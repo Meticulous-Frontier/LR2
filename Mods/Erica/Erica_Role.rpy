@@ -2426,6 +2426,8 @@ label erica_lily_weekly_photoshoot_label(the_person):
                 "Leave her drink alone":
                     "You top it off with soda."
             "You pick up both drinks and walk back down the hall to [lily.title]'s room. You open the door and step inside."
+            $ mc.change_location(lily_bedroom)
+            $ mc.location.show_background()
             $ lily.apply_outfit(lily_insta_outfit, update_taboo = True)
             $ erica.apply_outfit(erica_insta_outfit, update_taboo = True)
             $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
