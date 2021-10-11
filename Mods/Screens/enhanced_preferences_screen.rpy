@@ -187,7 +187,7 @@ init 2: # Add some additional
                     hbox:
                         spacing 20
 
-                        if not renpy.android: #Animations are always disabled on mobile.
+                        if not (renpy.android or renpy.mobile): #Animations are always disabled on mobile.
                             vbox:
                                 style_prefix "radio"
                                 label "Animation"
