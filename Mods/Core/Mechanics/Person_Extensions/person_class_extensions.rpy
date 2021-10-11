@@ -1284,13 +1284,11 @@ init -1 python:
             if show_person_info:
                 renpy.show_screen("person_info_ui",self)
 
-        if the_animation is None:
-            weight_mask = Solid("#000000") #Black mask = no influence.
-        else:
+        if the_animation:
             weight_mask = self.build_weight_mask(the_animation, position, animation_effect_strength)
-
-        renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = ShaderPerson(self.build_person_displayable(position, emotion, special_modifier, lighting), weight_mask), tag = self.identifier)
-        renpy.force_full_redraw() # test for android
+            renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = ShaderPerson(self.build_person_displayable(position, emotion, special_modifier, lighting), weight_mask), tag = self.identifier)
+        else:
+            renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = self.build_person_displayable(position, emotion, special_modifier, lighting), tag = self.identifier)
 
     # replace the default draw_person function of the person class
     Person.draw_person = draw_person_enhanced
@@ -1356,14 +1354,15 @@ init -1 python:
                 self.outfit.remove_clothing(cloth) #Remove the clothing
         top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting)
 
-        if the_animation is None:
-            weight_mask = Solid("#000000") #Black mask = no influence.
-        else:
-            weight_mask = self.build_weight_mask(the_animation, position, animation_effect_strength)
-
         self.hide_person()
-        renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = ShaderPerson(top_displayable, weight_mask), zorder = display_zorder, tag = self.identifier)
-        renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = ShaderPerson(bottom_displayable, weight_mask), zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
+
+        if the_animation:
+            weight_mask = self.build_weight_mask(the_animation, position, animation_effect_strength)
+            renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = ShaderPerson(top_displayable, weight_mask), zorder = display_zorder, tag = self.identifier)
+            renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = ShaderPerson(bottom_displayable, weight_mask), zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
+        else:
+            renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier)
+            renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
