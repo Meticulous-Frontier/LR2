@@ -675,14 +675,18 @@ init -1 python:
             final_slut_requirement -= self.love
         elif private:
             if self.has_role([girlfriend_role, affair_role]):
-                final_slut_requirement += self.love
+                final_slut_requirement -= self.love
             elif self.is_family():
-                final_slut_requirement += __builtin__.round(self.love / 4.0)
+                final_slut_requirement -= __builtin__.round(self.love / 4.0)
             else:
-                final_slut_requirement += __builtin__.round(self.love / 2.0)
+                final_slut_requirement -= __builtin__.round(self.love / 2.0)
 
         final_slut_requirement += __builtin__.round((self.happiness - 100)/4.0)
 
+        if ignore_taboo:
+            if self.effective_sluttiness() >= final_slut_requirement \
+                or self.effective_sluttiness() + (self.obedience-100) >= final_slut_requirement:
+                    return True
         if self.effective_sluttiness(the_position.associated_taboo) >= final_slut_requirement \
             or self.effective_sluttiness(the_position.associated_taboo) + (self.obedience-100) >= final_slut_requirement:
                 return True
