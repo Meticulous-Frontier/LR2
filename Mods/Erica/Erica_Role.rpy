@@ -2603,6 +2603,7 @@ label erica_lily_post_insta_handjob_label():
     $ clear_scene()
     "You wake up a few hours later. Did [the_person.possessive_title] really come in your room in the middle of the night? Or was that just a dream?"
     $ the_person.add_unique_on_talk_event(erica_post_insta_handjob_followup)
+    $ mc.location.lighting_conditions = standard_outdoor_lighting
     return
 
 label erica_lily_post_insta_morning_label():
@@ -2638,6 +2639,7 @@ label erica_lily_post_insta_morning_label():
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] quietly leaves your room and you quickly fall back asleep."
         $ clear_scene()
+        $ mc.location.lighting_conditions = standard_outdoor_lighting
         return
 
     if the_person.is_willing(cowgirl_blowjob) and "blowjob" not in option_list:
@@ -2663,6 +2665,7 @@ label erica_lily_post_insta_morning_label():
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] quietly leaves your room and you quickly fall back asleep."
         $ clear_scene()
+        $ mc.location.lighting_conditions = standard_outdoor_lighting
         return
 
     if willing_to_threesome(the_person, lily) and renpy.random.randint(0,100) <= 100 and "threesome" not in option_list: #Not everytime, but a chance to happen once it is available.
@@ -2724,6 +2727,7 @@ label erica_lily_post_insta_morning_label():
         the_person "Mmm, maybe. I might want him all to myself though..."
         $ scene_manager.clear_scene()
         "The two girls get up. You fall asleep as they slip out of your room."
+        $ mc.location.lighting_conditions = standard_outdoor_lighting
         return
 
 
@@ -2785,7 +2789,7 @@ label erica_lily_post_insta_morning_label():
         else:
             "The girls fall into your bed beside you. You relax for a little bit, enjoying the warmth of their bodies."
         the_person "I better get up, or I'm going to miss my workout..."
-        $ scene_manager.update_actor(the_person position = "walking_away")
+        $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.title] gets up and grabs her clothes. She carries them with her, probably going to change in the bathroom on her way out."
         the_person "Goodnight [the_person.name]! I'd better get back to my room too, as fun as it would be to sleep in here..."
         $ scene_manager.remove_actor(the_person)
@@ -2793,6 +2797,7 @@ label erica_lily_post_insta_morning_label():
         "You watch as [the_person.possessive_title] gets up and excuses herself, her ass swaying back and forth as she walks away."
         $ scene_manager.remove_actor(lily)
         "You fall back asleep. What an incredible midnight rendezvous..."
+        $ mc.location.lighting_conditions = standard_outdoor_lighting
         return
 
 
@@ -2802,6 +2807,7 @@ label erica_lily_post_insta_morning_label():
     $ the_person.draw_person(position = "walking_away")
     "[the_person.title] quietly leaves your room and you quickly fall back asleep."
     $ clear_scene()
+    $ mc.location.lighting_conditions = standard_outdoor_lighting
     return
 
 label erica_post_insta_handjob_followup_label(the_person):
