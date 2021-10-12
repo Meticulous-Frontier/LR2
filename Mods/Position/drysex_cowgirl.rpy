@@ -142,7 +142,7 @@ label outro_drysex_cowgirl(the_girl, the_location, the_object, the_goal = None):
     mc.name "Oh.... Fuck!"
     $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
     "You dump your load in your pants. It makes a mess but it feels great."
-    the_girl "Wow... that was... interesting?"
+    the_girl "Wow..."
     return
 
 label transition_default_drysex_cowgirl(the_girl, the_location, the_object):

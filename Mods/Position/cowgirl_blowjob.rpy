@@ -254,7 +254,7 @@ label GIC_outro_cowgirl_blowjob(the_girl, the_location, the_object, the_goal = N
         $ the_girl.cum_in_mouth()
         $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
         $ cowgirl_blowjob.redraw_scene(the_girl)
-        if the_girl.effective_sluttiness() > 80:
+        if the_girl.effective_sluttiness() > 80 or the_girl == erica:
             "Once you've had a good long look at your work [the_girl.title] closes her mouth and swallows loudly."
             "It takes a few big gulps to get every last drop of your cum down, but when she opens up again it's all gone."
         else:
