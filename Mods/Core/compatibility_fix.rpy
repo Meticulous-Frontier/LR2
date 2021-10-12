@@ -164,7 +164,7 @@ init 1 python:
     pencil_skirt.anchor_below = True
 
     # disable gl2 extensions
-    if renpy.android:
+    if renpy.android or renpy.mobile:
         config.gl2 = False
         persistent.vren_animation = False
 

@@ -119,7 +119,7 @@ init 2 python:
                 mi.display_scale = scale_person(item.height)
                 if draw_person_previews:
                     mi.display_func = item.build_person_displayable
-                if not renpy.mobile: # don't load person on mobile
+                if not (renpy.mobile or renpy.android): # don't load person on mobile
                     renpy.invoke_in_thread(mi.preload)
 
             if isinstance(item, Action):
@@ -203,7 +203,7 @@ init 2:
                                             style "textbutton_style"
                                             text_style "textbutton_text_style"
                                             text_align (0.5,0.5)
-                                            if not renpy.mobile and item.display_key:
+                                            if not (renpy.mobile or renpy.android) and item.display_key:
                                                 hovered [Function(item.show_person)]
                                                 unhovered [Function(item.hide_person)]
                                             action [
