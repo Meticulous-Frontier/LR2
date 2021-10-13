@@ -1634,9 +1634,12 @@ init -1 python:
 # Outfit functions - wear a specialized outfit #
 ################################################
     def should_wear_work_outfit(self):
-        shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
-        if ((time_of_day == 3 and shifts == 2) or (time_of_day == 4)) and self.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]):
-            return True
+        if self.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]):
+            shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
+            return (time_of_day == 3 and shifts == 2) or time_of_day == 4
+        if self.has_role([maid_role]):
+            return maid_at_work(self)
+
         return False
 
     Person.should_wear_work_outfit = should_wear_work_outfit
@@ -1656,6 +1659,8 @@ init -1 python:
             self.work_outfit = mc.business.mistress_wardrobe.decide_on_outfit2(self)
         elif self.has_role(manager_role):
             self.work_outfit = mc.business.manager_wardrobe.decide_on_outfit2(self)
+        elif self.has_role(maid_role):
+            self.work_outfit = maid_wardrobe.decide_on_outfit2(self)
 
         if self.work_outfit:
             self.apply_outfit(self.work_outfit)
