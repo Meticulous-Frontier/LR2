@@ -3,7 +3,7 @@ init 2 python:
     workout_wardrobe = wardrobe_from_xml("Workout_Wardrobe")
     def erica_mod_initialization(): #Add actionmod as argument#
 
-        erica_wardrobe = wardrobe_from_xml("Erica_Workout_Wardrobe")
+        erica_wardrobe = wardrobe_from_xml("Erica_Wardrobe") # default wardrobe when not in gym (no xml file, no wardrobe)
         erica_base_outfit = Outfit("Erica's base accessories")
         the_eye_shadow = heavy_eye_shadow .get_copy()
         the_eye_shadow.colour = [.20, .20, .37, 0.50]
@@ -12,10 +12,6 @@ init 2 python:
         erica_base_outfit.add_accessory(the_eye_shadow)
         erica_base_outfit.add_accessory(the_rings)
 
-        # init erica role
-        # erica_role = Role(role_name ="erica", actions =[erica_ask_date_classic_concert, erica_ask_about_porn], hidden = True)
-
-        #global erica_role
         global erica
         erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_8",  tits="B", height = 0.89, hair_colour="chestnut brown", hair_style = short_hair, skin="white" , \
             eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, \
@@ -23,7 +19,6 @@ init 2 python:
             title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True, base_outfit = erica_base_outfit, \
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["pants", 1, False], ["the colour blue", 2, False], ["yoga", 2, False], ["sports", 2, False]],
             forced_sexy_opinions = [["doggy style sex", 2, False], ["getting head", 1, False], ["being submissive", 1, False], ["creampies", -2, False], ["public sex", 1, False]])
-
 
         erica.max_energy = 120
         erica.generate_home()
@@ -217,29 +212,29 @@ init -2 python:
         return mc.business.hr_director and person.location == person.work
 
     def erica_money_problems_update_requirement(person):
-        if mc.business.hr_director and erica_is_looking_for_work():
-            if time_of_day != 0 and time_of_day != 4:
+        if time_of_day > 0 and time_of_day < 4:
+            if mc.business.hr_director and erica_is_looking_for_work():
                 return True
         return False
 
     def erica_money_problem_sarah_convincing_employee_requirement():
-        if mc.business.hr_director and mc.is_at_work():
-            if mc.business.is_open_for_business():
+        if mc.business.is_open_for_business():
+            if mc.business.hr_director and mc.is_at_work():
                 if renpy.random.randint(0,100) < 25:
                     return True
         return False
 
     def erica_money_problems_sarah_update_requirement():
-        if mc.business.hr_director and mc.is_at_work():
-            if mc.business.is_open_for_business():
+        if mc.business.is_open_for_business():
+            if mc.business.hr_director and mc.is_at_work():
                 if len(erica_get_yoga_class_list()) < 4:
                     if renpy.random.randint(0,100) < 10:
                         return True
         return False
 
     def erica_money_problems_sarah_final_update_requirement():
-        if mc.business.hr_director and mc.is_at_work():
-            if mc.business.is_open_for_business():
+        if mc.business.is_open_for_business():
+            if mc.business.hr_director and mc.is_at_work():
                 if len(erica_get_yoga_class_list()) >= 4:
                     if renpy.random.randint(0,100) < 20:
                         return True
@@ -2668,7 +2663,7 @@ label erica_lily_post_insta_morning_label():
         $ mc.location.lighting_conditions = standard_outdoor_lighting
         return
 
-    if willing_to_threesome(the_person, lily) and renpy.random.randint(0,100) <= 100 and "threesome" not in option_list: #Not everytime, but a chance to happen once it is available.
+    if willing_to_threesome(the_person, lily) and "threesome" not in option_list:
         the_person "God, you are so hard this morning. I need to feel it in me... can I put it in me?"
         mc.name "Of course."
         "As you pull down your blankets and shorts, [the_person.title] gets naked."
@@ -2720,7 +2715,7 @@ label erica_lily_post_insta_morning_label():
             $ the_person.change_slut(1, 100)
             $ lily.change_slut(1, 100)
             "The girls fall into your bed beside you. You relax for a little bit, enjoying the warmth of their bodies."
-        the_person "I think I'm going to take it easy during my workout this moring... you two about wore me out."
+        the_person "I think I'm going to take it easy during my workout this morning... you two about wore me out."
         lily "God I know, I think I'm gonna go back to bed..."
         the_person "Next Saturday then [lily.name]?"
         lily "Of course, and if you're gonna sneak into my brother's room let me know next time okay?"
@@ -2756,8 +2751,8 @@ label erica_lily_post_insta_morning_label():
         the_person "Let me have a dose of your protein before I go work out."
         "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts to stroke it again."
         $ the_person.draw_person(position = "blowjob")
-        "She moves her head down to your crotch and licks your precum from the tip."
-        the_person "Mmm, I should do this everytime I need some extra protein... you taste so good."
+        "She moves her head down to your crotch and licks your pre-cum from the tip."
+        the_person "Mmm, I should do this every time I need some extra protein... you taste so good."
         "[the_person.possessive_title] opens her mouth and begins to bob her head up and down on your morning wood."
         call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "oral creampie", private = True, skip_intro = True, allow_continue = False) from _erica_morning_blowjob_02
         $ the_person.change_slut(1, 60)
@@ -2859,7 +2854,7 @@ label erica_breeding_fetish_followup_label(the_person):
     mc.name "That's crazy! Surely there is some way to stop that?"
     $ the_person.draw_person(position = "Stand3")
     "[the_person.possessive_title] stops her bike and stands up to continue talking with you."
-    the_person "I don't think so. I know atleast one other girl that it happened to, and some of the seniors say it happened to a couple girls a few years ago..."
+    the_person "I don't think so. I know at least one other girl that it happened to, and some of the seniors say it happened to a couple girls a few years ago..."
     "Hmm. This is a distressing development. Despite being a model student athlete, a coach with a vendetta is not an easy thing to get around."
     the_person "Anyway, was there something that you wanted?"
     $ mc.business.add_mandatory_crisis(erica_breeding_fetish_team_crisis)
