@@ -1799,8 +1799,8 @@ init -1 python:
 
     Person.is_wearing_uniform = person_is_wearing_uniform_extended(Person.is_wearing_uniform)
 
-    def personalize_outfit(self, outfit, the_colour = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
-        return WardrobeBuilder(self).personalize_outfit(outfit, the_colour = the_colour, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, allow_coverup = allow_coverup)
+    def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
+        return WardrobeBuilder(self).personalize_outfit(outfit, opinion_color = opinion_color, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, allow_coverup = allow_coverup)
 
     Person.personalize_outfit = personalize_outfit
 

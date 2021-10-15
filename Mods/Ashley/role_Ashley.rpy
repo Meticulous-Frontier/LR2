@@ -2082,7 +2082,7 @@ label ashley_test_outfit_scene():
     $ scene_manager.remove_actor(bystander)
     the_person "Wow, did you see that?"
 
-    $ new_outfit = the_person.personalize_outfit(bystander.outfit, the_colour = "the colour green", coloured_underwear = True, max_alterations = 1)
+    $ new_outfit = the_person.personalize_outfit(bystander.outfit, opinion_color = "the colour green", coloured_underwear = True, max_alterations = 1)
 
     $ ashley.apply_outfit(new_outfit)
     $ stephanie.apply_outfit(new_outfit)
