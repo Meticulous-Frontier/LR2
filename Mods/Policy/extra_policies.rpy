@@ -67,7 +67,7 @@ init 1310 python:
     casual_friday_uniform_policy = Policy(
         name = "Casual Friday Uniform Policy",
         cost = 2000,
-        desc = "Employees are free to choose their own uniform on Fridays. This would add some variety on Fridays and gives them a small happiness boost.",
+        desc = "Employees are free to choose their own uniform on Fridays. This would add some variety on Fridays and prevents uniform infractions.",
         toggleable = True,
         requirement = casual_friday_uniform_policy_requirement,
         dependant_policies =  casual_uniform_policy
