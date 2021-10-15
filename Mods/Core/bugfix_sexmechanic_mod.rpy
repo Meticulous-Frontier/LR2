@@ -601,12 +601,13 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         if the_person.love >= 60 and the_person.effective_sluttiness() >= 30 - (the_person.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enough, is moderately slutty, and you made her cum
             call affair_check(the_person, report_log) from _call_affair_check_bugfix
 
-    if report_log.get("girl orgasms",0) >= 2 and time_of_day < 3:
-        $ attaboy_target = the_person.identifier
-        $ attaboy_record = report_log.copy()
-        $ attaboy_day = day
-
     python:
+        # Only activate sexting when we have her number
+        if report_log.get("girl orgasms",0) >= 2 and time_of_day < 3 and person in mc.phone.get_person_list():
+            attaboy_target = the_person.identifier
+            attaboy_record = report_log.copy()
+            attaboy_day = day
+
         update_person_sex_record(the_person, report_log)
         # the_person.restore_all_clothing()   # put all half-off clothing back in place
         position_choice = None
