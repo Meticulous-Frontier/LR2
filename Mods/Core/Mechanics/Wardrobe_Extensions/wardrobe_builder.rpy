@@ -41,15 +41,17 @@ init 5 python:
     }
 
     neutral_palette = {
-        "dark denim": [.2, .28, .37, .95],
+        "dark denim": [0, .278, .671, .95],
         "denim": [.082, .376, .741, .95],
-        "light denim": [.39, .58, .93, .95],
+        "light denim": [.365, .678, .925, .95],
         "midnight black": [.15, .15, .15, .95],
         "khaki": [.765, .69, .569, .95],
         "dark grey": [.365, .365, .365, .95],
+        "indian yellow": [.89, .659, .341, .95],
         "grey": [.502, .502, .502, .95],
         "light grey": [.827, .827, .827, .95],
         "sky blue": [.529, .808, .922, 0.95],
+        "antique white": [.98, .922, .843, .95],
         "white smoke": [.95, .95, .95, .95],
         "light beige": [.94, .94, .78, .95],
         "leather": [.384, .29, .18, .95],
@@ -349,73 +351,73 @@ init 5 python:
         matching_underwear["Cincher"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties, crotchless_panties]
 
         color_prefs = {}
-        color_prefs["the colour blue"] = OrderedDict({
-            "dark denim": [.2, .28, .37, .95],
-            "denim": [.082, .376, .741, .95],
-            "light denim": [.39, .58, .93, .95],
-            "cobalt blue": [0, .278, .671, .95],
-            "sky blue": [.529, .808, .922, 0.95],
-            "cornflower blue": [.392, .584, .929, .95],
-            "dark slate blue": [.282, .239, .545, .95],
-        })
-        color_prefs["the colour yellow"] = OrderedDict({
-            "khaki": [.765, .69, .569, .95],
-            "indian yellow": [.89, .65, .34, .95],
-            "saffron": [.96, .77, .19, .95],
-            "corn": [.98, .92, .36, .95],
-        })
-        color_prefs["the colour red"] = OrderedDict({
-            "bordeaux red": [.33, .10, .06, .95],
-            "sinopia": [.80, .26, .04, .95],
-            "vermillion": [.890, .258, .203, .95],
-            "scarlet": [1, .141, .0, .95],
-            "debian red": [.843, .039, .325, .95],
-        })
-        color_prefs["the colour pink"] = OrderedDict({
-            "thulian pink": [.871, .435, .631, .95],
-            "pale pink": [.98, .885, .867, .95],
-            "hot pink": [1, .412, .706, .95],
-            "cotton candy": [1, .733, .851, .95],
-        })
-        color_prefs["the colour black"] = OrderedDict({
-            "midnight black": [.15, .15, .15, .95],
-            "charcoal": [.212, .271, .31, .95],
-            "dark grey": [.365, .365, .365, .95],
-            "warm black": [0, .26, .36, .95],
-        })
-        color_prefs["the colour green"] = OrderedDict({
-            "sea green": [.18, .54, .34, .95],
-            "army green": [.29, .32, .12, .95],
-            "pistachio": [.576, .772, .447, .95],
-            "caribbean green": [.0, .8, .6, .95],
-        })
-        color_prefs["the colour purple"] = OrderedDict({
-            "palatinate purple": [.41, .16, .38, .95],
-            "dark lavender": [.45, .31, .59, .95],
-            "mauve": [.878, .690, 1, .95],
-            "rich lilac": [.714, .4, .824, .95],
-        })
-        color_prefs["the colour orange"] = OrderedDict({
-            "tigers eye": [.878, .552, .235, .95],
-            "swiss coffee": [.859, .331, .321, .95],
-            "honey orange": [.89, .6, .16, .95],
-            "burnt orange": [.8, .33, 0, .95],
-        })
-        color_prefs["the colour white"] = OrderedDict({
-            "cotton white": [.992, .953, .918, .95],
-            "white smoke": [.95, .95, .95, .95],
-            "ghost white": [.97, .97, 1, .95],
-            "bright white": [1, 1, 1, .95],
-        })
-        color_prefs["the colour brown"] = OrderedDict({
-            "leather": [.384, .29, .18, .95],
-            "mocha": [.514, .373, .345, .95],
-            "khaki": [.765, .69, .569, .95],
-            "coffee": [.435, .305, .215, .95],
-            "saddle brown": [.451, .313, .235, .95],
-            "chocolate noir": [.352, 0.239, .239, .95],
-            "light beige": [.94, .94, .78, .95],
-        })
+        color_prefs["the colour blue"] = OrderedDict([
+            ("dark denim", [0, .278, .671, .95]),
+            ("denim", [.082, .376, .741, .95]),
+            ("light denim", [.365, .678, .925, .95]),
+            ("cobalt blue", [0, .278, .671, .95]),
+            ("sky blue", [.529, .808, .922, 0.95]),
+            ("cornflower blue", [.392, .584, .929, .95]),
+            ("dark slate blue", [.282, .239, .545, .95]),
+        ])
+        color_prefs["the colour yellow"] = OrderedDict([
+            ("khaki", [.765, .69, .569, .95]),
+            ("indian yellow", [.89, .659, .341, .95]),
+            ("saffron", [.96, .77, .19, .95]),
+            ("corn", [.98, .92, .36, .95]),
+        ])
+        color_prefs["the colour red"] = OrderedDict([
+            ("bordeaux red", [.38, .118, .149, .95]),
+            ("debian red", [.843, .039, .325, .95]),
+            ("vermillion", [.890, .258, .203, .95]),
+            ("scarlet", [1, .141, .0, .95]),
+            ("sinopia", [.80, .26, .04, .95]),
+        ])
+        color_prefs["the colour pink"] = OrderedDict([
+            ("dark pink", [.906, .329, .502, .95]),
+            ("hot pink", [1, .412, .706, .95]),
+            ("cotton candy", [1, .733, .851, .95]),
+            ("pale pink", [.98, .885, .867, .95]),
+        ])
+        color_prefs["the colour black"] = OrderedDict([
+            ("midnight black", [.15, .15, .15, .95]),
+            ("charcoal", [.212, .271, .31, .95]),
+            ("dark grey", [.365, .365, .365, .95]),
+            ("warm black", [0, .26, .36, .95]),
+        ])
+        color_prefs["the colour green"] = OrderedDict([
+            ("army green", [.294, .325, .125, .95]),
+            ("sea green", [.18, .545, .341, .95]),
+            ("pistachio", [.576, .772, .447, .95]),
+            ("caribbean green", [.0, .8, .6, .95]),
+        ])
+        color_prefs["the colour purple"] = OrderedDict([
+            ("palatinate purple", [.41, .16, .38, .95]),
+            ("dark lavender", [.45, .31, .59, .95]),
+            ("mauve", [.878, .690, 1, .95]),
+            ("rich lilac", [.714, .4, .824, .95]),
+        ])
+        color_prefs["the colour orange"] = OrderedDict([
+            ("burnt orange", [.8, .33, 0, .95]),
+            ("tigers eye", [.878, .552, .235, .95]),
+            ("honey orange", [.89, .6, .16, .95]),
+            ("swiss coffee", [.859, .331, .321, .95]),
+        ])
+        color_prefs["the colour white"] = OrderedDict([
+            ("antique white", [.98, .922, .843, .95]),
+            ("cotton white", [.992, .953, .918, .95]),
+            ("white smoke", [.95, .95, .95, .95]),
+            ("ghost white", [.97, .97, 1, .95]),
+        ])
+        color_prefs["the colour brown"] = OrderedDict([
+            ("leather", [.384, .29, .18, .95]),
+            ("mocha", [.514, .373, .345, .95]),
+            ("khaki", [.765, .69, .569, .95]),
+            ("coffee", [.435, .305, .215, .95]),
+            ("saddle brown", [.451, .313, .235, .95]),
+            ("chocolate noir", [.352, 0.239, .239, .95]),
+            ("light beige", [.94, .94, .78, .95]),
+        ])
         #color_prefs[""][""] = [, , , ]
 
         @staticmethod
