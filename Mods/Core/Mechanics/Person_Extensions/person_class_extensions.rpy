@@ -895,12 +895,12 @@ init -1 python:
             else:
                 self.change_happiness(self.get_opinion_score("work uniforms"),add_to_log = False)
 
-        #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
-        if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
+        #A skimpy outfit is defined as the top 20% of a girls natural sluttiness.
+        if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.80:
             self.change_slut(self.get_opinion_score("skimpy outfits"), add_to_log = False)
 
-        #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.
-        if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.25:
+        #A conservative outfit is defined as the bottom 20% of a girls natural sluttiness.
+        if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.20:
             # happiness won't go below 80 or over 120 by this trait and only affects in low sluttiness range, after that she won't care
             if self.happiness > 80 and self.happiness < 120:
                 self.change_happiness(self.get_opinion_score("conservative outfits"), add_to_log = False)
