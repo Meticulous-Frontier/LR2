@@ -352,13 +352,13 @@ init 5 python:
 
         color_prefs = {}
         color_prefs["the colour blue"] = OrderedDict([
+            ("dark slate blue", [.282, .239, .545, .95]),
             ("dark denim", [0, .278, .671, .95]),
             ("denim", [.082, .376, .741, .95]),
+            ("steel blue", [.0275, .51, .706, .95]),
             ("light denim", [.365, .678, .925, .95]),
-            ("cobalt blue", [0, .278, .671, .95]),
-            ("sky blue", [.529, .808, .922, 0.95]),
             ("cornflower blue", [.392, .584, .929, .95]),
-            ("dark slate blue", [.282, .239, .545, .95]),
+            ("sky blue", [.529, .808, .922, 0.95]),
         ])
         color_prefs["the colour yellow"] = OrderedDict([
             ("khaki", [.765, .69, .569, .95]),
@@ -368,10 +368,10 @@ init 5 python:
         ])
         color_prefs["the colour red"] = OrderedDict([
             ("bordeaux red", [.38, .118, .149, .95]),
-            ("debian red", [.843, .039, .325, .95]),
-            ("vermillion", [.890, .258, .203, .95]),
-            ("scarlet", [1, .141, .0, .95]),
+            ("berry", [.478, .09, .071, .95]),
             ("sinopia", [.80, .26, .04, .95]),
+            ("vermillion", [.890, .258, .203, .95]),
+            ("debian red", [.843, .039, .325, .95]),
         ])
         color_prefs["the colour pink"] = OrderedDict([
             ("dark pink", [.906, .329, .502, .95]),
@@ -388,8 +388,9 @@ init 5 python:
         color_prefs["the colour green"] = OrderedDict([
             ("army green", [.294, .325, .125, .95]),
             ("sea green", [.18, .545, .341, .95]),
-            ("pistachio", [.576, .772, .447, .95]),
+            ("jade", [.0, .659, .43 , .95]),
             ("caribbean green", [.0, .8, .6, .95]),
+            ("pistachio", [.576, .772, .447, .95]),
         ])
         color_prefs["the colour purple"] = OrderedDict([
             ("palatinate purple", [.41, .16, .38, .95]),
@@ -411,10 +412,10 @@ init 5 python:
         ])
         color_prefs["the colour brown"] = OrderedDict([
             ("leather", [.384, .29, .18, .95]),
-            ("mocha", [.514, .373, .345, .95]),
-            ("khaki", [.765, .69, .569, .95]),
             ("coffee", [.435, .305, .215, .95]),
             ("saddle brown", [.451, .313, .235, .95]),
+            ("mocha", [.514, .373, .345, .95]),
+            ("khaki", [.765, .69, .569, .95]),
             ("chocolate noir", [.352, 0.239, .239, .95]),
             ("light beige", [.94, .94, .78, .95]),
         ])
