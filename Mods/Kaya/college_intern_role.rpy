@@ -78,14 +78,14 @@ label hire_new_college_intern_label(the_person):
             $ the_dept = "Research"
             $ stat_array = [1,3,2]  #Interns start with extremely basic stats, but can be trained.
             $ skill_array = [1,1,2,1,1]
-            pass
+            $ forced_opinions = [["research work", 1, True]]
         "Biology \n{color=#ff0000}{size=18}Research Team Full!{/size}{/color} (disabled)" if len(mc.business.college_interns_research) >= mc.business.max_interns_by_division:
             pass
         "Chemistry (Production)" if len(mc.business.college_interns_production) < mc.business.max_interns_by_division:
             $ the_dept = "Production"
             $ stat_array = [1,3,3]
             $ skill_array = [1,1,1,2,1]
-            pass
+            $ forced_opinions = [["production work", 1, True]]
         "Chemistry \n{color=#ff0000}{size=18}Production Team Full!{/size}{/color} (disabled)" if len(mc.business.college_interns_production) >= mc.business.max_interns_by_division:
             pass
         "Graphic Design (Marketing) (disabled)":    #In the future we may have opportunities to recruit interns for these programs.
@@ -108,7 +108,7 @@ label hire_new_college_intern_label(the_person):
         candidates = []
 
         for x in range(0,count+1): #NOTE: count is given +1 because the screen tries to pre-calculate the result of button presses. This leads to index out-of-bounds, unless we pad it with an extra character (who will not be reached).
-            candidates.append(make_person(age = 21, stat_array = stat_array, skill_array = skill_array))
+            candidates.append(make_person(age = renpy.random.randint(20, 22), stat_array = stat_array, skill_array = skill_array, forced_opinions = forced_opinions, force_random = True))
 
         reveal_count = 2
         reveal_sex = False
@@ -119,6 +119,7 @@ label hire_new_college_intern_label(the_person):
 
     call hire_select_process(candidates) from _call_intern_select_process_01
     $ candidates = [] #Prevent it from using up extra memory
+    $ forced_opinions = None
     $ renpy.free_memory() #Try and force a clean up of unused memory.
 
     if not _return == "None" and isinstance(_return, Person):
