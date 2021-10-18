@@ -348,7 +348,7 @@ label mom_breakfast_action_label_high():
     "With one hand on your cock, she guides you straight to her cunt. In one smooth motion, she relaxes herself and lowers her body down on to you, impaling herself on your manhood."
     the_person "OH fuck, that is just what I needed... I was dreaming about this last night..."
     "She is whispering in your ear. [the_person.title] is really turned on right now."
-    the_person "I remember you saying you were gonna cum... and I was so ready for it, I begging you for it... and then suddenly I woke up!"
+    the_person "I remember you saying you were gonna cum... and I was so ready for it, I was begging you for it... and then suddenly I woke up!"
     "[the_person.possessive_title] hips are moving in wide circles. Her sopping wet cunt feels amazing surrounding your penis."
     the_person "I want to feel it. Not just when you cum now... but when I'm at work, I want to feel you slowly leak out of me..."
     "Her voice and her movements are desperate. You suddenly realize that she is racing you to the finish, and you aren't sure who is going to finish first."
