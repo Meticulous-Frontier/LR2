@@ -60,6 +60,8 @@ init -1 python:
         return False
 
     def breeding_fetish_erica_intro_requirement():
+        if mc_asleep() and day%7 != 6:
+            return True
         return False
 
     def breeding_fetish_erica_unsuccessful_followup_requirement():
@@ -910,7 +912,10 @@ label breeding_fetish_erica_intro_label():
     "Her purse is sitting on the table next to her. She opens it up and starts to go through it. She pulls out a package of birth control pills, and a package of plan B."
     the_person "So, I stopped taking birth control lately..."
     the_person "I told myself it was just for the thrill of the risk, but if anything ever actually happened, I had plan B ready, and if that ever didn't work, you know... I was gonna get it taken care of."
-    the_person "I love running track and field. But if I ever got pregnant, they'd kick me off the team, you know? So I did what I had to..."
+    the_person "I love running track and field. But if I ever got pregnant..."
+    the_person "I know they can't legally kick me off the team, but the coach is a real bitch!"
+    the_person "Last time a girl got knocked up, they kicked her off for 'scholastic misconduct' to get around the law."
+    the_person "I didn't want that to be me, you know? So I did what I had to..."
     if the_person.is_girlfriend():
         the_person "But [the_person.mc_title], I just love you so much! The urge to just let go of all that, and just submit myself to you over and over, taking your seed! It's so so strong!"
     else:
@@ -966,6 +971,7 @@ label breeding_fetish_erica_intro_label():
     "You say goodnight and head home. It seems that you have given [the_person.possessive_title] a breeding fetish! You look forward to many creampies in your future together."
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
+    $ the_person.add_unique_on_room_enter_event(erica_breeding_fetish_followup)
     return
 
 label breeding_fetish_erica_unsuccessful_followup_label():
@@ -1007,6 +1013,7 @@ label breeding_fetish_erica_unsuccessful_followup_label():
     "Quietly, she leaves your room."
     "Did that just happen? You feel groggy. Looking down, you see your limp cock, still slick from her juices. Huh, that must have happened."
     "How did she even get in? You have so many questions, but for now, you just get up and start your regular morning routine."
+    $ the_person.add_unique_on_room_enter_event(erica_breeding_fetish_followup)
     return
 
 

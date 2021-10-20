@@ -4,8 +4,6 @@
 init -1 python:
     def crisis_nighttime_attaboy_requirement():      #Use this section to set up when this crisis or action can be fired.
         if day == attaboy_day and mc_asleep():
-            #TODO trist can you make it a requirement that MC already has the target's phone number? I'm not sure how to do that.
-            #if get_person_by_identifier(attaboy_target)->mc_has_phone_number == True:???
             if attaboy_record.get("is_angry", False):   #Don't sext MC if the person ended sex angrily
                 return False
             if get_person_by_identifier(attaboy_target).location == mc.location:    #If she's sleeping with MC, don't have her text him.

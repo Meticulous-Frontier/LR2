@@ -13,6 +13,22 @@ init 0 python:
             cm = __builtin__.round(total_inches * 2.54, 1)
             return str(cm) + " cm"
 
+    # override without the 'ERROR' message (just use 'husband' as fallback)
+    def SO_relationship_to_title(relationship_string):
+        if relationship_string == "Girlfriend":
+            return "boyfriend"
+        elif relationship_string == "Fiancée":
+            return "fiancé"
+        return "husband"
+
+    # override without the 'ERROR' message (just use 'wife' as fallback)
+    def girl_relationship_to_title(relationship_string):
+        if relationship_string == "Girlfriend":
+            return "girlfriend"
+        elif relationship_string == "Fiancée":
+            return "fiancée"
+        return "wife"
+
     def get_energy_string(person):
         percent = person.energy * 1.0 / person.max_energy
         color_string = "{color=#43B197}"

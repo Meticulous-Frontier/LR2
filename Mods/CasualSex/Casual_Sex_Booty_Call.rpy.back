@@ -5,9 +5,8 @@ init -1 python:
 init 3 python:
     #sports_bar = Room("bar", "Bar", [], room_background_image("bar_background.png"), [make_floor(), make_wall(), make_chair(), make_window()], [], [], True, [6,5], None, True)
     def casual_sex_booty_call_requirement():
-        if time_of_day > 0 : #Not early morning
-            if time_of_day < 4: #Not night
-                return not get_casual_sex_booty_call_person() is None
+        if time_of_day > 0 and time_of_day < 4:
+            return not get_casual_sex_booty_call_person() is None
         return False
 
     def get_casual_sex_booty_call_person():

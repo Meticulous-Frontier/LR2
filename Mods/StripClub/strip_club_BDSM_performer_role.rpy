@@ -80,8 +80,9 @@ init 10 python:
         mc.main_character_actions.append(strip_club_cage_her_action)
 
     def strip_club_cage_role_on_turn(person):
-        if person.obedience < 200:
-            person.obedience += 10
+        amount = __builtin__.min((210 - person.obedience)/10, 5) # slowly decaying increase of obedience.
+        if amount > 0:
+            person.change_obedience(5)
 
     def strip_club_cage_role_on_move(person):
         person.change_location(bdsm_room)

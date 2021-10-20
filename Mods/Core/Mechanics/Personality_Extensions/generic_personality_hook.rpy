@@ -624,16 +624,17 @@ init 2 python:
         def get_titles_wrapper(person):
             list_of_titles = org_func(person)
 
-            if person.love > 30 and person.height > 0.94:
-                list_of_titles.append("Sexy Legs")
-                list_of_titles.append("Sky High")
+            if person not in unique_character_list:
+                if person.love > 30 and person.height > 0.94:
+                    list_of_titles.append("Sexy Legs")
+                    list_of_titles.append("Sky High")
 
-            if person.love > 30 and person.height < 0.85:
-                list_of_titles.append("Tinkerbell")
-                list_of_titles.append("Little Lady")
+                if person.love > 30 and person.height < 0.85:
+                    list_of_titles.append("Tinkerbell")
+                    list_of_titles.append("Little Lady")
 
-            if person.love > 30 and person.sluttiness > 20 and person.get_opinion_score("high heels"):
-                list_of_titles.append("Killer Heels")
+                if person.love > 30 and person.sluttiness > 20 and person.get_opinion_score("high heels") >= 2:
+                    list_of_titles.append("Killer Heels")
 
             return list(set(list_of_titles))
 

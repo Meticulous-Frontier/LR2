@@ -4,20 +4,6 @@ init 5 python:
     #def casual_sex_mod_initialization(action_mod):
     university_wardrobe = wardrobe_from_xml("University_Wardrobe")
 
-    # evaluation function mapping for in-game color preferences in HSL values
-    color_pref_eval_map = OrderedDict([
-        ( "the colour black", "(s < 40 and l <= 30) or l <= 18"),
-        ( "the colour white", "l >= 95"),
-        ( "the colour yellow", "l > 55 and h >= 32 and h <= 78"),
-        ( "the colour orange", "s > 60 and  l > 30 and h >= 20 and h <= 55"),
-        ( "the colour brown", "s > 10 and s <= 60 and l <= 35 and (h <= 35 or h >= 330)" ),
-        ( "the colour pink", "s > 5 and l > 50 and h >= 300 and h <= 335"),
-        ( "the colour purple", "s > 5 and l < 95 and h >= 270 and h <= 330"),
-        ( "the colour green", "s > 5 and l < 95 and h >= 65 and h <= 170"),
-        ( "the colour blue", "s > 5 and l < 95 and h >= 210 and h <= 270"),
-        ( "the colour red", "s > 5 and l < 95 and (h <= 35 or h >= 330)"),
-    ])
-
     color_clothing_map = {
         "Jean_Hotpants": ["the colour black", "the colour blue", "the colour brown", "the colour white"],
         "Daisy_Dukes" : ["the colour black", "the colour blue", "the colour brown", "the colour white"],
@@ -44,49 +30,35 @@ init 5 python:
         "Spiked_Choker": ["the colour white"],
     }
 
-    # generate a more useable default color palette
-    if len(persistent.colour_palette) < 39:
-        persistent.colour_palette = []
-        for x in range(0, 39):
-            persistent.colour_palette.append([1,1,1,1])
-
-    if persistent.colour_palette[0] == [1,1,1,1]:
-        persistent.colour_palette = [
-            [0, .278, .671, .95], [.392, .584, .929, .95], [.282, .239, .545, .95], [.89, .65, .34, .95], [.96, .77, .19, .95], [.98, .92, .36, .95],
-            [.33, .10, .06, .95], [.80, .26, .04, .95], [.843, .039, .325, .95], [.87, .44, .63, .95], [1, .41, .71, .95], [1, .73, .85, .95],
-            [.29, .32, .12, .95], [.18, .54, .34, .95], [.0, .8, .6, .95], [.41, .16, .38, .95], [.45, .31, .59, .95], [.71, .4, .85, .95],
-            [.95, .95, .95, .95], [.15, .15, .15, .95], [.61, .39, 0, .95], [.67, .33, 0, .95], [.435, .305, .215, .95], [.352, 0.239, .239, .95],
-            [.765, .69, .569, .95], [.4, .4, .4, .95], [.94, .94, .78, .95], [.26, .21, .14, .95], [.62, .46, .14, .95], [.98, .86, .87, .95],
-            [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]    # allow for 1 unused user definable colors
-        ]
-
     #Use this to define a set of neutral colors, useful for colors that match most anything else.
     neutral_colors = {
         "khaki": [.765, .69, .569, .95],
         "swiss coffee": [.859, .331, .321, .95], #wut? this is salmon colored lol
-        "fog grey": [.656, .652, .617, .95],
+        "light grey": [.827, .827, .827, .95],
         "cotton white": [.992, .953, .918, .95],
-        "dark grey": [.400, .400, .400, .95],
+        "dark grey": [.365, .365, .365, .95],
         "midnight black": [.15, .15, .15, .95]
     }
 
     neutral_palette = {
-        "dark denim": [.2, .28, .37, .95],
-        "denim": [.08, .38, .74, .95],
-        "light denim": [.39, .58, .93, .95],
+        "dark denim": [0, .278, .671, .95],
+        "denim": [.082, .376, .741, .95],
+        "light denim": [.365, .678, .925, .95],
         "midnight black": [.15, .15, .15, .95],
         "khaki": [.765, .69, .569, .95],
-        "dark grey": [.4, .4, .4, .95],
-        "grey": [.5, .5, .5, .95],
-        "light grey": [.6, .6, .6, .95],
-        "sky blue": [.6, .8, 1.0, 0.95],
+        "dark grey": [.365, .365, .365, .95],
+        "indian yellow": [.89, .659, .341, .95],
+        "grey": [.502, .502, .502, .95],
+        "light grey": [.827, .827, .827, .95],
+        "sky blue": [.529, .808, .922, 0.95],
+        "antique white": [.98, .922, .843, .95],
         "white smoke": [.95, .95, .95, .95],
         "light beige": [.94, .94, .78, .95],
-        "leather": [.26, .21, .14, .95],
-        "mocha": [.62, .46, .14, .95],
-        "charcoal": [.25, .25, .25, .95],
-        "scarlet": [.9, .0, .0, .95],    #Looks decent for some patterns, might have to delete
-        "pale pink": [.98, .86, .87, .95]
+        "leather": [.384, .29, .18, .95],
+        "mocha": [.514, .373, .345, .95],
+        "charcoal": [.212, .271, .31, .95],
+        "scarlet": [1, .141, .0, .95],    #Looks decent for some patterns, might have to delete
+        "pale pink": [.98, .885, .867, .95]
     }
 
     neutral_color_map = {
@@ -281,34 +253,6 @@ init 5 python:
                 return the_outfit
         return the_outfit
 
-    def rgb_to_hsl(r, g, b):    # r/g/b values in decimal 0-1
-        mx = max(r, g, b)
-        mn = min(r, g, b)
-        dx = mx - mn
-
-        h = 0
-        s = 0
-        l = (mx + mn) / 2.0
-
-        if dx != 0:
-            if l < .5:
-                s = dx / (mx + mn)
-            else:
-                s = dx / (2.0 - mx - mn)
-
-            if r == mx:
-                h = (g-b) / dx
-            elif (g == mx):
-                h = 2.0 + (b - r) / dx
-            elif (b == mx):
-                h = 4.0 + (r - g) / dx
-
-        h *= 60
-        if h < 0:
-            h += 360
-
-        return h, s * 100, l * 100
-
     def enhance_existing_wardrobe(person, max_outfits):
         outfit_builder = WardrobeBuilder(person)
 
@@ -353,35 +297,12 @@ init 5 python:
                 outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list(eye_shadow_colours))
         return
 
-    def sluttiness_to_points(sluttiness_rating):# Use this table to make an approximation of sluttiness score to outfit points #TODO Tristimdorian you might want to tweak this
-        if sluttiness_rating < 5:
-            return 0
-        elif sluttiness_rating < 10:
-            return 1
-        elif sluttiness_rating < 20:
-            return 2
-        elif sluttiness_rating < 30:
-            return 3
-        elif sluttiness_rating < 35:
-            return 4
-        elif sluttiness_rating < 40:
-            return 5
-        elif sluttiness_rating < 50:
-            return 6
-        elif sluttiness_rating < 70:
-            return 10
-        elif sluttiness_rating < 90:
-            return 12
-        return 13
-
-
     real_bra_list = [x for x in bra_list if x not in [cincher, heart_pasties]]
     real_pants_list = [x for x in pants_list if not x in [cop_pants]]
     real_shirt_list = [x for x in shirts_list if not x in [cop_blouse]]
     real_dress_list = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron, nightgown_dress, sweater_dress]]
     only_socks_list = [x for x in socks_list if x not in [thigh_highs, fishnets, garter_with_fishnets]]
     real_pantyhose_list = [x for x in socks_list if x not in only_socks_list]
-
 
     class WardrobeBuilder():
         default_person = None
@@ -430,61 +351,74 @@ init 5 python:
         matching_underwear["Cincher"] = [panties, thin_panties, thong, tiny_lace_panties, tiny_g_string, string_panties, crotchless_panties]
 
         color_prefs = {}
-        color_prefs["the colour blue"] = {
-            "cobalt blue": [0, .278, .671, .95],
-            "cornflower blue": [.392, .584, .929, .95],
-            "denim": [.08, .38, .74, .95],
-            "dark slate blue": [.282, .239, .545, .95]
-        }
-        color_prefs["the colour yellow"] = {
-            "khaki": [.765, .69, .569, .95],
-            "indian yellow": [.89, .65, .34, .95],
-            "saffron": [.96, .77, .19, .95],
-            "corn": [.98, .92, .36, .95]
-        }
-        color_prefs["the colour red"] = {
-            "bordeaux red": [.33, .10, .06, .95],
-            "sinopia": [.80, .26, .04, .95],
-            "debian red": [.843, .039, .325, .95]
-        }
-        color_prefs["the colour pink"] = {
-            "thulian pink": [.87, .44, .63, .95],
-            "pale pink": [.98, .86, .87, .95],
-            "hot pink": [1, .41, .71, .95],
-            "cotton candy": [1, .73, .85, .95]
-        }
-        color_prefs["the colour black"] = {
-            "midnight black": [.15, .15, .15, .95],
-            "warm black": [0, .26, .36, .95],
-            "charcoal": [.21, .27, .34, .95]
-        }
-        color_prefs["the colour green"] = {
-            "army green": [.29, .32, .12, .95],
-            "sea green": [.18, .54, .34, .95],
-            "caribbean green": [.0, .8, .6, .95]
-        }
-        color_prefs["the colour purple"] = {
-            "palatinate purple": [.41, .16, .38, .95],
-            "dark lavender": [.45, .31, .59, .95],
-            "rich lilac": [.71, .4, .85, .95]
-        }
-        color_prefs["the colour orange"] = {
-            "swiss coffee": [.859, .331, .321, .95],
-            "honey orange": [.89, .6, .16, .95],
-            "burnt orange": [.8, .33, 0, .95]
-        }
-        color_prefs["the colour white"] = {
-            "cotton white": [.992, .953, .918, .95],
-            "white smoke": [.95, .95, .95, .95],
-            "ghost white": [.97, .97, 1, .95],
-            "bright white": [1, 1, 1, .95]
-        }
-        color_prefs["the colour brown"] = {
-            "saddle brown": [.451, .313, .235, .95],
-            "coffee": [.435, .305, .215, .95],
-            "chocolate noir": [.352, 0.239, .239, .95],
-            "leather": [.26, .21, .14, .95]
-        }
+        color_prefs["the colour blue"] = OrderedDict([
+            ("dark slate blue", [.282, .239, .545, .95]),
+            ("dark denim", [0, .278, .671, .95]),
+            ("denim", [.082, .376, .741, .95]),
+            ("steel blue", [.0275, .51, .706, .95]),
+            ("light denim", [.365, .678, .925, .95]),
+            ("cornflower blue", [.392, .584, .929, .95]),
+            ("sky blue", [.529, .808, .922, 0.95]),
+        ])
+        color_prefs["the colour yellow"] = OrderedDict([
+            ("khaki", [.765, .69, .569, .95]),
+            ("indian yellow", [.89, .659, .341, .95]),
+            ("saffron", [.96, .77, .19, .95]),
+            ("corn", [.98, .92, .36, .95]),
+        ])
+        color_prefs["the colour red"] = OrderedDict([
+            ("bordeaux red", [.38, .118, .149, .95]),
+            ("berry", [.478, .09, .071, .95]),
+            ("sinopia", [.80, .26, .04, .95]),
+            ("vermillion", [.890, .258, .203, .95]),
+            ("debian red", [.843, .039, .325, .95]),
+        ])
+        color_prefs["the colour pink"] = OrderedDict([
+            ("dark pink", [.906, .329, .502, .95]),
+            ("hot pink", [1, .412, .706, .95]),
+            ("cotton candy", [1, .733, .851, .95]),
+            ("pale pink", [.98, .885, .867, .95]),
+        ])
+        color_prefs["the colour black"] = OrderedDict([
+            ("midnight black", [.15, .15, .15, .95]),
+            ("charcoal", [.212, .271, .31, .95]),
+            ("dark grey", [.365, .365, .365, .95]),
+            ("warm black", [0, .26, .36, .95]),
+        ])
+        color_prefs["the colour green"] = OrderedDict([
+            ("army green", [.294, .325, .125, .95]),
+            ("sea green", [.18, .545, .341, .95]),
+            ("jade", [.0, .659, .43 , .95]),
+            ("caribbean green", [.0, .8, .6, .95]),
+            ("pistachio", [.576, .772, .447, .95]),
+        ])
+        color_prefs["the colour purple"] = OrderedDict([
+            ("palatinate purple", [.41, .16, .38, .95]),
+            ("dark lavender", [.45, .31, .59, .95]),
+            ("mauve", [.878, .690, 1, .95]),
+            ("rich lilac", [.714, .4, .824, .95]),
+        ])
+        color_prefs["the colour orange"] = OrderedDict([
+            ("burnt orange", [.8, .33, 0, .95]),
+            ("tigers eye", [.878, .552, .235, .95]),
+            ("honey orange", [.89, .6, .16, .95]),
+            ("swiss coffee", [.859, .331, .321, .95]),
+        ])
+        color_prefs["the colour white"] = OrderedDict([
+            ("antique white", [.98, .922, .843, .95]),
+            ("cotton white", [.992, .953, .918, .95]),
+            ("white smoke", [.95, .95, .95, .95]),
+            ("ghost white", [.97, .97, 1, .95]),
+        ])
+        color_prefs["the colour brown"] = OrderedDict([
+            ("leather", [.384, .29, .18, .95]),
+            ("coffee", [.435, .305, .215, .95]),
+            ("saddle brown", [.451, .313, .235, .95]),
+            ("mocha", [.514, .373, .345, .95]),
+            ("khaki", [.765, .69, .569, .95]),
+            ("chocolate noir", [.352, 0.239, .239, .95]),
+            ("light beige", [.94, .94, .78, .95]),
+        ])
         #color_prefs[""][""] = [, , , ]
 
         @staticmethod
@@ -504,23 +438,20 @@ init 5 python:
                     available_list = color_clothing_map[item.proper_name]
 
                 # color not match list
-                if not WardrobeBuilder.get_color_name(color) in available_list:
+                if not WardrobeBuilder.get_color_opinion(color) in available_list:
                     color_set = WardrobeBuilder.color_prefs[get_random_from_list(available_list)]
                     color_name = get_random_from_list(color_set.keys())
                     return [color_set[color_name][0] * multiplier, color_set[color_name][1] * multiplier, color_set[color_name][2] * multiplier, color_set[color_name][3]]
             return [color[0] * multiplier, color[1] * multiplier, color[2] * multiplier, color[3]]
 
         @staticmethod
-        def get_color_name(colour):
-            return WardrobeBuilder.get_color_name_rgb(colour[0], colour[1], colour[2])
+        def get_color_opinion(colour):
+            color_name = closest_preference_color(Color(rgb=(colour[0], colour[1], colour[2])))
+            for opinion in WardrobeBuilder.color_prefs:
+                if color_name in WardrobeBuilder.color_prefs[opinion]:
+                    return opinion
 
-        @staticmethod
-        def get_color_name_rgb(r, g, b):
-            h, s, l = rgb_to_hsl(r, g, b)
-            for pref in color_pref_eval_map:
-                if eval(color_pref_eval_map[pref], { "__builtins__": None }, { "h" : h, "s": s, "l" : l} ):
-                    return pref
-            return None
+            return "the colour black" # default fallback
 
         earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
         neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Wool_Scarf"]]
@@ -547,7 +478,7 @@ init 5 python:
         def validate_colors(self):
             for cp in sorted(self.color_prefs):
                 for col in sorted(self.color_prefs[cp]):
-                    name = WardrobeBuilder.get_color_name(self.color_prefs[cp][col])
+                    name = WardrobeBuilder.get_color_opinion(self.color_prefs[cp][col])
                     # print(cp + " - " + col + " -> " + (name if name else "Unknown"))
             return
 
@@ -609,10 +540,9 @@ init 5 python:
 
         def approves_outfit_color(self, outfit):
             for clothing in outfit.feet + outfit.lower_body + outfit.upper_body:
-                h, s, l = rgb_to_hsl(clothing.colour[0], clothing.colour[1], clothing.colour[2])
-                for pref in self.get_color_hate_list():
-                    if eval( color_pref_eval_map[pref], { "__builtins__": None }, { "h" : h, "s": s, "l" : l} ):
-                        return False
+                opinion_color = self.get_color_opinion(clothing.colour)
+                if opinion_color in self.get_color_hate_list():
+                    return False
             return True
 
         def build_overwear(self, points = 0, min_points = 0):
@@ -799,30 +729,31 @@ init 5 python:
             def get_excluded(base_color):
                 if base_color:
                     # prevents clashing colours
-                    color_name = WardrobeBuilder.get_color_name(base_color)
-                    if color_name == "the colour red":
+                    opinion_color = WardrobeBuilder.get_color_opinion(base_color)
+                    if opinion_color == "the colour red":
                         return ["the colour pink", "the colour purple", "the colour brown"]
-                    if color_name == "the colour pink":
+                    if opinion_color == "the colour pink":
                         return ["the colour red", "the colour purple", "the colour brown"]
-                    if color_name == "the colour purple":
+                    if opinion_color == "the colour purple":
                         return ["the colour red", "the colour pink", "the colour blue"]
-                    if color_name == "the colour blue":
+                    if opinion_color == "the colour blue":
                         return ["the colour purple"]
-                    if color_name == "the colour orange":
+                    if opinion_color == "the colour orange":
                         return ["the colour yellow"]
-                    if color_name == "the colour yellow":
+                    if opinion_color == "the colour yellow":
                         return ["the colour orange"]
-                    if color_name == "the colour brown":
+                    if opinion_color == "the colour brown":
                         return ["the colour black", "the colour pink", "the colour red"]
-                    if color_name == "the colour black":
+                    if opinion_color == "the colour black":
                         return ["the colour brown"]
                 return []
 
             color_list = []
             for cp in [x for x in self.color_prefs if x not in get_excluded(base_color)]:
                 score = self.person.get_opinion_score(cp)
-                for col in self.color_prefs[cp]:
-                    color_list.append([self.color_prefs[cp][col], (score + 2) ^ 3])
+                if score > -2: # don't append colors she hates
+                    for col in self.color_prefs[cp]:
+                        color_list.append([self.color_prefs[cp][col], (score + 2) ^ 3])
 
             # renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
@@ -858,7 +789,7 @@ init 5 python:
                 swapped = True
             return outfit, swapped
 
-        def personalize_outfit(self, outfit, the_colour = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
+        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
             def change_colour_alpha(new_colour, old_colour):
                 alpha_blended = new_colour
                 alpha_blended[3] = old_colour[3]
@@ -872,18 +803,18 @@ init 5 python:
             alterations = 0
 
             #First, get a theme color
-            if the_colour == None:
+            if opinion_color == None:
                 if main_colour:
-                    the_colour = WardrobeBuilder.get_color_name(main_colour)
+                    opinion_color = WardrobeBuilder.get_color_opinion(main_colour)
                 elif renpy.random.randint(0,100) < 50:  #50% chance we go straight to a favorite color.
                     main_colour = self.get_color()
-                    the_colour = WardrobeBuilder.get_color_name(main_colour)
+                    opinion_color = WardrobeBuilder.get_color_opinion(main_colour)
                 else:
-                    the_colour = self.person.favorite_colour()
+                    opinion_color = self.person.favorite_colour()
 
             color_list = []
-            for col in self.color_prefs[the_colour]:
-                color_list.append(self.color_prefs[the_colour][col])
+            for col in self.color_prefs[opinion_color]:
+                color_list.append(self.color_prefs[opinion_color][col])
             if main_colour == None:
                 main_colour = get_random_from_list(color_list)
 

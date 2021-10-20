@@ -157,7 +157,7 @@ label fetish_stephanie_first_fetish_label(the_person):
         "She takes a second, she looks like she is on the verge of getting emotional. Then she straightens up and looks you straight in the eye."
         the_person "For god's sake, the thoughts I'm having even now... This isn't normal!"
         the_person "I trust you. It took me a while to realize what is going on, but I understand it now."
-        the_person "This is the next step in our relationship. The urges are SO intense! You're the only guy here, I need you to help me take of these urges!"
+        the_person "This is the next step in our relationship. The urges are SO intense! You're the only guy here, I need you to help me take care of these urges!"
         the_person "I'm sure that relying on you for this can only bring us closer together."
         if the_person.relationship != "Single":
             $ SO_title = SO_relationship_to_title(the_person.relationship)

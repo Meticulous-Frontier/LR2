@@ -1038,7 +1038,7 @@ label unit_test_cum_fetish_intro():
 #         the_person "For god's sake, last night I went to the bar and sucked off three different guys! In one night! That isn't normal!"
 #         the_person "I'm going to be honest here. I trust you, I'm sure you are just doing this for research or business purposes. But I'm at a tipping point here. I need you to answer this question honestly."
 #         mc.name "Okay, go ahead."
-#         the_person "Are you going to... you know... take responsibility for this? The urges are SO intense! You're the only guy here, I need your word that you'll help me take of these urges!"
+#         the_person "Are you going to... you know... take responsibility for this? The urges are SO intense! You're the only guy here, I need your word that you'll help me take care of these urges!"
 #         "From a pocket, she pulls out a serum that it looks like she has concocted."
 #         the_person "If you can't, I understand. But I don't think I can take it, knowing the serums gave me these urges... I need something to forget the research, and just move on with my life."
 #         the_person "I don't have an antidote for this. It's the bimbo serum. I mixed it with a couple other things... Maybe it's time for me to start a new life. I'm sure you could use me over in marketing or something, right?"

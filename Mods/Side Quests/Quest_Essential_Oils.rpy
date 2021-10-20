@@ -124,9 +124,8 @@ init 1 python:
         return False
 
     def quest_essential_oils_decision_requirement(the_person):
-        if time_of_day > 0:
-            if time_of_day < 4:
-                return True
+        if time_of_day > 0 and time_of_day < 4:
+            return True
         return False
 
     def quest_essential_oils_abandon_requirement():
