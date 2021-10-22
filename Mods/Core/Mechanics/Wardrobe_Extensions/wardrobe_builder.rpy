@@ -441,7 +441,8 @@ init 5 python:
                 if not WardrobeBuilder.get_color_opinion(color) in available_list:
                     color_set = WardrobeBuilder.color_prefs[get_random_from_list(available_list)]
                     color_name = get_random_from_list(color_set.keys())
-                    return [color_set[color_name][0] * multiplier, color_set[color_name][1] * multiplier, color_set[color_name][2] * multiplier, color_set[color_name][3]]
+                    color = color_set[color_name][:]
+                    return [color[0] * multiplier, color[1] * multiplier, color[2] * multiplier, color[3]]
             return [color[0] * multiplier, color[1] * multiplier, color[2] * multiplier, color[3]]
 
         @staticmethod
@@ -753,7 +754,7 @@ init 5 python:
                 score = self.person.get_opinion_score(cp)
                 if score > -2: # don't append colors she hates
                     for col in self.color_prefs[cp]:
-                        color_list.append([self.color_prefs[cp][col], (score + 2) ^ 3])
+                        color_list.append([self.color_prefs[cp][col][:], (score + 2) ^ 3])
 
             # renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
@@ -763,9 +764,9 @@ init 5 python:
             color_list = []
             neutral_list = []
             for col in self.color_prefs[the_colour]:
-                color_list.append(self.color_prefs[the_colour][col])
+                color_list.append(self.color_prefs[the_colour][col][:])
             for col in neutral_colors:
-                neutral_list.append(neutral_colors[col])
+                neutral_list.append(neutral_colors[col][:])
             main_colour = get_random_from_list(color_list)
             neutral_colour = get_random_from_list(neutral_list)
             if coloured_outfit.is_dress():
@@ -814,7 +815,7 @@ init 5 python:
 
             color_list = []
             for col in self.color_prefs[opinion_color]:
-                color_list.append(self.color_prefs[opinion_color][col])
+                color_list.append(self.color_prefs[opinion_color][col][:])
             if main_colour == None:
                 main_colour = get_random_from_list(color_list)
 
