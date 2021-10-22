@@ -15,25 +15,25 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
         the_girl "Mmmm, that feels good [the_girl.mc_title]. Can I touch myself while you do that?"
         menu:
             "Masturbate for me":
-                 "Encouraged by your response, [the_girl.possessive_title] reaches down with one hand and begins to rub her clit."
-                 "You take it slow, and you revel in the delicious pleasure of each penetration as you thrust. [the_girl.possessive_title] struggles to hold herself up with one hand while the other works circles around her clit."
-                 if the_girl.get_opinion_score("masturbating") > 0:
-                     "[the_girl.possessive_title] moves her fingers masterfully across her pussy. You can tell she masturbates often."
-                     $ the_girl.discover_opinion("masturbating")
-                     $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 5))
-                 if the_girl.sluttiness > 100:
-                     the_girl "I'm sorry [the_girl.mc_title], I'll try to get better at this. Having you in my ass is so intense..."
-                 else:
-                     "[the_girl.possessive_title] seems to be enjoying the anal penetration a bit more now that she is touching herself."
+                "Encouraged by your response, [the_girl.possessive_title] reaches down with one hand and begins to rub her clit."
+                "You take it slow, and you revel in the delicious pleasure of each penetration as you thrust. [the_girl.possessive_title] struggles to hold herself up with one hand while the other works circles around her clit."
+                if the_girl.get_opinion_score("masturbating") > 0:
+                    "[the_girl.possessive_title] moves her fingers masterfully across her pussy. You can tell she masturbates often."
+                    $ the_girl.discover_opinion("masturbating")
+                    $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 5))
+                if the_girl.sluttiness > 100:
+                    the_girl "I'm sorry [the_girl.mc_title], I'll try to get better at this. Having you in my ass is so intense..."
+                else:
+                    "[the_girl.possessive_title] seems to be enjoying the anal penetration a bit more now that she is touching herself."
             "Fuck me with your ass":
-                 if the_girl.obedience > 130 or the_girl.get_opinion_score("being submissive") > 0:
-                     the_girl "Yes sir. I'll do my best."
-                 else:
-                     the_girl "I'll give it my best, but this better be worth it..."
-                 "[the_girl.possessive_title] slowly eases forward until just the tip remains inside, then slowly backs her ass back onto you. She is trying to obey but you can tell she is struggling to take you."
-                 "The next she starts to ease forward, you put your hand on her hips for a second to stop her. You spit into your hand then rub it along your shaft a bit, hoping it will make the penetration easier."
-                 the_girl "Mmm, that's a bit better..."
-                 "With the extra lube, [the_girl.possessive_title] resumes fucking you. She still has a fairy slow pace, but is a bit quicker than before."
+                if the_girl.obedience > 130 or the_girl.get_opinion_score("being submissive") > 0:
+                    the_girl "Yes sir. I'll do my best."
+                else:
+                    the_girl "I'll give it my best, but this better be worth it..."
+                "[the_girl.possessive_title] slowly eases forward until just the tip remains inside, then slowly backs her ass back onto you. She is trying to obey but you can tell she is struggling to take you."
+                "The next she starts to ease forward, you put your hand on her hips for a second to stop her. You spit into your hand then rub it along your shaft a bit, hoping it will make the penetration easier."
+                the_girl "Mmm, that's a bit better..."
+                "With the extra lube, [the_girl.possessive_title] resumes fucking you. She still has a fairy slow pace, but is a bit quicker than before."
 
     else:
         "In response to your spanking, [the_girl.possessive_title] thrusts herself back against you. Your penis is completely consumed by her bowel and she moans lewdly."

@@ -14,6 +14,7 @@ init:   #Great for in showers, dressing rooms, etc.
             taboo_break_description = "taboo_break_standing_cunnilingus",
             verb = "lick",
             opinion_tags = ["getting head", "taking control", "get off"], record_class = "Cunnilingus",
+            default_animation = blowjob_bob,
             associated_taboo = "licking_pussy")
 
         list_of_girl_positions.append(standing_cunnilingus)

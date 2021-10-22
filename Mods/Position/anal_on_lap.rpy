@@ -13,6 +13,7 @@ init python:
         orgasm_description = "orgasm_anal_on_lap",
         verb = "ass fuck",
         opinion_tags = ["anal sex"], record_class = "Anal Sex",
+        default_animation = blowjob_bob,
         associated_taboo = "anal_sex")
 
     list_of_positions.append(anal_on_lap)

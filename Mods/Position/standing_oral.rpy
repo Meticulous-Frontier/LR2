@@ -17,6 +17,7 @@ init:
             verb = "lick",
             opinion_tags = ["sex standing up", "getting head"],
             record_class = "Cunnilingus",
+            default_animation = blowjob_bob,
             associated_taboo = "licking_pussy")
         # don't add to list of positions, you need to unlock it ;)
         list_of_positions.append(standing_oral)

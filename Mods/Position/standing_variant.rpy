@@ -15,6 +15,7 @@ init python:
         taboo_break_description = "taboo_break_SB_facing_wall",
         verb = "fuck",
         opinion_tags = ["sex standing up", "vaginal sex"], record_class = "Vaginal Sex",
+        default_animation = missionary_bob,
         associated_taboo = "vaginal_sex")
 
     #list_of_positions.append(SB_facing_wall)     #Consider adding later, but for now, transition from the other standing scene
