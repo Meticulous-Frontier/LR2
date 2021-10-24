@@ -26,6 +26,8 @@ init 2 python:
         return
 
     def maid_on_turn(person):
+        if maid_at_work(person):    # at end of maid work time slot she gets paid.
+            mc.business.change_funds(-50)
         return
 
     def maid_slap_ass_requirement(person):
@@ -47,7 +49,12 @@ init 2 python:
     maid_grope_action = Action("Grope Maid", maid_grope_requirement, "maid_grope_label")
     maid_service_action = Action("Maid Service", maid_service_requirement, "maid_service_label")
 
-    maid_role = Role("Maid", actions = [maid_slap_ass_action, maid_grope_action, maid_service_action], hidden = True, on_turn = maid_on_turn, on_move = maid_on_move)
+    maid_role = Role("Maid", actions = [
+            maid_slap_ass_action,
+            maid_grope_action,
+            maid_service_action
+        ],
+        hidden = True, on_turn = maid_on_turn, on_move = maid_on_move)
 
 
 label maid_slap_ass_label(the_person):

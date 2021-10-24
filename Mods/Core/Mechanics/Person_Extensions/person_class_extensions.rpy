@@ -264,6 +264,17 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.work_outfit = property(get_person_work_outfit, set_person_work_outfit, del_person_work_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+    def get_person_maid_outfit(self):
+        if not hasattr(self, "_maid_outfit"):
+            self._maid_outfit = None
+        return self._maid_outfit
+
+    def set_person_maid_outfit(self, value):
+        self._maid_outfit = value
+
+    Person.maid_outfit = property(get_person_maid_outfit, set_person_maid_outfit, None, "Store maid outfit for the day.")
+
+
     # change idle position based on location
     def get_person_idle_pose(self):
         if not "downtown_bar" in globals(): # skip this when running tutorial
@@ -275,7 +286,7 @@ init -1 python:
         if renpy.call_stack_depth() < 2:
             # we are in the main menu (alternative idle_pose)
             if self.location == self.work or self.location == downtown_bar:
-                 return "sitting"
+                return "sitting"
             if self.location == gym:
                 pose = self.event_triggers_dict.get("gym_pose", None)
                 if not pose: # store preferred position in bdsm room (prevent switching on hover)
@@ -877,6 +888,7 @@ init -1 python:
                 self.planned_outfit = None
             self.planned_uniform = None
             self.work_outfit = None
+            self.maid_outfit = None
             self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
 
         destination = self.get_destination() #None destination means they have free time
@@ -1642,9 +1654,6 @@ init -1 python:
         if self.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]):
             shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
             return (time_of_day == 3 and shifts == 2) or time_of_day == 4
-        if self.has_role([maid_role]):
-            return maid_at_work(self)
-
         return False
 
     Person.should_wear_work_outfit = should_wear_work_outfit
@@ -1664,14 +1673,33 @@ init -1 python:
             self.work_outfit = mc.business.mistress_wardrobe.decide_on_outfit2(self)
         elif self.has_role(manager_role):
             self.work_outfit = mc.business.manager_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(maid_role):
-            self.work_outfit = maid_wardrobe.decide_on_outfit2(self)
 
         if self.work_outfit:
             self.apply_outfit(self.work_outfit)
         return
 
     Person.wear_work_outfit = wear_work_outfit
+
+    def should_wear_maid_outfit(self):
+        if self.has_role([maid_role]):
+            return maid_at_work(self)
+        return False
+
+    Person.should_wear_maid_outfit = should_wear_maid_outfit
+
+    def wear_maid_outfit(self):
+        if self.maid_outfit:
+            self.apply_outfit(self.maid_outfit)
+            return
+
+        if self.has_role(maid_role):
+            self.maid_outfit = maid_wardrobe.decide_on_outfit2(self)
+
+        if self.maid_outfit:
+            self.apply_outfit(self.maid_outfit)
+        return
+
+    Person.wear_maid_outfit = wear_maid_outfit
 
     def person_is_wearing_uniform(self):
         return self.outfit == self.planned_uniform and self.planned_uniform != self.planned_outfit
@@ -1766,6 +1794,8 @@ init -1 python:
             self.wear_uniform()
         elif self.should_wear_work_outfit():
             self.wear_work_outfit()
+        elif self.should_wear_maid_outfit():
+            self.wear_maid_outfit()
         else:
             if not self.planned_outfit: # extra validation to make sure we have a planned outfit
                 self.planned_outfit = self.decide_on_outfit()
