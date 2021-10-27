@@ -44,6 +44,7 @@ init 2 python:
         erica.event_triggers_dict["yoga_assistant"] = None
         erica.event_triggers_dict["post_insta_handy"] = False
         erica.event_triggers_dict["wake_up_options"] = ["handjob"]
+        erica.event_triggers_dict["team_reinstate_day"] = 9999
         erica.fertility_percent = -100.0  #Erica refuses to get pregnant for MC, getting pregnant would cause her to be kicked from track team. Enabled with breeding fetish.
 
 
@@ -2863,7 +2864,207 @@ label erica_breeding_fetish_followup_label(the_person):
 
 label erica_breeding_fetish_team_crisis_label():
     $ the_person = erica
+    $ the_person.happiness = 70
+    "You are in your room, getting ready for bed when your phone vibrates. It's [the_person.possessive_title]."
+    $ mc.start_text_convo(the_person)
+    the_person "Hey, sorry I know it's late. Can I come over?"
+    mc.name "Sure. Everything okay?"
+    the_person "No, I'll be over soon."
+    $ mc.end_text_convo()
+    "Yikes. You quickly straighten up your room and then wait for [the_person.title] to arrive."
+    "In a few minutes, your phone goes off again, and soon you are leading [the_person.possessive_title] back to your room."
+    $ the_person.draw_person(emotion = "sad")
+    the_person "I'm so sorry to just invite myself over like this..."
+    mc.name "It's okay, no need to apologize. Is everything okay with you and the baby?"
+    the_person "Aww, yeah, we're both doing okay..."
+    mc.name "Have a seat."
+    $ the_person.draw_person(position = "sitting")
+    "[the_person.title] sits on the edge of your bed."
+    mc.name "What is going on?"
+    the_person "I was at home, working on some homework, when I got an email from my coach."
+    the_person "He said I was being removed from the team for academic misconduct, that my grades had dropped too much."
+    the_person "They are kicking me off the track team for good, and I'm going to lose my athletic scholarship!"
+    mc.name "That doesn't make any sense, you've been keeping your grades up, right?"
+    the_person "Of course! But when I looked them up, I couldn't believe it!"
+    the_person "In the computer, they were all suddenly C's or worse, and to maintain my scholarship and spot on the team I have to maintain a 3.0 GPA!"
+    the_person "It's the coach... He had to have talked to my instructors and they changed my grades because I got pregnant!"
+    "It is crazy to imagine... You decide to look into it more."
+    mc.name "Let me see, can you show me? Your class grades?"
+    "[the_person.possessive_title] pulls up her grade sheet on her phone, then shows it to you."
+    "Damn, D, C+, F?, D... wait."
+    "You notice one of the classes, chemisty 201 with professor [nora.last_name] is now showing a D."
+    mc.name "Chemistry... is that with [nora.name] [nora.last_name]?"
+    the_person "Yeah?"
+    mc.name "I actually know her. Cooperating to get someone kicked off the track team because she got pregnant isn't something she would do."
+    the_person "But... I mean... she did though?"
+    "This doesn't add up. [nora.title] would never do something like that."
+    mc.name "I can't promise anything, but before you give up on this, let me talk to her. Maybe I can find out what is going on."
+    the_person "I... I don't know. I'm not sure you'll be able to anything."
+    mc.name "Well, I'll try anyway. [nora.title] is a good person, she'll atleast be able to tell me why she is going along with it."
+    $ nora.add_unique_on_talk_event(erica_breeding_fetish_nora_followup)
+    the_person "Okay. I appreciate it."
+    "You look down at [the_person.possessive_title], sitting on the edge of your bed. Her belly is really showing recently, and she looks amazing, although distraught."
+    mc.name "Hey, it's getting late. Why don't you spend the night here?"
+    $ the_person.change_happiness(5)
+    $ the_person.draw_person(position = "sitting", emotion = "happy")
+    "For the first time since she got here, she slips a slight smile."
+    the_person "Oh? You don't think it's gross... my belly getting bigger?"
+    mc.name "Gross? Geesh, everytime I look at you I get so turned on, thinking about pinning you down and knocking you up."
+    $ the_person.change_happiness(15)
+    $ the_person.change_arousal(20)
+    "She looks away from you, but her smile gets a little wider."
+    the_person "Yes, and as you can see you certainly did a good job of that, didn't you."
+    mc.name "Yeah, but I could definitely use a little more practice."
+    $ the_person.change_happiness(10)
+    $ the_person.change_arousal(20)
+    the_person "Oh god, would you stop? You're making me leak..."
+    mc.name "Seriously, you want me to stop?"
+    the_person "Stop talking anyway... yeah..."
+    "As you step toward [the_person.possessive_title], she lays back on your bed."
+    $ the_person.draw_person(position = "missionary", emotion = "happy")
+    if the_person.outfit.vagina_available():
+        "When she spreads her legs, the aroused folds of [the_person.possessive_title] lay open and exposed to you."
+        $ mc.change_locked_clarity(50)
+    else:
+        mc.name "Let's get these out of the way first..."
+        "As you pull off the clothes from her lower body, she takes the initiative and takes her top off."
+        $ the_person.strip_outfit(position = "missionary")
+        "Now naked, when she spreads her legs, the aroused folds of [the_person.possessive_title] lay open and exposed to you."
+        $ mc.change_locked_clarity(50)
+    "With one hand you start to undo your pants, with the other you run your fingers along her slit. You slip a finger in and discover she is sopping wet."
+    the_person "You don't need to do that, just give me that..."
+    "When you finish pulling your dick out, she reaches down, grabs your dick and starts to stroke it."
+    "You grab her hand, then pin it behind her head as you get on top of her. She starts to protest, but it dies in her throat when your cock pokes against her slit."
+    "It takes a couple tries, but you find the right angle and then push forward, your erection piercing into her cunt."
+    "[the_person.possessive_title]'s legs instinctually wrap around you as she pulls you in deeper. She moans when you bottom out."
+    the_person "Agh, it feels so good like this. Cum deep for me, please?"
+    $ mc.change_locked_clarity(50)
+    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, skip_condom = True, position_locked = True) from _erica_track_team_crisis_01
+    the_person "Mmm, that was nice... are you sure it's okay if I sleep here?"
+    mc.name "Of course."
+    $ the_person.draw_person(position = "walking_away")
 
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_erica_bred_night_01
+
+
+
+
+
+
+
+    return
+
+label erica_breeding_fetish_nora_followup_label(the_person):
+    "You step into [the_person.possessive_title]'s office."
+    mc.name "Hey [the_person.title], have a minute?"
+    the_person "I can give you a minunte."
+    mc.name "I was hoping I could talk to you about one of your students. She is a friend of mine and is confused about a recent drop in her grades."
+    the_person "Hmm, okay. What's her name?"
+    mc.name "[erica.name] [erica.last_name]. She is in your Chemistry 201 class."
+    the_person "Mmmm... I'm not sure, there's a lot of students in that class."
+    mc.name "She is on the track team. She got pregnant and is just starting to show."
+    the_person "Oh! Yeah I think I remember her. Sweet girl. You say her grades have been dropping?"
+    mc.name "Yeah..."
+    the_person "Hmm, that IS odd. I don't recall anything like that. I think she has been doing well in my class."
+    mc.name "Well, her grade is down to a D, and unfortunately she is on the verge of getting kicked off the track team."
+    "[the_person.possessive_title] wrinkles her nose for a second as she thinks about it."
+    the_person "Ah, well, if you like I could take a look at her grades on my computer really quick."
+    mc.name "Sure, that would be great."
+    $ the_person.draw_person(position = "sitting")
+    "[the_person.title] sits down at her desk and pulls up her student records. After a short time, she pulls up [erica.possessive_title] records."
+    the_person "Yeah, this is all fairly standard, good grades over all... hmm..."
+    mc.name "Yeah, it's weird isn't it?"
+    the_person "Actually, something went wrong here... this is a quiz I just got done grading yesterday. No one got less than 70%, but it shows in the record here that she got a 17%."
+    the_person "And this? This grade was just an attendance grade. I had mandatory attendance for a guest speaker, so it should either be 0, or 100%, and this is showing she got a 35%..."
+    $ the_person.draw_person(position = "sitting", emotion = "angry")
+    "[the_person.possessive_title]'s brow furrows as she goes through some of her recent grades."
+    the_person "[the_person.mc_title]... You wouldn't have come to me unless you thought something was going on... What exactly is going on here? I did NOT give her these grades!"
+    mc.name "Well, this is kind of a longshot, but, [erica.name] thinks her track coach is sabatoging her grades to get her kicked off the track team."
+    the_person "Oh my. That is a very serious allegation. But yet, her in front of me is possible incriminating data."
+    the_person "I'm going to save a copy of this and correct her grades immediately. While I do that, do you think you could get me a list of her other instructors?"
+    mc.name "Sure."
+    "You shoot [erica.title] a text and ask her for her full list of classes. It takes a minute, but she sends you a screenshot of her enrollement form with her class list."
+    "You show [the_person.possessive_title] the list."
+    the_person "Ahh, I see. Yes I am good friends with Professor Davis, I'll talk to her about this also and see if she is seeing the same thing."
+    mc.name "Do you think... she could be right?"
+    the_person "I'm not ready to jump to that conclusion yet, but the evidence I've seen has my attention."
+    the_person "I don't know how those grades got changed the way they did, and I'd like to check with her other instructors before I move forward with anything."
+    mc.name "Well, I really appreciate you looking in to this."
+    the_person "Give me a couple of days, and I'll get back with you about what I find out, okay?"
+    mc.name "Sounds great."
+    $ the_person.draw_person(position = "stand2", emotion = "happy")
+    the_person "Always happy to help. Is there anything else you needed?"
+    $ mc.business.add_mandatory_crisis(erica_breeding_nora_news_part_one)
+    return
+
+label erica_breeding_nora_news_part_one_label():
+    $ the_person = nora
+    "Your phone goes off in your pocket. It's [the_person.possessive_title]"
+    $ mc.start_text_convo(the_person)
+    the_person "Hey, I just wanted to give you a quick update."
+    the_person "Talked to all of Ms. [erica.last_name]'s other instructors, and they've all said similar things."
+    the_person "None of them gave her those bad marks. I've kicked it up to internal affairs and IT."
+    the_person "IT said there are some suspicious logs in the gradebook program and are investigating."
+    mc.name "That sounds promising."
+    the_person "Yeah, I'll keep you updated, but give me a couple more days."
+    mc.name "Got it. Thanks."
+    $ mc.end_text_convo()
+    return
+
+label erica_breeding_nora_news_part_two_label():
+    $ the_person = nora
+    if mc.location != university:
+        "Your phone goes off in your pocket. It's [the_person.possessive_title]"
+        $ mc.start_text_convo(the_person)
+        the_person "Hey, can you come out to the university? I have some big news."
+        mc.name "Sure, I'll be right there."
+        $ mc.end_text_convo()
+        $ mc.change_location(university)
+        $ mc.location.show_background()
+    else:
+        "Walking around the unveristy grounds, [the_person.possessive_title] spots you and hurries over to you."
+    $ the_person.draw_person()
+    the_person "[the_person.mc_title], I have some incredible news."
+    mc.name "Oh?"
+    the_person "The track coach has been fired. IT and security traced the gradebook changes back to a computer he was using and was able to trace everything back to him."
+    the_person "He was fired and may even be facing some jail time. The boy's track coach has bene named the interim coach until someone new can be hired."
+    the_person "I already spoke with him and informed him of the sensitive situation with the student."
+    the_person "The new coach has already reached out to her with an offer for a full ride, unconditional scholarship and placement back on the track team."
+    mc.name "Wow, so the guy really was tampering with grades."
+    the_person "Yes, he was."
+    mc.name "Well that is great news. I'm sure [erica.name] will be excited when she hears about it."
+    $ erica.event_triggers_dict["team_reinstate_day"] = day
+    $ erica.add_unique_on_talk_event(erica_breeding_fetish_team_rejoin)
+    $ nora.add_unique_on_room_enter_event(college_intern_recruit_supply)
+    "You can't wait to talk to [erica.possessive_title] about the news."
+    return
+
+label erica_breeding_fetish_team_rejoin_label(the_person):
+    if the_person.happiness < 130:
+        $ the_person.happiness = 130
+    $ the_person.draw_person()
+    "You find [the_person.possessive_title]. When she notices you approaching you, she smiles wide."
+    the_person "[the_person.mc_title]! I can't believe it!"
+    $ the_person.draw_person(position = "kissing")
+    "[the_person.title] throws her arms around you and gives you a hug, holding you closely for several seconds."
+    the_person "It was you, wasn't it?"
+    mc.name "That did what?"
+    "You decide to play ignorant."
+    the_person "The team! You got me back on the track team! And I got this email, they are giving me a full ride, unconditional scholarship!"
+    mc.name "Who me? Couldn't be!"
+    $ the_person.draw_person()
+    $ the_person.change_love(10)
+    $ the_person.change_obedience(30)
+    $ the_person.change_happiness(20)
+    the_person "Yeah right!"
+    if the_person.is_pregnant():
+        "[the_person.possessive_title] rubs her belly."
+        the_person "I won't be rejoining the team immediately... going to wait for the little one to come first."
+        the_person "But it's amazing knowing I'll be able to go back to it!"
+    else:
+        the_person "Since I already had the baby, I can go straight back to the team..."
+        the_person "But if you wanna knock me up again, I wouldn't mind it!"
+        $ mc.change_locked_clarity(30)
     return
 
 
