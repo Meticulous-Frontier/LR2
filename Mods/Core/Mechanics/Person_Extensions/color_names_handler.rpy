@@ -1,4 +1,4 @@
-init 1 python:
+init 6 python:
     def _fraction_to_integer(fraction):
         """
         Internal helper for converting a fraction value to an integer
@@ -17,11 +17,17 @@ init 1 python:
         hair_color_names_to_hex[color[0]] = normalize_hex(rgb_to_hex(rgb_fraction_to_rgb((color[1][0], color[1][1], color[1][2]))))
     hair_color_hex_to_names  = _reversedict(hair_color_names_to_hex)
 
-
     eye_color_names_to_hex = {}
     for color in list_of_eyes:
         eye_color_names_to_hex[color[0]] = normalize_hex(rgb_to_hex(rgb_fraction_to_rgb((color[1][0], color[1][1], color[1][2]))))
     eye_color_hex_to_names  = _reversedict(eye_color_names_to_hex)
+
+    opinion_color_names_to_hex = {}
+    for opinion in WardrobeBuilder.color_prefs:
+        for name in WardrobeBuilder.color_prefs[opinion]:
+            color = WardrobeBuilder.color_prefs[opinion][name]
+            opinion_color_names_to_hex[name] = normalize_hex(rgb_to_hex(rgb_fraction_to_rgb((color[0], color[1], color[2]))))
+    opinion_color_names_to_hex = _reversedict(opinion_color_names_to_hex)
 
     def closest_color_name(requested_colour, color_hex_to_name_map):
         min_colours = {}
@@ -39,6 +45,8 @@ init 1 python:
     def closest_eye_color(requested_colour):
         return closest_color_name(requested_colour, eye_color_hex_to_names)
 
+    def closest_preference_color(requested_colour):
+        return closest_color_name(requested_colour, opinion_color_names_to_hex)
 
     def person_set_eye_colour(self, new_colour):
         new_colour = Color(rgb=(new_colour.rgb)) #Make sure we don't have any alpha problems.

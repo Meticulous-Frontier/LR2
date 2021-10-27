@@ -264,6 +264,17 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.work_outfit = property(get_person_work_outfit, set_person_work_outfit, del_person_work_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+    def get_person_maid_outfit(self):
+        if not hasattr(self, "_maid_outfit"):
+            self._maid_outfit = None
+        return self._maid_outfit
+
+    def set_person_maid_outfit(self, value):
+        self._maid_outfit = value
+
+    Person.maid_outfit = property(get_person_maid_outfit, set_person_maid_outfit, None, "Store maid outfit for the day.")
+
+
     # change idle position based on location
     def get_person_idle_pose(self):
         if not "downtown_bar" in globals(): # skip this when running tutorial
@@ -275,7 +286,7 @@ init -1 python:
         if renpy.call_stack_depth() < 2:
             # we are in the main menu (alternative idle_pose)
             if self.location == self.work or self.location == downtown_bar:
-                 return "sitting"
+                return "sitting"
             if self.location == gym:
                 pose = self.event_triggers_dict.get("gym_pose", None)
                 if not pose: # store preferred position in bdsm room (prevent switching on hover)
@@ -877,6 +888,7 @@ init -1 python:
                 self.planned_outfit = None
             self.planned_uniform = None
             self.work_outfit = None
+            self.maid_outfit = None
             self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
 
         destination = self.get_destination() #None destination means they have free time
@@ -891,49 +903,49 @@ init -1 python:
 
         if self.should_wear_uniform(): #She's wearing a uniform
             if creative_colored_uniform_policy.is_active():
-                self.change_happiness(max(-1,self.get_opinion_score("work uniforms")),add_to_log = False)
+                self.change_happiness(max(-1,self.get_opinion_score("work uniforms")), add_to_log = False)
             else:
-                self.change_happiness(self.get_opinion_score("work uniforms"),add_to_log = False)
+                self.change_happiness(self.get_opinion_score("work uniforms"), add_to_log = False)
 
-        #A skimpy outfit is defined as the top 25% of a girls natural sluttiness.
-        if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.75:
-            self.change_slut(self.get_opinion_score("skimpy outfits"), add_to_log = False)
+        #A skimpy outfit is defined as the top 20% of a girls natural sluttiness.
+        if self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.80:
+            self.change_slut(self.get_opinion_score("skimpy outfits"), max_modified_to = 30, add_to_log = False)
 
-        #A conservative outfit is defined as the bottom 25% of a girls natural sluttiness.
-        if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.25:
+        #A conservative outfit is defined as the bottom 20% of a girls natural sluttiness.
+        if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.20:
             # happiness won't go below 80 or over 120 by this trait and only affects in low sluttiness range, after that she won't care
             if self.happiness > 80 and self.happiness < 120:
                 self.change_happiness(self.get_opinion_score("conservative outfits"), add_to_log = False)
 
         # lingerie only impacts to sluttiness level 30
-        if self.sluttiness < 30 and self.outfit and (self.outfit.get_bra() or self.outfit.get_panties()):
+        if self.outfit and (self.outfit.get_bra() or self.outfit.get_panties()):
             lingerie_bonus = 0
             if self.outfit.get_bra() and self.outfit.get_bra().slut_value > 1: #We consider underwear with an innate sluttiness of 2 or higher "lingerie" rather than just underwear.
                 lingerie_bonus += self.get_opinion_score("lingerie")
             if self.outfit.get_panties() and self.outfit.get_panties().slut_value > 1:
                 lingerie_bonus += self.get_opinion_score("lingerie")
             lingerie_bonus = __builtin__.int(lingerie_bonus/2.0)
-            self.change_slut(lingerie_bonus, add_to_log = False)
+            self.change_slut(lingerie_bonus, max_modified_to = 30, add_to_log = False)
 
         # not wearing underwear only impacts sluttiness to level 40
-        if self.sluttiness < 40 and self.outfit and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+        if self.outfit and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
             underwear_bonus = 0
             if not self.outfit.wearing_bra():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
             if not self.outfit.wearing_panties():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
             underwear_bonus = __builtin__.int(underwear_bonus/2.0) #I believe this rounds towards 0. No big deal if it doesn't, very minor detail.
-            self.change_slut(underwear_bonus, add_to_log = False)
+            self.change_slut(underwear_bonus, max_modified_to = 40, add_to_log = False)
 
         # showing the goods only impacts sluttiness to level 50
-        if self.sluttiness < 50 and self.outfit and self.outfit.tits_visible():
-            self.change_slut(self.get_opinion_score("showing her tits"), add_to_log = False)
-        if self.sluttiness < 50 and self.outfit and self.outfit.vagina_visible():
-            self.change_slut(self.get_opinion_score("showing her ass"), add_to_log = False)
+        if self.outfit and self.outfit.tits_visible():
+            self.change_slut(self.get_opinion_score("showing her tits"), max_modified_to = 50, add_to_log = False)
+        if self.outfit and self.outfit.vagina_visible():
+            self.change_slut(self.get_opinion_score("showing her ass"), max_modified_to = 50, add_to_log = False)
 
         # showing everything only impacts sluttiness to level 60
-        if self.sluttiness < 60 and self.outfit and self.outfit.full_access():
-            self.change_slut(self.get_opinion_score("not wearing anything"), add_to_log = False)
+        if self.outfit and self.outfit.full_access():
+            self.change_slut(self.get_opinion_score("not wearing anything"), max_modified_to = 60, add_to_log = False)
 
         for lta_store in [self.on_room_enter_event_list, self.on_talk_event_list]:
             removal_list = []
@@ -1581,11 +1593,16 @@ init -1 python:
             self.special_role.append(role)
             added = True
 
-        # special situation if she gets girlfriend role, she loses affair role and SO
-        if role is girlfriend_role:
-            self.remove_role(affair_role)
-            self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
-            self.SO_name = None
+        if added:
+            # special condition if she hates kissing, but becomes your girlfried or paramour she would allow kissing
+            if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role]:
+                self.increase_opinion_score("kissing")
+
+            # special situation if she gets girlfriend role, she loses affair role and SO
+            if role is girlfriend_role:
+                self.remove_role(affair_role)
+                self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
+                self.SO_name = None
 
         return added
     Person.add_role = add_role
@@ -1637,9 +1654,6 @@ init -1 python:
         if self.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]):
             shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
             return (time_of_day == 3 and shifts == 2) or time_of_day == 4
-        if self.has_role([maid_role]):
-            return maid_at_work(self)
-
         return False
 
     Person.should_wear_work_outfit = should_wear_work_outfit
@@ -1659,14 +1673,33 @@ init -1 python:
             self.work_outfit = mc.business.mistress_wardrobe.decide_on_outfit2(self)
         elif self.has_role(manager_role):
             self.work_outfit = mc.business.manager_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(maid_role):
-            self.work_outfit = maid_wardrobe.decide_on_outfit2(self)
 
         if self.work_outfit:
             self.apply_outfit(self.work_outfit)
         return
 
     Person.wear_work_outfit = wear_work_outfit
+
+    def should_wear_maid_outfit(self):
+        if self.has_role([maid_role]):
+            return maid_at_work(self)
+        return False
+
+    Person.should_wear_maid_outfit = should_wear_maid_outfit
+
+    def wear_maid_outfit(self):
+        if self.maid_outfit:
+            self.apply_outfit(self.maid_outfit)
+            return
+
+        if self.has_role(maid_role):
+            self.maid_outfit = maid_wardrobe.decide_on_outfit2(self)
+
+        if self.maid_outfit:
+            self.apply_outfit(self.maid_outfit)
+        return
+
+    Person.wear_maid_outfit = wear_maid_outfit
 
     def person_is_wearing_uniform(self):
         return self.outfit == self.planned_uniform and self.planned_uniform != self.planned_outfit
@@ -1681,6 +1714,9 @@ init -1 python:
             return False
 
         if not self.is_at_work():
+            return False
+
+        if casual_friday_uniform_policy.is_active() and day % 7 == 4:
             return False
 
         if self.event_triggers_dict.get("forced_uniform", False):
@@ -1758,6 +1794,8 @@ init -1 python:
             self.wear_uniform()
         elif self.should_wear_work_outfit():
             self.wear_work_outfit()
+        elif self.should_wear_maid_outfit():
+            self.wear_maid_outfit()
         else:
             if not self.planned_outfit: # extra validation to make sure we have a planned outfit
                 self.planned_outfit = self.decide_on_outfit()
@@ -1771,10 +1809,7 @@ init -1 python:
         if uniform is None:
             return
 
-        if casual_friday_uniform_policy.is_active() and day % 7 == 4:
-            self.planned_uniform = self.get_random_appropriate_outfit(guarantee_output = True)
-            self.change_happiness(5)
-        elif not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
+        if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
             (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(uniform.get_copy())
         elif creative_colored_uniform_policy.is_active():
             self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
@@ -1791,7 +1826,7 @@ init -1 python:
         def is_wearing_uniform_wrapper(person):
             # run extension code
             if casual_friday_uniform_policy.is_active() and day % 7 == 4:
-                return True
+                return False
             # run original function
             return org_func(person)
 
@@ -1799,8 +1834,8 @@ init -1 python:
 
     Person.is_wearing_uniform = person_is_wearing_uniform_extended(Person.is_wearing_uniform)
 
-    def personalize_outfit(self, outfit, the_colour = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
-        return WardrobeBuilder(self).personalize_outfit(outfit, the_colour = the_colour, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, allow_coverup = allow_coverup)
+    def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
+        return WardrobeBuilder(self).personalize_outfit(outfit, opinion_color = opinion_color, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, allow_coverup = allow_coverup)
 
     Person.personalize_outfit = personalize_outfit
 

@@ -14,6 +14,7 @@ init:
             taboo_break_description = "taboo_break_cowgirl_cunnilingus",
             verb = "lick",
             opinion_tags = ["getting head", "taking control", "get off"], record_class = "Cunnilingus",
+            default_animation = missionary_bob,
             associated_taboo = "licking_pussy")
 
         list_of_girl_positions.append(cowgirl_cunnilingus)

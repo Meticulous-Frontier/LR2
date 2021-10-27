@@ -56,8 +56,9 @@ label stripclub_dance_enhanced_label():
     $ the_person.apply_outfit(stripclub_wardrobe.pick_random_outfit())
 
     $ title = the_person.title
-    $ the_person.draw_person()
+    $ the_person.draw_person(position = "walking_away", the_animation = ass_bob)
     "A new song starts playing over the speakers and a girl steps out onto the stage."
+    $ the_person.draw_person(the_animation = idle_wiggle_animation)
     if title is not None:
         if cousin_role in the_person.special_role:
             if the_person.event_triggers_dict.get("blackmail_level", 999) < 2 and not the_person.event_triggers_dict.get("seen_cousin_stripping",False):
@@ -95,7 +96,7 @@ label stripclub_dance_enhanced_label():
     "She stops at the end of the stage, surrounded on three sides by eagerly watching men."
     "[title] starts to dance to the music, swinging her hips and turning slowly to show herself off to all members of the crowd."
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced
-    $ the_person.draw_person(position = "back_peek")
+    $ the_person.draw_person(position = "back_peek", the_animation = ass_bob, animation_effect_strength = 0.7)
     "She spins and poses for her audience, who respond with whoops and cheers."
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_1
     if the_person.has_large_tits():

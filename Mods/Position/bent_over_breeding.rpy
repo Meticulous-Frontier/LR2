@@ -13,6 +13,7 @@ init python:
         taboo_break_description = "taboo_break_bent_over_breeding",
         verb = "fuck",
         opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up"], record_class = "Vaginal Sex",
+        default_animation = blowjob_bob,
         associated_taboo = "bareback_sex")
 
 

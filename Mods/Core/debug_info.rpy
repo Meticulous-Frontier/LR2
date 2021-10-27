@@ -31,6 +31,8 @@ init 2:
 
 
 init 2 python:
+    import sys
+    import collections
 
     class SystemInfo():
         def __init__(self):
@@ -56,7 +58,8 @@ init 2 python:
     # make sure we only call this on the main thread
     def validate_texture_memory():
         # keep texture memory at configured image_cache_size_in_mb; game slows down when this gets too high
-        if renpy.display.draw.get_texture_size()[0] > (renpy.display.im.cache.cache_limit * 4):
+        # check for 90% of available memory cache slows down dramatically when under pressure
+        if renpy.display.draw.get_texture_size()[0] > (renpy.display.im.cache.cache_limit * 4 * .9):
             renpy.free_memory() # use main free memory function
         return
 
@@ -98,12 +101,12 @@ init 2 python:
     def get_persons_size():
         return sum([get_size(x) for x in all_people_in_the_game()])
 
-    def get_size(obj, seen = None):
+    def get_size(obj, seen=None):
         size = sys.getsizeof(obj)
         if not seen:
             seen = set()
         if id(obj) in seen:
-             return 0
+            return 0
         # Important mark as seen *before* entering recursion to gracefully handle
         # self-referential objects
         seen.add(id(obj))
@@ -117,6 +120,9 @@ init 2 python:
                 size += sum([get_size(i, seen) for i in obj])
             elif isinstance(obj, (str, bytes, bytearray)):
                 size += len(obj)
+            else: # check if passed object has a nested object property
+                for attr in [x for x in dir(obj) if isinstance(x, (list, dict, tuple, object))]:
+                    size += get_size(getattr(obj, attr), seen)
         except:
             pass
         return size

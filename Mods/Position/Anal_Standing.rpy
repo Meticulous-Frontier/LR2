@@ -15,6 +15,7 @@ init python:
         orgasm_description = "orgasm_SB_anal_standing",
         verb = "ass fuck",
         opinion_tags = ["doggy style sex", "anal sex", "sex standing up"], record_class = "Anal Sex",
+        default_animation = blowjob_bob,
         associated_taboo = "anal_sex")
 
     list_of_positions.append(SB_anal_standing)

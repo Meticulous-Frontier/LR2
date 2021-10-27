@@ -13,6 +13,7 @@ init python:
         orgasm_description = "orgasm_SB_doggy_anal_dildo_dp",
         verb = "dp", verbing = "dp-ing",
         opinion_tags = ["doggy style sex", "anal sex", "vaginal sex"], record_class = "Anal Sex",
+        default_animation = blowjob_bob,
         associated_taboo = "anal_sex")
 
     # only one associated taboo is allowed in code ["anal_sex", "vaginal_sex"]
