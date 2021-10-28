@@ -214,7 +214,7 @@ init -2 python:
 
     def erica_money_problems_update_requirement(person):
         if time_of_day > 0 and time_of_day < 4:
-            if mc.business.hr_director and erica_is_looking_for_work():
+            if erica_is_looking_for_work():
                 return True
         return False
 
@@ -288,7 +288,30 @@ init -2 python:
         return False
 
     def erica_breeding_fetish_team_crisis_requirement():
+        if time_of_day == 4 and erica.is_pregnant() and day%7 != 5: #SAturday pic nights
+            if day >= erica.pregnancy_show_day() + 7:
+                return True
         return False
+
+    def erica_breeding_fetish_nora_followup_requirement(the_person):
+        if the_person.location == university:
+            return True
+        return False
+
+    def erica_breeding_nora_news_part_one_requirement():
+        if time_of_day == 2:
+            if renpy.random.randint(0,100) < 20:    #I should probably just time this a week or something but I'm just so lazy
+                return True
+        return False
+
+    def erica_breeding_nora_news_part_two_requirement():
+        if time_of_day == 2:
+            if renpy.random.randint(0,100) < 15:    #Just to make F95 people QQ
+                return True
+        return False
+
+    def erica_breeding_fetish_team_rejoin_requirement(the_person):
+        return True
 
 
     def erica_ghost_requirement():
@@ -307,7 +330,7 @@ init -2 python:
 
 #*************Create Casual Athlete Role***********#
 init -1 python:
-    erica_intro_action =Action("Meet Erica", erica_intro_requirement, "erica_intro_label",
+    erica_intro_action = Action("Meet Erica", erica_intro_requirement, "erica_intro_label",
         menu_tooltip = "Meet your new gym girl.")
     erica_get_to_know = Action("Get to know Her {image=gui/heart/Time_Advance.png}", erica_get_to_know_requirement, "erica_get_to_know_label",
         menu_tooltip = "Make an observation about her.")
@@ -338,6 +361,10 @@ init -1 python:
     erica_lily_post_insta_morning = Action("Erica wakes you up", erica_lily_post_insta_morning_requirement, "erica_lily_post_insta_morning_label")
     erica_breeding_fetish_followup = Action("Erica knocked up followup", erica_breeding_fetish_followup_requirement, "erica_breeding_fetish_followup_label")
     erica_breeding_fetish_team_crisis = Action("Erica gets kicked off the track team", erica_breeding_fetish_team_crisis_requirement, "erica_breeding_fetish_team_crisis_label")
+    erica_breeding_fetish_nora_followup = Action("Talk to Nora about Erica", erica_breeding_fetish_nora_followup_requirement, "erica_breeding_fetish_nora_followup_label")
+    erica_breeding_nora_news_part_one = Action("Nora follow up text", erica_breeding_nora_news_part_one_requirement, "erica_breeding_nora_news_part_one_label")
+    erica_breeding_nora_news_part_two = Action("Nora good news", erica_breeding_nora_news_part_two_requirement, "erica_breeding_nora_news_part_two_label")
+    erica_breeding_fetish_team_rejoin = Action("Erica gets good news", erica_breeding_fetish_team_rejoin_requirement, "erica_breeding_fetish_team_rejoin_label")
 
     erica_role = Role(role_name ="College Athlete", actions =[erica_get_to_know , erica_phase_one, erica_phase_two, erica_protein_shake, erica_house_call, erica_money_problems_update], hidden = True)
 
@@ -2853,7 +2880,7 @@ label erica_breeding_fetish_followup_label(the_person):
     the_person "No, but the coach will just go around people's backs and go to their instructors, forcing them to give them bad marks."
     the_person "If a person's grades drop too much they kick you off the team... and sometimes even out of school..."
     mc.name "That's crazy! Surely there is some way to stop that?"
-    $ the_person.draw_person(position = "Stand3")
+    $ the_person.draw_person(position = "stand3")
     "[the_person.possessive_title] stops her bike and stands up to continue talking with you."
     the_person "I don't think so. I know at least one other girl that it happened to, and some of the seniors say it happened to a couple girls a few years ago..."
     "Hmm. This is a distressing development. Despite being a model student athlete, a coach with a vendetta is not an easy thing to get around."
@@ -2943,15 +2970,54 @@ label erica_breeding_fetish_team_crisis_label():
     the_person "Mmm, that was nice... are you sure it's okay if I sleep here?"
     mc.name "Of course."
     $ the_person.draw_person(position = "walking_away")
-
+    $ clear_scene()
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_erica_bred_night_01
 
-
-
-
-
-
-
+    $ scene_manager = Scene()
+    "You wake up. Next to you, the bed is empty, but it is still warm. [the_person.possessive_title] must have just gotten up..."
+    "A few seconds later, you hear the toilet flush. The sink runs for several seconds, and then the door opens."
+    $ the_person.apply_planned_outfit()
+    $ scene_manager.add_actor(the_person, display_transform = character_center_flipped)
+    mc.name "Good morning."
+    the_person "Good morning [the_person.mc_title]... Sorry but I need to leave early, I've got some things I need to figure out..."
+    mc.name "Sure, let me just walk you to the door atleast."
+    "You jump up out of bed, grab a pair of shorts and a t-shirt and throw them on."
+    "You open your bedroom door and start to walk [the_person.title] to the front door..."
+    $ scene_manager.add_actor(lily)
+    lily "Morning [lily.mc_title], you're up early... Oh! Hey [erica.name]!"
+    the_person "Hey..."
+    if lily.sluttiness >= 40:
+        lily "I thought I heard some action last night. Nice going!"
+    else:
+        lily "I thought hear some... errm... strange noises last night..."
+    the_person "Yeah... that was us..."
+    lily "Wow, [erica.name], you look amazing! You are positively glowing."
+    lily "You're still coming over on Saturday right? Thirsty insta boys are gonna love the way you are developing..."
+    if lily.pregnancy_is_visible():
+        lily "I have to say, I started making considerably more money on insta when my tits starting swelling up with milk."
+    elif lily.sluttiness >= 60:
+        lily "I've been thinking about doing something to make my tits a little bigger too, though maybe not getting pregnant..."
+    else:
+        lily "I've noticed lately that girls with bigger tits seem to make more money on that platform."
+    the_person "I don't know, things in my life are kind of crazy right now."
+    lily "Aww, come on! You can just come over and hang out, even if we don't get around to taking pictures."
+    the_person "Really?"
+    lily "Of course! I mean... I feel like I have a pretty good idea of who did this to you..."
+    the_person "That's true... I didn't even realize that you would be the aunt! Okay, I'll be here!"
+    lily "Great!"
+    "[lily.title] starts to talk about another subject, but [the_person.possessive_title] cuts her off."
+    the_person "I'm sorry, but I really need to get going, I have a lot of things to figure out."
+    if the_person.is_girlfriend():
+        lily "Oh god! He didn't just..."
+    else:
+        "[lily.title] looks at you and raises her eyebrow."
+        lily "He isn't playing around with your heart is he..."
+    the_person "No! No, it's school related stuff."
+    lily "Oh... right."
+    "[the_person.title] says goodbye. You finish walking her to the door, then go back to your room."
+    $ scene_manager.clear_scene()
+    "You aren't sure if there is anything you can do to help [the_person.possessive_title], but one thing that really bugs you is that score in [nora.title]'s class."
+    "You make up your mind. Next time you get the chance you are going to talk to her about it. Surely there is something more going on here?"
     return
 
 label erica_breeding_fetish_nora_followup_label(the_person):
@@ -2974,13 +3040,13 @@ label erica_breeding_fetish_nora_followup_label(the_person):
     "[the_person.title] sits down at her desk and pulls up her student records. After a short time, she pulls up [erica.possessive_title] records."
     the_person "Yeah, this is all fairly standard, good grades over all... hmm..."
     mc.name "Yeah, it's weird isn't it?"
-    the_person "Actually, something went wrong here... this is a quiz I just got done grading yesterday. No one got less than 70%, but it shows in the record here that she got a 17%."
-    the_person "And this? This grade was just an attendance grade. I had mandatory attendance for a guest speaker, so it should either be 0, or 100%, and this is showing she got a 35%..."
+    the_person "Actually, something went wrong here... this is a quiz I just got done grading yesterday. No one got less than 70 percent, but it shows in the record here that she got 17."
+    the_person "And this? This grade was just an attendance grade. I had mandatory attendance for a guest speaker, so it should either be 0, or 100, and this is showing she got a 35..."
     $ the_person.draw_person(position = "sitting", emotion = "angry")
     "[the_person.possessive_title]'s brow furrows as she goes through some of her recent grades."
     the_person "[the_person.mc_title]... You wouldn't have come to me unless you thought something was going on... What exactly is going on here? I did NOT give her these grades!"
     mc.name "Well, this is kind of a longshot, but, [erica.name] thinks her track coach is sabatoging her grades to get her kicked off the track team."
-    the_person "Oh my. That is a very serious allegation. But yet, her in front of me is possible incriminating data."
+    the_person "Oh my. That is a very serious allegation. But yet, here in front of me is possible incriminating data."
     the_person "I'm going to save a copy of this and correct her grades immediately. While I do that, do you think you could get me a list of her other instructors?"
     mc.name "Sure."
     "You shoot [erica.title] a text and ask her for her full list of classes. It takes a minute, but she sends you a screenshot of her enrollement form with her class list."
@@ -3009,6 +3075,7 @@ label erica_breeding_nora_news_part_one_label():
     the_person "Yeah, I'll keep you updated, but give me a couple more days."
     mc.name "Got it. Thanks."
     $ mc.end_text_convo()
+    $ mc.business.add_mandatory_crisis(erica_breeding_nora_news_part_two)
     return
 
 label erica_breeding_nora_news_part_two_label():
@@ -3027,7 +3094,7 @@ label erica_breeding_nora_news_part_two_label():
     the_person "[the_person.mc_title], I have some incredible news."
     mc.name "Oh?"
     the_person "The track coach has been fired. IT and security traced the gradebook changes back to a computer he was using and was able to trace everything back to him."
-    the_person "He was fired and may even be facing some jail time. The boy's track coach has bene named the interim coach until someone new can be hired."
+    the_person "He was fired and may even be facing some jail time. The boy's track coach has been named the interim coach until someone new can be hired."
     the_person "I already spoke with him and informed him of the sensitive situation with the student."
     the_person "The new coach has already reached out to her with an offer for a full ride, unconditional scholarship and placement back on the track team."
     mc.name "Wow, so the guy really was tampering with grades."
@@ -3035,7 +3102,7 @@ label erica_breeding_nora_news_part_two_label():
     mc.name "Well that is great news. I'm sure [erica.name] will be excited when she hears about it."
     $ erica.event_triggers_dict["team_reinstate_day"] = day
     $ erica.add_unique_on_talk_event(erica_breeding_fetish_team_rejoin)
-    $ nora.add_unique_on_room_enter_event(college_intern_recruit_supply)
+
     "You can't wait to talk to [erica.possessive_title] about the news."
     return
 
@@ -3065,6 +3132,11 @@ label erica_breeding_fetish_team_rejoin_label(the_person):
         the_person "Since I already had the baby, I can go straight back to the team..."
         the_person "But if you wanna knock me up again, I wouldn't mind it!"
         $ mc.change_locked_clarity(30)
+    the_person "Anyway, I just want you to know, I'll never forget what you've done for me."
+    the_person "Now, did you want something?"
+    $ nora.add_unique_on_room_enter_event(college_intern_recruit_supply) #I added this here so we don't accidentally steamroll right into it with Nora.
+    call talk_person(the_person) from _call_talk_erica_team_rejoin_010
+    #fin
     return
 
 

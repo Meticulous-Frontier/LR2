@@ -60,7 +60,7 @@ init -1 python:
     def college_intern_recruit_hr_requirement():
         return False
 
-    def college_intern_recruit_supply_requirement():
+    def college_intern_recruit_supply_requirement(the_person):
         if erica.event_triggers_dict.get("team_reinstate_day", 9999) + 14 < day and mc.business.college_interns_unlocked:
             return True
         return False
@@ -127,18 +127,21 @@ label hire_new_college_intern_label(the_person):
             $ the_dept = "Marketing"
             $ stat_array = [3,1,2]
             $ skill_array = [1,2,1,1,1]
+            $ forced_opinions = [["market work", 1, True]]
         "Graphic Design (Marketing) (disabled)":    #In the future we may have opportunities to recruit interns for these programs.
             pass
         "Psychology (HR)" if len(mc.business.college_interns_HR) < mc.business.max_interns_by_division and mc.business.college_hr_interns_unlocked:
             $ the_dept = "HR"
             $ stat_array = [3,2,1]
             $ skill_array = [2,1,1,1,1]
+            $ forced_opinions = [["HR work", 1, True]]
         "Psychology (HR) (disabled)":
             pass
         "Business (Supply)" if len(mc.business.college_interns_supply) < mc.business.max_interns_by_division and mc.business.college_supply_interns_unlocked:
             $ the_dept = "Supply"
             $ stat_array = [2,1,3]
             $ skill_array = [1,1,1,1,2]
+            $ forced_opinions = [["supply work", 1, True]]
         "Business (Supply) (disabled)":
             pass
         "Never mind":
@@ -271,6 +274,8 @@ label college_intern_training_label(the_person):
     return
 
 label college_intern_recruit_supply_label(the_person):
+    if mc.business.college_supply_interns_unlocked:
+        return False
     $ the_person.draw_person()
     the_person "Oh! [the_person.possessive_title], I was hoping to see you soon."
     mc.name "That's nice to hear."
