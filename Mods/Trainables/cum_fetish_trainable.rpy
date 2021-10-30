@@ -7,7 +7,7 @@ init 2 python:
         if has_started_cum_fetish(the_person):
             return "Not started"
         if the_person.sluttiness < 50:
-            return "> 50 sluttiness"
+            return ">50 sluttiness"
         return True
 
     def increase_cum_fetish(person):
@@ -64,6 +64,6 @@ label train_cum_fetish_label(the_person):
         else:
             "You have come one step closer to inducing her cum fetish. Perhaps another session or a serum with the Semen Nanobots will push her over the edge."
 
-    mc.name "Alright, [the_person.title], that's enough for today. We will talk about this soon."
+    mc.name "Alright, [the_person.title], that's enough for now. We will talk about this soon."
     the_person "Yes, I would love that."
     return True
