@@ -1,14 +1,5 @@
 # Enables extra functions for SerumDesign / SerumTraits.
 init 2 python:
-
-   # Checks if the SerumDesign contains a specific trait based on its name.
-   def has_trait(self, the_trait):
-      for trait in self.traits or trait in self.side_effects:
-         if trait.name == the_trait.name:
-            return trait
-   SerumDesign.has_trait = has_trait
-
-
    def anorexia_serum_on_turn(person, the_serum, add_to_log):
       return person.change_weight(amount = -0.5, chance = 50)
 
