@@ -2636,9 +2636,9 @@ label erica_lily_post_insta_morning_label():
     $ the_person = erica
     $ mc.location.lighting_conditions = dark_lighting
     $ option_list = erica_get_wakeup_options()
-    "You hear the door to your room slowly open, slowly waking you up."
+    "You hear the door to your room slowly open, waking you up."
     $ the_person.draw_person()
-    "A figure appears in your door. It's [the_person.possessive_title] again. She slowly makes her way over to your bed, then sits on the side of it."
+    "A figure appears in your door. It's [the_person.possessive_title] again. She tip toes over to your bed, then sits on the side of it."
     $ the_person.draw_person(position = "sitting")
     "Hearing you stir, she leans down and whispers in your ear."
     the_person "Good morning."
