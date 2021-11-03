@@ -1091,8 +1091,26 @@ label anal_fetish_dawn_intro_label():
     return False
 
 label anal_fetish_erica_intro_label():
-    "Erica's anal fetish scene has not yet been written."
-    return False
+    $ the_person = erica
+    $ mc.location.lighting_conditions = dark_lighting
+    "You hear the door to your room slowly open, waking you up."
+    $ the_person.draw_person()
+    "A figure appears in your door. It's [the_person.possessive_title] again. She tip toes over to your bed."
+    $ the_person.strip_outfit(position = "stand4")
+    "Did she just get naked? You decide to feign being asleep while you wait and see what she does."
+    $ the_person.draw_person(position = "sitting")
+    "You feel a weight on the side of your bed as she sits down. Slowly you feel the blankets being pulled down off of you."
+    the_person "Oh god... I've been dreaming about this all night..."
+    "You feel your shorts getting slowly pulled down now. Your morning wood springs free."
+    the_person "Holy... what a monster... god help me fit this..."
+    $ the_person.draw_person(position = "cowgirl")
+    "[the_person.title]'s weight settles on your mid section. You feel a hand grasp your cock and guide it as she starts to sit on it."
+    "However, when you feel contact with her skin, there is an unexpected resistance. You hear her sigh."
+    the_person "Okay... here we go..."
+    "A tight, smooth senesation begins to envelop the end of your dick. You realize [the_person.possessive_title] is struggling to "
+
+
+    return True
 
 label anal_fetish_ashley_intro_label():
     "Ashley's anal fetish scene has not yet been written."
