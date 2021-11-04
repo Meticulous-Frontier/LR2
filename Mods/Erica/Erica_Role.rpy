@@ -45,6 +45,7 @@ init 2 python:
         erica.event_triggers_dict["post_insta_handy"] = False
         erica.event_triggers_dict["wake_up_options"] = ["handjob"]
         erica.event_triggers_dict["team_reinstate_day"] = 9999
+        erica.event_triggers_dict["morning_wakeup_pref"] = 0
         erica.fertility_percent = -100.0  #Erica refuses to get pregnant for MC, getting pregnant would cause her to be kicked from track team. Enabled with breeding fetish.
 
 
@@ -313,6 +314,11 @@ init -2 python:
     def erica_breeding_fetish_team_rejoin_requirement(the_person):
         return True
 
+    def erica_discuss_morning_wakeup_requirement(the_person):
+        if erica_has_given_morning_handjob() and time_of_day != 0 and time_of_day != 4:
+            return True
+        return False
+
 
     def erica_ghost_requirement():
         if renpy.random.randint(0,100) < 20:
@@ -358,13 +364,15 @@ init -1 python:
     erica_lily_weekly_photoshoot = Action("Weekly instapic session with Lily", erica_lily_weekly_photoshoot_requirement, "erica_lily_weekly_photoshoot_label")
     erica_lily_post_insta_handjob = Action("Erica wakes you up", erica_lily_post_insta_handjob_requirement, "erica_lily_post_insta_handjob_label")
     erica_post_insta_handjob_followup = Action("Talk about Handjob", erica_post_insta_handjob_followup_requirement, "erica_post_insta_handjob_followup_label")
-    # erica_lily_post_insta_morning = Action("Erica wakes you up", erica_lily_post_insta_morning_requirement, "erica_lily_post_insta_morning_label")
+    erica_lily_post_insta_morning_mand = Action("Erica wakes you up", erica_lily_post_insta_morning_requirement, "erica_lily_post_insta_morning_label")
     erica_breeding_fetish_followup = Action("Erica knocked up followup", erica_breeding_fetish_followup_requirement, "erica_breeding_fetish_followup_label")
     erica_breeding_fetish_team_crisis = Action("Erica gets kicked off the track team", erica_breeding_fetish_team_crisis_requirement, "erica_breeding_fetish_team_crisis_label")
     erica_breeding_fetish_nora_followup = Action("Talk to Nora about Erica", erica_breeding_fetish_nora_followup_requirement, "erica_breeding_fetish_nora_followup_label")
     erica_breeding_nora_news_part_one = Action("Nora follow up text", erica_breeding_nora_news_part_one_requirement, "erica_breeding_nora_news_part_one_label")
     erica_breeding_nora_news_part_two = Action("Nora good news", erica_breeding_nora_news_part_two_requirement, "erica_breeding_nora_news_part_two_label")
     erica_breeding_fetish_team_rejoin = Action("Erica gets good news", erica_breeding_fetish_team_rejoin_requirement, "erica_breeding_fetish_team_rejoin_label")
+    erica_discuss_morning_wakeup = Action("Discuss wakeup plans", erica_discuss_morning_wakeup_requirement, "erica_discuss_morning_wakeup_label",
+        menu_tooltip = "Talk to Erica about whether she should wake you up in the morning after spending the night with Lily.")
 
     erica_role = Role(role_name ="College Athlete", actions =[erica_get_to_know , erica_phase_one, erica_phase_two, erica_protein_shake, erica_house_call, erica_money_problems_update], hidden = True)
 
@@ -2632,8 +2640,14 @@ label erica_lily_post_insta_handjob_label():
     $ mc.location.lighting_conditions = standard_outdoor_lighting
     return
 
+
+
 label erica_lily_post_insta_morning_label():
     $ the_person = erica
+    if erica_get_morning_wakeup_pref() == 0:
+        return
+    if the_person.sex_record.get("Last Sex Day", 9999) == day:  #If mandatory and random crisis happen to fire on the same day, suppress the second event.
+        return
     $ mc.location.lighting_conditions = dark_lighting
     $ option_list = erica_get_wakeup_options()
     "You hear the door to your room slowly open, waking you up."
@@ -2666,6 +2680,8 @@ label erica_lily_post_insta_morning_label():
         "[the_person.title] quietly leaves your room and you quickly fall back asleep."
         $ clear_scene()
         $ mc.location.lighting_conditions = standard_outdoor_lighting
+        if erica_get_morning_wakeup_pref() == 2:
+            $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
 
     if the_person.is_willing(cowgirl_blowjob) and "blowjob" not in option_list:
@@ -2692,6 +2708,8 @@ label erica_lily_post_insta_morning_label():
         "[the_person.title] quietly leaves your room and you quickly fall back asleep."
         $ clear_scene()
         $ mc.location.lighting_conditions = standard_outdoor_lighting
+        if erica_get_morning_wakeup_pref() == 2:
+            $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
 
     if willing_to_threesome(the_person, lily) and "threesome" not in option_list:
@@ -2754,6 +2772,8 @@ label erica_lily_post_insta_morning_label():
         $ scene_manager.clear_scene()
         "The two girls get up. You fall asleep as they slip out of your room."
         $ mc.location.lighting_conditions = standard_outdoor_lighting
+        if erica_get_morning_wakeup_pref() == 2:
+            $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
 
 
@@ -2787,6 +2807,9 @@ label erica_lily_post_insta_morning_label():
         "[the_person.possessive_title] opens her mouth and begins to bob her head up and down on your morning wood."
         call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "oral creampie", private = True, skip_intro = True, allow_continue = False) from _erica_morning_blowjob_02
         $ the_person.change_slut(1, 60)
+
+    elif position_choice == "anal cowgirl":
+        pass
     elif position_choice == "threesome":
         the_person "I'll go get [lily.name]. She DID say to let her know when I sneak back in anyway..."
         $ clear_scene
@@ -2824,6 +2847,8 @@ label erica_lily_post_insta_morning_label():
         $ scene_manager.remove_actor(lily)
         "You fall back asleep. What an incredible midnight rendezvous..."
         $ mc.location.lighting_conditions = standard_outdoor_lighting
+        if erica_get_morning_wakeup_pref() == 2:
+            $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
 
 
@@ -2834,6 +2859,8 @@ label erica_lily_post_insta_morning_label():
     "[the_person.title] quietly leaves your room and you quickly fall back asleep."
     $ clear_scene()
     $ mc.location.lighting_conditions = standard_outdoor_lighting
+    if erica_get_morning_wakeup_pref() == 2:
+        $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
     return
 
 label erica_post_insta_handjob_followup_label(the_person):
@@ -3142,6 +3169,24 @@ label erica_breeding_fetish_team_rejoin_label(the_person):
     #fin
     return
 
+label erica_discuss_morning_wakeup_label(the_person):
+    mc.name "Hey, I wanted to talk to you about something."
+    the_person "Yeah?"
+    mc.name "You know how sometimes, you sneak into my room after spending the night with [lily.name] in the early morning?"
+    the_person "Oh yeah..."
+    menu:
+        "Don't do that anymore":
+            $ erica.event_triggers_dict["morning_wakeup_pref"] = 0
+            pass
+        "Surprise me once in a while":
+            $ erica.event_triggers_dict["morning_wakeup_pref"] = 1
+            pass
+        "Do it every chance you get":
+            $ erica.event_triggers_dict["morning_wakeup_pref"] = 2
+            pass
+    the_person "Okay, I can do that! Anything else?"
+    return
+
 
 init 2 python:
     def switch_to_class_front(person_one, person_two, pose):
@@ -3278,6 +3323,9 @@ init 2 python:
         tuple_list.append(["Surprise me", "Surprise me"])
 
         return renpy.display_menu(tuple_list,True,"Choice")
+
+    def erica_get_morning_wakeup_pref():
+        return erica.event_triggers_dict.get("morning_wakeup_pref", 0)
 
     # def erica_check_class_size_and_add_event():
     #     if len(erica_get_yoga_class_list()) < 4:
