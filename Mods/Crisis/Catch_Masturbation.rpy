@@ -85,7 +85,7 @@ label SB_caught_masturbating_crisis_label():
         $ scene_manager.clear_scene()
         $ mc.location.show_background()
     else:
-        "Looking inside, you see [the_person.possessive_title] on all fours, with her back to you, quietly moaning."
+        "Looking inside, you see [the_person.possessive_title!l] on all fours, with her back to you, quietly moaning."
         $ the_person.draw_person(position = "doggy")
         the_person "Mmmmmmmfff... oh..."
         $ the_person.change_arousal(50)
@@ -95,11 +95,11 @@ label SB_caught_masturbating_crisis_label():
             "With her pussy on full display, you can see she is masturbating vigorously. Her pink lips glisten with moisture."
         else:
             $ mc.change_locked_clarity(10)
-            "While it is kind of hard to see, it appears that [the_person.possessive_title] has one hand in her [the_clothing.name] and is masturbating."
+            "While it is kind of hard to see, it appears that [the_person.possessive_title!l] has one hand in her [the_clothing.name] and is masturbating."
 
         menu:
             "Watch her masturbate":
-                "You shift your weight slightly to get comfortable. The sight of [the_person.possessive_title] brazenly masturbating while at work has you mesmerized."
+                "You shift your weight slightly to get comfortable. The sight of [the_person.possessive_title!l] brazenly masturbating while at work has you mesmerized."
                 the_person "Yes... fuck yes.."
                 $ the_person.change_arousal(10)
                 "[the_person.possessive_title] continues to moan to herself, lost in whatever fantasy she is masturbating to."
@@ -117,7 +117,7 @@ label SB_caught_masturbating_crisis_label():
                         the_person "Yes [fantasy_guy]... it feels so good when you do that..."
                         $ the_person.change_arousal(10)
                         "You aren't sure what she is fantasizing about, but she is getting really into it..."
-                        "As [the_person.possessive_title] continues to masturbate, you can tell she is getting ready to finish."
+                        "As [the_person.possessive_title!l] continues to masturbate, you can tell she is getting ready to finish."
                         $ the_person.change_arousal(10)
                         $ mc.change_locked_clarity(20)
                         $ the_person.have_orgasm()
@@ -129,11 +129,11 @@ label SB_caught_masturbating_crisis_label():
                             the_person "Oh God, [the_person.mc_title], that's it. Eat my pussy!"      #Get a chance to eat her
                             $ the_person.change_arousal(10)
                             $ mc.change_locked_clarity(20)
-                            "It seems that [the_person.possessive_title] is fantasizing about you eating her out!"
+                            "It seems that [the_person.possessive_title!l] is fantasizing about you eating her out!"
                             "You decide that this is an opportunity too good to pass up."
                             mc.name "I'd be happy to [the_person.title]."
                             $ the_person.draw_person(position = "missionary")
-                            "You startle [the_person.possessive_title] and she quickly turns over on her back."
+                            "You startle [the_person.possessive_title!l] and she quickly turns over on her back."
                             the_person "[the_person.mc_title]? Oh God, how long have you been here?"
                             if the_person.outfit.vagina_available():           #If its available no need to strip.
                                 "You drop down on the floor in front of her. With her pussy exposed you waste no time diving right in."
@@ -171,7 +171,7 @@ label SB_caught_masturbating_crisis_label():
                             "[the_person.possessive_title] seems really into it. Her back is arched as her hand works its magic on her groin."  ##TODO: this scene
                             the_person "Mmm, [the_person.mc_title], that's it... I wanna be your slut..."
                             $ the_person.change_arousal(10)
-                            "You hear [the_person.possessive_title] mumble your name. She's fantasizing about you! You stay as quiet as possible and continue to watch in amazement."
+                            "You hear [the_person.possessive_title!l] mumble your name. She's fantasizing about you! You stay as quiet as possible and continue to watch in amazement."
                             if the_person.get_opinion_score("giving blowjobs") > 0:
                                 the_person "Yeah [the_person.mc_title]... that it... let me suck on that delicious cock... I'll take care of it for you..."
                                 "She's fantasizing about sucking you off! Maybe you should pay her a visit later..."
@@ -186,13 +186,13 @@ label SB_caught_masturbating_crisis_label():
                             $ the_person.change_arousal(10)
                             $ mc.change_locked_clarity(20)
                             "[the_person.possessive_title]'s hand continues to work furiously on her pussy. You can tell from her proficiency that she probably does this often."
-                            "As [the_person.possessive_title] continues to masturbate, you can tell she is getting ready to finish."
+                            "As [the_person.possessive_title!l] continues to masturbate, you can tell she is getting ready to finish."
                             $ the_person.change_arousal(10)
                             $ the_person.have_orgasm(the_position = "doggy")
                             "[the_person.possessive_title] whimpers as she cums. Her legs spasm and she gasps for air."
                             $ mc.change_locked_clarity(20)
                             "You back out of the room before she has a chance to recover. You can't believe your good luck, catching an employee masturbating... while thinking of you of all people!"
-                            "On your way back to your work, you swing by [the_person.possessive_title]'s desk. You write her a quick note."
+                            "On your way back to your work, you swing by [the_person.possessive_title!l]'s desk. You write her a quick note."
                             "Thanks for the show!"
                             "You finish it with your initials and leave it next to her computer monitor."
                             "Half an hour later while you are back at work..."
@@ -220,7 +220,7 @@ label SB_caught_masturbating_crisis_label():
                                 "It looks like you've managed to convince her."
                                 $ the_person.draw_person(position = "walking_away")
                                 $ the_person.change_stats(happiness = -2, obedience = -2)
-                                "After a quick apology, [the_person.possessive_title] excuses herself. You see her head into the women's restroom. You decide it would be a bad idea to try and follow her there."
+                                "After a quick apology, [the_person.possessive_title!l] excuses herself. You see her head into the women's restroom. You decide it would be a bad idea to try and follow her there."
                                 "You finish up your walk and return back to your previous work."
                             else:
                                 the_person "I know I shouldn't have been... but you shouldn't just... UGH!!!"
@@ -229,10 +229,10 @@ label SB_caught_masturbating_crisis_label():
                                 $ the_person.change_stats(happiness = -5, obedience = -5, slut = 1, max_slut = 35)
                                 "You finish up your walk and return back to your previous work."
                         else: #She's embarrassed
-                            "Mortified, [the_person.possessive_title] makes a run for the door."
+                            "Mortified, [the_person.possessive_title!l] makes a run for the door."
                             $ the_person.draw_person(position = "walking_away")
                             the_person "Oh my god... I'm so sorry [the_person.mc_title]. I just couldn't help myself. I won't let this happen again!"
-                            "You try to reassure [the_person.possessive_title], but she quickly runs off before you can speak."
+                            "You try to reassure [the_person.possessive_title!l], but she quickly runs off before you can speak."
                             $ the_person.change_stats(happiness = -5, obedience = 5, slut = 1, max_slut = 35)
                             #show screen float_up_screen(["-5 Happiness","+5 Obedience"],["float_text_yellow","float_text_grey","float_text_pink"])    ###OLD code
                             "You finish up your walk and return back to your previous work."
@@ -243,7 +243,7 @@ label SB_caught_masturbating_crisis_label():
                         "[the_person.possessive_title] rolls over on her back and continues masturbating."
                         $ the_person.change_arousal(20)
                         if the_person.outfit.vagina_visible():
-                            "Her delicious pussy on full display, [the_person.possessive_title] increases her pace while closely watching you."
+                            "Her delicious pussy on full display, [the_person.possessive_title!l] increases her pace while closely watching you."
                             $ mc.change_locked_clarity(20)
                             $ the_person.break_taboo("bare_pussy")
                         else:
@@ -266,8 +266,8 @@ label SB_caught_masturbating_crisis_label():
                         $ mc.change_locked_clarity(20)
                         $ the_person.have_orgasm(the_position = "missionary")
                         "[the_person.possessive_title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air."
-                        "Catching her breath, [the_person.possessive_title] looks up at you but doesn't say a word. It is clear that masturbating in front of her boss has left a lasting impression."
-                        "You decide to give [the_person.possessive_title] a chance to recover. You nod at her and then back out of the room."
+                        "Catching her breath, [the_person.possessive_title!l] looks up at you but doesn't say a word. It is clear that masturbating in front of her boss has left a lasting impression."
+                        "You decide to give [the_person.possessive_title!l] a chance to recover. You nod at her and then back out of the room."
                         "You finish up your walk and return back to your previous work."
                     elif the_person.has_anal_fetish():
                         the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
@@ -285,7 +285,7 @@ label SB_caught_masturbating_crisis_label():
                             "Fuck her ass": # only show sex option if you had sex before
                                 mc.name "Sure, I could spare a few minutes for your ass."
                                 "You quickly pull your pants down. [the_person.possessive_title] is wiggling her ass back and forth, waiting for you."
-                                "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is so wet, your cock is soon nice lubed up."
+                                "You rub the tip of your penis against [the_person.possessive_title!l]'s cunt. She is so wet, your cock is soon nice lubed up."
                                 "When you're ready you move your cock up to her back door. With some gentle pressure, you slip into her well exercised hole."
                                 call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, skip_condom = True) from _call_sex_sb_event_masturbation_30
                                 $ the_report = _return
@@ -297,7 +297,7 @@ label SB_caught_masturbating_crisis_label():
                                     "[the_person.possessive_title] quickly recovers after you finish."
                                     $ the_person.change_stats(happiness = 3)
                                 the_person "Mmm, you always know just what I need [the_person.mc_title]"
-                                "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
+                                "You decide to give [the_person.possessive_title!l] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
                                 "You finish up your walk and return back to your previous work."
 
                             "Just watch":
@@ -323,8 +323,8 @@ label SB_caught_masturbating_crisis_label():
                                 $ mc.change_locked_clarity(20)
                                 $ the_person.have_orgasm(the_position = "doggy")
                                 "[the_person.possessive_title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air."
-                                "Catching her breath, [the_person.possessive_title] leans forward, leaving her ass up in the air. It is clear that masturbating in front of her boss has left a lasting impression."
-                                "You decide to give [the_person.possessive_title] a chance to recover. You nod to her and then back out of the room."
+                                "Catching her breath, [the_person.possessive_title!l] leans forward, leaving her ass up in the air. It is clear that masturbating in front of her boss has left a lasting impression."
+                                "You decide to give [the_person.possessive_title!l] a chance to recover. You nod to her and then back out of the room."
                                 "You finish up your walk and return back to your previous work."
 
                     else: #She is very slutty
@@ -343,8 +343,8 @@ label SB_caught_masturbating_crisis_label():
                             "Fuck her" if not the_person.has_taboo("vaginal_sex"): # only show sex option if you had sex before
                                 mc.name "Sure, I could go for a quick fuck right now."
                                 "You quickly pull your pants down. [the_person.possessive_title] is wiggling her ass back and forth, waiting for you."
-                                "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is already soaking wet."
-                                "When you're ready you push forward, slipping your shaft deep inside of [the_person.possessive_title]. She moans and quivers as you start to pump in and out."
+                                "You rub the tip of your penis against [the_person.possessive_title!l]'s cunt. She is already soaking wet."
+                                "When you're ready you push forward, slipping your shaft deep inside of [the_person.possessive_title!l]. She moans and quivers as you start to pump in and out."
                                 call fuck_person(the_person, start_position = doggy, start_object = make_floor(), skip_intro = True, skip_condom = True) from _call_sex_sb_event_masturbation_010
                                 $ the_report = _return
                                 if the_report.get("girl orgasms", 0) > 1:
@@ -354,7 +354,7 @@ label SB_caught_masturbating_crisis_label():
                                     "[the_person.possessive_title] quickly recovers after you finish."
                                     $ the_person.change_stats(happiness = 3)
                                 the_person "Mmmm, thanks [the_person.mc_title]! That was just what I needed..."
-                                "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
+                                "You decide to give [the_person.possessive_title!l] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
                                 "You finish up your walk and return back to your previous work."
 
                             "Just watch":
@@ -380,8 +380,8 @@ label SB_caught_masturbating_crisis_label():
                                 $ mc.change_locked_clarity(20)
                                 $ the_person.have_orgasm(the_position = "doggy")
                                 "[the_person.possessive_title] whimpers and her eyes glaze over as she cums. Her legs spasm and she gasps for air."
-                                "Catching her breath, [the_person.possessive_title] leans forward, leaving her ass up in the air. It is clear that masturbating in front of her boss has left a lasting impression."
-                                "You decide to give [the_person.possessive_title] a chance to recover. You nod to her and then back out of the room."
+                                "Catching her breath, [the_person.possessive_title!l] leans forward, leaving her ass up in the air. It is clear that masturbating in front of her boss has left a lasting impression."
+                                "You decide to give [the_person.possessive_title!l] a chance to recover. You nod to her and then back out of the room."
                                 "You finish up your walk and return back to your previous work."
 
             "Punish her for inappropriate behaviour" if office_punishment.is_active():
@@ -391,7 +391,7 @@ label SB_caught_masturbating_crisis_label():
                 mc.name "I'm sure you'll have learned your lesson in the future."
 
             "Keep walking":
-                "You decide to give [the_person.possessive_title] some privacy. As quietly as you can, you close the door behind you and continue walking."
+                "You decide to give [the_person.possessive_title!l] some privacy. As quietly as you can, you close the door behind you and continue walking."
 
         $ the_person.apply_planned_outfit()
         $ mc.location.show_background()

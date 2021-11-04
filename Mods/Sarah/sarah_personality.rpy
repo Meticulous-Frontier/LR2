@@ -386,7 +386,7 @@ label Sarah_flirt_response_high(the_person):
 
             menu:
                 "Kiss her":
-                    "You put an arm around [the_person.possessive_title]'s waist and pull her close."
+                    "You put an arm around [the_person.possessive_title!l]'s waist and pull her close."
 
                     if the_person.has_taboo("kissing"):
                         $ the_person.call_dialogue("kissing_taboo_break")
@@ -442,7 +442,7 @@ label Sarah_flirt_response_high(the_person):
                     mc.name "Then let's find somewhere private. Come on."
                     "You take her hand and start to lead her away. She follows you eagerly."
                     the_person "Wow, I wasn't expecting you to actually do it! This is gonna be fun!"
-                    "When you find a quiet spot you pull [the_person.possessive_title] close to you."
+                    "When you find a quiet spot you pull [the_person.possessive_title!l] close to you."
                     if the_person.has_taboo("kissing"):
                         $ the_person.call_dialogue("kissing_taboo_break")
                         $ the_person.break_taboo("kissing")

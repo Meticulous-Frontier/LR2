@@ -25,7 +25,7 @@ label Perk_Tutorial_Crisis_label():
         "Open the 'Perk Sheet' screen (top left UI) and click on the 'Time of Need' perk to continue."
     "You get up and follow your mom to her room."
     the_person "Thank you! I just had this overwhelming urge to move some of my furniture around. You know how it is, once you get the urge it's hard to put it off..."
-    "You help [the_person.possessive_title] move her furniture around. She seems extremely grateful."
+    "You help [the_person.possessive_title!l] move her furniture around. She seems extremely grateful."
     $ the_person.change_love(5)
     $ the_person.change_happiness(5)
     the_person "Thank you! This means a lot to me!"

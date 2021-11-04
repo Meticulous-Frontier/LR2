@@ -27,23 +27,23 @@ init 2 python:
 label fetish_anal_staylate_label(the_person):
     mc.name "[the_person.title], I need you to stay after work today."
     the_person "Oh, of course sir. I'm not in trouble am I?"
-    "You give [the_person.possessive_title] a reassuring smile."
+    "You give [the_person.possessive_title!l] a reassuring smile."
     mc.name "No, of course not, you are a wonderful asset to the company..."
     "You lower your voice and whisper in her ear so others don't overhear."
     mc.name "...but I might have to spank your ass a bit anyway."
-    "You look [the_person.possessive_title] in the eyes. Her pupils dilate a bit as she realizes the reasoning behind asking her to stay late."
+    "You look [the_person.possessive_title!l] in the eyes. Her pupils dilate a bit as she realizes the reasoning behind asking her to stay late."
     $ mc.change_locked_clarity(20)
     the_person "Oh! Thank you sir! I'll look forward to it!"
-    "You say goodbye to [the_person.possessive_title]."
+    "You say goodbye to [the_person.possessive_title!l]."
     $ add_fetish_anal_staylate_event(the_person)
     return
 
 #SBA2
 label fetish_anal_staylate_event_label(the_person):
     if not mc.is_at_work():
-        "Your phone rings. It's [the_person.possessive_title]. You answer it."
+        "Your phone rings. It's [the_person.possessive_title!l]. You answer it."
         the_person "Hey, are you at work? I can't find you."
-        "You forgot! You asked [the_person.possessive_title] to stay after work today."
+        "You forgot! You asked [the_person.possessive_title!l] to stay after work today."
         mc.name "Sorry, I had something come up and had to leave early."
         "[the_person.possessive_title] tries to mask disappointment in her voice but it is still obvious."
         the_person "Oh... okay... well try to let me know next time before I stay late. I thought... anyway, maybe some other time. Bye!"
@@ -52,7 +52,7 @@ label fetish_anal_staylate_event_label(the_person):
         return
 
     $ ceo_office.show_background()
-    "You finish up with your work for the day and return to your office. You are organizing some papers when [the_person.possessive_title] enters the room."
+    "You finish up with your work for the day and return to your office. You are organizing some papers when [the_person.possessive_title!l] enters the room."
     $ the_person.apply_outfit(special_fetish_outfit)
     $ the_person.draw_person()
     $ mc.change_locked_clarity(30)
@@ -66,7 +66,7 @@ label fetish_anal_staylate_event_label(the_person):
     $ the_person.draw_person(position = "standing_doggy")
     $ the_person.change_arousal(10)
     $ mc.change_locked_clarity(50)
-    "You approach [the_person.possessive_title] and begin to inspect her shapely ass. Nestled between her cheeks, you can see the pink jewel of her butt plug."
+    "You approach [the_person.possessive_title!l] and begin to inspect her shapely ass. Nestled between her cheeks, you can see the pink jewel of her butt plug."
     "Below her plug, you can see the soft wet lips of her cunt. They are already flushed, showing a slight glisten of moisture. She is getting aroused just from presenting her ass to you."
     "She begins to wiggle her hips slightly in response to your intense gaze."
     the_person "Is everything to your satisfaction, sir?"
@@ -94,7 +94,7 @@ label fetish_anal_staylate_event_label(the_person):
             $ the_person.change_arousal(10)
             $ mc.change_locked_clarity(50)
             mc.name "Now, I think it is time for something a bit more substantial than the plug..."
-            "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
+            "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title!l]'s rectum. She quivers in anticipation of what you are about to do to her."
             $ the_person.change_arousal(the_person.get_opinion_score("anal sex"))
             "You work a couple fingers into her bottom. It is clear she loves anal sex so much, she keeps herself lubed up with the plug in throughout the day hoping for you to come fuck it."
             "You decide to tease her before you put it in."
@@ -102,7 +102,7 @@ label fetish_anal_staylate_event_label(the_person):
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             $ the_person.break_taboo("anal_sex")
-            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
+            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]."
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_fuck_person_SBA20
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
@@ -130,7 +130,7 @@ label fetish_anal_staylate_event_label(the_person):
             $ the_person.change_arousal(10)
             $ mc.change_locked_clarity(50)
             mc.name "Now, I think it is time for something a bit more substantial than the plug..."
-            "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
+            "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title!l]'s rectum. She quivers in anticipation of what you are about to do to her."
             $ the_person.change_arousal(the_person.get_opinion_score("anal sex") * 5)
             "You work a couple fingers into her bottom. It is clear she loves anal sex so much, she keeps herself lubed up with the plug in throughout the day hoping for you to come fuck it."
             "You decide to tease her before you put it in."
@@ -138,7 +138,7 @@ label fetish_anal_staylate_event_label(the_person):
             "[the_person.possessive_title] tries to push back against you and begins to beg."
             the_person "No! I need you in my ass right now... I need the heat and intensity of you fucking my ass right now!"
             $ the_person.break_taboo("anal_sex")
-            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title]."
+            "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_person.possessive_title!l]."
             call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_fuck_person_SBA21
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:

@@ -9,7 +9,7 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("cum_pullout")
     "[the_girl.possessive_title]'s drenched cunt is just too good. You decide to cum inside it."
     if mc.condom:
-        "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans when she feels you filling the condom deep inside of her."
+        "You pull back on [the_girl.possessive_title!l]'s hips and drive your cock deep inside of her as you cum. She moans when she feels you filling the condom deep inside of her."
         "Her cunt quivers as she joins you in orgasm. Her body goes rigid but you can feel the delicious pulsing as it feels like her body is trying to suck the condom off."
         the_girl "Oh god, I can feel you twitching... but something is missing?"
         "You wait until both of your orgasms have passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
@@ -18,7 +18,7 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
         $ the_girl.change_happiness(-5)
         "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
     else:
-        "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
+        "You pull back on [the_girl.possessive_title!l]'s hips and drive your cock as deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
         "You feel her pussy convulsing around your dick as she also starts to orgasm."
 
         if the_girl.wants_creampie():
@@ -49,7 +49,7 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
         "When you finish, you wait for a bit, reveling in the sensations as [the_girl.title]'s slick cunt has aftershocks."
         "You wait until her orgasm has passed completely, then pull out and stand back."
         if the_girl.has_breeding_fetish():
-            "As your cum starts to leak out, [the_girl.possessive_title] reaches back and tries to keep it inside with her hand."
+            "As your cum starts to leak out, [the_girl.possessive_title!l] reaches back and tries to keep it inside with her hand."
         else:
             "You cum leaks out of her dripping wet [the_girl.pubes_description] pussy."
         $ post_double_orgasm(the_girl) #We have to put this at the end of each double orgasm scene because return doesn't return to where you think it will.

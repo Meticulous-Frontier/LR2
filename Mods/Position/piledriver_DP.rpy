@@ -31,7 +31,7 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
 
-    "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
+    "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title!l]."
     the_girl "I'm not sure the angle is gonna work for..."
     "She let's out a startled yelp as you grab her ankles and bring them up over her head."
     if the_girl.get_opinion_score("being submissive") > 0:
@@ -69,7 +69,7 @@ label taboo_break_piledriver_DP(the_girl, the_location, the_object): #This shoul
     else:
         the_girl "Ah! What are you doing?"
         mc.name "Trust me, this will feel great."
-        "You reach down between your legs and hold onto your cock, lining it up with [the_girl.possessive_title]'s pussy."
+        "You reach down between your legs and hold onto your cock, lining it up with [the_girl.possessive_title!l]'s pussy."
         "At the same time you place the dildo against her sphincter, slightly opening it up."
 
     "You hold onto [the_girl.title]'s legs and push forward. After a moment of resistance you slide smoothly into both her holes."
@@ -127,7 +127,7 @@ label scene_piledriver_DP_1(the_girl, the_location, the_object):
     return
 
 label scene_piledriver_DP_2(the_girl, the_location, the_object):
-    "You pound [the_girl.possessive_title]'s holes hard. She moans and her toes curl from the overwhelming sensations."
+    "You pound [the_girl.possessive_title!l]'s holes hard. She moans and her toes curl from the overwhelming sensations."
     "She lifts her head up from the [the_object.name] and looks you in the eyes."
     the_girl "Don't hold back... Give it to me good!"
     "She reaches down and starts to run circles with her fingertips around her clit."
@@ -168,12 +168,12 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 "The condom tip is ballooned out, hanging to one side and filled with your cum."
                 if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
                     $ the_girl.discover_opinion("drinking cum")
-                    "When you let [the_girl.possessive_title] down she reaches for your cock. With delicate fingers she slides the condom off of you."
+                    "When you let [the_girl.possessive_title!l] down she reaches for your cock. With delicate fingers she slides the condom off of you."
                     the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
                     $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
                 else:
-                    "When you let [the_girl.possessive_title] down she reaches for your cock, removes the condom, and ties the end in a knot."
+                    "When you let [the_girl.possessive_title!l] down she reaches for your cock, removes the condom, and ties the end in a knot."
                     the_girl "Look at all that cum. Well done."
 
             else:
@@ -204,7 +204,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
 
         else:
             the_girl "Wait, make sure to pull out!"
-            "It's a little late for that now. You gasp and push yourself as deep as you can, draining your balls into [the_girl.possessive_title]'s cunt."
+            "It's a little late for that now. You gasp and push yourself as deep as you can, draining your balls into [the_girl.possessive_title!l]'s cunt."
             $ the_girl.cum_in_vagina()
             $ climax_controller.do_clarity_release(the_girl)
             $ piledriver_DP.redraw_scene(the_girl)
@@ -217,9 +217,9 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
 
     if the_choice == "Cum on her face":
         if mc.condom:
-            "You pull your cock out at the last minute, whipping the condom off with one hand as you aim it towards [the_girl.possessive_title]'s face."
+            "You pull your cock out at the last minute, whipping the condom off with one hand as you aim it towards [the_girl.possessive_title!l]'s face."
         else:
-            "You pull your cock out at the last minute, stroking it off with one hand as you point it towards [the_girl.possessive_title]'s face."
+            "You pull your cock out at the last minute, stroking it off with one hand as you point it towards [the_girl.possessive_title!l]'s face."
         "The strap-on hangs below your cock as you stroke it."
         $ the_girl.cum_on_face()
         $ climax_controller.do_clarity_release(the_girl)
@@ -229,13 +229,13 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
             "She closes her mouth and swallows quickly, then bites her lip and smiles at you."
         else:
             "[the_girl.title] closes her eyes and waits for you to climax. You spray your load over her face and dribble a few drops of sperm onto her chest."
-        "You sit back and let [the_girl.possessive_title]'s legs down. You enjoy the sight of her covered in your semen when she looks at you."
+        "You sit back and let [the_girl.possessive_title!l]'s legs down. You enjoy the sight of her covered in your semen when she looks at you."
     return
 
 label transition_piledriver_piledriver_DP(the_girl, the_location, the_object):
     "You slide back and let [the_girl.title] lower her legs. You reach for your backpack and pull out the strap-on."
     mc.name "[the_girl.title], I'm going to fuck your pussy and your ass now."
-    "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
+    "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title!l]."
     "You grab her ankles and bring them up over her head."
     if the_girl.get_opinion_score("being submissive") > 0:
         the_girl "Oh god, you're gonna dominate me with that thing aren't you?"
@@ -281,7 +281,7 @@ label strip_ask_piledriver_DP(the_girl, the_clothing, the_location, the_object):
         "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = piledriver_DP.position_tag)
-            "You let your cock pop out of [the_girl.possessive_title]'s pussy and watch as she struggles out of her [the_clothing.name] and throws it to the side."
+            "You let your cock pop out of [the_girl.possessive_title!l]'s pussy and watch as she struggles out of her [the_clothing.name] and throws it to the side."
             the_girl "Okay, keep going now sir!"
             "You throw her legs over your shoulders and slide yourself as deep into her cunt as you can get it. She guides the strap-on into her puckered hole simultaneously."
             return True
@@ -302,7 +302,7 @@ label strip_ask_piledriver_DP(the_girl, the_clothing, the_location, the_object):
 label orgasm_piledriver_DP(the_girl, the_location, the_object):
     "[the_girl.title] takes a sharp breath in and you feel her legs try and clench together. Her toes curl as you bring her to the brink."
     $ the_girl.call_dialogue("climax_responses_vaginal")
-    "You keep fucking [the_girl.possessive_title] through her climax, enjoying her sopping wet cunt while she twitches and moans underneath you."
+    "You keep fucking [the_girl.possessive_title!l] through her climax, enjoying her sopping wet cunt while she twitches and moans underneath you."
     "A few seconds later she relaxes and all the tension drains from her body."
     the_girl "God that is so intense. Keep going, I bet you can make me cum again!"
     return

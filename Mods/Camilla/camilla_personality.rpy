@@ -322,7 +322,7 @@ label camilla_hookup_accept(the_person):
     $ work_bathroom.show_background()
     $ the_person.draw_person(position = "stand4")
     $ the_person.arousal = 20
-    "You discover [the_person.possessive_title] standing at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
+    "You discover [the_person.possessive_title!l] standing at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
     "You quickly lock the door behind you. She notices you walk in but doesn't say a word."
     $ the_person.draw_person(position = "kissing")
     "You walk over to her silently. She looks into your eyes as she wraps her arms around your shoulders. You bring your face to hers and begin to make out."
@@ -407,7 +407,7 @@ label camilla_hookup_accept(the_person):
     the_person "Ohhh, [the_person.mc_title]... That is exactly what I was hoping for when I sent you that text earlier. That feels so good..."
     "You give her a few tentative thrusts, then quickly pick up the pace and begin fucking her in earnest."
     "You set her phone to video mode, and take a clip of her backside rippling as you thrust in and out of her."
-    "Your hips slap against [the_person.possessive_title]'s ass as you fuck her vigorously."
+    "Your hips slap against [the_person.possessive_title!l]'s ass as you fuck her vigorously."
     $ the_person.call_dialogue("sex_responses_vaginal")
     if mc.condom == True:
         "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
@@ -466,7 +466,7 @@ label camilla_hookup_accept(the_person):
         "When satisfied, you bring you fingers back to her tight back passage. You pull your cock almost completely out and stop you hip motion as you begin to press your finger against [the_person.title]'s puckered hole."
         "She forces her sphincter to relax and your finger begins to slip inside her."
         the_person "Ohh, yes. You can move your hips, that feels good..."
-        "You give [the_person.possessive_title]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
+        "You give [the_person.possessive_title!l]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
         $ the_person.change_arousal(20)#90 + 8
         if the_person.arousal > 120:
             the_person "OH! It's so good... fuck I'm gonna cum again!!!"
@@ -529,11 +529,11 @@ label camilla_hookup_accept(the_person):
         "You briefly consider pulling out."
         menu:
             "Pull Out":
-                "You pull out of [the_person.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+                "You pull out of [the_person.possessive_title!l] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
                 the_person "Oh! It's so hot on my skin!"
                 $ the_person.cum_on_ass()
                 $ the_person.draw_person(position = "standing_doggy")
-                "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
+                "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title!l]'s ass covered in your semen."
                 "You use her phone and get several close up pictures of her luscious ass with your load covering it."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
                 return
@@ -553,7 +553,7 @@ label camilla_hookup_accept(the_person):
         "You stroke your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         $ the_person.cum_on_ass()
         $ the_person.draw_person(position = "standing_doggy")
-        "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
+        "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title!l]'s ass covered in your semen."
         "You use her phone and get several close up pictures of her luscious ass with your load covering it."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
     return

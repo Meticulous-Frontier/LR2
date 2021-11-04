@@ -98,9 +98,9 @@ label lazy_morning_crisis_action_label:
         $ mc.change_locked_clarity(30)
         "Her hand stroking your cock feels great, but soon you decide to make the pleasure mutual."
         if the_person.outfit.tits_visible():
-            "With one hand, you reach over and start to grope [the_person.possessive_title]'s tits. Her breath catches in her throat when you pinch one of her nipples."
+            "With one hand, you reach over and start to grope [the_person.possessive_title!l]'s tits. Her breath catches in her throat when you pinch one of her nipples."
         else:
-            "With one hand, you reach over and grope [the_person.possessive_title]'s tits through her clothing. She sighs and you can feel her nipple harden when you pull on it."
+            "With one hand, you reach over and grope [the_person.possessive_title!l]'s tits through her clothing. She sighs and you can feel her nipple harden when you pull on it."
         "When you finish with her chest, you run your hand down her stomach. It slows when you reach the top of her hips."
         if the_person.has_taboo("touching_vagina"):
             if the_person.outfit.vagina_visible():
@@ -115,7 +115,7 @@ label lazy_morning_crisis_action_label:
                 "[the_person.title] arches her back when your hand reaches her pubic hair."
             else:
                 "You slide your hand further down, under her clothes. [the_person.title] arches her back when your hand reaches her pubic hair."
-        "You slide a finger between [the_person.possessive_title]'s labia, rubbing all along her slit."
+        "You slide a finger between [the_person.possessive_title!l]'s labia, rubbing all along her slit."
         "She moans quietly as you slide two fingers into her cunt."
         "As your fingers push deep inside of her, she momentarily forgets to stroke you. You remind her by gently thrusting yourself into her hand and she immediately starts stroking you again."
         the_person "Mmmm, I love cuddling..."

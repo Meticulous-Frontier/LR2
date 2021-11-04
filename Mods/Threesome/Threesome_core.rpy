@@ -496,7 +496,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     $ position_choice = None
                     $ active_mc_position = None
                 elif active_mc_position.guy_energy > mc.energy:
-                    "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
+                    "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title!l]."
                     $ position_choice = None
                     $ active_mc_position = None
                 elif not active_mc_position.check_girl_one_energy(the_person_one):

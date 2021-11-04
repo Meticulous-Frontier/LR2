@@ -10,7 +10,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
     # CHOICE CONCEPT: Finger Fuck // Tongue Fuck her
     # Intro concept. Short difference depending on if she's wet or not.
     if the_girl.has_creampie_cum():
-        "You lap at the juices flowing down from [the_girl.possessive_title]'s slit. It's an arousing mix of her juices and semen."
+        "You lap at the juices flowing down from [the_girl.possessive_title!l]'s slit. It's an arousing mix of her juices and semen."
     elif the_girl.arousal > 70:
         "[the_girl.possessive_title]'s juices are beginning to flow freely from her slit. You lap them up before circling your tongue around her clit a few times."
     else:
@@ -19,7 +19,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
     menu:
         "Finger Her":
             #Generic choice with bonus based on girl opinion and MC foreplay skill
-            "As you continue to lick all around [the_girl.possessive_title]'s cunt, you slowly push a finger up inside of her."
+            "As you continue to lick all around [the_girl.possessive_title!l]'s cunt, you slowly push a finger up inside of her."
             if mc.sex_skills["Foreplay"] > 2:
                 "You spend a few seconds slowly stirring her vagina, then curl your finger up, rubbing her G-spot"
                 if the_girl.get_opinion_score("being fingered") > 0:
@@ -29,7 +29,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                 "She moans and runs her hands through your hair."
                 "You lightly suck on her clit as you finger her, caressing her most sensitive places."
             else:
-                "You do your best to split your focus between kissing [the_girl.possessive_title]'s pussy and fingering her, but you find yourself struggling to do both."
+                "You do your best to split your focus between kissing [the_girl.possessive_title!l]'s pussy and fingering her, but you find yourself struggling to do both."
                 "You take a break from licking her and focus pleasing her with your finger for a bit."
                 if the_girl.get_opinion_score("being fingered") > 0:
                     $ the_girl.discover_opinion("being fingered")
@@ -63,7 +63,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                 the_girl "That feels good [the_girl.mc_title], but it feels even better when you kiss me here..."
                 "You accept her guidance and begin to lick and suck at her clit again."
         "Finger Her Ass" if the_girl.get_opinion_score("anal sex") > 0:
-            "As you continue to lick all around [the_girl.possessive_title]'s cunt, you slowly push a finger up inside of her pussy."
+            "As you continue to lick all around [the_girl.possessive_title!l]'s cunt, you slowly push a finger up inside of her pussy."
             if the_girl.arousal > 50:
                 "It isn't long until your finger is well lubricated from her sopping wet cunt."
             else:
@@ -81,7 +81,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
             pass
 
         "Rim Her Ass" if the_girl.get_opinion_score("anal sex") > 0:
-            "As you continue to lick around [the_girl.possessive_title]'s cunt, you slowly work your way towards her ass."
+            "As you continue to lick around [the_girl.possessive_title!l]'s cunt, you slowly work your way towards her ass."
             if the_girl.has_role(anal_fetish_role):
                 if the_girl is mom or the_girl is lily:
                     the_girl "Oh!!!"
@@ -97,19 +97,19 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                     "Suck it up":
                         "You start to gently lick around her asshole and then start to suck the cum out of her ass, gently at first but with increasing pressure."
                         $ the_girl.change_arousal(2 + the_girl.get_opinion_score("anal sex"))
-                        "You go back to rimming [the_girl.possessive_title]."
+                        "You go back to rimming [the_girl.possessive_title!l]."
 
             if the_girl.has_role(anal_fetish_role):
                 the_girl "Oh..my.. god! That feels sooo good...you have to keep doing that."
                 "[the_girl.possessive_title] reached behind your head to hold your head in place. Her breathing is heavy but erratic."
                 menu:
                     "Keep licking":
-                        "You continue to lick [the_girl.possessive_title]'s asshole at a slow and steady pace."
+                        "You continue to lick [the_girl.possessive_title!l]'s asshole at a slow and steady pace."
                         the_girl "Oh!!! [the_girl.mc_title]!"
                         $ the_girl.call_dialogue("surprised_exclaim")
 
                     "Tongue fuck her ass.":
-                        "You roll the sides of your tongue up and start to push the tip in and out of [the_girl.possessive_title]'s asshole."
+                        "You roll the sides of your tongue up and start to push the tip in and out of [the_girl.possessive_title!l]'s asshole."
                         the_girl "Oh!!! [the_girl.mc_title]!"
                         $ the_girl.call_dialogue("surprised_exclaim")
                         "You start to pick up the pace of your tongue action."
@@ -121,7 +121,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                 "You can feel her body relax, as you push your tongue into her ass."
                 $ the_girl.call_dialogue("surprised_exclaim")
                 if the_girl.get_opinion_score("being fingered") > 0:
-                    "As you continue to lick [the_girl.possessive_title]'s ass, you use your hands to play with her cunt."
+                    "As you continue to lick [the_girl.possessive_title!l]'s ass, you use your hands to play with her cunt."
                     if mc.sex_skills["Foreplay"] > 4:
                         "You spend a few seconds slowly stirring her vagina, then curl your finger up, rubbing her G-spot"
                         if the_girl.get_opinion_score("being fingered") > 0:
@@ -129,7 +129,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                             $ the_girl.change_arousal(the_girl.get_opinion_score("being fingered") + mc.sex_skills["Foreplay"])
                         the_girl "[the_girl.mc_title]! Oh [the_girl.mc_title] that feels so good."
                     else:
-                        "You do your best to split your focus between rimming [the_girl.possessive_title] and fingering her [the_girl.pubes_description] pussy, but you find yourself struggling to do both."
+                        "You do your best to split your focus between rimming [the_girl.possessive_title!l] and fingering her [the_girl.pubes_description] pussy, but you find yourself struggling to do both."
                         "You take a break from using your fingers and focus on rimming her."
                 the_girl "That's right. Lick my ass you dirty boy."
                 "[the_girl.title]'s thighs begin to twitch."
@@ -140,16 +140,16 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                 "[the_girl.title] slowly relaxes as you lick at her asshole."
                 $ the_girl.call_dialogue("surprised_exclaim")
                 if the_girl.get_opinion_score("being fingered") > 0:
-                    "As you continue to lick [the_girl.possessive_title]'s ass, you use your hands to play with her cunt."
+                    "As you continue to lick [the_girl.possessive_title!l]'s ass, you use your hands to play with her cunt."
                     if mc.sex_skills["Foreplay"] > 4:
                         "You spend a few seconds slowly stirring her vagina, then curl your finger up, rubbing her G-spot"
                         $ the_girl.change_arousal(the_girl.get_opinion_score("being fingered") + mc.sex_skills["Foreplay"])
                         the_girl "[the_girl.mc_title]! Oh [the_girl.mc_title] that feels so good."
                     else:
-                        "You do your best to split your focus between rimming [the_girl.possessive_title] and fingering her [the_girl.pubes_description] pussy, but you find yourself struggling to do both."
+                        "You do your best to split your focus between rimming [the_girl.possessive_title!l] and fingering her [the_girl.pubes_description] pussy, but you find yourself struggling to do both."
                         "You take a break from using your fingers and focus on rimming her."
                 else:
-                    "You continue to lick gently at [the_girl.possessive_title]'s ass."
+                    "You continue to lick gently at [the_girl.possessive_title!l]'s ass."
                 "[the_girl.title]'s moans in appreciation."
                 "You continue for a while. [the_girl.title] enjoying the anal stimulation."
                 $ the_girl.change_arousal(2)
@@ -157,7 +157,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
             "You continue to use your tongue on her ass. As you do, [the_girl.title] gets more and more excited."
             $ the_girl.change_arousal(2)
             if (the_girl.get_opinion_score("masturbating")) > 0:
-                "As you use your tongue [the_girl.possessive_title] reaches to her pussy with one of her hands."
+                "As you use your tongue [the_girl.possessive_title!l] reaches to her pussy with one of her hands."
                 if (the_girl.get_opinion_score("vaginal sex")) > (the_girl.get_opinion_score("gettting head")):
                     "[the_girl.title] starts thrusting her fingers in and out of her pussy."
                 else:
@@ -179,14 +179,14 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
     elif mc.arousal > 40:
         "[the_girl.possessive_title]'s moaning and heavy breathing are arousing. You give yourself a couple strokes through your clothes while you eat her."
     else:
-        "While you aren't being stimulated, [the_girl.possessive_title]'s gasps and breathing are starting to turn you on."
+        "While you aren't being stimulated, [the_girl.possessive_title!l]'s gasps and breathing are starting to turn you on."
     return
 
 label scene_SB_Oral_Laying_2(the_girl, the_location, the_object):
     # CHOICE CONCEPT: Submit // Control her
     "[the_girl.possessive_title]'s hips are beginning to rock side to side, grinding against you as you lick her."
     "You feel her legs cross behind your back while she runs her hands through your hair. She starts to grind against you more aggressively."
-    "It feels like [the_girl.possessive_title] is trying to take control!"
+    "It feels like [the_girl.possessive_title!l] is trying to take control!"
     menu:
         "Let Her Take Control":
             "You take her enthusiasm as a sign that you must be doing well. You double down on her clit, sucking and licking at it."
@@ -227,5 +227,5 @@ label scene_SB_Oral_Laying_2(the_girl, the_location, the_object):
     elif mc.arousal > 40:
         "[the_girl.possessive_title]'s moaning and heavy breathing are arousing. You give yourself a couple strokes through your clothes while you eat her."
     else:
-        "While you aren't being stimulated, [the_girl.possessive_title]'s gasps and breathing are starting to turn you on."
+        "While you aren't being stimulated, [the_girl.possessive_title!l]'s gasps and breathing are starting to turn you on."
     return

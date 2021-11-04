@@ -59,7 +59,7 @@ label scene_cowgirl_cunnilingus_1(the_girl, the_location, the_object):
         $ the_girl.call_dialogue("sex_responses_oral")
         $ the_girl.change_arousal(5)
     else:
-        "You lick at [the_girl.possessive_title]'s delicate pussy, spreading her lips and sending your tongue inside."
+        "You lick at [the_girl.possessive_title!l]'s delicate pussy, spreading her lips and sending your tongue inside."
         "She shivers with each touch, obviously enjoying the feeling."
         if the_girl.arousal > 40:
             "Her pussy is dripping wet, filling your mouth with the taste of her juices."
@@ -67,7 +67,7 @@ label scene_cowgirl_cunnilingus_1(the_girl, the_location, the_object):
     return
 
 label scene_cowgirl_cunnilingus_2(the_girl, the_location, the_object):
-    "You flick your tongue over [the_girl.possessive_title]'s clit. She gasps and grabs at your shoulders."
+    "You flick your tongue over [the_girl.possessive_title!l]'s clit. She gasps and grabs at your shoulders."
     $ the_girl.call_dialogue("sex_responses_oral")
     "You tease the sensitive nub with your tongue, then suck on it gently."
     if the_girl.arousal > 80:
@@ -107,7 +107,7 @@ label scene_cowgirl_cunnilingus_3(the_girl, the_location, the_object):
     return
 
 label outro_cowgirl_cunnilingus(the_girl, the_location, the_object): #With low arousal gain this is unlikely to come up much
-    "The taste of [the_girl.possessive_title]'s pussy, the sound of her moans, and the subtle twitches of her body drive you crazy."
+    "The taste of [the_girl.possessive_title!l]'s pussy, the sound of her moans, and the subtle twitches of her body drive you crazy."
     "You touch yourself, stroking your hard cock between your legs while you pleasure her."
     "Finally you've gone too far, pushing yourself to climax."
     $ ClimaxController.manual_clarity_release(climax_type = "masturbation", the_person = the_girl)
@@ -148,7 +148,7 @@ label strip_ask_cowgirl_cunnilingus(the_girl, the_clothing, the_location, the_ob
             return False
 
 label orgasm_cowgirl_cunnilingus(the_girl, the_location, the_object):
-    "You notice [the_girl.possessive_title]'s moans becoming louder, and her legs twitching more noticeably on either side of you."
+    "You notice [the_girl.possessive_title!l]'s moans becoming louder, and her legs twitching more noticeably on either side of you."
     "You speed up your efforts, doing your best to drive her towards her orgasm. She moans and begins to writhe under your skilled tongue."
     if the_girl.get_sex_goal() == "get off":
         the_girl "Oh my god... I'm finally gonna cum!"
@@ -163,7 +163,7 @@ label GIC_outro_cowgirl_cunnilingus(the_girl, the_location, the_object, the_goal
 
     #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
     if the_goal == "hate fuck" or the_goal == "waste cum":
-        "The taste of [the_girl.possessive_title]'s pussy, the sound of her moans, and the subtle twitches of her body drive you crazy."
+        "The taste of [the_girl.possessive_title!l]'s pussy, the sound of her moans, and the subtle twitches of her body drive you crazy."
         "You touch yourself, stroking your hard cock between your legs while you pleasure her."
         "Finally you've gone too far, pushing yourself to climax."
         $ ClimaxController.manual_clarity_release(climax_type = "masturbation", the_person = the_girl)

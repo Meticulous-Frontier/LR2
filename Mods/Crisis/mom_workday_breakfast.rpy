@@ -47,7 +47,7 @@ label mom_breakfast_action_label():
         mc.name "Good morning, [the_person.title]. That smells great!"
         "She sees you walk into the kitchen and greets you warmly."
         the_person "Good morning! I made extra, grab some breakfast! I want you well fed going to work today."
-        "You grab some coffee and some bacon and sit down next to [the_person.possessive_title]. She is shaking her head while she looks at her phone."
+        "You grab some coffee and some bacon and sit down next to [the_person.possessive_title!l]. She is shaking her head while she looks at her phone."
         #$ the_person.draw_person(position = "sitting",emotion="angry")
         $ scene_manager.update_actor(the_person, position = "sitting", emotion="angry")
         mc.name "Everything okay?"
@@ -116,7 +116,7 @@ label mom_breakfast_action_label_medium():
             return None
         "Give Her Some Attention":  #Sluttiness staircase event, take it farther the sluttier she is
             mc.name "I'm sorry [the_person.title], I didn't realize you were in need of some attention!"
-            "You get up from your chair and walk around behind [the_person.possessive_title]."
+            "You get up from your chair and walk around behind [the_person.possessive_title!l]."
             the_person "[the_person.mc_title]? What are you... oohhhh."
             "You put your hands on her shoulders and begin to massage them. She sighs as your hands begin to work on her tension."
             menu:
@@ -132,7 +132,7 @@ label mom_breakfast_action_label_medium():
                     "You work on her shoulders for a while. She sighs in relaxation. You finish up and go back to your breakfast."
                     return None
             if the_person.outfit.tits_available():
-                "This skin of [the_person.possessive_title]'s creamy tits feels hot and soft in your hands."
+                "This skin of [the_person.possessive_title!l]'s creamy tits feels hot and soft in your hands."
             else:
                 menu:
                     "Pull Her Top Up" if the_person.sluttiness > 40:
@@ -209,7 +209,7 @@ label mom_breakfast_action_label_medium():
             lily "Are you feeling okay mom? Your cheeks are all flushed and you look so... tired?"
             the_person "Of course dear, I was just getting ready to go get ready for work..."
             $ scene_manager.update_actor(mom, position = "stand2")
-            "As [the_person.possessive_title] starts to get up, she looks at you. You make sure she notices as you lick some of her juices off your fingers."
+            "As [the_person.possessive_title!l] starts to get up, she looks at you. You make sure she notices as you lick some of her juices off your fingers."
             the_person "Oh my..."
             $ scene_manager.update_actor(mom, position = "walking_away")
             "[the_person.title] turns and leaves the kitchen in a hurry. You quickly finish breakfast and head out as well."
@@ -265,7 +265,7 @@ label mom_breakfast_action_label_high():
                 mc.name "Don't worry [the_person.title]. I'll make sure you have your needs met."
                 the_person "I suppose that would be okay, just make sure I get to finish!"
                 mc.name "Of course!"
-                "[the_person.possessive_title] quickly starts to strip down while you knock on [lily.possessive_title]'s door."
+                "[the_person.possessive_title] quickly starts to strip down while you knock on [lily.possessive_title!l]'s door."
 
                 $ scene_manager.strip_full_outfit(person = the_person)
                 "After no response, you knock again."
@@ -277,7 +277,7 @@ label mom_breakfast_action_label_high():
                 if lily.outfit.full_access():
                     "Already basically ready to go, [lily.title] looks to you for direction."
                 else:
-                    "Seeing [the_person.possessive_title] already naked, [lily.title] strips down also."
+                    "Seeing [the_person.possessive_title!l] already naked, [lily.title] strips down also."
                     $ scene_manager.strip_full_outfit(person = lily)
                 mc.name "Mom is feeling needy this morning sis, why don't we take care of her?"
                 lily "Sounds great!"
@@ -333,7 +333,7 @@ label mom_breakfast_action_label_high():
         $ scene_manager.update_actor(the_person) # redraw for cum
         $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person)
 
-        "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
+        "As her orgasm subsides, [the_person.possessive_title!l] suddenly returns to her senses."
         the_person "Oh god... [lily.name] could walk out any second!"
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.title] quickly gets up and hurries away. She calls back before she gets to her room."
@@ -363,7 +363,7 @@ label mom_breakfast_action_label_high():
     $ scene_manager.update_actor(the_person) # redraw for cum
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
 
-    "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
+    "As her orgasm subsides, [the_person.possessive_title!l] suddenly returns to her senses."
     the_person "Oh god... [lily.name] could walk out any second!"
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.title] quickly gets up and hurries away. She calls back before she gets to her room."

@@ -21,7 +21,7 @@ label sister_failed_test_label():
     $ mc.change_location(bedroom) #Make sure we're in our bedroom.
     $ mc.location.show_background()
 
-    "Laying in your bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
+    "Laying in your bed, you hear a knock on your door. You hear [the_person.possessive_title!l] from the other side of the door."
     the_person "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
     mc.name "It's open."
     $ the_person.draw_person()
@@ -112,9 +112,9 @@ label sister_failed_test_label():
     $ the_person.draw_person(position = "sitting")
     "You pull the covers back. [the_person.title] sits down on the bed next to you, her back against the headboard."
     if strip_path:
-        "Having [the_person.possessive_title] in your bed next to you, wearing so little, gets you excited, but you try to shake the thought and concentrate on studying... for now anyway."
+        "Having [the_person.possessive_title!l] in your bed next to you, wearing so little, gets you excited, but you try to shake the thought and concentrate on studying... for now anyway."
         $ mc.change_locked_clarity(20)
-    "You get into the books and take a look at [the_person.possessive_title]'s failed quiz. You recognize most of the material from your own time at the university."
+    "You get into the books and take a look at [the_person.possessive_title!l]'s failed quiz. You recognize most of the material from your own time at the university."
     if mc.int > 5:
         "The text books themselves are a newer edition, but you remember where most of the information is located."
         "You quickly mark some places with sticky notes and help [the_person.title] make a quick study guide to avoid this quiz result again."
@@ -129,11 +129,11 @@ label sister_failed_test_label():
     the_person "Thank you [the_person.mc_title]... You're the best!"
     "She leans over and gives you a big hug, lingering with her body up against yours for several seconds."
     if strip_path:
-        "Having [the_person.possessive_title] up against you quickly reminds you of her undressed state. You quickly get an erection from the close physical contact."
+        "Having [the_person.possessive_title!l] up against you quickly reminds you of her undressed state. You quickly get an erection from the close physical contact."
         $ mc.change_arousal(10)
         $ mc.change_locked_clarity(10)
     else:
-        "Eventually, [the_person.possessive_title] gets up and grabs her stuff."
+        "Eventually, [the_person.possessive_title!l] gets up and grabs her stuff."
         the_person "Thank you so much for the help. Good night!"
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] gets up and leaves your room, closing your door on the way out."

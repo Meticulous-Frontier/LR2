@@ -809,7 +809,7 @@ label HR_director_review_discoveries_label(the_person):
             if relaxed_uniform_policy.is_owned():
                 the_person "Hmmm, I see here that we have recently opened up company policy to allow for uniform guidelines."
                 the_person "This is something that could potentially alienate some of our employees. It might be a good idea if we include opinions on work uniforms when meeting one on one with them."
-                "You hadn't considered how your employees would react when you instituted the uniform policy. You decide [the_person.possessive_title] is right."
+                "You hadn't considered how your employees would react when you instituted the uniform policy. You decide [the_person.possessive_title!l] is right."
                 mc.name "That's a good idea. Go ahead and implement that going forward."
                 the_person "Sure thing [the_person.mc_title]!"
                 $ set_HR_director_tag("business_HR_uniform", True)
@@ -979,7 +979,7 @@ label HR_director_meeting_on_demand_label(the_person):
     $ scene_manager = Scene() # make sure we have an empty scene manager for on-demand meetings
     the_person "Okay, I think I have time for that! Let me grab my dossiers from Monday and I'll meet you in your office."
     $ ceo_office.show_background()
-    "You head to your office and [the_person.possessive_title] quickly arrives with her papers."
+    "You head to your office and [the_person.possessive_title!l] quickly arrives with her papers."
     $ the_person.draw_person(position = "sitting")
     the_person "Ok! Let me see who I have on my list here..."
     call HR_director_personnel_interview_label(the_person, max_opinion = get_HR_director_tag("business_HR_coffee_tier", 0)) from HR_DIR_INTERVIEW_CALL_4
@@ -1054,7 +1054,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_start_two
             $ the_report = _return
             if the_report.get("guy orgasms", 0) > 0:
-                "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
+                "After you finish, [the_person.possessive_title!l] runs her hands along her tits, rubbing your cum into her skin."
                 the_person "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
                 "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
             else:
@@ -1086,10 +1086,10 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "She spreads her legs, her pussy on display in front of you."
             else:
                 if the_person.outfit.can_half_off_to_vagina():
-                    "You move [the_person.possessive_title]'s clothes out of the way."
+                    "You move [the_person.possessive_title!l]'s clothes out of the way."
                     $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
                 else:
-                    "You start to strip [the_person.possessive_title] down."
+                    "You start to strip [the_person.possessive_title!l] down."
                     $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
                 "Soon her pussy is on full display in front of you, on your desk."
             $ mc.change_arousal(20)
@@ -1129,10 +1129,10 @@ label HR_director_sexy_meeting_start_label(the_person):
                     "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
                 else:
                     if the_person.outfit.can_half_off_to_vagina():
-                        "You move [the_person.possessive_title]'s clothes out of the way."
+                        "You move [the_person.possessive_title!l]'s clothes out of the way."
                         $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
                     else:
-                        "You start to strip [the_person.possessive_title] down."
+                        "You start to strip [the_person.possessive_title!l] down."
                         $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
                     "Soon her ass is on full display in front of you, bent over your desk."
                 $ mc.change_locked_clarity(50)
@@ -1249,7 +1249,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 the_person "Oh fuck... every time you finish inside me is just so good..."
                 "She rubs her belly and sighs."
                 $ the_person.event_triggers_dict["LastBreedingFetish"] = day
-            "When you finish, [the_person.possessive_title] cleans herself up a bit."
+            "When you finish, [the_person.possessive_title!l] cleans herself up a bit."
             $ the_person.apply_planned_outfit()
             the_person "Mmm, that was nice..."
             $ scene_manager.update_actor(the_person, position = "stand3")
@@ -1342,10 +1342,10 @@ label HR_director_sexy_meeting_start_label(the_person):
             "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bent her over your desk."
         else:
             if the_person.outfit.can_half_off_to_vagina():
-                "You move [the_person.possessive_title]'s clothes out of the way."
+                "You move [the_person.possessive_title!l]'s clothes out of the way."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
             else:
-                "You start to strip [the_person.possessive_title] down."
+                "You start to strip [the_person.possessive_title!l] down."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
             "As soon as her pussy is on full display in front of you, you bent her over your desk, exposing her round ass."
         $ scene_manager.update_actor(the_person, position="standing_doggy")

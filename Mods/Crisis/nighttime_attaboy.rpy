@@ -152,7 +152,7 @@ label crisis_nighttime_attaboy_label():
     $ text_2 = get_attaboy_string_2(attaboy_record, the_person)
     $ text_3 = get_attaboy_fetish_string(attaboy_record, the_person)
     "After you get in bed, as you are drifting off to sleep, you hear your phone vibrate."
-    "You roll over and look at it. It's a text from [the_person.possessive_title]."
+    "You roll over and look at it. It's a text from [the_person.possessive_title!l]."
     $ mc.start_text_convo(the_person)
     the_person "Hey! Sorry, I'm not sure if you're still up or not, but just wanted to text you."
     the_person "I'm lying in bed, I can't stop thinking about earlier today when you made me cum my brains out."
@@ -170,7 +170,7 @@ label crisis_nighttime_attaboy_label():
             the_person "[text_3]"
             $ the_person.change_slut(1, 80)
             $ mc.change_locked_clarity(70)
-            "Holy shit, [the_person.possessive_title] knows how to sext. You are getting really turned on."
+            "Holy shit, [the_person.possessive_title!l] knows how to sext. You are getting really turned on."
         else:
             $ the_person.change_slut(1, 50)
             "Her dirty words are really turning you on."
@@ -190,7 +190,7 @@ label crisis_nighttime_attaboy_label():
         menu:
             "Go see [the_person.title]" if mc.energy > 80:
                 $ mc.end_text_convo()
-                "You get up and creep down the hall. When you open her door, you see [the_person.possessive_title] laying out on her bed."
+                "You get up and creep down the hall. When you open her door, you see [the_person.possessive_title!l] laying out on her bed."
                 $ the_person.location.show_background()
                 $ the_person.strip_outfit(delay = 0)
                 $ mc.change_locked_clarity(50)
@@ -209,12 +209,12 @@ label crisis_nighttime_attaboy_label():
                     the_person "You getting a good look?"
                     mc.name "Sorry, I..."
                     the_person "Just close the door and get over here!"
-                "You quietly close the door and then walk over to the bed, joining [the_person.possessive_title]"
+                "You quietly close the door and then walk over to the bed, joining [the_person.possessive_title!l]"
                 call fuck_person(the_person) from _call_fuck_person_attaboy_encore_01
-                "When you finish, [the_person.possessive_title] lays back in her bed."
+                "When you finish, [the_person.possessive_title!l] lays back in her bed."
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 the_person "I think I'll be able to sleep good now!"
-                "You say goodnght to [the_person.possessive_title], then quietly got back to your room for the night."
+                "You say goodnght to [the_person.possessive_title!l], then quietly got back to your room for the night."
 
                 $ mc.location.show_background()
                 $ the_person.apply_planned_outfit()
@@ -236,7 +236,7 @@ label crisis_nighttime_attaboy_label():
             $ the_person.strip_outfit(delay = 0)
             $ mc.change_locked_clarity(50)
             $ the_person.draw_person(position = "missionary", emotion = "happy")
-            "You get a selfie from [the_person.possessive_title] laying on her bed while she is masturbating."
+            "You get a selfie from [the_person.possessive_title!l] laying on her bed while she is masturbating."
             the_person "I want to feel you inside me soon!"
 
         elif lowest_stat >= 80:

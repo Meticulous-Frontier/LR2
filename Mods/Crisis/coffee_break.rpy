@@ -72,7 +72,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
             $ scene_manager.update_actor(person_three, position = "walking_away")
 
             "You decide to follow them at a discrete distance."
-            "As soon as they enter the supply closet you peek through the side window where [person_two.possessive_title] starts kissing [person_three.possessive_title]."
+            "As soon as they enter the supply closet you peek through the side window where [person_two.possessive_title!l] starts kissing [person_three.possessive_title!l]."
 
             $ scene_manager.update_actor(person_two, position = "kissing")
             $ scene_manager.update_actor(person_three, position = "kissing")

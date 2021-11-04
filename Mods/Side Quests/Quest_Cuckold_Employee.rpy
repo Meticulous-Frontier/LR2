@@ -728,7 +728,7 @@ label quest_cuckold_employee_knocked_up_label():
     $ ceo_office.show_background()
     $ the_person.draw_person(position = "stand4")
     $ the_person.event_triggers_dict["preg_knows"] = True
-    "As you step into your office, you see [the_person.possessive_title]."
+    "As you step into your office, you see [the_person.possessive_title!l]."
     the_person "Well [the_person.mc_title], you did it! Positive pregnancy test!"
     mc.name "Oh my god, that's amazing! Congratulations!"
     the_person "I know! I can't wait to tell my husband... It's so weird though, knowing in my head that it isn't even his?"

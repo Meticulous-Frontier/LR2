@@ -50,7 +50,7 @@ label train_anal_fetish_label(the_person):
             "As you slowly move your thumbs closer to her rectum, she starts pushing her butt in your direction."
             mc.name "You like this, don't you?"
             the_person "Oh yes, please, just push them a little inside."
-            "You place your thumbs on either side and slide the tips inside, provoking a little sight from [the_person.possessive_title]."
+            "You place your thumbs on either side and slide the tips inside, provoking a little sight from [the_person.possessive_title!l]."
             mc.name "Do you want me to stretch it a bit for you?"
             the_person "Mmm...get that dirty hole ready for your big cock."
             "You continue stretching her asshole for a while, until you notice that her [the_person.pubes_description] pussy starts glistening."
@@ -62,7 +62,7 @@ label train_anal_fetish_label(the_person):
         "Finger her ass" if the_person.sex_skills["Anal"] > 1:
             "You reach out and start to rub her bottom."
             the_person "Hmmm, that feels nice..."
-            "After while, you slow start tracing her orifice with your fingers. Causing a slight tremble from [the_person.possessive_title]."
+            "After while, you slow start tracing her orifice with your fingers. Causing a slight tremble from [the_person.possessive_title!l]."
             the_person "Oh, yes, right there [the_person.mc_title]."
             "That's all the encouragement you need to slide your finger inside."
             the_person "Mmmm...yes...that's it. Every time I play with myself I have to push a finger inside."

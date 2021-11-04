@@ -107,22 +107,22 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
                 if is_phone:
                     "[person.possessive_title] sends you a bunch of texts about how she [opinion_string] [opinion_learned]."
                 else:
-                    "You listen while [person.possessive_title] talks about how she [opinion_string] [opinion_learned]."
+                    "You listen while [person.possessive_title!l] talks about how she [opinion_string] [opinion_learned]."
             else:
                 $ person.discover_opinion(opinion_learned)
                 if is_phone:
                     "[person.possessive_title] sends you a bunch of texts, and you learn that she [opinion_string] [opinion_learned]."
                 else:
-                    "You listen while [person.possessive_title] talks and discover that she [opinion_string] [opinion_learned]."
+                    "You listen while [person.possessive_title!l] talks and discover that she [opinion_string] [opinion_learned]."
 
             $ person.change_love(2 - prediction_difference, max_modified_to = 35)
 
         else:
             if is_phone:
                 person "Oh, this and that. What about you?"
-                "You and [person.possessive_title] text back and forth for a while. You've had a fun conversation, but you don't think you've learned anything new."
+                "You and [person.possessive_title!l] text back and forth for a while. You've had a fun conversation, but you don't think you've learned anything new."
             else:
-                "You and [person.possessive_title] chat for a while. You don't feel like you've learned much about her, but you both enjoyed talking."
+                "You and [person.possessive_title!l] chat for a while. You don't feel like you've learned much about her, but you both enjoyed talking."
 
         if person.love > 10 and person.has_role(instapic_role) and not person.event_triggers_dict.get("insta_known", False):
             $ person.event_triggers_dict["insta_known"] = True
@@ -154,7 +154,7 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
             person "Oh, not much honestly. How about you?"
             $ person.change_happiness(person.get_opinion_score("small talk"))
             if is_phone:
-                "You and [person.possessive_title] chat for a while. You don't feel like you've learned much about her, but you both enjoyed talking."
+                "You and [person.possessive_title!l] chat for a while. You don't feel like you've learned much about her, but you both enjoyed talking."
             else:
                 "[person.possessive_title] seems happy to chitchat, and you spend a couple of hours just hanging out."
                 "You don't feel like you've learned much about her, but least she seems to have enjoyed talking."

@@ -6,7 +6,7 @@ init 5 python:
 label orgasm_skull_fuck_enhanced(the_girl, the_location, the_object):
     $ skull_fuck.current_modifier = "blowjob"
     $ skull_fuck.redraw_scene(the_girl)
-    "You're happily fucking [the_girl.possessive_title]'s warm, wet throat when you notice her closing her eyes."
+    "You're happily fucking [the_girl.possessive_title!l]'s warm, wet throat when you notice her closing her eyes."
     "Her thighs quiver and her hands drop instinctively to her crotch. She begins to rub her pussy furiously, driving herself to orgasm."
     mc.name "Cum for me you dirty slut!"
     if the_girl.sex_skills["Oral"] > 3:

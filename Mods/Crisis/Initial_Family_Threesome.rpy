@@ -23,9 +23,9 @@ label SB_fetish_vaginal_family_threesome_label():
     if mom.energy < mom.max_energy:
         $ mom.energy = mom.max_energy
 
-    "Laying in your bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
+    "Laying in your bed, you hear a knock on your door. You hear [the_person.possessive_title!l] from the other side of the door."
     the_person "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
-    "You invite [the_person.possessive_title] in. You immediately start to get aroused when you see what she is wearing."
+    "You invite [the_person.possessive_title!l] in. You immediately start to get aroused when you see what she is wearing."
     $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(the_person.sluttiness, guarantee_output = True))
     $ mom.apply_outfit(mom.wardrobe.get_random_appropriate_underwear(mom.sluttiness, guarantee_output = True))
     $ scene_manager.add_actor(the_person)
@@ -56,7 +56,7 @@ label SB_fetish_vaginal_family_threesome_label():
             $ scene_manager.update_actor(the_person, position="kneeling1", display_transform = character_center_flipped)
             "[the_person.possessive_title] gives you a wink and then begins to crawl up the bed towards you."
 
-    "You are so busy checking out [the_person.possessive_title], your brain barely registers a knock on your door. [the_person.possessive_title] is just sitting down in your lap when you hear a gasp from your door."
+    "You are so busy checking out [the_person.possessive_title!l], your brain barely registers a knock on your door. [the_person.possessive_title] is just sitting down in your lap when you hear a gasp from your door."
     if mc.business.event_triggers_dict.get("family_threesome", False) == True:
         $ scene_manager.add_actor(mom, emotion = "happy")
         mom "Is that [the_person.name]? Ah good, I thought I heard you come in here."
@@ -88,21 +88,21 @@ label SB_fetish_vaginal_family_threesome_label():
         the_person "Goodnight mom! Actually, I should probably get to bed as well, I just remembered I have to get up early..."
         $ scene_manager.remove_actor(mom)
         $ scene_manager.update_actor(the_person, position = "walking_away", display_transform = character_right)
-        "You watch as [the_person.possessive_title] gets up and excuses herself, her ass swaying back and forth as she walks away."
+        "You watch as [the_person.possessive_title!l] gets up and excuses herself, her ass swaying back and forth as she walks away."
         "God damn you love this family!"
         $ scene_manager.remove_actor(the_person)
 
     else:
         $ scene_manager.add_actor(mom, emotion = "angry")
         mom "Is that... [the_person.name]!?! What are you... why are you naked in [mom.mc_title]'s room?" #NOTE: the_person doesn't necessarily know mom's title for the MC, but still somewhat makes sense.
-        "[mom.possessive_title] is shocked to discover that you and [the_person.possessive_title] are in your room, clearly about to get busy."
+        "[mom.possessive_title] is shocked to discover that you and [the_person.possessive_title!l] are in your room, clearly about to get busy."
         the_person "Mom! Nothing was... wait... what are you wearing?"
-        "[mom.possessive_title] quickly realizes that [the_person.possessive_title] is here... doing exactly what she was coming here to do. Her cheeks turn red with embarrassment."
+        "[mom.possessive_title] quickly realizes that [the_person.possessive_title!l] is here... doing exactly what she was coming here to do. Her cheeks turn red with embarrassment."
         "You think quickly. Maybe you can salvage this situation?"
         mc.name "Hey [mom.title]... you look amazing! Want to come in for a little bit? [the_person.title] and I are just getting started."
-        "You can see a clear look of conflict in [mom.possessive_title]'s eyes. Up until now, your antics have been isolated to you and her, in her mind anyway. She's slowly processing that you have a similar relationship with [the_person.possessive_title] "
+        "You can see a clear look of conflict in [mom.possessive_title]'s eyes. Up until now, your antics have been isolated to you and her, in her mind anyway. She's slowly processing that you have a similar relationship with [the_person.possessive_title!l] "
         mom "I mean... I suppose I could... for a bit..."
-        "Still in a bit of a daze, [mom.possessive_title] comes into your room, closing the door behind her. She sits over at your desk and looks over at you and [the_person.possessive_title] ."
+        "Still in a bit of a daze, [mom.possessive_title] comes into your room, closing the door behind her. She sits over at your desk and looks over at you and [the_person.possessive_title!l] ."
         $ scene_manager.update_actor(mom, position = "sitting")
         "[the_person.possessive_title] looks back at you, still a little unsure of herself. You hold up your hands and beckon her."
         $ scene_manager.update_actor(the_person, position = "cowgirl")
@@ -110,12 +110,12 @@ label SB_fetish_vaginal_family_threesome_label():
         $ mc.change_locked_clarity(10)
         "Your lips lock together in a passionate kiss. [the_person.possessive_title]'s body melts into yours in surrender, even as [mom.possessive_title] looks on."
         mom "Oh my... [mom.mc_title]... [the_person.name]..."
-        "You move your hands down [the_person.possessive_title]'s waist and around to her butt. You give both cheeks a squeeze."
+        "You move your hands down [the_person.possessive_title!l]'s waist and around to her butt. You give both cheeks a squeeze."
         "She presses her body against yours and sighs."
         the_person "Mmm... I can't wait for you to fuck me..."
         $ the_person.change_arousal(10)
         if mom.outfit.vagina_available():
-            "You glance over at [mom.possessive_title]. She is watching you and [the_person.possessive_title] intently and has one hand between her legs, stroking the outer lips of her pussy."
+            "You glance over at [mom.possessive_title]. She is watching you and [the_person.possessive_title!l] intently and has one hand between her legs, stroking the outer lips of her pussy."
         else:
             "You glance over and see that [mom.possessive_title] has her hand down her clothes, playing with herself as she watches."
         $ mc.change_locked_clarity(10)
@@ -131,7 +131,7 @@ label SB_fetish_vaginal_family_threesome_label():
         $ mc.change_locked_clarity(10)
         call start_threesome(lily, mom, start_position = Threesome_double_down) from threesome_event_test_call_2
         $ mc.business.event_triggers_dict["family_threesome"] = True
-        "Wow, you just had sex with [the_person.possessive_title] and [mom.possessive_title]! You can't believe how lucky you are."
+        "Wow, you just had sex with [the_person.possessive_title!l] and [mom.possessive_title]! You can't believe how lucky you are."
         "Maybe this is the event that will finally set things in motion for you family. All three of you are in this sexually together."
         "Eventually, the girls get up."
         $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_center_flipped)

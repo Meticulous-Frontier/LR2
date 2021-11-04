@@ -25,14 +25,14 @@ init 2 python:
 label mom_sister_snooping_action_label():
     "You wake up. You're a little groggy, but you manage to get out of bed."
     "You grab yourself some clothes and quietly leave your room. You aren't sure if you are the first one awake or not."
-    "However, as you walk by [lily.possessive_title]'s room, you hear her talking to [mom.title] inside. Her door is cracked so you take a quick peek."
+    "However, as you walk by [lily.possessive_title!l]'s room, you hear her talking to [mom.title] inside. Her door is cracked so you take a quick peek."
     # show lily her bedroom
     $ lily_bedroom.show_background()
     $ scene_manager = Scene()
     if mom.sluttiness < 20 and lily.sluttiness < 20:
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped)
         $ scene_manager.add_actor(lily, position = "sitting")
-        "[lily.title] is sitting on her bed while [mom.possessive_title] talks with her."
+        "[lily.title] is sitting on her bed while [mom.possessive_title!l] talks with her."
         "It seems like they are having a pretty lively conversation."
         $ overhear_topic = lily.get_random_opinion(include_sexy = False)
         $ text_one = person_opinion_to_string(lily, overhear_topic)[1]
@@ -75,7 +75,7 @@ label mom_sister_snooping_action_label():
         "[lily.title] and [mom.title] are sitting on her bed while chatting."
         mom "Nonsense honey, they look great. They're young and perky, just like you!"
         lily "You keep saying that, but I wish they were more like yours..."
-        "[lily.title] reaches over and puts one of her hands on [mom.possessive_title]'s tits."
+        "[lily.title] reaches over and puts one of her hands on [mom.possessive_title!l]'s tits."
         lily "They're so full and soft."
         "Damn. What are they doing in there? Comparing assets?"
         mom "Honey, you just have to work with what you've been given. Let mama help. Show me what you're working with."
@@ -87,15 +87,15 @@ label mom_sister_snooping_action_label():
         mom "I have to actively cover up, to keep from getting too much attention..."
         lily "Why would you do that!?! I'd kill to have your figure..."
         $ scene_manager.strip_to_tits(person = mom)
-        "Now [mom.possessive_title] is taking her top off?"
+        "Now [mom.possessive_title!l] is taking her top off?"
         $ mc.change_locked_clarity(30)
         mom "I don't know, I just feel like they are such a distraction sometimes..."
         "[mom.title] is holding her own tits, a bit self-consciously."
         lily "Don't say that, they are so beautiful..."
-        "[lily.title] reaches over and replaces [mom.possessive_title]'s hands. She hefts her tits in her hands and starts to tweak them a bit."
+        "[lily.title] reaches over and replaces [mom.possessive_title!l]'s hands. She hefts her tits in her hands and starts to tweak them a bit."
         lily "See? They're so heavy and soft..."
         $ mom.change_arousal(15)
-        "[mom.title] reaches over and puts her hands on [lily.possessive_title] now."
+        "[mom.title] reaches over and puts her hands on [lily.possessive_title!l] now."
         mom "Look at you though, so perky and firm..."
         "She pinches her nipples, prompting a squeal from [lily.title]."
         mom "And sensitive too!"
@@ -119,11 +119,11 @@ label mom_sister_snooping_action_label():
         $ mc.change_locked_clarity(50)
         mom "Mmmm, that's it dear, lick right there!"
         $ mom.change_arousal(12)
-        "You accidentally let out a little gasp. It must have been audible, because [mom.possessive_title] looks up at notices you at the door."
+        "You accidentally let out a little gasp. It must have been audible, because [mom.possessive_title!l] looks up at notices you at the door."
         mom "Oh! [mom.mc_title]! Come in here honey."
         "You slowly walk in to your sister's room."
         mom "Ohh... Your sister is doing such a good job, I can hardly concentrate. Would you help me take care of her?"
-        "You hear [lily.possessive_title] moan her approval of the offer while she has her face buried in [mom.title]'s cunt."
+        "You hear [lily.possessive_title!l] moan her approval of the offer while she has her face buried in [mom.title]'s cunt."
         mc.name "Sure. I'd be glad to help."
         $ mom.change_stats(obedience = 3, happiness = 5)
         mom "Oh thank you honey. I really appreciate this."
@@ -131,7 +131,7 @@ label mom_sister_snooping_action_label():
         call start_threesome(lily, mom, start_position = Threesome_sixty_nine, position_locked = False) from _mom_sister_snooping_threesome_01
         $ scene_manager.update_actor(mom, display_transform = character_center_flipped, position = "missionary")
         $ scene_manager.update_actor(lily, display_transform = character_right, position = "missionary")
-        "When you finish, [mom.possessive_title] and your sister flop down on her bed next to each other."
+        "When you finish, [mom.possessive_title!l] and your sister flop down on her bed next to each other."
         lily "Thanks [lily.mc_title]. I think I'm just gonna... go back to sleep for a little bit..."
         "As fun as it would be to join them, you decide to excuse yourself to get ready for the day."
         mc.name "No problem. You two take it easy, I'm gonna go shower."
@@ -139,7 +139,7 @@ label mom_sister_snooping_action_label():
         $ lily.apply_university_outfit()
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily)
-        "You peek in. You see [mom.title] sitting on [lily.possessive_title]'s bed, talking to her while she gets ready for the day."
+        "You peek in. You see [mom.title] sitting on [lily.possessive_title!l]'s bed, talking to her while she gets ready for the day."
         mom "I know, I know there's a uniform at the university, but that doesn't mean you can't express yourself a little!"
         lily "What do you mean?"
         mom "A beautiful young woman like you, maybe you could fold the top of your skirt? Show those beautiful legs of yours!"
@@ -158,7 +158,7 @@ label mom_sister_snooping_action_label():
         $ lily.apply_university_outfit()
         $ scene_manager.add_actor(mom, display_transform = character_center_flipped, position = "sitting")
         $ scene_manager.add_actor(lily)
-        "You peek in. You see [mom.title] sitting on [lily.possessive_title]'s bed, talking to her while she gets ready for the day."
+        "You peek in. You see [mom.title] sitting on [lily.possessive_title!l]'s bed, talking to her while she gets ready for the day."
         mom "Isn't there a uniform at the university? That skirt seems a little short..."
         lily "It's fine mom. I just roll it up a little at the top, no one even notices. Well, except for this one professor... I like to sit in the front and..."
         mom "That's enough... I don't need to hear about this! Young lady unroll that skirt right now."

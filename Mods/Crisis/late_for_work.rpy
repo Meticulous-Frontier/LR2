@@ -21,7 +21,7 @@ label late_for_work_action_label:
     $ mc.change_location(lobby)
     $ mc.location.show_background()
 
-    "As you are walking through the main corridor you spot [the_person.possessive_title] rushing through the entrance doors."
+    "As you are walking through the main corridor you spot [the_person.possessive_title!l] rushing through the entrance doors."
 
     if the_person.sluttiness < 40:
         $ the_person.draw_person(position="stand3", emotion="default")

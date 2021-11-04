@@ -90,7 +90,7 @@ label intro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loca
     "You lay down on your back as the girls get into position."
     $ the_girl_1.break_taboo("vaginal_sex")
     $ the_girl_1.break_taboo("condomless_sex")
-    "You briefly see [the_girl_1.title] sigh as she sinks down onto your cock, before [the_girl_2.possessive_title] swings a leg over your head."
+    "You briefly see [the_girl_1.title] sigh as she sinks down onto your cock, before [the_girl_2.possessive_title!l] swings a leg over your head."
     "With both girls on top of you, you waste no time diving into [the_girl_2.title]'s pussy."
     return
 
@@ -122,7 +122,7 @@ label scene_threesome_double_down_fuck_girl_one_1(the_girl_1, the_girl_2, the_lo
                 $ the_girl_2.change_arousal(5)
 
         "Grab [the_girl_1.title]'s hips":
-            "Even though you've got the other girl's pussy in your face, you reach down and grab [the_girl_1.possessive_title]'s hips."
+            "Even though you've got the other girl's pussy in your face, you reach down and grab [the_girl_1.possessive_title!l]'s hips."
             "With the extra leverage, you start to thrust up into her hard and fast."
             the_girl_1 "Oh! Fuck me good [the_girl_1.mc_title]!"
             $ the_girl_1.change_arousal(5)
@@ -137,9 +137,9 @@ label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_lo
     menu:
         "Finger her pussy":
             "You push two fingers into [the_girl_2.title]'s sopping wet pussy. From this angle, it's easy to angle your fingers down and find her G-spot."
-            "The girls continue to make out as they ride you. You notice [the_girl_1.title] reach back and spank [the_girl_2.possessive_title]'s ass."
+            "The girls continue to make out as they ride you. You notice [the_girl_1.title] reach back and spank [the_girl_2.possessive_title!l]'s ass."
             the_girl_2 "Mmmm..."
-            "[the_girl_2.title] begins to twist and pull at [the_girl_1.possessive_title]'s nipples. You can feel her pussy clamp down on you as she stimulates her breasts."
+            "[the_girl_2.title] begins to twist and pull at [the_girl_1.possessive_title!l]'s nipples. You can feel her pussy clamp down on you as she stimulates her breasts."
 
         "Finger her ass":
             "You lick your index finger quickly, getting it lubed up, then press it against [the_girl_2.title]'s ass. You slowly push it inside of her."
@@ -162,7 +162,7 @@ label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_lo
 
 label outro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "You feel yourself go past the point of no return, but there is nothing you can do. With [the_girl_2.title]'s pussy in your face, you can't really even get out a warning."
-    "You give [the_girl_2.possessive_title]'s ass a hard spank a moan, as you feel yourself begin to dump your cum inside of [the_girl_1.title]."
+    "You give [the_girl_2.possessive_title!l]'s ass a hard spank a moan, as you feel yourself begin to dump your cum inside of [the_girl_1.title]."
     $ the_girl_1.cum_in_vagina()
     $ scene_manager.draw_scene()
     $ ClimaxController.manual_clarity_release(climax_type = "vagina", the_person = the_girl_1)

@@ -84,18 +84,18 @@ label free_strip_scene(the_person, must_be_naked = True):
                 if renpy.random.randint(0,100) < 67: #She's independent enough to strip, change pose, etc. on her own.
                     if the_clothing is not None : #A more obedient person is less willing to strip without being told to. A less obedient person will strip further on their own.
                         $ the_person.draw_animated_removal(the_clothing, position = picked_pose)
-                        "You watch as [the_person.possessive_title] grabs their [the_clothing.name] and pulls it off."
+                        "You watch as [the_person.possessive_title!l] grabs their [the_clothing.name] and pulls it off."
                     else:
                         #She has nothing to strip off or she's as slutty as she's willing to get
                         "[the_person.possessive_title] seems comfortable just the way she is."
                 else: #She doesn't quite know what to do without you telling her.
-                    "Without any direction [the_person.possessive_title] just keeps doing what she was doing."
+                    "Without any direction [the_person.possessive_title!l] just keeps doing what she was doing."
             else:
                 #She decides to change pose half the time.
                 $ new_pose = get_random_from_list(sb_free_strip_pose_list)
                 if not new_pose[1] == picked_pose:
                     $ picked_pose = new_pose[1]
-                    "While you're watching [the_person.possessive_title] changes pose so you can see her from a different angle."
+                    "While you're watching [the_person.possessive_title!l] changes pose so you can see her from a different angle."
                 else:
                     "[the_person.possessive_title] seems comfortable just the way she is."
         elif strip_choice == "Pose":

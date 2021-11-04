@@ -16,11 +16,11 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
         if the_girl.wants_creampie():
             the_girl "Oh god yes, cum with me [the_girl.mc_title]!"
         if mc.condom:
-            "You push forward as you climax, thrusting your cock as deep inside of [the_girl.possessive_title] as you can manage. She wraps her legs around you as she cums in unison."
+            "You push forward as you climax, thrusting your cock as deep inside of [the_girl.possessive_title!l] as you can manage. She wraps her legs around you as she cums in unison."
             $ the_girl.call_dialogue("cum_condom")
             $ climax_controller.do_clarity_release(the_girl)
             "Once your climax has passed you keep [the_girl.title] pinned to the [the_object.name] for a little longer. When her aftershocks wind down, she slowly unwraps her legs."
-            "You step back and pull out of [the_girl.possessive_title]. Your condom is ballooned out, filled with your seed."
+            "You step back and pull out of [the_girl.possessive_title!l]. Your condom is ballooned out, filled with your seed."
             if the_girl.has_cum_fetish():
                 if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
                     $ the_girl.discover_opinion("drinking cum")
@@ -31,7 +31,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] moans as she pours your cum into her mouth."
                     $ the_girl.cum_in_mouth()
                     $ against_wall.redraw_scene(the_girl)
-                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
+                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title!l] is literally addicted to your cum."
                 else:
                     $ the_girl.discover_opinion("cum facials")
                     "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
@@ -56,7 +56,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 "Having your cum inside of her heightens her orgasm as her fetish for your cum is fulfilled."
             else:
-                "You push forward as you finally climax, thrusting your cock as deep inside of [the_girl.possessive_title] as you can manage."
+                "You push forward as you finally climax, thrusting your cock as deep inside of [the_girl.possessive_title!l] as you can manage."
                 "She clings to you helplessly as she cums with you in unison."
             $ the_girl.call_dialogue("cum_vagina")
             $ the_girl.cum_in_vagina()
@@ -117,9 +117,9 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
             $ climax_controller.do_clarity_release(the_girl)
             $ against_wall.redraw_scene(the_girl)
             if mc.condom:
-                "You pull out of [the_girl.possessive_title] at the last moment and step back. You whip your condom off and blow your load over her stomach while she watches."
+                "You pull out of [the_girl.possessive_title!l] at the last moment and step back. You whip your condom off and blow your load over her stomach while she watches."
             else:
-                "You pull out of [the_girl.possessive_title] at the last moment and step back. You stroke yourself off and blow your load over her stomach while she watches."
+                "You pull out of [the_girl.possessive_title!l] at the last moment and step back. You stroke yourself off and blow your load over her stomach while she watches."
             "As your cum erupts, she reaches down with her hand and rapidly strokes her clit. She throws her head back and begins to orgasm together with you."
             the_girl "Ohhhh yes! Shower me with your hot cum!"
             "You sigh contentedly and relax for a moment, enjoying the sight of [the_girl.title] covered in your semen."

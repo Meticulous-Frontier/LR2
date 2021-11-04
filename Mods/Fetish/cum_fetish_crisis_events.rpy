@@ -41,7 +41,7 @@ label cum_fetish_morning_shower_label():
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
     $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
-    "You hear the shower door open and see [the_person.possessive_title] getting in the shower with you."
+    "You hear the shower door open and see [the_person.possessive_title!l] getting in the shower with you."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person()
     $ mc.change_locked_clarity(30)
@@ -79,7 +79,7 @@ label cum_fetish_employee_dosage_request_label():
     "You step into your office and sit down for a minute. You hop on your laptop and start browsing the internet."
     "*KNOCK KNOCK*"
     $ the_person.draw_person()
-    "You look up and see [the_person.possessive_title] at your door."
+    "You look up and see [the_person.possessive_title!l] at your door."
     if mc.business.is_open_for_business():
         mc.name "Hello [the_person.title], come in."
         "[the_person.possessive_title] walks into your office."
@@ -106,7 +106,7 @@ label cum_fetish_employee_dosage_request_label():
             the_person "Oh my god, thank you [the_person.mc_title]... I wish I had time make you cum again... but I know you're a busy a man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
             the_person "Thanks again, [the_person.mc_title]. Don't hesitate to ask if you ever need to be... you know... serviced."
-            "You wave goodbye to [the_person.possessive_title] as she leaves your office. Damn that was good!"
+            "You wave goodbye to [the_person.possessive_title!l] as she leaves your office. Damn that was good!"
         "No Thanks":
             "[the_person.possessive_title] is caught completely off guard by your refusal."
             $ the_person.change_stats(happiness = -10, obedience = -10)

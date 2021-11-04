@@ -53,7 +53,7 @@ label piledriver_anal_double_orgasm(the_girl, the_location, the_object):
             "She truly is addicted to your cum."
         else:
             the_girl "Ah... Good job... Ah..."
-            "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s body covered in your semen."
+            "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title!l]'s body covered in your semen."
 
     $ post_double_orgasm(the_girl) #We have to put this at the end of each double orgasm scene because return doesn't return to where you think it will.
     return

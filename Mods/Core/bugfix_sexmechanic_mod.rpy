@@ -487,13 +487,13 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
                         $ mc.condom = False
                     if position_choice.requires_hard and mc.recently_orgasmed:
-                        "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
+                        "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title!l] for now."
                         $ position_choice = None
                     elif position_choice.guy_energy > mc.energy:
                         if girl_in_charge:
-                            "You're too exhausted to let [the_person.possessive_title] keep [position_choice.verbing] you."
+                            "You're too exhausted to let [the_person.possessive_title!l] keep [position_choice.verbing] you."
                         else:
-                            "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
+                            "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title!l]."
                         $ position_choice = None
                     elif position_choice.girl_energy > the_person.energy:
                         #TODO: Add some differentiated dialgoue depending on the position.
@@ -700,7 +700,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
     $ condom_threshold = the_person.get_no_condom_threshold()
 
     if the_person == kaya and persistent.pregnancy_pref != 0:
-        "As you look at [the_person.possessive_title], you remember she doesn't want you to use condoms. Should you put one on anyway?"
+        "As you look at [the_person.possessive_title!l], you remember she doesn't want you to use condoms. Should you put one on anyway?"
         menu:
             "Put on a condom":
                 mc.name "One sec, let me just get a condom on..."
@@ -1121,14 +1121,14 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
 label break_strip_outfit_taboos(the_person):
     $ taboo_broken = False
     if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
-        "Once she's done stripping [the_person.possessive_title] is practically naked."
+        "Once she's done stripping [the_person.possessive_title!l] is practically naked."
         if the_person.has_taboo(["bare_pussy", "bare_tits"]):
             "She makes a vain attempt to keep herself covered with her hands, but soon enough seems to be comfortable being nude in front of you."
             $ the_person.break_taboo("bare_pussy")
             $ the_person.break_taboo("bare_tits")
             $ taboo_broken = True
     elif the_person.outfit.tits_visible():
-        "Once she's done stripping [the_person.possessive_title] has her nice [the_person.tits] tits out on display."
+        "Once she's done stripping [the_person.possessive_title!l] has her nice [the_person.tits] tits out on display."
         if the_person.has_taboo("bare_tits"):
             if the_person.has_large_tits():
                 "She makes a hopeless attempt to cover her large tits with her hands, but comes to the realization it's pointless."
@@ -1138,7 +1138,7 @@ label break_strip_outfit_taboos(the_person):
             $ the_person.break_taboo("bare_tits")
             $ taboo_broken = True
     elif the_person.outfit.vagina_visible():
-        "Once she's done stripping [the_person.possessive_title] has her pretty little pussy out on display for everyone."
+        "Once she's done stripping [the_person.possessive_title!l] has her pretty little pussy out on display for everyone."
         if the_person.has_taboo("bare_pussy"):
             "She tries to hide herself from you with her hand, but quickly realizes how impractical that would be."
             "Soon enough she doesn't seem to mind."

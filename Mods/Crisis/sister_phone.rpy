@@ -30,18 +30,18 @@ label sister_phone_crisis_action_label:
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 $ mc.change_locked_clarity(10)
                 "Her first message is a selfie of herself lying down on your bed in lingerie."
-                the_person "I can't wait until you come home and give me what I need. I wish I could spend every minute of every day worshiping your cock like a [the_person.possessive_title] should."
+                the_person "I can't wait until you come home and give me what I need. I wish I could spend every minute of every day worshiping your cock like a [the_person.possessive_title!l] should."
             else:
                 the_person "It's so hard not to talk about you at school. The other girls are gossiping and I just want to tell them how good it feels when you try and breed me..."
-                the_person "My pussy full of your warm cum, knowing that I can take care of you the way only [the_person.possessive_title] could."
+                the_person "My pussy full of your warm cum, knowing that I can take care of you the way only [the_person.possessive_title!l] could."
                 the_person "I think I'm going to go touch myself in the bathroom. I hope you are having a great day too [the_person.mc_title]!"
         elif ran_num == 2:
             $ the_person.strip_outfit(delay = 0)
             the_person "Hi [the_person.mc_title], I hope I'm not interrupting your busy work day. This is just a quick reminder..."
             $ mc.change_locked_clarity(20)
             $ the_person.draw_person(emotion = "happy")
-            "You get a selfie from [the_person.possessive_title] naked in front of her bedroom mirror."
-            the_person "That [the_person.possessive_title] wants to feel you inside her tonight. Don't stay out too late!"
+            "You get a selfie from [the_person.possessive_title!l] naked in front of her bedroom mirror."
+            the_person "That [the_person.possessive_title!l] wants to feel you inside her tonight. Don't stay out too late!"
         else:
             $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(lowest_stat, guarantee_output = True))
             $ the_person.draw_person(position = "blowjob", emotion = "happy")
@@ -107,7 +107,7 @@ label sister_phone_crisis_action_label:
                     the_person.draw_person(emotion = "happy")
                     mc.change_locked_clarity(5)
                     renpy.pause(2)
-            the_person "I hope you think [the_person.possessive_title] looks sexy in her underwear ;)"
+            the_person "I hope you think [the_person.possessive_title!l] looks sexy in her underwear ;)"
         else:
             $ the_person.strip_outfit(exclude_lower = True, delay = 0)
             if mc.business.is_weekend():
@@ -147,7 +147,7 @@ label sister_phone_crisis_action_label:
 
             $ mc.change_locked_clarity(10)
             if mc.business.is_weekend():
-                the_person "I wish you were here spending time with me. Maybe this will convince you [the_person.possessive_title] is a cool person to hang out with!"
+                the_person "I wish you were here spending time with me. Maybe this will convince you [the_person.possessive_title!l] is a cool person to hang out with!"
                 $ the_person.draw_person(emotion = "happy")
                 "[the_person.possessive_title] sends you a selfie from her bedroom without her shirt on."
             else:
@@ -163,9 +163,9 @@ label sister_phone_crisis_action_label:
                 $ the_person.draw_person(emotion = "happy")
                 $ mc.change_locked_clarity(10)
                 if the_clothing.underwear:
-                    "You get a selfie from [the_person.possessive_title] wearing a slightly transparent bra."
+                    "You get a selfie from [the_person.possessive_title!l] wearing a slightly transparent bra."
                 else:
-                    "You get a selfie from [the_person.possessive_title] wearing a slightly transparent top."
+                    "You get a selfie from [the_person.possessive_title!l] wearing a slightly transparent top."
                 the_person "Oh well, I can still wear it when I'm doing chores around the house. Hope your day is going better, love you!"
             else:
                 the_person "I've looked everywhere, but I just can't find my favorite bra!"
@@ -182,11 +182,11 @@ label sister_phone_crisis_action_label:
                 the_person "I hope I'm not interrupting, I just wanted to say hi and check in. I'm stuck here at home wishing I could spend more time with you."
             else:
                 the_person "I hope I'm not interrupting, I just wanted to say hi and check in. I'm stuck here at school wishing I could spend more time with you."
-            the_person "Have a great day, see you later tonight. Love, [the_person.possessive_title]."
+            the_person "Have a great day, see you later tonight. Love, [the_person.possessive_title!l]."
 
         elif ran_num == 2:
             the_person "I hope you are having a great day [the_person.mc_title]! Imagining you out there working so hard makes me prouder than you can imagine!"
-            the_person "I'm looking forward to seeing you at home tonight. Love, [the_person.possessive_title]."
+            the_person "I'm looking forward to seeing you at home tonight. Love, [the_person.possessive_title!l]."
 
         elif ran_num == 3:
             the_person "I hope you aren't busy, I was thinking about you and just wanted to say hi!"
@@ -208,9 +208,9 @@ label sister_phone_crisis_action_label:
             "[the_person.possessive_title] sends you a short video she took of herself outside. She's keeping up a brisk walk and seems slightly out of breath."
             if not the_person.outfit.wearing_bra():
                 if the_person.has_large_tits():
-                    "She doesn't seem to realize it but it's very obvious [the_person.possessive_title] isn't wearing a bra under her shirt. Her sizeable breasts heave up and down with each step."
+                    "She doesn't seem to realize it but it's very obvious [the_person.possessive_title!l] isn't wearing a bra under her shirt. Her sizeable breasts heave up and down with each step."
                 else:
-                    "She doesn't seem to realize it but it's very obvious [the_person.possessive_title] isn't wearing a bra under her shirt. Her perky breasts slightly bounce with each step."
+                    "She doesn't seem to realize it but it's very obvious [the_person.possessive_title!l] isn't wearing a bra under her shirt. Her perky breasts slightly bounce with each step."
 
     else:
         #Sends you normal sisterly texts.
@@ -220,7 +220,7 @@ label sister_phone_crisis_action_label:
             the_person "Keep it up! See you at dinner ;)"
 
         elif ran_num == 2:
-            the_person "Remember that [the_person.possessive_title] loves you! Have a great day!"
+            the_person "Remember that [the_person.possessive_title!l] loves you! Have a great day!"
 
         else:
             the_person "Hi [the_person.mc_title], I'm just checking in to make sure you're doing okay."

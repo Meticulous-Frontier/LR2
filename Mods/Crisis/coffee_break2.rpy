@@ -67,7 +67,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         if loser.effective_sluttiness() >= 60:
             $ scene_manager.update_actor(winner_one, position = "walking_away")
             $ scene_manager.update_actor(winner_two, position = "walking_away")
-            "As [loser.possessive_title] turns around, she walks right into you."
+            "As [loser.possessive_title!l] turns around, she walks right into you."
             loser "Hey [mc.name] do you mind helping me out real quick?"
             $ scene_manager.remove_actor(winner_one)
             $ scene_manager.remove_actor(winner_two)
@@ -84,7 +84,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                 "Refuse":
                     loser "Aww you're no fun, [loser.mc_title]. If he makes me pay this time it's your fault."
 
-            "You watch as [loser.possessive_title] strips down."
+            "You watch as [loser.possessive_title!l] strips down."
             $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, temp_sluttiness_boost = 40)
 
             "She gives you a wink and turns around to pick up the food."
@@ -92,7 +92,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
 
             if loser.effective_sluttiness() >= 90 and loser.outfit.vagina_visible():
                 if persistent.show_ntr:
-                    "When [loser.possessive_title] reaches the lobby she pulls the sweaty guy into an empty office."
+                    "When [loser.possessive_title!l] reaches the lobby she pulls the sweaty guy into an empty office."
                     loser "I left my purse at my desk. I can go get it... or maybe I could pay another way."
                     $ scene_manager.update_actor(loser, position = "standing_doggy")
                     $ mc.change_locked_clarity(30)
@@ -100,7 +100,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     loser "Oh, hard already. We must be getting so predictable."
                     "The delivery man begins thrusting as hard and fast as he can. He seems to be in a hurry to finish and get back to work."
                     loser "Ah yes, fill me up. Fuck me you sweaty pig."
-                    "His face turns bright red as he pushes [loser.possessive_title]'s face into the desk."
+                    "His face turns bright red as he pushes [loser.possessive_title!l]'s face into the desk."
                     loser "Oh yes. I'm cumming!"
                     $ loser.run_orgasm()
                     $ loser.change_stats(slut = 1, max_slut = 100)
@@ -109,7 +109,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     $ loser.cum_on_ass()
                     "She gathers her clothes and takes the food back to her colleagues. "
                 else:
-                    "When [loser.possessive_title] reaches the lobby, where the delivery guy is standing with a big grin on his face."
+                    "When [loser.possessive_title!l] reaches the lobby, where the delivery guy is standing with a big grin on his face."
                     loser "I left my purse at my desk. I can go get it... or maybe I could pay another way."
                     $ scene_manager.update_actor(loser, position = "stand3")
                     $ mc.change_locked_clarity(20)
@@ -118,7 +118,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     "After a while she tells him the food is getting cold. He nods, turns around and as he walks away he says: 'Enjoy your food, slut!'"
                 $ scene_manager.update_actor(loser, position = "walking_away")
                 if winner_one.effective_sluttiness() > 60 and winner_two.effective_sluttiness() > 60:
-                    "You follow [loser.possessive_title] as she takes the delivery to the break room."
+                    "You follow [loser.possessive_title!l] as she takes the delivery to the break room."
                     $ scene_manager.update_actor(loser, display_transform = character_center_flipped)
                     "She steps into the break room and sets the food on the table."
                     loser "Lunch is here!"
@@ -153,7 +153,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
 
                     loser "Hey now, it's not like that, you know you can claim me anytime you want, we were just looking for some free... FUCK"
                     $ mc.change_locked_clarity(20)
-                    "You grab her hips and ram yourself forward into [loser.possessive_title]'s sopping wet pussy."
+                    "You grab her hips and ram yourself forward into [loser.possessive_title!l]'s sopping wet pussy."
                     if winner_one.effective_sluttiness() > 80 and winner_one.outfit.vagina_visible():
                         winner_one "Holy shit he's gonna fuck her right here!"
                         $ scene_manager.update_actor(winner_one, position = "kneeling1")
@@ -169,7 +169,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     if winner_two.effective_sluttiness() > 80 and winner_two.get_opinion_score("public sex") > 0:
                         winner_two "Fuck yeah! Give it to her good [winner_two.mc_title]!"
                         $ mc.change_locked_clarity(10)
-                        "[winner_two.title] is watching intently, cheering you on as you give it to [loser.possessive_title]."
+                        "[winner_two.title] is watching intently, cheering you on as you give it to [loser.possessive_title!l]."
                         $ winner_two.change_stats(happiness = 3, slut = 1, max_slut = 100)
                     else:
                         winner_two "Wow, that looks like it feels good..."
@@ -184,9 +184,9 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     $ scene_manager.draw_scene()
                     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = loser)
                     if loser.has_face_cum():
-                        "You pull out and look at [loser.possessive_title]. She has your old cum on her face and now also running down the inside of her legs as your seed spills out of her."
+                        "You pull out and look at [loser.possessive_title!l]. She has your old cum on her face and now also running down the inside of her legs as your seed spills out of her."
                     else:
-                        "You pull out and look at [loser.possessive_title]. Your cum is running down the inside of her legs as your seed spills out of her."
+                        "You pull out and look at [loser.possessive_title!l]. Your cum is running down the inside of her legs as your seed spills out of her."
 
                     $ loser.change_stats(obedience = 5, love = 3)
                     if winner_one.effective_sluttiness() > 90 and winner_one.outfit.vagina_visible():
@@ -209,7 +209,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                 $ scene_manager.update_actor(loser, position = "walking_away")
                 "While enjoying the view you decide to go back to work."
         else:
-            "You watch as [loser.possessive_title] strips down."
+            "You watch as [loser.possessive_title!l] strips down."
             $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, temp_sluttiness_boost = 40)
             $ mc.change_locked_clarity(20)
             "[loser.possessive_title] turns around walking down to the lobby to pick up the food."
@@ -241,7 +241,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         "The other girls stand back and watch, giggling amongst themselves."
         $ loser.change_slut(1)
         $ scene_manager.remove_actor(loser)
-        "You walk up to [winner_one.possessive_title] and [winner_two.possessive_title]."
+        "You walk up to [winner_one.possessive_title!l] and [winner_two.possessive_title!l]."
         mc.name "Ok, girls you had your fun, now back to work."
         winner_two "Yes [winner_two.mc_title], right away."
         $ scene_manager.update_actor(winner_one, position = "walking_away")

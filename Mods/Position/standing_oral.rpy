@@ -112,9 +112,9 @@ label scene_standing_oral_1(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("sex_responses_oral")
     if girl_in_charge or the_girl.get_opinion_score("taking control") > 0:
         "[the_girl.possessive_title] holds your head in place with one hand."
-        "You use your tongue on [the_girl.possessive_title]."
+        "You use your tongue on [the_girl.possessive_title!l]."
     else:
-        "You use your tongue on [the_girl.possessive_title]. On your knees in front of her, you look up and admire her shapely body and chest."
+        "You use your tongue on [the_girl.possessive_title!l]. On your knees in front of her, you look up and admire her shapely body and chest."
         "[the_girl.possessive_title] rests one hand on your shoulder."
     if the_girl.outfit.tits_available():# TODO: put in not heart pasties? How do I do that?
         if the_girl.get_opinion_score("being submissive") > 0:
@@ -154,7 +154,7 @@ label scene_standing_oral_2(the_girl, the_location, the_object):
 
         menu:
             "Lick firmly and steadily":
-                "You lick at [the_girl.possessive_title]'s pussy."
+                "You lick at [the_girl.possessive_title!l]'s pussy."
                 $ the_girl.call_dialogue("sex_responses_oral")
                 $ the_girl.change_arousal(3)
                 "You continue to lick until your tongue starts to tire."
@@ -167,14 +167,14 @@ label scene_standing_oral_2(the_girl, the_location, the_object):
                 if the_girl.get_opinion_score("taking control") > 0:
                     "[the_girl.possessive_title] grabs your hair and hold your head in place as you continue to lick."
                     $ the_girl.change_arousal(the_girl.get_opinion_score("taking control"))
-                "You continue to play with [the_girl.possessive_title]'s pussy with your mouth until you start to tire."
+                "You continue to play with [the_girl.possessive_title!l]'s pussy with your mouth until you start to tire."
     return
 
 
 label outro_standing_oral(the_girl, the_location, the_object):
     $ the_goal = the_girl.get_sex_goal()
 
-    "The taste of [the_girl.possessive_title]'s pussy, the sound of her moans, and the subtle twitches of her body drive you crazy."
+    "The taste of [the_girl.possessive_title!l]'s pussy, the sound of her moans, and the subtle twitches of her body drive you crazy."
     "You touch yourself, stroking your hard cock between your legs while you pleasure her."
     "[the_girl.possessive_title] can tell that you are on the verge of climax."
     "Finally you've gone too far, pushing yourself to climax."
@@ -290,7 +290,7 @@ label strip_ask_standing_oral(the_girl, the_clothing, the_location, the_object):
                 return False
 
 label orgasm_standing_oral(the_girl, the_location, the_object):
-    "You notice [the_girl.possessive_title]'s moans becoming louder, and her legs twitching more noticeably on either side of you."
+    "You notice [the_girl.possessive_title!l]'s moans becoming louder, and her legs twitching more noticeably on either side of you."
     $ the_girl.call_dialogue("climax_responses_oral")
     "Her whole body tenses up and she grabs you by the hair. A shiver runs through her body as she climaxes."
     "The moment passes and she relaxes. For a moment all she can do is look down at you and pant."

@@ -69,7 +69,7 @@ label lust_booty_call_intro_label():
         $ mc.business.add_mandatory_crisis(lust_booty_call_intro)
         return
     $ the_person = _return
-    "You decide to text [the_person.possessive_title]"
+    "You decide to text [the_person.possessive_title!l]"
     show screen person_info_ui(the_person)
     $ mc.start_text_convo(the_person)
     mc.name "Hey, you up?"
@@ -111,7 +111,7 @@ label lust_booty_call_intro_label():
         $ the_person.change_happiness(-3)
         $ the_person.change_obedience(-3)
     else:
-        "You and [the_person.possessive_title] take a few moments to recover, satisfied from your orgasms."
+        "You and [the_person.possessive_title!l] take a few moments to recover, satisfied from your orgasms."
         $ the_person.change_happiness(3)
         $ the_person.change_obedience(3)
     mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
@@ -150,7 +150,7 @@ label lust_booty_call_label():
         "After looking at your contact list, you change your mind. Maybe another opportunity will present itself later."
         return
     $ the_person = _return
-    "You decide to text [the_person.possessive_title]"
+    "You decide to text [the_person.possessive_title!l]"
     show screen person_info_ui(the_person)
     $ mc.start_text_convo(the_person)
     mc.name "Hey, I'm bored. You DTF tonight?"
@@ -200,7 +200,7 @@ label lust_booty_call_label():
         $ the_person.change_happiness(-3)
         $ the_person.change_obedience(-3)
     else:
-        "You and [the_person.possessive_title] take a few moments to recover, satisfied from your orgasms."
+        "You and [the_person.possessive_title!l] take a few moments to recover, satisfied from your orgasms."
         $ the_person.change_happiness(3)
         $ the_person.change_obedience(3)
     mc.name "Let me call you a cab. It's the least I can do for coming over late like this."

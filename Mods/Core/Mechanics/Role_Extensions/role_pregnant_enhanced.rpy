@@ -193,7 +193,7 @@ label silent_pregnant_finish_announce(the_person): #TODO: have more variants for
         return  # unknown girls should not announce delivery
 
     # The girl tells you she'll need a few days to have the kid and recover, and she'll be back in a few days.
-    "You get a call from [the_person.possessive_title]. You answer it."
+    "You get a call from [the_person.possessive_title!l]. You answer it."
     mc.name "Hey [the_person.title], what's up?"
 
     if the_person.is_employee():
@@ -218,7 +218,7 @@ label silent_pregnant_finish(the_person):
     if the_person.title is None:
         return  # unknown girls should not about the delivery
 
-    "You get a call from [the_person.possessive_title] early in the morning. You answer it."
+    "You get a call from [the_person.possessive_title!l] early in the morning. You answer it."
 
     if the_person in [aunt, mom]:
         the_person "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"

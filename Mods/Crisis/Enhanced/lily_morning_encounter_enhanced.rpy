@@ -27,17 +27,17 @@ label lily_morning_encounter_enhanced_label():
     "You wake up in the morning to your alarm. You get dressed and leave your room to get some breakfast."
     $ the_person.draw_person()
     if the_person.outfit.wearing_panties() and the_person.outfit.wearing_bra():
-        "The door to [the_person.possessive_title]'s room opens as you're walking past. She steps out, wearing nothing but her underwear."
+        "The door to [the_person.possessive_title!l]'s room opens as you're walking past. She steps out, wearing nothing but her underwear."
         $ mc.change_locked_clarity(5)
     elif the_person.outfit.wearing_panties():
-        "The door to [the_person.possessive_title]'s room opens as you're walking past. She steps out, wearing just a tiny pair of panties."
+        "The door to [the_person.possessive_title!l]'s room opens as you're walking past. She steps out, wearing just a tiny pair of panties."
         $ mc.change_locked_clarity(10)
     elif the_person.outfit.wearing_bra():
-        "The door to [the_person.possessive_title]'s room opens as you're walking past. She steps out, wearing a bra, but surprisingly no panties."
+        "The door to [the_person.possessive_title!l]'s room opens as you're walking past. She steps out, wearing a bra, but surprisingly no panties."
         $ mc.change_locked_clarity(10)
     else:
         $ mc.change_locked_clarity(15)
-        "The door to [the_person.possessive_title]'s room opens as you're walking past. She steps out, completely naked."
+        "The door to [the_person.possessive_title!l]'s room opens as you're walking past. She steps out, completely naked."
 
     if the_person.effective_sluttiness("underwear_nudity") < 10:
         #She's startled and embarrassed.
@@ -94,7 +94,7 @@ label lily_morning_encounter_enhanced_label():
                 "The view is pleasant, and as you walk together she seems to relax a bit with the idea of being mostly undressed around you."
                 $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 30)
                 $ the_person.draw_person(position = "walking_away")
-                "You reach the door to the kitchen and split up. You linger a second and enjoy the view as your [the_person.possessive_title] walks away."
+                "You reach the door to the kitchen and split up. You linger a second and enjoy the view as your [the_person.possessive_title!l] walks away."
                 # Make a bad decision?
 
     elif the_person.effective_sluttiness("underwear_nudity") < 40:
@@ -141,7 +141,7 @@ label lily_morning_encounter_enhanced_label():
                 $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 30)
 
         $ the_person.draw_person(position = "walking_away")
-        "You reach the door to the kitchen and split up. You wait a second and enjoy the view as your [the_person.possessive_title] walks away."
+        "You reach the door to the kitchen and split up. You wait a second and enjoy the view as your [the_person.possessive_title!l] walks away."
 
     else: #sluttiness >= 40-55
         #She likes being watched and teases you a little while you walk together.
@@ -178,7 +178,7 @@ label lily_morning_encounter_enhanced_label():
                     mc.name "I know, I'm just having a feel. You've got a great ass."
                     "You spank her butt and she moans again. You work your hand down between her legs from behind and run a finger along her slit."
                     the_person "Fuck, please don't get me too wet. I don't want to have to explain that to Mom if she finds us."
-                    "You flick your finger over [the_person.possessive_title]'s clit, then slide your hand back and kneed her ass some more."
+                    "You flick your finger over [the_person.possessive_title!l]'s clit, then slide your hand back and kneed her ass some more."
                     $ mc.change_locked_clarity(20)
                 $ the_person.change_stats(love = 2)
                 "When you reach the kitchen [the_person.title] reluctantly pulls away from you."
@@ -209,7 +209,7 @@ label lily_morning_encounter_enhanced_label():
                 $ mc.change_locked_clarity(20)
                 $ the_person.change_stats(obedience = 3, slut = 1, max_slut = 30)
 
-                "The two of you walk slowly towards the kitchen as [the_person.possessive_title] fondles your dick."
+                "The two of you walk slowly towards the kitchen as [the_person.possessive_title!l] fondles your dick."
                 "When you reach the door to the kitchen she reluctantly pulls her hand out of your pants."
         if the_person.effective_sluttiness() > 40:
             menu:
@@ -289,7 +289,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
         else:
             the_other_person "...and, [the_person.title], walking around naked again I see."
             the_person "Well, since [the_person.mc_title] likes it so much I didn't want to disappoint him."
-        the_other_person "Well I can understand that, now [the_other_person.mc_title] what are you doing dragging [the_person.possessive_title] around?"
+        the_other_person "Well I can understand that, now [the_other_person.mc_title] what are you doing dragging [the_person.possessive_title!l] around?"
         mc.name "She got me so excited that I figured she could help me take care of this."
         if jealous_person == True:
             the_other_person "Well, you can hardly blame her for wanting to get your attention."
@@ -373,7 +373,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
         mc.name "So am I, we've certainly done more than let her watch us. I'm sure we can do whatever we want wherever we want."
         the_person "I suppose that is true."
         $ scene_manager.update_actor(the_person, position = "stand2")
-        the_person "So, [the_person.mc_title] what do you want to do to [the_person.possessive_title]?"
+        the_person "So, [the_person.mc_title] what do you want to do to [the_person.possessive_title!l]?"
         menu:
             "Ask for a handjob":
                 the_person "Okay... I can do that."

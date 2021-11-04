@@ -56,7 +56,7 @@ label dungeon_room_appoint_slave_label_2(the_person):
             "Release her":
                 $ slave_release_slave(the_person)
                 $ del the_person.event_triggers_dict["unique_sex_positions"]
-                "You release [the_person.possessive_title] from their duties as a slave."
+                "You release [the_person.possessive_title!l] from their duties as a slave."
             "Never mind":
                 pass
 

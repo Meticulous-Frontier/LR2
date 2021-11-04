@@ -66,7 +66,7 @@ label sarah_bar_date_label(the_person):
         menu:
             "Let's Go":
                 the_person "Yes! You won't regret this. Let's go!"
-                "You finish up what you are working on and grab your stuff. You make sure to lock up the business on your way out with [the_person.possessive_title]."
+                "You finish up what you are working on and grab your stuff. You make sure to lock up the business on your way out with [the_person.possessive_title!l]."
                 "As you exit the building, you consider where you should head for the night."
                 menu:
                     "The Bar":

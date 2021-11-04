@@ -78,7 +78,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     mc.name "Why would I care? You're taking a break and relaxing the way you want to."
                     $ mc.change_locked_clarity(5)
                     $ scene_manager.update_actor(person_two, position = "stand2", emotion = "default")
-                    "The moans from the phone grow louder. You notice [person_one.possessive_title] has turned her attention back to the screen."
+                    "The moans from the phone grow louder. You notice [person_one.possessive_title!l] has turned her attention back to the screen."
                     mc.name "[person_one.title] seems to have the right idea."
                     $ scene_manager.update_actor(person_one, emotion = "happy")
                     person_one "Yeah, just relax [person_two.title]. You said you had something you wanted to show me too, right?"

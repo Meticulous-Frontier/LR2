@@ -23,7 +23,7 @@ label breeding_mom_intro_label_enhanced(the_person):
         return
     else:
         the_person "[the_person.mc_title], close the door, please. I have something I need to ask you."
-        "You close the door to [the_person.possessive_title]'s bedroom and walk over to her bed."
+        "You close the door to [the_person.possessive_title!l]'s bedroom and walk over to her bed."
         "She pats the bed beside her and you sit down."
         the_person "I've been thinking a lot about this. You're all grown up and [lily.title] isn't far behind."
         the_person "Soon you'll both be leaving home, but I don't think I'm done being a mother yet."
@@ -50,7 +50,7 @@ label breeding_mom_intro_label_enhanced(the_person):
             call fuck_person(the_person, start_position = breeding_missionary, start_object = mc.location.get_object_with_name("bed"), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_breeding_mom_enhanced_label
             $ the_report = _return #TODO: The creampie check should now be possible with the report system instead of checking her total record.
             if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
-                "You roll off of [the_person.possessive_title] and onto the bed beside her, feeling thoroughly spent."
+                "You roll off of [the_person.possessive_title!l] and onto the bed beside her, feeling thoroughly spent."
                 "She brings her knees up against her chest and tilts her hips up, holding all of your cum deep inside of her."
                 mc.name "Do you think that did it?"
 
@@ -67,7 +67,7 @@ label breeding_mom_intro_label_enhanced(the_person):
                 #TODO: Add an action where you can try and breed her some more.
 
             else:
-                "You roll off of [the_person.possessive_title] and onto the bed beside her."
+                "You roll off of [the_person.possessive_title!l] and onto the bed beside her."
                 $ the_person.change_happiness(-20)
                 the_person "I'm sorry... I'm sorry I'm not good enough to make you cum. I'm not good enough to earn your child..."
                 "She sounds as if she is almost on the verge of tears."
@@ -75,7 +75,7 @@ label breeding_mom_intro_label_enhanced(the_person):
                 mc.name "Shh... You were fantastic. It's me, I'm just not feeling it today. Maybe we can try some other day."
                 the_person "I don't know, this might have all been a mistake. Let's just... be quiet for a while, okay?"
                 $ the_person.draw_person(position = "sitting")
-                "You hold [the_person.possessive_title] until she's feeling better, then sit up in bed with her."
+                "You hold [the_person.possessive_title!l] until she's feeling better, then sit up in bed with her."
 
         "Say no":
             $ the_person.draw_person(position = "sitting", emotion = "sad")

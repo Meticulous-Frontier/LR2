@@ -15,7 +15,7 @@ label intern_water_spill_crisis_label():
     $ the_person.draw_person()
     mc.name "Hey [the_person.title], how can I help you?"
     the_person "I was working on some homework during my break and I hit some snags. I heard you are pretty good with academics?"
-    "You listen as [the_person.possessive_title] dives into her homework problem."
+    "You listen as [the_person.possessive_title!l] dives into her homework problem."
     "You aren't paying a terrible amount of attention until she goes to take a drink from her water bottle and dumps it down her front!"
     $ the_clothing.colour[3] *= .8
     $ the_person.draw_person(emotion="angry")
@@ -38,7 +38,7 @@ label intern_water_spill_crisis_label():
         $ the_person.change_slut(1)
         the_person "Ugh, that was so embarrassing. Lets just forget about that, okay?"
         mc.name "Of course, back to your homework then, right?"
-        "You help [the_person.possessive_title] sort out her homework issues, then get back to work."
+        "You help [the_person.possessive_title!l] sort out her homework issues, then get back to work."
         $ the_person.int += 1
     else:
         $ thinks_appropriate = the_person.judge_outfit(test_outfit) #Does she think it's appropriate to just strip it off all of the time?
@@ -56,7 +56,7 @@ label intern_water_spill_crisis_label():
                     the_person "I hope I'm not distracting you. I can dry my shirt off if you'd prefer."
                     mc.name "No, that's fine. Just remind me again what we were talking about."
                     $ the_person.change_slut(1)
-                    "You help [the_person.possessive_title] with her homework questions while she stands topless beside your desk."
+                    "You help [the_person.possessive_title!l] with her homework questions while she stands topless beside your desk."
                     $ the_person.int += 1
 
                 "Keep going...":
@@ -95,10 +95,10 @@ label intern_water_spill_crisis_label():
                     $ the_person.change_obedience(5)
                     $ the_person.int += 1
                     if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
-                        "You help [the_person.possessive_title] with her homework while she stands next to your desk, her body completely on display."
+                        "You help [the_person.possessive_title!l] with her homework while she stands next to your desk, her body completely on display."
                         $ mc.change_locked_clarity(50)
                     else:
-                        "You help [the_person.possessive_title] with her homework while she stands next to your desk, still partially undressed."
+                        "You help [the_person.possessive_title!l] with her homework while she stands next to your desk, still partially undressed."
                         $ mc.change_locked_clarity(30)
 
 
@@ -119,7 +119,7 @@ label intern_water_spill_crisis_label():
                     $ the_person.change_slut(1)
                     the_person "Ugh, that was so embarrassing. Lets just forget about that, okay?"
                     mc.name "Of course, back to your homework then, right?"
-                    "You help [the_person.possessive_title] with her homework, then get back to work."
+                    "You help [the_person.possessive_title!l] with her homework, then get back to work."
                     $ the_person.int += 1
 
                 "Leave it alone":
@@ -131,7 +131,7 @@ label intern_water_spill_crisis_label():
                     $ mc.change_locked_clarity(5)
                     $ the_person.change_obedience(1)
                     $ the_person.change_slut(1)
-                    "After a few minutes you've answered all of [the_person.possessive_title]'s questions, and she heads off to dry her [the_clothing.name]."
+                    "After a few minutes you've answered all of [the_person.possessive_title!l]'s questions, and she heads off to dry her [the_clothing.name]."
                     $ the_clothing.colour[3] *= 1.25
                     $ the_person.int += 1
 

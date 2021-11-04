@@ -109,7 +109,7 @@ label broken_AC_crisis_label_enhanced:
                     call screen enhanced_main_choice_display(build_menu_items([broken_AC_crisis_get_watch_list_menu(the_person)]))
                     $ girl_choice = _return
 
-                    "You pay special attention to [girl_choice.title] as she follows the lead of [the_person.possessive_title]."
+                    "You pay special attention to [girl_choice.title] as she follows the lead of [the_person.possessive_title!l]."
 
                     $ scene_manager.draw_scene()
                     $ scene_manager.add_actor(girl_choice, display_transform = character_center_flipped)
@@ -163,14 +163,14 @@ label broken_AC_crisis_label_enhanced:
 label broken_AC_crisis_break_taboo(the_girl):
     if the_girl.outfit.full_access():
         $ mc.change_locked_clarity(40)
-        "Once she's done stripping [the_girl.possessive_title] is practically naked."
+        "Once she's done stripping [the_girl.possessive_title!l] is practically naked."
         if the_girl.has_taboo(["bare_pussy","bare_tits"]):
             "She makes a vain attempt to keep herself covered with her hands, but soon enough seems to be comfortable being nude in front of you."
             $ the_girl.break_taboo("bare_pussy")
             $ the_girl.break_taboo("bare_tits")
     elif the_girl.outfit.tits_visible():
         $ mc.change_locked_clarity(20)
-        "Once she's done stripping [the_girl.possessive_title] has her nice [the_girl.tits] tits out on display."
+        "Once she's done stripping [the_girl.possessive_title!l] has her nice [the_girl.tits] tits out on display."
         if the_girl.has_taboo("bare_tits"):
             if the_girl.has_large_tits():
                 "She makes a hopeless attempt to cover her large tits with her hands, but comes to the realization it's pointless."
@@ -180,7 +180,7 @@ label broken_AC_crisis_break_taboo(the_girl):
             $ the_girl.break_taboo("bare_tits")
     elif the_girl.outfit.vagina_visible():
         $ mc.change_locked_clarity(30)
-        "Once she's done stripping [the_girl.possessive_title] has her pretty little pussy out on display for everyone."
+        "Once she's done stripping [the_girl.possessive_title!l] has her pretty little pussy out on display for everyone."
         if the_girl.has_taboo("bare_pussy"):
             "She tries to hide herself from you with her hand, but quickly realizes how impractical that would be."
             "Soon enough she doesn't seem to mind."

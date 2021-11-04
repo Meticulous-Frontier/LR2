@@ -53,7 +53,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
     $ the_choice = climax_controller.show_climax_menu()
     if the_choice == "Cum inside of her":
         if stealth_orgasm:  #You sly dog
-            "You know you should probably pull out after pulling the condom off, but you can't. You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
+            "You know you should probably pull out after pulling the condom off, but you can't. You pull back on [the_girl.possessive_title!l]'s hips and drive your cock deep inside of her as you cum."
             the_girl "Oh god, you are cumming so hard, I swear I can almost feel it splashing inside of me!"
             $ the_girl.cum_in_vagina()
             $ doggy.redraw_scene(the_girl)
@@ -85,10 +85,10 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 else:
                     the_girl "What the FUCK? You took the condom off? And then came inside me!?! I could get pregnant asshole!"
                 $ the_girl.change_stats(happiness = -5, obedience = 3, love = -5) #She loses trust
-                "You planted your seed inside of [the_girl.possessive_title], but it is clear she isn't happy about it."
+                "You planted your seed inside of [the_girl.possessive_title!l], but it is clear she isn't happy about it."
             "You slowly pull out of [the_girl.title]. Your cum is dripping down her leg as you sit back."
         elif mc.condom:
-            "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps as you dump your load into her, barely contained by your condom."
+            "You pull back on [the_girl.possessive_title!l]'s hips and drive your cock deep inside of her as you cum. She gasps as you dump your load into her, barely contained by your condom."
             $ the_girl.call_dialogue("cum_condom")
             $ climax_controller.do_clarity_release(the_girl)
             "You wait until your orgasm has passed completely, then pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
@@ -103,7 +103,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 the_girl "Look at all that cum. Well done."
             "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
         else:
-            "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
+            "You pull back on [the_girl.possessive_title!l]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
             $ the_girl.call_dialogue("cum_vagina")
             $ the_girl.cum_in_vagina()
             $ climax_controller.do_clarity_release(the_girl)
@@ -188,7 +188,7 @@ label transition_doggy_to_anal_doggy_taboo_break_label(the_girl, the_location, t
         else:
             "You pull back slightly, spit onto your cock and try again. This time making better progress, sliding the tip of your dick into [the_girl.title]'s ass."
         the_girl "Oh god... Fuck!"
-    "Inch by inch you slide your entire length into [the_girl.possessive_title]. She grunts and gasps the whole way down."
+    "Inch by inch you slide your entire length into [the_girl.possessive_title!l]. She grunts and gasps the whole way down."
     "You stop when you've bottomed out, to give your cock time to properly stretch her out."
     the_girl "I think... I'm ready for you to move some more..."
     "You pull back a little bit and give her a few testing strokes. When she can handle those you speed up, until you're thrusting your entire length."

@@ -14,7 +14,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
         mc.name "Fuck, here I come!"
         $ deepthroat.current_modifier = None
         $ the_girl.draw_person("kneeling1")
-        "You take a step back, pulling your cock out of [the_girl.possessive_title]'s throat with a satisfyingly wet pop, and take aim at her face."
+        "You take a step back, pulling your cock out of [the_girl.possessive_title!l]'s throat with a satisfyingly wet pop, and take aim at her face."
         $ climax_controller.do_clarity_release(the_girl)
         if the_girl.sluttiness > 80:
             "[the_girl.title] sticks out her tongue and rubs her [the_girl.pubes_description] pussy while waiting for your hot load."

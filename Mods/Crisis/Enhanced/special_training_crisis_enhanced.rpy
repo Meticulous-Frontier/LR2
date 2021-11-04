@@ -75,7 +75,7 @@ label return_from_seminar_action_label(the_person):
                 "[the_person.possessive_title] isn't impressed by your reaction to her display. Wanting to sweeten the deal for you, she continues on."
                 the_person "You deserve a bit more I guess... How about I take off my [the_clothing.display_name] for you?"
                 $ the_person.draw_animated_removal (the_clothing)
-                the_person "Do you like the view of [the_person.possessive_title] undressing?"
+                the_person "Do you like the view of [the_person.possessive_title!l] undressing?"
             $ mc.change_locked_clarity(10)
             if the_person.age > 30:
                 "Your dick twitches at the sight of [the_person.title]'s mature body."
@@ -97,7 +97,7 @@ label return_from_seminar_action_label(the_person):
         "She stops to think for a second, putting on a frown before turning it into a bright, mischievous smile."
         $ the_person.draw_person(emotion="happy")
         the_person "Being naked in front of you made so... horny! You deserve some real gratitude! How about a quick BJ?"
-        "\"There's always time for a quick blowjob\" you think to yourself before swiftly unzipping your pants as [the_person.possessive_title] gets onto her knees."
+        "\"There's always time for a quick blowjob\" you think to yourself before swiftly unzipping your pants as [the_person.possessive_title!l] gets onto her knees."
         $ the_person.draw_person(position="kneeling1")
         the_person "[the_person.mc_title], you have such a nice cock, it'll be perfect inside of my mouth..."
         $ the_person.draw_person(position="blowjob", special_modifier="blowjob")
@@ -124,7 +124,7 @@ label return_from_seminar_action_label(the_person):
             the_person "Yes, [the_person.mc_title]! I want to be covered by your sperm! Unleash it onto me, please!"
             the_person.mc_title "OK, [the_person.title], keep still. Here it goes!"
             $ the_person.cum_on_face()
-            "You start to unleash your load onto [the_person.possessive_title]'s face."
+            "You start to unleash your load onto [the_person.possessive_title!l]'s face."
             $ the_person.draw_person(position="blowjob", special_modifier="blowjob")
             "She opens her mouth and attempts to catch some of the load that is being sprayed onto her face, cherishing each drop that falls inside."
             $ the_person.cum_in_mouth()

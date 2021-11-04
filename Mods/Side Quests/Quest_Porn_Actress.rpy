@@ -142,7 +142,7 @@ label quest_porn_actress_intro_label():
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person_one)
     $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped)
-    "You see [the_person_one.possessive_title] and [the_person_two.title] looking at a phone. The sound of erotic moaning is coming from the phone."
+    "You see [the_person_one.possessive_title!l] and [the_person_two.title] looking at a phone. The sound of erotic moaning is coming from the phone."
     "[the_person_one.title] notices you walk in."
     the_person_one "Oh hey [the_person_one.mc_title]. Have you seen this?"
     the_person_two "Yeah, it looks just like [the_person.name]!"

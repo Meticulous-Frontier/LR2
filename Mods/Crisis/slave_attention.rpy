@@ -57,7 +57,7 @@ label slave_attention_crisis_action_label:
 
             menu slave_attention_comfort_menu:
                 "Whip her" if mc.energy >= 20:
-                    "You take a leather flogger from the wall and start to give [the_person.possessive_title] a good whipping."
+                    "You take a leather flogger from the wall and start to give [the_person.possessive_title!l] a good whipping."
 
                     python:
                         for count in __builtin__.range(1, 11):

@@ -42,5 +42,5 @@ label LTE_crisis_TEMPLATE_label(the_person):
         the_person "Well, sometimes I get lonely, especially when you are out working..."
         mc.name "I think it would work fine for that. Isn't that really more up to you?"
         the_person "I suppose you're right. I'm going to keep looking."
-        "You help [the_person.possessive_title] shop for a new dildo for a bit before saying goodbye."
+        "You help [the_person.possessive_title!l] shop for a new dildo for a bit before saying goodbye."
     return

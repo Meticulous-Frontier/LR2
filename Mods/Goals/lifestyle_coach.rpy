@@ -101,13 +101,13 @@ label lifestyle_coach_review_goals_label(the_person):
 label lifestyle_coach_choose_sexy_goal_label(the_person):
     $ the_person.draw_person()
     $ perk_choice = None
-    "You step up to [the_person.possessive_title]. She smiles as you approach her."
+    "You step up to [the_person.possessive_title!l]. She smiles as you approach her."
     the_person "Hey [the_person.mc_title] here to review your goals?"
     "You do want to... but you find yourself faltering for a second."
     "Setting goals, both long term and short term is important... but what really are your goals, anyway?"
     mc.name "I think so, but to be honest, I'm having trouble deciding what I even want."
     the_person "I see. Well, an exercise that might help. Let's pretend like money wasn't an obstacle. If you could do anything you wanted to right now, what would you do?"
-    "You look at [the_person.possessive_title]. You think about the question for a moment... but soon your eyes drift down from her face..."
+    "You look at [the_person.possessive_title!l]. You think about the question for a moment... but soon your eyes drift down from her face..."
     "Her chest... her belly... her hips..."
     $ mc.change_locked_clarity(10)
     "You close your eyes."
@@ -118,7 +118,7 @@ label lifestyle_coach_choose_sexy_goal_label(the_person):
     $ mc.change_locked_clarity(30)
     $ mc.change_arousal(30)
     "Maybe it is time to just embrace it. There's nothing wrong with that, right? Any guy in your position would do the same thing."
-    "You open your eyes and look at [the_person.possessive_title]. You eyes are immediately drawn to her..."
+    "You open your eyes and look at [the_person.possessive_title!l]. You eyes are immediately drawn to her..."
     menu:
         "Tits":
             $ perk_choice = "Tits"

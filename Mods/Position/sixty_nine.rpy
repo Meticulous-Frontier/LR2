@@ -31,7 +31,7 @@ init python:
         #SB_sixty_nine.link_positions(deepthroat,"transition_SB_sixty_nine_deepthroat")
 
 label intro_SB_sixty_nine(the_girl, the_location, the_object):
-    "You give her ass a good hard smack and then look at [the_girl.possessive_title]."
+    "You give her ass a good hard smack and then look at [the_girl.possessive_title!l]."
     mc.name "Hey, wanna sixty nine?"
     if the_girl.has_cum_fetish():
         "[the_girl.possessive_title] smiles wide and quickly responds."
@@ -64,7 +64,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
         call get_hard_SB_sixty_nine(the_girl, the_location, the_object) from _get_mc_hard_from_sixty_nine_00
         return
     if the_girl.sex_skills["Oral"] < 2: #Inexperienced.
-        "You rest your hands on [the_girl.possessive_title]'s ass as she bobs her head up and down. She struggles to take you very deep, so she focuses on licking and sucking your tip."
+        "You rest your hands on [the_girl.possessive_title!l]'s ass as she bobs her head up and down. She struggles to take you very deep, so she focuses on licking and sucking your tip."
         "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise."
         menu:
             "Focus on her" if mc.sex_skills["Oral"] > 2:
@@ -103,7 +103,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                         $ the_girl.discover_opinion("cum facials")
                         $ the_girl.discover_opinion("being covered in cum")
                         $ the_girl.change_arousal(5)
-                        "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her pussy."
+                        "You give [the_girl.possessive_title!l]'s ass a hard smack and resume eating her pussy."
                         "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
                     elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 40:
                         "After a moment she takes her lips off your dick and continues stroking you."
@@ -114,7 +114,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(5)
                         "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
                     else:
-                        "You lap at [the_girl.possessive_title]'s pussy leisurely while she services your cock, stroking your shaft and sucking gently on your tip."
+                        "You lap at [the_girl.possessive_title!l]'s pussy leisurely while she services your cock, stroking your shaft and sucking gently on your tip."
 
 
 
@@ -182,7 +182,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                             $ the_girl.change_arousal(5)
                             $ the_girl.cum_on_face()
                             $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
-                            "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her [the_girl.pubes_description] pussy."
+                            "You give [the_girl.possessive_title!l]'s ass a hard smack and resume eating her [the_girl.pubes_description] pussy."
                             "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
                         else:
                             "After a moment she takes her lips off your dick and continues stroking you."
@@ -202,7 +202,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                         $ the_girl.discover_opinion("cum facials")
                         $ the_girl.discover_opinion("being covered in cum")
                         $ the_girl.change_arousal(5)
-                        "You give [the_girl.possessive_title]'s ass a hard smack and resume eating her pussy."
+                        "You give [the_girl.possessive_title!l]'s ass a hard smack and resume eating her pussy."
                         "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
                     elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 40:
                         "After a moment she takes her lips off your dick and continues stroking you."
@@ -213,20 +213,20 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(5)
                         "[the_girl.possessive_title]'s cunt quivers as she slides your cock back into her mouth, sucking at it with renewed vigor."
                     else:
-                        "You lap at [the_girl.possessive_title]'s pussy leisurely while she services your cock, stroking your shaft and sucking gently on your tip."
+                        "You lap at [the_girl.possessive_title!l]'s pussy leisurely while she services your cock, stroking your shaft and sucking gently on your tip."
 
 
     else: #Amazing at oral
         "[the_girl.possessive_title] slides your cock all the way down into her throat. She uses one hand to cup and lightly stroke your balls while she hungrily throat you."
         "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise"
-        "You can feel [the_girl.possessive_title]'s throat contracting around you as she uses a swallowing motion to pleasure you. The sensation is intensely pleasurable."
+        "You can feel [the_girl.possessive_title!l]'s throat contracting around you as she uses a swallowing motion to pleasure you. The sensation is intensely pleasurable."
         "It feels so good it is making it hard for you to concentrate on pleasuring her."
         menu:
             "Focus on her" if mc.sex_skills["Oral"] > 5:
-                "Not to be outdone, you double down on your efforts to please [the_girl.possessive_title] orally."
+                "Not to be outdone, you double down on your efforts to please [the_girl.possessive_title!l] orally."
                 "You aggressively lick her clit, while simultaneously kneading her ass cheeks with your hands. You pull her clit into your mouth and suck on it lightly."
                 the_girl "mmmmmmmfff"
-                "The vibrations in [the_girl.possessive_title]'s throat feel amazing around your cock. You lick up some of her fluids that are beginning to drip down then lick up an down the length of slit a few times."
+                "The vibrations in [the_girl.possessive_title!l]'s throat feel amazing around your cock. You lick up some of her fluids that are beginning to drip down then lick up an down the length of slit a few times."
                 if the_girl.get_opinion_score("drinking cum") > 0 and (the_girl.get_opinion_score("drinking cum") >= the_girl.get_opinion_score("cum facials")):
                     "[the_girl.possessive_title] pulls off you for a moment."
                     the_girl "Oh god, [the_girl.mc_title], that feels so good. I can't wait to feel you blow your load straight down my throat!"
@@ -234,18 +234,18 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                 elif the_girl.get_opinion_score("cum facials") > 0:
                     "[the_girl.possessive_title] pulls off you for a moment."
                     the_girl "Oh god, [the_girl.mc_title], that feels so good. Make sure you warn me before you cum though... I want you to spray your cum all over my face!"
-                "You can feel [the_girl.possessive_title]'s tongue slithering back and forth across the base of your dick, and her nose brushes up against your scrotum."
-                "You and [the_girl.possessive_title] continue to please each other orally. You often you hear a muffled moan, accompanied by a pleasant vibration in your groin."
+                "You can feel [the_girl.possessive_title!l]'s tongue slithering back and forth across the base of your dick, and her nose brushes up against your scrotum."
+                "You and [the_girl.possessive_title!l] continue to please each other orally. You often you hear a muffled moan, accompanied by a pleasant vibration in your groin."
 
             "Focus on her\n{color=#ff0000}{size=18}Requires More Oral Skill{/size}{/color} (disabled)" if mc.sex_skills["Oral"] < 6:
                 pass
             "Focus on you":
                 "It feels so good, you don't even realize it but you stop licking her and close your eyes."
                 mc.name "[the_girl.title]! Holy hell girl that feels so good."
-                "You can feel [the_girl.possessive_title]'s tongue slithering back and forth across the base of your dick."
+                "You can feel [the_girl.possessive_title!l]'s tongue slithering back and forth across the base of your dick."
                 $ mc.change_arousal(5)
                 if the_girl.is_dominant():
-                    "Suddenly, [the_girl.possessive_title] pulls you out of her throat."
+                    "Suddenly, [the_girl.possessive_title!l] pulls you out of her throat."
                     the_girl "Hey now, don't forget about me!"
                     "You open your eyes just in time to see her back her pussy down onto your face as she begins to grind herself on you."
                     "You are caught unready. When you have a chance, you gasp a deep breath of air and begin to start licking her."
@@ -254,10 +254,10 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                     "You eat her out for several seconds, as best you can, while she grinds back against you. She strokes your shaft with her hand in time as she grinds on you."
                     "Eventually she eases off your face, giving you a chance to catch your breath. She slowly lick you around the tip of your shaft a few times then resumes bobbing her head up and down on you."
                 else:
-                    "Lost in the pleasure, [the_girl.possessive_title] suddenly pulls you out of her throat."
+                    "Lost in the pleasure, [the_girl.possessive_title!l] suddenly pulls you out of her throat."
                     the_girl "Hey now, don't forget about me!"
-                    "Your eyes snap open. You resume licking [the_girl.possessive_title]'s pussy with renewed vigor, hoping she will go back to what she was doing a moment ago."
-                    "After a few moments, [the_girl.possessive_title] lowers her head back to your cock. She circles the tip with her tongue a few times, and then you feel the wonderful sensation as she slides you back into her mouth."
+                    "Your eyes snap open. You resume licking [the_girl.possessive_title!l]'s pussy with renewed vigor, hoping she will go back to what she was doing a moment ago."
+                    "After a few moments, [the_girl.possessive_title!l] lowers her head back to your cock. She circles the tip with her tongue a few times, and then you feel the wonderful sensation as she slides you back into her mouth."
 
 
     return
@@ -288,7 +288,7 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
 
             elif the_girl.get_opinion_score("anal sex") < 0:
                 the_girl "Hey! Wrong hole! Don't touch me back there!"
-                "It seems that [the_girl.possessive_title] doesn't like having her ass played with."
+                "It seems that [the_girl.possessive_title!l] doesn't like having her ass played with."
                 $ the_girl.discover_opinion("anal sex")
                 $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex"))
             elif the_girl.sluttiness > 60:
@@ -304,7 +304,7 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] stays pretty tense, so for now you just leave your finger where it is."
                 "You decide to resume licking her [the_girl.pubes_description] pussy, your finger halfway inside her rectum."
                 "[the_girl.possessive_title] delicately licks the tip of your dick for a bit, before parting her lips and resuming her suckling motions."
-            "You decide that is enough ass play for now, so you resume eating [the_girl.possessive_title] out."
+            "You decide that is enough ass play for now, so you resume eating [the_girl.possessive_title!l] out."
 
 
         "Finger Her":
@@ -331,7 +331,7 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
             else:
                 "[the_girl.possessive_title] renews her vigor as she blows you. Her nose nestles into your balls as her easily swallows you into her greedy throat."
                 "Her tongue feels amazing as she strokes you, her mouth nearly overloads your senses."
-            "You continue to lick and tease [the_girl.possessive_title] as you slowly pull your finger out."
+            "You continue to lick and tease [the_girl.possessive_title!l] as you slowly pull your finger out."
 
 
     return
@@ -339,7 +339,7 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
 label outro_SB_sixty_nine(the_girl, the_location, the_object):
     #$ SB_sixty_nine.current_modifier = "SB_sixty_nine"
     $ SB_sixty_nine.redraw_scene(the_girl)
-    "Little by little the soft, warm mouth of [the_girl.possessive_title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
+    "Little by little the soft, warm mouth of [the_girl.possessive_title!l] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
     mc.name "Ah, I'm going to cum!"
     if the_girl.get_opinion_score("cum facials") > 0: #She loves facials
         if the_girl.get_opinion_score("cum facials") == the_girl.get_opinion_score("drinking cum"):   #She likes them equally, so do one randomly
@@ -350,7 +350,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                     $ the_girl.cum_in_mouth()
                     "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock while getting her addiction satisfied."
                 else:
-                    "You feel [the_girl.possessive_title] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
+                    "You feel [the_girl.possessive_title!l] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
                     "She moans as you fill up her mouth with your sperm."
                     $ the_girl.cum_in_mouth()
                     #$ SB_sixty_nine.redraw_scene(the_girl)
@@ -365,7 +365,7 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addiction has been craving."
                 #$ SB_sixty_nine.redraw_scene(the_girl)
-                "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
+                "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title!l]'s face. She sighs when you're completely finished."
                 $ the_girl.call_dialogue("cum_face")
         else:
             "[the_girl.possessive_title] pulls you out of her mouth, and begins stroking you eagerly."
@@ -375,9 +375,9 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
             if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
             #$ SB_sixty_nine.redraw_scene(the_girl)
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
+            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title!l]'s face. She sighs when you're completely finished."
             $ the_girl.call_dialogue("cum_face")
-        "You give [the_girl.possessive_title]'s slit a few more appreciative licks, and then you both start to get up."
+        "You give [the_girl.possessive_title!l]'s slit a few more appreciative licks, and then you both start to get up."
     elif the_girl.get_opinion_score("drinking cum") > 0:
         if the_girl.has_cum_fetish():
             "[the_girl.possessive_title] pulls off until just the  tip of your cock is in her mouth and she begins to stroke you off eagerly."
@@ -385,23 +385,23 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
             $ the_girl.cum_in_mouth()
             "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
         elif the_girl.sex_skills["Oral"] > 5:
-            "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
+            "You feel [the_girl.possessive_title!l] take you all the way in her mouth as you start to orgasm."
             "You grunt and twitch as you start to empty your balls right into her stomach."
             "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
             $ the_girl.cum_in_mouth()
             #$ SB_sixty_nine.redraw_scene(the_girl)
             "When you're completely finished she pulls off slowly, kissing the tip before leaning back."
         else:
-            "You feel [the_girl.possessive_title] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
+            "You feel [the_girl.possessive_title!l] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
             "She moans as you fill up her mouth with your sperm."
             $ the_girl.cum_in_mouth()
             #$ SB_sixty_nine.redraw_scene(the_girl)
             "When you're completely finished, you can feel her swallow the contents of her mouth, before slowly pulling off."
         $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
         $ the_girl.call_dialogue("cum_mouth")
-        "You give [the_girl.possessive_title]'s slit a few more appreciative licks."
+        "You give [the_girl.possessive_title!l]'s slit a few more appreciative licks."
     elif the_girl.sex_skills["Oral"] > 5: #She is amazing at oral
-        "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
+        "You feel [the_girl.possessive_title!l] take you all the way in her mouth as you start to orgasm."
         "You grunt and twitch as you start to empty your balls right into her stomach."
         "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
         $ the_girl.cum_in_mouth()
@@ -409,26 +409,26 @@ label outro_SB_sixty_nine(the_girl, the_location, the_object):
         #$ SB_sixty_nine.redraw_scene(the_girl)
         "When you're completely finished she pulls off slowly, kissing the tip before leaning back."
         $ the_girl.call_dialogue("cum_mouth")
-        "You give [the_girl.possessive_title]'s slit a few more appreciative licks, and then you both start to get up."
+        "You give [the_girl.possessive_title!l]'s slit a few more appreciative licks, and then you both start to get up."
     elif the_girl.sluttiness < 40:
         "[the_girl.possessive_title] pulls you out of her mouth, and begins stroking you."
         $ the_girl.cum_on_face()
         $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
         #$ SB_sixty_nine.redraw_scene(the_girl)
-        "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face."
+        "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title!l]'s face."
         $ the_girl.call_dialogue("cum_face")
     else:
-        "You feel [the_girl.possessive_title] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
+        "You feel [the_girl.possessive_title!l] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
         $ the_girl.cum_in_mouth()
         $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
         #1$ SB_sixty_nine.redraw_scene(the_girl)
         "When you're completely finished, you can feel her swallow the contents of her mouth, before slowly pulling off."
-        "You give [the_girl.possessive_title]'s slit a few more appreciative licks, and then you both start to get up."
+        "You give [the_girl.possessive_title!l]'s slit a few more appreciative licks, and then you both start to get up."
 
     return
 
 label transition_SB_sixty_nine_deepthroat(the_girl, the_location, the_object):  #Delete this?
-    mc.name "Fuck that feels great [the_girl.possessive_title]. Think you can take it any deeper?"
+    mc.name "Fuck that feels great [the_girl.possessive_title!l]. Think you can take it any deeper?"
     #$ SB_sixty_nine.current_modifier = None
     $ SB_sixty_nine.redraw_scene(the_girl)
     "[the_girl.possessive_title] slides off your dick with a wet pop and takes a few breaths."
@@ -472,7 +472,7 @@ label strip_ask_SB_sixty_nine(the_girl, the_clothing, the_location, the_object):
             return False
 
 label orgasm_SB_sixty_nine(the_girl, the_location, the_object):
-    "Licking and probing all around [the_girl.possessive_title]'s clit, you can feel her start to quiver."
+    "Licking and probing all around [the_girl.possessive_title!l]'s clit, you can feel her start to quiver."
     "[the_girl.possessive_title] pauses suddenly. You hear her moaning, the sound muffled by your cock in her mouth."
     if the_girl.sex_skills["Oral"] < 4:
         "[the_girl.possessive_title] starts to pull back off until just the tip of your erection is left in her mouth."
@@ -480,7 +480,7 @@ label orgasm_SB_sixty_nine(the_girl, the_location, the_object):
         "[the_girl.possessive_title] pushes her face down on to your cock, burying it in her throat."
     the_girl "mmmmm....MMMMM....MMMMMMMFFFF"
     "She moans loudly as orgasmic waves wash over her. Once you think you hear her call your name, but the sound is muffled and mostly incomprehensible with your cock in her mouth."
-    "After several seconds [the_girl.possessive_title] sighs and then begins to bob her head up and down on your again."
+    "After several seconds [the_girl.possessive_title!l] sighs and then begins to bob her head up and down on your again."
     return
 
 label taboo_break_SB_sixty_nine(the_girl, the_location, the_object):
@@ -499,12 +499,12 @@ label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = Non
     $ the_goal = the_girl.get_sex_goal()
 
     if the_goal == "waste cum" or the_goal == "hate fuck":
-        "Little by little the soft, warm mouth of [the_girl.possessive_title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
+        "Little by little the soft, warm mouth of [the_girl.possessive_title!l] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
         mc.name "Ah, I'm going to cum!"
         "[the_girl.possessive_title]'s mouth suddenly pops of your cock and she strokes you with her hand."
         the_girl "I'm not letting your spunk touch me!"
         "You groan as you feel yourself erupt. You feel a couple spurts of cum on your hip as [the_girl.title] points you to the side."
-        "When you finish you lay back, looking up at [the_girl.possessive_title]'s ass."
+        "When you finish you lay back, looking up at [the_girl.possessive_title!l]'s ass."
         $ the_girl.change_happiness(2)
         $ the_girl.change_obedience(-3)
     elif the_goal == "facial" or the_goal == "body shot":
@@ -516,7 +516,7 @@ label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = Non
         if the_girl.has_cum_fetish():
             "[the_girl.possessive_title] begins moaning uncontrollably as she receives the cum her addicted brain has been begging her for."
         $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
-        "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
+        "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title!l]'s face. She sighs when you're completely finished."
         $ the_girl.call_dialogue("cum_face")
     elif the_goal == "get mc off" or the_goal == "anal creampie" or the_goal == "vaginal creampie" or the_goal == "get off" or the_goal == None:
         $ SB_sixty_nine.call_default_outro(the_girl, the_location, the_object)
@@ -528,7 +528,7 @@ label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = Non
             "You erupt in orgasm into her greedy mouth. Her expert mouth milks you with every spurt."
             "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
         elif the_girl.sex_skills["Oral"] > 5:
-            "You feel [the_girl.possessive_title] take you all the way in her mouth as you start to orgasm."
+            "You feel [the_girl.possessive_title!l] take you all the way in her mouth as you start to orgasm."
             "You grunt and twitch as you start to empty your balls right into her stomach."
             "She tightens and relaxes her throat, swallowing your erection over and over as it spurts every last drop of cum straight down her throat."
             $ the_girl.cum_in_mouth()
@@ -536,7 +536,7 @@ label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = Non
             #$ SB_sixty_nine.redraw_scene(the_girl)
             "When you're completely finished she pulls off slowly, kissing the tip before leaning back."
         else:
-            "You feel [the_girl.possessive_title] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
+            "You feel [the_girl.possessive_title!l] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
             "She moans as you fill up her mouth with your sperm."
             $ the_girl.cum_in_mouth()
             $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
@@ -544,6 +544,6 @@ label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = Non
             "When you're completely finished, you can feel her swallow the contents of her mouth, before slowly pulling off."
 
         $ the_girl.call_dialogue("cum_mouth")
-        "You give [the_girl.possessive_title]'s slit a few appreciative licks."
+        "You give [the_girl.possessive_title!l]'s slit a few appreciative licks."
     else:
         $ SB_sixty_nine.call_default_outro(the_girl, the_location, the_object)

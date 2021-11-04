@@ -27,7 +27,7 @@ init python:
 
 label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     mc.name "[the_girl.title], I want you to get on your hands and knees for me. I want to fuck your ass and your pussy."
-    "You secure the strap on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title]."
+    "You secure the strap on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title!l]."
 
     if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
@@ -45,7 +45,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     if the_girl.arousal > 60:
         "Her [the_girl.pubes_description] pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
     else:
-        "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
+        "You line yourself up with her ass while [the_girl.possessive_title!l] reaches down and lines the dildo up with her pussy."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     if the_girl.get_opinion_score("anal sex") > 0 :
         the_girl "Oh my god! I'm so full... It's so good [the_girl.mc_title]!"
@@ -55,7 +55,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     return
 
 label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
-    "You give [the_girl.possessive_title]'s ass a good hard spank. She lets out a loud yelp"
+    "You give [the_girl.possessive_title!l]'s ass a good hard spank. She lets out a loud yelp"
     $ the_girl.call_dialogue("sex_responses_anal")
     if the_girl.sex_skills["Anal"] < 2: #Inexperienced
         "[the_girl.possessive_title] reflexively starts to pull away after you spank her. You grab her hips to keep her from pulling off completely."
@@ -66,7 +66,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
         the_girl "Mmmm, that feels good [the_girl.mc_title]. Can I touch myself while you do that?"
         menu:
             "Masturbate for me":
-                 "Encouraged by your response, [the_girl.possessive_title] reaches down with one hand and begins to rub her clit."
+                 "Encouraged by your response, [the_girl.possessive_title!l] reaches down with one hand and begins to rub her clit."
                  "You take it slow, and you revel in the delicious pleasure of each penetration as you thrust. With each thrust the vibrator brushes against her fingers on her clit."
                  "[the_girl.possessive_title] struggles to hold herself up with one hand while the other works circles around her clit"
                  if the_girl.get_opinion_score("masturbating") > 0:
@@ -86,16 +86,16 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
                  "[the_girl.possessive_title] slowly eases forward until just the tip remains inside, then slowly backs her ass back onto you. She is trying to obey but you can tell she is struggling to take you"
                  "The next time she starts to ease forward, you put your hand on her hips for a second to stop her. You spit into your hand then rub it along your shaft a bit, hoping it will make the penetration easier"
                  the_girl "Mmm, that's a bit better..."
-                 "With the extra lube, [the_girl.possessive_title] resumes fucking you. She still has a fairy slow pace, but is a bit quicker than before."
+                 "With the extra lube, [the_girl.possessive_title!l] resumes fucking you. She still has a fairy slow pace, but is a bit quicker than before."
 
     else:
-        "In response to your spanking, [the_girl.possessive_title] thrusts herself back against you. Your penis is completely consumed by her bowel and she moans lewdly."
+        "In response to your spanking, [the_girl.possessive_title!l] thrusts herself back against you. Your penis is completely consumed by her bowel and she moans lewdly."
         "When she starts to pull off you give her other ass check a hard swat. She buries her face in the [the_object.name] and moans as she pushes herself back onto you again."
         the_girl "Oh fuck [the_girl.mc_title], I needed this so bad. Make me cum all over that dildo!"
         "[the_girl.possessive_title]'s ass feels so tight you are tempted to let her continue setting the pace, but you worry she might get the wrong idea if you let this little slut take charge."
         menu:
             "Fuck me with your ass":
-                 "You decide to see what [the_girl.possessive_title] can do if you let her take control of the pace. Encouraged by your words, she eagerly works your cock with her ass" ###FINISH
+                 "You decide to see what [the_girl.possessive_title!l] can do if you let her take control of the pace. Encouraged by your words, she eagerly works your cock with her ass" ###FINISH
                  the_girl "Mmm, does it feel good when I work it like this?"
                  "[the_girl.possessive_title] begins to twerk up and down your shaft with quick, shallow movements."
                  if mc.arousal > 70:
@@ -126,7 +126,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
             "I'm in charge here":
                  "Sensing that your slut is getting out of hand, you quickly take charge. You grab her by the hair and pull her head back until her hands are no longer on the ground, taking away all her leverage."
                  $ the_girl.call_dialogue("surprised_exclaim")
-                 "You lean forward and whisper into [the_girl.possessive_title]'s ear."
+                 "You lean forward and whisper into [the_girl.possessive_title!l]'s ear."
                  mc.name "I know you dream about my dick in your ass constantly and it feels good to finally have that dream come true, but don't forget who is in charge around here."
                  if the_girl.has_role(anal_fetish_role):
                      "[the_girl.possessive_title] whimpers in total submission to you."
@@ -136,7 +136,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
                      $ the_girl.discover_opinion("being submissive")
                      if the_girl.get_opinion_score("being submissive") > 0:
                          $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive" * 5))
-                         "For once, [the_girl.possessive_title] is speechless. She can only whimper softly in total submission to you."
+                         "For once, [the_girl.possessive_title!l] is speechless. She can only whimper softly in total submission to you."
                      else:
                          the_girl "I'm sorry [the_girl.mc_title], I couldn't help myself. Please use me however you want, I'll be good I promise!"
                      "You give her a couple slow, heavy thrusts before releasing her hair. She returns her hands to the ground and moans when you resume your slow, methodical fucking."
@@ -151,7 +151,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title] lowers her shoulders against the [the_object.name] and groans as you fuck her from behind."
     the_girl "Ah... I feel so full!"
     "The dildo is clearly making the experience much more intense for her."
-    "You reach forward and place your hands on [the_girl.possessive_title]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly. She arches her back and lets out a series of satisfied yelps."
+    "You reach forward and place your hands on [the_girl.possessive_title!l]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly. She arches her back and lets out a series of satisfied yelps."
     $the_girl.call_dialogue("sex_responses_anal")
     if the_girl.arousal > 130:
         "[the_girl.possessive_title]'s pussy is now constantly convulsing in orgasm. Her juices are running out from around the dildo and down the inside of her legs."
@@ -163,15 +163,15 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
         "[the_girl.possessive_title] seems to be enjoying the double penetration you are giving her. She yelps in response to one particularly eager thrust."
         the_girl "God dammit, you're so fucking big. You feel huge... I'm so full."
     if the_girl.get_opinion_score("masturbating") > 0:
-        "You notice that [the_girl.possessive_title] now has one hand on her pussy, rubbing her clit, and with the other hand she reaches back and pulls her ass cheeks apart."
+        "You notice that [the_girl.possessive_title!l] now has one hand on her pussy, rubbing her clit, and with the other hand she reaches back and pulls her ass cheeks apart."
         $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 3))
     else:
         "[the_girl.possessive_title] reaches back with both hands and spreads her ass cheeks apart."
-        "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title]. "
+        "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title!l]. "
         "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]."
         "[the_girl.possessive_title] whimpers, her body now pinned between your body and [the_object.name]. The vibrating dildo stimulates her pussy mercilessly."
         if the_girl.has_role(anal_fetish_role):
-            "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best she can. Even with no room to move, her love for anal sex drives her to try to milk your cock"
+            "Despite having no leverage, [the_girl.possessive_title!l] wriggles her ass against you as best she can. Even with no room to move, her love for anal sex drives her to try to milk your cock"
             "You enjoy her efforts before you speak clearly to her."
             mc.name "You are such a slut. Is it nice to finally have a real cock, stuffed deep in your tight little asshole?"
             "[the_girl.possessive_title] is writhing in pleasure, having her fetish of anal sex fulfilled. The extra stimulation from the dildo just makes it even better."
@@ -179,18 +179,18 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
             "You grab her hair at the base of her scalp and pull her head back before whispering into her ear."
             mc.name "Don't worry, slut. This won't be the last time I stuff your holes. This one especially."
             "You give her prone body a forceful thrust."
-            "You can see goosebumps all over [the_girl.possessive_title]'s skin. She moans and then begs you to keep fucking her."
+            "You can see goosebumps all over [the_girl.possessive_title!l]'s skin. She moans and then begs you to keep fucking her."
             the_girl "I was made to be your little cock sleeve. Fuck me [the_girl.mc_title]!"
         elif the_girl.get_opinion_score("anal creampies") > 0:
             the_girl "Holy hell that is deep... tell me... tell me you'll push it this deep again when you cum... that would be so hot!"
             $mc.change_arousal(5)
-            "In your mind, you play out the fantasy of cumming so deep in [the_girl.possessive_title]'s ass, even when you pull out not a drop of your seed leaks out."
+            "In your mind, you play out the fantasy of cumming so deep in [the_girl.possessive_title!l]'s ass, even when you pull out not a drop of your seed leaks out."
             "You give the idea serious consideration. You can tell she would love it if you did."
         elif the_girl.get_opinion_score("anal sex") > 0:
-            "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best she can. Even with no room to move, her love for anal sex drives her to milk your cock"
+            "Despite having no leverage, [the_girl.possessive_title!l] wriggles her ass against you as best she can. Even with no room to move, her love for anal sex drives her to milk your cock"
             "You lower your face down behind her head and whisper into her ear."
             mc.name "Mmm, so rear entry is how you like it, slut? Don't worry, this won't be the last time you feel my cock ravage your back door."
-            "You can see goosebumps all over [the_girl.possessive_title]'s skin. You wonder how many times you can make her cum before you blow your load."
+            "You can see goosebumps all over [the_girl.possessive_title!l]'s skin. You wonder how many times you can make her cum before you blow your load."
             $ the_girl.change_slut(2)
         elif the_girl.sluttiness > 100:
             the_girl "Oh fuck, bury it in me [the_girl.mc_title]! I don't think I've ever felt so full..."
@@ -198,7 +198,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
             "[the_girl.possessive_title] lets out a loud groan. You can tell she isn't used to being penetrated like this, but she is taking it as best she can."
             the_girl "God [the_girl.mc_title] that is so intense... please just try to be gentle okay?"
         "You take a few seconds to enjoy being engulfed by her back passage, then give her a few slow, probing thrusts."
-        "After a minute or two slow, deep thrusts you decide to move back to doggy. You push yourself up off of [the_girl.possessive_title]'s back, and she follows, getting on all fours again to resume your fucking."
+        "After a minute or two slow, deep thrusts you decide to move back to doggy. You push yourself up off of [the_girl.possessive_title!l]'s back, and she follows, getting on all fours again to resume your fucking."
 
     return
 
@@ -220,7 +220,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     $ the_choice = climax_controller.show_climax_menu()
     if the_choice == "Cum inside of her":
         if mc.condom:
-            "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
+            "You pull back on [the_girl.possessive_title!l]'s hips and drive your cock deep inside of her as you cum."
             "She gasps with every final thrust as you fill your condom, which is slowly expanding inside her to accommodate your seed."
             if the_girl.get_opinion_score("bareback sex") > 0:
                 the_girl "Oh god, imagine if you weren't wearing that rubber thing... I could feel you filling me up!"
@@ -243,7 +243,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
                 the_girl "Mmmm, look at all that cum. I guess that means my ass was pretty good!"
             return
-        "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
+        "You pull back on [the_girl.possessive_title!l]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
         if the_girl.get_opinion_score("anal creampies") > 0:
             the_girl "Yes! Fill my ass with your cum!"
         $ the_girl.cum_in_ass()
@@ -258,10 +258,10 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
 
     if the_choice == "Cum on her ass":
         if mc.condom:
-            "You pull out of [the_girl.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
+            "You pull out of [the_girl.possessive_title!l] at the last moment, pulling your condom off as your blow your load all over her ass."
             "She holds still for you as you cover her with your sperm."
         else:
-            "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+            "You pull out of [the_girl.possessive_title!l] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         if the_girl.get_opinion_score("being covered in cum") > 0:
              the_girl "Yes! Paint me with your sticky cum!"
         $ the_girl.cum_on_ass()
@@ -272,30 +272,30 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:
             the_girl "Oh! It's so warm..."
-        "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s ass covered in your semen."
+        "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title!l]'s ass covered in your semen."
     if the_choice == "Cum on her face":
         mc.name "Fuck, get ready [the_girl.title], I wanna cum on your face!"
         if mc.condom:
-            "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. You pull your condom off as she turns around on gets on her knees in front of you."
+            "You pull your cock out of [the_girl.possessive_title!l]'s ass with a satisfying pop. You pull your condom off as she turns around on gets on her knees in front of you."
         else:
-            "You pull your cock out of [the_girl.possessive_title]'s ass with a satisfying pop. She immediately turns around on gets on her knees in front of you."
+            "You pull your cock out of [the_girl.possessive_title!l]'s ass with a satisfying pop. She immediately turns around on gets on her knees in front of you."
         $ the_girl.draw_person(position = "kneeling1")
         if the_girl.sluttiness > 80:
             "[the_girl.possessive_title] sticks out her tongue for you and holds still, eager to take your hot load."
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
+            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title!l]'s face and into her open mouth. She makes sure to wait until you're completely finished."
             the_girl "Oh god... it feels so good on my skin..."
         elif the_girl.sluttiness > 60:
             "[the_girl.possessive_title] closes her eyes and waits patiently for you to cum."
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
+            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title!l]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
         else:
             "[the_girl.possessive_title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
+            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title!l]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
         $ climax_controller.do_clarity_release(the_girl)
         "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
         $ the_girl.call_dialogue("cum_face")
@@ -319,7 +319,7 @@ label transition_doggy_anal_SB_doggy_anal_dildo_dp(the_girl, the_location, the_o
     if the_girl.arousal > 60:
         "Her pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
     else:
-        "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
+        "You line yourself up with her ass while [the_girl.possessive_title!l] reaches down and lines the dildo up with her pussy."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     if the_girl.get_opinion_score("anal sex") > 0 :
         the_girl "Oh my god! I'm so full... It's so good [the_girl.mc_title]!"
@@ -345,7 +345,7 @@ label transition_doggy_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object
     if the_girl.arousal > 60:
         "Her pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
     else:
-        "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
+        "You line yourself up with her ass while [the_girl.possessive_title!l] reaches down and lines the dildo up with her pussy."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     if the_girl.get_opinion_score("anal sex") > 0 :
         the_girl "Oh my god! I'm so full... It's so good [the_girl.mc_title]!"
@@ -394,15 +394,15 @@ label strip_ask_SB_doggy_anal_dildo_dp(the_girl, the_clothing, the_location, the
 label orgasm_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     if the_girl.arousal > 150:
         "[the_girl.possessive_title] has stopped being able to put together coherent sentences. She moans and gasps as yet another orgasm wracks her body."
-        "You bury your cock deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly. The vibrations from the dildo intensify her orgasm."
+        "You bury your cock deep in [the_girl.possessive_title!l]'s ass while she cums. Her bowel grips you tightly. The vibrations from the dildo intensify her orgasm."
         "Her body is now in a near constant state of orgasm. The constant quivering and her sexy moans are almost too much to bear."
         $ mc.change_arousal(10)
         the_girl "Oh fuck... fuck... yes!"
         return
     "[the_girl.possessive_title]'s tight back passage start to quiver, and suddenly tenses up."
     $ the_girl.call_dialogue("climax_responses_anal")
-    "You bury your cock deep in [the_girl.possessive_title]'s ass while she cums. Her bowel grips you tightly. The vibrations from the dildo intensify her orgasm."
-    "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
+    "You bury your cock deep in [the_girl.possessive_title!l]'s ass while she cums. Her bowel grips you tightly. The vibrations from the dildo intensify her orgasm."
+    "After a couple of seconds [the_girl.possessive_title!l] sighs and the tension drains from her body."
     if the_girl.get_opinion_score("anal sex") < 0:
         the_girl "I can't believe that just happened... oh god now you're going to keep going, aren't you?"
     else:

@@ -91,7 +91,7 @@ label intro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
     "You give yourself a couple strokes as you watch."
     the_girl_1 "Mmm, come on [the_girl_1.mc_title]."
     the_girl_2 "I'm ready for you!"
-    "You step up behind [the_girl_2.possessive_title]. She arches her back a bit to give you easier access."
+    "You step up behind [the_girl_2.possessive_title!l]. She arches her back a bit to give you easier access."
     $ the_girl_2.break_taboo("vaginal_sex")
     $ the_girl_2.break_taboo("condomless_sex")
     "With one smooth stroke you push yourself inside of her, she moans as you begin to fuck her."
@@ -99,15 +99,15 @@ label intro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
 
 label scene_threesome_standing_embrace_fuck_girl_two_1(the_girl_1, the_girl_2, the_location, the_object):
     "Your hips are slapping up against [the_girl_2.title]'s rear as you fuck her."
-    "Around her you can see [the_girl_1.possessive_title] kissing her neck as she closes her eyes and enjoys the sensations."
+    "Around her you can see [the_girl_1.possessive_title!l] kissing her neck as she closes her eyes and enjoys the sensations."
     the_girl_2 "Mmm, your bodies feel so good."
-    "You thrust deep inside her and keep it there. You start to kiss the opposite side of [the_girl_2.possessive_title]'s neck."
+    "You thrust deep inside her and keep it there. You start to kiss the opposite side of [the_girl_2.possessive_title!l]'s neck."
     "[the_girl_1.title] is pinching and pulling at her nipples. You use one hand to grope her ass cheeks as you grind deep inside of her."
     "[the_girl_2.possessive_title] is arching her back hard as the sensations overwhelm her. She reaches back with one hand and runs it through your hair, and does the same with [the_girl_1.title] with her other hand."
     return
 
 label scene_threesome_standing_embrace_fuck_girl_two_2(the_girl_1, the_girl_2, the_location, the_object):
-    "You grab [the_girl_2.possessive_title]'s leg and lift it up a bit, allowing for deeper penetration."
+    "You grab [the_girl_2.possessive_title!l]'s leg and lift it up a bit, allowing for deeper penetration."
     "The change of angle feels great and you enjoy the steamy wet grip of her cunt."
     "[the_girl_1.possessive_title] and [the_girl_2.title] both have their hands between each others legs. You can feel [the_girl_1.title]'s hand moving circles around the hole you are fucking."
     "Her hand drops a little lower and is now cupping your balls. You push yourself deep into [the_girl_2.title] and grind your hips a bit, enjoying the sensation."
@@ -122,12 +122,12 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
     menu:
         "Cum inside of her":
             if mc.condom:
-                "You pull back on [the_girl_2.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
+                "You pull back on [the_girl_2.possessive_title!l]'s hips and drive your cock as deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
                 "You wait until your orgasm has passed completely, then pull out and stand back. You condom is bulged on the end where it is filled with your seed."
                 "[the_girl_1.possessive_title] reaches down for your cock, removes the condom, and ties the end in a knot for you."
                 the_girl_1 "Damn that was hot... is it my turn next?"
                 return
-            "You pull back on [the_girl_2.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
+            "You pull back on [the_girl_2.possessive_title!l]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
             if the_girl_2.wants_creampie():
                 the_girl_2 "Yes! Fill me up with your cum!"
             if the_girl_2.get_opinion_score("bareback sex") > 0:
@@ -139,10 +139,10 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
 
         "Cum on her ass":
             if mc.condom:
-                "You pull out of [the_girl_2.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
+                "You pull out of [the_girl_2.possessive_title!l] at the last moment, pulling your condom off as your blow your load all over her ass."
                 "She holds still for you as you cover her with your sperm."
             else:
-                "You pull out of [the_girl_2.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She wiggles her ass for you as you cover her with your sperm."
+                "You pull out of [the_girl_2.possessive_title!l] at the last moment, stroking your shaft as you blow your load over her ass. She wiggles her ass for you as you cover her with your sperm."
             if the_girl_2.get_opinion_score("being covered in cum") > 0:
                  the_girl_2 "Yes! Paint me with your sticky cum!"
             $ the_girl_2.cum_on_ass()
@@ -151,7 +151,7 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
             if the_girl_2.get_opinion_score("showing her ass") > 0:
                 "[the_girl_2.possessive_title] bends over and presents her cum covered ass to you."
                 "She gives her hips a few enticing wiggles as your cum starts to drip down the back of her legs."
-            "[the_girl_1.title] spanks [the_girl_2.possessive_title], then gropes her and starts to rub your cum into her cheeks."
+            "[the_girl_1.title] spanks [the_girl_2.possessive_title!l], then gropes her and starts to rub your cum into her cheeks."
             "She brings her fingers up to her mouth and begins to lick them off."
             the_girl_1 "Damn that was hot... is it my turn next?"
     return
@@ -168,26 +168,26 @@ label strip_ask_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2,
 
 label orgasm_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
-        "Both girls are moaning aggressively into each other's mouths as they make out. [the_girl_2.title] has her fingers vigorously working [the_girl_1.possessive_title]'s slit."
+        "Both girls are moaning aggressively into each other's mouths as they make out. [the_girl_2.title] has her fingers vigorously working [the_girl_1.possessive_title!l]'s slit."
         $ the_girl_2.call_dialogue("climax_responses_vaginal")
         $ the_girl_2.run_orgasm()
-        "You can feel [the_girl_2.possessive_title]'s legs buckle for a second as she starts to cum. You grab her hips and hold them firmly in place while you fuck her."
+        "You can feel [the_girl_2.possessive_title!l]'s legs buckle for a second as she starts to cum. You grab her hips and hold them firmly in place while you fuck her."
         $ the_girl_1.run_orgasm()
         "[the_girl_2.title]'s cunt squeezes your cock as she cums, while [the_girl_1.title] moans and closes her eyes as she cums at the same time."
         "As they start to wind down, you continue fucking [the_girl_2.title]'s now considerably slicker pussy."
         return
 
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
-        "[the_girl_1.title] is moaning loudly as [the_girl_2.possessive_title]'s fingers work her cunt and she kisses and licks at her breasts."
+        "[the_girl_1.title] is moaning loudly as [the_girl_2.possessive_title!l]'s fingers work her cunt and she kisses and licks at her breasts."
         the_girl_1 "Oh fuck! Yes!!!"
         $ the_girl_1.run_orgasm()
         "She orgasms, her moans reaching a fevered pitch.."
-        "As [the_girl_1.title] comes down from her orgasm you continue your relentless fucking of [the_girl_2.possessive_title]."
+        "As [the_girl_1.title] comes down from her orgasm you continue your relentless fucking of [the_girl_2.possessive_title!l]."
         return
 
     elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
-        "[the_girl_2.title] moans loud as you and [the_girl_1.possessive_title] pleasure her."
-        "[the_girl_1.title] is holding [the_girl_2.possessive_title]'s leg up at an angle while she sucks eagerly on her nipples."
+        "[the_girl_2.title] moans loud as you and [the_girl_1.possessive_title!l] pleasure her."
+        "[the_girl_1.title] is holding [the_girl_2.possessive_title!l]'s leg up at an angle while she sucks eagerly on her nipples."
         $ the_girl_2.call_dialogue("climax_responses_vaginal")
         $ the_girl_2.run_orgasm()
         "The stimulation is overwhelming and she cums. Her legs start to buckle but you and [the_girl_1.title] hold her up as she orgasms."
@@ -196,7 +196,7 @@ label orgasm_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, th
 
 
 label swap_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object, the_round):
-    "As the girls make out with each other, you step up behind [the_girl_2.possessive_title]. She arches her back a bit to give you easier access."
+    "As the girls make out with each other, you step up behind [the_girl_2.possessive_title!l]. She arches her back a bit to give you easier access."
     $ the_girl_2.break_taboo("vaginal_sex")
     $ the_girl_2.break_taboo("condomless_sex")
     "With one smooth stroke you push yourself inside of her, she moans as you begin to fuck her."

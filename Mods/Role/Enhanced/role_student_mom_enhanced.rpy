@@ -17,9 +17,9 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
 
     the_student "You just have a seat, I'll get everything ready."
     $ scene_manager.update_actor(the_student, position = "sitting")
-    "You sit down and wait while [the_student.possessive_title] sets out place mats and cutlery. When she's done she sits down in the seat next to you."
+    "You sit down and wait while [the_student.possessive_title!l] sets out place mats and cutlery. When she's done she sits down in the seat next to you."
     $ scene_manager.add_actor(the_mom, display_transform = character_left_flipped)
-    "After waiting for a few minutes [the_mom.possessive_title] steps out from the kitchen, carrying a tray of roasted chicken and a bottle of wine under her arm."
+    "After waiting for a few minutes [the_mom.possessive_title!l] steps out from the kitchen, carrying a tray of roasted chicken and a bottle of wine under her arm."
     "She places the tray down, places the bottle of wine down, and sit down across from you and her daughter."
     $ scene_manager.update_actor(the_mom, display_transform = character_center_flipped, position = "sitting")
     the_mom "Mr.[the_mom.last_name] should be home any minute now, he's probably just held up at the office."
@@ -39,7 +39,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
         "[the_student.possessive_title] sighs unhappily as her mother uncorks the bottle of wine. She pours herself a generous glass."
 
     the_mom "Let me pour you both a glass..."
-    "You have dinner with [the_student.possessive_title] and [the_mom.possessive_title]."
+    "You have dinner with [the_student.possessive_title!l] and [the_mom.possessive_title!l]."
     "[the_mom.possessive_title] seems tense at first, but after some food and two glasses of wine she is smiling and making pleasant conversation."
     $ scene_manager.update_actor(the_mom, emotion = "happy")
     the_mom "[the_student.name], you made a very good choice when you asked [the_mom.mc_title] to tutor you. He's an absolute pleasure to have around."
@@ -47,11 +47,11 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
         "[the_student.possessive_title] places her hand on your thigh and rubs it for emphasis."
         if the_student.effective_sluttiness() > 50:
             "She carries on the conversation with her mother, but her hand starts to drift higher up."
-            "Soon [the_student.possessive_title] is rubbing your bulge under the table, massaging it through your pants."
+            "Soon [the_student.possessive_title!l] is rubbing your bulge under the table, massaging it through your pants."
 
     if the_mom.effective_sluttiness() > 20:
         $ mc.change_locked_clarity(10)
-        "While you are talking you feel a gentle touch on your leg. You glance under the table and see it is [the_mom.possessive_title]'s foot caressing your calf."
+        "While you are talking you feel a gentle touch on your leg. You glance under the table and see it is [the_mom.possessive_title!l]'s foot caressing your calf."
         "She turns to you and smiles, keeping up her conversation with her daughter while her foot moves up your leg."
         $ mc.change_locked_clarity(10)
         "Soon enough she is rubbing her soft foot against your inner thigh. The movement brings her dangerously close to brushing your cock."
@@ -65,18 +65,18 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
     $ clear_scene()
     # You can already give Emily serum while she's studying, so this is just to corrupt her Mom.
     menu:
-        "Add serum to [the_mom.possessive_title]'s wine" if mc.inventory.get_any_serum_count() > 0:
+        "Add serum to [the_mom.possessive_title!l]'s wine" if mc.inventory.get_any_serum_count() > 0:
             call give_serum(the_mom) from _call_give_serum_student_dinner_enhanced
             if _return:
-                "You stand up and lean over the table, quickly emptying the contents of a small glass vial into [the_mom.possessive_title]'s half finished wine glass."
-                "You give the glass a quick swirl, then sit back down and wait for [the_mom.possessive_title] and [the_student.possessive_title] to return."
+                "You stand up and lean over the table, quickly emptying the contents of a small glass vial into [the_mom.possessive_title!l]'s half finished wine glass."
+                "You give the glass a quick swirl, then sit back down and wait for [the_mom.possessive_title!l] and [the_student.possessive_title!l] to return."
             else:
-                "You reconsider, and instead sit back in your chair and wait for [the_mom.possessive_title] and [the_student.possessive_title] to return."
+                "You reconsider, and instead sit back in your chair and wait for [the_mom.possessive_title!l] and [the_student.possessive_title!l] to return."
 
-        "Add serum to [the_mom.possessive_title]'s wine\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
+        "Add serum to [the_mom.possessive_title!l]'s wine\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
             pass
         "Leave her drink alone":
-            "You lean back in your chair and relax while you wait for [the_mom.possessive_title] and [the_student.possessive_title] to return."
+            "You lean back in your chair and relax while you wait for [the_mom.possessive_title!l] and [the_student.possessive_title!l] to return."
 
 
     "After another minute or two both of them come back from the kitchen, now carrying small bowls of ice cream."
@@ -88,17 +88,17 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
     the_mom "I'm glad you were able to join us for the evening [the_mom.mc_title]."
     the_mom "It seems like my husband is always at work, it's nice to have some company."
     menu:
-        "Talk about [the_student.possessive_title]":
+        "Talk about [the_student.possessive_title!l]":
             mc.name "It's no trouble. It also gives us a perfect opportunity to talk about your daughters education."
             if the_mom.event_triggers_dict.get("student_mom_extra_obedience", False):
                 the_mom "Yes, give me an update on how things are going."
-                "You give [the_mom.possessive_title] a recap of your work educating [the_student.possessive_title], leaving out anything too explicit."
+                "You give [the_mom.possessive_title!l] a recap of your work educating [the_student.possessive_title!l], leaving out anything too explicit."
                 $ the_mom.change_happiness(5)
                 the_mom "It sounds like you have everything under control. Good work."
 
             else:
                 the_mom "That's a very good idea. Is she giving you any problems?"
-                "You glance at [the_student.possessive_title] at your side, then shake your head."
+                "You glance at [the_student.possessive_title!l] at your side, then shake your head."
                 mc.name "No, she is doing very well. There are some new study techniques that I would like to try though."
                 the_mom "Is that so? Well you have my full permission. [the_student.name], I want you to do everything [the_mom.mc_title] tells you to do."
                 the_mom "Please treat his instructions as if they were coming from me or your father."
@@ -106,31 +106,31 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
                 the_student "Yes Mom, I promise I will."
                 $ the_mom.event_triggers_dict["student_mom_extra_obedience"] = True
 
-        "Flirt with [the_mom.possessive_title]":
+        "Flirt with [the_mom.possessive_title!l]":
             mc.name "The pleasure is all mine. Your daughter is wonderful, I should have known she got it from her mother."
             "[the_mom.possessive_title] laughs and waves you off."
             the_mom "You're too kind."
-            "You flirt with [the_mom.possessive_title] as much as you think you can get away with while her daughter is in the room."
+            "You flirt with [the_mom.possessive_title!l] as much as you think you can get away with while her daughter is in the room."
             $ the_mom.change_slut(1)
             $ the_mom.change_love(2, max_modified_to = 25)
 
-        "Touch [the_student.possessive_title]" if the_student.effective_sluttiness("touching_body") > 35:
+        "Touch [the_student.possessive_title!l]" if the_student.effective_sluttiness("touching_body") > 35:
             mc.name "I'm glad to be here. I'm always happy to spend time with you and your daughter."
-            "You move a hand to your side, then and onto [the_student.possessive_title]'s thigh, rubbing it gently."
+            "You move a hand to your side, then and onto [the_student.possessive_title!l]'s thigh, rubbing it gently."
             $ mc.change_locked_clarity(10)
             "You move your hand higher, up her thigh and to her crotch. You can feel her struggling to keep still in front of her mother."
 
             if the_student.effective_sluttiness() > 50:
-                "In response [the_student.possessive_title] moves her hand onto your crotch, the movements hidden by the table."
+                "In response [the_student.possessive_title!l] moves her hand onto your crotch, the movements hidden by the table."
                 $ mc.change_locked_clarity(20)
                 "She runs her hand along the bulge of your crotch, stroking you slowly through the fabric."
                 the_student "He's been such a strong, firm presence in my life since I met him. I'm really learning a lot."
                 $ the_student.change_slut(1)
                 $ mc.change_locked_clarity(20)
-                "You and [the_student.possessive_title] fondle each other while you eat dessert, doing your best to keep [the_mom.possessive_title] from noticing everything."
+                "You and [the_student.possessive_title!l] fondle each other while you eat dessert, doing your best to keep [the_mom.possessive_title!l] from noticing everything."
 
             else:
-                "You fondle [the_student.possessive_title] as you eat your dessert, doing your best to keep [the_mom.possessive_title] from noticing."
+                "You fondle [the_student.possessive_title!l] as you eat your dessert, doing your best to keep [the_mom.possessive_title!l] from noticing."
 
             $ the_student.change_slut(1 + the_student.get_opinion_score("public sex"))
             $ the_student.discover_opinion("public sex")
@@ -147,7 +147,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
 
     $ her_hallway.show_background()
     $ scene_manager.show_actor(the_student, position = "stand4")
-    "[the_mom.possessive_title] and [the_student.possessive_title] walk you to the door to say goodbye."
+    "[the_mom.possessive_title] and [the_student.possessive_title!l] walk you to the door to say goodbye."
     the_student "Bye [the_student.mc_title], I hope you'll be by again soon!"
 
     if the_mom.effective_sluttiness("kissing") > 20 and not the_mom.event_triggers_dict.get("student_mom_door_kiss", 0) == 1: #TODO: Add a check that we haven't triggered the "I'm sorry" event.

@@ -257,9 +257,9 @@ label club_foreclosed_strip_label(the_person):
                 $ the_person.draw_person(position = "back_peek")
 
                 if the_person.outfit.wearing_panties() and the_person.outfit.wearing_bra():
-                    "Once [the_person.possessive_title] has stripped down to her underwear, she turns around to let you look at her ass."
+                    "Once [the_person.possessive_title!l] has stripped down to her underwear, she turns around to let you look at her ass."
                 else:
-                    "Once [the_person.possessive_title] has stripped down as far as she's willing, she turns around to let you look at her ass."
+                    "Once [the_person.possessive_title!l] has stripped down as far as she's willing, she turns around to let you look at her ass."
                 the_person "Are you happy now ? I bet you're about to cream your fucking pants looking at this."
                 "You take a second to enjoy the view."
                 mc.name "Alright, that'll do."
@@ -299,9 +299,9 @@ label club_foreclosed_strip_label(the_person):
                     the_person "Deal with it. Go cry to mommy if it matters that much to you."
                 $ the_person.draw_person(position = "back_peek")
                 if the_person.outfit.wearing_panties():
-                    "Once [the_person.possessive_title] has stripped down to her panties, she turns around to let you look at her ass."
+                    "Once [the_person.possessive_title!l] has stripped down to her panties, she turns around to let you look at her ass."
                 else:
-                    "Once [the_person.possessive_title] has stripped down, she turns around to let you look at her ass."
+                    "Once [the_person.possessive_title!l] has stripped down, she turns around to let you look at her ass."
                 the_person "Are you happy now? I bet you're about to cream your fucking pants looking at this."
                 "You take a second to enjoy the view."
                 mc.name "Alright, that'll do."

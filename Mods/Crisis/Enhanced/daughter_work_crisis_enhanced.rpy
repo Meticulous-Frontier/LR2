@@ -22,7 +22,7 @@ label daughter_work_crisis_label_enhanced():
     the_person "[the_person.mc_title], could I talk to you for a moment in your office?"
     mc.name "Of course. What's up?"
     $ ceo_office.show_background()
-    "You and [the_person.possessive_title] step into your office. You sit down at your desk while she closes the door."
+    "You and [the_person.possessive_title!l] step into your office. You sit down at your desk while she closes the door."
     $ ran_num = renpy.random.randint(0,2)
     if ran_num == 0: #TODO: Make this based on her stats?
         the_person "I wanted to ask you... My daughter is living at home and I think it's time she got a job."

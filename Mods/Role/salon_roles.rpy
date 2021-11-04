@@ -194,7 +194,7 @@ label cut_hair_label(the_person):
     if hair_style_check != the_person.hair_style or hair_style_check.colour != the_person.hair_style.colour or pubes_style_check != the_person.pubes_style or pubes_style_check.colour != the_person.pubes_style.colour: # Anything was changed
         the_person "Better now?"
         $ the_person.draw_person(emotion = "happy")
-        mc.name "You look wonderful, [the_person.possessive_title]!"
+        mc.name "You look wonderful, [the_person.possessive_title!l]!"
     else:
         the_person "It seems you preferred my old look, [the_person.mc_title]."
 
@@ -266,7 +266,7 @@ label ophelia_give_chocolate_label():
         "As you walk into the store, the clerk recognizes you and waves."
         "You exchange a few pleasantries as you grab the usual box of dark chocolates that [the_person.title] loves."
     "You take the candy to the counter and purchase it."
-    "You consider adding a serum to the candy before you leave it for [the_person.possessive_title]."
+    "You consider adding a serum to the candy before you leave it for [the_person.possessive_title!l]."
     menu:
         "Add a serum":
             "You decide to add a serum to the candy."
@@ -428,7 +428,7 @@ label ophelia_make_blowjob_pics_label():
     "She looks up at the phone, making perfect eye contact as she sticks her tongue out, and then easily slides your cock down her throat."
     "While that is impressive enough, her next move is amazing. With your dick down her throat, she sticks her tongue out and begins to lap at the bottom of your testicles."
     mc.name "Fuck! Holy hell..."
-    "She can't smile with her mouth full of meat, but you definitely see a hint of mischief in [the_person.possessive_title]'s eyes."
+    "She can't smile with her mouth full of meat, but you definitely see a hint of mischief in [the_person.possessive_title!l]'s eyes."
     $ the_person.change_arousal(15)
     $ mc.change_locked_clarity(50)
     "She keeps it up for several seconds, then slowly pulls off. You stop the recording."
@@ -453,7 +453,7 @@ label ophelia_make_blowjob_pics_label():
     $ the_person.change_arousal(20)
     $ the_person.draw_person(position = "kneeling1")
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
-    "Spurt after spurt covers [the_person.possessive_title]'s face. You don't think you've ever cum so hard or so fast from a blowjob."
+    "Spurt after spurt covers [the_person.possessive_title!l]'s face. You don't think you've ever cum so hard or so fast from a blowjob."
     the_person "Mmm, I forgot to tell you... I learned in beauty school that semen is great for your skin! Mmm, and it's nice and warm too..."
     $ the_person.draw_person()
     "As [the_person.title] stands up, you put your cock away. You see her slowly rubbing your cum into the skin on her face with two fingers..."
@@ -512,7 +512,7 @@ label ophelia_blowjob_pics_review_label(the_person):
     mc.name "Hey. How'd it go? Get any response?"
     the_person "Ugh. See for yourself."
     "She pulls out her phone and shows you the text conversation."
-    "It starts with a pic of [the_person.possessive_title] licking the tip of your cock."
+    "It starts with a pic of [the_person.possessive_title!l] licking the tip of your cock."
     the_person "Had so much fun last night baby..."
     "Next is the video you took of her doing that move where she deepthroats and simultaneously licks your balls."
     the_person "OH SHIT, sorry, wrong person."
@@ -704,7 +704,7 @@ label ophelia_revenge_date_label():
     $ scene_manager.hide_actor(candace)
     $ mc.change_locked_clarity(10)
     "You can hardly believe it... but you can just barely make out her legs just behind the tablecloth, on her knees, inches over towards [ex_name]."
-    "You see [ex_name] pick up his phone and dial someone... a moment later [the_person.possessive_title]'s phone is ringing. Oh boy, you can see where this is going..."
+    "You see [ex_name] pick up his phone and dial someone... a moment later [the_person.possessive_title!l]'s phone is ringing. Oh boy, you can see where this is going..."
     the_person "Hello? Why are you calling me?"
     the_person "What do you mean? I would have done anything for you... look at what?"
     "[the_person.title] turns and looks over at the other table. It takes her several moments to process what is going on."
@@ -782,7 +782,7 @@ label ophelia_revenge_date_label():
     $ the_person.change_arousal(15)
     $ mc.arousal += 10
     $ mc.change_locked_clarity(20)
-    "Your hands drops to her ass. You give it a squeeze, testing your limits with [the_person.possessive_title]. She sighs and gives a slight moan. She doesn't resist you at all."
+    "Your hands drops to her ass. You give it a squeeze, testing your limits with [the_person.possessive_title!l]. She sighs and gives a slight moan. She doesn't resist you at all."
     "You bring your other hand down and grab the other cheek. You pull her toward you and begin to grind your hips against her."
     "She is pressing her body against you."
     the_person "Oh god... I haven't... in a while..."
@@ -994,7 +994,7 @@ label ophelia_choose_service_test_label():
     $ the_person = _return
     $ del able_person_list
     if the_person == "Changed my mind":
-        "You decide not to call an employee for the trial run of [salon_manager.possessive_title] full body hair styling right now."
+        "You decide not to call an employee for the trial run of [salon_manager.possessive_title!l] full body hair styling right now."
         return
     "You call [the_person.title] down to your office. Soon she walks in your door."
     $ scene_manager.add_actor(the_person)
@@ -1029,7 +1029,7 @@ label ophelia_choose_service_test_label():
         salon_manager "Oh! This is perfect! Hi I'm [salon_manager.name]."
         the_person "[the_person.name], nice to meet you."
     salon_manager "I have a private room all set up for when a girl comes in looking for the full body hair cut style and dye. Let's head back there."
-    "You and [the_person.title] follow [salon_manager.possessive_title] to the private room. It's a great setup, with a very comfy looking styling chair."
+    "You and [the_person.title] follow [salon_manager.possessive_title!l] to the private room. It's a great setup, with a very comfy looking styling chair."
     salon_manager "When I open it, I plan to have wine coolers or mimosas I can offer, along with a hot towel."
     mc.name "Nice, it's a salon VIP lounge."
     salon_manager "Exactly! Alright dear, go ahead and strip down and we'll get started."
@@ -1058,14 +1058,14 @@ label ophelia_choose_service_test_label():
         the_person "I think... I could get used to this."
     salon_manager "Great! Let me get you a card so you can make an appointment when you want to come back."
     $ scene_manager.update_actor(salon_manager, position = "walking_away")
-    "As [salon_manager.possessive_title] goes to the other room to get her card, [the_person.title] gets dressed."
+    "As [salon_manager.possessive_title!l] goes to the other room to get her card, [the_person.title] gets dressed."
     $ the_person.apply_planned_outfit()
     $ scene_manager.update_actor(the_person)
     "Once dressed, she turns to you."
     the_person "This was great [the_person.mc_title]. Thanks for asking me to do this!"
     $ the_person.change_stats(happiness = 5, obedience = 5)
     $ scene_manager.update_actor(salon_manager, position = "stand3")
-    "[salon_manager.title] returns and hands [the_person.possessive_title] her business card."
+    "[salon_manager.title] returns and hands [the_person.possessive_title!l] her business card."
     salon_manager "Thanks again, both of you, for doing this. I think I'm going to move forward with adding the service to general customers!"
     salon_manager "From now on, if the girl wants me to, I'd be glad to give them the same treatment."
     mc.name "That sounds great. I'll definitely keep that in mind."

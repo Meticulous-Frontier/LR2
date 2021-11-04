@@ -138,7 +138,7 @@ label ellie_start_intro_note_label():
     "?????" "I know what your company is doing with the nanobots, and I'll go public with it if you don't meet my demands."
     "?????" "Meet me tomorrow night in alley between 3rd and 5th street downtown. Come alone, and bring cash."
     "Well that's not good. That sounds very not good. You find yourself panicking for a moment."
-    "You take a deep breath. You should get with [the_person.possessive_title]. You quickly page her to meet you in your office."
+    "You take a deep breath. You should get with [the_person.possessive_title!l]. You quickly page her to meet you in your office."
     $ ceo_office.show_background()
     "You sit at your desk and anxiously wait for her to meet you."
     $ the_person.draw_person()
@@ -172,7 +172,7 @@ label ellie_meet_ellie_intro_label():
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
-    "You text [the_person.possessive_title] to make sure she is still going to be there."
+    "You text [the_person.possessive_title!l] to make sure she is still going to be there."
     $ mc.start_text_convo(the_person)
     mc.name "In the alley between 3rd and 5th. Did you manage to find a good vantage point?"
     the_person "Sure did. I don't see anyone yet, and I brought a taser, you know, just in case."
@@ -203,7 +203,7 @@ label ellie_meet_ellie_intro_label():
     ellie "Same time next week."
     "The mysterious blackmailer turns and quickly leaves the alley. You stand there observing her until she turns the corner, when you turn around and leave the alley."
     $ clear_scene()
-    "Once you are a safe distance away from the alley, you pull out your phone and text [the_person.possessive_title]."
+    "Once you are a safe distance away from the alley, you pull out your phone and text [the_person.possessive_title!l]."
     $ mc.start_text_convo(the_person)
     mc.name "Hey, meet me at the bar. We have a lot to talk about."
     the_person "Okay, see you there"
@@ -238,7 +238,7 @@ label ellie_meet_ellie_intro_label():
     mc.name "I don't know why, but I feel a lot better about this whole thing. If we can figure out who she is, maybe we can come up with an alternative solution."
     the_person "Err... you don't mean like... 'taking care of her' do you?"
     mc.name "Of course not! But there may be other things we can do about this, I think."
-    "With your business concluded, you and [the_person.possessive_title] part ways."
+    "With your business concluded, you and [the_person.possessive_title!l] part ways."
     $ mc.change_location(bedroom)
     $ clear_scene()
     $ mc.business.add_mandatory_crisis(ellie_head_researcher_halfway_intro)
@@ -249,7 +249,7 @@ label ellie_head_researcher_halfway_intro_label():
     if the_person == None:
         $ mc.business.add_mandatory_crisis(ellie_unnecessary_payment)
         return
-    "You feel your phone vibrate in your pocket. It's [the_person.possessive_title]"
+    "You feel your phone vibrate in your pocket. It's [the_person.possessive_title!l]"
     $ mc.start_text_convo(the_person)
     the_person "I'm a genius. Meet me in your office!"
     mc.name "I'll be right there."
@@ -498,7 +498,7 @@ label ellie_work_welcome_monday_label():
 
 
 label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness event.
-    "You step into your research division. It seems that progress is going well here. To one side you see [the_person.possessive_title], working on a nanobot project."
+    "You step into your research division. It seems that progress is going well here. To one side you see [the_person.possessive_title!l], working on a nanobot project."
     $ the_person.draw_person(position = "sitting")
     $ the_person.arousal = 40
     $ mc.arousal = 0
@@ -615,7 +615,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "Don't you dare try and put that thing in me!"
     mc.name "Shhh, don't worry. I'm not even going to get it out of my pants. I'm just aroused too. It's okay."
     the_person "Ahh... okay..."
-    "You go back to groping [the_person.possessive_title]'s big tits. You take turns kneading them and pinching her nipples."
+    "You go back to groping [the_person.possessive_title!l]'s big tits. You take turns kneading them and pinching her nipples."
     "[the_person.title] is starting to whimper. The poor girl is so pent up, the time to finish her off is now."
     mc.name "Okay... I'm going to touch you between your legs now. I'm not going to put my hand under any of your clothing. Is that okay?"
     "She whimpers a response, but before you touch her you want to make sure she really consents."
@@ -635,7 +635,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "NO! No... it's kinda nice."
     mc.name "You can move your hips a bit. It will help you control the pace to something that feels good to you, and it'll feel nice for me too."
     the_person "... okay..."
-    "Instinctually, [the_person.possessive_title] starts to move her hips forward and backwards a bit, helping set a pace that feels best for her."
+    "Instinctually, [the_person.possessive_title!l] starts to move her hips forward and backwards a bit, helping set a pace that feels best for her."
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     "You can't help pushing your hips a bit up against her as well. It feels nice to have your cock against her ass."
@@ -648,7 +648,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "Her body starts to collapse so you quickly grab her with your left hand, your right hand still rubbing her pussy through her orgasm."
     "Your hand quickly starts to get damp as she cums. She sure seems to be having a juicy orgasm."
     $ the_person.draw_person(position = the_person.idle_pose)
-    "As soon as she regains control of her legs, [the_person.possessive_title] pulls away from you and turns."
+    "As soon as she regains control of her legs, [the_person.possessive_title!l] pulls away from you and turns."
     the_person "Oh heavens I just... no way... I couldn't have..."
     "She quickly puts a hand down her pants and then pulls it back out. It is shining wet. Did she just... squirt?"
     mc.name "That was just..."
@@ -678,7 +678,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     else:
         "Unfortunately there isn't much you can do about it now. You spend a few minutes walking around your office until your boner finally goes down, then return to work."
         return
-    "You decide to call [the_person.possessive_title] to your office to take care of it."
+    "You decide to call [the_person.possessive_title!l] to your office to take care of it."
     "*KNOCK KNOCK*"
     $ the_person.draw_person()
     the_person "Hey [the_person.mc_title], you wanted to see me?"
@@ -726,7 +726,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
 
 label ellie_grope_followup_label():
     $ the_person = ellie
-    "You are going about your work, when [the_person.possessive_title] finds you."
+    "You are going about your work, when [the_person.possessive_title!l] finds you."
     $ the_person.draw_person()
     the_person "Hey, can we talk somewhere private?"
     mc.name "Sure."
@@ -759,7 +759,7 @@ label ellie_grope_followup_label():
 label ellie_text_message_apology_label():
     $ the_person = ellie
     "Sunday morning, you roll over and look at your phone. You have several missed text message."
-    "Looking at your phone, you see they are all from [the_person.possessive_title], at about 3 am."
+    "Looking at your phone, you see they are all from [the_person.possessive_title!l], at about 3 am."
     $ mc.start_text_convo(the_person)
     the_person "Sorry, I know it's late, I was just up doing research on stuff you sent me..."
     the_person "I didn't know... all this stuff about my own body. No one ever told me this stuff."

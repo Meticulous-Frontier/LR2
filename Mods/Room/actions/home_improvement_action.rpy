@@ -189,7 +189,7 @@ label home_improvement_unlocked_label():
     return
 
 label lily_bedroom_renovate_label():
-    "You decide to renovate [lily.title]'s bedroom. After discussing with your [lily.possessive_title] what she wants, you call your contractor."
+    "You decide to renovate [lily.title]'s bedroom. After discussing with your [lily.possessive_title!l] what she wants, you call your contractor."
     mc.name "Good day, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
     "You go over the details to vastly improve your bedroom from a college student's decor to something more befitting the head of a successful company."
     python:
@@ -211,9 +211,9 @@ label lily_bedroom_renovate_completed_label():
     return
 
 label mom_bedroom_renovate_label():
-    "You decide to renovate [mom.title]'s bedroom. After discussing with your [mom.possessive_title] what she wants, you call your contractor."
+    "You decide to renovate [mom.title]'s bedroom. After discussing with your [mom.possessive_title!l] what she wants, you call your contractor."
     mc.name "Good day, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
-    "You go over the details to vastly improve your [mom.possessive_title]'s bedroom."
+    "You go over the details to vastly improve your [mom.possessive_title!l]'s bedroom."
     python:
         mc.business.change_funds(- mc_bedroom_renovation_cost)
         mc.business.event_triggers_dict["home_improvement_in_progress"] = True
@@ -255,7 +255,7 @@ label home_shower_renovate_completed_label():
     return
 
 label dungeon_build_label():
-    "You decide to build a dungeon at your house that would allow you to turn obedient girls into slaves who fulfill your deepest desires, telling your [mom.possessive_title] that it will be a \"Home Workshop\" of a sorts."
+    "You decide to build a dungeon at your house that would allow you to turn obedient girls into slaves who fulfill your deepest desires, telling your [mom.possessive_title!l] that it will be a \"Home Workshop\" of a sorts."
     "You pick up the phone and make a call."
     mc.name "Good afternoon, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
     "You go over the details with the constructor and agree on a price of $10,000 for converting your existing cellar into a dungeon, fully soundproofed of course."

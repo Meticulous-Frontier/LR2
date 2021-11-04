@@ -169,12 +169,12 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
         "Suck her nipples" if the_girl_2.outfit.tits_available():
             "You lean forward and run your tongue all around one of [the_girl_2.title]'s nipples."
             the_girl_2 "Oh! [the_girl_2.mc_title]! That feels good!."
-            "You suck one of [the_girl_2.possessive_title]'s nipples into your mouth. You flip it up and down with your tongue a few times."
+            "You suck one of [the_girl_2.possessive_title!l]'s nipples into your mouth. You flip it up and down with your tongue a few times."
             $the_girl_2.change_arousal(mc.sex_skills["Oral"])
         "Suck her nipples\n{color=#ff0000}{size=18}Obstructed by Clothing{/size}{/color} (disabled)" if not the_girl_2.outfit.tits_available():
             pass
 
-    "While you give attention to [the_girl_2.possessive_title]'s tits, you never stop pistoning your cock in and out of [the_girl_1.title]'s slick pussy."
+    "While you give attention to [the_girl_2.possessive_title!l]'s tits, you never stop pistoning your cock in and out of [the_girl_1.title]'s slick pussy."
 
     return
 
@@ -204,14 +204,14 @@ label scene_threesome_sixty_nine_oral_girl_two_1(the_girl_1, the_girl_2, the_loc
 label scene_threesome_sixty_nine_fuck_girl_one_2(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.title]'s whole body is jostling forward and backward as you fuck her roughly. Her tight pussy feels silky smooth around your dick."
     "You lean forward and grab the back of [the_girl_2.title]'s head, bring her in for a kiss. Your tongues meet together and you start to make out on top of [the_girl_1.title]."
-    "You decide it's time for [the_girl_2.possessive_title] to put her mouth to better use."
+    "You decide it's time for [the_girl_2.possessive_title!l] to put her mouth to better use."
     "You pull back from making out with [the_girl_2.title]."
     mc.name "I think [the_girl_1.title] needs a little more attention..."
-    "You grab [the_girl_2.possessive_title]'s head by her hair and start to pull her head downwards. You pull out of [the_girl_1.title]'s pussy partially to give her room to work."
+    "You grab [the_girl_2.possessive_title!l]'s head by her hair and start to pull her head downwards. You pull out of [the_girl_1.title]'s pussy partially to give her room to work."
     "She starts to lap at [the_girl_1.title]'s cunt. You can feel her tongue brushing up against your cock."
     "You give [the_girl_1.title] a few slow thrusts, making sure to give [the_girl_2.title] room to work."
     the_girl_1 "Mmmm..."
-    "Muffled moans come from [the_girl_1.title]. Your cock is buried deep inside her while [the_girl_2.possessive_title] licks and sucks at her clit."
+    "Muffled moans come from [the_girl_1.title]. Your cock is buried deep inside her while [the_girl_2.possessive_title!l] licks and sucks at her clit."
     $ the_girl_1.change_arousal(the_girl_2.sex_skills["Oral"] * 2)
 
     return
@@ -244,7 +244,7 @@ label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
                 $ the_girl_2.cum_in_mouth()
                 $ scene_manager.draw_scene()
                 if the_girl_2.arousal > 100:
-                    "Getting a dose of your cum triggers another orgasm in [the_girl_2.possessive_title]. Her body twitches as orgasm goes through it."
+                    "Getting a dose of your cum triggers another orgasm in [the_girl_2.possessive_title!l]. Her body twitches as orgasm goes through it."
                 "When she finally sits up, you can see traces of your cum on the corners of [the_girl_2.title]'s mouth."
             else:
                 "As you slowly pull out of [the_girl_1.title], a trickle of your cum starts to escape her."
@@ -275,7 +275,7 @@ label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locat
     mc.name "Oh fuck I'm gonna cum!"
     menu:
         "Cum inside [the_girl_2.title]'s mouth":
-            "You put your hand on the back of [the_girl_2.possessive_title]'s head."
+            "You put your hand on the back of [the_girl_2.possessive_title!l]'s head."
             mc.name "That's it [the_girl_2.title]. I want you to swallow it all!"
             "[the_girl_2.title] moans and looks you in the eyes. She pulls off until just the tip of your cock is in her mouth and she begins to stroke out off eagerly."
             "Your cock explodes in orgasm into her greedy mouth."
@@ -285,8 +285,8 @@ label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locat
             $ the_girl_2.cum_in_mouth()
 
             $ scene_manager.draw_scene()
-            "After you finish cumming, [the_girl_2.possessive_title] slowly pulls away from your cock."
-            "You give a sigh, deeply contented with having dumped your load inside of [the_girl_2.possessive_title]'s mouth."
+            "After you finish cumming, [the_girl_2.possessive_title!l] slowly pulls away from your cock."
+            "You give a sigh, deeply contented with having dumped your load inside of [the_girl_2.possessive_title!l]'s mouth."
 
         "Cum on [the_girl_2.title]'s face":
             "You pull out of [the_girl_2.title]'s mouth."
@@ -369,7 +369,7 @@ label orgasm_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_loca
     return
 
 label swap_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
-    "Stepping back for a moment, you decide you want to fuck [the_girl_1.possessive_title]."
+    "Stepping back for a moment, you decide you want to fuck [the_girl_1.possessive_title!l]."
     mc.name "Mmm, here it comes [the_girl_1.title]..."
     $ the_girl_1.break_taboo("vaginal_sex")
     $ the_girl_1.break_taboo("condomless_sex")
@@ -435,13 +435,13 @@ label orgasm_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_locati
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "Both girls are moaning wildly into each other's crotches."
         $ the_girl_1.run_orgasm()
-        "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
+        "You can see [the_girl_1.possessive_title!l]'s legs shaking as an orgasm hits her."
         $ the_girl_2.run_orgasm()
         "[the_girl_2.title] is right behind her, her hips pushing back against [the_girl_1.title]'s face as she cums too."
         return
     elif the_girl_1.arousal > 100:   #Just girl 1 orgasms
         $ the_girl_1.run_orgasm()
-        "You can see [the_girl_1.possessive_title]'s legs shaking as an orgasm hits her."
+        "You can see [the_girl_1.possessive_title!l]'s legs shaking as an orgasm hits her."
         "Her moans are muffled by [the_girl_2.title]'s pussy."
         return
 

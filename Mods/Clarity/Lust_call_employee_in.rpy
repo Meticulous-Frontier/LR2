@@ -75,7 +75,7 @@ label lust_blowjob_intro_label():
     $ the_person = _return
     if the_person == None:
         return
-    "You walk over to your door and unlock it as you call [the_person.possessive_title]. You tell her to come to your office ASAP."
+    "You walk over to your door and unlock it as you call [the_person.possessive_title!l]. You tell her to come to your office ASAP."
     "You walk back to your desk and sit down. Soon, there's a knock on your door."
     mc.name "Come in."
     $ the_person.draw_person()
@@ -111,7 +111,7 @@ label lust_blowjob_intro_label():
         "Frustrated with her service, you take control of the situation and finish yourself off by hand."
         $ the_person.cum_on_face()
         $ the_person.draw_person(position = "blowjob")
-        "As you finish, you point your cock at [the_person.possessive_title]'s face, covering it in your seed."
+        "As you finish, you point your cock at [the_person.possessive_title!l]'s face, covering it in your seed."
         $ ClimaxController.manual_clarity_release()
     else:
         "Fully spent, you let yourself relax in your chair."
@@ -140,7 +140,7 @@ label lust_blowjob_office_label():
         "After looking at your employee list, you change your mind. Maybe another opportunity will present itself later."
         return
     $ the_person = _return
-    "You call [the_person.possessive_title] and tell her to come to your office ASAP."
+    "You call [the_person.possessive_title!l] and tell her to come to your office ASAP."
     $ ceo_office.show_background()
     "Soon, there's a knock on your door."
     mc.name "Come in."
@@ -177,7 +177,7 @@ label lust_blowjob_office_label():
                 "You decide to take control of the situation and finish yourself off by hand."
                 $ the_person.cum_on_face()
                 $ the_person.draw_person(position = "blowjob")
-                "As you finish, you point your cock at [the_person.possessive_title]'s face, covering it in your seed."
+                "As you finish, you point your cock at [the_person.possessive_title!l]'s face, covering it in your seed."
                 $ ClimaxController.manual_clarity_release()
             else:
                 "Fully spent, you let yourself relax in your chair."
@@ -195,7 +195,7 @@ label lust_blowjob_office_label():
                 "Frustrated with her service, you take control of the situation and finish yourself off by hand."
                 $ the_person.cum_on_face()
                 $ the_person.draw_person(position = "blowjob")
-                "As you finish, you point your cock at [the_person.possessive_title]'s face, covering it in your seed."
+                "As you finish, you point your cock at [the_person.possessive_title!l]'s face, covering it in your seed."
                 $ ClimaxController.manual_clarity_release()
             else:
                 "Fully spent, you let yourself relax in your chair."
@@ -231,7 +231,7 @@ label lust_blowjob_office_label():
             "Frustrated with her service, you take control of the situation and finish yourself off by hand."
             $ the_person.cum_on_face()
             $ the_person.draw_person(position = "blowjob")
-            "As you finish, you point your cock at [the_person.possessive_title]'s face, covering it in your seed."
+            "As you finish, you point your cock at [the_person.possessive_title!l]'s face, covering it in your seed."
             $ ClimaxController.manual_clarity_release()
         else:
             "Fully spent, you let yourself relax in your chair."
@@ -265,7 +265,7 @@ label lust_blowjob_office_label():
         the_person "What do you want me to do?"
         mc.name "Just come around here, and get on your knees."
         $ the_person.draw_person(position = "blowjob")
-        "As [the_person.possessive_title] obediently gets down, you pull your cock out. She gasps when she sees it."
+        "As [the_person.possessive_title!l] obediently gets down, you pull your cock out. She gasps when she sees it."
         the_person "Wow... it looks so hard! It's okay... I'll take care of it!"
         $ the_person.add_situational_slut("situation",10, "I'm doing my work duties.")
         "[the_person.title] opens her mouth and begins to suck you off. She starts off tentatively, but soon has a good rhythm going."
@@ -277,7 +277,7 @@ label lust_blowjob_office_label():
             "Frustrated with her service, you take control of the situation and finish yourself off by hand."
             $ the_person.cum_on_face()
             $ the_person.draw_person(position = "blowjob")
-            "As you finish, you point your cock at [the_person.possessive_title]'s face, covering it in your seed."
+            "As you finish, you point your cock at [the_person.possessive_title!l]'s face, covering it in your seed."
             $ ClimaxController.manual_clarity_release()
         else:
             "Fully spent, you let yourself relax in your chair."

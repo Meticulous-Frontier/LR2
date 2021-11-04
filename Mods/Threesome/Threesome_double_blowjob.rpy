@@ -93,7 +93,7 @@ label intro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loca
         the_girl_2 "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
     $ the_girl_1.break_taboo("sucking_cock")
     $ the_girl_2.break_taboo("sucking_cock")
-    "[the_girl_1.possessive_title] and [the_girl_2.possessive_title] get to work servicing your cock."
+    "[the_girl_1.possessive_title] and [the_girl_2.possessive_title!l] get to work servicing your cock."
     return
 
 label scene_threesome_double_blowjob_focus_oral_1(the_girl_1, the_girl_2, the_location, the_object):
@@ -102,7 +102,7 @@ label scene_threesome_double_blowjob_focus_oral_1(the_girl_1, the_girl_2, the_lo
     "[the_girl_1.title] opens up and begins to blow you. Her tongue works circle around your head as she gives you shallow strokes."
     "[the_girl_2.title] moves her head lower and gently suckles on your ballsack. She gently sucks one into her mouth, then moves over to the other."
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
-        "You feel a pleasurable vibration in your testicles as [the_girl_2.possessive_title] starts to hum a bit."
+        "You feel a pleasurable vibration in your testicles as [the_girl_2.possessive_title!l] starts to hum a bit."
     "The sensations of having two mouths pleasuring you is intense."
     mc.name "Damn girls, that feels amazing!"
     "[the_girl_1.title] comes up for air, then runs her mouth along the side of your cock. [the_girl_2.title] notices and her mouth to the opposite side of your cock."
@@ -113,7 +113,7 @@ label scene_threesome_double_blowjob_focus_oral_2(the_girl_1, the_girl_2, the_lo
     "[the_girl_2.title] opens up and takes a turn focusing on your hard on. She takes the base in her hand and gives you long, deep strokes."
     $ scene_manager.update_actor(the_girl_1, position = "kissing")
     "[the_girl_1.title] takes a moment and stands up, wrapping her hands around you. She begins kissing your neck and along your jawline."
-    "[the_girl_1.possessive_title]'s lips on your neck, her body against yours, and [the_girl_2.possessive_title]'s mouth on your cock. This must be heaven."
+    "[the_girl_1.possessive_title]'s lips on your neck, her body against yours, and [the_girl_2.possessive_title!l]'s mouth on your cock. This must be heaven."
     "[the_girl_1.title] slowly kisses lower on your neck, moving down your collarbone. She continues to descend, licking and nipping at your chest and nipples."
     $ scene_manager.update_actor(the_girl_1, position = "blowjob")
     "She continues descending, kissing down your belly until she is back on her knees. When [the_girl_2.title] comes off she takes you in your hand and gives you a few strokes."
@@ -187,7 +187,7 @@ label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_locat
         the_girl_1 "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
     else:
         the_girl_2 "I wonder how long you can last with two girls on their knees for you, [the_girl_2.mc_title]."
-    "[the_girl_1.possessive_title] and [the_girl_2.possessive_title] get to work servicing your cock."
+    "[the_girl_1.possessive_title] and [the_girl_2.possessive_title!l] get to work servicing your cock."
     return
 
 
@@ -205,11 +205,11 @@ label intro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locatio
 
 label scene_threesome_double_blowjob_makeout_1(the_girl_1, the_girl_2, the_location, the_object):
     if the_girl_2.outfit.vagina_available():
-        "As they are making out, you notice [the_girl_1.possessive_title] has her hand between [the_girl_2.title]'s legs, petting her pussy."
+        "As they are making out, you notice [the_girl_1.possessive_title!l] has her hand between [the_girl_2.title]'s legs, petting her pussy."
     else:
         the_girl_1 "Mmm... I want to touch you. Lets get these out of the way!"
         $ scene_manager.strip_to_vagina(person = the_girl_2, prefer_half_off = True)
-        "Now [the_girl_1.title] immediately begins to fondle [the_girl_2.possessive_title]'s pussy."
+        "Now [the_girl_1.title] immediately begins to fondle [the_girl_2.possessive_title!l]'s pussy."
     if the_girl_1.outfit.vagina_available():
         "As she gets fingered, you notice that [the_girl_2.title] reaches down and begins to return the favor, fondling [the_girl_1.title]."
     else:

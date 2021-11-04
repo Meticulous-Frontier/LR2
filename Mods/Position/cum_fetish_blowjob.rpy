@@ -48,7 +48,7 @@ label scene_cum_fetish_blowjob_1(the_girl, the_location, the_object):
             "She slips you back into her mouth and resumes blowing you."
         "Stay quiet":
             "You rest your hand on her head, guiding her as she sucks you off."
-            "With a little encouragement, you pull [the_girl.possessive_title]'s head down a little further with each stroke."
+            "With a little encouragement, you pull [the_girl.possessive_title!l]'s head down a little further with each stroke."
             if the_girl.get_opinion_score("masturbating") > 0:
                 if the_girl.outfit.vagina_available():
                     "[the_girl.possessive_title] puts a hand between her legs and starts to touch herself while she blows you."
@@ -75,7 +75,7 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title] pulls your cock out of her her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
     the_girl "Mmm, I can't wait until your cock throbs and your sweet, sticky cum is shooting out..."
     mc.name "Of course you can't wait. You are my perfect little cum slut."
-    "When [the_girl.possessive_title] opens her mouth and resumes blowing you, you put your hand on the back of her head, intent to push yourself down her throat."
+    "When [the_girl.possessive_title!l] opens her mouth and resumes blowing you, you put your hand on the back of her head, intent to push yourself down her throat."
     if the_girl.get_opinion_score("being submissive") > 0:
         "[the_girl.possessive_title] looks up at you. You can see her pupils dilate as you slowly pull her head towards you, until your cock is buried in her throat."
         "[the_girl.possessive_title]'s knees quiver while her throat spasms around your shaft. You hold her deep while her body twitches with pleasure."
@@ -91,7 +91,7 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
         "With her hands holding yours, she opens her mouth wide and descends on your cock."
         "She bottoms out and her nose is touching your pubic hair. You are balls deep down her throat."
         mc.name "Mmmm, that's it bitch. Take it deep!"
-        "Still making eye contact, [the_girl.possessive_title] begins to bob her head up and down, completely deep throating you with every stroke."
+        "Still making eye contact, [the_girl.possessive_title!l] begins to bob her head up and down, completely deep throating you with every stroke."
         "Every few strokes you can feel the soft rumble of a moan, being stifled by your length she keeps impaling her throat on."
         $ the_girl.discover_opinion("taking control")
         $ the_girl.change_arousal(the_girl.get_opinion_score("taking control") * 3)
@@ -110,7 +110,7 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
 label outro_cum_fetish_blowjob(the_girl, the_location, the_object):
     $ cum_fetish_blowjob.current_modifier = "blowjob"
     $ cum_fetish_blowjob.redraw_scene(the_girl)
-    "Little by little the soft, warm mouth of [the_girl.possessive_title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
+    "Little by little the soft, warm mouth of [the_girl.possessive_title!l] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
     mc.name "Fuck, here I come!"
 
     # if the_girl.has_cum_fetish() or the_girl.get_opinion_score("drinking cum") > the_girl.get_opinion_score("cum facials"):
@@ -122,7 +122,7 @@ label outro_cum_fetish_blowjob(the_girl, the_location, the_object):
     #     if the_girl.arousal > 100:
     #         "[the_girl.possessive_title]'s legs quiver as she convulses. She is so addicted to your cum, blowing in her mouth has set off another orgasm for her."
     #         $ the_girl.change_obedience(5*the_girl.get_opinion_score("drinking cum"))
-    #     "Once you've had a second to recover, [the_girl.possessive_title] closes her mouth and swallows loudly. It takes a few big gulps to get every last drop of your cum down, but when she opens up again it's all gone."
+    #     "Once you've had a second to recover, [the_girl.possessive_title!l] closes her mouth and swallows loudly. It takes a few big gulps to get every last drop of your cum down, but when she opens up again it's all gone."
     #     $ cum_fetish_blowjob.current_modifier = None
     #     $ cum_fetish_blowjob.redraw_scene(the_girl)
     #     $ the_girl.call_dialogue("cum_mouth")
@@ -133,7 +133,7 @@ label outro_cum_fetish_blowjob(the_girl, the_location, the_object):
     $ the_girl.cum_on_face()
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
     $ cum_fetish_blowjob.redraw_scene(the_girl)
-    "Slowly recovering, you look at [the_girl.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
+    "Slowly recovering, you look at [the_girl.possessive_title!l]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
     $ cum_fetish_blowjob.current_modifier = None
     $ cum_fetish_blowjob.redraw_scene(the_girl)
     the_girl "Yes.. it's so hot... It feels so good on my skin..."
@@ -201,7 +201,7 @@ label orgasm_cum_fetish_blowjob(the_girl, the_location, the_object):
         $ the_girl.change_obedience(2*the_girl.get_opinion_score("being submissive"))
         "[the_girl.possessive_title] closes her eyes tight. You can feel her throat spasm around your shaft in time with her orgasmic contractions."
         if the_girl.outfit.vagina_visible():
-            "You can see that [the_girl.possessive_title]'s pussy is dripping wet as she cums."
+            "You can see that [the_girl.possessive_title!l]'s pussy is dripping wet as she cums."
         else:
             $ the_item = the_girl.outfit.get_lower_top_layer()
             if the_item and the_item.underwear:
@@ -211,7 +211,7 @@ label orgasm_cum_fetish_blowjob(the_girl, the_location, the_object):
             $ del the_item
         $ cum_fetish_blowjob.current_modifier = None
         $ cum_fetish_blowjob.redraw_scene(the_girl)
-        "When she's stopped twitching and moaning you let [the_girl.possessive_title] slide back. She pants loudly, then licks along the length of your cock."
+        "When she's stopped twitching and moaning you let [the_girl.possessive_title!l] slide back. She pants loudly, then licks along the length of your cock."
         the_girl "That was... incredible... Okay, I came... now it's your turn!"
         "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
     else:

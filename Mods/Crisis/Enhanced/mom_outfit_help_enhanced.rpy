@@ -8,13 +8,13 @@ label mom_outfit_help_crisis_label_enhanced():
     if not mom in mc.location.people:
         #She's in a different room, shh calls you in.
         the_person "[the_person.mc_title], can you help me with something for a moment?"
-        "You hear [the_person.possessive_title] call for you from her bedroom."
+        "You hear [the_person.possessive_title!l] call for you from her bedroom."
         menu:
-            "Help [the_person.possessive_title]":
+            "Help [the_person.possessive_title!l]":
                 mc.name "Sure thing, I'll be right there."
                 $ mom_bedroom.show_background()
                 $ the_person.draw_person()
-                "You step into [the_person.possessive_title]. She's standing at the foot of her bed and laying out a few sets of clothing."
+                "You step into [the_person.possessive_title!l]. She's standing at the foot of her bed and laying out a few sets of clothing."
                 mc.name "Hey Mom, what's up?"
 
             "Say you're busy":
@@ -27,7 +27,7 @@ label mom_outfit_help_crisis_label_enhanced():
         $ the_person.draw_person()
         the_person "[the_person.mc_title], could you help me with something for a moment?"
         menu:
-            "Help [the_person.possessive_title]":
+            "Help [the_person.possessive_title!l]":
                 mc.name "Sure thing, what's up?"
                 "[the_person.possessive_title] goes over to her closet and pulls out a few sets of clothing. She starts to lay them out."
 
@@ -56,17 +56,17 @@ label mom_outfit_help_crisis_label_enhanced():
     elif the_person.effective_sluttiness(["underwear_nudity","bare_pussy","bare_tits"]) + the_person.love < 50: #She just asks you to turn your back, so you can peek if you want.
         the_person "Okay, I'll need a moment to get changed. Could you just turn around for a second?"
         $ clear_scene()
-        "You nod and turn your back to [the_person.possessive_title]. You hear her moving behind you as she starts to get undressed."
+        "You nod and turn your back to [the_person.possessive_title!l]. You hear her moving behind you as she starts to get undressed."
         menu:
             "Try and peek":
                 # Chance to get spotted. Otherwise you get to watch as she strips clothing off one item at a time until she is naked.
                 $ the_person.draw_person()
-                "You shuffle to the side and manage to get a view of [the_person.possessive_title] using a mirror in the room."
+                "You shuffle to the side and manage to get a view of [the_person.possessive_title!l] using a mirror in the room."
 
                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                 while strip_choice and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
-                    "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
+                    "You watch as [the_person.possessive_title!l] take off her [strip_choice.display_name]."
                     $ mc.change_locked_clarity(2)
                     if renpy.random.randint(0,100) < 10: #you got caught
                         the_person "I'll be done in just a second [the_person.mc_title]..."
@@ -78,7 +78,7 @@ label mom_outfit_help_crisis_label_enhanced():
                         "She covers herself with her hands and motions for the door."
                         the_person "Could you wait outside, please?"
                         $ clear_scene()
-                        "You hurry outside and close the door to [the_person.possessive_title]'s bedroom behind you."
+                        "You hurry outside and close the door to [the_person.possessive_title!l]'s bedroom behind you."
                         the_person "Okay, you can come back in."
                         $ caught = True
                     else:
@@ -96,7 +96,7 @@ label mom_outfit_help_crisis_label_enhanced():
                     the_person "Okay [the_person.mc_title], you can turn around now."
 
             "Wait until she's done":
-                "You twiddle your thumbs until [the_person.possessive_title] is finished changing."
+                "You twiddle your thumbs until [the_person.possessive_title!l] is finished changing."
                 the_person "Okay, all done. You can turn around now."
 
     else: #She's slutty enough that she doesn't care if you watch or not.
@@ -161,12 +161,12 @@ label mom_outfit_help_crisis_label_enhanced():
             "Try and peek":
                 # Chance to get spotted. Otherwise you get to watch as she strips clothing off one item at a time until she is naked.
                 $ the_person.draw_person()
-                "You shuffle to the side and manage to get a view of [the_person.possessive_title] using a mirror in the room."
+                "You shuffle to the side and manage to get a view of [the_person.possessive_title!l] using a mirror in the room."
                 $ caught = False
                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                 while strip_choice and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
-                    "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
+                    "You watch as [the_person.possessive_title!l] take off her [strip_choice.display_name]."
                     $ mc.change_locked_clarity(2)
                     if renpy.random.randint(0,100) < 10: #you got caught
                         the_person "I'll be done in just a second [the_person.mc_title]..."
@@ -178,7 +178,7 @@ label mom_outfit_help_crisis_label_enhanced():
                         "She covers herself with her hands and motions for the door."
                         the_person "Could you wait outside, please?"
                         $ clear_scene()
-                        "You hurry outside and close the door to [the_person.possessive_title]'s bedroom behind you."
+                        "You hurry outside and close the door to [the_person.possessive_title!l]'s bedroom behind you."
                         the_person "Okay, you can come back in."
                         $ caught = True
                     else:
@@ -196,7 +196,7 @@ label mom_outfit_help_crisis_label_enhanced():
                     the_person "Okay [the_person.mc_title], you can turn around now."
 
             "Wait until she's done":
-                "You twiddle your thumbs until [the_person.possessive_title] is finished changing."
+                "You twiddle your thumbs until [the_person.possessive_title!l] is finished changing."
                 the_person "Okay, all done. You can turn around now."
 
     else: #She's slutty enough that she doesn't care if you watch or not.
@@ -231,7 +231,7 @@ label mom_outfit_help_crisis_label_enhanced():
 
         "Suggest your own outfit":
             mc.name "They both look good, but I think I have another idea for something you could wear..."
-            "You go to [the_person.possessive_title]'s closet and start to put together an outfit of your own for her."
+            "You go to [the_person.possessive_title!l]'s closet and start to put together an outfit of your own for her."
             $ clear_scene()
             call outfit_master_manager(slut_limit = the_person.sluttiness + 10, show_overwear = False, show_underwear = False) from _call_outfit_master_manager_mom_outfit_help_enhanced
             $ third_outfit = _return
@@ -244,7 +244,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ the_person.change_happiness(5)
                 $ the_person.next_day_outfit = first_outfit
             else:
-                "You lay the outfit out for [the_person.possessive_title]. She looks it over and nods."
+                "You lay the outfit out for [the_person.possessive_title!l]. She looks it over and nods."
                 the_person "I'll try it on, but I think I like it!"
 
                 if the_person.effective_sluttiness() + the_person.love < 35 or caught: #She really doesn't want you to see anything
@@ -260,12 +260,12 @@ label mom_outfit_help_crisis_label_enhanced():
                         "Try and peek":
                             # Chance to get spotted. Otherwise you get to watch as she strips clothing off one item at a time until she is naked.
                             $ the_person.draw_person()
-                            "You shuffle to the side and manage to get a view of [the_person.possessive_title] using a mirror in the room."
+                            "You shuffle to the side and manage to get a view of [the_person.possessive_title!l] using a mirror in the room."
                             $ caught = False
                             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                             while strip_choice and not caught:
                                 $ the_person.draw_animated_removal(strip_choice)
-                                "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
+                                "You watch as [the_person.possessive_title!l] take off her [strip_choice.display_name]."
                                 $ mc.change_locked_clarity(2)
                                 if renpy.random.randint(0,100) < 10: #you got caught
                                     the_person "I'll be done in just a second [the_person.mc_title]..."
@@ -277,7 +277,7 @@ label mom_outfit_help_crisis_label_enhanced():
                                     "She covers herself with her hands and motions for the door."
                                     the_person "Could you wait outside, please?"
                                     $ clear_scene()
-                                    "You hurry outside and close the door to [the_person.possessive_title]'s bedroom behind you."
+                                    "You hurry outside and close the door to [the_person.possessive_title!l]'s bedroom behind you."
                                     the_person "Okay, you can come back in."
                                     $ caught = True
                                 else:
@@ -295,7 +295,7 @@ label mom_outfit_help_crisis_label_enhanced():
                                 the_person "Okay [the_person.mc_title], you can look."
 
                         "Wait until she's done":
-                            "You twiddle your thumbs until [the_person.possessive_title] is finished changing."
+                            "You twiddle your thumbs until [the_person.possessive_title!l] is finished changing."
                             the_person "Okay, all done. You can look."
 
                 else: #She's slutty enough that she doesn't care if you watch or not.
@@ -332,7 +332,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 "She wraps her arms around you. The heat coming from her chest radiates against you. It feels great."
                 "You pull her close as your embrace. Your erection is now rubbing up against her belly..."
                 the_person "Oh my... you feel so hard. Why don't you let your mother take care of that for you?"
-                "Slowly, [the_person.possessive_title] slides down to her knees. She pulls your zipper down and takes your cock out."
+                "Slowly, [the_person.possessive_title!l] slides down to her knees. She pulls your zipper down and takes your cock out."
                 $ the_person.draw_person(position = "blowjob")
                 the_person "You have become such a virile young man..."
                 $ mc.change_locked_clarity(20)
@@ -364,13 +364,13 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ the_person.strip_outfit(position = "standing_doggy")
                 "When she finishes, she stays bent over her bed. Her hips wiggle back and forth a bit, making it obvious what she has in mind..."
                 $ mc.change_locked_clarity(20)
-                "It's been a long day, but you still got some energy left, so you decide to have your way with her. You pull your dick out and step behind [the_person.possessive_title]."
+                "It's been a long day, but you still got some energy left, so you decide to have your way with her. You pull your dick out and step behind [the_person.possessive_title!l]."
                 call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_bed(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_03
                 "When you finish up, you put your dick away."
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"
 
     $ the_person.draw_person()
-    "You leave [the_person.possessive_title] in her room as she starts to pack her clothes away."
+    "You leave [the_person.possessive_title!l] in her room as she starts to pack her clothes away."
 
     python:
         del first_outfit

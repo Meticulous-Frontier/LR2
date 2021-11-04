@@ -30,7 +30,7 @@ init 2 python:
 
 label fetish_stephanie_first_fetish_label(the_person):
     if mc.location == mc.business.r_div: #Already in research
-        "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
+        "Suddenly, [the_person.possessive_title!l] looks up from her work and and speaks up."
         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
         mc.name "Sure, follow me to my office."
     else:
@@ -181,13 +181,13 @@ label fetish_mom_kitchen_label(the_person):
 
     mc.name "Hey [the_person.title], dinner sure smells good. Just keep working on it, don't mind me!"
     "[the_person.possessive_title] hesitates for a second, clearly realizing you are up to something."
-    "You pretend to look in the fridge for something as [the_person.possessive_title] resumes dinner preparations. She bends over the counter and starts to chop up some vegetables."
+    "You pretend to look in the fridge for something as [the_person.possessive_title!l] resumes dinner preparations. She bends over the counter and starts to chop up some vegetables."
     $ the_person.draw_person(position = "standing_doggy")
     if the_person.outfit.vagina_available():
-        "You steal a few glances over at [the_person.possessive_title]'s exposed ass. It looks soft and supple, and shakes a bit as she prepares dinner."
+        "You steal a few glances over at [the_person.possessive_title!l]'s exposed ass. It looks soft and supple, and shakes a bit as she prepares dinner."
     else:
-        "You steal a glance over at [the_person.possessive_title]'s ass as she is bent over. It looks great in her [the_clothing.name]."
-    "Getting a naughty idea, you quietly move behind [the_person.possessive_title]."
+        "You steal a glance over at [the_person.possessive_title!l]'s ass as she is bent over. It looks great in her [the_clothing.name]."
+    "Getting a naughty idea, you quietly move behind [the_person.possessive_title!l]."
     menu:
         "Fuck her ass" if the_person.has_anal_fetish():
             "You reach down and grope her ass aggressively."
@@ -273,7 +273,7 @@ label fetish_mom_kitchen_label(the_person):
             the_person "Yes dear! I'm just... you knowing... chopping some vegetables!"
             "You give her ass another hard spank, as if to punctuate her remark. [the_person.possessive_title] is barely able to stifle her moan."
             $ the_person.change_arousal(15)
-            "Barely whispering, [the_person.possessive_title] tries to resist, but you can tell this is really turning her on."
+            "Barely whispering, [the_person.possessive_title!l] tries to resist, but you can tell this is really turning her on."
             the_person "Your sister, she's going to..."
             if the_person.outfit.vagina_available():
                 mc.name "Shhh, just be quiet. Your ass looks so amazing [the_person.title]... I should just fuck you right here..."
@@ -308,13 +308,13 @@ label fetish_mom_kitchen_label(the_person):
             the_person "No! I mean... your brother is in here giving me a hand... there's a LOT of meat to tenderize... it might take us a while!"
             "Holy shit she is actually gonna sell that."
             lily "Well... okay, if you're sure."
-            "You take the opportunity now to pick up the pace. You are really giving it to [the_person.possessive_title] now."
+            "You take the opportunity now to pick up the pace. You are really giving it to [the_person.possessive_title!l] now."
             call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_table(), skip_intro = True, skip_condom = True) from _call_sex_mom_kitchen_loud_sex_01
             $ the_report = _return
             $ the_person.event_triggers_dict["LastExhibitionFetish"] = day
         "Fuck her loudly\n{color=#ff0000}{size=18}Requires Exhibitionist Fetish{/size}{/color} (disabled)" if not the_person.has_exhibition_fetish():
             pass
-    "Clearly, in her current attire, it will be obvious what [the_person.possessive_title] has been up to. You look at the state of dinner. It's almost done."
+    "Clearly, in her current attire, it will be obvious what [the_person.possessive_title!l] has been up to. You look at the state of dinner. It's almost done."
     mc.name "You go clean yourself up. I'll finish preparing dinner."
     the_person "Ahhh... okay... thank you honey!"
     $ clear_scene()
@@ -340,7 +340,7 @@ label fetish_mom_kitchen_label(the_person):
                 call give_serum(cousin) from _call_give_mom_kitchen_fetish_04
             "Leave [cousin.name]'s food alone":
                 pass
-    "Just as you are finishing up with plating the food, when [the_person.possessive_title] walks back into the kitchen."
+    "Just as you are finishing up with plating the food, when [the_person.possessive_title!l] walks back into the kitchen."
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person()
     the_person "Thank you [the_person.mc_title]... for finishing dinner and... you know..."
@@ -353,7 +353,7 @@ label fetish_mom_kitchen_label(the_person):
 label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is currently disabled. As Lily progresses, give her a scene where you can act out her fetishes on video stream
 
     ###ANAL STREAM OPTION###
-    "You give [the_person.possessive_title] a quick proposition."
+    "You give [the_person.possessive_title!l] a quick proposition."
     mc.name "Hey [the_person.title]. What do you say we get out that strap on again? I bet your viewers would love that."
     "[the_person.possessive_title] looks at you and smiles."
     the_person "Mmm that sounds pretty good [the_person.mc_title]... Here, let me take a couple... precautions."
@@ -364,7 +364,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
     if the_person.outfit.vagina_available():
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
     else:
-        "You step up behind [the_person.possessive_title] and start to grope her ass. She sighs as you massage it."
+        "You step up behind [the_person.possessive_title!l] and start to grope her ass. She sighs as you massage it."
         "You decide to start getting her ready while she looks for the toy. You start peeling her clothes off."
         $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
@@ -380,7 +380,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
     $ the_person.draw_person(position = the_person.idle_pose)
     "[the_person.possessive_title] hands you a bottle of lube and the dildo, then gets on her bed and gets on her hands and knees with her ass in the air."
     $ the_person.draw_person(position = "doggy")
-    "You put the dildo on and lube yourself up. You get behind [the_person.possessive_title] on the bed and start to line yourself up."
+    "You put the dildo on and lube yourself up. You get behind [the_person.possessive_title!l] on the bed and start to line yourself up."
     the_person "Oh god I can't wait. This feel feels amazing when it goes in..."
     "Your cock sinks easily into her greedy back passage. She is so accustomed to being fucked anally now she accommodates you easily."
     the_person "Aaaahhhhhh yes! Now fuck me good! I'm ready for it!"

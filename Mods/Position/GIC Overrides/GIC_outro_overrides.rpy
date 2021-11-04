@@ -106,7 +106,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
             $ the_girl.cum_on_face()
             $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
             $ the_person.draw_person(position = "kneeling1")
-            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title!l]'s face and into her open mouth. She makes sure to wait until you're completely finished."
             "[the_girl.title] looks up at you, face covered in your semen."
             $ the_girl.call_dialogue("cum_face")
         elif the_goal == "body shot":
@@ -131,7 +131,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
             $ the_girl.cum_in_mouth()
             $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
             $ the_person.draw_person(position = "kneeling1")
-            "You let out a shuddering moan as you cum, pumping your sperm into [the_girl.possessive_title]'s eager mouth. She makes sure to wait until you're completely finished."
+            "You let out a shuddering moan as you cum, pumping your sperm into [the_girl.possessive_title!l]'s eager mouth. She makes sure to wait until you're completely finished."
             "[the_girl.title] closes her mouth and swallows loudly."
             "It takes a few big gulps to get every last drop of your cum down, but when she opens up again it's all gone."
         else:
@@ -152,7 +152,7 @@ label GIC_outro_tit_fuck(the_girl, the_location, the_object):
         "With each stroke of her tits [the_girl.title] brings you closer and closer to cumming. You're finally driven past the point of no return."
         mc.name "Fuck, I'm going to cum!"
         the_girl "Yes! Ah! Cover my tits with it!"
-        "You watch closely as [the_girl.possessive_title]'s warm tits bring you to your orgasm."
+        "You watch closely as [the_girl.possessive_title!l]'s warm tits bring you to your orgasm."
         $ the_girl.cum_on_tits()
         $ ClimaxController.manual_clarity_release(climax_type = "tits", the_person = the_girl)
         "Your orgasm builds to a peak and you grunt, blasting your load up between [the_girl.title]'s tits and out the top of her cleavage."

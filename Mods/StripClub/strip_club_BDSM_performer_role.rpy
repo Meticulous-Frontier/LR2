@@ -414,7 +414,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
 label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use the dildo chair with her
     $ scene_manager = Scene()
     $ mistress = strip_club_get_mistress()
-    "You ask [mistress.possessive_title] to set up the dildo chair so you can have some fun with [the_person.possessive_title]."
+    "You ask [mistress.possessive_title!l] to set up the dildo chair so you can have some fun with [the_person.possessive_title!l]."
     $ scene_manager.add_actor(mistress, position = "stand4", emotion = "happy")
     mistress "Sure [mistress.mc_title], how many dildos do you want me to install on the chair?"
     menu:

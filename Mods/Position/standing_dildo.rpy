@@ -47,9 +47,9 @@ label intro_standing_dildo(the_girl, the_location, the_object):
         the_girl "Ok. Ready when you are I guess!"
         "You bring the dildo up to her slit and begin to apply light pressure."
         if the_girl.arousal > 50:
-            "It slides into [the_girl.possessive_title]'s sopping cunt easily. Her excitement provides more than enough lube to push it deep."
+            "It slides into [the_girl.possessive_title!l]'s sopping cunt easily. Her excitement provides more than enough lube to push it deep."
         else:
-            "It takes several seconds of gentle pressure to push it up inside of [the_girl.possessive_title]'s cunt. She takes a moment to adjust to the pressure."
+            "It takes several seconds of gentle pressure to push it up inside of [the_girl.possessive_title!l]'s cunt. She takes a moment to adjust to the pressure."
         the_girl "You can start moving it."
 
         $ the_girl.event_triggers_dict["has_used_dildo"] = True
@@ -60,7 +60,7 @@ label taboo_break_standing_dildo(the_girl, the_location, the_object):
     return
 
 label scene_standing_dildo_1(the_girl, the_location, the_object):
-    "You pump the dildo in and out of [the_girl.possessive_title]. On your knees in front of her, you look up and admire her shapely body and chest."
+    "You pump the dildo in and out of [the_girl.possessive_title!l]. On your knees in front of her, you look up and admire her shapely body and chest."
     if the_girl.has_large_tits():
         if the_girl.outfit.tits_available():
             "You reach your free hand up to [the_girl.title]'s bare tits and cup one. Her skin is flushed and it feels hot in your hand."
@@ -69,17 +69,17 @@ label scene_standing_dildo_1(the_girl, the_location, the_object):
             "You reach your free hand up to [the_girl.title]'s tits and squeeze one through her clothing, enjoying its size and weight."
     else:
         if the_girl.outfit.tits_available():
-            "You paw at [the_girl.possessive_title]'s small tits with your free hand, running your thumb over one of her nipples."
+            "You paw at [the_girl.possessive_title!l]'s small tits with your free hand, running your thumb over one of her nipples."
             "Her body responds, the nipple hardening as you play with it."
         else:
-            "You paw at [the_girl.possessive_title]'s small tits through her clothing with your free hand."
+            "You paw at [the_girl.possessive_title!l]'s small tits through her clothing with your free hand."
             "You can feel her body respond, her nipple hardening enough that you can feel it through the fabric."
     return
 
 
 label scene_standing_dildo_2(the_girl, the_location, the_object):
     "You slide the dildo in and out of her pussy, stroking the inside of that soft tunnel."
-    "Each movement draws moans of pleasure from [the_girl.possessive_title]. She runs a hand through your hair."
+    "Each movement draws moans of pleasure from [the_girl.possessive_title!l]. She runs a hand through your hair."
     if the_girl.arousal > 75:
         "Her pussy is dripping wet now, her juices are running down the dildo and onto your hand.."
         menu:

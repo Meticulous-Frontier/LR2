@@ -608,7 +608,7 @@ label alpha_flirt_response_girlfriend(the_person):
             menu:
                 "Find someplace quiet":
                     mc.name "Why wait until later? Come on."
-                    "You take [the_person.possessive_title]'s hand. She hesitates for a moment, then follows as you lead her away."
+                    "You take [the_person.possessive_title!l]'s hand. She hesitates for a moment, then follows as you lead her away."
                     "After a few minutes of searching you find a quiet spot. You put your arm around [the_person.title]'s waist and pull her close to you."
                     mc.name "So, what did you want that privacy for again?"
                     the_person "Oh, a few things. Let's start with this."
@@ -620,7 +620,7 @@ label alpha_flirt_response_girlfriend(the_person):
                 "Just flirt":
                     mc.name "Aw, you're going to make me wait? That's so cruel."
                     $ mc.change_locked_clarity(10)
-                    "You reach around and place a hand on [the_person.possessive_title]'s ass, rubbing it gently."
+                    "You reach around and place a hand on [the_person.possessive_title!l]'s ass, rubbing it gently."
                     "She sighs and bites her lip, then clears her throat and glances around to see if anyone else noticed."
                     the_person "I'm sure we can find a way for you to satisfy me, but let's take it easy while other people are around."
                     "You give her butt one last squeeze, then slide your hand off."
@@ -692,7 +692,7 @@ label alpha_flirt_response_affair(the_person):
                 "Just flirt":
                     mc.name "Well that would just be cruel of me..."
                     $ mc.change_locked_clarity(10)
-                    "You put your arm around [the_person.possessive_title] and rest your hand on her ass."
+                    "You put your arm around [the_person.possessive_title!l] and rest your hand on her ass."
                     mc.name "...If I got you all excited thinking about the next time I'm going to fuck you."
                     "She leans her body against yours for a moment and squeezes your cock. You give her butt a final slap and let go of her."
 
@@ -710,7 +710,7 @@ label alpha_flirt_response_affair(the_person):
         menu:
             "Feel her up":
                 mc.name "That sounds like a good idea. Come here."
-                "You wrap your arms around [the_person.possessive_title]'s waist, resting your hands on her ass."
+                "You wrap your arms around [the_person.possessive_title!l]'s waist, resting your hands on her ass."
                 "Then you pull her tight against you, squeezing her tight butt."
                 "She quickly turns around and puts your hand between her thighs."
                 call fuck_person(the_person, private = True, start_position = standing_grope, skip_intro = True) from _call_fuck_person_alpha_flirt_response_affair_2
@@ -1032,7 +1032,7 @@ label alpha_being_watched(the_person, the_watcher, the_position):
         #She's into it and encouraged by the slut watching her.
         the_person "Oh [the_person.mc_title], I know it's wrong, but what you are doing just feels right."
         $ the_person.change_arousal(1)
-        "The longer [the_watcher.name] keeps watching, the more turned on [the_person.possessive_title] gets."
+        "The longer [the_watcher.name] keeps watching, the more turned on [the_person.possessive_title!l] gets."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
@@ -1046,7 +1046,7 @@ label alpha_being_watched(the_person, the_watcher, the_position):
         the_person "[the_watcher.name], just have a good look, I may let you try him one day."
         $ the_person.change_arousal(1)
         $ the_person.change_slut(1)
-        "[the_watcher.name] seems more comfortable, watching you [the_position.verbing] [the_person.possessive_title]."
+        "[the_watcher.name] seems more comfortable, watching you [the_position.verbing] [the_person.possessive_title!l]."
 
     return
 

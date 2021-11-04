@@ -70,7 +70,7 @@ label influence_opinion_label(person): #Input a custom opinion, check if they ha
     if person.suggestibility >= difficulty:
         $ person.add_opinion(opinion, degree, discovered)
         $ new_score = opinion_score_to_string(person.get_opinion_score(opinion))
-        "You succeed at influencing [person.possessive_title]'s opinion; she now [new_score] [opinion]."
+        "You succeed at influencing [person.possessive_title!l]'s opinion; she now [new_score] [opinion]."
 
 
     else:

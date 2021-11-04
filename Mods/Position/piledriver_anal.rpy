@@ -64,7 +64,7 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
     return
 
 label taboo_break_piledriver_anal(the_girl, the_location, the_object):
-    "You grab [the_girl.possessive_title]'s ass and give it a squeeze, then a hard slap."
+    "You grab [the_girl.possessive_title!l]'s ass and give it a squeeze, then a hard slap."
     mc.name "[the_girl.title], I want you to lie down for me."
     "[the_girl.possessive_title] nods, glancing briefly at the bulge in your pants. She gets onto the [the_object.name] and waits for you."
     the_girl "How's this?"
@@ -101,7 +101,7 @@ label scene_piledriver_anal_1(the_girl, the_location, the_object):
     return
 
 label scene_piledriver_anal_2(the_girl, the_location, the_object):
-    "You take [the_girl.possessive_title] legs and spread them wide. Her whole body lays open and surrendered to you."
+    "You take [the_girl.possessive_title!l] legs and spread them wide. Her whole body lays open and surrendered to you."
     "She reaches down with her hand and starts to play with her [the_girl.pubes_description] pussy as you fuck her buttery back door."
     if the_girl.tits_available():
         "[the_girl.title]'s tits are swaying attractively with each thrust. You give her a couple of rough thrusts and enjoy the change in their movement."
@@ -112,7 +112,7 @@ label scene_piledriver_anal_2(the_girl, the_location, the_object):
     $ the_girl.call_dialogue("sex_responses_anal")
     menu:
         "Grope her tits":
-            "With her legs spread wide, you can't resist groping [the_girl.possessive_title]'s tits."
+            "With her legs spread wide, you can't resist groping [the_girl.possessive_title!l]'s tits."
             mc.name "Hold your ankles wide open for me."
             "She bites her lip and does what she is told, freeing your hands to use as you please."
             if the_girl.has_large_tits():
@@ -141,7 +141,7 @@ label scene_piledriver_anal_2(the_girl, the_location, the_object):
 
 label outro_piledriver_anal(the_girl, the_location, the_object):
 
-    "Fucking [the_girl.possessive_title]'s tight asshole feels amazing, and you come closer and closer to your climax."
+    "Fucking [the_girl.possessive_title!l]'s tight asshole feels amazing, and you come closer and closer to your climax."
     "You pass the point of no return and speed up, slamming your cock into her with each thrust."
     $ the_girl.call_dialogue("sex_responses_anal")
     mc.name "Fuck, here I cum!"
@@ -178,9 +178,9 @@ label outro_piledriver_anal(the_girl, the_location, the_object):
 
     if the_choice == "Cum on her face":
         if mc.condom:
-            "You pull your cock out at the last minute, whipping the condom off with one hand as you aim it towards [the_girl.possessive_title]'s face."
+            "You pull your cock out at the last minute, whipping the condom off with one hand as you aim it towards [the_girl.possessive_title!l]'s face."
         else:
-            "You pull your cock out at the last minute, stroking it off with one hand as you point it towards [the_girl.possessive_title]'s face."
+            "You pull your cock out at the last minute, stroking it off with one hand as you point it towards [the_girl.possessive_title!l]'s face."
         $ the_girl.cum_on_face()
         $ climax_controller.do_clarity_release(the_girl)
         $ piledriver.redraw_scene(the_girl)
@@ -192,7 +192,7 @@ label outro_piledriver_anal(the_girl, the_location, the_object):
             "She closes her mouth and swallows quickly, then bites her lip and smiles at you."
         else:
             "[the_girl.title] closes her eyes and waits for you to climax. You spray your load over her face and dribble a few drops of sperm onto her chest."
-        "You sit back and let [the_girl.possessive_title]'s legs down. You enjoy the sight of her covered in your semen when she looks at you."
+        "You sit back and let [the_girl.possessive_title!l]'s legs down. You enjoy the sight of her covered in your semen when she looks at you."
     return
 
 label transition_piledriver_piledriver_anal(the_girl, the_location, the_object):
@@ -224,7 +224,7 @@ label strip_piledriver_anal(the_girl, the_clothing, the_location, the_object):
     "[the_girl.title] gasps between thrusts."
     $ the_girl.call_dialogue("sex_strip")
     $ the_girl.draw_animated_removal(the_clothing, position = piledriver_anal.position_tag)
-    "You stop fucking as [the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side."
+    "You stop fucking as [the_girl.possessive_title!l] struggles out of her [the_clothing.name] and throws it to the side."
     "Once she's done, you resume reaming her puckered hole."
     return
 

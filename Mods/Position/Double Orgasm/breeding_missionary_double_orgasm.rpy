@@ -11,7 +11,7 @@ label breeding_missionary_double_orgasm(the_girl, the_location, the_object):
     else:
         the_girl "Do it! I want you to cum with me! Cum deep and knock me up!"
     "[the_girl.possessive_title] wraps her legs around your waist. Even if you wanted to pull out, you couldn't, as she uses her legs to pull you into her."
-    "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She gasps and claws at your back as you pump your seed into her."
+    "You use your full weight to push your cock deep inside of [the_girl.possessive_title!l]'s cunt as you climax. She gasps and claws at your back as you pump your seed into her."
     $ the_girl.call_dialogue("cum_vagina")
     $ the_girl.cum_in_vagina()
     $ breeding_missionary.redraw_scene(the_girl)
@@ -33,7 +33,7 @@ label breeding_missionary_double_orgasm(the_girl, the_location, the_object):
         "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
         "Her body convulses as she begins to cum at the same time. She clings to you as her orgasm hits."
     "When you finish, you wait a few minutes while [the_girl.title] has a few aftershocks. Her pussy grasps your cock with each one."
-    "You roll off of [the_girl.possessive_title] and lie beside her."
+    "You roll off of [the_girl.possessive_title!l] and lie beside her."
     "She lifts her legs up a bit, tilting her vagina so that your cum will naturally slide deeper inside. She sighs happily."
     $ post_double_orgasm(the_girl) #We have to put this at the end of each double orgasm scene because return doesn't return to where you think it will.
     return

@@ -14,12 +14,12 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
     $ the_choice = climax_controller.show_climax_menu()
 
     if the_choice == "Cum inside of her":
-        "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She is moaning loudly as she cums together with you at the same time."
+        "You use your full weight to push your cock deep inside of [the_girl.possessive_title!l]'s cunt as you climax. She is moaning loudly as she cums together with you at the same time."
         $ climax_controller.do_clarity_release(the_girl)
         if mc.condom:
             $ the_girl.call_dialogue("cum_condom")
             "When you finish, you leave yourself deep inside her for a few moments while she has a few aftershocks."
-            "You pull off of [the_girl.possessive_title]."
+            "You pull off of [the_girl.possessive_title!l]."
             "Your condom is ballooned with your seed, hanging off your cock to one side."
             if the_girl.has_cum_fetish():
                 if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
@@ -30,7 +30,7 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
                     $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
                     "[the_girl.possessive_title] moans as she pours your cum into her mouth."
                     $ the_girl.cum_in_mouth()
-                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
+                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title!l] is literally addicted to your cum."
                 else:
                     $ the_girl.discover_opinion("cum facials")
                     "[the_girl.possessive_title] reaches up for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
@@ -58,7 +58,7 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
                 "Her body convulses as she begins to cum at the same time. She wraps her legs around you and clings to you as orgasm hits her as you cum inside of her."
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
             "When you finish, you wait a few minutes while [the_girl.title] has a few aftershocks. Her pussy grasps your cock with each one."
-            "You slowly pull out of [the_girl.possessive_title]."
+            "You slowly pull out of [the_girl.possessive_title!l]."
 
     elif the_choice == "Cum on her face":
         $ the_girl.cum_on_face()
@@ -76,7 +76,7 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
             "She truly is addicted to your cum."
         else:
             the_girl "Ah... Good job... Ah..."
-            "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s body covered in your semen."
+            "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title!l]'s body covered in your semen."
 
     $ post_double_orgasm(the_girl) #We have to put this at the end of each double orgasm scene because return doesn't return to where you think it will.
     return

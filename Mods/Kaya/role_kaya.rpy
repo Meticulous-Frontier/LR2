@@ -264,7 +264,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     $ mc.location.show_background()
     "You step outside and sit down, sipping your coffee."
     "You spend some time on your phone, and follow up on a couple of work emails while you wait. It's a pretty pleasant evening."
-    "Pretty soon you hear [the_person.possessive_title] clear her throat nearby. You look up from your phone."
+    "Pretty soon you hear [the_person.possessive_title!l] clear her throat nearby. You look up from your phone."
     $ the_person.draw_person()
     mc.name "Ah, you're right, that was quick!"
     the_person "Yes... hey... I need to be honest about something..."
@@ -340,7 +340,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
         the_person "Thank you. I love to play. It is a good exercise for your dexterity and your brain."
         mc.name "I agree. Now, about the wager..."
         the_person "Yes, this should be interesting. Go ahead, think about it and guess my favorite drink."
-        "It is clear to you so far that [the_person.possessive_title] is intelligent and practical. However, even though she is strapped for money right now, you get the feeling things haven't always been this way for her."
+        "It is clear to you so far that [the_person.possessive_title!l] is intelligent and practical. However, even though she is strapped for money right now, you get the feeling things haven't always been this way for her."
         "Rum is too simple a spirit for her to favor. She probably favors gin or whiskey."
         "Something about her dark skin has you guessing it might be a darker spirit too, so you decide to guess a classic whiskey cocktail."
         menu:
@@ -406,7 +406,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     "You both finish off what is left of your drinks, then leave the bar together."
     $ mc.change_location(downtown)
     $ mc.location.show_background()
-    "You step out on to the sidewalk and start to walk [the_person.possessive_title] home. Sensing a connection with her, you hold out your hand and she takes it."
+    "You step out on to the sidewalk and start to walk [the_person.possessive_title!l] home. Sensing a connection with her, you hold out your hand and she takes it."
     mc.name "So, you're going to class at the university, right?"
     the_person "That's right."
     mc.name "What are you studying?"
@@ -427,7 +427,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     $ the_person.draw_person(position = "kissing")
     "[the_person.title] holds her arms out for a hug, and you draw her close. She is looking up at you, and feeling right, you kiss her."
     "She responds immediately and starts kissing you back. Her mouth opens and your tongues intertwine in a passionate kiss."
-    "Your hands start to roam around [the_person.possessive_title]'s back. She gives a little moan when you hand wanders down to her ass, but reaches back and moves your hand back up."
+    "Your hands start to roam around [the_person.possessive_title!l]'s back. She gives a little moan when you hand wanders down to her ass, but reaches back and moves your hand back up."
     $ the_person.change_arousal(15)
     $ the_person.break_taboo("kissing")
     "You keep making out for several more seconds until [the_person.title] breaks it off and then steps back."
@@ -463,7 +463,7 @@ label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Li
     "You go for a stroll at the university. With no particular aim, you just walk around, checking out some of the girls, stretching your legs a bit."
     the_person "[the_person.mc_title]? Is that you?"
     $ scene_manager.add_actor(the_person)
-    "You turn and see [the_person.possessive_title]. She goes to class here, but it is a big school, so you are surprised to see her."
+    "You turn and see [the_person.possessive_title!l]. She goes to class here, but it is a big school, so you are surprised to see her."
     mc.name "Ah, hello there [the_person.title]."
     "She gives you a smile and chirps at you."
     the_person "We go out one night for drinks and you are stalking me at class, mister?"
@@ -476,7 +476,7 @@ label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Li
     lily "You didn't tell me you were gonna be here! Want to grab some lunch?"
     $ scene_manager.update_actor(the_person, emotion = "angry")
     the_person "Ahhh... I see... you aren't here to see me..."
-    "[lily.title] suddenly realizes you were talking with [the_person.possessive_title]. The edge of jealously is clear in [the_person.title]'s voice."
+    "[lily.title] suddenly realizes you were talking with [the_person.possessive_title!l]. The edge of jealously is clear in [the_person.title]'s voice."
     lily "Oh! Sorry, I didn't realize you were talking to her..."
     mc.name "Ah, let me introduce you. [the_person.name], this is my sister, [lily.name]. She is taking classes here also."
     $ scene_manager.update_actor(the_person, emotion = "happy")
@@ -488,7 +488,7 @@ label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Li
     if lily.has_taboo(["vaginal_sex", "sucking_cock", "anal_sex"]): #This is our check to see if anything serious has happened with Lily yet.
         "As you look at the two girls, you are suddenly struck by how similar they are. The way they talk and relate to each other."
         "[the_person.title] cracks a joke... they almost laugh the same? It's a little crazy how similar they are."
-        "While you are really attracted to [the_person.possessive_title], it is kind of weird seeing her interact with your sister."
+        "While you are really attracted to [the_person.possessive_title!l], it is kind of weird seeing her interact with your sister."
         $ kaya.event_triggers_dict["incest_warnings"] = 1
     else:   #You've started down the incest path with Lily
         "As you watch the two girls interact, you can't help but start to get turned on."
@@ -514,13 +514,13 @@ label kaya_lily_study_night_intro_label():
     $ the_person = kaya
     $ scene_manager = Scene()
     "As you are getting ready for bed, the sound of girls chattering and giggling can be heard from down the hall."
-    "You remember that [the_person.possessive_title] was supposed to come over tonight to study with [lily.title]."
+    "You remember that [the_person.possessive_title!l] was supposed to come over tonight to study with [lily.title]."
     "You decide to go say hi."
     $ mc.change_location(lily_bedroom)
     $ mc.location.show_background()
     $ scene_manager.add_actor(lily)
     $ scene_manager.add_actor(the_person, position = "sitting", display_transform = character_center_flipped)
-    "You knock on the door and a second later [lily.possessive_title] swings the door open. [the_person.title] is sitting on her bed."
+    "You knock on the door and a second later [lily.possessive_title!l] swings the door open. [the_person.title] is sitting on her bed."
     lily "Oh hey, I didn't realize you were home."
     the_person "Hey [the_person.mc_title]!"
     mc.name "Hey, I thought I heard you two in here, so I decided to come say hello."
@@ -553,7 +553,7 @@ label kaya_lily_study_night_intro_label():
     "You look at the second glass for a moment. This could get awkward when the other two get here."
     $ scene_manager.add_actor(lily, display_transform = character_center)
     $ scene_manager.add_actor(the_person, display_transform = character_left_flipped)
-    "[the_person.title] and [lily.possessive_title] enter the kitchen right on queue."
+    "[the_person.title] and [lily.possessive_title!l] enter the kitchen right on queue."
     lily "Oh hey mom."
     mom "Hi dear. Who is your friend?"
     lily "Oh! You mean [mc.name]'s friend!"
@@ -574,7 +574,7 @@ label kaya_lily_study_night_intro_label():
     lily "Hey, what do you think about having some of this?"
     $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(xoffset = -.1), position = "walking_away")
     $ scene_manager.update_actor(mom, emotion = "sad")
-    "When [the_person.title] turns to the fridge, you notice [mom.possessive_title] struggle for a moment to keep her emotions in check."
+    "When [the_person.title] turns to the fridge, you notice [mom.possessive_title!l] struggle for a moment to keep her emotions in check."
     "She looks at you with clear sadness in her eyes. Realization dawns on her though that you notice, and she quickly puts on happy face..."
     $ scene_manager.update_actor(mom, emotion = "happy")
     the_person "That looks good, but what about this..."
@@ -593,7 +593,7 @@ label kaya_lily_study_night_intro_label():
     "[lily.possessive_title] walks out of the kitchen. As [the_person.title] walks by also, she gives you a big smile."
     the_person "Talk to you later, [the_person.mc_title]..."
     $ scene_manager.remove_actor(the_person)
-    "The girls leave you alone with [mom.possessive_title] in the kitchen. This is sure to be a painful conversation. You brace yourself."
+    "The girls leave you alone with [mom.possessive_title!l] in the kitchen. This is sure to be a painful conversation. You brace yourself."
     "She takes a long drink of her glass of wine, then looks at you."
     if mom.has_taboo(["vaginal_sex", "sucking_cock", "anal_sex"]):  #You have not started incest content with her yet.
         mom "I don't expect you to understand this... but I want you to stay away from that girl."
@@ -625,7 +625,7 @@ label kaya_lily_study_night_intro_label():
     return
 
 label kaya_lily_study_night_apology_label(the_person):
-    "After the disaster that was Tuesday night, you decide you should probably talk to [the_person.possessive_title] and apologize about it."
+    "After the disaster that was Tuesday night, you decide you should probably talk to [the_person.possessive_title!l] and apologize about it."
     "Stepping up to the counter, [the_person.title] realizes it is you and smiles."
     $ the_person.draw_person(emotion = "happy")
     the_person "Ah, [the_person.mc_title]! I'm glad to see you. Can I get you something? The usual?"
@@ -652,7 +652,7 @@ label kaya_lily_study_night_apology_label(the_person):
 label kaya_lily_study_night_recurring_label(the_person):
     $ the_person = kaya
     $ scene_manager = Scene()
-    "You remember that [the_person.possessive_title] was supposed to come over tonight to study with [lily.title], so you swing by her room."
+    "You remember that [the_person.possessive_title!l] was supposed to come over tonight to study with [lily.title], so you swing by her room."
     $ mc.change_location(lily_bedroom)
     $ mc.location.show_background()
     $ scene_manager.add_actor(lily)
@@ -674,7 +674,7 @@ label kaya_lily_study_night_recurring_label(the_person):
         "Add serum to [lily.title]'s drink":
             call give_serum(lily) from _call_give_serum_lily_study_night_01
             if _return:
-                "You mix the serum into [lily.possessive_title]'s soda."
+                "You mix the serum into [lily.possessive_title!l]'s soda."
             else:
                 "You decide not to give her any for now."
         "Leave her drink alone":
@@ -683,7 +683,7 @@ label kaya_lily_study_night_recurring_label(the_person):
         "Add serum to [the_person.title]'s drink":
             call give_serum(the_person) from _call_give_serum_kaya_study_night_02
             if _return:
-                "You mix the serum into [the_person.possessive_title]'s soda."
+                "You mix the serum into [the_person.possessive_title!l]'s soda."
             else:
                 "You decide not to give her any for now."
         "Leave her drink alone":
@@ -695,7 +695,7 @@ label kaya_lily_study_night_recurring_label(the_person):
 label kaya_uni_scholarship_intro_label(the_person):
     "You go for a walk, eventually coming to the university grounds. You decide to walk about for a bit, admiring the architecture and the people."
     "The four years you spent going here, you feel a connection to this place and to the students. It feels good to be on the grounds."
-    "As you walk around, you spot [the_person.possessive_title]. She is stepping out of a building, and seems down."
+    "As you walk around, you spot [the_person.possessive_title!l]. She is stepping out of a building, and seems down."
     $ the_person.draw_person(emotion = "sad")
     mc.name "Hey [the_person.title]. Doing okay?"
     the_person "Wha? Oh hey [the_person.mc_title], I'm doing fine..."
@@ -719,13 +719,13 @@ label kaya_uni_scholarship_intro_label(the_person):
     the_person "I'm sorry, I have to get going... take care!"
     mc.name "Goodbye."
     $ the_person.draw_person(position = "walking_away")
-    "Your brain is working overtime as [the_person.possessive_title] walks away. There has to be some way that you can convince her to keep going to class?"
+    "Your brain is working overtime as [the_person.possessive_title!l] walks away. There has to be some way that you can convince her to keep going to class?"
     "When things with her mother... resolve... sure she could go back then... but will she?"
     "Dropping out now, you get the sinking feeling she will probably never finish her degree."
     "Surely there is something you could do?"
     "You decide to talk to someone about it. Someone who knows a bit more about the University and its inner workings, financially and otherwise."
     "Someone who once helped you financially get through your time in university."
-    "You walk to [nora.possessive_title]'s lab and knock on the door."
+    "You walk to [nora.possessive_title!l]'s lab and knock on the door."
     $ nora.draw_person()
     nora "Ah, hello [nora.mc_title]."
     mc.name "Hello [nora.title]."
@@ -769,7 +769,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     if nora.sluttiness > 40:
         nora "I can be VERY persuasive."
     "You think about it for a moment. This seems like a great opportunity to get impressionable young co-eds in your business..."
-    "However, you should probably run the details by your HR director before you go full steam ahead. For now, maybe you could just hire [the_person.possessive_title] until you talk to her."
+    "However, you should probably run the details by your HR director before you go full steam ahead. For now, maybe you could just hire [the_person.possessive_title!l] until you talk to her."
     mc.name "Tell you what, let's start with the student that we've already been discussing. I'll talk to my HR supervisor and iron out the details, and then get this program going."
     nora "Excellent. What programs are you looking to intern from?"
     mc.name "Well, for a STEM program... we currently do medical research and pharmaceutical manufacturing, so I suppose Chemistry and Biology?"
@@ -780,7 +780,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     $ nora.change_obedience(10)
     nora "It's decided then. I'll go find him right now. You're doing a wonderful thing, supporting students, [nora.mc_title]."
     $ clear_scene()
-    "You leave [nora.possessive_title]'s lab. You text [the_person.possessive_title]."
+    "You leave [nora.possessive_title!l]'s lab. You text [the_person.possessive_title!l]."
     $ mc.start_text_convo(the_person)
     mc.name "Hey, are you still at the university?"
     the_person "Yeah, I have an hour until my next class starts."
@@ -897,7 +897,7 @@ label kaya_moving_in_with_mother_intro_label(the_person): #This label is called 
     mc.name "I am so sorry. If there is anything I can do for you, please let me know."
     $ the_person.change_love(5)
     the_person "Thank you. It means a lot to hear that from you."
-    "Unfortunately, it seems that [the_person.possessive_title] may not be able to spend much time with you going forward."
+    "Unfortunately, it seems that [the_person.possessive_title!l] may not be able to spend much time with you going forward."
     $ mc.business.add_mandatory_crisis(kaya_asks_for_help_moving)
     $ kaya.event_triggers_dict["move_help_day"] = day + 7
     $ kaya.event_triggers_dict["can_get_drinks"] = False
@@ -913,7 +913,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     the_person "Just wondering if you could swing by the coffee shop."
     mc.name "Sure thing. I'll be right there."
     $ mc.end_text_convo()
-    "You make your way over to the coffee shop. When you get there the door is locked, since it is closed for the night, but after knocking [the_person.possessive_title] quickly lets you in."
+    "You make your way over to the coffee shop. When you get there the door is locked, since it is closed for the night, but after knocking [the_person.possessive_title!l] quickly lets you in."
     $ mc.change_location(coffee_shop)
     $ mc.location.show_background()
     $ the_person.draw_person()
@@ -941,7 +941,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     $ the_person.change_happiness(2)
     the_person "{=kaya_lang}āue!{/=kaya_lang} I've got this place closed down already. Let's go!"
     $ the_person.draw_person()
-    "You step out of the coffee shop into the night [the_person.possessive_title]. You soon find yourself walking into her apartment."
+    "You step out of the coffee shop into the night [the_person.possessive_title!l]. You soon find yourself walking into her apartment."
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
     "There are still a few basic things still out, but most of her belongings have been put into boxes."
@@ -978,10 +978,10 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
                 $ mc.business.add_mandatory_crisis(kaya_moving_day)
                 the_person "Tomorrow then?"
                 mc.name "I'll be here."
-                "You leave [the_person.possessive_title]'s place. It hurts to leave her like that, but something about it still just feels off."
+                "You leave [the_person.possessive_title!l]'s place. It hurts to leave her like that, but something about it still just feels off."
                 return
     elif the_person.event_triggers_dict.get("incest_warnings", 0) == 1:     #You might realize what is happening.
-        "You hands reach down and grope [the_person.possessive_title]'s ass. You've been waiting a while to get a piece of this!"
+        "You hands reach down and grope [the_person.possessive_title!l]'s ass. You've been waiting a while to get a piece of this!"
         "But still, something feels off. She seems desperate, and you wonder if her emotional state is okay."
         "You break off the kiss for a moment and look at her."
         mc.name "Are you sure you are okay with this? You've been through a lot lately, I feel like I'm kind of taking advantage of you."
@@ -1003,7 +1003,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
                 $ mc.business.add_mandatory_crisis(kaya_moving_day)
                 the_person "Tomorrow then?"
                 mc.name "I'll be here."
-                "You leave [the_person.possessive_title]'s place. It hurts to leave her like that, but something about it still just feels off."
+                "You leave [the_person.possessive_title!l]'s place. It hurts to leave her like that, but something about it still just feels off."
                 return
     "Primitive urges are overtaking you both. It isn't long until clothes start to come off."
     $ the_person.strip_to_tits(prefer_half_off = True, position = "kissing")
@@ -1042,7 +1042,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
                 $ mc.condom = True
             "Keep it natural":
                 mc.name "Thank you for telling me. I really appreciate it."
-                "You take the condom and put it back in your wallet. You start to move back toward [the_person.possessive_title]."
+                "You take the condom and put it back in your wallet. You start to move back toward [the_person.possessive_title!l]."
                 the_person "You just... so you..."
         "You pick up [the_person.title] and throw her on the bed."
         the_person "{=kaya_lang}Hika!{/=kaya_lang}"
@@ -1069,7 +1069,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
         call fuck_person(the_person, private=True, start_position = missionary, start_object = make_bed(), skip_condom = False) from _call_kaya_sex_at_Home_02
         $ kaya.event_triggers_dict["no_condom_talk"] = True   #We mark this is true here so it doesn't trigger later, since player pregnancy preferences override condom preference anyway
     $ the_person.draw_person(position = "missionary")
-    "You lay in bed for a while with [the_person.possessive_title], but it is getting very late."
+    "You lay in bed for a while with [the_person.possessive_title!l], but it is getting very late."
     mc.name "Hey... I'm sorry, but I didn't bring stuff to stay the night. I need to get going."
     the_person "Ahh. I know you can't stay. But that's okay. We're going to be doing this again... right?"
     mc.name "Yes, I would love to."
@@ -1094,7 +1094,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
         "You make sure to let work know you won't be in today."
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
-    "You walk over and soon you are knocking on [the_person.possessive_title]'s front door. She swings it open."
+    "You walk over and soon you are knocking on [the_person.possessive_title!l]'s front door. She swings it open."
     $ scene_manager.add_actor(the_person)
     the_person "Hey! You're here!"
     $ scene_manager.update_actor(the_person, position = "kissing")
@@ -1222,14 +1222,14 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     $ sakari.set_possessive_title(sakari.name)
     $ sakari.set_mc_title(mc.name)
     the_person "Alright. Let's get to work!"
-    "You and [the_person.possessive_title] team up and start unloading her stuff."
+    "You and [the_person.possessive_title!l] team up and start unloading her stuff."
     "After an hour or so the truck is starting to get pretty empty. [sakari.title] and [the_person.title] help direct you where to take things."
     "You come across a box that is labeled family pictures. When you take it inside, you ask [sakari.title] where to take it."
     sakari "Oh, that can probably just go in my closet for now. My room is the one on the right."
     $ scene_manager.clear_scene()
-    "You walk into [sakari.possessive_title]'s room and place the box on an empty shelf in her closet. When you finish putting it up, you glance around her room."
+    "You walk into [sakari.possessive_title!l]'s room and place the box on an empty shelf in her closet. When you finish putting it up, you glance around her room."
     "Suddenly, you see a picture on her wall and you stop in your tracks. It is a picture of a much younger [sakari.title], but she is standing suspiciously close to a man you recognize instantly."
-    "The picture is of [sakari.possessive_title] and your father! And they are clearly close to one another in the picture."
+    "The picture is of [sakari.possessive_title!l] and your father! And they are clearly close to one another in the picture."
     "You are stunned... Why would she have a picture of her and your father on the wall? Did they know each other? Did they..."
     $ scene_manager.add_actor(sakari)
     sakari "Ah, thank you for all your help, young man."
@@ -1241,17 +1241,17 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     mc.name "I'm sorry to hear that."
     sakari "Yes. He died a while ago, and I miss him. He was a good man."
     "You can't believe it. Your father had an affair? And [the_person.title] is..."
-    "You are speechless. How could this happen? Does [mom.possessive_title] know about this?"
-    "Of course she does! That's why she was acting so weird around her the other night when [the_person.possessive_title] came over to study with [lily.title]."
-    "And that would make [lily.possessive_title] and her half sisters! No wonder they are so similar and have the same laugh and smile!"
+    "You are speechless. How could this happen? Does [mom.possessive_title!l] know about this?"
+    "Of course she does! That's why she was acting so weird around her the other night when [the_person.possessive_title!l] came over to study with [lily.title]."
+    "And that would make [lily.possessive_title!l] and her half sisters! No wonder they are so similar and have the same laugh and smile!"
     $ scene_manager.add_actor(the_person, display_transform = character_center_flipped)
     the_person "Hey, everything going okay in here?"
     sakari "Yes, I was just showing [sakari.mc_title] here some old pictures."
-    "You look with new eyes at [the_person.possessive_title]."
+    "You look with new eyes at [the_person.possessive_title!l]."
     if came_inside_kaya:
         "Oh god... your cum is inside her right now!"
     if the_person.event_triggers_dict.get("incest_warnings", 0) == 0:   #You've fucked around with lily and jennifer already, before this happened.
-        "You've been messing around already with [lily.title] and [mom.possessive_title]... and now you have discovered a long-lost half sister."
+        "You've been messing around already with [lily.title] and [mom.possessive_title!l]... and now you have discovered a long-lost half sister."
         if kaya_had_condom_talk():
             "And you've already fucked her too!"
             if came_inside_kaya:
@@ -1281,13 +1281,13 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     else:
         "You can't believe it. You've considered using serums on your family from time to time, but so far you haven't taken anything too far..."
         if kaya_had_condom_talk():
-            "But with [the_person.possessive_title]... you've already fucked!"
+            "But with [the_person.possessive_title!l]... you've already fucked!"
             if came_inside_kaya:
                 "She has your cum swimming around inside her right now! You start to feel a bit sick to your stomach."
             elif the_person.is_pregnant():
                 "You came inside her last night! Oh god, she could be pregnant already! You feel a bit sick to your stomach."
         else:
-            "You can't believe you almost fucked your half sister. You are thankful for the warning [mom.possessive_title] gave you now."
+            "You can't believe you almost fucked your half sister. You are thankful for the warning [mom.possessive_title!l] gave you now."
 
     the_person "Are you okay [the_person.mc_title]? You look like you've seen a ghost..."
     "You finally snap out of it and regain your composure."
@@ -1323,7 +1323,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
 
 label kaya_fuck_in_apartment_label(the_person): #We already have her bent over doggy in scene manager for this.
     $ came_inside_kaya = False  #This could change some dialogue later in the scene.
-    "Bent over her counter, [the_person.possessive_title] wiggles her ass at you. You've been wanting to get her in this position for a long time."
+    "Bent over her counter, [the_person.possessive_title!l] wiggles her ass at you. You've been wanting to get her in this position for a long time."
     "You hands go to her hips. Time to get her naked."
     $ the_person.change_arousal(20)
     $ scene_manager.strip_to_vagina(person = the_person)
@@ -1363,7 +1363,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     $ mc.end_text_convo()
     $ mc.change_location(coffee_shop)
     $ mc.location.show_background()
-    "You head to your favorite coffee shop. After a knock on the door, [the_person.possessive_title] swings it open."
+    "You head to your favorite coffee shop. After a knock on the door, [the_person.possessive_title!l] swings it open."
     $ the_person.draw_person()
     the_person "Hey! Have a seat, everyone else is gone."
     "You walk over to a booth and sit down. [the_person.title] locks the door and joins you."
@@ -1453,7 +1453,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     the_person "You'd better take me now. I'm not sure how often we will be able to do this, so we'll need to take advantage of every opportunity."
     if kaya_had_condom_talk():#You've probably done this by now. If not, we definitely have the talk now.
         mc.name "You don't have to tell me twice."
-        "You hands are roaming every where over [the_person.possessive_title]'s body, and soon her clothes start to come off."
+        "You hands are roaming every where over [the_person.possessive_title!l]'s body, and soon her clothes start to come off."
         $ the_person.strip_outfit(exclude_lower = True, position = "kissing")
         "When her tits spring free, you can't help but grope one while lick and suck on the other."
         $ the_person.change_arousal(15)
@@ -1518,7 +1518,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
         the_person "Oh fuck... you better do this to me often, boyfriend!"
         call fuck_person(the_person, private=True, start_position = against_wall, skip_intro = True, skip_condom = True) from _call_kaya_sex_at_shop_08
     $ the_person.draw_person()
-    "When you finish, [the_person.possessive_title] looks thoughtful."
+    "When you finish, [the_person.possessive_title!l] looks thoughtful."
     the_person "Living with my mother... we are going to have to get creative so you can get naughty..."
     mc.name "I mean, you are always welcome at my place."
     the_person "Yeah. I'll see if I can come up with something."
@@ -1536,9 +1536,9 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     if the_person.is_pregnant():
         "And you've knocked her up!"
     "[the_person.possessive_title] seems very eager to put out. Normally sexy time would be something you would plan, but you decide for now to let her see what she can come up with."
-    "The obvious problem you need to deal with is [mom.possessive_title] and [lily.title]."
+    "The obvious problem you need to deal with is [mom.possessive_title!l] and [lily.title]."
     "[mom.title] likely already knows about your relationship with [the_person.title]... how is she going to react when you reveal you are dating?"
-    "And [lily.possessive_title]... she deserves to know that she also has a half-sister!"
+    "And [lily.possessive_title!l]... she deserves to know that she also has a half-sister!"
     "For now, there is no rush to reveal everything to them. You decide to take your time, think about it, and wait until the time is right to have those conversations."
     #TODO find some way to drop a hint here that the best way to continue the storyline is to invite Kaya over for a sleepover date.
     "NOTE: This is the end of Kaya's story content in this build."

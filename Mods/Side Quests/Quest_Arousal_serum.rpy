@@ -338,7 +338,7 @@ label quest_arousal_serum_test_label():
     $ quest_arousal_serum().quest_event_dict["ready_day"] = day + 3
     $ quest_arousal_serum().quest_event_dict["expiration_day"] += 3   # extend expiration to allow for research to finish
 
-    "You and [the_person.possessive_title] leave the lab and close up for the day."
+    "You and [the_person.possessive_title!l] leave the lab and close up for the day."
     return
 
 label quest_arousal_serum_researched_label():

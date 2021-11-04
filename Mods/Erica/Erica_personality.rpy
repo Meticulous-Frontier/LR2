@@ -326,7 +326,7 @@ label erica_hookup_accept(the_person):
     "A few minutes later, you walk into the gym. You locate the family locker room and discover it to be unlocked. You quietly let yourself in."
     $ the_person.draw_person(position = "missionary")
     $ the_person.arousal = 20
-    "You discover [the_person.possessive_title] sitting at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
+    "You discover [the_person.possessive_title!l] sitting at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
     "You quickly lock the door behind you. She notices you walk in but doesn't say a word."
     "You walk over to her silently, and then get down on your knees in front of her. Her pussy is hanging off the side of the sink, right in front of your face."
     "You waste no time and dive your tongue straight into her cunt. Her tangy juices greet your tongue."
@@ -409,7 +409,7 @@ label erica_hookup_accept(the_person):
     $ mc.change_locked_clarity(20)
     the_person "Ohhh, [the_person.mc_title]... That is exactly what I was hoping for when I sent you that text earlier. That feels so good..."
     "You give her a few tentative thrusts, then quickly pick up the pace and begin fucking her in earnest."
-    "Your hips slap against [the_person.possessive_title]'s ass as you fuck her vigorously."
+    "Your hips slap against [the_person.possessive_title!l]'s ass as you fuck her vigorously."
     $ the_person.call_dialogue("sex_responses_vaginal")
     if mc.condom:
         "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
@@ -479,7 +479,7 @@ label erica_hookup_accept(the_person):
         "She forces her sphincter to relax and your finger begins to slip inside her."
         the_person "Ohh, yes. You can move your hips, that feels good..."
         $ mc.change_locked_clarity(30)
-        "You give [the_person.possessive_title]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
+        "You give [the_person.possessive_title!l]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
         $ the_person.change_arousal(20)#90 + 8
         if the_person.arousal > 120:
             the_person "OH! It's so good... fuck I'm gonna cum again!!!"
@@ -546,13 +546,13 @@ label erica_hookup_accept(the_person):
         "You briefly consider pulling out."
         menu:
             "Pull Out":
-                "You pull out of [the_person.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+                "You pull out of [the_person.possessive_title!l] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
                 the_person "Oh! It's so hot on my skin!"
                 $ the_person.cum_on_ass()
                 $ the_person.draw_person(position = "standing_doggy")
                 $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
 
-                "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
+                "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title!l]'s ass covered in your semen."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
                 return
             "Creampie":
@@ -573,7 +573,7 @@ label erica_hookup_accept(the_person):
         $ the_person.cum_on_ass()
         $ the_person.draw_person(position = "standing_doggy")
         $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
-        "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
+        "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title!l]'s ass covered in your semen."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
     return
 

@@ -190,7 +190,7 @@ label quest_cure_discovery_intro_label():
         mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
     the_person "If I were you, I'd get on it, quick! Modern day drug research is extremely fast paced. No telling when another lab might replicate our findings..."
     mc.name "Thank you, [the_person.title], for your research and for bringing this to my attention."
-    "So... you should talk to [the_target.possessive_title] about selling your patent rights to the cure for [the_disease]."
+    "So... you should talk to [the_target.possessive_title!l] about selling your patent rights to the cure for [the_disease]."
 
     python:
         quest_cure_set_market_contact(the_target)
@@ -304,7 +304,7 @@ label quest_cure_discovery_patent_kept_label():
                 the_person "Yes sir!"
                 $ ceo_office.show_background()
                 $ the_person.draw_person()
-                "You hear a knock. You look up and see [the_person.possessive_title]."
+                "You hear a knock. You look up and see [the_person.possessive_title!l]."
                 the_person "You wanted to see me?"
                 mc.name "Yes. Come in, and lock the door behind you."
                 the_person "Oh my..."

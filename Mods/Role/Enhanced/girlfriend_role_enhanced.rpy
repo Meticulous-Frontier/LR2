@@ -194,7 +194,7 @@ label girlfriend_sleepover_label():
             $ the_person.change_slut(1)
             $ the_person.call_dialogue("sleepover_impressed_response")
             if not perk_system.has_ability_perk("Lustful Youth"):
-                "You feel like making [the_person.possessive_title] cum over and over has woken something inside you."
+                "You feel like making [the_person.possessive_title!l] cum over and over has woken something inside you."
                 "You feel like no matter what happens or how your day is going, you will always have the energy to make the ones you love cum."
                 $ lustful_youth_perk_unlock()
                 "You have gained the perk 'Lustful Youth'!"
@@ -216,7 +216,7 @@ label girlfriend_sleepover_label():
             $ done = True
 
         else:
-            "After a short rest you've recovered some of your energy and [the_person.possessive_title]'s eager to get back to work."
+            "After a short rest you've recovered some of your energy and [the_person.possessive_title!l]'s eager to get back to work."
             $ mc.change_energy(energy_gain_amount)
             $ the_person.change_energy(energy_gain_amount) #She gains some back too
             if energy_gain_amount >= 10:
@@ -277,7 +277,7 @@ label girlfriend_sleepover_label():
     if picked_event:
         $ picked_event.call_action(the_person)
     else:
-        "You wakeup, but [the_person.possessive_title] isn't there. She must have gotten up early and left."
+        "You wakeup, but [the_person.possessive_title!l] isn't there. She must have gotten up early and left."
         $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
         $ the_person.apply_planned_outfit()
     $ mc.business.event_triggers_dict["girlfriend_person"] = None
@@ -286,7 +286,7 @@ label girlfriend_sleepover_label():
 
 label girlfriend_wakeup_spooning_label(the_person):
     $ the_person.draw_person(position = "walking_away")
-    "You slowly wake up, with your arms around [the_person.possessive_title], spooning with her."
+    "You slowly wake up, with your arms around [the_person.possessive_title!l], spooning with her."
     "She is still sleeping, but her skin is setting off electric sparks everywhere it is touching yours."
     $ mc.change_locked_clarity(50)
     if the_person.has_large_tits():
@@ -447,7 +447,7 @@ label girlfriend_underwear_shopping_label(the_person):
                     "She gives you a quick kiss."
                     the_person "Thank you for being so patient!"
                     $ the_person.draw_person (position = "stand2")
-                "You spend a few minutes with [the_person.possessive_title] as she looks through the different clothes racks. Eventually she picks something."
+                "You spend a few minutes with [the_person.possessive_title!l] as she looks through the different clothes racks. Eventually she picks something."
                 "She takes your hand and you follow her to the dressing room."
                 the_person "I'll be right back!"
                 $ clear_scene()
@@ -465,7 +465,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 call screen outfit_creator(lingerie_outfit, outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
-                    "You pull out a few pieces of clothing to modify and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
+                    "You pull out a few pieces of clothing to modify and take them to [the_person.possessive_title!l]. You set them on the top of the dressing room door."
                     mc.name "Here you go, try this."
                     if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
                         $ the_person.call_dialogue("lingerie_shopping_tame_response")
@@ -499,7 +499,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 call screen outfit_creator(Outfit("New Outfit"), outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
-                    "You pick out an outfit and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
+                    "You pick out an outfit and take them to [the_person.possessive_title!l]. You set them on the top of the dressing room door."
                     mc.name "Here you go, try this."
                     $ the_person.apply_outfit(lingerie_outfit, update_taboo = True)
                     if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.

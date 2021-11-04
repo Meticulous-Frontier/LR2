@@ -11,12 +11,12 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
     $ the_choice = climax_controller.show_climax_menu()
 
     if the_choice == "Cum inside of her":
-        "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She gasps and claws lightly at your back as you pump your seed into her."
+        "You use your full weight to push your cock deep inside of [the_girl.possessive_title!l]'s cunt as you climax. She gasps and claws lightly at your back as you pump your seed into her."
 
         if mc.condom:
             $ the_girl.call_dialogue("cum_condom")
             $ climax_controller.do_clarity_release(the_girl)
-            "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
+            "You take a moment to catch your breath, then roll off of [the_girl.possessive_title!l] and lie beside her."
             "Your condom is ballooned with your seed, hanging off your cock to one side."
             if the_girl.has_cum_fetish():
                 if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
@@ -27,7 +27,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
                     $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
                     "[the_girl.possessive_title] moans as she pours your cum into her mouth."
                     $ the_girl.cum_in_mouth()
-                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
+                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title!l] is literally addicted to your cum."
                 else:
                     $ the_girl.discover_opinion("cum facials")
                     "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
@@ -55,7 +55,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
-            "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
+            "You take a moment to catch your breath, then roll off of [the_girl.possessive_title!l] and lie beside her."
 
     elif the_choice == "Cum outside":
         if mc.condom == False and (the_girl.has_cum_fetish() or (the_girl.wants_creampie() and the_girl.obedience <150 and the_girl.get_opinion_score("taking control") > -1 and the_girl.get_opinion_score("creampies") > 0)):
@@ -120,7 +120,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
                 "She truly is addicted to your cum."
             else:
                 the_girl "Ah... Good job... Ah..."
-                "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s body covered in your semen."
+                "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title!l]'s body covered in your semen."
     return
 
 label outro_against_wall_enhanced(the_girl, the_location, the_object):
@@ -134,7 +134,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
 
     if the_choice == "Cum inside of her":
         if mc.condom:
-            "You push forward as you climax, thrusting your cock as deep inside of [the_girl.possessive_title] as you can manage. She pants quietly as you pulse your hot cum into the condom you're wearing."
+            "You push forward as you climax, thrusting your cock as deep inside of [the_girl.possessive_title!l] as you can manage. She pants quietly as you pulse your hot cum into the condom you're wearing."
             $ the_girl.call_dialogue("cum_condom")
             $ climax_controller.do_clarity_release(the_girl)
             "Once your climax has passed you step back and pull your cock out from [the_girl.title]. Your condom is ballooned out, filled with your seed."
@@ -147,7 +147,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                     $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
                     "[the_girl.possessive_title] moans as she pours your cum into her mouth."
                     $ the_girl.cum_in_mouth()
-                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
+                    "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title!l] is literally addicted to your cum."
                 else:
                     $ the_girl.discover_opinion("cum facials")
                     "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
@@ -171,7 +171,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
             else:
-                "You push forward as you finally climax, thrusting your cock as deep inside of [the_girl.possessive_title] as you can manage. She gasps softly each time your dick pulses and shoots hot cum into her."
+                "You push forward as you finally climax, thrusting your cock as deep inside of [the_girl.possessive_title!l] as you can manage. She gasps softly each time your dick pulses and shoots hot cum into her."
             $ the_girl.call_dialogue("cum_vagina")
             $ the_girl.cum_in_vagina()
             $ against_wall.redraw_scene(the_girl)
@@ -227,9 +227,9 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
             $ against_wall.redraw_scene(the_girl)
             $ climax_controller.do_clarity_release(the_girl)
             if mc.condom:
-                "You pull out of [the_girl.possessive_title] at the last moment and step back. You whip your condom off and blow your load over her stomach while she watches."
+                "You pull out of [the_girl.possessive_title!l] at the last moment and step back. You whip your condom off and blow your load over her stomach while she watches."
             else:
-                "You pull out of [the_girl.possessive_title] at the last moment and step back. You stroke yourself off and blow your load over her stomach while she watches."
+                "You pull out of [the_girl.possessive_title!l] at the last moment and step back. You stroke yourself off and blow your load over her stomach while she watches."
             if the_girl.effective_sluttiness() > 120:
                 the_girl "What a waste, that would have felt so much better inside of me..."
                 "She reaches down and runs a finger through the puddles of cum you've put on her, then licks her finger clean and winks at you."

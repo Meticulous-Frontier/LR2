@@ -76,7 +76,7 @@ label train_in_gym(the_person):
         the_person.draw_person(emotion = "happy")
 
     if ran_num < 1:
-        "You decide to take a yoga class with [the_person.possessive_title]."
+        "You decide to take a yoga class with [the_person.possessive_title!l]."
         the_person "This stretching is good for my flexibility."
         if the_person.sluttiness > 20:
             $ the_person.draw_person(emotion="happy")
@@ -91,7 +91,7 @@ label train_in_gym(the_person):
         $ the_person.change_max_energy(5)
         "She seems to be building up her endurance."
     elif ran_num < 2.5:
-        "You and [the_person.possessive_title] spend a few hours working out."
+        "You and [the_person.possessive_title!l] spend a few hours working out."
         if the_person.get_opinion_score("sports") != 0:
             $ the_person.change_happiness(5*the_person.get_opinion_score("sports"))
             if the_person.get_opinion_score("sports") > 0:
@@ -102,7 +102,7 @@ label train_in_gym(the_person):
         $ the_person.change_max_energy(10)
         "She seems to be building up her endurance."
     else:
-        "You put [the_person.possessive_title] through a vigorous training session."
+        "You put [the_person.possessive_title!l] through a vigorous training session."
         if the_person.sluttiness > 20:
             $ the_person.draw_person(emotion = "happy")
             the_person "It seems you have plans with my body, [the_person.mc_title]."
@@ -123,7 +123,7 @@ label train_in_gym(the_person):
         $ body_changed = the_person.change_weight(-ran_num, 100)
         $ new_weight = get_person_weight_string(the_person)
 
-        "After the session, [the_person.possessive_title] weighs [new_weight]."
+        "After the session, [the_person.possessive_title!l] weighs [new_weight]."
 
     else:
         "Since she is pregnant, there is no visible change to her body or weight."
@@ -143,7 +143,7 @@ label train_in_gym(the_person):
                     the_person "Lead the way, [the_person.mc_title]."
                     $ gym_shower.show_background()
 
-                    "As soon as you get into the showers, [the_person.possessive_title] moves closer and starts kissing you."
+                    "As soon as you get into the showers, [the_person.possessive_title!l] moves closer and starts kissing you."
                     # intro breaks kissing taboo for the_person
                     $ the_person.break_taboo("kissing")
                     $ old_outfit = the_person.outfit.get_copy() # make a copy we can restore

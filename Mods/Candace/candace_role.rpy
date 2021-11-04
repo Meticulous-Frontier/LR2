@@ -646,7 +646,7 @@ label candace_convince_to_quit_label(the_person):
     $ town_relationships.update_relationship(salon_manager, the_person, "Friend")
 
     "You complete the necessary paperwork and hire [the_person.title], assigning her to the supply department."
-    "As you finish up, you notice [salon_manager.possessive_title] is walking over to the table."
+    "As you finish up, you notice [salon_manager.possessive_title!l] is walking over to the table."
     $ scene_manager.add_actor(salon_manager, position = "sitting", display_transform = character_left_flipped)
     salon_manager "Hello! I'm [salon_manager.name]. I don't think we've been properly introduced."
     the_person "Hi! You can call me [the_person.name]."
@@ -654,7 +654,7 @@ label candace_convince_to_quit_label(the_person):
     the_person "Right... used to... kind of weird to think about, this is all happening so fast!"
     salon_manager "Don't worry. First thing's first! Do you have your phone handy? Lets take a picture together!"
     the_person "Okay! I love selfies."
-    "[the_person.title] and [salon_manager.possessive_title] lean together and take a picture."
+    "[the_person.title] and [salon_manager.possessive_title!l] lean together and take a picture."
     salon_manager "There we go! That will be a great picture to send with your break up text..."
     "Oh boy. Things are about to get juicy."
     salon_manager "Let me see your phone now. Okay here we go."
@@ -781,7 +781,7 @@ label candace_topless_at_mall_label(the_person):
             police_chief.set_mc_title("Mr." + mc.last_name)
             police_chief.set_title("Officer " + police_chief.last_name)
     "As you walk around the mall, you notice a commotion. A small group of mostly men have gathered around someone, you walk over to see what is going on."
-    "When you walk over, you find [the_person.possessive_title], and it immediately becomes clear why there is a crowd gathering around..."
+    "When you walk over, you find [the_person.possessive_title!l], and it immediately becomes clear why there is a crowd gathering around..."
     if mc.business.topless_is_legal():  #Right now it is always illegal
         pass
     else:
@@ -810,7 +810,7 @@ label candace_topless_at_mall_label(the_person):
         mc.name "I'm sure she won't do it again!"
         "[police_chief.possessive_title] looks at you, then back at [the_person.title], then shakes her head."
         police_chief "I mean, there are worse crimes that could be committed here... Okay, just make it quick."
-        "You quickly grab [the_person.possessive_title]'s hand and lead her into the clothing store."
+        "You quickly grab [the_person.possessive_title!l]'s hand and lead her into the clothing store."
         $ scene_manager.remove_actor(police_chief)
         $ mc.change_location(clothing_store)
         $ mc.location.show_background()
@@ -825,7 +825,7 @@ label candace_topless_at_mall_label(the_person):
         the_person "Okay. I'm sorry [the_person.mc_title], I didn't mean to cause you trouble."
         "You walk with [the_person.title] to the check out counter. You have the cashier ring up the shirt."
         $ mc.business.change_funds(-20)
-        "After you check out, suddenly [the_person.possessive_title] turns to you and hugs you."
+        "After you check out, suddenly [the_person.possessive_title!l] turns to you and hugs you."
         $ scene_manager.update_actor(the_person, position = "kissing")
         the_person "Thank you. You've always been so nice to me..."
         "You put your hands on her back and hold her for a few seconds."
@@ -1006,7 +1006,7 @@ label candace_love_path_intro_label():
     the_person "Oh! Fucking... Finally!"
     "[the_person.title] grabs her own legs, holding them back for you as best she can. It's time to give her pounding she's been looking for!"
     call fuck_person(the_person, start_position = piledriver, start_object = make_counter(), private = True, skip_intro = True, skip_condom = True) from _call_candace_love_fuck_01
-    "You look at the clock on [the_person.possessive_title]'s microwave. It's almost 2am. You are exhausted."
+    "You look at the clock on [the_person.possessive_title!l]'s microwave. It's almost 2am. You are exhausted."
     mc.name "Hey... It's really late... Can I crash here tonight?"
     "[the_person.title]'s face gets disturbingly excited."
     the_person "Oh. My. God. A slumber party! Let's do it!"
@@ -1031,7 +1031,7 @@ label candace_love_path_intro_label():
     $ mc.change_locked_clarity(5)
     "Silently, [the_person.title] climbs into bed next to you. You turn on your side and cuddle up with her, spooning her from behind."
     $ the_person.draw_person(position = "walking_away")
-    "Still naked, your cock is now up against [the_person.possessive_title]'s rear. She wiggles back and forth a couple times until it nestles in between her cheeks."
+    "Still naked, your cock is now up against [the_person.possessive_title!l]'s rear. She wiggles back and forth a couple times until it nestles in between her cheeks."
     "She grabs your hand and brings it around her front, placing it on her chest. She sighs, then turns her head."
     the_person "Goodnight boss. Thanks for spending the night... I've... Like... always wanted to try sleeping like this..."
     mc.name "Goodnight..."
@@ -1054,7 +1054,7 @@ label candace_love_path_intro_label():
     "When you finish, [the_person.title] starts to lick her fingers. She seems happy as she lays back in bed next to you. Sleep rapidly overtakes you."
     $ mc.change_locked_clarity(20)
     "You sleep for a while longer. You aren't surprised though when you feel warm, wet sensations enveloping your cock again."
-    "The delicious suction and the sound of [the_person.possessive_title]'s lips smacking give you all the information you need. [the_person.title] is sucking you off."
+    "The delicious suction and the sound of [the_person.possessive_title!l]'s lips smacking give you all the information you need. [the_person.title] is sucking you off."
     $ the_person.draw_person(position = "blowjob")
     "You crack your eyes open and see Candi, working diligently to get you off with her mouth. You aren't sure how long she has been doing this, but it's definitely working."
     $ mc.change_locked_clarity(50)
@@ -1132,7 +1132,7 @@ label candace_love_path_intro_label():
     $ mc.change_locked_clarity(30)
     "Still completely naked, you know there is no way you can hide it from her. Maybe you should take charge, and give her a good fuck before you both head in to work."
 
-    "You get up from the table and start to walk over to [the_person.possessive_title]. She doesn't seem to react... Surely she heard you get up?"
+    "You get up from the table and start to walk over to [the_person.possessive_title!l]. She doesn't seem to react... Surely she heard you get up?"
     "Then you notice. She is starting to wiggle her ass back and forth. God she really is a sex hungry minx."
     $ mc.change_locked_clarity(50)
     "You grip her hips with your hands, and then push your fully erect cock against her ass."
@@ -1158,7 +1158,7 @@ label candace_love_path_intro_label():
     the_person "Oh! The dryer is done! I guess it's about time to head into the office..."
     "[the_person.title] disappears for a moment then comes back, holding your clothes."
     $ the_person.draw_person(position = "stand4")
-    "You spend a few minutes getting dressed and freshening up a bit in the restroom. When you emerge, you see [the_person.possessive_title] also getting ready for the day."
+    "You spend a few minutes getting dressed and freshening up a bit in the restroom. When you emerge, you see [the_person.possessive_title!l] also getting ready for the day."
     $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
     $ the_person.apply_planned_outfit()
     mc.name "I'm going to head in a little early. I'll page you down to my office when I've had a chance to talk to [mc.business.head_researcher.title]."
@@ -1166,7 +1166,7 @@ label candace_love_path_intro_label():
     "You step out of [the_person.title]'s apartment. You should make it a priority to talk to your head researcher."
     $ mc.business.head_researcher.add_unique_on_talk_event(candace_begin_cure_research)
     if not perk_system.has_ability_perk("Lustful Youth"):
-        "You feel like making [the_person.possessive_title] cum over and over has woken something inside you."
+        "You feel like making [the_person.possessive_title!l] cum over and over has woken something inside you."
         "You feel like no matter what happens or how your day is going, you will always have the energy to make the ones you love cum."
         $ lustful_youth_perk_unlock()
         "You have gained the perk 'Lustful Youth'!"
@@ -1240,7 +1240,7 @@ label candace_anti_bimbo_serum_label():
     $ mc.end_text_convo()
     $ the_person.draw_person(position = "sitting")
     $ ceo_office.show_background()
-    "You quickly head to your office and find [the_person.possessive_title] sitting behind your desk with her feet up."
+    "You quickly head to your office and find [the_person.possessive_title!l] sitting behind your desk with her feet up."
     the_person "Guess what? I'm a fucking genius."
     mc.name "Oh? Do you have something to report from your research with Candi?"
     the_person "Something like that. You see, at first, I was racking my brain, trying to come up with some crazy chemical compound that could go back and undo a complex drug with multiple binding points and effects."
@@ -1558,7 +1558,7 @@ label candace_meet_doctor_candace_label():
                 "You consider for a moment getting a nice couch for your office... "
                 "But then whenever you call a girl in they'd probably assume you were getting ready to make a cheap porno movie. Better not."
                 mc.name "Rest up, I'm going to get back to work."
-                "You leave your office. You feel great about how things have progressed with [the_person.possessive_title]."
+                "You leave your office. You feel great about how things have progressed with [the_person.possessive_title!l]."
             "Reject (disabled)":
                 pass
     $ clear_scene()

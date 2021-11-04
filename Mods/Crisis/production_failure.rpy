@@ -83,7 +83,7 @@ label production_failure_action_label:
 
                 $ production_failure_clear_situational_sluttiness(the_person)
 
-                "You leave [the_person.possessive_title] to get cleaned up and get back to work."
+                "You leave [the_person.possessive_title!l] to get cleaned up and get back to work."
             elif ran_num > 30: # 15% chance
                 $ production_failure_change_obedience(the_person, 3)
                 "The girls seem slightly more respectful."

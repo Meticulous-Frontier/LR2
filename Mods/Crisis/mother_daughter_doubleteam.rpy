@@ -39,7 +39,7 @@ label mother_daughter_doubleteam_action_label():
 
         scene_manager = Scene() # make sure we have a clean scene manager
     "As you are walking around the office, you hear some arguing coming from the break room."
-    "When you look inside, you see [the_mother.possessive_title] having a discussion with her daughter."
+    "When you look inside, you see [the_mother.possessive_title!l] having a discussion with her daughter."
     $ scene_manager.add_actor(the_mother)
     $ scene_manager.add_actor(the_daughter, display_transform = character_center_flipped)
     the_daughter "I know, I know, dad always said you were good in bed. I'm not disputing that! I'm just saying I'm pretty good at giving blowjobs and I might even be better than you..."

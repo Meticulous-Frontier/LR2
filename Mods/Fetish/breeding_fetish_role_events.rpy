@@ -46,7 +46,7 @@ label breeding_fetish_going_off_BC_label(the_person):
     return
 
 label breeding_fetish_bend_her_over_label(the_person):
-    "You decide that it is time for [the_person.possessive_title] to take a load. You decide to bend her over and fuck her right here, right now."
+    "You decide that it is time for [the_person.possessive_title!l] to take a load. You decide to bend her over and fuck her right here, right now."
     mc.name "[the_person.title], you haven't taken a load of cum in a while. Turn around, I'm going to give you one."
     if mc.location.get_person_count() < 2:
         "With no one around, [the_person.title] happily turns around for you."
@@ -99,7 +99,7 @@ label breeding_fetish_bend_her_over_label(the_person):
         the_person "Oh fuck... every time you finish inside me is just so good..."
         "She rubs her belly and sighs."
         $ the_person.event_triggers_dict["LastBreedingFetish"] = day
-    "When you finish, [the_person.possessive_title] cleans herself up a bit."
+    "When you finish, [the_person.possessive_title!l] cleans herself up a bit."
     $ the_person.review_outfit()
     $ the_person.draw_person()
     the_person "Mmm, that was nice..."

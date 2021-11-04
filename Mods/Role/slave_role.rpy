@@ -111,13 +111,13 @@ init 10 python:
 label stay_wet_label(the_person): # Can expand with dialogue options and degrees of arousal, but just setting up basic actions for now.
 
     if the_person.stay_wet == False:
-        "You order [the_person.possessive_title] to keep herself wet and ready at all times for you."
+        "You order [the_person.possessive_title!l] to keep herself wet and ready at all times for you."
         if the_person.arousal < 50:
             $ the_person.arousal = 50
         $ the_person.stay_wet = True
 
     elif the_person.stay_wet == True:
-        "You tell [the_person.possessive_title] to calm their tits."
+        "You tell [the_person.possessive_title!l] to calm their tits."
         $ the_person.stay_wet = False
         $ the_person.reset_arousal()
 
@@ -126,7 +126,7 @@ label stay_wet_label(the_person): # Can expand with dialogue options and degrees
 label slave_collar_person_label(the_person):
     if the_person.slave_collar:
         $ slave_remove_collar(the_person)
-        "You remove the collar from your [the_person.possessive_title]'s neck"
+        "You remove the collar from your [the_person.possessive_title!l]'s neck"
     else:
         call screen enhanced_main_choice_display(build_menu_items([["Select Collar"] + [["Simple Collar", "Simple Collar"], ["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Spiked Choker", spiked_choker], ["Wide Lace Choker", wide_choker], ["Back", "Back"]]]))
         $ collar_choice = _return
@@ -137,7 +137,7 @@ label slave_collar_person_label(the_person):
         $ slave_assign_new_collar(the_person, collar_choice)
         $ del collar_choice
 
-        "You put one of the collars you bought around your [the_person.possessive_title]'s neck."
+        "You put one of the collars you bought around your [the_person.possessive_title!l]'s neck."
 
     return
 
@@ -168,7 +168,7 @@ label slave_trim_pubes_label(the_person):
     return
 
 label wakeup_duty_label(the_person):
-    "You tell [the_person.possessive_title] to make sure you wake up in the morning."
+    "You tell [the_person.possessive_title!l] to make sure you wake up in the morning."
     $ slave_add_wakeup_duty_action(the_person)
     return
 
@@ -176,12 +176,12 @@ label slave_training_label(the_person): # TODO: Add variations to these. They ar
     menu:
 
         "Give her a head pat":
-            "You give [the_person.possessive_title] a quick head pat as to signal approval of her actions." #Or something like that. I don't do writing.
+            "You give [the_person.possessive_title!l] a quick head pat as to signal approval of her actions." #Or something like that. I don't do writing.
             $ the_person.change_stats(obedience = 2, happiness = 2, arousal = 10, love = 2)
 
         "Give her a quick kiss":
             $ the_person.draw_person("kissing")
-            "You give [the_person.possessive_title] a quick kiss"
+            "You give [the_person.possessive_title!l] a quick kiss"
             $ the_person.change_stats(happiness = 2, arousal = 10, love = 3)
 
         "Give her a serum":
@@ -205,7 +205,7 @@ label slave_alarm_clock_label(the_person):
     #TODO: Finish all of the side functionality this event requires to be implemented.
     if the_person.sluttiness < 50:
         the_person "[the_person.mc_title], it's time to wake up."
-        "You're woken up by the voice of [the_person.possessive_title]. You struggle to open your eyes and find her sitting on the edge of your bed."
+        "You're woken up by the voice of [the_person.possessive_title!l]. You struggle to open your eyes and find her sitting on the edge of your bed."
         $ the_person.draw_person(position="sitting")
         mc.name "Uh... Huh?"
         "You roll over and check your phone. It's a couple of minutes left until your alarm clock usually rings."
@@ -242,10 +242,10 @@ label slave_alarm_clock_label(the_person):
                     "She wiggles her butt a bit as if to tease you, then turns her attention back to putting together an outfit for you."
                     $ the_person.call_dialogue("sex_strip")
                     "You keep jerking yourself off, pulling yourself closer and closer to orgasm."
-                    "You're getting close when [the_person.possessive_title] turns around and walks back towards your bed with a handful of clothes."
+                    "You're getting close when [the_person.possessive_title!l] turns around and walks back towards your bed with a handful of clothes."
                     the_person "I think you'll look really cute in this. Are you almost done [the_person.mc_title]?"
                     menu:
-                        "Order [the_person.possessive_title] to get on her knees" if the_person.obedience >= 130:
+                        "Order [the_person.possessive_title!l] to get on her knees" if the_person.obedience >= 130:
                             mc.name "I'm so close. Get on your knees [the_person.title]."
                             $ the_person.call_dialogue("sex_obedience_accept")
                             $ the_person.draw_person(position = "blowjob")
@@ -254,7 +254,7 @@ label slave_alarm_clock_label(the_person):
                                     mc.name "Open your mouth [the_person.title]."
                                     "She hesitates for a split second, then closes her eyes and opens her mouth."
                                     $ the_person.draw_person(position = "blowjob", special_modifier = "blowjob")
-                                    "Seeing [the_person.possessive_title] presenting herself for you pushes you past the point of no return."
+                                    "Seeing [the_person.possessive_title!l] presenting herself for you pushes you past the point of no return."
                                     $ the_person.cum_in_mouth()
                                     $ the_person.draw_person(position = "blowjob", special_modifier = "blowjob")
                                     $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
@@ -271,7 +271,7 @@ label slave_alarm_clock_label(the_person):
                                 "Order her to hold up her tits" if the_person.has_large_tits():
                                     mc.name "Hold up your tits, I'm going to cum!"
                                     "[the_person.possessive_title] mumbles something but does as she's told. She cups her large breasts in her hands and presents them in front of you."
-                                    "You grunt and climax, firing your load out and right onto [the_person.possessive_title]'s chest."
+                                    "You grunt and climax, firing your load out and right onto [the_person.possessive_title!l]'s chest."
                                     $ the_person.cum_on_tits()
                                     #TODO: have more clothing aware stuff here
                                     $ the_person.call_dialogue("cum_face")
@@ -287,7 +287,7 @@ label slave_alarm_clock_label(the_person):
                             pass
 
                         "Climax":
-                            "Knowing that [the_person.possessive_title] is just a step away watching you stroke your cock and waiting for you to cum pushes you over the edge."
+                            "Knowing that [the_person.possessive_title!l] is just a step away watching you stroke your cock and waiting for you to cum pushes you over the edge."
                             "You grunt and climax, firing your load out in an arc. [the_person.title] gasps softly and watches it fly, looks away."
                             the_person "Well done [the_person.mc_title]. I'll make sure to clean that up while you're out today."
                             "She leans over and kisses you on the forehead."
@@ -312,7 +312,7 @@ label slave_alarm_clock_label(the_person):
         "She speeds up her strokes."
         the_person "I thought that this would be a much nicer way to wake up."
         mc.name "Right, of course... Good thinking, [the_person.title]."
-        "You lie back, relax, and enjoy the feeling of [the_person.possessive_title] hand caressing your hard shaft."
+        "You lie back, relax, and enjoy the feeling of [the_person.possessive_title!l] hand caressing your hard shaft."
         the_person "Anything for you [the_person.mc_title], I just want to make sure you're happy and successful."
         "After a few minutes you can feel your orgasm starting to build. [the_person.title] rubs your precum over your shaft and keeps stroking."
         menu:
@@ -321,7 +321,7 @@ label slave_alarm_clock_label(the_person):
                 $ the_person.change_obedience(5)
                 $ the_person.call_dialogue("sex_obedience_accept")
                 "She nods and leans over, stroking your cock faster and faster as she places the tip just inside her mouth."
-                "The soft touch of her lips pushes you over the edge. You gasp and climax, shooting your hot load into [the_person.possessive_title]'s waiting mouth."
+                "The soft touch of her lips pushes you over the edge. You gasp and climax, shooting your hot load into [the_person.possessive_title!l]'s waiting mouth."
                 $ the_person.cum_in_mouth()
                 $ the_person.draw_person(position = "blowjob")
                 $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
@@ -333,7 +333,7 @@ label slave_alarm_clock_label(the_person):
             "Climax":
                 mc.name "I'm almost there [the_person.title], keep going!"
                 "She nods and strokes your dick as fast as she can manage, pushing you over the edge."
-                "You grunt and fire your hot load into up into the air. It falls back down onto your stomach and [the_person.possessive_title]'s hand."
+                "You grunt and fire your hot load into up into the air. It falls back down onto your stomach and [the_person.possessive_title!l]'s hand."
                 "[the_person.possessive_title] strokes you slowly for a few seconds, then lets go and places her hand on her lap while you take a second to recover."
 
         the_person "Whew, that was a lot. I hope that leaves you feeling relaxed for the rest of the day."
@@ -355,13 +355,13 @@ label slave_alarm_clock_label(the_person):
         mc.name "That feels great [the_person.title]."
         $ the_person.change_happiness(5)
         "She smiles up at you, then lifts her head and slides your hard dick back into her mouth."
-        "You lie back and enjoy the feeling of [the_person.possessive_title] sucking you off."
+        "You lie back and enjoy the feeling of [the_person.possessive_title!l] sucking you off."
         $ the_person.draw_person(position = "blowjob", special_modifier = "blowjob")
         "For several minutes the room is quiet save for a soft slurping sound each time [the_person.title] slides herself down your shaft."
         "You rest a hand on the back of her head as you feel your orgasm start to build, encouraging her to go faster and deeper."
         mc.name "I'm almost there [the_person.title], keep going!"
         "She mumbles out an unintelligible response and keeps sucking your cock."
-        "You arch your back and grunt as you climax, firing a shot of cum into [the_person.possessive_title]'s mouth."
+        "You arch your back and grunt as you climax, firing a shot of cum into [the_person.possessive_title!l]'s mouth."
         $ the_person.cum_in_mouth()
         $ the_person.draw_person(position = "blowjob")
         $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
@@ -401,10 +401,10 @@ label slave_alarm_clock_label(the_person):
         "She grinds her hips back and forth, rubbing your shaft along the lips of her cunt."
         the_person "Would you like me to take care of this for you?"
         menu:
-            "Let [the_person.possessive_title] fuck you":
+            "Let [the_person.possessive_title!l] fuck you":
                 mc.name "That would be great [the_person.title]."
                 $ the_person.change_stats(happiness = 5, love = 2)
-                "You lie back relax as [the_person.possessive_title] lowers herself down onto your hard cock."
+                "You lie back relax as [the_person.possessive_title!l] lowers herself down onto your hard cock."
                 # call fuck_person(the_person, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, girl_in_charge = True, position_locked = True) from _slave_alarm_clock_label_2
                 call get_fucked(the_person, the_goal = "vaginal creampie", private= True, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, allow_continue = False) from _slave_alarm_clock_label_2
                 $ the_report = _return

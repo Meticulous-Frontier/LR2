@@ -94,7 +94,7 @@ label taboo_break_spanking(the_girl, the_location, the_object):
 label scene_spanking_1(the_girl, the_location, the_object):
     $ spank_factor = calc_spank_factor(the_girl)
     $ ass_desc = spanking_get_ass_description(the_girl)
-    "You look down at [the_girl.possessive_title]'s ass. It is [ass_desc]"
+    "You look down at [the_girl.possessive_title!l]'s ass. It is [ass_desc]"
     "*SMACK*"
     "You give her a solid spank. She lets out a little yelp."
     "*SMACK* *SMACK* SMACK*"
@@ -153,7 +153,7 @@ label scene_spanking_2(the_girl, the_location, the_object):
 
         "Finger her pussy" if the_girl.get_opinion_score("being fingered") > 0:
             "You slide your fingers in and out of her pussy, stroking the inside of that soft tunnel."
-            "Each movement draws moans of pleasure from [the_girl.possessive_title], who presses herself against you."
+            "Each movement draws moans of pleasure from [the_girl.possessive_title!l], who presses herself against you."
             "She places one of her own hands over yours, encouraging you to speed up."
             the_girl "Just like that... Ah..."
             $ the_girl.change_arousal((the_girl.get_opinion_score("being fingered") + 1) * 5)

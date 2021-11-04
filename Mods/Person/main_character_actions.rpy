@@ -149,7 +149,7 @@ label mc_spend_the_night_label(person): # Consider adding the sleep_action to th
 
 
 label mc_rename_person_label(person):
-    "You tell [person.possessive_title] that you are giving her a new name."
+    "You tell [person.possessive_title!l] that you are giving her a new name."
     while True:
         menu rename_person_menu:
             "Name: [person.name]":

@@ -111,7 +111,7 @@ label camilla_spot_at_bar_label(the_person):
     the_person "Yes, I remember. The small business owner."
     mc.name "I noticed you at the bar by yourself. Mind if I sit with you for a while?"
     the_person "That's fine."
-    "You sit down in a bar stool next to [the_person.possessive_title]"
+    "You sit down in a bar stool next to [the_person.possessive_title!l]"
     mc.name "So how long have you been working as a lifestyle coach?"
     the_person "Honestly, not too long. I mainly just do it as an extra source of income to supplement what my hubby brings in."
     "Ah, so she is married. You should probably keep things low key for now."
@@ -133,13 +133,13 @@ label camilla_spot_at_bar_label(the_person):
     the_person "I do. I'm here most evenings. I like have a drink before I head home each night. My husband works late."
     mc.name "I see. I'm here somewhat often as well. Maybe we could have a drink together once in a while?"
     the_person "I... I suppose that would be alright."
-    "You sit back in the chair and chat with [the_person.possessive_title] for a while. You both enjoy the time together, getting to know one another as friends."
+    "You sit back in the chair and chat with [the_person.possessive_title!l] for a while. You both enjoy the time together, getting to know one another as friends."
     $ the_person.change_love(3)
     $ mc.business.change_funds(-20)
     "Eventually you settle up with the bartender. You notice him gesture at [the_person.title] when she isn't looking, and gives you a little wink."
     "You aren't sure... is he trying to say she's... available? Maybe since her husband works late she picks up guys at the bar..."
     "You file it away in your brain. Maybe you could come back and have drinks with her again. A bar would be an ideal place to dose her with a few serums too..."
-    "You get up and say goodbye to [the_person.possessive_title]."
+    "You get up and say goodbye to [the_person.possessive_title!l]."
     mc.name "Thank you for the conversation. I'll see you around [the_person.title]"
     the_person "Take care [the_person.mc_title]."
     "You can now have drinks with [the_person.title] at the bar in the evenings."
@@ -241,7 +241,7 @@ label camilla_get_a_drink_label(the_person):
             the_person "No dancing tonight?"
             mc.name "No, sometimes it is nice to just relax and have drink."
             the_person "Yeah, I agree."
-            "You chat with [the_person.possessive_title] for a bit."
+            "You chat with [the_person.possessive_title!l] for a bit."
             "There is definitely some sexual tension in the air between you two, but she knows she can talk to you about it when she is ready."
             $ mc.change_locked_clarity(10)
 
@@ -374,7 +374,7 @@ label camilla_get_a_drink_label(the_person):
 label camilla_dance_lessons_label():
     $ the_person = camilla
     $ scene_manager = Scene()
-    "It's Wednesday night, and you have a date with [the_person.possessive_title] at the bar to learn salsa dancing."
+    "It's Wednesday night, and you have a date with [the_person.possessive_title!l] at the bar to learn salsa dancing."
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
     "When you get there, you step inside. You see [the_person.title] at the bar, in a very nice dress."
@@ -387,7 +387,7 @@ label camilla_dance_lessons_label():
     the_person "You are right about that, but tonight, it is all about you!"
     "You make some idle chatter at the bar as you wait for the lessons to begin. You admit you are pretty nervous, but as people filter in, you see a lot of people around who also look new at this."
     "?????" "Alright, everyone here for salsa lessons, we are forming up over here! Come with your partner!"
-    "You and [the_person.possessive_title] head over."
+    "You and [the_person.possessive_title!l] head over."
     "?????" "Alright, my name is Alvero, and I'll be your instructor tonight! First let's start off with a little..."
     "You listen intently as the instructor begins initial warm up instructions."
     "Finally, it's time to start dancing."
@@ -395,7 +395,7 @@ label camilla_dance_lessons_label():
     "You get close to [the_person.title] as the music starts. You listen as the instructor begins to issue commands."
     "Alvero" "Alright fellas, remember, your sole purpose while salsa dancing is to display the beautiful flower you are partners with."
     $ scene_manager.update_actor(the_person, position = "kissing", display_transform = character_left_flipped)
-    "You try one of the moves as instructed, moving [the_person.possessive_title] away from you a bit and allowing her make a graceful spin back to you."
+    "You try one of the moves as instructed, moving [the_person.possessive_title!l] away from you a bit and allowing her make a graceful spin back to you."
     $ scene_manager.update_actor(the_person, position = "back_peek", display_transform = character_right)
     "She spins beautifully and stops with her back to you. She looks back and gives you a sly smile."
     if mc_dancing_skill() < 4:
@@ -428,18 +428,18 @@ label camilla_dance_lessons_label():
 
     elif mc_dancing_skill() < 10:
         "While you don't have nearly the skill of your partner, you feel like you are learning fairly quick."
-        "By the end of the night, you are spinning and dancing with [the_person.possessive_title]. While you still make a few mistakes, you are getting better."
+        "By the end of the night, you are spinning and dancing with [the_person.possessive_title!l]. While you still make a few mistakes, you are getting better."
         "It is nice to get so close and personal with this señora."
         $ mc.change_locked_clarity(20)
     else:
         "You take to salsa dancing like a natural. Throughout the night you have her spinning and moving to the music."
-        "After a short time, you stop listening to the instructor and start doing things your own way. You lead [the_person.possessive_title] around the dance floor with authority."
+        "After a short time, you stop listening to the instructor and start doing things your own way. You lead [the_person.possessive_title!l] around the dance floor with authority."
         "At the end of the lesson, she is close to you again, breathless. A light sheen of sweat makes her skin shine."
         "You hands on her body throughout the dancing has definitely put sexual tension in the air."
         $ mc.change_locked_clarity(30)
         $ the_person.change_slut(2)
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
-    "Tired from your evening, you chat with [the_person.possessive_title] before you leave."
+    "Tired from your evening, you chat with [the_person.possessive_title!l] before you leave."
     the_person "So, they do this most evenings here. If you ever want a dance partner, I love to dance!"
     mc.name "I'll remember that. It might be a good way to unwind a bit after a long day at work."
     "You can now take [the_person.title] dancing any evening she is at the bar."
@@ -606,7 +606,7 @@ label camilla_bathroom_blowjob_label(the_person):
     $ clear_scene()
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
-    "You sneak your way out of the bathroom while [the_person.possessive_title] cleans herself up. You hope everything goes well with her tonight!"
+    "You sneak your way out of the bathroom while [the_person.possessive_title!l] cleans herself up. You hope everything goes well with her tonight!"
     $ the_person.event_triggers_dict["camilla_blowjob_pic_day"] = day + 1
     $ the_person.apply_planned_outfit()
     $ the_person.add_unique_on_room_enter_event(camilla_blowjob_text)
@@ -614,7 +614,7 @@ label camilla_bathroom_blowjob_label(the_person):
 
 label camilla_blowjob_text_label(the_person):
     $ the_person.draw_person()
-    "You walk up to [the_person.possessive_title]"
+    "You walk up to [the_person.possessive_title!l]"
 
     mc.name "So... how did it go with the pictures?"
     "[the_person.possessive_title] gives you a quick smile."
@@ -654,7 +654,7 @@ label camilla_dancing_sex_label(the_person):
         "[the_person.possessive_title] smiles."
         the_person "You know, I am. Let's go!"
         "You follow [the_person.title] out on to the dance floor. The bar is playing some pretty upbeat, fun music."
-        "You waste no time and grab [the_person.possessive_title]. You sync your movements to the beat and begin to move your bodies to the beat."
+        "You waste no time and grab [the_person.possessive_title!l]. You sync your movements to the beat and begin to move your bodies to the beat."
         $ the_person.draw_person (position = "back_peek")
         "At some point, [the_person.title] turns away from you. You put your hand on her hips and bring her close to you."
         "You can feel her grinding her ass back against you as you keep moving to the beat. Her ass feels great moving back and forth against your rapidly rising erection."
@@ -694,14 +694,14 @@ label camilla_dancing_sex_label(the_person):
         the_person "Oh! Shit I almost forgot!"
         "[the_person.possessive_title] grabs her purse. She rummages through it for a moment then pulls out her phone."
         the_person "Can't forget this!"
-        "She hands you her phone and you quickly pull up her camera app. While you are doing that [the_person.possessive_title] turns around and leans over the counter."
+        "She hands you her phone and you quickly pull up her camera app. While you are doing that [the_person.possessive_title!l] turns around and leans over the counter."
         $ the_person.draw_person (position = "standing_doggy")
         "You snap a couple pictures of her amazing ass while she is bent over."
         the_person "Okay, you better get your pants off, we don't have much time!"
         "You quickly drop your pants, letting your aching hard on spring free. You step behind [the_person.title], letting your cock nestle between her pliant ass cheeks."
         "You snap a few more pictures as you dry hump her ass crack a bit. Then you pull back a bit and get yourself pointed at her juicy slit."
         "You change the camera app to take a video. You figure since this is her first time getting fucked by a man other than her husband it might come in handy..."
-        "With one hand firmly on [the_person.possessive_title]'s hip, you steadily push yourself into her. She moans loudly and you capture the whole thing on glorious video."
+        "With one hand firmly on [the_person.possessive_title!l]'s hip, you steadily push yourself into her. She moans loudly and you capture the whole thing on glorious video."
         $ the_person.break_taboo("vaginal_sex")
         $ the_person.break_taboo("condomless_sex")
         the_person "Oh fuck that feels good. Fuck me good [the_person.mc_title]!"
@@ -750,7 +750,7 @@ label camilla_dancing_sex_label(the_person):
         "[the_person.possessive_title] smiles."
         the_person "You know it! Let's go!"
         "You follow [the_person.title] out on to the dance floor. The bar is playing some pretty upbeat, fun music."
-        "You waste no time and grab [the_person.possessive_title]. You sync your movements to the beat and begin to move your bodies to the beat."
+        "You waste no time and grab [the_person.possessive_title!l]. You sync your movements to the beat and begin to move your bodies to the beat."
         $ the_person.draw_person (position = "back_peek")
         "At some point, [the_person.title] turns away from you. You put your hand on her hips and bring her close to you."
         "You can feel her grinding her ass back against you as you keep moving to the beat. Her ass feels great moving back and forth against your rapidly rising erection."
@@ -781,7 +781,7 @@ label camilla_dancing_sex_label(the_person):
         "You got lots of pics of her strip tease. You take a few more as she saunters over to you."
         the_person "Come on, lets fuck!"
         call fuck_person(the_person) from _call_casual_sex_mod_camilla_022
-        "As you finish up, you make sure to take some pictures of the aftermath. You notice [the_person.possessive_title] is touching herself."
+        "As you finish up, you make sure to take some pictures of the aftermath. You notice [the_person.possessive_title!l] is touching herself."
         the_person "Oh god, daddy is fuck me so rough tonight when he reclaims me tonight... I'm gonna be so sore. I can't wait!"
         "You almost think she is going to make herself cum again until she stops."
         $ the_person.draw_person("stand3")
@@ -833,10 +833,10 @@ label camilla_her_place_label(the_person):
     "He nods to you, but you are shocked at the revelation."
     the_person "Don't worry about him, get over here and fuck me [the_person.mc_title]!"
     $ the_person.draw_person(position = "doggy")
-    "You watch as [the_person.possessive_title] crawls on to the bed, pointing her ass back at you. She wiggles it back and forth, enticingly."
+    "You watch as [the_person.possessive_title!l] crawls on to the bed, pointing her ass back at you. She wiggles it back and forth, enticingly."
     "You walk up behind her and run your hands over her pliant cheeks. [the_person.SO_name]'s chair is at the end of the bed, so he will have an excellent profile view while you fuck his wife."
     "With one hand you start to undo your trousers. With your other hand, you run you fingers along her slit. She is wet and ready for you."
-    "Your cock now free, you line yourself up with [the_person.possessive_title]'s pussy. You put her husband out of your mind as you slowly push into her."
+    "Your cock now free, you line yourself up with [the_person.possessive_title!l]'s pussy. You put her husband out of your mind as you slowly push into her."
     "[the_person.possessive_title] gasps as you begin to slide in and out of her."
     call fuck_person(the_person, start_position = doggy, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_camilla_sex_description_CSH040
     $ the_report = _return
@@ -908,13 +908,13 @@ label camilla_home_sex_label(the_person):
 
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
-    "You make your way back home after a sexy evening with [the_person.possessive_title]."
+    "You make your way back home after a sexy evening with [the_person.possessive_title!l]."
 
     call advance_time from _call_advance_camilla_home_sex
     return
 
 label camilla_ghost_label(the_person):
-    "You get a message on your phone. Looks like it is from [the_person.possessive_title]."
+    "You get a message on your phone. Looks like it is from [the_person.possessive_title!l]."
     the_person "Hey, I'm really sorry to have to do this, but we can't hookup anymore."
     the_person "I'm dedicated to my husband, but I find myself thinking about you constantly."
     the_person "This is beginning to turn into an emotional affair, and I can't do it anymore. I'm sorry."

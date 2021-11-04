@@ -342,7 +342,7 @@ label casual_athlete_phase_one_label(the_person):
         mc.name "Sounds good! I'll head to the locker room and get changed and meet you over by the free weights."
         "You quickly get yourself changed into workout clothes and meet [the_person.title]."
         $ the_person.draw_person( position = "stand4")
-        "It is obvious from the beginning of your workout with [the_person.possessive_title] that she intends to get frisky with you when you get done."
+        "It is obvious from the beginning of your workout with [the_person.possessive_title!l] that she intends to get frisky with you when you get done."
         "While doing squats, she gets right behind you, pressing her body against yours as she spots you."
         "You try to be as covert as possible, but a couple of the other guys in the gym shoot you knowing looks as you go about your workout."
         "During the bench press, [the_person.title] stands right above you, her crotch tantalizingly close to your face."
@@ -463,7 +463,7 @@ label casual_athlete_race_crisis_label(the_person):
     "You are breathing hard. It's getting so hard to keep up. She starts to pull away from you."
     "No! It's time to dig deep! You pump your arms and breath deep."
     "After a few moments, you catch your second wind. You get a burst of energy and race faster."
-    "You are catching up to her, and you find yourself running with a renewed vigor from the flow of testosterone in your bloodstream, day dreaming about [the_person.possessive_title]."
+    "You are catching up to her, and you find yourself running with a renewed vigor from the flow of testosterone in your bloodstream, day dreaming about [the_person.possessive_title!l]."
     "You pass the marker for the fourth kilometer. This is it, it's now or never!"
     "You surge forward, and soon you are right beside her. She is gasping for air, she is completely winded!"
     the_person "[the_person.mc_title]? Oh god..."
@@ -525,7 +525,7 @@ label casual_athlete_race_crisis_label(the_person):
     $ the_report = _return
 
     $ the_person.clear_situational_slut("Lost Bet")
-    "When you finish with her, [the_person.possessive_title] lays down on her bed."
+    "When you finish with her, [the_person.possessive_title!l] lays down on her bed."
     $ the_person.draw_person(position = "missionary")
     if the_report.get("girl orgasms", 0) > 0:
         the_person "[the_person.mc_title]... I am so sore... My legs from the race... and... you know..."
@@ -608,7 +608,7 @@ label casual_athlete_house_call_label(the_person):
     return
 
 label casual_athlete_ghost_label(the_person):
-    "You get a message on your phone. Looks like it is from [the_person.possessive_title]."
+    "You get a message on your phone. Looks like it is from [the_person.possessive_title!l]."
     the_person "Hey, I'm really sorry to have to do this, but I think I'm catching feelings."
     the_person "We agreed at the beginning we wouldn't let that happen, so I don't think we should see each other anymore."
     the_person "I'm changing to a different gym, and after I send this, I'm going to block your number. I'm sorry."
@@ -943,7 +943,7 @@ label athlete_hookup_accept(the_person):
     "A few minutes later, you walk into the gym. You locate the family locker room and discover it to be unlocked. You quietly let yourself in."
     $ the_person.draw_person(position = "missionary")
     $ the_person.arousal = 20
-    "You discover [the_person.possessive_title] sitting at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
+    "You discover [the_person.possessive_title!l] sitting at one of the sinks, touching herself while waiting for you. Her pussy glistens with arousal."
     "You quickly lock the door behind you. She notices you walk in but doesn't say a word."
     "You walk over to her silently, and then get down on your knees in front of her. Her pussy is hanging off the side of the sink, right in front of your face."
     "You waste no time and dive your tongue straight into her cunt. Her tangy juices greet your tongue."
@@ -1019,7 +1019,7 @@ label athlete_hookup_accept(the_person):
     $ the_person.change_arousal(20) #70 + 8
     the_person "Ohhh, [the_person.mc_title]... That is exactly what I was hoping for when I sent you that text earlier. That feels so good..."
     "You give her a few tentative thrusts, then quickly pick up the pace and begin fucking her in earnest."
-    "Your hips slap against [the_person.possessive_title]'s ass as you fuck her vigorously."
+    "Your hips slap against [the_person.possessive_title!l]'s ass as you fuck her vigorously."
     $ the_person.call_dialogue("sex_responses_vaginal")
     if mc.condom == True:
         "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
@@ -1077,7 +1077,7 @@ label athlete_hookup_accept(the_person):
         "When satisfied, you bring you fingers back to her tight back passage. You pull your cock almost completely out and stop you hip motion as you begin to press your finger against [the_person.title]'s puckered hole."
         "She forces her sphincter to relax and your finger begins to slip inside her."
         the_person "Ohh, yes. You can move your hips, that feels good..."
-        "You give [the_person.possessive_title]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
+        "You give [the_person.possessive_title!l]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
         $ the_person.change_arousal(20)#90 + 8
         if the_person.arousal > 120:
             the_person "OH! It's so good... fuck I'm gonna cum again!!!"
@@ -1136,11 +1136,11 @@ label athlete_hookup_accept(the_person):
         "You briefly consider pulling out."
         menu:
             "Pull Out":
-                "You pull out of [the_person.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+                "You pull out of [the_person.possessive_title!l] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
                 the_person "Oh! It's so hot on my skin!"
                 $ the_person.cum_on_ass()
                 $ the_person.draw_person(position = "standing_doggy")
-                "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
+                "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title!l]'s ass covered in your semen."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
                 return
             "Creampie":
@@ -1158,7 +1158,7 @@ label athlete_hookup_accept(the_person):
         "You stroke your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         $ the_person.cum_on_ass()
         $ the_person.draw_person(position = "standing_doggy")
-        "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s ass covered in your semen."
+        "You stand back and sigh contentedly, enjoying the sight of [the_person.possessive_title!l]'s ass covered in your semen."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
     return
 

@@ -94,22 +94,22 @@ label taboo_break_prone_bone(the_girl, the_location, the_object):
 
 label scene_prone_bone_1(the_girl, the_location, the_object):
     #Scene 1, focus on visuals of prone (ass, back)
-    "You push down on [the_girl.possessive_title] with your weight as you fuck her. She is pinned helplessly to the [the_object.name]."
+    "You push down on [the_girl.possessive_title!l] with your weight as you fuck her. She is pinned helplessly to the [the_object.name]."
     if the_girl.body_is_thin():
-        "Your hips slap up against [the_girl.possessive_title]'s fit ass."
+        "Your hips slap up against [the_girl.possessive_title!l]'s fit ass."
         "Her cheeks are tight from the exercise and care she puts into her body."
     elif the_girl.body_is_average():
-        "Your hips begin to slap up against [the_girl.possessive_title]'s delicious ass."
+        "Your hips begin to slap up against [the_girl.possessive_title!l]'s delicious ass."
         "Her cheeks are round but firm with just a hint of quaking with each impact."
     elif the_girl.body_is_thick():
-        "Your hips begin to slap up against [the_girl.possessive_title]'s thick ass."
+        "Your hips begin to slap up against [the_girl.possessive_title!l]'s thick ass."
         "Her cheeks are full and generous, and they quake back and forth enticingly as you pound her."
     elif the_girl.body_is_pregnant():
-        "Your hips begin to slap up against [the_girl.possessive_title]'s wide ass."
+        "Your hips begin to slap up against [the_girl.possessive_title!l]'s wide ass."
         "Her cheeks make a pleasing heart shape since her body has been changing with the baby growing in her belly."
         "Her belly is up against the [the_object.name], forcing her ass up at a pleasing angle."
     else:
-        "Your hips begin to slap up against [the_girl.possessive_title]'s ass."
+        "Your hips begin to slap up against [the_girl.possessive_title!l]'s ass."
         "Her cheeks respond delightfully with each thrust."
     menu:
         "Grab her shoulders":
@@ -121,7 +121,7 @@ label scene_prone_bone_1(the_girl, the_location, the_object):
 
         "Spank her" if the_girl.is_submissive():
             $ ass_desc = spanking_get_ass_description(the_girl)
-            "You look down at [the_girl.possessive_title]'s ass. It is [ass_desc]"
+            "You look down at [the_girl.possessive_title!l]'s ass. It is [ass_desc]"
             "With your erection buried deep inside her, you give her ass a firm spank. Her sexy cheeks quake in response."
             $ spank_factor_increment(the_girl)
             mc.name "[the_girl.title], your ass looks amazing when I spank it. You are such a slut. I bet you love it don't you?"
@@ -136,7 +136,7 @@ label scene_prone_bone_1(the_girl, the_location, the_object):
             else:
                 the_girl "Just you, [the_girl.mc_title]. I don't know why but it just feels so good... so right when you dominate me..."
             if the_girl is mom:
-                the_girl "It makes [the_girl.title] so happy to serve you like this... To be [the_girl.possessive_title]!"
+                the_girl "It makes [the_girl.title] so happy to serve you like this... To be [the_girl.possessive_title!l]!"
             "You give her pussy a few rough thrusts before bottoming out again."
             mc.name "That's right bitch, you're my little fuckhole. I'll push you down and fuck you anytime I please."
             $ the_girl.discover_opinion("being submissive")
@@ -204,14 +204,14 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
                 "You oblige her, helping correlate in her head your rough treatment with the pleasure of sex. Her pussy clenches around you as you pull her hair."
                 "She is exhausted, but constantly moaning from your dominating approach."
         "Go easy on her":
-            "You decide for now just to enjoy the wet hole [the_girl.possessive_title] has pointed up at you."
+            "You decide for now just to enjoy the wet hole [the_girl.possessive_title!l] has pointed up at you."
             "You put both you hands around her, letting your weight pin her to the [the_object.name]."
             "Her body is trying to push back against you as you fuck her, but her exhaustion your weight on top of her leave her helpless."
             the_girl "Mmmfff... god [the_girl.mc_title]... so good..."
     return
 
 label scene_prone_bone_3(the_girl, the_location, the_object):
-    "Being completely in control of [the_girl.possessive_title]'s body is such a turn on. You push your weight down onto her as you fuck her."
+    "Being completely in control of [the_girl.possessive_title!l]'s body is such a turn on. You push your weight down onto her as you fuck her."
     the_girl "Oh fuck... [the_girl.mc_title] it's so good..."
     menu:
         "Threaten to creampie her" if not mc.condom:
@@ -240,7 +240,7 @@ label scene_prone_bone_3(the_girl, the_location, the_object):
                 the_girl "I mean, if you really wanted to... it's not like I could stop you!"
             menu:
                 "Remove Condom":
-                    "You slowly pull out of [the_girl.possessive_title]. You reach down and pull the condom off, then toss it up by her face, making sure she sees it."
+                    "You slowly pull out of [the_girl.possessive_title!l]. You reach down and pull the condom off, then toss it up by her face, making sure she sees it."
                     if the_girl.has_breeding_fetish():
                         "When she sees the condom and realizes what you are about to do, she pushes her ass back towards you, trying to help you penetrate her bare."
                         "You slide into her sopping wet cunt without any protection this time. She moans and arches her back in pleasure."
@@ -301,12 +301,12 @@ label outro_prone_bone(the_girl, the_location, the_object):
     $ the_choice = climax_controller.show_climax_menu()
 
     if the_choice == "Cum inside of her":
-        "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She gasps and moans as you pin her to the [the_object.name]."
+        "You use your full weight to push your cock deep inside of [the_girl.possessive_title!l]'s cunt as you climax. She gasps and moans as you pin her to the [the_object.name]."
 
         if mc.condom:
             $ the_girl.call_dialogue("cum_condom")
             $ climax_controller.do_clarity_release(the_girl)
-            "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
+            "You take a moment to catch your breath, then roll off of [the_girl.possessive_title!l] and lie beside her."
             "Your condom is ballooned with your seed, hanging off your cock to one side."
             if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.effective_sluttiness() > 50:
                 $ the_girl.discover_opinion("drinking cum")
@@ -335,7 +335,7 @@ label outro_prone_bone(the_girl, the_location, the_object):
                 the_girl "Oh fuck...  Good thing I'm on the pill..."
             else:
                 the_girl "Oh fuck... I could get pregnant you know.."
-        "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
+        "You take a moment to catch your breath, then roll off of [the_girl.possessive_title!l] and lie beside her."
 
     elif the_choice == "Cum on her ass":
         $ the_girl.cum_on_ass()
@@ -356,7 +356,7 @@ label outro_prone_bone(the_girl, the_location, the_object):
             "[the_girl.title] lays there, whimpering. It seems you nearly fucked her senseless, and it scared her."
             $ the_girl.change_obedience(5)
             $ the_girl.change_happiness(-5)
-        "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s exhausted body covered in your semen."
+        "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title!l]'s exhausted body covered in your semen."
     return
 
 label transition_prone_bone_piledriver(the_girl, the_location, the_object):

@@ -100,13 +100,13 @@ label family_morning_breakfast_enhanced_label():
         $ scene_manager.update_actor(mom, position = "sitting")
         mom "No problem, I'm just happy to spend my morning relaxing with my two favorite people!"
         "You enjoy a relaxing breakfast bonding with your mother and lily. [mom.possessive_title] seems particularly happy she gets to spend time with you."
-        "Neither [lily.title] or [mom.possessive_title] seem to think it's strange to relax in their underwear."
+        "Neither [lily.title] or [mom.possessive_title!l] seem to think it's strange to relax in their underwear."
         $ mc.change_locked_clarity(10)
         $ lily.change_stats(love = 3)
         $ mom.change_stats(love = 3, happiness = 5)
         if mc.business.event_triggers_dict.get("family_threesome", False) == True:
             "While no one else seems to be bothered by all the skin in the room, it is starting to take a toll on you."
-            "You try to focus on something work related, but instead all you can focus on are [mom.possessive_title]'s heaving tits, across the table from you."
+            "You try to focus on something work related, but instead all you can focus on are [mom.possessive_title!l]'s heaving tits, across the table from you."
             mom "Honey? Are you feeling okay? You seem a little zoned out..."
             "Next to you, [lily.title] notices your erection and speaks up."
             lily "I'm sure he's fine mom, but us walking around like this has him all worked up. He's hard as a rock!"
@@ -119,13 +119,13 @@ label family_morning_breakfast_enhanced_label():
                     $ scene_manager.update_actor(mom, position = "stand2")
                     $ scene_manager.update_actor(lily, position = "blowjob")
                     "[mom.possessive_title] gets up and starts walking around the table, while [lily.title] gets on her knees and starts pulling off your pants and underwear."
-                    "Your cock springs out of your clothes, nearly smacking [lily.possessive_title] in the face. [mom.title] gets on her knees next to [lily.title]."
+                    "Your cock springs out of your clothes, nearly smacking [lily.possessive_title!l] in the face. [mom.title] gets on her knees next to [lily.title]."
                     call start_threesome(lily, mom, start_position = threesome_double_blowjob, position_locked = True) from _threesome_for_breakfast_yum_1
                     $ the_report = _return
                     if the_report.get("guy orgasms", 0) > 0:
-                        "You enjoy your post orgasm bliss for a few moments while [mom.possessive_title] and [lily.possessive_title] get up."
+                        "You enjoy your post orgasm bliss for a few moments while [mom.possessive_title!l] and [lily.possessive_title!l] get up."
                     else:
-                        "Finished for now, you decide to put your cock away while [mom.possessive_title] and [lily.possessive_title] get up."
+                        "Finished for now, you decide to put your cock away while [mom.possessive_title!l] and [lily.possessive_title!l] get up."
                     $ scene_manager.update_actor(mom, position="stand3", display_transform = character_center_flipped)
                     $ scene_manager.update_actor(lily, position = "stand4", display_transform = character_right)
                     mc.name "Mmm, thanks for breakfast mom!"
@@ -137,7 +137,7 @@ label family_morning_breakfast_enhanced_label():
                     mom "Okay, if that's what you want [mom.mc_title]."
                     $ scene_manager.update_actor(mom, position="walking_away", display_transform = character_left_flipped)
                     "[mom.possessive_title] gets up and starts to do the dishes."
-        "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
+        "When you're done you help [mom.possessive_title!l] put the dirty dishes away and get on with your day."
 
     elif mom.effective_sluttiness() > 40 and not lily.effective_sluttiness() > 40:
         #Lily thinks her mom is embarrassing and weird but Mom pulls rank.
@@ -200,7 +200,7 @@ label family_morning_breakfast_enhanced_label():
             $ mom.change_happiness(5)
             $ scene_manager.update_actor(mom, position = "sitting")
             "[mom.possessive_title] gives everyone a plate and sits down. [lily.title] eventually gets used to her mother's outfit and joins in on your conversation."
-            "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
+            "When you're done you help [mom.possessive_title!l] put the dirty dishes away and get on with your day."
 
 
     elif lily.effective_sluttiness() > 40 and not mom.effective_sluttiness() > 40:
@@ -239,7 +239,7 @@ label family_morning_breakfast_enhanced_label():
             "[lily.possessive_title] is back by the time Mom starts to plate breakfast. She sits down and starts to eat without saying anything."
             $ scene_manager.update_actor(mom, position = "sitting")
 
-        "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
+        "When you're done you help [mom.possessive_title!l] put the dirty dishes away and get on with your day."
 
     else:
         # Neither of them are particularly slutty, so it's just a normal breakfast.
@@ -247,13 +247,13 @@ label family_morning_breakfast_enhanced_label():
         $ scene_manager.update_actor(mom, position = "stand3")
         "[mom.possessive_title] takes the pan off the stove and scoops the scrambled eggs out equally onto three waiting plates."
         mom "Nothing special, I just thought we could have a nice quiet weekend breakfast together."
-        "She slides one plate in front of you and one plate in front of [lily.possessive_title], then turns around to get her own before sitting down to join you."
+        "She slides one plate in front of you and one plate in front of [lily.possessive_title!l], then turns around to get her own before sitting down to join you."
         $ scene_manager.update_actor(mom, position = "sitting")
         mom "Go ahead, eat up!"
         $ lily.change_love(3)
         $ mom.change_stats(love = 3, happiness = 5)
-        "You enjoy a relaxing breakfast bonding with [mom.possessive_title] and [lily.name]. [mom.possessive_title] seems particularly happy she gets to spend time with you."
-        "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
+        "You enjoy a relaxing breakfast bonding with [mom.possessive_title!l] and [lily.name]. [mom.possessive_title] seems particularly happy she gets to spend time with you."
+        "When you're done you help [mom.possessive_title!l] put the dirty dishes away and get on with your day."
 
     $ scene_manager.clear_scene()
     return "Advance Time"

@@ -32,7 +32,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 $ home_shower.show_background()
                 $ the_person.apply_outfit(Outfit("Nude"))
                 $ the_person.draw_person(position = "back_peek")
-                "You open the door and see [the_person.possessive_title] in the shower."
+                "You open the door and see [the_person.possessive_title!l] in the shower."
                 call girl_shower_enter_enhanced(the_person) from _call_girl_shower_enter_enhanced_1
             else:
                 the_person "Just a second!"
@@ -42,7 +42,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
             $ home_shower.show_background()
             $ apply_towel_outfit(the_person)
             $ the_person.draw_person(position = "walking_away")
-            "You see [the_person.possessive_title] is standing in front of a mirror, getting ready for a shower, undressing herself."
+            "You see [the_person.possessive_title!l] is standing in front of a mirror, getting ready for a shower, undressing herself."
 
             $ the_person.strip_outfit(position = "walking_away", exclude_feet = False)
 
@@ -51,10 +51,10 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
             $ the_person.draw_person(position = "stand3", emotion = "happy")
             "[the_person.possessive_title] turns around, with the water now going on her back and firm ass."
             if the_person.has_large_tits():
-                "You can't help but admire [the_person.possessive_title]'s great body and tits."
+                "You can't help but admire [the_person.possessive_title!l]'s great body and tits."
                 "Just as this thought flashes through your mind, she starts rubbing her boobs."
             else:
-                "You can't help but admire [the_person.possessive_title]'s slim body and perky tits."
+                "You can't help but admire [the_person.possessive_title!l]'s slim body and perky tits."
                 "Just as this thought flashes through your mind, she starts rubbing her breasts, pinching her small nipples."
             $ mc.change_locked_clarity(10)
             $ the_person.change_arousal(renpy.random.randint(10,50))
@@ -111,7 +111,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 $ home_shower.show_background()
                 $ the_person.apply_outfit(Outfit("Nude"))
                 $ the_person.draw_person(position = "back_peek")
-                "You open the door and see [the_person.possessive_title] in the shower."
+                "You open the door and see [the_person.possessive_title!l] in the shower."
                 "She looks up at you, slightly startled, and turns her body away from you."
                 the_person "Oh, [the_person.mc_title]!"
                 mc.name "I'm just here to have a shower."
@@ -125,7 +125,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
     return
 
 label morning_shower_masturbation():
-    "The warmth of the water and her caresses seem to turn [the_person.possessive_title] on."
+    "The warmth of the water and her caresses seem to turn [the_person.possessive_title!l] on."
     $ the_person.draw_person(position = "missionary")
     "She sits on the shower floor, spreads her legs and begins to masturbate with her hand."
     while the_person.arousal < 100:
@@ -156,7 +156,7 @@ label morning_shower_masturbation():
     the_person "Shit, I'm cumming!"
     $ the_person.run_orgasm()
     $ the_person.draw_person(position = "missionary", emotion = "orgasm")
-    "You see [the_person.possessive_title]'s body shiver as she reaches orgasm."
+    "You see [the_person.possessive_title!l]'s body shiver as she reaches orgasm."
     the_person "Wow, that was intense. Need to be quieter or someone might just hear me."
     $ the_person.draw_person(position = "walking_away")
     "She gets up and returns to washing her body."
@@ -168,7 +168,7 @@ label girl_shower_leave_enhanced(the_person):
     "After a short pause the shower stops and you hear movement on the other side of the door."
     $ apply_towel_outfit(the_person)
     $ the_person.draw_person()
-    "The bathroom door opens and [the_person.possessive_title] steps out from the steamy room in a towel."
+    "The bathroom door opens and [the_person.possessive_title!l] steps out from the steamy room in a towel."
     $ mc.change_locked_clarity(5)
     if the_person is mom:
         the_person "There you go [the_person.mc_title], go right ahead."
@@ -221,7 +221,7 @@ label girl_shower_enter_enhanced(the_person):
             $ mc.change_locked_clarity(20)
             $ mc.change_arousal(5)
             the_person "Oops, sorry about that."
-            "Your cock, already swollen, hardens in response, and now even stood up the tip brushes against [the_person.possessive_title]'s ass."
+            "Your cock, already swollen, hardens in response, and now even stood up the tip brushes against [the_person.possessive_title!l]'s ass."
             if the_person.effective_sluttiness("touching_body") <= 40:
                 the_person "I think I'm just about done, so you can take care of this..."
                 "She wiggles her butt and strokes your tip against her cheeks."

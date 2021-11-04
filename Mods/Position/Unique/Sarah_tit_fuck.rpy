@@ -28,7 +28,7 @@ init:
 
 label intro_sarah_tit_fuck(the_girl, the_location, the_object):
     #This position requires free (and big) tits, so we can assume they're available for everything.
-    "You place a hand on [the_girl.possessive_title]'s shoulder and rub it gently, then move down to her sizeable [the_girl.tits] cup tits and squeeze them."
+    "You place a hand on [the_girl.possessive_title!l]'s shoulder and rub it gently, then move down to her sizeable [the_girl.tits] cup tits and squeeze them."
     the_girl "Mmm, I love when you touch me like this. They are so sensitive ever since they got bigger."
     "She reaches down and rubs your cock."
     the_girl "Want to put your cock between them again? It feels so good, I think I'm getting addicted to that feeling."
@@ -40,7 +40,7 @@ label intro_sarah_tit_fuck(the_girl, the_location, the_object):
     return
 
 label taboo_break_sarah_tit_fuck(the_girl, the_location, the_object):
-    "You place a hands on [the_girl.possessive_title]'s shoulders and rub them gently for a few seconds."
+    "You place a hands on [the_girl.possessive_title!l]'s shoulders and rub them gently for a few seconds."
     "Then you move them lower, towards her sizeable [the_girl.tits] cup tits."
     "You're just about to grab them when she reaches up and holds your hands, stopping you from moving them any closer."
     $ the_girl.call_dialogue(sarah_tit_fuck.associated_taboo+"_taboo_break")
@@ -113,7 +113,7 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
     "She speeds up."
     menu:
         "Cum between her tits":
-            "You close your eyes. The sensation of [the_girl.possessive_title]'s warm, soft breasts massaging your cock is too intense to cum anywhere else."
+            "You close your eyes. The sensation of [the_girl.possessive_title!l]'s warm, soft breasts massaging your cock is too intense to cum anywhere else."
             "Your orgasm builds to a peak and you grunt, blasting your load up between [the_girl.title]'s tits and out the top of her cleavage."
             $ blocker = the_girl.outfit.get_upper_top_layer()
             if blocker: #There's something on her top
@@ -126,7 +126,7 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
             $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
 
         "Cum on her face":
-            "You close your eyes and focus on the sensation of [the_girl.possessive_title]'s warm, soft breasts massaging your cock."
+            "You close your eyes and focus on the sensation of [the_girl.possessive_title!l]'s warm, soft breasts massaging your cock."
             "As your orgasm builds to its peak, you step back, sliding your cock out from her cleavage and take it up in your own hand."
             $ the_girl.draw_person(position = "kneeling1")
             if the_girl.effective_sluttiness() > 40 or the_girl.get_opinion_score("cum facials") > 0:

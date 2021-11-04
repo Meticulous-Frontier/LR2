@@ -315,7 +315,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
     the_person "Huh? Oh, [the_person.mc_title]? What are..."
     mc.name "Shhh, just hold still."
     the_person "Why? I don't under... oh my god..."
-    "With one hand on her back and one firmly on her hip, you slowly bend [the_person.possessive_title] over her desk."
+    "With one hand on her back and one firmly on her hip, you slowly bend [the_person.possessive_title!l] over her desk."
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
     $ the_person.change_slut(2)
     $ mc.change_locked_clarity(10)

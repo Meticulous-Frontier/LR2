@@ -223,7 +223,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     "The sensations are overwhelming, and soon you are ready to cum. She can sense it and jacks you enthusiastically."
                     the_person "Do it! Cum in my panties!"
                     $ ClimaxController.manual_clarity_release()
-                    "You moan as your orgasm hits you. You dump spurt after spurt into [the_person.possessive_title]'s panties as she jacks you off with them."
+                    "You moan as your orgasm hits you. You dump spurt after spurt into [the_person.possessive_title!l]'s panties as she jacks you off with them."
                     $ the_person.draw_person(emotion = "happy")
                     "When you come back to your senses, you look and see [the_person.title]. She is licking a little bit of cum that got on her hand."
                     the_person "Mmm... that was hot! I can't wait to wear these tomorrow."
@@ -380,14 +380,14 @@ label dirty_laundry_stuck_in_dryer(the_person):
             else:
                 mc.name "No worries, [the_person.title]. Here, let me untangle this for you."
 
-            "You manage to untangle [the_person.possessive_title]'s hair."
+            "You manage to untangle [the_person.possessive_title!l]'s hair."
             $ the_person.draw_person(position = "stand3", emotion = "happy")
             the_person "Thanks, [the_person.mc_title], you're a lifesaver. Don't worry, I can finish the rest of this myself."
             $ the_person.change_stats(love = 2, happiness = 5)
 
         "Masturbate":
             "You don't say anything, but quickly pull out your already hard member."
-            "All the while you are masturbating, [the_person.possessive_title] keeps on muttering and wiggling her shapely ass, right in front of you."
+            "All the while you are masturbating, [the_person.possessive_title!l] keeps on muttering and wiggling her shapely ass, right in front of you."
             "You soon reach your tipping point and spray your load right onto her ass."
             $ the_person.cum_on_ass()
             $ the_person.draw_person(position="doggy")
@@ -416,16 +416,16 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 $ the_person.draw_person(position = "stand4", emotion = "angry")
                 if the_person is mom:
                     the_person "Jesus, [the_person.mc_title], did you just cum on my ass? I'm your mother!"
-                    "You just stare at her, while [the_person.possessive_title] continues her tirade."
+                    "You just stare at her, while [the_person.possessive_title!l] continues her tirade."
                     the_person "You shouldn't do that! What would your sister say if she saw this?"
                     the_person "Now be a good son and behave, and don't {i}ever{/i} let me catch you doing this again."
                 elif the_person is lily:
                     the_person "What the fuck, [the_person.mc_title]? Why the fuck would you jizz on me like that? You bastard!"
-                    "You just stare at her, while [the_person.possessive_title] continues her tirade."
+                    "You just stare at her, while [the_person.possessive_title!l] continues her tirade."
                     the_person "Now I have to wash this too, dammit. Don't you {i}ever{/i} do this again."
                 else:
                     the_person "Dammit [the_person.mc_title], you can't just cum on my ass like that!"
-                    "You just stare at her, while [the_person.possessive_title] continues her tirade."
+                    "You just stare at her, while [the_person.possessive_title!l] continues her tirade."
                     the_person "What would your mother and sister say if they find out about your behavior?"
                     the_person "Now get out of my way, so I can get out of these clothes."
 
@@ -438,7 +438,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
 
             $ the_item = the_person.outfit.get_lower_top_layer()
             if the_item:
-                "You move your hands along [the_person.possessive_title]'s ass and slide her [the_item.display_name] to the side."
+                "You move your hands along [the_person.possessive_title!l]'s ass and slide her [the_item.display_name] to the side."
                 $ the_person.draw_animated_removal(the_item, position = "doggy", half_off_instead = True)
 
             $ mc.change_locked_clarity(10)
@@ -448,16 +448,16 @@ label dirty_laundry_stuck_in_dryer(the_person):
 
             $ del the_item
             if not the_person.outfit.vagina_visible():
-                "You quickly start removing the remaining clothing from [the_person.possessive_title]."
+                "You quickly start removing the remaining clothing from [the_person.possessive_title!l]."
                 $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
                 $ mc.change_locked_clarity(10)
 
             if the_person.has_anal_fetish():
-                "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and slide your cock between her ass cheeks."
+                "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title!l] and slide your cock between her ass cheeks."
                 the_person "Oh baby! Are you going to fuck my slutty asshole like {i}this{/i}?"
                 call fuck_person(the_person, start_position = doggy_anal, start_object = make_dryer(), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer_2
             else:
-                "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
+                "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title!l] and push the tip of your cock against her wet slit."
                 the_person "What the fuck! You're going to fuck me like {i}this{/i}?"
                 mc.name "Yes, and don't pretend that you don't like it, because I know you do."
                 call fuck_person(the_person, start_position = doggy, start_object = make_dryer(), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer_1

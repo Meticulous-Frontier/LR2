@@ -83,7 +83,7 @@ label scene_breeding_missionary_1(the_girl, the_location, the_object):
                     $ generalised_strip_description(the_girl, the_girl.outfit.get_half_off_to_tits_list(), half_off_instead = True, position = breeding_missionary.position_tag)
                 else:
                     $ generalised_strip_description(the_girl, the_girl.outfit.get_tit_strip_list(visible_enough = False), position = breeding_missionary.position_tag)
-            "You lean down and start to kiss at [the_girl.possessive_title]'s tits. She arches her back, presenting them to your lips."
+            "You lean down and start to kiss at [the_girl.possessive_title!l]'s tits. She arches her back, presenting them to your lips."
             $ the_girl.discover_opinion("kissing")
             $ the_girl.change_arousal(the_girl.get_opinion_score("kissing"))
             the_girl "[the_girl.mc_title]... Oh [the_girl.mc_title], that feels so good."
@@ -161,12 +161,12 @@ label outro_breeding_missionary(the_girl, the_location, the_object):
     "You get to hear every little gasp and moan from [the_girl.title] as you're pressed up against her. Combined with the feeling of fucking her pussy, it's not long before you're pushed past the point of no return."
     mc.name "Here it comes bitch! I'm going to cum now!"
     "[the_girl.possessive_title] wraps her legs around your waist. Even if you wanted to pull out, you couldn't, as she uses her legs to pull you into her."
-    "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She gasps and claws at your back as you pump your seed into her."
+    "You use your full weight to push your cock deep inside of [the_girl.possessive_title!l]'s cunt as you climax. She gasps and claws at your back as you pump your seed into her."
     $ the_girl.call_dialogue("cum_vagina")
     $ the_girl.cum_in_vagina()
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
     $ breeding_missionary.redraw_scene(the_girl)
-    "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
+    "You take a moment to catch your breath, then roll off of [the_girl.possessive_title!l] and lie beside her."
     "She lifts her legs up a bit, tilting her vagina so that your cum will naturally slide deeper inside. She sighs happily."
 
 

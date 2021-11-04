@@ -515,7 +515,7 @@ label genius_flirt_response_high(the_person):
             "Find someplace quiet":
                 mc.name "Alright, let's find somewhere quiet then."
                 the_person "Oh! I was teasing, but if you're up for it..."
-                "You take [the_person.possessive_title]'s hand and lead her away. She follows you happily."
+                "You take [the_person.possessive_title!l]'s hand and lead her away. She follows you happily."
                 "After searching for a couple of minutes you find a quiet space with just the two of you."
                 the_person "Well... What did you want me all alone for?"
                 $ the_person.draw_person(position = "kissing")
@@ -599,7 +599,7 @@ label genius_flirt_response_girlfriend(the_person):
                 "Find someplace quiet":
                     mc.name "That sounds fun, come on, let's go."
                     "[the_person.title] follows you eagerly as you lead her away."
-                    "After a few minutes of searching you find a quiet spot and put an arm around [the_person.possessive_title]."
+                    "After a few minutes of searching you find a quiet spot and put an arm around [the_person.possessive_title!l]."
                     "She sighs happily as you pull her close and kiss her. She puts her arms around you and hugs you tight, opening her lips for you."
                     call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_genius_71
                     $ the_person.call_dialogue("sex_review", the_report = _return)
@@ -660,7 +660,7 @@ label genius_flirt_response_girlfriend(the_person):
                 the_person "Mmm... Can we just stay like this for a moment?"
                 mc.name "Of course."
                 $ mc.change_locked_clarity(10)
-                "You hold [the_person.possessive_title] for a few minutes in silence."
+                "You hold [the_person.possessive_title!l] for a few minutes in silence."
                 $ the_person.draw_person()
                 "She finally breaks the hug steps back."
                 the_person "Maybe next time we can... do some more kissing? I think I'd like that."
@@ -679,7 +679,7 @@ label genius_flirt_response_affair(the_person):
             menu:
                 "Find someplace quiet":
                     mc.name "I do, follow me."
-                    "You lead [the_person.possessive_title] away. After a few minutes of searching you manage to find a quiet spot."
+                    "You lead [the_person.possessive_title!l] away. After a few minutes of searching you manage to find a quiet spot."
                     the_person "So, where do we start?"
                     "You put your arm around her waist and rest your hand on her ass as you lean in and kiss her."
                     "She presses her body enthusiastically against you and returns your kiss with just as much excitement."
@@ -784,7 +784,7 @@ label genius_cum_pullout(the_person):
                     "You don't have much time to spare. You pull out, barely clearing her pussy, and pull the condom off as quickly as you can manage."
                     $ mc.condom = False
                 "Leave it on.":
-                    "You ignore [the_person.possessive_title]'s cum-drunk offer and keep the condom in place."
+                    "You ignore [the_person.possessive_title!l]'s cum-drunk offer and keep the condom in place."
 
         else:
             the_person "Oh yeah, cum for me [the_person.mc_title]!"

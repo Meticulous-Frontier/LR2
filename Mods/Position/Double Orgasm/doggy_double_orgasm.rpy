@@ -13,7 +13,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
 
     if the_choice == "Cum inside of her":
         if stealth_orgasm:  #You sly dog
-            "You know you should probably pull out after pulling the condom off, but you can't. You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum."
+            "You know you should probably pull out after pulling the condom off, but you can't. You pull back on [the_girl.possessive_title!l]'s hips and drive your cock deep inside of her as you cum."
             the_girl "Oh god, you are cumming so hard, I swear I can feel it splashing inside of me!"
             "You cum in unison with [the_girl.title]."
             $ the_girl.cum_in_vagina()
@@ -51,10 +51,10 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                 $ the_girl.change_happiness(-5)
                 $ the_girl.change_obedience(3)
                 $ the_girl.change_love(-5)          #She loses trust
-                "You planted your seed inside of [the_girl.possessive_title], but it is clear she isn't happy about it."
+                "You planted your seed inside of [the_girl.possessive_title!l], but it is clear she isn't happy about it."
             "You slowly pull out of [the_girl.title]. Your cum is dripping down her leg as you sit back."
         elif mc.condom:
-            "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans as you dump your load into her, barely contained by your condom."
+            "You pull back on [the_girl.possessive_title!l]'s hips and drive your cock deep inside of her as you cum. She moans as you dump your load into her, barely contained by your condom."
             the_girl "Oh god cum with me!"
             "You can feel her [the_girl.pubes_description] pussy quivering all around you as you cum in unison. Her body is milking your cum, with only a thin layer of latex keeping it from spilling deep inside her."
             $ climax_controller.do_clarity_release(the_girl)
@@ -71,7 +71,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                 the_girl "Look at all that cum. Well done."
             "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
         else:
-            "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
+            "You pull back on [the_girl.possessive_title!l]'s hips and drive your cock deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
             the_girl "Oh god cum with me!"
             "You can feel her [the_girl.pubes_description] pussy quivering all around you as you cum in unison. Her body is milking your cum, you swear it feels like she's pulling it deep into her womb."
             "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock."
@@ -79,7 +79,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
             $ the_girl.cum_in_vagina()
             $ doggy.redraw_scene(the_girl)
             $ climax_controller.do_clarity_release(the_girl)
-            "You slowly pull out of [the_girl.possessive_title]. Your cum is dripping down her leg as you sit back."
+            "You slowly pull out of [the_girl.possessive_title!l]. Your cum is dripping down her leg as you sit back."
 
     elif the_choice == "Cum on her ass":
         if mc.condom:

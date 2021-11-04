@@ -157,7 +157,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
     if the_girl_2.arousal > 50:
         "A steady stream of moans are getting drown out as [the_girl_2.title] buries her face in [the_girl_1.title]'s slit."
     else:
-        "You hear a low and steady moan coming from [the_girl_2.possessive_title], but it's muffled by [the_girl_1.title]'s cunt."
+        "You hear a low and steady moan coming from [the_girl_2.possessive_title!l], but it's muffled by [the_girl_1.title]'s cunt."
     menu:
         "Talk dirty to [the_girl_2.title]":
             mc.name "How does that feel? Do you like getting used? I bet you do."
@@ -186,7 +186,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
                 mc.name "Is it true, [the_girl_2.title]? Have you been bad?"
                 "She wiggles her ass back and forth a few times."
                 "*SMACK*"
-                "She moans loudly. You look up and see [the_girl_1.possessive_title] is enjoying the extra stimulation."
+                "She moans loudly. You look up and see [the_girl_1.possessive_title!l] is enjoying the extra stimulation."
                 "*SMACK*"
                 "She moans again. A red hand print is starting to form on her ass cheek."
                 "*SMACK*"
@@ -197,19 +197,19 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
             else:
                 "*SMACK*"
                 "Her ass jiggles enticingly when you spank it."
-            "You leave a hand planted on [the_girl_2.possessive_title]'s butt while you fuck her, kneading it and giving it the occasional slap."
+            "You leave a hand planted on [the_girl_2.possessive_title!l]'s butt while you fuck her, kneading it and giving it the occasional slap."
     return
 
 
 label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_location, the_object):
-    "Your hips slap against [the_girl_2.possessive_title]'s ass as you fuck her vigorously."
+    "Your hips slap against [the_girl_2.possessive_title!l]'s ass as you fuck her vigorously."
     if the_girl_2.sex_skills["Vaginal"] < 2: #Inexperienced
-        "After a particularly hard thrust, [the_girl_2.possessive_title] reflexively starts to pull away. You grab her hips to keep her from pulling off completely."
+        "After a particularly hard thrust, [the_girl_2.possessive_title!l] reflexively starts to pull away. You grab her hips to keep her from pulling off completely."
         the_girl_2 "I'm sorry [the_girl_2.mc_title], that's a little too rough. Can you go a little slower?"
         "You pull her hips back toward you slowly. She sighs, still trying to get accustomed to your girth, penetrating her at such a deep angle."
         "The next time you push yourself in you push a little faster. [the_girl_2.title] goes back to licking [the_girl_1.title]."
     elif the_girl_2.has_breeding_fetish():          #vaginal fetish
-        "After a particularly hard thrust, [the_girl_2.possessive_title] moans lewdly. She stops eating out [the_girl_1.title] for a second and looks back at you."
+        "After a particularly hard thrust, [the_girl_2.possessive_title!l] moans lewdly. She stops eating out [the_girl_1.title] for a second and looks back at you."
         the_girl_2 "It's so... fucking... GOOD. Fuck me hard [the_girl_2.mc_title], I want it so bad!"
         "With one hand on her hip to control the pace, you grope and worship her ass cheeks with the other hand. Each time you pull back you can see her labia clinging to you."
         "[the_girl_2.possessive_title] is moaning non stop a she continues to lick [the_girl_1.title]."
@@ -217,20 +217,20 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_l
         "You use both hands to grab her hips and slam yourself into her as deep as you can go."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     else:
-        "Fucking her hard, [the_girl_2.possessive_title] moans, matching each hip movement of yours with movement of her own."
+        "Fucking her hard, [the_girl_2.possessive_title!l] moans, matching each hip movement of yours with movement of her own."
         "[the_girl_2.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accommodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     the_girl_1 "I know it feels good, but don't forget you need to get me off too!"
     "[the_girl_1.possessive_title] reaches down and runs her hands through [the_girl_2.title]'s hair."
     if the_girl_1.is_dominant(): #She gets rough with her
-        "You watch as [the_girl_1.title] stop being gentle and grasps [the_girl_2.possessive_title] by the hair."
-        "You slow your pace a bit and just watch. [the_girl_1.title] is starting to move her hips aggressively, humping [the_girl_2.possessive_title]'s face."
+        "You watch as [the_girl_1.title] stop being gentle and grasps [the_girl_2.possessive_title!l] by the hair."
+        "You slow your pace a bit and just watch. [the_girl_1.title] is starting to move her hips aggressively, humping [the_girl_2.possessive_title!l]'s face."
         the_girl_1 "Mmmm, that's it. Atta girl!"
         $ the_girl_1.change_arousal(5)
         "Eventually [the_girl_1.title] lets go of her hair."
     else:
         the_girl_2 "Sorry! This is just so intense..."
-        "[the_girl_2.title] doubles down on her efforts to please [the_girl_1.possessive_title]."
+        "[the_girl_2.title] doubles down on her efforts to please [the_girl_1.possessive_title!l]."
         "You slow your pace down a bit to give her a chance to catch her breath, watching [the_girl_1.title] running her hands through her hair intimately."
         "Eventually [the_girl_1.title] lets go of her hair."
     "You resume your normal pace, settling into rhythm."
@@ -238,13 +238,13 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_l
 
 
 label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object):
-    "Pounding [the_girl_2.possessive_title] tight cunt, and watching her pleasure [the_girl_1.title] soon has you passing the point of no return."
+    "Pounding [the_girl_2.possessive_title!l] tight cunt, and watching her pleasure [the_girl_1.title] soon has you passing the point of no return."
     mc.name "Ah, I'm going to cum!"
     menu:
         "Cum inside of her":
             "Her pussy is just too good. There's no way you are going to pull out."
             if mc.condom:  #Not sure how we have a condom on but I guess it could happen
-                "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
+                "You grab [the_girl_2.possessive_title!l]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
                 $ condom_break_chance = renpy.random.randint(0, 100)
                 if condom_break_chance < 15: #15% chance of breaking, because it's a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
                     "This time though, you feel something give way. You give her a couple more strokes as you finish dumping your load, then slightly pull back."
@@ -260,10 +260,10 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                     "You wait until your orgasm has passed completely, then pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
                     "You tie the end in a knot and sit back, enjoying the post-orgasm feeling of relaxation."
             else:
-                "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load as deep inside of her as you can get it."
+                "You grab [the_girl_2.possessive_title!l]'s hips and thrust deep. You dump your load as deep inside of her as you can get it."
                 if the_girl_2.wants_creampie():
                     the_girl_2  "MMMM! Yes yes yeessshhhh"
-                    "You can make out a few words of excitement from [the_girl_2.possessive_title] as she buries her face in [the_girl_1.title]'s cunt."
+                    "You can make out a few words of excitement from [the_girl_2.possessive_title!l] as she buries her face in [the_girl_1.title]'s cunt."
                 $ the_girl_2.cum_in_vagina()
                 $ scene_manager.draw_scene()
                 $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl_2)
@@ -305,7 +305,7 @@ label orgasm_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_lo
         "[the_girl_2.title] is moaning loudly but it all gets muffled as [the_girl_1.title] grinds against her face roughly."
         $ the_girl_1.run_orgasm()
         $ the_girl_2.run_orgasm()
-        "They both orgasm. You can feel [the_girl_2.possessive_title]'s cunt gripping you in time with her orgasmic waves."
+        "They both orgasm. You can feel [the_girl_2.possessive_title!l]'s cunt gripping you in time with her orgasmic waves."
         "As they start to wind down, you continue fucking [the_girl_2.title]'s now considerably slicker pussy."
         return
 
@@ -341,7 +341,7 @@ label intro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
     "[the_girl_1.possessive_title] lays down on her back. [the_girl_2.possessive_title] gets down between her legs and start to lick her threesome partner."
     "You spend a moment, admiring the ass exposed in front of you, waiting for you to have your way."
     "You grab your strap on and secure it. It hangs below your cock, ready to fuck [the_girl_2.title]'s cunt while you fuck her ass."
-    "You use some spit to make sure your cock is lubed, then grab [the_girl_2.possessive_title]'s hips and get into position."
+    "You use some spit to make sure your cock is lubed, then grab [the_girl_2.possessive_title!l]'s hips and get into position."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     $ the_girl_2.break_taboo("anal_sex")
     if the_girl_2.has_role(anal_fetish_role):
@@ -354,7 +354,7 @@ label intro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
     return
 
 label scene_threesome_doggy_deluxe_dp_girl_two_1(the_girl_1, the_girl_2, the_location, the_object):
-    "You give [the_girl_2.possessive_title]'s ass a good hard spank. She lets out a loud yelp, but it's muffled between [the_girl_1.title]'s legs."
+    "You give [the_girl_2.possessive_title!l]'s ass a good hard spank. She lets out a loud yelp, but it's muffled between [the_girl_1.title]'s legs."
     the_girl_1 "Mmm, that felt good. You should spank her again [the_girl_1.mc_title]!"
     "[the_girl_2.title] wiggles her hips in front of you. It's like she's asking for a good spanking!"
     "You rub her ass with your hand, affectionately. You slowly pull out, almost completely, and look down, enjoying watching as her body grips the dildo and your dick as they slide out."
@@ -363,7 +363,7 @@ label scene_threesome_doggy_deluxe_dp_girl_two_1(the_girl_1, the_girl_2, the_loc
     return
 
 label scene_threesome_doggy_deluxe_dp_girl_two_2(the_girl_1, the_girl_2, the_location, the_object):
-    "You reach forward and place your hands on [the_girl_2.possessive_title]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly."
+    "You reach forward and place your hands on [the_girl_2.possessive_title!l]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly."
     the_girl_1 "Yeah, that's it [the_girl_1.mc_title], give it to her good!"
     "The double penetration of your cock and the strapon is making the experience much more intense for her."
     "[the_girl_2.possessive_title]'s pussy is dripping wet. A damp spot has begun to accumulate below her pussy as a result of your rutting."
@@ -389,7 +389,7 @@ label outro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
     menu:
         "Cum inside of her":
             if mc.condom:
-                "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
+                "You grab [the_girl_2.possessive_title!l]'s hips and thrust deep. You dump your load inside of the condom, filling it up."
                 $ condom_break_chance = renpy.random.randint(0, 100)
                 if condom_break_chance < 15: #15% chance of breaking, because it's a game condoms don't actually break this much #TODO make a game condom break chance and rewrite some scenes.
                     "This time though, you feel something give way. You give her a couple more strokes as you finish dumping your load, then slightly pull back."
@@ -405,21 +405,21 @@ label outro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locat
                     "You wait until your orgasm has passed completely, then pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
                     "You tie the end in a knot and sit back, enjoying the post-orgasm feeling of relaxation."
                 return
-            "You pull back on [the_girl_2.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans at the sensations but never stops licking [the_girl_1.title]'s cunt."
+            "You pull back on [the_girl_2.possessive_title!l]'s hips and drive your cock deep inside of her as you cum. She moans at the sensations but never stops licking [the_girl_1.title]'s cunt."
             $ the_girl_2.cum_in_ass()
             $ scene_manager.draw_scene()
             $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl_2)
             "You wait until your orgasm has passed completely, then pull out and sit back. Her asshole gapes slightly and you can see a hint of your cum start to dribble out, but most of it stays buried with her bowel"
         "Cum on her ass":
             if mc.condom:
-                "You pull out of [the_girl_2.possessive_title] at the last moment, pulling your condom off as your blow your load all over her ass."
+                "You pull out of [the_girl_2.possessive_title!l] at the last moment, pulling your condom off as your blow your load all over her ass."
                 "She holds still for you as you cover her with your sperm."
             else:
-                "You pull out of [the_girl_2.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
+                "You pull out of [the_girl_2.possessive_title!l] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
             $ the_girl_2.cum_on_ass()
             $ scene_manager.draw_scene()
             $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl_2)
-            "You sit back and sigh contentedly, enjoying the sight of [the_girl_2.possessive_title]'s ass covered in your semen."
+            "You sit back and sigh contentedly, enjoying the sight of [the_girl_2.possessive_title!l]'s ass covered in your semen."
 
     return
 
@@ -440,7 +440,7 @@ label orgasm_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_loca
         "[the_girl_2.title] is moaning loudly but it all gets muffled as [the_girl_1.title] grinds against her face roughly."
         $ the_girl_1.run_orgasm()
         $ the_girl_2.run_orgasm()
-        "They both orgasm. You can feel [the_girl_2.possessive_title]'s sphincter gripping you in time with her orgasmic waves."
+        "They both orgasm. You can feel [the_girl_2.possessive_title!l]'s sphincter gripping you in time with her orgasmic waves."
         "As they start to wind down, you continue fucking [the_girl_2.title]'s tight back passage."
         return
 
