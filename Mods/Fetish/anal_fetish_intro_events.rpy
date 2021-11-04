@@ -567,7 +567,7 @@ label anal_fetish_mom_intro_label():
     $ the_person.draw_person("standing_doggy")
     "[the_person.possessive_title] stands up, turns and bends over, grabbing the remote off the ottoman."
     "She takes her time pointing the remote at the tv and hitting play. Her hips appear to be swaying when the movie intro screen starts."
-    the_person "I ummm... heard good things about this movie... if it's too boring though, we can always turn it off."
+    the_person "I ummm, heard good things about this movie. If it's too boring though, we can always turn it off."
     $ the_person.draw_person(position = "sitting")
     "Instead of sitting next to you, [the_person.title] sits on your lap. Your cock nestles nicely between her ass cheeks as she leans back against you."
     "As the movie begins, you simply enjoy the heat and softness of her skin against yours."
@@ -1107,9 +1107,27 @@ label anal_fetish_erica_intro_label():
     "[the_person.title]'s weight settles on your mid section. You feel a hand grasp your cock and guide it as she starts to sit on it."
     "However, when you feel contact with her skin, there is an unexpected resistance. You hear her sigh."
     the_person "Okay... here we go..."
-    "A tight, smooth senesation begins to envelop the end of your dick. You realize [the_person.possessive_title] is struggling to "
+    "A tight, smooth senesation begins to envelop the end of your dick. You realize [the_person.possessive_title] is sliding you into her ass."
+    mc.name "Oooohhhh..."
+    "You can't help but moan at the sensation, making it obvious you are awake."
+    the_person "Ahh, good morning [the_person.mc_title]."
+    $ the_person.change_arousal(30)
+    $ mc.change_locked_clarity(50)
+    $ mc.change_arousal(15)
+    "[the_person.title] finishes sliding herself down, your morning wood now plunged completely into her well lubed backside."
+    "She must have walked in the room completely ready for this."
+    the_person "Oh my god... I swear I was thinking about this all night long."
+    the_person "[lily.name] and I, we had these outfits that really accentuated the ass, and all I could think about was wishing you would just rip them off and violate me!"
+    "[the_person.possessive_title] has been dosed recently with some of your anal enhancing serums. You wonder if she is ready to awaken a new love of anal sex."
+    mc.name "And now, you got it. Is it as good as you hoped? Filling your slutty ass with my cock?"
+    $ the_person.change_arousal(10)
+    the_person "Oh god yes... It's even better, somehow!"
+    "[the_person.title] begins to rock her hips "
+    call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), allow_continue = False) from _anal_fetish_erica_intro_01
+    $ add_anal_fetish(the_person)
 
 
+    $ erica_get_wakeup_options().append("anal cowgirl")
     return True
 
 label anal_fetish_ashley_intro_label():
