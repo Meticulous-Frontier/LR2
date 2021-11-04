@@ -31,7 +31,18 @@ init -1 python:
         return mc.business.event_triggers_dict.get("fetish_serum_count", 0)
 
     def start_anal_fetish_quest(person):
+        if not is_anal_fetish_unlocked():
+            return False
         if has_started_anal_fetish(person):
+            return False
+
+        if person.get_opinion_score("anal sex") < 2 \
+            or person.sex_skills["Anal"] < 4 \
+            or person.sluttiness < 70:
+                return False
+
+        # chance to start the anal fetish quest
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person):
             return False
 
         if person is lily:
@@ -90,7 +101,19 @@ init -1 python:
         #Determine who it is, then add the appropriate quest.
         if persistent.pregnancy_pref == 0:
             return False
+
+        if not is_breeding_fetish_unlocked():
+            return False
         if has_started_breeding_fetish(person):
+            return False
+
+        if person.get_opinion_score("bareback sex") < 2 \
+            or person.sex_skills["Vaginal"] < 4 \
+            or person.sluttiness < 70: \
+                return False
+
+        # chance to start the anal fetish quest
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person):
             return False
 
         if person is mom:
@@ -149,7 +172,18 @@ init -1 python:
         return False
 
     def start_cum_fetish_quest(person):
+        if not is_cum_fetish_unlocked():
+            return False
         if has_started_cum_fetish(person):
+            return False
+
+        if person.get_opinion_score("being covered in cum") < 2 \
+            or person.sex_skills["Oral"] < 4 \
+            or person.sluttiness < 70:
+                return False
+
+        # chance to start the cum fetish quest
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person):
             return False
 
         if person is lily:
@@ -188,7 +222,19 @@ init -1 python:
         return False
 
     def start_exhibition_fetish_quest(person):
+        if not is_breeding_fetish_unlocked():
+            return False
         if has_started_exhibition_fetish(person):
+            return False
+
+        if person.get_opinion_score("public sex") < 2 \
+            or person.sex_skills["Oral"] < 4 \
+            or person.sex_skills["Vaginal"] < 4 \
+            or person.sex_skills["Anal"] < 4 \
+            or person.sluttiness < 70:
+            return False
+
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person):
             return False
 
         return False #None of them are written yet
@@ -276,15 +322,12 @@ init -1 python:
         if not fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person):
             mc.log_event((person.title or person.name) + " anal proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
-        if is_anal_fetish_unlocked():
-            if person.get_opinion_score("anal sex") >= 2 and person.sex_skills["Anal"] >= 4 and not person.has_started_anal_fetish() and person.sluttiness > 70:
-                if fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person) > renpy.random.randint(0,100):
-                    if start_anal_fetish_quest(person):
-                        person.event_triggers_dict["anal_fetish_start"] = True
-                        #TODO some kind of test here to indicate to the player that their anal quest has started
-                    else:
-                        #TODO throw some kind of error here to indicate that I haven't created this scenario yet
-                        pass
+        if start_anal_fetish_quest(person):
+            person.event_triggers_dict["anal_fetish_start"] = True
+            #TODO some kind of test here to indicate to the player that their anal quest has started
+        else:
+            #TODO throw some kind of error here to indicate that I haven't created this scenario yet
+            pass
         return
 
     def fetish_breeding_function_on_apply(person, the_serum, add_to_log):
@@ -326,16 +369,13 @@ init -1 python:
             person.on_birth_control = False
             person.add_unique_on_talk_event(breeding_fetish_going_off_BC)
 
-        if is_breeding_fetish_unlocked():
-            if person.get_opinion_score("bareback sex") >= 2 and person.sex_skills["Vaginal"] >= 4 and not person.has_started_breeding_fetish() and person.sluttiness > 70:
-                if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) > renpy.random.randint(0,100):
-                    if start_breeding_fetish_quest(person):
-                        person.event_triggers_dict["breeding_fetish_start"] = True
-                        person.on_birth_control = False
-                        #TODO some kind of test here to indicate to the player that their breeding quest has started
-                    else:
-                        #TODO throw some kind of error here to indicate that I haven't created this scenario yet
-                        pass
+        if start_breeding_fetish_quest(person):
+            person.event_triggers_dict["breeding_fetish_start"] = True
+            person.on_birth_control = False
+            #TODO some kind of test here to indicate to the player that their breeding quest has started
+        else:
+            #TODO throw some kind of error here to indicate that I haven't created this scenario yet
+            pass
         return
 
     def fetish_cum_function_on_apply(person, the_serum, add_to_log):
@@ -370,17 +410,13 @@ init -1 python:
         if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person):
             mc.log_event((person.title or person.name) + " semen proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
-        if is_cum_fetish_unlocked():
-            if person.get_opinion_score("being covered in cum") >= 2 and person.sex_skills["Oral"] >= 4 and not person.has_started_cum_fetish() and person.sluttiness > 70:
-                if fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) > renpy.random.randint(0,100):
-                    if start_cum_fetish_quest(person):
-                        person.event_triggers_dict["cum_fetish_start"] = True
-                        #TODO some kind of test here to indicate to the player that their cum quest has started
-                    else:
-                        #TODO throw some kind of error here to indicate that I haven't created this scenario yet
-                        pass
+        if start_cum_fetish_quest(person):
+            person.event_triggers_dict["cum_fetish_start"] = True
+            #TODO some kind of test here to indicate to the player that their cum quest has started
+        else:
+            #TODO throw some kind of error here to indicate that I haven't created this scenario yet
+            pass
         return
-
 
     def fetish_exhibition_function_on_apply(person, the_serum, add_to_log):
         person.event_triggers_dict["nano_bots_e"] = False
@@ -414,14 +450,12 @@ init -1 python:
         if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person):
             mc.log_event((person.title or person.name) + " social sexual proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
-        if person.get_opinion_score("public sex") >= 2 and not person.has_started_exhibition_fetish() and person.sluttiness > 70:
-            if fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) > renpy.random.randint(0,100):
-                if start_exhibition_fetish_quest(person):
-                    person.event_triggers_dict["exhibition_fetish_start"] = True
-                    #TODO some kind of test here to indicate to the player that their exhibitionism quest has started
-                else:
-                    #TODO throw some kind of error here to indicate that I haven't created this scenario yet
-                    pass
+        if start_exhibition_fetish_quest(person):
+            person.event_triggers_dict["exhibition_fetish_start"] = True
+            #TODO some kind of test here to indicate to the player that their exhibitionism quest has started
+        else:
+            #TODO throw some kind of error here to indicate that I haven't created this scenario yet
+            pass
         return
 
     def unlock_fetish_serum(serum):
