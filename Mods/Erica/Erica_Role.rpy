@@ -2807,9 +2807,25 @@ label erica_lily_post_insta_morning_label():
         "[the_person.possessive_title] opens her mouth and begins to bob her head up and down on your morning wood."
         call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "oral creampie", private = True, skip_intro = True, allow_continue = False) from _erica_morning_blowjob_02
         $ the_person.change_slut(1, 60)
-
     elif position_choice == "anal cowgirl":
-        pass
+        the_person "Mmm, that sounds amazing. But try to be gentle, okay? I still want to go for a run today."
+        mc.name "Hey, you're the one who will need to be gentle then, you're the one on top!"
+        "[the_person.possessive_title] stands up and starts to strip down."
+        $ the_person.strip_outfit(position = "stand4")
+        "While she strips, you pull the blanket down and take your shorts off."
+        "When she finishes stripping, she gets on top of you, takes your cock in her hand and brings her face down to it."
+        $ the_person.draw_person(position = "blowjob")
+        "[the_person.title] opens her mouth and licks your morning wood up and down several times, slathering it in her saliva."
+        the_person "Mmm, you taste so good..."
+        "[the_person.possessive_title] opens her mouth and gives you a couple strokes with her mouth before stopping."
+        the_person "God, I could keep going, but it's time to put this someplace a little more fun..."
+        $ the_person.draw_person(position = "cowgirl")
+        "She climbs on top of you, and with one hand she points your erection up at her puckered hole."
+        "She lowers herself gently, but easily takes your hardness into her well trained back passage."
+        the_person "Ahhh! Oh fuck its so big..."
+        "It takes her a moment, but soon [the_person.possessive_title] starts to rock her hips. Time to fuck her silly."
+        call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), allow_continue = False) from _anal_fetish_erica_morning_wakeup_01
+        $ the_person.change_slut(2, 100)
     elif position_choice == "threesome":
         the_person "I'll go get [lily.name]. She DID say to let her know when I sneak back in anyway..."
         $ clear_scene
