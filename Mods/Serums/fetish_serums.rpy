@@ -69,8 +69,9 @@ init -1 python:
             pass
         elif person is salon_manager and False:
             pass
-        elif person is erica and False:
-            pass
+        elif person is erica and erica_has_given_morning_handjob():
+            mc.business.add_mandatory_morning_crisis(anal_fetish_erica_intro)
+            return True
         elif "candace" in globals() and person is candace and False:
             pass
         elif person is ashley and False:
