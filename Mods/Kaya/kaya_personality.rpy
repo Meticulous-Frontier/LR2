@@ -595,7 +595,7 @@ label kaya_flirt_response_high(the_person):
         else:
             #She's into turning you on.
             if the_person.has_large_tits():
-                $ the_person.draw_person(the_animation = blowjob_bob)
+                $ the_person.draw_person(the_animation = tit_bob)
                 $ mc.change_locked_clarity(15)
                 "[the_person.possessive_title] smiles mischievously at you and bounces her tits up and down."
                 the_person "Interested in getting a closer look at these girls?"

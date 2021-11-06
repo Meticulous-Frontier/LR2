@@ -146,15 +146,16 @@ label return_from_seminar_action_label(the_person):
             the_person "Do you prefer this view? My pussy is yours to use however you want for the sake of [mc.business.name]." # Should probably include some less NTR- suggestive dialogue depending on preferences etc.
             "She basks in the pleasurable sensation of announcing her devotion to you and [mc.business.name]."
             the_person "If my pussy is off limits... then how about this."
-            $ the_person.draw_person(position = "blowjob", emotion = "happy")
+            $ the_person.draw_person(position = "kneeling1", emotion = "happy")
             "[the_person.title] rolls herself onto her stomach, then gets up on her knees as she opens her mouth, licking her lips, while reaching down to rub at her clit."
-            # TODO: for now disable suggestive NTR - we have no option to turn this on / off yet
-            #the_person "I can be on my knees handing out blowjobs to whoever you want..."
-            #the_person "I'll gladly suck any dick you instruct me to if it helps [mc.business.name] prosper."
-            $ the_person.draw_person(position = "standing_doggy", emotion = "happy")
+            if persistent.show_ntr:
+                the_person "I can be on my knees handing out blowjobs to whoever you want..."
+                the_person "I'll gladly suck any dick you instruct me to if it helps [mc.business.name] prosper."
+            $ the_person.draw_person(position = "standing_doggy", emotion = "happy", the_animation = ass_bob, animation_effect_strength = 0.7)
             "[the_person.title] then rotates her back towards you, reaching up to support herself by resting her arms on the desk as she arches her back, pushing her ass in your direction, wiggling it left and right."
-            #the_person "You should also check up this ass. It is also usable if you would like so."
-            #the_person "I wouldn't mind if you share this ass of mine with your investors or friends either. I'd actually love that, [the_person.mc_title]!"
+            if persistent.show_ntr:
+                the_person "You should also check up this ass. It is also usable if you would like so."
+                the_person "I wouldn't mind if you share this ass of mine with your investors or friends either. I'd actually love that, [the_person.mc_title]!"
             $ the_person.draw_person(position = "back_peek", emotion = "happy")
             "[the_person.title] straightens her back then walks towards the door that leads out of your office. In the doorway she stops and turns to you."
             the_person "Remember [the_person.mc_title], I'll do anything for this company."

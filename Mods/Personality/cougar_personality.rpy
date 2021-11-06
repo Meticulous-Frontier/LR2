@@ -558,7 +558,7 @@ label cougar_flirt_response_high(the_person):
         else:  #You're not alone, but she doesn't care.
             the_person "Well I wouldn't want you to go into a frenzy. You'll just have to find a way to get me out of this outfit..."
             if the_person.has_large_tits(): #Bounces her tits for you
-                $ the_person.draw_person(the_animation = blowjob_bob)
+                $ the_person.draw_person(the_animation = tit_bob)
                 "[the_person.possessive_title] bites her lip sensually and rubs her boobs, while pinching her nipples."
 
             else: #No big tits, so she can't bounce them (as much

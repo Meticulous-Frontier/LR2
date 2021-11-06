@@ -458,7 +458,7 @@ label Sarah_flirt_response_high(the_person):
                     mc.name "I know, I just like to tease you."
                     the_person "Oh, is that so? Well two can play at that game."
                     if sarah_epic_tits_progress() >= 2:
-                        $ the_person.draw_person(the_animation = blowjob_bob)
+                        $ the_person.draw_person(the_animation = tit_bob)
                         "She checks that nobody else is looking, then grabs her tits and jiggles them for you."
                         the_person "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]!"
                         $ the_person.draw_person()
