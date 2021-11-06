@@ -1272,8 +1272,15 @@ init -1 python:
 
         if not can_use_animation():
             the_animation = None
-        elif the_animation is None:
-            the_animation = self.idle_animation
+        elif the_animation is None: # assign default animation when not passed and enabled
+            if position in ["blowjob", "kneeling1"]:
+                the_animation = blowjob_bob
+            elif position in ["doggy", "standing_doggy", "back_peek"]:
+                the_animation = ass_bob
+            elif position in ["missionary"]:
+                the_animation = missionary_bob
+            else:
+                the_animation = self.idle_animation
 
         if display_transform is None:
             display_transform = character_right
