@@ -792,7 +792,6 @@ label HR_director_review_discoveries_label(the_person):
                     "She furrows her brow when she sees the initial estimate for the cost of synthesis."
                     the_person "I mean uh, it'll be interesting to see how this progresses..."
                     "You notice [the_person.title] writing herself a note to visit the research department later."
-                    #TODO add breast serum sneak event to mandatory list
                     $ add_sarah_catch_stealing_action()
 
         "You spend a few minutes with [the_person.title] going over the progress in the research department over the last week or so."
