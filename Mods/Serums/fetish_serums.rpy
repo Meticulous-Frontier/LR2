@@ -201,6 +201,9 @@ init -1 python:
         elif person is sarah:
             mc.business.mandatory_crises_list.append(cum_fetish_sarah_intro)
             return True
+        elif person is erica and erica_get_progress() >= 4:
+            erica.add_unique_on_room_enter_event(cum_fetish_erica_intro)
+            return True
         elif person is kaya and False:
             pass
         elif person is ellie and False:
