@@ -1249,44 +1249,49 @@ init -1 python:
 
     Person.sluttiness_tier = sluttiness_tier
 
-    def change_slut_enhanced(self, amount, max_modified_to = None, add_to_log = True):  #Change max_modified_to based on suggestability.
-        suggestibility_modifier = 0
-        if self.suggestibility == 0:
-            pass
-        elif self.suggestibility < 20:
-            suggestibility_modifier = __builtin__.round(self.suggestibility / 2.0)
-        elif self.suggestibility < 60:
-            suggestibility_modifier = 10 + __builtin__.round((self.suggestibility - 20) / 4.0)
-        elif self.suggestibility < 140:
-            suggestibility_modifier = 20 + __builtin__.round((self.suggestibility - 60) / 8.0)
-        else:
-            suggestibility_modifier = 30
-        if max_modified_to:
-            max_modified_to += suggestibility_modifier
+    def person_change_slut_extended(org_func):
+        def person_change_slut_wrapper(person, amount, max_modified_to = None, add_to_log = True):
+            if max_modified_to:  # change max_modified_to based on suggestibility
+                suggestibility_modifier = 0
+                if person.suggestibility == 0:
+                    pass
+                elif person.suggestibility < 20:
+                    suggestibility_modifier = __builtin__.int(person.suggestibility / 2.0)
+                elif person.suggestibility < 60:
+                    suggestibility_modifier = 10 + __builtin__.int((person.suggestibility - 20) / 4.0)
+                elif person.suggestibility < 140:
+                    suggestibility_modifier = 20 + __builtin__.int((person.suggestibility - 60) / 8.0)
+                else:
+                    suggestibility_modifier = 30
+                max_modified_to += suggestibility_modifier
 
-        if max_modified_to and self.sluttiness + amount > max_modified_to:
-            amount = max_modified_to - self.sluttiness
-            if amount < 0:
-                amount = 0
+            org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
 
-        if self.sluttiness + amount < 0:
-            amount = -self.sluttiness
-        elif self.sluttiness + amount > 300:
-            amount = 300 - self.sluttiness
+        return person_change_slut_wrapper
 
-        self.sluttiness += amount
+    Person.change_slut = person_change_slut_extended(Person.change_slut)
 
-        if add_to_log:
-            display_name = self.create_formatted_title("???")
-            if self.title:
-                display_name = self.title
-            if amount == 0:
-                log_string = "No Effect on Sluttiness"
-            else: #It is exactly 0
-                log_string = ("+" if amount > 0 else "") + str(amount) + " Sluttiness"
-            mc.log_event(display_name + ": " + log_string, "float_text_pink")
+    def person_change_love_extended(org_func):
+        def person_change_love_wrapper(person, amount, max_modified_to = None, add_to_log = True):
+            if max_modified_to:
+                suggestibility_modifier = 0
+                if person.suggestibility == 0:
+                    pass
+                elif person.suggestibility < 20:
+                    suggestibility_modifier = __builtin__.int(person.suggestibility / 5.0)
+                elif person.suggestibility < 60:
+                    suggestibility_modifier = 2 + __builtin__.int(person.suggestibility / 10.0)
+                elif person.suggestibility < 120:
+                    suggestibility_modifier = 8 + __builtin__.int(person.suggestibility / 20.0)
+                else:
+                    suggestibility_modifier = 14
+                max_modified_to += suggestibility_modifier
 
-    Person.change_slut = change_slut_enhanced
+            org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
+
+        return person_change_love_wrapper
+
+    Person.change_love = person_change_love_extended(Person.change_love)
 
     ## CHANGE WILLPOWER EXTENSION
     # changes the willpower of a person by set amount
