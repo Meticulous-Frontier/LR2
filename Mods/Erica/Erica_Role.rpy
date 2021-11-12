@@ -323,7 +323,7 @@ init -2 python:
 
     def erica_pre_insta_love_requirement(the_person):
         if the_person.love > 40 and the_person.is_willing(blowjob):
-            return person.location == lily.location and time_of_day == 4 and day%7 == 5
+            return the_person.location == lily.location and time_of_day == 4 and day%7 == 5
         return False
 
     def erica_ghost_requirement():
@@ -1931,7 +1931,8 @@ label erica_weekly_yoga_label(the_person):
         mc.name "[the_person.title], could you come to my office for a minute? I have some ideas for additional things you could do during the session."
         the_person "Oh, sure! I have some time before my first class."
         yoga_assistant "Ah, guess I'll get to work then."
-        call erica_post_yoga_fuck(the_person) from _erica_60_love_post_yoga_scene_01
+        $ scene_manager.remove_actor(yoga_assistant)
+        call erica_post_yoga_love_label() from _erica_60_love_post_yoga_scene_01
     elif mc.arousal >= 30: #Use 30 so that this is possible from the start
         "Unfortunately, there is no hiding your erection from the duo. Watching the class has you way too excited."
         if willing_to_threesome(the_person, yoga_assistant) and renpy.random.randint(0,2) == 0:  #Give a chance, if possible, to get a double blowjob after the show
@@ -3021,7 +3022,7 @@ label erica_post_yoga_love_label():
         the_person "Oh god, you were supposed to pull out!"
         $ the_person.change_love(-2)
         "Your cum is dribbling down between her legs."
-        if the_person.on_birth_control():
+        if the_person.on_birth_control:
             the_person "You have got to be more careful... thankfully I'm on birth control..."
         else:
             the_person "I'm not on birth control! I'll have to get a plan B before class..."

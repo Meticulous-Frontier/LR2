@@ -792,7 +792,7 @@ label cum_fetish_candace_intro_label():
 label cum_fetish_dawn_intro_label():
     return False
 
-label cum_fetish_erica_intro_label():
+label cum_fetish_erica_intro_label(the_person):
     $ the_person = erica
     "It's time to hit the gym. You step into the lockerroom to get changed into workout clothes."
     "As you are changing, you feel someone tap on your shoulder. You turn around."
@@ -814,7 +814,7 @@ label cum_fetish_erica_intro_label():
     "You nod, and she immediately gets to work, pulling your dick out of your underwear. You feel her soft, velvet mouth wrapped around you."
     $ the_person.break_taboo("sucking_cock")
     "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
-    call get_fucked(the_person, start_position = blowjob, the_goal = "oral creampie", start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sarah_cum_fetish_intro_01
+    call get_fucked(the_person, start_position = blowjob, the_goal = "oral creampie", start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_erica_cum_fetish_intro_01
     $ add_cum_fetish(the_person)
     $ the_person.event_triggers_dict["LastCumFetish"] = day
     "After you finish, [the_person.possessive_title] continues to lick her fingers, desperate for a little more of your cum."

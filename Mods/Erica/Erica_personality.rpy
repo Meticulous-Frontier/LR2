@@ -31,7 +31,7 @@ init 1301 python:              #Because Vren Init personality functions at 1300
 
     def erica_player_titles(person):
         valid_titles = [mc.name]
-        valid_title.append("Workout Partner")
+        valid_titles.append("Workout Partner")
         if person.has_breeding_fetish():
             valid_titles.append("Bull")
 

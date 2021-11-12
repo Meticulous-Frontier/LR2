@@ -1261,7 +1261,8 @@ init -1 python:
             suggestibility_modifier = 20 + __builtin__.round((self.suggestibility - 60) / 8.0)
         else:
             suggestibility_modifier = 30
-        max_modified_to += suggestibility_modifier
+        if max_modified_to:
+            max_modified_to += suggestibility_modifier
 
         if max_modified_to and self.sluttiness + amount > max_modified_to:
             amount = max_modified_to - self.sluttiness
