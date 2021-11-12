@@ -153,7 +153,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                         the_person "Oh [the_person.mc_title], you have no idea how bad I need this."
                         "[the_person.possessive_title] runs her hands your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole."
                         $ mc.change_locked_clarity(10)
-                        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise."
+                        "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, your lips making wet, lewd smacking noises."
                         the_person "I am so close... you're gonna make me cum!"
                         $ the_person.draw_person(emotion="orgasm", position ="missionary")
                         "You double your efforts, licking, sucking, and teasing every corner of her pleasing slit."
