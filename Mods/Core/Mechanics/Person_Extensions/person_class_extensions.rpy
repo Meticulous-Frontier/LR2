@@ -908,8 +908,8 @@ init -1 python:
                 self.change_happiness(self.get_opinion_score("work uniforms"), add_to_log = False)
 
         #A skimpy outfit is defined as the top 20% of a girls natural sluttiness.
-        if self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.80:
-            self.change_slut(self.get_opinion_score("skimpy outfits"), max_modified_to = 30, add_to_log = False)
+        if self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.80 and self.get_opinion_score("skimpy outfits") > -2:
+            self.change_slut(1, max_modified_to = ((self.get_opinion_score("skimpy outfits") +1) * 10), add_to_log = False)
 
         #A conservative outfit is defined as the bottom 20% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.20:
@@ -1248,6 +1248,44 @@ init -1 python:
             return 5
 
     Person.sluttiness_tier = sluttiness_tier
+
+    def change_slut_enhanced(self, amount, max_modified_to = None, add_to_log = True):  #Change max_modified_to based on suggestability.
+        suggestibility_modifier = 0
+        if self.suggestibility == 0:
+            pass
+        elif self.suggestibility < 20:
+            suggestibility_modifier = __builtin__.round(self.suggestibility / 2.0)
+        elif self.suggestibility < 60:
+            suggestibility_modifier = 10 + __builtin__.round((self.suggestibility - 20) / 4.0)
+        elif self.suggestibility < 140:
+            suggestibility_modifier = 20 + __builtin__.round((self.suggestibility - 60) / 8.0)
+        else:
+            suggestibility_modifier = 30
+        max_modified_to += suggestibility_modifier
+
+        if max_modified_to and self.sluttiness + amount > max_modified_to:
+            amount = max_modified_to - self.sluttiness
+            if amount < 0:
+                amount = 0
+
+        if self.sluttiness + amount < 0:
+            amount = -self.sluttiness
+        elif self.sluttiness + amount > 300:
+            amount = 300 - self.sluttiness
+
+        self.sluttiness += amount
+
+        if add_to_log:
+            display_name = self.create_formatted_title("???")
+            if self.title:
+                display_name = self.title
+            if amount == 0:
+                log_string = "No Effect on Sluttiness"
+            else: #It is exactly 0
+                log_string = ("+" if amount > 0 else "") + str(amount) + " Sluttiness"
+            mc.log_event(display_name + ": " + log_string, "float_text_pink")
+
+    Person.change_slut = change_slut_enhanced
 
     ## CHANGE WILLPOWER EXTENSION
     # changes the willpower of a person by set amount
