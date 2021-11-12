@@ -18,7 +18,7 @@ init 2 python:
             eyes = "brown", personality = introvert_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ashley_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             relationship = "Single", kids = 0, force_random = True, base_outfit = ashley_base_outfit,
-            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
+            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 2, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -1, False], ["public sex", -1, False]])
 
         ashley.set_schedule(stephanie.home, times = [0,1,2,3,4])
@@ -231,7 +231,7 @@ init -1 python:
 
     def ashley_blows_during_meeting_requirement():
         if time_of_day == 2 and mc.is_at_work():
-            if ashley.sluttiness > 60:
+            if ashley.sluttiness > 40 and ashley.is_willing(blowjob):
                 return True
         return False
 
@@ -945,6 +945,7 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(stephanie, position = "sitting")
+    $ mc.business.add_mandatory_crisis(ashley_blows_during_meeting)
     "As you are walking downtown, you pass by the coffee shop. Looking inside, you are surprised to see Ashley and Stephanie sitting inside."
     "You decide to step inside and say hello."
     mc.name "Hey girls, good to see you."
@@ -1066,7 +1067,7 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
                 $ stephanie.change_stats(love = 3, happiness = 5)
                 $ ashley_set_coffee_partner(stephanie)
     "As you sit down, the girls are sharing their plans for the weekend. You take a few sips of your coffee enjoying the flavor."
-    if not the_person.event_triggers_dict.get("second_date", False) and the_person.sluttiness > 40 and stephanie.sluttiness > 40 and ashley_is_secret_path():
+    if not the_person.event_triggers_dict.get("second_date", False) and the_person.sluttiness > 60 and stephanie.sluttiness > 40 and ashley_is_secret_path():
         call ashley_second_concert_intro_label(the_person) from _start_ashley_second_date_path_01
 
     $ steph_action = steph_coffee_time_get_random_action()
@@ -1140,7 +1141,6 @@ label ashley_second_concert_date_label():
     $ caught_ashley_cheating = False
     $ the_person.planned_outfit = the_person.wardrobe.get_outfit_with_name("Ashley Night Out Outfit") or the_person.get_random_appropriate_outfit(guarantee_output = True)
     $ the_person.apply_outfit(the_person.planned_outfit)
-    $ mc.business.add_mandatory_crisis(ashley_blows_during_meeting)
     "Evening falls and soon it is time to make your way downtown to meet [the_person.title], your girlfriend's sister, for a date to another classical music concert."
     "Things with the two girls have gotten complicated. Ashley has been able to keep things between you a secret from her sister, but is getting more and more demanding and needy."
     "Lately it seems like [stephanie.title] is getting a little suspicious, and [the_person.possessive_title]'s demand to share you for a date is certain to have her unsettled."
