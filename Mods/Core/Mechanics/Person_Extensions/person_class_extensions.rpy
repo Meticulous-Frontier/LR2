@@ -133,7 +133,7 @@ init -1 python:
     @property
     def location(self): # Check what location a person is in e.g the_person.location == downtown. Use to trigger events?
         location = next((x for x in list_of_places if self in x.people), None)
-        return (location if location else self.home) # fallback location for person is home
+        return (location if location else (self.home or downtown)) # fallback location for person is home else downtown
 
     Person.location = location
 
