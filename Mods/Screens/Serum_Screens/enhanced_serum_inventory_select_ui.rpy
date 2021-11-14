@@ -1,5 +1,5 @@
 init 2:
-    screen serum_inventory_select_ui(the_inventory, the_person = None): #Used to let the player select a serum from an inventory.
+    screen serum_inventory_select_ui(the_inventory, the_person = None, batch_size = 1): #Used to let the player select a serum from an inventory.
         add "Science_Menu_Background.png"
         frame:
             background "#888888"
@@ -27,6 +27,7 @@ init 2:
 
                         action [Hide("serum_tooltip"),Return(serum[0])]
                         hovered Show("serum_tooltip",None,serum[0], given_align = (0.97,0.07), given_anchor = (1.0,0.0))
+                        sensitive serum[1] >= batch_size
 
         if the_person:
             frame:
