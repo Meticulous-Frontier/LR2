@@ -2922,8 +2922,7 @@ label erica_post_insta_handjob_followup_label(the_person):
     the_person "Did you need something?"
     return
 
-label erica_pre_insta_love_label():
-    $ the_person = erica
+label erica_pre_insta_love_label(the_person):
     "You walk down the hall to [lily.possessive_title]'s room, ready to help out with instapic."
     "You knock on the door, but are surprised when it is answer by [the_person.possessive_title]."
     $ the_person.draw_person()
