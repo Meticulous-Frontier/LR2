@@ -25,6 +25,8 @@ init -1 python:
         for person in [x for x in location.people if x.on_room_enter_event_list]:
             if any(x for x in person.on_room_enter_event_list if x.is_action_enabled(person)):
                 return True
+        if any(x for x in location.on_room_enter_event_list if x.is_action_enabled()):
+            return True
         return False
 
 init 2:

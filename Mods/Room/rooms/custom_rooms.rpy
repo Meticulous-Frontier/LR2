@@ -140,6 +140,9 @@ label build_custom_rooms(stack):
         coffee_shop = Room("coffee_shop", "Coffee Shop", [], standard_coffee_shop_backgrounds, coffee_shop_objects, [], [coffee_shop_get_coffee_action], True, [7,3], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(coffee_shop)
 
+        # Move electronic store to top location
+        electronics_store.map_pos = [7,0]
+
         # initialize dungeon room creation action
         fix_lobby_objects()
 

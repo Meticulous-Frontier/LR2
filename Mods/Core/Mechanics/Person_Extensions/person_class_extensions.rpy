@@ -133,7 +133,7 @@ init -1 python:
     @property
     def location(self): # Check what location a person is in e.g the_person.location == downtown. Use to trigger events?
         location = next((x for x in list_of_places if self in x.people), None)
-        return (location if location else self.home) # fallback location for person is home
+        return (location if location else (self.home or downtown)) # fallback location for person is home else downtown
 
     Person.location = location
 
@@ -878,6 +878,9 @@ init -1 python:
     Person.choose_strip_clothing_item = choose_strip_clothing_item
 
     def run_move_enhanced(self,location):
+        for serum in self.serum_effects: #Compute the effects of all of the serum that the girl is under.
+            serum.run_on_move(self) #Run the serum's on_move function if one exists
+
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 
         if time_of_day == 0: #Change outfit here, because crisis events might be triggered after run day function

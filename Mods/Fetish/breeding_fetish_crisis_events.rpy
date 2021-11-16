@@ -346,7 +346,7 @@ label breeding_fetish_family_sleep_crisis_label():
                 "[the_person.possessive_title] smiles at you."
                 the_person "Aww, does my [the_person.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!"
                 "[the_person.possessive_title] winks at you before beginning her routine."
-                call free_strip_scene(the_person) from _free_strip_scene_701
+                call strip_tease(the_person, for_pay = False) from _free_strip_scene_701
                 $ mc.change_locked_clarity(50)
                 mc.name "Damn [the_person.title], you are really getting good at that."
                 "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosy."

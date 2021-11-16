@@ -126,7 +126,7 @@ label mc_pay_to_strip_label(person):
     # strip a copy of the current outfit (so review outfit can restore the original outfit)
     $ person.outfit = person.outfit.get_copy()
 
-    call pay_strip_scene(person) from _call_pay_strip_scene_generic_people_role
+    call strip_tease(the_person, for_pay = True) from _call_pay_strip_scene_generic_people_role
 
     # reset the person outfit to the one prior to the strip
     python:

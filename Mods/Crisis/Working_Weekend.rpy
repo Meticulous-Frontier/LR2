@@ -128,7 +128,7 @@ label SB_working_weekend_crisis_label_high(person_one):
             "[person_one.possessive_title] smiles mischievously at you, before nodding."
             person_one "I can do that, [person_one.mc_title]... I hope you like the show!"
             $ person_one.change_slut(2)
-            call free_strip_scene(person_one) from _free_strip_scene_3
+            call strip_tease(person_one, for_pay = False) from _free_strip_scene_3
             $ mc.change_locked_clarity(50)
             $ person_two = get_random_employees(1)
             if not willing_to_threesome(person_one, person_two) or (person_two == sarah and sarah_epic_tits_progress() == 1):

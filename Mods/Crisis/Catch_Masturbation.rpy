@@ -152,7 +152,7 @@ label SB_caught_masturbating_crisis_label():
                             $ mc.change_locked_clarity(5)
                             the_person "Oh [the_person.mc_title], you have no idea how bad I need this."
                             "[the_person.possessive_title] runs her hands your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole."
-                            "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, you lips making a wet, lewd smacking noise."
+                            "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, your lips making wet, lewd smacking noises."
                             $ the_person.change_arousal(10)
                             the_person "I am so close... I'm sorry [the_person.mc_title], I'm not going to last much longer."
                             $ mc.change_locked_clarity(5)
