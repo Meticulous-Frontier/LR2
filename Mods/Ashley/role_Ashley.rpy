@@ -1141,6 +1141,7 @@ label ashley_second_concert_date_label():
     $ caught_ashley_cheating = False
     $ the_person.planned_outfit = the_person.wardrobe.get_outfit_with_name("Ashley Night Out Outfit") or the_person.get_random_appropriate_outfit(guarantee_output = True)
     $ the_person.apply_outfit(the_person.planned_outfit)
+    $ the_person.event_triggers_dict["second_date_complete"] = True
     "Evening falls and soon it is time to make your way downtown to meet [the_person.title], your girlfriend's sister, for a date to another classical music concert."
     "Things with the two girls have gotten complicated. Ashley has been able to keep things between you a secret from her sister, but is getting more and more demanding and needy."
     "Lately it seems like [stephanie.title] is getting a little suspicious, and [the_person.possessive_title]'s demand to share you for a date is certain to have her unsettled."
@@ -1477,6 +1478,7 @@ label ashley_second_concert_date_label():
         "There is probably no way for you to patch things up right now... You decide to do as she asks."
         "You gather your stuff and leave."
         $ mc.business.add_mandatory_crisis(ashley_steph_second_date_confrontation_date)
+        $ ashley.event_triggers_dict["caught_cheating"] = True
         #TODO make a mandatory event to trigger in a day or two where you and stephanie make up.
     else:
         stephanie "Mmm, you taste good... but that's not the only thing I want from you tonight..."
@@ -1617,6 +1619,55 @@ label ashley_blows_during_meeting_label():
     return
 
 label ashley_sneaks_over_label():
+    $ the_person = ashley
+    "After a long day, you sit down at your computer to work on a couple things before bedtime."
+    "After getting through some emails, you phone vibrates."
+    $ mc.start_text_convo(the_person)
+    the_person "Hey, are you busy?"
+    mc.name "Not really. Whatsup?"
+    the_person "Good. I'm outside, can I come in?."
+    $ mc.end_text_convo()
+    "She's what? How does she even know where you live?"
+    "You get up and walk to the front door. When you open it, sure enough, there stands [the_person.possessive_title]."
+    mc.name "[the_person.title]... what?"
+    the_person "I know I don't usually do stuff like this, but I wanted to see you... can I come in?"
+    mc.name "Umm, of course..."
+    "You quickly take [the_person.possessive_title] back to your room and close the door."
+    if ashley_caught_cheating_on_sister():
+        the_person "I just wanted to... apologize."
+        the_person "Steph and I have always had a bit of sibling rivalry, but she's never been into anyone the way she was into you."
+        the_person "I know it was both of us messing around, but I started a lot of it, so..."
+        the_person "I'm sorry."
+        $ the_person.change_obedience(20)
+        mc.name "It's okay. I'm not sure what is going to happen with [stephanie.title], but I'm hopeful I can patch things up somehow."
+        "[the_person.possessive_title] nods in understanding."
+        the_person "So you really like her too..."
+        mc.name "Yes."
+        the_person "I understand that, I really do. But tonight... I'm here. Maybe for one night, we could just like, pretend?"
+        the_person "I know I'm just a booty call to you, but can I spend the night tonight? And treat me the way you treated her?"
+    else:
+        the_person "So, ever since our date the other night, I can't stop thinking about how how it was."
+        the_person "I'm so tired of the subterfuge... I swiped Steph's phone and got your address from it and saw you didn't have any plans with her tonight..."
+        mc.name "[the_person.title]..."
+        the_person "I get it, that you and Steph are like, banging each other's brains out every chance you get."
+        the_person "I understand that, I really do. But tonight... I'm here. Maybe for one night, we could just like, pretend?"
+        the_person "I know I'm just a booty call to you, but can I spend the night tonight? And treat me the way you treat her?"
+    "Obvously [the_person.possessive_title] has been having jealousy issues for a while, but you assumed they were mostly physical needs."
+    "Now, she's exposing her real feelings, and it seems she's caught feelings for you that run deeper than just sex."
+    $ mc.energy = mc.max_energy
+    $ mc.change_locked_clarity(20)
+    "Seeing her expose herself in this way gives you a burst of energy. She want's the girlfriend treatment? You can give it to her."
+    mc.name "Of course you can stay the night. Don't get mad at me though if [stephanie.name] get's suspicious when you have trouble walking tomorrow."
+    $ the_person.change_happiness(10)
+    $ the_person.change_love(3)
+    the_person "Me? You'll be lucky if you can get out of bed at all tomorrow!"
+    $ the_person.draw_person(position = "against_wall")
+    "[the_person.title] jumps on to you."
+    "You stumble backwards, falling on to your bed. [the_person.possessive_title] lands on top of you."
+    $ the_person.draw_person(position = "cowgirl")
+
+
+
     "This scene not yet written."
     return
 
@@ -2335,6 +2386,11 @@ init 3 python:
     def ashley_get_observed_outfit():
         return ashley.event_triggers_dict.get("observed_outfit", None)
 
+    def ashley_second_date_complete():
+        return ashley.event_triggers_dict.get("second_date_complete", None)
+
+    def ashley_caught_cheating_on_sister():
+        return ashley.event_triggers_dict.get("caught_cheating", False)
 
     def ashley_non_con_enabled():
         return ashley.event_triggers_dict.get("non_con", False)
