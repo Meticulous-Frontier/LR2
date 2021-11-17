@@ -36,6 +36,7 @@ init 2 python:
         ashley.event_triggers_dict["porn_convo_avail"] = False
         ashley.event_triggers_dict["story_path"] = None
         ashley.event_triggers_dict["second_date"] = False
+        ashley.event_triggers_dict["sneaks_over_complete"] = False
 
         # add appoint
         #office.add_action(HR_director_appointment_action)
@@ -1634,6 +1635,7 @@ label ashley_blows_during_meeting_label():
 
 label ashley_sneaks_over_label():
     $ the_person = ashley
+    $ the_person.event_triggers_dict["sneaks_over_complete"] = True
     "After a long day, you sit down at your computer to work on a couple things before bedtime."
     "After getting through some emails, you phone vibrates."
     $ mc.start_text_convo(the_person)
@@ -2597,6 +2599,9 @@ init 3 python:
 
     def ashley_second_date_complete():
         return ashley.event_triggers_dict.get("second_date_complete", None)
+
+    def ashley_sneaks_over_complete():
+        return ashley.event_triggers_dict.get("sneaks_over_complete", False)
 
     def ashley_caught_cheating_on_sister():
         return ashley.event_triggers_dict.get("caught_cheating", False)
