@@ -56,6 +56,8 @@ init 2 python:
         kaya.event_triggers_dict["anal_position_filter"] = kaya_anal_position_filter
         kaya.event_triggers_dict["unique_sex_positions"] = kaya_unique_sex_positions
 
+        kaya.event_triggers_dict["sakari_has_died"] = False
+
         mc.business.add_mandatory_crisis(kaya_setup_intro_event) #Add the event here so that it pops when the requirements are met.
 
         if persistent.pregnancy_pref != 0:
@@ -1546,6 +1548,8 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     $ mom.add_unique_on_talk_event(kaya_jennifer_reveal)
     $ lily.add_unique_on_talk_event(kaya_lily_reveal)
     $ kaya.add_unique_on_talk_event(kaya_barista_fuck_intro)
+    $ sakari.add_unique_on_room_enter_event(sakari_intro)
+    $ sakari.set_schedule(clothing_store, days = [0, 1, 2, 3, 4], times = [1])
     return
 
 label kaya_jennifer_reveal_label(the_person):
