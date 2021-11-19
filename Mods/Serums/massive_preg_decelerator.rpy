@@ -26,6 +26,7 @@ init -1 python:
             requires = [pregnancy_decelerator_trait],
             tier = 3,
             research_needed = 1400,
+            exclude_tags = "Pregnancy",
             clarity_cost = 1800)
         return
 
