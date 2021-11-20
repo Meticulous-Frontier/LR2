@@ -36,6 +36,8 @@ init 2 python:
             return False # Don't trigger foreclosed event while strip club is open
         if get_strip_club_foreclosed_stage() != 0:
             return False
+        if mc.business.event_triggers_dict.get("strip_club_foreclosed_countdown", False):
+            return False
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
         if mc.business.funds > 60000:
@@ -96,6 +98,7 @@ init 2 python:
 label club_foreclosed_event_label():
     # delay the actual shutdown for 10 to 16 days after initial requirements are met.
     $ add_start_strip_club_foreclosed_countdown_action()
+    $ mc.business.event_triggers_dict["strip_club_foreclosed_countdown"] = True
     return
 
 label strip_club_closes_down_label():
