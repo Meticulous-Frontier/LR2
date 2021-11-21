@@ -80,6 +80,8 @@ init 2 python:
         # town_relationships.update_relationship(nora, sakari, "Friend")
         # town_relationships.update_relationship(lily, sakari, "Rival")
 
+        sakari.text_modifiers.append(maori_accent)
+
         sakari.add_role(sakari_role)
         return
 
@@ -95,12 +97,126 @@ init 3 python:
 
 #Story Labels
 label sakari_intro_label(the_person):
-    pass    #Written on mobile, TODO import to repo
+    "You wander into the clothes store at the mall. You walk in without any specific purpose and decide to do some people watching."
+    "As you walk around, you notice a familiar face, talking to a couple employees."
+    $ the_person.draw_person()
+    the_person "Set the new line up front, with the displays, and see if we can get some interest in that."
+    "It's [the_person.title], [kaya.possessive_title]'s mom. She seems to be giving instructions?"
+    "?????" "Okay, what do you want done with the product up there?"
+    the_person "We need to clearance it out. It's been up for far too long."
+    "One of the other workers speaks up."
+    "It's good to have you around running things again, [the_person.name]"
+    the_person "Ah, believe me it is good to be back."
+    "The employees grab a couple boxes of merchandise and set off with it."
+    "Alone now, [the_person.possessive_title] looks up and notices you. She seems a little out of breath."
+    the_person "Ah, is that [the_person.title]?"
+    mc.name "It is. I am surprised to see you."
+    the_person "Ah, well I was feeling a bit better, and I hadn't been into the store in such a long time."
+    the_person "Business has not been going well while I've been out sick."
+    "You suddenly make the connection with the name of the clothing store."
+    mc.name "Wait, you own [clothing_store.name]?"
+    the_person "Indeed. For now, anyway..."
+    "Something about the way she said that is unsettling. Didn't [kaya.title] say she was getting sicker?"
+    mc.name "So, you are feeling better this week?"
+    the_person "Yes, feeling better is a good way to say that."
+    "It's obvious from the way she is saying it that she is hiding something, but you decide for now to let it go."
+    mc.name "I'm sure [kaya.name] will be glad to hear that you are at the store. She is very worried about you."
+    $ the_person.draw_person(emotion = "sad")
+    the_person "Yes, my dear [kaya.name]..."
+    if kaya.is_girlfriend():
+        the_person "You are taking good care of her, right? She talks about you... a LOT."
+        mc.name "Of course."
+    else:
+        the_person "You know... she sure talks about you... a LOT."
+    "[the_person.possessive_title] mumbles something under her breath for a moment."
+    the_person "Daughter... she doesn't know I'm here, working."
+    "You glance at the time. This is when she would normally be in class."
+    mc.name "I'm guessing you would like to keep it that way?"
+    the_person "Never, EVER lie to my girl... but if she doesn't ask you, there's no need to tell her."
+    the_person "She is certain to discover eventually, but on days I have the energy, I will be here in the morning to work."
+    "An employee walks over, clearly looking for [the_person.title]."
+    the_person "Ah, I need to get back to work. if you'll excuse me."
+    mc.name "Certainly."
+    $ the_person.add_unique_on_room_enter_event(sakari_coffee_break)
+    $ clear_scene()
     return
 
 
 label sakari_coffee_break_label(the_person):
-    pass    #written on mobile. TODO import to repo "Myeloma"
+    "You swing by the clothing store and see that [the_person.possessive_title] is working this morning."
+    $ the_person.draw_person()
+    "Looks like she is changing out some price tags on some items. She looks tired."
+    mc.name "Good day, [the_person.title]."
+    the_person "To you as well, [the_person.mc_title]."
+    mc.name "Care to take a break? I could go get us a couple coffees."
+    the_person "That is very kind of you. Would you mind though, I would prefer hot tea?"
+    "This is the first chance you've gotten to actually sit down with [the_person.title], so you jump at the chance."
+    mc.name "I think I can manage that. How do you take it?"
+    the_person "Plain, thank you."
+    "You excuse yourself and walk into the mall, getting you and [the_person.possessive_title] drinks."
+    $clear_scene()
+    "You head to the generic branded coffee shop and order your drinks."
+    "Before you walk back to the clothes store, you consider using the opportunity to give [the_person.title] a serum in her drink..."
+    call give_serum(the_person) from _call_give_sakari_serum_coffee_01
+
+    "You walk back to the clothing store, drinks in hand."
+    $ the_person.draw_person()
+    the_person "Ah, good timing. I just finished with this task."
+    the_person "I have a small office, lets sit in there for a bit."
+    mc.name "Sounds good. Lead the way!"
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.title] leads you to the back of the store and into a small office."
+    "She sits down at a small desk and motions for you to sit across from her. You step in the office and sit down, leaving the door open."
+    $ the_person.draw_person(position = "sitting")
+
+    the_person "Lately, we've been getting to know each other better, so I wanted to make sure you understand what is going on with me."
+    if kaya.is_girlfriend():
+        the_person "Especially since you are so close with [kaya.name]... my dear daughter..."
+    the_person "I have an illness called myeloma. It is a type of recurring blood cancer."
+    the_person "The prognosis is terminal, and unfortunately I have entered the final stage of the illness."
+    mc.name "Ah [the_person.title]. I'm so sorry..."
+    the_person "There ar many experimental treatments... and unfortunately they have all failed."
+    the_person "I recently decided to go off all treatments. I'm feeling much better, but it will only be a short term thing."
+    mc.name "Ah, so that's why you have been back at the store a bit."
+    the_person "Yes. I want to leave things ready... for [kaya.name]."
+    the_person "The last estimate I heard, was one to three months..."
+
+    "There is a long silence as you soak in the information you just learned."
+
+    the_person "I don't want you to misunderstand. I've enjoy getting to know you, but I understand if you don't want to spend time with someone who is not going to be around much longer."
+    mc.name "What do you mean?"
+    the_person "I just mean... don't feel like you HAVE to come here to the store and spend with an old lady like me."
+    the_person "Your time is better spent with someone closer to your age..."
+    mc.name "I see what you are saying [the_person.title], but I don't see it the same way."
+    the_person "Oh?"
+    mc.name "Spending my time with someone who doesn't have much time left could provide very interesting perspective."
+    mc.name "Sometimes, when faced with mortality, it makes it easier to focus on what is truly important and what isn't."
+    the_person "A wise man are you?"
+    mc.name "Maybe so. Or, maybe it's an ego thing."
+    mc.name "I have to say, I've never been in this position before... especially since I lost my dad so suddenly..."
+    $ the_person.draw_person(position = "sitting", emotion = "sad")
+    the_person "Ahh, yes. It should not surprise me that your father's son turned out to be a good man also..."
+    mc.name "I don't know if I'll be able to do a perfect job of it... but if I can make your final days more pleasant, I am happy to do so."
+    $ the_person.change_love(3)
+    $ the_person.draw_person(position = "sitting", emotion = "happy")
+    the_person "That is very kind of you, [the_person.mc_title]."
+
+    "After a few more moments of silence, you decide to change topics."
+
+    call small_talk_person(the_person, apply_energy_cost = False)
+
+    the_person "Well, thank you for the tea. I feel refreshed! I think I'll try to get a little more work done today."
+    $ the_person.draw_person()
+    "You stand up with [the_person.possessive_title] and leave her small office."
+    $ clear_scene()
+
+    "The weight of your conversation sits heavy on your chest for a while."
+    "You should decide, and fairly quickly. Do you want to spend more time with [the_person.possessive_title]?"
+    "If you wait too long to decide, you might miss the opportunity completely."
+    "Starbuck" "NOTE TO PLAYERS: [sakari.name]'s max energy will decrease over time due to her sickness."
+    "Starbuck" "Once it hits a low enough threshold, she will get removed from the game!"
+    # $ ellie.add_unique_on_room_enter_event(nanobot_cure_ellie_inspiration)    #NOTE this is probably going to just be a new conversation option that opens up.
+    $ mc.business.add_mandatory_crisis(sakari_business_proposition)
     return
 
 label sakari_business_proposition_label():    #mandatory event
@@ -109,6 +225,9 @@ label sakari_business_proposition_label():    #mandatory event
 
 label sakari_business_partner_start_label():
     pass
+
+    $ mc.business.add_mandatory_crisis(sakari_goes_skinny_dipping)
+    $ mc.business.add_mandatory_crisis(sakari_mc_booty_call_intro)
     return
 
 label sakari_mc_booty_call_intro_label():     #Mandatory event
@@ -131,7 +250,14 @@ label sakari_kaya_move_in_label():          #Live in girlfriends still a WIP. co
 #Sluttiness Labels
 
 label sakari_goes_skinny_dipping_label():   #mandatory event
-    pass
+    $ the_person = sakari
+    "As you are getting ready for bed, your phone vibrates. You are surpised by who it appears to be from."
+    $ mc.start_text_convo(the_person)
+    the_person "Hello [the_person.mc_title]. This is [sakari.name], [kaya.name]'s mother."
+    "You didn't know she even had your number. Maybe she got it from [kaya.title]?"
+    mc.name "Hello, how are you doing?"
+
+
     return
 
 label sakari_goes_to_the_movies_label():
