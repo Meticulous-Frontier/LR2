@@ -234,20 +234,28 @@ init 2: # Need to allow for None name roles in this screen as well.
                     background None
                     anchor [0.5,1]
                     align [0.5,0]
-                    xysize [500,125]
+                    xysize [1000,125]
                     xoffset 10
                     yoffset 30
                     imagebutton:
-                        align [0.5,0.5]
+                        align [0.0,0.5]
                         auto "gui/button/choice_%s_background.png"
                         focus_mask "gui/button/choice_idle_background.png"
                         action Hide("person_info_detailed")
-                    textbutton "Return" align [0.5,0.5] style "return_button_style"
+                    textbutton "Return" align [0.17,0.5] style "return_button_style"
+
+                    if the_person.has_story_dict():
+                        imagebutton:
+                            align [1.0,0.5]
+                            auto "gui/button/choice_%s_background.png"
+                            focus_mask "gui/button/choice_idle_background.png"
+                            action Show("story_progress", the_person = the_person, story_dict = the_person.story_dict())
+                        textbutton "Story Progress" align [0.87,0.5] style "return_button_style"
                 frame:
                     background "#1a45a1aa"
                     xsize 325
                     ysize 185
-                    xoffset 195
+                    xoffset 30
                     vbox:
                         text "Currently Affected By" style "serum_text_style_header"
                         viewport:

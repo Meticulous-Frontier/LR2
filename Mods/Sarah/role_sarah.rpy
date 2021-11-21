@@ -67,6 +67,8 @@ init 2 python:
         sarah.set_schedule(sarah.home, times = [1,2,3])
         sarah.home.add_person(sarah)
 
+        sarah.event_triggers_dict["yoga_voyeur"] = False
+        sarah.event_triggers_dict["gym_tshirt"] = False
         sarah.event_triggers_dict["epic_tits_progress"] = 0    # 0 = not started, 1 = mandatory event triggered, 2 = tits epic, -1 = convinced her not to do it
         sarah.event_triggers_dict["drinks_out_progress"] = 0   # 0 = not started, 1 = third wheel event complete, 2 = grab drinks complete
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
@@ -82,10 +84,12 @@ init 2 python:
         sarah.event_triggers_dict["vaginal_position_filter"] = sarah_vaginal_position_filter
         sarah.event_triggers_dict["anal_position_filter"] = sarah_anal_position_filter
         sarah.event_triggers_dict["unique_sex_positions"] = sarah_unique_sex_positions
+        sarah.event_triggers_dict["story_dict"] = True
 
         # add appoint
         office.add_action(HR_director_appointment_action)
         sarah.add_role(sarah_role)
+        sarah.story_dict = sarah_story_build_dict
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.add_mandatory_crisis(Sarah_intro) #Add the event here so that it pops when the requirements are met.
@@ -218,7 +222,7 @@ init 2 python:
             return False
         #Only in the evening when the strippers are at the club
         if time_of_day > 2 and day%7 == 5:  #Saturday
-            if sarah.sluttiness > 50 and mc.is_at_work():
+            if sarah.sluttiness > 50 and mc.is_at_work() and sarah.love >= 60:
                 return True
         return False
 
@@ -790,6 +794,7 @@ label Sarah_third_wheel_label():
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     $ add_sarah_get_drinks_action()
+    $ sarah.event_triggers_dict["drinks_out_progress"] = 1
     return
 
 label Sarah_watch_yoga_at_gym_label(the_person):    #20 sluttiness event
@@ -834,6 +839,7 @@ label Sarah_watch_yoga_at_gym_label(the_person):    #20 sluttiness event
     the_person "Well, I have other commitments for today, have a good workout!"
     mc.name "Take care."
     $ clear_scene()
+    $ sarah.event_triggers_dict["yoga_voyeur"] = True
     return
 
 label Sarah_get_drinks_label():
@@ -1507,6 +1513,7 @@ label Sarah_workout_in_tshirt_label(the_person):    #60 sluttiness event
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] walks off, towards the locker room."
     "She walks by a guy and girl who are working out together. The guy stares at her tits as she walks by, and the girl he is working out with notices and smacks him."
+    $ sarah.event_triggers_dict["gym_tshirt"] = True
     return
 
 label Sarah_stripclub_story_label():

@@ -2534,3 +2534,17 @@ init -1 python:
     Person.roleplay_possessive_title_revert = roleplay_possessive_title_revert
     Person.roleplay_personality_swap = roleplay_personality_swap
     Person.roleplay_personality_revert = roleplay_personality_revert
+
+
+###### Story and hint related functions ######
+
+    def has_story_dict(self):
+        if self.event_triggers_dict.get("story_dict", False):
+            return True
+        return False
+
+    def get_story_dict(self):
+        return self.event_triggers_dict.get("story_dict", None)
+
+    Person.has_story_dict = has_story_dict
+    Person.get_story_dict = get_story_dict
