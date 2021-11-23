@@ -111,7 +111,7 @@ init 10 python:
         if sarah.sluttiness < 80:
             return "Try increasing [sarah.title]'s sluttiness."
         if __builtin__.len(get_Sarah_willing_threesome_list()) <= 3:
-            return "Not enough possible threesome partners. Try increasing more girl's sluttiness to atleast 80."
+            return "Not enough possible threesome partners. Try increasing more girl's sluttiness to at least 80."
         else:
             return "Look for [sarah.title] at work on Saturdays."
 
