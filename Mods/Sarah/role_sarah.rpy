@@ -632,6 +632,8 @@ label Sarah_third_wheel_label():
     $ the_person.apply_outfit(get_sarah_date_outfit_one())
 
     "By yourself on the weekend at work, you get up for a minute and decide to stretch your legs and walk the hallways for a bit."
+    $ mc.change_location(office)
+    $ mc.location.show_background()
     "As you pass by the HR offices, you notice the HR Director's office door is open and the light is on. You decide to investigate."
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -1271,6 +1273,8 @@ label Sarah_catch_stealing_label():
     $ the_person = sarah
     $ sarah.event_triggers_dict["epic_tits_progress"] = 1
     "As you walk to halls of your company, getting ready to pack things up for the weekend, you notice [the_person.title] sneaking out of the research division."
+    $ mc.change_location(rd_division)
+    $ mc.location.show_background()
     $ the_person.draw_person()
     mc.name "Hello [the_person.title]... what brings you to research on a late Friday evening?"
     "She looks down at the ground and mutters for a second, trying to think of something. It is clear she is hiding something."
@@ -2070,7 +2074,7 @@ label Sarah_threesome_request_label():
     the_person "Okay! Let's do it!"
 
     # Make threesome request even on talk event and add it here.
-    $ sarah.event_triggers_dict["initial_threesome_target"] = person_choice
+    $ sarah.event_triggers_dict["initial_threesome_target"] = person_choice.identifier
     $ sarah.event_triggers_dict["initial_threesome_arranged"] = False
 
     $ add_sarah_arrange_threesome_action(person_choice)
@@ -2279,6 +2283,7 @@ label Sarah_arrange_threesome_label(the_person):
         "You give her the details. This is going to be a fun night!"
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
     elif the_person is nora:
+        # TODO: Write Nora part
         "Note, this dialogue is not yet written. I'm waiting until Nora gets further developed as a character."  #TODO
         "At the end of the dialogue, she agrees to be the threesome partner... for science..."
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
@@ -2295,12 +2300,10 @@ label Sarah_initial_threesome_label():
         $ add_sarah_initial_threesome_action()
         return
 
-    $ the_person = sarah.event_triggers_dict.pop("initial_threesome_target") # get and remove from dictionary
-    $ scene_manager = Scene()
-
-    if the_person == None:
-        "How did we get here? Tell Starbuck her shitty code is missing the initial threesome target."
+    $ the_person = get_person_by_identifier(sarah.event_triggers_dict.get("initial_threesome_target", None))
+    if the_person is None:
         return
+
     "It's Saturday night. You quickly head home, you have an exciting night ahead of you."
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
@@ -2309,6 +2312,7 @@ label Sarah_initial_threesome_label():
     sarah "Hey, I'm here."
     $ mc.end_text_convo()
     "You head to the front door and invite her in."
+    $ scene_manager = Scene()
     $ scene_manager.add_actor(sarah)
     "You head back to your bedroom and she sits on your bed."
     $ scene_manager.update_actor(sarah, position = "sitting", display_transform = character_center_flipped)
