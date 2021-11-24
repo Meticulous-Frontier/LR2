@@ -48,8 +48,17 @@ init 2 python:
         erica.event_triggers_dict["morning_wakeup_pref"] = 0
         erica.event_triggers_dict["pre_insta_blowjob"] = False
         erica.event_triggers_dict["post_yoga_fuck"] = False
+        erica.event_triggers_dict["kicked_off_team"] = False
+        erica.event_triggers_dict["rejoin_team"] = False
+
         erica.fertility_percent = -100.0  #Erica refuses to get pregnant for MC, getting pregnant would cause her to be kicked from track team. Enabled with breeding fetish.
 
+        erica.event_triggers_dict["story_dict"] = True
+        erica.story_character_description = "A collegiate track and field athlete."
+        erica.story_love_list = erica_story_love_list
+        erica.story_lust_list = erica_story_lust_list
+        erica.story_teamup_list = erica_story_teamup_list
+        erica.story_other_list = erica_story_other_list
 
 
         town_relationships.update_relationship(nora, erica, "Friend")
@@ -3146,6 +3155,7 @@ label erica_breeding_fetish_team_crisis_label():
     the_person "I... I don't know. I'm not sure you'll be able to anything."
     mc.name "Well, I'll try anyway. [nora.title] is a good person, she'll atleast be able to tell me why she is going along with it."
     $ nora.add_unique_on_talk_event(erica_breeding_fetish_nora_followup)
+    $ erica.event_triggers_dict["kicked_off_team"] = True
     the_person "Okay. I appreciate it."
     "You look down at [the_person.possessive_title], sitting on the edge of your bed. Her belly is really showing recently, and she looks amazing, although distraught."
     mc.name "Hey, it's getting late. Why don't you spend the night here?"
@@ -3352,6 +3362,7 @@ label erica_breeding_fetish_team_rejoin_label(the_person):
     the_person "Anyway, I just want you to know, I'll never forget what you've done for me."
     the_person "Now, did you want something?"
     $ nora.add_unique_on_room_enter_event(college_intern_recruit_supply) #I added this here so we don't accidentally steamroll right into it with Nora.
+    $ erica.event_triggers_dict["rejoin_team"] = False
     call talk_person(the_person) from _call_talk_erica_team_rejoin_010
     #fin
     return
@@ -3519,6 +3530,12 @@ init 2 python:
 
     def erica_post_yoga_fuck_complete():
         return erica.event_triggers_dict.get("post_yoga_fuck", False)
+
+    def erica_fetish_is_kicked_off_team():
+        return erica.event_triggers_dict.get("kicked_off_team", False)
+
+    def erica_fetish_rejoin_team():
+        return erica.event_triggers_dict.get("rejoin_team",False)
 
     # def erica_check_class_size_and_add_event():
     #     if len(erica_get_yoga_class_list()) < 4:

@@ -86,6 +86,13 @@ init 2 python:
         sarah.event_triggers_dict["unique_sex_positions"] = sarah_unique_sex_positions
         sarah.event_triggers_dict["story_dict"] = True
 
+        #Progress screen functions
+        sarah.story_character_description = "A long lost childhood friend. Maybe you can spark a flame with her."
+        sarah.story_love_list = sarah_story_love_list
+        sarah.story_lust_list = sarah_story_lust_list
+        sarah.story_teamup_list = sarah_story_teamup_list
+        sarah.story_other_list = sarah_story_other_list
+
         # add appoint
         office.add_action(HR_director_appointment_action)
         sarah.add_role(sarah_role)

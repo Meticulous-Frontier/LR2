@@ -249,7 +249,10 @@ init 2: # Need to allow for None name roles in this screen as well.
                             align [1.0,0.5]
                             auto "gui/button/choice_%s_background.png"
                             focus_mask "gui/button/choice_idle_background.png"
-                            action Show("story_progress", the_person = the_person, story_dict = the_person.story_dict())
+                            action [
+                                Function(the_person.draw_person, draw_layer="8", wipe_scene = False),
+                                Show("story_progress", person = the_person)
+                            ]
                         textbutton "Story Progress" align [0.87,0.5] style "return_button_style"
                 frame:
                     background "#1a45a1aa"

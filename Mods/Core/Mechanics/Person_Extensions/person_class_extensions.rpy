@@ -1348,7 +1348,7 @@ init -1 python:
             else:
                 at_arguments.append(extra_at_arguments)
 
-        self.hide_person()
+        # self.hide_person()
         if wipe_scene:
             clear_scene() #Make sure no other characters are drawn either.
             if show_person_info:
@@ -2548,3 +2548,21 @@ init -1 python:
 
     Person.has_story_dict = has_story_dict
     Person.get_story_dict = get_story_dict
+
+    def story_love_list(self):  #Note, this is a generic list and is meant to be overloaded on a per character basis.
+        return ["This character's love progress menu has not yet been created."]
+
+    def story_lust_list(self):
+        return ["This character's lust progress menu has not yet been created."]
+
+    def story_teamup_list(self):
+        return [[" ", "No teamups have been written for this character yet!"]]
+
+    def story_other_list(self):
+        return [""] #There is some default info here, so no need to add a generic text description
+
+    Person.story_love_list = story_love_list
+    Person.story_lust_list = story_lust_list
+    Person.story_teamup_list = story_teamup_list
+    Person.story_other_list = story_other_list
+    Person.story_character_description = ""
