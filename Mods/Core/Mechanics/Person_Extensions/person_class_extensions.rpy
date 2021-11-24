@@ -1437,11 +1437,13 @@ init -1 python:
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
-    def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, hide_list = []): #Encapsulates what is done when drawing a person and produces a single displayable.
+    def build_person_displayable_enhanced(self, position = None, emotion = None, special_modifier = None, lighting = None, hide_list = [], outfit = None): #Encapsulates what is done when drawing a person and produces a single displayable.
         if position is None:
             position = self.idle_pose
         if emotion is None:
             emotion = self.get_emotion()
+        if outfit is None:
+            outfit = self.outfit
 
         forced_special_modifier = self.outfit.get_forced_modifier()
         if forced_special_modifier is not None:
@@ -1456,7 +1458,7 @@ init -1 python:
                 displayable_list.append(self.tan_style.has_extension.generate_item_displayable(self.body_type, self.tits, position, lighting = lighting)) # Add the tan
         displayable_list.append(self.pubes_style.generate_item_displayable(self.body_type, self.tits, position, lighting = lighting)) #Add in her pubes
 
-        displayable_list.extend(self.outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting, hide_layers = hide_list))
+        displayable_list.extend(outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting, hide_layers = hide_list))
         displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Get hair
 
         x_size, y_size = position_size_dict.get(position)

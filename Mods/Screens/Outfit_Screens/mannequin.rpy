@@ -8,9 +8,7 @@ init 2 python:
         if emotion is None:
             emotion = mannequin.get_emotion()
 
-        mannequin.apply_outfit(outfit)
-
-        character_image = mannequin.build_person_displayable(position, emotion,special_modifier, [0.98,0.98,0.98], hide_list = hide_list)
+        character_image = mannequin.build_person_displayable(position, emotion,special_modifier, [0.98,0.98,0.98], hide_list = hide_list, outfit = outfit)
 
         renpy.show(mannequin.identifier, at_list=[character_right, scale_person(mannequin.height)],layer="8",what=character_image,tag=mannequin.identifier)
         return
