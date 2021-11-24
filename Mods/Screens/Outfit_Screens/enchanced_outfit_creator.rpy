@@ -1,11 +1,3 @@
-#init -1 python: #TODO: Go through everything again so that it uses copies where it should and remove instances where it shouldn't.
-                      # I want outfits to be editable without forcing commitet changes upon `selected_clothing`
-                      # Right now, this seems to only be a problem when editing a `Person`'s wardrobe since the MC Wardrobe always use copies anyway.
-                      # Fix issue with hitting "Abandon" when using Outfit Manager through "Add Outfit" for a Person, seems to be coming from the fact it does not give the expected return of "No Return".
-                      # Best solution would be for Vren to change that in the main script so all the outfit screen expect the same return.
-                      # Figure out why and fix actions only running certain functions on every second press.
-                      # Add logic for the instances where multiple cloth items from a category can be applied so it displays properly at all times. (no known issues with the end result, just display)
-
 init 10 python:
 
     # NOTE: Override the color changing functions
@@ -43,11 +35,9 @@ init 10 python:
         cs = renpy.current_screen()
         # release display resources
         if "mannequin" in cs.scope.keys() and isinstance(cs.scope["mannequin"], Person):
-            renpy.hide(cs.scope["mannequin"].identifier)
+            renpy.hide(cs.scope["mannequin"].identifier, layer = "8")
         else:
-            renpy.hide("mannequin_dummy")
-        # clear mannequin layer
-        renpy.scene("8")
+            renpy.hide("mannequin_dummy", layer = "8")
         return
 
     def preview_outfit(outfit = "demo_outfit"):
