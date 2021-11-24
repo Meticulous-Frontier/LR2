@@ -69,6 +69,14 @@ init 2 python:
 
         # In Kaya's event, we keep the variable for whether or not Sakari has died, since
 
+        #Progress screen functions
+        sakari.event_triggers_dict["story_dict"] = True
+        sakari.story_character_description = "A native woman who had an affair with your dad and whose daughter, [kaya.title], is your half sister."
+        sakari.story_love_list = sakari_story_love_list
+        sakari.story_lust_list = sakari_story_lust_list
+        sakari.story_teamup_list = sakari_story_teamup_list
+        sakari.story_other_list = sakari_story_other_list
+
         # add appoint
         #office.add_action(HR_director_appointment_action)
 
