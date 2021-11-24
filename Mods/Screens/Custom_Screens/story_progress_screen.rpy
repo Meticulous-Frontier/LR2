@@ -5,6 +5,9 @@ init 2:
         modal True
         zorder 100
 
+        default mannequin = person
+        default preview_outfit = person.outfit
+
         vbox:
             yalign 0.2
             xalign 0.4
@@ -124,9 +127,7 @@ init 2:
                     auto "gui/button/choice_%s_background.png"
                     focus_mask "gui/button/choice_idle_background.png"
                     action [
-                        Function(person.hide_person,draw_layer="8"),
+                        Function(hide_mannequin),
                         (Hide("story_progress"))
                     ]
                 textbutton "Return" align [0.5,0.5] style "return_button_style"
-
-        #$ person.draw_person(draw_layer="8")
