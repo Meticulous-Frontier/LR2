@@ -1348,7 +1348,7 @@ init -1 python:
             else:
                 at_arguments.append(extra_at_arguments)
 
-        # self.hide_person()
+        self.hide_person(draw_layer = draw_layer)
         if wipe_scene:
             clear_scene() #Make sure no other characters are drawn either.
             if show_person_info:
