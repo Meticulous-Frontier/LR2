@@ -1,44 +1,44 @@
 init -1 python:
-        def get_trait_side_effect_text(trait):
-            trait_side_effects = trait.get_effective_side_effect_chance()
+    def get_trait_side_effect_text(trait):
+        trait_side_effects = trait.get_effective_side_effect_chance()
 
-            if trait.research_needed > 10000:
-                return "{color=#cd5c5c}Always Guaranteed{/color}"
-            if trait_side_effects >= 70: # Red (Color code the side effect risk for quicker identification)
-                return "{color=#cd5c5c}" + str(trait_side_effects) + "%{/color}"
-            elif trait_side_effects >= 20: # Yellow
-                return "{color=#eee000}" + str(trait_side_effects) + "%{/color}"
-            else: # Green
-                return "{color=#98fb98}" + str(trait_side_effects) + "%{/color}"
+        if trait.research_needed > 1000 or trait_side_effects > 1000:
+            return "{color=#cd5c5c}Always{/color}"
+        if trait_side_effects >= 70: # Red (Color code the side effect risk for quicker identification)
+            return "{color=#cd5c5c}" + str(trait_side_effects) + "%{/color}"
+        elif trait_side_effects >= 20: # Yellow
+            return "{color=#eee000}" + str(trait_side_effects) + "%{/color}"
+        else: # Green
+            return "{color=#98fb98}" + str(trait_side_effects) + "%{/color}"
 
-        def get_trait_mastery_text(trait):
-            if trait.mastery_level <= 10: # Red
-                return "{color=#cd5c5c}" + str(trait.mastery_level) + "{/color}"
-            elif trait.mastery_level <= 50: # Yellow
-                return "{color=#eee000}" + str(trait.mastery_level) + "{/color}"
-            else: # Green
-                return "{color=#98fb98}" + str(trait.mastery_level) + "{/color}"
+    def get_trait_mastery_text(trait):
+        if trait.mastery_level <= 10: # Red
+            return "{color=#cd5c5c}" + str(trait.mastery_level) + "{/color}"
+        elif trait.mastery_level <= 50: # Yellow
+            return "{color=#eee000}" + str(trait.mastery_level) + "{/color}"
+        else: # Green
+            return "{color=#98fb98}" + str(trait.mastery_level) + "{/color}"
 
-        def get_trait_tags(trait):
-            trait_tags = ""
-            if trait.exclude_tags:
-                trait_tags = "\nExcludes Other: "
-                for a_tag in trait.exclude_tags:
-                    trait_tags += "[" + a_tag + "]"
-            return trait_tags
+    def get_trait_tags(trait):
+        trait_tags = ""
+        if trait.exclude_tags:
+            trait_tags = "\nExcludes Other: "
+            for a_tag in trait.exclude_tags:
+                trait_tags += "[" + a_tag + "]"
+        return trait_tags
 
-        def get_trait_display_title(trait):
-            trait_tags = get_trait_tags(trait)
-            if trait.research_needed > 10000: #Assume very high values are impossible #TODO: Just make this a boolean we can toggle on each trait.
-                research_needed_string = "\nResearch Impossible"
-            else:
-                research_needed_string = "(" +str(__builtin__.round(trait.current_research, 1))+"/"+ str(int(trait.research_needed)) + ")"
+    def get_trait_display_title(trait):
+        trait_tags = get_trait_tags(trait)
+        if trait.research_needed > 10000: #Assume very high values are impossible #TODO: Just make this a boolean we can toggle on each trait.
+            research_needed_string = "\nResearch Impossible"
+        else:
+            research_needed_string = "(" +str(__builtin__.round(trait.current_research, 1))+"/"+ str(int(trait.research_needed)) + ")"
 
-            return trait.name + " " + research_needed_string + trait_tags
+        return trait.name + " " + research_needed_string + trait_tags
 
-        def get_blueprint_display_title(trait):
-            trait_tags = get_trait_tags(trait)
-            return trait.name + " " + trait_tags
+    def get_blueprint_display_title(trait):
+        trait_tags = get_trait_tags(trait)
+        return trait.name + " " + trait_tags
 
 init 2:
     screen research_select_ui: #How you select serum and trait research
