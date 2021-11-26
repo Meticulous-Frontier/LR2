@@ -2623,7 +2623,9 @@ label erica_lily_weekly_photoshoot_label(the_person):
     $ scene_manager.clear_scene()
     if erica.sluttiness > 20 and erica.event_triggers_dict.get("post_insta_handy", False) == False:
         $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_handjob)
-
+    elif erica_get_morning_wakeup_pref() == 2 or (erica_get_morning_wakeup_pref() == 1 and renpy.random.randint(0,2) == 1):
+        # make sure we add this if it's not already present
+        $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
 
     $ erica.add_unique_on_room_enter_event(erica_lily_weekly_photoshoot)
     $ del lily_insta_outfit
@@ -2720,8 +2722,6 @@ label erica_lily_post_insta_morning_label():
         "[the_person.title] quietly leaves your room and you quickly fall back asleep."
         $ clear_scene()
         $ mc.location.lighting_conditions = standard_indoor_lighting
-        if erica_get_morning_wakeup_pref() == 2:
-            $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
 
     if the_person.is_willing(cowgirl_blowjob) and "blowjob" not in option_list:
@@ -2748,8 +2748,6 @@ label erica_lily_post_insta_morning_label():
         "[the_person.title] quietly leaves your room and you quickly fall back asleep."
         $ clear_scene()
         $ mc.location.lighting_conditions = standard_indoor_lighting
-        if erica_get_morning_wakeup_pref() == 2:
-            $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
 
     if willing_to_threesome(the_person, lily) and "threesome" not in option_list:
@@ -2812,8 +2810,6 @@ label erica_lily_post_insta_morning_label():
         $ scene_manager.clear_scene()
         "The two girls get up. You fall asleep as they slip out of your room."
         $ mc.location.lighting_conditions = standard_indoor_lighting
-        if erica_get_morning_wakeup_pref() == 2:
-            $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
 
 
@@ -2903,8 +2899,6 @@ label erica_lily_post_insta_morning_label():
         $ scene_manager.remove_actor(lily)
         "You fall back asleep. What an incredible midnight rendezvous..."
         $ mc.location.lighting_conditions = standard_indoor_lighting
-        if erica_get_morning_wakeup_pref() == 2:
-            $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
 
 
@@ -2915,8 +2909,6 @@ label erica_lily_post_insta_morning_label():
     "[the_person.title] quietly leaves your room and you quickly fall back asleep."
     $ clear_scene()
     $ mc.location.lighting_conditions = standard_indoor_lighting
-    if erica_get_morning_wakeup_pref() == 2:
-        $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
     return
 
 label erica_post_insta_handjob_followup_label(the_person):
@@ -2934,6 +2926,8 @@ label erica_post_insta_handjob_followup_label(the_person):
     the_person "Mmm, okay. Maybe I'll do that again next time I come over and spend the night with your sister!"
     mc.name "That would be nice."
     the_person "Did you need something?"
+    # continue talk event
+    call talk_person(the_person) from _call_talk_person_handjob_followup
     return
 
 label erica_pre_insta_love_label(the_person):
