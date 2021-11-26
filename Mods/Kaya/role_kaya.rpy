@@ -116,6 +116,8 @@ init -2 python:
         return False
 
     def kaya_lily_study_night_recurring_requirement(the_person):
+        if the_person.event_triggers_dict.get("last_lily_study_night", 0) >= day:
+            return False
         if day%7 == 1 and time_of_day == 4 and the_person.location == lily.home:    #TODO double check and make sure this actually works...
             return True
         return False
@@ -691,6 +693,7 @@ label kaya_lily_study_night_recurring_label(the_person):
         "Leave her drink alone":
             "You decide not to give her any for now."
     "You bring the snacks and drink to the girls. They are busy studying, so you decide to leave them alone for tonight."
+    $ kaya.event_triggers_dict["last_lily_study_night"] = day
     $ kaya.add_unique_on_room_enter_event(kaya_lily_study_night_recurring)
     return
 
