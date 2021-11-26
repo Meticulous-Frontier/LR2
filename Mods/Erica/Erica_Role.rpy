@@ -2635,6 +2635,8 @@ label erica_lily_weekly_photoshoot_label(the_person):
 
 label erica_lily_post_insta_handjob_label():
     $ the_person = erica
+    $ mc.change_location(bedroom)   # switch to mc bedroom
+    $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
     $ erica.event_triggers_dict["post_insta_handy"] = True
     "You hear the door to your room slowly open, slowly waking you up."
@@ -2674,7 +2676,7 @@ label erica_lily_post_insta_handjob_label():
     $ clear_scene()
     "You wake up a few hours later. Did [the_person.possessive_title] really come in your room in the middle of the night? Or was that just a dream?"
     $ the_person.add_unique_on_talk_event(erica_post_insta_handjob_followup)
-    $ mc.location.lighting_conditions = standard_outdoor_lighting
+    $ mc.location.lighting_conditions = standard_indoor_lighting
     return
 
 label erica_lily_post_insta_morning_label():
@@ -2683,6 +2685,9 @@ label erica_lily_post_insta_morning_label():
         return
     if the_person.sex_record.get("Last Sex Day", 9999) == day:  #If mandatory and random crisis happen to fire on the same day, suppress the second event.
         return
+
+    $ mc.change_location(bedroom)   # switch to mc bedroom
+    $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
     $ option_list = erica_get_wakeup_options()
     "You hear the door to your room slowly open, waking you up."
@@ -2714,7 +2719,7 @@ label erica_lily_post_insta_morning_label():
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] quietly leaves your room and you quickly fall back asleep."
         $ clear_scene()
-        $ mc.location.lighting_conditions = standard_outdoor_lighting
+        $ mc.location.lighting_conditions = standard_indoor_lighting
         if erica_get_morning_wakeup_pref() == 2:
             $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
@@ -2742,7 +2747,7 @@ label erica_lily_post_insta_morning_label():
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] quietly leaves your room and you quickly fall back asleep."
         $ clear_scene()
-        $ mc.location.lighting_conditions = standard_outdoor_lighting
+        $ mc.location.lighting_conditions = standard_indoor_lighting
         if erica_get_morning_wakeup_pref() == 2:
             $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
@@ -2806,7 +2811,7 @@ label erica_lily_post_insta_morning_label():
         the_person "Mmm, maybe. I might want him all to myself though..."
         $ scene_manager.clear_scene()
         "The two girls get up. You fall asleep as they slip out of your room."
-        $ mc.location.lighting_conditions = standard_outdoor_lighting
+        $ mc.location.lighting_conditions = standard_indoor_lighting
         if erica_get_morning_wakeup_pref() == 2:
             $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
@@ -2897,7 +2902,7 @@ label erica_lily_post_insta_morning_label():
         "You watch as [the_person.possessive_title] gets up and excuses herself, her ass swaying back and forth as she walks away."
         $ scene_manager.remove_actor(lily)
         "You fall back asleep. What an incredible midnight rendezvous..."
-        $ mc.location.lighting_conditions = standard_outdoor_lighting
+        $ mc.location.lighting_conditions = standard_indoor_lighting
         if erica_get_morning_wakeup_pref() == 2:
             $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
         return
@@ -2909,7 +2914,7 @@ label erica_lily_post_insta_morning_label():
     $ the_person.draw_person(position = "walking_away")
     "[the_person.title] quietly leaves your room and you quickly fall back asleep."
     $ clear_scene()
-    $ mc.location.lighting_conditions = standard_outdoor_lighting
+    $ mc.location.lighting_conditions = standard_indoor_lighting
     if erica_get_morning_wakeup_pref() == 2:
         $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
     return
@@ -3118,6 +3123,8 @@ label erica_breeding_fetish_followup_label(the_person):
 label erica_breeding_fetish_team_crisis_label():
     $ the_person = erica
     $ the_person.happiness = 70
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     "You are in your room, getting ready for bed when your phone vibrates. It's [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey, sorry I know it's late. Can I come over?"
