@@ -1001,6 +1001,18 @@ init -1 python:
     # wrap up the run_day function
     Person.run_day = person_run_day_extended(Person.run_day)
 
+    # extend default wants_creampie function
+    def person_wants_creampie_extended(org_func):
+        def wants_creampie_wrapper(person):
+            # when breeding fetish, she always wants a creampie
+            if person.has_breeding_fetish():
+                return True
+            return org_func(person)
+
+        return wants_creampie_wrapper
+
+    Person.wants_creampie = person_wants_creampie_extended(Person.wants_creampie)
+
     def person_call_dialogue_extended(org_func):
         def person_call_dialogue_wrapper(person, type, **extra_args):
             if type == "sex_review" and extra_args.get("the_report", {}).get("is_angry", False):
