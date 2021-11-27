@@ -34,9 +34,9 @@ label intro_bent_over_breeding(the_girl, the_location, the_object):
     else:
         the_girl "Oh thank god, I've been daydreaming about getting filled up all day long."
 
-    if not the_girl.vagina_visible():
+    if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = bent_over_breeding.position_tag, visible_enough = True, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = bent_over_breeding.position_tag, prefer_half_off = True)
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."

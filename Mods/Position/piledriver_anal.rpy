@@ -32,9 +32,9 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
     $ the_girl.draw_person(position = piledriver_anal.position_tag)
     the_girl "How's this?"
 
-    if not the_girl.vagina_visible():
+    if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, prefer_half_off = True)
 
     "You get your hard cock out and kneel down in front of her. She yelps in surprise when you grab her ankles and bring them up and over her waist."
     the_girl "Oh god, it's crazy when you fuck my pussy like this."

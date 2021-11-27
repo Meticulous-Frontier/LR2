@@ -29,9 +29,9 @@ label intro_SB_facing_wall(the_girl, the_location, the_object):
     $ SB_facing_wall.redraw_scene(the_girl)
     "You turn [the_girl.possessive_title] so she faces away from you and push her up against the [the_object.name]."
 
-    if not the_girl.vagina_visible():
+    if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = SB_facing_wall.position_tag, visible_enough = True, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = SB_facing_wall.position_tag, prefer_half_off = True)
 
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
     the_girl "Oh my god..."
