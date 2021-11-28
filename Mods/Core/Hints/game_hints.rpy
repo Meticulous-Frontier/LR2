@@ -12,8 +12,8 @@ init -1 python:
     game_hints.append(Hint("Date with Sarah", "While working on Saturday, Sarah might ask you on a date.", "bool(exists_in_mandatory_crisis_list('Sarah_get_drinks_label')) and sarah.sluttiness > 40 and sarah.love > 40", "not bool(exists_in_mandatory_crisis_list('Sarah_get_drinks_label'))"))
     game_hints.append(Hint("Another date with Sarah", "Sarah might take you on another date on Saturday, when you work in the office.", "bool(exists_in_mandatory_crisis_list('Sarah_stripclub_story_label')) and (sarah_epic_tits_progress() >= 2 or sarah_epic_tits_progress() == -1) and not strip_club_is_closed() and sarah.sluttiness > 50", "not bool(exists_in_mandatory_crisis_list('Sarah_stripclub_story_label'))"))
 
-    # Hints for Kaya
-    game_hints.append(Hint("Ask Kaya Out", "Go to the coffee shop and increase Kaya's love to greater than 20 and in the evening ask Kaya on a date.", "kaya_has_finished_intro()", "not kaya_has_had_drink_date() or kaya_has_started_internship() or kaya_has_moved()"))
+    # Hints for Kaya (Disabled for now until the character is more complete)
+    # game_hints.append(Hint("Ask Kaya Out", "Go to the coffee shop and increase Kaya's love to greater than 20 and in the evening ask Kaya on a date.", "kaya_has_finished_intro()", "not kaya_has_had_drink_date() or kaya_has_started_internship() or kaya_has_moved()"))
 
     # Hints for HR Director Role
     game_hints.append(Hint("HR Director", "Purchase the business policy for the HR Director at your main office.", "HR_director_creation_requirement() and not HR_director_creation_policy.is_owned()", "HR_director_creation_policy.is_owned()"))
