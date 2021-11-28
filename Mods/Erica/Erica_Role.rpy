@@ -2820,7 +2820,8 @@ label erica_lily_post_insta_morning_label():
         $ mc.change_arousal(20)
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(-5)
-        $ position_choice = get_random_from_list(erica_wakeup_choose_position())
+        $ position_choice = get_random_from_list(erica_get_wakeup_options())
+
     if position_choice == "handjob":
         the_person "I don't know why, I just love the feeling of your thick cock in my hand..."
         "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts to stroke it again."
@@ -3518,7 +3519,7 @@ init 2 python:
     def erica_wakeup_choose_position():
         tuple_list = []
         for position in erica_get_wakeup_options():
-            tuple_list.append([position, position])
+            tuple_list.append([position.title(), position])
         tuple_list.append(["Surprise me", "Surprise me"])
 
         return renpy.display_menu(tuple_list,True,"Choice")
