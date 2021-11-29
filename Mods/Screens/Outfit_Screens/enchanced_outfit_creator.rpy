@@ -144,16 +144,16 @@ init 10 python:
     def set_generated_outfit(category, slut_value, min_slut_value = 0):
         cs = renpy.current_screen()
         outfit = cs.scope["outfit_builder"].build_outfit(cs.scope["outfit_class_selected"], slut_value, min_slut_value)
-        cs.scope["item_outfit"] = outfit.get_copy()
-        cs.scope["demo_outfit"] = outfit
+        cs.scope["item_outfit"] = get_outfit_copy_with_name(outfit)
+        cs.scope["demo_outfit"] = get_outfit_copy_with_name(outfit)
         switch_outfit_category(category)
         return
 
     def personalize_generated_outfit():
         cs = renpy.current_screen()
         outfit = cs.scope["outfit_builder"].personalize_outfit(cs.scope["item_outfit"], max_alterations = 2, swap_bottoms = True)
-        cs.scope["item_outfit"] = outfit.get_copy()
-        cs.scope["demo_outfit"] = outfit
+        cs.scope["item_outfit"] = get_outfit_copy_with_name(outfit)
+        cs.scope["demo_outfit"] = get_outfit_copy_with_name(outfit)
         preview_outfit()
         return
 
@@ -1019,9 +1019,9 @@ init 2:
 
                                                 action [
                                                     Function(update_outfit_name, item_outfit),
-                                                    Return(item_outfit),
                                                     Function(hide_mannequin),
-                                                    Hide("outfit_creator")
+                                                    Hide("outfit_creator"),
+                                                    Return(item_outfit.get_copy())
                                                 ]
 
                                             textbutton "Abandon / Exit":
