@@ -1017,7 +1017,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         $ the_person.change_obedience(3)
 
         $ the_relationship = town_relationships.get_relationship(the_watcher, the_person)
-        if the_relationship and the_relationship.get_type() in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
+        if the_relationship and the_relationship.get_type(the_watcher) in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
             call relationship_sex_watch(the_watcher, town_relationships.get_relationship_type(the_watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
             $ the_position.redraw_scene(the_person)
             call relationship_being_watched(the_person, the_watcher, town_relationships.get_relationship_type(the_person, the_watcher).lower(), the_position) from _call_relationship_being_watched
