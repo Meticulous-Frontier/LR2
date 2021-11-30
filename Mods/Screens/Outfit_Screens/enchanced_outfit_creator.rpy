@@ -144,16 +144,16 @@ init 10 python:
     def set_generated_outfit(category, slut_value, min_slut_value = 0):
         cs = renpy.current_screen()
         outfit = cs.scope["outfit_builder"].build_outfit(cs.scope["outfit_class_selected"], slut_value, min_slut_value)
-        cs.scope["item_outfit"] = get_outfit_copy_with_name(outfit)
         cs.scope["demo_outfit"] = get_outfit_copy_with_name(outfit)
+        cs.scope["item_outfit"] = cs.scope["demo_outfit"].get_copy()
         switch_outfit_category(category)
         return
 
     def personalize_generated_outfit():
         cs = renpy.current_screen()
-        outfit = cs.scope["outfit_builder"].personalize_outfit(cs.scope["item_outfit"], max_alterations = 2, swap_bottoms = True)
-        cs.scope["item_outfit"] = get_outfit_copy_with_name(outfit)
-        cs.scope["demo_outfit"] = get_outfit_copy_with_name(outfit)
+        cs.scope["outfit_builder"].personalize_outfit(cs.scope["demo_outfit"], max_alterations = 2, swap_bottoms = True)
+        cs.scope["demo_outfit"].update_name()
+        cs.scope["item_outfit"] = cs.scope["demo_outfit"].get_copy()
         preview_outfit()
         return
 
@@ -354,7 +354,7 @@ init 2:
         default import_selection = False
 
         default selected_from_outfit = None # Used to temporarily remember what clothing you have selected from starting_outfit if any
-        default demo_outfit = starting_outfit.get_copy()
+        default demo_outfit = starting_outfit
         default item_outfit = starting_outfit.get_copy()
         default outfit_builder = WardrobeBuilder(None)
         default max_slut = outfit_type == "over" and 8 or 12
@@ -1018,10 +1018,10 @@ init 2:
                                                 sensitive slut_limit is None or get_slut_score() <= slut_limit
 
                                                 action [
-                                                    Function(update_outfit_name, item_outfit),
+                                                    Function(update_outfit_name, demo_outfit),
+                                                    Return(demo_outfit),
                                                     Function(hide_mannequin),
-                                                    Hide("outfit_creator"),
-                                                    Return(item_outfit.get_copy())
+                                                    Hide("outfit_creator")
                                                 ]
 
                                             textbutton "Abandon / Exit":
