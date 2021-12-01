@@ -102,6 +102,9 @@ init 10 python:
 
     def preview_apply(cloth): # Temporarily remove the selected clothing with the one being hovered over.
         cs = renpy.current_screen()
+        if cs.scope["category_selected"] in cs.scope["accessory_categories"]:
+            return
+
         if cs.scope["selected_clothing"]:
             if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
                 if cs.scope["selected_clothing"].layer == cloth.layer:
@@ -116,6 +119,9 @@ init 10 python:
 
     def preview_restore(cloth):
         cs = renpy.current_screen()
+        if cs.scope["category_selected"] in cs.scope["accessory_categories"]:
+            return
+
         if cloth == cs.scope["selected_clothing"] and cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
             pass
         else:
@@ -361,6 +367,7 @@ init 2:
             $ outfit_class_selected = "FullSets"
 
         default valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"] #Holds the valid list of categories strings to be shown at the top.
+        default accessory_categories = ["Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"]
 
         default categories_mapping = {
             "Panties": [panties_list, Outfit.can_add_lower, Outfit.add_lower],  #Maps each category to the function it should use to determine if it is valid and how it should be added to the outfit.
