@@ -3,23 +3,20 @@ init 10 python:
     # NOTE: Override the color changing functions
 
     def get_heart_image_list_cloth(slut_value, multiplier = 5): ## Returns a string of hearts. Since we are dealing with lower values this version has 20 as it's 100% filled value. Used to indicate sluttiness requirement for the cloth item.
-
         heart_string = "{image=" + get_individual_heart(0, slut_value*multiplier, 0) + "}"
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-20, 0) + "}"
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-40, 0) + "}"
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-60, 0) + "}"
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-80, 0) + "}"
-
-
         return heart_string
 
     def replace_cloth(cloth):
         cs = renpy.current_screen()
-        if not cs.scope["valid_check"](cs.scope["item_outfit"], cs.scope["selected_clothing"]) and cs.scope["selected_from_outfit"] is not None:
-            cs.scope["item_outfit"].remove_clothing(cs.scope["selected_from_outfit"])
-            cs.scope["apply_method"](cs.scope["item_outfit"], cs.scope["selected_clothing"])
+        if not cs.scope["valid_check"](cs.scope["demo_outfit"], cs.scope["selected_clothing"]) and cs.scope["selected_from_outfit"] is not None:
+            cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_from_outfit"])
+            cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_clothing"])
         else:
-            cs.scope["apply_method"](cs.scope["item_outfit"], cs.scope["selected_clothing"])
+            cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_clothing"])
         cs.scope["selected_from_outfit"] = cloth
         return
 
@@ -55,7 +52,7 @@ init 10 python:
             draw_average_mannequin(cs.scope[outfit], hide_list = hide_list)
         else:
             draw_mannequin(cs.scope["mannequin"], cs.scope[outfit], cs.scope["mannequin_pose"], hide_list = hide_list)
-        renpy.restart_interaction()
+        return
 
     def get_slut_score():
         cs = renpy.current_screen()
@@ -90,8 +87,8 @@ init 10 python:
 
     def update_colour_sliders(cloth):
         cs = renpy.current_screen()
-        item_outfit = cs.scope["item_outfit"]
-        for cc in [x for x in item_outfit.upper_body + item_outfit.lower_body + item_outfit.feet + item_outfit.accessories]:
+        outfit = cs.scope["demo_outfit"]
+        for cc in [x for x in outfit.upper_body + outfit.lower_body + outfit.feet + outfit.accessories]:
             if cc in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
                 cloth.colour = cc.colour
                 cs.scope["selected_colour"] = "colour"
@@ -135,7 +132,7 @@ init 10 python:
     def outfit_valid_check():
         cs = renpy.current_screen()
         if cs.scope["selected_clothing"] is not None:
-            if cs.scope["valid_check"](cs.scope["item_outfit"], cs.scope["selected_clothing"]) or cs.scope["cloth"].layer in cs.scope["valid_layers"]:
+            if cs.scope["valid_check"](cs.scope["demo_outfit"], cs.scope["selected_clothing"]) or cs.scope["cloth"].layer in cs.scope["valid_layers"]:
                 return True
             else:
                 return False
@@ -145,7 +142,6 @@ init 10 python:
         cs = renpy.current_screen()
         outfit = cs.scope["outfit_builder"].build_outfit(cs.scope["outfit_class_selected"], slut_value, min_slut_value)
         cs.scope["demo_outfit"] = get_outfit_copy_with_name(outfit)
-        cs.scope["item_outfit"] = cs.scope["demo_outfit"].get_copy()
         switch_outfit_category(category)
         return
 
@@ -153,7 +149,6 @@ init 10 python:
         cs = renpy.current_screen()
         cs.scope["outfit_builder"].personalize_outfit(cs.scope["demo_outfit"], max_alterations = 2, swap_bottoms = True)
         cs.scope["demo_outfit"].update_name()
-        cs.scope["item_outfit"] = cs.scope["demo_outfit"].get_copy()
         preview_outfit()
         return
 
@@ -174,10 +169,9 @@ init 10 python:
         cs.scope["selected_from_outfit"] = None
         cs.scope["category_selected"] = category
         cs.scope["selected_colour"] = "colour" # Default to altering non- pattern colors
-        cs.scope["demo_outfit"] = cs.scope["item_outfit"].get_copy()
 
         # select cloth item from category we have selected
-        for cloth in cs.scope["item_outfit"].upper_body + cs.scope["item_outfit"].lower_body + cs.scope["item_outfit"].feet:
+        for cloth in cs.scope["demo_outfit"].upper_body + cs.scope["demo_outfit"].lower_body + cs.scope["demo_outfit"].feet:
             if not cloth.is_extension:
                 if cloth in cs.scope["categories_mapping"][category][0]:
                     cs.scope["selected_clothing"] = cloth
@@ -186,8 +180,6 @@ init 10 python:
                     break
 
         preview_outfit()
-        # if cs.scope["selected_clothing"] is not None and not cs.scope["starting_outfit"].has_clothing(cs.scope["selected_clothing"]):
-        #     cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
         return
 
     def colour_changed_bar(new_value): # Handles the changes to clothing colors, both normal and with patterns. Covers all channels.
@@ -255,7 +247,6 @@ init 10 python:
             new_value = 12
 
         cs.scope["slut_generation"] = new_value
-        renpy.restart_interaction()
         return
 
     def update_min_slut_generation(new_value):
@@ -269,7 +260,6 @@ init 10 python:
             new_value = cs.scope["slut_generation"]
 
         cs.scope["min_slut_generation"] = new_value
-        renpy.restart_interaction()
         return
 
 init 2:
@@ -302,7 +292,6 @@ init 2:
             feet_element = ET.SubElement(outfit_element, "Feet")
             accessory_element = ET.SubElement(outfit_element, "Accessories")
 
-
             for cloth in the_outfit.upper_body:
                 item_dict = build_item_dict(cloth)
                 if not cloth.is_extension:
@@ -325,7 +314,6 @@ init 2:
 
 init 2:
     screen outfit_creator(starting_outfit, outfit_type = "full", slut_limit = None, target_wardrobe = mc.designed_wardrobe): ##Pass a completely blank outfit instance for a new outfit, or an already existing instance to load an old one.| This overrides the default outfit creation screen
-
         add "Paper_Background.png"
         modal True
 
@@ -354,8 +342,7 @@ init 2:
         default import_selection = False
 
         default selected_from_outfit = None # Used to temporarily remember what clothing you have selected from starting_outfit if any
-        default demo_outfit = starting_outfit
-        default item_outfit = starting_outfit.get_copy()
+        default demo_outfit = starting_outfit.get_copy()
         default outfit_builder = WardrobeBuilder(None)
         default max_slut = outfit_type == "over" and 8 or 12
         default hide_underwear = False
@@ -958,7 +945,7 @@ init 2:
                                         xfill True
                                         vbox:
                                             spacing 5
-                                            for cloth in item_outfit.upper_body + item_outfit.lower_body + item_outfit.feet + item_outfit.accessories:
+                                            for cloth in demo_outfit.upper_body + demo_outfit.lower_body + demo_outfit.feet + demo_outfit.accessories:
                                                 if not cloth.is_extension and not cloth.layer in hide_list:
                                                     button:
                                                         background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
@@ -968,9 +955,7 @@ init 2:
                                                             SetScreenVariable("selected_from_outfit", cloth),
                                                             SetScreenVariable("category_selected", get_category(cloth)),
                                                             SetScreenVariable("selected_clothing", cloth),
-                                                            #Function(preview_apply, cloth),
 
-                                                            #Function(preview_restore, cloth),
                                                             SetScreenVariable("current_r",cloth.colour[0]),
                                                             SetScreenVariable("current_g",cloth.colour[1]),
                                                             SetScreenVariable("current_b",cloth.colour[2]),
@@ -980,7 +965,6 @@ init 2:
                                                         ]
                                                         alternate [
                                                             Function(hide_mannequin),
-                                                            Function(item_outfit.remove_clothing, cloth),
                                                             Function(demo_outfit.remove_clothing, cloth),
                                                             Function(preview_outfit)
                                                         ]
@@ -1046,7 +1030,7 @@ init 2:
 
                                                 if mannequin == "mannequin":
                                                     action [
-                                                        Function(custom_log_outfit, item_outfit, outfit_class = outfit_class_selected,
+                                                        Function(custom_log_outfit, demo_outfit, outfit_class = outfit_class_selected,
                                                         wardrobe_name = selected_xml),
                                                         Function(renpy.notify, "Outfit exported to " + selected_xml + "]")
                                                     ]
@@ -1054,18 +1038,18 @@ init 2:
                                                 else:
                                                     if outfit_type == "full":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_outfit, get_outfit_copy_with_name(item_outfit)),
+                                                            Function(mannequin.wardrobe.add_outfit, get_outfit_copy_with_name(demo_outfit)),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
                                                     elif outfit_type == "over":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_overwear_set, get_outfit_copy_with_name(item_outfit)),
+                                                            Function(mannequin.wardrobe.add_overwear_set, get_outfit_copy_with_name(demo_outfit)),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 
                                                     elif outfit_type == "under":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_underwear_set, get_outfit_copy_with_name(item_outfit)),
+                                                            Function(mannequin.wardrobe.add_underwear_set, get_outfit_copy_with_name(demo_outfit)),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 
