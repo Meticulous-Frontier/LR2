@@ -2,7 +2,7 @@ init -1 python:
     def get_trait_side_effect_text(trait):
         trait_side_effects = trait.get_effective_side_effect_chance()
 
-        if trait.research_needed > 1000 or trait_side_effects > 1000:
+        if trait_side_effects > 1000:
             return "{color=#cd5c5c}Always{/color}"
         if trait_side_effects >= 70: # Red (Color code the side effect risk for quicker identification)
             return "{color=#cd5c5c}" + str(trait_side_effects) + "%{/color}"
