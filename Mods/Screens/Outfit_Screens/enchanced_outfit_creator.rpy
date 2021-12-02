@@ -1,7 +1,5 @@
 init 10 python:
 
-    # NOTE: Override the color changing functions
-
     def get_heart_image_list_cloth(slut_value, multiplier = 5): ## Returns a string of hearts. Since we are dealing with lower values this version has 20 as it's 100% filled value. Used to indicate sluttiness requirement for the cloth item.
         heart_string = "{image=" + get_individual_heart(0, slut_value*multiplier, 0) + "}"
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-20, 0) + "}"
@@ -9,16 +7,6 @@ init 10 python:
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-60, 0) + "}"
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-80, 0) + "}"
         return heart_string
-
-    def replace_cloth(cloth):
-        cs = renpy.current_screen()
-        if not cs.scope["valid_check"](cs.scope["demo_outfit"], cs.scope["selected_clothing"]) and cs.scope["selected_from_outfit"] is not None:
-            cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_from_outfit"])
-            cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_clothing"])
-        else:
-            cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_clothing"])
-        cs.scope["selected_from_outfit"] = cloth
-        return
 
     def update_outfit_color(cloth_to_color):
         cs = renpy.current_screen()
@@ -58,11 +46,11 @@ init 10 python:
         cs = renpy.current_screen()
 
         if cs.scope["outfit_type"] == "full":
-            return cs.scope["demo_outfit"].get_full_outfit_slut_score()
+            return cs.scope["starting_outfit"].get_full_outfit_slut_score()
         elif cs.scope["outfit_type"] == "under":
-            return cs.scope["demo_outfit"].get_underwear_slut_score()
+            return cs.scope["starting_outfit"].get_underwear_slut_score()
         elif cs.scope["outfit_type"] == "over":
-            return cs.scope["demo_outfit"].get_overwear_slut_score()
+            return cs.scope["starting_outfit"].get_overwear_slut_score()
         return 0
 
     def get_outfit_type_name():
@@ -100,92 +88,51 @@ init 10 python:
                     cloth.colour_pattern = cc.colour_pattern
         return
 
-    def preview_apply(cloth): # Temporarily remove the selected clothing with the one being hovered over.
-        cs = renpy.current_screen()
-        if cs.scope["category_selected"] in cs.scope["accessory_categories"]:
-            return
-
-        if cs.scope["selected_clothing"]:
-            if cs.scope["selected_clothing"] in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
-                if cs.scope["selected_clothing"].layer == cloth.layer:
-                    cs.scope["demo_outfit"].remove_clothing(cs.scope["selected_clothing"])
-                cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
-        elif cloth in cs.scope["demo_outfit"].accessories:
-            cs.scope["selected_from_outfit"] = next((x for x in cs.scope["demo_outfit"].accessories if x == cloth), None)
-            cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
-        else:
-            cs.scope["apply_method"](cs.scope["demo_outfit"], cloth)
-        return
-
-    def preview_restore(cloth):
-        cs = renpy.current_screen()
-        if cs.scope["category_selected"] in cs.scope["accessory_categories"]:
-            return
-
-        if cloth == cs.scope["selected_clothing"] and cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
-            pass
-        else:
-            cs.scope["demo_outfit"].remove_clothing(cloth)
-
-        if cs.scope["selected_clothing"] is not None:
-            cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_clothing"])
-        elif cs.scope["selected_from_outfit"] is not None:
-            cs.scope["apply_method"](cs.scope["demo_outfit"], cs.scope["selected_from_outfit"])
-        else:
-            preview_outfit()
-        return
-
-    def outfit_valid_check():
-        cs = renpy.current_screen()
-        if cs.scope["selected_clothing"] is not None:
-            if cs.scope["valid_check"](cs.scope["demo_outfit"], cs.scope["selected_clothing"]) or cs.scope["cloth"].layer in cs.scope["valid_layers"]:
-                return True
-            else:
-                return False
-        return False
-
     def set_generated_outfit(category, slut_value, min_slut_value = 0):
         cs = renpy.current_screen()
         outfit = cs.scope["outfit_builder"].build_outfit(cs.scope["outfit_class_selected"], slut_value, min_slut_value)
-        cs.scope["demo_outfit"] = get_outfit_copy_with_name(outfit)
-        switch_outfit_category(category)
+        outfit.update_name()
+        cs.scope["demo_outfit"] = outfit
+        duplicate_outfit(cs.scope["starting_outfit"], outfit)
+        preview_outfit()
         return
 
     def personalize_generated_outfit():
         cs = renpy.current_screen()
         cs.scope["outfit_builder"].personalize_outfit(cs.scope["demo_outfit"], max_alterations = 2, swap_bottoms = True)
         cs.scope["demo_outfit"].update_name()
+        duplicate_outfit(cs.scope["starting_outfit"], cs.scope["demo_outfit"])
         preview_outfit()
         return
 
-    def get_outfit_copy_with_name(outfit):
-        new_outfit = outfit.get_copy()
-        new_outfit.update_name()
-        return new_outfit
+    # replace all items in outfit with a copy from source outfit
+    def duplicate_outfit(outfit, source_outfit):
+        outfit.upper_body = []
+        outfit.lower_body = []
+        outfit.feet = []
+        outfit.accessories = []
+
+        for feet in source_outfit.feet:
+            outfit.feet.append(feet.get_copy())
+
+        for lower in source_outfit.lower_body:
+            if not lower.is_extension:
+                outfit.lower_body.append(lower.get_copy())
+
+        for upper in source_outfit.upper_body:
+            upper_copy = upper.get_copy()
+            outfit.upper_body.append(upper_copy)
+            if upper.has_extension:
+                outfit.lower_body.append(upper_copy.has_extension)
+
+        for accessory in source_outfit.accessories:
+            outfit.accessories.append(accessory.get_copy())
+        return
 
     def update_outfit_name(outfit):
         default_names = ["New Outfit", "New Overwear Set", "New Underwear Set"]
         if outfit.name in default_names or outfit.name == "":
             outfit.update_name()
-        return
-
-    def switch_outfit_category(category):
-        cs = renpy.current_screen()
-        cs.scope["selected_clothing"] = None
-        cs.scope["selected_from_outfit"] = None
-        cs.scope["category_selected"] = category
-        cs.scope["selected_colour"] = "colour" # Default to altering non- pattern colors
-
-        # select cloth item from category we have selected
-        for cloth in cs.scope["demo_outfit"].upper_body + cs.scope["demo_outfit"].lower_body + cs.scope["demo_outfit"].feet:
-            if not cloth.is_extension:
-                if cloth in cs.scope["categories_mapping"][category][0]:
-                    cs.scope["selected_clothing"] = cloth
-                    cs.scope["selected_from_outfit"] = cloth
-                    update_colour_sliders(cloth)
-                    break
-
-        preview_outfit()
         return
 
     def colour_changed_bar(new_value): # Handles the changes to clothing colors, both normal and with patterns. Covers all channels.
@@ -347,7 +294,6 @@ init 2:
         default color_selection = True
         default import_selection = False
 
-        default selected_from_outfit = None # Used to temporarily remember what clothing you have selected from starting_outfit if any
         default demo_outfit = starting_outfit.get_copy()
         default outfit_builder = WardrobeBuilder(None)
         default max_slut = outfit_type == "over" and 8 or 12
@@ -367,7 +313,6 @@ init 2:
             $ outfit_class_selected = "FullSets"
 
         default valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"] #Holds the valid list of categories strings to be shown at the top.
-        default accessory_categories = ["Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"]
 
         default categories_mapping = {
             "Panties": [panties_list, Outfit.can_add_lower, Outfit.add_lower],  #Maps each category to the function it should use to determine if it is valid and how it should be added to the outfit.
@@ -433,9 +378,18 @@ init 2:
 
                                         xfill True
                                         sensitive category is not category_selected
+                                        if category == category_selected:
+                                            background "#143869"
+                                            hover_background "#1a45a1"
+                                        else:
+                                            background "#143869"
+                                            hover_background "#1a45a1"
+                                        insensitive_background "#171717"
 
                                         action [
-                                            Function(switch_outfit_category, category) # If a clothing item is selected and currently being previewed then remove it from preview.
+                                            SetScreenVariable("category_selected", category),
+                                            SetScreenVariable("selected_clothing", None),
+                                            SetScreenVariable("selected_colour", "colour")
                                         ]
                     vbox:
                         spacing 5
@@ -458,6 +412,10 @@ init 2:
                                         $ cloth_list_length = __builtin__.len(categories_mapping[category_selected][0])
 
                                         for cloth in sorted(categories_mapping[category_selected][0], key = lambda x: (x.layer, x.slut_value, x.name)):
+                                            $ is_sensitive = valid_check(starting_outfit, cloth) and cloth.layer in valid_layers
+                                            if cloth.has_extension and cloth.has_extension.layer not in valid_layers:
+                                                $ is_sensitive = False
+
                                             frame:
                                                 xsize 605
                                                 ysize 50
@@ -472,27 +430,28 @@ init 2:
                                                     style "textbutton_style"
                                                     text_style "custom_outfit_style"
 
-                                                    if selected_clothing is not None:
-                                                        sensitive outfit_valid_check()
-                                                    else: # If we are not editing an item already in the outfit then abide by the valid_layers rules.
-                                                        sensitive cloth.layer in valid_layers
-
+                                                    if valid_check(starting_outfit, cloth):
+                                                        background "#143869"
+                                                        hover_background "#1a45a1"
+                                                    else:
+                                                        background "#143869"
+                                                        hover_background "#1a45a1"
+                                                    insensitive_background "#171717"
+                                                    sensitive is_sensitive
                                                     action [
-                                                        SetScreenVariable("selected_clothing", cloth.get_copy()),
+                                                        SetScreenVariable("selected_clothing", cloth),
                                                         SetScreenVariable("selected_colour", "colour")
                                                     ]
-
                                                     hovered [
-                                                        Function(preview_apply, cloth), # Add the hovered outfit to the demo outfit
-                                                        Function(update_outfit_color, cloth),
+                                                        Function(apply_method, demo_outfit, cloth),
+                                                        Function(preview_outfit)
+                                                    ]
+                                                    unhovered [
+                                                        Function(demo_outfit.remove_clothing, cloth),
                                                         Function(preview_outfit)
                                                     ]
 
-                                                    unhovered [
-                                                        Function(preview_restore, cloth), # Remove the hovered outfit from the demo outfit and focus on the selected item if any.
-                                                        If(selected_clothing is not None, Function(update_outfit_color, selected_clothing)),
-                                                        Function(preview_outfit)
-                                                    ]
+
                                                 text cloth.generate_stat_slug():
                                                     style "custom_outfit_style"
                                                     ysize 50
@@ -783,24 +742,23 @@ init 2:
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
                                             hover_background "#143869"
-                                            background "#14386988"
+                                            background "#0a142688"
+                                            insensitive_background"#171717"
                                             xalign 0.5
                                             xfill True
 
-                                            sensitive outfit_valid_check()
+                                            sensitive valid_check(starting_outfit, selected_clothing)
 
-                                            action [
-                                                #Function(update_outfit_color, selected_clothing), #Make sure color is updated
-                                                Function(replace_cloth, selected_clothing),
-                                                Function(preview_outfit) # NOTE: We are no longer interested in the demo outfit so view the final outfit, starting_outfit
-                                            ]
-
+                                            action [SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), Function(apply_method, starting_outfit, selected_clothing)]
                                             hovered [
-                                                Function(preview_apply, selected_clothing),
-                                                #Function(update_outfit_color, selected_clothing),
+                                                SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                Function(apply_method, demo_outfit, selected_clothing),
                                                 Function(preview_outfit)
                                             ]
-
+                                            unhovered [
+                                                Function(demo_outfit.remove_clothing, selected_clothing),
+                                                Function(preview_outfit)
+                                            ]
 
                 # vbox: #Items selector
                 #     #W/ item customixing window at bottom
@@ -899,12 +857,6 @@ init 2:
                                                 #     background "#43B197"
                                                 #     xsize 250
                                                 #     padding [1,1]
-                                                #     if (selected_from_outfit):
-                                                #         text "From outfit: " + selected_from_outfit.name style "serum_text_style_traits"
-                                                # frame:
-                                                #     background "#43B197"
-                                                #     xsize 250
-                                                #     padding [1,1]
                                                 #     if (selected_clothing):
                                                 #         text "Seletect Item: " + selected_clothing.name style "serum_text_style_traits"
 
@@ -958,8 +910,6 @@ init 2:
                                                         background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
 
                                                         action [ # NOTE: Left click makes more sense for selection than right clicking
-
-                                                            SetScreenVariable("selected_from_outfit", cloth),
                                                             SetScreenVariable("category_selected", get_category(cloth)),
                                                             SetScreenVariable("selected_clothing", cloth),
 
@@ -972,6 +922,7 @@ init 2:
                                                         ]
                                                         alternate [
                                                             Function(hide_mannequin),
+                                                            Function(starting_outfit.remove_clothing, cloth),
                                                             Function(demo_outfit.remove_clothing, cloth),
                                                             Function(preview_outfit)
                                                         ]
@@ -1010,9 +961,8 @@ init 2:
 
                                                 action [
                                                     Function(update_outfit_name, demo_outfit),
-                                                    Return(demo_outfit),
                                                     Function(hide_mannequin),
-                                                    Hide("outfit_creator")
+                                                    Return(demo_outfit),
                                                 ]
 
                                             textbutton "Abandon / Exit":
@@ -1021,9 +971,8 @@ init 2:
                                                 xfill True
 
                                                 action [
-                                                    Return("Not_New"),
                                                     Function(hide_mannequin),
-                                                    Hide("outfit_creator")
+                                                    Return("Not_New"),
                                                 ]
                                     frame:
                                         background "#0a142688"
@@ -1045,18 +994,18 @@ init 2:
                                                 else:
                                                     if outfit_type == "full":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_outfit, get_outfit_copy_with_name(demo_outfit)),
+                                                            Function(mannequin.wardrobe.add_outfit, demo_outfit),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
                                                     elif outfit_type == "over":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_overwear_set, get_outfit_copy_with_name(demo_outfit)),
+                                                            Function(mannequin.wardrobe.add_overwear_set, demo_outfit),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 
                                                     elif outfit_type == "under":
                                                         action [
-                                                            Function(mannequin.wardrobe.add_underwear_set, get_outfit_copy_with_name(demo_outfit)),
+                                                            Function(mannequin.wardrobe.add_underwear_set, demo_outfit),
                                                             Function(renpy.notify, "Outfit added to " + mannequin.name + " wardrobe")
                                                         ]
 
