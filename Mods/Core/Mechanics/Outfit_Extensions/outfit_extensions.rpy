@@ -338,3 +338,15 @@ init 6 python:
         return False
 
     Outfit.has_hose = has_hose
+
+    # enhances original function to only return items
+    # on layer 1 and higher
+    def get_tit_strip_list_extended(org_func):
+        def get_tit_strip_list_wrapper(outfit, visible_enough = True):
+            result = org_func(outfit, visible_enough)
+            # only return items not on layer 0 (for now cincher, heart_pasties)
+            return [x for x in result if x.layer != 0]
+
+        return get_tit_strip_list_wrapper
+
+    Outfit.get_tit_strip_list = get_tit_strip_list_extended(Outfit.get_tit_strip_list)
