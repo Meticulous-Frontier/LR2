@@ -1662,7 +1662,7 @@ init -1 python:
             added = True
 
         if added:
-            # special condition if she hates kissing, but becomes your girlfried or paramour she would allow kissing
+            # special condition if she hates kissing, but becomes your girlfriend or paramour she would allow kissing
             if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role]:
                 self.increase_opinion_score("kissing")
 
