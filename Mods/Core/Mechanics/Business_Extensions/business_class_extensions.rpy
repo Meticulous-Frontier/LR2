@@ -244,6 +244,12 @@ init -1 python:
         person.add_role(employee_role)
         person.job = self.get_employee_title(person)
         person.set_work(div_func[target_division][1])
+        if not person.title:
+            person.set_title(get_random_title(person))
+        if not person.possessive_title:
+            person.set_possessive_title(get_random_possessive_title(person))
+        if not person.mc_title or person.mc_title == "Stranger":
+            person.set_mc_title(get_random_player_title(person))
         if add_to_location:
             div_func[target_division][1].add_person(person)
         self.update_employee_status(person)
