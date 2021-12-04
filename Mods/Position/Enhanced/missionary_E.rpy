@@ -26,7 +26,7 @@ label scene_missionary_3_enhanced(the_girl, the_location, the_object):
             else:
                 $ so_title = SO_relationship_to_title(the_girl.relationship)
                 mc.name "Take it bitch. God your cunt is so tight, so slick. I bet your [so_title] doesn't fuck you as good as I do."
-            "[the_girl.possessive_title] clings to you as fuck her, harder, faster, stronger."
+            "[the_girl.possessive_title] clings to you as you fuck her, harder, faster, stronger."
             "You continue at what seems like an impossible pace for as long as you can."
             the_girl "Oh god [the_girl.mc_title]! OH fuck yes!"
             "She is moaning your name right in your ear, and it's really turning you on."
