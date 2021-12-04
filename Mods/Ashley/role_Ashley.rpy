@@ -1491,7 +1491,7 @@ label ashley_second_concert_date_label():
         the_person "You should go."
         "There is probably no way for you to patch things up right now... You decide to do as she asks."
         "You gather your stuff and leave."
-        $ mc.business.add_mandatory_crisis(ashley_steph_second_date_confrontation_date)
+        $ mc.business.add_mandatory_crisis(ashley_steph_second_date_confrontation)
         $ ashley.event_triggers_dict["caught_cheating"] = True
         #TODO make a mandatory event to trigger in a day or two where you and stephanie make up.
     else:
