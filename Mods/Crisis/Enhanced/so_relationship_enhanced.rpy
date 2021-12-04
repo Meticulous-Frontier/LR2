@@ -47,7 +47,7 @@ init 2 python:
 
     def get_so_relationship_worsen_person():
         potential_people = []
-        for person in [x for x in known_people_in_the_game(excluded_people = unique_character_list + quest_director.unavailable_people()) if not x.relationship == "Single"]:
+        for person in [x for x in known_people_in_the_game(excluded_people = unique_character_list + quest_director.unavailable_people()) if not x.relationship == "Single" and not x.has_role([affair_role])]:
             if person.relationship in relationship_stats and person.love > relationship_stats[person.relationship] - (person.get_opinion_score("cheating on men") * 5):
                 potential_people.append(person)
         return get_random_from_list(potential_people)
