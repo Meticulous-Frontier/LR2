@@ -2029,7 +2029,7 @@ label Sarah_threesome_request_label():
     $ person_choice = _return
     $ scene_manager.update_actor(the_person, position = "sitting")
     if person_choice.is_employee():
-        mc.name "I was thinking about [person_choice.title]. She seems like she would be down for just about anything, to be honest."
+        mc.name "I was thinking about [person_choice.name]. She seems like she would be down for just about anything, to be honest."
         the_person "Oh! She's cute! Damn, that would be great!"
     elif person_choice is mom:
         mc.name "So, uh, this might sound kind of weird, but, I actually have a family member in mind."
@@ -2043,10 +2043,10 @@ label Sarah_threesome_request_label():
         "[the_person.title] stays quiet for a moment before she responds."
         the_person "I mean... that's a little weird, sure. But, I mean, we're already pushing boundaries having a threesome in the first place."
         the_person "Who did you have in mind?"
-        mc.name "It's actually my sister, [lily.title]."
+        mc.name "It's actually my sister, [lily.name]."
         the_person "Oh! Well, I mean, she DOES have a really nice body..."
     elif person_choice is cousin:
-        "You consider carefully whether or not you should reveal that [cousin.title] is your cousin, but you decide not to."
+        "You consider carefully whether or not you should reveal that [cousin.name] is your cousin, but you decide not to."
         mc.name "Actually, one of the strippers at the club we went to the other night is a good friend of mine."
         the_person "Ah. Are you friends with a lot of... strippers?"
         mc.name "Ha! Not really, but she and I go back a ways. And she actually owes me a favor or two."
