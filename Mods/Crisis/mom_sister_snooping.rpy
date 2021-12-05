@@ -119,6 +119,14 @@ label mom_sister_snooping_action_label():
         $ mc.change_locked_clarity(50)
         mom "Mmmm, that's it dear, lick right there!"
         $ mom.change_arousal(12)
+        menu:
+            "Keep watching":
+                pass
+            "Go on with your day":
+                "You decided to let them have some fun and continue with your day."
+                $ scene_manager.clear_scene()
+                return
+
         "You accidentally let out a little gasp. It must have been audible, because [mom.possessive_title] looks up at notices you at the door."
         mom "Oh! [mom.mc_title]! Come in here honey."
         "You slowly walk in to your sister's room."
