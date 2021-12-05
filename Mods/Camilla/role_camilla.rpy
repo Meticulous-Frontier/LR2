@@ -777,7 +777,7 @@ label camilla_dancing_sex_label(the_person):
         the_person "Okay, I want you to sit on the counter. I'm gonna get naked for you."
         "She hands you her phone."
         the_person "Here we go! Get lots of good pics!"
-        call free_strip_scene(the_person) from _CS_free_strip_scene_camilla_021
+        call strip_tease(the_person, for_pay = False, skip_intro = True) from _CS_free_strip_scene_camilla_021
         "You got lots of pics of her strip tease. You take a few more as she saunters over to you."
         the_person "Come on, lets fuck!"
         call fuck_person(the_person) from _call_casual_sex_mod_camilla_022

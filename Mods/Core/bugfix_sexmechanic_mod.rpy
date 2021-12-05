@@ -597,9 +597,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         mc.condom = False
         mc.recently_orgasmed = False
 
-    if affair_ask_after and private and ask_girlfriend_requirement(the_person) is True and not the_person.relationship == "Single":
-        if the_person.love >= 60 and the_person.effective_sluttiness() >= 30 - (the_person.get_opinion_score("cheating on men") * 5) and report_log.get("girl orgasms",0) >= 1: #If she loves you enough, is moderately slutty, and you made her cum
-            call affair_check(the_person, report_log) from _call_affair_check_bugfix
+    if affair_ask_after and private and not the_person.has_role([girlfriend_role, affair_role]) and not the_person.relationship == "Single" and report_log.get("girl orgasms",0) >= 1:
+        if the_person.relationship in relationship_stats and the_person.love >= relationship_stats[the_person.relationship] - 10 - (the_person.get_opinion_score("cheating on men") * 5):
+            if the_person.effective_sluttiness() >= 30 - (the_person.get_opinion_score("cheating on men") * 5):
+                call affair_check(the_person, report_log) from _call_affair_check_bugfix
 
     python:
         # Only activate sexting when we have her number
@@ -836,14 +837,20 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
         menu:
             "Put on a condom":
                 call put_on_condom_routine(the_person) from _call_put_on_condom_routine_4
+                if the_person.get_opinion_score("bareback sex") < 0 :
+                    the_person "There we go, a nice big rubbery cock."
 
             "Refuse and do something else":
                 "[the_person.title] doesn't seem like she's going to change her mind."
                 mc.name "If it's that important to you let's just do something else."
                 return 0
 
-        if the_person.get_opinion_score("bareback sex") < 0 :
-            the_person "There we go, a nice big rubbery cock."
+            "Fuck her raw anyways" if the_person.obedience >= 150:
+                mc.name "No way, this pussy is getting fucked raw."
+                call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_7
+
+            "Fuck her raw anyways\n{color=#ff0000}{size=18}Requires: 150 Obedience{/size}{/color} (disabled)" if the_person.obedience < 150:
+                pass
 
     elif the_person.get_opinion_score("bareback sex") < 0 or the_person.effective_sluttiness("condomless_sex") < condom_threshold + 20 or the_person.has_taboo("condomless_sex"):
         # They suggest you put on a condom.
@@ -878,7 +885,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                     menu:
                         "Fuck her raw":
                             mc.name "Alright, as long as you know what you're getting into..."
-                            call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_4
+                            "You abandon your plans to put on a condom and get ready to take [the_person.possessive_title] raw."
 
                         "Refuse and do something else":
                             "[the_person.possessive_title] seems like she's made up her cock-hungry mind, and you doubt you would be able to change it."
@@ -944,10 +951,12 @@ label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal
             the_person "Just pump my ass full with that hot spunk of yours."
 
         if skill_tag == "Vaginal":
-            if not the_person.wants_creampie():
-                the_person "Just pull out when you cum, okay?"
-            if not the_person.on_birth_control and not the_person.knows_pregnant():
-                the_person "I'm not using any contraception at the moment."
+            $ the_person.update_birth_control_knowledge()
+            if the_person.on_birth_control:
+                the_person "Okay. I'm on birth control, so it should be fine."
+            elif not the_person.knows_pregnant():
+                the_person "I'm not on birth control [the_person.mc_title], promise you won't cum inside me."
+                call condomless_promise(the_person) from _call_condomless_promise_fuck_without_condom
     return
 
 label put_on_condom_routine(the_person):
@@ -1009,7 +1018,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         $ the_person.change_obedience(3)
 
         $ the_relationship = town_relationships.get_relationship(the_watcher, the_person)
-        if the_relationship and the_relationship.get_type() in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
+        if the_relationship and the_relationship.get_type(the_watcher) in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
             call relationship_sex_watch(the_watcher, town_relationships.get_relationship_type(the_watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
             $ the_position.redraw_scene(the_person)
             call relationship_being_watched(the_person, the_watcher, town_relationships.get_relationship_type(the_person, the_watcher).lower(), the_position) from _call_relationship_being_watched

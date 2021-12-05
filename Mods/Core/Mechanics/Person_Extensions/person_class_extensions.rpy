@@ -133,7 +133,7 @@ init -1 python:
     @property
     def location(self): # Check what location a person is in e.g the_person.location == downtown. Use to trigger events?
         location = next((x for x in list_of_places if self in x.people), None)
-        return (location if location else self.home) # fallback location for person is home
+        return (location if location else (self.home or downtown)) # fallback location for person is home else downtown
 
     Person.location = location
 
@@ -264,6 +264,17 @@ init -1 python:
     # add follow_mc attribute to person class (without sub-classing)
     Person.work_outfit = property(get_person_work_outfit, set_person_work_outfit, del_person_work_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
 
+    def get_person_maid_outfit(self):
+        if not hasattr(self, "_maid_outfit"):
+            self._maid_outfit = None
+        return self._maid_outfit
+
+    def set_person_maid_outfit(self, value):
+        self._maid_outfit = value
+
+    Person.maid_outfit = property(get_person_maid_outfit, set_person_maid_outfit, None, "Store maid outfit for the day.")
+
+
     # change idle position based on location
     def get_person_idle_pose(self):
         if not "downtown_bar" in globals(): # skip this when running tutorial
@@ -275,7 +286,7 @@ init -1 python:
         if renpy.call_stack_depth() < 2:
             # we are in the main menu (alternative idle_pose)
             if self.location == self.work or self.location == downtown_bar:
-                 return "sitting"
+                return "sitting"
             if self.location == gym:
                 pose = self.event_triggers_dict.get("gym_pose", None)
                 if not pose: # store preferred position in bdsm room (prevent switching on hover)
@@ -867,6 +878,9 @@ init -1 python:
     Person.choose_strip_clothing_item = choose_strip_clothing_item
 
     def run_move_enhanced(self,location):
+        for serum in self.serum_effects: #Compute the effects of all of the serum that the girl is under.
+            serum.run_on_move(self) #Run the serum's on_move function if one exists
+
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 
         if time_of_day == 0: #Change outfit here, because crisis events might be triggered after run day function
@@ -877,6 +891,7 @@ init -1 python:
                 self.planned_outfit = None
             self.planned_uniform = None
             self.work_outfit = None
+            self.maid_outfit = None
             self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
 
         destination = self.get_destination() #None destination means they have free time
@@ -896,8 +911,8 @@ init -1 python:
                 self.change_happiness(self.get_opinion_score("work uniforms"), add_to_log = False)
 
         #A skimpy outfit is defined as the top 20% of a girls natural sluttiness.
-        if self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.80:
-            self.change_slut(self.get_opinion_score("skimpy outfits"), max_modified_to = 30, add_to_log = False)
+        if self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.80 and self.get_opinion_score("skimpy outfits") > -2:
+            self.change_slut(1, max_modified_to = ((self.get_opinion_score("skimpy outfits") +1) * 10), add_to_log = False)
 
         #A conservative outfit is defined as the bottom 20% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.20:
@@ -985,6 +1000,18 @@ init -1 python:
 
     # wrap up the run_day function
     Person.run_day = person_run_day_extended(Person.run_day)
+
+    # extend default wants_creampie function
+    def person_wants_creampie_extended(org_func):
+        def wants_creampie_wrapper(person):
+            # when breeding fetish, she always wants a creampie
+            if person.has_breeding_fetish():
+                return True
+            return org_func(person)
+
+        return wants_creampie_wrapper
+
+    Person.wants_creampie = person_wants_creampie_extended(Person.wants_creampie)
 
     def person_call_dialogue_extended(org_func):
         def person_call_dialogue_wrapper(person, type, **extra_args):
@@ -1237,6 +1264,50 @@ init -1 python:
 
     Person.sluttiness_tier = sluttiness_tier
 
+    def person_change_slut_extended(org_func):
+        def person_change_slut_wrapper(person, amount, max_modified_to = None, add_to_log = True):
+            if max_modified_to:  # change max_modified_to based on suggestibility
+                suggestibility_modifier = 0
+                if person.suggestibility == 0:
+                    pass
+                elif person.suggestibility < 20:
+                    suggestibility_modifier = __builtin__.int(person.suggestibility / 2.0)
+                elif person.suggestibility < 60:
+                    suggestibility_modifier = 10 + __builtin__.int((person.suggestibility - 20) / 4.0)
+                elif person.suggestibility < 140:
+                    suggestibility_modifier = 20 + __builtin__.int((person.suggestibility - 60) / 8.0)
+                else:
+                    suggestibility_modifier = 30
+                max_modified_to += suggestibility_modifier
+
+            org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
+
+        return person_change_slut_wrapper
+
+    Person.change_slut = person_change_slut_extended(Person.change_slut)
+
+    def person_change_love_extended(org_func):
+        def person_change_love_wrapper(person, amount, max_modified_to = None, add_to_log = True):
+            if max_modified_to:
+                suggestibility_modifier = 0
+                if person.suggestibility == 0:
+                    pass
+                elif person.suggestibility < 20:
+                    suggestibility_modifier = __builtin__.int(person.suggestibility / 5.0)
+                elif person.suggestibility < 60:
+                    suggestibility_modifier = 2 + __builtin__.int(person.suggestibility / 10.0)
+                elif person.suggestibility < 120:
+                    suggestibility_modifier = 8 + __builtin__.int(person.suggestibility / 20.0)
+                else:
+                    suggestibility_modifier = 14
+                max_modified_to += suggestibility_modifier
+
+            org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
+
+        return person_change_love_wrapper
+
+    Person.change_love = person_change_love_extended(Person.change_love)
+
     ## CHANGE WILLPOWER EXTENSION
     # changes the willpower of a person by set amount
     def change_willpower(self, amount): #Logs change in willpower and shows new total.
@@ -1260,8 +1331,15 @@ init -1 python:
 
         if not can_use_animation():
             the_animation = None
-        elif the_animation is None:
-            the_animation = self.idle_animation
+        elif the_animation is None: # assign default animation when not passed and enabled
+            if position in ["blowjob", "kneeling1"]:
+                the_animation = blowjob_bob
+            elif position in ["doggy", "standing_doggy", "back_peek"]:
+                the_animation = ass_bob
+            elif position in ["missionary"]:
+                the_animation = missionary_bob
+            else:
+                the_animation = self.idle_animation
 
         if display_transform is None:
             display_transform = character_right
@@ -1282,7 +1360,7 @@ init -1 python:
             else:
                 at_arguments.append(extra_at_arguments)
 
-        self.hide_person()
+        self.hide_person(draw_layer = draw_layer)
         if wipe_scene:
             clear_scene() #Make sure no other characters are drawn either.
             if show_person_info:
@@ -1371,11 +1449,13 @@ init -1 python:
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
-    def build_person_displayable_enhanced(self,position = None, emotion = None, special_modifier = None, lighting = None, hide_list = []): #Encapsulates what is done when drawing a person and produces a single displayable.
+    def build_person_displayable_enhanced(self, position = None, emotion = None, special_modifier = None, lighting = None, hide_list = [], outfit = None): #Encapsulates what is done when drawing a person and produces a single displayable.
         if position is None:
             position = self.idle_pose
         if emotion is None:
             emotion = self.get_emotion()
+        if outfit is None:
+            outfit = self.outfit
 
         forced_special_modifier = self.outfit.get_forced_modifier()
         if forced_special_modifier is not None:
@@ -1390,7 +1470,7 @@ init -1 python:
                 displayable_list.append(self.tan_style.has_extension.generate_item_displayable(self.body_type, self.tits, position, lighting = lighting)) # Add the tan
         displayable_list.append(self.pubes_style.generate_item_displayable(self.body_type, self.tits, position, lighting = lighting)) #Add in her pubes
 
-        displayable_list.extend(self.outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting, hide_layers = hide_list))
+        displayable_list.extend(outfit.generate_draw_list(self,position,emotion,special_modifier, lighting = lighting, hide_layers = hide_list))
         displayable_list.append(self.hair_style.generate_item_displayable("standard_body",self.tits,position, lighting = lighting)) #Get hair
 
         x_size, y_size = position_size_dict.get(position)
@@ -1582,7 +1662,7 @@ init -1 python:
             added = True
 
         if added:
-            # special condition if she hates kissing, but becomes your girlfried or paramour she would allow kissing
+            # special condition if she hates kissing, but becomes your girlfriend or paramour she would allow kissing
             if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role]:
                 self.increase_opinion_score("kissing")
 
@@ -1642,9 +1722,6 @@ init -1 python:
         if self.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]):
             shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
             return (time_of_day == 3 and shifts == 2) or time_of_day == 4
-        if self.has_role([maid_role]):
-            return maid_at_work(self)
-
         return False
 
     Person.should_wear_work_outfit = should_wear_work_outfit
@@ -1664,14 +1741,33 @@ init -1 python:
             self.work_outfit = mc.business.mistress_wardrobe.decide_on_outfit2(self)
         elif self.has_role(manager_role):
             self.work_outfit = mc.business.manager_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(maid_role):
-            self.work_outfit = maid_wardrobe.decide_on_outfit2(self)
 
         if self.work_outfit:
             self.apply_outfit(self.work_outfit)
         return
 
     Person.wear_work_outfit = wear_work_outfit
+
+    def should_wear_maid_outfit(self):
+        if self.has_role([maid_role]):
+            return maid_at_work(self)
+        return False
+
+    Person.should_wear_maid_outfit = should_wear_maid_outfit
+
+    def wear_maid_outfit(self):
+        if self.maid_outfit:
+            self.apply_outfit(self.maid_outfit)
+            return
+
+        if self.has_role(maid_role):
+            self.maid_outfit = maid_wardrobe.decide_on_outfit2(self)
+
+        if self.maid_outfit:
+            self.apply_outfit(self.maid_outfit)
+        return
+
+    Person.wear_maid_outfit = wear_maid_outfit
 
     def person_is_wearing_uniform(self):
         return self.outfit == self.planned_uniform and self.planned_uniform != self.planned_outfit
@@ -1766,6 +1862,8 @@ init -1 python:
             self.wear_uniform()
         elif self.should_wear_work_outfit():
             self.wear_work_outfit()
+        elif self.should_wear_maid_outfit():
+            self.wear_maid_outfit()
         else:
             if not self.planned_outfit: # extra validation to make sure we have a planned outfit
                 self.planned_outfit = self.decide_on_outfit()
@@ -2450,3 +2548,35 @@ init -1 python:
     Person.roleplay_possessive_title_revert = roleplay_possessive_title_revert
     Person.roleplay_personality_swap = roleplay_personality_swap
     Person.roleplay_personality_revert = roleplay_personality_revert
+
+
+###### Story and hint related functions ######
+
+    def has_story_dict(self):
+        if self.event_triggers_dict.get("story_dict", False):
+            return True
+        return False
+
+    def get_story_dict(self):
+        return self.event_triggers_dict.get("story_dict", None)
+
+    Person.has_story_dict = has_story_dict
+    Person.get_story_dict = get_story_dict
+
+    def story_love_list(self):  #Note, this is a generic list and is meant to be overloaded on a per character basis.
+        return ["This character's love progress menu has not yet been created."]
+
+    def story_lust_list(self):
+        return ["This character's lust progress menu has not yet been created."]
+
+    def story_teamup_list(self):
+        return [[" ", "No teamups have been written for this character yet!"]]
+
+    def story_other_list(self):
+        return [""] #There is some default info here, so no need to add a generic text description
+
+    Person.story_love_list = story_love_list
+    Person.story_lust_list = story_lust_list
+    Person.story_teamup_list = story_teamup_list
+    Person.story_other_list = story_other_list
+    Person.story_character_description = ""

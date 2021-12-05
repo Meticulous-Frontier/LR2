@@ -81,7 +81,7 @@ init 1 python:
         "fetish cum on tits" : "My tits are aching right now, wish you could cover them with another load right now!",
         "fetish cum on stomach" : "Each spurt felt like lightning on my skin!",
         "fetish cum on ass" : "You can bend me over and cum on my ass anytime!",
-        "fetish public sex" : ""
+        "fetish public sex" : "I just love it when you fuck me while other people are watching."
     }
 
 

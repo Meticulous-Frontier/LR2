@@ -64,7 +64,7 @@ label give_panties_label(the_person):
             "[the_person.possessive_title] takes a quick look around and starts stripping down."
         else:
             "[the_person.possessive_title] starts stripping down, giving you her [the_item.display_name]."
-        $ the_person.strip_outfit(exclude_upper = True)
+        $ the_person.strip_to_vagina(visible_enough = True)
         the_person "Here you are, anything else I can do for you?"
         $ removed_something = True
     else:

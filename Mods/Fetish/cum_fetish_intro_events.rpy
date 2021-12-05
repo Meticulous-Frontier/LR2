@@ -73,7 +73,9 @@ init 1 python:
     def cum_fetish_dawn_intro_requirement():
         return False
 
-    def cum_fetish_erica_intro_requirement():
+    def cum_fetish_erica_intro_requirement(the_person):
+        if the_person.location == gym and the_person.energy >=80 and mc.energy >= 80:
+            return True
         return False
 
     def cum_fetish_ashley_intro_requirement():
@@ -107,6 +109,7 @@ init 2 python:
     cum_fetish_lily_intro = Fetish_Action("Lily Cum Fetish Intro", cum_fetish_lily_intro_requirement, "cum_fetish_lily_intro_label", fetish_type = "cum")
     cum_fetish_rebecca_intro = Fetish_Action("Rebecca Cum Fetish Intro", cum_fetish_rebecca_intro_requirement, "cum_fetish_rebecca_intro_label", fetish_type = "cum")
     cum_fetish_sarah_intro = Fetish_Action("Sarah Cum Fetish Intro", cum_fetish_sarah_intro_requirement, "cum_fetish_sarah_intro_label", fetish_type = "cum")
+    cum_fetish_erica_intro = Fetish_Action("Erica Cum Fetish Intro", cum_fetish_erica_intro_requirement, "cum_fetish_erica_intro_label", fetish_type = "cum")
 
 init 50 python:
     def get_cum_fetish_unique_dialogue_list():
@@ -747,7 +750,7 @@ label cum_fetish_sarah_intro_label():
             the_person "Mmm... me too!"
             "[the_person.possessive_title] quickly gets down underneath your desk, before you sit down."
             $ the_person.draw_person(position = "blowjob")
-            "She immediately gets to work, pulling your dick out of your pants. You quickly feel the soft, velvet mouth wrapped around you."
+            "She immediately gets to work, pulling your dick out of your pants. You feel her soft, velvet mouth wrapped around you."
             $ the_person.break_taboo("sucking_cock")
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
 
@@ -789,8 +792,43 @@ label cum_fetish_candace_intro_label():
 label cum_fetish_dawn_intro_label():
     return False
 
-label cum_fetish_erica_intro_label():
-    return False
+label cum_fetish_erica_intro_label(the_person):
+    $ the_person = erica
+    "It's time to hit the gym. You step into the lockerroom to get changed into workout clothes."
+    "As you are changing, you feel someone tap on your shoulder. You turn around."
+    $ the_person.draw_person()
+    mc.name "Uhhh.... [the_person.title]? Are you supposed to be in the men's lockerroom?"
+    erica "Shhh!"
+    "[the_person.possessive_title] shushes you, then grabs your hand."
+    $ the_person.draw_person(position = "walking_away")
+    "She leads you into one of the shower stalls. You close it off behind you."
+    $ the_person.draw_person(position = "kissing")
+    "[the_person.title] pulls you close then whispers in your ear."
+    erica "Hey, I saw you walk in here, and I was just getting ready to work out too..."
+    erica "I thought today instead of a protein shake, I could just have some vitamin D."
+
+    $ the_person.draw_person(position = "blowjob")
+    "[the_person.title] gets down on her knees. She looks up at you and smiles."
+    "It's been a while since you started giving her the serum for increased cum enjoyment."
+    "Being a fitness enthusiast, it doesn't surprise you she has linked her urge for your cum with health benefits."
+    "You nod, and she immediately gets to work, pulling your dick out of your underwear. You feel her soft, velvet mouth wrapped around you."
+    $ the_person.break_taboo("sucking_cock")
+    "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
+    call get_fucked(the_person, start_position = blowjob, the_goal = "oral creampie", start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_erica_cum_fetish_intro_01
+    $ add_cum_fetish(the_person)
+    $ the_person.event_triggers_dict["LastCumFetish"] = day
+    "After you finish, [the_person.possessive_title] continues to lick her fingers, desperate for a little more of your cum."
+    "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
+    erica "That was great. I think I'm ready to make some serious gains today!"
+    mc.name "I'm sure you are..."
+    "She's been under the influence of your serums for a while now. She has definitely developed a cum fetish."
+    $ the_person.draw_person()
+    erica "Alright... I'm gonna sneak out of here... see you later!"
+    $ the_person.apply_planned_outfit()
+    $ mc.location.show_background()
+    $ clear_scene()
+    "You finish changing into your workout gear, then leave the lockerroom."
+    return True
 
 label cum_fetish_ashley_intro_label():
     return False

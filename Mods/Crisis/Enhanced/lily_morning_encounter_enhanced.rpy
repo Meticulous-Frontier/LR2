@@ -467,6 +467,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                             the_other_person "I'll let you two have your fun."
                             $ scene_manager.remove_actor(the_other_person)
 
+                    $ kitchen_threesome = False # init variable
                     if jealous_watcher == True:
                         mc.name "Sorry, [the_other_person.title] I can give you my attention now, and let [the_person.title] get on with her day."
                         if jealous_person == True:

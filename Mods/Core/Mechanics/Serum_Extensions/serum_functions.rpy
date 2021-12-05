@@ -1,14 +1,5 @@
 # Enables extra functions for SerumDesign / SerumTraits.
 init 2 python:
-
-   # Checks if the SerumDesign contains a specific trait based on its name.
-   def has_trait(self, the_trait):
-      for trait in self.traits or trait in self.side_effects:
-         if trait.name == the_trait.name:
-            return trait
-   SerumDesign.has_trait = has_trait
-
-
    def anorexia_serum_on_turn(person, the_serum, add_to_log):
       return person.change_weight(amount = -0.5, chance = 50)
 
@@ -32,9 +23,12 @@ init 2 python:
       return person.change_height(-.01693, 20)
 
    # Override base game serum functions
-   weight_loss.on_turn = anorexia_serum_on_turn
-   weight_gain.on_turn = hypothyroidism_serum_on_turn
-   height_increase.on_day = None
-   height_increase.on_turn = height_increase_on_turn
-   height_decrease.on_day = None
-   height_decrease.on_turn = height_decrease_on_turn
+   if 'weight_loss' in dir():
+      weight_loss.on_turn = anorexia_serum_on_turn
+      weight_gain.on_turn = hypothyroidism_serum_on_turn
+   if 'height_increase' in dir():
+      height_increase.on_day = None
+      height_increase.on_turn = height_increase_on_turn
+   if 'height_decrease' in dir():
+      height_decrease.on_day = None
+      height_decrease.on_turn = height_decrease_on_turn

@@ -13,6 +13,7 @@ init python:
         taboo_break_description = "taboo_break_SB_doggy_standing",
         verb = "fuck",
         opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up"], record_class = "Vaginal Sex",
+        default_animation = blowjob_bob,
         associated_taboo = "vaginal_sex")
 
     list_of_positions.append(SB_doggy_standing)
@@ -38,9 +39,9 @@ label intro_SB_doggy_standing(the_girl, the_location, the_object):
     else:
         the_girl "Okay [the_girl.mc_title], I'll play along this time."
 
-    if not the_girl.vagina_visible():
+    if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = SB_doggy_standing.position_tag, visible_enough = True, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = SB_doggy_standing.position_tag, prefer_half_off = True)
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."

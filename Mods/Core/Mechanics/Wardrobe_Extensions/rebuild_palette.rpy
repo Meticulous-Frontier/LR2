@@ -13,7 +13,7 @@ init 10 python:
                     persistent.colour_palette.append(WardrobeBuilder.color_prefs[opinion][color_name])
                     count += 1
 
-        while len(persistent.colour_palette) < 40:
+        while len(persistent.colour_palette) < 39:
             persistent.colour_palette.append([1,1,1,1])
 
         renpy.save_persistent()

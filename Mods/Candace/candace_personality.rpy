@@ -493,7 +493,7 @@ label candace_flirt_response_high(the_person):
         else:  #She's into turning you on.
             if the_person.has_large_tits(): #Bounces her tits for you
                 "She giggles and grabs her own tits, jiggling them for you."
-                $ the_person.draw_person(the_animation = blowjob_bob)
+                $ the_person.draw_person(the_animation = tit_bob)
 
             else:
                 "She giggles and wiggles her hips for you."

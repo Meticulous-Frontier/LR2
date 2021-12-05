@@ -13,6 +13,7 @@ init python:
         orgasm_description = "orgasm_anal_on_lap",
         verb = "ass fuck",
         opinion_tags = ["anal sex"], record_class = "Anal Sex",
+        default_animation = blowjob_bob,
         associated_taboo = "anal_sex")
 
     list_of_positions.append(anal_on_lap)
@@ -26,9 +27,9 @@ init python:
 label intro_anal_on_lap(the_girl, the_location, the_object):
     "You sit down on the [the_object.name] and motion [the_person.possessive_title] over to you. You turn her around so her ass is facing you."
 
-    if not the_girl.vagina_visible():
+    if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = "back_peek", visible_enough = True, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = "back_peek", prefer_half_off = True)
 
     $ the_girl.draw_person(position = "back_peek")
     "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."

@@ -1,6 +1,6 @@
 init 2 python:
     def get_breeding_fetish_list():
-        return [x for x in known_people_in_the_game() if x.has_breeding_fetish()]
+        return [x for x in known_people_in_the_game() if x.has_breeding_fetish() and x.event_triggers_dict.get("LastBreedingFetish", 0) + 12 < day]
 
     def get_highly_fertile_breeder():
         return get_random_from_list([x for x in get_breeding_fetish_list() if x.is_highly_fertile() and not x.is_employee()])
@@ -27,7 +27,6 @@ init 2 python:
         return False
 
     def breeding_fetish_family_sleep_crisis_requirement():
-        return False #Disable for now, when enabled add not x.is_family() to get_highly_fertile_breeder()
         if mc_at_home() and time_of_day == 4:
             if get_family_breeder():
                 return True
@@ -38,6 +37,18 @@ init 2 python:
             if get_highly_fertile_employee_breeder():
                 return True
         return False
+
+    def update_breeding_fetish_state(person):
+        if person.energy < 80:
+            person.energy = 80
+        if mc.energy < 80:
+            mc.energy = 80
+        if person.arousal <= 20:
+            person.change_arousal(30)
+
+        # set to prevent retrigger with this person anytime soon
+        person.event_triggers_dict["LastBreedingFetish"] = day
+        return
 
     breeding_fetish_high_fertility_crisis = ActionMod("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label",
         menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True, crisis_weight = 5)
@@ -52,10 +63,9 @@ label breeding_fetish_high_fertility_crisis_label():
     $ the_person = get_highly_fertile_breeder()
     if the_person == None:
         return
-    if the_person.energy < 80:
-        $ the_person.energy = 80
-    if mc.energy < 80:
-        $ mc.energy = 80
+
+    $ update_breeding_fetish_state(the_person)
+
     if the_person == mom or the_person == lily:
         "You hear a knock on your door."
         mc.name "Its open!"
@@ -102,7 +112,6 @@ label breeding_fetish_high_fertility_crisis_label():
             the_person "Its inside me! It worked! Don't ask me how I know... I can just feel it!"
             "She rubs her belly and sighs."
             $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
-            $ the_person.event_triggers_dict["LastBreedingFetish"] = day
         else:
             "Too tired to continue, [the_person.possessive_title] pulls off you a little frustrated."
             the_person "I can't believe it... just... lets make sure we try again soon okay?"
@@ -127,7 +136,6 @@ label breeding_fetish_high_fertility_crisis_label():
             the_person "Its inside me! I'm pregnant! Don't ask me how I know... I can just feel it!"
             "She rubs her belly and sighs."
             $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
-            $ the_person.event_triggers_dict["LastBreedingFetish"] = day
         else:
             "Too tired to continue, [the_person.possessive_title] looks up at you little frustrated."
             the_person "I can't believe it... just... lets make sure we try again soon okay?"
@@ -139,19 +147,15 @@ label breeding_fetish_high_fertility_crisis_label():
         the_person "I'm still going to be fertile for a few days... please try again? Okay? I don't want to wait anymore, I want your baby inside me..."
     $ the_person.review_outfit()
     $ the_person.draw_person(position = "walking_away")
-
-
     return
 
 label breeding_fetish_happy_breeder_crisis_label():
     $ the_person = get_pregnant_breeder()
-    $ the_person.event_triggers_dict["LastBreedingFetish"] = day
-    if the_person == None:
+    if the_person is None:
         return
-    if the_person.energy < 80:
-        $ the_person.energy = 80
-    if mc.energy < 80:
-        $ mc.energy = 80
+
+    $ update_breeding_fetish_state(the_person)
+
     if the_person == mom or the_person == lily:
         "You hear a knock on your door."
         "You stand up and open your door. It's [the_person.title], dressed very nicely..."
@@ -310,18 +314,17 @@ label breeding_fetish_happy_breeder_crisis_label():
             return  # EXIT
 
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_breeder_02
-    call breeder_cowgirl_wakeup_label(the_person) from _breeder_overnight_cowgirl_wakeup__01
+    call breeder_cowgirl_wakeup_label(the_person) from _call_breeder_overnight_cowgirl_wakeup_01
     return "Advance Time"
 
 label breeding_fetish_family_sleep_crisis_label():
     $ the_person = get_family_breeder()
-    if the_person = None:
+    if the_person is None:
         return
+
+    $ update_breeding_fetish_state(the_person)
+
     if the_person == lily:
-
-        $ mc.change_location(bedroom)
-        $ mc.location.show_background()
-
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
         the_person "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
         "You invite her in. You immediately start to get aroused when you see what she is wearing."
@@ -341,12 +344,11 @@ label breeding_fetish_family_sleep_crisis_label():
             "Not tonight\n{color=ff0000}{size=18}Too much Lust to say No{/size}{/color} (disabled)" if get_lust_tier() > 2:
                 pass
             "Strip first":
-                $ the_person.event_triggers_dict["LastBreedingFetish"] = day
                 mc.name "That sounds good [the_person.title]... why don't you give me a show before we go to bed?"
                 "[the_person.possessive_title] smiles at you."
                 the_person "Aww, does my [the_person.mc_title] wanna see his [the_person.title] get naked for him? What a pervert!"
                 "[the_person.possessive_title] winks at you before beginning her routine."
-                call free_strip_scene(the_person) from _free_strip_scene_701
+                call strip_tease(the_person, for_pay = False) from _free_strip_scene_701
                 $ mc.change_locked_clarity(50)
                 mc.name "Damn [the_person.title], you are really getting good at that."
                 "[the_person.possessive_title] bites her lip, glancing down at your bulge. Her cheeks are flushed and rosy."
@@ -358,23 +360,15 @@ label breeding_fetish_family_sleep_crisis_label():
         $ the_person.change_arousal(20)
         the_person "Throw me down on your bed, [the_person.mc_title]. I want to feel your weight on top of me while you fuck my brains out!"
         "You roughly pick up [the_person.possessive_title] and carry her over to the bed. You throw her down and quickly jump on top of her."
+        if not the_person.vagina_available():
+            $ the_girl.strip_to_vagina(position = "missionary", prefer_half_off = True)
         "[the_person.possessive_title] spreads her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
-        $ the_person.break_taboo("condomless_sex")
-        $ the_person.break_taboo("vaginal_sex")
-        call fuck_person(the_person, start_position = breeding_missionary, private = True, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_fuck_person_lily_breeding_overnight
 
-        "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
-        "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
-
-        call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBV070
-        call SB_cowgirl_wakeup_label(the_person) from _SB_cowgirl_wakeup_label_SBV070
-        return "Advance Time"
     elif the_person == mom:
-        $ mc.change_location(bedroom)
-        $ mc.location.show_background()
         "You are just drifting off to sleep when you hear your bedroom door squeak open. You look up to see [the_person.possessive_title] walking in."
         $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_black_outfit))
         $ the_person.draw_person()
+        $ mc.change_locked_clarity(30)
         mc.name "[the_person.title]?"
         the_person "Hi honey... I was feeling lonely over in my room, I thought maybe you might like some company tonight..."
         $ the_person.draw_person(position = "sitting")
@@ -391,20 +385,56 @@ label breeding_fetish_family_sleep_crisis_label():
             "Not tonight\n{color=ff0000}{size=18}Too much Lust to say No{/size}{/color} (disabled)" if get_lust_tier() > 2 and mc.energy > 80:
                 pass
             "Let Her":
-                $ the_person.event_triggers_dict["LastBreedingFetish"] = day
-                "You scoot over, giving her room to get under the covers with you."
+                "You pull her onto the bed, eager to begin another incestuous tryst with [the_person.possessive_title]."
 
-                "You stand up and embrace her, your dick straining against your clothes, eager to begin another incestuous tryst with [the_person.possessive_title]."
+    else: # aunt or cousin
+        "You are just drifting off to sleep when you hear your bedroom door squeak open. You look up to see [the_person.possessive_title] walking in."
+        $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_black_outfit))
+        $ the_person.draw_person()
+        $ mc.change_locked_clarity(30)
+        mc.name "What are you doing here [the_person.title]?"
+        if the_person == aunt:
+            the_person "Hi [the_person.mc_title], I can't stop thinking about you, I need your help."
+        else:
+            the_person "Be quiet [the_person.mc_title], you need to help me right now."
+        $ the_person.draw_person(position = "sitting")
+        "[the_person.possessive_title] sits on the edge of your bed. The way she is dressed, you have a pretty good idea what kind of help she needs."
+        menu:
+            "Not tonight" if get_lust_tier() < 3 or mc.energy < 80:
+                mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
+                "She is clearly disappointed."
+                if the_person == aunt:
+                    the_person "Ah, yes...well...maybe another time."
+                else:
+                    the_person "Whatever."
+                "You roll over while she leaves the room and quickly fall asleep."
+                $ the_person.change_obedience(-2)
+                $ the_person.change_happiness(-5)
+                return
+            "Not tonight\n{color=ff0000}{size=18}Too much Lust to say No{/size}{/color} (disabled)" if get_lust_tier() > 2 and mc.energy > 80:
+                pass
+            "Help Her":
+                "You quickly push her down on the bed, eager to give [the_person.possessive_title] what she needs."
 
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
+    call fuck_person(the_person, start_position = breeding_missionary, private = True, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_fuck_person_breeding_fetish_family_sleep_crisis
 
+    "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
+    "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
+
+    call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_breeding_fetish_family_sleep_crisis
+    call breeder_cowgirl_wakeup_label(the_person) from _call_breeder_overnight_cowgirl_wakeup_02
+    return "Advance Time"
 
 label breeding_fetish_employee_high_fertility_crisis_label():
     $ the_person = get_highly_fertile_employee_breeder()
-    if the_person == None:
+    if the_person is None:
         return
+
+    $ update_breeding_fetish_state(the_person)
+
     $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_black_outfit))
-    if the_person.arousal <= 20:
-        $ the_person.change_arousal(30)
     "As you are working, you get a text on your phone."
     $ mc.start_text_convo(the_person)
     the_person "Hey, can you help me with something? I'll be in your office."
@@ -436,6 +466,8 @@ label breeding_fetish_employee_high_fertility_crisis_label():
     "You start to pull out your cock. Her dirty talk is hot!"
     the_person "Knock me up! Breed me! Make me your personal cumdump and bend me over anytime you want and finish deep..."
     "With one hand you grab your cock and line it up with her cunt. [the_person.possessive_title] is so wet you slide in easily."
+    $ the_person.break_taboo("condomless_sex")
+    $ the_person.break_taboo("vaginal_sex")
     the_person "Yes! Oh [the_person.mc_title], fuck me good!"
     call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), skip_intro = True, position_locked = True, skip_condom = True, private = True) from _call_breeding_fetish_employee_high_fertility
     if the_person.has_creampie_cum():
@@ -444,7 +476,6 @@ label breeding_fetish_employee_high_fertility_crisis_label():
         "It is beginning to run down the inside of her thighs."
         the_person "Oh god... it's so deep..."
         $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
-        $ the_person.event_triggers_dict["LastBreedingFetish"] = day
         $ the_person.change_happiness(10)
         $ the_person.change_obedience(10)
         "[the_person.title] is euphoric, having taken your load she so desperately wanted."
@@ -473,9 +504,7 @@ label breeder_cowgirl_wakeup_label(the_person):
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person(position = "cowgirl")
     $ the_person.change_arousal(35)
-    $ the_person.break_taboo("condomless_sex")
-    $ the_person.break_taboo("vaginal_sex")
-    $ mc.arousal = 25
+    $ mc.change_arousal(25)
 
     "You slowly open your eyes and discover that [the_person.possessive_title] is on top of you, riding you in the cowgirl position."
     "You reach up and grab her amazing ass cheeks. [the_person.possessive_title] looks in your eyes when she feels your hands on her."
@@ -485,10 +514,18 @@ label breeder_cowgirl_wakeup_label(the_person):
     # call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBV50
     call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_bed(), skip_intro = True) from _call_sex_description_breeder_wakeup__01
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
-    if the_person is mom:
+    if the_person == mom:
         "[the_person.possessive_title] looks at you and smiles."
         the_person "Oh, anything for you honey. Well, I'd better go get ready for the day!"
-    elif the_person is starbuck:
+    elif the_person == lily:
+        "[the_person.possessive_title] gives you a peck on the cheeks."
+        if mc.business.event_triggers_dict.get("family_threesome", False):
+            the_person "Oh, anything for my big brother, just make sure mom doesn't find out."
+        elif day%7 < 5:
+            the_person "You're welcome big brother, but I'd better go and get ready for school!"
+        else:
+            the_person "Anytime big bro, but I got to go, I'm meeting some friends in town."
+    elif the_person == starbuck:
         "[the_person.possessive_title] giggles for a second then says goodbye."
         the_person "Yeah well, just don't tell my other customers about this, I can't make house calls for everyone!"
     else:

@@ -244,6 +244,12 @@ init -1 python:
         person.add_role(employee_role)
         person.job = self.get_employee_title(person)
         person.set_work(div_func[target_division][1])
+        if not person.title:
+            person.set_title(get_random_title(person))
+        if not person.possessive_title:
+            person.set_possessive_title(get_random_possessive_title(person))
+        if not person.mc_title or person.mc_title == "Stranger":
+            person.set_mc_title(get_random_player_title(person))
         if add_to_location:
             div_func[target_division][1].add_person(person)
         self.update_employee_status(person)
@@ -382,6 +388,9 @@ init -1 python:
     Business.college_interns_supply = []
     Business.college_interns_HR = []
     Business.college_interns_unlocked = False
+    Business.college_supply_interns_unlocked = False
+    Business.college_market_interns_unlocked = False
+    Business.college_hr_interns_unlocked = False
     Business.max_interns_by_division = 3    #Can be changed in later game code.
     Business.cost_to_hire_intern = 5000
 
@@ -433,7 +442,12 @@ init -1 python:
             dept_list.append("Research")
         if len(self.college_interns_production) < self.max_interns_by_division:
             dept_list.append("Production")
-        #TODO find conditions for allowing interns to other departments.
+        if len(self.college_interns_market) < self.max_interns_by_division and self.college_market_interns_unlocked:
+            dept_list.append("Marketing")
+        if len(self.college_interns_supply) < self.max_interns_by_division and self.college_supply_interns_unlocked:
+            dept_list.append("Supply")
+        if len(self.college_interns_HR) < self.max_interns_by_division and self.college_hr_interns_unlocked:
+            dept_list.append("HR")
         return dept_list
 
     Business.get_intern_depts_with_openings = get_intern_depts_with_openings

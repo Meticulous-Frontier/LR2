@@ -79,7 +79,8 @@ label employee_find_out_home_location_label(the_person):
     $ the_person.learn_home()
 
     mc.name "Well, well, that is indeed a great place to live. Thank you for the talk, I'm sorry to cut this short, but I do have to get back to work."
-    the_person "Any time [the_person.mc_title], I really enjoyed our little parley."
+    $ rando = get_random_from_list(["talk", "parley", "chat", "babble", "conversation"])
+    the_person "Any time [the_person.mc_title], I really enjoyed our little [rando]."
 
     $ clear_scene()
     $ jump_game_loop()

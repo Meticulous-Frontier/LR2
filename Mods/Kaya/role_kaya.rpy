@@ -56,6 +56,8 @@ init 2 python:
         kaya.event_triggers_dict["anal_position_filter"] = kaya_anal_position_filter
         kaya.event_triggers_dict["unique_sex_positions"] = kaya_unique_sex_positions
 
+        kaya.event_triggers_dict["sakari_has_died"] = False
+
         mc.business.add_mandatory_crisis(kaya_setup_intro_event) #Add the event here so that it pops when the requirements are met.
 
         if persistent.pregnancy_pref != 0:
@@ -114,6 +116,8 @@ init -2 python:
         return False
 
     def kaya_lily_study_night_recurring_requirement(the_person):
+        if the_person.event_triggers_dict.get("last_lily_study_night", 0) >= day:
+            return False
         if day%7 == 1 and time_of_day == 4 and the_person.location == lily.home:    #TODO double check and make sure this actually works...
             return True
         return False
@@ -689,6 +693,7 @@ label kaya_lily_study_night_recurring_label(the_person):
         "Leave her drink alone":
             "You decide not to give her any for now."
     "You bring the snacks and drink to the girls. They are busy studying, so you decide to leave them alone for tonight."
+    $ kaya.event_triggers_dict["last_lily_study_night"] = day
     $ kaya.add_unique_on_room_enter_event(kaya_lily_study_night_recurring)
     return
 
@@ -1326,12 +1331,12 @@ label kaya_fuck_in_apartment_label(the_person): #We already have her bent over d
     "Bent over her counter, [the_person.possessive_title] wiggles her ass at you. You've been wanting to get her in this position for a long time."
     "You hands go to her hips. Time to get her naked."
     $ the_person.change_arousal(20)
-    $ scene_manager.strip_to_vagina(person = the_person)
+    $ the_person.strip_to_vagina(the_person, position = "standing_doggy", prefer_half_off = False)
     mc.name "Holy fuck your ass is amazing..."
     $ mc.change_locked_clarity(50)
     "You run your hands along her soft curves a few times, one time after running your hands down the sides, you them back up between her legs. Her cunt is soaked."
     the_person "Ah! You don't have to tease me... just stick it in!"
-    call fuck_person(the_person, private=True, start_position = SB_doggy_standing, skip_condom = kaya_condom_check()) from _call_kaya_doggy_at_home_04
+    call fuck_person(the_person, private=True, start_position = SB_doggy_standing, skip_intro = True, skip_condom = kaya_condom_check()) from _call_kaya_doggy_at_home_04
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
     if the_person.has_creampie_cum() and not the_person.is_pregnant() and persistent.pregnancy_pref != 0: #Knock her up, first try
         the_person "Oh my god... I never knew how good it could be to get filled like that!"
@@ -1546,6 +1551,8 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     $ mom.add_unique_on_talk_event(kaya_jennifer_reveal)
     $ lily.add_unique_on_talk_event(kaya_lily_reveal)
     $ kaya.add_unique_on_talk_event(kaya_barista_fuck_intro)
+    $ sakari.add_unique_on_room_enter_event(sakari_intro)
+    $ sakari.set_schedule(clothing_store, days = [0, 1, 2, 3, 4], times = [1])
     return
 
 label kaya_jennifer_reveal_label(the_person):

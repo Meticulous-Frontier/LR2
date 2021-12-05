@@ -13,6 +13,7 @@ init python:
         taboo_break_description = "taboo_break_SB_reverse_cowgirl",
         verb = "be ridden by", verbing = "being ridden by",
         opinion_tags = ["taking control","vaginal sex", "vaginal creampie", "get off"], record_class = "Vaginal Sex",
+        default_animation = blowjob_bob,
         associated_taboo = "vaginal_sex")
 
     list_of_girl_positions.append(SB_reverse_cowgirl)

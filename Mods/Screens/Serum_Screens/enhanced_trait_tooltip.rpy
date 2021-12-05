@@ -1,4 +1,8 @@
 init 2:
+    python:
+        def get_unlockable_trait_names(trait):
+            return [x.name for x in list_of_traits if trait in x.requires]
+
     screen trait_tooltip(the_trait, given_align = (0.0,0.0), given_anchor = (0.0,0.0)):
         frame:
             background "#0a142688"
@@ -33,6 +37,26 @@ init 2:
                     background "#000080"
                     xsize 505
                     text the_trait.desc style "serum_text_style"
+
+                $ unlockable_traits = get_unlockable_trait_names(the_trait)
+                if len(unlockable_traits) > 0:
+                    frame:
+                        background "#000000"
+                        xsize 505
+                        text "Required for Traits" style "menu_text_title_style" xalign 0.5
+
+                    frame:
+                        background "#000080"
+                        xsize 505
+                        viewport:
+                            xsize 485
+                            ysize min(len(unlockable_traits) * 24, 580)
+                            scrollbars "vertical"
+                            mousewheel True
+                            vbox:
+                                for ut in get_unlockable_trait_names(the_trait):
+                                        text "■ " + ut style "serum_text_style" xalign 0.0
+
 
                 transclude
 

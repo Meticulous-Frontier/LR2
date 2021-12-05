@@ -13,6 +13,7 @@ init python:
         orgasm_description = "orgasm_SB_anal_cowgirl",
         verb = "ass fuck",
         opinion_tags = ["taking control", "anal sex", "anal creampie"], record_class = "Anal Sex",
+        default_animation = blowjob_bob,
         associated_taboo = "anal_sex")
 
     list_of_girl_positions.append(SB_anal_cowgirl)
@@ -54,6 +55,9 @@ label scene_SB_anal_cowgirl_1(the_girl, the_location, the_object):
         if the_girl is mom:
             the_girl "Oh god [the_girl.mc_title], you make [the_girl.title] feel so good... You grew up into such a good man!"
             mc.name "Mmm, [the_girl.title] your ass is amazing. It's so tight!"
+        elif the_girl.has_anal_fetish():
+            the_girl "God, do you see how good it makes me feel? Having your cock in my ass feels so fucking good!"
+            mc.name "It's so tight too, your ass is amazing."
         else:
             the_girl "Does that feel good? It feels even bigger when it's in my ass like this."
             mc.name "Mmm, [the_girl.title] your ass is amazing. It's so tight!"
@@ -175,9 +179,13 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
         else:
             "[the_girl.possessive_title] reaches over for your cock, removes the condom, and ties the end in a knot for you."
             the_girl "Wow, is all that cum for me? I guess my ass must be pretty good!"
+
     elif the_girl.sluttiness > 70 and the_girl.get_opinion_score("anal creampies") > 0 and the_girl.get_opinion_score("anal sex") > 0:
         #She drops down on you as you cum.
-        the_girl "Yes! Ah!"
+        if the_girl.has_anal_fetish():
+            the_girl "Yes! Finish in my ass... I need it in my ass!"
+        else:
+            the_girl "Yes! Ah!"
         "[the_girl.possessive_title] drops herself down, grinding her hips against yours and pushing your cock as deep into her ass as possible."
         "Her breath catches in her throat when you pulse out your hot load of cum deep inside of her."
         if the_girl is mom:

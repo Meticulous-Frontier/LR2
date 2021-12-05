@@ -11,6 +11,12 @@ init -1 python:
             mc.business.research_progress(person.int,person.focus,person.research_skill)
         elif person.location == p_division:
             mc.business.production_progress(person.focus,person.int,person.production_skill)
+        elif person.location == office and person in mc.business.college_interns_supply:
+            mc.business.supply_purchase(person.focus,person.charisma,person.supply_skill)
+        elif person.location == m_division:
+            mc.business.sale_progress(person.charisma, person.focus, person.market_skill)
+        elif person.location == office and person in mc.business.college_interns_HR:
+            mc.business.hr_progress(person.charisma,person.int,person.hr_skill)
         return
 
     def college_intern_on_day(the_person):  #Use this to figure out when to end the internship
@@ -47,10 +53,24 @@ init -1 python:
             return True
         return False
 
+    def college_intern_recruit_market_requirement(the_person):
+        return False
+
+
+    def college_intern_recruit_hr_requirement():
+        return False
+
+    def college_intern_recruit_supply_requirement(the_person):
+        if erica.event_triggers_dict.get("team_reinstate_day", 9999) + 14 < day and mc.business.college_interns_unlocked:
+            return True
+        return False
+
 init 1 python:
     hire_new_college_intern = Action("Hire new intern", hire_new_college_intern_requirement, "hire_new_college_intern_label")   #TODO tooltip
     college_intern_training = Action("Train your intern", college_intern_training_requirement, "college_intern_training_label")   #TODO tooltip
-
+    college_intern_recruit_market = Action("Recruit Marketing Interns", college_intern_recruit_market_requirement, "college_intern_recruit_market_label")
+    college_intern_recruit_hr = Action("Recruit HR Interns", college_intern_recruit_hr_requirement, "college_intern_recruit_hr_label")
+    college_intern_recruit_supply = Action("Recruit Supply Interns", college_intern_recruit_supply_requirement, "college_intern_recruit_supply_label")
 
 label unlock_college_interns():
     $ college_intern_role = Role("College Intern", actions = [college_intern_training], hidden = False, on_turn = college_intern_on_turn, on_move = college_intern_on_move, on_day = college_intern_on_day)
@@ -59,6 +79,21 @@ label unlock_college_interns():
     $ mc.business.college_interns_unlocked = True
     if hire_new_college_intern not in nora_role.actions:
         $ nora_role.actions.append(hire_new_college_intern)
+    return
+
+label unlock_college_supply_interns():
+    $ mc.business.college_interns_supply = []
+    $ mc.business.college_supply_interns_unlocked = True
+    return
+
+label unlock_college_HR_interns():
+    $ mc.business.college_interns_HR = []
+    $ mc.business.college_hr_interns_unlocked = True
+    return
+
+label unlock_college_market_interns():
+    $ mc.business.college_interns_market = []
+    $ mc.business.college_market_interns_unlocked = True
     return
 
 label hire_new_college_intern_label(the_person):
@@ -88,11 +123,26 @@ label hire_new_college_intern_label(the_person):
             $ forced_opinions = [["production work", 1, True]]
         "Chemistry \n{color=#ff0000}{size=18}Production Team Full!{/size}{/color} (disabled)" if len(mc.business.college_interns_production) >= mc.business.max_interns_by_division:
             pass
+        "Graphic Design (Marketing)" if len(mc.business.college_interns_market) < mc.business.max_interns_by_division and mc.business.college_market_interns_unlocked:
+            $ the_dept = "Marketing"
+            $ stat_array = [3,1,2]
+            $ skill_array = [1,2,1,1,1]
+            $ forced_opinions = [["market work", 1, True]]
         "Graphic Design (Marketing) (disabled)":    #In the future we may have opportunities to recruit interns for these programs.
             pass
+        "Psychology (HR)" if len(mc.business.college_interns_HR) < mc.business.max_interns_by_division and mc.business.college_hr_interns_unlocked:
+            $ the_dept = "HR"
+            $ stat_array = [3,2,1]
+            $ skill_array = [2,1,1,1,1]
+            $ forced_opinions = [["HR work", 1, True]]
         "Psychology (HR) (disabled)":
             pass
-        "Logistics (Supply) (disabled)":
+        "Business (Supply)" if len(mc.business.college_interns_supply) < mc.business.max_interns_by_division and mc.business.college_supply_interns_unlocked:
+            $ the_dept = "Supply"
+            $ stat_array = [2,1,3]
+            $ skill_array = [1,1,1,1,2]
+            $ forced_opinions = [["supply work", 1, True]]
+        "Business (Supply) (disabled)":
             pass
         "Never mind":
             mc.name "Actually, I just realized I can't bring on someone right now."
@@ -221,4 +271,29 @@ label college_intern_complete_internship(the_person):
 
 label college_intern_training_label(the_person):
     "This is going to be a menu where you can train your intern, but it has not yet been created."
+    return
+
+label college_intern_recruit_supply_label(the_person):
+    if mc.business.college_supply_interns_unlocked:
+        return False
+    $ the_person.draw_person()
+    the_person "Oh! [the_person.possessive_title], I was hoping to see you soon."
+    mc.name "That's nice to hear."
+    the_person "Yeah, it is about your internship program."
+    the_person "I was talking with the new track coach a couple of days ago, and he was lamenting the lack of scholarships being offered to female student athletes."
+    the_person "He said that a lot of the girls are here to just play their sport, and just getting basic degrees in business."
+    the_person "I didn't think much of it at the time, but then I realized they might be interested in something like your scholarship program."
+    mc.name "Hmm, business degrees? I'm not sure I could find something for them to do."
+    the_person "It doesn't have to be anything advanced, even just menial logistics work, but that would give them some experience in day to day business operations."
+    "Hmm... maybe you could start hiring interns to work in your supply department?"
+    mc.name "Actually, I have something I could probably have them do."
+    the_person "Excellent! I'll let the coach know and have him forward me information on anyone who might qualify. Just let me know when you want to set it up!"
+    "You can now recruit Business major interns for your supply department!"
+    call unlock_college_supply_interns() from _college_interns_unlock_supply_01
+    return
+
+label college_intern_recruit_hr_label():
+    return
+
+label college_intern_recruit_market_label():
     return

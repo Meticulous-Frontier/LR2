@@ -148,7 +148,7 @@ label sister_failed_test_label():
         $ the_person.change_slut(3)
         $ the_person.draw_person(position = "stand2")
         "She gets up and slowly collects her books."
-        mc.name "Goodnight"
+        mc.name "Goodnight."
         the_person "Goodnight."
         $ the_person.draw_person(position = "walking_away")
         $ the_person.change_stats(happiness = 3, obedience = 3, love = 3)
@@ -281,7 +281,7 @@ label sister_failed_test_label():
                 $ the_person.change_slut(2)
         $ the_person.draw_person(position = "stand2")
         "She gets up and slowly collects her books."
-        mc.name "Goodnight"
+        mc.name "Goodnight."
         the_person "Goodnight."
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] leaves your room, closing your door on the way out."

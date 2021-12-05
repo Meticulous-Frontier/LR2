@@ -115,6 +115,15 @@ init 5 python:
             return "Asked too recently"
         return True
 
+    def strip_club_stripper_private_dance_requirement(person):
+        if not get_strip_club_foreclosed_stage() >= 5:
+            return False
+        if not person.has_role(stripper_role):
+            return False
+        if person.location != strip_club:
+            return "Only in [strip_club.formal_name]"
+        return True
+
     def strip_club_review_requirement(person):
         if get_strip_club_foreclosed_stage() >= 5 and person.has_role([stripper_role, bdsm_performer_role, waitress_role]):
             if not mc.location in [strip_club, bdsm_room]:
@@ -161,8 +170,9 @@ init 5 python:
 
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
     strip_club_stripper_performance_review_action = Action("Review her performance", strip_club_review_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
+    strip_club_stripper_private_dance_action = Action("Private Dance", strip_club_stripper_private_dance_requirement, "strip_club_stripper_private_dance_label", menu_tooltip = "Ask [the_person] for a private dance.")
 
-    stripper_role = Role("Stripper", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
+    stripper_role = Role("Stripper", [strip_club_stripper_private_dance_action, promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
 
 label update_strip_club_show_requirement(stack):
     python:
@@ -377,6 +387,22 @@ label strip_club_fire_employee_label(the_person):
             $ strip_club_fire_stripper(the_person)
     return
 
+label strip_club_stripper_private_dance_label(the_person):
+    "You signal [the_person.possessive_title] to come over."
+    $ the_person.draw_person()
+    the_person "Yes [the_person.mc_title], what can I do for you?"
+    mc.name "Hey [the_person.title], would you like to make some extra cash tonight?"
+    the_person "Sure, what do you need?"
+    mc.name "I need to relax, would you mind giving me a private dance in the VIP room?"
+    $ the_person.draw_person(position = "back_peek")
+    the_person "No problem, follow me."
+    "As soon as you sit down in the VIP room, [the_person.possessive_title] start her routine."
+    call strip_tease(the_person, for_pay = True) from _call_strip_club_stripper_private_dance_strip_tease
+    $ the_person.draw_person()
+    mc.name "Thank you, now back to work."
+    the_person "Of course, [the_person.mc_title]."
+    return
+
 label stripper_performance_review_label(the_person):
     $ the_person.event_triggers_dict["day_last_performance_review"] = day
     mc.name "[the_person.title], I'd like to have a talk with you about your recent performance here at the club. Can you follow me to my office?"
@@ -471,7 +497,7 @@ label stripper_performance_review_label(the_person):
                         "[the_person.title] stands up and storms out of the room."
                         $ the_person.change_stats(happiness = -25, obedience = -15, love = -30)
                         $ strip_club_fire_stripper(the_person)
-                        $ the_person.location.move_person(the_person.home)
+                        $ the_person.change_location(the_person.home)
                         return
                 "Threaten to fire her": #She may ask to stay in exchange for some sort of favour, or get fired on the spot.
                     mc.name "I'll be honest with you [the_person.title], your performance here at the club leaves a lot to be desired."

@@ -15,6 +15,7 @@ init python:
         orgasm_description = "orgasm_SB_anal_standing",
         verb = "ass fuck",
         opinion_tags = ["doggy style sex", "anal sex", "sex standing up"], record_class = "Anal Sex",
+        default_animation = blowjob_bob,
         associated_taboo = "anal_sex")
 
     list_of_positions.append(SB_anal_standing)
@@ -39,9 +40,9 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
     else:
         the_girl "I don't know, are you sure that thing is gonna fit in me back there?"
 
-    if not the_girl.vagina_visible():
+    if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = SB_anal_standing.position_tag, visible_enough = True, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = SB_anal_standing.position_tag, prefer_half_off = True)
 
     if the_girl.has_anal_fetish():
         if the_girl is mom:

@@ -67,6 +67,8 @@ init 2 python:
         sarah.set_schedule(sarah.home, times = [1,2,3])
         sarah.home.add_person(sarah)
 
+        sarah.event_triggers_dict["yoga_voyeur"] = False
+        sarah.event_triggers_dict["gym_tshirt"] = False
         sarah.event_triggers_dict["epic_tits_progress"] = 0    # 0 = not started, 1 = mandatory event triggered, 2 = tits epic, -1 = convinced her not to do it
         sarah.event_triggers_dict["drinks_out_progress"] = 0   # 0 = not started, 1 = third wheel event complete, 2 = grab drinks complete
         sarah.event_triggers_dict["dating_path"] = False       # False = not started, or doing FWB during story, True = dating her.
@@ -82,10 +84,19 @@ init 2 python:
         sarah.event_triggers_dict["vaginal_position_filter"] = sarah_vaginal_position_filter
         sarah.event_triggers_dict["anal_position_filter"] = sarah_anal_position_filter
         sarah.event_triggers_dict["unique_sex_positions"] = sarah_unique_sex_positions
+        sarah.event_triggers_dict["story_dict"] = True
+
+        #Progress screen functions
+        sarah.story_character_description = "A long lost childhood friend. Maybe you can spark a flame with her."
+        sarah.story_love_list = sarah_story_love_list
+        sarah.story_lust_list = sarah_story_lust_list
+        sarah.story_teamup_list = sarah_story_teamup_list
+        sarah.story_other_list = sarah_story_other_list
 
         # add appoint
         office.add_action(HR_director_appointment_action)
         sarah.add_role(sarah_role)
+        sarah.story_dict = sarah_story_build_dict
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
         mc.business.add_mandatory_crisis(Sarah_intro) #Add the event here so that it pops when the requirements are met.
@@ -218,7 +229,7 @@ init 2 python:
             return False
         #Only in the evening when the strippers are at the club
         if time_of_day > 2 and day%7 == 5:  #Saturday
-            if sarah.sluttiness > 50 and mc.is_at_work():
+            if sarah.sluttiness > 50 and mc.is_at_work() and sarah.love >= 60:
                 return True
         return False
 
@@ -621,6 +632,8 @@ label Sarah_third_wheel_label():
     $ the_person.apply_outfit(get_sarah_date_outfit_one())
 
     "By yourself on the weekend at work, you get up for a minute and decide to stretch your legs and walk the hallways for a bit."
+    $ mc.change_location(office)
+    $ mc.location.show_background()
     "As you pass by the HR offices, you notice the HR Director's office door is open and the light is on. You decide to investigate."
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -790,6 +803,7 @@ label Sarah_third_wheel_label():
     "She turns and heads into her building. You check your watch and realize how late it is."
     $ scene_manager.remove_actor(the_person, reset_actor = False)
     $ add_sarah_get_drinks_action()
+    $ sarah.event_triggers_dict["drinks_out_progress"] = 1
     return
 
 label Sarah_watch_yoga_at_gym_label(the_person):    #20 sluttiness event
@@ -834,6 +848,7 @@ label Sarah_watch_yoga_at_gym_label(the_person):    #20 sluttiness event
     the_person "Well, I have other commitments for today, have a good workout!"
     mc.name "Take care."
     $ clear_scene()
+    $ sarah.event_triggers_dict["yoga_voyeur"] = True
     return
 
 label Sarah_get_drinks_label():
@@ -1258,6 +1273,8 @@ label Sarah_catch_stealing_label():
     $ the_person = sarah
     $ sarah.event_triggers_dict["epic_tits_progress"] = 1
     "As you walk to halls of your company, getting ready to pack things up for the weekend, you notice [the_person.title] sneaking out of the research division."
+    $ mc.change_location(rd_division)
+    $ mc.location.show_background()
     $ the_person.draw_person()
     mc.name "Hello [the_person.title]... what brings you to research on a late Friday evening?"
     "She looks down at the ground and mutters for a second, trying to think of something. It is clear she is hiding something."
@@ -1507,6 +1524,7 @@ label Sarah_workout_in_tshirt_label(the_person):    #60 sluttiness event
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] walks off, towards the locker room."
     "She walks by a guy and girl who are working out together. The guy stares at her tits as she walks by, and the girl he is working out with notices and smacks him."
+    $ sarah.event_triggers_dict["gym_tshirt"] = True
     return
 
 label Sarah_stripclub_story_label():
@@ -2056,7 +2074,7 @@ label Sarah_threesome_request_label():
     the_person "Okay! Let's do it!"
 
     # Make threesome request even on talk event and add it here.
-    $ sarah.event_triggers_dict["initial_threesome_target"] = person_choice
+    $ sarah.event_triggers_dict["initial_threesome_target"] = person_choice.identifier
     $ sarah.event_triggers_dict["initial_threesome_arranged"] = False
 
     $ add_sarah_arrange_threesome_action(person_choice)
@@ -2265,6 +2283,7 @@ label Sarah_arrange_threesome_label(the_person):
         "You give her the details. This is going to be a fun night!"
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
     elif the_person is nora:
+        # TODO: Write Nora part
         "Note, this dialogue is not yet written. I'm waiting until Nora gets further developed as a character."  #TODO
         "At the end of the dialogue, she agrees to be the threesome partner... for science..."
         $ sarah.event_triggers_dict["initial_threesome_arranged"] = True
@@ -2281,12 +2300,10 @@ label Sarah_initial_threesome_label():
         $ add_sarah_initial_threesome_action()
         return
 
-    $ the_person = sarah.event_triggers_dict.pop("initial_threesome_target") # get and remove from dictionary
-    $ scene_manager = Scene()
-
-    if the_person == None:
-        "How did we get here? Tell Starbuck her shitty code is missing the initial threesome target."
+    $ the_person = get_person_by_identifier(sarah.event_triggers_dict.get("initial_threesome_target", None))
+    if the_person is None:
         return
+
     "It's Saturday night. You quickly head home, you have an exciting night ahead of you."
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
@@ -2295,6 +2312,7 @@ label Sarah_initial_threesome_label():
     sarah "Hey, I'm here."
     $ mc.end_text_convo()
     "You head to the front door and invite her in."
+    $ scene_manager = Scene()
     $ scene_manager.add_actor(sarah)
     "You head back to your bedroom and she sits on your bed."
     $ scene_manager.update_actor(sarah, position = "sitting", display_transform = character_center_flipped)

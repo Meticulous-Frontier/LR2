@@ -57,4 +57,5 @@ init 5:
             textbutton _("Menu") style "quick_transparent_style" text_style "quick_text_style" action ShowMenu()
             textbutton _("Auto") style "quick_transparent_style" text_style "quick_text_style" action Preference("auto-forward", "toggle")
             textbutton _("Cheat") style "quick_transparent_style" text_style "quick_text_style" action ToggleScreen("cheat_menu")
+            textbutton _("Research") style "quick_transparent_style" text_style "quick_text_style" action ToggleScreen("serum_cheat_menu")
             textbutton _("Opinions") style "quick_transparent_style" text_style "quick_text_style" action ToggleScreen("opinion_edit_menu")

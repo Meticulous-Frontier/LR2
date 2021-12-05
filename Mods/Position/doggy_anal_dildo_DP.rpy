@@ -13,6 +13,7 @@ init python:
         orgasm_description = "orgasm_SB_doggy_anal_dildo_dp",
         verb = "dp", verbing = "dp-ing",
         opinion_tags = ["doggy style sex", "anal sex", "vaginal sex"], record_class = "Anal Sex",
+        default_animation = blowjob_bob,
         associated_taboo = "anal_sex")
 
     # only one associated taboo is allowed in code ["anal_sex", "vaginal_sex"]
@@ -28,9 +29,9 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     mc.name "[the_girl.title], I want you to get on your hands and knees for me. I want to fuck your ass and your pussy."
     "You secure the strap on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title]."
 
-    if not the_girl.vagina_visible():
+    if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = SB_doggy_anal_dildo_dp.position_tag, visible_enough = True, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = SB_doggy_anal_dildo_dp.position_tag, prefer_half_off = True)
 
     $ the_girl.draw_person(position = SB_doggy_anal_dildo_dp.position_tag)
 

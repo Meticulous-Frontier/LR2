@@ -8,6 +8,10 @@ init 1301 python:              #Because Vren Init personality functions at 1300
             valid_titles.append("Cardio Bunny")
         if person.effective_sluttiness() > 60:
             valid_titles.append("Slutty Athlete")
+        if person.has_breeding_fetish():
+            valid_titles.append("Breeding Gym Bunny")
+        if person.has_anal_fetish():
+            valid_titles.append("Anal Gym Bunny")
         return valid_titles
 
     def erica_possessive_titles(person):
@@ -19,9 +23,18 @@ init 1301 python:              #Because Vren Init personality functions at 1300
         if person.effective_sluttiness() > 80:
             valid_possessive_titles.append("The gym cumdump")
             valid_possessive_titles.append("The gym bicycle")
+        if person.has_breeding_fetish():
+            valid_possessive_titles.append("Your breeder gym bunny")
+        if person.has_anal_fetish():
+            valid_possessive_titles.append("Your anal gym bunny")
         return valid_possessive_titles
 
     def erica_player_titles(person):
+        valid_titles = [mc.name]
+        valid_titles.append("Workout Partner")
+        if person.has_breeding_fetish():
+            valid_titles.append("Bull")
+
         return mc.name
 
     erica_personality = Personality("athlete", default_prefix = "reserved",

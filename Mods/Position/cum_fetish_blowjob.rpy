@@ -13,6 +13,7 @@ init python:
         taboo_break_description = "taboo_break_cum_fetish_blowjob",
         verb = "throat",
         opinion_tags = ["giving blowjobs"], record_class = "Blowjobs",
+        default_animation = blowjob_bob,
         associated_taboo = "sucking_cock")
 
     #list_of_girl_positions.append(cum_fetish_blowjob)
