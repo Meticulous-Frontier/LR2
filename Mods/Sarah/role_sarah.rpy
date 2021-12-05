@@ -2185,7 +2185,7 @@ label Sarah_threesome_request_label():
     "You get to your room. When you walk in, [the_person.possessive_title] starts to strip down."
     the_person "Hope you don't mind if I sleep naked!"
     mc.name "That would actually be ideal, if I'm being honest."
-    $ scene_manager.strip_full_outfit(person = the_person)
+    $ scene_manager.strip_full_outfit(person = the_person, strip_feet = True)
     $ scene_manager.update_actor(the_person, position = "missionary")
     "She flops down on your bed. You hop in bed next to her."
     "You run your hands along her body as you snuggle up next to her. Her skin is so soft."
