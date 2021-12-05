@@ -597,7 +597,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         mc.condom = False
         mc.recently_orgasmed = False
 
-    if affair_ask_after and private and not the_person.relationship == "Single" and report_log.get("girl orgasms",0) >= 1:
+    if affair_ask_after and private and not the_person.has_role([girlfriend_role, affair_role]) and not the_person.relationship == "Single" and report_log.get("girl orgasms",0) >= 1:
         if the_person.relationship in relationship_stats and the_person.love >= relationship_stats[the_person.relationship] - 10 - (the_person.get_opinion_score("cheating on men") * 5):
             if the_person.effective_sluttiness() >= 30 - (the_person.get_opinion_score("cheating on men") * 5):
                 call affair_check(the_person, report_log) from _call_affair_check_bugfix
@@ -885,7 +885,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                     menu:
                         "Fuck her raw":
                             mc.name "Alright, as long as you know what you're getting into..."
-                            call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_4
+                            "You abandon your plans to put on a condom and get ready to take [the_person.possessive_title] raw."
 
                         "Refuse and do something else":
                             "[the_person.possessive_title] seems like she's made up her cock-hungry mind, and you doubt you would be able to change it."
@@ -951,9 +951,9 @@ label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal
             the_person "Just pump my ass full with that hot spunk of yours."
 
         if skill_tag == "Vaginal":
+            $ the_person.update_birth_control_knowledge()
             if the_person.on_birth_control:
                 the_person "Okay. I'm on birth control, so it should be fine."
-                $ the_person.update_birth_control_knowledge()
             elif not the_person.knows_pregnant():
                 the_person "I'm not on birth control [the_person.mc_title], promise you won't cum inside me."
                 call condomless_promise(the_person) from _call_condomless_promise_fuck_without_condom
