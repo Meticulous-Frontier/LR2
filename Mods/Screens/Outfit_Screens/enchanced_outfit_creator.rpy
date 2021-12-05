@@ -200,6 +200,7 @@ init 10 python:
             new_value = 12
 
         cs.scope["slut_generation"] = new_value
+        renpy.restart_interaction()
         return
 
     def update_min_slut_generation(new_value):
@@ -213,6 +214,7 @@ init 10 python:
             new_value = cs.scope["slut_generation"]
 
         cs.scope["min_slut_generation"] = new_value
+        renpy.restart_interaction()
         return
 
 init 2:
