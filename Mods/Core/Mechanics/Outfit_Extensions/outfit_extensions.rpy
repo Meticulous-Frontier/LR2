@@ -75,6 +75,21 @@ init -1 python:
 
     Outfit.can_remove_panties = can_remove_panties
 
+    def can_add_upper_enhanced(self, new_clothing):
+        allowed = True
+        for cloth in self.upper_body:
+            if (cloth.layer == 0 and cloth.name == new_clothing.name) or (cloth.layer > 0 and cloth.layer == new_clothing.layer):
+                allowed = False
+
+        if new_clothing.has_extension: #It's a dress with a top and a bottom, make sure we can add them both!
+            for cloth in self.lower_body:
+                if cloth.layer == new_clothing.has_extension.layer:
+                    allowed = False
+
+        return allowed
+
+    Outfit.can_add_upper = can_add_upper_enhanced
+
     def has_overwear(self): #Returns true if the outfit has layer 2 clothing items for upper and lower body.
         if any(x in [nightgown_dress] for x in self.upper_body):
             return False
