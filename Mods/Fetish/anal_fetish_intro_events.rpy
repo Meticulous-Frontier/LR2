@@ -171,7 +171,7 @@ label anal_fetish_employee_intro_label(the_person):
     the_person "Hey [the_person.mc_title]! It's good to see you!"
     $ the_person.draw_person(position = the_person.idle_pose)
     "She quickly stands up and turns to you. You take a deep breath. It's time to take the plunge."
-    mc.name "[the_person.title], are busy today? I have something I could use your help with after we close up."
+    mc.name "[the_person.title], are busy you tonight? I have something I could use your help with after we close up."
     the_person "Oh! I suppose I could stay for a bit. Let me just finish this up. Want to meet in your office?"
     "It's clear from the tone of her voice she's hoping for some personal attention."
     mc.name "That sounds perfect. See you there."
@@ -190,7 +190,7 @@ label anal_fetish_employee_intro_label(the_person):
     if the_person.has_taboo("anal_sex"):
         mc.name "I was wondering if you've ever tried anal before. It's clear that it is something that is on your mind."
     else:
-        mc.name "I was wondering if you want a round of anal. It is clear to me that your ass needs some attention."
+        mc.name "I was wondering if you have some anal cravings. It is clear to me that your ass needs some attention."
     "[the_person.title] laughs a little."
     the_person "Oh! I umm... I suppose I would be up for something like that."
     "You stand up and start to walk around the desk toward [the_person.possessive_title]."
