@@ -17,7 +17,7 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
     if __builtin__.len(mc.business.get_requirement_employee_list(slut_required = 50, obedience_required = 130)) <= 3: # If you don't have enough people who meet the requirements just get an update.
         mc.name "I'm still working on getting your test subjects ready. Could you remind me what you need?"
         the_person "To learn anything useful I need at least three girls who have been seriously affected by our serums. I need them to be obedient and open to some intimate testing procedures."
-        "[the_person.title] requires three employees who satisfy the following requirements: Core Sluttiness 50+ and Obedience 130+"
+        "[the_person.title] requires three employees who satisfy the following requirements: Sluttiness 50+ and Obedience 130+"
         $ show_satisfying_people_information(the_person)
         the_person "Noted. I'll get back to you when I have your test subjects ready."
         return
