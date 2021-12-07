@@ -69,7 +69,7 @@ label lust_blowjob_intro_label():
     $ ceo_office.show_background()
     "You sit down at your computer and lookup some porn. You browse for a bit, looking for something good to watch."
     "As you are looking around though, you start to rethink this decision."
-    "You own this business. You employee all these women. With the progress you've made with the serums, surely you could convince someone to help you out?"
+    "You own this business. You employ all these women. With the progress you've made with the serums, surely you could convince someone to help you out?"
     "You pull up your employee list on your computer... who should you call down?"
     call screen enhanced_main_choice_display(build_menu_items([["Call in"] + get_willing_lust_blowjob_girl_list()], draw_hearts_for_people = False))
     $ the_person = _return
