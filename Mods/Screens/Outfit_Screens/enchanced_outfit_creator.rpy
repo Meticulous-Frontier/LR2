@@ -178,6 +178,7 @@ init 10 python:
             else:
                 cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
         preview_outfit()
+        renpy.restart_interaction()
         return
 
     def update_transparency(new_value):

@@ -57,14 +57,14 @@ screen multi_person_info_ui(actors):
                         textbutton "Arousal: [actor.person.arousal]/[actor.person.max_arousal] (+" + get_red_heart(__builtin__.int(actor.person.arousal/4)) + ")":
                             style "transparent_style"
                             text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will instantly turn temporary sluttiness into core sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
+                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
                             action NullAction()
                             sensitive True
                     else:
                         textbutton "Arousal: 0%":
                             style "transparent_style"
                             text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will instantly turn temporary sluttiness into core sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
+                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
                             action NullAction()
                             sensitive True
 
