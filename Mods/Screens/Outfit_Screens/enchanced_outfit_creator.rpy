@@ -46,11 +46,11 @@ init 10 python:
         cs = renpy.current_screen()
 
         if cs.scope["outfit_type"] == "full":
-            return cs.scope["starting_outfit"].get_full_outfit_slut_score()
+            return cs.scope["demo_outfit"].get_full_outfit_slut_score()
         elif cs.scope["outfit_type"] == "under":
-            return cs.scope["starting_outfit"].get_underwear_slut_score()
+            return cs.scope["demo_outfit"].get_underwear_slut_score()
         elif cs.scope["outfit_type"] == "over":
-            return cs.scope["starting_outfit"].get_overwear_slut_score()
+            return cs.scope["demo_outfit"].get_overwear_slut_score()
         return 0
 
     def get_outfit_type_name():
