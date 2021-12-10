@@ -263,7 +263,7 @@ label ellie_head_researcher_halfway_intro_label():
     if the_person == None:
         $ mc.business.add_mandatory_crisis(ellie_unnecessary_payment)
         return
-    "You feel your phone vibrate in your pocket. It's [the_person.possessive_title]"
+    "You feel your phone vibrate in your pocket. It's [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "I'm a genius. Meet me in your office!"
     mc.name "I'll be right there."
@@ -475,7 +475,7 @@ label ellie_work_welcome_monday_label():
     $ the_person = ellie
     $ ceo_office.show_background()
     "When you arrive at work on Monday morning, you head to your office."
-    "Shortly after you arrive, you hear a knock on your office door. It's [the_person.title]"
+    "Shortly after you arrive, you hear a knock on your office door. It's [the_person.title]."
     $ the_person.draw_person()
     ellie "Hello. I've been looking at things over the weekend like I told you I would."
     mc.name "Great. Have a seat."

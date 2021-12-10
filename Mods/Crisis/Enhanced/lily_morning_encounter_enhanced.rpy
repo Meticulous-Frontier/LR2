@@ -478,7 +478,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                             the_person "Are you sure?"
                             menu:
                                 "Yes":
-                                    mc.name "Go on, [the_person.title] I'm going to spend some quality time with [the_other_person.title]"
+                                    mc.name "Go on, [the_person.title] I'm going to spend some quality time with [the_other_person.title]."
                                     the_person "Ok, you two have fun. I'll see you tonight."
                                     $ scene_manager.remove_actor(the_person)
                                     $ the_person = the_other_person

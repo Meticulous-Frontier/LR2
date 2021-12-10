@@ -2615,7 +2615,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
     #TODO special requests. IE topless, kissing, etc.
     #TODO add outfits to wardrobes if they like them.
     #TODO add new outfits?
-    "With the pictures done, you give the camera back to [lily.possessive_title]"
+    "With the pictures done, you give the camera back to [lily.possessive_title]."
     lily "Thanks [lily.mc_title]! You're the best!"
     erica "Yeah, thanks [erica.mc_title]. [lily.name] is it still okay if I spend the night?"
     lily "Of course! I could really use your help studying for my exam coming up."
@@ -2913,7 +2913,7 @@ label erica_lily_post_insta_morning_label():
     return
 
 label erica_post_insta_handjob_followup_label(the_person):
-    the_person "Hey [the_person.mc_title]"
+    the_person "Hey [the_person.mc_title]."
     mc.name "Hey [the_person.title]. You know, I had the craziest dream the other day."
     the_person "Oh?"
     mc.name "Yeah, I had this dream that you came into my room in the middle of the night..."
@@ -3147,7 +3147,7 @@ label erica_breeding_fetish_team_crisis_label():
     mc.name "Let me see, can you show me? Your class grades?"
     "[the_person.possessive_title] pulls up her grade sheet on her phone, then shows it to you."
     "Damn, D, C+, F?, D... wait."
-    "You notice one of the classes, chemisty 201 with professor [nora.last_name] is now showing a D."
+    "You notice one of the classes, chemistry 201 with professor [nora.last_name] is now showing a D."
     mc.name "Chemistry... is that with [nora.name] [nora.last_name]?"
     the_person "Yeah?"
     mc.name "I actually know her. Cooperating to get someone kicked off the track team because she got pregnant isn't something she would do."
@@ -3155,7 +3155,7 @@ label erica_breeding_fetish_team_crisis_label():
     "This doesn't add up. [nora.title] would never do something like that."
     mc.name "I can't promise anything, but before you give up on this, let me talk to her. Maybe I can find out what is going on."
     the_person "I... I don't know. I'm not sure you'll be able to anything."
-    mc.name "Well, I'll try anyway. [nora.title] is a good person, she'll atleast be able to tell me why she is going along with it."
+    mc.name "Well, I'll try anyway. [nora.title] is a good person, she'll at least be able to tell me why she is going along with it."
     $ nora.add_unique_on_talk_event(erica_breeding_fetish_nora_followup)
     $ erica.event_triggers_dict["kicked_off_team"] = True
     the_person "Okay. I appreciate it."
@@ -3165,7 +3165,7 @@ label erica_breeding_fetish_team_crisis_label():
     $ the_person.draw_person(position = "sitting", emotion = "happy")
     "For the first time since she got here, she slips a slight smile."
     the_person "Oh? You don't think it's gross... my belly getting bigger?"
-    mc.name "Gross? Geesh, everytime I look at you I get so turned on, thinking about pinning you down and knocking you up."
+    mc.name "Gross? Geesh, every time I look at you I get so turned on, thinking about pinning you down and knocking you up."
     $ the_person.change_happiness(15)
     $ the_person.change_arousal(20)
     "She looks away from you, but her smile gets a little wider."
@@ -3294,12 +3294,12 @@ label erica_breeding_fetish_nora_followup_label(the_person):
 
 label erica_breeding_nora_news_part_one_label():
     $ the_person = nora
-    "Your phone goes off in your pocket. It's [the_person.possessive_title]"
+    "Your phone goes off in your pocket. It's [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey, I just wanted to give you a quick update."
     the_person "Talked to all of Ms. [erica.last_name]'s other instructors, and they've all said similar things."
     the_person "None of them gave her those bad marks. I've kicked it up to internal affairs and IT."
-    the_person "IT said there are some suspicious logs in the gradebook program and are investigating."
+    the_person "IT said there are some suspicious logs in the grade book program and are investigating."
     mc.name "That sounds promising."
     the_person "Yeah, I'll keep you updated, but give me a couple more days."
     mc.name "Got it. Thanks."
@@ -3310,7 +3310,7 @@ label erica_breeding_nora_news_part_one_label():
 label erica_breeding_nora_news_part_two_label():
     $ the_person = nora
     if mc.location != university:
-        "Your phone goes off in your pocket. It's [the_person.possessive_title]"
+        "Your phone goes off in your pocket. It's [the_person.possessive_title]."
         $ mc.start_text_convo(the_person)
         the_person "Hey, can you come out to the university? I have some big news."
         mc.name "Sure, I'll be right there."
@@ -3318,11 +3318,11 @@ label erica_breeding_nora_news_part_two_label():
         $ mc.change_location(university)
         $ mc.location.show_background()
     else:
-        "Walking around the unveristy grounds, [the_person.possessive_title] spots you and hurries over to you."
+        "Walking around the university grounds, [the_person.possessive_title] spots you and hurries over to you."
     $ the_person.draw_person()
     the_person "[the_person.mc_title], I have some incredible news."
     mc.name "Oh?"
-    the_person "The track coach has been fired. IT and security traced the gradebook changes back to a computer he was using and was able to trace everything back to him."
+    the_person "The track coach has been fired. IT and security traced the grade book changes back to a computer he was using and was able to trace everything back to him."
     the_person "He was fired and may even be facing some jail time. The boy's track coach has been named the interim coach until someone new can be hired."
     the_person "I already spoke with him and informed him of the sensitive situation with the student."
     the_person "The new coach has already reached out to her with an offer for a full ride, unconditional scholarship and placement back on the track team."

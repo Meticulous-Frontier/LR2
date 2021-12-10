@@ -1325,7 +1325,7 @@ label ashley_second_concert_date_label():
                     "Take her raw":
                         $ date_outcome = "raw sex"
                         $ mc.condom = False
-                        "You growl at [the_person.possessive_title]"
+                        "You growl at [the_person.possessive_title]."
                         mc.name "You let me worry about [stephanie.title]."
                         "Without waiting further response, you line yourself up and push your cock into [the_person.title]'s drenched pussy."
                     "Put on a condom":
@@ -1557,7 +1557,7 @@ label ashley_steph_second_date_confrontation_label():
 label ashley_blows_during_meeting_label():
     $ scene_manager = Scene()
     $ mc.arousal = 0
-    "You get a text from [stephanie.possessive_title]"
+    "You get a text from [stephanie.possessive_title]."
     $ mc.start_text_convo(stephanie)
     stephanie "Hey, can you meet me in your office? I just found something I wanted to talk to you about."
     mc.name "Sure, I'll be right there."

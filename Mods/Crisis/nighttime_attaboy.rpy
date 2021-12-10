@@ -209,7 +209,7 @@ label crisis_nighttime_attaboy_label():
                     the_person "You getting a good look?"
                     mc.name "Sorry, I..."
                     the_person "Just close the door and get over here!"
-                "You quietly close the door and then walk over to the bed, joining [the_person.possessive_title]"
+                "You quietly close the door and then walk over to the bed, joining [the_person.possessive_title]."
                 call fuck_person(the_person) from _call_fuck_person_attaboy_encore_01
                 "When you finish, [the_person.possessive_title] lays back in her bed."
                 $ the_person.draw_person(position = "missionary", emotion = "happy")

@@ -795,7 +795,7 @@ label candace_topless_at_mall_label(the_person):
         "You look over. It's a police officer!"
         $ scene_manager.add_actor(police_chief, display_transform = character_left_flipped)
         police_chief "Come on now, let's all just go back to our shopping."
-        "Suddenly, she sees [the_person.title]"
+        "Suddenly, she sees [the_person.title]."
         police_chief "Move along now... holy shit!"
         $ scene_manager.update_actor(police_chief, emotion = "angry")
         police_chief "Excuse me Ma'am? You can't just walk around the mall with your titties out!"

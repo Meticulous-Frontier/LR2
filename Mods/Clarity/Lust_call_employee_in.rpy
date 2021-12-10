@@ -183,7 +183,7 @@ label lust_blowjob_office_label():
                 "Fully spent, you let yourself relax in your chair."
             $ the_person.draw_person(position = "stand3")
             "[the_person.title] stands up."
-            the_person "Wow, I needed that too. Thank you so much for calling me [the_person.mc_title]"
+            the_person "Wow, I needed that too. Thank you so much for calling me [the_person.mc_title]."
             $ the_person.draw_person(position = "walking_away")
             "[the_person.possessive_title] turns and walks out of your office. She doesn't even bother to clean up."
         else:
