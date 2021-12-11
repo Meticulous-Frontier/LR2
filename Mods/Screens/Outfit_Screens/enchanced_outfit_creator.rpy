@@ -42,6 +42,22 @@ init 10 python:
             draw_mannequin(cs.scope["mannequin"], cs.scope[outfit], cs.scope["mannequin_pose"], hide_list = hide_list)
         return
 
+    def preview_clothing(apply_method, cloth, outfit = "demo_outfit"):
+        cs = renpy.current_screen()
+
+        cloth.colour[0] = cs.scope["current_r"]
+        cloth.colour[1] = cs.scope["current_g"]
+        cloth.colour[2] = cs.scope["current_b"]
+        cloth.colour[3] = cs.scope["current_a"]
+
+        apply_method(cs.scope[outfit], cloth)
+        return
+
+    def hide_preview(cloth, outfit = "demo_outfit"):
+        cs = renpy.current_screen()
+        cs.scope[outfit].remove_clothing(cloth)
+        return
+
     def get_slut_score():
         cs = renpy.current_screen()
 
@@ -446,11 +462,11 @@ init 2:
                                                         SetScreenVariable("selected_colour", "colour")
                                                     ]
                                                     hovered [
-                                                        Function(apply_method, demo_outfit, cloth),
+                                                        Function(preview_clothing, apply_method, cloth),
                                                         Function(preview_outfit)
                                                     ]
                                                     unhovered [
-                                                        Function(demo_outfit.remove_clothing, cloth),
+                                                        Function(hide_preview, cloth),
                                                         Function(preview_outfit)
                                                     ]
 
