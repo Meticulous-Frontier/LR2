@@ -3,12 +3,9 @@ init 5 python:
 
     def get_friends_relationship_with_actor_not_girlfriend_or_paramour():
         relations = town_relationships.get_business_relationships(["Friend","Best Friend"])
-        func = Person.has_role
 
-        relationship = get_random_from_list([x for x in relations if \
-            (not func(x.person_a, [girlfriend_role, affair_role]) and not func(x.person_b, [girlfriend_role, affair_role])) \
-            or (not func(x.person_a, [girlfriend_role, affair_role]) and func(x.person_b, [girlfriend_role, affair_role])) \
-            or (func(x.person_a, [girlfriend_role, affair_role]) and not func(x.person_b, [girlfriend_role, affair_role]))
+        relationship = get_random_from_list([x for x in relations if
+            not (x.person_a.has_role([girlfriend_role, affair_role]) and x.person_b.has_role([girlfriend_role, affair_role]))
         ])
         if relationship is None:
             return (None, None)
