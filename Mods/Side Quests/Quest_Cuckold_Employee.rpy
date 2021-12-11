@@ -536,6 +536,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
             the_person "Oh! What can I do for you?"
             # since this is triggered inside the talk event, it is still in the list
             # so adding it here won't work, let the quest tracker reapply the talk event
+            call talk_person(the_person) from _call_talk_person_quest_cuckold_employee_breeding_session
             return
     mc.name "Yes that is exactly right. I really need help with something in my office, could you please come give me a hand?"
     the_person "Of course! Let's go!"
