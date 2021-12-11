@@ -513,7 +513,7 @@ label starbuck_sex_store_investment_one_label(the_person):
     mc.name "So, I'm seriously considering investing in your shop. What kind of stock can you get if I invest $1000?"
     the_person "Oh! That would be amazing! Well, with that money, I could get basic toys, creams, and lubricants. There are some pretty good creams for male endurance enhancement you can get..."
     the_person "As well as some toys for better foreplay and masturbation. Some dildos, male masturbation sleeves, vibrating rings..."
-    "That sounds like a pretty list of stuff that you would be interested in buying if you were to go to a sex shop."
+    "That sounds like a pretty good list of stuff that you would be interested in buying if you were to go to a sex shop."
     "Do you want to invest?"
     menu:
         "Invest ($1000)":

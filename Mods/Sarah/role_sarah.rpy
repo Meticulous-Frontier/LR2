@@ -534,7 +534,7 @@ label Sarah_intro_label():
     "Without warning, [the_person.name] throw herself at you and gives you a big hug."
     the_person "I never would have thought in a million years I would run into you again!"
     $ the_person.draw_person(position = "stand2", emotion = "happy")
-    mc.name "Dad told me your family had to move away from work. What brings you back to town?"
+    mc.name "Dad told me your family had to move away for work. What brings you back to town?"
     $ the_person.draw_person(position = "stand2", emotion = "sad")
     the_person "Ahh... well, I had just finished my degree and landed an internship at a company in town here. It was a great company, or so I thought..."
     "She clears her throat and continues."
