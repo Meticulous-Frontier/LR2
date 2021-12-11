@@ -321,7 +321,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                 mc.name "[the_other_person.title] I think I'm just going to focus on [the_person.title], she is the one who started this after all."
                 if jealous_watcher == True:
                     the_other_person "If that is what you want to do, just try to make time for me soon too."
-                    $ the_other_person.change_stats(happiness -5, love -1)
+                    $ the_other_person.change_stats(happiness = -5, love = -1)
                 else:
                     the_other_person "Don't let me get in your way. I'll see you tonight."
                 $ scene_manager.remove_actor(the_other_person)
@@ -330,7 +330,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                 mc.name "Go on, [the_person.title] I'm going to spend some quality time with [the_other_person.title]"
                 if jealous_person == True:
                     the_person "Ok, just remember that I'd like to spend time with you soon too."
-                    $ the_person.change_stats(happiness -5, love -1)
+                    $ the_person.change_stats(happiness = -5, love = -1)
                 else:
                     the_person "Ok, you two have fun. I'll see you tonight."
                 $ scene_manager.remove_actor(the_person)
@@ -347,10 +347,10 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                 mc.name "If I linger I'm going to be late so we'll have to try again another time."
                 if jealous_person == True:
                     the_person "Ok, just remember that I'd like to spend time with you soon."
-                    $ the_person.change_stats(happiness -5, love -1)
+                    $ the_person.change_stats(happiness = -5, love = -1)
                 if jealous_watcher == True:
                     the_other_person "If that is what you want to do, just try to make time for me soon."
-                    $ the_other_person.change_stats(happiness -5, love -1)
+                    $ the_other_person.change_stats(happiness = -5, love = -1)
                 "It isn't easy abandoning the two of them, so you quickly make your way back to your room to get ready for the day."
                 $ mc.change_location(bedroom)
         if not the_other_person:
