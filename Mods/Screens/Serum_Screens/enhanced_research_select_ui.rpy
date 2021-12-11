@@ -235,28 +235,27 @@ init 2:
                             vbox:
                                 xsize 370
 
-                                for serum in mc.business.serum_designs:
-                                    if not serum.researched:
-                                        textbutton "[serum.name] ([serum.current_research]/[serum.research_needed])":
-                                            text_xalign 0.5
-                                            text_text_align 0.5
+                                for serum in [x for x in mc.business.serum_designs + mc.business.blueprinted_traits if not x.researched]:
+                                    textbutton "[serum.name] ([serum.current_research]/[serum.research_needed])":
+                                        text_xalign 0.5
+                                        text_text_align 0.5
 
-                                            action SetScreenVariable("selected_research", serum)
-                                            style "textbutton_style"
-                                            text_style "serum_text_style_traits"
-                                            if selected_research == trait:
-                                                if mc.business.active_research_design == trait:
-                                                    background "#593f85"
-                                                else:
-                                                    background "#59853f"
-                                                hover_background "#a9d59f"
+                                        action SetScreenVariable("selected_research", serum)
+                                        style "textbutton_style"
+                                        text_style "serum_text_style_traits"
+                                        if selected_research == trait:
+                                            if mc.business.active_research_design == trait:
+                                                background "#593f85"
                                             else:
-                                                if mc.business.active_research_design == trait:
-                                                    background "#008000"
-                                                else:
-                                                    background "#000080"
-                                                hover_background "#1a45a1"
-                                            xsize 365
+                                                background "#59853f"
+                                            hover_background "#a9d59f"
+                                        else:
+                                            if mc.business.active_research_design == trait:
+                                                background "#008000"
+                                            else:
+                                                background "#000080"
+                                            hover_background "#1a45a1"
+                                        xsize 365
 
                 textbutton "Return" action [Return("None")] style "textbutton_style" text_style "textbutton_text_style" text_align (0.5, 0.5) yalign 0.995 xanchor 0.5 xalign 0.5 xsize 360
 
