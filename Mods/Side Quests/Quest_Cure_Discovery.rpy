@@ -66,12 +66,14 @@ init 1 python:
         return
 
     def quest_cure_discovery_start_requirement():
-        if day < 30: # we need to have put in some research for this event to occur
-            return False
-        if mc.business.head_researcher == None:
-            return False
+        if day < 30:
+            return False    # don't start too soon
+        if mc.business.research_tier < 1:
+            return False    # we should have made some research progress
+        if mc.business.head_researcher is None:
+            return False    # we need a head researcher
         if __builtin__.len(mc.business.market_team) == 0:
-            return False
+            return False    # we need someone in marketing
         return True
 
     def quest_cure_discovery_cleanup():

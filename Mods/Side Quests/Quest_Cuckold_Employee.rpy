@@ -77,13 +77,17 @@ init 1 python:
         return
 
     def quest_cuckold_employee_start_requirement():
-        if day < 50: # don't start this until we have a better employee base
-            return False
-        # wait until we unlocked the glory hole until we trigger the quest (moves quest back to later in game)
-        if persistent.pregnancy_pref > 0 and mc.business.unisex_restroom_unlocks.get("unisex_restroom_gloryhole", 0) == 1:
-            if quest_cuckold_employee_person_find_employee():
-                return True
-        return False
+        if persistent.pregnancy_pref == 0:
+            return False  # disabled when pregnancy disabled
+        if day < 50:
+            return False  # don't start too early
+        if mc.business.get_employee_count() < 10:
+            return False  # wait until we have a sizeable business
+        if mc.business.unisex_restroom_unlocks.get("unisex_restroom_gloryhole", 0) == 0:
+            return False  # disabled until gloryhole unlocked
+
+        # check if we have a married woman without kids who is slutty enough for breeding
+        return not quest_cuckold_employee_person_find_employee() is None
 
     def quest_cuckold_employee_cleanup():
         mc.business.remove_mandatory_crisis("quest_cuckold_employee_intro_label")
