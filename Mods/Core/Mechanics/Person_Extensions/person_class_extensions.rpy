@@ -1802,7 +1802,8 @@ init -1 python:
         if not self.has_cum_fetish():
             self.outfit.remove_all_cum()
 
-        if (self.should_wear_uniform() and not self.is_wearing_uniform()) \
+        if len(self.location.people) > 1 \
+            or (self.should_wear_uniform() and not self.is_wearing_uniform()) \
             or (self.outfit.slut_requirement > self.sluttiness):
             self.apply_planned_outfit()
             if draw_person:
