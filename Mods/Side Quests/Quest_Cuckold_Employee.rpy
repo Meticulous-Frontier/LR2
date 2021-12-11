@@ -544,19 +544,26 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     $ mc.change_location(office)
     $ ceo_office.show_background()
     "After you walk in, you close the door and lock it."
+    $ mc.change_arousal(5)
+    $ the_person.change_arousal(5)
     the_person "I've been looking forward to this. I know that we're doing this for practical reasons, but that doesn't mean it doesn't feel really good..."
     mc.name "Get ready, cow. I'm just here to breed you."
     the_person "Oh god, it's so hot when you talk to me like that."
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
     if the_person.outfit.vagina_available():
+        $ mc.change_arousal(5)
+        $ the_person.change_arousal(5)
         "She spreads her legs, her pussy on display in front of you."
     else:
         if the_person.outfit.can_half_off_to_vagina():
             $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "missionary")
         else:
             $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "missionary")
+    $ mc.change_arousal(10)
     mc.name "I'm gonna fuck you on my desk again. Tell your bull how much you want it."
+    $ mc.change_arousal(15)
+    $ the_person.change_arousal(20)
     the_person "Oh god please! I want you to fuck me over and over until my belly is popping with your seed!"
     call fuck_person(the_person, start_position = breeding_missionary, start_object = make_desk(), private= True, position_locked = True, skip_intro = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_2
     $ the_report = _return
@@ -584,7 +591,9 @@ label quest_cuckold_employee_breeding_session_label(the_person):
         "With that, you leave your office, being careful to lock the door behind you."
         $ clear_scene()
         $ mc.location.show_background()
-        "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
+        # only show message twice (first time and when you reached the requirement count)
+        if quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) in [0, 4]:
+            "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
         $ quest_cuckold_employee().quest_event_dict["creampie_count"] = quest_cuckold_employee().quest_event_dict.get("creampie_count", 0) + 1
     else:
         mc.name "Sorry, I'm just too tired, I shouldn't have tried this right now..."
