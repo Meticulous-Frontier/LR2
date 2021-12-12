@@ -1257,7 +1257,7 @@ label erica_post_race_love_label(the_person):
     $ the_person.change_arousal(15)
     $ the_person.discover_opinion("doggy style sex")
     "Mmm, seems she likes it doggy style... and maybe has a bit of a submissive streak? You aren't sure about the latter yet, but you look forward to finding out."
-    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed()) from _call_casual_sex_mod_CS033
+    call fuck_person(the_person, private=True, start_position = doggy, start_object = make_bed(), skip_intro = True) from _call_casual_sex_mod_CS033
     $ the_report = _return
     "When you finish you are both spent."
     if the_report.get("girl orgasms", 0) > 0:
@@ -1268,9 +1268,10 @@ label erica_post_race_love_label(the_person):
     $ the_person.change_love(5)
     $ the_person.draw_person(position = "kissing")
     the_person "Aww, you don't have to do that. You are such a sweetheart."
-    $ the_person.review_outfit()
-    $ the_person.draw_person()
+    $ clear_scene()
     "While [the_person.possessive_title] gets cleaned up, you order her a healthy lunch on your phone. You know she is a college student, so she probably doesn't have much disposable income."
+    $ the_person.apply_outfit()
+    $ the_person.draw_person()
     $ mc.business.change_funds(-10)
     $ title_choice = get_random_from_list(["BBQ rainbow beef salad", "fresh salmon and Thai noodle salad", "spicy chicken and avocado wrap"])
     mc.name "Alright, I got you a [title_choice], it should be here soon. Good luck with your studying!"
