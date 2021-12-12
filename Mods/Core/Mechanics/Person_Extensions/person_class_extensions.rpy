@@ -1445,6 +1445,8 @@ init -1 python:
         else:
             renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier)
             renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
+
+        renpy.pause(.3) # slight pause between animations
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
