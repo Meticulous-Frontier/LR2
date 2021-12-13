@@ -127,6 +127,9 @@ init -2 python: #Requirement Functions
     def ellie_turned_on_while_working_requirement():
         return False
 
+    def ellie_brings_lunch_requirement():
+        return False
+
 init -1 python:
     ellie_start_intro_note = Action("Blackmail Note", ellie_start_intro_note_requirement, "ellie_start_intro_note_label")
     ellie_meet_ellie_intro = Action("Meet Your Blackmailer", ellie_meet_ellie_intro_requirement, "ellie_meet_ellie_intro_label")
@@ -144,6 +147,7 @@ init -1 python:
     ellie_never_been_fucked = Action("Ellie wants to fuck", ellie_never_been_fucked_requirement, "ellie_never_been_fucked_label")
     ellie_loses_her_virginity = Action("Ellie loses her cherry", ellie_loses_her_virginity_requirement, "ellie_loses_her_virginity_label")
     ellie_never_tried_anal = Action("Ellie tries anal", ellie_never_tried_anal_requirement, "ellie_never_tried_anal_label")
+    ellie_brings_lunch = Action("Ellie likes cooking", ellie_brings_lunch_requirement, "ellie_brings_lunch_label")
 
 label ellie_start_intro_note_label():
     $ the_person = mc.business.head_researcher
@@ -974,26 +978,122 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ the_person.add_unique_on_room_enter_event(ellie_never_tasted_cock)
     return
 
-label ellie_never_tasted_cock_label():  #This is Ellie's 40 sluttiness event.
-    "Ellie has an on room entry event."
-    "You hear her asking another girl what it's like to suck dick."
-    "She gets crazy embarrassed when she sees you. Cute"
-    "You ask her to come with you to your office. Pretend like you're gonna discipline her for lewd talk."
-    "Get to your office, close door, lock it."
-    "She starts to say sorry, but instead you stop her."
-    "Do you really want to know what it's like to suck dick."
-    "She says yes. Give MC a choice. Whip it out and go for it, or offer to eat her out first. Best possible ending is non selfish route."
-    menu:
-        "Lick her first":
-            "If you eat her out first, her opinion on getting head is min(orgasms, 2)"
-            "You let her take the lead and practice sucking cock. Patient answers increase her opinion on sucking cock, impatient decrease."
-            "When you cum, she is putty and will take your cum wherever you say. If positive interactions so far, she likes or loves cum there now (face, swallow, body)"
-            "+1 taking control"
-        "Suck it now":
-            "If you whip out your cock, you an still be patient or impatient with responses. Impatient decreases giving blowjobs opinion and vice versa."
-            "When you cum, if interaction positive she lets you cum where you want, now likes cum there. (law of primacy)"
-            "If interaction was negative, she tries to swallow your cum but struggles. Now doesn't like swallowing cum, but gains a bit of slut and obedience."
-            "+1 being submissive"
+label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness event.
+    $ talk_person = get_random_employees(1, exclude_list = [the_person], slut_required = 50)
+    $ scene_manager = Scene()
+    "As you walk towards the entrance of research and development, you begin to overhear a conversation."
+    "You stop and listen in before walking in the door, not because of what is being talked about, but because of WHO is talking."
+    the_person "So like, you've had one in your mouth before... right?"
+    talk_person "Of course!"
+    the_person "Isn't it, like, gross?"
+    talk_person "Gross? No! I mean, it is a bit of acquired taste, but if you go into it with an open mind it is honestly not a bad taste."
+    the_person "Sorry, I just... my mamma always said doing something like that was for whores..."
+    talk_person "Nahh, as long as everyone is having a good time!"
+    the_person "What do you do like, when he's finishing though?"
+    if the_person.get_opinion_score("cum facials") > the_person.get_opinion_score("drinking cum"):
+        talk_person "Real talk here. Guy's love it when you just let them finish all over your face!"
+        the_person "On... mah face?"
+        talk_person "Yeah! They LOVE it. Plus it is actually kind of good for your skin."
+        the_person "Ah... I see..."
+    elif the_person.get_opinion_score("drinking cum") > 0:
+        talk_person "Real talk here. I usually just swallow it all."
+        the_person "You... swallow?"
+        talk_person "Yeah! Guys love it when you do that, and it makes cleanup stupid easy."
+        the_person "Ah... I see..."
+    else:
+        talk_person "Real talk here. I usually just let guys finish however they want. On my face, my chest, in my mouth, whatever."
+        the_person "Oh..."
+    "You pick that moment to turn the corner into the room."
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    $ scene_manager.add_actor(talk_person, position = "sitting", display_transform = character_center_flipped)
+    "[the_person.possessive_title] is looking down when you enter and doesn't even notice you walk in. [talk_person.title] sees you, however, and smiles."
+    talk_person "Oh hey [talk_person.mc_title]."
+    "[the_person.title] startles and looks up at you."
+    the_person "Ah! [the_person.mc_title]! I umm... I wasn't... we were just..."
+    mc.name "Talking about some things highly inappropriate for work."
+    the_person "Ohhh stars. I..."
+    mc.name "Come with me. We'll talk about this in my office."
+    the_person "Oh fudge... okay..."
+    $ scene_manager.update_actor(the_person, positition = "stand3")
+    "[talk_person.possessive_title] looks at you a little concerned, but you give her quick wink. She gives a smile as you turn and walk back out of the room."
+    $ scene_manager.clear_scene()
+    "Silently you lead [the_person.title] to your office."
+    $ ceo_office.show_background()
+    "You let her step inside, then close the door, locking it quietly, motioning for her to sit down."
+    $ the_person.draw_person(position="sitting")
+    "You sit down across from her."
+    the_person "Look, it's not what you think!"
+    mc.name "Oh, it's not, is it?"
+    the_person "No, I was jus..."
+    mc.name "You don't want to know what it is like to suck dick?"
+    the_person "I was curiou... wha???"
+    mc.name "[the_person.title]. You don't have to go to other employees when you get curious about this stuff, okay? You can just come to me."
+    "[the_person.possessive_title] is blushing hard."
+    mc.name "Now... do you want to know what it's like to suck dick?"
+    "[the_person.title] looks down for a few moments... but then gives a slow nod."
+    mc.name "It's nothing to be ashamed about."
+    the_person "I... I think I understand that sir... but I've spent so much of my life being told that kind of stuff is for... harlots..."
+    "Her voice breaks a little with the last word."
+    mc.name "It's okay. I understand that. If you don't want to try, that's fine. I don't want to pressure you into anything."
+    mc.name "But I also want you to know that it is perfectly understandable to be curious."
+    mc.name "Especially working here. We have a lot of work to be done here, researching chemicals and programs that change or enhance sexuality."
+    mc.name "It's okay if the answer is no. Do you want to suck my dick?"
+    "[the_person.possessive_title] nods her head."
+    the_person "... Yes... I really do..."
+    mc.name "There. Was that so hard? Come here. We'll go slow, okay?"
+    $ the_person.draw_person()
+    "[the_person.title] gets up and walks around your desk."
+
+    mc.name "Go ahead and get down on your knees. There's a reason that's a classic."
+    $ the_person.draw_person(position = "blowjob")
+    "As she gets down, you pull your cock from your pants."
+    mc.name "Alright, so there aren't really very many rules for this, but a basic one for while you are learning, no teeth!"
+    the_person "No teeth?"
+    mc.name "Right. Use your lips to cover up your teeth. Teeth hurt, okay?"
+    the_person "Ah, okay, I'll try."
+    mc.name "Alright, let's take this slow. Use your hand a little to get used to it."
+    "[the_person.possessive_title] takes you in her hand and gives you a couple strokes. Not long ago, she had never done this either, but now she handles your meat with skill."
+    $ mc.change_arousal(10) #10
+    $ mc.change_locked_clarity(20)
+    mc.name "That's it. Now, just give it a little kiss."
+    the_person "Okay... mmmm..."
+    "[the_person.title] gives your cock a quick peck. Then another. Then three more."
+    mc.name "See? It's not so bad, is it?"
+    the_person "Nah, it's so hot. And it smells kind of... manly..."
+    "[the_person.possessive_title] begins to kiss along the underside, down towards the base, then back up to the top."
+    $ mc.change_arousal(10) #20
+    $ mc.change_locked_clarity(20)
+    mc.name "Mmm, that feels nice."
+    "When she gets to the tip, [the_person.title] looks up at you and makes eye contact. A bit of pre-cum is starting to leak from the tip."
+    "She closes her eyes and sticks out her tongue. She slowly licks at the tip of the head, tasting your pre-cum for the first time."
+    "It takes her a few moments to open her eyes."
+    the_person "That... is certainly unique."
+    if the_person.love > 40:
+        the_person "It doesn't taste very good but like... because it's you, something about it makes it good anyways..."
+    else:
+        the_person "The taste isn't great... but the fact that it's coming from you makes it really hot anyways..."
+    #Increase drinking cum score
+    $ mc.change_arousal(15) #35
+    $ mc.change_locked_clarity(30)
+    mc.name "Keep going, I'll be glad to get you some more."
+    "[the_person.possessive_title] starts to run her tongue around the tip now. She goes up and down at first, then circles it a few times."
+    "[the_person.title] gives you a couple more strokes with her hand while she licks the tip. She stops and looks up at you."
+    the_person "Okay. Here goes!"
+    "[the_person.possessive_title] opens her mouth and for the first time pushes your erection inside her lips."
+    $ mc.change_arousal(15) #35
+    $ mc.change_locked_clarity(40)
+    $ the_person.break_taboo("sucking_cock")
+    "With the tip in her mouth, [the_person.title] swirls her tongue around it a few times. It feels so good."
+    "After a few seconds, she bravely pushes down a little further. She is clearly testing her limits, unsure of how far she can take it."
+    the_person "Mmmmmmm.... UNGLCK"
+    "[the_person.possessive_title] suddenly gags as she takes it a little to far. She quickly pulls off and catches her breath."
+    the_person "Stars! Sorry I..."
+    mc.name "It's okay. The tip is the most sensitive part, just do what you can, but don't force it."
+    the_person "Mmm... okay..."
+    $ mc.change_arousal(15) #50
+    $ mc.change_locked_clarity(40)
+    "[the_person.title] looks up at you as she licks at the tip again. She maintains the eye contact as she opens her mouth and starts to suck on the tip again."
+
 
     "Ellie now has oral positions unlocked."
     "Ellie may now approach MC once in a while when she is working on nanobot programs because working on sex related code is getting in her head and she needs some relief"
@@ -1048,6 +1148,11 @@ label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered 
     "If you offer to help her, you can do it right there in R&D (likes public sex), or find somewhere private."
     "Her reactions change based on her story and corruption progress. At extreme sluttiness, when she sees you walk up she may jump MC or if submissive, pull down bottoms and bend over her desk and beg."
     "Sex scene."
+    return
+
+# Love Scenes
+label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a date in his office.
+    pass
     return
 
 
