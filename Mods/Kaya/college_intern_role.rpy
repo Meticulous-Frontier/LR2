@@ -182,7 +182,7 @@ label hire_new_college_intern_label(the_person):
         $ new_person.set_mc_title(get_random_player_title(new_person))
         $ del new_person
         the_person "I'll pass this along to her. I'm sure she will be excited! Expect to see her on Saturday."
-        mc.name "Thank you [the_person.title]"
+        mc.name "Thank you [the_person.title]."
         $ mc.business.change_funds(-5000)
     else:
         "You decide against hiring any new interns for now."

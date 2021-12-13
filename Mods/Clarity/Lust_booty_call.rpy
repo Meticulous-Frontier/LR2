@@ -69,7 +69,7 @@ label lust_booty_call_intro_label():
         $ mc.business.add_mandatory_crisis(lust_booty_call_intro)
         return
     $ the_person = _return
-    "You decide to text [the_person.possessive_title]"
+    "You decide to text [the_person.possessive_title]."
     show screen person_info_ui(the_person)
     $ mc.start_text_convo(the_person)
     mc.name "Hey, you up?"
@@ -150,7 +150,7 @@ label lust_booty_call_label():
         "After looking at your contact list, you change your mind. Maybe another opportunity will present itself later."
         return
     $ the_person = _return
-    "You decide to text [the_person.possessive_title]"
+    "You decide to text [the_person.possessive_title]."
     show screen person_info_ui(the_person)
     $ mc.start_text_convo(the_person)
     mc.name "Hey, I'm bored. You DTF tonight?"

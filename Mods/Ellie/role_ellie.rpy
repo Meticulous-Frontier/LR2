@@ -267,7 +267,7 @@ label ellie_head_researcher_halfway_intro_label():
     if the_person == None:
         $ mc.business.add_mandatory_crisis(ellie_unnecessary_payment)
         return
-    "You feel your phone vibrate in your pocket. It's [the_person.possessive_title]"
+    "You feel your phone vibrate in your pocket. It's [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "I'm a genius. Meet me in your office!"
     mc.name "I'll be right there."
@@ -479,7 +479,7 @@ label ellie_work_welcome_monday_label():
     $ the_person = ellie
     $ ceo_office.show_background()
     "When you arrive at work on Monday morning, you head to your office."
-    "Shortly after you arrive, you hear a knock on your office door. It's [the_person.title]"
+    "Shortly after you arrive, you hear a knock on your office door. It's [the_person.title]."
     $ the_person.draw_person()
     ellie "Hello. I've been looking at things over the weekend like I told you I would."
     mc.name "Great. Have a seat."
@@ -810,10 +810,10 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ ceo_office.show_background()
     "You bring her to your office. After stepping inside, she closes the door and locks it."
     mc.name "Have a seat?"
-    the_person "Yessir."
+    the_person "Yes sir."
     $ the_person.draw_person(position = "sitting")
     mc.name "What can I do for you?"
-    the_person "Are bleu balls real?"
+    the_person "Are blue balls real?"
     "Wow she is getting right to the point. You have to smile at the way she pronounced blue though."
     mc.name "Wow, umm.. yeah, yeah they are."
     the_person "And... and they hurt?"
@@ -822,7 +822,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     mc.name "Yes, it was very hot getting you off with my fingers..."
     the_person "When... when I ran oft... did you get..."
     "She lowers her voice to a whisper."
-    the_person "Bleu balls?"
+    the_person "Blue balls?"
     "You stifle your laughter."
     mc.name "Umm, maybe a little bit, but I wouldn't worry about..."
     the_person "So you got me off, for nothing in return? And it actually hurt you?"
@@ -962,8 +962,8 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     mc.name "Hang on, let me get you some tissues and wet wipes."
     "You quickly walk back to your desk and pull some out and hand them to her."
     $ the_person.draw_person()
-    the_person "There's so much! Is it... is it because you had bleu balls?"
-    "You can't help but laugh this time, caught off guard by her prenounciation again."
+    the_person "There's so much! Is it... is it because you had blue balls?"
+    "You can't help but laugh this time, caught off guard by her pronunciation again."
     mc.name "No, that's about how much usually comes out."
     "You help her get cleaned up, then back into her outfit."
     $ the_person.apply_planned_outfit()
@@ -1119,7 +1119,7 @@ label ellie_loses_her_virginity_label():
     "Like a normal dinner date gain love based on how fancy wine is, how fancy dinner is, etc."
     "When finished, she asks MC back to her place, but says she is still scared."
     "Discover her place."
-    "She's nervous, you makeout with her for a bit to get her warmed up."
+    "She's nervous, you make out with her for a bit to get her warmed up."
     "Finally go back to her bedroom. She wants to strip for you."
     "Positive remarks give positive view on showing tits, showing ass, no clothes at all, and love gain."
     "Degrading remarks give negative opinion, but gain obedience and sluttiness."

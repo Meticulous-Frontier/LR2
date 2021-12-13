@@ -25,6 +25,10 @@ init 2 python:
         if quest_director.is_person_blocked(person):
             return False
 
+        if person.has_role(affair_role):
+            # she is happy with the affair, so she won't end relation
+            return False
+
         if time_of_day > 0 and time_of_day < 4:
             return person.relationship != "Single" and not (person.mc_title == "Stranger" or not person.title)
         return False
@@ -47,7 +51,7 @@ init 2 python:
 
     def get_so_relationship_worsen_person():
         potential_people = []
-        for person in [x for x in known_people_in_the_game(excluded_people = unique_character_list + quest_director.unavailable_people()) if not x.relationship == "Single"]:
+        for person in [x for x in known_people_in_the_game(excluded_people = unique_character_list + quest_director.unavailable_people()) if not x.relationship == "Single" and not x.has_role([affair_role])]:
             if person.relationship in relationship_stats and person.love > relationship_stats[person.relationship] - (person.get_opinion_score("cheating on men") * 5):
                 potential_people.append(person)
         return get_random_from_list(potential_people)
@@ -142,18 +146,10 @@ label so_relationship_quarrel_label(the_person):
         call talk_person(the_person) from _call_talk_person_so_relationship_quarrel
         return
 
-    if the_person.has_role(affair_role):
-        the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to split up."
-        the_person "We don't have to hide what's going on between us any more."
-        $ the_person.add_role(girlfriend_role)
-        mc.name "That's good news! So we don't have to sneak around anymore."
-        $ the_person.change_love(5)
-        the_person "Indeed, I would love to go out sometime..."
-    else:
-        $ the_person.change_happiness(-20)
-        the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to split up."
-        mc.name "I'm sorry to hear that, [the_person.title], just take it easy and take your time to process it."
-        the_person "Thanks, it's appreciated."
+    $ the_person.change_happiness(-20)
+    the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight and we decided to split up."
+    mc.name "I'm sorry to hear that, [the_person.title], just take it easy and take your time to process it."
+    the_person "Thanks, it's appreciated."
 
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None

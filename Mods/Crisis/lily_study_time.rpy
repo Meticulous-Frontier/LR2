@@ -183,7 +183,7 @@ label sister_failed_test_label():
                 call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False, ) from _lily_study_time_handjob_01
 
             "Ask for blowjob" if the_person.sluttiness >= 60 and mc.energy > 50:
-                the_person "Mmm, okay. I'll do that for you [the_person.mc_title]"
+                the_person "Mmm, okay. I'll do that for you [the_person.mc_title]."
                 $ the_person.draw_person(position = "kneeling1")
                 "[the_person.possessive_title] pulls the covers down and moves down to your legs. You lift her hips up when she pulls at your shorts, setting your erection free."
                 if the_person.has_taboo("sucking_cock"):

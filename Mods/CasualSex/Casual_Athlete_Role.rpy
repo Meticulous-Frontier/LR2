@@ -570,7 +570,7 @@
 #         "Leave her drink alone.":
 #             "You decide not to test a dose of serum out on [the_person.title] and take the shake back to her."
 #             $ the_person.draw_person(emotion = "happy")
-#             the_person "Thanks [the_person.mc_title]"
+#             the_person "Thanks [the_person.mc_title]."
 #             mc.name "No problem at all."
 #             $ clear_scene()
 #

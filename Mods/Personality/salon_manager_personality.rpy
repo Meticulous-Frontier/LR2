@@ -50,7 +50,7 @@ label salon_manager_greetings(the_person):
         the_person "I've just opened, so what can I do for you today? A wash or a trim? A shave perhaps?"
         mc.name "Nothing like that today, I own a company downtown."
         mc.name "My employees need to look perfect and I want to pay for their expenses, is that possible?"
-        the_person "No problem, just give me your credit card details and I will charge it whenever you sent someone by."
+        the_person "No problem, just give me your credit card details and I will charge it whenever you send someone by."
         "You smile at [the_person.name] and hand over your company credit card."
         the_person "Perfect! All done."
         $ the_person.event_triggers_dict["introduced"] = 1

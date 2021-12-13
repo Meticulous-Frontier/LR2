@@ -1445,6 +1445,8 @@ init -1 python:
         else:
             renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier)
             renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
+
+        renpy.pause(.3) # slight pause between animations
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
@@ -1662,7 +1664,7 @@ init -1 python:
             added = True
 
         if added:
-            # special condition if she hates kissing, but becomes your girlfried or paramour she would allow kissing
+            # special condition if she hates kissing, but becomes your girlfriend or paramour she would allow kissing
             if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role]:
                 self.increase_opinion_score("kissing")
 
@@ -1802,7 +1804,8 @@ init -1 python:
         if not self.has_cum_fetish():
             self.outfit.remove_all_cum()
 
-        if (self.should_wear_uniform() and not self.is_wearing_uniform()) \
+        if len(self.location.people) > 1 \
+            or (self.should_wear_uniform() and not self.is_wearing_uniform()) \
             or (self.outfit.slut_requirement > self.sluttiness):
             self.apply_planned_outfit()
             if draw_person:

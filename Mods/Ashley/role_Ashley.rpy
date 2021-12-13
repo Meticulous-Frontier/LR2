@@ -1325,7 +1325,7 @@ label ashley_second_concert_date_label():
                     "Take her raw":
                         $ date_outcome = "raw sex"
                         $ mc.condom = False
-                        "You growl at [the_person.possessive_title]"
+                        "You growl at [the_person.possessive_title]."
                         mc.name "You let me worry about [stephanie.title]."
                         "Without waiting further response, you line yourself up and push your cock into [the_person.title]'s drenched pussy."
                     "Put on a condom":
@@ -1491,7 +1491,7 @@ label ashley_second_concert_date_label():
         the_person "You should go."
         "There is probably no way for you to patch things up right now... You decide to do as she asks."
         "You gather your stuff and leave."
-        $ mc.business.add_mandatory_crisis(ashley_steph_second_date_confrontation_date)
+        $ mc.business.add_mandatory_crisis(ashley_steph_second_date_confrontation)
         $ ashley.event_triggers_dict["caught_cheating"] = True
         #TODO make a mandatory event to trigger in a day or two where you and stephanie make up.
     else:
@@ -1557,7 +1557,7 @@ label ashley_steph_second_date_confrontation_label():
 label ashley_blows_during_meeting_label():
     $ scene_manager = Scene()
     $ mc.arousal = 0
-    "You get a text from [stephanie.possessive_title]"
+    "You get a text from [stephanie.possessive_title]."
     $ mc.start_text_convo(stephanie)
     stephanie "Hey, can you meet me in your office? I just found something I wanted to talk to you about."
     mc.name "Sure, I'll be right there."
@@ -1625,7 +1625,7 @@ label ashley_blows_during_meeting_label():
     mc.name "Holy fuck, you couldn't pick a different time to do that?"
     "[ashley.title] looks up at you from below your desk, a bit of cum she didn't manage to swallow dribbling down her chin."
     ashley "Sure, but it wouldn't have been as fun otherwise."
-    $ the_person.apply_outfit(the_person.planned_outfit)
+    $ ashley.apply_outfit(ashley.planned_outfit)
     $ scene_manager.update_actor(ashley, position = "stand3", display_transform = character_center_flipped(yoffset = 0, zoom = 1.0))
     "[ashley.possessive_title] gets up and straightens her outfit."
     ashley "Until next time..."
@@ -1640,7 +1640,7 @@ label ashley_sneaks_over_label():
     "After getting through some emails, you phone vibrates."
     $ mc.start_text_convo(the_person)
     the_person "Hey, are you busy?"
-    mc.name "Not really. Whatsup?"
+    mc.name "Not really. Whats up?"
     the_person "Good. I'm outside, can I come in?."
     $ mc.end_text_convo()
     "She's what? How does she even know where you live?"
@@ -1668,7 +1668,7 @@ label ashley_sneaks_over_label():
         the_person "I get it, that you and Steph are like, banging each other's brains out every chance you get."
         the_person "I understand that, I really do. But tonight... I'm here. Maybe for one night, we could just like, pretend?"
         the_person "I know I'm just a booty call to you, but can I spend the night tonight? And treat me the way you treat her?"
-    "Obvously [the_person.possessive_title] has been having jealousy issues for a while, but you assumed they were mostly physical needs."
+    "Obviously [the_person.possessive_title] has been having jealousy issues for a while, but you assumed they were mostly physical needs."
     "Now, she's exposing her real feelings, and it seems she's caught feelings for you that run deeper than just sex."
     $ mc.energy = mc.max_energy
     $ mc.change_locked_clarity(20)

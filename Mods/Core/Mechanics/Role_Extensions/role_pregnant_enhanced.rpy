@@ -1,4 +1,4 @@
-init 2 python:
+init 3 python:
     def validate_pregnancy_crisis_events():
         for crisis in (mc.business.mandatory_crises_list + mc.business.mandatory_morning_crises_list):
             if "Pregnancy" in crisis.name:
@@ -69,13 +69,25 @@ init 2 python:
             return # she is already giving birth
 
         person.event_triggers_dict["preg_old_schedule"] = clone_schedule(person)
-        person.set_schedule(person.home, times = [0,1,2,3,4])
+        person.set_schedule(purgatory, times = [0,1,2,3,4])
 
         target_label = "pregnant_finish" if person.is_mc_father() else "silent_pregnant_finish"
 
         preg_finish_action = Action("Pregnancy Finish", preg_finish_requirement, target_label, args = person, requirement_args = [person, day + renpy.random.randint(4,7)])
         mc.business.add_mandatory_morning_crisis(preg_finish_action)
         return
+
+    # wrap original function and set schedule to purgatory
+    def pregnant_finish_announce_person_extended(org_func):
+        def pregnant_finish_announce_person_wrapper(person):
+            org_func(person)
+            # make her truly disappear from game (she's in the hospital)
+            person.set_schedule(purgatory, times=[0,1,2,3,4])
+            return
+
+        return pregnant_finish_announce_person_wrapper
+
+    pregnant_finish_announce_person = pregnant_finish_announce_person_extended(pregnant_finish_announce_person)
 
     def become_pregnant(person, mc_father = True, progress_days = 0): # Called when a girl is knocked up. Establishes all of the necessary bits of info.
         # prevent issues when function is called for already pregnant person / clones are sterile

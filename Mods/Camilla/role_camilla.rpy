@@ -111,7 +111,7 @@ label camilla_spot_at_bar_label(the_person):
     the_person "Yes, I remember. The small business owner."
     mc.name "I noticed you at the bar by yourself. Mind if I sit with you for a while?"
     the_person "That's fine."
-    "You sit down in a bar stool next to [the_person.possessive_title]"
+    "You sit down in a bar stool next to [the_person.possessive_title]."
     mc.name "So how long have you been working as a lifestyle coach?"
     the_person "Honestly, not too long. I mainly just do it as an extra source of income to supplement what my hubby brings in."
     "Ah, so she is married. You should probably keep things low key for now."
@@ -140,7 +140,7 @@ label camilla_spot_at_bar_label(the_person):
     "You aren't sure... is he trying to say she's... available? Maybe since her husband works late she picks up guys at the bar..."
     "You file it away in your brain. Maybe you could come back and have drinks with her again. A bar would be an ideal place to dose her with a few serums too..."
     "You get up and say goodbye to [the_person.possessive_title]."
-    mc.name "Thank you for the conversation. I'll see you around [the_person.title]"
+    mc.name "Thank you for the conversation. I'll see you around [the_person.title]."
     the_person "Take care [the_person.mc_title]."
     "You can now have drinks with [the_person.title] at the bar in the evenings."
     $ camilla.event_triggers_dict["get_drinks"] = True
@@ -614,7 +614,7 @@ label camilla_bathroom_blowjob_label(the_person):
 
 label camilla_blowjob_text_label(the_person):
     $ the_person.draw_person()
-    "You walk up to [the_person.possessive_title]"
+    "You walk up to [the_person.possessive_title]."
 
     mc.name "So... how did it go with the pictures?"
     "[the_person.possessive_title] gives you a quick smile."

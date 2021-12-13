@@ -75,6 +75,21 @@ init -1 python:
 
     Outfit.can_remove_panties = can_remove_panties
 
+    def can_add_upper_enhanced(self, new_clothing):
+        allowed = True
+        for cloth in self.upper_body:
+            if (cloth.layer == 0 and cloth.name == new_clothing.name) or (cloth.layer > 0 and cloth.layer == new_clothing.layer):
+                allowed = False
+
+        if new_clothing.has_extension: #It's a dress with a top and a bottom, make sure we can add them both!
+            for cloth in self.lower_body:
+                if cloth.layer == new_clothing.has_extension.layer:
+                    allowed = False
+
+        return allowed
+
+    Outfit.can_add_upper = can_add_upper_enhanced
+
     def has_overwear(self): #Returns true if the outfit has layer 2 clothing items for upper and lower body.
         if any(x in [nightgown_dress] for x in self.upper_body):
             return False
@@ -138,8 +153,8 @@ init -1 python:
     def full_access(self):
         return (self.tits_visible() and self.tits_available() and not self.wearing_bra()
             and self.vagina_visible() and self.vagina_available() and not self.wearing_panties()
-            and not any(x.layer >= 2 for x in self.upper_body)
-            and not any(x.layer >= 2 for x in self.lower_body))
+            and not any(x.layer >= 2 for x in self.upper_body if not x.half_off)
+            and not any(x.layer >= 2 for x in self.lower_body if not x.half_off))
 
     Outfit.full_access = full_access
 
@@ -338,3 +353,15 @@ init 6 python:
         return False
 
     Outfit.has_hose = has_hose
+
+    # enhances original function to only return items
+    # on layer 1 and higher
+    def get_tit_strip_list_extended(org_func):
+        def get_tit_strip_list_wrapper(outfit, visible_enough = True):
+            result = org_func(outfit, visible_enough)
+            # only return items not on layer 0 (for now cincher, heart_pasties)
+            return [x for x in result if x.layer != 0]
+
+        return get_tit_strip_list_wrapper
+
+    Outfit.get_tit_strip_list = get_tit_strip_list_extended(Outfit.get_tit_strip_list)

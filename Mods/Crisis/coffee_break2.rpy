@@ -14,7 +14,7 @@ init 2 python:
 
 label coffee_break2_action_label:
     $ (person_one, person_two, person_three) = get_random_employees(3, slut_required = 20)
-    if person_one is None:
+    if not (isinstance(person_one, Person) and isinstance(person_two, Person) and isinstance(person_three, Person)):
         return
 
     $ mc.change_location(lobby)
