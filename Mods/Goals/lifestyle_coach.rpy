@@ -16,7 +16,7 @@ init -1 python:
         return False
 
     def lifestyle_coach_choose_sexy_goal_requirement(the_person):
-        if the_person.sluttiness > 40 and get_lust_tier() > 2 and mc.energy > 80 and the_person.energy > 80:
+        if the_person.sluttiness > 40 and mc.energy > 80 and the_person.energy > 80:
             if the_person.location == mall:
                 return True
         return False
