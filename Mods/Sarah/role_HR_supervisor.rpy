@@ -1071,7 +1071,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         return
 
     if get_HR_director_unlock("missionary on desk") == False:
-        if (the_person.sluttiness + the_person.get_opinion_score("vaginal sex") * 5) >= 60:
+        if (the_person.sluttiness + the_person.get_opinion_score("vaginal sex") * 5) >= 60 and (the_person != sarah or sarah_get_sex_unlocked()):
             the_person "Hey... you know what would be really hot?"
             "You feel yourself raise your eyebrow in response. This should be good!"
             the_person "What if I just lay down on your desk and you have your way with me, right here in your office?"
@@ -1110,7 +1110,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             return
 
     if get_HR_director_unlock("bent over desk") == False:
-        if (the_person.sluttiness + the_person.get_opinion_score("doggy style sex") * 5) >= 70:
+        if (the_person.sluttiness + the_person.get_opinion_score("doggy style sex") * 5) >= 70 and (the_person != sarah or sarah_get_sex_unlocked()):
             if the_person.obedience > 130:
                 mc.name "Come here, I'm going to use you the way I see fit today."
                 if the_person.get_opinion_score("being submissive"):
