@@ -1,7 +1,7 @@
 init 3 python:
     def lust_booty_call_intro_requirement():
         if mc_asleep() and mc.energy > 80:
-            if len(lust_get_booty_call_list()) >= 3 and get_lust_tier() > 2:
+            if len(lust_get_booty_call_list()) >= 3:
                 #TODO disable if we have  sleepover planned
                 return True
         return False

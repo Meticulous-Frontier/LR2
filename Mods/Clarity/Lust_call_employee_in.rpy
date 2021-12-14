@@ -2,7 +2,7 @@ init 4 python:
     def lust_blowjob_intro_requirement():
         if mc.business.is_open_for_business(): #Only trigger if people are in the office.
             if mc.is_at_work(): #Check to see if the main character is at work
-                if len(get_willing_lust_blowjob_girl_list()) > 2 and get_lust_tier() > 2:
+                if len(get_willing_lust_blowjob_girl_list()) > 2:
                     return True
         return False
 
