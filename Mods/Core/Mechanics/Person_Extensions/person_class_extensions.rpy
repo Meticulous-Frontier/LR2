@@ -416,7 +416,7 @@ init -1 python:
             adjective = get_random_from_list(["large", "voluptuous", "colossal", "huge"])
             descriptor = get_random_from_list(["breasts", "tits", "jugs", "melons"])
 
-        return string.format("{adj} {desc}", adj = adjective, desc = descriptor)
+        return "{adj} {desc}".format(adj = adjective, desc = descriptor)
 
     Person.tits_description = property(person_tits_description_string, None, None, "Property that returns tits description for use in dialogs.")
 
