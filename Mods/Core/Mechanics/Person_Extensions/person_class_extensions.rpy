@@ -398,6 +398,28 @@ init -1 python:
 
     Person.pubes_description = property(person_pubes_description_string, None, None, "Property that returns pussy pubes description for use in dialogs.")
 
+    def person_tits_description_string(self):
+        rank = rank_tits(self.tits)
+        adjective = "perky"
+        descriptor = "tits"
+
+        if rank == 0:
+            adjective = get_random_from_list(["flat", "minute", "tiny"])
+            descriptor = get_random_from_list(["titties", "tits", "nipples"])
+        elif rank >= 1 and rank <= 3:
+            adjective = get_random_from_list(["firm", "perky", "small"])
+            descriptor = get_random_from_list(["breasts", "tits", "boobs"])
+        elif rank >= 4 and rank <= 6:
+            adjective = get_random_from_list(["shapely", "large", "big", "generous"])
+            descriptor = get_random_from_list(["breasts", "tits", "bosoms"])
+        elif rank >= 7 and rank <= 9:
+            adjective = get_random_from_list(["large", "voluptuous", "colossal", "huge"])
+            descriptor = get_random_from_list(["breasts", "tits", "jugs", "melons"])
+
+        return string.format("{adj} {desc}", adj = adjective, desc = descriptor)
+
+    Person.tits_description = property(person_tits_description_string, None, None, "Property that returns tits description for use in dialogs.")
+
     ## CHANGE HEIGHT EXTENSION
     # Returns True when the persons height has changed; otherwise False
     # chance is probability percentage that height change for amount will occur (used by serums)
