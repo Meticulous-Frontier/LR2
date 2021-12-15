@@ -290,9 +290,9 @@ label girlfriend_wakeup_spooning_label(the_person):
     "She is still sleeping, but her skin is setting off electric sparks everywhere it is touching yours."
     $ mc.change_locked_clarity(50)
     if the_person.has_large_tits():
-        "Your hands cup and squeeze one of her breasts. It's so full and hot, they feel so good in your hands."
+        "Your hands cup and squeeze one of her [the_person.tits_description]. It's so full and hot, they feel so good in your hands."
     else:
-        "Your hand cups one of her breasts. It's so perky and warm, it feels good in your hand."
+        "Your hand cups one of her [the_person.tits_description]. It's so soft and warm, it feels good in your hand."
     the_person "Mmmmmmmm......"
     "[the_person.title] moans but doesn't stir. Maybe you could surprise her with a little good morning dicking."
     menu:

@@ -57,9 +57,9 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
                 $ the_girl.cum_on_tits()
                 $ deepthroat.redraw_scene(the_girl)
                 if the_girl.has_large_tits():
-                    "After her orgasm subsides, she lets the cum dribble down her chin on to her nice breasts, giving you a wink."
+                    "After her orgasm subsides, she lets the cum dribble down her chin on to her nice [the_girl.tits_description], giving you a wink."
                 else:
-                    "After her orgasm subsides, she lets the cum dribble down her chin on to her perky small breasts, giving you a wink."
+                    "After her orgasm subsides, she lets the cum dribble down her chin on to her [the_girl.tits_description], giving you a wink."
             else:
                 "After her orgasm subsides, she moves her head to the side, letting the cum on dribble on the floor."
 

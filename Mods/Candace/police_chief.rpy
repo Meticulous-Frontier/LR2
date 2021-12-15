@@ -201,7 +201,7 @@ label police_chief_flirt_response_high(the_person):
             $ mc.change_locked_clarity(15)
             if the_person.has_large_tits(): #Bounces her tits for you
                 $ the_person.draw_person(the_animation = tit_bob)
-                "[the_person.possessive_title] bites her lip sensually and grabs her boobs, jiggling them for you."
+                "[the_person.possessive_title] bites her lip sensually and grabs her [the_person.tits_description], jiggling them for you."
 
             else: #No big tits, so she can't bounce them (as much
                 "[the_person.possessive_title] bites her lip sensually and looks you up and down, as if mentally undressing you."

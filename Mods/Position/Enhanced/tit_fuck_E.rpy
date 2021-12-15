@@ -27,7 +27,7 @@ label scene_SB_Titfuck_Kneeling_1(the_girl, the_location, the_object):
 
 #The second position label
 label scene_SB_Titfuck_Kneeling_2(the_girl, the_location, the_object):
-    "You run your hand through [the_girl.title]'s hair while she bounces her mammaries up and down."
+    "You run your hand through [the_girl.title]'s hair while she bounces her [the_girl.tits_description] up and down."
     "You move your hand down to her shoulder and grasp it firmly, stopping her motion. You begin to buck your hips, giving her a break from her motions."
     "Her hands move to your ass, and you can feel her gently urging you as you thrust up against her."
     if the_girl.has_large_tits():   #Must have a certain cup size

@@ -119,7 +119,7 @@ label scene_piledriver_anal_2(the_girl, the_location, the_object):
                 "With both hands, you take hold of [the_girl.title]'s generous tit flesh."
                 "She moans as you pinch and pull her nipples as you slowly fuck her ass."
             else:
-                "With both hands, you grab [the_girl.title]'s perky tits, holding them entirely in your hands."
+                "With both hands, you grab [the_girl.title]'s [the_girl.tits_description], holding them entirely in your hands."
                 "She moans as you rub her nipples with your thumbs as you slowly fuck her ass."
         "Pin her down hard":
             "It's time to see how flexible she is. With her ankles in your hands, you push your body down as far as you can, pinning her ankles to the [the_object.name]."

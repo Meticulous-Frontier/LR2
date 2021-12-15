@@ -407,7 +407,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                     if the_girl.outfit.tits_available():
                         "You plant a hand on [the_girl.possessive_title]'s nice, soft tits and squeeze. Her pliant flesh melts in your hand, and the heat coming form her skin feels amazing."
                         the_girl "Mmm, [the_girl.mc_title]. Your hands feel so good."
-                        "You enjoy teasing her supple breasts for a few moments. You hold one in place while you fuck her, feeling the weight of it sway with each motion."
+                        "You enjoy teasing her supple [the_girl.tits_description] for a few moments. You hold one in place while you fuck her, feeling the weight of it sway with each motion."
                         $ the_girl.change_arousal(5)
                     else:
                         $ top_clothing = the_girl.outfit.get_upper_top_layer()
@@ -423,7 +423,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         return
                 else:
                     if the_girl.outfit.tits_available():
-                        "You run a hand over [the_girl.possessive_title]'s dainty tits. You pinch and pull at one of her nipples."
+                        "You run a hand over [the_girl.possessive_title]'s [the_girl.tits_description]. You pinch and pull at one of her nipples."
                         the_girl "Oh! Easy there, it's sensitive."
                         "You move to her other nipple ad give it similar treatment. She gasps at the work of your strong hands on her chest."
                         $ the_girl.change_arousal(5)
@@ -434,7 +434,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                             return
                     else:
                         $ top_clothing = the_girl.outfit.get_upper_top_layer()
-                        "You try and feel up [the_girl.possessive_title]'s little tits, but her [top_clothing.name] stops you from getting much more than a handful of fabric."
+                        "You try and feel up [the_girl.possessive_title]'s [the_girl.tits_description], but her [top_clothing.name] stops you from getting much more than a handful of fabric."
                         $ top_clothing = None
                         "You give up and focus on fucking her instead."
                         $ the_girl.change_arousal(5)

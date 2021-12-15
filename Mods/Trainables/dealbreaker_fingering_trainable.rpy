@@ -167,12 +167,12 @@ label train_dealbreaker_fingering_label(the_person):
         $ mc.change_locked_clarity(10)
         if the_person.has_large_tits():
             if the_person.outfit.tits_available():
-                "You reach your free hand up to [the_person.title]'s bare tits and cup one, massaging it while you finger her."
+                "You reach your free hand up to [the_person.title]'s bare [the_person.tits_description] and cup one, massaging it while you finger her."
             else:
-                "You reach your free hand up to [the_person.title]'s tits and squeeze one through her clothing, enjoying its size and weight."
+                "You reach your free hand up to [the_person.title]'s large breasts and squeeze one through her clothing, enjoying its size and weight."
         else:
             if the_person.outfit.tits_available():
-                "You paw at [the_person.possessive_title]'s small tits with your free hand, running your thumb over one of her nipples as you continue to finger her."
+                "You paw at [the_person.possessive_title]'s [the_person.tits_description] with your free hand, running your thumb over one of her nipples as you continue to finger her."
                 "Her body responds, the nipple hardening as you play with it."
             else:
                 "You paw at [the_person.possessive_title]'s small tits through her clothing with your free hand."

@@ -1141,9 +1141,9 @@ label break_strip_outfit_taboos(the_person):
         "Once she's done stripping [the_person.possessive_title] has her nice [the_person.tits] tits out on display."
         if the_person.has_taboo("bare_tits"):
             if the_person.has_large_tits():
-                "She makes a hopeless attempt to cover her large tits with her hands, but comes to the realization it's pointless."
+                "She makes a hopeless attempt to cover her [the_person.tits_description] with her hands, but comes to the realization it's pointless."
             else:
-                "She tries to hide her tits from you with her hands, but quickly realizes how impractical that would be."
+                "She tries to hide her [the_person.tits_description] from you with her hands, but quickly realizes how impractical that would be."
             "Soon enough she doesn't even mind having them out."
             $ the_person.break_taboo("bare_tits")
             $ taboo_broken = True

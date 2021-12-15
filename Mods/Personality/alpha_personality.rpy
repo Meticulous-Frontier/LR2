@@ -566,7 +566,7 @@ label alpha_flirt_response_high(the_person):
             the_person "Well I wouldn't want you to go into a frenzy. You'll just have to find a way to get me out of this outfit..."
             if the_person.has_large_tits(): #Bounces her tits for you
                 $ the_person.draw_person(the_animation = tit_bob)
-                "[the_person.possessive_title] bites her lip sensually and rubs her boobs, while pinching her nipples."
+                "[the_person.possessive_title] bites her lip sensually and rubs her [the_person.tits_description], while pinching her nipples."
 
             else: #No big tits, so she can't bounce them
                 "[the_person.possessive_title] bites her lip sensually and looks you up and down, as if she's mentally undressing you."
@@ -1388,9 +1388,9 @@ label alpha_bare_tits_taboo_break(the_person, the_clothing):
     if the_person.effective_sluttiness() > (40 - the_person.get_opinion_score("showing her tits") * 5):
         the_person "Oh, so you want to take a look at my breasts?"
         if the_person.has_large_tits():
-            "She bounces her chest for you, jiggling the big tits hidden underneath her [the_clothing.display_name]."
+            "She bounces her chest for you, jiggling the [the_person.tits_description] hidden underneath her [the_clothing.display_name]."
         else:
-            "She bounces her chest and gives her small tits a little jiggle."
+            "She bounces her chest and gives her [the_person.tits_description] a little jiggle."
         the_person "Well it would be a shame not to let you get a glimpse, right? I've been waiting for you to ask."
         mc.name "Let's get that [the_clothing.display_name] off so I can see them then."
 

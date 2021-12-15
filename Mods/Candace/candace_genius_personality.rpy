@@ -424,7 +424,7 @@ label genius_flirt_response_low(the_person):
                 # Her tits are out
                 if the_person.has_large_tits():
                     the_person "Thanks, but I really wish my uniform included a bra."
-                    the_person "I know most men don't think about it, but I could use some support for my tits."
+                    the_person "I know most men don't think about it, but I could use some support for my [the_person.tits_description]."
                 else:
                     the_person "Thanks, but I really wish my uniform included an actual top."
                     the_person "When the AC is running my nipples could probably cut glass!"
@@ -554,7 +554,7 @@ label genius_flirt_response_high(the_person):
             #She's into turning you on.
             if the_person.has_large_tits():
                 $ the_person.draw_person(the_animation = tit_bob)
-                "[the_person.possessive_title] smiles mischievously at you and bounces her tits up and down."
+                "[the_person.possessive_title] smiles mischievously at you and bounces her [the_person.tits_description] up and down."
                 the_person "Interested in getting a closer look at these girls?"
             else:
                 "[the_person.possessive_title] smiles mischievously and wiggles her hips."
@@ -1335,9 +1335,9 @@ label genius_bare_tits_taboo_break(the_person, the_clothing):
     if the_person.effective_sluttiness() > (40 - the_person.get_opinion_score("showing her tits") * 5):
         the_person "So you want to see my tits, huh? I bet you're going to love them."
         if the_person.has_large_tits():
-            "She shakes her chest for you, jiggling the large tits hidden underneath her [the_clothing.display_name]."
+            "She shakes her chest for you, jiggling the [the_person.tits_description] hidden underneath her [the_clothing.display_name]."
         else:
-            "She shakes her chest and gives her small tits a little jiggle."
+            "She shakes her chest and gives her [the_person.tits_description] a little jiggle."
         mc.name "I bet I will, I just have to get your [the_clothing.display_name] out of the way."
         the_person "Go for it then, I'm not going to stop you."
 
@@ -1356,7 +1356,7 @@ label genius_bare_tits_taboo_break(the_person, the_clothing):
             mc.name "You don't have anything to be nervous about. Most girls would kill to have tits as big as yours, you should be proud to show them off."
         else:
             mc.name "You don't have anything to be nervous about. Most girls would kill to have tits as cute as yours."
-        "She takes a deep breath and shakes out her shoulders, inadvertently jiggling her tits while she's at it."
+        "She takes a deep breath and shakes out her shoulders, inadvertently jiggling her [the_person.tits_description] while she's at it."
         the_person "Okay, fuck it! Let's do it!"
     return
 

@@ -75,13 +75,13 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
     "Her ass makes a few lewd squelching noises from her aggressive fucking. Her buttery smooth puckered hole strokes your erection with every pump."
     if the_girl.has_large_tits():
         if the_girl.outfit.tits_visible():
-            "Her large, unconstrained tits bounce up and down with each stroke."
+            "Her large, unconstrained [the_girl.tits_description] bounce up and down with each stroke."
             the_girl "Fuck, hold onto these!"
             "[the_girl.possessive_title] reaches down and grabs your hands. She brings them up to her tits and plants them there."
             "She moans and grinds your hands into her breasts, then puts her hands on your chest and focuses on fucking you."
         else:
             $ the_clothing = the_girl.outfit.get_upper_visible()[0]
-            "Her large tits are barely contained by her [the_clothing.name]. You watch them bounce around as she fucks you vigorously."
+            "Her [the_girl.tits_description] are barely contained by her [the_clothing.name]. You watch them bounce around as she fucks you vigorously."
             menu:
                 "Pull her [the_clothing.name] off":
                     "You reach up and start to pull at her [the_clothing.name]. She stops fucking you for a moment as she moves her arms to give you better access."
@@ -105,13 +105,13 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
 
     else:
         if the_girl.outfit.tits_visible():
-            "She reaches up and grabs onto one of her own small tits, squeezing it while she rides you."
+            "She reaches up and grabs onto one of her own [the_girl.tits_description], squeezing it while she rides you."
             the_girl "Ah!"
             "You decide to get in on the action. You reach up and grab her other breast."
             "She moans as you rub and tweak her breasts. She puts her hands on your chest and focuses on fucking you."
         else:
             $ the_clothing = the_girl.outfit.get_upper_visible()[0]
-            "She reaches up and grabs onto one of her small tits through her [the_clothing.name]. She kneads it through the fabric and moans loudly while she rides you."
+            "She reaches up and grabs onto one of her [the_girl.tits_description] through her [the_clothing.name]. She kneads it through the fabric and moans loudly while she rides you."
             the_girl "Ah!"
             menu:
                 "Pull her [the_clothing.name] off":

@@ -148,7 +148,7 @@ label strip_club_evaluate_stripper(the_person):
     "She spins and poses for you, and you can easily imagine a crowd responding with whoops and cheers."
     if the_person.has_large_tits():
         if the_person.outfit.tits_available():
-            "As the music builds, [the_person.title]'s dance becomes more energetic. Her big tits bounce and jiggle in rhythm with her movements."
+            "As the music builds, [the_person.title]'s dance becomes more energetic. Her [the_person.tits_description] bounce and jiggle in rhythm with her movements."
         else:
             "As the music builds, [the_person.title]'s dance becomes more energetic. Her big tits bounce and jiggle, looking almost desperate to escape her clothing."
     else:

@@ -56,9 +56,9 @@ label lily_morning_encounter_enhanced_label():
         if the_person.outfit.wearing_panties():
             if not the_person.outfit.wearing_bra():
                 if the_person.has_large_tits():
-                    "She moves her hands up to her tits, covering them, but also creating some impressive cleavage in the process."
+                    "She moves her hands up to her [the_person.tits_description], covering them, but also creating some impressive cleavage in the process."
                 else:
-                    "She covers her breasts with her hands, but leaves the rest of her body exposed to you."
+                    "She covers her [the_person.tits_description] with her hands, but leaves the rest of her body exposed to you."
         else:
             if not the_person.outfit.wearing_bra():
                 "She cups one hand on her pussy while stretching the other arm across her breasts."

@@ -271,7 +271,7 @@ label breeding_fetish_happy_breeder_crisis_label():
                 "[the_person.possessive_title] smiles up at you."
                 the_person "Anything for you, [the_person.mc_title]."
                 "[the_person.possessive_title] looks up at you while she scoots closer to you, until her body is up against yours. She uses her hand to point your cock straight up while she moves it in position between her amazingly soft tits."
-                "Once in position, she uses her hands to push her tits together, squashing your prick in her heavenly soft tit-flesh."
+                "Once in position, she uses her hands to push her [the_person.tits_description] together, squashing your prick in her heavenly soft tit-flesh."
                 $ mc.change_locked_clarity(30)
                 "[the_person.possessive_title] starts to move up and down. Now and then when her tits are at the base of your dick she licks the sensitive tip."
                 "The view of [the_person.possessive_title] on her knees before you, happy with you between her tits is extremely arousing. It isn't long until you are fully erect."

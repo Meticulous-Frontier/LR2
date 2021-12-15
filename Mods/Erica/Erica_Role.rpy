@@ -1656,7 +1656,7 @@ label erica_yoga_event_intro_label():
     if yoga_assistant.has_large_tits():
         if yoga_assistant is sarah:
             yoga_assistant "Yeah... I recently, umm... filled out a bit... Running long distances isn't really practical with these!"
-            "[yoga_assistant.title] gives her pleasantly large chest a shake."
+            "[yoga_assistant.title] gives her pleasantly [yoga_assistant.tits_description] a shake."
         else:
             yoga_assistant "I've been keeping in shape by doing some exercises, but I'm not there yet."
             the_person "Hey, I'm glad you're still taking steps to stay fit though. You gotta work with the assets you've been given!"

@@ -2509,17 +2509,17 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
                 "Grope [the_person_one.title]'s tits" if the_person_one.tits_available():
                     "You get behind [the_person_one.possessive_title]. You run your hands slowly around he neck, collar, and down until they rest on her chest."
                     if the_person_one.has_large_tits():
-                        "You grope her sizable tits in your hands. The heat and softness of them feel amazing. She cries out when you pinch her nipples."
+                        "You grope her [the_person_one.tits_description] in your hands. The heat and softness of them feel amazing. She cries out when you pinch her nipples."
                     else:
-                        "You grope her perky tits in your hands. The heat and firmness of them feel amazing. She cries out when you pinch her nipples."
+                        "You grope her [the_person_one.tits_description] in your hands. The heat and firmness of them feel amazing. She cries out when you pinch her nipples."
                     the_person_one "Ah! Oh god that feels nice..."
                     $ the_person_one.change_arousal(5)
                 "Grope [the_person_two.title]'s tits" if the_person_two.tits_available():
                     "You get behind [the_person_two.possessive_title]. You run your hands slowly around he neck, collar, and down until they rest on her chest."
                     if the_person_two.has_large_tits():
-                        "You grope her sizable tits in your hands. The heat and softness of them feel amazing. She cries out when you pinch her nipples."
+                        "You grope her [the_person_two.tits_description] in your hands. The heat and softness of them feel amazing. She cries out when you pinch her nipples."
                     else:
-                        "You grope her perky tits in your hands. The heat and firmness of them feel amazing. She cries out when you pinch her nipples."
+                        "You grope her [the_person_two.tits_description] in your hands. The heat and firmness of them feel amazing. She cries out when you pinch her nipples."
                     the_person_two "Oh! God boss don't make me lose again please!"
                     $ the_person_two.change_arousal(5)
                 "Just watch":
