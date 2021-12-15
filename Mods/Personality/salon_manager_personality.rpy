@@ -28,7 +28,7 @@ init 1400 python:
 label salon_manager_greetings(the_person):
     $ the_person.draw_person(emotion = "happy")
 
-    if the_person.mc_title == "Stranger":
+    if the_person.event_triggers_dict.get("introduced", 0) == 0:
         "You enter the hair salon. A beautiful young woman walks up to you and introduces herself."
         $ the_person.draw_person(position = "stand2", emotion = "happy")
         the_person "Hello there sir! Welcome to the Sweet Pixie Salon!"
