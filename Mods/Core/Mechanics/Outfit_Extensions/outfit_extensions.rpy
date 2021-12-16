@@ -35,6 +35,18 @@ init -1 python:
 
     Outfit.__ne__ = outfit_ne
 
+    # compare if clothing items match in each outfit (ignores accessories)
+    def matches(self, other):
+        current_clothing = self.upper_body + self.lower_body + self.feet
+        other_clothing = other.upper_body + other.lower_body + other.feet
+
+        if len(current_clothing) != len(other_clothing):
+            return False
+
+        return sorted(current_clothing) == sorted(other_clothing)
+
+    Outfit.matches = matches
+
     ######################################
     # Extension Methods For Outfit Class #
     ######################################

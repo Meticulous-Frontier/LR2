@@ -272,8 +272,23 @@ init -1 python:
     def set_person_maid_outfit(self, value):
         self._maid_outfit = value
 
-    Person.maid_outfit = property(get_person_maid_outfit, set_person_maid_outfit, None, "Store maid outfit for the day.")
+    def del_person_maid_outfit(self):
+        del self._maid_outfit
 
+    Person.maid_outfit = property(get_person_maid_outfit, set_person_maid_outfit, del_person_maid_outfit, "Store maid outfit for the day.")
+
+    def get_person_location_outfit(self):
+        if not hasattr(self, "_location_outfit"):
+            self._location_outfit = None
+        return self._location_outfit
+
+    def set_person_location_outfit(self, value):
+        self._location_outfit = value
+
+    def del_person_location_outfit(self):
+        del self._location_outfit
+
+    Person.location_outfit = property(get_person_location_outfit, set_person_location_outfit, del_person_location_outfit, "Store outfit for specific location (only valid 1 timeslot).")
 
     # change idle position based on location
     def get_person_idle_pose(self):
@@ -904,6 +919,7 @@ init -1 python:
             serum.run_on_move(self) #Run the serum's on_move function if one exists
 
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
+        self.location_outfit = None # Clear the current location outfit (only valid 1 timeslot)
 
         if time_of_day == 0: #Change outfit here, because crisis events might be triggered after run day function
             if self.next_day_outfit:
@@ -1822,13 +1838,28 @@ init -1 python:
 
     Person.should_wear_uniform = should_wear_uniform_enhanced
 
+    @property
+    def current_planned_outfit(self):
+        if self.should_wear_uniform():
+            return self.uniform
+        elif self.should_wear_work_outfit():
+            return self.work_outfit
+        elif self.should_wear_maid_outfit():
+            return self.maid_outfit
+        elif self.location in [gym, university]:
+            return self.location_outfit
+        return self.planned_outfit
+
+    Person.current_planned_outfit = current_planned_outfit
+
     def review_outfit_enhanced(self, dialogue = True, draw_person = True):
         if not self.has_cum_fetish():
             self.outfit.remove_all_cum()
 
-        if len(self.location.people) > 1 \
+        if not self.outfit.matches(self.current_planned_outfit) \
+            and (__builtin__.len(self.location.people) > 1 \
             or (self.should_wear_uniform() and not self.is_wearing_uniform()) \
-            or (self.outfit.slut_requirement > self.sluttiness):
+            or (self.outfit.slut_requirement > self.sluttiness)):
             self.apply_planned_outfit()
             if draw_person:
                 self.draw_person()
@@ -1840,7 +1871,8 @@ init -1 python:
 
     def apply_gym_outfit(self):
         if workout_wardrobe:
-            self.apply_outfit(self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
+            self.location_outfit = self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self))
+            self.apply_outfit(self.location_outfit)
             # self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
@@ -1848,8 +1880,9 @@ init -1 python:
 
     def apply_university_outfit(self):
         if university_wardrobe:
+            self.location_outfit = university_wardrobe.decide_on_outfit2(self)
             # get personal copy of outfit, so we don't change the university wardrobe (in any events)
-            self.apply_outfit(university_wardrobe.decide_on_outfit2(self))
+            self.apply_outfit(self.location_outfit)
         return
 
     Person.apply_university_outfit = apply_university_outfit
@@ -1889,6 +1922,8 @@ init -1 python:
             self.wear_work_outfit()
         elif self.should_wear_maid_outfit():
             self.wear_maid_outfit()
+        elif self.location in [gym, university] and self.location_outfit:
+            self.apply_outfit(self.location_outfit)
         else:
             if not self.planned_outfit: # extra validation to make sure we have a planned outfit
                 self.planned_outfit = self.decide_on_outfit()
