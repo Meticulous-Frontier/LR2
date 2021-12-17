@@ -450,7 +450,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                             $ person_two.draw_person(position = "blowjob")
                             "She opens her mouth and slides your penis between her moist lips."
                             $ person_two.break_taboo("sucking_cock")
-                            call fuck_person(person_two, start_position = blowjob, skip_intro = True, position_locked = True, self_strip = False, affair_ask_after = True) from _call_fuck_person_friends_help_friends_be_sluts_enhanced
+                            call fuck_person(person_two, start_position = blowjob, skip_intro = True, position_locked = True, self_strip = False, affair_ask_after = True, ignore_taboo = True) from _call_fuck_person_friends_help_friends_be_sluts_enhanced
                             $ the_report = _return
                             if the_report.get("guy orgasms", 0) > 0:
                                 "You sit down in your office chair, thoroughly drained. [person_two.title] smiles, seemingly proud of her work."
