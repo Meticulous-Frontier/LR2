@@ -1840,13 +1840,13 @@ init -1 python:
 
     @property
     def current_planned_outfit(self):
-        if self.should_wear_uniform():
-            return self.uniform
-        elif self.should_wear_work_outfit():
+        if self.should_wear_uniform() and self.planned_uniform:
+            return self.planned_uniform
+        elif self.should_wear_work_outfit() and self.work_outfit:
             return self.work_outfit
-        elif self.should_wear_maid_outfit():
+        elif self.should_wear_maid_outfit() and self.maid_outfit:
             return self.maid_outfit
-        elif self.location in [gym, university]:
+        elif self.location in [gym, university] and self.location_outfit:
             return self.location_outfit
         return self.planned_outfit
 
