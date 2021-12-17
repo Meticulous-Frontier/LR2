@@ -628,7 +628,10 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
     $ final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(the_person, ignore_taboo)
     $ hates_position = len([the_person.discover_opinion(x) for x in the_position.opinion_tags if the_person.get_opinion_score(x) == -2]) != 0
 
-    if not hates_position and the_person.effective_sluttiness(the_taboo) >= final_slut_requirement:
+    if ignore_taboo:
+        # ignore taboo, also ignores willingness (we got here in a special way)
+        # so we also go into the position (no escape because she hates is)
+    elif not hates_position and the_person.effective_sluttiness(the_taboo) >= final_slut_requirement:
         if not (skip_dialog or the_person.has_taboo(the_taboo)):
             $ the_person.call_dialogue("sex_accept")
 
@@ -662,7 +665,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
         python:
             ran_num = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #A negative number
             ran_num = __builtin__.round(ran_num/5)
-            the_person.change_love(ran_num)
+            the_person.change_love(-ran_num)
             willing = -1
 
         $ the_person.call_dialogue("sex_angry_reject")
