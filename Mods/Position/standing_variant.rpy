@@ -75,95 +75,95 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
         "You pull out then pull her hips back toward you slowly. You consider punishing her for her poor performance... or maybe you could slow up the pace and talk dirty to her?"
         menu:
             "Punish Her":
-                 "SMACK"
-                 "You give [the_girl.possessive_title]'s ass a hard swat. It leaves a clear red handprint on her behind."
-                 the_girl "Yow!"
-                 mc.name "Sorry? That's not what I expect from you. Count how many times I spank you. How many times do you think you deserve?"
-                 if the_girl.get_opinion_score("being submissive") > 0:
-                     "[the_girl.possessive_title] quivers at your touch and your words."
-                     the_girl "O master, I don't know! Ten? Is ten enough?"
-                     "SMACK"
-                     "You give her ass another swat. She arches her back in appreciation."
-                     the_girl "Two!"
-                     "You continue your punishment, alternating giving her a few thrusts and then another smack."
-                     $ the_girl.discover_opinion("being submissive")
-                     $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 5)
-                     "SMACK"
-                     the_girl "OH, god... SEVEN!"
-                     mc.name "Does your pussy get wetter with every spank? I think it does!"
-                     if the_girl.arousal > 80:
-                         "Are you going to cum when I spank you? Go ahead and cum. I'll punish you by spanking you another 10 times."
-                         $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 2)
-                         "[the_girl.possessive_title] moans loudly. She is breathing too heavy to make a coherent response."
-                 elif the_girl.sluttiness > 80 or the_girl.obedience > 130:
-                     the_girl "I'm sorry [the_girl.mc_title]! I'll try to get better at this. Having you fuck me like this is so intense..."
-                     "SMACK"
-                     mc.name "You didn't answer the question! Answer how many spankings you deserve for being such a tease"
-                     the_girl "Oh god, five! I deserve five for being such a tease!"
-                     "You continue your punishment, alternating giving her a few thrusts and then another smack."
-                 elif the_girl.get_opinion_score("being submissive") < 0:
-                     the_girl "What the fuck? How about zero?"
-                     $ the_girl.discover_opinion("being submissive")
-                     $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 5)
-                     "[the_girl.possessive_title] doesn't seem to appreciate the spanking, maybe you should refrain from doing so."
-                 else:
-                     the_girl "Five! I think I need five... but could you not spank me so hard? It hurts..."
-                     "You give her plaint ass another swat, this time not quite as hard."
-                     "Her ass quivers slightly as you spank her. It feels great around your cock."
-                 "After you finish her spanking, you grab her hips and resume your fucking."
+                "SMACK"
+                "You give [the_girl.possessive_title]'s ass a hard swat. It leaves a clear red handprint on her behind."
+                the_girl "Yow!"
+                mc.name "Sorry? That's not what I expect from you. Count how many times I spank you. How many times do you think you deserve?"
+                if the_girl.get_opinion_score("being submissive") > 0:
+                    "[the_girl.possessive_title] quivers at your touch and your words."
+                    the_girl "O master, I don't know! Ten? Is ten enough?"
+                    "SMACK"
+                    "You give her ass another swat. She arches her back in appreciation."
+                    the_girl "Two!"
+                    "You continue your punishment, alternating giving her a few thrusts and then another smack."
+                    $ the_girl.discover_opinion("being submissive")
+                    $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 5)
+                    "SMACK"
+                    the_girl "OH, god... SEVEN!"
+                    mc.name "Does your pussy get wetter with every spank? I think it does!"
+                    if the_girl.arousal > 80:
+                        "Are you going to cum when I spank you? Go ahead and cum. I'll punish you by spanking you another 10 times."
+                        $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 2)
+                        "[the_girl.possessive_title] moans loudly. She is breathing too heavy to make a coherent response."
+                elif the_girl.sluttiness > 80 or the_girl.obedience > 130:
+                    the_girl "I'm sorry [the_girl.mc_title]! I'll try to get better at this. Having you fuck me like this is so intense..."
+                    "SMACK"
+                    mc.name "You didn't answer the question! Answer how many spankings you deserve for being such a tease"
+                    the_girl "Oh god, five! I deserve five for being such a tease!"
+                    "You continue your punishment, alternating giving her a few thrusts and then another smack."
+                elif the_girl.get_opinion_score("being submissive") < 0:
+                    the_girl "What the fuck? How about zero?"
+                    $ the_girl.discover_opinion("being submissive")
+                    $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 5)
+                    "[the_girl.possessive_title] doesn't seem to appreciate the spanking, maybe you should refrain from doing so."
+                else:
+                    the_girl "Five! I think I need five... but could you not spank me so hard? It hurts..."
+                    "You give her plaint ass another swat, this time not quite as hard."
+                    "Her ass quivers slightly as you spank her. It feels great around your cock."
+                "After you finish her spanking, you grab her hips and resume your fucking."
             "Talk Dirty":
-                 mc.name "I love the way it sounds when I fuck you. Hear it?"
-                 "You thrust yourself back into her forcefully, her ass smacking against your hips with a loud smack."
-                 "[the_girl.possessive_title] moans and pushes herself back against you."
-                 mc.name "That's it, you’re my bitch. I love how naughty you are."
-                 "She seems to be into it. Maybe you should tell her how you want to finish."
-                 menu:
-                     "I wanna creampie you":
-                         if the_girl.wants_creampie():
-                              "[the_girl.possessive_title]'s legs shake for a second. She peeks back at you with lust in her eyes."
-                              the_girl "I'm already so full... I can't wait to feel you blow inside me"
-                              "She seems to be into creampies!"
-                              mc.name "Don't worry, I'm gonna put this cum where it belongs."
-                              $ the_girl.discover_opinion("creampies")
-                              $ the_girl.change_arousal(the_girl.get_opinion_score("creampies") * 5)
-                              "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
-                         elif the_girl.get_opinion_score("bareback sex") > 0:
-                             "You see goosebumps form on the back of [the_girl.possessive_title]'s neck"
-                             the_girl "Plant your seed inside me! I want to feel you fill me up!"
-                             "Sounds like she likes the idea of getting bred!"
-                             mc.name "When I get ready to cum, I'm gonna thrust so deep inside you and hold it there while I fill your fertile pussy."
-                             $ the_girl.discover_opinion("bareback sex")
-                             $ the_girl.change_arousal(the_girl.get_opinion_score("bareback sex") * 5)
-                             "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
-                         elif the_girl.get_opinion_score("creampies") < 0 or the_girl.effective_sluttiness() < 80:
-                             "[the_girl.possessive_title] stiffens up slightly at the prospect of getting creampied"
-                             the_girl "You could do that... or you could pullout and cum all over my ass... wouldn't that be sexy?"
-                             "She doesn't seem to be into being cum inside. Maybe you should consider finishing somewhere else..."
-                         else:
-                             the_girl "Mmmmm I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
-                             "Sounds like she just wants to please you, without being partial to a creampie or finishing some other way."
-                     "I wanna cover your ass":
-                          if the_girl.get_opinion_score("being covered in cum") > 0:
-                              "[the_girl.possessive_title] moans and looks back at you."
-                              the_girl "Oh god I love the feeling of your hot, sticky cum shooting all over me..."
-                              mc.name "Oh, do you like that, slut? When I spray all over you skin and mark you as my little cumslut?"
-                              "She moans lewdly at your remarks. She seems to be getting into it."
-                              $ the_girl.discover_opinion("being covered in cum")
-                              $ the_girl.change_arousal(the_girl.get_opinion_score("being covered in cum") * 5)
-                          elif the_girl.get_opinion_score("showing her ass") > 0:
-                              "[the_girl.possessive_title] looks back at you."
-                              the_girl "Mmmm, do you think it's sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
-                              mc.name "I bet. That ass is so amazing, I bet you love showing it off every chance you get, don't you?"
-                              "The next time you thrust into her, you pause for a second when you are fully embedded within her."
-                              the_girl "I'm gonna shake my ass just like this for you, after you paint it with your cum"
-                              "[the_girl.possessive_title] begins to move her hips side to side. It is a very alluring motion, and feels amazing being so deep inside her."
-                              $ the_girl.discover_opinion("showing her ass")
-                              $ the_girl.change_arousal(the_girl.get_opinion_score("showing her ass") * 3)
-                              $ mc.change_arousal( 5)
-                          else:
-                              "[the_girl.possessive_title] peeks back at you and smiles"
-                              the_girl "That sounds hot... I can't wait to feel it..."
-                 "After you finish dirty talking, you grab her hips and resume your fucking."
+                mc.name "I love the way it sounds when I fuck you. Hear it?"
+                "You thrust yourself back into her forcefully, her ass smacking against your hips with a loud smack."
+                "[the_girl.possessive_title] moans and pushes herself back against you."
+                mc.name "That's it, you’re my bitch. I love how naughty you are."
+                "She seems to be into it. Maybe you should tell her how you want to finish."
+                menu:
+                    "I wanna creampie you":
+                        if the_girl.wants_creampie():
+                            "[the_girl.possessive_title]'s legs shake for a second. She peeks back at you with lust in her eyes."
+                            the_girl "I'm already so full... I can't wait to feel you blow inside me"
+                            "She seems to be into creampies!"
+                            mc.name "Don't worry, I'm gonna put this cum where it belongs."
+                            $ the_girl.discover_opinion("creampies")
+                            $ the_girl.change_arousal(the_girl.get_opinion_score("creampies") * 5)
+                            "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
+                        elif the_girl.get_opinion_score("bareback sex") > 0:
+                            "You see goosebumps form on the back of [the_girl.possessive_title]'s neck"
+                            the_girl "Plant your seed inside me! I want to feel you fill me up!"
+                            "Sounds like she likes the idea of getting bred!"
+                            mc.name "When I get ready to cum, I'm gonna thrust so deep inside you and hold it there while I fill your fertile pussy."
+                            $ the_girl.discover_opinion("bareback sex")
+                            $ the_girl.change_arousal(the_girl.get_opinion_score("bareback sex") * 5)
+                            "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
+                        elif the_girl.get_opinion_score("creampies") < 0 or the_girl.effective_sluttiness() < 80:
+                            "[the_girl.possessive_title] stiffens up slightly at the prospect of getting creampied"
+                            the_girl "You could do that... or you could pullout and cum all over my ass... wouldn't that be sexy?"
+                            "She doesn't seem to be into being cum inside. Maybe you should consider finishing somewhere else..."
+                        else:
+                            the_girl "Mmmmm I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
+                            "Sounds like she just wants to please you, without being partial to a creampie or finishing some other way."
+                    "I wanna cover your ass":
+                        if the_girl.get_opinion_score("being covered in cum") > 0:
+                            "[the_girl.possessive_title] moans and looks back at you."
+                            the_girl "Oh god I love the feeling of your hot, sticky cum shooting all over me..."
+                            mc.name "Oh, do you like that, slut? When I spray all over you skin and mark you as my little cumslut?"
+                            "She moans lewdly at your remarks. She seems to be getting into it."
+                            $ the_girl.discover_opinion("being covered in cum")
+                            $ the_girl.change_arousal(the_girl.get_opinion_score("being covered in cum") * 5)
+                        elif the_girl.get_opinion_score("showing her ass") > 0:
+                            "[the_girl.possessive_title] looks back at you."
+                            the_girl "Mmmm, do you think it's sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
+                            mc.name "I bet. That ass is so amazing, I bet you love showing it off every chance you get, don't you?"
+                            "The next time you thrust into her, you pause for a second when you are fully embedded within her."
+                            the_girl "I'm gonna shake my ass just like this for you, after you paint it with your cum"
+                            "[the_girl.possessive_title] begins to move her hips side to side. It is a very alluring motion, and feels amazing being so deep inside her."
+                            $ the_girl.discover_opinion("showing her ass")
+                            $ the_girl.change_arousal(the_girl.get_opinion_score("showing her ass") * 3)
+                            $ mc.change_arousal( 5)
+                        else:
+                            "[the_girl.possessive_title] peeks back at you and smiles"
+                            the_girl "That sounds hot... I can't wait to feel it..."
+                "After you finish dirty talking, you grab her hips and resume your fucking."
     else:   #She is experienced. Give her a chance to please you
         "[the_girl.possessive_title] reaches back with one hand and grabs your hip, urging you to fuck her harder."
         "She is keeping pace with you, pushing back and meeting your thrusts exquisitely. Your hips make a loud slap against her ass with every thrust, and your balls swing forward and slap her pussy when you bottom out."
@@ -171,128 +171,128 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
         "[the_girl.possessive_title]'s tight cunt feels so good, you can't help but slam into it over and over again. Maybe you should touch her a bit or talk dirty in her ear..."
         menu:
             "Touch her":
-                 "You thrust deep inside [the_girl.possessive_title]'s [the_girl.pubes_description] pussy and hold it there for a second. You reach one hand around her hip and trail it down between her legs..."
-                 "You reach her mound and being to work circles around her clit with your fingers"
-                 if the_girl.arousal > 130:
-                      the_girl "Oh my god you're gonna make me cum again! Holy fuck!"
-                      "With your fingers caressing her and your cock buried deep, you can feel her pussy pulse and spasm around you as another orgasmic wave hits her."
-                      "The feeling of her juicy cunt convulsing all around your shaft is almost too much to bear"
-                      $ mc.change_arousal( 8)
-                      $ the_girl.change_happiness(2)
-                 if the_girl.get_opinion_score("being fingered") > 0:
-                      "[the_girl.possessive_title] reacts by pushing her hips forward to grind against your fingers."
-                      "You use your other hand to hold her hip to keep your groin buried in her sex."
-                      the_girl "OH... fuck, how do you do that... it feels so good!"
-                      $ the_girl.discover_opinion("being fingered")
-                      $ the_girl.change_arousal(the_girl.get_opinion_score("being fingered") * 4)
-                 else:   ####TODO add doesn't like it dialogue ###
-                      "[the_girl.possessive_title] moans at the added stimulation. She begins to move her hips side to side, alternating grinding against your fingers and your crotch"
-                      the_girl "[the_girl.mc_title] that's it, keep going!"
-                      $ the_girl.change_arousal(3)
-                 "You decide after a bit to get back to fucking. You bring you hand up to your face and see that is covered in her juices."
-                 menu:
-                     "Make her suck it":
-                         "You bring your fingers, glistening with her moisture, up to her face."
-                         mc.name "Suck my fingers clean like a good girl."
-                         if the_girl.has_cum_fetish():
-                             "[the_girl.possessive_title] opens her mouth and sucks your fingers into her mouth. She sucks your fingers hungrily, deep into her mouth. Your fingertips are tickling the back of her throat."
-                             "Her head bobs up and down as she suckles her juices off your fingers."
-                             "You pull your fingers out with a pop. She looks back at you, her pouty lips almost enticing you to let her suck on your finger a bit longer."
-                         elif the_girl.get_opinion_score("being submissive") > 0 or the_girl.effective_sluttiness() > 120:
-                             the_girl "Yes sir!"
-                             "[the_girl.possessive_title] immediately opens her mouth and begins sucking on your fingers. She bobs her head up and down on them a few times as if it were a cock"
-                             "Her mouth comes off your fingers with a pop."
-                             the_girl "There you go sir, all clean!"
-                             $ the_girl.change_arousal(2)
-                         else:
-                             "[the_girl.possessive_title] tentatively opens her mouth and sucks on your fingers, one at a time, until none of her juices remain."
-                     "Lick it clean":
-                         "A tantalizing musk enters your nose, coming from your fingers. Without even thinking, you start to lick her juices off your fingers."
-                         "You moan in appreciation of how good she tastes, and she peeks back at you."
-                         if the_girl.has_cum_fetish():
-                             the_girl "Oh [the_girl.mc_title], if you want to taste me, just ask! I love it when you lick my pussy..."
-                         elif the_girl.get_opinion_score("getting head") > 0:
-                             the_girl "You know, [the_girl.mc_title], if you ever want more, you could always go straight to the source..."
-                             "For a second, you imagine [the_girl.possessive_title] laying on your bed, legs spread wide, while you eat her out..."
-                             $ the_girl.discover_opinion("getting head")
-                             $ mc.change_arousal( 2)
-                             "It's a very enticing thought, and sounds like she would be into it..."
-                         else:
-                             "[the_girl.possessive_title]'s eyes go wide when she sees you licking your fingers."
-                             "[the_girl.possessive_title] turns back to [the_object.name] and pushes back against you, prompting you to continue fucking her"
-                     "Wipe it on your hip":
-                         "You wipe your hand quickly on your hip."
-                 "Your fingers clean, you grab her hips with both hands and resume fucking her."
+                "You thrust deep inside [the_girl.possessive_title]'s [the_girl.pubes_description] pussy and hold it there for a second. You reach one hand around her hip and trail it down between her legs..."
+                "You reach her mound and being to work circles around her clit with your fingers"
+                if the_girl.arousal > 130:
+                    the_girl "Oh my god you're gonna make me cum again! Holy fuck!"
+                    "With your fingers caressing her and your cock buried deep, you can feel her pussy pulse and spasm around you as another orgasmic wave hits her."
+                    "The feeling of her juicy cunt convulsing all around your shaft is almost too much to bear"
+                    $ mc.change_arousal( 8)
+                    $ the_girl.change_happiness(2)
+                if the_girl.get_opinion_score("being fingered") > 0:
+                    "[the_girl.possessive_title] reacts by pushing her hips forward to grind against your fingers."
+                    "You use your other hand to hold her hip to keep your groin buried in her sex."
+                    the_girl "OH... fuck, how do you do that... it feels so good!"
+                    $ the_girl.discover_opinion("being fingered")
+                    $ the_girl.change_arousal(the_girl.get_opinion_score("being fingered") * 4)
+                else:   ####TODO add doesn't like it dialogue ###
+                    "[the_girl.possessive_title] moans at the added stimulation. She begins to move her hips side to side, alternating grinding against your fingers and your crotch"
+                    the_girl "[the_girl.mc_title] that's it, keep going!"
+                    $ the_girl.change_arousal(3)
+                "You decide after a bit to get back to fucking. You bring you hand up to your face and see that is covered in her juices."
+                menu:
+                    "Make her suck it":
+                        "You bring your fingers, glistening with her moisture, up to her face."
+                        mc.name "Suck my fingers clean like a good girl."
+                        if the_girl.has_cum_fetish():
+                            "[the_girl.possessive_title] opens her mouth and sucks your fingers into her mouth. She sucks your fingers hungrily, deep into her mouth. Your fingertips are tickling the back of her throat."
+                            "Her head bobs up and down as she suckles her juices off your fingers."
+                            "You pull your fingers out with a pop. She looks back at you, her pouty lips almost enticing you to let her suck on your finger a bit longer."
+                        elif the_girl.get_opinion_score("being submissive") > 0 or the_girl.effective_sluttiness() > 120:
+                            the_girl "Yes sir!"
+                            "[the_girl.possessive_title] immediately opens her mouth and begins sucking on your fingers. She bobs her head up and down on them a few times as if it were a cock"
+                            "Her mouth comes off your fingers with a pop."
+                            the_girl "There you go sir, all clean!"
+                            $ the_girl.change_arousal(2)
+                        else:
+                            "[the_girl.possessive_title] tentatively opens her mouth and sucks on your fingers, one at a time, until none of her juices remain."
+                    "Lick it clean":
+                        "A tantalizing musk enters your nose, coming from your fingers. Without even thinking, you start to lick her juices off your fingers."
+                        "You moan in appreciation of how good she tastes, and she peeks back at you."
+                        if the_girl.has_cum_fetish():
+                            the_girl "Oh [the_girl.mc_title], if you want to taste me, just ask! I love it when you lick my pussy..."
+                        elif the_girl.get_opinion_score("getting head") > 0:
+                            the_girl "You know, [the_girl.mc_title], if you ever want more, you could always go straight to the source..."
+                            "For a second, you imagine [the_girl.possessive_title] laying on your bed, legs spread wide, while you eat her out..."
+                            $ the_girl.discover_opinion("getting head")
+                            $ mc.change_arousal( 2)
+                            "It's a very enticing thought, and sounds like she would be into it..."
+                        else:
+                            "[the_girl.possessive_title]'s eyes go wide when she sees you licking your fingers."
+                            "[the_girl.possessive_title] turns back to [the_object.name] and pushes back against you, prompting you to continue fucking her"
+                    "Wipe it on your hip":
+                        "You wipe your hand quickly on your hip."
+                "Your fingers clean, you grab her hips with both hands and resume fucking her."
 
             "Dirty Talk":
-                 mc.name "I love the way it sounds when I fuck you. Hear it?"
-                 "You thrust yourself back into her forcefully, her ass smacking against your hips with a loud smack."
-                 "[the_girl.possessive_title] moans and pushes herself back against you."
-                 mc.name "That's it, you’re such a talented slut. I love how naughty you are."
-                 "She seems to be into it. Maybe you should tell her how you want to finish."
-                 menu:
-                     "I wanna creampie you":
-                         if the_girl.has_cum_fetish():
-                             "[the_girl.possessive_title]'s legs shake for a second. She looks back at you with fire in her eyes."
-                             the_girl "You better! Don't even thinking about robbing my poor pussy of your incredible cum. It belongs inside me!"
-                             "You give her another rough thrust, pushing yourself deep inside her."
-                             mc.name "Don't worry, when I cum, I'll push in so deep not a drop will leak out of you."
-                             $ the_girl.change_arousal(the_girl.get_opinion_score(15))
-                             "[the_girl.possessive_title] moans. She is truly addicted to your cum."
-                             the_girl "Do it! Give me your cum! I want it so bad."
-                         elif the_girl.wants_creampie():
-                              "[the_girl.possessive_title]'s legs shake for a second. She peeks back at you with lust in her eyes."
-                              the_girl "I'm already so full... I can't wait to feel you blow inside me"
-                              "She seems to be into creampies!"
-                              mc.name "Don't worry, I'm gonna put this cum where it belongs."
-                              $ the_girl.discover_opinion("creampies")
-                              $ the_girl.change_arousal(the_girl.get_opinion_score("creampies") * 5)
-                              "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
-                         elif the_girl.get_opinion_score("bareback sex") > 0:
-                             "You see goosebumps form on the back of [the_girl.possessive_title]'s neck"
-                             the_girl "Plant your seed inside me! I want to feel you fill me up!"
-                             "Sounds like she likes the idea of getting bred!"
-                             mc.name "When I get ready to cum, I'm gonna thrust so deep inside you and hold it there while I fill your fertile pussy."
-                             $ the_girl.discover_opinion("bareback sex")
-                             $ the_girl.change_arousal(the_girl.get_opinion_score("bareback sex") * 5)
-                             "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
-                         elif the_girl.get_opinion_score("creampies") < 0 or the_girl.effective_sluttiness() < 80:
-                             "[the_girl.possessive_title] stiffens up slightly at the prospect of getting creampied"
-                             the_girl "You could do that... or you could pullout and cum all over my ass... wouldn't that be sexy?"
-                             "She doesn't seem to be into being cum inside. Maybe you should consider finishing somewhere else..."
-                         else:
-                             the_girl "Mmmmm I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
-                             "Sounds like she just wants to please you, without being partial to a creampie or finishing some other way."
-                     "I wanna cover your ass":
-                          if the_girl.has_cum_fetish():
-                             "[the_girl.possessive_title]'s legs shake for a second. She looks back at you with fire in her eyes."
-                             the_girl "You better! cover every single square inch of my ass. I want to feel it when I stand up and your cum runs down my legs"
-                             "You fuck her roughly, each thrust making a loud slap."
-                             mc.name "Don't worry, when I cum, you ass will be slick and sticky, coated in my seed.."
-                             $ the_girl.change_arousal(the_girl.get_opinion_score(15))
-                             "[the_girl.possessive_title] moans. She is truly addicted to your cum."
-                             the_girl "Do it! Give me your cum! I want it so bad."
-                          if the_girl.get_opinion_score("being covered in cum") > 0:
-                              "[the_girl.possessive_title] moans and looks back at you."
-                              the_girl "Oh god I love the feeling of your hot, sticky cum shooting all over me..."
-                              mc.name "Oh, do you like that, slut? When I spray all over you skin and mark you as my little cumslut?"
-                              "She moans lewdly at your remarks. She seems to be getting into it."
-                              $ the_girl.discover_opinion("being covered in cum")
-                              $ the_girl.change_arousal(the_girl.get_opinion_score("being covered in cum") * 5)
-                          elif the_girl.get_opinion_score("showing her ass") > 0:
-                              "[the_girl.possessive_title] looks back at you."
-                              the_girl "Mmmm, do you think it's sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
-                              mc.name "I bet. That ass is so amazing, I bet you love showing it off every chance you get, don't you?"
-                              "The next time you thrust into her, you pause for a second when you are fully embedded within her."
-                              the_girl "I'm gonna shake my ass just like this for you, after you paint it with your cum"
-                              "[the_girl.possessive_title] begins to move her hips side to side. It is a very alluring motion, and feels amazing being so deep inside her."
-                              $ the_girl.discover_opinion("showing her ass")
-                              $ the_girl.change_arousal(the_girl.get_opinion_score("showing her ass") * 3)
-                              $mc.change_arousal( 5)
-                          else:
-                              "[the_girl.possessive_title] peeks back at you and smiles"
-                              the_girl "That sounds hot... I can't wait to feel it..."
-                 "After you finish dirty talking, you grab her hips and resume your fucking."
+                mc.name "I love the way it sounds when I fuck you. Hear it?"
+                "You thrust yourself back into her forcefully, her ass smacking against your hips with a loud smack."
+                "[the_girl.possessive_title] moans and pushes herself back against you."
+                mc.name "That's it, you’re such a talented slut. I love how naughty you are."
+                "She seems to be into it. Maybe you should tell her how you want to finish."
+                menu:
+                    "I wanna creampie you":
+                        if the_girl.has_cum_fetish():
+                            "[the_girl.possessive_title]'s legs shake for a second. She looks back at you with fire in her eyes."
+                            the_girl "You better! Don't even thinking about robbing my poor pussy of your incredible cum. It belongs inside me!"
+                            "You give her another rough thrust, pushing yourself deep inside her."
+                            mc.name "Don't worry, when I cum, I'll push in so deep not a drop will leak out of you."
+                            $ the_girl.change_arousal(the_girl.get_opinion_score(15))
+                            "[the_girl.possessive_title] moans. She is truly addicted to your cum."
+                            the_girl "Do it! Give me your cum! I want it so bad."
+                        elif the_girl.wants_creampie():
+                            "[the_girl.possessive_title]'s legs shake for a second. She peeks back at you with lust in her eyes."
+                            the_girl "I'm already so full... I can't wait to feel you blow inside me"
+                            "She seems to be into creampies!"
+                            mc.name "Don't worry, I'm gonna put this cum where it belongs."
+                            $ the_girl.discover_opinion("creampies")
+                            $ the_girl.change_arousal(the_girl.get_opinion_score("creampies") * 5)
+                            "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
+                        elif the_girl.get_opinion_score("bareback sex") > 0:
+                            "You see goosebumps form on the back of [the_girl.possessive_title]'s neck"
+                            the_girl "Plant your seed inside me! I want to feel you fill me up!"
+                            "Sounds like she likes the idea of getting bred!"
+                            mc.name "When I get ready to cum, I'm gonna thrust so deep inside you and hold it there while I fill your fertile pussy."
+                            $ the_girl.discover_opinion("bareback sex")
+                            $ the_girl.change_arousal(the_girl.get_opinion_score("bareback sex") * 5)
+                            "[the_girl.possessive_title] moans and her arousal is quickly building from your dirty talk."
+                        elif the_girl.get_opinion_score("creampies") < 0 or the_girl.effective_sluttiness() < 80:
+                            "[the_girl.possessive_title] stiffens up slightly at the prospect of getting creampied"
+                            the_girl "You could do that... or you could pullout and cum all over my ass... wouldn't that be sexy?"
+                            "She doesn't seem to be into being cum inside. Maybe you should consider finishing somewhere else..."
+                        else:
+                            the_girl "Mmmmm I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
+                            "Sounds like she just wants to please you, without being partial to a creampie or finishing some other way."
+                    "I wanna cover your ass":
+                        if the_girl.has_cum_fetish():
+                            "[the_girl.possessive_title]'s legs shake for a second. She looks back at you with fire in her eyes."
+                            the_girl "You better! cover every single square inch of my ass. I want to feel it when I stand up and your cum runs down my legs"
+                            "You fuck her roughly, each thrust making a loud slap."
+                            mc.name "Don't worry, when I cum, you ass will be slick and sticky, coated in my seed.."
+                            $ the_girl.change_arousal(the_girl.get_opinion_score(15))
+                            "[the_girl.possessive_title] moans. She is truly addicted to your cum."
+                            the_girl "Do it! Give me your cum! I want it so bad."
+                        if the_girl.get_opinion_score("being covered in cum") > 0:
+                            "[the_girl.possessive_title] moans and looks back at you."
+                            the_girl "Oh god I love the feeling of your hot, sticky cum shooting all over me..."
+                            mc.name "Oh, do you like that, slut? When I spray all over you skin and mark you as my little cumslut?"
+                            "She moans lewdly at your remarks. She seems to be getting into it."
+                            $ the_girl.discover_opinion("being covered in cum")
+                            $ the_girl.change_arousal(the_girl.get_opinion_score("being covered in cum") * 5)
+                        elif the_girl.get_opinion_score("showing her ass") > 0:
+                            "[the_girl.possessive_title] looks back at you."
+                            the_girl "Mmmm, do you think it's sexy? My ass, covered in your seed. I can't wait to bend over and shake it back and forth for you."
+                            mc.name "I bet. That ass is so amazing, I bet you love showing it off every chance you get, don't you?"
+                            "The next time you thrust into her, you pause for a second when you are fully embedded within her."
+                            the_girl "I'm gonna shake my ass just like this for you, after you paint it with your cum"
+                            "[the_girl.possessive_title] begins to move her hips side to side. It is a very alluring motion, and feels amazing being so deep inside her."
+                            $ the_girl.discover_opinion("showing her ass")
+                            $ the_girl.change_arousal(the_girl.get_opinion_score("showing her ass") * 3)
+                            $mc.change_arousal( 5)
+                        else:
+                            "[the_girl.possessive_title] peeks back at you and smiles"
+                            the_girl "That sounds hot... I can't wait to feel it..."
+                "After you finish dirty talking, you grab her hips and resume your fucking."
 
     return
 
@@ -322,26 +322,26 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                 "Still holding her leg up with one hand, you release her tit with your other and let it trail down her body to her slit."
                 "Holding yourself deep inside her, you give her clit a few light, playful smacks with a couple of your fingers."
                 if the_girl.get_opinion_score("being fingered") > 0:
-                     "[the_girl.possessive_title] moans enthusiastically at the stimulation of your light slaps on her clit."
-                     the_girl "That's it, [the_girl.mc_title]! Spank my pussy! I've been so naughty!"
-                     $ the_girl.discover_opinion("being fingered")
-                     $ the_girl.change_arousal((the_girl.get_opinion_score("being fingered") * 2) + mc.sex_skills["Foreplay"])
-                     "You continue giving [the_girl.possessive_title]'s mound a few more swats. You can feel her pelvic muscles clench you a few times as you tap her."
-                     "[the_girl.possessive_title] clearly enjoys having your hands on her..."
+                    "[the_girl.possessive_title] moans enthusiastically at the stimulation of your light slaps on her clit."
+                    the_girl "That's it, [the_girl.mc_title]! Spank my pussy! I've been so naughty!"
+                    $ the_girl.discover_opinion("being fingered")
+                    $ the_girl.change_arousal((the_girl.get_opinion_score("being fingered") * 2) + mc.sex_skills["Foreplay"])
+                    "You continue giving [the_girl.possessive_title]'s mound a few more swats. You can feel her pelvic muscles clench you a few times as you tap her."
+                    "[the_girl.possessive_title] clearly enjoys having your hands on her..."
                 elif the_girl.get_opinion_score("being fingered") < 0:
-                     the_girl "Ow! Hey! What was that for?"
-                     "You pause for a second... maybe she isn't into have your hands on her down there?"
-                     "You give he another light swat."
-                     the_girl "Hey! You're supposed to be fucking me! Knock it off with that!"
-                     $ the_girl.discover_opinion("being fingered")
-                     "Looks like she doesn't enjoy having your hands down there."
+                    the_girl "Ow! Hey! What was that for?"
+                    "You pause for a second... maybe she isn't into have your hands on her down there?"
+                    "You give he another light swat."
+                    the_girl "Hey! You're supposed to be fucking me! Knock it off with that!"
+                    $ the_girl.discover_opinion("being fingered")
+                    "Looks like she doesn't enjoy having your hands down there."
                 else:
-                      "[the_girl.possessive_title] jumps when you first swat her, surprised by the mixture of pleasure and pain the smack gives her."
-                      the_girl "Oh! [the_girl.mc_title]... that feels good... but could you be careful?"
-                      "Using your index and middle finger, you give [the_girl.possessive_title]'s mound a few more taps, a bit lighter than before."
-                      the_girl "Mmmmm, that's it!"
-                      "Encouraged by her words, you give her a few more playful taps."
-                      $ the_girl.change_arousal(mc.sex_skills["Foreplay"])
+                    "[the_girl.possessive_title] jumps when you first swat her, surprised by the mixture of pleasure and pain the smack gives her."
+                    the_girl "Oh! [the_girl.mc_title]... that feels good... but could you be careful?"
+                    "Using your index and middle finger, you give [the_girl.possessive_title]'s mound a few more taps, a bit lighter than before."
+                    the_girl "Mmmmm, that's it!"
+                    "Encouraged by her words, you give her a few more playful taps."
+                    $ the_girl.change_arousal(mc.sex_skills["Foreplay"])
 
             "Play with her asshole":
                 "You look down and admire [the_girl.possessive_title]'s amazing ass and get a naughty idea."
@@ -602,7 +602,7 @@ label transition_SB_facing_wall_against_wall(the_girl, the_location, the_object)
 label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object):
     "You decide you want to turn her around so you can really give her a good pounding. You pull out and turn her around, facing [the_object.name]."
     $ SB_facing_wall.redraw_scene(the_girl)
-    "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and being to push inside of her."
+    "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
     the_girl "Oh my god..."
     "[the_girl.possessive_title] sighs as you bottom out."
     if the_girl.effective_sluttiness() > 110:
