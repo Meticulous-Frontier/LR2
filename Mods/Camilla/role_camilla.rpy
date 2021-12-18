@@ -605,7 +605,7 @@ label camilla_bathroom_blowjob_label(the_person):
     $ mc.change_locked_clarity(40)
     "You forget you are supposed to take pictures and begin to just enjoy the wonderful sensations."
     # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH010
-    call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), private = True, skip_intro = True, allow_continue = False) from _call_camilla_sex_description_CSH010
+    call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_camilla_sex_description_CSH010
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
@@ -728,20 +728,22 @@ label camilla_dancing_sex_label(the_person):
         $ the_person.draw_person (position = "against_wall")
         "You grab her and pick her up. Her legs wrap around you."
         the_person "Oh god... I can't believe I'm doing this... but I need it so bad!"
-        "You take her over to the counter and set her on the edge of it. You start to strip her clothes off."
-        if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
-            "You stop for a second and admire [the_person.title], her body on display in front of you."
+        "You take her over to the sinks and set her on the edge of it. You start to strip her clothes off."
+        if the_person.outfit.vagina_visible():
+            "You stop for a second and admire [the_person.title]'s [the_person.pubes_description] little slit glistening in the florescent lights."
         else:
-            "Piece by piece, you take [the_person.title]'s clothes off."
+            "You quickly remove [the_person.title]'s clothes blocking the way to your prize."
 
-            $ the_person.strip_outfit(position = "against_wall")
+            $ the_person.strip_to_vagina(position = "against_wall", prefer_half_off = True, visible_enough = True)
             $ the_person.change_arousal(20)
 
-            "Once finished, You stop for a second and admire [the_person.title], her body on display in front of you."
+            "Once finished, You stop for a second and admire [the_person.title]'s [the_person.pubes_description] little slit glistening in the florescent lights."
         the_person "Oh! Shit I almost forgot!"
+        $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] grabs her purse. She rummages through it for a moment then pulls out her phone."
         the_person "Can't forget this!"
-        "She hands you her phone and you quickly pull up her camera app. While you are doing that [the_person.possessive_title] turns around and leans over the counter."
+        $ the_person.draw_person(position = "stand3")
+        "She hands you her phone and you quickly pull up her camera app. While you are doing that [the_person.possessive_title] turns around and leans over the sink."
         $ the_person.draw_person (position = "standing_doggy")
         "You snap a couple pictures of her amazing ass while she is bent over."
         the_person "Okay, you better get your pants off, we don't have much time!"
@@ -756,7 +758,7 @@ label camilla_dancing_sex_label(the_person):
         "You look up and get one last picture of [the_person.title] in the mirror. Her mouth is open and she has one hand groping one of her own tits while her other hand is reaching back and grabbing your hip."
         "You set the phone down and begin to fuck her."
         $ mc.condom = False
-        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), private = True, skip_intro = True, skip_condom = True) from _call_camilla_sex_description_CSH020
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), private = True, skip_intro = True, skip_condom = True, ignore_taboo = True) from _call_camilla_sex_description_CSH020
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             #TODO description for all possible cum locations
