@@ -451,12 +451,12 @@ label camilla_take_pics_label(the_person):  #Not the first time.
         the_person "Here, take this. You know what to do!"
         "[the_person.possessive_title] hands you her phone. You pull up her photo app."
         $ the_person.draw_person(position = "missionary")
-        "She hops up on the sink and spreads her legs, showing you everything."
+        "She hops up on the bathroom sink and spreads her legs, showing you everything."
         "Moisture glistens between her legs, her pussy looks great and ready for you to fuck. You snap several pictures."
         the_person "Here, let me see it now..."
         "She takes her phone back. You see her attach a couple to a text message and send it."
         the_person "Alright, I'm going to set this up to take a picture every few seconds... now get over here and fuck me!"
-        call fuck_person(the_person, private = True) from _call_camilla_sex_photo_shoot_01
+        call fuck_person(the_person, start_object = make_sink(), private = True) from _call_camilla_sex_photo_shoot_01
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             #description for all possible cum locations
@@ -467,18 +467,18 @@ label camilla_take_pics_label(the_person):  #Not the first time.
             elif the_person.has_face_cum():
                 $ the_person.draw_person()
                 "[the_person.possessive_title] stands up as you grab her phone."
-                "Her face is plastered with your sticky seed. You snap a couple pictures of her sperm coverd smile."
+                "Her face is plastered with your sticky seed. You snap a couple pictures of her sperm covered smile."
             elif the_person.has_tits_cum():
                 $ the_person.draw_person()
                 "[the_person.possessive_title] stands up as you grab her phone."
                 "Her tits are plastered with your sticky seed. You snap a couple pictures of her snow capped mountains."
             elif the_person.has_ass_cum():
                 $ the_person.draw_person(position = "standing_doggy")
-                "[the_person.possessive_title] bends over the sink. Her ass is plastered with your sticky seed."
+                "[the_person.possessive_title] bends over the bathroom sink. Her ass is plastered with your sticky seed."
                 "You grab her phone and snap a couple pictures of her ass with your cum covering it."
             elif the_person.has_creampie_cum():       #We assume we finished inside her#
                 $ the_person.draw_person(position = "missionary")
-                "[the_person.possessive_title]'s sits on the edge of the counter, mirroring her pose before you started fucking."
+                "[the_person.possessive_title]'s sits on the edge of the bathroom sink, mirroring her pose before you started fucking."
                 "This time though, her cunt is a little gaped and your seed is clearly leaking out and down her legs."
                 "You grab her phone and snap a couple pictures of her well used pussy with your cum dripping out of it."
             else:   #We have no idea where the cum is. It got wasted?
@@ -512,7 +512,7 @@ label camilla_take_pics_label(the_person):  #Not the first time.
             "You make sure to snap more pictures of her. She's getting good at this!"
             "You decide to just enjoy her skilled mouth going down on you."
             # call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH011
-            call get_fucked(the_person, start_position = deepthroat, start_object = make_floor(), private = True, skip_intro = True, allow_continue = False) from _call_camilla_sex_description_CSH011
+            call get_fucked(the_person, start_position = deepthroat, start_object = make_sink(), private = True, skip_intro = True, allow_continue = False) from _call_camilla_sex_description_CSH011
         else:
             the_person "Mmmm, I can't wait any longer... I have to taste it!"
             $ the_person.break_taboo("sucking_cock")
@@ -521,7 +521,7 @@ label camilla_take_pics_label(the_person):  #Not the first time.
             mc.name "Mmm, that feels great [the_person.title]."
             "You decide to just enjoy her skilled mouth going down on you."
             # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH012
-            call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), private = True, skip_intro = True, allow_continue = False) from _call_camilla_sex_description_CSH012
+            call get_fucked(the_person, start_position = blowjob, start_object = make_sink(), private = True, skip_intro = True, allow_continue = False) from _call_camilla_sex_description_CSH012
 
         if the_person.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quite swallow all your cum, some of it is slowly dripping down the sides of her mouth."
@@ -605,7 +605,7 @@ label camilla_bathroom_blowjob_label(the_person):
     $ mc.change_locked_clarity(40)
     "You forget you are supposed to take pictures and begin to just enjoy the wonderful sensations."
     # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH010
-    call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_camilla_sex_description_CSH010
+    call get_fucked(the_person, start_position = blowjob, start_object = make_sink(), private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_camilla_sex_description_CSH010
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
@@ -728,7 +728,7 @@ label camilla_dancing_sex_label(the_person):
         $ the_person.draw_person (position = "against_wall")
         "You grab her and pick her up. Her legs wrap around you."
         the_person "Oh god... I can't believe I'm doing this... but I need it so bad!"
-        "You take her over to the sinks and set her on the edge of it. You start to strip her clothes off."
+        "You take her over to the bathroom sinks and set her on the edge of it. You start to strip her clothes off."
         if the_person.outfit.vagina_visible():
             "You stop for a second and admire [the_person.title]'s [the_person.pubes_description] little slit glistening in the florescent lights."
         else:
@@ -743,7 +743,7 @@ label camilla_dancing_sex_label(the_person):
         "[the_person.possessive_title] grabs her purse. She rummages through it for a moment then pulls out her phone."
         the_person "Can't forget this!"
         $ the_person.draw_person(position = "stand3")
-        "She hands you her phone and you quickly pull up her camera app. While you are doing that [the_person.possessive_title] turns around and leans over the sink."
+        "She hands you her phone and you quickly pull up her camera app. While you are doing that [the_person.possessive_title] turns around and leans over the bathroom sink."
         $ the_person.draw_person (position = "standing_doggy")
         "You snap a couple pictures of her amazing ass while she is bent over."
         the_person "Okay, you better get your pants off, we don't have much time!"
@@ -758,7 +758,7 @@ label camilla_dancing_sex_label(the_person):
         "You look up and get one last picture of [the_person.title] in the mirror. Her mouth is open and she has one hand groping one of her own tits while her other hand is reaching back and grabbing your hip."
         "You set the phone down and begin to fuck her."
         $ mc.condom = False
-        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), private = True, skip_intro = True, skip_condom = True, ignore_taboo = True) from _call_camilla_sex_description_CSH020
+        call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_sink(), private = True, skip_intro = True, skip_condom = True, ignore_taboo = True) from _call_camilla_sex_description_CSH020
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             #TODO description for all possible cum locations
@@ -828,13 +828,13 @@ label camilla_dancing_sex_label(the_person):
         $ mc.location.show_background()
         "You head to women's restroom and [the_person.title] soon meets you there."
         $ the_person.draw_person (position = "stand4")
-        the_person "Okay, I want you to sit on the counter. I'm gonna get naked for you."
+        the_person "Okay, I want you to sit on the bathroom sink. I'm gonna get naked for you."
         "She hands you her phone."
         the_person "Here we go! Get lots of good pics!"
         call strip_tease(the_person, for_pay = False, skip_intro = True) from _CS_free_strip_scene_camilla_021
         "You got lots of pics of her strip tease. You take a few more as she saunters over to you."
         the_person "Come on, lets fuck!"
-        call fuck_person(the_person, private = True) from _call_casual_sex_mod_camilla_022
+        call fuck_person(the_person, start_object = make_sink(), private = True) from _call_casual_sex_mod_camilla_022
         "As you finish up, you make sure to take some pictures of the aftermath. You notice [the_person.possessive_title] is touching herself."
         the_person "Oh god, daddy is fuck me so rough tonight when he reclaims me tonight... I'm gonna be so sore. I can't wait!"
         "You almost think she is going to make herself cum again until she stops."
