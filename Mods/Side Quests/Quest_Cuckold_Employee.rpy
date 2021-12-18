@@ -775,7 +775,7 @@ label quest_cuckold_employee_knocked_up_label():
     the_person "Yes my [the_person.mc_title]!"
     $ the_person.draw_person(position = "doggy")
     "Her ass in position, you quickly get her ready."
-    $ the_person.strip_to_vagina(position = "doggy", prefer_half_off = True)
+    $ the_person.strip_to_vagina(position = "doggy", prefer_half_off = True, visible_enough = True)
     call fuck_person(the_person, start_position = doggy, start_object = make_floor(), private = True, affair_ask_after = False, skip_intro = True, skip_condom = True) from _breed_cuckold_victory_lap_01
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():

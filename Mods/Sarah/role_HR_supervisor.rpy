@@ -1242,7 +1242,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             $ scene_manager.update_actor(the_person, position = "standing_doggy")
             $ mc.change_locked_clarity(50)
             "[the_person.title] turns around. You quickly get her ready to fuck."
-            $ the_person.strip_to_vagina(the_person, prefer_half_off = True)
+            $ the_person.strip_to_vagina(the_person, position = "standing_doggy", prefer_half_off = True, visible_enough = True)
             call fuck_person(the_person, start_position = bent_over_breeding, private = True) from _call_hr_breeding_01
             if the_person.has_creampie_cum():
                 the_person "Oh fuck... every time you finish inside me is just so good..."
@@ -1408,7 +1408,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ scene_manager.update_actor(the_person, position = "standing_doggy")
         $ mc.change_locked_clarity(50)
         "[the_person.title] turns around. You quickly get her ready to fuck."
-        $ the_person.strip_to_vagina(the_person, prefer_half_off = True)
+        $ the_person.strip_to_vagina(the_person, position = "standing_doggy", prefer_half_off = True, visible_enough = True)
         call fuck_person(the_person, start_position = bent_over_breeding, private = True) from _call_hr_breeding_02
         if the_person.has_creampie_cum():
             the_person "Oh fuck... every time you finish inside me is just so good..."

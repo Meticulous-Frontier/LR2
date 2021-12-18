@@ -1682,7 +1682,7 @@ label ashley_sneaks_over_label():
     "You stumble backwards, falling on to your bed. [the_person.possessive_title] lands on top of you."
     $ the_person.draw_person(position = "cowgirl")
     "[the_person.title] is so eager, she starts pulling her clothes out of the way."
-    $ the_person.strip_to_vagina(prefer_half_off = True, position = "cowgirl")
+    $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "cowgirl")
     the_person "What are you waiting for? Get your cock out, geesh!"
     "[the_person.possessive_title] licks her lips as you quickly pull your pants and underwear down. She grabs your erection and gives it a couple strokes."
     the_person "Oh god, this thing is mine ALL NIGHT. It's about fucking time..."

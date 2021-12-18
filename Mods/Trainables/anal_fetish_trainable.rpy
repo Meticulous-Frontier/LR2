@@ -40,7 +40,7 @@ label train_anal_fetish_label(the_person):
 
     if not the_person.vagina_available():
         mc.name "Let's get these clothes out of the way."
-        $ the_person.strip_to_vagina(prefer_half_off = True, position = "standing_doggy")
+        $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "standing_doggy")
 
     "Now since you got her sweet ass on display, what do you plan to do with it?"
     menu:
