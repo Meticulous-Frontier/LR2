@@ -99,7 +99,7 @@ label lust_booty_call_intro_label():
     "Pretty soon, clothes start coming off."
     $ the_person.strip_outfit(position = "missionary")
     the_person "Wow, you are really into it tonight! How do you want to start?"
-    call fuck_person(the_person, start_object = make_bed(), skip_intro = True, private = True) from _lust_booty_call_fuck_01
+    call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, ignore_taboo = True, private = True) from _lust_booty_call_fuck_01
     $ the_report = _return
     if the_report.get("guy orgasms", 0) == 0:
         "Frustrated, you finish up but still haven't cum."
@@ -187,7 +187,7 @@ label lust_booty_call_label():
     "Pretty soon, clothes start coming off."
     $ the_person.strip_outfit(position = "missionary")
     the_person "Wow, you are really into it tonight! How do you want to start?"
-    call fuck_person(the_person, start_object = make_bed(), skip_intro = True, private = True) from _lust_booty_call_fuck_02
+    call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, ignore_taboo = True, private = True) from _lust_booty_call_fuck_02
     $ the_report = _return
     if the_report.get("guy orgasms", 0) == 0:
         "Frustrated, you finish up but still haven't cum."
