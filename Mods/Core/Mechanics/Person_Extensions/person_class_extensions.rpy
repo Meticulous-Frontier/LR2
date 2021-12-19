@@ -1749,10 +1749,10 @@ init -1 python:
 
     # helper function, to determine if person is available for crisis events
     # for now only girls giving birth are not available (but is extendable for future conditions)
-    def is_available(self):
+    def person_is_available(self):
         return not self.is_giving_birth()
 
-    Person.is_available = is_available
+    Person.is_available = property(person_is_available, None, None)
 
 
 ################################################

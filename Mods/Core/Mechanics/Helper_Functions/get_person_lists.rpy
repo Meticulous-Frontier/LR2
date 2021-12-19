@@ -68,7 +68,7 @@ init -1 python:
     def known_people_at_location(location, excluded_people = []):
         excluded = set(excluded_people)
         excluded.update(unique_characters_not_known())
-        return [x for x in location.people if x.is_available() and not x in excluded and x.title]
+        return [x for x in location.people if x.is_available and not x in excluded and x.title]
 
     @lru_cache_function(max_size=3, expiration=3)
     def unknown_people_in_the_game(excluded_people = [], excluded_locations = []):
@@ -91,7 +91,7 @@ init -1 python:
     # only returns employees available for events
     def get_random_employees(number_of_employees, exclude_list = None, **employee_args):
         result = set([])
-        list_of_possible_people = [x for x in mc.business.get_requirement_employee_list(exclude_list = exclude_list, **employee_args) if x.is_available()]
+        list_of_possible_people = [x for x in mc.business.get_requirement_employee_list(exclude_list = exclude_list, **employee_args) if x.is_available]
         if len(list_of_possible_people) < number_of_employees:
             if number_of_employees == 1:
                 return None

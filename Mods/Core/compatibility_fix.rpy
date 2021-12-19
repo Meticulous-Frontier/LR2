@@ -211,6 +211,18 @@ init 1 python:
 
             if scheduled_location:
                 scheduled_location.add_person(employee)
+
+        for intern in [x for x in all_people_in_the_game() if x.job == "Student Intern"]:
+            if intern.schedule[6][1] == mc.business.r_div and intern not in mc.business.college_interns_research:
+                mc.business.college_interns_research.append(intern)
+            if intern.schedule[6][1] == mc.business.p_div and intern not in mc.business.college_interns_production:
+                mc.business.college_interns_production.append(intern)
+            if intern.schedule[6][1] == mc.business.s_div and intern not in mc.business.college_interns_supply:
+                mc.business.college_interns_supply.append(intern)
+            if intern.schedule[6][1] == mc.business.m_div and intern not in mc.business.college_interns_market:
+                mc.business.college_interns_market.append(intern)
+            if intern.schedule[6][1] == mc.business.h_div and intern not in mc.business.college_interns_HR:
+                mc.business.college_interns_HR.append(intern)
         return
 
     def update_pinned_cache():

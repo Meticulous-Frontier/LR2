@@ -357,7 +357,7 @@ init -1 python:
     Business.remove_mandatory_crisis = business_remove_mandatory_crisis
 
     def business_get_employee_list(self):
-        return [x for x in self.research_team + self.production_team + self.supply_team + self.market_team + self.hr_team if x.is_available()]
+        return [x for x in self.research_team + self.production_team + self.supply_team + self.market_team + self.hr_team if x.is_available]
 
     Business.get_employee_list = business_get_employee_list
 
@@ -381,12 +381,41 @@ init -1 python:
     Business.date_scheduled_today = date_scheduled_today
 
     # College intern related functions
+    def business_college_interns_research(self):
+        if not hasattr(self, "_college_interns_research"):
+            self._college_interns_research = MappedList(Person, all_people_in_the_game)
+        return self._college_interns_research
 
-    Business.college_interns_research = []
-    Business.college_interns_production = []
-    Business.college_interns_market = []    #Adding code support for other divisions even though there is currently no plan to use them.
-    Business.college_interns_supply = []
-    Business.college_interns_HR = []
+    Business.college_interns_research = property(business_college_interns_research, None, None)
+
+    def business_college_interns_production(self):
+        if not hasattr(self, "_college_interns_production"):
+            self._college_interns_production = MappedList(Person, all_people_in_the_game)
+        return self._college_interns_production
+
+    Business.college_interns_production = property(business_college_interns_production, None, None)
+
+    def business_college_interns_market(self):
+        if not hasattr(self, "_college_interns_market"):
+            self._college_interns_market = MappedList(Person, all_people_in_the_game)
+        return self._college_interns_market
+
+    Business.college_interns_market = property(business_college_interns_market, None, None)
+
+    def business_college_interns_supply(self):
+        if not hasattr(self, "_college_interns_supply"):
+            self._college_interns_supply = MappedList(Person, all_people_in_the_game)
+        return self._college_interns_supply
+
+    Business.college_interns_supply = property(business_college_interns_supply, None, None)
+
+    def business_college_interns_HR(self):
+        if not hasattr(self, "_college_interns_HR"):
+            self._college_interns_HR = MappedList(Person, all_people_in_the_game)
+        return self._college_interns_HR
+
+    Business.college_interns_HR = property(business_college_interns_HR, None, None)
+
     Business.college_interns_unlocked = False
     Business.college_supply_interns_unlocked = False
     Business.college_market_interns_unlocked = False
@@ -453,7 +482,7 @@ init -1 python:
     Business.get_intern_depts_with_openings = get_intern_depts_with_openings
 
     def business_get_intern_list(self):
-        return [x for x in self.college_interns_research + self.college_interns_production + self.college_interns_supply + self.college_interns_market + self.college_interns_HR if x.is_available()]
+        return [x for x in self.college_interns_research + self.college_interns_production + self.college_interns_supply + self.college_interns_market + self.college_interns_HR if x.is_available]
 
     Business.get_intern_list = business_get_intern_list
 

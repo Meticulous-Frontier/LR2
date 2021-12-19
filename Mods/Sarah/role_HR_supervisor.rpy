@@ -123,7 +123,7 @@ init 5 python:
         return False
 
     def HR_director_monday_meeting_requirement():
-        if not mc.business.hr_director or not mc.business.hr_director.is_available():
+        if not mc.business.hr_director or not mc.business.hr_director.is_available:
             return False
         if day%7 == 0 and time_of_day == 1: #Monday
             return True
