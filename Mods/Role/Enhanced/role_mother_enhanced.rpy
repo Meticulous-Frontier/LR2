@@ -1,6 +1,6 @@
 init 5 python:
     def mom_weekly_pay_requirement(the_person):
-        if the_person.available and day%7 == 5: #It is the end of the day on friday
+        if the_person.is_available and day%7 == 5: #It is the end of the day on friday
             return True
         return False
 
