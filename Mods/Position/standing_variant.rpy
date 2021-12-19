@@ -541,7 +541,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She wiggles her ass for you as you cover her with your sperm."
 
         if the_girl.get_opinion_score("being covered in cum") > 0:
-             the_girl "Yes! Paint me with your sticky cum!"
+            the_girl "Yes! Paint me with your sticky cum!"
 
         if the_girl.get_opinion_score("showing her ass") > 0:
             "[the_girl.possessive_title] bends over and presents her cum covered ass to you."
