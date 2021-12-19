@@ -72,7 +72,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
     if the_girl.sex_skills["Vaginal"] < 2: #Inexperienced, option to dominate her a bit
         "[the_girl.possessive_title] is getting overwhelmed by the sensation. She is clearly enjoying your fucking but is having a hard time keeping up."
         the_girl "Sorry, I just... you are going so fast!"
-        "You pull out then pull her hips back toward you slowly. You consider punishing her for her poor performance... or maybe you could slow up the pace and talk dirty to her?"
+        "You pull out then pull her hips back toward you slowly. You consider punishing her for her poor performance... or maybe you could slowly up the pace and talk dirty to her?"
         menu:
             "Punish Her":
                 "SMACK"

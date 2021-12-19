@@ -112,7 +112,7 @@ label scene_SB_anal_swing_1(the_girl, the_location, the_object):
 
 
 label scene_SB_anal_swing_2(the_girl, the_location, the_object):
-    "[the_girl.possessive_title] quivers as you slow up the pace a bit. You pull the straps on the swing towards you and thrust your hips forward, burying your cock as deep in her ass as you can."
+    "[the_girl.possessive_title] quivers as you slowly up the pace a bit. You pull the straps on the swing towards you and thrust your hips forward, burying your cock as deep in her ass as you can."
     if the_girl.outfit.tits_available():
         "You reach around her body with both hands and grab her tits. You pinch and pull at her nipples roughly being careful to keep your cock deep inside her."
     else:
