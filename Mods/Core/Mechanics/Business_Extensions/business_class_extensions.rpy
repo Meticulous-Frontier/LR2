@@ -435,15 +435,17 @@ init -1 python:
             div_func[target_division][0].append(person)
         person.add_role(college_intern_role)
         person.job = "Student Intern"
-        person.set_schedule(div_func[target_division][1], days = [5,6], times = [1,2])
+        person.set_alt_schedule(div_func[target_division][1], days = [5,6], times = [1,2])
         if add_to_location:
             university.add_person(person)
         if person.event_triggers_dict.get("intern_since", -1) == -1:
             person.event_triggers_dict["intern_since"] = day
             self.listener_system.fire_event("new_intern", the_person = person)
 
-        for other_employee in (self.college_interns_research + self.college_interns_production + self.college_interns_HR + self.college_interns_supply + self.college_interns_market):
-            town_relationships.begin_relationship(person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
+        # they never meet other employees...so why add relationships?
+        # for other_employee in (self.college_interns_research + self.college_interns_production + self.college_interns_HR + self.college_interns_supply + self.college_interns_market):
+        #     town_relationships.begin_relationship(person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
+        return
 
     Business.hire_college_intern = hire_college_intern
 
@@ -460,6 +462,9 @@ init -1 python:
             self.college_interns_HR.remove(person)
         else:
             pass    #Some kind of error here?
+
+        person.set_alt_schedule(None, days = [5,6], times = [1,2])
+        person.job = None
         person.remove_role(college_intern_role)
         return
 
