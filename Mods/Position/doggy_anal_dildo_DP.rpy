@@ -301,40 +301,22 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
         $ the_girl.call_dialogue("cum_face")
     return
 
-label transition_doggy_to_anal_doggy_anal_dp_taboo_break_label(the_girl, the_location, the_object):
+label transition_doggy_to_doggy_anal_dp_taboo_break_label(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s tight sphincter feels amazing, but you decide it is time to take things up another notch."
     "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap on."
     the_girl "What... what is that for?"
-    call transition_doggy_anal_doggy_anal_dp(the_girl, the_location, the_object) from _call_transition_doggy_anal_doggy_anal_dp_taboo_break
+    call transition_doggy_doggy_anal_dp(the_girl, the_location, the_object) from _call_transition_doggy_anal_doggy_anal_dp_taboo_break
     return
 
-label transition_doggy_anal_doggy_anal_dp(the_girl, the_location, the_object):
-    mc.name "I'm gonna fuck both your holes at the same time."
-    if the_girl.effective_sluttiness() > 110:
-        the_girl "Oh god I love it when you do this to me..."
-    elif the_girl.effective_sluttiness() > 80:
-        the_girl "Ok, just be careful [the_girl.mc_title]..."
-    else:
-        the_girl "Oh Jesus! I don't know..."
-        mc.name "Hush. Don't worry, it'll fit."
-    "[the_girl.possessive_title] waits patiently on all fours as you secure the strap on. She arches her back and presents her ass."
-    if the_girl.arousal > 60:
-        "Her pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
-    else:
-        "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
-    "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
-    if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl "Oh my god! I'm so full... It's so good [the_girl.mc_title]!"
-        $ the_girl.discover_opinion("anal sex")
-    else:
-        the_girl "Holy fuck! Go slow [the_girl.mc_title]. This is really intense..."
-    return
-
-label transition_doggy_to_doggy_anal_dp_taboo_break_label(the_girl, the_location, the_object):
-    "[the_girl.possessive_title]'s slobbering cunt feels great, but you decide it is time to take things up a notch."
+label transition_anal_doggy_to_doggy_anal_dp_taboo_break_label(the_girl, the_location, the_object):
+    "[the_girl.possessive_title]'s tight asshole feels great, but you decide it is time to take things up a notch."
     "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap on."
     the_girl "What... what is that for?"
     call transition_doggy_doggy_anal_dp(the_girl, the_location, the_object) from _call_transition_doggy_doggy_anal_dp_taboo_break
+    return
+
+label transition_anal_doggy_doggy_anal_dp(the_girl, the_location, the_object):
+    call transition_doggy_doggy_anal_dp (the_girl, the_location, the_object) from _call_transition_doggy_doggy_anal_dp
     return
 
 label transition_doggy_doggy_anal_dp(the_girl, the_location, the_object):
@@ -351,8 +333,11 @@ label transition_doggy_doggy_anal_dp(the_girl, the_location, the_object):
         "Her pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
     else:
         "You line yourself up with her ass while [the_girl.possessive_title] reaches down and lines the dildo up with her pussy."
-    "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
-    if the_girl.get_opinion_score("anal sex") > 0 :
+    if the_girl.has_anal_fetish():
+        "Since she's craving anal sex so much, you give a firm push, filling up both her holes."
+    else:
+        "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
+    if the_girl.get_opinion_score("anal sex") > 1 or the_girl.sex_skills["Anal"] > 2:
         the_girl "Oh my god! I'm so full... It's so good [the_girl.mc_title]!"
         $ the_girl.discover_opinion("anal sex")
     else:
