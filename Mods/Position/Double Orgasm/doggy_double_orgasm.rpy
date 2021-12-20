@@ -34,7 +34,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                 $ the_girl.discover_opinion("creampies")
                 if the_girl.on_birth_control and not the_girl.is_pregnant():
                     the_girl "Oh god, that's so hot! I love feeling cum deep inside me."
-                elif the_girl.is_pregnant():
+                elif the_girl.knows_pregnant():
                     the_girl "So fucking hot! Bathe my pregnant womb with your hot cum!"
                 else:
                     the_girl "Oh god that's so hot. You could knock me up you know? Next time be more careful!"

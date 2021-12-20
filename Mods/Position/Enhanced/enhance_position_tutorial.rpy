@@ -1,22 +1,23 @@
 # This file is designed to walk a user through enhancing existing Vren sex positions
 # This file will offer the MC the opportunity to stealth off a condom that may be in use, as well as give unique orgasm text if you choose to cum inside her
 
-init 2:     #This init must be a later number than the original position declaration.
-            #Most positions are declared in init 0:
-    python:
-        doggy.scenes.append("doggy_stealth_attempt")    #Adding to doggy.scenes gives a new scene that could be randomly selected
-        stealth_orgasm = False                          #Create a new variable to find out if orgasm was stealthed
-        doggy.outro = "outro_stealth_doggy"             #Completely replace the orgasm scene
+init 2 python:
+    #This init must be a later number than the original position declaration.
+    #Most positions are declared in init 0:
 
-        doggy_anal.transitions.remove([doggy,"transition_doggy_anal_doggy"])
-        doggy_anal.transitions.append([doggy,"transition_stealth_doggy_anal_doggy"])
-        #Other variables we could change to enhance the position
+    doggy.scenes.append("doggy_stealth_attempt")    #Adding to doggy.scenes gives a new scene that could be randomly selected
+    stealth_orgasm = False                          #Create a new variable to find out if orgasm was stealthed
+    doggy.outro = "outro_stealth_doggy"             #Completely replace the orgasm scene
 
-        # doggy.strip_description = "strip_doggy"         #Make her notice the condom is off when she strips
-        # doggy.strip_ask_description = "strip_ask_doggy" #Same as above
-        # doggy.orgasm_description = "orgasm_doggy"       #change her orgasm in some way
-        # doggy.girl_energy = 14                          #Change energy requirements
-        # doggy.guy_energy = 20                           #Change energy requirements
+    doggy_anal.transitions.remove([doggy,"transition_doggy_anal_doggy"])
+    doggy_anal.transitions.append([doggy,"transition_stealth_doggy_anal_doggy"])
+    #Other variables we could change to enhance the position
+
+    # doggy.strip_description = "strip_doggy"         #Make her notice the condom is off when she strips
+    # doggy.strip_ask_description = "strip_ask_doggy" #Same as above
+    # doggy.orgasm_description = "orgasm_doggy"       #change her orgasm in some way
+    # doggy.girl_energy = 14                          #Change energy requirements
+    # doggy.guy_energy = 20                           #Change energy requirements
 
 label doggy_stealth_attempt(the_girl, the_location, the_object):  #Write the new scene here
     "[the_girl.possessive_title] moans, clearly enjoying herself as your cock hits all the right places."
@@ -71,7 +72,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 $ the_girl.discover_opinion("creampies")
                 if the_girl.on_birth_control and not the_girl.is_pregnant():
                     the_girl "Oh god, that's so hot! I love feeling cum deep inside me."
-                elif the_girl.is_pregnant():
+                elif the_girl.knows_pregnant():
                     the_girl "So fucking hot! Bathe my pregnant womb with your hot cum!"
                 else:
                     the_girl "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
