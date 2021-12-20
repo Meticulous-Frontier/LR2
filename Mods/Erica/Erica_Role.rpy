@@ -617,7 +617,7 @@ label erica_phase_one_label(the_person):
         $ the_person.draw_person( position = "stand2")
         $ mc.change_locked_clarity(20)
         "As you enter, you see that [the_person.title] is already naked."
-        the_person "[the_person.mc_title], I'm so turned on. Can you do what you did a little bit ago again?"
+        the_person "[the_person.mc_title], I'm so turned on. Can you finish what you started in the fitness area?"
         "She points to a bench sitting along the wall."
         "She looks nervous. You can tell she is just looking to fool around a bit."
         menu:
