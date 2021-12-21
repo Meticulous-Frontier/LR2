@@ -48,6 +48,7 @@ init 2 python:
         ellie.event_triggers_dict["intro_complete"] = False    # True after first talk
         ellie.event_triggers_dict["blackmail_stage"] = 0
         ellie.event_triggers_dict["squirts"] = False
+        ellie.event_triggers_dict["been_fingered"] = False
         ellie.event_triggers_dict["given_handjob"] = False
         ellie.event_triggers_dict["given_blowjob"] = False
         ellie.event_triggers_dict["given_virginity"] = False
@@ -98,7 +99,7 @@ init -2 python: #Requirement Functions
         return time_of_day == 0 and day%7 == 0
 
     def ellie_never_been_kissed_requirement(the_person):
-        if ellie_is_working_on_nanobots() and ellie.sluttiness > 20:
+        if ellie_is_working_on_nanobots() and ellie.sluttiness >= 20:
             return True
         if ellie.sluttiness > 40:
             return True
@@ -115,7 +116,7 @@ init -2 python: #Requirement Functions
         return False
 
     def ellie_never_given_handjob_requirement():
-        if ellie.love > 20 and mc.is_at_work() and mc.business.is_open_for_business():
+        if ellie.love >= 20 and mc.is_at_work() and mc.business.is_open_for_business():
             return True
         return False
 
@@ -708,6 +709,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
 
     "You'll want to speak with her soon though, about what just happened."
     $ mc.business.add_mandatory_crisis(ellie_grope_followup)
+    $ the_person.event_triggers_dict["been_fingered"] = True
 
     "Your encounter has left you crazy horny."
     if mc.business.head_researcher.sluttiness > 60:
@@ -1271,6 +1273,9 @@ init -1 python:
 
     def ellie_is_a_squirter():
         return ellie.event_triggers_dict.get("squirts", False)
+
+    def ellie_has_been_fingered():
+        return ellie.event_triggers_dict.get("been_fingered", False)
 
     def ellie_has_given_handjob():
         return ellie.event_triggers_dict.get("given_handjob", False)
