@@ -48,6 +48,13 @@ init 2 python:
         ellie.event_triggers_dict["intro_complete"] = False    # True after first talk
         ellie.event_triggers_dict["blackmail_stage"] = 0
         ellie.event_triggers_dict["squirts"] = False
+        ellie.event_triggers_dict["given_handjob"] = False
+        ellie.event_triggers_dict["given_blowjob"] = False
+        ellie.event_triggers_dict["given_virginity"] = False
+        ellie.event_triggers_dict["given_anal_virginity"] = False
+        ellie.event_triggers_dict["brought_lunch"] = False
+        ellie.event_triggers_dict["dinner_date"] = False
+        ellie.event_triggers_dict["work_turnon"] = False
 
         mc.business.add_mandatory_crisis(ellie_start_intro_note) #Add the event here so that it pops when the requirements are met.
 
@@ -113,6 +120,9 @@ init -2 python: #Requirement Functions
         return False
 
     def ellie_never_tasted_cock_requirement(the_person):
+        if the_person.sluttiness >= 40 and mc.is_at_work() and mc.business.is_open_for_business():
+            if get_random_employees(1, exclude_list = [the_person], slut_required = 50):
+                return True
         return False
 
     def ellie_never_been_fucked_requirement():
@@ -122,6 +132,9 @@ init -2 python: #Requirement Functions
         return False
 
     def ellie_never_tried_anal_requirement():
+        return False
+
+    def ellie_turned_on_while_working_intro_requirement(the_person):
         return False
 
     def ellie_turned_on_while_working_requirement():
@@ -148,6 +161,8 @@ init -1 python:
     ellie_loses_her_virginity = Action("Ellie loses her cherry", ellie_loses_her_virginity_requirement, "ellie_loses_her_virginity_label")
     ellie_never_tried_anal = Action("Ellie tries anal", ellie_never_tried_anal_requirement, "ellie_never_tried_anal_label")
     ellie_brings_lunch = Action("Ellie likes cooking", ellie_brings_lunch_requirement, "ellie_brings_lunch_label")
+    ellie_turned_on_while_working_intro = Action("Ellie gets horny", ellie_turned_on_while_working_intro_requirement, "ellie_turned_on_while_working_intro_label")
+    ellie_turned_on_while_working = Action("Ellie gets horny", ellie_turned_on_while_working_requirement, "ellie_turned_on_while_working_label")    #NOTE: This should probably get moved to a separate crisis file
 
 label ellie_start_intro_note_label():
     $ the_person = mc.business.head_researcher
@@ -790,6 +805,7 @@ label ellie_text_message_apology_label():
     the_person "When I was in school, I just stayed busy with schoolwork and never had a boyfriend or anything."
     the_person "Anyway, thanks for sending me this, I appreciate yer helping me out with it."
     $ the_person.change_love(3)
+    $ the_person.increase_sex_skill("Foreplay", 3, add_to_log = True)
 
     "You decide to send her a quick text back."
     mc.name "Happy to help. Let me know if you need any further demonstrations."
@@ -878,6 +894,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     mc.name "Gentle now. Think about how soft your vagina is. Try and replicate that with your hand."
     the_person "Ah! Sorry..."
     "[the_person.title] gives you a few softer strokes now. They are much more pleasant."
+    $ the_person.increase_sex_skill("Foreplay", 4, add_to_log = True)
     $ mc.change_locked_clarity(20)
     $ mc.change_arousal(10) # 15
     $ the_person.draw_person(position = "blowjob")
@@ -951,6 +968,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ mc.change_arousal(20) #85
     $ mc.change_locked_clarity(50)
     $ ClimaxController.manual_clarity_release(climax_type = "tits", the_person = the_person)
+    $ the_person.event_triggers_dict["given_handjob"] = True
 
     "Your orgasm builds to a peak and you grunt, blasting your load up between [the_person.title]'s tits and out the top of her cleavage."
     $ the_person.cum_on_tits()
@@ -1014,7 +1032,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     the_person "Ohhh stars. I..."
     mc.name "Come with me. We'll talk about this in my office."
     the_person "Oh fudge... okay..."
-    $ scene_manager.update_actor(the_person, positition = "stand3")
+    $ scene_manager.update_actor(the_person, position = "stand3")
     "[talk_person.possessive_title] looks at you a little concerned, but you give her quick wink. She gives a smile as you turn and walk back out of the room."
     $ scene_manager.clear_scene()
     "Silently you lead [the_person.title] to your office."
@@ -1092,11 +1110,79 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     the_person "Mmm... okay..."
     $ mc.change_arousal(15) #50
     $ mc.change_locked_clarity(40)
+    $ the_person.increase_sex_skill("Oral", 4, add_to_log = True)
     "[the_person.title] looks up at you as she licks at the tip again. She maintains the eye contact as she opens her mouth and starts to suck on the tip again."
+    $ the_person.change_arousal(10)
+    the_person "Mmm... mmm..."
+    "[the_person.possessive_title] gives a couple little moans as she keeps working you over. She seems to be be really getting to it."
+    $ mc.change_arousal(20) #70
+    $ mc.change_locked_clarity(40)
+    "[the_person.title] is getting braver. She pushes the tip past her lips now and starts bobbing her head gently."
+    mc.name "That's it. You're doing great. If it starts to get uncomfortable, you can always back off and just use your hand for a bit."
+    "[the_person.title] looks at you and nods for a second, but keeps going. Her silky tongue is working wonders traveling up and down your cock."
+    $ mc.change_arousal(20) #90
+    $ mc.change_locked_clarity(40)
+    "The sensations are getting more intense. She's going to make you cum?"
+    mc.name "[the_person.title], I'm gonna cum soon. What do you want me to do?"
+    "She pulls off for a quick second."
+    the_person "Whatever you want. I just want to make you feel good."
+    "[the_person.possessive_title] opens up and starts sucking you off eagerly now. She is really working hard!"
+    $ mc.change_arousal(20) #110
+    $ mc.change_locked_clarity(40)
+    "The velvet soft tongue of [the_person.title] is driving you over the edge. What do you want to do?"
+    menu:
+        "Cum in her mouth":
+            "You put your hand on the back of her head."
+            mc.name "Get ready, I want to cum in your mouth.... here it comes!"
+            "With a moan you explode, your cock starts to dump its load in her eager mouth."
+            $ the_person.cum_in_mouth()
+            $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
+            $ the_person.draw_person(position = "blowjob")
+            "[the_person.title] is startled by how forcefully you ejaculate. She gags almost immediately, but refuses to open her mouth."
+            "Cmming in [the_person.possessive_title]'s hot, wet mouth feels incredible. When you finish, you look down and see that she still has the tip in her mouth."
+            mc.name "[the_person.title], that was incredible. Now, I want you to look up at me and swallow."
+            "Dutifully, she looks up at you and does as you order. It takes a couple gulps, and she winces a bit, but she swallows it all."
+            $ the_person.change_slut(2, 60)
+            mc.name "So... how was it?"
+            "She thinks about it for a moment."
+            the_person "It was... I don't know! It was gross, but amazing at the same time..."
+            $ the_person.increase_opinion_score("giving blowjobs", max_value = 1)
+            $ the_person.increase_opinion_score("drinking cum", max_value = 2)
+            $ the_person.increase_opinion_score("being submissive", max_value = 1)
+        "Cum on her face":
+            "You put your hand on the back of her head and pull her off."
+            mc.name "Use your hand, I want you jack me off all over your face."
+            "[the_person.possessive_title] starts stroking you rapidly with her hand, pointing you at her face."
+            the_person "That's it. Cum on my face [the_person.mc_title]!"
+            $ the_person.cum_on_face()
+            $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
+            $ the_person.draw_person(position = "blowjob")
+            "Hearing her words pushes you over the edge and your cock explodes. Spurt after spurt erupts all over her face."
+            "She keeps jacking you off, and overall does a very good job of aiming your twitching manhood."
+            "When the last wave finishes, you look down and survey [the_person.possessive_title]. Her face is plastered in your semen."
+            $ the_person.change_slut(2, 60)
+            mc.name "So... how was it?"
+            the_person "It's... sticky? But hot, and watching you as you cum made me feel so incredible..."
+            $ the_person.increase_opinion_score("giving blowjobs", max_value = 1)
+            $ the_person.increase_opinion_score("cum facials", max_value = 2)
+            $ the_person.increase_opinion_score("taking control", max_value = 1)
 
 
-    "Ellie now has oral positions unlocked."
-    "Ellie may now approach MC once in a while when she is working on nanobot programs because working on sex related code is getting in her head and she needs some relief"
+    "As you recover, you get yourself decent again."
+    $ the_person.draw_person()
+    $ the_person.event_triggers_dict["given_blowjob"] = True
+    the_person "I... I think I'm gonna go to the lady's room..."
+    mc.name "That's a good idea."
+    the_person "But umm... can we do this again sometime? I ummm... I might need more pratice."
+    mc.name "I think that can be arranged."
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] awkwardly turns and walks out of your office."
+    "Your conservative, southern belle has now given you a blowjob! And it sounds like she wants to do it again soon!"
+    "[the_person.title] now has oral positions unlocked."
+    $ mc.business.add_mandatory_crisis(ellie_brings_lunch)
+    $ the_person.add_unique_on_room_enter_event(ellie_turned_on_while_working_intro)
+    $ the_person.apply_planned_outfit()
+    #"Ellie may now approach MC once in a while when she is working on nanobot programs because working on sex related code is getting in her head and she needs some relief"
     return
 
 label ellie_never_been_fucked_label():  #This is Ellie's 60 sluttiness event. Also requires X number of oral encounters?
@@ -1110,6 +1196,7 @@ label ellie_never_been_fucked_label():  #This is Ellie's 60 sluttiness event. Al
     "She says okay. Make a plan for dinner on... some day? Figure out best day."
     "She's still needy right now though. Quick detour to the office for sixty nine."
     "She goes back to work."
+
     return
 
 label ellie_loses_her_virginity_label():
@@ -1134,10 +1221,16 @@ label ellie_loses_her_virginity_label():
     "With high love stat, MC has option to ask her to be his girlfriend. She accepts."
     "Leave her place and go home."
     "You have unlocked Ellie's vaginal sex options."
+    $ ellie.event_triggers_dict["given_virginity"] = True
     return
 
 label ellie_never_tried_anal_label():   #This is Ellie's 80 sluttiness rating. Must have anal nanobots unlocked.
     pass
+    $ ellie.event_triggers_dict["given_anal_virginity"] = True
+    return
+
+label ellie_turned_on_while_working_intro_label(the_person):
+    $ ellie.event_triggers_dict["work_turnon"] = False
     return
 
 label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered after unlocking Ellie's oral sex options, and procs when she is working on nanobot programming.
@@ -1152,7 +1245,15 @@ label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered 
 
 # Love Scenes
 label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a date in his office.
+    $ ellie.event_triggers_dict["brought_lunch"] = False
+    return
+
+label ellie_dinner_date_intro_label():
     pass
+    return
+
+label ellie_dinner_date_label():
+    $ ellie.event_triggers_dict["dinner_date"] = False
     return
 
 
@@ -1170,3 +1271,24 @@ init -1 python:
 
     def ellie_is_a_squirter():
         return ellie.event_triggers_dict.get("squirts", False)
+
+    def ellie_has_given_handjob():
+        return ellie.event_triggers_dict.get("given_handjob", False)
+
+    def ellie_has_given_blowjob():
+        return ellie.event_triggers_dict.get("given_blowjob", False)
+
+    def ellie_has_given_virginity():
+        return ellie.event_triggers_dict.get("given_virginity", False)
+
+    def ellie_has_given_anal_virginity():
+        return ellie.event_triggers_dict.get("given_anal_virginity", False)
+
+    def ellie_has_brought_lunch_date():
+        return ellie.event_triggers_dict.get("brought_lunch", False)
+
+    def ellie_has_cooked_dinner_date():
+        return ellie.event_triggers_dict.get("dinner_date", False)
+
+    def ellie_work_crisis_unlocked():
+        return ellie.event_triggers_dict.get("work_turnon", False)
