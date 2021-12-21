@@ -1138,8 +1138,8 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
             $ the_person.cum_in_mouth()
             $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
             $ the_person.draw_person(position = "blowjob")
-            "[the_person.title] is startled by how forcefully you ejaculate. She gags almost immediately, but refuses to open her mouth."
-            "Cmming in [the_person.possessive_title]'s hot, wet mouth feels incredible. When you finish, you look down and see that she still has the tip in her mouth."
+            "[the_person.title] is startled by how forcefully you ejaculate. She gags almost immediately, but refuses to close her mouth."
+            "Cumming in [the_person.possessive_title]'s hot, wet mouth feels incredible. When you finish, you look down and see that she still has the tip in her mouth."
             mc.name "[the_person.title], that was incredible. Now, I want you to look up at me and swallow."
             "Dutifully, she looks up at you and does as you order. It takes a couple gulps, and she winces a bit, but she swallows it all."
             $ the_person.change_slut(2, 60)
@@ -1173,7 +1173,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     $ the_person.event_triggers_dict["given_blowjob"] = True
     the_person "I... I think I'm gonna go to the lady's room..."
     mc.name "That's a good idea."
-    the_person "But umm... can we do this again sometime? I ummm... I might need more pratice."
+    the_person "But umm... can we do this again sometime? I ummm... I might need more practice."
     mc.name "I think that can be arranged."
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] awkwardly turns and walks out of your office."
