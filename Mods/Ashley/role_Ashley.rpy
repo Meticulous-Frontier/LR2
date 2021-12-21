@@ -2325,6 +2325,8 @@ label ashley_clothes_shopping_label(the_person):
         $ clear_scene()
         "You quietly exit the changing room."
 
+    # make sure she changes back into her normal outfit
+    $ the_person.apply_planned_outfit()
     return
 
 label ashley_test_outfit_scene():
