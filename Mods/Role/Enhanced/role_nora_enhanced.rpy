@@ -28,6 +28,8 @@ init 5 python:
 
 
     def study_person_requirement(the_person):
+        if len(list_of_nora_traits) == 0:
+            return False
         if not has_nora_trait_info(the_person):
             return "No interesting properties"
         if time_of_day == 4:
