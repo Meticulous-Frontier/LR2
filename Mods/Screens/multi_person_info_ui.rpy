@@ -40,10 +40,7 @@ screen multi_person_info_ui(actors):
                             action NullAction()
                             sensitive True
 
-                        if actor.person.title:
-                            text actor.person.title style "menu_text_style" size 30 ysize 30
-                        else:
-                            text "???" style "menu_text_style" font actor.person.char.what_args["font"] color actor.person.char.what_args["color"] size 30
+                        text format_titles(actor.person) style "menu_text_style" size 30 ysize 30
 
                         if actor.person.serum_effects:
                             textbutton "{image=serum_vial} +[actor.person.suggestibility]%":
