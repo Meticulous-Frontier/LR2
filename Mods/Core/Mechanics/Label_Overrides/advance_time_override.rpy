@@ -139,6 +139,12 @@ init 5 python:
             if crisis:
                 return crisis
 
+        # special handling for mall introductions during weekends (prioritize while we have unknown people in the mall)
+        if day % 7 in [5, 6] and mall_introduction_requirement():
+            crisis = find_in_list(lambda x: x.effect == "mall_introduction_action_label", active_crisis_list)
+            if crisis:
+                return crisis
+
         # append excluded events to list
         active_excluded_events = [x for x in excluded_crisis_tracker_events if x.is_action_enabled()]
 
