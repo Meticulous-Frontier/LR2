@@ -75,7 +75,7 @@ init 0 python:
     # instead of using 'call name' in menus, use the actual person name to avoid confusion
     def format_titles(person):
         person_title = person.name + " " + person.last_name
-        if person_title is None:
+        if person.title is None:
             person_title = "???"
         return_title = "{color=" + person.char.who_args["color"] + "}" + "{font=" + person.char.what_args["font"] + "}" + person_title + "{/font}{/color}"
         return return_title
