@@ -26,9 +26,15 @@ init 5 python:
             return True
         return False
 
+    def nora_traits_left():
+        nora_traits = [nora_reward_mother_trait, nora_reward_sister_trait, nora_reward_cousin_trait, nora_reward_aunt_trait, nora_reward_nora_trait, nora_reward_high_love_trait, nora_reward_low_love_trait, nora_reward_high_obedience_trait, nora_reward_high_slut_trait, nora_reward_genius_trait, nora_reward_instant_trance]
+        if persistent.pregnancy_pref != 0:
+            nora_traits.append(nora_reward_hucow_trait)
+
+        return len(list(set(nora_traits)-set(list_of_traits)))
 
     def study_person_requirement(the_person):
-        if len(list_of_nora_traits) == 0:
+        if nora_traits_left() == 0:
             return False
         if not has_nora_trait_info(the_person):
             return "No interesting properties"
