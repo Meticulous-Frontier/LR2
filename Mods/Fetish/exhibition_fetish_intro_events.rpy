@@ -50,6 +50,7 @@ init 1 python:
         return False
 
     def exhibition_fetish_sarah_intro_requirement():
+
         return False
 
     def exhibition_fetish_ophelia_intro_requirement():
@@ -73,9 +74,9 @@ init 2 python: #Other exhibition fetish related python code
 
 init 50 python:
     def get_exhibition_fetish_unique_dialogue_list():
-        anal_list = [lily, starbuck]
+        exhibition_list = [sarah]
 
-        return anal_list
+        return exhibition_list
 
     def debug_set_stats_for_exhibition_fetish_mins(the_person):
         the_person.situational_sluttiness = {} #A dict that stores a "situation" string and the corresponding amount it is contributing to the girls sluttiness.
@@ -136,7 +137,30 @@ label exhibition_fetish_starbuck_intro_label():
     return False
 
 label exhibition_fetish_sarah_intro_label():
-    return False
+    $ the_person = sarah
+    "It's another Wednesday morning. The girls are starting to arrive for work and getting set up for the day."
+    "You always enjoy when the girls get there in the morning. You check out some of their outfits, not so subtly, as they arrive."
+    "You are just starting to think about calling one to the office for a quickie when someone interrupts your thoughts..."
+    the_person "Ahem..."
+    $ the_person.draw_person()
+    mc.name "Ah, good morning [the_person.title]."
+    the_person "Good morning. I umm, noticed you were checking out some of the employees..."
+    mc.name "Ah, yes I was."
+    the_person "I try to take care of your urges for you at the Monday meetings..."
+    mc.name "Well, maybe..."
+    the_person "Do you need me to take care of you again? I know it's hump day... I could do it right here?"
+    "You look around. Several girls have already sat down at their desk and begun their work."
+    "You look back at [the_person.possessive_title]. Is she blushing?"
+    "You've been testing Social Sexual Proclivity Nanobots quite a bit on her lately. Is she doing this BECAUSE all the other girls are here?"
+    "You reply to her in a voice that is louder than necessary, making sure all the girls around you hear it."
+    mc.name "Yes [the_person.title]. Why don't you get on your knees and take care of it for me."
+    $ the_person.change_happiness(3)
+    the_person "Yes sir!"
+    $ the_person.draw_person(position = "blowjob")
+    "[the_person.possessive_title] gleefully gets down on her knees and pulls down your zipper. After pulling your cock out, she smiles up at you, then licks the tip."
+    "You can here murmurs from some of the girls around you, but it doesn't seem to phase her. If anything, she seems to be emboldened..."
+    
+    return
 
 label exhibition_fetish_ophelia_intro_label():
     return False

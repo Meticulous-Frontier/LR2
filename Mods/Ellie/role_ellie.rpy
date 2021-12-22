@@ -996,6 +996,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     "[the_person.possessive_title] awkwardly turns and leaves your office. You can't help but smile."
     "She'll get used to servicing your needs in your office soon enough. For now you are content with the leap of progress you have made with her."
     $ the_person.add_unique_on_room_enter_event(ellie_never_tasted_cock)
+    $ mc.business.add_mandatory_crisis(ellie_brings_lunch)
     return
 
 label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness event.
@@ -1181,7 +1182,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     "[the_person.possessive_title] awkwardly turns and walks out of your office."
     "Your conservative, southern belle has now given you a blowjob! And it sounds like she wants to do it again soon!"
     "[the_person.title] now has oral positions unlocked."
-    $ mc.business.add_mandatory_crisis(ellie_brings_lunch)
+    $ mc.business.add_mandatory_crisis(ellie_brings_lunch)  #TODO delete this line with 48.1 release
     $ the_person.add_unique_on_room_enter_event(ellie_turned_on_while_working_intro)
     $ the_person.apply_planned_outfit()
     #"Ellie may now approach MC once in a while when she is working on nanobot programs because working on sex related code is getting in her head and she needs some relief"
@@ -1247,7 +1248,11 @@ label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered 
 
 # Love Scenes
 label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a date in his office.
-    $ ellie.event_triggers_dict["brought_lunch"] = False
+    if ellie_has_brought_lunch_date():  #I left a scenario in game where this could occur twice. IF this event has already occured, just exit immediately.
+        return
+    $ ellie.event_triggers_dict["brought_lunch"] = True
+
+
     return
 
 label ellie_dinner_date_intro_label():
