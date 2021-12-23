@@ -507,6 +507,13 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                                 $ position_choice = prone_bone
                             else:
                                 $ position_choice = None
+                        elif position_choice.skill_tag == "Anal" and mc.energy > 50 and mc.location.has_object_with_trait(prone_anal.requires_location):
+                            call prone_anal_decision_label(the_girl = the_person, the_location = mc.location, the_object = object_choice, the_position = position_choice) from _prone_anal_sex_takeover_01
+                            if _return:
+                                $ the_object = _return
+                                $ position_choice = prone_anal
+                            else:
+                                $ position_choice = None
                         else:
                             $ position_choice = None
                     elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
