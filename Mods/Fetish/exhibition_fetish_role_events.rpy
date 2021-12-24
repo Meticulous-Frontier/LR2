@@ -31,6 +31,14 @@ init 2 python:
 init 3 python:
     exhibition_fetish_role = Role(role_name = "Exhibitionist", actions = [])
 
+    def add_exhibition_fetish(person):
+        person.add_role(exhibition_fetish_role)
+        #person.update_sex_skill("Vaginal", 6)
+        person.event_triggers_dict["LastExhibitionFetish"] = day
+        # fetish_add_collar(person, breed_collar)
+        return
+
+
 #Strip scene for exhibitionists
 # label free_strip_scene(the_person, must_be_naked = True):
 #     $ picked_pose = the_person.idle_pose #She starts in her idle pose (which is a string)

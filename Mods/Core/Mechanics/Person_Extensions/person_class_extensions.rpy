@@ -272,8 +272,23 @@ init -1 python:
     def set_person_maid_outfit(self, value):
         self._maid_outfit = value
 
-    Person.maid_outfit = property(get_person_maid_outfit, set_person_maid_outfit, None, "Store maid outfit for the day.")
+    def del_person_maid_outfit(self):
+        del self._maid_outfit
 
+    Person.maid_outfit = property(get_person_maid_outfit, set_person_maid_outfit, del_person_maid_outfit, "Store maid outfit for the day.")
+
+    def get_person_location_outfit(self):
+        if not hasattr(self, "_location_outfit"):
+            self._location_outfit = None
+        return self._location_outfit
+
+    def set_person_location_outfit(self, value):
+        self._location_outfit = value
+
+    def del_person_location_outfit(self):
+        del self._location_outfit
+
+    Person.location_outfit = property(get_person_location_outfit, set_person_location_outfit, del_person_location_outfit, "Store outfit for specific location (only valid 1 timeslot).")
 
     # change idle position based on location
     def get_person_idle_pose(self):
@@ -397,6 +412,28 @@ init -1 python:
         return "neatly trimmed"
 
     Person.pubes_description = property(person_pubes_description_string, None, None, "Property that returns pussy pubes description for use in dialogs.")
+
+    def person_tits_description_string(self):
+        rank = rank_tits(self.tits)
+        adjective = "perky"
+        descriptor = "tits"
+
+        if rank == 0:
+            adjective = get_random_from_list(["flat", "minute", "tiny"])
+            descriptor = get_random_from_list(["titties", "tits", "nipples"])
+        elif rank >= 1 and rank <= 3:
+            adjective = get_random_from_list(["firm", "perky", "small"])
+            descriptor = get_random_from_list(["breasts", "tits", "boobs"])
+        elif rank >= 4 and rank <= 6:
+            adjective = get_random_from_list(["shapely", "large", "big", "generous"])
+            descriptor = get_random_from_list(["breasts", "tits", "bosoms"])
+        elif rank >= 7 and rank <= 9:
+            adjective = get_random_from_list(["large", "voluptuous", "colossal", "huge"])
+            descriptor = get_random_from_list(["breasts", "tits", "jugs", "melons"])
+
+        return "{adj} {desc}".format(adj = adjective, desc = descriptor)
+
+    Person.tits_description = property(person_tits_description_string, None, None, "Property that returns tits description for use in dialogs.")
 
     ## CHANGE HEIGHT EXTENSION
     # Returns True when the persons height has changed; otherwise False
@@ -882,6 +919,7 @@ init -1 python:
             serum.run_on_move(self) #Run the serum's on_move function if one exists
 
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
+        self.location_outfit = None # Clear the current location outfit (only valid 1 timeslot)
 
         if time_of_day == 0: #Change outfit here, because crisis events might be triggered after run day function
             if self.next_day_outfit:
@@ -1445,6 +1483,8 @@ init -1 python:
         else:
             renpy.show(self.identifier, at_list=at_arguments, layer = draw_layer, what = top_displayable, zorder = display_zorder, tag = self.identifier)
             renpy.show(self.identifier + "_old", at_list= at_arguments + [clothing_fade], layer = draw_layer, what = bottom_displayable, zorder = display_zorder + 1, tag = self.identifier + "_old") #Overlay old and blend out
+
+        renpy.pause(.3) # slight pause between animations
         return
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
@@ -1709,10 +1749,10 @@ init -1 python:
 
     # helper function, to determine if person is available for crisis events
     # for now only girls giving birth are not available (but is extendable for future conditions)
-    def is_available(self):
+    def person_is_available(self):
         return not self.is_giving_birth()
 
-    Person.is_available = is_available
+    Person.is_available = property(person_is_available, None, None)
 
 
 ################################################
@@ -1798,12 +1838,28 @@ init -1 python:
 
     Person.should_wear_uniform = should_wear_uniform_enhanced
 
+    @property
+    def current_planned_outfit(self):
+        if self.should_wear_uniform() and self.planned_uniform:
+            return self.planned_uniform
+        elif self.should_wear_work_outfit() and self.work_outfit:
+            return self.work_outfit
+        elif self.should_wear_maid_outfit() and self.maid_outfit:
+            return self.maid_outfit
+        elif self.location in [gym, university] and self.location_outfit:
+            return self.location_outfit
+        return self.planned_outfit
+
+    Person.current_planned_outfit = current_planned_outfit
+
     def review_outfit_enhanced(self, dialogue = True, draw_person = True):
         if not self.has_cum_fetish():
             self.outfit.remove_all_cum()
 
-        if (self.should_wear_uniform() and not self.is_wearing_uniform()) \
-            or (self.outfit.slut_requirement > self.sluttiness):
+        if not self.outfit.matches(self.current_planned_outfit) \
+            and (__builtin__.len(self.location.people) > 1 \
+            or (self.should_wear_uniform() and not self.is_wearing_uniform()) \
+            or (self.outfit.slut_requirement > self.sluttiness)):
             self.apply_planned_outfit()
             if draw_person:
                 self.draw_person()
@@ -1815,7 +1871,8 @@ init -1 python:
 
     def apply_gym_outfit(self):
         if workout_wardrobe:
-            self.apply_outfit(self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
+            self.location_outfit = self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self))
+            self.apply_outfit(self.location_outfit)
             # self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
@@ -1823,8 +1880,9 @@ init -1 python:
 
     def apply_university_outfit(self):
         if university_wardrobe:
+            self.location_outfit = university_wardrobe.decide_on_outfit2(self)
             # get personal copy of outfit, so we don't change the university wardrobe (in any events)
-            self.apply_outfit(university_wardrobe.decide_on_outfit2(self))
+            self.apply_outfit(self.location_outfit)
         return
 
     Person.apply_university_outfit = apply_university_outfit
@@ -1864,6 +1922,8 @@ init -1 python:
             self.wear_work_outfit()
         elif self.should_wear_maid_outfit():
             self.wear_maid_outfit()
+        elif self.location in [gym, university] and self.location_outfit:
+            self.apply_outfit(self.location_outfit)
         else:
             if not self.planned_outfit: # extra validation to make sure we have a planned outfit
                 self.planned_outfit = self.decide_on_outfit()

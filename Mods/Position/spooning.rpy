@@ -55,7 +55,7 @@ label scene_spooning_1(the_girl, the_location, the_object):
             the_girl "Mmm, you should just pull that out of the way. I want you to be able to grab them and squeeze them."
     else:
         if the_girl.outfit.tits_available():
-            "[the_girl.possessive_title]'s cute little tits feel firm and hot in your hand."
+            "[the_girl.possessive_title]'s cute [the_girl.tits_description] feel firm and hot in your hand."
             the_girl "Oh! Mmm gentle with me [the_girl.mc_title]."
             "You rub her nipple for a moment and feel it get hard, then move to her other breast and do the same."
         else:

@@ -132,6 +132,19 @@ init 5 python:
     def find_next_crisis(active_crisis_list):
         update_crisis_tracker(active_crisis_list)
 
+        # special handling for unlocking the unisex bathroom quest line faster (last stage should unlock around day 140)
+        unisex_level = mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0)
+        if unisex_restroom_crisis_requirement() and unisex_level > 0 and unisex_level < 6 and day > 20 + unisex_level * 20:
+            crisis = find_in_list(lambda x: x.effect == "unisex_restroom_action_label", active_crisis_list)
+            if crisis:
+                return crisis
+
+        # special handling for mall introductions during weekends (prioritize while we have unknown people in the mall)
+        if day % 7 in [5, 6] and mall_introduction_requirement():
+            crisis = find_in_list(lambda x: x.effect == "mall_introduction_action_label", active_crisis_list)
+            if crisis:
+                return crisis
+
         # append excluded events to list
         active_excluded_events = [x for x in excluded_crisis_tracker_events if x.is_action_enabled()]
 

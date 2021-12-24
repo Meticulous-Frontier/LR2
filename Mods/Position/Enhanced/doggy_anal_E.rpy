@@ -42,57 +42,57 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
         "[the_girl.possessive_title]'s ass feels so tight you are tempted to let her continue setting the pace, but you worry she might get the wrong idea if you let this little slut take charge."
         menu:
             "Fuck me with your ass":
-                 "You decide to see what [the_girl.possessive_title] can do if you let her take control of the pace. Encouraged by your words, she eagerly works your cock with her ass." ###FINISH
-                 the_girl "Mmm, does it feel good when I work it like this?"
-                 "[the_girl.possessive_title] begins to twerk up and down your shaft with quick, shallow movements."
-                 if mc.arousal > 70:
-                      mc.name "Damn that feels good. You're gonna make me cum if you keep that up. Where do you want my load?"
-                      if mc.condom:
-                           the_girl "Just shove it in deep and dump it right in my ass. You still have that condom on, right?"
-                      elif the_girl.has_cum_fetish():
-                           the_girl "Anywhere on my skin! My ass, my face, I don't care, just spray me down with it! With you know I need it like that!"
-                      elif the_girl.get_opinion_score("anal creampies") > 0:
-                           the_girl "You should just shove it in as deep as you can and cum inside me."
-                      elif the_girl.get_opinion_score("being covered in cum") > 0:
-                           the_girl "You should pull out and cum all over my ass. That would be so hot..."
-                      elif the_girl.get_opinion_score("cum facials") > 0:
-                           the_girl "Tell me when you are about to cum and I'll let you cum all over my face..."
-                      elif the_girl.obedience > 130:
-                           the_girl "Cum wherever you want to... I just want to please you, sir."
-                      else:
-                           the_girl "I don't know... wherever you want I guess?"
-                 else:
-                      mc.name "Wow, your ass is amazing. Where'd you learn to work it like that girl? Have you been practicing?"
-                      if the_girl.has_role(anal_fetish_role):
-                           "In response, she slams her ass all the way back on your dick. She grinds her hips left and right up against you."
-                           the_girl "Practicing, dreaming, begging for your cock in my ass! Every moment my rear is empty I'm craving your dick deep inside it."
-                           "You can feel her tense and relax her muscles in her ass rhythmically, messaging your shaft while you remain totally engulfed inside her."
-                           mc.name "Fuck [the_girl.title], I don't know how you do that, but it's amazing."
-                           "[the_girl.possessive_title] sighs. She is truly addicted to getting her tight back passage fucked"
-                      elif the_girl.get_opinion_score("anal sex") > 0:
-                           "In response, she slams her ass all the way back on your dick. She grinds her hips left and right up against you."
-                           "You can feel her tense and relax her muscles in her ass rhythmically, messaging your shaft while you remain totally engulfed inside her."
-                           mc.name "Wow, I guess so! That feels amazing. Feel free to practice anytime you want on me, [the_girl.title]!"
-                           "[the_girl.possessive_title] sighs. You can tell having your dick in her ass is very fulfilling for her."
-                      else:
-                           "[the_girl.possessive_title] looks back at you."
-                           the_girl "Honestly, I'm not usually into butt stuff... but I just want to make you feel so good..."
-                 "[the_girl.possessive_title] continues to twerk her ass up and down on your penis. How does she make it look so easy?"
+                "You decide to see what [the_girl.possessive_title] can do if you let her take control of the pace. Encouraged by your words, she eagerly works your cock with her ass." ###FINISH
+                the_girl "Mmm, does it feel good when I work it like this?"
+                "[the_girl.possessive_title] begins to twerk up and down your shaft with quick, shallow movements."
+                if mc.arousal > 70:
+                    mc.name "Damn that feels good. You're gonna make me cum if you keep that up. Where do you want my load?"
+                    if mc.condom:
+                        the_girl "Just shove it in deep and dump it right in my ass. You still have that condom on, right?"
+                    elif the_girl.has_cum_fetish():
+                        the_girl "Anywhere on my skin! My ass, my face, I don't care, just spray me down with it! With you know I need it like that!"
+                    elif the_girl.get_opinion_score("anal creampies") > 0:
+                        the_girl "You should just shove it in as deep as you can and cum inside me."
+                    elif the_girl.get_opinion_score("being covered in cum") > 0:
+                        the_girl "You should pull out and cum all over my ass. That would be so hot..."
+                    elif the_girl.get_opinion_score("cum facials") > 0:
+                        the_girl "Tell me when you are about to cum and I'll let you cum all over my face..."
+                    elif the_girl.obedience > 130:
+                        the_girl "Cum wherever you want to... I just want to please you, sir."
+                    else:
+                        the_girl "I don't know... wherever you want I guess?"
+                else:
+                    mc.name "Wow, your ass is amazing. Where'd you learn to work it like that girl? Have you been practicing?"
+                    if the_girl.has_role(anal_fetish_role):
+                        "In response, she slams her ass all the way back on your dick. She grinds her hips left and right up against you."
+                        the_girl "Practicing, dreaming, begging for your cock in my ass! Every moment my rear is empty I'm craving your dick deep inside it."
+                        "You can feel her tense and relax her muscles in her ass rhythmically, messaging your shaft while you remain totally engulfed inside her."
+                        mc.name "Fuck [the_girl.title], I don't know how you do that, but it's amazing."
+                        "[the_girl.possessive_title] sighs. She is truly addicted to getting her tight back passage fucked"
+                    elif the_girl.get_opinion_score("anal sex") > 0:
+                        "In response, she slams her ass all the way back on your dick. She grinds her hips left and right up against you."
+                        "You can feel her tense and relax her muscles in her ass rhythmically, messaging your shaft while you remain totally engulfed inside her."
+                        mc.name "Wow, I guess so! That feels amazing. Feel free to practice anytime you want on me, [the_girl.title]!"
+                        "[the_girl.possessive_title] sighs. You can tell having your dick in her ass is very fulfilling for her."
+                    else:
+                        "[the_girl.possessive_title] looks back at you."
+                        the_girl "Honestly, I'm not usually into butt stuff... but I just want to make you feel so good..."
+                "[the_girl.possessive_title] continues to twerk her ass up and down on your penis. How does she make it look so easy?"
             "I'm in charge here":
-                 "Sensing that your slut is getting out of hand, you quickly take charge. You grab her by the hair and pull her head back until her hands are no longer on the ground, taking away all her leverage."
-                 $ the_girl.call_dialogue("surprised_exclaim")
-                 "You lean forward and whisper into [the_girl.possessive_title]'s ear."
-                 mc.name "I know you dream about my dick in your ass constantly and it feels good to finally have that dream come true, but don't forget who is in charge around here."
-                 if the_girl.obedience > 130 or the_girl.get_opinion_score("being submissive") > 0:
-                     $ the_girl.discover_opinion("being submissive")
-                     if the_girl.get_opinion_score("being submissive") > 0:
-                         $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive" * 5))
-                         "For once, [the_girl.possessive_title] is speechless. She can only whimper softly in total submission to you."
-                     else:
-                         the_girl "I'm sorry [the_girl.mc_title], I couldn't help myself. Please use me however you want, I'll be good I promise!"
-                     "You give her a couple slow, heavy thrusts before releasing her hair. She returns her hands to the ground and moans when you resume your slow, methodical fucking."
-                 else :
-                     the_girl "Okay! Geesh! Be careful with my hair, that hurts!"
+                "Sensing that your slut is getting out of hand, you quickly take charge. You grab her by the hair and pull her head back until her hands are no longer on the ground, taking away all her leverage."
+                $ the_girl.call_dialogue("surprised_exclaim")
+                "You lean forward and whisper into [the_girl.possessive_title]'s ear."
+                mc.name "I know you dream about my dick in your ass constantly and it feels good to finally have that dream come true, but don't forget who is in charge around here."
+                if the_girl.obedience > 130 or the_girl.get_opinion_score("being submissive") > 0:
+                    $ the_girl.discover_opinion("being submissive")
+                    if the_girl.get_opinion_score("being submissive") > 0:
+                        $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive" * 5))
+                        "For once, [the_girl.possessive_title] is speechless. She can only whimper softly in total submission to you."
+                    else:
+                        the_girl "I'm sorry [the_girl.mc_title], I couldn't help myself. Please use me however you want, I'll be good I promise!"
+                    "You give her a couple slow, heavy thrusts before releasing her hair. She returns her hands to the ground and moans when you resume your slow, methodical fucking."
+                else :
+                    the_girl "Okay! Geesh! Be careful with my hair, that hurts!"
                 #TODO this option is kinda boring... expand some?
 
     return
@@ -153,9 +153,9 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
             if the_girl.has_role(anal_fetish_role):
                 "Despite having no leverage, [the_girl.possessive_title] wriggles her ass against you as best she can. Even with no room to move, her love for anal sex drives her to try to milk your cock."
                 "You enjoy her efforts before you speak clearly to her."
-                mc.name "Does this feel better than that plug? Is this what you're imagining everytime you push that plug up your ass?"
+                mc.name "Does this feel better than that plug? Is this what you're imagining every time you push that plug up your ass?"
                 "[the_girl.possessive_title] is writhing in pleasure, having her fetish of anal sex fulfilled."
-                the_girl "Oh god it is. Everytime I play with my ass and all I can think about is your big meaty dick buried inside me."
+                the_girl "Oh god it is. Every time I play with my ass and all I can think about is your big meaty dick buried inside me."
                 "You grab her hair at the base of her scalp and pull her head back before whispering into her ear."
                 mc.name "Don't worry, slut. This won't be the last time I fill your ass with my cock."
                 "You can see goosebumps all over [the_girl.possessive_title]'s skin. She moans and then begs you to keep fucking her."

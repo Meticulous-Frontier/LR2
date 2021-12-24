@@ -123,7 +123,7 @@ init 5 python:
         return False
 
     def HR_director_monday_meeting_requirement():
-        if not mc.business.hr_director or not mc.business.hr_director.is_available():
+        if not mc.business.hr_director or not mc.business.hr_director.is_available:
             return False
         if day%7 == 0 and time_of_day == 1: #Monday
             return True
@@ -1071,7 +1071,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         return
 
     if get_HR_director_unlock("missionary on desk") == False:
-        if (the_person.sluttiness + the_person.get_opinion_score("vaginal sex") * 5) >= 60:
+        if (the_person.sluttiness + the_person.get_opinion_score("vaginal sex") * 5) >= 60 and (the_person != sarah or sarah_get_sex_unlocked()):
             the_person "Hey... you know what would be really hot?"
             "You feel yourself raise your eyebrow in response. This should be good!"
             the_person "What if I just lay down on your desk and you have your way with me, right here in your office?"
@@ -1110,7 +1110,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             return
 
     if get_HR_director_unlock("bent over desk") == False:
-        if (the_person.sluttiness + the_person.get_opinion_score("doggy style sex") * 5) >= 70:
+        if (the_person.sluttiness + the_person.get_opinion_score("doggy style sex") * 5) >= 70 and (the_person != sarah or sarah_get_sex_unlocked()):
             if the_person.obedience > 130:
                 mc.name "Come here, I'm going to use you the way I see fit today."
                 if the_person.get_opinion_score("being submissive"):
@@ -1242,7 +1242,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             $ scene_manager.update_actor(the_person, position = "standing_doggy")
             $ mc.change_locked_clarity(50)
             "[the_person.title] turns around. You quickly get her ready to fuck."
-            $ the_person.strip_to_vagina(the_person, prefer_half_off = True)
+            $ the_person.strip_to_vagina(the_person, position = "standing_doggy", prefer_half_off = True, visible_enough = True)
             call fuck_person(the_person, start_position = bent_over_breeding, private = True) from _call_hr_breeding_01
             if the_person.has_creampie_cum():
                 the_person "Oh fuck... every time you finish inside me is just so good..."
@@ -1408,7 +1408,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ scene_manager.update_actor(the_person, position = "standing_doggy")
         $ mc.change_locked_clarity(50)
         "[the_person.title] turns around. You quickly get her ready to fuck."
-        $ the_person.strip_to_vagina(the_person, prefer_half_off = True)
+        $ the_person.strip_to_vagina(the_person, position = "standing_doggy", prefer_half_off = True, visible_enough = True)
         call fuck_person(the_person, start_position = bent_over_breeding, private = True) from _call_hr_breeding_02
         if the_person.has_creampie_cum():
             the_person "Oh fuck... every time you finish inside me is just so good..."

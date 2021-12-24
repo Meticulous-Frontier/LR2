@@ -2,7 +2,7 @@ init 4 python:
     def lust_blowjob_intro_requirement():
         if mc.business.is_open_for_business(): #Only trigger if people are in the office.
             if mc.is_at_work(): #Check to see if the main character is at work
-                if len(get_willing_lust_blowjob_girl_list()) > 2 and get_lust_tier() > 2:
+                if len(get_willing_lust_blowjob_girl_list()) > 2:
                     return True
         return False
 
@@ -183,7 +183,7 @@ label lust_blowjob_office_label():
                 "Fully spent, you let yourself relax in your chair."
             $ the_person.draw_person(position = "stand3")
             "[the_person.title] stands up."
-            the_person "Wow, I needed that too. Thank you so much for calling me [the_person.mc_title]"
+            the_person "Wow, I needed that too. Thank you so much for calling me [the_person.mc_title]."
             $ the_person.draw_person(position = "walking_away")
             "[the_person.possessive_title] turns and walks out of your office. She doesn't even bother to clean up."
         else:

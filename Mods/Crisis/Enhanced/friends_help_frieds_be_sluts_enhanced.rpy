@@ -1,20 +1,31 @@
 init 5 python:
     config.label_overrides["friends_help_friends_be_sluts_label"] = "friends_help_friends_be_sluts_enhanced_label"
 
+    def get_friends_relationship_with_actor_not_girlfriend_or_paramour():
+        relations = town_relationships.get_business_relationships(["Friend","Best Friend"])
+
+        relationship = get_random_from_list([x for x in relations if
+            not (x.person_a.has_role([girlfriend_role, affair_role]) and x.person_b.has_role([girlfriend_role, affair_role]))
+        ])
+        if relationship is None:
+            return (None, None)
+
+        if relationship.person_a.has_role([girlfriend_role, affair_role]) \
+            or relationship.person_a.effective_sluttiness() > relationship.person_b.effective_sluttiness():
+            person_one = relationship.person_a
+            person_two = relationship.person_b
+        else:
+            person_one = relationship.person_b
+            person_two = relationship.person_a
+
+        return (person_one, person_two)
+
 label friends_help_friends_be_sluts_enhanced_label():
     #A slutty girl helps her less slutty friend be more slutty.
 
-    $ the_relationship = get_random_from_list(town_relationships.get_business_relationships(["Friend","Best Friend"])) #Get a random rival or nemesis relationship within the company
-    if the_relationship is None:
+    $ (person_one, person_two) = get_friends_relationship_with_actor_not_girlfriend_or_paramour()
+    if not (isinstance(person_one, Person) and isinstance(person_two, Person)):
         return
-    $ person_one = None #Sluttier person
-    $ person_two = None #Person being convinced to be sluttier.
-    if the_relationship.person_a.effective_sluttiness() > the_relationship.person_b.effective_sluttiness():
-        $ person_one = the_relationship.person_a
-        $ person_two = the_relationship.person_b
-    else:
-        $ person_one = the_relationship.person_b
-        $ person_two = the_relationship.person_a
 
     $ mc.change_location(lobby)
     $ mc.location.show_background()
@@ -439,7 +450,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                             $ person_two.draw_person(position = "blowjob")
                             "She opens her mouth and slides your penis between her moist lips."
                             $ person_two.break_taboo("sucking_cock")
-                            call fuck_person(person_two, start_position = blowjob, skip_intro = True, position_locked = True, self_strip = False, affair_ask_after = True) from _call_fuck_person_friends_help_friends_be_sluts_enhanced
+                            call fuck_person(person_two, start_position = blowjob, skip_intro = True, position_locked = True, self_strip = False, affair_ask_after = True, ignore_taboo = True) from _call_fuck_person_friends_help_friends_be_sluts_enhanced
                             $ the_report = _return
                             if the_report.get("guy orgasms", 0) > 0:
                                 "You sit down in your office chair, thoroughly drained. [person_two.title] smiles, seemingly proud of her work."
@@ -490,6 +501,5 @@ label friends_help_friends_be_sluts_enhanced_label():
         scene_manager.clear_scene()
         del person_one
         del person_two
-        del the_relationship
         clear_scene()
     return

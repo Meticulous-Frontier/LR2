@@ -1,7 +1,7 @@
 init 3 python:
     def lust_booty_call_intro_requirement():
         if mc_asleep() and mc.energy > 80:
-            if len(lust_get_booty_call_list()) >= 3 and get_lust_tier() > 2:
+            if len(lust_get_booty_call_list()) >= 3:
                 #TODO disable if we have  sleepover planned
                 return True
         return False
@@ -69,7 +69,7 @@ label lust_booty_call_intro_label():
         $ mc.business.add_mandatory_crisis(lust_booty_call_intro)
         return
     $ the_person = _return
-    "You decide to text [the_person.possessive_title]"
+    "You decide to text [the_person.possessive_title]."
     show screen person_info_ui(the_person)
     $ mc.start_text_convo(the_person)
     mc.name "Hey, you up?"
@@ -99,7 +99,7 @@ label lust_booty_call_intro_label():
     "Pretty soon, clothes start coming off."
     $ the_person.strip_outfit(position = "missionary")
     the_person "Wow, you are really into it tonight! How do you want to start?"
-    call fuck_person(the_person, start_object = make_bed(), skip_intro = True, private = True) from _lust_booty_call_fuck_01
+    call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, ignore_taboo = True, private = True) from _lust_booty_call_fuck_01
     $ the_report = _return
     if the_report.get("guy orgasms", 0) == 0:
         "Frustrated, you finish up but still haven't cum."
@@ -150,7 +150,7 @@ label lust_booty_call_label():
         "After looking at your contact list, you change your mind. Maybe another opportunity will present itself later."
         return
     $ the_person = _return
-    "You decide to text [the_person.possessive_title]"
+    "You decide to text [the_person.possessive_title]."
     show screen person_info_ui(the_person)
     $ mc.start_text_convo(the_person)
     mc.name "Hey, I'm bored. You DTF tonight?"
@@ -187,7 +187,7 @@ label lust_booty_call_label():
     "Pretty soon, clothes start coming off."
     $ the_person.strip_outfit(position = "missionary")
     the_person "Wow, you are really into it tonight! How do you want to start?"
-    call fuck_person(the_person, start_object = make_bed(), skip_intro = True, private = True) from _lust_booty_call_fuck_02
+    call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, ignore_taboo = True, private = True) from _lust_booty_call_fuck_02
     $ the_report = _return
     if the_report.get("guy orgasms", 0) == 0:
         "Frustrated, you finish up but still haven't cum."

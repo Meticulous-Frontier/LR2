@@ -225,6 +225,7 @@ label sakari_coffee_break_label(the_person):
     "Starbuck" "Once it hits a low enough threshold, she will get removed from the game!"
     # $ ellie.add_unique_on_room_enter_event(nanobot_cure_ellie_inspiration)    #NOTE this is probably going to just be a new conversation option that opens up.
     $ mc.business.add_mandatory_crisis(sakari_business_proposition)
+    $ mc.business.add_mandatory_crisis(sakari_goes_skinny_dipping)
     return
 
 label sakari_business_proposition_label():    #mandatory event
@@ -234,7 +235,7 @@ label sakari_business_proposition_label():    #mandatory event
 label sakari_business_partner_start_label():
     pass
 
-    $ mc.business.add_mandatory_crisis(sakari_goes_skinny_dipping)
+    # $ mc.business.add_mandatory_crisis(sakari_goes_skinny_dipping)
     $ mc.business.add_mandatory_crisis(sakari_mc_booty_call_intro)
     return
 
@@ -264,6 +265,23 @@ label sakari_goes_skinny_dipping_label():   #mandatory event
     the_person "Hello [the_person.mc_title]. This is [sakari.name], [kaya.name]'s mother."
     "You didn't know she even had your number. Maybe she got it from [kaya.title]?"
     mc.name "Hello, how are you doing?"
+    the_person "Good. I've been thinking a lot about what you said. You know, about mortality giving you a fresh perspective on things."
+    the_person "There's something I've always wanted to do, but never had the chance. Can you meet me downtown in a bit?"
+    "Wow. It's pretty late, but you are intrigued about what she has in mind."
+    mc.name "Sure. Should I bring anything?"
+    the_person "No. Meet me here."
+    "The last message is followed up with an address. It is downtown close to the river."
+    $ mc.end_text_convo()
+    "You change back into your regular clothes, then head out."
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+    "15 minutes later, you are downtown. Eventually, you spot [the_person.title] and walk up to her."
+    $ the_person.draw_person()
+    mc.name "Good evening [the_person.title]."
+    the_person "Ah, good evening [the_person.mc_title]."
+    mc.name "Mind telling me what we are up to tonight?"
+    the_person "Like I told you earlier, there is something I have always wanted to do... and there is no time like the present."
+    the_person "But I need help, "
 
 
     return

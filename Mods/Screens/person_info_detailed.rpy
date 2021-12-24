@@ -41,7 +41,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                     vbox:
                         xsize (1050 if persistent.pregnancy_pref > 0 else 1650)
                         xalign 0.5 xanchor 0.5
-                        text "[the_person.name] [the_person.last_name]" style "menu_text_style" size 30 xalign 0.5 yalign 0.5 yanchor 0.5 color the_person.char.who_args["color"] font the_person.char.what_args["font"]
+                        text format_titles(the_person) style "menu_text_style" size 30 xalign 0.5 yalign 0.5 yanchor 0.5 color the_person.char.who_args["color"] font the_person.char.what_args["font"]
                         if not mc.business.get_employee_title(the_person) == "None":
                             text "Position: " + mc.business.get_employee_title(the_person) + " ($[the_person.salary]/day)" style "menu_text_style" xalign 0.5 yalign 0.5 yanchor 0.5
                         if get_strip_club_foreclosed_stage() >= 5 and the_person.has_role([stripper_role, waitress_role, bdsm_performer_role, manager_role, mistress_role]):

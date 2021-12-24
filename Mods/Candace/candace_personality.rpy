@@ -371,11 +371,11 @@ label candace_flirt_response_low(the_person):
             elif the_person.outfit.tits_visible():
                 #Her tits are out
                 if the_person.has_large_tits():
-                    the_person "Hehe, thanks! I really like how it shows off my big tits!"
+                    the_person "Hehe, thanks! I really like how it shows off my [the_person.tits_description]!"
                     "[the_person.possessive_title] bounces happily, jiggling her breasts."
                     the_person "People are always telling me I need to hide them, but at work I don't have to worry about that!"
                 else:
-                    the_person "Hehe, thanks! I really like how I it shows off my boobs!"
+                    the_person "Hehe, thanks! I really like how I it shows off my [the_person.tits_description]!"
                     "[the_person.possessive_title] looks down at her own chests and pouts."
                     the_person "I wish they were bigger though. Oh well!"
                     $ mc.change_locked_clarity(5)

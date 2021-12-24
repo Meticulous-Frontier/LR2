@@ -51,10 +51,10 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
             $ the_person.draw_person(position = "stand3", emotion = "happy")
             "[the_person.possessive_title] turns around, with the water now going on her back and firm ass."
             if the_person.has_large_tits():
-                "You can't help but admire [the_person.possessive_title]'s great body and tits."
+                "You can't help but admire [the_person.possessive_title]'s great body and [the_person.tits_description]."
                 "Just as this thought flashes through your mind, she starts rubbing her boobs."
             else:
-                "You can't help but admire [the_person.possessive_title]'s slim body and perky tits."
+                "You can't help but admire [the_person.possessive_title]'s slim body and [the_person.tits_description]."
                 "Just as this thought flashes through your mind, she starts rubbing her breasts, pinching her small nipples."
             $ mc.change_locked_clarity(10)
             $ the_person.change_arousal(renpy.random.randint(10,50))
@@ -148,9 +148,9 @@ label morning_shower_masturbation():
                 "[the_person.possessive_title] pinches her nipples hard, wincing from excitement and pain."
             else:
                 if the_person.has_large_tits():
-                    "With one hand she softly squeezes her large breast."
+                    "With one hand she softly squeezes her [the_person.tits_description]."
                 else:
-                    "With one hand she squeezes her perky little breast."
+                    "With one hand she squeezes her [the_person.tits_description]."
         $ the_person.change_arousal(renpy.random.randint(20,35))
         $ mc.change_locked_clarity(10)
     the_person "Shit, I'm cumming!"

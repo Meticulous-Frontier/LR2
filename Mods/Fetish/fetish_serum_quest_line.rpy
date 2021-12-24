@@ -832,6 +832,7 @@ label fetish_serum_discuss_progress_label(the_person):
         the_person "There are still some possibilities for new nanobot programs. You should consider trying to make new programs."
     else:
         the_person "I think we have exhausted all the possibilities for new nanobot programs, for now at least."
+        return
 
     "Here is the current status of our specialize nanobot programs."
     if fetish_exhibition_serum_is_unlocked():

@@ -1,25 +1,25 @@
-#Prone bone position. Girl is pinned down on her front, very submissive position, so we make sure to use lots of references to submissive or dominant girls in dialogue and actions.
-#These actions generally increase obedience and sluttiness in dominant girls,  increase happiness in submissives.
+#Prone anal position. Girl is pinned down on her front, very submissive position, so we make sure to use lots of references to submissive or dominant girls in dialogue and actions.
+#These actions generally increase obedience and sluttiness in dominant girls, increase happiness in submissives.
 init python:
-    prone_bone = Position(name = "Prone", slut_requirement = 60, slut_cap = 90, requires_hard = True, requires_large_tits = False,
-        position_tag = "back_peek", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Vaginal",
-        girl_arousal = 18, girl_energy = 0,
+    prone_anal = Position(name = "Prone Anal", slut_requirement = 65, slut_cap = 95, requires_hard = True, requires_large_tits = False,
+        position_tag = "back_peek", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Anal",
+        girl_arousal = 14, girl_energy = 0,
         guy_arousal = 16, guy_energy = 14,
         connections = [],
-        intro = "intro_prone_bone",
-        scenes = ["scene_prone_bone_1","scene_prone_bone_2","scene_prone_bone_3"],
-        outro = "outro_prone_bone",
-        transition_default = "transition_default_prone_bone",
-        strip_description = "strip_prone_bone", strip_ask_description = "strip_ask_prone_bone",
-        orgasm_description = "orgasm_prone_bone",
-        taboo_break_description = "taboo_break_prone_bone",
-        opinion_tags = ["doggy style sex","vaginal sex", "being submissive"], record_class = "Vaginal Sex",
+        intro = "intro_prone_anal",
+        scenes = ["scene_prone_anal_1","scene_prone_anal_2","scene_prone_anal_3"],
+        outro = "outro_prone_anal",
+        transition_default = "transition_default_prone_anal",
+        strip_description = "strip_prone_anal", strip_ask_description = "strip_ask_prone_anal",
+        orgasm_description = "orgasm_prone_anal",
+        taboo_break_description = "taboo_break_prone_anal",
+        opinion_tags = ["doggy style sex","anal sex", "being submissive"], record_class = "Anal Sex",
         default_animation = missionary_bob,
-        associated_taboo = "vaginal_sex")
+        associated_taboo = "anal_sex")
     # not available as normal position
-    #list_of_positions.append(prone_bone)
+    #list_of_positions.append(prone_anal)
 
-    def build_prone_bone_decision_menu(position, person):
+    def build_prone_anal_decision_menu(position, person):
         position_option_list = []
         position_option_list.append([position.build_position_willingness_string(person, ignore_taboo = True).replace("Prone", "Fuck her prone"), position])
         position_option_list.append(["Let her take a break", "Nothing"])
@@ -29,17 +29,17 @@ init python:
 #     python:
 #         missionary.link_positions(piledriver,"transition_missionary_piledriver")
 
-label prone_decision_label(the_girl, the_location, the_object, the_position):
-    "[the_girl.possessive_title] seems exhausted, but you are still full of vigor. You could probably push her down and fuck her prone, but she may or may not like it..."
+label prone_anal_decision_label(the_girl, the_location, the_object, the_position):
+    "[the_girl.possessive_title] seems exhausted, but you are still full of vigor. You could probably push her down and fuck her ass prone, but she may or may not like it..."
 
-    $ picked_position = renpy.display_menu(build_prone_bone_decision_menu(prone_bone, the_girl),True,"Choice")
+    $ picked_position = renpy.display_menu(build_prone_anal_decision_menu(prone_anal, the_girl),True,"Choice")
 
     if not isinstance(picked_position, Position):
         return None
 
     mc.name "That's too bad. I'm not done with you yet though."
-    if not the_object.has_trait(prone_bone.requires_location):
-        call pick_object(the_girl, prone_bone) from _call_pick_object_in_prone_01
+    if not the_object.has_trait(prone_anal.requires_location):
+        call pick_object(the_girl, prone_anal) from _call_pick_object_in_prone_anal_01
         $ the_object = _return
     if the_position.position_tag == "missionary":
         "You grab [the_girl.title]'s hips and roll her over onto her stomach."
@@ -48,22 +48,22 @@ label prone_decision_label(the_girl, the_location, the_object, the_position):
     else:
         "You push [the_girl.title] down onto the [the_object.name] on her stomach."
     #TODO check her willingness here, if she is not usually willing take a happiness hit. Can probably copy paste code from sex system
-    $ prone_bone.redraw_scene(the_girl)
+    $ prone_anal.redraw_scene(the_girl)
     if the_girl.is_submissive():
-        "[the_girl.possessive_title] gives a moan as you line yourself and push back into her. She is completely helpless but submits to you obediently."
+        "[the_girl.possessive_title] gives a moan as you line yourself up and push back into her ass. She is completely helpless but submits to you obediently."
         $ the_person.change_happiness(5)
     elif the_girl.is_dominant():
         the_girl "Are you serious? Can't we just take a quick break?..."
-        "[the_girl.possessive_title]'s question gets cut off as you line yourself and push back into her. She isn't happy with being uesd like this but is too tired to resist."
-        $ the_person.change_happiness(5)
+        "[the_girl.possessive_title]'s question gets cut off as you line yourself and push back into her ass. She isn't happy with being uesd like this but is too tired to resist."
+        $ the_person.change_happiness(-5)
     else:
         "[the_girl.possessive_title] gives a little yelp as you line yourself and push back into her. She is completely helpless but submits to you obediently."
         $ the_person.change_obedience(5)
     return the_object
 
-label intro_prone_bone(the_girl, the_location, the_object):
+label intro_prone_anal(the_girl, the_location, the_object):
     "You turn [the_girl.title] so her back is to you, then push her down onto the [the_object.name]."
-    mc.name "Just lay down. I'm going to have my way with you now."
+    mc.name "Just lay down. I'm going to have my way with your ass now."
     if the_girl.is_submissive():
         the_girl "I'll do whatever you want, you always make me feel so good too..."
         $ the_girl.change_happiness(1)
@@ -79,20 +79,20 @@ label intro_prone_bone(the_girl, the_location, the_object):
         the_girl "Okay, just don't do anything too crazy, okay?"
         $ the_girl.change_obedience(1)
     "She lies down on the [the_object.name], waiting while you climb on top of her. Before you get started, you give her ass a couple smacks with your dick."
-    "[the_girl.possessive_title] looks back at you as you line your cock up with her [the_girl.pubes_description] pussy. She moans as you slide into her."
+    "[the_girl.possessive_title] looks back at you as you line your cock up with her puckered hole. She groans as you slide into her."
     return
 
-label taboo_break_prone_bone(the_girl, the_location, the_object):
+label taboo_break_prone_anal(the_girl, the_location, the_object):
     "You take [the_girl.title]'s hands in yours and guide her down onto the [the_object.name]. You turn her back to you."
-    mc.name "Lay down. I want to be in control for our first time."
-    $ the_girl.call_dialogue(prone_bone.associated_taboo+"_taboo_break")
+    mc.name "Lay down. I want to be in control the first time I take your ass."
+    $ the_girl.call_dialogue(prone_anal.associated_taboo+"_taboo_break")
     the_girl "Okay, just don't do anything too crazy, okay?"
     $ the_girl.change_obedience(2)
     "She lies down on the [the_object.name] on her belly. She wiggles her ass at you, waiting while you climb on top of her."
-    "[the_girl.possessive_title] loks back at you as you line your cock up with her [the_girl.pubes_description] pussy. She moans as you slide into her."
+    "[the_girl.possessive_title] loks back at you as you line your cock up with her puckered hole. She groans as you slide into her."
     return
 
-label scene_prone_bone_1(the_girl, the_location, the_object):
+label scene_prone_anal_1(the_girl, the_location, the_object):
     #Scene 1, focus on visuals of prone (ass, back)
     "You push down on [the_girl.possessive_title] with your weight as you fuck her. She is pinned helplessly to the [the_object.name]."
     if the_girl.body_is_thin():
@@ -112,8 +112,8 @@ label scene_prone_bone_1(the_girl, the_location, the_object):
         "Your hips begin to slap up against [the_girl.possessive_title]'s ass."
         "Her cheeks respond delightfully with each thrust."
     menu:
-        "Grab her shoulders":
-            "You put your hands on [the_girl.title]'s shoulders. The leverage helps you pound her harder."
+        "Grab her hair":
+            "You grab [the_girl.title] by the hair and pull. The leverage helps you pound her ass harder."
             the_girl "Oh my god... ooohhhhh..."
             "She is moaning as you thrust yourself in hard and deep. [the_girl.possessive_title] is taking your cock like a slut."
             mc.name "That's it. Be a good little cum dump and take it."
@@ -122,12 +122,12 @@ label scene_prone_bone_1(the_girl, the_location, the_object):
         "Spank her" if the_girl.is_submissive():
             $ ass_desc = spanking_get_ass_description(the_girl)
             "You look down at [the_girl.possessive_title]'s ass. It is [ass_desc]"
-            "With your erection buried deep inside her, you give her ass a firm spank. Her sexy cheeks quake in response."
+            "With your erection buried deep inside her bowel, you give her ass a firm spank. Her sexy cheeks quake in response."
             $ spank_factor_increment(the_girl)
             mc.name "[the_girl.title], your ass looks amazing when I spank it. You are such a slut. I bet you love it don't you?"
             "[the_girl.possessive_title] moans at your words."
-            "You pull her ass cheeks apart. You give her a hard spank with your other hand and enjoy the feeling of her silky cunt."
-            mc.name "Do you let any guy with a hard cock fuck you and spank you like this? Or just me?"
+            "You pull her ass cheeks apart. You give her a hard spank with your other hand and enjoy the feeling of her buttery backdoor."
+            mc.name "Do you let any guy with a hard cock fuck you in the ass like this? Or just me?"
             "[the_girl.possessive_title] responds quietly."
             if the_girl.get_opinion_score("being submissive") > 0 and not the_girl.can_be_spanked():
                 the_girl "Just you! I love it when you get rough with me, and spank me when I've been naughty!"
@@ -137,41 +137,44 @@ label scene_prone_bone_1(the_girl, the_location, the_object):
                 the_girl "Just you, [the_girl.mc_title]. I don't know why but it just feels so good... so right when you dominate me..."
             if the_girl is mom:
                 the_girl "It makes [the_girl.title] so happy to serve you like this... To be [the_girl.possessive_title]!"
-            "You give her pussy a few rough thrusts before bottoming out again."
-            mc.name "That's right bitch, you're my little fuckhole. I'll push you down and fuck you anytime I please."
+            "You give her ass a few rough thrusts before bottoming out again."
+            mc.name "That's right bitch, I own every single hole. I'll push you down and fuck you anytime I please."
             $ the_girl.discover_opinion("being submissive")
             $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3 + 5)
 
             if mc.arousal > 70:
-                "[the_girl.possessive_title]'s tight pussy feels so good. You are getting close to cumming."
+                "[the_girl.possessive_title]'s tight ass feels so good. You are getting close to cumming."
                 mc.name "You feel amazing. You're gonna make me cum soon."
-                if the_girl.wants_creampie():
+                if the_girl.get_opinion_score("anal creampies") > 0:
                     "[the_girl.possessive_title] looks back at you and smiles."
                     the_girl "Oh [the_girl.mc_title], I can't wait to feel you fill me up. I hope you finish deep!"
-                    "[the_girl.possessive_title]'s ass quivers a bit, as she imagines you cumming deep inside her."
-                    $ the_girl.discover_opinion("creampies")
-                    $ the_girl.discover_opinion("bareback sex")
+                    "[the_girl.possessive_title]'s ass quivers a bit, as she imagines you cumming deep inside her backdoor."
+                    $ the_girl.discover_opinion("anal creampies")
                     $ the_girl.change_arousal(5)
                     if the_girl.get_opinion_score("being covered in cum") > 0:
-                        the_girl "You could always pull out too... your cum feels so good when it splashes all over my skin..."
+                        the_girl "Or you could pull out? It feels amazing when your hot cum splashes against my skin!"
                         $ the_girl.discover_opinion("being covered in cum")
-                        $ the_girl.change_arousal(the_girl.get_opinion_score("being covered in cum") * 3)
+                        $ the_girl.change_arousal(5)
                         if the_girl.get_opinion_score("cum facials") > 0:
                             the_girl "Or my face! You haven't cum on my face in a while either..."
                             $ the_girl.discover_opinion("cum facials")
-                            $ the_girl.change_arousal(the_girl.get_opinion_score("cum facials") * 3)
+                            $ the_girl.change_arousal(the_girl.get_opinion_score("cum facials") * 5)
                             "[the_girl.possessive_title] starts muttering to herself, fantasizing about all the different ways you could cum on, or in her."
-            "You put your hands on her hips and continue fucking her."
+                elif the_girl.get_opinion_score("being covered in cum") > 0:
+                    the_girl "Are you going to pull out? It feels amazing when your cum splashes all over my skin..."
+                "Instead of answering, you put your hands on her hips and fuck her harder."
+            else:
+                "You put your hands on her hips and continue fucking her."
     return
 
-label scene_prone_bone_2(the_girl, the_location, the_object):
+label scene_prone_anal_2(the_girl, the_location, the_object):
     #Scene 2, focus on submissiveness of scene (spank, dirty talk, hair pulling)
 
     if the_girl.is_submissive():
         the_girl "Yes! Oh fuck yes!"
         "[the_girl.possessive_title] is really getting into being dominated. You give her ass a quick smack."
     elif the_girl.is_dominant():
-        the_girl "This isn't right... at least let me roll over... okay?"
+        the_girl "This isn't right... at least put it in my pussy... okay?"
         "You give her ass a smack, making her yelp."
     else:
         the_girl "Oh god... I don't know if I can take this..."
@@ -187,78 +190,80 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
                 $ the_girl.change_happiness(3)
                 $ the_girl.change_obedience(3)
                 $ the_girl.change_arousal(15)
-                "Her tight pussy clenches around in response. You can feel it get a little wetter as you dominate her."
+                "Her ass clenches around in response. You can feel it quivering as you dominate her."
             elif the_girl.is_dominant():
                 mc.name "I don't think so. You're my little slut, and I'll take you the way I want to, when I want to."
                 $ the_girl.change_happiness(-5)
                 $ the_girl.change_obedience(3)
                 $ the_girl.change_slut(2)
-                "[the_girl.title] starts to say something, but you grab her hair and pull it back some. Her tight pussy clenches around you in response."
+                "[the_girl.title] starts to say something, but you grab her hair and pull it back some. Her ass clenches around you in response."
                 "She decides to just stay quiet for now and accept it as you continue to have you way with her."
             else:
                 the_girl "That's it... oh god it's so good..."
                 "You reach forward and grab her hair near the base of her head and pull it back some."
-                the_girl "Oh fuck! Oh god fuck my pussy [the_girl.mc_title]!"
+                the_girl "Oh fuck! Oh god fuck my ass[the_girl.mc_title]!"
                 $ the_girl.change_obedience(5)
                 $ the_girl.change_arousal(5)
-                "You oblige her, helping correlate in her head your rough treatment with the pleasure of sex. Her pussy clenches around you as you pull her hair."
+                "You oblige her, helping correlate in her head your rough treatment with the pleasure of sex. Her ass clenches around you as you pull her hair."
                 "She is exhausted, but constantly moaning from your dominating approach."
         "Go easy on her":
-            "You decide for now just to enjoy the wet hole [the_girl.possessive_title] has pointed up at you."
+            "You decide for now just to enjoy the puckered hole [the_girl.possessive_title] has pointed up at you."
             "You put both you hands around her, letting your weight pin her to the [the_object.name]."
-            "Her body is trying to push back against you as you fuck her, but her exhaustion your weight on top of her leave her helpless."
+            "Her body is trying to push back against you as you fuck her, but her exhaustion and your weight on top of her leave her helpless."
             the_girl "Mmmfff... god [the_girl.mc_title]... so good..."
     return
 
-label scene_prone_bone_3(the_girl, the_location, the_object):
+label scene_prone_anal_3(the_girl, the_location, the_object):
     "Being completely in control of [the_girl.possessive_title]'s body is such a turn on. You push your weight down onto her as you fuck her."
     the_girl "Oh fuck... [the_girl.mc_title] it's so good..."
     menu:
-        "Threaten to creampie her" if not mc.condom:
-            mc.name "God your pussy is so tight. I can't wait to dump my load inside it."
-            if the_girl.has_breeding_fetish():
+        "Threaten to creampie her ass" if not mc.condom:
+            mc.name "God your ass is so tight. I can't wait to dump my load inside it."
+            if the_girl.has_anal_fetish() or the_girl.has_cum_fetish():
                 the_girl "Yes! Oh fuck yes make sure you cum deep [the_girl.mc_title]!"
                 $ the_girl.change_arousal(20)
                 "Goosebumps raise up all along her shoulders. It is a massive turn on for her to hear you threaten to cum inside of her."
-            elif the_girl.wants_creampie():
+            elif the_girl.get_opinion_score("anal creampies") > 0:
                 the_girl "Oh god, you can cum inside me if you want... I think I want you to!"
                 $ the_girl.change_arousal(10)
-            elif the_girl.get_opinion_score("creampies") < 0:
-                the_girl "No way... please don't! I hate it when guys cum inside me..."
+            elif the_girl.get_opinion_score("anal creampies") <= 0:
+                the_girl "No way... please don't! It's so gross after when guys cum back there..."
                 $ the_girl.change_arousal(-5)
             else:
                 the_girl "Oh my god... you wouldn't... would you?"
         "Threaten to remove the condom" if mc.condom:
-            mc.name "Your pussy feels great... but I bet it would feel even better raw. Maybe I should just slip this thing off?"
-            if the_girl.has_breeding_fetish():
+            mc.name "Your ass feels great... but I bet it would feel even better raw. Maybe I should just slip this thing off?"
+            if the_girl.has_anal_fetish() or the_girl.has_cum_fetish():
                 the_girl "You should! I don't know why you wear those stupid things anyway. You should take it off!"
-            elif the_girl.wants_creampie():
+            elif the_girl.get_opinion_score("anal creampies") > 0:
                 the_girl "I mean, if you really wanted to... I wouldn't mind it if you went in bare..."
-            elif the_girl.get_opinion_score("bareback sex") < 0:
+                "Her voice drops to a whisper."
+                the_girl "Or if you even finish in me like that..."
+            elif the_girl.get_opinion_score("anal creampies") < 0:
                 the_girl "No! Please don't, I'm not sure I can handle the anxiety of you doing it unprotected."
             else:
                 the_girl "I mean, if you really wanted to... it's not like I could stop you!"
             menu:
                 "Remove Condom":
                     "You slowly pull out of [the_girl.possessive_title]. You reach down and pull the condom off, then toss it up by her face, making sure she sees it."
-                    if the_girl.has_breeding_fetish():
+                    if the_girl.has_anal_fetish() or the_girl.has_cum_fetish():
                         "When she sees the condom and realizes what you are about to do, she pushes her ass back towards you, trying to help you penetrate her bare."
-                        "You slide into her sopping wet cunt without any protection this time. She moans and arches her back in pleasure."
+                        "You slide into her backdoor without any protection this time. She moans and arches her back."
                         $ the_girl.change_arousal(20)
-                        the_girl "Thats it... now fuck me good [the_girl.mc_title]!"
-                    elif the_girl.wants_creampie():
+                        the_girl "Thats it... now fuck my ass good [the_girl.mc_title]!"
+                    elif the_girl.get_opinion_score("anal creampies") > 0:
                         the_girl "Oh god, you're really going to do it! Oh fuck..."
-                        "You slide into her sopping wet cunt without any protection this time. She moans and arches her back in pleasure."
+                        "You slide into her backdoor without any protection this time. She moans and arches her back."
                         $ the_girl.change_arousal(20)
-                    elif the_girl.get_opinion_score("bareback sex") < 0:
+                    elif the_girl.get_opinion_score("anal creampies") < 0:
                         the_girl "Oh my god. This can't be happening..."
                         $ the_girl.change_obedience(5)
                         $ the_girl.change_love(-5)
                         $ the_girl.change_happiness(-15)
-                        "You slide into her sopping wet cunt without any protection this time. Her body is stiff and unmoving."
+                        "You slide into her ass without any protection this time. Her body is stiff and unmoving."
                     else:
                         the_girl "Oh god, you're really going to do it! Oh fuck..."
-                        "You slide into her sopping wet cunt without any protection this time. She moans at the sensations.."
+                        "You slide into her ass without any protection this time. She moans at the sensations.."
                     $ mc.condom = False
                 "Leave it on":
                     "You decide to leave it on for now."
@@ -293,18 +298,18 @@ label scene_prone_bone_3(the_girl, the_location, the_object):
 
 
 
-label outro_prone_bone(the_girl, the_location, the_object):
-    "You get to hear every little gasp and moan from [the_girl.title] as you're pressed up against her. Combined with the feeling of fucking her pussy it's not long before you're pushed past the point of no return."
+label outro_prone_anal(the_girl, the_location, the_object):
+    "You get to hear every little gasp and moan from [the_girl.title] as you're pressed up against her. Combined with the feeling of fucking her ass it's not long before you're pushed past the point of no return."
     mc.name "I'm going to cum!"
-    $ the_girl.call_dialogue("cum_pullout")
-    $ climax_controller = ClimaxController(["Cum inside of her", "pussy"],["Cum on her ass","body"])
+    $ the_girl.call_dialogue("cum_anal")
+    $ climax_controller = ClimaxController(["Cum inside of her", "anal"],["Cum on her ass","body"])
     $ the_choice = climax_controller.show_climax_menu()
 
     if the_choice == "Cum inside of her":
-        "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s cunt as you climax. She gasps and moans as you pin her to the [the_object.name]."
+        "You use your full weight to push your cock deep inside of [the_girl.possessive_title]'s ass as you climax. She gasps and moans as you pin her to the [the_object.name]."
 
         if mc.condom:
-            $ the_girl.call_dialogue("cum_condom")
+            #$ the_girl.call_dialogue("cum_condom")
             $ climax_controller.do_clarity_release(the_girl)
             "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
             "Your condom is ballooned with your seed, hanging off your cock to one side."
@@ -320,26 +325,22 @@ label outro_prone_bone(the_girl, the_location, the_object):
 
         else:
             $ climax_controller.do_clarity_release(the_girl)
-            $ the_girl.call_dialogue("cum_vagina")
-            $ the_girl.cum_in_vagina()
-            $ prone_bone.redraw_scene(the_girl)
-            if the_girl.has_cum_fetish() or the_girl.has_breeding_fetish():
-                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
+            #$ the_girl.call_dialogue("cum_anal")
+            $ the_girl.cum_in_ass()
+            $ prone_anal.redraw_scene(the_girl)
+            if the_girl.has_cum_fetish() or the_girl.has_anal_fetish():
+                "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her fetish fulfilled."
-            if the_girl.knows_pregnant():
-                the_girl "Oh god... no wonder I got knocked up..."
             elif the_girl.sluttiness > 110:
                 the_girl "Oh god it's so deep."
-            elif the_girl.on_birth_control:
-                the_girl "Oh fuck...  Good thing I'm on the pill..."
             else:
-                the_girl "Oh fuck... I could get pregnant you know.."
+                the_girl "Oh fuck..."
         "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
 
     elif the_choice == "Cum on her ass":
         $ the_girl.cum_on_ass()
-        $ prone_bone.redraw_scene(the_girl)
+        $ prone_anal.redraw_scene(the_girl)
         if mc.condom:
             "You pull out at the last moment and grab your cock. You whip off your condom and stroke yourself off, blowing your load over [the_girl.title]'s ass."
         else:
@@ -359,31 +360,26 @@ label outro_prone_bone(the_girl, the_location, the_object):
         "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s exhausted body covered in your semen."
     return
 
-label transition_prone_bone_piledriver(the_girl, the_location, the_object):
-    "[the_girl.title]'s pussy feels so warm and inviting, you can't help but want to get deeper inside of her. You pause for a moment and reach down for her legs."
-    the_girl "Hey, what's... Whoa!"
-    "You pull her legs up and bend them over her shoulders. You hold onto her ankles as you start to fuck her again, pushing your hard cock nice and deep."
+
+label transition_default_prone_anal(the_girl, the_location, the_object):
+    "You put [the_girl.title] on her stomach and lie down on top of her, lining your hard cock up with her tight ass hole."
+    "After running the tip of your penis along her slit a few times to get it wet, you push forward, sliding inside of her backdoor. She gasps softly and closes her eyes."
     return
 
-label transition_default_prone_bone(the_girl, the_location, the_object):
-    "You put [the_girl.title] on her back and lie down on top of her, lining your hard cock up with her tight cunt."
-    "After running the tip of your penis along her slit a few times you press forward, sliding inside of her. She gasps softly and closes her eyes."
-    return
-
-label strip_prone_bone(the_girl, the_clothing, the_location, the_object):
+label strip_prone_anal(the_girl, the_clothing, the_location, the_object):
     $ the_girl.call_dialogue("sex_strip")
-    $ the_girl.draw_animated_removal(the_clothing, position = prone_bone.position_tag)
-    "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
-    "She sighs happily when you slip back inside of her."
+    $ the_girl.draw_animated_removal(the_clothing, position = prone_anal.position_tag)
+    "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side."
+    "You line yourself up and push back into her ass. She sighs happily when you slip back inside of her."
     return
 
-label strip_ask_prone_bone(the_girl, the_clothing, the_location, the_object):
+label strip_ask_prone_anal(the_girl, the_clothing, the_location, the_object):
     the_girl "[the_girl.mc_title], I'd like to take off my [the_clothing.name], would you mind?"
     "[the_girl.title] pants as you fuck her."
     menu:
         "Let her strip":
             mc.name "Take it off for me."
-            $ the_girl.draw_animated_removal(the_clothing, position = prone_bone.position_tag)
+            $ the_girl.draw_animated_removal(the_clothing, position = prone_anal.position_tag)
             "You move back kneel for a moment while [the_girl.title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
             "She sighs happily when you get on top of her and slide your cock back inside."
 
@@ -400,10 +396,10 @@ label strip_ask_prone_bone(the_girl, the_clothing, the_location, the_object):
                 "She grinds her hips against you and moans ecstatically."
     return
 
-label orgasm_prone_bone(the_girl, the_location, the_object):
+label orgasm_prone_anal(the_girl, the_location, the_object):
     "[the_girl.title] turns her head and pants loudly. Suddenly she bucks her hips up against yours and gasps."
-    $ the_girl.call_dialogue("climax_responses_vaginal")
-    "Her [the_girl.pubes_description] pussy is dripping wet as you fuck through her climax. She paws at the [the_object.name], trying to find something to hold onto."
+    $ the_girl.call_dialogue("climax_responses_anal")
+    "Her [the_girl.pubes_description] pussy is dripping wet as you fuck through her assgasm. She paws at the [the_object.name], trying to find something to hold onto."
     "After a few seconds she lets out a long sigh and all the tension drains out of her body. You slow down your thrusts to catch your own breath."
     the_girl "[the_girl.mc_title]... fuck! I Can't... oh my god..."
     "[the_girl.possessive_title] is getting fucked senseless as you continue to have your way with her."

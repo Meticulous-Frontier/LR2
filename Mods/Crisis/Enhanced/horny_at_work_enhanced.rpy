@@ -57,7 +57,7 @@ label horny_at_work_crisis_enhanced_label():
 
     elif the_cause == "large_tits":
         $ the_person.draw_person(position = "sitting")
-        "You're at your desk, trying hard to focus. Unfortunately, [the_person.title]'s nice, large tits keep grabbing your attention."
+        "You're at your desk, trying hard to focus. Unfortunately, [the_person.title]'s nice, [the_person.tits_description] keep grabbing your attention."
         "The more you try and ignore them the hornier you get, and it's starting to get in the way of work."
 
     elif the_cause == "vagina_visible":
@@ -68,10 +68,10 @@ label horny_at_work_crisis_enhanced_label():
     elif the_cause == "tits_visible":
         $ the_person.draw_person()
         if the_person.has_large_tits():
-            "You're at your desk, trying hard to focus. Unfortunately, [the_person.title]'s tits are on prominent display, bouncing pleasantly every time she takes a step."
+            "You're at your desk, trying hard to focus. Unfortunately, [the_person.title]'s [the_person.tits_description] are on prominent display, bouncing pleasantly every time she takes a step."
             "The more you try and ignore them the hornier you get, and it's starting to get in the way of your work."
         else:
-            "You're at your desk, trying hard to focus. Unfortunately, [the_person.title]'s tits are on display and pleasantly perky."
+            "You're at your desk, trying hard to focus. Unfortunately, [the_person.title]'s [the_person.tits_description] are on display and make your mind wander."
             "The more you try and ignore them the hornier you get, and it's starting to get in the way of your work."
 
     else:
@@ -478,11 +478,11 @@ label horny_at_work_crisis_enhanced_label():
                             $ the_person.draw_person()
                         elif the_person.get_opinion_score("showing her tits") > 0:
                             if the_person.has_large_tits():
-                                "She puts an arm under her tits and lifts them up for you, leaning forward a little to emphasize their size."
+                                "She puts an arm under her [the_person.tits_description] and lifts them up for you, leaning forward a little to emphasize their size."
                                 the_person "Do you like my tits? I know a lot of men do, they like to have a big pair of juicy titties in their face."
 
                             else:
-                                "She rubs her small tits, thumbing the nipples until they grow hard."
+                                "She rubs her [the_person.tits_description], thumbing the nipples until they grow hard."
                                 the_person "Do you like my tits? I know some women have bigger ones, but I think these are still pretty cute."
                                 the_person "They're just the right size to suck on, don't you think?"
                             $ mc.change_locked_clarity(10)

@@ -1,6 +1,6 @@
 init 2 python:
     def anal_fetish_employee_evening_approach_requirement():
-        if time_of_day == 3 and mc.is_at_work():
+        if time_of_day == 3 and mc.is_at_work() and mc.business.is_open_for_business():
             return not get_anal_fetish_employee() is None
         return False
 

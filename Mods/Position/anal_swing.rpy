@@ -112,7 +112,7 @@ label scene_SB_anal_swing_1(the_girl, the_location, the_object):
 
 
 label scene_SB_anal_swing_2(the_girl, the_location, the_object):
-    "[the_girl.possessive_title] quivers as you slow up the pace a bit. You pull the straps on the swing towards you and thrust your hips forward, burying your cock as deep in her ass as you can."
+    "[the_girl.possessive_title] quivers as you slowly up the pace a bit. You pull the straps on the swing towards you and thrust your hips forward, burying your cock as deep in her ass as you can."
     if the_girl.outfit.tits_available():
         "You reach around her body with both hands and grab her tits. You pinch and pull at her nipples roughly being careful to keep your cock deep inside her."
     else:
@@ -241,7 +241,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
         else:
             "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         if the_girl.get_opinion_score("being covered in cum") > 0:
-             the_girl "Yes! Paint me with your sticky cum!"
+            the_girl "Yes! Paint me with your sticky cum!"
         $ the_girl.cum_on_ass()
         $ climax_controller.do_clarity_release(the_girl)
         $ SB_anal_swing.redraw_scene(the_girl)

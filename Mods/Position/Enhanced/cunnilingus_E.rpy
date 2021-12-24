@@ -108,7 +108,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                         the_girl "Oh!!! [the_girl.mc_title]!"
                         $ the_girl.call_dialogue("surprised_exclaim")
 
-                    "Tongue fuck her ass.":
+                    "Tongue fuck her ass":
                         "You roll the sides of your tongue up and start to push the tip in and out of [the_girl.possessive_title]'s asshole."
                         the_girl "Oh!!! [the_girl.mc_title]!"
                         $ the_girl.call_dialogue("surprised_exclaim")

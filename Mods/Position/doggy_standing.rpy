@@ -163,7 +163,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
 
 
 label scene_SB_doggy_standing_2(the_girl, the_location, the_object):
-    "You take a breather and slow up the pace a bit."
+    "You take a breather and slowly up the pace a bit."
     if the_girl.outfit.tits_available():
         "You reach around her body with one hand and grasp her tit. You pinch and pull at her nipple roughly as you fuck her saturated slit."
     else:
@@ -332,7 +332,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
         else:
             "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         if the_girl.get_opinion_score("being covered in cum") > 0:
-             the_girl "Yes! Paint me with your sticky cum!"
+            the_girl "Yes! Paint me with your sticky cum!"
         $ the_girl.cum_on_ass()
         $ climax_controller.do_clarity_release(the_girl)
         $ SB_doggy_standing.redraw_scene(the_girl)

@@ -55,12 +55,12 @@ init 1 python:
         return
 
     def quest_wet_tshirt_contest_start_requirement():
-        if day < 21: # don't start this too soon
-            return False
-        if mc.business.company_model == None:
-            return False
-        elif mc.business.company_model.sluttiness < 50:
-                return False
+        if day < 21:
+            return False    # don't start this too soon
+        if mc.business.company_model is None:
+            return False    # we need a company model
+        if mc.business.company_model.sluttiness < 50:
+            return False    # she needs to be slutty enough to go along
         return True
 
     def quest_wet_tshirt_contest_cleanup():

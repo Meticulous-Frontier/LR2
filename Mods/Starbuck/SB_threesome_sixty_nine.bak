@@ -166,7 +166,7 @@ label outro_SB_threesome_sixty_nine(the_girl_1, the_girl_2, the_location, the_ob
         "Between [the_girl_1.title]'s steamy pussy and [the_girl_2.title]'s heaving tits in front of you, you find yourself going past the point of no return."
         mc.name "Oh fuck I'm gonna cum!"
         menu:
-            "Cum inside [the_girl_1.title]":
+            "Cum inside [the_girl_1.title].":
                 "You thrust yourself deep inside of [the_girl_1.title]'s cunt as you climax."
                 if the_girl_1.arousal > 100:
                     "Your cock bursting deep inside her triggers another orgasm for [the_girl_1.title]. She is moaning non stop."

@@ -121,14 +121,14 @@ label scene_standing_oral_1(the_girl, the_location, the_object):
             "[the_girl.possessive_title] reaches up and pinches one of her nipples hard, wincing from excitement and pain. She then proceeds to tweak and roll it between her fingers."
             $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") + 1)
         if the_girl.has_large_tits():
-            "With one hand she softly squeezes her large breast, gently playing with her nipple."
+            "With one hand she softly squeezes her [the_girl.tits_description], gently playing with her nipple."
         else:
-            "With one hand she squeezes her perky little breast, gently playing with her nipple."
+            "With one hand she squeezes her [the_girl.tits_description], gently playing with her nipple."
     else:
         if the_girl.has_large_tits():
-            "With one hand she softly squeezes her large breast."
+            "With one hand she softly squeezes her [the_girl.tits_description]."
         else:
-            "With one hand she squeezes her perky little breast."
+            "With one hand she squeezes her [the_girl.tits_description]."
     return
 
 

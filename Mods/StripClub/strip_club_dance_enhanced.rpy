@@ -102,7 +102,7 @@ label stripclub_dance_enhanced_label():
     if the_person.has_large_tits():
         if the_person.outfit.tits_available():
             $ mc.change_locked_clarity(10)
-            "As the music builds, [title]'s dance becomes more energetic. Her big tits bounce and jiggle in rhythm with her movements."
+            "As the music builds, [title]'s dance becomes more energetic. Her [the_person.tits_description] bounce and jiggle in rhythm with her movements."
         else:
             $ mc.change_locked_clarity(5)
             "As the music builds, [title]'s dance becomes more energetic. Her big tits bounce and jiggle, looking almost desperate to escape."

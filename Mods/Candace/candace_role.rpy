@@ -795,7 +795,7 @@ label candace_topless_at_mall_label(the_person):
         "You look over. It's a police officer!"
         $ scene_manager.add_actor(police_chief, display_transform = character_left_flipped)
         police_chief "Come on now, let's all just go back to our shopping."
-        "Suddenly, she sees [the_person.title]"
+        "Suddenly, she sees [the_person.title]."
         police_chief "Move along now... holy shit!"
         $ scene_manager.update_actor(police_chief, emotion = "angry")
         police_chief "Excuse me Ma'am? You can't just walk around the mall with your titties out!"
@@ -996,7 +996,7 @@ label candace_love_path_intro_label():
     $ the_person.change_arousal(15)
     if not the_person.vagina_available():
         "You pull off everything between you and her cunt."
-        $ the_person.strip_to_vagina(prefer_half_off = True, position = "missionary")
+        $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "missionary")
     "[the_person.title] reaches down and starts to play with herself as you start to get undressed. She starts to moan as you pull your cock out."
     $ the_person.change_arousal(15)
     $ mc.change_locked_clarity(30)

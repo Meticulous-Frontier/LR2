@@ -507,6 +507,13 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                                 $ position_choice = prone_bone
                             else:
                                 $ position_choice = None
+                        elif position_choice.skill_tag == "Anal" and mc.energy > 50 and mc.location.has_object_with_trait(prone_anal.requires_location):
+                            call prone_anal_decision_label(the_girl = the_person, the_location = mc.location, the_object = object_choice, the_position = position_choice) from _prone_anal_sex_takeover_01
+                            if _return:
+                                $ the_object = _return
+                                $ position_choice = prone_anal
+                            else:
+                                $ position_choice = None
                         else:
                             $ position_choice = None
                     elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
@@ -598,9 +605,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         mc.recently_orgasmed = False
 
     if affair_ask_after and private and not the_person.has_role([girlfriend_role, affair_role]) and not the_person.relationship == "Single" and report_log.get("girl orgasms",0) >= 1:
-        if the_person.relationship in relationship_stats and the_person.love >= relationship_stats[the_person.relationship] - 10 - (the_person.get_opinion_score("cheating on men") * 5):
-            if the_person.effective_sluttiness() >= 30 - (the_person.get_opinion_score("cheating on men") * 5):
-                call affair_check(the_person, report_log) from _call_affair_check_bugfix
+        if not the_person.has_role([lifestyle_coach_role]): # don't exclude all unique characters (boss wife / emily mom -> affair should be possible)
+            if the_person.relationship in relationship_stats and the_person.love >= relationship_stats[the_person.relationship] - 10 - (the_person.get_opinion_score("cheating on men") * 5):
+                if the_person.effective_sluttiness() >= 30 - (the_person.get_opinion_score("cheating on men") * 5):
+                    call affair_check(the_person, report_log) from _call_affair_check_bugfix
 
     python:
         # Only activate sexting when we have her number
@@ -627,7 +635,11 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
     $ final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(the_person, ignore_taboo)
     $ hates_position = len([the_person.discover_opinion(x) for x in the_position.opinion_tags if the_person.get_opinion_score(x) == -2]) != 0
 
-    if not hates_position and the_person.effective_sluttiness(the_taboo) >= final_slut_requirement:
+    if ignore_taboo:
+        # ignore taboo, also ignores willingness (we got here in a special way)
+        # so we also go into the position (no escape because she hates is)
+        pass
+    elif not hates_position and the_person.effective_sluttiness(the_taboo) >= final_slut_requirement:
         if not (skip_dialog or the_person.has_taboo(the_taboo)):
             $ the_person.call_dialogue("sex_accept")
 
@@ -661,7 +673,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
         python:
             ran_num = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #A negative number
             ran_num = __builtin__.round(ran_num/5)
-            the_person.change_love(ran_num)
+            the_person.change_love(-ran_num)
             willing = -1
 
         $ the_person.call_dialogue("sex_angry_reject")
@@ -1140,9 +1152,9 @@ label break_strip_outfit_taboos(the_person):
         "Once she's done stripping [the_person.possessive_title] has her nice [the_person.tits] tits out on display."
         if the_person.has_taboo("bare_tits"):
             if the_person.has_large_tits():
-                "She makes a hopeless attempt to cover her large tits with her hands, but comes to the realization it's pointless."
+                "She makes a hopeless attempt to cover her [the_person.tits_description] with her hands, but comes to the realization it's pointless."
             else:
-                "She tries to hide her tits from you with her hands, but quickly realizes how impractical that would be."
+                "She tries to hide her [the_person.tits_description] from you with her hands, but quickly realizes how impractical that would be."
             "Soon enough she doesn't even mind having them out."
             $ the_person.break_taboo("bare_tits")
             $ taboo_broken = True

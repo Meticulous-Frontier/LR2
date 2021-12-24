@@ -173,9 +173,9 @@ label broken_AC_crisis_break_taboo(the_girl):
         "Once she's done stripping [the_girl.possessive_title] has her nice [the_girl.tits] tits out on display."
         if the_girl.has_taboo("bare_tits"):
             if the_girl.has_large_tits():
-                "She makes a hopeless attempt to cover her large tits with her hands, but comes to the realization it's pointless."
+                "She makes a hopeless attempt to cover her [the_girl.tits_description] with her hands, but comes to the realization it's pointless."
             else:
-                "She tries to hide her tits from you with her hands, but quickly realizes how impractical that would be."
+                "She tries to hide her [the_girl.tits_description] from you with her hands, but quickly realizes how impractical that would be."
             "Soon enough she doesn't even mind having them out."
             $ the_girl.break_taboo("bare_tits")
     elif the_girl.outfit.vagina_visible():

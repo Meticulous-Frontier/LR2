@@ -16,7 +16,7 @@ init -1 python:
         return False
 
     def lifestyle_coach_choose_sexy_goal_requirement(the_person):
-        if the_person.sluttiness > 40 and get_lust_tier() > 2 and mc.energy > 80 and the_person.energy > 80:
+        if the_person.sluttiness > 40 and mc.energy > 80 and the_person.energy > 80:
             if the_person.location == mall:
                 return True
         return False
@@ -52,7 +52,7 @@ label lifestyle_coach_intro_label(the_person):
     $ scene_manager = Scene()
     "You decide to wander aimlessly around the mall for a bit. You do a bit of people watching and generally enjoy the time to yourself."
     "As you walk around, you spot a kiosk that catches your attention."
-    "Lifestyle Coaches: We help you set and achievement long term and short term goals!"
+    "Lifestyle Coaches: We help you set and achieve long term and short term goals!"
     "You walk around the kiosk a bit, there are all kinds of testimonials and adverts up for the service."
     the_person "Hello there! I'm [the_person.name]."
     $ scene_manager.add_actor(the_person)

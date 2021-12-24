@@ -1325,7 +1325,7 @@ label ashley_second_concert_date_label():
                     "Take her raw":
                         $ date_outcome = "raw sex"
                         $ mc.condom = False
-                        "You growl at [the_person.possessive_title]"
+                        "You growl at [the_person.possessive_title]."
                         mc.name "You let me worry about [stephanie.title]."
                         "Without waiting further response, you line yourself up and push your cock into [the_person.title]'s drenched pussy."
                     "Put on a condom":
@@ -1557,7 +1557,7 @@ label ashley_steph_second_date_confrontation_label():
 label ashley_blows_during_meeting_label():
     $ scene_manager = Scene()
     $ mc.arousal = 0
-    "You get a text from [stephanie.possessive_title]"
+    "You get a text from [stephanie.possessive_title]."
     $ mc.start_text_convo(stephanie)
     stephanie "Hey, can you meet me in your office? I just found something I wanted to talk to you about."
     mc.name "Sure, I'll be right there."
@@ -1682,7 +1682,7 @@ label ashley_sneaks_over_label():
     "You stumble backwards, falling on to your bed. [the_person.possessive_title] lands on top of you."
     $ the_person.draw_person(position = "cowgirl")
     "[the_person.title] is so eager, she starts pulling her clothes out of the way."
-    $ the_person.strip_to_vagina(prefer_half_off = True, position = "cowgirl")
+    $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "cowgirl")
     the_person "What are you waiting for? Get your cock out, geesh!"
     "[the_person.possessive_title] licks her lips as you quickly pull your pants and underwear down. She grabs your erection and gives it a couple strokes."
     the_person "Oh god, this thing is mine ALL NIGHT. It's about fucking time..."
@@ -2325,6 +2325,8 @@ label ashley_clothes_shopping_label(the_person):
         $ clear_scene()
         "You quietly exit the changing room."
 
+    # make sure she changes back into her normal outfit
+    $ the_person.apply_planned_outfit()
     return
 
 label ashley_test_outfit_scene():

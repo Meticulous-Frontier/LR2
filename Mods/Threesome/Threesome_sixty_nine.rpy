@@ -135,7 +135,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
     "You run your hands along [the_girl_1.title]'s hips as you fuck her. You can see her hands groping [the_girl_2.title]'s ass cheeks as she pleasures her with her tongue."
     if the_girl_2.has_large_tits() :
         if the_girl_2.outfit.tits_available():
-            "In front of you, you can see [the_girl_2.title]'s huge tits heaving up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
+            "In front of you, you can see [the_girl_2.title]'s [the_girl_2.tits_description] heaving up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
         else:
             $ top_clothing = the_girl_2.outfit.get_upper_top_layer()
             "In front of you, you can see [the_girl_2.title]'s huge tits heaving up and down, barely contained in her [top_clothing.name] as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
@@ -149,7 +149,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
             $ the_clothing = None
     else:
         if the_girl_2.outfit.tits_available():
-            "In front of you, you can see [the_girl_2.title]'s perky tits swaying up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
+            "In front of you, you can see [the_girl_2.title]'s [the_girl_2.tits_description] swaying up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
         else:
             $ top_clothing = the_girl_2.outfit.get_upper_top_layer()
             "In front of you, you can see [the_girl_2.title]'s perky tits swaying up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."

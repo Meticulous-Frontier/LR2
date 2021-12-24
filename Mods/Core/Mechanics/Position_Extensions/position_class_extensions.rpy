@@ -177,6 +177,36 @@ init 5 python:
 
     Position.call_transition_taboo_break = call_transition_taboo_break
 
+    def position_call_transition(self, new_position, person, the_location, the_object):
+        def get_position_name(position):
+            return position.name.lower().replace(" ", "_")
+
+        if not new_position is None:
+            transition_scene = "transition_" + get_position_name(self) + "_" + get_position_name(new_position)
+            #renpy.say(None, "Custom transition function is: " + transition_scene)
+            if renpy.has_label(transition_scene):
+                #renpy.say(None, "Calling custom transition function: " + transition_scene)
+                renpy.call(transition_scene, person, the_location, the_object)
+
+            transition_scene = new_position.transition_default
+            for position_tuple in self.transitions:
+                if position_tuple[0] == new_position: ##Does the position match the one we are looking for?
+                    transition_scene = position_tuple[1] ##If so, set it's label as the one we are going to change to.
+
+            #renpy.say(None, "Default transition scene is: " + transition_scene)
+            if renpy.has_label(transition_scene):
+                #renpy.say(None, "Calling default transition scene: " + transition_scene)
+                renpy.call(transition_scene, person, the_location, the_object)
+
+        else: # we are calling from the new position (we don't have an old position to start from)
+            transition_scene = self.transition_default
+            if renpy.has_label(transition_scene):
+                #renpy.say(None, "Calling default transition: " + transition_scene)
+                renpy.call(transition_scene, person, the_location, the_object)
+        return
+
+    Position.call_transition = position_call_transition
+
     def get_girl_outro(self):
         if not hasattr(self, "_girl_outro"):
             self._girl_outro = None

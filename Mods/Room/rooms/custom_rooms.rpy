@@ -108,6 +108,7 @@ label build_custom_rooms(stack):
         #Creates a room specifically to keep girls we don't want to be accessible, so they are still updated.
         purgatory = Room("purgatory", "Purgatory", [], None, purgatory_objects, [], [], False, [-5, -5], None, False, True, lighting_conditions = standard_indoor_lighting)
         purgatory.accessible = False
+        list_of_places.append(purgatory)
 
         fancy_restaurant = Room("fancy_restaurant", "Restaurant", [], standard_fancy_restaurant_backgrounds, [make_floor(), make_chair(), make_table()], [], [], False, [4,6], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(fancy_restaurant)
@@ -197,6 +198,12 @@ init 10 python:
 
         return
 
+    def fix_missing_rooms():
+        # added for save compatibility
+        if purgatory not in list_of_places:
+            list_of_places.append(purgatory)
+        return
+
 # Dead code? Doesn't seem to trigger.
 label update_custom_rooms(stack):
     python:
@@ -204,6 +211,7 @@ label update_custom_rooms(stack):
         add_custom_objects()
         fix_duplicate_objects_in_rooms()
         fix_lobby_objects()
+        fix_missing_rooms()
 
         execute_hijack_call(stack)
     return

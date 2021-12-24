@@ -92,10 +92,7 @@ init 2:
                 yalign 0.1
                 spacing 100
                 vbox:
-                    if person.title:
-                        text person.title style "menu_text_style" size 30
-                    else:
-                        text "???" style "menu_text_style" font person.char.what_args["font"] color person.char.what_args["color"] size 40
+                    text format_titles(person) style "menu_text_style" size 30
 
                     if mc.business.get_employee_title(person) != "None":
                         text "     Job: " + mc.business.get_employee_title(person) style "menu_text_style"

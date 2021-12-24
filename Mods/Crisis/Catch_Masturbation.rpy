@@ -296,7 +296,7 @@ label SB_caught_masturbating_crisis_label():
                                 else:
                                     "[the_person.possessive_title] quickly recovers after you finish."
                                     $ the_person.change_stats(happiness = 3)
-                                the_person "Mmm, you always know just what I need [the_person.mc_title]"
+                                the_person "Mmm, you always know just what I need [the_person.mc_title]."
                                 "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
                                 "You finish up your walk and return back to your previous work."
 

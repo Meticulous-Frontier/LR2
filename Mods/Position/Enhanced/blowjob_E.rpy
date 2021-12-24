@@ -294,9 +294,9 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
 
 label blowjob_enhanced_kneel_mouth_cum(the_girl):
     if the_girl.get_opinion_score("drinking cum") < 0:
-       "[the_girl.title] clearly has other ideas as she brings one hand up to your cock and goes to pull her mouth off of your cock."
-       menu:
-           "Let her off":
+        "[the_girl.title] clearly has other ideas as she brings one hand up to your cock and goes to pull her mouth off of your cock."
+        menu:
+            "Let her off":
                 "You let her pull back."
                 $ the_girl.change_stats(love = -the_girl.get_opinion_score("drinking cum"), happiness = -the_girl.get_opinion_score("drinking cum"))
                 if the_girl.has_cum_fetish():
@@ -347,7 +347,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                     if the_girl.has_cum_fetish():
                         "She closes her eyes and starts to gently massage your cum all over her face."
 
-           "Hold her in place":
+            "Hold her in place":
                 "You grab her head with both your hands and thrust roughly into her mouth as you cum."
                 $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
                 $ the_girl.cum_in_mouth()

@@ -63,16 +63,16 @@ label scene_standing_dildo_1(the_girl, the_location, the_object):
     "You pump the dildo in and out of [the_girl.possessive_title]. On your knees in front of her, you look up and admire her shapely body and chest."
     if the_girl.has_large_tits():
         if the_girl.outfit.tits_available():
-            "You reach your free hand up to [the_girl.title]'s bare tits and cup one. Her skin is flushed and it feels hot in your hand."
+            "You reach your free hand up to [the_girl.title]'s bare [the_girl.tits_description] and cup one. Her skin is flushed and it feels hot in your hand."
 
         else:
             "You reach your free hand up to [the_girl.title]'s tits and squeeze one through her clothing, enjoying its size and weight."
     else:
         if the_girl.outfit.tits_available():
-            "You paw at [the_girl.possessive_title]'s small tits with your free hand, running your thumb over one of her nipples."
+            "You paw at [the_girl.possessive_title]'s [the_girl.tits_description] with your free hand, running your thumb over one of her nipples."
             "Her body responds, the nipple hardening as you play with it."
         else:
-            "You paw at [the_girl.possessive_title]'s small tits through her clothing with your free hand."
+            "You paw at [the_girl.possessive_title]'s [the_girl.tits_description] through her clothing with your free hand."
             "You can feel her body respond, her nipple hardening enough that you can feel it through the fabric."
     return
 

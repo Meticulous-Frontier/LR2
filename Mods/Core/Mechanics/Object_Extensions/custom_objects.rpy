@@ -20,6 +20,9 @@ init -1 python:
     def make_toilet():
         return Object("Toilet", ["Sit", "Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
+    def make_sink():
+        return Object("Bathroom Sinks", ["Sit", "Kneel", "Lean"], sluttiness_modifier = 0, obedience_modifier = 0)
+
     def make_love_rug():
         return Object("Love Rug", ["Kneel", "Lay"], sluttiness_modifier = 0, obedience_modifier = 0)
 

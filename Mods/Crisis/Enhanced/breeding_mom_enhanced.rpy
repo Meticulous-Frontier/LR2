@@ -31,7 +31,7 @@ label breeding_mom_intro_label_enhanced(the_person):
         the_person "I want you to give me a child. I want you to breed me."
 
     if the_person.has_large_tits():
-        "Her face is flush and her breathing rapid. Her large breasts heave up and down."
+        "Her face is flush and her breathing rapid. Her [the_person.tits_description] heave up and down."
     else:
         "Her face is flush and her breathing rapid."
     $ mc.change_locked_clarity(50)

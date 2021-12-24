@@ -597,7 +597,7 @@ label kaya_flirt_response_high(the_person):
             if the_person.has_large_tits():
                 $ the_person.draw_person(the_animation = tit_bob)
                 $ mc.change_locked_clarity(15)
-                "[the_person.possessive_title] smiles mischievously at you and bounces her tits up and down."
+                "[the_person.possessive_title] smiles mischievously at you and bounces her [the_person.tits_description] up and down."
                 the_person "Interested in getting a closer look at these girls?"
             else:
                 $ mc.change_locked_clarity(15)
@@ -1637,9 +1637,9 @@ label kaya_bare_tits_taboo_break(the_person, the_clothing):
     if the_person.effective_sluttiness() > (40 - the_person.get_opinion_score("showing her tits") * 5):
         the_person "So you want to see my tits, huh? I bet you're going to love them."
         if the_person.has_large_tits():
-            "She shakes her chest for you, jiggling the large tits hidden underneath her [the_clothing.display_name]."
+            "She shakes her chest for you, jiggling the [the_person.tits_description] hidden underneath her [the_clothing.display_name]."
         else:
-            "She shakes her chest and gives her small tits a little jiggle."
+            "She shakes her chest and gives her [the_person.tits_description] a little jiggle."
         mc.name "I bet I will, I just have to get your [the_clothing.display_name] out of the way."
         the_person "Go for it then, I'm not going to stop you."
 

@@ -357,7 +357,7 @@ init -1 python:
     Business.remove_mandatory_crisis = business_remove_mandatory_crisis
 
     def business_get_employee_list(self):
-        return [x for x in self.research_team + self.production_team + self.supply_team + self.market_team + self.hr_team if x.is_available()]
+        return [x for x in self.research_team + self.production_team + self.supply_team + self.market_team + self.hr_team if x.is_available]
 
     Business.get_employee_list = business_get_employee_list
 
@@ -381,12 +381,41 @@ init -1 python:
     Business.date_scheduled_today = date_scheduled_today
 
     # College intern related functions
+    def business_college_interns_research(self):
+        if not hasattr(self, "_college_interns_research"):
+            self._college_interns_research = MappedList(Person, all_people_in_the_game)
+        return self._college_interns_research
 
-    Business.college_interns_research = []
-    Business.college_interns_production = []
-    Business.college_interns_market = []    #Adding code support for other divisions even though there is currently no plan to use them.
-    Business.college_interns_supply = []
-    Business.college_interns_HR = []
+    Business.college_interns_research = property(business_college_interns_research, None, None)
+
+    def business_college_interns_production(self):
+        if not hasattr(self, "_college_interns_production"):
+            self._college_interns_production = MappedList(Person, all_people_in_the_game)
+        return self._college_interns_production
+
+    Business.college_interns_production = property(business_college_interns_production, None, None)
+
+    def business_college_interns_market(self):
+        if not hasattr(self, "_college_interns_market"):
+            self._college_interns_market = MappedList(Person, all_people_in_the_game)
+        return self._college_interns_market
+
+    Business.college_interns_market = property(business_college_interns_market, None, None)
+
+    def business_college_interns_supply(self):
+        if not hasattr(self, "_college_interns_supply"):
+            self._college_interns_supply = MappedList(Person, all_people_in_the_game)
+        return self._college_interns_supply
+
+    Business.college_interns_supply = property(business_college_interns_supply, None, None)
+
+    def business_college_interns_HR(self):
+        if not hasattr(self, "_college_interns_HR"):
+            self._college_interns_HR = MappedList(Person, all_people_in_the_game)
+        return self._college_interns_HR
+
+    Business.college_interns_HR = property(business_college_interns_HR, None, None)
+
     Business.college_interns_unlocked = False
     Business.college_supply_interns_unlocked = False
     Business.college_market_interns_unlocked = False
@@ -406,15 +435,17 @@ init -1 python:
             div_func[target_division][0].append(person)
         person.add_role(college_intern_role)
         person.job = "Student Intern"
-        person.set_schedule(div_func[target_division][1], days = [5,6], times = [1,2])
+        person.set_alt_schedule(div_func[target_division][1], days = [5,6], times = [1,2])
         if add_to_location:
             university.add_person(person)
         if person.event_triggers_dict.get("intern_since", -1) == -1:
             person.event_triggers_dict["intern_since"] = day
             self.listener_system.fire_event("new_intern", the_person = person)
 
-        for other_employee in (self.college_interns_research + self.college_interns_production + self.college_interns_HR + self.college_interns_supply + self.college_interns_market):
-            town_relationships.begin_relationship(person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
+        # they never meet other employees...so why add relationships?
+        # for other_employee in (self.college_interns_research + self.college_interns_production + self.college_interns_HR + self.college_interns_supply + self.college_interns_market):
+        #     town_relationships.begin_relationship(person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
+        return
 
     Business.hire_college_intern = hire_college_intern
 
@@ -431,6 +462,9 @@ init -1 python:
             self.college_interns_HR.remove(person)
         else:
             pass    #Some kind of error here?
+
+        person.set_alt_schedule(None, days = [5,6], times = [1,2])
+        person.job = None
         person.remove_role(college_intern_role)
         return
 
@@ -453,7 +487,7 @@ init -1 python:
     Business.get_intern_depts_with_openings = get_intern_depts_with_openings
 
     def business_get_intern_list(self):
-        return [x for x in self.college_interns_research + self.college_interns_production + self.college_interns_supply + self.college_interns_market + self.college_interns_HR if x.is_available()]
+        return [x for x in self.college_interns_research + self.college_interns_production + self.college_interns_supply + self.college_interns_market + self.college_interns_HR if x.is_available]
 
     Business.get_intern_list = business_get_intern_list
 

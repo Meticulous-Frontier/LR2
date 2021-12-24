@@ -116,9 +116,9 @@ init -1 python:
 
             the_group.draw_animated_removal(the_person, make_primary = True, the_clothing = the_item)
             if the_person.has_large_tits():
-                renpy.say(None, the_person.title + " pulls off her " + the_item.display_name + ". Her large breasts jiggle briefly as they're released.")
+                renpy.say(None, the_person.title + " pulls off her " + the_item.display_name + ". Her [the_person.tits_description] jiggle briefly as they're released.")
             else: #Peepers
-                renpy.say(None, the_person.title + " pulls off her " + the_item.display_name + ", setting her tits free.")
+                renpy.say(None, the_person.title + " pulls off her " + the_item.display_name + ", setting her [the_person.tits_description] free.")
 
             if person.has_taboo("bare_tits"):
                 renpy.say(None, the_person.title + " tries to keep her breasts covered with her hands, cheeks red.")

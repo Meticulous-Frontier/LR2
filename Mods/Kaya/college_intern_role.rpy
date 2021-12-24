@@ -74,25 +74,20 @@ init 1 python:
 
 label unlock_college_interns():
     $ college_intern_role = Role("College Intern", actions = [college_intern_training], hidden = False, on_turn = college_intern_on_turn, on_move = college_intern_on_move, on_day = college_intern_on_day)
-    $ mc.business.college_interns_research = []
-    $ mc.business.college_interns_production = []
     $ mc.business.college_interns_unlocked = True
     if hire_new_college_intern not in nora_role.actions:
         $ nora_role.actions.append(hire_new_college_intern)
     return
 
 label unlock_college_supply_interns():
-    $ mc.business.college_interns_supply = []
     $ mc.business.college_supply_interns_unlocked = True
     return
 
 label unlock_college_HR_interns():
-    $ mc.business.college_interns_HR = []
     $ mc.business.college_hr_interns_unlocked = True
     return
 
 label unlock_college_market_interns():
-    $ mc.business.college_interns_market = []
     $ mc.business.college_market_interns_unlocked = True
     return
 
@@ -182,7 +177,7 @@ label hire_new_college_intern_label(the_person):
         $ new_person.set_mc_title(get_random_player_title(new_person))
         $ del new_person
         the_person "I'll pass this along to her. I'm sure she will be excited! Expect to see her on Saturday."
-        mc.name "Thank you [the_person.title]"
+        mc.name "Thank you [the_person.title]."
         $ mc.business.change_funds(-5000)
     else:
         "You decide against hiring any new interns for now."

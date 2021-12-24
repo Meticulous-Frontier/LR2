@@ -42,15 +42,31 @@ init 10 python:
             draw_mannequin(cs.scope["mannequin"], cs.scope[outfit], cs.scope["mannequin_pose"], hide_list = hide_list)
         return
 
+    def preview_clothing(apply_method, cloth, outfit = "demo_outfit"):
+        cs = renpy.current_screen()
+
+        cloth.colour[0] = cs.scope["current_r"]
+        cloth.colour[1] = cs.scope["current_g"]
+        cloth.colour[2] = cs.scope["current_b"]
+        cloth.colour[3] = cs.scope["current_a"]
+
+        apply_method(cs.scope[outfit], cloth)
+        return
+
+    def hide_preview(cloth, outfit = "demo_outfit"):
+        cs = renpy.current_screen()
+        cs.scope[outfit].remove_clothing(cloth)
+        return
+
     def get_slut_score():
         cs = renpy.current_screen()
 
         if cs.scope["outfit_type"] == "full":
-            return cs.scope["starting_outfit"].get_full_outfit_slut_score()
+            return cs.scope["demo_outfit"].get_full_outfit_slut_score()
         elif cs.scope["outfit_type"] == "under":
-            return cs.scope["starting_outfit"].get_underwear_slut_score()
+            return cs.scope["demo_outfit"].get_underwear_slut_score()
         elif cs.scope["outfit_type"] == "over":
-            return cs.scope["starting_outfit"].get_overwear_slut_score()
+            return cs.scope["demo_outfit"].get_overwear_slut_score()
         return 0
 
     def get_outfit_type_name():
@@ -72,21 +88,6 @@ init 10 python:
                 if item.name == cloth.name:
                     return cat
         return cs.scope["valid_categories"][0]
-
-    def update_colour_sliders(cloth):
-        cs = renpy.current_screen()
-        outfit = cs.scope["demo_outfit"]
-        for cc in [x for x in outfit.upper_body + outfit.lower_body + outfit.feet + outfit.accessories]:
-            if cc in cs.scope["categories_mapping"][cs.scope["category_selected"]][0]:
-                cloth.colour = cc.colour
-                cs.scope["selected_colour"] = "colour"
-                cs.scope["current_r"] = cc.colour[0]
-                cs.scope["current_g"] = cc.colour[1]
-                cs.scope["current_b"] = cc.colour[2]
-                cs.scope["current_a"] = cc.colour[3]
-                if not isinstance(cc, Facial_Accessory):
-                    cloth.colour_pattern = cc.colour_pattern
-        return
 
     def set_generated_outfit(category, slut_value, min_slut_value = 0):
         cs = renpy.current_screen()
@@ -442,15 +443,15 @@ init 2:
                                                     insensitive_background "#171717"
                                                     sensitive is_sensitive
                                                     action [
-                                                        SetScreenVariable("selected_clothing", cloth),
+                                                        SetScreenVariable("selected_clothing", cloth.get_copy()),
                                                         SetScreenVariable("selected_colour", "colour")
                                                     ]
                                                     hovered [
-                                                        Function(apply_method, demo_outfit, cloth),
+                                                        Function(preview_clothing, apply_method, cloth),
                                                         Function(preview_outfit)
                                                     ]
                                                     unhovered [
-                                                        Function(demo_outfit.remove_clothing, cloth),
+                                                        Function(hide_preview, cloth),
                                                         Function(preview_outfit)
                                                     ]
 
@@ -511,7 +512,10 @@ init 2:
                                                                                         background "#171717"
 
                                                                                     sensitive True
-                                                                                    action SetField(selected_clothing,"pattern",selected_clothing.supported_patterns[pattern])
+                                                                                    action [
+                                                                                        SetField(selected_clothing,"pattern",selected_clothing.supported_patterns[pattern]),
+                                                                                        Function(preview_outfit)
+                                                                                    ]
 
                                                         hbox:
                                                             xfill True
@@ -752,7 +756,10 @@ init 2:
 
                                             sensitive valid_check(starting_outfit, selected_clothing)
 
-                                            action [SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]), Function(apply_method, starting_outfit, selected_clothing)]
+                                            action [
+                                                SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
+                                                Function(apply_method, starting_outfit, selected_clothing)
+                                            ]
                                             hovered [
                                                 SetField(selected_clothing, selected_colour,[current_r,current_g,current_b,current_a]),
                                                 Function(apply_method, demo_outfit, selected_clothing),
@@ -915,11 +922,12 @@ init 2:
                                                         action [ # NOTE: Left click makes more sense for selection than right clicking
                                                             SetScreenVariable("category_selected", get_category(cloth)),
                                                             SetScreenVariable("selected_clothing", cloth),
+                                                            SetScreenVariable("selected_colour", "colour"),
 
-                                                            SetScreenVariable("current_r",cloth.colour[0]),
-                                                            SetScreenVariable("current_g",cloth.colour[1]),
-                                                            SetScreenVariable("current_b",cloth.colour[2]),
-                                                            SetScreenVariable("current_a",cloth.colour[3]),
+                                                            SetScreenVariable("current_r", cloth.colour[0]),
+                                                            SetScreenVariable("current_g", cloth.colour[1]),
+                                                            SetScreenVariable("current_b", cloth.colour[2]),
+                                                            SetScreenVariable("current_a", cloth.colour[3]),
 
                                                             Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
                                                         ]

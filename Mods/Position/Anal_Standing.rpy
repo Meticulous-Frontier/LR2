@@ -221,7 +221,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
 
 
 label scene_SB_anal_standing_2(the_girl, the_location, the_object):
-    "[the_girl.possessive_title] quivers as you slow up the pace a bit. The sensation of burying yourself in her tight chute over and over is amazing."
+    "[the_girl.possessive_title] quivers as you slowly up the pace a bit. The sensation of burying yourself in her tight chute over and over is amazing."
     if the_girl.outfit.tits_available():
         "You reach around her body with one hand and grasp her tit. You pinch and pull at her nipple roughly as you plow her behind."
     else:
@@ -362,7 +362,7 @@ label outro_SB_anal_standing(the_girl, the_location, the_object):
         else:
             "You pull out of [the_girl.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         if the_girl.get_opinion_score("being covered in cum") > 0:
-             the_girl "Yes! Paint me with your sticky cum!"
+            the_girl "Yes! Paint me with your sticky cum!"
         $ the_girl.cum_on_ass()
         $ climax_controller.do_clarity_release(the_girl)
         $ SB_anal_standing.redraw_scene(the_girl)
