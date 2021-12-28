@@ -139,7 +139,7 @@ label train_dealbreaker_blowjob_label(the_person):
     $ mc.change_arousal(20)
     $ mc.change_locked_clarity(20)
 
-    "[the_person.title] pulls your cock out of her her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
+    "[the_person.title] pulls your cock out of her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
     the_person "Does that feel good?"
     "[the_person.possessive_title] seems to actually be getting into this. You make sure to encourage her."
     mc.name "It feels amazing."

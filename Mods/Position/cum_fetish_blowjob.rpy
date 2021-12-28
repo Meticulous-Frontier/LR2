@@ -72,7 +72,7 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
     $ cum_fetish_blowjob.current_modifier = None
     $ cum_fetish_blowjob.redraw_scene(the_girl)
 
-    "[the_girl.possessive_title] pulls your cock out of her her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
+    "[the_girl.possessive_title] pulls your cock out of her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
     the_girl "Mmm, I can't wait until your cock throbs and your sweet, sticky cum is shooting out..."
     mc.name "Of course you can't wait. You are my perfect little cum slut."
     "When [the_girl.possessive_title] opens her mouth and resumes blowing you, you put your hand on the back of her head, intent to push yourself down her throat."

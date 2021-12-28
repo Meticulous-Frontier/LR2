@@ -267,7 +267,7 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
         call get_hard_SB_sixty_nine(the_girl, the_location, the_object) from _get_mc_hard_from_sixty_nine_01
         return
 
-    "[the_girl.possessive_title] pulls your cock out of her her mouth and starts to stroke you with her hand while her tongue circles around the tip."
+    "[the_girl.possessive_title] pulls your cock out of her mouth and starts to stroke you with her hand while her tongue circles around the tip."
     if the_girl.arousal > 50:
         "Her pussy glistens with moisture above you. You eagerly lap it up and the push your tongue into her moist, wet hole."
     else:

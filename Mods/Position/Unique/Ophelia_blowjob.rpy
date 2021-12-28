@@ -94,7 +94,7 @@ label scene_Ophelia_blowjob_2(the_girl, the_location, the_object):
     $ Ophelia_blowjob.current_modifier = None
     $ Ophelia_blowjob.redraw_scene(the_girl)
 
-    "[the_girl.title] pulls your cock out of her her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
+    "[the_girl.title] pulls your cock out of her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
     the_girl "Feels good, doesn't it?"
     mc.name "Yeah, it does. You are an amazing cocksucker."
     "[the_girl.possessive_title] smiles and keeps working her tongue over your cock. She licks it bottom to top, then sucks on the tip, then licks it from the top back to the bottom."
