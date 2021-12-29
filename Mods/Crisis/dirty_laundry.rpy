@@ -241,7 +241,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     $ the_person.draw_person(position = "sitting")
                     "She looks at you, expectantly."
                     the_person "What are you waiting for? Keep going!"
-                    "She continues to watch you. You gives yourself a few tentative strokes."
+                    "She continues to watch you. You give yourself a few tentative strokes."
                     the_person "Mmm, I love watching a man get himself off..."
                     $ mc.change_locked_clarity(10)
                     "You try to get back into the swing of things, you have a hard time with [the_person.title] in the room. She seems to be oblivious though."
