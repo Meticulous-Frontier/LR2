@@ -128,10 +128,7 @@ label orgasm_standing_cunnilingus(the_girl, the_location, the_object):
 
     "You notice [the_girl.possessive_title]'s moans becoming louder, and her legs twitching more noticeably on either side of your head."
     "You speed up your efforts, doing your best to drive her towards her orgasm. She moans and begins to writhe under your skilled tongue."
-    if the_girl.get_sex_goal() == "get off":
-        the_girl "Oh my god... I'm finally gonna cum!"
-    else:
-        $ the_girl.call_dialogue("climax_responses_oral")
+    $ the_girl.call_dialogue("climax_responses_oral")
     "All at once the tension in her body is unleashed in a series of violent tremors. Her hand grabs the back of your head, pulling you against her."
     "The moment passes and she relaxes. For a moment all she can do is look down at you and pant."
     return
