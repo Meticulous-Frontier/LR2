@@ -476,7 +476,7 @@ label stripper_performance_review_label(the_person):
         "Punish her for poor performance":
             $ cut_amount = __builtin__.round(the_person.salary * 0.1)
             menu:
-                "Cut her pay by 10%\n{color=#00ff00}{size=18}Profit: $[cut_amount] / day{/size}{/color}": #Pay her less. Large happiness and obedience drop.
+                "Cut her pay by 10%%\n{color=#00ff00}{size=18}Profit: $[cut_amount] / day{/size}{/color}": #Pay her less. Large happiness and obedience drop.
                     mc.name "I'm really sorry to do this [the_person.title], but your performance lately just doesn't justify what I'm paying you."
                     mc.name "I'm going to have to cut your pay by 10%%."
                     $ the_person.change_salary(-cut_amount)
