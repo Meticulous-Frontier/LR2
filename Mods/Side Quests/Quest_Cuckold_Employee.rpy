@@ -158,11 +158,10 @@ init 1 python:
 ###Functions unique to the quest
     def quest_cuckold_employee_person_find_employee():
         able_person_list = []
-        for person in mc.business.get_employee_list():
-            if not quest_director.is_person_blocked(person):
-                if person.sluttiness > 50 and not person.is_pregnant():
-                    if person.relationship == "Married" and person.kids == 0:
-                        able_person_list.append(person)
+        for person in [x for x in mc.business.get_employee_list() if x.sluttiness > 50 and x.kids == 0 \
+            and x.relationship == "Married" and not x.is_pregnant() \
+            and not quest_director.is_person_blocked(x)]:
+                able_person_list.append(person)
         return get_random_from_list(able_person_list)
 
 ###Declare quest actions###

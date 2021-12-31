@@ -31,12 +31,11 @@
 init 1 python:
     def get_quest_production_line_person():
         able_person_list = []
-        for person in mc.business.production_team:
-            if person.age < 25 and person.kids == 0: # young enough and no kids (she's daddy's little girl)
-                if not quest_director.is_person_blocked(person):
-                    if day > person.event_triggers_dict.get("employed_since", 9999) + 7: #Employed for at least 7 days#
-                        if len(town_relationships.get_existing_parents(person)) == 0 and len(town_relationships.get_existing_sisters(person)) == 0: # no mother / sisters in game
-                            able_person_list.append(person)
+        for person in [x for x in mc.business.production_team if x.age < 25 and x.kids == 0 \
+            and not quest_director.is_person_blocked(x) \
+            and day > x.event_triggers_dict.get("employed_since", 9999) + 7]:
+            if len(town_relationships.get_existing_parents(person)) == 0 and len(town_relationships.get_existing_sisters(person)) == 0: # no mother / sisters in game
+                able_person_list.append(person)
         return get_random_from_list(able_person_list)
 
     def quest_production_line():

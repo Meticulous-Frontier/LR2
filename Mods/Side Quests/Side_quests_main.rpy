@@ -96,9 +96,12 @@ init python: #For now default init. May change later if we know better.
             return
 
         def start_new_quest(self):
+            if self.active_quest:
+                return False    # Finish old quest first
+
             self.active_quest = get_random_from_list([x for x in self.quest_list if not x.quest_complete and x.start_requirement()])
-            if not self.active_quest: #No applicable quests available. Reset quest chance.
-                return False
+            if not self.active_quest:
+                return False    # No applicable quests available. Reset quest chance.
 
             self.active_quest.quest_init()
             self.quest_active = True
@@ -167,7 +170,8 @@ init python: #For now default init. May change later if we know better.
             if self.active_quest:
                 self.active_quest.set_quest_flag(0)
                 self.active_quest.quest_cleanup()
-                self.active_quest = false
+                self.active_quest = None
+                self.quest_active = False
 
     def Quest_tracker_init():
         global quest_director
