@@ -211,7 +211,7 @@ label sakari_coffee_break_label(the_person):
 
     "After a few more moments of silence, you decide to change topics."
 
-    call small_talk_person(the_person, apply_energy_cost = False)
+    call small_talk_person(the_person, apply_energy_cost = False) from _call_small_talk_person_sakari_coffee_break
 
     the_person "Well, thank you for the tea. I feel refreshed! I think I'll try to get a little more work done today."
     $ the_person.draw_person()
