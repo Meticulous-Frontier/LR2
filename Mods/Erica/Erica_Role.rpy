@@ -71,8 +71,8 @@ init 2 python:
         #REMARKS: Erica has a few instance specific class overrides. This is my first time testing this type of programming, hopefully it works correctly.
         erica.apply_gym_outfit = erica_apply_gym_outfit
 
-        # game_hints.append(Hint("College Athlete", "Get to know Erica to learn to give her a protein shake.", "erica_get_progress() > 0 and not erica_get_protein_unlock()", "erica_get_protein_unlock()"))
-        # game_hints.append(Hint("College Athlete", "Get at least 120 max energy and Erica to at least 40 sluttiness.", "erica_get_progress() == 1 and erica_get_protein_unlock()", "erica_get_progress() > 1"))
+        # game_hints.append(Hint("College Athlete", "Get to know Erica to learn to give her a protein shake.", "erica_get_progress() > 0 and not erica_protein_shake_is_unlocked()", "erica_protein_shake_is_unlocked()"))
+        # game_hints.append(Hint("College Athlete", "Get at least 120 max energy and Erica to at least 40 sluttiness.", "erica_get_progress() == 1 and erica_protein_shake_is_unlocked()", "erica_get_progress() > 1"))
         # game_hints.append(Hint("College Athlete", "Get at least 140 max energy and Erica to at least 60 sluttiness. Then challenge her to a race.", "erica_get_progress() == 2", "erica_get_progress() > 2"))
 
         return
@@ -165,9 +165,11 @@ init -2 python:
             return "Requires: 110 maximum energy"
 
     def erica_phase_one_requirement(person):
-        if person.event_triggers_dict.get("erica_progress", 0) < 1:
+        if erica_get_progress() < 1:
             return False
-        if person.event_triggers_dict.get("erica_workout", 0) < 1:
+        if not erica_workout_is_unlocked():
+            return False
+        if not erica_protein_shake_is_unlocked():
             return False
         if time_of_day < 4:
             if mc.max_energy >= 120:
@@ -182,9 +184,7 @@ init -2 python:
         return False
 
     def erica_phase_two_requirement(person):
-        if person.event_triggers_dict.get("erica_progress", 0) < 2:
-            return False
-        if person.event_triggers_dict.get("erica_progress", 0) > 3:
+        if erica_get_progress() < 2 or erica_get_progress() > 3:
             return False
         if time_of_day < 4:
             if mc.max_energy >= 140:
@@ -205,10 +205,10 @@ init -2 python:
         return day % 7 == 5 and time_of_day == 1
 
     def erica_buy_protein_shake_requirement(person):
-        if person.event_triggers_dict.get("erica_protein", 0) < 1:
+        if not erica_protein_shake_is_unlocked():
             return False
         if mc.location == gym:
-            if day > person.event_triggers_dict.get("protein_day", 9999):
+            if day > erica_get_protein_day():
                 return True
             else:
                 return "Once per Day"
@@ -216,7 +216,7 @@ init -2 python:
             return "Only at the Gym"
 
     def erica_house_call_requirement(person):
-        if person.event_triggers_dict.get("erica_progress", 0) == 4:
+        if erica_get_progress() == 4:
             if mc.location == person.home:
                 return True
         return False
@@ -446,9 +446,9 @@ label erica_get_to_know_label(the_person):
         $ the_person.event_triggers_dict["erica_progress"] = 0
         call erica_intro_label(the_person) from _erica_recall_intro_if_skipped_somehow_01
         #Introduction scene#
-    elif the_person.event_triggers_dict.get("erica_protein", 0) > 0 and erica_is_looking_for_work() == False and the_person.love>20:
+    elif erica_protein_shake_is_unlocked() and not erica_is_looking_for_work() and the_person.love > 20:
         call erica_money_problems_label(the_person) from _erica_start_job_quest_01
-    elif the_person.event_triggers_dict.get("erica_progress", 0) == 1:
+    elif erica_get_progress() == 1:
         "You decide to ask [the_person.title] a bit more about her athletics."
         mc.name "I see you here a lot. Are you getting ready for a race?"
         the_person "Yeah! I'm getting ready for a big race soon, so I try to get in here before and after class each day."
@@ -458,7 +458,7 @@ label erica_get_to_know_label(the_person):
         "[the_person.title] starts to move to the next workout machine."
         the_person "So a relationship is not really an option for me right now, or a job for that matter."
         mc.name "Yeah, sounds like an intense schedule."
-        if the_person.event_triggers_dict.get("erica_protein", 0) < 1:
+        if not erica_protein_shake_is_unlocked():
             the_person "It'd be nice to have a little extra money for some protein powder or something. Money is pretty tight!"
             "You think about it for a bit. You could offer to buy her a protein shake, they serve them here at the gym. That would be a good opportunity to slip some serum in..."
             mc.name "They have protein shakes here. Maybe I could grab you one? It'd be no trouble."
@@ -495,7 +495,7 @@ label erica_get_to_know_label(the_person):
             "If you want to get further with her, maybe you should work on increasing your energy!"
 
         #Had sex in the locker room#
-    elif the_person.event_triggers_dict.get("erica_progress", 0) == 2:
+    elif erica_get_progress() == 2:
         "You notice that [the_person.title] is really pushing herself hard today on the treadmill."
         mc.name "Hey [the_person.title]. You're really going at it! Have an event coming up?"
         "[the_person.title] slows the treadmill down so she can carry on a conversation."
@@ -513,14 +513,14 @@ label erica_get_to_know_label(the_person):
         "You say goodbye and head on your way."
 
         #You've challenged her to a race!#
-    elif the_person.event_triggers_dict.get("erica_progress", 0) == 3:
+    elif erica_get_progress() == 3:
         "You try to strike up a conversation with [the_person.title]."
         the_person "Hey now, no distractions! Your ass is mine on Saturday!"
         mc.name "Ha! We'll see about that!"
 
 
         #You've won the race#
-    elif the_person.event_triggers_dict.get("erica_progress", 0) == 4:
+    elif erica_get_progress() == 4:
         mc.name "Hey [the_person.title]."
         the_person "Hey, [the_person.mc_title]!"
         "You catch up with her for a bit with what she's been up to."
@@ -538,7 +538,7 @@ label erica_get_to_know_label(the_person):
 
 #CSA10
 label erica_phase_one_label(the_person):
-    if the_person.event_triggers_dict.get("erica_progress", 0) == 1:
+    if erica_get_progress() == 1:
         mc.name "Hey [the_person.title]. I figured I would find you here. Want to work out together?"
         "[the_person.title] is just hopping off the treadmill. You can tell she just finished getting warmed up."
         the_person "[the_person.mc_title]! Hey, I was wondering if you would take me up on my offer to work out sometime. That sounds great! I'm going to be doing free weights today."
@@ -717,7 +717,7 @@ label erica_phase_one_label(the_person):
         # "You now have [the_person.title]'s phone number."
         # $ the_person.event_triggers_dict["erica_progress"] = 2
 
-    elif the_person.event_triggers_dict.get("erica_progress", 0) > 1:
+    elif erica_get_progress() > 1:
         mc.name "Hey [the_person.title]. I figured I would find you here. Want to work out together?"
         the_person "That sounds great, [the_person.mc_title]! I always enjoy working up a sweat with you."
         mc.name "Sounds good! I'll head to the locker room and get changed and meet you over by the free weights."
@@ -877,7 +877,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
 
 #CSA20
 label erica_phase_two_label(the_person):
-    if the_person.event_triggers_dict.get("erica_progress", 0) == 2:
+    if erica_get_progress() == 2:
         "You see [the_person.title] on the treadmill. She is running hard, and has been training for a race coming up soon. She pauses the treadmill as you walk up to her."
         the_person "Hey [the_person.mc_title], here for another workout?"
         mc.name "Not today, [the_person.title]. How goes training? Is that big race coming up soon?"
@@ -908,7 +908,7 @@ label erica_phase_two_label(the_person):
         "You have a feeling the outcome of your bet could change your relationship with her."
 
         $ the_person.event_triggers_dict["erica_progress"] = 3
-    elif the_person.event_triggers_dict.get("erica_progress", 0) == 3:
+    elif erica_get_progress() == 3:
         mc.name "Hey [the_person.title], I just wanted to verify, the race is this Saturday, right?"
         the_person "That's right! I can't wait to beat your ass in the race, and then spank it again later at my place!"
         mc.name "Yeah right, I'll be bending you over before you can even get your front door closed."
@@ -3427,35 +3427,26 @@ init 2 python:
     def erica_get_protein_day():
         return erica.event_triggers_dict.get("protein_day", 9999)
 
-    def erica_get_protein_unlock():
-        if erica.event_triggers_dict.get("erica_protein", 0) > 0:
-            return True
-        return False
+    def erica_protein_shake_is_unlocked():
+        return erica.event_triggers_dict.get("erica_protein", 0) != 0
+
+    def erica_workout_is_unlocked():
+        return erica.event_triggers_dict.get("erica_workout", 0) != 0
 
     def erica_get_is_doing_yoga_sessions():
-        if erica.event_triggers_dict.get("yoga_sessions_started", False) == True:
-            return True
-        return False
+        return erica.event_triggers_dict.get("yoga_sessions_started", False)
 
     def erica_get_is_yoga_nude():
-        if erica.event_triggers_dict.get("nude_yoga", False) == True:
-            return True
-        return False
+        return erica.event_triggers_dict.get("nude_yoga", False) == True
 
     def erica_get_is_doing_insta_sessions():
-        if erica.event_triggers_dict.get("insta_pic_intro_complete", False) == True:
-            return True
-        return False
+        return erica.event_triggers_dict.get("insta_pic_intro_complete", False) == True
 
     def erica_is_looking_for_work():
-        if erica.event_triggers_dict.get("looking_for_work", False) == True:
-            return True
-        return False
+        return erica.event_triggers_dict.get("looking_for_work", False) == True
 
     def erica_has_given_morning_handjob():
-        if erica.event_triggers_dict.get("post_insta_handy", False) == True:
-            return True
-        return False
+        return erica.event_triggers_dict.get("post_insta_handy", False) == True
 
     def erica_get_wakeup_options():
         return erica.event_triggers_dict.get("wake_up_options", [])

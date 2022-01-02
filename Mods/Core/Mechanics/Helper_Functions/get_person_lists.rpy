@@ -32,7 +32,7 @@ init -1 python:
             not_met_yet_list.append(dawn)
         if emily.mc_title == 'Stranger': #She'll call MC differently when met.
             not_met_yet_list.append(emily)
-        if "erica" in globals() and erica.event_triggers_dict.get("erica_progress", 0) == 0:
+        if "erica" in globals() and erica_get_progress() == 0:
             not_met_yet_list.append(erica)
         if cousin.get_destination(specified_time = 1) == cousin.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(cousin)
