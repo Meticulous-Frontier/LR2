@@ -10,6 +10,10 @@ init 2 python:
     camilla_blowjob_text = Action("Blowjob Discussion", camilla_blowjob_text_requirement, "camilla_blowjob_text_label")
     camilla_her_place = Action("Cuckold Visit", camilla_her_place_requirement, "camilla_her_place_label")
     camilla_home_sex = Action("Cuckold Visit", camilla_home_sex_requirement, "camilla_home_sex_label")
+    camilla_outfit_help = Action("Shopping Trip", camilla_outfit_help_requirement, "camilla_outfit_help_label")
+    camilla_lingerie_help = Action("Lingerie Shopping", camilla_lingerie_help_requirement, "camilla_lingerie_help_label")
+    camilla_formal_date = Action("Camilla Comes Over", camilla_formal_date_requirement, "camilla_formal_date_label")
+    camilla_gives_anal_virginity = Action("Camilla Tries Anal", camilla_gives_anal_virginity_requirement, "camilla_gives_anal_virginity_label")
 
     def camilla_mod_initialization():
         camilla_wardrobe = wardrobe_from_xml("Camilla_Wardrobe")
@@ -29,12 +33,12 @@ init 2 python:
 
         #global camilla_role
         global camilla
-        camilla = make_person(name = "Camilla", last_name ="Rojas", age = 34, face_style = "Face_2",  tits="D", height = 0.94, hair_colour="golden blonde", hair_style = braided_bun, skin="tan" , \
+        camilla = make_person(name = "Camilla", last_name ="Rojas", body_type = "thin_body", age = 34, face_style = "Face_2",  tits="D", height = 0.98, hair_colour="golden blonde", hair_style = braided_bun, skin="tan" , \
             personality = introvert_personality, name_color = "#228b22", dial_color = "228b22", starting_wardrobe = camilla_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
-            forced_opinions = [["dancing", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
-            forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False]])
+            forced_opinions = [["dancing", 2, True], ["fasion", 2, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
+            forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False]])
 
         camilla.generate_home()
         camilla.set_schedule(camilla.home, times = [0,4])
@@ -49,6 +53,10 @@ init 2 python:
         camilla.event_triggers_dict["take_pics"] = False
         camilla.event_triggers_dict["will_fuck"] = False
         camilla.event_triggers_dict["her_place"] = False
+        camilla.event_triggers_dict["outfit_help"] = False
+        camilla.event_triggers_dict["lingerie_help"] = False
+        camilla.event_triggers_dict["formal_date"] = False
+        camilla.event_triggers_dict["lost_anal_virginity"] = False
 
 
         # add appoint
@@ -116,6 +124,18 @@ init -1 python:
                 return True
         return False
 
+    def camilla_outfit_help_requirement(the_person):
+        return False
+
+    def camilla_lingerie_help_requirement(the_person):
+        return False
+
+    def camilla_formal_date_requirement(the_person):
+        return False
+
+    def camilla_gives_anal_virginity_requirement(the_person):
+        return False
+
 #Additional Camilla Functions
 init 2 python:
     def get_camilla_lingerie_set_white():
@@ -177,6 +197,7 @@ label camilla_spot_at_bar_label(the_person):
     the_person "Take care [the_person.mc_title]."
     "You can now have drinks with [the_person.title] at the bar in the evenings."
     $ camilla.event_triggers_dict["get_drinks"] = True
+    $ camilla.add_unique_on_room_enter_event(camilla_outfit_help)
     #TODO advance time
     return
 
@@ -695,7 +716,7 @@ label camilla_dancing_sex_label(the_person):
             "She gives a sigh and melts back into you. You let your hands roam all along the sides of her body, once in a while moving across the sides of her breasts."
             "Being careful not to push things too fast, you spin her out again, and then back to you."
         else:   #dancing check failed.
-            "As you try to sping her back to you, clumsily you accidentally stick your foot out too far, and [the_person.title] trips over it."
+            "As you try to spin her back to you, clumsily you accidentally stick your foot out too far, and [the_person.title] trips over it."
             $ scene_manager.update_actor(the_person, position = "doggy", display_transform = character_right)
             the_person "Oof!"
             "You quickly help her up."
@@ -983,6 +1004,294 @@ label camilla_ghost_label(the_person):
     return
 
 
+# Camilla's love story scenes
+
+label camilla_outfit_help_label(the_person):    #20
+    python:
+        builder = WardrobeBuilder(the_person)
+        outfit_slut_points = __builtin__.min(__builtin__.int(the_person.effective_sluttiness() / 8), 12)
+        camilla_outfit_1 = builder.personalize_outfit(builder.build_outfit(None, outfit_slut_points))
+        camilla_outfit_2 = builder.personalize_outfit(builder.build_outfit(None, outfit_slut_points))
+        camilla_outfit_3 = None
+    "You go for a walk around the mall. As you pass by the stall where [the_person.title] is working it, she notices you."
+    $ the_person.draw_person()
+    the_person "Oh [the_person.mc_title]!"
+    mc.name "Hey [the_person.title]."
+    the_person "You have awesome timing. I got a couple new outfits from Sak's, and I was hoping to get your opinion on them?"
+    mc.name "Oh?"
+    the_person "Yeah! I have a date with the hubby soon, and I want to look nice. It's been a while since he's taken me out somewhere."
+    "Oof. Obviously you knew she was taken, but this could be a good opportunity to get to know her a little better, so you agree."
+    mc.name "Sure, I can help out."
+    the_person "Great! I'm about due for a break. Let me just put up a be right back sign and we can head over to the clothing store and I'll use the changing room there."
+    $ mc.change_location(clothing_store)
+    $ mc.location.show_background()
+    "You walk with her to the clothing store and back towards the dressing rooms."
+    mc.name "So, a hot date huh? Any idea what you are gonna do?"
+    the_person "I have no idea! I just want to make sure I look nice for it!"
+    the_person "Alright, give me just one moment and I'll be out!"
+    $ clear_scene()
+    "[the_person.possessive_title] steps into the dressing room. You wish you could have a look and see what is going on in there, but think better of it in this public setting."
+    $ the_person.apply_outfit(camilla_outfit_1, update_taboo = True)
+    $ the_person.draw_person(position = "stand2")
+    "[the_person.title] steps out of the dressing room."
+    the_person "Here! This is the front..."
+    $ the_person.draw_person(position = "back_peek")
+    the_person "And this is what it looks like from the back..."
+    $ mc.change_locked_clarity(10)
+    "She pauses for a few seconds to let you look her up and down."
+    $ the_person.draw_person(position = "stand2")
+    the_person "Alright. So this is the first one! Hang on before you say anything, let me show you the other one I am thinking of..."
+    $ clear_scene()
+    "[the_person.possessive_title] disappears back into the dressing room... damn you wish you could see her getting undressed..."
+    $ the_person.apply_outfit(camilla_outfit_2, update_taboo = True)
+    $ the_person.draw_person(position = "stand4")
+    "[the_person.title] steps out of the dressing room in her second outfit."
+    the_person "Here we go! And of course..."
+    $ the_person.draw_person(position = "back_peek")
+    "She turns around again, giving you a good look at her back side."
+    $ mc.change_locked_clarity(10)
+    the_person "The back of this one..."
+    $ the_person.draw_person(position = "stand4")
+    the_person "What do you think?"
+    menu:
+        "Suggest the first outfit":
+            mc.name "I think your husband would appreciate the first outfit the most."
+            "She smiles and nods."
+            $ the_person.change_happiness(5)
+            $ the_person.next_day_outfit = camilla_outfit_1
+            $ the_person.add_outfit(camilla_outfit_1,"full")
+            the_person "Thanks! It helps to have a man's opinion on this."
+
+        "Suggest the second outfit":
+            mc.name "I think your husband would appreciate the second outfit the most."
+            "She smiles and nods."
+            $ the_person.change_happiness(5)
+            $ the_person.next_day_outfit = camilla_outfit_2
+            $ the_person.add_outfit(camilla_outfit_2,"full")
+            the_person "Thanks! It helps to have a man's opinion on this."
+
+        "Suggest your own outfit":
+            mc.name "They both look good, but I think I have another idea for something you could wear..."
+            "[the_person.title] seems surprised, but goes along with it for now."
+            the_person "Oh? I suppose I have time I could try on one more outfit... why don't you go pick something out for me while I change?"
+            mc.name "Okay."
+            $ clear_scene()
+            call outfit_master_manager(slut_limit = the_person.sluttiness + 5, show_overwear = False, show_underwear = False) from _call_outfit_master_manager_camilla_hubby_impression_01
+            $ camilla_outfit_3 = _return
+            #$ the_person.draw_person()
+
+            if camilla_outfit_3 == None:
+                "You try a few different combinations, but you can't come up with anything. You head back to the changing room."
+                $ the_person.apply_planned_outfit()
+                $ the_person.draw_person()
+                mc.name "Sorry, I thought I had an idea but I guess I was wrong."
+                the_person "That's fine [the_person.mc_title]. I think I'm going to go with the first one."
+                $ the_person.change_happiness(5)
+                $ the_person.next_day_outfit = camilla_outfit_1
+                $ the_person.add_outfit(camilla_outfit_1,"full")
+            else:
+                "You take the outfit for [the_person.possessive_title] back to the changing room and set it on top of the door."
+                the_person "Okay, give me a minute to try it on!"
+
+                $ the_person.apply_outfit(camilla_outfit_3, update_taboo = True)
+                $ the_person.draw_person()
+                $ the_person.change_stats(happiness = 5, obedience = 5, love = 1)
+                the_person "This is... surprisingly fashionable!"
+                $ the_person.draw_person(position = "back_peek")
+                "[the_person.title] gives you a quick turn to show it off."
+                $ mc.change_locked_clarity(10)
+                $ the_person.add_outfit(camilla_outfit_3,"full")
+                $ the_person.next_day_outfit = camilla_outfit_3
+                the_person "What the hell. I'm going to get it. Give me a minute, I'm going to change back..."
+                $ clear_scene()
+                $ the_person.apply_planned_outfit()
+                $ the_person.draw_person()
+
+    the_person "Thank you so much for the help [the_person.mc_title]. This has been reall helpful!"
+    mc.name "Of course. Always glad to help."
+    $ the_person.change_love(1, 40)
+    the_person "I'd better get back to my stall. Take care!"
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.title] walks away, leaving you in the clothing store. You hope that her husband can appreciate her beauty as much as you do!"
+    $ the_person.add_unique_on_room_enter_event(camilla_lingerie_help)
+    python: #Cleanup time
+        del builder
+        del outfit_slut_points
+        del camilla_outfit_1
+        del camilla_outfit_2
+        del camilla_outfit_3
+    return
+
+label camilla_lingerie_help_label(the_person):  #40
+    python:
+        builder = WardrobeBuilder(the_person)
+        outfit_slut_points = __builtin__.min(__builtin__.int(the_person.effective_sluttiness() / 6), 12)
+        camilla_lingerie_1 = builder.personalize_outfit(builder.build_outfit("UnderwearSets", outfit_slut_points))
+        camilla_lingerie_2 = builder.personalize_outfit(builder.build_outfit("UnderwearSets", outfit_slut_points))
+        #camilla_lingerie_3 = None
+
+    "Walking around the mall, you happen to walk by [the_person.possessive_title]'s stall. You decide to stop in and see how she is doing."
+    $ the_person.draw_person()
+    mc.name "Hello [the_person.title]. How are you doing?"
+    the_person "Oh hey [the_person.mc_title]. I'm doing good. Here to work on your goals again?"
+    mc.name "Nah, I just stopped in to say hello and see how you are doing."
+    the_person "Ah, thanks. It's always good to see you."
+    "You chat with her for a few minutes about general small talk."
+    the_person "Say... are you busy right now?"
+    mc.name "Not really."
+    the_person "I'm due for a lunch break... want to snap a few more umm... you know... pics for me?"
+    "Damn. You can't forget taking pics with her in the bar restroom with your dick in her mouth. Surely this opportunity is worth taking too!"
+    mc.name "Definitely. Have something in mind?"
+    the_person "Well, I have a couple more outfits I kind of wanted to get your opinion on, but they are for a more intimate encounter than last time..."
+    mc.name "Wow, sounds great! Lead the way!"
+    $ mc.change_location(clothing_store)
+    $ mc.location.show_background()
+    "You walk with her to the clothing store and back towards the dressing rooms."
+    the_person "So, I have a special night planned with the hubby... I was hoping you could give me your opinion on some lingerie sets..."
+    the_person "And then snap a couple quick pictures that I can send to him as a tease!"
+    mc.name "Alright, I think I'm down for that."
+    "When you get to the dressing rooms, [the_person.possessive_title] takes a quick look around to make sure the coast is clear, then quickly drags you into the changing room with her."
+    the_person "Shh, just be quiet. It'll be easier if you're in here with me while I try these on."
+
+    $ the_person.strip_outfit(exclude_feet = False)
+    $ mc.change_locked_clarity(20)
+    "Quietly, [the_person.possessive_title] strips down in front of you. She gives you a sheepish smile when she is naked, before donning her underwear set."
+
+    $ the_person.apply_outfit(camilla_lingerie_1, update_taboo = True)
+    $ the_person.draw_person(position = "stand2")
+    "[the_person.title] whispers to you."
+    the_person "Okay. This is the first set..."
+    $ the_person.draw_person(position = "standing_doggy")
+    "[the_person.possessive_title] turns around and bends over, give you the opportunity to check out how the set hugs her curves."
+    "You enjoy a good long look."
+    $ mc.change_locked_clarity(20)
+    $ the_person.draw_person(position = "stand2")
+
+    the_person "Alright, one second..."
+
+    $ the_person.strip_outfit(exclude_feet = False)
+    $ mc.change_locked_clarity(20)
+    "Quietly, [the_person.possessive_title] strips down in front of you again."
+
+    $ the_person.apply_outfit(camilla_lingerie_2, update_taboo = True)
+    $ the_person.draw_person(position = "stand4")
+    "[the_person.title] whispers to you."
+    the_person "Okay. This is the second set."
+    $ the_person.draw_person(position = "standing_doggy")
+    "[the_person.possessive_title] turns around and bends over again. The way she is showing off her body is really starting to turn you on."
+    $ mc.change_arousal(10)
+    $ mc.change_locked_clarity(20)
+    "You swear you see a little wiggle in her hips as you check her out."
+    $ the_person.draw_person(position = "stand4")
+
+    the_person "What do you think? Which set did you like better?"
+
+    menu:
+        "The first set":
+            the_person "Ah, okay. One second..."
+            $ the_person.strip_outfit(exclude_feet = False)
+            $ mc.change_locked_clarity(20)
+            "Quietly, [the_person.possessive_title] strips down and then changes back into the first outfit."
+
+            $ the_person.apply_outfit(camilla_lingerie_1, update_taboo = True)
+            $ the_person.draw_person(position = "stand2")
+            $ the_person.add_outfit(camilla_lingerie_1,"full")
+        "This set":
+            the_person "Ah, I see..."
+            $ the_person.add_outfit(camilla_lingerie_2,"full")
+
+    the_person "Okay, can you snap some pics for me?"
+    mc.name "Sure."
+    "[the_person.title] hands you her phone with her camera app pulled up. She strikes a few poses for you."
+    $ the_person.draw_person(position = "stand4")
+    "[the_person.possessive_title] strikes a few poses for you. You make sure to take snap pics showing off her incredible body as best you can."
+    $ the_person.draw_person(position = "standing_doggy")
+    if camilla_will_fuck():
+        "Bending over, you get an awesome view of [the_person.title]'s ass."
+        "For a second you get goosebumps thinking about the first time you bent her over the bathrooms sink at the bar and fucked her proper."
+        $ mc.change_locked_clarity(50)
+    else:
+        "Bending over, you get a great view of [the_person.title]'s undefiled ass."
+        "The way things are going, you think it is only a matter of time until you can bend her over and fuck her properly."
+        $ mc.change_locked_clarity(30)
+    $ the_person.draw_person(position = "sitting")
+    "You snap a few more pictures of [the_person.possessive_title] as she sits on the bench, showcasing her long, sexy legs."
+    "Suddenly, you are struck by just how picture perfect she really is. Long legs, nice tits, and her tanned skin gives her an exotic appearance."
+    mc.name "[the_person.name]... have you ever thought about shooting some professional pictures?"
+    the_person "Umm... you mean like... modeling?"
+    mc.name "Not necessarily modeling... but like, boudoir photos? You really do have the body for it."
+    $ the_person.change_love(2, 80)
+    $ the_person.change_slut(1, 60)
+    the_person "Oh! You mean like... sexy photos?"
+    mc.name "Yeah."
+    the_person "Wow... I mean, I guess I've always kind of thought about it but... I don't think I really have the body for it?"
+    "What the fuck, is she serious?"
+    mc.name "I would argue aggressively against that statement. Your body would be perfect for boudoir."
+    the_person "I don't know... what would I even do with them?"
+    mc.name "You could sell them for advertisement purposes, or even keep them for you and your husband."
+    mc.name "You should try it. Worst case scenario, you don't care for it, so you get rid of them and don't try it again."
+    the_person "I guess... I could maybe try it sometime? Is that something you could do for me?"
+    if mc_business_has_expensive_camera():
+        "You think about it. You do have the expensive camera that you got for making ads at your business."
+        if alexia == mc.business.company_model: #Alexia is the company model
+            "Actually, the photo sessions you have been doing with [alexia.possessive_title] have been going well."
+            "Maybe you could have her help you with it? That would probably make it an easier sell to [the_person.title] if a woman was helping."
+            mc.name "Actually, at my business I have a nice camera and photographer we use for company ads. She would probably be willing to help if I asked her to."
+            "[the_person.possessive_title] thinks about it for a bit, but finally agrees."
+            the_person "Okay... I'll do it. Can you set it up for me and let me know when and where?"
+            mc.name "Certainly, I'll get back to you about it."
+        else:
+            "Right now though, you don't really have anyone who you could count on to take the pictures."
+            "Maybe in the future you will have something better in line to facilitate this sort of photo shoot."
+            mc.name "I don't have the ability right now to do that, but I'll let you know in the future if that is something I can pull off."
+            "She looks disappointed, but also relieved."
+            the_person "Okay. I appreciate the thought."
+    else:
+        "Unfortunately, you have no idea how you could facilitate this. After thinking about it for a bit, you decide it isn't in your capabilities right now."
+        mc.name "I don't have the ability right now to do that, but I'll let you know in the future if that is something I can pull off."
+        "She looks disappointed, but also relieved."
+        the_person "Okay. I appreciate the thought."
+    $ camilla_alexia_boudoir_intro_setup()
+    "You snap a couple more photos. Just when you think you are finishing up, [the_person.title] gets down her knees slides over to you."
+    $ the_person.draw_person(position = "blowjob")
+    "[the_person.possessive_title] grabs your zipper and starts to pull it down. A couple quick motions later, and your cock is out and inches from her face."
+    the_person "Hey, keep taking pictures!"
+    mc.name "Right!"
+    "You snap more pictures as [the_person.title] opens up and slides her warm wet mouth down over the tip of your erection."
+    $ mc.change_locked_clarity(50)
+    $ mc.change_arousal(15)
+    "All the sexy wardrobe changes have you aching for release. You sigh as [the_person.possessive_title]'s mouth starts bobbing up and down."
+    call get_fucked(the_person, start_position = blowjob, private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_camilla_lingerie_blowjob_01
+    if the_person.has_mouth_cum():
+        "[the_person.possessive_title] looks up at you. You frame the cum dribbling down the sides of her mouth in a final set of pictures."
+        the_person "Mmm, another tasty snack. Glad I got a high protein lunch today!"
+    elif the_person.has_face_cum():
+        "[the_person.possessive_title] looks up at you. You frame her cum drenched face in a final set of pictures."
+        the_person "God, it doesn't get old, does it? Sucking off another man?"
+    $ the_person.draw_person (position = "stand2")
+    "[the_person.title] stands up. You hand her back her phone."
+    the_person "Go ahead and sneak out, I'm going to buy this and send a few messages..."
+    mc.name "Sounds good... I'll see you next time."
+    $ clear_scene()
+    "With a quick wink, you excuse yourself from the changing room and go out into the clothing store."
+    "[the_person.title] was so hot in that lingerie. You really hope you get the chance to take more photos of her like that."
+    $ camilla.add_unique_on_room_enter_event(camilla_formal_date)
+    python: #Cleanup time
+        del builder
+        del outfit_slut_points
+        del camilla_lingerie_1
+        del camilla_lingerie_2
+    return
+
+label camilla_formal_date_label(the_person):    #60
+    "Camilla asks to spend some time with MC, can end with her spending the night at his place."
+    return
+
+label camilla_gives_anal_virginity_label(the_person): #80
+    "In this scene, camilla gives MC her anal virginity."
+    return
+
+
 init -1 python:
     def camilla_can_get_drinks():
         return camilla.event_triggers_dict.get("get_drinks", False)
@@ -1001,6 +1310,18 @@ init -1 python:
 
     def camilla_can_go_to_her_place():
         return camilla.event_triggers_dict.get("her_place", False)
+
+    def camilla_outfit_help_complete():
+        return camilla.event_triggers_dict.get("outfit_help", False)
+
+    def camilla_lingerie_help_complete():
+        return camilla.event_triggers_dict.get("lingerie_help", False)
+
+    def camilla_formal_date_complete():
+        return camilla.event_triggers_dict.get("formal_date", False)
+
+    def camilla_has_lost_anal_virginity():
+        return camilla.event_triggers_dict.get("lost_anal_virginity", False)
 
     def mc_dancing_skill(): #Wrapper for measuring MC's progress learning to salsa dance.
         return mc.charisma + round((mc.max_energy - 100) / 20)
