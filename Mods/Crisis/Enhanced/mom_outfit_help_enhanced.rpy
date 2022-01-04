@@ -40,7 +40,11 @@ label mom_outfit_help_crisis_label_enhanced():
     the_person "I've got a meeting with an important client tomorrow and I don't know what I should wear."
     the_person "Could you give me your opinion?"
     mc.name "Of course, lets take a look!"
-    $ first_outfit = the_person.decide_on_outfit() # A normal outfit for her, made from her wardrobe.
+    python:
+        builder = WardrobeBuilder(the_person)
+        outfit_slut_points = __builtin__.min(__builtin__.int(the_person.effective_sluttiness() / 8), 12)
+        first_outfit = builder.personalize_outfit(builder.build_outfit(None, outfit_slut_points))
+    # $ first_outfit = the_person.decide_on_outfit() # A normal outfit for her, made from her wardrobe.
     $ second_outfit = None # Changes her goals based on how you respond to the first one (ie. she tones it down, makes it sluttier, or keeps it the way it is)
     $ third_outfit = None # She asks you to put something together from her wardrobe. If it's reasonable for her she'll add it to her wardrobe.
     $ caught = False #Did you get caught watching her strip
@@ -120,7 +124,8 @@ label mom_outfit_help_crisis_label_enhanced():
             mc.name "I don't think it's very appropriate for work Mom. Maybe you should try something a little less... revealing."
             $ the_person.change_slut(-2)
             the_person "Maybe you're right. Okay, I'll try something a little more conservative for this next outfit."
-            $ second_outfit = the_person.decide_on_outfit(sluttiness_modifier = -.2) #Note that if we have impossible values for this function it'll keep exanding the threshold until it's possible
+            $ outfit_slut_points = __builtin__.max(outfit_slut_points - 1, 0)
+            $ second_outfit = builder.personalize_outfit(builder.build_outfit(None, outfit_slut_points)) #Note that if we have impossible values for this function it'll keep exanding the threshold until it's possible
 
         "Say she looks beautiful in it":
             mc.name "You look beautiful Mom, I think it would be perfect."
@@ -129,11 +134,12 @@ label mom_outfit_help_crisis_label_enhanced():
             the_person "You aren't just saying that, are you? I want your real opinion"
             mc.name "It's a great look for you."
             the_person "Great! I want to try another outfit before I settle on this one though, if you don't mind."
-            $ second_outfit = the_person.decide_on_outfit()
+            $ second_outfit = builder.personalize_outfit(builder.build_outfit(None, outfit_slut_points))
 
         "Say it's not revealing enough":
             mc.name "I don't know Mom, it's a little stuffy, isn't it? Maybe you should pick something that's a little more modern and fun."
             $ the_person.change_slut(1+the_person.get_opinion_score("skimpy uniforms"))
+            $ outfit_slut_points = __builtin__.min(outfit_slut_points + 1, 12)
             $ the_person.discover_opinion("skimpy uniforms")
             if the_person.get_opinion_score("skimpy uniforms") >= 0:
                 the_person "Do you think so? Maybe it is a little too conservative."
@@ -143,7 +149,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 the_person "Oh no, I hate having to dress in those skimpy little outfits everyone wants their secretary in these days."
                 "She sighs and shrugs."
                 the_person "Well, if that's what you think I'll give something else a try."
-            $ second_outfit = the_person.decide_on_outfit(sluttiness_modifier = .2)
+            $ second_outfit = builder.personalize_outfit(builder.build_outfit(None, outfit_slut_points))
 
 
     #Strip choices for the second peek section
@@ -376,5 +382,7 @@ label mom_outfit_help_crisis_label_enhanced():
         del first_outfit
         del second_outfit
         del third_outfit
+        del builder
+        del outfit_slut_points
         clear_scene()
     return
