@@ -390,10 +390,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 "[the_person.title] looks around, but can't see anywhere to have fun with you."
                 $ round_choice = "Girl Leave"
             elif report_log.get("guy orgasms", 0) > guy_orgasms_before_control and report_log.get("girl orgasms", 0) > 0: #Both parties have been satisfied
-                the_person "Whew, that felt amazing. It's good to know it was as good for you as it was for me."
+                mc.name "Whew, that was amazing, and I'm guessing you enjoyed it too."
                 $ round_choice = "Girl Leave"
-            elif report_log.get("guy orgasms", 0) > guy_orgasms_before_control and position_locked:
-                the_person "We should do this again soon."
+            elif report_log.get("guy orgasms", 0) > guy_orgasms_before_control and position_locked: # MC liked what we did
+                mc.name "That felt great, we should do this again soon."
                 $ round_choice = "Girl Leave"
             elif report_log.get("girl orgasms", 0) > 0 and not (the_person.love > 40 or the_person.obedience > 150): #She's cum and doesn't care about you finishing.
                 the_person "Whew, that felt great. Thanks for the good time [the_person.mc_title]!"
