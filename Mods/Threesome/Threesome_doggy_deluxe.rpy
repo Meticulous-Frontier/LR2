@@ -91,7 +91,7 @@ init:
 
 
         Threesome_doggy_deluxe_dp_girl_two = Threesome_MC_position(name = "DP_girl_2",
-            action_description = "Fuck [the_person_{0}.title]'s ass and pussy using strapon",
+            action_description = "Fuck [the_person_{0}.title]'s ass and pussy using strap-on",
             default_action_person = "two",
             skill_tag_p1 = "Oral",
             skill_tag_p2 = "Anal",
@@ -365,7 +365,7 @@ label scene_threesome_doggy_deluxe_dp_girl_two_1(the_girl_1, the_girl_2, the_loc
 label scene_threesome_doggy_deluxe_dp_girl_two_2(the_girl_1, the_girl_2, the_location, the_object):
     "You reach forward and place your hands on [the_girl_2.possessive_title]'s shoulders. With each thrust you pull her back onto you forcefully, your hips smacking her ass cheeks loudly."
     the_girl_1 "Yeah, that's it [the_girl_1.mc_title], give it to her good!"
-    "The double penetration of your cock and the strapon is making the experience much more intense for her."
+    "The double penetration of your cock and the strap-on is making the experience much more intense for her."
     "[the_girl_2.possessive_title]'s pussy is dripping wet. A damp spot has begun to accumulate below her pussy as a result of your rutting."
     if the_girl_2.has_role(anal_fetish_role):
         "She is moaning so loudly, she is having a hard time concentrating on eating out [the_girl_1.title]."

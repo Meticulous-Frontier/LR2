@@ -37,7 +37,7 @@ init 2 python:
             personality = introvert_personality, name_color = "#228b22", dial_color = "228b22", starting_wardrobe = camilla_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
-            forced_opinions = [["dancing", 2, True], ["fasion", 2, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
+            forced_opinions = [["dancing", 2, True], ["fashion", 2, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
             forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False]])
 
         camilla.generate_home()
@@ -1107,7 +1107,7 @@ label camilla_outfit_help_label(the_person):    #20
                 $ the_person.apply_planned_outfit()
                 $ the_person.draw_person()
 
-    the_person "Thank you so much for the help [the_person.mc_title]. This has been reall helpful!"
+    the_person "Thank you so much for the help [the_person.mc_title]. This has been really helpful!"
     mc.name "Of course. Always glad to help."
     $ the_person.change_love(1, 40)
     the_person "I'd better get back to my stall. Take care!"

@@ -426,7 +426,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 else:
                     the_person "Dammit [the_person.mc_title], you can't just cum on my ass like that!"
                     "You just stare at her, while [the_person.possessive_title] continues her tirade."
-                    the_person "What would your mother and sister say if they find out about your behavior?"
+                    the_person "What would your mother and sister say if they find out about your behaviour?"
                     the_person "Now get out of my way, so I can get out of these clothes."
 
                 $ the_person.change_stats(happiness = -5, slut = 1, max_slut = 50)
