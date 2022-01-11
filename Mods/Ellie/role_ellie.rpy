@@ -228,7 +228,7 @@ label ellie_meet_ellie_intro_label():
     "Eventually, the time comes, so you head down the alley. As you hit the halfway mark, a shadowy figure emerges from behind a dumpster."
     $ ellie.draw_person()
     ellie "That's far enough, stay right there."
-    "The first thing you notice is the heavy southern twang in her accent. Secondly, it is heavily feminine. A southern woman is blackmailing you? It catches you completely off gaurd."
+    "The first thing you notice is the heavy southern twang in her accent. Secondly, it is heavily feminine. A southern woman is blackmailing you? It catches you completely off guard."
     ellie "You got cash?"
     mc.name "Yeah, although the note failed to mention exactly how much you were expecting."
     ellie "I'm figuring a million dollars in cold hard cash."
@@ -783,7 +783,7 @@ label ellie_grope_followup_label():
     mc.name "Sure."
     $ ceo_office.show_background()
     "You take her to your office and close the door. You offer to let her sit down but she declines."
-    the_person "I'll keep this short, i just didn't want any other girls to hear this..."
+    the_person "I'll keep this short, I just didn't want any other girls to hear this..."
     the_person "I'm sorry for... yah know... peein my pants like that..."
     $ the_person.draw_person(emotion = "angry")
     the_person "But to be fair, ya'll didn't tell me something like that could happen!"
@@ -887,7 +887,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     "[the_person.possessive_title] pulls the zipper down, then pushes her fingers into your pants."
     "She keeps rubbing your dick with her hand now, but gets confused when she tries to figure how to get it out of your underwear."
     the_person "Isn't... isn't it just supposed to... pop out or something?"
-    mc.name "Nope! Thank goodness! Theres another hole in fabric, usually on the side..."
+    mc.name "Nope! Thank goodness! There's another hole in fabric, usually on the side..."
     "She fishes around for several more seconds, but finally finds it."
     mc.name "Now back the other way..."
     "Finally, she gets her hand through. And for the first time in her life, she is holding a dick."
@@ -1315,7 +1315,7 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
     the_person "If there's anything you don't like, don't worry, just pick it out, I won't be offended."
     "You look down. A healthy portion of macaroni and cheese, ham slices, something fried?, and some fresh green beans."
     mc.name "Wow, [the_person.title], this looks delicious. These are?"
-    the_person "Fried tomatoes! It's hard to get good tomotoes around here, but these'll do."
+    the_person "Fried tomatoes! It's hard to get good tomatoes around here, but these'll do."
     "You take a few bites. The food is all homemade and tastes delicious."
     $ the_person.change_happiness(2)
     "You dig in and start eating. You look up and notice [the_person.title] smile a bit when she sees you enjoying her cooking."

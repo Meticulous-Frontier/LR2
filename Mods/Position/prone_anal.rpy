@@ -54,7 +54,7 @@ label prone_anal_decision_label(the_girl, the_location, the_object, the_position
         $ the_person.change_happiness(5)
     elif the_girl.is_dominant():
         the_girl "Are you serious? Can't we just take a quick break?..."
-        "[the_girl.possessive_title]'s question gets cut off as you line yourself and push back into her ass. She isn't happy with being uesd like this but is too tired to resist."
+        "[the_girl.possessive_title]'s question gets cut off as you line yourself and push back into her ass. She isn't happy with being used like this but is too tired to resist."
         $ the_person.change_happiness(-5)
     else:
         "[the_girl.possessive_title] gives a little yelp as you line yourself and push back into her. She is completely helpless but submits to you obediently."
@@ -89,7 +89,7 @@ label taboo_break_prone_anal(the_girl, the_location, the_object):
     the_girl "Okay, just don't do anything too crazy, okay?"
     $ the_girl.change_obedience(2)
     "She lies down on the [the_object.name] on her belly. She wiggles her ass at you, waiting while you climb on top of her."
-    "[the_girl.possessive_title] loks back at you as you line your cock up with her puckered hole. She groans as you slide into her."
+    "[the_girl.possessive_title] looks back at you as you line your cock up with her puckered hole. She groans as you slide into her."
     return
 
 label scene_prone_anal_1(the_girl, the_location, the_object):
@@ -250,7 +250,7 @@ label scene_prone_anal_3(the_girl, the_location, the_object):
                         "When she sees the condom and realizes what you are about to do, she pushes her ass back towards you, trying to help you penetrate her bare."
                         "You slide into her backdoor without any protection this time. She moans and arches her back."
                         $ the_girl.change_arousal(20)
-                        the_girl "Thats it... now fuck my ass good [the_girl.mc_title]!"
+                        the_girl "That's it... now fuck my ass good [the_girl.mc_title]!"
                     elif the_girl.get_opinion_score("anal creampies") > 0:
                         the_girl "Oh god, you're really going to do it! Oh fuck..."
                         "You slide into her backdoor without any protection this time. She moans and arches her back."
@@ -268,7 +268,7 @@ label scene_prone_anal_3(the_girl, the_location, the_object):
                 "Leave it on":
                     "You decide to leave it on for now."
         "Degrade her":
-            mc.name "Damn right it's good. You are such a cock hungry slut, your holes are just begging to stuffed."
+            mc.name "Damn right it's good. You are such a cock hungry slut, your holes are just begging to be stuffed."
             mc.name "Don't worry, I'm gonna fuck your slutty holes until you can barely walk, bitch!"
             if the_girl.is_submissive():
                 "[the_girl.possessive_title] moans as you degrade her. Her submission to you is total."

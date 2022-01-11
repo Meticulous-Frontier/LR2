@@ -1711,9 +1711,9 @@ label ashley_sneaks_over_label():
         "[the_person.possessive_title] stops rolling her hips. With one smooth movement she slides you raw deep into her tight cunt."
         $ the_person.break_taboo("condomless_sex")
     elif the_person.has_taboo("condomless_sex") and the_person.effective_sluttiness() >= the_person.get_no_condom_threshold():  #She would normally be willing to go bare
-        the_person "I was talking to Steph about you the other day, and something she told me surprsied me."
+        the_person "I was talking to Steph about you the other day, and something she told me surprised me."
         mc.name "Oh?"
-        the_person "She said everytime you guys have, you know, she always makes you wrap it up."
+        the_person "She said every time you guys have, you know, she always makes you wrap it up."
         "[the_person.title] points your bare cock toward her slit, then starts to rub against it. Her arousal glistens at the tip as she moves her hips back and forth."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(30)
@@ -2156,7 +2156,7 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
         the_person "[temp_string]"
     "[stephanie.title] considers it for a moment."
     if the_person.approves_outfit_color(bystander.outfit):
-        stephanie "I suppose so. I mean the color was nice."
+        stephanie "I suppose so. I mean the colour was nice."
     else:
         stephanie "I don't know, I don't usually see you wear that colour."
         $ favorite_colour = the_person.favorite_colour()
