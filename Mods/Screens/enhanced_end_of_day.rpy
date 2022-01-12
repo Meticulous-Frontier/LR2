@@ -38,7 +38,7 @@ init 2:
                         $ salary_costs = mc.business.calculate_salary_cost()
                     $ profit = mc.business.funds - mc.business.funds_yesterday
                     $ mc.business.listener_system.fire_event("daily_profit", profit = profit)
-                    $ mc.business.listener_system.fire_event("side_money", count = starbuck.calc_investment_return())
+                    # $ mc.business.listener_system.fire_event("side_money", count = starbuck.calc_investment_return())
                     text ("Profit" if profit > 0 else "Loss") + ": $ " + str(__builtin__.round(abs(profit), 2))  style "textbutton_text_style" size 26 color ("#00A000" if profit > 0 else "#A00000")
                     text "     " + "Sales Made: $ " + str(__builtin__.round(mc.business.sales_made, 2)) style "textbutton_text_style"
                     text "     " + "Daily Salary Paid: $ " + str(__builtin__.round(salary_costs, 2)) style "textbutton_text_style"
