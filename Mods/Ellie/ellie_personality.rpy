@@ -1660,7 +1660,7 @@ label ellie_bare_tits_taboo_break(the_person, the_clothing):
         the_person "So you want to see my boobs?"
         mc.name "Yeah, I do. Are you ready for that?"
         "She takes a long moment to respond, then nods."
-        the_person "Yeah, I think I am. I didn't realise how nervous I was going to be though!"
+        the_person "Yeah, I think I am. I didn't realize how nervous I was going to be though!"
         mc.name "Don't be nervous. Just relax and let me get rid of this [the_clothing.display_name] for you."
 
     else:

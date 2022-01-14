@@ -42,7 +42,7 @@ init 3 python:
     def add_lust_gain_perk():
         if perk_system.has_ability_perk("Lustful Priorities"):
             return
-        perk_system.add_ability_perk(Ability_Perk(description = "Everytime you normally gain lust, you gain 5 extra.", toggle = True,togglable = True, usable = False), "Lustful Priorities")
+        perk_system.add_ability_perk(Ability_Perk(description = "Every time you normally gain lust, you gain 5 extra.", toggle = True,togglable = True, usable = False), "Lustful Priorities")
         return
 
     persuade_action = ActionMod("Use Persuasion", requirement = persuade_person_requirement, effect = "persuade_person",
