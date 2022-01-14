@@ -382,7 +382,7 @@ label candace_get_to_know_label(the_person):
                 if ophelia_get_will_help_candace():
                     "You already talked to [salon_manager.title]. Next time you see [the_person.title], you should put the pressure on and see if you can convince her to quit and come work for you."
                 elif the_person.love < 20:
-                    "You can tell that [the_person.title] is wavering, but you sense hestitation. The conditions aren't quite right to get her to convince her to split with her boyfriend."
+                    "You can tell that [the_person.title] is wavering, but you sense hesitation. The conditions aren't quite right to get her to convince her to split with her boyfriend."
                     "Maybe if you got closer with her? If she had more affection for you, she might be more willing to break up with her asshole boyfriend."
                 else:
                     "You feel like with one more push, you could probably get [the_person.title] to quit. But what will happen when you do?"
@@ -875,7 +875,7 @@ label candace_midnight_wakeup_label():
     $ police_station.show_background()
     "As you walk in, you walk up to the front desk. There's a good looking girl behind the desk. She smiles when she greets you."
     "?????" "Hello. Can I help you?"
-    mc.name "Yeah. I'm hear to pick up Candace."
+    mc.name "Yeah. I'm here to pick up Candace."
     "?????" "Ahh. Sure thing. First though, the chief wants to talk to you in her office, privately..."
     mc.name "Okay..."
     "?????" "Her office is right down the hall there."
@@ -891,7 +891,7 @@ label candace_midnight_wakeup_label():
     "Oh boy, this is going to be interesting..."
     police_chief "So I come in, and they got her in solitary lockup. I asked why, and apparently she was in a cell with a few other women and when a deputy walked by she would beg to suck his dick."
     police_chief "When he said no and walked away, he could hear her making passes at the other girls in the cell."
-    police_chief "So I get here, bring her to my office and wouldn't you know it, it's the woman that was walking around topless at the mall the other day!."
+    police_chief "So I get here, bring her to my office and wouldn't you know it, it's the woman that was walking around topless at the mall the other day!"
     police_chief "I start asking her questions, you know. Where are you from, where's your family, that sort of thing."
     police_chief "She says she doesn't know, so I ask about friends and she says she just has a couple..."
     police_chief "We talk for a bit longer... And it's pretty clear from her conversation... This lady has no business being out in public. She is so far gone. Do you have any idea what is going on with her?"
