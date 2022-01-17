@@ -99,12 +99,12 @@ label clarity_train_int(the_person):
     return "Advance Time"
 
 label clarity_train_cha(the_person):
-    mc.name "Hey, did you hear the latest rumors?."
+    mc.name "Hey, did you hear the latest rumours?."
     the_person "No, I haven't."
     mc.name "Ah, have a bit that I could fill you in?"
     the_person "I suppose we could do that."
     $ the_person.draw_person(position = "sitting")
-    "You sit down with [the_person.possessive_title]. You spend a few hours chatting about the latest rumors and gossip."
+    "You sit down with [the_person.possessive_title]. You spend a few hours chatting about the latest rumours and gossip."
     $ mc.spend_clarity(the_person.charisma * 500)
     $ the_person.change_cha(1)
     the_person "Thank you [the_person.mc_title], that was very educational!"
@@ -115,7 +115,7 @@ label clarity_train_focus(the_person):
     mc.name "Hey, are you busy? I was thinking about doing some meditation, and I thought you might want to join me."
     the_person "I didn't realize you did that. Sure I'd love to join you."
     $ the_person.draw_person(position = "sitting")
-    "You sit down with [the_person.possessive_title]. You spend a few hours chatting about the latest rumors and gossip."
+    "You sit down with [the_person.possessive_title]. You spend a few hours chatting about the latest rumours and gossip."
     $ mc.spend_clarity(the_person.focus * 500)
     $ the_person.change_focus(1)
     the_person "Thank you [the_person.mc_title]. I feel like I can really focus on the rest of my day now!"

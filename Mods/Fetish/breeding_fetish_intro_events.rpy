@@ -483,7 +483,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     mc.name "Maybe I should message them. Find out more about what they want to see..."
     "She quickly interrupts you."
     the_person "No! You don't need to do that... I'm sure that's what it is! To watch as I pretend to get knocked up!"
-    "She gives a telltale sign. As she says that, she looks away from you and to the side. She is lying to you."
+    "She gives a tell-tale sign. As she says that, she looks away from you and to the side. She is lying to you."
     mc.name "That's what they want? Are you sure? Or is that what YOU want?"
     "[the_person.possessive_title] begins to blush heavily."
     the_person "Oh me? Want to get knocked up? By my brother? That's... I mean that's CRAZY!... right?"

@@ -20,7 +20,7 @@ This mod collection extends the base game with a range of new features and enhan
 * Enhances 8 existing sex positions with new dialogs;
 * Unisex company bathrooms story-line with various new events;
 * Outfit generator built into the outfit creator (use mannequin selector for wardrobe edit);
-* A hair salon with options to change hair styles, colors and pubes trims;
+* A hair salon with options to change hair styles, colours and pubes trims;
 * Some extra actions in the gym studio;
 * A large collection of new serums to influence characters in the game;
 * Extra personalities and random character enhancements with dialogs and story lines;
