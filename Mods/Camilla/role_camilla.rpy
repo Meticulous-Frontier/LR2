@@ -38,7 +38,7 @@ init 2 python:
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
             forced_opinions = [["dancing", 2, True], ["fasion", 2, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
-            forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False]])
+            forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False], ["bareback sex", 2, False]])
 
         camilla.generate_home()
         camilla.set_schedule(camilla.home, times = [0,4])
@@ -57,6 +57,9 @@ init 2 python:
         camilla.event_triggers_dict["lingerie_help"] = False
         camilla.event_triggers_dict["formal_date"] = False
         camilla.event_triggers_dict["lost_anal_virginity"] = False
+        camilla.event_triggers_dict["boudoir_stage"] = 0
+
+        camilla.fertility_percent = -1000.0 #She's infertile
 
 
         # add appoint
@@ -1275,7 +1278,7 @@ label camilla_lingerie_help_label(the_person):  #40
     $ clear_scene()
     "With a quick wink, you excuse yourself from the changing room and go out into the clothing store."
     "[the_person.title] was so hot in that lingerie. You really hope you get the chance to take more photos of her like that."
-    $ camilla.add_unique_on_room_enter_event(camilla_formal_date)
+    $ mc.business.add_mandatory_crisis(camilla_formal_date)
     python: #Cleanup time
         del builder
         del outfit_slut_points
@@ -1283,8 +1286,88 @@ label camilla_lingerie_help_label(the_person):  #40
         del camilla_lingerie_2
     return
 
-label camilla_formal_date_label(the_person):    #60
-    "Camilla asks to spend some time with MC, can end with her spending the night at his place."
+label camilla_formal_date_label():    #60
+    $ the_person = camilla
+    "As you are finishing up your day, your phone vibrates, and you see you have a message from [the_person.possessive_title]."
+    $ mc.start_text_convo(the_person)
+    the_person "Hey Senior! Sorry, I know this is last minute... are you busy tonight?"
+    mc.name "I'm not now. Want to meet at the bar?"
+    the_person "I was actually wondering if you wanted to grab dinner somewhere else tonight."
+    "Dinner? That sounds a LOT like a date! You wonder why she suddenly wants to change things up. Could be interesting!"
+    mc.name "Sounds great. I know a good place. I'll text you the address, my treat, okay?"
+    the_person "Wow, you don't have to do that... but I'm not going to say no! See you there!"
+    "You send her the address and set a time. It's a fairly upscale place that you think she will be fairly impressed by."
+    $ mc.end_text_convo()
+    "You double check and make sure you look okay for the occasion, then head over to the restaurant."
+    $ mc.change_location(fancy_restaurant)
+    $ mc.location.show_background()
+    "When you arrive, you check in at the front counter. You wait a few minutes, but your date soon arrives."
+
+    $ the_person.planned_outfit = the_person.wardrobe.get_outfit_with_name("Camilla Summer Dress") or the_person.get_random_appropriate_outfit(guarantee_output = True)
+    $ the_person.apply_outfit(the_person.planned_outfit)
+    $ the_person.draw_person()
+    the_person "Buenas noches señor!"
+    mc.name "Ah. [the_person.title], good to see you. You look great!"
+    the_person "Gracias! I can't wait to try this place. I knew it was here, but despite living in this town for a decade, I've never been inside."
+    mc.name "Yes, and I think the change of scenery will do us some good. The bar is nice and all but this is certainly a pleasant alternative."
+    the_person "Yeah I suppose so."
+    "You make some small talk with [the_person.possessive_title] until you are shown to your table."
+    $ the_person.draw_person(position = "sitting")
+    "The waiter seats you both and turns to you."
+    "WAITER" "Can I get your started with anything? Our house red wine is delightful for a beautiful young couple such as yourselves."
+    the_person "Ha!... ahhh..."
+    "[the_person.title] lets out a snort. For a second, the waiter looks at you in distress, thinking he's embarassed you by assuming you were a couple, but you just smile."
+    mc.name "That sounds great. Start with two glasses?"
+    "WAITER" "Yes sir. I'll have those right out."
+    "As the waiter walks away, [the_person.possessive_title] looks at you and laughs."
+    the_person "A young couple. That's the funniest thing I've heard in a while!"
+    if camilla_will_fuck():
+        mc.name "Is it funny though? We do other things that couples often do..."
+    elif camilla_will_take_pics():
+        mc.name "I mean, we've been intimate. Is it really that far off?"
+    else:
+        mc.name "I mean, I helped you shop for lingerie. Is it REALLY that far off?"
+    the_person "I suppose that is a fair point."
+    mc.name "I know it was for the benefit if your husband... but still."
+    $ the_person.draw_person(position = "sitting", emotion = "angry")
+    the_person "Ugh, can we PLEASE not bring him up tonight?"
+    "Yikes... has something happened between them? Usually the time you spend with [the_person.title] is for mostly his benefit..."
+    "The look on her face tells you that you should probably leave it alone though."
+    mc.name "I'm fine with that. Let's talk more about *us* then."
+    $ the_person.draw_person(position = "sitting", emotion = "happy")
+    mc.name "I suppose I'll go first... What are you ordering?"
+    the_person "I have no idea... the menu all looks so good. I was thinking maybe the salmon."
+    mc.name "That does sound good..."
+    the_person "Yeah. I had a friend tell me once it's a good aphrodisiac. Might be good for when it's time to get out of here."
+    "The sulty tone in [the_person.possessive_title]'s voice makes it clear that she is hoping for there to be a part two to this date."
+    "The waiter brings out the wine and takes your orders. Before long you've drank two glasses each. The waiter returns and sees your empty glasses."
+    "WAITER" "Sir, you and your friend here seem to be enjoying the wine tonight. Might I bring a full bottle for you?"
+    mc.name "That sounds great."
+    "Soon the food and the wine arrive. You dig in to a plate of pesto shrimp linguini and [the_person.title] eats her salmon."
+    "When you finish eating, you've both had several glasses of wine. [the_person.possessive_title] looks at you seriously."
+    the_person "So, you are probably wondering why I suddenly want to go out for dinner with you."
+    mc.name "Yeah I'm definitely wondering..."
+    "[the_person.title] takes a long draught of wine and then continues."
+    the_person "Well, at the bar a few nights ago, I got approached by a woman. She said hello, knew my name. Knew a lot about me actually."
+    the_person "She explained that she was so happy that I was FINALLY coming around to the hotwife lifestyle."
+    the_person "I... I asked how she knew about it? And she said... she said that her and her husband and... and my husband... had been fucking around too."
+    the_person "Of course I just... you know... played it off cool. But I was so blindsided by it! I asked her... you know... how long had they been at it."
+    the_person "And, well, they've been fucking around for a LOT longer than we have..."
+    the_person "But that hey! It's okay right? We're all in the lifestyle together now right?"
+    the_person "She pointed out her husband. Asked if I was interested. I said maybe, but honestly I just got so sick to my stomach."
+    mc.name "[the_person.name]... I'm so sorry..."
+    $ the_person.change_happiness(-5)
+    $ the_person.change_love(2, 80)
+    the_person "It's ok. You didn't have anything to do with it. I just... I just don't understand, why he kept it all a secret from me... you know?"
+    "[the_person.title] turns away for a second and wipes her eyes."
+    mc.name "What... what are you going to do?"
+    the_person "I have no idea, honestly. These last few weeks have been so crazy! I don't know if I even want this lifestyle."
+    the_person "I honestly was just thinking that... maybe tonight we could go back to your place?"
+    the_person "I don't want to go home tonight. Just let me come over, and tomorrow, or the next day, or sometime soon, I can really just think about it and figure it out."
+    mc.name "Okay. "
+
+
+
     return
 
 label camilla_gives_anal_virginity_label(the_person): #80
