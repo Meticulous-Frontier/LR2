@@ -37,13 +37,8 @@ init 2 python:
             personality = introvert_personality, name_color = "#228b22", dial_color = "228b22", starting_wardrobe = camilla_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
-<<<<<<< HEAD
-            forced_opinions = [["dancing", 2, True], ["fasion", 2, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
-            forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False], ["bareback sex", 2, False]])
-=======
             forced_opinions = [["dancing", 2, True], ["fashion", 2, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
-            forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False]])
->>>>>>> e6053625b61e5ef436ba08a81d3a59fcd418f38a
+            forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False], ["bareback sex", 2, False]])
 
         camilla.generate_home()
         camilla.set_schedule(camilla.home, times = [0,4])
@@ -778,6 +773,9 @@ label camilla_dancing_sex_label(the_person):
         the_person "Okay, you better get your pants off, we don't have much time!"
         "You quickly drop your pants, letting your aching hard on spring free. You step behind [the_person.title], letting your cock nestle between her pliant ass cheeks."
         "You snap a few more pictures as you dry hump her ass crack a bit. Then you pull back a bit and get yourself pointed at her juicy slit."
+        mc.name "Should I umm... wrap it up?"
+        the_person "Don't bother, unless you REALLY want to. I'm actually infertile..."
+        mc.name "Ah... I see..."
         "You change the camera app to take a video. You figure since this is her first time getting fucked by a man other than her husband it might come in handy..."
         "With one hand firmly on [the_person.possessive_title]'s hip, you steadily push yourself into her. She moans loudly and you capture the whole thing on glorious video."
         $ the_person.break_taboo("vaginal_sex")
@@ -1359,8 +1357,8 @@ label camilla_formal_date_label():    #60
     the_person "Of course I just... you know... played it off cool. But I was so blindsided by it! I asked her... you know... how long had they been at it."
     the_person "And, well, they've been fucking around for a LOT longer than we have..."
     the_person "But that hey! It's okay right? We're all in the lifestyle together now right?"
-    the_person "She pointed out her husband. Asked if I was interested. I said maybe, but honestly I just got so sick to my stomach."
-    mc.name "[the_person.name]... I'm so sorry..."
+    the_person "She pointed out her husband. Asked if I was interested. I said maybe, but honestly I just got sick to my stomach."
+    mc.name "[the_person.name]... I'm sorry..."
     $ the_person.change_happiness(-5)
     $ the_person.change_love(2, 80)
     the_person "It's ok. You didn't have anything to do with it. I just... I just don't understand, why he kept it all a secret from me... you know?"
@@ -1413,3 +1411,6 @@ init -1 python:
 
     def mc_dancing_skill(): #Wrapper for measuring MC's progress learning to salsa dance.
         return mc.charisma + round((mc.max_energy - 100) / 20)
+
+    def camilla_is_fertile():   #Just make this a function name. Can come back and make the method once we decide triggers for making her fertile.
+        return False
