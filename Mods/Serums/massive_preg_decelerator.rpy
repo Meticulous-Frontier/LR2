@@ -27,7 +27,13 @@ init -1 python:
             tier = 3,
             research_needed = 1400,
             exclude_tags = "Pregnancy",
-            clarity_cost = 1800)
+            clarity_cost = 1800,
+            mental_aspect = 0,
+            physical_aspect = 9,
+            sexual_aspect = 2,
+            medical_aspect = 3,
+            flaws_aspect = 0,
+            attention = 4)
         return
 
 # any label that starts with serum_mod is added to the serum mod list

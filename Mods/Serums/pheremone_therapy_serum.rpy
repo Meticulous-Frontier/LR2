@@ -27,7 +27,13 @@ init -1 python:
                 start_researched =  False,
                 research_needed = 800,
                 clarity_cost = 1500,
-                start_enabled = False
+                start_enabled = False,
+                mental_aspect = 5,
+                physical_aspect = 0,
+                sexual_aspect = 7,
+                medical_aspect = 0,
+                flaws_aspect = 0,
+                attention = 3
         #     exclude_tags = [list_of_other_tags],
         #     is_side_effect = a_bool)
             )

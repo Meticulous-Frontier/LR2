@@ -26,7 +26,11 @@ init python:
             tier = 0,
             start_researched =  True,
             research_needed = 1500,
-            clarity_cost = 1000
-    #     exclude_tags = [list_of_other_tags],
-    #     is_side_effect = a_bool)
+            clarity_cost = 1000,
+            mental_aspect = 6,
+            physical_aspect = 0,
+            sexual_aspect = 0,
+            medical_aspect = 2,
+            flaws_aspect = 0,
+            attention = 0
         )

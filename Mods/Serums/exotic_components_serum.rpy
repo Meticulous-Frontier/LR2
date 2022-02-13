@@ -11,7 +11,13 @@ init -1 python:
             requires = [basic_med_app, improved_serum_prod],
             tier = 1,
             research_needed = 300,
-            clarity_cost = 300)
+            clarity_cost = 300,
+            mental_aspect = 2,
+            physical_aspect = 0,
+            sexual_aspect = 0,
+            medical_aspect = 0,
+            flaws_aspect = 0,
+            attention = 0)
 
 
 # any label that starts with serum_mod is added to the serum mod list

@@ -24,7 +24,13 @@ init 1 python:
             tier = 99,
             research_needed = 3000,
             exclude_tags = ["Personality"],
-            clarity_cost = 2200
+            clarity_cost = 2200,
+            mental_aspect = 9,
+            physical_aspect = 0,
+            sexual_aspect = 0,
+            medical_aspect = 2,
+            flaws_aspect = 0,
+            attention = 5
         )
 
     def enhanced_permanent_bimbo_on_apply(the_person, the_serum, add_to_log):

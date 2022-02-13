@@ -30,7 +30,13 @@ init -1 python:
                 tier = 1,
                 start_researched =  False,
                 research_needed = 500,
-                clarity_cost = 500
+                clarity_cost = 500,
+                mental_aspect = 2,
+                physical_aspect = 0,
+                sexual_aspect = 5,
+                medical_aspect = 0,
+                flaws_aspect = 0,
+                attention = 3
             )
 
 

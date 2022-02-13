@@ -522,7 +522,13 @@ init -1 python:
             start_researched = False,
             research_needed = 1000,
             exclude_tags = ["Nanobots"],
-            clarity_cost = 1000
+            clarity_cost = 1000,
+            mental_aspect = 3,
+            physical_aspect = 3,
+            sexual_aspect = 5,
+            medical_aspect = 0,
+            flaws_aspect = 0,
+            attention = 2
         )
 
         fetish_exhibition_serum = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
@@ -541,7 +547,13 @@ init -1 python:
             start_researched =  False,
             research_needed = 1200,
             exclude_tags = ["Nanobots"],
-            clarity_cost = 1000
+            clarity_cost = 1000,
+            mental_aspect = 5,
+            physical_aspect = 2,
+            sexual_aspect = 5,
+            medical_aspect = 0,
+            flaws_aspect = 0,
+            attention = 4
         )
 
         fetish_anal_serum = SerumTraitMod(name = "Anal Proclivity Nanobots",
@@ -560,7 +572,13 @@ init -1 python:
             start_researched =  False,
             research_needed = 2000,
             exclude_tags = ["Nanobots"],
-            clarity_cost = 1500
+            clarity_cost = 1500,
+            mental_aspect = 4,
+            physical_aspect = 6,
+            sexual_aspect = 6,
+            medical_aspect = 1,
+            flaws_aspect = 0,
+            attention = 3
         )
 
         fetish_cum_serum = SerumTraitMod(name = "Semen Proclivity Nanobots",
@@ -580,6 +598,12 @@ init -1 python:
             research_needed = 2000,
             exclude_tags = ["Nanobots"],
             clarity_cost = 1500,
+            mental_aspect = 5,
+            physical_aspect = 3,
+            sexual_aspect = 6,
+            medical_aspect = 0,
+            flaws_aspect = 0,
+            attention = 3
         )
 
         fetish_breeding_serum = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
@@ -598,7 +622,13 @@ init -1 python:
             start_researched =  False,
             research_needed = 2000,
             exclude_tags = ["Nanobots"],
-            clarity_cost = 1500
+            clarity_cost = 1500,
+            mental_aspect = 5,
+            physical_aspect = 5,
+            sexual_aspect = 5,
+            medical_aspect = 0,
+            flaws_aspect = 0,
+            attention = 2
         )
         return
 

@@ -42,7 +42,13 @@ init -1 python:
             requires = [clinical_testing],
             tier = 1,
             research_needed = 800,
-            clarity_cost = 1000)
+            clarity_cost = 1000,
+            mental_aspect = 4,
+            physical_aspect = 5,
+            sexual_aspect = 4,
+            medical_aspect = 0,
+            flaws_aspect = 2,
+            attention = 4)
         return
 
 label serum_mod_skin_sensitivity_trait(stack):

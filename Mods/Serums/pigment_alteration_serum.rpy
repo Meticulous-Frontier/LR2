@@ -18,7 +18,13 @@ init -1 python:
             requires = clinical_testing,
             tier = 3,
             research_needed = 500,
-            clarity_cost = 2500)
+            clarity_cost = 2500,
+            mental_aspect = 2,
+            physical_aspect = 7,
+            sexual_aspect = 0,
+            medical_aspect = 0,
+            flaws_aspect = 0,
+            attention = 2)
 
 
 label serum_mod_pigment_serum_trait(stack):
