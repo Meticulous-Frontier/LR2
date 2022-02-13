@@ -12,7 +12,6 @@ init -1 python:
                 desc = "By mimicking pheromones found in closely related animals, this serum can recreate feelings of going into heat in women.",
                 positive_slug = "+$40 Value, +15 Sluttiness",
                 negative_slug = "+200 Serum Research",
-                value_added = 40,
                 research_added = 200,
         #     slots_added = a_number,
         #     production_added = a_number,
@@ -29,7 +28,8 @@ init -1 python:
                 clarity_cost = 1500,
                 start_enabled = False
         #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool)
+        #     is_side_effect = a_bool),
+                mental_aspect = 5, physical_aspect = 0, sexual_aspect = 7, medical_aspect = 0, flaws_aspect = 0, attention = 2
             )
 
 

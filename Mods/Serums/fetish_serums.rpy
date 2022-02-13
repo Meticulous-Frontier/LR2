@@ -510,7 +510,6 @@ init -1 python:
             desc = "Targeted endorphin emitters increase general positive sexual responses based on suggestibility.",
             positive_slug = "Increases sexual opinions, slowly increases Foreplay skill",
             negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
-            value_added = 0,
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
@@ -522,14 +521,14 @@ init -1 python:
             start_researched = False,
             research_needed = 1000,
             exclude_tags = ["Nanobots"],
-            clarity_cost = 1000
+            clarity_cost = 1000,
+            mental_aspect = 5, physical_aspect = 3, sexual_aspect = 6, medical_aspect = 0, flaws_aspect = 0, attention = 2
         )
 
         fetish_exhibition_serum = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase general positive opinions of public sexual encounters based on suggestibility.",
             positive_slug = "Increases exhibitionistic behavior, slow increases sluttiness",
             negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
-            value_added = 0,
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
@@ -541,14 +540,14 @@ init -1 python:
             start_researched =  False,
             research_needed = 1200,
             exclude_tags = ["Nanobots"],
-            clarity_cost = 1000
+            clarity_cost = 1000,
+            mental_aspect = 5, physical_aspect = 3, sexual_aspect = 6, medical_aspect = 0, flaws_aspect = 0, attention = 2
         )
 
         fetish_anal_serum = SerumTraitMod(name = "Anal Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase pleasure received from anal stimulation based on suggestibility.",
             positive_slug = "Increases Anal sexual opinions, slowly increases Anal skill, Slowly increases obedience",
             negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
-            value_added = 0,
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
@@ -560,14 +559,14 @@ init -1 python:
             start_researched =  False,
             research_needed = 2000,
             exclude_tags = ["Nanobots"],
-            clarity_cost = 1500
+            clarity_cost = 1500,
+            mental_aspect = 5, physical_aspect = 3, sexual_aspect = 6, medical_aspect = 0, flaws_aspect = 0, attention = 2
         )
 
         fetish_cum_serum = SerumTraitMod(name = "Semen Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase pleasure received when in contact with semen based on suggestibility.",
             positive_slug = "Increases Cum related sexual opinions, slowly increases sluttiness, slowly increases Oral skill",
             negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
-            value_added = 0,
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
@@ -580,13 +579,13 @@ init -1 python:
             research_needed = 2000,
             exclude_tags = ["Nanobots"],
             clarity_cost = 1500,
+            mental_aspect = 5, physical_aspect = 3, sexual_aspect = 6, medical_aspect = 0, flaws_aspect = 0, attention = 2,
         )
 
         fetish_breeding_serum = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase reproduction drive and associated opinions based on suggestibility.",
             positive_slug = "Increases reproduction sexual opinions, slowly increases Vaginal skill",
             negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
-            value_added = 0,
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
@@ -598,7 +597,8 @@ init -1 python:
             start_researched =  False,
             research_needed = 2000,
             exclude_tags = ["Nanobots"],
-            clarity_cost = 1500
+            clarity_cost = 1500,
+            mental_aspect = 5, physical_aspect = 3, sexual_aspect = 6, medical_aspect = 0, flaws_aspect = 0, attention = 2
         )
         return
 

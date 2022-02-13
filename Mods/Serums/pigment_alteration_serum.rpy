@@ -11,14 +11,14 @@ init -1 python:
             desc = "Causes instantaneous alterations in the subject's pigment distribution causing noticeable changes in skin color",
             positive_slug = "Changes the subject's skin color, +$5 Value",
             negative_slug = "+125 Serum Research",
-            value_added = 5,
             research_added = 125,
             base_side_effect_chance = 20,
             on_apply = pigment_serum_on_apply,
             requires = clinical_testing,
             tier = 3,
             research_needed = 500,
-            clarity_cost = 2500)
+            clarity_cost = 2500,
+            mental_aspect = 0, physical_aspect = 7, sexual_aspect = 0, medical_aspect = 0, flaws_aspect = 0, attention = 3)
 
 
 label serum_mod_pigment_serum_trait(stack):

@@ -15,13 +15,13 @@
 #             desc = "Decrease target subject body mass, using peptide YY3-36 as a serum component that acts on the hypothalamic feeding centers to inhibit hunger and calorie intake.",
 #             positive_slug = "-$15 Value, 20% Chance/Turn to reduce body mass by 200 grams",
 #             negative_slug = "+125 Serum Research",
-#             value_added = -15,
 #             research_added = 125,
 #             base_side_effect_chance = 20,
 #             on_turn = anorexia_serum_on_turn,
 #             requires = basic_med_app,
 #             tier = 1,
-#             research_needed = 500)
+#             research_needed = 500,
+#             mental_aspect = 0, physical_aspect = 0, sexual_aspect = 0, medical_aspect = 1, flaws_aspect = 0, attention = 0)
 
 #         # continue on the hijack stack if needed
 #         execute_hijack_call(stack)
@@ -36,19 +36,20 @@ init -1 python:
         # store instances of mod
         _instances = set()
 
-        def __init__(self,name,desc, positive_slug = "", negative_slug = "",
-            value_added = 0, research_added = 0, slots_added = 0, production_added = 0, duration_added = 0, base_side_effect_chance = 0, clarity_added = 0,
+        def __init__(self,name,desc, positive_slug = "", negative_slug = "", research_added = 0, slots_added = 0, production_added = 0, duration_added = 0, base_side_effect_chance = 0, clarity_added = 0,
             on_apply = None, on_remove = None, on_turn = None, on_day = None, on_move = None,
             requires = None, tier = 0, start_researched = False, research_needed=50, exclude_tags=None, is_side_effect = False,
-            clarity_cost = 50, start_unlocked = False, start_enabled = True):
+            clarity_cost = 50, start_unlocked = False, start_enabled = True,
+            mental_aspect = 0, physical_aspect = 0, sexual_aspect = 0, medical_aspect = 0, flaws_aspect = 0, attention = 0):
 
             self.enabled = start_enabled
 
             SerumTrait.__init__(self, name, desc, positive_slug, negative_slug,
-                value_added, research_added, slots_added, production_added, duration_added, base_side_effect_chance, clarity_added,
+                research_added, slots_added, production_added, duration_added, base_side_effect_chance, clarity_added,
                 on_apply, on_remove, on_turn, on_day, on_move,
                 requires, tier, start_researched, research_needed, exclude_tags, is_side_effect,
-                clarity_cost, start_unlocked)
+                clarity_cost, start_unlocked,
+                mental_aspect = 0, physical_aspect = 0, sexual_aspect = 0, medical_aspect = 0, flaws_aspect = 0, attention = 0)
 
             # store the instance in class static
             SerumTraitMod._instances.add(self)

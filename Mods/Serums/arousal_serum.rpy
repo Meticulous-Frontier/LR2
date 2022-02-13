@@ -8,7 +8,6 @@ init python:
             desc = "Reverse engineered from the pills you ordered. Increases arousal over time, maxing out based on suggestibility.",
             positive_slug = "+$20 Value, +15 Arousal over time",
             negative_slug = "+20 Serum Research",
-            value_added = 20,
             research_added = 20,
     #     slots_added = a_number,
     #     production_added = a_number,
@@ -22,7 +21,8 @@ init python:
             tier = 2,
             start_researched =  True,
             research_needed = 800,
-            clarity_cost = 1000
+            clarity_cost = 1000,
+            mental_aspect = 4, physical_aspect = 5, sexual_aspect = 4, medical_aspect = 0, flaws_aspect = 0, attention = 2
     #     exclude_tags = [list_of_other_tags],
     #     is_side_effect = a_bool)
         )

@@ -19,7 +19,6 @@ init -1 python:
             desc = "Clamps down on natural pregnancy hormone production. Massively decreases the pace at which a pregnancy will progress.",
             positive_slug = "+$40 Value, -1 Pregnancy Progress per Turn",
             negative_slug = "+300 Serum Research",
-            value_added = 40,
             research_added = 300,
             base_side_effect_chance = 80,
             on_turn = massive_pregnancy_decelerator_on_turn,
@@ -27,7 +26,8 @@ init -1 python:
             tier = 3,
             research_needed = 1400,
             exclude_tags = "Pregnancy",
-            clarity_cost = 1800)
+            clarity_cost = 1800,
+            mental_aspect = 0, physical_aspect = 9, sexual_aspect = 2, medical_aspect = 3, flaws_aspect = 0, attention = 4)
         return
 
 # any label that starts with serum_mod is added to the serum mod list

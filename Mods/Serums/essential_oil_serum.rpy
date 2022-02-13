@@ -12,7 +12,6 @@ init python:
             desc = "Pleasant smell and texture adds greatly to the value of the serum. High chance of negative side effect.",
             positive_slug = "+$50 Value, +5 Happiness",
             negative_slug = "+20 Serum Research",
-            value_added = 50,
             research_added = 20,
     #     slots_added = a_number,
     #     production_added = a_number,
@@ -26,7 +25,8 @@ init python:
             tier = 0,
             start_researched =  True,
             research_needed = 1500,
-            clarity_cost = 1000
+            clarity_cost = 1000,
+            mental_aspect = 6, physical_aspect = 0, sexual_aspect = 0, medical_aspect = 2, flaws_aspect = 0, attention = 0
     #     exclude_tags = [list_of_other_tags],
     #     is_side_effect = a_bool)
         )

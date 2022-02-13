@@ -34,7 +34,6 @@ init -1 python:
             desc = "Heighten the subjects sense of touch. This can lead to increased arousal, but in public it might be frustrating if their clothes are too restrictive.",
             positive_slug = "+$20 Value, +5 Arousal/turn, may cause stripping when administered",
             negative_slug = "-2 Happiness/turn in public, +20 Serum Research",
-            value_added = 20,
             research_added = 20,
             base_side_effect_chance = 30,
             on_apply = skin_sensitivity_on_apply,
@@ -42,7 +41,8 @@ init -1 python:
             requires = [clinical_testing],
             tier = 1,
             research_needed = 800,
-            clarity_cost = 1000)
+            clarity_cost = 1000,
+            mental_aspect = 4, physical_aspect = 5, sexual_aspect = 4, medical_aspect = 0, flaws_aspect = 2, attention = 4)
         return
 
 label serum_mod_skin_sensitivity_trait(stack):
