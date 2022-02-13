@@ -2552,6 +2552,13 @@ init -1 python:
 
     Person.is_single = is_single
 
+    def is_in_trance(self):
+        if self.get_trance_multiplier() > 1.2:
+            return True
+        return False
+
+    Person.is_in_trance = is_in_trance
+
 #Intern functions
 
     def is_intern(self):
