@@ -2,95 +2,78 @@
 # Create them as ModPolicy instead of Policy if you intend for them to be non- standalone aka child elements of a parent policy
 init 1310 python:
 
-    def increase_maximum_production(amount):
-        global production_max
-        production_max += amount
+    # DISABLED FOR NOW, NEEDS NEW IMPLEMENTATION DUE TO CHANGE IN BUSINESS PRODUCTION LINES
+    # def increase_maximum_production(amount):
+    #     global production_max
+    #     production_max += amount
 
-    def overload_production_lines_1_policy_requirement():
-        return production_line_addition_1_policy.is_owned()
+    # def overload_production_lines_1_policy_requirement():
+    #     return production_line_addition_1_policy.is_owned()
 
-    overload_production_lines_1_policy = Policy(
-        name = "Production Optimization Level 1",
-        cost = 10000,
-        desc = "Increases the maximum efficiency of the production lines by 10 percent",
-        requirement = overload_production_lines_1_policy_requirement,
-        on_buy_function = increase_maximum_production,
-        extra_arguments = {"amount": 10},
-        dependant_policies = production_line_addition_1_policy
-    )
-    serum_policies_list.append(overload_production_lines_1_policy)
+    # overload_production_lines_1_policy = Policy(
+    #     name = "Production Optimization Level 1",
+    #     cost = 10000,
+    #     desc = "Increases the maximum efficiency of the production lines by 10 percent",
+    #     requirement = overload_production_lines_1_policy_requirement,
+    #     on_buy_function = increase_maximum_production,
+    #     extra_arguments = {"amount": 10},
+    #     dependant_policies = production_line_addition_1_policy
+    # )
+    # serum_policies_list.append(overload_production_lines_1_policy)
 
-    def overload_production_lines_2_policy_requirement():
-        return production_line_addition_2_policy.is_owned()
+    # def overload_production_lines_2_policy_requirement():
+    #     return production_line_addition_2_policy.is_owned()
 
-    overload_production_lines_2_policy = Policy(
-        name = "Production Optimization Level 2",
-        cost = 20000,
-        desc = "Increases the maximum efficiency of the production lines by 10 percent",
-        requirement = overload_production_lines_2_policy_requirement,
-        on_buy_function = increase_maximum_production,
-        extra_arguments = {"amount": 10},
-        dependant_policies = production_line_addition_2_policy
-    )
-    serum_policies_list.append(overload_production_lines_2_policy)
-
-    def creative_colored_uniform_policy_requirement():
-        return casual_uniform_policy.is_owned()
+    # overload_production_lines_2_policy = Policy(
+    #     name = "Production Optimization Level 2",
+    #     cost = 20000,
+    #     desc = "Increases the maximum efficiency of the production lines by 10 percent",
+    #     requirement = overload_production_lines_2_policy_requirement,
+    #     on_buy_function = increase_maximum_production,
+    #     extra_arguments = {"amount": 10},
+    #     dependant_policies = production_line_addition_2_policy
+    # )
+    # serum_policies_list.append(overload_production_lines_2_policy)
 
     creative_colored_uniform_policy = Policy(
         name = "Relaxed Uniform Color Policy",
         cost = 1000,
         desc = "Employees are given some leeway with the colors of their outfits. While active, employees where your uniform pieces but can select their own colors. Reduces happiness penalties for girls who hate work uniforms.",
         toggleable = True,
-        requirement = creative_colored_uniform_policy_requirement,
+        own_requirement = casual_uniform_policy,
         dependant_policies = casual_uniform_policy
     )
     uniform_policies_list.append(creative_colored_uniform_policy)
-
-    def personal_bottoms_uniform_policy_requirement():
-        return casual_uniform_policy.is_owned()
 
     personal_bottoms_uniform_policy = Policy(
         name = "Relaxed Uniform Bottoms Policy",
         cost = 2000,
         desc = "Employees are given some leeway on uniforms. While active, employees may choose to swap pants for a skirt and vice versa.",
         toggleable = True,
-        requirement = personal_bottoms_uniform_policy_requirement,
+        own_requirement = casual_uniform_policy,
         dependant_policies = casual_uniform_policy
     )
-
     uniform_policies_list.append(personal_bottoms_uniform_policy)
-
-    def casual_friday_uniform_policy_requirement():
-        return casual_uniform_policy.is_owned()
 
     casual_friday_uniform_policy = Policy(
         name = "Casual Friday Uniform Policy",
         cost = 2000,
         desc = "Employees are free to choose their own uniform on Fridays. This would add some variety on Fridays and prevents uniform infractions.",
         toggleable = True,
-        requirement = casual_friday_uniform_policy_requirement,
+        own_requirement = casual_uniform_policy,
         dependant_policies =  casual_uniform_policy
     )
-
     uniform_policies_list.append(casual_friday_uniform_policy)
-
-    def creative_skimpy_uniform_policy_requirement():
-        return corporate_enforced_nudity_policy.is_owned()
 
     creative_skimpy_uniform_policy = Policy(
         name = "Uniform Self Expression Policy",
         cost = 10000,
         desc = "Employees are given some leeway on uniforms. While active, employees may choose not to wear a piece or two of the uniform as a form of self expression.",
         toggleable = True,
-        requirement = personal_bottoms_uniform_policy_requirement,
+        own_requirement = corporate_enforced_nudity_policy,
         dependant_policies = corporate_enforced_nudity_policy
     )
-
     uniform_policies_list.append(creative_skimpy_uniform_policy)
-
-    def mandatory_vibe_policy_requirement():
-        return maximal_arousal_uniform_policy.is_owned()
 
     def mandatory_vibe_policy_on_turn():
         if mc.business.is_open_for_business():
@@ -102,7 +85,7 @@ init 1310 python:
         cost = 30000,
         desc = "All employees are required to have a bullet vibrator inserted into their vaginas during work hours, ensuring they are aroused at work all the time.",
         toggleable = True,
-        requirement = mandatory_vibe_policy_requirement,
+        own_requirement = maximal_arousal_uniform_policy,
         on_turn_function = mandatory_vibe_policy_on_turn
     )
     uniform_policies_list.append(mandatory_vibe_policy)

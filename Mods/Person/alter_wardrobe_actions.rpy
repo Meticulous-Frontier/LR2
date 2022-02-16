@@ -12,9 +12,9 @@ init 4 python:
         menu_tooltip = "Ask girl to change her wardrobe.", priority = -5, category = "Wardrobe", initialization = init_action_mod_disabled)
 
     def build_specific_action_list_alter_outfit_extended(org_func):
-        def build_specific_action_list_wrapper(person):
+        def build_specific_action_list_wrapper(person, keep_talking = True):
             # run original function
-            result = org_func(person)
+            result = org_func(person, keep_talking)
             # run extension code (append new action to base game menu)
             found = next((x for x in action_mod_list if x.effect == "modify_wardrobe_label"), None)
             if isinstance(found, ActionMod) and found.enabled:   # use enabled from action mod settings

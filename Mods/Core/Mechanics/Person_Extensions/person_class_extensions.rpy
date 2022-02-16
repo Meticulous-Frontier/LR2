@@ -90,8 +90,8 @@ init -1 python:
             self.sexy_opinions.clear()
 
         # clear all references held by person object.
-        del self.schedule
-        del self.alt_schedule
+        self.schedule = None
+        self.override_schedule = None
         self.home = None
         self.work = None
         self.schedule = None
@@ -141,37 +141,6 @@ init -1 python:
         self.location.move_person(self, destination)
 
     Person.change_location = person_change_location
-
-    def get_alt_schedule(self):
-        if not hasattr(self, "_alt_schedule"):
-            self._alt_schedule = Schedule()
-        return self._alt_schedule
-
-    def set_alt_schedule(self, value):
-        self._alt_schedule = value
-
-    def del_alt_schedule(self):
-        self._alt_schedule = None
-
-    # has no settter, set specific timeslots using the_person.schedule[day][timeslot] = room
-    # clear alternative schedule by calling the_person.schedule.clear_schedule()
-    Person.alt_schedule = property(get_alt_schedule, set_alt_schedule, del_alt_schedule, "Alternative schedule property.")
-
-    def set_alt_schedule(self, location, days = None, times = None):
-        if not "Schedule" in globals():
-            return
-
-        if days is None:
-            days = [0,1,2,3,4,5,6] #Full week if not specified
-        if times is None:
-            times = []
-
-        for the_day in days:
-            for time_chunk in times:
-                self.alt_schedule[the_day][time_chunk] = location
-        return
-
-    Person.set_alt_schedule = set_alt_schedule
 
     def get_follow_me(self):
         if not hasattr(self, "_follow_me"):
@@ -362,6 +331,16 @@ init -1 python:
         self._tan_style = value
 
     Person.tan_style = property(get_person_tan_style, set_person_tan_style, None, "The tan style to render for a person.")
+
+    def get_person_available(self):
+        if not hasattr(self, "_available"):
+            self._available = True
+        return self._available
+
+    def set_person_available(self, value):
+        self._available = value
+
+    Person.available = property(get_person_available, set_person_available, None, "Mark a person available or not.")
 
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
@@ -616,7 +595,7 @@ init -1 python:
         if start_home is None:
             the_daughter.generate_home()
         else:
-            the_daughter.set_schedule(the_location = start_home, times = [0,4])
+            the_daughter.set_schedule(the_location = start_home, the_times = [0,4])
 
         the_daughter.home.add_person(the_daughter)
 
@@ -686,7 +665,7 @@ init -1 python:
         if start_home is None:
             the_mother.generate_home()
         else:
-            the_mother.set_schedule(the_location = start_home, times = [0,4])
+            the_mother.set_schedule(the_location = start_home, the_times = [0,4])
 
         the_mother.home.add_person(the_mother)
 
@@ -914,6 +893,19 @@ init -1 python:
 
     Person.choose_strip_clothing_item = choose_strip_clothing_item
 
+    def person_get_destination_extended(org_func):
+        def get_destination_wrapper(person, specified_day = None, specified_time = None):
+            if not person.available:  # special case to make people disappear (used in pregnancy)
+                return purgatory
+
+            # run original function
+            return org_func(person, specified_day, specified_time)
+
+        return get_destination_wrapper
+
+    # wrap up the run_day function
+    Person.get_destination = person_get_destination_extended(Person.get_destination)
+
     def run_move_enhanced(self,location):
         for serum in self.serum_effects: #Compute the effects of all of the serum that the girl is under.
             serum.run_on_move(self) #Run the serum's on_move function if one exists
@@ -1003,22 +995,6 @@ init -1 python:
             a_role.run_move(self)
 
     Person.run_move = run_move_enhanced
-
-    # enhanced get destination function, that checks the alternative schedule for a destination prior to regular schedule.
-    def get_destination_enhanced(self, specified_day = None, specified_time = None):
-        if specified_day is None:
-            specified_day = day%7 #Today
-        if specified_time is None:
-            specified_time = time_of_day #Now
-
-        if "Schedule" in globals():
-            alt_destination = self.alt_schedule[specified_day][specified_time]
-            if alt_destination: # if we have an alternative schedule, return that location
-                return alt_destination
-
-        return self.schedule[specified_day][specified_time] #Returns the Room this person should be in during the specified time chunk.
-
-    Person.get_destination = get_destination_enhanced
 
     # extend the default run day function
     def person_run_day_extended(org_func):
@@ -1750,7 +1726,7 @@ init -1 python:
     # helper function, to determine if person is available for crisis events
     # for now only girls giving birth are not available (but is extendable for future conditions)
     def person_is_available(self):
-        return not self.is_giving_birth()
+        return not self.is_giving_birth() and self.available
 
     Person.is_available = property(person_is_available, None, None)
 
@@ -1759,7 +1735,7 @@ init -1 python:
 # Outfit functions - wear a specialized outfit #
 ################################################
     def should_wear_work_outfit(self):
-        if self.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]):
+        if self.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]):
             shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
             return (time_of_day == 3 and shifts == 2) or time_of_day == 4
         return False
@@ -1773,13 +1749,13 @@ init -1 python:
 
         if self.has_role(stripper_role):
             self.work_outfit = mc.business.stripper_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3)
-        elif self.has_role(waitress_role):
+        elif self.has_role(stripclub_waitress_role):
             self.work_outfit = mc.business.waitress_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(bdsm_performer_role):
+        elif self.has_role(stripclub_bdsm_performer_role):
             self.work_outfit = mc.business.bdsm_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(mistress_role):
+        elif self.has_role(stripclub_mistress_role):
             self.work_outfit = mc.business.mistress_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(manager_role):
+        elif self.has_role(stripclub_manager_role):
             self.work_outfit = mc.business.manager_wardrobe.decide_on_outfit2(self)
 
         if self.work_outfit:
@@ -1971,7 +1947,6 @@ init -1 python:
         return WardrobeBuilder(self).approves_outfit_color(outfit)
 
     Person.approves_outfit_color = approves_outfit_color
-
 
 ######################################
 # Extend give serum for added goal #
@@ -2286,7 +2261,7 @@ init -1 python:
     Person.is_lactating = is_lactating
 
     def is_giving_birth(self):
-        return "preg_old_schedule" in self.event_triggers_dict
+        return self.location == purgatory or not self.available
 
     Person.is_giving_birth = is_giving_birth
 

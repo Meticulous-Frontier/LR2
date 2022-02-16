@@ -20,6 +20,8 @@ init 2:
                         style "menu_text_title_style"
                         xalign 0.5
 
+                use aspect_grid(the_trait)
+
                 hbox:
                     spacing 5
                     frame:

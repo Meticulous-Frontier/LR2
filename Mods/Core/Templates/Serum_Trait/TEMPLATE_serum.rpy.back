@@ -20,7 +20,6 @@ init -1 python:
             desc = "TEMPLATE",                                          # Make up something about how it works.
             positive_slug = "+1 TEMPLATE",                               # The green section in the serum design screen
             negative_slug = "+25 Research",                             # The red section in the serum design screen
-            value_added = 0,                                            # Cash value added to each completed serum. CAN be negative
             research_added = 0,                                         # Extra research required to develop the protoype
             slots_added = 0,                                            # IF it adds any additioanl serum trait slots. Usually No
             production_added = 0,                                       # If it adds production time

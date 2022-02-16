@@ -242,22 +242,22 @@ label quest_cure_discovery_patent_sold_label():
     if quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 0:
         the_person "Well, [the_disease] has very few cases annually, so the prospects of a lucrative deal for the patent rights were pretty slim."
         the_person "After negotiating, I was able to sell them for $1500. I hope that is okay."
-        $ mc.business.funds += 1500
+        $ mc.business.change_funds(1500)
         mc.name "I understand. That is still very helpful. Thank you [the_person.title]."
     elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 1:
         the_person "Well, [the_disease] really only propagates in poor, tropical areas, due to the way it spreads."
         the_person "While the good this drug can do is great, the profit potential is pretty low. I was only able to sell it for $3500. I hope that is okay."
-        $ mc.business.funds += 3500
+        $ mc.business.change_funds(3500)
         mc.name "Thank you [the_person.title], I just hope the drug can be put to good use."
     elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 2:
         the_person "[the_disease] is widespread in the developed world. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
         the_person "After negotiating, I was able to sell the patent for $15000. I hope that is okay."
-        $ mc.business.funds += 15000
+        $ mc.business.change_funds(15000)
         mc.name "That is still a considerable sum. Thank you [the_person.title]."
     elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) >= 3:
         the_person "[the_disease] is widespread in older populations. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
         the_person "After negotiating, I was able to sell the patent for $50000. I hope that is okay."
-        $ mc.business.funds += 50000
+        $ mc.business.change_funds(50000)
         mc.name "That is still a significant sum. Thank you [the_person.title]."
     $ mc.end_text_convo()
     "The patent is sold! And you made a little extra money for the business."

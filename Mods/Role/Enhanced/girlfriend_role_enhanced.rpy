@@ -31,7 +31,7 @@ init 2 python:
             return "Clothes store closed"
         elif time_of_day == 4: # Can be removed
             return "Clothes store closed"
-        elif mc.business.funds < 500:
+        elif not mc.business.has_funds(500):
             return "Requires $500"
         else:
             return True

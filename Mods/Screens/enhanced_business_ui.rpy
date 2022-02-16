@@ -10,6 +10,7 @@ init 2:
             vbox:
                 yanchor 1.0
                 yalign 1.0
+                yoffset -30
                 spacing 5
                 text "[mc.business.name]" style "menu_text_title_style" xalign 0.03 yoffset -10
                 textbutton "Employee Count: " + str(mc.business.get_employee_count()) + "/" + str(mc.business.max_employee_count):
@@ -28,10 +29,10 @@ init 2:
                     action NullAction()
                     sensitive True
 
-                textbutton "Daily Salary Cost: $"+ str(__builtin__.int(mc.business.calculate_salary_cost())):
+                textbutton "Daily Salary Cost: $"+ str(__builtin__.int(mc.business.calculate_salary_cost())) + " | $" + str(__builtin__.int(mc.business.operating_costs)):
                     style "transparent_style"
                     text_style "menu_text_style"
-                    tooltip "The amount of money spent daily to pay your employees. Employees are not paid on weekends."
+                    tooltip "The amount of money spent daily to pay your employees along with daily operating costs. Neither apply during the weekend."
                     action NullAction()
                     sensitive True
 

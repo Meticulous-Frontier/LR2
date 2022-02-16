@@ -12,9 +12,13 @@ init 2 python:
         erica_base_outfit.add_accessory(the_eye_shadow)
         erica_base_outfit.add_accessory(the_rings)
 
+        erica_student_job = Job("College Athlete", erica_role, job_location = university, work_times = [2])
+        erica_student_job.schedule.set_schedule(gym, the_times = [1, 3])
+        erica_student_job.schedule.set_schedule(gym, the_days = [5, 6], the_times = [1, 2])
+
         global erica
         erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_4",  tits="B", height = 0.89, hair_colour="chestnut brown", hair_style = braided_bun, skin="white" , \
-            eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, \
+            eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, job = erica_student_job, \
             stat_array = [2,4,4], skill_array = [4,1,3,3,1], sex_array = [3,2,3,2], start_sluttiness = 3, start_obedience = -18, start_happiness = 119, start_love = 0, \
             title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True, base_outfit = erica_base_outfit, \
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["pants", 1, False], ["the colour blue", 2, False], ["yoga", 2, False], ["sports", 2, False]],
@@ -23,10 +27,6 @@ init 2 python:
         erica.max_energy = 120
         erica.generate_home()
         erica.home.add_person(erica)
-
-        erica.set_schedule(gym, days = [5,6], times = [1, 2])
-        erica.set_schedule(university, days = [0, 1, 2, 3, 4], times = [2])
-        erica.set_schedule(gym, days = [0, 1, 2, 3, 4], times = [1, 3])
 
         erica.event_triggers_dict["reject_position"] = "standing_doggy"
         erica.event_triggers_dict["erica_progress"] = 0
@@ -65,7 +65,6 @@ init 2 python:
         # town_relationships.update_relationship(lily, erica, "Friend")
 
 
-        erica.add_role(erica_role)
         erica.add_unique_on_room_enter_event(erica_intro_action)
 
         #REMARKS: Erica has a few instance specific class overrides. This is my first time testing this type of programming, hopefully it works correctly.
@@ -406,7 +405,7 @@ init 1 python:
 init 2 python:
 
     erica_lily_post_insta_morning_action = ActionMod("Erica wakes you up", erica_lily_post_insta_morning_requirement, "erica_lily_post_insta_morning_label",
-        menu_tooltip = "Erica wakes you up after spending the night with Lily.", category = "Home", is_crisis = True, is_morning_crisis = True, crisis_weight = 7)
+        menu_tooltip = "Erica wakes you up after spending the night with Lily.", category = "Home", is_crisis = True, is_morning_crisis = True)
 
 ###Erica ACTION LABELS###
 label erica_intro_label(the_person):
@@ -1619,8 +1618,8 @@ label erica_money_problems_yoga_start_label(the_person):
     mc.name "Okay. I'm going to give your number to my HR director. She'll contact you to set up the final details. Her name is [mc.business.hr_director.name]."
     the_person "I'll look for it. I'm going to get back to my workout, thank you so much!"
     "After you finish up your conversation, you text [mc.business.hr_director.title], your HR director. Your give her [the_person.possessive_title] contact info."
-    $ the_person.set_alt_schedule(lobby, days = [1], times = [0])
-    $ mc.business.hr_director.set_alt_schedule(lobby, days = [1], times =[0])
+    $ the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
+    $ mc.business.hr_director.set_override_schedule(lobby, the_days = [1], the_times =[0])
     $ mc.business.add_mandatory_crisis(erica_yoga_event_intro)
     return
 
@@ -1721,8 +1720,8 @@ label erica_yoga_event_intro_label():
         erica_class_energy_increase(yoga_list)
 
         # make sure we set the schedule right (fixes room change)
-        the_person.set_alt_schedule(lobby, days = [1], times = [0])
-        yoga_assistant.set_alt_schedule(lobby, days = [1], times =[0])
+        the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
+        yoga_assistant.set_override_schedule(lobby, the_days = [1], the_times =[0])
 
         scene_manager.clear_scene()
         yoga_list = None
@@ -2101,8 +2100,8 @@ label erica_weekly_yoga_label(the_person):
         erica_class_energy_increase(yoga_list)
 
         # make sure we set the schedule right (fixes room change)
-        the_person.set_alt_schedule(lobby, days = [1], times = [0])
-        yoga_assistant.set_alt_schedule(lobby, days = [1], times =[0])
+        the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
+        yoga_assistant.set_override_schedule(lobby, the_days = [1], the_times =[0])
 
         scene_manager.clear_scene()
         yoga_list = None
@@ -2469,8 +2468,8 @@ label erica_post_photoshoot_label(the_person):
     mc.name "Nonsense. I'm just glad to see you reach your potential. Plus... the pics ARE really hot."
     "[the_person.title] gives you a playful punch on the shoulder."
     the_person "Was there anything else you needed?"
-    $ the_person.set_alt_schedule(lily_bedroom, days = [5], times = [4])
-    $ lily.set_alt_schedule(lily_bedroom, days = [5], times = [4])  #This should already be set, but just in case, make sure she is there.
+    $ the_person.set_override_schedule(lily_bedroom, the_days = [5], the_times = [4])
+    $ lily.set_override_schedule(lily_bedroom, the_days = [5], the_times = [4])  #This should already be set, but just in case, make sure she is there.
     $ erica.add_unique_on_room_enter_event(erica_pre_insta_love)
     $ erica.add_unique_on_room_enter_event(erica_lily_weekly_photoshoot)
     $ erica.event_triggers_dict["insta_pic_intro_complete"] = True

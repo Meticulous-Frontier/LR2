@@ -70,6 +70,7 @@ label alternative_start:
             purchase_policy(recruitment_skill_improvement_policy, ignore_cost = True)
             purchase_policy(business_size_1_policy, ignore_cost = True)
             purchase_policy(theoretical_research, ignore_cost = True)
+            purchase_policy(max_attention_increase_1_policy, ignore_cost = True)
 
     $ renpy.block_rollback()
     menu:

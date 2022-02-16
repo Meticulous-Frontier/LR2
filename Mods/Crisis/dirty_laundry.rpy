@@ -6,16 +6,12 @@
 # Low sluttiness they watch and touch themselves
 # Mid sluttiness they give MC a handjob with the panties in their hand
 # high sluttiness they put the panties on and have MC cum in the panties while they wear them
-
-init -1 python:
-    dirty_laundry_weight = 5
-
 init 2 python:
     def dirty_laundry_requirement():
         return mc_asleep()
 
     dirty_laundry_action = ActionMod("Dirty Laundry", dirty_laundry_requirement, "dirty_laundry_action_label",
-        menu_tooltip = "Start your laundry before bed", category = "Home", is_crisis = True, crisis_weight = dirty_laundry_weight)
+        menu_tooltip = "Start your laundry before bed", category = "Home", is_crisis = True)
 
 init 3 python:
     #Create Sleeping Outfits

@@ -4,10 +4,6 @@
 #At mid sluttiness you overhear them talking about guys/sex (learn new sexy opinions)
 #At mid-high sluttiness they are comparing assets
 #At high sluttiness you discover them fucking, option to join or observe
-
-init -1 python:
-    mom_sister_snooping_mod_weight = 5
-
 init 2 python:
     def mom_sister_snooping_requirement():
         if not day%7 == 5 and mc.is_home(): # not on saturday mornings
@@ -19,7 +15,7 @@ init 2 python:
         return
 
     mom_sister_snooping_action = ActionMod("Snooping on Mom and Lily", mom_sister_snooping_requirement,"mom_sister_snooping_action_label", initialization = mom_sister_snooping_initialization,
-        menu_tooltip = "You overhear something from the hallway.", category="Home", is_crisis = True, is_morning_crisis = True, crisis_weight = mom_sister_snooping_mod_weight)
+        menu_tooltip = "You overhear something from the hallway.", category="Home", is_crisis = True, is_morning_crisis = True)
 
 
 label mom_sister_snooping_action_label():

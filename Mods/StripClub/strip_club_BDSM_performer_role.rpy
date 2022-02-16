@@ -12,24 +12,31 @@ init 10 python:
         return
 
     def strip_club_bdsm_dildochair_MC_requirements(the_person):
-        if the_person.has_role(bdsm_performer_role):
+        if the_person.has_role(stripclub_bdsm_performer_role):
             if mc.location is bdsm_room:
                 return True
         return False
 
     def strip_club_bdsm_dildochair_Mistress_requirements(the_person):
-        if the_person.has_role(bdsm_performer_role):
+        if the_person.has_role(stripclub_bdsm_performer_role):
             if mc.location is bdsm_room:
                 if strip_club_get_mistress() in mc.location.people:
                     return True
         return False
+
+    def strip_club_hire_bdsm_performer():
+        stripclub_bdsm_performers.append(person)
+
+    def strip_club_fire_bdsm_performer(person):
+        if person in stripclub_bdsm_performers:
+            stripclub_bdsm_performers.remove(person)
 
     BDSM_performer_wardrobe = wardrobe_from_xml("BDSM_Wardrobe")
 
     strip_club_dildochair_MC_action = Action("Use the dildo chair {image=gui/heart/Time_Advance.png}", strip_club_bdsm_dildochair_MC_requirements, "strip_club_bdsm_dildochair_MC_label", menu_tooltip = "Use the dildo chair with your BDSM performer.")
     strip_club_dildochair_Mistress_action = Action("Mistress use the chair {image=gui/heart/Time_Advance.png}", strip_club_bdsm_dildochair_Mistress_requirements, "strip_club_bdsm_dildochair_Mistress_label", menu_tooltip = "Have the Mistress use the dildo chair with your BDSM performer.")
 
-    bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action, strip_club_dildochair_MC_action, strip_club_dildochair_Mistress_action], hidden = False)
+    stripclub_bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action, strip_club_dildochair_MC_action, strip_club_dildochair_Mistress_action], hidden = True)
 
     def strip_club_get_caged():
         caged = people_in_role(caged_role)

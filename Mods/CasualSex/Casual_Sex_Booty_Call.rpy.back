@@ -1,7 +1,4 @@
 ## Booty Call Crisis. Girl you are FWB with calls you for some casual sex.
-init -1 python:
-    booty_call_mod_weight = 5     # Set High for testing. TODO set lower after play testing
-
 init 3 python:
     #sports_bar = Room("bar", "Bar", [], room_background_image("bar_background.png"), [make_floor(), make_wall(), make_chair(), make_window()], [], [], True, [6,5], None, True)
     def casual_sex_booty_call_requirement():
@@ -19,7 +16,7 @@ init 3 python:
         return get_random_from_list(possible_people)
 
     casual_sex_booty_call = ActionMod("Booty Call", casual_sex_booty_call_requirement,"casual_sex_booty_call_label",
-        menu_tooltip = "A friend sends you a phone message", is_crisis = True, crisis_weight = booty_call_mod_weight)
+        menu_tooltip = "A friend sends you a phone message", is_crisis = True)
 
 label casual_sex_booty_call_label:
     $ the_person = get_casual_sex_booty_call_person()

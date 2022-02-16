@@ -22,9 +22,9 @@ init 1 python:
             mc.business.IT_increase_project_progress(amount = (the_person.int * 2) + (the_person.focus))
 
         if mc.business.IT_project_in_progress:
-            the_person.set_alt_schedule(mc.business.r_div, days = [0, 1, 2, 3, 4], times = [1,2,3])
+            the_person.set_override_schedule(mc.business.r_div, the_days = [0, 1, 2, 3, 4], the_times = [1,2,3])
         else:
-            the_person.set_alt_schedule(None, days = [0, 1, 2, 3, 4], times = [1,2,3])
+            the_person.set_override_schedule(None, the_days = [0, 1, 2, 3, 4], the_times = [1,2,3])
 
         return
 

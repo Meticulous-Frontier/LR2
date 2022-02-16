@@ -30,21 +30,19 @@ init 2 python:
 
         # init camilla role
         camilla_role = Role(role_name ="camilla", actions =[camilla_get_a_drink, camilla_go_dancing, camilla_take_pics, camilla_home_sex], hidden = True)
+        camilla_job = Job("Lifestyle Coach", camilla_role, mall, work_times = [1,2])
 
         #global camilla_role
         global camilla
         camilla = make_person(name = "Camilla", last_name ="Rojas", body_type = "thin_body", age = 34, face_style = "Face_2",  tits="D", height = 0.98, hair_colour="golden blonde", hair_style = braided_bun, skin="tan" , \
-            personality = introvert_personality, name_color = "#228b22", dial_color = "228b22", starting_wardrobe = camilla_wardrobe, \
+            personality = introvert_personality, name_color = "#228b22", dial_color = "228b22", starting_wardrobe = camilla_wardrobe, job = camilla_job, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
             forced_opinions = [["dancing", 2, True], ["fashion", 2, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
             forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False]])
 
         camilla.generate_home()
-        camilla.set_schedule(camilla.home, times = [0,4])
-        #camilla.set_schedule(downtown_bar, times = [2,3])  #Disabled for now
-        camilla.set_schedule(downtown_bar, times = [3])
-        camilla.set_schedule(mall, times = [1,2], days = [0, 1, 2, 3, 4])
+        camilla.set_schedule(downtown_bar, the_times = [3])
         camilla.home.add_person(camilla)
 
         camilla.event_triggers_dict["intro_complete"] = False    # True after first talk
@@ -70,7 +68,6 @@ init 2 python:
         # town_relationships.update_relationship(nora, camilla, "Friend")
         # town_relationships.update_relationship(lily, camilla, "Rival")
 
-        camilla.add_role(camilla_role)
         camilla.add_role(lifestyle_coach_role)
         camilla.add_unique_on_room_enter_event(lifestyle_coach_intro)
         return

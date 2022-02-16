@@ -37,7 +37,7 @@ init 2 python:
             forced_sexy_opinions = [["vaginal sex", 2, False], ["bareback sex", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -1, False], ["missionary style sex", 2, False], ["creampies", 2, False]])
 
         kaya.generate_home()
-        kaya.set_schedule(kaya.home, times = [0,1,2,3,4])
+        kaya.set_schedule(kaya.home, the_times = [0,1,2,3,4])
         kaya.home.add_person(kaya)
 
         kaya.event_triggers_dict["intro_complete"] = False    # True after first talk
@@ -63,7 +63,6 @@ init 2 python:
         if persistent.pregnancy_pref != 0:
             kaya.on_birth_control = False
 
-        kaya.add_role(kaya_role)
         return
 
 
@@ -124,7 +123,7 @@ init -2 python:
 
 
     def kaya_uni_scholarship_intro_requirement(the_person):
-        if the_person.love > 40 and mc.business.funds > 10000 and the_person.location == university and day%7 < 4:
+        if the_person.love > 40 and mc.business.has_funds(10000) and the_person.location == university and day%7 < 4:
             return True
         return False
 
@@ -203,10 +202,12 @@ init 3 python:
 
 
 label kaya_setup_intro_event_label():
-    $ the_person = kaya
-    $ kaya.set_schedule(coffee_shop, days = [0, 1, 2, 3, 4], times = [2,3])    #TODO make this the coffee shop
-    $ kaya.set_schedule(university, days = [0, 1, 2, 3, 4], times = [1])
-    $ kaya.add_unique_on_room_enter_event(kaya_intro)
+    python:
+        kaya_barista_job = Job("Barista", kaya_role, coffee_shop, work_times = [2, 3])
+        kaya.add_job(kaya_barista_job)
+        # she also studies
+        kaya.set_schedule(university, the_days = [0, 1, 2, 3, 4], the_times = [1])
+        kaya.add_unique_on_room_enter_event(kaya_intro)
     return
 
 label kaya_intro_label(the_person):
@@ -620,8 +621,8 @@ label kaya_lily_study_night_intro_label():
         $ mom.change_happiness(-5)
     $ scene_manager.clear_scene()
     "Alone in the kitchen, you are left with more questions than answers. As you walk down the hall back to your bedroom, you hear the girls in [lily.title]'s room, but decide to leave them alone."
-    $ the_person.set_alt_schedule(lily_bedroom, days = [1], times = [4])
-    $ lily.set_alt_schedule(lily_bedroom, days = [1], times = [4])  #This should already be set, but just in case, make sure she is there.
+    $ the_person.set_override_schedule(lily_bedroom, the_days = [1], the_times = [4])
+    $ lily.set_override_schedule(lily_bedroom, the_days = [1], the_times = [4])  #This should already be set, but just in case, make sure she is there.
     $ kaya.add_unique_on_room_enter_event(kaya_lily_study_night_recurring)
     $ kaya.add_unique_on_talk_event(kaya_lily_study_night_apology)
     $ kaya.add_unique_on_talk_event(kaya_uni_scholarship_intro)
@@ -907,7 +908,7 @@ label kaya_moving_in_with_mother_intro_label(the_person): #This label is called 
     $ kaya.event_triggers_dict["move_help_day"] = day + 7
     $ kaya.event_triggers_dict["can_get_drinks"] = False
     $ kaya.event_triggers_dict["studies_with_lily"] = False
-    $ the_person.set_alt_schedule(None, days = [1], times = [4])
+    $ the_person.set_override_schedule(None, the_days = [1], the_times = [4])
     return
 
 label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal. Something like a week later? Maybe less?
@@ -1309,7 +1310,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     $ mc.location.show_background()
     # set kaya living with her mom
     $ kaya.home = sakari.home
-    $ kaya.set_schedule(the_location = sakari.home, times = [0,4])
+    $ kaya.set_schedule(the_location = sakari.home, the_times = [0,4])
     $ kaya.event_triggers_dict["mc_knows_relation"] = True
     "You leave the apartment and just walk for a while. You have a lot to think about."
     "This information... there's no way that [the_person.title] knows about it. You HAVE to talk to her about it."
@@ -1547,12 +1548,12 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     "For now, there is no rush to reveal everything to them. You decide to take your time, think about it, and wait until the time is right to have those conversations."
     #TODO find some way to drop a hint here that the best way to continue the storyline is to invite Kaya over for a sleepover date.
     "NOTE: This is the end of Kaya's story content in this build."
-    #Adding on talk events to jennifer and lily that are currently blank, so that in the future when the mod updates we can write those scenes and include save game compatability.
+    #Adding on talk events to jennifer and lily that are currently blank, so that in the future when the mod updates we can write those scenes and include save game compatibility.
     $ mom.add_unique_on_talk_event(kaya_jennifer_reveal)
     $ lily.add_unique_on_talk_event(kaya_lily_reveal)
     $ kaya.add_unique_on_talk_event(kaya_barista_fuck_intro)
     $ sakari.add_unique_on_room_enter_event(sakari_intro)
-    $ sakari.set_schedule(clothing_store, days = [0, 1, 2, 3, 4], times = [1])
+    $ sakari.set_schedule(clothing_store, the_days = [0, 1, 2, 3, 4], the_times = [1])
     return
 
 label kaya_jennifer_reveal_label(the_person):

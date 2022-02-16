@@ -15,7 +15,8 @@ init 2 python:
         start_time = time.time()
         candidates = []
         for x in __builtin__.range(0, count): #NOTE: count is given +1 because the screen tries to pre-calculate the result of button presses. This leads to index out-of-bounds, unless we pad it with an extra character (who will not be reached).
-            candidates.append(make_person())
+            requirements = mc.business.generate_candidate_requirements()
+            candidates.append(make_person(**requirements))
 
         reveal_count = 0
         reveal_sex = False
@@ -54,7 +55,7 @@ label interview_action_description_enhanced:
             $ clear_scene()
 
             $ candidates = interview_build_candidates_list(count)
-            call hire_select_process(candidates + [1]) from _call_hire_select_process_interview_action_enhanced
+            call hire_select_process(candidates) from _call_hire_select_process_interview_action_enhanced
 
             if not _return == "None":
                 $ new_person = _return

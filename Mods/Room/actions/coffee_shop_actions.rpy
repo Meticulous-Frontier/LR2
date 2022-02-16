@@ -1,14 +1,14 @@
 init -1 python:
-   def coffee_shop_get_coffee_requirement(): # Leave this in
-      if time_of_day == 4: # Can be removed
-          return "Closed for the night"
-      elif mc.business.funds < 5: # $40 per session.
-          return "Requires: $5"
-      else:
-          return True
+    def coffee_shop_get_coffee_requirement(): # Leave this in
+        if time_of_day == 4: # Can be removed
+            return "Closed for the night"
+        elif not mc.business.has_funds(5): # $40 per session.
+            return "Requires: $5"
+        else:
+            return True
 
-   # actions available from entry point action
-   coffee_shop_get_coffee_action = Action("Order a coffee", coffee_shop_get_coffee_requirement, "coffee_shop_get_coffee_label", menu_tooltip = "Restore some energy with a hot coffee")
+    # actions available from entry point action
+    coffee_shop_get_coffee_action = Action("Order a coffee", coffee_shop_get_coffee_requirement, "coffee_shop_get_coffee_label", menu_tooltip = "Restore some energy with a hot coffee")
 
 label  coffee_shop_get_coffee_label():
     if kaya.location == coffee_shop:

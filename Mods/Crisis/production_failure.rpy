@@ -1,7 +1,4 @@
 ## Production Failure Crisis Mod by Tristimdorion
-init -1 python:
-    production_failure_weight = 5
-
 init 2 python:
     def production_failure_requirement():
         if not mc.business.is_weekend():
@@ -40,7 +37,7 @@ init 2 python:
         return
 
     production_failure_action = ActionMod("Production Failure", production_failure_requirement, "production_failure_action_label",
-        menu_tooltip = "An accident during research / production causes some issues.", category = "Business", is_crisis = True, crisis_weight = production_failure_weight)
+        menu_tooltip = "An accident during research / production causes some issues.", category = "Business", is_crisis = True)
 
 
 label production_failure_action_label:

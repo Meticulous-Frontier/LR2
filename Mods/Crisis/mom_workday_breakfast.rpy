@@ -4,10 +4,6 @@
 #At mid sluttiness, MC can tell Jennifer she should try going to work without underwear on, try and get attention from men that way.
 #At high sluttiness, Jennifer asks MC to cum on/in her so she can feel it throughout the day.
 #Fetish options: for Anal, Jennifer asks for anal, for cum fetish, you cum on/in her as appropriate, and for vaginal, she asks for creampie.
-
-init -1 python:
-    mom_breakfast_mod_weight = 5
-
 init 2 python:
     def mom_breakfast_crisis_requirement():
         if mc.is_home() and mc.business.is_work_day():
@@ -24,7 +20,7 @@ init 2 python:
         return
 
     mom_breakfast_crisis_action = ActionMod("Breakfast with Mom", mom_breakfast_crisis_requirement,"mom_breakfast_action_label", initialization = mom_breakfast_mod_initialization,
-        menu_tooltip = "You have breakfast with Mom before she goes to work..", category="Home", is_crisis = True, is_morning_crisis = True, crisis_weight = mom_breakfast_mod_weight)
+        menu_tooltip = "You have breakfast with Mom before she goes to work..", category="Home", is_crisis = True, is_morning_crisis = True)
 
     mom_commando_day_selfie_action = Action("Mom Commando Selfie", mom_commando_day_selfie_requirement, "mom_commando_day_selfie_label")
 

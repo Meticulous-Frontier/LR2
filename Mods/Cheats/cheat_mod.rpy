@@ -191,7 +191,6 @@ screen cheat_menu():
         "Salary": ["salary", "salary", 1, 6, (0, 200)],
 
         "Max Employees": ["max_employee_count", "max_employee_count", 5, 5, (5, 80)],
-        "Production Lines": ["production_lines", "production_lines", 1, 6, (1, 10)],
         "Serum Batch Size": ["batch_size", "batch_size", 1, 7, (1, 20)],
         "Research Tier": ["research_tier", "research_tier", 1, 8, (0, 4)]
         }

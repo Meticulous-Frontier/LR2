@@ -1,8 +1,5 @@
 ## Lazy Morning Crisis Mod by Starbuck
 
-init -1 python:
-    lazy_morning_mod_weight = 7 #Higher weight since it only occurs on weekends.
-
 init 2 python:
     def lazy_morning_crisis_requirement():
         if mc.is_home() and mc.business.is_weekend():
@@ -14,7 +11,7 @@ init 2 python:
         return
     #
     # lazy_morning_crisis_action = ActionMod("Lazy Morning", lazy_morning_crisis_requirement,"lazy_morning_crisis_action_label", initialization = lazy_morning_mod_initialization,
-    #     menu_tooltip = "You sleep in.", category="Home", is_crisis = True, is_morning_crisis = True, crisis_weight = lazy_morning_mod_weight)
+    #     menu_tooltip = "You sleep in.", category="Home", is_crisis = True, is_morning_crisis = True)
         #TODO this is disabled for now.
 label lazy_morning_crisis_action_label:
 

@@ -18,7 +18,7 @@ init -2 style serum_text_style: # Cheat Text Style
     xalign 0.5
 
 init 2:
-    screen serum_trade_ui(inventory_1,inventory_2,name_1="Player",name_2="Business"): #Lets you trade serums back and forth between two different inventories. Inventory 1 is assumed to be the players.
+    screen serum_trade_ui(inventory_1,inventory_2,name_1="Player",name_2="Business", trade_requirement = None, hide_instead = False, inventory_2_max = -1): #Lets you trade serums back and forth between two different inventories. Inventory 1 is assumed to be the players.
         add "Science_Menu_Background.png"
 
         frame:
@@ -51,6 +51,13 @@ init 2:
 
                                 for serum in set(inventory_1.get_serum_type_list()) | set(inventory_2.get_serum_type_list()): #Gets a unique entry for each serum design that shows up in either list. Doesn't duplicate if it's in both.
                                     # has a few things. 1) name of serum design. 2) count of first inventory, 3) arrows for transfering, 4) count of second inventory.
+                                    $ trade_sensitive = True
+                                    if trade_requirement:
+                                        $ trade_sensitive = trade_requirement(serum)
+
+                                    $ move_all_amount = inventory_1.get_serum_count(serum)
+                                    if inventory_2_max >= 0 and move_all_amount + inventory_2.get_any_serum_count() > inventory_2_max:
+                                        $ move_all_amount =inventory_2_max - inventory_2.get_any_serum_count()
 
                                     vbox:
                                         textbutton serum.name:
@@ -69,9 +76,9 @@ init 2:
 
                                             null width 10
 
-                                            textbutton "|<" action [Function(inventory_1.change_serum,serum,inventory_2.get_serum_count(serum)),Function(inventory_2.change_serum,serum,-inventory_2.get_serum_count(serum))] sensitive (inventory_2.get_serum_count(serum) > 0) style "textbutton_no_padding_highlight" text_style "serum_text_style"
-                                            textbutton "<<" action [Function(inventory_1.change_serum,serum,10),Function(inventory_2.change_serum,serum,-10)] sensitive (inventory_2.get_serum_count(serum) > 9) style "textbutton_no_padding_highlight" text_style "serum_text_style"
-                                            textbutton "<" action [Function(inventory_1.change_serum,serum, serum_transfer_amount),Function(inventory_2.change_serum,serum, -serum_transfer_amount)] sensitive (inventory_2.get_serum_count(serum) > serum_transfer_amount - 1) style "textbutton_no_padding_highlight" text_style "serum_text_style"
+                                            textbutton "|<" action [Function(inventory_1.change_serum,serum,inventory_2.get_serum_count(serum)),Function(inventory_2.change_serum,serum,-inventory_2.get_serum_count(serum))] sensitive (inventory_2.get_serum_count(serum) > 0) and trade_sensitive style "textbutton_no_padding_highlight" text_style "serum_text_style"
+                                            textbutton "<<" action [Function(inventory_1.change_serum,serum,10),Function(inventory_2.change_serum,serum,-10)] sensitive (inventory_2.get_serum_count(serum) > 9) and trade_sensitive style "textbutton_no_padding_highlight" text_style "serum_text_style"
+                                            textbutton "<" action [Function(inventory_1.change_serum,serum, serum_transfer_amount),Function(inventory_2.change_serum,serum, -serum_transfer_amount)] sensitive (inventory_2.get_serum_count(serum) > serum_transfer_amount - 1) and trade_sensitive style "textbutton_no_padding_highlight" text_style "serum_text_style"
 
                                             null width 10
                                             button:
@@ -93,9 +100,9 @@ init 2:
 
                                             null width 10
 
-                                            textbutton ">" action [Function(inventory_2.change_serum,serum, serum_transfer_amount),Function(inventory_1.change_serum,serum,-serum_transfer_amount)] sensitive (inventory_1.get_serum_count(serum) > serum_transfer_amount - 1) style "textbutton_no_padding_highlight" text_style "serum_text_style"
-                                            textbutton ">>" action [Function(inventory_2.change_serum,serum,10),Function(inventory_1.change_serum,serum,-10)] sensitive (inventory_1.get_serum_count(serum) > 9) style "textbutton_no_padding_highlight" text_style "serum_text_style"
-                                            textbutton ">|" action [Function(inventory_2.change_serum,serum,inventory_1.get_serum_count(serum)),Function(inventory_1.change_serum,serum,-inventory_1.get_serum_count(serum))] sensitive (inventory_1.get_serum_count(serum) > 0) style "textbutton_no_padding_highlight" text_style "serum_text_style"
+                                            textbutton ">" action [Function(inventory_2.change_serum,serum, serum_transfer_amount),Function(inventory_1.change_serum,serum,-serum_transfer_amount)] sensitive (inventory_1.get_serum_count(serum) > serum_transfer_amount - 1) and trade_sensitive style "textbutton_no_padding_highlight" text_style "serum_text_style"
+                                            textbutton ">>" action [Function(inventory_2.change_serum,serum,10),Function(inventory_1.change_serum,serum,-10)] sensitive (inventory_1.get_serum_count(serum) > 9) and trade_sensitive style "textbutton_no_padding_highlight" text_style "serum_text_style"
+                                            textbutton ">|" action [Function(inventory_2.change_serum,serum, move_all_amount),Function(inventory_1.change_serum,serum,-move_all_amount)] sensitive (move_all_amount > 0) and trade_sensitive style "textbutton_no_padding_highlight" text_style "serum_text_style"
 
                                             null width 10
 
@@ -113,5 +120,8 @@ init 2:
                 align [0.5,0.5]
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
-                action [Return(), Hide("serum_tooltip")]
+                if hide_instead:
+                    action [Hide("serum_trade_ui"), Hide("serum_tooltip")]
+                else:
+                    action [Return(), Hide("serum_tooltip")]
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"

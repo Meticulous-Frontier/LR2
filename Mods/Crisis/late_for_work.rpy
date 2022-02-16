@@ -1,7 +1,4 @@
 ## Late for Work Crisis Mod by Tristimdorion
-init -1 python:
-    late_for_work_weight = 10   # Increase weight because it only occurs in one timeslot.
-
 init 2 python:
     def late_for_work_requirement():
         if time_of_day <= 1 and mc.business.get_employee_count() > 2:
@@ -10,7 +7,7 @@ init 2 python:
         return False
 
     late_for_work_action = ActionMod("Late for Work", late_for_work_requirement, "late_for_work_action_label",
-        menu_tooltip = "An employee is late for work.", category = "Business", is_crisis = True, crisis_weight = late_for_work_weight)
+        menu_tooltip = "An employee is late for work.", category = "Business", is_crisis = True)
 
 label late_for_work_action_label:
     #Lets get the girl of interest (exclude Sarah on mondays).

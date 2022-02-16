@@ -1,9 +1,5 @@
 #This is a crisis series for changing company restrooms to unisex. As the girls in the company get sluttier and sluttier, the crisis changes to reflect the corrupted nature.
 #At first, you may only over hear conversations. Then girls talking about sexual fantasies, then gloryhole options.
-
-init -1 python:
-    unisex_restroom_mod_weight = 8
-
 init 1301 python:
 
     def unisex_bathroom_creation_requirement():
@@ -82,7 +78,7 @@ init 2 python:
         return anon_person
 
     unisex_restroom_crisis_action = ActionMod("Unisex Restroom", unisex_restroom_crisis_requirement,"unisex_restroom_action_label",
-        menu_tooltip = "Change company restrooms the unisex and enjoy the results.", category="Business", is_crisis = True, crisis_weight = unisex_restroom_mod_weight)
+        menu_tooltip = "Change company restrooms the unisex and enjoy the results.", category="Business", is_crisis = True)
 
 label unisex_restroom_action_label():
     if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) == 0:  #unisex restroom not yet created. Go to suggestion label

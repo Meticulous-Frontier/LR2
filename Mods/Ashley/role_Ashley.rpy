@@ -21,7 +21,7 @@ init 2 python:
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 2, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -1, False], ["public sex", -1, False]])
 
-        ashley.set_schedule(stephanie.home, times = [0,1,2,3,4])
+        ashley.set_schedule(stephanie.home, the_days=[0,1,2,3,4,5,6], the_times = [0,1,2,3,4])
         ashley.home = stephanie.home
         ashley.home.add_person(ashley)
 
@@ -296,7 +296,7 @@ label ashley_intro_label():
         $ the_person.change_obedience(5)
         the_person "Oh! I didn't think you would say yes. This is great news! I'm sure she'll probably want to get started right away!"
 
-        $ mc.business.hire_person(ashley, "Production")
+        $ mc.business.add_employee_production(ashley)
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
         "As you finish up, you notice [the_person.possessive_title] is already calling her sister with the news."
@@ -330,7 +330,7 @@ label ashley_hire_directed_label():
         $ the_person.change_obedience(5)
         the_person "Oh! This is great news! I'm sure she'll probably want to get started right away!"
         $ remove_ashley_hire_later_action()
-        $ mc.business.hire_person(ashley, "Production")
+        $ mc.business.add_employee_production(ashley)
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
         "As you finish up and start to leave, you notice [the_person.possessive_title] is already calling her sister with the news."
@@ -948,8 +948,8 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         the_person "Thank you for this chat. I feel better knowing what is going on with you two. Now... I think I'll get back to work?"
         "[the_person.title] turns and leaves your office. Things got a little sticky there, but you feel like you are now in the clear to pursue things with [ashley.title] from now on."
     $ clear_scene()
-    $ stephanie.set_alt_schedule(coffee_shop, days = [6], times = [0])
-    $ ashley.set_alt_schedule(coffee_shop, days = [6], times = [0])
+    $ stephanie.set_schedule(coffee_shop, the_days = [6], the_times = [0])
+    $ ashley.set_schedule(coffee_shop, the_days = [6], the_times = [0])
     $ ashley.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_intro)
     call advance_time from _call_advance_ashley_arrangement_01
     return
@@ -1039,13 +1039,13 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
         stephanie "That's what she said!"
         "The girls are laughing at [stephanie.possessive_title]'s joke as you head up to the counter and order the coffees."
     # TODO: add serums to coffees here
-    $ mc.business.funds -= 15
+    $ mc.business.change_funds(-15)
     if the_person.is_girlfriend():
         "As you wait for your coffees to get made, you spot a yummy looking blueberry muffin. You decide to get it to share with [the_person.title]."
-        $ mc.business.funds -= 5
+        $ mc.business.change_funds(-5)
     elif stephanie.is_girlfriend():
         "As you wait for your coffees to get made, you spot a yummy looking blueberry muffin. You decide to get it to share with [stephanie.title]."
-        $ mc.business.funds -= 5
+        $ mc.business.change_funds(-5)
     "You walk back to the table and give the girls their coffee."
     if the_person.is_girlfriend():
         the_person "Ohh, that looks good..."
@@ -2173,7 +2173,7 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
             the_person "I think I'm gonna go over to the mall this afternoon and try some stuff on. I could use a new outfit!"
             "Hmm, maybe you should swing by the mall later and help [the_person.title] go clothes shopping?"
             $ ashley_set_observed_outfit(bystander.outfit)
-            $ ashley.set_alt_schedule(clothing_store, days = [6], times = [2])
+            $ ashley.set_override_schedule(clothing_store, the_days = [6], the_times = [2])
             $ ashley.add_unique_on_room_enter_event(ashley_clothes_shopping)
         "No":
             the_person "Ahh..."
@@ -2185,6 +2185,7 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
     return
 
 label ashley_clothes_shopping_label(the_person):
+    $ ashley.set_override_schedule(None, the_days = [6], the_times = [2])
     "You decide to swing by the clothing store, where [the_person.title] said she would be at. After a few awkward minutes poking around the women's clothing, you spot her."
     $ the_person.draw_person()
     "She seems preoccupied and doesn't notice you until you walk up."

@@ -62,7 +62,7 @@ init 2 python:
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -2, False], ["giving blowjobs", -2, False], ["public sex", 2, False]])   #random_lists.rpy for list of sexy and normal opinions
 
         TEMPLATE.generate_home()                                    #Omit this if girl lives with someone else
-        TEMPLATE.set_schedule(TEMPLATE.home, times = [0,1,2,3,4])   #Hide TEMPLATE at home until we are ready to use her
+        TEMPLATE.set_schedule(TEMPLATE.home, the_times = [0,1,2,3,4])   #Hide TEMPLATE at home until we are ready to use her
                                                                     #Any unused times, girl will wander public areas during those time slots.
         TEMPLATE.home.add_person(TEMPLATE)                          #Need to add her to the world or MC will not encounter her.
 

@@ -12,12 +12,14 @@ init 10 python: # add to stack later then other mods
 init 2 python:
     # This will be called in game when a person is created original function in script.rpy
     def make_person(name = None, last_name = None, age = None, body_type = None, face_style = None, tits = None, height = None,
-        hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, tan_style = None, eyes = None, job = None,
+        hair_colour = None, hair_style = None, pubes_colour = None, pubes_style = None, skin = None, eyes = None, job = None,
         personality = None, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = None, stat_array = None, skill_array = None, sex_array = None,
-        start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None, start_suggest = None,
+        start_sluttiness = None, start_obedience = None, start_happiness = None, start_love = None, start_home = None,
         title = None, possessive_title = None, mc_title = None, relationship = None, kids = None, SO_name = None, base_outfit = None,
         generate_insta = None, generate_dikdok = None, generate_onlyfans = None,
-        force_random = False, forced_opinions = None, forced_sexy_opinions = None):
+        bonus_kids = 0, bonus_sluttiness = 0, bonus_obedience = 0, bonus_happiness = 0, bonus_suggest = 0, bonus_love = 0,
+        stat_cap = 5, skill_cap = 5, age_floor = 18, age_ceiling = 50,
+        tan_style = None, force_random = False, forced_opinions = None, forced_sexy_opinions = None):
 
         return_character = None
         if not force_random and renpy.random.randint(1,100) < 20:
@@ -45,6 +47,9 @@ init 2 python:
             else:
                 relationship = get_random_from_weighted_list([["Single", 80 - age], ["Girlfriend", 100 - age], ["Fiancée", age * 3], ["Married", age * 4]])
 
+        if personality is None:
+            personality = get_random_personality()
+
         if kids is None:
             kids = 0
             if relationship == "Single":
@@ -68,6 +73,20 @@ init 2 python:
         if mc_title is None:
             mc_title = "Stranger"
 
+        if not bonus_suggest:
+            bonus_suggest = renpy.random.randint(5, 15)
+
+            if personality.base_personality_prefix == wild_personality.personality_type_prefix:
+                bonus_suggest += 5
+            elif personality.base_personality_prefix == bimbo_personality.personality_type_prefix:
+                bonus_suggest += 10
+            elif personality.base_personality_prefix == relaxed_personality.personality_type_prefix:
+                bonus_suggest += 3
+            elif personality.base_personality_prefix == reserved_personality.personality_type_prefix:
+                bonus_suggest -= 3
+            elif personality.base_personality_prefix == introvert_personality.personality_type_prefix:
+                bonus_suggest -= 5
+
         if return_character is None: #Either we aren't getting a pre-made, or we are out of them.
             # Use larger height range of person object (not full)
             return_character = create_random_person(name = name, last_name = last_name, age = age, body_type = body_type, face_style = face_style, tits = tits, height = height,
@@ -75,24 +94,9 @@ init 2 python:
                 personality = personality, custom_font = custom_font, name_color = name_color, dial_color = dial_color, starting_wardrobe = starting_wardrobe, stat_array = stat_array, skill_array = skill_array, sex_array = sex_array,
                 start_sluttiness = start_sluttiness, start_obedience = start_obedience, start_happiness = start_happiness, start_love = start_love, start_home = start_home,
                 title = title, possessive_title = possessive_title, mc_title = mc_title, relationship = relationship, kids = kids, SO_name = SO_name, base_outfit = base_outfit,
-                generate_insta = generate_insta, generate_dikdok = generate_dikdok, generate_onlyfans = generate_onlyfans)
-
-        # initialize start suggestibility
-        if return_character.suggestibility == 0:
-            start_suggest = renpy.random.randint(5, 15)
-
-            if return_character.personality.base_personality_prefix == wild_personality.personality_type_prefix:
-                start_suggest += 5
-            elif return_character.personality.base_personality_prefix == bimbo_personality.personality_type_prefix:
-                start_suggest += 10
-            elif return_character.personality.base_personality_prefix == relaxed_personality.personality_type_prefix:
-                start_suggest += 3
-            elif return_character.personality.base_personality_prefix == reserved_personality.personality_type_prefix:
-                start_suggest -= 3
-            elif return_character.personality.base_personality_prefix == introvert_personality.personality_type_prefix:
-                start_suggest -= 5
-
-            return_character.change_suggest(start_suggest, add_to_log = False)
+                generate_insta = generate_insta, generate_dikdok = generate_dikdok, generate_onlyfans = generate_onlyfans,
+                bonus_kids = bonus_kids, bonus_sluttiness = bonus_sluttiness, bonus_obedience = bonus_obedience, bonus_happiness = bonus_happiness, bonus_suggest = bonus_suggest, bonus_love = bonus_love,
+                stat_cap = stat_cap, skill_cap = skill_cap, age_floor = age_floor, age_ceiling = age_ceiling)
 
         if tan_style is None:
             if renpy.random.randint(0, 1) == 1: # 50% chance on random tan (could be no_tan)
@@ -364,8 +368,8 @@ init 2 python:
         if not "Schedule" in globals():
             return
 
-        person.set_alt_schedule(None, times = [4])
-        if person.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]) or person in stripclub_strippers:
+        person.set_override_schedule(None, the_times = [4])
+        if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]) or person in stripclub_strippers:
             return  # no party for the working girls
         if person.pregnancy_is_visible():
             return  # no party for girls who already show the baby bump
@@ -373,19 +377,19 @@ init 2 python:
         count = 0
         party_destinations = get_party_destinations()
         if person.get_opinion_score("Mondays") > 0:
-            person.alt_schedule[0][4] = get_random_from_list(party_destinations)
+            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [0], the_times=[4])
             count += 1
         if person.get_opinion_score("Fridays") > 0:
-            person.alt_schedule[4][4] = get_random_from_list(party_destinations)
+            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [4], the_times=[4])
             count += 1
         if person.get_opinion_score("the weekend") > 0:
-            person.alt_schedule[5][4] = get_random_from_list(party_destinations)
-            person.alt_schedule[6][4] = get_random_from_list(party_destinations)
+            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [5], the_times=[4])
+            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [6], the_times=[4])
             count += 2
 
         while count < 2:
             rnd_day = renpy.random.randint(0, 6)
-            person.alt_schedule[rnd_day][4] = get_random_from_list(party_destinations)
+            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [rnd_day], the_times=[4])
             count += 1
         return
 
@@ -436,7 +440,10 @@ init 2 python:
         return person
 
     def create_stripper():
-        person = make_person(start_sluttiness = renpy.random.randint(15,30), force_random = True, forced_opinions = [
+        person = make_person(start_sluttiness = renpy.random.randint(15,30),
+            job = stripper_job,
+            force_random = True,
+            forced_opinions = [
                 ["skimpy outfits", 2, True],
                 ["high heels", 2, True],
             ], forced_sexy_opinions = [
@@ -554,14 +561,13 @@ init 2 python:
         return
 
     def update_stripclub_strippers():
-        for person in stripclub_strippers:
+        # create new set of stripper characters
+        for person in stripclub_strippers[:]:   #use copy of array
+            person.quit_job()
             person.remove_person_from_game()
-        stripclub_strippers.clear()
 
         for i in __builtin__.range(0,4):
             person = create_stripper()
-            person.set_schedule(strip_club, times = [3,4])
-            stripclub_strippers.append(person)
 
         # make sure one of the strippers an alpha-personality (simplifies stripclub story-line)
         alpha_stripper = get_random_from_list([x for x in stripclub_strippers if x.age >= 25 and not x.personality == alpha_personality])
@@ -581,7 +587,7 @@ init 2 python:
                     mc.main_character_actions.append(action)
 
             # cleanup (remove next version)
-            found = next((x for x in mc.main_character_actions if x.effect == "mc_ask_take_serum_label"), None)
+            found = next((x for x in mc.main_character_actions if x.effect in ["mc_hire_person_label", "mc_pay_to_strip_label"]), None)
             if found:
                 mc.main_character_actions.remove(found)
         return

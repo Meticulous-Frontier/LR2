@@ -41,9 +41,11 @@ init 2:
                     $ mc.business.listener_system.fire_event("side_money", count = starbuck.calc_investment_return())
                     text ("Profit" if profit > 0 else "Loss") + ": $ " + str(__builtin__.round(abs(profit), 2))  style "textbutton_text_style" size 26 color ("#00A000" if profit > 0 else "#A00000")
                     text "     " + "Sales Made: $ " + str(__builtin__.round(mc.business.sales_made, 2)) style "textbutton_text_style"
-                    text "     " + "Daily Salary Paid: $ " + str(__builtin__.round(salary_costs, 2)) style "textbutton_text_style"
+                    if mc.business.is_work_day():
+                        text "     " + "Daily Salary Paid: $ " + str(__builtin__.round(salary_costs, 2)) style "textbutton_text_style"
+                        text "     " + "Daily Operating Costs: $" + str(mc.business.operating_costs) style "textbutton_text_style"
                     text "     " + "Serums Sold Today: " + str(mc.business.serums_sold) + " Vials" style "textbutton_text_style"
-                    text "     " + "Serums Ready for Sale: " + str(mc.business.sale_inventory.get_any_serum_count()) + " Vials" style "textbutton_text_style"
+                    text "     " + "Serums Ready for Sale: " + str(mc.business.inventory.get_any_serum_count()) + " Vials" style "textbutton_text_style"
 
         frame:
             background "#1a45a1aa"

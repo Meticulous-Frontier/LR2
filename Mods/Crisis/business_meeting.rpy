@@ -1,7 +1,4 @@
 ## Business Meeting Crisis Mod by Tristimdorion
-init -1 python:
-    business_meeting_weight = 5
-
 init 2 python:
     def business_meeting_requirement():
         if not mc.business.is_weekend():
@@ -17,7 +14,7 @@ init 2 python:
         return
 
     business_meeting_action = ActionMod("Business Meeting", business_meeting_requirement, "business_meeting_action_label",
-        menu_tooltip = "An employee wants to discuss some business with you.", category = "Business", is_crisis = True, crisis_weight = business_meeting_weight)
+        menu_tooltip = "An employee wants to discuss some business with you.", category = "Business", is_crisis = True)
 
 label business_meeting_action_label:
     $ the_person = get_random_employees(1)

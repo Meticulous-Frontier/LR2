@@ -19,7 +19,7 @@ init 2 python:
         return get_random_from_list(valid_people_list) #Pick someone appropriate from the company.
 
     hire_mother_work_crisis = ActionMod("Mother Work Crisis", hire_mother_work_crisis_requirement,"hire_mother_work_crisis_label",
-        menu_tooltip = "Allow you to hire the mothers of girls working for you.", category = "Business", is_crisis = True, crisis_weight = 0) # set to 0 (disabled), changes when Sarah puts up sign
+        menu_tooltip = "Allow you to hire the mothers of girls working for you.", category = "Business", is_crisis = True)
 
 
 label hire_mother_work_crisis_label():

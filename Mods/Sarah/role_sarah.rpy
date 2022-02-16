@@ -64,7 +64,7 @@ init 2 python:
             ])
 
         sarah.generate_home()
-        sarah.set_schedule(sarah.home, times = [1,2,3])
+        sarah.set_schedule(sarah.home, the_times = [1,2,3])
         sarah.home.add_person(sarah)
 
         sarah.event_triggers_dict["yoga_voyeur"] = False
@@ -428,7 +428,8 @@ init 2 python:
 
     def add_naomi_reconciliation_action():
         # make her free roaming so you can run into her.
-        naomi.set_schedule(None, days=[0,1,2,3,4,5,6], times=[1,2,3])
+        naomi.add_job(unemployed_job)
+        naomi.set_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[1,2,3])
 
         naomi_reconciliation_action = Action("Naomi reconciliation", naomi_reconciliation_requirement, "Sarah_naomi_reconciliation_label")
         naomi.add_unique_on_room_enter_event(naomi_reconciliation_action)
@@ -498,7 +499,7 @@ init 2 python:
         naomi.set_mc_title(mc.name)
         naomi.set_possessive_title(get_random_possessive_title(the_person))
         # hide her from player until she is reintroduced into the story
-        naomi.set_schedule(naomi.home, days=[0, 1, 2, 3, 4, 5, 6], times =[0,1,2,3,4])
+        naomi.set_schedule(naomi.home, the_days=[0, 1, 2, 3, 4, 5, 6], the_times =[0,1,2,3,4])
         sarah.event_triggers_dict["bar_friend"] = naomi.identifier
         town_relationships.update_relationship(sarah, naomi, "Best Friend")
         unique_character_list.append(naomi) # add her to the unique character list for later story line
@@ -509,6 +510,8 @@ label Sarah_intro_label():
     $ the_person = sarah
     "*DING DONG*"
     "You hear the doorbell ring. You don't remember expecting anyone? You go and answer it."
+    $ mc.change_location(hall)
+    $ mc.location.show_background()
     $ the_person.draw_person()
     "Standing at your door is a cute brunette, fairly short, and strikingly familiar..."
     "She appears to be holding some kind of clipboard. A door to door saleswoman? Do those still exist?"
@@ -583,12 +586,12 @@ label Sarah_intro_label():
             the_person "Thanks... well, it was good seeing you. I'd better keep at it."
             "You say goodbye to [the_person.title]. If you want to hire an HR director, you will need to create the position via the policy menu."
             $ sarah.event_triggers_dict["rejected"] = True
-            $ sarah.set_schedule(None, times = [1,2,3])   # make her a free roaming character
+            $ sarah.set_schedule(None, the_times = [1,2,3])   # make her a free roaming character
             $ sarah.event_triggers_dict["alt_hire"] = True
 
     # make her a free roaming character
-    $ sarah.set_schedule(None, times = [1, 2, 3])
-    $ sarah.set_schedule(gym, days = [5,6], times = [1])    #She tries to stay in shape
+    $ sarah.set_schedule(None, the_times = [1, 2, 3])
+    $ sarah.set_schedule(gym, the_days = [5,6], the_times = [1])    #She tries to stay in shape
     $ sarah.event_triggers_dict["first_meeting"] = True
     $ add_sarah_watch_yoga_at_gym_action()
     return
@@ -2243,7 +2246,7 @@ label Sarah_arrange_threesome_label(the_person):
         mc.name "There's this girl I've been seeing lately. She is pretty bi-curious, and has never had a threesome before."
         the_person "Oh Jesus, I can tell where this is going already."
         mc.name "Anyway, she's been asking, so I promised her I'd try to arrange something for Saturday. I need you to come over to my place Saturday night."
-        if cousin.event_triggers_dict.get("blackmail_level", -1) >= 2 and cousin.has_role([stripper_role, waitress_role, bdsm_performer_role]):
+        if cousin.event_triggers_dict.get("blackmail_level", -1) >= 2 and cousin.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role]):
             the_person "That's ridiculous. I'm gonna make a ton of money in tips on a Saturday night. You're gonna have to convince me..."
             mc.name "How about I promise not to tell your mom where you make all those tips at? Does that sound good?"
             the_person "Look, I need that money. I'm sorry but I can't just give up the most lucrative night of the week."
@@ -3486,7 +3489,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
         showgirl_2 "Don't you wanna grab your cousin's tits?"
     "You see [the_person.title] look over at you. You can see her mouth the word 'please'"
     menu:
-        "Pay\n{color=ff0000}{size=18}Costs: $100{/size}{/color}" if mc.business.funds >= 100:
+        "Pay\n{color=ff0000}{size=18}Costs: $100{/size}{/color}" if mc.business.has_funds(100):
             mc.name "That sounds fair."
             "You grab $100 and put it in the tip jar."
             $ mc.business.change_funds(-100)
@@ -3500,7 +3503,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
                 "You reach up and begin to fondle your stripper's tits. They are so soft and warm. They feel amazing."
                 $ mc.change_locked_clarity(30)
             $ the_person.change_arousal(15)
-        "Pay\n{color=ff0000}{size=18}Requires: $100{/size}{/color} (disabled)" if mc.business.funds < 100:
+        "Pay\n{color=ff0000}{size=18}Requires: $100{/size}{/color} (disabled)" if not mc.business.has_funds(100):
             pass
         "Not today":
             mc.name "We're just here to watch."
@@ -3521,7 +3524,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     $ the_person.change_arousal(10)
     showgirl_2 "For $200, you two can grope and spank it!"
     menu:
-        "Pay\n{color=ff0000}{size=18}Costs: $200{/size}{/color}" if mc.business.funds >= 200:
+        "Pay\n{color=ff0000}{size=18}Costs: $200{/size}{/color}" if mc.business.has_funds(200):
             "You don't hesitate. You grab $200 and put it in the tip jar."
             $ mc.business.change_funds(-200)
             "[the_person.title] sees you do it and immediately starts to run her hands along her girl's hips."
@@ -3543,7 +3546,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
                 $ mc.change_locked_clarity(30)
             $ the_person.change_arousal(15)
             $ mc.change_arousal(15)
-        "Pay\n{color=ff0000}{size=18}Requires: $200{/size}{/color} (disabled)" if mc.business.funds < 200:
+        "Pay\n{color=ff0000}{size=18}Requires: $200{/size}{/color} (disabled)" if not mc.business.has_funds(200):
             pass
         "Not today":
             mc.name "We're just here to watch."

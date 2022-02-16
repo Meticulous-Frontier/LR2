@@ -2,9 +2,6 @@
 # Based on the Pilotus13 Vanilla extension
 # Overhaul edit by Longshot
 # an idea that i want to implement later: if lily is slutty enough, she finds you spying and gets turned on, and then you and her have fun in the hall while jennifer does her thing in her room.
-init -1 python:
-    mom_ntr_mod_weight = 5
-
 init 2 python:
 
     #cum_*_ntr def's added so pregnancy and sex counters will not be an issue in NTR.
@@ -133,8 +130,7 @@ init 2 python:
 
     mom_ntr_mod_action = ActionMod("Mom NTR",mom_ntr_mod_requirement,"mom_ntr_mod_action_label",
         menu_tooltip = "At night, you hear strange sounds out of [mom.possessive_title]'s bedroom.", category = "NTR",
-        initialization = init_action_mod_disabled,
-        is_crisis = True, crisis_weight = mom_ntr_mod_weight)
+        initialization = init_action_mod_disabled, is_crisis = True)
 
 label mom_ntr_mod_action_label:
     ## Mom having her private life

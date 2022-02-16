@@ -1,7 +1,4 @@
 ## Coffee Break 2 Crisis Mod by Tristimdorion
-init -1 python:
-    coffee_break2_weight = 5
-
 init 2 python:
     def coffee_break2_requirement():
         if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
@@ -10,7 +7,7 @@ init 2 python:
         return False
 
     coffee_break2_action = ActionMod("Coffee Break 2", coffee_break2_requirement, "coffee_break2_action_label",
-        menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True, crisis_weight = coffee_break2_weight)
+        menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True)
 
 label coffee_break2_action_label:
     $ (person_one, person_two, person_three) = get_random_employees(3, slut_required = 20)

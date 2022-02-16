@@ -200,31 +200,6 @@ init 1 python:
         common_variable_list.append("scene_manager");
         common_variable_list.append('HR_employee_list');
 
-    def restore_employees_to_schedules():
-        for employee in mc.business.research_team + mc.business.market_team + mc.business.supply_team + mc.business.production_team + mc.business.hr_team:
-            if employee.location:
-                continue
-            # somehow she is lost in limbo
-            scheduled_location = employee.get_destination()
-            if not scheduled_location: # pick random location
-                scheduled_location = get_random_from_list([x for x in list_of_places if x.public])
-
-            if scheduled_location:
-                scheduled_location.add_person(employee)
-
-        for intern in [x for x in all_people_in_the_game() if x.job == "Student Intern"]:
-            if intern.schedule[6][1] == mc.business.r_div and intern not in mc.business.college_interns_research:
-                mc.business.college_interns_research.append(intern)
-            if intern.schedule[6][1] == mc.business.p_div and intern not in mc.business.college_interns_production:
-                mc.business.college_interns_production.append(intern)
-            if intern.schedule[6][1] == mc.business.s_div and intern not in mc.business.college_interns_supply:
-                mc.business.college_interns_supply.append(intern)
-            if intern.schedule[6][1] == mc.business.m_div and intern not in mc.business.college_interns_market:
-                mc.business.college_interns_market.append(intern)
-            if intern.schedule[6][1] == mc.business.h_div and intern not in mc.business.college_interns_HR:
-                mc.business.college_interns_HR.append(intern)
-        return
-
     def update_pinned_cache():
         # cache all GUI images in memory
         for fn in renpy.list_files():
@@ -293,8 +268,6 @@ label update_compatibility_fix(stack):
     $ update_pinned_cache()
 
     $ cleanup_default_wardrobe()
-
-    $ restore_employees_to_schedules()
 
     $ validate_person_stats()
 

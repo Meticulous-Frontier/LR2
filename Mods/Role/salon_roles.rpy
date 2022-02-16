@@ -31,7 +31,7 @@ init 2 python:
 
     def ophelia_give_chocolate_requirement():
         if ophelia_get_chocolate_gift_unlock():
-            if mc.business.funds <= 50:
+            if not mc.business.has_funds(50):
                 return "Not enough money"
             if time_of_day < 1:
                 return "Wait for shops to open"
@@ -177,7 +177,7 @@ init 2 python:
     ophelia_choose_service_test = Action("Pick employee for salon visit",ophelia_choose_service_test_requirement ,"ophelia_choose_service_test_label", menu_tooltip = "Select a girl you want to have her hair and pubic hair cut and styled")
     ophelia_add_service_full_body_massage = Action ("Ophelia wants to do massages", ophelia_add_service_full_body_massage_requirement, "ophelia_add_service_full_body_massage_label")
 
-    salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics, ophelia_talk_about_candace])
+    salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics, ophelia_talk_about_candace], hidden = True)
 
 
 label cut_hair_label(the_person):

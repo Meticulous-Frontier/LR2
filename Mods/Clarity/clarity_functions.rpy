@@ -49,9 +49,9 @@ init 3 python:
         menu_tooltip = "Leverage your clarity to persuade her to do something.", category = "Generic People Actions")
 
     def build_specific_action_list_extended(org_func):
-        def build_specific_action_list_wrapper(person):
+        def build_specific_action_list_wrapper(person, keep_talking = True):
             # run original function
-            result = org_func(person)
+            result = org_func(person, keep_talking)
             # run extension code (append new action to base game menu)
             if persuade_action.enabled:
                 persuade_action.args = [person]

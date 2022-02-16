@@ -44,7 +44,7 @@ init 2 python:
             forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 1, False], ["drinking cum", -2, False], ["giving blowjobs", -1, False], ["creampies", 2, False]])
 
         sakari.generate_home()
-        sakari.set_schedule(sakari.home, times = [0,1,2,3,4])   #Hide Sakari at home until we are ready to use her
+        sakari.set_schedule(sakari.home, the_times = [0,1,2,3,4])   #Hide Sakari at home until we are ready to use her
         sakari.home.add_person(sakari)
         sakari.hair_colour = ["bald", [0.414, 0.305, 0.258,0]]
         sakari.hair_style.colour = [0.414, 0.305, 0.258,0]

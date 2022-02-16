@@ -40,8 +40,8 @@ init 2 python:
             forced_opinions = [["production work", 2, True], ["work uniforms", 1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["cooking", 2, False]])
 
         ellie.generate_home()
-        ellie.set_schedule(ellie.home, times = [0,1,2,3,4])
-        # ellie.set_schedule(downtown_bar, times = [2,3])
+        # ellie.set_schedule(ellie.home, the_times = [0,1,2,3,4])
+        # ellie.set_schedule(downtown_bar, the_times = [2,3])
         ellie.home.add_person(ellie)
         ellie.idle_pose = "stand2"
 
@@ -496,7 +496,7 @@ label ellie_work_welcome_label():
     the_person "Okay."
     $ the_person.draw_person(position = "sitting")
     "You sit down at your desk, filling out some paperwork and getting her officially hired by the company."
-    $ mc.business.hire_person(the_person, "HR")
+    $ mc.business.add_employee_hr(the_person)
     $ mc.business.add_mandatory_crisis(ellie_work_welcome_monday)
 
     return

@@ -33,7 +33,10 @@ init 2 python:
         # init starbuck role
         starbuck_role = Role(role_name ="Sex Shop Owner", actions =[starbuck_vaginal_skillup, starbuck_anal_skillup, starbuck_oral_skillup, starbuck_foreplay_skillup, starbuck_sex_store_investment_one,
             starbuck_sex_store_investment_two, starbuck_sex_store_investment_three, starbuck_sex_store_promo_one, starbuck_sex_store_promo_two, starbuck_sex_store_promo_three, starbuck_sex_store_promo_four,
-            starbuck_sex_store_promo_five, starbuck_spend_the_night, starbuck_close_up, starbuck_anal_fetish_swing_demo])
+            starbuck_sex_store_promo_five, starbuck_spend_the_night, starbuck_close_up, starbuck_anal_fetish_swing_demo], hidden = True)
+
+        starbuck_job = Job("Sex Shop Owner", starbuck_role, sex_store, work_times = [2, 3])
+        starbuck_job.schedule.set_schedule(sex_store, the_days = [5,6], the_times=[1,2])
 
         #global starbuck_role
         global starbuck
@@ -42,12 +45,10 @@ init 2 python:
         starbuck_lipstick.colour = [.80, .26, .04, .90]
         starbuck_base.add_accessory(starbuck_lipstick)
         starbuck = Sex_Shop_Owner(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E", height = 0.89,  body_images = white_skin, expression_images = None, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
-            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = "Sex Shop Owner", wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
-            work = None, font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", special_role = [starbuck_role], relationship = "Single", base_outfit = starbuck_base)
+            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = starbuck_job, wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
+            font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", relationship = "Single", base_outfit = starbuck_base)
 
         starbuck.generate_home()
-        starbuck.set_schedule(sex_store, times = [2, 3], days = [0, 1, 2, 3, 4])
-        starbuck.set_schedule(sex_store, times = [1, 2], days = [5, 6])
         starbuck.home.add_person(starbuck)
 
         # Add a counter to the sex shop
@@ -71,7 +72,7 @@ init -1 python:
         if starbuck.shop_progress_stage >= 2:
             if perk_system.has_stat_perk("Vibrating Cock Ring"):
                 return "Already Active"
-            if mc.business.funds >= 500:
+            if mc.business.has_funds(500):
                 if mc.location == sex_store:
                     return True
             else:
@@ -83,7 +84,7 @@ init -1 python:
         if starbuck.shop_progress_stage >= 3:
             if perk_system.has_stat_perk("Perfect Anal Lube"):
                 return "Already Active"
-            if mc.business.funds >= 800:
+            if mc.business.has_funds(800):
                 if mc.location == sex_store:
                     return True
             else:
@@ -94,7 +95,7 @@ init -1 python:
         if starbuck.shop_progress_stage >= 1:
             if perk_system.has_stat_perk("Small Finger Vibrator"):
                 return "Already Active"
-            if mc.business.funds >= 100:
+            if mc.business.has_funds(100):
                 if mc.location == sex_store:
                     return True
             else:
@@ -105,7 +106,7 @@ init -1 python:
         if starbuck.shop_progress_stage >= 2:
             if perk_system.has_stat_perk("Stimulating Lip Balm"):
                 return "Already Active"
-            if mc.business.funds >= 250:
+            if mc.business.has_funds(250):
                 if mc.location == sex_store:
                     return True
             else:
@@ -114,7 +115,7 @@ init -1 python:
 
     def starbuck_arousal_reduction_one_requirement(the_person):
         if SB_MOD_MC_AROUSAL_MULT == 1.0:
-            if mc.business.funds >= 500:
+            if mc.business.has_funds(500):
                 if mc.location == sex_store:
                     return True
             else:
@@ -123,7 +124,7 @@ init -1 python:
 
     def starbuck_arousal_reduction_two_requirement(the_person):
         if SB_MOD_MC_AROUSAL_MULT == SB_MOD_MC_AROUSAL_1ST_MULT:
-            if mc.business.funds >= 5000:
+            if mc.business.has_funds(5000):
                 if mc.location == sex_store:
                     return True
             else:
@@ -134,7 +135,7 @@ init -1 python:
         if not starbuck.location == sex_store:
             return False
         if the_person.shop_progress_stage == 0:
-            if mc.business.funds >= 1000:
+            if mc.business.has_funds(1000):
                 return True
             else:
                 return "Requires: $1000"
@@ -144,7 +145,7 @@ init -1 python:
             return False
         if the_person.shop_progress_stage == 1:
             if (the_person.event_triggers_dict.get("shop_stage_one_day", 9999) + 7) < day:
-                if mc.business.funds >= 5000:
+                if mc.business.has_funds(5000):
                     return True
                 else:
                     return "Requires: $5000"
@@ -156,7 +157,7 @@ init -1 python:
             return False
         if the_person.shop_progress_stage == 2:
             if (the_person.event_triggers_dict.get("shop_stage_two_day", 9999) + 7) < day:
-                if mc.business.funds >= 15000:
+                if mc.business.has_funds(15000):
                     return True
                 else:
                     return "Requires: $15000"
@@ -2277,8 +2278,8 @@ label starbuck_candace_product_demo_label(the_person):
     "You turn to leave the two girls as they chat... still naked..."
     "They have become almost instant best friends, and it sounds like they are planning to get together every Saturday here at the shop. Maybe you should swing by and join them sometime?"
     $ town_relationships.update_relationship(the_person, starbuck, "Best Friend")
-    $ the_person.set_alt_schedule(sex_store, days = [5], times = [3])
-    $ starbuck.set_alt_schedule(sex_store, days = [5], times = [3])
+    $ the_person.set_override_schedule(sex_store, the_days = [5], the_times = [3])
+    $ starbuck.set_override_schedule(sex_store, the_days = [5], the_times = [3])
     $ starbuck.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
     $ candace.event_triggers_dict["friends_with_starbuck"] = True
     $ starbuck.apply_planned_outfit()

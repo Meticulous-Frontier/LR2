@@ -358,9 +358,9 @@ init -1 python:
             value_change = multipliers_used.get(maxed_multiplier)
             serum_value_multiplier = serum_value_multiplier * value_change
 
-        sorted_by_value = sorted(mc.business.sale_inventory.serums_held, key = lambda serum: serum[0].value) #List of tuples [SerumDesign, count], sorted by the value of each design. Used so most valuable serums are sold first.
-        if mc.business.sale_inventory.get_any_serum_count() < serum_sale_count:
-            serum_sale_count = mc.business.sale_inventory.get_any_serum_count()
+        sorted_by_value = sorted(mc.business.inventory.serums_held, key = lambda serum: serum[0].value) #List of tuples [SerumDesign, count], sorted by the value of each design. Used so most valuable serums are sold first.
+        if mc.business.inventory.get_any_serum_count() < serum_sale_count:
+            serum_sale_count = mc.business.inventory.get_any_serum_count()
 
         this_batch_serums_sold = 0
         if serum_sale_count > 0: #ie. we have serum in our inventory to sell, and the capability to sell them.
@@ -375,7 +375,7 @@ init -1 python:
                     mc.business.listener_system.fire_event("serums_sold_value", amount = value_sold)
                     mc.business.serums_sold += serum_sale_count
                     this_batch_serums_sold += serum_sale_count
-                    mc.business.sale_inventory.change_serum(serum[0],-serum_sale_count)
+                    mc.business.inventory.change_serum(serum[0],-serum_sale_count)
                     serum_sale_count = 0
                     break
                 else:
@@ -389,7 +389,7 @@ init -1 python:
                     mc.business.listener_system.fire_event("serums_sold_value", amount = value_sold)
                     mc.business.serums_sold += serum_sale_count
                     this_batch_serums_sold += serum_sale_count
-                    mc.business.sale_inventory.change_serum(serum[0],-serum[1]) #Should set serum count to 0.
+                    mc.business.inventory.change_serum(serum[0],-serum[1]) #Should set serum count to 0.
                     #Don't break, we haven't used up all of the serum count
         return this_batch_serums_sold
 
@@ -422,41 +422,11 @@ init -1 python:
     def production_assembly_line_project_on_turn():
         if not mc.business.is_open_for_business():
             return 0
-        if mc.business.serum_production_array is None:
-            return
 
-        # calculate bonus production
-        prod_inc = 0
+        # calculate bonus production (25% for each employee)
         for person in [x for x in mc.business.production_team if x in mc.business.p_div.people]:
-            prod_inc += __builtin__.int(((3*person.focus) + person.int + (2*person.production_skill) + 10) * (mc.business.team_effectiveness / 100.0))
-
-        production_amount = __builtin__.round(prod_inc * 0.25)
-
-        #Calculate the supplies used from the normal production amount
-        if production_amount > mc.business.supply_count:
-            production_amount = mc.business.supply_count
-
-        for production_line in mc.business.serum_production_array:
-            # A production line is a tuple of [SerumDesign, production weight (int), production point progress (int)].
-            serum_weight = mc.business.serum_production_array[production_line][1]
-            the_serum = mc.business.serum_production_array[production_line][0]
-
-            proportional_production = __builtin__.int((serum_weight/100.0) * production_amount) #Get the closest integer value for the weighted production we put into the serum
-            mc.business.production_used += proportional_production #Update our usage stats and subtract supply needed.
-            mc.business.supply_count -= proportional_production
-
-
-            mc.business.serum_production_array[production_line][2] += proportional_production
-            serum_prod_cost = the_serum.production_cost
-            if serum_prod_cost <= 0:
-                serum_prod_cost = 1
-            serum_count = mc.business.serum_production_array[production_line][2]//serum_prod_cost #Calculates the number of batches we have made (previously for individual serums, now for entire batches)
-            if serum_count > 0:
-                mc.business.add_counted_message("Produced " + mc.business.serum_production_array[production_line][0].name,serum_count*mc.business.batch_size) #Give a note to the player on the end of day screen for how many we made.
-                mc.business.serum_production_array[production_line][2] -= serum_count * mc.business.serum_production_array[production_line][0].production_cost
-                mc.business.inventory.change_serum(mc.business.serum_production_array[production_line][0],serum_count*mc.business.batch_size) #Add the number serums we made to our inventory.
-
-        return production_amount
+            mc.business.production_progress(person.focus,person.int,person.production_skill, multiplier = 0.25)
+        return
 
     def research_team_building_project_on_day():
         if not mc.business.is_weekend():

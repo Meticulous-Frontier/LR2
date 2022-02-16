@@ -1,16 +1,16 @@
 init -1 python:
     def strip_club_give_daily_serum():
-        for person in people_in_role([stripper_role, waitress_role, manager_role, mistress_role, bdsm_performer_role]):
+        for person in people_in_role([stripper_role, stripclub_waitress_role, stripclub_manager_role, stripclub_mistress_role, bdsm_performer_role]):
             if person.is_employee():
                 continue
 
             if person.has_role(stripper_role) and getattr(mc.business, "strippers_serum", None):
                 strip_club_give_daily_serum_to_person(person, mc.business.strippers_serum)
-            if person.has_role(waitress_role) and getattr(mc.business, "waitresses_serum", None):
+            if person.has_role(stripclub_waitress_role) and getattr(mc.business, "waitresses_serum", None):
                 strip_club_give_daily_serum_to_person(person, mc.business.waitresses_serum)
-            if person.has_role([manager_role, mistress_role]) and getattr(mc.business, "manager_serum", None):
+            if person.has_role([stripclub_manager_role, stripclub_mistress_role]) and getattr(mc.business, "manager_serum", None):
                 strip_club_give_daily_serum_to_person(person, mc.business.manager_serum)
-            if person.has_role(bdsm_performer_role) and getattr(mc.business, "bdsm_performers_serum", None):
+            if person.has_role(stripclub_bdsm_performer_role) and getattr(mc.business, "bdsm_performers_serum", None):
                 strip_club_give_daily_serum_to_person(person, mc.business.bdsm_performers_serum)
         return
 

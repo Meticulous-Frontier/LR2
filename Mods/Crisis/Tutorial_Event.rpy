@@ -1,6 +1,3 @@
-init -1 python:
-    SB_tutorial_crisis_weight = 5
-
 init 2 python:
     def SB_tutorial_event_requirement():
         if mc.location in get_mall_locations():
@@ -11,7 +8,7 @@ init 2 python:
         return get_random_from_list(known_people_at_location(mc.location, unique_character_list))
 
     SB_tutorial_crisis = ActionMod("Mall Flirt", SB_tutorial_event_requirement, "SB_tutorial_event",
-        menu_tooltip = "You have a short flirt with someone in the mall.", category = "Mall", is_crisis = True, crisis_weight = SB_tutorial_crisis_weight)
+        menu_tooltip = "You have a short flirt with someone in the mall.", category = "Mall", is_crisis = True, is_fast = True)
 
 label SB_tutorial_event():
     $ the_person = SB_tutorial_event_get_known_person()

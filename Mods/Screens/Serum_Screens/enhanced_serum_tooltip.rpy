@@ -47,6 +47,13 @@ init 2:
                         text the_serum.name style "menu_text_title_style" xalign 0.5
 
                 frame:
+                    background "#000080"
+                    xsize 480
+                    ysize 40
+
+                    use aspect_grid(the_serum)
+
+                frame:
                     background "#0a142688"
                     xalign 0.5
                     xsize 480
@@ -69,22 +76,15 @@ init 2:
                                 frame:
                                     background "#000080"
                                     xsize 225
-                                    text "Value: $[the_serum.value]" style "serum_text_style_traits"
+                                    $ calculated_profit = __builtin__.round(mc.business.get_serum_base_value(the_serum)-(the_serum.production_cost/mc.business.batch_size))
+                                    if calculated_profit > 0:
+                                        text "Expected Profit:{color=#98fb98} $[calculated_profit]{/color}" style "serum_text_style_traits"
+                                    else:
+                                        $ calculated_profit = 0 - calculated_profit
+                                        text "Expected Profit:{color=#ff0000} -$[calculated_profit]{/color}" style "serum_text_style_traits"
 
                             vbox:
                                 spacing 5
-                                $ calculated_profit = (the_serum.value*mc.business.batch_size)-the_serum.production_cost
-                                if calculated_profit > 0:
-                                    frame:
-                                        background "#000080"
-                                        xsize 225
-                                        text "Expected Profit:{color=#98fb98} $[calculated_profit]{/color}" style "serum_text_style_traits"
-                                else:
-                                    $ calculated_profit = 0 - calculated_profit
-                                    frame:
-                                        background "#000080"
-                                        xsize 225
-                                        text "Expected Profit:{color=#cd5c5c} -$[calculated_profit]{/color}" style "serum_text_style_traits"
 
                                 frame:
                                     background "#000080"

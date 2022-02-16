@@ -1,7 +1,4 @@
 ## Mall Introduction Crisis Mod by Tristimdorion
-init -1 python:
-    mall_introduction_weight = 5
-
 init 2 python:
     def get_mall_locations():
         locations = [mall, gym, home_store, clothing_store, sex_store]
@@ -35,7 +32,7 @@ init 2 python:
         return (known_person, stranger)
 
     mall_introduction_action = ActionMod("Mall Introduction", mall_introduction_requirement, "mall_introduction_action_label",
-        menu_tooltip = "You meet a stranger and a friend introduces you.", category = "Mall", is_crisis = True, crisis_weight = mall_introduction_weight)
+        menu_tooltip = "You meet a stranger and a friend introduces you.", category = "Mall", is_crisis = True)
 
 label mall_introduction_action_label():
     $ (known_person, stranger) = mall_introduction_get_actors()

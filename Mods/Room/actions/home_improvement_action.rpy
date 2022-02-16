@@ -13,7 +13,6 @@
 # Jucazzi baths for bedrooms (still leaves main shower for encounters)
 # Guest rooms/servants quarters?
 init 0 python:
-    home_improvement_crisis_weight = 5
     mc_bedroom_renovation_cost = 3000 # Currently used for all bedrooms, this could be varied.
     home_improvement_base_duration = 0 # (+0-3 days, always takes at least one full day), dungeon takes longer.
 
@@ -24,7 +23,7 @@ init 0 python:
             return "Wait for current project completion"
         if not mc.business.is_open_for_business():
             return "Only during business hours"
-        if mc.business.funds > mc_bedroom_renovation_cost:
+        if mc.business.has_funds(mc_bedroom_renovation_cost):
             return True
         return False
 
@@ -38,7 +37,7 @@ init 0 python:
             return "Wait for current project completion"
         if not mc.business.is_open_for_business():
             return "Only during business hours"
-        if mc.business.funds > mc_bedroom_renovation_cost:
+        if mc.business.has_funds(mc_bedroom_renovation_cost):
             return True
         else:
             return "Requires: $" + str(mc_bedroom_renovation_cost)
@@ -51,7 +50,7 @@ init 0 python:
             return "Wait for current project completion"
         if not mc.business.is_open_for_business():
             return "Only during business hours"
-        if mc.business.funds > mc_bedroom_renovation_cost:
+        if mc.business.has_funds(mc_bedroom_renovation_cost):
             return True
         else:
             return "Requires: $" + str(mc_bedroom_renovation_cost)
@@ -64,7 +63,7 @@ init 0 python:
             return "Wait for current project completion"
         if not mc.business.is_open_for_business():
             return "Only during business hours"
-        if mc.business.funds > mc_bedroom_renovation_cost:
+        if mc.business.has_funds(mc_bedroom_renovation_cost):
             return True
         else:
             return "Requires: $" + str(mc_bedroom_renovation_cost)
@@ -77,7 +76,7 @@ init 0 python:
             return "Wait for current project completion"
         if not mc.business.is_open_for_business():
             return "Only during business hours"
-        if mc.business.funds > 10000:
+        if mc.business.has_funds(10000):
             return True
         else:
             return "Requires: $10000"
@@ -86,7 +85,7 @@ init 0 python:
 init 2 python:
     # ModAction initialization. Kicks off initial entry into code.
     add_mc_bedroom_renovate_action = ActionMod("Home Improvement", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_option_label",
-        menu_tooltip = "Enables a series of renovations for your home into more impressive state (with some bonuses), including home dungeon.", category = "Home", is_crisis = True, crisis_weight = home_improvement_crisis_weight )
+        menu_tooltip = "Enables a series of renovations for your home into more impressive state (with some bonuses), including home dungeon.", category = "Home", is_crisis = True)
 
     # extend the default build phone menu function with renovations
     def build_phone_menu_home_improvement_extended(org_func):

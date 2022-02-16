@@ -18,6 +18,7 @@ screen keybindT():
 
 screen serum_cheat_menu():
     add "Science_Menu_Background.png"
+    modal True
 
     default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits + mc.business.blueprinted_traits)])
     default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
@@ -125,8 +126,10 @@ screen serum_cheat_menu():
                                     textbutton "[serum.name] ([serum.current_research]/[serum.research_needed])":
                                         text_xalign 0.5
                                         text_text_align 0.5
-                                        action [Hide("serum_tooltip"), SetField(serum, "researched", True)] style "textbutton_style"
+                                        action [Hide("serum_tooltip"), SetField(serum, "researched", True)]
+                                        style "textbutton_style"
                                         text_style "serum_text_style_traits"
                                         hovered Show("serum_tooltip",None,serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                         unhovered Hide("serum_tooltip")
-                                        xsize 365
+                                        xsize 370
+                                        xalign 0.5

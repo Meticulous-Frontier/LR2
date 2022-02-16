@@ -64,12 +64,7 @@ init 3 python:
         return schedule
 
     def silent_pregnant_finish_announce_person(person):
-        if "preg_old_schedule" in person.event_triggers_dict:
-            renpy.say("Warning", "Something went wrong with setting the pregnancy for " + person.name + ", she is already giving birth.")
-            return # she is already giving birth
-
-        person.event_triggers_dict["preg_old_schedule"] = clone_schedule(person)
-        person.set_schedule(purgatory, times = [0,1,2,3,4])
+        person.available = False
 
         target_label = "pregnant_finish" if person.is_mc_father() else "silent_pregnant_finish"
 
@@ -77,17 +72,12 @@ init 3 python:
         mc.business.add_mandatory_morning_crisis(preg_finish_action)
         return
 
-    # wrap original function and set schedule to purgatory
-    def pregnant_finish_announce_person_extended(org_func):
-        def pregnant_finish_announce_person_wrapper(person):
-            org_func(person)
-            # make her truly disappear from game (she's in the hospital)
-            person.set_schedule(purgatory, times=[0,1,2,3,4])
-            return
+    def pregnant_finish_announce_person(person):
+        person.available = False
 
-        return pregnant_finish_announce_person_wrapper
-
-    pregnant_finish_announce_person = pregnant_finish_announce_person_extended(pregnant_finish_announce_person)
+        preg_finish_action = Action("Pregnancy Finish", preg_finish_requirement, "pregnant_finish", args = person, requirement_args = [person, day + renpy.random.randint(4,7)])
+        mc.business.mandatory_morning_crises_list.append(preg_finish_action)
+        return
 
     def become_pregnant(person, mc_father = True, progress_days = 0): # Called when a girl is knocked up. Establishes all of the necessary bits of info.
         # prevent issues when function is called for already pregnant person / clones are sterile
@@ -146,19 +136,30 @@ init 3 python:
         return
 
 init 3 python:
-    def pregnant_finish_person_extended(org_func):
-        def pregnant_finish_person_wrapper(person):
-            # run extension code
-            if person.is_mc_father():
-                person.sex_record["Children with MC"] = person.sex_record.get("Children with MC", 0) + 1
-            # run original function
-            return org_func(person)
-        return pregnant_finish_person_wrapper
+    def pregnant_finish_person(person):
+        if not "pre_preg_body" in person.event_triggers_dict:
+            renpy.say("Warning", "Something went wrong with restoring the pregnancy of " + person.name)
+            return False # she is not giving birth
 
-    if "pregnant_finish_person" in dir():   # check if bugfix is installed
-        # wrap up the pregnant finish person function
-        pregnant_finish_person = pregnant_finish_person_extended(pregnant_finish_person)
+        person.body_type = person.event_triggers_dict.pop("pre_preg_body")
+        person.available = True
 
+        person.event_triggers_dict["preg_knows"] = False #Otherwise she immediately knows the next time she's pregnant.
+        person.kids += 1 #TODO: add a new role related to a girl being a mother of your kid?
+
+        tit_shrink_one_day = day + renpy.random.randint(7,14)
+        tit_shrink_one = Action("Tits Shrink One", tit_shrink_requirement, "tits_shrink", args = [person, True, add_tits_shrink_one_announcement], requirement_args = [person, tit_shrink_one_day])
+        mc.business.mandatory_morning_crises_list.append(tit_shrink_one) #Events for her breasts to return to their normal size.
+
+        tit_shrink_two_day = day + renpy.random.randint(21,35)
+        tit_shrink_two = Action("Tits Shrink Two", tit_shrink_requirement, "tits_shrink", args = [person, False, add_tits_shrink_two_announcement], requirement_args = [person, tit_shrink_two_day])
+        mc.business.mandatory_morning_crises_list.append(tit_shrink_two)
+
+        if person.is_mc_father():
+            person.sex_record["Children with MC"] = person.sex_record.get("Children with MC", 0) + 1
+
+        the_person.remove_role(pregnant_role)
+        return True
 
 label silent_pregnant_announce(the_person):
     #In silent pregnancy, she just knows she's pregnant, but doesn't necessarily announce it.

@@ -32,7 +32,7 @@ label enhanced_special_training_crisis_label():
     if the_person.effective_sluttiness() >= 20:
         the_person "I'll personally repay you for it later..."
     menu:
-        "Send [the_person.title] to Seminar\n{color=#ff0000}{size=18}Costs: $500{/size}{/color}" if mc.business.funds >= 500:
+        "Send [the_person.title] to Seminar\n{color=#ff0000}{size=18}Costs: $500{/size}{/color}" if mc.business.has_funds(500):
             mc.name "That sounds like a great idea. I'll call and sort out the fee, you start heading over."
             the_person "Understood, thank you sir! What would you like me to focus on?"
 
@@ -46,7 +46,7 @@ label enhanced_special_training_crisis_label():
                     # follow up on promise made
                     $ add_return_from_seminar_action(the_person)
 
-        "Send [the_person.title] to Seminar\n{color=#ff0000}{size=18}Requires: $500{/size}{/color} (disabled)" if mc.business.funds < 500:
+        "Send [the_person.title] to Seminar\n{color=#ff0000}{size=18}Requires: $500{/size}{/color} (disabled)" if not mc.business.has_funds(500):
             pass
 
         "Tell her to stay at work":

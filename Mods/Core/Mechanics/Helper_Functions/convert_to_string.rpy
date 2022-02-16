@@ -39,6 +39,15 @@ init 0 python:
 
         return color_string + str(__builtin__.int(person.energy)) +"/"+ str(__builtin__.int(person.max_energy)) + "{/color} {image=energy_token_small}"
 
+    def get_attention_string():
+        percent = mc.business.attention * 1.0 / mc.business.max_attention
+        color_string = "{color=#43B197}"
+        if percent > .5:
+            color_string = "{color=#e1e113}"
+        if percent > .8:
+            color_string = "{color=#B14365}"
+        return color_string + str(mc.business.attention) + "/" + str(mc.business.max_attention) + "{/color}"
+
     def get_person_weight_string(person):
         if use_imperial_system:
             lbs = person.weight * 2.205

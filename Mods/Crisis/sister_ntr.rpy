@@ -1,8 +1,5 @@
 ## Sister NTR Crisis Mod by Tristimdorion
 # Based on the Pilotus13 Vanilla extension
-init -1 python:
-    sister_ntr_mod_weight = 5
-
 init 3 python:
     def sister_ntr_crisis_requirement():
         if mc_asleep():
@@ -34,7 +31,7 @@ init 3 python:
     sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label",
         menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom", category = "NTR",
         initialization = init_action_mod_disabled,
-        is_crisis = True, crisis_weight = sister_ntr_mod_weight)
+        is_crisis = True)
 
 label sister_ntr_crisis_action_label:
     ## Lily studying with her friends

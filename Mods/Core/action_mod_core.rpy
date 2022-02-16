@@ -57,19 +57,20 @@ init 2 python:
         _instances = set()
 
         # store instances of mod
-        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = "", initialization = None, category="Misc", enabled = True, allow_disable = True, priority = 10, on_enabled_changed = None, options_menu = None, is_crisis = False, is_morning_crisis = False, is_mandatory_crisis = False, crisis_weight = None):
+        def __init__(self, name, requirement, effect, args = None, requirement_args = None, menu_tooltip = None, priority = 10, event_duration = 99999, is_fast = True,
+            initialization = None, category="Misc", enabled = True, allow_disable = True, on_enabled_changed = None, options_menu = None,
+            is_crisis = False, is_morning_crisis = False, is_mandatory_crisis = False):
             self.initialization = initialization
+            self.category = category
             self.enabled = enabled
             self.allow_disable = allow_disable
-            self.category = category
             self.on_enabled_changed = on_enabled_changed
             self.options_menu = options_menu
             self.is_crisis = is_crisis                      # chance to trigger during day
             self.is_morning_crisis = is_morning_crisis      # chance to trigger early morning
             self.is_mandatory_crisis = is_mandatory_crisis  # only triggered once when requirements are met
-            self.crisis_weight = crisis_weight              # no longer any function, due to round robbin events
 
-            Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip, priority)
+            Action.__init__(self, name, requirement, effect, args, requirement_args, menu_tooltip, priority, event_duration, is_fast)
 
             ActionMod._instances.add(self)
 
@@ -110,10 +111,10 @@ init 2 python:
             if action_mod.is_crisis:
                 if action_mod.is_morning_crisis:
                     if not action_mod in [c[0] for c in morning_crisis_list]:
-                        morning_crisis_list.append([action_mod, action_mod.crisis_weight])
+                        morning_crisis_list.append([action_mod, 5])
                 else:
                     if not action_mod in [c[0] for c in crisis_list]:
-                        crisis_list.append([action_mod, action_mod.crisis_weight])
+                        crisis_list.append([action_mod, 5])
             elif action_mod.is_mandatory_crisis:
                 if action_mod.is_morning_crisis:
                     mc.business.add_mandatory_morning_crisis_event(action_mod)

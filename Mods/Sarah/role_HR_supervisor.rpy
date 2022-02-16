@@ -137,7 +137,7 @@ init 5 python:
             return False
         if get_HR_director_tag("business_HR_serum_tier", 0) == 0:
             return False
-        if mc.business.funds < 500:
+        if not mc.business.has_funds(500):
             return "Requires: $500"
         if not mc.is_at_work():
             return "Only in the office"
@@ -150,7 +150,7 @@ init 5 python:
             return False
         if get_HR_director_tag("business_HR_serum_tier", 0) <= 1:
             return False
-        if mc.business.funds < 1500:
+        if not mc.business.has_funds(1500):
             return "Requires: $1,500"
         if not mc.is_at_work():
             return "Only in the office"
@@ -179,7 +179,7 @@ init 5 python:
     def HR_director_mind_control_requirement(the_person):
         if get_HR_director_tag("business_HR_serum_tier", 0) != 3:
             return False
-        if mc.business.funds < 5000:
+        if not mc.business.has_funds(5000):
             return "Requires: $5,000"
         if not mc.is_at_work():
             return "Only in the office"
@@ -395,7 +395,7 @@ label HR_director_initial_hire_label(the_person):
         if the_person.is_employee():
             mc.business.remove_employee(the_person)
 
-        mc.business.hire_person(the_person, "HR")
+        mc.business.add_employee_hr(the_person)
 
         # assign special HR director role
         mc.business.hr_director = the_person
@@ -1749,8 +1749,12 @@ init 1200 python:
         main_skill = renpy.random.randint(5,7)
         other_stat = 0
 
+        sex_skill = 5
+        if recruitment_sex_improvement_policy.is_active():
+            sex_skill = renpy.random.randint(5,7)
+
         min_slut = (get_HR_director_tag("recruit_slut", 0) or 0) // 10
-        sex_array = [renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5)]
+        sex_array = [renpy.random.randint(min_slut,sex_skill), renpy.random.randint(min_slut,sex_skill), renpy.random.randint(min_slut,sex_skill), renpy.random.randint(min_slut,sex_skill)]
 
         # extra boost / penalty for focused recruit
         if get_HR_director_tag("recruit_focused", False) == True:

@@ -3,7 +3,7 @@ init 2 python:
         return (mc.business.any_intern_in_office() and mc.is_at_work())
 
     intern_water_spill_crisis = ActionMod("Intern Water Spill Crisis",intern_water_spill_crisis_requirement,"intern_water_spill_crisis_label",
-        menu_tooltip = "An intern spills her water", category = "Intern", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "An intern spills her water", category = "Intern", is_crisis = True)
 
 label intern_water_spill_crisis_label():
     $ the_person = get_random_from_list(mc.business.get_intern_list())

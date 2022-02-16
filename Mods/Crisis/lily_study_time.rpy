@@ -5,10 +5,7 @@ init 2 python:
         return False
 
     sister_failed_test_crisis = ActionMod("Lily Needs Help Studying",sister_failed_test_requirement,"sister_failed_test_label",
-        menu_tooltip = "Lily fails a quiz in her class and needs help studying.", category = "Home", is_crisis = True, crisis_weight = sister_failed_test_weight)
-
-init -1 python:
-    sister_failed_test_weight = 5
+        menu_tooltip = "Lily fails a quiz in her class and needs help studying.", category = "Home", is_crisis = True)
 
 #new night time crisis. Lily enters MC's bedroom and asks for help because she failed a test at school.
 #Options change based on story progression with Lily. She can't pay you for tutoring, but offers other services.

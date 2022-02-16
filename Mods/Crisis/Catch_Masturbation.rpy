@@ -10,9 +10,6 @@
 #
 #
 ###
-init -1 python:
-    SB_caught_masturbating_crisis_weight = 5
-
 init 2 python:
     def SB_caught_masturbating_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
@@ -23,7 +20,7 @@ init 2 python:
         return get_random_from_list([x for x in mc.business.get_employee_list() if x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
 
     SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label",
-        menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True, crisis_weight = SB_caught_masturbating_crisis_weight)
+        menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True)
 
 label SB_caught_masturbating_crisis_label():
     $ the_person = select_girl_masturbating()

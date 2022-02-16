@@ -26,8 +26,8 @@ screen lifestyle_goal_sheet():
                 ysize 110
                 vbox:
                     xsize 600
-                    text "Goal Lists" + " " + mc.name + " " + mc.last_name style "menu_text_style" size 36 
-                    text "Each category requires a minimum of 2 selections" size 20 
+                    text "Goal Lists" + " " + mc.name + " " + mc.last_name style "menu_text_style" size 36
+                    text "Each category requires a minimum of 2 selections" size 20
                 vbox:
                     xsize 1000
                     text tt.value size 20
@@ -155,22 +155,6 @@ screen lifestyle_goal_sheet():
                                     hovered [
                                         tt.Action(goal.name + "\n" + goal.description)
                                     ]
-
-
-                #$ tooltip = GetTooltip()
-
-
-    # frame:
-    #     background None
-    #     anchor [0.5,0.5]
-    #     align [0.2,0.88]
-    #     xysize [500,125]
-    #     imagebutton:
-    #         align [0.5,0.5]
-    #         auto "gui/button/choice_%s_background.png"
-    #         focus_mask "gui/button/choice_idle_background.png"
-    #         action Show("mc_character_sheet")
-    #     textbutton "Character Sheet" align [0.5,0.5] text_style "return_button_style"
 
     frame:
         background None
