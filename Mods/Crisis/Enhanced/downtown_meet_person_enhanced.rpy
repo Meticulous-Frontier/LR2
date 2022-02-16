@@ -45,7 +45,7 @@ label meet_person_enhanced_label():
         "Keep the cash\n{color=#0F0}+$200{/color}":
             $ mc.business.change_funds(200)
             $ mc.business.listener_system.fire_event("side_money", count = 200)
-            "You slip the cash out of the womans wallet and watch as she rushes to catch her bus."
+            "You slip the cash out of the woman's wallet and watch as she rushes to catch her bus."
             $ clear_scene()
             "She gets on and the bus pulls away. When you pass a mailbox you slide the wallet inside - at least she'll get it back."
             $ the_person.remove_person_from_game()

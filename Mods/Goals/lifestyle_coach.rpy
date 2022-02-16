@@ -27,7 +27,7 @@ init -1 python:
 
     lifestyle_coach_intro = Action("Meet the Lifestyle Coach", lifestyle_coach_intro_requirement, "lifestyle_coach_intro_label")
 
-init 3 python:
+#init 3 python:
     # def lifestyle_coach_init():
     #     print("Initialize Lifestyle Coach")
     #     dawn_job = Job("Lifestyle Coach", lifestyle_coach_role, mall, work_times = [1,2,3])

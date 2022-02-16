@@ -373,7 +373,7 @@ init 2:
 #                 background "#1a45a1aa"
 #                 xsize 1860
 #                 ysize 60
-#                 text "Creat Your Serum Dose" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 size 36 style "menu_text_style"
+#                 text "Create Your Serum Dose" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 size 36 style "menu_text_style"
 #
 #             hbox:
 #                 vbox:
