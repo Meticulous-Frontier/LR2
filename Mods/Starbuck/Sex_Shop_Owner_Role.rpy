@@ -54,12 +54,12 @@ init 1 python:
     def make_sex_shop_owner(the_person):
         the_person.event_triggers_dict["shop_progress_stage"] = 0   #For story purposes
         the_person.event_triggers_dict["shop_investment_total"] = 0 #For calculation purposes
-        the_person.event_triggers_dict["shop_investment_rate"] = 0  #For balance purpsoses
+        the_person.event_triggers_dict["shop_investment_rate"] = 0  #For balance purposes
         the_person.event_triggers_dict["shop_investment_basic_total"] = 0
         the_person.event_triggers_dict["shop_investment_advanced_total"] = 0
         the_person.event_triggers_dict["shop_investment_fetish_total"] = 0
         the_person.event_triggers_dict["shop_market_production_count"] = 0  #For extra income if we've spent a lot of time on promo videos etc.
-        sex_shop_owner_role = Role(role_name ="Sex Shop Owner", actions =[sex_shop_invest_basic, sex_shop_invest_advanced, sex_shop_invest_fetish], on_turn = sex_shop_owner_on_turn, on_move = None, on_day = sex_shop_owner_on_day)
+        sex_shop_owner_role = Role(role_name ="Sex Shop Invest Role", actions =[sex_shop_invest_basic, sex_shop_invest_advanced, sex_shop_invest_fetish], on_turn = sex_shop_owner_on_turn, on_move = None, on_day = sex_shop_owner_on_day, hidden = True)
         the_person.add_role(sex_shop_owner_role)
         return
 
@@ -89,7 +89,7 @@ label sex_shop_invest_basic_label(the_person):
 label sex_shop_invest_advanced_label(the_person):
     mc.name "I'd like to invest more in your shop, [the_person.title]."
     the_person "Oh?"
-    mc.name "I'd like for you to expand more of your advnaced inventory."
+    mc.name "I'd like for you to expand more of your advanced inventory."
     the_person "Yeah, having intricate toys and the like can be great for driving foot traffic, even if they don't sell very fast."
     mc.name "Sounds great. Here's a check for $5000."
     $ the_person.change_love(2)

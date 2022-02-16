@@ -2061,7 +2061,7 @@ label Sarah_threesome_request_label():
         mc.name "It's actually my aunt. She's been going through a rough patch after her divorce. I think it would really help pick her up."
         the_person "Oh! Well, I mean, an aunt is fairly distant relation. And it sounds like she could use a good opportunity to cut loose..."
     elif person_choice is starbuck:
-        if starbuck.shop_progress_stage >= 1:
+        if starbuck.event_triggers_dict.get("shop_progress_stage", 0) >= 1:
             mc.name "I actually have a joint venture in another business. There's a woman who owns the mall sex shop, and I invested a decent sum of money in it recently."
             the_person "Ah, so, she's a business partner?"
         else:
