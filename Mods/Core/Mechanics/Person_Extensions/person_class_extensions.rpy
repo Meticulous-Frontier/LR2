@@ -2462,6 +2462,17 @@ init -1 python:
 
     Person.is_submissive = is_submissive
 
+    def facial_or_swallow(self):    #Use this function to determine if girl wants a facial or to swallow cum. If neither is preferred, return one at random.
+        if self.has_cum_fetish():
+            return get_random_from_list(["swallow", "facial"])
+        if self.get_opinion_score("cum facials") == self.get_opinion_score("drinking cum"):
+            return get_random_from_list(["swallow", "facial"])
+        if self.get_opinion_score("cum facials") > self.get_opinion_score("drinking cum"):
+            return "facial"
+        return "swallow"
+
+    Person.facial_or_swallow = facial_or_swallow
+
     def is_jealous(self):
         if not (self.is_girlfriend() or self.is_affair()):
             return False
@@ -2515,6 +2526,13 @@ init -1 python:
         return self.relationship == "Single" and not self.is_girlfriend()
 
     Person.is_single = is_single
+
+    def is_in_trance(self):
+        if self.get_trance_multiplier() > 1.2:
+            return True
+        return False
+
+    Person.is_in_trance = is_in_trance
 
 #Intern functions
 
