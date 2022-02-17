@@ -291,8 +291,8 @@ init -1 python:
 
     # wrap default remove_employee function to also trigger the fire_HR_director code when needed
     def business_remove_employee_extended(org_func):
-        def remove_employee_wrapper(business, person, remove_linked = True):
-            org_func(business, person, remove_linked)
+        def remove_employee_wrapper(business, person):
+            org_func(business, person)
 
             if person is business.hr_director:
                 business.fire_HR_director()
