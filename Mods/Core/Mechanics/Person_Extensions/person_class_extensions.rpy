@@ -1566,10 +1566,10 @@ init -1 python:
     Person.hide_person = hide_person_enhanced
 
     def is_person_at_work(self): #Checks to see if the character is at work.
-        if not self.work:
+        if not self.job or not self.job.job_location:
             return False
 
-        return self.location in [mc.business.m_div, mc.business.p_div, mc.business.r_div, mc.business.s_div, mc.business.h_div]
+        return self.job.schedule.get_destination() == self.location
 
     Person.is_at_work = is_person_at_work
 
