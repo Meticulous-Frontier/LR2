@@ -64,7 +64,7 @@ init 2 python:
             ])
 
         sarah.generate_home()
-        sarah.set_schedule(sarah.home, the_times = [1,2,3])
+        sarah.set_override_schedule(sarah.home)
         sarah.home.add_person(sarah)
 
         sarah.event_triggers_dict["yoga_voyeur"] = False
@@ -590,7 +590,7 @@ label Sarah_intro_label():
             $ sarah.event_triggers_dict["alt_hire"] = True
 
     # make her a free roaming character
-    $ sarah.set_schedule(None, the_times = [1, 2, 3])
+    $ sarah.set_override_schedule(None)
     $ sarah.set_schedule(gym, the_days = [5,6], the_times = [1])    #She tries to stay in shape
     $ sarah.event_triggers_dict["first_meeting"] = True
     $ add_sarah_watch_yoga_at_gym_action()
