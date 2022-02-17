@@ -222,11 +222,12 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 185
                     vbox:
                         text "Job Statistics" style "serum_text_style_header"
-                        text "HR Job: [hr_base]" style "menu_text_style"
-                        text "Marketing Job: [market_base]" style "menu_text_style"
-                        text "Research Job: [research_base]" style "menu_text_style"
-                        text "Production Job: [prod_base]" style "menu_text_style"
-                        text "Supply Job: [supply_base]" style "menu_text_style"
+                        text "HR: [hr_base]% Company Efficiency" style "menu_text_style"
+                        text "Marketing: [market_base] Market Reach" style "menu_text_style"
+                        text "Research: [research_base] Research Points" style "menu_text_style"
+                        text "Production: [prod_base] Production Points" style "menu_text_style"
+                        text "Supply: [supply_base] Supply Units" style "menu_text_style"
+
                 frame:
                     background None
                     anchor [0.5,1]
