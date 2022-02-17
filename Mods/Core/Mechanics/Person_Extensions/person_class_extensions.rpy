@@ -94,7 +94,6 @@ init -1 python:
         self.override_schedule = None
         self.home = None
         self.work = None
-        self.schedule = None
         self.job = None
         self.relationship = None
         self.personality = None
