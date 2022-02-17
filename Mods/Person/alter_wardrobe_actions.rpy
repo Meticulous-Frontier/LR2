@@ -19,9 +19,7 @@ init 4 python:
             found = next((x for x in action_mod_list if x.effect == "modify_wardrobe_label"), None)
             if isinstance(found, ActionMod) and found.enabled:   # use enabled from action mod settings
                 # use not stored action to append to action menu
-                modify_wardrobe_action.args = [person]
-                modify_wardrobe_action.requirement_args = [person]
-                result.append(modify_wardrobe_action)
+                result.append([modify_wardrobe_action, person])
             return result
 
         return build_specific_action_list_wrapper
