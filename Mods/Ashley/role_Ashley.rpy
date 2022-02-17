@@ -21,6 +21,7 @@ init 2 python:
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 2, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -1, False], ["public sex", -1, False]])
 
+        ashley.add_job(unemployed_job)
         ashley.set_schedule(stephanie.home, the_days=[0,1,2,3,4,5,6], the_times = [0,1,2,3,4])
         ashley.home = stephanie.home
         ashley.home.add_person(ashley)
@@ -297,6 +298,7 @@ label ashley_intro_label():
         the_person "Oh! I didn't think you would say yes. This is great news! I'm sure she'll probably want to get started right away!"
 
         $ mc.business.add_employee_production(ashley)
+        $ ashley.set_schedule(None, the_times = [1,2,3]) #Free roam when not working
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
         "As you finish up, you notice [the_person.possessive_title] is already calling her sister with the news."

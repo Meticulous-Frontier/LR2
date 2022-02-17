@@ -38,6 +38,7 @@ init 2 python:
 
         kaya.generate_home()
         kaya.set_schedule(kaya.home, the_times = [0,1,2,3,4])
+        kaya.add_job(unemployed_job)
         kaya.home.add_person(kaya)
 
         kaya.event_triggers_dict["intro_complete"] = False    # True after first talk
@@ -206,6 +207,7 @@ label kaya_setup_intro_event_label():
         kaya_barista_job = Job("Barista", kaya_role, coffee_shop, work_times = [2, 3])
         kaya.add_job(kaya_barista_job)
         # she also studies
+        kaya.set_schedule(None, the_times = [1,2,3])    # Free roam
         kaya.set_schedule(university, the_days = [0, 1, 2, 3, 4], the_times = [1])
         kaya.add_unique_on_room_enter_event(kaya_intro)
     return
