@@ -21,6 +21,8 @@ init -1 python:
             if max_supply <= 0:
                 return 0
 
+        max_supply = __builtin__.int(max_supply)
+
         self.funds -= __builtin__.round(max_supply * candace_calculate_discount(), 1)
         self.supply_count += max_supply
         self.supplies_purchased += max_supply #Used for end of day reporting
@@ -38,6 +40,24 @@ init -1 python:
         return False
 
     Business.is_trait_researched = is_trait_researched
+
+    def setup_employee_stats(the_person): #Centralized function for setting up employee stuff when you hire them
+        if the_person.event_triggers_dict.get("employed_since", -1) == -1: # prevent fire / hire loop event triggering
+            the_person.event_triggers_dict["employed_since"] = day
+            mc.business.listener_system.fire_event("new_hire", the_person = the_person)
+            for other_employee in mc.business.get_employee_list():
+                town_relationships.begin_relationship(the_person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
+
+        # set names when hiring (if not set)
+        if not person.title:
+            person.set_title(get_random_title(person))
+        if not person.possessive_title:
+            person.set_possessive_title(get_random_possessive_title(person))
+        if not person.mc_title or person.mc_title == "Stranger":
+            person.set_mc_title(get_random_player_title(person))
+
+        # make sure she is dressed appropriately
+        the_person.apply_outfit()
 
     def all_IT_projects():
         return [x for x in business_IT_project_list + nanobot_IT_project_list]
