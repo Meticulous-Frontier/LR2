@@ -41,12 +41,12 @@ init -1 python:
 
     Business.is_trait_researched = is_trait_researched
 
-    def setup_employee_stats(the_person): #Centralized function for setting up employee stuff when you hire them
-        if the_person.event_triggers_dict.get("employed_since", -1) == -1: # prevent fire / hire loop event triggering
-            the_person.event_triggers_dict["employed_since"] = day
-            mc.business.listener_system.fire_event("new_hire", the_person = the_person)
+    def setup_employee_stats(person): #Centralized function for setting up employee stuff when you hire them
+        if person.event_triggers_dict.get("employed_since", -1) == -1: # prevent fire / hire loop event triggering
+            person.event_triggers_dict["employed_since"] = day
+            mc.business.listener_system.fire_event("new_hire", the_person = person)
             for other_employee in mc.business.get_employee_list():
-                town_relationships.begin_relationship(the_person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
+                town_relationships.begin_relationship(person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
 
         # set names when hiring (if not set)
         if not person.title:
@@ -57,7 +57,7 @@ init -1 python:
             person.set_mc_title(get_random_player_title(person))
 
         # make sure she is dressed appropriately
-        the_person.apply_outfit()
+        person.apply_outfit()
 
     def all_IT_projects():
         return [x for x in business_IT_project_list + nanobot_IT_project_list]
