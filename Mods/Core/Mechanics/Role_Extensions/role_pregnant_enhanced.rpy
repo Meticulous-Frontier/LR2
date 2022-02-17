@@ -133,6 +133,8 @@ init 3 python:
             mc.business.add_mandatory_morning_crisis(preg_transform_action) #This event adds an announcement event the next time you enter the same room as the girl.
 
         person.add_role(pregnant_role)
+
+        mc.listener_system.fire_event("girl_pregnant", the_person = person)
         return
 
 init 3 python:
