@@ -24,9 +24,6 @@ init 2 python:
         kaya_base_outfit.add_accessory(the_lipstick)
         kaya_base_outfit.add_accessory(the_bracelets)
 
-        # init kaya role
-        kaya_role = Role(role_name ="kaya", actions =[kaya_barista_fuck, kaya_get_drinks], hidden = True)
-
         #global kaya_role
         global kaya
         kaya = make_person(name = "Kaya", last_name ="Greene", age = 22, body_type = "thin_body", face_style = "Face_3",  tits="B", height = 0.94, hair_colour="black", hair_style = messy_hair, skin="tan" , \
@@ -204,6 +201,8 @@ init 3 python:
 
 label kaya_setup_intro_event_label():
     python:
+        # init kaya role
+        kaya_role = Role(role_name ="kaya", actions =[kaya_barista_fuck, kaya_get_drinks], hidden = True)
         kaya_barista_job = Job("Barista", kaya_role, coffee_shop, work_times = [2, 3])
         kaya.add_job(kaya_barista_job)
         # she also studies
