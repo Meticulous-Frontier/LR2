@@ -49,7 +49,7 @@ init 2:
                             vbox:
                                 xalign 0.5
 
-                                for serum in set(inventory_1.get_serum_type_list()) | set(inventory_2.get_serum_type_list()): #Gets a unique entry for each serum design that shows up in either list. Doesn't duplicate if it's in both.
+                                for serum in sorted(set(inventory_1.get_serum_type_list()) | set(inventory_2.get_serum_type_list()), key = lambda x: x.name): #Gets a unique entry for each serum design that shows up in either list. Doesn't duplicate if it's in both.
                                     # has a few things. 1) name of serum design. 2) count of first inventory, 3) arrows for transfering, 4) count of second inventory.
                                     $ trade_sensitive = True
                                     if trade_requirement:
