@@ -15,18 +15,18 @@ init 2:
             return True
 
         def get_trait_aspect_tags(trait):
-            aspect_tags = "\n{size=14}"
+            aspect_tags = "\n{size=15}"
             if trait.tier > mc.business.max_serum_tier:
                 aspect_tags += "Tier: {color=#98fb98}" + str(trait.tier) + "{/color}"
             else:
                 aspect_tags += "Tier:" + str(trait.tier)
 
-            aspect_tags += "{color=#0049d8} Ment: " + str(trait.mental_aspect) + "{/color}"
-            aspect_tags += "{color=#00AA00} Phys: " + str(trait.physical_aspect) + "{/color}"
-            aspect_tags += "{color=#FFC0CB} Sex: " + str(trait.sexual_aspect) + "{/color}"
-            aspect_tags += "{color=#FFFFFF} Medic: " + str(trait.medical_aspect) + "{/color}"
-            aspect_tags += "{color=#BBBBBB} Flaw: " + str(trait.flaws_aspect) + "{/color}"
-            aspect_tags += "{color=#FF6249} Attn: " + str(trait.attention) + "{/color}"
+            aspect_tags += "{color=#387aff}   Ment: " + str(trait.mental_aspect) + "{/color}"
+            aspect_tags += "{color=#00AA00}   Phys: " + str(trait.physical_aspect) + "{/color}"
+            aspect_tags += "{color=#FFC0CB}   Sex: " + str(trait.sexual_aspect) + "{/color}"
+            aspect_tags += "{color=#FFFFFF}   Med: " + str(trait.medical_aspect) + "{/color}"
+            aspect_tags += "{color=#AAAAAA}   Flaw: " + str(trait.flaws_aspect) + "{/color}"
+            aspect_tags += "{color=#FF6249}   Attn: " + str(trait.attention) + "{/color}"
             aspect_tags += "{/size}"
             return aspect_tags
 
@@ -187,10 +187,7 @@ init 2:
                             xsize 530
                             text "[trait_tooltip.name]" style "menu_text_title_style" xalign .5
 
-                        frame:
-                            background "#000080"
-                            xsize 530
-                            use aspect_grid(trait_tooltip)
+                        use aspect_grid(trait_tooltip)
 
                         frame:
                             background "#0a142688"
@@ -208,12 +205,12 @@ init 2:
                                             frame:
                                                 background "#43B197"
                                                 xsize 255
-                                                text "[trait_tooltip.positive_slug]" style "serum_text_style"
+                                                text "[trait_tooltip.positive_slug]" style "serum_text_style" size 16
                                         vbox:
                                             frame:
                                                 background "#B14365"
                                                 xsize 255
-                                                text "[trait_tooltip.negative_slug]" style "serum_text_style"
+                                                text "[trait_tooltip.negative_slug]" style "serum_text_style" size 16
                                     hbox:
                                         frame:
                                             background "#000080"
@@ -325,11 +322,11 @@ init 2:
                                         background "#43B197"
                                         xsize 270
                                         margin [5, 0, 5, 0]
-                                        text "[trait.positive_slug]" style "serum_text_style"
+                                        text "[trait.positive_slug]" style "serum_text_style" size 16
                                     frame:
                                         xsize 270
                                         background "#B14365"
-                                        text "[trait.negative_slug]" style "serum_text_style"
+                                        text "[trait.negative_slug]" style "serum_text_style" size 16
 
         frame:
             background "#0a142688"
