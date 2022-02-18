@@ -185,6 +185,17 @@ init 5 python:
                     return False
         return True
 
+    def is_position_filtered(person, position):
+        if position.skill_tag == "Foreplay" and callable(person.event_triggers_dict.get("foreplay_position_filter", None)):
+            return not person.event_triggers_dict["foreplay_position_filter"]([position])
+        if position.skill_tag == "Oral" and callable(person.event_triggers_dict.get("oral_position_filter", None)):
+            return not person.event_triggers_dict["oral_position_filter"]([position])
+        if position.skill_tag == "Vaginal" and callable(person.event_triggers_dict.get("vaginal_position_filter", None)):
+            return not person.event_triggers_dict["vaginal_position_filter"]([position])
+        if position.skill_tag == "Anal" and callable(person.event_triggers_dict.get("anal_position_filter", None)):
+            return not person.event_triggers_dict["anal_position_filter"]([position])
+        return False
+
     def build_position_rejection_string(person, position):
         result = position.name + "\nHates: "
         if position.opinion_tags:
@@ -264,7 +275,8 @@ init 5 python:
             if not position_locked and object_choice:
                 option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
-                    if allow_position(person, position) and object_choice.has_trait(position.requires_location):
+
+                    if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location):
                         appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
@@ -272,9 +284,10 @@ init 5 python:
                 # allow transition to positions with same traits and skill requirements
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
-                        if allow_position(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
+                        if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
                             appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
+
             if not person.outfit.full_access():
                 option_list.append(["Pause and strip her down","Strip"])
 

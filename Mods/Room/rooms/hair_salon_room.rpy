@@ -2,7 +2,7 @@ init 2 python: # Declare variables to use
     # Wardrobe for employees in the salon
     salon_wardrobe = wardrobe_from_xml("Salon_Wardrobe")
 
-     # Note that the class Room have a bunch of useful variables already for restricting access, adding objects etc.
+    # Note that the class Room have a bunch of useful variables already for restricting access, adding objects etc.
     def salon_requirement():
         if day%7 == 6: # Can be removed
             return "Closed on Sundays"
