@@ -115,7 +115,7 @@ label manager_role_remove_label(the_person):
     mc.name "I know, that's why I'm keeping you with me here."
     $ the_person.change_stats(happiness = -10, obedience = 2)
     # this might increase the number of active strippers to 6
-    $ the_person.add_job(stripper_job)
+    $ the_person.add_job(stripclub_stripper_job)
     return
 
 label promote_to_mistress_label(the_person):
@@ -146,7 +146,7 @@ label mistress_role_remove_label(the_person):
     $ the_person.draw_person(emotion = "sad")
     the_person "I understand [the_person.mc_title], I can assure you I did my best..."
     mc.name "I know, that's why I keep you with me here."
-    $ the_person.add_job(stripper_job)
+    $ the_person.add_job(stripclub_stripper_job)
     return
 
 label mistress_hunt_for_me_label(the_person):

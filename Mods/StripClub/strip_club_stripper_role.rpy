@@ -1,7 +1,6 @@
 ## Stripclub storyline Mod by Corrado
 #  Strippers role definition.
 #  The role is appended to strippers after they start to work for you.
-
 init 5 python:
     add_label_hijack("normal_start", "update_strip_club_show_requirement")
     add_label_hijack("after_load", "update_strip_club_show_requirement")
@@ -72,12 +71,11 @@ init 5 python:
         strip_club_hire_employee_action = Action("Employ at [strip_club.formal_name]", strip_club_hire_employee_requirement, "strip_club_hire_employee_label", menu_tooltip = "Hire [the_person.title] to work for you in your strip club.")
         mc.main_character_actions.append(strip_club_hire_employee_action)
         # update base game stripper job
-        stripper_job.job_role = stripclub_stripper_role
+        stripper_job.quit_function = stripper_quit   # change quit function to prevent adding new strippers
         # change strippers jobs role
         for stripper in stripclub_strippers[:]: # use copy of existing array
-            print("Updated: " + stripper.name)
-            stripper.quit_job()
-            stripper.add_job(stripper_job)
+            stripper.quit_job() # use quit job because the role names match
+            stripper.add_job(stripclub_stripper_job)
 
     def allow_promote_to_manager_requirement(person):
         if get_strip_club_foreclosed_stage() < 5:
@@ -108,11 +106,24 @@ init 5 python:
         available_roles.insert(0, "Strip Club Role")
         return [available_roles]
 
+    # change stripper replace function
+    def stripper_replace_enhanced(the_person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
+        if the_person in stripclub_strippers:
+            stripclub_strippers.remove(the_person)
+
+        # add new stripper to replace the one that left
+        create_stripper()
+
+    def stripper_quit(the_person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
+        if the_person in stripclub_strippers:
+            stripclub_strippers.remove(the_person)
+
     promote_to_manager_action = Action("Appoint as Manager", allow_promote_to_manager_requirement, "promote_to_manager_label", menu_tooltip = "Appoint [the_person.title] as strip club manager.")
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
     strip_club_stripper_performance_review_action = Action("Review her performance", strip_club_review_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
 
     stripclub_stripper_role = Role("Stripper", get_stripper_role_actions() + [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = True)
+
 
 label update_strip_club_show_requirement(stack):
     python:
@@ -123,6 +134,9 @@ label update_strip_club_show_requirement(stack):
             stripclub_bdsm_performers = MappedList(Person, all_people_in_the_game)
         if not "stripclub_waitresses" in globals():
             stripclub_waitresses = MappedList(Person, all_people_in_the_game)
+
+        # attach new replace function for better stripper creation
+        stripper_job.quit_function = stripper_replace_enhanced
 
         execute_hijack_call(stack)
     return
@@ -157,7 +171,7 @@ label strip_club_hire_employee_label(the_person):
             the_person "Ok, but after what you did last time, the pay should be magnificent!"
             mc.name "Your pay will be $[ran_num] a day. Do you think that will be good enough for you?"
             the_person "Really you will pay me that much? Ok, then my answer is yes, I'll work as stripper again."
-            $ the_person.add_job(stripper_job)
+            $ the_person.add_job(stripclub_stripper_job)
 
         elif _return is stripclub_bdsm_performer_role:
             mc.name "I did it just because I already knew I had a better offer for a girl like you. How do you feel about coming back at the strip club to work as BDSM performer?"
@@ -231,7 +245,7 @@ label strip_club_hire_employee_label(the_person):
             mc.name "Don't worry [the_person.title], if you change your mind, just let me know."
             $ the_person.event_triggers_dict["stripper_ask_hire"] = day
             return
-        $ the_person.add_job(stripper_job)
+        $ the_person.add_job(stripclub_stripper_job)
 
     elif _return is stripclub_bdsm_performer_role:
         mc.name "I was thinking you might like to perform in the BDSM room..."

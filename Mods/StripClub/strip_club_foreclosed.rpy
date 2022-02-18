@@ -25,6 +25,8 @@ init 2 python:
         stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4])
         global stripclub_mistress_job
         stripclub_mistress_job = Job("Mistress", stripclub_mistress_role, bdsm_room, work_days=[0,1,2,3,4,5,6], work_times = [3,4])
+        global stripclub_stripper_job
+        stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit)
         return
 
     def get_strip_club_foreclosed_stage():
