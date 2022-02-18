@@ -18,19 +18,19 @@ init 2 python:
         if the_goal.arg_dict["required"] > 5000:
             the_goal.arg_dict["required"]  = 5000
 
-    def side_money_count_function(the_goal, count):
-        the_goal.arg_dict["count"] += count
-        if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
-            return True
-        return False
+    # def side_money_count_function(the_goal, count):
+    #     the_goal.arg_dict["count"] += count
+    #     if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
+    #         return True
+    #     return False
 
-    def side_money_difficulty_function(the_goal, the_difficulty):
-        the_goal.arg_dict["required"]  = 100
-        the_goal.arg_dict["required"]  += (50 * the_difficulty)
-        if the_difficulty > 8:
-            the_goal.arg_dict["required"]  += (100 * the_difficulty)
-        if the_goal.arg_dict["required"] > 3000:
-            the_goal.arg_dict["required"]  = 3000
+    # def side_money_difficulty_function(the_goal, the_difficulty):
+    #     the_goal.arg_dict["required"]  = 100
+    #     the_goal.arg_dict["required"]  += (50 * the_difficulty)
+    #     if the_difficulty > 8:
+    #         the_goal.arg_dict["required"]  += (100 * the_difficulty)
+    #     if the_goal.arg_dict["required"] > 3000:
+    #         the_goal.arg_dict["required"]  = 3000
 
     def HR_interview_count_function(the_goal, the_person):
         the_goal.arg_dict["count"] += 1
