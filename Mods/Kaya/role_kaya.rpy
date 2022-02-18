@@ -103,16 +103,22 @@ init -2 python:
         return False
 
     def kaya_lily_study_night_intro_requirement():
+        if not lily.has_job(sister_student_job):
+            return False
         if day%7 == 1 and time_of_day == 4:
             return True
         return False
 
     def kaya_lily_study_night_apology_requirement(the_person):
+        if not lily.has_job(sister_student_job):
+            return False
         if the_person.location == coffee_shop:
             return True
         return False
 
     def kaya_lily_study_night_recurring_requirement(the_person):
+        if not lily.has_job(sister_student_job):
+            return False
         if the_person.event_triggers_dict.get("last_lily_study_night", 0) >= day:
             return False
         if day%7 == 1 and time_of_day == 4 and the_person.location == lily.home:    #TODO double check and make sure this actually works...
