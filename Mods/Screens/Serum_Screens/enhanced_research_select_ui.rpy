@@ -188,7 +188,7 @@ init 2:
 
                         viewport:
                             xsize 380
-                            ysize 560
+                            ysize 460
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
@@ -223,7 +223,7 @@ init 2:
 
                         viewport:
                             xsize 380
-                            ysize 180
+                            ysize 280
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
