@@ -489,8 +489,8 @@ init -1 python:
         happy_points += self.salary - self.calculate_base_salary() #A real salary greater than her base is a bonus, less is a penalty. TODO: Make this dependent on salary fraction, not abosolute pay.
         happy_points += self.get_opinion_score("working") * 5 # Does she like working? It affects her happiness score.
 
-        if (day - self.event_triggers_dict.get("employed_since",0)) < 14:
-            happy_points += 14 - (day - self.event_triggers_dict.get("employed_since",0)) #Employees are much less likely to quit over the first two weeks.
+        if self.days_employed < 14:
+            happy_points += 14 - self.days_employed #Employees are much less likely to quit over the first two weeks.
         return happy_points
 
     Person.get_job_happiness_score = get_job_happiness_score_enhanced
@@ -1208,6 +1208,20 @@ init -1 python:
         return
 
     Person.update_work_skill = update_work_skill
+
+    # returns the day of first employment in company (-1 for never employed)
+    def get_employed_since(self):
+        return self.event_triggers_dict.get("employed_since", -1)
+
+    Person.employed_since = property(get_employed_since, None, None)
+
+    # returns the total number of days employed in company (0 for not employed)
+    def get_days_employed(self):
+        if self.is_employee():
+            return day - self.employed_since
+        return 0
+
+    Person.days_employed = property(get_days_employed, None, None)
 
     # increase skill of person by one until max_value is reached.
     def increase_work_skill(self, skill, max_value = 6, add_to_log = True):

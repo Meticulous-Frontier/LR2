@@ -79,9 +79,6 @@ init 2 python:
     ashley_sneaks_over = Action("Ashley sneaks over", ashley_sneaks_over_requirement, "ashley_sneaks_over_label")
     ashley_steph_drinks_out = Action("Ashley and Stephanie date", ashley_steph_drinks_out_requirement, "ashley_steph_drinks_out_label")
 
-    def ashley_get_days_employed():
-        return day - ashley.event_triggers_dict.get("employed_since", 9999)
-
     def ashley_steph_relationship_status():  #This function should return limited options back, to summarize the current status of MC relationship with Steph and Ashley
         if (ashley.sluttiness > 70 or ashley.is_girlfriend()) and (stephanie.sluttiness > 70 or stephanie.is_girlfriend()):
             return "both"
@@ -126,7 +123,7 @@ init -1 python:
 
     def ashley_room_excitement_overhear_requirement(the_person):
         if the_person.location == the_person.work:
-            if ashley_get_days_employed() > 5: #Been working for at least a few days week.
+            if the_person.days_employed > 5: #Been working for at least a few days week.
                 return True
         return False
 
@@ -138,13 +135,13 @@ init -1 python:
 
     def ashley_room_warming_up_requirement(the_person):
         if the_person.location == the_person.work:
-            if ashley_get_days_employed() > 12: #Been working for at least a week.
+            if the_person.days_employed > 12: #Been working for at least a week.
                 return True
         return False
 
     def ashley_room_overhear_classical_requirement(the_person):
         if the_person.location == the_person.work:
-            if ashley_get_days_employed() > 18:
+            if the_person.days_employed > 18:
                 return True
         return False
 

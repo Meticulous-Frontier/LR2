@@ -66,8 +66,7 @@ init 2 python:
 
 init -2 python:
     def kaya_setup_intro_event_requirement():
-        #return False    #Disabled for now #test
-        if alexia.is_employee() and day > alexia.event_triggers_dict.get("employed_since", 9999) + 7:
+        if alexia.is_employee() and alexia.days_employed > 7:
             return True
         return False
 

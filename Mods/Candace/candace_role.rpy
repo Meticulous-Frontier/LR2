@@ -28,15 +28,15 @@ init 2 python:
         return False
 
     def candace_goes_clothes_shopping_requirement(person):
-        if candace_get_hire_date() == -1 or candace.event_triggers_dict["clothes_shopping"] != 0:
+        if candace.employed_since == -1 or candace.event_triggers_dict["clothes_shopping"] != 0:
             return False
-        if day > candace_get_hire_date() + 7:  #She's been working at least a week.
+        if candace.days_employed > 7:  #She's been working at least a week.
             if mc.business.has_funds(500) and candace.location == candace.work:
                 return True
         return False
 
     def candace_overhear_supply_order_requirement(person):
-        if day > candace_get_hire_date() + 14:
+        if day > candace.employed_since + 14:
             if time_of_day > 1:
                 if person.sluttiness > 40:
                     if person.location == person.work:
@@ -1613,11 +1613,6 @@ init 3 python:
         score = candace.event_triggers_dict.get("relationship_doubt_score", 0)
         candace.event_triggers_dict["relationship_doubt_score"] = score + 1
         return
-
-    def candace_get_hire_date():
-        if "candace" in globals():
-            return candace.event_triggers_dict.get("employed_since", -1)
-        return 0
 
     def candace_get_has_gone_clothes_shopping():
         if "candace" in globals():

@@ -22,7 +22,7 @@ init -1 python:
         not_met_yet_list = []
         if alexia.get_destination(specified_time = 1) == alexia.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(alexia)
-        if "ashley" in globals() and day <= ashley.event_triggers_dict.get("employed_since", 0):
+        if "ashley" in globals() and ashley.employed_since == -1:
             not_met_yet_list.append(ashley)
         if "candace" in globals() and candace.event_triggers_dict.get("met_at_store", 0) == 0: # She exist but not met yet.
             not_met_yet_list.append(candace)
