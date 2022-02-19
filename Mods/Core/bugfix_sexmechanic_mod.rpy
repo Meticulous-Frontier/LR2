@@ -436,7 +436,6 @@ init 5 python:
         elif the_position.skill_tag == "Vaginal":
             alternate_position = suggest_alt_vaginal_sex_position(the_person, the_position, ignore_taboo = ignore_taboo)
 
-
         elif the_position.skill_tag == "Anal":
             alternate_position = suggest_alt_anal_sex_position(the_person, the_position, ignore_Taboo = ignore_taboo)
         return alternate_position
@@ -561,14 +560,20 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             call clear_object_effects(the_person) from _call_clear_object_effects_bugfix_1
                         if _return == -2:   #She hates that position, but suggests a different one.
                             $ position_choice = suggest_alternate_sex_position(the_person, position_choice, ignore_taboo = ignore_taboo)
+                            $ object_choice = None
+                            call clear_object_effects(the_person) from _call_clear_object_effects_bugfix_2
                             if position_choice.verb:
                                 the_person "I have another idea... what if we [position_choice.verb] like this?"
                             else:
                                 the_person "I have another idea... what if we just did this?"
                             "[the_person.possessive_title] leans into your ear and whispers, describing [position_choice.name]."
-                            $ object_choice = None
-                            call clear_object_effects(the_person) from _call_clear_object_effects_bugfix_2
-                            $ object_choice = pick_object_enhanced(the_person, position_choice, forced_object = start_object)
+                            menu:
+                                "[position_choice.name]":
+                                    mc.name "Let's do it."
+                                    $ object_choice = pick_object_enhanced(the_person, position_choice, forced_object = start_object)
+                                "Do something else":
+                                    mc.name "I think I can come up with something else instead..."
+                                    $ position_choice = None
                         else:
                             $ position_choice = None
                             $ object_choice = None
