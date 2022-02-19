@@ -55,7 +55,9 @@ label interview_action_description_enhanced():
             $ clear_scene()
 
             $ candidates = interview_build_candidates_list(count)
-            call hire_select_process(candidates) from _call_hire_select_process_interview_action_enhanced
+
+            # pad with one extra element, to make sure we can see all candidates
+            call hire_select_process(candidates + [1]) from _call_hire_select_process_interview_action_enhanced
 
             if not _return == "None":
                 $ new_person = _return

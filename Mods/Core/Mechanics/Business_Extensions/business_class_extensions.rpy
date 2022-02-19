@@ -414,7 +414,7 @@ init -1 python:
         if not person in div_func[target_division][0]:
             div_func[target_division][0].append(person)
         person.add_role(college_intern_role)
-        person.job = student_job
+        person.add_job(student_job)
         person.set_override_schedule(div_func[target_division][1], the_days = [5,6], the_times = [1,2])
         if add_to_location:
             university.add_person(person)
