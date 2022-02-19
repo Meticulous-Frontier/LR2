@@ -43,6 +43,11 @@ init 5 python:
         "Anal Sex": "Anal",
     }
 
+    foreplay_giving_positions = [kissing, standing_finger, standing_grope]
+    foreplay_receiving_positions = [handjob, tit_fuck, kissing]
+    oral_giving_positions = [cunnilingus, standing_oral, SB_sixty_nine]
+    oral_receiving_positions = [blowjob, deepthroat, skull_fuck, SB_sixty_nine]
+
     def girl_choose_position_enhanced(person, ignore_taboo = False):
         position_option_list = []
         extra_positions = []
@@ -348,6 +353,95 @@ init 5 python:
                 positions.append([spanking, 1])
         return positions
 
+    def check_person_position_tags(the_person, the_position):
+        for pos_tag in the_position.opinion_tags:
+            if the_person.get_opinion_score(pos_tag) <= -2:
+                return False
+        return True
+
+    def get_willing_vaginal_position_list(the_person):
+        items = filter(lambda x: x.skill_tag == "Vaginal" and check_person_position_tags(the_person, x) and x.her_position_willingness_check(the_person), list_of_positions)
+        return items
+
+    def suggest_alt_foreplay_sex_position(the_person, the_position, ignore_taboo = False):
+        alternate_position = kissing
+        if the_position.guy_arousal > the_position.girl_arousal:    #checking arousal should show us if giving or receiving
+            renpy.random.shuffle(foreplay_receiving_positions)
+            for x in foreplay_receiving_positions:
+                if check_person_position_tags(the_person, x):
+                    if x.her_position_willingness_check(the_person, ignore_taboo = ignore_taboo):
+                        alternate_position = x
+                        break
+        else:
+            renpy.random.shuffle(foreplay_giving_positions)
+            for x in foreplay_giving_positions:
+                if check_person_position_tags(the_person, x):
+                    if x.her_position_willingness_check(the_person, ignore_taboo = ignore_taboo):
+                        alternate_position = x
+                        break
+        return alternate_position
+
+    def suggest_alt_oral_sex_position(the_person, the_position, ignore_taboo = False):
+        alternate_position = kissing
+        if the_position.guy_arousal > the_position.girl_arousal:
+            renpy.random.shuffle(oral_receiving_positions)
+            for x in oral_receiving_positions:
+                if check_person_position_tags(the_person, x):
+                    if x.her_position_willingness_check(the_person, ignore_taboo = ignore_taboo):
+                        alternate_position = x
+                        break
+        else:
+            renpy.random.shuffle(oral_giving_positions)
+            for x in oral_giving_positions:
+                if check_person_position_tags(the_person, x):
+                    if x.her_position_willingness_check(the_person, ignore_taboo = ignore_taboo):
+                        alternate_position = x
+                        break
+        if the_position == kissing: #We didn't find a suitable alternative. Step down to foreplay
+            alternate_position = suggest_alt_foreplay_sex_position(the_person, the_position, ignore_taboo = ignore_taboo)
+        return alternate_position
+
+    def suggest_alt_vaginal_sex_position(the_person, the_postion, ignore_taboo = False):
+        alternate_position = kissing
+        vaginal_postions_avail = get_willing_vaginal_position_list(the_person)
+        if the_person.get_opinion_score("vaginal sex") <= -2 or len(vaginal_postions_avail) == 0:   #She isn't willing to do any type of vaginal sex. Step down to oral.
+            the_position = blowjob  #If we are proceeding to sex, probably expectation for male pleasure. Default to receiving.
+            alternate_position = suggest_alt_oral_sex_position(the_person, the_postion, ignore_taboo = ignore_taboo)
+        else:
+            alternate_position = get_random_from_list(vaginal_postions_avail)
+        return alternate_position
+
+    def suggest_alt_anal_sex_position(the_person, the_postion, ignore_taboo = False):
+        alternate_position = kissing
+        anal_postions_avail = filter(lambda x: x.skill_tag == "Anal" and check_person_position_tags(the_person, x) and x.her_position_willingness_check(the_person), list_of_positions)
+        if the_person.get_opinion_score("anal sex") <= -2 or len(anal_postions_avail) == 0:   #She isn't willing to do any type of anal sex. Step down to vaginal.
+            alternate_position = suggest_alt_vaginal_sex_position(the_person, the_postion, ignore_taboo = ignore_taboo)
+        else:
+            alternate_position = get_random_from_list(anal_postions_avail)
+        return alternate_position
+
+    def suggest_alternate_sex_position(the_person, the_position, ignore_taboo = False):
+        the_taboo = the_position.associated_taboo
+        if ignore_taboo:
+            the_taboo = None
+
+        alternate_position = kissing    #Default alternate position in case we can't find any others.
+        #First, split the function based on type of sex attempted. Similar positions should have similar alternates.
+        if the_position.skill_tag == "Foreplay":
+            alternate_position = suggest_alt_foreplay_sex_position(the_person, the_position, ignore_taboo = ignore_taboo)
+
+        elif the_position.skill_tag == "Oral":
+            alternate_position = suggest_alt_oral_sex_position(the_person, the_position, ignore_taboo = ignore_taboo)
+
+        elif the_position.skill_tag == "Vaginal":
+            alternate_position = suggest_alt_vaginal_sex_position(the_person, the_position, ignore_taboo = ignore_taboo)
+
+
+        elif the_position.skill_tag == "Anal":
+            alternate_position = suggest_alt_anal_sex_position(the_person, the_position, ignore_Taboo = ignore_taboo)
+        return alternate_position
+
+
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = []):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
@@ -462,9 +556,23 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         if _return == -1: # angry reject ends interactions
                             $ finished = True
                             $ report_log["is_angry"] = True
-                        $ position_choice = None
-                        $ object_choice = None
-                        call clear_object_effects(the_person) from _call_clear_object_effects_bugfix
+                            $ position_choice = None
+                            $ object_choice = None
+                            call clear_object_effects(the_person) from _call_clear_object_effects_bugfix_1
+                        if _return == -2:   #She hates that position, but suggests a different one.
+                            $ position_choice = suggest_alternate_sex_position(the_person, position_choice, ignore_taboo = ignore_taboo)
+                            if position_choice.verb:
+                                the_person "I have another idea... what if we [position_choice.verb] like this?"
+                            else:
+                                the_person "I have another idea... what if we just did this?"
+                            "[the_person.possessive_title] leans into your ear and whispers, describing [position_choice.name]."
+                            $ object_choice = None
+                            call clear_object_effects(the_person) from _call_clear_object_effects_bugfix_2
+                            $ object_choice = pick_object_enhanced(the_person, position_choice, forced_object = start_object)
+                        else:
+                            $ position_choice = None
+                            $ object_choice = None
+                            call clear_object_effects(the_person) from _call_clear_object_effects_bugfix_3
 
 
                 if position_choice and object_choice:
@@ -680,6 +788,10 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
         # She's not willing to do it, but gives you a soft reject.
         $ the_person.call_dialogue("sex_gentle_reject")
         $ willing = 0
+
+    elif hates_position and the_person.effective_sluttiness(the_taboo) > final_slut_requirement * .6:
+        #She hates the position but isn't so mad she ends sex outright.
+        $ willing = -2
 
     else:
         # You're nowhere close to the required sluttiness or hates position, lose some love for even trying and end interaction
