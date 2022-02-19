@@ -2,7 +2,7 @@
 #All functions associated with running the sex shop can now be done via Roles, so lets simplify the code and do it that way.
 init -1 python:
     def sex_shop_invest_basic_requirement(person):
-        if person.event_triggers_dict.get("shop_progress_stage", 0) > 0:
+        if sex_shop_stage() > 0:
             if person.event_triggers_dict.get("shop_investment_basic_total", 0) > 5000:
                 return "No more investment opportunity."
             elif mc.business.funds >= 1000:
@@ -12,7 +12,7 @@ init -1 python:
         return False
 
     def sex_shop_invest_advanced_requirement(person):
-        if person.event_triggers_dict.get("shop_progress_stage", 0) > 1:
+        if sex_shop_stage() > 1:
             if person.event_triggers_dict.get("shop_investment_advanced_total", 0) > 20000:
                 return "No more investment opportunity."
             elif mc.business.funds >= 5000:
@@ -22,7 +22,7 @@ init -1 python:
         return False
 
     def sex_shop_invest_fetish_requirement(person):
-        if person.event_triggers_dict.get("shop_progress_stage", 0) > 2:
+        if sex_shop_stage() > 2:
             if person.event_triggers_dict.get("shop_investment_fetish_total", 0) > 45000:
                 return "No more investment opportunity."
             elif mc.business.funds >= 15000:
@@ -42,8 +42,7 @@ init 1 python:
         return
 
     def sex_shop_owner_on_day(person): #Use this function to determine if she is going to act on jealous score. also can check for date events here.
-
-        if person.event_triggers_dict.get("shop_progress_stage", 0) > 0:
+        if sex_shop_stage() > 0:
             investment_return = sex_shop_investment_return(person)
             if (investment_return > 0) :
                 mc.business.funds += investment_return
@@ -69,6 +68,9 @@ init 1 python:
         investment_return += int (person.event_triggers_dict.get("shop_investment_advanced_total", 0) * person.event_triggers_dict.get("shop_investment_rate", 1) * 0.006)
         investment_return += int (person.event_triggers_dict.get("shop_investment_fetish_total", 0) * person.event_triggers_dict.get("shop_investment_rate", 1) * 0.004)
         return investment_return
+
+    def sex_shop_stage():
+        return starbuck.event_triggers_dict.get("shop_progress_stage", 0)
 
 
 label sex_shop_invest_basic_label(the_person):

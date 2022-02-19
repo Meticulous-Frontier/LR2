@@ -46,7 +46,7 @@ init -1 python:
         return False
 
     def breeding_fetish_starbuck_intro_requirement():
-        if starbuck.event_triggers_dict.get("shop_progress_stage", 0) > 0:
+        if sex_shop_stage() > 0:
             if time_of_day == 3:
                 return True
         return False
