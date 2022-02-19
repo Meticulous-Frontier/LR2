@@ -14,13 +14,13 @@ init 2 python:
 
     def ophelia_gets_dumped_requirement(person):
         if day >= ophelia_get_day_met() + 4:
-            if person.location == mall_salon:
+            if person.is_at_work():
                 return True
         return False
 
     def ophelia_coworker_conversation_overhear_requirement(person):
         if day >= ophelia_get_day_dumped() + 4:
-            if person.location == mall_salon:
+            if person.is_at_work():
                 return True
         return False
 
@@ -45,7 +45,7 @@ init 2 python:
 
     def ophelia_ex_bf_phone_overhear_requirement(person):
         if day >= ophelia_get_day_dumped() + 14: #Wait at least two weeks after getting dumped
-            if person.location == mall_salon:
+            if person.is_at_work():
                 if person.sluttiness >= 20:
                     return True
         return False
@@ -54,7 +54,7 @@ init 2 python:
         # prevent conflict with planned dates
         if mc.business.date_scheduled_today():
             return False
-        if person.location == mall_salon:
+        if person.is_at_work():
             if ophelia_get_ex_pics_planned() < 2:
                 if ophelia_get_phone_convo_heard() > 0:
                     return True
@@ -71,7 +71,7 @@ init 2 python:
         return False
 
     def ophelia_blowjob_pics_review_requirement(person):
-        if not person.location == mall_salon:
+        if not person.is_at_work():
             return False
         if time_of_day < 4:
             return True
@@ -79,7 +79,7 @@ init 2 python:
 
     def ophelia_revenge_date_plan_requirement(person):
         if person.sluttiness >= 40:
-            if person.location == mall_salon:
+            if person.is_at_work():
                 if day >= ophelia_get_day_dumped() + 21:
                     return True
         return False
@@ -96,7 +96,7 @@ init 2 python:
 
     def ophelia_is_over_her_ex_requirement(person):
         if not ophelia_get_is_over_her_ex() and day >= ophelia_get_day_of_revenge_date() + 7:
-            if person.location == mall_salon:
+            if person.is_at_work():
                 return True
         return False
 
@@ -118,7 +118,7 @@ init 2 python:
     def ophelia_increased_service_begin_requirement(person):
         if ophelia_get_is_over_her_ex():
             if person.sluttiness_tier >= 3:
-                if person.location == mall_salon:
+                if person.is_at_work():
                     return True
         return False
 

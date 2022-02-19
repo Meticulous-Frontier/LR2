@@ -71,12 +71,12 @@ init -2 python:
         return False
 
     def kaya_intro_requirement(the_person):
-        if the_person.location == coffee_shop:
+        if the_person.is_at_work():
             return True
         return False
 
     def kaya_ask_out_requirement(the_person):
-        if the_person.location == coffee_shop and the_person.love > 20 and time_of_day == 3:
+        if the_person.is_at_work() and the_person.love > 20 and time_of_day == 3:
             return not mc.business.date_scheduled_today()
         return False
 
@@ -92,7 +92,7 @@ init -2 python:
         return False
 
     def kaya_HR_start_internship_program_requirement(the_person):
-        if the_person.location == the_person.work:
+        if the_person.is_at_work():
             return True
         return False
 
@@ -111,7 +111,7 @@ init -2 python:
     def kaya_lily_study_night_apology_requirement(the_person):
         if not lily.has_job(sister_student_job):
             return False
-        if the_person.location == coffee_shop:
+        if the_person.is_at_work():
             return True
         return False
 
@@ -141,7 +141,7 @@ init -2 python:
         return False
 
     def kaya_moving_in_with_mother_intro_requirement(the_person):
-        if kaya.sluttiness > 40 and the_person.location == coffee_shop and kaya_studies_with_lily():
+        if kaya.sluttiness > 40 and the_person.is_at_work() and kaya_studies_with_lily():
             return True
         return False
 

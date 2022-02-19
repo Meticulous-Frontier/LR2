@@ -1591,6 +1591,11 @@ init -1 python:
 
     Person.is_person_at_mc_house = is_person_at_mc_house
 
+    def is_person_home(self):
+        return self.location == self.home
+
+    Person.is_home = is_person_home
+
     ####### Begin cum extension functions ######
 
     def cum_on_face_extended(org_func):

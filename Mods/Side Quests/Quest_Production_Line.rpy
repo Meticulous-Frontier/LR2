@@ -114,7 +114,7 @@ init 1 python:
         return
 
     def quest_production_line_intro_requirement(the_person):
-        if the_person.location == the_person.work:
+        if the_person.is_at_work():
             return True
 
     def quest_production_line_coffee_reminder_requirement():

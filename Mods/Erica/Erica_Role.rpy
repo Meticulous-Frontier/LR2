@@ -221,7 +221,7 @@ init -2 python:
         return False
 
     def erica_money_problems_sarah_talk_requirement(person):
-        return mc.business.hr_director and person.location == person.work
+        return mc.business.hr_director and person.is_at_work()
 
     def erica_money_problems_update_requirement(person):
         if time_of_day > 0 and time_of_day < 4:

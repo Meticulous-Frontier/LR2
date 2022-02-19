@@ -120,7 +120,7 @@ init -1 python:
 
     def camilla_home_sex_requirement(the_person):
         if camilla_can_go_to_her_place() and time_of_day == 4:
-            if the_person.location == the_person.home:
+            if the_person.is_home():
                 return True
         return False
 

@@ -92,7 +92,7 @@ init 2 python: # Declare variables to use
     def salon_introduction_action_requirement(the_person):
         if not "mall_salon" in globals():
             return False
-        if the_person.location == mall_salon:    # only trigger event when ophelia is there
+        if the_person.is_at_work():    # only trigger event when ophelia is there
             return True
         return False
 

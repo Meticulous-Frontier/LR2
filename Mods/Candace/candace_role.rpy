@@ -39,7 +39,7 @@ init 2 python:
         if day > candace.employed_since + 14:
             if time_of_day > 1:
                 if person.sluttiness > 40:
-                    if person.location == person.work:
+                    if person.is_at_work():
                         return True
         return False
 
@@ -63,7 +63,7 @@ init 2 python:
         return False
 
     def candace_begin_cure_research_requirement(the_person):
-        if the_person.location == the_person.work:
+        if the_person.is_at_work():
             return True
         return False
 

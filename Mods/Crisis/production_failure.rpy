@@ -8,32 +8,32 @@ init 2 python:
         return False
 
     def production_failure_increase_sluttiness(person):
-        for team_member in person.work.people:
+        for team_member in person.job.job_location.people:
             team_member.add_situational_slut("Gassed",25,"The girls become extremely slutty.")
             team_member.change_stats(slut = 1 + person.get_opinion_score("not wearing anything"), max_slut = 30, arousal = 50, add_to_log = False)
 
-        mc.log_event("All " + person.work.formal_name + " staff affected","float_text_pink")
+        mc.log_event("All " + person.job.job_location.formal_name + " staff affected","float_text_pink")
         return
 
     def production_failure_clear_situational_sluttiness(person):
-        for team_member in person.work.people:
+        for team_member in person.job.job_location.people:
             team_member.clear_situational_slut("Gassed")
 
         person.apply_planned_outfit()
         return
 
     def production_failure_change_obedience(person, amount):
-        for team_member in person.work.people:
+        for team_member in person.job.job_location.people:
             team_member.change_obedience(amount, add_to_log = False)
 
-        mc.log_event("All " + person.work.formal_name + " staff: " + str(amount) + " obedience","float_text_pink")
+        mc.log_event("All " + person.job.job_location.formal_name + " staff: " + str(amount) + " obedience","float_text_pink")
         return
 
     def production_failure_fix_the_problem(person):
-        for team_member in person.work.people:
+        for team_member in person.job.job_location.people:
             team_member.change_stats(happiness = -2, love = 2, add_to_log = False)
 
-        mc.log_event("All " + person.work.formal_name + " staff: +2 love, -2 happiness","float_text_pink")
+        mc.log_event("All " + person.job.job_location.formal_name + " staff: +2 love, -2 happiness","float_text_pink")
         return
 
     production_failure_action = ActionMod("Production Failure", production_failure_requirement, "production_failure_action_label",
@@ -42,10 +42,10 @@ init 2 python:
 
 label production_failure_action_label:
     $ the_person = get_random_from_list(rd_division.people + p_division.people)
-    if the_person is None or the_person.work is None:
+    if the_person is None or not the_person.is_employee():
         return
 
-    "While monitoring the equipment you notice a problem in the [the_person.work.formal_name], it seems a gas mixture is building up."
+    "While monitoring the equipment you notice a problem in the [the_person.job.job_location.formal_name], it seems a gas mixture is building up."
     "Without halting work and alerting everyone to the problem there is no way to fix it. You also can't be sure what the effects of this will be on your employees."
     menu:
         "Halt work and fix the problem":
@@ -55,8 +55,8 @@ label production_failure_action_label:
 
         "Call in an overnight repair man":
             "You call the repair man and tell him to come in that night, and warn him not to alert anyone and to wear a gas mask."
-            "You decide to monitor the situation first hand and move to the [the_person.work.formal_name]."
-            $ mc.change_location(the_person.work)
+            "You decide to monitor the situation first hand and move to the [the_person.job.job_location.formal_name]."
+            $ mc.change_location(the_person.job.job_location)
             $ mc.location.show_background()
 
             $ ran_num = renpy.random.randint(0,100)

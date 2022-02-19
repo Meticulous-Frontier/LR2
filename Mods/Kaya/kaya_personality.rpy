@@ -44,7 +44,7 @@ label kaya_introduction(the_person):
     return
 
 label kaya_greetings(the_person):
-    if the_person.location == coffee_shop:
+    if the_person.is_at_work():
         if the_person.love < 0:
             the_person "Back again? What do you want this time?"
         elif kaya_can_get_drinks() and time_of_day == 3:

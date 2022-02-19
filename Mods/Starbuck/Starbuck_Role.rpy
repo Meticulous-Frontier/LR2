@@ -242,7 +242,7 @@ init -1 python:
 
     def starbuck_candace_product_demo_requirement(the_person):
         if starbuck.location == sex_store:
-            if the_person.location == the_person.work:
+            if the_person.is_at_work():
                 return True
         return False
 
