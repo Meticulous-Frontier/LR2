@@ -1,6 +1,8 @@
 
 init 2 python:
     def employee_find_out_home_location_requirement(the_person):
+        if the_person in unique_character_list:
+            return False
         if mc.business.is_open_for_business():
             if mc.is_at_work():
                 if the_person.obedience > 120 and the_person.effective_sluttiness() > 30:
