@@ -16,7 +16,7 @@ init 2 python:
     business_meeting_action = ActionMod("Business Meeting", business_meeting_requirement, "business_meeting_action_label",
         menu_tooltip = "An employee wants to discuss some business with you.", category = "Business", is_crisis = True)
 
-label business_meeting_action_label:
+label business_meeting_action_label():
     $ the_person = get_random_employees(1)
     if the_person is None:
         return

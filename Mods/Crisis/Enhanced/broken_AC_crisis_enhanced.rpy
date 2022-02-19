@@ -43,7 +43,7 @@ init 5 python:
         people_list.insert(0, "Watch")
         return people_list
 
-label broken_AC_crisis_label_enhanced:
+label broken_AC_crisis_label_enhanced():
     $ the_person = broken_AC_crisis_get_sluttiest_person()
     if the_person is None:
         return

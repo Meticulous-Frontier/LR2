@@ -33,7 +33,7 @@ init 3 python:
         initialization = init_action_mod_disabled,
         is_crisis = True)
 
-label sister_ntr_crisis_action_label:
+label sister_ntr_crisis_action_label():
     ## Lily studying with her friends
     $ the_person = lily
     "While trying to fall asleep, you're disturbed by some noise down the hallway."

@@ -13,7 +13,7 @@ init 3 python:
         menu_tooltip = "One of your slaves feels you are ignoring her and demands your attention", category="Home", is_crisis = True)
 
 
-label slave_attention_crisis_action_label:
+label slave_attention_crisis_action_label():
     $ the_person = get_unhappy_slave()
 
     # set person for debug purposes

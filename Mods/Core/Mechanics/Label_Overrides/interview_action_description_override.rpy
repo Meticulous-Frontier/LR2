@@ -46,7 +46,7 @@ init 2 python:
         return candidates
 
 
-label interview_action_description_enhanced:
+label interview_action_description_enhanced():
     $ count = get_candidate_count()
     "Bringing in [count] people for an interview will cost $50. Do you want to spend time interviewing potential employees?"
     menu:

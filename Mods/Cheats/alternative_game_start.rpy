@@ -1,7 +1,7 @@
 init 2 python:
     config.label_overrides["start"] = "alternative_start"
 
-label alternative_start:
+label alternative_start():
     scene bg paper_menu_background with fade
     "Lab Rats 2 contains adult content. If you are not over 18 or your country's equivalent age you should not view this content."
     menu:

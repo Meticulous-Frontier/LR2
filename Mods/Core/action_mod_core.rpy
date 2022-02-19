@@ -144,7 +144,7 @@ init 4 python: # NOTE: Having it at 5 was causing errors after I moved things ar
 
 # as long as VREN doesn't use this, we need to add a dummy label for hijacking purposes
 # NOTE: this label gets called after the hijack labels have been triggered
-label after_load:
+label after_load():
     return
 
 label activate_action_mod_core(stack):
@@ -188,13 +188,13 @@ label update_action_mod_core(stack):
         execute_hijack_call(stack)
     return
 
-label show_action_mod_settings:
+label show_action_mod_settings():
     $ hide_ui()
     call screen mod_configuration_ui
     $ show_ui()
     return
 
-label show_action_mod_configuration:
+label show_action_mod_configuration():
     python:
         while True:
             action_mod_choice =  build_action_mod_configuration_menu()

@@ -1553,7 +1553,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     #TODO the rest of this encounter. Go see her, pay her with sexual favors, etc.
     return
 
-label HR_director_appointment_action_label:
+label HR_director_appointment_action_label():
     call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])]))
     $ person_choice = _return
 

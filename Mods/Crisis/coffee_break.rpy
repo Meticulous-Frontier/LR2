@@ -9,7 +9,7 @@ init 2 python:
     coffee_break_action = ActionMod("Coffee Break", coffee_break_requirement, "coffee_break_action_label",
         menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True)
 
-label coffee_break_action_label:
+label coffee_break_action_label():
     $ (person_one, person_two, person_three) = get_random_employees(3, slut_required = 20)
     if not (isinstance(person_one, Person) and isinstance(person_two, Person) and isinstance(person_three, Person)):
         return

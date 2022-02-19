@@ -39,7 +39,7 @@ init 3 python:
             person.apply_outfit(night_clothes)
         return
 
-label dirty_laundry_action_label:
+label dirty_laundry_action_label():
     $ the_person = get_random_from_list(people_in_mc_home())
     if the_person is None:
         return

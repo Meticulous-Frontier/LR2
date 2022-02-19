@@ -40,7 +40,7 @@ init 2 python:
         menu_tooltip = "An accident during research / production causes some issues.", category = "Business", is_crisis = True)
 
 
-label production_failure_action_label:
+label production_failure_action_label():
     $ the_person = get_random_from_list(rd_division.people + p_division.people)
     if the_person is None or not the_person.is_employee():
         return

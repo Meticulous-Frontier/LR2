@@ -132,7 +132,7 @@ init 2 python:
         menu_tooltip = "At night, you hear strange sounds out of [mom.possessive_title]'s bedroom.", category = "NTR",
         initialization = init_action_mod_disabled, is_crisis = True)
 
-label mom_ntr_mod_action_label:
+label mom_ntr_mod_action_label():
     ## Mom having her private life
     $ the_person = mom
     "Some time late in the night, you're awoken by some noise down the hallway."

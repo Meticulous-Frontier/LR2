@@ -32,7 +32,7 @@ init 3 python:
     daily_talk_action = ActionMod("Talk with Employees {image=gui/heart/Time_Advance.png}", daily_talk_requirement, "daily_talk_employees", initialization = daily_talk_initialization,
         menu_tooltip = "Compliment Work (Happiness <= 120 or Love < 12) / Insult Work (Happiness > 120)", category = "Business")
 
-label daily_talk_employees:
+label daily_talk_employees():
 
     "You tell all of your employees to meet you in the [lobby.formal_name] for a daily chat."
     $ daily_talk_update_employee_stats()

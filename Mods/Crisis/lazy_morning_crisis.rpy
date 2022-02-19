@@ -13,7 +13,7 @@ init 2 python:
     # lazy_morning_crisis_action = ActionMod("Lazy Morning", lazy_morning_crisis_requirement,"lazy_morning_crisis_action_label", initialization = lazy_morning_mod_initialization,
     #     menu_tooltip = "You sleep in.", category="Home", is_crisis = True, is_morning_crisis = True)
         #TODO this is disabled for now.
-label lazy_morning_crisis_action_label:
+label lazy_morning_crisis_action_label():
 
     $ the_person = get_random_from_list(people_in_mc_home()) #Checks all the rooms in player's home
     if the_person is None:

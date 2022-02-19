@@ -9,7 +9,7 @@ init 3 python:
     sister_phone_crisis_action = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_crisis_action_label",
         menu_tooltip = "[the_person.possessive_title] sends you phone messages", category="Home", is_crisis = True)
 
-label sister_phone_crisis_action_label:
+label sister_phone_crisis_action_label():
     #TODO: have a way of saving and reviewing selfies in the future.
     #TODO: Have a proper weekday/weekend schedule for people and use that to determine when sister is at home, at work, or out on the town.
     $ the_person = lily
