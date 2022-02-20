@@ -192,13 +192,13 @@ init 5 python:
 
     def is_position_filtered(person, position):
         if position.skill_tag == "Foreplay" and callable(person.event_triggers_dict.get("foreplay_position_filter", None)):
-            return not person.event_triggers_dict["foreplay_position_filter"]([position])
+            return not person.event_triggers_dict["foreplay_position_filter"]([1, position])
         if position.skill_tag == "Oral" and callable(person.event_triggers_dict.get("oral_position_filter", None)):
-            return not person.event_triggers_dict["oral_position_filter"]([position])
+            return not person.event_triggers_dict["oral_position_filter"]([1, position])
         if position.skill_tag == "Vaginal" and callable(person.event_triggers_dict.get("vaginal_position_filter", None)):
-            return not person.event_triggers_dict["vaginal_position_filter"]([position])
+            return not person.event_triggers_dict["vaginal_position_filter"]([1, position])
         if position.skill_tag == "Anal" and callable(person.event_triggers_dict.get("anal_position_filter", None)):
-            return not person.event_triggers_dict["anal_position_filter"]([position])
+            return not person.event_triggers_dict["anal_position_filter"]([1, position])
         return False
 
     def build_position_rejection_string(person, position):
