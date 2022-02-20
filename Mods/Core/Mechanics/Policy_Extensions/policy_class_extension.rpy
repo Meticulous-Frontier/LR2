@@ -31,17 +31,6 @@ init 2 python:
 
     Policy.__ne__ = policy_ne
 
-
-    def get_enabled_on_buy(self):
-        if not hasattr(self, "_enabled_on_buy"):
-            self._enabled_on_buy = True
-        return self._enabled_on_buy
-
-    def set_enabled_on_buy(self, value):
-        self._enabled_on_buy = value
-
-    Policy.enabled_on_buy = property(get_enabled_on_buy, set_enabled_on_buy, None, "Enable policy when bought, ignored when not toggleable.")
-
     # alter policy descriptions to match values in get_uniform_limits_enhanced()
     strict_uniform_policy.desc = "Requiring certain styles of attire in the business world is nothing new. Allows you to designate overwear sets of sluttiness 15 or less as part of your business uniform."
     relaxed_uniform_policy.desc = "Corporate dress code is broadened to include more casual apparel. You can designate overwear sets up to sluttiness 25 as part of your business uniform."
