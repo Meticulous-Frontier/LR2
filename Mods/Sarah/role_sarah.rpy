@@ -60,6 +60,7 @@ init 2 python:
             ], forced_sexy_opinions = [
                 ["taking control", 1, False], # she likes taking control, type A
                 ["giving handjobs", 2, False], # Not afraid to get her hands dirty ;)
+                ["giving blowjobs", 1, False], # make sure she likes blowjobs (HR meeting)
                 ["showing her tits", -2, False], # She hates showing her small tits
             ])
 
