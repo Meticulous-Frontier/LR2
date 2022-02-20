@@ -48,10 +48,12 @@ init 2 python:
 
 label interview_action_description_enhanced():
     $ count = get_candidate_count()
-    "Bringing in [count] people for an interview will cost $50. Do you want to spend time interviewing potential employees?"
+    $ interview_cost = mc.business.recruitment_cost
+
+    "Bringing in [count] people for an interview will cost $[interview_cost]. Do you want to spend time interviewing potential employees?"
     menu:
-        "Yes, I'll pay the cost\n{color=#ff0000}{size=18}Costs: $50{/size}{/color}":
-            $ mc.business.change_funds(-50)
+        "Yes, I'll pay the cost\n{color=#ff0000}{size=18}Costs: $[interview_cost]{/size}{/color}":
+            $ mc.business.change_funds(-interview_cost)
             $ clear_scene()
 
             $ candidates = interview_build_candidates_list(count)
