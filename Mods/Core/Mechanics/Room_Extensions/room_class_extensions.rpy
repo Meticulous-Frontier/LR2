@@ -64,6 +64,16 @@ init -1 python:
 
     Room.move_person = move_person_extended(Room.move_person)
 
+    def show_background_extended(org_func):
+        def show_background_wrapper(room):
+            org_func(room)
+            renpy.with_statement(Fade(.5, 0.0, .5))
+            return
+
+        return show_background_wrapper
+
+    Room.show_background = show_background_extended(Room.show_background)
+
     ########################
     # Added Room Functions #
     ########################
