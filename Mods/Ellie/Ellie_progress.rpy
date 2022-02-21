@@ -55,7 +55,7 @@ init 10 python:
         return lust_story_list
 
     def ellie_story_teamup_list():
-        return [[" ", " "]]
+        return []
 
     def ellie_story_other_list():
         other_info_list = ["[ellie.title] is thankful you hired her, despite blackmailing you."]
