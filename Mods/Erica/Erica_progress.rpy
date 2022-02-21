@@ -113,7 +113,7 @@ init 10 python:
         if erica_get_is_doing_insta_sessions():
             teamup_story_list.append([lily,"Help [erica.title] take insta pics with [lily.title] every Saturday night in [lily.title]'s room!"])
         elif not erica_is_looking_for_work():
-            teamup_story_list.append([erica,"Try progressing [erica.title]'s story."])
+            teamup_story_list.append([lily,"Try progressing [erica.title]'s story."])
         elif lily.event_triggers_dict.get("sister_instathot_pic_count", 0) == 0:
             teamup_story_list.append([lily,"Try advancing [lily.title]'s storyline."])
         else:
