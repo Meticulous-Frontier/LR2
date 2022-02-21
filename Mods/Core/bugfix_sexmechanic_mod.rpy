@@ -578,7 +578,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             $ position_choice = None
                             $ object_choice = None
                             call clear_object_effects(the_person) from _call_clear_object_effects_bugfix_3
-
+                        $ skip_intro = False
 
                 if position_choice and object_choice:
                     if skip_intro:
