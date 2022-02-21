@@ -67,7 +67,7 @@ init -1 python:
     def show_background_extended(org_func):
         def show_background_wrapper(room):
             org_func(room)
-            renpy.with_statement(Fade(.5, 0.0, .5))
+            renpy.with_statement(Dissolve(.5, alpha = False))
             return
 
         return show_background_wrapper
