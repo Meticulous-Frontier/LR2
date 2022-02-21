@@ -25,17 +25,16 @@ init 2 python:
         if not force_random and renpy.random.randint(1,100) < 20:
             return_character = get_premade_character()
 
-        if height is None: # use non-linear distribution similar to the 2 dice role curve
-            height = 0.825 + (renpy.random.random()/14) + (renpy.random.random()/14)
-
         if pubes_style is None:
             pubes_style = get_random_pubes_style()
 
         if hair_style is None:
             hair_style = get_random_hair_style()
 
-        if age is None: # use linear decreasing distribution (more young than old)
-            age = int(math.floor(abs(renpy.random.random() - renpy.random.random()) * (1 + 55 - 18) + 18))
+        if age is None: # use linear decreasing distribution in age range (more young than old)
+            max_age = age_ceiling or 55
+            min_age = age_floor or 18
+            age = int(math.floor(abs(renpy.random.random() - renpy.random.random()) * (1 + max_age - min_age) + min_age))
 
         if relationship is None:
             if age < 21:
@@ -46,9 +45,6 @@ init 2 python:
                 relationship = get_random_from_weighted_list([["Single", 10], ["Girlfriend", 30], ["Fiancée", 40], ["Married", 20]])
             else:
                 relationship = get_random_from_weighted_list([["Single", 80 - age], ["Girlfriend", 100 - age], ["Fiancée", age * 3], ["Married", age * 4]])
-
-        if personality is None:
-            personality = get_random_personality()
 
         if kids is None:
             kids = 0
