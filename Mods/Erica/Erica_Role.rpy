@@ -2658,7 +2658,7 @@ label erica_lily_post_insta_handjob_label():
     $ mc.change_arousal(20)
     "Your sleep addled brain only lets you moan as she starts to work it."
     the_person "Can you pull your blanket down?"
-    "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts to stroke it again."
+    "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
     "Her hands feel soft and warm."
     if the_person.has_taboo("touching_penis"):
         the_person "I know I've never really been this forward with you before..."
@@ -2730,7 +2730,7 @@ label erica_lily_post_insta_morning_label():
         the_person "You know, I usually take a protein supplement before I workout, but I don't have any with me..."
         the_person "Do you think you could donate some?"
         mc.name "Hmm, well I suppose if it's for a good cause..."
-        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts to stroke it again."
+        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
         $ the_person.draw_person(position = "blowjob")
         "[the_person.title] lowers herself down your body until you feel her warm breath on your crotch. She opens her mouth and licks your pre-cum from the tip."
         the_person "Mmm, you taste better than those protein powders too..."
@@ -2824,7 +2824,7 @@ label erica_lily_post_insta_morning_label():
 
     if position_choice == "handjob":
         the_person "I don't know why, I just love the feeling of your thick cock in my hand..."
-        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts to stroke it again."
+        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
         the_person "God it's so warm..."
         "[the_person.possessive_title] doesn't waste any time and starts stroking you off."
         call get_fucked(the_person, start_position = cowgirl_handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _erica_wakeup_handjob_02
@@ -2837,7 +2837,7 @@ label erica_lily_post_insta_morning_label():
         call get_fucked(the_person, start_position = drysex_cowgirl, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _erica_morning_drysex_02
     elif position_choice == "blowjob":
         the_person "Let me have a dose of your protein before I go work out."
-        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts to stroke it again."
+        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
         $ the_person.draw_person(position = "blowjob")
         "She moves her head down to your crotch and licks your pre-cum from the tip."
         the_person "Mmm, I should do this every time I need some extra protein... you taste so good."

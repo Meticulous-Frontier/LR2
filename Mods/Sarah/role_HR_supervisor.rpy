@@ -412,7 +412,7 @@ label HR_director_first_monday_label(the_person):
         "Since you have no HR director, there are no Monday morning meetings, appoint a new HR director, to resume meetings."
         return
 
-    "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
+    "It's lunchtime, so you prepare to have your first meeting with your new HR Director, [the_person.title]."
     "You grab your lunch from the break room, head to your office, and sit down."
     $ scene_manager = Scene()
     $ mc.change_location(office)
