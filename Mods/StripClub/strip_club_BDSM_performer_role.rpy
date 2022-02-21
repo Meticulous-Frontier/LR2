@@ -24,7 +24,7 @@ init 10 python:
                     return True
         return False
 
-    def strip_club_hire_bdsm_performer():
+    def strip_club_hire_bdsm_performer(person):
         stripclub_bdsm_performers.append(person)
 
     def strip_club_fire_bdsm_performer(person):

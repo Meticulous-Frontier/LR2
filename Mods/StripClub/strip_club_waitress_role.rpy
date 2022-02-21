@@ -3,7 +3,7 @@
 #  The role is appended to waitresses after they start to work for you.
 
 init 3304 python:
-    def strip_club_hire_waitress():
+    def strip_club_hire_waitress(person):
         stripclub_waitresses.append(person)
 
     def strip_club_fire_waitress(person):
