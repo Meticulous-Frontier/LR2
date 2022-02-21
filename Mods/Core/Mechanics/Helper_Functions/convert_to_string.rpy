@@ -88,3 +88,10 @@ init 0 python:
             person_title = "???"
         return_title = "{color=" + person.char.who_args["color"] + "}" + "{font=" + person.char.what_args["font"] + "}" + person_title + "{/font}{/color}"
         return return_title
+
+    def format_titles_short(person):
+        person_title = person.name[0] + ". " + person.last_name
+        if person.title is None:
+            person_title = "???"
+        return_title = "{color=" + person.char.who_args["color"] + "}" + "{font=" + person.char.what_args["font"] + "}" + person_title + "{/font}{/color}"
+        return return_title
