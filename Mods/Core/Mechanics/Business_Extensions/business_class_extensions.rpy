@@ -263,7 +263,7 @@ init -1 python:
             # run extension code
             strip_club_income = business.calculate_strip_club_income()
             if strip_club_income != 0:
-                mc.business.change_funds(strip_club_income)
+                mc.business.change_funds(strip_club_income, add_to_log = False)
                 mc.business.add_normal_message("The [strip_club.formal_name] has made a net profit of $" + str(__builtin__.round(strip_club_income, 1)) + " today!")
 
         return run_day_wrapper

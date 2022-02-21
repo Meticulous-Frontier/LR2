@@ -45,9 +45,8 @@ init 1 python:
         if sex_shop_stage() > 0:
             investment_return = sex_shop_investment_return(person)
             if (investment_return > 0) :
-                mc.business.funds += investment_return
-                business_message = "Sex shop has returned $" + str(investment_return) + " on your investment!"
-                mc.business.add_normal_message(business_message)
+                mc.business.change_funds(investment_return, add_to_log = False)
+                mc.business.add_normal_message("Sex shop has returned $" + str(investment_return) + " on your investment!")
             return
 
     def make_sex_shop_owner(the_person):
