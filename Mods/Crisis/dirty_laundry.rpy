@@ -40,7 +40,7 @@ init 3 python:
         return
 
 label dirty_laundry_action_label():
-    $ the_person = get_random_from_list(people_in_mc_home())
+    $ the_person = get_random_from_list(people_in_mc_home([aunt]))
     if the_person is None:
         return
 
