@@ -70,6 +70,9 @@ init 2 python:
             mc_title = "Stranger"
 
         if not bonus_suggest:
+            if personality is None: # we need a personality to set the bonus suggest
+                personality = get_random_personality()
+
             bonus_suggest = renpy.random.randint(5, 15)
 
             if personality.base_personality_prefix == wild_personality.personality_type_prefix:
