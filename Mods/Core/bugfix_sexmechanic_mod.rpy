@@ -537,7 +537,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 if position_choice and object_choice:
                     call check_position_willingness_bugfix(the_person, position_choice, ignore_taboo = ignore_taboo) from _call_check_position_willingness_bugfix
                     if not _return == 1: #If she wasn't willing for whatever reason (too slutty a position, not willing to wear a condom) we clear our settings and try again.
-                        if _return == -1: # angry reject ends interactions
+                        if _return == -1 or (_return == -2 and position_locked): # angry reject ends interactions
                             $ finished = True
                             $ report_log["is_angry"] = True
                             $ position_choice = None
