@@ -542,11 +542,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             $ report_log["is_angry"] = True
                             $ position_choice = None
                             $ object_choice = None
-                            call clear_object_effects(the_person) from _call_clear_object_effects_bugfix_1
                         if _return == -2:   #She hates that position, but suggests a different one.
                             $ position_choice = suggest_alternate_sex_position(the_person, position_choice, object_choice, ignore_taboo = ignore_taboo)
                             $ object_choice = None
-                            call clear_object_effects(the_person) from _call_clear_object_effects_bugfix_2
                             if position_choice.verb:
                                 the_person "I have another idea... what if we [position_choice.verb] like this?"
                             else:
@@ -555,14 +553,16 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             menu:
                                 "[position_choice.name]":
                                     mc.name "Let's do it."
-                                    $ object_choice = pick_object_enhanced(the_person, position_choice, forced_object = start_object)
+                                    $ object_choice = pick_object_enhanced(the_person, position_choice)
                                 "Do something else":
                                     mc.name "I think I can come up with something else instead..."
                                     $ position_choice = None
                         else:
                             $ position_choice = None
                             $ object_choice = None
-                            call clear_object_effects(the_person) from _call_clear_object_effects_bugfix_3
+
+                        $ the_person.clear_situational_slut("sex_object")
+                        $ the_person.clear_situational_obedience("sex_object")
                         $ skip_intro = False
 
                 if position_choice and object_choice:
@@ -607,7 +607,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
                         $ position_choice = None
                     elif position_choice.girl_energy > the_person.energy:
-                        #TODO: Add some differentiated dialgoue depending on the position.
+                        #TODO: Add some differentiated dialogue depending on the position.
                         #TODO: Add "no energy" transitions where you keep fucking her anyways. (double TODO: Add a way of "breaking" her like this)
                         if not girl_in_charge:
                             the_person "I'm exhausted [the_person.mc_title], I can't keep this up..."
