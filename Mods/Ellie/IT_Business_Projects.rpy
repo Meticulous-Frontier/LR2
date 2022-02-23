@@ -345,7 +345,7 @@ init -1 python:
                 amount_increased = __builtin__.int((3*person.charisma) + (person.focus) + (2*person.market_skill)) * ((mc.business.team_effectiveness*0.01)) * 5.0
             extra_amount += (amount_increased * .1)
 
-        self.market_reach += extra_amount
+        mc.business.market_reach += extra_amount
         return extra_amount
 
     def research_peerless_review_project_on_turn():
