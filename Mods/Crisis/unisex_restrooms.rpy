@@ -331,15 +331,18 @@ label unisex_restroom_fantasy_actout_label(the_person):
     "Without saying a word, you push yourself into her slick fuckhole. It feels amazing."
     call fuck_person(the_person, start_position = SB_doggy_standing, start_object = mc.location.get_object_with_name("desk"), skip_intro = True, skip_condom = True, private = False, position_locked = True) from _call_fantasy_actout_1
     $ the_report = _return
-    if the_report.get("girl orgasms", 0) > 0:
+    if the_report.get("is_angry", False):
+        the_person "I'm sorry [the_person.mc_title], I didn't want it to go this far."
+        mc.name "I understand, it was just a spur of the moment."
+        the_person "Maybe next time..."
+        $ the_person.change_stats(happiness = -5, obedience = 1)
+    elif the_report.get("girl orgasms", 0) > 0:
         the_person "Oh god, it was even better than I thought... oh my god."
         $ the_person.increase_opinion_score("public sex")
-        $ the_person.change_happiness(10)
-        $ the_person.change_slut(3)
+        $ the_person.change_stats(happiness = 10, slut = 3, max_slut = 60)
     else:
         the_person "Fuck... I need to finish so bad! Why can't I just get off today?"
-        $ the_person.change_happiness(-10)
-        $ the_person.change_love(-5)
+        $ the_person.change_stats(happiness = -10, love = -5)
 
     $ the_person.review_outfit()
     return
