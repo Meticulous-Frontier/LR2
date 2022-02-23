@@ -543,7 +543,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             $ position_choice = None
                             $ object_choice = None
                         if _return == -2:   #She hates that position, but suggests a different one.
-                            $ position_choice = suggest_alternate_sex_position(the_person, position_choice, object_choice, ignore_taboo = ignore_taboo)
+                            $ position_choice = suggest_alternate_sex_position(the_person, the_position = position_choice, the_object = object_choice, ignore_taboo = ignore_taboo)
                             $ object_choice = None
                             if position_choice.verb:
                                 the_person "I have another idea... what if we [position_choice.verb] like this?"
