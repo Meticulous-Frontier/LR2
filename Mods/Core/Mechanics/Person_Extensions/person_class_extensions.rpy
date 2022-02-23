@@ -681,6 +681,11 @@ init -1 python:
     def person_is_willing(self, the_position, private = True, ignore_taboo = False):
         final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(self, ignore_taboo)
 
+        # quick return if she hates any required opinion tags for the position
+        for tag in the_position.opinion_tags:
+            if self.get_opinion_score(tag) <= -2:
+                return False
+
         # add modifiers
         if self.has_family_taboo():
             final_slut_requirement -= 20

@@ -270,7 +270,7 @@ label ashley_intro_label():
             the_person "Of course, that's all I can ask, is that you will keep her in mind. Thanks!"
             $ add_ashley_hire_later_action()
             return
-        "Blow me and I'll look" if the_person.sluttiness > 50:
+        "Blow me and I'll look" if the_person.is_willing(blowjob):
             mc.name "I tell you what, why don't you come suck me off while I look over her documents."
             the_person "Oh! A favor for a favor then? Okay!"
             $ scene_manager.update_actor(the_person, position = "blowjob", emotion = "happy")

@@ -529,7 +529,7 @@ label camilla_take_pics_label(the_person):  #Not the first time.
         $ the_person.draw_person(position = "blowjob")
         "You can tell that [the_person.title] is hungry. She wastes no time pulling your pants down, followed quickly by your underwear."
         "Your hardened cock springs out. Her agile hands grasp it and begin to stroke."
-        if the_person.effective_sluttiness() > 50:
+        if the_person.is_willing(deepthroat):
             the_person "Mmm, I've been working on a new skill lately... since we started doing this. Mind if I practice on you?"
             mc.name "Sure I guess, but what is..."
             "She doesn't wait for you to finish your response. In one, smooth motion, she opens her mouth and swallows your cock whole."
