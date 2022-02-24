@@ -180,7 +180,8 @@ screen cheat_menu():
         "Funds": ["funds", "funds", 10000, 9, (0, 100000000)],
         "Supplies": ["supply_count", "supply_count", 10000, 10, (0, 100000)],
         "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 11, (50, 300)],
-        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 12, (50, 300)] # Might add If statement to combine these two as they go hand in hand
+        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 12, (50, 300)], # Might add If statement to combine these two as they go hand in hand
+        'Attention': ["attention", "attention", 10, 13, (0, 400)]
         }
     default work_skills = {
         "HR": ["hr_skill", "hr_skill", 1, 0, (0, 20)],
