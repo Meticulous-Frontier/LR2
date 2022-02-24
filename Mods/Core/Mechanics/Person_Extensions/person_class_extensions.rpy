@@ -680,6 +680,10 @@ init -1 python:
 
     def person_is_willing(self, the_position, private = True, ignore_taboo = False):
         final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(self, ignore_taboo)
+        # DON'T USE EFFECTIVE SLUTTINESS IN THIS FUNCTION
+        # IT CAN HAVE THE MODIFIERS THAT THIS FUNCTION EMULATES
+        # TO VALIDATE PRIOR TO ACTUALLY STARTING THE SEX LOOP
+        # IT VALIDATES IF SHE IS WILLING BY HERSELF (NOT USING OBEDIENCE)
 
         # quick return if she hates any required opinion tags for the position
         for tag in the_position.opinion_tags:
@@ -700,7 +704,7 @@ init -1 python:
             final_slut_requirement += (self.get_opinion_score("cheating on men") * 10 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 20)
 
         if not private:
-            final_slut_requirement += (-10 + self.get_opinion_score("public sex") * 5) if self.effective_sluttiness() < 50 else self.get_opinion_score("public sex") * 5
+            final_slut_requirement += ((-10 if self.sluttiness < 50 else 0) + self.get_opinion_score("public sex") * 5) if self.sluttiness < 50 else self.get_opinion_score("public sex") * 5
 
         if self.love < 0:
             final_slut_requirement -= self.love
@@ -708,19 +712,17 @@ init -1 python:
             if self.has_role([girlfriend_role, affair_role]):
                 final_slut_requirement -= self.love
             elif self.is_family():
-                final_slut_requirement -= __builtin__.round(self.love / 4.0)
+                final_slut_requirement -= __builtin__.int(self.love / 4.0)
             else:
-                final_slut_requirement -= __builtin__.round(self.love / 2.0)
+                final_slut_requirement -= __builtin__.int(self.love / 2.0)
 
-        final_slut_requirement += __builtin__.round((self.happiness - 100)/4.0)
+        final_slut_requirement += __builtin__.int((self.happiness - 100)/4.0)
 
-        if ignore_taboo:
-            if self.effective_sluttiness() >= final_slut_requirement \
-                or self.effective_sluttiness() + (self.obedience-100) >= final_slut_requirement:
-                    return True
-        if self.effective_sluttiness(the_position.associated_taboo) >= final_slut_requirement \
-            or self.effective_sluttiness(the_position.associated_taboo) + (self.obedience-100) >= final_slut_requirement:
-                return True
+        if not ignore_taboo and the_position.associated_taboo:
+            final_slut_requirement += 10
+
+        if self.sluttiness >= final_slut_requirement:
+            return True
         return False
 
     Person.is_willing = person_is_willing

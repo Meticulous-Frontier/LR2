@@ -108,7 +108,7 @@ init 5 python:
 
         return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
 
-    def apply_sex_modifiers(person):
+    def apply_sex_modifiers(person, private = True):
         #Family situational modifiers
         if person.has_family_taboo(): #Check if any of the roles the person has belong to the list of family roles.
             person.add_situational_slut("taboo_sex", -20, "We're related, we shouldn't be doing this.")
@@ -135,7 +135,7 @@ init 5 python:
 
         #Privacy modifiers
         if not private:
-            if person.effective_sluttiness() < 50:
+            if person.sluttiness < 50:
                 person.add_situational_slut("public_sex", -10 + person.get_opinion_score("public sex") * 5, "There are people watching...")
             else:
                 person.add_situational_slut("public_sex", person.get_opinion_score("public sex") * 5, "There are people watching!")
@@ -150,16 +150,16 @@ init 5 python:
                 person.add_situational_slut("love_modifier", person.love, "I have kept it a secret, but I love you!")
             elif person.has_family_taboo(): #Family now only gains 1/4 (but this now helps offset the taboo penalty)
                 if person.has_role(mother_role):
-                    person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "Even if it's wrong, a mother should do everything she can for her son!")
+                    person.add_situational_slut("love_modifier", __builtin__.int(person.love/4.0), "Even if it's wrong, a mother should do everything she can for her son!")
                 elif person.has_role(sister_role):
-                    person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "I love my brother, and even if it's wrong I want to be close to him!")
+                    person.add_situational_slut("love_modifier", __builtin__.int(person.love/4.0), "I love my brother, and even if it's wrong I want to be close to him!")
                 else: #Generic family one
-                    person.add_situational_slut("love_modifier", __builtin__.int(person.love/4), "I love you, even though we're related!")
+                    person.add_situational_slut("love_modifier", __builtin__.int(person.love/4.0), "I love you, even though we're related!")
             else: #If you aren't in a relationship with them only half their Love applies.
-                person.add_situational_slut("love_modifier", __builtin__.int(person.love/2), "I really like you, let's see where this goes!")
+                person.add_situational_slut("love_modifier", __builtin__.int(person.love/2.0), "I really like you, let's see where this goes!")
 
         # Happiness modifiers
-        happiness_effect = __builtin__.round((person.happiness - 100)/4.0)
+        happiness_effect = __builtin__.int((person.happiness - 100)/4.0)
         if happiness_effect <= -10:
             person.add_situational_slut("happiness_modifier", happiness_effect, "I'm so unhappy, I just don't want to do anything!")
         elif happiness_effect <= -5:
@@ -447,7 +447,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         $ private = True #If we're alone in the space we're always Private, even if we had left the possibility for people being around.
 
     # $ renpy.say(None, "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
-    $ apply_sex_modifiers(the_person)
+    $ apply_sex_modifiers(the_person, private = private)
     $ report_log["was_public"] = not private
 
     $ round_choice = "Change" # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)

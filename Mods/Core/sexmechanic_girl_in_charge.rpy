@@ -355,7 +355,7 @@ init 2:
 
 
 label get_fucked(the_person, the_goal = None, sex_path = None, private= True, start_position = None, start_object = None, skip_intro = False, report_log = None, ignore_taboo = False, prohibit_tags = [], unit_test = False, allow_continue = True):
-    $ apply_sex_modifiers(the_person) #Apply sex modifiers before choosing goals and positions to avoid choosing positions girl shouldn't accept
+    $ apply_sex_modifiers(the_person, private = private) #Apply sex modifiers before choosing goals and positions to avoid choosing positions girl shouldn't accept
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ ask_for_threesome = False
     $ object_choice = start_object
