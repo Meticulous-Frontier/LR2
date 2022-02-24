@@ -23,7 +23,7 @@ label scene_skull_fuck_4_enhanced(the_girl, the_location, the_object):
     else:
         "You stop fucking [the_girl.title]'s face for a second."
         mc.name "I wonder how long I could keep deep fucking your face, want to find out?"
-        "She nods and you push [the_girl.possessive_title] your cock back into her throat. Your balls tap against her chin."
+        "She nods and you push your cock back into [the_girl.possessive_title]'s throat. Your balls tap against her chin."
         if the_girl.get_opinion_score("being submissive") > 0 and the_girl.get_opinion_score("giving blowjobs") > 0:
             "After a while, she pulls back, gagging and gasping for air."
             mc.name "That wasn't bad, but I think you could do better..."
