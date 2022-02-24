@@ -1,6 +1,6 @@
 init -1 python:
     def strip_club_give_daily_serum():
-        for person in people_in_role([stripper_role, stripclub_waitress_role, stripclub_manager_role, stripclub_mistress_role, bdsm_performer_role]):
+        for person in people_in_role([stripper_role, stripclub_waitress_role, stripclub_manager_role, stripclub_mistress_role, stripclub_bdsm_performer_role]):
             if person.is_employee():
                 continue
 
