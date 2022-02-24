@@ -1,7 +1,7 @@
 # name, formal_name, connections, background_image, objects, people, actions, public, map_pos, tutorial_label = None, visible = True)
 init 3 python:
-    add_label_hijack("normal_start", "build_custom_rooms")
-
+    list_of_instantiation_labels.append("build_custom_rooms")
+    add_label_hijack("normal_start", "validate_custom_rooms")
 
 init 15 python:
     dungeon_objects = [
@@ -84,7 +84,7 @@ init 15 python:
         return Object("dryer", ["Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
 
-label build_custom_rooms(stack):
+label build_custom_rooms():
     python:
         # Research Division Basement - Biotechnology Lab | biotech_room_actions.rpy
         # rd_division_basement = Room("biotech", "Biotechnology Lab", [], room_background_image("Biotech_Background.jpg"), rd_division_basement_objects, [], [biotech_clone_person, biotech_modify_person], False, [12,5], None, False, lighting_conditions = standard_indoor_lighting)
@@ -141,6 +141,11 @@ label build_custom_rooms(stack):
         coffee_shop = Room("coffee_shop", "Coffee Shop", [], standard_coffee_shop_backgrounds, coffee_shop_objects, [], [coffee_shop_get_coffee_action], True, [7,3], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(coffee_shop)
 
+    return
+
+label validate_custom_rooms(stack):
+    # extra code run after creation of all rooms
+    python:
         # Move electronic store to top location
         electronics_store.map_pos = [7,0]
 
