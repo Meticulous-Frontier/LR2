@@ -50,6 +50,8 @@ init 5 python:
             return False
         if person.is_employee() or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
             return False
+        if person.has_job_role(critical_job_role) and person.sluttiness < 100: # critical jobs require very high sluttiness
+            return False
         if __builtin__.len(stripclub_strippers) >= 5 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
             return "At maximum Strip Club employees"
         if day < person.event_triggers_dict.get("stripper_ask_hire", 0) + 3:
@@ -198,19 +200,21 @@ label strip_club_hire_employee_label(the_person):
         else:
             the_person "I don't understand, I already work for you. Or are you terminating my position?"
             mc.name "Of course not, you are a valuable employee, but I thought you might like to make some extra cash for just a few hours work, after hours."
-    elif ran_num < 33: # 33% chance Yes
-        the_person "Actually yes, I would welcome something to do in my life... Do you have something available for me?"
-    elif ran_num > 67: # 33% chance No
-        the_person "No [the_person.mc_title], I already have a job right now and I'm happy with it."
+    elif the_person.has_job(unemployed_job):
+        the_person "I'm currently unemployed, so I'm open to any suggestions..."
+    elif ran_num < 33: # Any other 33% chance Yes
+        the_person "Actually yes, I would like to take a break from being a [the_person.job.job_title]... Do you have something available for me?"
+    elif ran_num > 67: # Any other 33% chance No
+        the_person "No [the_person.mc_title], I'm quite happy with my job as [the_person.job.job_title]."
         mc.name "Oh, that's good for you! If one day you'll change your mind, let me know."
         the_person "Sure, thank you!"
         $ the_person.event_triggers_dict["stripper_ask_hire"] = day
         return
-    else: # chance left (34%) Maybe
+    else: #  Any other (34% chance) Maybe
         the_person "Maybe, but not right now, I'm really busy at the moment, so there's not too many jobs I can do..."
         mc.name "Then my proposal will be perfect for you!"
 
-    if mc.location is strip_club:
+    if mc.location == strip_club:
         mc.name "I own this strip club and I could see you working here..."
     else:
         mc.name "I own the [strip_club.formal_name] downtown, and I need some workers for the place..."

@@ -1755,6 +1755,15 @@ init -1 python:
 
     Person.is_available = property(person_is_available, None, None)
 
+    def person_has_job_role(self, job_role):
+        if not self.job:
+            return False
+
+        if self.job.job_role == job_role:
+            return True
+        return False
+
+    Person.has_job_role = person_has_job_role
 
 ################################################
 # Outfit functions - wear a specialized outfit #
