@@ -6,7 +6,7 @@
 #Fetish options: for Anal, Jennifer asks for anal, for cum fetish, you cum on/in her as appropriate, and for vaginal, she asks for creampie.
 init 2 python:
     def mom_breakfast_crisis_requirement():
-        if mc.is_home() and mc.business.is_work_day():
+        if mc.is_home() and mc.business.is_work_day() and not mom.is_employee():
             return True
         return False
 
