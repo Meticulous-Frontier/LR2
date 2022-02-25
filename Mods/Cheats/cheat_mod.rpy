@@ -180,8 +180,8 @@ screen cheat_menu():
         "Funds": ["funds", "funds", 10000, 9, (0, 100000000)],
         "Supplies": ["supply_count", "supply_count", 10000, 10, (0, 100000)],
         "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 11, (50, 300)],
-        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 12, (50, 300)], # Might add If statement to combine these two as they go hand in hand
-        'Attention': ["attention", "attention", 10, 13, (0, 400)]
+        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 12, (50, 300)],
+        "Market Reach": ["market_reach", "market_reach", 1000,  14, (0, 100000000)]
         }
     default work_skills = {
         "HR": ["hr_skill", "hr_skill", 1, 0, (0, 20)],
@@ -189,11 +189,14 @@ screen cheat_menu():
         "Researching": ["research_skill", "research_skill", 1, 2, (0, 20)],
         "Production": ["production_skill", "production_skill", 1, 3, (0, 20)],
         "Supplying": ["supply_skill", "supply_skill", 1, 4, (0, 20)],
-        "Salary": ["salary", "salary", 1, 6, (0, 200)],
+        "Salary": ["salary", "salary", 1, 6, (0, 1000)],
 
         "Max Employees": ["max_employee_count", "max_employee_count", 5, 5, (5, 80)],
         "Serum Batch Size": ["batch_size", "batch_size", 1, 7, (1, 20)],
-        "Research Tier": ["research_tier", "research_tier", 1, 8, (0, 4)]
+        "Research Tier": ["research_tier", "research_tier", 1, 8, (0, 4)],
+        "Attention": ["attention", "attention", 10, 9, (0, 400)],
+        "Max Attention": ["max_attention", "max_attention", 10, 10, (0, 400)],
+        "Num of Contracts": ["max_offered_contracts", "max_offered_contracts", 1, 11, (1, 5)]
         }
     default relation_stats = {
         "Love": ["love", "love", 10, 0, (-100, 100)],
