@@ -187,9 +187,13 @@ label quest_cure_discovery_intro_label():
     if the_target == alexia:
         the_person "She's a recent college graduate and seems to have a good handle on things over there. I bet she could manage it!"
         mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
+    elif the_target == lily or the_person == mom or the_person == cousin or the_person == aunt:
+        the_person "Corporate espionage is huge, and a discovery like this could make big waves."
+        the_person "You should probably ask someone you can trust to handle this, like someone from your family."
+        mc.name "Good idea. I'll talk to her as soon as I can."
     else:
         the_person "Yeah, I think she actually has experience doing something similar at a previous job. I bet she could help out!"
-        mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
+        mc.name "Noted. I'm not sure I'll have the time, but I'll talk to her when I can."
     the_person "If I were you, I'd get on it, quick! Modern day drug research is extremely fast paced. No telling when another lab might replicate our findings..."
     mc.name "Thank you, [the_person.title], for your research and for bringing this to my attention."
     "So... you should talk to [the_target.possessive_title] about selling your patent rights to the cure for [the_disease]."
@@ -211,6 +215,12 @@ label quest_cure_discovery_market_patent_label(the_person):
     if the_person == alexia:
         mc.name "We made a big discovery in the research lab, but it is too big for our production department to handle. I was wondering if you could look into selling some patent rights."
         the_person "Oh? I think I could handle something like that. What is the patent for?"
+        mc.name "Our research department made a discovery related to a possible treatment for [the_disease]."
+    elif the_person == lily or the_person == mom or the_person == cousin or the_person == aunt:
+        mc.name "We made a big discovery in the research lab, but it is too big for our production department to handle. I was wondering if you could look into selling some patent rights."
+        the_person "Oh? Why... why would you ask me to do that?"
+        mc.name "If word gets out that we made this discovery, we might be the target of some bad actors. I need someone I can trust to handle this. Someone from the family."
+        the_person "Okay, what is the discovery?"
         mc.name "Our research department made a discovery related to a possible treatment for [the_disease]."
     else:
         mc.name "Well, I heard that you might have some prior experience working with drug patent rights..."
