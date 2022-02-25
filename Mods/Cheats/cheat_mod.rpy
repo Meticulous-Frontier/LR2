@@ -174,13 +174,14 @@ screen cheat_menu():
         "Height": ["height", "height", .005, 4, (.8, 1)],
         "Energy": ["energy", "energy", 10.0, 5, (60,  400)],
         "Max Energy": ["max_energy", "max_energy", 10.0, 6, (60,  400)],
-        "Clarity": ["free_clarity", "free_clarity", 500.0, 7, (0, 100000)],
-        "Lust": ["locked_clarity", "locked_clarity", 500.0, 8, (0, 100000)],
+        "Kids": ["kids", "kids", 1, 7, (0, 8)],
+        "Clarity": ["free_clarity", "free_clarity", 500.0, 8, (0, 100000)],
+        "Lust": ["locked_clarity", "locked_clarity", 500.0, 9, (0, 100000)],
 
-        "Funds": ["funds", "funds", 10000, 9, (0, 100000000)],
-        "Supplies": ["supply_count", "supply_count", 10000, 10, (0, 100000)],
-        "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 11, (50, 300)],
-        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 12, (50, 300)],
+        "Funds": ["funds", "funds", 10000, 10, (0, 100000000)],
+        "Supplies": ["supply_count", "supply_count", 10000, 11, (0, 100000)],
+        "Efficiency": ["team_effectiveness", "team_effectiveness", 10, 12, (50, 300)],
+        "Max Efficiency": ["effectiveness_cap", "effectiveness_cap", 10, 13, (50, 300)],
         "Market Reach": ["market_reach", "market_reach", 1000,  14, (0, 100000000)]
         }
     default work_skills = {
