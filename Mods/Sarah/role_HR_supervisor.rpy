@@ -118,14 +118,12 @@ init 5 python:
         return True
 
     def HR_director_first_monday_requirement():
-        if day%7 == 0 and time_of_day == 1: #Monday
-            return True
-        return False
+        return day%7 == 0 and time_of_day == 1 #Monday
 
     def HR_director_monday_meeting_requirement():
         if not mc.business.hr_director or not mc.business.hr_director.is_available:
             return False
-        return day%7 == 0 and time_of_day == 1: #Monday Noon
+        return day%7 == 0 and time_of_day == 1 #Monday
 
     # override attention event to not trigger on mondays when we have HR meetings
     def attention_event_requirement():
