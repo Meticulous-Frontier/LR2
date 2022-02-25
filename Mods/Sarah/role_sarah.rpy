@@ -523,7 +523,7 @@ label Sarah_intro_label():
     "What did she say her name was again? [the_person.title]? Suddenly you get a flash of a memory from a long time again. You quickly interrupt her."
     mc.name "I'm sorry, you said your name was [the_person.title]? Is your name [the_person.title] [the_person.last_name]?"
     "She immediately stops her sales pitch."
-    the_person "That's right... do... do I know your from somewhere?"
+    the_person "That's right... do... do I know you from somewhere?"
     "Faint memories come flooding back to you. When you were growing up, your dad and his best friend got married around the same time and had kids!"
     "You used to spend a lot of time with your dad and his friend, and his friend's daughter, who was just a few years younger than you!"
     "You aren't sure what happened, but one day the other family moved away, to another city, and you never saw them again."
