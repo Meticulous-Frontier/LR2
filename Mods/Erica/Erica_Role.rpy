@@ -1461,7 +1461,10 @@ label erica_money_problems_sarah_talk_label(the_person):
     the_person "Oh! She's an athlete?"
     mc.name "Yeah. Very accomplished in fact. Sometimes we work out together at the gym."
     "The wheels in her head are turning. She seems to have the beginning of an idea in her head."
-    the_person "Some of the girls here are really enjoying the gym membership you've offered... But I've gotten some complaints that after a long day here they are just too tired to make it to the gym."
+    if get_HR_director_tag("business_HR_gym_tier", 0) > 0:
+        the_person "Some of the girls here are really enjoying the gym membership you've offered... But I've gotten some complaints that after a long day here they are just too tired to make it to the gym."
+    else:
+        the_person "Some of the girls go to the gym after work, but it is very taxing to go into the gym after work."
     "You consider what she is saying, but you aren't sure how [erica.title] could help. After pause though, [the_person.title] continues, clearly brainstorming out loud."
     the_person "What if we like... Hired her... To come in, like once a week, and run a personal fitness class?"
     mc.name "Here at the office?"
