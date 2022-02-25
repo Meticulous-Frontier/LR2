@@ -785,8 +785,8 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
     else:
         # You're nowhere close to the required sluttiness or hates position, lose some love for even trying and end interaction
         python:
-            ran_num = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #A negative number
-            ran_num = __builtin__.round(ran_num/5)
+            ran_num = the_person.effective_sluttiness(the_taboo) - final_slut_requirement
+            ran_num = __builtin__.abs(__builtin__.int(ran_num/5.0))
             the_person.change_love(-ran_num)
             willing = -1
 
