@@ -432,7 +432,7 @@ init 2 python:
                 ["showing her tits", 1, False],
             ])
         person.set_mc_title("Honey")
-        person.add_role(prostitute_role)
+        person.add_job(prostitute_job)
         if add_to_game:
             person.generate_home()
             person.home.add_person(person)
