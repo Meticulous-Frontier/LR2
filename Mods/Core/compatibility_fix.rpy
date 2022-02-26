@@ -275,6 +275,11 @@ label update_compatibility_fix(stack):
 
     $ cleanup_default_wardrobe()
 
+    # make beta saves compatible
+    if not list_of_jobs or not isinstance(list_of_jobs[0], list):
+        call instantiate_jobs() from _call_instantiate_jobs
+        call add_extra_room_job_definitions() from _call_add_extra_room_job_definitions
+
     $ validate_person_stats()
 
     $ validate_stripclub_stripper_role()
