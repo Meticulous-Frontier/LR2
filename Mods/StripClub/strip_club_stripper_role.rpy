@@ -12,8 +12,9 @@ init 5 python:
             return False
         if time_of_day in [0,1,2]:
             return "Too early for performances"
-        else:
-            return True
+        if get_strip_club_foreclosed_stage() < 5 and not mc.business.has_funds(20):
+            return "Not enough cash"
+        return True
 
     def calculate_stripper_salary(person):
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
@@ -72,10 +73,9 @@ init 5 python:
     def add_strip_club_hire_employee_action_to_mc_actions():
         strip_club_hire_employee_action = Action("Employ at [strip_club.formal_name]", strip_club_hire_employee_requirement, "strip_club_hire_employee_label", menu_tooltip = "Hire [the_person.title] to work for you in your strip club.")
         mc.main_character_actions.append(strip_club_hire_employee_action)
-        # update base game stripper job
-        stripper_job.quit_function = stripper_quit   # change quit function to prevent adding new strippers
         # change strippers jobs role
         for stripper in stripclub_strippers[:]: # use copy of existing array
+            stripper.job.quit_function = stripper_quit # replace base game stripper job quit_function
             stripper.quit_job() # use quit job because the role names match
             stripper.add_job(stripclub_stripper_job)
 
@@ -109,16 +109,16 @@ init 5 python:
         return [available_roles]
 
     # change stripper replace function
-    def stripper_replace_enhanced(the_person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
-        if the_person in stripclub_strippers:
-            stripclub_strippers.remove(the_person)
+    def stripper_replace_enhanced(person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
+        if person in stripclub_strippers:
+            stripclub_strippers.remove(person)
 
         # add new stripper to replace the one that left
         create_stripper()
 
-    def stripper_quit(the_person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
-        if the_person in stripclub_strippers:
-            stripclub_strippers.remove(the_person)
+    def stripper_quit(person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
+        if person in stripclub_strippers:
+            stripclub_strippers.remove(person)
 
     promote_to_manager_action = Action("Appoint as Manager", allow_promote_to_manager_requirement, "promote_to_manager_label", menu_tooltip = "Appoint [the_person.title] as strip club manager.")
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
