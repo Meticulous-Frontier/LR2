@@ -49,7 +49,7 @@ init 2 python:
         if person.love < 30:
             return "Requires: 30 Love"
 
-        if big_glasses in person.base_outfit.accessories or modern_glasses in person.base_outfit.accessories:
+        if person.base_outfit and big_glasses in person.base_outfit.accessories or modern_glasses in person.base_outfit.accessories:
             if person in unique_character_list:
                 return False
             if not mc.business.has_funds(5000):
