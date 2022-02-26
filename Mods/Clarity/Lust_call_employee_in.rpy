@@ -63,7 +63,7 @@ init 4 python:
 
 label lust_blowjob_intro_label():
     $ the_person = None
-    "In between shifts, you make your way around the office. You stop one in a while to admire some of the women you have employed."
+    "In between shifts, you make your way around the office. You stop once in a while to admire some of the women you have employed."
     "Someone stops and asks you about something... it takes several seconds of staring at their tits before you realize they are talking to you."
     "Your sexual tension is starting to distract you from your work. You decide to hide in your office. You lock the door behind you."
     $ ceo_office.show_background()

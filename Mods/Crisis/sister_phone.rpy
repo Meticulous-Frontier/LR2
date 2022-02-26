@@ -135,7 +135,7 @@ label sister_phone_crisis_action_label():
             if mc.business.is_weekend():
                 "[the_person.possessive_title] sends you a selfie without her shirt on. The background looks like her bedroom."
             else:
-                "[the_person.possessive_title] sends you a sends you a selfie without her shirt on. It looks like it was taken in a bathroom of her school."
+                "[the_person.possessive_title] sends you a selfie without her shirt on. It looks like it was taken in a bathroom of her school."
 
         elif ran_num == 2:
             $ the_person.outfit.remove_random_upper(top_layer_first = True)
