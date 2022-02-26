@@ -714,7 +714,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         mc.condom = False
         mc.recently_orgasmed = False
 
-    if affair_ask_after and private and not the_person.has_role([girlfriend_role, affair_role]) and not the_person.relationship == "Single" and report_log.get("girl orgasms",0) >= 1:
+    if affair_ask_after and private and not the_person.has_role([girlfriend_role, affair_role, prostitute_role]) and not the_person.relationship == "Single" and report_log.get("girl orgasms",0) >= 1:
         if not the_person.has_role([lifestyle_coach_role]): # don't exclude all unique characters (boss wife / emily mom -> affair should be possible)
             if the_person.relationship in relationship_stats and the_person.love >= relationship_stats[the_person.relationship] - 10 - (the_person.get_opinion_score("cheating on men") * 5):
                 if the_person.effective_sluttiness() >= 30 - (the_person.get_opinion_score("cheating on men") * 5):
