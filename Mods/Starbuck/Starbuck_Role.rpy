@@ -563,7 +563,7 @@ label starbuck_sex_store_investment_two_label(the_person):
             $ mc.business.change_funds(-5000)
             $ the_person.change_stats(obedience = 5, happiness = 20, love = 5)
             the_person "Wow... are you really doing this? I can hardly believe it. Don't worry, I won't let you down!"
-            "Even as you write you check, she is already going on about the stock she'll be able to get."
+            "Even as you write your check, she is already going on about the stock she'll be able to get."
             the_person "...hmmm... OH! And edible underwear! And nipple clamps! Maybe some handcuffs..."
             $ mc.change_locked_clarity(20)
             $ starbuck.event_triggers_dict["shop_investment_total"] += 5000
@@ -615,7 +615,7 @@ label starbuck_sex_store_investment_three_label(the_person):
             $ mc.business.change_funds(-15000)
             $ the_person.change_stats(obedience = 10, happiness = 20, love = 10)
             the_person "Wow... this is it! The opportunity of a lifetime. I'm speechless [the_person.mc_title]. Thank you so much!"
-            "Even as you write you check, she is beginning to plan the expansion to the shop."
+            "Even as you write your check, she is beginning to plan the expansion to the shop."
             $ starbuck.event_triggers_dict["shop_investment_total"] += 15000
             $ starbuck.event_triggers_dict["shop_investment_fetish_total"] += 15000
             $ starbuck.event_triggers_dict["shop_progress_stage"] = 3
