@@ -118,6 +118,21 @@ init 10 python:
             teamup_story_list.append([lily,"Try advancing [lily.title]'s storyline."])
         else:
             teamup_story_list.append([lily,"Try talking to [lily.title] and [erica.title] about money issues."])
+
+        #Study
+        if kaya_studies_with_erica():
+            if kaya_erica_teamup.get_stage() == 0:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights."])
+            elif kaya_erica_teamup.get_stage() == 1:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes getting naked for you."])
+            elif kaya_erica_teamup.get_stage() == 2:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes letting you spank them."])
+            elif kaya_erica_teamup.get_stage() == 3:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes sucking you off."])
+            elif kaya_erica_teamup.get_stage() == 4:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, and are down for a threesome after!"])
+        elif kaya_has_finished_intro():
+            teamup_story_list.append([kaya,"[erica.title] and [kaya.title] are both college students..."])
         return teamup_story_list
 
     def erica_story_other_list():
