@@ -67,6 +67,7 @@ init 2 python:
 
 
 label kaya_erica_teamup_action_label(the_person):
+    $ show_university_study_room_background()
     call teamup_scene_label(kaya_erica_teamup, kaya, erica) from _teamup_scene_call_test_01
     return
 
@@ -468,7 +469,7 @@ label kaya_erica_teamup_scene_2(the_person_one, the_person_two):
             mc.name "Alright [kaya.title], it's your study partner's turn."
             call kaya_erica_teamup_spank_ass_condition(kaya, kaya_spank_count) from _kaya_erica_teamup_spank_debrief_01
             $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
-            "She takes her seat."
+            "[kaya.title] takes her seat."
         $ scene_manager.update_actor(erica, position = "standing_doggy", display_transform = character_center(yoffset = .2, zoom = 1.2))
         "[erica.title] bends over, presenting her ass to you."
         $ previous_punished = True
@@ -484,7 +485,7 @@ label kaya_erica_teamup_scene_2(the_person_one, the_person_two):
             mc.name "Alright [kaya.title]. Your partner got her question right, it's your turn again."
             call kaya_erica_teamup_spank_ass_condition(kaya, kaya_spank_count) from _kaya_erica_teamup_spank_debrief_02
             $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
-            "She takes her seat."
+            "[kaya.title] takes her seat."
         $ previous_punished = False
 
     mc.name "Alright, on to the second round of questions."
@@ -646,6 +647,7 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
         $ erica.change_arousal(10)
         $ kaya.change_slut(1, 80)
         $ mc.change_locked_clarity(40)
+        $ kaya.increase_opinion_score("giving blowjobs", weighted = True)
         "You turn to [erica.possessive_title]."
 
     mc.name "Alright, [erica.title], your first question."
@@ -666,6 +668,7 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
         $ kaya.change_arousal(10)
         $ erica.change_slut(1, 80)
         $ mc.change_locked_clarity(40)
+        $ erica.increase_opinion_score("giving blowjobs", weighted = True)
         "As she services you, you turn back to [kaya.possessive_title]."
     else:
         if previous_punished:
@@ -683,7 +686,7 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
             mc.name "Alright [erica.title], don't hog all the fun, it's your partners turn."
             call kaya_erica_teamup_blowjob_condition(inc_mouth = True) from _kaya_erica_teamup_oral_debrief_03
             $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
-            "She gets up and takes her seat with a little pout."
+            "[erica.title] gets up and takes her seat with a little pout."
         $ scene_manager.update_actor(kaya, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
         "[kaya.title] gets on her knees. She hesitates for a moment, but then opens up takes your cock into her heavenly mouth."
         $ previous_punished = True
@@ -693,6 +696,7 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
         $ erica.change_arousal(10)
         $ kaya.change_slut(1, 80)
         $ mc.change_locked_clarity(40)
+        $ kaya.increase_opinion_score("giving blowjobs", weighted = True)
         "You turn to [erica.possessive_title]."
     else:
         if previous_punished:
@@ -712,7 +716,7 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
             mc.name "Alright [kaya.title], it's your study partner's turn."
             call kaya_erica_teamup_blowjob_condition(inc_mouth = True) from _kaya_erica_teamup_oral_debrief_05
             $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
-            "She gets up and takes her seat."
+            "[erica.title] gets up and takes her seat."
         $ scene_manager.update_actor(erica, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
         "[erica.title] gets on her knees at your feet. She hungrily takes you in her mouth and gets to work."
         $ previous_punished = True
@@ -722,6 +726,7 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
         $ kaya.change_arousal(10)
         $ erica.change_slut(1, 80)
         $ mc.change_locked_clarity(40)
+        $ erica.increase_opinion_score("giving blowjobs", weighted = True)
         "As she services you, you turn back to [kaya.possessive_title]."
     else:
         if previous_punished:
@@ -741,7 +746,7 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
             mc.name "Alright [erica.title], fun time is over, it's your partners turn."
             call kaya_erica_teamup_blowjob_condition(inc_mouth = True) from _kaya_erica_teamup_oral_debrief_07
             $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
-            "She gets up and takes her seat with a little pout."
+            "[erica.title] gets up and takes her seat with a little pout."
         $ scene_manager.update_actor(kaya, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
         "[kaya.title] gets on her knees. She cautiously runs her tongue up and down the shaft a couple times before opening up and taking you in her mouth."
         $ previous_punished = True
@@ -751,6 +756,7 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
         $ erica.change_arousal(10)
         $ kaya.change_slut(1, 80)
         $ mc.change_locked_clarity(40)
+        $ kaya.increase_opinion_score("giving blowjobs", weighted = True)
         "You turn to [erica.possessive_title]."
     else:
         if previous_punished:
@@ -769,7 +775,7 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
             mc.name "Alright [kaya.title], it's your study partner's turn."
             call kaya_erica_teamup_blowjob_condition(inc_mouth = True) from _kaya_erica_teamup_oral_debrief_09
             $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
-            "She takes her seat."
+            "[kaya.title] takes her seat."
         $ scene_manager.update_actor(erica, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
         "[erica.title] gets on her knees at your feet. She hungrily takes you in her mouth and gets to work."
         $ previous_punished = True
@@ -779,18 +785,20 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
         $ kaya.change_arousal(10)
         $ erica.change_slut(1, 80)
         $ mc.change_locked_clarity(40)
+        $ erica.increase_opinion_score("giving blowjobs", weighted = True)
         "Since that was the last question, there is only silence in the room this time, except for lewd slurping noises as you deliver [erica.possessive_title]'s punishment."
         if mc.arousal >= 100:
             "Thankfully, you feel your orgasm approaching. You were starting to get worried you might not get off tonight, but the final wrong answer of the night is going to finish you off."
             mc.name "Atta girl. Get ready [erica.title], I'm about to cum!"
             "She just moans as you start to cum."
             $ erica.cum_in_mouth()
+            $ erica.increase_opinion_score("drinking cum", weighted = True)
             $ scene_manager.update_actor(erica, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
             "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
-            "[the_person.title] just watches quietly, a hint of jealousy in her face."
+            "[kaya.title] just watches quietly, a hint of jealousy in her face."
             $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = erica)
             $ mc.arousal = 0
-            "When you finish, [erica.title] slides of and gasps for air. You give her a few moments."
+            "When you finish, [erica.title] slides off and gasps for air. You give her a few moments."
             mc.name "I suppose that is enough punishment then."
         else:
             "As much as you want her to just keep going until you finish, you can tell it wouldn't really be fair."
@@ -806,6 +814,36 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
             $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
             "She takes her seat."
         $ previous_punished = False
+    if mc.arousal > 70 and kaya.love > 40:    #She loves MC enough to take care of him.
+        kaya "[kaya.mc_title]... are you okay? That looks... Painful!"
+        mc.name "It actually does hurt a little."
+        kaya "That's... I can't let you go home like that!"
+        $ scene_manager.update_actor(kaya, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
+        "[kaya.possessive_title] drops to her knees and grabs your cock. She quickly takes it in her mouth and starts bobbing her head up and down."
+        mc.name "Oh! Fuck [kaya.title] thank you I'm so close..."
+        "[kaya.title] keeps her mouth open wide and bobs her head back and forth to slide your cock in and out. The feeling of her soft, warm mouth sends shivers up your spine."
+        $ erica.change_arousal(10)    #Everyone liked that
+        $ mc.change_arousal(35)
+        $ kaya.change_arousal(10)
+        $ kaya.change_slut(2, 90)
+        $ mc.change_locked_clarity(50)
+        $ kaya.increase_opinion_score("giving blowjobs")
+        erica "Damn, she's really thirsty for it, isn't she?"
+        kaya "Mmmmhmmmmffff!!!"
+        "[kaya.possessive_title] gives out a moaning, muffled affirmative. The vibrations and the eagerness of her mouth are going to make you cum!"
+        mc.name "Oh fuck that's it, here it comes!"
+        $ kaya.cum_in_mouth()
+        $ kaya.increase_opinion_score("drinking cum", weighted = True)
+        $ scene_manager.update_actor(kaya, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
+        "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
+        "[erica.title] just watches quietly, a hint of jealousy in her face."
+        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = kaya)
+        $ mc.arousal = 0
+        "When you finish, [kaya.title] slides off and gasps for air. You give her a few moments."
+        mc.name "[kaya.title], that was incredible. You didn't have to do that..."
+        kaya "I know, I just couldn't let you go home like that! It looked so painful!"
+        $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
+        "[kaya.possessive_title] slides back in her seat."
 
     "Finished with your questions, you have a pretty good idea of where to direct their study time."
     $ kaya.change_love(2, 40)
@@ -1187,6 +1225,7 @@ label kaya_erica_teamup_question_label(the_person, active_punishment = False, pu
                 mc.name "Oh fuck... that's it, here it comes..."
                 $ punished_person.cum_in_mouth()
                 $ scene_manager.update_actor(punished_person, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
+                $ punished_person.increase_opinion_score("drinking cum", weighted = True)
                 "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
                 "[the_person.title] just watches quietly, a hint of jealousy in her face."
                 $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = punished_person)
@@ -1234,6 +1273,7 @@ label kaya_erica_teamup_question_label(the_person, active_punishment = False, pu
                 "You grab [punished_person.title]'s head with both hands as you feel yourself getting ready to cum."
                 mc.name "Oh fuck... that's it, here it comes..."
                 $ punished_person.cum_in_mouth()
+                $ punished_person.increase_opinion_score("drinking cum", weighted = True)
                 $ scene_manager.update_actor(punished_person, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
                 "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
                 "[the_person.title] just watches quietly, a hint of jealousy in her face."
@@ -1270,6 +1310,7 @@ label kaya_erica_teamup_question_label(the_person, active_punishment = False, pu
                 "You grab [punished_person.title]'s head with both hands as you feel yourself getting ready to cum."
                 mc.name "Oh fuck... that's it, here it comes..."
                 $ punished_person.cum_in_mouth()
+                $ punished_person.increase_opinion_score("drinking cum", weighted = True)
                 $ scene_manager.update_actor(punished_person, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
                 "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
                 "[the_person.title] just watches quietly, a hint of jealousy in her face."
@@ -1310,7 +1351,7 @@ label kaya_erica_teamup_spank_ass_condition(the_person, spank_count):
             "[the_person.possessive_title]'s ass glows bright red, despite her dark skin."
             "She whimpers and trembles when her spanking is complete."
             mc.name "Maybe next week you'll actually study, unless you like getting your ass whipped like this?"
-            $ the_person.increase_opinion_score("being submissive")
+
 
     else:
         if spank_count == 1:
@@ -1323,7 +1364,8 @@ label kaya_erica_teamup_spank_ass_condition(the_person, spank_count):
             "[the_person.possessive_title]'s ass glows bright red as a result of your firm punishment."
             "She whimpers and trembles when her spanking is complete."
             mc.name "Maybe next week you'll actually study, unless you like getting your ass whipped like this?"
-            $ the_person.increase_opinion_score("being submissive")
+    $ the_person.increase_opinion_score("being submissive", weighted = True)
+    $ the_person.increase_opinion_score("showing her ass", weighted = True)
     return
 
 label kaya_erica_teamup_blowjob_condition(inc_mouth = False, final = False):

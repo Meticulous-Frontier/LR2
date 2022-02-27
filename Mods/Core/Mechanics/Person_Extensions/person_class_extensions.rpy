@@ -1103,11 +1103,15 @@ init -1 python:
     Person.update_opinion_with_score = update_opinion_with_score
 
     ## Increase the opinion on a specific topic (opinion)
-    def increase_opinion_score(self, topic, max_value = 2, add_to_log = True):
+    def increase_opinion_score(self, topic, max_value = 2, add_to_log = True, weighted = False):
         score = self.get_opinion_score(topic)
 
         if score < 2 and score < max_value:
-            self.update_opinion_with_score(topic, score + 1, add_to_log)
+            if weighted:
+                if renpy.random.randint(0,100) < self.suggestibility:
+                    self.update_opinion_with_score(topic, score + 1, add_to_log)
+            else:
+                self.update_opinion_with_score(topic, score + 1, add_to_log)
         return
 
     # Add increase opinion function to person class
