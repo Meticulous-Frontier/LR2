@@ -28,21 +28,18 @@ init 2 python:
         ellie_base_outfit.add_accessory(the_necklace)
         ellie_base_outfit.add_accessory(the_bracelet)
 
-        # init ellie role
-        ellie_role = Role(role_name ="ellie", actions =[], hidden = True)
+        # init ellie job (make her hidden on start)
+        ellie_job = Job("IT Specialist", critical_job_role, purgatory, work_days = [0,1,2,3,4,5,6], work_times = [1,2,3])
 
-        #global ellie_role
+        #global ellie
         global ellie
         ellie = make_person(name = "Ellie", age = 24, body_type = "thin_body", face_style = "Face_13",  tits="DDD", height = 0.92, hair_colour="dark auburn", hair_style = bobbed_hair, skin="white" , \
-            eyes = "light blue", personality = ellie_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ellie_wardrobe, \
+            eyes = "light blue", personality = ellie_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ellie_wardrobe, job = ellie_job, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [1,1,1,1], start_sluttiness = 0, start_obedience = 5, start_happiness = 103, start_love = -3, \
             relationship = "Single", kids = 0, force_random = True, base_outfit = ellie_base_outfit,
             forced_opinions = [["production work", 2, True], ["work uniforms", 1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["cooking", 2, False]])
 
         ellie.generate_home()
-        ellie.add_job(unemployed_job)
-        ellie.set_schedule(ellie.home, the_times = [0,1,2,3,4])
-        # ellie.set_schedule(downtown_bar, the_times = [2,3])
         ellie.home.add_person(ellie)
         ellie.idle_pose = "stand2"
 
@@ -65,8 +62,6 @@ init 2 python:
         # set relationships
         # Ellie is relatively new in town and has no mutual relationship with MC
         ellie.text_modifiers.append(southern_belle)
-
-        ellie.add_role(ellie_role)
         return
 
 init -2 python: #Requirement Functions
