@@ -836,12 +836,14 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                 the_person "I'm sorry. We do it bare, or not at all."
                 menu:
                     "Fuck her raw":
+                        $ the_person.break_taboo("condomless_sex")
                         return 1
                     "Refuse and do something else":
                         "[the_person.possessive_title] seems like she's made up her mind, and you doubt you would be able to change it."
                         mc.name "We can't risk it [the_person.title]. We'll have to do something else."
                         return 0
             "Don't":
+                $ the_person.break_taboo("condomless_sex")
                 return 1
 
 
