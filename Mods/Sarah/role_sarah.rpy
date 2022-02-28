@@ -172,7 +172,7 @@ init 2 python:
         return sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2
 
     def Sarah_intro_requirement():
-        return day > 2 and time_of_day < 4 and mc.is_home()
+        return day > 2 and time_of_day < 4 and day%7 != 5 and day%7 !=6 and mc.is_home()
 
     def Sarah_hire_requirement(day_trigger):
         if day > day_trigger and HR_director_creation_policy.is_owned():
