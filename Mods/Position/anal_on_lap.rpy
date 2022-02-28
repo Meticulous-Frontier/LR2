@@ -46,7 +46,7 @@ label intro_anal_on_lap(the_girl, the_location, the_object):
     else:
         the_girl "I don't know, I guess I can do that."
 
-    "You work your fingers in and out of her ass a few times, getting it good a lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
+    "You work your fingers in and out of her ass a few times, getting it good and lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
     $ the_girl.draw_person(position = anal_on_lap.position_tag)
     "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
     "[the_girl.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
@@ -274,7 +274,7 @@ label taboo_break_anal_on_lap(the_girl, the_location, the_object):
 
     the_girl "Ok, just be careful [the_girl.mc_title]..."
 
-    "You work your fingers in and out of her ass a few times, getting it good a lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
+    "You work your fingers in and out of her ass a few times, getting it good and lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
     $ the_girl.draw_person(position = "sitting")
     "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
     "[the_girl.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."

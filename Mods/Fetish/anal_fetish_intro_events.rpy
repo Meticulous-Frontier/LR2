@@ -491,7 +491,7 @@ label anal_fetish_generic_intro_label(the_person):
     the_person "I... I think you might be right... I..."
     $ the_person.break_taboo("anal_sex")
     "She stops mid sentence as you give her a quick thrust."
-    mc.name "It's okay to admit you are a buttslut. Now, lets just make sure you needs are sated before we part ways."
+    mc.name "It's okay to admit you are a buttslut. Now, let's just make sure you needs are sated before we part ways."
     "[the_person.possessive_title] is unable to reply as you begin to fuck her ass. It's time to show her just how good you can make her feel that way."
     call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True, skip_condom = True) from _call_fuck_person_anal_fetish_intro_generic_01
     #$ the_person.SB_fetish = "anal sex"

@@ -1294,7 +1294,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     $ mc.change_arousal(5)
     $ mc.change_locked_clarity(30)
     $ the_person.draw_person(position = "stand4")
-    the_person "Now, before we get to the good part, it is important, anytime you are getting ready to put anything in your ass, that you get it good a lubed up..."
+    the_person "Now, before we get to the good part, it is important, anytime you are getting ready to put anything in your ass, that you get it good and lubed up..."
     "She grabs the bottle of premium anal lube and squirts some in her hand. She lists the pro's of buying the higher quality lubes."
     "[the_person.possessive_title] takes your cock in her hand and started to lube it up. She takes the bottle and squirts some more into her hand, getting you nice and slick."
     $ mc.change_arousal(5)#10

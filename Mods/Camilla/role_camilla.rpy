@@ -689,7 +689,7 @@ label camilla_blowjob_text_label(the_person):
     mc.name "Okay, I'm down for that."
     the_person "Okay, well, like I said. I'm a good wife! I love my husband. He always comes first."
     "You nod in understanding."
-    the_person "If you try to make me choose between you two, I'll choose him, every time. So lets just keep this casual, okay?"
+    the_person "If you try to make me choose between you two, I'll choose him, every time. So let's just keep this casual, okay?"
     mc.name "Sounds good. Purely physical. I'm okay with that."
     the_person "Right... here, let's exchange numbers. I'll text you and if we're both free, we can screw around, no strings attached!"
     "You agree. You and [the_person.title] exchange numbers."

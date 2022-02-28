@@ -1591,7 +1591,7 @@ label Sarah_stripclub_story_label():
     the_person "Come on, let's grab a table to the side before we decide what to do first!"
     $ scene_manager.update_actor(the_person, position = "sitting")
     "You sit down across from [the_person.possessive_title] in a booth."
-    the_person "Alright, lets just watch the girls from here for a little bit. I'm going to buy you a private dance before we go."
+    the_person "Alright, let's just watch the girls from here for a little bit. I'm going to buy you a private dance before we go."
     mc.name "That's... very generous of you. You know you don't have to do that, right?"
     the_person "Sure but, it's not like I'm not going to have fun while we're here too. I've heard the girls here are hot!"
     "It's been clear for a while now that [the_person.title] has an interest in both men and women. It's cute to see her coming out of her shell a bit and enjoying her sexuality."

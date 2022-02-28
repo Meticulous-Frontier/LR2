@@ -2488,7 +2488,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
     lily "Come in!"
     $ scene_manager.add_actor(lily, display_transform = character_center_flipped, position = "back_peek")
     $ scene_manager.add_actor(erica, position = "back_peek")
-    "As you open the door, the two girls and standing in front of [lily.title]'s closet, looking back at you."
+    "As you open the door, the two girls are standing in front of [lily.title]'s closet, looking back at you."
     lily "Oh hey [lily.mc_title]. Good timing! We were just picking out what to wear for tonights photos!"
     erica "[lily.name] thinks we should match, but I was thinking about just wearing something else. What do you think?"
     "It's clear the your opinion is important to her. You think about it for a moment."

@@ -1432,7 +1432,7 @@ label HR_director_sexy_meeting_start_label(the_person):
     elif ((the_person.obedience - 100) + the_person.sluttiness) > 100: #If she is either very obedient, slutty, or a mixture
         menu:
             "Tell her to stay like that for the meeting":
-                mc.name "I'm very busy, lets just continue the meeting. Don't bother to clean up."
+                mc.name "I'm very busy, let's just continue the meeting. Don't bother to clean up."
                 "[the_person.title] opens her mouth for a second, ready to protest, but quickly reconsiders."
                 the_person "Of course, [the_person.mc_title]. Let's see what is next."
                 $ mc.change_locked_clarity(20)
