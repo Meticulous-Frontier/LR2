@@ -193,7 +193,7 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
         else:
             "[the_girl.possessive_title] pulls off you at the last moment. You start stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         if the_girl.get_opinion_score("being covered in cum") > 0:
-             the_girl "Yes! Paint me with your sticky cum!"
+            the_girl "Yes! Paint me with your sticky cum!"
         if the_girl.has_cum_fetish():
             the_girl "Fuck... it's so good! Oh yes!"
             "[the_girl.possessive_title] squeals as you paint her ass with your cum. Her cum fetish causes her to orgasm as you cum all over her."
