@@ -127,7 +127,7 @@ label SB_working_weekend_crisis_label_high(person_one):
             $ person_one.change_slut(2)
             call strip_tease(person_one, for_pay = False) from _free_strip_scene_3
             $ mc.change_locked_clarity(50)
-            $ person_two = get_random_employees(1)
+            $ person_two = get_random_employees(1, exclude_list = [person_one])
             if not willing_to_threesome(person_one, person_two) or (person_two == sarah and sarah_epic_tits_progress() == 1):
                 "You're pretty sure she's ready for next step if you are ready."
                 menu:
