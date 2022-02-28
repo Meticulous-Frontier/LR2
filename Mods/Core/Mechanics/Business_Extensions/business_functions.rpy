@@ -44,6 +44,7 @@ init -1 python:
     def setup_employee_stats(person): #Centralized function for setting up employee stuff when you hire them
         if person.event_triggers_dict.get("employed_since", -1) == -1: # prevent fire / hire loop event triggering
             person.event_triggers_dict["employed_since"] = day
+            mc.phone.register_number(person)        # you know the phone numbers of your employees
             mc.business.listener_system.fire_event("new_hire", the_person = person)
             for other_employee in mc.business.get_employee_list():
                 town_relationships.begin_relationship(person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"

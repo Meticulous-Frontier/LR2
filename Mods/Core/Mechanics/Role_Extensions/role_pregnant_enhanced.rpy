@@ -185,7 +185,7 @@ label silent_pregnant_transform(the_person): #Changes the person to their pregna
     return
 
 label silent_pregnant_transform_announce(start_day, the_person):
-    if the_person.title is None:
+    if the_person.title is None or not mc.phone.has_number(the_person):
         return  # unknown girls should not inform you about their pregnancy
 
     $ the_person.draw_person()
@@ -204,7 +204,7 @@ label silent_pregnant_transform_announce(start_day, the_person):
 label silent_pregnant_finish_announce(the_person): #TODO: have more variants for girlfriend_role, affair_role, etc.
     $ silent_pregnant_finish_announce_person(the_person)
 
-    if the_person.title is None:
+    if the_person.title is None or not mc.phone.has_number(the_person):
         return  # unknown girls should not announce delivery
 
     # The girl tells you she'll need a few days to have the kid and recover, and she'll be back in a few days.
