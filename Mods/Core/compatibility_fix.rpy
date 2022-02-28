@@ -242,15 +242,6 @@ init 1 python:
         if not "stripclub_stripper_job" in globals():
             global stripclub_stripper_job
             stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit)
-        else:
-            # match stripclub_strippers with jobs
-            for stripper in stripclub_strippers[:]:
-                if get_strip_club_foreclosed_stage() >= 5:
-                    if not stripper.has_job(stripclub_stripper_job):
-                        stripclub_strippers.remove(stripper)
-                else:
-                    if not stripper.has_job(stripper_job):
-                        stripclub_strippers.remove(stripper)
         return
 
     def check_bugfix_installed(*args, **kwargs): #allow passing of any number of parameters
