@@ -32,10 +32,21 @@ init 2 python:
         elif time_of_day == 4: # Can be removed
             return "Clothes store closed"
         elif not mc.business.has_funds(500):
-            return "Requires $500"
+            return "Requires: $500"
         else:
             return True
         return False
+
+    def girlfriend_quit_dikdok_requirement(the_person):
+        if not the_person.has_role(dikdok_role):
+            return
+        if the_person in unique_character_list:
+            return False
+        if the_person.love < 40: # hide option will love is very low
+            return False
+        if the_person.love < 60:
+            return "Requires: 60 Love"
+        return True
 
 
     girlfriend_sleepover_action = Action("Arrange a sleepover", girlfriend_myplace_yourplace_requirement, "girlfriend_myplace_yourplace_label",
@@ -50,6 +61,8 @@ init 2 python:
     girlfriend_morning_action_list.append(girlfriend_wakeup_spooning)
     girlfriend_morning_action_list.append(girlfriend_wakeup_jealous_sister)
 
+    girlfriend_quit_dikdok_action = Action("Quit Dikdok", girlfriend_quit_dikdok_requirement, "girlfriend_quit_dikdok_label",
+        menu_tooltip = "Ask your girlfriend to stop showing herself off on Dikdok.")
 
 
 
@@ -86,6 +99,7 @@ label activate_girlfriend_role_enhancement(stack):
     python:
         girlfriend_role.add_action(girlfriend_sleepover_action)
         girlfriend_role.add_action(girlfriend_underwear_shopping)
+        girlfriend_role.add_action(girlfriend_quit_dikdok_action)
 
         sister_girlfriend_role.add_action(girlfriend_underwear_shopping)
         mom_girlfriend_role.add_action(girlfriend_underwear_shopping)
@@ -598,4 +612,13 @@ label girlfriend_underwear_shopping_label(the_person):
     $ clear_scene()
     $ del lingerie_outfit
     call advance_time from _call_advance_girlfriend_lingerie_shopping_01
+    return
+
+label girlfriend_quit_dikdok_label(the_person):
+    mc.name "Hey [the_person.title], would you do something for me?"
+    the_person "Sure, [the_person.mc_title], what do you need?"
+    mc.name "I'm not very comfortable with you on Dikdok, so I would prefer if you closed your account."
+    the_person "Well, since I have you in my life, I don't see why not."
+    $ the_person.remove_role(dikdok_role)
+    "She pulls out her phone and closes her account right there."
     return
