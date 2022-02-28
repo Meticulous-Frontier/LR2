@@ -1,7 +1,7 @@
 #This class is designed to hold all the variables and labels required to create a teamup scene.
-#Class contains labels for all parts of the scene in a list, which progresses automatically in corruption based on specified  conditions
+#Class contains labels for all parts of the scene in a list, which progresses automatically in corruption based on specified conditions
 #Class should track what stage the teamup is at so it can be referenced easily and should save the progress in save file
-#Class shold compile at startup the list of stages of the teamup so that it can be modified and added to as necessary
+#Class should compile at startup the list of stages of the teamup so that it can be modified and added to as necessary
 #Class may have to reference another class in the event of a branching storyline 4  4
 
 init -2 python:
@@ -13,7 +13,7 @@ init -2 python:
 
             self.stage = stage  #The corruption level of the teamup event
             self.compile_scenes = compile_scenes #Use this function to recompile the lists. Should be run on game load and initial game start.
-            self.intro_scene = intro_scene  #Scene to pley the first time this teamup is called
+            self.intro_scene = intro_scene  #Scene to play the first time this teamup is called
             self.exit_scene = exit_scene    #If MC decides not to participate.
             self.choice_scene = choice_scene    #Use this to determine if MC wants to stay or leave the event.
             self.teamup_action = teamup_action  #Use this as a generic action that can be added to any girl to proc the event.
@@ -77,7 +77,7 @@ init -2 python:
             return
 
         def recompile_scenes(self):
-            self.compile_scene(self)
+            self.compile_scenes(self)
             return
 
 label teamup_scene_label(teamup, the_person_one, the_person_two):
