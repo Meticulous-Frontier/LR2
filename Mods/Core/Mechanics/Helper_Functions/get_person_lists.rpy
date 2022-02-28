@@ -68,7 +68,7 @@ init -1 python:
     def known_people_at_location(location, excluded_people = []):
         excluded = set(excluded_people)
         excluded.update(unique_characters_not_known())
-        return [x for x in location.people if x.is_available and not x in excluded and x.title]
+        return [x for x in location.people if x.is_available and not x in excluded and x.title and x.mc_title != "Stranger"]
 
     @lru_cache_function(max_size=3, expiration=3)
     def unknown_people_in_the_game(excluded_people = [], excluded_locations = []):
@@ -78,7 +78,7 @@ init -1 python:
         return list(unknown_people)
 
     def unknown_people_at_location(location, excluded_people = []):
-        return [x for x in location.people if x.is_available and not x in excluded_people and not x.title]
+        return [x for x in location.people if x.is_available and not x in excluded_people and (not x.title or x.mc_title == "Stranger")]
 
     def people_in_mc_home(excluded_people = []):
         return [x for x in hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people if x.is_available and not x in excluded_people]
