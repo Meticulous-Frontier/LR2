@@ -4,8 +4,8 @@ init 5 python:
     add_label_hijack("after_load", "update_teamup_mod_core")
 
     def teamup_mod_initialization():
-         kaya_erica_teamup_init()
-         return
+        kaya_erica_teamup_init()
+        return
 
 label activate_teamup_mod_core(stack):
     python:
@@ -19,6 +19,6 @@ label update_teamup_mod_core(stack):
         if "kaya_erica_teamup" not in globals():
             teamup_mod_initialization()
         else:
-             kaya_erica_teamup.compile_scenes(kaya_erica_teamup)
+            kaya_erica_teamup.compile_scenes(kaya_erica_teamup)
         execute_hijack_call(stack)
     return
