@@ -639,7 +639,7 @@ label starbuck_sex_store_promo_one_label(the_person):
     mc.name "I know just what you need to do [the_person.title], that will help drive traffic here. You need to do some advertising!"
     "[the_person.possessive_title] shakes her head."
     the_person "I do, but it doesn't seem to be very effective."
-    mc.name "That's right, because your advertising is so plain! What you need to do is get a sexy woman in your advertising, in some lingerie, showing of some of the products you have for sale!"
+    mc.name "That's right, because your advertising is so plain! What you need to do is get a sexy woman in your advertising, in some lingerie, showing off some of the products you have for sale!"
     "She thinks about your proposal."
     the_person "That sounds great, [the_person.mc_title], but... where am I going to find a model for something like that? Let alone pay her?"
     "You pretend to think hard about it."
