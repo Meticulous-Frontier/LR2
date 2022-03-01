@@ -84,6 +84,10 @@ init 3 python:
         if not person or person.is_pregnant() or person.has_role(clone_role):
             return
 
+        # she recently had a child, so block pregnancy for at least 36 days (allow all events to play out)
+        if day < person.event_triggers_dict.get("last_birth", -36) + 36:
+            return
+
         # historic start date of pregnancy
         start_day = day - progress_days
 
@@ -148,6 +152,7 @@ init 3 python:
 
         person.event_triggers_dict["preg_knows"] = False #Otherwise she immediately knows the next time she's pregnant.
         person.kids += 1 #TODO: add a new role related to a girl being a mother of your kid?
+        person.event_triggers_dict["last_birth"] = day  # record last day giving birth
 
         tit_shrink_one_day = day + renpy.random.randint(7,14)
         tit_shrink_one = Action("Tits Shrink One", tit_shrink_requirement, "tits_shrink", args = [person, True, add_tits_shrink_one_announcement], requirement_args = [person, tit_shrink_one_day])
