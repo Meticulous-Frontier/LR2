@@ -12,7 +12,7 @@ init 2 python:
         count = 0
         while serum.slots_used() < serum.slots and count < 20: # try to add traits in a loop for a max of 20 tries
             trait = get_random_from_list([x for x in list_of_traits if x.researched and not x in serum.traits])
-            if serum.trait_add_allowed(trait):
+            if trait and serum.trait_add_allowed(trait):
                 serum.add_trait(trait)
             count += 1
 
