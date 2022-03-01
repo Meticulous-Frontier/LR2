@@ -65,6 +65,20 @@ init -1 python:
             return True
         return False
 
+    def get_intern_candidates(count, stat_array, skill_array, forced_opinions):
+        candidates = []
+
+        for x in range(0,count):
+            candidates.append(
+                make_person(age = renpy.random.randint(19, 22), stat_array = stat_array, skill_array = skill_array,
+                forced_opinions = forced_opinions, job = student_job, force_random = True))
+
+        for a_candidate in candidates:
+            for x in __builtin__.range(0,2): #Reveal all of their opinions based on our policies.
+                a_candidate.discover_opinion(a_candidate.get_random_opinion(include_known = False, include_sexy = False),add_to_log = False) #Get a random opinion and reveal it.
+        return candidates
+
+
 init 1 python:
     hire_new_college_intern = Action("Hire new intern", hire_new_college_intern_requirement, "hire_new_college_intern_label")   #TODO tooltip
     college_intern_training = Action("Train your intern", college_intern_training_requirement, "college_intern_training_label")   #TODO tooltip
@@ -146,21 +160,8 @@ label hire_new_college_intern_label(the_person):
     the_person "OK. Here's my list of candidates from that program."
     the_person "These are all girls who are doing good academically, are starting their final semester, and have applied for the scholarship."
 
-    $ count = 3 #Num of people to generate, by default is 3. Changed with some policies
     $ clear_scene()
-    $ renpy.free_memory() #Try and free available memory
-    python: #Build our list of candidates with our proper recruitment requirements
-        candidates = []
-
-        for x in range(0,count):
-            candidates.append(make_person(age = renpy.random.randint(19, 22), stat_array = stat_array, skill_array = skill_array, forced_opinions = forced_opinions, force_random = True))
-
-        reveal_count = 2
-        reveal_sex = False
-        for a_candidate in candidates:
-            for x in __builtin__.range(0,reveal_count): #Reveal all of their opinions based on our policies.
-                a_candidate.discover_opinion(a_candidate.get_random_opinion(include_known = False, include_sexy = reveal_sex),add_to_log = False) #Get a random opinion and reveal it.
-        a_candidate = None
+    $ candidates = get_intern_candidates(3, stat_array, skill_array, forced_opinions)
 
     # pad with extra element to make sure we can reach all candidates
     call hire_select_process(candidates + [1]) from _call_intern_select_process_01
@@ -168,7 +169,7 @@ label hire_new_college_intern_label(the_person):
     $ forced_opinions = None
     $ renpy.free_memory() #Try and force a clean up of unused memory.
 
-    if not _return == "None" and isinstance(_return, Person):
+    if isinstance(_return, Person):
         $ new_person = _return
         $ new_person.generate_home() #Generate them a home location so they have somewhere to go at night.
         $ mc.business.hire_college_intern(new_person, the_dept, add_to_location = True)
