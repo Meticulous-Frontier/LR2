@@ -114,10 +114,10 @@ label outro_Ophelia_blowjob(the_girl, the_location, the_object):
     "She pulls back, your cock slipping out of [the_girl.possessive_title]'s mouth with a satisfyingly wet pop. She strokes you with her hand while she points you at her face."
     the_girl "Do it! Cum all over me!!!"
     $ Ophelia_blowjob.current_modifier = None
-    $ Ophelia_blowjob.redraw_scene(the_girl)
+    $ the_girl.draw_person(position = "kneeling1")
     "[the_girl.title] sticks out her tongue for you and holds still, eager to take your hot load."
     $ the_girl.cum_on_face()
-    $ Ophelia_blowjob.redraw_scene(the_girl)
+    $ the_girl.draw_person(position = "kneeling1")
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
     "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
     "You take a deep breath to steady yourself once you've finished cumming. [the_girl.title] looks up at you from her knees, face covered in your semen."

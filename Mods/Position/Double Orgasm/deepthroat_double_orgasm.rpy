@@ -19,17 +19,17 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
         if the_girl.sluttiness > 80:
             "[the_girl.title] sticks out her tongue and rubs her [the_girl.pubes_description] pussy while waiting for your hot load."
             $ the_girl.cum_on_face()
-            $ the_girl.draw_person("kneeling1")
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.title]'s face and into her open mouth, all the while rubbing her wet clit."
         elif the_girl.sluttiness > 60:
             "[the_girl.title] closes her eyes riding out her orgasm."
             $ the_girl.cum_on_face()
-            $ the_girl.draw_person("kneeling1")
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shudder moaning as keep pumping out cum over [the_girl.title]'s face."
         else:
             "[the_girl.title] closes her eyes, presenting her cheek while she enjoys her orgasm."
             $ the_girl.cum_on_face()
-            $ the_girl.draw_person("kneeling1")
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.title]'s face. She is a little distracted as the warm liquid lands on her cheek, but keeps enjoying her own bliss."
         "You hear her whimper and a final shiver runs through her body."
         "You take a deep breath to steady yourself once you've finished cumming."
