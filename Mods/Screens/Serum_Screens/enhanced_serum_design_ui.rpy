@@ -39,11 +39,6 @@ init 2:
 
         add "Science_Menu_Background.png"
         default trait_tooltip = primitive_serum_prod
-        python:
-            effective_traits = 0
-            for trait_count in starting_serum.traits:
-                if not "Production" in trait_count.exclude_tags:
-                    effective_traits += 1
         hbox:
             yalign 0.15
             xanchor 0.5
@@ -229,12 +224,12 @@ init 2:
                         text "Current Serum Statistics:" style "menu_text_title_style" xalign .5
 
                     frame:
-                        if effective_traits > starting_serum.slots:
+                        if starting_serum.slots_used() > starting_serum.slots:
                             background "#B14365"
                         else:
                             background "#000080"
                         xsize 550
-                        text "Trait Slots: " + str(effective_traits) +"/[starting_serum.slots]" style "serum_text_style"
+                        text "Trait Slots: " + str(starting_serum.slots_used()) +"/[starting_serum.slots]" style "serum_text_style"
 
                     viewport:
                         draggable True
@@ -246,10 +241,10 @@ init 2:
                             xalign 0.5
                             spacing 5
                             xsize 550
-                            for num in __builtin__.range(__builtin__.max(starting_serum.slots,effective_traits)):
-                                if num < effective_traits and num < starting_serum.slots:
+                            for num in __builtin__.range(__builtin__.max(starting_serum.slots,starting_serum.slots_used())):
+                                if num < starting_serum.slots_used() and num < starting_serum.slots:
                                     add "Serum_Slot_Full.png" xanchor 0.5 xalign 0.5
-                                elif num < effective_traits and num >= starting_serum.slots:
+                                elif num < starting_serum.slots_used() and num >= starting_serum.slots:
                                     add "Serum_Slot_Incorrect.png" xanchor 0.5 xalign 0.5
                                 else:
                                     add "Serum_Slot_Empty.png" xanchor 0.5 xalign 0.5
@@ -340,7 +335,7 @@ init 2:
                 spacing 40
                 textbutton "Create Design":
                     action [Hide("trait_tooltip"), Hide("serum_design_ui"), Hide("serum_tooltip"), Return(starting_serum)]
-                    sensitive (starting_serum.slots >= effective_traits and __builtin__.len(starting_serum.traits) and starting_serum.has_tag("Production")) > 0
+                    sensitive (starting_serum.slots >= starting_serum.slots_used() and __builtin__.len(starting_serum.traits) and starting_serum.has_tag("Production")) > 0
 
                     style "textbutton_style"
                     text_style "serum_text_style"
