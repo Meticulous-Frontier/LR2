@@ -562,8 +562,12 @@ init 2 python:
     def update_stripclub_strippers():
         # create new set of stripper characters
         for person in stripclub_strippers[:]:   #use copy of array
+            person.job.quit_function = stripper_quit # override quit function to prevent new generation
             person.quit_job()
             person.remove_person_from_game()
+
+        # make sure we have the original quit_function on the stripper_job
+        stripper_job.quit_function = stripper_replace
 
         for i in __builtin__.range(0,4):
             person = create_stripper()
