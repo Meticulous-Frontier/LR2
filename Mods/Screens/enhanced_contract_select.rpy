@@ -68,6 +68,16 @@ init 2:
                 action Hide("contract_select")
             textbutton "Return" align [0.5,0.5] style "return_button_style" text_style "return_button_style"
 
+    python:
+        def get_design_names_that_satisfy_contract(contract):
+            usable_serums = []
+            for sd in [x for x in mc.business.serum_designs if contract.check_serum(x)]:
+                usable_serums.append(sd.name)
+
+            if usable_serums:
+                return ", ".join(usable_serums)
+            return "None"
+
     screen contract_select_button(the_contract):
         frame:
             background "#00000088"
@@ -88,7 +98,7 @@ init 2:
                     use contract_aspect_grid(the_contract)
 
                     text the_contract.description style "textbutton_text_style" size 12 text_align 0.0
-
+                    text "Usable designs: " + get_design_names_that_satisfy_contract(the_contract) style "textbutton_text_style" size 14 text_align 0.0
 
                 vbox:
                     yfill False
