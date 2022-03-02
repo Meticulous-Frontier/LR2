@@ -47,6 +47,37 @@ init -1 python:
 
     Outfit.matches = matches
 
+    #####################################
+    # Enhanced Methods for Outfit Class #
+    #####################################
+
+    def remove_random_upper_enhanced(self, top_layer_first = False, do_not_remove = False):
+        #if top_layer_first only the upper most layer is removed, otherwise anything unanchored is a valid target.
+        #if do_not_remove is set to True we only use this to find something valid to remove and return that clothing item. this lets us use this function to find thigns to remove with an animation.
+        #Returns None if there is nothing to be removed.
+        to_remove = None
+        if top_layer_first:
+            #Just remove the very top layer
+            if self.get_upper_unanchored():
+                to_remove = self.get_upper_unanchored()[0]
+                if to_remove.is_extension:
+                    return None #Extensions can't be removed directly.
+            else:
+                return None
+        else:
+            to_remove = get_random_from_list(self.get_upper_unanchored())
+            if to_remove and to_remove.is_extension:
+                return None
+
+        if to_remove and to_remove.layer == 0: # don not nipple covers or cinchers
+            return None
+
+        if to_remove and not do_not_remove:
+            self.remove_clothing(to_remove)
+        return to_remove
+
+    Outfit.remove_random_upper = remove_random_upper_enhanced
+
     ######################################
     # Extension Methods For Outfit Class #
     ######################################
