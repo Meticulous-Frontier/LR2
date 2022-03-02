@@ -44,14 +44,14 @@ init 2 python:
         return False
 
     def mc_action_lasik_surgery_person_requirement(person):
-        if person.love < 20: # you need have some connection with her to offer this
+        if person in unique_character_list:
             return False
-        if person.love < 30:
-            return "Requires: 30 Love"
 
         if person.base_outfit and big_glasses in person.base_outfit.accessories or modern_glasses in person.base_outfit.accessories:
-            if person in unique_character_list:
+            if person.love < 20: # you need have some connection with her to offer this
                 return False
+            if person.love < 30:
+                return "Requires: 30 Love"
             if not mc.business.has_funds(5000):
                 return "Not enough money"
             return True
