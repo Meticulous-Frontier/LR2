@@ -65,7 +65,7 @@ label sister_ntr_crisis_action_label():
             "They go back to kissing. [man_name] moves his hands to [the_person.possessive_title] butt and starts caressing it."
             the_person "Mmmmm... Your hands are so gentle..."
             "You see [man_name] starts to undress [the_person.possessive_title]."
-            $ the_person.strip_outfit_to_max_sluttiness(narrator_messages = "He takes off [the_person.possessive_title]'s [strip_choice.name] and throws it on a chair.")
+            $ the_person.strip_outfit_to_max_sluttiness(narrator_messages = "He takes off [the_person.possessive_title]'s [strip_choice.display_name] and throws it on a chair.")
             the_person "Hold it there, [man_name]. I'm not ready for this. Hope you understand."
             "You see a glimpse of disappointment on man's face, but he regains himself."
             man_name "Sorry, [the_person.name]. I understand."

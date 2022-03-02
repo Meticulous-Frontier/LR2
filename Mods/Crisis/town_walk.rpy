@@ -53,11 +53,11 @@ label town_walk_crisis_action_label():
         the_person "I should get dressed for dinner. Don't have much time..."
 
     if (the_person.strip_outfit_to_max_sluttiness(narrator_messages = [
-        "[the_person.possessive_title] takes off her [strip_choice.name] and throws it on the bed.",
-        "[the_person.possessive_title] keeps going and drops her [strip_choice.name].",
-        "[the_person.possessive_title] strips off her [strip_choice.name] and tosses it to the side.",
-        "[the_person.possessive_title] removes her [strip_choice.name] and drops it to the floor.",
-        "[the_person.possessive_title] quickly slides off her [strip_choice.name] and leaves it on the ground."
+        "[the_person.possessive_title] takes off her [strip_choice.display_name] and throws it on the bed.",
+        "[the_person.possessive_title] keeps going and drops her [strip_choice.display_name].",
+        "[the_person.possessive_title] strips off her [strip_choice.display_name] and tosses it to the side.",
+        "[the_person.possessive_title] removes her [strip_choice.display_name] and drops it to the floor.",
+        "[the_person.possessive_title] quickly slides off her [strip_choice.display_name] and leaves it on the ground."
         ], temp_sluttiness_boost = 20)):
 
         # only show this part of the dialog if she removed clothing

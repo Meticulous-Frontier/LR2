@@ -772,7 +772,7 @@ init -1 python:
             if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
                 msg_idx = renpy.random.randint(1, msg_count)
                 msg = messages[msg_idx - 1]
-                msg = msg.replace("[the_person.possessive_title]", self.possessive_title or "the unknown woman").replace("[the_person.title]", self.title or self.name).replace("[the_person.mc_title]", self.mc_title).replace("[strip_choice.name]", strip_choice.name)
+                msg = msg.replace("[the_person.possessive_title]", self.possessive_title or "the unknown woman").replace("[the_person.title]", self.title or self.name).replace("[the_person.mc_title]", self.mc_title).replace("[strip_choice.name]", strip_choice.name).replace("[strip_choice.display_name]", strip_choice.display_name)
                 renpy.say(None, msg)
 
             strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
