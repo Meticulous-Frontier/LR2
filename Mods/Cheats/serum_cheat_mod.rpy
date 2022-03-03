@@ -1,24 +1,16 @@
 # Since a lot of players complain about a new game restart is due almost at every game
 # update, I made this cheat screen for serums to be quickly researched and mastered.
 
-init -2 style serum_cheat_text_style: # cheat_text_style already defined in cheat_mod
-    text_align 0.5
-    size 20
-    color "#dddddd"
-    outlines [(2,"#222222",0,0)]
-    xalign 0.5
+init python:
+    if "serum_cheat_menu_keybind" not in config.overlay_screens:
+        config.overlay_screens.append("serum_cheat_menu_keybind")
 
-init -1 python:
-    if "keybindS" not in config.overlay_screens:
-        config.overlay_screens.append("keybindT")
-
-screen keybindT():
+screen serum_cheat_menu_keybind():
     key "t" action ToggleScreen("serum_cheat_menu")
     key "T" action ToggleScreen("serum_cheat_menu")
 
 screen serum_cheat_menu():
     add "Science_Menu_Background.png"
-    modal True
 
     default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits + mc.business.blueprinted_traits)])
     default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
@@ -36,7 +28,9 @@ screen serum_cheat_menu():
                     frame:
                         background "#000080"
                         xsize 380
-                        text "Available New Traits\n{color=#ff0000}{size=14}Click the Trait to have it researched{/size}{/color}" style "serum_cheat_text_style"
+                        vbox:
+                            text "Available New Traits" style "menu_text_title_style"
+                            text "{color=#B14365}{size=14}Click the Trait to have it researched{/size}{/color}" style "serum_text_style"
 
                     viewport:
                         xsize 380
@@ -67,7 +61,9 @@ screen serum_cheat_menu():
                     frame:
                         background "#000080"
                         xsize 410
-                        text "Master Existing Traits:\n{color=#ff0000}{size=14}Click the Trait to add mastery levels{/size}{/color}" style "serum_cheat_text_style"
+                        vbox:
+                            text "Master Existing Traits" style "menu_text_title_style"
+                            text "{color=#B14365}{size=14}Click the Trait to add mastery levels{/size}{/color}" style "serum_text_style"
 
                     viewport:
                         xsize 410
@@ -111,7 +107,9 @@ screen serum_cheat_menu():
                     frame:
                         background "#000080"
                         xsize 390
-                        text "Research New Designs:\n{color=#ff0000}{size=14}Click the Design to have it researched{/size}{/color}" style "serum_cheat_text_style"
+                        vbox:
+                            text "Research New Designs" style "menu_text_title_style"
+                            text "{color=#B14365}{size=14}Click the Design to have it researched{/size}{/color}" style "serum_text_style"
 
                     viewport:
                         xsize 390
