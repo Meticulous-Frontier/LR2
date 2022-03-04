@@ -7,7 +7,7 @@
 init 2 python:
     #Requirement functions
     def candace_meet_at_office_store_requirement(person):
-        if person.location == office_store:
+        if person.location == office_store and mc.business.is_work_day():
             return True
         return False
 
