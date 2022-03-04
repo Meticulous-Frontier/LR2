@@ -316,7 +316,7 @@ init 2:
                                     frame:
                                         background "#43B197"
                                         xsize 270
-                                        margin [5, 0, 5, 0]
+                                        margin (5, 0, 5, 0)
                                         text "[trait.positive_slug]" style "serum_text_style" size 16
                                     frame:
                                         xsize 270

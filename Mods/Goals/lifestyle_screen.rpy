@@ -1,8 +1,8 @@
 # This file contains the provisions for the lifetstyle coach screen for setting personal goal lists.
 init -2 style textbutton_green_style: ##The generic style used for text button backgrounds. TODO: Replace this with a pretty background image instead of a flat colour.
-    padding [5,5]
-    margin [5,5]
-    background "#44BB44"
+    padding (5,5)
+    margin (5,5)
+    background "#43B197"
     insensitive_background "#222222"
     hover_background "#aaaaaa"
 

@@ -49,7 +49,7 @@ init 2:
                 button:
                     style "transparent_style"
                     focus_mask None
-                    margin [-20, -20]
+                    margin (-20, -20)
                     ysize 440
                     action [
                         ToggleScreenVariable("phone_up"),

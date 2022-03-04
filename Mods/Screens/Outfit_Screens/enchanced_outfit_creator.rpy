@@ -709,7 +709,7 @@ init 2:
                                                                             xysize (60, 40)
                                                                             action [Function(update_transparency, float(trans))]
                                                                     frame:
-                                                                        padding [0,0]
+                                                                        padding (0,0)
                                                                         xysize (60, 40)
                                                                         background "#143869"
                                                                         text str(int(float(current_a)*100)) + "%" style "serum_text_style" yalign 0.5 size 16
@@ -723,7 +723,7 @@ init 2:
                                                                 for count, a_colour in __builtin__.enumerate(colour_list):
                                                                     frame:
                                                                         background "#0a142688"
-                                                                        padding [3, 3]
+                                                                        padding (3, 3)
                                                                         button:
                                                                             background Color(rgb=(a_colour[0], a_colour[1], a_colour[2]))
                                                                             xysize (38, 38)
@@ -819,54 +819,54 @@ init 2:
                                                 frame:
                                                     background "#143869"
                                                     xsize 250
-                                                    padding [1,1]
+                                                    padding (1,1)
                                                     text "Sluttiness (" + get_outfit_type_name() + "): " + str(get_slut_score()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#143869"
                                                     xsize 250
-                                                    padding [1,1]
+                                                    padding (1,1)
                                                     text "Tits Visible: " + str(demo_outfit.tits_visible()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#143869"
                                                     xsize 250
-                                                    padding [1,1]
+                                                    padding (1,1)
                                                     text "Tits Usable: " + str(demo_outfit.tits_available()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#143869"
                                                     xsize 250
-                                                    padding [1,1]
+                                                    padding (1,1)
                                                     text "Wearing a Bra: " + str(demo_outfit.wearing_bra()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#143869"
                                                     xsize 250
-                                                    padding [1,1]
+                                                    padding (1,1)
                                                     text "Bra Covered: " + str(demo_outfit.bra_covered()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#143869"
                                                     xsize 250
-                                                    padding [1,1]
+                                                    padding (1,1)
                                                     text "Pussy Visible: " + str(demo_outfit.vagina_visible()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#143869"
                                                     xsize 250
-                                                    padding [1,1]
+                                                    padding (1,1)
                                                     text "Pussy Usable: " + str(demo_outfit.vagina_available()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#143869"
                                                     xsize 250
-                                                    padding [1,1]
+                                                    padding (1,1)
                                                     text "Wearing Panties: " + str(demo_outfit.wearing_panties()) style "serum_text_style_traits"
                                                 frame:
                                                     background "#143869"
                                                     xsize 250
-                                                    padding [1,1]
+                                                    padding (1,1)
                                                     text "Panties Covered: " + str(demo_outfit.panties_covered()) style "serum_text_style_traits"
 
                                                 # DEBUG CODE TO SEE WHAT IS SELECTED WHEN WE CLICK AROUND
                                                 # frame:
                                                 #     background "#43B197"
                                                 #     xsize 250
-                                                #     padding [1,1]
+                                                #     padding (1,1)
                                                 #     if (selected_clothing):
                                                 #         text "Seletect Item: " + selected_clothing.name style "serum_text_style_traits"
 
@@ -876,7 +876,7 @@ init 2:
                                     vbox:
                                         frame:
                                             background "#143869"
-                                            padding [1,1]
+                                            padding (1,1)
                                             xsize 250
                                             text "Visible Layers:" style "serum_text_style_traits"
                                         hbox:
@@ -1082,7 +1082,7 @@ init 2:
                                                 frame:
                                                     background "#000080"
                                                     xsize 240
-                                                    padding [1,1]
+                                                    padding (1,1)
                                                     text "Preferences:" style "serum_text_style_traits"
                                                 viewport:
                                                     scrollbars "vertical"
@@ -1096,14 +1096,14 @@ init 2:
                                                                 frame:
                                                                     background "#43B197"
                                                                     xsize 220
-                                                                    padding [1,1]
+                                                                    padding (1,1)
                                                                     text pref style "serum_text_style_traits"
                                                         if __builtin__.len(hate_list) > 0:
                                                             for pref in hate_list:
                                                                 frame:
                                                                     background "#B14365"
                                                                     xsize 220
-                                                                    padding [1,1]
+                                                                    padding (1,1)
                                                                     text pref style "serum_text_style_traits"
 
                                 vbox:

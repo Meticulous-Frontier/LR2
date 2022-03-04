@@ -605,7 +605,7 @@ screen cheat_menu():
                                         if hasattr(editing_target, str(available_naming[x][0])):
                                             button:
                                                 id "name_select"
-                                                margin [2,2]
+                                                margin (2,2)
                                                 xfill True
 
                                                 background "#000080"
