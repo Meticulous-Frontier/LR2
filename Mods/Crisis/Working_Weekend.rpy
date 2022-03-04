@@ -135,6 +135,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                         "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                         "When her ass runs up against the desk, she reaches down and begins unzipping your pants."
                         $ mc.change_locked_clarity(30)
+                        $ mc.change_arousal(10)
                         $ person_one.break_taboo("condomless_sex")
                         "She pulls your your dick out and lays back. She lines you up with her pussy and push yourself into her."
                         call fuck_person(person_one, start_position = missionary, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_sex_description_SB15
@@ -158,6 +159,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                 "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                 $ scene_manager.update_actor(person_one, position = "kissing")
                 $ mc.change_locked_clarity(30)
+                $ mc.change_arousal(10)
                 "[person_one.possessive_title] is just pulling your cock out when you hear a cough from the doorway."
                 $ person_one.break_taboo("touching_penis")
                 person_two "Wow, looks like you guys are getting ready for some fun!"
@@ -165,12 +167,14 @@ label SB_working_weekend_crisis_label_high(person_one):
                 "You turn and see [person_two.possessive_title] standing in the doorway. You aren't sure how long she has been standing there."
                 person_two "This is so sexy... [person_two.mc_title], can I join? Please!?! You won't regret it!"
                 $ mc.change_locked_clarity(50)
+                $ mc.change_arousal(10)
                 "Dumbfounded, you can only nod."
                 person_two "Yes! Oh just give me one second!!!"
                 "She starts to strip down."
                 $ scene_manager.strip_full_outfit(person = person_two)
                 $ person_two.break_taboo("bare_tits")
                 $ person_two.break_taboo("bare_pussy")
+                $ mc.change_arousal(10)
                 "Now naked, she walks over to you and [person_one.possessive_title]."
                 person_two "Okay, how do you want to do this?"
                 call start_threesome(person_one, person_two) from _call_start_threesome_SB_working_weekend_crisis
@@ -252,9 +256,11 @@ label SB_working_weekend_crisis_label_medium(person_one):
             if not person_one.outfit.tits_available():    #If covered up, have her take her top off
                 person_one "Here... let me take this off. I bet that will help ease some of your stress."
                 $ the_clothing = person_one.outfit.get_upper_top_layer()
+                $ mc.change_arousal(10)
                 "[person_one.possessive_title] takes off her [the_clothing.name]."
                 $ scene_manager.draw_animated_removal(person_one, the_clothing)
                 $ the_clothing = None
+            $ mc.change_arousal(10)
             "Your eyes wander down to [person_one.possessive_title]'s tits."
             $ mc.change_locked_clarity(30)
             if person_one.outfit.tits_available():
@@ -263,6 +269,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
                     $ person_one.discover_opinion("showing her tits")
                     $ person_one.change_slut(1)
                     $ person_one.change_slut(2)
+            $ mc.change_arousal(10)
             "You back your chair up and move it to the side while [person_one.possessive_title] gets down on her knees in front of you."
             $ person_one.break_taboo("sucking_cock")
             $ scene_manager.update_actor(person_one, position = "blowjob")
