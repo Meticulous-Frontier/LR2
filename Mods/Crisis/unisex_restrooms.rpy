@@ -451,7 +451,7 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     anon_char "Oh!"
     "The hand never stops stroking you as you start to blow your load. Thank god whoever it is knows how to finish the job!"
     $ the_person.cum_on_face(add_to_record = False)
-    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
+    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person, add_to_log = False)
     "After you finishes, she gives you a few extra strokes, drawing out any remaining cum. You feel a pair of lips lightly kiss the tip."
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
 
@@ -495,7 +495,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     "With a moan, you feel yourself pushed too far. It feels like your cock explodes as you begin to dump your load into her gullet."
     anon_char "Oh! Ummmfff.... mmmmmmmm..."
     $ the_person.cum_in_mouth(add_to_record = False)
-    $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
+    $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person, add_to_log = False)
     "She moans in delight as your cream fills her mouth. She eagerly works every last drop from your pulsating prick."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
@@ -545,7 +545,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     anon_char "Yes. Yes! Oh fuck yes!"
     $ the_person.have_orgasm(add_to_log = False)
     $ the_person.cum_in_vagina(add_to_record = False)
-    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
+    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person, add_to_log = False)
     "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
     if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
         anon_char "Wait a minute, let me clean that up for you."
@@ -603,7 +603,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     anon_char "Yes! Fuck my ass! YES!"
     $ the_person.have_orgasm(add_to_log = False)
     $ the_person.cum_in_ass(add_to_record = False)
-    $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person)
+    $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person, add_to_log = False)
     "You cum as deep inside her ass as you can manage. Your cum spurts deep inside her bowel, farther than your cock can penetrate."
     if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
         anon_char "Wait a minute, let me clean that up for you."
@@ -685,7 +685,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
 
             $ the_person.have_orgasm(add_to_log = False)
             $ the_person.cum_in_vagina(add_to_record = False)
-            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
+            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person, add_to_log = False)
             "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
             if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
                 anon_char "Wait a minute, let me clean that up for you."
