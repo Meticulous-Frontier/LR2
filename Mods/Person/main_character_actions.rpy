@@ -47,7 +47,7 @@ init 2 python:
         if person in unique_character_list:
             return False
 
-        if person.base_outfit and big_glasses in person.base_outfit.accessories or modern_glasses in person.base_outfit.accessories:
+        if person.base_outfit and person.base_outfit.has_glasses():
             if person.love < 20: # you need have some connection with her to offer this
                 return False
             if person.love < 30:
@@ -292,7 +292,7 @@ label mc_stop_follow_label(person):
 
 
     return
-# Lasik surgery Labels
+
 label mc_action_lasik_surgery_label(the_person):
     mc.name "[the_person.title], your have beautiful eyes, but they are always hidden behind your glasses."
     the_person "Don't you like them? I can wear different glasses tomorrow."
@@ -310,7 +310,7 @@ label mc_action_lasik_surgery_label(the_person):
     python:
         the_person.change_stats(happiness = 10, love = 5, max_love = 80)
         mc.business.change_funds(-5000)
-        the_person.base_outfit.accessories.remove(filter(lambda x : x in [big_glasses, modern_glasses], the_person.base_outfit.accessories)[0])
+        the_person.base_outfit.remove_glasses()
     $ the_person.draw_person()
     return
 

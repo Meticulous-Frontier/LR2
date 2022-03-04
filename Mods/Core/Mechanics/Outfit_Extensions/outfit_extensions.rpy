@@ -145,21 +145,26 @@ init -1 python:
     Outfit.has_overwear = has_overwear
 
     def remove_all_cum(self):
-        remove_list = []
-        for acc in self.accessories:
-            if acc.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]:
-                remove_list.append(acc)
-        for acc in remove_list:
+        for acc in [x for x in self.accessories if x.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]]:
             self.accessories.remove(acc)
         return
 
     Outfit.remove_all_cum = remove_all_cum
 
+    def has_glasses(self):
+        return any([x for x in self.accessories if x.name in [big_glasses.name, modern_glasses.name]])
+
+    Outfit.has_glasses = has_glasses
+
+    def remove_glasses(self):
+        for acc in [x for x in self.accessories if x.name in [big_glasses.name, modern_glasses.name]]:
+            self.accessories.remove(acc)
+        return
+
+    Outfit.remove_glasses = remove_glasses
+
     def check_outfit_cum(self):                                             #Checks if the person has any cum on them
-        for acc in self.accessories:
-            if acc.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]:
-                return True
-        return False
+        return any([x for x in self.accessories if x.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]])
 
     Outfit.check_outfit_cum = check_outfit_cum
 
