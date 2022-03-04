@@ -145,8 +145,7 @@ label hire_mother_work_crisis_label():
         else:
             mc.name "Alright [the_person.title], this looks promising, she can start tomorrow. I can't give her any preferential treatment, but I'll give her a try."
             $ the_person.draw_person(emotion = "happy")
-            $ the_person.change_happiness(5)
-            $ the_person.change_love(2)
+            $ the_person.change_stats(happiness = 5, love = 2)
             the_person "Thank you so much!"
             call hire_someone(the_mother) from _call_hire_mother_work_2
         # make sure to set titles for the mother (prevent introduction dialogs)
@@ -156,8 +155,7 @@ label hire_mother_work_crisis_label():
     else: #is "None
         if promised_sex: #You promised to do it for sex but don't want to hire her, mom is disappointed.
             mc.name "I'm sorry but her credentials just aren't what they need to be. I could never justify hiring your mother."
-            $ the_person.change_happiness(-5)
-            $ the_person.change_love(-1)
+            $ the_person.change_stats(happiness = -5, love = -2)
             $ the_person.draw_person(emotion = "sad")
             "[the_person.possessive_title] seems to deflate. She nods sadly."
             the_person "I understand. Thank you for the time."

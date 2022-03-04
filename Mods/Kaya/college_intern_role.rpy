@@ -205,15 +205,13 @@ label college_intern_complete_internship(the_person):
         call hire_select_process([the_person, 1]) from _call_hire_intern_work_select_process_01
         if _return == the_person:
             mc.name "Alright [the_person.title]. I can't give you any preferential treatment, but we will give it a shot."
-            $ the_person.change_happiness(5)
-            $ the_person.change_love(2)
+            $ the_person.change_stats(happiness = 5, love = 2)
             the_person "Oh my! Thank you so much! I'll see you at work sir!"
             "You use your phone and text HR to get her paperwork started to change her from intern to full employee status. You should probably decide what department she goes to."
             call hire_someone(the_person) from _call_hire_intern_work__01
         else:
             mc.name "I'm sorry, but I can't do that right now, the logistics aren't good for a new full time employee."
-            $ the_person.change_happiness(-5)
-            $ the_person.change_love(-2)
+            $ the_person.change_stats(happiness = -5, love = -2)
             the_person "Ah... I understand. Well, if you change your mind, please let me know, okay?"
             "She hangs up before you can respond. It's unfortunate, but not every intern can transition to a full employee."
     elif college_intern_happiness_score(the_person) > 100:  #She wants to keep working for you
@@ -225,15 +223,13 @@ label college_intern_complete_internship(the_person):
         call hire_select_process([the_person, 1]) from _call_hire_intern_work_select_process_02
         if _return == the_person:
             mc.name "Alright [the_person.title]. I can't give you any preferential treatment, but we will give it a shot."
-            $ the_person.change_happiness(5)
-            $ the_person.change_love(2)
+            $ the_person.change_stats(happiness = 5, love = 2)
             the_person "Ah, I was hoping you would say that! I appreciate it sir!"
             "You use your phone and text HR to get her paperwork started to change her from intern to full employee status. You should probably decide what department she goes to."
             call hire_someone(the_person) from _call_hire_intern_work__02
         else:
             mc.name "I'm sorry, but I can't do that right now, the logistics aren't good for a new full time employee."
-            $ the_person.change_happiness(-5)
-            $ the_person.change_love(-2)
+            $ the_person.change_stats(happiness = -5, love = -2)
             the_person "Ah... I understand. Well, if you change your mind, please let me know, okay?"
             "She hangs up before you can respond. It's unfortunate, but not every intern can transition to a full employee."
     elif college_intern_happiness_score(the_person) > renpy.random.randint(1,100):  #She might ask to stay on

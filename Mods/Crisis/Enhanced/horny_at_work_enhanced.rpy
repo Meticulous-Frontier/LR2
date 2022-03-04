@@ -395,9 +395,7 @@ label horny_at_work_crisis_enhanced_label():
                 $ the_person.discover_opinion("public sex")
                 "She looks away and gasps."
                 the_person "Oh my god, [the_person.mc_title]! I can't believe you're doing this right here!"
-                $ the_person.change_love(-5)
-                $ the_person.change_happiness(-10)
-                $ the_person.change_obedience(-3)
+                $ the_person.change_stats(happiness = -10, love = -5, obedience = -3)
                 $ the_person.draw_person(position = "walking_away")
                 "Before you can say anything more she turns around and hurries out of the room."
                 the_person "I really need to go..."

@@ -340,9 +340,7 @@ label ashley_hire_directed_label():
     else:
         mc.name "I'm sorry, I don't think she is a good fit at this time. But I will keep her in mind for the future, okay?"
         the_person "Wow, really? Why did you even talk to me about this?"
-        $ the_person.change_happiness(-10)
-        $ the_person.change_obedience(-10)
-        $ the_person.change_love(-10)
+        $ the_person.change_stats(happiness = -10, love = -5, obedience = -5)
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] gets up and leaves the room. You should probably avoid getting her hopes up again like this."
 
@@ -482,11 +480,9 @@ label ashley_classical_concert_date_label():
     #love: compliment ash. neutral: compliment both. corrupt: crude compliment
     mc.name "Hello! Thanks for this, I've been looking forward to this ever since we arranged it. [the_person.title], you look great tonight!"
     the_person "Ah... thank you."
-    $ the_person.change_happiness(1)
-    $ the_person.change_love(1)
+    $ the_person.change_stats(happiness = 1, love = 1)
     "[stephanie.title] gives you a smile after your kind words to her sister."
-    $ stephanie.change_obedience(1)
-    $ stephanie.change_love(1)
+    $ stephanie.change_stats(obedience = 1, love = 1)
     #End of love option
     stephanie "Alright you two, go enjoy your classical concert. Ash, just text me when you get done, I'm gonna go have a couple drinks."
     the_person "Okay. Bye Steph!"
@@ -1384,8 +1380,7 @@ label ashley_second_concert_date_label():
         $ scene_manager.update_actor(ashley, position = "walking_away")
         "As she walks by [stephanie.possessive_title]..."
         stephanie "Hey, you got something on your dress..."
-        $ stephanie.change_happiness(-5)
-        $ stephanie.change_love(-5)
+        $ stephanie.change_stats(happiness = -10, love = -5)
         $ scene_manager.remove_actor(the_person)
         "[the_person.title] disappears into the restroom, leaving you with [stephanie.title]. You can tell she is suspicious, but for now, she decides not to say anything about it."
     else:
@@ -1673,8 +1668,7 @@ label ashley_sneaks_over_label():
     $ mc.change_locked_clarity(20)
     "Seeing her expose herself in this way gives you a burst of energy. She want's the girlfriend treatment? You can give it to her."
     mc.name "Of course you can stay the night. Don't get mad at me though if [stephanie.name] get's suspicious when you have trouble walking tomorrow."
-    $ the_person.change_happiness(10)
-    $ the_person.change_love(3)
+    $ the_person.change_stats(happiness = 10, love = 3)
     the_person "Me? You'll be lucky if you can get out of bed at all tomorrow!"
     $ the_person.draw_person(position = "against_wall")
     "[the_person.title] jumps on to you."
@@ -1780,8 +1774,7 @@ label ashley_sneaks_over_label():
                 the_person "Mmm, I wore you out! That was fun."
                 "She kisses you and runs her hand over your back."
             else:
-                $ the_person.change_love(-1)
-                $ the_person.change_slut(-1)
+                $ the_person.change_stats(slut = -1, love = -3)
                 the_person "Well I guess we're done then... Maybe next time you can get me off as well."
             $ done = True
 
@@ -1809,8 +1802,7 @@ label ashley_sneaks_over_label():
                         the_person "Mmm, okay! That was nice."
                         "She kisses you and runs her hand over your back."
                     else:
-                        $ the_person.change_love(-1)
-                        $ the_person.change_slut(-1)
+                        $ the_person.change_stats(slut = -1, love = -3)
                         the_person "Well... Maybe next time you can get me off as well?"
                     $ done = True
     $ the_person.draw_person(position = "back_peek")
@@ -2304,13 +2296,11 @@ label ashley_clothes_shopping_label(the_person):
         if _return.get("girl orgasms", 0):
             the_person "Ahhh, that was nice. Good to know my sister isn't getting ALL your attention!"
             $ the_person.reset_all_jealousy()
-            $ the_person.change_love(3)
-            $ the_person.change_slut(1)
+            $ the_person.change_stats(slut = 1, love = 3)
         else:
             the_person "Wow, really? You can't give me the same treatment that [stephanie.name] gave you? She got you all worn out?"
             "She looks pissed."
-            $ the_person.change_love(-3)
-            $ the_person.change_slut(1)
+            $ the_person.change_stats(slut = -1, love = -3)
             $ the_person.jealous_change_score(3) #Add points to jealous score so ashley gets more desperate.
         $ the_person.draw_person(position = "stand2")
         "You get yourself put back together."

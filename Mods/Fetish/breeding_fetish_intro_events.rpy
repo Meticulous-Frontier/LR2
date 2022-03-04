@@ -332,8 +332,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
             return
         "Not now":
             mc.name "I'm sorry [the_person.title], I've got errands to accomplish. Maybe another time."
-            $ the_person.change_love(-2)
-            $ the_person.change_happiness(-5)
+            $ the_person.change_stats(happiness = -5, love = -2)
             the_person "Ah, okay. I see."
             return False
 

@@ -238,8 +238,7 @@ label lily_morning_encounter_follow_up_one_label(the_person):
     the_person "Oh, [the_person.mc_title] I thought you were going to the kitchen."
     mc.name "I was, but I don't think I can leave you like this in good conscience."
     the_person "That is so sweet, I was worried I would have to take care of myself before I could think about school for the day."
-    $ the_person.change_love(3)
-    $ the_person.change_happiness(5)
+    $ the_person.change_stats(happiness = 5, love = 3)
     if the_person.outfit.wearing_panties():
         $ the_person.outfit.strip_to_vagina()
         "As you step towards her she drops her panties off her hips to the floor."

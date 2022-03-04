@@ -67,23 +67,21 @@ label mom_breakfast_action_label_low():
             "Your kind words bring a smile to her face."
             $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
             the_person "Thank you, [the_person.mc_title], for your kind words. You and your sister mean so much to me, it's a good reminder why I do what I do sometimes."
-            $ the_person.change_love(5)
-            $ the_person.change_happiness(2)
+            $ the_person.change_stats(happiness = 2, love = 5)
 
         "Emphasize Happiness": #This will increase happiness (duh)
             mc.name "I'm sorry work is such a pain. Just think about the weekend coming up, maybe you and [lily.title] can go shopping or something?"
             "Your kind words bring a smile to her face."
             $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
             the_person "Thank you, [the_person.mc_title], for your kind words. You and your sister mean so much to me, it's a good reminder why I do what I do sometimes."
-            $ the_person.change_love(2)
-            $ the_person.change_happiness(5)
+            $ the_person.change_stats(happiness = 5, love = 2)
+
         "Emphasize Stability": #This will increase obedience
             mc.name "I'm sorry work is annoying. I know you do it just to keep us afloat, but I have a good feeling about this business I'm running now, I can start supporting the family more soon."
             "Your kind words bring a smile to her face."
             $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
             the_person "Oh, thank you [the_person.mc_title], but you don't need to worry about supporting me. I'm just happy to see you making something of yourself."
-            $ the_person.change_obedience(5)
-            $ the_person.change_happiness(2)
+            $ the_person.change_stats(happiness = 2, obedience = 5)
     "You and [the_person.title] chat for a while longer, until you finish with your breakfast."
     mc.name "Thanks for the great breakfast! I'll see you tonight after work!"
     "You say goodbye to her and head out for the day."

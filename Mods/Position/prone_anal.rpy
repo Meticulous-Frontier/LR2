@@ -257,9 +257,7 @@ label scene_prone_anal_3(the_girl, the_location, the_object):
                         $ the_girl.change_arousal(20)
                     elif the_girl.get_opinion_score("anal creampies") < 0:
                         the_girl "Oh my god. This can't be happening..."
-                        $ the_girl.change_obedience(5)
-                        $ the_girl.change_love(-5)
-                        $ the_girl.change_happiness(-15)
+                        $ the_girl.change_stats(happiness = -10, love = -3, obedience = 3)
                         "You slide into her ass without any protection this time. Her body is stiff and unmoving."
                     else:
                         the_girl "Oh god, you're really going to do it! Oh fuck..."

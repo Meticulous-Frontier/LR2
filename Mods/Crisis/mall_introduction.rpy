@@ -97,8 +97,7 @@ label mall_introduction_action_label():
             else:
                 known_person "I have to tell you [stranger.name], he is a great person to hang out with."
 
-        $ stranger.change_love(5)
-        $ stranger.change_happiness(10)
+        $ stranger.change_stats(happiness = 10, love = 5)
 
         if stranger.sluttiness > 30:
             stranger "Well, he's very hansom [known_person.name], I wouldn't mind going on a date with him."

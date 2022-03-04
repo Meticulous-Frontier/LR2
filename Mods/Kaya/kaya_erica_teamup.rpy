@@ -103,10 +103,8 @@ label kaya_erica_teamup_intro_scene(the_person_one, the_person_two):
     mc.name "Alright [erica.title], how about this."
     call kaya_erica_teamup_question_label(erica) from _kaya_erica_teamup_question_02
     "You spend some time going over a couple more questions, and soon you have a pretty good idea of where to direct their study time towards."
-    $ kaya.change_love(2, 40)
-    $ erica.change_love(2, 40)
-    $ kaya.change_happiness(2)
-    $ erica.change_happiness(2)
+    $ kaya.change_stats(happiness = 2, love = 2, max_love = 40)
+    $ erica.change_stats(happiness = 2, love = 2, max_love = 40)
     erica "Wow, that was really helpful. Thanks [erica.mc_title]!"
     kaya "Yes! Thank you so much, I feel like this has been a big help."
     mc.name "Alright, you girls can take it from here?"
@@ -280,10 +278,8 @@ label kaya_erica_teamup_scene_0(the_person_one, the_person_two):
     mc.name "Alright [erica.title], how about this."
     call kaya_erica_teamup_question_label(erica) from _kaya_erica_teamup_question_04
     "You spend some time going over a couple more questions, and soon you have a pretty good idea of where to direct their study time towards."
-    $ kaya.change_love(2, 40)
-    $ erica.change_love(2, 40)
-    $ kaya.change_happiness(2)
-    $ erica.change_happiness(2)
+    $ kaya.change_stats(happiness = 2, love = 2, max_love = 40)
+    $ erica.change_stats(happiness = 2, love = 2, max_love = 40)
     erica "Wow, that was really helpful. Thanks [erica.mc_title]!"
     kaya "Yes! Thank you so much, I feel like this has been a big help."
     mc.name "Alright, you girls can take it from here?"
@@ -418,10 +414,8 @@ label kaya_erica_teamup_scene_1(the_person_one, the_person_two):
             $ erica.change_slut(2, 40)
 
     "Finished with your questions, you have a pretty good idea of where to direct their study time."
-    $ kaya.change_love(2, 40)
-    $ erica.change_love(2, 40)
-    $ kaya.change_happiness(2)
-    $ erica.change_happiness(2)
+    $ kaya.change_stats(happiness = 2, love = 2, max_love = 40)
+    $ erica.change_stats(happiness = 2, love = 2, max_love = 40)
     erica "Wow, that was really helpful. Thanks [erica.mc_title]!"
     kaya "Yes! Thank you so much, I feel like this has been a big help, and it was fun too!"
     mc.name "Alright, you girls can take it from here?"
@@ -608,10 +602,8 @@ label kaya_erica_teamup_scene_2(the_person_one, the_person_two):
         $ previous_punished = False
 
     "Finished with your questions, you have a pretty good idea of where to direct their study time."
-    $ kaya.change_love(2, 40)
-    $ erica.change_love(2, 40)
-    $ kaya.change_happiness(2)
-    $ erica.change_happiness(2)
+    $ kaya.change_stats(happiness = 2, love = 2, max_love = 40)
+    $ erica.change_stats(happiness = 2, love = 2, max_love = 40)
     erica "Wow, that was really helpful. Thanks [erica.mc_title]!"
     kaya "Yes! Thank you so much, I feel like this has been a big help, and it was fun too!"
     mc.name "Alright, you girls can take it from here?"
@@ -846,10 +838,8 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
         "[kaya.possessive_title] slides back in her seat."
 
     "Finished with your questions, you have a pretty good idea of where to direct their study time."
-    $ kaya.change_love(2, 40)
-    $ erica.change_love(2, 40)
-    $ kaya.change_happiness(2)
-    $ erica.change_happiness(2)
+    $ kaya.change_stats(happiness = 2, love = 2, max_love = 40)
+    $ erica.change_stats(happiness = 2, love = 2, max_love = 40)
     erica "Wow, that was really helpful. Thanks [erica.mc_title]!"
     kaya "Yes! Thank you so much, I feel like this has been a big help, and it was fun too!"
     mc.name "Alright, you girls can take it from here?"
@@ -977,9 +967,7 @@ label kaya_erica_teamup_scene_4(the_person_one, the_person_two):
                 "When you finish holding her up, [kaya.possessive_title] collapses to the floor."
                 "Her multiple orgasms have left her completely drained. Her breathing is ragged as she tries to recover from the pleasure."
                 kaya "That was... fucking amazing... holy..."
-                $ kaya.change_happiness(5)
-                $ kaya.change_love(5)
-                $ kaya.change_obedience(5)
+                $ kaya.change_stats(happiness = 5, love = 5, obedience = 5)
                 "Eventually, she starts to recover."
         else:
             kaya "Well, [erica.name] got both of hers right... we should make her cum like crazy!"
@@ -993,9 +981,7 @@ label kaya_erica_teamup_scene_4(the_person_one, the_person_two):
                 "When you finish holding her up, [erica.possessive_title] collapses to the floor."
                 "Her multiple orgasms have left her completely drained. Her breathing is ragged as she tries to recover from the pleasure."
                 erica "That was... fucking amazing... holy..."
-                $ erica.change_happiness(5)
-                $ erica.change_love(5)
-                $ erica.change_obedience(5)
+                $ erica.change_stats(happiness = 5, love = 5, obedience = 5)
                 "Eventually, she starts to recover."
         "Finished for tonight, you decide to put your cock away while [erica.possessive_title] and [kaya.possessive_title] get up."
         $ scene_manager.update_actor(kaya, position="stand3", display_transform = character_center_flipped)

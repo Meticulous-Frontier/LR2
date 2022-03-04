@@ -1341,8 +1341,7 @@ label erica_buy_protein_shake_label(the_person):
     elif erica_on_hate_path():
         "She takes the shake warily. She hesitates to take a sip."
         mc.name "Go on now. Don't worry, it's good for you."
-        $ the_person.change_obedience(3)
-        $ the_person.change_love(-2)
+        $ the_person.change_stats(love = -2, obedience = 3)
         "She starts to drink it. She waits to see if you need anything else."
     else:
         $ the_person.draw_person(emotion = "happy")
@@ -3051,8 +3050,7 @@ label erica_post_yoga_love_label():
     menu:
         "I feel the same way":
             the_person "Yes! Oh god, you have no idea how happy I am to hear that."
-            $ the_person.change_happiness(15)
-            $ the_person.change_love(5)
+            $ the_person.change_stats(happiness = 15, love = 5)
             "She kisses you, and you kiss her back."
             the_person "So like... are we official now? I can call you my boyfriend?"
             mc.name "Yes that would be appropriate."
@@ -3061,8 +3059,7 @@ label erica_post_yoga_love_label():
 
         "Let's just be friends":
             the_person "Ah... okay wow, I guess I was just... totally misinterpreting things between us..."
-            $ the_person.change_happiness(-15)
-            $ the_person.change_love(-20)
+            $ the_person.change_stats(happiness = -15, love = -20)
             the_person "I didn't realize you just wanted things to be strictly physical between us. Is that what you want? Friends with benefits?"
             mc.name "Yes that is what I am looking for right now."
             the_person "Okay... I'm sorry I didn't realize. But I think I can manage that."
@@ -3352,9 +3349,7 @@ label erica_breeding_fetish_team_rejoin_label(the_person):
     the_person "The team! You got me back on the track team! And I got this email, they are giving me a full ride, unconditional scholarship!"
     mc.name "Who me? Couldn't be!"
     $ the_person.draw_person()
-    $ the_person.change_love(10)
-    $ the_person.change_obedience(30)
-    $ the_person.change_happiness(20)
+    $ the_person.change_stats(happiness = 15, love = 7, obedience = 12)
     the_person "Yeah right!"
     if the_person.is_pregnant():
         "[the_person.possessive_title] rubs her belly."

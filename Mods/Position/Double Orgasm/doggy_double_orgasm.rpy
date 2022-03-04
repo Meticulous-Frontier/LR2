@@ -26,9 +26,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                     the_girl "What the FUCK? You took the condom off? And then came inside me!?! I know I'm just a working girl, but you can't treat me like this."
                 else:
                     the_girl "What? You took the condom off? And then came inside me!?! Fuck, I could get pregnant, not all working girls take birth control, you asshole!"
-                $ the_girl.change_happiness(-5)
-                $ the_girl.change_obedience(3)
-                $ the_girl.change_love(-5)          #She loses trust
+                $ the_girl.change_stats(happiness = -5, love = -5, obedience = 3)
             elif the_girl.wants_creampie():         #She likes creampies...
                 the_girl "Wait... that's... you took the condom off, didn't you? Oh fuck that's why it felt so good!"
                 $ the_girl.discover_opinion("creampies")
@@ -48,9 +46,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                     the_girl "What the FUCK? You took the condom off? And then came inside me!?! You asshole!"
                 else:
                     the_girl "What the FUCK? You took the condom off? And then came inside me!?! I could get pregnant asshole!"
-                $ the_girl.change_happiness(-5)
-                $ the_girl.change_obedience(3)
-                $ the_girl.change_love(-5)          #She loses trust
+                $ the_girl.change_stats(happiness = -5, love = -5, obedience = 3)
                 "You planted your seed inside of [the_girl.possessive_title], but it is clear she isn't happy about it."
             "You slowly pull out of [the_girl.title]. Your cum is dripping down her leg as you sit back."
         elif mc.condom:

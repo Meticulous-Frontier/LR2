@@ -204,8 +204,7 @@ label girlfriend_sleepover_label():
     while done == False:
 
         if girl_came > 5:
-            $ the_person.change_love(5)
-            $ the_person.change_slut(1)
+            $ the_person.change_stats(love = 3, slut = 1)
             $ the_person.call_dialogue("sleepover_impressed_response")
             if not perk_system.has_ability_perk("Lustful Youth"):
                 "You feel like making [the_person.possessive_title] cum over and over has woken something inside you."
@@ -224,8 +223,7 @@ label girlfriend_sleepover_label():
                 the_person "Mmm, I wore you out! That was fun."
                 "She kisses you and runs her hand over your back."
             else:
-                $ the_person.change_love(-1)
-                $ the_person.change_slut(-1)
+                $ the_person.change_stats(slut = -1, love = -1)
                 the_person "Well I guess we're done then... Maybe next time you can get me off as well."
             $ done = True
 
@@ -275,8 +273,7 @@ label girlfriend_sleepover_label():
                         the_person "Mmm, okay! That was nice."
                         "She kisses you and runs her hand over your back."
                     else:
-                        $ the_person.change_love(-1)
-                        $ the_person.change_slut(-1)
+                        $ the_person.change_stats(slut = -1, love = -1)
                         the_person "Well... Maybe next time you can get me off as well?"
                     $ done = True
     $ the_person.draw_person(position = "back_peek")

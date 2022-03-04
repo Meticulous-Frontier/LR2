@@ -417,8 +417,7 @@ label anal_fetish_generic_intro_label(the_person):
             mc.name "Let's find somewhere private first."
         "Too busy":
             mc.name "I'm sorry [the_person.title], but I just wanted to talk about something."
-            $ the_person.change_love(-2)
-            $ the_person.change_happiness(-5)
+            $ the_person.change_stats(happiness = -5, love = -2)
             the_person "Ah, okay. I see."
             $ abort_anal_fetish_intro(the_person)
             return False

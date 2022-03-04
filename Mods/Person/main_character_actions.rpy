@@ -308,8 +308,7 @@ label mc_action_lasik_surgery_label(the_person):
     $ the_person.draw_person(position = "kissing")
     the_person "You make me so happy [the_person.mc_title], thank you so much!"
     python:
-        the_person.change_happiness(10)
-        the_person.change_love(5, max_modified_to = 80)
+        the_person.change_stats(happiness = 10, love = 5, max_love = 80)
         mc.business.change_funds(-5000)
         the_person.base_outfit.accessories.remove(filter(lambda x : x in [big_glasses, modern_glasses], the_person.base_outfit.accessories)[0])
     $ the_person.draw_person()

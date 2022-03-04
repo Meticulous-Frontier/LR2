@@ -567,8 +567,7 @@ label Sarah_intro_label():
             the_person "Wait, so, you run a small business? I mean, I would love to, but I can't afford to do another unpaid internship right now."
             mc.name "I didn't say it was unpaid, this would definitely be a paid position."
             $ the_person.draw_person(position = "stand3", emotion = "happy")
-            $ the_person.change_happiness(5)
-            $ the_person.change_love(5)
+            $ the_person.change_stats(happiness = 5, love = 2)
             the_person "That would be... incredible! I don't know what to say! I can't wait to get started!"
             mc.name "I'll have to get your phone number. I'll need to set up the position before I can officially hire you, and that might take a few days."
             the_person "Oh! Of course, here..."
@@ -619,8 +618,7 @@ label Sarah_alternative_hire_label(the_person):
     the_person "Yeah, still haven't found a better job."
     mc.name "Interested in becoming my new HR Director?"
     $ the_person.draw_person(position = "stand3", emotion = "happy")
-    $ the_person.change_happiness(5)
-    $ the_person.change_love(5)
+    $ the_person.change_stats(happiness = 5, love = 2)
     the_person "That would be... incredible! I don't know what to say! I can't wait to get started!"
     $ day_name = "tomorrow"
     if day%7 == 4 or day%7 == 5: # it's friday or saturday so next workday is monday
@@ -894,16 +892,13 @@ label Sarah_get_drinks_label():
             $ sarah.event_triggers_dict["dating_path"] = True
             $ the_person.add_situational_slut("Date", 20, "There's no reason to hold back, he's here to fuck me!") # Bonus to sluttiness since she really likes you.
 
-            $ the_person.change_happiness(20)
-            $ the_person.change_love(10)
+            $ the_person.change_stats(happiness = 10, love = 5)
         "Just as friends":
             mc.name "I wouldn't mind going out for a few drinks, with a friend of course."
             $ scene_manager.update_actor(the_person, emotion = "sad")
             "Her face shows visible signs of disappointment."
             the_person "Oh, right. Friends! That's us! I don't want to interrupt you, there, buddy. Need a few minutes to finish up?"
-            $ the_person.change_happiness(-20)
-            $ the_person.change_obedience(20)
-            $ the_person.change_love(-10)
+            $ the_person.change_stats(happiness = -10, love = -5, obedience = 5)
             $ sarah.event_triggers_dict["dating_path"] = False
             $ the_person.add_situational_slut("Date", 10, "There's no reason to hold back, he's here to fuck me!") # Bonus to sluttiness not so high since we go as friends.
 
@@ -974,8 +969,7 @@ label Sarah_get_drinks_label():
         $ scene_manager.update_actor(the_person, position = "stand4")
         "You walk over to [the_person.title], drinks in hand. You hand her a drink."
         mc.name "How about a toast? To tonight! May we love as long as we live, and live as long as we love."
-        $ the_person.change_happiness(5)
-        $ the_person.change_love(5)
+        $ the_person.change_stats(happiness = 5, love = 2)
         "You surprise yourself with your sappy toast. It seems to have the desired effect though, as she smiles wide with your toast."
     else:
         the_person "Hey, let me grab the next round. I want to play a game though! Can you go get us a dart game set up?"
@@ -1238,8 +1232,7 @@ label Sarah_get_drinks_label():
         $ scene_manager.draw_scene()
         "You lay down on your side next to her. She scoots next to you and lays her head on your arm."
         the_person "Can we... can I just be close to you for a while? I'm not ready for this day to end!"
-        $ the_person.change_happiness(5)
-        $ the_person.change_love(5)
+        $ the_person.change_stats(happiness = 5, love = 2)
         mc.name "Of course! Your skin feels so good."
         "You cuddle up with [the_person.possessive_title] for a while, just enjoying the afterglow of your lovemaking."
         "She is starting to doze off, when suddenly she wakes up and gets up."
@@ -1295,8 +1288,7 @@ label Sarah_catch_stealing_label():
         "Reeling that you aren't going to back down, she slowly brings her hand forward. In it are several glass vials with some prototype serum labeled 'T+'"
         the_person "Don't be mad! When you told me on Monday that we had come up with a breast enhancement serum, I knew I had to get my hands on one of the prototypes..."
     mc.name "It's okay. I didn't realize that was something you would be interested in. If you had asked me, I would have seen it arranged without having to sneak around!"
-    $ the_person.change_happiness(5)
-    $ the_person.change_love(3)
+    $ the_person.change_stats(happiness = 5, love = 2)
     $ the_person.draw_person(emotion = "happy")
     $ mc.change_locked_clarity(10)
     "She is very relieved to hear that."
@@ -1555,7 +1547,7 @@ label Sarah_stripclub_story_label():
     mc.name "It's okay, you don't have to do anything, I was just happy to help!"
     if the_person.event_triggers_dict.get("dating_path", False) == True:
         the_person "Hah! [the_person.mc_title], that's one of the things I love about you. You are so giving of yourself and your resources."
-        $ the_person.change_love(10)
+        $ the_person.change_love(5)
     else:
         the_person "Hey now, friends with benefits means we both get benefits, but lately it feels like I've been getting most of the benefits!"
         the_person "This arrangement has been great, I don't it to end just because I'm the only one getting anything out of it."
@@ -1863,15 +1855,13 @@ label Sarah_stripclub_story_label():
             menu:
                 "Make it official":
                     the_person "Yes! Oh my god you have no idea how happy that makes me to hear, that you feel the same way!"
-                    $ the_person.change_happiness(15)
-                    $ the_person.change_love(5)
+                    $ the_person.change_stats(happiness = 10, love = 3)
                     "She kisses you, and you kiss her back."
                     $ the_person.add_role(girlfriend_role)
 
                 "Let's just be friends":
                     the_person "Ah... okay wow, I guess I was just... totally misinterpreting things between us..."
-                    $ the_person.change_happiness(-15)
-                    $ the_person.change_love(-20)
+                    $ the_person.change_stats(happiness = -10, love = -5)
                     $ the_person.event_triggers_dict["dating_path"] = False
                     the_person "I didn't realize you just wanted things to be strictly physical between us. Is that what you want? Friends with benefits?"
                     mc.name "Yes that is what I am looking for right now."
@@ -2938,9 +2928,7 @@ label Sarah_weekend_surprise_crisis_label():    #This code is old. It should be 
                 the_person "Alright, I know you wanted to get other things done, so I'll let you get back to it. But don't work too hard! Look me up if you need another break sometime!"
                 "She quickly cleans herself up then leaves, giving you a chance to continue your work, but now with your balls empty."
             else:
-                $ the_person.change_happiness(-10)
-                $ the_person.change_love(-5)
-                $ the_person.change_obedience(5)
+                $ the_person.change_stats(happiness = -10, love = -5, obedience = 5)
                 the_person "Wow, okay. Sorry, I didn't realize you were so busy. Maybe next time I guess?"
                 "[the_person.title] quickly turns and walks out, leaving you to your work."
                 $ scene_manager.remove_actor(the_person)

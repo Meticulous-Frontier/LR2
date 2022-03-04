@@ -619,8 +619,7 @@ label kaya_lily_study_night_intro_label():
     $ scene_manager.add_actor(mom)
     "[mom.possessive_title] grabs the glass from you before you can react and starts to sip on it."
     mom "Thank you honey, you are so thoughtful."
-    $ mom.change_love(2)
-    $ mom.change_happiness(5)
+    $ mom.change_stats(happiness = 5, love = 2)
     mc.name "Err, right."
     "You look at the second glass for a moment. This could get awkward when the other two get here."
     $ scene_manager.add_actor(lily, display_transform = character_center)
@@ -849,9 +848,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     mc.name "Well, for a STEM program... we currently do medical research and pharmaceutical manufacturing, so I suppose Chemistry and Biology?"
     nora "I'll go corner the CFO right away. Can I give him your financial details? We could have this girl you are talking about official by this weekend."
     mc.name "Do it. I have the funds to start this ASAP."
-    $ nora.change_love(5)
-    $ nora.change_happiness(10)
-    $ nora.change_obedience(10)
+    $ nora.change_stats(happiness = 10, love = 3, obedience = 5)
     nora "It's decided then. I'll go find him right now. You're doing a wonderful thing, supporting students, [nora.mc_title]."
     $ clear_scene()
     "You leave [nora.possessive_title]'s lab. You text [the_person.possessive_title]."
@@ -1101,8 +1098,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
         "You quickly get on top of her. Her legs naturally wrap around your body as she urges closer."
         the_person "Oh my god, oh fuck! I've been wanting this since the first night you took me out..."
         mc.name "I've been wanting this for a lot longer than that."
-        $ the_person.change_happiness(3)
-        $ the_person.change_love(5)
+        $ the_person.change_stats(happiness = 5, love = 2)
         "When your cock finally hits her slit, she reaches down with her hand and guides it to her soaking wet hole."
         "You slide yourself in easily. [the_person.possessive_title] is wet and ready for you so you start to fuck her immediately."
         $ the_person.break_taboo("vaginal_sex")
@@ -1419,10 +1415,10 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
             if kaya.is_pregnant():
                 mc.name "And now you're pregnant and..."
             the_person "Geeze, you scared me! I thought you were really going to say no!"
-            $ the_person.change_happiness(5)
+            $ the_person.change_happiness(10)
             mc.name "I want to make this work. Honestly."
             $ the_person.draw_person(position = "sitting", emotion = "happy")
-            $ the_person.change_love(10)
+            $ the_person.change_love(5)
             mc.name "We can figure this whole thing out. Together."
             if not the_person.is_girlfriend():
                 $ the_person.add_role(girlfriend_role)

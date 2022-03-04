@@ -141,13 +141,10 @@ label SB_working_weekend_crisis_label_high(person_one):
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 0:
                             "You get up and make yourself presentable again. [person_one.possessive_title] lays there for a while, recovering from her orgasm."
-                            $ person_one.change_slut(1)
-                            $ person_one.change_slut(2)
-                            $ person_one.change_love(5)
+                            $ person_one.change_stats(slut = 3, love = 5)
                         else:   #She didn't cum
                             "You get up and make yourself presentable again. [person_one.possessive_title] lays there for a bit, clearly disappointed she didn't orgasm."
-                            $ person_one.change_slut(2)
-                            $ person_one.change_happiness(-5)
+                            $ person_one.change_stats(slut = 1, happiness = -5)
                         $ person_one.apply_outfit()
                         $ person_one.draw_person()
                         "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
@@ -155,10 +152,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                         mc.name "Thanks for that very pleasant distraction, [person_one.title], but I need to get back to work now."
                         "[person_one.possessive_title] can barely hide their disappointment. There's a hint of anger in their voice when they reply."
                         person_one "Wow, really? After I stripped for you? Okay then, I hope your day goes better than mine..."
-                        $ person_one.change_slut(2)
-                        $ person_one.change_slut(1)
-                        $ person_one.change_happiness(-5)
-                        $ person_one.change_love(-5)
+                        $ person_one.change_stats(slut = 2, happiness = -5, love = -5)
 
             else:  #Someone walks in, threesome opportunity#
                 "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
@@ -192,9 +186,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                 $ scene_manager.remove_actor(person_two)
                 if the_report.get("girl one orgasms", 0) > 0:
                     "You get up and make yourself presentable again. [person_one.possessive_title] lays there for a while, recovering from her orgasm."
-                    $ person_one.change_slut(1)
-                    $ person_one.change_slut(2)
-                    $ person_one.change_love(5)
+                    $ person_one.change_stats(happiness = 5, slut = 3, love = 3)
                 person_one "Holy fuck [person_one.mc_title], that was so hot."
                 $ person_one.apply_planned_outfit()
                 $ scene_manager.update_actor(person_one, position = "stand3")

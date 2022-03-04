@@ -34,8 +34,7 @@ label meet_person_enhanced_label():
             the_person "Thank you so much. I'm [the_person.title]."
             call person_introduction(the_person, girl_introduction = False) from _call_person_introduction_1_override
             "You shake her hand. You and [the_person.title] chat while she waits for the next bus to come by."
-            $ the_person.change_happiness(10)
-            $ the_person.change_love(8)
+            $ the_person.change_stats(happiness = 10, love = 8)
             "When it does she gives you a quick hug."
             the_person "Thank you again, you've saved my whole day. Maybe we'll see each other again."
             mc.name "I'd like that."

@@ -408,24 +408,20 @@ label camilla_dance_lessons_label():
         $ scene_manager.update_actor(the_person, position = "kissing")
         "[the_person.title] whispers in your ear."
         the_person "Don't worry, we were all new at one time. You are doing great."
-        $ the_person.change_happiness(2)
-        $ the_person.change_love(2)
+        $ the_person.change_stats(happiness = 2, love = 2)
     elif mc_dancing_skill() < 10:
         "You spin her back out the other side. She gracefully finishes her spin before returning to you."
         $ scene_manager.update_actor(the_person, position = "kissing")
         "[the_person.title] whispers in your ear."
         the_person "You're doing great! I think you are a natural."
-        $ the_person.change_happiness(2)
-        $ the_person.change_love(2)
-        $ the_person.change_obedience(2)
+        $ the_person.change_stats(happiness = 2, love = 2, obedience = 2)
     else:
         "You easily lead her into a reverse spin out the other side the way the instructor led. Her skirt flares up as she spins gracefully and then returns to your side."
         $ mc.change_locked_clarity(10)
         $ scene_manager.update_actor(the_person, position = "kissing")
         "[the_person.title] whispers in your ear."
         the_person "Are you sure this is your first time doing this? You have the manner of someone experienced sir..."
-        $ the_person.change_obedience(5)
-        $ the_person.change_love(5)
+        $ the_person.change_stats(obedience = 5, love = 3)
     "As you continue your first salsa dancing lesson, that trend continues."
     if mc_dancing_skill() < 4:
         "You are bumbling and awkward, but you enjoy the chance to get close with this sexy señora."
@@ -1229,8 +1225,7 @@ label camilla_lingerie_help_label(the_person):  #40
     mc.name "[the_person.name]... have you ever thought about shooting some professional pictures?"
     the_person "Umm... you mean like... modeling?"
     mc.name "Not necessarily modeling... but like, boudoir photos? You really do have the body for it."
-    $ the_person.change_love(2, 80)
-    $ the_person.change_slut(1, 60)
+    $ the_person.change_stats(slut = 1, max_slut = 60, love = 2, max_love = 80)
     the_person "Oh! You mean like... sexy photos?"
     mc.name "Yeah."
     the_person "Wow... I mean, I guess I've always kind of thought about it but... I don't think I really have the body for it?"
@@ -1362,8 +1357,7 @@ label camilla_formal_date_label():    #60
     the_person "But that hey! It's okay right? We're all in the lifestyle together now right?"
     the_person "She pointed out her husband. Asked if I was interested. I said maybe, but honestly I just got sick to my stomach."
     mc.name "[the_person.name]... I'm sorry..."
-    $ the_person.change_happiness(-5)
-    $ the_person.change_love(2, 80)
+    $ the_person.change_stats(happiness = -5, love = 2, max_love = 80)
     the_person "It's ok. You didn't have anything to do with it. I just... I just don't understand, why he kept it all a secret from me... you know?"
     "[the_person.title] turns away for a second and wipes her eyes."
     mc.name "What... what are you going to do?"

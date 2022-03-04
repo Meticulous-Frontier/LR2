@@ -314,8 +314,7 @@ label ophelia_ex_bf_plan_pics_label(the_person):
         $ the_person.draw_person(emotion = "angry")
         "She snaps back at you."
         the_person "Well then you probably shouldn't. What happens between me and my ex is none of your business."
-        $ the_person.change_obedience(-2)
-        $ the_person.change_love(-2)
+        $ the_person.change_stats(obedience = -2, love = -2)
         "Yikes! Maybe you should try and find a way to cheer her up some before you talk to her about her ex again..."
         $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 1
         return
@@ -487,8 +486,7 @@ label ophelia_make_blowjob_pics_label():
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             the_person "Oh my god, I came so hard... you have no idea how bad I needed that!"
-            $ the_person.change_love(5)
-            $ the_person.change_happiness(10)
+            $ the_person.change_stats(happiness = 5, love = 2)
         else:
             the_person "Errr, I thought you said you were good at that? I didn't even finish..."
             "Her disappointment is obvious."

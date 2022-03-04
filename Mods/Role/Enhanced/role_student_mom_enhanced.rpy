@@ -114,8 +114,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             "[the_mom.possessive_title] laughs and waves you off."
             the_mom "You're too kind."
             "You flirt with [the_mom.possessive_title] as much as you think you can get away with while her daughter is in the room."
-            $ the_mom.change_slut(1, 25)
-            $ the_mom.change_love(2, max_modified_to = 25)
+            $ the_mom.change_stats(slut = 1, max_slut = 25, love = 2, max_love = 25)
 
         "Touch [the_student.possessive_title]" if the_student.effective_sluttiness("touching_body") > 35:
             mc.name "I'm glad to be here. I'm always happy to spend time with you and your daughter."
