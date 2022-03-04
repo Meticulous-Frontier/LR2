@@ -3073,7 +3073,7 @@ label Sarah_weekend_date_strip_club_label():
                 $ the_person.change_arousal(renpy.random.randint(5,15))
                 $ mc.change_arousal(renpy.random.randint(5,15))
                 $ showgirl = None
-            "Get a private dance  -$200":
+            "Get a private dance\n{color=#ff0000}{size=18}Costs: $200{/size}{/color}" if mc.business.has_funds(200):
                 mc.name "Want to get a private dance? I'll get it set up."
                 the_person "Ohh, now we're talking! Sounds great!"
                 $ scene_manager.hide_actor(the_person)
