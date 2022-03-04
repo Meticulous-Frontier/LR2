@@ -73,59 +73,35 @@ init 2:
                                             xfill True
                                             spacing 0
 
-                                            if line.selected_design:
-                                                $ production_string = "Currently Producing: " + line.selected_design.name
-                                                textbutton "Production Line " + str(line_number):
-                                                    action [
-                                                        SetScreenVariable("line_selected", line),
-                                                        Hide("serum_tooltip")
-                                                    ]
-                                                    style "serum_textbutton_style_header"
-                                                    text_style "menu_text_title_style"
-                                                    margin (0,0)
+                                            textbutton "Production Line " + str(line_number):
+                                                action [
+                                                    SetScreenVariable("line_selected", line),
+                                                    Hide("serum_tooltip")
+                                                ]
+                                                style "serum_textbutton_style_header"
+                                                text_style "menu_text_title_style"
+                                                margin (0,0)
+                                                if line.selected_design:
                                                     hovered Show("serum_tooltip",None, line.selected_design, given_anchor = (1.0,0.0), given_align = (0.97,0.07))
                                                     unhovered Hide("serum_tooltip")
-                                                    background ("#000080" if line_selected == line else "#0a142688")
-                                                    xfill True
-                                                    xalign 0.5 xanchor 0.5
+                                                background ("#000080" if line_selected == line else "#0a142688")
+                                                xfill True
+                                                xalign 0.5 xanchor 0.5
 
-                                                textbutton production_string:
-                                                    action [
-                                                        SetScreenVariable("line_selected", line),
-                                                        Hide("serum_tooltip")
-                                                    ]
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style"
-                                                    margin (0,0)
+                                            textbutton "Currently Producing: " + (line.selected_design.name if line.selected_design else "Nothing"):
+                                                action [
+                                                    SetScreenVariable("line_selected", line),
+                                                    Hide("serum_tooltip")
+                                                ]
+                                                style "textbutton_style"
+                                                text_style "serum_text_style"
+                                                margin (0,0)
+                                                if line.selected_design:
                                                     hovered Show("serum_tooltip",None, line.selected_design, given_anchor = (1.0,0.0), given_align = (0.97,0.07))
                                                     unhovered Hide("serum_tooltip")
-                                                    background ("#000080" if line_selected == line else "#0a142688")
-                                                    xfill True
-                                                    xalign 0.5 xanchor 0.5
-
-                                            else:
-                                                $ production_string = "Currently Producing: Nothing"
-                                                textbutton "Production Line " + str(line_number):
-                                                    action SetScreenVariable("line_selected", line)
-                                                    style "serum_textbutton_style_header"
-                                                    text_style "menu_text_title_style"
-                                                    margin (0,0)
-                                                    background ("#000080" if line_selected == line else "#0a142688")
-                                                    xfill True
-                                                    xalign 0.5 xanchor 0.5
-
-                                                textbutton production_string:
-                                                    action [
-                                                        SetScreenVariable("line_selected", line),
-                                                        Hide("serum_tooltip")
-                                                    ]
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style"
-                                                    margin (0,0)
-                                                    background ("#000080" if line_selected == line else "#0a142688")
-                                                    xfill True
-                                                    xalign 0.5 xanchor 0.5
-
+                                                background ("#000080" if line_selected == line else "#0a142688")
+                                                xfill True
+                                                xalign 0.5 xanchor 0.5
 
                                         #null height 20
                                             frame:
