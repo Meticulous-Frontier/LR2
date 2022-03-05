@@ -142,10 +142,7 @@ init 2 python:
 
     def upgrade_bedroom(room, background):
         room.background_image = background
-        room.remove_object("bed")
-        room.remove_object("chair")
-        room.add_object( make_comfy_chair() )
-        room.add_object( make_impressive_bed() )
+
         return
 
 

@@ -43,7 +43,7 @@ init 15 python:
         make_stage()
     ]
     ceo_office_objects = [
-        make_comfy_chair(),
+        make_chair(),
         make_desk(),
         make_wall(),
         make_window(),

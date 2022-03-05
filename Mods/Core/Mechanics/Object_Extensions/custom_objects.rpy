@@ -39,14 +39,6 @@ init -1 python:
     def make_pole():
         return Object("Stripper Pole", ["Lean", "Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
-    # For renovated MC Bedroom:
-    def make_impressive_bed():
-        return Object("Impressive Bed", ["Lay", "Low", "Kneel"], sluttiness_modifier = 0, obedience_modifier = 0)
-
-    # Bring out the comfy chair! Nobody expects the Spanish Inquisition!
-    def make_comfy_chair():
-        return Object("Comfy Chair",["Sit","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
-
     # Classic porn audition couch
     def make_black_leather_couch():
         return Object("Black Leather Couch",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
