@@ -46,7 +46,7 @@ label late_for_work_action_label():
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] quietly rushes to her desk."
     elif the_person.relationship != "Single":   # high sluttiness non single girls
-        $ the_person.cum_on_tits()
+        $ the_person.cum_on_tits(add_to_record = False)
         $ the_person.draw_person(position="stand3", emotion="default")
         the_person "I'm sorry [the_person.mc_title], [the_person.SO_name] needed some personal attention when he dropped me off at the office."
         $ upper_clothing = the_person.outfit.get_upper_top_layer()
@@ -127,8 +127,8 @@ label late_for_work_action_label():
         "[the_person.possessive_title] rushes to the ladies room to clean up."
         $ upper_clothing = None
     elif persistent.show_ntr and the_person.sluttiness > 80 and not the_person.has_role(girlfriend_role): # NTR Enabled very slutty single girls
-        $ the_person.cum_on_face()
-        $ the_person.cum_on_tits()
+        $ the_person.cum_on_face(add_to_record = False)
+        $ the_person.cum_on_tits(add_to_record = False)
         $ the_person.draw_person(position="stand3", emotion="default")
         the_person "Sorry [the_person.mc_title], a client caught me in the parking lot and wanted to have a business meeting in his car. You can let marketing know I made the sale."
 
