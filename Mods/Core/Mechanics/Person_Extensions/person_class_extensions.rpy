@@ -1313,6 +1313,12 @@ init -1 python:
                     suggestibility_modifier = 30
                 max_modified_to += suggestibility_modifier
 
+            # limit sluttiness to 100 -> read as 100%
+            # there is no content for higher sluttiness values,
+            # but it will impact the game negatively if it is over 100 (bored sex pos etc.)
+            if not max_modified_to or max_modified_to > 100:
+                max_modified_to = 100
+
             org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
 
         return person_change_slut_wrapper
