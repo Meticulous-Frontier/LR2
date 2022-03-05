@@ -230,7 +230,7 @@ init -1 python:
             new_score += 30
         if extra_modifier and (not self.wearing_panties() or not self.panties_covered()):
             new_score += 15
-        return new_score
+        return __builtin__.int(new_score * .8)
 
     Outfit.get_body_parts_slut_score = get_body_parts_slut_score
 
@@ -238,7 +238,7 @@ init -1 python:
         new_score = 0
         new_score += self.get_body_parts_slut_score()
         new_score += self.get_total_slut_modifiers()
-        return new_score
+        return new_score if new_score < 100 else 100
 
     Outfit.get_underwear_slut_score = get_underwear_slut_score_enhanced
 
@@ -246,7 +246,7 @@ init -1 python:
         new_score = 0
         new_score += self.get_body_parts_slut_score()
         new_score += self.get_total_slut_modifiers()
-        return new_score
+        return new_score if new_score < 100 else 100
 
     Outfit.get_overwear_slut_score = get_overwear_slut_score_enhanced
 
@@ -254,13 +254,13 @@ init -1 python:
         new_score = 0
         new_score += self.get_body_parts_slut_score(extra_modifier = True)
         new_score += self.get_total_slut_modifiers()
-        return new_score
+        return new_score if new_score < 100 else 100
 
     Outfit.get_full_outfit_slut_score = get_full_outfit_slut_score_enhanced
 
     def get_slut_value_classification(slut_requirement):
         classifications = ["Conservative", "Timid", "Modest", "Casual", "Trendy", "Stylish", "Enticing", "Provocative", "Sensual", "Sexy", "Seductive", "Sultry", "Slutty"]
-        ci = (slut_requirement + 5) // 7
+        ci = __builtin__.int(slut_requirement * .14)
         if ci >= __builtin__.len(classifications):
             return classifications[-1]
         return classifications[ci]
@@ -350,11 +350,11 @@ init 6 python:
         for cloth in self.upper_body + self.lower_body:
             if cloth.colour[3] < 1:
                 if cloth.layer == 2:
-                    new_score += int((1 - cloth.colour[3]) * 40)
+                    new_score += __builtin__.int((1 - cloth.colour[3]) * 40)
                 elif cloth.layer == 1:
-                    new_score += int((1 - cloth.colour[3]) * 10)
+                    new_score += __builtin__.int((1 - cloth.colour[3]) * 10)
 
-        return new_score
+        return __builtin__.int(new_score  * .8)
 
     Outfit.get_total_slut_modifiers = get_total_slut_modifiers_enhanced
 
