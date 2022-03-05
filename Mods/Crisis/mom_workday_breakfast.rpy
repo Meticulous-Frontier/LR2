@@ -359,8 +359,16 @@ label mom_breakfast_action_label_high():
 
     "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
     the_person "Oh god... [lily.name] could walk out any second!"
+    $ the_person.apply_planned_outfit()
+    $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
+    "She quickly gets up and puts her clothes back on, leaning close to your ear."
+    if the_person.wearing_panties():
+        the_person "Hmmm, I'm going to feel your cum dripping into my panties all day."
+    else:
+        the_person "Hmmm, I'm going drip cum all day long, staining my clothes."
+
     $ scene_manager.update_actor(the_person, position = "walking_away")
-    "[the_person.title] quickly gets up and hurries away. She calls back before she gets to her room."
+    "[the_person.title] turns around and hurries away. She calls back before she gets to her room."
     $ scene_manager.update_actor(the_person, position = "back_peek")
     the_person "I love you, have a good day at work!"
     $ scene_manager.clear_scene()
