@@ -780,167 +780,182 @@ init 2:
                     background "#0a142688"
                     vbox:
                         spacing 5
-                        grid 2 1:
+                        frame:
+                            background "#0a142688"
                             xfill True
-                            spacing 5
-                            frame:
-                                background "#0a142688"
+                            ysize 60
+                            textbutton demo_outfit.name:
+                                style "textbutton_no_padding_highlight"
+                                text_style "serum_text_style"
                                 xfill True
-                                textbutton "View Outfit Stats":
-                                    style "textbutton_no_padding_highlight"
-                                    text_style "serum_text_style"
-                                    xfill True
+                                ysize 60
+                                action [
+                                    Function(demo_outfit.update_name)
+                                ]
+                                tooltip "Current outfit name. Click to generate new name based on current clothing."
 
-                                    action ToggleScreenVariable("outfit_stats")
-                            frame:
-                                background "#0a142688"
+                        vbox:
+                            grid 2 1:
                                 xfill True
-                                textbutton "Current (" + get_slut_value_classification(get_slut_score()) + ")":
-                                    style "textbutton_no_padding"
-                                    text_style "serum_text_style"
+                                spacing 5
+                                frame:
+                                    background "#0a142688"
                                     xfill True
+                                    textbutton "View Outfit Stats":
+                                        style "textbutton_no_padding_highlight"
+                                        text_style "serum_text_style"
+                                        xfill True
 
-                                    action NullAction()
+                                        action ToggleScreenVariable("outfit_stats")
+                                frame:
+                                    background "#0a142688"
+                                    xfill True
+                                    textbutton "Current (" + get_slut_value_classification(get_slut_score()) + ")":
+                                        style "textbutton_no_padding"
+                                        text_style "serum_text_style"
+                                        xfill True
 
-                        hbox:
-                            spacing 5
-                            vbox:
-                                xalign 0.5
-                                if outfit_stats:
+                                        action NullAction()
+
+                            hbox:
+                                spacing 5
+                                vbox:
+                                    xalign 0.5
+                                    if outfit_stats:
+                                        frame:
+                                            background "#0a142688"
+                                            ysize 314
+                                            viewport:
+                                                draggable True
+                                                mousewheel True
+                                                yfill True
+                                                xsize 250
+                                                vbox:
+                                                    frame:
+                                                        background "#143869"
+                                                        xsize 250
+                                                        padding (1,1)
+                                                        text "Sluttiness (" + get_outfit_type_name() + "): " + str(get_slut_score()) style "serum_text_style_traits"
+                                                    frame:
+                                                        background "#143869"
+                                                        xsize 250
+                                                        padding (1,1)
+                                                        text "Tits Visible: " + str(demo_outfit.tits_visible()) style "serum_text_style_traits"
+                                                    frame:
+                                                        background "#143869"
+                                                        xsize 250
+                                                        padding (1,1)
+                                                        text "Tits Usable: " + str(demo_outfit.tits_available()) style "serum_text_style_traits"
+                                                    frame:
+                                                        background "#143869"
+                                                        xsize 250
+                                                        padding (1,1)
+                                                        text "Wearing a Bra: " + str(demo_outfit.wearing_bra()) style "serum_text_style_traits"
+                                                    frame:
+                                                        background "#143869"
+                                                        xsize 250
+                                                        padding (1,1)
+                                                        text "Bra Covered: " + str(demo_outfit.bra_covered()) style "serum_text_style_traits"
+                                                    frame:
+                                                        background "#143869"
+                                                        xsize 250
+                                                        padding (1,1)
+                                                        text "Pussy Visible: " + str(demo_outfit.vagina_visible()) style "serum_text_style_traits"
+                                                    frame:
+                                                        background "#143869"
+                                                        xsize 250
+                                                        padding (1,1)
+                                                        text "Pussy Usable: " + str(demo_outfit.vagina_available()) style "serum_text_style_traits"
+                                                    frame:
+                                                        background "#143869"
+                                                        xsize 250
+                                                        padding (1,1)
+                                                        text "Wearing Panties: " + str(demo_outfit.wearing_panties()) style "serum_text_style_traits"
+                                                    frame:
+                                                        background "#143869"
+                                                        xsize 250
+                                                        padding (1,1)
+                                                        text "Panties Covered: " + str(demo_outfit.panties_covered()) style "serum_text_style_traits"
+
+                                                    # DEBUG CODE TO SEE WHAT IS SELECTED WHEN WE CLICK AROUND
+                                                    # frame:
+                                                    #     background "#43B197"
+                                                    #     xsize 250
+                                                    #     padding (1,1)
+                                                    #     if (selected_clothing):
+                                                    #         text "Seletect Item: " + selected_clothing.name style "serum_text_style_traits"
+
                                     frame:
                                         background "#0a142688"
-                                        ysize 354
-                                        viewport:
-                                            draggable True
-                                            mousewheel True
-                                            yfill True
-                                            xsize 250
-                                            vbox:
-                                                frame:
-                                                    background "#143869"
-                                                    xsize 250
-                                                    padding (1,1)
-                                                    text "Sluttiness (" + get_outfit_type_name() + "): " + str(get_slut_score()) style "serum_text_style_traits"
-                                                frame:
-                                                    background "#143869"
-                                                    xsize 250
-                                                    padding (1,1)
-                                                    text "Tits Visible: " + str(demo_outfit.tits_visible()) style "serum_text_style_traits"
-                                                frame:
-                                                    background "#143869"
-                                                    xsize 250
-                                                    padding (1,1)
-                                                    text "Tits Usable: " + str(demo_outfit.tits_available()) style "serum_text_style_traits"
-                                                frame:
-                                                    background "#143869"
-                                                    xsize 250
-                                                    padding (1,1)
-                                                    text "Wearing a Bra: " + str(demo_outfit.wearing_bra()) style "serum_text_style_traits"
-                                                frame:
-                                                    background "#143869"
-                                                    xsize 250
-                                                    padding (1,1)
-                                                    text "Bra Covered: " + str(demo_outfit.bra_covered()) style "serum_text_style_traits"
-                                                frame:
-                                                    background "#143869"
-                                                    xsize 250
-                                                    padding (1,1)
-                                                    text "Pussy Visible: " + str(demo_outfit.vagina_visible()) style "serum_text_style_traits"
-                                                frame:
-                                                    background "#143869"
-                                                    xsize 250
-                                                    padding (1,1)
-                                                    text "Pussy Usable: " + str(demo_outfit.vagina_available()) style "serum_text_style_traits"
-                                                frame:
-                                                    background "#143869"
-                                                    xsize 250
-                                                    padding (1,1)
-                                                    text "Wearing Panties: " + str(demo_outfit.wearing_panties()) style "serum_text_style_traits"
-                                                frame:
-                                                    background "#143869"
-                                                    xsize 250
-                                                    padding (1,1)
-                                                    text "Panties Covered: " + str(demo_outfit.panties_covered()) style "serum_text_style_traits"
-
-                                                # DEBUG CODE TO SEE WHAT IS SELECTED WHEN WE CLICK AROUND
-                                                # frame:
-                                                #     background "#43B197"
-                                                #     xsize 250
-                                                #     padding (1,1)
-                                                #     if (selected_clothing):
-                                                #         text "Seletect Item: " + selected_clothing.name style "serum_text_style_traits"
-
-                                frame:
-                                    background "#0a142688"
-                                    xsize 262
-                                    vbox:
-                                        frame:
-                                            background "#143869"
-                                            padding (1,1)
-                                            xsize 250
-                                            text "Visible Layers:" style "serum_text_style_traits"
-                                        hbox:
-                                            xfill True
-                                            textbutton "Under":
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
-                                                xsize 78
-                                                hover_background "#143869"
-                                                background ("#171717" if hide_underwear else "#14386988")
-                                                action [ToggleScreenVariable("hide_underwear", False, True), Function(preview_outfit)]
-                                            textbutton "Clothing":
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
-                                                xsize 86
-                                                hover_background "#143869"
-                                                background ("#171717" if hide_base else "#14386988")
-                                                action [ToggleScreenVariable("hide_base", False, True), Function(preview_outfit)]
-                                            textbutton "Over":
-                                                style "textbutton_no_padding_highlight"
-                                                text_style "serum_text_style"
-                                                xsize 78
-                                                hover_background "#143869"
-                                                background ("#171717" if hide_overwear else "#14386988")
-                                                action [ToggleScreenVariable("hide_overwear", False, True), Function(preview_outfit)]
-
-                            vbox:
-                                frame:
-                                    background "#0a142688"
-
-                                    xfill True
-                                    viewport:
-                                        scrollbars "vertical"
-                                        mousewheel True
-                                        xfill True
+                                        xsize 262
                                         vbox:
-                                            spacing 5
-                                            for cloth in demo_outfit.upper_body + demo_outfit.lower_body + demo_outfit.feet + demo_outfit.accessories:
-                                                if not cloth.is_extension and not cloth.layer in hide_list:
-                                                    button:
-                                                        background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
+                                            frame:
+                                                background "#143869"
+                                                padding (1,1)
+                                                xsize 250
+                                                text "Visible Layers:" style "serum_text_style_traits"
+                                            hbox:
+                                                xfill True
+                                                textbutton "Under":
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+                                                    xsize 78
+                                                    hover_background "#143869"
+                                                    background ("#171717" if hide_underwear else "#14386988")
+                                                    action [ToggleScreenVariable("hide_underwear", False, True), Function(preview_outfit)]
+                                                textbutton "Clothing":
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+                                                    xsize 86
+                                                    hover_background "#143869"
+                                                    background ("#171717" if hide_base else "#14386988")
+                                                    action [ToggleScreenVariable("hide_base", False, True), Function(preview_outfit)]
+                                                textbutton "Over":
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+                                                    xsize 78
+                                                    hover_background "#143869"
+                                                    background ("#171717" if hide_overwear else "#14386988")
+                                                    action [ToggleScreenVariable("hide_overwear", False, True), Function(preview_outfit)]
 
-                                                        action [ # NOTE: Left click makes more sense for selection than right clicking
-                                                            SetScreenVariable("category_selected", get_category(cloth)),
-                                                            SetScreenVariable("selected_clothing", cloth),
-                                                            SetScreenVariable("selected_colour", "colour"),
+                                vbox:
+                                    frame:
+                                        background "#0a142688"
 
-                                                            SetScreenVariable("current_r", cloth.colour[0]),
-                                                            SetScreenVariable("current_g", cloth.colour[1]),
-                                                            SetScreenVariable("current_b", cloth.colour[2]),
-                                                            SetScreenVariable("current_a", cloth.colour[3]),
+                                        xfill True
+                                        viewport:
+                                            scrollbars "vertical"
+                                            mousewheel True
+                                            xfill True
+                                            vbox:
+                                                spacing 5
+                                                for cloth in demo_outfit.upper_body + demo_outfit.lower_body + demo_outfit.feet + demo_outfit.accessories:
+                                                    if not cloth.is_extension and not cloth.layer in hide_list:
+                                                        button:
+                                                            background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
 
-                                                            Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
-                                                        ]
-                                                        alternate [
-                                                            Function(hide_mannequin),
-                                                            Function(starting_outfit.remove_clothing, cloth),
-                                                            Function(demo_outfit.remove_clothing, cloth),
-                                                            Function(preview_outfit)
-                                                        ]
-                                                        xalign 0.5
-                                                        xfill True
-                                                        ysize 34
-                                                        text cloth.name xalign 0.5 yalign 0.5 xfill True yoffset 2 style "custom_outfit_style"
+                                                            action [ # NOTE: Left click makes more sense for selection than right clicking
+                                                                SetScreenVariable("category_selected", get_category(cloth)),
+                                                                SetScreenVariable("selected_clothing", cloth),
+                                                                SetScreenVariable("selected_colour", "colour"),
+
+                                                                SetScreenVariable("current_r", cloth.colour[0]),
+                                                                SetScreenVariable("current_g", cloth.colour[1]),
+                                                                SetScreenVariable("current_b", cloth.colour[2]),
+                                                                SetScreenVariable("current_a", cloth.colour[3]),
+
+                                                                Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
+                                                            ]
+                                                            alternate [
+                                                                Function(hide_mannequin),
+                                                                Function(starting_outfit.remove_clothing, cloth),
+                                                                Function(demo_outfit.remove_clothing, cloth),
+                                                                Function(preview_outfit)
+                                                            ]
+                                                            xalign 0.5
+                                                            xfill True
+                                                            ysize 34
+                                                            text cloth.name xalign 0.5 yalign 0.5 xfill True yoffset 2 style "custom_outfit_style"
 
                 frame:
                     background "#0a142688"
