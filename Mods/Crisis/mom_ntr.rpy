@@ -611,7 +611,7 @@ label mom_ntr_mod_action_label():
                             $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                             "He grants her wish, caressing her body as he strips her down."
                     $ mom_clothing = None
-                    $ the_person.sluttiness += 2
+                    $ the_person.change_slut(2, 40)
                     "They are both undressed, and you can clearly see where this is going."
                     the_person "Well, I think we are both ready for action. So, let's do it!"
                     menu:
@@ -1547,7 +1547,7 @@ label mom_ntr_mod_action_label():
                         else:
                             "[man_name2] grants her wish, while [the_person.possessive_title] caresses [man_name2]'s crouch."
                 $ mom_clothing = None
-                $ the_person.sluttiness += 2
+                $ the_person.change_slut(2, 40)
                 "Now with all of them pretty naked, you clearly see where it will go."
                 the_person "Oh, guys, I feel so horny around you. Let's have some fun!"
                 menu:

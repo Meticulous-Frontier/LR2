@@ -75,7 +75,7 @@ label sister_ntr_crisis_action_label():
             man_name "Thanks for the evening, [the_person.name]. Say, how about we have a lunch at the cafe next to college tomorrow?"
             the_person "Oh, I like that, [man_name]. I'll give you a call after the class, ok?"
             man_name "Great. See you tomorrow then!"
-            $ the_person.sluttiness += 2
+            $ the_person.change_slut(2, 40)
             "You get back to your room and don't even hear the front door closing. You fall asleep quickly."
         else:
             $ the_person.strip_outfit_to_max_sluttiness()
