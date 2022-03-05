@@ -5,13 +5,17 @@ init 2 python:
 
         serum = SerumDesign()
 
-        production_trait = next((x for x in list_of_traits if x.researched and "Production" in x.exclude_tags), primitive_serum_prod)
+        weighted_production_traits = [[t, (t.tier + 1) * 2] for t in [x for x in list_of_traits if x.researched and "Production" in x.exclude_tags]]
+        serum.add_trait(get_random_from_weighted_list(weighted_production_traits) or primitive_serum_prod)
 
-        serum.add_trait(production_trait)
+        if serum.slots >= 2:  # key part of serums is suggestion
+            weighted_suggestion_traits = [[t, (t.tier + 1) * 2] for t in [x for x in list_of_traits if x.researched and "Suggest" in x.exclude_tags]]
+            serum.add_trait(get_random_from_weighted_list(weighted_suggestion_traits) or suggestion_drugs_trait)
 
         count = 0
-        while serum.slots_used() < serum.slots and count < 20: # try to add traits in a loop for a max of 20 tries
-            trait = get_random_from_list([x for x in list_of_traits if x.researched and not x in serum.traits])
+        while serum.slots_used() < serum.slots and count < 10: # try to add traits in a loop for a max of 10 tries
+            weighted_traits = [[t, (t.tier + 1) * 2] for t in [x for x in list_of_traits if x.researched and not "Production" in x.exclude_tags and not x in serum.traits]]
+            trait = get_random_from_weighted_list(weighted_traits)
             if trait and serum.trait_add_allowed(trait):
                 serum.add_trait(trait)
             count += 1
@@ -26,6 +30,9 @@ init 2 python:
         # pick primary and secondary aspect
         primary_aspect = aspect_list[sorted_aspect_list[0][1]]
         secondary_aspect = aspect_list[sorted_aspect_list[1][1]]
+
+        # print("Main aspects: " + primary_aspect + " - " + secondary_aspect)
+        # print("Traits:" + ", ".join([x.name for x in serum.traits]))
 
         contract_name, contract_description = get_contract_description(primary_aspect, secondary_aspect, contract_tier)
 
