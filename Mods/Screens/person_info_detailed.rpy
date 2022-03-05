@@ -96,7 +96,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                     vbox:
                         text "Status and Info" style "serum_text_style_header"
                         text "Happiness: [the_person.happiness]" style "menu_text_style"
-                        text "Sluttiness: [the_person.sluttiness]" style "menu_text_style"
+                        text "Sluttiness: [the_person.sluttiness]%" style "menu_text_style"
                         text "Obedience: [the_person.obedience] - " + get_obedience_plaintext(the_person.obedience) style "menu_text_style"
                         text "Love: [the_person.love]" style "menu_text_style"
                         text "Personality: " + the_person.personality.base_personality_prefix.capitalize() style "menu_text_style"
