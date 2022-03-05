@@ -910,8 +910,8 @@ label mom_ntr_mod_action_label():
                                     man_name "Ow, fuck! That was great!"
                                     the_person "Indeed, [man_name]! It was great!"
                                     if the_person.get_opinion_score("being submissive") > 0:
-                                         the_person "I guess you like it when a girl allows you to be rough, don't you? I like feeling owned by a man while he fucks me."
-                                         man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
+                                        the_person "I guess you like it when a girl allows you to be rough, don't you? I like feeling owned by a man while he fucks me."
+                                        man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
                                     man_name "Thanks, [the_person.name]. I really needed that."
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "[the_person.possessive_title] stands up from the bed and smiles."
@@ -1882,8 +1882,8 @@ label mom_ntr_mod_action_label():
                                 man_name2 "Ow, fuck! That was great!"
                                 the_person "Indeed, [man_name2]! It was great!"
                                 if the_person.get_opinion_score("being submissive") > 0:
-                                     the_person "I guess you like it when a girl allows you to be rough, don't you? I like feeling owned by a man while he fucks me."
-                                     man_name2 "Yes, it is a wonderful feeling. It really turns me on. Wish I could do this with my wife..."
+                                    the_person "I guess you like it when a girl allows you to be rough, don't you? I like feeling owned by a man while he fucks me."
+                                    man_name2 "Yes, it is a wonderful feeling. It really turns me on. Wish I could do this with my wife..."
                                 man_name2 "Thanks, [the_person.name]. I really needed that."
                                 man_name "I'm cumming too!"
                                 $ cum_on_tits_ntr(the_person) #$ the_person.cum_on_tits()
@@ -2238,8 +2238,8 @@ label mom_ntr_mod_action_label():
                                 man_name "Ow, fuck! That was great!"
                                 the_person "Indeed, [man_name]! It was great! I also liked having you two in me."
                                 if the_person.get_opinion_score("being submissive") > 0:
-                                     the_person "I guess I just like being used this way. I like feeling owned by men while they fuck me."
-                                     man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
+                                    the_person "I guess I just like being used this way. I like feeling owned by men while they fuck me."
+                                    man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
                                 man_name "Thanks, [the_person.name]. I really needed that."
                                 man_name2 "I'm cumming too!"
                                 $ cum_on_ass_ntr(the_person) #$ the_person.cum_on_ass()

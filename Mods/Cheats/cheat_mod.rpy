@@ -205,7 +205,7 @@ screen cheat_menu():
         "Obedience": ["obedience", "obedience", 10, 3, (0, 300)],
         "Happiness": ["happiness", "happiness", 10, 4, (0, 300)],
         "Arousal": ["arousal", "arousal", 10, 5, (0, 100)],
-        "Sluttiness": ["sluttiness", "sluttiness", 5, 6, (0, 300)],
+        "Sluttiness": ["sluttiness", "sluttiness", 5, 6, (0, 100)],
         "Kids": ["kids", "kids", 1, 7, (0, 8)]
         }
     default sex_stats = { # Sex Skills are stored in a dict
