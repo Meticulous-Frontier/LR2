@@ -101,7 +101,7 @@ label outro_cowgirl_blowjob(the_girl, the_location, the_object):
         if the_girl.effective_sluttiness() > 80:
             "[the_girl.title] sticks out her tongue for you and holds still, eager to take your hot load."
             $ the_girl.cum_on_face()
-            $ the_girl.draw_person(the_girl, position = "kneeling1")
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
         elif the_girl.effective_sluttiness() > 60:
             "[the_girl.title] closes her eyes and waits patiently for you to cum."
