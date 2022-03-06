@@ -1164,7 +1164,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
             the_person "That's it. Cum on my face [the_person.mc_title]!"
             $ the_person.cum_on_face()
             $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
-            $ the_person.draw_person(position = "blowjob")
+            $ the_person.draw_person(position = "kneeling1")
             "Hearing her words pushes you over the edge and your cock explodes. Spurt after spurt erupts all over her face."
             "She keeps jacking you off, and overall does a very good job of aiming your twitching manhood."
             "When the last wave finishes, you look down and survey [the_person.possessive_title]. Her face is plastered in your semen."

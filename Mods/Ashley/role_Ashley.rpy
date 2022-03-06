@@ -1605,6 +1605,7 @@ label ashley_blows_during_meeting_label():
     $ mc.change_locked_clarity(40)
     "You put your hand on [ashley.possessive_title]'s head again and force her down again as you start to cum, right down her throat."
     $ ashley.cum_in_mouth()
+    $ scene_manager.update_actor(ashley)
     "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
     "You do your best to remain absolutely silent, but you see [stephanie.title] looking at you confused."
     $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = ashley)
@@ -2079,6 +2080,7 @@ label coffee_time_steph_gets_handsy_label():
                 "The wet tongue of [stephanie.title] is driving you quickly to orgasm. Between the public setting, her partial handjob, and talented mouth, you are sure you can't take any more."
                 "You relax and enjoy the blowjob. Soon your orgasm approaches. There's no easy way to warn [stephanie.title], so you just let it go, firing your load into her mouth."
                 $ stephanie.cum_in_mouth()
+                $ scene_manager.update_actor(stephanie)
                 $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = stephanie)
                 "Her talented mouth takes your load easily. When you finish, her mouth slowly releases your cock and you hear a loud gulp."
                 "You look around to make sure you are still anonymous before putting your hand on her shoulder and then helping her back up and into her seat."

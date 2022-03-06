@@ -112,7 +112,7 @@ label lust_blowjob_intro_label():
         $ the_person.draw_person(position = "blowjob")
         "Frustrated with her service, you take control of the situation and finish yourself off by hand."
         $ the_person.cum_on_face()
-        $ the_person.draw_person(position = "blowjob")
+        $ the_person.draw_person(position = "kneeling1")
         "As you finish, you point your cock at [the_person.possessive_title]'s face, covering it in your seed."
         $ ClimaxController.manual_clarity_release()
     else:
@@ -180,7 +180,7 @@ label lust_blowjob_office_label():
                 $ the_person.draw_person(position = "blowjob")
                 "You decide to take control of the situation and finish yourself off by hand."
                 $ the_person.cum_on_face()
-                $ the_person.draw_person(position = "blowjob")
+                $ the_person.draw_person(position = "kneeling1")
                 "As you finish, you point your cock at [the_person.possessive_title]'s face, covering it in your seed."
                 $ ClimaxController.manual_clarity_release()
             else:
@@ -198,7 +198,7 @@ label lust_blowjob_office_label():
                 $ the_person.draw_person(position = "blowjob")
                 "Frustrated with her service, you take control of the situation and finish yourself off by hand."
                 $ the_person.cum_on_face()
-                $ the_person.draw_person(position = "blowjob")
+                $ the_person.draw_person(position = "kneeling1")
                 "As you finish, you point your cock at [the_person.possessive_title]'s face, covering it in your seed."
                 $ ClimaxController.manual_clarity_release()
             else:
@@ -234,7 +234,7 @@ label lust_blowjob_office_label():
             $ the_person.draw_person(position = "blowjob")
             "Frustrated with her service, you take control of the situation and finish yourself off by hand."
             $ the_person.cum_on_face()
-            $ the_person.draw_person(position = "blowjob")
+            $ the_person.draw_person(position = "kneeling1")
             "As you finish, you point your cock at [the_person.possessive_title]'s face, covering it in your seed."
             $ ClimaxController.manual_clarity_release()
         else:
@@ -280,7 +280,7 @@ label lust_blowjob_office_label():
             $ the_person.draw_person(position = "blowjob")
             "Frustrated with her service, you take control of the situation and finish yourself off by hand."
             $ the_person.cum_on_face()
-            $ the_person.draw_person(position = "blowjob")
+            $ the_person.draw_person(position = "kneeling1")
             "As you finish, you point your cock at [the_person.possessive_title]'s face, covering it in your seed."
             $ ClimaxController.manual_clarity_release()
         else:

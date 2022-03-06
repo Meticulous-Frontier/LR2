@@ -223,11 +223,12 @@ label GIC_outro_cowgirl_handjob(the_girl, the_location, the_object, the_goal = N
         "Just hearing her say that would have pushed you over the edge - her soft, wet hand working your cock is just a bonus."
         "She opens up her mouth and sticks out her tongue, presenting you with a clear target."
         $ the_girl.cum_in_mouth()
-        "You spasm and shoot out a pulse of hot sperm, splashing it over her tongue and down the back of her throat."
-        "She maintains eye contact as you fire off the rest of your load, then closes her mouth and swallows quietly."
-        $ the_girl.cum_in_mouth()
-        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
         $ cowgirl_handjob.redraw_scene(the_girl)
+        "You spasm and shoot out a pulse of hot sperm, splashing it over her tongue and down the back of her throat."
+        $ the_girl.cum_on_face()
+        $ cowgirl_handjob.redraw_scene(the_girl)
+        "She maintains eye contact as you fire off the rest of your load over her face, she closes her mouth and swallows quietly."
+        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
         $ the_girl.call_dialogue("cum_mouth")
     else:
         $ cowgirl_handjob.call_default_outro(the_girl, the_location, the_object)
