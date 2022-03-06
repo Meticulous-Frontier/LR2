@@ -131,13 +131,13 @@ init -1 python:
     Wardrobe.pick_underwear_with_lowest_sluttiness = pick_underwear_with_lowest_sluttiness
 
     def wardrobe_remove_outfit(self, outfit):
-        for store in [self.outfits, self.underwear_sets, self.overwear_sets]:
+        for outfit_set in [self.outfits, self.underwear_sets, self.overwear_sets]:
             if isinstance(outfit, basestring):
-                found = find_in_list(lambda x: x.name == outfit, store)
+                found = find_in_list(lambda x: x.name == outfit, outfit_set)
                 if found:
-                    store.remove(found)
-            elif outfit in store:
-                store.remove(outfit)
+                    outfit_set.remove(found)
+            elif outfit in outfit_set:
+                outfit_set.remove(outfit)
 
     Wardrobe.remove_outfit = wardrobe_remove_outfit
 
