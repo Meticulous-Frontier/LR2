@@ -88,6 +88,8 @@ init 3 python:
         if day < person.event_triggers_dict.get("last_birth", -36) + 36:
             return
 
+        # clear any party schedules
+        person.set_override_schedule(None, the_times = [4])
         # historic start date of pregnancy
         start_day = day - progress_days
 

@@ -367,11 +367,13 @@ init 2 python:
         if not "Schedule" in globals():
             return
 
-        person.set_override_schedule(None, the_times = [4])
         if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]) or person in stripclub_strippers:
             return  # no party for the working girls
         if person.pregnancy_is_visible():
             return  # no party for girls who already show the baby bump
+
+        # clear old party schedule (clear after stripper check as to not clear her override schedule during foreclosed phase)
+        person.set_override_schedule(None, the_times = [4])
 
         count = 0
         party_destinations = get_party_destinations()

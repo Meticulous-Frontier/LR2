@@ -80,6 +80,8 @@ init 2 python:
 
     def strip_club_foreclosed_change_stripper_schedules():
         for person in stripclub_strippers:
+            # clear any party schedules
+            person.set_override_schedule(None, the_times = [4])
             person.set_override_schedule(person.home, the_days = [0,1,2,3,4,5,6], the_times = [3, 4])
         return
 
