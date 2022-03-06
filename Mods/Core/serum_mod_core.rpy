@@ -36,12 +36,8 @@ init -1 python:
         # store instances of mod
         _instances = set()
 
-<<<<<<< HEAD
-        def __init__(self,name,desc, positive_slug = "", negative_slug = "", research_added = 0, slots_added = 0, production_added = 0, duration_added = 0, base_side_effect_chance = 0, clarity_added = 0,
-=======
         def __init__(self,name,desc, positive_slug = "", negative_slug = "",
             research_added = 0, slots_added = 0, production_added = 0, duration_added = 0, base_side_effect_chance = 0, clarity_added = 0,
->>>>>>> 6e6cb5b2a2e133ad3fbdb0a9cee754ecc1301374
             on_apply = None, on_remove = None, on_turn = None, on_day = None, on_move = None,
             requires = None, tier = 0, start_researched = False, research_needed=50, exclude_tags=None, is_side_effect = False,
             clarity_cost = 50, start_unlocked = False, start_enabled = True,
@@ -54,11 +50,7 @@ init -1 python:
                 on_apply, on_remove, on_turn, on_day, on_move,
                 requires, tier, start_researched, research_needed, exclude_tags, is_side_effect,
                 clarity_cost, start_unlocked,
-<<<<<<< HEAD
-                mental_aspect = 0, physical_aspect = 0, sexual_aspect = 0, medical_aspect = 0, flaws_aspect = 0, attention = 0)
-=======
                 mental_aspect, physical_aspect, sexual_aspect, medical_aspect, flaws_aspect, attention)
->>>>>>> 6e6cb5b2a2e133ad3fbdb0a9cee754ecc1301374
 
             # store the instance in class static
             SerumTraitMod._instances.add(self)

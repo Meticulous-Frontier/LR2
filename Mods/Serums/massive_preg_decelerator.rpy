@@ -17,13 +17,8 @@ init -1 python:
     def add_massive_pregnancy_decelerator():
         massive_pregnancy_decelerator_serum_trait = SerumTraitMod(name = "Pregnancy Hormone Inhibitors",
             desc = "Clamps down on natural pregnancy hormone production. Massively decreases the pace at which a pregnancy will progress.",
-<<<<<<< HEAD
-            positive_slug = "+$40 Value, -1 Pregnancy Progress per Turn",
-            negative_slug = "+300 Serum Research",
-=======
             positive_slug = "-1 Pregnancy Progress per Turn",
             negative_slug = "",
->>>>>>> 6e6cb5b2a2e133ad3fbdb0a9cee754ecc1301374
             research_added = 300,
             base_side_effect_chance = 80,
             on_turn = massive_pregnancy_decelerator_on_turn,
@@ -32,11 +27,7 @@ init -1 python:
             research_needed = 1400,
             exclude_tags = "Pregnancy",
             clarity_cost = 1800,
-<<<<<<< HEAD
-            mental_aspect = 0, physical_aspect = 9, sexual_aspect = 2, medical_aspect = 3, flaws_aspect = 0, attention = 4)
-=======
             mental_aspect = 0, physical_aspect = 9, sexual_aspect = 0, medical_aspect = 3, flaws_aspect = 0, attention = 4)
->>>>>>> 6e6cb5b2a2e133ad3fbdb0a9cee754ecc1301374
         return
 
 # any label that starts with serum_mod is added to the serum mod list

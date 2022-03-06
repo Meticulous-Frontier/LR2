@@ -9,17 +9,10 @@ init -1 python:
 
     def add_pheromone_therapy_serum():
         pher_ther = SerumTraitMod(name = "Pheromone Therapy",
-<<<<<<< HEAD
-                desc = "By mimicking pheromones found in closely related animals, this serum can recreate feelings of going into heat in women.",
-                positive_slug = "+$40 Value, +15 Sluttiness",
-                negative_slug = "+200 Serum Research",
-                research_added = 200,
-=======
             desc = "By mimicking pheromones found in closely related animals, this serum can recreate feelings of going into heat in women.",
             positive_slug = "+15 Sluttiness",
             negative_slug = "",
             research_added = 200,
->>>>>>> 6e6cb5b2a2e133ad3fbdb0a9cee754ecc1301374
         #     slots_added = a_number,
         #     production_added = a_number,
         #     duration_added = a_number,
