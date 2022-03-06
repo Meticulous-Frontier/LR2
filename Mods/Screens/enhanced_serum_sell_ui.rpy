@@ -24,9 +24,9 @@ init 2:
                                 $ serum_amount = serum_stock[1]
                                 hbox:
                                     $ serum_dose_value = mc.business.get_serum_base_value(the_serum, round_value = True)
-                                    use serum_design_menu_item(the_serum, given_y_size = 60, name_addition = ": " + str(serum_amount) + " Doses, $" + str(serum_dose_value) + "/Dose")
+                                    use serum_design_menu_item(the_serum, name_addition = ": " + str(serum_amount) + " Doses, $" + str(serum_dose_value) + "/Dose")
                                     textbutton "1":
-                                        ysize 60
+                                        ysize 64
                                         xsize 50
                                         text_yalign 0.5
                                         text_xalign 0.5
@@ -35,7 +35,7 @@ init 2:
                                         style "textbutton_style" text_style "textbutton_text_style"
                                         sensitive serum_amount >= 1
                                     textbutton "10":
-                                        ysize 60
+                                        ysize 64
                                         xsize 50
                                         text_yalign 0.5
                                         text_xalign 0.5
@@ -44,7 +44,7 @@ init 2:
                                         style "textbutton_style" text_style "textbutton_text_style"
                                         sensitive serum_amount >= 10
                                     textbutton "All":
-                                        ysize 60
+                                        ysize 64
                                         xsize 50
                                         text_yalign 0.5
                                         text_xalign 0.5
@@ -174,3 +174,29 @@ init 2:
                 focus_mask "gui/button/choice_idle_background.png"
                 action Return()
             textbutton "Return" align [0.5,0.5] style "return_button_style" text_style "return_button_style"
+
+    screen serum_design_menu_item(the_design, given_x_size = 500, given_y_size = 64, name_addition = ""):
+        frame:
+            background None
+
+            xsize given_x_size
+            ysize given_y_size
+            padding (0,0)
+            margin (0,0)
+            button:
+                style "textbutton_style"
+                xfill True
+                yfill True
+                action SetScreenVariable("selected_serum", the_design)
+                sensitive True
+                hovered [SetScreenVariable("selected_serum", None), Show("serum_tooltip", None, the_design, given_anchor = (1.0,0.0), given_align = (0.95,0.05))]
+                unhovered Hide("serum_tooltip")
+
+            vbox:
+                yanchor 0.5
+                yalign 0.5
+                xalign 1.0
+                xfill True
+                yfill True
+                text the_design.name + name_addition style "textbutton_text_style" xoffset 16 yoffset 10
+                use aspect_grid(the_design, given_xalign = 0.03, given_xanchor = 0.0)
