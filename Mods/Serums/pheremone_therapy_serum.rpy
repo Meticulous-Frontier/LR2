@@ -29,8 +29,7 @@ init -1 python:
             mental_aspect = 5, physical_aspect = 0, sexual_aspect = 5, medical_aspect = 0, flaws_aspect = 0, attention = 2,
             start_enabled = False
         #     exclude_tags = [list_of_other_tags],
-        #     is_side_effect = a_bool),
-                mental_aspect = 5, physical_aspect = 0, sexual_aspect = 7, medical_aspect = 0, flaws_aspect = 0, attention = 2
+        #     is_side_effect = a_bool)
             )
 
 

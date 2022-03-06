@@ -15,13 +15,13 @@
 #             desc = "Decrease target subject body mass, using peptide YY3-36 as a serum component that acts on the hypothalamic feeding centers to inhibit hunger and calorie intake.",
 #             positive_slug = "-$15 Value, 20% Chance/Turn to reduce body mass by 200 grams",
 #             negative_slug = "+125 Serum Research",
+#             value_added = -15,
 #             research_added = 125,
 #             base_side_effect_chance = 20,
 #             on_turn = anorexia_serum_on_turn,
 #             requires = basic_med_app,
 #             tier = 1,
-#             research_needed = 500,
-#             mental_aspect = 0, physical_aspect = 0, sexual_aspect = 0, medical_aspect = 1, flaws_aspect = 0, attention = 0)
+#             research_needed = 500)
 
 #         # continue on the hijack stack if needed
 #         execute_hijack_call(stack)
