@@ -10,13 +10,6 @@ init -1:
                 new_amount = 1
             store.serum_transfer_amount = __builtin__.int(new_amount)
 
-init -2 style serum_text_style: # Cheat Text Style
-    text_align 0.5
-    size 20
-    color "#dddddd"
-    outlines [(2,"#222222",0,0)]
-    xalign 0.5
-
 init 2:
     screen serum_trade_ui(inventory_1,inventory_2,name_1="Player",name_2="Business", trade_requirement = None, hide_instead = False, inventory_2_max = -1): #Lets you trade serums back and forth between two different inventories. Inventory 1 is assumed to be the players.
         add "Science_Menu_Background.png"
@@ -64,6 +57,8 @@ init 2:
                                             style "textbutton_style"
                                             text_style "serum_text_style"
                                             xsize 560
+                                            if not trade_sensitive:
+                                                background "#B14365"
 
                                             action ToggleScreen("serum_tooltip", None, serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                             hovered Show("serum_tooltip", None, serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
