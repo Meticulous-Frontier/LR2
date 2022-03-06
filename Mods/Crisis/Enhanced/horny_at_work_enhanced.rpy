@@ -80,7 +80,7 @@ label horny_at_work_crisis_enhanced_label():
 
 
     menu:
-        "Ignore it\n{color=#ff0000}{size=18}-10%% Business Efficiency{/size}{/color} (tooltip)Ignore your arousal through sheer willpower. It might save you some embarrassment, but your business efficiency is sure to suffer.":
+        "Ignore it\n{color=#ff0000}{size=18}-10%% Business Efficiency{/size}{/color} (tooltip)Ignore your arousal through sheer willpower. It might save you some embarrassment, but your business efficiency is sure to suffer":
             $ clear_scene()
             "Putting mind over matter into action you redouble your efforts. Time seems to pass slowly and it seems like you're getting no work done at all."
             $ mc.business.change_team_effectiveness(-10)

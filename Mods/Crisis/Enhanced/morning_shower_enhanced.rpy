@@ -240,9 +240,9 @@ label girl_shower_enter_enhanced(the_person):
             #     $ the_person.draw_person("walking_away")
             #     "She rubs up against you while you talk, stroking your shaft with her wet, slippery ass."
             #     menu:
-            #         "Jerk off with her ass.":
+            #         "Jerk off with her ass":
             #
-            #         "Just have a shower.":
+            #         "Just have a shower":
 
 
             else:

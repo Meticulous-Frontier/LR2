@@ -1662,7 +1662,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 the_person "Lets go to bed! I'm so charged tonight, I think I can go all night!"
                 mc.name "Sounds good. I'm gonna fuck your brains out tonight."
                 $ the_person.draw_person(position = "walking_away")
-            #"Wait for her.":  #TODO
+            #"Wait for her":  #TODO
         "You follow [the_person.title] to her bedroom."
         "Her amazing ass sways back and forth as she walks. Your cock twitches thinking about the night ahead of you."
         "She gets to her bed and immediately opens her nightstand and begins looking for something."
