@@ -97,7 +97,7 @@ init -2 python: #Requirement Functions
     def ellie_never_been_kissed_requirement(the_person):
         if ellie_is_working_on_nanobots() and ellie.sluttiness >= 20:
             return True
-        if ellie.sluttiness > 40:
+        if ellie.location == mc.business.r_div and ellie.sluttiness > 40 and mc.business.is_open_for_business():
             return True
         return False
 
