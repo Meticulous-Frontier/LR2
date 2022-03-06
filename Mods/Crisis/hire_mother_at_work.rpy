@@ -12,14 +12,14 @@ init 2 python:
 
     def hire_mother_work_crisis_get_daughter():
         valid_people_list = []
-        for person in [x for x in mc.business.get_employee_list() if x.age < 34 and not x.has_role(clone_role) and not quest_director.is_person_blocked(x)]:
+        for person in [x for x in mc.business.get_employee_list() if x.age < 34 and not x.has_role(clone_role) and not quest_director.is_person_blocked(x) and x not in unique_character_list]:
             if town_relationships.get_existing_parent_count(person) == 0: #The mother for this character is not yet in the game
                 valid_people_list.append(person)
 
         return get_random_from_list(valid_people_list) #Pick someone appropriate from the company.
 
     hire_mother_work_crisis = ActionMod("Mother Work Crisis", hire_mother_work_crisis_requirement,"hire_mother_work_crisis_label",
-        menu_tooltip = "Allow you to hire the mothers of girls working for you.", category = "Business", is_crisis = True, crisis_weight = 0) # set to 0 (disabled), changes when Sarah puts up sign
+        menu_tooltip = "Allow you to hire the mothers of girls working for you.", category = "Business", is_crisis = True)
 
 
 label hire_mother_work_crisis_label():
@@ -145,8 +145,7 @@ label hire_mother_work_crisis_label():
         else:
             mc.name "Alright [the_person.title], this looks promising, she can start tomorrow. I can't give her any preferential treatment, but I'll give her a try."
             $ the_person.draw_person(emotion = "happy")
-            $ the_person.change_happiness(5)
-            $ the_person.change_love(2)
+            $ the_person.change_stats(happiness = 5, love = 2)
             the_person "Thank you so much!"
             call hire_someone(the_mother) from _call_hire_mother_work_2
         # make sure to set titles for the mother (prevent introduction dialogs)
@@ -156,8 +155,7 @@ label hire_mother_work_crisis_label():
     else: #is "None
         if promised_sex: #You promised to do it for sex but don't want to hire her, mom is disappointed.
             mc.name "I'm sorry but her credentials just aren't what they need to be. I could never justify hiring your mother."
-            $ the_person.change_happiness(-5)
-            $ the_person.change_love(-1)
+            $ the_person.change_stats(happiness = -5, love = -2)
             $ the_person.draw_person(emotion = "sad")
             "[the_person.possessive_title] seems to deflate. She nods sadly."
             the_person "I understand. Thank you for the time."

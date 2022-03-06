@@ -15,6 +15,18 @@ init 2 python:
         mc.business.event_triggers_dict["old_strip_club_name"] = None
         mc.business.event_triggers_dict["strip_club_decision_day"] = 0
         mc.business.event_triggers_dict["strip_club_has_bdsm_room"] = False
+
+        # init jobs after rooms are created
+        global stripclub_waitress_job
+        stripclub_waitress_job = Job("Waitress", stripclub_waitress_role, strip_club, strip_club_hire_waitress, strip_club_fire_waitress, work_days=[0,1,2,3,4,5,6], work_times = [3,4])
+        global stripclub_bdsm_performer_job
+        stripclub_bdsm_performer_job = Job("BDSM Performer", stripclub_bdsm_performer_role, bdsm_room, strip_club_hire_bdsm_performer, strip_club_fire_bdsm_performer, work_days = [0,1,2,3,4,5,6], work_times = [3,4])
+        global stripclub_manager_job
+        stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4])
+        global stripclub_mistress_job
+        stripclub_mistress_job = Job("Mistress", stripclub_mistress_role, bdsm_room, work_days=[0,1,2,3,4,5,6], work_times = [3,4])
+        global stripclub_stripper_job
+        stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit)
         return
 
     def get_strip_club_foreclosed_stage():
@@ -40,7 +52,7 @@ init 2 python:
             return False
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
-        if mc.business.funds > 60000:
+        if mc.business.has_funds(60000):
             if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
                 return True
         return False
@@ -68,11 +80,7 @@ init 2 python:
 
     def strip_club_foreclosed_change_stripper_schedules():
         for person in stripclub_strippers:
-            if person.is_employee():
-                person.set_schedule(person.home, times = [0, 4])
-            else:
-                person.set_schedule(None, times = [1,2,3])
-                person.set_schedule(person.home, times = [0, 4])
+            person.set_override_schedule(person.home, the_days = [0,1,2,3,4,5,6], the_times = [3, 4])
         return
 
     def add_cousin_talk_about_strip_club_action():
@@ -92,8 +100,7 @@ init 2 python:
 
     strip_club_foreclosed_mod_action = ActionMod("Strip Club Story Line", strip_club_foreclosed_event_requirement, "club_foreclosed_event_label",
         menu_tooltip = "At a certain point the strip club is closed and you get the chance to buy it.", category = "Misc",
-        initialization = init_strip_club_mod, is_mandatory_crisis = True, crisis_weight = 5)
-
+        initialization = init_strip_club_mod, is_mandatory_crisis = True)
 
 label club_foreclosed_event_label():
     # delay the actual shutdown for 10 to 16 days after initial requirements are met.

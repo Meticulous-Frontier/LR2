@@ -1,14 +1,13 @@
 init 2 python:
     def sister_failed_test_requirement():
+        if not lily.has_job(sister_student_job):
+            return False
         if mc_asleep() and mc.business.event_triggers_dict.get("sister_serum_test", False):
             return True
         return False
 
     sister_failed_test_crisis = ActionMod("Lily Needs Help Studying",sister_failed_test_requirement,"sister_failed_test_label",
-        menu_tooltip = "Lily fails a quiz in her class and needs help studying.", category = "Home", is_crisis = True, crisis_weight = sister_failed_test_weight)
-
-init -1 python:
-    sister_failed_test_weight = 5
+        menu_tooltip = "Lily fails a quiz in her class and needs help studying.", category = "Home", is_crisis = True)
 
 #new night time crisis. Lily enters MC's bedroom and asks for help because she failed a test at school.
 #Options change based on story progression with Lily. She can't pay you for tutoring, but offers other services.
@@ -60,10 +59,10 @@ label sister_failed_test_label():
                 $ the_person.apply_serum_study()
             else:
                 "After looking at your serums, you decide none of them would be useful."
-                mc.name "Actually, I don't have the right ones with me. Come on lets just help you study."
+                mc.name "Actually, I don't have the right ones with me. Come on let me just help you study."
 
         "Nothing" if mc.inventory.get_any_serum_count() <= 0:
-            mc.name "Actually... I can't think of anything. Come on lets just help you study."
+            mc.name "Actually... I can't think of anything. Come on let me just help you study."
         "Strip" if mc.business.event_triggers_dict.get("sister_strip",False):
             $ strip_path = True
             mc.name "Why don't you take off some of your clothes, that way I have something nice to look at while we study?"
@@ -259,7 +258,7 @@ label sister_failed_test_label():
                     $ the_person.break_taboo("condomless_sex")
                 "[the_person.possessive_title] lifts her hips up slightly, lining you up with her pussy. She slowly lowers herself down, your cock pushing inside of her."
                 "It takes a few seconds, but with steady pressure she manages to take you all the way. She takes a few moments to adjust to the feeling, then begins to rock her hips."
-                call get_fucked(the_person, start_position = cowgirl, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False, ) from _lily_study_time_quickie_01
+                call get_fucked(the_person, start_position = cowgirl, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _lily_study_time_quickie_01
                 $ the_report = _return
                 if the_report.get("girl orgasms", 0) > 0:
                     the_person "Wow... that felt so good..."

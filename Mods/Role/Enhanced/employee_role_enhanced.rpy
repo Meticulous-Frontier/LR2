@@ -1,6 +1,8 @@
 
 init 2 python:
     def employee_find_out_home_location_requirement(the_person):
+        if the_person in unique_character_list:
+            return False
         if mc.business.is_open_for_business():
             if mc.is_at_work():
                 if the_person.obedience > 120 and the_person.effective_sluttiness() > 30:
@@ -21,7 +23,7 @@ label employee_find_out_home_location_label(the_person):
     "You walk up to [the_person.possessive_title], who is sitting at her work station."
 
     mc.name "Hey [the_person.title], how long have you been working for me?"
-    $ ran_num = (day - the_person.event_triggers_dict.get("employed_since", 0)) // 7
+    $ ran_num = the_person.days_employed // 7
     if ran_num == 0:
         the_person "I just started working here, is there something wrong?"
     elif ran_num == 1:

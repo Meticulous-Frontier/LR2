@@ -616,7 +616,7 @@ init 5 python:
                 outfit.add_upper(*make_upper_item_transparent(item, points, color_upper))
 
             # random chance of adding sexy underwear part (heart pasties / cincher)
-            if renpy.random.randint(0, 3 - self.person.get_opinion_score("lingerie")) == 0:
+            if points >= 7 and renpy.random.randint(0, 3 - self.person.get_opinion_score("lingerie")) == 0:
                 outfit.add_upper(*make_upper_item_transparent(get_random_from_list([cincher, heart_pasties]), points, color_upper))
 
             # find lower body item

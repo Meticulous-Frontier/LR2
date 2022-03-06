@@ -7,7 +7,7 @@
 init 2 python:
     #Requirement functions
     def candace_meet_at_office_store_requirement(person):
-        if person.location == office_store:
+        if person.location == office_store and mc.business.is_work_day():
             return True
         return False
 
@@ -28,18 +28,18 @@ init 2 python:
         return False
 
     def candace_goes_clothes_shopping_requirement(person):
-        if candace_get_hire_date() == -1 or candace.event_triggers_dict["clothes_shopping"] != 0:
+        if candace.employed_since == -1 or candace.event_triggers_dict["clothes_shopping"] != 0:
             return False
-        if day > candace_get_hire_date() + 7:  #She's been working at least a week.
-            if mc.business.funds > 500 and candace.location == candace.work:
+        if candace.days_employed > 7:  #She's been working at least a week.
+            if mc.business.has_funds(500) and candace.location == candace.work:
                 return True
         return False
 
     def candace_overhear_supply_order_requirement(person):
-        if day > candace_get_hire_date() + 14:
+        if day > candace.employed_since + 14:
             if time_of_day > 1:
                 if person.sluttiness > 40:
-                    if person.location == person.work:
+                    if person.is_at_work():
                         return True
         return False
 
@@ -63,7 +63,7 @@ init 2 python:
         return False
 
     def candace_begin_cure_research_requirement(the_person):
-        if the_person.location == the_person.work:
+        if the_person.is_at_work():
             return True
         return False
 
@@ -124,10 +124,11 @@ init 2 python:
 
         # init candace role
         candace_role = Role(role_name ="It\'s Complicated", actions =[candace_get_to_know, candace_convince_to_quit], hidden = True)
+        candace_job = Job("Assistant", candace_role, purgatory, work_times = [1, 2])
 
         global candace
         candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "standard_body", face_style = "Face_12", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
-            eyes = "light blue", personality = candace_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = candace_wardrobe, \
+            eyes = "light blue", personality = candace_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = candace_wardrobe, job = candace_job, \
             stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
             title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit,
             force_random = True, forced_opinions = [
@@ -149,8 +150,7 @@ init 2 python:
             ])
 
         candace.generate_home()
-        candace.set_schedule(candace.home, times = [1,2])
-        candace.set_schedule(office_store, times = [3], days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
+        candace.set_schedule(office_store, the_times = [3], the_days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
         candace.home.add_person(candace)
         candace.event_triggers_dict["met_at_store"] = 0
         candace.event_triggers_dict["day_met"] = -1 #Might eventually change the code where candi gets INIT other than when you meet her, so leave this -1 for now
@@ -165,8 +165,6 @@ init 2 python:
         candace.event_triggers_dict["clothes_shopping"] = 0
         candace.event_triggers_dict["supply_discount_active"] = False
         candace.event_triggers_dict["is_bimbo"] = True
-
-        candace.add_role(candace_role)
 
         candace.add_unique_on_room_enter_event(candace_meet_at_office_store)
         return
@@ -196,10 +194,11 @@ init 2 python:
 
         # init candace role
         candace_role = Role(role_name ="It\'s Complicated", actions =[candace_get_to_know, candace_convince_to_quit], hidden = True)
+        candace_job = Job("Assistant", candace_role, purgatory, work_times = [1, 2])
 
         global candace
         candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "thin_body", face_style = "Face_3", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
-            eyes = "light blue", personality = candace_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = candace_wardrobe, \
+            eyes = "light blue", personality = candace_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = candace_wardrobe, job = candace_job, \
             stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
             title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit,
             force_random = True, forced_opinions = [
@@ -221,8 +220,7 @@ init 2 python:
             ])
 
         candace.generate_home()
-        candace.set_schedule(candace.home, times = [1,2])
-        candace.set_schedule(office_store, times = [3], days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
+        candace.set_schedule(office_store, the_times = [3], the_days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
         candace.home.add_person(candace)
         candace.event_triggers_dict["met_at_store"] = 0
         candace.event_triggers_dict["day_met"] = day #Might eventually change the code where candi gets INIT other than when you meet her, so leave this -1 for now
@@ -237,8 +235,6 @@ init 2 python:
         candace.event_triggers_dict["clothes_shopping"] = 0
         candace.event_triggers_dict["supply_discount_active"] = False
         candace.event_triggers_dict["is_bimbo"] = True
-
-        candace.add_role(candace_role)
 
         candace.add_unique_on_room_enter_event(candace_meet_at_office_store)
 
@@ -270,10 +266,11 @@ init 2 python:
 
         # init candace role
         candace_role = Role(role_name ="It\'s Complicated", actions =[candace_get_to_know, candace_convince_to_quit], hidden = True)
+        candace_job = Job("Assistant", candace_role, purgatory, work_times = [1, 2])
 
         global candace
         candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "thin_body", face_style = "Face_3", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
-            eyes = "light blue", personality = genius_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = candace_wardrobe, \
+            eyes = "light blue", personality = genius_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = candace_wardrobe, job = candace_job, \
             stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
             title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = candace_base_outfit,
             force_random = True, forced_opinions = [
@@ -295,8 +292,8 @@ init 2 python:
             ])
 
         candace.generate_home()
-        #candace.set_schedule(candace.home, times = [1,2])
-        #candace.set_schedule(office_store, times = [3], days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
+        #candace.set_schedule(candace.home, the_times = [1,2])
+        #candace.set_schedule(office_store, the_times = [3], the_days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
         candace.home.add_person(candace)
         candace.event_triggers_dict["met_at_store"] = 1
         candace.event_triggers_dict["day_met"] = day #Might eventually change the code where candi gets INIT other than when you meet her, so leave this -1 for now
@@ -311,8 +308,6 @@ init 2 python:
         candace.event_triggers_dict["clothes_shopping"] = 1
         candace.event_triggers_dict["supply_discount_active"] = True
         candace.event_triggers_dict["is_bimbo"] = False
-
-        candace.add_role(candace_role)
 
         candace.add_unique_on_room_enter_event(candace_meet_at_office_store)
         mc.business.add_employee_supply(candace, False)
@@ -642,7 +637,7 @@ label candace_convince_to_quit_label(the_person):
     "There is a small table to the side of the room. You sit down and start to go through it with [the_person.title]."
     $ scene_manager.update_actor(the_person, position = "sitting")
 
-    $ mc.business.hire_person(the_person, "Supply")
+    $ mc.business.add_employee_supply(the_person)
     $ town_relationships.update_relationship(salon_manager, the_person, "Friend")
 
     "You complete the necessary paperwork and hire [the_person.title], assigning her to the supply department."
@@ -1222,7 +1217,7 @@ label candace_begin_cure_research_label(the_person):
     mc.name "Good. Let me know if you either of you need anything."
     "With that, you dismiss the meeting. Hopefully [the_person.name] will be able to find some way to reverse the effects of the serum that made [candace.name] this way."
     $ candace.event_triggers_dict["living_with_stephanie"] = day
-    $ candace.set_schedule(the_location = the_person.home, times = [0,4])
+    $ candace.set_schedule(the_location = the_person.home, the_times = [0,4])
     $ mc.business.add_mandatory_crisis(candace_anti_bimbo_serum)
     $ scene_manager.clear_scene()
     $ mc.location.show_background()
@@ -1373,7 +1368,7 @@ label candace_cure_bimbo_label():
     $ scene_manager.clear_scene()
     "It feels like a happy ending for her, but at the same time you feel certain that this is really just the beginning of the story of you and your genius office girl."
     $ candace.event_triggers_dict["sex_record_snapshot"] = candace.sex_record.copy() #This should take a snapshot of our sex record with candace so we can compare it later
-    $ candace.set_schedule(the_location = candace.home, times = [0,4])
+    $ candace.set_schedule(the_location = candace.home, the_times = [0,4])
     $ mc.business.add_mandatory_crisis(candace_meet_doctor_candace)
     return
 
@@ -1618,11 +1613,6 @@ init 3 python:
         score = candace.event_triggers_dict.get("relationship_doubt_score", 0)
         candace.event_triggers_dict["relationship_doubt_score"] = score + 1
         return
-
-    def candace_get_hire_date():
-        if "candace" in globals():
-            return candace.event_triggers_dict.get("employed_since", -1)
-        return 0
 
     def candace_get_has_gone_clothes_shopping():
         if "candace" in globals():

@@ -2,9 +2,6 @@
 # Based on the Pilotus13 Vanilla extension
 # Overhaul edit by Longshot
 # an idea that i want to implement later: if lily is slutty enough, she finds you spying and gets turned on, and then you and her have fun in the hall while jennifer does her thing in her room.
-init -1 python:
-    mom_ntr_mod_weight = 5
-
 init 2 python:
 
     #cum_*_ntr def's added so pregnancy and sex counters will not be an issue in NTR.
@@ -133,10 +130,9 @@ init 2 python:
 
     mom_ntr_mod_action = ActionMod("Mom NTR",mom_ntr_mod_requirement,"mom_ntr_mod_action_label",
         menu_tooltip = "At night, you hear strange sounds out of [mom.possessive_title]'s bedroom.", category = "NTR",
-        initialization = init_action_mod_disabled,
-        is_crisis = True, crisis_weight = mom_ntr_mod_weight)
+        initialization = init_action_mod_disabled, is_crisis = True)
 
-label mom_ntr_mod_action_label:
+label mom_ntr_mod_action_label():
     ## Mom having her private life
     $ the_person = mom
     "Some time late in the night, you're awoken by some noise down the hallway."
@@ -615,7 +611,7 @@ label mom_ntr_mod_action_label:
                             $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
                             "He grants her wish, caressing her body as he strips her down."
                     $ mom_clothing = None
-                    $ the_person.sluttiness += 2
+                    $ the_person.change_slut(2, 40)
                     "They are both undressed, and you can clearly see where this is going."
                     the_person "Well, I think we are both ready for action. So, let's do it!"
                     menu:
@@ -914,8 +910,8 @@ label mom_ntr_mod_action_label:
                                     man_name "Ow, fuck! That was great!"
                                     the_person "Indeed, [man_name]! It was great!"
                                     if the_person.get_opinion_score("being submissive") > 0:
-                                         the_person "I guess you like it when a girl allows you to be rough, don't you? I like feeling owned by a man while he fucks me."
-                                         man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
+                                        the_person "I guess you like it when a girl allows you to be rough, don't you? I like feeling owned by a man while he fucks me."
+                                        man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
                                     man_name "Thanks, [the_person.name]. I really needed that."
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "[the_person.possessive_title] stands up from the bed and smiles."
@@ -1551,7 +1547,7 @@ label mom_ntr_mod_action_label:
                         else:
                             "[man_name2] grants her wish, while [the_person.possessive_title] caresses [man_name2]'s crouch."
                 $ mom_clothing = None
-                $ the_person.sluttiness += 2
+                $ the_person.change_slut(2, 40)
                 "Now with all of them pretty naked, you clearly see where it will go."
                 the_person "Oh, guys, I feel so horny around you. Let's have some fun!"
                 menu:
@@ -1886,8 +1882,8 @@ label mom_ntr_mod_action_label:
                                 man_name2 "Ow, fuck! That was great!"
                                 the_person "Indeed, [man_name2]! It was great!"
                                 if the_person.get_opinion_score("being submissive") > 0:
-                                     the_person "I guess you like it when a girl allows you to be rough, don't you? I like feeling owned by a man while he fucks me."
-                                     man_name2 "Yes, it is a wonderful feeling. It really turns me on. Wish I could do this with my wife..."
+                                    the_person "I guess you like it when a girl allows you to be rough, don't you? I like feeling owned by a man while he fucks me."
+                                    man_name2 "Yes, it is a wonderful feeling. It really turns me on. Wish I could do this with my wife..."
                                 man_name2 "Thanks, [the_person.name]. I really needed that."
                                 man_name "I'm cumming too!"
                                 $ cum_on_tits_ntr(the_person) #$ the_person.cum_on_tits()
@@ -2242,8 +2238,8 @@ label mom_ntr_mod_action_label:
                                 man_name "Ow, fuck! That was great!"
                                 the_person "Indeed, [man_name]! It was great! I also liked having you two in me."
                                 if the_person.get_opinion_score("being submissive") > 0:
-                                     the_person "I guess I just like being used this way. I like feeling owned by men while they fuck me."
-                                     man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
+                                    the_person "I guess I just like being used this way. I like feeling owned by men while they fuck me."
+                                    man_name "Yes, it is a wonderful feeling. I really turns me on. Wish I could do it with my wife..."
                                 man_name "Thanks, [the_person.name]. I really needed that."
                                 man_name2 "I'm cumming too!"
                                 $ cum_on_ass_ntr(the_person) #$ the_person.cum_on_ass()

@@ -1,7 +1,7 @@
 init 2 python:
     config.label_overrides["start"] = "alternative_start"
 
-label alternative_start:
+label alternative_start():
     scene bg paper_menu_background with fade
     "Lab Rats 2 contains adult content. If you are not over 18 or your country's equivalent age you should not view this content."
     menu:
@@ -70,6 +70,7 @@ label alternative_start:
             purchase_policy(recruitment_skill_improvement_policy, ignore_cost = True)
             purchase_policy(business_size_1_policy, ignore_cost = True)
             purchase_policy(theoretical_research, ignore_cost = True)
+            purchase_policy(max_attention_increase_1_policy, ignore_cost = True)
 
     $ renpy.block_rollback()
     menu:

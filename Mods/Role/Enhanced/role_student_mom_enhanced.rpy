@@ -30,6 +30,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
     the_mom "Yes... Okay... [the_student.name]'s tutor is over for dinner... I'll tell him... We can talk when you get home..."
     $ scene_manager.show_actor(the_mom, position = "sitting", emotion = "sad")
     "[the_mom.possessive_title] comes back into the room and sits down. She has a tense smile as she reaches for the bottle of wine."
+    $ mc.change_locked_clarity(5)
     if first_time:
         the_mom "My husband is going to be at the office for the rest of the night, so we should just get started."
         the_mom "He wanted me to tell you how happy he is with your work."
@@ -45,8 +46,10 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
     the_mom "[the_student.name], you made a very good choice when you asked [the_mom.mc_title] to tutor you. He's an absolute pleasure to have around."
     if the_student.love > 40 or the_student.effective_sluttiness() > 30:
         "[the_student.possessive_title] places her hand on your thigh and rubs it for emphasis."
+        $ mc.change_locked_clarity(15)
         if the_student.effective_sluttiness() > 50:
             "She carries on the conversation with her mother, but her hand starts to drift higher up."
+            $ mc.change_locked_clarity(20)
             "Soon [the_student.possessive_title] is rubbing your bulge under the table, massaging it through your pants."
 
     if the_mom.effective_sluttiness() > 20:
@@ -111,8 +114,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             "[the_mom.possessive_title] laughs and waves you off."
             the_mom "You're too kind."
             "You flirt with [the_mom.possessive_title] as much as you think you can get away with while her daughter is in the room."
-            $ the_mom.change_slut(1)
-            $ the_mom.change_love(2, max_modified_to = 25)
+            $ the_mom.change_stats(slut = 1, max_slut = 25, love = 2, max_love = 25)
 
         "Touch [the_student.possessive_title]" if the_student.effective_sluttiness("touching_body") > 35:
             mc.name "I'm glad to be here. I'm always happy to spend time with you and your daughter."
@@ -125,11 +127,12 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
                 $ mc.change_locked_clarity(20)
                 "She runs her hand along the bulge of your crotch, stroking you slowly through the fabric."
                 the_student "He's been such a strong, firm presence in my life since I met him. I'm really learning a lot."
-                $ the_student.change_slut(1)
+                $ the_student.change_slut(1, 65)
                 $ mc.change_locked_clarity(20)
                 "You and [the_student.possessive_title] fondle each other while you eat dessert, doing your best to keep [the_mom.possessive_title] from noticing everything."
 
             else:
+                $ mc.change_locked_clarity(10)
                 "You fondle [the_student.possessive_title] as you eat your dessert, doing your best to keep [the_mom.possessive_title] from noticing."
 
             $ the_student.change_slut(1 + the_student.get_opinion_score("public sex"))
@@ -183,7 +186,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             $ mc.change_locked_clarity(10)
             "She presses her body against you and holds the back of your neck. After a long moment she pulls back, panting softly."
             $ scene_manager.update_actor(the_mom, special_modifier = None)
-            $ the_mom.change_slut(1)
+            $ the_mom.change_slut(1, 60)
             $ the_mom.break_taboo("kissing")
             the_mom "Thank you for staying for dinner [the_mom.mc_title]. I hope I see you again soon..."
             $ scene_manager.update_actor(the_mom, position = "stand3")

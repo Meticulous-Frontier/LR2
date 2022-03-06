@@ -23,7 +23,7 @@ init -1 python:
 
     def get_location_on_enter_events(location):
         for person in [x for x in location.people if x.on_room_enter_event_list]:
-            if any(x for x in person.on_room_enter_event_list if x.is_action_enabled(person)):
+            if any(x for x in person.on_room_enter_event_list if x.is_action_enabled(person) and not x.effect in ["work_spank_opportunity"]):
                 return True
         if any(x for x in location.on_room_enter_event_list if x.is_action_enabled()):
             return True

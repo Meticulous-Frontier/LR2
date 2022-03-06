@@ -22,7 +22,7 @@ init -1 python:
         not_met_yet_list = []
         if alexia.get_destination(specified_time = 1) == alexia.home: # She'll be scheduled otherwise when met.
             not_met_yet_list.append(alexia)
-        if "ashley" in globals() and day <= ashley.event_triggers_dict.get("employed_since", 0):
+        if "ashley" in globals() and ashley.employed_since == -1:
             not_met_yet_list.append(ashley)
         if "candace" in globals() and candace.event_triggers_dict.get("met_at_store", 0) == 0: # She exist but not met yet.
             not_met_yet_list.append(candace)
@@ -68,7 +68,7 @@ init -1 python:
     def known_people_at_location(location, excluded_people = []):
         excluded = set(excluded_people)
         excluded.update(unique_characters_not_known())
-        return [x for x in location.people if x.is_available and not x in excluded and x.title]
+        return [x for x in location.people if x.is_available and not x in excluded and x.title and x.mc_title != "Stranger"]
 
     @lru_cache_function(max_size=3, expiration=3)
     def unknown_people_in_the_game(excluded_people = [], excluded_locations = []):
@@ -78,7 +78,7 @@ init -1 python:
         return list(unknown_people)
 
     def unknown_people_at_location(location, excluded_people = []):
-        return [x for x in location.people if x.is_available and not x in excluded_people and not x.title]
+        return [x for x in location.people if x.is_available and not x in excluded_people and (not x.title or x.mc_title == "Stranger")]
 
     def people_in_mc_home(excluded_people = []):
         return [x for x in hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people if x.is_available and not x in excluded_people]

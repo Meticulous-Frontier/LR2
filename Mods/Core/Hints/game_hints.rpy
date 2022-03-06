@@ -94,12 +94,6 @@ init -1 python:
         return True
 
 init 2:
-    # remove research reminder crisis (we have a hint for it)
-    python:
-        found = find_in_list(lambda x: x[0].effect == "research_reminder_crisis_label", crisis_list)
-        if found:
-            crisis_list.remove(found)
-
     screen game_hints_tooltip():
         $ count = number_of_hints()
         $ hint_height = 90

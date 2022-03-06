@@ -10,7 +10,7 @@ init 1 python:
 
 
     def anal_fetish_family_intro_requirement(the_person):
-        if the_person.location == the_person.home:
+        if the_person.is_home():
             if the_person.location.get_person_count() == 1: #She is alone in her bedroom
                 return True
         return False
@@ -417,8 +417,7 @@ label anal_fetish_generic_intro_label(the_person):
             mc.name "Let's find somewhere private first."
         "Too busy":
             mc.name "I'm sorry [the_person.title], but I just wanted to talk about something."
-            $ the_person.change_love(-2)
-            $ the_person.change_happiness(-5)
+            $ the_person.change_stats(happiness = -5, love = -2)
             the_person "Ah, okay. I see."
             $ abort_anal_fetish_intro(the_person)
             return False
@@ -491,7 +490,7 @@ label anal_fetish_generic_intro_label(the_person):
     the_person "I... I think you might be right... I..."
     $ the_person.break_taboo("anal_sex")
     "She stops mid sentence as you give her a quick thrust."
-    mc.name "It's okay to admit you are a buttslut. Now, lets just make sure you needs are sated before we part ways."
+    mc.name "It's okay to admit you are a buttslut. Now, let's just make sure you needs are sated before we part ways."
     "[the_person.possessive_title] is unable to reply as you begin to fuck her ass. It's time to show her just how good you can make her feel that way."
     call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True, skip_condom = True) from _call_fuck_person_anal_fetish_intro_generic_01
     #$ the_person.SB_fetish = "anal sex"

@@ -9,24 +9,32 @@ init -1 python:
 
     def add_pheromone_therapy_serum():
         pher_ther = SerumTraitMod(name = "Pheromone Therapy",
+<<<<<<< HEAD
                 desc = "By mimicking pheromones found in closely related animals, this serum can recreate feelings of going into heat in women.",
                 positive_slug = "+$40 Value, +15 Sluttiness",
                 negative_slug = "+200 Serum Research",
                 research_added = 200,
+=======
+            desc = "By mimicking pheromones found in closely related animals, this serum can recreate feelings of going into heat in women.",
+            positive_slug = "+15 Sluttiness",
+            negative_slug = "",
+            research_added = 200,
+>>>>>>> 6e6cb5b2a2e133ad3fbdb0a9cee754ecc1301374
         #     slots_added = a_number,
         #     production_added = a_number,
         #     duration_added = a_number,
-                base_side_effect_chance = 20,
-                on_apply = pheremone_therapy_on_apply,
-                on_remove = pheremone_therapy_on_remove,
+            base_side_effect_chance = 20,
+            on_apply = pheremone_therapy_on_apply,
+            on_remove = pheremone_therapy_on_remove,
         #     on_turn = a_function,
         #     on_day = a_function,
         #     requires = [list_of_other_traits],
-                tier = 2,
-                start_researched =  False,
-                research_needed = 800,
-                clarity_cost = 1500,
-                start_enabled = False
+            tier = 2,
+            start_researched =  False,
+            research_needed = 800,
+            clarity_cost = 1500,
+            mental_aspect = 5, physical_aspect = 0, sexual_aspect = 5, medical_aspect = 0, flaws_aspect = 0, attention = 2,
+            start_enabled = False
         #     exclude_tags = [list_of_other_tags],
         #     is_side_effect = a_bool),
                 mental_aspect = 5, physical_aspect = 0, sexual_aspect = 7, medical_aspect = 0, flaws_aspect = 0, attention = 2

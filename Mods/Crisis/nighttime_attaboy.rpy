@@ -14,7 +14,7 @@ init -1 python:
 
 init 2 python:
     crisis_nighttime_attaboy_action = ActionMod("Bedtime Sext", crisis_nighttime_attaboy_requirement, "crisis_nighttime_attaboy_label",  #Using ActionMod automatically adds this event to the crisis list
-        menu_tooltip = "A sexy text from a satisfied lover.", category = "Home", is_crisis = True, is_morning_crisis = False, crisis_weight = 5)   #Categories include Home, Business, Fetish
+        menu_tooltip = "A sexy text from a satisfied lover.", category = "Home", is_crisis = True, is_morning_crisis = False)   #Categories include Home, Business, Fetish
 
 
 init 1 python:

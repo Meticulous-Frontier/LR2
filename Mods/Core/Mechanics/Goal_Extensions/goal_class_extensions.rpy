@@ -24,7 +24,7 @@ init -1 python:
 
     def goal_toggle_enabled(self):
         def enable_in_list(the_goal, the_list):
-            found = find_in_list(lambda x: x.hash() == self.hash(), the_list)
+            found = next((x for x in the_list if x.name == the_goal.name), None)
             if not found:
                 the_list.append(the_goal)
                 the_goal.enabled = True
@@ -32,7 +32,7 @@ init -1 python:
         def disable_in_list(the_goal, the_list):
             if __builtin__.len(the_list) < 3: # minimum of two active items
                 return
-            found = find_in_list(lambda x: x.hash() == self.hash(), the_list)
+            found = next((x for x in the_list if x.name == the_goal.name), None)
             if found:
                 the_list.remove(found)
                 the_goal.enabled = False
@@ -65,11 +65,11 @@ init -1 python:
             return 1
         else:
             return -1
-    
+
     Goal.__cmp__ == goal__cmp__
 
     def goal__hash__(self):
-        return hash((self.name))
+        return hash(self.name)
 
     Goal.__hash__ = goal__hash__
     Goal.hash = goal__hash__

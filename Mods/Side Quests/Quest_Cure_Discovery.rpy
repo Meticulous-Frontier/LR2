@@ -98,7 +98,7 @@ init 1 python:
 
     def quest_cure_discovery_market_patent_requirement(the_person):
         if mc.business.is_open_for_business():
-            if the_person.location == the_person.work:
+            if the_person.is_at_work():
                 return True #Only while she is at work
         return False
 
@@ -187,9 +187,13 @@ label quest_cure_discovery_intro_label():
     if the_target == alexia:
         the_person "She's a recent college graduate and seems to have a good handle on things over there. I bet she could manage it!"
         mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
+    elif the_target == lily or the_person == mom or the_person == cousin or the_person == aunt:
+        the_person "Corporate espionage is huge, and a discovery like this could make big waves."
+        the_person "You should probably ask someone you can trust to handle this, like someone from your family."
+        mc.name "Good idea. I'll talk to her as soon as I can."
     else:
         the_person "Yeah, I think she actually has experience doing something similar at a previous job. I bet she could help out!"
-        mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
+        mc.name "Noted. I'm not sure I'll have the time, but I'll talk to her when I can."
     the_person "If I were you, I'd get on it, quick! Modern day drug research is extremely fast paced. No telling when another lab might replicate our findings..."
     mc.name "Thank you, [the_person.title], for your research and for bringing this to my attention."
     "So... you should talk to [the_target.possessive_title] about selling your patent rights to the cure for [the_disease]."
@@ -211,6 +215,12 @@ label quest_cure_discovery_market_patent_label(the_person):
     if the_person == alexia:
         mc.name "We made a big discovery in the research lab, but it is too big for our production department to handle. I was wondering if you could look into selling some patent rights."
         the_person "Oh? I think I could handle something like that. What is the patent for?"
+        mc.name "Our research department made a discovery related to a possible treatment for [the_disease]."
+    elif the_person == lily or the_person == mom or the_person == cousin or the_person == aunt:
+        mc.name "We made a big discovery in the research lab, but it is too big for our production department to handle. I was wondering if you could look into selling some patent rights."
+        the_person "Oh? Why... why would you ask me to do that?"
+        mc.name "If word gets out that we made this discovery, we might be the target of some bad actors. I need someone I can trust to handle this. Someone from the family."
+        the_person "Okay, what is the discovery?"
         mc.name "Our research department made a discovery related to a possible treatment for [the_disease]."
     else:
         mc.name "Well, I heard that you might have some prior experience working with drug patent rights..."
@@ -242,22 +252,22 @@ label quest_cure_discovery_patent_sold_label():
     if quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 0:
         the_person "Well, [the_disease] has very few cases annually, so the prospects of a lucrative deal for the patent rights were pretty slim."
         the_person "After negotiating, I was able to sell them for $1500. I hope that is okay."
-        $ mc.business.funds += 1500
+        $ mc.business.change_funds(1500)
         mc.name "I understand. That is still very helpful. Thank you [the_person.title]."
     elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 1:
         the_person "Well, [the_disease] really only propagates in poor, tropical areas, due to the way it spreads."
         the_person "While the good this drug can do is great, the profit potential is pretty low. I was only able to sell it for $3500. I hope that is okay."
-        $ mc.business.funds += 3500
+        $ mc.business.change_funds(3500)
         mc.name "Thank you [the_person.title], I just hope the drug can be put to good use."
     elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 2:
         the_person "[the_disease] is widespread in the developed world. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
         the_person "After negotiating, I was able to sell the patent for $15000. I hope that is okay."
-        $ mc.business.funds += 15000
+        $ mc.business.change_funds(15000)
         mc.name "That is still a considerable sum. Thank you [the_person.title]."
     elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) >= 3:
         the_person "[the_disease] is widespread in older populations. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
         the_person "After negotiating, I was able to sell the patent for $50000. I hope that is okay."
-        $ mc.business.funds += 50000
+        $ mc.business.change_funds(50000)
         mc.name "That is still a significant sum. Thank you [the_person.title]."
     $ mc.end_text_convo()
     "The patent is sold! And you made a little extra money for the business."

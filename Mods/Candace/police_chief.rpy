@@ -31,11 +31,17 @@ init 5 python:
             common_sexy_dislikes = ["being submissive", "bareback sex", "skimpy outfit", "showing her tits", "showing her ass", "not wearing underwear", "cum facials", "incest"],
             titles_function = police_chief_titles, possessive_titles_function = police_chief_possessive_titles, player_titles_function = reserved_player_titles)
 
+        police_job = Job("Police Chief", critical_job_role, police_station, work_times = [1, 2])
+        police_job.schedule.set_schedule(mall, the_days = [0,2,4], the_times = [1]) #patrol mall
+        police_job.schedule.set_schedule(downtown, the_days=[1,3], the_times=[2]) # patrol downtown
+        police_job.schedule.set_schedule(downtown_bar, the_days=[5,6], the_times=[3]) # patrol bar
+        police_job.schedule.set_schedule(strip_club, the_days=[5,6], the_times=[4]) # patrol strip club (Does she have a kinky side?)
+
         global police_chief
         police_chief = make_person(name = "Christine", last_name = "Lavardin", age = 34, body_type = "thin_body", face_style = "Face_4", tits = "C", height = 0.91, \
             hair_colour = ["knight red", [0.745, 0.117, 0.235,1]], hair_style = short_hair, skin="white", eyes = "emerald", name_color = "#fcf7de", dial_color = "#fcf7de",  \
             stat_array = [4,6,2], skill_array = [2,1,4,1,2], sex_array = [0,1,1,4], start_sluttiness = -20, start_obedience = -40, start_happiness = 89, start_love = 0, \
-            generate_insta = False, generate_dikdok = False, generate_onlyfans = False, relationship = "Single", \
+            generate_insta = False, generate_dikdok = False, generate_onlyfans = False, relationship = "Single", job = police_job, \
             kids = 0, force_random = True, starting_wardrobe = police_chief_wardrobe, personality = police_chief_personality,
             forced_opinions = [
                 ["pants", 2, False],
@@ -57,12 +63,6 @@ init 5 python:
             ])
         police_chief.idle_pose = "stand3"   # forced idle pose
         police_chief.generate_home()
-        police_chief.set_schedule(police_chief.home, times = [0,4])
-        police_chief.set_schedule(police_station, times = [1,2,3])  # for now no free-roam (workaholic)
-        police_chief.set_schedule(mall, days=[0,2,4], times=[1]) # patrol mall
-        police_chief.set_schedule(downtown, days=[1,3], times=[2]) # patrol downtown
-        police_chief.set_schedule(downtown_bar, days=[5,6], times=[3]) # patrol bar
-        police_chief.set_schedule(strip_club, days=[5,6], times=[4]) # patrol strip club (Does she have a kinky side?)
         police_chief.home.add_person(police_chief)
         return
 

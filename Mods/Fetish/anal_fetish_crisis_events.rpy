@@ -30,13 +30,13 @@ init 2 python:
         return get_random_from_list([x for x in known_people_in_the_game() if x.is_family() and x.has_anal_fetish()])
 
     aggressive_anal_fetish_employee = ActionMod("Employee wants anal", aggressive_anal_employee_requirement, "aggressive_anal_fetish_employee_label",
-        menu_tooltip = "An employee needs her anal fetish fulfilled", category = "Fetish", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "An employee needs her anal fetish fulfilled", category = "Fetish", is_crisis = True)
 
     aggressive_anal_fetish_non_employee = ActionMod("Someone wants anal", aggressive_anal_fetish_non_employee_requirement, "aggressive_anal_fetish_non_employee_label",
-        menu_tooltip = "Someone needs her anal fetish fulfilled", category = "Fetish", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "Someone needs her anal fetish fulfilled", category = "Fetish", is_crisis = True)
 
     anal_fetish_employee_evening_approach = ActionMod("Employee evening anal request", anal_fetish_employee_evening_approach_requirement, "anal_fetish_employee_evening_approach_label",
-        menu_tooltip = "An employee asks for anal after the office closes", category = "Fetish", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "An employee asks for anal after the office closes", category = "Fetish", is_crisis = True)
 
 label aggressive_anal_fetish_employee_label():
     $ the_person = get_needy_anal_fetish_employee()

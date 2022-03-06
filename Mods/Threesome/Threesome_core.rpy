@@ -579,6 +579,11 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     else:
         $ the_person_two.arousal = (the_person_two.arousal / 2)
 
+    #Easy marker to add to log if EVERYONE orgasmed
+    if report_log["girl one orgasms"] > 0 and report_log["girl two orgasms"] > 0 and report_log["guy orgasms"] > 0:
+        $ report_log["trifecta"] == True
+
+
 
     #Disabling affair check for now. Doesn't really make sense in a threesome.
     # if affair_ask_after and private and ask_girlfriend_requirement(the_person_one) is True and not the_person_one.relationship == "Single":
@@ -737,7 +742,7 @@ label threesome_strip_menu(the_person_one, the_person_two):
     return
 
 label join_threesome(the_person_one, the_person_two, initial_position, private = True, report_log = None):  #We can use this function to add a second girl to an existing sex scene.
-                                                                         #Works by selecting a position then calling threesome with the first position pre-set
+    #Works by selecting a position then calling threesome with the first position pre-set
     $ girl_swap_pos = False # reset swapped
     call pick_threesome(the_person_one, the_person_two, girl_one_position = initial_position) from _join_threesome_position_selection_1
     $ position_choice = _return

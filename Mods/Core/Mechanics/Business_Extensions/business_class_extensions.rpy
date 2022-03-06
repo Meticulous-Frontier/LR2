@@ -68,27 +68,27 @@ init -1 python:
             underwear_limit = 999
             limited_to_top = False
         elif corporate_enforced_nudity_policy.is_active():
-            slut_limit = 90
+            slut_limit = 80
             underwear_limit = 999
             limited_to_top = False
         elif minimal_coverage_uniform_policy.is_active():
-            slut_limit = 70
+            slut_limit = 60
             underwear_limit = 30
             limited_to_top = False
         elif reduced_coverage_uniform_policy.is_active():
-            slut_limit = 50
+            slut_limit = 40
             underwear_limit = 15
             limited_to_top = False
         elif casual_uniform_policy.is_active():
-            slut_limit = 35
+            slut_limit = 30
             underwear_limit = 0
             limited_to_top = True
         elif relaxed_uniform_policy.is_active():
-            slut_limit = 25
+            slut_limit = 20
             underwear_limit = 0
             limited_to_top = True
         elif strict_uniform_policy.is_active():
-            slut_limit = 15
+            slut_limit = 10
             underwear_limit = 0
             limited_to_top = True
         else:
@@ -98,18 +98,6 @@ init -1 python:
         return slut_limit, underwear_limit, limited_to_top
 
     Business.get_uniform_limits = get_uniform_limits_enhanced
-
-    def update_employee_status(self, person):
-        if person.event_triggers_dict.get("employed_since", -1) == -1:
-            person.event_triggers_dict["employed_since"] = day
-            self.listener_system.fire_event("new_hire", the_person = person)
-
-        for other_employee in self.get_employee_list():
-            town_relationships.begin_relationship(person, other_employee) #They are introduced to everyone at work, with a starting value of "Acquaintance"
-
-        person.apply_outfit()   # make sure the wear the correct outfit (uniform if so needed)
-
-    Business.update_employee_status = update_employee_status
 
     def add_uniform_to_company(self, outfit, full_outfit_flag = False, overwear_flag = False, underwear_flag = False, research = True, production = True, supply = True, marketing = True, hr = True):
         uniform = UniformOutfit(outfit)
@@ -131,6 +119,23 @@ init -1 python:
         return
 
     Business.add_uniform_to_company = add_uniform_to_company
+
+    def production_progress_enhanced(self,focus,int,skill,multiplier = 1.0):
+        #First, figure out how many production points we can produce total. Subtract that much supply and mark that much production down for the end of day report.
+        production_amount = __builtin__.int(((3*focus) + int + (2*skill) + 10) * (self.team_effectiveness / 100.0) * multiplier)
+        self.production_potential += production_amount
+
+        if production_amount > self.supply_count:
+            production_amount = self.supply_count #Figure out our total available production, before we split it up between tasks (which might not have 100% usage!)
+
+        for line in self.production_lines:
+            supply_used = line.add_production(production_amount) #NOTE: this is modified by the weighted use of the Line in particular. This allows for greater than 100% efficency.
+            self.supply_count += - supply_used
+            self.production_used += supply_used
+
+        return production_amount
+
+    Business.production_progress = production_progress_enhanced
 
     def get_business_stripper_wardrobe(self):
         if not hasattr(self, "_stripper_wardrobe"):
@@ -231,44 +236,19 @@ init -1 python:
 
     Business.update_stripclub_wardrobes = update_stripclub_wardrobes
 
-    def hire_person(self, person, target_division, add_to_location = False):
-        div_func = {
-            "Research" : [ self.research_team, self.r_div],
-            "Production" : [ self.production_team, self.p_div],
-            "Supply" : [ self.supply_team, self.s_div ],
-            "Marketing" : [ self.market_team, self.m_div ],
-            "HR" : [ self.hr_team, self.h_div ]
-        }
-        if not person in div_func[target_division][0]:
-            div_func[target_division][0].append(person)
-        person.add_role(employee_role)
-        person.job = self.get_employee_title(person)
-        person.set_work(div_func[target_division][1])
-        if not person.title:
-            person.set_title(get_random_title(person))
-        if not person.possessive_title:
-            person.set_possessive_title(get_random_possessive_title(person))
-        if not person.mc_title or person.mc_title == "Stranger":
-            person.set_mc_title(get_random_player_title(person))
-        if add_to_location:
-            div_func[target_division][1].add_person(person)
-        self.update_employee_status(person)
-
-    Business.hire_person = hire_person
-
     def calculate_strip_club_income(self):
         income = 0
         if "get_strip_club_foreclosed_stage" in globals():
             if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
                 multiplier = 1
-                if __builtin__.len(people_in_role(manager_role)) > 0 or __builtin__.len(people_in_role(mistress_role)) > 0:
+                if __builtin__.len(people_in_role(stripclub_manager_role)) > 0 or __builtin__.len(people_in_role(stripclub_mistress_role)) > 0:
                     multiplier = 1.1 # +10% income
 
                 for person in known_people_in_the_game():
-                    if person.has_role([stripper_role, waitress_role, bdsm_performer_role]):
+                    if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role]):
                         income += (calculate_stripper_profit(person) * multiplier)  # profit
 
-                    if person.has_role([stripper_role, waitress_role, bdsm_performer_role, manager_role, mistress_role]):
+                    if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]):
                         income -= person.stripper_salary    # costs
 
         return income
@@ -283,7 +263,7 @@ init -1 python:
             # run extension code
             strip_club_income = business.calculate_strip_club_income()
             if strip_club_income != 0:
-                mc.business.funds += strip_club_income
+                mc.business.change_funds(strip_club_income, add_to_log = False)
                 mc.business.add_normal_message("The [strip_club.formal_name] has made a net profit of $" + str(__builtin__.round(strip_club_income, 1)) + " today!")
 
         return run_day_wrapper
@@ -311,8 +291,8 @@ init -1 python:
 
     # wrap default remove_employee function to also trigger the fire_HR_director code when needed
     def business_remove_employee_extended(org_func):
-        def remove_employee_wrapper(business, person, remove_linked = True):
-            org_func(business, person, remove_linked)
+        def remove_employee_wrapper(business, person):
+            org_func(business, person)
 
             if person is business.hr_director:
                 business.fire_HR_director()
@@ -434,8 +414,8 @@ init -1 python:
         if not person in div_func[target_division][0]:
             div_func[target_division][0].append(person)
         person.add_role(college_intern_role)
-        person.job = "Student Intern"
-        person.set_alt_schedule(div_func[target_division][1], days = [5,6], times = [1,2])
+        person.add_job(student_job)
+        person.set_override_schedule(div_func[target_division][1], the_days = [5,6], the_times = [1,2])
         if add_to_location:
             university.add_person(person)
         if person.event_triggers_dict.get("intern_since", -1) == -1:
@@ -463,8 +443,7 @@ init -1 python:
         else:
             pass    #Some kind of error here?
 
-        person.set_alt_schedule(None, days = [5,6], times = [1,2])
-        person.job = None
+        person.set_override_schedule(None, the_days = [5,6], the_times = [1,2])
         person.remove_role(college_intern_role)
         return
 

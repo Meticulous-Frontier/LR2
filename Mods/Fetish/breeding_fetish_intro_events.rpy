@@ -12,7 +12,7 @@ init -1 python:
         return False
 
     def breeding_fetish_family_intro_requirement(the_person):
-        if the_person.location == the_person.home:
+        if the_person.is_home():
             if the_person.location.get_person_count() == 1: #She is alone in her bedroom
                 return True
         return False
@@ -34,7 +34,7 @@ init -1 python:
 
     def breeding_fetish_stephanie_intro_requirement():
         if mc.business.is_open_for_business():
-            if stephanie.location == stephanie.work:
+            if stephanie.is_at_work():
                 if renpy.random.randint(0,100) < 25:
                     return True
         return False
@@ -46,7 +46,7 @@ init -1 python:
         return False
 
     def breeding_fetish_starbuck_intro_requirement():
-        if starbuck.shop_progress_stage > 0:
+        if sex_shop_stage() > 0:
             if time_of_day == 3:
                 return True
         return False
@@ -332,8 +332,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
             return
         "Not now":
             mc.name "I'm sorry [the_person.title], I've got errands to accomplish. Maybe another time."
-            $ the_person.change_love(-2)
-            $ the_person.change_happiness(-5)
+            $ the_person.change_stats(happiness = -5, love = -2)
             the_person "Ah, okay. I see."
             return False
 

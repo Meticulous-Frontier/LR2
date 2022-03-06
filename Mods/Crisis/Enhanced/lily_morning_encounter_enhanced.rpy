@@ -238,8 +238,7 @@ label lily_morning_encounter_follow_up_one_label(the_person):
     the_person "Oh, [the_person.mc_title] I thought you were going to the kitchen."
     mc.name "I was, but I don't think I can leave you like this in good conscience."
     the_person "That is so sweet, I was worried I would have to take care of myself before I could think about school for the day."
-    $ the_person.change_love(3)
-    $ the_person.change_happiness(5)
+    $ the_person.change_stats(happiness = 5, love = 3)
     if the_person.outfit.wearing_panties():
         $ the_person.outfit.strip_to_vagina()
         "As you step towards her she drops her panties off her hips to the floor."
@@ -357,15 +356,15 @@ label lily_morning_encounter_follow_up_two_label(the_person):
             mc.name "Now get over here [the_person.title]."
             menu:
                 "Get a handjob":
-                    call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False, ) from _call_lily_morning_encounter_handjob_02
+                    call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_lily_morning_encounter_handjob_02
 
-                "Force her to her knees" if not the_person.has_taboo("sucking_cock"):
+                "Force her to her knees" if the_person.is_willing(blowjob):
                     call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = False, position_locked = True) from _call_lily_morning_encounter_kitchenblow
 
-                "Lay her on the table" if not the_person.has_taboo("vaginal_sex"):
+                "Lay her on the table" if the_person.is_willing(missionary):
                     call fuck_person(the_person, private = False, start_position = missionary, start_object = make_table(), skip_intro = False) from _call_lily_morning_encounter_kitchenfuck
 
-                "Bend her over the table" if not the_person.has_taboo("anal_sex"):
+                "Bend her over the table" if the_person.is_willing(spanking):
                     call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False) from _call_lily_morning_encounter_kitchenspank4
 
     else:
@@ -395,7 +394,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                     $ mc.change_arousal(15)
                 call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False, ) from _call_lily_morning_encounter_handjob_01
 
-            "Force her to her knees" if not the_person.has_taboo("sucking_cock"):
+            "Force her to her knees" if the_person.is_willing(blowjob):
                 $ scene_manager.update_actor(the_person, position = "kneeling1")
                 "You run your hand up her arm to her shoulder and firmly push her down to her knees."
                 mc.name "I think you need to get a closer look at the problem, maybe see if you can find a solution."
@@ -433,7 +432,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                     mc.name "Don't be shy [the_person.title], I know how much you want this."
                     call fuck_person(the_person, private = True, start_position = blowjob, skip_intro = True, position_locked = True) from _call_lily_morning_encounter_kitchenblow3
 
-            "Lay her on the table" if not the_person.has_taboo("vaginal_sex"): # only show sex option if you had sex before
+            "Lay her on the table" if the_person.is_willing(missionary): # only show sex option if you had sex before
                 $ scene_manager.strip_to_vagina(the_person, visible_enough = True, prefer_half_off = True)
                 $ scene_manager.update_actor(the_person, position = "missionary")
                 "Putting your other hand on [the_person.title]'s shoulder you gently guide her to the table and push her back to sit on the top."
@@ -496,7 +495,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                 else:
                     call fuck_person(the_person, private = False, start_position = missionary, start_object = make_table(), skip_intro = True) from _call_lily_morning_encounter_kitchenfuck3
 
-            "Bend her over the table":
+            "Bend her over the table" if the_person.is_willing(spanking):
                 "Already hard from the teasing in the hallway you waste no time forcing [the_person.title] over to the table."
                 $ scene_manager.strip_to_vagina(the_person, visible_enough = True, prefer_half_off = True)
                 $ scene_manager.update_actor(the_person, position = "standing_doggy")

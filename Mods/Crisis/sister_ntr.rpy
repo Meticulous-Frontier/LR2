@@ -1,8 +1,5 @@
 ## Sister NTR Crisis Mod by Tristimdorion
 # Based on the Pilotus13 Vanilla extension
-init -1 python:
-    sister_ntr_mod_weight = 5
-
 init 3 python:
     def sister_ntr_crisis_requirement():
         if mc_asleep():
@@ -34,9 +31,9 @@ init 3 python:
     sister_ntr_mod_action = ActionMod("Sister NTR",sister_ntr_crisis_requirement,"sister_ntr_crisis_action_label",
         menu_tooltip = "At night you hear strange sounds out of [lily.possessive_title]'s bedroom", category = "NTR",
         initialization = init_action_mod_disabled,
-        is_crisis = True, crisis_weight = sister_ntr_mod_weight)
+        is_crisis = True)
 
-label sister_ntr_crisis_action_label:
+label sister_ntr_crisis_action_label():
     ## Lily studying with her friends
     $ the_person = lily
     "While trying to fall asleep, you're disturbed by some noise down the hallway."
@@ -68,7 +65,7 @@ label sister_ntr_crisis_action_label:
             "They go back to kissing. [man_name] moves his hands to [the_person.possessive_title] butt and starts caressing it."
             the_person "Mmmmm... Your hands are so gentle..."
             "You see [man_name] starts to undress [the_person.possessive_title]."
-            $ the_person.strip_outfit_to_max_sluttiness(narrator_messages = "He takes off [the_person.possessive_title]'s [strip_choice.name] and throws it on a chair.")
+            $ the_person.strip_outfit_to_max_sluttiness(narrator_messages = "He takes off [the_person.possessive_title]'s [strip_choice.display_name] and throws it on a chair.")
             the_person "Hold it there, [man_name]. I'm not ready for this. Hope you understand."
             "You see a glimpse of disappointment on man's face, but he regains himself."
             man_name "Sorry, [the_person.name]. I understand."
@@ -78,7 +75,7 @@ label sister_ntr_crisis_action_label:
             man_name "Thanks for the evening, [the_person.name]. Say, how about we have a lunch at the cafe next to college tomorrow?"
             the_person "Oh, I like that, [man_name]. I'll give you a call after the class, ok?"
             man_name "Great. See you tomorrow then!"
-            $ the_person.sluttiness += 2
+            $ the_person.change_slut(2, 40)
             "You get back to your room and don't even hear the front door closing. You fall asleep quickly."
         else:
             $ the_person.strip_outfit_to_max_sluttiness()

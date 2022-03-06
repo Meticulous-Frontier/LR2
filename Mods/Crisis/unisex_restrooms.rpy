@@ -1,9 +1,5 @@
 #This is a crisis series for changing company restrooms to unisex. As the girls in the company get sluttier and sluttier, the crisis changes to reflect the corrupted nature.
 #At first, you may only over hear conversations. Then girls talking about sexual fantasies, then gloryhole options.
-
-init -1 python:
-    unisex_restroom_mod_weight = 8
-
 init 1301 python:
 
     def unisex_bathroom_creation_requirement():
@@ -82,7 +78,7 @@ init 2 python:
         return anon_person
 
     unisex_restroom_crisis_action = ActionMod("Unisex Restroom", unisex_restroom_crisis_requirement,"unisex_restroom_action_label",
-        menu_tooltip = "Change company restrooms the unisex and enjoy the results.", category="Business", is_crisis = True, crisis_weight = unisex_restroom_mod_weight)
+        menu_tooltip = "Change company restrooms the unisex and enjoy the results.", category="Business", is_crisis = True)
 
 label unisex_restroom_action_label():
     if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) == 0:  #unisex restroom not yet created. Go to suggestion label
@@ -335,15 +331,18 @@ label unisex_restroom_fantasy_actout_label(the_person):
     "Without saying a word, you push yourself into her slick fuckhole. It feels amazing."
     call fuck_person(the_person, start_position = SB_doggy_standing, start_object = mc.location.get_object_with_name("desk"), skip_intro = True, skip_condom = True, private = False, position_locked = True) from _call_fantasy_actout_1
     $ the_report = _return
-    if the_report.get("girl orgasms", 0) > 0:
+    if the_report.get("is_angry", False):
+        the_person "I'm sorry [the_person.mc_title], I didn't want it to go this far."
+        mc.name "I understand, it was just a spur of the moment."
+        the_person "Maybe next time..."
+        $ the_person.change_stats(happiness = -5, obedience = 1)
+    elif the_report.get("girl orgasms", 0) > 0:
         the_person "Oh god, it was even better than I thought... oh my god."
         $ the_person.increase_opinion_score("public sex")
-        $ the_person.change_happiness(10)
-        $ the_person.change_slut(3)
+        $ the_person.change_stats(happiness = 10, slut = 3, max_slut = 60)
     else:
         the_person "Fuck... I need to finish so bad! Why can't I just get off today?"
-        $ the_person.change_happiness(-10)
-        $ the_person.change_love(-5)
+        $ the_person.change_stats(happiness = -10, love = -5)
 
     $ the_person.review_outfit()
     return
@@ -452,7 +451,7 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     anon_char "Oh!"
     "The hand never stops stroking you as you start to blow your load. Thank god whoever it is knows how to finish the job!"
     $ the_person.cum_on_face(add_to_record = False)
-    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
+    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person, add_to_log = False)
     "After you finishes, she gives you a few extra strokes, drawing out any remaining cum. You feel a pair of lips lightly kiss the tip."
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
 
@@ -496,7 +495,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     "With a moan, you feel yourself pushed too far. It feels like your cock explodes as you begin to dump your load into her gullet."
     anon_char "Oh! Ummmfff.... mmmmmmmm..."
     $ the_person.cum_in_mouth(add_to_record = False)
-    $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
+    $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person, add_to_log = False)
     "She moans in delight as your cream fills her mouth. She eagerly works every last drop from your pulsating prick."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
@@ -546,7 +545,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     anon_char "Yes. Yes! Oh fuck yes!"
     $ the_person.have_orgasm(add_to_log = False)
     $ the_person.cum_in_vagina(add_to_record = False)
-    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
+    $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person, add_to_log = False)
     "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
     if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
         anon_char "Wait a minute, let me clean that up for you."
@@ -604,7 +603,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     anon_char "Yes! Fuck my ass! YES!"
     $ the_person.have_orgasm(add_to_log = False)
     $ the_person.cum_in_ass(add_to_record = False)
-    $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person)
+    $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person, add_to_log = False)
     "You cum as deep inside her ass as you can manage. Your cum spurts deep inside her bowel, farther than your cock can penetrate."
     if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
         anon_char "Wait a minute, let me clean that up for you."
@@ -686,7 +685,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
 
             $ the_person.have_orgasm(add_to_log = False)
             $ the_person.cum_in_vagina(add_to_record = False)
-            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
+            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person, add_to_log = False)
             "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
             if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
                 anon_char "Wait a minute, let me clean that up for you."

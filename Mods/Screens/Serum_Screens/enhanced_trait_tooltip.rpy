@@ -15,22 +15,24 @@ init 2:
                 xalign 0.5
                 frame:
                     background "#000080"
-                    xsize 505
+                    xsize 525
                     text the_trait.name + (" (C)" if isinstance(the_trait, SerumTraitBlueprint) else ""):
                         style "menu_text_title_style"
                         xalign 0.5
+
+                use aspect_grid(the_trait)
 
                 hbox:
                     spacing 5
                     frame:
                         background "#43B197"
-                        xsize 250
+                        xsize 260
                         xfill True
                         text the_trait.positive_slug style "serum_text_style_traits"
 
                     frame:
                         background "#B14365"
-                        xsize 250
+                        xsize 260
                         xfill True
                         text the_trait.build_negative_slug() style "serum_text_style_traits"
                 frame:
@@ -42,14 +44,14 @@ init 2:
                 if len(unlockable_traits) > 0:
                     frame:
                         background "#000000"
-                        xsize 505
+                        xsize 525
                         text "Required for Traits" style "menu_text_title_style" xalign 0.5
 
                     frame:
                         background "#000080"
-                        xsize 505
+                        xsize 525
                         viewport:
-                            xsize 485
+                            xsize 505
                             ysize min(len(unlockable_traits) * 24, 580)
                             scrollbars "vertical"
                             mousewheel True

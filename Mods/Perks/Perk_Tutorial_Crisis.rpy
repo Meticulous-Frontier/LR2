@@ -26,8 +26,7 @@ label Perk_Tutorial_Crisis_label():
     "You get up and follow your mom to her room."
     the_person "Thank you! I just had this overwhelming urge to move some of my furniture around. You know how it is, once you get the urge it's hard to put it off..."
     "You help [the_person.possessive_title] move her furniture around. She seems extremely grateful."
-    $ the_person.change_love(5)
-    $ the_person.change_happiness(5)
+    $ the_person.change_stats(happiness = 5, love = 3)
     the_person "Thank you! This means a lot to me!"
     "You say goodnight and then head back to bed."
     $ scene_manager.clear_scene()

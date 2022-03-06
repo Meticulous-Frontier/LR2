@@ -118,16 +118,18 @@ init 5 python:
         return True
 
     def HR_director_first_monday_requirement():
-        if day%7 == 0 and time_of_day == 1: #Monday
-            return True
-        return False
+        return day%7 == 0 and time_of_day == 1 #Monday
 
     def HR_director_monday_meeting_requirement():
         if not mc.business.hr_director or not mc.business.hr_director.is_available:
             return False
-        if day%7 == 0 and time_of_day == 1: #Monday
-            return True
-        return False
+        return day%7 == 0 and time_of_day == 1 #Monday
+
+    # override attention event to not trigger on mondays when we have HR meetings
+    def attention_event_requirement():
+        if HR_director_monday_meeting_requirement():
+            return False
+        return mc.business.is_work_day() and time_of_day == 1
 
     def HR_director_fire_requirement():
         return True
@@ -137,7 +139,7 @@ init 5 python:
             return False
         if get_HR_director_tag("business_HR_serum_tier", 0) == 0:
             return False
-        if mc.business.funds < 500:
+        if not mc.business.has_funds(500):
             return "Requires: $500"
         if not mc.is_at_work():
             return "Only in the office"
@@ -150,7 +152,7 @@ init 5 python:
             return False
         if get_HR_director_tag("business_HR_serum_tier", 0) <= 1:
             return False
-        if mc.business.funds < 1500:
+        if not mc.business.has_funds(1500):
             return "Requires: $1,500"
         if not mc.is_at_work():
             return "Only in the office"
@@ -179,7 +181,7 @@ init 5 python:
     def HR_director_mind_control_requirement(the_person):
         if get_HR_director_tag("business_HR_serum_tier", 0) != 3:
             return False
-        if mc.business.funds < 5000:
+        if not mc.business.has_funds(5000):
             return "Requires: $5,000"
         if not mc.is_at_work():
             return "Only in the office"
@@ -395,7 +397,7 @@ label HR_director_initial_hire_label(the_person):
         if the_person.is_employee():
             mc.business.remove_employee(the_person)
 
-        mc.business.hire_person(the_person, "HR")
+        mc.business.add_employee_hr(the_person)
 
         # assign special HR director role
         mc.business.hr_director = the_person
@@ -412,7 +414,7 @@ label HR_director_first_monday_label(the_person):
         "Since you have no HR director, there are no Monday morning meetings, appoint a new HR director, to resume meetings."
         return
 
-    "It's lunchtime, so you prepare to have your first meeting with your new HR Direction, [the_person.title]."
+    "It's lunchtime, so you prepare to have your first meeting with your new HR Director, [the_person.title]."
     "You grab your lunch from the break room, head to your office, and sit down."
     $ scene_manager = Scene()
     $ mc.change_location(office)
@@ -1430,7 +1432,7 @@ label HR_director_sexy_meeting_start_label(the_person):
     elif ((the_person.obedience - 100) + the_person.sluttiness) > 100: #If she is either very obedient, slutty, or a mixture
         menu:
             "Tell her to stay like that for the meeting":
-                mc.name "I'm very busy, lets just continue the meeting. Don't bother to clean up."
+                mc.name "I'm very busy, let's just continue the meeting. Don't bother to clean up."
                 "[the_person.title] opens her mouth for a second, ready to protest, but quickly reconsiders."
                 the_person "Of course, [the_person.mc_title]. Let's see what is next."
                 $ mc.change_locked_clarity(20)
@@ -1553,7 +1555,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     #TODO the rest of this encounter. Go see her, pay her with sexual favors, etc.
     return
 
-label HR_director_appointment_action_label:
+label HR_director_appointment_action_label():
     call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])]))
     $ person_choice = _return
 
@@ -1749,8 +1751,12 @@ init 1200 python:
         main_skill = renpy.random.randint(5,7)
         other_stat = 0
 
+        sex_skill = 5
+        if recruitment_sex_improvement_policy.is_active():
+            sex_skill = renpy.random.randint(5,7)
+
         min_slut = (get_HR_director_tag("recruit_slut", 0) or 0) // 10
-        sex_array = [renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5), renpy.random.randint(min_slut,5)]
+        sex_array = [renpy.random.randint(min_slut,sex_skill), renpy.random.randint(min_slut,sex_skill), renpy.random.randint(min_slut,sex_skill), renpy.random.randint(min_slut,sex_skill)]
 
         # extra boost / penalty for focused recruit
         if get_HR_director_tag("recruit_focused", False) == True:

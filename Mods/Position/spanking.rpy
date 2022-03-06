@@ -100,15 +100,15 @@ label scene_spanking_1(the_girl, the_location, the_object):
     "*SMACK* *SMACK* SMACK*"
     "You don't let up, giving her a solid spanking."
     if spank_factor > 5: #She loves it.
-         the_girl "Oh god [the_girl.mc_title]! Give it to me good! Oh god!"
-         "She is really getting into this. With each spank she wiggles her ass, giving you an enticing target."
-         $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
-         $ the_girl.change_slut(spank_factor - 5)
+        the_girl "Oh god [the_girl.mc_title]! Give it to me good! Oh god!"
+        "She is really getting into this. With each spank she wiggles her ass, giving you an enticing target."
+        $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
+        $ the_girl.change_slut(spank_factor - 5)
     elif spank_factor > 0:
-         the_girl "Oh... I'm sorry [the_girl.mc_title]! Oh god..."
-         "She keeps her ass still, taking your blows. Her ass makes an enticing target."
-         $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
-         $ the_girl.change_obedience(spank_factor)
+        the_girl "Oh... I'm sorry [the_girl.mc_title]! Oh god..."
+        "She keeps her ass still, taking your blows. Her ass makes an enticing target."
+        $ the_girl.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
+        $ the_girl.change_obedience(spank_factor)
     elif spank_factor > -5:
         the_girl "Ouch! I'm sorry [the_girl.mc_title]! That really hurts..."
         "With each spank, she flinches a bit."

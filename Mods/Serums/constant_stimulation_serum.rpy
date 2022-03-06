@@ -21,8 +21,8 @@ init -1 python:
     def add_constant_stimulation_serum():
         constant_stimulation_ther = SerumTraitMod(name = "Constant Stimulation",
                 desc = "Slowly increases sluttiness. Strong wills can resist it, but it increases effect based on suggestibility.",
-                positive_slug = "Slowly increases sluttiness based on suggestibility, +$15 Value",
-                negative_slug = "+100 Serum Research",
+                positive_slug = "Slowly increases sluttiness based on suggestibility",
+                negative_slug = "",
                 research_added = 100,
                 base_side_effect_chance = 50,
                 on_turn = constant_stimulation_on_turn,
@@ -30,7 +30,11 @@ init -1 python:
                 start_researched =  False,
                 research_needed = 500,
                 clarity_cost = 500,
+<<<<<<< HEAD
                 mental_aspect = 2, physical_aspect = 0, sexual_aspect = 5, medical_aspect = 0, flaws_aspect = 0, attention = 1
+=======
+                mental_aspect = 2, physical_aspect = 0, sexual_aspect = 5, medical_aspect = 0, flaws_aspect = 0, attention = 3
+>>>>>>> 6e6cb5b2a2e133ad3fbdb0a9cee754ecc1301374
             )
 
 

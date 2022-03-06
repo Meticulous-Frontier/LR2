@@ -10,9 +10,6 @@
 #
 #
 ###
-init -1 python:
-    milk_employee_crisis_weight = 5
-
 init 2 python:
     def milk_employee_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.get_employee_count() > 0:
@@ -23,7 +20,7 @@ init 2 python:
         return get_random_from_list([x for x in mc.business.get_employee_list() if x.lactation_sources > 0])
 
     milk_employee_crisis = ActionMod("Employee Needs Milked",milk_employee_requirement,"milk_employee_crisis_label",
-        menu_tooltip = "An employee is struggling to milk herself.", category = "Business", is_crisis = True, crisis_weight = milk_employee_crisis_weight)
+        menu_tooltip = "An employee is struggling to milk herself.", category = "Business", is_crisis = True)
 
 label milk_employee_crisis_label():
     $ the_person = select_girl_lactating()

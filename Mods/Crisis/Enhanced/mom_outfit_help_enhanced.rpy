@@ -331,7 +331,8 @@ label mom_outfit_help_crisis_label_enhanced():
             "[the_person.possessive_title] starts to take off her outfit. Saving her clothes for tomorrow you guess?"
             $ the_person.strip_outfit(exclude_lower = True)
             $ mc.change_locked_clarity(10)
-            if the_person.has_taboo("condomless_sex") or the_person.effective_sluttiness(["touching_penis", "sucking_cock"]) < 70: #Mid sluttiness path.
+            $ mc.change_arousal(20)
+            if the_person.has_taboo("condomless_sex") and the_person.is_willing(tit_fuck): #Mid sluttiness path.
                 "With her tits out, she starts to walk over to you."
                 the_person "I'm sure it was hard for you... to watch your mother undress like that... right in front of you..."
                 $ the_person.draw_person(position = "kissing")
@@ -342,7 +343,8 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ the_person.draw_person(position = "blowjob")
                 the_person "You have become such a virile young man..."
                 $ mc.change_locked_clarity(20)
-                if the_person.get_opinion_score("giving blowjobs") > the_person.get_opinion_score("giving tit fucks"):
+                $ mc.change_arousal(10)
+                if the_person.is_willing(blowjob) and the_person.get_opinion_score("giving blowjobs") >= the_person.get_opinion_score("giving tit fucks"):
                     "[the_person.possessive_title]'s lips part and she runs the tip of your cock back and forth across her tongue."
                     if the_person.has_taboo("sucking_cock"):
                         the_person "Oh my god... I just can't stop myself. I'm sorry honey, I know I should be doing this..."
@@ -364,15 +366,23 @@ label mom_outfit_help_crisis_label_enhanced():
                     "[the_person.possessive_title] slowly starts to rock her body up and down, stroking your cock with her tits."
                     call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_02
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"
-            else:
+            elif the_person.is_willing(SB_doggy_standing):
                 the_person "I mean... you are such a virile young man... maybe you could think of some way I could thank you..."
                 "[the_person.possessive_title] turns around and bends over as she starts to take off what is left over her outfit. She takes her time..."
                 $ the_person.strip_outfit(position = "standing_doggy")
                 "When she finishes, she stays bent over her bed. Her hips wiggle back and forth a bit, making it obvious what she has in mind..."
                 $ mc.change_locked_clarity(20)
+                $ mc.change_arousal(10)
                 "It's been a long day, but you still got some energy left, so you decide to have your way with her. You pull your dick out and step behind [the_person.possessive_title]."
                 call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_bed(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_03
                 "When you finish up, you put your dick away."
+                mc.name "That was nice... if you ever need any more outfit advice, let me know!"
+            else:
+                the_person "How about a nice handjob? I know that you like it when I take care of you."
+                $ mc.change_arousal(10)
+                "[the_person.possessive_title] gets your cock of your pants and starts jerking you off."
+                call get_fucked(the_person, the_goal = "get mc off", start_position = handjob, start_object = make_floor(), skip_intro = True, prohibit_tags = ["Vaginal", "Anal"]) from _call_get_fucked_person_mom_outfit_help_crisis_01
+                "When you are done, you put your cock in your pants."
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"
 
     $ the_person.draw_person()

@@ -73,6 +73,7 @@ init -1 python:
     standard_coffee_shop_backgrounds = room_background_image("Coffee_Shop_Background.jpg")
     luxury_apartment_backgrounds = room_background_image("Luxury_Apartment_Background.jpg", darken = False)
     university_library_backgrounds = room_background_image("University_Library_Background.jpg")
+    university_study_room_backgrounds = room_background_image("Study_Room_Background.jpg")
     # bedroom backgrounds
     standard_bedroom1_background = room_background_image("Generic_Bedroom1_Background.jpg")
     standard_bedroom2_background = room_background_image("Generic_Bedroom2_Background.jpg")
@@ -99,6 +100,11 @@ init -1 python:
     def show_university_library_background(*args, **kwargs):
         library_image = university_library_backgrounds[time_of_day]
         renpy.show("university_library", what=Image(library_image), layer = "master")
+        return
+
+    def show_university_study_room_background(*args, **kwargs):
+        library_image = university_study_room_backgrounds[time_of_day]
+        renpy.show("university_study_room", what=Image(library_image), layer = "master")
         return
 
 label updated_room_background(stack):

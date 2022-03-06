@@ -6,7 +6,7 @@ init 2 python:
     def clone_rent_apartment_requirement(person):
         if not person.home is dungeon:
             return False
-        if mc.business.funds < 25000:
+        if  not mc.business.has_funds(25000):
             return "Requires: $25,000"
         return person.home is dungeon
 
@@ -48,7 +48,7 @@ label clone_rent_apartment_label(the_person):
                 the_person.home = None
                 the_person.generate_home()
                 mc.business.change_funds(-25000)
-                the_person.set_schedule(None, times = [1,2,3])
+                the_person.set_schedule(None, the_times = [1,2,3])
 
             "You make all the necessary arrangements, your clone [the_person.name] will now stay at her own place at night and live her life."
 

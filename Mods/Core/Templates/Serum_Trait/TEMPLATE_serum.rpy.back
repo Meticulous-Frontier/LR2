@@ -39,12 +39,21 @@ init -1 python:
             clarity_cost = 50,                                          # Cost in clarity to begin researching this trait
             start_unlocked = False,                                     # IF this trait does not require clarity to unlock
             start_enabled = True,                                       # MOD function. if False, players MUST enable the serum in the mod options menu from MC bedroom.
+<<<<<<< HEAD
             mental_aspect = 0, 
             physical_aspect = 0, 
             sexual_aspect = 0, 
             medical_aspect = 0, 
             flaws_aspect = 0, 
             attention = 0)                                      
+=======
+            mental_aspect = 0,                                          # The following 5 aspects govern serum value for contracts
+            physical_aspect = 0,
+            sexual_aspect = 0,
+            medical_aspect = 0,
+            flaws_aspect = 0,
+            attention = 0)                                              # How much attention this serum trait generates for story purposes.
+>>>>>>> 6e6cb5b2a2e133ad3fbdb0a9cee754ecc1301374
 
 
 # any label that starts with serum_mod is added to the serum mod list

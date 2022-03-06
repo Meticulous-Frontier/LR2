@@ -102,7 +102,8 @@ init 2:
                     ysize 200
                     vbox:
                         text "Teamups" style "menu_text_style" size 30
-                        for teamup_info in person.story_teamup_list():
+                        for teamup_info in [x for x in person.story_teamup_list() if isinstance(x, list) and len(x) == 2]:
+
                             if teamup_info[0] != " ":
                                 vbox:
                                     textbutton teamup_info[0].title:

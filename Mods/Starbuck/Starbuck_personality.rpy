@@ -485,13 +485,14 @@ init python:
         valid_titles.append("Mrs. " + person.last_name)
         valid_titles.append("Cara")
         return valid_titles
+
     def starbuck_possessive_titles(person):
         valid_possessive_titles = []
         valid_possessive_titles.append("Mrs. " + person.last_name)
         valid_possessive_titles.append("The sex shop owner")
-        if starbuck.shop_progress_stage > 1:
+        if sex_shop_stage() > 1:
             valid_possessive_titles.append("Your business partner")
-        if person.sluttiness > 60 and starbuck.shop_progress_stage > 1:
+        if person.sluttiness > 60 and sex_shop_stage() > 1:
             valid_possessive_titles.append("Your slutty business partner")
         if person.sluttiness > 100 and person.sex_skills["Anal"] >= 4:
             valid_possessive_titles.append("Your buttslut")
@@ -499,9 +500,10 @@ init python:
             valid_possessive_titles.append("Your cum guzzler")
             valid_possessive_titles.append("Your cum catcher")
         return valid_possessive_titles
+
     def starbuck_player_titles(person):
         valid_player_titles = []
         valid_player_titles.append("Mr. " + mc.last_name)
-        if starbuck.shop_progress_stage > 1:
+        if sex_shop_stage() > 1:
             valid_player_titles.append("Business Partner")
         return valid_player_titles

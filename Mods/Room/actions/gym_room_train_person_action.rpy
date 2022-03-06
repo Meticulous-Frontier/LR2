@@ -7,7 +7,7 @@ init 3 python:
             return "Closed for the night"
         elif time_of_day == 0:
             return "Opens in the morning"
-        elif mc.business.funds < 40: # $40 per session.
+        elif not mc.business.has_funds(40): # $40 per session.
             return "Requires: $40"
         elif mc.energy < 30:
             return "Requires: 30 energy"

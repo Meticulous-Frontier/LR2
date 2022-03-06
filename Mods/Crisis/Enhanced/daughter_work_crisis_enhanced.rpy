@@ -3,7 +3,7 @@ init 5 python:
 
     def get_random_mother_from_company_with_children():
         valid_people_list = []
-        for person in [x for x in mc.business.get_employee_list() if x.age >= 34 and not quest_director.is_person_blocked(x)]:
+        for person in [x for x in mc.business.get_employee_list() if x.age >= 34 and not quest_director.is_person_blocked(x) and x not in unique_character_list]:
             available_kids = person.kids - person.number_of_children_with_mc()
             if available_kids > 0 and available_kids > town_relationships.get_existing_child_count(person): #They have undiscovered kids we can add in.
                 valid_people_list.append(person)
@@ -126,8 +126,7 @@ label daughter_work_crisis_label_enhanced():
             call hire_someone(the_daughter) from _call_hire_someone_daughter_work_crisis_enhanced_1
         else:
             mc.name "Alright [the_person.title], this looks promising, she can start tomorrow. I can't give her any preferential treatment, but I'll give her a try."
-            $ the_person.change_happiness(5)
-            $ the_person.change_love(2)
+            $ the_person.change_stats(happiness = 5, love = 2)
             the_person "Thank you so much!"
             call hire_someone(the_daughter) from _call_hire_someone_daughter_work_crisis_enhanced_2
         # make sure to set titles for the daughter (prevent introduction dialogs)
@@ -138,8 +137,7 @@ label daughter_work_crisis_label_enhanced():
         $ the_daughter.remove_person_from_game()
         if promised_sex: #You promised to do it for sex but don't want to hire her, mom is disappointed.
             mc.name "I'm sorry but her credentials just aren't what they need to be. I could never justify hiring your daughter."
-            $ the_person.change_happiness(-5)
-            $ the_person.change_love(-1)
+            $ the_person.change_stats(happiness = -5, love = -1)
             $ the_person.draw_person(emotion = "sad")
             "[the_person.possessive_title] seems to deflate. She nods sadly."
             the_person "I understand. Thank you for your time."

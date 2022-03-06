@@ -226,7 +226,7 @@ init 3 python:
     company_wardrobe_action = ActionMod("Add Company Wardrobe", company_wardrobe_requirement, "append_company_wardrobe", initialization = company_wardrobe_initialization,
         menu_tooltip = "Adds a collection of over- and underwear for your company to your outfit manager.", category = "Wardrobe")
 
-label append_company_wardrobe:
+label append_company_wardrobe():
     "Choose you primary business color"
     menu:
         "Primary Color Red":

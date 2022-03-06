@@ -62,7 +62,7 @@ screen opinion_edit_menu():
             xfill 0.5
             for n in categories:
                 frame:
-                    margin [0, 24]
+                    margin (0, 24)
                     vbox:
                         frame:
                             text target.name + " - " + n style "serum_text_style_header"
@@ -80,12 +80,12 @@ screen opinion_edit_menu():
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
                                             xsize 370
-                                            padding [4,2]
+                                            padding (4,2)
                                             action Function(target.update_opinion_score, x, categories[n][1], 1)
                                             alternate Function(target.update_opinion_score, x, categories[n][1], 0, False)
 
                                         textbutton " - ":
-                                            padding [0,2]
+                                            padding (0,2)
                                             xsize 36
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
@@ -93,13 +93,13 @@ screen opinion_edit_menu():
                                                 Function(target.update_opinion_score, x, categories[n][1], -1)
                                             ]
                                         textbutton cheat_opinion_score_to_string(target.get_opinion_score(x)).title() + " | " + "Discovered: " + str(target.get_opinion_status(x)):
-                                            padding [0,2]
+                                            padding (0,2)
                                             xsize 440
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
                                             action NullAction()
                                         textbutton " + ":
-                                            padding [0,2]
+                                            padding (0,2)
                                             xsize 36
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
@@ -107,7 +107,7 @@ screen opinion_edit_menu():
                                                 Function(target.update_opinion_score, x, categories[n][1], 1)
                                             ]
                                         textbutton "{color=#D00}{b}" + " X " + "{/b}{/color}":
-                                            padding [0,2]
+                                            padding (0,2)
                                             xsize 44
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"

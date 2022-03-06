@@ -28,20 +28,18 @@ init 2 python:
         ellie_base_outfit.add_accessory(the_necklace)
         ellie_base_outfit.add_accessory(the_bracelet)
 
-        # init ellie role
-        ellie_role = Role(role_name ="ellie", actions =[], hidden = True)
+        # init ellie job (make her hidden on start)
+        ellie_job = Job("IT Specialist", critical_job_role, purgatory, work_days = [0,1,2,3,4,5,6], work_times = [1,2,3])
 
-        #global ellie_role
+        #global ellie
         global ellie
         ellie = make_person(name = "Ellie", age = 24, body_type = "thin_body", face_style = "Face_13",  tits="DDD", height = 0.92, hair_colour="dark auburn", hair_style = bobbed_hair, skin="white" , \
-            eyes = "light blue", personality = ellie_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ellie_wardrobe, \
+            eyes = "light blue", personality = ellie_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ellie_wardrobe, job = ellie_job, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [1,1,1,1], start_sluttiness = 0, start_obedience = 5, start_happiness = 103, start_love = -3, \
             relationship = "Single", kids = 0, force_random = True, base_outfit = ellie_base_outfit,
             forced_opinions = [["production work", 2, True], ["work uniforms", 1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["cooking", 2, False]])
 
         ellie.generate_home()
-        ellie.set_schedule(ellie.home, times = [0,1,2,3,4])
-        # ellie.set_schedule(downtown_bar, times = [2,3])
         ellie.home.add_person(ellie)
         ellie.idle_pose = "stand2"
 
@@ -64,8 +62,6 @@ init 2 python:
         # set relationships
         # Ellie is relatively new in town and has no mutual relationship with MC
         ellie.text_modifiers.append(southern_belle)
-
-        ellie.add_role(ellie_role)
         return
 
 init -2 python: #Requirement Functions
@@ -496,7 +492,8 @@ label ellie_work_welcome_label():
     the_person "Okay."
     $ the_person.draw_person(position = "sitting")
     "You sit down at your desk, filling out some paperwork and getting her officially hired by the company."
-    $ mc.business.hire_person(the_person, "HR")
+    $ mc.business.add_employee_hr(the_person)
+    $ the_person.set_schedule(None, the_times = [1,2,3])    # free roam when not working
     $ mc.business.add_mandatory_crisis(ellie_work_welcome_monday)
 
     return
@@ -768,9 +765,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
         "After you finish, you feel much better."
         mc.name "Thank you [the_person.title], I really needed that."
         the_person "Glad to help!"
-        $ the_person.change_happiness(10)
-        $ the_person.change_love(5)
-        $ the_person.change_obedience(10)
+        $ the_person.change_stats(happiness = 10, love = 5, obedience = 10)
     $ clear_scene()
     "You dismiss her. After you get yourself cleaned up, you get back to work."
     return

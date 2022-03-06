@@ -6,7 +6,7 @@ init 2 python:
 
 
     TEMPLATE_action = ActionMod("TEMPLATE event description", crisis_TEMPLATE_requirement,"crisis_TEMPLATE_label",
-        menu_tooltip = "Expanded Description.", category="Home", is_crisis = True, is_morning_crisis = True, crisis_weight = 5)
+        menu_tooltip = "Expanded Description.", category="Home", is_crisis = True, is_morning_crisis = True)
 
 
 label crisis_TEMPLATE_label():

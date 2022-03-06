@@ -40,7 +40,7 @@ init 2 python:
                 option_list.append(["Ask her to take it\n{size=12}{color=#00D000}Required by Policy{/color}{/size}", "policy"])
             else:
                 option_list.append(["Ask her to take it" + serum_give_chance_color_wrapper(chances[1]), "ask"])
-                if mandatory_paid_serum_testing_policy.is_owned() and mc.business.funds >= chances[3]:
+                if mandatory_paid_serum_testing_policy.is_owned() and mc.business.has_funds(chances[3]):
                     option_list.append(["Pay her to take it\n{size=12}{color=#D00000}Costs $" + str(chances[3]) + "{/color}{/size}", "paid"])
         else:
             option_list.append(["Ask her to take it" + serum_give_chance_color_wrapper(chances[1]), "ask"])

@@ -14,8 +14,8 @@ init 1 python:
 
     anti_bimbo_serum_trait = SerumTrait(name = "Bimbo Reversal",
             desc = "This serum doesn't completely counter the bimbo serum, but it returns personality and intelligence to roughly pre-bimbo status.",
-            positive_slug = "+$20 Value, Restores Intelligence, Restores Personality",
-            negative_slug = "400 Serum Research",
+            positive_slug = "Restores Intelligence, Restores Personality",
+            negative_slug = "",
             research_added = 400,
             base_side_effect_chance = 50,
             on_apply = anti_bimbo_serum_function_on_apply,

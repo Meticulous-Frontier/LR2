@@ -1,7 +1,4 @@
 ## Mother Daughter Double Team
-init -1 python:
-    mother_daughter_doubleteam_weight = 5
-
 init 2 python:
     def mother_daughter_doubleteam_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
@@ -26,7 +23,7 @@ init 2 python:
         return (None, None)
 
     mother_daughter_doubleteam_action = ActionMod("Mother Daughter Blowjob", mother_daughter_doubleteam_requirement, "mother_daughter_doubleteam_action_label",
-        menu_tooltip = "A mother and daughter compete to give a better blowjob.", category = "Business", is_crisis = True, crisis_weight = mother_daughter_doubleteam_weight)
+        menu_tooltip = "A mother and daughter compete to give a better blowjob.", category = "Business", is_crisis = True)
 
 label mother_daughter_doubleteam_action_label():
     python:

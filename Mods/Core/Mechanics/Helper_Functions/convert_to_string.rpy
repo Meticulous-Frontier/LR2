@@ -39,6 +39,15 @@ init 0 python:
 
         return color_string + str(__builtin__.int(person.energy)) +"/"+ str(__builtin__.int(person.max_energy)) + "{/color} {image=energy_token_small}"
 
+    def get_attention_string():
+        percent = mc.business.attention * 1.0 / mc.business.max_attention
+        color_string = "{color=#43B197}"
+        if percent > .5:
+            color_string = "{color=#e1e113}"
+        if percent > .8:
+            color_string = "{color=#B14365}"
+        return color_string + str(mc.business.attention) + "/" + str(mc.business.max_attention) + "{/color}"
+
     def get_person_weight_string(person):
         if use_imperial_system:
             lbs = person.weight * 2.205
@@ -75,7 +84,12 @@ init 0 python:
     # instead of using 'call name' in menus, use the actual person name to avoid confusion
     def format_titles(person):
         person_title = person.name + " " + person.last_name
-        if person.title is None:
-            person_title = "???"
-        return_title = "{color=" + person.char.who_args["color"] + "}" + "{font=" + person.char.what_args["font"] + "}" + person_title + "{/font}{/color}"
-        return return_title
+        if not person.title or person.mc_title == "Stranger":
+            return "???"    # we don't know her yet
+        return "{color=" + person.char.who_args["color"] + "}" + "{font=" + person.char.what_args["font"] + "}" + person_title + "{/font}{/color}"
+
+    def format_titles_short(person):
+        person_title = person.name + " " + person.last_name[0] + "."
+        if not person.title or person.mc_title == "Stranger":
+            return "???"    # we don't know her yet
+        return "{color=" + person.char.who_args["color"] + "}" + "{font=" + person.char.what_args["font"] + "}" + person_title + "{/font}{/color}"

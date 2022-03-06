@@ -3,29 +3,16 @@
 
 init 3304 python:
     def strip_club_get_manager():
-        managers = people_in_role(manager_role)
+        managers = people_in_role(stripclub_manager_role)
         if __builtin__.len(managers) > 0:
             return managers[0]
         return None
 
     def strip_club_get_mistress():
-        mistresses = people_in_role(mistress_role)
+        mistresses = people_in_role(stripclub_mistress_role)
         if __builtin__.len(mistresses) > 0:
             return mistresses[0]
         return None
-
-    def strip_club_get_job_title(person):
-        if person.has_role(stripper_role):
-            return "Stripper"
-        elif person.has_role(waitress_role):
-            return "Waitress"
-        elif person.has_role(bdsm_performer_role):
-            return "BDSM Performer"
-        elif person.has_role(manager_role):
-            return "Strip Club Manager"
-        elif person.has_role(mistress_role):
-            return "Strip Club Mistress"
-        return ""
 
     def strip_club_manager_reminder_requirement():
         if day >= (get_strip_club_foreclosed_last_action_day() + 7): # the event start to trigger after 7 days MC bought the club.
@@ -101,7 +88,7 @@ init 3304 python:
             mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_reminder_action)
 
     def strip_club_manager_bdsm_room_build_requirement():
-        if mc.business.funds < 10000:
+        if not mc.business.has_funds(10000):
             return False
         if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
             return False

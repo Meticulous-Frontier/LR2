@@ -395,9 +395,7 @@ label horny_at_work_crisis_enhanced_label():
                 $ the_person.discover_opinion("public sex")
                 "She looks away and gasps."
                 the_person "Oh my god, [the_person.mc_title]! I can't believe you're doing this right here!"
-                $ the_person.change_love(-5)
-                $ the_person.change_happiness(-10)
-                $ the_person.change_obedience(-3)
+                $ the_person.change_stats(happiness = -10, love = -5, obedience = -3)
                 $ the_person.draw_person(position = "walking_away")
                 "Before you can say anything more she turns around and hurries out of the room."
                 the_person "I really need to go..."
@@ -416,10 +414,6 @@ label horny_at_work_crisis_enhanced_label():
                 $ mc.change_locked_clarity(5)
 
                 #TODO: Make sure all of this is context aware in some way for other people in the room.
-                $ willingness_value = the_person.sluttiness + (the_person.obedience - 100) + the_person.get_opinion_score("being submissive") * 10
-                if mc.location.get_person_count() > 1:
-                    $ willingness_value += the_person.get_opinion_score("public sex") * 10
-
                 $ scene_manager.add_group([x for x in mc.location.people if x != the_person], position = "sitting")
                 $ scene_manager.add_actor(the_person, display_transform = character_right, position = "stand3")
                 menu:
@@ -513,8 +507,7 @@ label horny_at_work_crisis_enhanced_label():
 
                     "Make her suck you off":
                         mc.name "Well, I need this taken care of so I can get back to work. I want you to get under my desk and suck me off."
-                        $ willingness_value += the_person.get_opinion_score("giving blowjobs") * 10
-                        if willingness_value >= blowjob.slut_requirement:
+                        if the_person.is_willing(blowjob, private = False):
                             if (the_person.get_opinion_score("public sex") > 0 and mc.location.get_person_count() > 1) or the_person.get_opinion_score("giving blowjobs") > 0:
                                 the_person "Okay, if that's what you need."
                                 "She gets onto her hands and knees, crawling under your desk and nestling herself between your legs."
@@ -546,9 +539,7 @@ label horny_at_work_crisis_enhanced_label():
                         else:
                             $ scene_manager.update_actor(the_person, emotion = "angry")
                             the_person "What? Oh my god, I couldn't do that!"
-                            $ the_person.change_love(-5)
-                            $ the_person.change_happiness(-10)
-                            $ the_person.change_obedience(-3)
+                            $ the_person.change_stats(love = -5, happiness = -10, obedience = -3)
                             "She stammers for something more to say before settling on storming out of the room instead."
                             $ clear_scene()
                             "Frustrated, her rejection has at least taken your mind off of your erection and you're able to get back to work eventually."
@@ -556,8 +547,7 @@ label horny_at_work_crisis_enhanced_label():
 
                     "Make her fuck you":
                         mc.name "I want you to take some responsibility for this. Come over here so I can fuck you."
-                        $ willingness_value += the_person.get_opinion_score("missionary style sex") * 10
-                        if willingness_value >= missionary.slut_requirement:
+                        if the_person.is_willing(missionary, private = False):
                             $ desk = mc.location.get_object_with_name("desk") #May be None if there's no desk where you are.
                             if desk is not None:
                                 "You grab [the_person.possessive_title] by her hips and lift her up, putting her down on your desk and positioning yourself between her legs."

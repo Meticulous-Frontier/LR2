@@ -9,5 +9,6 @@ init 5 python:
         if interview_outfit:
             if is_planned:
                 person.next_day_outfit = interview_outfit.get_copy()
+            person.planned_outfit = interview_outfit.get_copy() # also set it as planned so she doesn't change clothes on interactions
             person.apply_outfit(interview_outfit)
         return

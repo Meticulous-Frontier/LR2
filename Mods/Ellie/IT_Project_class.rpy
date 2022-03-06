@@ -15,7 +15,9 @@ init -1 python:
 
             if requirement == None:
                 requirement = IT_proj_generic_req_True
-            super(IT_Project, self).__init__(name, desc, requirement, cost, toggleable, on_buy_function, extra_arguments, on_apply_function, on_remove_function, on_turn_function, on_move_function, on_day_function, dependant_policies)
+            super(IT_Project, self).__init__(name, desc, cost, requirement = requirement, toggleable = toggleable,
+                on_buy_function = on_buy_function, extra_arguments = extra_arguments, on_apply_function = on_apply_function, on_remove_function = on_remove_function,
+                on_turn_function = on_turn_function, on_move_function = on_move_function, on_day_function = on_day_function, dependant_policies = dependant_policies)
             self.project_progress = project_progress
             self.project_cost = project_cost
             self.category = category

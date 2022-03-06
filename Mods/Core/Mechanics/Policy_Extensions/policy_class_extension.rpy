@@ -31,29 +31,10 @@ init 2 python:
 
     Policy.__ne__ = policy_ne
 
-
-    def get_enabled_on_buy(self):
-        if not hasattr(self, "_enabled_on_buy"):
-            self._enabled_on_buy = True
-        return self._enabled_on_buy
-
-    def set_enabled_on_buy(self, value):
-        self._enabled_on_buy = value
-    
-    Policy.enabled_on_buy = property(get_enabled_on_buy, set_enabled_on_buy, None, "Enable policy when bought, ignored when not toggleable.")
-
-
-    # Override default purchase policy function to evaluate 'enabled_on_buy'
-    def purchase_policy(the_policy, ignore_cost = False):
-        the_policy.buy_policy(ignore_cost = ignore_cost)
-        if not the_policy.toggleable or (the_policy.is_toggleable() and the_policy.enabled_on_buy):
-            the_policy.apply_policy()
-
     # alter policy descriptions to match values in get_uniform_limits_enhanced()
-    strict_uniform_policy.desc = "Requiring certain styles of attire in the business world is nothing new. Allows you to designate overwear sets of sluttiness 15 or less as part of your business uniform."
-    relaxed_uniform_policy.desc = "Corporate dress code is broadened to include more casual apparel. You can designate overwear sets up to sluttiness 25 as part of your business uniform."
-    casual_uniform_policy.desc = "Corporate dress code is broadened even further. Overwear sets up to 35 sluttiness are now valid uniforms."
-    reduced_coverage_uniform_policy.desc = "The term \"appropriate coverage\" in the employee manual is redefined and subject to employer approval. You can now use full outfits or underwear sets as part of your corporate uniform. Underwear sets must have a sluttiness score of 15 or less, outfits to 50 or less."
-    minimal_coverage_uniform_policy.desc = "Corporate dress code is broadened further. Uniforms must now only meet a \"minimum coverage\" requirement, generally nothing more than a set of bra and panties. Full uniforms can have a sluttiness score of 70, underwear sets can go up to 30."
-    corporate_enforced_nudity_policy.desc = "Corporate dress code is removed in favour of a \"need to wear\" system. All clothing items that are deemed non-essential are subject to employer approval. Conveniently, all clothing is deemed non-essential. Full outfit sluttiness is limited to 90 or less, underwear sets have no limit."
-
+    strict_uniform_policy.desc = "Requiring certain styles of attire in the business world is nothing new. Allows you to designate overwear sets of sluttiness 10 or less as part of your business uniform."
+    relaxed_uniform_policy.desc = "Corporate dress code is broadened to include more casual apparel. You can designate overwear sets up to sluttiness 20 as part of your business uniform."
+    casual_uniform_policy.desc = "Corporate dress code is broadened even further. Overwear sets up to 30 sluttiness are now valid uniforms."
+    reduced_coverage_uniform_policy.desc = "The term \"appropriate coverage\" in the employee manual is redefined and subject to employer approval. You can now use full outfits or underwear sets as part of your corporate uniform. Underwear sets must have a sluttiness score of 15 or less, outfits to 40 or less."
+    minimal_coverage_uniform_policy.desc = "Corporate dress code is broadened further. Uniforms must now only meet a \"minimum coverage\" requirement, generally nothing more than a set of bra and panties. Full uniforms can have a sluttiness score of 60, underwear sets can go up to 30."
+    corporate_enforced_nudity_policy.desc = "Corporate dress code is removed in favour of a \"need to wear\" system. All clothing items that are deemed non-essential are subject to employer approval. Conveniently, all clothing is deemed non-essential. Full outfit sluttiness is limited to 80 or less, underwear sets have no limit."

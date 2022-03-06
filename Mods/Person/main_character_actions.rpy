@@ -31,7 +31,7 @@ init 2 python:
 
     # Hire Person Requirements
     def mc_hire_person_requirement(person):
-        excluded_roles = ["stripper_role", "waitress_role", "bdsm_performer_role", "manager_role", "mistress_role", "candace_role", "college_intern_role"]
+        excluded_roles = ["stripper_role", "stripclub_waitress_role", "stripclub_bdsm_performer_role", "stripclub_manager_role", "stripclub_mistress_role", "candace_role", "college_intern_role"]
         for role in excluded_roles:
             if role in globals():
                 if person.has_role(globals()[role]):
@@ -44,10 +44,15 @@ init 2 python:
         return False
 
     def mc_action_lasik_surgery_person_requirement(person):
-        if big_glasses in person.base_outfit.accessories or modern_glasses in person.base_outfit.accessories:
-            if person in unique_character_list:
+        if person in unique_character_list:
+            return False
+
+        if person.base_outfit and person.base_outfit.has_glasses():
+            if person.love < 20: # you need have some connection with her to offer this
                 return False
-            if mc.business.funds < 5000:
+            if person.love < 30:
+                return "Requires: 30 Love"
+            if not mc.business.has_funds(5000):
                 return "Not enough money"
             return True
         return False
@@ -104,7 +109,8 @@ init 5 python:
     mc_stop_follow_action = ActionMod("Stop following me", mc_stop_follow_requirement, "mc_stop_follow_label", menu_tooltip = "Have [the_person.title] stop following you.", allow_disable = False, category = "Generic People Actions")
 
     # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
-    mc_hire_person_action = ActionMod("Employ", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire [the_person.title] to work for you in your business.", category = "Generic People Actions")
+    # DISABLED: This functionality is now supported by the base-game
+    # mc_hire_person_action = ActionMod("Employ", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire [the_person.title] to work for you in your business.", category = "Generic People Actions")
 
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
     mc_rename_person_action = ActionMod("Rename", mc_action_rename_person_requirement, "mc_rename_person_label", menu_tooltip = "Change the name of [the_person.title].", category = "Generic People Actions", initialization = init_action_mod_disabled)
@@ -113,13 +119,14 @@ init 5 python:
     mc_spend_the_night_action = ActionMod("Spend the night with girl", mc_action_spend_the_night_requirement, "mc_spend_the_night_label", menu_tooltip = "Allows you to sleep in this location.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
-    pay_to_strip_action = ActionMod("Pay her to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay [the_person.title] to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
+    # DISABLED: Stripping is now supported in the base game (conditions apply)
+    # pay_to_strip_action = ActionMod("Pay her to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay [the_person.title] to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     mc_lasik_surgery_action = ActionMod("Pay for LASIK surgery\n{color=#ff0000}{size=18}Costs: $5000{/size}{/color}", mc_action_lasik_surgery_person_requirement, "mc_action_lasik_surgery_label", menu_tooltip = "You don't like [the_person.title] wearing glasses, offer to pay for LASIK surgery.", category = "Generic People Actions")
 
     mc_remove_person_action = ActionMod("Remove from game", mc_remove_person_requirement, "mc_remove_person_label", menu_tooltip = "You are not interested in [the_person.title]. This will remove her from the game.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
-    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_hire_person_action, mc_rename_person_action, mc_spend_the_night_action, mc_lasik_surgery_action, pay_to_strip_action, mc_remove_person_action]
+    main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_rename_person_action, mc_spend_the_night_action, mc_lasik_surgery_action, mc_remove_person_action]
 
 
 label mc_pay_to_strip_label(person):
@@ -181,7 +188,7 @@ label mc_rename_person_label(person):
 label mc_hire_person_label(person):
 
     python:
-        if mc.business.funds < (person.calculate_base_salary() * 10):
+        if not mc.business.has_funds(person.calculate_base_salary() * 10):
             renpy.say(None, "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + " and put you in debt due to low funds.")
         else:
             renpy.say(None, "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + ", do you wish to proceed?")
@@ -195,19 +202,19 @@ label mc_hire_person_label(person):
     "You complete the necessary paperwork and hire [person.title]. What division do you assign them to?"
     menu:
         "Research and Development":
-            $ mc.business.hire_person(the_person, "Research")
+            $ mc.business.add_employee_research(the_person)
 
         "Production":
-            $ mc.business.hire_person(the_person, "Production")
+            $ mc.business.add_employee_production(the_person)
 
         "Supply Procurement":
-            $ mc.business.hire_person(the_person, "Supply")
+            $ mc.business.add_employee_supply(the_person)
 
         "Marketing":
-            $ mc.business.hire_person(the_person, "Marketing")
+            $ mc.business.add_employee_marketing(the_person)
 
         "Human Resources":
-            $ mc.business.hire_person(the_person, "HR")
+            $ mc.business.add_employee_hr(the_person)
 
         "Back":
             return
@@ -249,7 +256,7 @@ label mc_schedule_person_label(*args):
     if room_choice == "Back":
         return
     else:
-        $ person.set_schedule(room_choice, times = [time_slot])
+        $ person.set_schedule(room_choice, the_times = [time_slot])
         $ renpy.say(None, time_names[time_slot] + " Schedule Set: [room_choice.formal_name]")
         return
 
@@ -285,7 +292,7 @@ label mc_stop_follow_label(person):
 
 
     return
-# Lasik surgery Labels
+
 label mc_action_lasik_surgery_label(the_person):
     mc.name "[the_person.title], your have beautiful eyes, but they are always hidden behind your glasses."
     the_person "Don't you like them? I can wear different glasses tomorrow."
@@ -301,10 +308,9 @@ label mc_action_lasik_surgery_label(the_person):
     $ the_person.draw_person(position = "kissing")
     the_person "You make me so happy [the_person.mc_title], thank you so much!"
     python:
-        the_person.change_happiness(10)
-        the_person.change_love(5, max_modified_to = 80)
+        the_person.change_stats(happiness = 10, love = 5, max_love = 80)
         mc.business.change_funds(-5000)
-        the_person.base_outfit.accessories.remove(filter(lambda x : x in [big_glasses, modern_glasses], the_person.base_outfit.accessories)[0])
+        the_person.base_outfit.remove_glasses()
     $ the_person.draw_person()
     return
 

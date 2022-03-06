@@ -10,8 +10,8 @@ init python:
 
     essential_oil_trait = SerumTrait(name = "Essential Oils",
             desc = "Pleasant smell and texture adds greatly to the value of the serum. High chance of negative side effect.",
-            positive_slug = "+$50 Value, +5 Happiness",
-            negative_slug = "+20 Serum Research",
+            positive_slug = "+5 Happiness",
+            negative_slug = "",
             research_added = 20,
     #     slots_added = a_number,
     #     production_added = a_number,

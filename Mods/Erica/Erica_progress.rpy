@@ -113,11 +113,26 @@ init 10 python:
         if erica_get_is_doing_insta_sessions():
             teamup_story_list.append([lily,"Help [erica.title] take insta pics with [lily.title] every Saturday night in [lily.title]'s room!"])
         elif not erica_is_looking_for_work():
-            teamup_story_list.append([erica,"Try progressing [erica.title]'s story."])
+            teamup_story_list.append([lily,"Try progressing [erica.title]'s story."])
         elif lily.event_triggers_dict.get("sister_instathot_pic_count", 0) == 0:
             teamup_story_list.append([lily,"Try advancing [lily.title]'s storyline."])
         else:
             teamup_story_list.append([lily,"Try talking to [lily.title] and [erica.title] about money issues."])
+
+        #Study
+        if kaya_studies_with_erica():
+            if kaya_erica_teamup.get_stage() == 0:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights."])
+            elif kaya_erica_teamup.get_stage() == 1:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes getting naked for you."])
+            elif kaya_erica_teamup.get_stage() == 2:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes letting you spank them."])
+            elif kaya_erica_teamup.get_stage() == 3:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes sucking you off."])
+            elif kaya_erica_teamup.get_stage() == 4:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, and are down for a threesome after!"])
+        elif kaya_has_finished_intro():
+            teamup_story_list.append([kaya,"[erica.title] and [kaya.title] are both college students..."])
         return teamup_story_list
 
     def erica_story_other_list():

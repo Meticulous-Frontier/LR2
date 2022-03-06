@@ -64,7 +64,7 @@ init 3 python:
             personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = [person.charisma, person.int, person.focus], skill_array = [person.hr_skill, person.market_skill, person.research_skill, person.production_skill, person.supply_skill], sex_array = [person.sex_skills["Foreplay"], person.sex_skills["Oral"], person.sex_skills["Vaginal"], person.sex_skills["Anal"]],
             start_sluttiness = person.sluttiness, start_obedience = person.obedience - 100, start_happiness = person.happiness, start_love = person.love, start_home = dungeon, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0, forced_sexy_opinions = [["being submissive", 2 , True]] , force_random = True)
 
-        clone.set_schedule(dungeon, times = [0,1,2,3,4])
+        clone.set_schedule(dungeon, the_times = [0,1,2,3,4])
         clone.add_role(clone_role)
 
         dungeon.add_person(clone) #Create rooms for the clones to inhabit until a schedule is given (through being hired or player input)
