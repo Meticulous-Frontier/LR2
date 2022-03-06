@@ -1774,7 +1774,7 @@ init -1 python:
 # Outfit functions - wear a specialized outfit #
 ################################################
     def should_wear_work_outfit(self):
-        if self.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]):
+        if not strip_club_is_closed() and self.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]):
             shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
             return (time_of_day == 3 and shifts == 2) or time_of_day == 4
         return False
@@ -1782,7 +1782,7 @@ init -1 python:
     Person.should_wear_work_outfit = should_wear_work_outfit
 
     def wear_work_outfit(self):
-        if self.work_outfit:    # quick exit if we already go an outfit for the day and puts outfit back on after stripping
+        if self.work_outfit:    # quick exit if we already got an outfit for the day and puts outfit back on after stripping
             self.apply_outfit(self.work_outfit)
             return
 
