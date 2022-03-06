@@ -1513,7 +1513,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
                     "I'll reward you financially ($1000)":
                         the_person "Oh... well I suppose I could really use the extra pay."
                         $ mc.business.change_funds(- 1000)
-                    "I'll fire you if you don't.":
+                    "I'll fire you if you don't."
                         $ scene_manager.update_actor(the_person, emotion = "angry")
                         the_person "What!?! You're kidding me? I can't afford to lose this job right now!"
                         if the_person.happiness > 90:

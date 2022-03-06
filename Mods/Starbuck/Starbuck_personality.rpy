@@ -409,7 +409,7 @@ label starbuck_flirt_response_high(the_person):
         # There are other people here, if she's not slutty she asks if you want to find somewhere quiet
         the_person "I'd say your chances are actually pretty good, if you don't mind sneaking to the back room with me."
         menu:
-            "Find someplace quiet.":
+            "Find someplace quiet."
                 mc.name "Alright, let's do it."
                 the_person "Mmm, okay! Let's go!"
                 "[the_person.possessive_title] takes your hand and leads you between a few shelves to a door for employees only."
@@ -427,7 +427,7 @@ label starbuck_flirt_response_high(the_person):
                 $ the_person.call_dialogue("sex_review", the_report = _return)
                 $ the_person.review_outfit()
 
-            "Just flirt.":
+            "Just flirt."
                 mc.name "I'm a patient man, I can wait until you close up tonight."
                 $ mc.change_locked_clarity(15)
                 "[the_person.possessive_title] blushes and places her hand on your shoulder, massaging your muscles."

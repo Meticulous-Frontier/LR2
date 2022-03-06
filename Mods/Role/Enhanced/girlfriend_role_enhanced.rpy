@@ -179,7 +179,7 @@ label girlfriend_sleepover_label():
                 "You mix the serum into [the_person.title]'s wine."
             "Add a dose of serum to [the_person.title]'s shake\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
                 pass
-            "Leave her drink alone.":
+            "Leave her drink alone."
                 "You decide to leave her wine alone."
         "You wait for another minute, when you hear the bedroom door open."
         $ the_person.change_to_lingerie()

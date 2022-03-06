@@ -152,7 +152,7 @@ label slave_trim_pubes_label(the_person):
 
     $ pubes_choice = renpy.display_menu(girlfriend_build_pubes_choice_menu(the_person),True,"Choice")
 
-    if pubes_choice == "Never mind.":
+    if pubes_choice == "Never mind."
         mc.name "On second thought, just leave them the way they are."
         the_person "As you wish."
     else:

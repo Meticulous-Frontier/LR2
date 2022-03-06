@@ -60,7 +60,7 @@ label scene_Ophelia_blowjob_1(the_girl, the_location, the_object):
     "[the_girl.title] keeps her mouth open wide and bobs her head back and forth to slide your cock in and out."
     "Her mouth moves an incredible distance with each stroke as she repeatedly throats you. Her gag immunity serving her well as she services your erection."
     menu:
-        "Talk dirty to her.":
+        "Talk dirty to her."
             mc.name "That feels great [the_girl.title]. You look good on your knees, sucking my cock."
             "She slides your cock out of her mouth to speak."
             the_girl "Mmm, and you feel so good in my mouth. You're so big I can barely manage."
@@ -69,7 +69,7 @@ label scene_Ophelia_blowjob_1(the_girl, the_location, the_object):
             the_girl "Don't forget to warn me when you cum. I like it all over my face, remember?."
             "She slips you back into her mouth and resumes blowing you."
 
-        "Stay quiet.": #TODO change this
+        "Stay quiet." #TODO change this
             "You rest your hand on her head, guiding her as she sucks you off."
             if the_girl.get_opinion_score("masturbating") > 0:
                 if the_girl.outfit.vagina_available():
