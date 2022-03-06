@@ -252,6 +252,11 @@ label lily_morning_encounter_follow_up_one_label(the_person):
 
         "Fuck her" if not the_person.has_taboo("vaginal_sex"): # only show sex option if you had sex before
             call fuck_person(the_person, private = True, start_object = make_floor(), start_position = missionary, skip_intro = False) from _call_lily_morning_encounter_laundryfuck
+
+    the_person "Thanks bro, now get out of here, so I can do my laundry."
+    "You walk back to the kitchen to get some breakfast."
+    $ mc.change_location(kitchen)
+    $ mc.location.show_background()
     return True
 
 label lily_morning_encounter_follow_up_two_label(the_person):
@@ -367,6 +372,9 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                 "Bend her over the table" if the_person.is_willing(spanking):
                     call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False) from _call_lily_morning_encounter_kitchenspank4
 
+            the_person "Thanks bro, I'm going to do my laundry now."
+            $ the_person.draw_person(position = "walking_away")
+            "You watch as your sister walks to the laundry room."
     else:
         the_person "Very funny, I'm serious."
         mc.name "So am I, we've certainly done more than let her watch us. I'm sure we can do whatever we want wherever we want."
@@ -547,6 +555,10 @@ label lily_morning_encounter_follow_up_two_label(the_person):
 
                 else:
                     call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = True, private = True, position_locked = True) from _call_lily_morning_encounter_kitchenspank
+
+                    the_person "See you next time bro, I'm going to do my laundry now."
+                    $ the_person.draw_person(position = "walking_away")
+                    "You watch as your sister walks to the laundry room."
 
     $ the_other_person = None
     $ scene_manager.clear_scene()
