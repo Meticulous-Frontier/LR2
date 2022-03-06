@@ -1329,7 +1329,7 @@ label erica_buy_protein_shake_label(the_person):
         "Add a dose of serum to [the_person.title]'s shake\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
             pass
 
-        "Leave her drink alone.":
+        "Leave her drink alone":
             "You decide not to test a dose of serum out on [the_person.title] and take the shake back to her."
 
     if erica_on_love_path():
