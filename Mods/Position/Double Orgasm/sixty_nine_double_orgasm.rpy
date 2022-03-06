@@ -37,7 +37,7 @@ label SB_sixty_nine_double_orgasm(the_girl, the_location, the_object):
             "When you're completely finished she pulls off slowly, panting and catching her breath."
         else:
             "You feel [the_girl.possessive_title] leave just the tip of you in her mouth. She strokes you with her hand as you start to orgasm."
-            "She moans as you fill up her mouth with your sperm. Her body is twiching as she orgasms with you in unison."
+            "She moans as you fill up her mouth with your sperm. Her body is twitching as she orgasms with you in unison."
             $ the_girl.cum_in_mouth()
             #$ SB_sixty_nine.redraw_scene(the_girl)
             "When you're completely finished, you can feel her swallow the contents of her mouth, before slowly pulling off, panting as she catches her breath."
