@@ -467,6 +467,8 @@ label ellie_end_blackmail_label():
     "You exchange some information with [the_person.title]. You feel pretty certain she'll decide to stick around."
     $ mc.business.add_mandatory_crisis(ellie_work_welcome)
     $ mc.location.lighting_conditions = standard_outdoor_lighting
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     return
 
 label ellie_work_welcome_label():
