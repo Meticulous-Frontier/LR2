@@ -313,7 +313,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 $ scene_manager.strip_actor_strip_list(person_two, strip_list, half_off_instead = half_off_instead)
                                 $ scene_manager.update_actor(person_one, display_transform = character_right)
 
-                                $ del strip_list
+                                $ strip_list = None
 
                                 if person_two.get_opinion_score("showing her tits") > 0:
                                     "When she has her tits out she crosses her arms in front of her in a small attempt to preserve her modesty."
