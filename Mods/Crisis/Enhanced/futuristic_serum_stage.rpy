@@ -14,17 +14,17 @@ init 5 python:
 
 
 label futuristic_serum_stage_2_enhanced_label(the_person):
-    if __builtin__.len(mc.business.get_requirement_employee_list(slut_required = 50, obedience_required = 130)) <= 3: # If you don't have enough people who meet the requirements just get an update.
+    if __builtin__.len(mc.business.get_requirement_employee_list(slut_required = 40, obedience_required = 120)) <= 3: # If you don't have enough people who meet the requirements just get an update.
         mc.name "I'm still working on getting your test subjects ready. Could you remind me what you need?"
         the_person "To learn anything useful I need at least three girls who have been seriously affected by our serums. I need them to be obedient and open to some intimate testing procedures."
-        "[the_person.title] requires three employees who satisfy the following requirements: Sluttiness 50+ and Obedience 130+"
+        "[the_person.title] requires three employees who satisfy the following requirements: Sluttiness 40+ and Obedience 120+"
         $ show_satisfying_people_information(the_person)
         the_person "Noted. I'll get back to you when I have your test subjects ready."
         return
 
     mc.name "[the_person.title], I have your group of test subjects ready."
     the_person "Excellent, let me know who to call down and I'll begin as soon as possible."
-    $ possible_picks = mc.business.get_requirement_employee_list(slut_required = 50, obedience_required = 130, exclude_list = [the_person])
+    $ possible_picks = mc.business.get_requirement_employee_list(slut_required = 40, obedience_required = 120, exclude_list = [the_person])
     call screen employee_overview(white_list = possible_picks, person_select = True)
     $ pick_1 = _return
     call screen employee_overview(white_list = possible_picks, black_list = [pick_1], person_select = True)
@@ -56,6 +56,8 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
         scene_manager.add_actor(pick_2, position = "stand3", display_transform = character_left_flipped)
         scene_manager.add_actor(pick_3, position = "stand2", display_transform = character_right)
 
+    the_person "The testing might take some time sir, I'll get started right now and have all my findings recorded. Come by later and we can review any discoveries."
+    "[the_person.title] turns to the other girls."
     the_person "Well then, we have some special testing to get through today! Who would like to go first?"
     $ go_first = pick_1
     if pick_2.obedience > go_first.obedience:
