@@ -592,6 +592,11 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             # $ renpy.say(None, "Continue round => Position: " + position_choice.name + ", object: " + object_choice.name)
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
                 call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
+
+                # If the girl has an orgasm due to MC coming, describe her orgasm (cum wrapper functions increase or decrease her arousal)
+                if the_person.arousal >= the_person.max_arousal:
+                    call describe_girl_climax(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_describe_girl_fuck_person_bugfix2
+
                 $ first_round = False
                 if not finished:    # when we switched to threesome finished is True
                     if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.

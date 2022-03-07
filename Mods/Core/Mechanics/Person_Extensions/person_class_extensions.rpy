@@ -1610,6 +1610,40 @@ init -1 python:
 
     ####### Begin cum extension functions ######
 
+    # calculate generic arousal change for a person based on opinions during MC cum shot
+    # with all favorable max gain is 12 arousal points
+    def partner_generic_arousal(person):
+        total_amount = 0
+        if not mc.condom:
+            total_amount += 2 * the_person.get_opinion_score("bareback sex")
+        else:
+            total_amount -= 2 * the_person.get_opinion_score("bareback sex")
+        if person.relationship != "Single":
+            total_amount += 2 * the_person.get_opinion_score("cheating on men")
+        return total_amount
+
+    def cum_in_vagina_extended(org_func):
+        def cum_in_vagina_wrapper(person, add_to_record = True):
+            # run original function
+            org_func(person, add_to_record)
+            # run extension code
+            person.change_arousal(partner_generic_arousal(person) + 5 * the_person.get_opinion_score("creampies"))
+        return cum_in_vagina_wrapper
+
+    # wrap up the cum_in_vagina function
+    Person.cum_in_vagina = cum_in_vagina_extended(Person.cum_in_vagina)
+
+    def cum_in_ass_extended(org_func):
+        def cum_in_ass_wrapper(person, add_to_record = True):
+            # run original function
+            org_func(person, add_to_record)
+            # run extension code
+            person.change_arousal(partner_generic_arousal(person) + 5 * the_person.get_opinion_score("anal creampies"))
+        return cum_in_ass_wrapper
+
+    # wrap up the cum_in_ass function
+    Person.cum_in_ass = cum_in_ass_extended(Person.cum_in_ass)
+
     def cum_on_face_extended(org_func):
         def cum_on_face_wrapper(person, add_to_record = True):
             # run original function
@@ -1618,7 +1652,7 @@ init -1 python:
             mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum facials"] = report_log.get("cum facials", 0) + 1
-
+            person.change_arousal(partner_generic_arousal(person) + 5 * the_person.get_opinion_score("cum facials"))
         return cum_on_face_wrapper
 
     # wrap up the cum_on_face function
@@ -1632,7 +1666,7 @@ init -1 python:
             mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on tits"] = report_log.get("cum on tits", 0) + 1
-
+            person.change_arousal(partner_generic_arousal(person) + 5 * the_person.get_opinion_score("being covered in cum"))
         return cum_on_tits_wrapper
 
     # wrap up the cum_on_tits function
@@ -1646,7 +1680,7 @@ init -1 python:
             mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on stomach"] = report_log.get("cum on stomach", 0) + 1
-
+            person.change_arousal(partner_generic_arousal(person) + 5 * the_person.get_opinion_score("being covered in cum"))
         return cum_on_stomach_wrapper
 
     # wrap up the cum_on_stomach function
@@ -1660,7 +1694,7 @@ init -1 python:
             mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on ass"] = report_log.get("cum on ass", 0) + 1
-
+            person.change_arousal(partner_generic_arousal(person) + 5 * the_person.get_opinion_score("being covered in cum"))
         return cum_on_ass_wrapper
 
     # wrap up the cum_on_ass function
@@ -1673,7 +1707,7 @@ init -1 python:
             # run extension code
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["drinking cum"] = report_log.get("drinking cum", 0) + 1
-
+            person.change_arousal(partner_generic_arousal(person) + 5 * the_person.get_opinion_score("drinking cum"))
         return cum_in_mouth_wrapper
 
     # wrap up the cum_on_ass function
