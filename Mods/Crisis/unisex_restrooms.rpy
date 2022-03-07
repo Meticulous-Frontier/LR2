@@ -452,7 +452,7 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     "The hand never stops stroking you as you start to blow your load. Thank god whoever it is knows how to finish the job!"
     $ the_person.cum_on_face(add_to_record = False)
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person, add_to_log = False)
-    "After you finishes, she gives you a few extra strokes, drawing out any remaining cum. You feel a pair of lips lightly kiss the tip."
+    "After you finish, she gives you a few extra strokes, drawing out any remaining cum. You feel a pair of lips lightly kiss the tip."
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)

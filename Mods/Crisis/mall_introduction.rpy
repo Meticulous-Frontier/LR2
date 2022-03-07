@@ -100,7 +100,7 @@ label mall_introduction_action_label():
         $ stranger.change_stats(happiness = 10, love = 5)
 
         if stranger.sluttiness > 30:
-            stranger "Well, he's very hansom [known_person.name], I wouldn't mind going on a date with him."
+            stranger "Well, he's very handsome [known_person.name], I wouldn't mind going on a date with him."
         elif stranger.sluttiness > 10:
             stranger "He is very cute [known_person.name], I might just do that."
         else:
