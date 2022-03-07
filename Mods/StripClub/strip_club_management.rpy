@@ -27,14 +27,14 @@ init 3304 python:
             mc.business.add_mandatory_crisis(strip_club_manager_reminder_action)
 
     def strip_club_manager_hire_more_stripper_reminder_requirement():
-        if __builtin__.len(stripclub_strippers) < 5: # the event only trigger if there's not the max nr. of strippers (5 + 1 manager)
+        if __builtin__.len(stripclub_strippers) < 7: # the event only trigger if there's not the max nr. of strippers (5 + 1 manager)
             if strip_club_get_manager(): # the event only trigger if there's a Manager
                 if day % 5 == 0 and time_of_day == 2: # the event trigger every 5 days in the afternoon. (phone call)
                     return True
         return False
 
     def add_strip_club_manager_hire_more_stripper_reminder_action():
-        if __builtin__.len(stripclub_strippers) < 5:
+        if __builtin__.len(stripclub_strippers) < 7:
             strip_club_manager_hire_more_stripper_reminder_action = Action("A simple reminder from the strip club manager to hire more stripper", strip_club_manager_hire_more_stripper_reminder_requirement, "strip_club_manager_hire_more_stripper_reminder_label")
             mc.business.add_mandatory_crisis(strip_club_manager_hire_more_stripper_reminder_action)
 
@@ -125,11 +125,11 @@ label strip_club_manager_reminder_label():
     return
 
 label strip_club_manager_hire_more_stripper_reminder_label(): # phone call
-    if __builtin__.len(stripclub_strippers) >= 5:
+    if __builtin__.len(stripclub_strippers) >= 7:
         return
     "Suddenly your smartphone rings, it's your strip club manager."
     $ the_person = strip_club_get_manager()
-    the_person "Hello [the_person.mc_title], I called just to remind you we can have five girls here, performing on the stage."
+    the_person "Hello [the_person.mc_title], I called just to remind you we can have seven girls here, performing on the stage."
     the_person "A full roster would make setting up the shifts easier and, of course, it would be more profitable for you."
     mc.name "Thank you [the_person.title]... I know, I'll find someone, I promise!"
     the_person "Okay [the_person.mc_title], thank you!"
