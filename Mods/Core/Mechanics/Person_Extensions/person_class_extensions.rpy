@@ -926,9 +926,6 @@ init -1 python:
             self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
 
         destination = self.get_destination() #None destination means they have free time
-        if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
-            destination = None
-
         # changing outfits is handled by move_person wrapper function
         if destination:
             location.move_person(self, destination)
@@ -940,10 +937,12 @@ init -1 python:
                 self.change_happiness(max(-1,self.get_opinion_score("work uniforms")), add_to_log = False)
             else:
                 self.change_happiness(self.get_opinion_score("work uniforms"), add_to_log = False)
-
-        #A skimpy outfit is defined as the top 20% of a girls natural sluttiness.
-        if self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.80 and self.get_opinion_score("skimpy outfits") > -2:
-            self.change_slut(1, max_modified_to = ((self.get_opinion_score("skimpy outfits") +1) * 10), add_to_log = False)
+            if self.planned_uniform and self.planned_uniform.slut_requirement > self.sluttiness*0.8: #A skimpy outfit/uniform is defined as the top 20% of a girls natural sluttiness.
+                self.change_slut(self.get_opinion_score("skimpy uniforms"), 30, add_to_log = False)
+        else:
+            #A skimpy outfit is defined as the top 20% of a girls natural sluttiness.
+            if self.planned_outfit and self.planned_outfit.slut_requirement > self.sluttiness * 0.80 and self.get_opinion_score("skimpy outfits") > -2:
+                self.change_slut(1, max_modified_to = ((self.get_opinion_score("skimpy outfits") +1) * 10), add_to_log = False)
 
         #A conservative outfit is defined as the bottom 20% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.20:
@@ -1590,13 +1589,13 @@ init -1 python:
 
     Person.hide_person = hide_person_enhanced
 
-    def is_person_at_work(self): #Checks to see if the character is at work.
+    def person_is_at_work(self): #Checks to see if the character is at work.
         if not self.job or not self.job.job_location:
             return False
 
-        return self.job.schedule.get_destination() == self.location
+        return self.location == self.job.job_location
 
-    Person.is_at_work = is_person_at_work
+    Person.is_at_work = person_is_at_work
 
     def is_person_at_mc_house(self):
         return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
@@ -1849,7 +1848,7 @@ init -1 python:
             self.apply_outfit(self.maid_outfit)
             return
 
-        if self.has_role(maid_role):
+        if self.should_wear_maid_outfit():
             self.maid_outfit = maid_wardrobe.decide_on_outfit2(self)
 
         if self.maid_outfit:
@@ -1864,12 +1863,6 @@ init -1 python:
     Person.is_wearing_uniform = person_is_wearing_uniform
 
     def should_wear_uniform_enhanced(self):
-        if not mc.business.is_open_for_business():
-            return False
-
-        if mc.business.get_employee_title(self) == "None":
-            return False
-
         if not self.is_at_work():
             return False
 
@@ -1880,10 +1873,7 @@ init -1 python:
             return True
 
         wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
-        if wardrobe and wardrobe.get_count() > 0:  #Check to see if there's anything stored in the uniform section.
-            return True
-
-        return False
+        return wardrobe and wardrobe.get_count() > 0  #Check to see if there's anything stored in the uniform section.
 
     Person.should_wear_uniform = should_wear_uniform_enhanced
 
