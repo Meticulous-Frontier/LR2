@@ -42,10 +42,12 @@ init 2 python:
 
         # init Sarah role
         sarah_role = Role(role_name ="Childhood Friend", actions =[alt_hire_action], role_dates = [sarah_bar_date_ask_action], hidden = True)
+        # initial representative job
+        sarah_initial_job = Job("Representative", unimportant_job_role, work_days = [], work_times = [])
 
         global sarah
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
-            eyes = "dark blue", personality = Sarah_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = sarah_wardrobe, \
+            eyes = "dark blue", personality = Sarah_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = sarah_wardrobe, job = sarah_initial_job, \
             stat_array = [5,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
             title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit,
             force_random = True, forced_opinions = [
