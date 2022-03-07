@@ -301,6 +301,8 @@ init 5 python:
     real_dress_list = [x for x in dress_list if x not in [bath_robe, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron, nightgown_dress, sweater_dress]]
     only_socks_list = [x for x in socks_list if x not in [thigh_highs, fishnets, garter_with_fishnets]]
     real_pantyhose_list = [x for x in socks_list if x not in only_socks_list]
+    earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
+    neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Wool_Scarf"]]
 
     class WardrobeBuilder():
         default_person = None
@@ -421,10 +423,7 @@ init 5 python:
 
         @staticmethod
         def clothing_in_preferences(topic, clothing):
-            for layer in WardrobeBuilder.preferences[topic].keys():
-                if clothing in WardrobeBuilder.preferences[topic][layer]:
-                    return True
-            return False
+            return any(clothing in WardrobeBuilder.preferences[topic][x] for x in WardrobeBuilder.preferences[topic].keys())
 
         @staticmethod
         def get_item_color(item, color, exclude_list = [], multiplier = 1.0):
@@ -451,9 +450,6 @@ init 5 python:
                     return opinion
 
             return "the colour black" # default fallback
-
-        earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
-        neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Wool_Scarf"]]
 
         def __init__(self, person):
             if person and isinstance(person, Person):
@@ -490,52 +486,32 @@ init 5 python:
             underwear = self.build_underwear(points, min_points)
             overwear = self.build_overwear(points, min_points)
 
-            for item in underwear.upper_body:
-                if overwear.can_add_upper(item):
-                    overwear.add_upper(item)
+            for item in [x for x in underwear.upper_body if overwear.can_add_upper(x)]:
+                overwear.add_upper(item)
 
-            for item in underwear.lower_body:
-                if overwear.can_add_lower(item):
-                    overwear.add_lower(item)
+            for item in [x for x in underwear.lower_body if overwear.can_add_lower(x)]:
+                overwear.add_lower(item)
 
-            for item in underwear.feet:
-                if overwear.can_add_feet(item):
-                    overwear.add_feet(item)
+            for item in [x for x in underwear.feet if overwear.can_add_feet(x)]:
+                overwear.add_feet(item)
 
-            for item in underwear.accessories:
-                if overwear.can_add_accessory(item):
-                    overwear.add_accessory(item)
+            for item in [x for x in underwear.accessories if overwear.can_add_accessory(item)]:
+                overwear.add_accessory(item)
 
             # prevent any item from having no colour set
-            for cloth in overwear.upper_body + overwear.lower_body + overwear.feet + overwear.accessories:
-                if __builtin__.len(cloth.colour) < 4:
-                    cloth.colour = [1, 1, 1, .5]    # transparant white is easy to spot for debuggin
+            for cloth in [x for x in overwear.upper_body + overwear.lower_body + overwear.feet + overwear.accessories if __builtin__.len(x.colour) < 4]:
+                cloth.colour = [1, 1, 1, .2]    # transparent white is easy to spot for debugging
 
             return overwear
 
         def get_hate_list(self):
-            item_list = []
-            for pref in self.preferences.keys() + self.color_prefs.keys():
-                score = self.person.get_opinion_score(pref)
-                if score == -2:
-                    item_list.append(pref)
-            return item_list
+            return [x for x in self.preferences.keys() + self.color_prefs.keys() if self.person.get_opinion_score(x) == -2]
 
         def get_love_list(self):
-            item_list = []
-            for pref in self.preferences.keys() + self.color_prefs.keys():
-                score = self.person.get_opinion_score(pref)
-                if score == 2:
-                    item_list.append(pref)
-            return item_list
+            return [x for x in self.preferences.keys() + self.color_prefs.keys() if self.person.get_opinion_score(x) == 2]
 
         def get_color_hate_list(self):
-            item_list = []
-            for pref in self.color_prefs.keys():
-                score = self.person.get_opinion_score(pref)
-                if score == -2:
-                    item_list.append(pref)
-            return item_list
+            return [x for x in self.color_prefs.keys() if self.person.get_opinion_score(x) == -2]
 
         def approves_outfit_color(self, outfit):
             for clothing in outfit.feet + outfit.lower_body + outfit.upper_body:
@@ -584,10 +560,10 @@ init 5 python:
             if item:
                 outfit.add_feet(item, self.get_item_color(item, color_feet, self.get_color_hate_list(), 0.8))
 
-            self.add_accessory_from_list(outfit, self.build_filter_list(self.earings_only_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(earings_only_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
             self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
             self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
-            self.add_accessory_from_list(outfit, self.build_filter_list(self.neckwear_without_collars, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_without_collars, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
 
             outfit.update_name()
 
@@ -643,9 +619,7 @@ init 5 python:
                 add_make_up_to_outfit(self.person, outfit)
 
             outfit.update_name()
-
             return outfit
-
 
         def build_filter_list(self, item_list, points, min_points = 0, filter_list = [], layers = [1, 2, 3]):
             # extend range until we have items
@@ -688,13 +662,6 @@ init 5 python:
         def get_item_from_list(self, item_group, filtered_list, points = 0, empty_item_opinions = [], no_pattern = False):
             weighted_list = self.build_weighted_list(item_group, filtered_list)
 
-            for pref in self.preferences:
-                if item_group in self.preferences[pref]:
-                    if self.person.get_opinion_score(pref) == -2:
-                        item_list = [x for x in weighted_list if x[0] not in self.preferences[pref][item_group]]
-                        if item_list: # check if we have any items left, if not use original weighted list
-                            weighted_list = item_list
-
             item = get_random_from_weighted_list(weighted_list)
             if not item:    # make sure we have an item from the list
                 item = get_random_from_list(filtered_list)
@@ -712,16 +679,18 @@ init 5 python:
             return item
 
         def build_weighted_list(self, item_group, filtered_list):
-            item_list = []
-            for item in filtered_list:
-                item_list.append([item, 0])
+            item_list = [[x, 0, True] for x in filtered_list]
             for pref in self.preferences:
                 score = self.person.get_opinion_score(pref)
                 for name in [x for x in self.preferences[pref] if x == item_group]:
                     for item in [x for x in self.preferences[pref][name] if x in filtered_list]:
-                        [x for x in item_list if item in x][0][1] += (score + 2) ^ 3
+                        found = next((x for x in item_list if x[0]==item), None)
+                        if found:
+                            if score == -2:
+                                found[2] = False
+                            found[1] += (score + 2) ^ 3
 
-            return [x for x in item_list if x[1] > 0]
+            return [x for x in item_list if x[1] > 0 and x[2]] or [x for x in item_list if x[1] > 0]
 
 
         def get_color(self, base_color = None):
@@ -759,12 +728,8 @@ init 5 python:
 
         def change_color_theme(self, outfit, the_colour):
             coloured_outfit = outfit.get_copy()
-            color_list = []
-            neutral_list = []
-            for col in self.color_prefs[the_colour]:
-                color_list.append(self.color_prefs[the_colour][col][:])
-            for col in neutral_colors:
-                neutral_list.append(neutral_colors[col][:])
+            color_list = [self.color_prefs[the_colour][x][:] for x in self.color_prefs[the_colour]]
+            neutral_list = [neutral_colors[x][:] for x in neutral_colors]
             main_colour = get_random_from_list(color_list)
             neutral_colour = get_random_from_list(neutral_list)
             if coloured_outfit.is_dress():
@@ -810,9 +775,7 @@ init 5 python:
                 else:
                     opinion_color = self.person.favorite_colour()
 
-            color_list = []
-            for col in self.color_prefs[opinion_color]:
-                color_list.append(self.color_prefs[opinion_color][col][:])
+            color_list = [self.color_prefs[opinion_color][x][:] for x in self.color_prefs[opinion_color]]
             if main_colour == None:
                 main_colour = get_random_from_list(color_list)
 
