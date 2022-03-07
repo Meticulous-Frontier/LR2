@@ -202,6 +202,7 @@ label ellie_start_intro_note_label():
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] gets up and leaves your office. This is a precarious situation, and you can't help but worry about it."
     $ clear_scene()
+    $ mc.location.show_background()
     $ mc.business.add_mandatory_crisis(ellie_meet_ellie_intro)
     #TODO link next scene.
     return
@@ -331,6 +332,7 @@ label ellie_head_researcher_halfway_intro_label():
     "WARNING: If you want to hire [ellie.name], make sure you have an open employee position! You may miss the opportunity to hire her if you don't!"
     #TODO link up next event.
     $ mc.business.add_mandatory_crisis(ellie_end_blackmail)
+    $ mc.location.show_background()
     return
 
 label ellie_unnecessary_payment_label():    #Use this scene each week if MC can't find out info on Ellie for some reason (head researcher fired, etc)
@@ -497,6 +499,7 @@ label ellie_work_welcome_label():
     $ mc.business.add_employee_hr(the_person)
     $ the_person.set_schedule(None, the_times = [1,2,3])    # free roam when not working
     $ mc.business.add_mandatory_crisis(ellie_work_welcome_monday)
+    $ mc.location.show_background()
 
     return
 
@@ -543,6 +546,7 @@ label ellie_work_welcome_monday_label():
     "[the_person.possessive_title] gets up and starts to walk away. You have now unlocked IT projects!"
     "Talk to your IT director to change projects when she is at work. If she is working on developing a new project, she will be in the Research Department."
     $ ellie.add_unique_on_room_enter_event(ellie_never_been_kissed)
+    $ mc.location.show_background()
     return
 
 
@@ -770,6 +774,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
         $ the_person.change_stats(happiness = 10, love = 5, obedience = 10)
     $ clear_scene()
     "You dismiss her. After you get yourself cleaned up, you get back to work."
+    $ mc.location.show_background()
     return
 
 label ellie_grope_followup_label():
@@ -781,7 +786,7 @@ label ellie_grope_followup_label():
     $ ceo_office.show_background()
     "You take her to your office and close the door. You offer to let her sit down but she declines."
     the_person "I'll keep this short, I just didn't want any other girls to hear this..."
-    the_person "I'm sorry for... yah know... peein my pants like that..."
+    the_person "I'm sorry for... yah know... peeing my pants like that..."
     $ the_person.draw_person(emotion = "angry")
     the_person "But to be fair, ya'll didn't tell me something like that could happen!"
     mc.name "[the_person.title]... did it feel good? When that happened?"
@@ -789,17 +794,18 @@ label ellie_grope_followup_label():
     mc.name "[the_person.title]... I don't think you peed yourself, I think you just had an orgasm."
     the_person "I had a... a what now?"
     mc.name "[the_person.title], have you ever masturbated?"
-    the_person "What the heckin kind of question is that? Of course not, that's for unsavory folk."
+    the_person "What the hecking kind of question is that? Of course not, that's for unsavory folk."
     $ the_person.draw_person(emotion = "sad")
     "You sigh. She is struggling in her brain to overcome her sexual desires, and being exposed to your serums is starting to overwhelm her."
     "She is making progress, but you can tell it is going to be a long road before you can fully corrupt her."
     mc.name "I tell you what. I'm going to email you some sexual health websites. I want you to do some research on things this weekend."
     mc.name "With the work we do here on serums, it is important that you have a good understanding what is actually going on with your body."
-    the_person "You're sayin... this is a work assignment?"
+    the_person "You're saying... this is a work assignment?"
     mc.name "That's right. It will help you do your job better."
     mc.name "I'm not saying you have to masturbate, but getting to know your body better might help you better understand what we are trying to achieve here, in general."
     the_person "Okay, I'll take a look."
     $ clear_scene()
+    $ mc.location.show_background()
     "[the_person.possessive_title] leaves your office. You take a few minutes and email her some links to positive sex health websites and information."
     $ mc.business.add_mandatory_morning_crisis(ellie_text_message_apology)
     return
@@ -1002,6 +1008,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] awkwardly turns and leaves your office. You can't help but smile."
     "She'll get used to servicing your needs in your office soon enough. For now you are content with the leap of progress you have made with her."
+    $ mc.location.show_background()
     $ the_person.add_unique_on_room_enter_event(ellie_never_tasted_cock)
     $ mc.business.add_mandatory_crisis(ellie_brings_lunch)
     return
@@ -1217,6 +1224,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     $ mc.business.add_mandatory_crisis(ellie_brings_lunch)  #TODO delete this line with 48.1 release
     $ the_person.add_unique_on_room_enter_event(ellie_turned_on_while_working_intro)
     $ the_person.apply_planned_outfit()
+    $ mc.location.show_background()
     #"Ellie may now approach MC once in a while when she is working on nanobot programs because working on sex related code is getting in her head and she needs some relief"
     return
 
@@ -1352,6 +1360,7 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
 
     $ mc.business.add_mandatory_crisis(ellie_dinner_date_intro)
     $ clear_scene()
+    $ mc.location.show_background()
     return
 
 label ellie_cunnilingus_office_label(the_person):
