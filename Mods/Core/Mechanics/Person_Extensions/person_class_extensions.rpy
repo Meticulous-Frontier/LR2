@@ -1958,7 +1958,7 @@ init -1 python:
             return
 
         if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
-            (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(uniform.get_copy())
+            (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform.get_copy())
         elif creative_colored_uniform_policy.is_active():
             self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
         else:
