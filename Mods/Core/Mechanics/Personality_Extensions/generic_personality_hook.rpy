@@ -513,7 +513,7 @@ init 2 python:
         lily.wardrobe = lily.wardrobe.merge_wardrobes(wardrobe_from_xml("Lily_Extended_Wardrobe"), keep_primary_name = True)
 
         # remove strange outfits (they should not be in her wardrobe at all)
-        mom.wardrobe.remove_outfit("mom_apron")
+        mom.wardrobe.remove_outfit("Mom_Apron")
         mom.wardrobe.remove_outfit("lingerie_1")
         lily.wardrobe.remove_outfit("pink_lingerie")
         stephanie.wardrobe.remove_outfit("Nude")
