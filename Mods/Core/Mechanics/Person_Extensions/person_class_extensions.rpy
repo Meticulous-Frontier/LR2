@@ -981,15 +981,10 @@ init -1 python:
             self.change_slut(self.get_opinion_score("not wearing anything"), max_modified_to = 60, add_to_log = False)
 
         for lta_store in [self.on_room_enter_event_list, self.on_talk_event_list]:
-            removal_list = []
             for an_action in [x for x in lta_store if isinstance(x, Limited_Time_Action)]:
                 an_action.turns_valid -= 1
                 if an_action.turns_valid <= 0:
-                    removal_list.append(an_action)
-
-            for action_to_remove in removal_list:
-                if action_to_remove in lta_store:
-                    lta_store.remove(action_to_remove)
+                    lta_store.remove(an_action)
 
         for a_role in self.special_role:
             a_role.run_move(self)
