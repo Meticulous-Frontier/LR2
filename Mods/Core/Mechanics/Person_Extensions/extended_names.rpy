@@ -2,14 +2,14 @@ init -1 python:
     # prevent choosing name already used in game
     def get_unused_name():
         names = [person.name for person in all_people_in_the_game()]
-        return get_random_from_list(list(set(list_of_names)-set(names)))
+        return renpy.random.choice(list(set(list_of_names)-set(names)))
 
     get_random_name = get_unused_name
 
     # prevent choosing last_name already used in game
     def get_unused_last_name():
         names = [person.last_name for person in all_people_in_the_game()]
-        return get_random_from_list(list(set(list_of_last_names)-set(names)))
+        return renpy.random.choice(list(set(list_of_last_names)-set(names)))
 
     get_random_last_name = get_unused_last_name
 

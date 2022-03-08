@@ -24,7 +24,7 @@ init 1 python:
                     if valid_side_effect:
                         valid_side_effects.append(side_effect_trait)
 
-                the_side_effect = get_random_from_list(valid_side_effects)
+                the_side_effect = renpy.random.choice(valid_side_effects)
                 self.add_trait(the_side_effect, is_side_effect = True)
                 if add_to_log:
                     mc.log_event(self.name + " developed side effect " + the_side_effect.name + " due to " + trait.name, "float_text_blue")

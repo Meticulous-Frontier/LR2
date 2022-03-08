@@ -30,7 +30,7 @@ init -2 python:
             if element == obj:
                 return element
         return
-    
+
     # finds all qualifying items in list and returns them as a smaller list.
     def find_items_in_list(search, list):
         items = []
@@ -46,11 +46,11 @@ init -2 python:
         tuple_list = []                                                    # NOTE: Needed a generic list setup, this seems to cover most usecases I came across.
         for what_to_format in list_to_format:
             if what_to_format is not ignore:
-                
+
                 if attrib is not "":
                     tuple_string = str(string) + str(vars(what_to_format)[attrib]) # e.g attrib = "name" for SerumTrait.name to be displayed
                     tuple_list.append([tuple_string, what_to_format])
-                
+
                 else:
                     tuple_string = str(string) + str(what_to_format)
                     tuple_list.append([tuple_string, what_to_format])
@@ -59,7 +59,6 @@ init -2 python:
                 tuple_list.append([tuple_string, what_to_format])
         return tuple_list
 
-init -2 python:
     def sort_display_list_extra(the_item): #Function to use when sorting lists of actions (and potentially people or strings)
         extra_args = None
         if isinstance(the_item, list): #If it's a list it's actually an item of some sort with extra args. Break those out and continue.
@@ -87,3 +86,9 @@ init -2 python:
         if not back_extension is None:
             people_list.extend(["Back"])
         return people_list
+
+init -1 python:
+        def get_random_from_list(list):
+            if list:
+                return renpy.random.choice(list)
+            return None

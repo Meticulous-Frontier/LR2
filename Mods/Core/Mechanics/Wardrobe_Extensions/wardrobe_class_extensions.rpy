@@ -17,7 +17,7 @@ init -1 python:
             valid_overwear = [x for x in self.overwear_sets if x.get_overwear_slut_score() <= sluttiness_limit and x.get_overwear_slut_score() >= sluttiness_min]
 
         if valid_overwear:
-            return get_random_from_list(valid_overwear).get_copy()
+            return renpy.random.choice(valid_overwear).get_copy()
         elif guarantee_output:
             if depth < 2:
                 return self.get_random_appropriate_overwear(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences, depth + 1)
@@ -41,7 +41,7 @@ init -1 python:
             valid_outfits = [x for x in self.outfits if x.get_full_outfit_slut_score() <= sluttiness_limit and x.get_full_outfit_slut_score() >= sluttiness_min]
 
         if valid_outfits:
-            return get_random_from_list(valid_outfits).get_copy()
+            return renpy.random.choice(valid_outfits).get_copy()
         elif guarantee_output:
             if depth < 2:
                 return self.get_random_appropriate_outfit(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences, depth + 1)
@@ -64,7 +64,7 @@ init -1 python:
             valid_underwear = [x for x in self.underwear_sets if x.get_underwear_slut_score() <= sluttiness_limit and x.get_underwear_slut_score() >= sluttiness_min]
 
         if valid_underwear:
-            return get_random_from_list(valid_underwear).get_copy()
+            return renpy.random.choice(valid_underwear).get_copy()
         elif guarantee_output: # If an output is guaranteed we always return an Outfit object (even if it is empty). Otherwise we return None to indicate failure to find something.
             if depth < 2: #Sets an effective recursion limit.
                 return self.get_random_appropriate_underwear(sluttiness_limit+5, sluttiness_min-5, guarantee_output, preferences, depth + 1)

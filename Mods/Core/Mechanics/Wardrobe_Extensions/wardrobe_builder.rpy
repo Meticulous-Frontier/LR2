@@ -196,7 +196,7 @@ init 5 python:
             if the_colour:
                 item.colour = the_colour
             else:
-                item.colour = neutral_palette[get_random_from_list(neutral_color_map["Underwear"])]
+                item.colour = neutral_palette[renpy.random.choice(neutral_color_map["Underwear"])]
             item.pattern = None
             item.colour[3] = current_alpha
             return item
@@ -205,26 +205,25 @@ init 5 python:
             if the_colour:
                 item.colour = the_colour
             else:
-                item.colour = neutral_palette[get_random_from_list(neutral_color_map["Underwear"])]
+                item.colour = neutral_palette[renpy.random.choice(neutral_color_map["Underwear"])]
             item.pattern = None
             item.colour[3] = current_alpha
             return item
 
         if item.proper_name in neutral_color_map.keys():
-            item.colour = neutral_palette[get_random_from_list(neutral_color_map[item.proper_name])]
+            item.colour = neutral_palette[renpy.random.choice(neutral_color_map[item.proper_name])]
             item.colour[3] = current_alpha
             if item.proper_name == "Sneakers": #For sneakers we always set the pattern color to white (laces)
-                key_value = get_random_from_list(list(item.supported_patterns.keys()))
-                item.pattern = item.supported_patterns[key_value]
+                item.pattern = item.supported_patterns[renpy.random.choice(item.supported_patterns.keys())]
                 color_key = item.proper_name + "_Pattern"
-                item.colour_pattern = neutral_palette[get_random_from_list(neutral_color_map[color_key])]
+                item.colour_pattern = neutral_palette[renpy.random.choice(neutral_color_map[color_key])]
                 item.colour_pattern[3] = current_alpha
             elif isinstance(item, Facial_Accessory):    #facial accessories don't have patterns
                 pass
             elif item.pattern:
                 color_key = item.proper_name + "_Pattern"
                 if color_key in neutral_color_map.keys():
-                    item.colour_pattern = neutral_palette[get_random_from_list(neutral_color_map[color_key])]
+                    item.colour_pattern = neutral_palette[renpy.random.choice(neutral_color_map[color_key])]
                     item.colour_pattern[3] = current_alpha
                 else:
                     item.colour_pattern = item.colour   #Preserve the pattern to possibly colorize later
@@ -280,13 +279,13 @@ init 5 python:
         if make_up_score > 0 or (make_up_score == 0 and renpy.random.randint(0, 4) == 0):
             make_up_score += renpy.random.randint(1, 2)
             if make_up_score > 0:
-                outfit.add_accessory(lipstick.get_copy(), get_random_from_list(lipstick_colours))
+                outfit.add_accessory(lipstick.get_copy(), renpy.random.choice(lipstick_colours))
             if make_up_score > 1:
-                outfit.add_accessory(light_eye_shadow.get_copy(), get_random_from_list(eye_shadow_colours))
+                outfit.add_accessory(light_eye_shadow.get_copy(), renpy.random.choice(eye_shadow_colours))
             if make_up_score > 2:
-                outfit.add_accessory(blush.get_copy(), get_random_from_list(blush_colours))
+                outfit.add_accessory(blush.get_copy(), renpy.random.choice(blush_colours))
             if make_up_score > 3:
-                outfit.add_accessory(heavy_eye_shadow.get_copy(), get_random_from_list(eye_shadow_colours))
+                outfit.add_accessory(heavy_eye_shadow.get_copy(), renpy.random.choice(eye_shadow_colours))
         return
 
     real_bra_list = [x for x in bra_list if x not in [cincher, heart_pasties]]
@@ -430,8 +429,8 @@ init 5 python:
 
                 # color not match list
                 if not WardrobeBuilder.get_color_opinion(color) in available_list:
-                    color_set = WardrobeBuilder.color_prefs[get_random_from_list(available_list)]
-                    color_name = get_random_from_list(color_set.keys())
+                    color_set = WardrobeBuilder.color_prefs[renpy.random.choice(available_list)]
+                    color_name = renpy.random.choice(color_set.keys())
                     color = color_set[color_name][:]
                     return [color[0] * multiplier, color[1] * multiplier, color[2] * multiplier, color[3]]
             return [color[0] * multiplier, color[1] * multiplier, color[2] * multiplier, color[3]]
@@ -473,8 +472,7 @@ init 5 python:
             for cp in [x for x in WardrobeBuilder.color_prefs if x not in get_excluded(base_color)]:
                 score = person.get_opinion_score(cp)
                 if score > -2: # don't append colors she hates
-                    for col in WardrobeBuilder.color_prefs[cp]:
-                        color_list.append([WardrobeBuilder.color_prefs[cp][col][:], (score + 2) ^ 3])
+                    color_list.extend([[WardrobeBuilder.color_prefs[cp][x][:], (score + 2) ^ 3] for x in WardrobeBuilder.color_prefs[cp]])
 
             # renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
@@ -516,11 +514,11 @@ init 5 python:
         def build_weighted_list(person, item_group, filtered_list):
             item_list = [[x, 1, True] for x in filtered_list]
             for pref in WardrobeBuilder.preferences:
-                score = person.get_opinion_score(pref)
                 for name in [x for x in WardrobeBuilder.preferences[pref] if x == item_group]:
                     for item in [x for x in WardrobeBuilder.preferences[pref][name] if x in filtered_list]:
                         found = next((x for x in item_list if x[0]==item), None)
                         if found:
+                            score = person.get_opinion_score(pref)
                             if score == -2:
                                 found[2] = False
                             found[1] += (score + 2) ^ 3
@@ -551,10 +549,10 @@ init 5 python:
                 return item
 
             # force pattern for certain items, others random 50/50
-            if item and hasattr(item, "supported_patterns") and item.supported_patterns and (renpy.random.randint(0, 1) == 1 or item in [apron, breed_collar, cum_slut_collar, fuck_doll_collar]):
+            if item and hasattr(item, "supported_patterns") and item.supported_patterns and \
+                (renpy.random.randint(0, 1) == 1 or item in [apron, breed_collar, cum_slut_collar, fuck_doll_collar]):
                 item = item.get_copy() # get copy before applying pattern
-                key_value = get_random_from_list(list(item.supported_patterns.keys()))
-                item.pattern = item.supported_patterns[key_value]
+                item.pattern = item.supported_patterns[renpy.random.choice(item.supported_patterns.keys())]
                 item.colour_pattern = WardrobeBuilder.get_color(person, item.colour)
 
             return item
@@ -758,7 +756,7 @@ init 5 python:
 
             # random chance of adding sexy underwear part (heart pasties / cincher)
             if points >= 7 and renpy.random.randint(0, 3 - self.person.get_opinion_score("lingerie")) == 0:
-                outfit.add_upper(*make_upper_item_transparent(get_random_from_list([cincher, heart_pasties]), points, color_upper))
+                outfit.add_upper(*make_upper_item_transparent(renpy.random.choice([cincher, heart_pasties]), points, color_upper))
 
             # find lower body item
             if not item or not item.has_extension:
@@ -810,17 +808,17 @@ init 5 python:
 
             color_list = [self.color_prefs[opinion_color][x][:] for x in self.color_prefs[opinion_color]]
             if main_colour == None:
-                main_colour = get_random_from_list(color_list)
+                main_colour = renpy.random.choice(color_list)
 
             if coloured_underwear:
                 if renpy.random.randint(0,100) < 70: #70% chance to use similar color as outfit theme
-                    underwear_colour = get_random_from_list(color_list)
+                    underwear_colour = renpy.random.choice(color_list)
                 else:
                     color_list = []
                     underwear_colour = self.get_color(self.person, main_colour)
                     # for col in self.color_prefs[under_colour]:
                     #     color_list.append(self.color_prefs[under_colour][col])
-                    # underwear_colour = get_random_from_list(color_list)
+                    # underwear_colour = renpy.random.choice(color_list)
 
             #First alteration we look at is bottom swap. Allow it if alterations are allowed or if we specifically allow bottom swaps.
             if swap_bottoms:

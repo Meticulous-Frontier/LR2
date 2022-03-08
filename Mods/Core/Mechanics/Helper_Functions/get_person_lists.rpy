@@ -12,7 +12,7 @@ init -1 python:
         return [x for x in list_of_places if not x in excluded_locations]
 
     def get_random_person_in_the_game(excluded_people = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
-        return get_random_from_list(all_people_in_the_game(excluded_people))
+        return renpy.random.choice(all_people_in_the_game(excluded_people))
 
     def get_random_person_in_location(location, excluded_people = []):
         return get_random_from_list([x for x in location.people if not x in excluded_people])

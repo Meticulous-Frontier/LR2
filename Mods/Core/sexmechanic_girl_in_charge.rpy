@@ -644,19 +644,19 @@ init 1000 python:
         unit_test_count = 0
         while unit_test_count < count:
             mc.change_location(bedroom)
-            the_person = get_random_from_list(known_people_in_the_game())
+            the_person = renpy.random.choice(known_people_in_the_game())
             the_person.love = renpy.random.randint(-50,50)
             the_person.sluttiness = renpy.random.randint(60,120)
             mc.energy = mc.max_energy
             the_person.energy = the_person.max_energy
-            renpy.call("get_fucked", the_person, unit_test = True, the_goal = get_random_from_list(list_of_all_dom_sex_goals))
+            renpy.call("get_fucked", the_person, unit_test = True, the_goal = renpy.random.choice(list_of_all_dom_sex_goals))
             unit_test_count += 1
 
     def GIC_unit_test_2(count = 1):#Count is the number of times we repeat the unit test.
         unit_test_count = 0
         while unit_test_count < count:
             mc.change_location(bedroom)
-            the_person = get_random_from_list(known_people_in_the_game())
+            the_person = renpy.random.choice(known_people_in_the_game())
             the_person.love = -50
             the_person.sluttiness = renpy.random.randint(60,120)
             mc.energy = mc.max_energy

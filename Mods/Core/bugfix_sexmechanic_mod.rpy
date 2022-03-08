@@ -71,14 +71,12 @@ init 5 python:
         return get_random_from_weighted_list(position_option_list)
 
     def girl_choose_object_enhanced(person, position):
-        possible_object_list = []
         if position is None:
             person.clear_situational_slut("sex_object")
             person.clear_situational_obedience("sex_object")
             return None
 
-        for an_object in mc.location.objects_with_trait(position.requires_location):
-            possible_object_list.append(an_object)
+        possible_object_list = [x for x in mc.location.objects_with_trait(position.requires_location)]
 
         picked_object = get_random_from_list(possible_object_list)
 
@@ -254,14 +252,11 @@ init 5 python:
         if forced_object:
             picked_object = forced_object
         else:
-            object_option_list = []
-            for loc_object in mc.location.objects:
-                if loc_object.has_trait(position.requires_location):
-                    object_option_list.append([loc_object.get_formatted_name().capitalize(), loc_object]) #Displays a list of objects in the room related to that position and their appropriate bonuses/penalties
+            object_option_list = [[x.get_formatted_name().capitalize(), x] for x in mc.location.objects if x.has_trait(position.requires_location)]
 
             # if we have only one object to pick for position, select it automatically (saves the user for selecting the only obvious choice)
-            if __builtin__.len(object_option_list) == 0:
-                picked_object = get_random_from_list(mc.location.objects)
+            if not object_option_list:
+                picked_object = renpy.random.choice(mc.location.objects)
             elif __builtin__.len(object_option_list) == 1:
                 picked_object = object_option_list[0][1]
             else:
@@ -393,19 +388,19 @@ init 5 python:
     def suggest_alt_vaginal_sex_position(person, the_position, the_object, ignore_taboo = False):
         alternate_position = kissing
         vaginal_positions_avail = filter(lambda x: x.skill_tag == "Vaginal" and not x == the_position and x.requires_location in the_object.traits and check_person_position_tags(person, x) and x.her_position_willingness_check(person, ignore_taboo = ignore_taboo), list_of_positions)
-        if person.get_opinion_score("vaginal sex") <= -2 or len(vaginal_positions_avail) == 0:   #She isn't willing to do any type of vaginal sex. Step down to oral.
+        if person.get_opinion_score("vaginal sex") <= -2 or not vaginal_positions_avail:   #She isn't willing to do any type of vaginal sex. Step down to oral.
             alternate_position = suggest_alt_oral_sex_position(person, the_position, the_object, ignore_taboo = ignore_taboo)
         else:
-            alternate_position = get_random_from_list(vaginal_positions_avail)
+            alternate_position = renpy.random.choice(vaginal_positions_avail)
         return alternate_position
 
     def suggest_alt_anal_sex_position(person, the_position, the_object, ignore_taboo = False):
         alternate_position = kissing
         anal_positions_avail = filter(lambda x: x.skill_tag == "Anal" and not x == the_position and x.requires_location in the_object.traits and check_person_position_tags(person, x) and x.her_position_willingness_check(person, ignore_taboo = ignore_taboo), list_of_positions)
-        if person.get_opinion_score("anal sex") <= -2 or len(anal_positions_avail) == 0:   #She isn't willing to do any type of anal sex. Step down to vaginal.
+        if person.get_opinion_score("anal sex") <= -2 or not anal_positions_avail:   #She isn't willing to do any type of anal sex. Step down to vaginal.
             alternate_position = suggest_alt_vaginal_sex_position(person, the_position, the_object, ignore_taboo = ignore_taboo)
         else:
-            alternate_position = get_random_from_list(anal_positions_avail)
+            alternate_position = renpy.random.choice(anal_positions_avail)
         return alternate_position
 
     def suggest_alternate_sex_position(person, the_position, the_object, ignore_taboo = False):

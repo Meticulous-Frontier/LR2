@@ -200,10 +200,11 @@ label starbuck_celebration_strip_event(the_person):
                         the_person "Okay, I don't care if my customers see me strip, let them enjoy the show."
                     else:
                         the_person "Okay, I don't care if someone enters the shop in the next few minutes, let them enjoy the show."
-                    $ the_person.change_arousal(4 * (the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive")))
-                    $ the_person.change_love(the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive"))
-                    $ the_person.change_slut(2 *(the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive")))
-                    $ should_be_private = False
+                    python:
+                        the_person.change_arousal(4 * the_person.get_opinion_score(["showing her ass", "showing her tits", "being submissive"]))
+                        the_person.change_love(the_person.get_opinion_score(["showing her ass", "showing her tits", "being submissive"]))
+                        the_person.change_slut(2 *(the_person.get_opinion_score(["showing her ass", "showing her tits", "being submissive"])))
+                        should_be_private = False
                     "[the_person.title] climbs up on the shop counter using it as a walkway to perform her sexy dance."
             $ the_person.draw_person(emotion = "happy", position = "back_peek")
             "[the_person.title] starts to dance to the music, swinging her hips and turning slowly to show herself off all around."

@@ -153,7 +153,7 @@ init -1 python:
             if self.has_role(prostitute_role):
                 self._bedroom = prostitute_bedroom
             else:
-                self._bedroom = get_random_from_list([generic_bedroom_1, generic_bedroom_2, generic_bedroom_3, generic_bedroom_4])
+                self._bedroom = renpy.random.choice([generic_bedroom_1, generic_bedroom_2, generic_bedroom_3, generic_bedroom_4])
         return self._bedroom
     Person.bedroom = property(get_person_bedroom, None, None, "Her bedroom")
 
@@ -245,7 +245,7 @@ init -1 python:
             return self._idle_pose
 
         if not hasattr(self, "_idle_pose"):
-            self._idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"])
+            self._idle_pose = renpy.random.choice(["stand2","stand3","stand4","stand5"])
 
         if renpy.call_stack_depth() < 2:
             # we are in the main menu (alternative idle_pose)
@@ -254,14 +254,14 @@ init -1 python:
             if self.location == gym:
                 pose = self.event_triggers_dict.get("gym_pose", None)
                 if not pose: # store preferred position in bdsm room (prevent switching on hover)
-                    pose = get_random_from_list(["missionary", "stand2", "back_peek", "stand4", "sitting"])
+                    pose = renpy.random.choice(["missionary", "stand2", "back_peek", "stand4", "sitting"])
                     self.event_triggers_dict["gym_pose"] = pose
                 return pose
 
         if self.has_role(caged_role):
             pose = self.event_triggers_dict.get("bdsm_room_pose", None)
             if not pose: # store preferred position in bdsm room (prevent switching on hover)
-                pose = get_random_from_list(["cowgirl", "kneeling1", "blowjob"])
+                pose = renpy.random.choice(["cowgirl", "kneeling1", "blowjob"])
                 self.event_triggers_dict["bdsm_room_pose"] = pose
             return pose
         return self._idle_pose
@@ -378,17 +378,17 @@ init -1 python:
         descriptor = "tits"
 
         if rank == 0:
-            adjective = get_random_from_list(["flat", "minute", "tiny"])
-            descriptor = get_random_from_list(["titties", "tits", "nipples"])
+            adjective = renpy.random.choice(["flat", "minute", "tiny"])
+            descriptor = renpy.random.choice(["titties", "tits", "nipples"])
         elif rank >= 1 and rank <= 3:
-            adjective = get_random_from_list(["firm", "perky", "small"])
-            descriptor = get_random_from_list(["breasts", "tits", "boobs"])
+            adjective = renpy.random.choice(["firm", "perky", "small"])
+            descriptor = renpy.random.choice(["breasts", "tits", "boobs"])
         elif rank >= 4 and rank <= 6:
-            adjective = get_random_from_list(["shapely", "large", "big", "generous"])
-            descriptor = get_random_from_list(["breasts", "tits", "bosoms"])
+            adjective = renpy.random.choice(["shapely", "large", "big", "generous"])
+            descriptor = renpy.random.choice(["breasts", "tits", "bosoms"])
         elif rank >= 7 and rank <= 9:
-            adjective = get_random_from_list(["large", "voluptuous", "colossal", "huge"])
-            descriptor = get_random_from_list(["breasts", "tits", "jugs", "melons"])
+            adjective = renpy.random.choice(["large", "voluptuous", "colossal", "huge"])
+            descriptor = renpy.random.choice(["breasts", "tits", "jugs", "melons"])
 
         return "{adj} {desc}".format(adj = adjective, desc = descriptor)
 
@@ -1057,6 +1057,21 @@ init -1 python:
 
     # Adds a function that edits and adds opinions. It also appends to the vanilla opinion pool.
     Person.add_opinion = add_opinion
+
+    def get_opinion_score_enhanced(self, topic): #Like get_opinion_topic, but only returns the score and not a tuple. Use this when determining a persons reaction to a relavent event.
+        if isinstance(topic, basestring):
+            if topic in self.opinions:
+                return self.opinions[topic][0]
+            if topic in self.sexy_opinions:
+                return self.sexy_opinions[topic][0]
+
+        return_value = 0
+        if isinstance(topic, list):
+            for a_topic in topic:
+                return_value += self.get_opinion_score(a_topic)
+        return return_value
+
+    Person.get_opinion_score = get_opinion_score_enhanced
 
     def update_opinion_with_score(self, topic, score, add_to_log = True):
         if topic in sexy_opinions_list:
@@ -2508,9 +2523,9 @@ init -1 python:
 
     def facial_or_swallow(self):    #Use this function to determine if girl wants a facial or to swallow cum. If neither is preferred, return one at random.
         if self.has_cum_fetish():
-            return get_random_from_list(["swallow", "facial"])
+            return renpy.random.choice(["swallow", "facial"])
         if self.get_opinion_score("cum facials") == self.get_opinion_score("drinking cum"):
-            return get_random_from_list(["swallow", "facial"])
+            return renpy.random.choice(["swallow", "facial"])
         if self.get_opinion_score("cum facials") > self.get_opinion_score("drinking cum"):
             return "facial"
         return "swallow"
@@ -2558,9 +2573,9 @@ init -1 python:
             if self.get_opinion_score(colour) == 2:
                 list_of_favorites.append(colour)
         if len(list_of_favorites) > 0:
-            self.event_triggers_dict["favorite_colour"] = get_random_from_list(list_of_favorites)
+            self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_favorites)
         else:
-            self.event_triggers_dict["favorite_colour"] = get_random_from_list(list_of_colours)
+            self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_colours)
             self.update_opinion_with_score(self.favorite_colour(), 2, add_to_log = False)
         return self.favorite_colour()
 

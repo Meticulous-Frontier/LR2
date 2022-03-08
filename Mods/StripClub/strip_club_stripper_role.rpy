@@ -261,9 +261,9 @@ label strip_club_hire_employee_label(the_person):
             the_person "Great, then I'll be a stripper for you."
         elif the_person.effective_sluttiness() > 70:
             the_person "I admit, I love turning men on, just making them horny while they ogle my body, mmm... Where should I sign?"
-        elif the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 1:
+        elif the_person.effective_sluttiness() > 40 and the_person.get_opinion_score(["showing her ass","showing her tits"]) > 1:
             the_person "I admit, I always wanted to do something like that. Seducing men, with my body on full display, mmm... Where should I sign?"
-        elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 3:
+        elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score(["showing her ass", "showing her tits"]) > 3:
             the_person "Maybe, if the money is good enough, I could give it a try..."
             mc.name "Your pay will be $[ran_num] a day. Do you think that will be good enough for you?"
             the_person "Really you will pay me that much? Ok, then my answer is yes, I'll work as stripper for you."

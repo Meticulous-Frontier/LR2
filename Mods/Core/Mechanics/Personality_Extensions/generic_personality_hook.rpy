@@ -49,15 +49,15 @@ init 2 python:
         if kids is None:
             kids = 0
             if relationship == "Single":
-                kids += get_random_from_list([0, 0, 0, 0, 1])
+                kids += renpy.random.choice([0, 0, 0, 0, 1])
             if relationship == "Girlfriend":
-                kids += get_random_from_list([0, 0, 0, 1, 1])
+                kids += renpy.random.choice([0, 0, 0, 1, 1])
             if relationship == "Fiancée":
-                kids += get_random_from_list([0, 0, 1, 1, 1])
-                kids += get_random_from_list([0, 0, 1, 1, 1])
+                kids += renpy.random.choice([0, 0, 1, 1, 1])
+                kids += renpy.random.choice([0, 0, 1, 1, 1])
             if relationship == "Married":
-                kids += get_random_from_list([0, 1, 1, 1, 1])
-                kids += get_random_from_list([0, 1, 1, 1, 1])
+                kids += renpy.random.choice([0, 1, 1, 1, 1])
+                kids += renpy.random.choice([0, 1, 1, 1, 1])
 
             if age < 25:
                 kids -= 1
@@ -207,14 +207,14 @@ init 2 python:
     def ensure_opinion_on_subject(person, opinions):
         if not any(x[0] in person.opinions for x in opinions):
             the_opinion_key = get_random_from_list(opinions)
-            degree = get_random_from_list([-2,-1,1,2])
+            degree = renpy.random.choice([-2,-1,1,2])
             person.opinions[the_opinion_key] = [degree, False]
         return
 
     def ensure_sexy_opinion_on_subject(person, opinions):
         if not any(x[0] in person.opinions for x in opinions):
             the_opinion_key = get_random_from_list(opinions)
-            degree = get_random_from_list([-2,-1,1,2])
+            degree = renpy.random.choice([-2,-1,1,2])
             person.sexy_opinions[the_opinion_key] = [degree, False]
         return
 
@@ -222,11 +222,11 @@ init 2 python:
         if not any(x[0] in person.sexy_opinions for x in opinions):
             the_opinion_key = get_random_from_list(opinions)
             if person.sex_skills[sex_skill] >= 3: # positive skew
-                degree = get_random_from_list([1,2])
+                degree = renpy.random.choice([1,2])
             elif person.sex_skills[sex_skill] < 1: # negative skew
-                degree = get_random_from_list([-2, -1])
+                degree = renpy.random.choice([-2, -1])
             else: # random
-                degree = get_random_from_list([-2,-1,1,2])
+                degree = renpy.random.choice([-2,-1,1,2])
             person.sexy_opinions[the_opinion_key] = [degree, False]
         return
 
@@ -378,19 +378,19 @@ init 2 python:
         count = 0
         party_destinations = get_party_destinations()
         if person.get_opinion_score("Mondays") > 0:
-            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [0], the_times=[4])
+            person.set_override_schedule(renpy.random.choice(party_destinations), the_days = [0], the_times=[4])
             count += 1
         if person.get_opinion_score("Fridays") > 0:
-            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [4], the_times=[4])
+            person.set_override_schedule(renpy.random.choice(party_destinations), the_days = [4], the_times=[4])
             count += 1
         if person.get_opinion_score("the weekend") > 0:
-            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [5], the_times=[4])
-            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [6], the_times=[4])
+            person.set_override_schedule(renpy.random.choice(party_destinations), the_days = [5], the_times=[4])
+            person.set_override_schedule(renpy.random.choice(party_destinations), the_days = [6], the_times=[4])
             count += 2
 
         while count < 2:
             rnd_day = renpy.random.randint(0, 6)
-            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [rnd_day], the_times=[4])
+            person.set_override_schedule(renpy.random.choice(party_destinations), the_days = [rnd_day], the_times=[4])
             count += 1
         return
 
@@ -487,7 +487,7 @@ init 2 python:
         if len(list_of_unique_characters) == 0: # no more pre-made left
             return None
 
-        person = get_random_from_list(list_of_unique_characters)
+        person = renpy.random.choice(list_of_unique_characters)
 
         # improve stats for pre-made characters to be on par with random generated characters
         if recruitment_skill_improvement_policy.is_active():
