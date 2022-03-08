@@ -151,9 +151,9 @@ init -1 python:
 
     def generate_random_appropriate_outfit(person, outfit_type = "FullSets"):
         wardrobe_builder = WardrobeBuilder(person)
-        base_sluttiness = __builtin__.max(person.sluttiness - 15, 0) # first 15 points of sluttiness don't impact outfit builder
-        outfit = wardrobe_builder.build_outfit(outfit_type, __builtin__.min(base_sluttiness / 10, 12), __builtin__.min(base_sluttiness / 40, 5))
-        return wardrobe_builder.personalize_outfit(outfit, max_alterations = 2, allow_skimpy = base_sluttiness > 80)
+        base_sluttiness = __builtin__.max(person.sluttiness - 10, 0) # first 15 points of sluttiness don't impact outfit builder
+        outfit = wardrobe_builder.build_outfit(outfit_type, __builtin__.min(base_sluttiness / 7, 12), __builtin__.min(base_sluttiness / 18, 5))
+        return wardrobe_builder.personalize_outfit(outfit, max_alterations = 2, allow_skimpy = base_sluttiness > 70)
 
     def build_valid_uniform_wardrobe(self, person):
         slut_limit, underwear_limit, limited_to_top = mc.business.get_uniform_limits()
@@ -284,7 +284,7 @@ init -1 python:
 
         target_sluttiness = __builtin__.int(person.sluttiness * (1.0 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
         minimum_sluttiness = calculate_minimum_sluttiness(person, target_sluttiness)
-        preferences = WardrobePreference(person)
+        preferences = None
 
         if __builtin__.len(self.outfits) > 0:
             #We have some full body outfits we might use. 50/50 to use that or a constructed outfit.
@@ -295,6 +295,9 @@ init -1 python:
 
             #If we roll use full or we don't have the parts to make an assembled outfit.
             if outfit_choice < chance_to_use_full or __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
+                if not preferences:
+                    preferences = WardrobePreference(person)
+
                 full_outfit = self.get_random_appropriate_outfit(target_sluttiness, minimum_sluttiness, preferences = preferences)
 
                 if not full_outfit:
@@ -309,6 +312,9 @@ init -1 python:
         if __builtin__.len(self.underwear_sets + self.overwear_sets) == 0:
             #We have nothing else to make a outfit out of. Use default builder function.
             return generate_random_appropriate_outfit(person)
+
+        if not preferences:
+            preferences = WardrobePreference(person)
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         outfit_under = None
