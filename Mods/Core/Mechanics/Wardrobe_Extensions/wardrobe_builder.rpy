@@ -495,7 +495,7 @@ init 5 python:
             for item in [x for x in underwear.feet if overwear.can_add_feet(x)]:
                 overwear.add_feet(item)
 
-            for item in [x for x in underwear.accessories if overwear.can_add_accessory(item)]:
+            for item in [x for x in underwear.accessories if overwear.can_add_accessory(x)]:
                 overwear.add_accessory(item)
 
             # prevent any item from having no colour set
@@ -679,7 +679,7 @@ init 5 python:
             return item
 
         def build_weighted_list(self, item_group, filtered_list):
-            item_list = [[x, 0, True] for x in filtered_list]
+            item_list = [[x, 1, True] for x in filtered_list]
             for pref in self.preferences:
                 score = self.person.get_opinion_score(pref)
                 for name in [x for x in self.preferences[pref] if x == item_group]:
@@ -690,8 +690,11 @@ init 5 python:
                                 found[2] = False
                             found[1] += (score + 2) ^ 3
 
-            return [x for x in item_list if x[1] > 0 and x[2]] or [x for x in item_list if x[1] > 0]
-
+            # first return pref without hated, then without pref and hate, then with pref, then any item
+            return [x for x in item_list if x[1] > 1 and x[2]] \
+                or [x for x in item_list if x[1] > 0 and x[2]] \
+                or [x for x in item_list if x[1] > 1] \
+                or [x for x in item_list if x[1] > 0]
 
         def get_color(self, base_color = None):
             def get_excluded(base_color):
