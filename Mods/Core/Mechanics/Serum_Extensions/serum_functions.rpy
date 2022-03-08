@@ -24,12 +24,12 @@ init 2 python:
 
    # Override base game serum functions
    if 'weight_loss' in dir():
-      weight_loss.desc = "Decrease target subject body mass, using peptide YY3-36 as a serum component that acts on the hypothalamic feeding centers to inhibit hunger and calorie intake.",
-      weight_loss.positive_slug = "50% Chance/Turn to reduce body mass by 500 grams, +$5 Value",
+      weight_loss.desc = "Decrease target subject body mass, using peptide YY3-36 as a serum component that acts on the hypothalamic feeding centers to inhibit hunger and calorie intake."
+      weight_loss.positive_slug = "50% Chance/Turn to reduce body mass by 500 grams"
       weight_loss.on_turn = anorexia_serum_on_turn
 
-      weight_gain.desc = "Increase target subject body mass, by reducing hormones from the thyroid gland slowing down metabolism, thus causing weight gain.",
-      weight_gain.positive_slug = "50% Chance/Turn to increase body mass by 500 grams, +$5 Value",
+      weight_gain.desc = "Increase target subject body mass, by reducing hormones from the thyroid gland slowing down metabolism, thus causing weight gain."
+      weight_gain.positive_slug = "50% Chance/Turn to increase body mass by 500 grams"
       weight_gain.on_turn = hypothyroidism_serum_on_turn
 
    if 'height_increase' in dir():
