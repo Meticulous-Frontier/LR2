@@ -200,17 +200,17 @@ init 2:
                                             frame:
                                                 background "#43B197"
                                                 xsize 255
-                                                text "[trait_tooltip.positive_slug]" style "serum_text_style" size 16
+                                                text trait_tooltip.positive_slug style "serum_text_style" size 16
                                         vbox:
                                             frame:
                                                 background "#B14365"
                                                 xsize 255
-                                                text "[trait_tooltip.negative_slug]" style "serum_text_style" size 16
+                                                text trait_tooltip.build_negative_slug() style "serum_text_style" size 16
                                     hbox:
                                         frame:
                                             background "#000080"
                                             xsize 515
-                                            text "[trait_tooltip.desc]" style "serum_text_style"
+                                            text trait_tooltip.desc style "serum_text_style"
 
             frame:
                 background "#0a142688"
@@ -317,11 +317,11 @@ init 2:
                                         background "#43B197"
                                         xsize 270
                                         margin (5, 0, 5, 0)
-                                        text "[trait.positive_slug]" style "serum_text_style" size 16
+                                        text trait.positive_slug style "serum_text_style" size 16
                                     frame:
                                         xsize 270
                                         background "#B14365"
-                                        text "[trait.negative_slug]" style "serum_text_style" size 16
+                                        text trait.build_negative_slug() style "serum_text_style" size 16
 
         frame:
             background "#0a142688"

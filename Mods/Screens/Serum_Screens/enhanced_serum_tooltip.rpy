@@ -125,12 +125,12 @@ init 2:
                                     frame:
                                         background "#43B197"
                                         xsize 245
-                                        text "[trait.positive_slug]" style "serum_text_style_traits" size 16
+                                        text trait.positive_slug style "serum_text_style_traits" size 16
 
                                     frame:
                                         background "#B14365"
                                         xsize 245
-                                        text "[trait.negative_slug]" style "serum_text_style_traits" size 16
+                                        text trait.build_negative_slug() style "serum_text_style_traits" size 16
 
                 if the_serum.side_effects:
                     frame:
