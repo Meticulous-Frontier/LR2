@@ -20,9 +20,9 @@ init python:
 
     #list_of_positions.append(SB_facing_wall)     #Consider adding later, but for now, transition from the other standing scene
 
-init 1:
-    python:
-        SB_facing_wall.link_positions_two_way(against_wall, "transition_SB_facing_wall_against_wall", "transition_against_wall_SB_facing_wall")
+# init 1:
+#     python:
+        #SB_facing_wall.link_positions_two_way(against_wall, "transition_SB_facing_wall_against_wall", "transition_against_wall_SB_facing_wall")
         #SB_facing_wall.link_positions(against_wall,"transition_SB_facing_wall_against_wall")
 
 label intro_SB_facing_wall(the_girl, the_location, the_object):
