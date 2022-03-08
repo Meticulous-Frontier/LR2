@@ -199,7 +199,6 @@ init 5 python:
     def advance_time_run_turn(people):
         start_time = time.time()
         for (person, place) in people: #Run the results of people spending their turn in their current location.
-            person.validate_stats()
             person.run_turn()
 
         mc.business.run_turn()

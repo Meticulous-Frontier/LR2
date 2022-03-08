@@ -233,11 +233,6 @@ init 1 python:
             renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
-    def validate_person_stats():
-        for person in all_people_in_the_game():
-            person.validate_stats()
-        return
-
     def validate_stripclub_stripper_role():
         if not "stripclub_stripper_job" in globals():
             global stripclub_stripper_job
@@ -279,8 +274,6 @@ label update_compatibility_fix(stack):
     if not list_of_jobs or not isinstance(list_of_jobs[0], list):
         call instantiate_jobs() from _call_instantiate_jobs
         call add_extra_room_job_definitions() from _call_add_extra_room_job_definitions
-
-    $ validate_person_stats()
 
     $ validate_stripclub_stripper_role()
 

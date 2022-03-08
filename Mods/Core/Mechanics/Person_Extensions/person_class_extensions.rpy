@@ -110,20 +110,6 @@ init -1 python:
 
     Person.remove_person_from_game = remove_person_from_game
 
-    def validate_stats(self):
-        # limit person stat values (anything over these values has no in-game effect)
-        if self.sluttiness > 300:
-            self.sluttiness = 300
-        if self.sluttiness > 300:
-            self.sluttiness = 300
-        if self.obedience > 300:
-            self.obedience = 300
-        if self.love > 100:
-            self.love = 100
-        return
-
-    Person.validate_stats = validate_stats
-
     @property
     def location(self): # Check what location a person is in e.g the_person.location == downtown. Use to trigger events?
         location = next((x for x in list_of_places if self in x.people), None)
