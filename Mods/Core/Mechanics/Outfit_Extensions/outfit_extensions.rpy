@@ -230,7 +230,7 @@ init -1 python:
             new_score += 30
         if extra_modifier and (not self.wearing_panties() or not self.panties_covered()):
             new_score += 15
-        return __builtin__.int(new_score * .8)
+        return __builtin__.int(new_score * .9)
 
     Outfit.get_body_parts_slut_score = get_body_parts_slut_score
 
@@ -354,7 +354,7 @@ init 6 python:
                 elif cloth.layer == 1:
                     new_score += __builtin__.int((1 - cloth.colour[3]) * 10)
 
-        return __builtin__.int(new_score  * .8)
+        return __builtin__.int(new_score  * .9)
 
     Outfit.get_total_slut_modifiers = get_total_slut_modifiers_enhanced
 
