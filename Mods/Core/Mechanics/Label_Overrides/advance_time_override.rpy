@@ -237,7 +237,9 @@ init 5 python:
     def advance_time_run_move(people):
         start_time = time.time()
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
-            person.run_move(place)
+            t = threading.Thread(target=person.run_move, args = [place])
+            t.start()
+            #person.run_move(place)
 
         mc.business.run_move()
         for project in mc.business.active_IT_projects:
