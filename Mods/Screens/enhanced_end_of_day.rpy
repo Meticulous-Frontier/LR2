@@ -73,7 +73,6 @@ init 2:
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
                 action [
-                    UpdateWidgetText("end_of_day_update", "end_day_button_text", "Starting day..."),
                     Return()
                 ]
             textbutton "End Day" id "end_day_button_text" align [0.5,0.5] style "button_text"
