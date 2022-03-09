@@ -65,7 +65,7 @@ init 2:
                 align [0.5,0.5]
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
-                action [mc.business.update_uniform_wardrobes(), Return(None)]
+                action [mc.business.update_uniform_wardrobes(), Return()]
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"
 
     screen uniform_entry(given_uniform):
@@ -100,18 +100,18 @@ init 2:
                         background "#B14365"
                         hover_background "#143869"
                 #null
-                use uniform_button(state = given_uniform.full_outfit_flag, is_sensitive = given_uniform.can_toggle_full_outfit_state(), toggle_function = given_uniform.set_full_outfit_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.overwear_flag, is_sensitive = given_uniform.can_toggle_overwear_state(), toggle_function = given_uniform.set_overwear_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.underwear_flag, is_sensitive = given_uniform.can_toggle_underwear_state(), toggle_function = given_uniform.set_underwear_flag, outfit_preview = given_uniform.outfit)
+                use uniform_button(state = given_uniform.full_outfit_flag, is_sensitive = given_uniform.can_toggle_full_outfit_state(), toggle_function = given_uniform.set_full_outfit_flag)
+                use uniform_button(state = given_uniform.overwear_flag, is_sensitive = given_uniform.can_toggle_overwear_state(), toggle_function = given_uniform.set_overwear_flag)
+                use uniform_button(state = given_uniform.underwear_flag, is_sensitive = given_uniform.can_toggle_underwear_state(), toggle_function = given_uniform.set_underwear_flag)
 
                 null #Spacing purposes
-                use uniform_button(state = given_uniform.marketing_flag, is_sensitive = True, toggle_function = given_uniform.set_marketing_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.research_flag, is_sensitive = True, toggle_function = given_uniform.set_research_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.production_flag, is_sensitive = True, toggle_function = given_uniform.set_production_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.supply_flag, is_sensitive = True, toggle_function = given_uniform.set_supply_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.hr_flag, is_sensitive = True, toggle_function = given_uniform.set_hr_flag, outfit_preview = given_uniform.outfit)
+                use uniform_button(state = given_uniform.marketing_flag, is_sensitive = True, toggle_function = given_uniform.set_marketing_flag)
+                use uniform_button(state = given_uniform.research_flag, is_sensitive = True, toggle_function = given_uniform.set_research_flag)
+                use uniform_button(state = given_uniform.production_flag, is_sensitive = True, toggle_function = given_uniform.set_production_flag)
+                use uniform_button(state = given_uniform.supply_flag, is_sensitive = True, toggle_function = given_uniform.set_supply_flag)
+                use uniform_button(state = given_uniform.hr_flag, is_sensitive = True, toggle_function = given_uniform.set_hr_flag)
 
-    screen uniform_button(state, is_sensitive, toggle_function, outfit_preview = None):
+    screen uniform_button(state, is_sensitive, toggle_function):
         $ button_colour = "#666666"
         $ hovered_button_colour = "#aaaaaa"
 
@@ -128,9 +128,6 @@ init 2:
             background button_colour
             hover_background hovered_button_colour
             sensitive is_sensitive
-            if outfit_preview:
-                hovered Function(draw_average_mannequin, outfit_preview)
-                unhovered Function(hide_mannequin)
             action Function(toggle_function, not state)
             xsize 50 ysize 40
             yanchor 0.5 yalign 0.5
