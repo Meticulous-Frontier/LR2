@@ -5,7 +5,7 @@ init -2 python:
         for i in __builtin__.range(0, __builtin__.len(list), blok_size):
             yield list[i:i + blok_size]
 
-    # splits an item_array in a number of blocks about equal in size (remainders are added to last bloks)
+    # splits an item_array in a number of blocks about equal in size (remainders are added to last block)
     def split_list_in_even_blocks(list, blok_count):
         avg = __builtin__.len(list) / float(blok_count)
         result = []
@@ -20,27 +20,17 @@ init -2 python:
     # finds an item in a list, where search(item) == True
     # search as lambda could be a lambda ==> x: x.name == 'searchname'
     def find_in_list(search, list):
-        for item in list:
-            if search(item):
-                return item
-        return None
+        return next((x for x in list if search(x)), None)
 
     def find_in_set(obj, in_set):
-        for element in in_set:
-            if element == obj:
-                return element
-        return
+        return next((x for x in in_set if x == obj), None)
 
     # finds all qualifying items in list and returns them as a smaller list.
     def find_items_in_list(search, list):
-        items = []
-        for item in list:
-            if search(item):
-                items.append(item)
-        if items != []:
+        items = [x for x in list if search(x)]
+        if items:
             return items
-        else:
-            return None
+        return None
 
     def simple_list_format(list_to_format, what_to_format, string = "", ignore = "", attrib = ""): # Returns a simple list for use in generic menus. Extensive use in the Biotech Actions.
         tuple_list = []                                                    # NOTE: Needed a generic list setup, this seems to cover most usecases I came across.
@@ -79,13 +69,11 @@ init -2 python:
 
     # get a sorted list of people to use with main_choice_display
     def get_sorted_people_list(list_of_people, title, back_extension = None, reverse = False):
-        people_list = []
-        people_list.extend(list_of_people)
-        people_list.sort(key = sort_display_list_extra, reverse = reverse)
-        people_list.insert(0, title)
+        list_of_people.sort(key = sort_display_list_extra, reverse = reverse)
+        list_of_people.insert(0, title)
         if not back_extension is None:
-            people_list.extend(["Back"])
-        return people_list
+            list_of_people.extend(["Back"])
+        return list_of_people
 
 init -1 python:
         def get_random_from_list(list):
