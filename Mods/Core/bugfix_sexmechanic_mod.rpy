@@ -590,6 +590,11 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
                 # If the girl has an orgasm due to MC coming, describe her orgasm (cum wrapper functions increase or decrease her arousal)
                 if the_person.arousal >= the_person.max_arousal:
+                    if position_choice.skill_tag in ["Vaginal", "Anal"]:
+                        the_person "Quick, slide your cock back in."
+                        "You are more than happy to oblige."
+                    else:
+                        the_person "Oh, [the_person.mc_title]..."
                     call describe_girl_climax(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_describe_girl_fuck_person_bugfix2
 
                 $ first_round = False
