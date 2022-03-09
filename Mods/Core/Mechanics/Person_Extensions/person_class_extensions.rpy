@@ -1858,20 +1858,19 @@ init -1 python:
 
     Person.is_wearing_uniform = person_is_wearing_uniform
 
-    def should_wear_uniform_enhanced(self):
-        if not self.is_at_work():
-            return False
+    def person_should_wear_uniform_extended(org_func):
+        def should_wear_uniform_wrapper(person):
+            # run original function
+            result = org_func(person)
+            # run extension code
+            if result and day%7 == 4 and casual_friday_uniform_policy.is_active():
+                result = False
+            return result
 
-        if casual_friday_uniform_policy.is_active() and day % 7 == 4:
-            return False
+        return should_wear_uniform_wrapper
 
-        if self.event_triggers_dict.get("forced_uniform", False):
-            return True
-
-        wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
-        return wardrobe and wardrobe.get_count() > 0  #Check to see if there's anything stored in the uniform section.
-
-    Person.should_wear_uniform = should_wear_uniform_enhanced
+    # wrap up the should_wear_uniform function
+    Person.should_wear_uniform = person_should_wear_uniform_extended(Person.should_wear_uniform)
 
     @property
     def current_planned_outfit(self):
