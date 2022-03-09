@@ -43,7 +43,7 @@ init 2 python:
         # init Sarah role
         sarah_role = Role(role_name ="Childhood Friend", actions =[alt_hire_action], role_dates = [sarah_bar_date_ask_action], hidden = True)
         # initial representative job
-        sarah_initial_job = Job("Representative", unimportant_job_role, work_days = [], work_times = [])
+        sarah_initial_job = Job("Representative", critical_job_role, work_days = [], work_times = [])
 
         global sarah
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
