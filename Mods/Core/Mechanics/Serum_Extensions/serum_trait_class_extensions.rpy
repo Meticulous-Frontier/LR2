@@ -44,6 +44,9 @@ init -1 python:
         if self.clarity_added > 0:
             return_slug.append("+" + str(self.clarity_added) + " Clarity to Unlock")
 
+        if self.is_side_effect:
+            return_slug.append("+" + str(self.flaws_aspect) + " Flaws")
+
         return ", ".join(return_slug)
 
     SerumTrait.build_negative_slug = build_negative_slug_enhanced
