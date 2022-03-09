@@ -158,6 +158,6 @@ init 2:
                                         frame:
                                             background "#B14365"
                                             xsize 245
-                                            text "[side_effect.negative_slug]" size 16 style "serum_text_style_traits"
+                                            text side_effect.build_negative_slug() size 16 style "serum_text_style_traits"
 
                 transclude #If you hand the serum tooltip a child it's added to the vBox
