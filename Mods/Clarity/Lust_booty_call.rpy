@@ -96,8 +96,8 @@ label lust_booty_call_intro_label():
     "She gives a little yelp as you jump on top of her. You start to make out, pushing yourself up against her."
     $ the_person.change_arousal(15)
     $ mc.change_arousal(15)
-    "Pretty soon, clothes start coming off."
-    $ the_person.strip_outfit(position = "missionary")
+    "Pretty soon, you start moving her clothes out of the way."
+    $ the_person.strip_to_vagina(position = "missionary", visible_enough = True, prefer_half_off = True)
     the_person "Wow, you are really into it tonight! How do you want to start?"
     call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, ignore_taboo = True, private = True) from _lust_booty_call_fuck_01
     $ the_report = _return
@@ -184,8 +184,8 @@ label lust_booty_call_label():
     "She gives a little yelp as you jump on top of her. You start to make out, pushing yourself up against her."
     $ the_person.change_arousal(15)
     $ mc.change_arousal(15)
-    "Pretty soon, clothes start coming off."
-    $ the_person.strip_outfit(position = "missionary")
+    "Pretty soon, you start moving her clothes out of the way."
+    $ the_person.strip_to_vagina(position = "missionary", visible_enough = True, prefer_half_off = True)
     the_person "Wow, you are really into it tonight! How do you want to start?"
     call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, ignore_taboo = True, private = True) from _lust_booty_call_fuck_02
     $ the_report = _return

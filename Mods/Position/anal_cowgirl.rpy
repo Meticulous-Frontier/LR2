@@ -25,7 +25,8 @@ init python:
 
 label intro_SB_anal_cowgirl(the_girl, the_location, the_object):
     the_girl "Lie down for me, I want to be on top."
-    "You lie down on the [the_object.name] and undo your pants. [the_girl.possessive_title] swings a leg over your body and straddles you."
+    "You lie down on the [the_object.name] and undo your pants."
+    "[the_girl.possessive_title] swings a leg over your body and straddles you."
     the_girl "I'm gonna put it in my ass. Lets get you lubed up first though..."
     if the_girl.outfit.vagina_visible():
         "She leans back and grinds herself against you. The shaft of your cock rubs against the lips of her pussy."
@@ -33,6 +34,9 @@ label intro_SB_anal_cowgirl(the_girl, the_location, the_object):
         $ blocking_item = the_girl.outfit.get_lower_visible()[0]
         "She leans back and grinds herself against you. Underneath her [blocking_item.name] you can feel the lips of her pussy sliding along the length of your shaft."
     "She grinds up against you for several seconds, until your cock glides pleasingly along her wet slit."
+    if not the_girl.vagina_available():
+        "She quickly moves some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_anal_cowgirl.position_tag, visible_enough = True, prefer_half_off = True)
     the_girl "Ready?"
     if the_girl.sex_skills["Anal"] >= 3:
         "You nod. She grinds forward one last time, then lifts herself up. She reaches back behind her and guides your cock to the entrance of her puckered hole."
@@ -335,6 +339,9 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
 
 label transition_default_SB_anal_cowgirl(the_girl, the_location, the_object):
     "You lie down on [the_object.name]. [the_girl.possessive_title] swings a leg over your waist and straddles you."
+    if not the_girl.vagina_available():
+        "She moves some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_anal_cowgirl.position_tag, visible_enough = True, prefer_half_off = True)
     if the_girl.sex_skills["Anal"] >= 3:
         "You nod. She grinds forward one last time, then lifts herself up. She reaches back behind her and guides your cock to the entrance of her puckered hole."
         "With a grunt, she slowly lets her body weight sink down on top of you. Her sphincter finally gives way with a pleasing pop, and she slow sinks down on top of you."

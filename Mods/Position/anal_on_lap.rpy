@@ -29,7 +29,7 @@ label intro_anal_on_lap(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = "back_peek", prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = "back_peek", visible_enough = True, prefer_half_off = True)
 
     $ the_girl.draw_person(position = "back_peek")
     "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
@@ -215,6 +215,9 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
 
 label transition_default_anal_on_lap(the_girl, the_location, the_object):
     "You sit down on the [the_object.name]. She follows and starts to sit on your lap."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = "back_peek", visible_enough = True, prefer_half_off = True)
     "When she's ready, she grabs your cock and points it at her rear, then slowly lowers herself down on it. She lets out a gasp under her breath."
     return
 
