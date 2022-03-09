@@ -385,7 +385,7 @@ label HR_director_initial_hire_label(the_person):
 
     $ ceo_office.show_background()
     the_person "Well, I am excited to have this opportunity. To be honest I'm not really even sure where to begin!"
-    mc.name "I'll tell you what, for the rest of this week, why don't you just work alongside the others in the HR department. I'll send over to you my personal dossiers on all the employees, and as you have time you can look over them."
+    mc.name "I'll tell you what, for the rest of this week, why don't you just get to know the other employees and see how they perform. I'll send over to you my personal dossiers on all the employees, and as you have time you can look over them."
     the_person "Okay, I can do that. I'll look over them over the weekend as well. Do you want to plan on having a meeting sometime next week?"
     mc.name "That sounds good. How about we do lunch on Monday? Since you are going to heading up the department, having a meeting every week might be a good idea."
     $ the_person.draw_person(emotion = "happy")
