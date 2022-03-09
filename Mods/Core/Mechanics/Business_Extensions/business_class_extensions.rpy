@@ -271,6 +271,34 @@ init -1 python:
     # wrap up the run_day function
     Business.run_day = business_run_day_extended(Business.run_day)
 
+    def business_get_uniform_wardrobe_for_person_extended(org_func):
+        def get_uniform_wardrobe_for_person_wrapper(business, person):
+            # run original function
+            result = org_func(business, person)
+            if result:
+                return result
+            # run extension code
+            if not person.job:
+                return None
+
+            if person.job == stripper_job: # base game stripper
+                return stripclub_wardrobe
+            if person.job == stripclub_stripper_job: # stripclub bought stripper
+                return business.stripper_wardrobe
+            if person.job == stripclub_waitress_job:
+                return business.waitress_wardrobe
+            if person.job == stripclub_bdsm_performer_job:
+                return business.bdsm_wardrobe
+            if person.job == stripclub_mistress_job:
+                return business.mistress_wardrobe
+            if person.job == stripclub_manager_job:
+                return business.manager_wardrobe
+            return None
+
+        return get_uniform_wardrobe_for_person_wrapper
+
+    Business.get_uniform_wardrobe_for_person = business_get_uniform_wardrobe_for_person_extended(Business.get_uniform_wardrobe_for_person)
+
     # add fire HR director function to Business
     def fire_HR_director(self):
         if self.hr_director:

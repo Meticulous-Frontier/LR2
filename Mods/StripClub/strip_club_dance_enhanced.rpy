@@ -54,7 +54,6 @@ label stripclub_dance_enhanced_label():
     "You nurse your beer while you wait for the next performer."
 
     $ the_person = get_next_stripper()
-    $ the_person.apply_outfit(stripclub_wardrobe.pick_random_outfit())
 
     $ title = the_person.title
     $ the_person.draw_person(position = "walking_away", the_animation = ass_bob)

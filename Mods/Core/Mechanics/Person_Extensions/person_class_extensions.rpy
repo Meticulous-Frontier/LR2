@@ -199,20 +199,6 @@ init -1 python:
 
     # work-outfit for strippers / waitresses and bdsm room performers
 
-    def get_person_work_outfit(self):
-        if not hasattr(self, "_work_outfit"):
-            self._work_outfit = None
-        return self._work_outfit
-
-    def set_person_work_outfit(self, value):
-        self._work_outfit = value
-
-    def del_person_work_outfit(self):
-        del self._work_outfit
-
-    # add follow_mc attribute to person class (without sub-classing)
-    Person.work_outfit = property(get_person_work_outfit, set_person_work_outfit, del_person_work_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
-
     def get_person_maid_outfit(self):
         if not hasattr(self, "_maid_outfit"):
             self._maid_outfit = None
@@ -907,7 +893,6 @@ init -1 python:
             else:
                 self.planned_outfit = None
             self.planned_uniform = None
-            self.work_outfit = None
             self.maid_outfit = None
             self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
 
@@ -1802,35 +1787,6 @@ init -1 python:
 ################################################
 # Outfit functions - wear a specialized outfit #
 ################################################
-    def should_wear_work_outfit(self):
-        if not strip_club_is_closed() and self.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]):
-            shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
-            return (time_of_day == 3 and shifts == 2) or time_of_day == 4
-        return False
-
-    Person.should_wear_work_outfit = should_wear_work_outfit
-
-    def wear_work_outfit(self):
-        if self.work_outfit:    # quick exit if we already got an outfit for the day and puts outfit back on after stripping
-            self.apply_outfit(self.work_outfit)
-            return
-
-        if self.has_role(stripper_role):
-            self.work_outfit = mc.business.stripper_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3)
-        elif self.has_role(stripclub_waitress_role):
-            self.work_outfit = mc.business.waitress_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(stripclub_bdsm_performer_role):
-            self.work_outfit = mc.business.bdsm_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(stripclub_mistress_role):
-            self.work_outfit = mc.business.mistress_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(stripclub_manager_role):
-            self.work_outfit = mc.business.manager_wardrobe.decide_on_outfit2(self)
-
-        if self.work_outfit:
-            self.apply_outfit(self.work_outfit)
-        return
-
-    Person.wear_work_outfit = wear_work_outfit
 
     def should_wear_maid_outfit(self):
         if self.has_role([maid_role]):
@@ -1860,6 +1816,10 @@ init -1 python:
 
     def person_should_wear_uniform_extended(org_func):
         def should_wear_uniform_wrapper(person):
+            # pre-condition for stripclub ownership
+            if not strip_club_is_closed() and person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]):
+                shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
+                return (time_of_day == 3 and shifts == 2) or time_of_day == 4
             # run original function
             result = org_func(person)
             # run extension code
@@ -1876,8 +1836,6 @@ init -1 python:
     def current_planned_outfit(self):
         if self.should_wear_uniform() and self.planned_uniform:
             return self.planned_uniform
-        elif self.should_wear_work_outfit() and self.work_outfit:
-            return self.work_outfit
         elif self.should_wear_maid_outfit() and self.maid_outfit:
             return self.maid_outfit
         elif self.location in [gym, university] and self.location_outfit:
@@ -1952,8 +1910,6 @@ init -1 python:
 
         if self.should_wear_uniform():
             self.wear_uniform()
-        elif self.should_wear_work_outfit():
-            self.wear_work_outfit()
         elif self.should_wear_maid_outfit():
             self.wear_maid_outfit()
         elif self.location in [gym, university] and self.location_outfit:
