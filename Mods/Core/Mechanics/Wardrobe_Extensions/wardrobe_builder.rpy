@@ -438,6 +438,7 @@ init 5 python:
         @staticmethod
         def get_color_opinion(colour):
             color_name = closest_preference_color(Color(rgb=(colour[0], colour[1], colour[2])))
+
             for opinion in WardrobeBuilder.color_prefs:
                 if color_name in WardrobeBuilder.color_prefs[opinion]:
                     return opinion
@@ -514,14 +515,13 @@ init 5 python:
         def build_weighted_list(person, item_group, filtered_list):
             item_list = [[x, 1, True] for x in filtered_list]
             for pref in WardrobeBuilder.preferences:
+                score = person.get_opinion_score(pref)
                 for name in [x for x in WardrobeBuilder.preferences[pref] if x == item_group]:
                     for item in [x for x in WardrobeBuilder.preferences[pref][name] if x in filtered_list]:
                         found = next((x for x in item_list if x[0]==item), None)
-                        if found:
-                            score = person.get_opinion_score(pref)
-                            if score == -2:
-                                found[2] = False
-                            found[1] += (score + 2) ^ 3
+                        if score == -2:
+                            found[2] = False
+                        found[1] += (score + 2) ^ 3
 
             # first return pref without hated, then without pref and hate, then with pref, then any item
             return [x for x in item_list if x[1] > 1 and x[2]] \
