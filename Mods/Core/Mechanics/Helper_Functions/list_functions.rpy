@@ -69,11 +69,13 @@ init -2 python:
 
     # get a sorted list of people to use with main_choice_display
     def get_sorted_people_list(list_of_people, title, back_extension = None, reverse = False):
-        list_of_people.sort(key = sort_display_list_extra, reverse = reverse)
-        list_of_people.insert(0, title)
+        people_list = []
+        people_list.extend(list_of_people)
+        people_list.sort(key = sort_display_list_extra, reverse = reverse)
+        people_list.insert(0, title)
         if not back_extension is None:
-            list_of_people.extend(["Back"])
-        return list_of_people
+            people_list.extend(["Back"])
+        return people_list
 
 init -1 python:
         def get_random_from_list(list):

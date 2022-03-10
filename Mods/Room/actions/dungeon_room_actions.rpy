@@ -5,11 +5,9 @@ init 10 python:
     def dungeon_room_appoint_slave_requirement():
         if mc.location.people:
             return True
-        else:
-            return "Requires: Person in Room"
+        return "Requires: Person in Room"
 
     dungeon_room_appoint_slave_action = Action("Appoint a slave", dungeon_room_appoint_slave_requirement, "dungeon_room_appoint_slave_label", menu_tooltip = "Assigns the person a role as a slave. Use the \"Follow Me\" Action on a person to bring them to the Dungeon.")
-
 
     def slave_unique_sex_positions(person, prohibit_tags = []):
         positions = []
@@ -22,14 +20,13 @@ label dungeon_room_appoint_slave_label():
     call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])]))
     $ person_choice = _return
 
-    if person_choice == "Back":
-        return # Where to go if you hit "Back"
-    elif person_choice.personality is alpha_personality:
-        "This girl has an Alpha personality and will never submit into becoming your slave. You could turn her into a bimbo, that would remove her Alpha personality."
-    else:
-        call dungeon_room_appoint_slave_label_2(person_choice) from dungeon_room_appoint_slave_label_1
-        $ del person_choice
-    jump dungeon_room_appoint_slave_label
+    if isinstance(person_choice, Person):
+        if person_choice.personality == alpha_personality:
+            "This girl has an Alpha personality and will never submit into becoming your slave. You could turn her into a bimbo, that would remove her Alpha personality."
+        else:
+            call dungeon_room_appoint_slave_label_2(person_choice) from dungeon_room_appoint_slave_label_1
+            $ del person_choice
+    return # Where to go if you hit "Back"
 
 label dungeon_room_appoint_slave_label_2(the_person):
     if not the_person.has_role(slave_role): # What happens when you try to appoint them
