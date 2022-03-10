@@ -96,7 +96,7 @@ label return_from_seminar_action_label(the_person):
         $ the_person.draw_person(emotion="sad")
         "She stops to think for a second, putting on a frown before turning it into a bright, mischievous smile."
         $ the_person.draw_person(emotion="happy")
-        the_person "Being naked in front of you made so... horny! You deserve some real gratitude! How about a quick BJ?"
+        the_person "Being naked in front of you makes me so... horny! You deserve some real gratitude! How about a quick BJ?"
         "\"There's always time for a quick blowjob\" you think to yourself before swiftly unzipping your pants as [the_person.possessive_title] gets onto her knees."
         $ the_person.draw_person(position="kneeling1")
         the_person "[the_person.mc_title], you have such a nice cock, it'll be perfect inside of my mouth..."
