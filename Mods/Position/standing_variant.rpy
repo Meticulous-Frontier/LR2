@@ -20,9 +20,9 @@ init python:
 
     #list_of_positions.append(SB_facing_wall)     #Consider adding later, but for now, transition from the other standing scene
 
-# init 1:
-#     python:
-        #SB_facing_wall.link_positions_two_way(against_wall, "transition_SB_facing_wall_against_wall", "transition_against_wall_SB_facing_wall")
+init 1:
+    python:
+        SB_facing_wall.link_positions_two_way(against_wall, "transition_SB_facing_wall_against_wall", "transition_against_wall_SB_facing_wall")
         #SB_facing_wall.link_positions(against_wall,"transition_SB_facing_wall_against_wall")
 
 label intro_SB_facing_wall(the_girl, the_location, the_object):
@@ -624,6 +624,9 @@ label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object)
 
 label transition_default_SB_facing_wall(the_girl, the_location, the_object):
     "You turn [the_girl.possessive_title] so she is is facing [the_object.name]."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_facing_wall.position_tag, visible_enough = True, prefer_half_off = True)
     "Once you're ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 
