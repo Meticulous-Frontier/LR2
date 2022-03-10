@@ -5,11 +5,19 @@
 #Class may have to reference another class in the event of a branching storyline 4  4
 
 init -2 python:
-    #How the character responds to various actions
+    #Default function to run between cycles if we do a default unit test.
+    def teamup_test_func_default(the_person_one, the_person_two):
+        the_person_one.change_slut(10, 100)
+        the_person_one.change_energy(200)
+        the_person_two.change_slut(10, 100)
+        the_person_two.change_energy(200)
+        time_of_day = 1
+        return
+
     class Teamup_Scene():
 
         def __init__(self, compile_scenes, start_scene_list, req_list, trans_list, final_scene_list, intro_scene, exit_scene, teamup_action, choice_scene,
-            stage = -1, advance_time = True, business_action = False, person_action = False, is_random = False):
+            stage = -1, advance_time = True, business_action = False, person_action = False, is_random = False, unit_test_func = None):
 
             self.stage = stage  #The corruption level of the teamup event
             self.compile_scenes = compile_scenes #Use this function to recompile the lists. Should be run on game load and initial game start.
@@ -25,6 +33,10 @@ init -2 python:
             self.business_action = business_action  #If the action should be a business crisis
             self.person_action = person_action      #if the action should be a person crisis
             self.is_random = is_random              #If this action only pops up randomly.
+            if unit_test_func == None:
+                self.unit_test_func = teamup_test_func_default
+            else:
+                self.unit_test_func = unit_test_func
 
         def get_stage(self):
             return self.stage
@@ -78,6 +90,13 @@ init -2 python:
 
         def recompile_scenes(self):
             self.compile_scenes(self)
+            return
+
+        def run_unit_test(self, the_person_one, the_person_two, cycles = 10):
+            scene_count = 0
+            while scene_count < cycles:
+                self.call_scene(the_person_one, the_person_two)
+                self.unit_test_func(the_person_one, the_person_two)
             return
 
 label teamup_scene_label(teamup, the_person_one, the_person_two):
