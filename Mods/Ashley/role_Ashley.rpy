@@ -21,7 +21,8 @@ init 2 python:
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 2, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -1, False], ["public sex", -1, False]])
 
-        ashley.set_schedule(stephanie.home, times = [0,1,2,3,4])
+        ashley.add_job(unemployed_job)
+        ashley.set_schedule(stephanie.home, the_days=[0,1,2,3,4,5,6], the_times = [0,1,2,3,4])
         ashley.home = stephanie.home
         ashley.home.add_person(ashley)
 
@@ -78,9 +79,6 @@ init 2 python:
     ashley_sneaks_over = Action("Ashley sneaks over", ashley_sneaks_over_requirement, "ashley_sneaks_over_label")
     ashley_steph_drinks_out = Action("Ashley and Stephanie date", ashley_steph_drinks_out_requirement, "ashley_steph_drinks_out_label")
 
-    def ashley_get_days_employed():
-        return day - ashley.event_triggers_dict.get("employed_since", 9999)
-
     def ashley_steph_relationship_status():  #This function should return limited options back, to summarize the current status of MC relationship with Steph and Ashley
         if (ashley.sluttiness > 70 or ashley.is_girlfriend()) and (stephanie.sluttiness > 70 or stephanie.is_girlfriend()):
             return "both"
@@ -124,32 +122,32 @@ init -1 python:
         return False
 
     def ashley_room_excitement_overhear_requirement(the_person):
-        if the_person.location == the_person.work:
-            if ashley_get_days_employed() > 5: #Been working for at least a few days week.
+        if the_person.is_at_work():
+            if the_person.days_employed > 5: #Been working for at least a few days week.
                 return True
         return False
 
     def ashley_ask_sister_about_attitude_requirement(the_person):
         if ashley_get_if_excitement_overheard():
-            if the_person.location == the_person.work:
+            if the_person.is_at_work():
                 return True
         return False
 
     def ashley_room_warming_up_requirement(the_person):
-        if the_person.location == the_person.work:
-            if ashley_get_days_employed() > 12: #Been working for at least a week.
+        if the_person.is_at_work():
+            if the_person.days_employed > 12: #Been working for at least a week.
                 return True
         return False
 
     def ashley_room_overhear_classical_requirement(the_person):
-        if the_person.location == the_person.work:
-            if ashley_get_days_employed() > 18:
+        if the_person.is_at_work():
+            if the_person.days_employed > 18:
                 return True
         return False
 
     def ashley_ask_date_classic_concert_requirement(the_person):
         if ashley_get_concert_overheard() and not ashley_get_concert_date_stage() > 0:
-            if the_person.location == the_person.work and the_person.love > 20:
+            if the_person.is_at_work() and the_person.love > 20:
                 return True
         return False
 
@@ -169,7 +167,7 @@ init -1 python:
 
     def ashley_ask_sister_about_porn_video_requirement(the_person):
         if ashley_get_porn_discovered():
-            if the_person.location == the_person.work:
+            if the_person.is_at_work():
                 return True
         return False
 
@@ -182,17 +180,17 @@ init -1 python:
 
     def ashley_ask_about_porn_requirement(the_person):
         if ashley_get_porn_convo_avail():
-            if the_person.location == the_person.work:
+            if the_person.is_at_work():
                 return True
         return False
 
     def ashley_post_handjob_convo_requirement(the_person):
-        if the_person.location == the_person.work:
+        if the_person.is_at_work():
             return True
         return False
 
     def ashley_stephanie_arrange_relationship_requirement(the_person):
-        if the_person.location == the_person.work:
+        if the_person.is_at_work():
             return True
         return False
 
@@ -272,7 +270,7 @@ label ashley_intro_label():
             the_person "Of course, that's all I can ask, is that you will keep her in mind. Thanks!"
             $ add_ashley_hire_later_action()
             return
-        "Blow me and I'll look" if the_person.sluttiness > 50:
+        "Blow me and I'll look" if the_person.is_willing(blowjob):
             mc.name "I tell you what, why don't you come suck me off while I look over her documents."
             the_person "Oh! A favor for a favor then? Okay!"
             $ scene_manager.update_actor(the_person, position = "blowjob", emotion = "happy")
@@ -296,7 +294,8 @@ label ashley_intro_label():
         $ the_person.change_obedience(5)
         the_person "Oh! I didn't think you would say yes. This is great news! I'm sure she'll probably want to get started right away!"
 
-        $ mc.business.hire_person(ashley, "Production")
+        $ mc.business.add_employee_production(ashley)
+        $ ashley.set_schedule(None, the_times = [1,2,3]) #Free roam when not working
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
         "As you finish up, you notice [the_person.possessive_title] is already calling her sister with the news."
@@ -330,7 +329,7 @@ label ashley_hire_directed_label():
         $ the_person.change_obedience(5)
         the_person "Oh! This is great news! I'm sure she'll probably want to get started right away!"
         $ remove_ashley_hire_later_action()
-        $ mc.business.hire_person(ashley, "Production")
+        $ mc.business.add_employee_production(ashley)
 
         "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
         "As you finish up and start to leave, you notice [the_person.possessive_title] is already calling her sister with the news."
@@ -341,9 +340,7 @@ label ashley_hire_directed_label():
     else:
         mc.name "I'm sorry, I don't think she is a good fit at this time. But I will keep her in mind for the future, okay?"
         the_person "Wow, really? Why did you even talk to me about this?"
-        $ the_person.change_happiness(-10)
-        $ the_person.change_obedience(-10)
-        $ the_person.change_love(-10)
+        $ the_person.change_stats(happiness = -10, love = -5, obedience = -5)
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] gets up and leaves the room. You should probably avoid getting her hopes up again like this."
 
@@ -483,11 +480,9 @@ label ashley_classical_concert_date_label():
     #love: compliment ash. neutral: compliment both. corrupt: crude compliment
     mc.name "Hello! Thanks for this, I've been looking forward to this ever since we arranged it. [the_person.title], you look great tonight!"
     the_person "Ah... thank you."
-    $ the_person.change_happiness(1)
-    $ the_person.change_love(1)
+    $ the_person.change_stats(happiness = 1, love = 1)
     "[stephanie.title] gives you a smile after your kind words to her sister."
-    $ stephanie.change_obedience(1)
-    $ stephanie.change_love(1)
+    $ stephanie.change_stats(obedience = 1, love = 1)
     #End of love option
     stephanie "Alright you two, go enjoy your classical concert. Ash, just text me when you get done, I'm gonna go have a couple drinks."
     the_person "Okay. Bye Steph!"
@@ -948,8 +943,8 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         the_person "Thank you for this chat. I feel better knowing what is going on with you two. Now... I think I'll get back to work?"
         "[the_person.title] turns and leaves your office. Things got a little sticky there, but you feel like you are now in the clear to pursue things with [ashley.title] from now on."
     $ clear_scene()
-    $ stephanie.set_alt_schedule(coffee_shop, days = [6], times = [0])
-    $ ashley.set_alt_schedule(coffee_shop, days = [6], times = [0])
+    $ stephanie.set_schedule(coffee_shop, the_days = [6], the_times = [0])
+    $ ashley.set_schedule(coffee_shop, the_days = [6], the_times = [0])
     $ ashley.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_intro)
     call advance_time from _call_advance_ashley_arrangement_01
     return
@@ -1039,13 +1034,13 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
         stephanie "That's what she said!"
         "The girls are laughing at [stephanie.possessive_title]'s joke as you head up to the counter and order the coffees."
     # TODO: add serums to coffees here
-    $ mc.business.funds -= 15
+    $ mc.business.change_funds(-15)
     if the_person.is_girlfriend():
         "As you wait for your coffees to get made, you spot a yummy looking blueberry muffin. You decide to get it to share with [the_person.title]."
-        $ mc.business.funds -= 5
+        $ mc.business.change_funds(-5)
     elif stephanie.is_girlfriend():
         "As you wait for your coffees to get made, you spot a yummy looking blueberry muffin. You decide to get it to share with [stephanie.title]."
-        $ mc.business.funds -= 5
+        $ mc.business.change_funds(-5)
     "You walk back to the table and give the girls their coffee."
     if the_person.is_girlfriend():
         the_person "Ohh, that looks good..."
@@ -1385,8 +1380,7 @@ label ashley_second_concert_date_label():
         $ scene_manager.update_actor(ashley, position = "walking_away")
         "As she walks by [stephanie.possessive_title]..."
         stephanie "Hey, you got something on your dress..."
-        $ stephanie.change_happiness(-5)
-        $ stephanie.change_love(-5)
+        $ stephanie.change_stats(happiness = -10, love = -5)
         $ scene_manager.remove_actor(the_person)
         "[the_person.title] disappears into the restroom, leaving you with [stephanie.title]. You can tell she is suspicious, but for now, she decides not to say anything about it."
     else:
@@ -1611,6 +1605,7 @@ label ashley_blows_during_meeting_label():
     $ mc.change_locked_clarity(40)
     "You put your hand on [ashley.possessive_title]'s head again and force her down again as you start to cum, right down her throat."
     $ ashley.cum_in_mouth()
+    $ scene_manager.update_actor(ashley)
     "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
     "You do your best to remain absolutely silent, but you see [stephanie.title] looking at you confused."
     $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = ashley)
@@ -1674,8 +1669,7 @@ label ashley_sneaks_over_label():
     $ mc.change_locked_clarity(20)
     "Seeing her expose herself in this way gives you a burst of energy. She want's the girlfriend treatment? You can give it to her."
     mc.name "Of course you can stay the night. Don't get mad at me though if [stephanie.name] get's suspicious when you have trouble walking tomorrow."
-    $ the_person.change_happiness(10)
-    $ the_person.change_love(3)
+    $ the_person.change_stats(happiness = 10, love = 3)
     the_person "Me? You'll be lucky if you can get out of bed at all tomorrow!"
     $ the_person.draw_person(position = "against_wall")
     "[the_person.title] jumps on to you."
@@ -1711,9 +1705,9 @@ label ashley_sneaks_over_label():
         "[the_person.possessive_title] stops rolling her hips. With one smooth movement she slides you raw deep into her tight cunt."
         $ the_person.break_taboo("condomless_sex")
     elif the_person.has_taboo("condomless_sex") and the_person.effective_sluttiness() >= the_person.get_no_condom_threshold():  #She would normally be willing to go bare
-        the_person "I was talking to Steph about you the other day, and something she told me surprsied me."
+        the_person "I was talking to Steph about you the other day, and something she told me surprised me."
         mc.name "Oh?"
-        the_person "She said everytime you guys have, you know, she always makes you wrap it up."
+        the_person "She said every time you guys have, you know, she always makes you wrap it up."
         "[the_person.title] points your bare cock toward her slit, then starts to rub against it. Her arousal glistens at the tip as she moves her hips back and forth."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(30)
@@ -1781,8 +1775,7 @@ label ashley_sneaks_over_label():
                 the_person "Mmm, I wore you out! That was fun."
                 "She kisses you and runs her hand over your back."
             else:
-                $ the_person.change_love(-1)
-                $ the_person.change_slut(-1)
+                $ the_person.change_stats(slut = -1, love = -3)
                 the_person "Well I guess we're done then... Maybe next time you can get me off as well."
             $ done = True
 
@@ -1810,8 +1803,7 @@ label ashley_sneaks_over_label():
                         the_person "Mmm, okay! That was nice."
                         "She kisses you and runs her hand over your back."
                     else:
-                        $ the_person.change_love(-1)
-                        $ the_person.change_slut(-1)
+                        $ the_person.change_stats(slut = -1, love = -3)
                         the_person "Well... Maybe next time you can get me off as well?"
                     $ done = True
     $ the_person.draw_person(position = "back_peek")
@@ -2088,6 +2080,7 @@ label coffee_time_steph_gets_handsy_label():
                 "The wet tongue of [stephanie.title] is driving you quickly to orgasm. Between the public setting, her partial handjob, and talented mouth, you are sure you can't take any more."
                 "You relax and enjoy the blowjob. Soon your orgasm approaches. There's no easy way to warn [stephanie.title], so you just let it go, firing your load into her mouth."
                 $ stephanie.cum_in_mouth()
+                $ scene_manager.update_actor(stephanie)
                 $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = stephanie)
                 "Her talented mouth takes your load easily. When you finish, her mouth slowly releases your cock and you hear a loud gulp."
                 "You look around to make sure you are still anonymous before putting your hand on her shoulder and then helping her back up and into her seat."
@@ -2156,7 +2149,7 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
         the_person "[temp_string]"
     "[stephanie.title] considers it for a moment."
     if the_person.approves_outfit_color(bystander.outfit):
-        stephanie "I suppose so. I mean the color was nice."
+        stephanie "I suppose so. I mean the colour was nice."
     else:
         stephanie "I don't know, I don't usually see you wear that colour."
         $ favorite_colour = the_person.favorite_colour()
@@ -2173,7 +2166,7 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
             the_person "I think I'm gonna go over to the mall this afternoon and try some stuff on. I could use a new outfit!"
             "Hmm, maybe you should swing by the mall later and help [the_person.title] go clothes shopping?"
             $ ashley_set_observed_outfit(bystander.outfit)
-            $ ashley.set_alt_schedule(clothing_store, days = [6], times = [2])
+            $ ashley.set_override_schedule(clothing_store, the_days = [6], the_times = [2])
             $ ashley.add_unique_on_room_enter_event(ashley_clothes_shopping)
         "No":
             the_person "Ahh..."
@@ -2185,6 +2178,7 @@ label coffee_time_woman_walks_by_label(): #Whoever's turn it is should be the pe
     return
 
 label ashley_clothes_shopping_label(the_person):
+    $ ashley.set_override_schedule(None, the_days = [6], the_times = [2])
     "You decide to swing by the clothing store, where [the_person.title] said she would be at. After a few awkward minutes poking around the women's clothing, you spot her."
     $ the_person.draw_person()
     "She seems preoccupied and doesn't notice you until you walk up."
@@ -2304,13 +2298,11 @@ label ashley_clothes_shopping_label(the_person):
         if _return.get("girl orgasms", 0):
             the_person "Ahhh, that was nice. Good to know my sister isn't getting ALL your attention!"
             $ the_person.reset_all_jealousy()
-            $ the_person.change_love(3)
-            $ the_person.change_slut(1)
+            $ the_person.change_stats(slut = 1, love = 3)
         else:
             the_person "Wow, really? You can't give me the same treatment that [stephanie.name] gave you? She got you all worn out?"
             "She looks pissed."
-            $ the_person.change_love(-3)
-            $ the_person.change_slut(1)
+            $ the_person.change_stats(slut = -1, love = -3)
             $ the_person.jealous_change_score(3) #Add points to jealous score so ashley gets more desperate.
         $ the_person.draw_person(position = "stand2")
         "You get yourself put back together."

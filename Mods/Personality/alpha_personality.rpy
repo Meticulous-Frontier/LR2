@@ -21,9 +21,9 @@ init 1400 python:
         valid_titles.append("Mrs. " + person.last_name)
         if person.love > 20:
             valid_titles.append(person.name)
-        if person.love > 50 and person.has_role(mistress_role):
+        if person.love > 50 and person.has_role(stripclub_mistress_role):
             valid_titles.append("Milady")
-        if person.sluttiness > 60 and person.has_role(mistress_role):
+        if person.sluttiness > 60 and person.has_role(stripclub_mistress_role):
             valid_titles.append("Mistress")
         if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_titles.append("Anal Queen")
@@ -31,11 +31,11 @@ init 1400 python:
     def alpha_possessive_titles(person):
         valid_possessive_titles = []
         valid_possessive_titles.append("Mrs. " + person.last_name)
-        if person.love > 10 and person.has_role(manager_role):
+        if person.love > 10 and person.has_role(stripclub_manager_role):
             valid_possessive_titles.append("Your manager")
-        if person.sluttiness > 60 and person.has_role(manager_role):
+        if person.sluttiness > 60 and person.has_role(stripclub_manager_role):
             valid_possessive_titles.append("Your naughty Manager")
-        if person.sluttiness > 60 and person.has_role(mistress_role):
+        if person.sluttiness > 60 and person.has_role(stripclub_mistress_role):
             valid_possessive_titles.append("Your kinky Mistress")
         if person.sluttiness > 100 and (person.get_opinion_score("threesomes") > 0 or person.get_opinion_score("other girls") > 0):
             valid_possessive_titles.append("Your bi-sexual queen")

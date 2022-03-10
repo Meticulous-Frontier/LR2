@@ -33,7 +33,7 @@ label intro_standing_cunnilingus(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = standing_cunnilingus.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = standing_cunnilingus.position_tag, visible_enough = True, prefer_half_off = True)
 
     "You lean forward and run your tongue along her slit. She groans as soon as you make contact."
     the_girl "Oh [the_girl.mc_title]..."
@@ -50,6 +50,9 @@ label taboo_break_standing_cunnilingus(the_girl, the_location, the_object):  #be
     "You get down on your knees in front of her."
     mc.name "Ha! Just kidding. Mmm I can't wait to taste your pussy..."
     the_person "Ahh... you scared me there..."
+    if not the_girl.vagina_available():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = standing_cunnilingus.position_tag, prefer_half_off = True)
     "She runs her fingers through your hair as you get closer, her cunt inches from your face."
     "You slide forward and bring your head even closer. [the_girl.possessive_title] takes a sharp breath and turns her head to the side."
     "You bring one hand up to her [the_girl.pubes_description] pussy and spread it open to reveal the tender pink inside."
@@ -98,6 +101,9 @@ label transition_default_standing_cunnilingus(the_girl, the_location, the_object
     $ standing_cunnilingus.redraw_scene(the_girl) #Draw her sitting down.
     the_person "I want you to kiss me for a little bit..."
     "You decide to go with it, for now. You slowly kiss your way down her body. She moans softly when you get close to her groin."
+    if not the_girl.vagina_available():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = standing_cunnilingus.position_tag, prefer_half_off = True)
     "You lean forward and run your tongue along her slit. She groans as soon as you make contact."
     the_girl "Oh [the_girl.mc_title]..."
     return
@@ -128,10 +134,7 @@ label orgasm_standing_cunnilingus(the_girl, the_location, the_object):
 
     "You notice [the_girl.possessive_title]'s moans becoming louder, and her legs twitching more noticeably on either side of your head."
     "You speed up your efforts, doing your best to drive her towards her orgasm. She moans and begins to writhe under your skilled tongue."
-    if the_girl.get_sex_goal() == "get off":
-        the_girl "Oh my god... I'm finally gonna cum!"
-    else:
-        $ the_girl.call_dialogue("climax_responses_oral")
+    $ the_girl.call_dialogue("climax_responses_oral")
     "All at once the tension in her body is unleashed in a series of violent tremors. Her hand grabs the back of your head, pulling you against her."
     "The moment passes and she relaxes. For a moment all she can do is look down at you and pant."
     return

@@ -31,7 +31,7 @@ label train_anal_fetish_label(the_person):
     "She nods and listens attentively."
     mc.name "I've noticed that you really enjoy when I play with your ass."
     the_person "Yeah..I do.."
-    mc.name "I was thinking that we should explore this a little further, what do yu think?"
+    mc.name "I was thinking that we should explore this a little further, what do you think?"
     the_person "Well, I wouldn't mind, if you did."
     mc.name "Good, stand up and show me your butt."
 

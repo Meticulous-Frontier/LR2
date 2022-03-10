@@ -19,7 +19,7 @@ screen multi_person_info_ui(actors):
     frame:
         background im.Alpha("gui/topbox.png", .9)
         xsize 1100
-        ysize 180
+        ysize 200
         yalign 0.0
         xalign 0.5
         xanchor 0.5
@@ -40,7 +40,7 @@ screen multi_person_info_ui(actors):
                             action NullAction()
                             sensitive True
 
-                        text format_titles(actor.person) style "menu_text_style" size 30 ysize 30
+                        text format_titles_short(actor.person) style "menu_text_style" size 30 ysize 30
 
                         if actor.person.serum_effects:
                             textbutton "{image=serum_vial} +[actor.person.suggestibility]%":

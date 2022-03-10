@@ -27,26 +27,27 @@ init -1 python:
 
     lifestyle_coach_intro = Action("Meet the Lifestyle Coach", lifestyle_coach_intro_requirement, "lifestyle_coach_intro_label")
 
-init 3 python:
-    def lifestyle_coach_init():
-        global dawn
-        dawn = make_person(name = "Dawn", age = 42, body_type = "thin_body", \
-            personality = relaxed_personality,  \
-            sex_array = [3,3,4,3], start_obedience = -28, start_happiness = 129, start_love = 0, \
-            title = "Dawn", possessive_title = "Your lifestyle coach", mc_title = mc.name, force_random = True,
-            forced_opinions = [
-                ["HR work", 2, True],
-            ], forced_sexy_opinions = [
-                ["taking control", 1, False]
-            ])
+#init 3 python:
+    # def lifestyle_coach_init():
+    #     print("Initialize Lifestyle Coach")
+    #     dawn_job = Job("Lifestyle Coach", lifestyle_coach_role, mall, work_times = [1,2,3])
 
-        dawn.generate_home()
-        dawn.set_schedule(mall, times = [1,2,3], days = [0, 1, 2, 3, 4])
-        dawn.add_role(lifestyle_coach_role)
-        dawn.home.add_person(dawn)
-        dawn.event_triggers_dict["met"] = 0
-        dawn.add_unique_on_room_enter_event(lifestyle_coach_intro)
-        return
+    #     global dawn
+    #     dawn = make_person(name = "Dawn", age = 42, body_type = "thin_body", \
+    #         personality = relaxed_personality, job = dawn_job, \
+    #         sex_array = [3,3,4,3], start_obedience = -28, start_happiness = 129, start_love = 0, \
+    #         title = "Dawn", possessive_title = "Your lifestyle coach", mc_title = mc.name, force_random = True,
+    #         forced_opinions = [
+    #             ["HR work", 2, True],
+    #         ], forced_sexy_opinions = [
+    #             ["taking control", 1, False]
+    #         ])
+
+    #     dawn.generate_home()
+    #     dawn.home.add_person(dawn)
+    #     dawn.event_triggers_dict["met"] = 0
+    #     dawn.add_unique_on_room_enter_event(lifestyle_coach_intro)
+    #     return
 
 label lifestyle_coach_intro_label(the_person):
     $ scene_manager = Scene()

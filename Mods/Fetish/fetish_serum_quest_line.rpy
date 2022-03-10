@@ -312,7 +312,7 @@ label fetish_serum_contact_dialogue(the_person):
         mc.name "How much?"
         the_person "He is asking for $1000. He could have it done by the start of business on Monday."
         mc.name "Hmm..."
-        if mc.business.funds < 1000:
+        if not mc.business.has_funds(1000):
             "Unfortunately, you don't have the funds to commission this program right now."
             return
         "Do you want to commission a new nanobot program?"
@@ -328,7 +328,7 @@ label fetish_serum_contact_dialogue(the_person):
         mc.name "How much for the new equipment?"
         the_person "He said $5000 should cover it, including his usual $1000 fee."
         mc.name "Hmm..."
-        if mc.business.funds < 6000:
+        if not mc.business.has_funds(6000):
             "Unfortunately, you don't have the funds to commission this program right now."
             return
         "Do you want to commission a new nanobot program?"
@@ -344,7 +344,7 @@ label fetish_serum_contact_dialogue(the_person):
         mc.name "How much is he asking for?"
         the_person "He won't do it for less than $10000."
         mc.name "Hmm..."
-        if mc.business.funds < 10000:
+        if not mc.business.has_funds(10000):
             "Unfortunately, you don't have the funds to commission this program right now."
             return
         "Do you want to commission a new nanobot program?"
@@ -361,7 +361,7 @@ label fetish_serum_contact_dialogue(the_person):
         mc.name "How much is he asking for?"
         the_person "He won't do it for less than $25000."
         mc.name "Hmm..."
-        if mc.business.funds < 25000:
+        if not mc.business.has_funds(25000):
             "Unfortunately, you don't have the funds to commission this program right now."
             return
         "Do you want to commission a new nanobot program?"

@@ -1,7 +1,4 @@
 ## Girlfriend Service crisis. If dating an employee, she approaches you and offers to hookup.
-init -1 python:
-    girlfriend_service_weight = 5
-
 init 2 python:
     def girlfriend_service_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
@@ -14,7 +11,7 @@ init 2 python:
     girlfriend_service = ActionMod("Girlfriend Service", girlfriend_service_requirement, "girlfriend_service_label",
         menu_tooltip = "WIP: Your girlfriend offers sex at work.", category = "Business",
         # initialization = init_action_mod_disabled,
-        is_crisis = True, crisis_weight = girlfriend_service_weight)
+        is_crisis = True)
 
 label girlfriend_service_label():
     $ the_person = girlfriend_service_get_person()

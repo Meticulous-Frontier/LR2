@@ -41,7 +41,7 @@ label intro_SB_doggy_standing(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = SB_doggy_standing.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = SB_doggy_standing.position_tag, visible_enough = True, prefer_half_off = True)
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."
@@ -426,7 +426,11 @@ label transition_standing_doggy_to_standing_anal_taboo_break_label(the_girl, the
 
 label transition_default_SB_doggy_standing(the_girl, the_location, the_object):
     mc.name "Stand here."
-    "[the_girl.possessive_title] obeys then leans forward and puts her hands on [the_object.name]. You bounce your hard shaft on her ass a couple of times before sliding your cock between her thighs."
+    "[the_girl.possessive_title] obeys then leans forward and puts her hands on [the_object.name]."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_doggy_standing.position_tag, visible_enough = True, prefer_half_off = True)
+    "You bounce your hard shaft on her ass a couple of times before sliding your cock between her thighs."
     "You continue your back and forth motion, rubbing your cock along her pussy lips."
     if the_girl.get_opinion_score("vaginal sex") > 0:
         the_girl "Oh....Please..."

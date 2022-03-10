@@ -29,33 +29,33 @@ init -2 style serum_text_style: # General text style used in the serum screens.
     xalign 0.5
 
 init -2 style serum_background_style: # General text style used in the serum screens.
-    padding [5,5]
-    margin [5,5]
+    padding (5,5)
+    margin (5,5)
     background "#0a142688"
     insensitive_background "#171717"
     hover_background "#143869"
 
 init -2 style serum_textbutton_style_positive: # Used for positive trait / serum slugs
-    margin [2,2]
+    margin (2,2)
     background "#43B197"
     insensitive_background "#171717"
     hover_background "#143869"
 
 init -2 style textbutton_no_padding: # Textbutton without padding
-    margin [2,2]
+    margin (2,2)
     background "#0a142688"
     insensitive_background "#171717"
     hover_background "#143869"
 
 init -2 style serum_textbutton_style_negative: # Used for negative trait / serum slugs
-    margin [2,2]
+    margin (2,2)
     background "#B14365"
     insensitive_background "#171717"
     hover_background "#143869"
 
 init -2 style serum_textbutton_style_header: # Used for header / title boxes NOTE: Make this different later to easier distinguish
-    padding [5,5]
-    margin [5,5]
+    padding (5,5)
+    margin (5,5)
     background "#0a142688"
     insensitive_background "#171717"
     hover_background "#143869"
@@ -78,7 +78,7 @@ init -2 style serum_text_style_traits: # Unaligned text style for traits in the 
     yoffset 2
 
 init -2 style textbutton_no_padding_highlight: # Textbutton without padding
-    margin [2,2]
+    margin (2,2)
     background "#0a142688"
     insensitive_background "#171717"
     hover_background "#143869"
@@ -94,7 +94,7 @@ init -2 style custom_outfit_style: ##The text style used for text inside of the 
 
 init 2 style textbutton_style: ##The generic style used for text button backgrounds. TODO: Replace this with a pretty background image instead of a flat colour.
     size (persistent.display_text_size + 2)
-    margin [2, 2]
+    margin (2, 2)
     background "#0a142688"
     insensitive_background "#171717"
     hover_background "#143869"
@@ -111,7 +111,7 @@ init 2 style textbutton_text_style: ##The generic style used for text button bac
 
 init 2 style transparent_style:
     background None
-    padding [5, 0]
+    padding (5, 0)
 
 init 2 style outfit_description_style is textbutton_text_style:
     size 18

@@ -47,8 +47,7 @@ label fetish_anal_staylate_event_label(the_person):
         mc.name "Sorry, I had something come up and had to leave early."
         "[the_person.possessive_title] tries to mask disappointment in her voice but it is still obvious."
         the_person "Oh... okay... well try to let me know next time before I stay late. I thought... anyway, maybe some other time. Bye!"
-        $ the_person.change_love(-2)
-        $ the_person.change_happiness(-5)
+        $ the_person.change_stats(happiness = -5, love = -2)
         return
 
     $ ceo_office.show_background()
@@ -108,14 +107,12 @@ label fetish_anal_staylate_event_label(the_person):
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] lays over the desk for a while, recovering from her ass reaming."
                 the_person "God... that felt so fucking good..."
-                $ the_person.change_obedience(5)
-                $ the_person.change_happiness(5)
+                $ the_person.change_stats(happiness = 5, obedience = 5)
 
             else:
                 the_person "Okay... I guess we're done already?"
                 "[the_person.possessive_title] seems disappointed she didn't finish."
-                $ the_person.change_love(-2)
-                $ the_person.change_happiness(-5)
+                $ the_person.change_stats(happiness = -5, love = -2)
 
             $ the_person.event_triggers_dict["LastAnalFetish"] = day
             "[the_person.possessive_title] gets up and starts getting ready to go home."
@@ -158,7 +155,5 @@ label fetish_anal_staylate_event_label(the_person):
             "[the_person.possessive_title] looks back at your, clearly surprised that you are sending her away already."
             the_person "What? I mean, already? Okay..."
             "She grabs her stuff and quickly makes an exit from your office."
-            $ the_person.change_love(-2)
-            $ the_person.change_happiness(-5)
-            $ the_person.change_obedience(10)
+            $ the_person.change_stats(happiness = -5, love = -2, obedience = 5)
     return

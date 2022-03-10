@@ -1,7 +1,4 @@
 ## Late for Work Crisis Mod by Tristimdorion
-init -1 python:
-    late_for_work_weight = 10   # Increase weight because it only occurs in one timeslot.
-
 init 2 python:
     def late_for_work_requirement():
         if time_of_day <= 1 and mc.business.get_employee_count() > 2:
@@ -10,9 +7,9 @@ init 2 python:
         return False
 
     late_for_work_action = ActionMod("Late for Work", late_for_work_requirement, "late_for_work_action_label",
-        menu_tooltip = "An employee is late for work.", category = "Business", is_crisis = True, crisis_weight = late_for_work_weight)
+        menu_tooltip = "An employee is late for work.", category = "Business", is_crisis = True)
 
-label late_for_work_action_label:
+label late_for_work_action_label():
     #Lets get the girl of interest (exclude Sarah on mondays).
     $ the_person = get_random_employees(1, exclude_list = [] if day%7 != 0 else [sarah])
     if the_person is None:
@@ -49,7 +46,7 @@ label late_for_work_action_label:
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] quietly rushes to her desk."
     elif the_person.relationship != "Single":   # high sluttiness non single girls
-        $ the_person.cum_on_tits()
+        $ the_person.cum_on_tits(add_to_record = False)
         $ the_person.draw_person(position="stand3", emotion="default")
         the_person "I'm sorry [the_person.mc_title], [the_person.SO_name] needed some personal attention when he dropped me off at the office."
         $ upper_clothing = the_person.outfit.get_upper_top_layer()
@@ -130,8 +127,8 @@ label late_for_work_action_label:
         "[the_person.possessive_title] rushes to the ladies room to clean up."
         $ upper_clothing = None
     elif persistent.show_ntr and the_person.sluttiness > 80 and not the_person.has_role(girlfriend_role): # NTR Enabled very slutty single girls
-        $ the_person.cum_on_face()
-        $ the_person.cum_on_tits()
+        $ the_person.cum_on_face(add_to_record = False)
+        $ the_person.cum_on_tits(add_to_record = False)
         $ the_person.draw_person(position="stand3", emotion="default")
         the_person "Sorry [the_person.mc_title], a client caught me in the parking lot and wanted to have a business meeting in his car. You can let marketing know I made the sale."
 

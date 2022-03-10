@@ -150,10 +150,7 @@ label strip_ask_cowgirl_cunnilingus(the_girl, the_clothing, the_location, the_ob
 label orgasm_cowgirl_cunnilingus(the_girl, the_location, the_object):
     "You notice [the_girl.possessive_title]'s moans becoming louder, and her legs twitching more noticeably on either side of you."
     "You speed up your efforts, doing your best to drive her towards her orgasm. She moans and begins to writhe under your skilled tongue."
-    if the_girl.get_sex_goal() == "get off":
-        the_girl "Oh my god... I'm finally gonna cum!"
-    else:
-        $ the_girl.call_dialogue("climax_responses_oral")
+    $ the_girl.call_dialogue("climax_responses_oral")
     "All at once the tension in her body is unleashed in a series of violent tremors. Her legs wrap around you for a moment, pulling you against her."
     "The moment passes and she relaxes. For a moment all she can do is look down at you and pant."
     return

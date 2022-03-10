@@ -5,7 +5,7 @@ init python:
         guy_arousal = 16, guy_energy = 14,
         connections = [],
         intro = "intro_SB_anal_cowgirl",
-        scenes = ["scene_SB_anal_cowgirl_1","scene_SB_anal_cowgirl_2","scene_SB_anal_cowgirl_3"],
+        scenes = ["scene_SB_anal_cowgirl_1","scene_SB_anal_cowgirl_2","scene_SB_anal_cowgirl_3","scene_SB_anal_cowgirl_4"],
         outro = "outro_SB_anal_cowgirl",
         transition_default = "transition_default_SB_anal_cowgirl",
         strip_description = "strip_SB_anal_cowgirl", strip_ask_description = "strip_ask_SB_anal_cowgirl",
@@ -25,7 +25,8 @@ init python:
 
 label intro_SB_anal_cowgirl(the_girl, the_location, the_object):
     the_girl "Lie down for me, I want to be on top."
-    "You lie down on the [the_object.name] and undo your pants. [the_girl.possessive_title] swings a leg over your body and straddles you."
+    "You lie down on the [the_object.name] and undo your pants."
+    "[the_girl.possessive_title] swings a leg over your body and straddles you."
     the_girl "I'm gonna put it in my ass. Lets get you lubed up first though..."
     if the_girl.outfit.vagina_visible():
         "She leans back and grinds herself against you. The shaft of your cock rubs against the lips of her pussy."
@@ -33,6 +34,9 @@ label intro_SB_anal_cowgirl(the_girl, the_location, the_object):
         $ blocking_item = the_girl.outfit.get_lower_visible()[0]
         "She leans back and grinds herself against you. Underneath her [blocking_item.name] you can feel the lips of her pussy sliding along the length of your shaft."
     "She grinds up against you for several seconds, until your cock glides pleasingly along her wet slit."
+    if not the_girl.vagina_available():
+        "She quickly moves some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_anal_cowgirl.position_tag, visible_enough = True, prefer_half_off = True)
     the_girl "Ready?"
     if the_girl.sex_skills["Anal"] >= 3:
         "You nod. She grinds forward one last time, then lifts herself up. She reaches back behind her and guides your cock to the entrance of her puckered hole."
@@ -158,6 +162,97 @@ label scene_SB_anal_cowgirl_3(the_girl, the_location, the_object):
         "With [the_girl.possessive_title] in control you're able to relax and focus entirely on enjoying the feeling."
     return
 
+label scene_SB_anal_cowgirl_4(the_girl, the_location, the_object):
+    "[the_girl.possessive_title] slows her strokes down, eventually stopping as she sits on top of you, your cock buried deep in her ass."
+    if the_girl.has_anal_fetish():
+        if the_girl.arousal > 85:
+            "Even though she stopped, you can still feel her body twitching and pulsing around you."
+            "It seems like she's trying to edge herself a bit, but her breathing is getting more ragged despite her lack of movement."
+            the_girl "Oh fuck... I just want a second... I'm not ready to cum yet...!"
+            "She tries to keep herself from getting off too soon, but her hips are starting to twitch a bit on their own."
+            "[the_girl.title] gives one small stroke of her hips and gasps. There is no way she can stop herself from cumming now."
+            $ the_girl.change_arousal(15)
+            "Suddenly, [the_girl.possessive_title] is fucking you with incredible need."
+            the_girl "Oh fuck! Oh!"
+        else:
+            "Even though she stopped, you can still feel movement as [the_girl.title] starts to clench and unclench her ass around you."
+            the_girl "Fuck you are so big... it feels so good to just have you deep for a bit."
+            "[the_girl.possessive_title]'s subtle strokes and heavy breathing is really turning you on. It's clear she is savoring having your cock deep in her ass."
+            $ mc.change_arousal(5)
+    elif the_girl.sex_skills["Anal"] >= 3 and the_girl.get_opinion_score("anal sex") >= 0:
+        if the_girl.arousal > 90:   #She tries to edge herself.
+            "Even though she stopped, you can still feel her body twitching and pulsing around you."
+            "It seems like she's trying to edge herself a bit, but she is still slowly getting herself off from the pleasure of having her ass filled."
+            if the_girl.tits_available():
+                "Not content to let her off easy, you reach up and grab her tits. When you pinch her nipples you feel her ass clench your cock."
+                the_girl "Ah! Hey! I need a second... I'm... I'm not ready to cum yet...!"
+                "[the_girl.title] protests, but doesn't move to stop you, so you pinch her nipples again."
+            else:
+                "Not content to let her off easy, you reach down and grab her hips. You move her body side to side a bit, stirring your cock inside her."
+                the_girl "Ah! Hey! I need a second... I'm... I'm not ready to cum yet...!"
+                "[the_girl.title] protests, but doesn't move to stop you, so you keep going."
+            "[the_girl.title] gives one small stroke of her hips and gasps. There is no way she can stop herself from cumming now."
+            $ the_girl.change_arousal(15)
+            "Suddenly, [the_girl.possessive_title] is fucking you with incredible need."
+            the_girl "Oh fuck! Oh!"
+        else:
+            the_girl "Your cock is so big... it feels good even when I'm not moving."
+            "[the_girl.title]'s ass clenches and unclenches around your cock slowly. You can tell she is doing it on purporse."
+            $ mc.change_arousal(5)
+            "It feels amazing to have her stroking you without even moving. You lay back and enjoy it."
+
+    else:   #A chance to train her
+        the_girl "Sorry, I... I just need a second... this is so intense!"
+        if the_girl.arousal > 90 and the_girl.get_opinion_score("anal sex") < 1:
+            "You can tell that even though she doesn't particularly enjoy it, [the_girl.title] is getting off on this. You decide to push it a bit."
+            mc.name "Wow, you are dripping. You are really getting off on this aren't you?"
+            the_girl "No! I... I mean... your cock in inside me... of course it's going to feel a little bit good..."
+            mc.name "It's not just a little bit good though, is it? You are starting to like it like this, are you, you little butt slut?"
+            if ((the_girl.suggestibility + the_girl.arousal) / 2) > renpy.random.randint(0,100):    #Odds of improvement are average of suggestability and arousal. Because of conditions base chance of 45%
+                the_girl "I... oh god... I think you're right..."
+                $ the_girl.increase_opinion_score("anal sex")
+                $ the_girl.change_arousal(10)
+                "[the_girl.title] gives one small stroke of her hips and gasps."
+                the_girl "It's you! You make it so good... oh fuck!"
+                "Suddenly, [the_girl.possessive_title] is fucking you with need."
+            else:
+                the_girl "I... no... I'm not a butt slut!"
+                "Despite your urging, [the_girl.possessive_title] resists your training."
+        elif the_girl.arousal > 90 and the_girl.sex_skills["Anal"] < 3:
+            "You can tell that [the_girl.title] is really enjoying herself, but is struggling with being on top during anal."
+            mc.name "Wow, you are dripping. Are you going to get off soon?"
+            the_girl "I want to... It's just so big! I... I'm not sure I can do this..."
+            mc.name "Shhh, it's okay. Don't focus on me, just focus on yourself. Think about your body, how good it feels, then force your ass to relax."
+            the_girl "I... I'm trying... it just hurts a little, but it feels so good too."
+            mc.name "Close your eyes, take a deep breath. Remember this isn't a race."
+            "[the_girl.title] closes her eyes and sighs. You can feel it as her ass slightly unclenches around you."
+            $ the_girl.increase_sex_skill("Anal")
+            "She gives you a slow stroke and moans."
+            mc.name "That's it. You're doing great. I'll make you my little butt slut soon enough. You want to be my butt slut, don't you?"
+            the_girl "Oh fuck... I do!"
+            $ the_girl.change_arousal(10)
+            "[the_girl.title] gives another small stroke of her hips and gasps."
+            "[the_girl.possessive_title] is speeding up now, her body leading her to her orgasm."
+        else:
+            mc.name "It's okay. Take your time."
+            if the_girl.tits_available():
+                "You reach up and grab her tits. When you pinch her nipples you feel her ass clench your cock."
+                the_girl "Ah! Mmm that feels good, do that again..."
+                "You pinch her nipples again. She moans in response."
+            else:
+                "To help her relax, you decide to her off a little. You reach down with your hand and stroke her a slit."
+                the_girl "Ahhh... that feels nice."
+                "[the_girl.title] closes her eyes as you touch her pussy. When you flick her clit with your thumb, you feel her ass clench around you."
+            $ the_girl.change_arousal(5)
+            the_girl "Mmm... okay, I'm going to keep going..."
+            "Slowly, [the_girl.possessive_title] starts to move her hips again, her backdoor accepting you more and more."
+
+
+
+
+
+    return
+
 label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
     "With each stroke of her hips [the_girl.possessive_title]'s impossibly tight ass brings you closer and closer to cumming. You're finally driven past the point of no return."
     mc.name "Fuck, I'm going to cum!"
@@ -244,6 +339,9 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
 
 label transition_default_SB_anal_cowgirl(the_girl, the_location, the_object):
     "You lie down on [the_object.name]. [the_girl.possessive_title] swings a leg over your waist and straddles you."
+    if not the_girl.vagina_available():
+        "She moves some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_anal_cowgirl.position_tag, visible_enough = True, prefer_half_off = True)
     if the_girl.sex_skills["Anal"] >= 3:
         "You nod. She grinds forward one last time, then lifts herself up. She reaches back behind her and guides your cock to the entrance of her puckered hole."
         "With a grunt, she slowly lets her body weight sink down on top of you. Her sphincter finally gives way with a pleasing pop, and she slow sinks down on top of you."

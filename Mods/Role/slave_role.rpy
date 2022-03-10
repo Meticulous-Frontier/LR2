@@ -152,7 +152,7 @@ label slave_trim_pubes_label(the_person):
 
     $ pubes_choice = renpy.display_menu(girlfriend_build_pubes_choice_menu(the_person),True,"Choice")
 
-    if pubes_choice == "Never mind.":
+    if pubes_choice == "Never mind":
         mc.name "On second thought, just leave them the way they are."
         the_person "As you wish."
     else:
@@ -215,7 +215,7 @@ label slave_alarm_clock_label(the_person):
         "You sit up on the side of the bed and stretch, letting out a long yawn."
         if the_person.sluttiness < 20:
             the_person "Oh... I should... Uh..."
-            "[the_person.possessive_title] blushes and turns around suddenly. It takes you a moment to realise why: your morning wood pitching an impressive tent with your underwear."
+            "[the_person.possessive_title] blushes and turns around suddenly. It takes you a moment to realize why: your morning wood pitching an impressive tent with your underwear."
             the_person "No, it's perfectly natural. I'll give you some privacy."
             $ the_person.change_slut(2)
             $ the_person.draw_person(position = "back_peek")
@@ -223,7 +223,7 @@ label slave_alarm_clock_label(the_person):
 
         else:
             the_person "Oh, and you might want to take care of that before you go out [the_person.mc_title]."
-            "She nods towards your crotch and you realise you're pitching an impressive tent."
+            "She nods towards your crotch and you realize you're pitching an impressive tent."
             mc.name "Oh, sorry about that."
             the_person "No, it's perfectly natural and nothing to be embarrassed about."
             $ the_person.change_slut(2)
@@ -305,7 +305,7 @@ label slave_alarm_clock_label(the_person):
 
 
     elif the_person.sluttiness < 70:
-        "You're slowly awoken by a strange, pleasant sensation. When you open your eyes it takes a moment to realise you aren't still dreaming."
+        "You're slowly awoken by a strange, pleasant sensation. When you open your eyes it takes a moment to realize you aren't still dreaming."
         $ the_person.draw_person(position = "blowjob") #TODO: We need a handjob pose.
         "[the_person.possessive_title] is sitting on the side of your bed. The covers have been pulled down and she has your morning wood in her hand. She strokes it slowly as she speaks."
         the_person "Good morning [the_person.mc_title]. You didn't really specify how you would like to be woke up so I thought I'd improvise... You see; I came in to wake you up and saw this..."
@@ -345,7 +345,7 @@ label slave_alarm_clock_label(the_person):
 
     elif the_person.sluttiness < 90:
         #TODO: image a lying down blowjob pose
-        "You're slowly awoken by a strange, pleasant sensation. When you open your eyes it takes a moment to realise you aren't still dreaming."
+        "You're slowly awoken by a strange, pleasant sensation. When you open your eyes it takes a moment to realize you aren't still dreaming."
         $ the_person.draw_person(position = "blowjob")
         "[the_person.possessive_title] is lying face down between your legs, gently sucking off your morning wood."
         "She notices you waking up and pulls off of your cock to speak."

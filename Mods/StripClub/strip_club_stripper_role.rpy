@@ -1,7 +1,6 @@
 ## Stripclub storyline Mod by Corrado
 #  Strippers role definition.
 #  The role is appended to strippers after they start to work for you.
-
 init 5 python:
     add_label_hijack("normal_start", "update_strip_club_show_requirement")
     add_label_hijack("after_load", "update_strip_club_show_requirement")
@@ -13,66 +12,9 @@ init 5 python:
             return False
         if time_of_day in [0,1,2]:
             return "Too early for performances"
-        else:
-            return True
-
-    def set_stripper_schedule(person, work_location):
-        # slightly altered schedule for these characters, so it does not interfere with the story-line or work schedule.
-        if person.is_employee() or person in [nora, emily, christina]:
-            person.event_triggers_dict["strip_club_shifts"] = 1
-            person.set_schedule(work_location, times = [4])
-        elif person in [lily, mom, aunt]:
-            person.event_triggers_dict["strip_club_shifts"] = 1
-            person.set_schedule(work_location, days = [0, 1, 3, 4, 5, 6], times =[4]) # Mom, Sis & Aunt on Wednesday play cards.
-        else:
-            person.event_triggers_dict["strip_club_shifts"] = 2
-            person.set_schedule(work_location, times = [3, 4])
-        return
-
-    # replace requirement on action to prevent CPickle errors
-    def strip_club_hire_stripper(person, role):
-        person.add_role(role)
-
-        work_location = strip_club
-        if person.has_role(bdsm_performer_role):
-            work_location = bdsm_room
-
-        set_stripper_schedule(person, work_location)
-        person.event_triggers_dict["stripclub_hire_day"] = day
-        person.stripper_salary = calculate_stripper_salary(person)
-
-        if role is stripper_role and not person in stripclub_strippers:
-            stripclub_strippers.append(person)
-        if role is bdsm_performer_role and not person in stripclub_bdsm_performers:
-            stripclub_bdsm_performers.append(person)
-        if role is waitress_role and not person in stripclub_waitresses:
-            stripclub_waitresses.append(person)
-        return
-
-    def strip_club_fire_stripper(person):
-        if person.has_role(stripper_role):
-            person.remove_role(stripper_role)
-        if person.has_role(bdsm_performer_role):
-            person.remove_role(bdsm_performer_role)
-        if person.has_role(waitress_role):
-            person.remove_role(waitress_role)
-
-        # restore default schedules
-        if person.is_employee():
-            person.set_schedule(person.home, times = [4])
-        elif person in [lily, mom, aunt]:
-            person.set_schedule(person.home, days = [0, 1, 3, 4, 5, 6], times = [4])
-        else:
-            person.set_schedule(None, times = [3])
-            person.set_schedule(person.home, times = [4])
-
-        if person in stripclub_strippers:
-            stripclub_strippers.remove(person)
-        if person in stripclub_bdsm_performers:
-            stripclub_bdsm_performers.remove(person)
-        if person in stripclub_waitresses:
-            stripclub_waitresses.remove(person)
-        return
+        if get_strip_club_foreclosed_stage() < 5 and not mc.business.has_funds(20):
+            return "Not enough cash"
+        return True
 
     def calculate_stripper_salary(person):
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
@@ -80,7 +22,7 @@ init 5 python:
         age_modifier = 8 - (__builtin__.abs(25 - person.age) / 3.0)            # optimal age is 25
         slut_modifier = person.sluttiness / 20.0
         obed_modifier = 0
-        if person.has_role(bdsm_performer_role):
+        if person.has_role(stripclub_bdsm_performer_role):
             obed_modifier = person.obedience / 20.0
 
         return __builtin__.round((person.charisma + tit_modifier + age_modifier + slut_modifier + obed_modifier) * shifts, 1)
@@ -88,7 +30,7 @@ init 5 python:
     def calculate_stripper_profit(person):
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
         profit_base = person.stripper_salary * (renpy.random.random() + .7) # stripper income is variable
-        if person.has_role(waitress_role):
+        if person.has_role(stripclub_waitress_role):
             profit_base = person.stripper_salary * (renpy.random.random() + .5) # waitress income is variable
 
         tit_modifier = person.get_opinion_score("showing her tits") * 2
@@ -100,32 +42,28 @@ init 5 python:
         if get_strip_club_foreclosed_stage() >= 5:
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formal_name]"
-            if person.has_role([stripper_role, bdsm_performer_role, waitress_role]):
+            if person.has_role([stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role]):
                 return True
         return False
 
     def strip_club_hire_employee_requirement(person):
-        if person.has_role([stripper_role, waitress_role, manager_role, mistress_role, bdsm_performer_role]):
+        if person.has_role([stripper_role, stripclub_waitress_role, stripclub_manager_role, stripclub_mistress_role, stripclub_bdsm_performer_role]):
             return False
-        if person.is_employee() or person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
+        if person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
             return False
-        if __builtin__.len(stripclub_strippers) >= 5 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
+        if person.has_job_role(critical_job_role): # critical jobs require very high sluttiness
+            if person.sluttiness < 80:
+                return False
+            if person.sluttiness < 100:
+                return "Try at max sluttiness"
+        if __builtin__.len(stripclub_strippers) >= 7 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
             return "At maximum Strip Club employees"
         if day < person.event_triggers_dict.get("stripper_ask_hire", 0) + 3:
             return "Asked too recently"
         return True
 
-    def strip_club_stripper_private_dance_requirement(person):
-        if not get_strip_club_foreclosed_stage() >= 5:
-            return False
-        if not person.has_role(stripper_role):
-            return False
-        if person.location != strip_club:
-            return "Only in [strip_club.formal_name]"
-        return True
-
     def strip_club_review_requirement(person):
-        if get_strip_club_foreclosed_stage() >= 5 and person.has_role([stripper_role, bdsm_performer_role, waitress_role]):
+        if get_strip_club_foreclosed_stage() >= 5 and person.has_role([stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role]):
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formal_name]"
             if day - person.event_triggers_dict.get("stripclub_last_promotion_day", -7) < 7:
@@ -138,9 +76,16 @@ init 5 python:
     def add_strip_club_hire_employee_action_to_mc_actions():
         strip_club_hire_employee_action = Action("Employ at [strip_club.formal_name]", strip_club_hire_employee_requirement, "strip_club_hire_employee_label", menu_tooltip = "Hire [the_person.title] to work for you in your strip club.")
         mc.main_character_actions.append(strip_club_hire_employee_action)
+        # change strippers jobs role
+        for stripper in stripclub_strippers[:]: # use copy of existing array
+            stripper.job.quit_function = stripper_quit # replace base game stripper job quit_function
+            stripper.quit_job() # use quit job because the role names match
+            stripper.add_job(stripclub_stripper_job)
 
     def allow_promote_to_manager_requirement(person):
-        if person.has_role([stripper_role, waitress_role, bdsm_performer_role]) and not strip_club_get_manager():
+        if get_strip_club_foreclosed_stage() < 5:
+            return False
+        if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role]) and not strip_club_get_manager():
             # if person.age < 25: # As requested from a lot of people to hire Gabrielle as manager
                 # return "Requires: age >= 25"
             if person.int < 4 or person.charisma < 5:
@@ -154,25 +99,57 @@ init 5 python:
 
     def build_strip_club_hire_role_menu(person):
         available_roles = []
-        if __builtin__.len(stripclub_strippers) < 5:
+        if __builtin__.len(stripclub_strippers) < 7:
             available_roles.append(["Stripper", stripper_role])
         if strip_club_get_manager() and __builtin__.len(stripclub_waitresses) < 2:
-            available_roles.append(["Waitress", waitress_role])
+            available_roles.append(["Waitress", stripclub_waitress_role])
         if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and __builtin__.len(stripclub_bdsm_performers) < 5:
-            available_roles.append(["BDSM Performer", bdsm_performer_role])
+            available_roles.append(["BDSM Performer", stripclub_bdsm_performer_role])
 
         available_roles.append(["Forget It", "None"])
 
         available_roles.insert(0, "Strip Club Role")
         return [available_roles]
 
-    promote_to_manager_action = Action("Appoint as Manager", allow_promote_to_manager_requirement, "promote_to_manager_label", menu_tooltip = "Appoint [the_person.title] as strip club manager.")
+    def hire_stripper(person, job):
+        person.set_override_schedule(None, the_times = [4]) # clear party schedule
+        if person.is_employee() or person in [lily, aunt, mom, nora]:    # moonlighting
+            person.event_triggers_dict["strip_club_shifts"] = 1
+            person.set_schedule(job.job_location, the_times = [4])
+            person.add_role(job.job_role)
+            stripclub_strippers.add(person)
+        else:
+            person.event_triggers_dict["strip_club_shifts"] = 2
+            person.add_job(job)
+        return
 
+    def fire_stripper(person):
+        if person.is_employee() or person in [lily, aunt, mom, nora]:   # moonlighting
+            person.set_schedule(person.home, the_times = [4])
+            person.remove_role([stripclub_stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role])
+            stripclub_strippers.remove(person)
+        else:
+            person.quit_job()
+        return
+
+    # change stripper replace function
+    def stripper_replace_enhanced(person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
+        if person in stripclub_strippers:
+            stripclub_strippers.remove(person)
+
+        # add new stripper to replace the one that left
+        create_stripper()
+
+    def stripper_quit(person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
+        if person in stripclub_strippers:
+            stripclub_strippers.remove(person)
+
+    promote_to_manager_action = Action("Appoint as Manager", allow_promote_to_manager_requirement, "promote_to_manager_label", menu_tooltip = "Appoint [the_person.title] as strip club manager.")
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
     strip_club_stripper_performance_review_action = Action("Review her performance", strip_club_review_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
-    strip_club_stripper_private_dance_action = Action("Private Dance", strip_club_stripper_private_dance_requirement, "strip_club_stripper_private_dance_label", menu_tooltip = "Ask [the_person] for a private dance.")
 
-    stripper_role = Role("Stripper", [strip_club_stripper_private_dance_action, promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = False)
+    stripclub_stripper_role = Role("Stripper", get_stripper_role_actions() + [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = True)
+
 
 label update_strip_club_show_requirement(stack):
     python:
@@ -184,6 +161,9 @@ label update_strip_club_show_requirement(stack):
         if not "stripclub_waitresses" in globals():
             stripclub_waitresses = MappedList(Person, all_people_in_the_game)
 
+        # attach new replace function for better stripper creation
+        stripper_job.quit_function = stripper_replace_enhanced
+
         execute_hijack_call(stack)
     return
 
@@ -191,15 +171,12 @@ label strip_club_hire_employee_label(the_person):
     mc.name "So [the_person.title], are you looking for a job?"
     $ ran_num = renpy.random.randint(0,100)
     if the_person is lily:
-        $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         the_person "Hey [the_person.mc_title], you know I'm always looking for ways to boost my pocket money, a student has always a shortage of money."
         mc.name "Then you might like the proposal I have for you."
     elif the_person is mom:
-        $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         the_person "Hi [the_person.mc_title], you know I have a lot of bills to pay, but I also have my job, so I'm not really looking for something else."
         mc.name "I think you are going to like this offer."
     elif the_person is aunt:
-        $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         the_person "Hello [the_person.mc_title], I'm so tired of sitting around at home all day, I wouldn't mind a little diversion."
         mc.name "Well, it's not exactly a daytime job, but the hours and pay are very good."
     elif the_person is cousin:
@@ -220,13 +197,15 @@ label strip_club_hire_employee_label(the_person):
             the_person "Ok, but after what you did last time, the pay should be magnificent!"
             mc.name "Your pay will be $[ran_num] a day. Do you think that will be good enough for you?"
             the_person "Really you will pay me that much? Ok, then my answer is yes, I'll work as stripper again."
+            $ hire_stripper(the_person, stripclub_stripper_job)
 
-        elif _return is bdsm_performer_role:
+        elif _return is stripclub_bdsm_performer_role:
             mc.name "I did it just because I already knew I had a better offer for a girl like you. How do you feel about coming back at the strip club to work as BDSM performer?"
             $ the_person.draw_person(emotion = "happy", position = "stand5")
             the_person "Maybe, but as stripper I was getting good money, so if I do this, the pay should be a lot better!"
             mc.name "Your pay will be $[ran_num] a day. Do you think that is 'a lot better' for you?"
             the_person "Really you will pay me that much? Ok, then my answer is yes, I'll do some kinky stuff for you."
+            $ hire_stripper(the_person, stripclub_bdsm_performer_job)
 
         else:
             mc.name "I don't like the idea of you working as stripper, but how do you feel about coming back at the strip club to work as waitress?"
@@ -234,32 +213,32 @@ label strip_club_hire_employee_label(the_person):
             the_person "Ok, but as stripper I was getting good money, so the pay should be this good!"
             mc.name "Your pay will be $[ran_num] a day. Do you think that will be good enough for you?"
             the_person "Really you will pay me that much just to give people drinks and clean some tables? Ok, then my answer is yes."
+            $ hire_stripper(the_person, stripclub_waitress_job)
 
-
-        $ strip_club_hire_stripper(the_person, _return)
         mc.name "See you at the club."
         return
     elif the_person.is_employee():
-        $ the_person.event_triggers_dict["strip_club_shifts"] = 1
         if mc.business.is_open_for_business():
             the_person "What do you mean? I already have a job, right here, right now."
             mc.name "Don't worry, it won't interfere with this job, I just thought you might like to make something extra on the side."
         else:
             the_person "I don't understand, I already work for you. Or are you terminating my position?"
             mc.name "Of course not, you are a valuable employee, but I thought you might like to make some extra cash for just a few hours work, after hours."
-    elif ran_num < 33: # 33% chance Yes
-        the_person "Actually yes, I would welcome something to do in my life... Do you have something available for me?"
-    elif ran_num > 67: # 33% chance No
-        the_person "No [the_person.mc_title], I already have a job right now and I'm happy with it."
+    elif the_person.has_job(unemployed_job):
+        the_person "I'm currently unemployed, so I'm open to any suggestions..."
+    elif ran_num < 33: # Any other 33% chance Yes
+        the_person "Actually yes, I would like to take a break from being a [the_person.job.job_title]... Do you have something available for me?"
+    elif ran_num > 67: # Any other 33% chance No
+        the_person "No [the_person.mc_title], I'm quite happy with my job as [the_person.job.job_title]."
         mc.name "Oh, that's good for you! If one day you'll change your mind, let me know."
         the_person "Sure, thank you!"
         $ the_person.event_triggers_dict["stripper_ask_hire"] = day
         return
-    else: # chance left (34%) Maybe
+    else: #  Any other (34% chance) Maybe
         the_person "Maybe, but not right now, I'm really busy at the moment, so there's not too many jobs I can do..."
         mc.name "Then my proposal will be perfect for you!"
 
-    if mc.location is strip_club:
+    if mc.location == strip_club:
         mc.name "I own this strip club and I could see you working here..."
     else:
         mc.name "I own the [strip_club.formal_name] downtown, and I need some workers for the place..."
@@ -282,9 +261,9 @@ label strip_club_hire_employee_label(the_person):
             the_person "Great, then I'll be a stripper for you."
         elif the_person.effective_sluttiness() > 70:
             the_person "I admit, I love turning men on, just making them horny while they ogle my body, mmm... Where should I sign?"
-        elif the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 1:
+        elif the_person.effective_sluttiness() > 40 and the_person.get_opinion_score(["showing her ass","showing her tits"]) > 1:
             the_person "I admit, I always wanted to do something like that. Seducing men, with my body on full display, mmm... Where should I sign?"
-        elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 3:
+        elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score(["showing her ass", "showing her tits"]) > 3:
             the_person "Maybe, if the money is good enough, I could give it a try..."
             mc.name "Your pay will be $[ran_num] a day. Do you think that will be good enough for you?"
             the_person "Really you will pay me that much? Ok, then my answer is yes, I'll work as stripper for you."
@@ -294,8 +273,9 @@ label strip_club_hire_employee_label(the_person):
             mc.name "Don't worry [the_person.title], if you change your mind, just let me know."
             $ the_person.event_triggers_dict["stripper_ask_hire"] = day
             return
+        $ hire_stripper(the_person, stripclub_stripper_job)
 
-    elif _return is bdsm_performer_role:
+    elif _return is stripclub_bdsm_performer_role:
         mc.name "I was thinking you might like to perform in the BDSM room..."
         if the_person.has_role(prostitute_role):
             the_person "Could I still turn tricks, when I like the guy?"
@@ -319,6 +299,7 @@ label strip_club_hire_employee_label(the_person):
             mc.name "Don't worry [the_person.title], if you change your mind, just let me know."
             $ the_person.event_triggers_dict["stripper_ask_hire"] = day
             return
+        $ hire_stripper(the_person, stripclub_bdsm_performer_job)
 
     else:
         mc.name "I was thinking you might like to become a waitress..."
@@ -341,16 +322,15 @@ label strip_club_hire_employee_label(the_person):
             mc.name "Don't worry [the_person.title], if you change your mind, just let me know."
             $ the_person.event_triggers_dict["stripper_ask_hire"] = day
             return
+        $ hire_stripper(the_person,stripclub_waitress_job)
 
     "You ask her to sign the standard contract and [the_person.title] now works for you in the [strip_club.formal_name]."
-
-    $ strip_club_hire_stripper(the_person, _return)
 
     the_person "Thank you for the opportunity [the_person.mc_title], I'll try my best!"
     return
 
 label strip_club_fire_employee_label(the_person):
-    if the_person.has_role(stripper_role) or the_person.has_role(waitress_role):
+    if the_person.has_role(stripper_role) or the_person.has_role(stripclub_waitress_role):
         mc.name "[the_person.title], I've checked your performances on stage and it is absolutely unsatisfactory."
         mc.name "There's no a nice way to say this, but you're fired, you can finish your shift tonight and collect your severance pay."
         $ the_person.draw_person(emotion = "happy", position = "stand3")
@@ -384,23 +364,7 @@ label strip_club_fire_employee_label(the_person):
             $ the_person.draw_person(emotion = "sad", position = "stand3")
             the_person "Damn... Ok, I will clear out my locker at the end of my shift."
             $ the_person.change_stats(happiness = -10, obedience = -5, love = -5)
-            $ strip_club_fire_stripper(the_person)
-    return
-
-label strip_club_stripper_private_dance_label(the_person):
-    "You signal [the_person.possessive_title] to come over."
-    $ the_person.draw_person()
-    the_person "Yes [the_person.mc_title], what can I do for you?"
-    mc.name "Hey [the_person.title], would you like to make some extra cash tonight?"
-    the_person "Sure, what do you need?"
-    mc.name "I need to relax, would you mind giving me a private dance in the VIP room?"
-    $ the_person.draw_person(position = "back_peek")
-    the_person "No problem, follow me."
-    "As soon as you sit down in the VIP room, [the_person.possessive_title] start her routine."
-    call strip_tease(the_person, for_pay = True) from _call_strip_club_stripper_private_dance_strip_tease
-    $ the_person.draw_person()
-    mc.name "Thank you, now back to work."
-    the_person "Of course, [the_person.mc_title]."
+            $ fire_stripper(the_person)
     return
 
 label stripper_performance_review_label(the_person):
@@ -476,7 +440,7 @@ label stripper_performance_review_label(the_person):
         "Punish her for poor performance":
             $ cut_amount = __builtin__.round(the_person.salary * 0.1)
             menu:
-                "Cut her pay by 10%\n{color=#00ff00}{size=18}Profit: $[cut_amount] / day{/size}{/color}": #Pay her less. Large happiness and obedience drop.
+                "Cut her pay by 10%%\n{color=#00ff00}{size=18}Profit: $[cut_amount] / day{/size}{/color}": #Pay her less. Large happiness and obedience drop.
                     mc.name "I'm really sorry to do this [the_person.title], but your performance lately just doesn't justify what I'm paying you."
                     mc.name "I'm going to have to cut your pay by 10%%."
                     $ the_person.change_salary(-cut_amount)
@@ -496,7 +460,7 @@ label stripper_performance_review_label(the_person):
                         $ clear_scene()
                         "[the_person.title] stands up and storms out of the room."
                         $ the_person.change_stats(happiness = -25, obedience = -15, love = -30)
-                        $ strip_club_fire_stripper(the_person)
+                        $ fire_stripper(the_person)
                         $ the_person.change_location(the_person.home)
                         return
                 "Threaten to fire her": #She may ask to stay in exchange for some sort of favour, or get fired on the spot.
@@ -515,7 +479,7 @@ label stripper_performance_review_label(the_person):
                                     mc.name "I'm sorry, but that wouldn't be enough."
                                     the_person "I understand. I'll clear out my locker at the end of my shift."
                                     $ the_person.change_stats(happiness = -10, obedience = -5)
-                                    $ strip_club_fire_stripper(the_person)
+                                    $ fire_stripper(the_person)
                         else:
                             the_person "Wait, I really need this job... What if I... let you use me. Just so you'll keep me around."
                             menu:
@@ -537,7 +501,7 @@ label stripper_performance_review_label(the_person):
                                     mc.name "I'm sorry, but that wouldn't be enough."
                                     the_person "I understand. I'll clear out my locker at the end of the shift."
                                     $ the_person.change_stats(happiness = -15, obedience = -10, love = -10)
-                                    $ strip_club_fire_stripper(the_person)
+                                    $ fire_stripper(the_person)
                                     return
                     else:
                         $ the_person.draw_person(position = "sitting", emotion = "angry")
@@ -545,7 +509,7 @@ label stripper_performance_review_label(the_person):
                         $ clear_scene()
                         "[the_person.title] stands up and storms out."
                         $ the_person.change_stats(happiness = -15, obedience = -10, love = -10)
-                        $ strip_club_fire_stripper(the_person)
+                        $ fire_stripper(the_person)
                         return
                 "Punish her sexually" if the_person.effective_sluttiness() >= 40 and the_person.obedience >= 120: #Orgasm denial and/or make her service you.
                     "You sigh dramatically, stand up and walk over to [the_person.title]."

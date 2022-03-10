@@ -31,11 +31,22 @@ init 2 python:
             return "Clothes store closed"
         elif time_of_day == 4: # Can be removed
             return "Clothes store closed"
-        elif mc.business.funds < 500:
-            return "Requires $500"
+        elif not mc.business.has_funds(500):
+            return "Requires: $500"
         else:
             return True
         return False
+
+    def girlfriend_quit_dikdok_requirement(the_person):
+        if not the_person.has_role(dikdok_role):
+            return
+        if the_person in unique_character_list:
+            return False
+        if the_person.love < 40: # hide option will love is very low
+            return False
+        if the_person.love < 60:
+            return "Requires: 60 Love"
+        return True
 
 
     girlfriend_sleepover_action = Action("Arrange a sleepover", girlfriend_myplace_yourplace_requirement, "girlfriend_myplace_yourplace_label",
@@ -50,6 +61,8 @@ init 2 python:
     girlfriend_morning_action_list.append(girlfriend_wakeup_spooning)
     girlfriend_morning_action_list.append(girlfriend_wakeup_jealous_sister)
 
+    girlfriend_quit_dikdok_action = Action("Quit Dikdok", girlfriend_quit_dikdok_requirement, "girlfriend_quit_dikdok_label",
+        menu_tooltip = "Ask your girlfriend to stop showing herself off on Dikdok.")
 
 
 
@@ -86,6 +99,7 @@ label activate_girlfriend_role_enhancement(stack):
     python:
         girlfriend_role.add_action(girlfriend_sleepover_action)
         girlfriend_role.add_action(girlfriend_underwear_shopping)
+        girlfriend_role.add_action(girlfriend_quit_dikdok_action)
 
         sister_girlfriend_role.add_action(girlfriend_underwear_shopping)
         mom_girlfriend_role.add_action(girlfriend_underwear_shopping)
@@ -165,7 +179,7 @@ label girlfriend_sleepover_label():
                 "You mix the serum into [the_person.title]'s wine."
             "Add a dose of serum to [the_person.title]'s shake\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
                 pass
-            "Leave her drink alone.":
+            "Leave her drink alone":
                 "You decide to leave her wine alone."
         "You wait for another minute, when you hear the bedroom door open."
         $ the_person.change_to_lingerie()
@@ -190,8 +204,7 @@ label girlfriend_sleepover_label():
     while done == False:
 
         if girl_came > 5:
-            $ the_person.change_love(5)
-            $ the_person.change_slut(1)
+            $ the_person.change_stats(love = 3, slut = 1)
             $ the_person.call_dialogue("sleepover_impressed_response")
             if not perk_system.has_ability_perk("Lustful Youth"):
                 "You feel like making [the_person.possessive_title] cum over and over has woken something inside you."
@@ -210,8 +223,7 @@ label girlfriend_sleepover_label():
                 the_person "Mmm, I wore you out! That was fun."
                 "She kisses you and runs her hand over your back."
             else:
-                $ the_person.change_love(-1)
-                $ the_person.change_slut(-1)
+                $ the_person.change_stats(slut = -1, love = -1)
                 the_person "Well I guess we're done then... Maybe next time you can get me off as well."
             $ done = True
 
@@ -261,8 +273,7 @@ label girlfriend_sleepover_label():
                         the_person "Mmm, okay! That was nice."
                         "She kisses you and runs her hand over your back."
                     else:
-                        $ the_person.change_love(-1)
-                        $ the_person.change_slut(-1)
+                        $ the_person.change_stats(slut = -1, love = -1)
                         the_person "Well... Maybe next time you can get me off as well?"
                     $ done = True
     $ the_person.draw_person(position = "back_peek")
@@ -598,4 +609,13 @@ label girlfriend_underwear_shopping_label(the_person):
     $ clear_scene()
     $ del lingerie_outfit
     call advance_time from _call_advance_girlfriend_lingerie_shopping_01
+    return
+
+label girlfriend_quit_dikdok_label(the_person):
+    mc.name "Hey [the_person.title], would you do something for me?"
+    the_person "Sure, [the_person.mc_title], what do you need?"
+    mc.name "I'm not very comfortable with you on Dikdok, so I would prefer if you closed your account."
+    the_person "Well, since I have you in my life, I don't see why not."
+    $ the_person.remove_role(dikdok_role)
+    "She pulls out her phone and closes her account right there."
     return

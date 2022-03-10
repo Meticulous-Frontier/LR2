@@ -3,29 +3,16 @@
 
 init 3304 python:
     def strip_club_get_manager():
-        managers = people_in_role(manager_role)
+        managers = people_in_role(stripclub_manager_role)
         if __builtin__.len(managers) > 0:
             return managers[0]
         return None
 
     def strip_club_get_mistress():
-        mistresses = people_in_role(mistress_role)
+        mistresses = people_in_role(stripclub_mistress_role)
         if __builtin__.len(mistresses) > 0:
             return mistresses[0]
         return None
-
-    def strip_club_get_job_title(person):
-        if person.has_role(stripper_role):
-            return "Stripper"
-        elif person.has_role(waitress_role):
-            return "Waitress"
-        elif person.has_role(bdsm_performer_role):
-            return "BDSM Performer"
-        elif person.has_role(manager_role):
-            return "Strip Club Manager"
-        elif person.has_role(mistress_role):
-            return "Strip Club Mistress"
-        return ""
 
     def strip_club_manager_reminder_requirement():
         if day >= (get_strip_club_foreclosed_last_action_day() + 7): # the event start to trigger after 7 days MC bought the club.
@@ -40,14 +27,14 @@ init 3304 python:
             mc.business.add_mandatory_crisis(strip_club_manager_reminder_action)
 
     def strip_club_manager_hire_more_stripper_reminder_requirement():
-        if __builtin__.len(stripclub_strippers) < 5: # the event only trigger if there's not the max nr. of strippers (5 + 1 manager)
+        if __builtin__.len(stripclub_strippers) < 7: # the event only trigger if there's not the max nr. of strippers (5 + 1 manager)
             if strip_club_get_manager(): # the event only trigger if there's a Manager
                 if day % 5 == 0 and time_of_day == 2: # the event trigger every 5 days in the afternoon. (phone call)
                     return True
         return False
 
     def add_strip_club_manager_hire_more_stripper_reminder_action():
-        if __builtin__.len(stripclub_strippers) < 5:
+        if __builtin__.len(stripclub_strippers) < 7:
             strip_club_manager_hire_more_stripper_reminder_action = Action("A simple reminder from the strip club manager to hire more stripper", strip_club_manager_hire_more_stripper_reminder_requirement, "strip_club_manager_hire_more_stripper_reminder_label")
             mc.business.add_mandatory_crisis(strip_club_manager_hire_more_stripper_reminder_action)
 
@@ -101,7 +88,7 @@ init 3304 python:
             mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_reminder_action)
 
     def strip_club_manager_bdsm_room_build_requirement():
-        if mc.business.funds < 10000:
+        if not mc.business.has_funds(10000):
             return False
         if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
             return False
@@ -138,11 +125,11 @@ label strip_club_manager_reminder_label():
     return
 
 label strip_club_manager_hire_more_stripper_reminder_label(): # phone call
-    if __builtin__.len(stripclub_strippers) >= 5:
+    if __builtin__.len(stripclub_strippers) >= 7:
         return
     "Suddenly your smartphone rings, it's your strip club manager."
     $ the_person = strip_club_get_manager()
-    the_person "Hello [the_person.mc_title], I called just to remind you we can have five girls here, performing on the stage."
+    the_person "Hello [the_person.mc_title], I called just to remind you we can have seven girls here, performing on the stage."
     the_person "A full roster would make setting up the shifts easier and, of course, it would be more profitable for you."
     mc.name "Thank you [the_person.title]... I know, I'll find someone, I promise!"
     the_person "Okay [the_person.mc_title], thank you!"

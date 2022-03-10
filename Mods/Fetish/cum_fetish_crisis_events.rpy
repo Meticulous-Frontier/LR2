@@ -26,11 +26,11 @@ init 2 python:
         return get_random_from_list([x for x in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily]) if x.has_cum_fetish() and x.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
 
     cum_fetish_morning_shower_crisis = ActionMod("Morning shower with company", cum_fetish_morning_shower_requirement, "cum_fetish_morning_shower_label",
-        menu_tooltip = "You are take a shower when a family member joins you.", category = "Fetish", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "You are take a shower when a family member joins you.", category = "Fetish", is_crisis = True)
     cum_fetish_employee_dosage_request_crisis = ActionMod("Employee asks for cum", cum_fetish_non_employee_dosage_request_requirement, "cum_fetish_non_employee_dosage_request_label",
-        menu_tooltip = "An employee is thirsty for cum.", category = "Fetish", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "An employee is thirsty for cum.", category = "Fetish", is_crisis = True)
     cum_fetish_non_employee_dosage_request_crisis = ActionMod("Someone asks for cum", cum_fetish_non_employee_dosage_request_requirement, "cum_fetish_non_employee_dosage_request_label",
-        menu_tooltip = "Someone calls and asks for a favor.", category = "Fetish", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "Someone calls and asks for a favor.", category = "Fetish", is_crisis = True)
 
 
 label cum_fetish_morning_shower_label():

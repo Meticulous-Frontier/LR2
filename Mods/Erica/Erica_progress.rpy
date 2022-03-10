@@ -66,9 +66,9 @@ init 10 python:
             lust_story_list.append("[erica.title] may try sneaking into your room some morning...")
             return lust_story_list
 
-        if erica.event_triggers_dict.get("erica_progress", 0) > 1:
+        if erica_get_progress() > 1:
             lust_story_list.append("You worked out with [erica.title] and had some fun in the gym locker room afterwords.")
-        elif erica.event_triggers_dict.get("erica_progress", 0) == 1:
+        elif erica_get_progress() == 1:
             lust_story_list.append("Try working out with [erica.title] sometime.")
             return lust_story_list
         elif mc.max_energy < 120:
@@ -78,9 +78,9 @@ init 10 python:
             lust_story_list.append("Try raising [erica.title]'s sluttiness to continue this story.")
             return lust_story_list
 
-        if erica.event_triggers_dict.get("erica_progress", 0) >= 4:
+        if erica_get_progress() >= 4:
             lust_story_list.append("You won a bet with [erica.title] in a race, then fucked her at her place.")
-        elif erica.event_triggers_dict.get("erica_progress", 0) == 3:
+        elif erica_get_progress() == 3:
             lust_story_list.append("You've challenged [erica.title] to a race. To the victor go the spoils!")
             return lust_story_list
         elif erica.sluttiness < 60:
@@ -113,18 +113,33 @@ init 10 python:
         if erica_get_is_doing_insta_sessions():
             teamup_story_list.append([lily,"Help [erica.title] take insta pics with [lily.title] every Saturday night in [lily.title]'s room!"])
         elif not erica_is_looking_for_work():
-            teamup_story_list.append([erica,"Try progressing [erica.title]'s story."])
+            teamup_story_list.append([lily,"Try progressing [erica.title]'s story."])
         elif lily.event_triggers_dict.get("sister_instathot_pic_count", 0) == 0:
             teamup_story_list.append([lily,"Try advancing [lily.title]'s storyline."])
         else:
             teamup_story_list.append([lily,"Try talking to [lily.title] and [erica.title] about money issues."])
+
+        #Study
+        if kaya_studies_with_erica():
+            if kaya_erica_teamup.get_stage() == 0:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights."])
+            elif kaya_erica_teamup.get_stage() == 1:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes getting naked for you."])
+            elif kaya_erica_teamup.get_stage() == 2:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes letting you spank them."])
+            elif kaya_erica_teamup.get_stage() == 3:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes sucking you off."])
+            elif kaya_erica_teamup.get_stage() == 4:
+                teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, and are down for a threesome after!"])
+        elif kaya_has_finished_intro():
+            teamup_story_list.append([kaya,"[erica.title] and [kaya.title] are both college students..."])
         return teamup_story_list
 
     def erica_story_other_list():
         other_info_list = []
-        if erica.event_triggers_dict.get("erica_progress", 0) > 1:
+        if erica_get_progress() > 1:
             other_info_list.append("[erica.title] likes to workout with you at the gym, especially what happens after...")
-        if erica.event_triggers_dict.get("erica_progress", 0) >= 4:
+        if erica_get_progress() >= 4:
             other_info_list.append("You are always welcome at [erica.title]'s house at night.")
         if erica_fetish_is_kicked_off_team() and not erica_fetish_rejoin_team():
             other_info_list.append("[erica.title] got kicked off the track team for getting pregnant! Try talking to [nora.title].")

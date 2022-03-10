@@ -1,7 +1,4 @@
 ## Mall Introduction Crisis Mod by Tristimdorion
-init -1 python:
-    mall_introduction_weight = 5
-
 init 2 python:
     def get_mall_locations():
         locations = [mall, gym, home_store, clothing_store, sex_store]
@@ -35,7 +32,7 @@ init 2 python:
         return (known_person, stranger)
 
     mall_introduction_action = ActionMod("Mall Introduction", mall_introduction_requirement, "mall_introduction_action_label",
-        menu_tooltip = "You meet a stranger and a friend introduces you.", category = "Mall", is_crisis = True, crisis_weight = mall_introduction_weight)
+        menu_tooltip = "You meet a stranger and a friend introduces you.", category = "Mall", is_crisis = True)
 
 label mall_introduction_action_label():
     $ (known_person, stranger) = mall_introduction_get_actors()
@@ -100,11 +97,10 @@ label mall_introduction_action_label():
             else:
                 known_person "I have to tell you [stranger.name], he is a great person to hang out with."
 
-        $ stranger.change_love(5)
-        $ stranger.change_happiness(10)
+        $ stranger.change_stats(happiness = 10, love = 5)
 
         if stranger.sluttiness > 30:
-            stranger "Well, he's very hansom [known_person.name], I wouldn't mind going on a date with him."
+            stranger "Well, he's very handsome [known_person.name], I wouldn't mind going on a date with him."
         elif stranger.sluttiness > 10:
             stranger "He is very cute [known_person.name], I might just do that."
         else:

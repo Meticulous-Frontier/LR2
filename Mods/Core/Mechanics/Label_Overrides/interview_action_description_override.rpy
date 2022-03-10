@@ -15,7 +15,8 @@ init 2 python:
         start_time = time.time()
         candidates = []
         for x in __builtin__.range(0, count): #NOTE: count is given +1 because the screen tries to pre-calculate the result of button presses. This leads to index out-of-bounds, unless we pad it with an extra character (who will not be reached).
-            candidates.append(make_person())
+            requirements = mc.business.generate_candidate_requirements()
+            candidates.append(make_person(**requirements))
 
         reveal_count = 0
         reveal_sex = False
@@ -45,15 +46,19 @@ init 2 python:
         return candidates
 
 
-label interview_action_description_enhanced:
+label interview_action_description_enhanced():
     $ count = get_candidate_count()
-    "Bringing in [count] people for an interview will cost $50. Do you want to spend time interviewing potential employees?"
+    $ interview_cost = mc.business.recruitment_cost
+
+    "Bringing in [count] people for an interview will cost $[interview_cost]. Do you want to spend time interviewing potential employees?"
     menu:
-        "Yes, I'll pay the cost\n{color=#ff0000}{size=18}Costs: $50{/size}{/color}":
-            $ mc.business.change_funds(-50)
+        "Yes, I'll pay the cost\n{color=#ff0000}{size=18}Costs: $[interview_cost]{/size}{/color}":
+            $ mc.business.change_funds(-interview_cost)
             $ clear_scene()
 
             $ candidates = interview_build_candidates_list(count)
+
+            # pad with one extra element, to make sure we can see all candidates
             call hire_select_process(candidates + [1]) from _call_hire_select_process_interview_action_enhanced
 
             if not _return == "None":

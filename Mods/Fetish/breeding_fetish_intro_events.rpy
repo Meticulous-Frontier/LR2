@@ -12,7 +12,7 @@ init -1 python:
         return False
 
     def breeding_fetish_family_intro_requirement(the_person):
-        if the_person.location == the_person.home:
+        if the_person.is_home():
             if the_person.location.get_person_count() == 1: #She is alone in her bedroom
                 return True
         return False
@@ -34,7 +34,7 @@ init -1 python:
 
     def breeding_fetish_stephanie_intro_requirement():
         if mc.business.is_open_for_business():
-            if stephanie.location == stephanie.work:
+            if stephanie.is_at_work():
                 if renpy.random.randint(0,100) < 25:
                     return True
         return False
@@ -46,7 +46,7 @@ init -1 python:
         return False
 
     def breeding_fetish_starbuck_intro_requirement():
-        if starbuck.shop_progress_stage > 0:
+        if sex_shop_stage() > 0:
             if time_of_day == 3:
                 return True
         return False
@@ -332,8 +332,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
             return
         "Not now":
             mc.name "I'm sorry [the_person.title], I've got errands to accomplish. Maybe another time."
-            $ the_person.change_love(-2)
-            $ the_person.change_happiness(-5)
+            $ the_person.change_stats(happiness = -5, love = -2)
             the_person "Ah, okay. I see."
             return False
 
@@ -483,7 +482,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     mc.name "Maybe I should message them. Find out more about what they want to see..."
     "She quickly interrupts you."
     the_person "No! You don't need to do that... I'm sure that's what it is! To watch as I pretend to get knocked up!"
-    "She gives a telltale sign. As she says that, she looks away from you and to the side. She is lying to you."
+    "She gives a tell-tale sign. As she says that, she looks away from you and to the side. She is lying to you."
     mc.name "That's what they want? Are you sure? Or is that what YOU want?"
     "[the_person.possessive_title] begins to blush heavily."
     the_person "Oh me? Want to get knocked up? By my brother? That's... I mean that's CRAZY!... right?"

@@ -23,7 +23,6 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
             "Your condom is ballooned with your seed, hanging off your cock to one side."
             if the_girl.has_cum_fetish():
                 if renpy.random.randint(0, 1) == 1: # random choice of cum fetish dialog
-                    $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] reaches up for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and brings the condom to her mouth. She tips the bottom up and drains it into her mouth."
@@ -32,7 +31,6 @@ label piledriver_double_orgasm(the_girl, the_location, the_object):
                     $ the_girl.cum_in_mouth()
                     "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
                 else:
-                    $ the_girl.discover_opinion("cum facials")
                     "[the_girl.possessive_title] reaches up for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl "It would be a shame to waste all of this, right?"
                     "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."

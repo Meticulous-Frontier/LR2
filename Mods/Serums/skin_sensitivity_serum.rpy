@@ -32,9 +32,8 @@ init -1 python:
     def add_skin_sensitivity():
         skin_sensitivity_serum_trait = SerumTraitMod(name = "Skin Sensitivity",
             desc = "Heighten the subjects sense of touch. This can lead to increased arousal, but in public it might be frustrating if their clothes are too restrictive.",
-            positive_slug = "+$20 Value, +5 Arousal/turn, may cause stripping when administered",
-            negative_slug = "-2 Happiness/turn in public, +20 Serum Research",
-            value_added = 20,
+            positive_slug = "+5 Arousal/turn, may cause stripping when administered",
+            negative_slug = "-2 Happiness/turn in public",
             research_added = 20,
             base_side_effect_chance = 30,
             on_apply = skin_sensitivity_on_apply,
@@ -42,7 +41,8 @@ init -1 python:
             requires = [clinical_testing],
             tier = 1,
             research_needed = 800,
-            clarity_cost = 1000)
+            clarity_cost = 1000,
+            mental_aspect = 3, physical_aspect = 1, sexual_aspect = 4, medical_aspect = 0, flaws_aspect = 0, attention = 2)
         return
 
 label serum_mod_skin_sensitivity_trait(stack):

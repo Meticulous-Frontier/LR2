@@ -33,17 +33,15 @@ init 2:
 
                 vbox:
                     xsize 800
-                    $ salary_costs = 0
-                    if day % 7 > 0 and day % 7 < 6: # day count already changed before summary is shown
-                        $ salary_costs = mc.business.calculate_salary_cost()
                     $ profit = mc.business.funds - mc.business.funds_yesterday
                     $ mc.business.listener_system.fire_event("daily_profit", profit = profit)
-                    $ mc.business.listener_system.fire_event("side_money", count = starbuck.calc_investment_return())
                     text ("Profit" if profit > 0 else "Loss") + ": $ " + str(__builtin__.round(abs(profit), 2))  style "textbutton_text_style" size 26 color ("#00A000" if profit > 0 else "#A00000")
                     text "     " + "Sales Made: $ " + str(__builtin__.round(mc.business.sales_made, 2)) style "textbutton_text_style"
-                    text "     " + "Daily Salary Paid: $ " + str(__builtin__.round(salary_costs, 2)) style "textbutton_text_style"
-                    text "     " + "Serums Sold Today: " + str(mc.business.serums_sold) + " Vials" style "textbutton_text_style"
-                    text "     " + "Serums Ready for Sale: " + str(mc.business.sale_inventory.get_any_serum_count()) + " Vials" style "textbutton_text_style"
+                    if mc.business.is_work_day():
+                        text "     " + "Daily Salary Paid: $ " + str(__builtin__.round(mc.business.calculate_salary_cost(), 2)) style "textbutton_text_style"
+                        text "     " + "Daily Operating Costs: $" + str(mc.business.operating_costs) style "textbutton_text_style"
+                    #text "     " + "Serums Sold Today: " + str(mc.business.serums_sold) + " Vials" style "textbutton_text_style"
+                    text "     " + "Serums Ready for Sale: " + str(mc.business.inventory.get_any_serum_count()) + " Vials" style "textbutton_text_style"
 
         frame:
             background "#1a45a1aa"
@@ -74,5 +72,7 @@ init 2:
                 align [0.5,0.5]
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
-                action Return()
-            textbutton "End Day" align [0.5,0.5] style "button_text"
+                action [
+                    Return()
+                ]
+            textbutton "End Day" id "end_day_button_text" align [0.5,0.5] style "button_text"

@@ -1,5 +1,5 @@
 init 5 python:
-    add_label_hijack("normal_start", "activate_starbuck_mod_core")  
+    add_label_hijack("normal_start", "activate_starbuck_mod_core")
     add_label_hijack("after_load", "update_starbuck_mod_core")
 
 init -2 python:
@@ -41,7 +41,7 @@ init -2 python:
 
 
 # TODO: Add difficulty configuration
-label SB_mod_options_menu:
+label SB_mod_options_menu():
     python:
         while True:
             action_mod_choice = SB_mod_change_action_mod_settings()
@@ -50,7 +50,7 @@ label SB_mod_options_menu:
             else:
                 globals()[action_mod_choice]()
 
-label initialize_starbuck_configuration_values:
+label initialize_starbuck_configuration_values():
     $ store.shop_difficulty_value = 2.0
     $ store.max_fetishes_per_person = 3
     return
@@ -65,7 +65,7 @@ label update_starbuck_mod_core(stack):
     python:
         if not hasattr(store, 'shop_difficulty_value'):
             renpy.call("initialize_starbuck_configuration_values")
-        
+
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return

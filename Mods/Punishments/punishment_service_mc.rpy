@@ -1,51 +1,51 @@
 init 1 python: #Original code is at -1, so make sure we are higher than that for custom code
-        #This is the requirement for the punishment itself
-        def punishment_service_mc_requirement(the_person, the_infraction):
-            if the_infraction.severity < 4:
-                return "Severity 4"
-            elif not corporal_punishment.is_active():
-                return "Requires Policy: Corporal Punishment"
-            else:
-                return True
-
-        def employee_cocksucking_practice_remove_requirement(the_person, trigger_day):
-            if day >= trigger_day:
-                return True
-            return False
-
-        def employee_cocksucking_practice_report_requirement(the_person):
-            if not mc.business.is_open_for_business():
-                return False
-            elif not mc.is_at_work():
-                return False
+    #This is the requirement for the punishment itself
+    def punishment_service_mc_requirement(the_person, the_infraction):
+        if the_infraction.severity < 4:
+            return "Severity 4"
+        elif not corporal_punishment.is_active():
+            return "Requires Policy: Corporal Punishment"
+        else:
             return True
 
-        # Practice adding a time gated work discipline.
-        def add_practice_cocksucking_work_action(person):
-            if not person.has_role(employee_practice_cocksucking_work_role): # prevent adding it twice
-                person.add_role(employee_practice_cocksucking_work_role)
-                clear_action = Action("Clear employee cocksucking practice", employee_cocksucking_practice_remove_requirement, "employee_cocksucking_practice_remove_label", args = person, requirement_args = [person, day + 7])
-                mc.business.add_mandatory_crisis(clear_action)
-            return
+    def employee_cocksucking_practice_remove_requirement(the_person, trigger_day):
+        if day >= trigger_day:
+            return True
+        return False
 
-        def add_practice_cocksucking_report_action(person):
-            if person.has_role(employee_practice_cocksucking_work_role):
-                person.remove_role(employee_practice_cocksucking_work_role, remove_linked = False)
+    def employee_cocksucking_practice_report_requirement(the_person):
+        if not mc.business.is_open_for_business():
+            return False
+        elif not mc.is_at_work():
+            return False
+        return True
 
-            if person.has_role(employee_role): #She may have quit/been fired since then.
-                person.sex_skills["Oral"] = min(4, person.sex_skills["Oral"] + 1)
+    # Practice adding a time gated work discipline.
+    def add_practice_cocksucking_work_action(person):
+        if not person.has_role(employee_practice_cocksucking_work_role): # prevent adding it twice
+            person.add_role(employee_practice_cocksucking_work_role)
+            clear_action = Action("Clear employee cocksucking practice", employee_cocksucking_practice_remove_requirement, "employee_cocksucking_practice_remove_label", args = person, requirement_args = [person, day + 7])
+            mc.business.add_mandatory_crisis(clear_action)
+        return
 
-                if person.get_opinion_score("giving blowjobs") <= -2:
-                    person.update_opinion_with_score("giving blowjobs", -1, add_to_log = False)  #Set this to -1 if it was -2 so that she at least tries to give MC a blowjob.
+    def add_practice_cocksucking_report_action(person):
+        if person.has_role(employee_practice_cocksucking_work_role):
+            person.remove_role(employee_practice_cocksucking_work_role, remove_linked = False)
 
-                practice_cocksucking_report_action = Action("Cocksucking practice report crisis", employee_cocksucking_practice_report_requirement, "employee_cocksucking_practice_report_label", args = person, requirement_args = person)
-                mc.business.add_mandatory_crisis(practice_cocksucking_report_action)
-            return
+        if person.has_role(employee_role): #She may have quit/been fired since then.
+            person.sex_skills["Oral"] = min(4, person.sex_skills["Oral"] + 1)
 
-        employee_practice_cocksucking_work_role = Role("Practicing Cocksucking", [], hidden = True)
+            if person.get_opinion_score("giving blowjobs") <= -2:
+                person.update_opinion_with_score("giving blowjobs", -1, add_to_log = False)  #Set this to -1 if it was -2 so that she at least tries to give MC a blowjob.
 
-        punishment_service_mc_action = Action("Service Me", punishment_service_mc_requirement, "punishment_service_mc_label") #Let's follow previous naming conventions and add label to labe names
-        list_of_punishments.append(punishment_service_mc_action)
+            practice_cocksucking_report_action = Action("Cocksucking practice report crisis", employee_cocksucking_practice_report_requirement, "employee_cocksucking_practice_report_label", args = person, requirement_args = person)
+            mc.business.add_mandatory_crisis(practice_cocksucking_report_action)
+        return
+
+    employee_practice_cocksucking_work_role = Role("Practicing Cocksucking", [], hidden = True)
+
+    punishment_service_mc_action = Action("Service Me", punishment_service_mc_requirement, "punishment_service_mc_label") #Let's follow previous naming conventions and add label to labe names
+    list_of_punishments.append(punishment_service_mc_action)
 
 label punishment_service_mc_label(the_person, the_infraction):
     mc.name "It's time for your punishment [the_person.title]."

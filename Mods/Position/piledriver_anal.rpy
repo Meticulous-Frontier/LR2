@@ -20,9 +20,9 @@ init:
         list_of_positions.append(piledriver_anal)
 
 init 1:
-   python:
-       piledriver.link_positions(piledriver_anal,"transition_piledriver_piledriver_anal")
-       #Here is where you would put connections if they existed.
+    python:
+        piledriver.link_positions(piledriver_anal,"transition_piledriver_piledriver_anal")
+        #Here is where you would put connections if they existed.
 
 
 
@@ -34,7 +34,7 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
 
     "You get your hard cock out and kneel down in front of her. She yelps in surprise when you grab her ankles and bring them up and over her waist."
     the_girl "Oh god, it's crazy when you fuck my pussy like this."
@@ -106,9 +106,9 @@ label scene_piledriver_anal_2(the_girl, the_location, the_object):
     if the_girl.tits_available():
         "[the_girl.title]'s tits are swaying attractively with each thrust. You give her a couple of rough thrusts and enjoy the change in their movement."
     else:
-        "Suddenly, you realize that [the_girl.title] still hasn't taken her tits out. You decide to change that. You quickly pull her clothes off before she has a chance to protest."
-        $ the_girl.strip_outfit(exclude_lower = True, position = piledriver_anal.position_tag)
-        "Her tits now out, you resume fucking her ass and enjoy the way they shake as you pound her."
+        "Suddenly, you realize that [the_girl.title] still hasn't taken her tits out. You decide to change that. You quickly move her clothes out of the way before she has a chance to protest."
+        $ the_girl.strip_to_tits(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
+        "With her tits now out, you resume fucking her ass and enjoy the way they shake as you pound her."
     $ the_girl.call_dialogue("sex_responses_anal")
     menu:
         "Grope her tits":

@@ -97,21 +97,21 @@ label outro_cowgirl_blowjob(the_girl, the_location, the_object):
         mc.name "Fuck, here I come!"
         "[the_girl.possessive_title]'s mouth pulls back with a satisfyingly wet pop. She aims it at her face."
         $ cowgirl_blowjob.current_modifier = None
-        $ cowgirl_blowjob.redraw_scene(the_girl)
+        $ the_girl.draw_person(position = "kneeling1")
         if the_girl.effective_sluttiness() > 80:
             "[the_girl.title] sticks out her tongue for you and holds still, eager to take your hot load."
             $ the_girl.cum_on_face()
-            $ cowgirl_blowjob.redraw_scene(the_girl)
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
         elif the_girl.effective_sluttiness() > 60:
             "[the_girl.title] closes her eyes and waits patiently for you to cum."
             $ the_girl.cum_on_face()
-            $ cowgirl_blowjob.redraw_scene(the_girl)
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
         else:
             "[the_girl.title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
             $ the_girl.cum_on_face()
-            $ cowgirl_blowjob.redraw_scene(the_girl)
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
         $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
         "You take a deep breath and lay back, enjoying your post orgasm bliss. [the_girl.title] looks up at you, face covered in your semen."
@@ -231,12 +231,12 @@ label GIC_outro_cowgirl_blowjob(the_girl, the_location, the_object, the_goal = N
         mc.name "Fuck, here I come!"
         "[the_girl.possessive_title]'s mouth pulls back with a satisfyingly wet pop. She aims it at her face."
         $ cowgirl_blowjob.current_modifier = None
-        $ cowgirl_blowjob.redraw_scene(the_girl)
+        $ the_girl.draw_person(position = "kneeling1")
         the_girl "Do it... I want it all over me!"
         "Her encouraging words push you over the edge. She sticks out her tongue to try and catch some as your cock erupts."
         $ the_girl.cum_on_face()
         $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
-        $ cowgirl_blowjob.redraw_scene(the_girl)
+        $ the_girl.draw_person(position = "kneeling1")
         "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
 
 

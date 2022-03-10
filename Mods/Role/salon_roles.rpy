@@ -14,13 +14,13 @@ init 2 python:
 
     def ophelia_gets_dumped_requirement(person):
         if day >= ophelia_get_day_met() + 4:
-            if person.location == mall_salon:
+            if person.is_at_work():
                 return True
         return False
 
     def ophelia_coworker_conversation_overhear_requirement(person):
         if day >= ophelia_get_day_dumped() + 4:
-            if person.location == mall_salon:
+            if person.is_at_work():
                 return True
         return False
 
@@ -31,7 +31,7 @@ init 2 python:
 
     def ophelia_give_chocolate_requirement():
         if ophelia_get_chocolate_gift_unlock():
-            if mc.business.funds <= 50:
+            if not mc.business.has_funds(50):
                 return "Not enough money"
             if time_of_day < 1:
                 return "Wait for shops to open"
@@ -45,7 +45,7 @@ init 2 python:
 
     def ophelia_ex_bf_phone_overhear_requirement(person):
         if day >= ophelia_get_day_dumped() + 14: #Wait at least two weeks after getting dumped
-            if person.location == mall_salon:
+            if person.is_at_work():
                 if person.sluttiness >= 20:
                     return True
         return False
@@ -54,7 +54,7 @@ init 2 python:
         # prevent conflict with planned dates
         if mc.business.date_scheduled_today():
             return False
-        if person.location == mall_salon:
+        if person.is_at_work():
             if ophelia_get_ex_pics_planned() < 2:
                 if ophelia_get_phone_convo_heard() > 0:
                     return True
@@ -71,7 +71,7 @@ init 2 python:
         return False
 
     def ophelia_blowjob_pics_review_requirement(person):
-        if not person.location == mall_salon:
+        if not person.is_at_work():
             return False
         if time_of_day < 4:
             return True
@@ -79,7 +79,7 @@ init 2 python:
 
     def ophelia_revenge_date_plan_requirement(person):
         if person.sluttiness >= 40:
-            if person.location == mall_salon:
+            if person.is_at_work():
                 if day >= ophelia_get_day_dumped() + 21:
                     return True
         return False
@@ -96,7 +96,7 @@ init 2 python:
 
     def ophelia_is_over_her_ex_requirement(person):
         if not ophelia_get_is_over_her_ex() and day >= ophelia_get_day_of_revenge_date() + 7:
-            if person.location == mall_salon:
+            if person.is_at_work():
                 return True
         return False
 
@@ -118,7 +118,7 @@ init 2 python:
     def ophelia_increased_service_begin_requirement(person):
         if ophelia_get_is_over_her_ex():
             if person.sluttiness_tier >= 3:
-                if person.location == mall_salon:
+                if person.is_at_work():
                     return True
         return False
 
@@ -177,7 +177,7 @@ init 2 python:
     ophelia_choose_service_test = Action("Pick employee for salon visit",ophelia_choose_service_test_requirement ,"ophelia_choose_service_test_label", menu_tooltip = "Select a girl you want to have her hair and pubic hair cut and styled")
     ophelia_add_service_full_body_massage = Action ("Ophelia wants to do massages", ophelia_add_service_full_body_massage_requirement, "ophelia_add_service_full_body_massage_label")
 
-    salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics, ophelia_talk_about_candace])
+    salon_manager_role = Role("Salon Manager", [cut_hair_action, ophelia_ex_bf_plan_pics, ophelia_talk_about_candace], hidden = True)
 
 
 label cut_hair_label(the_person):
@@ -314,8 +314,7 @@ label ophelia_ex_bf_plan_pics_label(the_person):
         $ the_person.draw_person(emotion = "angry")
         "She snaps back at you."
         the_person "Well then you probably shouldn't. What happens between me and my ex is none of your business."
-        $ the_person.change_obedience(-2)
-        $ the_person.change_love(-2)
+        $ the_person.change_stats(obedience = -2, love = -2)
         "Yikes! Maybe you should try and find a way to cheer her up some before you talk to her about her ex again..."
         $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 1
         return
@@ -487,8 +486,7 @@ label ophelia_make_blowjob_pics_label():
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             the_person "Oh my god, I came so hard... you have no idea how bad I needed that!"
-            $ the_person.change_love(5)
-            $ the_person.change_happiness(10)
+            $ the_person.change_stats(happiness = 5, love = 2)
         else:
             the_person "Errr, I thought you said you were good at that? I didn't even finish..."
             "Her disappointment is obvious."

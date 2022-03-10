@@ -44,7 +44,8 @@ init 2 python:
             forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 1, False], ["drinking cum", -2, False], ["giving blowjobs", -1, False], ["creampies", 2, False]])
 
         sakari.generate_home()
-        sakari.set_schedule(sakari.home, times = [0,1,2,3,4])   #Hide Sakari at home until we are ready to use her
+        sakari.add_job(unemployed_job)
+        sakari.set_schedule(sakari.home, the_times = [0,1,2,3,4])   #Hide Sakari at home until we are ready to use her
         sakari.home.add_person(sakari)
         sakari.hair_colour = ["bald", [0.414, 0.305, 0.258,0]]
         sakari.hair_style.colour = [0.414, 0.305, 0.258,0]
@@ -145,6 +146,8 @@ label sakari_intro_label(the_person):
     "An employee walks over, clearly looking for [the_person.title]."
     the_person "Ah, I need to get back to work. if you'll excuse me."
     mc.name "Certainly."
+    $ the_person.add_job(clothing_cashier_job)
+    $ the_person.set_schedule(None, the_times = [1,2,3]) # Free roam
     $ the_person.add_unique_on_room_enter_event(sakari_coffee_break)
     $ clear_scene()
     return
@@ -211,7 +214,7 @@ label sakari_coffee_break_label(the_person):
 
     "After a few more moments of silence, you decide to change topics."
 
-    call small_talk_person(the_person, apply_energy_cost = False)
+    call small_talk_person(the_person, apply_energy_cost = False) from _call_small_talk_person_sakari_coffee_break
 
     the_person "Well, thank you for the tea. I feel refreshed! I think I'll try to get a little more work done today."
     $ the_person.draw_person()

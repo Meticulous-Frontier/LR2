@@ -242,7 +242,8 @@ label camilla_seduction_response(the_person):
 label camilla_flirt_response(the_person):
     if mc.location == downtown_bar:
         if the_person.love > 50:  #She loves you too much and is going to or already has called things off
-            the_person "Didn't your mother ever tell you it's rude to hit on a married woman?"
+            the_person "señor, didn't your mother ever tell you it's rude to hit on a married woman?"
+            "[the_person.title] gives you a wink."
             return
         if the_person.event_triggers_dict.get("camilla_progress", 0) >= 2:
             the_person "Well why don't you meet me in the back in a bit and we'll see what happens?"
@@ -285,7 +286,10 @@ label camilla_flirt_response_mid(the_person):
             the_person "Aw, thanks! I thought this was a pretty hot look when I was getting dressed this morning."
 
         $ mc.change_locked_clarity(10)
-        the_person "Maybe hubby will let you come shopping with me one day, so you can tell me what else you want to see me in."
+        if camilla_lingerie_help_complete():
+            the_person "Maybe sometime we could shopping together again and you could pick out something for me to wear again."
+        else:
+            the_person "Maybe hubby will let you come shopping with me one day, so you can tell me what else you want to see me in."
         mc.name "I think I would like that."
 
     else:
@@ -301,12 +305,72 @@ label camilla_flirt_response_mid(the_person):
     return
 
 label camilla_flirt_response_high(the_person):
-    if the_person.love > 50: #She is going to ghost soon
-        the_person "Didn't your mother ever tell you it's rude to hit on a married woman?"
+    if mc.location.get_person_count() > 1 and the_person.effective_sluttiness("kissing") < (25 - (5*the_person.get_opinion_score("public_sex"))):
+        # There are other people here, if she's not slutty she asks if you want to find somewhere quiet
+        the_person "Not very high, unless we can find someplace quiet."
+        menu:
+            "Find someplace quiet":
+                mc.name "Alright, let's find somewhere quiet then."
+                the_person "Wait, I don't know if we should..."
+                mc.name "Relax, it's just going to be a little bit of fun."
+                "You take [the_person.possessive_title]'s hand and lead her away. After a moment of hesitation she follows you happily."
+                "After searching for a couple of minutes you find a quiet space with just the two of you."
+                the_person "Well... What did you want me all alone for?"
+                $ the_person.draw_person(position = "kissing")
+                "She steps close to you and puts her arms around your waist. She brings her face close to yours."
+
+                if the_person.has_taboo("kissing"):
+                    $ the_person.call_dialogue("kissing_taboo_break")
+                    $ the_person.break_taboo("kissing")
+
+                $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
+                "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
+                call fuck_person(the_person, private = True, start_position = kissing, skip_intro = True) from _call_fuck_camilla_47
+                $ the_person.call_dialogue("sex_review", the_report = _return)
+                $ the_person.review_outfit()
+
+            "Just flirt":
+                mc.name "I'm a patient man, I can wait until we have some privacy. It's probably for the best; you might get a little loud."
+                "[the_person.possessive_title] blushes and places her hand on your shoulder, massaging your muscles."
+                the_person "Confident, senior? Maybe if you take me out to dinner you'll get your chance at some privacy."
+
     else:
-        "She looks at you and her eyes narrow."
-        the_person "I appreciate the comment, I really do... but I'm worried you are taking things a little too far."
-        the_person "Remember, we need to keep things CASUAL. Okay?"
+        # She wants to kiss you, leading to other things.
+        if mc.location.get_person_count() == 1:
+            #She's shy about the whole thing.
+            "She looks around nervously."
+            the_person "[the_person.mc_title], I... I mean, it's just us here."
+            mc.name "So you're saying my chances are good?"
+            $ the_person.draw_person(position = "kissing")
+            "She takes a step closer to you and puts her arms around your waist, bringing her face close to yours."
+            the_person "They could certainly be worse. Let's just... see where things go."
+
+        else:
+            #She's into turning you on.
+            $ mc.change_locked_clarity(15)
+            "[the_person.possessive_title] smiles mischievously and wiggles her hips."
+            the_person "Maybe we can... fool around a little? Does that sound fun?"
+            $ the_person.draw_person()
+
+        menu:
+            "Kiss her":
+                if the_person.has_taboo("kissing"):
+                    $ the_person.call_dialogue("kissing_taboo_break")
+                    $ the_person.break_taboo("kissing")
+
+                $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
+                "You close the final gap and kiss her. She returns the kiss immediately, leaning her body against yours."
+                call fuck_person(the_person, start_position = kissing, private = mc.location.get_person_count() < 2, skip_intro = True) from _call_fuck_camilla_48
+                $ the_person.call_dialogue("sex_review", the_report = _return)
+                $ the_person.review_outfit()
+
+            "Just flirt":
+                mc.name "I wish we could, but I'll need to take a rain check."
+                "[the_person.title] pouts and steps back, disappointed."
+                mc.name "Don't worry, we'll get there soon enough. I just want to wait for the right time."
+                #TODO: There should be boyfriend/family specific variants here like "Right, what was I even thinking? I don't know what came over me."
+                the_person "Right. Sure."
+                "She tries to hide it, but you can tell she's a little disappointed."
     return
 
 
@@ -598,6 +662,142 @@ label camilla_cum_mouth(the_person):
             the_person "Bleh, I don't know if I'll ever get used to that."
     return
 
+label camilla_cum_pullout(the_person):
+    # Lead in: "I'm going to cum!"
+    if mc.condom: #TODO: All of the cum-drunk stuff
+        if the_person.wants_creampie() and the_person.get_opinion_score("creampies") > 0 and not the_person.has_taboo("condomless_sex"): #TODO: FIgure out we want any more requirements for this to fire.
+            if the_person.event_triggers_dict.get("preg_knows", False):
+                the_person "I'm already pregnant, why are we even bothering with a condom?"
+                the_person "Take it off and cum inside my pussy, just like you did when you knocked me up!"
+            elif the_person.on_birth_control:
+                the_person "You are? Do..."
+                "She moans, almost desperately."
+                the_person "...Do you want to cum inside me? Just take the condom off!"
+                the_person "I just want your cum!"
+            elif camilla_is_fertile():
+                the_person "Oh god... I can't resist it!"
+                the_person "I want you to cum in my pussy [the_person.mc_title]!"
+                "She seems almost desperate as she moans."
+                the_person "I don't care if you knock me up! I'm just your... breeding slut!"
+            else:
+                the_person "You should take the condom off!"
+                the_person "It's okay, I'm infertile... nothing will happen!"
+                "She seems almost desperate as she moans."
+
+            menu: #TODO: Add a varient of this normally so you can stealth a girl (don't do that in real life, it's super fucked up).
+                "Take off the condom":
+                    "You don't have much time to spare. You pull out, barely clearing her pussy, and pull the condom off as quickly as you can manage."
+                    $ mc.condom = False
+                "Leave it on":
+                    "You ignore [the_person.possessive_title]'s cum-drunk offer and keep the condom in place."
+
+        else:
+            the_person "Oh yeah, cum for me [the_person.mc_title]!"
+
+    else:
+        if the_person.wants_creampie():
+            if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
+                the_person "Cum wherever you want [the_person.mc_title]!"
+            elif the_person.get_opinion_score("creampies") > 0:
+                "[the_person.possessive_title] moans happily."
+                if the_person.on_birth_control: #She just likes creampies.
+                    the_person "Yes! Cum inside me [the_person.mc_title]! Fill me up with your hot load!"
+                elif camilla_is_fertile(): #Yeah, she's not on BC and asking for you to creampie her. She's looking to get pregnant.
+                    the_person "Yes! Cum inside me and knock me up! Breed me like the slut I am!"
+                else:
+                    the_person "Yes! Cum inside me! I love it!"
+            elif the_person.on_birth_control: #She's on the pill, so she's probably fine
+                the_person "I'm on the pill, cum wherever you want [the_person.mc_title]!"
+                $ the_person.update_birth_control_knowledge()
+            else: #Too distracted to care about getting pregnant or not. Oh well, what could go wrong?
+                the_person "Ah! Do it!"
+        else:
+            if not the_person.on_birth_control: #You need to pull out, I'm not on the pill!
+                the_person "Please pull out! I want you to cum all over me instead!"
+
+            elif the_person.get_opinion_score("creampies") < 0:
+                the_person "Make sure to pull out, you can cum anywhere else you want, I just don't like it inside me!"
+
+            elif camilla_is_fertile():
+                the_person "Can you pull out? I'm not ready to get pregnant yet!"
+
+            else:
+                the_person "Ah, really? Can you pull out? I just like it better that way..."
+    return
+
+label camilla_cum_condom(the_person):
+    if the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
+        the_person "Mmm, your cum feels so warm. I wish you weren't wearing a condom; I bet you would feel amazing raw."
+    else:
+        the_person "Whew... I can feel how warm your cum is through the condom. It feels nice."
+    return
+
+label camilla_cum_vagina(the_person):
+    if the_person.has_taboo("creampie"):
+        $ the_person.call_dialogue("creampie_taboo_break")
+        $ the_person.break_taboo("creampie")
+        return
+
+    if the_person.wants_creampie():
+        if the_person.event_triggers_dict.get("preg_knows", False):
+            the_person "Mmm, your cum is so nice and warm..."
+            "She sighs happily."
+
+        elif the_person.on_birth_control or not camilla_is_fertile():
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person "Mmmm, it's so warm."
+                "She sighs happily as you cum inside her."
+                the_person "I feel bad for my [so_title], he never makes me feel this good."
+            else:
+                the_person "Oh fuck, it's so warm. I can feel it inside me..."
+                "She sighs happily as you cum inside her."
+
+        elif the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person "Your cum is so nice and warm..."
+                the_person "If you get me pregnant I'm not sure what to tell [so_title]..."
+            else:
+                the_person "Mmm, it's so warm... I wonder if it's going to get me pregnant."
+
+        else:
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person "Ah... There it is..."
+                the_person "Fuck, I hope you didn't knock me up though. I don't want to have to explain that to my [so_title]."
+            else:
+                the_person "Oh fuck, there it all is... It's so warm."
+
+    else: #She's angry
+        if not the_person.on_birth_control:
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person "Fuck, I told you to pull out! I have a [so_title]!"
+                the_person "Whatever, I guess it's already done."
+            else:
+                the_person "Fuck, I told you to pull out!"
+                the_person "Whatever, I guess it's already done."
+
+        elif the_person.relationship != "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            the_person "Hey, I told you to pull out! I've got an [so_title], you can't be finishing inside me!"
+
+        elif the_person.get_opinion_score("creampies") < 0:
+            the_person "Ugh, I told you to pull out! Fuck, you made such a mess..."
+
+        else:
+            the_person "Hey, didn't I tell you to pull out?"
+            the_person "Well, whatever. It's done now, I guess."
+    return
+
+label camilla_cum_anal(the_person):
+    if the_person.sluttiness > 75 or the_person.get_opinion_score("anal creampies") > 0:
+        the_person "Oh god yes, cum inside me!"
+    else:
+        the_person "Oh god, ah!"
+    return
+
 #label camilla_surprised_exclaim(the_person):
 #    $rando = renpy.random.choice(["Fuck!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit!", "Fucking shit!"])
 #    the_person "[rando]"
@@ -761,6 +961,117 @@ label camilla_sex_toy_taboo_break(the_person):
 
 label camilla_roleplay_taboo_break(the_person):
     pass
+    return
+
+label camilla_condomless_sex_taboo_break(the_person):
+    if the_person.has_role(pregnant_role) and the_person.event_triggers_dict.get("preg_knows", False):
+        the_person "I don't mind, it's not like I could get more pregnant."
+
+    elif the_person.get_opinion_score("bareback sex") > 0:
+        the_person "You want to do me raw? That's so hot."
+        if the_person.on_birth_control or not camilla_is_fertile():
+            the_person "I'm infertile, so you shouldn't have anything to worry about."
+            $ the_person.update_birth_control_knowledge()
+            if the_person.get_opinion_score("creampies") > 0:
+                the_person "If you want to you can still pull out. It might be smart to do that."
+                $ the_person.update_birth_control_knowledge()
+                mc.name "Do you feel smart today?"
+                "She bites her lip and shakes her head."
+                the_person "No, not particularly."
+            elif the_person.get_opinion_score("creampies") < 0:
+                the_person "You'll need to pull out though. I just don't like the cleanup and the way it oozes out of you all day long."
+        else:
+            the_person "I'm not on the pill though. You'll need to pull out so you don't knock me up, got it?"
+            $ the_person.update_birth_control_knowledge()
+
+    elif the_person.love > 60:
+        the_person "I want to feel close to you too [the_person.mc_title]."
+        if the_person.on_birth_control:
+            the_person "I'm on birth control, so you don't need to worry about getting me pregnant."
+            $ the_person.update_birth_control_knowledge()
+        elif not camilla_is_fertile():
+            the_person "It's okay. I'm actually infertile, so you don't need to worry about getting me pregnant."
+            if the_person.get_opinion_score("creampies") > 0:
+                the_person "If we're doing this, I don't want you to pull out when you finish either."
+                the_person "I want the full experience of having another man fuck me and cum deep inside."
+            elif the_person.get_opinion_score("creampies") < 0:
+                the_person "You'll need to pull out though. This is already kind of weird, and I don't want you oozing out of me all day long."
+        else:
+            if the_person.get_opinion_score("creampies") > 0:
+                the_person "If we're doing this, I don't want you to pull out when you finish either."
+                the_person "I've never experienced risky sex... it sounds so hot!"
+            elif the_person.get_opinion_score("creampies") < 0:
+                the_person "You'll need to pull out, I'm not ready to be a mother!"
+
+    else:
+        if the_person.get_opinion_score("creampies") > 0:
+            the_person "If we're doing this, I don't want you to pull out when you finish either."
+            the_person "I've never experienced risky sex... it sounds so hot!"
+        elif the_person.get_opinion_score("creampies") < 0:
+            the_person "You'll need to pull out, I'm not ready to be a mother!"
+    return
+
+label camilla_creampie_taboo_break(the_person):
+    if the_person.wants_creampie():
+        if the_person.event_triggers_dict.get("preg_knows", False):
+            the_person "OH señor! I love your cum deep inside me."
+            "She sighs happily."
+
+        elif the_person.on_birth_control or not camilla_is_fertile():
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person "Mmm, I finally have your cum in me... I'll have to tell my [so_title] I'm sorry, but this feels so good!"
+
+            else:
+                the_person "Oh my god, I finally have your cum in me... It feels so good!"
+
+        elif the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person "Ah, finally! I've wanted a load inside me for so long, I don't even care that it's not my [so_title] giving it to me!"
+
+            else:
+                the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care I'm not on the pill!."
+                $ the_person.update_birth_control_knowledge()
+
+            "She pants happily for a moment."
+            the_person "Now I just have to wait and see if you got me pregnant... We should go for round two, just to make sure you did."
+
+        else:
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person "Ah, I should have told you to pull out, but it just feels so good..."
+                the_person "We shouldn't do that again though, if I get pregnant I'm going to have to explain it to my [so_title]."
+
+            else:
+                the_person "Ah, I really should have told you to pull out... I'm not on the pill..."
+                $ the_person.update_birth_control_knowledge()
+                the_person "It's just this once, right? It's probably fine..."
+
+    else:
+        if the_person.event_triggers_dict.get("preg_knows", False):
+            the_person "Oh, you came deep inside me."
+
+        elif not the_person.on_birth_control and camilla_is_fertile():
+            the_person "Oh my god, [the_person.mc_title]! Did you really just cum inside me?"
+            "She groans unhappily."
+            if the_person.relationship != "Single":
+                $ so_title = SO_relationship_to_title(the_person.relationship)
+                the_person "Ugh, now what if I get pregnant? I guess I'd have to tell my [so_title] it's his."
+            else:
+                the_person "Ugh, what if you get me knocked up? I just wanted to have some fun!"
+                the_person "Whatever, it's probably fine."
+
+        elif the_person.relationship != "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            the_person "Hey, I told you to pull out. I don't want to cheat on my [so_title] like this..."
+            the_person "I guess it's already done. Just be more careful next time, okay?"
+
+        elif the_person.get_opinion_score("creampies") < 0:
+            the_person "I said to pull out! Now look at what you've done, you've made such a mess in me."
+
+        else:
+            the_person "Hey, you should have pulled out! I guess just once isn't so bad, but don't make a habit of it."
     return
 
 label camilla_sleepover_yourplace_response(the_person): #Invited her over to spend the night

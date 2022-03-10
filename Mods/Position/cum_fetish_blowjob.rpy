@@ -72,7 +72,7 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
     $ cum_fetish_blowjob.current_modifier = None
     $ cum_fetish_blowjob.redraw_scene(the_girl)
 
-    "[the_girl.possessive_title] pulls your cock out of her her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
+    "[the_girl.possessive_title] pulls your cock out of her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
     the_girl "Mmm, I can't wait until your cock throbs and your sweet, sticky cum is shooting out..."
     mc.name "Of course you can't wait. You are my perfect little cum slut."
     "When [the_girl.possessive_title] opens her mouth and resumes blowing you, you put your hand on the back of her head, intent to push yourself down her throat."
@@ -126,16 +126,15 @@ label outro_cum_fetish_blowjob(the_girl, the_location, the_object):
     #     $ cum_fetish_blowjob.current_modifier = None
     #     $ cum_fetish_blowjob.redraw_scene(the_girl)
     #     $ the_girl.call_dialogue("cum_mouth")
+    $ cum_fetish_blowjob.current_modifier = None
+    $ the_girl.draw_person(position = "kneeling1")
     "[the_girl.possessive_title] moans and looks you in the eyes. She pulls off your cock and strokes you eagerly, waiting for the first splash across her face."
     "You erupt in orgasm and shoot your load across her glowing face. Her pupils dilate as her cum addicted brain registers the presence of your cum on her skin."
     "[the_girl.possessive_title] moans uncontrollably with every spurt"
-    $ the_girl.discover_opinion("cum facials")
     $ the_girl.cum_on_face()
+    $ the_girl.draw_person(position = "kneeling1")
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
-    $ cum_fetish_blowjob.redraw_scene(the_girl)
     "Slowly recovering, you look at [the_girl.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
-    $ cum_fetish_blowjob.current_modifier = None
-    $ cum_fetish_blowjob.redraw_scene(the_girl)
     the_girl "Yes.. it's so hot... It feels so good on my skin..."
     return
 

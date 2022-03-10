@@ -566,7 +566,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. After your first spurt a big smile spreads across her face as you cover it with your cum."
             "[the_girl.possessive_title] keeps stroking you as you finish your orgasm. She grasps your penis at the base and slowly milks out the last couple of drops, letting fall down and on to her cheek."
             the_girl "Ohhhh... damn that is so hot..."
-            "[the_girl.possessive_title] uses her hand to rub your cum into her skin, reveling in the sticky texture. A couple of times she licks her fingers clean."
+            "[the_girl.possessive_title] uses her hand to rub your cum into her skin, revealing in the sticky texture. A couple of times she licks her fingers clean."
         elif the_girl.sluttiness > 80:
             "[the_girl.possessive_title] sticks out her tongue for you and holds still, eager to take your hot load."
             $ the_girl.cum_on_face()
@@ -624,6 +624,9 @@ label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object)
 
 label transition_default_SB_facing_wall(the_girl, the_location, the_object):
     "You turn [the_girl.possessive_title] so she is is facing [the_object.name]."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_facing_wall.position_tag, visible_enough = True, prefer_half_off = True)
     "Once you're ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 

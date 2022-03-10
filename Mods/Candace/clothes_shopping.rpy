@@ -12,7 +12,7 @@ init 2 python:
             return "Opens in the morning"
         elif time_of_day == 4: # Can be removed
             return "Closed for the night"
-        elif mc.business.funds < 500:
+        elif not mc.business.has_funds(500):
             return "Requires $500"
         else:
             return True
@@ -190,9 +190,9 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
     "She gives you a little turn so you can see all sides."
     $ the_person.draw_person(position = "back_peek")
     if preferences.evaluate_outfit(outfits[0], the_person.effective_sluttiness() + 10, sluttiness_min = the_person.effective_sluttiness() - 10):
-         the_person "I actually really like this one!"
+        the_person "I actually really like this one!"
     else:
-         the_person "I'm not certain about this one to be honest!"
+        the_person "I'm not certain about this one to be honest!"
     $ the_person.draw_person(position = "stand4")
     the_person "Be honest!"
     menu:

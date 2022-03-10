@@ -1,6 +1,6 @@
 init 2 python:
     # maid knows her work locations by using add_work_location / remove_work_location
-    # then set her schedule (preferably alt_schedule) to be in one of these locations
+    # then set her schedule (preferably using maid_job) to be in one of these locations
     # she will automatically wear a maid outfit when she moves to the location and unlock actions.
 
     maid_wardrobe = wardrobe_from_xml("Maid_Wardrobe")

@@ -1,18 +1,11 @@
 # Since a lot of players complain about a new game restart is due almost at every game
 # update, I made this cheat screen for serums to be quickly researched and mastered.
 
-init -2 style serum_cheat_text_style: # cheat_text_style already defined in cheat_mod
-    text_align 0.5
-    size 20
-    color "#dddddd"
-    outlines [(2,"#222222",0,0)]
-    xalign 0.5
+init python:
+    if "serum_cheat_menu_keybind" not in config.overlay_screens:
+        config.overlay_screens.append("serum_cheat_menu_keybind")
 
-init -1 python:
-    if "keybindS" not in config.overlay_screens:
-        config.overlay_screens.append("keybindT")
-
-screen keybindT():
+screen serum_cheat_menu_keybind():
     key "t" action ToggleScreen("serum_cheat_menu")
     key "T" action ToggleScreen("serum_cheat_menu")
 
@@ -35,7 +28,9 @@ screen serum_cheat_menu():
                     frame:
                         background "#000080"
                         xsize 380
-                        text "Available New Traits\n{color=#ff0000}{size=14}Click the Trait to have it researched{/size}{/color}" style "serum_cheat_text_style"
+                        vbox:
+                            text "Available New Traits" style "menu_text_title_style"
+                            text "{color=#B14365}{size=14}Click the Trait to have it researched{/size}{/color}" style "serum_text_style"
 
                     viewport:
                         xsize 380
@@ -66,7 +61,9 @@ screen serum_cheat_menu():
                     frame:
                         background "#000080"
                         xsize 410
-                        text "Master Existing Traits:\n{color=#ff0000}{size=14}Click the Trait to add mastery levels{/size}{/color}" style "serum_cheat_text_style"
+                        vbox:
+                            text "Master Existing Traits" style "menu_text_title_style"
+                            text "{color=#B14365}{size=14}Click the Trait to add mastery levels{/size}{/color}" style "serum_text_style"
 
                     viewport:
                         xsize 410
@@ -110,7 +107,9 @@ screen serum_cheat_menu():
                     frame:
                         background "#000080"
                         xsize 390
-                        text "Research New Designs:\n{color=#ff0000}{size=14}Click the Design to have it researched{/size}{/color}" style "serum_cheat_text_style"
+                        vbox:
+                            text "Research New Designs" style "menu_text_title_style"
+                            text "{color=#B14365}{size=14}Click the Design to have it researched{/size}{/color}" style "serum_text_style"
 
                     viewport:
                         xsize 390
@@ -125,8 +124,10 @@ screen serum_cheat_menu():
                                     textbutton "[serum.name] ([serum.current_research]/[serum.research_needed])":
                                         text_xalign 0.5
                                         text_text_align 0.5
-                                        action [Hide("serum_tooltip"), SetField(serum, "researched", True)] style "textbutton_style"
+                                        action [Hide("serum_tooltip"), SetField(serum, "researched", True)]
+                                        style "textbutton_style"
                                         text_style "serum_text_style_traits"
                                         hovered Show("serum_tooltip",None,serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                         unhovered Hide("serum_tooltip")
-                                        xsize 365
+                                        xsize 370
+                                        xalign 0.5

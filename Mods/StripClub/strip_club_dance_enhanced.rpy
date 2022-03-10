@@ -49,11 +49,11 @@ label stripclub_dance_enhanced_label():
     #-> Lap dance scene may just turn into sex.
 
     "You decide to stay a while and enjoy a show. You stop by the bar to satisfy the drink minimum, then find a seat near the edge of the stage."
-    $ mc.business.change_funds(-20)
+    if get_strip_club_foreclosed_stage() < 5:
+        $ mc.business.change_funds(-20)
     "You nurse your beer while you wait for the next performer."
 
     $ the_person = get_next_stripper()
-    $ the_person.apply_outfit(stripclub_wardrobe.pick_random_outfit())
 
     $ title = the_person.title
     $ the_person.draw_person(position = "walking_away", the_animation = ass_bob)
@@ -73,16 +73,16 @@ label stripclub_dance_enhanced_label():
             else:
                 "You recognize your cousin almost as soon as she steps onto the stage."
 
-        elif sister_role in the_person.special_role:
+        elif the_person.has_role(sister_role):
             "You recognize your little sister almost as soon as she steps onto the stage."
 
-        elif aunt_role in the_person.special_role:
+        elif the_person.has_role(aunt_role):
             "You recognize your aunt as she steps into the stage spotlights."
 
-        elif mother_role in the_person.special_role:
+        elif the_person.has_role(mother_role):
             "You recognize your mother as soon as she steps into the stage spotlight."
 
-        elif employee_role in the_person.special_role:
+        elif the_person.has_role(employee_role):
             "You recognize [title] as one of your employees."
 
         else:
@@ -101,12 +101,13 @@ label stripclub_dance_enhanced_label():
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_1
     if the_person.has_large_tits():
         if the_person.outfit.tits_available():
-            $ mc.change_locked_clarity(10)
+            $ mc.change_locked_clarity(15)
             "As the music builds, [title]'s dance becomes more energetic. Her [the_person.tits_description] bounce and jiggle in rhythm with her movements."
         else:
-            $ mc.change_locked_clarity(5)
+            $ mc.change_locked_clarity(10)
             "As the music builds, [title]'s dance becomes more energetic. Her big tits bounce and jiggle, looking almost desperate to escape."
     else:
+        $ mc.change_locked_clarity(5)
         "As the music builds, [title]'s dance becomes more energetic. She runs her hands over her tight body, accentuating her curves."
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_2
     $ the_person.draw_person(position = get_random_from_list(cousin_strip_pose_list), the_animation = blowjob_bob, animation_effect_strength = 0.7)
@@ -115,10 +116,10 @@ label stripclub_dance_enhanced_label():
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_3
     $ the_person.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.8)
     if the_person.outfit.vagina_visible():
-        $ mc.change_locked_clarity(10)
+        $ mc.change_locked_clarity(15)
         "As the song comes to an end, the dancer lowers herself to all fours, showing off her ass and pussy to the crowd."
     else:
-        $ mc.change_locked_clarity(5)
+        $ mc.change_locked_clarity(10)
         "As the song comes to an end, the dancer lowers herself to all fours. She spreads her legs and works her hips, jiggling her ass for the crowd's amusement."
 
     $ the_person.draw_person()

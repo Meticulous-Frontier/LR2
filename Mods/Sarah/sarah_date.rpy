@@ -137,9 +137,7 @@ label sarah_bar_date_label(the_person):
                     the_person "Alright, I know you wanted to get other things done, so I'll let you get back to it. But don't work too hard! Look me up if you need another break sometime!"
                     "She quickly cleans herself up then leaves, giving you a chance to continue your work, but now with your balls empty."
                 else:
-                    $ the_person.change_happiness(-10)
-                    $ the_person.change_love(-5)
-                    $ the_person.change_obedience(5)
+                    $ the_person.change_stats(happiness = -10, love = -5, obedience = 5)
                     the_person "Wow, okay. Sorry, I didn't realize you were so busy. Maybe next time I guess?"
                     "[the_person.title] quickly turns and walks out, leaving you to your work."
                     $ scene_manager.remove_actor(the_person)
@@ -150,7 +148,7 @@ label sarah_bar_date_label(the_person):
             "Get ready for the date {image=gui/heart/Time_Advance.png}":
                 pass
 
-            "Cancel the date (tooltip)She won't be happy with you canceling last minute.":
+            "Cancel the date (tooltip)She won't be happy with you canceling last minute":
                 $ mc.start_text_convo(the_person)
                 mc.name "I'm sorry, but something important came up at the last minute. We'll have to reschedule."
                 $ the_person.change_love(-5)

@@ -51,13 +51,13 @@ init 2 python:
         return
 
     breeding_fetish_high_fertility_crisis = ActionMod("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label",
-        menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True)
     breeding_fetish_happy_breeder_crisis = ActionMod("Breeding fetish desperation", breeding_fetish_high_fertility_crisis_requirement, "breeding_fetish_high_fertility_crisis_label",
-        menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "You are visited by a highly fertile breeder.", category = "Fetish", is_crisis = True)
     breeding_fetish_family_sleep_crisis = ActionMod("Familial nighttime breeding", breeding_fetish_family_sleep_crisis_requirement, "breeding_fetish_family_sleep_crisis_label",
-        menu_tooltip = "You are visited at night by a thirsty family member.", category = "Fetish", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "You are visited at night by a thirsty family member.", category = "Fetish", is_crisis = True)
     breeding_fetish_employee_high_fertility_crisis = ActionMod("Highly fertile employee needs breeding", breeding_fetish_employee_high_fertility_crisis_requirement, "breeding_fetish_employee_high_fertility_crisis_label",
-        menu_tooltip = "An employee surprises you in your office", category = "Fetish", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "An employee surprises you in your office", category = "Fetish", is_crisis = True)
 
 label breeding_fetish_high_fertility_crisis_label():
     $ the_person = get_highly_fertile_breeder()
@@ -361,7 +361,7 @@ label breeding_fetish_family_sleep_crisis_label():
         the_person "Throw me down on your bed, [the_person.mc_title]. I want to feel your weight on top of me while you fuck my brains out!"
         "You roughly pick up [the_person.possessive_title] and carry her over to the bed. You throw her down and quickly jump on top of her."
         if not the_person.vagina_available():
-            $ the_girl.strip_to_vagina(position = "missionary", prefer_half_off = True)
+            $ the_girl.strip_to_vagina(position = "missionary", visible_enough = True, prefer_half_off = True)
         "[the_person.possessive_title] spreads her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
 
     elif the_person == mom:

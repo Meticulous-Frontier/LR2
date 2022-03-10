@@ -16,15 +16,11 @@ init 3 python:
         for person in [x for x in mc.business.get_employee_list() if x.event_triggers_dict.get("day_last_employee_interaction", 0) < day]:
             person.event_triggers_dict["day_last_employee_interaction"] = day
             if person.obedience > 150 and person.love * 2 + 89 < person.obedience:
-                person.change_love(1)
-                person.change_happiness(mc.charisma)
+                person.change_stats(love = 1, happiness = mc.charisma)
             elif person.happiness > 120 and person.love >= 12:
-                person.change_obedience(mc.charisma)
-                person.change_happiness(-5)
-                person.change_love(-2)
+                person.change_stats(happiness = -5, love = -2, obedience = mc.charisma)
             else:
-                person.change_love(1)
-                person.change_happiness(mc.charisma)
+                person.change_stats(happiness = mc.charisma, love = 1)
 
         mc.business.event_triggers_dict["daily_talk_employees"] = day
         return
@@ -32,7 +28,7 @@ init 3 python:
     daily_talk_action = ActionMod("Talk with Employees {image=gui/heart/Time_Advance.png}", daily_talk_requirement, "daily_talk_employees", initialization = daily_talk_initialization,
         menu_tooltip = "Compliment Work (Happiness <= 120 or Love < 12) / Insult Work (Happiness > 120)", category = "Business")
 
-label daily_talk_employees:
+label daily_talk_employees():
 
     "You tell all of your employees to meet you in the [lobby.formal_name] for a daily chat."
     $ daily_talk_update_employee_stats()

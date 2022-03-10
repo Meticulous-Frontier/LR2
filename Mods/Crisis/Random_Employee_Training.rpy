@@ -11,10 +11,6 @@
 #        Future options: Other benefits for NPCs having high sex skills
 #
 ################################################################################################
-
-init -1 python:
-    one_on_one_weight = 5
-
 init 2 python:
     # increases affection for trained job (if not maxed)
     def increase_job_affection(person, job_description):
@@ -95,7 +91,7 @@ init 2 python:
         return True
 
     one_on_one_action = ActionMod("One on One Training", one_on_one_training_requirement, "SB_one_on_one_label",
-        menu_tooltip = "You give an employee on the job training.", category = "Business", is_crisis = True, crisis_weight = one_on_one_weight)
+        menu_tooltip = "You give an employee on the job training.", category = "Business", is_crisis = True)
 
 label SB_one_on_one_label():
     $ the_person = get_training_employee()

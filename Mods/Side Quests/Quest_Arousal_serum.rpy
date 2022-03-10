@@ -240,7 +240,7 @@ label quest_arousal_serum_test_label():
     the_person "How long is it supposed to take for these to take effect?"
     mc.name "Well, to be honest, the packaging is a little ambiguous."
     the_person "... Of course..."
-    "You spend some time with [the_person.title]. Not long after taking the pill, you start to notice some abnormal behavior."
+    "You spend some time with [the_person.title]. Not long after taking the pill, you start to notice some abnormal behaviour."
     $ the_person.change_arousal(35)
     "Her cheeks are starting to get flushed."
     if the_person.tits_available():
@@ -406,7 +406,7 @@ label quest_arousal_serum_researched_label():
 label quest_arousal_serum_pills_expire_label():
     if quest_arousal_serum().get_quest_flag() >= 101:
         return
-    "The female viagra pills you ordered have expired. You decide the whole thing was probably bullshit anyway, and decide not to pursue it any further."
+    "The female Viagra pills you ordered have expired. You decide the whole thing was probably bullshit anyway, and decide not to pursue it any further."
     $ quest_arousal_serum().set_quest_flag(29)
     $ quest_arousal_serum().quest_completed()
     return
@@ -414,7 +414,7 @@ label quest_arousal_serum_pills_expire_label():
 label quest_arousal_serum_fire_HR_label():
     if quest_arousal_serum().get_quest_flag() >= 101:
         return
-    "Unfortunately, since the head researcher position is no longer filled, you doubt you will be able do anything with the female viagra pills you ordered."
+    "Unfortunately, since the head researcher position is no longer filled, you doubt you will be able do anything with the female Viagra pills you ordered."
     $ quest_arousal_serum().set_quest_flag(39)
     $ quest_arousal_serum().quest_completed()
     return

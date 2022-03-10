@@ -43,8 +43,8 @@ label intro_SB_sixty_nine(the_girl, the_location, the_object):
         "[the_girl.possessive_title] hesitates for a moment before responding."
         the_girl "I guess we could do that. But I'm on top!"
     if not the_girl.vagina_available():
-        $ the_girl.strip_to_vagina(prefer_half_off = True)
         "She quickly moves some clothes out of the way."
+        $ the_girl.strip_to_vagina(position = SB_sixty_nine.position_tag, visible_enough = True, prefer_half_off = True)
     "You lay down on the [the_object.name]. [the_girl.possessive_title] swings one leg over you, presenting her [the_girl.pubes_description] pussy to your face. You waste no time and start to flick your tongue around her slit."
     if the_girl.get_opinion_score("getting head") > 2 :
         the_girl "Oh! Yes that feels so good already! Oh [the_girl.mc_title] your tongue feels amazing."
@@ -267,7 +267,7 @@ label scene_SB_sixty_nine_2(the_girl, the_location, the_object):
         call get_hard_SB_sixty_nine(the_girl, the_location, the_object) from _get_mc_hard_from_sixty_nine_01
         return
 
-    "[the_girl.possessive_title] pulls your cock out of her her mouth and starts to stroke you with her hand while her tongue circles around the tip."
+    "[the_girl.possessive_title] pulls your cock out of her mouth and starts to stroke you with her hand while her tongue circles around the tip."
     if the_girl.arousal > 50:
         "Her pussy glistens with moisture above you. You eagerly lap it up and the push your tongue into her moist, wet hole."
     else:
@@ -445,6 +445,9 @@ label transition_default_SB_sixty_nine(the_girl, the_location, the_object):
         the_girl "Why are you wearing this thing? Lets take this off so I can take care of you better..."
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
+    if not the_girl.vagina_available():
+        "You move some clothes clothes out of the way."
+        $ the_girl.strip_to_vagina(position = SB_sixty_nine.position_tag, visible_enough = True, prefer_half_off = True)
     return
 
 label strip_SB_sixty_nine(the_girl, the_clothing, the_location, the_object):

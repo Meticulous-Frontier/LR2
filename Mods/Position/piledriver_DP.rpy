@@ -29,7 +29,7 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
 
     "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
     the_girl "I'm not sure the angle is gonna work for..."
@@ -58,6 +58,9 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
 
 label taboo_break_piledriver_DP(the_girl, the_location, the_object): #This should only be filler, since piledriver can only be transitioned to for now
     "You take [the_girl.title]'s hands in yours and guide her down onto the [the_object.name]. She follows your lead, lying down for you."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = piledriver_DP.position_tag, visible_enough = True, prefer_half_off = True)
     "You place your hands on her knees and spread her legs, kneeling down between them."
     "You sit your hard cock on her stomach, teasingly close to her warm pussy. [the_girl.possessive_title] reaches down and gently pets your shaft."
     $ the_girl.call_dialogue(piledriver_DP.associated_taboo+"_taboo_break")
@@ -260,7 +263,11 @@ label transition_piledriver_piledriver_DP(the_girl, the_location, the_object):
     return
 
 label transition_default_piledriver_DP(the_girl, the_location, the_object):
-    "You put [the_girl.title] on her back, then lift her legs up and bend her over at the waist. You kneel over her, lining your hard cock up with her tight pussy."
+    "You put [the_girl.title] on her back."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = piledriver_DP.position_tag, visible_enough = True, prefer_half_off = True)
+    "Then lift her legs up and bend her over at the waist. You kneel over her, lining your hard cock up with her tight pussy."
     mc.name "Ready?"
     "[the_girl.possessive_title] nods, and you slip yourself deep, deep inside of her."
     return

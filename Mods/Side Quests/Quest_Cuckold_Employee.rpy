@@ -158,11 +158,10 @@ init 1 python:
 ###Functions unique to the quest
     def quest_cuckold_employee_person_find_employee():
         able_person_list = []
-        for person in mc.business.get_employee_list():
-            if not quest_director.is_person_blocked(person):
-                if person.sluttiness > 50 and not person.is_pregnant():
-                    if person.relationship == "Married" and person.kids == 0:
-                        able_person_list.append(person)
+        for person in [x for x in mc.business.get_employee_list() if x.sluttiness > 50 and x.kids == 0 \
+            and x.relationship == "Married" and not x.is_pregnant() \
+            and not quest_director.is_person_blocked(x)]:
+                able_person_list.append(person)
         return get_random_from_list(able_person_list)
 
 ###Declare quest actions###
@@ -569,8 +568,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0 and the_person.has_creampie_cum():
         the_person "Oh god, every risky load feels even better than the last..."
-        $ the_person.change_love(1, max_modified_to = 80)
-        $ the_person.change_stats(happiness = 1, obedience = 1, add_to_log = False)
+        $ the_person.change_stats(happiness = 1, obedience = 1, love = 1, max_love = 80, add_to_log = False)
         "You gently rub her stomach."
         mc.name "Your hungry cunt feels like it's sucking the cum out of me. It's amazing, honestly."
         mc.name "A little part of me is hoping it doesn't take right away and we have to keep trying for a while."

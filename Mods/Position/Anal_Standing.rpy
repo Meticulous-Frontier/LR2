@@ -42,7 +42,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = SB_anal_standing.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = SB_anal_standing.position_tag, visible_enough = True, prefer_half_off = True)
 
     if the_girl.has_anal_fetish():
         if the_girl is mom:
@@ -424,10 +424,15 @@ label outro_SB_anal_standing(the_girl, the_location, the_object):
 label transition_default_SB_anal_standing(the_girl, the_location, the_object):
     if the_girl.obedience > 120:
         mc.name "Stand here."
-        "[the_girl.possessive_title] obeys then leans forward and puts her hands on [the_object.name]. You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
+        "[the_girl.possessive_title] obeys then leans forward and puts her hands on [the_object.name]."
     else:
         mc.name "Come stand over here."
 
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_anal_standing.position_tag, visible_enough = True, prefer_half_off = True)
+
+    "You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
     call transition_default_anal_penetration_dialog(the_girl, the_location, the_object) from _call_transition_default_anal_penetration_dialog_1
     return
 

@@ -20,7 +20,7 @@ init 2 python:
         setattr( division[1], division[2], serum)
 
 
-label set_serum_description_enhanced:
+label set_serum_description_enhanced():
     call screen assign_division_serum()
 
 

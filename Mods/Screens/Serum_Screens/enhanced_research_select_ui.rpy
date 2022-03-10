@@ -99,7 +99,7 @@ init 2:
 
                         viewport:
                             xsize 380
-                            ysize 560
+                            ysize 780
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
@@ -131,47 +131,6 @@ init 2:
                                                             background "#000080"
                                                         hover_background "#1a45a1"
                                                     xsize 365
-
-                        frame:
-                            background "#000080"
-                            xsize 380
-                            text "Design Blueprints" style "menu_text_title_style" xalign 0.5
-
-                        viewport:
-                            xsize 380
-                            ysize 180
-                            scrollbars "vertical"
-                            mousewheel True
-                            vbox:
-                                xsize 370
-                                for dt in range(mc.business.research_tier, -1, -1):
-                                    if any([x for x in sorted_traits if x.tier == dt and isinstance(x, SerumTraitBlueprint) and not x.researched and x.has_required()]):
-                                        # frame:
-                                        #     background "#000000"
-                                        #     xsize 365
-                                        #     text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
-
-                                        for trait in sorted_traits:
-                                            if trait.tier == dt and isinstance(trait, SerumTraitBlueprint) and not trait.researched and trait.has_required():
-                                                $ trait_title = get_blueprint_display_title(trait)
-                                                textbutton "[trait_title]":
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style_traits"
-                                                    action SetScreenVariable("selected_research", trait)
-                                                    if selected_research == trait:
-                                                        if mc.business.active_research_design == trait:
-                                                            background "#593f85"
-                                                        else:
-                                                            background "#59853f"
-                                                        hover_background "#a9d59f"
-                                                    else:
-                                                        if mc.business.active_research_design == trait:
-                                                            background "#008000"
-                                                        else:
-                                                            background "#000080"
-                                                        hover_background "#1a45a1"
-                                                    xsize 365
-
 
 
                     vbox:
@@ -229,7 +188,7 @@ init 2:
 
                         viewport:
                             xsize 380
-                            ysize 780
+                            ysize 460
                             scrollbars "vertical"
                             mousewheel True
                             vbox:
@@ -256,6 +215,47 @@ init 2:
                                                 background "#000080"
                                             hover_background "#1a45a1"
                                         xsize 365
+
+                        frame:
+                            background "#000080"
+                            xsize 380
+                            text "Design Blueprints" style "menu_text_title_style" xalign 0.5
+
+                        viewport:
+                            xsize 380
+                            ysize 280
+                            scrollbars "vertical"
+                            mousewheel True
+                            vbox:
+                                xsize 370
+                                for dt in range(mc.business.research_tier, -1, -1):
+                                    if any([x for x in sorted_traits if x.tier == dt and isinstance(x, SerumTraitBlueprint) and not x.researched and x.has_required()]):
+                                        # frame:
+                                        #     background "#000000"
+                                        #     xsize 365
+                                        #     text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
+
+                                        for trait in sorted_traits:
+                                            if trait.tier == dt and isinstance(trait, SerumTraitBlueprint) and not trait.researched and trait.has_required():
+                                                $ trait_title = get_blueprint_display_title(trait)
+                                                textbutton "[trait_title]":
+                                                    style "textbutton_style"
+                                                    text_style "serum_text_style_traits"
+                                                    action SetScreenVariable("selected_research", trait)
+                                                    if selected_research == trait:
+                                                        if mc.business.active_research_design == trait:
+                                                            background "#593f85"
+                                                        else:
+                                                            background "#59853f"
+                                                        hover_background "#a9d59f"
+                                                    else:
+                                                        if mc.business.active_research_design == trait:
+                                                            background "#008000"
+                                                        else:
+                                                            background "#000080"
+                                                        hover_background "#1a45a1"
+                                                    xsize 365
+
 
                 textbutton "Return" action [Return("None")] style "textbutton_style" text_style "textbutton_text_style" text_align (0.5, 0.5) yalign 0.995 xanchor 0.5 xalign 0.5 xsize 360
 

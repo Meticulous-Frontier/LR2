@@ -19,17 +19,12 @@ init -1 python:
 
         # cleanup crisis events where person is in argument list
         for crisis_store in [mc.business.mandatory_crises_list, mc.business.mandatory_morning_crises_list]:
-            remove_list = []
-            for crisis in crisis_store:
+            for crisis in crisis_store[:]:
                 args = crisis.args
                 if not isinstance(args, list):
                     args = [args]
 
                 if any(x for x in args if x == self):
-                    remove_list.append(crisis)
-
-            for crisis in remove_list:
-                if crisis in crisis_store:
                     crisis_store.remove(crisis)
 
         # remove from business teams
@@ -90,11 +85,10 @@ init -1 python:
             self.sexy_opinions.clear()
 
         # clear all references held by person object.
-        del self.schedule
-        del self.alt_schedule
+        self.schedule = None
+        self.override_schedule = None
         self.home = None
         self.work = None
-        self.schedule = None
         self.job = None
         self.relationship = None
         self.personality = None
@@ -116,20 +110,6 @@ init -1 python:
 
     Person.remove_person_from_game = remove_person_from_game
 
-    def validate_stats(self):
-        # limit person stat values (anything over these values has no in-game effect)
-        if self.sluttiness > 300:
-            self.sluttiness = 300
-        if self.sluttiness > 300:
-            self.sluttiness = 300
-        if self.obedience > 300:
-            self.obedience = 300
-        if self.love > 100:
-            self.love = 100
-        return
-
-    Person.validate_stats = validate_stats
-
     @property
     def location(self): # Check what location a person is in e.g the_person.location == downtown. Use to trigger events?
         location = next((x for x in list_of_places if self in x.people), None)
@@ -141,37 +121,6 @@ init -1 python:
         self.location.move_person(self, destination)
 
     Person.change_location = person_change_location
-
-    def get_alt_schedule(self):
-        if not hasattr(self, "_alt_schedule"):
-            self._alt_schedule = Schedule()
-        return self._alt_schedule
-
-    def set_alt_schedule(self, value):
-        self._alt_schedule = value
-
-    def del_alt_schedule(self):
-        self._alt_schedule = None
-
-    # has no settter, set specific timeslots using the_person.schedule[day][timeslot] = room
-    # clear alternative schedule by calling the_person.schedule.clear_schedule()
-    Person.alt_schedule = property(get_alt_schedule, set_alt_schedule, del_alt_schedule, "Alternative schedule property.")
-
-    def set_alt_schedule(self, location, days = None, times = None):
-        if not "Schedule" in globals():
-            return
-
-        if days is None:
-            days = [0,1,2,3,4,5,6] #Full week if not specified
-        if times is None:
-            times = []
-
-        for the_day in days:
-            for time_chunk in times:
-                self.alt_schedule[the_day][time_chunk] = location
-        return
-
-    Person.set_alt_schedule = set_alt_schedule
 
     def get_follow_me(self):
         if not hasattr(self, "_follow_me"):
@@ -204,7 +153,7 @@ init -1 python:
             if self.has_role(prostitute_role):
                 self._bedroom = prostitute_bedroom
             else:
-                self._bedroom = get_random_from_list([generic_bedroom_1, generic_bedroom_2, generic_bedroom_3, generic_bedroom_4])
+                self._bedroom = renpy.random.choice([generic_bedroom_1, generic_bedroom_2, generic_bedroom_3, generic_bedroom_4])
         return self._bedroom
     Person.bedroom = property(get_person_bedroom, None, None, "Her bedroom")
 
@@ -250,20 +199,6 @@ init -1 python:
 
     # work-outfit for strippers / waitresses and bdsm room performers
 
-    def get_person_work_outfit(self):
-        if not hasattr(self, "_work_outfit"):
-            self._work_outfit = None
-        return self._work_outfit
-
-    def set_person_work_outfit(self, value):
-        self._work_outfit = value
-
-    def del_person_work_outfit(self):
-        del self._work_outfit
-
-    # add follow_mc attribute to person class (without sub-classing)
-    Person.work_outfit = property(get_person_work_outfit, set_person_work_outfit, del_person_work_outfit, "Allow for forcing the next day outfit a girl will wear (set planned outfit).")
-
     def get_person_maid_outfit(self):
         if not hasattr(self, "_maid_outfit"):
             self._maid_outfit = None
@@ -296,7 +231,7 @@ init -1 python:
             return self._idle_pose
 
         if not hasattr(self, "_idle_pose"):
-            self._idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"])
+            self._idle_pose = renpy.random.choice(["stand2","stand3","stand4","stand5"])
 
         if renpy.call_stack_depth() < 2:
             # we are in the main menu (alternative idle_pose)
@@ -305,14 +240,14 @@ init -1 python:
             if self.location == gym:
                 pose = self.event_triggers_dict.get("gym_pose", None)
                 if not pose: # store preferred position in bdsm room (prevent switching on hover)
-                    pose = get_random_from_list(["missionary", "stand2", "back_peek", "stand4", "sitting"])
+                    pose = renpy.random.choice(["missionary", "stand2", "back_peek", "stand4", "sitting"])
                     self.event_triggers_dict["gym_pose"] = pose
                 return pose
 
         if self.has_role(caged_role):
             pose = self.event_triggers_dict.get("bdsm_room_pose", None)
             if not pose: # store preferred position in bdsm room (prevent switching on hover)
-                pose = get_random_from_list(["cowgirl", "kneeling1", "blowjob"])
+                pose = renpy.random.choice(["cowgirl", "kneeling1", "blowjob"])
                 self.event_triggers_dict["bdsm_room_pose"] = pose
             return pose
         return self._idle_pose
@@ -362,6 +297,16 @@ init -1 python:
         self._tan_style = value
 
     Person.tan_style = property(get_person_tan_style, set_person_tan_style, None, "The tan style to render for a person.")
+
+    def get_person_available(self):
+        if not hasattr(self, "_available"):
+            self._available = True
+        return self._available
+
+    def set_person_available(self, value):
+        self._available = value
+
+    Person.available = property(get_person_available, set_person_available, None, "Mark a person available or not.")
 
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
@@ -419,17 +364,17 @@ init -1 python:
         descriptor = "tits"
 
         if rank == 0:
-            adjective = get_random_from_list(["flat", "minute", "tiny"])
-            descriptor = get_random_from_list(["titties", "tits", "nipples"])
+            adjective = renpy.random.choice(["flat", "minute", "tiny"])
+            descriptor = renpy.random.choice(["titties", "tits", "nipples"])
         elif rank >= 1 and rank <= 3:
-            adjective = get_random_from_list(["firm", "perky", "small"])
-            descriptor = get_random_from_list(["breasts", "tits", "boobs"])
+            adjective = renpy.random.choice(["firm", "perky", "small"])
+            descriptor = renpy.random.choice(["breasts", "tits", "boobs"])
         elif rank >= 4 and rank <= 6:
-            adjective = get_random_from_list(["shapely", "large", "big", "generous"])
-            descriptor = get_random_from_list(["breasts", "tits", "bosoms"])
+            adjective = renpy.random.choice(["shapely", "large", "big", "generous"])
+            descriptor = renpy.random.choice(["breasts", "tits", "bosoms"])
         elif rank >= 7 and rank <= 9:
-            adjective = get_random_from_list(["large", "voluptuous", "colossal", "huge"])
-            descriptor = get_random_from_list(["breasts", "tits", "jugs", "melons"])
+            adjective = renpy.random.choice(["large", "voluptuous", "colossal", "huge"])
+            descriptor = renpy.random.choice(["breasts", "tits", "jugs", "melons"])
 
         return "{adj} {desc}".format(adj = adjective, desc = descriptor)
 
@@ -511,8 +456,8 @@ init -1 python:
         happy_points += self.salary - self.calculate_base_salary() #A real salary greater than her base is a bonus, less is a penalty. TODO: Make this dependent on salary fraction, not abosolute pay.
         happy_points += self.get_opinion_score("working") * 5 # Does she like working? It affects her happiness score.
 
-        if (day - self.event_triggers_dict.get("employed_since",0)) < 14:
-            happy_points += 14 - (day - self.event_triggers_dict.get("employed_since",0)) #Employees are much less likely to quit over the first two weeks.
+        if self.days_employed < 14:
+            happy_points += 14 - self.days_employed #Employees are much less likely to quit over the first two weeks.
         return happy_points
 
     Person.get_job_happiness_score = get_job_happiness_score_enhanced
@@ -616,7 +561,7 @@ init -1 python:
         if start_home is None:
             the_daughter.generate_home()
         else:
-            the_daughter.set_schedule(the_location = start_home, times = [0,4])
+            the_daughter.set_schedule(the_location = start_home, the_times = [0,4])
 
         the_daughter.home.add_person(the_daughter)
 
@@ -686,7 +631,7 @@ init -1 python:
         if start_home is None:
             the_mother.generate_home()
         else:
-            the_mother.set_schedule(the_location = start_home, times = [0,4])
+            the_mother.set_schedule(the_location = start_home, the_times = [0,4])
 
         the_mother.home.add_person(the_mother)
 
@@ -702,6 +647,15 @@ init -1 python:
 
     def person_is_willing(self, the_position, private = True, ignore_taboo = False):
         final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(self, ignore_taboo)
+        # DON'T USE EFFECTIVE SLUTTINESS IN THIS FUNCTION
+        # IT CAN HAVE THE MODIFIERS THAT THIS FUNCTION EMULATES
+        # TO VALIDATE PRIOR TO ACTUALLY STARTING THE SEX LOOP
+        # IT VALIDATES IF SHE IS WILLING BY HERSELF (NOT USING OBEDIENCE)
+
+        # quick return if she hates any required opinion tags for the position
+        for tag in the_position.opinion_tags:
+            if self.get_opinion_score(tag) <= -2:
+                return False
 
         # add modifiers
         if self.has_family_taboo():
@@ -717,7 +671,7 @@ init -1 python:
             final_slut_requirement += (self.get_opinion_score("cheating on men") * 10 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 20)
 
         if not private:
-            final_slut_requirement += (-10 + self.get_opinion_score("public sex") * 5) if self.effective_sluttiness() < 50 else self.get_opinion_score("public sex") * 5
+            final_slut_requirement += ((-10 if self.sluttiness < 50 else 0) + self.get_opinion_score("public sex") * 5) if self.sluttiness < 50 else self.get_opinion_score("public sex") * 5
 
         if self.love < 0:
             final_slut_requirement -= self.love
@@ -725,19 +679,17 @@ init -1 python:
             if self.has_role([girlfriend_role, affair_role]):
                 final_slut_requirement -= self.love
             elif self.is_family():
-                final_slut_requirement -= __builtin__.round(self.love / 4.0)
+                final_slut_requirement -= __builtin__.int(self.love / 4.0)
             else:
-                final_slut_requirement -= __builtin__.round(self.love / 2.0)
+                final_slut_requirement -= __builtin__.int(self.love / 2.0)
 
-        final_slut_requirement += __builtin__.round((self.happiness - 100)/4.0)
+        final_slut_requirement += __builtin__.int((self.happiness - 100)/4.0)
 
-        if ignore_taboo:
-            if self.effective_sluttiness() >= final_slut_requirement \
-                or self.effective_sluttiness() + (self.obedience-100) >= final_slut_requirement:
-                    return True
-        if self.effective_sluttiness(the_position.associated_taboo) >= final_slut_requirement \
-            or self.effective_sluttiness(the_position.associated_taboo) + (self.obedience-100) >= final_slut_requirement:
-                return True
+        if not ignore_taboo and the_position.associated_taboo:
+            final_slut_requirement += 10
+
+        if self.sluttiness >= final_slut_requirement:
+            return True
         return False
 
     Person.is_willing = person_is_willing
@@ -787,7 +739,7 @@ init -1 python:
             if msg_count > 0:   # do we need to show a random message and replace titles and outfit name
                 msg_idx = renpy.random.randint(1, msg_count)
                 msg = messages[msg_idx - 1]
-                msg = msg.replace("[the_person.possessive_title]", self.possessive_title or "the unknown woman").replace("[the_person.title]", self.title or self.name).replace("[the_person.mc_title]", self.mc_title).replace("[strip_choice.name]", strip_choice.name)
+                msg = msg.replace("[the_person.possessive_title]", self.possessive_title or "the unknown woman").replace("[the_person.title]", self.title or self.name).replace("[the_person.mc_title]", self.mc_title).replace("[strip_choice.name]", strip_choice.name).replace("[strip_choice.display_name]", strip_choice.display_name)
                 renpy.say(None, msg)
 
             strip_choice = get_strip_choice_max(test_outfit, top_layer_first, exclude_upper, exclude_lower, exclude_feet)
@@ -914,6 +866,19 @@ init -1 python:
 
     Person.choose_strip_clothing_item = choose_strip_clothing_item
 
+    def person_get_destination_extended(org_func):
+        def get_destination_wrapper(person, specified_day = None, specified_time = None):
+            if not person.available:  # special case to make people disappear (used in pregnancy)
+                return purgatory
+
+            # run original function
+            return org_func(person, specified_day, specified_time)
+
+        return get_destination_wrapper
+
+    # wrap up the run_day function
+    Person.get_destination = person_get_destination_extended(Person.get_destination)
+
     def run_move_enhanced(self,location):
         for serum in self.serum_effects: #Compute the effects of all of the serum that the girl is under.
             serum.run_on_move(self) #Run the serum's on_move function if one exists
@@ -928,14 +893,10 @@ init -1 python:
             else:
                 self.planned_outfit = None
             self.planned_uniform = None
-            self.work_outfit = None
             self.maid_outfit = None
             self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
 
         destination = self.get_destination() #None destination means they have free time
-        if destination == self.work and not mc.business.is_open_for_business(): #NOTE: Right now we give everyone time off based on when the mc has work scheduled.
-            destination = None
-
         # changing outfits is handled by move_person wrapper function
         if destination:
             location.move_person(self, destination)
@@ -947,10 +908,12 @@ init -1 python:
                 self.change_happiness(max(-1,self.get_opinion_score("work uniforms")), add_to_log = False)
             else:
                 self.change_happiness(self.get_opinion_score("work uniforms"), add_to_log = False)
-
-        #A skimpy outfit is defined as the top 20% of a girls natural sluttiness.
-        if self.outfit and self.outfit.slut_requirement > self.sluttiness * 0.80 and self.get_opinion_score("skimpy outfits") > -2:
-            self.change_slut(1, max_modified_to = ((self.get_opinion_score("skimpy outfits") +1) * 10), add_to_log = False)
+            if self.planned_uniform and self.planned_uniform.slut_requirement > self.sluttiness*0.8: #A skimpy outfit/uniform is defined as the top 20% of a girls natural sluttiness.
+                self.change_slut(self.get_opinion_score("skimpy uniforms"), 30, add_to_log = False)
+        else:
+            #A skimpy outfit is defined as the top 20% of a girls natural sluttiness.
+            if self.planned_outfit and self.planned_outfit.slut_requirement > self.sluttiness * 0.80 and self.get_opinion_score("skimpy outfits") > -2:
+                self.change_slut(1, max_modified_to = ((self.get_opinion_score("skimpy outfits") +1) * 10), add_to_log = False)
 
         #A conservative outfit is defined as the bottom 20% of a girls natural sluttiness.
         if self.sluttiness < 30 and self.outfit and self.outfit.slut_requirement < self.sluttiness * 0.20:
@@ -989,36 +952,15 @@ init -1 python:
             self.change_slut(self.get_opinion_score("not wearing anything"), max_modified_to = 60, add_to_log = False)
 
         for lta_store in [self.on_room_enter_event_list, self.on_talk_event_list]:
-            removal_list = []
             for an_action in [x for x in lta_store if isinstance(x, Limited_Time_Action)]:
                 an_action.turns_valid -= 1
                 if an_action.turns_valid <= 0:
-                    removal_list.append(an_action)
-
-            for action_to_remove in removal_list:
-                if action_to_remove in lta_store:
-                    lta_store.remove(action_to_remove)
+                    lta_store.remove(an_action)
 
         for a_role in self.special_role:
             a_role.run_move(self)
 
     Person.run_move = run_move_enhanced
-
-    # enhanced get destination function, that checks the alternative schedule for a destination prior to regular schedule.
-    def get_destination_enhanced(self, specified_day = None, specified_time = None):
-        if specified_day is None:
-            specified_day = day%7 #Today
-        if specified_time is None:
-            specified_time = time_of_day #Now
-
-        if "Schedule" in globals():
-            alt_destination = self.alt_schedule[specified_day][specified_time]
-            if alt_destination: # if we have an alternative schedule, return that location
-                return alt_destination
-
-        return self.schedule[specified_day][specified_time] #Returns the Room this person should be in during the specified time chunk.
-
-    Person.get_destination = get_destination_enhanced
 
     # extend the default run day function
     def person_run_day_extended(org_func):
@@ -1101,6 +1043,21 @@ init -1 python:
     # Adds a function that edits and adds opinions. It also appends to the vanilla opinion pool.
     Person.add_opinion = add_opinion
 
+    def get_opinion_score_enhanced(self, topic): #Like get_opinion_topic, but only returns the score and not a tuple. Use this when determining a persons reaction to a relavent event.
+        if isinstance(topic, basestring):
+            if topic in self.opinions:
+                return self.opinions[topic][0]
+            if topic in self.sexy_opinions:
+                return self.sexy_opinions[topic][0]
+
+        return_value = 0
+        if isinstance(topic, list):
+            for a_topic in topic:
+                return_value += self.get_opinion_score(a_topic)
+        return return_value
+
+    Person.get_opinion_score = get_opinion_score_enhanced
+
     def update_opinion_with_score(self, topic, score, add_to_log = True):
         if topic in sexy_opinions_list:
             if topic in self.sexy_opinions:
@@ -1121,11 +1078,15 @@ init -1 python:
     Person.update_opinion_with_score = update_opinion_with_score
 
     ## Increase the opinion on a specific topic (opinion)
-    def increase_opinion_score(self, topic, max_value = 2, add_to_log = True):
+    def increase_opinion_score(self, topic, max_value = 2, add_to_log = True, weighted = False):
         score = self.get_opinion_score(topic)
 
         if score < 2 and score < max_value:
-            self.update_opinion_with_score(topic, score + 1, add_to_log)
+            if weighted:
+                if renpy.random.randint(0,100) < self.suggestibility:
+                    self.update_opinion_with_score(topic, score + 1, add_to_log)
+            else:
+                self.update_opinion_with_score(topic, score + 1, add_to_log)
         return
 
     # Add increase opinion function to person class
@@ -1234,6 +1195,20 @@ init -1 python:
 
     Person.update_work_skill = update_work_skill
 
+    # returns the day of first employment in company (-1 for never employed)
+    def get_employed_since(self):
+        return self.event_triggers_dict.get("employed_since", -1)
+
+    Person.employed_since = property(get_employed_since, None, None)
+
+    # returns the total number of days employed in company (0 for not employed)
+    def get_days_employed(self):
+        if self.is_employee():
+            return day - self.employed_since
+        return 0
+
+    Person.days_employed = property(get_days_employed, None, None)
+
     # increase skill of person by one until max_value is reached.
     def increase_work_skill(self, skill, max_value = 6, add_to_log = True):
         if skill == 0 or skill == "hr_skill":
@@ -1268,7 +1243,7 @@ init -1 python:
     Person.decrease_work_skill = decrease_work_skill
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
-    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, max_slut = None, energy = None, add_to_log = True):
+    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, max_slut = None, max_love = None, energy = None, add_to_log = True):
         if not obedience is None:
             self.change_obedience(obedience, add_to_log = add_to_log)
         if not happiness is None:
@@ -1276,7 +1251,7 @@ init -1 python:
         if not arousal is None:
             self.change_arousal(arousal, add_to_log = add_to_log)
         if not love is None:
-            self.change_love(love, add_to_log = add_to_log)
+            self.change_love(love, max_love, add_to_log = add_to_log)
         if not slut is None:
             self.change_slut(slut, max_slut, add_to_log = add_to_log)
         if not energy is None:
@@ -1317,6 +1292,12 @@ init -1 python:
                 else:
                     suggestibility_modifier = 30
                 max_modified_to += suggestibility_modifier
+
+            # limit sluttiness to 100 -> read as 100%
+            # there is no content for higher sluttiness values,
+            # but it will impact the game negatively if it is over 100 (bored sex pos etc.)
+            if not max_modified_to or max_modified_to > 100:
+                max_modified_to = 100
 
             org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
 
@@ -1589,20 +1570,59 @@ init -1 python:
 
     Person.hide_person = hide_person_enhanced
 
-    def is_person_at_work(self): #Checks to see if the character is at work.
-        if not self.work:
+    def person_is_at_work(self): #Checks to see if the character is at work.
+        if not self.job or not self.job.job_location:
             return False
 
-        return self.location in [mc.business.m_div, mc.business.p_div, mc.business.r_div, mc.business.s_div, mc.business.h_div]
+        return self.location == self.job.job_location
 
-    Person.is_at_work = is_person_at_work
+    Person.is_at_work = person_is_at_work
 
     def is_person_at_mc_house(self):
         return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
 
     Person.is_person_at_mc_house = is_person_at_mc_house
 
+    def is_person_home(self):
+        return self.location == self.home
+
+    Person.is_home = is_person_home
+
     ####### Begin cum extension functions ######
+
+    # calculate generic arousal change for a person based on opinions during MC cum shot
+    # with all favorable max gain is 12 arousal points
+    def partner_generic_arousal(person):
+        total_amount = 0
+        if not mc.condom:
+            total_amount += 2 * person.get_opinion_score("bareback sex")
+        else:
+            total_amount -= 2 * person.get_opinion_score("bareback sex")
+        if person.relationship != "Single":
+            total_amount += 2 * person.get_opinion_score("cheating on men")
+        return total_amount
+
+    def cum_in_vagina_extended(org_func):
+        def cum_in_vagina_wrapper(person, add_to_record = True):
+            # run original function
+            org_func(person, add_to_record)
+            # run extension code
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("creampies"))
+        return cum_in_vagina_wrapper
+
+    # wrap up the cum_in_vagina function
+    Person.cum_in_vagina = cum_in_vagina_extended(Person.cum_in_vagina)
+
+    def cum_in_ass_extended(org_func):
+        def cum_in_ass_wrapper(person, add_to_record = True):
+            # run original function
+            org_func(person, add_to_record)
+            # run extension code
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("anal creampies"))
+        return cum_in_ass_wrapper
+
+    # wrap up the cum_in_ass function
+    Person.cum_in_ass = cum_in_ass_extended(Person.cum_in_ass)
 
     def cum_on_face_extended(org_func):
         def cum_on_face_wrapper(person, add_to_record = True):
@@ -1610,9 +1630,9 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
-            if "report_log" in globals():   # add to report log if exists
+            if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum facials"] = report_log.get("cum facials", 0) + 1
-
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("cum facials"))
         return cum_on_face_wrapper
 
     # wrap up the cum_on_face function
@@ -1624,9 +1644,9 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
-            if "report_log" in globals():   # add to report log if exists
+            if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on tits"] = report_log.get("cum on tits", 0) + 1
-
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"))
         return cum_on_tits_wrapper
 
     # wrap up the cum_on_tits function
@@ -1638,9 +1658,9 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
-            if "report_log" in globals():   # add to report log if exists
+            if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on stomach"] = report_log.get("cum on stomach", 0) + 1
-
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"))
         return cum_on_stomach_wrapper
 
     # wrap up the cum_on_stomach function
@@ -1652,9 +1672,9 @@ init -1 python:
             org_func(person, add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
-            if "report_log" in globals():   # add to report log if exists
+            if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on ass"] = report_log.get("cum on ass", 0) + 1
-
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"))
         return cum_on_ass_wrapper
 
     # wrap up the cum_on_ass function
@@ -1665,9 +1685,9 @@ init -1 python:
             # run original function
             org_func(person, add_to_record)
             # run extension code
-            if "report_log" in globals():   # add to report log if exists
+            if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["drinking cum"] = report_log.get("drinking cum", 0) + 1
-
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("drinking cum"))
         return cum_in_mouth_wrapper
 
     # wrap up the cum_on_ass function
@@ -1750,43 +1770,23 @@ init -1 python:
     # helper function, to determine if person is available for crisis events
     # for now only girls giving birth are not available (but is extendable for future conditions)
     def person_is_available(self):
-        return not self.is_giving_birth()
+        return not self.is_giving_birth() and self.available
 
     Person.is_available = property(person_is_available, None, None)
 
+    def person_has_job_role(self, job_role):
+        if not self.job:
+            return False
+
+        if self.job.job_role == job_role:
+            return True
+        return False
+
+    Person.has_job_role = person_has_job_role
 
 ################################################
 # Outfit functions - wear a specialized outfit #
 ################################################
-    def should_wear_work_outfit(self):
-        if self.has_role([stripper_role, waitress_role, bdsm_performer_role, mistress_role, manager_role]):
-            shifts = self.event_triggers_dict.get("strip_club_shifts", 2)
-            return (time_of_day == 3 and shifts == 2) or time_of_day == 4
-        return False
-
-    Person.should_wear_work_outfit = should_wear_work_outfit
-
-    def wear_work_outfit(self):
-        if self.work_outfit:    # quick exit if we already go an outfit for the day and puts outfit back on after stripping
-            self.apply_outfit(self.work_outfit)
-            return
-
-        if self.has_role(stripper_role):
-            self.work_outfit = mc.business.stripper_wardrobe.decide_on_outfit2(self, sluttiness_modifier = 0.3)
-        elif self.has_role(waitress_role):
-            self.work_outfit = mc.business.waitress_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(bdsm_performer_role):
-            self.work_outfit = mc.business.bdsm_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(mistress_role):
-            self.work_outfit = mc.business.mistress_wardrobe.decide_on_outfit2(self)
-        elif self.has_role(manager_role):
-            self.work_outfit = mc.business.manager_wardrobe.decide_on_outfit2(self)
-
-        if self.work_outfit:
-            self.apply_outfit(self.work_outfit)
-        return
-
-    Person.wear_work_outfit = wear_work_outfit
 
     def should_wear_maid_outfit(self):
         if self.has_role([maid_role]):
@@ -1800,7 +1800,7 @@ init -1 python:
             self.apply_outfit(self.maid_outfit)
             return
 
-        if self.has_role(maid_role):
+        if self.should_wear_maid_outfit():
             self.maid_outfit = maid_wardrobe.decide_on_outfit2(self)
 
         if self.maid_outfit:
@@ -1814,36 +1814,28 @@ init -1 python:
 
     Person.is_wearing_uniform = person_is_wearing_uniform
 
-    def should_wear_uniform_enhanced(self):
-        if not mc.business.is_open_for_business():
-            return False
+    def person_should_wear_uniform_extended(org_func):
+        def should_wear_uniform_wrapper(person):
+            # pre-condition for stripclub ownership
+            if not strip_club_is_closed() and person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]):
+                shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
+                return (time_of_day == 3 and shifts == 2) or time_of_day == 4
+            # run original function
+            result = org_func(person)
+            # run extension code
+            if result and day%7 == 4 and casual_friday_uniform_policy.is_active():
+                result = False
+            return result
 
-        if mc.business.get_employee_title(self) == "None":
-            return False
+        return should_wear_uniform_wrapper
 
-        if not self.is_at_work():
-            return False
-
-        if casual_friday_uniform_policy.is_active() and day % 7 == 4:
-            return False
-
-        if self.event_triggers_dict.get("forced_uniform", False):
-            return True
-
-        wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
-        if wardrobe and wardrobe.get_count() > 0:  #Check to see if there's anything stored in the uniform section.
-            return True
-
-        return False
-
-    Person.should_wear_uniform = should_wear_uniform_enhanced
+    # wrap up the should_wear_uniform function
+    Person.should_wear_uniform = person_should_wear_uniform_extended(Person.should_wear_uniform)
 
     @property
     def current_planned_outfit(self):
         if self.should_wear_uniform() and self.planned_uniform:
             return self.planned_uniform
-        elif self.should_wear_work_outfit() and self.work_outfit:
-            return self.work_outfit
         elif self.should_wear_maid_outfit() and self.maid_outfit:
             return self.maid_outfit
         elif self.location in [gym, university] and self.location_outfit:
@@ -1918,8 +1910,6 @@ init -1 python:
 
         if self.should_wear_uniform():
             self.wear_uniform()
-        elif self.should_wear_work_outfit():
-            self.wear_work_outfit()
         elif self.should_wear_maid_outfit():
             self.wear_maid_outfit()
         elif self.location in [gym, university] and self.location_outfit:
@@ -1938,7 +1928,7 @@ init -1 python:
             return
 
         if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
-            (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(uniform.get_copy())
+            (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform.get_copy())
         elif creative_colored_uniform_policy.is_active():
             self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
         else:
@@ -1971,7 +1961,6 @@ init -1 python:
         return WardrobeBuilder(self).approves_outfit_color(outfit)
 
     Person.approves_outfit_color = approves_outfit_color
-
 
 ######################################
 # Extend give serum for added goal #
@@ -2286,7 +2275,7 @@ init -1 python:
     Person.is_lactating = is_lactating
 
     def is_giving_birth(self):
-        return "preg_old_schedule" in self.event_triggers_dict
+        return self.location == purgatory or not self.available
 
     Person.is_giving_birth = is_giving_birth
 
@@ -2487,6 +2476,17 @@ init -1 python:
 
     Person.is_submissive = is_submissive
 
+    def facial_or_swallow(self):    #Use this function to determine if girl wants a facial or to swallow cum. If neither is preferred, return one at random.
+        if self.has_cum_fetish():
+            return renpy.random.choice(["swallow", "facial"])
+        if self.get_opinion_score("cum facials") == self.get_opinion_score("drinking cum"):
+            return renpy.random.choice(["swallow", "facial"])
+        if self.get_opinion_score("cum facials") > self.get_opinion_score("drinking cum"):
+            return "facial"
+        return "swallow"
+
+    Person.facial_or_swallow = facial_or_swallow
+
     def is_jealous(self):
         if not (self.is_girlfriend() or self.is_affair()):
             return False
@@ -2528,9 +2528,9 @@ init -1 python:
             if self.get_opinion_score(colour) == 2:
                 list_of_favorites.append(colour)
         if len(list_of_favorites) > 0:
-            self.event_triggers_dict["favorite_colour"] = get_random_from_list(list_of_favorites)
+            self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_favorites)
         else:
-            self.event_triggers_dict["favorite_colour"] = get_random_from_list(list_of_colours)
+            self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_colours)
             self.update_opinion_with_score(self.favorite_colour(), 2, add_to_log = False)
         return self.favorite_colour()
 
@@ -2540,6 +2540,13 @@ init -1 python:
         return self.relationship == "Single" and not self.is_girlfriend()
 
     Person.is_single = is_single
+
+    def is_in_trance(self):
+        if self.get_trance_multiplier() > 1.2:
+            return True
+        return False
+
+    Person.is_in_trance = is_in_trance
 
 #Intern functions
 

@@ -1,7 +1,4 @@
 ## Coffee Break 2 Crisis Mod by Tristimdorion
-init -1 python:
-    coffee_break2_weight = 5
-
 init 2 python:
     def coffee_break2_requirement():
         if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
@@ -10,9 +7,9 @@ init 2 python:
         return False
 
     coffee_break2_action = ActionMod("Coffee Break 2", coffee_break2_requirement, "coffee_break2_action_label",
-        menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True, crisis_weight = coffee_break2_weight)
+        menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True)
 
-label coffee_break2_action_label:
+label coffee_break2_action_label():
     $ (person_one, person_two, person_three) = get_random_employees(3, slut_required = 20)
     if not (isinstance(person_one, Person) and isinstance(person_two, Person) and isinstance(person_three, Person)):
         return
@@ -105,8 +102,10 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     $ loser.run_orgasm()
                     $ loser.change_stats(slut = 1, max_slut = 100)
                     $ mc.change_locked_clarity(20)
+                    $ loser.cum_on_ass(add_to_record = False)
+                    $ scene_manager.update_actor(loser)
                     "He finishes leaving her quivering against the desk. As he walks away he says: 'Enjoy your food, slut!'"
-                    $ loser.cum_on_ass()
+                    $ scene_manager.update_actor(loser, position = "walking_away")
                     "She gathers her clothes and takes the food back to her colleagues. "
                 else:
                     "When [loser.possessive_title] reaches the lobby, where the delivery guy is standing with a big grin on his face."
@@ -115,8 +114,9 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     $ mc.change_locked_clarity(20)
                     "[loser.possessive_title] indicates the guy to come forward, she spreads her legs a little to give him a nice view."
                     $ loser.change_stats(slut = 1, max_slut = 100)
+                    $ scene_manager.update_actor(loser, position = "walking_away")
                     "After a while she tells him the food is getting cold. He nods, turns around and as he walks away he says: 'Enjoy your food, slut!'"
-                $ scene_manager.update_actor(loser, position = "walking_away")
+
                 if winner_one.effective_sluttiness() > 60 and winner_two.effective_sluttiness() > 60:
                     "You follow [loser.possessive_title] as she takes the delivery to the break room."
                     $ scene_manager.update_actor(loser, display_transform = character_center_flipped)

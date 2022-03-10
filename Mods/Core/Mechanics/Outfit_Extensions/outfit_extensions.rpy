@@ -47,6 +47,37 @@ init -1 python:
 
     Outfit.matches = matches
 
+    #####################################
+    # Enhanced Methods for Outfit Class #
+    #####################################
+
+    def remove_random_upper_enhanced(self, top_layer_first = False, do_not_remove = False):
+        #if top_layer_first only the upper most layer is removed, otherwise anything unanchored is a valid target.
+        #if do_not_remove is set to True we only use this to find something valid to remove and return that clothing item. this lets us use this function to find thigns to remove with an animation.
+        #Returns None if there is nothing to be removed.
+        to_remove = None
+        if top_layer_first:
+            #Just remove the very top layer
+            if self.get_upper_unanchored():
+                to_remove = self.get_upper_unanchored()[0]
+                if to_remove.is_extension:
+                    return None #Extensions can't be removed directly.
+            else:
+                return None
+        else:
+            to_remove = get_random_from_list(self.get_upper_unanchored())
+            if to_remove and to_remove.is_extension:
+                return None
+
+        if to_remove and to_remove.layer == 0: # don not nipple covers or cinchers
+            return None
+
+        if to_remove and not do_not_remove:
+            self.remove_clothing(to_remove)
+        return to_remove
+
+    Outfit.remove_random_upper = remove_random_upper_enhanced
+
     ######################################
     # Extension Methods For Outfit Class #
     ######################################
@@ -114,21 +145,26 @@ init -1 python:
     Outfit.has_overwear = has_overwear
 
     def remove_all_cum(self):
-        remove_list = []
-        for acc in self.accessories:
-            if acc.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]:
-                remove_list.append(acc)
-        for acc in remove_list:
+        for acc in [x for x in self.accessories if x.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]]:
             self.accessories.remove(acc)
         return
 
     Outfit.remove_all_cum = remove_all_cum
 
+    def has_glasses(self):
+        return any([x for x in self.accessories if x.name in [big_glasses.name, modern_glasses.name]])
+
+    Outfit.has_glasses = has_glasses
+
+    def remove_glasses(self):
+        for acc in [x for x in self.accessories if x.name in [big_glasses.name, modern_glasses.name]]:
+            self.accessories.remove(acc)
+        return
+
+    Outfit.remove_glasses = remove_glasses
+
     def check_outfit_cum(self):                                             #Checks if the person has any cum on them
-        for acc in self.accessories:
-            if acc.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]:
-                return True
-        return False
+        return any([x for x in self.accessories if x.name in [mouth_cum.name, tits_cum.name, stomach_cum.name, face_cum.name, ass_cum.name, creampie_cum.name]])
 
     Outfit.check_outfit_cum = check_outfit_cum
 
@@ -194,7 +230,7 @@ init -1 python:
             new_score += 30
         if extra_modifier and (not self.wearing_panties() or not self.panties_covered()):
             new_score += 15
-        return new_score
+        return __builtin__.int(new_score * .9)
 
     Outfit.get_body_parts_slut_score = get_body_parts_slut_score
 
@@ -202,7 +238,7 @@ init -1 python:
         new_score = 0
         new_score += self.get_body_parts_slut_score()
         new_score += self.get_total_slut_modifiers()
-        return new_score
+        return new_score if new_score < 100 else 100
 
     Outfit.get_underwear_slut_score = get_underwear_slut_score_enhanced
 
@@ -210,7 +246,7 @@ init -1 python:
         new_score = 0
         new_score += self.get_body_parts_slut_score()
         new_score += self.get_total_slut_modifiers()
-        return new_score
+        return new_score if new_score < 100 else 100
 
     Outfit.get_overwear_slut_score = get_overwear_slut_score_enhanced
 
@@ -218,13 +254,13 @@ init -1 python:
         new_score = 0
         new_score += self.get_body_parts_slut_score(extra_modifier = True)
         new_score += self.get_total_slut_modifiers()
-        return new_score
+        return new_score if new_score < 100 else 100
 
     Outfit.get_full_outfit_slut_score = get_full_outfit_slut_score_enhanced
 
     def get_slut_value_classification(slut_requirement):
         classifications = ["Conservative", "Timid", "Modest", "Casual", "Trendy", "Stylish", "Enticing", "Provocative", "Sensual", "Sexy", "Seductive", "Sultry", "Slutty"]
-        ci = (slut_requirement + 5) // 7
+        ci = __builtin__.int(slut_requirement * .14)
         if ci >= __builtin__.len(classifications):
             return classifications[-1]
         return classifications[ci]
@@ -314,11 +350,11 @@ init 6 python:
         for cloth in self.upper_body + self.lower_body:
             if cloth.colour[3] < 1:
                 if cloth.layer == 2:
-                    new_score += int((1 - cloth.colour[3]) * 40)
+                    new_score += __builtin__.int((1 - cloth.colour[3]) * 40)
                 elif cloth.layer == 1:
-                    new_score += int((1 - cloth.colour[3]) * 10)
+                    new_score += __builtin__.int((1 - cloth.colour[3]) * 10)
 
-        return new_score
+        return __builtin__.int(new_score  * .9)
 
     Outfit.get_total_slut_modifiers = get_total_slut_modifiers_enhanced
 

@@ -8,10 +8,21 @@ init 10 python:
             if ellie.love < 20:
                 love_story_list.append("Increase [ellie.title]'s love to continue this story.")
             else:
-                love_story.append("[ellie.title] may surprise you at work soon.")
+                love_story_list.append("[ellie.title] may surprise you at work soon.")
             return love_story_list
         else:
             love_story_list.append("[ellie.title] returned the sexual favor with her first handjob!")
+        if not ellie_has_brought_lunch_date():
+            if ellie.love < 40:
+                love_story_list.append("Increase [ellie.title]'s love to continue this story.")
+            else:
+                love_story_list.append("Work in the morning and [ellie.title] maybe surprise you with a meal.")
+            return love_story_list
+        else:
+            love_story_list.append("[ellie.title] surprised you at work with a delicious home cooked meal.")
+            if ellie_has_given_blowjob():
+                love_story_list.append("You made her cum while eating her out in your office.")
+
         love_story_list.append("There is nothing more in this story line at this time.")
         return love_story_list
 
@@ -44,7 +55,7 @@ init 10 python:
         return lust_story_list
 
     def ellie_story_teamup_list():
-        return [[" ", " "]]
+        return []
 
     def ellie_story_other_list():
         other_info_list = ["[ellie.title] is thankful you hired her, despite blackmailing you."]

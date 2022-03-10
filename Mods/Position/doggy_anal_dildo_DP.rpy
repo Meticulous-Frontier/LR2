@@ -31,7 +31,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = SB_doggy_anal_dildo_dp.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = SB_doggy_anal_dildo_dp.position_tag, visible_enough = True, prefer_half_off = True)
 
     $ the_girl.draw_person(position = SB_doggy_anal_dildo_dp.position_tag)
 
@@ -345,7 +345,11 @@ label transition_doggy_doggy_anal_dp(the_girl, the_location, the_object):
     return
 
 label transition_default_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
-    "[the_girl.possessive_title] gets on her hands and knees as you kneel behind her. You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
+    "[the_girl.possessive_title] gets on her hands and knees as you kneel behind her."
+    if not the_girl.vagina_available():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_doggy_anal_dildo_dp.position_tag, visible_enough = True, prefer_half_off = True)
+    "You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
     "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 

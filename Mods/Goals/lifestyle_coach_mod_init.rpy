@@ -5,7 +5,7 @@ init 5 python:
 
 label activate_lifestyle_coach_mod_core(stack):
     python:
-        #lifestyle_coach_init()
+        # lifestyle_coach_init()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return

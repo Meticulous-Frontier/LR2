@@ -21,7 +21,6 @@ init:
 
 label intro_breeding_missionary(the_girl, the_location, the_object):
     "You run your hands along [the_girl.title]'s hips, feeling the shape of her body."
-    #TODO next line only if the girl is already pregnant. change this statement after 29.1 to match the pregnancy condition
     if the_girl.knows_pregnant():
         mc.name "I want to practice putting another baby inside you. Let's pretend like we are trying to make another one."
         the_girl "Mmm, sounds nice. Okay, I'm up for a little roleplaying."
@@ -32,7 +31,7 @@ label intro_breeding_missionary(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = breeding_missionary.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = breeding_missionary.position_tag, visible_enough = True, prefer_half_off = True)
 
     if mc.condom:
         the_girl "Why are you wearing that thing? Let's get that off of you."
@@ -175,13 +174,15 @@ label outro_breeding_missionary(the_girl, the_location, the_object):
 
 label transition_default_breeding_missionary(the_girl, the_location, the_object):
     "You run your hands along [the_girl.title]'s hips, feeling the shape of her body."
-    #TODO next line only if the girl is already pregnant. change this statement after 29.1 to match the pregnancy condition
-    if False:
+    if the_person.knows_pregnant():
         mc.name "I want to practice putting another baby inside you. Let's pretend like we are trying to make another one."
         the_girl "Mmm, sounds nice. Okay, I'm up for a little roleplaying."
     else:
         mc.name "Lie down now. It's time for me to put a baby inside you."
     "She nods meekly and lies down on the [the_object.name], waiting while you climb on top of her."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = breeding_missionary.position_tag, visible_enough = True, prefer_half_off = True)
     if mc.condom:
         the_girl "Why are you wearing that thing? Let's get that off of you."
         "She reaches down and pulls off your condom."

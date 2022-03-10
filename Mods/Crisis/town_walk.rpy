@@ -1,8 +1,5 @@
 ## Town walk Crisis Mod by Tristimdorion
 # Based on the Pilotus13 Vanilla extension
-init -1 python:
-    town_walk_mod_weight = 10   # Due to limited time window we give it a higher probability
-
 init 2 python:
     def town_walk_crisis_requirement():
         if time_of_day >= 1 or time_of_day <= 3:
@@ -17,9 +14,9 @@ init 2 python:
         return get_random_from_list(candidates)
 
     town_walk_crisis_action = ActionMod("Town Walk", town_walk_crisis_requirement, "town_walk_crisis_action_label", category = "Misc",
-        menu_tooltip = "On occasion when you walk down town, you notice, someone did not close their bedroom curtains.", is_crisis = True, crisis_weight = town_walk_mod_weight)
+        menu_tooltip = "On occasion when you walk down town, you notice, someone did not close their bedroom curtains.", is_crisis = True)
 
-label town_walk_crisis_action_label:
+label town_walk_crisis_action_label():
     ## You spy on a neighbor during your town walk activities
     $ the_person = get_town_walk_person()
     $ old_location = mc.location
@@ -56,11 +53,11 @@ label town_walk_crisis_action_label:
         the_person "I should get dressed for dinner. Don't have much time..."
 
     if (the_person.strip_outfit_to_max_sluttiness(narrator_messages = [
-        "[the_person.possessive_title] takes off her [strip_choice.name] and throws it on the bed.",
-        "[the_person.possessive_title] keeps going and drops her [strip_choice.name].",
-        "[the_person.possessive_title] strips off her [strip_choice.name] and tosses it to the side.",
-        "[the_person.possessive_title] removes her [strip_choice.name] and drops it to the floor.",
-        "[the_person.possessive_title] quickly slides off her [strip_choice.name] and leaves it on the ground."
+        "[the_person.possessive_title] takes off her [strip_choice.display_name] and throws it on the bed.",
+        "[the_person.possessive_title] keeps going and drops her [strip_choice.display_name].",
+        "[the_person.possessive_title] strips off her [strip_choice.display_name] and tosses it to the side.",
+        "[the_person.possessive_title] removes her [strip_choice.display_name] and drops it to the floor.",
+        "[the_person.possessive_title] quickly slides off her [strip_choice.display_name] and leaves it on the ground."
         ], temp_sluttiness_boost = 20)):
 
         # only show this part of the dialog if she removed clothing

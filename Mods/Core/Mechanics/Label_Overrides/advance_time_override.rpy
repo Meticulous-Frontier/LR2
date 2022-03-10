@@ -90,14 +90,14 @@ init 5 python:
         "advance_time_end_of_day_label", priority = 7, allow_disable = False)
 
     advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_mandatory_morning_crisis_requirement,
-        "advance_time_mandatory_morning_crisis_label", priority = 8, category = "Gameplay", allow_disable = False)
+        "advance_time_mandatory_morning_crisis_label", priority = 10, category = "Gameplay", allow_disable = False)
 
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
-        "advance_time_random_morning_crisis_label", priority = 9, category = "Gameplay")
+        "advance_time_random_morning_crisis_label", priority = 11, category = "Gameplay")
 
     # People run move Actions
     advance_time_people_run_move_action = ActionMod("Moves people to their destinations", advance_time_next_requirement,
-        "advance_time_people_run_move_label", priority = 15, allow_disable = False)
+        "advance_time_people_run_move_label", priority = 8, allow_disable = False)
 
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action,
@@ -199,7 +199,6 @@ init 5 python:
     def advance_time_run_turn(people):
         start_time = time.time()
         for (person, place) in people: #Run the results of people spending their turn in their current location.
-            person.validate_stats()
             person.run_turn()
 
         mc.business.run_turn()
@@ -401,6 +400,7 @@ label advance_time_end_of_day_label():
     call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
 
     python:
+        renpy.restart_interaction()
         mc.business.clear_messages()
         # increase morning crisis chance (once a day)
         morning_crisis_chance += 2

@@ -24,9 +24,6 @@ init 2 python:
         kaya_base_outfit.add_accessory(the_lipstick)
         kaya_base_outfit.add_accessory(the_bracelets)
 
-        # init kaya role
-        kaya_role = Role(role_name ="kaya", actions =[kaya_barista_fuck, kaya_get_drinks], hidden = True)
-
         #global kaya_role
         global kaya
         kaya = make_person(name = "Kaya", last_name ="Greene", age = 22, body_type = "thin_body", face_style = "Face_3",  tits="B", height = 0.94, hair_colour="black", hair_style = messy_hair, skin="tan" , \
@@ -37,7 +34,8 @@ init 2 python:
             forced_sexy_opinions = [["vaginal sex", 2, False], ["bareback sex", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -1, False], ["missionary style sex", 2, False], ["creampies", 2, False]])
 
         kaya.generate_home()
-        kaya.set_schedule(kaya.home, times = [0,1,2,3,4])
+        kaya.set_schedule(kaya.home, the_times = [0,1,2,3,4])
+        kaya.add_job(unemployed_job)
         kaya.home.add_person(kaya)
 
         kaya.event_triggers_dict["intro_complete"] = False    # True after first talk
@@ -63,24 +61,22 @@ init 2 python:
         if persistent.pregnancy_pref != 0:
             kaya.on_birth_control = False
 
-        kaya.add_role(kaya_role)
         return
 
 
 init -2 python:
     def kaya_setup_intro_event_requirement():
-        #return False    #Disabled for now #test
-        if alexia.is_employee() and day > alexia.event_triggers_dict.get("employed_since", 9999) + 7:
+        if alexia.is_employee() and alexia.days_employed > 7:
             return True
         return False
 
     def kaya_intro_requirement(the_person):
-        if the_person.location == coffee_shop:
+        if the_person.is_at_work():
             return True
         return False
 
     def kaya_ask_out_requirement(the_person):
-        if the_person.location == coffee_shop and the_person.love > 20 and time_of_day == 3:
+        if the_person.is_at_work() and the_person.love > 20 and time_of_day == 3:
             return not mc.business.date_scheduled_today()
         return False
 
@@ -96,7 +92,7 @@ init -2 python:
         return False
 
     def kaya_HR_start_internship_program_requirement(the_person):
-        if the_person.location == the_person.work:
+        if the_person.is_at_work():
             return True
         return False
 
@@ -105,17 +101,28 @@ init -2 python:
             return True
         return False
 
+    def kaya_meet_erica_at_uni_requirement(the_person):
+        if the_person.location == university and day%7 != 1 and the_person.sluttiness > 20 and kaya_has_had_drink_date():
+            return True
+        return False
+
     def kaya_lily_study_night_intro_requirement():
+        if not lily.has_job(sister_student_job):
+            return False
         if day%7 == 1 and time_of_day == 4:
             return True
         return False
 
     def kaya_lily_study_night_apology_requirement(the_person):
-        if the_person.location == coffee_shop:
+        if not lily.has_job(sister_student_job):
+            return False
+        if the_person.is_at_work():
             return True
         return False
 
     def kaya_lily_study_night_recurring_requirement(the_person):
+        if not lily.has_job(sister_student_job):
+            return False
         if the_person.event_triggers_dict.get("last_lily_study_night", 0) >= day:
             return False
         if day%7 == 1 and time_of_day == 4 and the_person.location == lily.home:    #TODO double check and make sure this actually works...
@@ -124,7 +131,7 @@ init -2 python:
 
 
     def kaya_uni_scholarship_intro_requirement(the_person):
-        if the_person.love > 40 and mc.business.funds > 10000 and the_person.location == university and day%7 < 4:
+        if the_person.love > 40 and mc.business.has_funds(10000) and the_person.location == university and day%7 < 4:
             return True
         return False
 
@@ -139,7 +146,7 @@ init -2 python:
         return False
 
     def kaya_moving_in_with_mother_intro_requirement(the_person):
-        if kaya.sluttiness > 40 and the_person.location == coffee_shop and kaya_studies_with_lily():
+        if kaya.sluttiness > 40 and the_person.is_at_work() and kaya_studies_with_erica():
             return True
         return False
 
@@ -187,6 +194,7 @@ init 3 python:
     kaya_asks_for_help_moving = Action("Kaya Needs Help",kaya_asks_for_help_moving_requirement,"kaya_asks_for_help_moving_label")   #40 love + 40 slut
     kaya_moving_day = Action("Kaya Moves",kaya_moving_day_requirement,"kaya_moving_day_label")
     kaya_meet_lily_at_uni = Action("Kaya and Lily Meet",kaya_meet_lily_at_uni_requirement,"kaya_meet_lily_at_uni_label")    #20 slut
+    kaya_meet_erica_at_uni = Action("Kaya and Erica Meet",kaya_meet_erica_at_uni_requirement,"kaya_meet_erica_at_uni_label")
     kaya_lily_study_night_intro = Action("Kaya and Lily Study",kaya_lily_study_night_intro_requirement,"kaya_lily_study_night_intro_label")
     kaya_lily_study_night_recurring = Action("Kaya and Lily Study",kaya_lily_study_night_recurring_requirement,"kaya_lily_study_night_recurring_label")
     kaya_lily_study_night_apology = Action("Apologize to Kaya",kaya_lily_study_night_apology_requirement,"kaya_lily_study_night_apology_label")
@@ -203,10 +211,15 @@ init 3 python:
 
 
 label kaya_setup_intro_event_label():
-    $ the_person = kaya
-    $ kaya.set_schedule(coffee_shop, days = [0, 1, 2, 3, 4], times = [2,3])    #TODO make this the coffee shop
-    $ kaya.set_schedule(university, days = [0, 1, 2, 3, 4], times = [1])
-    $ kaya.add_unique_on_room_enter_event(kaya_intro)
+    python:
+        # init kaya role
+        kaya_role = Role(role_name ="kaya", actions =[kaya_barista_fuck, kaya_get_drinks], hidden = True)
+        kaya_barista_job = Job("Barista", kaya_role, coffee_shop, work_times = [2, 3])
+        kaya.add_job(kaya_barista_job)
+        # she also studies
+        kaya.set_schedule(None, the_times = [1,2,3])    # Free roam
+        kaya.set_schedule(university, the_days = [0, 1, 2, 3, 4], the_times = [1])
+        kaya.add_unique_on_room_enter_event(kaya_intro)
     return
 
 label kaya_intro_label(the_person):
@@ -448,7 +461,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     $ clear_scene()
     "Wow, what a busy night! You feel like you have a connection with [the_person.title]. She definitely seems eager too..."
     $ the_person.add_unique_on_room_enter_event(kaya_moving_in_with_mother_intro)   #Link this for now. Probably will change to a different place later on.
-    $ the_person.add_unique_on_room_enter_event(kaya_meet_lily_at_uni)
+    $ the_person.add_unique_on_room_enter_event(kaya_meet_erica_at_uni)
     $ kaya.event_triggers_dict["drink_date_complete"] = True
     return
 
@@ -514,7 +527,62 @@ label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Li
     $ kaya.event_triggers_dict["has_started_internship"] = False
     return
 
+label kaya_meet_erica_at_uni_label(the_person):     #This label is a repalcement for kaya and lily event.
+    $ scene_manager = Scene()
+    "You go for a stroll at the university. With no particular aim, you just walk around, checking out some of the girls, stretching your legs a bit."
+    the_person "[the_person.mc_title]? Is that you?"
+    $ scene_manager.add_actor(the_person)
+    "You turn and see [the_person.possessive_title]. She goes to class here, but it is a big school, so you are surprised to see her."
+    mc.name "Ah, hello there [the_person.title]."
+    "She gives you a smile and chirps at you."
+    the_person "We go out one night for drinks and you are stalking me at class, mister?"
+    "[the_person.title] is very quick-witted. You can tell she is half joking... but also seriously wanting to know what you are doing here."
+    mc.name "Ah, sorry I wasn't looking for you, to be honest... I was... er..."
+    "Just then, you are saved by another familiar voice."
+    erica "Oh hey, [erica.mc_title]!"
+    $ scene_manager.add_actor(erica, display_transform = character_center_flipped)
+    "[erica.possessive_title] walks up."
+    erica "You didn't tell me you were gonna be here! I'm just headed to the gym, want to go workout?"
+    $ scene_manager.update_actor(the_person, emotion = "angry")
+    the_person "Ahhh... I see... you aren't here to see me..."
+    "[erica.title] suddenly realizes you were talking with [the_person.possessive_title]. The edge of jealously is clear in [the_person.title]'s voice."
+    erica "Oh! Sorry, I didn't realize you were talking to her..."
+    mc.name "Ah, let me introduce you. [the_person.name], this is [erica.name]. She is taking classes here also, and we workout together once in a while."
+    $ scene_manager.update_actor(the_person, emotion = "sad")
+    "You can tell [the_person.title] is still skeptical."
+    the_person "Ah... so you are... workout buddies?"
+    mc.name "Yeah, something like that."
+    erica "Nice to meet you! You look kind of familiar... have I seen you somewhere before?"
+    the_person "Maybe, I work over at the coffee shop..."
+    erica "Ah, probably not there, coffee makes me anxious."
+    "The girls start to chat, trying to figure out if they know each other from somewhere."
+    "Suddenly, they make a breakthrough."
+    erica "Ah! Yes I have that class too! It is so hard!"
+    the_person "Yeah it is definitely challenging."
+    erica "Hey... do you want to get together to study sometime? They have study rooms here at the university."
+    the_person "That would be really helpful."
+    "As you watch the two girls interact, you can't help but start to get turned on."
+    "Two hot college coeds. You've already started messing around with [erica.possessive_title], the other is right on the brink."
+    "You can't help but imagine the two girls making out... getting on their knees in front of you, one of them taking the tip of your cock in her mouth while the other licks the shaft..."
+    $ mc.change_locked_clarity(20)
+    the_person "[the_person.mc_title]?"
+    erica "Earth to [mc.name]?"
+    mc.name "I'm sorry... I spaced out for a second."
+    the_person "[erica.name] just asked if you ever took molecular biology when you were here..."
+    mc.name "Oh! Yes, actually that is one of my specialties. I use it every day at my pharmaceutical company."
+    erica "Ah! You should join us sometime. I bet you could help us out if we get stuck."
+    the_person "If it isn't too much of a bother."
+    mc.name "No, I'll try to swing by sometime.."
+    "[the_person.possessive_title] and [erica.title] trade phone numbers. Sounds like you have a study party to crash on Tuesday!"
+    $ town_relationships.update_relationship(erica, kaya, "Friend")
+    $ kaya.add_unique_on_room_enter_event(kaya_erica_teamup_action)
+    $ kaya.event_triggers_dict["has_started_internship"] = False
+    $ kaya.set_override_schedule(university, the_days = [1], the_times = [4])
+    $ erica.set_override_schedule(university, the_days = [1], the_times = [4])
+    return
+
 label kaya_lily_study_night_intro_label():
+    #This should no longer trigger
     $ the_person = kaya
     $ scene_manager = Scene()
     "As you are getting ready for bed, the sound of girls chattering and giggling can be heard from down the hall."
@@ -551,8 +619,7 @@ label kaya_lily_study_night_intro_label():
     $ scene_manager.add_actor(mom)
     "[mom.possessive_title] grabs the glass from you before you can react and starts to sip on it."
     mom "Thank you honey, you are so thoughtful."
-    $ mom.change_love(2)
-    $ mom.change_happiness(5)
+    $ mom.change_stats(happiness = 5, love = 2)
     mc.name "Err, right."
     "You look at the second glass for a moment. This could get awkward when the other two get here."
     $ scene_manager.add_actor(lily, display_transform = character_center)
@@ -620,15 +687,15 @@ label kaya_lily_study_night_intro_label():
         $ mom.change_happiness(-5)
     $ scene_manager.clear_scene()
     "Alone in the kitchen, you are left with more questions than answers. As you walk down the hall back to your bedroom, you hear the girls in [lily.title]'s room, but decide to leave them alone."
-    $ the_person.set_alt_schedule(lily_bedroom, days = [1], times = [4])
-    $ lily.set_alt_schedule(lily_bedroom, days = [1], times = [4])  #This should already be set, but just in case, make sure she is there.
-    $ kaya.add_unique_on_room_enter_event(kaya_lily_study_night_recurring)
-    $ kaya.add_unique_on_talk_event(kaya_lily_study_night_apology)
+    $ the_person.set_override_schedule(lily_bedroom, the_days = [1], the_times = [4])
+    $ lily.set_override_schedule(lily_bedroom, the_days = [1], the_times = [4])  #This should already be set, but just in case, make sure she is there.
+    $ kaya.add_unique_on_room_enter_event(kaya_erica_teamup_action)
     $ kaya.add_unique_on_talk_event(kaya_uni_scholarship_intro)
     $ kaya.event_triggers_dict["studies_with_lily"] = True
     return
 
 label kaya_lily_study_night_apology_label(the_person):
+    #This should also no longer trigger
     "After the disaster that was Tuesday night, you decide you should probably talk to [the_person.possessive_title] and apologize about it."
     "Stepping up to the counter, [the_person.title] realizes it is you and smiles."
     $ the_person.draw_person(emotion = "happy")
@@ -654,6 +721,7 @@ label kaya_lily_study_night_apology_label(the_person):
     return
 
 label kaya_lily_study_night_recurring_label(the_person):
+    #This should no longer trigger
     $ the_person = kaya
     $ scene_manager = Scene()
     "You remember that [the_person.possessive_title] was supposed to come over tonight to study with [lily.title], so you swing by her room."
@@ -780,9 +848,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     mc.name "Well, for a STEM program... we currently do medical research and pharmaceutical manufacturing, so I suppose Chemistry and Biology?"
     nora "I'll go corner the CFO right away. Can I give him your financial details? We could have this girl you are talking about official by this weekend."
     mc.name "Do it. I have the funds to start this ASAP."
-    $ nora.change_love(5)
-    $ nora.change_happiness(10)
-    $ nora.change_obedience(10)
+    $ nora.change_stats(happiness = 10, love = 3, obedience = 5)
     nora "It's decided then. I'll go find him right now. You're doing a wonderful thing, supporting students, [nora.mc_title]."
     $ clear_scene()
     "You leave [nora.possessive_title]'s lab. You text [the_person.possessive_title]."
@@ -898,16 +964,17 @@ label kaya_moving_in_with_mother_intro_label(the_person): #This label is called 
     mc.name "Hey, do you want to go out for a couple drinks tonight?"
     $ the_person.draw_person(emotion = "sad")
     the_person "I can't. My mother's health has been going downhill really fast the last couple of weeks."
-    the_person "It seems that she probably will not survive much longer, so I need to spend as much time with her as I can. I had to stop studying with your sister too..."
+    the_person "It seems that she probably will not survive much longer, so I need to spend as much time with her as I can."
     mc.name "I am so sorry. If there is anything I can do for you, please let me know."
-    $ the_person.change_love(5)
     the_person "Thank you. It means a lot to hear that from you."
+    the_person "If you want to swing by, I still make time to study with [erica.name] on Tuesdays, but my schedule is pretty much maxed out now..."
+    $ the_person.change_love(5)
     "Unfortunately, it seems that [the_person.possessive_title] may not be able to spend much time with you going forward."
     $ mc.business.add_mandatory_crisis(kaya_asks_for_help_moving)
     $ kaya.event_triggers_dict["move_help_day"] = day + 7
     $ kaya.event_triggers_dict["can_get_drinks"] = False
-    $ kaya.event_triggers_dict["studies_with_lily"] = False
-    $ the_person.set_alt_schedule(None, days = [1], times = [4])
+    #$ kaya.event_triggers_dict["studies_with_lily"] = False
+    # $ the_person.set_override_schedule(None, the_days = [1], the_times = [4])
     return
 
 label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal. Something like a week later? Maybe less?
@@ -962,54 +1029,30 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     "It starts docile, but quickly heats up. Her tongue is hungry for yours and soon you are making out earnestly."
     $ the_person.change_arousal(10)
     $ mc.change_locked_clarity(20)
-    if the_person.event_triggers_dict.get("incest_warnings", 0) == 2:   #You've gotten two warnings about the relationship
-        "As you are making out with [the_person.title] though, something just feels off."
-        "Something about the warning your mother gave you the other day. You feel like you need to get to know her more first before you go any farther."
-        "Besides, she is clearly dealing with some emotional issues. It wouldn't be right to take advantage of her."
-        "You break off the kiss and she looks up at you."
-        mc.name "Hey, I really like you... but I'm worried you are going through a lot of stuff right now... I don't want to take advantage of you..."
-        the_person "No... no no no please don't do this!"
-        the_person "Just because my mom is sick doesn't mean I can't think for myself... or want what I want!"
-        the_person "Please... I don't want to be alone in my last night here..."
-        menu:
-            "Kiss her (Keep going)":
-                "You can't say no to her. You grab her and start to make out again. Tongues meet and the urgency returns immediately."
-            "Call it a night":
-                mc.name "I believe you, but let's just put this on pause, okay?"
-                mc.name "I'll come back in the morning, I'll still help you move. I don't want to stop seeing you, but I don't want it to be like this."
-                the_person "Okay... I understand..."
-                $ the_person.change_happiness(-5)
-                $ the_person.change_obedience(5)
-                $ mc.business.add_mandatory_crisis(kaya_moving_day)
-                the_person "Tomorrow then?"
-                mc.name "I'll be here."
-                "You leave [the_person.possessive_title]'s place. It hurts to leave her like that, but something about it still just feels off."
-                return
-    elif the_person.event_triggers_dict.get("incest_warnings", 0) == 1:     #You might realize what is happening.
-        "You hands reach down and grope [the_person.possessive_title]'s ass. You've been waiting a while to get a piece of this!"
-        "But still, something feels off. She seems desperate, and you wonder if her emotional state is okay."
-        "You break off the kiss for a moment and look at her."
-        mc.name "Are you sure you are okay with this? You've been through a lot lately, I feel like I'm kind of taking advantage of you."
-        the_person "God... you are just perfect, aren't you?"
-        the_person "It's okay. I know my mom is sick... but it's been this way for a while."
-        the_person "I knew this day would come eventually. Besides, I'm a big girl. I can decide what I want for myself!"
-        "She runs her hand down your chest and start to stroke you through your pants..."
-        $ mc.change_locked_clarity(40)
-        the_person "And right now, I want you!"
-        menu:
-            "Fuck Her (Keep going)":
-                "You can't say no to her. You grab her and start to make out again. Tongues meet and the urgency returns immediately."
-            "Call it a night":
-                mc.name "I believe you, but my gut just keeps telling me this isn't the right time... lets put this on pause, okay?"
-                mc.name "I'll come back in the morning, I'll still help you move. I don't want to stop seeing you, but I don't think I'm quite ready for this."
-                the_person "Okay... I understand..."
-                $ the_person.change_happiness(-5)
-                $ the_person.change_obedience(5)
-                $ mc.business.add_mandatory_crisis(kaya_moving_day)
-                the_person "Tomorrow then?"
-                mc.name "I'll be here."
-                "You leave [the_person.possessive_title]'s place. It hurts to leave her like that, but something about it still just feels off."
-                return
+    "You hands reach down and grope [the_person.possessive_title]'s ass. You've been waiting a while to get a piece of this!"
+    "But still, something feels off. She seems desperate, and you wonder if her emotional state is okay."
+    "You break off the kiss for a moment and look at her."
+    mc.name "Are you sure you are okay with this? You've been through a lot lately, I feel like I'm kind of taking advantage of you."
+    the_person "God... you are just perfect, aren't you?"
+    the_person "It's okay. I know my mom is sick... but it's been this way for a while."
+    the_person "I knew this day would come eventually. Besides, I'm a big girl. I can decide what I want for myself!"
+    "She runs her hand down your chest and start to stroke you through your pants..."
+    $ mc.change_locked_clarity(40)
+    the_person "And right now, I want you!"
+    menu:
+        "Fuck Her (Keep going)":
+            "You can't say no to her. You grab her and start to make out again. Tongues meet and the urgency returns immediately."
+        "Call it a night":
+            mc.name "I believe you, but my gut just keeps telling me this isn't the right time... lets put this on pause, okay?"
+            mc.name "I'll come back in the morning, I'll still help you move. I don't want to stop seeing you, but I don't think I'm quite ready for this."
+            the_person "Okay... I understand..."
+            $ the_person.change_happiness(-5)
+            $ the_person.change_obedience(5)
+            $ mc.business.add_mandatory_crisis(kaya_moving_day)
+            the_person "Tomorrow then?"
+            mc.name "I'll be here."
+            "You leave [the_person.possessive_title]'s place. It hurts to leave her like that, but something about it still just feels off."
+            return
     "Primitive urges are overtaking you both. It isn't long until clothes start to come off."
     $ the_person.strip_to_tits(prefer_half_off = True, position = "kissing")
     "With her perky tits out, you quickly kiss down the side of her neck and to her chest. You lick and suckle on one nipple while you grope her other tit with your hands."
@@ -1055,13 +1098,13 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
         "You quickly get on top of her. Her legs naturally wrap around your body as she urges closer."
         the_person "Oh my god, oh fuck! I've been wanting this since the first night you took me out..."
         mc.name "I've been wanting this for a lot longer than that."
-        $ the_person.change_happiness(3)
-        $ the_person.change_love(5)
+        $ the_person.change_stats(happiness = 5, love = 2)
         "When your cock finally hits her slit, she reaches down with her hand and guides it to her soaking wet hole."
         "You slide yourself in easily. [the_person.possessive_title] is wet and ready for you so you start to fuck her immediately."
         $ the_person.break_taboo("vaginal_sex")
         call fuck_person(the_person, private=True, start_position = missionary, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_kaya_sex_at_Home_01
-        if the_person.has_creampie_cum():
+        $ report_log = _return
+        if report_log.get("creampies", 0) > 0:
             the_person "Oh my god... I never knew how good it could be to get filled like that!"
             $ become_pregnant(the_person, mc_father = True) #For story reasons, knock her up for sure.
             "[the_person.possessive_title] rubs her belly. A bit of your cum is dribbling down her slit, the rest deposited deep inside of her."
@@ -1126,7 +1169,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
                 $ came_inside_kaya = _return
             "Leave her alone":
                 pass
-    elif the_person.event_triggers_dict.get("incest_warnings", 0) == 1: #One last chance to fuck her if we only had soft incest warning.
+    else:
         mc.name "God you are hot. You know that?"
         $ scene_manager.update_actor(the_person, position = "stand3")
         the_person "You're pretty good looking yourself."
@@ -1233,74 +1276,32 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     sakari "Oh, that can probably just go in my closet for now. My room is the one on the right."
     $ scene_manager.clear_scene()
     "You walk into [sakari.possessive_title]'s room and place the box on an empty shelf in her closet. When you finish putting it up, you glance around her room."
-    "Suddenly, you see a picture on her wall and you stop in your tracks. It is a picture of a much younger [sakari.title], but she is standing suspiciously close to a man you recognize instantly."
-    "The picture is of [sakari.possessive_title] and your father! And they are clearly close to one another in the picture."
-    "You are stunned... Why would she have a picture of her and your father on the wall? Did they know each other? Did they..."
+    "Suddenly, you see a picture on her wall. It is a picture of a much younger [sakari.title], but she is standing suspiciously close to a man you feel like you almost recognize."
+    "The picture of [sakari.possessive_title] and the man make it clear that they are close. He seems so familiar, but you can't quite put your finger on why."
     $ scene_manager.add_actor(sakari)
     sakari "Ah, thank you for all your help, young man."
     "Her eyes follow yours to the picture on the wall."
     mc.name "That's a nice picture. Who is the man?"
     sakari "That would be [the_person.name]'s father. He and I had, I guess you would call it an office romance."
-    "Your father... he had a mistress!?!"
     sakari "We worked together for a while, but then things got complicated."
     mc.name "I'm sorry to hear that."
     sakari "Yes. He died a while ago, and I miss him. He was a good man."
-    "You can't believe it. Your father had an affair? And [the_person.title] is..."
-    "You are speechless. How could this happen? Does [mom.possessive_title] know about this?"
-    "Of course she does! That's why she was acting so weird around her the other night when [the_person.possessive_title] came over to study with [lily.title]."
-    "And that would make [lily.possessive_title] and her half sisters! No wonder they are so similar and have the same laugh and smile!"
+    "Wow, you feel horrible. [kaya.title] already lost her dad... and now her mom is dying also."
     $ scene_manager.add_actor(the_person, display_transform = character_center_flipped)
     the_person "Hey, everything going okay in here?"
     sakari "Yes, I was just showing [sakari.mc_title] here some old pictures."
     "You look with new eyes at [the_person.possessive_title]."
     if came_inside_kaya:
         "Oh god... your cum is inside her right now!"
-    if the_person.event_triggers_dict.get("incest_warnings", 0) == 0:   #You've fucked around with lily and jennifer already, before this happened.
-        "You've been messing around already with [lily.title] and [mom.possessive_title]... and now you have discovered a long-lost half sister."
-        if kaya_had_condom_talk():
-            "And you've already fucked her too!"
-            if came_inside_kaya:
-                "Your cum is already swimming around inside her... dripping down her legs as she stands there."
-                $ mc.change_locked_clarity(50)
-                "You feel yourself getting turned on. Fuck you can't let yourself get aroused right now."
-            elif the_person.is_pregnant():
-                "And you came inside her last night! You've already seeded her!"
-                $ mc.change_locked_clarity(30)
-                "You feel yourself getting turned on. Fuck you can't let yourself get aroused right now."
-        else:
-            "You can't believe you almost fucked her. You should probably talk to her about things before you take things any farther..."
-    elif the_person.event_triggers_dict.get("incest_warnings", 0) == 1:
-        "You've already messed around a little bit with your family since you started up the serum business, and now you have discovered a long-lost half sister!"
-        if kaya_had_condom_talk():
-            "You feel a bit conflicted. You've already fucked her!"
-            if came_inside_kaya:
-                "You just came inside her a couple hours ago! Your cum is still inside her, slowly dripping down her legs, even as she stands there..."
-                $ mc.change_locked_clarity(30)
-                "You try to clear your brain. It's so hot... but you still feel conflicted about it."
-            elif the_person.is_pregnant():
-                "And you came inside her last night! You've already seeded her!"
-                $ mc.change_locked_clarity(30)
-                "You try to clear your brain. It's so hot... but you still feel conflicted about it."
-        else:
-            "You can't believe you almost fucked her. You should probably talk to her about things before you take things any farther..."
-    else:
-        "You can't believe it. You've considered using serums on your family from time to time, but so far you haven't taken anything too far..."
-        if kaya_had_condom_talk():
-            "But with [the_person.possessive_title]... you've already fucked!"
-            if came_inside_kaya:
-                "She has your cum swimming around inside her right now! You start to feel a bit sick to your stomach."
-            elif the_person.is_pregnant():
-                "You came inside her last night! Oh god, she could be pregnant already! You feel a bit sick to your stomach."
-        else:
-            "You can't believe you almost fucked your half sister. You are thankful for the warning [mom.possessive_title] gave you now."
+        "You wonder if she has any other family around... someone who could support her if she got knocked up?"
 
     the_person "Are you okay [the_person.mc_title]? You look like you've seen a ghost..."
     "You finally snap out of it and regain your composure."
     mc.name "Right. No I'm fine, just thinking about some things."
     the_person "Good! I just got the last of the boxes in. We are done! Now I get to start unpacking."
-    mc.name "Ah, I'm glad I could help you si... [the_person.title]."
+    mc.name "Ah, I'm glad I could help you [the_person.title]."
     the_person "UGH, but first I need to take the truck back to the rental place. Can I give you a ride home while I'm on my way?"
-    mc.name "No, that's okay. I need to swing by work anyway, I have somethings I left there I need to take care of anyway."
+    mc.name "No, that's okay. I need to swing by work. I have somethings I left there I need to take care of anyway."
     the_person "Alright... Mom I'll be back in a little bit, okay?"
     sakari "Okay. You take care too, young man."
     "You say goodbye and leave. You can hear the moving truck start up as you walk away."
@@ -1309,17 +1310,17 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     $ mc.location.show_background()
     # set kaya living with her mom
     $ kaya.home = sakari.home
-    $ kaya.set_schedule(the_location = sakari.home, times = [0,4])
+    $ kaya.set_schedule(the_location = sakari.home, the_times = [0,4])  #Should still meet with erica on tuesday.
     $ kaya.event_triggers_dict["mc_knows_relation"] = True
     "You leave the apartment and just walk for a while. You have a lot to think about."
-    "This information... there's no way that [the_person.title] knows about it. You HAVE to talk to her about it."
-    "But you are going to need time to process things. Does this change anything about how you feel about her?"
+    "You feel a tug in your heart. You want to be there for [kaya.possessive_title] over the next few weeks."
+    "And her mom, [sakari.title]... you wonder what is going on with her? Poor [kaya.title]."
     "She's funny, great to be around..."
     if kaya_had_condom_talk():
         "And an awesome fuck."
     else:
         "And seems eager to fuck."
-    "[the_person.title] is going to need some time to settle in anyway. Maybe you should give her a week?"
+    "[the_person.title] is going to need some time to settle in anyway. You decide to give her some time to settle in before you bug her."
     #TODO write personality greetings in such a way that makes her impossible to interact with during this week.
     $ mc.business.add_mandatory_crisis(kaya_share_the_news)
     $ kaya.event_triggers_dict["share_news_day"] = day + 7
@@ -1337,8 +1338,9 @@ label kaya_fuck_in_apartment_label(the_person): #We already have her bent over d
     "You run your hands along her soft curves a few times, one time after running your hands down the sides, you them back up between her legs. Her cunt is soaked."
     the_person "Ah! You don't have to tease me... just stick it in!"
     call fuck_person(the_person, private=True, start_position = SB_doggy_standing, skip_intro = True, skip_condom = kaya_condom_check()) from _call_kaya_doggy_at_home_04
+    $ report_log = _return
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
-    if the_person.has_creampie_cum() and not the_person.is_pregnant() and persistent.pregnancy_pref != 0: #Knock her up, first try
+    if report_log.get("creampies", 0) > 0 and not the_person.is_pregnant() and persistent.pregnancy_pref != 0: #Knock her up, first try
         the_person "Oh my god... I never knew how good it could be to get filled like that!"
         $ become_pregnant(the_person, mc_father = True) #For story reasons, knock her up for sure.
         "[the_person.possessive_title]'s legs are shaking. A bit of your cum is dribbling down her slit, the rest deposited deep inside of her."
@@ -1347,7 +1349,7 @@ label kaya_fuck_in_apartment_label(the_person): #We already have her bent over d
         the_person "Oh god... of course, I finally find a stud that will fuck me senseless and I move out of my apartment the same day..."
         "[the_person.possessive_title] is panting."
         the_person "Just... give me a second... I'll be good to go."
-    if the_person.has_creampie_cum():
+    if report_log.get("creampies", 0) > 0:
         $ came_inside_kaya = True
     the_person "I'm gonna clean up in the bathroom, give me a minute."
     $ scene_manager.clear_scene()
@@ -1399,42 +1401,24 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
         the_person "You don't have to say anything back, and I understand if you need time... but I feel like I need to be honest about my feelings and how I feel about you."
         "You get a knot in a your stomach. Normally getting with a hot piece of ass like [the_person.title] would be exciting..."
         "[the_person.possessive_title] is looking at you, nervous. You can tell she is excited, but is scared about how you are going to react."
+
     mc.name "Yeah, well, there is something I need to talk to you about too."
-    mc.name "I'm not sure how to say this, and it's going to sound impossible, but, I think... we might be related."
+    mc.name "I'm not sure how to say this, but, I feel like I am taking advantage of you."
     the_person "You think... what?"
-    mc.name "When I was helping you move in with your mom, in her bedroom there was a picture of her with a man. She said that the man was your dad..."
-    the_person "Yeah, my dad isn't alive anymore..."
-    mc.name "Same. [the_person.title], the man in the picture is ALSO my father..."
-    the_person "That's... {=kaya_lang}kore e taea{/=kaya_lang}..."
-    "[the_person.title] is quiet for a while."
-    mc.name "[the_person.title], you are my half-sister."
-    "[the_person.possessive_title] bites her lip."
-    the_person "Does that... does that change things... for you?"
-    the_person "I believe you. My stomach... I know you're right. I can feel it."
-    the_person "But, that doesn't change the way I feel about you. In my culture, it isn't unheard of for things like this to happen."
-    mc.name "[the_person.title]..."
-    if the_person.is_pregnant():
-        "[the_person.title] rubs her belly."
-        the_person "I mean... we've already made a baby!"
-    mc.name "What are you saying?"
-    the_person "We could keep it secret! Right? I mean, no one is going to look at us and think..."
-    mc.name "I'm pretty sure my mom knows."
-    the_person "[mom.name]?"
-    mc.name "She was acting really funny when you came over to study with [lily.name]. I'm pretty sure she recognized your name."
-    $ the_person.draw_person(position = "sitting", emotion = "sad")
-    "[the_person.possessive_title] is on the verge of tears."
-    the_person "That's it? You want to just... give up?"
-    mc.name "Whoa whoa. I never said anything about that."
-    mc.name "There's a lot going on here, and I just want to approach things logically."
-    mc.name "I know the way I feel, and this is what I want to do."
-    "Warning! This decision has lasting impact on your relationship with [the_person.title]! Choose carefully!"
+    mc.name "Your mom told me about how your dad died... and with your mom sick too, I know you're in a vulnerable state..."
+    mc.name "I should have kept it in my pants... and I'm sorry."
+    the_person "That's... I don't understand. Are you saying you don't want to..."
     menu:
-        "Make this work":
-            mc.name "I'll talk to my mom about it. She loves me, and I'm sure in time she'll come to love you too."
-            the_person "[the_person.mc_title], are you saying..."
-            mc.name "I want to make this work. Honestly, I didn't think that you would be open to something like this."
+        "You want to be with her":
+            mc.name "That isn't what I'm saying. [kaya.title], you are funny, and great to be around, and I really want to make this work."
+            mc.name "I'm just really feeling guilty about the way things went down."
+            if kaya.is_pregnant():
+                mc.name "And now you're pregnant and..."
+            the_person "Geeze, you scared me! I thought you were really going to say no!"
+            $ the_person.change_happiness(10)
+            mc.name "I want to make this work. Honestly."
             $ the_person.draw_person(position = "sitting", emotion = "happy")
-            $ the_person.change_love(10)
+            $ the_person.change_love(5)
             mc.name "We can figure this whole thing out. Together."
             if not the_person.is_girlfriend():
                 $ the_person.add_role(girlfriend_role)
@@ -1443,10 +1427,9 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
                 the_person "Oh! Yes of course!"
             else:
                 the_person "I'm so glad to hear that you don't want to give up on things between us."
-        "Let's be friends (disabled)":
-            pass    #TODO
-        "Call it off, and get rid of the baby (disabled)" if kaya.is_pregnant():
-            pass    #TODO this our exit point for Kaya.
+        "You don't feel that way (disabled)":
+            pass
+
     $ the_person.draw_person(position = the_person.idle_pose)
     "[the_person.possessive_title] stands up."
     the_person "Come with me!"
@@ -1524,35 +1507,35 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
         call fuck_person(the_person, private=True, start_position = against_wall, skip_intro = True, skip_condom = True) from _call_kaya_sex_at_shop_08
     $ the_person.draw_person()
     "When you finish, [the_person.possessive_title] looks thoughtful."
-    the_person "Living with my mother... we are going to have to get creative so you can get naughty..."
+    the_person "Living with my mother... we are going to have to get creative so we can get naughty..."
     mc.name "I mean, you are always welcome at my place."
     the_person "Yeah. I'll see if I can come up with something."
     "As you look at her, [the_person.title] looks happy, but tired."
     mc.name "It's been a long day. Can I help you close up?"
-    the_person "No, I've got everything closed up already. You go on, I'll see you soon, okay?"
-    mc.name "Okay. Take care."
+    the_person "No, I've got everything closed up already. You go on, I'll see you soon, babe?"
+    "You smirk when she calls you that."
+    the_person "Is that okay? To call you that?"
+    mc.name "Sure."
+    $ the_person.set_mc_title("Babe")
+    mc.name "Take care."
     $ the_person.apply_outfit(the_person.planned_outfit)
     $ clear_scene()
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     "You leave the coffee shop and start to walk around downtown some, lost in your thoughts."
-    "Last week, you found out the hot barista you've been hitting on is actually a long-lost half-sister you never knew about."
+    "Last week, you found out the hot barista you've been hitting on's mom is dying and her dad is already gone."
     "And now... you are dating?"
     if the_person.is_pregnant():
         "And you've knocked her up!"
     "[the_person.possessive_title] seems very eager to put out. Normally sexy time would be something you would plan, but you decide for now to let her see what she can come up with."
-    "The obvious problem you need to deal with is [mom.possessive_title] and [lily.title]."
-    "[mom.title] likely already knows about your relationship with [the_person.title]... how is she going to react when you reveal you are dating?"
-    "And [lily.possessive_title]... she deserves to know that she also has a half-sister!"
-    "For now, there is no rush to reveal everything to them. You decide to take your time, think about it, and wait until the time is right to have those conversations."
     #TODO find some way to drop a hint here that the best way to continue the storyline is to invite Kaya over for a sleepover date.
     "NOTE: This is the end of Kaya's story content in this build."
-    #Adding on talk events to jennifer and lily that are currently blank, so that in the future when the mod updates we can write those scenes and include save game compatability.
-    $ mom.add_unique_on_talk_event(kaya_jennifer_reveal)
-    $ lily.add_unique_on_talk_event(kaya_lily_reveal)
+    #Adding on talk events to jennifer and lily that are currently blank, so that in the future when the mod updates we can write those scenes and include save game compatibility.
+    # $ mom.add_unique_on_talk_event(kaya_jennifer_reveal)
+    # $ lily.add_unique_on_talk_event(kaya_lily_reveal)
     $ kaya.add_unique_on_talk_event(kaya_barista_fuck_intro)
     $ sakari.add_unique_on_room_enter_event(sakari_intro)
-    $ sakari.set_schedule(clothing_store, days = [0, 1, 2, 3, 4], times = [1])
+    $ sakari.set_schedule(clothing_store, the_days = [0, 1, 2, 3, 4], the_times = [1])
     return
 
 label kaya_jennifer_reveal_label(the_person):
@@ -1569,6 +1552,7 @@ label kaya_barista_fuck_intro_label(the_person):
     $ kaya.event_triggers_dict["can_get_barista_quickie"] = False
     # Kaya works out a deal with a co-worker to fuck you on her break
     return
+
 label kaya_barista_fuck_label(the_person):
     pass
     # recurring scene, can fuck kaya any day on her break at work.
@@ -1635,6 +1619,9 @@ init 3 python:      #Use this section to make wrappers for determining where we 
 
     def kaya_studies_with_lily():
         return kaya.event_triggers_dict.get("studies_with_lily", False)
+
+    def kaya_studies_with_erica():
+        return kaya.event_triggers_dict.get("studies_with_erica", False)
 
     def kaya_mc_knows_relation():
         return kaya.event_triggers_dict.get("mc_knows_relation", False)

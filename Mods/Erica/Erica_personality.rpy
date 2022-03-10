@@ -56,14 +56,14 @@ label erica_greetings(the_person):
         #     the_person "Oh... hello, [the_person.mc_title]."
         #     $ add_erica_ghost_action(the_person)
         #     return
-        if the_person.event_triggers_dict.get("erica_progress", 0) >= 2:
+        if erica_get_progress() >= 2:
             the_person "Hey there, [the_person.mc_title]."
             "You see [the_person.title] here at the Gym, in her usual spot on the treadmill."
             the_person "You want to join me for another workout? I always leave the gym feeling so satisfied when we work out together!"
         else:
             the_person "Hey there!"
     elif mc.location == the_person.home:
-        if the_person.event_triggers_dict.get("erica_progress", 0) > 3:
+        if erica_get_progress() > 3:
             the_person "Hey there, [the_person.mc_title]! I wasn't expecting you! Are you here for some fun?"
             "She looks at you hopefully."
         else:
@@ -270,7 +270,7 @@ label erica_flirt_response(the_person):
         if the_person.love > 50:  #She loves you too much and is going to or already has called things off
             the_person "Didn't your mother ever tell you it's rude to hit on girls at the gym?"
             return
-        if the_person.event_triggers_dict.get("erica_progress", 0) >= 2:
+        if erica_get_progress() >= 2:
             the_person "Well why don't you workout with me for a bit and we can work up a sweat together?"
         else:
             the_person "Hey, maybe if you workout with me first."

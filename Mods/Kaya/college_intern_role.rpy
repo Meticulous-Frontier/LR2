@@ -40,7 +40,7 @@ init -1 python:
         return happiness_score
 
     def hire_new_college_intern_requirement(the_person):
-        if mc.business.funds < 5000:
+        if not mc.business.has_funds(5000):
             return "$5000 scholarship fund"
         if len(mc.business.get_intern_depts_with_openings()) > 0:
             return True
@@ -64,6 +64,20 @@ init -1 python:
         if erica.event_triggers_dict.get("team_reinstate_day", 9999) + 14 < day and mc.business.college_interns_unlocked:
             return True
         return False
+
+    def get_intern_candidates(count, stat_array, skill_array, forced_opinions):
+        candidates = []
+
+        for x in range(0,count):
+            candidates.append(
+                make_person(age = renpy.random.randint(19, 22), stat_array = stat_array, skill_array = skill_array,
+                forced_opinions = forced_opinions, job = student_job, force_random = True))
+
+        for a_candidate in candidates:
+            for x in __builtin__.range(0,2): #Reveal all of their opinions based on our policies.
+                a_candidate.discover_opinion(a_candidate.get_random_opinion(include_known = False, include_sexy = False),add_to_log = False) #Get a random opinion and reveal it.
+        return candidates
+
 
 init 1 python:
     hire_new_college_intern = Action("Hire new intern", hire_new_college_intern_requirement, "hire_new_college_intern_label")   #TODO tooltip
@@ -108,35 +122,35 @@ label hire_new_college_intern_label(the_person):
             $ the_dept = "Research"
             $ stat_array = [1,3,2]  #Interns start with extremely basic stats, but can be trained.
             $ skill_array = [1,1,2,1,1]
-            $ forced_opinions = [["research work", 1, True]]
+            $ forced_opinions = [["research work", renpy.random.randint(1, 2), True]]
         "Biology \n{color=#ff0000}{size=18}Research Team Full!{/size}{/color} (disabled)" if len(mc.business.college_interns_research) >= mc.business.max_interns_by_division:
             pass
         "Chemistry (Production)" if len(mc.business.college_interns_production) < mc.business.max_interns_by_division:
             $ the_dept = "Production"
             $ stat_array = [1,3,3]
             $ skill_array = [1,1,1,2,1]
-            $ forced_opinions = [["production work", 1, True]]
+            $ forced_opinions = [["production work", renpy.random.randint(1, 2), True]]
         "Chemistry \n{color=#ff0000}{size=18}Production Team Full!{/size}{/color} (disabled)" if len(mc.business.college_interns_production) >= mc.business.max_interns_by_division:
             pass
         "Graphic Design (Marketing)" if len(mc.business.college_interns_market) < mc.business.max_interns_by_division and mc.business.college_market_interns_unlocked:
             $ the_dept = "Marketing"
             $ stat_array = [3,1,2]
             $ skill_array = [1,2,1,1,1]
-            $ forced_opinions = [["market work", 1, True]]
+            $ forced_opinions = [["market work", renpy.random.randint(1, 2), True]]
         "Graphic Design (Marketing) (disabled)":    #In the future we may have opportunities to recruit interns for these programs.
             pass
         "Psychology (HR)" if len(mc.business.college_interns_HR) < mc.business.max_interns_by_division and mc.business.college_hr_interns_unlocked:
             $ the_dept = "HR"
             $ stat_array = [3,2,1]
             $ skill_array = [2,1,1,1,1]
-            $ forced_opinions = [["HR work", 1, True]]
+            $ forced_opinions = [["HR work", renpy.random.randint(1, 2), True]]
         "Psychology (HR) (disabled)":
             pass
         "Business (Supply)" if len(mc.business.college_interns_supply) < mc.business.max_interns_by_division and mc.business.college_supply_interns_unlocked:
             $ the_dept = "Supply"
             $ stat_array = [2,1,3]
             $ skill_array = [1,1,1,1,2]
-            $ forced_opinions = [["supply work", 1, True]]
+            $ forced_opinions = [["supply work", renpy.random.randint(1, 2), True]]
         "Business (Supply) (disabled)":
             pass
         "Never mind":
@@ -146,32 +160,19 @@ label hire_new_college_intern_label(the_person):
     the_person "OK. Here's my list of candidates from that program."
     the_person "These are all girls who are doing good academically, are starting their final semester, and have applied for the scholarship."
 
-    $ count = 3 #Num of people to generate, by default is 3. Changed with some policies
     $ clear_scene()
-    $ renpy.free_memory() #Try and free available memory
-    python: #Build our list of candidates with our proper recruitment requirements
-        candidates = []
+    $ candidates = get_intern_candidates(3, stat_array, skill_array, forced_opinions)
 
-        for x in range(0,count+1): #NOTE: count is given +1 because the screen tries to pre-calculate the result of button presses. This leads to index out-of-bounds, unless we pad it with an extra character (who will not be reached).
-            candidates.append(make_person(age = renpy.random.randint(20, 22), stat_array = stat_array, skill_array = skill_array, forced_opinions = forced_opinions, force_random = True))
-
-        reveal_count = 2
-        reveal_sex = False
-        for a_candidate in candidates:
-            for x in __builtin__.range(0,reveal_count): #Reveal all of their opinions based on our policies.
-                a_candidate.discover_opinion(a_candidate.get_random_opinion(include_known = False, include_sexy = reveal_sex),add_to_log = False) #Get a random opinion and reveal it.
-        a_candidate = None
-
-    call hire_select_process(candidates) from _call_intern_select_process_01
+    # pad with extra element to make sure we can reach all candidates
+    call hire_select_process(candidates + [1]) from _call_intern_select_process_01
     $ candidates = [] #Prevent it from using up extra memory
     $ forced_opinions = None
     $ renpy.free_memory() #Try and force a clean up of unused memory.
 
-    if not _return == "None" and isinstance(_return, Person):
+    if isinstance(_return, Person):
         $ new_person = _return
         $ new_person.generate_home() #Generate them a home location so they have somewhere to go at night.
         $ mc.business.hire_college_intern(new_person, the_dept, add_to_location = True)
-        $ new_person.set_schedule(university, days = [0, 1, 2, 3, 4], times = [1,2])
         $ new_person.set_title(get_random_title(new_person))
         $ new_person.set_possessive_title(get_random_possessive_title(new_person))
         $ new_person.set_mc_title(get_random_player_title(new_person))
@@ -204,15 +205,13 @@ label college_intern_complete_internship(the_person):
         call hire_select_process([the_person, 1]) from _call_hire_intern_work_select_process_01
         if _return == the_person:
             mc.name "Alright [the_person.title]. I can't give you any preferential treatment, but we will give it a shot."
-            $ the_person.change_happiness(5)
-            $ the_person.change_love(2)
+            $ the_person.change_stats(happiness = 5, love = 2)
             the_person "Oh my! Thank you so much! I'll see you at work sir!"
             "You use your phone and text HR to get her paperwork started to change her from intern to full employee status. You should probably decide what department she goes to."
             call hire_someone(the_person) from _call_hire_intern_work__01
         else:
             mc.name "I'm sorry, but I can't do that right now, the logistics aren't good for a new full time employee."
-            $ the_person.change_happiness(-5)
-            $ the_person.change_love(-2)
+            $ the_person.change_stats(happiness = -5, love = -2)
             the_person "Ah... I understand. Well, if you change your mind, please let me know, okay?"
             "She hangs up before you can respond. It's unfortunate, but not every intern can transition to a full employee."
     elif college_intern_happiness_score(the_person) > 100:  #She wants to keep working for you
@@ -224,15 +223,13 @@ label college_intern_complete_internship(the_person):
         call hire_select_process([the_person, 1]) from _call_hire_intern_work_select_process_02
         if _return == the_person:
             mc.name "Alright [the_person.title]. I can't give you any preferential treatment, but we will give it a shot."
-            $ the_person.change_happiness(5)
-            $ the_person.change_love(2)
+            $ the_person.change_stats(happiness = 5, love = 2)
             the_person "Ah, I was hoping you would say that! I appreciate it sir!"
             "You use your phone and text HR to get her paperwork started to change her from intern to full employee status. You should probably decide what department she goes to."
             call hire_someone(the_person) from _call_hire_intern_work__02
         else:
             mc.name "I'm sorry, but I can't do that right now, the logistics aren't good for a new full time employee."
-            $ the_person.change_happiness(-5)
-            $ the_person.change_love(-2)
+            $ the_person.change_stats(happiness = -5, love = -2)
             the_person "Ah... I understand. Well, if you change your mind, please let me know, okay?"
             "She hangs up before you can respond. It's unfortunate, but not every intern can transition to a full employee."
     elif college_intern_happiness_score(the_person) > renpy.random.randint(1,100):  #She might ask to stay on

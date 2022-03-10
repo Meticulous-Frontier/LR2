@@ -1,7 +1,4 @@
 ## Sister Phone Crisis Mod by Tristimdorion
-init -1 python:
-    sister_phone_mod_weight = 7     # Short filler event (equal chance as mom selfie)
-
 init 3 python:
     def sister_phone_crisis_requirement():
         if time_of_day > 0 and time_of_day < 3 and not mc.is_home(): #She always sends you texts while you're not at home for the middle part of the day
@@ -10,9 +7,9 @@ init 3 python:
         return False
 
     sister_phone_crisis_action = ActionMod("Sister Phone Message",sister_phone_crisis_requirement,"sister_phone_crisis_action_label",
-        menu_tooltip = "[the_person.possessive_title] sends you phone messages", category="Home", is_crisis = True, crisis_weight = sister_phone_mod_weight)
+        menu_tooltip = "[the_person.possessive_title] sends you phone messages", category="Home", is_crisis = True)
 
-label sister_phone_crisis_action_label:
+label sister_phone_crisis_action_label():
     #TODO: have a way of saving and reviewing selfies in the future.
     #TODO: Have a proper weekday/weekend schedule for people and use that to determine when sister is at home, at work, or out on the town.
     $ the_person = lily
@@ -138,7 +135,7 @@ label sister_phone_crisis_action_label:
             if mc.business.is_weekend():
                 "[the_person.possessive_title] sends you a selfie without her shirt on. The background looks like her bedroom."
             else:
-                "[the_person.possessive_title] sends you a sends you a selfie without her shirt on. It looks like it was taken in a bathroom of her school."
+                "[the_person.possessive_title] sends you a selfie without her shirt on. It looks like it was taken in a bathroom of her school."
 
         elif ran_num == 2:
             $ the_person.outfit.remove_random_upper(top_layer_first = True)

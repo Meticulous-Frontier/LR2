@@ -3,7 +3,7 @@ init 2 python:
         return (mc.business.any_intern_in_office() and mc.is_at_work())
 
     intern_water_spill_crisis = ActionMod("Intern Water Spill Crisis",intern_water_spill_crisis_requirement,"intern_water_spill_crisis_label",
-        menu_tooltip = "An intern spills her water", category = "Intern", is_crisis = True, crisis_weight = 5)
+        menu_tooltip = "An intern spills her water", category = "Intern", is_crisis = True)
 
 label intern_water_spill_crisis_label():
     $ the_person = get_random_from_list(mc.business.get_intern_list())
@@ -91,9 +91,11 @@ label intern_water_spill_crisis_label():
 
                     the_person "There, I hope that's good enough."
                     mc.name "Much better. Now, back to your homework."
-                    $ the_person.change_slut(3)
-                    $ the_person.change_obedience(5)
-                    $ the_person.int += 1
+                    python:
+                        the_person.change_slut(3)
+                        the_person.change_obedience(5)
+                        if the_person.int < 6:
+                            the_person.change_int(1)
                     if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
                         "You help [the_person.possessive_title] with her homework while she stands next to your desk, her body completely on display."
                         $ mc.change_locked_clarity(50)
@@ -120,7 +122,8 @@ label intern_water_spill_crisis_label():
                     the_person "Ugh, that was so embarrassing. Lets just forget about that, okay?"
                     mc.name "Of course, back to your homework then, right?"
                     "You help [the_person.possessive_title] with her homework, then get back to work."
-                    $ the_person.int += 1
+                    if the_person.int < 6:
+                        $ the_person.change_int(1)
 
                 "Leave it alone":
                     mc.name "I'd like to get back to work as quickly as possible, just leave it for now and you can dry it off later."
@@ -133,7 +136,8 @@ label intern_water_spill_crisis_label():
                     $ the_person.change_slut(1)
                     "After a few minutes you've answered all of [the_person.possessive_title]'s questions, and she heads off to dry her [the_clothing.name]."
                     $ the_clothing.colour[3] *= 1.25
-                    $ the_person.int += 1
+                    if the_person.int < 6:
+                        $ the_person.change_int(1)
 
                 "Take it off":
                     mc.name "I'm really quite busy right now, just take it off now and you can dry it off later."
@@ -152,7 +156,8 @@ label intern_water_spill_crisis_label():
                     $ mc.change_locked_clarity(20)
                     $ the_clothing.colour[3] *= 1.25
                     $ the_person.outfit.add_upper(the_clothing)
-                    $ the_person.int += 1
+                    if the_person.int < 6:
+                        $ the_person.change_int(1)
 
     $ the_clothing = None
     $ del test_outfit

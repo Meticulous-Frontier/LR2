@@ -12,21 +12,21 @@ init 2 python:
         erica_base_outfit.add_accessory(the_eye_shadow)
         erica_base_outfit.add_accessory(the_rings)
 
+        erica_student_job = Job("College Athlete", erica_role, job_location = university, work_times = [2])
+        erica_student_job.schedule.set_schedule(gym, the_times = [1, 3])
+        erica_student_job.schedule.set_schedule(gym, the_days = [5, 6], the_times = [1, 2])
+
         global erica
         erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_4",  tits="B", height = 0.89, hair_colour="chestnut brown", hair_style = braided_bun, skin="white" , \
-            eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, \
+            eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, job = erica_student_job, \
             stat_array = [2,4,4], skill_array = [4,1,3,3,1], sex_array = [3,2,3,2], start_sluttiness = 3, start_obedience = -18, start_happiness = 119, start_love = 0, \
             title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True, base_outfit = erica_base_outfit, \
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["pants", 1, False], ["the colour blue", 2, False], ["yoga", 2, False], ["sports", 2, False]],
-            forced_sexy_opinions = [["doggy style sex", 2, False], ["giving blowjobs", 1, False], ["getting head", 1, False], ["being submissive", 1, False], ["creampies", -2, False], ["public sex", 1, False]])
+            forced_sexy_opinions = [["doggy style sex", 2, True], ["missionary style sex", -2, False], ["giving blowjobs", 1, False], ["getting head", 1, False], ["being submissive", 1, False], ["creampies", -2, False], ["public sex", 1, False]])
 
         erica.max_energy = 120
         erica.generate_home()
         erica.home.add_person(erica)
-
-        erica.set_schedule(gym, days = [5,6], times = [1, 2])
-        erica.set_schedule(university, days = [0, 1, 2, 3, 4], times = [2])
-        erica.set_schedule(gym, days = [0, 1, 2, 3, 4], times = [1, 3])
 
         erica.event_triggers_dict["reject_position"] = "standing_doggy"
         erica.event_triggers_dict["erica_progress"] = 0
@@ -65,14 +65,13 @@ init 2 python:
         # town_relationships.update_relationship(lily, erica, "Friend")
 
 
-        erica.add_role(erica_role)
         erica.add_unique_on_room_enter_event(erica_intro_action)
 
         #REMARKS: Erica has a few instance specific class overrides. This is my first time testing this type of programming, hopefully it works correctly.
         erica.apply_gym_outfit = erica_apply_gym_outfit
 
-        # game_hints.append(Hint("College Athlete", "Get to know Erica to learn to give her a protein shake.", "erica_get_progress() > 0 and not erica_get_protein_unlock()", "erica_get_protein_unlock()"))
-        # game_hints.append(Hint("College Athlete", "Get at least 120 max energy and Erica to at least 40 sluttiness.", "erica_get_progress() == 1 and erica_get_protein_unlock()", "erica_get_progress() > 1"))
+        # game_hints.append(Hint("College Athlete", "Get to know Erica to learn to give her a protein shake.", "erica_get_progress() > 0 and not erica_protein_shake_is_unlocked()", "erica_protein_shake_is_unlocked()"))
+        # game_hints.append(Hint("College Athlete", "Get at least 120 max energy and Erica to at least 40 sluttiness.", "erica_get_progress() == 1 and erica_protein_shake_is_unlocked()", "erica_get_progress() > 1"))
         # game_hints.append(Hint("College Athlete", "Get at least 140 max energy and Erica to at least 60 sluttiness. Then challenge her to a race.", "erica_get_progress() == 2", "erica_get_progress() > 2"))
 
         return
@@ -165,9 +164,11 @@ init -2 python:
             return "Requires: 110 maximum energy"
 
     def erica_phase_one_requirement(person):
-        if person.event_triggers_dict.get("erica_progress", 0) < 1:
+        if erica_get_progress() < 1:
             return False
-        if person.event_triggers_dict.get("erica_workout", 0) < 1:
+        if not erica_workout_is_unlocked():
+            return False
+        if not erica_protein_shake_is_unlocked():
             return False
         if time_of_day < 4:
             if mc.max_energy >= 120:
@@ -182,9 +183,7 @@ init -2 python:
         return False
 
     def erica_phase_two_requirement(person):
-        if person.event_triggers_dict.get("erica_progress", 0) < 2:
-            return False
-        if person.event_triggers_dict.get("erica_progress", 0) > 3:
+        if erica_get_progress() < 2 or erica_get_progress() > 3:
             return False
         if time_of_day < 4:
             if mc.max_energy >= 140:
@@ -205,10 +204,10 @@ init -2 python:
         return day % 7 == 5 and time_of_day == 1
 
     def erica_buy_protein_shake_requirement(person):
-        if person.event_triggers_dict.get("erica_protein", 0) < 1:
+        if not erica_protein_shake_is_unlocked():
             return False
         if mc.location == gym:
-            if day > person.event_triggers_dict.get("protein_day", 9999):
+            if day > erica_get_protein_day():
                 return True
             else:
                 return "Once per Day"
@@ -216,13 +215,13 @@ init -2 python:
             return "Only at the Gym"
 
     def erica_house_call_requirement(person):
-        if person.event_triggers_dict.get("erica_progress", 0) == 4:
+        if erica_get_progress() == 4:
             if mc.location == person.home:
                 return True
         return False
 
     def erica_money_problems_sarah_talk_requirement(person):
-        return mc.business.hr_director and person.location == person.work
+        return mc.business.hr_director and person.is_at_work()
 
     def erica_money_problems_update_requirement(person):
         if time_of_day > 0 and time_of_day < 4:
@@ -406,7 +405,7 @@ init 1 python:
 init 2 python:
 
     erica_lily_post_insta_morning_action = ActionMod("Erica wakes you up", erica_lily_post_insta_morning_requirement, "erica_lily_post_insta_morning_label",
-        menu_tooltip = "Erica wakes you up after spending the night with Lily.", category = "Home", is_crisis = True, is_morning_crisis = True, crisis_weight = 7)
+        menu_tooltip = "Erica wakes you up after spending the night with Lily.", category = "Home", is_crisis = True, is_morning_crisis = True)
 
 ###Erica ACTION LABELS###
 label erica_intro_label(the_person):
@@ -446,9 +445,9 @@ label erica_get_to_know_label(the_person):
         $ the_person.event_triggers_dict["erica_progress"] = 0
         call erica_intro_label(the_person) from _erica_recall_intro_if_skipped_somehow_01
         #Introduction scene#
-    elif the_person.event_triggers_dict.get("erica_protein", 0) > 0 and erica_is_looking_for_work() == False and the_person.love>20:
+    elif erica_protein_shake_is_unlocked() and not erica_is_looking_for_work() and the_person.love > 20:
         call erica_money_problems_label(the_person) from _erica_start_job_quest_01
-    elif the_person.event_triggers_dict.get("erica_progress", 0) == 1:
+    elif erica_get_progress() == 1:
         "You decide to ask [the_person.title] a bit more about her athletics."
         mc.name "I see you here a lot. Are you getting ready for a race?"
         the_person "Yeah! I'm getting ready for a big race soon, so I try to get in here before and after class each day."
@@ -458,7 +457,7 @@ label erica_get_to_know_label(the_person):
         "[the_person.title] starts to move to the next workout machine."
         the_person "So a relationship is not really an option for me right now, or a job for that matter."
         mc.name "Yeah, sounds like an intense schedule."
-        if the_person.event_triggers_dict.get("erica_protein", 0) < 1:
+        if not erica_protein_shake_is_unlocked():
             the_person "It'd be nice to have a little extra money for some protein powder or something. Money is pretty tight!"
             "You think about it for a bit. You could offer to buy her a protein shake, they serve them here at the gym. That would be a good opportunity to slip some serum in..."
             mc.name "They have protein shakes here. Maybe I could grab you one? It'd be no trouble."
@@ -495,7 +494,7 @@ label erica_get_to_know_label(the_person):
             "If you want to get further with her, maybe you should work on increasing your energy!"
 
         #Had sex in the locker room#
-    elif the_person.event_triggers_dict.get("erica_progress", 0) == 2:
+    elif erica_get_progress() == 2:
         "You notice that [the_person.title] is really pushing herself hard today on the treadmill."
         mc.name "Hey [the_person.title]. You're really going at it! Have an event coming up?"
         "[the_person.title] slows the treadmill down so she can carry on a conversation."
@@ -513,14 +512,14 @@ label erica_get_to_know_label(the_person):
         "You say goodbye and head on your way."
 
         #You've challenged her to a race!#
-    elif the_person.event_triggers_dict.get("erica_progress", 0) == 3:
+    elif erica_get_progress() == 3:
         "You try to strike up a conversation with [the_person.title]."
         the_person "Hey now, no distractions! Your ass is mine on Saturday!"
         mc.name "Ha! We'll see about that!"
 
 
         #You've won the race#
-    elif the_person.event_triggers_dict.get("erica_progress", 0) == 4:
+    elif erica_get_progress() == 4:
         mc.name "Hey [the_person.title]."
         the_person "Hey, [the_person.mc_title]!"
         "You catch up with her for a bit with what she's been up to."
@@ -538,7 +537,7 @@ label erica_get_to_know_label(the_person):
 
 #CSA10
 label erica_phase_one_label(the_person):
-    if the_person.event_triggers_dict.get("erica_progress", 0) == 1:
+    if erica_get_progress() == 1:
         mc.name "Hey [the_person.title]. I figured I would find you here. Want to work out together?"
         "[the_person.title] is just hopping off the treadmill. You can tell she just finished getting warmed up."
         the_person "[the_person.mc_title]! Hey, I was wondering if you would take me up on my offer to work out sometime. That sounds great! I'm going to be doing free weights today."
@@ -717,7 +716,7 @@ label erica_phase_one_label(the_person):
         # "You now have [the_person.title]'s phone number."
         # $ the_person.event_triggers_dict["erica_progress"] = 2
 
-    elif the_person.event_triggers_dict.get("erica_progress", 0) > 1:
+    elif erica_get_progress() > 1:
         mc.name "Hey [the_person.title]. I figured I would find you here. Want to work out together?"
         the_person "That sounds great, [the_person.mc_title]! I always enjoy working up a sweat with you."
         mc.name "Sounds good! I'll head to the locker room and get changed and meet you over by the free weights."
@@ -877,7 +876,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
 
 #CSA20
 label erica_phase_two_label(the_person):
-    if the_person.event_triggers_dict.get("erica_progress", 0) == 2:
+    if erica_get_progress() == 2:
         "You see [the_person.title] on the treadmill. She is running hard, and has been training for a race coming up soon. She pauses the treadmill as you walk up to her."
         the_person "Hey [the_person.mc_title], here for another workout?"
         mc.name "Not today, [the_person.title]. How goes training? Is that big race coming up soon?"
@@ -908,7 +907,7 @@ label erica_phase_two_label(the_person):
         "You have a feeling the outcome of your bet could change your relationship with her."
 
         $ the_person.event_triggers_dict["erica_progress"] = 3
-    elif the_person.event_triggers_dict.get("erica_progress", 0) == 3:
+    elif erica_get_progress() == 3:
         mc.name "Hey [the_person.title], I just wanted to verify, the race is this Saturday, right?"
         the_person "That's right! I can't wait to beat your ass in the race, and then spank it again later at my place!"
         mc.name "Yeah right, I'll be bending you over before you can even get your front door closed."
@@ -1330,7 +1329,7 @@ label erica_buy_protein_shake_label(the_person):
         "Add a dose of serum to [the_person.title]'s shake\n{color=#ff0000}{size=18}Requires: Serum{/size}{/color} (disabled)" if mc.inventory.get_any_serum_count() == 0:
             pass
 
-        "Leave her drink alone.":
+        "Leave her drink alone":
             "You decide not to test a dose of serum out on [the_person.title] and take the shake back to her."
 
     if erica_on_love_path():
@@ -1342,8 +1341,7 @@ label erica_buy_protein_shake_label(the_person):
     elif erica_on_hate_path():
         "She takes the shake warily. She hesitates to take a sip."
         mc.name "Go on now. Don't worry, it's good for you."
-        $ the_person.change_obedience(3)
-        $ the_person.change_love(-2)
+        $ the_person.change_stats(love = -2, obedience = 3)
         "She starts to drink it. She waits to see if you need anything else."
     else:
         $ the_person.draw_person(emotion = "happy")
@@ -1462,7 +1460,10 @@ label erica_money_problems_sarah_talk_label(the_person):
     the_person "Oh! She's an athlete?"
     mc.name "Yeah. Very accomplished in fact. Sometimes we work out together at the gym."
     "The wheels in her head are turning. She seems to have the beginning of an idea in her head."
-    the_person "Some of the girls here are really enjoying the gym membership you've offered... But I've gotten some complaints that after a long day here they are just too tired to make it to the gym."
+    if get_HR_director_tag("business_HR_gym_tier", 0) > 0:
+        the_person "Some of the girls here are really enjoying the gym membership you've offered... But I've gotten some complaints that after a long day here they are just too tired to make it to the gym."
+    else:
+        the_person "Some of the girls go to the gym after work, but it is very taxing to go into the gym after work."
     "You consider what she is saying, but you aren't sure how [erica.title] could help. After pause though, [the_person.title] continues, clearly brainstorming out loud."
     the_person "What if we like... Hired her... To come in, like once a week, and run a personal fitness class?"
     mc.name "Here at the office?"
@@ -1619,8 +1620,8 @@ label erica_money_problems_yoga_start_label(the_person):
     mc.name "Okay. I'm going to give your number to my HR director. She'll contact you to set up the final details. Her name is [mc.business.hr_director.name]."
     the_person "I'll look for it. I'm going to get back to my workout, thank you so much!"
     "After you finish up your conversation, you text [mc.business.hr_director.title], your HR director. Your give her [the_person.possessive_title] contact info."
-    $ the_person.set_alt_schedule(lobby, days = [1], times = [0])
-    $ mc.business.hr_director.set_alt_schedule(lobby, days = [1], times =[0])
+    $ the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
+    $ mc.business.hr_director.set_override_schedule(lobby, the_days = [1], the_times =[0])
     $ mc.business.add_mandatory_crisis(erica_yoga_event_intro)
     return
 
@@ -1721,8 +1722,8 @@ label erica_yoga_event_intro_label():
         erica_class_energy_increase(yoga_list)
 
         # make sure we set the schedule right (fixes room change)
-        the_person.set_alt_schedule(lobby, days = [1], times = [0])
-        yoga_assistant.set_alt_schedule(lobby, days = [1], times =[0])
+        the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
+        yoga_assistant.set_override_schedule(lobby, the_days = [1], the_times =[0])
 
         scene_manager.clear_scene()
         yoga_list = None
@@ -2101,8 +2102,8 @@ label erica_weekly_yoga_label(the_person):
         erica_class_energy_increase(yoga_list)
 
         # make sure we set the schedule right (fixes room change)
-        the_person.set_alt_schedule(lobby, days = [1], times = [0])
-        yoga_assistant.set_alt_schedule(lobby, days = [1], times =[0])
+        the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
+        yoga_assistant.set_override_schedule(lobby, the_days = [1], the_times =[0])
 
         scene_manager.clear_scene()
         yoga_list = None
@@ -2469,8 +2470,8 @@ label erica_post_photoshoot_label(the_person):
     mc.name "Nonsense. I'm just glad to see you reach your potential. Plus... the pics ARE really hot."
     "[the_person.title] gives you a playful punch on the shoulder."
     the_person "Was there anything else you needed?"
-    $ the_person.set_alt_schedule(lily_bedroom, days = [5], times = [4])
-    $ lily.set_alt_schedule(lily_bedroom, days = [5], times = [4])  #This should already be set, but just in case, make sure she is there.
+    $ the_person.set_override_schedule(lily_bedroom, the_days = [5], the_times = [4])
+    $ lily.set_override_schedule(lily_bedroom, the_days = [5], the_times = [4])  #This should already be set, but just in case, make sure she is there.
     $ erica.add_unique_on_room_enter_event(erica_pre_insta_love)
     $ erica.add_unique_on_room_enter_event(erica_lily_weekly_photoshoot)
     $ erica.event_triggers_dict["insta_pic_intro_complete"] = True
@@ -2486,7 +2487,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
     lily "Come in!"
     $ scene_manager.add_actor(lily, display_transform = character_center_flipped, position = "back_peek")
     $ scene_manager.add_actor(erica, position = "back_peek")
-    "As you open the door, the two girls and standing in front of [lily.title]'s closet, looking back at you."
+    "As you open the door, the two girls are standing in front of [lily.title]'s closet, looking back at you."
     lily "Oh hey [lily.mc_title]. Good timing! We were just picking out what to wear for tonights photos!"
     erica "[lily.name] thinks we should match, but I was thinking about just wearing something else. What do you think?"
     "It's clear the your opinion is important to her. You think about it for a moment."
@@ -2659,7 +2660,7 @@ label erica_lily_post_insta_handjob_label():
     $ mc.change_arousal(20)
     "Your sleep addled brain only lets you moan as she starts to work it."
     the_person "Can you pull your blanket down?"
-    "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts to stroke it again."
+    "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
     "Her hands feel soft and warm."
     if the_person.has_taboo("touching_penis"):
         the_person "I know I've never really been this forward with you before..."
@@ -2731,7 +2732,7 @@ label erica_lily_post_insta_morning_label():
         the_person "You know, I usually take a protein supplement before I workout, but I don't have any with me..."
         the_person "Do you think you could donate some?"
         mc.name "Hmm, well I suppose if it's for a good cause..."
-        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts to stroke it again."
+        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
         $ the_person.draw_person(position = "blowjob")
         "[the_person.title] lowers herself down your body until you feel her warm breath on your crotch. She opens her mouth and licks your pre-cum from the tip."
         the_person "Mmm, you taste better than those protein powders too..."
@@ -2825,7 +2826,7 @@ label erica_lily_post_insta_morning_label():
 
     if position_choice == "handjob":
         the_person "I don't know why, I just love the feeling of your thick cock in my hand..."
-        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts to stroke it again."
+        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
         the_person "God it's so warm..."
         "[the_person.possessive_title] doesn't waste any time and starts stroking you off."
         call get_fucked(the_person, start_position = cowgirl_handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _erica_wakeup_handjob_02
@@ -2838,7 +2839,7 @@ label erica_lily_post_insta_morning_label():
         call get_fucked(the_person, start_position = drysex_cowgirl, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _erica_morning_drysex_02
     elif position_choice == "blowjob":
         the_person "Let me have a dose of your protein before I go work out."
-        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts to stroke it again."
+        "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
         $ the_person.draw_person(position = "blowjob")
         "She moves her head down to your crotch and licks your pre-cum from the tip."
         the_person "Mmm, I should do this every time I need some extra protein... you taste so good."
@@ -3049,8 +3050,7 @@ label erica_post_yoga_love_label():
     menu:
         "I feel the same way":
             the_person "Yes! Oh god, you have no idea how happy I am to hear that."
-            $ the_person.change_happiness(15)
-            $ the_person.change_love(5)
+            $ the_person.change_stats(happiness = 15, love = 5)
             "She kisses you, and you kiss her back."
             the_person "So like... are we official now? I can call you my boyfriend?"
             mc.name "Yes that would be appropriate."
@@ -3059,8 +3059,7 @@ label erica_post_yoga_love_label():
 
         "Let's just be friends":
             the_person "Ah... okay wow, I guess I was just... totally misinterpreting things between us..."
-            $ the_person.change_happiness(-15)
-            $ the_person.change_love(-20)
+            $ the_person.change_stats(happiness = -15, love = -20)
             the_person "I didn't realize you just wanted things to be strictly physical between us. Is that what you want? Friends with benefits?"
             mc.name "Yes that is what I am looking for right now."
             the_person "Okay... I'm sorry I didn't realize. But I think I can manage that."
@@ -3350,9 +3349,7 @@ label erica_breeding_fetish_team_rejoin_label(the_person):
     the_person "The team! You got me back on the track team! And I got this email, they are giving me a full ride, unconditional scholarship!"
     mc.name "Who me? Couldn't be!"
     $ the_person.draw_person()
-    $ the_person.change_love(10)
-    $ the_person.change_obedience(30)
-    $ the_person.change_happiness(20)
+    $ the_person.change_stats(happiness = 15, love = 7, obedience = 12)
     the_person "Yeah right!"
     if the_person.is_pregnant():
         "[the_person.possessive_title] rubs her belly."
@@ -3427,35 +3424,26 @@ init 2 python:
     def erica_get_protein_day():
         return erica.event_triggers_dict.get("protein_day", 9999)
 
-    def erica_get_protein_unlock():
-        if erica.event_triggers_dict.get("erica_protein", 0) > 0:
-            return True
-        return False
+    def erica_protein_shake_is_unlocked():
+        return erica.event_triggers_dict.get("erica_protein", 0) != 0
+
+    def erica_workout_is_unlocked():
+        return erica.event_triggers_dict.get("erica_workout", 0) != 0
 
     def erica_get_is_doing_yoga_sessions():
-        if erica.event_triggers_dict.get("yoga_sessions_started", False) == True:
-            return True
-        return False
+        return erica.event_triggers_dict.get("yoga_sessions_started", False)
 
     def erica_get_is_yoga_nude():
-        if erica.event_triggers_dict.get("nude_yoga", False) == True:
-            return True
-        return False
+        return erica.event_triggers_dict.get("nude_yoga", False) == True
 
     def erica_get_is_doing_insta_sessions():
-        if erica.event_triggers_dict.get("insta_pic_intro_complete", False) == True:
-            return True
-        return False
+        return erica.event_triggers_dict.get("insta_pic_intro_complete", False) == True
 
     def erica_is_looking_for_work():
-        if erica.event_triggers_dict.get("looking_for_work", False) == True:
-            return True
-        return False
+        return erica.event_triggers_dict.get("looking_for_work", False) == True
 
     def erica_has_given_morning_handjob():
-        if erica.event_triggers_dict.get("post_insta_handy", False) == True:
-            return True
-        return False
+        return erica.event_triggers_dict.get("post_insta_handy", False) == True
 
     def erica_get_wakeup_options():
         return erica.event_triggers_dict.get("wake_up_options", [])

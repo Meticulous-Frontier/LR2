@@ -15,7 +15,7 @@ init 3302 python:
         strip_club.formal_name = strip_club_owner + "'s Gentlemen's Club"
         strip_club.add_action(strip_club_show_action) # Restore 'Watch a show' button
         for person in stripclub_strippers: # rehire strippers
-            set_stripper_schedule(person, strip_club)
+            person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
         set_strip_club_foreclosed_stage(-1) # end story line
         starbuck.remove_on_talk_event("talk_again_buying_club_starbuck_label")
         return
@@ -24,7 +24,7 @@ init 3302 python:
         return (19 + mc.business.event_triggers_dict.get("strip_club_decision_day", 0) - day)
 
     def discuss_buying_club_with_starbuck_requirement(person):
-        if get_strip_club_foreclosed_stage() == 3 and mc.business.funds > 60000:
+        if get_strip_club_foreclosed_stage() == 3 and mc.business.has_funds(60000):
             if day > get_strip_club_foreclosed_last_action_day() and time_of_day > 0:
                 return True
         return False
@@ -47,7 +47,7 @@ init 3302 python:
 
     def add_cousin_meet_at_strip_club():
         cousin_meet_at_strip_club_action = Action("Meet cousin at strip club", cousin_meet_at_strip_club_requirement, "strip_club_bought_strippers_selection_label", requirement_args = day + 1)
-        cousin.set_alt_schedule(strip_club, times = [3]) # set alternative schedule
+        cousin.set_override_schedule(strip_club, the_times = [3]) # set alternative schedule
         cousin.add_unique_on_room_enter_event(cousin_meet_at_strip_club_action)
 
     def add_think_about_buying_strip_club_action():
@@ -129,13 +129,13 @@ label discuss_buying_club_with_starbuck_label(the_person): # The event trigger w
     "[the_person.title] takes out her phone, a minute later she is talking with a bank employee and after a few minutes the call ends."
     the_person "Everything's set up [the_person.mc_title]! They await your money transfer, after that they'll prepare all the documents for your signature."
     menu:
-        "Buy the club\n{color=#ff0000}{size=18}Costs: $50,000{/size}{/color}" if mc.business.funds > 50000:
+        "Buy the club\n{color=#ff0000}{size=18}Costs: $50,000{/size}{/color}" if mc.business.has_funds(50000):
             "You make a call and set up the money transfer from your company's account."
             $ mc.business.change_funds(-50000)
             the_person "Congratulations [the_person.mc_title]! You're now the proud owner of a Strip Club... and you already have one loyal customer, business partner."
             call starbuck_celebration_strip_event(the_person) from _call_starbuck_celebration_strip_event_1
             call starbuck_name_the_new_club_label(the_person) from _call_starbuck_name_the_new_club_label_1
-        "Buy the club\n{color=#ff0000}{size=18}Requires: $50,000{/size}{/color} (disabled)" if mc.business.funds <= 50000:
+        "Buy the club\n{color=#ff0000}{size=18}Requires: $50,000{/size}{/color} (disabled)" if not mc.business.has_funds(50000):
             pass
         "Change your mind":
             mc.name "Actually $50,000 is a lot of money, perhaps it's better to a few days so I can think it over..."
@@ -156,14 +156,14 @@ label talk_again_buying_club_starbuck_label(the_person):
     the_person "Hey [the_person.mc_title], did you change your mind about buying the strip club?"
     mc.name "Hi [the_person.title], I've had some time to think about it."
     menu:
-        "Buy the club\n{color=#ff0000}{size=18}Costs: $50,000{/size}{/color}" if mc.business.funds > 50000:
+        "Buy the club\n{color=#ff0000}{size=18}Costs: $50,000{/size}{/color}" if mc.business.has_funds(50000):
             "You make a call and set up the money transfer from your company's account."
             $ set_strip_club_foreclosed_stage(4)
             $ mc.business.change_funds(-50000)
             the_person "Congratulations [the_person.mc_title]! You're now the proud owner of a Strip Club... and you already have one loyal customer, business partner."
             call starbuck_celebration_strip_event(the_person) from _call_starbuck_celebration_strip_event_2
             call starbuck_name_the_new_club_label(the_person) from _call_starbuck_name_the_new_club_label_2
-        "Buy the club\n{color=#ff0000}{size=18}Requires: $50,000{/size}{/color} (disabled)" if mc.business.funds <= 50000:
+        "Buy the club\n{color=#ff0000}{size=18}Requires: $50,000{/size}{/color} (disabled)" if not mc.business.has_funds(50000):
             pass
         "Need more time":
             mc.name "But I'm still not sure, I'm going to think about it a little while longer."
@@ -200,10 +200,11 @@ label starbuck_celebration_strip_event(the_person):
                         the_person "Okay, I don't care if my customers see me strip, let them enjoy the show."
                     else:
                         the_person "Okay, I don't care if someone enters the shop in the next few minutes, let them enjoy the show."
-                    $ the_person.change_arousal(4 * (the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive")))
-                    $ the_person.change_love(the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive"))
-                    $ the_person.change_slut(2 *(the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") + the_person.get_opinion_score("being submissive")))
-                    $ should_be_private = False
+                    python:
+                        the_person.change_arousal(4 * the_person.get_opinion_score(["showing her ass", "showing her tits", "being submissive"]))
+                        the_person.change_love(the_person.get_opinion_score(["showing her ass", "showing her tits", "being submissive"]))
+                        the_person.change_slut(2 *(the_person.get_opinion_score(["showing her ass", "showing her tits", "being submissive"])))
+                        should_be_private = False
                     "[the_person.title] climbs up on the shop counter using it as a walkway to perform her sexy dance."
             $ the_person.draw_person(emotion = "happy", position = "back_peek")
             "[the_person.title] starts to dance to the music, swinging her hips and turning slowly to show herself off all around."

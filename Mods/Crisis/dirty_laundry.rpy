@@ -6,16 +6,12 @@
 # Low sluttiness they watch and touch themselves
 # Mid sluttiness they give MC a handjob with the panties in their hand
 # high sluttiness they put the panties on and have MC cum in the panties while they wear them
-
-init -1 python:
-    dirty_laundry_weight = 5
-
 init 2 python:
     def dirty_laundry_requirement():
         return mc_asleep()
 
     dirty_laundry_action = ActionMod("Dirty Laundry", dirty_laundry_requirement, "dirty_laundry_action_label",
-        menu_tooltip = "Start your laundry before bed", category = "Home", is_crisis = True, crisis_weight = dirty_laundry_weight)
+        menu_tooltip = "Start your laundry before bed", category = "Home", is_crisis = True)
 
 init 3 python:
     #Create Sleeping Outfits
@@ -43,8 +39,8 @@ init 3 python:
             person.apply_outfit(night_clothes)
         return
 
-label dirty_laundry_action_label:
-    $ the_person = get_random_from_list(people_in_mc_home())
+label dirty_laundry_action_label():
+    $ the_person = get_random_from_list(people_in_mc_home([aunt]))
     if the_person is None:
         return
 
@@ -241,7 +237,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     $ the_person.draw_person(position = "sitting")
                     "She looks at you, expectantly."
                     the_person "What are you waiting for? Keep going!"
-                    "She continues to watch you. You gives yourself a few tentative strokes."
+                    "She continues to watch you. You give yourself a few tentative strokes."
                     the_person "Mmm, I love watching a man get himself off..."
                     $ mc.change_locked_clarity(10)
                     "You try to get back into the swing of things, you have a hard time with [the_person.title] in the room. She seems to be oblivious though."
@@ -426,7 +422,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 else:
                     the_person "Dammit [the_person.mc_title], you can't just cum on my ass like that!"
                     "You just stare at her, while [the_person.possessive_title] continues her tirade."
-                    the_person "What would your mother and sister say if they find out about your behavior?"
+                    the_person "What would your mother and sister say if they find out about your behaviour?"
                     the_person "Now get out of my way, so I can get out of these clothes."
 
                 $ the_person.change_stats(happiness = -5, slut = 1, max_slut = 50)
@@ -441,35 +437,47 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 "You move your hands along [the_person.possessive_title]'s ass and slide her [the_item.display_name] to the side."
                 $ the_person.draw_animated_removal(the_item, position = "doggy", half_off_instead = True)
 
-            $ mc.change_locked_clarity(10)
-            the_person "[the_person.mc_title]? I don't think moving my [the_item.display_name] will get me out of here."
-            mc.name "Trust me [the_person.title], I have a good reason for doing it this way."
-            the_person "Okay, go ahead, just don't pull too much on my head."
-
-            $ del the_item
-            if not the_person.outfit.vagina_visible():
-                "You quickly start removing the remaining clothing from [the_person.possessive_title]."
-                $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
                 $ mc.change_locked_clarity(10)
+                the_person "[the_person.mc_title]? I don't think moving my [the_item.display_name] will get me out of here."
+                mc.name "Trust me [the_person.title], I have a good reason for doing it this way."
+                the_person "Okay, go ahead, just don't pull too much on my head."
+                $ the_item = None
+
+                if not the_person.outfit.vagina_visible():
+                    "You quickly move [the_person.possessive_title] remaining clothing out of the way."
+                    $ the_person.strip_to_vagina(visible_enough = True, prefer_half_off = True, position = "doggy")
+                    $ mc.change_locked_clarity(10)
+            else:
+                $ mc.change_locked_clarity(20)
+                "Seeing her [the_person.pubes_description] pussy, right in front of you, excites you even more."
 
             if the_person.has_anal_fetish():
-                "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and slide your cock between her ass cheeks."
+                "You quickly remove your shorts and position yourself behind [the_person.possessive_title] and slide your cock between her ass cheeks."
                 the_person "Oh baby! Are you going to fuck my slutty asshole like {i}this{/i}?"
                 call fuck_person(the_person, start_position = doggy_anal, start_object = make_dryer(), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer_2
             else:
-                "Now that you have clear access, you quickly remove your shorts and position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
+                "You quickly remove your shorts and position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
                 the_person "What the fuck! You're going to fuck me like {i}this{/i}?"
                 mc.name "Yes, and don't pretend that you don't like it, because I know you do."
                 call fuck_person(the_person, start_position = doggy, start_object = make_dryer(), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer_1
 
             $ the_report = _return
-            if the_report.get("girl orgasms", 0) > 1:
+            if the_report.get("is_angry", False):
+                $ the_person.change_stats(happiness = -5, love = -5, obedience = -5)
+                $ the_person.draw_person(position = "stand4", emotion = "angry")
+                the_person "Did you really think I would let you fuck me like that?!"
+                the_person "You will be lucky, if I don't tell mom about the stunt you just tried."
+            elif the_report.get("girl orgasms", 0) > 1:
                 "With your activities concluded, you help [the_person.title] out of the dryer onto shaky legs."
                 $ the_person.change_stats(happiness = 5, obedience = 3)
                 $ the_person.draw_person(position = "stand4", emotion = "orgasm")
                 the_person "Oh my god, I came so much... I didn't think that would be possible in this position."
                 $ the_person.draw_person(position = "stand4", emotion = "default")
                 the_person "It's still not cool that you took advantage of me like that, even if it was really good."
+                mc.name "Haven't you noticed?"
+                the_person "What?"
+                mc.name "Your hair came loose about a minute in, you could have stopped at any point."
+                the_person "Oh... well, it wasn't that bad after all. Now move..."
             elif the_report.get("girl orgasms", 0) > 0:
                 "After you are done, you help [the_person.title] out of the dryer."
                 $ the_person.change_stats(happiness = 3, obedience = 1)
@@ -477,16 +485,19 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 the_person "Oh wow, that really felt good, thank you [the_person.mc_title]."
                 $ the_person.draw_person(position = "stand4", emotion = "default")
                 the_person "It's still not cool that you took advantage of me like that, though."
+                mc.name "Haven't you noticed?"
+                the_person "What?"
+                mc.name "Your hair came loose about a minute in, you could have stopped at any point."
+                the_person "Oh... well, next time just get me out, and we can do this properly. Now move..."
             else:
                 "Feeling satisfied, you pull [the_person.title] out of the dryer."
                 $ the_person.change_stats(happiness = -5, obedience = -3)
                 $ the_person.draw_person(position = "stand4", emotion = "angry")
                 the_person "You take advantage of me like that and don't even get me off? Not cool, [the_person.mc_title], not cool."
-
-            mc.name "Haven't you noticed?"
-            the_person "What?"
-            mc.name "Your hair came loose about a minute in, you could have stopped at any point."
-            the_person "Oh... well, next time just get me out, and we can do this properly. Now move..."
+                mc.name "Haven't you noticed?"
+                the_person "What?"
+                mc.name "Your hair came loose about a minute in, you could have stopped at any point."
+                the_person "Next time just get me out and make sure I get something out of it. Now move..."
 
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] quickly grabs her laundry and scoots out of the laundry room."

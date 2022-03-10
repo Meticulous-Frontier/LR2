@@ -373,7 +373,7 @@ label Sarah_flirt_response_mid(the_person):
 
 label Sarah_flirt_response_high(the_person):
     if mc.location.get_person_count() == 1: #If you are alone she'll flirt with you
-        if the_person.effective_sluttiness() > 25: # High sluttiness flirt
+        if the_person.effective_sluttiness("kissing") > (25 - (5*the_person.get_opinion_score("public_sex"))): # High sluttiness flirt
             if the_person.has_taboo("underwear_nudity"):
                 the_person "Oh [the_person.mc_title], you're so bad! Do you really want to... see me naked?"
             else:

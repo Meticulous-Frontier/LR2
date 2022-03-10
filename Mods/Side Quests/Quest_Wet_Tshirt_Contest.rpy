@@ -48,13 +48,15 @@ init 1 python:
     def quest_wet_tshirt_contest_tracker():
         quest = quest_wet_tshirt_contest()
         if quest.get_quest_flag() <= 101:    #If company model quits or get fired before quest completion then quest fails
-            if mc.business.company_model == None:
+            if mc.business.company_model is None:
                 quest.quest_completed()
                 return
 
         return
 
     def quest_wet_tshirt_contest_start_requirement():
+        return False    # NOT YET IMPLEMENTED
+
         if day < 21:
             return False    # don't start this too soon
         if mc.business.company_model is None:

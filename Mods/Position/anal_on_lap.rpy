@@ -29,7 +29,7 @@ label intro_anal_on_lap(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = "back_peek", prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = "back_peek", visible_enough = True, prefer_half_off = True)
 
     $ the_girl.draw_person(position = "back_peek")
     "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
@@ -46,7 +46,7 @@ label intro_anal_on_lap(the_girl, the_location, the_object):
     else:
         the_girl "I don't know, I guess I can do that."
 
-    "You work your fingers in and out of her ass a few times, getting it good a lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
+    "You work your fingers in and out of her ass a few times, getting it good and lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
     $ the_girl.draw_person(position = anal_on_lap.position_tag)
     "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
     "[the_girl.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
@@ -193,7 +193,7 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
         else:
             "[the_girl.possessive_title] pulls off you at the last moment. You start stroking your shaft as you blow your load over her ass. She holds still for you as you cover her with your sperm."
         if the_girl.get_opinion_score("being covered in cum") > 0:
-             the_girl "Yes! Paint me with your sticky cum!"
+            the_girl "Yes! Paint me with your sticky cum!"
         if the_girl.has_cum_fetish():
             the_girl "Fuck... it's so good! Oh yes!"
             "[the_girl.possessive_title] squeals as you paint her ass with your cum. Her cum fetish causes her to orgasm as you cum all over her."
@@ -215,6 +215,9 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
 
 label transition_default_anal_on_lap(the_girl, the_location, the_object):
     "You sit down on the [the_object.name]. She follows and starts to sit on your lap."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = "back_peek", visible_enough = True, prefer_half_off = True)
     "When she's ready, she grabs your cock and points it at her rear, then slowly lowers herself down on it. She lets out a gasp under her breath."
     return
 
@@ -274,7 +277,7 @@ label taboo_break_anal_on_lap(the_girl, the_location, the_object):
 
     the_girl "Ok, just be careful [the_girl.mc_title]..."
 
-    "You work your fingers in and out of her ass a few times, getting it good a lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
+    "You work your fingers in and out of her ass a few times, getting it good and lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
     $ the_girl.draw_person(position = "sitting")
     "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
     "[the_girl.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."

@@ -108,7 +108,7 @@ label train_dealbreaker_blowjob_label(the_person):
         the_person "Ok... I'll try it again."
         "You wonder how this would have gone if she had more energy before you tried to convince her to go down on you."
     else:
-        the_person "I do want to make you feel good. I think you talked me into trying it atleast."
+        the_person "I do want to make you feel good. I think you talked me into trying it at least."
         "[the_person.possessive_title] is energetic. She actually seems a little eager to give it a try now that you've talked her into it."
     $ the_person.draw_person(position = "blowjob")
     "[the_person.title] get's down on her knees in front of you. She waits patiently as you pull your dick out."
@@ -139,7 +139,7 @@ label train_dealbreaker_blowjob_label(the_person):
     $ mc.change_arousal(20)
     $ mc.change_locked_clarity(20)
 
-    "[the_person.title] pulls your cock out of her her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
+    "[the_person.title] pulls your cock out of her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
     the_person "Does that feel good?"
     "[the_person.possessive_title] seems to actually be getting into this. You make sure to encourage her."
     mc.name "It feels amazing."

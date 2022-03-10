@@ -75,6 +75,12 @@ init -1 python:
             tooltip += serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left"
         return tooltip
 
+    def person_info_ui_get_job_title(person):
+        if person.event_triggers_dict.get("job_known", False):
+            return person.job.job_title
+        return "Unknown"
+
+
 init 2:
     screen person_info_ui(person): #Used to display stats for a person while you're talking to them.
         layer "solo" #By making this layer active it is cleared whenever we draw a person or clear them off the screen.
@@ -94,8 +100,7 @@ init 2:
                 vbox:
                     text format_titles(person) style "menu_text_style" size 30
 
-                    if mc.business.get_employee_title(person) != "None":
-                        text "     Job: " + mc.business.get_employee_title(person) style "menu_text_style"
+                    text "     Job: " + person_info_ui_get_job_title(person) style "menu_text_style"
 
                     viewport:
                         scrollbars "vertical"
@@ -111,7 +116,7 @@ init 2:
                     textbutton "Arousal: "+ str(__builtin__.int(person.arousal)) + "/"+ str(__builtin__.int(person.max_arousal)) + " {image=arousal_token_small}":
                         style "transparent_style"
                         text_style "menu_text_style"
-                        tooltip "When a girl is brought to a state of high arousal she will start to climax. Climaxing will make the girl happy and has a chance to put her into a trance state."
+                        tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will make a girl happier and may put them into a Trance if their suggestibility is higher than 0."
                         action NullAction()
                         sensitive True
 

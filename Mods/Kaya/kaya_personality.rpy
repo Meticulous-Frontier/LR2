@@ -44,7 +44,7 @@ label kaya_introduction(the_person):
     return
 
 label kaya_greetings(the_person):
-    if the_person.location == coffee_shop:
+    if the_person.is_at_work():
         if the_person.love < 0:
             the_person "Back again? What do you want this time?"
         elif kaya_can_get_drinks() and time_of_day == 3:
@@ -885,10 +885,10 @@ label kaya_cum_pullout(the_person):
                 the_person "I don't care if you knock me up! I'm just your... breeding slut!"
 
             menu: #TODO: Add a variant of this normally so you can stealth a girl (don't do that in real life, it's super fucked up).
-                "Take off the condom.":
+                "Take off the condom":
                     "You don't have much time to spare. You pull out, barely clearing her pussy, and pull the condom off as quickly as you can manage."
                     $ mc.condom = False
-                "Leave it on.":
+                "Leave it on":
                     "You ignore [the_person.possessive_title]'s cum-drunk offer and keep the condom in place."
 
         else:
@@ -1647,7 +1647,7 @@ label kaya_bare_tits_taboo_break(the_person, the_clothing):
         the_person "So you want to see my boobs?"
         mc.name "Yeah, I do. Are you ready for that?"
         "She takes a long moment to respond, then nods."
-        the_person "Yeah, I think I am. I didn't realise how nervous I was going to be though!"
+        the_person "Yeah, I think I am. I didn't realize how nervous I was going to be though!"
         mc.name "Don't be nervous. Just relax and let me get rid of this [the_clothing.display_name] for you."
 
     else:

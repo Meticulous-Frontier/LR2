@@ -200,31 +200,6 @@ init 1 python:
         common_variable_list.append("scene_manager");
         common_variable_list.append('HR_employee_list');
 
-    def restore_employees_to_schedules():
-        for employee in mc.business.research_team + mc.business.market_team + mc.business.supply_team + mc.business.production_team + mc.business.hr_team:
-            if employee.location:
-                continue
-            # somehow she is lost in limbo
-            scheduled_location = employee.get_destination()
-            if not scheduled_location: # pick random location
-                scheduled_location = get_random_from_list([x for x in list_of_places if x.public])
-
-            if scheduled_location:
-                scheduled_location.add_person(employee)
-
-        for intern in [x for x in all_people_in_the_game() if x.job == "Student Intern"]:
-            if intern.schedule[6][1] == mc.business.r_div and intern not in mc.business.college_interns_research:
-                mc.business.college_interns_research.append(intern)
-            if intern.schedule[6][1] == mc.business.p_div and intern not in mc.business.college_interns_production:
-                mc.business.college_interns_production.append(intern)
-            if intern.schedule[6][1] == mc.business.s_div and intern not in mc.business.college_interns_supply:
-                mc.business.college_interns_supply.append(intern)
-            if intern.schedule[6][1] == mc.business.m_div and intern not in mc.business.college_interns_market:
-                mc.business.college_interns_market.append(intern)
-            if intern.schedule[6][1] == mc.business.h_div and intern not in mc.business.college_interns_HR:
-                mc.business.college_interns_HR.append(intern)
-        return
-
     def update_pinned_cache():
         # cache all GUI images in memory
         for fn in renpy.list_files():
@@ -258,9 +233,10 @@ init 1 python:
             renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
-    def validate_person_stats():
-        for person in all_people_in_the_game():
-            person.validate_stats()
+    def validate_stripclub_stripper_role():
+        if not "stripclub_stripper_job" in globals():
+            global stripclub_stripper_job
+            stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit)
         return
 
     def check_bugfix_installed(*args, **kwargs): #allow passing of any number of parameters
@@ -294,9 +270,12 @@ label update_compatibility_fix(stack):
 
     $ cleanup_default_wardrobe()
 
-    $ restore_employees_to_schedules()
+    # make beta saves compatible
+    if not list_of_jobs or not isinstance(list_of_jobs[0], list):
+        call instantiate_jobs() from _call_instantiate_jobs
+        call add_extra_room_job_definitions() from _call_add_extra_room_job_definitions
 
-    $ validate_person_stats()
+    $ validate_stripclub_stripper_role()
 
     $ execute_hijack_call(stack)
     return

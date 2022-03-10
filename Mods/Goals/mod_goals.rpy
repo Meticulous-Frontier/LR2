@@ -18,19 +18,19 @@ init 2 python:
         if the_goal.arg_dict["required"] > 5000:
             the_goal.arg_dict["required"]  = 5000
 
-    def side_money_count_function(the_goal, count):
-        the_goal.arg_dict["count"] += count
-        if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
-            return True
-        return False
+    # def side_money_count_function(the_goal, count):
+    #     the_goal.arg_dict["count"] += count
+    #     if the_goal.arg_dict["count"] >= the_goal.arg_dict["required"]:
+    #         return True
+    #     return False
 
-    def side_money_difficulty_function(the_goal, the_difficulty):
-        the_goal.arg_dict["required"]  = 100
-        the_goal.arg_dict["required"]  += (50 * the_difficulty)
-        if the_difficulty > 8:
-            the_goal.arg_dict["required"]  += (100 * the_difficulty)
-        if the_goal.arg_dict["required"] > 3000:
-            the_goal.arg_dict["required"]  = 3000
+    # def side_money_difficulty_function(the_goal, the_difficulty):
+    #     the_goal.arg_dict["required"]  = 100
+    #     the_goal.arg_dict["required"]  += (50 * the_difficulty)
+    #     if the_difficulty > 8:
+    #         the_goal.arg_dict["required"]  += (100 * the_difficulty)
+    #     if the_goal.arg_dict["required"] > 3000:
+    #         the_goal.arg_dict["required"]  = 3000
 
     def HR_interview_count_function(the_goal, the_person):
         the_goal.arg_dict["count"] += 1
@@ -107,9 +107,9 @@ init 2 python:
     {"count": 0, "required": 50},
     difficulty_scale_function = daily_profit_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
 
-    side_money_goal = Goal("Side Hustles", "Earn money from ways other than through pharmaceuticals.", "side_money", "Business", always_valid_goal_function, side_money_count_function,
-    {"count": 0, "required": 100},
-    difficulty_scale_function = side_money_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
+    # side_money_goal = Goal("Side Hustles", "Earn money from ways other than through pharmaceuticals.", "side_money", "Business", always_valid_goal_function, side_money_count_function,
+    # {"count": 0, "required": 100},
+    # difficulty_scale_function = side_money_difficulty_function, report_function = standard_count_report, progress_fraction_function = standard_progress_fraction, enabled = False)
 
     HR_interview_goal = Goal("HR meetings", "Use the HR director to conduct meetings with employees.", "HR_opinion_improvement", "MC", always_valid_goal_function, HR_interview_count_function,
     {"count": 0, "required": 1},
@@ -139,7 +139,7 @@ init 2 python:
     sex_goals.append(ass_cum_goal)
     sex_goals.append(threesome_goal)
     stat_goals.append(daily_profit_goal)
-    stat_goals.append(side_money_goal)
+    # stat_goals.append(side_money_goal)
     work_goals.append(give_serum_goal)
     work_goals.append(HR_interview_goal)
 

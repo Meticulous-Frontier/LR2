@@ -34,8 +34,7 @@ label meet_person_enhanced_label():
             the_person "Thank you so much. I'm [the_person.title]."
             call person_introduction(the_person, girl_introduction = False) from _call_person_introduction_1_override
             "You shake her hand. You and [the_person.title] chat while she waits for the next bus to come by."
-            $ the_person.change_happiness(10)
-            $ the_person.change_love(8)
+            $ the_person.change_stats(happiness = 10, love = 8)
             "When it does she gives you a quick hug."
             the_person "Thank you again, you've saved my whole day. Maybe we'll see each other again."
             mc.name "I'd like that."
@@ -44,8 +43,8 @@ label meet_person_enhanced_label():
 
         "Keep the cash\n{color=#0F0}+$200{/color}":
             $ mc.business.change_funds(200)
-            $ mc.business.listener_system.fire_event("side_money", count = 200)
-            "You slip the cash out of the womans wallet and watch as she rushes to catch her bus."
+            # $ mc.business.listener_system.fire_event("side_money", count = 200)
+            "You slip the cash out of the woman's wallet and watch as she rushes to catch her bus."
             $ clear_scene()
             "She gets on and the bus pulls away. When you pass a mailbox you slide the wallet inside - at least she'll get it back."
             $ the_person.remove_person_from_game()

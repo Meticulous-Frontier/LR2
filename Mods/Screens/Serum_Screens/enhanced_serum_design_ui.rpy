@@ -14,6 +14,23 @@ init 2:
                     return False
             return True
 
+        def get_trait_aspect_tags(trait):
+            aspect_tags = "\n{size=15}"
+            if trait.tier > mc.business.max_serum_tier:
+                aspect_tags += "Tier: {color=#98fb98}" + str(trait.tier) + "{/color}"
+            else:
+                aspect_tags += "Tier:" + str(trait.tier)
+
+            aspect_tags += "{color=#387aff}   Ment: " + str(trait.mental_aspect) + "{/color}"
+            aspect_tags += "{color=#00AA00}   Phys: " + str(trait.physical_aspect) + "{/color}"
+            aspect_tags += "{color=#FFC0CB}   Sex: " + str(trait.sexual_aspect) + "{/color}"
+            aspect_tags += "{color=#FFFFFF}   Med: " + str(trait.medical_aspect) + "{/color}"
+            aspect_tags += "{color=#AAAAAA}   Flaw: " + str(trait.flaws_aspect) + "{/color}"
+            aspect_tags += "{color=#FF6249}   Attn: " + str(trait.attention) + "{/color}"
+            aspect_tags += "{/size}"
+            return aspect_tags
+
+
     screen serum_design_ui(starting_serum,current_traits):
         $ renpy.block_rollback()
 
@@ -22,11 +39,6 @@ init 2:
 
         add "Science_Menu_Background.png"
         default trait_tooltip = primitive_serum_prod
-        python:
-            effective_traits = 0
-            for trait_count in starting_serum.traits:
-                if not "Production" in trait_count.exclude_tags:
-                    effective_traits += 1
         hbox:
             yalign 0.15
             xanchor 0.5
@@ -39,44 +51,46 @@ init 2:
 
                 vbox:
                     xsize 530
-                    frame:
-                        background "#000080"
-                        xsize 530
-                        text "Pick Production Type" style "menu_text_title_style" xalign .5
-                    frame:
-                        background "#0a142688"
-                        xalign 0.5
-                        xsize 530
-                        ysize 175
-
-                        viewport:
+                    if not starting_serum.has_production_trait():
+                        frame:
+                            background "#000080"
                             xsize 530
-                            scrollbars "vertical"
-                            mousewheel True
-                            vbox:
-                                for trait in sorted(list_of_traits + mc.business.blueprinted_traits, key = lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
-                                    if trait not in starting_serum.traits and trait.researched and "Production" in trait.exclude_tags:
-                                        $ trait_tags = get_exclude_tags(trait)
-                                        $ trait_allowed = get_trait_allowed(starting_serum, trait)
+                            text "Pick Production Type" style "menu_text_title_style" xalign .5
+                        frame:
+                            background "#0a142688"
+                            xalign 0.5
+                            xsize 530
+                            ysize 175
 
-                                        #$ trait_side_effects_text = get_trait_side_effect_text(trait)
-                                        #$ trait_mastery_text = get_trait_mastery_text(trait)
-                                                    #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                        textbutton trait.name + trait_tags:
-                                            style "textbutton_style"
-                                            text_style "serum_text_style"
-                                            xsize 530
-                                            sensitive trait_allowed
-                                            action [
-                                                Function(starting_serum.add_trait,trait)
-                                            ]
-                                            hovered [
-                                                SetScreenVariable("trait_tooltip", trait)
-                                            ]
+                            viewport:
+                                xsize 530
+                                scrollbars "vertical"
+                                mousewheel True
+                                vbox:
+                                    for trait in sorted(list_of_traits + mc.business.blueprinted_traits, key = lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
+                                        if trait not in starting_serum.traits and trait.researched and "Production" in trait.exclude_tags:
+                                            $ trait_tags = get_exclude_tags(trait)
+                                            $ trait_allowed = get_trait_allowed(starting_serum, trait)
 
-                                            #unhovered [
-                                            #Hide("trait_tooltip")
-                                            #]
+                                            #$ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                            #$ trait_mastery_text = get_trait_mastery_text(trait)
+                                                        #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                            textbutton trait.name + trait_tags:
+                                                style "textbutton_style"
+                                                text_style "serum_text_style"
+                                                xsize 530
+                                                sensitive trait_allowed
+                                                action [
+                                                    Function(starting_serum.add_trait,trait)
+                                                ]
+                                                hovered [
+                                                    SetScreenVariable("trait_tooltip", trait)
+                                                ]
+
+                                                #unhovered [
+                                                #Hide("trait_tooltip")
+                                                #]
+
                     frame:
                         background "#000080"
                         xsize 530
@@ -86,7 +100,7 @@ init 2:
                         background "#0a142688"
                         xalign 0.5
                         xsize 530
-                        ysize 574
+                        ysize ((574 + 175) if starting_serum.has_production_trait() else 574)
 
                         viewport:
                             xsize 530
@@ -146,11 +160,11 @@ init 2:
                             vbox:
                                 for trait in starting_serum.traits:
                                     $ trait_tags = get_exclude_tags(trait)
-
+                                    $ trait_aspect_tags = get_trait_aspect_tags(trait)
                                     $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                     $ trait_mastery_text = get_trait_mastery_text(trait)
 
-                                    textbutton trait.name + trait_tags + "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
+                                    textbutton trait.name + trait_tags + trait_aspect_tags + "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
                                         style "textbutton_style"
                                         text_style "serum_text_style"
                                         xsize 520
@@ -168,6 +182,8 @@ init 2:
                             xsize 530
                             text "[trait_tooltip.name]" style "menu_text_title_style" xalign .5
 
+                        use aspect_grid(trait_tooltip)
+
                         frame:
                             background "#0a142688"
                             xsize 530
@@ -184,17 +200,17 @@ init 2:
                                             frame:
                                                 background "#43B197"
                                                 xsize 255
-                                                text "[trait_tooltip.positive_slug]" style "serum_text_style"
+                                                text trait_tooltip.positive_slug style "serum_text_style" size 16
                                         vbox:
                                             frame:
                                                 background "#B14365"
                                                 xsize 255
-                                                text "[trait_tooltip.negative_slug]" style "serum_text_style"
+                                                text trait_tooltip.build_negative_slug() style "serum_text_style" size 16
                                     hbox:
                                         frame:
                                             background "#000080"
                                             xsize 515
-                                            text "[trait_tooltip.desc]" style "serum_text_style"
+                                            text trait_tooltip.desc style "serum_text_style"
 
             frame:
                 background "#0a142688"
@@ -208,12 +224,12 @@ init 2:
                         text "Current Serum Statistics:" style "menu_text_title_style" xalign .5
 
                     frame:
-                        if effective_traits > starting_serum.slots:
+                        if starting_serum.slots_used() > starting_serum.slots:
                             background "#B14365"
                         else:
                             background "#000080"
                         xsize 550
-                        text "Trait Slots: " + str(effective_traits) +"/[starting_serum.slots]" style "serum_text_style"
+                        text "Trait Slots: " + str(starting_serum.slots_used()) +"/[starting_serum.slots]" style "serum_text_style"
 
                     viewport:
                         draggable True
@@ -225,13 +241,16 @@ init 2:
                             xalign 0.5
                             spacing 5
                             xsize 550
-                            for num in __builtin__.range(__builtin__.max(starting_serum.slots,effective_traits)):
-                                if num < effective_traits and num < starting_serum.slots:
+                            for num in __builtin__.range(__builtin__.max(starting_serum.slots,starting_serum.slots_used())):
+                                if num < starting_serum.slots_used() and num < starting_serum.slots:
                                     add "Serum_Slot_Full.png" xanchor 0.5 xalign 0.5
-                                elif num < effective_traits and num >= starting_serum.slots:
+                                elif num < starting_serum.slots_used() and num >= starting_serum.slots:
                                     add "Serum_Slot_Incorrect.png" xanchor 0.5 xalign 0.5
                                 else:
                                     add "Serum_Slot_Empty.png" xanchor 0.5 xalign 0.5
+
+                    use aspect_grid(starting_serum)
+
                     hbox:
                         spacing 5
                         vbox:
@@ -247,15 +266,18 @@ init 2:
                             frame:
                                 background "#000080"
                                 xsize 270
-                                text "Value: ${color=#98fb98}[starting_serum.value]{/color}" style "serum_text_style"
+                                if starting_serum.tier <= mc.business.max_serum_tier:
+                                    text "Serum Tier: " + str(starting_serum.tier) style "serum_text_style"
+                                else:
+                                    text "Serum Tier: {color=#fb6868}" + str(starting_serum.tier) + "{/color}" style "serum_text_style"
                         vbox:
                             spacing 5
                             frame:
                                 background "#000080"
                                 xsize 270
 
-                                $ calculated_profit = (starting_serum.value*mc.business.batch_size)-starting_serum.production_cost
-                                if calculated_profit > 0:
+                                $ calculated_profit = round(mc.business.get_serum_base_value(starting_serum)-(starting_serum.production_cost/mc.business.batch_size))
+                                if calculated_profit >= 0:
                                     text "Expected Profit:{color=#98fb98} $[calculated_profit]{/color}" style "serum_text_style"
                                 else:
                                     $ calculated_profit = 0 - calculated_profit
@@ -294,12 +316,12 @@ init 2:
                                     frame:
                                         background "#43B197"
                                         xsize 270
-                                        margin [5, 0, 5, 0]
-                                        text "[trait.positive_slug]" style "serum_text_style"
+                                        margin (5, 0, 5, 0)
+                                        text trait.positive_slug style "serum_text_style" size 16
                                     frame:
                                         xsize 270
                                         background "#B14365"
-                                        text "[trait.negative_slug]" style "serum_text_style"
+                                        text trait.build_negative_slug() style "serum_text_style" size 16
 
         frame:
             background "#0a142688"
@@ -307,12 +329,13 @@ init 2:
             xanchor 0.5
             xalign 0.5
             yalign 0.93
-            vbox:
+            hbox:
                 xanchor 0.5
                 xalign 0.5
+                spacing 40
                 textbutton "Create Design":
                     action [Hide("trait_tooltip"), Hide("serum_design_ui"), Hide("serum_tooltip"), Return(starting_serum)]
-                    sensitive (starting_serum.slots >= effective_traits and __builtin__.len(starting_serum.traits) and starting_serum.has_tag("Production")) > 0
+                    sensitive (starting_serum.slots >= starting_serum.slots_used() and __builtin__.len(starting_serum.traits) and starting_serum.has_tag("Production")) > 0
 
                     style "textbutton_style"
                     text_style "serum_text_style"
@@ -323,6 +346,14 @@ init 2:
                 textbutton "Reject Design":
                     action [Hide("trait_tooltip"), Hide("serum_design_ui"), Hide("serum_tooltip"), Return("None")]
 
+                    style "textbutton_style"
+                    text_style "serum_text_style"
+                    xanchor 0.5
+                    xalign 0.5
+                    xsize 230
+
+                textbutton "View Contracts":
+                    action Show("contract_select")
                     style "textbutton_style"
                     text_style "serum_text_style"
                     xanchor 0.5

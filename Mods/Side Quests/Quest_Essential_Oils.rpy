@@ -149,11 +149,9 @@ init 1 python:
 ###Functions unique to the quest
     def quest_essential_oils_find_employee():
         able_person_list = []
-        for person in mc.business.get_employee_list():
-            if person.int <= 2 and not quest_director.is_person_blocked(person):
-                able_person_list.append(person)
-        if __builtin__.len(able_person_list) == 0:
-            return None
+        for person in [x for x in mc.business.get_employee_list() if x.int <= 2 \
+            and not quest_director.is_person_blocked(x)]:
+            able_person_list.append(person)
         return get_random_from_list(able_person_list)
 
 ###Declare quest actions###

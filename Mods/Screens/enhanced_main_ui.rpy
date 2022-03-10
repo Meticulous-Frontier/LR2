@@ -57,6 +57,13 @@ init 2:
                     action NullAction()
                     sensitive True
 
+                textbutton "Attention: " + get_attention_string():
+                    style "transparent_style"
+                    text_style "menu_text_style"
+                    tooltip "The attention your company is attracting from the local authorities."
+                    action NullAction()
+                    sensitive True
+
                 textbutton "World: [known]/[total]":
                     style "transparent_style"
                     text_style "menu_text_style"

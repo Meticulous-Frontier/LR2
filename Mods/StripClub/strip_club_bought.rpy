@@ -24,15 +24,12 @@ init 5 python:
             stripper.set_title(get_random_from_list(get_titles(stripper)))
             stripper.set_mc_title("Boss")
             stripper.set_possessive_title("The stripper")
-
-            set_stripper_schedule(stripper, strip_club)
             stripper.change_stats(happiness = 10, obedience = 5, love = 5)
-            stripper.add_role(stripper_role)
         return
 
 label strip_club_bought_strippers_selection_label(the_person): # Talk event
     python:
-        cousin.set_alt_schedule(None, times = [3])  # reset alternative schedule
+        cousin.set_override_schedule(None, the_times = [3, 4])  # reset alternative schedule
         for person in strip_club.people:
             if person is not cousin:
                 person.change_location(downtown) # Failsafe to remove anyone improperly scheduled to be at the strip club
@@ -82,9 +79,9 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     else:
         mc.name "Goodbye, [the_person.title]!"
     $ the_person.change_stats(happiness = 5, obedience = 3, love = 3)
-    $ strip_club_fire_stripper(the_person)
-    $ the_person.set_schedule(None, times = [1, 2, 3])
-    $ the_person.set_schedule(the_person.home, times = [0, 4])
+    $ the_person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
+    $ the_person.job.quit_function = stripper_quit
+    $ the_person.quit_job()
     $ the_person.change_location(the_person.home)
 
     # resume dialog with
@@ -134,6 +131,7 @@ label strip_club_evaluate_stripper(the_person):
     $ mc.location.show_background()
     $ the_person.outfit = stripclub_wardrobe.pick_random_outfit()
     $ the_person.draw_person(emotion = "happy", position = "stand4")
+    $ the_person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
     "A new song starts playing over the speakers and a stripper moves elegantly up on the stage."
 
     if the_person.title is None:
@@ -168,8 +166,8 @@ label strip_club_evaluate_stripper(the_person):
     the_person "So [mc.name] what do you think, am I good enough to be one of your girls?"
     "She puts a hand on your shoulder pressing her bosom against your body..."
     menu:
-        "Yes" if mc.business.funds > 500:
-            $ strip_club_hire_stripper(the_person, stripper_role)
+        "Yes" if mc.business.has_funds(500):
+            $ the_person.add_job(stripper_job)
             mc.name "Yes, you impressed me! Your salary will be $[the_person.stripper_salary] per day excluding tips, if you agree?"
             $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
             $ ran_num = __builtin__.int(((the_person.stripper_salary / 20) - 1) * 100)
@@ -184,7 +182,7 @@ label strip_club_evaluate_stripper(the_person):
             "After a few seconds, when she stops, you give her the promised signing bonus."
             $ the_person.change_stats(happiness = 5, obedience = 3, love = 3)
             $ the_person.change_location(the_person.home) # Avoid to process the person again
-        "Yes\n{color=#ff0000}{size=18}Insufficient funds{/size}{/color} (disabled)" if mc.business.funds <= 500:
+        "Yes\n{color=#ff0000}{size=18}Insufficient funds{/size}{/color} (disabled)" if not mc.business.has_funds(500):
             pass
         "Maybe later": # Don't need to reschedule
             $ the_person.draw_person(emotion = "sad", position = "stand2")
@@ -197,7 +195,8 @@ label strip_club_evaluate_stripper(the_person):
                 $ the_person.change_stats(happiness = -10, obedience = 3, love = -5)
             else:
                 "Unable to argue with you, [the_person.title] quickly dresses back up and leaves the club, still in tears."
-            $ strip_club_fire_stripper(the_person)
+            $ the_person.job.quit_function = stripper_quit
+            $ the_person.quit_job()
             $ the_person.change_location(the_person.home)
             $ mc.location.show_background()
     return
