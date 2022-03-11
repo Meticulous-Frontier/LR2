@@ -31,8 +31,8 @@ label kaya_introduction(the_person):
     "She turns around."
     $ the_person.set_title("???")
     the_person "I guess? What do you need?"
-    mc.name "I know this is strange, but I saw you and I just needed to know your name."
-    "She laughs and blushes."
+    mc.name "I know this sounds crazy, but I saw you and just wanted to say hi and get your name."
+    "She laughs and crosses her arms."
     the_person "Really? You're just saying that to impress me, aren't you."
     mc.name "Really, I really just wanted to talk to you."
     $ title_choice = get_random_title(the_person)

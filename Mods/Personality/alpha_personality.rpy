@@ -87,12 +87,12 @@ label alpha_introduction(the_person):
     $ the_person.set_title("???")
     the_person "I guess? What can I do for you?"
     mc.name "I know this is strange, but I saw you and I just needed to know your name."
-    "She laughs full of herself."
+    "She laughs and rolls her eyes."
     the_person "Is that so? You're not the first one... Maybe for today!"
     mc.name "Really, I just wanted to talk to you."
     $ title_choice = get_random_title(the_person)
     $ formatted_title = the_person.create_formatted_title(title_choice)
-    the_person "Well, if you insist, my name is [formatted_title]. It's nice to meet you..."
+    the_person "Well, if you insist, you can call me [formatted_title]."
     $ the_person.set_title(title_choice)
     $ the_person.set_possessive_title(get_random_possessive_title(the_person))
     "With a commanding gaze she waits for you to introduce yourself."
