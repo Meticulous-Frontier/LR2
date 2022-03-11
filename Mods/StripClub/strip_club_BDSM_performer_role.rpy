@@ -170,7 +170,7 @@ init -1 python:
             scene_manager.update_actor(person, emotion = "orgasm")
             renpy.say(person.char, "Oh my god, I'm cumming....Ahhh....YES!....please " + person.mc_title + ", increase the speed!")
             scene_manager.update_actor(person, emotion = "happy")
-            person.have_orgasm(the_position = "sitting")
+            person.have_orgasm(the_position = "sitting", sluttiness_increase_limit = 80)
         return
 
     def dildochair_pleasure_loop_intensity(person, arousal = 0, energy = 0):
@@ -288,7 +288,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
 label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_punishment = False):
     "You turn on the chair and set the vibrations at:"
     menu dildochair_reward_menu:
-        "Speed 1 (tooltip)Slowly increase her arousal" if the_person.energy >= 10: # Each action use 10 energy and give 10 arousal and 1 obedience
+        "Speed 1 (tooltip)Slowly increase her arousal" if the_person.energy >= 5: # Each action use 10 energy and give 10 arousal and 1 obedience
             "A feeble buzz can be heard in the room, [the_person.title] bites her lip."
             $ dildochair_pleasure_loop_intensity(the_person, arousal = 3, energy = -1)
             if the_person.event_triggers_dict.get("dildochair_dildos") == 1: # One dildo in the pussy
@@ -301,7 +301,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
             $ dildochair_pleasure_loop_allow_orgasm(the_person, is_punishment)
             "You decide what to do next."
             jump dildochair_reward_menu
-        "Speed 1\n{color=#ff0000}{size=18}Requires at least 10 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if the_person.energy < 10:
+        "Speed 1\n{color=#ff0000}{size=18}Requires at least 10 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if the_person.energy < 5:
             pass
         "Speed 2 (tooltip)Moderately increase her arousal" if the_person.energy >= 10: # Each action use 10 energy and give 20 arousal and 2 obedience
             "A soft buzz can be heard in the room, [the_person.title] bite her lips moaning."
