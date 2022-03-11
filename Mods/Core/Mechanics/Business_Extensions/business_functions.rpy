@@ -52,6 +52,8 @@ init -1 python:
         # special case, she is a stripper but has no stripper_job so if you hire her before you confronted her, the schedule will be wrong
         if person == cousin:
             person.set_schedule(cousin.home, the_times = [4])
+            if person in stripclub_strippers:
+                stripclub_strippers.remove(the_person)
 
         # set names when hiring (if not set)
         if not person.title:
