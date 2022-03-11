@@ -1,5 +1,5 @@
 init python:
-    spooning_sex = Position(name = "Spooning", slut_requirement = 60, slut_cap = 90, requires_hard = True, requires_large_tits = False,
+    spooning_sex = Position(name = "Spooning", slut_requirement = 60, slut_cap = 85, requires_hard = True, requires_large_tits = False,
         position_tag = "back_peek", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Vaginal",
         girl_arousal = 12, girl_energy = 7,
         guy_arousal = 12, guy_energy = 10,  #A relaxed, low energy position
@@ -110,7 +110,7 @@ label outro_spooning(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] revels in having her fetish fulfilled."
             if the_girl.knows_pregnant():
                 the_girl "Oh god... no wonder I got knocked up..."
-            elif the_girl.sluttiness > 110:
+            elif the_girl.sluttiness > 90:
                 the_girl "Oh god it's so deep."
             elif the_girl.on_birth_control:
                 the_girl "Oh fuck...  Good thing I'm on the pill..."
@@ -239,7 +239,7 @@ label spooning_double_orgasm(the_girl, the_location, the_object):
             "[the_girl.possessive_title]'s body goes rigid and goosebumps erupt all over her body as her brain registers your cum on her."
             "[the_girl.possessive_title] revels in bliss as she mindlessly rubs in your cum and licks of her fingers to heighten her orgasm."
             "She truly is addicted to your cum."
-        elif the_girl.sluttiness > 120:
+        elif the_girl.sluttiness > 90:
             the_girl "What a waste, you should have put that inside of me."
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:

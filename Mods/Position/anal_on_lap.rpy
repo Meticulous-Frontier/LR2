@@ -1,5 +1,5 @@
 init python:
-    anal_on_lap = Position(name = "Sit on Lap", slut_requirement = 75, slut_cap = 105, requires_hard = True, requires_large_tits = False,
+    anal_on_lap = Position(name = "Sit on Lap", slut_requirement = 75, slut_cap = 95, requires_hard = True, requires_large_tits = False,
         position_tag = "sitting", requires_location = "Sit", requires_clothing = "Vagina", skill_tag = "Anal",
         girl_arousal = 22, girl_energy = 20,
         guy_arousal = 16, guy_energy = 14,
@@ -39,7 +39,7 @@ label intro_anal_on_lap(the_girl, the_location, the_object):
         the_girl "Ohhhh that's a great idea [the_girl.mc_title]!"
     elif the_girl.get_opinion_score("anal sex") > 0 :
         the_girl "Ahh, that feels really nice. You know I like it like that..."
-    elif the_girl.effective_sluttiness() > 110:
+    elif the_girl.effective_sluttiness() > 95:
         the_girl "Mmm, sounds kinky! Let's do it!"
     elif the_girl.effective_sluttiness() > 80:
         the_girl "Ok, just be careful [the_girl.mc_title]..."
@@ -110,7 +110,7 @@ label scene_anal_on_lap_2(the_girl, the_location, the_object):
                     "Pulling her back against you, you reach under her legs and force them up and open, so she is spread wide."
                     "She whimpers helplessly as you fuck her backdoor mercilessly."
                     $ the_girl.change_arousal(10)
-                elif the_girl.effective_sluttiness() > 110:
+                elif the_girl.effective_sluttiness() > 95:
                     the_girl "Mmm, do it! Fuck me hard and make me cum!"
                 elif the_girl.effective_sluttiness() > 80:
                     the_girl "Fuck [the_girl.mc_title], it's so intense I might need you to slow down..."
@@ -119,7 +119,7 @@ label scene_anal_on_lap_2(the_girl, the_location, the_object):
 
             "Finger her too":
                 "You reach forward and wrap your arms around her. With one arm you lift her entire body up and down, with the other you reach between her legs and shove two fingers into her cunt."
-                if the_girl.get_opinion_score("being fingered") or the_girl.get_opinion_score("being submissive") > 0:
+                if the_girl.get_opinion_score("being fingered") > 0 or the_girl.get_opinion_score("being submissive") > 0:
                     $ the_girl.discover_opinion("being fingered")
                     "You use your fingers inside of her as extra leverage to push her up and down. She gasps at the intense sensations."
                     the_girl "Fucking hell! That's so intense... oh yes [the_girl.mc_title]!"
@@ -179,7 +179,7 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
         if the_girl.get_opinion_score("anal creampies") > 0:
             $ the_girl.discover_opinion("anal creampies")
             the_girl "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."
-        elif the_girl.sluttiness > 110:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh god it's so good. It makes me so happy to be pumped full like this."
         else:
             the_girl "Oh fuck, I can't believe I let you cum in my ass..."
@@ -204,7 +204,7 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
         if the_girl.has_cum_fetish():
             "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
             "She truly is addicted to your cum."
-        elif the_girl.sluttiness > 120:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the streams of cum you've put on her, then licks her finger clean."
         else:

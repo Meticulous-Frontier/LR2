@@ -176,7 +176,7 @@ label scene_bent_over_breeding_2(the_girl, the_location, the_object):
                 the_girl "[the_girl.mc_title]! I love it deep. Fuck me good!"
                 "[the_girl.possessive_title] begs you for more."
                 "You give her what she wants. You grab her hips and start thrusting into her hard and fast."
-                $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3 + 3)
+                $ the_girl.change_arousal(5 * the_girl.get_opinion_score("being submissive"))
             else:
                 "[the_girl.possessive_title] moans."
                 the_girl "You are so deep... It feels good having you so deep inside me."
@@ -276,7 +276,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
         elif the_girl.wants_creampie() or the_girl.get_opinion_score("bareback sex") > 0:
             the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
             "[the_girl.possessive_title]'s voice starts to trail off."
-        elif the_girl.sluttiness > 110:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh god it's so deep."
         elif the_girl.on_birth_control:
             the_girl "Oh fuck...  Good thing I'm on the pill..."

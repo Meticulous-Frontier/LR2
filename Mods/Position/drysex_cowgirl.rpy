@@ -2,7 +2,7 @@
 
 init:
     python:
-        drysex_cowgirl = Position(name = "Dry Cowgirl", slut_requirement = 20, slut_cap = 80, requires_hard = False, requires_large_tits = False,
+        drysex_cowgirl = Position(name = "Dry Cowgirl", slut_requirement = 20, slut_cap = 40, requires_hard = False, requires_large_tits = False,
             position_tag = "cowgirl", requires_location = "Lay", requires_clothing = "None", skill_tag = "Foreplay",
             girl_arousal = 12, girl_energy = 9,
             guy_arousal = 10, guy_energy = 11,

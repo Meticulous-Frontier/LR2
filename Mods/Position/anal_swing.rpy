@@ -1,5 +1,5 @@
 init python:
-    SB_anal_swing = Position(name = "Swinging Anal", slut_requirement = 85, slut_cap = 110, requires_hard = True, requires_large_tits = False,
+    SB_anal_swing = Position(name = "Swinging Anal", slut_requirement = 80, slut_cap = 100, requires_hard = True, requires_large_tits = False,
         position_tag = "sitting", requires_location = "Swing", requires_clothing = "Vagina", skill_tag = "Anal",
         girl_arousal = 20, girl_energy = 12,
         guy_arousal = 22, guy_energy = 16,
@@ -29,7 +29,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object):
         the_girl "Oh my god. This is so kinky... fuck me good [the_girl.mc_title]!"
     elif the_girl.get_opinion_score("anal sex") > 0 :
         the_girl "I can't wait! It's so intense when you fuck me back there..."
-    elif the_girl.effective_sluttiness() > 110:
+    elif the_girl.effective_sluttiness() > 95:
         the_girl "Oh god I love it when you do this to me..."
     elif the_girl.effective_sluttiness() > 80:
         the_girl "Ok, just be careful [the_girl.mc_title]..."
@@ -232,7 +232,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         elif the_girl.get_opinion_score("anal creampies") > 0:
             the_girl "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."
-        elif the_girl.sluttiness > 110:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh god it's so good. It makes me so happy to be pumped full like this."
         else:
             the_girl "Oh fuck, I can't believe I let you cum in my ass..."
@@ -253,7 +253,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
             "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
             "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
             "She truly is addicted to your cum."
-        elif the_girl.sluttiness > 120:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the streams of cum you've put on her, then licks her finger clean."
         else:

@@ -88,7 +88,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
         $ doggy.redraw_scene(the_girl)
         $ climax_controller.do_clarity_release(the_girl)
         "You sit back and sigh contentedly, enjoying the sight of [the_girl.title] covered in your semen."
-        if the_girl.sluttiness > 120:
+        if the_girl.sluttiness > 90:
             the_girl "What a waste, you should have put that inside of me."
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:

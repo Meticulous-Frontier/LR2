@@ -230,7 +230,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                 "You pull out of [the_girl.possessive_title] at the last moment and step back. You whip your condom off and blow your load over her stomach while she watches."
             else:
                 "You pull out of [the_girl.possessive_title] at the last moment and step back. You stroke yourself off and blow your load over her stomach while she watches."
-            if the_girl.effective_sluttiness() > 120:
+            if the_girl.effective_sluttiness() > 90:
                 the_girl "What a waste, that would have felt so much better inside of me..."
                 "She reaches down and runs a finger through the puddles of cum you've put on her, then licks her finger clean and winks at you."
             else:

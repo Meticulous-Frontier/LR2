@@ -1,6 +1,6 @@
 init:
     python:
-        piledriver_DP = Position(name = "Piledriver DP", slut_requirement = 95, slut_cap = 130, requires_hard = True, requires_large_tits = False,
+        piledriver_DP = Position(name = "Piledriver DP", slut_requirement = 90, slut_cap = 100, requires_hard = True, requires_large_tits = False,
             position_tag = "missionary", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Vaginal",
             girl_arousal = 18, girl_energy = 14,
             guy_arousal = 24, guy_energy = 22,
@@ -38,7 +38,7 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
         the_girl "Oh god, you're gonna dominate me with that thing aren't you?"
         "She sounds more excited than scared."
         $ the_girl.change_arousal(10)
-    elif the_girl.sluttiness > 100:
+    elif the_girl.sluttiness > 90:
         the_girl "Oh! That'll work! My holes are for you to use [the_girl.mc_title]!"
     else:
         the_girl "Oh god! I don't know... are you sure about this?"
@@ -196,7 +196,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 elif the_girl.get_opinion_score("bareback sex") > 0:
                     the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
                     "[the_girl.possessive_title]'s voice starts to trail off."
-                elif the_girl.sluttiness > 110:
+                elif the_girl.sluttiness > 90:
                     the_girl "Oh god it's so deep."
                 elif the_girl.on_birth_control:
                     the_girl "Oh fuck...  Good thing I'm on the pill..."
@@ -244,7 +244,7 @@ label transition_piledriver_piledriver_DP(the_girl, the_location, the_object):
         the_girl "Oh god, you're gonna dominate me with that thing aren't you?"
         "She sounds more excited than scared."
         $ the_girl.change_arousal(10)
-    elif the_girl.sluttiness > 100:
+    elif the_girl.sluttiness > 90:
         the_girl "Oh god here we go. My holes are for you to use [the_girl.mc_title]!"
     else:
         the_girl "Oh god! I don't know... are you sure about this?"

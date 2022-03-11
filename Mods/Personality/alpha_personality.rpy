@@ -25,7 +25,7 @@ init 1400 python:
             valid_titles.append("Milady")
         if person.sluttiness > 60 and person.has_role(stripclub_mistress_role):
             valid_titles.append("Mistress")
-        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_titles.append("Anal Queen")
         return valid_titles
     def alpha_possessive_titles(person):
@@ -37,9 +37,9 @@ init 1400 python:
             valid_possessive_titles.append("Your naughty Manager")
         if person.sluttiness > 60 and person.has_role(stripclub_mistress_role):
             valid_possessive_titles.append("Your kinky Mistress")
-        if person.sluttiness > 100 and (person.get_opinion_score("threesomes") > 0 or person.get_opinion_score("other girls") > 0):
+        if person.sluttiness > 80 and (person.get_opinion_score("threesomes") > 0 or person.get_opinion_score("other girls") > 0):
             valid_possessive_titles.append("Your bi-sexual queen")
-        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_possessive_titles.append("Your anal queen")
         return valid_possessive_titles
     def alpha_player_titles(person):
@@ -931,7 +931,7 @@ label alpha_cum_vagina(the_person):
 
 label alpha_cum_anal(the_person):
     if the_person.obedience > 130:
-        if the_person.sluttiness > 200:
+        if the_person.sluttiness > 90:
             $ pronoun = person_body_shame_string(the_person, "little anal queen")
             the_person "Ah...yes pump your seed into your [pronoun]?"
         else:

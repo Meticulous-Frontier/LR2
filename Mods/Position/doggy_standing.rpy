@@ -131,7 +131,7 @@ label scene_SB_doggy_standing_1(the_girl, the_location, the_object):
 
         "Play with her clit":
             "You lean forward a bit and reach down with one hand and begin to move it in circles around her clit."
-            if the_girl.get_opinion_score("being fingered"):
+            if the_girl.get_opinion_score("being fingered") > 0:
                 "[the_girl.possessive_title] moans loudly in response."
                 the_girl "Oh [the_girl.mc_title], I love when you touch me there."
                 "You slide your fingers around her slit a few times."
@@ -311,7 +311,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
             elif the_girl.get_opinion_score("bareback sex") > 0:
                 the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
                 "[the_girl.possessive_title]'s voice starts to trail off."
-            elif the_girl.sluttiness > 110:
+            elif the_girl.sluttiness > 90:
                 the_girl "Oh god it's so deep."
             elif the_girl.on_birth_control:
                 the_girl "Oh fuck...  Good thing I'm on the pill..."
@@ -340,7 +340,7 @@ label outro_SB_doggy_standing(the_girl, the_location, the_object):
             "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
             "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
             "She truly is addicted to your cum."
-        if the_girl.sluttiness > 120:
+        if the_girl.sluttiness > 90:
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:

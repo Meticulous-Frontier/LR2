@@ -1,5 +1,5 @@
 init python:
-    SB_doggy_anal_dildo_dp = Position(name = "Doggy Anal DP", slut_requirement = 80, slut_cap = 120, requires_hard = True, requires_large_tits = False,
+    SB_doggy_anal_dildo_dp = Position(name = "Doggy Anal DP", slut_requirement = 80, slut_cap = 100, requires_hard = True, requires_large_tits = False,
         position_tag = "doggy", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Anal",
         girl_arousal = 26, girl_energy = 14,
         guy_arousal = 22, guy_energy = 20,
@@ -35,7 +35,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
 
     $ the_girl.draw_person(position = SB_doggy_anal_dildo_dp.position_tag)
 
-    if the_girl.effective_sluttiness() > 110:
+    if the_girl.effective_sluttiness() > 95:
         the_girl "Oh god I love it when you do this to me..."
     elif the_girl.effective_sluttiness() > 80:
         the_girl "Ok, just be careful [the_girl.mc_title]..."
@@ -73,7 +73,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] moves her fingers masterfully across her pussy. You can tell she masturbates often."
                     $ the_girl.discover_opinion("masturbating")
                     $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 5))
-                if the_girl.sluttiness > 100:
+                if the_girl.sluttiness > 90:
                     the_girl "I'm sorry [the_girl.mc_title], I'll try to get better at this. Having you in my ass is so intense..."
                     the_girl "and then the dildo with it? I've never felt so full..."
                 else:
@@ -192,7 +192,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
             mc.name "Mmm, so rear entry is how you like it, slut? Don't worry, this won't be the last time you feel my cock ravage your back door."
             "You can see goosebumps all over [the_girl.possessive_title]'s skin. You wonder how many times you can make her cum before you blow your load."
             $ the_girl.change_slut(2)
-        elif the_girl.sluttiness > 100:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh fuck, bury it in me [the_girl.mc_title]! I don't think I've ever felt so full..."
         else:
             "[the_girl.possessive_title] lets out a loud groan. You can tell she isn't used to being penetrated like this, but she is taking it as best she can."
@@ -249,7 +249,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
         $ the_girl.cum_in_ass()
         $ climax_controller.do_clarity_release(the_girl)
         $ SB_doggy_anal_dildo_dp.redraw_scene(the_girl)
-        if the_girl.sluttiness > 110:
+        if the_girl.sluttiness > 90:
             the_girl "Oh god it's so good. It doesn't matter which hole you do it in, I love it when you cum inside me."
         else:
             the_girl "Oh fuck, I can't believe I let you cum in my ass..."
@@ -267,7 +267,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
         $ the_girl.cum_on_ass()
         $ climax_controller.do_clarity_release(the_girl)
         $ SB_doggy_anal_dildo_dp.redraw_scene(the_girl)
-        if the_girl.sluttiness > 120:
+        if the_girl.sluttiness > 90:
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:
@@ -321,7 +321,7 @@ label transition_anal_doggy_doggy_anal_dp(the_girl, the_location, the_object):
 
 label transition_doggy_doggy_anal_dp(the_girl, the_location, the_object):
     mc.name "I'm gonna fuck both your holes at the same time."
-    if the_girl.effective_sluttiness() > 110:
+    if the_girl.effective_sluttiness() > 95:
         the_girl "Oh god I love it when you do this to me..."
     elif the_girl.effective_sluttiness() > 80:
         the_girl "Ok, just be careful [the_girl.mc_title]..."

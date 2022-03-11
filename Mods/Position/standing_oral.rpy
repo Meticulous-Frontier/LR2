@@ -243,13 +243,13 @@ label transition_default_standing_oral(the_girl, the_location, the_object):
             else:
                 the_girl "My, my. What did I do to deserve this?"
             $ the_girl.change_arousal(the_girl.get_opinion_score("taking control"))
-        elif the_girl.get_opinion_score("getting head") < 0 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] < 2) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] == 0):
+        elif the_girl.get_opinion_score("getting head") < 0 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] < 2) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] < 3):
             the_girl "You know you don't have to do that."
             "[the_girl.possessive_title] pushes your head away."
             $ the_girl.change_arousal(-10)
             if the_girl.get_opinion_score("giving blowjobs") > 0:
                 the_girl "How about we swap and I do something for you instead?"
-        elif the_girl.get_opinion_score("getting head") == 2 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] > 7) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] > 5):
+        elif the_girl.get_opinion_score("getting head") >= 2 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] > 7) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] > 5):
             the_girl "I could get used to this."
             the_girl "That feels GOOD."
         else:

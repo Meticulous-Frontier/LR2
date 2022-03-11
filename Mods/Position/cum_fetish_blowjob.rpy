@@ -1,5 +1,5 @@
 init python:
-    cum_fetish_blowjob = Position(name = "Blowjob", slut_requirement = 40, slut_cap = 100, requires_hard = True, requires_large_tits = False,
+    cum_fetish_blowjob = Position(name = "Blowjob", slut_requirement = 40, slut_cap = 90, requires_hard = True, requires_large_tits = False,
         position_tag = "blowjob", requires_location = "Kneel", requires_clothing = "None", skill_tag = "Oral",
         girl_arousal = 13, girl_energy = 10,
         guy_arousal = 15, guy_energy = 3,

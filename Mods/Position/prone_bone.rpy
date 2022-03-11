@@ -327,7 +327,7 @@ label outro_prone_bone(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] revels in having her fetish fulfilled."
             if the_girl.knows_pregnant():
                 the_girl "Oh god... no wonder I got knocked up..."
-            elif the_girl.sluttiness > 110:
+            elif the_girl.sluttiness > 90:
                 the_girl "Oh god it's so deep."
             elif the_girl.on_birth_control:
                 the_girl "Oh fuck...  Good thing I'm on the pill..."

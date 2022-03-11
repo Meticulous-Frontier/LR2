@@ -24,7 +24,7 @@ init 1400 python:
             valid_titles.append("Cougar")
         if person.sluttiness > 70:
             valid_titles.append("Old Bitch")
-        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_titles.append("Anal Harlot")
         return valid_titles
     def cougar_possessive_titles(person):
@@ -34,9 +34,9 @@ init 1400 python:
             valid_possessive_titles.append(person.name)
         if person.sluttiness > 60:
             valid_possessive_titles.append("Your slutty cougar")
-        if person.sluttiness > 100 and (person.get_opinion_score("drinking cum") > 0 or person.get_opinion_score("being covered in cum") > 0):
+        if person.sluttiness > 90 and (person.get_opinion_score("drinking cum") > 0 or person.get_opinion_score("being covered in cum") > 0):
             valid_possessive_titles.append("Your cum-dump cougar")
-        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_possessive_titles.append("Your anal minx")
         return valid_possessive_titles
     def cougar_player_titles(person):

@@ -80,7 +80,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
             "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly as her orgasm is enhanced by your bodyshot."
             "She truly is addicted to your cum."
         "After you finish, you watch as she slowly stops rubbing herself. Her body twitches once in a while from an aftershock."
-        if the_girl.sluttiness > 120 or the_girl.get_opinion_score("being covered in cum") > 0:
+        if the_girl.sluttiness > 90 or the_girl.get_opinion_score("being covered in cum") > 0:
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:

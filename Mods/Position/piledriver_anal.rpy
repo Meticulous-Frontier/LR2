@@ -1,6 +1,6 @@
 init:
     python:
-        piledriver_anal = Position(name = "Anal Piledriver", slut_requirement = 80, slut_cap = 110, requires_hard = True, requires_large_tits = False,
+        piledriver_anal = Position(name = "Anal Piledriver", slut_requirement = 80, slut_cap = 95, requires_hard = True, requires_large_tits = False,
             position_tag = "missionary", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Anal",
             girl_arousal = 18, girl_energy = 12,
             guy_arousal = 24, guy_energy = 20,
@@ -41,12 +41,12 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
     mc.name "I'm not fucking your pussy."
     "Your run your cock along her slit a few times, getting it lubricated. She understands what you mean after a few seconds."
     if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
-        if the_girl.effective_sluttiness() > 100:
+        if the_girl.effective_sluttiness() > 90:
             the_girl "Oh god, you're gonna pin me to the [the_object.name] and fuck my ass, aren't you?"
         else:
             the_girl "Oh god, you're gonna fuck my ass aren't you?"
     else: #She's inexperienced and doesn't quite know what to do.
-        if the_girl.effective_sluttiness() > 100:
+        if the_girl.effective_sluttiness() > 90:
             the_girl "Oh fuck, you want to put it in my ass don't you?"
         else:
             "[the_girl.possessive_title] looks worried."

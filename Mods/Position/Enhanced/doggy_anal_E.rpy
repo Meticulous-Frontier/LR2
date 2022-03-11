@@ -21,7 +21,7 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] moves her fingers masterfully across her pussy. You can tell she masturbates often."
                     $ the_girl.discover_opinion("masturbating")
                     $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 5))
-                if the_girl.sluttiness > 100:
+                if the_girl.sluttiness > 90:
                     the_girl "I'm sorry [the_girl.mc_title], I'll try to get better at this. Having you in my ass is so intense..."
                 else:
                     "[the_girl.possessive_title] seems to be enjoying the anal penetration a bit more now that she is touching herself."
@@ -123,16 +123,16 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
             "You pull yourself out of [the_girl.possessive_title]'s ass for moment and admire the soft, round cheeks of carnal pleasure in front of you."
             "Her asshole gapes a bit from your sudden pullout, and she quickly turns her head to see why she suddenly feels so empty."
             "[the_girl.possessive_title] realizes you are taking a moment to check out her backside."
-            if the_girl.get_opinion_score("showing her ass"):
+            if the_girl.get_opinion_score("showing her ass") > 0:
                 the_girl "Do you like my ass, [the_girl.mc_title]? I've caught you checking it out before. It gets me so hot when I feel your eyes checking out my backside..."
                 $ the_girl.change_arousal(the_girl.get_opinion_score("showing her ass" * 5))###
                 $ the_girl.discover_opinion("showing her ass")
                 "[the_girl.possessive_title] moves her ass side to side, gyrating her hips for you while keeping her ass cheeks spread wide."
-            elif the_girl.get_opinion_score("being covered in cum"):
+            elif the_girl.get_opinion_score("being covered in cum") > 0:
                 the_girl "Do you like what you see, [the_girl.mc_title]? I bet it is going to look even more amazing covered in your hot cum."
                 $mc.change_arousal(5)
                 "The thought of painting [the_girl.possessive_title]'s ass with your semen makes your cock twitch in anticipation."
-            elif the_girl.sluttiness > 100:
+            elif the_girl.sluttiness > 80:
                 the_girl "Hey, you can check my ass out later, right now you're supposed to be fucking it, [the_girl.mc_title]!"
                 "[the_girl.possessive_title] tries to push herself back on to you, but from her angle she is unable to get you to penetrate her again unless you help."
                 "She quickly gives up an resorts to rubbing her ass up and down along the length of your penis."
@@ -170,7 +170,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
                 mc.name "Mmm, so rear entry is how you like it, slut? Don't worry, this won't be the last time you feel my cock ravage your back door."
                 "You can see goosebumps all over [the_girl.possessive_title]'s skin. You wonder how many times you can make her cum before you blow your load."
                 $ the_girl.change_slut(2)
-            elif the_girl.sluttiness > 100:
+            elif the_girl.sluttiness > 80:
                 the_girl "Oh fuck, bury it in me [the_girl.mc_title]! I don't think I've ever felt so full..."
             else:
                 "[the_girl.possessive_title] lets out a loud groan. You can tell she isn't used to being penetrated like this, but she is taking it as best she can."

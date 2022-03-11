@@ -226,7 +226,7 @@ label scene_prone_anal_3(the_girl, the_location, the_object):
             elif the_girl.get_opinion_score("anal creampies") > 0:
                 the_girl "Oh god, you can cum inside me if you want... I think I want you to!"
                 $ the_girl.change_arousal(10)
-            elif the_girl.get_opinion_score("anal creampies") <= 0:
+            elif the_girl.get_opinion_score("anal creampies") < 0:
                 the_girl "No way... please don't! It's so gross after when guys cum back there..."
                 $ the_girl.change_arousal(-5)
             else:
@@ -330,7 +330,7 @@ label outro_prone_anal(the_girl, the_location, the_object):
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her fetish fulfilled."
-            elif the_girl.sluttiness > 110:
+            elif the_girl.sluttiness > 90:
                 the_girl "Oh god it's so deep."
             else:
                 the_girl "Oh fuck..."

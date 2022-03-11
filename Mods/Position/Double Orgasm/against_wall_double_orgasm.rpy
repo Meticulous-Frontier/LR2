@@ -127,7 +127,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 "[the_girl.possessive_title]'s body goes rigid and goosebumps erupt all over her body as her brain registers your cum on her."
                 "[the_girl.possessive_title] revels in bliss as she mindlessly rubs in your cum and licks of her fingers to heighten her orgasm."
                 "She truly is addicted to your cum."
-            elif the_girl.effective_sluttiness() > 120:
+            elif the_girl.effective_sluttiness() > 90:
                 the_girl "What a waste, that would have felt so much better inside of me..."
                 "She reaches down and runs a finger through the puddles of cum you've put on her, then licks her finger clean and winks at you."
             else:
