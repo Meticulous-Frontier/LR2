@@ -115,7 +115,7 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
                 else:
                     "You listen while [person.possessive_title] talks and discover that she [opinion_string] [opinion_learned]."
 
-            $ person.change_love(2 - prediction_difference, max_modified_to = 35)
+            $ person.change_love(3 - prediction_difference, max_modified_to = 35)
 
         else:
             if is_phone:
