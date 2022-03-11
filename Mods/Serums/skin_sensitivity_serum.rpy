@@ -18,6 +18,7 @@ init -1 python:
 
         the_person.planned_outfit = test_outfit
         the_person.apply_outfit(the_person.planned_outfit)
+        the_person.draw_animated_removal(the_clothing)
         # always log stripping
         mc.log_event((the_person.title or the_person.create_formatted_title("???")) + ": Removed her " + the_clothing.display_name, "float_text_grey")
         return
