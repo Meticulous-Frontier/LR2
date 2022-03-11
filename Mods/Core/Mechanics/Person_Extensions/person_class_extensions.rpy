@@ -380,6 +380,19 @@ init -1 python:
 
     Person.tits_description = property(person_tits_description_string, None, None, "Property that returns tits description for use in dialogs.")
 
+    def person_formal_address(self):
+        if self.job == nora_professor_job:
+            return "Professor"
+        if self.job in [doctor_job]:
+            return "Doctor"
+        if self.relationship == "Married":
+            return "Mrs."
+        elif self.age > 30:
+            return "Ms."
+        return "Miss"
+
+    Person.formal_address = property(person_formal_address, None, None, "Property that returns Miss, Ms. or Mrs. based on age / martial status.")
+
     ## CHANGE HEIGHT EXTENSION
     # Returns True when the persons height has changed; otherwise False
     # chance is probability percentage that height change for amount will occur (used by serums)

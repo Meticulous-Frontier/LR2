@@ -482,13 +482,13 @@ label starbuck_flirt_response_high(the_person):
 init python:
     def starbuck_titles(person):
         valid_titles = []
-        valid_titles.append("Mrs. " + person.last_name)
+        valid_titles.append(person.formal_address + " " + person.last_name)
         valid_titles.append("Cara")
         return valid_titles
 
     def starbuck_possessive_titles(person):
         valid_possessive_titles = []
-        valid_possessive_titles.append("Mrs. " + person.last_name)
+        valid_possessive_titles.append(person.formal_address + " " + person.last_name)
         valid_possessive_titles.append("The sex shop owner")
         if sex_shop_stage() > 1:
             valid_possessive_titles.append("Your business partner")

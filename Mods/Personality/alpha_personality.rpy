@@ -18,7 +18,7 @@ init 3 python:
 init 1400 python:
     def alpha_titles(person):
         valid_titles = []
-        valid_titles.append("Mrs. " + person.last_name)
+        valid_titles.append(person.formal_address + " " + person.last_name)
         if person.love > 20:
             valid_titles.append(person.name)
         if person.love > 50 and person.has_role(stripclub_mistress_role):
@@ -30,7 +30,7 @@ init 1400 python:
         return valid_titles
     def alpha_possessive_titles(person):
         valid_possessive_titles = []
-        valid_possessive_titles.append("Mrs. " + person.last_name)
+        valid_possessive_titles.append(person.formal_address + " " + person.last_name)
         if person.love > 10 and person.has_role(stripclub_manager_role):
             valid_possessive_titles.append("Your manager")
         if person.sluttiness > 60 and person.has_role(stripclub_manager_role):

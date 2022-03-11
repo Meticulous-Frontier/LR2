@@ -432,7 +432,7 @@ label erica_hookup_accept(the_person):
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
         "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
         mc.name "That's it, bitch. I'm about to cum!"
-        if the_person.effective_sluttiness() > 100: #She is so slutty, she begs for your cum.
+        if the_person.effective_sluttiness() > 90: #She is so slutty, she begs for your cum.
             the_person "The condom! Take it off! Please!?! Your cock is so good, I want to feel you dump your load inside me!"
             "Your brain is getting a little hazy with lust. Surely there's nothing wrong with that, right?"
             menu:
@@ -501,11 +501,11 @@ label erica_hookup_accept(the_person):
             menu:
                 "Stay Vaginal":
                     "As [the_person.title]'s pussy quivers around you, you decide to just keep doing what you are doing."
-                "Fuck Her Ass" if the_person.effective_sluttiness() >= 80:
+                "Fuck Her Ass" if the_person.effective_sluttiness() >= 70:
                     "You pull out of her pussy. Her juices leave a strand attached to you, connecting you to her cunt."
                     the_person "Mmm, [the_person.mc_title]? Why did you pull out... OH!"
                     "Her question is swiftly answered when she feels your manhood poking her puckered hole."
-                    if the_person.effective_sluttiness() > 100:
+                    if the_person.effective_sluttiness() > 90:
                         the_person "Yes! Fuck my ass good!"
                     else:
                         the_person "Oh my... be careful!"

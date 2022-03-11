@@ -17,7 +17,7 @@ init 3 python:
 init 1400 python:
     def cougar_titles(person):
         valid_titles = []
-        valid_titles.append("Mrs. " + person.last_name)
+        valid_titles.append(person.formal_address + " " + person.last_name)
         if person.love > 20:
             valid_titles.append(person.name)
         if person.love > 40:
@@ -29,7 +29,7 @@ init 1400 python:
         return valid_titles
     def cougar_possessive_titles(person):
         valid_possessive_titles = []
-        valid_possessive_titles.append("Mrs. " + person.last_name)
+        valid_possessive_titles.append(person.formal_address + " " + person.last_name)
         if person.love > 20:
             valid_possessive_titles.append(person.name)
         if person.sluttiness > 60:
