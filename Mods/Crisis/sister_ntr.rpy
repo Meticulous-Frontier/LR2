@@ -151,7 +151,7 @@ label sister_ntr_crisis_action_label():
                     "She looks into [man_name]'s eyes while sucking him off. One of her hands is playing with his balls."
                     man_name "I'm gonna cum, [the_person.name]!"
                     "She just keep on going at steady pace."
-                    the_person "Mmmmmm... Mmmm.. Uh."
+                    the_person "Mmmmmm... Mmmm... Uh."
                     $ cum_in_mouth_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] moans and starts filling her mouth with his load."
@@ -252,7 +252,7 @@ label sister_ntr_crisis_action_label():
                     "She looks into [man_name]'s eyes while sucking him off. One of her hands is playing with his balls."
                     man_name "I'm gonna cum, [the_person.name]!"
                     "She just keep on going at steady pace."
-                    the_person "Mmmmmm... Mmmm.. Uh."
+                    the_person "Mmmmmm... Mmmm... Uh."
                     $ cum_in_mouth_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
@@ -352,7 +352,7 @@ label sister_ntr_crisis_action_label():
                     "She looks into [man_name]'s eyes while sucking him off. One of her hands is playing with his balls."
                     man_name "I'm gonna cum, [the_person.name]!"
                     "She just keep on going at steady pace."
-                    the_person "Mmmmmm... Mmmm.. Uh."
+                    the_person "Mmmmmm... Mmmm... Uh."
                     $ cum_in_mouth_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
@@ -425,7 +425,7 @@ label sister_ntr_crisis_action_label():
                     "She looks into [man_name]'s eyes while sucking him off. One of her hands is playing with his balls."
                     man_name "I'm gonna cum, [the_person.name]!"
                     "She just keep on going at steady pace."
-                    the_person "Mmmmmm... Mmmm.. Uh."
+                    the_person "Mmmmmm... Mmmm... Uh."
                     $ cum_in_mouth_ntr(the_person)
                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                     "[man_name] shrugs and starts filling her mouth with his load."
@@ -550,7 +550,7 @@ label sister_ntr_crisis_action_label():
                 "She looks into [man_name]'s eyes while sucking him off. One of her hands is playing with his balls and the other is stroking [man_name2]."
                 man_name "I'm gonna cum, [the_person.name]!"
                 "She just keep on going at steady pace."
-                the_person "Mmmmmm... Mmmm.. Uh."
+                the_person "Mmmmmm... Mmmm... Uh."
                 $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
@@ -680,7 +680,7 @@ label sister_ntr_crisis_action_label():
                 "She looks into [man_name]'s eyes while sucking him off. One of her hands is playing with his balls and the other is stroking [man_name2]."
                 man_name "I'm gonna cum, [the_person.name]!"
                 "She just keep on going at steady pace."
-                the_person "Mmmmmm... Mmmm.. Uh."
+                the_person "Mmmmmm... Mmmm... Uh."
                 $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
@@ -802,7 +802,7 @@ label sister_ntr_crisis_action_label():
                 "She looks into [man_name]'s eyes while sucking him off. One of her hands is playing with his balls and the other is stroking [man_name2]."
                 man_name "I'm gonna cum, [the_person.name]!"
                 "She just keep on going at steady pace."
-                the_person "Mmmmmm... Mmmm.. ahh."
+                the_person "Mmmmmm... Mmmm... ahh."
                 $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."
@@ -895,7 +895,7 @@ label sister_ntr_crisis_action_label():
                 "She looks into [man_name]'s eyes while sucking him off. One of her hands is playing with his balls and the other is stroking [man_name2]."
                 man_name "I'm gonna cum, [the_person.name]!"
                 "She just keep on going at steady pace."
-                the_person "Mmmmmm... Mmmm.. Uh."
+                the_person "Mmmmmm... Mmmm... Uh."
                 $ cum_in_mouth_ntr(the_person)
                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                 "[man_name] shrugs and starts filling her mouth with his load."

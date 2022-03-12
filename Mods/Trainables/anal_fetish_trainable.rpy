@@ -30,7 +30,7 @@ label train_anal_fetish_label(the_person):
     mc.name "I've got something to talk to you about [the_person.title]."
     "She nods and listens attentively."
     mc.name "I've noticed that you really enjoy when I play with your ass."
-    the_person "Yeah..I do.."
+    the_person "Yeah... I do..."
     mc.name "I was thinking that we should explore this a little further, what do you think?"
     the_person "Well, I wouldn't mind, if you did."
     mc.name "Good, stand up and show me your butt."
@@ -52,7 +52,7 @@ label train_anal_fetish_label(the_person):
             the_person "Oh yes, please, just push them a little inside."
             "You place your thumbs on either side and slide the tips inside, provoking a little sight from [the_person.possessive_title]."
             mc.name "Do you want me to stretch it a bit for you?"
-            the_person "Mmm...get that dirty hole ready for your big cock."
+            the_person "Mmm... get that dirty hole ready for your big cock."
             "You continue stretching her asshole for a while, until you notice that her [the_person.pubes_description] pussy starts glistening."
 
         # TODO: Write the ass spanking part
@@ -65,7 +65,7 @@ label train_anal_fetish_label(the_person):
             "After while, you slow start tracing her orifice with your fingers. Causing a slight tremble from [the_person.possessive_title]."
             the_person "Oh, yes, right there [the_person.mc_title]."
             "That's all the encouragement you need to slide your finger inside."
-            the_person "Mmmm...yes...that's it. Every time I play with myself I have to push a finger inside."
+            the_person "Mmmm... yes... that's it. Every time I play with myself I have to push a finger inside."
             menu:
                 "Continue":
                     "Using some spit as lube, you shove your entire finder inside of her."
@@ -73,9 +73,9 @@ label train_anal_fetish_label(the_person):
                     "You continue to finger fuck her ass for a while, until her [the_person.pubes_description] pussy gets really wet."
                 "Slide in a second finger":
                     "You lube up a second finger with your saliva and push both fingers inside."
-                    the_person "Ahhh...YES...stretch my dirty hole [the_person.mc_title]."
+                    the_person "Ahhh... YES... stretch my dirty hole [the_person.mc_title]."
                     mc.name "You are going to be my slutty anal bitch, aren't you [the_person.name]?"
-                    the_person "Yes...I will...hmmm...right there..."
+                    the_person "Yes... I will... hmmm... right there..."
                     "You continue to shove your fingers up her bum, until her [the_person.pubes_description] pussy gets really wet."
 
         # TODO: Write the dildo part
@@ -84,7 +84,7 @@ label train_anal_fetish_label(the_person):
 
     mc.name "Alright, [the_person.title], that's enough for now. We will continue this another time."
     $ increase_anal_fetish(the_person)
-    the_person "Oh [the_person.mc_title], that felt..just..amazing."
+    the_person "Oh [the_person.mc_title], that felt... just... amazing."
 
     if start_anal_fetish_quest(the_person):
         $ the_person.event_triggers_dict["anal_fetish_start"] = True

@@ -33,7 +33,7 @@ label aunt_drunk_cuddle_label():
 
     "Before you go to bed, you come out into the kitchen to get a drink of water. [mom.possessive_title] and [the_person.title] are sitting there, drinking some wine."
     "It is pretty clear from their conversation that they have both had a lot to drink. They are cracking dirty jokes to each other."
-    the_person "...So then I said, it's okay my partner is no good, I've got a good hand!"
+    the_person "... So then I said, it's okay my partner is no good, I've got a good hand!"
     "[mom.title] laughs at [the_person.possessive_title]'s joke."
     mom "Ah that's too funny. Oh hi [mom.mc_title], your aunt and I were just having some wine before bed. Would you like some?"
     mc.name "No thanks, I'm just grabbing a glass of water."

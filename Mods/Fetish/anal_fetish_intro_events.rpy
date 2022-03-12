@@ -254,7 +254,7 @@ label anal_fetish_employee_intro_label(the_person):
     $ the_person.draw_person(position = the_person.idle_pose)
     the_person "Wow, that was amazing, [the_person.mc_title]. I don't know what has been coming over me lately... I just can't stop thinking about you bending me over..."
     "[the_person.possessive_title] blushes and pauses..."
-    mc.name "...And doing what, [the_person.title]?"
+    mc.name "... And doing what, [the_person.title]?"
     "You tease her."
     the_person "I can't stop thinking about how full it feels... it feels so right when you push into my ass. It gets me so hot imagining it..."
     $ add_anal_fetish(the_person)
@@ -541,8 +541,8 @@ label anal_fetish_mom_intro_label():
     $ clear_scene()
     $ hall.show_background()
     "You grab a soda from the kitchen then head to the living room and sit down on the couch. You take a look at the movie that [the_person.possessive_title] has picked out."
-    "Murmur of the Heart? Hmm, sounds like a dumb chick flick... you back out for a second to read the description. Hmm...."
-    "...an open-minded teenage boy finds himself torn between a rebellious urge to discover love, and the ever-present, almost dominating affection of his beloved mother..."
+    "Murmur of the Heart? Hmm, sounds like a dumb chick flick... you back out for a second to read the description. Hmm..."
+    "... an open-minded teenage boy finds himself torn between a rebellious urge to discover love, and the ever-present, almost dominating affection of his beloved mother..."
     "Oh geeze. She is definitely planning an interesting night! You quickly click back into the movie and pause it when you hear her bedroom door open."
     "You try to act nonchalant as you hear [the_person.title] walk into the living room. You purposefully avoid looking at her until you hear her clear her throat."
     the_person "Ah, want to get a little more comfortable with me tonight?"
@@ -737,7 +737,7 @@ label anal_fetish_lily_intro_label():
     starbuck "Is there anything I can help you find?"
     $ the_person.draw_person(position = "stand4")
     "[the_person.possessive_title] takes the lead."
-    the_person "Yeah so, I was wondering, do you sell a special type of strap on that came be used to... umm... strap on to a guy so he can fuck your pussy and ass at the same time?"
+    the_person "Yeah so, I was wondering, do you sell a special type of strap-on that came be used to... umm... strap on to a guy so he can fuck your pussy and ass at the same time?"
     "You can barely believe your ears. You knew that the serums you had been giving [the_person.title] were starting to really corrupt her, but you had no idea she was ready for something like this."
     "And for her instapic channel? It's almost too good to be true."
     $ mc.change_locked_clarity(30)

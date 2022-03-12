@@ -269,7 +269,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
             "[the_girl.possessive_title] revels in having her breeding fetish fulfilled."
         elif the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+            the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         if the_girl.knows_pregnant():
             the_girl "It's nice, already being pregnant, I can take a load like that anytime..."
@@ -311,7 +311,7 @@ label transition_default_bent_over_breeding(the_girl, the_location, the_object):
         $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
         "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
         "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
-        the_girl "Oh god.... Ah...."
+        the_girl "Oh god... Ah..."
         "You start with short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
         $ the_girl.break_taboo("vaginal_sex")
     else:

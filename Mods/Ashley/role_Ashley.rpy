@@ -1819,7 +1819,7 @@ label ashley_sneaks_over_label():
     "You slowly wake up, with your arms around [the_person.possessive_title], spooning with her."
     $ mc.change_locked_clarity(50)
     "She stirs at the same time as you. She gives a big yawn."
-    the_person "...[the_person.mc_title]?"
+    the_person "... [the_person.mc_title]?"
     mc.name "Good morning."
     $ the_person.change_love(5)
     the_person "Mmm... so this is what it's like? To wake up next to someone you fucked all night sober?"
@@ -1897,7 +1897,7 @@ label coffee_time_innocent_chat_label():
     $ overhear_topic = stephanie.get_random_opinion(include_sexy = False)
     $ text_one = person_opinion_to_string(stephanie, overhear_topic)[1]
     $ text_two = get_topic_text(overhear_topic)
-    stephanie "...But I [text_one] [text_two], so I'm not sure what to do."
+    stephanie "... But I [text_one] [text_two], so I'm not sure what to do."
     if stephanie.discover_opinion(overhear_topic):
         "Wow, you knew they were sisters, but they really do talk about basically everything!"
 
@@ -1922,7 +1922,7 @@ label coffee_time_sexy_chat_label():
     $ overhear_topic = the_person.get_random_opinion(include_sexy = True, include_normal = False)
     $ text_one = person_opinion_to_string(the_person, overhear_topic)[1]
     $ text_two = get_topic_text(overhear_topic)
-    the_person "...But I [text_one] [text_two], so I'm not sure what to do."
+    the_person "... But I [text_one] [text_two], so I'm not sure what to do."
     if the_person.discover_opinion(overhear_topic):
         "Wow, you didn't realize they talked about sex in such detail with each other."
     $ mc.change_locked_clarity(10)

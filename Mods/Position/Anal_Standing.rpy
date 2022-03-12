@@ -344,7 +344,7 @@ label outro_SB_anal_standing(the_girl, the_location, the_object):
         $ SB_anal_standing.redraw_scene(the_girl)
         if the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
-            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
+            the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         elif the_girl.get_opinion_score("anal creampies") > 0:
             the_girl "Oh god... it's inside me... right where it belongs. Thank you so much, [the_girl.mc_title]!"
@@ -440,14 +440,14 @@ label transition_standing_anal_to_standing_doggy_taboo_break_label(the_girl, the
     "You pull your cock out of [the_girl.title]'s ass."
     "You continue your back and forth motion, rubbing your cock along her pussy lips."
     if the_girl.get_opinion_score("vaginal sex") > 0:
-        the_girl "Oh....Please..."
+        the_girl "Oh... Please..."
     "You continue to move your cock forwards and backwards teasing her pussy."
     mc.name "Ready."
     "The word is a command not a question."
     $ the_girl.call_dialogue(SB_doggy_standing.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
     "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
-    the_girl "Oh god.... Ah...."
+    the_girl "Oh god... Ah..."
     "You start with short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
     return
 

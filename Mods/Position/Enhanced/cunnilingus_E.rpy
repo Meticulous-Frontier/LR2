@@ -100,7 +100,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                         "You go back to rimming [the_girl.possessive_title]."
 
             if the_girl.has_role(anal_fetish_role):
-                the_girl "Oh..my.. god! That feels sooo good...you have to keep doing that."
+                the_girl "Oh... my... god! That feels sooo good... you have to keep doing that."
                 "[the_girl.possessive_title] reached behind your head to hold your head in place. Her breathing is heavy but erratic."
                 menu:
                     "Keep licking":

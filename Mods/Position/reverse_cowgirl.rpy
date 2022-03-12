@@ -194,7 +194,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
             "[the_girl.possessive_title]'s quivering hole feels too good, you can't hold it back anymore."
             "She moans as the first wave of your cum floods her [the_girl.pubes_description] pussy. She rocks her hips back and forth on top of you as you dump your load inside her."
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I want it all inside me!"
+            the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! I want it all inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
             $ the_girl.cum_in_vagina()
             $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)

@@ -67,7 +67,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
     elif the_choice == "Cum on her stomach":
         if mc.condom == False and the_girl.wants_creampie() and the_girl.obedience <200 :
             "Before you get the chance to pull back and out, [the_girl.title] lifts both her feet up and wraps her legs around you, locking her ankles together."
-            $ wordchoice = renpy.random.choice(["Oh God", "Oh yes", "Oh.. OH! Yes"])
+            $ wordchoice = renpy.random.choice(["Oh God", "Oh yes", "Oh... OH! Yes"])
             $ wordchoice2 = renpy.random.choice(["Cum for me!", "Cum inside!", "Cum for me!", "Cum in me!", "Pump it deep!", ""])
             if the_girl.love < 0:
                 "Where do think you're going, [the_girl.mc_title]?"
@@ -90,7 +90,7 @@ label against_wall_double_orgasm(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] moans in ecstasy as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 "Having your cum inside of her heightens her orgasm as her fetish for you cum is fulfilled."
-                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
+                the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
             "When you finish, [the_girl.title] leaves her legs wrapped around you as she has a couple aftershocks. Her pussy twitches with each one."
             "She slowly opens her eyes and looks at you."
             $ wordchoice = renpy.random.choice(['Relax', "Don't panic", 'Stay calm', 'Chill', "It's okay"])

@@ -228,7 +228,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
         $ SB_anal_swing.redraw_scene(the_girl)
         if the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
-            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
+            the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         elif the_girl.get_opinion_score("anal creampies") > 0:
             the_girl "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."

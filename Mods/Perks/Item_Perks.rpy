@@ -18,11 +18,11 @@ init -1 python:
             piledriver.link_positions(piledriver_DP,"transition_piledriver_piledriver_DP")
         return
 
-    def male_strapon_unlock(): #This function is wrapper to unlock the male strap on. This is in testing
+    def male_strapon_unlock(): #This function is wrapper to unlock the male strap-on. This is in testing
         if perk_system.has_item_perk("Male Strapon"):
             return
 
-        item_perk_male_strapon = Item_Perk("A strap on designed to be worn by men. Useful for double penetration!",
+        item_perk_male_strapon = Item_Perk("A strap-on designed to be worn by men. Useful for double penetration!",
         on_unlock = male_strapon_on_unlock,
         save_load = male_strapon_save_load)
 

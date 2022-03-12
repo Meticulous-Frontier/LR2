@@ -197,7 +197,7 @@ label transition_anal_doggy_to_doggy_taboo_break_label(the_girl, the_location, t
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
     "After a moment of resistance your cock spreads her [the_girl.pubes_description] pussy open and you slide smoothly inside of her."
     if the_girl.sex_skills["Vaginal"] > 2:
-        the_girl "Oh god yes.... keep sliding that monster into me...."
+        the_girl "Oh god yes... keep sliding that monster into me..."
         "You ram your whole length into her wet pussy and start pounding her."
     else:
         the_girl "Oh god... take it slow... "

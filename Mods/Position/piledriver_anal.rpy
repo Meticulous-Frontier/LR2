@@ -160,7 +160,7 @@ label outro_piledriver_anal(the_girl, the_location, the_object):
         else:
             if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Her eyes go blank and she gets a blissful expression on her face."
-                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! Fill this slutty ass up!"
+                the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! Fill this slutty ass up!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
 
             "She is left on her back, holding her own ankles up by her head, trying to catch her breath, as your cum drips out of her gaping asshole."

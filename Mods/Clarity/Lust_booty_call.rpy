@@ -84,7 +84,7 @@ label lust_booty_call_intro_label():
         the_person "Damn, why didn't you say you were DTF. I'll be right over."
         "You make sure she has your address."
     "You use the time to make sure your bedroom is cleaned up and ready for your booty call."
-    "Soon, you phone is going off."
+    "Soon, your phone is going off."
     the_person "I'm here."
     $ mc.end_text_convo()
     "You quickly let her in and sneak back to your room."
@@ -166,7 +166,7 @@ label lust_booty_call_label():
             $ mc.change_location(bedroom)
             $ mc.location.show_background()
         "You use the time to make sure your bedroom is cleaned up and ready for your booty call."
-        "Soon, you phone is going off."
+        "Soon, your phone is going off."
         the_person "I'm here."
         $ mc.end_text_convo()
         "You quickly let her in and sneak back to your room."

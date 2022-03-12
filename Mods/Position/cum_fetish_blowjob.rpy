@@ -44,7 +44,7 @@ label scene_cum_fetish_blowjob_1(the_girl, the_location, the_object):
             mc.name "You are such a good cum slut. You are so eager to suck that cum straight outta me, aren't you?"
             "[the_girl.possessive_title] strokes you a few more times with her skilled mouth. She twirls her tongue around the tip a few times before taking a second to respond."
             the_girl "Mmm, it's been too long since you fed me... I cant wait to feel your cum sliding down my throat..."
-            the_girl "...or maybe I'll pull off and stroke you while you cover my face in your hot cum..."
+            the_girl "... or maybe I'll pull off and stroke you while you cover my face in your hot cum..."
             "She slips you back into her mouth and resumes blowing you."
         "Stay quiet":
             "You rest your hand on her head, guiding her as she sucks you off."
@@ -81,7 +81,7 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
         "[the_girl.possessive_title]'s knees quiver while her throat spasms around your shaft. You hold her deep while her body twitches with pleasure."
         "You let go of her head and she slowly comes up for air."
         the_girl "Oh god you taste so good. You can fuck my throat if you want to, just promise me you'll warn me before you cum..."
-        the_girl "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
+        the_girl "... I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
         $ the_girl.discover_opinion("cum facials")
         "Turned on by her filthy words, you grab the back of her head with both hands and force your dick right back down her throat."
         "You fuck her face roughly. Her throat makes vulgar suction noises with each thrust, and you can see her throat bulging slightly."
@@ -102,7 +102,7 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
         "She tenses and and relaxes her throat rhythmically, gently massaging your shaft with it."
         "You moan at the intense sensations.You let go of her head and she slowly comes up for air."
         the_girl "Oh god you taste so good. Just promise me you'll warn me before you cum..."
-        the_girl "...I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
+        the_girl "... I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."
         $ the_girl.discover_opinion("cum facials")
         "Your cock twitches in response to her filthy words. She notices and quickly opens her mouth and take you deep again."
     return
@@ -135,7 +135,7 @@ label outro_cum_fetish_blowjob(the_girl, the_location, the_object):
     $ the_girl.draw_person(position = "kneeling1")
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
     "Slowly recovering, you look at [the_girl.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
-    the_girl "Yes.. it's so hot... It feels so good on my skin..."
+    the_girl "Yes... it's so hot... It feels so good on my skin..."
     return
 
 label transition_default_cum_fetish_blowjob(the_girl, the_location, the_object):

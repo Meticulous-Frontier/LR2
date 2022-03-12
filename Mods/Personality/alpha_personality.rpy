@@ -177,7 +177,7 @@ label alpha_sex_gentle_reject(the_person):
     elif not the_person.relationship == "Single":
         the_person "I... we can't do that [the_person.mc_title]. I'm seeing someone else..."
     else:
-        the_person "I can't...at least not yet."
+        the_person "I can't... at least not yet."
     return
 
 label alpha_sex_angry_reject(the_person):
@@ -217,7 +217,7 @@ label alpha_climax_responses_vaginal(the_person):
         the_person "Ah! Yes [the_person.mc_title]! Right there, yes... pump me... I'm cumming!"
         "She closes her eyes and goes into a frenzy of multiple orgasms."
     else:
-        the_person "Oh god, that's it...keep going...yes [the_person.mc_title]..yes! Yes! YES!"
+        the_person "Oh god, that's it... keep going... yes [the_person.mc_title]... yes! Yes! YES!"
     return
 
 label alpha_climax_responses_anal(the_person):
@@ -693,7 +693,7 @@ label alpha_flirt_response_affair(the_person):
                     mc.name "Well that would just be cruel of me..."
                     $ mc.change_locked_clarity(10)
                     "You put your arm around [the_person.possessive_title] and rest your hand on her ass."
-                    mc.name "...If I got you all excited thinking about the next time I'm going to fuck you."
+                    mc.name "... If I got you all excited thinking about the next time I'm going to fuck you."
                     "She leans her body against yours for a moment and squeezes your cock. You give her butt a final slap and let go of her."
 
         else: #She's shy or nervous about being discovered
@@ -933,7 +933,7 @@ label alpha_cum_anal(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 90:
             $ pronoun = person_body_shame_string(the_person, "little anal queen")
-            the_person "Ah...yes pump your seed into your [pronoun]?"
+            the_person "Ah... yes pump your seed into your [pronoun]?"
         else:
             the_person "Oh my, you filled up my bottom... Remember [the_person.mc_title], you're the only one I let do this."
     else:
@@ -1249,7 +1249,7 @@ label alpha_licking_pussy_taboo_break(the_person):
     else:
         the_person "You're a gentleman [the_person.mc_title], but I don't feel like it."
         if not the_person.has_taboo("sucking_cock"):
-            the_person "It's flattering that you'd want to return the favour though, so thank you."
+            the_person "It's flattering that you'd want to return the favor though, so thank you."
 
         mc.name "No, I don't think you understand what I'm saying. I {i}want{/i} to eat you out, I'm just waiting for you to say it."
         "[the_person.title] won't admit it..."

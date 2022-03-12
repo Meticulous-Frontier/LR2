@@ -323,7 +323,7 @@ label outro_prone_bone(the_girl, the_location, the_object):
             $ prone_bone.redraw_scene(the_girl)
             if the_girl.has_cum_fetish() or the_girl.has_breeding_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+                the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her fetish fulfilled."
             if the_girl.knows_pregnant():
                 the_girl "Oh god... no wonder I got knocked up..."

@@ -66,7 +66,7 @@ label slave_attention_crisis_action_label():
                     $ mc.change_energy(-20)
 
                     if the_person.arousal >= 100:
-                        the_person "Oh my god, I'm cumming....Aaargh....YES....please [the_person.mc_title], continue abusing my body..."
+                        the_person "Oh my god, I'm cumming... Aaargh... YES... please [the_person.mc_title], continue abusing my body..."
                         $ the_person.have_orgasm(half_arousal = True, the_position = "against_wall")
 
                     "Looking at her welted body, you decide what to do next."
@@ -111,7 +111,7 @@ label slave_attention_crisis_action_label():
 
         "Release her":
             mc.name "Well, [the_person.title], I don't think this is working out, although I'm not unsatisfied with your performance, this is not working out."
-            the_person "Please Master, give me another chance...you can punish me hard if you need to."
+            the_person "Please Master, give me another chance... you can punish me hard if you need to."
             if not the_person.vagina_visible():
                 "Pleading she turns around stripping her bottom bare, waiting for your decision."
                 $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
@@ -167,7 +167,7 @@ label slave_attention_crisis_action_label():
 
         "Ignore her":
             mc.name "So you think you can make any demands from me now?"
-            the_person "Oh no, [the_person.mc_title], I would never do that...I was just hoping you would use your slave."
+            the_person "Oh no, [the_person.mc_title], I would never do that... I was just hoping you would use your slave."
             mc.name "Well you thought wrong, get up and get out of here."
             $ the_person.draw_person(position = "walking_away")
             "She quickly jumps to her feet and rushes out of your dungeon."

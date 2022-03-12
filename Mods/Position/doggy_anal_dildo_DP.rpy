@@ -27,7 +27,7 @@ init python:
 
 label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     mc.name "[the_girl.title], I want you to get on your hands and knees for me. I want to fuck your ass and your pussy."
-    "You secure the strap on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title]."
+    "You secure the strap-on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title]."
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
@@ -303,14 +303,14 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
 
 label transition_doggy_to_doggy_anal_dp_taboo_break_label(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s tight sphincter feels amazing, but you decide it is time to take things up another notch."
-    "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap on."
+    "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap-on."
     the_girl "What... what is that for?"
     call transition_doggy_doggy_anal_dp(the_girl, the_location, the_object) from _call_transition_doggy_anal_doggy_anal_dp_taboo_break
     return
 
 label transition_anal_doggy_to_doggy_anal_dp_taboo_break_label(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s tight asshole feels great, but you decide it is time to take things up a notch."
-    "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap on."
+    "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap-on."
     the_girl "What... what is that for?"
     call transition_doggy_doggy_anal_dp(the_girl, the_location, the_object) from _call_transition_doggy_doggy_anal_dp_taboo_break
     return
@@ -328,7 +328,7 @@ label transition_doggy_doggy_anal_dp(the_girl, the_location, the_object):
     else:
         the_girl "Oh Jesus! I don't know..."
         mc.name "Hush. Don't worry, it'll fit."
-    "[the_girl.possessive_title] waits patiently on all fours as you secure the strap on. She arches her back and presents her ass."
+    "[the_girl.possessive_title] waits patiently on all fours as you secure the strap-on. She arches her back and presents her ass."
     if the_girl.arousal > 60:
         "Her pussy is already dripping with arousal. You line yourself up with her ass, while she reaches down and lines the dildo up with her pussy."
     else:
@@ -404,7 +404,7 @@ label orgasm_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     return
 
 label taboo_break_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
-    "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap on."
+    "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap-on."
     the_girl "What... what is that for?"
     call transition_doggy_doggy_anal_dp(the_girl, the_location, the_object) from _call_transition_doggy_doggy_anal_dp_default_taboo_break
     return

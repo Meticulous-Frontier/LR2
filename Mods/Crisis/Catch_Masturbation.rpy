@@ -48,7 +48,7 @@ label SB_caught_masturbating_crisis_label():
 
         the_person "Oh yes [the_person_two.title], keep licking me right there, that feels wonderful."
         $ the_person.change_arousal(20)
-        the_person_two "Mmm, [the_person.title], you taste great...oh yes, push some fingers in there...ah, yes, right there..."
+        the_person_two "Mmm, [the_person.title], you taste great... oh yes, push some fingers in there... ah, yes, right there..."
         $ the_person_two.change_arousal(20)
 
         "While watching them going at it, you decide what to do next."
@@ -213,7 +213,7 @@ label SB_caught_masturbating_crisis_label():
                             if mc.charisma > 4:    #Charisma check to limit the damage
                                 $ the_person.draw_person(emotion="happy")
                                 "[the_person.possessive_title] hesitates for a moment, then turns to you."
-                                the_person "Okay.... I believe you... but still, maybe you could knock or something? You scared the shit out of me!"
+                                the_person "Okay... I believe you... but still, maybe you could knock or something? You scared the shit out of me!"
                                 "It looks like you've managed to convince her."
                                 $ the_person.draw_person(position = "walking_away")
                                 $ the_person.change_stats(happiness = -2, obedience = -2)

@@ -1040,7 +1040,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
 
         else:
             if skill_tag == "Anal":
-                the_person "Well...ah...could you fuck my little ass raw?"
+                the_person "Well... ah... could you fuck my little ass raw?"
             else:
                 $ the_person.call_dialogue("condom_bareback_ask")
             menu:
