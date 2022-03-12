@@ -523,7 +523,7 @@ init 2 python:
 
     def create_unique_character_list():
         # use extend when adding a list to another list
-        unique_character_list.extend([mom, lily, aunt, cousin, stephanie, alexia, nora, emily, christina])
+        unique_character_list.extend([mom, lily, aunt, cousin, stephanie, alexia, nora, emily, christina, city_rep])
 
         # mod unique characters (check for existence first)
         if "salon_manager" in globals():
