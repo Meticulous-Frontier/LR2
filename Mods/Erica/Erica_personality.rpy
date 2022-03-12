@@ -397,7 +397,7 @@ label erica_hookup_accept(the_person):
                 if the_person.effective_sluttiness() > 60:
                     the_person "I mean... it's okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
                     if the_person.effective_sluttiness() > 90:
-                        the_person "...or even just finish inside me. I promise I wouldn't mind at all!"
+                        the_person "... or even just finish inside me. I promise I wouldn't mind at all!"
                     mc.name "Maybe next time!"
                 "You get a condom and put it on quickly."
                 $ mc.condom = True
@@ -687,7 +687,7 @@ label erica_sex_watch(the_person, the_sex_person, the_position):
 
     elif the_person.effective_sluttiness() > the_position.slut_requirement and the_person.effective_sluttiness() < the_position.slut_cap:
         $ the_person.draw_person()
-        the_person "Oh my god that's... Wow that looks...Hot."
+        the_person "Oh my god that's... Wow that looks... Hot."
         $ change_report = the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 

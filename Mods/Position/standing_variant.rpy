@@ -92,7 +92,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                     the_girl "OH, god... SEVEN!"
                     mc.name "Does your pussy get wetter with every spank? I think it does!"
                     if the_girl.arousal > 80:
-                        "Are you going to cum when I spank you? Go ahead and cum. I'll punish you by spanking you another 10 times."
+                        mc.name "Are you going to cum when I spank you? Go ahead and cum. I'll punish you by spanking you another 10 times."
                         $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 2)
                         "[the_girl.possessive_title] moans loudly. She is breathing too heavy to make a coherent response."
                 elif the_girl.sluttiness > 80 or the_girl.obedience > 130:

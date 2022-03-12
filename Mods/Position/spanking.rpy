@@ -221,7 +221,7 @@ label strip_ask_spanking(the_girl, the_clothing, the_location, the_object):
             return False
 
 label orgasm_spanking(the_girl, the_location, the_object):
-    the_girl "Oh god, oh god, oh.. OH... OHHHH"
+    the_girl "Oh god, oh god, oh... OH... OHHHH"
     "Her whole body tenses up. You give her a few more spanks as she cums, just from the sensations of being spanked."
     $ the_girl.call_dialogue("climax_responses_foreplay")
     "She quivers with pleasure for a few seconds before her whole body relaxes."
@@ -237,13 +237,13 @@ label transition_spanking_SB_doggy_standing(the_girl, the_location, the_object):
     "You bounce your hard shaft on her ass a couple of times before sliding your cock between her thighs."
     "You continue your back and forth motion, rubbing your cock along her already wet pussy lips."
     if the_girl.get_opinion_score("vaginal sex") > 0:
-        the_girl "Oh....Please..."
+        the_girl "Oh... Please..."
     "You continue to move your cock forwards and backwards teasing her [the_girl.pubes_description] pussy."
     if the_girl.has_taboo("vaginal_sex"):
         $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
         "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
         "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
-        the_girl "Oh god.... Ah...."
+        the_girl "Oh god... Ah..."
         "You start with short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
         $ the_girl.break_taboo("vaginal_sex")
     else:

@@ -94,7 +94,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
                     call start_threesome(person_two, person_three) from _call_coffee_break_threesome_test_3
 
-                    person_two "Wow...this was...really good actually... You can join us anytime you want boss..."
+                    person_two "Wow... this was... really good actually... You can join us anytime you want boss..."
                     $ scene_manager.update_actor(person_two, position = "walking_away", display_transform = character_center_flipped)
                     $ scene_manager.update_actor(person_three, position = "walking_away", display_transform = character_right)
                     "They pick up their clothes and leave you feeling very proud of yourself."

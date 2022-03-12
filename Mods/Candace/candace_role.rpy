@@ -960,7 +960,7 @@ label candace_love_path_intro_label():
     mc.name "[the_person.title]... Tomorrow we are going to talk to [mc.business.head_researcher.name]. I want to see if we can try and reverse the experiment that made you like this."
     the_person "Made me... Like this? I don't understand... Don't you like me?"
     mc.name "Of course I do. But the changes that it caused, you're a danger to yourself. How long have you been going out and wandering around, looking for a fuck?"
-    the_person"I.. err... I mean... Sometimes I just get the urge..."
+    the_person"I... err... I mean... Sometimes I just get the urge..."
     mc.name "And you can't control it?"
     the_person "I mean... Why should I? It's just for fun!"
     mc.name "I get that, but you can't just wander the streets. I got you out of your previous relationship because I care about you and and couldn't stand to see you getting taken advantage of like that."
@@ -1214,7 +1214,7 @@ label candace_begin_cure_research_label(the_person):
     candace "Oh! A slumber party! That will be like, so much fun!"
     "[the_person.name] gives you a wink, seeing that [candace.name] is going along with the plan."
     the_person "I'll come over after work today and help you pack a few things."
-    mc.name "Good. Let me know if you either of you need anything."
+    mc.name "Good. Let me know if either of you need anything."
     "With that, you dismiss the meeting. Hopefully [the_person.name] will be able to find some way to reverse the effects of the serum that made [candace.name] this way."
     $ candace.event_triggers_dict["living_with_stephanie"] = day
     $ candace.set_schedule(the_location = the_person.home, the_times = [0,4])

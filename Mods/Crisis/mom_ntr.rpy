@@ -740,7 +740,7 @@ label mom_ntr_mod_action_label():
                                         "She looks into [man_name]'s eyes while sucking him off. Meanwhile, one of her hands is still working on you."
                                         man_name "I'm gonna cum, [the_person.name]!"
                                         "She keeps sucking him, bobbing her head at a steady pace and stroking you faster."
-                                        the_person "Mmmmmm... Mmmm.. Uhhh."
+                                        the_person "Mmmmmm... Mmmm... Uhhh."
                                         $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                         $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                         "[man_name] shudders and starts filling her mouth with his load. There's so much it spills out onto her chin."
@@ -881,7 +881,7 @@ label mom_ntr_mod_action_label():
                                     "She looks up into [man_name]'s eyes while sucking him off."
                                     man_name "I'm gonna cum, [the_person.name]!"
                                     "[the_person.possessive_title] keeps on sucking, bobbing her head at a steady pace."
-                                    the_person "Mmmmmm... Mmmm.. Uhhh."
+                                    the_person "Mmmmmm... Mmmm... Uhhh."
                                     $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "[man_name] shudders and starts filling her mouth with his load."
@@ -1056,7 +1056,7 @@ label mom_ntr_mod_action_label():
                                         "She looks into [man_name]'s eyes while sucking him off."
                                         man_name "I'm gonna cum, [the_person.name]!"
                                         "She just keep on going at steady pace."
-                                        the_person "Mmmmmm... Mmmm.. Uh."
+                                        the_person "Mmmmmm... Mmmm... Uh."
                                         $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                         $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                         "[man_name] shrugs and starts filling her mouth with his load."
@@ -1199,7 +1199,7 @@ label mom_ntr_mod_action_label():
                                     "She looks into [man_name]'s eyes while sucking him off."
                                     man_name "I'm gonna cum, [the_person.name]!"
                                     "She just keep on going at steady pace."
-                                    the_person "Mmmmmm... Mmmm.. Uh."
+                                    the_person "Mmmmmm... Mmmm... Uh."
                                     $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "[man_name] shrugs and starts filling her mouth with his load."
@@ -1329,7 +1329,7 @@ label mom_ntr_mod_action_label():
                                         "She looks into [man_name]'s eyes while sucking him off. Her hand keeps jerking you in meantime."
                                         man_name "I'm gonna cum, [the_person.name]!"
                                         "She just keep on going at steady pace."
-                                        the_person "Mmmmmm... Mmmm.. Uh."
+                                        the_person "Mmmmmm... Mmmm... Uh."
                                         $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                         $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                         "[man_name] shrugs and starts filling her mouth with his load."
@@ -1436,7 +1436,7 @@ label mom_ntr_mod_action_label():
                                     "She looks into [man_name]'s eyes while sucking him off."
                                     man_name "I'm gonna cum, [the_person.name]!"
                                     "She just keep on going at steady pace."
-                                    the_person "Mmmmmm... Mmmm.. Uh."
+                                    the_person "Mmmmmm... Mmmm... Uh."
                                     $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "[man_name] shrugs and starts filling her mouth with his load."
@@ -1696,7 +1696,7 @@ label mom_ntr_mod_action_label():
                                     "She looks into [man_name2]'s eyes while sucking him off. Her hands are working on two other dicks in meantime."
                                     man_name2 "I'm gonna cum, [the_person.name]!"
                                     "She just keep on going at steady pace."
-                                    the_person "Mmmmmm... Mmmm.. Uh."
+                                    the_person "Mmmmmm... Mmmm... Uh."
                                     $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "[man_name2] shrugs and starts filling her mouth with his load."
@@ -1848,7 +1848,7 @@ label mom_ntr_mod_action_label():
                                 "She looks into [man_name2]'s eyes while sucking him off."
                                 man_name2 "I'm gonna cum, [the_person.name]!"
                                 "She just keep on going at steady pace."
-                                the_person "Mmmmmm... Mmmm.. Uh."
+                                the_person "Mmmmmm... Mmmm... Uh."
                                 $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                 "[man_name2] shrugs and starts filling her mouth with his load."
@@ -1933,7 +1933,7 @@ label mom_ntr_mod_action_label():
                                     the_person "My house, my rules. So, come on [the_person.mc_title]. I will help you relax."
                                 "You stand on the bed in front of [the_person.possessive_title] and she starts sucking your dick."
                                 "The guys go on doing [the_person.possessive_title]'s two holes at once."
-                                the_person "Mhhhh.... Ohmmmm..."
+                                the_person "Mhhhh... Ohmmmm..."
                                 while the_person.arousal < 100:
                                     "[man_name2] and [man_name] keep fucking [the_person.possessive_title] two ways."
                                     the_person "Mhmhmmmmh..."
@@ -2044,7 +2044,7 @@ label mom_ntr_mod_action_label():
                                     "She looks into [man_name2]'s eyes while sucking him off. Her hands are working on two other dicks in meantime."
                                     man_name2 "I'm gonna cum, [the_person.name]!"
                                     "She just keep on going at steady pace."
-                                    the_person "Mmmmmm... Mmmm.. Uh."
+                                    the_person "Mmmmmm... Mmmm... Uh."
                                     $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "[man_name2] shrugs and starts filling her mouth with his load."
@@ -2204,7 +2204,7 @@ label mom_ntr_mod_action_label():
                                 "She looks into [man_name2]'s eyes while sucking him off. Her hands are working on [man_name]'s dick in meantime."
                                 man_name2 "I'm gonna cum, [the_person.name]!"
                                 "She just keep on going at steady pace."
-                                the_person "Mmmmmm... Mmmm.. Uh."
+                                the_person "Mmmmmm... Mmmm... Uh."
                                 $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                 "[man_name2] shrugs and starts filling her mouth with his load."
@@ -2330,7 +2330,7 @@ label mom_ntr_mod_action_label():
                                     "She looks into [man_name2]'s eyes while sucking him off. Her hands are working on two other dicks in meantime."
                                     man_name2 "I'm gonna cum, [the_person.name]!"
                                     "She keeps on going at steady pace."
-                                    the_person "Mmmmmm... Mmmm.. Uh."
+                                    the_person "Mmmmmm... Mmmm... Uh."
                                     $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "[man_name2] shrugs and starts filling her mouth with his load."
@@ -2431,7 +2431,7 @@ label mom_ntr_mod_action_label():
                                 "She looks into [man_name2]'s eyes while sucking him off."
                                 man_name2 "I'm gonna cum, [the_person.name]!"
                                 "She just keep on going at steady pace."
-                                the_person "Mmmmmm... Mmmm.. Uh."
+                                the_person "Mmmmmm... Mmmm... Uh."
                                 $ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                 "[man_name2] shrugs and starts filling her mouth with his load."

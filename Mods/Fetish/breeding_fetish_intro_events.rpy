@@ -171,7 +171,7 @@ label breeding_fetish_employee_intro_label(the_person):
     $ the_person.draw_person(position = "missionary")
     "You force her down onto her back."
     the_person "Oh my god..."
-    mc.name "...and fucked you..."
+    mc.name "... and fucked you..."
     if the_person.outfit.vagina_available():
         "You reach down and pull your cock out from your pants."
     else:
@@ -181,14 +181,14 @@ label breeding_fetish_employee_intro_label(the_person):
     $ mc.change_locked_clarity(50)
     mc.name "... and pinned you down..."
     "You grab her hands and force them down at her sides. She has a wild look in her eye as your raw cock nears her cunt."
-    mc.name "...and fucked your brains out..."
+    mc.name "... and fucked your brains out..."
     "As you finish those words, your push yourself inside of her. She moans as it goes in."
     $ the_person.change_arousal (20)
     $ mc.change_arousal(15)
     $ mc.change_locked_clarity(50)
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
-    mc.name "...and didn't stop until I dump my cum deep?"
+    mc.name "... and didn't stop until I dump my cum deep?"
     the_person "Oh god! Yes do it! Oh fuck!"
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
     call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _employee_gets_breeding_fetish_01
@@ -1150,7 +1150,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             else:
                 the_person "The odds aren't great from just one creampie. Make sure you cum inside me again soon!"
         else:
-            the_person "You're.... you're done already?"
+            the_person "You're... you're done already?"
             mc.name "Sorry... I'll have to cum inside you another time."
 
         $ the_person.draw_person(position = "stand2")

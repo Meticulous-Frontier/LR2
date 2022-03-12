@@ -139,7 +139,7 @@ label outro_drysex_cowgirl(the_girl, the_location, the_object, the_goal = None):
     mc.name "Fuck, I'm going to cum!"
 
     "She acts surprised, but quickly speeds up, dry humping you at a rapid pace."
-    mc.name "Oh.... Fuck!"
+    mc.name "Oh... Fuck!"
     $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
     "You dump your load in your pants. It makes a mess but it feels great."
     the_girl "Wow..."

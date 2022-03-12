@@ -116,7 +116,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     person_two "I hope you don't mind that we're watching... [person_one.title] just wanted to show me something quickly."
                     mc.name "I certainly don't mind."
                     $ scene_manager.update_actor(person_one, position = "stand3", emotion = "happy")
-                    person_one "I told you it was fine. I found this last night and thought it was so hot. Do you want to take a look [person_one.mc_title]."
+                    person_one "I told you it was fine. I found this last night and thought it was so hot. Do you want to take a look, [person_one.mc_title]?"
                     "She holds her phone up for you to see. You lean in close and join the ladies watching porn on [person_one.title]'s phone."
                     $ scene_manager.update_actor(person_one, position = "stand5", emotion = "default")
                     # Discover something new about her sexuality

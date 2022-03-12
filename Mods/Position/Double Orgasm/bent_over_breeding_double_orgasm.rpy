@@ -32,7 +32,7 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
             "[the_girl.possessive_title] revels in having her breeding fetish fulfilled."
         elif the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her [the_girl.pubes_description] pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+            the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         if the_girl.get_opinion_score("bareback sex") > 0:
             the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."

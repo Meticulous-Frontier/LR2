@@ -76,7 +76,7 @@ label taboo_break_piledriver_DP(the_girl, the_location, the_object): #This shoul
         "At the same time you place the dildo against her sphincter, slightly opening it up."
 
     "You hold onto [the_girl.title]'s legs and push forward. After a moment of resistance you slide smoothly into both her holes."
-    the_girl "Ohhhh....."
+    the_girl "Ohhhh...."
     "You hold yourself deep inside of her for a few seconds, then pull back and begin slowly thrust in and out."
     return
 
@@ -188,7 +188,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                     the_girl "Yes! Fill me with your cum!"
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title]'s body goes rigid as your cum pours into her [the_girl.pubes_description] pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-                    the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+                    the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                     "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
 
                 if the_girl.knows_pregnant():

@@ -165,10 +165,10 @@ init -1 python:
     def dildochair_pleasure_loop_allow_orgasm(person, is_punishment = False):
         if is_punishment:
             if person.arousal > 70:
-                renpy.say(the_person.char, "Please " + the_person.mc_title + ", I promise I will be the best slave you ever had, please...let me cum!")
+                renpy.say(the_person.char, "Please " + the_person.mc_title + ", I promise I will be the best slave you ever had, please... let me cum!")
         elif person.arousal >= 100:
             scene_manager.update_actor(person, emotion = "orgasm")
-            renpy.say(person.char, "Oh my god, I'm cumming....Ahhh....YES!....please " + person.mc_title + ", increase the speed!")
+            renpy.say(person.char, "Oh my god, I'm cumming... Ahhh... YES!... please " + person.mc_title + ", increase the speed!")
             scene_manager.update_actor(person, emotion = "happy")
             person.have_orgasm(the_position = "sitting", sluttiness_increase_limit = 80)
         return

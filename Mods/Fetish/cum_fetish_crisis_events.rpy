@@ -86,7 +86,7 @@ label cum_fetish_employee_dosage_request_label():
         the_person "Hey [the_person.mc_title]. So... I saw you walk into your office a minute ago and I was just thinking that it's been a while..."
         mc.name "A while since what?"
         "[the_person.possessive_title] stutters for a second."
-        the_person "...A while since you let me have your cum, so I thought..."
+        the_person "... A while since you let me have your cum, so I thought..."
         "[the_person.possessive_title] voice trails off. It seems she is craving it again."
     else:
         "You are surprised to see her, considering the business is closed for the day."
@@ -154,7 +154,7 @@ label cum_fetish_non_employee_dosage_request_label():
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(emotion = "happy")
-            the_person "Thanks again, [the_person.mc_title]. Don't hesitate to give me a call when... you know...need my service."
+            the_person "Thanks again, [the_person.mc_title]. Don't hesitate to give me a call when... you know... need my service."
             $ the_person.draw_person(position = "walking_away")
             "She gives you a smile and a wink, turns around and walks out of the door."
 

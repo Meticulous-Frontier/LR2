@@ -288,10 +288,10 @@ label lily_morning_encounter_follow_up_two_label(the_person):
         $ scene_manager.add_actor(the_other_person, display_transform = character_left_flipped, position = "sitting", emotion = "happy")
         the_other_person "Good morning [the_other_person.mc_title]..."
         if the_other_person.sluttiness < 60:
-            the_other_person "...and, [the_person.title], what do you think you are doing walking around naked?"
+            the_other_person "... and, [the_person.title], what do you think you are doing walking around naked?"
             the_person "Sorry, [the_other_person.name] I was on my way to get my laundry and [the_person.mc_title] pulled me in here."
         else:
-            the_other_person "...and, [the_person.title], walking around naked again I see."
+            the_other_person "... and, [the_person.title], walking around naked again I see."
             the_person "Well, since [the_person.mc_title] likes it so much I didn't want to disappoint him."
         the_other_person "Well I can understand that, now [the_other_person.mc_title] what are you doing dragging [the_person.possessive_title] around?"
         mc.name "She got me so excited that I figured she could help me take care of this."

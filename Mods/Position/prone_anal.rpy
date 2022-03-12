@@ -328,7 +328,7 @@ label outro_prone_anal(the_girl, the_location, the_object):
             $ prone_anal.redraw_scene(the_girl)
             if the_girl.has_cum_fetish() or the_girl.has_anal_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
-                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+                the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her fetish fulfilled."
             elif the_girl.sluttiness > 90:
                 the_girl "Oh god it's so deep."

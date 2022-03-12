@@ -569,7 +569,7 @@ label camilla_bathroom_blowjob_label(the_person):
     $ camilla.event_triggers_dict["take_pics"] = True
     mc.name "Hey, so uhh... want me to take some pictures for you?"
     "You see a bright red flush in her cheeks, but she quickly nods."
-    the_person "Si! I would like that...a lot!"
+    the_person "Si! I would like that... a lot!"
     "She takes a quick look around."
     the_person "Let me just go talk to the bartender... head to the lady's room and wait outside... I'll be over in a second."
     $ the_person.draw_person(position = "walking_away")
@@ -583,7 +583,7 @@ label camilla_bathroom_blowjob_label(the_person):
     $ the_person.draw_person(position = "kissing")
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
-    the_person "Mm... mmm.... mmmmmmmmmff..."
+    the_person "Mm... mmm... mmmmmmmmmff..."
     "She is moaning in your mouth. You can tell the naughtiness of finally getting intimate with someone other than her husband is really turning her on."
     $ the_person.change_arousal(10)
     the_person "Ok... wow this is hot. This is my first time ever doing something like this... so... I want you to just let me do my thing, ok?"
@@ -613,7 +613,7 @@ label camilla_bathroom_blowjob_label(the_person):
     "One more tug on your underwear, and your erection springs free."
     the_person "Wow! I haven't seen anything other than hubby for... years..."
     "She begins to stroke you softly with her hand."
-    the_person "Mmmmm.... it's so hard... and hot!"
+    the_person "Mmmmm... it's so hard... and hot!"
     "You moan as she strokes you. You make sure to snap a couple pictures."
     $ mc.change_arousal(10)
     $ the_person.change_arousal(10)

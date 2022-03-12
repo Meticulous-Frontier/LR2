@@ -421,7 +421,7 @@ label mom_breakfast_action_mom_and_lily_label():
         the_person "Oh yes baby, keep licking me right there, that feels wonderful."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(20)
-        lily "Mmm, mom, you taste great...oh yes, push some fingers in there...ah, yes, right there..."
+        lily "Mmm, mom, you taste great... oh yes, push some fingers in there... ah, yes, right there..."
         $ lily.change_arousal(20)
 
         "While watching them going at it, you decide what to do next."

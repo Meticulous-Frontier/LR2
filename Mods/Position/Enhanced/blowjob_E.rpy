@@ -286,7 +286,7 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
                 "She gags and coughs again, this time blowing little cum bubbles out of her nose as her body struggles to find somewhere to put more and more of your sperm."
                 $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
                 "Finally you're spent and you finally let [the_girl.title] pull off of your cock."
-                the_girl "Guahh... Guahh... Ah.... Ah...."
+                the_girl "Guahh... Guahh... Ah... Ah..."
                 mc.name "Fuck that felt good."
                 the_girl "There was so much... Ah... I thought I was going to drown in it..."
                 "Still gasping for air, she wipes your sperm away from her nose and chin, then swallows loudly to get rid of the rest of it."

@@ -481,7 +481,7 @@ label orgasm_SB_sixty_nine(the_girl, the_location, the_object):
         "[the_girl.possessive_title] starts to pull back off until just the tip of your erection is left in her mouth."
     else:
         "[the_girl.possessive_title] pushes her face down on to your cock, burying it in her throat."
-    the_girl "mmmmm....MMMMM....MMMMMMMFFFF"
+    the_girl "mmmmm... MMMMM... MMMMMMMFFFF"
     "She moans loudly as orgasmic waves wash over her. Once you think you hear her call your name, but the sound is muffled and mostly incomprehensible with your cock in her mouth."
     "After several seconds [the_girl.possessive_title] sighs and then begins to bob her head up and down on your again."
     return

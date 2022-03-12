@@ -451,7 +451,7 @@ label camilla_hookup_accept(the_person):
                 if the_person.effective_sluttiness() > 60:
                     the_person "I mean... it's okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
                     if the_person.effective_sluttiness() > 90:
-                        the_person "...or even just finish inside me. I promise I wouldn't mind at all!"
+                        the_person "... or even just finish inside me. I promise I wouldn't mind at all!"
                     mc.name "Maybe next time!"
                 "You get a condom and put it on quickly."
                 $ mc.condom = True
@@ -677,7 +677,7 @@ label camilla_cum_pullout(the_person):
             elif the_person.on_birth_control:
                 the_person "You are? Do..."
                 "She moans, almost desperately."
-                the_person "...Do you want to cum inside me? Just take the condom off!"
+                the_person "... Do you want to cum inside me? Just take the condom off!"
                 the_person "I just want your cum!"
             elif camilla_is_fertile():
                 the_person "Oh god... I can't resist it!"
