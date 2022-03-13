@@ -108,7 +108,7 @@ label sister_failed_test_label():
                 the_person "Okay! Let's get started!"
 
     # switch to strip path if she is teasing you (even without stripping)
-    if not strip_path and (the_person.vagina_available or the_person.tits_available()):
+    if not strip_path and (the_person.vagina_available() or the_person.tits_available()):
         $ strip_path = True
     mc.name "Here, why don't you sit next to me in the bed here while we study. You'll be more comfortable that way."
     the_person "Okay."
