@@ -73,9 +73,9 @@ init 10 python:
 
         sgs = next((x for x in list_of_traits if x == self_generating_serum), None)
         if sgs:
-            sgs.duration = 0
-            sgs.positive_slug = "+$40 Value, Long Lasting Duration"
-            sgs.negative_slug = "+800 Serum Research, Long Lasting Duration"
+            sgs.duration = 3
+            sgs.positive_slug = "+3 Turn Duration, Long Lasting Duration"
+            sgs.negative_slug = ""
             sgs.desc = "Inserts instructions for the creation of this serum into the subject's cells, allowing them to create a copy of the serum in the body, each copy will decrease its duration by 1, until it fades away."
             sgs.on_remove = self_generating_serum_on_remove
         return
