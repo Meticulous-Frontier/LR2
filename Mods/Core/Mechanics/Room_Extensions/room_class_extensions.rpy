@@ -39,12 +39,6 @@ init -1 python:
     # Extend Default Room Functions #
     #################################
 
-    def validate_people(self):
-        for person in [x for x in self.people if x.schedule is None]:
-            person.remove_person_from_game()
-
-    Room.validate_people = validate_people
-
     # extend the default move_person function
     def move_person_extended(org_func):
         def move_person_wrapper(room, person, destination):

@@ -181,7 +181,6 @@ init 5 python:
     def build_people_to_process():
         people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
         for place in [x for x in list_of_places if x.people]:
-            place.validate_people()
             people.extend([[x, place] for x in place.people])
         return people
 
@@ -205,9 +204,6 @@ init 5 python:
         for project in mc.business.active_IT_projects:
             project.on_turn()
         mc.run_turn()
-        if "police_chief" in globals(): # make sure changes to her uniform during work hours
-            if time_of_day > 0 and time_of_day < 4:
-                police_chief.planned_outfit = police_chief.wardrobe.get_outfit_with_name("Cop")
         if "quest_director" in globals():
             quest_director.run_turn()
         if "perk_system" in globals():
@@ -225,8 +221,6 @@ init 5 python:
         mc.business.run_day()
         for project in mc.business.active_IT_projects:
             project.on_day()
-        if "police_chief" in globals(): # make sure she always wears her uniform
-            police_chief.planned_outfit = police_chief.wardrobe.get_outfit_with_name("Cop")
         if "quest_director" in globals():
             quest_director.run_day()
         if debug_log_enabled:

@@ -1833,6 +1833,8 @@ init -1 python:
             if not strip_club_is_closed() and person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]):
                 shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
                 return (time_of_day == 3 and shifts == 2) or time_of_day == 4
+            if person == police_chief:
+                return person.job.schedule.get_destination() != None
             # run original function
             result = org_func(person)
             # run extension code

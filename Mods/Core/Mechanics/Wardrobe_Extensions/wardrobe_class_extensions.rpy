@@ -156,6 +156,9 @@ init -1 python:
         return wardrobe_builder.personalize_outfit(outfit, max_alterations = 2, allow_skimpy = base_sluttiness > 70)
 
     def build_valid_uniform_wardrobe(self, person):
+        if person.job not in [hr_job, market_job, rd_job, supply_job, production_job]:
+            return self
+
         slut_limit, underwear_limit, limited_to_top = mc.business.get_uniform_limits()
 
         valid_full_outfits = []
@@ -192,7 +195,7 @@ init -1 python:
         valid_wardrobe = self.build_valid_uniform_wardrobe(person)
         preferences = WardrobePreference(person)
 
-        # renpy.say(None, person.name + " " + person.last_name + " [outfits: " + str(__builtin__.len(valid_wardrobe.outfits)) + " - overwear: " + str(__builtin__.len(valid_wardrobe.overwear_sets)) + " - underwear: " + str(__builtin__.len(valid_wardrobe.underwear_sets)))
+        # renpy.say(None, person.name + " " + person.last_name + " outfits: " + str(__builtin__.len(valid_wardrobe.outfits)) + " - overwear: " + str(__builtin__.len(valid_wardrobe.overwear_sets)) + " - underwear: " + str(__builtin__.len(valid_wardrobe.underwear_sets)))
 
         if __builtin__.len(valid_wardrobe.outfits) > 0:
             #We have some full body outfits we might use. 50/50 to use that or a constructed outfit.

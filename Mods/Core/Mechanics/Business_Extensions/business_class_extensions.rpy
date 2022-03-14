@@ -91,10 +91,6 @@ init -1 python:
             slut_limit = 10
             underwear_limit = 0
             limited_to_top = True
-        else:
-            slut_limit = 0
-            underwear_limit = 0
-            limited_to_top = True
         return slut_limit, underwear_limit, limited_to_top
 
     Business.get_uniform_limits = get_uniform_limits_enhanced
@@ -281,6 +277,16 @@ init -1 python:
             if not person.job:
                 return None
 
+            if person == police_chief:
+                if not "police_chief_uniform_wardrobe" in globals():    # save game compatibility remove after v0.49
+                    cop_outfit = police_chief.wardrobe.get_outfit_with_name("Cop").get_copy()
+
+                    global police_chief_uniform_wardrobe
+                    police_chief_uniform_wardrobe = Wardrobe("Cop Uniform")
+                    police_chief_uniform_wardrobe.add_outfit(cop_outfit)
+                    police_chief.wardrobe.remove_outfit(cop_outfit)
+
+                return police_chief_uniform_wardrobe
             if person.job == stripper_job: # base game stripper
                 return stripclub_wardrobe
             if person.job == stripclub_stripper_job: # stripclub bought stripper
