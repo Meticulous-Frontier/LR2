@@ -17,7 +17,7 @@ init 10 python:
         return positions
 
 label dungeon_room_appoint_slave_label():
-    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.location.people, "Turn into slave", ["Back"])]))
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(known_people_at_location(mc.location), "Turn into slave", ["Back"])]))
     $ person_choice = _return
 
     if isinstance(person_choice, Person):
