@@ -354,20 +354,20 @@ init -1 python:
 
     def business_remove_mandatory_crisis(self, crisis_event):
         if isinstance(crisis_event, basestring):
-            found = find_in_list(lambda x: x.effect == crisis_event, self.mandatory_crises_list)
+            found = next((x for x in self.mandatory_crises_list if x.effect == crisis_event), None)
             if found:
                 self.mandatory_crises_list.remove(found)
                 return True
-            found = find_in_list(lambda x: x.effect == crisis_event, self.mandatory_morning_crises_list)
+            found = next((x for x in self.mandatory_morning_crises_list if x.effect == crisis_event), None)
             if found:
                 self.mandatory_morning_crises_list.remove(found)
                 return True
         elif isinstance(crisis_event, Action):
-            found = find_in_list(lambda x: x == crisis_event, self.mandatory_crises_list)
+            found = next((x for x in self.mandatory_crises_list if x == crisis_event), None)
             if found:
                 self.mandatory_crises_list.remove(found)
                 return True
-            found = find_in_list(lambda x: x == crisis_event, self.mandatory_morning_crises_list)
+            found = next((x for x in self.mandatory_morning_crises_list if x == crisis_event), None)
             if found:
                 self.mandatory_morning_crises_list.remove(found)
                 return True

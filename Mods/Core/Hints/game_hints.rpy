@@ -70,28 +70,25 @@ init -1 python:
         return [x for x in game_hints if x.is_active and not x.is_complete]
 
     def exists_in_mandatory_crisis_list(effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, mc.business.mandatory_crises_list)
+        return next((x for x in mc.business.mandatory_crises_list if x.effect == effect_name), None)
 
     def exists_in_mandatory_morning_crisis_list(effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, mc.business.mandatory_morning_crises_list)
+        return next((x for x in mc.business.mandatory_morning_crises_list if x.effect == effect_name), None)
 
     def exists_in_room_enter_list(person, effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, person.on_room_enter_event_list)
+        return next((x for x in person.on_room_enter_event_list if x.effect == effect_name), None)
 
     def exists_in_talk_event_list(person, effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, person.on_talk_event_list)
+        return next((x for x in person.on_talk_event_list if x.effect == effect_name), None)
 
     def exists_in_role_action_list(role, effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, role.actions)
+        return next((x for x in role.actions if x.effect == effect_name), None)
 
     def exists_in_location_action_list(location, effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, location.actions)
+        return next((x for x in location.actions if x.effect == effect_name), None)
 
     def researched_all_at_level():
-        for trait in list_of_traits:
-            if not trait.researched and trait.tier == mc.business.research_tier:
-                return False
-        return True
+        return not any(x for x in list_of_traits if not x.researched and x.tier == mc.business.research_tier)
 
 init 2:
     screen game_hints_tooltip():

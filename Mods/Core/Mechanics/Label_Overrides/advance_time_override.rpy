@@ -135,13 +135,13 @@ init 5 python:
         # special handling for unlocking the unisex bathroom quest line faster (last stage should unlock around day 140)
         unisex_level = mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0)
         if unisex_restroom_crisis_requirement() and unisex_level > 0 and unisex_level < 6 and day > 20 + unisex_level * 20:
-            crisis = find_in_list(lambda x: x.effect == "unisex_restroom_action_label", active_crisis_list)
+            crisis = next((x for x in active_crisis_list if x.effect == "unisex_restroom_action_label"), None)
             if crisis:
                 return crisis
 
         # special handling for mall introductions during weekends (prioritize while we have unknown people in the mall)
         if day % 7 in [5, 6] and mall_introduction_requirement():
-            crisis = find_in_list(lambda x: x.effect == "mall_introduction_action_label", active_crisis_list)
+            crisis = next((x for x in active_crisis_list if x.effect == "mall_introduction_action_label"), None)
             if crisis:
                 return crisis
 
@@ -167,7 +167,7 @@ init 5 python:
         # renpy.say(None, "Run Crisis [" + str(__builtin__.len(key_list)) +"]: " + random_crisis)
         if random_crisis in crisis_tracker_dict.keys():
             crisis_tracker_dict[random_crisis] = average + 1     # set to min_value +1 to prevent the event from triggering a lot (its count maybe low due to being disabled)
-        return find_in_list(lambda x: x.effect == random_crisis, active_crisis_list + active_excluded_events)
+        return next((x for x in active_crisis_list + active_excluded_events if x.effect == random_crisis), None)
 
     def get_crisis_from_crisis_list():
         return find_next_crisis([x[0] for x in crisis_list if x[1] > 0 and x[0].is_action_enabled()])

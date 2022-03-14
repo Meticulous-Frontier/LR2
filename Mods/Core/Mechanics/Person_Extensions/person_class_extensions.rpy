@@ -1716,15 +1716,15 @@ init -1 python:
 
     def has_role(self, role):
         if isinstance(role, basestring):
-            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None \
-                or not find_in_list(lambda x: x.parent_role and x.parent_role.role_name == role, self.special_role) is None
+            return any(x for x in self.special_role if x.role_name == role) \
+                or any(x for x in self.special_role if x.parent_role and x.parent_role.role_name == role)
         elif isinstance(role, list):
             return any(x in self.special_role for x in role) \
                 or any(x.parent_role in self.special_role for x in role)
         else:
             return role in self.special_role \
                 or role.parent_role in self.special_role \
-                or not find_in_list(lambda x: x.check_looks_like(role), self.special_role) is None
+                or any(x for x in self.special_role if x.check_looks_like(role))
 
     Person.has_role = has_role
 
@@ -2249,7 +2249,7 @@ init -1 python:
 
     def remove_on_talk_event(self, the_crisis):
         if isinstance(the_crisis, basestring):
-            found = find_in_list(lambda x: x.effect == the_crisis or x.name == the_crisis, self.on_talk_event_list)
+            found = next((x for x in self.on_talk_event_list if x.effect == the_crisis or x.name == the_crisis), None)
             if found:
                 self.on_talk_event_list.remove(found)
 
@@ -2259,7 +2259,7 @@ init -1 python:
 
     def remove_on_room_enter_event(self, the_crisis):
         if isinstance(the_crisis, basestring):
-            found = find_in_list(lambda x: x.effect == the_crisis or x.name == the_crisis, self.on_room_enter_event_list)
+            found = next((x for x in self.on_room_enter_event_list if x.effect == the_crisis or x.name == the_crisis), None)
             if found:
                 self.on_room_enter_event_list.remove(found)
 

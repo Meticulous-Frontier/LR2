@@ -60,12 +60,11 @@ init -1 python:
             self.update_serum_trait()
 
         def update_serum_trait(self)            :
+            found = next((x for x in list_of_traits if x.hash() == self.hash()), None)
             if self.enabled:
-                found = find_in_list(lambda x: x.hash() == self.hash(), list_of_traits)
                 if not found:
                     list_of_traits.append(self)
             else:
-                found = find_in_list(lambda x: x.hash() == self.hash(), list_of_traits)
                 if found:
                     list_of_traits.remove(found)
 

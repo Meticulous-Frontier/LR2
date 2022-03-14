@@ -98,7 +98,7 @@ init -1 python:
     def wardrobe_remove_outfit(self, outfit):
         for outfit_set in [self.outfits, self.underwear_sets, self.overwear_sets]:
             if isinstance(outfit, basestring):
-                found = find_in_list(lambda x: x.name == outfit, outfit_set)
+                found = next((x for x in outfit_set if x.name == outfit), None)
                 if found:
                     outfit_set.remove(found)
             elif outfit in outfit_set:
