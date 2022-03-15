@@ -44,10 +44,12 @@ init 2 python:
         kaya.event_triggers_dict["can_get_barista_quickie"] = False
         kaya.event_triggers_dict["has_moved"] = False
         kaya.event_triggers_dict["has_started_internship"] = False
+        kaya.event_triggers_dict["barista_fuck_last_day"] = 9999
         kaya.event_triggers_dict["studies_with_lily"] = False
         kaya.event_triggers_dict["incest_warnings"] = 0
         kaya.event_triggers_dict["no_condom_talk"] = False
         kaya.event_triggers_dict["mc_knows_relation"] = False
+
         kaya.event_triggers_dict["foreplay_position_filter"] = kaya_foreplay_position_filter
         kaya.event_triggers_dict["oral_position_filter"] = kaya_oral_position_filter
         kaya.event_triggers_dict["vaginal_position_filter"] = kaya_vaginal_position_filter
@@ -172,12 +174,20 @@ init -2 python:
         return False
 
     def kaya_barista_fuck_intro_requirement(the_person):
+        if the_person.location == coffee_shop and time_of_day == 2 and the_person.sluttiness >= 60:
+            return true
         return False
 
     def kaya_barista_fuck_requirement(the_person):
-        return False
         if kaya_can_get_work_quickie():
-            return True
+            if kaya.event_triggers_dict.get("barista_fuck_last_day", 9999) + 3 <= day:
+                if time_of_day == 2:
+                    return True
+                else:
+                    return "Only in the afternoon"
+            else:
+                "Wait a few days"
+        return False
 
     def kaya_jennifer_confrontation_requirement():
         if willing_to_threesome(kaya, mom):
@@ -1529,7 +1539,6 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
         "And you've knocked her up!"
     "[the_person.possessive_title] seems very eager to put out. Normally sexy time would be something you would plan, but you decide for now to let her see what she can come up with."
     #TODO find some way to drop a hint here that the best way to continue the storyline is to invite Kaya over for a sleepover date.
-    "NOTE: This is the end of Kaya's story content in this build."
     #Adding on talk events to jennifer and lily that are currently blank, so that in the future when the mod updates we can write those scenes and include save game compatibility.
     # $ mom.add_unique_on_talk_event(kaya_jennifer_reveal)
     # $ lily.add_unique_on_talk_event(kaya_lily_reveal)
@@ -1548,14 +1557,96 @@ label kaya_lily_reveal_label(the_person):
     pass
     return
 
-label kaya_barista_fuck_intro_label(the_person):
-    $ kaya.event_triggers_dict["can_get_barista_quickie"] = False
+label kaya_barista_fuck_intro_label(the_person):    #60 sluttiness
+    $ kaya.event_triggers_dict["can_get_barista_quickie"] = True
+    $ the_person.arousal = 20
+    $ kaya.event_triggers_dict["barista_fuck_last_day"] = day
     # Kaya works out a deal with a co-worker to fuck you on her break
+    $ the_person.draw_person()
+    "You swing by the coffee shop. You see that [the_person.title] is there, looking as hot as ever."
+    "She sees you when you come in and waves you over to the counter. Thankfully there isn't a line."
+    the_person "Hey! I'm glad you swung by!"
+    mc.name "Oh?"
+    the_person "Yeah, I'm just getting ready to take my break. Let me just tell my coworker to take over for me."
+    $ the_person.draw_person(position = "walking_away")
+    "She turns to her coworker, from the looks of it another college student. He just nods at her and gives you a quick wave."
+    $ the_person.draw_persion()
+    the_person "Okay, follow me!"
+    $ the_person.draw_person(position = "walking_away")
+    "You follow [the_person.possessive_title] behind the counter and into a back storage area. You don't think you've ever been back here before?"
+    "The door closes behind you, you follow her to the back corner, out of sight from the door."
+    $ the_person.draw_person(position = "kissing")
+    "When she turns around, she pulls you into an embrace and kisses your neck."
+    the_person "Want to get busy?"
+    mc.name "In the storage room? Isn't..."
+    if the_person.is_girlfriend():
+        the_person "I was complaining to my coworker about how I'd finally found a boyfriend but had to move in with my mom and it was impossible to get any alone time."
+    else:
+        the_person "I was complaining to my coworker about how I'd finally found an awesome hookup but had to move in with my mom and it was impossible to get any alone time."
+    the_person "He said as long as we don't take forever or make a bunch of noise then once in a while we can hook up back here once in a while..."
+    $ mc.change_locked_clarity(20)
+    "[the_person.title] rakes her nails down your back as she finishes her sentence."
+    "You look around the room. There's really nothing to set her on, but there is a small counter you can bend her over."
+    the_person "What do you think?"
+    mc.name "Are you sure you can be quiet?"
+    $ the_person.change_arousal(15)
+    $ the_person.change_happiness(3)
+    the_person "No, but I'm willing to try."
+    "You turn [the_person.possessive_title] around and bend her over the counter."
+    $ the_person.draw_person(position = "standing_doggy")
+    mc.name "Ah, maybe I sould bring a gag with me next time I stop by for coffee."
+    "You know you have to be quick, so you quickly pull away at the clothing between you and [the_person.title]'s fertile young cunt."
+    $ the_person.strip_to_vagina(prefer_half_off = True, delay = 1)
+    mc.name "You sure you are ready for this? This is kinda fast..."
+    the_person "I was day dreaming about your cock when you walked in. Don't be gentle, I'm ready."
+    "You run a finger along her slit with one hand while you undo your zipper with the other. She isn't lying, her pussy is wet and ready."
+    mc.name "Wow you really are wet."
+    if the_person.is_pregnant():
+        the_person "I've always been kind of like this, but I think the hormone changes are making my urges even stronger."
+    the_person "I've been waiting for a guy like you to come around for a while, now I feel like I just can't get enough..."
+    "You step forward and get into position behind [the_person.title]. You run your cock up and down her slit a couple times, getting the tip nice and wet."
+    "You slowly push into her. She reaches back and grabs your leg, urging you forward as her cunt stretches to receive you."
+    "She keeps her voice hushed, as she urges you in between moans."
+    the_person "That's it, now don't stop until you fill me up...!"
+    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_counter(), skip_intro = True, skip_condom = True, position_locked = True, private = True) from _call_sex_kaya_barista_quicky_01
+    $ report_log = _return
+    $ the_person.draw_person(position = "standing_doggy")
+    if report_log.get("creampies", 0) > 0 and report_log.get("girl orgasms", 0) > 0:
+        "When you step back, [the_person.possessive_title]'s legs are shaking, but she manages to stay standing."
+        "Your cum is dripping down the inside of her legs."
+    elif report_log.get("girl orgasms", 0) > 0:
+        "When you step back, [the_person.possessive_title]'s legs are shaking, but she manages to stay standing."
+    else:
+        "When you step back, [the_person.possessive_title] sighs happily."
+    kaya "Oh god... that was so good..."
+    $ the_person.draw_person()
+    "[the_person.title] stands up."
+    kaya "Alright, I'd better straigten myself up and get back to work. There's a door back there that leads out into the alley... do you mind letting yourself out?"
+    mc.name "Uhh sure, that would be no problem."
+    kaya "Thanks! Now, we can't do this too often, maximum every few days, okay?"
+    mc.name "Sounds good to me."
+    $ kaya.apply_planned_outfit()
+    $ clear_scene()
+    "You step out of the back door and into the alley, leaving [the_person.possessive_title] to finish her shift."
+    "This is an ineresting development with [the_person.title]. Once in a while, you can swing by the coffee shop during the afternoon for a quickie."
+    "While not as satisfying as full on sex, a quickie is better than nothing."
+    if kaya_has_started_internship():
+        "You should enjoy this phase of your relationship with her while it lasts. She is already your intern, and you doubt she is going to keep working here once she graduates!"
+    else:
+        "You should enjoy this phase of your relationship with her while it lasts. You doubt she is going to keep working here once she graduates!"
     return
 
 label kaya_barista_fuck_label(the_person):
-    pass
-    # recurring scene, can fuck kaya any day on her break at work.
+    $ start_energy = the_person.energy
+    mc.name "Want to take a break..?"
+    "You trail off the end of the sentence, making it clear you mean a break in the back of the shop."
+    "[the_person.possessive_title] looks over and sees their coworker. She gives him a wave, then looks back."
+    the_person "Yes. Follow me!"
+    $ the_person.draw_person(position = "walking_away")
+
+
+
+    $ kaya.event_triggers_dict["barista_fuck_last_day"] = day
     return
 
 
@@ -1602,6 +1693,7 @@ init 3 python:      #Use this section to make wrappers for determining where we 
 
     def kaya_can_get_barista_quickie():
         return kaya.event_triggers_dict.get("can_get_barista_quickie", False)
+
 
     def kaya_has_started_internship():
         return kaya.event_triggers_dict.get("has_moved", False)
