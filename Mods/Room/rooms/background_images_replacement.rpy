@@ -71,6 +71,7 @@ init -1 python:
     standard_police_station_backgrounds = room_background_image("Police_Station_Background.jpg", darken = False)
     standard_police_jail_backgrounds = room_background_image("Police_Jail_Background.jpg", darken = False)
     standard_coffee_shop_backgrounds = room_background_image("Coffee_Shop_Background.jpg")
+    standard_gaming_cafe_backgrounds = room_background_image("Internet_Cafe_Background.jpg")
     luxury_apartment_backgrounds = room_background_image("Luxury_Apartment_Background.jpg", darken = False)
     university_library_backgrounds = room_background_image("University_Library_Background.jpg")
     university_study_room_backgrounds = room_background_image("Study_Room_Background.jpg")

@@ -559,6 +559,9 @@ init 2 python:
         if "sakari" in globals():
             unique_character_list.append(sakari)
 
+        if "myra" in globals():
+            unique_character_list.append(myra)
+
         return
 
     def update_stripclub_strippers():
