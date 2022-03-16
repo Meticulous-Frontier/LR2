@@ -39,7 +39,7 @@ label intern_water_spill_crisis_label():
         the_person "Ugh, that was so embarrassing. Lets just forget about that, okay?"
         mc.name "Of course, back to your homework then, right?"
         "You help [the_person.possessive_title] sort out her homework issues, then get back to work."
-        $ the_person.int += 1
+        $ the_person.change_int(1)
     else:
         $ thinks_appropriate = the_person.judge_outfit(test_outfit) #Does she think it's appropriate to just strip it off all of the time?
         if thinks_appropriate:
@@ -57,7 +57,7 @@ label intern_water_spill_crisis_label():
                     mc.name "No, that's fine. Just remind me again what we were talking about."
                     $ the_person.change_slut(1)
                     "You help [the_person.possessive_title] with her homework questions while she stands topless beside your desk."
-                    $ the_person.int += 1
+                    $ the_person.change_int(1)
 
                 "Keep going...":
                     mc.name "You might as well keep going. All this homework talk is boring and I'd appreciate something pleasant to look at while I help you."
