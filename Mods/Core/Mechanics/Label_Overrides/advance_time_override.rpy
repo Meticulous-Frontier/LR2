@@ -179,14 +179,11 @@ init 5 python:
         return find_next_crisis([x[0] for x in morning_crisis_list if x[1] > 0 and x[0].is_action_enabled()])
 
     def build_people_to_process():
-        people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
-        for place in [x for x in list_of_places if x.people]:
-            people.extend([[x, place] for x in place.people])
-        return people
+        return [[y, x] for x in list_of_places for y in x.people]
 
     def update_party_schedules(people):
         # exclude unique characters as to not to interfere with story lines
-        for (person, place) in [x for x in people if not x[0] in unique_character_list]:
+        for person in [x[0] for x in people if not x[0] in unique_character_list]:
             create_party_schedule(person)
         return
 
