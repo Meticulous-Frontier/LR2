@@ -3,10 +3,7 @@ init -1 python:
     from lru import LRUCacheDict
 
     def all_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
-        all_people = set()
-        for location in all_locations_in_the_game(excluded_locations):
-            all_people.update([x for x in location.people if not x in excluded_people])
-        return list(all_people)
+        return [y for x in list_of_places if x not in excluded_locations for y in x.people if y not in excluded_people]
 
     def all_locations_in_the_game(excluded_locations = []):
         return [x for x in list_of_places if not x in excluded_locations]
@@ -56,29 +53,19 @@ init -1 python:
             not_met_yet_list.append(ellie)
         return not_met_yet_list
 
-    @lru_cache_function(max_size=10, expiration=3)
+    @lru_cache_function(max_size=3, expiration=5)
     def known_people_in_the_game(excluded_people = [], excluded_locations = []): # Pass excluded_people as array of people [mc, lily, aunt, cousin, alexia]
-        known_people = set()
-        excluded = set(excluded_people)
-        excluded.update(unique_characters_not_known())
-        for location in all_locations_in_the_game(excluded_locations):
-            known_people.update(known_people_at_location(location, excluded))
-        return list(known_people)
+        return [y for x in list_of_places if x not in excluded_locations for y in known_people_at_location(x, excluded_people)]
 
     def known_people_at_location(location, excluded_people = []):
-        excluded = set(excluded_people)
-        excluded.update(unique_characters_not_known())
-        return [x for x in location.people if x.is_available and not x in excluded and x.title and x.mc_title != "Stranger"]
+        return [x for x in location.people if x.is_available and not x in excluded_people + unique_characters_not_known() and x.title and x.mc_title != "Stranger"]
 
-    @lru_cache_function(max_size=3, expiration=3)
+    @lru_cache_function(max_size=3, expiration=5)
     def unknown_people_in_the_game(excluded_people = [], excluded_locations = []):
-        unknown_people = set(unique_characters_not_known())
-        for location in all_locations_in_the_game(excluded_locations):
-            unknown_people.update(unknown_people_at_location(location, excluded_people))
-        return list(unknown_people)
+        return [y for x in list_of_places if x not in excluded_locations for y in unknown_people_at_location(x, excluded_people)]
 
     def unknown_people_at_location(location, excluded_people = []):
-        return [x for x in location.people if x.is_available and not x in excluded_people and (not x.title or x.mc_title == "Stranger")]
+        return [x for x in location.people if x.is_available and not x in excluded_people and (x in unique_characters_not_known() or not x.title or x.mc_title == "Stranger")]
 
     def people_in_mc_home(excluded_people = []):
         return [x for x in hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people if x.is_available and not x in excluded_people]
