@@ -1358,6 +1358,7 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
         $ the_person.draw_person()
         "You leave your office together and go back to the work day."
 
+    $ ellie.apply_planned_outfit()
     $ mc.business.add_mandatory_crisis(ellie_dinner_date_intro)
     $ clear_scene()
     $ mc.location.show_background()
