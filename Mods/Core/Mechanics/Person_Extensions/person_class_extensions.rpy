@@ -1948,7 +1948,7 @@ init -1 python:
         if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
             (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform.get_copy())
         elif creative_colored_uniform_policy.is_active():
-            self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
+            self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
         else:
             self.planned_uniform = uniform.get_copy()
 
@@ -1970,8 +1970,8 @@ init -1 python:
 
     Person.is_wearing_uniform = person_is_wearing_uniform_extended(Person.is_wearing_uniform)
 
-    def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
-        return WardrobeBuilder(self).personalize_outfit(outfit, opinion_color = opinion_color, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, allow_coverup = allow_coverup)
+    def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True):
+        return WardrobeBuilder(self).personalize_outfit(outfit, opinion_color = opinion_color, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
 
     Person.personalize_outfit = personalize_outfit
 
@@ -2186,13 +2186,13 @@ init -1 python:
     def person_get_random_appropriate_outfit(self, guarantee_output = False):
         outfit = self.wardrobe.get_random_appropriate_outfit(sluttiness_limit = self.effective_sluttiness(), preferences = WardrobePreference(self))
         if guarantee_output and not outfit: # when no outfit and we need one, generate one
-            outfit = self.generate_random_appropriate_outfit()
+            outfit = self.generate_random_appropriate_outfit(swap_bottoms = False, allow_skimpy = self.sluttiness > 50)
         return outfit
 
     Person.get_random_appropriate_outfit = person_get_random_appropriate_outfit
 
-    def person_generate_random_appropriate_outfit(self, outfit_type = "FullSets"):
-        return generate_random_appropriate_outfit(self, outfit_type = outfit_type)
+    def person_generate_random_appropriate_outfit(self, outfit_type = "FullSets", swap_bottoms = False, allow_skimpy = False):
+        return generate_random_appropriate_outfit(self, outfit_type = outfit_type, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
 
     Person.generate_random_appropriate_outfit = person_generate_random_appropriate_outfit
 

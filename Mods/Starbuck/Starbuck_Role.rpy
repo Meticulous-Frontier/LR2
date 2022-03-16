@@ -1865,7 +1865,7 @@ label starbuck_replay_dressup_label(the_person):
     else:
         mc.name "It seems I've lost my touch, why don't you surprise me?"
         the_person "Oh hotshot, give me a minute."
-        $ created_outfit = the_person.generate_random_appropriate_outfit(outfit_type = "UnderwearSets")
+        $ created_outfit = the_person.generate_random_appropriate_outfit(outfit_type = "UnderwearSets", allow_skimpy = True)
         "After a few minutes she is back, holding an outfit in her hand."
 
     "[the_person.possessive_title] starts to get undressed in front of you."

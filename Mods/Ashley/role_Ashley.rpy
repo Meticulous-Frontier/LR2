@@ -1253,14 +1253,14 @@ label ashley_second_concert_date_label():
                 $ the_report = _return
                 if the_report.get("guy orgasms", 0) > 0:
                     if the_person.has_face_cum():
-                        if the_person.outfit.is_dress():
+                        if the_person.outfit.has_dress():
                             "[the_person.possessive_title]'s face is covered in your cum. Somehow, it doesn't seem like any of it got on her dress..."
                         else:
                             "[the_person.possessive_title]'s face is covered in your cum. Thankfully her dress came off at some point, so no cum dripped on it."
                     elif the_person.has_mouth_cum():
                         "[the_person.possessive_title] has a bit of cum on her chin, but is able to quickly clean it up."
                     elif the_person.has_tits_cum():
-                        if the_person.outfit.is_dress():
+                        if the_person.outfit.has_dress():
                             "[the_person.possessive_title]'s chest looks great covered in your cum. But you slowly realize... it's all over her dress."
                             $ cum_clue = True
             "Tease her":
@@ -1296,7 +1296,7 @@ label ashley_second_concert_date_label():
                 $ the_report = _return
                 if the_report.get("guy orgasms", 0) > 0:
                     if the_person.has_face_cum():
-                        if the_person.outfit.is_dress():
+                        if the_person.outfit.has_dress():
                             "[the_person.possessive_title]'s face is covered in your cum. Somehow, it doesn't seem like any of it got on her dress..."
                         else:
                             "[the_person.possessive_title]'s face is covered in your cum. Thankfully her dress came off at some point, so no cum dripped on it."
@@ -1337,13 +1337,13 @@ label ashley_second_concert_date_label():
                 elif the_person.has_creampie_cum():
                     "When you look down, you can see some cum running down the inside of [the_person.possessive_title]'s legs, but it doesn't seem like any got on her clothes."
                 elif the_person.has_ass_cum():
-                    if the_person.outfit.is_dress():
+                    if the_person.outfit.has_dress():
                         "[the_person.possessive_title]'s ass looks amazing covered in your cum. But you slowly realize... it's all over her dress."
                         $ cum_clue = True
                     else:
                         "[the_person.possessive_title]'s ass looks amazing covered in your cum. Thankfully her dress came off at some point, so no cum got on it."
                 elif the_person.has_face_cum():
-                    if the_person.outfit.is_dress():
+                    if the_person.outfit.has_dress():
                         "[the_person.possessive_title]'s face is covered in your cum. Somehow, it doesn't seem like any of it got on her dress..."
                     else:
                         "[the_person.possessive_title]'s face is covered in your cum. Thankfully her dress came off at some point, so no cum dripped on it."
