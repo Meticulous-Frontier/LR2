@@ -84,20 +84,18 @@ init 2 python:
         else:
             clear_scene()
 
-init python:
-    if "keybind1" not in config.overlay_screens:
-        config.overlay_screens.append("keybind1")
-    config.console = True # Enables the console, can be set to False.
+    # Define function to open the screen
+    def toggle_cheat_menu():
+        if renpy.get_screen("cheat_menu"):
+            renpy.hide_screen("cheat_menu")
+        else:
+            renpy.show_screen("cheat_menu")
 
-screen keybind1():
-    key "x" action [
-        ToggleScreen("cheat_menu"),
-        Function(cheat_restore_screen)
-    ]
-    key "X" action [
-        ToggleScreen("cheat_menu"),
-        Function(cheat_restore_screen)
-    ]
+        renpy.restart_interaction()
+        cheat_restore_screen()
+
+    config.keymap["toggle_cheat_menu"] = ["x", "X"]
+    config.underlay.append(renpy.Keymap(toggle_cheat_menu=toggle_cheat_menu))
 
 init 5 python:
     def get_cheat_menu_divisions():
