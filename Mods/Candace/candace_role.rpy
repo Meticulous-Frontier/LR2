@@ -108,7 +108,7 @@ init 2 python:
         the_eyeshadow.colour = [.15, .15, .15, 0.95]
         candace_base_outfit.add_accessory(the_eyeshadow)
 
-        candace_wardrobe = Wardrobe("Candace's Wardrobe") # This name will allow the rebuild_wardrobe function to generate a new one
+        candace_wardrobe = Wardrobe("Candace's Wardrobe")
 
         # her boyfriend only allows her to wear this 'company wardrobe'
         outfit = Outfit("Pink Lace Top And Leggings")
@@ -679,7 +679,7 @@ label candace_convince_to_quit_label(the_person):
     the_person "Bye!"
     $ candace.event_triggers_dict["quit_job"] = 1
     # she has quit her job, give her a new wardrobe
-    $ rebuild_wardrobe(candace)
+    $ rebuild_wardrobe(candace, force = True)
     $ candace.add_unique_on_talk_event(candace_goes_clothes_shopping)
     $ candace.add_unique_on_room_enter_event(candace_overhear_supply_order)
     call advance_time from _call_advance_time_candace_convince_to_quit_label
