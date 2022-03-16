@@ -36,7 +36,7 @@ init 2 python: # Declare variables to use
 
         global salon_manager
         salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", age = renpy.random.randint(26,35), body_type = "thin_body", skin="tan", face_style = "Face_11", hair_colour = "barn red", hair_style = messy_hair,
-            personality = salon_manager_personality, job = salon_job, starting_wardrobe = salon_wardrobe, eyes="green", sex_array = [1,5,3,1], start_sluttiness = 10,
+            personality = salon_manager_personality, starting_wardrobe = salon_wardrobe, eyes="green", sex_array = [1,5,3,1], start_sluttiness = 10,
             possessive_title = "Your Stylist", relationship = "Single", force_random = True, base_outfit = ophelia_base_outfit,
                 forced_opinions = [
                 ["dark chocolate", 2, False],
@@ -52,6 +52,7 @@ init 2 python: # Declare variables to use
         salon_manager.add_unique_on_room_enter_event(salon_introduction_action)
 
         # create home for salon manager
+        salon_manager.add_job(salon_job, job_known = True)
         salon_manager.generate_home()
         salon_manager.home.add_person(salon_manager)
 

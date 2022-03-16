@@ -51,6 +51,7 @@ init 2 python:
             font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", relationship = "Single", base_outfit = starbuck_base)
 
         starbuck.generate_home()
+        starbuck.add_job(starbuck_job, job_known = True)
         starbuck.home.add_person(starbuck)
         make_sex_shop_owner(starbuck)
 
