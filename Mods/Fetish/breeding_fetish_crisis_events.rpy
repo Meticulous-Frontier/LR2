@@ -404,7 +404,7 @@ label breeding_fetish_family_sleep_crisis_label():
                 mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
                 "She is clearly disappointed."
                 if the_person == aunt:
-                    the_person "Ah, yes...well...maybe another time."
+                    the_person "Ah, yes... well... maybe another time."
                 else:
                     the_person "Whatever."
                 "You roll over while she leaves the room and quickly fall asleep."

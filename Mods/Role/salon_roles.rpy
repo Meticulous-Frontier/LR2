@@ -520,7 +520,7 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person "What? It's nothing serious, you should come over tomorrow, I'll do the same for you."
     ex_name "I'm sorry, this is getting out of control. I'm sorry but I'm blocking you."
     the_person "Wow, after everything we've been through together? \n \'message not received\'"
-    "...Ouch..."
+    "... Ouch..."
     mc.name "[the_person.title]... I'm sorry."
     the_person "Yeah that's... not what I was hoping for. Oh well."
     the_person "I was really thinking that, just maybe."

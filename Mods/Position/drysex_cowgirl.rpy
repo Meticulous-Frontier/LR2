@@ -2,7 +2,7 @@
 
 init:
     python:
-        drysex_cowgirl = Position(name = "Dry Cowgirl", slut_requirement = 20, slut_cap = 80, requires_hard = False, requires_large_tits = False,
+        drysex_cowgirl = Position(name = "Dry Cowgirl", slut_requirement = 20, slut_cap = 40, requires_hard = False, requires_large_tits = False,
             position_tag = "cowgirl", requires_location = "Lay", requires_clothing = "None", skill_tag = "Foreplay",
             girl_arousal = 12, girl_energy = 9,
             guy_arousal = 10, guy_energy = 11,
@@ -139,7 +139,7 @@ label outro_drysex_cowgirl(the_girl, the_location, the_object, the_goal = None):
     mc.name "Fuck, I'm going to cum!"
 
     "She acts surprised, but quickly speeds up, dry humping you at a rapid pace."
-    mc.name "Oh.... Fuck!"
+    mc.name "Oh... Fuck!"
     $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
     "You dump your load in your pants. It makes a mess but it feels great."
     the_girl "Wow..."

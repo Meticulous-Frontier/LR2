@@ -1,7 +1,4 @@
 init python:
-    if "opinion_edit_menu_keybind" not in config.overlay_screens:
-        config.overlay_screens.append("opinion_edit_menu_keybind")
-
     def update_opinion_score(self, topic, category, value, discover = True):
 
         score = self.get_opinion_score(topic)
@@ -45,9 +42,18 @@ init python:
         if score >= 2:
             return "loves"
 
-screen opinion_edit_menu_keybind():
-    key "p" action ToggleScreen("opinion_edit_menu")
-    key "P" action ToggleScreen("opinion_edit_menu")
+    # Define function to open the screen
+    def toggle_opinion_edit_menu():
+        if renpy.get_screen("opinion_edit_menu"):
+            renpy.hide_screen("opinion_edit_menu")
+        else:
+            renpy.show_screen("opinion_edit_menu")
+
+        renpy.restart_interaction()
+
+    config.keymap["toggle_opinion_edit_menu"] = ["p", "P"]
+    config.underlay.append(renpy.Keymap(toggle_opinion_edit_menu=toggle_opinion_edit_menu))
+
 
 screen opinion_edit_menu():
 

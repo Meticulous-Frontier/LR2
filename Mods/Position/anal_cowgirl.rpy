@@ -1,5 +1,5 @@
 init python:
-    SB_anal_cowgirl = Position("Anal Cowgirl", slut_requirement = 70, slut_cap = 95, requires_hard = True, requires_large_tits = False,
+    SB_anal_cowgirl = Position("Anal Cowgirl", slut_requirement = 70, slut_cap = 90, requires_hard = True, requires_large_tits = False,
         position_tag = "cowgirl", requires_location = "Lay",  requires_clothing = "Vagina", skill_tag = "Anal",
         girl_arousal = 22, girl_energy = 20,
         guy_arousal = 16, guy_energy = 14,
@@ -96,7 +96,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
                     return
                 "Play with her pussy":
                     "You quickly stick your thumb in your mouth to get it wet, then reach down and start to rub her clit with your thumb as she rides you."
-                    if the_girl.get_opinion_score("being fingered"):
+                    if the_girl.get_opinion_score("being fingered") > 0:
                         "[the_girl.possessive_title] moans as you start to play with her."
                         the_girl "Oh! That feels good. Makes it easier to handle buttsex when you touch me like that."
                         $ the_girl.change_arousal(5)
@@ -127,7 +127,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
                     return
                 "Play with her pussy":
                     "You quickly stick your thumb in your mouth to get it wet, then reach down and start to rub her clit with your thumb as she rides you."
-                    if the_girl.get_opinion_score("being fingered"):
+                    if the_girl.get_opinion_score("being fingered") > 0:
                         "[the_girl.possessive_title] moans as you start to play with her."
                         the_girl "Oh! That feels good. Makes it easier to handle buttsex when you touch me like that."
                         $ the_girl.change_arousal(5)

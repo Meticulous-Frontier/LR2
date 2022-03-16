@@ -528,7 +528,7 @@ label ellie_work_welcome_monday_label():
     ellie "I... I get it that you are using the nanobots for... fornication..."
     ellie "So I looked through those programs a bit. There are definitely some gains to be made in those programs."
     ellie "I'm not saying I agree with what you are doing with them, but the programs themselves look like you just slapped them together over a weekend or something."
-    mc.name "That's.... basically what we did. The head researcher had a contact who put together the programs for us over a weekend..."
+    mc.name "That's... basically what we did. The head researcher had a contact who put together the programs for us over a weekend..."
     ellie "You... bless your hearts. You are lucky he didn't put in some kinda back door or tracking program in there. He was probably just lazy."
     ellie "Anyway, I think I can improve those more for you, though if I'm honest, these bots are cutting edge tech. Some improvements might need more research into the bots themselves first."
     $ mc.business.it_director = the_person
@@ -645,7 +645,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     mc.name "Not unless you want me to. It'll be just like I'm rubbing your back, but it'll feel even better, I promise."
     "[the_person.title] doesn't respond, but just waits. You know you are pushing boundaries here, so you proceed carefully."
     "You let both hands creep up her belly until they reach the bottom of her rib cage. You slide them up a bit more until you are cupping the bottom of her tits."
-    the_person "Ahhhhh...."
+    the_person "Ahhhhh..."
     $ the_person.change_arousal(5) #70
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
@@ -846,7 +846,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     mc.name "What can I do for you?"
     the_person "Are blue balls real?"
     "Wow she is getting right to the point. You have to smile at the way she pronounced blue though."
-    mc.name "Wow, umm.. yeah, yeah they are."
+    mc.name "Wow, umm... yeah, yeah they are."
     the_person "And... and they hurt?"
     mc.name "Yeah, they can, I guess it depends on the situation..."
     the_person "The... other day... when you touched me? Did you get turned on too?"
@@ -871,7 +871,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     mc.name "Why? I mean, it's what you call it. It's okay, say it. Tell me what you want me to do."
     "[the_person.possessive_title] takes a deep breath."
     the_person "[the_person.mc_title], can I give you a handjob?"
-    mc.name "...and?"
+    mc.name "... and?"
     the_person "Wha? and?"
     mc.name "What do you say when you are asking your boss for something?"
     $ the_person.change_obedience(5)
@@ -943,7 +943,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     the_person "Okay?"
     "You take her hand and bring it up to your mouth. You get a big bit of saliva and spit it into her hand."
     mc.name "Now keep going."
-    the_person "Ohhh.... okay..."
+    the_person "Ohhh... okay..."
     $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(5)
     $ mc.change_arousal(20) #45
@@ -1120,7 +1120,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     $ the_person.break_taboo("sucking_cock")
     "With the tip in her mouth, [the_person.title] swirls her tongue around it a few times. It feels so good."
     "After a few seconds, she bravely pushes down a little further. She is clearly testing her limits, unsure of how far she can take it."
-    the_person "Mmmmmmm.... UNGLCK"
+    the_person "Mmmmmmm... UNGLCK"
     "[the_person.possessive_title] suddenly gags as she takes it a little to far. She quickly pulls off and catches her breath."
     the_person "Stars! Sorry I..."
     mc.name "It's okay. The tip is the most sensitive part, just do what you can, but don't force it."
@@ -1150,7 +1150,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     menu:
         "Cum in her mouth":
             "You put your hand on the back of her head."
-            mc.name "Get ready, I want to cum in your mouth.... here it comes!"
+            mc.name "Get ready, I want to cum in your mouth... here it comes!"
             "With a moan you explode, your cock starts to dump its load in her eager mouth."
             $ the_person.cum_in_mouth()
             $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
@@ -1358,6 +1358,7 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
         $ the_person.draw_person()
         "You leave your office together and go back to the work day."
 
+    $ ellie.apply_planned_outfit()
     $ mc.business.add_mandatory_crisis(ellie_dinner_date_intro)
     $ clear_scene()
     $ mc.location.show_background()

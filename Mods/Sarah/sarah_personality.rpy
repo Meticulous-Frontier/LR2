@@ -894,7 +894,7 @@ label Sarah_sucking_cock_taboo_break(the_person):
         mc.name "Who's going to know, and why do you care what people think?"
         mc.name "Just suck on it a little, and if you don't like doing it you can stop."
         "She shakes her head again, but you can see her resolve breaking the more she thinks about it."
-        the_person "...Fine. I'll do it."
+        the_person "... Fine. I'll do it."
         mc.name "Do what?"
         "She smiles and laughs."
         the_person "You're the worst. I'll suck on your cock, [the_person.mc_title]. Happy?"
@@ -1147,7 +1147,7 @@ label Sarah_get_drunk_dialogue(the_person, intoxication_level):
     if intoxication_level < 3: # mostly sober
         if the_person.sluttiness > 60:
             "[the_person.title] is carrying on, talking about a time that she was trying to hookup with a random guy on Tinder but it didn't go well."
-            the_person "...So anyway, that's when I decided to start making sure to keep my pubic hair trimmed."
+            the_person "... So anyway, that's when I decided to start making sure to keep my pubic hair trimmed."
             mc.name "Yeah I bet. To be honest though, I probably would have eaten you out anyway."
             the_person "Yeah right, and risk getting hair in your mouth? Hey, that reminds me of a joke I heard. What do you call a roman with a hair stuck in his teeth?"
             mc.name "I don't know, what?"
@@ -1155,21 +1155,21 @@ label Sarah_get_drunk_dialogue(the_person, intoxication_level):
             "You share a laugh together and continue having your drinks."
         else:
             "[the_person.title] is carrying on, talking about her time at her internship, before you hired her."
-            the_person "...So anyway, I still can't believe I didn't realize what was going on. That man can go fuck himself!"
+            the_person "... So anyway, I still can't believe I didn't realize what was going on. That man can go fuck himself!"
             mc.name "Well, I for one am glad that they let you go, or it is likely we never would have reconnected."
             the_person "I mean... that's true! I guess everything happens for a reason?"
 
     elif intoxication_level < 5: # drunk
         if the_person.sluttiness > 60:
             "[the_person.title] is carrying on. She's had a few drinks and is starting to get pretty obvious, flirting with you."
-            the_person "...So anyway, that's why I'm banned from the weekly wine tasting. They keep saying to spit it out, but I always swallow."
+            the_person "... So anyway, that's why I'm banned from the weekly wine tasting. They keep saying to spit it out, but I always swallow."
             mc.name "Always?"
             the_person "Don't believe me?"
             "[the_person.possessive_title] takes a deep sip of her drink, then makes a show, tiling her head back and swallowing it all with a loud gulp."
             the_person "The defense declares this evidence to be called exhibit A... maybe later I can show you exhibit D."
         else:
             "[the_person.title] is carrying on, talking about her time at her internship, before you hired her."
-            the_person "...So anyway, I still can't believe I didn't realize what was going on. That man can go fuck himself!"
+            the_person "... So anyway, I still can't believe I didn't realize what was going on. That man can go fuck himself!"
             mc.name "Well, I for one am glad that they let you go, or it is likely we never would have reconnected."
             the_person "I mean... that's true! I guess everything happens for a reason?"
 

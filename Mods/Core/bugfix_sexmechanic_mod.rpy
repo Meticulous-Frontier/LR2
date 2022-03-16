@@ -1036,11 +1036,11 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                             call put_on_condom_routine(the_person) from _call_put_on_condom_routine_9
 
                 "Fuck her raw":
-                    call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_5
+                    call fuck_without_condom_taboo_break_response(the_person, skill_tag, condom_promise = False) from _call_fuck_without_condom_taboo_break_response_5
 
         else:
             if skill_tag == "Anal":
-                the_person "Well...ah...could you fuck my little ass raw?"
+                the_person "Well... ah... could you fuck my little ass raw?"
             else:
                 $ the_person.call_dialogue("condom_bareback_ask")
             menu:
@@ -1049,7 +1049,8 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_7
 
                 "Fuck her raw":
-                    call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_6
+                    mc.name "No arguments here."
+                    call fuck_without_condom_taboo_break_response(the_person, skill_tag, condom_promise = False) from _call_fuck_without_condom_taboo_break_response_6
 
     if not mc.condom:
         $ the_person.break_taboo("condomless_sex")
@@ -1071,25 +1072,24 @@ label prostitute_agree_no_condom_taboo_break_response(the_person):
             the_person "I'm not using any contraception at the moment."
     return
 
-label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal"):
+label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal", condom_promise = True):
     if the_person.has_taboo("condomless_sex") and skill_tag == "Vaginal":
         $ the_person.call_dialogue("condomless_sex_taboo_break")
     else:
         # TODO: make this a personality based response.
         if the_person.get_opinion_score("bareback sex") > 0:
             the_person "I agree, nothing beats skin on skin."
-        elif skill_tag == "Vaginal" and the_person.get_opinion_score("creampies") > 0:
-            the_person "I love it when you fill me up with your spunk."
-        elif skill_tag == "Anal" and the_person.get_opinion_score("anal creampies") > 0:
-            the_person "Just pump my ass full with that hot spunk of yours."
-
-        if skill_tag == "Vaginal":
-            $ the_person.update_birth_control_knowledge()
+        elif skill_tag == "Vaginal" and condom_promise:
             if the_person.on_birth_control:
                 the_person "Okay. I'm on birth control, so it should be fine."
             elif not the_person.knows_pregnant():
                 the_person "I'm not on birth control [the_person.mc_title], promise you won't cum inside me."
                 call condomless_promise(the_person) from _call_condomless_promise_fuck_without_condom
+        elif skill_tag == "Vaginal" and not condom_promise:
+            if the_person.get_opinion_score("creampies") > 0:
+                the_person "I love it when you fill me up with your spunk."
+        elif skill_tag == "Anal" and the_person.get_opinion_score("anal creampies") > 0:
+            the_person "Just pump my ass full with that hot spunk of yours."
     return
 
 label put_on_condom_routine(the_person):

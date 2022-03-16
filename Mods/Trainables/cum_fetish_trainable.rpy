@@ -44,10 +44,10 @@ label train_cum_fetish_label(the_person):
     mc.name "I've noticed that you enjoy my cum a lot."
 
     $ text_1 = get_attaboy_girl_response(the_person)
-    the_person "Uhm..yeah..[text_1]"
+    the_person "Uhm... yeah... [text_1]"
 
     mc.name "You would like it if I did that more often, right?"
-    the_person "Oh..yes..I really would love that."
+    the_person "Oh... yes... I really would love that."
 
     mc.name "I want you to close your eyes and imagine me doing that right now."
     "She closes her eyes and you see her getting exited with the idea."

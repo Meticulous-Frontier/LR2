@@ -817,7 +817,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
             valid_possessive_titles.append("The Slutwife")
             valid_possessive_titles.append("Your Swinging Slut")
 
-        if person.effective_sluttiness() > 100:
+        if person.effective_sluttiness() > 90:
             valid_possessive_titles.append("The Bar Cumdump")
         return valid_possessive_titles
     def hotwife_player_titles(person):

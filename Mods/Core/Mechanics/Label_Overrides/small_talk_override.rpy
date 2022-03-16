@@ -50,7 +50,17 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
         person.discover_opinion("small talk")
 
     # TODO: Add a chance that she wants to talk about someone she knows.
-    if renpy.random.randint(0,100) < 60 + (person.get_opinion_score("small talk") * 20) + (mc.charisma * 5):
+    if not is_phone and person.love > 5 and not person.event_triggers_dict.get("job_known", True) and renpy.random.randint(0,2) == 1:
+        if person.job == unemployed_job:
+            person "Well, it's hard to make ends meet, but I'll figure it out."
+            "She tells you that it is not easy when you have no job."
+        elif person in unique_character_list:
+            "You chit chat for a while, about life, aspirations and dreams."
+        else:
+            person "Just having some issues at work, but nothing I can't handle."
+            "She tells you about her job and its challenges."
+        $ person.event_triggers_dict["job_known"] = True
+    elif renpy.random.randint(0,100) < 60 + (person.get_opinion_score("small talk") * 20) + (mc.charisma * 5):
         if is_phone:
             "There's a short pause, then [person.title] texts you back."
         else:
@@ -115,7 +125,7 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
                 else:
                     "You listen while [person.possessive_title] talks and discover that she [opinion_string] [opinion_learned]."
 
-            $ person.change_love(2 - prediction_difference, max_modified_to = 35)
+            $ person.change_love(3 - prediction_difference, max_modified_to = 35)
 
         else:
             if is_phone:

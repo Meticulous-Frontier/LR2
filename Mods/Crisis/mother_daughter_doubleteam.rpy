@@ -85,7 +85,7 @@ label mother_daughter_doubleteam_action_label():
                     the_mother "Alright, I'll make dinner tonight, but this isn't over girl! We'll revisit this another time!"
             $ scene_manager.update_actor(the_mother, position = "walking_away", display_transform = character_right)
             $ scene_manager.update_actor(the_daughter, position = "walking_away", display_transform = character_center_flipped)
-            "The two girls walk out of your office, the competition settled.... for now..."
+            "The two girls walk out of your office, the competition settled... for now..."
         "Too busy":
             mc.name "I'm sorry, I have a lot on my to do list right now. Perhaps another time."
             the_daughter "Oof. Okay, maybe we're both bad if [the_daughter.mc_title] won't even accept a free blowjob from us mom?"

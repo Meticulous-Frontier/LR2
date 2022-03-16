@@ -23,6 +23,12 @@ init 5 python:
 
     def add_police_chief_character():
         police_chief_wardrobe = wardrobe_from_xml("Cop_Wardrobe")
+        cop_outfit = police_chief_wardrobe.get_outfit_with_name("Cop")
+
+        global police_chief_uniform_wardrobe
+        police_chief_uniform_wardrobe = Wardrobe("Cop Uniform")
+        police_chief_uniform_wardrobe.add_outfit(cop_outfit)
+        police_chief_wardrobe.remove_outfit(cop_outfit)
 
         police_chief_personality = Personality("police_chief", default_prefix = "reserved",
             common_likes = ["pants", "small talk", "working", "the colour blue", "the colour black", "boots", "sports", "working", "work uniforms"],

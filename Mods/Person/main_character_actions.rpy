@@ -264,12 +264,9 @@ label mc_schedule_person_label(*args):
 label mc_start_follow_label(person):
     "You tell [person.title] to follow you around."
 
-    #if the_person.get_opinion_score("being submissive"):
-
     $ the_person.follow_mc = True
-    $ the_person.call_dialogue("seduction_accept_crowded")
-
-    return
+    person "Ok, let's go."
+    jump game_loop      # exit talk menu
 
 label mc_stop_follow_label(person):
     python:

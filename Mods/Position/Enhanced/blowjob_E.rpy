@@ -247,7 +247,7 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
             "She runs the back of her hand along her lips, removing the cum trails and sits back to catch her breath."
             $ the_girl.call_dialogue("cum_mouth")
 
-    elif the_girl.effective_sluttiness() > 90 or (the_girl.get_opinion_score("giving blowjobs") > 0 and the_girl.sex_skills["Oral"] > 0) or the_girl.sex_skills["Oral"] > 3:
+    elif the_girl.effective_sluttiness() > 90 or (the_girl.get_opinion_score("giving blowjobs") > 1 and the_girl.sex_skills["Oral"] > 1) or the_girl.sex_skills["Oral"] > 4:
         "[the_girl.possessive_title] looks up at you and stares into your eyes as you climax."
         if the_girl.sex_skills["Oral"] > 3:
             "She tightens and relaxes her throat, as if to draw out every last drop of semen from you."
@@ -257,7 +257,7 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
         $ deepthroat.redraw_scene(the_girl)
         "When you're completely finished she pulls off slowly, kissing the tip before leaning back."
         $ the_girl.call_dialogue("cum_mouth")
-    elif the_girl.effective_sluttiness() > 60 or the_girl.get_opinion_score("giving blowjobs") > -1 or the_girl.sex_skills["Oral"] > 1:
+    elif the_girl.effective_sluttiness() > 60 or the_girl.get_opinion_score("giving blowjobs") > 0 or the_girl.sex_skills["Oral"] > 2:
         "[the_girl.possessive_title] closes her eyes and holds still as you climax. You feel her throat spasm a few times as she struggles to keep your cock in place."
         $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
         $ the_girl.cum_in_mouth()
@@ -278,18 +278,20 @@ label blowjob_enhanced_kneel_throat_cum(the_girl):
                 "[the_girl.title]'s eyes go wide as she realizes you don't intend to let her off your cock as you cum."
                 "She tries to pull her head back, but you hold it in place as you begin to unload your hot, sticky load directly into her throat."
                 "For a brief second she manages to keep up with the torrent of cum, then it overwhelms her."
-                "She spasms and gags. A mix of her spit and your semen bubble around the base of your cock, collecting in drops that roll down her chin and onto her tits."
-                "She gags and coughs again, this time blowing little cum bubbles out of her nose as her body struggles to find somewhere to put more and more of your sperm."
-                $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
                 $ the_girl.cum_in_mouth()
                 $ skull_fuck.redraw_scene(the_girl)
+                "She spasms and gags. A mix of her spit and your semen bubble around the base of your cock, collecting in drops that roll down her chin and onto her tits."
+                $ the_girl.cum_on_tits(add_to_record = False)
+                $ skull_fuck.redraw_scene(the_girl)
+                "She gags and coughs again, this time blowing little cum bubbles out of her nose as her body struggles to find somewhere to put more and more of your sperm."
+                $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_girl)
                 "Finally you're spent and you finally let [the_girl.title] pull off of your cock."
-                the_girl "Guahh... Guahh... Ah.... Ah...."
+                the_girl "Guahh... Guahh... Ah... Ah..."
                 mc.name "Fuck that felt good."
                 the_girl "There was so much... Ah... I thought I was going to drown in it..."
                 "Still gasping for air, she wipes your sperm away from her nose and chin, then swallows loudly to get rid of the rest of it."
                 $ the_girl.call_dialogue("cum_mouth")
-                $ the_girl.change_arousal(the_girl.get_opinion_score("drinking cum") + the_girl.get_opinion_score("being submissive"))
+                $ the_girl.change_arousal(the_girl.get_opinion_score(["drinking cum", "being submissive"]))
     return
 
 label blowjob_enhanced_kneel_mouth_cum(the_girl):
@@ -309,7 +311,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                     $ the_girl.change_arousal(10)
                 elif the_girl.get_opinion_score("cum facials") < 0:
                     "[the_girl.title] moves her head so that your cum will miss her face."
-                    if the_girl.get_opinion_score("being covered in cum") > 0):
+                    if the_girl.get_opinion_score("being covered in cum") > 0:
                         "[the_girl.possessive_title] moves your cock to point at her chest."
                         $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
                         $ the_girl.cum_on_tits()
@@ -379,7 +381,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                 $ the_girl.change_arousal(10)
                 $ the_girl.call_dialogue("cum_mouth")
                 "[the_girl.possessive_title] begins moaning uncontrollably around your twitching cock when her cum addicted brain registers her cum dosage."
-        elif the_girl.effective_sluttiness() > 70 or the_girl.get_opinion_score("giving blowjobs") > 0:
+        elif the_girl.effective_sluttiness() > 70 or the_girl.get_opinion_score("giving blowjobs") > 1:
             "[the_girl.possessive_title] doesn't even flinch as you shoot your hot cum across the back of her throat."
             $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_girl)
             $ the_girl.cum_in_mouth()
@@ -397,7 +399,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
             if the_girl.get_opinion_score("being covered in cum") > 0 and the_girl.outfit.tits_available():
                 "[the_girl.possessive_title] tilts her head forward and let your cum dribble out of her mouth onto her bare tits."
                 $ the_girl.call_dialogue("cum_mouth")
-                $ the_girl.cum_on_tits()
+                $ the_girl.cum_on_tits(add_to_record = False)
                 $ the_girl.draw_person(position = "kneeling1")
                 "She starts to rub your cum on her breasts."
             elif the_girl.effective_sluttiness() > 80 or the_girl.get_opinion_score("drinking cum") > 0:

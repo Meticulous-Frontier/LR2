@@ -300,7 +300,7 @@ label fetish_mom_kitchen_label(the_person):
             lily "Are you sure you're okay mom? That doesn't sound like vegetables."
             the_person "I'm sure! I'm not chopping vegetables anymore... I'm... oh god... I'm... beating meat!"
             "You try to stifle a laugh."
-            lily "Beating...meat?"
+            lily "Beating... meat?"
             the_person "I mean... tenderizing it! You have to really spank... I mean... smack it hard to get it tender!"
             "You give her ass a solid spank."
             $ the_person.change_arousal(20)
@@ -354,7 +354,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
 
     ###ANAL STREAM OPTION###
     "You give [the_person.possessive_title] a quick proposition."
-    mc.name "Hey [the_person.title]. What do you say we get out that strap on again? I bet your viewers would love that."
+    mc.name "Hey [the_person.title]. What do you say we get out that strap-on again? I bet your viewers would love that."
     "[the_person.possessive_title] looks at you and smiles."
     the_person "Mmm that sounds pretty good [the_person.mc_title]... Here, let me take a couple... precautions."
     "[the_person.possessive_title] walks over and closes her door and locks it. She turns on some music and turns the volume up."

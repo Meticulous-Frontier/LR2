@@ -47,7 +47,7 @@ init 2 python:
 
         global sarah
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
-            eyes = "dark blue", personality = Sarah_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = sarah_wardrobe, job = sarah_initial_job, \
+            eyes = "dark blue", personality = Sarah_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = sarah_wardrobe, \
             stat_array = [5,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
             title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit,
             force_random = True, forced_opinions = [
@@ -67,6 +67,7 @@ init 2 python:
             ])
 
         sarah.generate_home()
+        sarah.add_job(sarah_initial_job, job_known = True)
         sarah.set_override_schedule(sarah.home)
         sarah.home.add_person(sarah)
 
@@ -521,7 +522,7 @@ label Sarah_intro_label():
     the_person "Hello sir, I am [the_person.title], with Metropolis Power and Light, I was just wondering if you had ever thought about installing solar panels..."
     "She begins talking about the benefits and tax credits associated with solar panels, but you have a hard time listening."
     "This girl... she look so familiar! Where do you know her from!?!"
-    the_person "...with even 50%% coverage of the roof you can expect a considerable reduction in your electric bill..."
+    the_person "... with even 50%% coverage of the roof you can expect a considerable reduction in your electric bill..."
     "What did she say her name was again? [the_person.title]? Suddenly you get a flash of a memory from a long time again. You quickly interrupt her."
     mc.name "I'm sorry, you said your name was [the_person.title]? Is your name [the_person.title] [the_person.last_name]?"
     "She immediately stops her sales pitch."
@@ -648,7 +649,7 @@ label Sarah_third_wheel_label():
     the_person "I actually just found it! One second..."
     "You see her pull a small, silver package out of her desk and shove it in her bag quickly... was that a condom?"
     $ mc.change_locked_clarity(5)
-    the_person "...sorry I just... you know, like to be prepared. You never know!"
+    the_person "... sorry I just... you know, like to be prepared. You never know!"
     mc.name "You look nice, you have a date tonight?"
     "[the_person.title] blushes and looks down at her desk."
     the_person "Errrmm... not really. I'm meeting a friend at the bar for a few drinks. I thought it was just going to be me and her, but she just texted me she is bringing her boyfriend."
@@ -2639,7 +2640,7 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "You are slow to wake up. You had several sexy dreams the night before, and you aren't ready to leave them yet."
         "It feels good, in your dream, as you slowly push your cock into [the_person.title]'s hot pussy."
         "It's so wet and tight, it feels almost real..."
-        the_person "...[the_person.mc_title]... mmm.... I can't take it anymore..."
+        the_person "... [the_person.mc_title]... mmm... I can't take it anymore..."
         $ scene_manager.add_actor(the_person, position = "cowgirl")
         $ the_person.change_arousal(30)
         $ mc.change_arousal(30)
@@ -3229,7 +3230,7 @@ label Sarah_naomi_visits_to_apologize_label():
     $ scene_manager.add_actor(sarah, display_transform = character_right)
     sarah "Good afternoon, [sarah.mc_title]."
     if sarah_epic_tits_progress() > 1:
-        the_person "Oh my god, [sarah.name] you look absolutely stunning, your breasts...they are...amazing."
+        the_person "Oh my god, [sarah.name] you look absolutely stunning, your breasts... they are... amazing."
         $ the_person.change_arousal(10)
         $ scene_manager.update_actor(sarah, emotion = "happy")
     else:
@@ -3245,7 +3246,7 @@ label Sarah_naomi_visits_to_apologize_label():
     $ scene_manager.update_actor(sarah, emotion = "happy")
     "A second [the_person.name] looks dumbfounded, but [sarah.title] starts to smile and nods to you."
     mc.name "Good, I thought you both would agree, [the_person.name] please stand and lean over my desk."
-    the_person "I...but...well..."
+    the_person "I... but... well..."
     $ scene_manager.update_actor(the_person, position = "standing_doggy", display_transform = character_center)
     mc.name "Right, [sarah.title], I think it would be only fair if you did the spanking."
     "[sarah.possessive_title] finally seems to figure out where you are going and leans into the role."
@@ -3259,9 +3260,9 @@ label Sarah_naomi_visits_to_apologize_label():
     sarah "Good, I see you are committed to apologize."
     $ scene_manager.update_actor(sarah, position = "stand5")
     "And with that [sarah.possessive_title] starts slapping away at [the_person.name]'s naked ass cheeks."
-    the_person "Oh shit!...Fuck!...Aaarg!"
+    the_person "Oh shit!... Fuck!... Aaarg!"
     sarah "Now you little bitch, tell me how sorry you are!"
-    the_person "Aaah....I'm...shit...really...Ouch...SORRY!!"
+    the_person "Aaah... I'm... shit... really... Ouch... SORRY!!"
     "As you are watching this scene you see [the_person.name]'s bottom turn a nice shade of red, but what's even more interesting, her pussy seems to get wet also."
     menu:
         "Degrade [the_person.title]":
@@ -3271,7 +3272,7 @@ label Sarah_naomi_visits_to_apologize_label():
             $ scene_manager.update_actor(sarah, position = "sitting")
             mc.name "Well [the_person.name], did you know that [sarah.name] had a girl crush on you since you met?"
             $ scene_manager.update_actor(the_person, position = "stand2")
-            the_person "Oh...I didn't know that, is that why you were so angry with me after that night? Because my ex didn't let you join us?"
+            the_person "Oh... I didn't know that, is that why you were so angry with me after that night? Because my ex didn't let you join us?"
             $ the_person.change_arousal(10)
             "[sarah.possessive_title] looks at her and quietly nods."
             mc.name "[sarah.title], why don't you show her how wet your little snatch is..."
@@ -3297,7 +3298,7 @@ label Sarah_naomi_visits_to_apologize_label():
             "While [the_person.name] is doing her best to satisfy [sarah.possessive_title], you position yourself right behind her."
             mc.name "I think she needs some extra motivation, don't you agree [sarah.title]?"
             "Your friend is only able to nod while enjoying the tongue of her friend. And with that you continue the spanking of [the_person.name]."
-            the_person "*SLAP*...Aargh...*SLAP*...hmm...*SLAP*...MMM..."
+            the_person "*SLAP*... Aargh... *SLAP*... hmm... *SLAP*... MMM..."
             $ the_person.change_arousal(20)
             $ sarah.change_arousal(20)
             "Occasionally, you move your hands between her legs to check how wet she is and she's is getting wetter by the minute."
@@ -3306,11 +3307,11 @@ label Sarah_naomi_visits_to_apologize_label():
             "[sarah.possessive_title] is close to orgasm, judging by her groans getting louder and louder."
             $ the_person.change_arousal(30)
             $ sarah.change_arousal(30)
-            sarah "Oh yes, right there [the_person.name], make me cum....Oh God, YES, I'm CUMMING!!!"
+            sarah "Oh yes, right there [the_person.name], make me cum... Oh God, YES, I'm CUMMING!!!"
             $ sarah.have_orgasm()
             "As [sarah.possessive_title] starts squirting, her friend starts to shudder indicating that she's having an orgasm as well."
             $ the_person.have_orgasm()
-            the_person "MMMM!!!....Oh my, this is so good, I never thought you could taste this good."
+            the_person "MMMM!!!... Oh my, this is so good, I never thought you could taste this good."
             $ sarah.increase_opinion_score("getting head", 2)
             sarah "You really know you way around down there, I came like a freight train."
             "After [the_person.name] gives [sarah.possessive_title] a few more licks along her dripping slit, she stands up."

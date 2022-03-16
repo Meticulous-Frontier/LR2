@@ -797,7 +797,7 @@ label cum_fetish_erica_intro_label(the_person):
     "It's time to hit the gym. You step into the lockerroom to get changed into workout clothes."
     "As you are changing, you feel someone tap on your shoulder. You turn around."
     $ the_person.draw_person()
-    mc.name "Uhhh.... [the_person.title]? Are you supposed to be in the men's lockerroom?"
+    mc.name "Uhhh... [the_person.title]? Are you supposed to be in the men's lockerroom?"
     erica "Shhh!"
     "[the_person.possessive_title] shushes you, then grabs your hand."
     $ the_person.draw_person(position = "walking_away")

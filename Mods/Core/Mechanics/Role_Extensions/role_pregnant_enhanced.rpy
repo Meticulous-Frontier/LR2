@@ -199,7 +199,7 @@ label silent_pregnant_transform_announce(start_day, the_person):
     "[the_person.possessive_title] notices you and comes over to talk."
     the_person "Hey [the_person.mc_title]. So, it's probably pretty obvious at this point..."
     "She turns and runs a hand over her belly, accentuating the new and prominent curves that have formed there."
-    the_person "...but, I'm pregnant!"
+    the_person "... but, I'm pregnant!"
     mc.name "Congratulations! You look fantastic. You really are glowing."
     $ the_person.change_happiness(10)
     if the_person.is_employee():

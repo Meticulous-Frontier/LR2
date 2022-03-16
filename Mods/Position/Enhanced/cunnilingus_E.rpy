@@ -75,7 +75,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
             "[the_girl.title]'s hips begin to grind forward and back. With each peak she grinds her clit against your face, and with each slide trough your finger is fully embedded in her backdoor."
             the_girl "Oh!!! [the_girl.mc_title] yes!"
             "You continue for a while. [the_girl.title] clearly enjoys the anal penetration. Eventually you pull your finger out and resume eating her out normally."
-            $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") * 10)
+            $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex") * 5)
             the_girl "Fuck that was intense..."
         "Finger Her Ass\n{color=#ff0000}{size=18}Must like anal sex{/size}{/color} (disabled)" if the_girl.get_opinion_score("anal sex") <= 0:
             pass
@@ -100,22 +100,23 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                         "You go back to rimming [the_girl.possessive_title]."
 
             if the_girl.has_role(anal_fetish_role):
-                the_girl "Oh..my.. god! That feels sooo good...you have to keep doing that."
+                the_girl "Oh... my... god! That feels sooo good... you have to keep doing that."
                 "[the_girl.possessive_title] reached behind your head to hold your head in place. Her breathing is heavy but erratic."
                 menu:
                     "Keep licking":
                         "You continue to lick [the_girl.possessive_title]'s asshole at a slow and steady pace."
                         the_girl "Oh!!! [the_girl.mc_title]!"
                         $ the_girl.call_dialogue("surprised_exclaim")
+                        $ the_girl.change_arousal(2 * the_girl.get_opinion_score(["anal sex", "taking control", "getting head"]))
 
                     "Tongue fuck her ass":
                         "You roll the sides of your tongue up and start to push the tip in and out of [the_girl.possessive_title]'s asshole."
                         the_girl "Oh!!! [the_girl.mc_title]!"
                         $ the_girl.call_dialogue("surprised_exclaim")
                         "You start to pick up the pace of your tongue action."
+                        $ the_girl.change_arousal(4 * the_girl.get_opinion_score(["anal sex", "taking control", "getting head"]))
 
                 "You continue for a while. [the_girl.title] clearly enjoys the feel of your tongue."
-                $ the_girl.change_arousal((the_girl.get_opinion_score("anal sex") * 5) + (the_girl.get_opinion_score("taking control") * 2) + (the_girl.get_opinion_score("getting head")))
             elif the_girl.get_opinion_score("anal sex") > 0:
                 "[the_girl.title] reaches down and grabs her own butt cheeks to hold them apart giving you free access to her asshole."
                 "You can feel her body relax, as you push your tongue into her ass."
@@ -135,7 +136,7 @@ label scene_SB_Oral_Laying_1(the_girl, the_location, the_object):
                 "[the_girl.title]'s thighs begin to twitch."
                 the_girl "Oh!!! [the_girl.mc_title] yes!"
                 "You continue for a while. [the_girl.title] clearly enjoys the anal stimulation."
-                $ the_girl.change_arousal((the_girl.get_opinion_score("anal sex") * 5) + the_girl.get_opinion_score("taking control") + (the_girl.get_opinion_score("getting head")))
+                $ the_girl.change_arousal(2 * the_girl.get_opinion_score(["anal sex", "taking control", "getting head"]))
             else:
                 "[the_girl.title] slowly relaxes as you lick at her asshole."
                 $ the_girl.call_dialogue("surprised_exclaim")

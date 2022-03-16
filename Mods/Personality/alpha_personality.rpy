@@ -18,28 +18,28 @@ init 3 python:
 init 1400 python:
     def alpha_titles(person):
         valid_titles = []
-        valid_titles.append("Mrs. " + person.last_name)
+        valid_titles.append(person.formal_address + " " + person.last_name)
         if person.love > 20:
             valid_titles.append(person.name)
         if person.love > 50 and person.has_role(stripclub_mistress_role):
             valid_titles.append("Milady")
         if person.sluttiness > 60 and person.has_role(stripclub_mistress_role):
             valid_titles.append("Mistress")
-        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_titles.append("Anal Queen")
         return valid_titles
     def alpha_possessive_titles(person):
         valid_possessive_titles = []
-        valid_possessive_titles.append("Mrs. " + person.last_name)
+        valid_possessive_titles.append(person.formal_address + " " + person.last_name)
         if person.love > 10 and person.has_role(stripclub_manager_role):
             valid_possessive_titles.append("Your manager")
         if person.sluttiness > 60 and person.has_role(stripclub_manager_role):
             valid_possessive_titles.append("Your naughty Manager")
         if person.sluttiness > 60 and person.has_role(stripclub_mistress_role):
             valid_possessive_titles.append("Your kinky Mistress")
-        if person.sluttiness > 100 and (person.get_opinion_score("threesomes") > 0 or person.get_opinion_score("other girls") > 0):
+        if person.sluttiness > 80 and (person.get_opinion_score("threesomes") > 0 or person.get_opinion_score("other girls") > 0):
             valid_possessive_titles.append("Your bi-sexual queen")
-        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_possessive_titles.append("Your anal queen")
         return valid_possessive_titles
     def alpha_player_titles(person):
@@ -87,12 +87,12 @@ label alpha_introduction(the_person):
     $ the_person.set_title("???")
     the_person "I guess? What can I do for you?"
     mc.name "I know this is strange, but I saw you and I just needed to know your name."
-    "She laughs full of herself."
+    "She laughs and rolls her eyes."
     the_person "Is that so? You're not the first one... Maybe for today!"
     mc.name "Really, I just wanted to talk to you."
     $ title_choice = get_random_title(the_person)
     $ formatted_title = the_person.create_formatted_title(title_choice)
-    the_person "Well, if you insist, my name is [formatted_title]. It's nice to meet you..."
+    the_person "Well, if you insist, you can call me [formatted_title]."
     $ the_person.set_title(title_choice)
     $ the_person.set_possessive_title(get_random_possessive_title(the_person))
     "With a commanding gaze she waits for you to introduce yourself."
@@ -177,7 +177,7 @@ label alpha_sex_gentle_reject(the_person):
     elif not the_person.relationship == "Single":
         the_person "I... we can't do that [the_person.mc_title]. I'm seeing someone else..."
     else:
-        the_person "I can't...at least not yet."
+        the_person "I can't... at least not yet."
     return
 
 label alpha_sex_angry_reject(the_person):
@@ -217,7 +217,7 @@ label alpha_climax_responses_vaginal(the_person):
         the_person "Ah! Yes [the_person.mc_title]! Right there, yes... pump me... I'm cumming!"
         "She closes her eyes and goes into a frenzy of multiple orgasms."
     else:
-        the_person "Oh god, that's it...keep going...yes [the_person.mc_title]..yes! Yes! YES!"
+        the_person "Oh god, that's it... keep going... yes [the_person.mc_title]... yes! Yes! YES!"
     return
 
 label alpha_climax_responses_anal(the_person):
@@ -693,7 +693,7 @@ label alpha_flirt_response_affair(the_person):
                     mc.name "Well that would just be cruel of me..."
                     $ mc.change_locked_clarity(10)
                     "You put your arm around [the_person.possessive_title] and rest your hand on her ass."
-                    mc.name "...If I got you all excited thinking about the next time I'm going to fuck you."
+                    mc.name "... If I got you all excited thinking about the next time I'm going to fuck you."
                     "She leans her body against yours for a moment and squeezes your cock. You give her butt a final slap and let go of her."
 
         else: #She's shy or nervous about being discovered
@@ -931,9 +931,9 @@ label alpha_cum_vagina(the_person):
 
 label alpha_cum_anal(the_person):
     if the_person.obedience > 130:
-        if the_person.sluttiness > 200:
+        if the_person.sluttiness > 90:
             $ pronoun = person_body_shame_string(the_person, "little anal queen")
-            the_person "Ah...yes pump your seed into your [pronoun]?"
+            the_person "Ah... yes pump your seed into your [pronoun]?"
         else:
             the_person "Oh my, you filled up my bottom... Remember [the_person.mc_title], you're the only one I let do this."
     else:
@@ -1249,7 +1249,7 @@ label alpha_licking_pussy_taboo_break(the_person):
     else:
         the_person "You're a gentleman [the_person.mc_title], but I don't feel like it."
         if not the_person.has_taboo("sucking_cock"):
-            the_person "It's flattering that you'd want to return the favour though, so thank you."
+            the_person "It's flattering that you'd want to return the favor though, so thank you."
 
         mc.name "No, I don't think you understand what I'm saying. I {i}want{/i} to eat you out, I'm just waiting for you to say it."
         "[the_person.title] won't admit it..."

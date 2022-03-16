@@ -586,7 +586,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                     the_person "Hey... [the_person.mc_title]... what are you doing?"
                     mc.name "Shhh, quiet."
                     "With one smooth motion you push yourself inside of her."
-                    if the_person.effective_sluttiness() > 100:
+                    if the_person.effective_sluttiness() > 90:
                         the_person "Ohhh god. Go ahead and take what you want, I'll just be along for the ride."
                     elif the_person.effective_sluttiness() > 60:
                         the_person "Ohhhhhh. I'm not sure how long I can do this but if you need to finish that bad go ahead..."

@@ -78,7 +78,7 @@ label scene_cowgirl_cunnilingus_2(the_girl, the_location, the_object):
 label scene_cowgirl_cunnilingus_3(the_girl, the_location, the_object):
     $ the_goal = the_girl.get_sex_goal()
 
-    the_girl "Just keep licking...licking...licking..."
+    the_girl "Just keep licking... licking... licking..."
     if the_girl.arousal > 70:
         "[the_girl.possessive_title]'s juices are flowing freely from her slit. You lap them up before circling your tongue around her clit a few times."
     elif the_girl.arousal > 50:

@@ -189,7 +189,7 @@ label quest_essential_oils_intro_label(the_person):
     "You take another whiff... the smell is very confusing. And personally you find it a bit distracting."
     mc.name "Well, I don't think it is a good idea to be diffusing that around here. We have a lot of chemicals we store in the building, and for a minute I thought we had a leak or spill."
     the_person "Oh, yes sir! Don't worry, this batch is almost out anyway. This stuff is so expensive, I can't diffuse it often anyway."
-    "Hmmm.... expensive?"
+    "Hmmm... expensive?"
     mc.name "So, this is something people pay a lot of money for? These, essential oils?"
     the_person "Oh yes! You can use them for all sorts of things. Tummy aches, headaches, concentration, memory. Diffusers are good, but you can also apply them to the skin or even orally."
     menu:

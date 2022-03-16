@@ -22,7 +22,7 @@ init -1 python:
         return False
 
     lifestyle_coach_review_goals = Action("Review Goals", lifestyle_coach_review_goals_requirement, "lifestyle_coach_review_goals_label")
-    lifestyle_coach_role = Role(role_name ="Lifestyle Coach", actions =[lifestyle_coach_review_goals], hidden = False)
+    lifestyle_coach_role = Role(role_name ="Lifestyle Coach", actions =[lifestyle_coach_review_goals], hidden = True)
     lifestyle_coach_choose_sexy_goal = Action("Choose a Sexy Goal", lifestyle_coach_choose_sexy_goal_requirement, "lifestyle_coach_choose_sexy_goal_label")
 
     lifestyle_coach_intro = Action("Meet the Lifestyle Coach", lifestyle_coach_intro_requirement, "lifestyle_coach_intro_label")

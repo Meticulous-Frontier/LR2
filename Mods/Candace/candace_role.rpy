@@ -108,7 +108,7 @@ init 2 python:
         the_eyeshadow.colour = [.15, .15, .15, 0.95]
         candace_base_outfit.add_accessory(the_eyeshadow)
 
-        candace_wardrobe = Wardrobe("Candace's Wardrobe") # This name will allow the rebuild_wardrobe function to generate a new one
+        candace_wardrobe = Wardrobe("Candace's Wardrobe")
 
         # her boyfriend only allows her to wear this 'company wardrobe'
         outfit = Outfit("Pink Lace Top And Leggings")
@@ -128,7 +128,7 @@ init 2 python:
 
         global candace
         candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "standard_body", face_style = "Face_12", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
-            eyes = "light blue", personality = candace_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = candace_wardrobe, job = candace_job, \
+            eyes = "light blue", personality = candace_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = candace_wardrobe, \
             stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
             title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit,
             force_random = True, forced_opinions = [
@@ -150,6 +150,7 @@ init 2 python:
             ])
 
         candace.generate_home()
+        candace.add_job(candace_job, job_known = True)
         candace.set_schedule(office_store, the_times = [3], the_days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
         candace.home.add_person(candace)
         candace.event_triggers_dict["met_at_store"] = 0
@@ -679,7 +680,7 @@ label candace_convince_to_quit_label(the_person):
     the_person "Bye!"
     $ candace.event_triggers_dict["quit_job"] = 1
     # she has quit her job, give her a new wardrobe
-    $ rebuild_wardrobe(candace)
+    $ rebuild_wardrobe(candace, force = True)
     $ candace.add_unique_on_talk_event(candace_goes_clothes_shopping)
     $ candace.add_unique_on_room_enter_event(candace_overhear_supply_order)
     call advance_time from _call_advance_time_candace_convince_to_quit_label
@@ -960,7 +961,7 @@ label candace_love_path_intro_label():
     mc.name "[the_person.title]... Tomorrow we are going to talk to [mc.business.head_researcher.name]. I want to see if we can try and reverse the experiment that made you like this."
     the_person "Made me... Like this? I don't understand... Don't you like me?"
     mc.name "Of course I do. But the changes that it caused, you're a danger to yourself. How long have you been going out and wandering around, looking for a fuck?"
-    the_person"I.. err... I mean... Sometimes I just get the urge..."
+    the_person"I... err... I mean... Sometimes I just get the urge..."
     mc.name "And you can't control it?"
     the_person "I mean... Why should I? It's just for fun!"
     mc.name "I get that, but you can't just wander the streets. I got you out of your previous relationship because I care about you and and couldn't stand to see you getting taken advantage of like that."
@@ -1214,7 +1215,7 @@ label candace_begin_cure_research_label(the_person):
     candace "Oh! A slumber party! That will be like, so much fun!"
     "[the_person.name] gives you a wink, seeing that [candace.name] is going along with the plan."
     the_person "I'll come over after work today and help you pack a few things."
-    mc.name "Good. Let me know if you either of you need anything."
+    mc.name "Good. Let me know if either of you need anything."
     "With that, you dismiss the meeting. Hopefully [the_person.name] will be able to find some way to reverse the effects of the serum that made [candace.name] this way."
     $ candace.event_triggers_dict["living_with_stephanie"] = day
     $ candace.set_schedule(the_location = the_person.home, the_times = [0,4])

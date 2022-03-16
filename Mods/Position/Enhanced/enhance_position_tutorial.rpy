@@ -121,7 +121,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
         $ the_girl.cum_on_ass()
         $ doggy.redraw_scene(the_girl)
         $ climax_controller.do_clarity_release(the_girl)
-        if the_girl.sluttiness > 120:
+        if the_girl.sluttiness > 90:
             the_girl "What a waste, you should have put that inside of me."
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:

@@ -215,7 +215,7 @@ label kaya_setup_intro_event_label():
         # init kaya role
         kaya_role = Role(role_name ="kaya", actions =[kaya_barista_fuck, kaya_get_drinks], hidden = True)
         kaya_barista_job = Job("Barista", kaya_role, coffee_shop, work_times = [2, 3])
-        kaya.add_job(kaya_barista_job)
+        kaya.add_job(kaya_barista_job, job_known = True)
         # she also studies
         kaya.set_schedule(None, the_times = [1,2,3])    # Free roam
         kaya.set_schedule(university, the_days = [0, 1, 2, 3, 4], the_times = [1])
@@ -231,7 +231,7 @@ label kaya_intro_label(the_person):
     "You listen as the person ahead of you orders."
     "?????" "Yes I'd like a tall macchiato with whipped cream."
     the_person "Is that all?"
-    "When she talks, there is a slight accent. It's small, and you have trouble placing it."
+    "When she talks, there is a slight accent. It's subtle, and you have trouble placing it."
     "You quickly check behind you. No one in line behind you yet... maybe you can chat with her for a bit?"
     "The person in front of you moves to wait for their drink."
     the_person "Hi, what can I get you?"
@@ -372,7 +372,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
         the_person "My favorite cocktail is definitely a Manhattan with an orange twist."
     mc.name "Ah, a bold drink indeed. I was definitely thinking something whiskey inspired, but I would not have guessed that."
     the_person "Yeah. Sometimes I'll have one, but to make a good one it requires good whiskey. The ones you get with more affordable varieties just aren't as good."
-    mc.name "Yes, a quality of many heavy whiskey drinks I think. Well, we seem to be ready for another round?"
+    mc.name "Yes, a quality of many whiskey-heavy drinks, I think. Well, we seem to be ready for another round?"
     the_person "I umm... I'm kind of out of quarters..."
     mc.name "Here, let me go get us a couple more drinks and some quarters. I'm not quite ready to say goodbye for the evening yet."
     $ the_person.change_love(2)
@@ -818,7 +818,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     nora "You are still running that research company right? Many degrees here have electives that involve an internship, especially STEM degrees."
     nora "You run an internship program where the students come help in your research facility and you pay their schooling costs for a semester."
     nora "The university would count it as credit accumulated to their degree."
-    nora "Generally though, they want students to focus on their studies, so usually they ask the he hours be kept low, 10 hours a week or less."
+    nora "Generally though, they want students to focus on their studies, so usually they ask that the hours be kept low, 10 hours a week or less."
     mc.name "Hmm, how much would it cost to set up something like that?"
     nora "Last time I checked, other similar programs paid about $5000 per intern. That covers the student's entire tuition, meal plan, and books for a semester."
     nora "The time for the interns to work is up to you, but most programs I've seen are set up for weekends. Either one full day, or two half days."
@@ -1075,7 +1075,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
         mc.name "So... what... but..."
         the_person "I know that I sprung this on you at like, the worst possible time. If you still want to put on a condom this time, I totally understand."
         the_person "It's okay too, if you want to just pull out. In my culture, if a man has a will strong enough to pull out, he is allowed to..."
-        mc.name "........ You know that makes no sense whatsoever."
+        mc.name "... ... ... You know that makes no sense whatsoever."
         the_person "I know! I'm so sorry, I know this is totally a mood killer but... if you don't want to... I would really prefer you didn't wear one..."
         the_person "But this one time it's okay if you decide to anyway."
         "You think about it for a moment. [the_person.possessive_title] is down to fuck, and wants it raw!"
@@ -1204,7 +1204,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
                     mc.name "So... what... but..."
                     the_person "I know that I sprung this on you at like, the worst possible time. If you still want to put on a condom this time, I totally understand."
                     the_person "It's okay too, if you want to just pull out. In my culture, if a man has a will strong enough to pull out, he is allowed to..."
-                    mc.name "........ You know that makes no sense whatsoever."
+                    mc.name "... ... ... You know that makes no sense whatsoever."
                     the_person "I know! I'm so sorry, I know this is totally a mood killer but... if you don't want to... I would really prefer you didn't wear one..."
                     the_person "But this one time it's okay if you decide to anyway."
                     "You think about it for a moment. [the_person.possessive_title] is down to fuck, and wants it raw!"
@@ -1480,7 +1480,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
             mc.name "So... what... but..."
             the_person "I know that I sprung this on you at like, the worst possible time. If you still want to put on a condom this time, I totally understand."
             the_person "It's okay too, if you want to just pull out. In my culture, if a man has a will strong enough to pull out, he is allowed to..."
-            mc.name "........ You know that makes no sense whatsoever."
+            mc.name "... ... ... You know that makes no sense whatsoever."
             the_person "I know! I'm so sorry, I know this is totally a mood killer but... if you don't want to... I would really prefer you didn't wear one..."
             the_person "But this one time it's okay if you decide to anyway."
             "You think about it for a moment. [the_person.possessive_title] is down to fuck, and wants it raw!"

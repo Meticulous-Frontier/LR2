@@ -137,7 +137,7 @@ label train_dealbreaker_fingering_label(the_person):
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(10)
         "You move your fingers a little more urgently now, pushing a little deeper and with more pressure."
-        the_person "Oooohhh...."
+        the_person "Oooohhh..."
         "A long drawn out moan tells you she is starting to let go and enjoy it finally."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(15)

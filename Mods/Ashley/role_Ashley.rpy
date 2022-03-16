@@ -1253,14 +1253,14 @@ label ashley_second_concert_date_label():
                 $ the_report = _return
                 if the_report.get("guy orgasms", 0) > 0:
                     if the_person.has_face_cum():
-                        if the_person.outfit.is_dress():
+                        if the_person.outfit.has_dress():
                             "[the_person.possessive_title]'s face is covered in your cum. Somehow, it doesn't seem like any of it got on her dress..."
                         else:
                             "[the_person.possessive_title]'s face is covered in your cum. Thankfully her dress came off at some point, so no cum dripped on it."
                     elif the_person.has_mouth_cum():
                         "[the_person.possessive_title] has a bit of cum on her chin, but is able to quickly clean it up."
                     elif the_person.has_tits_cum():
-                        if the_person.outfit.is_dress():
+                        if the_person.outfit.has_dress():
                             "[the_person.possessive_title]'s chest looks great covered in your cum. But you slowly realize... it's all over her dress."
                             $ cum_clue = True
             "Tease her":
@@ -1296,7 +1296,7 @@ label ashley_second_concert_date_label():
                 $ the_report = _return
                 if the_report.get("guy orgasms", 0) > 0:
                     if the_person.has_face_cum():
-                        if the_person.outfit.is_dress():
+                        if the_person.outfit.has_dress():
                             "[the_person.possessive_title]'s face is covered in your cum. Somehow, it doesn't seem like any of it got on her dress..."
                         else:
                             "[the_person.possessive_title]'s face is covered in your cum. Thankfully her dress came off at some point, so no cum dripped on it."
@@ -1337,13 +1337,13 @@ label ashley_second_concert_date_label():
                 elif the_person.has_creampie_cum():
                     "When you look down, you can see some cum running down the inside of [the_person.possessive_title]'s legs, but it doesn't seem like any got on her clothes."
                 elif the_person.has_ass_cum():
-                    if the_person.outfit.is_dress():
+                    if the_person.outfit.has_dress():
                         "[the_person.possessive_title]'s ass looks amazing covered in your cum. But you slowly realize... it's all over her dress."
                         $ cum_clue = True
                     else:
                         "[the_person.possessive_title]'s ass looks amazing covered in your cum. Thankfully her dress came off at some point, so no cum got on it."
                 elif the_person.has_face_cum():
-                    if the_person.outfit.is_dress():
+                    if the_person.outfit.has_dress():
                         "[the_person.possessive_title]'s face is covered in your cum. Somehow, it doesn't seem like any of it got on her dress..."
                     else:
                         "[the_person.possessive_title]'s face is covered in your cum. Thankfully her dress came off at some point, so no cum dripped on it."
@@ -1819,7 +1819,7 @@ label ashley_sneaks_over_label():
     "You slowly wake up, with your arms around [the_person.possessive_title], spooning with her."
     $ mc.change_locked_clarity(50)
     "She stirs at the same time as you. She gives a big yawn."
-    the_person "...[the_person.mc_title]?"
+    the_person "... [the_person.mc_title]?"
     mc.name "Good morning."
     $ the_person.change_love(5)
     the_person "Mmm... so this is what it's like? To wake up next to someone you fucked all night sober?"
@@ -1897,7 +1897,7 @@ label coffee_time_innocent_chat_label():
     $ overhear_topic = stephanie.get_random_opinion(include_sexy = False)
     $ text_one = person_opinion_to_string(stephanie, overhear_topic)[1]
     $ text_two = get_topic_text(overhear_topic)
-    stephanie "...But I [text_one] [text_two], so I'm not sure what to do."
+    stephanie "... But I [text_one] [text_two], so I'm not sure what to do."
     if stephanie.discover_opinion(overhear_topic):
         "Wow, you knew they were sisters, but they really do talk about basically everything!"
 
@@ -1922,7 +1922,7 @@ label coffee_time_sexy_chat_label():
     $ overhear_topic = the_person.get_random_opinion(include_sexy = True, include_normal = False)
     $ text_one = person_opinion_to_string(the_person, overhear_topic)[1]
     $ text_two = get_topic_text(overhear_topic)
-    the_person "...But I [text_one] [text_two], so I'm not sure what to do."
+    the_person "... But I [text_one] [text_two], so I'm not sure what to do."
     if the_person.discover_opinion(overhear_topic):
         "Wow, you didn't realize they talked about sex in such detail with each other."
     $ mc.change_locked_clarity(10)

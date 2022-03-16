@@ -630,12 +630,12 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title] showing off her pussy."
         $ person_choice.change_slut(2)
-        person_choice "Uh...right, what can I do for you, [person_choice.mc_title]."
+        person_choice "Uh... right, what can I do for you, [person_choice.mc_title]?"
     elif the_person.outfit.tits_visible():
         $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]'s exposed tits."
         $ person_choice.change_slut(1)
-        person_choice "Oh...what can I do for you, [person_choice.mc_title]."
+        person_choice "Oh... what can I do for you, [person_choice.mc_title]?"
 
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         "[person_choice.title] sits down across from you at your desk. [the_person.title] pours a cup of coffee while talking."
@@ -1234,7 +1234,7 @@ label HR_director_sexy_meeting_start_label(the_person):
     if get_HR_director_unlock("breeding fetish session") == False:
         if the_person.has_breeding_fetish() and the_person.is_highly_fertile():
             the_person "So, I know this is usually about you, and making sure your needs are met before the start of the week..."
-            mc.name "...but?"
+            mc.name "... but?"
             the_person "But... I swear to god I feel like I'm heat right now. It is all I can do to keep myself from jumping you everytime I see you in the hall!"
             the_person "I know this is out of line... but would you mind? It's a good time for it too..."
             mc.name "Hmmm, I don't know..."
@@ -1528,7 +1528,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     "The two girls get up and leave to go to a quite room where [the_HR_dir.title] makes the mind control attempt."
     "You return to your work while the attempt is made."
     "..."
-    "....."
+    "......"
     $ is_backfire = False
     if calculate_backfire_odds() > renpy.random.randint(0,100): #FAIL
         $ backfire_string = mind_control_backfire(the_person)

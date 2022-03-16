@@ -46,9 +46,9 @@ label intro_SB_sixty_nine(the_girl, the_location, the_object):
         "She quickly moves some clothes out of the way."
         $ the_girl.strip_to_vagina(position = SB_sixty_nine.position_tag, visible_enough = True, prefer_half_off = True)
     "You lay down on the [the_object.name]. [the_girl.possessive_title] swings one leg over you, presenting her [the_girl.pubes_description] pussy to your face. You waste no time and start to flick your tongue around her slit."
-    if the_girl.get_opinion_score("getting head") > 2 :
+    if the_girl.get_opinion_score("getting head") >= 2 :
         the_girl "Oh! Yes that feels so good already! Oh [the_girl.mc_title] your tongue feels amazing."
-    if the_girl.get_opinion_score("giving blowjobs") > 2:
+    if the_girl.get_opinion_score("giving blowjobs") >= 2:
         the_girl "Mmm, that feels good [the_girl.mc_title]... and your cock... it looks so good... I wanna swallow it whole!"
     if mc.condom:
         the_girl "Why are you wearing this thing? Lets take this off so I can take care of you better..."
@@ -152,7 +152,7 @@ label scene_SB_sixty_nine_1(the_girl, the_location, the_object):
                 else:
                     "[the_girl.possessive_title] moans, the vibrations it causes around your shaft feels great."
                     "She tries to take your cock down her throat. She manages it comfortably for a second, but eventually she gags and starts to pull off."
-                    if the_girl.get_opinion_score("being submissive"):
+                    if the_girl.get_opinion_score("being submissive") > 0:
                         "SMACK"
                         "You give her ass a loud spank as she pulls off."
                         mc.name "Each time you gag I'm gonna spank you good, slut!"
@@ -481,7 +481,7 @@ label orgasm_SB_sixty_nine(the_girl, the_location, the_object):
         "[the_girl.possessive_title] starts to pull back off until just the tip of your erection is left in her mouth."
     else:
         "[the_girl.possessive_title] pushes her face down on to your cock, burying it in her throat."
-    the_girl "mmmmm....MMMMM....MMMMMMMFFFF"
+    the_girl "mmmmm... MMMMM... MMMMMMMFFFF"
     "She moans loudly as orgasmic waves wash over her. Once you think you hear her call your name, but the sound is muffled and mostly incomprehensible with your cock in her mouth."
     "After several seconds [the_girl.possessive_title] sighs and then begins to bob her head up and down on your again."
     return

@@ -52,6 +52,8 @@ init 2 python:
             return False
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
+        if not cousin.job == unemployed_job: # don't trigger event when cousin is not stripper
+            return False
         if mc.business.has_funds(60000):
             if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
                 return True
@@ -201,7 +203,7 @@ label club_foreclosed_strip_label(the_person):
             mc.name "Enough! I know how desperate for money you are, [the_person.title]."
             $ the_person.draw_person(emotion = "sad", position = "stand4")
             "She think she just lost her opportunity to gain some cash and looks disheartened..."
-            mc.name "Despite your usual attitude, I'll let you keep the money I gave you and I'll add $100 more...because, believe it or not, family matters to me."
+            mc.name "Despite your usual attitude, I'll let you keep the money I gave you and I'll add $100 more... because, believe it or not, family matters to me."
             $ mc.business.change_funds(-100)
             "When you give her another $100, you can see the puzzled look on her face, she can't believe what's happening..."
             $ the_person.draw_person(emotion = "happy", position = "stand4")

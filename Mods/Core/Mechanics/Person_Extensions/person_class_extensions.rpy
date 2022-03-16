@@ -380,6 +380,19 @@ init -1 python:
 
     Person.tits_description = property(person_tits_description_string, None, None, "Property that returns tits description for use in dialogs.")
 
+    def person_formal_address(self):
+        if self.job == nora_professor_job:
+            return "Professor"
+        if self.job in [doctor_job]:
+            return "Doctor"
+        if self.relationship == "Married":
+            return "Mrs."
+        elif self.age > 30:
+            return "Ms."
+        return "Miss"
+
+    Person.formal_address = property(person_formal_address, None, None, "Property that returns Miss, Ms. or Mrs. based on age / martial status.")
+
     ## CHANGE HEIGHT EXTENSION
     # Returns True when the persons height has changed; otherwise False
     # chance is probability percentage that height change for amount will occur (used by serums)
@@ -1199,7 +1212,10 @@ init -1 python:
     def get_employed_since(self):
         return self.event_triggers_dict.get("employed_since", -1)
 
-    Person.employed_since = property(get_employed_since, None, None)
+    def set_employed_since(self, value):
+        self.event_triggers_dict["employed_since"] = value
+
+    Person.employed_since = property(get_employed_since, set_employed_since, None)
 
     # returns the total number of days employed in company (0 for not employed)
     def get_days_employed(self):
@@ -1703,15 +1719,15 @@ init -1 python:
 
     def has_role(self, role):
         if isinstance(role, basestring):
-            return not find_in_list(lambda x: x.role_name == role, self.special_role) is None \
-                or not find_in_list(lambda x: x.parent_role and x.parent_role.role_name == role, self.special_role) is None
+            return any(x for x in self.special_role if x.role_name == role) \
+                or any(x for x in self.special_role if x.parent_role and x.parent_role.role_name == role)
         elif isinstance(role, list):
             return any(x in self.special_role for x in role) \
                 or any(x.parent_role in self.special_role for x in role)
         else:
             return role in self.special_role \
                 or role.parent_role in self.special_role \
-                or not find_in_list(lambda x: x.check_looks_like(role), self.special_role) is None
+                or any(x for x in self.special_role if x.check_looks_like(role))
 
     Person.has_role = has_role
 
@@ -1820,6 +1836,8 @@ init -1 python:
             if not strip_club_is_closed() and person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]):
                 shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
                 return (time_of_day == 3 and shifts == 2) or time_of_day == 4
+            if person == police_chief:
+                return person.job.schedule.get_destination() != None
             # run original function
             result = org_func(person)
             # run extension code
@@ -1930,7 +1948,7 @@ init -1 python:
         if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
             (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform.get_copy())
         elif creative_colored_uniform_policy.is_active():
-            self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active(), allow_coverup = False)
+            self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
         else:
             self.planned_uniform = uniform.get_copy()
 
@@ -1952,8 +1970,8 @@ init -1 python:
 
     Person.is_wearing_uniform = person_is_wearing_uniform_extended(Person.is_wearing_uniform)
 
-    def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
-        return WardrobeBuilder(self).personalize_outfit(outfit, opinion_color = opinion_color, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, allow_coverup = allow_coverup)
+    def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True):
+        return WardrobeBuilder(self).personalize_outfit(outfit, opinion_color = opinion_color, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
 
     Person.personalize_outfit = personalize_outfit
 
@@ -2168,13 +2186,13 @@ init -1 python:
     def person_get_random_appropriate_outfit(self, guarantee_output = False):
         outfit = self.wardrobe.get_random_appropriate_outfit(sluttiness_limit = self.effective_sluttiness(), preferences = WardrobePreference(self))
         if guarantee_output and not outfit: # when no outfit and we need one, generate one
-            outfit = self.generate_random_appropriate_outfit()
+            outfit = self.generate_random_appropriate_outfit(swap_bottoms = False, allow_skimpy = self.sluttiness > 50)
         return outfit
 
     Person.get_random_appropriate_outfit = person_get_random_appropriate_outfit
 
-    def person_generate_random_appropriate_outfit(self, outfit_type = "FullSets"):
-        return generate_random_appropriate_outfit(self, outfit_type = outfit_type)
+    def person_generate_random_appropriate_outfit(self, outfit_type = "FullSets", swap_bottoms = False, allow_skimpy = False):
+        return generate_random_appropriate_outfit(self, outfit_type = outfit_type, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
 
     Person.generate_random_appropriate_outfit = person_generate_random_appropriate_outfit
 
@@ -2234,7 +2252,7 @@ init -1 python:
 
     def remove_on_talk_event(self, the_crisis):
         if isinstance(the_crisis, basestring):
-            found = find_in_list(lambda x: x.effect == the_crisis or x.name == the_crisis, self.on_talk_event_list)
+            found = next((x for x in self.on_talk_event_list if x.effect == the_crisis or x.name == the_crisis), None)
             if found:
                 self.on_talk_event_list.remove(found)
 
@@ -2244,7 +2262,7 @@ init -1 python:
 
     def remove_on_room_enter_event(self, the_crisis):
         if isinstance(the_crisis, basestring):
-            found = find_in_list(lambda x: x.effect == the_crisis or x.name == the_crisis, self.on_room_enter_event_list)
+            found = next((x for x in self.on_room_enter_event_list if x.effect == the_crisis or x.name == the_crisis), None)
             if found:
                 self.on_room_enter_event_list.remove(found)
 
@@ -2499,10 +2517,10 @@ init -1 python:
 
     Person.is_jealous = is_jealous
 
-    def have_orgasm(self, the_position = None, the_object = None, half_arousal = True, force_trance = False, trance_chance_modifier = 0, sluttiness_increase_limit = 30, add_to_log = True):
+    def have_orgasm(self, the_position = None, the_object = None, half_arousal = True, force_trance = False, trance_chance_modifier = 0, sluttiness_increase_limit = 30, reset_arousal = False, add_to_log = True):
         mc.listener_system.fire_event("girl_climax", the_person = self, the_position = the_position, the_object = the_object)
 
-        self.run_orgasm(show_dialogue = add_to_log, force_trance = force_trance, trance_chance_modifier = trance_chance_modifier, add_to_log = add_to_log, sluttiness_increase_limit = sluttiness_increase_limit)
+        self.run_orgasm(show_dialogue = add_to_log, force_trance = force_trance, trance_chance_modifier = trance_chance_modifier, add_to_log = add_to_log, sluttiness_increase_limit = sluttiness_increase_limit, reset_arousal = reset_arousal)
         self.change_happiness(3, add_to_log = add_to_log)
 
         if "report_log" in globals():

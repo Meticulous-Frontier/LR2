@@ -91,10 +91,6 @@ init -1 python:
             slut_limit = 10
             underwear_limit = 0
             limited_to_top = True
-        else:
-            slut_limit = 0
-            underwear_limit = 0
-            limited_to_top = True
         return slut_limit, underwear_limit, limited_to_top
 
     Business.get_uniform_limits = get_uniform_limits_enhanced
@@ -281,6 +277,16 @@ init -1 python:
             if not person.job:
                 return None
 
+            if person == police_chief:
+                if not "police_chief_uniform_wardrobe" in globals():    # save game compatibility remove after v0.49
+                    cop_outfit = police_chief.wardrobe.get_outfit_with_name("Cop").get_copy()
+
+                    global police_chief_uniform_wardrobe
+                    police_chief_uniform_wardrobe = Wardrobe("Cop Uniform")
+                    police_chief_uniform_wardrobe.add_outfit(cop_outfit)
+                    police_chief.wardrobe.remove_outfit(cop_outfit)
+
+                return police_chief_uniform_wardrobe
             if person.job == stripper_job: # base game stripper
                 return stripclub_wardrobe
             if person.job == stripclub_stripper_job: # stripclub bought stripper
@@ -325,6 +331,11 @@ init -1 python:
             if person is business.hr_director:
                 business.fire_HR_director()
 
+            if person == cousin and get_strip_club_foreclosed_stage() == 0: # she goes back to stripping
+                stripclub_strippers.append(the_cousin)
+                the_cousin.set_schedule(strip_club, the_times = [3, 4])
+                the_cousin.event_triggers_dict["stripping"] = True #Used to flag the blackmail event
+
         return remove_employee_wrapper
 
     Business.remove_employee = business_remove_employee_extended(Business.remove_employee)
@@ -343,20 +354,20 @@ init -1 python:
 
     def business_remove_mandatory_crisis(self, crisis_event):
         if isinstance(crisis_event, basestring):
-            found = find_in_list(lambda x: x.effect == crisis_event, self.mandatory_crises_list)
+            found = next((x for x in self.mandatory_crises_list if x.effect == crisis_event), None)
             if found:
                 self.mandatory_crises_list.remove(found)
                 return True
-            found = find_in_list(lambda x: x.effect == crisis_event, self.mandatory_morning_crises_list)
+            found = next((x for x in self.mandatory_morning_crises_list if x.effect == crisis_event), None)
             if found:
                 self.mandatory_morning_crises_list.remove(found)
                 return True
         elif isinstance(crisis_event, Action):
-            found = find_in_list(lambda x: x == crisis_event, self.mandatory_crises_list)
+            found = next((x for x in self.mandatory_crises_list if x == crisis_event), None)
             if found:
                 self.mandatory_crises_list.remove(found)
                 return True
-            found = find_in_list(lambda x: x == crisis_event, self.mandatory_morning_crises_list)
+            found = next((x for x in self.mandatory_morning_crises_list if x == crisis_event), None)
             if found:
                 self.mandatory_morning_crises_list.remove(found)
                 return True

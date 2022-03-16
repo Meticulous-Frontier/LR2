@@ -35,13 +35,14 @@ init 2 python:
         #global camilla_role
         global camilla
         camilla = make_person(name = "Camilla", last_name ="Rojas", body_type = "thin_body", age = 34, face_style = "Face_2",  tits="D", height = 0.98, hair_colour="golden blonde", hair_style = braided_bun, skin="tan" , \
-            personality = introvert_personality, name_color = "#228b22", dial_color = "228b22", starting_wardrobe = camilla_wardrobe, job = camilla_job, \
+            personality = introvert_personality, name_color = "#228b22", dial_color = "228b22", starting_wardrobe = camilla_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
             relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
             forced_opinions = [["dancing", 2, True], ["fashion", 2, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
             forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False], ["bareback sex", 2, False]])
 
         camilla.generate_home()
+        camilla.add_job(camilla_job, job_known = True)
         camilla.set_schedule(downtown_bar, the_times = [3])
         camilla.home.add_person(camilla)
 
@@ -569,7 +570,7 @@ label camilla_bathroom_blowjob_label(the_person):
     $ camilla.event_triggers_dict["take_pics"] = True
     mc.name "Hey, so uhh... want me to take some pictures for you?"
     "You see a bright red flush in her cheeks, but she quickly nods."
-    the_person "Si! I would like that...a lot!"
+    the_person "Si! I would like that... a lot!"
     "She takes a quick look around."
     the_person "Let me just go talk to the bartender... head to the lady's room and wait outside... I'll be over in a second."
     $ the_person.draw_person(position = "walking_away")
@@ -583,7 +584,7 @@ label camilla_bathroom_blowjob_label(the_person):
     $ the_person.draw_person(position = "kissing")
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
-    the_person "Mm... mmm.... mmmmmmmmmff..."
+    the_person "Mm... mmm... mmmmmmmmmff..."
     "She is moaning in your mouth. You can tell the naughtiness of finally getting intimate with someone other than her husband is really turning her on."
     $ the_person.change_arousal(10)
     the_person "Ok... wow this is hot. This is my first time ever doing something like this... so... I want you to just let me do my thing, ok?"
@@ -613,7 +614,7 @@ label camilla_bathroom_blowjob_label(the_person):
     "One more tug on your underwear, and your erection springs free."
     the_person "Wow! I haven't seen anything other than hubby for... years..."
     "She begins to stroke you softly with her hand."
-    the_person "Mmmmm.... it's so hard... and hot!"
+    the_person "Mmmmm... it's so hard... and hot!"
     "You moan as she strokes you. You make sure to snap a couple pictures."
     $ mc.change_arousal(10)
     $ the_person.change_arousal(10)

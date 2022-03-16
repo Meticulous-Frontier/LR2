@@ -103,7 +103,7 @@ label candace_sex_responses_oral(the_person):
 
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
-            the_person "Does my pussy taste good [the_person.mc_title]? I'll repay the favour suck your cock later!"
+            the_person "Does my pussy taste good [the_person.mc_title]? I'll repay the favor and suck your cock later!"
         else:
             the_person "That, like, feels so good [the_person.mc_title]!"
 

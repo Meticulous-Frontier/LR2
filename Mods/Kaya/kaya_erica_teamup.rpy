@@ -96,7 +96,7 @@ label kaya_erica_teamup_intro_scene(the_person_one, the_person_two):
     erica "It would be great for figuring out what we need to be studying!"
     mc.name "Sure, let me take a look at the material."
     "[kaya.possessive_title] hands you a study guide for the class they are taking together."
-    "You look over it for a moment. Yes you remember this material, and quickly come up with a few questions to gauge their progress."
+    "You look over it for a moment. Yes, you remember this material, and quickly come up with a few questions to gauge their progress."
     mc.name "Okay [kaya.title]."
     call kaya_erica_teamup_question_label(kaya) from _kaya_erica_teamup_question_01
     "Now you turn to [erica.possessive_title]."
@@ -271,7 +271,7 @@ label kaya_erica_teamup_scene_0(the_person_one, the_person_two):
     erica "It would be great for figuring out what we need to be studying!"
     mc.name "Sure, let me take a look at the material."
     "[kaya.possessive_title] hands you a study guide for the class they are taking together."
-    "You look over it for a moment. Yes you remember this material, and quickly come up with a few questions to gauge their progress."
+    "You look over it for a moment. Yes, you remember this material, and quickly come up with a few questions to gauge their progress."
     mc.name "Okay [kaya.title]."
     call kaya_erica_teamup_question_label(kaya) from _kaya_erica_teamup_question_03
     "Now you turn to [erica.possessive_title]."

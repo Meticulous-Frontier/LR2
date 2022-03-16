@@ -2,10 +2,13 @@
 
 init -1 python:
     def pheremone_therapy_on_apply(the_person, the_serum, add_to_log):
-        the_person.change_slut(15, add_to_log = add_to_log)
+        change_amount = __builtin__.min(100 - the_person.sluttiness, 15)
+        the_serum.effects_dict["pheromone_therapy_change"] = change_amount
+        the_person.change_slut(change_amount, add_to_log = add_to_log)
 
     def pheremone_therapy_on_remove(the_person, the_serum, add_to_log):
-        the_person.change_slut(-15, add_to_log = add_to_log)
+        change_amount = the_serum.effects_dict.get("pheromone_therapy_change", 15)
+        the_person.change_slut(-change_amount, add_to_log = add_to_log)
 
     def add_pheromone_therapy_serum():
         pher_ther = SerumTraitMod(name = "Pheromone Therapy",

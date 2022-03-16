@@ -81,9 +81,9 @@ init 2 python:
                 bonus_suggest += 10
             elif personality.base_personality_prefix == relaxed_personality.personality_type_prefix:
                 bonus_suggest += 3
-            elif personality.base_personality_prefix == reserved_personality.personality_type_prefix:
-                bonus_suggest -= 3
             elif personality.base_personality_prefix == introvert_personality.personality_type_prefix:
+                bonus_suggest -= 3
+            elif personality.base_personality_prefix == reserved_personality.personality_type_prefix:
                 bonus_suggest -= 5
 
         if return_character is None: #Either we aren't getting a pre-made, or we are out of them.
@@ -296,7 +296,7 @@ init 2 python:
             return
 
         base_wardrobe = Wardrobe("[person.name]_[person.last_name]_wardrobe")
-        if persistent.low_memory_wardrobes:
+        if not force and persistent.low_memory_wardrobes:
             person.wardrobe = base_wardrobe
             return
 
@@ -523,7 +523,7 @@ init 2 python:
 
     def create_unique_character_list():
         # use extend when adding a list to another list
-        unique_character_list.extend([mom, lily, aunt, cousin, stephanie, alexia, nora, emily, christina])
+        unique_character_list.extend([mom, lily, aunt, cousin, stephanie, alexia, nora, emily, christina, city_rep])
 
         # mod unique characters (check for existence first)
         if "salon_manager" in globals():

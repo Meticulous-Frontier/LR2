@@ -30,7 +30,7 @@ label fetish_anal_staylate_label(the_person):
     "You give [the_person.possessive_title] a reassuring smile."
     mc.name "No, of course not, you are a wonderful asset to the company..."
     "You lower your voice and whisper in her ear so others don't overhear."
-    mc.name "...but I might have to spank your ass a bit anyway."
+    mc.name "... but I might have to spank your ass a bit anyway."
     "You look [the_person.possessive_title] in the eyes. Her pupils dilate a bit as she realizes the reasoning behind asking her to stay late."
     $ mc.change_locked_clarity(20)
     the_person "Oh! Thank you sir! I'll look forward to it!"

@@ -33,7 +33,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
         the_girl "Oh thank god, I've been daydreaming about this all day long."
     elif the_girl.get_opinion_score("anal sex") > 0 :
         the_girl "I can't wait! It's so intense when you fuck me back there..."
-    elif the_girl.effective_sluttiness() > 110:
+    elif the_girl.effective_sluttiness() > 95:
         the_girl "Oh god I love it when you do this to me..."
     elif the_girl.effective_sluttiness() > 80:
         the_girl "Ok, just be careful [the_girl.mc_title]..."
@@ -149,7 +149,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
 
         "Play with her clit":
             "You lean forward a bit and reach down with one hand and begin to move it in circles around her clit."
-            if the_girl.get_opinion_score("being fingered"):
+            if the_girl.get_opinion_score("being fingered") > 0:
                 "[the_girl.possessive_title] moans loudly in response."
                 the_girl "Oh [the_girl.mc_title], I love your hands on me... especially down there..."
                 "You slide your middle finger along her slit a few times and then push up inside her pussy."
@@ -179,7 +179,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] moans in response."
                 "She is so practiced at throating dick that this exercise is not creating the desired response."
                 "She reaches behind her with both her hands and spreads her butt cheeks as you fuck her ass."
-                $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3 + the_girl.get_opinion_score("anal sex") * 3)
+                $ the_girl.change_arousal(3 * the_girl.get_opinion_score(["being submissive", "anal sex"]))
             else:
                 "[the_girl.possessive_title] starts to gag and choke and splutter."
                 "This makes her whole body clench and unclench, including her ass, giving you the sensation you were looking for."
@@ -213,7 +213,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
                     "[the_girl.possessive_title] pushes her head onto your hand causing her to gag."
                     "She reaches behind her with both her hands and uses them to hold on to your butt cheeks as you fuck her ass."
                     "She pulls you into her ass, while at the same time trying to push your fingers further down her throat, causing her whole body to clench and unclench."
-                    $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 4 + the_girl.get_opinion_score("anal sex") * 3)
+                    $ the_girl.change_arousal(4 * the_girl.get_opinion_score(["being submissive", "anal sex"]))
                     "Once you're satisfied you withdraw your fingers."
         "Gag her with your fingers\n{color=#ff0000}{size=18}Must be submissive{/size}{/color} (disabled)" if the_girl.get_opinion_score("being submissive") <= 0:
             pass
@@ -344,11 +344,11 @@ label outro_SB_anal_standing(the_girl, the_location, the_object):
         $ SB_anal_standing.redraw_scene(the_girl)
         if the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
-            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
+            the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         elif the_girl.get_opinion_score("anal creampies") > 0:
             the_girl "Oh god... it's inside me... right where it belongs. Thank you so much, [the_girl.mc_title]!"
-        elif the_girl.sluttiness > 110:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh god it's so good. It doesn't matter which hole you do it in, I love it when you cum inside me."
         else:
             the_girl "Oh fuck, I can't believe I let you cum in my ass..."
@@ -370,7 +370,7 @@ label outro_SB_anal_standing(the_girl, the_location, the_object):
             "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
             "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
             "She truly is addicted to your cum."
-        elif the_girl.sluttiness > 120:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:
@@ -440,14 +440,14 @@ label transition_standing_anal_to_standing_doggy_taboo_break_label(the_girl, the
     "You pull your cock out of [the_girl.title]'s ass."
     "You continue your back and forth motion, rubbing your cock along her pussy lips."
     if the_girl.get_opinion_score("vaginal sex") > 0:
-        the_girl "Oh....Please..."
+        the_girl "Oh... Please..."
     "You continue to move your cock forwards and backwards teasing her pussy."
     mc.name "Ready."
     "The word is a command not a question."
     $ the_girl.call_dialogue(SB_doggy_standing.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
     "After a moment of resistance your cock spreads her pussy open and you slide smoothly inside of her."
-    the_girl "Oh god.... Ah...."
+    the_girl "Oh god... Ah..."
     "You start with short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
     return
 
@@ -464,9 +464,9 @@ label transition_default_anal_penetration_dialog(the_girl, the_location, the_obj
         menu:
             "Ram it home!":
                 "You get a firm grip on her hips, make sure you're lined up, and push yourself in with all your might."
-                if the_girl.get_opinion_score("being submissive") > 0 or the_girl.get_opinion_score("anal sex") > 2:
+                if the_girl.get_opinion_score("being submissive") > 0 or the_girl.get_opinion_score("anal sex") >= 2:
                     the_girl "Ah! Yes! Tear that ass up!"
-                    $ the_girl.change_arousal(5*( the_girl.get_opinion_score("being submissive") + the_girl.get_opinion_score("anal sex") + 1))
+                    $ the_girl.change_arousal(5* the_girl.get_opinion_score(["being submissive", "anal sex"]))
                     "Using her pussy juice as lube you lay into her tight ass, wasting no time in fucking her hard."
                 else:
                     the_girl "Oh fuck! FUCK!"
@@ -476,7 +476,7 @@ label transition_default_anal_penetration_dialog(the_girl, the_location, the_obj
                     "You wait a moment, then start to move again. Using her pussy juices as lube you've soon got a good rhythm going."
 
             "Take it slow":
-                if the_girl.get_opinion_score("being submissive") > 0 or the_girl.get_opinion_score("anal sex") > 2:
+                if the_girl.get_opinion_score("being submissive") > 0 or the_girl.get_opinion_score("anal sex") >= 2:
                     the_girl "Mmmm."
                     "[the_girl.possessive_title] reaches behind her and grabs one of your butt cheeks. She pulls on you to get your cock as deep in her ass as she can."
                 else:

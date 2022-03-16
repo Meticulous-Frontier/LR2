@@ -18,11 +18,16 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
             valid_possessive_titles.append("The Slutwife")
             valid_possessive_titles.append("Your Swinging Slut")
 
-        if person.effective_sluttiness() > 100:
+        if person.effective_sluttiness() > 90:
             valid_possessive_titles.append("The Bar Cumdump")
         return valid_possessive_titles
     def camilla_player_titles(person):
-        return mc.name
+        valid_titles = "Mr. " + mc.last_name
+        if person.love > 20:
+            valid_titles.append(mc.name)
+        if person.has_breeding_fetish():
+            valid_titles.append("Bull")
+        return valid_titles
 
     camilla_personality = Personality("camilla", default_prefix = "wild",
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
@@ -446,7 +451,7 @@ label camilla_hookup_accept(the_person):
                 if the_person.effective_sluttiness() > 60:
                     the_person "I mean... it's okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
                     if the_person.effective_sluttiness() > 90:
-                        the_person "...or even just finish inside me. I promise I wouldn't mind at all!"
+                        the_person "... or even just finish inside me. I promise I wouldn't mind at all!"
                     mc.name "Maybe next time!"
                 "You get a condom and put it on quickly."
                 $ mc.condom = True
@@ -481,7 +486,7 @@ label camilla_hookup_accept(the_person):
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
         "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
         mc.name "That's it, bitch. I'm about to cum!"
-        if the_person.effective_sluttiness() > 100: #She is so slutty, she begs for your cum.
+        if the_person.effective_sluttiness() > 90: #She is so slutty, she begs for your cum.
             the_person "The condom! Take it off! Please!?! Your cock is so good, I want to feel you dump your load inside me!"
             "Your brain is getting a little hazy with lust. Surely there's nothing wrong with that, right?"
             menu:
@@ -541,11 +546,11 @@ label camilla_hookup_accept(the_person):
             menu:
                 "Stay Vaginal":
                     "As [the_person.title]'s pussy quivers around you, you decide to just keep doing what you are doing."
-                "Fuck Her Ass" if the_person.effective_sluttiness() >= 80:
+                "Fuck Her Ass" if the_person.effective_sluttiness() >= 70:
                     "You pull out of her pussy. Her juices leave a strand attached to you, connecting you to her cunt."
                     the_person "Mmm, [the_person.mc_title]? Why did you pull out... OH!"
                     "Her question is swiftly answered when she feels your manhood poking her puckered hole."
-                    if the_person.effective_sluttiness() > 100:
+                    if the_person.effective_sluttiness() > 90:
                         the_person "Yes! Fuck my ass good!"
                     else:
                         the_person "Oh my... be careful!"
@@ -672,7 +677,7 @@ label camilla_cum_pullout(the_person):
             elif the_person.on_birth_control:
                 the_person "You are? Do..."
                 "She moans, almost desperately."
-                the_person "...Do you want to cum inside me? Just take the condom off!"
+                the_person "... Do you want to cum inside me? Just take the condom off!"
                 the_person "I just want your cum!"
             elif camilla_is_fertile():
                 the_person "Oh god... I can't resist it!"
