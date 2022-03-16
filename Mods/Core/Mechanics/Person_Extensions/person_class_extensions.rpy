@@ -1212,7 +1212,10 @@ init -1 python:
     def get_employed_since(self):
         return self.event_triggers_dict.get("employed_since", -1)
 
-    Person.employed_since = property(get_employed_since, None, None)
+    def set_employed_since(self, value):
+        self.event_triggers_dict["employed_since"] = value
+
+    Person.employed_since = property(get_employed_since, set_employed_since, None)
 
     # returns the total number of days employed in company (0 for not employed)
     def get_days_employed(self):
