@@ -78,12 +78,6 @@ init -1 python:
 
     Outfit.remove_random_upper = remove_random_upper_enhanced
 
-    def restore_all_clothing_enhanced(self):
-        for cloth in [x for x in self.upper_body + self.lower_body + self.feet + self.accessories if x.half_off]:
-            cloth.half_off = False
-
-    Outfit.restore_all_clothing = restore_all_clothing_enhanced
-
     ######################################
     # Extension Methods For Outfit Class #
     ######################################
