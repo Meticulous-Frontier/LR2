@@ -1,13 +1,12 @@
 # Override default person_info_ui screen by VREN to show extra information about character
 init -1 python:
 
+    @renpy.pure
     def person_info_ui_format_hearts(value):
         heart_value = __builtin__.abs(value)
         if (heart_value / 4) > 10:
             return get_gold_heart(heart_value / 4)
         return get_red_heart(heart_value)
-
-    renpy.pure(person_info_ui_format_hearts)
 
     def person_info_ui_get_formatted_tooltip(person):
         tooltip = ""

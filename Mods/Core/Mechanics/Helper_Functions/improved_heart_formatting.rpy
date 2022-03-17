@@ -1,5 +1,6 @@
 init 2 python:
     # override default function to limit call stack depth
+    @renpy.pure
     def get_red_heart(sluttiness, depth = 0): #A recursive function, feet it a sluttiness and it will return a string of all red heart images for it. Heatrts taht are entirely empty are left out.
         if depth >= 5:
             return ""
@@ -17,9 +18,8 @@ init 2 python:
 
         return the_final_string
 
-    renpy.pure(get_red_heart)
-
     # override default function to limit call stack depth
+    @renpy.pure
     def get_gold_heart(sluttiness, depth = 0):
         if depth >= 5:
             return ""
@@ -37,8 +37,7 @@ init 2 python:
 
         return the_final_string
 
-    renpy.pure(get_gold_heart)
-
+    @renpy.pure
     def get_heart_image_list(sluttiness, effective_sluttiness): ##Returns a formatted string that will add coloured hearts in line with text, perfect for menu choices, ect.
         heart_string = ""
         platinum_count = __builtin__.int((sluttiness - 1) // 100)
@@ -58,8 +57,7 @@ init 2 python:
             heart_string += "{image=" + get_individual_heart(sluttiness - x, effective_sluttiness - x, capacity) + "}"
         return heart_string
 
-    renpy.pure(get_heart_image_list)
-
+    @renpy.pure
     def get_individual_heart(base_sluttiness, actual_sluttiness, capacity  = 20): #Give this the core, temp, core+suggest slut, minus 20*(current heart-1) each and it will find out the current heart status for that chunk of the heart array.
         image_string = "gui/heart/"
         factor = capacity / 4.0
@@ -141,5 +139,3 @@ init 2 python:
                     image_string += "gold_heart"
 
         return image_string + ".png"
-
-    renpy.pure(get_individual_heart)

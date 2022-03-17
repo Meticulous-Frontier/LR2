@@ -1,5 +1,6 @@
 init 10 python:
 
+    @renpy.pure
     def get_heart_image_list_cloth(slut_value, multiplier = 5): ## Returns a string of hearts. Since we are dealing with lower values this version has 20 as it's 100% filled value. Used to indicate sluttiness requirement for the cloth item.
         heart_string = "{image=" + get_individual_heart(0, slut_value*multiplier, 0) + "}"
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-20, 0) + "}"
@@ -7,8 +8,6 @@ init 10 python:
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-60, 0) + "}"
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-80, 0) + "}"
         return heart_string
-
-    renpy.pure(get_heart_image_list_cloth)
 
     def update_outfit_color(cloth_to_color):
         cs = renpy.current_screen()
