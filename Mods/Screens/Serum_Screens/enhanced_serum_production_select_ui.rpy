@@ -221,7 +221,7 @@ init 2:
                                 mousewheel True
                                 xsize 400
                                 vbox:
-                                    for a_serum in mc.business.serum_designs:
+                                    for a_serum in sorted(mc.business.serum_designs, key = lambda x: x.name):
                                         if a_serum.researched:
                                             textbutton "[a_serum.name]":
                                                 action [
