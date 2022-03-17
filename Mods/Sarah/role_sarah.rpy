@@ -46,7 +46,7 @@ init 2 python:
         sarah_initial_job = Job("Representative", critical_job_role, work_days = [], work_times = [])
 
         global sarah
-        sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = "brown", hair_style = windswept_hair, skin="white",\
+        sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = ["chocolate", [.247, .0, .058, 1]], hair_style = windswept_hair, skin="white",\
             eyes = "dark blue", personality = Sarah_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = sarah_wardrobe, \
             stat_array = [5,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
             title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit,
@@ -479,7 +479,7 @@ init 2 python:
         if "naomi" in globals():
             return
 
-        naomi = make_person(name = "Naomi", last_name = "Walters", age = 23, body_type = "thin_body", face_style = "Face_3", height = 0.94, hair_colour = "alt blond", hair_style = braided_bun, skin="white", relationship = "Fiancée", kids = 0, tits = "DD", start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
+        naomi = make_person(name = "Naomi", last_name = "Walters", age = 23, body_type = "thin_body", face_style = "Face_3", height = 0.94, hair_colour = ["alt blond", [.882, .733, .580, 1]], hair_style = braided_bun, skin="white", relationship = "Fiancée", kids = 0, tits = "DD", start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
                 ["skirts", 1, False],
                 ["other girls", 1, False],
                 ["boots", 1, False],

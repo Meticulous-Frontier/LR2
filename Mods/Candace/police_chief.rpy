@@ -45,7 +45,7 @@ init 5 python:
 
         global police_chief
         police_chief = make_person(name = "Christine", last_name = "Lavardin", age = 34, body_type = "thin_body", face_style = "Face_4", tits = "C", height = 0.91, \
-            hair_colour = ["knight red", [0.745, 0.117, 0.235,1]], hair_style = short_hair, skin="white", eyes = "emerald", name_color = "#fcf7de", dial_color = "#fcf7de",  \
+            hair_colour = ["knight red", [.745, .117, .235, 1]], hair_style = short_hair, skin="white", eyes = "emerald", name_color = "#fcf7de", dial_color = "#fcf7de",  \
             stat_array = [4,6,2], skill_array = [2,1,4,1,2], sex_array = [0,1,1,4], start_sluttiness = -20, start_obedience = -40, start_happiness = 89, start_love = 0, \
             generate_insta = False, generate_dikdok = False, generate_onlyfans = False, relationship = "Single", job = police_job, \
             kids = 0, force_random = True, starting_wardrobe = police_chief_wardrobe, personality = police_chief_personality,
