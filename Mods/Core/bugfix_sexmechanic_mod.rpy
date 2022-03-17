@@ -588,14 +588,12 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
                 call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
 
-                # If the girl has an orgasm due to MC coming, describe her orgasm (cum wrapper functions increase or decrease her arousal)
+                # If the girl has an orgasm due to MC coming, she gets a guaranteed trance upgrade
                 if the_person.arousal >= the_person.max_arousal:
-                    if position_choice.skill_tag in ["Vaginal", "Anal"]:
-                        the_person "Quick, slide your cock back in."
-                        "You are more than happy to oblige."
-                    else:
-                        the_person "Oh, [the_person.mc_title]..."
-                    call describe_girl_climax(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_describe_girl_fuck_person_bugfix2
+                    the_person "Oh, [the_person.mc_title], I'm cumming again..."
+                    $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = position_choice.slut_requirement, reset_arousal = False)
+                    $ the_person.change_arousal(-__builtin__.max(the_person.arousal/(report_log.get("girl orgasms", 0)+2), the_person.arousal - 99))
+                    $ report_log["girl orgasms"] += 1
 
                 $ first_round = False
                 if not finished:    # when we switched to threesome finished is True
