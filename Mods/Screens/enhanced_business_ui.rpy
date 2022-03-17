@@ -2,6 +2,7 @@ init 2:
     screen business_ui(): #Shows some information about your business.
         python:
             count = number_of_hints()
+            employee_count = str(mc.business.get_employee_count()) + "/" + str(mc.business.max_employee_count)
             funds = "${funds:,}".format(funds = __builtin__.int(mc.business.funds))
             daily_salary = "$"+ str(__builtin__.int(mc.business.calculate_salary_cost())) + " | $" + str(__builtin__.int(mc.business.operating_costs))
             efficiency = str(__builtin__.int(mc.business.team_effectiveness)) + "%"
@@ -20,7 +21,7 @@ init 2:
                 yoffset -30
                 spacing 5
                 text "[mc.business.name]" style "menu_text_title_style" xalign 0.03 yoffset -10
-                textbutton "Employee Count: " + str(mc.business.get_employee_count()) + "/" + str(mc.business.max_employee_count):
+                textbutton "Employee Count: [employee_count]":
                     style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "Your current and maximum number of employees. Purchase new business policies from your main office to increase the number of employees you can have."

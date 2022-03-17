@@ -126,3 +126,7 @@ init 2 python:
         except:
             pass
         return size
+
+    # renpy.profile_screen("main_ui", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)
+    # renpy.profile_screen("business_ui", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)
+    # renpy.profile_screen("person_info_ui", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)
