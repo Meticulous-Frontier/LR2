@@ -35,7 +35,7 @@ init -2 python:
                 self.show_actor(actor.person, position, emotion, special_modifier, lighting, display_transform, z_order)
             else:       # add person as actor
                 if display_transform is None:
-                    display_transform = self.get_free_position_tuple()
+                    display_transform = self.get_random_free_position()
                 actor = Actor(person, position, emotion, special_modifier, lighting, display_transform, z_order, visible)
                 self.actors.append(actor)
                 self.draw_scene()
@@ -174,7 +174,7 @@ init -2 python:
                 #mc.log_event("Remove clothing " + actor.person.title, "gray_float_text")
                 actor.person.draw_animated_removal(the_clothing, position = actor.position, emotion = actor.emotion, special_modifier = actor.special_modifier, lighting = lighting, display_transform = actor.display_transform, scene_manager = self, half_off_instead = half_off_instead)
 
-        def get_free_position_tuple(self):
+        def get_random_free_position(self):
             if not any(x for x in self.actors if x.display_transform in [character_right, character_right_flipped]):
                 return renpy.random.choice([character_right, character_right_flipped])
             if not any(x for x in self.actors if x.display_transform in [character_center, character_center_flipped]):

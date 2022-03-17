@@ -35,6 +35,8 @@ init -1 python:
             return False
         if has_started_anal_fetish(person):
             return False
+        if person.has_taboo("anal_sex"):
+            return False
 
         if person.get_opinion_score("anal sex") < 2 \
             or person.sex_skills["Anal"] < 4 \
@@ -107,6 +109,8 @@ init -1 python:
             return False
         if has_started_breeding_fetish(person):
             return False
+        if person.has_taboo(["condomless_sex", "vaginal_sex"]):
+            return False
 
         if person.get_opinion_score("bareback sex") < 2 \
             or person.sex_skills["Vaginal"] < 4 \
@@ -177,6 +181,8 @@ init -1 python:
             return False
         if has_started_cum_fetish(person):
             return False
+        if person.has_taboo(["sucking_cock", "condomless_sex"]):
+            return False
 
         if person.get_opinion_score("being covered in cum") < 2 \
             or person.sex_skills["Oral"] < 4 \
@@ -229,6 +235,8 @@ init -1 python:
         if not is_breeding_fetish_unlocked():
             return False
         if has_started_exhibition_fetish(person):
+            return False
+        if person.has_taboo(["sucking_cock", "vaginal_sex"]):
             return False
 
         if person.get_opinion_score("public sex") < 2 \
