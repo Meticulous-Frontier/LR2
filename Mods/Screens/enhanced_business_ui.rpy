@@ -1,6 +1,13 @@
 init 2:
     screen business_ui(): #Shows some information about your business.
-        $ count = number_of_hints()
+        python:
+            count = number_of_hints()
+            funds = "${funds:,}".format(funds = __builtin__.int(mc.business.funds))
+            daily_salary = "$"+ str(__builtin__.int(mc.business.calculate_salary_cost())) + " | $" + str(__builtin__.int(mc.business.operating_costs))
+            efficiency = str(__builtin__.int(mc.business.team_effectiveness)) + "%"
+            supplies = str(__builtin__.int(mc.business.supply_count)) +"/" + str(__builtin__.int(mc.business.supply_goal))
+            if mc.business.active_research_design:
+                current_research = "(" + str(__builtin__.int(mc.business.active_research_design.current_research)) + "/" + str(__builtin__.int(mc.business.active_research_design.research_needed)) + ")"
 
         frame:
             background im.Flip("Info_Frame_1.png",vertical=True)
@@ -20,7 +27,7 @@ init 2:
                     action NullAction()
                     sensitive True
 
-                textbutton "Company Funds: ${funds:,}".format(funds = __builtin__.int(mc.business.funds)):
+                textbutton "Company Funds: [funds]":
                     style "transparent_style"
                     text_style "menu_text_style"
                     if mc.business.funds < 0:
@@ -29,21 +36,21 @@ init 2:
                     action NullAction()
                     sensitive True
 
-                textbutton "Daily Salary Cost: $"+ str(__builtin__.int(mc.business.calculate_salary_cost())) + " | $" + str(__builtin__.int(mc.business.operating_costs)):
+                textbutton "Daily Salary Cost: [daily_salary]":
                     style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "The amount of money spent daily to pay your employees along with daily operating costs. Neither apply during the weekend."
                     action NullAction()
                     sensitive True
 
-                textbutton "Company Efficiency: "+ str(__builtin__.int(mc.business.team_effectiveness)) + "%":
+                textbutton "Company Efficiency: [efficiency]":
                     style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "The more employees you have the faster your company will become inefficient. Perform HR work at your office or hire someone to do it for you to raise your company Efficiency. All productivity is modified by company Efficiency."
                     action NullAction()
                     sensitive True
 
-                textbutton "Current Raw Supplies: " + str(__builtin__.int(mc.business.supply_count)) +"/" + str(__builtin__.int(mc.business.supply_goal)):
+                textbutton "Current Raw Supplies: [supplies]":
                     style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "Your current and goal amounts of serum supply. Manufacturing serum requires supplies, spend time ordering supplies from your office or hire someone to do it for you. Raise your supply goal from your office if you want to keep more supply stockpiled."
@@ -54,7 +61,7 @@ init 2:
                     textbutton "Current Research:":
                         style "transparent_style"
                         text_style "menu_text_style"
-                    textbutton "[mc.business.active_research_design.name] (" + str(__builtin__.int(mc.business.active_research_design.current_research)) + "/" + str(__builtin__.int(mc.business.active_research_design.research_needed)) + ")":
+                    textbutton "[mc.business.active_research_design.name] [current_research]":
                         style "transparent_style"
                         text_style "menu_text_style"
                         text_color "#43B197"

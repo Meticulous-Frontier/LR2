@@ -323,7 +323,7 @@ screen cheat_menu():
                             vbox:
                                 for x in editable_characters:
                                     if hasattr(x, "name"):
-                                        textbutton x.name:
+                                        textbutton "[x.name]":
                                             xfill True
 
                                             if editing_target == x:
@@ -387,35 +387,14 @@ screen cheat_menu():
                                                         xsize 198
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "cheat_text_style"
+                                                        sensitive False
 
-                                                        if cur_value < limit[1]:
-                                                            action [
-                                                                Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2]),
-                                                                Function(cheat_appearance)
-                                                            ]
-
-                                                        if cur_value > limit[0]:
-                                                            alternate [
-                                                                Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2]),
-                                                                Function(cheat_appearance)
-                                                            ]
                                                 else:
                                                     textbutton x + ": " + str(__builtin__.round(vars(editing_target)[main_stats[x][1]], 3)):
                                                         xsize 198
                                                         style "textbutton_no_padding_highlight"
                                                         text_style "cheat_text_style"
-
-                                                        if cur_value < limit[1]:
-                                                            action [
-                                                                Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] + main_stats[x][2]),
-                                                                Function(cheat_appearance)
-                                                            ]
-
-                                                        if cur_value > limit[0]:
-                                                            alternate [
-                                                                Function(setattr, editing_target, main_stats[x][0], vars(editing_target)[main_stats[x][1]] - main_stats[x][2]),
-                                                                Function(cheat_appearance)
-                                                            ]
+                                                        sensitive False
 
                                                 textbutton " + ":
                                                     xsize 36
@@ -454,20 +433,11 @@ screen cheat_menu():
                                                         Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] - work_skills[x][2])
                                                     ]
 
-                                                textbutton x + ": " + str(vars(editing_target)[work_skills[x][1]]):
+                                                textbutton "[x]: [cur_value]":
                                                     xsize 198
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
-
-                                                    if cur_value < limit[1]:
-                                                        action [
-                                                            Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] + work_skills[x][2])
-                                                        ]
-
-                                                    if cur_value > limit[0]:
-                                                        alternate [
-                                                            Function(setattr, editing_target, work_skills[x][0], vars(editing_target)[work_skills[x][1]] - work_skills[x][2])
-                                                        ]
+                                                    sensitive False
 
                                                 textbutton " + ":
                                                     xsize 36
@@ -504,20 +474,11 @@ screen cheat_menu():
                                                         SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] - sex_stats[x][2])
                                                     ]
 
-                                                textbutton x + ": " + str(vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]]):
+                                                textbutton "[x]: [cur_value]":
                                                     xsize 198
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
-
-                                                    if cur_value < limit[1]:
-                                                        action [
-                                                            SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] + sex_stats[x][2])
-                                                        ]
-
-                                                    if cur_value > limit[0]:
-                                                        alternate [
-                                                            SetDict(vars(editing_target)[sex_stats[x][0]], sex_stats[x][1], vars(editing_target)[sex_stats[x][0]][sex_stats[x][1]] - sex_stats[x][2])
-                                                        ]
+                                                    sensitive False
 
                                                 textbutton " + ":
                                                     xsize 36
@@ -557,20 +518,11 @@ screen cheat_menu():
                                                         Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] - relation_stats[x][2])
                                                     ]
 
-                                                textbutton x + ": " + str(vars(editing_target)[relation_stats[x][0]]):
+                                                textbutton "[x]: [cur_value]":
                                                     xsize 198
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "cheat_text_style"
-
-                                                    if cur_value < limit[1]:
-                                                        action [
-                                                            Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] + relation_stats[x][2])
-                                                        ]
-
-                                                    if cur_value > limit[0]:
-                                                        alternate [
-                                                            Function(setattr, editing_target, relation_stats[x][0], vars(editing_target)[relation_stats[x][1]] - relation_stats[x][2])
-                                                        ]
+                                                    sensitive False
 
                                                 textbutton " + ":
                                                     xsize 36
@@ -623,7 +575,7 @@ screen cheat_menu():
                                                         xfill True
 
                                                 else:
-                                                    text x + ": "+ str(vars(editing_target)[available_naming[x][0]]):
+                                                    text "[x]: "+ str(vars(editing_target)[available_naming[x][0]]):
                                                         yalign 0.5
                                                         yfill True
                                                         style "cheat_text_style"
@@ -646,7 +598,7 @@ screen cheat_menu():
                             action [Function(cheat_collapse_menus), ToggleScreenVariable("salary_options")]
 
                         for div in divisions:
-                            textbutton div:
+                            textbutton "[div]":
                                 style "textbutton_no_padding_highlight"
                                 text_style "cheat_text_style"
                                 xfill True
@@ -669,7 +621,7 @@ screen cheat_menu():
                         for div in divisions:
                             if divisions[div][1]:
                                 for person in divisions[div][0]:
-                                    textbutton person.name + " " + person.last_name:
+                                    textbutton "[person.name] [person.last_name]":
                                         xfill True
                                         style "textbutton_no_padding_highlight"
                                         text_style "cheat_text_style"
@@ -862,7 +814,7 @@ screen cheat_menu():
                         if skin_options and hasattr(editing_target, "skin"):
                             vbox:
                                 for x in available_skin:
-                                    textbutton x:
+                                    textbutton "[x]":
                                         xfill True
                                         style "textbutton_no_padding_highlight"
                                         text_style "cheat_text_style"
@@ -897,7 +849,7 @@ screen cheat_menu():
                         if tan_options and hasattr(editing_target, "tan_style"):
                             vbox:
                                 for x in tan_list:
-                                    textbutton str(x.name):
+                                    textbutton "[x.name]":
                                         xfill True
                                         style "textbutton_no_padding_highlight"
                                         text_style "cheat_text_style"
@@ -931,7 +883,7 @@ screen cheat_menu():
                         if breast_options and hasattr(editing_target, "tits"):
                             vbox:
                                 for x in available_breast_sizes:
-                                    textbutton str(x):
+                                    textbutton "[x]":
                                         xfill True
                                         style "textbutton_no_padding_highlight"
                                         text_style "cheat_text_style"
@@ -948,7 +900,7 @@ screen cheat_menu():
                         if hair_style_options and hasattr(editing_target, "hair_style" and "hair_colour"):
                             vbox:
                                 for x in available_hair_styles:
-                                    textbutton str(x.name):
+                                    textbutton "[x.name]":
                                         xfill True
                                         style "textbutton_no_padding_highlight"
                                         text_style "cheat_text_style"
@@ -989,7 +941,7 @@ screen cheat_menu():
                         if pubes_options and hasattr(editing_target, "pubes_style"):
                             vbox:
                                 for x in available_pubes_styles:
-                                    textbutton str(x.name):
+                                    textbutton "[x.name]":
                                         xfill True
                                         style "textbutton_no_padding_highlight"
                                         text_style "cheat_text_style"
@@ -1037,7 +989,7 @@ screen cheat_menu():
                                 vbox:
                                     $ name = getattr(editing_target, "name")
                                     for c in readable_color_list:
-                                        textbutton "{color=[c]}" + name + "{/color}":
+                                        textbutton "{color=[c]}[name]{/color}":
                                             xfill True
                                             style "textbutton_no_padding_highlight"
                                             text_style "cheat_text_style"

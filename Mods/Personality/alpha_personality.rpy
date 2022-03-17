@@ -77,7 +77,7 @@ label alpha_greetings(the_person):
             if the_person.sluttiness > 60:
                 the_person "Hello [the_person.mc_title], how has your day been? Maybe you can make mine better..."
             else:
-                $ day_part = time_of_day_string()
+                $ day_part = time_of_day_string(time_of_day)
                 the_person "Good [day_part], [the_person.mc_title]!"
     return
 
@@ -853,7 +853,7 @@ label alpha_condom_bareback_demand(the_person):
 label alpha_cum_face(the_person):
     if the_person.has_cum_fetish() or the_person.obedience > 130:
         if the_person.has_cum_fetish() or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("cum facials") > 0:
-            $ pronoun = person_body_shame_string(the_person, "little cum slut")
+            $ pronoun = person_body_shame_string(the_person.body_type, "little cum slut")
             the_person "Do you like to see my face covered [the_person.mc_title]? Am I your good [pronoun]?"
         else:
             the_person "It's everywhere! Next time point that thing somewhere else, I'm only doing this for you as a favor."
@@ -932,7 +932,7 @@ label alpha_cum_vagina(the_person):
 label alpha_cum_anal(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 90:
-            $ pronoun = person_body_shame_string(the_person, "little anal queen")
+            $ pronoun = person_body_shame_string(the_person.body_type, "little anal queen")
             the_person "Ah... yes pump your seed into your [pronoun]?"
         else:
             the_person "Oh my, you filled up my bottom... Remember [the_person.mc_title], you're the only one I let do this."
@@ -1005,7 +1005,7 @@ label alpha_sex_watch(the_person, the_sex_person, the_position):
 
     else:
         $ the_person.draw_person(emotion = "happy")
-        $ pronoun = person_body_shame_string(the_sex_person, "slut")
+        $ pronoun = person_body_shame_string(the_sex_person.body_type, "slut")
         the_person "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
         "[title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
 

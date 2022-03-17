@@ -110,7 +110,7 @@ init 2 python:
                 elif any([x.name != "Ask new title" and x.is_action_enabled(item) for x in item.on_talk_event_list]):
                     mi.title += " {image=speech_bubble_token_small}"
                 if draw_hearts_for_people:
-                    mi.title += "\n" + get_heart_image_list(item)
+                    mi.title += "\n" + get_heart_image_list(item.sluttiness, item.effective_sluttiness())
                 if person_preview_args is None:
                     person_preview_args = {}
 

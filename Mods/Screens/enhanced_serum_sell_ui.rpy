@@ -80,8 +80,8 @@ init 2:
                                 action VrenNullAction style "textbutton_style" text_style "textbutton_text_style"
                                 tooltip "How much attention your business has drawn. If this gets too high the authorities will act, outlawing a serum design, leveling a fine, or seizing your inventory."
 
-
-                            text get_attention_string() + " (-" + str(mc.business.attention_bleed) + "/Day)" style "textbutton_text_style" yalign 0.5
+                            $ attention_info = get_attention_string(mc.business.attention, mc.business.max_attention) + " (-" + str(mc.business.attention_bleed) + "/Day)"
+                            text "[attention_info]" style "textbutton_text_style" yalign 0.5
 
                         null height 8
 

@@ -8,6 +8,8 @@ init 10 python:
         heart_string += "{image=" + get_individual_heart(0, slut_value*multiplier-80, 0) + "}"
         return heart_string
 
+    renpy.pure(get_heart_image_list_cloth)
+
     def update_outfit_color(cloth_to_color):
         cs = renpy.current_screen()
         if cs.scope["selected_colour"] == "colour_pattern":

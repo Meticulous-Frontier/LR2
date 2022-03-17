@@ -22,7 +22,7 @@ label business_meeting_action_label():
         return
 
     $ the_place = mc.business.get_employee_workstation(the_person)
-    $ day_part = time_of_day_string()
+    $ day_part = time_of_day_string(time_of_day)
 
     if (mc.location ==  the_place):
         "You're hard at work in the [day_part], when [the_person.possessive_title] asks you over to discuss some plans."
