@@ -51,7 +51,7 @@ label kaya_greetings(the_person):
             the_person "Hey! Are we going out for drinks tonight?"
         elif kaya_can_get_barista_quickie():
             the_person "Hey there... want to take a break with me in the back?"
-        elif the_person.is_pregnant():
+        elif the_person.knows_pregnant():
             the_person "Aww, you came to say hi! I can't wait to tell our baby how thoughtful you are."
         elif the_person.sluttiness > 60:
             the_person "Hey there good looking. How are you doing today?"
