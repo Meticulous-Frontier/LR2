@@ -3352,7 +3352,7 @@ label erica_breeding_fetish_team_rejoin_label(the_person):
     $ the_person.draw_person()
     $ the_person.change_stats(happiness = 15, love = 7, obedience = 12)
     the_person "Yeah right!"
-    if the_person.is_pregnant():
+    if the_person.knows_pregnant():
         "[the_person.possessive_title] rubs her belly."
         the_person "I won't be rejoining the team immediately... going to wait for the little one to come first."
         the_person "But it's amazing knowing I'll be able to go back to it!"

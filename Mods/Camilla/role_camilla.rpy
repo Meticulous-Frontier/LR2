@@ -1417,7 +1417,7 @@ label camilla_formal_date_label():    #60
             "It's so hot, dumping your load inside a married woman."
             if camilla_is_fertile():
                 "Especially since you cured her infertility."
-                if the_person.is_pregnant():
+                if the_person.knows_pregnant():
                     "You've already knocked her up, and now every load is another claim you are staking on her body."
                 else:
                     "Every load you dump inside her could be the one that knocks her up."

@@ -1412,7 +1412,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
         "You want to be with her":
             mc.name "That isn't what I'm saying. [kaya.title], you are funny, and great to be around, and I really want to make this work."
             mc.name "I'm just really feeling guilty about the way things went down."
-            if kaya.is_pregnant():
+            if kaya.knows_pregnant():
                 mc.name "And now you're pregnant and..."
             the_person "Geeze, you scared me! I thought you were really going to say no!"
             $ the_person.change_happiness(10)
@@ -1525,7 +1525,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     "You leave the coffee shop and start to walk around downtown some, lost in your thoughts."
     "Last week, you found out the hot barista you've been hitting on's mom is dying and her dad is already gone."
     "And now... you are dating?"
-    if the_person.is_pregnant():
+    if the_person.knows_pregnant():
         "And you've knocked her up!"
     "[the_person.possessive_title] seems very eager to put out. Normally sexy time would be something you would plan, but you decide for now to let her see what she can come up with."
     #TODO find some way to drop a hint here that the best way to continue the storyline is to invite Kaya over for a sleepover date.
