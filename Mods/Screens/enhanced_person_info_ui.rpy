@@ -49,16 +49,15 @@ init 2:
     screen person_info_ui(person): #Used to display stats for a person while you're talking to them.
         layer "solo" #By making this layer active it is cleared whenever we draw a person or clear them off the screen.
 
-        python:
-            job_title = person_info_ui_get_job_title(person)
-            arousal_info = get_arousal_with_token_string(person.arousal, person.max_arousal)
-            energy_info = get_energy_string(person.energy, person.max_energy)
-            happiness_info = str(__builtin__.int(person.happiness))
-            love_info = str(__builtin__.int(person.love))
-            sluttiness_info = get_heart_image_list(person.sluttiness, person.effective_sluttiness())
-            obedience_info = str(person.obedience) + " - " + get_obedience_plaintext(person.obedience)
-            height_info = height_to_string(person.height)
-            weight_info = get_person_weight_string(person)
+        default job_title = person_info_ui_get_job_title(person)
+        default arousal_info = get_arousal_with_token_string(person.arousal, person.max_arousal)
+        default energy_info = get_energy_string(person.energy, person.max_energy)
+        default happiness_info = str(__builtin__.int(person.happiness))
+        default love_info = str(__builtin__.int(person.love))
+        default sluttiness_info = get_heart_image_list(person.sluttiness, person.effective_sluttiness())
+        default obedience_info = str(person.obedience) + " - " + get_obedience_plaintext(person.obedience)
+        default height_info = height_to_string(person.height)
+        default weight_info = get_person_weight_string(person)
 
         frame:
             background im.Alpha("gui/topbox.png", .9)
