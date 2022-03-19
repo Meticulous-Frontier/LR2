@@ -2,6 +2,7 @@ init 2:
     screen end_of_day_update():
         add "Paper_Background.png"
         zorder 100
+        modal True
 
         hbox:
             xalign 0.5
