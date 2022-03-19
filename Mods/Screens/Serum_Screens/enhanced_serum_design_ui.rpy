@@ -177,10 +177,16 @@ init 2:
                                         #unhovered Hide("trait_tooltip")
 
                     vbox:
+                        $ trait_side_effects_text = get_trait_side_effect_text(trait_tooltip)
+                        $ trait_mastery_text = get_trait_mastery_text(trait_tooltip)
                         frame:
                             background "#000080"
                             xsize 530
                             text "[trait_tooltip.name]" style "menu_text_title_style" xalign .5
+                        frame:
+                            background None
+                            xsize 530
+                            text "Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]" style "serum_text_style" xalign .5
 
                         use aspect_grid(trait_tooltip)
 
