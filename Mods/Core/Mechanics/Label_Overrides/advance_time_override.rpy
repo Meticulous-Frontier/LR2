@@ -391,7 +391,7 @@ label advance_time_end_of_day_label():
     call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
 
     python:
-        renpy.restart_interaction()
+        # renpy.restart_interaction()
         mc.business.clear_messages()
         # increase morning crisis chance (once a day)
         morning_crisis_chance += 2

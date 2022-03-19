@@ -1260,18 +1260,32 @@ init -1 python:
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
     def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, max_slut = None, max_love = None, energy = None, add_to_log = True):
-        if not obedience is None:
-            self.change_obedience(obedience, add_to_log = add_to_log)
+        message = []
         if not happiness is None:
-            self.change_happiness(happiness, add_to_log = add_to_log)
+            self.change_happiness(happiness, add_to_log = False)
+            message.append(("+" if happiness > 0 else "-") + str(happiness) + " {image=happy_token_small}")
+        if not obedience is None:
+            self.change_obedience(obedience, add_to_log = False)
+            message.append(("+" if obedience > 0 else "-") + str(obedience) +" {image=padlock_token_small}")
         if not arousal is None:
-            self.change_arousal(arousal, add_to_log = add_to_log)
+            message.append(("+" if arousal > 0 else "-") + str(arousal) + " {image=arousal_token_small}")
+            self.change_arousal(arousal, add_to_log = False)
         if not love is None:
-            self.change_love(love, max_love, add_to_log = add_to_log)
+            amount = self.change_love(love, max_love, add_to_log = False)
+            if amount and amount != 0:
+                message.append(("+" if amount > 0 else "-") + str(amount) + " {image=red_heart_token_small}")
         if not slut is None:
-            self.change_slut(slut, max_slut, add_to_log = add_to_log)
+            amount = self.change_slut(slut, max_slut, add_to_log = False)
+            if amount and amount != 0:
+                message.append(("+" if amount > 0 else "-") + str(amount) + " {image=underwear_token_small}")
         if not energy is None:
-            self.change_energy(energy, add_to_log = add_to_log)
+            self.change_energy(energy, add_to_log = False)
+            message.append(("+" if energy > 0 else "-") + str(energy) + " {image=energy_token_small}")
+        if add_to_log and message:
+            display_name = self.create_formatted_title("???")
+            if self.title:
+                display_name = self.title
+            mc.log_event(display_name + ": " + " ".join(message), "float_text_yellow")
         return
 
     Person.change_stats = change_stats
@@ -1315,7 +1329,7 @@ init -1 python:
             if not max_modified_to or max_modified_to > 100:
                 max_modified_to = 100
 
-            org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
+            return org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
 
         return person_change_slut_wrapper
 
@@ -1337,7 +1351,7 @@ init -1 python:
                     suggestibility_modifier = 14
                 max_modified_to += suggestibility_modifier
 
-            org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
+            return org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
 
         return person_change_love_wrapper
 

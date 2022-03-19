@@ -16,6 +16,18 @@ init 5 python:
     arousal_token_small_image = im.Scale(Image(get_file_handle("arousal_token.png")), 18, 18)
     renpy.image("arousal_token_small", arousal_token_small_image)
 
+    red_heart_small_image = im.Scale(Image(get_file_handle("red_heart.png")), 18, 18)
+    renpy.image("red_heart_token_small", red_heart_small_image)
+
+    happy_small_image = im.Scale(Image(get_file_handle("happy.png")), 18, 18)
+    renpy.image("happy_token_small", happy_small_image)
+
+    underwear_small_image = im.Scale(Image(get_file_handle("underwear_token.png")), 18, 18)
+    renpy.image("underwear_token_small", underwear_small_image)
+
+    padlock_small_image = im.Scale(Image(get_file_handle("padlock.png")), 18, 18)
+    renpy.image("padlock_token_small", padlock_small_image)
+
     question_mark_small_image = im.Scale(Image(get_file_handle("question.png")), 18, 18)
     renpy.image("question_mark_small", question_mark_small_image)
 
@@ -113,7 +125,6 @@ label updated_room_background(stack):
     image question_mark = "[question_image.filename]"
     image dna_sequence = "[dna_image.filename]"
     image home_marker = "[home_image.filename]"
-    image padlock = "[padlock_image.filename]"
 
     python:
         # as long as the base game has no nice images, we use these to make navigating a little more fun
