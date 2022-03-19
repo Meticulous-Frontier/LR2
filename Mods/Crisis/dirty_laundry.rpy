@@ -93,7 +93,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                 "You are totally busted! You stop what you are doing and open you eyes, seeing [the_person.title] looking at you wide eyed."
                 if the_person.sluttiness < 20:
                     $ the_person.draw_person(position = "stand4", emotion= "angry")
-                    the_person "[the_person.mc_title]! Those are my panties! What the fuck do you think you're doing? "
+                    the_person "[the_person.mc_title]! Those are my panties! What the fuck do you think you're doing?"
                     "You try to respond but just stammer. You're pretty sure there's no way to salvage this."
                     the_person "God I can't believe you. Don't touch my stuff! This is so gross! I'm gonna have to rewash these!"
                     "She quickly grabs her panties from your hand. She grabs the rest of her laundry and walks out of the laundry room."

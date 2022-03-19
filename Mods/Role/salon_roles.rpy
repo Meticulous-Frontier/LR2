@@ -780,7 +780,7 @@ label ophelia_revenge_date_label():
     $ the_person.change_arousal(15)
     $ mc.arousal += 10
     $ mc.change_locked_clarity(20)
-    "Your hands drops to her ass. You give it a squeeze, testing your limits with [the_person.possessive_title]. She sighs and gives a slight moan. She doesn't resist you at all."
+    "Your hand drops to her ass. You give it a squeeze, testing your limits with [the_person.possessive_title]. She sighs and gives a slight moan. She doesn't resist you at all."
     "You bring your other hand down and grab the other cheek. You pull her toward you and begin to grind your hips against her."
     "She is pressing her body against you."
     the_person "Oh god... I haven't... in a while..."
@@ -1087,7 +1087,7 @@ label ophelia_add_service_full_body_massage_label(the_person):
     mc.name "I'm listening. What's the idea?"
     "She takes a deep breath."
     the_person "Well... my full body hair styling has been a great success... especially with some of the girls from your office..."
-    the_person "I was thinking about what I could do to take the service to the next level, you know. "
+    the_person "I was thinking about what I could do to take the service to the next level, you know."
     return
 
 

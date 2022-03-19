@@ -1450,7 +1450,7 @@ label Sarah_tits_reveal_label():
     the_person "Ah! Stop! God that feels amazing. But there's something else I want to try..."
     mc.name "Oh? What is that?"
     the_person "Well, I've tried this a couple times before but to be honest my chest was so small I don't think it was very good for the guy but... I want your cock between my tits!"
-    mc.name "That sounds hot. Lets do it!"
+    mc.name "That sounds hot. Let's do it!"
     "You turn your chair to the side and [the_person.title] gets on her knees in front of you."
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] eagerly begins opening your pants. She pulls out your cock and gives it a few gentle strokes."
@@ -1679,7 +1679,7 @@ label Sarah_stripclub_story_label():
         "You see [showgirl.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]."
         "She gives you a quick wink."
         $ mc.change_locked_clarity(10)
-    showgirl "Alright, lets get the fun started!"
+    showgirl "Alright, let's get the fun started!"
     $ scene_manager.update_actor(showgirl_2, position = "kneeling1")
     "Your stripper gets on your lap. She starts to take off her top."
     $ scene_manager.strip_to_tits(person = showgirl_2)
@@ -3156,7 +3156,7 @@ label Sarah_talk_about_naomi_label(the_person):
     mc.name "Hey [the_person.title], can we have a talk in my office?"
     the_person "I'm not in trouble, am I?"
     mc.name "Don't worry, it's personal."
-    the_person "Ok, lets go then."
+    the_person "Ok, let's go then."
     $ mc.change_location(ceo_office)
     $ mc.location.show_background()
     "You gesture [the_person.possessive_title] to sit down."
@@ -3181,7 +3181,7 @@ label Sarah_talk_about_naomi_label(the_person):
             $ the_person.draw_person(position = "back_peek")
             "With that she stands up and leaves your office, looking back to give you a wink."
             $ clear_scene()
-            "Now lets invite [naomi.name] over to give her the 'good' news."
+            "Now let's invite [naomi.name] over to give her the 'good' news."
             $ mc.start_text_convo(naomi)
             mc.name "Good news, I talked it over with [the_person.name]."
             mc.name "Can you come to my business next Wednesday afternoon?"
@@ -3329,7 +3329,7 @@ label Sarah_naomi_visits_to_apologize_label():
             the_person "Do you think we could be friends again, [sarah.name]?"
 
     "You look at [sarah.possessive_title], so she knows it's her decision."
-    sarah "Very well, lets consider this a friendship on trial basis and see where it goes from here."
+    sarah "Very well, let's consider this a friendship on trial basis and see where it goes from here."
     the_person "Thats all I ever wanted."
     if sarah.vagina_visible():
         "The girls rearrange their outfits."
@@ -3340,7 +3340,7 @@ label Sarah_naomi_visits_to_apologize_label():
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "She grabs [sarah.possessive_title] by the hand and drags her out of your office."
     $ scene_manager.update_actor(sarah, position = "walking_away")
-    "It seems they are off to a good start, lets see where this relationship goes in the future."
+    "It seems they are off to a good start, let's see where this relationship goes in the future."
     $ scene_manager.clear_scene()
 
     # TODO: add bar date with Sarah and Naomi, where you end up at Sarah's place for a night of fun
@@ -3466,7 +3466,7 @@ label Sarah_date_strip_club_private_dance_label(the_person):
         "You see [showgirl_1.title] looking over to you, realizing that you are gonna be in the room as she performs for [the_person.title]."
         "She gives you a quick wink."
         $ mc.change_locked_clarity(10)
-    showgirl_1 "Alright, lets get the fun started!"
+    showgirl_1 "Alright, let's get the fun started!"
     $ scene_manager.update_actor(showgirl_2, position = "kneeling1")
     "Your stripper gets on your lap. She starts to take off her top."
     $ scene_manager.strip_to_tits(person = showgirl_2)

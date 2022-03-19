@@ -114,7 +114,7 @@ label breeding_fetish_high_fertility_crisis_label():
             $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
         else:
             "Too tired to continue, [the_person.possessive_title] pulls off you a little frustrated."
-            the_person "I can't believe it... just... lets make sure we try again soon okay?"
+            the_person "I can't believe it... just... let's make sure we try again soon okay?"
 
     else:
         mc.name "One knocked up cum slut, coming right up!"
@@ -138,7 +138,7 @@ label breeding_fetish_high_fertility_crisis_label():
             $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
         else:
             "Too tired to continue, [the_person.possessive_title] looks up at you little frustrated."
-            the_person "I can't believe it... just... lets make sure we try again soon okay?"
+            the_person "I can't believe it... just... let's make sure we try again soon okay?"
         "Finished for now, [the_person.title] excuses herself."
     the_person "I'd better get going..."
     if the_person.has_creampie_cum():
@@ -334,7 +334,7 @@ label breeding_fetish_family_sleep_crisis_label():
         the_person "So... I was wondering... is it okay if I sleep in here with you again tonight?"
         menu:
             "Not tonight" if get_lust_tier() < 3:
-                mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
+                mc.name "Sorry [the_person.title]... I had a long day and I'm pretty worn out... maybe tomorrow?"
                 "She is clearly disappointed."
                 the_person "Whatever [the_person.mc_title]... see you in the morning I guess?"
                 "You head for bed, looking forward to a restful night's sleep."
@@ -375,7 +375,7 @@ label breeding_fetish_family_sleep_crisis_label():
         "[the_person.possessive_title] sits on the edge of your bed. The way she is dressed, you're sure she has more in mind."
         menu:
             "Not tonight" if get_lust_tier() < 3 or mc.energy < 80:
-                mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
+                mc.name "Sorry [the_person.title]... I had a long day and I'm pretty worn out... maybe tomorrow?"
                 "She is clearly disappointed."
                 the_person "I understand [the_person.mc_title]... see you in the morning I guess?"
                 "You roll over while she leaves the room and quickly fall asleep."
@@ -401,7 +401,7 @@ label breeding_fetish_family_sleep_crisis_label():
         "[the_person.possessive_title] sits on the edge of your bed. The way she is dressed, you have a pretty good idea what kind of help she needs."
         menu:
             "Not tonight" if get_lust_tier() < 3 or mc.energy < 80:
-                mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
+                mc.name "Sorry [the_person.title]... I had a long day and I'm pretty worn out... maybe tomorrow?"
                 "She is clearly disappointed."
                 if the_person == aunt:
                     the_person "Ah, yes... well... maybe another time."

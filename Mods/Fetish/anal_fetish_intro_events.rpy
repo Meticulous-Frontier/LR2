@@ -685,7 +685,7 @@ label anal_fetish_mom_intro_label():
     the_person "[the_person.mc_title], last night [the_person.title] took care of you. Do you think this morning, you could take care of me?"
     "You smile to yourself."
     mc.name "Are you asking me to fuck you in your ass?"
-    the_person "Yes... Please! Please [the_person.mc_title]! "
+    the_person "Yes... Please! Please [the_person.mc_title]!"
     "You pick her up from behind and take her back to the bed. You throw her on the bed. She quickly gets on her hands and knees and starts wiggling her ass at you."
     #Draw doggystyle
     $ the_person.draw_person(position = "doggy")

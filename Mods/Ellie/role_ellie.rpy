@@ -631,7 +631,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     $ the_person.change_arousal(5) #65
     $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
-    "[the_person.title] let's out a little moan. She slowly relaxes as more as you continue to rub and caress her rear."
+    "[the_person.title] lets out a little moan. She slowly relaxes as more as you continue to rub and caress her rear."
     mc.name "See? Rubbing your back feels good, and rubbing down here feels a little bit better, doesn't it?"
     the_person "It does..."
     "She leans forward and relaxes more, just enjoying the touch of your hands on her body. You really need to take this slow, so you take your time rubbing for several minutes."
@@ -1121,7 +1121,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     "With the tip in her mouth, [the_person.title] swirls her tongue around it a few times. It feels so good."
     "After a few seconds, she bravely pushes down a little further. She is clearly testing her limits, unsure of how far she can take it."
     the_person "Mmmmmmm... UNGLCK"
-    "[the_person.possessive_title] suddenly gags as she takes it a little to far. She quickly pulls off and catches her breath."
+    "[the_person.possessive_title] suddenly gags as she takes it a little too far. She quickly pulls off and catches her breath."
     the_person "Stars! Sorry I..."
     mc.name "It's okay. The tip is the most sensitive part, just do what you can, but don't force it."
     the_person "Mmm... okay..."

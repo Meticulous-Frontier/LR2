@@ -271,7 +271,7 @@ label candace_sex_accept(the_person):
         else:
             the_person "Yeah, let's do it! You're so cute when you're horny, did you know that?"
     else:
-        the_person "Oh? Oh! Yeah, lets do that!"
+        the_person "Oh? Oh! Yeah, let's do that!"
     return
 
 label candace_sex_obedience_accept(the_person):
@@ -930,7 +930,7 @@ label candace_sleepover_yourplace_sex_start(the_person): #Right before sexy time
 
 label candace_sleepover_herplace_sex_start(the_person): #Right before sexy times at her place
     "[the_person.possessive_title] takes the wine glass. She gulps it down, draining the glass all at once."
-    the_person "Mmm, that was nice! But enough with the booze, lets fuck!"
+    the_person "Mmm, that was nice! But enough with the booze, let's fuck!"
     return
 
 label candace_sleepover_impressed_response(the_person):  #If you've made her cum a lot

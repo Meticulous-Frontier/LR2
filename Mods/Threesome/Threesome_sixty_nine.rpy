@@ -401,7 +401,7 @@ label scene_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_locatio
 
 label outro_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
     "You watch, completely enthralled by the girls as they pleasure each other."
-    "Suddenly, you realize you stroked yourself to far and you are already past the point of no return."
+    "Suddenly, you realize you stroked yourself too far and you are already past the point of no return."
     mc.name "Oh fuck I'm gonna cum!"
     "[the_girl_2.title] suddenly looks up and sees the look on your face. She smiles wide."
     the_girl_2 "Damn, couldn't handle watching? Why don't you..."

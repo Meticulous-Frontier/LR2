@@ -117,7 +117,7 @@ label lust_booty_call_intro_label():
     mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits on the edge of your bed."
-    the_person "Okay, lets chat a little while we wait."
+    the_person "Okay, let's chat a little while we wait."
     "As you order a Lyft, she gets herself presentable."
     $ the_person.apply_outfit()
     $ the_person.draw_person(position = "sitting")
@@ -206,7 +206,7 @@ label lust_booty_call_label():
     mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits on the edge of your bed."
-    the_person "Okay, lets chat a little while we wait."
+    the_person "Okay, let's chat a little while we wait."
     "As you order a Lyft, she gets herself presentable."
     $ the_person.apply_outfit()
     $ the_person.draw_person(position = "sitting")

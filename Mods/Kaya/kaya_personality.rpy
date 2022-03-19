@@ -331,7 +331,7 @@ label kaya_sex_obedience_accept(the_person):
         if the_person.obedience > 130:
             the_person "Yes [the_person.mc_title], if that's what you want to do I'll give it a try."
         else:
-            the_person "I... Okay, if you really want to, lets give it a try."
+            the_person "I... Okay, if you really want to, let's give it a try."
     return
 
 # label kaya_sex_gentle_reject(the_person):
@@ -689,7 +689,7 @@ label kaya_flirt_response_girlfriend(the_person):
                         "[the_person.possessive_title] nibbles at your ear, then steps back and smiles happily."
     else:
         # You're alone, so she's open to fooling around.
-        the_person "You are so ridiculous. Come here, lets make out!"
+        the_person "You are so ridiculous. Come here, let's make out!"
         $ the_person.draw_person(position = "kissing")
         "She puts her arms around you and leans in, quickly kissing you a few times on the lips."
         "When she's finished kissing you she rests her head on your shoulder and sighs happily."

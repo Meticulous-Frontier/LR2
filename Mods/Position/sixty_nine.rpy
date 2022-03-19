@@ -51,7 +51,7 @@ label intro_SB_sixty_nine(the_girl, the_location, the_object):
     if the_girl.get_opinion_score("giving blowjobs") >= 2:
         the_girl "Mmm, that feels good [the_girl.mc_title]... and your cock... it looks so good... I wanna swallow it whole!"
     if mc.condom:
-        the_girl "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        the_girl "Why are you wearing this thing? Let's take this off so I can take care of you better..."
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
     "[the_girl.possessive_title] begins to please you in return. Taking you into her mouth, she begins sucking you off."
@@ -442,7 +442,7 @@ label transition_default_SB_sixty_nine(the_girl, the_location, the_object):
     $ SB_sixty_nine.redraw_scene(the_girl)
     "You lay down on the [the_object.name]. [the_girl.possessive_title] swings one leg over your head and slowly moves her body into position on top of yours."
     if mc.condom:
-        the_girl "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        the_girl "Why are you wearing this thing? Let's take this off so I can take care of you better..."
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
     if not the_girl.vagina_available():

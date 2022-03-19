@@ -519,7 +519,7 @@ label HR_director_monday_meeting_label(the_person):
         if the_person.energy < 60:
             "She looks at you before she begins."
             the_person "So, normally I would offer to help with your... you know... needs..."
-            the_person "But honestly I'm pretty wore out from earlier. If you are still feeling needy later, let me know, okay?"
+            the_person "But honestly I'm pretty worn out from earlier. If you are still feeling needy later, let me know, okay?"
             mc.name "Okay."
             "She reaches down to her backpack and begins to pull out her notes from the previous week."
 
@@ -897,7 +897,7 @@ label HR_director_manage_gym_membership(the_person):
                 if x.get_opinion_score("sports") > 0:
                     x.change_happiness(3 * x.get_opinion_score("sports"))
                 if x.get_opinion_score("hiking") > 0:
-                    x.change_happiness(1 * x.get_opinion_score("sports"))
+                    x.change_happiness(1 * x.get_opinion_score("hiking"))
             cost = __builtin__.len(mc.business.get_employee_list()) * 5
     elif get_HR_director_tag("business_HR_gym_tier", 0) == 2:
         python:
@@ -910,7 +910,7 @@ label HR_director_manage_gym_membership(the_person):
                 if x.get_opinion_score("sports") > 0:
                     x.change_happiness(5 * x.get_opinion_score("sports"))
                 if x.get_opinion_score("hiking") > 0:
-                    x.change_happiness(2 * x.get_opinion_score("sports"))
+                    x.change_happiness(2 * x.get_opinion_score("hiking"))
             cost = __builtin__.len(mc.business.get_employee_list()) * 15
     the_person "Just to let you know, I wrote out the check this morning for this week's employee health program."
     $ mc.business.change_funds(-cost)
@@ -1272,7 +1272,7 @@ label HR_director_sexy_meeting_start_label(the_person):
 
     $ position_choice = HR_director_choose_position()
     if position_choice == "any":
-        the_person "Mmmm, I can do that! "
+        the_person "Mmmm, I can do that!"
         $ mc.change_arousal(20)
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(-5)
@@ -1314,7 +1314,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "[the_person.possessive_title] moves her clothes out of the way."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
             else:
-                "[the_person.possessive_title] begins to take off her clothes. "
+                "[the_person.possessive_title] begins to take off her clothes."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
             "When she finishes getting naked, she gives you a big smile."
         the_person "Oh my, fucking me on your desk? You are so naughty, [the_person.mc_title]!"
@@ -1368,7 +1368,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "[the_person.possessive_title] moves her clothes out of the way."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
             else:
-                "[the_person.possessive_title] begins to take off her clothes. "
+                "[the_person.possessive_title] begins to take off her clothes."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
             "When she finishes getting naked, she gives you a big smile."
         $ scene_manager.update_actor(the_person, position = "back_peek")

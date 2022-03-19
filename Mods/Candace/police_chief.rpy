@@ -156,10 +156,10 @@ label police_chief_flirt_response_mid(the_person):
     else:
         "[the_person.possessive_title] gives a subtle smile and nods her head."
         the_person "Thank you [the_person.mc_title]. I'm happy you like to see me in uniform."
-        the_person "How does it look when I'm walking away>"
+        the_person "How does it look when I'm walking away?"
         $ the_person.draw_person(position = "walking_away")
         $ mc.change_locked_clarity(10)
-        "She just keeps on walking, did you go to far?"
+        "She just keeps on walking, did you go too far?"
         mc.name "You have an amazing swag in your step, I wouldn't mind walking behind you."
         $ the_person.draw_person()
         "She turns around and smiles warmly."

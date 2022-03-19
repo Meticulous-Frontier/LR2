@@ -334,7 +334,7 @@ label ellie_sex_obedience_accept(the_person):
         if the_person.obedience > 130:
             the_person "Yes [the_person.mc_title], if that's what you want to do I'll give it a try."
         else:
-            the_person "I... Okay, if you really want to, lets give it a try."
+            the_person "I... Okay, if you really want to, let's give it a try."
     return
 
 label ellie_sex_gentle_reject(the_person):
@@ -1797,7 +1797,7 @@ label ellie_sleepover_herplace_response(the_person): #Spending the night at her 
     if the_person.sluttiness < 80:
         the_person "Mmm, that sounds great! Bring a toothbrush, you can spend the night."
     else:
-        the_person "You don't need the wine to seduce me. "
+        the_person "You don't need the wine to seduce me."
     return
 
 

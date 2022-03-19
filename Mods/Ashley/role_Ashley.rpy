@@ -764,7 +764,7 @@ label ashley_post_handjob_convo_label(the_person):
     $ the_person.draw_person()
     mc.name "Hey [the_person.title]..."
     the_person "Oh... haha, yeah, I figured something like this was coming... it's okay, I'll clean out my desk and be out before you know it..."
-    mc.name "Clean out your desk? I'm not firing you. Come on let's go get some coffee."
+    mc.name "Clean out your desk? I'm not firing you. Come on, let's go get some coffee."
     if the_person.should_wear_uniform():
         the_person "Oh, coffee? Ok, I'm going to change and we can go."
         $ the_person.apply_outfit(the_person.planned_outfit)
@@ -960,7 +960,7 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     mc.name "Hey girls, good to see you."
     "They are surprised to see you. Ashley blushes and looks down at her coffee as Stephanie responds."
     stephanie "Hey boss! Me and Ash are just having a cup of coffee before we go our separate ways. It's kind of become our little tradition every Sunday morning, since she moved in with me."
-    "She looks over at her sister and starts to tease her. "
+    "She looks over at her sister and starts to tease her."
     stephanie "I think she said something about hitting up the gym today... I think there's a guy she's trying to impress!"
     the_person "Oh my gosh Steph, stop it!"
     "[the_person.title] is blushing, and once in a while sneaks a peek up at you. Even though you've already discussed with her how you want things to be with her, it is cute to see her squirm a little."
@@ -1157,7 +1157,7 @@ label ashley_second_concert_date_label():
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     "When you arrive, you looked around for a minute, but don't see Ashley yet at your agreed on meeting place. You decide to give her a few minutes. You are just about to pull out your phone and text her when you see her approaching."
-    "She is wearing a sexy black dress, and your eyes are immediately drawn to it's curves. There's not a doubt in your mind that [the_person.title] has something planned for you this evening..."
+    "She is wearing a sexy black dress, and your eyes are immediately drawn to its curves. There's not a doubt in your mind that [the_person.title] has something planned for you this evening..."
     $ mc.change_locked_clarity(20)
     $ the_person.draw_person()
     ashley "Hey! My eyes are up here."
@@ -1279,7 +1279,7 @@ label ashley_second_concert_date_label():
             "Stop her":
                 mc.name "What are you doing? This is supposed to be a one way thing. I'll cum in your sister later."
                 the_person "You're serious? Why not do both?"
-                mc.name "I promised her I wouldn't go to far. You got your satisfaction, I'll get mine later."
+                mc.name "I promised her I wouldn't go too far. You got your satisfaction, I'll get mine later."
                 the_person "Geeze, okay. I was about to offer to drink your cum as thanks, but I guess you'd better save that load then champ."
                 "[the_person.possessive_title] pulls a couple wipes from her clutch and wipes herself clean."
             "Let her continue":
@@ -1386,7 +1386,7 @@ label ashley_second_concert_date_label():
     else:
         the_person "Hey sis! We had a great time, and don't worry, your boyfriend was a gentleman."
         stephanie "Ah, that's good."
-        the_person "I'm wore out. I think I'm going to go have a shower. You two try to keep it down so I can get some sleep tonight, okay?"
+        the_person "I'm worn out. I think I'm going to go have a shower. You two try to keep it down so I can get some sleep tonight, okay?"
         stephanie "No promises."
         $ scene_manager.remove_actor(the_person)
         "[the_person.title] disappears into the restroom, leaving you with [stephanie.title]."
@@ -2018,7 +2018,7 @@ label coffee_time_steph_gets_handsy_label():
                         $ mc.change_locked_clarity(20)
                         mc.name "So what are you thinking about getting done at the Spa? I hear they have really good service there."
                         "You keep the conversation going so Steph can concentrate on her work. You are starting to leak precum, making her handjob feel even better."
-                        the_person "Oh, ahh, well I want to get my nails done for sure... "
+                        the_person "Oh, ahh, well I want to get my nails done for sure..."
                         "[the_person.possessive_title] starts to explain. However, [stephanie.title] is looking around nervously and she is starting to notice."
                         the_person "You okay Steph? You seem preoccupied..."
                         "She startles and looks back at her sister."

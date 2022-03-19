@@ -167,7 +167,7 @@ label scene_SB_doggy_anal_dildo_dp_2(the_girl, the_location, the_object):
         $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 3))
     else:
         "[the_girl.possessive_title] reaches back with both hands and spreads her ass cheeks apart."
-        "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title]. "
+        "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title]."
         "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]."
         "[the_girl.possessive_title] whimpers, her body now pinned between your body and [the_object.name]. The vibrating dildo stimulates her pussy mercilessly."
         if the_girl.has_role(anal_fetish_role):
