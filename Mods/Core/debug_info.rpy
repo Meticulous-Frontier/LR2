@@ -130,3 +130,4 @@ init 2 python:
     # renpy.profile_screen("main_ui", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)
     # renpy.profile_screen("business_ui", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)
     # renpy.profile_screen("person_info_ui", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)
+    # renpy.profile_screen("enhanced_main_choice_display", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)
