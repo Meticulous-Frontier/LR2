@@ -34,20 +34,20 @@ init 5 python:
     infraction_token_small_image = im.Scale(Image(get_file_handle("infraction_token.png")), 18, 18)
     renpy.image("infraction_token_small", infraction_token_small_image)
 
-    red_heart_token_small_image = im.Scale(Image("gui/heart/red_heart.png"), 14, 12)
+    red_heart_token_small_image = im.Scale(Image(get_file_handle("red_heart.png")), 14, 12)
     renpy.image("red_heart_token_small", red_heart_token_small_image)
 
-    speech_bubble_small_image = im.Scale(Image("gui/speech_bubble.png"), 18, 18)
+    speech_bubble_small_image = im.Scale(Image(get_file_handle("speech_bubble.png")), 18, 18)
     renpy.image("speech_bubble_token_small", speech_bubble_small_image)
 
-    speech_bubble_exclamation_small_image = im.Scale(Image("gui/speech_bubble_exclamation.png"), 18, 18)
+    speech_bubble_exclamation_small_image = im.Scale(Image(get_file_handle("speech_bubble_exclamation.png")), 18, 18)
     renpy.image("speech_bubble_exclamation_token_small", speech_bubble_exclamation_small_image)
 
     vial_image = Image(get_file_handle("vial.png"))
     dna_image = Image(get_file_handle("dna.png"))
     question_image = Image(get_file_handle("question.png"))
     home_image = Image(get_file_handle("home_marker.png"))
-    padlock_image = Image(get_file_handle("padlock.png"))
+    #padlock_image = Image(get_file_handle("padlock.png"))
 
     under_construction_image = Image(get_file_handle("under_construction.png"))
 
