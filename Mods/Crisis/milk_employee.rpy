@@ -120,7 +120,7 @@ label milk_employee_crisis_label():
             the_person "Oh my god, yes that's it."
             "Her hand is running through your hair. It is a very intimate encounter to suckle from her like this."
         else:
-            "[the_person.possessive_title] milk starts to flow more freely as she lets down. You are able to spend a few seconds at a time sucking, swallow, then repeat."
+            "[the_person.possessive_title]'s milk starts to flow more freely as she lets down. You are able to spend a few seconds at a time sucking, swallow, then repeat."
             "Her milk is smooth, sweet, and creamy."
             $ the_person.change_arousal(15)
             $ mc.arousal += 10              #Fun for everyone
@@ -131,7 +131,7 @@ label milk_employee_crisis_label():
         "She holds one of the milk containers up as your begin to squeeze. Soon, droplets of milk are beginning to drip from her other breast."
         if the_person.lactation_sources > 2:
             the_person "Oh... oh that's so good..."
-            "Her other breast let's down and begins to spray milk into the bottle. With each squeeze it comes out forcefully, but never stops spraying."
+            "Her other breast lets down and begins to spray milk into the bottle. With each squeeze it comes out forcefully, but never stops spraying."
             "One hand continues to run through your hair, while her other hand holds the bottle. You look up and see her eyes are closed as she enjoys her milking."
             $ the_person.change_arousal(25)
             $ mc.arousal += 15

@@ -1605,7 +1605,7 @@ label erica_money_problems_yoga_start_label(the_person):
     mc.name "Not here. It would be once a week, in the morning, on a day of your choosing... At the business I run."
     the_person "At... your company?"
     mc.name "Yeah. We've recently been running some promotions for employees, encouraging them to stay fit, and eat right. What better way to encourage them to do that than with a personal yoga instructor?"
-    the_person "That would be... incredible! I didn't realize that you took fitness so seriously! I mean... I know YOU do... "
+    the_person "That would be... incredible! I didn't realize that you took fitness so seriously! I mean... I know YOU do..."
     "She glances down at your fit chest before she continues."
     the_person "But to make it a company policy... That's a great program!"
     mc.name "I've been working with my HR director. I asked her for help coming up with something you do at the company, and she helped me come up with the whole thing."
@@ -2581,7 +2581,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
     if (erica.sluttiness > 20 and lily.sluttiness > 20):
         "The girls seem relaxed. The pictures are coming out natural and they look great together."
         $ mc.change_locked_clarity(10)
-        mc.name "Alright lets do another set, these are great."
+        mc.name "Alright, let's do another set, these are great."
         $ current_pos = get_random_from_list(erica_insta_pose_pairs)
         $ erica_insta_pose_pairs.remove(current_pos)
         $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
@@ -2862,7 +2862,7 @@ label erica_lily_post_insta_morning_label():
         $ the_person.draw_person(position = "cowgirl")
         "She climbs on top of you, and with one hand she points your erection up at her puckered hole."
         "She lowers herself gently, but easily takes your hardness into her well trained back passage."
-        the_person "Ahhh! Oh fuck its so big..."
+        the_person "Ahhh! Oh fuck it's so big..."
         "It takes her a moment, but soon [the_person.possessive_title] starts to rock her hips. Time to fuck her silly."
         call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), allow_continue = False) from _anal_fetish_erica_morning_wakeup_01
         $ the_person.change_slut(2, 100)

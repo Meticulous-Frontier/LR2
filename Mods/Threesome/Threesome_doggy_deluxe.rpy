@@ -148,7 +148,7 @@ label intro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
         $ the_girl_2.break_taboo("vaginal_sex")
         $ the_girl_2.break_taboo("condomless_sex")
         the_girl_2 "I think I'm ready for you... go ahead and push it in!"
-    "You don't need any encouragement! "
+    "You don't need any encouragement!"
     return
 
 

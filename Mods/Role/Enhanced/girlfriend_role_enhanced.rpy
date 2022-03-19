@@ -546,7 +546,7 @@ label girlfriend_underwear_shopping_label(the_person):
         "You head to the front of the store and walk out without buying anything."
     else:
         mc.name "That's it. That is exactly what I want."
-        the_person "Ahh! Okay! Let me change out of it real quick and lets buy it."
+        the_person "Ahh! Okay! Let me change out of it real quick and let's buy it."
         $ clear_scene()
         "[the_person.possessive_title] retreats into the dressing room for a minute."
         "Soon, she emerges, holding the items you've decided to purchase."

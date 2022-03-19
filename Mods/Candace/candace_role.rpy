@@ -617,7 +617,7 @@ label candace_convince_to_quit_label(the_person):
     mc.name "Then why don't you?"
     the_person "I'm... I'm so scared! [ex_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
     the_person "He says it's illegal! That I'll go to jail for being a prostitute!"
-    mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with a similar situation... lets say she can handle herself."
+    mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with a similar situation... let's say she can handle herself."
     mc.name "She can help you. Take a leap of faith. You can trust me."
     "She thinks about it for a bit."
     "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
@@ -648,7 +648,7 @@ label candace_convince_to_quit_label(the_person):
     the_person "Hi! You can call me [the_person.name]."
     salon_manager "You know, I used to date [ex_name] too!"
     the_person "Right... used to... kind of weird to think about, this is all happening so fast!"
-    salon_manager "Don't worry. First thing's first! Do you have your phone handy? Lets take a picture together!"
+    salon_manager "Don't worry. First thing's first! Do you have your phone handy? Let's take a picture together!"
     the_person "Okay! I love selfies."
     "[the_person.title] and [salon_manager.possessive_title] lean together and take a picture."
     salon_manager "There we go! That will be a great picture to send with your break up text..."
@@ -826,7 +826,7 @@ label candace_topless_at_mall_label(the_person):
         "You start to wonder if she is going to be okay. Whatever happened that turned her into a bimbo, she seems to be barely functional."
         mc.name "You stay out of trouble, okay?"
         $ scene_manager.update_actor(the_person, emotion = "happy", position = "stand3")
-        "[the_person.title] let's go of you and gives you a big smile."
+        "[the_person.title] lets go of you and gives you a big smile."
         the_person "Okay!"
         mc.name "I'll see you at work."
         the_person "Yes Sir!"
@@ -1377,7 +1377,7 @@ label candace_meet_doctor_candace_label():
     python:
         the_person = candace
 
-    "It's been about a week since you cured [the_person.title] of her bimboism... "
+    "It's been about a week since you cured [the_person.title] of her bimboism..."
     "Well, mostly anyway. Since that time, talking with her is like talking to an entirely different person... But also the same."
     "She still smells the same, she still twirls her hair around her finger the same way, she still smiles at you the same way."
     "Yet, every time she opens her mouth and speaks, she is completely different."
@@ -1548,7 +1548,7 @@ label candace_meet_doctor_candace_label():
                 the_person "Are we, umm... We doing my place or yours tonight?"
                 mc.name "Honestly, I'm not sure if I'll be able to tonight, but I'll let you know."
                 the_person "Mmm... Okay... You go ahead... I think I would just like to bask a little..."
-                "You consider for a moment getting a nice couch for your office... "
+                "You consider for a moment getting a nice couch for your office..."
                 "But then whenever you call a girl in they'd probably assume you were getting ready to make a cheap porno movie. Better not."
                 mc.name "Rest up, I'm going to get back to work."
                 "You leave your office. You feel great about how things have progressed with [the_person.possessive_title]."

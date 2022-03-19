@@ -39,7 +39,7 @@ label mom_outfit_help_crisis_label_enhanced():
 
     the_person "I've got a meeting with an important client tomorrow and I don't know what I should wear."
     the_person "Could you give me your opinion?"
-    mc.name "Of course, lets take a look!"
+    mc.name "Of course, let's take a look!"
     python:
         builder = WardrobeBuilder(the_person)
         outfit_slut_points = __builtin__.min(__builtin__.int(the_person.effective_sluttiness() / 8), 12)

@@ -147,7 +147,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
             "After taking a moment appraising [the_girl.possessive_title]'s buttocks, you decide to get back to the act."
             "With gentle pressure, you slowly fill her ass with your erection again. [the_girl.possessive_title] groans as you resume your thrusting."
         "Shove it in deep":
-            "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title]. "
+            "You decide with her cheeks spread wide to see how deep you can get yourself into [the_girl.possessive_title]."
             "With her hands busy, she has no way of holding up your weight as you push yourself forward and then down on top of her, your full body weight pushing her prone down onto the [the_object.name]."
             "[the_girl.possessive_title] whimpers, her body now pinned between your body and [the_object.name]."
             if the_girl.has_role(anal_fetish_role):
@@ -200,6 +200,6 @@ label transition_anal_doggy_to_doggy_taboo_break_label(the_girl, the_location, t
         the_girl "Oh god yes... keep sliding that monster into me..."
         "You ram your whole length into her wet pussy and start pounding her."
     else:
-        the_girl "Oh god... take it slow... "
+        the_girl "Oh god... take it slow..."
         "You give her short thrusts, each time going a little bit deeper. Soon you're working your full length in and out of her wet hole."
     return

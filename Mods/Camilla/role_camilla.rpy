@@ -300,7 +300,7 @@ label camilla_get_a_drink_label(the_person):
             call camilla_bathroom_blowjob_label(the_person) from _camilla_first_blowjob_pics_01
         else:
             the_person "No dancing tonight?"
-            mc.name "No, sometimes it is nice to just relax and have drink."
+            mc.name "No, sometimes it is nice to just relax and have a drink."
             the_person "Yeah, I agree."
             "You chat with [the_person.possessive_title] for a bit."
             "There is definitely some sexual tension in the air between you two, but she knows she can talk to you about it when she is ready."
@@ -632,9 +632,9 @@ label camilla_bathroom_blowjob_label(the_person):
     call get_fucked(the_person, start_position = blowjob, start_object = make_sink(), private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_camilla_sex_description_CSH010
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
-        "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
+        the_person "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
     else:
-        "Wow... that was hot!"
+        the_person "Wow... that was hot!"
 
     if the_person.has_mouth_cum():
         "[the_person.possessive_title] looks up at you. She couldn't quite swallow all your cum, some of it is slowly dripping down the sides of her mouth."
@@ -860,7 +860,7 @@ label camilla_dancing_sex_label(the_person):
         the_person "Here we go! Get lots of good pics!"
         call strip_tease(the_person, for_pay = False, skip_intro = True) from _CS_free_strip_scene_camilla_021
         "You got lots of pics of her strip tease. You take a few more as she saunters over to you."
-        the_person "Come on, lets fuck!"
+        the_person "Come on, let's fuck!"
         call fuck_person(the_person, start_object = make_sink(), private = True) from _call_casual_sex_mod_camilla_022
         "As you finish up, you make sure to take some pictures of the aftermath. You notice [the_person.possessive_title] is touching herself."
         the_person "Oh god, daddy is fuck me so rough tonight when he reclaims me tonight... I'm gonna be so sore. I can't wait!"
@@ -1257,7 +1257,7 @@ label camilla_lingerie_help_label(the_person):  #40
         "She looks disappointed, but also relieved."
         the_person "Okay. I appreciate the thought."
     $ camilla_alexia_boudoir_intro_setup()
-    "You snap a couple more photos. Just when you think you are finishing up, [the_person.title] gets down her knees slides over to you."
+    "You snap a couple more photos. Just when you think you are finishing up, [the_person.title] gets down on her knees and slides over to you."
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] grabs your zipper and starts to pull it down. A couple quick motions later, and your cock is out and inches from her face."
     the_person "Hey, keep taking pictures!"

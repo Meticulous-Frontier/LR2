@@ -172,7 +172,7 @@ label sakari_coffee_break_label(the_person):
     "You walk back to the clothing store, drinks in hand."
     $ the_person.draw_person()
     the_person "Ah, good timing. I just finished with this task."
-    the_person "I have a small office, lets sit in there for a bit."
+    the_person "I have a small office, let's sit in there for a bit."
     mc.name "Sounds good. Lead the way!"
     $ the_person.draw_person(position = "walking_away")
     "[the_person.title] leads you to the back of the store and into a small office."
@@ -185,7 +185,7 @@ label sakari_coffee_break_label(the_person):
     the_person "I have an illness called myeloma. It is a type of recurring blood cancer."
     the_person "The prognosis is terminal, and unfortunately I have entered the final stage of the illness."
     mc.name "Ah [the_person.title]. I'm so sorry..."
-    the_person "There ar many experimental treatments... and unfortunately they have all failed."
+    the_person "There are many experimental treatments... and unfortunately they have all failed."
     the_person "I recently decided to go off all treatments. I'm feeling much better, but it will only be a short term thing."
     mc.name "Ah, so that's why you have been back at the store a bit."
     the_person "Yes. I want to leave things ready... for [kaya.name]."

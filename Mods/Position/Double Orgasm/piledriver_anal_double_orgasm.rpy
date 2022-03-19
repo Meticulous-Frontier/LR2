@@ -22,7 +22,7 @@ label piledriver_anal_double_orgasm(the_girl, the_location, the_object):
         the_girl "Wait! Oh god leave it just a little longer..."
         "You can feel her tight back passage quivering around you as she has little aftershocks from her orgasm. When they stop, you slowly pull out."
         if mc.condom:
-            "Your condom is filled and bulging on one side. [the_girl.title] is to wore out to do anything with it."
+            "Your condom is filled and bulging on one side. [the_girl.title] is too worn out to do anything with it."
             "You tie the end in a knot and pull it off, throwing it away while she recovers."
         else:
             "She is left on her back, holding her own ankles up by her head, trying to catch her breath, as your cum drips out of her gaping asshole."

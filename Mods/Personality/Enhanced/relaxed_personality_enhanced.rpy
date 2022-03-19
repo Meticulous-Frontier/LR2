@@ -17,7 +17,7 @@ label relaxed_sleepover_herplace_response(the_person): #Spending the night at he
     if the_person.sluttiness < 80:
         the_person "Mmm, that sounds great! Bring a toothbrush, you can spend the night."
     else:
-        the_person "You don't need the wine to seduce me. "
+        the_person "You don't need the wine to seduce me."
     return
 
 

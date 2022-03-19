@@ -1043,7 +1043,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
         "Fuck Her (Keep going)":
             "You can't say no to her. You grab her and start to make out again. Tongues meet and the urgency returns immediately."
         "Call it a night":
-            mc.name "I believe you, but my gut just keeps telling me this isn't the right time... lets put this on pause, okay?"
+            mc.name "I believe you, but my gut just keeps telling me this isn't the right time... let's put this on pause, okay?"
             mc.name "I'll come back in the morning, I'll still help you move. I don't want to stop seeing you, but I don't think I'm quite ready for this."
             the_person "Okay... I understand..."
             $ the_person.change_happiness(-5)
@@ -1255,7 +1255,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     $ mc.change_location(sakari.home)
     $ mc.location.show_background()
     $ scene_manager.update_actor(the_person, position = "walking_away")
-    "Soon you arrive. [the_person.possessive_title] goes to the front door and let's herself in. You follow closely behind her."
+    "Soon you arrive. [the_person.possessive_title] goes to the front door and lets herself in. You follow closely behind her."
     the_person "{=kaya_lang}Whaea! Kei konei ahau!{/=kaya_lang}(?????)"
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     $ scene_manager.add_actor(sakari, display_transform = character_center_flipped)

@@ -112,7 +112,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
             "With your erection buried deep in her rump, you take both hands and knead her ass cheeks."
             mc.name "[the_girl.title], your ass is so tight, I can't believe you let me sodomize you like this."
             if the_girl.get_opinion_score("being submissive") > 0 or the_girl.obedience > 130:
-                "[the_girl.possessive_title] trembles at your words and touch. "
+                "[the_girl.possessive_title] trembles at your words and touch."
                 "You pull her ass cheeks apart and revel in her ultimate submission, your cock in her forbidden hole."
                 the_girl "I couldn't stop you from fucking me... any way you want... even if I wanted to..."
                 "You reach forward and run a hand through her hair. You knead her scalp for a few seconds, then grasp her hair and pull it towards you."
