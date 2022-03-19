@@ -67,6 +67,9 @@ init 2 python:
 
 
 init -1 python:
+    def get_shop_investment_rate():
+        return starbuck.event_triggers_dict.get("shop_investment_rate", 1)
+
     def starbuck_introduction_requirement(the_person):
         if starbuck.location == sex_store:    # only trigger event when starbuck is there
             return True
@@ -172,7 +175,7 @@ init -1 python:
         if not the_person.is_at_work():
             return False
         if sex_shop_stage() > 0:
-            if the_person.event_triggers_dict.get("shop_investment_rate", 1) == 1.0:
+            if get_shop_investment_rate() == 1.0:
                 return True
         return False
 
@@ -180,7 +183,7 @@ init -1 python:
         if not the_person.is_at_work():
             return False
         if sex_shop_stage() > 0:
-            if the_person.event_triggers_dict.get("shop_investment_rate", 1) == 2.0:
+            if get_shop_investment_rate() == 2.0:
                 return True
         return False
 
@@ -188,7 +191,7 @@ init -1 python:
         if not the_person.is_at_work():
             return False
         if sex_shop_stage() > 1:
-            if the_person.event_triggers_dict.get("shop_investment_rate", 1) == 3.0:
+            if get_shop_investment_rate() == 3.0:
                 if starbuck.sluttiness >= 60:
                     if starbuck.love >= 50:
                         return True
@@ -202,7 +205,7 @@ init -1 python:
         if not the_person.is_at_work():
             return False
         if sex_shop_stage() > 1:
-            if the_person.event_triggers_dict.get("shop_investment_rate", 1) == 4.0:
+            if get_shop_investment_rate() == 4.0:
                 if starbuck.sluttiness >= 70:
                     if starbuck.love >= 60:
                         return True
@@ -216,7 +219,7 @@ init -1 python:
         if not the_person.is_at_work():
             return False
         if sex_shop_stage() > 2:
-            if the_person.event_triggers_dict.get("shop_investment_rate", 1) == 5.0:
+            if get_shop_investment_rate() == 5.0:
                 if starbuck.sluttiness >= 90:
                     if starbuck.love >= 70:
                         return True
@@ -227,7 +230,7 @@ init -1 python:
         return False
 
     def starbuck_spend_the_night_requirement(the_person):
-        if the_person.event_triggers_dict.get("shop_investment_rate", 1) == 6.0:
+        if get_shop_investment_rate() == 6.0:
             if time_of_day < 4:
                 return "Only at night"
             else:
@@ -555,7 +558,7 @@ label starbuck_sex_store_investment_two_label(the_person):
     "[the_person.possessive_title] clears her throat."
     the_person "Well, the way I added it up, to expand beyond just basic stock, and include a variety of novelty items, edibles, and accessories would be about $5000."
     "You consider the amount. It is steep, to be sure, but it also might be a good investment."
-    if starbuck.event_triggers_dict["shop_investment_rate"] == 3.0 :
+    if get_shop_investment_rate() == 3.0:
         "It might also open up new opportunities with [the_person.possessive_title]. You wouldn't mind a few more excuses to get intimate with her..."
     "Do you want to invest?"
     menu:
@@ -604,7 +607,7 @@ label starbuck_sex_store_investment_three_label(the_person):
         "Invest ($15000)":
             mc.name "How about this. You've done an incredible job managing this place. How about if I front the money, and from now on we're partners?"
             the_person "Wow... partners?... I mean... you're talking business partners, right?"
-            if starbuck.event_triggers_dict.get("shop_investment_rate", 1) > 3.0:
+            if get_shop_investment_rate() > 3.0:
                 mc.name "[the_person.title], I'd be lying if I said I don't thoroughly enjoy the time we've spent together. So yeah, we would be business partners, but I'd also love the excuse to spend more time with you."
                 $ the_person.draw_person(emotion = "happy")
                 if starbuck.love > 60:
@@ -1813,15 +1816,15 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
             mc.name "I'm sorry, I can't promise something like that, my business keeps me busy."
             the_person "Damn. A girl can dream though."
             $ the_person.change_love(amount = 3, max_modified_to = 30)
-        "Dress up for you" if the_person.event_triggers_dict.get("shop_investment_rate", 1) >= 2.0:
+        "Dress up for you" if get_shop_investment_rate() >= 2.0:
             call starbuck_replay_dressup_label(the_person) from _call_starbuck_replay_SBS132
-        # "Play with a dildo for you" if the_person.event_triggers_dict.get("shop_investment_rate", 1) >= 3.0:   #TODO these options.
+        # "Play with a dildo for you" if get_shop_investment_rate() >= 3.0:   #TODO these options.
         #     pass
-        # "Try more edible underwear" if the_person.event_triggers_dict.get("shop_investment_rate", 1) >= 4.0:
+        # "Try more edible underwear" if get_shop_investment_rate() >= 4.0:
         #     pass
-        # "Use whip and strap on" if the_person.event_triggers_dict.get("shop_investment_rate", 1) >= 5.0:
+        # "Use whip and strap on" if get_shop_investment_rate() >= 5.0:
         #     pass
-        # "Anal on the swingset" if the_person.event_triggers_dict.get("shop_investment_rate", 1) >= 6.0:
+        # "Anal on the swingset" if get_shop_investment_rate() >= 6.0:
     "[the_person.title] lets out a big yawn."
     the_person "You really wore me out! Good night [the_person.mc_title]."
     "She walks you to the door of the business and you walk out together, before going your separate ways."
@@ -2741,7 +2744,7 @@ label starbuck_intro():
             the_person "I was just thinking about you. Anything I can help you with?"
         else:
             the_person "Is there anything I can help you with?"
-    elif sex_shop_stage() >= 2 and the_person.event_triggers_dict.get("shop_investment_rate", 1) >= 3.0 and candace_get_has_gone_clothes_shopping() and candace_is_bimbo() and the_person.event_triggers_dict.get("Candi_event_start", False) == False:
+    elif sex_shop_stage() >= 2 and get_shop_investment_rate() >= 3.0 and candace_get_has_gone_clothes_shopping() and candace_is_bimbo() and the_person.event_triggers_dict.get("Candi_event_start", False) == False:
         if candace.sluttiness >= 60: #Separate candace slut check since I never check to make sure she exists in globals
             call starbuck_cargo_shipment_label(the_person) from _begin_candi_duo_event_intro_01
         else:

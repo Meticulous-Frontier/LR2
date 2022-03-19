@@ -57,7 +57,7 @@ init -1 python:
             pass
         elif person is cousin and False:
             pass
-        elif person is starbuck and starbuck.shop_investment_rate >= 6.0:
+        elif person is starbuck and get_shop_investment_rate() >= 6.0:
             mc.business.mandatory_crises_list.append(anal_fetish_starbuck_intro)
             return True
         elif person is stephanie:
