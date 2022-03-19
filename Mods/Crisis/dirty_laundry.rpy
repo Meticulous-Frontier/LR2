@@ -110,7 +110,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     "Her eyes go back down to your crotch as you continue to stroke yourself."
                     mc.name "You should do it too, we all need to get off once a while!"
                     "She looks at you, still a bit conflicted."
-                    the_person "I could... I mean... you aren't going to tell anyone about this are you?"
+                    the_person "I could... I mean... you aren't going to tell anyone about this, are you?"
                     mc.name "Of course not."
                     $ the_person.draw_person(position = "kneeling1")
                     "[the_person.possessive_title] begins to rub her crotch. She gets down on her knees and continues to watch as you stroke yourself."
