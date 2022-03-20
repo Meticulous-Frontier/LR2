@@ -34,7 +34,7 @@ init 2 python:
         if age is None: # use linear decreasing distribution in age range (more young than old)
             max_age = age_ceiling or 55
             min_age = age_floor or 18
-            age = int(math.floor(abs(renpy.random.random() - renpy.random.random()) * (1 + max_age - min_age) + min_age))
+            age = int(floor(abs(renpy.random.random() - renpy.random.random()) * (1 + max_age - min_age) + min_age))
 
         if relationship is None:
             if age < 21:
