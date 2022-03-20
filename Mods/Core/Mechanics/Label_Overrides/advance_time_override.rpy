@@ -371,15 +371,9 @@ label advance_time_people_run_turn_label():
     return
 
 label advance_time_people_run_day_label():
+    # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
     python:
-        # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
-        #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
         advance_time_run_day(people_to_process)
-        # we need to clear memory at least once a day (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
-        renpy.free_memory()
-        # $ gc.collect()    don't force garbage collector, let internals handle this
-        #$ renpy.profile_memory(.5, 1024)
-        renpy.block_rollback()
 
         # update party schedules once a week (sunday night)
         if day%7 == 6:
@@ -387,6 +381,13 @@ label advance_time_people_run_day_label():
     return
 
 label advance_time_end_of_day_label():
+    python:
+        # we need to clear memory at least once a day (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
+        renpy.free_memory()
+        # $ gc.collect()    don't force garbage collector, let internals handle this
+        #$ renpy.profile_memory(.5, 1024)
+        renpy.block_rollback()
+
     # "advance_time_end_of_day_label - timeslot [time_of_day]" # DEBUG
     call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
 
