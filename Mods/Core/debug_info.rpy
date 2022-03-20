@@ -44,9 +44,10 @@ init 2 python:
             self.cache_size = 0
 
         def update(self):
-            self.total_zip_size = get_size(zip_manager)
-            self.total_zip_items = zip_manager.size()
-            self.zip_utilization = zip_manager.utilization()
+            if "zip_manager" in globals():
+                self.total_zip_size = get_size(zip_manager)
+                self.total_zip_items = zip_manager.size()
+                self.zip_utilization = zip_manager.utilization()
             self.texture_size, self.texture_count = renpy.exports.get_texture_size()
             self.cache_size = renpy.display.im.cache.get_total_size()
 
