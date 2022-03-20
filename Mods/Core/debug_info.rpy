@@ -29,7 +29,6 @@ init 2:
                 label ""
                 label get_debug_log()
 
-
 init 2 python:
     import sys
     import collections
@@ -45,6 +44,7 @@ init 2 python:
 
         def update(self):
             if "zip_manager" in globals():
+                global zip_manager
                 self.total_zip_size = get_size(zip_manager)
                 self.total_zip_items = zip_manager.size()
                 self.zip_utilization = zip_manager.utilization()
@@ -68,10 +68,10 @@ init 2 python:
         while not hasattr(renpy.display.draw, "get_texture_size"):
             time.sleep(2)
 
-        while True:
+        while 1:
             if debug_log_enabled:
                 system_info.update()
-            time.sleep(.33)
+            time.sleep(.5)
         return
 
     debug_log = LRUCacheDict(8, expiration = 0)

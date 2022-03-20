@@ -43,12 +43,11 @@ init -2 python:
 # TODO: Add difficulty configuration
 label SB_mod_options_menu():
     python:
-        while True:
-            action_mod_choice = SB_mod_change_action_mod_settings()
-            if action_mod_choice == "Back":
-                renpy.return_statement()
-            else:
-                globals()[action_mod_choice]()
+        action_mod_choice = SB_mod_change_action_mod_settings()
+        if action_mod_choice == "Back":
+            renpy.return_statement()
+        globals()[action_mod_choice]()
+    jump SB_mod_options_menu
 
 label initialize_starbuck_configuration_values():
     $ store.shop_difficulty_value = 2.0

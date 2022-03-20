@@ -196,10 +196,10 @@ label show_action_mod_settings():
 
 label show_action_mod_configuration():
     python:
-        while True:
-            action_mod_choice =  build_action_mod_configuration_menu()
+        action_mod_choice =  build_action_mod_configuration_menu()
 
-            if action_mod_choice == "Back":
-                renpy.return_statement()
-            else:
-                action_mod_choice.show_options()
+        if action_mod_choice == "Back":
+            renpy.return_statement()
+        else:
+            action_mod_choice.show_options()
+    jump show_action_mod_configuration
