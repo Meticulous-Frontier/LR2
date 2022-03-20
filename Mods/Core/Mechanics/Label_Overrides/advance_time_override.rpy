@@ -2,8 +2,6 @@
 # it adds a increased chance for a crisis to occur when more time passed without a crisis
 # it adds a way of preventing the same crisis popping up over and over, whilst others never get triggered by remembering a set of occurred events
 init -1 python:
-    import gc
-
     def advance_time_next_requirement():
         return True
 
@@ -264,6 +262,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
 
     python:
         #renpy.say(None, "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
+        renpy.suspend_rollback(True)
         count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
@@ -289,6 +288,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         c = None
         people_to_process = []
         person = None
+        renpy.suspend_rollback(False)
 
     if mandatory_advance_time and not time_of_day == 4: #If a crisis has told us to advance time after it we do so (not when night to prevent spending night at current location).
         call advance_time from _call_advance_time_advance_time_enhanced
@@ -384,7 +384,6 @@ label advance_time_end_of_day_label():
     python:
         # we need to clear memory at least once a day (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
         renpy.free_memory()
-        # $ gc.collect()    don't force garbage collector, let internals handle this
         #$ renpy.profile_memory(.5, 1024)
         renpy.block_rollback()
 
