@@ -16,8 +16,8 @@ init 5 python:
     arousal_token_small_image = im.Scale(Image(get_file_handle("arousal_token.png")), 18, 18)
     renpy.image("arousal_token_small", arousal_token_small_image)
 
-    red_heart_small_image = im.Scale(Image(get_file_handle("red_heart.png")), 18, 18)
-    renpy.image("red_heart_token_small", red_heart_small_image)
+    red_heart_token_small_image = im.Scale(Image(get_file_handle("heart/red_heart.png")), 14, 12)
+    renpy.image("red_heart_token_small", red_heart_token_small_image)
 
     happy_small_image = im.Scale(Image(get_file_handle("happy.png")), 18, 18)
     renpy.image("happy_token_small", happy_small_image)
@@ -33,9 +33,6 @@ init 5 python:
 
     infraction_token_small_image = im.Scale(Image(get_file_handle("infraction_token.png")), 18, 18)
     renpy.image("infraction_token_small", infraction_token_small_image)
-
-    red_heart_token_small_image = im.Scale(Image(get_file_handle("red_heart.png")), 14, 12)
-    renpy.image("red_heart_token_small", red_heart_token_small_image)
 
     speech_bubble_small_image = im.Scale(Image(get_file_handle("speech_bubble.png")), 18, 18)
     renpy.image("speech_bubble_token_small", speech_bubble_small_image)
