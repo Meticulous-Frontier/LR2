@@ -117,7 +117,7 @@ init 5 python:
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule(job.job_location, the_times = [4])
             person.add_role(job.job_role)
-            stripclub_strippers.add(person)
+            stripclub_strippers.append(person)
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
             person.add_job(job)
