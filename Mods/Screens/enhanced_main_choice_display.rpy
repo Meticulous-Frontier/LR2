@@ -190,7 +190,7 @@ init 2:
                             ysize 588
                             vbox:
                                 for item in [x for x in menu_items[count][1:] if x.display]:
-                                    textbutton "[item.title]":
+                                    textbutton "[item.title!i]":
                                         xysize (360, 80)
                                         align (0.5, 0.5)
                                         style "textbutton_style"
