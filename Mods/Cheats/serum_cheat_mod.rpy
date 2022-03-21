@@ -50,7 +50,7 @@ screen serum_cheat_menu():
                                     frame:
                                         background "#000000"
                                         xsize 365
-                                        text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
+                                        text "Tier [dt]" style "serum_text_style_header" xalign 0.5
 
                                     for trait in sorted_traits:
                                         if trait.tier == dt and not trait.researched and trait.has_required():
@@ -84,7 +84,7 @@ screen serum_cheat_menu():
                                     frame:
                                         background "#000000"
                                         xsize 395
-                                        text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
+                                        text "Tier [dt]" style "serum_text_style_header" xalign 0.5
 
                                 for trait in sorted_traits:
                                     if trait.tier == dt and trait.researched:
