@@ -31,7 +31,7 @@ label intro_standing_oral(the_girl, the_location, the_object):
         else:
             the_girl "I have something I want you to do."
             mc.name "Oh? What might that be?"
-        if (the_girl.get_opinion_score("getting head") > 0 and the_girl.get_opinion_status("getting head")):
+        if (the_girl.get_opinion_score("getting head") > 0 and the_girl.get_known_opinion_score("getting head")):
             the_girl "You know what I like."
             "[the_girl.title] winks at you as she gently but firmly pushes your shoulders down until you are kneeling before her."
         else:
@@ -220,7 +220,7 @@ label transition_default_standing_oral(the_girl, the_location, the_object):
         else:
             the_girl "I have something I want you to do."
             mc.name "Oh? What might that be?"
-        if (the_girl.get_opinion_score("getting head") > 0 and the_girl.get_opinion_status("getting head")):
+        if (the_girl.get_opinion_score("getting head") > 0 and the_girl.get_known_opinion_score("getting head")):
             the_girl "You know what I like."
             "[the_girl.title] winks at you as she gently but firmly pushes your shoulders down until you are kneeling before her."
         else:
