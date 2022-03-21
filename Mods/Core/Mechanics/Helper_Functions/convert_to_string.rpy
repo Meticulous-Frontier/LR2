@@ -48,6 +48,10 @@ init 0 python:
         return str(__builtin__.int(arousal)) + "/"+ str(__builtin__.int(max_arousal)) + " {image=arousal_token_small}"
 
     @renpy.pure
+    def get_locked_clarity_with_token_string(locked_clarity):
+        return str(__builtin__.int(locked_clarity)) + " {image=lust_eye_token_small}"
+
+    @renpy.pure
     def get_attention_string(attention, max_attention):
         percent = attention * 1.0 / max_attention
         color_string = "{color=#43B197}"

@@ -1259,7 +1259,7 @@ init -1 python:
     Person.decrease_work_skill = decrease_work_skill
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
-    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, max_slut = None, max_love = None, energy = None, add_to_log = True):
+    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, max_slut = None, max_love = None, energy = None, novelty = None, add_to_log = True):
         message = []
         if not happiness is None:
             self.change_happiness(happiness, add_to_log = False)
@@ -1268,8 +1268,8 @@ init -1 python:
             self.change_obedience(obedience, add_to_log = False)
             message.append(("+" if obedience > 0 else "") + str(obedience) +" {image=padlock_token_small}")
         if not arousal is None:
-            message.append(("+" if arousal > 0 else "") + str(arousal) + " {image=arousal_token_small}")
             self.change_arousal(arousal, add_to_log = False)
+            message.append(("+" if arousal > 0 else "") + str(arousal) + " {image=arousal_token_small}")
         if not love is None:
             amount = self.change_love(love, max_love, add_to_log = False)
             if amount and amount != 0:
@@ -1279,8 +1279,13 @@ init -1 python:
             if amount and amount != 0:
                 message.append(("+" if amount > 0 else "") + str(amount) + " {image=underwear_token_small}")
         if not energy is None:
-            self.change_energy(energy, add_to_log = False)
-            message.append(("+" if energy > 0 else "") + str(energy) + " {image=energy_token_small}")
+            amount = self.change_energy(energy, add_to_log = False)
+            if amount and amount != 0:
+                message.append(("+" if amount > 0 else "") + str(amount) + " {image=energy_token_small}")
+        if not novelty is None:
+            amount = self.change_novelty(novelty, add_to_log = False)
+            if amount and amount != 0:
+                message.append(("+" if amount > 0 else "") + str(amount) + " Novelty")
         if add_to_log and message:
             display_name = self.create_formatted_title("???")
             if self.title:

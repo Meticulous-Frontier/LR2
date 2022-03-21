@@ -39,3 +39,20 @@ init -1 python:
         return change_locked_clarity_wrapper
 
     MainCharacter.change_locked_clarity = main_character_change_locked_clarity_extended(MainCharacter.change_locked_clarity)
+
+    def main_character_change_stats(self, arousal = None, locked_clarity = None, energy = None, add_to_log = True):
+        message = []
+        if not arousal is None:
+            self.change_arousal(arousal)
+            message.append(("+" if arousal > 0 else "") + str(arousal) + " {image=arousal_token_small}")
+        if not locked_clarity is None:
+            self.change_locked_clarity(locked_clarity, add_to_log = False)
+            message.append(("+" if locked_clarity > 0 else "") + str(locked_clarity) + " {image=lust_eye_token_small}")
+        if not energy is None:
+            amount = self.change_energy(energy, add_to_log = False)
+            if amount and amount != 0:
+                message.append(("+" if amount > 0 else "") + str(amount) + " {image=energy_token_small}")
+        if add_to_log and message:
+            mc.log_event("You: " + " ".join(message), "float_text_yellow")
+
+    MainCharacter.change_stats = main_character_change_stats

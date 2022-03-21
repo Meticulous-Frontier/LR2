@@ -15,7 +15,7 @@ init 2:
             arousal_info = get_arousal_with_token_string(mc.arousal, mc.max_arousal)
             energy_info = get_energy_string(mc.energy, mc.max_energy)
             clarity_info = str(__builtin__.int(mc.free_clarity))
-            locked_clarity_info = str(__builtin__.int(mc.locked_clarity))
+            locked_clarity_info = get_locked_clarity_with_token_string(mc.locked_clarity)
             attention_info = get_attention_string(mc.business.attention, mc.business.max_attention)
 
         frame:
