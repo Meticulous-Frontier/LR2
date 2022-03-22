@@ -33,7 +33,7 @@ init -1 python:
         amount = __builtin__.int(amount)
         self.locked_clarity += amount
 
-        arousal = __builtin__.int(amount / 5.0)
+        arousal = __builtin__.int(amount * .2)
         self.arousal += arousal
 
         if add_to_log and amount != 0:
