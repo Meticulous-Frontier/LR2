@@ -1840,6 +1840,10 @@ label erica_yoga_loop_label(the_person, yoga_assistant):
     return erica_num_watched
 
 label erica_weekly_yoga_label(the_person):
+    if not erica.is_available:
+        call erica_no_yoga_session_this_week() from _call_erica_no_yoga_session_this_week_1
+        return
+
     python: # setup yoga class
         scene_manager = Scene() # only use one scene manager per event
 
@@ -1854,11 +1858,19 @@ label erica_weekly_yoga_label(the_person):
         "The girls are all naked, as has been previously decided. Nude yoga is probably your favorite spectator sport right now."
 
     $ scene_manager.add_actor(the_person)
-    $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
-    "At the front, you see [the_person.possessive_title] doing some light stretching. She has a speaker out, playing some upbeat music."
-    "Next to her you see [yoga_assistant.title]. They have become good friends and are chatting idly as you walk up."
+    if not yoga_assistant.available:
+        mc.name "Hey [the_person.title], I see [yoga_assistant.name] is not here today?"
+        the_person "Yeah, [yoga_assistant.name] couldn't make it this week."
+        $ yoga_assistant = erica_get_alternative_assistant(yoga_list)
+        $ erica_apply_yoga_outfit_to_class([yoga_assistant])
+        the_person "But [yoga_assistant.name] is filling in for her."
+        $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
+    else:
+        $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
+        "At the front, you see [the_person.possessive_title] doing some light stretching. She has a speaker out, playing some upbeat music."
+        "Next to her you see [yoga_assistant.title]. They have become good friends and are chatting idly as you walk up."
+        the_person "Oh hey [the_person.mc_title]!"
 
-    the_person "Oh hey [the_person.mc_title]!"
     if not erica_get_is_yoga_nude() and erica_get_class_average_sluttiness(yoga_list) > 80: #Average class sluttiness is super slutty. They want to do it nude from now on
         the_person "I'm glad you're here. Several of the girls have approached me about something, but I wanted to run it by you before it became an official policy."
         the_person "The class and I both agree, this is a great, safe place to celebrate the feminine form and what we are capable of."
@@ -2109,6 +2121,31 @@ label erica_weekly_yoga_label(the_person):
 
     call advance_time(no_events = True) from _call_advance_time_erica_yoga_weekly_recurring
     return
+
+label erica_no_yoga_session_this_week():
+    python: # setup yoga class
+        scene_manager = Scene() # only use one scene manager per event
+        yoga_assistant = erica_get_yoga_assistant()
+
+    if not yoga_assistant.is_available:
+        "As you walk into the lobby, you expected to see the yoga class, but nobody is here."
+        "You suddenly remember that [erica.possessive_title] is not available and they probably rescheduled the class."
+    else:
+        $ scene_manager.add_actor(yoga_assistant)
+        mc.name "Hey [yoga_assistant.title], no class today?"
+        yoga_assistant "Hey [yoga_assistant.mc_title], nah, [erica.name], couldn't make it today, we rescheduled to next week."
+        mc.name "Ok, thanks."
+
+    python:
+        # setup next event
+        erica.add_unique_on_room_enter_event(erica_weekly_yoga)
+        # make sure we set the schedule right (fixes room change)
+        the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
+        yoga_assistant.set_override_schedule(lobby, the_days = [1], the_times =[0])
+        scene_manager.clear_scene()
+        yoga_assistant = None
+    return
+
 
 label erica_getting_watched_reaction_label(the_person, watched_count = 0):  #A short label to describe how Erica feels when you watch her doing yoga.
     if watched_count == 0:
@@ -3452,6 +3489,13 @@ init 2 python:
             if not person is mc.business.hr_director:
                 yoga_list.append(person)
         return yoga_list
+
+    def erica_get_alternative_assistant(yoga_class):
+        alt = next((x for x in mc.business.get_employee_list() if x not in yoga_class and x.get_opinion_score("yoga") > 0), None)
+        if not alt:
+            alt = renpy.random.choice(yoga_class)
+            yoga_class.remove(alt)
+        return alt
 
     def erica_get_yoga_assistant():
         identifier = erica.event_triggers_dict.get("yoga_assistant", None)
