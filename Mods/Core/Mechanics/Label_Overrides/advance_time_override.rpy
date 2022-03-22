@@ -224,6 +224,7 @@ init 5 python:
 
     def advance_time_run_move(people):
         start_time = time.time()
+        renpy.execution.il_time = start_time + 10 # delay the infinite loop detector for 10 seconds
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
 
