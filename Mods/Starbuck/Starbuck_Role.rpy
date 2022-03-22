@@ -717,7 +717,6 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ the_person.draw_person()
     $ the_person.break_taboo("underwear_nudity")
     "Now dressed in her outfit, [the_person.possessive_title] hands you her phone. She grabs the first item, the bottle of lubricant."
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
     mc.name "Wow... you look great..."
     "You murmur. She smiles at your compliment."
@@ -749,7 +748,6 @@ label starbuck_sex_store_promo_one_label(the_person):
             $ the_person.apply_outfit(SB_advert_three_outfit)
             $ the_person.draw_person()
     "Now dressed in her outfit, [the_person.possessive_title] looks to you for direction."
-    $ mc.change_arousal(15)
     $ mc.change_locked_clarity(25)
     mc.name "[the_person.title]. You look incredible..."
     "She clears her throat to get your attention."
@@ -905,7 +903,6 @@ label starbuck_sex_store_promo_two_label(the_person):
     $ the_person.draw_person()
     $ the_person.wardrobe.add_outfit(SB_advert_four_outfit)
     $ del SB_advert_four_outfit
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
     "You check out [the_person.possessive_title] in her outfit. Damn she looks hot!"
     the_person "Okay, so here's what I'm thinking..."
@@ -940,7 +937,6 @@ label starbuck_sex_store_promo_two_label(the_person):
     "She looks directly at you and cries out."
     the_person "YES! OH god, fuck me... YES! FUCK ME!!!"
     $ the_person.change_arousal(25)
-    $ mc.change_arousal(25)
     $ mc.change_locked_clarity(50)
     $ the_person.draw_person(position = "missionary", emotion = "orgasm")
     $ the_person.have_orgasm(half_arousal = True)
@@ -1116,13 +1112,11 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "Her pussy lips are wildly engorged, slick from the juices of her previous orgasm."
     "You rub your dick back and forth across her slit, getting it nice and slick. Then you grab her hips, and in one smooth motion you thrust yourself deep inside her."
     $ the_person.change_arousal(20)
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(50)
     "You thrust yourself deep into her steamy sex. Her moans begin immediately, her arousal still high from her previous orgasm."
     "You hold onto [the_person.possessive_title]'s hips and settle into a steady rhythm, pumping your cock in and out of her tight pussy."
     "You take a hand off of [the_person.possessive_title]'s hips and squeeze her ass cheeks with it. She moans happily in response you give her a hard slap."
     $ the_person.change_arousal(20)
-    $ mc.change_arousal(20)#40
     $ mc.change_locked_clarity(50)
     "[the_person.possessive_title] struggles a bit against her handcuffs, but she is helpless to defend herself from your spanking."
     "[the_person.possessive_title]'s moaning intensifies rapidly, until finally she takes a sharp breath and tenses up."
@@ -1132,7 +1126,6 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     the_person "Ah!"
     "You enjoy the way her tight ass jiggles and spank it again."
     $ the_person.change_arousal(20)
-    $ mc.change_arousal(20)#60
     $ mc.change_locked_clarity(50)
     "You take your hands off of her hips and lean forward to put them on her shoulders. With her hands in cuffs she is powerless to resist when you pull her shoulder back towards you, forcing her to arch her back."
     "With the leverage of your hands on her shoulders, holding her body weight up off the table. Your hips make heavy slapping noises as the slam into her ass with each thrust."
@@ -1140,7 +1133,6 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "[the_person.possessive_title]'s entire body begins to tremble as another orgasm hits her. Her pussy spasms wildly all around you and you can see her hips quaking."
     $ the_person.call_dialogue("climax_responses_vaginal")
     $ the_person.change_stats(happiness = 4, arousal = 20, slut = 1, max_slut = 50)
-    $ mc.change_arousal(20)#80
     $ mc.change_locked_clarity(30)
     "[the_person.possessive_title]'s orgasm is milking your cock. It is rapidly pushing you past the point of no return."
     "You can't help but grunt with each thrust as you fuck her roughly. [the_person.possessive_title] is having trouble speaking intelligible words."
@@ -1295,7 +1287,6 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     the_person "Okay, here is how we put it on..."
     "She grabs your dick and gives it a couple strokes. She puts the straps in place and secures the strap-on to you. You now have a second, rubber cock, sitting just below your fleshy one."
     "[the_person.possessive_title] gazes intently at your meat. She licks her lips and then runs her tongue along the side of it a couple times before she stands up."
-    $ mc.change_arousal(5)
     $ mc.change_locked_clarity(30)
     $ the_person.draw_person(position = "stand4")
     the_person "Now, before we get to the good part, it is important, anytime you are getting ready to put anything in your ass, that you get it good and lubed up..."
@@ -1403,7 +1394,6 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "You start to strip down, but watch intently while [the_person.possessive_title] strips down along side you."
     $ the_person.strip_outfit(position = "stand3")
     $ mc.change_locked_clarity(30)
-    $ mc.change_arousal(10)
     "Now that she is naked, [the_person.possessive_title] grabs some of her anal lube of a shelf. You raise an eyebrow as she squirts some onto her hand."
     mc.name "Anal lube? Wow... going all out are we?"
     "[the_person.possessive_title] chuckles as she reaches back and starts to spread the lube around her backside."
@@ -1424,7 +1414,6 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     the_person "Today, he is going to show us how it could be used for a relaxed sodomy session. I'll be able to relax here in the swing, while my ass is at just the right height for him to fuck it..."
     "As you get close behind her, you put your hands on her hips. She reaches back and grasps your cock, and begins to guide it toward her bottom."
     "When your cock begins poking up against her puckered hole, you can feel a bit of resistance. With your hands firmly on her hips, you pull her ass towards you."
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(30)
     "[the_person.possessive_title] forces herself to relax her sphincter, and you penetrate her with a wonderful pop. With more gentle pressure you are soon deep inside her bowel."
     the_person "Mmm... as you can see... I'm able to completely relax with my ass off the back of the swing, so I can just sit and enjoy the sensations."
@@ -1581,7 +1570,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
             "Your mind hazy with lust, you begin to pull [the_person.title]'s clothes off."
             $ the_person.strip_outfit(position = "missionary")
             "Now naked, you stop for a second and admire [the_person.title]'s incredible body."
-        $ mc.change_arousal(10)
         $ mc.change_locked_clarity(30)
         "Before you go any further, you decide to make sure that [the_person.title] is wet and ready for you. You pull her over so her legs are hanging off the edge of the bed and get down on your knees in front of her."
         "She spread's her legs instinctively as you begin to kiss along her knee. You trail wet kisses along the inside of her thigh, working your way further up."
@@ -1590,7 +1578,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.change_arousal(10)
         "You reach forward with your hands and grasp her tits. You roll her nipples in your fingers for a second causing her moans to grow louder."
         "You lick circles around her clit, then close your mouth over and gently suck on it."
-        $ mc.change_arousal(10)
         $ the_person.change_arousal(10)
         $ mc.change_locked_clarity(30)
         the_person "Oh! Baby I'm ready, come fuck me!"
@@ -1632,7 +1619,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 "She hands you her loofah and you begin to work circles up and down her back. The soap bubbles make her already smooth skin slick and soft."
                 "When her back is all soapy, you reach over her shoulder and hand the loofah back to her. You put your other hand against her hip and slowly pull her back against you."
                 "You now wrap your arms around her from behind, and she melts back into you. Your hands roam her body but quickly begin to grope her generous bosom, while she wiggles her ass back against you."
-                $ mc.change_arousal(10)
                 $ mc.change_locked_clarity(20)
                 the_person "Mmm, I'm glad we're thinking the same thing. I'm really hungry for you tonight, [the_person.mc_title]!"
                 "You whisper into her ear."
@@ -1690,7 +1676,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 the_person "Lube me up, [the_person.mc_title]. Don't be stingy!"
                 "You squirt a generous amount of lube onto your fingers. You run your fingers along her ass crack, coating it in a glaze of lube."
                 "You take a finger and begin to push it up against her sphincter. You can feel her physically force herself to relax and then your finger eases right in."
-                $ mc.change_arousal(10)
                 $ mc.change_locked_clarity(50)
                 the_person "Mmm... that feels good already. I think I'm getting better at this!"
                 "You apply some more lube, then slowly push two fingers into her smooth back passage. You feel like she is ready for you."
@@ -1731,7 +1716,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.draw_person(position = "cowgirl")
         "When you awaken, you discover that [the_person.title] is on top of you, with your morning wood already hilted inside her pussy."
         "You moan in appreciation at the wonderful wake up call."
-        $ mc.change_arousal(20)
         $ mc.change_locked_clarity(50)
         the_person "Mmm... Good morning [the_person.mc_title]... When I woke up this morning you were poking me pretty good... I figured you wouldn't mind if I took it for a quick ride."
         "You murmur your acceptance. Her mesmerizing tits are bouncing up and down right in front of you. You take them both in your palms and give them a good squeeze."
@@ -1883,7 +1867,6 @@ label starbuck_replay_dressup_label(the_person):
     $ the_person.apply_outfit(created_outfit, update_taboo = True)
     $ the_person.draw_person()
 
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(30)
     the_person "Mmm, I like it! Alright, let's take some pictures!"
     $ the_person.wardrobe.add_outfit(created_outfit)
@@ -1896,7 +1879,6 @@ label starbuck_replay_dressup_label(the_person):
     $ the_person.draw_person(position = "cowgirl")
     "Finally, she gets down on her knees and slowly starts crawling over to you in a sultry display of her femininity."
     $ the_person.change_arousal(10)
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(30)
     mc.name "Jesus girl, you are stunning..."
     the_person "Showing off for you is getting me all worked up again. Will you ummm... lay down for me?"
@@ -1916,7 +1898,6 @@ label starbuck_replay_dressup_label(the_person):
     "You push your nose into her slit and begin to lick and suck on her clit. She exhales forcefully and you feel her hot breath on your dick."
     the_person "Mmmm, that's it. Oh god you are so hard, I have to taste it..."
     $ the_person.change_arousal(10)
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(30)
     "You feel her tongue circling around the tip. She gives the head a couple of quick kisses and then parts her lips."
     "Her lips slowly descend your length, entering her blissfully hot mouth. You refrain from bucking your hips to keep from gagging her."
@@ -2186,7 +2167,6 @@ label starbuck_candace_product_demo_label(the_person):
     the_person "Oh god... Oh god!"
     $ the_person.change_arousal(60)
     $ starbuck.change_arousal(15)
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     $ the_person.have_orgasm(the_position = "cowgirl")
     "[the_person.title]'s body begins to convulse as she begins to orgasm. [starbuck.possessive_title] keeps fucking her with the same methodical pace."
@@ -2231,14 +2211,12 @@ label starbuck_candace_product_demo_label(the_person):
     "You put your hands on [starbuck.title]'s hips as you begin to fuck her. She moans and puts her hand on top of yours, encouraging you."
     starbuck "Give it to me [starbuck.mc_title]! I'm so hot from earlier..."
     $ starbuck.change_arousal(20)
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(30)
     "You immediately set the pace, giving it to her hard and rough. Her ass cheeks clap with each thrust."
     "[starbuck.title] pushes back against you, meeting every single thrust. Your balls swing forward and smack her clit with each thrust."
     starbuck "Oh fuck! Oh that's it, yes!"
     "[the_person.title] continues to watch, her fingers working circles around her clit as you go at it with [starbuck.possessive_title]."
     $ starbuck.change_arousal(20)
-    $ mc.change_arousal(25)
     $ mc.change_locked_clarity(30)
     "[starbuck.title]'s slit is so smooth, it's getting to be too much to bear. Instead of slowing down to try and last longer though, you speed up even more."
     starbuck "Oh my god I'm gonna cum... I'm gonna cum!"
@@ -2246,7 +2224,6 @@ label starbuck_candace_product_demo_label(the_person):
     starbuck "Cum with me [starbuck.mc_title]! Shove it in deep and don't pull out until we're both finished!"
     mc.name "Like you could stop me if you tried!"
     $ starbuck.change_arousal(40)
-    $ mc.change_arousal(40)
     $ mc.change_locked_clarity(50)
     "You push yourself in as deep as you can. [starbuck.title]'s feet are actually off the ground as your forcefully pin her to the wall."
     "You feel her pussy start to quiver around you as she starts to cum and that's it, you can't take anymore."

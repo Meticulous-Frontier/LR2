@@ -461,7 +461,6 @@ label breeding_fetish_employee_high_fertility_crisis_label():
     mc.name "Beg for it."
     "She doesn't hesitate."
     the_person "Fuck me daddy! Fuck me raw and don't stop fucking me until your cock pulses and blows your seed inside me!"
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     "You start to pull out your cock. Her dirty talk is hot!"
     the_person "Knock me up! Breed me! Make me your personal cumdump and bend me over anytime you want and finish deep..."
@@ -504,7 +503,6 @@ label breeder_cowgirl_wakeup_label(the_person):
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person(position = "cowgirl")
     $ the_person.change_arousal(35)
-    $ mc.change_arousal(25)
 
     "You slowly open your eyes and discover that [the_person.possessive_title] is on top of you, riding you in the cowgirl position."
     "You reach up and grab her amazing ass cheeks. [the_person.possessive_title] looks in your eyes when she feels your hands on her."

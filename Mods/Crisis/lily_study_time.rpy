@@ -133,7 +133,6 @@ label sister_failed_test_label():
     "She leans over and gives you a big hug, lingering with her body up against yours for several seconds."
     if strip_path:
         "Having [the_person.possessive_title] up against you quickly reminds you of her undressed state. You quickly get an erection from the close physical contact."
-        $ mc.change_arousal(10)
         $ mc.change_locked_clarity(10)
     else:
         "Eventually, [the_person.possessive_title] gets up and grabs her stuff."

@@ -118,7 +118,6 @@ label town_walk_crisis_action_label():
             $ the_person.change_arousal(renpy.random.randint(20,35))
         $ the_person.call_dialogue("climax_responses_foreplay")
         $ the_person.draw_person(position = "missionary", emotion = "orgasm")
-        $ mc.change_arousal(25)
         $ mc.change_locked_clarity(20)
         #"You see [the_person.possessive_title]'s body shiver as she reaches orgasm." NOTE: Things like this gets mentioned in the climax_responses
         the_person "Wow, that was intense. Need to be quieter or someone might just hear me - the window is still open... I would be so ashamed."

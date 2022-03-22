@@ -134,12 +134,10 @@ init 2 python:
             mc.change_arousal(20)
             if nude_class:
                 renpy.say(None, erica_yoga_nude_pose_descriptions[pose])
-                mc.change_arousal(10)
                 mc.change_locked_clarity(30)
             else:
                 mc.change_locked_clarity(20)
         else:
-            mc.change_arousal(10)
             mc.change_locked_clarity(10)
         return
 
@@ -783,7 +781,6 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                 $ the_person.draw_person(position = "kissing")
                 "You lean in and kiss [the_person.possessive_title] hungrily. Her hips are grinding against yours."
                 $ the_person.change_arousal(10)
-                $ mc.change_arousal(10)
                 $ mc.change_locked_clarity(10)
                 $ the_person.add_situational_slut("horny", 10, "You take charge")
                 $ the_person.add_situational_obedience("submissive", 20, "She submits to you")
@@ -2658,7 +2655,6 @@ label erica_lily_post_insta_handjob_label():
     "Over your blankets, [the_person.title] reaches over and puts her hand on your chest, then starts to slide it down your body."
     "When she gets to your morning wood, she starts to stroke it."
     $ mc.change_locked_clarity(20)
-    $ mc.change_arousal(20)
     "Your sleep addled brain only lets you moan as she starts to work it."
     the_person "Can you pull your blanket down?"
     "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
@@ -2821,8 +2817,7 @@ label erica_lily_post_insta_morning_label():
     if position_choice == "Surprise me":
         the_person "Mmmm, okay."
         $ mc.change_arousal(20)
-        $ the_person.change_happiness(5)
-        $ the_person.change_obedience(-5)
+        $ the_person.change_stats(happiness = 5, obedience = -5)
         $ position_choice = get_random_from_list(erica_get_wakeup_options())
 
     if position_choice == "handjob":
@@ -2969,15 +2964,14 @@ label erica_pre_insta_love_label(the_person):
         "[the_person.title] opens her mouth. She slides her wet, velvet lips down your erection."
         $ the_person.break_taboo("sucking_cock")
         $ mc.change_locked_clarity(50)
-        $ mc.change_arousal(20)
     else:
         the_person "Mmm, you smell so manly. I love the way you taste and the way you feel so hot in my mouth."
         "[the_person.possessive_title] gives the tip a few exploring licks."
         the_person "I guess I'd better get to work... I'm not sure how long [lily.name] is going to be gone."
         "[the_person.title] opens her mouth. She slides her wet, velvet lips down your erection"
         $ mc.change_locked_clarity(50)
-        $ mc.change_arousal(20)
     "[the_person.title] starts to bob her head up and down, eager to satisfy you with her mouth."
+    $ mc.change_arousal(10)
     "It's so hot, getting a blowjob from [the_person.possessive_title] while sitting on your sister's bed!"
     call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = blowjob, skip_intro = True, ignore_taboo = True, allow_continue = False) from _erica_pre_insta_oral_01
     "When you finish, [the_person.possessive_title] quickly starts to straight up her clothes and wipes the cum from her face."

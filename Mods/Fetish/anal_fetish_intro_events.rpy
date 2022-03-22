@@ -300,7 +300,6 @@ label anal_fetish_family_intro_label(the_person):
         the_person "Ah, well, we've tried it before, but I've been thinking about it a lot lately."
     "You keep rubbing yourself up against her as she watches her video. She moans as your cock gets hard and presses against her."
     $ the_person.change_arousal (10) # 40
-    $ mc.change_arousal (10)
     $ mc.change_locked_clarity(30)
     if the_person.has_breeding_fetish(): #She likes getting pregnant
         the_person "You know I love it when we fuck and you cum deep inside me... but I was thinking maybe we could have a change of pace."
@@ -363,7 +362,6 @@ label anal_fetish_family_intro_label(the_person):
     "When you're ready, you point it at her puckered hole and begin to push. It takes several seconds, but you feel her sphincter give way and part for you."
     "With sweet, delicious pressure, your erection slowly buries itself in [the_person.possessive_title]'s bowel."
     $ the_person.change_arousal(15) #85
-    $ mc.change_arousal(15)
     $ mc.change_locked_clarity(50)
     $ the_person.break_taboo("anal_sex")
     the_person "Oh god... why does it... feel so good!!!"
@@ -484,7 +482,6 @@ label anal_fetish_generic_intro_label(the_person):
     "[the_person.possessive_title]'s ass is twitching wildly all around you as she orgasms. You hold her hips tight and in place with both hands as her body quivers."
     $ the_person.have_orgasm()
     "It feels amazing to have her body gripping you as she cums."
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     mc.name "See? You just needed something in your ass so you could cum."
     the_person "I... I think you might be right... I..."
@@ -561,7 +558,6 @@ label anal_fetish_mom_intro_label():
     mc.name "Ahhh... Oh! Right..."
     "You start to lift your shirt up over your head. As you do, you feel [the_person.possessive_title] lean forward and run her tongue up and down your cock."
     "Her mouth opens and her soft lips slowly descend your erection as you finish pulling your shirt off. When you look, she has her eyes closed, just enjoying servicing her son's erection."
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(50)
     "You run your hands through her hair. She doesn't stroke you at all, but you feel her tongue roaming all over the tip. It feels great. Eventually she pulls off."
     the_person "Mmm, sorry, I needed a taste. Ready to start the movie?"
@@ -578,7 +574,6 @@ label anal_fetish_mom_intro_label():
     "[the_person.title] starts moving her hips now on her own, your cock still hot dogging between her cheeks. You reach down and start to slide your fingers along her slit."
     the_person "Oooohhhh, [the_person.mc_title], my beautiful son..."
     $ the_person.change_arousal(15) #15
-    $ mc.change_arousal(10) #30
     $ mc.change_locked_clarity(50)
     "She turns her head to you and comes in for a kiss. You lips meet, followed by tongues, as she begins to hungrily explore your mouth."
     "[the_person.title] gasps when you slip two fingers inside of her, moving slow and exploring every inch of her cunt."
@@ -1115,7 +1110,6 @@ label anal_fetish_erica_intro_label():
     the_person "Ahh, good morning [the_person.mc_title]."
     $ the_person.change_arousal(30)
     $ mc.change_locked_clarity(50)
-    $ mc.change_arousal(15)
     "[the_person.title] finishes sliding herself down, your morning wood now plunged completely into her well lubed backside."
     "She must have walked in the room completely ready for this."
     the_person "Oh my god... I swear I was thinking about this all night long."
@@ -1127,7 +1121,6 @@ label anal_fetish_erica_intro_label():
     "[the_person.title] begins to rock her hips forward and backward a bit, adjusting herself to your girth."
     $ the_person.change_arousal(15)
     $ mc.change_locked_clarity(50)
-    $ mc.change_arousal(15)
     "You put your hands on her hips and start to guide her movements. She moans in pleasure."
     the_person "Ohhhhhh! Fuck you feel so hot..."
     "[the_person.possessive_title] leans forward and whispers in your ear."

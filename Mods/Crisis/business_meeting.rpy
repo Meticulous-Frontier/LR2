@@ -90,7 +90,6 @@ label business_meeting_flirtation(the_person):
 label business_meeting_arrousal(the_person):
     if the_person.effective_sluttiness() > 30:
         "She moves up to your crotch and unzips your pants with her feet, sliding with her foot over you growing bulge."
-        $ mc.change_arousal(20)
         $ mc.change_locked_clarity(20)
         the_person "Oh my, [the_person.mc_title] it seems my proposal got you all excited."
     else:
@@ -141,10 +140,9 @@ label business_meeting_seduction(the_person):
             "After spending a few more minutes talking she suddenly perks up."
             the_person "I'm sorry [the_person.mc_title], it seems i've dropped something..."
 
-            $ mc.change_arousal(10)
             $ the_person.draw_person(position = "blowjob")
-
             $ mc.change_locked_clarity(20)
+
             if the_person.has_taboo("touching_penis"):
                 the_person "Oh my god, that is a big one!"
                 mc.name "You can touch it for real, if you want."

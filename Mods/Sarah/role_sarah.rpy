@@ -2529,7 +2529,6 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "You give her a few gentle, smooth strokes. You can feel her pussy getting wetter with each stroke as her body begins to respond to the stimulation."
         $ the_person.change_arousal(20)
         "With her legs closed and on her side like this, her pussy feels really tight. You can feel her gripping you every time you start to pull it out."
-        $ mc.change_arousal(15)
         $ mc.change_locked_clarity(50)
         "Your reach around her with your hand and grab one of her tits. You start to get a little rough with her and pinch and pull at one of her nipples."
         $ the_person.change_arousal(20)
@@ -2541,7 +2540,6 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         "Encouraged by her words, you reach your hand down and lift her leg, giving you a better angle for deeper penetration."
         "You pick up the pace and begin to fuck her earnestly."
         $ the_person.change_arousal(30) #70
-        $ mc.change_arousal(25) #55
         $ mc.change_locked_clarity(50)
         the_person "Oh yes that feels so good, fuck me good!"
         "She reaches down and holds her leg for you, freeing up your hand. You reach down between her legs and start to play with her clit."
@@ -2551,7 +2549,6 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         the_person "Oh fuck, yes! YES!"
         $ the_person.have_orgasm()
         "She shoves her ass back against you as she cums. Her helpless body quivers in delight. Her moans drive you even harder."
-        $ mc.change_arousal(20) #110
         $ mc.change_locked_clarity(50)
         mc.name "I'm gonna cum!"
         if the_person.is_highly_fertile():
@@ -2643,7 +2640,6 @@ label Sarah_spend_the_night():      #She spends the night with you. Have a rando
         the_person "... [the_person.mc_title]... mmm... I can't take it anymore..."
         $ scene_manager.add_actor(the_person, position = "cowgirl")
         $ the_person.change_arousal(30)
-        $ mc.change_arousal(30)
         $ mc.change_locked_clarity(50)
         "You slowly open your eyes and discover [the_person.possessive_title] is on top of you, riding your cock."
         the_person "Oh thank god you're awake. I swear you were poking me all night long! I kept hoping you would just stick it in, but I think you were sleeping."
@@ -3512,7 +3508,6 @@ label Sarah_date_strip_club_private_dance_label(the_person):
     $ scene_manager.strip_full_outfit(person = showgirl_1)
     "Her ass bare now, you find it difficult to restrain your hands from molesting the girl in front of you."
     $ mc.change_locked_clarity(30)
-    $ mc.change_arousal(10)
     $ the_person.change_arousal(10)
     showgirl_2 "For $200, you two can grope and spank it!"
     menu:
@@ -3533,9 +3528,9 @@ label Sarah_date_strip_club_private_dance_label(the_person):
                     showgirl_2 "Maybe later you can finish this..."
 
             else:
+                $ mc.change_locked_clarity(30)
                 "You reach up and begin to fondle your stripper's ass. It is firm and supple."
                 "You give her cheeks a few firm spanks."
-                $ mc.change_locked_clarity(30)
             $ the_person.change_arousal(15)
             $ mc.change_arousal(15)
         "Pay\n{color=ff0000}{size=18}Requires: $200{/size}{/color} (disabled)" if not mc.business.has_funds(200):
