@@ -10,6 +10,7 @@
 # Teamup option is Alexia. On friday nights, they start to have all night gaming sessions. At first, MC just plays games with them, but it transitions to massages...
 # ... topless massages, fingering, eventually at full corruption start the night with them naked and MC has total free-use while they play video games.
 
+# $ mother_role.actions.append(myra_focus_progression_scene_action)
 
 init 2 python:
     myrabelle_wardrobe = wardrobe_from_xml("Myrabelle_Wardrobe")
@@ -101,6 +102,7 @@ init 2 python:
         myra.event_triggers_dict["has_been_sponsored"] = False
         myra.event_triggers_dict["has_won_tournement"] = False
         myra.event_triggers_dict["is_expanding_business"] = False
+        myra.event_triggers_dict["focus_train_day"] = 9999
         myra.event_triggers_dict["focus_train_grope"] = False
         myra.event_triggers_dict["focus_train_sit_on_lap"] = False
         myra.event_triggers_dict["focus_train_finger"] = False
@@ -229,7 +231,9 @@ label myra_gaming_cafe_opening_label():
     the_person "Thanks! I got it done in preparation for the grand opening, but I really like it! I think I might keep it like this."
     alexia "You should!"
     mc.name "So I take it you two are friends?"
-    alexia "Yep! I've been playing this game called Guild Quest 2, and she is the guild leader. We've been playing together for almost year, but just discovered a couple weeks ago we live in the same town!"
+    alexia "Yep! I've been playing this game called Guild Quest 2, and she is the guild leader."
+    mc.name "So you met... playing a game?"
+    alexia "No, we go back farther than that, but lately it is mainly when playing that game."
     the_person "Yep! Blonde Cupcake and I go way back."
     alexia "Oh my gosh don't tell..."
     mc.name "Blonde... Cupcake?"
@@ -337,7 +341,7 @@ label myra_esports_second_tournament_intro_label(the_person):   #Sets up for the
     #Just use this event to set up anticipation for the tournament itself.
     return
 
-label myra_esports_second_tournament_intro_label(): #Mandatory event. Myra wins her second tournament
+label myra_esports_second_tournament_label(): #Mandatory event. Myra wins her second tournament
     $ myra.event_triggers_dict["has_won_tournement"] = False
     return
 
@@ -411,3 +415,12 @@ init 3 python:
 
     def myra_will_grind_with_mc():
         return myra.event_triggers_dict.get("will_grind_with_mc", False)
+
+    def myra_last_focus_train_day():
+        return myra.event_triggers_dict.get("focus_train_day", 9999)
+
+    def myra_has_exclusive_energy_drink():
+        return False
+
+    def myra_get_exclusive_energy_drink():
+        return None
