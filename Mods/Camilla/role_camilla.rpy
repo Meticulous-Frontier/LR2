@@ -105,7 +105,7 @@ init -1 python:
         return False
 
     def camilla_take_pics_requirement(the_person):
-        if the_person.location == downtown_bar and camilla_will_take_pics() and the_person.effective_sluttiness > 40:
+        if the_person.location == downtown_bar and camilla_will_take_pics() and the_person.effective_sluttiness() > 40:
             return True
         return False
 
