@@ -629,9 +629,8 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "You slowly start to knead her curvy cheeks. They are supple and soft and feel amazing in your hands."
     the_person "Mmm..."
     $ the_person.change_arousal(5) #65
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
-    "[the_person.title] let's out a little moan. She slowly relaxes as more as you continue to rub and caress her rear."
+    "[the_person.title] lets out a little moan. She slowly relaxes as more as you continue to rub and caress her rear."
     mc.name "See? Rubbing your back feels good, and rubbing down here feels a little bit better, doesn't it?"
     the_person "It does..."
     "She leans forward and relaxes more, just enjoying the touch of your hands on her body. You really need to take this slow, so you take your time rubbing for several minutes."
@@ -647,7 +646,6 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "You let both hands creep up her belly until they reach the bottom of her rib cage. You slide them up a bit more until you are cupping the bottom of her tits."
     the_person "Ahhhhh..."
     $ the_person.change_arousal(5) #70
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
     "You start to grope and massage her tits earnestly now, being careful to avoid her sensitive nipples. Her breathing is getting heavier and an occasional moan escapes her lips."
     mc.name "It's nice, isn't it? Doesn't it make you feel good?"
@@ -660,7 +658,6 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "Ah!"
     "[the_person.possessive_title] cries out and for a second her knees buckle. She catches herself, but when she straightens out, her body rubs up against yours."
     "You've been rock hard throughout this whole process, but when she straightens up her ass rubs up against you, causing you to moan."
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(30)
     "Her body goes rigid."
     the_person "Ah! Was that... your... your thing!?!"
@@ -679,7 +676,6 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "Your left hand still on her tits, you move your right hand down her body and between her legs."
     "When you start to apply pressure on her cunt through her clothes she starts to melt. Her hips move a bit on their own."
     $ the_person.change_arousal(10) #90
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     the_person "Oh Lordie... forgive me..."
     "[the_person.title]'s hip movements have her ass rubbing up against you now. You can't help but moan a bit at the contact with the red haired belle."
@@ -689,7 +685,6 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     mc.name "You can move your hips a bit. It will help you control the pace to something that feels good to you, and it'll feel nice for me too."
     the_person "... okay..."
     "Instinctually, [the_person.possessive_title] starts to move her hips forward and backwards a bit, helping set a pace that feels best for her."
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     "You can't help pushing your hips a bit up against her as well. It feels nice to have your cock against her ass."
     "You wish you just rip the clothes off between you and her and bend her over your desk, but you know she isn't ready for that yet."
@@ -911,7 +906,6 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     "[the_person.title] gives you a few softer strokes now. They are much more pleasant."
     $ the_person.increase_sex_skill("Foreplay", 4, add_to_log = True)
     $ mc.change_locked_clarity(20)
-    $ mc.change_arousal(10) # 15
     $ the_person.draw_person(position = "blowjob")
     "[the_person.title] gets down on her knees next to you, watching you very closely as she starts her first ever handjob."
     "Thankfully, her hand is very soft as she strokes you off, and the taboo of defiling this southern belle makes it even hotter."
@@ -923,7 +917,6 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ the_person.strip_to_tits(position = "blowjob")
     $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(5)
-    $ mc.change_arousal(10) #25
     "Her tits now out for your viewing pleasure, this little session is going great. When she looks back at your dick there is a little pre-cum leaking from it."
     the_person "Ah! It's got stuff coming out!"
     mc.name "Yeah, that is pre-cum. It starts to come out a little bit when I get really turned on."
@@ -946,7 +939,6 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     the_person "Ohhh... okay..."
     $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(5)
-    $ mc.change_arousal(20) #45
     "She resumes stroking you now, and the sensations are much more pleasant. When her hand gets a little dry, she gets the idea and spits into her own hand before resuming."
     "This is turning into an almost acceptable handjob. She might actually be able to get off."
     if not the_person.is_willing(tit_fuck):
@@ -964,7 +956,6 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     "[the_person.title] uses her hands to move her big tits up and down your cock. The soft flesh feels amazing sliding up and down."
     $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(5)
-    $ mc.change_arousal(20) #65
     mc.name "Ah, this feels amazing. I'm not doing to last very long like this. You know what is going to happen when I finish... right?"
     the_person "It's gonna spurt out... right?"
     mc.name "Yeah."
@@ -975,12 +966,10 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     mc.name "Spit some."
     the_person "Okay."
     "She stops moving her tits for a second to spit down into her cleaves. She moves her breasts up and down, slathering you up before continuing."
-    $ mc.change_arousal(20) #85
     $ mc.change_locked_clarity(50)
     mc.name "Oh god. [the_person.title], I'm almost there. Keep going!"
     the_person "Okay [the_person.mc_title]!"
     "This southern redheads big titties are amazing, bouncing up and down around your cock. It's getting ready to burst."
-    $ mc.change_arousal(20) #85
     $ mc.change_locked_clarity(50)
     $ ClimaxController.manual_clarity_release(climax_type = "tits", the_person = the_person)
     $ the_person.event_triggers_dict["given_handjob"] = True
@@ -1088,7 +1077,6 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     the_person "Ah, okay, I'll try."
     mc.name "Alright, let's take this slow. Use your hand a little to get used to it."
     "[the_person.possessive_title] takes you in her hand and gives you a couple strokes. Not long ago, she had never done this either, but now she handles your meat with skill."
-    $ mc.change_arousal(10) #10
     $ mc.change_locked_clarity(20)
     mc.name "That's it. Now, just give it a little kiss."
     the_person "Okay... mmmm..."
@@ -1096,7 +1084,6 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     mc.name "See? It's not so bad, is it?"
     the_person "Nah, it's so hot. And it smells kind of... manly..."
     "[the_person.possessive_title] begins to kiss along the underside, down towards the base, then back up to the top."
-    $ mc.change_arousal(10) #20
     $ mc.change_locked_clarity(20)
     mc.name "Mmm, that feels nice."
     "When she gets to the tip, [the_person.title] looks up at you and makes eye contact. A bit of pre-cum is starting to leak from the tip."
@@ -1108,43 +1095,37 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     else:
         the_person "The taste isn't great... but the fact that it's coming from you makes it really hot anyways..."
     #Increase drinking cum score
-    $ mc.change_arousal(15) #35
     $ mc.change_locked_clarity(30)
     mc.name "Keep going, I'll be glad to get you some more."
     "[the_person.possessive_title] starts to run her tongue around the tip now. She goes up and down at first, then circles it a few times."
     "[the_person.title] gives you a couple more strokes with her hand while she licks the tip. She stops and looks up at you."
     the_person "Okay. Here goes!"
     "[the_person.possessive_title] opens her mouth and for the first time pushes your erection inside her lips."
-    $ mc.change_arousal(15) #35
     $ mc.change_locked_clarity(40)
     $ the_person.break_taboo("sucking_cock")
     "With the tip in her mouth, [the_person.title] swirls her tongue around it a few times. It feels so good."
     "After a few seconds, she bravely pushes down a little further. She is clearly testing her limits, unsure of how far she can take it."
     the_person "Mmmmmmm... UNGLCK"
-    "[the_person.possessive_title] suddenly gags as she takes it a little to far. She quickly pulls off and catches her breath."
+    "[the_person.possessive_title] suddenly gags as she takes it a little too far. She quickly pulls off and catches her breath."
     the_person "Stars! Sorry I..."
     mc.name "It's okay. The tip is the most sensitive part, just do what you can, but don't force it."
     the_person "Mmm... okay..."
-    $ mc.change_arousal(15) #50
     $ mc.change_locked_clarity(40)
     $ the_person.increase_sex_skill("Oral", 4, add_to_log = True)
     "[the_person.title] looks up at you as she licks at the tip again. She maintains the eye contact as she opens her mouth and starts to suck on the tip again."
     $ the_person.change_arousal(10)
     the_person "Mmm... mmm..."
     "[the_person.possessive_title] gives a couple little moans as she keeps working you over. She seems to be be really getting to it."
-    $ mc.change_arousal(20) #70
     $ mc.change_locked_clarity(40)
     "[the_person.title] is getting braver. She pushes the tip past her lips now and starts bobbing her head gently."
     mc.name "That's it. You're doing great. If it starts to get uncomfortable, you can always back off and just use your hand for a bit."
     "[the_person.title] looks at you and nods for a second, but keeps going. Her silky tongue is working wonders traveling up and down your cock."
-    $ mc.change_arousal(20) #90
     $ mc.change_locked_clarity(40)
     "The sensations are getting more intense. She's going to make you cum?"
     mc.name "[the_person.title], I'm gonna cum soon. What do you want me to do?"
     "She pulls off for a quick second."
     the_person "Whatever you want. I just want to make you feel good."
     "[the_person.possessive_title] opens up and starts sucking you off eagerly now. She is really working hard!"
-    $ mc.change_arousal(20) #110
     $ mc.change_locked_clarity(40)
     "The velvet soft tongue of [the_person.title] is driving you over the edge. What do you want to do?"
     menu:
@@ -1358,6 +1339,7 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
         $ the_person.draw_person()
         "You leave your office together and go back to the work day."
 
+    $ ellie.apply_planned_outfit()
     $ mc.business.add_mandatory_crisis(ellie_dinner_date_intro)
     $ clear_scene()
     $ mc.location.show_background()

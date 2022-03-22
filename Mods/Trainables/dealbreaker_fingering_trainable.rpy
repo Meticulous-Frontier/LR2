@@ -105,7 +105,7 @@ label train_dealbreaker_fingering_label(the_person):
         "She obediently turns around and awaits your touch."
     else:
         the_person "I don't know... I'm not sure I want to do this right now."
-        "[the_person.possessive_title] is energetic, more capable of withstanding your training. You wish she was a bit more wore out."
+        "[the_person.possessive_title] is energetic, more capable of withstanding your training. You wish she was a bit more worn out."
         mc.name "Don't worry, no one is going to see. It's just you and me, and I just want what is best for you, I promise."
         "[the_person.title] thinks about it a few more seconds. She seems just about ready to refuse, but eventually turns away and complies with your instructions."
     $ the_person.draw_person(position = "walking_away")
@@ -181,7 +181,7 @@ label train_dealbreaker_fingering_label(the_person):
         $ mc.change_locked_clarity(10)
         "You can feel [the_person.possessive_title]'s pussy get a little wetter from your touch. She shivers as you continue to finger her."
         the_person "Mmmmmmmm..."
-        "[the_person.title] let's out a soft moan, encouraging you to keep going. Her body is melting into yours."
+        "[the_person.title] lets out a soft moan, encouraging you to keep going. Her body is melting into yours."
         $ the_person.change_arousal(10 + mc.sex_skills["Foreplay"])
         $ mc.change_locked_clarity(10)
         if the_person.arousal >= 90:

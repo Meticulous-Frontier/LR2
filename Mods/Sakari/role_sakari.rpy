@@ -37,14 +37,13 @@ init 2 python:
         #global sakari_role
         global sakari
         sakari = make_person(name = "Sakari", last_name ="Greene", age = 42, body_type = "thin_body", face_style = "Face_14",  tits="C", height = 0.92, hair_colour=["bald", [0.414, 0.305, 0.258,0]], hair_style = short_hair, skin="tan" , \
-            eyes = "brown", personality = sakari_personality, name_color = "#228b22", dial_color = "228b22" , \
+            eyes = "brown", personality = sakari_personality, name_color = "#228b22", dial_color = "228b22" , job = unemployed_job, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = 18, start_happiness = 88, start_love = 0, \
             relationship = "Single", kids = 1, force_random = True, base_outfit = sakari_base_outfit,
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
             forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 1, False], ["drinking cum", -2, False], ["giving blowjobs", -1, False], ["creampies", 2, False]])
 
         sakari.generate_home()
-        sakari.add_job(unemployed_job)
         sakari.set_schedule(sakari.home, the_times = [0,1,2,3,4])   #Hide Sakari at home until we are ready to use her
         sakari.home.add_person(sakari)
         sakari.hair_colour = ["bald", [0.414, 0.305, 0.258,0]]
@@ -173,7 +172,7 @@ label sakari_coffee_break_label(the_person):
     "You walk back to the clothing store, drinks in hand."
     $ the_person.draw_person()
     the_person "Ah, good timing. I just finished with this task."
-    the_person "I have a small office, lets sit in there for a bit."
+    the_person "I have a small office, let's sit in there for a bit."
     mc.name "Sounds good. Lead the way!"
     $ the_person.draw_person(position = "walking_away")
     "[the_person.title] leads you to the back of the store and into a small office."
@@ -186,7 +185,7 @@ label sakari_coffee_break_label(the_person):
     the_person "I have an illness called myeloma. It is a type of recurring blood cancer."
     the_person "The prognosis is terminal, and unfortunately I have entered the final stage of the illness."
     mc.name "Ah [the_person.title]. I'm so sorry..."
-    the_person "There ar many experimental treatments... and unfortunately they have all failed."
+    the_person "There are many experimental treatments... and unfortunately they have all failed."
     the_person "I recently decided to go off all treatments. I'm feeling much better, but it will only be a short term thing."
     mc.name "Ah, so that's why you have been back at the store a bit."
     the_person "Yes. I want to leave things ready... for [kaya.name]."

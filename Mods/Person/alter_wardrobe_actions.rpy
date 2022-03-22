@@ -432,7 +432,7 @@ label modify_wardrobe_label(the_person):
     $ strip_choice = _return
     $ alterations = 0
     if strip_choice == 'base':
-        mc.name "Lets take a look at the accessories you are always wearing."
+        mc.name "Let's take a look at the accessories you are always wearing."
         the_person "Alright, it shouldn't be too hard to update my jewelry collection."
         call screen outfit_creator(the_person.base_outfit, outfit_type = "full", slut_limit = None)
         if _return != "Not_New":
@@ -686,7 +686,7 @@ label modify_wardrobe_label(the_person):
         menu:
             "95":
                 $ fade_number = 0.95
-                mc.name "Lets start small."
+                mc.name "Let's start small."
             "90" if the_person.sluttiness > 20:
                 $ fade_number = 0.90
                 mc.name "Fade them a bit, but not too much."

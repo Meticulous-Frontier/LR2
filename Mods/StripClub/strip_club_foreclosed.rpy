@@ -168,7 +168,7 @@ label cousin_talk_about_strip_club_label(the_person):
                 "Accept":
                     mc.name "Perhaps I should say no..."
                     the_person "Come on, take me to a nice hotel and I'll show you a good time."
-                    mc.name "Alright, lets go."
+                    mc.name "Alright, let's go."
                     "You and [the_person.title] walks to the nearest hotel."
                     $ amount = 200
                     $ the_person.change_stats(happiness = 5, obedience = -1, love = 1)
@@ -191,7 +191,7 @@ label club_foreclosed_strip_label(the_person):
     "You walk up to the reception and hire a hotel room for one night. You and [the_person.title] go up to your room."
     $ mc.business.change_funds(-80)
     $ downtown_hotel_room.show_background()
-    mc.name "Ok, here's your money, now lets get this show started."
+    mc.name "Ok, here's your money, now let's get this show started."
     $ mc.business.change_funds(-amount)
     "[the_person.possessive_title] quickly disappears into the bathroom to change her clothes."
     $ the_person.apply_outfit(stripclub_wardrobe.pick_random_outfit())

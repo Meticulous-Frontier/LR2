@@ -133,7 +133,6 @@ label sister_failed_test_label():
     "She leans over and gives you a big hug, lingering with her body up against yours for several seconds."
     if strip_path:
         "Having [the_person.possessive_title] up against you quickly reminds you of her undressed state. You quickly get an erection from the close physical contact."
-        $ mc.change_arousal(10)
         $ mc.change_locked_clarity(10)
     else:
         "Eventually, [the_person.possessive_title] gets up and grabs her stuff."
@@ -230,7 +229,7 @@ label sister_failed_test_label():
                     "[the_person.possessive_title] lowers her face to your cock. She opens her mouth and starts to suck on the tip, tasting your precum."
                     "She gives your dick several strokes, but then stops."
                     $ the_person.draw_person(position = "cowgirl")
-                    the_person "Okay... lets do it!"
+                    the_person "Okay... let's do it!"
                     "[the_person.title] climbs up on top of you, your cock in her hand."
                     $ the_person.break_taboo("vaginal_sex")
                     $ mc.change_locked_clarity(50)
@@ -239,7 +238,7 @@ label sister_failed_test_label():
                     "[the_person.title] pulls down the covers. You lift your hips up when she pulls at your shorts, freeing your cock from its confines."
                     "She gives it a few strokes with her hand."
                     $ the_person.draw_person(position = "cowgirl")
-                    the_person "Okay... lets do it!"
+                    the_person "Okay... let's do it!"
                     "[the_person.title] climbs up on top of you, your cock in her hand."
                     $ mc.change_locked_clarity(30)
 

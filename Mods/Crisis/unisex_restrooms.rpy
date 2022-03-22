@@ -547,7 +547,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     $ the_person.cum_in_vagina(add_to_record = False)
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person, add_to_log = False)
     "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
-    if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
+    if the_person.effective_sluttiness() > 70 and the_person.get_opinion_score("being submissive") > 0:
         anon_char "Wait a minute, let me clean that up for you."
         "You suddenly feel her tongue licking up and down your cock, cleaning every drop of pussy juice off your dick."
         "When she's done, she cleans up with a soft cloth."
@@ -605,7 +605,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     $ the_person.cum_in_ass(add_to_record = False)
     $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person, add_to_log = False)
     "You cum as deep inside her ass as you can manage. Your cum spurts deep inside her bowel, farther than your cock can penetrate."
-    if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
+    if the_person.effective_sluttiness() > 70 and the_person.get_opinion_score("being submissive") > 0:
         anon_char "Wait a minute, let me clean that up for you."
         "You suddenly feel her tongue licking up and down your cock, even though it was deep inside her bowels just a minute ago."
         "When she's done, she cleans your cock with a soft cloth."
@@ -687,7 +687,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             $ the_person.cum_in_vagina(add_to_record = False)
             $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person, add_to_log = False)
             "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
-            if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
+            if the_person.effective_sluttiness() > 70 and the_person.get_opinion_score("being submissive") > 0:
                 anon_char "Wait a minute, let me clean that up for you."
                 "You suddenly feel her tongue licking up and down your cock, cleaning every drop of pussy juice off your dick."
                 "When she's done, she cleans up with a soft cloth."

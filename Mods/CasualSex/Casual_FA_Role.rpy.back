@@ -235,7 +235,6 @@ init -1 python:
             self.on_talk_event_list = [] #Checked when you start to interact with a character. If an event is in this list and enabled it is run (and no other event is until you talk to the character again.)
 
             self.event_triggers_dict = {} #A dict used to store extra parameters used by events, like how many days has it been since a performance review.
-            self.event_triggers_dict["employed_since"] = 0
             self.event_triggers_dict["wants_titlechange"] = False
 
 
@@ -269,9 +268,6 @@ init -1 python:
             self.supply_skill = renpy.random.randint(1,skill_cap)
 
             self.salary = self.calculate_base_salary()
-
-            # self.employed_since = 0 #Default this to 0, it will almost always be overwritten but in case it sneaks through this makes sure that nothing breaks.
-
             self.idle_pose = get_random_from_list(["stand2","stand3","stand4","stand5"]) #Get a random idle pose that you will use while people are talking to you.
 
             ##Personality Stats##

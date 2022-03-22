@@ -225,7 +225,7 @@ label kaya_setup_intro_event_label():
         # init kaya role
         kaya_role = Role(role_name ="kaya", actions =[kaya_barista_fuck, kaya_get_drinks], hidden = True)
         kaya_barista_job = Job("Barista", kaya_role, coffee_shop, work_times = [2, 3])
-        kaya.add_job(kaya_barista_job)
+        kaya.add_job(kaya_barista_job, job_known = True)
         # she also studies
         kaya.set_schedule(None, the_times = [1,2,3])    # Free roam
         kaya.set_schedule(university, the_days = [0, 1, 2, 3, 4], the_times = [1])
@@ -1053,7 +1053,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
         "Fuck Her (Keep going)":
             "You can't say no to her. You grab her and start to make out again. Tongues meet and the urgency returns immediately."
         "Call it a night":
-            mc.name "I believe you, but my gut just keeps telling me this isn't the right time... lets put this on pause, okay?"
+            mc.name "I believe you, but my gut just keeps telling me this isn't the right time... let's put this on pause, okay?"
             mc.name "I'll come back in the morning, I'll still help you move. I don't want to stop seeing you, but I don't think I'm quite ready for this."
             the_person "Okay... I understand..."
             $ the_person.change_happiness(-5)
@@ -1265,7 +1265,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     $ mc.change_location(sakari.home)
     $ mc.location.show_background()
     $ scene_manager.update_actor(the_person, position = "walking_away")
-    "Soon you arrive. [the_person.possessive_title] goes to the front door and let's herself in. You follow closely behind her."
+    "Soon you arrive. [the_person.possessive_title] goes to the front door and lets herself in. You follow closely behind her."
     the_person "{=kaya_lang}Whaea! Kei konei ahau!{/=kaya_lang}(?????)"
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     $ scene_manager.add_actor(sakari, display_transform = character_center_flipped)
@@ -1422,7 +1422,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
         "You want to be with her":
             mc.name "That isn't what I'm saying. [kaya.title], you are funny, and great to be around, and I really want to make this work."
             mc.name "I'm just really feeling guilty about the way things went down."
-            if kaya.is_pregnant():
+            if kaya.knows_pregnant():
                 mc.name "And now you're pregnant and..."
             the_person "Geeze, you scared me! I thought you were really going to say no!"
             $ the_person.change_happiness(10)
@@ -1535,7 +1535,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     "You leave the coffee shop and start to walk around downtown some, lost in your thoughts."
     "Last week, you found out the hot barista you've been hitting on's mom is dying and her dad is already gone."
     "And now... you are dating?"
-    if the_person.is_pregnant():
+    if the_person.knows_pregnant():
         "And you've knocked her up!"
     "[the_person.possessive_title] seems very eager to put out. Normally sexy time would be something you would plan, but you decide for now to let her see what she can come up with."
     #TODO find some way to drop a hint here that the best way to continue the storyline is to invite Kaya over for a sleepover date.

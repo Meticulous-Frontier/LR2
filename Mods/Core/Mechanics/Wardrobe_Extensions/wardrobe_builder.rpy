@@ -503,13 +503,12 @@ init 5 python:
         @staticmethod
         def build_filter_list(item_list, points, min_points = 0, filter_list = [], layers = [1, 2, 3]):
             # extend range until we have items
-            while not any(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points and x.layer in layers and x not in filter_list, item_list)):
+            while not any(x for x in item_list if x.slut_value >= min_points and x.slut_value <= points and x.layer in layers and x not in filter_list):
                 if min_points > 0:
                     min_points -= 1
                 if points < 15:
                     points += 1
-
-            return list(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points and x.layer in layers, item_list))
+            return [x for x in item_list if x.slut_value >= min_points and x.slut_value <= points and x.layer in layers and x not in filter_list]
 
         @staticmethod
         def build_weighted_list(person, item_group, filtered_list):
@@ -784,7 +783,7 @@ init 5 python:
             outfit.update_name()
             return outfit
 
-        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, allow_coverup = True):
+        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True):
             def change_colour_alpha(new_colour, old_colour):
                 alpha_blended = new_colour
                 alpha_blended[3] = old_colour[3]
@@ -827,7 +826,7 @@ init 5 python:
                     alterations += 1
 
             if allow_skimpy:
-                if alterations < max_alterations and outfit.is_dress() or outfit.has_skirt():  #Next, if we are wearing a dress or skirt, have slutty girls have a chance to drop their panties.
+                if alterations < max_alterations and outfit.has_dress() or outfit.has_skirt():  #Next, if we are wearing a dress or skirt, have slutty girls have a chance to drop their panties.
                     if outfit.get_full_outfit_slut_score() + 20 < self.person.sluttiness and renpy.random.randint(0, 1) == 1:
                         item = outfit.get_panties()
                         if item:
@@ -844,7 +843,7 @@ init 5 python:
             self.set_sexier_bra(self.person, outfit, underwear_colour)
             #Next, determine what kind of outfit this is.
 
-            if outfit.is_dress(): #If it is a dress, let the dress be the focal point of the outfit.
+            if outfit.has_dress(): #If it is a dress, let the dress be the focal point of the outfit.
                 # renpy.say ("", "Suitable dress set")
                 for item in outfit.upper_body:
                     if item in real_bra_list and coloured_underwear:

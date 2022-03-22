@@ -117,10 +117,17 @@ init 5 python:
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule(job.job_location, the_times = [4])
             person.add_role(job.job_role)
-            stripclub_strippers.add(person)
+            stripclub_strippers.append(person)
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
             person.add_job(job)
+
+        salary = calculate_stripper_salary(person)
+        if person.has_role(stripclub_waitress_role):
+            salary *= .5
+        if person.has_role(stripclub_bdsm_performer_role):
+            salary *= 1.1
+        person.stripper_salary = __builtin__.round(salary, 1)
         return
 
     def fire_stripper(person):
@@ -313,7 +320,7 @@ label strip_club_hire_employee_label(the_person):
             the_person "If it's just to be a waitress there, I don't mind showing some skin... Ok, where should I sign?"
         elif the_person.effective_sluttiness() > 10 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 2:
             the_person "Maybe, if the money is good enough, I could give it a try..."
-            $ ran_num = calculate_waitress_salary(the_person)
+            $ ran_num = calculate_stripper_salary(the_person) * .5
             mc.name "Your pay will be $[ran_num] a day, not bad for waiting some tables, right?"
             the_person "Oh! Ok, then my answer is yes, for that kind of money I don't mind running around in a short skirt waiting tables."
         else:

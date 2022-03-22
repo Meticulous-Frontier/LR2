@@ -34,8 +34,12 @@ init -2 python:
             if actor:   # we have an existing actor object, so use that
                 self.show_actor(actor.person, position, emotion, special_modifier, lighting, display_transform, z_order)
             else:       # add person as actor
-                self.actors.append(Actor(person, position, emotion, special_modifier, lighting, display_transform, z_order, visible))
+                if display_transform is None:
+                    display_transform = self.get_random_free_position()
+                actor = Actor(person, position, emotion, special_modifier, lighting, display_transform, z_order, visible)
+                self.actors.append(actor)
                 self.draw_scene()
+            return actor
 
         # Removes all actors from the scene
         def clear_scene(self, reset_actor = True):
@@ -79,7 +83,7 @@ init -2 python:
             if person is None:
                 actors = [x for x in self.actors if x.visible]
             else:
-                actors = [next(x for x in self.actors if x.person == person)]
+                actors = [next((x for x in self.actors if x.person == person), self.add_actor(person))]
 
             for actor in actors:
                 strip_list = actor.person.outfit.get_full_strip_list(strip_feet = strip_feet, strip_accessories = strip_accessories)
@@ -93,7 +97,7 @@ init -2 python:
             if person is None:
                 actors = [x for x in self.actors if x.visible]
             else:
-                actors = [next(x for x in self.actors if x.person == person)]
+                actors = [next((x for x in self.actors if x.person == person), self.add_actor(person))]
 
             for actor in actors:
                 strip_list = actor.person.outfit.get_underwear_strip_list(visible_enough = visible_enough, avoid_nudity = avoid_nudity)
@@ -107,7 +111,7 @@ init -2 python:
             if person is None:
                 actors = [x for x in self.actors if x.visible]
             else:
-                actors = [next(x for x in self.actors if x.person == person)]
+                actors = [next((x for x in self.actors if x.person == person), self.add_actor(person))]
 
             for actor in actors:
                 half_off_instead = False
@@ -127,7 +131,7 @@ init -2 python:
             if person is None:
                 actors = [x for x in self.actors if x.visible]
             else:
-                actors = [next(x for x in self.actors if x.person == person)]
+                actors = [next((x for x in self.actors if x.person == person), self.add_actor(person))]
 
             for actor in actors:
                 half_off_instead = False
@@ -170,13 +174,13 @@ init -2 python:
                 #mc.log_event("Remove clothing " + actor.person.title, "gray_float_text")
                 actor.person.draw_animated_removal(the_clothing, position = actor.position, emotion = actor.emotion, special_modifier = actor.special_modifier, lighting = lighting, display_transform = actor.display_transform, scene_manager = self, half_off_instead = half_off_instead)
 
-        def get_free_position_tuple(self):
+        def get_random_free_position(self):
             if not any(x for x in self.actors if x.display_transform in [character_right, character_right_flipped]):
-                return [character_right, character_right_flipped]
+                return renpy.random.choice([character_right, character_right_flipped])
             if not any(x for x in self.actors if x.display_transform in [character_center, character_center_flipped]):
-                return [character_center, character_center_flipped]
+                return renpy.random.choice([character_center, character_center_flipped])
             if not any(x for x in self.actors if x.display_transform in [character_left, character_left_flipped]):
-                return [character_left, character_left_flipped]
+                return renpy.random.choice([character_left, character_left_flipped])
             return None
 
         # removes specific actor from scene

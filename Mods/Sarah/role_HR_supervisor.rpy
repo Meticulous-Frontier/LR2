@@ -519,7 +519,7 @@ label HR_director_monday_meeting_label(the_person):
         if the_person.energy < 60:
             "She looks at you before she begins."
             the_person "So, normally I would offer to help with your... you know... needs..."
-            the_person "But honestly I'm pretty wore out from earlier. If you are still feeling needy later, let me know, okay?"
+            the_person "But honestly I'm pretty worn out from earlier. If you are still feeling needy later, let me know, okay?"
             mc.name "Okay."
             "She reaches down to her backpack and begins to pull out her notes from the previous week."
 
@@ -695,8 +695,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
                 $ mc.change_locked_clarity(20)
                 if the_person.outfit.check_outfit_cum():
                     "With [the_person.title] still wearing your cum from her service earlier, you get a burst of energy and arousal."
-                    $ mc.change_arousal(30)
-                    $ mc.change_energy(100)
+                    $ mc.change_stats(arousal = 30, energy = 100)
                 mc.name "Of course. Let's get started."
                 call start_threesome(person_choice, the_person) from threesome_HR_meeting_happy_ending
                 person_choice "Oh my... that was fun. Thanks for calling me in! I guess I'd better go get back to work..."
@@ -897,7 +896,7 @@ label HR_director_manage_gym_membership(the_person):
                 if x.get_opinion_score("sports") > 0:
                     x.change_happiness(3 * x.get_opinion_score("sports"))
                 if x.get_opinion_score("hiking") > 0:
-                    x.change_happiness(1 * x.get_opinion_score("sports"))
+                    x.change_happiness(1 * x.get_opinion_score("hiking"))
             cost = __builtin__.len(mc.business.get_employee_list()) * 5
     elif get_HR_director_tag("business_HR_gym_tier", 0) == 2:
         python:
@@ -910,7 +909,7 @@ label HR_director_manage_gym_membership(the_person):
                 if x.get_opinion_score("sports") > 0:
                     x.change_happiness(5 * x.get_opinion_score("sports"))
                 if x.get_opinion_score("hiking") > 0:
-                    x.change_happiness(2 * x.get_opinion_score("sports"))
+                    x.change_happiness(2 * x.get_opinion_score("hiking"))
             cost = __builtin__.len(mc.business.get_employee_list()) * 15
     the_person "Just to let you know, I wrote out the check this morning for this week's employee health program."
     $ mc.business.change_funds(-cost)
@@ -1093,7 +1092,6 @@ label HR_director_sexy_meeting_start_label(the_person):
                     "You start to strip [the_person.possessive_title] down."
                     $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
                 "Soon her pussy is on full display in front of you, on your desk."
-            $ mc.change_arousal(20)
             $ mc.change_locked_clarity(50)
             $ the_person.break_taboo("condomless_sex")
             $ the_person.break_taboo("vaginal_sex")
@@ -1141,7 +1139,6 @@ label HR_director_sexy_meeting_start_label(the_person):
                 $ the_person.break_taboo("vaginal_sex")
                 "You push yourself inside of her nice and slow, since she hasn't had much time to warm up yet."
                 the_person "Oh God! It's going so deep."
-                $ mc.change_arousal(20)
                 "You give her ass a solid spank, then begin to fuck her roughly."
                 call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_start_four
                 $ the_report = _return
@@ -1272,7 +1269,7 @@ label HR_director_sexy_meeting_start_label(the_person):
 
     $ position_choice = HR_director_choose_position()
     if position_choice == "any":
-        the_person "Mmmm, I can do that! "
+        the_person "Mmmm, I can do that!"
         $ mc.change_arousal(20)
         $ the_person.change_happiness(5)
         $ the_person.change_obedience(-5)
@@ -1284,7 +1281,6 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ scene_manager.update_actor(the_person, position = "blowjob")
         "She gets down on her knees in front of you and takes a moment to admire your hardness."
         $ mc.change_locked_clarity(30)
-        $ mc.change_arousal(20)
         "She opens her mouth and runs her tongue along it a few times, and then parts her lips and begins to suck you off."
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_one
 
@@ -1298,7 +1294,6 @@ label HR_director_sexy_meeting_start_label(the_person):
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_tit_strip_list(), half_off_instead = False)
             "With her tits out and ready to be used, she gives you a big smile."
         the_person "Get your cock out, I want to feel it slide between my boobs!"
-        $ mc.change_arousal(20)
         $ mc.change_locked_clarity(30)
         "You pull your cock out as she gets up and walks around your desk. She drops down on her knees in front of you."
         $ scene_manager.update_actor(the_person, position = "blowjob")
@@ -1314,14 +1309,13 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "[the_person.possessive_title] moves her clothes out of the way."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
             else:
-                "[the_person.possessive_title] begins to take off her clothes. "
+                "[the_person.possessive_title] begins to take off her clothes."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
             "When she finishes getting naked, she gives you a big smile."
         the_person "Oh my, fucking me on your desk? You are so naughty, [the_person.mc_title]!"
         $ scene_manager.update_actor(the_person, position = "missionary")
         mc.name "Oh, I'm the naughty one? I seem to remember this was your idea in the first place..."
         "You pull your cock out and line it up with [the_person.title]'s pussy. You ease yourself inside of her with one slow, smooth push."
-        $ mc.change_arousal(20)
         $ mc.change_locked_clarity(50)
         $ the_person.break_taboo("condomless_sex")
         $ the_person.break_taboo("vaginal_sex")
@@ -1353,7 +1347,6 @@ label HR_director_sexy_meeting_start_label(the_person):
 
         "You don't waste any time. You pull your cock out and point it at her slit. You pull her hips back as you push inside of her with one smooth push."
         the_person "Mmm, fuck me good [the_person.mc_title]!"
-        $ mc.change_arousal(20)
         $ mc.change_locked_clarity(50)
         $ the_person.break_taboo("condomless_sex")
         $ the_person.break_taboo("vaginal_sex")
@@ -1368,7 +1361,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 "[the_person.possessive_title] moves her clothes out of the way."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
             else:
-                "[the_person.possessive_title] begins to take off her clothes. "
+                "[the_person.possessive_title] begins to take off her clothes."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
             "When she finishes getting naked, she gives you a big smile."
         $ scene_manager.update_actor(the_person, position = "back_peek")

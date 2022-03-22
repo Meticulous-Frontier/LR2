@@ -74,7 +74,7 @@ label cougar_greetings(the_person):
             if the_person.sluttiness > 60:
                 the_person "Hello [the_person.mc_title], how has your day been? I was... thinking about you, that's all."
             else:
-                $ day_part = time_of_day_string()
+                $ day_part = time_of_day_string(time_of_day)
                 the_person "Good [day_part], [the_person.mc_title]!"
     return
 
@@ -146,7 +146,7 @@ label cougar_sex_accept(the_person):
         else:
             the_person "Whatever you want me to do [the_person.mc_title]. I just want to make sure you're happy."
     else:
-        the_person "Okay, lets try it this, I hope you don't mind having sex with an older woman?"
+        the_person "Okay, let's try it this, I hope you don't mind having sex with an older woman?"
     return
 
 label cougar_sex_obedience_accept(the_person):
@@ -155,7 +155,7 @@ label cougar_sex_obedience_accept(the_person):
         the_person "But you look so strong and beautiful, please..."
     else:
         if the_person.obedience > 130:
-            the_person "I... We really shouldn't... But I know this makes you happy. Lets do it [the_person.mc_title]..."
+            the_person "I... We really shouldn't... But I know this makes you happy. Let's do it [the_person.mc_title]..."
         else:
             the_person "How does this keep happening [the_person.mc_title]? You know I love you but we shouldn't be doing this..."
             "[the_person.possessive_title] looks away, conflicted."
@@ -246,7 +246,7 @@ label cougar_seduction_accept_crowded(the_person):
             "[the_person.possessive_title] smiles and devours your body with her eyes, making sure nobody around you notices."
             the_person "Okay, but we need to be careful. I don't think people would understand our relationship. Let's find someplace quiet."
         else:
-            the_person "Oh my, [the_person.mc_title] ... why don't you take care of me right here!"
+            the_person "Oh my, [the_person.mc_title]... why don't you take care of me right here!"
     else:
         $ so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 60:
@@ -267,7 +267,7 @@ label cougar_seduction_accept_alone(the_person):
     else:
         $ so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 60:
-            the_person "Come on [the_person.mc_title], lets get going, screw my [so_title]!"
+            the_person "Come on [the_person.mc_title], let's get going, screw my [so_title]!"
         else:
             the_person "I have a [so_title], I shouldn't be doing this..."
             "Her eyes tell quite a different story."
@@ -845,7 +845,7 @@ label cougar_condom_bareback_demand(the_person):
 label cougar_cum_face(the_person):
     if the_person.has_cum_fetish() or the_person.obedience > 130:
         if the_person.has_cum_fetish() or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("cum facials") > 0:
-            $ pronoun = person_body_shame_string(the_person, "little cum slut")
+            $ pronoun = person_body_shame_string(the_person.body_type, "little cum slut")
             the_person "Ah... do you like to see my face covered [the_person.mc_title]? Am I your good [pronoun]?"
         else:
             the_person "Oh, it's everywhere! Next time be more careful, I'm only doing this for you."
@@ -984,7 +984,7 @@ label cougar_cum_vagina(the_person):
 label cougar_cum_anal(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 50:
-            $ pronoun = person_body_shame_string(the_person, "little anal slave")
+            $ pronoun = person_body_shame_string(the_person.body_type, "little anal slave")
             the_person "Ah... yes pump your seed into your [pronoun]?"
         else:
             the_person "Oh my, you filled up my bottom, remember [the_person.mc_title], I'm only doing this for you."
@@ -1057,7 +1057,7 @@ label cougar_sex_watch(the_person, the_sex_person, the_position):
 
     else:
         $ the_person.draw_person(emotion = "happy")
-        $ pronoun = person_body_shame_string(the_sex_person, "slut")
+        $ pronoun = person_body_shame_string(the_sex_person.body_type, "slut")
         the_person "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
         "[title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
 

@@ -108,7 +108,7 @@ init 2 python:
         the_eyeshadow.colour = [.15, .15, .15, 0.95]
         candace_base_outfit.add_accessory(the_eyeshadow)
 
-        candace_wardrobe = Wardrobe("Candace's Wardrobe") # This name will allow the rebuild_wardrobe function to generate a new one
+        candace_wardrobe = Wardrobe("Candace's Wardrobe")
 
         # her boyfriend only allows her to wear this 'company wardrobe'
         outfit = Outfit("Pink Lace Top And Leggings")
@@ -128,7 +128,7 @@ init 2 python:
 
         global candace
         candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "standard_body", face_style = "Face_12", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
-            eyes = "light blue", personality = candace_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = candace_wardrobe, job = candace_job, \
+            eyes = "light blue", personality = candace_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = candace_wardrobe, \
             stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
             title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit,
             force_random = True, forced_opinions = [
@@ -150,6 +150,7 @@ init 2 python:
             ])
 
         candace.generate_home()
+        candace.add_job(candace_job, job_known = True)
         candace.set_schedule(office_store, the_times = [3], the_days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
         candace.home.add_person(candace)
         candace.event_triggers_dict["met_at_store"] = 0
@@ -616,7 +617,7 @@ label candace_convince_to_quit_label(the_person):
     mc.name "Then why don't you?"
     the_person "I'm... I'm so scared! [ex_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
     the_person "He says it's illegal! That I'll go to jail for being a prostitute!"
-    mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with a similar situation... lets say she can handle herself."
+    mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with a similar situation... let's say she can handle herself."
     mc.name "She can help you. Take a leap of faith. You can trust me."
     "She thinks about it for a bit."
     "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
@@ -647,7 +648,7 @@ label candace_convince_to_quit_label(the_person):
     the_person "Hi! You can call me [the_person.name]."
     salon_manager "You know, I used to date [ex_name] too!"
     the_person "Right... used to... kind of weird to think about, this is all happening so fast!"
-    salon_manager "Don't worry. First thing's first! Do you have your phone handy? Lets take a picture together!"
+    salon_manager "Don't worry. First thing's first! Do you have your phone handy? Let's take a picture together!"
     the_person "Okay! I love selfies."
     "[the_person.title] and [salon_manager.possessive_title] lean together and take a picture."
     salon_manager "There we go! That will be a great picture to send with your break up text..."
@@ -679,7 +680,7 @@ label candace_convince_to_quit_label(the_person):
     the_person "Bye!"
     $ candace.event_triggers_dict["quit_job"] = 1
     # she has quit her job, give her a new wardrobe
-    $ rebuild_wardrobe(candace)
+    $ rebuild_wardrobe(candace, force = True)
     $ candace.add_unique_on_talk_event(candace_goes_clothes_shopping)
     $ candace.add_unique_on_room_enter_event(candace_overhear_supply_order)
     call advance_time from _call_advance_time_candace_convince_to_quit_label
@@ -825,7 +826,7 @@ label candace_topless_at_mall_label(the_person):
         "You start to wonder if she is going to be okay. Whatever happened that turned her into a bimbo, she seems to be barely functional."
         mc.name "You stay out of trouble, okay?"
         $ scene_manager.update_actor(the_person, emotion = "happy", position = "stand3")
-        "[the_person.title] let's go of you and gives you a big smile."
+        "[the_person.title] lets go of you and gives you a big smile."
         the_person "Okay!"
         mc.name "I'll see you at work."
         the_person "Yes Sir!"
@@ -1376,7 +1377,7 @@ label candace_meet_doctor_candace_label():
     python:
         the_person = candace
 
-    "It's been about a week since you cured [the_person.title] of her bimboism... "
+    "It's been about a week since you cured [the_person.title] of her bimboism..."
     "Well, mostly anyway. Since that time, talking with her is like talking to an entirely different person... But also the same."
     "She still smells the same, she still twirls her hair around her finger the same way, she still smiles at you the same way."
     "Yet, every time she opens her mouth and speaks, she is completely different."
@@ -1466,7 +1467,6 @@ label candace_meet_doctor_candace_label():
     "Her tongue dances with yours as the first fledgling thrusts are made of her hips onto yours. Her kisses punctuated with moans."
     the_person "Mmm... You feel so good. I swear, every time we fuck is better than the last..."
     $ the_person.change_arousal(30)
-    $ mc.change_arousal(30)
     call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _meet_dr_candace_fuck_01
     "When you finish, she just stays on top of you for a bit. You can feel your seed dribble out of her for a bit, but she doesn't seem to care about the mess. She just holds on to you."
     the_person "Thank you. I needed that."
@@ -1547,7 +1547,7 @@ label candace_meet_doctor_candace_label():
                 the_person "Are we, umm... We doing my place or yours tonight?"
                 mc.name "Honestly, I'm not sure if I'll be able to tonight, but I'll let you know."
                 the_person "Mmm... Okay... You go ahead... I think I would just like to bask a little..."
-                "You consider for a moment getting a nice couch for your office... "
+                "You consider for a moment getting a nice couch for your office..."
                 "But then whenever you call a girl in they'd probably assume you were getting ready to make a cheap porno movie. Better not."
                 mc.name "Rest up, I'm going to get back to work."
                 "You leave your office. You feel great about how things have progressed with [the_person.possessive_title]."

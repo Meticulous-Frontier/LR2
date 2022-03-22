@@ -218,7 +218,6 @@ label girl_shower_enter_enhanced(the_person):
             "You strip down and get in the shower with [the_person.title]. The space isn't very big, so she puts her back to you."
             "You're left with her ass inches from your crotch, and when she leans over to pick up the shampoo she grinds up against you."
             $ mc.change_locked_clarity(20)
-            $ mc.change_arousal(5)
             the_person "Oops, sorry about that."
             "Your cock, already swollen, hardens in response, and now even stood up the tip brushes against [the_person.possessive_title]'s ass."
             if the_person.effective_sluttiness("touching_body") <= 40:

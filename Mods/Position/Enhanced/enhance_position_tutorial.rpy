@@ -28,7 +28,7 @@ label doggy_stealth_attempt(the_girl, the_location, the_object):  #Write the new
         "If you take it off you should probably pull out when you finish though... or should you?"
         menu:
             "Attempt to remove condom":
-                "You bring one hand down to your cock and get it ready. With one out stroke, you pretend to accidentally pull back to far, pulling out of her."
+                "You bring one hand down to your cock and get it ready. With one out stroke, you pretend to accidentally pull back too far, pulling out of her."
                 "You quickly strip off the condom as quietly as possible, then line yourself up and plunge into [the_girl.title]'s heavenly slick cunt."
                 $ stealth_orgasm = True
                 $ mc.condom = False

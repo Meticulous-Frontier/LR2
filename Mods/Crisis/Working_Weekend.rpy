@@ -135,7 +135,6 @@ label SB_working_weekend_crisis_label_high(person_one):
                         "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                         "When her ass runs up against the desk, she reaches down and begins unzipping your pants."
                         $ mc.change_locked_clarity(30)
-                        $ mc.change_arousal(10)
                         $ person_one.break_taboo("condomless_sex")
                         "She pulls your your dick out and lays back. She lines you up with her pussy and push yourself into her."
                         call fuck_person(person_one, start_position = missionary, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_sex_description_SB15
@@ -159,7 +158,6 @@ label SB_working_weekend_crisis_label_high(person_one):
                 "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                 $ scene_manager.update_actor(person_one, position = "kissing")
                 $ mc.change_locked_clarity(30)
-                $ mc.change_arousal(10)
                 "[person_one.possessive_title] is just pulling your cock out when you hear a cough from the doorway."
                 $ person_one.break_taboo("touching_penis")
                 person_two "Wow, looks like you guys are getting ready for some fun!"
@@ -167,7 +165,6 @@ label SB_working_weekend_crisis_label_high(person_one):
                 "You turn and see [person_two.possessive_title] standing in the doorway. You aren't sure how long she has been standing there."
                 person_two "This is so sexy... [person_two.mc_title], can I join? Please!?! You won't regret it!"
                 $ mc.change_locked_clarity(50)
-                $ mc.change_arousal(10)
                 "Dumbfounded, you can only nod."
                 person_two "Yes! Oh just give me one second!!!"
                 "She starts to strip down."

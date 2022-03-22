@@ -2,8 +2,6 @@
 # it adds a increased chance for a crisis to occur when more time passed without a crisis
 # it adds a way of preventing the same crisis popping up over and over, whilst others never get triggered by remembering a set of occurred events
 init -1 python:
-    import gc
-
     def advance_time_next_requirement():
         return True
 
@@ -179,14 +177,11 @@ init 5 python:
         return find_next_crisis([x[0] for x in morning_crisis_list if x[1] > 0 and x[0].is_action_enabled()])
 
     def build_people_to_process():
-        people = [] #This is a master list of turns of need to process, stored as tuples [character,location]. Used to avoid modifying a list while we iterate over it, and to avoid repeat movements.
-        for place in [x for x in list_of_places if x.people]:
-            people.extend([[x, place] for x in place.people])
-        return people
+        return [[y, x] for x in list_of_places for y in x.people]
 
     def update_party_schedules(people):
         # exclude unique characters as to not to interfere with story lines
-        for (person, place) in [x for x in people if not x[0] in unique_character_list]:
+        for person in [x[0] for x in people if not x[0] in unique_character_list]:
             create_party_schedule(person)
         return
 
@@ -229,6 +224,7 @@ init 5 python:
 
     def advance_time_run_move(people):
         start_time = time.time()
+        renpy.execution.il_time = start_time + 10 # delay the infinite loop detector for 10 seconds
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
 
@@ -267,6 +263,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
 
     python:
         #renpy.say(None, "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
+        renpy.suspend_rollback(True)
         count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
@@ -292,6 +289,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         c = None
         people_to_process = []
         person = None
+        renpy.suspend_rollback(False)
 
     if mandatory_advance_time and not time_of_day == 4: #If a crisis has told us to advance time after it we do so (not when night to prevent spending night at current location).
         call advance_time from _call_advance_time_advance_time_enhanced
@@ -374,15 +372,9 @@ label advance_time_people_run_turn_label():
     return
 
 label advance_time_people_run_day_label():
+    # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
     python:
-        # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
-        #if time_of_day == 4: ##First, determine if we're going into the next chunk of time. If we are, advance the day and run all of the end of day code. NOTE: We can do checks like these with Action.requirements
         advance_time_run_day(people_to_process)
-        # we need to clear memory at least once a day (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
-        renpy.free_memory()
-        # $ gc.collect()    don't force garbage collector, let internals handle this
-        #$ renpy.profile_memory(.5, 1024)
-        renpy.block_rollback()
 
         # update party schedules once a week (sunday night)
         if day%7 == 6:
@@ -390,11 +382,17 @@ label advance_time_people_run_day_label():
     return
 
 label advance_time_end_of_day_label():
+    python:
+        # we need to clear memory at least once a day (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
+        renpy.free_memory()
+        #$ renpy.profile_memory(.5, 1024)
+        renpy.block_rollback()
+
     # "advance_time_end_of_day_label - timeslot [time_of_day]" # DEBUG
     call screen end_of_day_update() # We have to keep this outside of a python block, because the renpy.call_screen function does not properly fade out the text bar.
 
     python:
-        renpy.restart_interaction()
+        # renpy.restart_interaction()
         mc.business.clear_messages()
         # increase morning crisis chance (once a day)
         morning_crisis_chance += 2

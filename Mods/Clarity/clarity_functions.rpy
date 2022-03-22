@@ -11,8 +11,9 @@ init 3 python:
         return multiplier
 
     def lust_drip_perk_update_func():
-        mc.change_locked_clarity(__builtin__.round(max(5, (min(200, mc.free_clarity * .03)))), add_to_log = False)
-        mc.spend_clarity(__builtin__.round(max(5, (min(200, mc.free_clarity * .03)))), add_to_log = False)
+        change_amount = __builtin__.int(max(5, (min(20, mc.free_clarity * .001))))
+        mc.locked_clarity += change_amount
+        mc.free_clarity -=  change_amount
         return
 
     def add_lust_drip_perk():

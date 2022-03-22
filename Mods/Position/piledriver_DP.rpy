@@ -33,7 +33,7 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
 
     "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
     the_girl "I'm not sure the angle is gonna work for..."
-    "She let's out a startled yelp as you grab her ankles and bring them up over her head."
+    "She lets out a startled yelp as you grab her ankles and bring them up over her head."
     if the_girl.get_opinion_score("being submissive") > 0:
         the_girl "Oh god, you're gonna dominate me with that thing aren't you?"
         "She sounds more excited than scared."

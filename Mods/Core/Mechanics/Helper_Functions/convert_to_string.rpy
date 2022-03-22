@@ -2,6 +2,7 @@ init 0 python:
     # Overrides VREN's height function, so we display the height based on the weight property
     # instead of the fixed weight on zoom factor
     # currently between (147cm) - (197cm).
+    @renpy.pure
     def height_to_string(person_height): #Height is a value between 0.8 and 1.0
         total_inches = __builtin__.round(((person_height * 250) - 53) / 2.54)
         feet = __builtin__.int(total_inches // 12)
@@ -14,6 +15,7 @@ init 0 python:
             return str(cm) + " cm"
 
     # override without the 'ERROR' message (just use 'husband' as fallback)
+    @renpy.pure
     def SO_relationship_to_title(relationship_string):
         if relationship_string == "Girlfriend":
             return "boyfriend"
@@ -22,6 +24,7 @@ init 0 python:
         return "husband"
 
     # override without the 'ERROR' message (just use 'wife' as fallback)
+    @renpy.pure
     def girl_relationship_to_title(relationship_string):
         if relationship_string == "Girlfriend":
             return "girlfriend"
@@ -29,24 +32,34 @@ init 0 python:
             return "fiancée"
         return "wife"
 
-    def get_energy_string(person):
-        percent = person.energy * 1.0 / person.max_energy
+    @renpy.pure
+    def get_energy_string(energy, max_energy):
+        percent = energy * 1.0 / max_energy
         color_string = "{color=#43B197}"
         if percent < .5:
             color_string = "{color=#e1e113}"
         if percent < .2:
             color_string = "{color=#B14365}"
 
-        return color_string + str(__builtin__.int(person.energy)) +"/"+ str(__builtin__.int(person.max_energy)) + "{/color} {image=energy_token_small}"
+        return color_string + str(__builtin__.int(energy)) +"/"+ str(__builtin__.int(max_energy)) + "{/color} {image=energy_token_small}"
 
-    def get_attention_string():
-        percent = mc.business.attention * 1.0 / mc.business.max_attention
+    @renpy.pure
+    def get_arousal_with_token_string(arousal, max_arousal):
+        return str(__builtin__.int(arousal)) + "/"+ str(__builtin__.int(max_arousal)) + " {image=arousal_token_small}"
+
+    @renpy.pure
+    def get_locked_clarity_with_token_string(locked_clarity):
+        return str(__builtin__.int(locked_clarity)) + " {image=lust_eye_token_small}"
+
+    @renpy.pure
+    def get_attention_string(attention, max_attention):
+        percent = attention * 1.0 / max_attention
         color_string = "{color=#43B197}"
         if percent > .5:
             color_string = "{color=#e1e113}"
         if percent > .8:
             color_string = "{color=#B14365}"
-        return color_string + str(mc.business.attention) + "/" + str(mc.business.max_attention) + "{/color}"
+        return color_string + str(attention) + "/" + str(max_attention) + "{/color}"
 
     def get_person_weight_string(person):
         if use_imperial_system:
@@ -68,15 +81,17 @@ init 0 python:
 
             return str(__builtin__.round(kg, 1)) + " kg"
 
-    def time_of_day_string():
+    @renpy.pure
+    def time_of_day_string(time_of_day):
         return time_names[time_of_day].lower()
 
-    def person_body_shame_string(person, pronoun = "girl"):
-        if person.body_type == "curvy_body":
+    @renpy.pure
+    def person_body_shame_string(body_type, pronoun = "girl"):
+        if body_type == "curvy_body":
             return "chubby " + pronoun
-        elif person.body_type == "standard_body":
+        elif body_type == "standard_body":
             return "curvy " + pronoun
-        elif person.body_type == "standard_preg_body":
+        elif body_type == "standard_preg_body":
             return "pregnant " + pronoun
         else:
             return "skinny " + pronoun

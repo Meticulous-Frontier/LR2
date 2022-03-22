@@ -29,7 +29,6 @@ init 2:
                 label ""
                 label get_debug_log()
 
-
 init 2 python:
     import sys
     import collections
@@ -44,9 +43,11 @@ init 2 python:
             self.cache_size = 0
 
         def update(self):
-            self.total_zip_size = get_size(zip_manager)
-            self.total_zip_items = zip_manager.size()
-            self.zip_utilization = zip_manager.utilization()
+            if "zip_manager" in globals():
+                global zip_manager
+                self.total_zip_size = get_size(zip_manager)
+                self.total_zip_items = zip_manager.size()
+                self.zip_utilization = zip_manager.utilization()
             self.texture_size, self.texture_count = renpy.exports.get_texture_size()
             self.cache_size = renpy.display.im.cache.get_total_size()
 
@@ -67,10 +68,10 @@ init 2 python:
         while not hasattr(renpy.display.draw, "get_texture_size"):
             time.sleep(2)
 
-        while True:
+        while 1:
             if debug_log_enabled:
                 system_info.update()
-            time.sleep(.33)
+            time.sleep(.5)
         return
 
     debug_log = LRUCacheDict(8, expiration = 0)
@@ -126,3 +127,8 @@ init 2 python:
         except:
             pass
         return size
+
+    # renpy.profile_screen("main_ui", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)
+    # renpy.profile_screen("business_ui", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)
+    # renpy.profile_screen("person_info_ui", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)
+    # renpy.profile_screen("enhanced_main_choice_display", predict=True, show=True, update=True, request=True, time=True, debug=False, const=True)

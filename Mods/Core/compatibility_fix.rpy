@@ -127,6 +127,7 @@ init -4 python:
 init -2:
     default persistent.zip_cache_size = 0 # default is small size
     default persistent.show_ntr = False     # default turn of NTR
+    default persistent.keep_patreon_characters = True  # keep VREN original characters from hire process
 
 init python: # place first on the hijack stack
     add_label_hijack("after_load", "check_save_version")
@@ -176,6 +177,7 @@ init 1 python:
     config.cache_surfaces = False
     config.predict_screen_statements = False
     config.predict_screens = False
+    config.list_compression_length = 200        # increase list compression length for rollback
 
     # disable auto save
     config.autosave_on_choice = False

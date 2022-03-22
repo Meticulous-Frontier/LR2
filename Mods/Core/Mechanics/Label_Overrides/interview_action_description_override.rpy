@@ -76,12 +76,13 @@ label interview_action_description_enhanced():
 
             # cleanup not used candidates
             python:
-                for person in candidates:
-                    if person.is_patreon: # preserve Patreon unique characters.
-                        person.generate_home()
-                        person.home.add_person(person)
-                    else:
-                        person.remove_person_from_game()
+                if persistent.keep_patreon_characters:
+                    for person in candidates:
+                        if person.is_patreon: # preserve Patreon unique characters.
+                            person.generate_home()
+                            person.home.add_person(person)
+                        else:
+                            person.remove_person_from_game()
 
                 candidates.clear() #Prevent it from using up extra memory
                 person = None

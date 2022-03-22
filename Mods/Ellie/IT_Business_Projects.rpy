@@ -354,7 +354,7 @@ init -1 python:
         research_inc = 0
         for person in mc.business.research_team:
             research_inc += research_potential_stat(person)
-        research_amount = __builtin__.round(research_inc * 0.05)
+        research_amount = __builtin__.round(research_inc * 0.05 * (mc.business.team_effectiveness / 100.0))
 
         if mc.business.active_research_design is not None:
             the_research = mc.business.active_research_design

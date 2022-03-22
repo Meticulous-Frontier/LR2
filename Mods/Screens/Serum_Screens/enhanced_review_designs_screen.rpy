@@ -16,7 +16,7 @@ init 2:
                         mousewheel True
                         vbox:
                             text "Serum Designs:" style "menu_text_title_style" size 30
-                            for serum_design in mc.business.serum_designs:
+                            for serum_design in sorted(mc.business.serum_designs, key = lambda x: x.name):
                                 $ serum_name = serum_design.name
                                 if serum_design.researched:
                                     $ serum_name += " - Research Finished"
