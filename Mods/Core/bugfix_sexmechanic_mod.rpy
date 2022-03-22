@@ -590,7 +590,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
                 # If the girl has an orgasm due to MC coming, she gets a guaranteed trance upgrade
                 if the_person.arousal >= the_person.max_arousal:
-                    the_person "Oh, [the_person.mc_title], I'm cumming again..."
+                    if report_log.get("girl orgasms", 0) == 0:
+                        the_person "Oh, [the_person.mc_title], I'm cumming..."
+                    else:
+                        the_person "Oh, [the_person.mc_title], I'm cumming again..."
                     $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = position_choice.slut_requirement, reset_arousal = False)
                     $ the_person.change_arousal(-__builtin__.max(the_person.arousal/(report_log.get("girl orgasms", 0)+2), the_person.arousal - 99))
                     $ report_log["girl orgasms"] += 1
