@@ -53,41 +53,41 @@ init -1 python:
         elif person is mom:
             mc.business.mandatory_crises_list.append(anal_fetish_mom_intro)
             return True
-        elif person is aunt and False:
-            pass
-        elif person is cousin and False:
-            pass
+        # elif person is aunt and False:
+        #     pass
+        # elif person is cousin and False:
+        #     pass
         elif person is starbuck and get_shop_investment_rate() >= 6.0:
             mc.business.mandatory_crises_list.append(anal_fetish_starbuck_intro)
             return True
         elif person is stephanie:
             mc.business.mandatory_crises_list.append(anal_fetish_stephanie_intro)
             return True
-        elif person is emily and False:
-            pass
-        elif person is christina and False:
-            pass
-        elif person is sarah and False:
-            pass
-        elif person is salon_manager and False:
-            pass
+        # elif person is emily and False:
+        #     pass
+        # elif person is christina and False:
+        #     pass
+        # elif person is sarah and False:
+        #     pass
+        # elif person is salon_manager and False:
+        #     pass
         elif person is erica and erica_has_given_morning_handjob():
             mc.business.add_mandatory_morning_crisis(anal_fetish_erica_intro)
             return True
         elif "candace" in globals() and person is candace and False:
             pass
-        elif person is ashley and False:
-            pass
-        elif person is alexia and False:
-            pass
-        elif person is kaya and False:
-            pass
-        elif person is ellie and False:
-            pass
-        elif person is camilla and False:
-            pass
-        elif person is sakari and False:
-            pass
+        # elif person is ashley and False:
+        #     pass
+        # elif person is alexia and False:
+        #     pass
+        # elif person is kaya and False:
+        #     pass
+        # elif person is ellie and False:
+        #     pass
+        # elif person is camilla and False:
+        #     pass
+        # elif person is sakari and False:
+        #     pass
         elif person.is_employee():
             anal_fetish_employee_intro = Fetish_Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "anal")
             mc.business.add_mandatory_crisis(anal_fetish_employee_intro)
@@ -127,43 +127,43 @@ init -1 python:
         elif person is lily:
             lily.add_unique_on_room_enter_event(breeding_fetish_lily_intro)
             return True
-        elif person is aunt and False:
-            pass
-        elif person is cousin and False:
-            pass
+        # elif person is aunt and False:
+        #     pass
+        # elif person is cousin and False:
+        #     pass
         elif person is stephanie:
             mc.business.mandatory_crises_list.append(breeding_fetish_stephanie_intro)
             return True
-        elif person is emily and False:
-            pass
-        elif person is christina and False:
-            pass
+        # elif person is emily and False:
+        #     pass
+        # elif person is christina and False:
+        #     pass
         elif person is starbuck:
             mc.business.mandatory_crises_list.append(breeding_fetish_starbuck_intro)
             return True
         elif person is sarah:
             mc.business.mandatory_crises_list.append(breeding_fetish_sarah_intro)
             return True
-        elif person is salon_manager and False:
-            pass
+        # elif person is salon_manager and False:
+        #     pass
         elif person is erica and erica_get_progress() >= 4:
             mc.business.mandatory_crises_list.append(breeding_fetish_erica_intro)
             return True
         elif "candace" in globals() and person is candace:
             candace.add_unique_on_room_enter_event(breeding_fetish_candace_intro)
             return True
-        elif person is ashley and False:
-            pass
-        elif person is alexia and False:
-            pass
-        elif person is kaya and False:
-            pass
-        elif person is ellie and False:
-            pass
-        elif person is camilla and False:
-            pass
-        elif person is sakari and False:
-            pass
+        # elif person is ashley and False:
+        #     pass
+        # elif person is alexia and False:
+        #     pass
+        # elif person is kaya and False:
+        #     pass
+        # elif person is ellie and False:
+        #     pass
+        # elif person is camilla and False:
+        #     pass
+        # elif person is sakari and False:
+        #     pass
         elif person.is_employee():
             breeding_fetish_employee_intro = Fetish_Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "breeding")
             mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
@@ -210,14 +210,14 @@ init -1 python:
         elif person is erica and erica_get_progress() >= 4:
             erica.add_unique_on_room_enter_event(cum_fetish_erica_intro)
             return True
-        elif person is kaya and False:
-            pass
-        elif person is ellie and False:
-            pass
-        elif person is camilla and False:
-            pass
-        elif person is sakari and False:
-            pass
+        # elif person is kaya and False:
+        #     pass
+        # elif person is ellie and False:
+        #     pass
+        # elif person is camilla and False:
+        #     pass
+        # elif person is sakari and False:
+        #     pass
         elif person.is_employee():
             cum_fetish_employee_intro = Fetish_Action("Employee cum fetish intro", cum_fetish_employee_intro_requirement, "cum_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "cum")
             mc.business.mandatory_crises_list.append(cum_fetish_employee_intro)
