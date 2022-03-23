@@ -503,13 +503,12 @@ init 5 python:
         @staticmethod
         def build_filter_list(item_list, points, min_points = 0, filter_list = [], layers = [1, 2, 3]):
             # extend range until we have items
-            while not any(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points and x.layer in layers and x not in filter_list, item_list)):
+            while not any(x for x in item_list if x.slut_value >= min_points and x.slut_value <= points and x.layer in layers and x not in filter_list):
                 if min_points > 0:
                     min_points -= 1
                 if points < 15:
                     points += 1
-
-            return list(filter(lambda x: x.slut_value >= min_points and x.slut_value <= points and x.layer in layers, item_list))
+            return [x for x in item_list if x.slut_value >= min_points and x.slut_value <= points and x.layer in layers and x not in filter_list]
 
         @staticmethod
         def build_weighted_list(person, item_group, filtered_list):

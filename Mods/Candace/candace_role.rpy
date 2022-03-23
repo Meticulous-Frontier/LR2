@@ -617,7 +617,7 @@ label candace_convince_to_quit_label(the_person):
     mc.name "Then why don't you?"
     the_person "I'm... I'm so scared! [ex_name]... I think he knows I've been thinking about leaving! Last night he told me if I quit, he's going to expose that I've been trading sexual favors for discounts..."
     the_person "He says it's illegal! That I'll go to jail for being a prostitute!"
-    mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with a similar situation... lets say she can handle herself."
+    mc.name "Don't worry, I know someone who can help. I have a friend who has dealt with a similar situation... let's say she can handle herself."
     mc.name "She can help you. Take a leap of faith. You can trust me."
     "She thinks about it for a bit."
     "?????""Ms. [the_person.name]? I have your order ready for you in the back now."
@@ -648,7 +648,7 @@ label candace_convince_to_quit_label(the_person):
     the_person "Hi! You can call me [the_person.name]."
     salon_manager "You know, I used to date [ex_name] too!"
     the_person "Right... used to... kind of weird to think about, this is all happening so fast!"
-    salon_manager "Don't worry. First thing's first! Do you have your phone handy? Lets take a picture together!"
+    salon_manager "Don't worry. First thing's first! Do you have your phone handy? Let's take a picture together!"
     the_person "Okay! I love selfies."
     "[the_person.title] and [salon_manager.possessive_title] lean together and take a picture."
     salon_manager "There we go! That will be a great picture to send with your break up text..."
@@ -773,6 +773,7 @@ label candace_topless_at_mall_label(the_person):
             police_chief.set_possessive_title("the police chief")
             police_chief.set_mc_title("Mr." + mc.last_name)
             police_chief.set_title("Officer " + police_chief.last_name)
+            police_chief.wear_uniform()
 
     "As you walk around the mall, you notice a commotion. A small group of mostly men have gathered around someone, you walk over to see what is going on."
     "When you walk over, you find [the_person.possessive_title], and it immediately becomes clear why there is a crowd gathering around..."
@@ -826,7 +827,7 @@ label candace_topless_at_mall_label(the_person):
         "You start to wonder if she is going to be okay. Whatever happened that turned her into a bimbo, she seems to be barely functional."
         mc.name "You stay out of trouble, okay?"
         $ scene_manager.update_actor(the_person, emotion = "happy", position = "stand3")
-        "[the_person.title] let's go of you and gives you a big smile."
+        "[the_person.title] lets go of you and gives you a big smile."
         the_person "Okay!"
         mc.name "I'll see you at work."
         the_person "Yes Sir!"
@@ -844,7 +845,7 @@ label candace_midnight_wakeup_label():
 
         # make sure she is in the police station wearing her uniform
         police_chief.change_location(police_station)
-        police_chief.apply_planned_outfit()
+        police_chief.wear_uniform()
 
     "Your phone goes off in the middle of the night, waking you up. You look over at it."
     "You have no idea who it is, so you silence it and roll over. Seconds later, it's going off again. You groggily sit up and answer your phone."
@@ -1377,7 +1378,7 @@ label candace_meet_doctor_candace_label():
     python:
         the_person = candace
 
-    "It's been about a week since you cured [the_person.title] of her bimboism... "
+    "It's been about a week since you cured [the_person.title] of her bimboism..."
     "Well, mostly anyway. Since that time, talking with her is like talking to an entirely different person... But also the same."
     "She still smells the same, she still twirls her hair around her finger the same way, she still smiles at you the same way."
     "Yet, every time she opens her mouth and speaks, she is completely different."
@@ -1467,7 +1468,6 @@ label candace_meet_doctor_candace_label():
     "Her tongue dances with yours as the first fledgling thrusts are made of her hips onto yours. Her kisses punctuated with moans."
     the_person "Mmm... You feel so good. I swear, every time we fuck is better than the last..."
     $ the_person.change_arousal(30)
-    $ mc.change_arousal(30)
     call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _meet_dr_candace_fuck_01
     "When you finish, she just stays on top of you for a bit. You can feel your seed dribble out of her for a bit, but she doesn't seem to care about the mess. She just holds on to you."
     the_person "Thank you. I needed that."
@@ -1548,7 +1548,7 @@ label candace_meet_doctor_candace_label():
                 the_person "Are we, umm... We doing my place or yours tonight?"
                 mc.name "Honestly, I'm not sure if I'll be able to tonight, but I'll let you know."
                 the_person "Mmm... Okay... You go ahead... I think I would just like to bask a little..."
-                "You consider for a moment getting a nice couch for your office... "
+                "You consider for a moment getting a nice couch for your office..."
                 "But then whenever you call a girl in they'd probably assume you were getting ready to make a cheap porno movie. Better not."
                 mc.name "Rest up, I'm going to get back to work."
                 "You leave your office. You feel great about how things have progressed with [the_person.possessive_title]."

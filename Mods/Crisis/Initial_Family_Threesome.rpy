@@ -33,7 +33,7 @@ label SB_fetish_vaginal_family_threesome_label():
     the_person "So... I was wondering... is it okay if I sleep in here with you tonight?"
     menu:
         "Not tonight":
-            mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
+            mc.name "Sorry [the_person.title]... I had a long day and I'm pretty worn out... maybe tomorrow?"
             "She is clearly disappointed."
             the_person "Whatever [the_person.mc_title]... see you in the morning I guess?"
             "You head for bed, looking forward to a restful night's sleep."
@@ -100,9 +100,9 @@ label SB_fetish_vaginal_family_threesome_label():
         "[mom.possessive_title] quickly realizes that [the_person.possessive_title] is here... doing exactly what she was coming here to do. Her cheeks turn red with embarrassment."
         "You think quickly. Maybe you can salvage this situation?"
         mc.name "Hey [mom.title]... you look amazing! Want to come in for a little bit? [the_person.title] and I are just getting started."
-        "You can see a clear look of conflict in [mom.possessive_title]'s eyes. Up until now, your antics have been isolated to you and her, in her mind anyway. She's slowly processing that you have a similar relationship with [the_person.possessive_title] "
+        "You can see a clear look of conflict in [mom.possessive_title]'s eyes. Up until now, your antics have been isolated to you and her, in her mind anyway. She's slowly processing that you have a similar relationship with [the_person.possessive_title]."
         mom "I mean... I suppose I could... for a bit..."
-        "Still in a bit of a daze, [mom.possessive_title] comes into your room, closing the door behind her. She sits over at your desk and looks over at you and [the_person.possessive_title] ."
+        "Still in a bit of a daze, [mom.possessive_title] comes into your room, closing the door behind her. She sits over at your desk and looks over at you and [the_person.possessive_title]."
         $ scene_manager.update_actor(mom, position = "sitting")
         "[the_person.possessive_title] looks back at you, still a little unsure of herself. You hold up your hands and beckon her."
         $ scene_manager.update_actor(the_person, position = "cowgirl")

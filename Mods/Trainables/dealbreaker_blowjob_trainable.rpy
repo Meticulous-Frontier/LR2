@@ -122,7 +122,6 @@ label train_dealbreaker_blowjob_label(the_person):
     "You sigh happily as you feel [the_person.title]'s warm mouth envelop your cock."
     "She moves slowly at first, gently working her head up and down over your sensitive tip."
 
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(20)
 
     #Next, run BJ dialogue. Based on how she feels about it when MC cums we can get the final progress point..
@@ -130,13 +129,11 @@ label train_dealbreaker_blowjob_label(the_person):
     mc.name "It's okay if you can't get the whole thing. Use your hand a little so you don't gag."
     "[the_person.possessive_title] wraps her right hand around the base of your cock and starts to slide it back and forth in time with her blowjob."
 
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(20)
 
     "You relax for a little while while [the_person.possessive_title] services your cock, stroking your shaft and sucking gently on your tip."
     "You're pleasantly surprised when she reaches her other hand up and starts to gently play with your balls. You run your fingers through her hair and sigh contentedly."
 
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(20)
 
     "[the_person.title] pulls your cock out of her mouth and leans in even closer. She runs her tongue along the bottom of your shaft, pausing at the top to kiss the tip a few times."
@@ -144,7 +141,6 @@ label train_dealbreaker_blowjob_label(the_person):
     "[the_person.possessive_title] seems to actually be getting into this. You make sure to encourage her."
     mc.name "It feels amazing."
 
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(20)
 
     "[the_person.possessive_title] smiles and keeps working her tongue over your cock. She licks it bottom to top, then sucks on the tip, then licks it from the top back to the bottom."
@@ -160,11 +156,11 @@ label train_dealbreaker_blowjob_label(the_person):
             "[the_person.title] keeps on licking your cock. Her tongue hits all the right places and sends shivers up your spine."
             "You're almost disappointed when she opens her mouth wide and starts to blow you again."
 
-    $ mc.change_arousal(30)
     $ mc.change_locked_clarity(20)
 
     "The sweet, pouty lips of [the_person.possessive_title] is getting you off. You are going to cum soon."
     mc.name "I'm gonna cum!"
+    $ mc.change_arousal(20)
     "Suddenly, a look of panic in her eyes. She doesn't know what to do! She looks at you for direction."
     $ orgasm_choice = renpy.display_menu(orgasm_location_formatted_menu(the_person, orgasm_options),True,"Choice")
     if orgasm_choice[0] == "On her face":

@@ -5,8 +5,8 @@ init 6 python:
         between 0 and 255 inclusive.
         """
         num = fraction * 255
-        e = num - math.floor(num)
-        return e < 0.5 and int(math.floor(num)) or int(math.ceil(num))
+        e = num - floor(num)
+        return e < 0.5 and int(floor(num)) or int(ceil(num))
 
     def rgb_fraction_to_rgb(rgb_fraction_triplet):
         return tuple(map(_fraction_to_integer, rgb_fraction_triplet))

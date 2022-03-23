@@ -104,9 +104,9 @@ init 2:
                     xalign 0.5
                     xsize 520
                     if the_serum.side_effects:
-                        ysize 450
+                        ysize 430
                     else:
-                        ysize 650
+                        ysize 630
 
                     viewport:
                         scrollbars "vertical"

@@ -983,9 +983,9 @@ init -1 python:
             # run extension code (clean up situational dictionaries)
             person.situational_sluttiness.clear()
             person.situational_obedience.clear()
-            # dominant person slowly bleeds obedience on run_day
+            # dominant person slowly bleeds obedience on run_day (lowest point offset by love)
             if person.is_dominant():
-                if person.obedience > 100 - (person.get_opinion_score("taking control") * 5):
+                if person.obedience - person.love > 100 - (person.get_opinion_score("taking control") * 5):
                     person.change_obedience(-1, add_to_log = False)
 
 
@@ -1259,19 +1259,38 @@ init -1 python:
     Person.decrease_work_skill = decrease_work_skill
 
     # Change Multiple Stats for a person at once (less lines of code, better readability)
-    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, max_slut = None, max_love = None, energy = None, add_to_log = True):
-        if not obedience is None:
-            self.change_obedience(obedience, add_to_log = add_to_log)
+    def change_stats(self, obedience = None, happiness = None, arousal = None, love = None, slut = None, max_slut = None, max_love = None, energy = None, novelty = None, add_to_log = True):
+        message = []
         if not happiness is None:
-            self.change_happiness(happiness, add_to_log = add_to_log)
+            self.change_happiness(happiness, add_to_log = False)
+            message.append(("+" if happiness > 0 else "") + str(happiness) + " {image=happy_token_small}")
+        if not obedience is None:
+            self.change_obedience(obedience, add_to_log = False)
+            message.append(("+" if obedience > 0 else "") + str(obedience) +" {image=padlock_token_small}")
         if not arousal is None:
-            self.change_arousal(arousal, add_to_log = add_to_log)
+            self.change_arousal(arousal, add_to_log = False)
+            message.append(("+" if arousal > 0 else "") + str(arousal) + " {image=arousal_token_small}")
         if not love is None:
-            self.change_love(love, max_love, add_to_log = add_to_log)
+            amount = self.change_love(love, max_love, add_to_log = False)
+            if amount and amount != 0:
+                message.append(("+" if amount > 0 else "") + str(amount) + " {image=red_heart_token_small}")
         if not slut is None:
-            self.change_slut(slut, max_slut, add_to_log = add_to_log)
+            amount = self.change_slut(slut, max_slut, add_to_log = False)
+            if amount and amount != 0:
+                message.append(("+" if amount > 0 else "") + str(amount) + " {image=underwear_token_small}")
         if not energy is None:
-            self.change_energy(energy, add_to_log = add_to_log)
+            amount = self.change_energy(energy, add_to_log = False)
+            if amount and amount != 0:
+                message.append(("+" if amount > 0 else "") + str(amount) + " {image=energy_token_small}")
+        if not novelty is None:
+            amount = self.change_novelty(novelty, add_to_log = False)
+            if amount and amount != 0:
+                message.append(("+" if amount > 0 else "") + str(amount) + " Novelty")
+        if add_to_log and message:
+            display_name = self.create_formatted_title("???")
+            if self.title:
+                display_name = self.title
+            mc.log_event(display_name + ": " + " ".join(message), "float_text_yellow")
         return
 
     Person.change_stats = change_stats
@@ -1315,7 +1334,7 @@ init -1 python:
             if not max_modified_to or max_modified_to > 100:
                 max_modified_to = 100
 
-            org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
+            return org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
 
         return person_change_slut_wrapper
 
@@ -1337,7 +1356,7 @@ init -1 python:
                     suggestibility_modifier = 14
                 max_modified_to += suggestibility_modifier
 
-            org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
+            return org_func(person, amount, max_modified_to = max_modified_to, add_to_log = add_to_log)
 
         return person_change_love_wrapper
 
@@ -1623,7 +1642,7 @@ init -1 python:
             # run original function
             org_func(person, add_to_record)
             # run extension code
-            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("creampies"))
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("creampies"), add_to_log = add_to_record)
         return cum_in_vagina_wrapper
 
     # wrap up the cum_in_vagina function
@@ -1634,7 +1653,7 @@ init -1 python:
             # run original function
             org_func(person, add_to_record)
             # run extension code
-            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("anal creampies"))
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("anal creampies"), add_to_log = add_to_record)
         return cum_in_ass_wrapper
 
     # wrap up the cum_in_ass function
@@ -1648,7 +1667,7 @@ init -1 python:
             mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum facials"] = report_log.get("cum facials", 0) + 1
-            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("cum facials"))
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("cum facials"), add_to_log = add_to_record)
         return cum_on_face_wrapper
 
     # wrap up the cum_on_face function
@@ -1662,7 +1681,7 @@ init -1 python:
             mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on tits"] = report_log.get("cum on tits", 0) + 1
-            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"))
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"), add_to_log = add_to_record)
         return cum_on_tits_wrapper
 
     # wrap up the cum_on_tits function
@@ -1676,7 +1695,7 @@ init -1 python:
             mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on stomach"] = report_log.get("cum on stomach", 0) + 1
-            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"))
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"), add_to_log = add_to_record)
         return cum_on_stomach_wrapper
 
     # wrap up the cum_on_stomach function
@@ -1690,7 +1709,7 @@ init -1 python:
             mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on ass"] = report_log.get("cum on ass", 0) + 1
-            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"))
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"), add_to_log = add_to_record)
         return cum_on_ass_wrapper
 
     # wrap up the cum_on_ass function
@@ -1703,7 +1722,7 @@ init -1 python:
             # run extension code
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["drinking cum"] = report_log.get("drinking cum", 0) + 1
-            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("drinking cum"))
+            person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("drinking cum"), add_to_log = add_to_record)
         return cum_in_mouth_wrapper
 
     # wrap up the cum_on_ass function
@@ -1924,7 +1943,8 @@ init -1 python:
     Person.apply_yoga_shoes = apply_yoga_shoes
 
     def apply_planned_outfit(self):
-        self.restore_all_clothing() # restore half-off clothing items of current outfit.
+        if time_of_day != 0:    # in timeslot 0 we pick new outfits
+            self.restore_all_clothing() # restore half-off clothing items of current outfit.
 
         if self.should_wear_uniform():
             self.wear_uniform()

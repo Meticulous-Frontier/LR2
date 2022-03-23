@@ -385,7 +385,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
         "You give her a couple quick thrusts while you consider it. You're sure with how skilled she is, that whatever she has in mind is probably very pleasurable..."
         menu:
             "Let her fuck you":
-                mc.name "Okay, [the_girl.title], lets see what you can do."
+                mc.name "Okay, [the_girl.title], let's see what you can do."
                 "Even with just one foot on the floor and the other in the air as you hold it, [the_girl.possessive_title] is able to begin gyrating her hips up against you."
                 "Enjoying her skill, you stand and watch, entranced as [the_girl.possessive_title] stirs her creamy womb with your shaft."
                 if the_girl.is_dominant():

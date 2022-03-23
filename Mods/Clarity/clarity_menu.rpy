@@ -3,10 +3,11 @@
 
 init -2 python:
     def persuade_person_requirement(the_person):
+        if the_person == city_rep and city_rep.event_triggers_dict.get("currently_interrogating", False):
+            return "Not during official visit"
         if mc.free_clarity < 500:
             return "Requires: 500+ Clarity"
-        else:
-            return True
+        return True
 
     def clarity_train_int_requirement(the_person):
         if the_person.int >= mc.int:
@@ -15,8 +16,7 @@ init -2 python:
             return "Intelligence maximum reached"
         elif mc.free_clarity < (the_person.int * 500):
             return "Requires: {} Clarity".format(the_person.int * 500)
-        else:
-            return True
+        return True
 
     def clarity_train_cha_requirement(the_person):
         if the_person.charisma >= mc.charisma:
@@ -25,8 +25,7 @@ init -2 python:
             return "Charisma maximum reached"
         elif mc.free_clarity < (the_person.charisma * 500):
             return "Requires: {} Clarity".format(the_person.charisma * 500)
-        else:
-            return True
+        return True
 
     def clarity_train_focus_requirement(the_person):
         if the_person.focus >= mc.focus:
@@ -35,8 +34,7 @@ init -2 python:
             return "Focus maximum reached"
         elif mc.free_clarity < (the_person.focus * 500):
             return "Requires: {} Clarity".format(the_person.charisma * 500)
-        else:
-            return True
+        return True
 
     def clarity_train_obedience_requirement(the_person):
         if (the_person.obedience - 100) / 5 >= mc.charisma:
@@ -45,9 +43,7 @@ init -2 python:
             return "Obedience maximum reached"
         elif mc.free_clarity < max(500, ((the_person.obedience - 100) * 100)):
             return "Requires: {} Clarity".format(max(500, ((the_person.obedience - 100) * 100)))
-        else:
-            return True
-
+        return True
 
     def clarity_serum_dose_requirement(the_person):
         if mc.inventory.get_any_serum_count() <= 0:

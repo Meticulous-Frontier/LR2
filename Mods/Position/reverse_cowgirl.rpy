@@ -136,7 +136,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
                     $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating" * 5))
                 "You grab [the_girl.possessive_title]'s ass cheeks with both hands. Her smooth skin feels supple in your hands." ###TODO
             "After some time spent grinding, [the_girl.possessive_title] resumes her bouncing motion on top of you."
-        "Finger Her Ass" if (the_girl.get_opinion_score("anal sex") > 0 and the_girl.get_opinion_status("anal sex")):   #Can only be done if the girl is known buttslut#
+        "Finger Her Ass" if (the_girl.get_opinion_score("anal sex") > 0 and the_girl.get_known_opinion_score("anal sex")):   #Can only be done if the girl is known buttslut#
             "You decide to help her feel even more full! You bring your index finger up to your mouth. You stick it in your mouth, getting it good and lubed up."
             "[the_girl.possessive_title] stops grinding for a second when she feels your finger at her asshole."
             if the_girl.sex_skills["Anal"] > 1: #She can easily take a finger
@@ -161,7 +161,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
                 "She stops for a second when you hit just the right spot and works her hips side to side for a few moments instead of forward and back."
             "Eventually, she stops grinding and begins to work her body up and down again. You try to keep your finger inside her ass, but it soon slips out."
             "Instead of stopping to let you push your finger back inside her, she keeps riding you, so you give her ass a firm spank."
-        "Finger Her Ass\n{color=#ff0000}{size=18}Must like anal sex{/size}{/color} (disabled)" if (the_girl.get_opinion_score("anal sex") <= 0 or not the_girl.get_opinion_status("anal sex")):
+        "Finger Her Ass\n{color=#ff0000}{size=18}Must like anal sex{/size}{/color} (disabled)" if (the_girl.get_opinion_score("anal sex") <= 0 or not the_girl.get_known_opinion_score("anal sex")):
             pass
     return
 

@@ -34,7 +34,7 @@ init 2 python:
         if age is None: # use linear decreasing distribution in age range (more young than old)
             max_age = age_ceiling or 55
             min_age = age_floor or 18
-            age = int(math.floor(abs(renpy.random.random() - renpy.random.random()) * (1 + max_age - min_age) + min_age))
+            age = int(floor(abs(renpy.random.random() - renpy.random.random()) * (1 + max_age - min_age) + min_age))
 
         if relationship is None:
             if age < 21:
@@ -397,7 +397,7 @@ init 2 python:
     def create_bimbo():
         # add one bimbo to the game (on start of game)
         person = make_person(age=renpy.random.randint(21, 35), tits="DD", face_style = "Face_4", skin = "tan", stat_array = [4, 1, 2],
-            hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality, force_random = True,
+            hair_colour = ["platinum blonde", [.789, .746, .691, 1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality, force_random = True,
             forced_opinions = [["high heels", 2, False]],
             forced_sexy_opinions = [["skimpy outfits", 2, False]])
         person.generate_home()

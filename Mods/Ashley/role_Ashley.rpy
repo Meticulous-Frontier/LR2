@@ -699,7 +699,6 @@ label ashley_ask_about_porn_label(the_person):
     the_person "Oh, but I want to..."
     "She leans closer to you and whispers."
     the_person "I really want to... I want to make you feel good..."
-    $ mc.change_arousal(30)
     $ mc.change_locked_clarity(20)
     "DAMN. You feel your pants get a little tight after that. You remember from the video the way [the_person.title] took control and rode her ex..."
     mc.name "I mean, you don't have to do that..."
@@ -709,18 +708,15 @@ label ashley_ask_about_porn_label(the_person):
     "With nothing else to say, [the_person.possessive_title] reaches down and begins to stroke your cock through your pants."
     the_person "Mmmm, I can tell you want it too!"
     "[the_person.title] has some skilled hands... You close your eyes and enjoy her stroking you for a moment."
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
     "You hear a zipper some fabric rustle for a moment, then suddenly feel her warm hand on your dick, skin to skin. You look down and see her pulling your dick out."
     if the_person.has_taboo("touching_penis"):
         the_person "Oh my god... it's so big... You've been hiding this from me, [the_person.mc_title]?"
         "She gives you a couple eager strokes. You can only moan in response. It feels good to finally feel her hands on you."
         $ the_person.break_taboo("touching_penis")
-        $ mc.change_arousal(15)
     else:
         the_person "God, it's so big. I love getting your cock out..."
         "She gives you a couple eager strokes. You can only moan in response."
-        $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
     "She looks into your eyes as she continues to give you a handjob."
     the_person "Alright, don't hold back now."
@@ -764,7 +760,7 @@ label ashley_post_handjob_convo_label(the_person):
     $ the_person.draw_person()
     mc.name "Hey [the_person.title]..."
     the_person "Oh... haha, yeah, I figured something like this was coming... it's okay, I'll clean out my desk and be out before you know it..."
-    mc.name "Clean out your desk? I'm not firing you. Come on let's go get some coffee."
+    mc.name "Clean out your desk? I'm not firing you. Come on, let's go get some coffee."
     if the_person.should_wear_uniform():
         the_person "Oh, coffee? Ok, I'm going to change and we can go."
         $ the_person.apply_outfit(the_person.planned_outfit)
@@ -960,7 +956,7 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     mc.name "Hey girls, good to see you."
     "They are surprised to see you. Ashley blushes and looks down at her coffee as Stephanie responds."
     stephanie "Hey boss! Me and Ash are just having a cup of coffee before we go our separate ways. It's kind of become our little tradition every Sunday morning, since she moved in with me."
-    "She looks over at her sister and starts to tease her. "
+    "She looks over at her sister and starts to tease her."
     stephanie "I think she said something about hitting up the gym today... I think there's a guy she's trying to impress!"
     the_person "Oh my gosh Steph, stop it!"
     "[the_person.title] is blushing, and once in a while sneaks a peek up at you. Even though you've already discussed with her how you want things to be with her, it is cute to see her squirm a little."
@@ -1157,7 +1153,7 @@ label ashley_second_concert_date_label():
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     "When you arrive, you looked around for a minute, but don't see Ashley yet at your agreed on meeting place. You decide to give her a few minutes. You are just about to pull out your phone and text her when you see her approaching."
-    "She is wearing a sexy black dress, and your eyes are immediately drawn to it's curves. There's not a doubt in your mind that [the_person.title] has something planned for you this evening..."
+    "She is wearing a sexy black dress, and your eyes are immediately drawn to its curves. There's not a doubt in your mind that [the_person.title] has something planned for you this evening..."
     $ mc.change_locked_clarity(20)
     $ the_person.draw_person()
     ashley "Hey! My eyes are up here."
@@ -1279,7 +1275,7 @@ label ashley_second_concert_date_label():
             "Stop her":
                 mc.name "What are you doing? This is supposed to be a one way thing. I'll cum in your sister later."
                 the_person "You're serious? Why not do both?"
-                mc.name "I promised her I wouldn't go to far. You got your satisfaction, I'll get mine later."
+                mc.name "I promised her I wouldn't go too far. You got your satisfaction, I'll get mine later."
                 the_person "Geeze, okay. I was about to offer to drink your cum as thanks, but I guess you'd better save that load then champ."
                 "[the_person.possessive_title] pulls a couple wipes from her clutch and wipes herself clean."
             "Let her continue":
@@ -1386,7 +1382,7 @@ label ashley_second_concert_date_label():
     else:
         the_person "Hey sis! We had a great time, and don't worry, your boyfriend was a gentleman."
         stephanie "Ah, that's good."
-        the_person "I'm wore out. I think I'm going to go have a shower. You two try to keep it down so I can get some sleep tonight, okay?"
+        the_person "I'm worn out. I think I'm going to go have a shower. You two try to keep it down so I can get some sleep tonight, okay?"
         stephanie "No promises."
         $ scene_manager.remove_actor(the_person)
         "[the_person.title] disappears into the restroom, leaving you with [stephanie.title]."
@@ -1567,7 +1563,6 @@ label ashley_blows_during_meeting_label():
     "[ashley.possessive_title] quickly slides under your desk and unzips your pants, pulling your cock out."
     mc.name "Are you serious? Is this really the right time for..."
     "[ashley.title] engulfs the entirety of your rapidly hardening cock in her mouth, stopping your words in your throat."
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(30)
     "It only takes a few moments to reach full hardness as she starts to work your cock over with her soft lips."
     "Of course, there is another knock at the door. You look up."
@@ -1577,13 +1572,11 @@ label ashley_blows_during_meeting_label():
     stephanie "Thanks."
     $ scene_manager.update_actor(stephanie, position = "sitting")
     "[ashley.title] continues to bob her head up and down your cock while her sister sits down across from you. Somehow she is completely silent?"
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(30)
     mc.name "What can I do for you?"
     stephanie "Ah, well, I'm having some trouble with the synthesis on one of the latest serum designs, I was wondering if you could look at it."
     "Fuck, you aren't sure you can handle science talk right now..."
     "Those pouty lips are working wonders sliding up and down your cock... you just wanna grab her by the hair..."
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(40)
     mc.name "What issues are you having?"
     "[stephanie.possessive_title] grabs a folder from her bag and hands it to you."
@@ -1593,7 +1586,6 @@ label ashley_blows_during_meeting_label():
     stephanie "We have, actually..."
     "[stephanie.title] starts to talk about some of the other methods they've been using. You use your hand in [ashley.title]'s hair and force your cock down her throat."
     "She manages to throat you for several seconds, but eventually sputters and gags. When you let go she quickly pulls off and gasps. You pretend to cough to cover up the noise."
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(40)
     stephanie "Ah, you okay?"
     mc.name "Yes, sorry, please continue."
@@ -1601,7 +1593,6 @@ label ashley_blows_during_meeting_label():
     "[ashley.title]'s soft mouth is working your shaft hard. There is no way you don't cum soon."
     stephanie "Actually, maybe if homogenized the base before we mixed in the catalyst, that would help..."
     mc.name "Yes I think that sounds... good..."
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(40)
     "You put your hand on [ashley.possessive_title]'s head again and force her down again as you start to cum, right down her throat."
     $ ashley.cum_in_mouth()
@@ -1942,7 +1933,6 @@ label coffee_time_steph_gets_handsy_label():
     "As she asks her sister, her hand drifts up to your crotch. It rapidly hardens as she begins to stroke it carefully."
     $ mc.change_locked_clarity(20)
     the_person "No... Not that I'm aware of anyway... The Chicago symphony is doing a charity live-stream later though, so I might watch that..."
-    $ mc.change_arousal(15)
     "You decide two can play at this game. In the same way, you carefully run your hand along her thigh until it's resting on her mound. She gives a small sigh when you start to apply pressure on it."
     $ stephanie.change_arousal(15)
     if stephanie.sluttiness < 30:
@@ -1974,12 +1964,10 @@ label coffee_time_steph_gets_handsy_label():
             "She squirms a bit and glances around nervously as your hand reaches her slit. She sighs when your middle finger pushes inside of her, but is on alert for anyone who might be watching."
             "Not to be outdone, [stephanie.title] starts to undo your zipper. She clumsily reaches into your pants and pulls your cock out. The soft skin of her hand feels great as she starts to stroke you."
             $ mc.change_locked_clarity(20)
-        $ mc.change_arousal(30)
         $ stephanie.change_arousal(30)
         if the_person.sluttiness < 40:
             "You and [stephanie.title] continue to pet each other at the booth, sipping your coffees once in a while with your free hands."
             "Across the table, [the_person.title] appears to be completely oblivious. [stephanie.possessive_title] is beginning to squirm as you stroke her gspot with your finger."
-            $ mc.change_arousal(30)
             $ stephanie.change_arousal(30)
             the_person "So... I'm thinking about going to the spa later treat myself to something... Do you want to go Steph?"
             stephanie "Oh!!! Uhh... Yesssss..."
@@ -2018,7 +2006,7 @@ label coffee_time_steph_gets_handsy_label():
                         $ mc.change_locked_clarity(20)
                         mc.name "So what are you thinking about getting done at the Spa? I hear they have really good service there."
                         "You keep the conversation going so Steph can concentrate on her work. You are starting to leak precum, making her handjob feel even better."
-                        the_person "Oh, ahh, well I want to get my nails done for sure... "
+                        the_person "Oh, ahh, well I want to get my nails done for sure..."
                         "[the_person.possessive_title] starts to explain. However, [stephanie.title] is looking around nervously and she is starting to notice."
                         the_person "You okay Steph? You seem preoccupied..."
                         "She startles and looks back at her sister."

@@ -101,7 +101,7 @@ label scene_piledriver_anal_1(the_girl, the_location, the_object):
     return
 
 label scene_piledriver_anal_2(the_girl, the_location, the_object):
-    "You take [the_girl.possessive_title] legs and spread them wide. Her whole body lays open and surrendered to you."
+    "You take [the_girl.possessive_title]'s legs and spread them wide. Her whole body lays open and surrendered to you."
     "She reaches down with her hand and starts to play with her [the_girl.pubes_description] pussy as you fuck her buttery back door."
     if the_girl.tits_available():
         "[the_girl.title]'s tits are swaying attractively with each thrust. You give her a couple of rough thrusts and enjoy the change in their movement."
@@ -155,7 +155,7 @@ label outro_piledriver_anal(the_girl, the_location, the_object):
         if mc.condom:
             "You hold yourself inside of her until your climax has passed, then pull out slowly and sit back."
 
-            "Your condom is filled and bulging on one side. [the_girl.title] is to wore out to do anything with it."
+            "Your condom is filled and bulging on one side. [the_girl.title] is too worn out to do anything with it."
             "You tie the end in a knot and pull it off, throwing it away while she recovers."
         else:
             if the_girl.has_cum_fetish():

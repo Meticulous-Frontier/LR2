@@ -105,7 +105,7 @@ init -1 python:
         return False
 
     def camilla_take_pics_requirement(the_person):
-        if the_person.location == downtown_bar and camilla_will_take_pics() and the_person.effective_sluttiness > 40:
+        if the_person.location == downtown_bar and camilla_will_take_pics() and the_person.effective_sluttiness() > 40:
             return True
         return False
 
@@ -300,7 +300,7 @@ label camilla_get_a_drink_label(the_person):
             call camilla_bathroom_blowjob_label(the_person) from _camilla_first_blowjob_pics_01
         else:
             the_person "No dancing tonight?"
-            mc.name "No, sometimes it is nice to just relax and have drink."
+            mc.name "No, sometimes it is nice to just relax and have a drink."
             the_person "Yeah, I agree."
             "You chat with [the_person.possessive_title] for a bit."
             "There is definitely some sexual tension in the air between you two, but she knows she can talk to you about it when she is ready."
@@ -439,7 +439,7 @@ label camilla_dance_lessons_label():
         "At the end of the lesson, she is close to you again, breathless. A light sheen of sweat makes her skin shine."
         "You hands on her body throughout the dancing has definitely put sexual tension in the air."
         $ mc.change_locked_clarity(30)
-        $ the_person.change_slut(2)
+        $ the_person.change_slut(2, 50)
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     "Tired from your evening, you chat with [the_person.possessive_title] before you leave."
     the_person "So, they do this most evenings here. If you ever want a dance partner, I love to dance!"
@@ -470,7 +470,6 @@ label camilla_take_pics_label(the_person):  #Not the first time.
 
         $ the_person.strip_outfit(position = "kissing")
         $ the_person.change_arousal(20)
-        $ mc.change_arousal(10)
         $ mc.change_locked_clarity(20)
         the_person "Here, take this. You know what to do!"
         "[the_person.possessive_title] hands you her phone. You pull up her photo app."
@@ -582,7 +581,6 @@ label camilla_bathroom_blowjob_label(the_person):
     "You both take a quick look around, and when the coast is clear, you both walk into the bathroom and lock the door behind you."
     "You waste no time, you quickly wrap your arms around [the_person.title] and start making out with her."
     $ the_person.draw_person(position = "kissing")
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
     the_person "Mm... mmm... mmmmmmmmmff..."
     "She is moaning in your mouth. You can tell the naughtiness of finally getting intimate with someone other than her husband is really turning her on."
@@ -616,7 +614,6 @@ label camilla_bathroom_blowjob_label(the_person):
     "She begins to stroke you softly with her hand."
     the_person "Mmmmm... it's so hard... and hot!"
     "You moan as she strokes you. You make sure to snap a couple pictures."
-    $ mc.change_arousal(10)
     $ the_person.change_arousal(10)
     $ mc.change_locked_clarity(40)
     the_person "Does that feel good? I bet it does... I just wanna make you feel good..."
@@ -625,16 +622,15 @@ label camilla_bathroom_blowjob_label(the_person):
     "She starts to take you into her mouth. You snap a few more pictures of this beautiful senora, on her knees servicing you."
     "[the_person.possessive_title]'s head is now bouncing up and down on your cock. Her pouty lips feel amazing sliding up and down your length."
     $ the_person.change_arousal(20)
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(40)
     "You forget you are supposed to take pictures and begin to just enjoy the wonderful sensations."
     # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH010
     call get_fucked(the_person, start_position = blowjob, start_object = make_sink(), private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_camilla_sex_description_CSH010
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
-        "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
+        the_person "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
     else:
-        "Wow... that was hot!"
+        the_person "Wow... that was hot!"
 
     if the_person.has_mouth_cum():
         "[the_person.possessive_title] looks up at you. She couldn't quite swallow all your cum, some of it is slowly dripping down the sides of her mouth."
@@ -677,7 +673,6 @@ label camilla_blowjob_text_label(the_person):
     "Her voice trails off a bit as she recalls the details. A smile on her face."
     the_person "I've never, ever had to swallow soooooo much. It was so hot, like a firehose it just kept cumming..."
     "You shift uncomfortably. This story is starting to turn you on!"
-    $ mc.change_arousal (20)
     $ mc.change_locked_clarity(20)
     the_person "Haaa... sorry! I probably should have just said that it went well."
     mc.name "No it's' alright. I was a little concerned with how things would go for you, but I'm glad that it turned out well."
@@ -714,7 +709,6 @@ label camilla_dancing_sex_label(the_person):
             "She slightly grinds her ass back against you as you keep moving to the beat. Her ass feels great moving back and forth against your rapidly rising erection."
             mc.name "Mmm, that feels good. I can't wait to get you alone..."
             $ the_person.change_arousal(20)
-            $ mc.change_arousal(10)
             $ mc.change_locked_clarity(20)
             "She gives a sigh and melts back into you. You let your hands roam all along the sides of her body, once in a while moving across the sides of her breasts."
             "Being careful not to push things too fast, you spin her out again, and then back to you."
@@ -741,7 +735,6 @@ label camilla_dancing_sex_label(the_person):
         the_person "Mmm... fuck that feels good."
         "[the_person.title] begins moving her hips against yours. Your cock, constrained in your clothing, is nestled against her crotch, aching to be let free."
         $ the_person.change_arousal(20)
-        $ mc.change_arousal(10)
         $ mc.change_locked_clarity(30)
         "The song ends, and [the_person.title] looks at you."
         the_person "Ok... you know what to do... I'll meet you in the Lady's room in just a minute..."
@@ -860,7 +853,7 @@ label camilla_dancing_sex_label(the_person):
         the_person "Here we go! Get lots of good pics!"
         call strip_tease(the_person, for_pay = False, skip_intro = True) from _CS_free_strip_scene_camilla_021
         "You got lots of pics of her strip tease. You take a few more as she saunters over to you."
-        the_person "Come on, lets fuck!"
+        the_person "Come on, let's fuck!"
         call fuck_person(the_person, start_object = make_sink(), private = True) from _call_casual_sex_mod_camilla_022
         "As you finish up, you make sure to take some pictures of the aftermath. You notice [the_person.possessive_title] is touching herself."
         the_person "Oh god, daddy is fuck me so rough tonight when he reclaims me tonight... I'm gonna be so sore. I can't wait!"
@@ -1185,7 +1178,6 @@ label camilla_lingerie_help_label(the_person):  #40
     the_person "Okay. This is the second set."
     $ the_person.draw_person(position = "standing_doggy")
     "[the_person.possessive_title] turns around and bends over again. The way she is showing off her body is really starting to turn you on."
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
     "You swear you see a little wiggle in her hips as you check her out."
     $ the_person.draw_person(position = "stand4")
@@ -1257,14 +1249,13 @@ label camilla_lingerie_help_label(the_person):  #40
         "She looks disappointed, but also relieved."
         the_person "Okay. I appreciate the thought."
     $ camilla_alexia_boudoir_intro_setup()
-    "You snap a couple more photos. Just when you think you are finishing up, [the_person.title] gets down her knees slides over to you."
+    "You snap a couple more photos. Just when you think you are finishing up, [the_person.title] gets down on her knees and slides over to you."
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] grabs your zipper and starts to pull it down. A couple quick motions later, and your cock is out and inches from her face."
     the_person "Hey, keep taking pictures!"
     mc.name "Right!"
     "You snap more pictures as [the_person.title] opens up and slides her warm wet mouth down over the tip of your erection."
     $ mc.change_locked_clarity(50)
-    $ mc.change_arousal(15)
     "All the sexy wardrobe changes have you aching for release. You sigh as [the_person.possessive_title]'s mouth starts bobbing up and down."
     call get_fucked(the_person, start_position = blowjob, private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_camilla_lingerie_blowjob_01
     if the_person.has_mouth_cum():
@@ -1417,7 +1408,7 @@ label camilla_formal_date_label():    #60
             "It's so hot, dumping your load inside a married woman."
             if camilla_is_fertile():
                 "Especially since you cured her infertility."
-                if the_person.is_pregnant():
+                if the_person.knows_pregnant():
                     "You've already knocked her up, and now every load is another claim you are staking on her body."
                 else:
                     "Every load you dump inside her could be the one that knocks her up."
@@ -1454,7 +1445,6 @@ label camilla_formal_date_label():    #60
     "Your hand is cupping her chest. You give her hefty tits a squeeze, enjoying their weight heat and weight."
     $ mc.change_locked_clarity(50)
     $ the_person.change_arousal(10)
-    $ mc.change_arousal(10)
     the_person "Mmm..."
     "God, thinking about the latina goddess next to you in bed is getting you hard. She's still sleeping... but surely she wouldn't mind if you slipped inside her for a bit?"
     "You are both already naked... maybe you could just slide it between her legs for a bit, up against her pussy... that could be nice..."
@@ -1462,25 +1452,21 @@ label camilla_formal_date_label():    #60
     the_person "Ahhh... [the_person.SO_name]..."
     $ mc.change_locked_clarity(50)
     $ the_person.change_arousal(15)
-    $ mc.change_arousal(10)
     "[the_person.title] is so out of it, she thinks you are her husband!"
     "As you slide up against her, you can feel a bit of heat and humidity escaping her crotch. She's definitely getting turned on too."
     "You let go of her tits and reach down between her legs. You use your hand to push your cock against her slit as much as possible and then start to thrust a bit."
     $ mc.change_locked_clarity(50)
     $ the_person.change_arousal(25) #60
-    $ mc.change_arousal(20)
     the_person "[the_person.SO_name], que me cojan..."
     "You have no idea what she is saying, but she is definitely getting into it. You decide to go for it."
     "You take a couple more strokes, then use your hand to put your cock up. You slide into her wet cunt quite easily."
     $ mc.change_locked_clarity(50)
     $ the_person.change_arousal(25) #85
-    $ mc.change_arousal(20) #60
     the_person "Que me jodan más fuerte..."
     "God, fucking married women is amazing. She is pushing her ass back against you now. You aren't sure if she's woken up or not but you don't really care."
     "You grope her tits roughly and start to really pound her. She is moaning loudly."
     $ mc.change_locked_clarity(50)
     $ the_person.change_arousal(25) #110
-    $ mc.change_arousal(20) #80
     the_person "Papi! punto de correrse!"
     "Did she just call you daddy? Either way, the urgency in her voice makes it clear she is finishing."
     "[the_person.possessive_title] shoves her ass back against you as she cums. Her helpless body quivers in delight. Her moans drive you even harder."

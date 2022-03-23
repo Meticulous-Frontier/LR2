@@ -77,7 +77,7 @@ label alpha_greetings(the_person):
             if the_person.sluttiness > 60:
                 the_person "Hello [the_person.mc_title], how has your day been? Maybe you can make mine better..."
             else:
-                $ day_part = time_of_day_string()
+                $ day_part = time_of_day_string(time_of_day)
                 the_person "Good [day_part], [the_person.mc_title]!"
     return
 
@@ -149,7 +149,7 @@ label alpha_sex_accept(the_person):
         else:
             the_person "I love sex, [the_person.mc_title], and I love it more when it's with you!"
     else:
-        the_person "Okay, lets try this... I hope you know how to treat a real woman during sex!"
+        the_person "Okay, let's try this... I hope you know how to treat a real woman during sex!"
     return
 
 label alpha_sex_obedience_accept(the_person):
@@ -158,7 +158,7 @@ label alpha_sex_obedience_accept(the_person):
         the_person "But you look so strong and handsome... Let me feel your body!"
     else:
         if the_person.obedience > 130:
-            the_person "I... We really shouldn't... But I know this will make me happy, lets do it [the_person.mc_title]..."
+            the_person "I... We really shouldn't... But I know this will make me happy, let's do it [the_person.mc_title]..."
         else:
             the_person "How does this keep happening [the_person.mc_title]? I like you but we shouldn't be doing this..."
             "[the_person.possessive_title] looks straight in your eyes, conflicted."
@@ -274,7 +274,7 @@ label alpha_seduction_accept_alone(the_person):
     else:
         $ so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 60:
-            the_person "Come on [the_person.mc_title], lets get going, screw my [so_title]!"
+            the_person "Come on [the_person.mc_title], let's get going, screw my [so_title]!"
         else:
             the_person "I have a [so_title], I shouldn't be doing this..."
             "Her eyes tell quite a different story."
@@ -853,7 +853,7 @@ label alpha_condom_bareback_demand(the_person):
 label alpha_cum_face(the_person):
     if the_person.has_cum_fetish() or the_person.obedience > 130:
         if the_person.has_cum_fetish() or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("cum facials") > 0:
-            $ pronoun = person_body_shame_string(the_person, "little cum slut")
+            $ pronoun = person_body_shame_string(the_person.body_type, "little cum slut")
             the_person "Do you like to see my face covered [the_person.mc_title]? Am I your good [pronoun]?"
         else:
             the_person "It's everywhere! Next time point that thing somewhere else, I'm only doing this for you as a favor."
@@ -932,7 +932,7 @@ label alpha_cum_vagina(the_person):
 label alpha_cum_anal(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 90:
-            $ pronoun = person_body_shame_string(the_person, "little anal queen")
+            $ pronoun = person_body_shame_string(the_person.body_type, "little anal queen")
             the_person "Ah... yes pump your seed into your [pronoun]?"
         else:
             the_person "Oh my, you filled up my bottom... Remember [the_person.mc_title], you're the only one I let do this."
@@ -1005,7 +1005,7 @@ label alpha_sex_watch(the_person, the_sex_person, the_position):
 
     else:
         $ the_person.draw_person(emotion = "happy")
-        $ pronoun = person_body_shame_string(the_sex_person, "slut")
+        $ pronoun = person_body_shame_string(the_sex_person.body_type, "slut")
         the_person "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
         "[title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
 
@@ -1338,7 +1338,7 @@ label alpha_condomless_sex_taboo_break(the_person):
             mc.name "I want our first time to be special though, don't you?"
             "She takes a second to think, then nods."
             if the_person.on_birth_control:
-                the_person "You really want to do it raw? Well, I'm on birth control, so lets make this special."
+                the_person "You really want to do it raw? Well, I'm on birth control, so let's make this special."
             else:
                 the_person "I want you to be very careful where you finish, do you understand?"
         else:
@@ -1381,7 +1381,7 @@ label alpha_underwear_nudity_taboo_break(the_person, the_clothing):
             the_person "I have to keep some kind of decorum, but I am intrigued..."
         else:
             mc.name "You might have wanted to worry about that before I saw you naked. You have nothing left to hide."
-            the_person "Yes, you are right, lets go."
+            the_person "Yes, you are right, let's go."
     return
 
 label alpha_bare_tits_taboo_break(the_person, the_clothing):

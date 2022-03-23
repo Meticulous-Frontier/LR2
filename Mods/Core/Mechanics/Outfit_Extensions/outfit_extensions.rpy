@@ -350,31 +350,6 @@ init 6 python:
     Outfit.get_total_slut_modifiers = get_total_slut_modifiers_enhanced
 
     #Categorizing outfits based on type
-    def has_clothing_optimized(self, clothing): #returns true if this outfit includes the given clothing item, false otherwise. checks for exact parameter match (colour, name, ect), but not reference match.
-        return any(x for x in self.upper_body + self.lower_body + self.feet + self.accessories if x == clothing)
-
-    Outfit.has_clothing = has_clothing_optimized
-
-    def vagina_available_optimized(self): ## Doubles for asshole for anal.
-        return not any(x for x in self.lower_body if x.anchor_below and not (x.half_off and x.half_off_gives_access))
-
-    Outfit.vagina_available = vagina_available_optimized
-
-    def vagina_visible_optimized(self):
-        return not any(x for x in self.lower_body if x.hide_below and not (x.half_off and x.half_off_gives_access))
-
-    Outfit.vagina_visible = vagina_visible_optimized
-
-    def tits_available_optimized(self):
-        return not any(x for x in self.upper_body if x.anchor_below and not x in [vest, suit_jacket] and not (x.half_off and x.half_off_gives_access))
-
-    Outfit.tits_available = tits_available_optimized
-
-    def tits_visible_optimized(self):
-        return not any(x for x in self.upper_body if x.hide_below and not x in [vest, suit_jacket] and not (x.half_off and x.half_off_gives_access))
-
-    Outfit.tits_visible = tits_visible_optimized
-
     def has_dress(self):
         return any(self.has_clothing(item) for item in real_dress_list)
 

@@ -184,7 +184,6 @@ label breeding_fetish_employee_intro_label(the_person):
     mc.name "... and fucked your brains out..."
     "As you finish those words, your push yourself inside of her. She moans as it goes in."
     $ the_person.change_arousal (20)
-    $ mc.change_arousal(15)
     $ mc.change_locked_clarity(50)
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
@@ -417,7 +416,6 @@ label breeding_fetish_mom_intro_label(): # Needs testing
     the_person "My belly started to get bigger and my tits started to leak milk and I loved it so much..."
     "Ahh, you've been giving her serums that increase her drive to reproduce. Looks like they've finally driven her over the urge and given her a breeding fetish!"
     $ the_person.change_arousal (30)
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(50)
     "She starts to rock her hips back and forth. You reach up and start to fondle her tits as they sway back and forth."
     mc.name "Mmmm, I can't wait to drink milk from your tits again, [the_person.title]."
@@ -536,7 +534,6 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     the_person "Oh fuck bro, you fill me up so good..."
     "She's playing it up for the stream, but you know she is also having fun, fucking her brother."
     $ the_person.change_arousal(20)
-    $ mc.change_arousal(20)
     $ mc.change_locked_clarity(20)
     "You lay back on the bed while [the_person.possessive_title] works your cock in and out of her. You make sure to keep her ass in the frame of the camera."
     "[the_person.possessive_title] gives you a few quick, shallow dips then pull off you almost completely, leaving just your tip inside her."
@@ -549,14 +546,12 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     mc.name "Do it sis, your ass is amazing!"
     "You play along for the stream, and while no one online actually believes it, you legitimately fuck your sister."
     $ the_person.change_arousal(30)
-    $ mc.change_arousal(30)
     $ mc.change_locked_clarity(20)
     "[the_person.possessive_title] wiggles back and forth a few more times, then looks back at you and smiles."
     the_person "Do you like that, bro? Ah! That is so good..."
     "[the_person.possessive_title] reaches back between her legs and cups your balls."
     the_person "Mmm you feel so full... I want you to fill me up! I can't wait to milk all that cum out of you!"
     $ the_person.change_arousal(30)
-    $ mc.change_arousal(30)
     $ mc.change_locked_clarity(20)
     "Her dirty talking it having it's desired effect, and the taboo of doing this while anyone in the world can watch is just too much."
     "[the_person.possessive_title]'s sweet cunt milks your cock, the wet friction pushes you past the point of no return."
@@ -775,7 +770,6 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
         $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
         "You give her ass a couple smacks with your cock."
     $ the_person.change_arousal(10)
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     "She wiggles her hips back and forth a bit, teasing you."
     the_person "Stick it in [the_person.mc_title]! Fuck me hard and cum as deep as you can!"
@@ -935,7 +929,6 @@ label breeding_fetish_erica_intro_label():
     "You grab her hands and force them down at her sides. She looks at you longingly as your bare cock nears her cunt."
     "You don't say a word, you just push forward, sliding yourself into her fertile young pussy."
     $ the_person.change_arousal (20)
-    $ mc.change_arousal(15)
     $ mc.change_locked_clarity(50)
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
@@ -992,7 +985,6 @@ label breeding_fetish_erica_unsuccessful_followup_label():
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
     $ the_person.change_arousal(10)
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     mc.name "What are you doing here?"
     the_person "I've been tracking my cycles and I am soooo fertile right now. I understand you were too tired last night, but I need your cum ASAP."
@@ -1061,7 +1053,6 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
             "You give her ass a couple smacks with your cock."
         $ the_person.change_arousal(10)
-        $ mc.change_arousal(10)
         $ mc.change_locked_clarity(50)
         mc.name "Are you ready to get bred, bitch?"
         "[the_person.title] keeps trying to back herself up onto you, but you move your dick around, frustrating her."
@@ -1130,7 +1121,6 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
             "You give her ass a couple smacks with your cock."
         $ the_person.change_arousal(10)
-        $ mc.change_arousal(10)
         $ mc.change_locked_clarity(50)
         mc.name "Are you ready to get bred, bitch?"
         "[the_person.title] keeps trying to back herself up onto you, but you move your dick around, frustrating her."

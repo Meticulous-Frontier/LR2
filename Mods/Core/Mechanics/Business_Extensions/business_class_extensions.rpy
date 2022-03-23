@@ -332,9 +332,9 @@ init -1 python:
                 business.fire_HR_director()
 
             if person == cousin and get_strip_club_foreclosed_stage() == 0: # she goes back to stripping
-                stripclub_strippers.append(the_cousin)
-                the_cousin.set_schedule(strip_club, the_times = [3, 4])
-                the_cousin.event_triggers_dict["stripping"] = True #Used to flag the blackmail event
+                stripclub_strippers.append(person)
+                person.set_schedule(strip_club, the_times = [3, 4])
+                person.event_triggers_dict["stripping"] = True #Used to flag the blackmail event
 
         return remove_employee_wrapper
 

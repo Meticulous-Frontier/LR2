@@ -25,7 +25,7 @@ init python:
 label intro_cum_fetish_blowjob(the_girl, the_location, the_object):
     "[the_girl.possessive_title] eagerly begins opening your pants. She pulls out your cock and gives it a few gentle strokes."
     if mc.condom:
-        the_girl "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        the_girl "Why are you wearing this thing? Let's take this off so I can take care of you better..."
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
     the_girl "How about I take care of this for you?"
@@ -142,7 +142,7 @@ label transition_default_cum_fetish_blowjob(the_girl, the_location, the_object):
     $ cum_fetish_blowjob.current_modifier = "blowjob"
     $ cum_fetish_blowjob.redraw_scene(the_girl)
     if mc.condom:
-        the_girl "Why are you wearing this thing? Lets take this off so I can take care of you better..."
+        the_girl "Why are you wearing this thing? Let's take this off so I can take care of you better..."
         "[the_girl.possessive_title] pulls off your condom."
         $ mc.condom = False
     "[the_girl.possessive_title] gets onto her knees in front of you and takes your hard cock in her hands. She strokes it tentatively a few times, then leans in and slides the tip into her mouth."

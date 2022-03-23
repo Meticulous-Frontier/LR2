@@ -111,7 +111,7 @@ label family_morning_breakfast_enhanced_label():
             "Next to you, [lily.title] notices your erection and speaks up."
             lily "I'm sure he's fine mom, but us walking around like this has him all worked up. He's hard as a rock!"
             "[lily.possessive_title] reaches down and starts to stroke you."
-            mom "Oh! I'm so sorry [mom.mc_title], I didn't even think about that. [lily.name] honey, lets take care of him before the day gets going."
+            mom "Oh! I'm so sorry [mom.mc_title], I didn't even think about that. [lily.name] honey, let's take care of him before the day gets going."
             lily "Good idea mom!"
             menu:
                 "Accept their help":

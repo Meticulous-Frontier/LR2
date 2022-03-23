@@ -163,7 +163,7 @@ label GIC_outro_tit_fuck(the_girl, the_location, the_object):
         else:
             "Your cum splatters down over the top of [the_girl.title]'s tits. She gasps as the warm liquid covers her and drips back down between her tits."
         $ del blocker
-        the_person "Oh my god, its so warm..."
+        the_person "Oh my god, it's so warm..."
     else:
         $ tit_fuck.call_default_outro(the_girl, the_location, the_object)
     return

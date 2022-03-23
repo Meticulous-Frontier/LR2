@@ -13,6 +13,7 @@ init -1:
 init 2:
     screen serum_trade_ui(inventory_1,inventory_2,name_1="Player",name_2="Business", trade_requirement = None, hide_instead = False, inventory_2_max = -1): #Lets you trade serums back and forth between two different inventories. Inventory 1 is assumed to be the players.
         add "Science_Menu_Background.png"
+        modal True
 
         frame:
             background "#0a142688"
@@ -63,7 +64,7 @@ init 2:
                                             if not trade_sensitive:
                                                 background "#B14365"
 
-                                            action ToggleScreen("serum_tooltip", None, serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
+                                            action NullAction()
                                             hovered Show("serum_tooltip", None, serum, given_align = (0.97,0.07), given_anchor = (1.0,0.0))
                                         hbox:
                                             frame:

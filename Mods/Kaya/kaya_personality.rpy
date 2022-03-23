@@ -51,7 +51,7 @@ label kaya_greetings(the_person):
             the_person "Hey! Are we going out for drinks tonight?"
         elif kaya_can_get_barista_quickie():
             the_person "Hey there... want to take a break with me in the back?"
-        elif the_person.is_pregnant():
+        elif the_person.knows_pregnant():
             the_person "Aww, you came to say hi! I can't wait to tell our baby how thoughtful you are."
         elif the_person.sluttiness > 60:
             the_person "Hey there good looking. How are you doing today?"
@@ -331,7 +331,7 @@ label kaya_sex_obedience_accept(the_person):
         if the_person.obedience > 130:
             the_person "Yes [the_person.mc_title], if that's what you want to do I'll give it a try."
         else:
-            the_person "I... Okay, if you really want to, lets give it a try."
+            the_person "I... Okay, if you really want to, let's give it a try."
     return
 
 # label kaya_sex_gentle_reject(the_person):
@@ -689,7 +689,7 @@ label kaya_flirt_response_girlfriend(the_person):
                         "[the_person.possessive_title] nibbles at your ear, then steps back and smiles happily."
     else:
         # You're alone, so she's open to fooling around.
-        the_person "You are so ridiculous. Come here, lets make out!"
+        the_person "You are so ridiculous. Come here, let's make out!"
         $ the_person.draw_person(position = "kissing")
         "She puts her arms around you and leans in, quickly kissing you a few times on the lips."
         "When she's finished kissing you she rests her head on your shoulder and sighs happily."

@@ -254,9 +254,10 @@ label lily_morning_encounter_follow_up_one_label(the_person):
             call fuck_person(the_person, private = True, start_object = make_floor(), start_position = missionary, skip_intro = False) from _call_lily_morning_encounter_laundryfuck
 
     the_person "Thanks bro, now get out of here, so I can do my laundry."
-    "You walk back to the kitchen to get some breakfast."
+    $ clear_scene()
     $ mc.change_location(kitchen)
     $ mc.location.show_background()
+    "You walk back to the kitchen to get some breakfast."
     return True
 
 label lily_morning_encounter_follow_up_two_label(the_person):

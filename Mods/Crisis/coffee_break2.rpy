@@ -106,7 +106,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     $ scene_manager.update_actor(loser)
                     "He finishes leaving her quivering against the desk. As he walks away he says: 'Enjoy your food, slut!'"
                     $ scene_manager.update_actor(loser, position = "walking_away")
-                    "She gathers her clothes and takes the food back to her colleagues. "
+                    "She gathers her clothes and takes the food back to her colleagues."
                 else:
                     "When [loser.possessive_title] reaches the lobby, where the delivery guy is standing with a big grin on his face."
                     loser "I left my purse at my desk. I can go get it... or maybe I could pay another way."

@@ -117,7 +117,6 @@ label lifestyle_coach_choose_sexy_goal_label(the_person):
     "Try as you might, you can't get the women in your life out of your brain. Maybe... all the money... the company... is really all about?"
     "Having the women in your life serve your needs, physically, emotionally, sexually..."
     $ mc.change_locked_clarity(30)
-    $ mc.change_arousal(30)
     "Maybe it is time to just embrace it. There's nothing wrong with that, right? Any guy in your position would do the same thing."
     "You open your eyes and look at [the_person.possessive_title]. You eyes are immediately drawn to her..."
     menu:

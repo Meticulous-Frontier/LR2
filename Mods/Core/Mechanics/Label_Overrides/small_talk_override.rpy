@@ -50,7 +50,7 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
         person.discover_opinion("small talk")
 
     # TODO: Add a chance that she wants to talk about someone she knows.
-    if not is_phone and person.love > 5 and not person.event_triggers_dict.get("job_known", True) and renpy.random.randint(0,2) == 1:
+    if not is_phone and person.love > 5 and not person.event_triggers_dict.get("job_known", True):
         if person.job == unemployed_job:
             person "Well, it's hard to make ends meet, but I'll figure it out."
             "She tells you that it is not easy when you have no job."

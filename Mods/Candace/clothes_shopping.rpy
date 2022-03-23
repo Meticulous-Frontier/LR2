@@ -427,7 +427,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                             $ mc.change_arousal(10)
                             menu:
                                 "Fuck Her":
-                                    mc.name "Fuck yeah, lets do it."
+                                    mc.name "Fuck yeah, let's do it."
                                     the_person "Yes! But go quick, I don't want anyone getting suspicious."
                                     $ the_person.strip_outfit()
                                     $ the_person.change_arousal(10)

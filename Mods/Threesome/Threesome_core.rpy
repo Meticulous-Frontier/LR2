@@ -672,7 +672,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, object_ch
     $ the_person_two.change_energy(-position_choice.girl_two_energy)
 
     #Add clarity
-    $ mc.change_locked_clarity(position_choice.guy_arousal * 10)
+    $ mc.locked_clarity += (position_choice.guy_arousal * 10)
 
     #If girl(s) orgasms, call orgasm scene
     if the_person_one.arousal >= the_person_one.max_arousal or the_person_two.arousal >= the_person_two.max_arousal:

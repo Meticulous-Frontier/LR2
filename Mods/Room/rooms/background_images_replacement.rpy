@@ -16,26 +16,38 @@ init 5 python:
     arousal_token_small_image = im.Scale(Image(get_file_handle("arousal_token.png")), 18, 18)
     renpy.image("arousal_token_small", arousal_token_small_image)
 
+    red_heart_token_small_image = im.Scale(Image(get_file_handle("heart/red_heart.png")), 18, 18)
+    renpy.image("red_heart_token_small", red_heart_token_small_image)
+
+    lust_eye_token_small_image = im.Scale(Image(get_file_handle("lust_eye.png")), 18, 18)
+    renpy.image("lust_eye_token_small", lust_eye_token_small_image)
+
+    happy_small_image = im.Scale(Image(get_file_handle("happy.png")), 18, 18)
+    renpy.image("happy_token_small", happy_small_image)
+
+    underwear_small_image = im.Scale(Image(get_file_handle("underwear_token.png")), 18, 18)
+    renpy.image("underwear_token_small", underwear_small_image)
+
+    padlock_small_image = im.Scale(Image(get_file_handle("padlock.png")), 18, 18)
+    renpy.image("padlock_token_small", padlock_small_image)
+
     question_mark_small_image = im.Scale(Image(get_file_handle("question.png")), 18, 18)
     renpy.image("question_mark_small", question_mark_small_image)
 
     infraction_token_small_image = im.Scale(Image(get_file_handle("infraction_token.png")), 18, 18)
     renpy.image("infraction_token_small", infraction_token_small_image)
 
-    red_heart_token_small_image = im.Scale(Image("gui/heart/red_heart.png"), 14, 12)
-    renpy.image("red_heart_token_small", red_heart_token_small_image)
-
-    speech_bubble_small_image = im.Scale(Image("gui/speech_bubble.png"), 18, 18)
+    speech_bubble_small_image = im.Scale(Image(get_file_handle("speech_bubble.png")), 18, 18)
     renpy.image("speech_bubble_token_small", speech_bubble_small_image)
 
-    speech_bubble_exclamation_small_image = im.Scale(Image("gui/speech_bubble_exclamation.png"), 18, 18)
+    speech_bubble_exclamation_small_image = im.Scale(Image(get_file_handle("speech_bubble_exclamation.png")), 18, 18)
     renpy.image("speech_bubble_exclamation_token_small", speech_bubble_exclamation_small_image)
 
     vial_image = Image(get_file_handle("vial.png"))
     dna_image = Image(get_file_handle("dna.png"))
     question_image = Image(get_file_handle("question.png"))
     home_image = Image(get_file_handle("home_marker.png"))
-    padlock_image = Image(get_file_handle("padlock.png"))
+    #padlock_image = Image(get_file_handle("padlock.png"))
 
     under_construction_image = Image(get_file_handle("under_construction.png"))
 
@@ -113,7 +125,6 @@ label updated_room_background(stack):
     image question_mark = "[question_image.filename]"
     image dna_sequence = "[dna_image.filename]"
     image home_marker = "[home_image.filename]"
-    image padlock = "[padlock_image.filename]"
 
     python:
         # as long as the base game has no nice images, we use these to make navigating a little more fun

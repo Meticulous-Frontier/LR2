@@ -334,7 +334,6 @@ label girlfriend_wakeup_spooning_label(the_person):
     $ mc.change_arousal(15)
     "Your reach around her with your hand and grab one of her tits. You start to get a little rough with her and pinch and pull at one of her nipples."
     $ the_person.change_arousal(20)
-    $ mc.change_arousal(15)
     $ mc.change_locked_clarity(30)
     the_person "Mmm that feels so... wait... [the_person.mc_title]?"
     $ the_person.draw_person( position = "back_peek", emotion = "happy")
@@ -343,13 +342,11 @@ label girlfriend_wakeup_spooning_label(the_person):
     "Encouraged by her words, you reach your hand down and lift her leg, giving you a better angle for deeper penetration."
     "You pick up the pace and begin to fuck her earnestly."
     $ the_person.change_arousal(30) #70
-    $ mc.change_arousal(25) #55
     $ mc.change_locked_clarity(30)
     the_person "Oh yes that feels so good, fuck me good!"
     "She reaches down and holds her leg for you, freeing up your hand. You reach down between her legs and start to play with her clit."
     "Her ass is making smacking noises now, every time your hips drive your cock deep inside of her."
     $ the_person.change_arousal(40) #110
-    $ mc.change_arousal(35) #90
     the_person "Oh fuck, yes! YES!"
     $ mc.change_locked_clarity(30)
     "She shoves her ass back against you as she cums. Her helpless body quivers in delight. Her moans drive you even harder."
@@ -546,7 +543,7 @@ label girlfriend_underwear_shopping_label(the_person):
         "You head to the front of the store and walk out without buying anything."
     else:
         mc.name "That's it. That is exactly what I want."
-        the_person "Ahh! Okay! Let me change out of it real quick and lets buy it."
+        the_person "Ahh! Okay! Let me change out of it real quick and let's buy it."
         $ clear_scene()
         "[the_person.possessive_title] retreats into the dressing room for a minute."
         "Soon, she emerges, holding the items you've decided to purchase."
