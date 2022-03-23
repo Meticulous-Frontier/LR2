@@ -9,7 +9,7 @@ init 1 python:
 
 #Requirement functions
     def breeding_fetish_going_off_BC_requirement(the_person):
-        return True
+        return the_person.on_birth_control
 
     def breeding_fetish_bend_her_over_requirement(the_person):
         if the_person.energy < 50:
@@ -41,6 +41,7 @@ label breeding_fetish_going_off_BC_label(the_person):
     "She leans forward and whispers into your ear."
     the_person "Just thought you'd like to know... I decided to go off my birth control..."
     $ mc.change_locked_clarity(20)
+    $ manage_bc(the_person, False)
     "She leans back. You should be careful if you decide to fuck her, she might be fertile!"
     the_person "Is there something I can do for you?"
     return
