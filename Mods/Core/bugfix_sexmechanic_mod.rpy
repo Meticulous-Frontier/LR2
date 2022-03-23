@@ -595,7 +595,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     else:
                         the_person "Oh, [the_person.mc_title], I'm cumming again..."
                     $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = position_choice.slut_requirement, reset_arousal = False)
-                    $ the_person.change_arousal(-__builtin__.max(the_person.arousal/(report_log.get("girl orgasms", 0)+2), the_person.arousal - 99))
+                    $ the_person.change_arousal(-__builtin__.max(the_person.arousal/(report_log.get("girl orgasms", 0)+2), the_person.arousal - the_person.max_arousal - 1))
                     $ report_log["girl orgasms"] += 1
 
                 $ first_round = False
