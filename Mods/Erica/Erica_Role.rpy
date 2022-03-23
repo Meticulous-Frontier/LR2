@@ -1850,6 +1850,7 @@ label erica_weekly_yoga_label(the_person):
         the_person = erica
         yoga_assistant = erica_get_yoga_assistant()
         yoga_list = erica_get_yoga_class_list()
+        schedule_assistant = True
 
         erica_apply_yoga_outfit_to_class([the_person, yoga_assistant] + yoga_list)
 
@@ -1865,6 +1866,7 @@ label erica_weekly_yoga_label(the_person):
         $ erica_apply_yoga_outfit_to_class([yoga_assistant])
         the_person "But [yoga_assistant.name] is filling in for her."
         $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
+        $ schedule_assistant = False
     else:
         $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
         "At the front, you see [the_person.possessive_title] doing some light stretching. She has a speaker out, playing some upbeat music."
@@ -2113,7 +2115,8 @@ label erica_weekly_yoga_label(the_person):
 
         # make sure we set the schedule right (fixes room change)
         the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
-        yoga_assistant.set_override_schedule(lobby, the_days = [1], the_times =[0])
+        if schedule_assistant:
+            yoga_assistant.set_override_schedule(lobby, the_days = [1], the_times =[0])
 
         scene_manager.clear_scene()
         yoga_list = None
@@ -2139,9 +2142,6 @@ label erica_no_yoga_session_this_week():
     python:
         # setup next event
         erica.add_unique_on_room_enter_event(erica_weekly_yoga)
-        # make sure we set the schedule right (fixes room change)
-        the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
-        yoga_assistant.set_override_schedule(lobby, the_days = [1], the_times =[0])
         scene_manager.clear_scene()
         yoga_assistant = None
     return
