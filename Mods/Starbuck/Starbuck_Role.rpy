@@ -47,7 +47,7 @@ init 2 python:
 
 
         starbuck = Person(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E", height = 0.89,  body_images = white_skin, expression_images = None, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
-            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = starbuck_job, wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
+            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
             font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", relationship = "Single", base_outfit = starbuck_base)
 
         starbuck.generate_home()
