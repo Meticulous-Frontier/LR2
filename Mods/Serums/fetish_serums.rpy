@@ -332,7 +332,10 @@ init -1 python:
             person.change_obedience(1, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person):
-            mc.log_event((person.title or person.name) + " anal proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+            if person.sex_skills["Anal"] < 5:
+                person.increase_sex_skill("Anal", 2 + tier, add_to_log = True)
+            else:
+                mc.log_event((person.title or person.name) + " anal proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if start_anal_fetish_quest(person):
             person.event_triggers_dict["anal_fetish_start"] = True
@@ -371,7 +374,10 @@ init -1 python:
             person.change_happiness(1, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person):
-            mc.log_event((person.title or person.name) + " reproduction proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+            if person.sex_skills["Vaginal"] < 5:
+                person.increase_sex_skill("Vaginal", 2 + tier, add_to_log = True)
+            else:
+                mc.log_event((person.title or person.name) + " reproduction proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if persistent.pregnancy_pref == 0:  # pregnancy is disabled, so don't run rest of function
             return
@@ -420,7 +426,10 @@ init -1 python:
                 person.change_slut(1, add_to_log = add_to_log)
 
         if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person):
-            mc.log_event((person.title or person.name) + " semen proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+            if person.sex_skills["Oral"] < 5:
+                person.increase_sex_skill("Oral", 2 + tier, add_to_log = True)
+            else:
+                mc.log_event((person.title or person.name) + " semen proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if start_cum_fetish_quest(person):
             person.event_triggers_dict["cum_fetish_start"] = True
@@ -463,7 +472,10 @@ init -1 python:
             mc.log_event((person.title or person.name) + " social sexual proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
 
         if start_exhibition_fetish_quest(person):
-            person.event_triggers_dict["exhibition_fetish_start"] = True
+            if person.sex_skills["Foreplay"] < 5:
+                person.increase_sex_skill("Foreplay", 2 + tier, add_to_log = True)
+            else:
+                person.event_triggers_dict["exhibition_fetish_start"] = True
             #TODO some kind of test here to indicate to the player that their exhibitionism quest has started
         else:
             #TODO throw some kind of error here to indicate that I haven't created this scenario yet
