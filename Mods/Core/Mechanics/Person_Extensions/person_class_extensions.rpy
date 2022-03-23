@@ -983,9 +983,9 @@ init -1 python:
             # run extension code (clean up situational dictionaries)
             person.situational_sluttiness.clear()
             person.situational_obedience.clear()
-            # dominant person slowly bleeds obedience on run_day
+            # dominant person slowly bleeds obedience on run_day (lowest point offset by love)
             if person.is_dominant():
-                if person.obedience > 100 - (person.get_opinion_score("taking control") * 5):
+                if person.obedience - person.love > 100 - (person.get_opinion_score("taking control") * 5):
                     person.change_obedience(-1, add_to_log = False)
 
 
