@@ -332,7 +332,7 @@ init -1 python:
             person.change_obedience(1, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_ANAL_OPINION_LIST, tier - 1, person):
-            if person.sex_skills["Anal"] < 5:
+            if person.sex_skills["Anal"] < 2 + tier:
                 person.increase_sex_skill("Anal", 2 + tier, add_to_log = True)
             else:
                 mc.log_event((person.title or person.name) + " anal proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
@@ -374,7 +374,7 @@ init -1 python:
             person.change_happiness(1, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_BREEDING_OPINION_LIST, tier - 1, person):
-            if person.sex_skills["Vaginal"] < 5:
+            if person.sex_skills["Vaginal"] < 2 + tier:
                 person.increase_sex_skill("Vaginal", 2 + tier, add_to_log = True)
             else:
                 mc.log_event((person.title or person.name) + " reproduction proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
@@ -384,7 +384,6 @@ init -1 python:
 
         # going off birth-control
         if fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) >= 50 and person.on_birth_control:
-            person.on_birth_control = False
             person.add_unique_on_talk_event(breeding_fetish_going_off_BC)
 
         if start_breeding_fetish_quest(person):
@@ -426,7 +425,7 @@ init -1 python:
                 person.change_slut(1, add_to_log = add_to_log)
 
         if not fetish_serum_increase_opinion(FETISH_CUM_OPINION_LIST, tier - 1, person):
-            if person.sex_skills["Oral"] < 5:
+            if person.sex_skills["Oral"] < 2 + tier:
                 person.increase_sex_skill("Oral", 2 + tier, add_to_log = True)
             else:
                 mc.log_event((person.title or person.name) + " semen proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
@@ -469,13 +468,13 @@ init -1 python:
             person.change_obedience(1, add_to_log = True)
 
         if not fetish_serum_increase_opinion(FETISH_EXHIBITION_OPINION_LIST, tier - 1, person):
-            mc.log_event((person.title or person.name) + " social sexual proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
-
-        if start_exhibition_fetish_quest(person):
-            if person.sex_skills["Foreplay"] < 5:
+            if person.sex_skills["Foreplay"] < 2 + tier:
                 person.increase_sex_skill("Foreplay", 2 + tier, add_to_log = True)
             else:
-                person.event_triggers_dict["exhibition_fetish_start"] = True
+                mc.log_event((person.title or person.name) + " social sexual proclivity bots reduced effectiveness at " + str(person.suggestibility) + "% suggestibility.", "float_text_blue")
+
+        if start_exhibition_fetish_quest(person):
+            person.event_triggers_dict["exhibition_fetish_start"] = True
             #TODO some kind of test here to indicate to the player that their exhibitionism quest has started
         else:
             #TODO throw some kind of error here to indicate that I haven't created this scenario yet
