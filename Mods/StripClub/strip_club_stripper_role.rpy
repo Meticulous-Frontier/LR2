@@ -80,7 +80,7 @@ init 5 python:
         for stripper in stripclub_strippers[:]: # use copy of existing array
             stripper.job.quit_function = stripper_quit # replace base game stripper job quit_function
             stripper.quit_job() # use quit job because the role names match
-            stripper.add_job(stripclub_stripper_job)
+            stripper.add_job(stripclub_stripper_job, job_known = True)
 
     def allow_promote_to_manager_requirement(person):
         if get_strip_club_foreclosed_stage() < 5:

@@ -145,7 +145,7 @@ label sakari_intro_label(the_person):
     "An employee walks over, clearly looking for [the_person.title]."
     the_person "Ah, I need to get back to work. if you'll excuse me."
     mc.name "Certainly."
-    $ the_person.add_job(clothing_cashier_job)
+    $ the_person.add_job(clothing_cashier_job, job_known = True)
     $ the_person.set_schedule(None, the_times = [1,2,3]) # Free roam
     $ the_person.add_unique_on_room_enter_event(sakari_coffee_break)
     $ clear_scene()
