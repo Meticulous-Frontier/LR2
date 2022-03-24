@@ -1549,7 +1549,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     return
 
 label HR_director_appointment_action_label():
-    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])]))
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list([x for x in mc.business.hr_team if x.available], "Appoint", ["Back"])]))
     $ person_choice = _return
 
     if person_choice != "Back":
