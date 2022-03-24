@@ -167,7 +167,7 @@ label strip_club_evaluate_stripper(the_person):
     "She puts a hand on your shoulder pressing her bosom against your body..."
     menu:
         "Yes" if mc.business.has_funds(500):
-            $ the_person.add_job(stripper_job)
+            $ the_person.add_job(stripclub_stripper_job, job_known = True)
             mc.name "Yes, you impressed me! Your salary will be $[the_person.stripper_salary] per day excluding tips, if you agree?"
             $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
             $ ran_num = __builtin__.int(((the_person.stripper_salary / 20) - 1) * 100)
