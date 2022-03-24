@@ -191,7 +191,6 @@ init 5 python:
         return
 
     def advance_time_run_turn(people):
-        start_time = time.time()
         for (person, place) in people: #Run the results of people spending their turn in their current location.
             person.run_turn()
 
@@ -203,12 +202,9 @@ init 5 python:
             quest_director.run_turn()
         if "perk_system" in globals():
             perk_system.update()  #TEST to see if this is a good time for this.
-        if debug_log_enabled:
-            add_to_debug_log("Run Turn: {total_time:.3f}", start_time)
         return
 
     def advance_time_run_day(people):
-        start_time = time.time()
         for (person, place) in people:
             person.run_day()
 
@@ -218,12 +214,9 @@ init 5 python:
             project.on_day()
         if "quest_director" in globals():
             quest_director.run_day()
-        if debug_log_enabled:
-            add_to_debug_log("Run Day: {total_time:.3f}", start_time)
         return
 
     def advance_time_run_move(people):
-        start_time = time.time()
         renpy.execution.il_time = start_time + 10 # delay the infinite loop detector for 10 seconds
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
@@ -231,8 +224,6 @@ init 5 python:
         mc.business.run_move()
         for project in mc.business.active_IT_projects:
             project.on_move()
-        if debug_log_enabled:
-            add_to_debug_log("Run Move: {total_time:.3f}", start_time)
         return
 
     def advance_time_assign_limited_time_events(people):
@@ -268,21 +259,23 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
         clear_follow_mc_flag(people_to_process)
-        okay_to_save = False
         mandatory_event = False
 
     while count < advance_time_max_actions:
         if not no_events or (not advance_time_action_list[count] in advance_time_event_action_list):
             if advance_time_action_list[count].is_action_enabled(): # Only run actions that have their requirement met.
-                # $ renpy.say(None, "Run: " + act.name)
-                $ advance_time_action_list[count].call_action()
+                $ start_time = time.time()
+                # $ renpy.say(None, "Run: " + advance_time_action_list[count].name)
+                call expression advance_time_action_list[count].effect from _call_advance_time_action_advance_time_enhanced
+                if debug_log_enabled:
+                    $ add_to_debug_log("Adv time: " + advance_time_action_list[count].name + " ({total_time:.3f})", start_time)
+
                 $ clear_scene()
 
         $ count += 1
 
     python:
         # increase crisis chance (every time slot)
-        okay_to_save = True
         crisis_chance += 1
         mc.location.show_background()
         x = None
@@ -316,20 +309,15 @@ label advance_time_bankrupt_check_label():
 
 label advance_time_random_crisis_label():
     # "advance_time_random_crisis_label - timeslot [time_of_day]" #DEBUG
-    $ start_time = time.time()
     $ crisis = get_crisis_from_crisis_list()
     if crisis:
-        $ okay_to_save = False
-        if debug_log_enabled:
-            $ add_to_debug_log("Random crisis: " + crisis.name + " ({total_time:.3f})", start_time)
-
         #$ mc.log_event("General [[" + str(__builtin__.len(possible_crisis_list)) + "]: " + crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
-        $ crisis.call_action()
+        call expression crisis.effect from _call_random_crisis_advance_time
         if _return == "Advance Time":
             $ mandatory_advance_time = True
-
-        $ okay_to_save = True
+        if debug_log_enabled:
+            $ add_to_debug_log("Random crisis: " + crisis.name)
         $ del crisis
     $ mc.location.show_background()
     show screen business_ui
@@ -340,25 +328,22 @@ label advance_time_mandatory_crisis_label():
     python:
         active_crisis_list = get_sorted_active_and_filtered_mandatory_crisis_list(mc.business.mandatory_crises_list)
         crisis_count = 0
-        okay_to_save = False
 
     while crisis_count < len(active_crisis_list):
         # remove from main list before we trigger
         if active_crisis_list[crisis_count] in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
             $ mc.business.mandatory_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
-
-        if debug_log_enabled:
-            $ add_to_debug_log("Mandatory crisis: " + active_crisis_list[crisis_count].name)
-        $ active_crisis_list[crisis_count].call_action()
+        call expression active_crisis_list[crisis_count].effect from _call_mandatory_crisis_advance_time
         if _return == "Advance Time":
             $ mandatory_advance_time = True
         python:
+            if debug_log_enabled:
+                add_to_debug_log("Mandatory crisis: " + active_crisis_list[crisis_count].name)
             clear_scene()
             crisis_count += 1
             mandatory_event = True
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
-        okay_to_save = True
         mc.location.show_background()
         del active_crisis_list
         crisis = None
@@ -407,25 +392,23 @@ label advance_time_mandatory_morning_crisis_label():
     python:
         active_crisis_list = get_sorted_active_and_filtered_mandatory_crisis_list(mc.business.mandatory_morning_crises_list)
         crisis_count = 0
-        okay_to_save = False
 
     while crisis_count < len(active_crisis_list):
         # remove from main list before we trigger
         if active_crisis_list[crisis_count] in mc.business.mandatory_morning_crises_list:
             $ mc.business.mandatory_morning_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
-        if debug_log_enabled:
-            $ add_to_debug_log("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
-        $ active_crisis_list[crisis_count].call_action()
+        call expression active_crisis_list[crisis_count].effect from _call_mandatory_morning_crisis_advance_time
         if _return == "Advance Time":
             $ mandatory_advance_time = True
         python:
+            if debug_log_enabled:
+                add_to_debug_log("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
             clear_scene()
             crisis_count += 1
             mandatory_event = True
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
-        okay_to_save = True
         mc.location.show_background()
         del active_crisis_list
         crisis = None
@@ -433,18 +416,16 @@ label advance_time_mandatory_morning_crisis_label():
 
 label advance_time_random_morning_crisis_label():
     # "advance_time_random_morning_crisis_label  - timeslot [time_of_day]" #DEBUG
-    $ start_time = time.time()
     $ crisis = get_morning_crisis_from_crisis_list()
     if crisis:
-        $ okay_to_save = False
-        if debug_log_enabled:
-            $ add_to_debug_log("Random morning crisis: " + crisis.name + " ({total_time:.3f})", start_time)
+        $ start_time = time.time()
         #$ mc.log_event("Morning: [[" + str(__builtin__.len(possible_morning_crises_list)) + "] : " +  crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
-        $ crisis.call_action()
+        call expression crisis.effect from _call_random_morning_crisis_advance_time
         if _return == "Advance Time":
             $ mandatory_advance_time = True
-        $ okay_to_save = True
+        if debug_log_enabled:
+            $ add_to_debug_log("Random morning crisis: " + crisis.name)
         $ del crisis
     $ mc.location.show_background()
     return
