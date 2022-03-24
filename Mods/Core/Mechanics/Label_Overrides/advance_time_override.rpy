@@ -266,7 +266,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
             if advance_time_action_list[count].is_action_enabled(): # Only run actions that have their requirement met.
                 $ start_time = time.time()
                 # $ renpy.say(None, "Run: " + advance_time_action_list[count].name)
-                call expression advance_time_action_list[count].effect from _call_advance_time_action_advance_time_enhanced
+                call expression advance_time_action_list[count].effect pass (*advance_time_action_list[count].args) from _call_advance_time_action_advance_time_enhanced
                 if debug_log_enabled:
                     $ add_to_debug_log("Adv time: " + advance_time_action_list[count].name + " ({total_time:.3f})", start_time)
 
@@ -313,7 +313,7 @@ label advance_time_random_crisis_label():
     if crisis:
         #$ mc.log_event("General [[" + str(__builtin__.len(possible_crisis_list)) + "]: " + crisis.name, "float_text_grey")
         $ crisis_chance = crisis_base_chance
-        call expression crisis.effect from _call_random_crisis_advance_time
+        call expression crisis.effect pass (*crisis.args) from _call_random_crisis_advance_time
         if _return == "Advance Time":
             $ mandatory_advance_time = True
         if debug_log_enabled:
@@ -333,7 +333,7 @@ label advance_time_mandatory_crisis_label():
         # remove from main list before we trigger
         if active_crisis_list[crisis_count] in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
             $ mc.business.mandatory_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
-        call expression active_crisis_list[crisis_count].effect from _call_mandatory_crisis_advance_time
+        call expression active_crisis_list[crisis_count].effect pass (*active_crisis_list[crisis_count].args) from _call_mandatory_crisis_advance_time
         if _return == "Advance Time":
             $ mandatory_advance_time = True
         python:
@@ -398,7 +398,7 @@ label advance_time_mandatory_morning_crisis_label():
         if active_crisis_list[crisis_count] in mc.business.mandatory_morning_crises_list:
             $ mc.business.mandatory_morning_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
-        call expression active_crisis_list[crisis_count].effect from _call_mandatory_morning_crisis_advance_time
+        call expression active_crisis_list[crisis_count].effect pass (*active_crisis_list[crisis_count].args) from _call_mandatory_morning_crisis_advance_time
         if _return == "Advance Time":
             $ mandatory_advance_time = True
         python:
@@ -421,7 +421,7 @@ label advance_time_random_morning_crisis_label():
         $ start_time = time.time()
         #$ mc.log_event("Morning: [[" + str(__builtin__.len(possible_morning_crises_list)) + "] : " +  crisis.name, "float_text_grey")
         $ morning_crisis_chance = morning_crisis_base_chance
-        call expression crisis.effect from _call_random_morning_crisis_advance_time
+        call expression crisis.effect pass (*crisis.args) from _call_random_morning_crisis_advance_time
         if _return == "Advance Time":
             $ mandatory_advance_time = True
         if debug_log_enabled:

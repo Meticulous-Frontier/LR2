@@ -246,7 +246,7 @@ label girlfriend_sleepover_label():
                                     possible_action_list.append(interruption_scene) #Build a list of valid crises from ones that pass their requirement.
                         $ interruption_action = get_random_from_list(possible_action_list)
                         if interruption_action:
-                            call expression interruption_action.effect from _call_interruption_action_girlfriend_sleepover
+                            call expression interruption_action.effect pass (*interruption_action.args) from _call_interruption_action_girlfriend_sleepover
                             $ del interruption_action
                         else: #default to fuck person if there isn't an interruption here.
                             call fuck_person(the_person, private = True) from _call_fuck_person_sleepover_gf_02
@@ -287,7 +287,7 @@ label girlfriend_sleepover_label():
 
     $ picked_event = get_random_girlfriend_morning_action(the_person)
     if picked_event:
-        call expression picked_event.effect from _call_picked_event_girlfriend_sleepover
+        call expression picked_event.effect pass (*picked_event.args) from _call_picked_event_girlfriend_sleepover
         $ del picked_event
     else:
         "You wakeup, but [the_person.possessive_title] isn't there. She must have gotten up early and left."

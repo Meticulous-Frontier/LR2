@@ -1077,7 +1077,7 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
 
     $ steph_action = steph_coffee_time_get_random_action()
     if steph_action:
-        call expression steph_action.effect from _call_stephanie_action_saturday_coffee_event
+        call expression steph_action.effect pass (*steph_action.args) from _call_stephanie_action_saturday_coffee_event
         $ del steph_action
     else:
         "You sit and have a lively conversation with the girls while you drink your coffee, but nothing of any major consequence comes up."
@@ -1085,7 +1085,7 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
 
     $ ashley_action = ashley_coffee_time_get_random_action()
     if ashley_action:
-        call expression ashley_action.effect from _call_ashley_action_saturday_coffee_event
+        call expression ashley_action.effect pass (*ashley_action.args) from _call_ashley_action_saturday_coffee_event
         $ del ashley_action
     else:
         "You sit and have a lively conversation with the girls while you drink your coffee, but nothing of any major consequence comes up."
@@ -1515,7 +1515,7 @@ label ashley_second_concert_date_label():
 
         $ picked_event = get_random_girlfriend_morning_action(stephanie)
         if picked_event:
-            call expression picked_event.effect from _call_picked_event_stephanie_after_ashley_concert
+            call expression picked_event.effect pass (*picked_event.args) from _call_picked_event_stephanie_after_ashley_concert
             $ del picked_event
         else:
             "You wake up, but [stephanie.possessive_title] isn't there. She must have gotten up early and left."
