@@ -824,7 +824,7 @@ label HR_director_review_discoveries_label(the_person):
                     the_person "Sure thing [the_person.mc_title]!"
                     $ set_HR_director_tag("business_HR_skimpy_uniform", True)
                     if the_person is sarah:
-                        the_person "Mmm, I can't wait to see what some of the outfits other girls wear around the office..."
+                        the_person "Mmm, I can't wait to see what outfits some of the other girls will wear around the office..."
                         $ the_person.change_slut(2)
         if get_HR_director_tag("business_HR_relative_recruitment", 0) == 0:
             if (mc.business.max_employee_count - mc.business.get_employee_count()) > 4:

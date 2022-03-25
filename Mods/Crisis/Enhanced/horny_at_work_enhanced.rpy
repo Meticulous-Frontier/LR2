@@ -225,7 +225,7 @@ label horny_at_work_crisis_enhanced_label():
                     $ del licker
                     $ scene_manager.update_scene(position = "sitting", emotion = "happy")
                     "The girls go back to their workstations, happy with the distraction you provided them."
-                    "You pull your pants up and get back to work, basking in your post orgasm clarity."
+                    "You pull your pants up and get back to work, basking in your post-orgasm clarity."
 
                 else:
                     $ active_person = _return
@@ -279,7 +279,7 @@ label horny_at_work_crisis_enhanced_label():
                         "You've worn yourself out, but you still haven't gotten off. You relax in your office chair and stroke yourself off until you cum."
                         $ ClimaxController.manual_clarity_release()
                         "With that finally taken care of, you get yourself cleaned up and get back to work."
-                        "Thanks to your post orgasm clarity you're able to focus perfectly."
+                        "Thanks to your post-orgasm clarity you're able to focus perfectly."
                     elif the_report.get("guy orgasms",0) == 1:
                         "You sit back down in your office chair, feeling satisfied."
                         "After getting yourself cleaned up you're able to focus perfectly again and you get back to work."
@@ -611,9 +611,9 @@ label horny_at_work_crisis_enhanced_label():
                                         "You still haven't gotten off, so you stroke your cock until you cum."
                                         $ ClimaxController.manual_clarity_release()
                                         "With that finally taken care of, you get yourself cleaned up and get back to work."
-                                        "Thanks to your post orgasm clarity you're able to focus perfectly."
+                                        "Thanks to your post-orgasm clarity you're able to focus perfectly."
                                     else:
-                                        "You get yourself cleaned up and get back to work. You're able to focus perfectly now thanks to your post orgasm clarity."
+                                        "You get yourself cleaned up and get back to work. You're able to focus perfectly now thanks to your post-orgasm clarity."
 
                             else: #We've been thwarted somehow and can't get to her pussy.
                                 "Thwarted by her clothing and unable to dress her down any further, you give up and let her go. The shame of your defeat has, thankfully, killed your erection and you're able to get back to work."

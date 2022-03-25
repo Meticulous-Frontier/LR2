@@ -916,7 +916,7 @@ label kaya_erica_teamup_scene_4(the_person_one, the_person_two):
         call start_threesome(kaya, erica, start_position = threesome_double_blowjob, position_locked = True) from _kaya_erica_punishment_threesome_01
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
-            "You enjoy your post orgasm bliss for a few moments while [erica.possessive_title] and [kaya.possessive_title] get up."
+            "You enjoy your post-orgasm bliss for a few moments while [erica.possessive_title] and [kaya.possessive_title] get up."
         else:
             "Finished for now, you decide to put your cock away while [erica.possessive_title] and [kaya.possessive_title] get up."
         $ scene_manager.update_actor(kaya, position="stand3", display_transform = character_center_flipped)

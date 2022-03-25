@@ -222,7 +222,7 @@ label spooning_double_orgasm(the_girl, the_location, the_object):
             $ the_girl.cum_in_vagina()
             $ spooning.redraw_scene(the_girl)
             $ climax_controller.do_clarity_release(the_girl)
-            "You slowly pull out of [the_girl.possessive_title], then rollover next to her."
+            "You slowly pull out of [the_girl.possessive_title], then roll over next to her."
 
     elif the_choice == "Cum on her ass":
         if mc.condom:

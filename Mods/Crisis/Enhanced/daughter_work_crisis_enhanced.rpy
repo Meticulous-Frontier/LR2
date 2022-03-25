@@ -110,6 +110,9 @@ label daughter_work_crisis_label_enhanced():
 
     $ the_person.draw_person()
     if _return == the_daughter: #You've chosen to hire her.
+        $ hire_day = "tomorrow"
+        if day%7 == 4 or day%7 == 5: #If it's Friday or Saturday, don't start tomorrow
+            $ hire_day = "Monday"
         if promised_sex:
             mc.name "Alright, I'll admit this looks promising, but I need some convincing."
             the_person "Of course, [the_person.mc_title]."
@@ -121,11 +124,11 @@ label daughter_work_crisis_label_enhanced():
             $ the_person.change_obedience(2)
             $ the_person.review_outfit()
             the_person "Are we all done then?"
-            mc.name "For now. You can call your daughter and tell her she can start tomorrow. I won't give her any preferential treatment from here on out though."
+            mc.name "For now. You can call your daughter and tell her she can start [hire_day]. I won't give her any preferential treatment from here on out though."
             the_person "Of course. Thank you."
             call hire_someone(the_daughter) from _call_hire_someone_daughter_work_crisis_enhanced_1
         else:
-            mc.name "Alright [the_person.title], this looks promising, she can start tomorrow. I can't give her any preferential treatment, but I'll give her a try."
+            mc.name "Alright [the_person.title], this looks promising, she can start [hire_day]. I can't give her any preferential treatment, but I'll give her a try."
             $ the_person.change_stats(happiness = 5, love = 2)
             the_person "Thank you so much!"
             call hire_someone(the_daughter) from _call_hire_someone_daughter_work_crisis_enhanced_2

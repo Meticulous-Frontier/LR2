@@ -30,10 +30,10 @@ init python:
 
     def get_opinion_status(self, topic): #topic is a string matching the topics given in our random list (ie. "the colour blue", "sports"). Returns a tuple containing the score: -2 for hates, -1 for dislikes, 0 for no opinion, 1 for likes, and 2 for loves, and a bool to say if the opinion is known or not.
         if topic in self.opinions:
-            return "Discoverd" if self.opinions[topic][1] else "Unknown"
+            return "Discovered" if self.opinions[topic][1] else "Unknown"
 
         if topic in self.sexy_opinions:
-            return "Discoverd" if self.sexy_opinions[topic][1] else "Unknown"
+            return "Discovered" if self.sexy_opinions[topic][1] else "Unknown"
 
         return "Not assigned"
     Person.get_opinion_status = get_opinion_status
