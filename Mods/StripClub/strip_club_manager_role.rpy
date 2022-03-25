@@ -70,7 +70,7 @@ init 3303 python:
             person.love = 5
         person.change_stats(happiness = 10, obedience = 5, love = 5)
         person.add_job(stripclub_manager_job, job_known = True)
-        person.stripper_salary = __builtin__.round(stripper_salary * 1.1, 1)
+        person.stripper_salary = __builtin__.round(person.stripper_salary * 1.1, 1)
 
         manager_role_status_acquisition(person)
 
@@ -81,7 +81,7 @@ init 3303 python:
 
     def promote_strip_club_manager_to_mistress(person):
         person.add_job(stripclub_mistress_job, job_known = True)
-        person.stripper_salary = __builtin__.round(stripper_salary * 1.1, 1)
+        person.stripper_salary = __builtin__.round(person.stripper_salary * 1.1, 1)
         return
 
     manager_role_remove_action = Action("Remove as Manager", has_manager_role_requirement, "manager_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club manager.")
