@@ -434,7 +434,7 @@ label ellie_flirt_response(the_person):
             "She seems more worried about being caught than flirting with you."
     else:
         if the_person.sluttiness > 50:
-            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peak."
+            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peek."
             "[the_person.title] smiles at you and spins around, giving you a full look at her body."
         else:
             the_person "Hey, maybe if you buy me dinner first."

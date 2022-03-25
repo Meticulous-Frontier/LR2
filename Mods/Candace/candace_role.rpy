@@ -771,7 +771,7 @@ label candace_topless_at_mall_label(the_person):
     python:
         if police_chief.title is None:  # haven't met, set title
             police_chief.set_possessive_title("the police chief")
-            police_chief.set_mc_title("Mr." + mc.last_name)
+            police_chief.set_mc_title("Mr. " + mc.last_name)
             police_chief.set_title("Officer " + police_chief.last_name)
             police_chief.wear_uniform()
 
@@ -840,7 +840,7 @@ label candace_midnight_wakeup_label():
     python:
         if police_chief.title is None:  # haven't met, set title
             police_chief.set_possessive_title("the police chief")
-            police_chief.set_mc_title("Mr." + mc.last_name)
+            police_chief.set_mc_title("Mr. " + mc.last_name)
             police_chief.set_title("Officer " + police_chief.last_name)
 
         # make sure she is in the police station wearing her uniform

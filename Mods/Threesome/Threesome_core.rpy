@@ -492,7 +492,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                 call threesome_round(the_person_one, the_person_two, position_choice = active_mc_position, object_choice = None, private = private, report_log = report_log) from _call_threesome_round_1
                 $ first_round = False
                 if not active_mc_position.requirement(the_person_one, the_person_two):
-                    "Your post orgasm cock softens, stopping you from continuing for now."
+                    "Your post-orgasm cock softens, stopping you from continuing for now."
                     $ position_choice = None
                     $ active_mc_position = None
                 elif active_mc_position.guy_energy > mc.energy:

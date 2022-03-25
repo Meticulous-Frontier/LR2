@@ -272,7 +272,7 @@ label camilla_get_a_drink_label(the_person):
             "[the_person.title] takes a sip of her drink."
             the_person "Did you know they do salsa dancing here sometimes? Even if you are new at it, it would be fun to try it sometime."
             the_person "On Wednesday nights they have a salsa dancing for beginners class. You should come and I'll go with you."
-            "That sounds suspiciously like a date. With this smoking hot senorita in an open relationship, the implications are impossible to ignore."
+            "That sounds suspiciously like a date. With this smoking hot señorita in an open relationship, the implications are impossible to ignore."
             mc.name "Sure, I'll do it next Wednesday."
             the_person "Great!"
             "You chat with [the_person.title] for a bit longer, but soon it is time to leave."
@@ -619,7 +619,7 @@ label camilla_bathroom_blowjob_label(the_person):
     the_person "Does that feel good? I bet it does... I just wanna make you feel good..."
     "She closes her eyes, then opens her mouth. She slowly rubs the tip back and forth along her slithery tongue."
     the_person "Mmm, you taste good too."
-    "She starts to take you into her mouth. You snap a few more pictures of this beautiful senora, on her knees servicing you."
+    "She starts to take you into her mouth. You snap a few more pictures of this beautiful señora, on her knees servicing you."
     "[the_person.possessive_title]'s head is now bouncing up and down on your cock. Her pouty lips feel amazing sliding up and down your length."
     $ the_person.change_arousal(20)
     $ mc.change_locked_clarity(40)

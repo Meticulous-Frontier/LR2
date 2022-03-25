@@ -452,7 +452,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             $ mc.condom = False
             $ using_condom = False
         if current_node.position.requires_hard and mc.recently_orgasmed:
-            "Your post orgasm cock softens, stopping [the_person.possessive_title] for now."
+            "Your post-orgasm cock softens, stopping [the_person.possessive_title] for now."
             #TODO if this keeps us from accomplishing sex goal, consider rerunning this method from the beginning, or just ending the scene. Or creating a new path?
             $ finished = True
         else:

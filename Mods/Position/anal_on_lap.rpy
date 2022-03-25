@@ -32,7 +32,7 @@ label intro_anal_on_lap(the_girl, the_location, the_object):
         $ the_girl.strip_to_vagina(position = "back_peek", visible_enough = True, prefer_half_off = True)
 
     $ the_girl.draw_person(position = "back_peek")
-    "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
+    "You give her ass cheeks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
     mc.name "I want you to sit on my lap, but I'm going to put it here..."
     "You push your lubed up fingers against her asshole, slowly working them inside her."
     if the_girl.has_anal_fetish():
@@ -270,7 +270,7 @@ label orgasm_anal_on_lap(the_girl, the_location, the_object):
 label taboo_break_anal_on_lap(the_girl, the_location, the_object):
     "You sit down on the [the_object.name] and motion [the_person.possessive_title] over to you. You turn her around so her ass is facing you."
     $ the_girl.draw_person(position = "back_peek")
-    "You give her ass checks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
+    "You give her ass cheeks a lengthy grope. You slide your fingers up and down her slit a few times, getting them nice and wet."
     mc.name "I want you to sit on my lap, but I'm going to put it here..."
     $ the_girl.call_dialogue(anal_on_lap.associated_taboo+"_taboo_break")
     "You push your lubed up fingers against her asshole, slowly working them inside her."
