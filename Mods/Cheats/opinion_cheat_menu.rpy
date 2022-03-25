@@ -35,14 +35,14 @@ init python:
         if topic in self.sexy_opinions:
             return "Discovered" if self.sexy_opinions[topic][1] else "Unknown"
 
-        return "Not assigned"
+        return "No opinion"
     Person.get_opinion_status = get_opinion_status
 
     def cheat_opinion_score_to_string(target, topic):
         status = target.get_opinion_status(topic)
         score = target.get_opinion_score(topic)
-        if status == "Not assigned" or score == 0:
-            return "Not assigned"
+        if status == "No opinion" or score == 0:
+            return "No opinion"
 
         return " ".join([opinion_score_to_string(score), "|", status]).title()
 
