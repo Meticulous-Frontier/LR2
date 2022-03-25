@@ -2264,7 +2264,7 @@ label starbuck_candace_product_demo_label(the_person):
     $ the_person.set_override_schedule(sex_store, the_days = [5], the_times = [3])
     $ starbuck.set_override_schedule(sex_store, the_days = [5], the_times = [3])
     $ starbuck.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
-    $ candace.event_triggers_dict["friends_with_starbuck"] = True
+    $ candace.event_triggers_dict["friends_with_starbuck"] = day
     $ starbuck.apply_planned_outfit()
     $ candace.apply_planned_outfit()
     $ mc.location.show_background()
