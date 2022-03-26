@@ -23,7 +23,7 @@ init 2 python:
     starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
     def SB_mod_initialization(action_mod):
-        starbuck_personality = Personality("starbuck", default_prefix = "relaxed",
+        starbuck_personality = Personality("starbuck", default_prefix = relaxed_personality.default_prefix,
         common_likes = ["skirts", "small talk", "the colour blue", "makeup"],
         common_sexy_likes = ["lingerie","taking control",  "doggy style sex", "creampies"],
         common_dislikes = ["working", "research work", "production work"],

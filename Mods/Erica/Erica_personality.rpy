@@ -37,7 +37,7 @@ init 1301 python:              #Because Vren Init personality functions at 1300
 
         return mc.name
 
-    erica_personality = Personality("athlete", default_prefix = "reserved",
+    erica_personality = Personality("athlete", default_prefix = reserved_personality.default_prefix,
     common_likes = ["small talk", "the colour blue", "sports"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "showing her ass", "drinking cum", "taking control"],
     common_dislikes = ["relationships", "conservative outfits", "makeup", "the colour pink", "dresses", "high heels", "the colour purple"],

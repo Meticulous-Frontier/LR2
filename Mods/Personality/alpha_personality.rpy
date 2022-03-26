@@ -15,7 +15,7 @@ init 3 python:
     alpha_personality_action = ActionMod("Alpha Personality", alpha_personality_requirement, "alpha_personality_dummy_label", priority = -10,
         menu_tooltip = "Enable or disable the Alpha personality.", category="Personality", on_enabled_changed = change_alpha_personality_enabled)
 
-init 1400 python:
+init 1301 python:
     def alpha_titles(person):
         valid_titles = []
         valid_titles.append(person.formal_address + " " + person.last_name)
@@ -53,7 +53,7 @@ init 1400 python:
             valid_player_titles.append("Queen's Dick")
         return valid_player_titles
 
-    alpha_personality = Personality("alpha", default_prefix = "reserved",
+    alpha_personality = Personality("alpha", default_prefix = reserved_personality.default_prefix,
         common_likes = ["flirting", "HR work", "work uniforms", "working", "sports", "small talk", "boots", "dresses", "high heels", "skirts", "the colour black", "the colour red"],
         common_sexy_likes = ["taking control", "threesomes", "getting head", "lingerie", "not wearing underwear", "showing her tits", "showing her ass", "skimpy uniforms"],
         common_dislikes = ["conservative outfits", "pants", "punk", "the colour green", "the colour pink", "classical", "jazz"],

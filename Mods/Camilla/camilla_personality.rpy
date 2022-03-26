@@ -1,8 +1,6 @@
 
 init 1301 python:              #Because Vren Init personality functionns at 1300
 
-
-
     def camilla_titles(person):
         valid_titles = []
         valid_titles.append(person.name)
@@ -29,7 +27,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
             valid_titles.append("Bull")
         return valid_titles
 
-    camilla_personality = Personality("camilla", default_prefix = "wild",
+    camilla_personality = Personality("camilla", default_prefix = wild_personality.default_prefix,
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "skimpy outfits", "being submissive", "drinking cum", "cheating on men"],
     common_dislikes = ["polyamory", "pants", "working", "the colour yellow", "conservative outfits", "sports"],

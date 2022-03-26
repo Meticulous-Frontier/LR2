@@ -11,7 +11,7 @@ init 1301:
         def genius_player_titles(the_person):
             return mc.name
 
-        genius_personality = Personality("genius", default_prefix = "relaxed",
+        genius_personality = Personality("genius", default_prefix = relaxed_personality.default_prefix,
         common_likes = ["pants", "the weekend", "small talk", "the colour pink", "research work", "supply work", "flirting","punk","pop"],
         common_sexy_likes = ["missionary style sex", "kissing", "masturbating", "being submissive", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour yellow", "research work", "work uniforms"],

@@ -14,7 +14,7 @@ init 3 python:
     cougar_personality_action = ActionMod("Cougar Personality", cougar_personality_requirement, "cougar_personality_dummy_label", priority = -10,
         menu_tooltip = "Enable or disable the cougar personality.", category="Personality", on_enabled_changed = change_cougar_personality_enabled)
 
-init 1400 python:
+init 1301 python:
     def cougar_titles(person):
         valid_titles = []
         valid_titles.append(person.formal_address + " " + person.last_name)
@@ -50,7 +50,7 @@ init 1400 python:
             valid_player_titles.append("Young Stud")
         return valid_player_titles
 
-    cougar_personality = Personality("cougar", default_prefix = "reserved", #Cougar style personality
+    cougar_personality = Personality("cougar", default_prefix = reserved_personality.default_prefix, #Cougar style personality
         common_likes = ["skirts", "small talk", "Mondays", "the weekend", "the colour red", "makeup", "sports", "flirting", "HR work", "high heels", "dresses"],
         common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal creampies", "showing her tits", "showing her ass", "taking control", "not wearing underwear", "creampies", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms", "pants"],
