@@ -31,7 +31,7 @@ init 2 python:
         if candace.employed_since == -1 or candace.event_triggers_dict["clothes_shopping"] != 0:
             return False
         if candace.days_employed > 7:  #She's been working at least a week.
-            if mc.business.has_funds(500) and candace.location == candace.work:
+            if mc.business.has_funds(500) and candace.job and candace.job.job_location == candace.location:
                 return True
         return False
 

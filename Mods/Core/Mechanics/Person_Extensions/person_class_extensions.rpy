@@ -88,7 +88,6 @@ init -1 python:
         self.schedule = None
         self.override_schedule = None
         self.home = None
-        self.work = None
         self.job = None
         self.relationship = None
         self.personality = None
@@ -235,7 +234,7 @@ init -1 python:
 
         if renpy.call_stack_depth() < 2:
             # we are in the main menu (alternative idle_pose)
-            if self.location == self.work or self.location == downtown_bar:
+            if (self.job and self.location == self.job.job_location) or self.location == downtown_bar:
                 return "sitting"
             if self.location == gym:
                 pose = self.event_triggers_dict.get("gym_pose", None)
