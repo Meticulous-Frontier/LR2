@@ -25,7 +25,7 @@ init 5 python:
         "yellow": "yellah",
         "hello": "howdy",
         #"i": "ah",
-        "a": "uh",
+        "a": "ah",
         "you": "yah",
         #"it": "aht",
         "to": "tuh",
