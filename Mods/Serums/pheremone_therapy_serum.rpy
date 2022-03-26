@@ -7,7 +7,7 @@ init -1 python:
         the_person.change_slut(change_amount, add_to_log = add_to_log)
 
     def pheremone_therapy_on_remove(the_person, the_serum, add_to_log):
-        change_amount = the_serum.effects_dict.get("pheromone_therapy_change", 15)
+        change_amount = the_serum.effects_dict.get("pheromone_therapy_change", 15) or 15
         the_person.change_slut(-change_amount, add_to_log = add_to_log)
 
     pher_ther = SerumTraitMod(name = "Pheromone Therapy",

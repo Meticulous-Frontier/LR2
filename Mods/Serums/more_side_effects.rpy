@@ -8,7 +8,7 @@ init 2 python:
         the_person.change_slut(change_amount, add_to_log = add_to_log)
 
     def uncontrollable_arousal_side_effect_on_remove(the_person, the_serum, add_to_log):
-        change_amount = the_serum.effects_dict.get("uncontrollable_arousal_effect", 20)
+        change_amount = the_serum.effects_dict.get("uncontrollable_arousal_effect", 20) or 20
         the_person.change_slut(-change_amount, add_to_log = add_to_log)
 
     ## tryptamine_side_effect_functions ##
@@ -18,7 +18,7 @@ init 2 python:
         the_person.change_obedience(change_amount, add_to_log = add_to_log)
 
     def tryptamine_side_effect_on_remove(the_person, the_serum, add_to_log):
-        change_amount = the_serum.effects_dict.get("tryptamine_effect", 10)
+        change_amount = the_serum.effects_dict.get("tryptamine_effect", 10) or 10
         the_person.change_obedience(-change_amount, add_to_log = add_to_log)
 
     ## oxytocin_side_effect_functions ##
