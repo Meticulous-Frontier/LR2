@@ -78,6 +78,7 @@ init 5 python:
         " is not ": " ain't ",
         " is all ": " 'sall ",
         "isn't": "ain't",
+        "wanted to": "wanna",
         " am not ": " ain't ",
         " are not ": " ain't ",
         "aren't": "ain't",
