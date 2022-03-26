@@ -425,7 +425,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                         "Let [person_two.name] give you a blowjob":
                             mc.name "I'm not about to say no to an offer like that."
                             $ scene_manager.update_actor(person_two, emotion = "happy")
-                            if person_one.has_role[girlfriend_role, affair_role]:
+                            if person_one.has_role([girlfriend_role, affair_role]):
                                 person_one "I didn't think you would sweetheart."
                                 "[person_one.title] leans over your desk and gives you a kiss, then whispers in your ear."
                                 person_one "A little gift from me. You two have fun."
