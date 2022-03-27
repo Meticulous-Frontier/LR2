@@ -29,9 +29,9 @@ init 5 python:
 
     def calculate_stripper_profit(person):
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
-        profit_base = person.stripper_salary * (renpy.random.random() + .7) # stripper income is variable
+        profit_base = calculate_stripper_salary(person) * (renpy.random.random() + .8) # stripper income is variable
         if person.has_role(stripclub_waitress_role):
-            profit_base = person.stripper_salary * (renpy.random.random() + .5) # waitress income is variable
+            profit_base = calculate_stripper_salary(person) * (renpy.random.random() + .6) # waitress income is variable
 
         tit_modifier = person.get_opinion_score("showing her tits") * 2
         ass_modifier = person.get_opinion_score("showing her ass") * 2
