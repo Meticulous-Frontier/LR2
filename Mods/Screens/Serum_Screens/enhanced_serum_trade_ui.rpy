@@ -57,7 +57,7 @@ init 2:
                                         $ move_all_amount = inventory_2_max - inventory2_count
 
                                     vbox:
-                                        textbutton serum.name:
+                                        textbutton "[serum.name]":
                                             style "textbutton_style"
                                             text_style "serum_text_style"
                                             xsize 560

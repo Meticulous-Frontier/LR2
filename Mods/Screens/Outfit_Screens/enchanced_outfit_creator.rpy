@@ -377,7 +377,7 @@ init 2:
                             draggable True
                             grid 1 __builtin__.len(valid_categories): #categories select on far left
                                 for category in valid_categories:
-                                    textbutton category:
+                                    textbutton "[category]":
                                         style "textbutton_style"
                                         text_style "serum_text_style"
 
@@ -417,9 +417,12 @@ init 2:
                                         $ cloth_list_length = __builtin__.len(categories_mapping[category_selected][0])
 
                                         for cloth in sorted(categories_mapping[category_selected][0], key = lambda x: (x.layer, x.slut_value, x.name)):
-                                            $ is_sensitive = valid_check(starting_outfit, cloth) and cloth.layer in valid_layers
-                                            if cloth.has_extension and cloth.has_extension.layer not in valid_layers:
-                                                $ is_sensitive = False
+                                            python:
+                                                name = cloth.name.title()
+                                                stat_slut = cloth.generate_stat_slug()
+                                                is_sensitive = valid_check(starting_outfit, cloth) and cloth.layer in valid_layers
+                                                if cloth.has_extension and cloth.has_extension.layer not in valid_layers:
+                                                    is_sensitive = False
 
                                             frame:
                                                 xsize 605
@@ -427,7 +430,7 @@ init 2:
                                                 background None
                                                 padding 0,0
 
-                                                textbutton cloth.name.title():
+                                                textbutton "[name]":
                                                     xalign 0.0
                                                     ysize 50
                                                     text_align .5
@@ -457,7 +460,7 @@ init 2:
                                                     ]
 
 
-                                                text cloth.generate_stat_slug():
+                                                text "[stat_slut]":
                                                     style "custom_outfit_style"
                                                     ysize 50
                                                     xalign .95
@@ -468,8 +471,9 @@ init 2:
                             xysize (605, 400)
                             background "#0a142688"
                             if selected_clothing is not None:
+                                $ selected_stat_slug = selected_clothing.generate_stat_slug()
                                 vbox:
-                                    text selected_clothing.name + " " + selected_clothing.generate_stat_slug() style "serum_text_style_header"
+                                    text "[selected_clothing.name] [selected_stat_slug]" style "serum_text_style_header"
 
                                     frame:
                                         background "#0a142688"
@@ -499,7 +503,7 @@ init 2:
                                                                             xfill True
                                                                             for pattern in selected_clothing.supported_patterns:
 
-                                                                                textbutton pattern:
+                                                                                textbutton "[pattern]":
                                                                                     style "textbutton_no_padding_highlight"
                                                                                     text_style "serum_text_style"
                                                                                     xalign 0.5
@@ -706,7 +710,7 @@ init 2:
                                                                             else:
                                                                                 hover_background "#143869"
                                                                                 background "#171717"
-                                                                            text trans_name style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
+                                                                            text "[trans_name]" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                                                             xysize (60, 40)
                                                                             action [Function(update_transparency, float(trans))]
                                                                     frame:
@@ -746,7 +750,7 @@ init 2:
                                     frame:
                                         background "#0a142688"
                                         xfill True
-                                        textbutton "Add " + selected_clothing.name:
+                                        textbutton "Add [selected_clothing.name]":
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
                                             hover_background "#143869"
@@ -785,7 +789,7 @@ init 2:
                             background "#0a142688"
                             xfill True
                             ysize 60
-                            textbutton demo_outfit.name:
+                            textbutton "[demo_outfit.name]":
                                 style "textbutton_no_padding_highlight"
                                 text_style "serum_text_style"
                                 xfill True
@@ -956,7 +960,7 @@ init 2:
                                                             xalign 0.5
                                                             xfill True
                                                             ysize 34
-                                                            text cloth.name xalign 0.5 yalign 0.5 xfill True yoffset 2 style "custom_outfit_style"
+                                                            text "[cloth.name]" xalign 0.5 yalign 0.5 xfill True yoffset 2 style "custom_outfit_style"
 
                 frame:
                     background "#0a142688"
@@ -980,7 +984,7 @@ init 2:
                                             if slut_limit is not None:
                                                 $ save_button_name += " {size=14}{color=#FF0000}Max: " + str(slut_limit) + " slut{/color}{/size}"
 
-                                            textbutton save_button_name:
+                                            textbutton "[save_button_name]":
                                                 style "textbutton_no_padding_highlight"
                                                 text_style "serum_text_style"
                                                 xfill True
@@ -1062,7 +1066,7 @@ init 2:
                                             hbox:
                                                 button:
                                                     background "#505050"
-                                                    text "Slut "+ str(slut_generation) style "serum_text_style" yalign 0.5 size 16
+                                                    text "Slut [slut_generation]" style "serum_text_style" yalign 0.5 size 16
                                                     xsize 90
                                                     ysize 24
                                                 bar:
@@ -1076,7 +1080,7 @@ init 2:
                                                 hbox:
                                                     button:
                                                         background "#505050"
-                                                        text "Min "+ str(min_slut_generation) style "serum_text_style" yalign 0.5 size 16
+                                                        text "Min [min_slut_generation]" style "serum_text_style" yalign 0.5 size 16
                                                         xsize 90
                                                         ysize 24
                                                     bar:
@@ -1113,14 +1117,14 @@ init 2:
                                                                     background "#43B197"
                                                                     xsize 220
                                                                     padding (1,1)
-                                                                    text pref style "serum_text_style_traits"
+                                                                    text "[pref]" style "serum_text_style_traits"
                                                         if __builtin__.len(hate_list) > 0:
                                                             for pref in hate_list:
                                                                 frame:
                                                                     background "#B14365"
                                                                     xsize 220
                                                                     padding (1,1)
-                                                                    text pref style "serum_text_style_traits"
+                                                                    text "[pref]" style "serum_text_style_traits"
 
                                 vbox:
 
@@ -1184,7 +1188,7 @@ init 2:
                                                 draggable True
                                                 vbox:
                                                     for n in get_xml_files_from_path():
-                                                        textbutton n:
+                                                        textbutton "[n]":
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
                                                             xfill True
@@ -1222,7 +1226,7 @@ init 2:
                                                             Function(preview_outfit)
                                                         ]
                                                     for person in sorted(known_people_in_the_game(), key = lambda x: x.name):
-                                                        textbutton person.name:
+                                                        textbutton "[person.name]":
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
                                                             xfill True
@@ -1248,7 +1252,7 @@ init 2:
                                                 draggable True
                                                 vbox:
                                                     for x in sorted(["stand2","stand3","stand4","stand5","walking_away","kissing","kneeling1","doggy","missionary","blowjob","against_wall","back_peek","sitting","standing_doggy","cowgirl"]):
-                                                        textbutton x:
+                                                        textbutton "[x]":
                                                             style "textbutton_no_padding_highlight"
                                                             text_style "serum_text_style"
                                                             xfill True

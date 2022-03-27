@@ -17,7 +17,7 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
     #default valid_categories = ["Hair Style", "Pubic Style"] #Holds the valid list of categories strings to be shown at the top.
     $ categories_mapping = { # list of clothing | Apply method | Valid / sensitive check | nudity switch | tooltip string
         "Hair Style": [hair_styles, Person.set_hair_style, True, "use_current_outfit"],
-        "Pubic Style": [pube_styles, Person.set_pubic_style, ophelia_person_wants_pubic_hair_included(person), "use_nude", "Example String"] #Set the False bool to either true or a custom requirement function
+        "Pubic Style": [pube_styles, Person.set_pubic_style, ophelia_person_wants_pubic_hair_included(person), "use_nude"] #Set the False bool to either true or a custom requirement function
         }
 
 
@@ -41,7 +41,7 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
         yanchor 0.5
         spacing 15
         frame:
-            background "#aaaaaa"
+            background "#0a142688"
             padding (20,20)
             xysize (880, 1015)
             hbox:
@@ -50,7 +50,7 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                     spacing 15
                     for category in categories_mapping:
 
-                        textbutton category:
+                        textbutton "[category]":
                             style "textbutton_style"
                             text_style "textbutton_text_style"
                             if category == category_selected:
@@ -95,14 +95,14 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                         frame:
                             xsize 620
                             yminimum 480
-                            background "#888888"
+                            background "#0a142688"
                             vbox:
                                 if category_selected in categories_mapping:
                                     #    $ valid_check = categories_mapping[category_selected][1]
                                     #    $ apply_method = categories_mapping[category_selected][2]
                                     #    $ cloth_list_length = __builtin__.len(categories_mapping[category_selected][0])
                                     for style_item in sorted(categories_mapping[category_selected][0], key = lambda x: x.name):
-                                        textbutton style_item.name:
+                                        textbutton "[style_item.name]":
                                             style "textbutton_style"
                                             text_style "textbutton_text_style"
                                             background "#1a45a1"
@@ -122,11 +122,11 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                     frame:
                         #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
                         xysize (605, 480)
-                        background "#888888"
+                        background "#0a142688"
                         vbox:
                             spacing 10
                             if selected_style:
-                                text selected_style.name style "textbutton_text_style"
+                                text "[selected_style.name]" style "textbutton_text_style"
 
                                 hbox:
                                     spacing -5 #We will manually handle spacing so we can have our colour predictor frames
@@ -283,7 +283,7 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
             xalign 0.5
             frame:
                 xysize (440, 500)
-                background "#aaaaaa"
+                background "#0a142688"
                 padding (20,20)
                 vbox:
                     frame:
@@ -293,7 +293,7 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                     frame:
                         xfill True
                         yfill True
-                        background "#888888"
+                        background None
                         vbox:
                             spacing 5 #TODO: Add a viewport here too.
                             frame:
@@ -305,7 +305,7 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                                     text selected_style.name xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "outfit_style"
 
             frame:
-                background "#aaaaaa"
+                background "#0a142688"
                 xysize (440, 500)
                 padding (20,20)
                 vbox:
@@ -315,5 +315,6 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                         xalign 0.5
                         xanchor 0.5
                         spacing 50
-                        textbutton "Save Haircut" action [Return, SetField(person, "outfit", use_current_outfit), Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80)
-                        textbutton "Abandon Design" action [Function(revert_style, person, old_hair_style, old_pubes_style), SetField(person, "outfit", use_current_outfit), Return, Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80)
+                        textbutton "Save Haircut" action [Return, SetField(person, "outfit", use_current_outfit), Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80) background "#222222" hover_background "#1a45a1"
+
+                        textbutton "Abandon Design" action [Function(revert_style, person, old_hair_style, old_pubes_style), SetField(person, "outfit", use_current_outfit), Return, Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80) background "#222222" hover_background "#1a45a1"

@@ -22,7 +22,7 @@ init 2:
                                 text "Serums in Inventory" style "menu_text_title_style" xalign 0.5
 
                         for design in sorted(an_inventory.serums_held, key = lambda x: x[0].name):
-                            textbutton design[0].name + ": " + str(design[1]) + " Doses":
+                            textbutton "[design[0].name]: [design[1]] Doses":
                                 xsize 390
                                 style "textbutton_style"
                                 text_style "serum_text_style"

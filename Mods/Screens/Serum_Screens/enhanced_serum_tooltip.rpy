@@ -44,7 +44,7 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 520
-                        text the_serum.name style "menu_text_title_style" xalign 0.5
+                        text "[the_serum.name]" style "menu_text_title_style" xalign 0.5
 
                 use aspect_grid(the_serum)
 
@@ -118,14 +118,14 @@ init 2:
                                 frame:
                                     background "#000080"
                                     xsize 520
-                                    text trait.name style "serum_text_style"
+                                    text "[trait.name]" style "serum_text_style"
 
                                 hbox:
                                     spacing 5
                                     frame:
                                         background "#43B197"
                                         xsize 245
-                                        text trait.positive_slug style "serum_text_style_traits" size 16
+                                        text "[trait.positive_slug]" style "serum_text_style_traits" size 16
 
                                     frame:
                                         background "#B14365"
@@ -153,7 +153,7 @@ init 2:
                                         frame:
                                             background "#000080"
                                             xsize 245
-                                            text side_effect.name style "serum_text_style_traits"
+                                            text "[side_effect.name]" style "serum_text_style_traits"
 
                                         frame:
                                             background "#B14365"
