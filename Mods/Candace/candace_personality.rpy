@@ -1,5 +1,5 @@
 ### PERSONALITY CHARACTERISTICS ###
-init 1301:
+init 1400:
     python:
         def candace_titles(person):
             return "Candi"

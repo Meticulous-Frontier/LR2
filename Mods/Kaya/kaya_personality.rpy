@@ -1,4 +1,4 @@
-init 1301 python:              #Because Vren Init personality functionns at 1300
+init 1400 python:              #Because Vren Init personality functionns at 1300
 
     def kaya_titles(person):
         valid_titles = []

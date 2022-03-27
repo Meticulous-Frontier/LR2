@@ -1,6 +1,6 @@
 #This is a crisis series for changing company restrooms to unisex. As the girls in the company get sluttier and sluttier, the crisis changes to reflect the corrupted nature.
 #At first, you may only over hear conversations. Then girls talking about sexual fantasies, then gloryhole options.
-init 1301 python:
+init 1400 python:
 
     def unisex_bathroom_creation_requirement():
         if mc.business.unisex_restroom_unlocks.get("unisex_policy_avail",0) == 1:

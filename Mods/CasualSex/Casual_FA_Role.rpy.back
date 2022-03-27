@@ -513,7 +513,7 @@ label casual_FA_sexual_favors_label(the_person):
 
 #************* Personality****************# #For now, based on Wild Personality
 #
-init 1301 python:              #Because Vren Init personality functionns at 1300
+init 1400 python:              #Because Vren Init personality functionns at 1300
 
     def FA_titles(person):
         valid_titles = []

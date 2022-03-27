@@ -1,4 +1,4 @@
-init 1301 python:              #Because Vren Init personality functions at 1300
+init 1400 python:              #Because Vren Init personality functions at 1300
 
     def erica_titles(person):
         valid_titles = []

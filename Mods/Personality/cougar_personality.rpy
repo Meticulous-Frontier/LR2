@@ -14,7 +14,7 @@ init 3 python:
     cougar_personality_action = ActionMod("Cougar Personality", cougar_personality_requirement, "cougar_personality_dummy_label", priority = -10,
         menu_tooltip = "Enable or disable the cougar personality.", category="Personality", on_enabled_changed = change_cougar_personality_enabled)
 
-init 1301 python:
+init 1400 python:
     def cougar_titles(person):
         valid_titles = []
         valid_titles.append(person.formal_address + " " + person.last_name)

@@ -1,5 +1,5 @@
 ### PERSONALITY CHARACTERISTICS ###
-init 1301:
+init 1400:
     python:
         def genius_titles(the_person):
             if the_person.love < 20:

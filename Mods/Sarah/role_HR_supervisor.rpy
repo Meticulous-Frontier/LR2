@@ -347,7 +347,7 @@ init 5 python:
             menu_tooltip = "Pick a member of your HR staff to be your HR director. The HR director will help you manage your employees well-being and motivation.")
 
 
-init 1301 python:
+init 1400 python:
     def HR_director_creation_requirement():
         if "sarah" in globals():
             return sarah.event_triggers_dict.get("first_meeting", False) == True

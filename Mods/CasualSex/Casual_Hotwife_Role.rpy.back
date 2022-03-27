@@ -798,7 +798,7 @@ label casual_hotwife_ghost_label(the_person):
 #************* Personality****************#
 #Override some of her personality functions so that her conversation options makes sense.
 
-init 1301 python:              #Because Vren Init personality functionns at 1300
+init 1400 python:              #Because Vren Init personality functionns at 1300
 
 
 
