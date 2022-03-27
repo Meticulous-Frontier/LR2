@@ -254,7 +254,6 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
 
     python:
         #renpy.say(None, "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
-        renpy.suspend_rollback(True)
         count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
@@ -282,7 +281,6 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         c = None
         people_to_process = []
         person = None
-        renpy.suspend_rollback(False)
 
     if mandatory_advance_time and not time_of_day == 4: #If a crisis has told us to advance time after it we do so (not when night to prevent spending night at current location).
         call advance_time from _call_advance_time_advance_time_enhanced
@@ -352,18 +350,22 @@ label advance_time_mandatory_crisis_label():
 label advance_time_people_run_turn_label():
     # "advance_time_people_run_turn_label - timeslot [time_of_day]" #DEBUG
     python:
+        renpy.suspend_rollback(True)
         mandatory_advance_time = False
         advance_time_run_turn(people_to_process)
+        renpy.suspend_rollback(False)
     return
 
 label advance_time_people_run_day_label():
     # "advance_time_people_run_day_label - timeslot [time_of_day]" # DEBUG
     python:
+        renpy.suspend_rollback(True)
         advance_time_run_day(people_to_process)
 
         # update party schedules once a week (sunday night)
         if day%7 == 6:
             update_party_schedules(people_to_process)
+        renpy.suspend_rollback(False)
     return
 
 label advance_time_end_of_day_label():
@@ -442,7 +444,9 @@ label advance_time_next_label():
 
 label advance_time_people_run_move_label():
     python:
+        renpy.suspend_rollback(True)
         # "advance_time_people_run_move_label - timeslot [time_of_day]" #DEBUG
         advance_time_run_move(people_to_process)
         advance_time_assign_limited_time_events(people_to_process)
+        renpy.suspend_rollback(False)
     return
