@@ -846,6 +846,8 @@ label candace_midnight_wakeup_label():
         police_chief.change_location(police_station)
         police_chief.wear_uniform()
 
+        the_person = candace
+
     "Your phone goes off in the middle of the night, waking you up. You look over at it."
     "You have no idea who it is, so you silence it and roll over. Seconds later, it's going off again. You groggily sit up and answer your phone."
     mc.name "Hello?"
