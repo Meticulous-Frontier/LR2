@@ -264,10 +264,11 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         if not no_events or (not advance_time_action_list[adv_time_index] in advance_time_event_action_list):
             if advance_time_action_list[adv_time_index].is_action_enabled(): # Only run actions that have their requirement met.
                 $ start_time = time.time()
+                $ action_name = advance_time_action_list[adv_time_index].name
                 # $ renpy.say(None, "Run: " + advance_time_action_list[adv_time_index].name)
                 call expression advance_time_action_list[adv_time_index].effect pass (*advance_time_action_list[adv_time_index].args) from _call_advance_time_action_advance_time_enhanced
                 if debug_log_enabled:
-                    $ add_to_debug_log("Adv time: " + advance_time_action_list[adv_time_index].name + " ({total_time:.3f})", start_time)
+                    $ add_to_debug_log("Adv time: " + action_name + " ({total_time:.3f})", start_time)
 
                 $ clear_scene()
 
