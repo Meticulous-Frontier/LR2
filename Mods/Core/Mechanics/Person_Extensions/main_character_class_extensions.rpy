@@ -14,7 +14,7 @@ init -1 python:
     MainCharacter.has_dungeon = has_dungeon
 
     def is_home(self):
-        return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
+        return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, dungeon, home_shower]
 
     MainCharacter.is_home = is_home
 
