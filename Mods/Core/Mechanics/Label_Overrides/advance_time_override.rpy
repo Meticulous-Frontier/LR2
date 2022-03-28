@@ -254,24 +254,24 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
 
     python:
         #renpy.say(None, "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
-        count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
+        adv_time_index = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
         clear_follow_mc_flag(people_to_process)
         mandatory_event = False
 
-    while count < advance_time_max_actions:
-        if not no_events or (not advance_time_action_list[count] in advance_time_event_action_list):
-            if advance_time_action_list[count].is_action_enabled(): # Only run actions that have their requirement met.
+    while adv_time_index < advance_time_max_actions:
+        if not no_events or (not advance_time_action_list[adv_time_index] in advance_time_event_action_list):
+            if advance_time_action_list[adv_time_index].is_action_enabled(): # Only run actions that have their requirement met.
                 $ start_time = time.time()
-                # $ renpy.say(None, "Run: " + advance_time_action_list[count].name)
-                call expression advance_time_action_list[count].effect pass (*advance_time_action_list[count].args) from _call_advance_time_action_advance_time_enhanced
+                # $ renpy.say(None, "Run: " + advance_time_action_list[adv_time_index].name)
+                call expression advance_time_action_list[adv_time_index].effect pass (*advance_time_action_list[adv_time_index].args) from _call_advance_time_action_advance_time_enhanced
                 if debug_log_enabled:
-                    $ add_to_debug_log("Adv time: " + advance_time_action_list[count].name + " ({total_time:.3f})", start_time)
+                    $ add_to_debug_log("Adv time: " + advance_time_action_list[adv_time_index].name + " ({total_time:.3f})", start_time)
 
                 $ clear_scene()
 
-        $ count += 1
+        $ adv_time_index += 1
 
     python:
         # increase crisis chance (every time slot)
