@@ -109,20 +109,22 @@ init -1 python:
 
     # Adds an action to the room if not already present. Used with PolicyMod.
     def add_action(self, act):
-        if act not in self.actions:
-            self.actions.append(act)
+        found = next((x for x in self.actions if x.effect == action.effect), None)
+        if not found:
+            self.actions.append(action)
 
     Room.add_action = add_action
 
     # Remove an action from if present
     def remove_action(self, act):
-        if isinstance(act, basestring):
-            found = next((x for x in self.actions if x.effect == act), None)
-            if found:
-                self.actions.remove(found)
+        found = None
+        if isinstance(action, Action):
+            found = next((x for x in self.actions if x == action), None)
+        elif isinstance(action, basestring):
+            found = next((x for x in self.actions if x.effect == action), None)
 
-        if act in self.actions:
-            self.actions.remove(act)
+        if found:
+            self.actions.remove(found)
 
     Room.remove_action = remove_action
 

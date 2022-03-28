@@ -439,7 +439,7 @@ label fetish_serum_self_code_menu(the_person):
             "The code itself is complicated, but you think it might be possible to modify it into a new program yourself, with the help of [the_person.possessive_title]."
             mc.name "I think we might actually be able to pull this off."
             if fetish_serum_coding_activity not in mc.business.r_div.actions:
-                $ mc.business.r_div.actions.append(fetish_serum_coding_activity)
+                $ mc.business.r_div.add_action(fetish_serum_coding_activity)
     the_person "Okay, what kind of program do you think we should make?"
     menu:
         "Exhibitionist Program" if not fetish_exhibition_serum_is_unlocked():
