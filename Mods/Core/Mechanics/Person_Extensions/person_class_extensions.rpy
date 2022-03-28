@@ -1615,7 +1615,7 @@ init -1 python:
     def is_person_at_mc_house(self):
         return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
 
-    Person.is_person_at_mc_house = is_person_at_mc_house
+    Person.is_at_mc_house = is_person_at_mc_house
 
     def is_person_home(self):
         return self.location == self.home
