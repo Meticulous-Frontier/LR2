@@ -843,16 +843,14 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                     mc.name "I don't think so. I'm the man here. Lie down, I'll lick your pussy for a bit first."
                     $ mc.change_locked_clarity(20)
                     "She starts to protest, but quickly stops when she realizes you are going to eat her out."
-                    $ the_person.change_happiness(-3)
-                    $ the_person.change_obedience(5)
+                    $ the_person.change_stats(happiness = -3, obedience = 5)
                     $ the_person.add_situational_slut("horny", 10, "You take charge")
                     $ the_person.add_situational_obedience("submissive", 20, "She submits to you")
                     $ the_person.draw_person(position = "missionary")
                     call fuck_person(the_person, private = True, start_position = cunnilingus, start_object = make_bench()) from _erica_gets_fucked_by_her_man_in_lockerroom_02
                 "Let her take the lead":
                     "You decide to let her take charge. She gently pushes you back onto the bench."
-                    $ the_person.change_happiness(3)
-                    $ the_person.change_obedience(-5)
+                    $ the_person.change_stats(happiness = 3, obedience = -5)
                     $ mc.change_locked_clarity(20)
                     the_person "Don't worry, I know just what to do."
                     $ the_person.add_situational_slut("horny", 10, "She takes the lead")
@@ -2534,8 +2532,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
         "You should wear your own thing":
             $ erica_insta_outfit = erica.personalize_outfit(insta_wardrobe.pick_random_outfit())
     erica "Thanks! I'm still pretty new at this, so it's nice to have your opinion on it."
-    $ erica.change_happiness(1)
-    $ erica.change_obedience(1)
+    $ erica.change_stats(happiness = 1, obedience = 1)
     lily "Alright, before we get going, I need to grab a soda or something. I'm parched!"
     erica "Yeah, me too. Do you have any flavored seltzers?"
     "You think for a second. You could offer to go get them their drinks, and that would give you an opportunity to give them a serum..."
@@ -2598,8 +2595,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.strip_full_outfit(strip_feet = True) # strip both simultaneously
             $ mc.change_locked_clarity(40)
             "[erica.possessive_title] gives you a sly smile before she starts putting on her outfit."
-            $ erica.change_slut(2)
-            $ erica.change_happiness(2)
+            $ erica.change_stats(happiness = 2, slut = 2, max_slut = 30)
             $ lily.apply_outfit(lily_insta_outfit, update_taboo = True)
             $ erica.apply_outfit(erica_insta_outfit, update_taboo = True)
             $ scene_manager.update_actor(lily)
@@ -3198,13 +3194,11 @@ label erica_breeding_fetish_team_crisis_label():
     "For the first time since she got here, she slips a slight smile."
     the_person "Oh? You don't think it's gross... my belly getting bigger?"
     mc.name "Gross? Geesh, every time I look at you I get so turned on, thinking about pinning you down and knocking you up."
-    $ the_person.change_happiness(15)
-    $ the_person.change_arousal(20)
+    $ the_person.change_stats(happiness = 5, arousal = 20)
     "She looks away from you, but her smile gets a little wider."
     the_person "Yes, and as you can see you certainly did a good job of that, didn't you."
     mc.name "Yeah, but I could definitely use a little more practice."
-    $ the_person.change_happiness(10)
-    $ the_person.change_arousal(20)
+    $ the_person.change_stats(happiness = 5, arousal = 20)
     the_person "Oh god, would you stop? You're making me leak..."
     mc.name "Seriously, you want me to stop?"
     the_person "Stop talking anyway... yeah..."

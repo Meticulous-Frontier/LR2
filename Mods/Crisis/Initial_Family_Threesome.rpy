@@ -37,8 +37,7 @@ label SB_fetish_vaginal_family_threesome_label():
             "She is clearly disappointed."
             the_person "Whatever [the_person.mc_title]... see you in the morning I guess?"
             "You head for bed, looking forward to a restful night's sleep."
-            $ the_person.change_obedience(-2)
-            $ the_person.change_happiness(-5)
+            $ the_person.change_stats(happiness = -5, obedience = -2)
             return
         "Strip first" if not the_person.outfit.full_access():
             mc.name "That sounds good [the_person.title], I could use a bed warmer. Why don't you get naked first?"

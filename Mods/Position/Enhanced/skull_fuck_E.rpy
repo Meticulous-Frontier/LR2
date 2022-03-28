@@ -147,8 +147,7 @@ label orgasm_skull_fuck_enhanced(the_girl, the_location, the_object):
                 "[the_girl.title] clenches her thighs together and rides out her orgasm."
             $ the_item = None
     else:
-        $ the_girl.change_obedience(1)
-        $ the_girl.change_happiness(-2)
+        $ the_girl.change_stats(happiness = -2, obedience = 1)
 
     $ skull_fuck.current_modifier = None
     $ skull_fuck.redraw_scene(the_girl)

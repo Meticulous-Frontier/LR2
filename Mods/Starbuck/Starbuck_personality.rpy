@@ -320,13 +320,13 @@ label starbuck_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
-        $ change_report = the_person.change_slut(1)
+        $ the_person.change_slut(1)
         "[title] watches for a moment, then turns away  while you and [the_sex_person.name] keep [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh wow that's hot. I should sell tickets to this!"
-        $ change_report = the_person.change_slut(2)
+        $ the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:

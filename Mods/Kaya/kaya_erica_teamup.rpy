@@ -1001,10 +1001,8 @@ label kaya_erica_teamup_scene_4(the_person_one, the_person_two):
         $ the_report = _return
         if the_report.get("trifecta", False):
             "You slowly recover with the girls. They both had orgasms, and you are recovering from yours also."
-            $ kaya.change_happiness(5)
-            $ kaya.change_obedience(5)
-            $ erica.change_happiness(5)
-            $ erica.change_obedience(5)
+            $ kaya.change_stats(happiness = 5, obedience = 5)
+            $ erica.change_stats(happiness = 5, obedience = 5)
         "Finished for tonight, you decide to put your cock away while [erica.possessive_title] and [kaya.possessive_title] get up."
         $ scene_manager.update_actor(kaya, position="stand3", display_transform = character_center_flipped)
         $ scene_manager.update_actor(erica, position = "stand4", display_transform = character_right)
@@ -1311,14 +1309,12 @@ label kaya_erica_teamup_question_label(the_person, active_punishment = False, pu
                 "[punished_person.title] pulls off for a second to protest."
                 punished_person "Seriously? Youre gonna give her an easy one? That is so..."
                 "You grab [punished_person.possessive_title] by the hair and force her back down on your cock, cutting off her complaint."
-                $ punished_person.change_obedience(5)
-                $ punished_person.change_happiness(-2)
+                $ punished_person.change_stats(happiness = -2, obedience = 3)
                 "She gags for a second, but soon resumes her punishment, pleasuring you with her mouth."
             elif active_punishment and kaya_erica_teamup.get_stage() == 2:
                 punished_person "Seriously? Youre gonna give her an easy one? That is so..."
                 "You deliver a smack to her ass, using more force than usual this time. She yelps and quickly shuts up."
-                $ punished_person.change_obedience(5)
-                $ punished_person.change_happiness(-2)
+                $ punished_person.change_stats(happiness = -2, obedience = 3)
             "[the_person.title] immediately gives you the correct answer."
             mc.name "That's correct."
             return True

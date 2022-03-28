@@ -222,8 +222,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 mc.name "I've got to give it to [person_one.name]. I like them perky."
                             else:
                                 mc.name "I've got to give it to [person_one.name]. I like them big."
-                            $ person_one.change_happiness(5)
-                            $ person_one.change_love(1 + person_one.get_opinion_score("showing her tits"))
+                            $ person_one.change_stats(happiness = 5, love = 1 + person_one.get_opinion_score("showing her tits"))
                             $ scene_manager.update_actor(person_two, emotion = "sad")
                             person_two "See? Now that we've settled that, can we get back to work. It feels weird to be talking about our breasts with our boss."
                             $ scene_manager.update_actor(person_one, emotion = "happy")
@@ -236,8 +235,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 mc.name "I've got to give it to [person_two.name]. I like them big."
                             $ scene_manager.update_actor(person_one, emotion = "happy")
                             person_one "Exactly! You're just going to have to accept that you're smoking hot [person_two.name]."
-                            $ person_two.change_slut(2 + person_one.get_opinion_score("showing her tits"))
-                            $ person_two.change_love(1 + person_one.get_opinion_score("showing her tits"))
+                            $ person_two.change_stats(slut = 2 + person_one.get_opinion_score("showing her tits"), love = 1 + person_one.get_opinion_score("showing her tits"))
                             $ scene_manager.update_actor(person_two, emotion = "happy")
                             person_two "Fine, I guess my tits are pretty nice. Shouldn't we be getting back to work."
                             person_one "I suppose. Thanks for the help [person_one.mc_title]."

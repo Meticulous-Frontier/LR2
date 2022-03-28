@@ -331,7 +331,7 @@ init -1 python:
     def production_equipment_selftest_project_on_day():
         if not mc.business.is_weekend():
             for person in mc.business.production_team:
-                person.change_happiness(1)
+                person.change_happiness(1, add_to_log = False)
 
     def market_targeted_advertising_project_on_turn():
         if not mc.business.is_open_for_business():
@@ -386,7 +386,7 @@ init -1 python:
     def research_team_building_project_on_day():
         if not mc.business.is_weekend():
             for person in mc.business.research_team:
-                person.change_obedience(1)
+                person.change_obedience(1, add_to_log = False)
 
     def hr_test_project_on_turn():
         renpy.say(None, "Test project on turn")

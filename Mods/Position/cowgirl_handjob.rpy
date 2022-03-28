@@ -185,8 +185,7 @@ label GIC_outro_cowgirl_handjob(the_girl, the_location, the_object, the_goal = N
         $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
         "Thick strands of cum erupt as you orgasm. It ropes up and out over your belly."
         "When you finish you lay back and [the_girl.title] stops stroking you. She has a naughty smile on her face."
-        $ the_girl.change_happiness(2)
-        $ the_girl.change_obedience(-3)
+        $ the_girl.change_stats(happiness = 2, obedience = -3)
         "She wipes her hand on your leg and starts to get up."
     elif the_goal == "facial" or the_goal == "body shot":
         "Little by little the soft hand of [the_girl.title] brings you closer to orgasm."

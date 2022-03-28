@@ -290,8 +290,7 @@ label ashley_intro_label():
     $ the_person.draw_person()
     if _return == ashley:
         mc.name "I agree. She would be perfect for the production department. Would you pass along that she can start tomorrow? Or anytime in the next week."
-        $ the_person.change_happiness(5)
-        $ the_person.change_obedience(5)
+        $ the_person.change_stats(happiness = 5, obedience = 5)
         the_person "Oh! I didn't think you would say yes. This is great news! I'm sure she'll probably want to get started right away!"
 
         $ mc.business.add_employee_production(ashley)
@@ -325,8 +324,7 @@ label ashley_hire_directed_label():
     $ the_person.draw_person()
     if _return == ashley:
         mc.name "I agree. She would be perfect for the production department. Would you pass along that she can start tomorrow? Or anytime in the next week."
-        $ the_person.change_happiness(5)
-        $ the_person.change_obedience(5)
+        $ the_person.change_stats(happiness = 5, obedience = 5)
         the_person "Oh! This is great news! I'm sure she'll probably want to get started right away!"
         $ remove_ashley_hire_later_action()
         $ mc.business.add_employee_production(ashley)

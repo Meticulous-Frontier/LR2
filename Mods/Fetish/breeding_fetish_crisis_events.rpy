@@ -300,15 +300,13 @@ label breeding_fetish_happy_breeder_crisis_label():
             "That night, you have many pleasant dreams involving [the_person.possessive_title] and sex in all kinds of crazy positions."
         "Refuse":       # allow for player to decide if he wants to induce fetish
             mc.name "I'm sorry [the_person.title], I really need to get some sleep."
-            $ the_person.change_obedience(-10)
-            $ the_person.change_happiness(-10)
+            $ the_person.change_stats(happiness = -10, obedience = -10)
             the_person "Oh! I'm sorry... Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
             return # EXIT
         "Too Tired" if mc.energy < 30:
             "[the_person.possessive_title] is surprised by your answer."
-            $ the_person.change_obedience(-5)
-            $ the_person.change_happiness(-5)
+            $ the_person.change_stats(happiness = -5, obedience = -5)
             the_person "Oh! I'm sorry... I didn't think about that. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
             return  # EXIT
@@ -338,8 +336,7 @@ label breeding_fetish_family_sleep_crisis_label():
                 "She is clearly disappointed."
                 the_person "Whatever [the_person.mc_title]... see you in the morning I guess?"
                 "You head for bed, looking forward to a restful night's sleep."
-                $ the_person.change_obedience(-2)
-                $ the_person.change_happiness(-5)
+                $ the_person.change_stats(happiness = -5, obedience = -2)
                 return
             "Not tonight\n{color=ff0000}{size=18}Too much Lust to say No{/size}{/color} (disabled)" if get_lust_tier() > 2:
                 pass
@@ -379,8 +376,7 @@ label breeding_fetish_family_sleep_crisis_label():
                 "She is clearly disappointed."
                 the_person "I understand [the_person.mc_title]... see you in the morning I guess?"
                 "You roll over while she leaves the room and quickly fall asleep."
-                $ the_person.change_obedience(-2)
-                $ the_person.change_happiness(-5)
+                $ the_person.change_stats(happiness = -5, obedience = -2)
                 return
             "Not tonight\n{color=ff0000}{size=18}Too much Lust to say No{/size}{/color} (disabled)" if get_lust_tier() > 2 and mc.energy > 80:
                 pass
@@ -408,8 +404,7 @@ label breeding_fetish_family_sleep_crisis_label():
                 else:
                     the_person "Whatever."
                 "You roll over while she leaves the room and quickly fall asleep."
-                $ the_person.change_obedience(-2)
-                $ the_person.change_happiness(-5)
+                $ the_person.change_stats(happiness = -5, obedience = -2)
                 return
             "Not tonight\n{color=ff0000}{size=18}Too much Lust to say No{/size}{/color} (disabled)" if get_lust_tier() > 2 and mc.energy > 80:
                 pass
@@ -475,8 +470,7 @@ label breeding_fetish_employee_high_fertility_crisis_label():
         "It is beginning to run down the inside of her thighs."
         the_person "Oh god... it's so deep..."
         $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
-        $ the_person.change_happiness(10)
-        $ the_person.change_obedience(10)
+        $ the_person.change_stats(happiness = 10, obedience = 10)
         "[the_person.title] is euphoric, having taken your load she so desperately wanted."
         $ the_person.draw_person(position = "missionary")
         "She rolls over onto her back on your desk, lift her hips up to try and keep your cum inside of her."

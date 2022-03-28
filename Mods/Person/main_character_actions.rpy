@@ -149,8 +149,7 @@ label mc_pay_to_strip_label(person):
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
 label mc_spend_the_night_label(person): # Consider adding the sleep_action to the_person's room, but stats jump all over the place so doesn't necessarily make sense.
     "You go to sleep in [person.home.name]."
-    $ person.change_love(5)
-    $ person.change_happiness(5)
+    $ the_person.change_stats(happiness = 5, love = 3)
     call advance_time from _call_advance_time_spend_the_night
     return
 

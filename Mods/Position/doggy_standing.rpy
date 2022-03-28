@@ -231,7 +231,7 @@ label scene_SB_doggy_standing_3(the_girl, the_location, the_object):
     menu:
         "Finger her ass":
             "You decide to give her ass a little extra attention. You work up some saliva in your mouth then pause fucking her for a second."
-            the_person "Hey... why did you stop?"
+            the_girl "Hey... why did you stop?"
             "Instead of answering, you let the saliva drop from your mouth onto her crack. She feels it and realizes what you are about to do when you start to work it into her crack with your finger."
             if the_girl.get_opinion_score("anal sex") > 0:
                 "[the_girl.possessive_title] bucks her hips slightly as you start to push your finger into her tight back passage. Her back arches in pleasure."

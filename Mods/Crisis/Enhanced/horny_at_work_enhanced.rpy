@@ -354,8 +354,7 @@ label horny_at_work_crisis_enhanced_label():
 
                     "Tell her to leave":
                         mc.name "If I wanted you to come I would have told you to. I'd like some privacy, please."
-                        $ active_person.change_happiness(-5)
-                        $ active_person.change_obedience(2)
+                        $ active_person.change_stats(happiness = -5, obedience = 2)
                         $ active_person.draw_person(emotion = "sad")
                         active_person "I... Oh, I'm sorry [active_person.mc_title], I don't know what I was thinking..."
                         $ active_person.draw_person(position = "walking_away")

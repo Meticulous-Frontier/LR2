@@ -770,8 +770,7 @@ label fetish_serum_coding_activity_label():
 
                     "Focus on the code" if mc.focus >= 6:
                         mc.name "I think I would like to work on this right now. Maybe another time."
-                        $ the_person.change_happiness(-3)
-                        $ the_person.change_obedience(5)
+                        $ the_person.change_stats(happiness = -3, obedience = 3)
                         the_person "Ah, okay."
                         "You spend a few hours working on the code. You feel like you are making good progress."
                         "You write some unit tests. There are a couple bugs, but you are able to work through them."

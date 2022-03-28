@@ -465,8 +465,7 @@ label erica_hookup_accept(the_person):
         "You wait until your orgasm has passed completely, then pull out and stand back. Your condom is bulged on the end where it is filled with your seed."
         if the_person.arousal < 100:
             the_person "Wow, okay, I guess we are done?"
-            $ the_person.change_happiness(-5)
-            $ the_person.change_obedience(-5)
+            $ the_person.change_stats(happiness = -5, obedience = -5)
             "She is a bit disappointed she didn't finish."
         else:
             the_person "That was nice. I'll make sure next time I'm in the mood to hit you up again..."
@@ -518,8 +517,7 @@ label erica_hookup_accept(the_person):
                     "Her knees give out, but you are too close to stop fucking her. You grab her hips roughly and pick up the pace."
                     $ the_person.change_arousal(20)#110 + 8
                     "Her ass begins to spasm. Her buttery smooth back passage squeezes you over and over as her body is racked with yet another orgasm. It feels incredible."
-                    $ the_person.change_slut(2)
-                    $ the_person.change_happiness(5)
+                    $ the_person.change_stats(happiness = 5, slut = 2)
                     mc.name "Get ready, I'm gonna cum!"
                     "[the_person.title] is incoherent, and doesn't process your words."
                     "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
@@ -670,8 +668,7 @@ label erica_sex_watch(the_person, the_sex_person, the_position):
     if the_person.effective_sluttiness() < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.effective_sluttiness() < the_position.slut_requirement - 10:

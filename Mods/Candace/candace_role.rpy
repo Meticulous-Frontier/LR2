@@ -1494,8 +1494,7 @@ label candace_meet_doctor_candace_label():
                 mc.name "So, what is your degree in, anyway?"
                 the_person "I received my doctorate for molecular biology and genetics... Though I'm not sure why that is relevant."
                 mc.name "Oh, I just wanted to know for when I have to introduce you to people as 'my girlfriend Dr. [the_person.last_name]."
-                $ the_person.change_happiness(15)
-                $ the_person.change_love(5)
+                $ the_person.change_stats(happiness = 15, love = 5)
                 the_person "Ahh! I suppose that would be okay... The first part anyway."
                 "She leans back a bit and gets kinda dreamy eyed."
                 the_person "You know, I truly had no idea if you were going to accept or not."
