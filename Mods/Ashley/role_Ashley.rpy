@@ -147,73 +147,47 @@ init -1 python:
 
     def ashley_ask_date_classic_concert_requirement(the_person):
         if ashley_get_concert_overheard() and not ashley_get_concert_date_stage() > 0:
-            if the_person.is_at_work() and the_person.love > 20:
-                return True
+            return the_person.is_at_work() and the_person.love > 20
         return False
 
     def ashley_classical_concert_date_requirement():
-        if time_of_day == 3:
-            if day%7 == 3:  #Thursday
-                if ashley_get_concert_date_stage() == 1:
-                    return True
+        if time_of_day == 3 and day%7 == 3:  #Thursday
+            return ashley_get_concert_date_stage() == 1
         return False
 
     def ashley_porn_video_discover_requirement():
-        if ashley_get_attitude_discussed():
-            if time_of_day == 4 and ashley.sluttiness > 20:
-                if mc.energy > 80:
-                    return True
+        if time_of_day == 4 and ashley.sluttiness > 20 and mc.energy > 80:
+            return ashley_get_attitude_discussed()
         return False
 
     def ashley_ask_sister_about_porn_video_requirement(the_person):
-        if ashley_get_porn_discovered():
-            if the_person.is_at_work():
-                return True
-        return False
+        return the_person.is_at_work() and ashley_get_porn_discovered()
 
     def ashley_mandatory_ask_about_porn_requirement():
-        if day > ashley_get_porn_convo_day() and ashley_get_concert_date_stage() >= 2:
-            if time_of_day > 1:
-                if ashley.sluttiness >= 20 and ashley.love >= 40 and stephanie.love >= 60:
-                    return True
+        if time_of_day > 1 and ashley.sluttiness >= 20 and ashley.love >= 40 and stephanie.love >= 60:
+            return day > ashley_get_porn_convo_day() and ashley_get_concert_date_stage() >= 2
         return False
 
     def ashley_ask_about_porn_requirement(the_person):
-        if ashley_get_porn_convo_avail():
-            if the_person.is_at_work():
-                return True
-        return False
+        return the_person.is_at_work() and ashley_get_porn_convo_avail()
 
     def ashley_post_handjob_convo_requirement(the_person):
-        if the_person.is_at_work():
-            return True
-        return False
+        return the_person.is_at_work()
 
     def ashley_stephanie_arrange_relationship_requirement(the_person):
-        if the_person.is_at_work():
-            return True
-        return False
+        return the_person.is_at_work()
 
     def ashley_stephanie_saturday_coffee_intro_requirement(the_person):
-        if the_person.location == stephanie.location and day%7 == 6 and time_of_day == 0:
-            return True
-        return False
+        return the_person.location == stephanie.location and day%7 == 6 and time_of_day == 0
 
     def ashley_stephanie_saturday_coffee_recur_requirement(the_person):
-        if the_person.location == stephanie.location and day%7 == 6 and time_of_day == 0:
-            return True
-        return False
+        return the_person.location == stephanie.location and day%7 == 6 and time_of_day == 0
 
     def ashley_second_concert_date_requirement():
-        if time_of_day == 3:
-            return True
-        return False
+        return time_of_day == 3
 
     def ashley_steph_second_date_confrontation_requirement():
-        if time_of_day == 2 and mc.is_at_work():
-            if ashley.sluttiness >= 60:
-                return True
-        return False
+        return time_of_day == 2 and mc.is_at_work() and ashley.sluttiness >= 60
 
     def add_ashley_hire_later_action():
         ashley_hire_directed = Action("Reconsider hiring Stephanie's sister", ashley_hire_directed_requirement, "ashley_hire_directed_label",
@@ -226,23 +200,18 @@ init -1 python:
         return
 
     def ashley_clothes_shopping_requirement(the_person):
-        if the_person.location == clothing_store:
-            return True
-        return False
+        return the_person.location == clothing_store
 
     def ashley_blows_during_meeting_requirement():
         if time_of_day == 2 and mc.is_at_work():
-            if ashley.sluttiness > 40 and ashley.is_willing(blowjob):
-                return True
+            return ashley.sluttiness > 40 and ashley.is_willing(blowjob)
         return False
 
     def ashley_sneaks_over_requirement():
         if schedule_sleepover_available() and time_of_day == 4: #No sleepover expected
             if ashley.love >= 60 and ashley.is_willing(cowgirl):    #Needs to be willing to commit the acts in the event
-                if ashley_second_date_complete():
-                    return True
+                return ashley_second_date_complete()
         return False
-
 
     def ashley_steph_drinks_out_requirement(the_person):
         return False
