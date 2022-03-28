@@ -238,10 +238,10 @@ init 5 python:
                         person.add_unique_on_room_enter_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
         return
 
-label advance_time_move_to_next_day(no_events = True):
+label advance_time_move_to_next_day():
     $ current_day = day
     while day == current_day:
-        call advance_time_enhanced(no_events = no_events, jump_to_game_loop = False) from _call_advance_time_advance_time_move_to_next_day
+        call advance_time_enhanced(no_events = True, jump_to_game_loop = False) from _call_advance_time_advance_time_move_to_next_day
     return
 
 label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
@@ -253,25 +253,25 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
     # Then: Add research crisis when serum is finished, requiring additional input from the player and giving the chance to test a serum on the R&D staff.
 
     python:
+        renpy.dynamic("count")
         #renpy.say(None, "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
-        adv_time_index = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
+        count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
         clear_follow_mc_flag(people_to_process)
         mandatory_event = False
 
-    if not no_events:
-        while adv_time_index < advance_time_max_actions:
-            if not advance_time_action_list[adv_time_index] in advance_time_event_action_list:
-                if advance_time_action_list[adv_time_index].is_action_enabled(): # Only run actions that have their requirement met.
-                    $ start_time = time.time()
-                    # $ renpy.say(None, "Run: " + advance_time_action_list[adv_time_index].name)
-                    call expression advance_time_action_list[adv_time_index].effect pass (*advance_time_action_list[adv_time_index].args) from _call_advance_time_action_advance_time_enhanced
-                    if debug_log_enabled:
-                        $ add_to_debug_log("Adv time: " +  advance_time_action_list[adv_time_index].name + " ({total_time:.3f})", start_time)
+    while count < advance_time_max_actions:
+        if not no_events or (not advance_time_action_list[count] in advance_time_event_action_list):
+            if advance_time_action_list[count].is_action_enabled(): # Only run actions that have their requirement met.
+                $ start_time = time.time()
+                # $ renpy.say(None, "Run: " + advance_time_action_list[count].name)
+                call expression advance_time_action_list[count].effect pass (*advance_time_action_list[count].args) from _call_advance_time_action_advance_time_enhanced
+                if debug_log_enabled:
+                    $ add_to_debug_log("Adv time: " +  advance_time_action_list[count].name + " ({total_time:.3f})", start_time)
 
-                    $ clear_scene()
-            $ adv_time_index += 1
+                $ clear_scene()
+        $ count += 1
 
     python:
         # increase crisis chance (every time slot)
@@ -283,7 +283,7 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         person = None
 
     if mandatory_advance_time and not time_of_day == 4: #If a crisis has told us to advance time after it we do so (not when night to prevent spending night at current location).
-        call advance_time from _call_advance_time_advance_time_enhanced
+        call advance_time() from _call_advance_time_advance_time_enhanced
     if no_events or not jump_to_game_loop:
         return
 
