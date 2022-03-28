@@ -132,7 +132,7 @@ label SB_fetish_vaginal_family_threesome_label():
         call start_threesome(lily, mom, start_position = Threesome_double_down) from threesome_event_test_call_2
         $ mc.business.event_triggers_dict["family_threesome"] = True
         "Wow, you just had sex with [the_person.possessive_title] and [mom.possessive_title]! You can't believe how lucky you are."
-        "Maybe this is the event that will finally set things in motion for you family. All three of you are in this sexually together."
+        "Maybe this is the event that will finally set things in motion for your family. All three of you are in this sexually together."
         "Eventually, the girls get up."
         $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_center_flipped)
         $ scene_manager.update_actor(mom, position = "stand4", display_transform = character_right)
