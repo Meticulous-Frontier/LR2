@@ -127,8 +127,8 @@ init 2 python:
             target_list.append(aunt)
         if willing_to_threesome(sarah, nora):
             target_list.append(nora)
-        for person in mc.business.get_employee_list():
-            if not person is sarah and willing_to_threesome(sarah, person):
+        for person in [x for x in mc.business.get_employee_list() if not x == sarah and willing_to_threesome(sarah, x)]:
+            if not person in target_list:
                 target_list.append(person)
 
         return target_list

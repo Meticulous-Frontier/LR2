@@ -1269,7 +1269,7 @@ label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered 
 
 # Love Scenes
 label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a date in his office.
-    if ellie_has_brought_lunch_date():  #I left a scenario in game where this could occur twice. IF this event has already occured, just exit immediately.
+    if ellie_has_brought_lunch_date():  #I left a scenario in game where this could occur twice. IF this event has already occurred, just exit immediately.
         return
     $ the_person = ellie
     $ ellie.event_triggers_dict["brought_lunch"] = True
