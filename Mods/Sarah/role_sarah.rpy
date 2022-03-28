@@ -2002,7 +2002,7 @@ label Sarah_threesome_request_label():
     the_person "Oh hell yeah, one sec..."
     "[the_person.title] fumbles around on her phone for a second. She is pretty drunk, so it takes her a while to find them."
     $ scene_manager.hide_actor(sarah)
-    $ gossip_target.strip_outfit_to_max_sluttiness()
+    $ gossip_target.strip_outfit_to_max_sluttiness(delay = 0)
     $ scene_manager.show_actor(sarah)
     $ scene_manager.add_actor(gossip_target, position = "cowgirl", emotion = "orgasm", display_transform = character_center)
     "She shows you her phone. It shows [gossip_target.title] in the backseat of a Jeep, riding some guy you don't recognize while he is sitting."
