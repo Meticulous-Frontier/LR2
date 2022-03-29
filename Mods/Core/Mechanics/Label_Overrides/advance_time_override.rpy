@@ -330,18 +330,20 @@ label advance_time_mandatory_crisis_label():
         crisis_count = 0
 
     while crisis_count < len(active_crisis_list):
-        # remove from main list before we trigger
-        if active_crisis_list[crisis_count] in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
-            $ mc.business.mandatory_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
-        call expression active_crisis_list[crisis_count].effect pass (*active_crisis_list[crisis_count].args) from _call_mandatory_crisis_advance_time
-        if _return == "Advance Time":
-            $ mandatory_advance_time = True
-        python:
-            if debug_log_enabled:
-                add_to_debug_log("Mandatory crisis: " + active_crisis_list[crisis_count].name)
-            clear_scene()
-            crisis_count += 1
-            mandatory_event = True
+        # check if condition is still valid, a mandatory event might invalidate the conditions
+        if active_crisis_list[crisis_count].is_action_enabled():
+            # remove from main list before we trigger
+            if active_crisis_list[crisis_count] in mc.business.mandatory_crises_list: # extra check to see if crisis still in list
+                $ mc.business.mandatory_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
+            call expression active_crisis_list[crisis_count].effect pass (*active_crisis_list[crisis_count].args) from _call_mandatory_crisis_advance_time
+            if _return == "Advance Time":
+                $ mandatory_advance_time = True
+            python:
+                if debug_log_enabled:
+                    add_to_debug_log("Mandatory crisis: " + active_crisis_list[crisis_count].name)
+                clear_scene()
+                mandatory_event = True
+        $ crisis_count += 1
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
@@ -398,19 +400,21 @@ label advance_time_mandatory_morning_crisis_label():
         crisis_count = 0
 
     while crisis_count < len(active_crisis_list):
-        # remove from main list before we trigger
-        if active_crisis_list[crisis_count] in mc.business.mandatory_morning_crises_list:
-            $ mc.business.mandatory_morning_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
+        # check if condition is still valid, a mandatory event might invalidate the conditions
+        if active_crisis_list[crisis_count].is_action_enabled():
+            # remove from main list before we trigger
+            if active_crisis_list[crisis_count] in mc.business.mandatory_morning_crises_list:
+                $ mc.business.mandatory_morning_crises_list.remove(active_crisis_list[crisis_count]) #Clean up the list.
 
-        call expression active_crisis_list[crisis_count].effect pass (*active_crisis_list[crisis_count].args) from _call_mandatory_morning_crisis_advance_time
-        if _return == "Advance Time":
-            $ mandatory_advance_time = True
-        python:
-            if debug_log_enabled:
-                add_to_debug_log("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
-            clear_scene()
-            crisis_count += 1
-            mandatory_event = True
+            call expression active_crisis_list[crisis_count].effect pass (*active_crisis_list[crisis_count].args) from _call_mandatory_morning_crisis_advance_time
+            if _return == "Advance Time":
+                $ mandatory_advance_time = True
+            python:
+                if debug_log_enabled:
+                    add_to_debug_log("Mandatory morning crisis: " + active_crisis_list[crisis_count].name)
+                clear_scene()
+                mandatory_event = True
+        $ crisis_count += 1
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
