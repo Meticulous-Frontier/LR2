@@ -1008,7 +1008,7 @@ label candace_love_path_intro_label():
     $ the_person.draw_person(position = "walking_away")
     "She starts to lead you into her bedroom."
     mc.name "[the_person.title] I just need to get some sleep..."
-    the_person "Don't worry, you'll wake up and be all like, I've never slept better!'"
+    the_person "Don't worry, you'll wake up and be all like, {i}'I've never slept better!'{/iRR}"
     "She modulates her voice lower when she imitates you. Oh god what are you getting yourself in to..."
     $ the_person.change_to_bedroom()
     "In her bedroom, you lay down on her bed, pulling blankets up over yourself. Her bed smells flowery."
