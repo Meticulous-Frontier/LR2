@@ -65,8 +65,6 @@ init 5 python:
         if crisis in globals():
             excluded_crisis_tracker_events.append(globals()[crisis])
 
-    mandatory_advance_time = False
-
     advance_time_people_run_turn_action = ActionMod("Run people turn", advance_time_people_run_turn_requirement,
         "advance_time_people_run_turn_label", priority = 1, allow_disable = False)
 
@@ -87,15 +85,15 @@ init 5 python:
     advance_time_end_of_day_action = ActionMod("Ends the day if time_of_day is 4", advance_time_end_of_day_requirement,
         "advance_time_end_of_day_label", priority = 7, allow_disable = False)
 
+    # People run move Actions
+    advance_time_people_run_move_action = ActionMod("Moves people to their destinations", advance_time_next_requirement,
+        "advance_time_people_run_move_label", priority = 8, allow_disable = False)
+
     advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_mandatory_morning_crisis_requirement,
         "advance_time_mandatory_morning_crisis_label", priority = 10, category = "Gameplay", allow_disable = False)
 
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
         "advance_time_random_morning_crisis_label", priority = 11, category = "Gameplay")
-
-    # People run move Actions
-    advance_time_people_run_move_action = ActionMod("Moves people to their destinations", advance_time_next_requirement,
-        "advance_time_people_run_move_label", priority = 8, allow_disable = False)
 
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action,
@@ -125,7 +123,6 @@ init 5 python:
             else:
                 active_crisis_list.append(crisis)
         return active_crisis_list
-
 
     def find_next_crisis(active_crisis_list):
         update_crisis_tracker(active_crisis_list)
@@ -186,12 +183,12 @@ init 5 python:
         return
 
     def clear_follow_mc_flag(people):
-        for (person, place) in people:
+        for (person, _) in people:
             person.follow_mc = False
         return
 
     def advance_time_run_turn(people):
-        for (person, place) in people: #Run the results of people spending their turn in their current location.
+        for (person, _) in people: #Run the results of people spending their turn in their current location.
             person.run_turn()
 
         mc.business.run_turn()
@@ -205,7 +202,7 @@ init 5 python:
         return
 
     def advance_time_run_day(people):
-        for (person, place) in people:
+        for (person, _) in people:
             person.run_day()
 
         mc.run_day()
@@ -228,7 +225,7 @@ init 5 python:
 
     def advance_time_assign_limited_time_events(people):
         start_time = time.time()
-        for (person, place) in [x for x in people if x[0].title or x[0].mc_title != "Stranger"]:
+        for person in [x[0] for x in people if x[0].title or x[0].mc_title != "Stranger"]:
             if renpy.random.randint(0,100) < 10: #Only assign one to 10% of people, to cut down on the number of people we're checking.
                 crisis = get_limited_time_action_for_person(person)
                 if crisis:
@@ -242,6 +239,7 @@ label advance_time_move_to_next_day():
     $ current_day = day
     while day == current_day:
         call advance_time_enhanced(no_events = True, jump_to_game_loop = False) from _call_advance_time_advance_time_move_to_next_day
+    $ jumped_day = True
     return
 
 label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
@@ -253,13 +251,15 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
     # Then: Add research crisis when serum is finished, requiring additional input from the player and giving the chance to test a serum on the R&D staff.
 
     python:
-        renpy.dynamic("count")
+        renpy.dynamic("count", "people_to_process", "mandatory_event", "mandatory_advance_time", "jumped_day")
         #renpy.say(None, "advance_time_enhanced -> location: " + mc.location.name + ", time: [time_of_day]") # DEBUG
         count = 0 # NOTE: Count and Max might need to be unique for each label since it carries over.
         advance_time_max_actions = __builtin__.len(advance_time_action_list) # This list is automatically sorted by priority due to the class properties.
         people_to_process = build_people_to_process()
         clear_follow_mc_flag(people_to_process)
+        mandatory_advance_time = False
         mandatory_event = False
+        jumped_day = False
 
     while count < advance_time_max_actions:
         if not no_events or (not advance_time_action_list[count] in advance_time_event_action_list):
@@ -271,6 +271,8 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
                     $ add_to_debug_log("Adv time: " +  advance_time_action_list[count].name + " ({total_time:.3f})", start_time)
 
                 $ clear_scene()
+                if jumped_day:  # an event jumped to the next day, break current loop
+                    $ count = advance_time_max_actions
         $ count += 1
 
     python:
@@ -280,10 +282,10 @@ label advance_time_enhanced(no_events = False, jump_to_game_loop = True):
         x = None
         c = None
         people_to_process = []
-        person = None
+        jumped_day = False
 
     if mandatory_advance_time and not time_of_day == 4: #If a crisis has told us to advance time after it we do so (not when night to prevent spending night at current location).
-        call advance_time() from _call_advance_time_advance_time_enhanced
+        call advance_time(no_events = True) from _call_advance_time_advance_time_enhanced
     if no_events or not jump_to_game_loop:
         return
 
