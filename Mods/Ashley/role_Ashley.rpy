@@ -1589,8 +1589,12 @@ label ashley_blows_during_meeting_label():
     return
 
 label ashley_sneaks_over_label():
-    $ the_person = ashley
-    $ the_person.event_triggers_dict["sneaks_over_complete"] = True
+    python:
+        mc.change_location(bedroom)
+        mc.location.show_background()
+        the_person = ashley
+        the_person.event_triggers_dict["sneaks_over_complete"] = True
+
     "After a long day, you sit down at your computer to work on a couple things before bedtime."
     "After getting through some emails, you phone vibrates."
     $ mc.start_text_convo(the_person)
@@ -1599,10 +1603,13 @@ label ashley_sneaks_over_label():
     the_person "Good. I'm outside, can I come in?."
     $ mc.end_text_convo()
     "She's what? How does she even know where you live?"
+    $ hall.show_background()
+    $ the_person.draw_person()
     "You get up and walk to the front door. When you open it, sure enough, there stands [the_person.possessive_title]."
     mc.name "[the_person.title]... what?"
     the_person "I know I don't usually do stuff like this, but I wanted to see you... can I come in?"
     mc.name "Umm, of course..."
+    $ mc.location.show_background()
     "You quickly take [the_person.possessive_title] back to your room and close the door."
     if ashley_caught_cheating_on_sister():
         the_person "I just wanted to... apologize."
