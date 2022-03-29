@@ -1008,16 +1008,16 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
     if the_person.is_girlfriend():
         the_person "Ohh, that looks good..."
         "[the_person.possessive_title] spots your muffin. You slide into the booth next to her."
-        $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.1, zoom = 0.9))
-        $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .1, zoom = 1.1))
+        $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .1, zoom = 1.1))
+        $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.1, zoom = 0.9))
         mc.name "Got it for us to share."
         "You glance over at [stephanie.title]. A hint of jealousy crosses her face, but she quickly hides it."
         $ ashley_set_coffee_partner(the_person)
     elif stephanie.is_girlfriend():
         stephanie "Ohh! Yum, that looks tasty [stephanie.mc_title]."
         "[stephanie.possessive_title] spots your muffin. You slide into the booth next to her."
-        $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .1, zoom = 1.1))
-        $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.1, zoom = 0.9))
+        $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.1, zoom = 0.9))
+        $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .1, zoom = 1.1))
         mc.name "Got it for us to share."
         "You glance over at [the_person.title]. A hint of jealousy crosses her face, but she quickly hides it."
         $ ashley_set_coffee_partner(stephanie)
@@ -1358,6 +1358,7 @@ label ashley_second_concert_date_label():
     stephanie "I'm so glad to finally have you for myself. Let's go to my room!"
     $ scene_manager.clear_scene()
 
+    $ stephanie.change_to_bedroom()
     $ stephanie.draw_person(position = "walking_away")
     "You follow [stephanie.possessive_title] to her bedroom. She closes the door, then pushes you back onto her bed."
     "She strips down in front of you."
@@ -1935,7 +1936,7 @@ label coffee_time_steph_gets_handsy_label():
         $ stephanie.change_arousal(30)
         if the_person.sluttiness < 40:
             "You and [stephanie.title] continue to pet each other at the booth, sipping your coffees once in a while with your free hands."
-            "Across the table, [the_person.title] appears to be completely oblivious. [stephanie.possessive_title] is beginning to squirm as you stroke her gspot with your finger."
+            "Across the table, [the_person.title] appears to be completely oblivious. [stephanie.possessive_title] is beginning to squirm as you stroke her g-spot with your finger."
             $ stephanie.change_arousal(30)
             the_person "So... I'm thinking about going to the spa later treat myself to something... Do you want to go Steph?"
             stephanie "Oh!!! Uhh... Yesssss..."
@@ -2012,7 +2013,7 @@ label coffee_time_steph_gets_handsy_label():
                 "You feel [the_person.title]'s foot beneath the table begin to rub along your leg."
                 the_person "Damn... Right here in the booth? That's kinda hot..."
                 $ mc.change_locked_clarity(30)
-            "You push the palm of your hand rigidly against [stephanie.possessive_title]'s clit, while your middle finger strokes her gspot. Your attention to her sensitive spots soon haa her gasping."
+            "You push the palm of your hand rigidly against [stephanie.possessive_title]'s clit, while your middle finger strokes her g-spot. Your attention to her sensitive spots soon has her gasping."
             "Only a whimper escapes her lips when you feel her pussy begin to quiver around your finger. She stops stroking you as she focuses on the pleasure of orgasming in the palm of your hands."
             $ stephanie.have_orgasm(half_arousal = False, the_position = "sitting")
             "After several seconds, [stephanie.title] slowly opens her eyes and glances around as you withdraw your hand."
@@ -2041,7 +2042,7 @@ label coffee_time_steph_gets_handsy_label():
                 "Her talented mouth takes your load easily. When you finish, her mouth slowly releases your cock and you hear a loud gulp."
                 "You look around to make sure you are still anonymous before putting your hand on her shoulder and then helping her back up and into her seat."
                 $ scene_manager.update_actor(stephanie, position = "sitting")
-                "Once back up, she wipes what little cum managed to get on her face with a napkin and sets it aside. [stephanie.title] shakes her head."
+                "Once back up, she wipes what little cum managed to get on her face with a napkin and sets it aside. [ashley.title] shakes her head."
                 $ stephanie.outfit.remove_all_cum()
                 $ scene_manager.draw_scene()
             else:
