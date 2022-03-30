@@ -176,7 +176,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] lets out a loud groan. You can tell she isn't used to being penetrated like this, but she is taking it as best she can."
                 the_girl "God [the_girl.mc_title] that is so intense... please just try to be a little more gentle okay?"
             "You take a few seconds to enjoy being engulfed by her back passage, then give her a few slow, probing thrusts."
-            "After a minute or two slow, deep thrusts you decide to move back to doggy. You push yourself up off of [the_girl.possessive_title]'s back, and she follows, getting on all fours again to resume your fucking."
+            "After a minute or two of slow, deep thrusts you decide to move back to doggy. You push yourself up off of [the_girl.possessive_title]'s back, and she follows, getting on all fours again to resume your fucking."
 
     return
 
