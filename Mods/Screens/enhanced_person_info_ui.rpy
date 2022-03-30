@@ -27,7 +27,10 @@ init -1 python:
     def person_info_ui_get_serum_info_tooltip(person):
         tooltip = ""
         for serum in person.serum_effects:
-            tooltip += "{name}: {duration} Turns Left\n".format(name = serum.name, duration = serum.duration - serum.duration_counter)
+            if serum.has_trait(self_generating_serum):
+                tooltip += "{name}: {duration} Turns Left\n".format(name = serum.name, duration = (serum.duration * (serum.duration + 1) / 2) - serum.duration_counter)
+            else:
+                tooltip += "{name}: {duration} Turns Left\n".format(name = serum.name, duration = serum.duration - serum.duration_counter)
         return tooltip
 
     def person_info_ui_get_job_title(person):
