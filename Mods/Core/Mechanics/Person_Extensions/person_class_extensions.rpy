@@ -234,7 +234,7 @@ init -1 python:
 
         if renpy.call_stack_depth() < 2:
             # we are in the main menu (alternative idle_pose)
-            if (self.job and self.location == self.job.job_location) or self.location == downtown_bar:
+            if (self.is_employee() and self.is_at_work()) or self.location == downtown_bar:
                 return "sitting"
             if self.location == gym:
                 pose = self.event_triggers_dict.get("gym_pose", None)
