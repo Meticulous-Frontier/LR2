@@ -1,7 +1,6 @@
 init -1 python:
     def skin_improvement_trait_on_apply(the_person, the_serum, add_to_log):
         the_person.change_happiness(5, add_to_log = add_to_log)
-        return
 
     def add_skin_improvement_serum():
         skin_improvement_trait = SerumTraitMod(name = "Skin Improvement",

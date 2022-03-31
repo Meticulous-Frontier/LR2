@@ -3,23 +3,21 @@ init 2 python:
 
     ## uncontrollable_arousal_side_effect_functions ##
     def uncontrollable_arousal_side_effect_on_apply(the_person, the_serum, add_to_log):
-        change_amount = __builtin__.min(100 - the_person.sluttiness, 20)
+        change_amount = the_person.change_slut(20, add_to_log = add_to_log)
         the_serum.effects_dict["uncontrollable_arousal_effect"] = change_amount
-        the_person.change_slut(change_amount, add_to_log = add_to_log)
 
     def uncontrollable_arousal_side_effect_on_remove(the_person, the_serum, add_to_log):
-        change_amount = the_serum.effects_dict.get("uncontrollable_arousal_effect", 20) or 20
-        the_person.change_slut(-change_amount, add_to_log = add_to_log)
+        change_amount = the_serum.effects_dict.get("uncontrollable_arousal_effect", 20)
+        the_person.change_slut(-(20 if change_amount is None else change_amount), add_to_log = add_to_log)
 
     ## tryptamine_side_effect_functions ##
     def tryptamine_side_effect_on_apply(the_person, the_serum, add_to_log):
-        change_amount = __builtin__.min(300 - the_person.obedience, 10)
+        change_amount = the_person.change_obedience(10, add_to_log = add_to_log)
         the_serum.effects_dict["tryptamine_effect"] = change_amount
-        the_person.change_obedience(change_amount, add_to_log = add_to_log)
 
     def tryptamine_side_effect_on_remove(the_person, the_serum, add_to_log):
-        change_amount = the_serum.effects_dict.get("tryptamine_effect", 10) or 10
-        the_person.change_obedience(-change_amount, add_to_log = add_to_log)
+        change_amount = the_serum.effects_dict.get("tryptamine_effect", 10)
+        the_person.change_obedience(-(10 if change_amount is None else change_amount), add_to_log = add_to_log)
 
     ## oxytocin_side_effect_functions ##
     def oxytocin_side_effect_on_turn(the_person, the_serum, add_to_log):
