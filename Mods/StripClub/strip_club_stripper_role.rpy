@@ -120,7 +120,7 @@ init 5 python:
             stripclub_strippers.append(person)
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
-            person.add_job(job)
+            person.add_job(job, job_known = True)
 
         salary = calculate_stripper_salary(person)
         if person.has_role(stripclub_waitress_role):
