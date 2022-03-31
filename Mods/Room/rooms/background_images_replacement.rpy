@@ -43,6 +43,9 @@ init 5 python:
     speech_bubble_exclamation_small_image = im.Scale(Image(get_file_handle("speech_bubble_exclamation.png")), 18, 18)
     renpy.image("speech_bubble_exclamation_token_small", speech_bubble_exclamation_small_image)
 
+    vial_token_small_image = im.Scale(Image(get_file_handle("vial.png")), 18, 18)
+    renpy.image("vial_token_small", vial_token_small_image)
+
     vial_image = Image(get_file_handle("vial.png"))
     dna_image = Image(get_file_handle("dna.png"))
     question_image = Image(get_file_handle("question.png"))

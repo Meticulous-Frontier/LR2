@@ -18,7 +18,17 @@ init -1 python:
             return ""
         tooltip = "You know " + str(__builtin__.len(known_people)) + (" person here:\n" if __builtin__.len(known_people) == 1 else " people here:\n")
         for person in known_people:
-            tooltip += person.name + " " + person.last_name + "\n"
+            info = []
+            info.append(person.name)
+            info.append(person.last_name)
+            if any([not isinstance(x, Limited_Time_Action) and x.is_action_enabled(person) for x in person.on_talk_event_list]):
+                info.append("{image=speech_bubble_exclamation_token_small}")
+            if person.serum_effects:
+                info.append("{image=vial_token_small}")
+            if person.infractions:
+                info.append("{image=infraction_token_small}")
+            info.append("\n")
+            tooltip += " ".join(info)
         return tooltip
 
     def get_location_on_enter_events(location):
@@ -33,6 +43,8 @@ init -1 python:
         info = []
         info.append(location.formal_name.replace(" ", "\n", 2))
         info.append("\n(")
+        info.append(str(len(known_people_at_location(location))))
+        info.append("/")
         info.append(str(location.get_person_count()))
         info.append(")")
         if tt_dict[location.name][1]:
@@ -116,4 +128,4 @@ init 2:
             textbutton "Return" align [0.5,0.5] style "transparent_style" text_style "return_button_style"
 
         if tt.value:
-            text "[tt.value]" style "textbutton_text_style" size 18 xalign 0.02 yalign 0.02
+            text "[tt.value]" style "textbutton_text_style" text_align 0.0 size 18 xalign 0.02 yalign 0.02
