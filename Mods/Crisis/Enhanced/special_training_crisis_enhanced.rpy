@@ -1,12 +1,18 @@
 # Originally written by Pilotus13
 init 10 python:
-
     config.label_overrides["special_training_crisis_label"] = "enhanced_special_training_crisis_label"
 
 init 2 python:
+    dict_work_skills = {
+        "hr_skill": ["Human Resources", "hr_skill"],
+        "market_skill": ["Marketing", "market_skill"],
+        "research_skill": ["Research & Development", "research_skill"],
+        "production_skill": ["Production", "production_skill"],
+        "supply_skill": ["Supply Procurement", "supply_skill"]
+        }
+
     def build_seminar_improvement_menu(person):
         work_seminar = [] # NOTE: We can allow seminars for both main and sex skills, e.g through introducing a company hosted seminar type.
-        dict_work_skills = get_work_skills()
         for skill in dict_work_skills:
             work_seminar.append([dict_work_skills[skill][0] + "\nCurrent: " + str(getattr(person, dict_work_skills[skill][1])), dict_work_skills[skill][1]])
         work_seminar.insert(0, "Work Skills")
@@ -40,8 +46,8 @@ label enhanced_special_training_crisis_label():
             if _return != "None":
                 $ mc.business.change_funds(-500)
                 $ setattr(the_person, _return, getattr(the_person, _return) + 2) #TODO: Make this line be generic.
-                $ mc.log_event((the_person.title or the_person.name) + ": +2 " + get_work_skills()[_return][0], "float_text_grey")
-                $ renpy.say(mc.name, "Work on your " + get_work_skills()[_return][0] + " skills.")
+                $ mc.log_event((the_person.title or the_person.name) + ": +2 " + dict_work_skills[_return][0], "float_text_grey")
+                $ renpy.say(mc.name, "Work on your " + dict_work_skills[_return][0] + " skills.")
                 if the_person.effective_sluttiness() >= 20:
                     # follow up on promise made
                     $ add_return_from_seminar_action(the_person)

@@ -531,7 +531,7 @@ label quest_production_line_daddy_title_label(the_person): #This label is activa
     return
 
 #Daddy's girl personality overrides
-init 1301 python:
+init 1400 python:
     def daddy_girl_titles(the_person):
         return "Baby Girl"
     def daddy_girl_possessive_titles(the_person):

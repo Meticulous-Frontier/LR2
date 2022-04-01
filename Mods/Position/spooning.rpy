@@ -103,7 +103,7 @@ label outro_spooning(the_girl, the_location, the_object):
             $ climax_controller.do_clarity_release(the_girl)
             $ the_girl.call_dialogue("cum_vagina")
             $ the_girl.cum_in_vagina()
-            $ spooning.redraw_scene(the_girl)
+            $ spooning_sex.redraw_scene(the_girl)
             if the_girl.has_cum_fetish() or the_girl.has_breeding_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                 the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
@@ -120,7 +120,7 @@ label outro_spooning(the_girl, the_location, the_object):
 
     elif the_choice == "Cum on her ass":
         $ the_girl.cum_on_ass()
-        $ spooning.redraw_scene(the_girl)
+        $ spooning_sex.redraw_scene(the_girl)
         if mc.condom:
             "You pull out at the last moment and grab your cock. You whip off your condom and stroke yourself off, blowing your load over [the_girl.title]'s ass."
         else:
@@ -145,7 +145,7 @@ label transition_default_spooning(the_girl, the_location, the_object):
 
 label strip_spooning(the_girl, the_clothing, the_location, the_object):
     $ the_girl.call_dialogue("sex_strip")
-    $ the_girl.draw_animated_removal(the_clothing, position = spooning.position_tag)
+    $ the_girl.draw_animated_removal(the_clothing, position = spooning_sex.position_tag)
     "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
     "She sighs happily when you slip back inside of her."
     return
@@ -156,7 +156,7 @@ label strip_ask_spooning(the_girl, the_clothing, the_location, the_object):
     menu:
         "Let her strip":
             mc.name "Take it off for me."
-            $ the_girl.draw_animated_removal(the_clothing, position = spooning.position_tag)
+            $ the_girl.draw_animated_removal(the_clothing, position = spooning_sex.position_tag)
             "You move back kneel for a moment while [the_girl.title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
             "She sighs happily when you slide your cock back inside."
 
@@ -220,9 +220,9 @@ label spooning_double_orgasm(the_girl, the_location, the_object):
             "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock."
             $ the_girl.call_dialogue("cum_vagina")
             $ the_girl.cum_in_vagina()
-            $ spooning.redraw_scene(the_girl)
+            $ spooning_sex.redraw_scene(the_girl)
             $ climax_controller.do_clarity_release(the_girl)
-            "You slowly pull out of [the_girl.possessive_title], then rollover next to her."
+            "You slowly pull out of [the_girl.possessive_title], then roll over next to her."
 
     elif the_choice == "Cum on her ass":
         if mc.condom:
@@ -230,7 +230,7 @@ label spooning_double_orgasm(the_girl, the_location, the_object):
         else:
             "You pull out of [the_girl.title] at the last moment, stroking your shaft as you blow your load over her ass."
         $ the_girl.cum_on_ass()
-        $ spooning.redraw_scene(the_girl)
+        $ spooning_sex.redraw_scene(the_girl)
         $ climax_controller.do_clarity_release(the_girl)
         "She reaches down between her legs and starts to play with herself, bringing herself to orgasm in unison with you."
         the_girl "Oh god I'm cumming!"

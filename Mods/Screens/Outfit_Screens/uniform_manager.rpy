@@ -75,7 +75,7 @@ init 2:
                 spacing 70
                 hbox:
                     spacing 10
-                    textbutton given_uniform.outfit.name:
+                    textbutton "[given_uniform.outfit.name]":
                         xsize 250
                         yanchor 0.5
                         yalign 0.5
@@ -112,21 +112,9 @@ init 2:
                 use uniform_button(state = given_uniform.hr_flag, is_sensitive = True, toggle_function = given_uniform.set_hr_flag)
 
     screen uniform_button(state, is_sensitive, toggle_function):
-        $ button_colour = "#666666"
-        $ hovered_button_colour = "#aaaaaa"
-
-        if is_sensitive:
-            if state:
-                $ button_colour = "#449044"
-                $ hovered_button_colour = "#66a066"
-
-        else:
-            $ button_colour = "#00000088"
-            #$ hovered_button_colour = "#888888"
-
         button:
-            background button_colour
-            hover_background hovered_button_colour
+            background ("#449044" if state else "#666666" if is_sensitive else "#00000088")
+            hover_background ("#66a066" if state else "#aaaaaa" if is_sensitive else "#00000088")
             sensitive is_sensitive
             action Function(toggle_function, not state)
             xsize 50 ysize 40

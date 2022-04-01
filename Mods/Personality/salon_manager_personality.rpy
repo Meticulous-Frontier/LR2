@@ -18,7 +18,7 @@ init 1400 python:
             title_tuple.append([title,title])
         return renpy.display_menu(title_tuple, True, "Choice")
 
-    salon_manager_personality = Personality("salon_manager", default_prefix = "wild", #Based on relaxed style personality
+    salon_manager_personality = Personality("salon_manager", default_prefix = wild_personality.default_prefix, #Based on relaxed style personality
         common_likes = ["skirts", "small talk", "the weekend", "the colour purple", "makeup", "hiking", "flirting", "high heels"],
         common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal creampies", "showing her tits", "showing her ass", "being submissive", "creampies", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour yellow", "supply work", "conservative outfits", "work uniforms", "pants", "boots"],

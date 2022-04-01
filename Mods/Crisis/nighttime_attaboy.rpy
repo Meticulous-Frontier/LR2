@@ -185,7 +185,7 @@ label crisis_nighttime_attaboy_label():
         the_person "Sorry! There's too many people around for me to snap any sexy pics..."
         $ the_person.draw_person(emotion = "happy")
         "She snaps you a quick selfie."
-    elif the_person.is_person_at_mc_house():
+    elif the_person.is_at_mc_house():
         the_person "Then why don't you come see? Maybe we could have a repeat performance right now ;)"
         menu:
             "Go see [the_person.title]" if mc.energy > 80:

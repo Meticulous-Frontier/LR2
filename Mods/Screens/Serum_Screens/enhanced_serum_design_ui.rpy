@@ -5,7 +5,7 @@ init 2:
             if trait.exclude_tags:
                 tags = " - "
                 for a_tag in trait.exclude_tags:
-                    tags += "{color=#d38c19}[[" + a_tag + "]{/color}"
+                    tags += "{color=#d38c19}[" + a_tag + "]{/color}"
             return tags
 
         def get_trait_allowed(starting_serum, trait):
@@ -75,7 +75,7 @@ init 2:
                                             #$ trait_side_effects_text = get_trait_side_effect_text(trait)
                                             #$ trait_mastery_text = get_trait_mastery_text(trait)
                                                         #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                            textbutton trait.name + trait_tags:
+                                            textbutton "[trait.name][trait_tags]":
                                                 style "textbutton_style"
                                                 text_style "serum_text_style"
                                                 xsize 530
@@ -124,7 +124,7 @@ init 2:
                                                 #$ trait_side_effects_text = get_trait_side_effect_text(trait)
                                                 #$ trait_mastery_text = get_trait_mastery_text(trait)
                                                                 #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                                textbutton trait.name + trait_tags:
+                                                textbutton "[trait.name][trait_tags]":
                                                     style "textbutton_style"
                                                     text_style "serum_text_style"
                                                     xsize 530
@@ -164,7 +164,7 @@ init 2:
                                     $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                     $ trait_mastery_text = get_trait_mastery_text(trait)
 
-                                    textbutton trait.name + trait_tags + trait_aspect_tags + "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
+                                    textbutton "[trait.name][trait_tags][trait_aspect_tags]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
                                         style "textbutton_style"
                                         text_style "serum_text_style"
                                         xsize 520
@@ -230,12 +230,12 @@ init 2:
                         text "Current Serum Statistics:" style "menu_text_title_style" xalign .5
 
                     frame:
-                        if starting_serum.slots_used() > starting_serum.slots:
+                        if starting_serum.slots_used > starting_serum.slots:
                             background "#B14365"
                         else:
                             background "#000080"
                         xsize 550
-                        text "Trait Slots: " + str(starting_serum.slots_used()) +"/[starting_serum.slots]" style "serum_text_style"
+                        text "Trait Slots: [starting_serum.slots_used]/[starting_serum.slots]" style "serum_text_style"
 
                     viewport:
                         draggable True
@@ -247,10 +247,10 @@ init 2:
                             xalign 0.5
                             spacing 5
                             xsize 550
-                            for num in __builtin__.range(__builtin__.max(starting_serum.slots,starting_serum.slots_used())):
-                                if num < starting_serum.slots_used() and num < starting_serum.slots:
+                            for num in __builtin__.range(__builtin__.max(starting_serum.slots,starting_serum.slots_used)):
+                                if num < starting_serum.slots_used and num < starting_serum.slots:
                                     add "Serum_Slot_Full.png" xanchor 0.5 xalign 0.5
-                                elif num < starting_serum.slots_used() and num >= starting_serum.slots:
+                                elif num < starting_serum.slots_used and num >= starting_serum.slots:
                                     add "Serum_Slot_Incorrect.png" xanchor 0.5 xalign 0.5
                                 else:
                                     add "Serum_Slot_Empty.png" xanchor 0.5 xalign 0.5
@@ -273,9 +273,9 @@ init 2:
                                 background "#000080"
                                 xsize 270
                                 if starting_serum.tier <= mc.business.max_serum_tier:
-                                    text "Serum Tier: " + str(starting_serum.tier) style "serum_text_style"
+                                    text "Serum Tier: [starting_serum.tier]" style "serum_text_style"
                                 else:
-                                    text "Serum Tier: {color=#fb6868}" + str(starting_serum.tier) + "{/color}" style "serum_text_style"
+                                    text "Serum Tier: {color=#fb6868}[starting_serum.tier]{/color}" style "serum_text_style"
                         vbox:
                             spacing 5
                             frame:
@@ -311,7 +311,7 @@ init 2:
                         draggable True
                         vbox:
                             for trait in starting_serum.traits:
-                                textbutton trait.name:
+                                textbutton "[trait.name]":
                                     style "textbutton_style"
                                     text_style "serum_text_style"
                                     xsize 540
@@ -323,7 +323,7 @@ init 2:
                                         background "#43B197"
                                         xsize 270
                                         margin (5, 0, 5, 0)
-                                        text trait.positive_slug style "serum_text_style" size 16
+                                        text "[trait.positive_slug]" style "serum_text_style" size 16
                                     frame:
                                         xsize 270
                                         background "#B14365"
@@ -341,7 +341,7 @@ init 2:
                 spacing 40
                 textbutton "Create Design":
                     action [Hide("trait_tooltip"), Hide("serum_design_ui"), Hide("serum_tooltip"), Return(starting_serum)]
-                    sensitive (starting_serum.slots >= starting_serum.slots_used() and __builtin__.len(starting_serum.traits) and starting_serum.has_tag("Production")) > 0
+                    sensitive (starting_serum.slots >= starting_serum.slots_used and __builtin__.len(starting_serum.traits) and starting_serum.has_tag("Production")) > 0
 
                     style "textbutton_style"
                     text_style "serum_text_style"

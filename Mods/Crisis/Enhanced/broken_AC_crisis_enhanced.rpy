@@ -10,14 +10,13 @@ init 5 python:
 
     def broken_AC_crisis_update_stats(happiness, obedience):
         for person in mc.business.p_div.people:
-            person.change_happiness(happiness)
-            person.change_obedience(obedience)
+            person.change_stats(happiness = happiness, obedience = obedience)
         return
 
     def broken_AC_crisis_update_sluttiness():
         for person in mc.business.p_div.people:
             person.change_slut(2, add_to_log = False)
-        mc.log_event("All Production Staff: +5 Sluttiness","float_text_pink")
+        mc.log_event("All Production Staff: +2 Sluttiness","float_text_pink")
         return
 
     def broken_ac_crisis_strip_other_girls(person, girl):

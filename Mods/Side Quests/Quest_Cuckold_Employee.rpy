@@ -787,7 +787,7 @@ label quest_cuckold_employee_knocked_up_label():
     $ quest_cuckold_employee().quest_completed()
     return
 
-init 1301 python:
+init 1400 python:
     def breeding_stock_titles(the_person):
         return "Cow"
     def breeding_stock_possessive_titles(the_person):

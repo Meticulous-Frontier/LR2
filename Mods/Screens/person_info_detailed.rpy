@@ -16,9 +16,6 @@ init 2: # Need to allow for None name roles in this screen as well.
         default research_base = the_person.int*3 + the_person.research_skill*2 + the_person.focus + 10
         default prod_base = the_person.focus*3 + the_person.production_skill*2 + the_person.int + 10
         default supply_base = the_person.focus*5 + the_person.supply_skill*3 + the_person.charisma*3 + 20
-        default dict_work_skills = get_work_skills()
-        default dict_sex_skills = get_sex_skills()
-        default dict_main_skills = get_main_skills()
         default master_opinion_dict = dict(the_person.opinions, **the_person.sexy_opinions)
         default relationship_list = sorted(town_relationships.get_relationship_type_list(the_person, visible = True), key = lambda x: x[0].name)
         default visible_roles = ", ".join(info_detail_visible_roles(the_person))
@@ -132,8 +129,9 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 264
                     vbox:
                         text "Characteristics" style "serum_text_style_header"
-                        for skill in dict_main_skills:
-                            text dict_main_skills[skill][0] + ": " + str(getattr(the_person, dict_main_skills[skill][1])) style "menu_text_style"
+                        text "Intelligence: [the_person.int]" style "menu_text_style"
+                        text "Focus: [the_person.focus]" style "menu_text_style"
+                        text "Charisma: [the_person.charisma]" style "menu_text_style"
                         text "Age: [the_person.age]" style "menu_text_style"
                         text "Cup size: [the_person.tits]" style "menu_text_style"
                         text "Height: [height_info]" style "menu_text_style"
@@ -146,8 +144,11 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 264
                     vbox:
                         text "Work Skills" style "serum_text_style_header"
-                        for skill in dict_work_skills:
-                            text dict_work_skills[skill][0] + ": " + str(getattr(the_person, dict_work_skills[skill][1])) style "menu_text_style"
+                        text "Human Resources: [the_person.hr_skill]" style "menu_text_style"
+                        text "Marketing: [the_person.market_skill]" style "menu_text_style"
+                        text "Research & Development: [the_person.research_skill]" style "menu_text_style"
+                        text "Production: [the_person.production_skill]" style "menu_text_style"
+                        text "Supply Procurement: [the_person.supply_skill]" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
@@ -155,8 +156,10 @@ init 2: # Need to allow for None name roles in this screen as well.
                     ysize 264
                     vbox:
                         text "Sex Skills" style "serum_text_style_header"
-                        for skill in dict_sex_skills:
-                            text dict_sex_skills[skill][0] + " Skill: " + str(the_person.sex_skills[dict_sex_skills[skill][0]]) style "menu_text_style"
+                        text "Foreplay Skill: {}".format(the_person.sex_skills["Foreplay"]) style "menu_text_style"
+                        text "Oral Skill: {}".format(the_person.sex_skills["Oral"]) style "menu_text_style"
+                        text "Vaginal Skill: {}".format(the_person.sex_skills["Vaginal"]) style "menu_text_style"
+                        text "Anal Skill: {}".format(the_person.sex_skills["Anal"]) style "menu_text_style"
                         text "Novelty: [novelty_info]%" style "menu_text_style"
 
                 frame:

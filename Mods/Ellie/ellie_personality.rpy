@@ -1,4 +1,4 @@
-init 1301 python:              #Because Vren Init personality functionns at 1300
+init 1400 python:              #Because Vren Init personality functionns at 1300
 
     def ellie_titles(person):
         valid_titles = []
@@ -12,7 +12,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
     def ellie_player_titles(person):
         return mc.name
 
-    ellie_personality = Personality("ellie", default_prefix = "introverted",
+    ellie_personality = Personality("ellie", default_prefix = introvert_personality.default_prefix,
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "skimpy outfits", "being submissive", "drinking cum", "cheating on men"],
     common_dislikes = ["polyamory", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
@@ -434,7 +434,7 @@ label ellie_flirt_response(the_person):
             "She seems more worried about being caught than flirting with you."
     else:
         if the_person.sluttiness > 50:
-            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peak."
+            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peek."
             "[the_person.title] smiles at you and spins around, giving you a full look at her body."
         else:
             the_person "Hey, maybe if you buy me dinner first."
@@ -1045,8 +1045,7 @@ label ellie_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:

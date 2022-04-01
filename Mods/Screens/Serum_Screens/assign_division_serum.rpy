@@ -84,18 +84,16 @@ init 2:
 
                                     vbox:
                                         for division in __builtin__.range(0,__builtin__.len(division_serums)):
+                                            $ division_name = division_serums[division][0]
+                                            $ serum_name = get_division_serum_name(division_serums[division])
                                             button:
                                                 vbox:
                                                     xalign 0.5
-                                                    text division_serums[division][0] style "serum_text_style"
-                                                    text get_division_serum_name(division_serums[division]) style "serum_text_style" size 14
+                                                    text "[division_name]" style "serum_text_style"
+                                                    text "[serum_name]" style "serum_text_style" size 14
                                                 style "textbutton_style"
-                                                if division_selected == division:
-                                                    background "#000080"
-                                                    hover_background "#0030A0"
-                                                else:
-                                                    background "#222222"
-                                                    hover_background "#333333"
+                                                background ("#000080" if division_selected else "#222222")
+                                                hover_background ("#0030A0" if division_selected else "#333333")
                                                 xsize 500
                                                 action SetScreenVariable("division_selected", division)
 
@@ -129,10 +127,9 @@ init 2:
 
                                             button:
                                                 xsize 500
-                                                ysize 80
-                                                vbox:
-                                                    xalign 0.5
-                                                    text "No serum" style "serum_text_style"
+                                                ysize 38
+                                                xalign 0.5
+                                                text "No serum" style "serum_text_style"
                                                 style "textbutton_style"
                                                 sensitive True
                                                 if get_division_serum(division_serums[division_selected]) is None:
@@ -146,10 +143,15 @@ init 2:
                                             for serum in sorted(mc.business.inventory.serums_held, key = lambda e: e[0].name):
                                                 button:
                                                     xsize 500
-                                                    vbox:
-                                                        xalign 0.5
-                                                        text serum[0].name style "serum_text_style"
-                                                        text "Available: " + str(serum[1]) style "serum_text_style" size 14
+                                                    ysize 44
+                                                    hbox:
+                                                        frame:
+                                                            background None
+                                                            xsize 300
+                                                            text "[serum[0].name]" xsize 300 style "serum_text_style"
+                                                        frame:
+                                                            background None
+                                                            text "Available: [serum[1]]" style "serum_text_style" size 16
                                                     style "textbutton_style"
                                                     sensitive True
                                                     if get_division_serum(division_serums[division_selected]) == serum[0]:
@@ -159,7 +161,7 @@ init 2:
                                                         background "#222222"
                                                         hover_background "#333333"
                                                     hovered [
-                                                        Show("serum_tooltip", None, serum[0],given_align = (0.97,0.07), given_anchor = (1.0,0.0))
+                                                        Show("serum_tooltip", None, serum[0],given_align = (0.97,0.11), given_anchor = (1.0,0.0))
                                                     ]
                                                     unhovered [
                                                         Hide("serum_tooltip")

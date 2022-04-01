@@ -1075,7 +1075,7 @@ label ophelia_choose_service_test_label():
     $ scene_manager.remove_actor(the_person)
     "From now on, if a girl is slutty or obedient enough, when you schedule a haircut, you can also set a pubic hair style."
     $ salon_manager.event_triggers_dict["full_style_state"] = 2
-    $ office.actions.remove(ophelia_choose_service_test)
+    $ office.remove_action(ophelia_choose_service_test)
     return # Where to go if you hit "Back".
 
 label ophelia_add_service_full_body_massage_label(the_person):

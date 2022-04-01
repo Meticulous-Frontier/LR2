@@ -377,7 +377,7 @@ label mom_outfit_help_crisis_label_enhanced():
             else:
                 the_person "How about a nice handjob? I know that you like it when I take care of you."
                 $ mc.change_locked_clarity(10)
-                "[the_person.possessive_title] gets your cock of your pants and starts jerking you off."
+                "[the_person.possessive_title] gets your cock out of your pants and starts jerking you off."
                 call get_fucked(the_person, the_goal = "get mc off", start_position = handjob, start_object = make_floor(), skip_intro = True, prohibit_tags = ["Vaginal", "Anal"]) from _call_get_fucked_person_mom_outfit_help_crisis_01
                 "When you are done, you put your cock in your pants."
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"

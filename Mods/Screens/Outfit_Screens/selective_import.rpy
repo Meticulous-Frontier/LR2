@@ -2,8 +2,8 @@
 init 2:
     screen import_outfit_manager(target_wardrobe, xml_filename = None, outfit_type = None):
         default outfit_categories = {
-            "Full": ["FullSets", "full", "get_outfit_list", "get_full_outfit_slut_score"], 
-            "Overwear": ["OverwearSets", "over", "get_overwear_sets_list", "get_overwear_slut_score"], 
+            "Full": ["FullSets", "full", "get_outfit_list", "get_full_outfit_slut_score"],
+            "Overwear": ["OverwearSets", "over", "get_overwear_sets_list", "get_overwear_slut_score"],
             "Underwear": ["UnderwearSets", "under", "get_underwear_sets_list", "get_underwear_slut_score"]
         }
         add "Paper_Background.png"
@@ -20,7 +20,7 @@ init 2:
                     xsize 480
                     frame:
                         background "#0a142688"
-                        text category style "menu_text_title_style" xalign 0.5
+                        text "[category]" style "menu_text_title_style" xalign 0.5
                         xfill True
                     if not outfit_type or outfit_categories[category][1] == outfit_type:
                         viewport:

@@ -36,8 +36,7 @@ label doggy_double_orgasm(the_girl, the_location, the_object):
                     the_girl "So fucking hot! Bathe my pregnant womb with your hot cum!"
                 else:
                     the_girl "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
-                $ the_girl.change_happiness(2)
-                $ the_girl.change_obedience(3)
+                $ the_girl.change_stats(happiness = 2, obedience = 3)
             elif the_girl.get_opinion_score("bareback sex") > 0:  #She is slutty enough she doesn't mind the cream filling
                 the_girl "Oh my god you took the condom off? You know you can cum inside me anytime you want, no need to be stealthy about it!"
                 $ the_girl.change_obedience(3)

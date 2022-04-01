@@ -109,7 +109,7 @@ init 2:
                                         frame:
                                             background "#000000"
                                             xsize 365
-                                            text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
+                                            text "Tier [dt]" style "serum_text_style_header" xalign 0.5
 
                                         for trait in sorted_traits:
                                             if trait.tier == dt and not isinstance(trait, SerumTraitBlueprint) and not trait.researched and trait.has_required():
@@ -151,7 +151,7 @@ init 2:
                                         frame:
                                             background "#000000"
                                             xsize 395
-                                            text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
+                                            text "Tier [dt]" style "serum_text_style_header" xalign 0.5
 
                                         for trait in sorted_traits:
                                             if trait.tier == dt and trait.researched:
@@ -167,16 +167,10 @@ init 2:
                                                     style "textbutton_style"
                                                     text_style "serum_text_style_traits"
                                                     if selected_research == trait:
-                                                        if mc.business.active_research_design == trait:
-                                                            background "#593f85"
-                                                        else:
-                                                            background "#59853f"
+                                                        background ("#593f85" if mc.business.active_research_design == trait else "#59853f")
                                                         hover_background "#a9d59f"
                                                     else:
-                                                        if mc.business.active_research_design == trait:
-                                                            background "#008000"
-                                                        else:
-                                                            background "#000080"
+                                                        background ("#008000" if mc.business.active_research_design == trait else "#000080")
                                                         hover_background "#1a45a1"
                                                     xsize 395
 
@@ -243,16 +237,10 @@ init 2:
                                                     text_style "serum_text_style_traits"
                                                     action SetScreenVariable("selected_research", trait)
                                                     if selected_research == trait:
-                                                        if mc.business.active_research_design == trait:
-                                                            background "#593f85"
-                                                        else:
-                                                            background "#59853f"
+                                                        background ("#593f85" if mc.business.active_research_design == trait else "#59853f")
                                                         hover_background "#a9d59f"
                                                     else:
-                                                        if mc.business.active_research_design == trait:
-                                                            background "#008000"
-                                                        else:
-                                                            background "#000080"
+                                                        background ("#008000" if mc.business.active_research_design == trait else "#000080")
                                                         hover_background "#1a45a1"
                                                     xsize 365
 

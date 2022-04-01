@@ -55,8 +55,8 @@ init -1 python:
         list_of_last_names.remove("Greene")
     if "von Friseur" in list_of_last_names:
         list_of_last_names.remove("von Friseur")
-    if "Coopers" in list_of_last_names:
-        list_of_last_names.remove("Coopers")
+    if "Cooper" in list_of_last_names:
+        list_of_last_names.remove("Cooper")
     if "Walters" in list_of_last_names:
         list_of_last_names.remove("Walters")
 

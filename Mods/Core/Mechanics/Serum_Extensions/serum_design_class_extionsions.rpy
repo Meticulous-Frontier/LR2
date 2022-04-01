@@ -5,10 +5,10 @@ init 1 python:
 
     SerumDesign.has_trait = has_trait
 
-    def slots_used(self):
+    def get_slots_used(self):
         return len([x for x in self.traits if not "Production" in x.exclude_tags])
 
-    SerumDesign.slots_used = slots_used
+    SerumDesign.slots_used = property(get_slots_used, None, None, "Slots used in serum design")
 
     # override so we can pass the add_to_log parameter
     def generate_side_effects_enhanced(self, add_to_log = True): #Called when a serum is finished development. Tests all traits against their side effect chance and adds an effect for any that fail.

@@ -1,7 +1,7 @@
 #Testing Comments
 
 
-init 1301 python:
+init 1400 python:
 
     def Sarah_titles(the_person):
         return the_person.name
@@ -13,7 +13,7 @@ init 1301 python:
         return valid_possessive_titles
     def Sarah_player_titles(the_person):
         return mc.name
-    Sarah_personality = Personality("Sarah", default_prefix = "relaxed",
+    Sarah_personality = Personality("Sarah", default_prefix = relaxed_personality.default_prefix,
     common_likes = ["skirts", "small talk", "Fridays", "the weekend", "the colour purple", "makeup", "flirting", "heavy metal","punk"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "showing her ass", "threesomes", "not wearing underwear", "creampies", "bareback sex"],
     common_dislikes = ["the colour pink", "supply work", "conservative outfits", "work uniforms"],
@@ -655,8 +655,7 @@ label Sarah_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Ugh, for crying out loud, you two. Get a room or something, nobody wants to see this."
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -2, obedience = -1)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
@@ -668,13 +667,13 @@ label Sarah_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
-        $ change_report = the_person.change_slut(1)
+        $ the_person.change_slut(1)
         "[title] watches for a moment, then turns away while you and [the_sex_person.name] keep [the_position.verbing]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh wow that's hot. You don't mind if I watch, do you?"
-        $ change_report = the_person.change_slut(2)
+        $ the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:

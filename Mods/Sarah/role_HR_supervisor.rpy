@@ -347,7 +347,7 @@ init 5 python:
             menu_tooltip = "Pick a member of your HR staff to be your HR director. The HR director will help you manage your employees well-being and motivation.")
 
 
-init 1301 python:
+init 1400 python:
     def HR_director_creation_requirement():
         if "sarah" in globals():
             return sarah.event_triggers_dict.get("first_meeting", False) == True
@@ -824,7 +824,7 @@ label HR_director_review_discoveries_label(the_person):
                     the_person "Sure thing [the_person.mc_title]!"
                     $ set_HR_director_tag("business_HR_skimpy_uniform", True)
                     if the_person is sarah:
-                        the_person "Mmm, I can't wait to see what some of the outfits other girls wear around the office..."
+                        the_person "Mmm, I can't wait to see what outfits some of the other girls will wear around the office..."
                         $ the_person.change_slut(2)
         if get_HR_director_tag("business_HR_relative_recruitment", 0) == 0:
             if (mc.business.max_employee_count - mc.business.get_employee_count()) > 4:
@@ -894,9 +894,9 @@ label HR_director_manage_gym_membership(the_person):
                     else:
                         x.change_max_energy(2, add_to_log = False)
                 if x.get_opinion_score("sports") > 0:
-                    x.change_happiness(3 * x.get_opinion_score("sports"))
+                    x.change_happiness(3 * x.get_opinion_score("sports"), add_to_log = False)
                 if x.get_opinion_score("hiking") > 0:
-                    x.change_happiness(1 * x.get_opinion_score("hiking"))
+                    x.change_happiness(1 * x.get_opinion_score("hiking"), add_to_log = False)
             cost = __builtin__.len(mc.business.get_employee_list()) * 5
     elif get_HR_director_tag("business_HR_gym_tier", 0) == 2:
         python:
@@ -907,9 +907,9 @@ label HR_director_manage_gym_membership(the_person):
                     else:
                         x.change_max_energy(2, add_to_log = False)
                 if x.get_opinion_score("sports") > 0:
-                    x.change_happiness(5 * x.get_opinion_score("sports"))
+                    x.change_happiness(5 * x.get_opinion_score("sports"), add_to_log = False)
                 if x.get_opinion_score("hiking") > 0:
-                    x.change_happiness(2 * x.get_opinion_score("hiking"))
+                    x.change_happiness(2 * x.get_opinion_score("hiking"), add_to_log = False)
             cost = __builtin__.len(mc.business.get_employee_list()) * 15
     the_person "Just to let you know, I wrote out the check this morning for this week's employee health program."
     $ mc.business.change_funds(-cost)
@@ -1271,8 +1271,7 @@ label HR_director_sexy_meeting_start_label(the_person):
     if position_choice == "any":
         the_person "Mmmm, I can do that!"
         $ mc.change_arousal(20)
-        $ the_person.change_happiness(5)
-        $ the_person.change_obedience(-5)
+        $ the_person.change_stats(happiness = 5, obedience = 3)
         $ position_choice = get_random_from_list(mc.business.hr_director.HR_unlocks.keys())
 
     if position_choice == "blowjob":
@@ -1549,7 +1548,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     return
 
 label HR_director_appointment_action_label():
-    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list(mc.business.hr_team, "Appoint", ["Back"])]))
+    call screen enhanced_main_choice_display(build_menu_items([get_sorted_people_list([x for x in mc.business.hr_team if x.available], "Appoint", ["Back"])]))
     $ person_choice = _return
 
     if person_choice != "Back":
@@ -1645,8 +1644,7 @@ label HR_director_headhunt_interview_label(the_person):
     $ scene_manager.draw_scene()
     if _return == prospect: #MC chooses to hire her
         mc.name "Alright [the_person.title], this looks promising. Good work finding her."
-        $ the_person.change_happiness(5)
-        $ the_person.change_obedience(5)
+        $ the_person.change_stats(happiness = 5, obedience = 3)
         the_person "Alright! I'll give her the news."
         $ prospect.generate_home()
         call hire_someone(prospect, add_to_location = True) from _call_hire_HR_prospect_1

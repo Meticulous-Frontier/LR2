@@ -143,9 +143,7 @@ label intern_water_spill_crisis_label():
                     mc.name "I'm really quite busy right now, just take it off now and you can dry it off later."
                     the_person "I... Okay, fine. I really need your help on this."
                     $ the_person.draw_animated_removal(the_clothing)
-                    $ the_person.change_happiness(-5)
-                    $ the_person.change_slut(2)
-                    $ the_person.change_obedience(2)
+                    $ the_person.change_stats(happiness = -5, slut = 2, obedience =2)
                     $ mc.business.change_team_effectiveness(-10)
                     "[the_person.title] clearly isn't happy, but she takes off her [the_clothing.name] and resumes talking about her homework."
                     "You're sure she'll probably make a complaint with HR..."

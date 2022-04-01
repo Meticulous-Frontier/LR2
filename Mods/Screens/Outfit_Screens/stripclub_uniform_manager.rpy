@@ -74,7 +74,7 @@ init 2:
                 spacing 70
                 hbox:
                     spacing 10
-                    textbutton given_uniform.outfit.name:
+                    textbutton "[given_uniform.outfit.name]":
                         xsize 250
                         yanchor 0.5
                         yalign 0.5

@@ -1,4 +1,4 @@
-init 1310 python:
+init 1310 python:           # init after VREN personalities, but before our personalities
     def relaxed_titles(person):
         valid_titles = []
         valid_titles.append(person.formal_address + " " + person.last_name)

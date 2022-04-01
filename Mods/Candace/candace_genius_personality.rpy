@@ -1,5 +1,5 @@
 ### PERSONALITY CHARACTERISTICS ###
-init 1301:
+init 1400:
     python:
         def genius_titles(the_person):
             if the_person.love < 20:
@@ -11,7 +11,7 @@ init 1301:
         def genius_player_titles(the_person):
             return mc.name
 
-        genius_personality = Personality("genius", default_prefix = "relaxed",
+        genius_personality = Personality("genius", default_prefix = relaxed_personality.default_prefix,
         common_likes = ["pants", "the weekend", "small talk", "the colour pink", "research work", "supply work", "flirting","punk","pop"],
         common_sexy_likes = ["missionary style sex", "kissing", "masturbating", "being submissive", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour yellow", "research work", "work uniforms"],
@@ -928,8 +928,7 @@ label genius_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:

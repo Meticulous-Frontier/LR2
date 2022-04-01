@@ -425,6 +425,7 @@ screen cheat_menu():
                                 vbox:
                                     for x in available_naming:
                                         if hasattr(editing_target, str(available_naming[x][0])):
+                                            $ item_property = vars(editing_target)[available_naming[x][0]]
                                             button:
                                                 id "name_select"
                                                 margin (2,2)
@@ -439,7 +440,7 @@ screen cheat_menu():
                                                 action [ToggleScreenVariable("name_select"), SetScreenVariable("name_type", available_naming[x][0])]
 
                                                 if name_select:
-                                                    input default remove_display_tags(str(vars(editing_target)[available_naming[x][0]])):
+                                                    input default remove_display_tags(str(item_property)):
                                                         changed edit_name_func
                                                         style "cheat_text_style"
                                                         yalign 0.5
@@ -447,7 +448,7 @@ screen cheat_menu():
                                                         xfill True
 
                                                 else:
-                                                    text "[x]: "+ str(vars(editing_target)[available_naming[x][0]]):
+                                                    text "[x]: [item_property]":
                                                         yalign 0.5
                                                         yfill True
                                                         style "cheat_text_style"
@@ -915,15 +916,16 @@ screen cheat_stat_list(editing_target, base_list):
         vbox:
             for (x, i) in sorted(base_list.items(), key=lambda x:x[1][3]):
                 $ property_name = base_list[x][0]
-                if hasattr(editing_target, property_name):
-                    $ key_name = base_list[x][1]
-                    $ modifier = base_list[x][2]
-                    $ limit = base_list[x][4]
-                    $ is_dict = isinstance(vars(editing_target)[property_name], dict)
-                    if is_dict:
-                        $ cur_value = vars(editing_target)[property_name][key_name]
-                    else:
-                        $ cur_value = vars(editing_target)[property_name]
+                if hasattr(editing_target, base_list[x][0]):
+                    python:
+                        item_property = vars(editing_target)[property_name]
+                        key_name, modifier, limit = base_list[x][1], base_list[x][2], base_list[x][4]
+                        is_dict = isinstance(item_property, dict)
+                        if is_dict:
+                            cur_value = item_property[key_name]
+                        else:
+                            cur_value = item_property
+
                     hbox:
                         textbutton " - ":
                             xsize 36
@@ -932,7 +934,7 @@ screen cheat_stat_list(editing_target, base_list):
                             sensitive cur_value > limit[0]
                             if is_dict:
                                 action [
-                                    SetDict(vars(editing_target)[property_name], key_name, cur_value - modifier)
+                                    SetDict(item_property, key_name, cur_value - modifier)
                                 ]
                             else:
                                 action [
@@ -961,7 +963,7 @@ screen cheat_stat_list(editing_target, base_list):
                             sensitive cur_value < limit[1]
                             if is_dict:
                                 action [
-                                    SetDict(vars(editing_target)[property_name], key_name, cur_value + modifier)
+                                    SetDict(item_property, key_name, cur_value + modifier)
                                 ]
                             else:
                                 action [

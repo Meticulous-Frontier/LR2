@@ -1,5 +1,5 @@
 ### PERSONALITY CHARACTERISTICS ###
-init 1300:
+init 1400:
     python:
         def candace_titles(person):
             return "Candi"
@@ -11,7 +11,7 @@ init 1300:
             valid_mc_titles.append("Cutie")
             valid_mc_titles.append("Boss")
             return valid_mc_titles
-        candace_personality = Personality("candace", default_prefix = "bimbo",
+        candace_personality = Personality("candace", default_prefix = bimbo_personality.default_prefix,
         common_likes = ["skirts", "small talk", "the colour pink", "makeup", "pop"],
         common_sexy_likes = ["giving blowjobs", "missionary style sex", "being submissive", "skimpy outfits", "showing her tits", "showing her ass", "not wearing anything", "not wearing underwear", "lingerie", "cum facials"],
         common_dislikes = ["working", "research work", "work uniforms", "conservative outfits", "Mondays", "pants"],
@@ -643,8 +643,7 @@ label candace_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Is that, like, allowed? I thought that was illegal or something. Ugh."
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:

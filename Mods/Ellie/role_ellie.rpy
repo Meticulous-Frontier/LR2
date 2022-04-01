@@ -305,7 +305,7 @@ label ellie_head_researcher_halfway_intro_label():
     the_person "I gave him a description of the blackmailer, and he finally got back to me this morning."
     the_person "The company launched an investigation trying to figure out who leaked the bots, but they got the wrong person."
     the_person "The company came down hard on a relatively new person. A woman they had hired about a year ago. A fresh computer science college graduate from University of Alabama..."
-    mc.name "Ahhhhh"
+    mc.name "Ahhhhh."
     the_person "He sent me her basic details..."
     "[the_person.possessive_title] hands you a dossier she has put together on this person. The first thing you notice is her red hair."
     the_person "[ellie.name] [ellie.last_name]. Redhead, southern computer expert."
@@ -397,7 +397,7 @@ label ellie_self_research_identity_label():
     "You run a search for local job applications looking for work, with that company as a previous employer."
     "There are a couple that come up, but one specifically immediately jumps out at you. Her picture is perfect."
     $ ellie.draw_person()
-    "[ellie.name] [ellie.last_name]. Graduate of University of Alabama in Computer Science. Worked at the other company for 6 months. Looking for non IT related work."
+    "[ellie.name] [ellie.last_name]. Graduate of University of Alabama in Computer Science. Worked at the other company for 6 months. Looking for non-IT-related work."
     "It HAS to be her! It's just too perfect."
     "You feel conflicted about this. Surely, this is the girl that is blackmailing you... but you are also partially responsible for it, having acquired the nanobots in the first place."
     "Her previous employer must have blamed her for the leak. Now they are keeping her from finding work in her field of study with a non-compete agreement."
@@ -1269,7 +1269,7 @@ label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered 
 
 # Love Scenes
 label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a date in his office.
-    if ellie_has_brought_lunch_date():  #I left a scenario in game where this could occur twice. IF this event has already occured, just exit immediately.
+    if ellie_has_brought_lunch_date():  #I left a scenario in game where this could occur twice. IF this event has already occurred, just exit immediately.
         return
     $ the_person = ellie
     $ ellie.event_triggers_dict["brought_lunch"] = True

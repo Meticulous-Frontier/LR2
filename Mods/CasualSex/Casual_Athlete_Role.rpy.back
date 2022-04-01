@@ -619,7 +619,7 @@ label casual_athlete_ghost_label(the_person):
 #************* Personality****************#
 #Override some of her personality functions so that her conversation options makes sense.
 
-init 1301 python:              #Because Vren Init personality functions at 1300
+init 1400 python:              #Because Vren Init personality functions at 1300
 
     def athlete_titles(person):
         valid_titles = []
