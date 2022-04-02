@@ -100,20 +100,28 @@ init 2 python:
                     mi.return_value = item[1]
 
             if isinstance(item,Person): #It's a person. Format it for a person list.
-                mi.title = format_titles(item)
-                mi.return_value = item
-
+                info = [format_titles(item)]
+                if item.has_role(pregnant_role):
+                    info.append("{image=feeding_bottle_token_small}")
+                if item.serum_effects:
+                    info.append("{image=vial_token_small}")
                 if item.infractions:
-                    mi.title += " {image=infraction_token_small}"
-                if any([not isinstance(x, Limited_Time_Action) and x.is_action_enabled(item) for x in item.on_talk_event_list]):
-                    mi.title += " {image=speech_bubble_exclamation_token_small}"
-                elif any([x.name != "Ask new title" and x.is_action_enabled(item) for x in item.on_talk_event_list]):
-                    mi.title += " {image=speech_bubble_token_small}"
+                    info.append("{image=infraction_token_small}")
+                if any(not isinstance(x, Limited_Time_Action) and x.is_action_enabled(item) for x in item.on_talk_event_list):
+                    info.append("{image=speech_bubble_exclamation_token_small}")
+                elif any(x.name != "Ask new title" and x.is_action_enabled(item) for x in item.on_talk_event_list):
+                    info.append("{image=speech_bubble_token_small}")
+                if item.has_role([trance_role, heavy_trance_role, very_heavy_trance_role]):
+                    info.append("{image=lust_eye_token_small}")
+                if item.arousal > 60:
+                    info.append("{image=arousal_token_small}")
                 if draw_hearts_for_people:
-                    mi.title += "\n" + get_heart_image_list(item.sluttiness, item.effective_sluttiness())
+                    info.append("\n" + get_heart_image_list(item.sluttiness, item.effective_sluttiness()))
                 if person_preview_args is None:
                     person_preview_args = {}
 
+                mi.title = " ".join(info)
+                mi.return_value = item
                 mi.person_preview_args = person_preview_args
                 mi.display_key = item.identifier
                 mi.display_scale = scale_person(item.height)

@@ -21,12 +21,20 @@ init -1 python:
             info = []
             info.append(person.name)
             info.append(person.last_name)
-            if any([not isinstance(x, Limited_Time_Action) and x.is_action_enabled(person) for x in person.on_talk_event_list]):
-                info.append("{image=speech_bubble_exclamation_token_small}")
+            if person.has_role(pregnant_role):
+                info.append("{image=feeding_bottle_token_small}")
             if person.serum_effects:
                 info.append("{image=vial_token_small}")
             if person.infractions:
                 info.append("{image=infraction_token_small}")
+            if any(not isinstance(x, Limited_Time_Action) and x.is_action_enabled(person) for x in person.on_talk_event_list):
+                info.append("{image=speech_bubble_exclamation_token_small}")
+            elif any(x.name != "Ask new title" and x.is_action_enabled(person) for x in person.on_talk_event_list):
+                info.append("{image=speech_bubble_token_small}")
+            if person.has_role([trance_role, heavy_trance_role, very_heavy_trance_role]):
+                info.append("{image=lust_eye_token_small}")
+            if person.arousal > 60:
+                info.append("{image=arousal_token_small}")
             info.append("\n")
             tooltip += " ".join(info)
         return tooltip

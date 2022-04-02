@@ -22,6 +22,9 @@ init 5 python:
     lust_eye_token_small_image = im.Scale(Image(get_file_handle("lust_eye.png")), 18, 18)
     renpy.image("lust_eye_token_small", lust_eye_token_small_image)
 
+    feeding_bottle_token_small_image = im.Scale(Image(get_file_handle("feeding_bottle.png")), 18, 18)
+    renpy.image("feeding_bottle_token_small", feeding_bottle_token_small_image)
+
     happy_small_image = im.Scale(Image(get_file_handle("happy.png")), 18, 18)
     renpy.image("happy_token_small", happy_small_image)
 

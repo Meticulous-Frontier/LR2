@@ -98,18 +98,18 @@ init 1 python:
 init 1 python:
     ###Project requirement functions###
     def anal_incest_project_requirement():
-        return get_fetish_anal_serum().mastery_level > 3.0
+        return get_fetish_anal_serum().mastery_level >= 3.0
 
     def breeder_submission_project_requirement():
-        if get_fetish_breeding_serum().mastery_level > 3.0:
+        if get_fetish_breeding_serum().mastery_level >= 3.0:
             return True
         return "Low Mastery"
 
     def cum_thirst_project_requirement():
-        return get_fetish_cum_serum().mastery_level > 3.0
+        return get_fetish_cum_serum().mastery_level >= 3.0
 
     def exhibition_cheating_project_requirement():
-        if get_fetish_exhibition_serum().mastery_level > 3.0:
+        if get_fetish_exhibition_serum().mastery_level >= 3.0:
             return True
         return "Low Mastery"
 
