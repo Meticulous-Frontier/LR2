@@ -21,7 +21,7 @@ init -1 python:
             info = []
             info.append(person.name)
             info.append(person.last_name)
-            if person.has_role(pregnant_role):
+            if person.knows_pregnant():
                 info.append("{image=feeding_bottle_token_small}")
             if person.serum_effects:
                 info.append("{image=vial_token_small}")

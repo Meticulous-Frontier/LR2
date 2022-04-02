@@ -101,7 +101,7 @@ init 2 python:
 
             if isinstance(item,Person): #It's a person. Format it for a person list.
                 info = [format_titles(item)]
-                if item.has_role(pregnant_role):
+                if item.knows_pregnant():
                     info.append("{image=feeding_bottle_token_small}")
                 if item.serum_effects:
                     info.append("{image=vial_token_small}")
