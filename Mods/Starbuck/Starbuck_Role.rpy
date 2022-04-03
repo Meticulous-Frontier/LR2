@@ -23,7 +23,7 @@ init 2 python:
     starbuck_wardrobe = wardrobe_from_xml("Starbuck_Wardrobe")
 
     def SB_mod_initialization(action_mod):
-        starbuck_personality = Personality("starbuck", default_prefix = "relaxed",
+        starbuck_personality = Personality("starbuck", default_prefix = relaxed_personality.default_prefix,
         common_likes = ["skirts", "small talk", "the colour blue", "makeup"],
         common_sexy_likes = ["lingerie","taking control",  "doggy style sex", "creampies"],
         common_dislikes = ["working", "research work", "production work"],
@@ -45,10 +45,10 @@ init 2 python:
         starbuck_lipstick.colour = [.80, .26, .04, .90]
         starbuck_base.add_accessory(starbuck_lipstick)
 
-
-        starbuck = Person(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", tits="E", height = 0.89,  body_images = white_skin, expression_images = None, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair.get_copy(), pubes_colour = None, pubes_style = landing_strip_pubes, skin="white", \
-            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], job = starbuck_job, wardrobe = starbuck_wardrobe, personality = starbuck_personality, stat_list = [3,4,3],  skill_list = [1,1,4,2,1], sluttiness = 27, obedience = -22, suggest = 0, sex_list = [3,3,4,4], love = 0, happiness = 119, \
-            font = get_random_font(), name_color = "#cd5c5c", dialogue_color = "#cd5c5c" , face_style = "Face_4", relationship = "Single", base_outfit = starbuck_base)
+        starbuck = make_person(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", face_style = "Face_4", tits="E", height = 0.89, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair, skin = "white",
+            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], pubes_style = landing_strip_pubes, personality = starbuck_personality, name_color = "#cd5c5c", dial_color = "#cd5c5c", starting_wardrobe = starbuck_wardrobe,  \
+            stat_array = [3,4,3], skill_array = [1,1,4,2,1], sex_array = [3,3,4,4], start_sluttiness = 27, start_obedience = -18, start_happiness = 119, start_love = 0, bonus_suggest = 6, \
+            relationship = "Single", kids = 0, force_random = True, base_outfit = starbuck_base)
 
         starbuck.generate_home()
         starbuck.add_job(starbuck_job, job_known = True)
@@ -2264,7 +2264,7 @@ label starbuck_candace_product_demo_label(the_person):
     $ the_person.set_override_schedule(sex_store, the_days = [5], the_times = [3])
     $ starbuck.set_override_schedule(sex_store, the_days = [5], the_times = [3])
     $ starbuck.add_unique_on_room_enter_event(starbuck_candace_recurring_event)
-    $ candace.event_triggers_dict["friends_with_starbuck"] = True
+    $ candace.event_triggers_dict["friends_with_starbuck"] = day
     $ starbuck.apply_planned_outfit()
     $ candace.apply_planned_outfit()
     $ mc.location.show_background()

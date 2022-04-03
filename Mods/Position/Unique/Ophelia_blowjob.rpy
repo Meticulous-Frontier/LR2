@@ -211,8 +211,7 @@ label orgasm_Ophelia_blowjob(the_girl, the_location, the_object):
                 $ Ophelia_blowjob.current_modifier = None
                 $ Ophelia_blowjob.redraw_scene(the_girl)
                 "She pulls off and takes a long, deep breath."
-                $ the_girl.change_obedience(1)
-                $ the_girl.change_happiness(2)
+                $ the_girl.change_stats(happiness = 2, obedience = 1)
                 the_girl "Damn, that was crazy! I couldn't breath!"
 
         "Be gentle as she cums":

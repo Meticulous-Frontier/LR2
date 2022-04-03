@@ -1056,8 +1056,7 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
             mc.name "I believe you, but my gut just keeps telling me this isn't the right time... let's put this on pause, okay?"
             mc.name "I'll come back in the morning, I'll still help you move. I don't want to stop seeing you, but I don't think I'm quite ready for this."
             the_person "Okay... I understand..."
-            $ the_person.change_happiness(-5)
-            $ the_person.change_obedience(5)
+            $ the_person.change_stats(happiness = -5, obedience = 3)
             $ mc.business.add_mandatory_crisis(kaya_moving_day)
             the_person "Tomorrow then?"
             mc.name "I'll be here."
@@ -1425,10 +1424,9 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
             if kaya.knows_pregnant():
                 mc.name "And now you're pregnant and..."
             the_person "Geeze, you scared me! I thought you were really going to say no!"
-            $ the_person.change_happiness(10)
             mc.name "I want to make this work. Honestly."
             $ the_person.draw_person(position = "sitting", emotion = "happy")
-            $ the_person.change_love(5)
+            $ the_person.change_stats(happiness = 10, love = 5)
             mc.name "We can figure this whole thing out. Together."
             if not the_person.is_girlfriend():
                 $ the_person.add_role(girlfriend_role)

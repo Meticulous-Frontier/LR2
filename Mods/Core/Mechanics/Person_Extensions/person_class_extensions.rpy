@@ -88,7 +88,6 @@ init -1 python:
         self.schedule = None
         self.override_schedule = None
         self.home = None
-        self.work = None
         self.job = None
         self.relationship = None
         self.personality = None
@@ -235,7 +234,7 @@ init -1 python:
 
         if renpy.call_stack_depth() < 2:
             # we are in the main menu (alternative idle_pose)
-            if self.location == self.work or self.location == downtown_bar:
+            if (self.is_employee() and self.is_at_work()) or self.location == downtown_bar:
                 return "sitting"
             if self.location == gym:
                 pose = self.event_triggers_dict.get("gym_pose", None)
@@ -983,9 +982,9 @@ init -1 python:
             # run extension code (clean up situational dictionaries)
             person.situational_sluttiness.clear()
             person.situational_obedience.clear()
-            # dominant person slowly bleeds obedience on run_day
+            # dominant person slowly bleeds obedience on run_day (lowest point offset by love)
             if person.is_dominant():
-                if person.obedience > 100 - (person.get_opinion_score("taking control") * 5):
+                if person.obedience - person.love > 100 - (person.get_opinion_score("taking control") * 5):
                     person.change_obedience(-1, add_to_log = False)
 
 
@@ -1616,7 +1615,7 @@ init -1 python:
     def is_person_at_mc_house(self):
         return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
 
-    Person.is_person_at_mc_house = is_person_at_mc_house
+    Person.is_at_mc_house = is_person_at_mc_house
 
     def is_person_home(self):
         return self.location == self.home
@@ -1851,12 +1850,6 @@ init -1 python:
 
     def person_should_wear_uniform_extended(org_func):
         def should_wear_uniform_wrapper(person):
-            # pre-condition for stripclub ownership
-            if not strip_club_is_closed() and person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]):
-                shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
-                return (time_of_day == 3 and shifts == 2) or time_of_day == 4
-            if person == police_chief:
-                return person.job.schedule.get_destination() != None
             # run original function
             result = org_func(person)
             # run extension code

@@ -1,7 +1,5 @@
 
-init 1301 python:              #Because Vren Init personality functionns at 1300
-
-
+init 1400 python:              #Because Vren Init personality functionns at 1300
 
     def camilla_titles(person):
         valid_titles = []
@@ -29,7 +27,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
             valid_titles.append("Bull")
         return valid_titles
 
-    camilla_personality = Personality("camilla", default_prefix = "wild",
+    camilla_personality = Personality("camilla", default_prefix = wild_personality.default_prefix,
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "skimpy outfits", "being submissive", "drinking cum", "cheating on men"],
     common_dislikes = ["polyamory", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
@@ -498,8 +496,7 @@ label camilla_hookup_accept(the_person):
                     "Her excitement is too much. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
                     the_person  "Yes! Fill me with your cum!"
                     "You feel her pussy convulsing around your dick as she also starts to orgasm."
-                    $ the_person.change_slut(1)
-                    $ the_person.change_happiness(2)
+                    $ the_person.change_stats(slut = 1, happiness = 2)
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person( position = "standing_doggy") # redraw with cum
                     "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
@@ -512,8 +509,7 @@ label camilla_hookup_accept(the_person):
         "You wait until your orgasm has passed completely, then pull out and stand back. Your condom is bulged on the end where it is filled with your seed."
         if the_person.arousal < 100:
             the_person "Wow, okay, I guess we are done?"
-            $ the_person.change_happiness(-5)
-            $ the_person.change_obedience(-5)
+            $ the_person.change_stats(happiness = -5, obedience = -5)
             "She is a bit disappointed she didn't finish."
         else:
             the_person "That was nice. I'll make sure next time I'm in the mood to hit you up again..."

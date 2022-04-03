@@ -1,4 +1,4 @@
-init 1301 python:              #Because Vren Init personality functionns at 1300
+init 1400 python:              #Because Vren Init personality functionns at 1300
 
     def kaya_titles(person):
         valid_titles = []
@@ -17,7 +17,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
     def kaya_player_titles(person):
         return mc.name
 
-    kaya_personality = Personality("kaya", default_prefix = "wild",
+    kaya_personality = Personality("kaya", default_prefix = wild_personality.default_prefix,
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "skimpy outfits", "being submissive", "drinking cum", "cheating on men"],
     common_dislikes = ["polyamory", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
@@ -1030,8 +1030,7 @@ label kaya_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:

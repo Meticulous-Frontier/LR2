@@ -104,7 +104,9 @@ init 0 python:
         return "{color=" + person.char.who_args["color"] + "}" + "{font=" + person.char.what_args["font"] + "}" + person_title + "{/font}{/color}"
 
     def format_titles_short(person):
-        person_title = person.name + " " + person.last_name[0] + "."
+        person_title = person.name + " "
+        if person.last_name and __builtin__.len(person.last_name) > 0:
+            person_title += person.last_name[0] + "."
         if not person.title or person.mc_title == "Stranger":
             return "???"    # we don't know her yet
         return "{color=" + person.char.who_args["color"] + "}" + "{font=" + person.char.what_args["font"] + "}" + person_title + "{/font}{/color}"

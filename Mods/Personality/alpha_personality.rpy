@@ -53,7 +53,7 @@ init 1400 python:
             valid_player_titles.append("Queen's Dick")
         return valid_player_titles
 
-    alpha_personality = Personality("alpha", default_prefix = "reserved",
+    alpha_personality = Personality("alpha", default_prefix = reserved_personality.default_prefix,
         common_likes = ["flirting", "HR work", "work uniforms", "working", "sports", "small talk", "boots", "dresses", "high heels", "skirts", "the colour black", "the colour red"],
         common_sexy_likes = ["taking control", "threesomes", "getting head", "lingerie", "not wearing underwear", "showing her tits", "showing her ass", "skimpy uniforms"],
         common_dislikes = ["conservative outfits", "pants", "punk", "the colour green", "the colour pink", "classical", "jazz"],
@@ -981,8 +981,7 @@ label alpha_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "[the_person.mc_title]! Why do you want me to watch that!"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:

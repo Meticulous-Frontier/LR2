@@ -30,19 +30,19 @@ init python:
 
     def get_opinion_status(self, topic): #topic is a string matching the topics given in our random list (ie. "the colour blue", "sports"). Returns a tuple containing the score: -2 for hates, -1 for dislikes, 0 for no opinion, 1 for likes, and 2 for loves, and a bool to say if the opinion is known or not.
         if topic in self.opinions:
-            return "Discoverd" if self.opinions[topic][1] else "Unknown"
+            return "Discovered" if self.opinions[topic][1] else "Unknown"
 
         if topic in self.sexy_opinions:
-            return "Discoverd" if self.sexy_opinions[topic][1] else "Unknown"
+            return "Discovered" if self.sexy_opinions[topic][1] else "Unknown"
 
-        return "Not assigned"
+        return "No opinion"
     Person.get_opinion_status = get_opinion_status
 
     def cheat_opinion_score_to_string(target, topic):
         status = target.get_opinion_status(topic)
         score = target.get_opinion_score(topic)
-        if status == "Not assigned" or score == 0:
-            return "Not assigned"
+        if status == "No opinion" or score == 0:
+            return "No opinion"
 
         return " ".join([opinion_score_to_string(score), "|", status]).title()
 
@@ -67,7 +67,7 @@ screen opinion_edit_menu():
     else:
         default target = None
 
-    if target:
+    if isinstance(target, Person):
         grid __builtin__.len(categories) 1:
             xalign 0.37
             for n in categories:
@@ -91,12 +91,12 @@ screen opinion_edit_menu():
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
                                             xsize 260
-                                            padding (4,2)
+                                            padding (4,2,4,0)
                                             # action Function(target.update_opinion_score, x, categories[n][1], 1)
                                             # alternate Function(target.update_opinion_score, x, categories[n][1], 0)
 
                                         textbutton " ? ":
-                                            padding (0,2)
+                                            padding (0,2,0,0)
                                             xsize 36
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
@@ -104,7 +104,7 @@ screen opinion_edit_menu():
                                                 Function(target.toggle_opinion_known, x, categories[n][1])
                                             ]
                                         textbutton " - ":
-                                            padding (0,2)
+                                            padding (0,2,0,0)
                                             xsize 36
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
@@ -112,13 +112,13 @@ screen opinion_edit_menu():
                                                 Function(target.update_opinion_score, x, categories[n][1], -1)
                                             ]
                                         textbutton cheat_opinion_score_to_string(target, x):
-                                            padding (0,2)
+                                            padding (0,2,0,0)
                                             xsize 230
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
                                             #action NullAction()
                                         textbutton " + ":
-                                            padding (0,2)
+                                            padding (0,2,0,0)
                                             xsize 36
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"
@@ -126,7 +126,7 @@ screen opinion_edit_menu():
                                                 Function(target.update_opinion_score, x, categories[n][1], 1)
                                             ]
                                         textbutton "{color=#D00}{b} X {/b}{/color}":
-                                            padding (0,2)
+                                            padding (0,2,0,0)
                                             xsize 44
                                             style "textbutton_no_padding_highlight"
                                             text_style "serum_text_style"

@@ -439,7 +439,7 @@ label fetish_serum_self_code_menu(the_person):
             "The code itself is complicated, but you think it might be possible to modify it into a new program yourself, with the help of [the_person.possessive_title]."
             mc.name "I think we might actually be able to pull this off."
             if fetish_serum_coding_activity not in mc.business.r_div.actions:
-                $ mc.business.r_div.actions.append(fetish_serum_coding_activity)
+                $ mc.business.r_div.add_action(fetish_serum_coding_activity)
     the_person "Okay, what kind of program do you think we should make?"
     menu:
         "Exhibitionist Program" if not fetish_exhibition_serum_is_unlocked():
@@ -770,8 +770,7 @@ label fetish_serum_coding_activity_label():
 
                     "Focus on the code" if mc.focus >= 6:
                         mc.name "I think I would like to work on this right now. Maybe another time."
-                        $ the_person.change_happiness(-3)
-                        $ the_person.change_obedience(5)
+                        $ the_person.change_stats(happiness = -3, obedience = 3)
                         the_person "Ah, okay."
                         "You spend a few hours working on the code. You feel like you are making good progress."
                         "You write some unit tests. There are a couple bugs, but you are able to work through them."

@@ -29,9 +29,9 @@ init 5 python:
 
     def calculate_stripper_profit(person):
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
-        profit_base = person.stripper_salary * (renpy.random.random() + .7) # stripper income is variable
+        profit_base = calculate_stripper_salary(person) * (renpy.random.random() + .8) # stripper income is variable
         if person.has_role(stripclub_waitress_role):
-            profit_base = person.stripper_salary * (renpy.random.random() + .5) # waitress income is variable
+            profit_base = calculate_stripper_salary(person) * (renpy.random.random() + .6) # waitress income is variable
 
         tit_modifier = person.get_opinion_score("showing her tits") * 2
         ass_modifier = person.get_opinion_score("showing her ass") * 2
@@ -80,7 +80,7 @@ init 5 python:
         for stripper in stripclub_strippers[:]: # use copy of existing array
             stripper.job.quit_function = stripper_quit # replace base game stripper job quit_function
             stripper.quit_job() # use quit job because the role names match
-            stripper.add_job(stripclub_stripper_job)
+            stripper.add_job(stripclub_stripper_job, job_known = True)
 
     def allow_promote_to_manager_requirement(person):
         if get_strip_club_foreclosed_stage() < 5:
@@ -120,7 +120,7 @@ init 5 python:
             stripclub_strippers.append(person)
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
-            person.add_job(job)
+            person.add_job(job, job_known = True)
 
         salary = calculate_stripper_salary(person)
         if person.has_role(stripclub_waitress_role):

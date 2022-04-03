@@ -218,8 +218,7 @@ label orgasm_cum_fetish_blowjob(the_girl, the_location, the_object):
         $ cum_fetish_blowjob.current_modifier = None
         $ cum_fetish_blowjob.redraw_scene(the_girl)
         "She pulls off and takes a long, deep breath."
-        $ the_girl.change_obedience(1)
-        $ the_girl.change_happiness(2)
+        $ the_girl.change_stats(happiness = 2, obedience = 1)
         the_girl "Wow, that was amazing... Okay, I came... now it's your turn!"
         "She slides you back into her mouth and presses you all the way to the back, rubbing your tip against the back of her throat for a second before she goes back to blowing you."
 

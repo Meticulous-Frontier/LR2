@@ -508,8 +508,7 @@ label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = Non
         the_girl "I'm not letting your spunk touch me!"
         "You groan as you feel yourself erupt. You feel a couple spurts of cum on your hip as [the_girl.title] points you to the side."
         "When you finish you lay back, looking up at [the_girl.possessive_title]'s ass."
-        $ the_girl.change_happiness(2)
-        $ the_girl.change_obedience(-3)
+        $ the_girl.change_stats(happiness = 2, obedience = -3)
     elif the_goal == "facial" or the_goal == "body shot":
         "Little by little the soft, warm mouth of [the_girl.title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."
         mc.name "Fuck, here I come!"

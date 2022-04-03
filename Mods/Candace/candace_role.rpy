@@ -7,9 +7,7 @@
 init 2 python:
     #Requirement functions
     def candace_meet_at_office_store_requirement(person):
-        if person.location == office_store and mc.business.is_work_day():
-            return True
-        return False
+        return person.location == office_store and mc.business.is_work_day()
 
     def candace_get_to_know_requirement(person):
         if person.location == office_store:
@@ -31,60 +29,40 @@ init 2 python:
         if candace.employed_since == -1 or candace.event_triggers_dict["clothes_shopping"] != 0:
             return False
         if candace.days_employed > 7:  #She's been working at least a week.
-            if mc.business.has_funds(500) and candace.location == candace.work:
-                return True
+            return mc.business.has_funds(500) and candace.is_at_work()
         return False
 
     def candace_overhear_supply_order_requirement(person):
-        if day > candace.employed_since + 14:
-            if time_of_day > 1:
-                if person.sluttiness > 40:
-                    if person.is_at_work():
-                        return True
-        return False
+        return time_of_day > 1 and person.sluttiness > 40 and day > candace.employed_since + 14 and person.is_at_work()
 
     def candace_supply_order_discount_requirement():
-        if time_of_day == 1:
-            if mc.is_at_work() and mc.business.is_open_for_business():
-                return True
-        return False
+        return time_of_day == 1 and mc.is_at_work() and mc.business.is_open_for_business()
 
     def candace_topless_at_mall_requirement(the_person):
-        if the_person.location in [mall, gym, home_store, clothing_store, office_store, mall_salon]:
-            if the_person.love >= 40:
-                return True
-        return False
+        return the_person.love >= 40 and the_person.location in [mall, gym, home_store, clothing_store, office_store, mall_salon]
 
     def candace_midnight_wakeup_requirement():
-        if mc.business.research_tier >= 3 and candace_starbuck_are_friends() and candace.love >= 60:
-            if time_of_day == 4:
-                if renpy.random.randint(0,100) < 15: #Average 7 days
-                    return True
+        if time_of_day == 4 and mc.business.research_tier >= 3 and candace.love >= 60:
+            return day >= candace_starbuck_are_friends_day() + 7
         return False
 
     def candace_begin_cure_research_requirement(the_person):
-        if the_person.is_at_work():
-            return True
-        return False
+        return the_person.is_at_work()
 
     def candace_anti_bimbo_serum_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
             # lock for at least 2 weeks
-            if day >= candace_get_living_with_stephanie_day() + 14:
-                return True
+            return day >= candace_get_living_with_stephanie_day() + 14
         return False
 
     def candace_cure_bimbo_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
-            if mc.business.is_trait_researched(anti_bimbo_serum_trait):
-                return True
+            return mc.business.is_trait_researched(anti_bimbo_serum_trait)
         return False
 
     def candace_meet_doctor_candace_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
-            if time_of_day == 2:
-                if day >= candace_get_cure_day() + 7:
-                    return True
+            return time_of_day == 2 and day >= candace_get_cure_day() + 7
         return False
 
     #Candace Actions (define actions in init)
@@ -771,8 +749,9 @@ label candace_topless_at_mall_label(the_person):
     python:
         if police_chief.title is None:  # haven't met, set title
             police_chief.set_possessive_title("the police chief")
-            police_chief.set_mc_title("Mr." + mc.last_name)
+            police_chief.set_mc_title("Mr. " + mc.last_name)
             police_chief.set_title("Officer " + police_chief.last_name)
+            police_chief.wear_uniform()
 
     "As you walk around the mall, you notice a commotion. A small group of mostly men have gathered around someone, you walk over to see what is going on."
     "When you walk over, you find [the_person.possessive_title], and it immediately becomes clear why there is a crowd gathering around..."
@@ -839,12 +818,14 @@ label candace_midnight_wakeup_label():
     python:
         if police_chief.title is None:  # haven't met, set title
             police_chief.set_possessive_title("the police chief")
-            police_chief.set_mc_title("Mr." + mc.last_name)
+            police_chief.set_mc_title("Mr. " + mc.last_name)
             police_chief.set_title("Officer " + police_chief.last_name)
 
         # make sure she is in the police station wearing her uniform
         police_chief.change_location(police_station)
-        police_chief.apply_planned_outfit()
+        police_chief.wear_uniform()
+
+        the_person = candace
 
     "Your phone goes off in the middle of the night, waking you up. You look over at it."
     "You have no idea who it is, so you silence it and roll over. Seconds later, it's going off again. You groggily sit up and answer your phone."
@@ -1006,7 +987,7 @@ label candace_love_path_intro_label():
     $ the_person.draw_person(position = "walking_away")
     "She starts to lead you into her bedroom."
     mc.name "[the_person.title] I just need to get some sleep..."
-    the_person "Don't worry, you'll wake up and be all like, I've never slept better!'"
+    the_person "Don't worry, you'll wake up and be all like, {i}'I've never slept better!'{/iRR}"
     "She modulates her voice lower when she imitates you. Oh god what are you getting yourself in to..."
     $ the_person.change_to_bedroom()
     "In her bedroom, you lay down on her bed, pulling blankets up over yourself. Her bed smells flowery."
@@ -1260,7 +1241,7 @@ label candace_anti_bimbo_serum_label():
         mc.name "It won't be too much longer. I appreciate it."
         the_person "Okay... She's driving me crazy, okay!"
         $ town_relationships.update_relationship(the_person, candace, "Rival")
-    "[the_person.title] leaves your office"
+    "[the_person.title] leaves your office."
     $ clear_scene()
     if mc.business.is_trait_researched(permanent_bimbo):
         "You now have a new serum trait available to research."
@@ -1291,7 +1272,7 @@ label candace_cure_bimbo_label():
     mc.name "Why don't you both sit down."
     $ scene_manager.update_actor(the_person, position = "sitting")
     $ scene_manager.update_actor(candace, position = "sitting")
-    mc.name "I have some good news [candace.name]. [the_person.name] has designed a serum to help you get back to your old self. It won't be a complete reversal, but it should help a lot with some of the issues you've been having with your memory and impulse control"
+    mc.name "I have some good news [candace.name]. [the_person.name] has designed a serum to help you get back to your old self. It won't be a complete reversal, but it should help a lot with some of the issues you've been having with your memory and impulse control."
     candace "Okay boss. If that's what you want, I'd be happy to try it."
     mc.name "Thank you for trusting me. It means a lot. [the_person.name]?"
     the_person "Okay... Do you mind if I take notes? This will be our first human trial..."
@@ -1336,6 +1317,7 @@ label candace_cure_bimbo_label():
     candace "But then, I met you... At that restaurant. You convinced me to quit, and to leave that controlling asshole... And gave me a job..."
     mc.name "I'm glad I was able to help..."
     candace "You did more than just help. You brought stability back to my life, gave me hope... You even bailed me out of jail! I owe you a great debt Mr. [mc.last_name]."
+    $ candace.set_mc_title(mc.name)
     mc.name "Please, just [candace.mc_title]. I'm sorry about the times I also took advantage of your mental state."
     candace "What? I don't remember you doing anything like that."
     mc.name "We've been intimate. A lot actually."
@@ -1359,7 +1341,7 @@ label candace_cure_bimbo_label():
     candace "Really, the work that has been done to help me... I don't think I will ever be able to repay you."
     the_person "Well, when [the_person.mc_title] came to me and asked me to do it... I knew I couldn't say no. I'm so relieved that it has all worked out."
     candace "Ah, so you were the architect of the whole thing [candace.mc_title]? I suppose I shouldn't be surprised."
-    mc.name "Well... That night at the police station. The chief talked to me before I bailed you out. He wanted me to apply to be your conservator."
+    mc.name "Well... That night at the police station. The chief talked to me before I bailed you out. She wanted me to apply to be your conservator."
     mc.name "I knew I needed to do everything I could to get the effects reversed..."
     candace "Wow... I didn't realize things had gone that far. I'm going to have to think about that for a bit."
     candace "Now, unless there's more to discuss, I think I have some new supply contracts to negotiate."
@@ -1494,8 +1476,7 @@ label candace_meet_doctor_candace_label():
                 mc.name "So, what is your degree in, anyway?"
                 the_person "I received my doctorate for molecular biology and genetics... Though I'm not sure why that is relevant."
                 mc.name "Oh, I just wanted to know for when I have to introduce you to people as 'my girlfriend Dr. [the_person.last_name]."
-                $ the_person.change_happiness(15)
-                $ the_person.change_love(5)
+                $ the_person.change_stats(happiness = 15, love = 5)
                 the_person "Ahh! I suppose that would be okay... The first part anyway."
                 "She leans back a bit and gets kinda dreamy eyed."
                 the_person "You know, I truly had no idea if you were going to accept or not."
@@ -1650,9 +1631,10 @@ init 3 python:
             return candace.event_triggers_dict.get("is_bimbo", False)
         return False
 
-    def candace_starbuck_are_friends():
+    def candace_starbuck_are_friends_day():
         if "candace" in globals():
-            return candace.event_triggers_dict.get("friends_with_starbuck", False)
+            return candace.event_triggers_dict.get("friends_with_starbuck", 9999)
+        return 9999
 
     def candace_get_cure_day():
         if "candace" in globals():

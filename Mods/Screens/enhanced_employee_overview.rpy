@@ -129,16 +129,13 @@ init 2:
                         frame:
                             xsize 274
                             ysize 60
-                            if division_select == button_map[1]:
-                                background "#4f7ad6"
-                            else:
-                                background "#1a45a1"
+                            background ("#4f7ad6" if division_select == button_map[1] else "#1a45a1")
                             button:
                                 action SetScreenVariable("division_select", button_map[1])
                                 hover_background "#4f7ad6"
                                 xsize 262
                                 ysize 48
-                                text button_map[0] xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "textbutton_text_style"
+                                text "[button_map[0]]" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "textbutton_text_style"
 
             $ grid_count = 15
             if person_select:
@@ -157,7 +154,7 @@ init 2:
                     for attributes in sort_attributes:
                         frame:
                             background None
-                            textbutton attributes[0]:
+                            textbutton "[attributes[0]]":
                                 style "textbutton_style"
                                 text_style "menu_text_style"
                                 xfill True
@@ -192,7 +189,7 @@ init 2:
                                 background None
                                 xsize 148
                                 ysize 80
-                                textbutton person.name + "\n" + person.last_name style "textbutton_style" text_style "menu_text_style_left" action Show("person_info_detailed", the_person = person) xfill True xalign 0.0 yfill True margin (2, 0)
+                                textbutton "[person.name]\n[person.last_name]" style "textbutton_style" text_style "menu_text_style_left" action Show("person_info_detailed", the_person = person) xfill True xalign 0.0 yfill True margin (2, 0)
                             for attributes in sort_attributes[1:]:
                                 frame:
                                     background None
@@ -213,7 +210,7 @@ init 2:
                             background None
                             xsize 300
                             ysize 60
-                            text stat[0] + ": " + str(stat[1]) xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "textbutton_text_style"
+                            text "[stat[0]]: [stat[1]]" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5 style "textbutton_text_style"
 
         if not person_select:
             frame:

@@ -108,12 +108,10 @@ label lust_booty_call_intro_label():
     elif the_report.get("girl orgasms", 0) == 0:
         "Fully spent, you let yourself relax in your bed. [the_person.possessive_title] seems a little disgruntled."
         the_person "Wow, I come all the way over here, and you can't even reciprocate?"
-        $ the_person.change_happiness(-3)
-        $ the_person.change_obedience(-3)
+        $ the_person.change_stats(happiness = -3, obedience = -3)
     else:
         "You and [the_person.possessive_title] take a few moments to recover, satisfied from your orgasms."
-        $ the_person.change_happiness(3)
-        $ the_person.change_obedience(3)
+        $ the_person.change_stats(happiness = 3, obedience = 3)
     mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits on the edge of your bed."
@@ -197,12 +195,10 @@ label lust_booty_call_label():
     elif the_report.get("girl orgasms", 0) == 0:
         "Fully spent, you let yourself relax in your bed. [the_person.possessive_title] seems a little disgruntled."
         the_person "Wow, I come all the way over here, and you can't even reciprocate?"
-        $ the_person.change_happiness(-3)
-        $ the_person.change_obedience(-3)
+        $ the_person.change_stats(happiness = -3, obedience = -3)
     else:
         "You and [the_person.possessive_title] take a few moments to recover, satisfied from your orgasms."
-        $ the_person.change_happiness(3)
-        $ the_person.change_obedience(3)
+        $ the_person.change_stats(happiness = 3, obedience = 3)
     mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits on the edge of your bed."

@@ -100,7 +100,7 @@ label outro_cowgirl_handjob(the_girl, the_location, the_object):
             $ cowgirl_handjob.redraw_scene(the_girl)
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
         $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
-        "You take a deep breath and lay back, enjoying your post orgasm bliss. [the_girl.title] looks up at you, face covered in your semen."
+        "You take a deep breath and lay back, enjoying your post-orgasm bliss. [the_girl.title] looks up at you, face covered in your semen."
         $ the_girl.call_dialogue("cum_face")
     else:
         mc.name "Fuck, I'm about to cum!"
@@ -185,8 +185,7 @@ label GIC_outro_cowgirl_handjob(the_girl, the_location, the_object, the_goal = N
         $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
         "Thick strands of cum erupt as you orgasm. It ropes up and out over your belly."
         "When you finish you lay back and [the_girl.title] stops stroking you. She has a naughty smile on her face."
-        $ the_girl.change_happiness(2)
-        $ the_girl.change_obedience(-3)
+        $ the_girl.change_stats(happiness = 2, obedience = -3)
         "She wipes her hand on your leg and starts to get up."
     elif the_goal == "facial" or the_goal == "body shot":
         "Little by little the soft hand of [the_girl.title] brings you closer to orgasm."
@@ -210,7 +209,7 @@ label GIC_outro_cowgirl_handjob(the_girl, the_location, the_object, the_goal = N
             $ cowgirl_handjob.redraw_scene(the_girl)
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
         $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
-        "You take a deep breath and lay back, enjoying your post orgasm bliss. [the_girl.title] looks up at you, face covered in your semen."
+        "You take a deep breath and lay back, enjoying your post-orgasm bliss. [the_girl.title] looks up at you, face covered in your semen."
         $ the_girl.call_dialogue("cum_face")
 
 

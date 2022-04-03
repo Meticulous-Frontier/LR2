@@ -271,7 +271,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                     "[the_girl_2.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                     "She revels in having her cum fetish fulfilled."
                 "You slowly pull back. Your cum is dripping out of her cunt and down the inside of her legs."
-                "You sit back and enjoy the feeling of post orgasm bliss."
+                "You sit back and enjoy the feeling of post-orgasm bliss."
         "Cum on her ass":
             if mc.condom:
                 "You pull out of [the_girl_2.title] at the last moment. You whip your condom off and stroke your cock as you blow your load over her ass."

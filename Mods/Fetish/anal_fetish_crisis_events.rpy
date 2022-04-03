@@ -223,14 +223,12 @@ label anal_fetish_employee_evening_approach_label():
             "You wave goodbye to [the_person.possessive_title] and get ready to head home for the night."
         "No Thanks":
             "[the_person.possessive_title] is caught completely off guard by your refusal."
-            $ the_person.change_obedience(-10)
-            $ the_person.change_happiness(-10)
+            $ the_person.change_stats(happiness = -10, obedience = -10)
             the_person "Oh!... Okay... Well... hey I understand... Maybe some other time yeah?"
             "[the_person.possessive_title] quickly sulks off. Maybe you should've?"
         "Too Tired" if mc.energy < 30:
             "[the_person.possessive_title] is surprised by your answer."
-            $ the_person.change_obedience(-5)
-            $ the_person.change_happiness(-5)
+            $ the_person.change_stats(happiness = -5, obedience = -5)
             the_person "Oh! I'm sorry... I know you work so hard around here. Maybe tomorrow then?"
             "[the_person.possessive_title] quickly sulks off."
 

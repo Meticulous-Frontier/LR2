@@ -77,9 +77,7 @@ label serum_give_label_enhanced(the_person):
             else:
                 mc.name "This? Uh..."
                 $ the_person.draw_person(emotion="angry")
-                $ the_person.change_obedience(-10)
-                $ the_person.change_happiness(-10)
-                $ the_person.change_love(-5)
+                $ the_person.change_stats(happiness = -10, obedience = -10, love = -5)
                 the_person "Were you about to put that in my drink? Oh my god [the_person.mc_title]!"
                 mc.name "Me? Never!"
                 "[the_person.title] shakes her head and storms off. You can only hope this doesn't turn into something more serious."
@@ -130,9 +128,7 @@ label serum_give_label_enhanced(the_person):
         else:
             #Refuse
             $ the_person.draw_person(emotion = "angry")
-            $ the_person.change_obedience(-2)
-            $ the_person.change_happiness(-2)
-            $ the_person.change_love(-2)
+            $ the_person.change_stats(happiness = -2, obedience = -2, love = -2)
             the_person "You expect me to just drink random shit you hand to me? I'm sorry, but that's just ridiculous."
 
     elif _return == "pay":

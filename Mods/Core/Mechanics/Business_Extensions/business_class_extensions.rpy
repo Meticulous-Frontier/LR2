@@ -247,7 +247,7 @@ init -1 python:
                     if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]):
                         income -= person.stripper_salary    # costs
 
-        return income
+        return __builtin__.int(income)  # round to whole dollars
 
     Business.calculate_strip_club_income = calculate_strip_club_income
 

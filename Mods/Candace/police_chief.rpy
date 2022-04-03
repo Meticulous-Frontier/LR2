@@ -30,7 +30,7 @@ init 5 python:
         police_chief_uniform_wardrobe.add_outfit(cop_outfit)
         police_chief_wardrobe.remove_outfit(cop_outfit)
 
-        police_chief_personality = Personality("police_chief", default_prefix = "reserved",
+        police_chief_personality = Personality("police_chief", default_prefix = reserved_personality.default_prefix,
             common_likes = ["pants", "small talk", "working", "the colour blue", "the colour black", "boots", "sports", "working", "work uniforms"],
             common_sexy_likes = ["taking control", "anal sex", "sex standing up", "anal creampies", "getting head"],
             common_dislikes = ["Mondays", "the colour yellow", "the colour pink", "skirts", "dresses", "high heels", "flirting"],

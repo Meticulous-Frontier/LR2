@@ -10,34 +10,27 @@ init -1 python:
 
     def person_info_ui_get_formatted_tooltip(person):
         tooltip = ""
-        positive_effects = ""
-        negative_effects = ""
         for situation in person.situational_sluttiness:
-            if person.situational_sluttiness[situation][0] > 0: #We purposefully ignore 0 so we don't show null sluttiness modifiers.
-                positive_effects += get_coloured_arrow(1) + " " + person_info_ui_format_hearts(person.situational_sluttiness[situation][0]) + " - " + person.situational_sluttiness[situation][1] + "\n"
-            elif person.situational_sluttiness[situation][0] < 0:
-                negative_effects += get_coloured_arrow(-1) + " " + person_info_ui_format_hearts(person.situational_sluttiness[situation][0]) + " - " + person.situational_sluttiness[situation][1] + "\n"
-        tooltip += positive_effects + negative_effects
+            ss = person.situational_sluttiness[situation]
+            if ss[0] != 0:
+                tooltip += "{arrow} {hearts} - {description}\n".format(arrow = get_coloured_arrow(ss[0]), hearts = person_info_ui_format_hearts(ss[0]), description = ss[1])
         return tooltip
 
     def person_info_ui_get_formatted_obedience_tooltip(person):
         tooltip = ""
-        positive_effects = ""
-        negative_effects = ""
         for situation in person.situational_obedience:
-            if person.situational_obedience[situation][0] > 0:
-                positive_effects += get_coloured_arrow(1)+"+"+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
-            elif person.situational_obedience[situation][0] < 0:
-                negative_effects += get_coloured_arrow(-1)+""+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
-        tooltip += positive_effects + negative_effects
+            so = person.situational_obedience[situation]
+            if so[0] != 0:
+                tooltip += "{arrow} {sign}{value} Obedience - {description}\n".format(arrow = get_coloured_arrow(so[0]), sign = "+" if so[0] > 0 else "", value = so[0], description = so[1])
         return tooltip
 
     def person_info_ui_get_serum_info_tooltip(person):
         tooltip = ""
         for serum in person.serum_effects:
-            if len(tooltip) > 0:
-                tooltip += "\n"
-            tooltip += serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left"
+            if serum.has_trait(self_generating_serum):
+                tooltip += "{name}: {duration} Turns Left\n".format(name = serum.name, duration = (serum.duration * (serum.duration + 1) / 2) - serum.duration_counter)
+            else:
+                tooltip += "{name}: {duration} Turns Left\n".format(name = serum.name, duration = serum.duration - serum.duration_counter)
         return tooltip
 
     def person_info_ui_get_job_title(person):

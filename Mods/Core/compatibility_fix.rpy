@@ -137,10 +137,6 @@ init 5 python: # add to stack later then other mods
     add_label_hijack("after_load", "update_compatibility_fix")
     add_label_hijack("start", "check_mod_installation")
 
-    # disable game saving by setting this flag
-    okay_to_save = True
-    config.game_menu[3] = ( "save", u"Save Game", ui.jumps("_save_screen"), 'not renpy.context().main_menu and okay_to_save' )
-
     hook_label("start", check_bugfix_installed)
 
 init 100 python:

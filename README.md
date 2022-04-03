@@ -6,18 +6,23 @@ This mod collection extends the base game with a range of new features and enhan
 * Adds over 25 new crisis events with new dialogs and situations;
 * Adds In-game hint system that helps you find the more hidden quest and story lines in the game;
 * Adds Perks System that unlock special positions, give stat boosts or help you recover energy;
-* Adds 6 Side Quests (Essential Oils, Arousal Serum, Breeding, Cure Discovery, Chemists Daughter, Porn Star);
+* Adds 5 Side Quests (Essential Oils, Arousal Serum, Breeding, Cure Discovery, Chemists Daughter);
+* Adds 4 fetishes linked to a Nanobot program that can be unlocked for each girl.
 * The sex shop owner Cara with a complete story-line;
-* The hair salon Ophelia owner with a complete story-line;
-* Meet Candace the bimbo and open the clothes shop for shopping;
 * Ashley got a troubled past: you can make her trust men again;
-* Two story lines for college athlete and wife in a bar;
-* Become the new Stripclub's owner, hire more girls and open a new BDSM room for special shows;
-* The HR director position (with Sarah story-line and enhanced employee recruitment);
-* Lifestyle Coach Camilla in the Mall (change active goals for main character skills-up);
-* Adds 18 new sex positions with dialogs and unique positions for some characters;
+* Candace, the bimbo and open the clothes shop for shopping;
+* Camilla, the lifestyle coach who loves to have a drink / dance in the bar (change active goals for main character skills-up);
+* Ellie the IT expert with story-line and various enhancements to your business;
+* Erica, the college athlete who is looking for ways to make cash;
+* Kaya, the coffee-shop barista who wants to study;
+* Ophelia, the hair salon owner with a complete story-line;
+* Sarah, old childhood friend who you can over the job of HR director;
+* Sakari, Kaya's mother and owner of the clothing shop;
+* Become the new Strip Club's owner, hire more girls and open a new BDSM room for special shows;
+* The HR director position with enhanced employee recruitment and opinion influencing;
+* Adds 24 new sex positions with dialogs and unique positions for some characters;
 * Adds 5 threesome positions (triggered in various situations);
-* Enhances 8 existing sex positions with new dialogs;
+* Enhances 9 existing sex positions with new dialogs and adds double orgasm to some;
 * Unisex company bathrooms story-line with various new events;
 * Outfit generator built into the outfit creator (use mannequin selector for wardrobe edit);
 * A hair salon with options to change hair styles, colours and pubes trims;
@@ -26,11 +31,12 @@ This mod collection extends the base game with a range of new features and enhan
 * Extra personalities and random character enhancements with dialogs and story lines;
 * Custom face/mouth cum dialogs for all personalities that match the girls preferences;
 * Your personal dungeon where you can enslave and collar girls (with extra actions for slaves);
-* Adds new policies that enhance your business (2 x production overload, mandatory vibe, genetic modification, clone person).
+* Adds new policies that enhance your business (mandatory vibe, genetic modification, clone person);
 
 ## Enhancements:
 * Enhanced outfit creator
 * Enhanced serum editor
+* Enhanced contract screens
 * Enhanced maps for faster one-click navigation
 * Enhanced interview UI
 * Enhanced employee overview UI (with sorting)
@@ -42,7 +48,7 @@ This mod collection extends the base game with a range of new features and enhan
 ## Cheat Mod:
 * Cheat Mod ('x' key or 'cheats' in bottom action menu)
 * Opinion Editor (press 'p' while talking to someone or 'opinions' in bottom action menu)
-* Traits and Serums Research Cheat Mod (press 't' in game)
+* Traits and Serums Research Cheat Mod (press 't' in game or 'research' in bottom action menu)
 
 ## Authors:
 * Trollden

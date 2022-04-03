@@ -86,14 +86,13 @@ label punishment_service_mc_label(the_person, the_infraction):
         the_person "That's... that's crazy!"
         mc.name "What's crazy is how bad at giving head you are. You heard me, now get back to work."
 
-        $ the_person.change_stats(happiness = -5, obedience = 3)
+        $ the_person.change_stats(happiness = -5, obedience = 2)
         $ add_practice_cocksucking_work_action(the_person)
     else:
         "You give a sigh, satisfied after [the_person.possessive_title] drained your balls."
         mc.name "You look good like that. Next time this happens, I'll have you wear my cum on your face for the rest of the day."
         the_person "Yes sir..."
-        $ the_person.change_happiness(-5)
-        $ the_person.change_obedience(4)
+        $ the_person.change_stats(happiness = -5, obedience = 3)
         mc.name "Alright, I hope you learned something. Now get back to work."
     $ clear_scene()
     return
