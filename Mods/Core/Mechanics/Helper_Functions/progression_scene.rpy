@@ -109,6 +109,8 @@ label progression_scene_label(progression_scene, the_group):
         if progression_scene.is_multiple_choice:    #IF it is multiple choice, add the basic scene to the list of options.
             $ progression_scene.scene_unlock_list.append(0)
         $ progression_scene.call_intro(the_group)
+        if progression_scene.advance_time:
+            call advance_time from _call_advance_progression_scene_class_02
         return
 
     #First, play the start scene
@@ -123,17 +125,23 @@ label progression_scene_label(progression_scene, the_group):
     if progression_scene.is_multiple_choice:
         pass
 
+    scene_transition = False    #pass in to the final scene if we played a transition or not. It may change the final scene.
+
     #if it is linear progression, first check if we can progress this scene.
     if len(progression_scene.req_list) > progression_scene.stage + 1: #Only try if there is another scene
         if progression_scene.req_list[progression_scene.stage + 1](the_group):
             $ progression_scene.stage = progression_scene.stage + 1
             $ progression_scene.call_trans_scene(the_group)
+            scene_transition = True
     #If the scene can regress, check and see if we need to regress a step
     if not progression_scene.is_progress_only() and progression_scene.stage != 0:
         if not progression_scene.req_list[progression_scene.stage](the_group):
             $ progression_scene.stage = progression_scene.stage - 1
             $ progression_scene.call_regress_scene(the_group)
+            scene_transition = True
 
     #Call the appropriate final scene.
-    $ progression_scene.call_final_scene(the_group)
+    $ progression_scene.call_final_scene(the_group, scene_transition)
+    if progression_scene.advance_time:
+        call advance_time from _call_advance_progression_scene_class_01
     return

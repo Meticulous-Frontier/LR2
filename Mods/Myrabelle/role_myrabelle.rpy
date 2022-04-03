@@ -114,6 +114,7 @@ init 2 python:
         myra.event_triggers_dict["wants_bigger_tits"] = False
         myra.event_triggers_dict["bar_arcade_avail"] = False
         myra.event_triggers_dict["alexia_teamup_start"] = False
+        myra.event_triggers_dict["knows_alexia_single"] = False
 
 
 
