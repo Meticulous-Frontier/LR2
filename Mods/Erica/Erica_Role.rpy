@@ -1618,7 +1618,7 @@ label erica_money_problems_yoga_start_label(the_person):
     "After you finish up your conversation, you text [mc.business.hr_director.title], your HR director. Your give her [the_person.possessive_title] contact info."
     $ the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
     $ mc.business.hr_director.set_override_schedule(lobby, the_days = [1], the_times =[0])
-    $ mc.business.add_mandatory_crisis(erica_yoga_event_intro)
+    $ mc.business.add_mandatory_morning_crisis(erica_yoga_event_intro)
     return
 
 label erica_yoga_event_intro_label():
