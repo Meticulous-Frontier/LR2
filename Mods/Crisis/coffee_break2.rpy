@@ -163,7 +163,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     else:
                         winner_one "Holy!... Wow I was not expecting this!"
                         "[winner_one.title] watches you closely."
-                    "You pound [loser.title] hard. She so wet that you easily slide in and out of her."
+                    "You pound [loser.title] hard. She's so wet that you easily slide in and out of her."
                     $ mc.change_locked_clarity(20)
                     "You look down and see the soft wet lips of her labia gripping and pulling at you every time you start to slide out. It feels amazing."
                     if winner_two.effective_sluttiness() > 80 and winner_two.get_opinion_score("public sex") > 0:
