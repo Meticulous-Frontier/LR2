@@ -8,7 +8,7 @@ init -1 python:
         acromegaly_serum_trait = SerumTraitMod(name = "Acromegaly Trait",
             desc = "Increase target subjects height, stimulates the pituitary gland to increase growth hormone production and calcium absorption causing slight changes in height.",
             positive_slug = "20% Chance/Turn to increase height by 1 cm, +$5 Value",
-            negative_slug = "+125 Serum Research",
+            negative_slug = "",
             value_added = 5,
             research_added = 125,
             base_side_effect_chance = 20,

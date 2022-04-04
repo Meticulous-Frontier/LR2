@@ -18,7 +18,7 @@ init -1 python:
         lysergide_n2o_serum_trait = SerumTraitMod(name = "Lysergide N2O Trait",
             desc = "Increases target subjects suggestibility, using LSD and Nitrous Oxide components to change the higher brain function to become more receptive to suggestions.",
             positive_slug = "Increases suggestibility while active, +$25 Value",
-            negative_slug = "+200 Serum Research",
+            negative_slug = "",
             value_added = 25,
             research_added = 200,
             base_side_effect_chance = 50,
