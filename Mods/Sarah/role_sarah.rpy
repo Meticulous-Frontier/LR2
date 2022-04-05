@@ -522,7 +522,7 @@ label Sarah_intro_label():
     the_person "Hello sir, I am [the_person.title], with Metropolis Power and Light, I was just wondering if you had ever thought about installing solar panels..."
     "She begins talking about the benefits and tax credits associated with solar panels, but you have a hard time listening."
     "This girl... she look so familiar! Where do you know her from!?!"
-    the_person "... with even 50%% coverage of the roof you can expect a considerable reduction in your electric bill..."
+    the_person "... with even 50% coverage of the roof you can expect a considerable reduction in your electric bill..."
     "What did she say her name was again? [the_person.title]? Suddenly you get a flash of a memory from a long time again. You quickly interrupt her."
     mc.name "I'm sorry, you said your name was [the_person.title]? Is your name [the_person.title] [the_person.last_name]?"
     "She immediately stops her sales pitch."

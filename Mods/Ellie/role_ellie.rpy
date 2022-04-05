@@ -327,7 +327,7 @@ label ellie_head_researcher_halfway_intro_label():
     mc.name "Alright. Next time I meet with her, I'll consider trying to hire her. If nothing else, maybe I can at least scare her off."
     the_person "Okay. Let me know if there is anything else I can help out with, [the_person.mc_title]!."
     $ clear_scene()
-    "[the_person.possessive_title] gets up and leaves you a lone in your office."
+    "[the_person.possessive_title] gets up and leaves you alone in your office."
     "You meet again with [ellie.name] on Thursday night. You feel like you could definitely hire her."
     "WARNING: If you want to hire [ellie.name], make sure you have an open employee position! You may miss the opportunity to hire her if you don't!"
     #TODO link up next event.
@@ -539,7 +539,7 @@ label ellie_work_welcome_monday_label():
     ellie "So, here's the first set of things I can work on. Take a look and let me know if you want me to start on something."
     call screen it_project_screen()
     if mc.business.IT_project_in_progress:
-        ellie "Okay, I have starting point. If you decide to have me work on something else just come talk to me."
+        ellie "Okay, I have a starting point. If you decide to have me work on something else just come talk to me."
     else:
         ellie "Alright well, when you decide what you want me to work on, let me know, I'll be in HR."
     $ the_person.draw_person(position = "walking_away")
@@ -630,12 +630,12 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "Mmm..."
     $ the_person.change_arousal(5) #65
     $ mc.change_locked_clarity(20)
-    "[the_person.title] lets out a little moan. She slowly relaxes as more as you continue to rub and caress her rear."
+    "[the_person.title] lets out a little moan. She slowly relaxes more as you continue to rub and caress her rear."
     mc.name "See? Rubbing your back feels good, and rubbing down here feels a little bit better, doesn't it?"
     the_person "It does..."
     "She leans forward and relaxes more, just enjoying the touch of your hands on her body. You really need to take this slow, so you take your time rubbing for several minutes."
     "However, you won't be able to make her cum just from this. Eventually it is time to move on."
-    mc.name "Alright, now I'm going to need you turn around, so I can keep making you feel good."
+    mc.name "Alright, now I'm going to need you to turn around, so I can keep making you feel good."
     "[the_person.possessive_title] just nods. She doesn't say a word but turns around for you."
     $ the_person.draw_person(position = "walking_away")
     "You run your hands along her hips, to her front and along her belly. You get close to her so her body is right up against yours."
@@ -650,7 +650,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "You start to grope and massage her tits earnestly now, being careful to avoid her sensitive nipples. Her breathing is getting heavier and an occasional moan escapes her lips."
     mc.name "It's nice, isn't it? Doesn't it make you feel good?"
     the_person "Yeah... It's good... but weird too. It's making me all warm... down there..."
-    mc.name "That is arousal building up. We want to build that up as much as we can, and it will make it feel amazing when it releases."
+    mc.name "That is arousal building up. We want to build that up as much as we can, and it will make you feel amazing when it releases."
     the_person "I... I dunno about that, but keep doing what you're doing... it's nice..."
     "The weight of her heavy tits feels great in your hands. You really wish you could touch her flesh there, but for now you need to take things one step at a time."
     "When you feel her arousal start to plateau, you make your next move. With two fingers and a thumb, you start to knead her engorged nipples."
@@ -878,7 +878,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ the_person.change_arousal(5)
     the_person "Okay [the_person.mc_title]..."
     "Her hands have a little bit of a shake, but she slowly brings them up to your pants."
-    mc.name "There you go, now just rub your hands along my pants now until you find it."
+    mc.name "There you go, now just rub your hands along my pants until you find it."
     "She does as you order, and is soon rubbing her hand up and down your cock through your pants."
     $ mc.change_arousal(5)
     mc.name "Mmm, that's it... now pull down the zipper carefully..."
