@@ -630,7 +630,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "Mmm..."
     $ the_person.change_arousal(5) #65
     $ mc.change_locked_clarity(20)
-    "[the_person.title] lets out a little moan. She slowly relaxes more as you continue to rub and caress her rear."
+    "[the_person.title] lets out a little moan. She slowly relaxes further as you continue to rub and caress her rear."
     mc.name "See? Rubbing your back feels good, and rubbing down here feels a little bit better, doesn't it?"
     the_person "It does..."
     "She leans forward and relaxes more, just enjoying the touch of your hands on her body. You really need to take this slow, so you take your time rubbing for several minutes."
