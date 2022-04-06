@@ -1965,6 +1965,12 @@ init -1 python:
         else:
             self.planned_uniform = uniform.get_copy()
 
+        if commando_uniform_policy.is_active():
+            for item in [x for x in self.planned_uniform.get_upper_ordered() if x.underwear]:
+                self.planned_uniform.remove_clothing(item)
+            for item in [x for x in self.planned_uniform.get_lower_ordered() if x.underwear]:
+                self.planned_uniform.remove_clothing(item)
+
         if wear_now:
             self.wear_uniform()
         return
