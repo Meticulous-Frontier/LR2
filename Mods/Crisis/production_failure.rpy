@@ -66,10 +66,10 @@ label production_failure_action_label():
             if ran_num > 45: # 55% chance it's a mixture that alters behavior (slutty)
                 "For the first half hour everything seems fine, but then you notice a sudden shift in behavior."
                 if mc.location.get_person_count() > 1:
-                    "The girls are clearly hot and bothered. They barely keep their focus on their work. Spending much of their time eyeing you and each other."
+                    "The girls are clearly hot and bothered. They barely keep their focus on their work, spending much of their time eyeing you and each other."
                     "[the_person.name] appears to have been particularly affected."
                 else:
-                    "[the_person.name] is clearly hot and bothered. She can barely keep her focus on her work. Spending much of her time eyeing you."
+                    "[the_person.name] is clearly hot and bothered. She can barely keep her focus on her work, spending much of her time eyeing you."
                 $ production_failure_increase_sluttiness(the_person)
                 $ the_person.draw_person(position = "stand2", emotion = "happy")
                 $ the_person.change_slut(2)
