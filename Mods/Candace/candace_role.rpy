@@ -945,7 +945,7 @@ label candace_love_path_intro_label():
     the_person"I... err... I mean... Sometimes I just get the urge..."
     mc.name "And you can't control it?"
     the_person "I mean... Why should I? It's just for fun!"
-    mc.name "I get that, but you can't just wander the streets. I got you out of your previous relationship because I care about you and and couldn't stand to see you getting taken advantage of like that."
+    mc.name "I get that, but you can't just wander the streets. I got you out of your previous relationship because I care about you and couldn't stand to see you getting taken advantage of like that."
     mc.name "If you keep doing this, someone even worse is going to come along and who knows what will happen."
     $ the_person.draw_person(emotion = "sad")
     the_person "I... I..."

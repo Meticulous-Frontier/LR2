@@ -790,10 +790,10 @@ label cum_fetish_dawn_intro_label():
 
 label cum_fetish_erica_intro_label(the_person):
     $ the_person = erica
-    "It's time to hit the gym. You step into the lockerroom to get changed into workout clothes."
+    "It's time to hit the gym. You step into the locker room to get changed into workout clothes."
     "As you are changing, you feel someone tap on your shoulder. You turn around."
     $ the_person.draw_person()
-    mc.name "Uhhh... [the_person.title]? Are you supposed to be in the men's lockerroom?"
+    mc.name "Uhhh... [the_person.title]? Are you supposed to be in the men's locker room?"
     erica "Shhh!"
     "[the_person.possessive_title] shushes you, then grabs your hand."
     $ the_person.draw_person(position = "walking_away")
@@ -823,7 +823,7 @@ label cum_fetish_erica_intro_label(the_person):
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ clear_scene()
-    "You finish changing into your workout gear, then leave the lockerroom."
+    "You finish changing into your workout gear, then leave the locker room."
     return True
 
 label cum_fetish_ashley_intro_label():

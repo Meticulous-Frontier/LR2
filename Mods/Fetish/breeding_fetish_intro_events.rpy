@@ -629,7 +629,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
             call breeding_fetish_stephanie_bimbo_label(the_person) from _breeding_fetish_steph_bimbo_02
         else:
             if mc.location == mc.business.r_div: #Already in research
-                "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
+                "Suddenly, [the_person.possessive_title] looks up from her work and speaks up."
                 the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
                 mc.name "Sure, follow me to my office."
             else:

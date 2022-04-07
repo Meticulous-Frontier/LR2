@@ -82,7 +82,10 @@ label business_meeting_flirtation(the_person):
     if the_person.effective_sluttiness() > 15:
         $ remove_person_shoes(the_person)
         $ mc.change_locked_clarity(10)
-        "While talking about her proposal, you suddenly feel her bare foot moving up and down your leg."
+        if the_person.outfit.feet_available:
+            "While talking about her proposal, you suddenly feel her bare foot moving up and down your leg."
+        else:
+            "While talking about her proposal, you suddenly feel her stockinged foot moving up and down your leg."
     else:
         "You mind wanders off while she is talking..."
     return

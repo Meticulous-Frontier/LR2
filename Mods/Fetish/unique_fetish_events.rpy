@@ -30,7 +30,7 @@ init 2 python:
 
 label fetish_stephanie_first_fetish_label(the_person):
     if mc.location == mc.business.r_div: #Already in research
-        "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
+        "Suddenly, [the_person.possessive_title] looks up from her work and speaks up."
         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
         mc.name "Sure, follow me to my office."
     else:
