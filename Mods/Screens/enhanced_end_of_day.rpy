@@ -2,6 +2,7 @@ init 2:
     screen end_of_day_update():
         add "Paper_Background.png"
         zorder 100
+        modal True
 
         hbox:
             xalign 0.5
@@ -72,5 +73,7 @@ init 2:
                 align [0.5,0.5]
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
-                action Return()
-            textbutton "End Day" align [0.5,0.5] style "button_text"
+                action [
+                    Return()
+                ]
+            textbutton "End Day" id "end_day_button_text" align [0.5,0.5] style "button_text"

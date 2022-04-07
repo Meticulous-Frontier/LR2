@@ -5,10 +5,10 @@ init 1 python:
 
     SerumDesign.has_trait = has_trait
 
-    def slots_used(self):
+    def get_slots_used(self):
         return len([x for x in self.traits if not "Production" in x.exclude_tags])
 
-    SerumDesign.slots_used = slots_used
+    SerumDesign.slots_used = property(get_slots_used, None, None, "Slots used in serum design")
 
     # override so we can pass the add_to_log parameter
     def generate_side_effects_enhanced(self, add_to_log = True): #Called when a serum is finished development. Tests all traits against their side effect chance and adds an effect for any that fail.
@@ -24,7 +24,7 @@ init 1 python:
                     if valid_side_effect:
                         valid_side_effects.append(side_effect_trait)
 
-                the_side_effect = get_random_from_list(valid_side_effects)
+                the_side_effect = renpy.random.choice(valid_side_effects)
                 self.add_trait(the_side_effect, is_side_effect = True)
                 if add_to_log:
                     mc.log_event(self.name + " developed side effect " + the_side_effect.name + " due to " + trait.name, "float_text_blue")

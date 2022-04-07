@@ -40,7 +40,7 @@ label mom_sister_snooping_action_label():
         $ overhear_topic = mom.get_random_opinion(include_sexy = False)
         $ text_one = person_opinion_to_string(mom, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        mom "...But I [text_one] [text_two], so I'm not sure what to do."
+        mom "... But I [text_one] [text_two], so I'm not sure what to do."
         if mom.discover_opinion(overhear_topic):
             "Wow, you didn't realize they talked about basically everything."
         "They keep talking, but you decide to keep heading to the bathroom. You wouldn't want to get caught snooping around, anyway!"
@@ -60,7 +60,7 @@ label mom_sister_snooping_action_label():
         $ overhear_topic = lily.get_random_opinion(include_sexy = True, include_normal = False)
         $ text_one = person_opinion_to_string(lily, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        lily "...But I [text_one] [text_two], so I'm not sure what to do."
+        lily "... But I [text_one] [text_two], so I'm not sure what to do."
         $ mc.change_locked_clarity(10)
         if lily.discover_opinion(overhear_topic):
             "Wow, you didn't realize they talked about sex in such detail with each other."

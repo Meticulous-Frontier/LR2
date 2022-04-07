@@ -1,6 +1,6 @@
 init:
     python:
-        piledriver_anal = Position(name = "Anal Piledriver", slut_requirement = 80, slut_cap = 110, requires_hard = True, requires_large_tits = False,
+        piledriver_anal = Position(name = "Anal Piledriver", slut_requirement = 80, slut_cap = 95, requires_hard = True, requires_large_tits = False,
             position_tag = "missionary", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Anal",
             girl_arousal = 18, girl_energy = 12,
             guy_arousal = 24, guy_energy = 20,
@@ -20,9 +20,9 @@ init:
         list_of_positions.append(piledriver_anal)
 
 init 1:
-   python:
-       piledriver.link_positions(piledriver_anal,"transition_piledriver_piledriver_anal")
-       #Here is where you would put connections if they existed.
+    python:
+        piledriver.link_positions(piledriver_anal,"transition_piledriver_piledriver_anal")
+        #Here is where you would put connections if they existed.
 
 
 
@@ -34,19 +34,19 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
 
     "You get your hard cock out and kneel down in front of her. She yelps in surprise when you grab her ankles and bring them up and over her waist."
     the_girl "Oh god, it's crazy when you fuck my pussy like this."
     mc.name "I'm not fucking your pussy."
     "Your run your cock along her slit a few times, getting it lubricated. She understands what you mean after a few seconds."
     if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
-        if the_girl.effective_sluttiness() > 100:
+        if the_girl.effective_sluttiness() > 90:
             the_girl "Oh god, you're gonna pin me to the [the_object.name] and fuck my ass, aren't you?"
         else:
             the_girl "Oh god, you're gonna fuck my ass aren't you?"
     else: #She's inexperienced and doesn't quite know what to do.
-        if the_girl.effective_sluttiness() > 100:
+        if the_girl.effective_sluttiness() > 90:
             the_girl "Oh fuck, you want to put it in my ass don't you?"
         else:
             "[the_girl.possessive_title] looks worried."
@@ -101,14 +101,14 @@ label scene_piledriver_anal_1(the_girl, the_location, the_object):
     return
 
 label scene_piledriver_anal_2(the_girl, the_location, the_object):
-    "You take [the_girl.possessive_title] legs and spread them wide. Her whole body lays open and surrendered to you."
+    "You take [the_girl.possessive_title]'s legs and spread them wide. Her whole body lays open and surrendered to you."
     "She reaches down with her hand and starts to play with her [the_girl.pubes_description] pussy as you fuck her buttery back door."
     if the_girl.tits_available():
         "[the_girl.title]'s tits are swaying attractively with each thrust. You give her a couple of rough thrusts and enjoy the change in their movement."
     else:
-        "Suddenly, you realize that [the_girl.title] still hasn't taken her tits out. You decide to change that. You quickly pull her clothes off before she has a chance to protest."
-        $ the_girl.strip_outfit(exclude_lower = True, position = piledriver_anal.position_tag)
-        "Her tits now out, you resume fucking her ass and enjoy the way they shake as you pound her."
+        "Suddenly, you realize that [the_girl.title] still hasn't taken her tits out. You decide to change that. You quickly move her clothes out of the way before she has a chance to protest."
+        $ the_girl.strip_to_tits(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
+        "With her tits now out, you resume fucking her ass and enjoy the way they shake as you pound her."
     $ the_girl.call_dialogue("sex_responses_anal")
     menu:
         "Grope her tits":
@@ -155,12 +155,12 @@ label outro_piledriver_anal(the_girl, the_location, the_object):
         if mc.condom:
             "You hold yourself inside of her until your climax has passed, then pull out slowly and sit back."
 
-            "Your condom is filled and bulging on one side. [the_girl.title] is to wore out to do anything with it."
+            "Your condom is filled and bulging on one side. [the_girl.title] is too worn out to do anything with it."
             "You tie the end in a knot and pull it off, throwing it away while she recovers."
         else:
             if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Her eyes go blank and she gets a blissful expression on her face."
-                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! Fill this slutty ass up!"
+                the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! Fill this slutty ass up!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
 
             "She is left on her back, holding her own ankles up by her head, trying to catch her breath, as your cum drips out of her gaping asshole."

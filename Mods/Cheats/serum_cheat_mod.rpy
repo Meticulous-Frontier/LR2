@@ -2,12 +2,18 @@
 # update, I made this cheat screen for serums to be quickly researched and mastered.
 
 init python:
-    if "serum_cheat_menu_keybind" not in config.overlay_screens:
-        config.overlay_screens.append("serum_cheat_menu_keybind")
+    # Define function to open the screen
+    def toggle_serum_cheat_menu():
+        if renpy.get_screen("serum_cheat_menu"):
+            renpy.hide_screen("serum_cheat_menu")
+        else:
+            renpy.show_screen("serum_cheat_menu")
 
-screen serum_cheat_menu_keybind():
-    key "t" action ToggleScreen("serum_cheat_menu")
-    key "T" action ToggleScreen("serum_cheat_menu")
+        renpy.restart_interaction()
+
+    config.keymap["toggle_serum_cheat_menu"] = ["t", "T"]
+    config.underlay.append(renpy.Keymap(toggle_serum_cheat_menu=toggle_serum_cheat_menu))
+
 
 screen serum_cheat_menu():
     add "Science_Menu_Background.png"
@@ -44,7 +50,7 @@ screen serum_cheat_menu():
                                     frame:
                                         background "#000000"
                                         xsize 365
-                                        text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
+                                        text "Tier [dt]" style "serum_text_style_header" xalign 0.5
 
                                     for trait in sorted_traits:
                                         if trait.tier == dt and not trait.researched and trait.has_required():
@@ -78,7 +84,7 @@ screen serum_cheat_menu():
                                     frame:
                                         background "#000000"
                                         xsize 395
-                                        text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
+                                        text "Tier [dt]" style "serum_text_style_header" xalign 0.5
 
                                 for trait in sorted_traits:
                                     if trait.tier == dt and trait.researched:

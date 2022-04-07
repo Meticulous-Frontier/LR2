@@ -294,12 +294,10 @@ label cum_fetish_family_intro_label(the_person):
     mc.name "It's because of how turned on you are."
     the_person "Yeah, I suppose."
     "She opens her mouth and then takes you in. Her sultry lips feel amazing as they descend your cock, then slowly pull back off."
-    $ mc.change_arousal(15) #40
     $ mc.change_locked_clarity(30)
     "[the_person.possessive_title] gives you a couple slow strokes then pulls off for a breath."
     the_person "Mmm, I can't believe how hot your cock is [the_person.mc_title]..."
     "[the_person.title] opens up and starts to go at it. Her laps smack against each other each time she pulls back."
-    $ mc.change_arousal(15) # 55
     "[the_person.possessive_title] is reaching down with her free hand and has begin to play with herself. Her moans around your erection feel amazing."
     $ the_person.change_arousal(10) #80
     $ mc.change_locked_clarity(50)
@@ -323,7 +321,6 @@ label cum_fetish_family_intro_label(the_person):
     mc.name "God [the_person.title] your pussy is so good."
     the_person "On my ass... I want you finish on my ass!"
     $ the_person.change_arousal(30) #85
-    $ mc.change_arousal(25) #105
     $ mc.change_locked_clarity(50)
     "You pump your hips as hard as you can for as long as you can, but right when you are about to cum you pull out."
     "You stroke yourself as you pump your load all over her ass, coating it in your cum."
@@ -392,7 +389,6 @@ label cum_fetish_generic_intro_label(the_person):
     menu:
         "Ok, go ahead":
             mc.name "Ok, go ahead, but make it quick, I don't want to disturb the neighbors."
-            $ mc.change_arousal(20)
             $ mc.change_locked_clarity(50)
             "She quickly takes you in her mouth, slowly making your cock hard as rock."
             $ the_person.break_taboo("sucking_cock")
@@ -797,7 +793,7 @@ label cum_fetish_erica_intro_label(the_person):
     "It's time to hit the gym. You step into the lockerroom to get changed into workout clothes."
     "As you are changing, you feel someone tap on your shoulder. You turn around."
     $ the_person.draw_person()
-    mc.name "Uhhh.... [the_person.title]? Are you supposed to be in the men's lockerroom?"
+    mc.name "Uhhh... [the_person.title]? Are you supposed to be in the men's lockerroom?"
     erica "Shhh!"
     "[the_person.possessive_title] shushes you, then grabs your hand."
     $ the_person.draw_person(position = "walking_away")

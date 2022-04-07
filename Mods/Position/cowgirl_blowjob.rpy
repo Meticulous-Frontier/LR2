@@ -101,7 +101,7 @@ label outro_cowgirl_blowjob(the_girl, the_location, the_object):
         if the_girl.effective_sluttiness() > 80:
             "[the_girl.title] sticks out her tongue for you and holds still, eager to take your hot load."
             $ the_girl.cum_on_face()
-            $ the_girl.draw_person(the_girl, position = "kneeling1")
+            $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
         elif the_girl.effective_sluttiness() > 60:
             "[the_girl.title] closes her eyes and waits patiently for you to cum."
@@ -114,7 +114,7 @@ label outro_cowgirl_blowjob(the_girl, the_location, the_object):
             $ the_girl.draw_person(position = "kneeling1")
             "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
         $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
-        "You take a deep breath and lay back, enjoying your post orgasm bliss. [the_girl.title] looks up at you, face covered in your semen."
+        "You take a deep breath and lay back, enjoying your post-orgasm bliss. [the_girl.title] looks up at you, face covered in your semen."
         $ the_girl.call_dialogue("cum_face")
     else:
         $ cowgirl_blowjob.current_modifier = "blowjob"
@@ -223,8 +223,7 @@ label GIC_outro_cowgirl_blowjob(the_girl, the_location, the_object, the_goal = N
         $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
         "Thick strands of cum erupt as you orgasm. It ropes up and out over your belly."
         "When you finish you lay back and [the_girl.title] stops stroking you. She has a naughty smile on her face."
-        $ the_girl.change_happiness(2)
-        $ the_girl.change_obedience(-3)
+        $ the_girl.change_stats(happiness = 2, obedience = -3)
         "She wipes her hand on your leg and starts to get up."
     elif the_goal == "facial" or the_goal == "body shot":
         "Little by little the soft, warm mouth of [the_girl.title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."

@@ -202,10 +202,10 @@ init 2: # Add some additional
 
                         vbox:
                             style_prefix "check"
-                            label "Misc (Requires Restart)"
+                            label "Misc [[Requires Restart]"
                             textbutton "Cache Images on Startup" action [ToggleField(persistent, "zip_cache_preload", True, False)]
                             textbutton "Empty Wardrobe for Random Girls" action [ToggleField(persistent, "low_memory_wardrobes", True, False)]
-
+                            textbutton "Keep Patreon Characters" action [ToggleField(persistent, "keep_patreon_characters", True, False)]
 
                     null height (2 * gui.pref_spacing)
 

@@ -63,10 +63,10 @@ init 1 python:
 
     def sex_shop_investment_return(person):
         investment_return = 30
-        investment_return += int (person.event_triggers_dict.get("shop_investment_basic_total", 0) * person.event_triggers_dict.get("shop_investment_rate", 1) * 0.01)
-        investment_return += int (person.event_triggers_dict.get("shop_investment_advanced_total", 0) * person.event_triggers_dict.get("shop_investment_rate", 1) * 0.006)
-        investment_return += int (person.event_triggers_dict.get("shop_investment_fetish_total", 0) * person.event_triggers_dict.get("shop_investment_rate", 1) * 0.004)
-        return investment_return
+        investment_return += int (person.event_triggers_dict.get("shop_investment_basic_total", 0) * get_shop_investment_rate() * 0.01)
+        investment_return += int (person.event_triggers_dict.get("shop_investment_advanced_total", 0) * get_shop_investment_rate() * 0.004)
+        investment_return += int (person.event_triggers_dict.get("shop_investment_fetish_total", 0) * get_shop_investment_rate() * 0.004)
+        return __builtin__.int(investment_return * (renpy.random.random() + .5))    # make it variable rounded to whole dollars
 
     def sex_shop_stage():
         return starbuck.event_triggers_dict.get("shop_progress_stage", 0)

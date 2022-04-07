@@ -17,26 +17,26 @@ init 3 python:
 init 1400 python:
     def cougar_titles(person):
         valid_titles = []
-        valid_titles.append("Mrs. " + person.last_name)
+        valid_titles.append(person.formal_address + " " + person.last_name)
         if person.love > 20:
             valid_titles.append(person.name)
         if person.love > 40:
             valid_titles.append("Cougar")
         if person.sluttiness > 70:
             valid_titles.append("Old Bitch")
-        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_titles.append("Anal Harlot")
         return valid_titles
     def cougar_possessive_titles(person):
         valid_possessive_titles = []
-        valid_possessive_titles.append("Mrs. " + person.last_name)
+        valid_possessive_titles.append(person.formal_address + " " + person.last_name)
         if person.love > 20:
             valid_possessive_titles.append(person.name)
         if person.sluttiness > 60:
             valid_possessive_titles.append("Your slutty cougar")
-        if person.sluttiness > 100 and (person.get_opinion_score("drinking cum") > 0 or person.get_opinion_score("being covered in cum") > 0):
+        if person.sluttiness > 90 and (person.get_opinion_score("drinking cum") > 0 or person.get_opinion_score("being covered in cum") > 0):
             valid_possessive_titles.append("Your cum-dump cougar")
-        if person.sluttiness > 100 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
+        if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_possessive_titles.append("Your anal minx")
         return valid_possessive_titles
     def cougar_player_titles(person):
@@ -50,7 +50,7 @@ init 1400 python:
             valid_player_titles.append("Young Stud")
         return valid_player_titles
 
-    cougar_personality = Personality("cougar", default_prefix = "reserved", #Cougar style personality
+    cougar_personality = Personality("cougar", default_prefix = reserved_personality.default_prefix, #Cougar style personality
         common_likes = ["skirts", "small talk", "Mondays", "the weekend", "the colour red", "makeup", "sports", "flirting", "HR work", "high heels", "dresses"],
         common_sexy_likes = ["doggy style sex", "giving blowjobs", "getting head", "anal sex", "public sex", "skimpy outfits", "anal creampies", "showing her tits", "showing her ass", "taking control", "not wearing underwear", "creampies", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour pink", "supply work", "conservative outfits", "work uniforms", "pants"],
@@ -74,7 +74,7 @@ label cougar_greetings(the_person):
             if the_person.sluttiness > 60:
                 the_person "Hello [the_person.mc_title], how has your day been? I was... thinking about you, that's all."
             else:
-                $ day_part = time_of_day_string()
+                $ day_part = time_of_day_string(time_of_day)
                 the_person "Good [day_part], [the_person.mc_title]!"
     return
 
@@ -83,7 +83,7 @@ label cougar_introduction(the_person): # Copy paste from relaxed to fix crash
     "She turns around."
     $ the_person.set_title("???")
     the_person "I guess? What can I do for you?"
-    mc.name "I know this is strange, but I saw you and I just needed to know your name."
+    mc.name "I'm so sorry, I know this is silly but I just couldn't let you walk by without knowing your name."
     "She laughs with a twinkle in her eyes."
     the_person "Is that so? You're trying to impress me, aren't you."
     mc.name "Really, I really just wanted to talk to you."
@@ -92,7 +92,7 @@ label cougar_introduction(the_person): # Copy paste from relaxed to fix crash
     the_person "Well, if you insist, my name is [formatted_title]. It's nice to meet you..."
     $ the_person.set_title(title_choice)
     $ the_person.set_possessive_title(get_random_possessive_title(the_person))
-    "With a commanding gaze she waits for you to introduce yourself."
+    "With a predatory smile, she waits for you to introduce yourself."
     return
 
 label cougar_clothing_accept(the_person):
@@ -125,7 +125,7 @@ label cougar_clothing_review(the_person):
             the_person "Oh [the_person.mc_title], I shouldn't be seen like this... Just give me a moment and I'll get dressed."
         elif not the_person.relationship == "Single":
             $ so_title = SO_relationship_to_title(the_person.relationship)
-            the_person "Oh my, what would my [so_title] say if he saw me here, like this....with you. Turn around, I need to cover myself!"
+            the_person "Oh my, what would my [so_title] say if he saw me here, like this... with you. Turn around, I need to cover myself!"
         else:
             the_person "Oh [the_person.mc_title], I'm not decent! Turn around now, I need to cover myself!"
     return
@@ -146,7 +146,7 @@ label cougar_sex_accept(the_person):
         else:
             the_person "Whatever you want me to do [the_person.mc_title]. I just want to make sure you're happy."
     else:
-        the_person "Okay, lets try it this, I hope you don't mind having sex with an older woman?"
+        the_person "Okay, let's try it this, I hope you don't mind having sex with an older woman?"
     return
 
 label cougar_sex_obedience_accept(the_person):
@@ -155,7 +155,7 @@ label cougar_sex_obedience_accept(the_person):
         the_person "But you look so strong and beautiful, please..."
     else:
         if the_person.obedience > 130:
-            the_person "I... We really shouldn't... But I know this makes you happy. Lets do it [the_person.mc_title]..."
+            the_person "I... We really shouldn't... But I know this makes you happy. Let's do it [the_person.mc_title]..."
         else:
             the_person "How does this keep happening [the_person.mc_title]? You know I love you but we shouldn't be doing this..."
             "[the_person.possessive_title] looks away, conflicted."
@@ -207,10 +207,10 @@ label cougar_climax_responses_oral(the_person):
 
 label cougar_climax_responses_vaginal(the_person):
     if the_person.sluttiness > 70:
-        the_person "Ah! Yes [the_person.mc_title]! Right there on my...yesss...I'm cumming!"
+        the_person "Ah! Yes [the_person.mc_title]! Right there on my... yesss... I'm cumming!"
         "She closes her eyes and goes into a frenzy of multiple orgasms."
     else:
-        the_person "Oh god, that's it...keep going...yes [the_person.mc_title]..yes! Yes! YES!"
+        the_person "Oh god, that's it... keep going... yes [the_person.mc_title]... yes! Yes! YES!"
     return
 
 label cougar_climax_responses_anal(the_person):
@@ -246,7 +246,7 @@ label cougar_seduction_accept_crowded(the_person):
             "[the_person.possessive_title] smiles and devours your body with her eyes, making sure nobody around you notices."
             the_person "Okay, but we need to be careful. I don't think people would understand our relationship. Let's find someplace quiet."
         else:
-            the_person "Oh my, [the_person.mc_title] ... why don't you take care of me right here!"
+            the_person "Oh my, [the_person.mc_title]... why don't you take care of me right here!"
     else:
         $ so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 60:
@@ -267,7 +267,7 @@ label cougar_seduction_accept_alone(the_person):
     else:
         $ so_title = SO_relationship_to_title(the_person.relationship)
         if the_person.sluttiness + (5*the_person.get_opinion_score("cheating on men")) > 60:
-            the_person "Come on [the_person.mc_title], lets get going, screw my [so_title]!"
+            the_person "Come on [the_person.mc_title], let's get going, screw my [so_title]!"
         else:
             the_person "I have a [so_title], I shouldn't be doing this..."
             "Her eyes tell quite a different story."
@@ -691,7 +691,7 @@ label cougar_flirt_response_affair(the_person):
                     mc.name "Well that would just be cruel of me..."
                     $ mc.change_locked_clarity(10)
                     "You put your arm around [the_person.possessive_title] and rest your hand on her ass."
-                    mc.name "...If I got you all excited thinking about the next time I'm going to fuck you."
+                    mc.name "... If I got you all excited thinking about the next time I'm going to fuck you."
                     "She leans her body against yours for a moment and sighs happily. You give her butt a final slap and let go of her."
 
         else: #She's shy or nervous about being discovered
@@ -739,7 +739,7 @@ label cougar_flirt_response(the_person):
             "She seems more worried about being caught than flirting with you."
     else:
         if the_person.sluttiness > 50:
-            the_person "Oh my...hmm... Thank you, [the_person.mc_title]."
+            the_person "Oh my... hmm... Thank you, [the_person.mc_title]."
             "[the_person.possessive_title] smiles at you and turns around slowly, giving you a full look at her body."
             the_person "Thank you for noticing me."
         else:
@@ -845,7 +845,7 @@ label cougar_condom_bareback_demand(the_person):
 label cougar_cum_face(the_person):
     if the_person.has_cum_fetish() or the_person.obedience > 130:
         if the_person.has_cum_fetish() or the_person.effective_sluttiness() > 70 or the_person.get_opinion_score("cum facials") > 0:
-            $ pronoun = person_body_shame_string(the_person, "little cum slut")
+            $ pronoun = person_body_shame_string(the_person.body_type, "little cum slut")
             the_person "Ah... do you like to see my face covered [the_person.mc_title]? Am I your good [pronoun]?"
         else:
             the_person "Oh, it's everywhere! Next time be more careful, I'm only doing this for you."
@@ -984,8 +984,8 @@ label cougar_cum_vagina(the_person):
 label cougar_cum_anal(the_person):
     if the_person.obedience > 130:
         if the_person.sluttiness > 50:
-            $ pronoun = person_body_shame_string(the_person, "little anal slave")
-            the_person "Ah...yes pump your seed into your [pronoun]?"
+            $ pronoun = person_body_shame_string(the_person.body_type, "little anal slave")
+            the_person "Ah... yes pump your seed into your [pronoun]?"
         else:
             the_person "Oh my, you filled up my bottom, remember [the_person.mc_title], I'm only doing this for you."
     else:
@@ -1033,8 +1033,7 @@ label cougar_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "[the_person.mc_title]! Why do you want me to watch that!"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
@@ -1057,7 +1056,7 @@ label cougar_sex_watch(the_person, the_sex_person, the_position):
 
     else:
         $ the_person.draw_person(emotion = "happy")
-        $ pronoun = person_body_shame_string(the_sex_person, "slut")
+        $ pronoun = person_body_shame_string(the_sex_person.body_type, "slut")
         the_person "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
         "[title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
 
@@ -1296,15 +1295,15 @@ label cougar_licking_pussy_taboo_break(the_person):
         the_person "Oh what a gentleman I have! Why don't you get down to business, [the_person.mc_title]!"
     elif the_person.love >= 30:
         the_person "You're such a gentleman [the_person.mc_title], but you don't have to do that."
-        mc.name "I don't think you understand. I {i}want{/i} to eat you out, I'm not doing it as a favour."
+        mc.name "I don't think you understand. I {i}want{/i} to eat you out, I'm not doing it as a favor."
         "[the_person.title] almost seems confused by the idea."
         the_person "Oh... Well then, I suppose you can get right to it."
     else:
         the_person "You're a gentleman [the_person.mc_title], but you don't need to do that."
         if not the_person.has_taboo("sucking_cock"):
-            the_person "It's flattering that you'd want to return the favour though, so thank you."
+            the_person "It's flattering that you'd want to return the favor though, so thank you."
 
-        mc.name "No, I don't think you understand what I'm saying. I {i}want{/i} to eat you out, I'm not doing it as a favour."
+        mc.name "No, I don't think you understand what I'm saying. I {i}want{/i} to eat you out, I'm not doing it as a favor."
         "[the_person.title] almost seems confused by the idea."
         the_person "Really? I mean... I just haven't met many men who {i}want{/i} to do that."
         mc.name "Well you have one now. Just relax and enjoy yourself."
@@ -1466,7 +1465,7 @@ label cougar_bare_tits_taboo_break(the_person, the_clothing):
         if the_person.has_large_tits() and the_clothing.underwear:
             the_person "Besides, a girl like me needs a little support. These aren't exactly light."
         mc.name "Come on [the_person.title]. You're gorgeous, I'm just dying to see more of you."
-        the_person "Well I'm glad I have that effect on you. I suppose...I could make an exception..."
+        the_person "Well I'm glad I have that effect on you. I suppose... I could make an exception..."
         "She takes a moment to think, then sighs and nods."
         the_person "You can take off my [the_clothing.display_name] and have a look. Just be kind to me, I'm feeling very vulnerable."
     return

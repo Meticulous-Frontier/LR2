@@ -462,7 +462,7 @@ label increase_slave_submission_label(the_person):
         $ the_person.change_stats(arousal = 10)
         "Suddenly you pull you hand back and start giving her the spanking she deserves."
         "SMACK! SMACK! SMACK!"
-        the_person "Please Master...OUCH, I'll try to obey...AH...your wishes...OW, please let me...OUCH...prove it to you..."
+        the_person "Please Master... OUCH, I'll try to obey... AH... your wishes... OW, please let me... OUCH... prove it to you..."
         mc.name "Be quiet, slave and take your punishment with pride."
         "You keep on punishing her for another minute, while she tries to stifle her cries."
         mc.name "Very well, slave, I will be demanding your complete submission next time."

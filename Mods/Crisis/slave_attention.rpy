@@ -21,6 +21,8 @@ label slave_attention_crisis_action_label():
     if the_person is None:
         return
 
+    $ old_location = mc.location
+
     if the_person.sex_record.get("Last Sex Day", 0) > day + 21: # she is very upset
         $ the_person.draw_person(emotion = "angry")
         the_person "[the_person.mc_title]! You have been neglecting your slave, don't you want me to be your slave anymore?"
@@ -62,11 +64,10 @@ label slave_attention_crisis_action_label():
                             the_person.change_arousal(5)
                             renpy.pause(.8)
 
-                    $ mc.change_arousal(20)
-                    $ mc.change_energy(-20)
+                    $ mc.change_stats(arousal = 20, energy = -20)
 
                     if the_person.arousal >= 100:
-                        the_person "Oh my god, I'm cumming....Aaargh....YES....please [the_person.mc_title], continue abusing my body..."
+                        the_person "Oh my god, I'm cumming... Aaargh... YES... please [the_person.mc_title], continue abusing my body..."
                         $ the_person.have_orgasm(half_arousal = True, the_position = "against_wall")
 
                     "Looking at her welted body, you decide what to do next."
@@ -86,7 +87,7 @@ label slave_attention_crisis_action_label():
 
                     jump slave_attention_comfort_menu
 
-                "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 and had sex before{image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
+                "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png} and had sex{/size}{/color} (disabled)" if mc.energy < 40 or the_person.has_taboo("vaginal_sex"):
                     pass
                 "Dildo her" if mc.energy >= 40 and perk_system.has_item_perk("Dildo"):
                     "You pick up one of the bigger dildos from your cabinet."
@@ -100,7 +101,7 @@ label slave_attention_crisis_action_label():
                         the_person "Please [the_person.mc_title], stick that thing into me, I need to cum so badly."
 
                     jump slave_attention_comfort_menu
-                "Dildo her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
+                "Dildo her\n{color=#ff0000}{size=18}Requires at least 40 {image=gui/extra_images/energy_token.png} and dildo{/size}{/color} (disabled)" if mc.energy < 40 or not perk_system.has_item_perk("Dildo"):
                     pass
                 "Let her go":
                     mc.name "That's enough for now, you can get dressed."
@@ -111,7 +112,7 @@ label slave_attention_crisis_action_label():
 
         "Release her":
             mc.name "Well, [the_person.title], I don't think this is working out, although I'm not unsatisfied with your performance, this is not working out."
-            the_person "Please Master, give me another chance...you can punish me hard if you need to."
+            the_person "Please Master, give me another chance... you can punish me hard if you need to."
             if not the_person.vagina_visible():
                 "Pleading she turns around stripping her bottom bare, waiting for your decision."
                 $ the_person.strip_outfit(position = "doggy", exclude_upper = True)
@@ -131,7 +132,7 @@ label slave_attention_crisis_action_label():
                             the_person.change_arousal(5)
                             renpy.pause(.8)
 
-                        mc.change_arousal(20)
+                        mc.change_stats(arousal = 20, energy = -20)
 
                     menu:
                         "Fuck her" if not the_person.has_taboo("vaginal_sex") and mc.energy >= 40:
@@ -145,7 +146,7 @@ label slave_attention_crisis_action_label():
                             the_person "As you wish, [the_person.mc_title]."
                             $ the_person.change_stats(happiness = 5, obedience = 5)
 
-                        "Fuck her\n{color=#ff0000}{size=18}Requires at least 40 and had sex before{image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if mc.energy < 40:
+                        "Fuck her\n{color=#ff0000}{size=18}Requires at least 40{image=gui/extra_images/energy_token.png} and had sex{/size}{/color} (disabled)" if mc.energy < 40 or the_person.has_taboo("vaginal_sex"):
                             pass
 
                         "Send her away":
@@ -167,13 +168,18 @@ label slave_attention_crisis_action_label():
 
         "Ignore her":
             mc.name "So you think you can make any demands from me now?"
-            the_person "Oh no, [the_person.mc_title], I would never do that...I was just hoping you would use your slave."
+            the_person "Oh no, [the_person.mc_title], I would never do that... I was just hoping you would use your slave."
             mc.name "Well you thought wrong, get up and get out of here."
             $ the_person.draw_person(position = "walking_away")
             "She quickly jumps to her feet and rushes out of your dungeon."
             $ the_person.change_stats(happiness = -3, obedience = 1)
             the_person "Yes Master, please forgive me..."
 
-    $ the_person.apply_planned_outfit()
     $ clear_scene()
+    $ the_person.apply_planned_outfit()
+    if old_location != dungeon:
+        "You move back to [old_location.formal_name]."
+    $ mc.change_location(old_location)
+    $ mc.location.show_background()
+    $ old_location = None
     return

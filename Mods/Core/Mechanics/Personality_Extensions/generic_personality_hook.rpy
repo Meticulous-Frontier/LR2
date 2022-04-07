@@ -34,7 +34,7 @@ init 2 python:
         if age is None: # use linear decreasing distribution in age range (more young than old)
             max_age = age_ceiling or 55
             min_age = age_floor or 18
-            age = int(math.floor(abs(renpy.random.random() - renpy.random.random()) * (1 + max_age - min_age) + min_age))
+            age = int(floor(abs(renpy.random.random() - renpy.random.random()) * (1 + max_age - min_age) + min_age))
 
         if relationship is None:
             if age < 21:
@@ -49,15 +49,15 @@ init 2 python:
         if kids is None:
             kids = 0
             if relationship == "Single":
-                kids += get_random_from_list([0, 0, 0, 0, 1])
+                kids += renpy.random.choice([0, 0, 0, 0, 1])
             if relationship == "Girlfriend":
-                kids += get_random_from_list([0, 0, 0, 1, 1])
+                kids += renpy.random.choice([0, 0, 0, 1, 1])
             if relationship == "Fiancée":
-                kids += get_random_from_list([0, 0, 1, 1, 1])
-                kids += get_random_from_list([0, 0, 1, 1, 1])
+                kids += renpy.random.choice([0, 0, 1, 1, 1])
+                kids += renpy.random.choice([0, 0, 1, 1, 1])
             if relationship == "Married":
-                kids += get_random_from_list([0, 1, 1, 1, 1])
-                kids += get_random_from_list([0, 1, 1, 1, 1])
+                kids += renpy.random.choice([0, 1, 1, 1, 1])
+                kids += renpy.random.choice([0, 1, 1, 1, 1])
 
             if age < 25:
                 kids -= 1
@@ -81,9 +81,9 @@ init 2 python:
                 bonus_suggest += 10
             elif personality.base_personality_prefix == relaxed_personality.personality_type_prefix:
                 bonus_suggest += 3
-            elif personality.base_personality_prefix == reserved_personality.personality_type_prefix:
-                bonus_suggest -= 3
             elif personality.base_personality_prefix == introvert_personality.personality_type_prefix:
+                bonus_suggest -= 3
+            elif personality.base_personality_prefix == reserved_personality.personality_type_prefix:
                 bonus_suggest -= 5
 
         if return_character is None: #Either we aren't getting a pre-made, or we are out of them.
@@ -207,14 +207,14 @@ init 2 python:
     def ensure_opinion_on_subject(person, opinions):
         if not any(x[0] in person.opinions for x in opinions):
             the_opinion_key = get_random_from_list(opinions)
-            degree = get_random_from_list([-2,-1,1,2])
+            degree = renpy.random.choice([-2,-1,1,2])
             person.opinions[the_opinion_key] = [degree, False]
         return
 
     def ensure_sexy_opinion_on_subject(person, opinions):
         if not any(x[0] in person.opinions for x in opinions):
             the_opinion_key = get_random_from_list(opinions)
-            degree = get_random_from_list([-2,-1,1,2])
+            degree = renpy.random.choice([-2,-1,1,2])
             person.sexy_opinions[the_opinion_key] = [degree, False]
         return
 
@@ -222,11 +222,11 @@ init 2 python:
         if not any(x[0] in person.sexy_opinions for x in opinions):
             the_opinion_key = get_random_from_list(opinions)
             if person.sex_skills[sex_skill] >= 3: # positive skew
-                degree = get_random_from_list([1,2])
+                degree = renpy.random.choice([1,2])
             elif person.sex_skills[sex_skill] < 1: # negative skew
-                degree = get_random_from_list([-2, -1])
+                degree = renpy.random.choice([-2, -1])
             else: # random
-                degree = get_random_from_list([-2,-1,1,2])
+                degree = renpy.random.choice([-2,-1,1,2])
             person.sexy_opinions[the_opinion_key] = [degree, False]
         return
 
@@ -296,7 +296,7 @@ init 2 python:
             return
 
         base_wardrobe = Wardrobe("[person.name]_[person.last_name]_wardrobe")
-        if persistent.low_memory_wardrobes:
+        if not force and persistent.low_memory_wardrobes:
             person.wardrobe = base_wardrobe
             return
 
@@ -367,35 +367,37 @@ init 2 python:
         if not "Schedule" in globals():
             return
 
-        person.set_override_schedule(None, the_times = [4])
         if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]) or person in stripclub_strippers:
             return  # no party for the working girls
         if person.pregnancy_is_visible():
             return  # no party for girls who already show the baby bump
 
+        # clear old party schedule (clear after stripper check as to not clear her override schedule during foreclosed phase)
+        person.set_override_schedule(None, the_times = [4])
+
         count = 0
         party_destinations = get_party_destinations()
         if person.get_opinion_score("Mondays") > 0:
-            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [0], the_times=[4])
+            person.set_override_schedule(renpy.random.choice(party_destinations), the_days = [0], the_times=[4])
             count += 1
         if person.get_opinion_score("Fridays") > 0:
-            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [4], the_times=[4])
+            person.set_override_schedule(renpy.random.choice(party_destinations), the_days = [4], the_times=[4])
             count += 1
         if person.get_opinion_score("the weekend") > 0:
-            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [5], the_times=[4])
-            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [6], the_times=[4])
+            person.set_override_schedule(renpy.random.choice(party_destinations), the_days = [5], the_times=[4])
+            person.set_override_schedule(renpy.random.choice(party_destinations), the_days = [6], the_times=[4])
             count += 2
 
         while count < 2:
             rnd_day = renpy.random.randint(0, 6)
-            person.set_override_schedule(get_random_from_list(party_destinations), the_days = [rnd_day], the_times=[4])
+            person.set_override_schedule(renpy.random.choice(party_destinations), the_days = [rnd_day], the_times=[4])
             count += 1
         return
 
     def create_bimbo():
         # add one bimbo to the game (on start of game)
         person = make_person(age=renpy.random.randint(21, 35), tits="DD", face_style = "Face_4", skin = "tan", stat_array = [4, 1, 2],
-            hair_colour = ["platinum blonde", [0.789, 0.746, 0.691,1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality, force_random = True,
+            hair_colour = ["platinum blonde", [.789, .746, .691, 1]], hair_style = messy_hair, eyes = ["light blue", [0.60, 0.75, 0.98, 1.0]], personality = bimbo_personality, force_random = True,
             forced_opinions = [["high heels", 2, False]],
             forced_sexy_opinions = [["skimpy outfits", 2, False]])
         person.generate_home()
@@ -485,7 +487,7 @@ init 2 python:
         if len(list_of_unique_characters) == 0: # no more pre-made left
             return None
 
-        person = get_random_from_list(list_of_unique_characters)
+        person = renpy.random.choice(list_of_unique_characters)
 
         # improve stats for pre-made characters to be on par with random generated characters
         if recruitment_skill_improvement_policy.is_active():
@@ -511,7 +513,7 @@ init 2 python:
         lily.wardrobe = lily.wardrobe.merge_wardrobes(wardrobe_from_xml("Lily_Extended_Wardrobe"), keep_primary_name = True)
 
         # remove strange outfits (they should not be in her wardrobe at all)
-        mom.wardrobe.remove_outfit("mom_apron")
+        mom.wardrobe.remove_outfit("Mom_Apron")
         mom.wardrobe.remove_outfit("lingerie_1")
         lily.wardrobe.remove_outfit("pink_lingerie")
         stephanie.wardrobe.remove_outfit("Nude")
@@ -521,7 +523,7 @@ init 2 python:
 
     def create_unique_character_list():
         # use extend when adding a list to another list
-        unique_character_list.extend([mom, lily, aunt, cousin, stephanie, alexia, nora, emily, christina])
+        unique_character_list.extend([mom, lily, aunt, cousin, stephanie, alexia, nora, emily, christina, city_rep])
 
         # mod unique characters (check for existence first)
         if "salon_manager" in globals():

@@ -74,7 +74,7 @@ init 2:
                 spacing 70
                 hbox:
                     spacing 10
-                    textbutton given_uniform.outfit.name:
+                    textbutton "[given_uniform.outfit.name]":
                         xsize 250
                         yanchor 0.5
                         yalign 0.5
@@ -99,13 +99,13 @@ init 2:
                         background "#B14365"
                         hover_background "#143869"
                 #null
-                use uniform_button(state = given_uniform.full_outfit_flag, is_sensitive = given_uniform.can_toggle_full_outfit_state(), toggle_function = given_uniform.set_full_outfit_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.overwear_flag, is_sensitive = given_uniform.can_toggle_overwear_state(), toggle_function = given_uniform.set_overwear_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.underwear_flag, is_sensitive = given_uniform.can_toggle_underwear_state(), toggle_function = given_uniform.set_underwear_flag, outfit_preview = given_uniform.outfit)
+                use uniform_button(state = given_uniform.full_outfit_flag, is_sensitive = given_uniform.can_toggle_full_outfit_state(), toggle_function = given_uniform.set_full_outfit_flag)
+                use uniform_button(state = given_uniform.overwear_flag, is_sensitive = given_uniform.can_toggle_overwear_state(), toggle_function = given_uniform.set_overwear_flag)
+                use uniform_button(state = given_uniform.underwear_flag, is_sensitive = given_uniform.can_toggle_underwear_state(), toggle_function = given_uniform.set_underwear_flag)
 
                 null #Spacing purposes
-                use uniform_button(state = given_uniform.stripper_flag, is_sensitive = True, toggle_function = given_uniform.set_stripper_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.waitress_flag, is_sensitive = True, toggle_function = given_uniform.set_waitress_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.bdsm_flag, is_sensitive = True, toggle_function = given_uniform.set_bdsm_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.manager_flag, is_sensitive = True, toggle_function = given_uniform.set_manager_flag, outfit_preview = given_uniform.outfit)
-                use uniform_button(state = given_uniform.mistress_flag, is_sensitive = True, toggle_function = given_uniform.set_mistress_flag, outfit_preview = given_uniform.outfit)
+                use uniform_button(state = given_uniform.stripper_flag, is_sensitive = True, toggle_function = given_uniform.set_stripper_flag)
+                use uniform_button(state = given_uniform.waitress_flag, is_sensitive = True, toggle_function = given_uniform.set_waitress_flag)
+                use uniform_button(state = given_uniform.bdsm_flag, is_sensitive = True, toggle_function = given_uniform.set_bdsm_flag)
+                use uniform_button(state = given_uniform.manager_flag, is_sensitive = True, toggle_function = given_uniform.set_manager_flag)
+                use uniform_button(state = given_uniform.mistress_flag, is_sensitive = True, toggle_function = given_uniform.set_mistress_flag)

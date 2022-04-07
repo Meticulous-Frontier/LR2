@@ -97,7 +97,7 @@ init -2 python: #Requirement Functions
     def ellie_never_been_kissed_requirement(the_person):
         if ellie_is_working_on_nanobots() and ellie.sluttiness >= 20:
             return True
-        if ellie.sluttiness > 40:
+        if ellie.location == mc.business.r_div and ellie.sluttiness > 40 and mc.business.is_open_for_business():
             return True
         return False
 
@@ -202,6 +202,7 @@ label ellie_start_intro_note_label():
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] gets up and leaves your office. This is a precarious situation, and you can't help but worry about it."
     $ clear_scene()
+    $ mc.location.show_background()
     $ mc.business.add_mandatory_crisis(ellie_meet_ellie_intro)
     #TODO link next scene.
     return
@@ -304,7 +305,7 @@ label ellie_head_researcher_halfway_intro_label():
     the_person "I gave him a description of the blackmailer, and he finally got back to me this morning."
     the_person "The company launched an investigation trying to figure out who leaked the bots, but they got the wrong person."
     the_person "The company came down hard on a relatively new person. A woman they had hired about a year ago. A fresh computer science college graduate from University of Alabama..."
-    mc.name "Ahhhhh"
+    mc.name "Ahhhhh."
     the_person "He sent me her basic details..."
     "[the_person.possessive_title] hands you a dossier she has put together on this person. The first thing you notice is her red hair."
     the_person "[ellie.name] [ellie.last_name]. Redhead, southern computer expert."
@@ -326,11 +327,12 @@ label ellie_head_researcher_halfway_intro_label():
     mc.name "Alright. Next time I meet with her, I'll consider trying to hire her. If nothing else, maybe I can at least scare her off."
     the_person "Okay. Let me know if there is anything else I can help out with, [the_person.mc_title]!."
     $ clear_scene()
-    "[the_person.possessive_title] gets up and leaves you a lone in your office."
+    "[the_person.possessive_title] gets up and leaves you alone in your office."
     "You meet again with [ellie.name] on Thursday night. You feel like you could definitely hire her."
     "WARNING: If you want to hire [ellie.name], make sure you have an open employee position! You may miss the opportunity to hire her if you don't!"
     #TODO link up next event.
     $ mc.business.add_mandatory_crisis(ellie_end_blackmail)
+    $ mc.location.show_background()
     return
 
 label ellie_unnecessary_payment_label():    #Use this scene each week if MC can't find out info on Ellie for some reason (head researcher fired, etc)
@@ -395,7 +397,7 @@ label ellie_self_research_identity_label():
     "You run a search for local job applications looking for work, with that company as a previous employer."
     "There are a couple that come up, but one specifically immediately jumps out at you. Her picture is perfect."
     $ ellie.draw_person()
-    "[ellie.name] [ellie.last_name]. Graduate of University of Alabama in Computer Science. Worked at the other company for 6 months. Looking for non IT related work."
+    "[ellie.name] [ellie.last_name]. Graduate of University of Alabama in Computer Science. Worked at the other company for 6 months. Looking for non-IT-related work."
     "It HAS to be her! It's just too perfect."
     "You feel conflicted about this. Surely, this is the girl that is blackmailing you... but you are also partially responsible for it, having acquired the nanobots in the first place."
     "Her previous employer must have blamed her for the leak. Now they are keeping her from finding work in her field of study with a non-compete agreement."
@@ -467,6 +469,8 @@ label ellie_end_blackmail_label():
     "You exchange some information with [the_person.title]. You feel pretty certain she'll decide to stick around."
     $ mc.business.add_mandatory_crisis(ellie_work_welcome)
     $ mc.location.lighting_conditions = standard_outdoor_lighting
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
     return
 
 label ellie_work_welcome_label():
@@ -495,6 +499,7 @@ label ellie_work_welcome_label():
     $ mc.business.add_employee_hr(the_person)
     $ the_person.set_schedule(None, the_times = [1,2,3])    # free roam when not working
     $ mc.business.add_mandatory_crisis(ellie_work_welcome_monday)
+    $ mc.location.show_background()
 
     return
 
@@ -523,7 +528,7 @@ label ellie_work_welcome_monday_label():
     ellie "I... I get it that you are using the nanobots for... fornication..."
     ellie "So I looked through those programs a bit. There are definitely some gains to be made in those programs."
     ellie "I'm not saying I agree with what you are doing with them, but the programs themselves look like you just slapped them together over a weekend or something."
-    mc.name "That's.... basically what we did. The head researcher had a contact who put together the programs for us over a weekend..."
+    mc.name "That's... basically what we did. The head researcher had a contact who put together the programs for us over a weekend..."
     ellie "You... bless your hearts. You are lucky he didn't put in some kinda back door or tracking program in there. He was probably just lazy."
     ellie "Anyway, I think I can improve those more for you, though if I'm honest, these bots are cutting edge tech. Some improvements might need more research into the bots themselves first."
     $ mc.business.it_director = the_person
@@ -534,13 +539,14 @@ label ellie_work_welcome_monday_label():
     ellie "So, here's the first set of things I can work on. Take a look and let me know if you want me to start on something."
     call screen it_project_screen()
     if mc.business.IT_project_in_progress:
-        ellie "Okay, I have starting point. If you decide to have me work on something else just come talk to me."
+        ellie "Okay, I have a starting point. If you decide to have me work on something else just come talk to me."
     else:
         ellie "Alright well, when you decide what you want me to work on, let me know, I'll be in HR."
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] gets up and starts to walk away. You have now unlocked IT projects!"
     "Talk to your IT director to change projects when she is at work. If she is working on developing a new project, she will be in the Research Department."
     $ ellie.add_unique_on_room_enter_event(ellie_never_been_kissed)
+    $ mc.location.show_background()
     return
 
 
@@ -623,14 +629,13 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "You slowly start to knead her curvy cheeks. They are supple and soft and feel amazing in your hands."
     the_person "Mmm..."
     $ the_person.change_arousal(5) #65
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
-    "[the_person.title] let's out a little moan. She slowly relaxes as more as you continue to rub and caress her rear."
+    "[the_person.title] lets out a little moan. She slowly relaxes further as you continue to rub and caress her rear."
     mc.name "See? Rubbing your back feels good, and rubbing down here feels a little bit better, doesn't it?"
     the_person "It does..."
     "She leans forward and relaxes more, just enjoying the touch of your hands on her body. You really need to take this slow, so you take your time rubbing for several minutes."
     "However, you won't be able to make her cum just from this. Eventually it is time to move on."
-    mc.name "Alright, now I'm going to need you turn around, so I can keep making you feel good."
+    mc.name "Alright, now I'm going to need you to turn around, so I can keep making you feel good."
     "[the_person.possessive_title] just nods. She doesn't say a word but turns around for you."
     $ the_person.draw_person(position = "walking_away")
     "You run your hands along her hips, to her front and along her belly. You get close to her so her body is right up against yours."
@@ -639,14 +644,13 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     mc.name "Not unless you want me to. It'll be just like I'm rubbing your back, but it'll feel even better, I promise."
     "[the_person.title] doesn't respond, but just waits. You know you are pushing boundaries here, so you proceed carefully."
     "You let both hands creep up her belly until they reach the bottom of her rib cage. You slide them up a bit more until you are cupping the bottom of her tits."
-    the_person "Ahhhhh...."
+    the_person "Ahhhhh..."
     $ the_person.change_arousal(5) #70
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(20)
     "You start to grope and massage her tits earnestly now, being careful to avoid her sensitive nipples. Her breathing is getting heavier and an occasional moan escapes her lips."
     mc.name "It's nice, isn't it? Doesn't it make you feel good?"
     the_person "Yeah... It's good... but weird too. It's making me all warm... down there..."
-    mc.name "That is arousal building up. We want to build that up as much as we can, and it will make it feel amazing when it releases."
+    mc.name "That is arousal building up. We want to build that up as much as we can, and it will make you feel amazing when it releases."
     the_person "I... I dunno about that, but keep doing what you're doing... it's nice..."
     "The weight of her heavy tits feels great in your hands. You really wish you could touch her flesh there, but for now you need to take things one step at a time."
     "When you feel her arousal start to plateau, you make your next move. With two fingers and a thumb, you start to knead her engorged nipples."
@@ -654,7 +658,6 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     the_person "Ah!"
     "[the_person.possessive_title] cries out and for a second her knees buckle. She catches herself, but when she straightens out, her body rubs up against yours."
     "You've been rock hard throughout this whole process, but when she straightens up her ass rubs up against you, causing you to moan."
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(30)
     "Her body goes rigid."
     the_person "Ah! Was that... your... your thing!?!"
@@ -673,7 +676,6 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "Your left hand still on her tits, you move your right hand down her body and between her legs."
     "When you start to apply pressure on her cunt through her clothes she starts to melt. Her hips move a bit on their own."
     $ the_person.change_arousal(10) #90
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     the_person "Oh Lordie... forgive me..."
     "[the_person.title]'s hip movements have her ass rubbing up against you now. You can't help but moan a bit at the contact with the red haired belle."
@@ -683,7 +685,6 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     mc.name "You can move your hips a bit. It will help you control the pace to something that feels good to you, and it'll feel nice for me too."
     the_person "... okay..."
     "Instinctually, [the_person.possessive_title] starts to move her hips forward and backwards a bit, helping set a pace that feels best for her."
-    $ mc.change_arousal(10)
     $ mc.change_locked_clarity(50)
     "You can't help pushing your hips a bit up against her as well. It feels nice to have your cock against her ass."
     "You wish you just rip the clothes off between you and her and bend her over your desk, but you know she isn't ready for that yet."
@@ -768,6 +769,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
         $ the_person.change_stats(happiness = 10, love = 5, obedience = 10)
     $ clear_scene()
     "You dismiss her. After you get yourself cleaned up, you get back to work."
+    $ mc.location.show_background()
     return
 
 label ellie_grope_followup_label():
@@ -779,7 +781,7 @@ label ellie_grope_followup_label():
     $ ceo_office.show_background()
     "You take her to your office and close the door. You offer to let her sit down but she declines."
     the_person "I'll keep this short, I just didn't want any other girls to hear this..."
-    the_person "I'm sorry for... yah know... peein my pants like that..."
+    the_person "I'm sorry for... yah know... peeing my pants like that..."
     $ the_person.draw_person(emotion = "angry")
     the_person "But to be fair, ya'll didn't tell me something like that could happen!"
     mc.name "[the_person.title]... did it feel good? When that happened?"
@@ -787,17 +789,18 @@ label ellie_grope_followup_label():
     mc.name "[the_person.title]... I don't think you peed yourself, I think you just had an orgasm."
     the_person "I had a... a what now?"
     mc.name "[the_person.title], have you ever masturbated?"
-    the_person "What the heckin kind of question is that? Of course not, that's for unsavory folk."
+    the_person "What the hecking kind of question is that? Of course not, that's for unsavory folk."
     $ the_person.draw_person(emotion = "sad")
     "You sigh. She is struggling in her brain to overcome her sexual desires, and being exposed to your serums is starting to overwhelm her."
     "She is making progress, but you can tell it is going to be a long road before you can fully corrupt her."
     mc.name "I tell you what. I'm going to email you some sexual health websites. I want you to do some research on things this weekend."
     mc.name "With the work we do here on serums, it is important that you have a good understanding what is actually going on with your body."
-    the_person "You're sayin... this is a work assignment?"
+    the_person "You're saying... this is a work assignment?"
     mc.name "That's right. It will help you do your job better."
     mc.name "I'm not saying you have to masturbate, but getting to know your body better might help you better understand what we are trying to achieve here, in general."
     the_person "Okay, I'll take a look."
     $ clear_scene()
+    $ mc.location.show_background()
     "[the_person.possessive_title] leaves your office. You take a few minutes and email her some links to positive sex health websites and information."
     $ mc.business.add_mandatory_morning_crisis(ellie_text_message_apology)
     return
@@ -838,7 +841,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     mc.name "What can I do for you?"
     the_person "Are blue balls real?"
     "Wow she is getting right to the point. You have to smile at the way she pronounced blue though."
-    mc.name "Wow, umm.. yeah, yeah they are."
+    mc.name "Wow, umm... yeah, yeah they are."
     the_person "And... and they hurt?"
     mc.name "Yeah, they can, I guess it depends on the situation..."
     the_person "The... other day... when you touched me? Did you get turned on too?"
@@ -863,7 +866,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     mc.name "Why? I mean, it's what you call it. It's okay, say it. Tell me what you want me to do."
     "[the_person.possessive_title] takes a deep breath."
     the_person "[the_person.mc_title], can I give you a handjob?"
-    mc.name "...and?"
+    mc.name "... and?"
     the_person "Wha? and?"
     mc.name "What do you say when you are asking your boss for something?"
     $ the_person.change_obedience(5)
@@ -875,7 +878,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ the_person.change_arousal(5)
     the_person "Okay [the_person.mc_title]..."
     "Her hands have a little bit of a shake, but she slowly brings them up to your pants."
-    mc.name "There you go, now just rub your hands along my pants now until you find it."
+    mc.name "There you go, now just rub your hands along my pants until you find it."
     "She does as you order, and is soon rubbing her hand up and down your cock through your pants."
     $ mc.change_arousal(5)
     mc.name "Mmm, that's it... now pull down the zipper carefully..."
@@ -903,7 +906,6 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     "[the_person.title] gives you a few softer strokes now. They are much more pleasant."
     $ the_person.increase_sex_skill("Foreplay", 4, add_to_log = True)
     $ mc.change_locked_clarity(20)
-    $ mc.change_arousal(10) # 15
     $ the_person.draw_person(position = "blowjob")
     "[the_person.title] gets down on her knees next to you, watching you very closely as she starts her first ever handjob."
     "Thankfully, her hand is very soft as she strokes you off, and the taboo of defiling this southern belle makes it even hotter."
@@ -915,7 +917,6 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ the_person.strip_to_tits(position = "blowjob")
     $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(5)
-    $ mc.change_arousal(10) #25
     "Her tits now out for your viewing pleasure, this little session is going great. When she looks back at your dick there is a little pre-cum leaking from it."
     the_person "Ah! It's got stuff coming out!"
     mc.name "Yeah, that is pre-cum. It starts to come out a little bit when I get really turned on."
@@ -935,10 +936,9 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     the_person "Okay?"
     "You take her hand and bring it up to your mouth. You get a big bit of saliva and spit it into her hand."
     mc.name "Now keep going."
-    the_person "Ohhh.... okay..."
+    the_person "Ohhh... okay..."
     $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(5)
-    $ mc.change_arousal(20) #45
     "She resumes stroking you now, and the sensations are much more pleasant. When her hand gets a little dry, she gets the idea and spits into her own hand before resuming."
     "This is turning into an almost acceptable handjob. She might actually be able to get off."
     if not the_person.is_willing(tit_fuck):
@@ -956,7 +956,6 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     "[the_person.title] uses her hands to move her big tits up and down your cock. The soft flesh feels amazing sliding up and down."
     $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(5)
-    $ mc.change_arousal(20) #65
     mc.name "Ah, this feels amazing. I'm not doing to last very long like this. You know what is going to happen when I finish... right?"
     the_person "It's gonna spurt out... right?"
     mc.name "Yeah."
@@ -967,12 +966,10 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     mc.name "Spit some."
     the_person "Okay."
     "She stops moving her tits for a second to spit down into her cleaves. She moves her breasts up and down, slathering you up before continuing."
-    $ mc.change_arousal(20) #85
     $ mc.change_locked_clarity(50)
     mc.name "Oh god. [the_person.title], I'm almost there. Keep going!"
     the_person "Okay [the_person.mc_title]!"
     "This southern redheads big titties are amazing, bouncing up and down around your cock. It's getting ready to burst."
-    $ mc.change_arousal(20) #85
     $ mc.change_locked_clarity(50)
     $ ClimaxController.manual_clarity_release(climax_type = "tits", the_person = the_person)
     $ the_person.event_triggers_dict["given_handjob"] = True
@@ -1000,6 +997,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] awkwardly turns and leaves your office. You can't help but smile."
     "She'll get used to servicing your needs in your office soon enough. For now you are content with the leap of progress you have made with her."
+    $ mc.location.show_background()
     $ the_person.add_unique_on_room_enter_event(ellie_never_tasted_cock)
     $ mc.business.add_mandatory_crisis(ellie_brings_lunch)
     return
@@ -1079,7 +1077,6 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     the_person "Ah, okay, I'll try."
     mc.name "Alright, let's take this slow. Use your hand a little to get used to it."
     "[the_person.possessive_title] takes you in her hand and gives you a couple strokes. Not long ago, she had never done this either, but now she handles your meat with skill."
-    $ mc.change_arousal(10) #10
     $ mc.change_locked_clarity(20)
     mc.name "That's it. Now, just give it a little kiss."
     the_person "Okay... mmmm..."
@@ -1087,7 +1084,6 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     mc.name "See? It's not so bad, is it?"
     the_person "Nah, it's so hot. And it smells kind of... manly..."
     "[the_person.possessive_title] begins to kiss along the underside, down towards the base, then back up to the top."
-    $ mc.change_arousal(10) #20
     $ mc.change_locked_clarity(20)
     mc.name "Mmm, that feels nice."
     "When she gets to the tip, [the_person.title] looks up at you and makes eye contact. A bit of pre-cum is starting to leak from the tip."
@@ -1099,49 +1095,43 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     else:
         the_person "The taste isn't great... but the fact that it's coming from you makes it really hot anyways..."
     #Increase drinking cum score
-    $ mc.change_arousal(15) #35
     $ mc.change_locked_clarity(30)
     mc.name "Keep going, I'll be glad to get you some more."
     "[the_person.possessive_title] starts to run her tongue around the tip now. She goes up and down at first, then circles it a few times."
     "[the_person.title] gives you a couple more strokes with her hand while she licks the tip. She stops and looks up at you."
     the_person "Okay. Here goes!"
     "[the_person.possessive_title] opens her mouth and for the first time pushes your erection inside her lips."
-    $ mc.change_arousal(15) #35
     $ mc.change_locked_clarity(40)
     $ the_person.break_taboo("sucking_cock")
     "With the tip in her mouth, [the_person.title] swirls her tongue around it a few times. It feels so good."
     "After a few seconds, she bravely pushes down a little further. She is clearly testing her limits, unsure of how far she can take it."
-    the_person "Mmmmmmm.... UNGLCK"
-    "[the_person.possessive_title] suddenly gags as she takes it a little to far. She quickly pulls off and catches her breath."
+    the_person "Mmmmmmm... UNGLCK"
+    "[the_person.possessive_title] suddenly gags as she takes it a little too far. She quickly pulls off and catches her breath."
     the_person "Stars! Sorry I..."
     mc.name "It's okay. The tip is the most sensitive part, just do what you can, but don't force it."
     the_person "Mmm... okay..."
-    $ mc.change_arousal(15) #50
     $ mc.change_locked_clarity(40)
     $ the_person.increase_sex_skill("Oral", 4, add_to_log = True)
     "[the_person.title] looks up at you as she licks at the tip again. She maintains the eye contact as she opens her mouth and starts to suck on the tip again."
     $ the_person.change_arousal(10)
     the_person "Mmm... mmm..."
     "[the_person.possessive_title] gives a couple little moans as she keeps working you over. She seems to be be really getting to it."
-    $ mc.change_arousal(20) #70
     $ mc.change_locked_clarity(40)
     "[the_person.title] is getting braver. She pushes the tip past her lips now and starts bobbing her head gently."
     mc.name "That's it. You're doing great. If it starts to get uncomfortable, you can always back off and just use your hand for a bit."
     "[the_person.title] looks at you and nods for a second, but keeps going. Her silky tongue is working wonders traveling up and down your cock."
-    $ mc.change_arousal(20) #90
     $ mc.change_locked_clarity(40)
     "The sensations are getting more intense. She's going to make you cum?"
     mc.name "[the_person.title], I'm gonna cum soon. What do you want me to do?"
     "She pulls off for a quick second."
     the_person "Whatever you want. I just want to make you feel good."
     "[the_person.possessive_title] opens up and starts sucking you off eagerly now. She is really working hard!"
-    $ mc.change_arousal(20) #110
     $ mc.change_locked_clarity(40)
     "The velvet soft tongue of [the_person.title] is driving you over the edge. What do you want to do?"
     menu:
         "Cum in her mouth":
             "You put your hand on the back of her head."
-            mc.name "Get ready, I want to cum in your mouth.... here it comes!"
+            mc.name "Get ready, I want to cum in your mouth... here it comes!"
             "With a moan you explode, your cock starts to dump its load in her eager mouth."
             $ the_person.cum_in_mouth()
             $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
@@ -1164,7 +1154,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
             the_person "That's it. Cum on my face [the_person.mc_title]!"
             $ the_person.cum_on_face()
             $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
-            $ the_person.draw_person(position = "blowjob")
+            $ the_person.draw_person(position = "kneeling1")
             "Hearing her words pushes you over the edge and your cock explodes. Spurt after spurt erupts all over her face."
             "She keeps jacking you off, and overall does a very good job of aiming your twitching manhood."
             "When the last wave finishes, you look down and survey [the_person.possessive_title]. Her face is plastered in your semen."
@@ -1215,6 +1205,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     $ mc.business.add_mandatory_crisis(ellie_brings_lunch)  #TODO delete this line with 48.1 release
     $ the_person.add_unique_on_room_enter_event(ellie_turned_on_while_working_intro)
     $ the_person.apply_planned_outfit()
+    $ mc.location.show_background()
     #"Ellie may now approach MC once in a while when she is working on nanobot programs because working on sex related code is getting in her head and she needs some relief"
     return
 
@@ -1278,7 +1269,7 @@ label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered 
 
 # Love Scenes
 label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a date in his office.
-    if ellie_has_brought_lunch_date():  #I left a scenario in game where this could occur twice. IF this event has already occured, just exit immediately.
+    if ellie_has_brought_lunch_date():  #I left a scenario in game where this could occur twice. IF this event has already occurred, just exit immediately.
         return
     $ the_person = ellie
     $ ellie.event_triggers_dict["brought_lunch"] = True
@@ -1348,8 +1339,10 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
         $ the_person.draw_person()
         "You leave your office together and go back to the work day."
 
+    $ ellie.apply_planned_outfit()
     $ mc.business.add_mandatory_crisis(ellie_dinner_date_intro)
     $ clear_scene()
+    $ mc.location.show_background()
     return
 
 label ellie_cunnilingus_office_label(the_person):

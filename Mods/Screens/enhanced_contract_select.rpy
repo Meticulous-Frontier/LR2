@@ -97,8 +97,8 @@ init 2:
 
                     use contract_aspect_grid(the_contract)
 
-                    text the_contract.description style "textbutton_text_style" size 12 text_align 0.0
-                    text "Usable designs: " + get_design_names_that_satisfy_contract(the_contract) style "textbutton_text_style" size 14 text_align 0.0
+                    text the_contract.description style "textbutton_text_style" size 14 text_align 0.0
+                    text "Usable designs: " + get_design_names_that_satisfy_contract(the_contract) style "textbutton_text_style" size 16 text_align 0.0
 
                 vbox:
                     yfill False
@@ -119,23 +119,23 @@ init 2:
             $ non_zero_aspects += 1
 
         hbox:
-            text "Doses Required: " + str(the_thing.amount_desired) style "menu_text_style" size 14 color "#fbff00"
-            text "Payout: $" + str(the_thing.price_per_dose*the_thing.amount_desired) style "menu_text_style" size 14 color "#85bb65"
+            text "Doses Required: " + str(the_thing.amount_desired) style "menu_text_style" size 16 color "#fbff00"
+            text "Payout: ${payout:,}".format(payout = __builtin__.int(the_thing.price_per_dose * the_thing.amount_desired)) style "menu_text_style" size 16 color "#85bb65"
 
             if the_thing.contract_started:
-                text "Deliver in: " + str(the_thing.contract_length - the_thing.time_elapsed) + " days" style "menu_text_style" size 14 color "#BBBBBB"
+                text "Deliver in: " + str(the_thing.contract_length - the_thing.time_elapsed) + " days" style "menu_text_style" size 16 color "#BBBBBB"
             else:
-                text "Deliver in: "+ str(the_thing.contract_length) + " days" style "menu_text_style" size 14 color "#BBBBBB"
+                text "Deliver in: "+ str(the_thing.contract_length) + " days" style "menu_text_style" size 16 color "#BBBBBB"
 
 
         grid non_zero_aspects+2 1:
             if the_thing.mental_aspect > 0:
-                text "Men: >=" + str(the_thing.mental_aspect) style "menu_text_style" size 14 color "#387aff"
+                text "Men: >=" + str(the_thing.mental_aspect) style "menu_text_style" size 16 color "#387aff"
             if the_thing.physical_aspect > 0:
-                text "Phy: >=" + str(the_thing.physical_aspect) style "menu_text_style" size 14 color "#00AA00"
+                text "Phy: >=" + str(the_thing.physical_aspect) style "menu_text_style" size 16 color "#00AA00"
             if the_thing.sexual_aspect > 0:
-                text "Sex: >=" + str(the_thing.sexual_aspect) style "menu_text_style" size 14 color "#FFC0CB"
+                text "Sex: >=" + str(the_thing.sexual_aspect) style "menu_text_style" size 16 color "#FFC0CB"
             if the_thing.medical_aspect > 0:
-                text "Med: >=" + str(the_thing.medical_aspect) style "menu_text_style" size 14 color "#FFFFFF"
-            text "Flw: <=" + str(the_thing.flaws_aspect) style "menu_text_style" size 14 color "#AAAAAA"
-            text "Attn: <=" + str(the_thing.attention) style "menu_text_style" size 14 color "#FF6249"
+                text "Med: >=" + str(the_thing.medical_aspect) style "menu_text_style" size 16 color "#FFFFFF"
+            text "Flw: <=" + str(the_thing.flaws_aspect) style "menu_text_style" size 16 color "#AAAAAA"
+            text "Attn: <=" + str(the_thing.attention) style "menu_text_style" size 16 color "#FF6249"

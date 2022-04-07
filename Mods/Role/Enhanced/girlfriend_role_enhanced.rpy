@@ -16,7 +16,7 @@ init 2 python:
             return "You already have a sleepover arranged"
         return False
 
-    def girlfriend_sleepover_requirement():
+    def girlfriend_sleepover_crisis_requirement():
         if time_of_day == 4:
             return True
         return False
@@ -51,7 +51,7 @@ init 2 python:
 
     girlfriend_sleepover_action = Action("Arrange a sleepover", girlfriend_myplace_yourplace_requirement, "girlfriend_myplace_yourplace_label",
         menu_tooltip = "Ask your girlfriend if she wants to sleep together tonight.")
-    girlfriend_sleepover = Action("Have a sleepover", girlfriend_sleepover_requirement, "girlfriend_sleepover_label")
+    girlfriend_sleepover_crisis = Action("Have a sleepover", girlfriend_sleepover_crisis_requirement, "girlfriend_sleepover_crisis_label")
     girlfriend_underwear_shopping = Action("Shop for new lingerie", girlfriend_underwear_shopping_requirement , "girlfriend_underwear_shopping_label",
         menu_tooltip = "Take your girlfriend out to shop for some exciting underwear to wear for you.")
 
@@ -74,7 +74,7 @@ init 5 python:
         mc.business.event_triggers_dict["girlfriend_person"] = person.identifier
         mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
         mc.business.event_triggers_dict["your_place"] = your_place
-        mc.business.add_mandatory_crisis(girlfriend_sleepover)
+        mc.business.add_mandatory_crisis(girlfriend_sleepover_crisis)
         return
 
     def schedule_sleepover_get_girlfriend_person():
@@ -84,14 +84,13 @@ init 5 python:
         return get_person_by_identifier(identifier)
 
     def schedule_sleepover_available():
-        if mc.business.event_triggers_dict.get("girlfriend_sleepover_scheduled", False):
-            return False
-        return True
+        return not mc.business.event_triggers_dict.get("girlfriend_sleepover_scheduled", False)
 
     def get_random_girlfriend_morning_action(person):
         possible_action_list = []
         for wakeup_scene in girlfriend_morning_action_list:
             if wakeup_scene.is_action_enabled(person):
+                wakeup_scene.args = [person]
                 possible_action_list.append(wakeup_scene)
         return get_random_from_list(possible_action_list)
 
@@ -123,10 +122,10 @@ label girlfriend_myplace_yourplace_label(the_person):
     $ mc.change_locked_clarity(15)
     $ mc.business.event_triggers_dict["girlfriend_person"] = the_person.identifier
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
-    $ mc.business.add_mandatory_crisis(girlfriend_sleepover)
+    $ mc.business.add_mandatory_crisis(girlfriend_sleepover_crisis)
     return
 
-label girlfriend_sleepover_label():
+label girlfriend_sleepover_crisis_label():
     $ the_person = schedule_sleepover_get_girlfriend_person()
     if the_person == None:
         return
@@ -246,7 +245,8 @@ label girlfriend_sleepover_label():
                                     possible_action_list.append(interruption_scene) #Build a list of valid crises from ones that pass their requirement.
                         $ interruption_action = get_random_from_list(possible_action_list)
                         if interruption_action:
-                            $ interruption_action.call_action()
+                            call expression interruption_action.effect pass (*interruption_action.args) from _call_interruption_action_girlfriend_sleepover
+                            $ del interruption_action
                         else: #default to fuck person if there isn't an interruption here.
                             call fuck_person(the_person, private = True) from _call_fuck_person_sleepover_gf_02
                             $ the_report = _return
@@ -286,7 +286,8 @@ label girlfriend_sleepover_label():
 
     $ picked_event = get_random_girlfriend_morning_action(the_person)
     if picked_event:
-        $ picked_event.call_action(the_person)
+        call expression picked_event.effect pass (*picked_event.args) from _call_picked_event_girlfriend_sleepover
+        $ del picked_event
     else:
         "You wakeup, but [the_person.possessive_title] isn't there. She must have gotten up early and left."
         $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
@@ -334,7 +335,6 @@ label girlfriend_wakeup_spooning_label(the_person):
     $ mc.change_arousal(15)
     "Your reach around her with your hand and grab one of her tits. You start to get a little rough with her and pinch and pull at one of her nipples."
     $ the_person.change_arousal(20)
-    $ mc.change_arousal(15)
     $ mc.change_locked_clarity(30)
     the_person "Mmm that feels so... wait... [the_person.mc_title]?"
     $ the_person.draw_person( position = "back_peek", emotion = "happy")
@@ -343,13 +343,11 @@ label girlfriend_wakeup_spooning_label(the_person):
     "Encouraged by her words, you reach your hand down and lift her leg, giving you a better angle for deeper penetration."
     "You pick up the pace and begin to fuck her earnestly."
     $ the_person.change_arousal(30) #70
-    $ mc.change_arousal(25) #55
     $ mc.change_locked_clarity(30)
     the_person "Oh yes that feels so good, fuck me good!"
     "She reaches down and holds her leg for you, freeing up your hand. You reach down between her legs and start to play with her clit."
     "Her ass is making smacking noises now, every time your hips drive your cock deep inside of her."
     $ the_person.change_arousal(40) #110
-    $ mc.change_arousal(35) #90
     the_person "Oh fuck, yes! YES!"
     $ mc.change_locked_clarity(30)
     "She shoves her ass back against you as she cums. Her helpless body quivers in delight. Her moans drive you even harder."
@@ -546,7 +544,7 @@ label girlfriend_underwear_shopping_label(the_person):
         "You head to the front of the store and walk out without buying anything."
     else:
         mc.name "That's it. That is exactly what I want."
-        the_person "Ahh! Okay! Let me change out of it real quick and lets buy it."
+        the_person "Ahh! Okay! Let me change out of it real quick and let's buy it."
         $ clear_scene()
         "[the_person.possessive_title] retreats into the dressing room for a minute."
         "Soon, she emerges, holding the items you've decided to purchase."

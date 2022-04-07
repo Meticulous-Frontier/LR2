@@ -12,7 +12,7 @@ init 2:
         default mannequin = "mannequin"
 
         $ outfit_info_array = []
-        ## ["Catagory name", is_catagory_enabled, "return value when new is made", slut score calculation field/function, "export field type", add_outfit_to_wardrobe_function] ##
+        ## ["Category name", is_category_enabled, "return value when new is made", slut score calculation field/function, "export field type", add_outfit_to_wardrobe_function] ##
         $ outfit_info_array.append([show_outfits, "Full Outfit", "new_full", Outfit.get_full_outfit_slut_score , "FullSets", Wardrobe.add_outfit, Wardrobe.get_outfit_list])
         $ outfit_info_array.append([show_overwear, "Overwear Set", "new_over", Outfit.get_overwear_slut_score, "OverwearSets",  Wardrobe.add_overwear_set, Wardrobe.get_overwear_sets_list])
         $ outfit_info_array.append([show_underwear, "Underwear Set", "new_under", Outfit.get_underwear_slut_score, "UnderwearSets", Wardrobe.add_underwear_set, Wardrobe.get_underwear_sets_list])
@@ -21,8 +21,8 @@ init 2:
             spacing 20
             xalign 0.1
             yalign 0.1
-            for catagory_info in outfit_info_array:
-                if catagory_info[0]:
+            for category_info in outfit_info_array:
+                if category_info[0]:
                     frame:
                         background "#1a45a1aa"
                         xsize 450
@@ -34,11 +34,11 @@ init 2:
                             mousewheel True
                             vbox:
                                 spacing -10
-                                text catagory_info[1] + "s" style "menu_text_title_style" size 30 xalign 0.5 #Add an s to make it plural so we can reuse the field in the new button. Yep, I'm that clever-lazy.
+                                text "[category_info[1]]s" style "menu_text_title_style" size 30 xalign 0.5 #Add an s to make it plural so we can reuse the field in the new button. Yep, I'm that clever-lazy.
                                 null height 20
                                 if show_make_new:
-                                    textbutton "Create New " + catagory_info[1]:
-                                        action Return(catagory_info[2])
+                                    textbutton "Create New [category_info[1]]":
+                                        action Return(category_info[2])
                                         sensitive True
                                         style "textbutton_style"
                                         text_style "outfit_description_style"
@@ -46,13 +46,13 @@ init 2:
 
                                     null height 20
 
-                                for outfit in catagory_info[6](mc.designed_wardrobe):
-                                    textbutton outfit.name + " (" +str(catagory_info[3](outfit)) + " {image=red_heart_token_small})":
+                                for outfit in category_info[6](mc.designed_wardrobe):
+                                    textbutton outfit.name + " (" +str(category_info[3](outfit)) + " {image=red_heart_token_small})":
                                         action [
                                             Function(hide_mannequin),
                                             Return(["select",outfit.get_copy()])
                                         ]
-                                        sensitive (catagory_info[3](outfit) <= slut_limit) and main_selectable
+                                        sensitive (category_info[3](outfit) <= slut_limit) and main_selectable
                                         hovered [
                                             SetScreenVariable("demo_outfit", outfit.get_copy()),
                                             Function(preview_outfit)
@@ -74,7 +74,7 @@ init 2:
                                             if show_export:
                                                 default exported = []
                                                 textbutton "Export":
-                                                    action [Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = catagory_info[4], wardrobe_name = "Exported_Wardrobe"), Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")]
+                                                    action [Function(exported.append,outfit), Function(log_outfit, outfit, outfit_class = category_info[4], wardrobe_name = "Exported_Wardrobe"), Function(renpy.notify, "Outfit exported to Exported_Wardrobe.xml")]
                                                     sensitive outfit not in exported
                                                     hovered [
                                                         SetScreenVariable("demo_outfit", outfit.get_copy()),
@@ -91,8 +91,8 @@ init 2:
 
                                             if show_modify:
                                                 textbutton "Modify":
-                                                    action Return(["modify",outfit]) #If we are modifying an outfit just return it. outfit management loop will find which catagory it is in.
-                                                    sensitive (catagory_info[3](outfit) <= slut_limit)
+                                                    action Return(["modify",outfit]) #If we are modifying an outfit just return it. outfit management loop will find which category it is in.
+                                                    sensitive (category_info[3](outfit) <= slut_limit)
                                                     hovered [
                                                         SetScreenVariable("demo_outfit", outfit.get_copy()),
                                                         Function(preview_outfit)
@@ -109,8 +109,8 @@ init 2:
                                             if show_duplicate:
                                                 $ the_copied_outfit = outfit.get_copy() #We make a copy to add to the wardrobe if this is selected. Otherwise continues same as "Modify"
                                                 textbutton "Duplicate":
-                                                    action [Function(catagory_info[5], mc.designed_wardrobe, the_copied_outfit), Return(["duplicate",the_copied_outfit])]
-                                                    #sensitive (catagory_info[3](outfit) <= slut_limit)
+                                                    action [Function(category_info[5], mc.designed_wardrobe, the_copied_outfit), Return(["duplicate",the_copied_outfit])]
+                                                    #sensitive (category_info[3](outfit) <= slut_limit)
                                                     hovered [
                                                         SetScreenVariable("demo_outfit", outfit.get_copy()),
                                                         Function(preview_outfit)
@@ -127,7 +127,7 @@ init 2:
                                             if show_delete:
                                                 textbutton "Delete":
                                                     action Function(mc.designed_wardrobe.remove_outfit, outfit)
-                                                    #sensitive (catagory_info[3](outfit) <= slut_limit)
+                                                    #sensitive (category_info[3](outfit) <= slut_limit)
                                                     hovered [
                                                         SetScreenVariable("demo_outfit", outfit.get_copy()),
                                                         Function(preview_outfit)
@@ -148,7 +148,7 @@ init 2:
             if slut_limit != 999:
                 frame:
                     background "#888888"
-                    text "Slut Limit: " + str(slut_limit) + "{image=gui/heart/red_heart.png}" style "textbutton_text_style" text_align 0.0
+                    text "Slut Limit: [slut_limit]{image=gui/heart/red_heart.png}" style "textbutton_text_style" text_align 0.0
         frame:
             background None
             anchor [0.5,0.5]

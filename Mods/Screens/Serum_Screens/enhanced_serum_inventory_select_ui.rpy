@@ -14,8 +14,8 @@ init 2:
                     xsize 380
                     text "Serum Available" style "serum_text_style_header"
 
-                for serum in the_inventory.serums_held:
-                    textbutton serum[0].name + " - " + str(serum[1]) + " Doses":
+                for serum in sorted(the_inventory.serums_held, key = lambda x: x[0].name):
+                    textbutton "[serum[0].name] - [serum[1]] Doses":
                         style "textbutton_style"
                         text_style "serum_text_style"
                         xsize 380

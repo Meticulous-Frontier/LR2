@@ -1,6 +1,6 @@
 #This is a crisis series for changing company restrooms to unisex. As the girls in the company get sluttier and sluttier, the crisis changes to reflect the corrupted nature.
 #At first, you may only over hear conversations. Then girls talking about sexual fantasies, then gloryhole options.
-init 1301 python:
+init 1400 python:
 
     def unisex_bathroom_creation_requirement():
         if mc.business.unisex_restroom_unlocks.get("unisex_policy_avail",0) == 1:
@@ -154,7 +154,7 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     $ overhear_topic = the_person_two.get_random_opinion(include_sexy = False)
     $ text_one = person_opinion_to_string(the_person_two, overhear_topic)[1]
     $ text_two = get_topic_text(overhear_topic)
-    the_person_two "...But I [text_one] [text_two], so I'm not sure what to do."
+    the_person_two "... But I [text_one] [text_two], so I'm not sure what to do."
     if the_person_two.discover_opinion(overhear_topic):
         "Wow, you can learn all kinds of stuff just hanging out in the bathroom stall, or so it seems..."
     "The girls are still talking but you hear the bathroom door open. Their voices fade away as they exit."
@@ -202,7 +202,7 @@ label unisex_restroom_sexy_overhear_label():
         $ overhear_topic = the_person_two.get_random_opinion(include_sexy = True, include_normal = False)
         $ text_one = person_opinion_to_string(the_person_two, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        the_person_two "...But I [text_one] [text_two], so I'm not sure what to do."
+        the_person_two "... But I [text_one] [text_two], so I'm not sure what to do."
         if the_person_two.discover_opinion(overhear_topic):
             "Wow, you can learn all kinds of stuff just hanging out in the bathroom stall."
     else:
@@ -215,7 +215,7 @@ label unisex_restroom_sexy_overhear_label():
         $ overhear_topic_two = the_person_two.get_random_opinion(include_sexy = True, include_normal = False)
         $ text_one = person_opinion_to_string(the_person_two, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        anon_char_two "...But I [text_one] [text_two], so I'm not sure what to do."
+        anon_char_two "... But I [text_one] [text_two], so I'm not sure what to do."
         "Wow, you can learn all kinds of stuff just hanging out in the bathroom stall. If only you knew who it was!"
     "You hear the girls finish up and leave the restroom. You wash your hands and leave as well."
 
@@ -394,8 +394,7 @@ label unisex_restroom_use_gloryhole_label():
     if person_response == "Refuse":
         "The person inside clears her throat, but doesn't say or do anything."
         "Soon, you hear her exit her stall and quickly leave the restroom. Yikes, looks like whoever it was, wasn't very interested!"
-        $ the_person.change_slut(2, add_to_log = False)
-        $ the_person.change_happiness(-5, add_to_log = False)
+        $ the_person.change_stats(happiness = -5, slut = 2, add_to_log = False)
     elif person_response == "Handjob":
         call unisex_restroom_gloryhole_handjob_label(the_person) from _call_gloryhole_HJ_response_1
     elif person_response == "Blowjob":
@@ -452,12 +451,11 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     "The hand never stops stroking you as you start to blow your load. Thank god whoever it is knows how to finish the job!"
     $ the_person.cum_on_face(add_to_record = False)
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person, add_to_log = False)
-    "After you finishes, she gives you a few extra strokes, drawing out any remaining cum. You feel a pair of lips lightly kiss the tip."
+    "After you finish, she gives you a few extra strokes, drawing out any remaining cum. You feel a pair of lips lightly kiss the tip."
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut(1, 50, add_to_log = False)
-    $ the_person.change_happiness(2, add_to_log = False)
+    $ the_person.change_stats(slut = 1, max_slut = 50, happiness = 2, add_to_log = False)
 
     $ del anon_char
     return
@@ -493,14 +491,13 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     "She pushes herself deep, as you feel the tip start to hit the back of her throat, and then begin to slide down it a bit. You swear you feel a tongue on your balls!"
     "Her technique is amazing, you feel yourself getting ready to cum already!"
     "With a moan, you feel yourself pushed too far. It feels like your cock explodes as you begin to dump your load into her gullet."
-    anon_char "Oh! Ummmfff.... mmmmmmmm..."
+    anon_char "Oh! Ummmfff... mmmmmmmm..."
     $ the_person.cum_in_mouth(add_to_record = False)
     $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person, add_to_log = False)
     "She moans in delight as your cream fills her mouth. She eagerly works every last drop from your pulsating prick."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut(2, 70, add_to_log = False)
-    $ the_person.change_happiness(3, add_to_log = False)
+    $ the_person.change_stats(slut = 2, max_slut = 70, happiness = 3, add_to_log = False)
 
     $ del anon_char
     return
@@ -547,7 +544,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     $ the_person.cum_in_vagina(add_to_record = False)
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person, add_to_log = False)
     "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
-    if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
+    if the_person.effective_sluttiness() > 70 and the_person.get_opinion_score("being submissive") > 0:
         anon_char "Wait a minute, let me clean that up for you."
         "You suddenly feel her tongue licking up and down your cock, cleaning every drop of pussy juice off your dick."
         "When she's done, she cleans up with a soft cloth."
@@ -556,8 +553,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
         "You pull out. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut(2, 80, add_to_log = False)
-    $ the_person.change_happiness(5, add_to_log = False)
+    $ the_person.change_stats(slut = 2, max_slut = 80, happiness = 5, add_to_log = False)
 
     $ del anon_char
     return
@@ -605,7 +601,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     $ the_person.cum_in_ass(add_to_record = False)
     $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person, add_to_log = False)
     "You cum as deep inside her ass as you can manage. Your cum spurts deep inside her bowel, farther than your cock can penetrate."
-    if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
+    if the_person.effective_sluttiness() > 70 and the_person.get_opinion_score("being submissive") > 0:
         anon_char "Wait a minute, let me clean that up for you."
         "You suddenly feel her tongue licking up and down your cock, even though it was deep inside her bowels just a minute ago."
         "When she's done, she cleans your cock with a soft cloth."
@@ -614,8 +610,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
         "You pull out. You grab some toilet paper and wipe your cock off."
 
     # the person is happy and a sluttier (don't log as to preserve anonymity)
-    $ the_person.change_slut(2, 90, add_to_log = False)
-    $ the_person.change_happiness(7, add_to_log = False)
+    $ the_person.change_stats(slut = 2, max_slut = 90, happiness = 7, add_to_log = False)
 
     $ del anon_char
     return
@@ -687,7 +682,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             $ the_person.cum_in_vagina(add_to_record = False)
             $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person, add_to_log = False)
             "You cum as deep inside of her as you can manage. You wonder if she is on birth control. Maybe you knocked her up? Who even is it!?!"
-            if the_person.effective_sluttiness > 70 and the_person.get_opinion_score("being submissive") > 0:
+            if the_person.effective_sluttiness() > 70 and the_person.get_opinion_score("being submissive") > 0:
                 anon_char "Wait a minute, let me clean that up for you."
                 "You suddenly feel her tongue licking up and down your cock, cleaning every drop of pussy juice off your dick."
                 "When she's done, she cleans up with a soft cloth."
@@ -696,8 +691,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
                 "You pull out. You grab some toilet paper and wipe your cock off."
 
             # the person is happy and a sluttier (don't log as to preserve anonymity)
-            $ the_person.change_slut(2, 60, add_to_log = False)
-            $ the_person.change_happiness(5, add_to_log = False)
+            $ the_person.change_stats(slut = 2, max_slut = 60, happiness = 5, add_to_log = False)
 
     $ del anon_char
     return

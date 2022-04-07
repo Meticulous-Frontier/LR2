@@ -16,7 +16,7 @@ init 2:
                         mousewheel True
                         vbox:
                             text "Serum Designs:" style "menu_text_title_style" size 30
-                            for serum_design in mc.business.serum_designs:
+                            for serum_design in sorted(mc.business.serum_designs, key = lambda x: x.name):
                                 $ serum_name = serum_design.name
                                 if serum_design.researched:
                                     $ serum_name += " - Research Finished"
@@ -24,14 +24,14 @@ init 2:
                                     $ serum_name += " - " + str(serum_design.current_research) + "/" + str(serum_design.research_needed) + " Research Required"
 
                                 if serum_design == selected_research:
-                                    textbutton serum_name:
+                                    textbutton "[serum_name]":
                                         action SetScreenVariable("selected_research", None)
                                         sensitive serum_design.researched or not hide_partially_researched
                                         style "textbutton_style"
                                         text_style "serum_text_style"
 
                                 else:
-                                    textbutton serum_name:
+                                    textbutton "[serum_name]":
                                         action SetScreenVariable("selected_research", serum_design)
                                         sensitive serum_design.researched or not hide_partially_researched
                                         style "textbutton_style"
@@ -53,14 +53,14 @@ init 2:
                                     $ trait_name += " - " + str(trait_design.current_research) + "/" + str(trait_design.research_needed) + " Research Required"
 
                                 if trait_design == selected_research:
-                                    textbutton trait_name:
+                                    textbutton "[trait_name]":
                                         action SetScreenVariable("selected_research", None)
                                         sensitive trait_design.researched or not hide_partially_researched
                                         style "textbutton_style"
                                         text_style "serum_text_style"
 
                                 else:
-                                    textbutton trait_name:
+                                    textbutton "[trait_name]":
                                         action SetScreenVariable("selected_research", trait_design)
                                         sensitive trait_design.researched or not hide_partially_researched
                                         style "textbutton_style"
@@ -73,7 +73,7 @@ init 2:
                 $ research_verb = "Select"
             if isinstance(selected_research, SerumDesign):
                 use serum_tooltip(selected_research, given_align = (0.96,0.02), given_anchor = (1.0,0.0)):
-                    textbutton research_verb + " Design":
+                    textbutton "[research_verb] Design":
                         if select_instead_of_delete:
                             action Return(selected_research)
                         else:
@@ -81,7 +81,7 @@ init 2:
                         style "textbutton_style" text_style "menu_text_title_style" xanchor 0.5 xalign 0.5
             if isinstance(selected_research, SerumTrait):
                 use trait_tooltip(selected_research, given_align = (0.96,0.02), given_anchor = (1.0,0.0)):
-                    textbutton research_verb + " Trait":
+                    textbutton "[research_verb] Trait":
                         if select_instead_of_delete:
                             action Return(selected_research)
                         else:

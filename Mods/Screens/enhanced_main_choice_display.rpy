@@ -100,20 +100,28 @@ init 2 python:
                     mi.return_value = item[1]
 
             if isinstance(item,Person): #It's a person. Format it for a person list.
-                mi.title = format_titles(item)
-                mi.return_value = item
-
+                info = [format_titles(item)]
+                if item.knows_pregnant():
+                    info.append("{image=feeding_bottle_token_small}")
+                if item.serum_effects:
+                    info.append("{image=vial_token_small}")
                 if item.infractions:
-                    mi.title += " {image=infraction_token_small}"
-                if any([not isinstance(x, Limited_Time_Action) and x.is_action_enabled(item) for x in item.on_talk_event_list]):
-                    mi.title += " {image=speech_bubble_exclamation_token_small}"
-                elif any([x.name != "Ask new title" and x.is_action_enabled(item) for x in item.on_talk_event_list]):
-                    mi.title += " {image=speech_bubble_token_small}"
+                    info.append("{image=infraction_token_small}")
+                if any(not isinstance(x, Limited_Time_Action) and x.is_action_enabled(item) for x in item.on_talk_event_list):
+                    info.append("{image=speech_bubble_exclamation_token_small}")
+                elif any(x.name != "Ask new title" and x.is_action_enabled(item) for x in item.on_talk_event_list):
+                    info.append("{image=speech_bubble_token_small}")
+                if item.has_role([trance_role, heavy_trance_role, very_heavy_trance_role]):
+                    info.append("{image=lust_eye_token_small}")
+                if item.arousal > 60:
+                    info.append("{image=arousal_token_small}")
                 if draw_hearts_for_people:
-                    mi.title += "\n" + get_heart_image_list(item)
+                    info.append("\n" + get_heart_image_list(item.sluttiness, item.effective_sluttiness()))
                 if person_preview_args is None:
                     person_preview_args = {}
 
+                mi.title = " ".join(info)
+                mi.return_value = item
                 mi.person_preview_args = person_preview_args
                 mi.display_key = item.identifier
                 mi.display_scale = scale_person(item.height)
@@ -165,25 +173,21 @@ init 2:
 
         hbox:
             spacing 10
-            xalign 0.518
-            yalign 0.2
-            xanchor 0.5
-            yanchor 0.0
+            align (0.518, 0.2)
+            anchor (0.5, 0.0)
             for count in __builtin__.range(len(menu_items)):
-                if __builtin__.len(menu_items[count][1:]) > 0:
+                if __builtin__.len(menu_items[count]) > 1:
                     frame:
                         background "gui/LR2_Main_Choice_Box.png"
-                        xsize 380
-                        ysize 700
+                        xysize (380, 700)
                         $ title_element = menu_items[count][0]
                         if isinstance(title_element, basestring):
-                            text title_element xalign 0.5 ypos 45 anchor (0.5,0.5) size 22 style "menu_text_title_style" xsize 240
+                            text "[title_element]" xalign 0.5 ypos 45 anchor (0.5,0.5) size 22 style "menu_text_title_style" xsize 240
                         else:
                             add title_element xalign 0.5 ypos 45 anchor (0.5,0.5)
 
-                        viewport id title_element:
-                            #scrollbars "vertical" #But if we aren't on a PC we need to make sure the player can scroll since they won't have a mouse wheel.
-
+                        viewport id:
+                            scrollbars "vertical"
                             mousewheel True
                             xalign 0.5
                             xanchor 0.5
@@ -193,33 +197,19 @@ init 2:
                             xsize 360
                             ysize 588
                             vbox:
-                                for item in menu_items[count][1:]:
-                                    if item.display:
-                                        textbutton item.title:
-                                            xsize 360
-                                            ysize 80
-                                            xalign 0.5
-                                            yalign 0.5
-                                            style "textbutton_style"
-                                            text_style "textbutton_text_style"
-                                            text_align (0.5,0.5)
-                                            if not (renpy.mobile or renpy.android) and item.display_key:
-                                                hovered [Function(item.show_person)]
-                                                unhovered [Function(item.hide_person)]
-                                            action [
-                                                Function(item.hide_person),
-                                                Return(item.return_value)
-                                            ]
-                                            tooltip item.the_tooltip
-                                            sensitive item.is_sensitive
-                        vbar:
-                            value YScrollValue(title_element)
-                            xalign 0.99
-                            yalign 0.99
-                            ysize 585
-
-transform character_off_screen():
-    yalign 0.5
-    yanchor 0.5
-    xalign 2.0
-    xanchor 1.0
+                                for item in [x for x in menu_items[count][1:] if x.display]:
+                                    textbutton "[item.title!i]":
+                                        xysize (360, 80)
+                                        align (0.5, 0.5)
+                                        style "textbutton_style"
+                                        text_style "textbutton_text_style"
+                                        text_align (0.5,0.5)
+                                        if not (renpy.mobile or renpy.android) and item.display_key:
+                                            hovered [Function(item.show_person)]
+                                            unhovered [Function(item.hide_person)]
+                                        action [
+                                            Function(item.hide_person),
+                                            Return(item.return_value)
+                                        ]
+                                        tooltip item.the_tooltip
+                                        sensitive item.is_sensitive

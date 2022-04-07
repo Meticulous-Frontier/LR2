@@ -23,8 +23,14 @@ init 5 python:
 
     def add_police_chief_character():
         police_chief_wardrobe = wardrobe_from_xml("Cop_Wardrobe")
+        cop_outfit = police_chief_wardrobe.get_outfit_with_name("Cop")
 
-        police_chief_personality = Personality("police_chief", default_prefix = "reserved",
+        global police_chief_uniform_wardrobe
+        police_chief_uniform_wardrobe = Wardrobe("Cop Uniform")
+        police_chief_uniform_wardrobe.add_outfit(cop_outfit)
+        police_chief_wardrobe.remove_outfit(cop_outfit)
+
+        police_chief_personality = Personality("police_chief", default_prefix = reserved_personality.default_prefix,
             common_likes = ["pants", "small talk", "working", "the colour blue", "the colour black", "boots", "sports", "working", "work uniforms"],
             common_sexy_likes = ["taking control", "anal sex", "sex standing up", "anal creampies", "getting head"],
             common_dislikes = ["Mondays", "the colour yellow", "the colour pink", "skirts", "dresses", "high heels", "flirting"],
@@ -39,7 +45,7 @@ init 5 python:
 
         global police_chief
         police_chief = make_person(name = "Christine", last_name = "Lavardin", age = 34, body_type = "thin_body", face_style = "Face_4", tits = "C", height = 0.91, \
-            hair_colour = ["knight red", [0.745, 0.117, 0.235,1]], hair_style = short_hair, skin="white", eyes = "emerald", name_color = "#fcf7de", dial_color = "#fcf7de",  \
+            hair_colour = ["knight red", [.745, .117, .235, 1]], hair_style = short_hair, skin="white", eyes = "emerald", name_color = "#fcf7de", dial_color = "#fcf7de",  \
             stat_array = [4,6,2], skill_array = [2,1,4,1,2], sex_array = [0,1,1,4], start_sluttiness = -20, start_obedience = -40, start_happiness = 89, start_love = 0, \
             generate_insta = False, generate_dikdok = False, generate_onlyfans = False, relationship = "Single", job = police_job, \
             kids = 0, force_random = True, starting_wardrobe = police_chief_wardrobe, personality = police_chief_personality,
@@ -150,10 +156,10 @@ label police_chief_flirt_response_mid(the_person):
     else:
         "[the_person.possessive_title] gives a subtle smile and nods her head."
         the_person "Thank you [the_person.mc_title]. I'm happy you like to see me in uniform."
-        the_person "How does it look when I'm walking away>"
+        the_person "How does it look when I'm walking away?"
         $ the_person.draw_person(position = "walking_away")
         $ mc.change_locked_clarity(10)
-        "She just keeps on walking, did you go to far?"
+        "She just keeps on walking, did you go too far?"
         mc.name "You have an amazing swag in your step, I wouldn't mind walking behind you."
         $ the_person.draw_person()
         "She turns around and smiles warmly."

@@ -90,7 +90,7 @@ label unlock_college_interns():
     $ college_intern_role = Role("College Intern", actions = [college_intern_training], hidden = False, on_turn = college_intern_on_turn, on_move = college_intern_on_move, on_day = college_intern_on_day)
     $ mc.business.college_interns_unlocked = True
     if hire_new_college_intern not in nora_role.actions:
-        $ nora_role.actions.append(hire_new_college_intern)
+        $ nora_role.add_action(hire_new_college_intern)
     return
 
 label unlock_college_supply_interns():

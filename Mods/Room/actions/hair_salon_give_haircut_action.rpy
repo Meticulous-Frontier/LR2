@@ -38,8 +38,7 @@ label salon_response(person_choice): # How does the_person respond to a company 
     elif the_person.obedience < 80 or the_person.happiness < 100:
         $ the_person.draw_person(emotion = "sad")
         the_person "I'm not in the mood for a haircut right now."
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-2)
+        $ the_person.change_stats(happiness = -2, obedience = -2)
         $ clear_scene()
         return
 

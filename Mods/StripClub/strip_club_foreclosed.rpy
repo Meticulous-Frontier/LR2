@@ -22,9 +22,9 @@ init 2 python:
         global stripclub_bdsm_performer_job
         stripclub_bdsm_performer_job = Job("BDSM Performer", stripclub_bdsm_performer_role, bdsm_room, strip_club_hire_bdsm_performer, strip_club_fire_bdsm_performer, work_days = [0,1,2,3,4,5,6], work_times = [3,4])
         global stripclub_manager_job
-        stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4])
+        stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [2,3,4])
         global stripclub_mistress_job
-        stripclub_mistress_job = Job("Mistress", stripclub_mistress_role, bdsm_room, work_days=[0,1,2,3,4,5,6], work_times = [3,4])
+        stripclub_mistress_job = Job("Mistress", stripclub_mistress_role, bdsm_room, work_days=[0,1,2,3,4,5,6], work_times = [2,3,4])
         global stripclub_stripper_job
         stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit)
         return
@@ -51,6 +51,8 @@ init 2 python:
         if mc.business.event_triggers_dict.get("strip_club_foreclosed_countdown", False):
             return False
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
+            return False
+        if not cousin.job == unemployed_job: # don't trigger event when cousin is not stripper
             return False
         if mc.business.has_funds(60000):
             if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
@@ -80,6 +82,8 @@ init 2 python:
 
     def strip_club_foreclosed_change_stripper_schedules():
         for person in stripclub_strippers:
+            # clear any party schedules
+            person.set_override_schedule(None, the_times = [4])
             person.set_override_schedule(person.home, the_days = [0,1,2,3,4,5,6], the_times = [3, 4])
         return
 
@@ -164,7 +168,7 @@ label cousin_talk_about_strip_club_label(the_person):
                 "Accept":
                     mc.name "Perhaps I should say no..."
                     the_person "Come on, take me to a nice hotel and I'll show you a good time."
-                    mc.name "Alright, lets go."
+                    mc.name "Alright, let's go."
                     "You and [the_person.title] walks to the nearest hotel."
                     $ amount = 200
                     $ the_person.change_stats(happiness = 5, obedience = -1, love = 1)
@@ -187,7 +191,7 @@ label club_foreclosed_strip_label(the_person):
     "You walk up to the reception and hire a hotel room for one night. You and [the_person.title] go up to your room."
     $ mc.business.change_funds(-80)
     $ downtown_hotel_room.show_background()
-    mc.name "Ok, here's your money, now lets get this show started."
+    mc.name "Ok, here's your money, now let's get this show started."
     $ mc.business.change_funds(-amount)
     "[the_person.possessive_title] quickly disappears into the bathroom to change her clothes."
     $ the_person.apply_outfit(stripclub_wardrobe.pick_random_outfit())
@@ -199,7 +203,7 @@ label club_foreclosed_strip_label(the_person):
             mc.name "Enough! I know how desperate for money you are, [the_person.title]."
             $ the_person.draw_person(emotion = "sad", position = "stand4")
             "She think she just lost her opportunity to gain some cash and looks disheartened..."
-            mc.name "Despite your usual attitude, I'll let you keep the money I gave you and I'll add $100 more...because, believe it or not, family matters to me."
+            mc.name "Despite your usual attitude, I'll let you keep the money I gave you and I'll add $100 more... because, believe it or not, family matters to me."
             $ mc.business.change_funds(-100)
             "When you give her another $100, you can see the puzzled look on her face, she can't believe what's happening..."
             $ the_person.draw_person(emotion = "happy", position = "stand4")

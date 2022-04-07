@@ -1,78 +1,36 @@
 # Override default person_info_ui screen by VREN to show extra information about character
 init -1 python:
-    # override default function to limit call stack depth
-    def get_red_heart(sluttiness, depth = 0): #A recursive function, feet it a sluttiness and it will return a string of all red heart images for it. Heatrts taht are entirely empty are left out.
-        if depth >= 5:
-            return ""
 
-        the_final_string = ""
-        if sluttiness >= 20:
-            the_final_string += "{image=gui/heart/red_heart.png}"
-            the_final_string += get_red_heart(sluttiness - 20, depth + 1) #Call it recursively if we might have another heart after this.
-        elif sluttiness >= 15:
-            the_final_string += "{image=gui/heart/three_quarter_red_quarter_empty_heart.png}"
-        elif sluttiness >= 10:
-            the_final_string += "{image=gui/heart/half_red_half_empty_heart.png}"
-        elif sluttiness >= 5:
-            the_final_string += "{image=gui/heart/quarter_red_three_quarter_empty_heart.png}"
-
-        return the_final_string
-
-    # override default function to limit call stack depth
-    def get_gold_heart(sluttiness, depth = 0):
-        if depth >= 5:
-            return ""
-
-        the_final_string = ""
-        if sluttiness >= 20:
-            the_final_string += "{image=gui/heart/gold_heart.png}"
-            the_final_string += get_gold_heart(sluttiness - 20, depth + 1) #Call it recursively if we might have another heart after this.
-        elif sluttiness >= 15:
-            the_final_string += "{image=gui/heart/three_quarter_gold_quarter_empty_heart.png}"
-        elif sluttiness >= 10:
-            the_final_string += "{image=gui/heart/half_gold_half_empty_heart.png}"
-        elif sluttiness >= 5:
-            the_final_string += "{image=gui/heart/quarter_gold_three_quarter_empty_heart.png}"
-
-        return the_final_string
-
+    @renpy.pure
     def person_info_ui_format_hearts(value):
         heart_value = __builtin__.abs(value)
         if (heart_value / 4) > 10:
             return get_gold_heart(heart_value / 4)
         return get_red_heart(heart_value)
 
-
     def person_info_ui_get_formatted_tooltip(person):
         tooltip = ""
-        positive_effects = ""
-        negative_effects = ""
         for situation in person.situational_sluttiness:
-            if person.situational_sluttiness[situation][0] > 0: #We purposefully ignore 0 so we don't show null sluttiness modifiers.
-                positive_effects += get_coloured_arrow(1) + " " + person_info_ui_format_hearts(person.situational_sluttiness[situation][0]) + " - " + person.situational_sluttiness[situation][1] + "\n"
-            elif person.situational_sluttiness[situation][0] < 0:
-                negative_effects += get_coloured_arrow(-1) + " " + person_info_ui_format_hearts(person.situational_sluttiness[situation][0]) + " - " + person.situational_sluttiness[situation][1] + "\n"
-        tooltip += positive_effects + negative_effects
+            ss = person.situational_sluttiness[situation]
+            if ss[0] != 0:
+                tooltip += "{arrow} {hearts} - {description}\n".format(arrow = get_coloured_arrow(ss[0]), hearts = person_info_ui_format_hearts(ss[0]), description = ss[1])
         return tooltip
 
     def person_info_ui_get_formatted_obedience_tooltip(person):
         tooltip = ""
-        positive_effects = ""
-        negative_effects = ""
         for situation in person.situational_obedience:
-            if person.situational_obedience[situation][0] > 0:
-                positive_effects += get_coloured_arrow(1)+"+"+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
-            elif person.situational_obedience[situation][0] < 0:
-                negative_effects += get_coloured_arrow(-1)+""+__builtin__.str(person.situational_obedience[situation][0])+ " Obedience - " + person.situational_obedience[situation][1] + "\n"
-        tooltip += positive_effects + negative_effects
+            so = person.situational_obedience[situation]
+            if so[0] != 0:
+                tooltip += "{arrow} {sign}{value} Obedience - {description}\n".format(arrow = get_coloured_arrow(so[0]), sign = "+" if so[0] > 0 else "", value = so[0], description = so[1])
         return tooltip
 
     def person_info_ui_get_serum_info_tooltip(person):
         tooltip = ""
         for serum in person.serum_effects:
-            if len(tooltip) > 0:
-                tooltip += "\n"
-            tooltip += serum.name + " : " + str(serum.duration - serum.duration_counter) + " Turns Left"
+            if serum.has_trait(self_generating_serum):
+                tooltip += "{name}: {duration} Turns Left\n".format(name = serum.name, duration = (serum.duration * (serum.duration + 1) / 2) - serum.duration_counter)
+            else:
+                tooltip += "{name}: {duration} Turns Left\n".format(name = serum.name, duration = serum.duration - serum.duration_counter)
         return tooltip
 
     def person_info_ui_get_job_title(person):
@@ -80,10 +38,20 @@ init -1 python:
             return person.job.job_title
         return "Unknown"
 
-
 init 2:
     screen person_info_ui(person): #Used to display stats for a person while you're talking to them.
         layer "solo" #By making this layer active it is cleared whenever we draw a person or clear them off the screen.
+
+        python:
+            job_title = person_info_ui_get_job_title(person)
+            arousal_info = get_arousal_with_token_string(person.arousal, person.max_arousal)
+            energy_info = get_energy_string(person.energy, person.max_energy)
+            happiness_info = str(__builtin__.int(person.happiness))
+            love_info = str(__builtin__.int(person.love))
+            sluttiness_info = get_heart_image_list(person.sluttiness, person.effective_sluttiness())
+            obedience_info = str(person.obedience) + " - " + get_obedience_plaintext(person.obedience)
+            height_info = height_to_string(person.height)
+            weight_info = get_person_weight_string(person)
 
         frame:
             background im.Alpha("gui/topbox.png", .9)
@@ -100,7 +68,7 @@ init 2:
                 vbox:
                     text format_titles(person) style "menu_text_style" size 30
 
-                    text "     Job: " + person_info_ui_get_job_title(person) style "menu_text_style"
+                    text "     Job: [job_title]" style "menu_text_style"
 
                     viewport:
                         scrollbars "vertical"
@@ -109,32 +77,32 @@ init 2:
                         ysize 100
                         vbox:
                             for role in [x for x in person.special_role if not x.hidden]:
-                                text "       - " + role.role_name style "menu_text_style" size 14
+                                text "       - [role.role_name]" style "menu_text_style" size 14
 
                 vbox:
                     yoffset 10
-                    textbutton "Arousal: "+ str(__builtin__.int(person.arousal)) + "/"+ str(__builtin__.int(person.max_arousal)) + " {image=arousal_token_small}":
+                    textbutton "Arousal: [arousal_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will make a girl happier and may put them into a Trance if their suggestibility is higher than 0."
                         action NullAction()
                         sensitive True
 
-                    textbutton "Energy: " + get_energy_string(person):
+                    textbutton "Energy: [energy_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night."
                         action NullAction()
                         sensitive True
 
-                    textbutton "Happiness: "+ str(__builtin__.int(person.happiness)):
+                    textbutton "Happiness: [happiness_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "The happier a girl the more tolerant she will be of low pay and unpleasant interactions. High or low happiness will return to it's default value over time."
                         action NullAction()
                         sensitive True
 
-                    textbutton "Love: "+ str(__builtin__.int(person.love)):
+                    textbutton "Love: [love_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "Girls who love you will be more willing to have sex when you're in private (as long as they aren't family) and be more devoted to you. Girls who hate you will have a lower effective sluttiness regardless of the situation."
@@ -142,7 +110,7 @@ init 2:
                         sensitive True
 
                     hbox:
-                        textbutton "Obedience: [person.obedience] - " + get_obedience_plaintext(person.obedience):
+                        textbutton "Obedience: [obedience_info]":
                             style "transparent_style"
                             text_style "menu_text_style"
                             tooltip "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
@@ -158,7 +126,7 @@ init 2:
                                 sensitive True
 
                     hbox:
-                        textbutton "Sluttiness: " + get_heart_image_list(person):
+                        textbutton "Sluttiness: [sluttiness_info]":
                             style "transparent_style"
                             text_style "menu_text_style"
                             tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is added to her sluttiness based on effect modifiers {image=question_mark_small}."
@@ -219,7 +187,7 @@ init 2:
                         action NullAction()
                         sensitive True
 
-                    textbutton "Height: " + height_to_string(person.height):
+                    textbutton "Height: [height_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
                         if use_imperial_system:
@@ -236,7 +204,7 @@ init 2:
                         action NullAction()
                         sensitive True
 
-                    textbutton "Weight: " + get_person_weight_string(person):
+                    textbutton "Weight: [weight_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
                         if use_imperial_system:

@@ -84,7 +84,7 @@ label lust_booty_call_intro_label():
         the_person "Damn, why didn't you say you were DTF. I'll be right over."
         "You make sure she has your address."
     "You use the time to make sure your bedroom is cleaned up and ready for your booty call."
-    "Soon, you phone is going off."
+    "Soon, your phone is going off."
     the_person "I'm here."
     $ mc.end_text_convo()
     "You quickly let her in and sneak back to your room."
@@ -96,8 +96,8 @@ label lust_booty_call_intro_label():
     "She gives a little yelp as you jump on top of her. You start to make out, pushing yourself up against her."
     $ the_person.change_arousal(15)
     $ mc.change_arousal(15)
-    "Pretty soon, clothes start coming off."
-    $ the_person.strip_outfit(position = "missionary")
+    "Pretty soon, you start moving her clothes out of the way."
+    $ the_person.strip_to_vagina(position = "missionary", visible_enough = True, prefer_half_off = True)
     the_person "Wow, you are really into it tonight! How do you want to start?"
     call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, ignore_taboo = True, private = True) from _lust_booty_call_fuck_01
     $ the_report = _return
@@ -108,16 +108,14 @@ label lust_booty_call_intro_label():
     elif the_report.get("girl orgasms", 0) == 0:
         "Fully spent, you let yourself relax in your bed. [the_person.possessive_title] seems a little disgruntled."
         the_person "Wow, I come all the way over here, and you can't even reciprocate?"
-        $ the_person.change_happiness(-3)
-        $ the_person.change_obedience(-3)
+        $ the_person.change_stats(happiness = -3, obedience = -3)
     else:
         "You and [the_person.possessive_title] take a few moments to recover, satisfied from your orgasms."
-        $ the_person.change_happiness(3)
-        $ the_person.change_obedience(3)
+        $ the_person.change_stats(happiness = 3, obedience = 3)
     mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits on the edge of your bed."
-    the_person "Okay, lets chat a little while we wait."
+    the_person "Okay, let's chat a little while we wait."
     "As you order a Lyft, she gets herself presentable."
     $ the_person.apply_outfit()
     $ the_person.draw_person(position = "sitting")
@@ -166,7 +164,7 @@ label lust_booty_call_label():
             $ mc.change_location(bedroom)
             $ mc.location.show_background()
         "You use the time to make sure your bedroom is cleaned up and ready for your booty call."
-        "Soon, you phone is going off."
+        "Soon, your phone is going off."
         the_person "I'm here."
         $ mc.end_text_convo()
         "You quickly let her in and sneak back to your room."
@@ -184,8 +182,8 @@ label lust_booty_call_label():
     "She gives a little yelp as you jump on top of her. You start to make out, pushing yourself up against her."
     $ the_person.change_arousal(15)
     $ mc.change_arousal(15)
-    "Pretty soon, clothes start coming off."
-    $ the_person.strip_outfit(position = "missionary")
+    "Pretty soon, you start moving her clothes out of the way."
+    $ the_person.strip_to_vagina(position = "missionary", visible_enough = True, prefer_half_off = True)
     the_person "Wow, you are really into it tonight! How do you want to start?"
     call fuck_person(the_person, start_position = missionary, start_object = make_bed(), skip_intro = True, ignore_taboo = True, private = True) from _lust_booty_call_fuck_02
     $ the_report = _return
@@ -197,16 +195,14 @@ label lust_booty_call_label():
     elif the_report.get("girl orgasms", 0) == 0:
         "Fully spent, you let yourself relax in your bed. [the_person.possessive_title] seems a little disgruntled."
         the_person "Wow, I come all the way over here, and you can't even reciprocate?"
-        $ the_person.change_happiness(-3)
-        $ the_person.change_obedience(-3)
+        $ the_person.change_stats(happiness = -3, obedience = -3)
     else:
         "You and [the_person.possessive_title] take a few moments to recover, satisfied from your orgasms."
-        $ the_person.change_happiness(3)
-        $ the_person.change_obedience(3)
+        $ the_person.change_stats(happiness = 3, obedience = 3)
     mc.name "Let me call you a cab. It's the least I can do for coming over late like this."
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits on the edge of your bed."
-    the_person "Okay, lets chat a little while we wait."
+    the_person "Okay, let's chat a little while we wait."
     "As you order a Lyft, she gets herself presentable."
     $ the_person.apply_outfit()
     $ the_person.draw_person(position = "sitting")

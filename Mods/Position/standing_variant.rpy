@@ -36,7 +36,7 @@ label intro_SB_facing_wall(the_girl, the_location, the_object):
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
     the_girl "Oh my god..."
     "[the_girl.possessive_title] sighs as you bottom out."
-    if the_girl.effective_sluttiness() > 110:
+    if the_girl.effective_sluttiness() > 95:
         "She wiggles her ass back and forth a few times, enjoying the familiar feel of fullness you give her when you fuck her."
     elif the_girl.effective_sluttiness() > 80:
         the_girl "[the_girl.mc_title], it feels so good..."
@@ -92,7 +92,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                     the_girl "OH, god... SEVEN!"
                     mc.name "Does your pussy get wetter with every spank? I think it does!"
                     if the_girl.arousal > 80:
-                        "Are you going to cum when I spank you? Go ahead and cum. I'll punish you by spanking you another 10 times."
+                        mc.name "Are you going to cum when I spank you? Go ahead and cum. I'll punish you by spanking you another 10 times."
                         $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 2)
                         "[the_girl.possessive_title] moans loudly. She is breathing too heavy to make a coherent response."
                 elif the_girl.sluttiness > 80 or the_girl.obedience > 130:
@@ -198,7 +198,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                             "[the_girl.possessive_title] opens her mouth and sucks your fingers into her mouth. She sucks your fingers hungrily, deep into her mouth. Your fingertips are tickling the back of her throat."
                             "Her head bobs up and down as she suckles her juices off your fingers."
                             "You pull your fingers out with a pop. She looks back at you, her pouty lips almost enticing you to let her suck on your finger a bit longer."
-                        elif the_girl.get_opinion_score("being submissive") > 0 or the_girl.effective_sluttiness() > 120:
+                        elif the_girl.get_opinion_score("being submissive") > 0 or the_girl.effective_sluttiness() > 90:
                             the_girl "Yes sir!"
                             "[the_girl.possessive_title] immediately opens her mouth and begins sucking on your fingers. She bobs her head up and down on them a few times as if it were a cock"
                             "Her mouth comes off your fingers with a pop."
@@ -385,7 +385,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
         "You give her a couple quick thrusts while you consider it. You're sure with how skilled she is, that whatever she has in mind is probably very pleasurable..."
         menu:
             "Let her fuck you":
-                mc.name "Okay, [the_girl.title], lets see what you can do."
+                mc.name "Okay, [the_girl.title], let's see what you can do."
                 "Even with just one foot on the floor and the other in the air as you hold it, [the_girl.possessive_title] is able to begin gyrating her hips up against you."
                 "Enjoying her skill, you stand and watch, entranced as [the_girl.possessive_title] stirs her creamy womb with your shaft."
                 if the_girl.is_dominant():
@@ -519,9 +519,9 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
                 the_girl "I love it when you shoot your seed so deep!"
             $ the_girl.cum_in_vagina()
             $ SB_facing_wall.redraw_scene(the_girl)
-            if the_girl.sluttiness > 110:
+            if the_girl.sluttiness > 90:
                 the_girl "Oh god it's so good. I'm going to fall asleep dreaming about this tonight..."
-            elif the_girl.sluttiness > 80:
+            elif the_girl.sluttiness > 70:
                 the_girl "Oh fuck that's good. It feels so warm..."
             else:
                 the_girl "Oh my god, why do I let you do this to me... but it feels so good..."
@@ -546,7 +546,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
         if the_girl.get_opinion_score("showing her ass") > 0:
             "[the_girl.possessive_title] bends over and presents her cum covered ass to you."
             "She gives her hips a few enticing wiggles as your cum starts to drip down the back of her legs."
-        elif the_girl.sluttiness > 120:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:
@@ -559,7 +559,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
         else:
             "You pull your cock out of [the_girl.possessive_title] with a satisfying pop. She immediately turns around on gets on her knees in front of you."
         $ the_girl.draw_person(position = "kneeling1")
-        if the_girl.get_opinion_score("cum facials"):
+        if the_girl.get_opinion_score("cum facials") > 0:
             "[the_girl.possessive_title] begins stroking you while pointing your cock straight at her eager face."
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
@@ -583,7 +583,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
             "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
-        if the_girl.get_opinion_score("being covered in cum"):
+        if the_girl.get_opinion_score("being covered in cum") > 0:
             "[the_girl.possessive_title] runs her fingers through your cum on her face a few times. She quickly licks her fingers clean."
             the_girl "Mmm, your hot, sticky seed feels so good all over me..."
         $ climax_controller.do_clarity_release(the_girl)
@@ -605,7 +605,7 @@ label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object)
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
     the_girl "Oh my god..."
     "[the_girl.possessive_title] sighs as you bottom out."
-    if the_girl.effective_sluttiness() > 110:
+    if the_girl.effective_sluttiness() > 95:
         "She wiggles her ass back and forth a few times, enjoying the familiar feel of fullness you give her when you fuck her."
     elif the_girl.effective_sluttiness() > 80:
         the_girl "[the_girl.mc_title], it feels so good..."
@@ -624,6 +624,9 @@ label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object)
 
 label transition_default_SB_facing_wall(the_girl, the_location, the_object):
     "You turn [the_girl.possessive_title] so she is is facing [the_object.name]."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_facing_wall.position_tag, visible_enough = True, prefer_half_off = True)
     "Once you're ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 

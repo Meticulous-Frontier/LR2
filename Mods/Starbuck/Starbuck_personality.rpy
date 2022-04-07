@@ -320,13 +320,13 @@ label starbuck_sex_watch(the_person, the_sex_person, the_position):
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
-        $ change_report = the_person.change_slut(1)
+        $ the_person.change_slut(1)
         "[title] watches for a moment, then turns away  while you and [the_sex_person.name] keep [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh wow that's hot. I should sell tickets to this!"
-        $ change_report = the_person.change_slut(2)
+        $ the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
     else:
@@ -482,13 +482,13 @@ label starbuck_flirt_response_high(the_person):
 init python:
     def starbuck_titles(person):
         valid_titles = []
-        valid_titles.append("Mrs. " + person.last_name)
+        valid_titles.append(person.formal_address + " " + person.last_name)
         valid_titles.append("Cara")
         return valid_titles
 
     def starbuck_possessive_titles(person):
         valid_possessive_titles = []
-        valid_possessive_titles.append("Mrs. " + person.last_name)
+        valid_possessive_titles.append(person.formal_address + " " + person.last_name)
         valid_possessive_titles.append("The sex shop owner")
         if sex_shop_stage() > 1:
             valid_possessive_titles.append("Your business partner")

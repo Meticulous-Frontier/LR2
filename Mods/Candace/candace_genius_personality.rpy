@@ -1,5 +1,5 @@
 ### PERSONALITY CHARACTERISTICS ###
-init 1301:
+init 1400:
     python:
         def genius_titles(the_person):
             if the_person.love < 20:
@@ -11,7 +11,7 @@ init 1301:
         def genius_player_titles(the_person):
             return mc.name
 
-        genius_personality = Personality("genius", default_prefix = "relaxed",
+        genius_personality = Personality("genius", default_prefix = relaxed_personality.default_prefix,
         common_likes = ["pants", "the weekend", "small talk", "the colour pink", "research work", "supply work", "flirting","punk","pop"],
         common_sexy_likes = ["missionary style sex", "kissing", "masturbating", "being submissive", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour yellow", "research work", "work uniforms"],
@@ -59,7 +59,7 @@ label genius_greetings(the_person):
 label genius_sex_responses_foreplay(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Mmm.... This is a great warmup."
+            the_person "Mmm... This is a great warmup."
         else:
             the_person "Mmmm... That feels nice."
 
@@ -181,7 +181,7 @@ label genius_sex_responses_anal(the_person):
         else:
             the_person "I can't..."
             "She struggles to catch her breath."
-            the_person "...I can't believe you might make me cum!"
+            the_person "... I can't believe you might make me cum!"
     return
 
 
@@ -292,7 +292,7 @@ label genius_sex_obedience_accept(the_person):
         if the_person.obedience > 130:
             the_person "Yes [the_person.mc_title], if that's what you want to do I'll give it a try."
         else:
-            the_person "I... Okay, if you really want to, lets give it a try."
+            the_person "I... Okay, if you really want to, let's give it a try."
     return
 
 label genius_sex_gentle_reject(the_person):
@@ -771,7 +771,7 @@ label genius_cum_pullout(the_person):
             elif the_person.on_birth_control:
                 the_person "You are? Do..."
                 "She moans, almost desperately."
-                the_person "...Do you want to cum inside me? Just take the condom off, I don't care any more!"
+                the_person "... Do you want to cum inside me? Just take the condom off, I don't care any more!"
                 the_person "I just want your cum!"
             else:
                 the_person "Oh god... I can't resist it!"
@@ -928,8 +928,7 @@ label genius_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
@@ -945,7 +944,7 @@ label genius_sex_watch(the_person, the_sex_person, the_position):
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
-        the_person "Oh my god that's... Wow that looks...Hot."
+        the_person "Oh my god that's... Wow that looks... Hot."
         $ change_report = the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
@@ -1174,7 +1173,7 @@ label genius_sucking_cock_taboo_break(the_person):
         mc.name "Who's going to know, and why do you care what people think?"
         mc.name "Just suck on it a little, and if you don't like doing it you can stop."
         "She shakes her head again, but you can see her resolve breaking the more she thinks about it."
-        the_person "...Fine. I'll do it."
+        the_person "... Fine. I'll do it."
         mc.name "Do what?"
         "She smiles and laughs."
         the_person "You're the worst. I'll suck on your cock, [the_person.mc_title]. Happy?"
@@ -1197,7 +1196,7 @@ label genius_licking_pussy_taboo_break(the_person):
             the_person "Alright... You can eat me out if you really want to [the_person.mc_title]."
 
         else:
-            the_person "I was wondering if you were going to repay the favour."
+            the_person "I was wondering if you were going to repay the favor."
             the_person "Alright then, you go for it."
         mc.name "Just relax and enjoy."
     return

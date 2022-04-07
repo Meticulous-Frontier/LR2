@@ -44,7 +44,7 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 520
-                        text the_serum.name style "menu_text_title_style" xalign 0.5
+                        text "[the_serum.name]" style "menu_text_title_style" xalign 0.5
 
                 use aspect_grid(the_serum)
 
@@ -104,9 +104,9 @@ init 2:
                     xalign 0.5
                     xsize 520
                     if the_serum.side_effects:
-                        ysize 450
+                        ysize 430
                     else:
-                        ysize 650
+                        ysize 630
 
                     viewport:
                         scrollbars "vertical"
@@ -118,7 +118,7 @@ init 2:
                                 frame:
                                     background "#000080"
                                     xsize 520
-                                    text trait.name style "serum_text_style"
+                                    text "[trait.name]" style "serum_text_style"
 
                                 hbox:
                                     spacing 5
@@ -130,7 +130,7 @@ init 2:
                                     frame:
                                         background "#B14365"
                                         xsize 245
-                                        text "[trait.negative_slug]" style "serum_text_style_traits" size 16
+                                        text trait.build_negative_slug() style "serum_text_style_traits" size 16
 
                 if the_serum.side_effects:
                     frame:
@@ -153,11 +153,11 @@ init 2:
                                         frame:
                                             background "#000080"
                                             xsize 245
-                                            text side_effect.name style "serum_text_style_traits"
+                                            text "[side_effect.name]" style "serum_text_style_traits"
 
                                         frame:
                                             background "#B14365"
                                             xsize 245
-                                            text "[side_effect.negative_slug]" size 16 style "serum_text_style_traits"
+                                            text side_effect.build_negative_slug() size 16 style "serum_text_style_traits"
 
                 transclude #If you hand the serum tooltip a child it's added to the vBox

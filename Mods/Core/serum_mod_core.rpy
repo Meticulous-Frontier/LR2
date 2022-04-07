@@ -14,7 +14,7 @@
 #         anorexia_serum_trait = SerumTraitMod(name = "Anorexia Serum",
 #             desc = "Decrease target subject body mass, using peptide YY3-36 as a serum component that acts on the hypothalamic feeding centers to inhibit hunger and calorie intake.",
 #             positive_slug = "-$15 Value, 20% Chance/Turn to reduce body mass by 200 grams",
-#             negative_slug = "+125 Serum Research",
+#             negative_slug = "",
 #             value_added = -15,
 #             research_added = 125,
 #             base_side_effect_chance = 20,
@@ -60,12 +60,11 @@ init -1 python:
             self.update_serum_trait()
 
         def update_serum_trait(self)            :
+            found = next((x for x in list_of_traits if x.hash() == self.hash()), None)
             if self.enabled:
-                found = find_in_list(lambda x: x.hash() == self.hash(), list_of_traits)
                 if not found:
                     list_of_traits.append(self)
             else:
-                found = find_in_list(lambda x: x.hash() == self.hash(), list_of_traits)
                 if found:
                     list_of_traits.remove(found)
 

@@ -32,23 +32,25 @@ init -1 python:
             return self.role_name != other.role_name
         return True
 
-    Role.__ne__ = role_ne   
+    Role.__ne__ = role_ne
 
-    def add_action(self, act):
-        if not act in self.actions:
-            self.actions.append(act)
+    def add_action(self, action):
+        found = next((x for x in self.actions if x.effect == action.effect), None)
+        if not found:
+            self.actions.append(action)
 
     Role.add_action = add_action
 
     # Remove an action from if present
-    def remove_action(self, act):
-        if isinstance(act, basestring):
-            found = find_in_list(lambda x: x.effect == act, self.actions)
-            if found:
-                self.actions.remove(found)
+    def remove_action(self, action):
+        found = None
+        if isinstance(action, Action):
+            found = next((x for x in self.actions if x == action), None)
+        elif isinstance(action, basestring):
+            found = next((x for x in self.actions if x.effect == action), None)
 
-        if act in self.actions:
-            self.actions.remove(act)
+        if found:
+            self.actions.remove(found)
 
     Role.remove_action = remove_action
 

@@ -28,7 +28,7 @@ label doggy_stealth_attempt(the_girl, the_location, the_object):  #Write the new
         "If you take it off you should probably pull out when you finish though... or should you?"
         menu:
             "Attempt to remove condom":
-                "You bring one hand down to your cock and get it ready. With one out stroke, you pretend to accidentally pull back to far, pulling out of her."
+                "You bring one hand down to your cock and get it ready. With one out stroke, you pretend to accidentally pull back too far, pulling out of her."
                 "You quickly strip off the condom as quietly as possible, then line yourself up and plunge into [the_girl.title]'s heavenly slick cunt."
                 $ stealth_orgasm = True
                 $ mc.condom = False
@@ -121,7 +121,7 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
         $ the_girl.cum_on_ass()
         $ doggy.redraw_scene(the_girl)
         $ climax_controller.do_clarity_release(the_girl)
-        if the_girl.sluttiness > 120:
+        if the_girl.sluttiness > 90:
             the_girl "What a waste, you should have put that inside of me."
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:

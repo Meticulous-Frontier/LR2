@@ -2,14 +2,14 @@ init -1 python:
     # prevent choosing name already used in game
     def get_unused_name():
         names = [person.name for person in all_people_in_the_game()]
-        return get_random_from_list(list(set(list_of_names)-set(names)))
+        return renpy.random.choice(list(set(list_of_names)-set(names)))
 
     get_random_name = get_unused_name
 
     # prevent choosing last_name already used in game
     def get_unused_last_name():
         names = [person.last_name for person in all_people_in_the_game()]
-        return get_random_from_list(list(set(list_of_last_names)-set(names)))
+        return renpy.random.choice(list(set(list_of_last_names)-set(names)))
 
     get_random_last_name = get_unused_last_name
 
@@ -22,6 +22,8 @@ init -1 python:
         list_of_names.remove("Emily")
     if "Christina" in list_of_names:
         list_of_names.remove("Christina")
+    if "Christine" in list_of_names:
+        list_of_names.remove("Christine")
     if "Gabrielle" in list_of_names:
         list_of_names.remove("Gabrielle")
     if "Rebecca" in list_of_names:
@@ -32,8 +34,10 @@ init -1 python:
         list_of_names.remove("Cara")
     if "Erica" in list_of_names:
         list_of_names.remove("Erica")
-    # if "Dawn" in list_of_names:
-    #     list_of_names.remove("Dawn")
+    if "Kaya" in list_of_names:
+        list_of_names.remove("Kaya")
+    if "Sakari" in list_of_names:
+        list_of_names.remove("Sakari")
     if "Ellie" in list_of_names:
         list_of_names.remove("Ellie")
     if "Sarah" in list_of_names:
@@ -41,12 +45,26 @@ init -1 python:
     if "Ophelia" in list_of_names:
         list_of_names.remove("Ophelia")
 
+    if "Rojas" in list_of_last_names:
+        list_of_last_names.remove("Rojas")
+    if "Hooper" in list_of_last_names:
+        list_of_last_names.remove("Hooper")
+    if "Lavardin" in list_of_last_names:
+        list_of_last_names.remove("Lavardin")
+    if "Greene" in list_of_last_names:
+        list_of_last_names.remove("Greene")
+    if "von Friseur" in list_of_last_names:
+        list_of_last_names.remove("von Friseur")
+    if "Cooper" in list_of_last_names:
+        list_of_last_names.remove("Cooper")
+    if "Walters" in list_of_last_names:
+        list_of_last_names.remove("Walters")
+
     # Extra names provided by LangyMD (based on US consensus)
     list_of_names.append("Mary")
     list_of_names.append("Patricia")
     list_of_names.append("Linda")
     list_of_names.append("Barbara")
-    list_of_names.append("Maria")
     list_of_names.append("Margaret")
     list_of_names.append("Dorothy")
     list_of_names.append("Lisa")
@@ -73,7 +91,6 @@ init -1 python:
     list_of_names.append("Amanda")
     list_of_names.append("Carolyn")
     # Popular Names from UK census
-    list_of_names.append("Olivia")
     list_of_names.append("Amelia")
     list_of_names.append("Ava")
     list_of_names.append("Mia")
@@ -88,7 +105,6 @@ init -1 python:
     list_of_names.append("Sienna")
     list_of_names.append("Ruby")
     list_of_names.append("Harper")
-    list_of_names.append("Daisy")
     list_of_names.append("Luna")
     list_of_names.append("Eliza")
     list_of_names.append("Chloe")
@@ -97,7 +113,6 @@ init -1 python:
     # Extra last names provided by LangyMD (based on US consensus)
     list_of_last_names.append("Smith")
     list_of_last_names.append("Johnson")
-    list_of_last_names.append("Jones")
     list_of_last_names.append("Brown")
     list_of_last_names.append("Davis")
     list_of_last_names.append("Miller")
@@ -114,7 +129,6 @@ init -1 python:
     list_of_last_names.append("Robinson")
     list_of_last_names.append("Clark")
     list_of_last_names.append("Lewis")
-    list_of_last_names.append("Lee")
     list_of_last_names.append("Walker")
     list_of_last_names.append("Hall")
     list_of_last_names.append("Allen")
@@ -232,7 +246,7 @@ init -1 python:
 
     # Italian
     list_of_names.append("Aurora")
-    # list_of_names.append("Camilla")
+    list_of_names.append("Celine")
     list_of_names.append("Chiara")
     list_of_names.append("Giulia")
     list_of_names.append("Eleonora")

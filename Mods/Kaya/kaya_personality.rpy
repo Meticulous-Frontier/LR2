@@ -1,4 +1,4 @@
-init 1301 python:              #Because Vren Init personality functionns at 1300
+init 1400 python:              #Because Vren Init personality functionns at 1300
 
     def kaya_titles(person):
         valid_titles = []
@@ -17,7 +17,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
     def kaya_player_titles(person):
         return mc.name
 
-    kaya_personality = Personality("kaya", default_prefix = "wild",
+    kaya_personality = Personality("kaya", default_prefix = wild_personality.default_prefix,
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "skimpy outfits", "being submissive", "drinking cum", "cheating on men"],
     common_dislikes = ["polyamory", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
@@ -31,8 +31,8 @@ label kaya_introduction(the_person):
     "She turns around."
     $ the_person.set_title("???")
     the_person "I guess? What do you need?"
-    mc.name "I know this is strange, but I saw you and I just needed to know your name."
-    "She laughs and blushes."
+    mc.name "I know this sounds crazy, but I saw you and just wanted to say hi and get your name."
+    "She laughs and crosses her arms."
     the_person "Really? You're just saying that to impress me, aren't you."
     mc.name "Really, I really just wanted to talk to you."
     $ title_choice = get_random_title(the_person)
@@ -51,7 +51,7 @@ label kaya_greetings(the_person):
             the_person "Hey! Are we going out for drinks tonight?"
         elif kaya_can_get_barista_quickie():
             the_person "Hey there... want to take a break with me in the back?"
-        elif the_person.is_pregnant():
+        elif the_person.knows_pregnant():
             the_person "Aww, you came to say hi! I can't wait to tell our baby how thoughtful you are."
         elif the_person.sluttiness > 60:
             the_person "Hey there good looking. How are you doing today?"
@@ -78,7 +78,7 @@ label kaya_greetings(the_person):
 label kaya_sex_responses_foreplay(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Mmm.... this feels great. Keep going!"
+            the_person "Mmm... this feels great. Keep going!"
         else:
             the_person "Mmmm... that feels good..."
 
@@ -208,7 +208,7 @@ label kaya_sex_responses_anal(the_person):
         else:
             the_person "I can't..."
             "She struggles to catch her breath."
-            the_person "...I can't believe you might make me cum!"
+            the_person "... I can't believe you might make me cum!"
     return
 
 
@@ -331,7 +331,7 @@ label kaya_sex_obedience_accept(the_person):
         if the_person.obedience > 130:
             the_person "Yes [the_person.mc_title], if that's what you want to do I'll give it a try."
         else:
-            the_person "I... Okay, if you really want to, lets give it a try."
+            the_person "I... Okay, if you really want to, let's give it a try."
     return
 
 # label kaya_sex_gentle_reject(the_person):
@@ -689,7 +689,7 @@ label kaya_flirt_response_girlfriend(the_person):
                         "[the_person.possessive_title] nibbles at your ear, then steps back and smiles happily."
     else:
         # You're alone, so she's open to fooling around.
-        the_person "You are so ridiculous. Come here, lets make out!"
+        the_person "You are so ridiculous. Come here, let's make out!"
         $ the_person.draw_person(position = "kissing")
         "She puts her arms around you and leans in, quickly kissing you a few times on the lips."
         "When she's finished kissing you she rests her head on your shoulder and sighs happily."
@@ -876,7 +876,7 @@ label kaya_cum_pullout(the_person):
             elif the_person.on_birth_control:
                 the_person "You are? Do..."
                 "She moans, almost desperately."
-                the_person "...Do you want to cum inside me? Just take the condom off, I don't care any more!"
+                the_person "... Do you want to cum inside me? Just take the condom off, I don't care any more!"
                 the_person "I just want your cum!"
             else:
                 the_person "Oh god... I can't resist it!"
@@ -1030,8 +1030,7 @@ label kaya_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
@@ -1047,7 +1046,7 @@ label kaya_sex_watch(the_person, the_sex_person, the_position):
 
     elif the_person.sluttiness >= the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
-        the_person "Oh my god that's... Wow that looks...Hot."
+        the_person "Oh my god that's... Wow that looks... Hot."
         $ change_report = the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
@@ -1130,7 +1129,7 @@ label kaya_date_seduction(the_person):
         if the_person.effective_sluttiness(["vaginal_sex", "condomless_sex"]) > 60 and the_person.wants_creampie() and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") >= 0 and the_person.get_opinion_score("creampies") >= 0 and not the_person.on_birth_control and not the_person.event_triggers_dict.get("preg_knows", False):
             if the_person.get_opinion_score("creampies") > 0: #No condoms, loves creampies, she's basically asking you to knock her up. So... have her ask you to knock her up!
                 the_person "Would you like to come home with me? We could fuck until we both cum all over each other..."
-                the_person "...Or inside of me, if you wanted to do that. I promise I'll let you." #TODO Actually check if you've been dating for a while.
+                the_person "... Or inside of me, if you wanted to do that. I promise I'll let you." #TODO Actually check if you've been dating for a while.
             else:
                 the_person "Would you like to come home with me? You could ride me and cum anywhere you want!"
         elif the_person.effective_sluttiness(["vaginal_sex", "condomless_sex"]) > 60 and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") > 0:
@@ -1295,9 +1294,9 @@ label kaya_sex_review(the_person, the_report):
             mc.name "And you wound up begging me to do it."
             "[the_person.possessive_title] looks away, embarrassed by what she's done with you."
         else:
-            the_person "I have never...fucked like that...It was just amazing..."
+            the_person "I have never... fucked like that... It was just amazing..."
             "She seems dazed by her orgasm as she struggles to put full sentences together."
-            the_person "Something took over...and I did....just gimme a second."
+            the_person "Something took over... and I did... just gimme a second."
 
     # special condition abort due to lack of girl energy without orgasm
     elif the_report.get("girl orgasms", 0) == 0 and the_person.energy < 20:
@@ -1479,7 +1478,7 @@ label kaya_sucking_cock_taboo_break(the_person):
         mc.name "Who's going to know, and why do you care what people think?"
         mc.name "Just suck on it a little, and if you don't like doing it you can stop."
         "She shakes her head again, but you can see her resolve breaking the more she thinks about it."
-        the_person "...Fine. I'll do it."
+        the_person "... Fine. I'll do it."
         mc.name "Do what?"
         "She smiles and laughs."
         the_person "You're the worst. I'll suck on your cock, [the_person.mc_title]. Happy?"
@@ -1502,7 +1501,7 @@ label kaya_licking_pussy_taboo_break(the_person):
             the_person "Alright... You can eat me out if you really want to [the_person.mc_title]."
 
         else:
-            the_person "I was wondering if you were going to repay the favour."
+            the_person "I was wondering if you were going to repay the favor."
             the_person "Alright then, you go for it."
         mc.name "Just relax and enjoy."
     return

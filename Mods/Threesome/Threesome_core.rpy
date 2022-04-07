@@ -492,7 +492,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                 call threesome_round(the_person_one, the_person_two, position_choice = active_mc_position, object_choice = None, private = private, report_log = report_log) from _call_threesome_round_1
                 $ first_round = False
                 if not active_mc_position.requirement(the_person_one, the_person_two):
-                    "Your post orgasm cock softens, stopping you from continuing for now."
+                    "Your post-orgasm cock softens, stopping you from continuing for now."
                     $ position_choice = None
                     $ active_mc_position = None
                 elif active_mc_position.guy_energy > mc.energy:
@@ -672,7 +672,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, object_ch
     $ the_person_two.change_energy(-position_choice.girl_two_energy)
 
     #Add clarity
-    $ mc.change_locked_clarity(position_choice.guy_arousal * 10)
+    $ mc.locked_clarity += (position_choice.guy_arousal * 10)
 
     #If girl(s) orgasms, call orgasm scene
     if the_person_one.arousal >= the_person_one.max_arousal or the_person_two.arousal >= the_person_two.max_arousal:

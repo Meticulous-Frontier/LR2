@@ -111,7 +111,7 @@ label family_morning_breakfast_enhanced_label():
             "Next to you, [lily.title] notices your erection and speaks up."
             lily "I'm sure he's fine mom, but us walking around like this has him all worked up. He's hard as a rock!"
             "[lily.possessive_title] reaches down and starts to stroke you."
-            mom "Oh! I'm so sorry [mom.mc_title], I didn't even think about that. [lily.name] honey, lets take care of him before the day gets going."
+            mom "Oh! I'm so sorry [mom.mc_title], I didn't even think about that. [lily.name] honey, let's take care of him before the day gets going."
             lily "Good idea mom!"
             menu:
                 "Accept their help":
@@ -123,7 +123,7 @@ label family_morning_breakfast_enhanced_label():
                     call start_threesome(lily, mom, start_position = threesome_double_blowjob, position_locked = True) from _threesome_for_breakfast_yum_1
                     $ the_report = _return
                     if the_report.get("guy orgasms", 0) > 0:
-                        "You enjoy your post orgasm bliss for a few moments while [mom.possessive_title] and [lily.possessive_title] get up."
+                        "You enjoy your post-orgasm bliss for a few moments while [mom.possessive_title] and [lily.possessive_title] get up."
                     else:
                         "Finished for now, you decide to put your cock away while [mom.possessive_title] and [lily.possessive_title] get up."
                     $ scene_manager.update_actor(mom, position="stand3", display_transform = character_center_flipped)

@@ -1,5 +1,5 @@
 init python:
-    SB_anal_swing = Position(name = "Swinging Anal", slut_requirement = 85, slut_cap = 110, requires_hard = True, requires_large_tits = False,
+    SB_anal_swing = Position(name = "Swinging Anal", slut_requirement = 80, slut_cap = 100, requires_hard = True, requires_large_tits = False,
         position_tag = "sitting", requires_location = "Swing", requires_clothing = "Vagina", skill_tag = "Anal",
         girl_arousal = 20, girl_energy = 12,
         guy_arousal = 22, guy_energy = 16,
@@ -29,12 +29,16 @@ label intro_SB_anal_swing(the_girl, the_location, the_object):
         the_girl "Oh my god. This is so kinky... fuck me good [the_girl.mc_title]!"
     elif the_girl.get_opinion_score("anal sex") > 0 :
         the_girl "I can't wait! It's so intense when you fuck me back there..."
-    elif the_girl.effective_sluttiness() > 110:
+    elif the_girl.effective_sluttiness() > 95:
         the_girl "Oh god I love it when you do this to me..."
     elif the_girl.effective_sluttiness() > 80:
         the_girl "Ok, just be careful [the_girl.mc_title]..."
     else:
         the_girl "I don't know, are you sure this thing is safe?"
+
+    if not the_girl.vagina_available():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_anal_swing.position_tag, visible_enough = True, prefer_half_off = True)
 
     if the_girl.has_role(anal_fetish_role):
         if the_girl is mom:
@@ -224,11 +228,11 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
         $ SB_anal_swing.redraw_scene(the_girl)
         if the_girl.has_cum_fetish():
             "[the_girl.possessive_title]'s body goes rigid as your cum pours into her ass. Goosebumps erupt all over her body as her brain registers her creampie."
-            the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
+            the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         elif the_girl.get_opinion_score("anal creampies") > 0:
             the_girl "Yes!... Thank you so much [the_girl.mc_title]. It's inside me... you know I love that so much..."
-        elif the_girl.sluttiness > 110:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh god it's so good. It makes me so happy to be pumped full like this."
         else:
             the_girl "Oh fuck, I can't believe I let you cum in my ass..."
@@ -249,7 +253,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
             "[the_girl.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
             "[the_girl.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
             "She truly is addicted to your cum."
-        elif the_girl.sluttiness > 120:
+        elif the_girl.sluttiness > 90:
             the_girl "Oh god your seed is so hot! Does it look sexy, having it plastered all over my ass?"
             "She reaches back and runs a finger through the streams of cum you've put on her, then licks her finger clean."
         else:
@@ -297,7 +301,12 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
 
 
 label transition_default_SB_anal_swing(the_girl, the_location, the_object):
-    "[the_girl.possessive_title] turns and puts her hands on [the_object.name]. You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
+    "[the_girl.possessive_title] sits down in the [the_object.name]. Her ass is hanging off the back end."
+    "You run your hands along her supple hips."
+    if not the_girl.vagina_available():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_anal_swing.position_tag, visible_enough = True, prefer_half_off = True)
+    "You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
     "Once you're both ready you push yourself forward, slipping your hard shaft deep inside of her. She lets out a gasp under her breath."
     return
 

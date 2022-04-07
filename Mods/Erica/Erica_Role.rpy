@@ -18,7 +18,7 @@ init 2 python:
 
         global erica
         erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_4",  tits="B", height = 0.89, hair_colour="chestnut brown", hair_style = braided_bun, skin="white" , \
-            eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, job = erica_student_job, \
+            eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, \
             stat_array = [2,4,4], skill_array = [4,1,3,3,1], sex_array = [3,2,3,2], start_sluttiness = 3, start_obedience = -18, start_happiness = 119, start_love = 0, \
             title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True, base_outfit = erica_base_outfit, \
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["pants", 1, False], ["the colour blue", 2, False], ["yoga", 2, False], ["sports", 2, False]],
@@ -26,6 +26,7 @@ init 2 python:
 
         erica.max_energy = 120
         erica.generate_home()
+        erica.add_job(erica_student_job, job_known = True)
         erica.home.add_person(erica)
 
         erica.event_triggers_dict["reject_position"] = "standing_doggy"
@@ -133,12 +134,10 @@ init 2 python:
             mc.change_arousal(20)
             if nude_class:
                 renpy.say(None, erica_yoga_nude_pose_descriptions[pose])
-                mc.change_arousal(10)
                 mc.change_locked_clarity(30)
             else:
                 mc.change_locked_clarity(20)
         else:
-            mc.change_arousal(10)
             mc.change_locked_clarity(10)
         return
 
@@ -782,7 +781,6 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                 $ the_person.draw_person(position = "kissing")
                 "You lean in and kiss [the_person.possessive_title] hungrily. Her hips are grinding against yours."
                 $ the_person.change_arousal(10)
-                $ mc.change_arousal(10)
                 $ mc.change_locked_clarity(10)
                 $ the_person.add_situational_slut("horny", 10, "You take charge")
                 $ the_person.add_situational_obedience("submissive", 20, "She submits to you")
@@ -845,16 +843,14 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                     mc.name "I don't think so. I'm the man here. Lie down, I'll lick your pussy for a bit first."
                     $ mc.change_locked_clarity(20)
                     "She starts to protest, but quickly stops when she realizes you are going to eat her out."
-                    $ the_person.change_happiness(-3)
-                    $ the_person.change_obedience(5)
+                    $ the_person.change_stats(happiness = -3, obedience = 5)
                     $ the_person.add_situational_slut("horny", 10, "You take charge")
                     $ the_person.add_situational_obedience("submissive", 20, "She submits to you")
                     $ the_person.draw_person(position = "missionary")
                     call fuck_person(the_person, private = True, start_position = cunnilingus, start_object = make_bench()) from _erica_gets_fucked_by_her_man_in_lockerroom_02
                 "Let her take the lead":
                     "You decide to let her take charge. She gently pushes you back onto the bench."
-                    $ the_person.change_happiness(3)
-                    $ the_person.change_obedience(-5)
+                    $ the_person.change_stats(happiness = 3, obedience = -5)
                     $ mc.change_locked_clarity(20)
                     the_person "Don't worry, I know just what to do."
                     $ the_person.add_situational_slut("horny", 10, "She takes the lead")
@@ -1604,7 +1600,7 @@ label erica_money_problems_yoga_start_label(the_person):
     mc.name "Not here. It would be once a week, in the morning, on a day of your choosing... At the business I run."
     the_person "At... your company?"
     mc.name "Yeah. We've recently been running some promotions for employees, encouraging them to stay fit, and eat right. What better way to encourage them to do that than with a personal yoga instructor?"
-    the_person "That would be... incredible! I didn't realize that you took fitness so seriously! I mean... I know YOU do... "
+    the_person "That would be... incredible! I didn't realize that you took fitness so seriously! I mean... I know YOU do..."
     "She glances down at your fit chest before she continues."
     the_person "But to make it a company policy... That's a great program!"
     mc.name "I've been working with my HR director. I asked her for help coming up with something you do at the company, and she helped me come up with the whole thing."
@@ -1622,7 +1618,7 @@ label erica_money_problems_yoga_start_label(the_person):
     "After you finish up your conversation, you text [mc.business.hr_director.title], your HR director. Your give her [the_person.possessive_title] contact info."
     $ the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
     $ mc.business.hr_director.set_override_schedule(lobby, the_days = [1], the_times =[0])
-    $ mc.business.add_mandatory_crisis(erica_yoga_event_intro)
+    $ mc.business.add_mandatory_morning_crisis(erica_yoga_event_intro)
     return
 
 label erica_yoga_event_intro_label():
@@ -1842,12 +1838,17 @@ label erica_yoga_loop_label(the_person, yoga_assistant):
     return erica_num_watched
 
 label erica_weekly_yoga_label(the_person):
+    if not erica.is_available:
+        call erica_no_yoga_session_this_week() from _call_erica_no_yoga_session_this_week_1
+        return
+
     python: # setup yoga class
         scene_manager = Scene() # only use one scene manager per event
 
         the_person = erica
         yoga_assistant = erica_get_yoga_assistant()
         yoga_list = erica_get_yoga_class_list()
+        schedule_assistant = True
 
         erica_apply_yoga_outfit_to_class([the_person, yoga_assistant] + yoga_list)
 
@@ -1856,11 +1857,20 @@ label erica_weekly_yoga_label(the_person):
         "The girls are all naked, as has been previously decided. Nude yoga is probably your favorite spectator sport right now."
 
     $ scene_manager.add_actor(the_person)
-    $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
-    "At the front, you see [the_person.possessive_title] doing some light stretching. She has a speaker out, playing some upbeat music."
-    "Next to her you see [yoga_assistant.title]. They have become good friends and are chatting idly as you walk up."
+    if not yoga_assistant.available:
+        mc.name "Hey [the_person.title], I see [yoga_assistant.name] is not here today?"
+        the_person "Yeah, [yoga_assistant.name] couldn't make it this week."
+        $ yoga_assistant = erica_get_alternative_assistant(yoga_list)
+        $ erica_apply_yoga_outfit_to_class([yoga_assistant])
+        the_person "But [yoga_assistant.name] is filling in for her."
+        $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
+        $ schedule_assistant = False
+    else:
+        $ scene_manager.add_actor(yoga_assistant, display_transform = character_center_flipped)
+        "At the front, you see [the_person.possessive_title] doing some light stretching. She has a speaker out, playing some upbeat music."
+        "Next to her you see [yoga_assistant.title]. They have become good friends and are chatting idly as you walk up."
+        the_person "Oh hey [the_person.mc_title]!"
 
-    the_person "Oh hey [the_person.mc_title]!"
     if not erica_get_is_yoga_nude() and erica_get_class_average_sluttiness(yoga_list) > 80: #Average class sluttiness is super slutty. They want to do it nude from now on
         the_person "I'm glad you're here. Several of the girls have approached me about something, but I wanted to run it by you before it became an official policy."
         the_person "The class and I both agree, this is a great, safe place to celebrate the feminine form and what we are capable of."
@@ -2103,7 +2113,8 @@ label erica_weekly_yoga_label(the_person):
 
         # make sure we set the schedule right (fixes room change)
         the_person.set_override_schedule(lobby, the_days = [1], the_times = [0])
-        yoga_assistant.set_override_schedule(lobby, the_days = [1], the_times =[0])
+        if schedule_assistant:
+            yoga_assistant.set_override_schedule(lobby, the_days = [1], the_times =[0])
 
         scene_manager.clear_scene()
         yoga_list = None
@@ -2111,6 +2122,28 @@ label erica_weekly_yoga_label(the_person):
 
     call advance_time(no_events = True) from _call_advance_time_erica_yoga_weekly_recurring
     return
+
+label erica_no_yoga_session_this_week():
+    python: # setup yoga class
+        scene_manager = Scene() # only use one scene manager per event
+        yoga_assistant = erica_get_yoga_assistant()
+
+    if not yoga_assistant.is_available:
+        "As you walk into the lobby, you expected to see the yoga class, but nobody is here."
+        "You suddenly remember that [erica.possessive_title] is not available and they probably rescheduled the class."
+    else:
+        $ scene_manager.add_actor(yoga_assistant)
+        mc.name "Hey [yoga_assistant.title], no class today?"
+        yoga_assistant "Hey [yoga_assistant.mc_title], nah, [erica.name], couldn't make it today, we rescheduled to next week."
+        mc.name "Ok, thanks."
+
+    python:
+        # setup next event
+        erica.add_unique_on_room_enter_event(erica_weekly_yoga)
+        scene_manager.clear_scene()
+        yoga_assistant = None
+    return
+
 
 label erica_getting_watched_reaction_label(the_person, watched_count = 0):  #A short label to describe how Erica feels when you watch her doing yoga.
     if watched_count == 0:
@@ -2499,8 +2532,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
         "You should wear your own thing":
             $ erica_insta_outfit = erica.personalize_outfit(insta_wardrobe.pick_random_outfit())
     erica "Thanks! I'm still pretty new at this, so it's nice to have your opinion on it."
-    $ erica.change_happiness(1)
-    $ erica.change_obedience(1)
+    $ erica.change_stats(happiness = 1, obedience = 1)
     lily "Alright, before we get going, I need to grab a soda or something. I'm parched!"
     erica "Yeah, me too. Do you have any flavored seltzers?"
     "You think for a second. You could offer to go get them their drinks, and that would give you an opportunity to give them a serum..."
@@ -2563,8 +2595,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.strip_full_outfit(strip_feet = True) # strip both simultaneously
             $ mc.change_locked_clarity(40)
             "[erica.possessive_title] gives you a sly smile before she starts putting on her outfit."
-            $ erica.change_slut(2)
-            $ erica.change_happiness(2)
+            $ erica.change_stats(happiness = 2, slut = 2, max_slut = 30)
             $ lily.apply_outfit(lily_insta_outfit, update_taboo = True)
             $ erica.apply_outfit(erica_insta_outfit, update_taboo = True)
             $ scene_manager.update_actor(lily)
@@ -2580,7 +2611,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
     if (erica.sluttiness > 20 and lily.sluttiness > 20):
         "The girls seem relaxed. The pictures are coming out natural and they look great together."
         $ mc.change_locked_clarity(10)
-        mc.name "Alright lets do another set, these are great."
+        mc.name "Alright, let's do another set, these are great."
         $ current_pos = get_random_from_list(erica_insta_pose_pairs)
         $ erica_insta_pose_pairs.remove(current_pos)
         $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
@@ -2657,7 +2688,6 @@ label erica_lily_post_insta_handjob_label():
     "Over your blankets, [the_person.title] reaches over and puts her hand on your chest, then starts to slide it down your body."
     "When she gets to your morning wood, she starts to stroke it."
     $ mc.change_locked_clarity(20)
-    $ mc.change_arousal(20)
     "Your sleep addled brain only lets you moan as she starts to work it."
     the_person "Can you pull your blanket down?"
     "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
@@ -2820,8 +2850,7 @@ label erica_lily_post_insta_morning_label():
     if position_choice == "Surprise me":
         the_person "Mmmm, okay."
         $ mc.change_arousal(20)
-        $ the_person.change_happiness(5)
-        $ the_person.change_obedience(-5)
+        $ the_person.change_stats(happiness = 5, obedience = -5)
         $ position_choice = get_random_from_list(erica_get_wakeup_options())
 
     if position_choice == "handjob":
@@ -2861,7 +2890,7 @@ label erica_lily_post_insta_morning_label():
         $ the_person.draw_person(position = "cowgirl")
         "She climbs on top of you, and with one hand she points your erection up at her puckered hole."
         "She lowers herself gently, but easily takes your hardness into her well trained back passage."
-        the_person "Ahhh! Oh fuck its so big..."
+        the_person "Ahhh! Oh fuck it's so big..."
         "It takes her a moment, but soon [the_person.possessive_title] starts to rock her hips. Time to fuck her silly."
         call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), allow_continue = False) from _anal_fetish_erica_morning_wakeup_01
         $ the_person.change_slut(2, 100)
@@ -2968,15 +2997,14 @@ label erica_pre_insta_love_label(the_person):
         "[the_person.title] opens her mouth. She slides her wet, velvet lips down your erection."
         $ the_person.break_taboo("sucking_cock")
         $ mc.change_locked_clarity(50)
-        $ mc.change_arousal(20)
     else:
         the_person "Mmm, you smell so manly. I love the way you taste and the way you feel so hot in my mouth."
         "[the_person.possessive_title] gives the tip a few exploring licks."
         the_person "I guess I'd better get to work... I'm not sure how long [lily.name] is going to be gone."
         "[the_person.title] opens her mouth. She slides her wet, velvet lips down your erection"
         $ mc.change_locked_clarity(50)
-        $ mc.change_arousal(20)
     "[the_person.title] starts to bob her head up and down, eager to satisfy you with her mouth."
+    $ mc.change_arousal(10)
     "It's so hot, getting a blowjob from [the_person.possessive_title] while sitting on your sister's bed!"
     call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = blowjob, skip_intro = True, ignore_taboo = True, allow_continue = False) from _erica_pre_insta_oral_01
     "When you finish, [the_person.possessive_title] quickly starts to straight up her clothes and wipes the cum from her face."
@@ -3166,13 +3194,11 @@ label erica_breeding_fetish_team_crisis_label():
     "For the first time since she got here, she slips a slight smile."
     the_person "Oh? You don't think it's gross... my belly getting bigger?"
     mc.name "Gross? Geesh, every time I look at you I get so turned on, thinking about pinning you down and knocking you up."
-    $ the_person.change_happiness(15)
-    $ the_person.change_arousal(20)
+    $ the_person.change_stats(happiness = 5, arousal = 20)
     "She looks away from you, but her smile gets a little wider."
     the_person "Yes, and as you can see you certainly did a good job of that, didn't you."
     mc.name "Yeah, but I could definitely use a little more practice."
-    $ the_person.change_happiness(10)
-    $ the_person.change_arousal(20)
+    $ the_person.change_stats(happiness = 5, arousal = 20)
     the_person "Oh god, would you stop? You're making me leak..."
     mc.name "Seriously, you want me to stop?"
     the_person "Stop talking anyway... yeah..."
@@ -3351,7 +3377,7 @@ label erica_breeding_fetish_team_rejoin_label(the_person):
     $ the_person.draw_person()
     $ the_person.change_stats(happiness = 15, love = 7, obedience = 12)
     the_person "Yeah right!"
-    if the_person.is_pregnant():
+    if the_person.knows_pregnant():
         "[the_person.possessive_title] rubs her belly."
         the_person "I won't be rejoining the team immediately... going to wait for the little one to come first."
         the_person "But it's amazing knowing I'll be able to go back to it!"
@@ -3457,6 +3483,13 @@ init 2 python:
             if not person is mc.business.hr_director:
                 yoga_list.append(person)
         return yoga_list
+
+    def erica_get_alternative_assistant(yoga_class):
+        alt = next((x for x in mc.business.get_employee_list() if x not in yoga_class and x.get_opinion_score("yoga") > 0), None)
+        if not alt:
+            alt = renpy.random.choice(yoga_class)
+            yoga_class.remove(alt)
+        return alt
 
     def erica_get_yoga_assistant():
         identifier = erica.event_triggers_dict.get("yoga_assistant", None)

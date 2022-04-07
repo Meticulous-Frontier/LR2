@@ -148,7 +148,7 @@ label intro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
         $ the_girl_2.break_taboo("vaginal_sex")
         $ the_girl_2.break_taboo("condomless_sex")
         the_girl_2 "I think I'm ready for you... go ahead and push it in!"
-    "You don't need any encouragement! "
+    "You don't need any encouragement!"
     return
 
 
@@ -271,7 +271,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                     "[the_girl_2.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
                     "She revels in having her cum fetish fulfilled."
                 "You slowly pull back. Your cum is dripping out of her cunt and down the inside of her legs."
-                "You sit back and enjoy the feeling of post orgasm bliss."
+                "You sit back and enjoy the feeling of post-orgasm bliss."
         "Cum on her ass":
             if mc.condom:
                 "You pull out of [the_girl_2.title] at the last moment. You whip your condom off and stroke your cock as you blow your load over her ass."
@@ -340,7 +340,7 @@ label swap_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loca
 label intro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.possessive_title] lays down on her back. [the_girl_2.possessive_title] gets down between her legs and start to lick her threesome partner."
     "You spend a moment, admiring the ass exposed in front of you, waiting for you to have your way."
-    "You grab your strap on and secure it. It hangs below your cock, ready to fuck [the_girl_2.title]'s cunt while you fuck her ass."
+    "You grab your strap-on and secure it. It hangs below your cock, ready to fuck [the_girl_2.title]'s cunt while you fuck her ass."
     "You use some spit to make sure your cock is lubed, then grab [the_girl_2.possessive_title]'s hips and get into position."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     $ the_girl_2.break_taboo("anal_sex")
@@ -460,7 +460,7 @@ label orgasm_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_loca
     return
 
 label swap_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object):
-    "You grab your strap on and secure it around you. You use a little saliva to make sure your cock is good and lubed up."
+    "You grab your strap-on and secure it around you. You use a little saliva to make sure your cock is good and lubed up."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
     $ the_girl_2.break_taboo("anal_sex")
     if the_girl_2.has_role(anal_fetish_role):

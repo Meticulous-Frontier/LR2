@@ -1,5 +1,5 @@
 ### PERSONALITY CHARACTERISTICS ###
-init 1300:
+init 1400:
     python:
         def candace_titles(person):
             return "Candi"
@@ -11,7 +11,7 @@ init 1300:
             valid_mc_titles.append("Cutie")
             valid_mc_titles.append("Boss")
             return valid_mc_titles
-        candace_personality = Personality("candace", default_prefix = "bimbo",
+        candace_personality = Personality("candace", default_prefix = bimbo_personality.default_prefix,
         common_likes = ["skirts", "small talk", "the colour pink", "makeup", "pop"],
         common_sexy_likes = ["giving blowjobs", "missionary style sex", "being submissive", "skimpy outfits", "showing her tits", "showing her ass", "not wearing anything", "not wearing underwear", "lingerie", "cum facials"],
         common_dislikes = ["working", "research work", "work uniforms", "conservative outfits", "Mondays", "pants"],
@@ -103,7 +103,7 @@ label candace_sex_responses_oral(the_person):
 
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
-            the_person "Does my pussy taste good [the_person.mc_title]? I'll repay the favour suck your cock later!"
+            the_person "Does my pussy taste good [the_person.mc_title]? I'll repay the favor and suck your cock later!"
         else:
             the_person "That, like, feels so good [the_person.mc_title]!"
 
@@ -271,7 +271,7 @@ label candace_sex_accept(the_person):
         else:
             the_person "Yeah, let's do it! You're so cute when you're horny, did you know that?"
     else:
-        the_person "Oh? Oh! Yeah, lets do that!"
+        the_person "Oh? Oh! Yeah, let's do that!"
     return
 
 label candace_sex_obedience_accept(the_person):
@@ -643,8 +643,7 @@ label candace_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Is that, like, allowed? I thought that was illegal or something. Ugh."
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
@@ -930,7 +929,7 @@ label candace_sleepover_yourplace_sex_start(the_person): #Right before sexy time
 
 label candace_sleepover_herplace_sex_start(the_person): #Right before sexy times at her place
     "[the_person.possessive_title] takes the wine glass. She gulps it down, draining the glass all at once."
-    the_person "Mmm, that was nice! But enough with the booze, lets fuck!"
+    the_person "Mmm, that was nice! But enough with the booze, let's fuck!"
     return
 
 label candace_sleepover_impressed_response(the_person):  #If you've made her cum a lot

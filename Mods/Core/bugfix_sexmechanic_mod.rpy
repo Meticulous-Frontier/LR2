@@ -71,14 +71,12 @@ init 5 python:
         return get_random_from_weighted_list(position_option_list)
 
     def girl_choose_object_enhanced(person, position):
-        possible_object_list = []
         if position is None:
             person.clear_situational_slut("sex_object")
             person.clear_situational_obedience("sex_object")
             return None
 
-        for an_object in mc.location.objects_with_trait(position.requires_location):
-            possible_object_list.append(an_object)
+        possible_object_list = [x for x in mc.location.objects_with_trait(position.requires_location)]
 
         picked_object = get_random_from_list(possible_object_list)
 
@@ -254,14 +252,11 @@ init 5 python:
         if forced_object:
             picked_object = forced_object
         else:
-            object_option_list = []
-            for loc_object in mc.location.objects:
-                if loc_object.has_trait(position.requires_location):
-                    object_option_list.append([loc_object.get_formatted_name().capitalize(), loc_object]) #Displays a list of objects in the room related to that position and their appropriate bonuses/penalties
+            object_option_list = [[x.get_formatted_name().capitalize(), x] for x in mc.location.objects if x.has_trait(position.requires_location)]
 
             # if we have only one object to pick for position, select it automatically (saves the user for selecting the only obvious choice)
-            if __builtin__.len(object_option_list) == 0:
-                picked_object = get_random_from_list(mc.location.objects)
+            if not object_option_list:
+                picked_object = renpy.random.choice(mc.location.objects)
             elif __builtin__.len(object_option_list) == 1:
                 picked_object = object_option_list[0][1]
             else:
@@ -393,19 +388,19 @@ init 5 python:
     def suggest_alt_vaginal_sex_position(person, the_position, the_object, ignore_taboo = False):
         alternate_position = kissing
         vaginal_positions_avail = filter(lambda x: x.skill_tag == "Vaginal" and not x == the_position and x.requires_location in the_object.traits and check_person_position_tags(person, x) and x.her_position_willingness_check(person, ignore_taboo = ignore_taboo), list_of_positions)
-        if person.get_opinion_score("vaginal sex") <= -2 or len(vaginal_positions_avail) == 0:   #She isn't willing to do any type of vaginal sex. Step down to oral.
+        if person.get_opinion_score("vaginal sex") <= -2 or not vaginal_positions_avail:   #She isn't willing to do any type of vaginal sex. Step down to oral.
             alternate_position = suggest_alt_oral_sex_position(person, the_position, the_object, ignore_taboo = ignore_taboo)
         else:
-            alternate_position = get_random_from_list(vaginal_positions_avail)
+            alternate_position = renpy.random.choice(vaginal_positions_avail)
         return alternate_position
 
     def suggest_alt_anal_sex_position(person, the_position, the_object, ignore_taboo = False):
         alternate_position = kissing
         anal_positions_avail = filter(lambda x: x.skill_tag == "Anal" and not x == the_position and x.requires_location in the_object.traits and check_person_position_tags(person, x) and x.her_position_willingness_check(person, ignore_taboo = ignore_taboo), list_of_positions)
-        if person.get_opinion_score("anal sex") <= -2 or len(anal_positions_avail) == 0:   #She isn't willing to do any type of anal sex. Step down to vaginal.
+        if person.get_opinion_score("anal sex") <= -2 or not anal_positions_avail:   #She isn't willing to do any type of anal sex. Step down to vaginal.
             alternate_position = suggest_alt_vaginal_sex_position(person, the_position, the_object, ignore_taboo = ignore_taboo)
         else:
-            alternate_position = get_random_from_list(anal_positions_avail)
+            alternate_position = renpy.random.choice(anal_positions_avail)
         return alternate_position
 
     def suggest_alternate_sex_position(person, the_position, the_object, ignore_taboo = False):
@@ -592,12 +587,23 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             # $ renpy.say(None, "Continue round => Position: " + position_choice.name + ", object: " + object_choice.name)
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
                 call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
+
+                # If the girl has an orgasm due to MC coming, she gets a guaranteed trance upgrade
+                if the_person.arousal >= the_person.max_arousal:
+                    if report_log.get("girl orgasms", 0) == 0:
+                        the_person "Oh, [the_person.mc_title], I'm cumming..."
+                    else:
+                        the_person "Oh, [the_person.mc_title], I'm cumming again..."
+                    $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = position_choice.slut_requirement, reset_arousal = False)
+                    $ the_person.change_arousal(-__builtin__.max(the_person.arousal/(report_log.get("girl orgasms", 0)+2), the_person.arousal - the_person.max_arousal - 1))
+                    $ report_log["girl orgasms"] += 1
+
                 $ first_round = False
                 if not finished:    # when we switched to threesome finished is True
                     if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
                         $ mc.condom = False
                     if position_choice.requires_hard and mc.recently_orgasmed:
-                        "Your post orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
+                        "Your post-orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
                         $ position_choice = None
                     elif position_choice.guy_energy > mc.energy:
                         if girl_in_charge:
@@ -1031,11 +1037,11 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                             call put_on_condom_routine(the_person) from _call_put_on_condom_routine_9
 
                 "Fuck her raw":
-                    call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_5
+                    call fuck_without_condom_taboo_break_response(the_person, skill_tag, condom_promise = False) from _call_fuck_without_condom_taboo_break_response_5
 
         else:
             if skill_tag == "Anal":
-                the_person "Well...ah...could you fuck my little ass raw?"
+                the_person "Well... ah... could you fuck my little ass raw?"
             else:
                 $ the_person.call_dialogue("condom_bareback_ask")
             menu:
@@ -1044,7 +1050,8 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                     call put_on_condom_routine(the_person) from _call_put_on_condom_routine_7
 
                 "Fuck her raw":
-                    call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_6
+                    mc.name "No arguments here."
+                    call fuck_without_condom_taboo_break_response(the_person, skill_tag, condom_promise = False) from _call_fuck_without_condom_taboo_break_response_6
 
     if not mc.condom:
         $ the_person.break_taboo("condomless_sex")
@@ -1066,25 +1073,24 @@ label prostitute_agree_no_condom_taboo_break_response(the_person):
             the_person "I'm not using any contraception at the moment."
     return
 
-label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal"):
+label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal", condom_promise = True):
     if the_person.has_taboo("condomless_sex") and skill_tag == "Vaginal":
         $ the_person.call_dialogue("condomless_sex_taboo_break")
     else:
         # TODO: make this a personality based response.
         if the_person.get_opinion_score("bareback sex") > 0:
             the_person "I agree, nothing beats skin on skin."
-        elif skill_tag == "Vaginal" and the_person.get_opinion_score("creampies") > 0:
-            the_person "I love it when you fill me up with your spunk."
-        elif skill_tag == "Anal" and the_person.get_opinion_score("anal creampies") > 0:
-            the_person "Just pump my ass full with that hot spunk of yours."
-
-        if skill_tag == "Vaginal":
-            $ the_person.update_birth_control_knowledge()
+        elif skill_tag == "Vaginal" and condom_promise:
             if the_person.on_birth_control:
                 the_person "Okay. I'm on birth control, so it should be fine."
             elif not the_person.knows_pregnant():
                 the_person "I'm not on birth control [the_person.mc_title], promise you won't cum inside me."
                 call condomless_promise(the_person) from _call_condomless_promise_fuck_without_condom
+        elif skill_tag == "Vaginal" and not condom_promise:
+            if the_person.get_opinion_score("creampies") > 0:
+                the_person "I love it when you fill me up with your spunk."
+        elif skill_tag == "Anal" and the_person.get_opinion_score("anal creampies") > 0:
+            the_person "Just pump my ass full with that hot spunk of yours."
     return
 
 label put_on_condom_routine(the_person):

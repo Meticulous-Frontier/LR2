@@ -31,7 +31,7 @@ label intro_standing_oral(the_girl, the_location, the_object):
         else:
             the_girl "I have something I want you to do."
             mc.name "Oh? What might that be?"
-        if (the_girl.get_opinion_score("getting head") > 0 and the_girl.get_opinion_status("getting head")):
+        if (the_girl.get_opinion_score("getting head") > 0 and the_girl.get_known_opinion_score("getting head")):
             the_girl "You know what I like."
             "[the_girl.title] winks at you as she gently but firmly pushes your shoulders down until you are kneeling before her."
         else:
@@ -40,7 +40,7 @@ label intro_standing_oral(the_girl, the_location, the_object):
         $ standing_oral.redraw_scene(the_girl)
 
         if not the_girl.vagina_available():
-            $ the_girl.strip_to_vagina(position = standing_oral.position_tag, prefer_half_off = True)
+            $ the_girl.strip_to_vagina(position = standing_oral.position_tag, visible_enough = True, prefer_half_off = True)
             "She quickly moves her clothes out of the way."
 
         if the_girl.sex_record.get("Cunnilingus", 0) > 1 and mc.sex_skills["Oral"] > 5:
@@ -55,8 +55,8 @@ label intro_standing_oral(the_girl, the_location, the_object):
         "You do as you are told."
     else:
         if not the_girl.vagina_available():
-            $ the_girl.strip_to_vagina(position = standing_oral.position_tag, prefer_half_off = True)
             "You quickly move her clothes out of the way."
+            $ the_girl.strip_to_vagina(position = standing_oral.position_tag, visible_enough = True, prefer_half_off = True)
 
         $ standing_oral.redraw_scene(the_girl)
         "You kneel before [the_girl.title] and gently start to lick her pussy."
@@ -89,7 +89,7 @@ label taboo_break_standing_oral(the_girl, the_location, the_object):
             the_girl "It's your turn on your knees."
         "[the_girl.title] gently but firmly pushes your shoulders down until you are kneeling before her."
         if not the_girl.vagina_available():
-            $ the_girl.strip_to_vagina(prefer_half_off = True)
+            $ the_girl.strip_to_vagina(standing_oral.position_tag, visible_enough = True, prefer_half_off = True)
             "She quickly moves her clothes out of the way."
         "She runs the fingers of one hand through your hair as she pulls your face to her pussy."
         the_girl "Now start licking."
@@ -97,8 +97,8 @@ label taboo_break_standing_oral(the_girl, the_location, the_object):
     else:
         "You kneel before [the_girl.title]."
         if not the_girl.vagina_available():
-            $ the_girl.strip_to_vagina(prefer_half_off = True)
             "You quickly move her clothes out of the way."
+            $ the_girl.strip_to_vagina(standing_oral.position_tag, visible_enough = True, prefer_half_off = True)
         $ the_girl.call_dialogue("licking_pussy_taboo_break")
         "You gently lick her [the_girl.pubes_description] pussy."
         if the_girl.get_opinion_score("getting head") < 0:
@@ -220,7 +220,7 @@ label transition_default_standing_oral(the_girl, the_location, the_object):
         else:
             the_girl "I have something I want you to do."
             mc.name "Oh? What might that be?"
-        if (the_girl.get_opinion_score("getting head") > 0 and the_girl.get_opinion_status("getting head")):
+        if (the_girl.get_opinion_score("getting head") > 0 and the_girl.get_known_opinion_score("getting head")):
             the_girl "You know what I like."
             "[the_girl.title] winks at you as she gently but firmly pushes your shoulders down until you are kneeling before her."
         else:
@@ -243,13 +243,13 @@ label transition_default_standing_oral(the_girl, the_location, the_object):
             else:
                 the_girl "My, my. What did I do to deserve this?"
             $ the_girl.change_arousal(the_girl.get_opinion_score("taking control"))
-        elif the_girl.get_opinion_score("getting head") < 0 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] < 2) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] == 0):
+        elif the_girl.get_opinion_score("getting head") < 0 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] < 2) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] < 3):
             the_girl "You know you don't have to do that."
             "[the_girl.possessive_title] pushes your head away."
             $ the_girl.change_arousal(-10)
             if the_girl.get_opinion_score("giving blowjobs") > 0:
                 the_girl "How about we swap and I do something for you instead?"
-        elif the_girl.get_opinion_score("getting head") == 2 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] > 7) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] > 5):
+        elif the_girl.get_opinion_score("getting head") >= 2 or (the_girl.get_opinion_score("getting head") == 0 and mc.sex_skills["Oral"] > 7) or (the_girl.get_opinion_score("getting head") == 1 and mc.sex_skills["Oral"] > 5):
             the_girl "I could get used to this."
             the_girl "That feels GOOD."
         else:

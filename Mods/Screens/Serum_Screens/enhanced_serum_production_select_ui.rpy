@@ -48,7 +48,7 @@ init 2:
                     frame:
                         background "#000080"
                         xfill True
-                        textbutton "Max Serum Tier: " + str(mc.business.max_serum_tier) action VrenNullAction style "serum_text_style" text_style "serum_text_style" tooltip "The highest tier of serum you can produce is limited by your production facilities. Upgrade them to produce higher tier designs."
+                        textbutton "Max Serum Tier: [mc.business.max_serum_tier]" action VrenNullAction style "serum_text_style" text_style "serum_text_style" tooltip "The highest tier of serum you can produce is limited by your production facilities. Upgrade them to produce higher tier designs."
 
                     viewport:
                         draggable True
@@ -73,7 +73,7 @@ init 2:
                                             xfill True
                                             spacing 0
 
-                                            textbutton "Production Line " + str(line_number):
+                                            textbutton "Production Line [line_number]":
                                                 action [
                                                     SetScreenVariable("line_selected", line),
                                                     Hide("serum_tooltip")
@@ -188,7 +188,7 @@ init 2:
 
                                                                 frame:
                                                                     xsize 180
-                                                                    text "When > " + str(line.autosell_amount) + " doses" style "menu_text_style" ysize 30 yalign 0.5 yanchor 0.5
+                                                                    text "When > [line.autosell_amount] doses" style "menu_text_style" ysize 30 yalign 0.5 yanchor 0.5
 
                                                                 hbox:
                                                                     xsize 60
@@ -221,7 +221,7 @@ init 2:
                                 mousewheel True
                                 xsize 400
                                 vbox:
-                                    for a_serum in mc.business.serum_designs:
+                                    for a_serum in sorted(mc.business.serum_designs, key = lambda x: x.name):
                                         if a_serum.researched:
                                             textbutton "[a_serum.name]":
                                                 action [

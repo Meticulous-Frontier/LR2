@@ -1,4 +1,4 @@
-init 1301 python:              #Because Vren Init personality functionns at 1300
+init 1400 python:              #Because Vren Init personality functionns at 1300
 
     def ellie_titles(person):
         valid_titles = []
@@ -12,7 +12,7 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
     def ellie_player_titles(person):
         return mc.name
 
-    ellie_personality = Personality("ellie", default_prefix = "introverted",
+    ellie_personality = Personality("ellie", default_prefix = introvert_personality.default_prefix,
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "skimpy outfits", "being submissive", "drinking cum", "cheating on men"],
     common_dislikes = ["polyamory", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
@@ -30,8 +30,8 @@ label ellie_introduction(the_person):
     "She turns around."
     $ the_person.set_title("???")
     the_person "I guess? What do you need?"
-    mc.name "I know this is strange, but I saw you and I just needed to know your name."
-    "She laughs and blushes."
+    mc.name "I know this is sudden, but I just saw you walking by and I felt like I needed to say hi and get your name."
+    "She glances around uncomfortably."
     the_person "Really? You're just saying that to impress me, aren't you."
     mc.name "Really, I really just wanted to talk to you."
     $ title_choice = get_random_title(the_person)
@@ -63,7 +63,7 @@ label ellie_greetings(the_person):
 label ellie_sex_responses_foreplay(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Mmm.... You're good at getting me warmed up..."
+            the_person "Mmm... You're good at getting me warmed up..."
         else:
             the_person "Mmmm... Ah..."
 
@@ -193,7 +193,7 @@ label ellie_sex_responses_anal(the_person):
         else:
             the_person "I can't..."
             "She struggles to catch her breath."
-            the_person "...I can't believe you might make me cum!"
+            the_person "... I can't believe you might make me cum!"
     return
 
 
@@ -334,7 +334,7 @@ label ellie_sex_obedience_accept(the_person):
         if the_person.obedience > 130:
             the_person "Yes [the_person.mc_title], if that's what you want to do I'll give it a try."
         else:
-            the_person "I... Okay, if you really want to, lets give it a try."
+            the_person "I... Okay, if you really want to, let's give it a try."
     return
 
 label ellie_sex_gentle_reject(the_person):
@@ -434,7 +434,7 @@ label ellie_flirt_response(the_person):
             "She seems more worried about being caught than flirting with you."
     else:
         if the_person.sluttiness > 50:
-            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peak."
+            the_person "Mmm, if that's what you want I'm sure I could find a chance to give you a quick peek."
             "[the_person.title] smiles at you and spins around, giving you a full look at her body."
         else:
             the_person "Hey, maybe if you buy me dinner first."
@@ -888,7 +888,7 @@ label ellie_cum_pullout(the_person):
             elif the_person.on_birth_control:
                 the_person "You are? Do..."
                 "She moans, almost desperately."
-                the_person "...Do you want to cum inside me? Just take the condom off, I don't care any more!"
+                the_person "... Do you want to cum inside me? Just take the condom off, I don't care any more!"
                 the_person "I just want your cum!"
             else:
                 the_person "Oh god... I can't resist it!"
@@ -1045,8 +1045,7 @@ label ellie_sex_watch(the_person, the_sex_person, the_position):
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
@@ -1062,7 +1061,7 @@ label ellie_sex_watch(the_person, the_sex_person, the_position):
 
     elif the_person.sluttiness >= the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
-        the_person "Oh my god that's... Wow that looks...Hot."
+        the_person "Oh my god that's... Wow that looks... Hot."
         $ change_report = the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 
@@ -1145,7 +1144,7 @@ label ellie_date_seduction(the_person):
         if the_person.effective_sluttiness(["vaginal_sex", "condomless_sex"]) > 60 and the_person.wants_creampie() and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") >= 0 and the_person.get_opinion_score("creampies") >= 0 and not the_person.on_birth_control and not the_person.event_triggers_dict.get("preg_knows", False):
             if the_person.get_opinion_score("creampies") > 0: #No condoms, loves creampies, she's basically asking you to knock her up. So... have her ask you to knock her up!
                 the_person "Would you like to come home with me? We could sleep together."
-                the_person "We've been dating for a while now...." #TODO Actually check if you've been dating for a while.
+                the_person "We've been dating for a while now..." #TODO Actually check if you've been dating for a while.
             else:
                 the_person "Would you like to come home with me? You could, oh I don't know, pin me down and stick it in raw?"
         elif the_person.effective_sluttiness(["vaginal_sex", "condomless_sex"]) > 60 and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") > 0:
@@ -1306,13 +1305,13 @@ label ellie_sex_review(the_person, the_report):
     # special condition - you fucked her brains out
     elif the_report.get("girl orgasms", 0) > 2:
         if used_obedience:
-            the_person "Oh wow...I just can't believe...I got so...nasty..."
+            the_person "Oh wow... I just can't believe... I got so... nasty..."
             mc.name "A minute ago you were begging me to make you cum again."
             "[the_person.possessive_title] looks away, embarrassed by what she's done with you."
         else:
-            the_person "I have never...It was just amazing..."
+            the_person "I have never... It was just amazing..."
             "She seems dazed by her orgasm as she struggles to put full sentences together."
-            the_person "Something took over...and I did....just gimme a second."
+            the_person "Something took over... and I did... just gimme a second."
 
     #No special conditions, just respond based on how orgasmed and how slutty the position was.
     elif the_report.get("girl orgasms", 0) > 0 and the_report.get("guy orgasms", 0) > 0: #You both came
@@ -1397,7 +1396,7 @@ label ellie_sex_review(the_person, the_report):
 
     # Gave creampie while she is not on birth control (extra dialog when she could get pregnant)
     if the_report.get("creampies", 0) > 0 and not the_person.on_birth_control and not the_person.event_triggers_dict.get("preg_knows", False):
-        the_person "Oh my...you know that you could get me pregnant, right?"
+        the_person "Oh my... you know that you could get me pregnant, right?"
 
     $ del comment_position
     return
@@ -1492,7 +1491,7 @@ label ellie_sucking_cock_taboo_break(the_person):
         mc.name "Who's going to know, and why do you care what people think?"
         mc.name "Just suck on it a little, and if you don't like doing it you can stop."
         "She shakes her head again, but you can see her resolve breaking the more she thinks about it."
-        the_person "...Fine. I'll do it."
+        the_person "... Fine. I'll do it."
         mc.name "Do what?"
         "She smiles and laughs."
         the_person "You're the worst. I'll suck on your cock, [the_person.mc_title]. Happy?"
@@ -1515,7 +1514,7 @@ label ellie_licking_pussy_taboo_break(the_person):
             the_person "Alright... You can eat me out if you really want to [the_person.mc_title]."
 
         else:
-            the_person "I was wondering if you were going to repay the favour."
+            the_person "I was wondering if you were going to repay the favor."
             the_person "Alright then, you go for it."
         mc.name "Just relax and enjoy."
     return
@@ -1797,7 +1796,7 @@ label ellie_sleepover_herplace_response(the_person): #Spending the night at her 
     if the_person.sluttiness < 80:
         the_person "Mmm, that sounds great! Bring a toothbrush, you can spend the night."
     else:
-        the_person "You don't need the wine to seduce me. "
+        the_person "You don't need the wine to seduce me."
     return
 
 

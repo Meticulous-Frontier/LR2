@@ -16,7 +16,7 @@ init 2:
                 frame:
                     background "#000080"
                     xsize 525
-                    text the_trait.name + (" (C)" if isinstance(the_trait, SerumTraitBlueprint) else ""):
+                    text "[the_trait.name]" + (" (C)" if isinstance(the_trait, SerumTraitBlueprint) else ""):
                         style "menu_text_title_style"
                         xalign 0.5
 
@@ -28,7 +28,7 @@ init 2:
                         background "#43B197"
                         xsize 260
                         xfill True
-                        text the_trait.positive_slug style "serum_text_style_traits"
+                        text "[the_trait.positive_slug]" style "serum_text_style_traits"
 
                     frame:
                         background "#B14365"
@@ -38,7 +38,7 @@ init 2:
                 frame:
                     background "#000080"
                     xsize 505
-                    text the_trait.desc style "serum_text_style"
+                    text "[the_trait.desc]" style "serum_text_style"
 
                 $ unlockable_traits = get_unlockable_trait_names(the_trait)
                 if len(unlockable_traits) > 0:
@@ -57,7 +57,7 @@ init 2:
                             mousewheel True
                             vbox:
                                 for ut in get_unlockable_trait_names(the_trait):
-                                        text "■ " + ut style "serum_text_style" xalign 0.0
+                                    text "■ [ut]" style "serum_text_style" xalign 0.0
 
 
                 transclude

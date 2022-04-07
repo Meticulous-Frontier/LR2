@@ -39,12 +39,6 @@ init -1 python:
     # Extend Default Room Functions #
     #################################
 
-    def validate_people(self):
-        for person in [x for x in self.people if x.schedule is None]:
-            person.remove_person_from_game()
-
-    Room.validate_people = validate_people
-
     # extend the default move_person function
     def move_person_extended(org_func):
         def move_person_wrapper(room, person, destination):
@@ -114,27 +108,29 @@ init -1 python:
         return possible_locations
 
     # Adds an action to the room if not already present. Used with PolicyMod.
-    def add_action(self, act):
-        if act not in self.actions:
-            self.actions.append(act)
+    def add_action(self, action):
+        found = next((x for x in self.actions if x.effect == action.effect), None)
+        if not found:
+            self.actions.append(action)
 
     Room.add_action = add_action
 
     # Remove an action from if present
-    def remove_action(self, act):
-        if isinstance(act, basestring):
-            found = find_in_list(lambda x: x.effect == act, self.actions)
-            if found:
-                self.actions.remove(found)
+    def remove_action(self, action):
+        found = None
+        if isinstance(action, Action):
+            found = next((x for x in self.actions if x == action), None)
+        elif isinstance(action, basestring):
+            found = next((x for x in self.actions if x.effect == action), None)
 
-        if act in self.actions:
-            self.actions.remove(act)
+        if found:
+            self.actions.remove(found)
 
     Room.remove_action = remove_action
 
     def remove_object(self, the_object):
         if isinstance(the_object, basestring):
-            found = find_in_list(lambda x: x.name == the_object, self.objects)
+            found = ((x for x in self.objects if x.name == the_object), None)
             if found:
                 self.objects.remove(found)
 

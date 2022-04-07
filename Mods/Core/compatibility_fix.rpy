@@ -127,6 +127,7 @@ init -4 python:
 init -2:
     default persistent.zip_cache_size = 0 # default is small size
     default persistent.show_ntr = False     # default turn of NTR
+    default persistent.keep_patreon_characters = True  # keep VREN original characters from hire process
 
 init python: # place first on the hijack stack
     add_label_hijack("after_load", "check_save_version")
@@ -135,10 +136,6 @@ init 5 python: # add to stack later then other mods
     add_label_hijack("normal_start", "activate_compatibility_fix")
     add_label_hijack("after_load", "update_compatibility_fix")
     add_label_hijack("start", "check_mod_installation")
-
-    # disable game saving by setting this flag
-    okay_to_save = True
-    config.game_menu[3] = ( "save", u"Save Game", ui.jumps("_save_screen"), 'not renpy.context().main_menu and okay_to_save' )
 
     hook_label("start", check_bugfix_installed)
 
@@ -176,6 +173,7 @@ init 1 python:
     config.cache_surfaces = False
     config.predict_screen_statements = False
     config.predict_screens = False
+    config.list_compression_length = 200        # increase list compression length for rollback
 
     # disable auto save
     config.autosave_on_choice = False
@@ -233,11 +231,6 @@ init 1 python:
             renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
-    def validate_person_stats():
-        for person in all_people_in_the_game():
-            person.validate_stats()
-        return
-
     def validate_stripclub_stripper_role():
         if not "stripclub_stripper_job" in globals():
             global stripclub_stripper_job
@@ -279,8 +272,6 @@ label update_compatibility_fix(stack):
     if not list_of_jobs or not isinstance(list_of_jobs[0], list):
         call instantiate_jobs() from _call_instantiate_jobs
         call add_extra_room_job_definitions() from _call_add_extra_room_job_definitions
-
-    $ validate_person_stats()
 
     $ validate_stripclub_stripper_role()
 

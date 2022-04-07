@@ -1,6 +1,6 @@
 init:
     python:
-        piledriver_DP = Position(name = "Piledriver DP", slut_requirement = 95, slut_cap = 130, requires_hard = True, requires_large_tits = False,
+        piledriver_DP = Position(name = "Piledriver DP", slut_requirement = 90, slut_cap = 100, requires_hard = True, requires_large_tits = False,
             position_tag = "missionary", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Vaginal",
             girl_arousal = 18, girl_energy = 14,
             guy_arousal = 24, guy_energy = 22,
@@ -29,16 +29,16 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
 
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
 
     "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
     the_girl "I'm not sure the angle is gonna work for..."
-    "She let's out a startled yelp as you grab her ankles and bring them up over her head."
+    "She lets out a startled yelp as you grab her ankles and bring them up over her head."
     if the_girl.get_opinion_score("being submissive") > 0:
         the_girl "Oh god, you're gonna dominate me with that thing aren't you?"
         "She sounds more excited than scared."
         $ the_girl.change_arousal(10)
-    elif the_girl.sluttiness > 100:
+    elif the_girl.sluttiness > 90:
         the_girl "Oh! That'll work! My holes are for you to use [the_girl.mc_title]!"
     else:
         the_girl "Oh god! I don't know... are you sure about this?"
@@ -58,6 +58,9 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
 
 label taboo_break_piledriver_DP(the_girl, the_location, the_object): #This should only be filler, since piledriver can only be transitioned to for now
     "You take [the_girl.title]'s hands in yours and guide her down onto the [the_object.name]. She follows your lead, lying down for you."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = piledriver_DP.position_tag, visible_enough = True, prefer_half_off = True)
     "You place your hands on her knees and spread her legs, kneeling down between them."
     "You sit your hard cock on her stomach, teasingly close to her warm pussy. [the_girl.possessive_title] reaches down and gently pets your shaft."
     $ the_girl.call_dialogue(piledriver_DP.associated_taboo+"_taboo_break")
@@ -73,7 +76,7 @@ label taboo_break_piledriver_DP(the_girl, the_location, the_object): #This shoul
         "At the same time you place the dildo against her sphincter, slightly opening it up."
 
     "You hold onto [the_girl.title]'s legs and push forward. After a moment of resistance you slide smoothly into both her holes."
-    the_girl "Ohhhh....."
+    the_girl "Ohhhh...."
     "You hold yourself deep inside of her for a few seconds, then pull back and begin slowly thrust in and out."
     return
 
@@ -185,7 +188,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                     the_girl "Yes! Fill me with your cum!"
                 if the_girl.has_cum_fetish():
                     "[the_girl.possessive_title]'s body goes rigid as your cum pours into her [the_girl.pubes_description] pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-                    the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+                    the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                     "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
 
                 if the_girl.knows_pregnant():
@@ -193,7 +196,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 elif the_girl.get_opinion_score("bareback sex") > 0:
                     the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
                     "[the_girl.possessive_title]'s voice starts to trail off."
-                elif the_girl.sluttiness > 110:
+                elif the_girl.sluttiness > 90:
                     the_girl "Oh god it's so deep."
                 elif the_girl.on_birth_control:
                     the_girl "Oh fuck...  Good thing I'm on the pill..."
@@ -241,7 +244,7 @@ label transition_piledriver_piledriver_DP(the_girl, the_location, the_object):
         the_girl "Oh god, you're gonna dominate me with that thing aren't you?"
         "She sounds more excited than scared."
         $ the_girl.change_arousal(10)
-    elif the_girl.sluttiness > 100:
+    elif the_girl.sluttiness > 90:
         the_girl "Oh god here we go. My holes are for you to use [the_girl.mc_title]!"
     else:
         the_girl "Oh god! I don't know... are you sure about this?"
@@ -260,7 +263,11 @@ label transition_piledriver_piledriver_DP(the_girl, the_location, the_object):
     return
 
 label transition_default_piledriver_DP(the_girl, the_location, the_object):
-    "You put [the_girl.title] on her back, then lift her legs up and bend her over at the waist. You kneel over her, lining your hard cock up with her tight pussy."
+    "You put [the_girl.title] on her back."
+    if not the_girl.vagina_available():
+        "You move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = piledriver_DP.position_tag, visible_enough = True, prefer_half_off = True)
+    "Then lift her legs up and bend her over at the waist. You kneel over her, lining your hard cock up with her tight pussy."
     mc.name "Ready?"
     "[the_girl.possessive_title] nods, and you slip yourself deep, deep inside of her."
     return

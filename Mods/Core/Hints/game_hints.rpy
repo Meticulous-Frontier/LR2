@@ -10,7 +10,7 @@ init -1 python:
     game_hints.append(Hint("Meet Sarah", "You should stay home for a day and see who knocks on your door.", "day > 2", "HR_director_creation_requirement() or sarah.is_employee() or sarah.event_triggers_dict.get('rejected', False) == True"))
     game_hints.append(Hint("Join Sarah and Friends", "While working on Saturday, Sarah might ask you to join her for drinks with friends.", "bool(exists_in_mandatory_crisis_list('Sarah_third_wheel_label')) and sarah.sluttiness >= 20 and sarah.love >= 20", "not bool(exists_in_mandatory_crisis_list('Sarah_third_wheel_label'))"))
     game_hints.append(Hint("Date with Sarah", "While working on Saturday, Sarah might ask you on a date.", "bool(exists_in_mandatory_crisis_list('Sarah_get_drinks_label')) and sarah.sluttiness > 40 and sarah.love > 40", "not bool(exists_in_mandatory_crisis_list('Sarah_get_drinks_label'))"))
-    game_hints.append(Hint("Another date with Sarah", "Sarah might take you on another date on Saturday, when you work in the office.", "bool(exists_in_mandatory_crisis_list('Sarah_stripclub_story_label')) and (sarah_epic_tits_progress() >= 2 or sarah_epic_tits_progress() == -1) and not strip_club_is_closed() and sarah.sluttiness > 50", "not bool(exists_in_mandatory_crisis_list('Sarah_stripclub_story_label'))"))
+    game_hints.append(Hint("Another date with Sarah", "Sarah might take you on another date on Saturday, when you work in the office.", "bool(exists_in_mandatory_crisis_list('Sarah_stripclub_story_label')) and (sarah_epic_tits_progress() >= 2 or sarah_epic_tits_progress() == -1) and not strip_club_is_closed() and sarah.sluttiness > 50 and sarah.love >= 60", "not bool(exists_in_mandatory_crisis_list('Sarah_stripclub_story_label'))"))
 
     # Hints for Kaya (Disabled for now until the character is more complete)
     # game_hints.append(Hint("Ask Kaya Out", "Go to the coffee shop and increase Kaya's love to greater than 20 and in the evening ask Kaya on a date.", "kaya_has_finished_intro()", "not kaya_has_had_drink_date() or kaya_has_started_internship() or kaya_has_moved()"))
@@ -39,7 +39,7 @@ init -1 python:
     game_hints.append(Hint("Nora's Research Lovers Attraction", "Interview anyone with her love > 85. Each turn permanently converts one point of Sluttiness into Love until they are equal.", "bool(exists_in_location_action_list(university, 'nora_special_research')) and the_person is nora and not nora_reward_high_love_trait in list_of_traits", "nora_reward_high_love_trait in list_of_traits"))
     game_hints.append(Hint("Nora's Research Distilled Disgust", "Interview anyone with her love < -50. Gives a massive penalty to love (-50) for the duration of the serum.", "bool(exists_in_location_action_list(university, 'nora_special_research')) and the_person is nora and not nora_reward_low_love_trait in list_of_traits", "nora_reward_low_love_trait in list_of_traits"))
     game_hints.append(Hint("Nora's Research Pleasurable Obedience", "Interview anyone with obedience > 180. Increases happiness by 1 for every 5 points of Obedience over 100 per turn.", "bool(exists_in_location_action_list(university, 'nora_special_research')) and the_person is nora and not nora_reward_high_obedience_trait in list_of_traits", "nora_reward_high_obedience_trait in list_of_traits"))
-    game_hints.append(Hint("Nora's Research Rapid Corruption", "Interview anyone with her sluttiness > 100. Instantly and permanently increase Sluttiness by 5 when applied.", "bool(exists_in_location_action_list(university, 'nora_special_research')) and the_person is nora and not nora_reward_high_slut_trait in list_of_traits", "nora_reward_high_slut_trait in list_of_traits"))
+    game_hints.append(Hint("Nora's Research Rapid Corruption", "Interview anyone with her sluttiness > 95. Instantly and permanently increase Sluttiness by 5 when applied.", "bool(exists_in_location_action_list(university, 'nora_special_research')) and the_person is nora and not nora_reward_high_slut_trait in list_of_traits", "nora_reward_high_slut_trait in list_of_traits"))
     game_hints.append(Hint("Nora's Research Natural Talent", "Interview anyone with intelligence, charisma and focus >= 7. Instantly and permanently sets the serum recipient's Intelligence, Charisma, and Focus to 7.", "bool(exists_in_location_action_list(university, 'nora_special_research')) and the_person is nora and not nora_reward_genius_trait in list_of_traits", "nora_reward_genius_trait in list_of_traits"))
     game_hints.append(Hint("Nora's Human Breeding Hormones", "Interview anyone who is pregnant with sluttiness > 75 and the pregnancy is visible. Decreases birth control effectiveness and increases fertility, lactation and breast size for duration.", "persistent.pregnancy_pref != 0 and bool(exists_in_location_action_list(university, 'nora_special_research')) and the_person is nora and not nora_reward_hucow_trait in list_of_traits", "nora_reward_hucow_trait in list_of_traits"))
     game_hints.append(Hint("Nora's Trance Inducer", "Interview anyone who is in a very heavy trance role and make sure to give the report to Nora while she still in trance. Instantly puts some in a trance, does not deepen trance.", "bool(exists_in_location_action_list(university, 'nora_special_research')) and the_person is nora and not nora_reward_instant_trance in list_of_traits", "nora_reward_instant_trance in list_of_traits"))
@@ -70,28 +70,25 @@ init -1 python:
         return [x for x in game_hints if x.is_active and not x.is_complete]
 
     def exists_in_mandatory_crisis_list(effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, mc.business.mandatory_crises_list)
+        return next((x for x in mc.business.mandatory_crises_list if x.effect == effect_name), None)
 
     def exists_in_mandatory_morning_crisis_list(effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, mc.business.mandatory_morning_crises_list)
+        return next((x for x in mc.business.mandatory_morning_crises_list if x.effect == effect_name), None)
 
     def exists_in_room_enter_list(person, effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, person.on_room_enter_event_list)
+        return next((x for x in person.on_room_enter_event_list if x.effect == effect_name), None)
 
     def exists_in_talk_event_list(person, effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, person.on_talk_event_list)
+        return next((x for x in person.on_talk_event_list if x.effect == effect_name), None)
 
     def exists_in_role_action_list(role, effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, role.actions)
+        return next((x for x in role.actions if x.effect == effect_name), None)
 
     def exists_in_location_action_list(location, effect_name):
-        return find_in_list(lambda x: x.effect == effect_name, location.actions)
+        return next((x for x in location.actions if x.effect == effect_name), None)
 
     def researched_all_at_level():
-        for trait in list_of_traits:
-            if not trait.researched and trait.tier == mc.business.research_tier:
-                return False
-        return True
+        return not any(x for x in list_of_traits if not x.researched and x.tier == mc.business.research_tier)
 
 init 2:
     screen game_hints_tooltip():

@@ -153,7 +153,7 @@ label mc_bedroom_renovate_option_label():
     return
 
 label mc_bedroom_renovate_label():
-    "You decide to renovate your bedroom and call a contractor recommended by a college friend: Turner construction, renowned for their efficiency and discretion."
+    "You decide to renovate your bedroom and call a contractor recommended by a college friend: Turner Construction, renowned for their efficiency and discretion."
     mc.name "Good day, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
     "You go over the details to vastly improve your bedroom from a college student's decor to something more befitting the head of a successful company."
     python:

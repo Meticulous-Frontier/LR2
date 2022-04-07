@@ -384,10 +384,10 @@ label quest_cuckold_employee_decision_label():
         $ the_person.apply_planned_outfit() # make sure she is dressed again after event
     elif the_report.get("guy orgasms", 0) == 0:
         "[the_person.title] is completely silent."
-        the_person "You... you didn't even finish. "
+        the_person "You... you didn't even finish."
         the_person "Don't you like breeding me?"
         if mc.energy < 30:
-            mc.name "I'm really sorry, but I'm just to tired at the moment, we can try again tomorrow."
+            mc.name "I'm really sorry, but I'm just too tired at the moment, we can try again tomorrow."
             $ the_person.change_stats(happiness = -10, obedience = -10, love = -10)
             the_person "Alright, for just this once, I will believe you, but you better clean up your act."
             $ the_person.apply_planned_outfit()
@@ -397,7 +397,7 @@ label quest_cuckold_employee_decision_label():
             $ the_person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
             $ mc.business.add_mandatory_crisis(quest_cuckold_employee_after_window)
         else:
-            mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
+            mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just worn out..."
             the_person "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "walking_away")
@@ -409,7 +409,7 @@ label quest_cuckold_employee_decision_label():
         the_person "You... you didn't even finish inside of me?"
         $ the_person.change_stats(happiness = -20, obedience = -30, love = -30)
         the_person "You... you just wanted to fuck me, didn't you!?!"
-        mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
+        mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just worn out..."
         the_person "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
         $ the_person.apply_planned_outfit()
         $ the_person.draw_person(position = "walking_away")
@@ -488,10 +488,10 @@ label quest_cuckold_employee_rethink_decision_label():
         $ the_person.apply_planned_outfit() # make sure she is dressed again after event
     elif the_report.get("guy orgasms", 0) == 0:
         "[the_person.title] is completely silent."
-        the_person "You... you didn't even finish. "
+        the_person "You... you didn't even finish."
         the_person "Don't you like breeding me?"
         if mc.energy < 30:
-            mc.name "I'm really sorry, but I'm just to tired at the moment, we can try again tomorrow."
+            mc.name "I'm really sorry, but I'm just too tired at the moment, we can try again tomorrow."
             $ the_person.change_stats(happiness = -10, obedience = -10, love = -10)
             the_person "Alright, for just this once, I will believe you, but you better clean up your act."
             $ the_person.apply_planned_outfit()
@@ -501,7 +501,7 @@ label quest_cuckold_employee_rethink_decision_label():
             $ the_person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
             $ mc.business.add_mandatory_crisis(quest_cuckold_employee_after_window)
         else:
-            mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
+            mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just worn out..."
             the_person "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(position = "walking_away")
@@ -513,7 +513,7 @@ label quest_cuckold_employee_rethink_decision_label():
         the_person "You... you didn't even finish inside of me?"
         $ the_person.change_stats(happiness = -20, obedience = -30, love = -30)
         the_person "You... you just wanted to fuck me, didn't you!?!"
-        mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just wore out..."
+        mc.name "I'm sorry, I want to help you, but it's been a long day and I'm just worn out..."
         the_person "Fuck you! I see right through that charade. You just wanted to fuck a married woman!"
         $ the_person.apply_planned_outfit()
         $ the_person.draw_person(position = "walking_away")
@@ -787,7 +787,7 @@ label quest_cuckold_employee_knocked_up_label():
     $ quest_cuckold_employee().quest_completed()
     return
 
-init 1301 python:
+init 1400 python:
     def breeding_stock_titles(the_person):
         return "Cow"
     def breeding_stock_possessive_titles(the_person):

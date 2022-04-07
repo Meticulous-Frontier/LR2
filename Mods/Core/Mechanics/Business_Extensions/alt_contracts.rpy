@@ -13,7 +13,7 @@ init 2 python:
             serum.add_trait(get_random_from_weighted_list(weighted_suggestion_traits) or suggestion_drugs_trait)
 
         count = 0
-        while serum.slots_used() < serum.slots and count < 10: # try to add traits in a loop for a max of 10 tries
+        while serum.slots_used < serum.slots and count < 10: # try to add traits in a loop for a max of 10 tries
             weighted_traits = [[t, (t.tier + 1) * 2] for t in [x for x in list_of_traits if x.researched and not "Production" in x.exclude_tags and not x in serum.traits]]
             trait = get_random_from_weighted_list(weighted_traits)
             if trait and serum.trait_add_allowed(trait):

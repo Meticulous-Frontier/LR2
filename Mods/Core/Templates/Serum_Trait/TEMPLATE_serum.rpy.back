@@ -18,8 +18,8 @@ init -1 python:
     def add_TEMPLATE_serum():
         TEMPLATE_serum_trait = SerumTraitMod(name = "TEMPLATE",        # The name of the serum
             desc = "TEMPLATE",                                          # Make up something about how it works.
-            positive_slug = "+1 TEMPLATE",                               # The green section in the serum design screen
-            negative_slug = "+25 Research",                             # The red section in the serum design screen
+            positive_slug = "+1 TEMPLATE",                              # The green section in the serum design screen
+            negative_slug = "",                                         # The red section in the serum design screen
             research_added = 0,                                         # Extra research required to develop the protoype
             slots_added = 0,                                            # IF it adds any additioanl serum trait slots. Usually No
             production_added = 0,                                       # If it adds production time

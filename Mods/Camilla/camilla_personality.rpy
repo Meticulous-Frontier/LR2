@@ -1,7 +1,5 @@
 
-init 1301 python:              #Because Vren Init personality functionns at 1300
-
-
+init 1400 python:              #Because Vren Init personality functionns at 1300
 
     def camilla_titles(person):
         valid_titles = []
@@ -18,13 +16,18 @@ init 1301 python:              #Because Vren Init personality functionns at 1300
             valid_possessive_titles.append("The Slutwife")
             valid_possessive_titles.append("Your Swinging Slut")
 
-        if person.effective_sluttiness() > 100:
+        if person.effective_sluttiness() > 90:
             valid_possessive_titles.append("The Bar Cumdump")
         return valid_possessive_titles
     def camilla_player_titles(person):
-        return mc.name
+        valid_titles = "Mr. " + mc.last_name
+        if person.love > 20:
+            valid_titles.append(mc.name)
+        if person.has_breeding_fetish():
+            valid_titles.append("Bull")
+        return valid_titles
 
-    camilla_personality = Personality("camilla", default_prefix = "wild",
+    camilla_personality = Personality("camilla", default_prefix = wild_personality.default_prefix,
     common_likes = ["skirts", "dresses", "the weekend", "the colour red", "makeup", "flirting", "high heels"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "vaginal sex", "public sex", "lingerie", "skimpy outfits", "being submissive", "drinking cum", "cheating on men"],
     common_dislikes = ["polyamory", "pants", "working", "the colour yellow", "conservative outfits", "sports"],
@@ -157,7 +160,7 @@ label camilla_sex_obedience_accept(the_person):
         if the_person.obedience > 130:
             the_person "Yes [the_person.mc_title], if that's what you want to do I'll give it a try."
         else:
-            the_person "I... Okay, if you really want to, lets give it a try."
+            the_person "I... Okay, if you really want to, let's give it a try."
     return
 
 # label camilla_sex_gentle_reject(the_person):
@@ -446,7 +449,7 @@ label camilla_hookup_accept(the_person):
                 if the_person.effective_sluttiness() > 60:
                     the_person "I mean... it's okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
                     if the_person.effective_sluttiness() > 90:
-                        the_person "...or even just finish inside me. I promise I wouldn't mind at all!"
+                        the_person "... or even just finish inside me. I promise I wouldn't mind at all!"
                     mc.name "Maybe next time!"
                 "You get a condom and put it on quickly."
                 $ mc.condom = True
@@ -481,7 +484,7 @@ label camilla_hookup_accept(the_person):
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
         "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
         mc.name "That's it, bitch. I'm about to cum!"
-        if the_person.effective_sluttiness() > 100: #She is so slutty, she begs for your cum.
+        if the_person.effective_sluttiness() > 90: #She is so slutty, she begs for your cum.
             the_person "The condom! Take it off! Please!?! Your cock is so good, I want to feel you dump your load inside me!"
             "Your brain is getting a little hazy with lust. Surely there's nothing wrong with that, right?"
             menu:
@@ -493,8 +496,7 @@ label camilla_hookup_accept(the_person):
                     "Her excitement is too much. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
                     the_person  "Yes! Fill me with your cum!"
                     "You feel her pussy convulsing around your dick as she also starts to orgasm."
-                    $ the_person.change_slut(1)
-                    $ the_person.change_happiness(2)
+                    $ the_person.change_stats(slut = 1, happiness = 2)
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person( position = "standing_doggy") # redraw with cum
                     "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
@@ -507,8 +509,7 @@ label camilla_hookup_accept(the_person):
         "You wait until your orgasm has passed completely, then pull out and stand back. Your condom is bulged on the end where it is filled with your seed."
         if the_person.arousal < 100:
             the_person "Wow, okay, I guess we are done?"
-            $ the_person.change_happiness(-5)
-            $ the_person.change_obedience(-5)
+            $ the_person.change_stats(happiness = -5, obedience = -5)
             "She is a bit disappointed she didn't finish."
         else:
             the_person "That was nice. I'll make sure next time I'm in the mood to hit you up again..."
@@ -541,11 +542,11 @@ label camilla_hookup_accept(the_person):
             menu:
                 "Stay Vaginal":
                     "As [the_person.title]'s pussy quivers around you, you decide to just keep doing what you are doing."
-                "Fuck Her Ass" if the_person.effective_sluttiness() >= 80:
+                "Fuck Her Ass" if the_person.effective_sluttiness() >= 70:
                     "You pull out of her pussy. Her juices leave a strand attached to you, connecting you to her cunt."
                     the_person "Mmm, [the_person.mc_title]? Why did you pull out... OH!"
                     "Her question is swiftly answered when she feels your manhood poking her puckered hole."
-                    if the_person.effective_sluttiness() > 100:
+                    if the_person.effective_sluttiness() > 90:
                         the_person "Yes! Fuck my ass good!"
                     else:
                         the_person "Oh my... be careful!"
@@ -672,7 +673,7 @@ label camilla_cum_pullout(the_person):
             elif the_person.on_birth_control:
                 the_person "You are? Do..."
                 "She moans, almost desperately."
-                the_person "...Do you want to cum inside me? Just take the condom off!"
+                the_person "... Do you want to cum inside me? Just take the condom off!"
                 the_person "I just want your cum!"
             elif camilla_is_fertile():
                 the_person "Oh god... I can't resist it!"
@@ -1085,7 +1086,7 @@ label camilla_sleepover_herplace_response(the_person): #Spending the night at he
     if the_person.sluttiness < 80:
         the_person "Mmm, that sounds great! Bring a toothbrush, you can spend the night."
     else:
-        the_person "You don't need the wine to seduce me. "
+        the_person "You don't need the wine to seduce me."
     return
 
 

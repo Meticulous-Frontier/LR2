@@ -520,7 +520,7 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person "What? It's nothing serious, you should come over tomorrow, I'll do the same for you."
     ex_name "I'm sorry, this is getting out of control. I'm sorry but I'm blocking you."
     the_person "Wow, after everything we've been through together? \n \'message not received\'"
-    "...Ouch..."
+    "... Ouch..."
     mc.name "[the_person.title]... I'm sorry."
     the_person "Yeah that's... not what I was hoping for. Oh well."
     the_person "I was really thinking that, just maybe."
@@ -780,7 +780,7 @@ label ophelia_revenge_date_label():
     $ the_person.change_arousal(15)
     $ mc.arousal += 10
     $ mc.change_locked_clarity(20)
-    "Your hands drops to her ass. You give it a squeeze, testing your limits with [the_person.possessive_title]. She sighs and gives a slight moan. She doesn't resist you at all."
+    "Your hand drops to her ass. You give it a squeeze, testing your limits with [the_person.possessive_title]. She sighs and gives a slight moan. She doesn't resist you at all."
     "You bring your other hand down and grab the other cheek. You pull her toward you and begin to grind your hips against her."
     "She is pressing her body against you."
     the_person "Oh god... I haven't... in a while..."
@@ -1075,7 +1075,7 @@ label ophelia_choose_service_test_label():
     $ scene_manager.remove_actor(the_person)
     "From now on, if a girl is slutty or obedient enough, when you schedule a haircut, you can also set a pubic hair style."
     $ salon_manager.event_triggers_dict["full_style_state"] = 2
-    $ office.actions.remove(ophelia_choose_service_test)
+    $ office.remove_action(ophelia_choose_service_test)
     return # Where to go if you hit "Back".
 
 label ophelia_add_service_full_body_massage_label(the_person):
@@ -1087,7 +1087,7 @@ label ophelia_add_service_full_body_massage_label(the_person):
     mc.name "I'm listening. What's the idea?"
     "She takes a deep breath."
     the_person "Well... my full body hair styling has been a great success... especially with some of the girls from your office..."
-    the_person "I was thinking about what I could do to take the service to the next level, you know. "
+    the_person "I was thinking about what I could do to take the service to the next level, you know."
     return
 
 

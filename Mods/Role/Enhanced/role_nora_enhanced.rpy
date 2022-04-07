@@ -18,7 +18,7 @@ init 5 python:
             return True
         elif person.obedience > 180 and nora_reward_high_obedience_trait not in list_of_traits:
             return True
-        elif person.sluttiness > 100 and nora_reward_high_slut_trait not in list_of_traits:
+        elif person.sluttiness > 95 and nora_reward_high_slut_trait not in list_of_traits:
             return True
         elif person.int >= 7 and person.charisma >= 7 and person.focus >= 7 and nora_reward_genius_trait not in list_of_traits:
             return True

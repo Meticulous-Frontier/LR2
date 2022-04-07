@@ -33,12 +33,11 @@ label SB_fetish_vaginal_family_threesome_label():
     the_person "So... I was wondering... is it okay if I sleep in here with you tonight?"
     menu:
         "Not tonight":
-            mc.name "Sorry [the_person.title]... I had a long day and I'm pretty wore out... maybe tomorrow?"
+            mc.name "Sorry [the_person.title]... I had a long day and I'm pretty worn out... maybe tomorrow?"
             "She is clearly disappointed."
             the_person "Whatever [the_person.mc_title]... see you in the morning I guess?"
             "You head for bed, looking forward to a restful night's sleep."
-            $ the_person.change_obedience(-2)
-            $ the_person.change_happiness(-5)
+            $ the_person.change_stats(happiness = -5, obedience = -2)
             return
         "Strip first" if not the_person.outfit.full_access():
             mc.name "That sounds good [the_person.title], I could use a bed warmer. Why don't you get naked first?"
@@ -100,9 +99,9 @@ label SB_fetish_vaginal_family_threesome_label():
         "[mom.possessive_title] quickly realizes that [the_person.possessive_title] is here... doing exactly what she was coming here to do. Her cheeks turn red with embarrassment."
         "You think quickly. Maybe you can salvage this situation?"
         mc.name "Hey [mom.title]... you look amazing! Want to come in for a little bit? [the_person.title] and I are just getting started."
-        "You can see a clear look of conflict in [mom.possessive_title]'s eyes. Up until now, your antics have been isolated to you and her, in her mind anyway. She's slowly processing that you have a similar relationship with [the_person.possessive_title] "
+        "You can see a clear look of conflict in [mom.possessive_title]'s eyes. Up until now, your antics have been isolated to you and her, in her mind anyway. She's slowly processing that you have a similar relationship with [the_person.possessive_title]."
         mom "I mean... I suppose I could... for a bit..."
-        "Still in a bit of a daze, [mom.possessive_title] comes into your room, closing the door behind her. She sits over at your desk and looks over at you and [the_person.possessive_title] ."
+        "Still in a bit of a daze, [mom.possessive_title] comes into your room, closing the door behind her. She sits over at your desk and looks over at you and [the_person.possessive_title]."
         $ scene_manager.update_actor(mom, position = "sitting")
         "[the_person.possessive_title] looks back at you, still a little unsure of herself. You hold up your hands and beckon her."
         $ scene_manager.update_actor(the_person, position = "cowgirl")
@@ -132,7 +131,7 @@ label SB_fetish_vaginal_family_threesome_label():
         call start_threesome(lily, mom, start_position = Threesome_double_down) from threesome_event_test_call_2
         $ mc.business.event_triggers_dict["family_threesome"] = True
         "Wow, you just had sex with [the_person.possessive_title] and [mom.possessive_title]! You can't believe how lucky you are."
-        "Maybe this is the event that will finally set things in motion for you family. All three of you are in this sexually together."
+        "Maybe this is the event that will finally set things in motion for your family. All three of you are in this sexually together."
         "Eventually, the girls get up."
         $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_center_flipped)
         $ scene_manager.update_actor(mom, position = "stand4", display_transform = character_right)

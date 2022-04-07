@@ -432,7 +432,7 @@ label modify_wardrobe_label(the_person):
     $ strip_choice = _return
     $ alterations = 0
     if strip_choice == 'base':
-        mc.name "Lets take a look at the accessories you are always wearing."
+        mc.name "Let's take a look at the accessories you are always wearing."
         the_person "Alright, it shouldn't be too hard to update my jewelry collection."
         call screen outfit_creator(the_person.base_outfit, outfit_type = "full", slut_limit = None)
         if _return != "Not_New":
@@ -686,7 +686,7 @@ label modify_wardrobe_label(the_person):
         menu:
             "95":
                 $ fade_number = 0.95
-                mc.name "Lets start small."
+                mc.name "Let's start small."
             "90" if the_person.sluttiness > 20:
                 $ fade_number = 0.90
                 mc.name "Fade them a bit, but not too much."
@@ -696,13 +696,13 @@ label modify_wardrobe_label(the_person):
             "75" if the_person.sluttiness > 60:
                 $ fade_number = 0.75
                 mc.name "Take it down a quarter."
-            "66" if the_person.sluttiness > 80:
+            "66" if the_person.sluttiness > 70:
                 $ fade_number = 0.66
                 mc.name "Go pretty far, I want to know what is under everything."
-            "50" if the_person.sluttiness > 100:
+            "50" if the_person.sluttiness > 80:
                 $ fade_number = 0.50
                 mc.name "Go extreme, let me see everything under them."
-            "33" if the_person.sluttiness > 120:
+            "33" if the_person.sluttiness > 90:
                 $ fade_number = 0.33
                 mc.name "I should barely be able to tell you are wearing anything."
         the_person "Alright, I should be able to do that."
@@ -747,7 +747,7 @@ label modify_wardrobe_label(the_person):
         mc.name "Thanks."
     else:
         the_person "I'm sorry [the_person.mc_title], I couldn't find any parts of my wardrobe I was comfortable changing."
-        if the_person.sluttiness > 110:
+        if the_person.sluttiness > 90:
             mc.name "I guess we have probably taken things as far as they can go."
         else:
             mc.name "I guess I have some more work to do before you're ready for this."

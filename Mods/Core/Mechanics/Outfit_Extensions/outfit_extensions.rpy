@@ -83,20 +83,12 @@ init -1 python:
     ######################################
 
     def feet_available(self):
-        reachable = True
-        for cloth in self.feet:
-            if cloth.anchor_below:
-                reachable = False
-        return reachable
+        return not any(x for x in self.feet if x.anchor_below)
 
     Outfit.feet_available = feet_available
 
     def feet_visible(self):
-        visible = True
-        for cloth in self.feet:
-            if cloth.hide_below:
-                visible = False
-        return visible
+        return not any(x for x in self.feet if x.hide_below)
 
     Outfit.feet_visible = feet_visible
 
@@ -230,7 +222,7 @@ init -1 python:
             new_score += 30
         if extra_modifier and (not self.wearing_panties() or not self.panties_covered()):
             new_score += 15
-        return __builtin__.int(new_score * .8)
+        return __builtin__.int(new_score * .9)
 
     Outfit.get_body_parts_slut_score = get_body_parts_slut_score
 
@@ -347,58 +339,44 @@ init 6 python:
                     new_score += 10 # lower part not covered
 
         # take transparency of clothing into account for sluttiness score
-        for cloth in self.upper_body + self.lower_body:
-            if cloth.colour[3] < 1:
-                if cloth.layer == 2:
-                    new_score += __builtin__.int((1 - cloth.colour[3]) * 40)
-                elif cloth.layer == 1:
-                    new_score += __builtin__.int((1 - cloth.colour[3]) * 10)
+        for cloth in [x for x  in self.upper_body + self.lower_body if x.colour[3] < 1 and x.layer in [1, 2]]:
+            if cloth.layer == 2:
+                new_score += __builtin__.int((1 - cloth.colour[3]) * 40)
+            elif cloth.layer == 1:
+                new_score += __builtin__.int((1 - cloth.colour[3]) * 10)
 
-        return __builtin__.int(new_score  * .8)
+        return __builtin__.int(new_score  * .9)
 
     Outfit.get_total_slut_modifiers = get_total_slut_modifiers_enhanced
 
     #Categorizing outfits based on type
+    def has_dress(self):
+        return any(self.has_clothing(item) for item in real_dress_list)
 
-    def is_dress(self):
-        if any(self.has_clothing(item) for item in real_dress_list):
-            return True
-        return False
-
-    Outfit.is_dress = is_dress
+    Outfit.has_dress = has_dress
 
     def has_skirt(self):
-        if any(self.has_clothing(item) for item in skirts_list):
-            return True
-        return False
+        return any(self.has_clothing(item) for item in skirts_list)
 
     Outfit.has_skirt = has_skirt
 
     def has_pants(self):
-        if any(self.has_clothing(item) for item in pants_list):
-            return True
-        return False
+        return any(self.has_clothing(item) for item in pants_list)
 
     Outfit.has_pants = has_pants
 
     def has_shirt(self):
-        if any(self.has_clothing(item) for item in shirts_list):
-            return True
-        return False
+        return any(self.has_clothing(item) for item in shirts_list)
 
     Outfit.has_shirt = has_shirt
 
     def has_socks(self):
-        if any(self.has_clothing(item) for item in only_socks_list):
-            return True
-        return False
+        return any(self.has_clothing(item) for item in only_socks_list)
 
     Outfit.has_socks = has_socks
 
     def has_hose(self):
-        if any(self.has_clothing(item) for item in real_pantyhose_list):
-            return True
-        return False
+        return any(self.has_clothing(item) for item in real_pantyhose_list)
 
     Outfit.has_hose = has_hose
 

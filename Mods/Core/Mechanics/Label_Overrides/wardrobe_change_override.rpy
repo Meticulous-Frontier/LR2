@@ -46,7 +46,7 @@ label wardrobe_change_label_enhanced(the_person):
         $ del new_outfit
 
     elif strip_choice == "delete":
-        mc.name "[the_person.title], lets have a talk about what you've been wearing."
+        mc.name "[the_person.title], let's have a talk about what you've been wearing."
         $ clear_scene()
         call screen outfit_delete_manager(the_person.wardrobe)
         $ the_person.apply_planned_outfit()

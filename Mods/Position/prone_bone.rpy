@@ -51,14 +51,14 @@ label prone_decision_label(the_girl, the_location, the_object, the_position):
     $ prone_bone.redraw_scene(the_girl)
     if the_girl.is_submissive():
         "[the_girl.possessive_title] gives a moan as you line yourself and push back into her. She is completely helpless but submits to you obediently."
-        $ the_person.change_happiness(5)
+        $ the_girl.change_happiness(5)
     elif the_girl.is_dominant():
         the_girl "Are you serious? Can't we just take a quick break?..."
         "[the_girl.possessive_title]'s question gets cut off as you line yourself and push back into her. She isn't happy with being used like this but is too tired to resist."
-        $ the_person.change_happiness(5)
+        $ the_girl.change_happiness(5)
     else:
         "[the_girl.possessive_title] gives a little yelp as you line yourself and push back into her. She is completely helpless but submits to you obediently."
-        $ the_person.change_obedience(5)
+        $ the_girl.change_obedience(5)
     return the_object
 
 label intro_prone_bone(the_girl, the_location, the_object):
@@ -66,15 +66,13 @@ label intro_prone_bone(the_girl, the_location, the_object):
     mc.name "Just lay down. I'm going to have my way with you now."
     if the_girl.is_submissive():
         the_girl "I'll do whatever you want, you always make me feel so good too..."
-        $ the_girl.change_happiness(1)
-        $ the_girl.change_obedience(1)
+        $ the_girl.change_stats(happiness = 1, obedience = 1)
         mc.name "Yeah, 'atta girl.'"
     elif the_girl.is_dominant():
         the_girl "Is that so? What do I get out of it?"
         mc.name "Why should I care? Lay down."
         "She murmurs but begins to lay down obediently."
-        $ the_girl.change_happiness(-1)
-        $ the_girl.change_obedience(2)
+        $ the_girl.change_stats(happiness = -2, obedience = 1)
     else:
         the_girl "Okay, just don't do anything too crazy, okay?"
         $ the_girl.change_obedience(1)
@@ -184,23 +182,18 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
                 the_girl "Oh god, thank you, I..."
                 "When she starts to respond, you bring your hand around her neck and give it a little squeeze, cutting her words off."
                 mc.name "I don't remember asking for a response, slut."
-                $ the_girl.change_happiness(3)
-                $ the_girl.change_obedience(3)
-                $ the_girl.change_arousal(15)
+                $ the_girl.change_stats(happiness = 3, obedience = 1, arousal = 15)
                 "Her tight pussy clenches around in response. You can feel it get a little wetter as you dominate her."
             elif the_girl.is_dominant():
                 mc.name "I don't think so. You're my little slut, and I'll take you the way I want to, when I want to."
-                $ the_girl.change_happiness(-5)
-                $ the_girl.change_obedience(3)
-                $ the_girl.change_slut(2)
+                $ the_girl.change_stats(happiness = -5, obedience = 1, slut = 1)
                 "[the_girl.title] starts to say something, but you grab her hair and pull it back some. Her tight pussy clenches around you in response."
                 "She decides to just stay quiet for now and accept it as you continue to have you way with her."
             else:
                 the_girl "That's it... oh god it's so good..."
                 "You reach forward and grab her hair near the base of her head and pull it back some."
                 the_girl "Oh fuck! Oh god fuck my pussy [the_girl.mc_title]!"
-                $ the_girl.change_obedience(5)
-                $ the_girl.change_arousal(5)
+                $ the_girl.change_stats(obedience = 1, arousal = 5)
                 "You oblige her, helping correlate in her head your rough treatment with the pleasure of sex. Her pussy clenches around you as you pull her hair."
                 "She is exhausted, but constantly moaning from your dominating approach."
         "Go easy on her":
@@ -323,11 +316,11 @@ label outro_prone_bone(the_girl, the_location, the_object):
             $ prone_bone.redraw_scene(the_girl)
             if the_girl.has_cum_fetish() or the_girl.has_breeding_fetish():
                 "[the_girl.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
-                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
+                the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! I was made to take your cum inside me!"
                 "[the_girl.possessive_title] revels in having her fetish fulfilled."
             if the_girl.knows_pregnant():
                 the_girl "Oh god... no wonder I got knocked up..."
-            elif the_girl.sluttiness > 110:
+            elif the_girl.sluttiness > 90:
                 the_girl "Oh god it's so deep."
             elif the_girl.on_birth_control:
                 the_girl "Oh fuck...  Good thing I'm on the pill..."
@@ -352,8 +345,7 @@ label outro_prone_bone(the_girl, the_location, the_object):
             $ the_girl.change_happiness(10)
         elif the_girl.is_dominant():
             "[the_girl.title] lays there, whimpering. It seems you nearly fucked her senseless, and it scared her."
-            $ the_girl.change_obedience(5)
-            $ the_girl.change_happiness(-5)
+            $ the_girl.change_stats(happiness = -5, obedience = 2)
         "You sit back and sigh contentedly, enjoying the sight of [the_girl.possessive_title]'s exhausted body covered in your semen."
     return
 

@@ -1,4 +1,4 @@
-init 1301 python:              #Because Vren Init personality functions at 1300
+init 1400 python:              #Because Vren Init personality functions at 1300
 
     def erica_titles(person):
         valid_titles = []
@@ -37,7 +37,7 @@ init 1301 python:              #Because Vren Init personality functions at 1300
 
         return mc.name
 
-    erica_personality = Personality("athlete", default_prefix = "reserved",
+    erica_personality = Personality("athlete", default_prefix = reserved_personality.default_prefix,
     common_likes = ["small talk", "the colour blue", "sports"],
     common_sexy_likes = ["doggy style sex", "giving blowjobs", "showing her ass", "drinking cum", "taking control"],
     common_dislikes = ["relationships", "conservative outfits", "makeup", "the colour pink", "dresses", "high heels", "the colour purple"],
@@ -183,7 +183,7 @@ label erica_sex_obedience_accept(the_person):
         if the_person.obedience > 130:
             the_person "Yes [the_person.mc_title], if that's what you want to do I'll give it a try."
         else:
-            the_person "I... Okay, if you really want to, lets give it a try."
+            the_person "I... Okay, if you really want to, let's give it a try."
     return
 
 label erica_sex_gentle_reject(the_person):
@@ -397,7 +397,7 @@ label erica_hookup_accept(the_person):
                 if the_person.effective_sluttiness() > 60:
                     the_person "I mean... it's okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
                     if the_person.effective_sluttiness() > 90:
-                        the_person "...or even just finish inside me. I promise I wouldn't mind at all!"
+                        the_person "... or even just finish inside me. I promise I wouldn't mind at all!"
                     mc.name "Maybe next time!"
                 "You get a condom and put it on quickly."
                 $ mc.condom = True
@@ -432,7 +432,7 @@ label erica_hookup_accept(the_person):
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
         "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
         mc.name "That's it, bitch. I'm about to cum!"
-        if the_person.effective_sluttiness() > 100: #She is so slutty, she begs for your cum.
+        if the_person.effective_sluttiness() > 90: #She is so slutty, she begs for your cum.
             the_person "The condom! Take it off! Please!?! Your cock is so good, I want to feel you dump your load inside me!"
             "Your brain is getting a little hazy with lust. Surely there's nothing wrong with that, right?"
             menu:
@@ -465,8 +465,7 @@ label erica_hookup_accept(the_person):
         "You wait until your orgasm has passed completely, then pull out and stand back. Your condom is bulged on the end where it is filled with your seed."
         if the_person.arousal < 100:
             the_person "Wow, okay, I guess we are done?"
-            $ the_person.change_happiness(-5)
-            $ the_person.change_obedience(-5)
+            $ the_person.change_stats(happiness = -5, obedience = -5)
             "She is a bit disappointed she didn't finish."
         else:
             the_person "That was nice. I'll make sure next time I'm in the mood to hit you up again..."
@@ -501,11 +500,11 @@ label erica_hookup_accept(the_person):
             menu:
                 "Stay Vaginal":
                     "As [the_person.title]'s pussy quivers around you, you decide to just keep doing what you are doing."
-                "Fuck Her Ass" if the_person.effective_sluttiness() >= 80:
+                "Fuck Her Ass" if the_person.effective_sluttiness() >= 70:
                     "You pull out of her pussy. Her juices leave a strand attached to you, connecting you to her cunt."
                     the_person "Mmm, [the_person.mc_title]? Why did you pull out... OH!"
                     "Her question is swiftly answered when she feels your manhood poking her puckered hole."
-                    if the_person.effective_sluttiness() > 100:
+                    if the_person.effective_sluttiness() > 90:
                         the_person "Yes! Fuck my ass good!"
                     else:
                         the_person "Oh my... be careful!"
@@ -518,8 +517,7 @@ label erica_hookup_accept(the_person):
                     "Her knees give out, but you are too close to stop fucking her. You grab her hips roughly and pick up the pace."
                     $ the_person.change_arousal(20)#110 + 8
                     "Her ass begins to spasm. Her buttery smooth back passage squeezes you over and over as her body is racked with yet another orgasm. It feels incredible."
-                    $ the_person.change_slut(2)
-                    $ the_person.change_happiness(5)
+                    $ the_person.change_stats(happiness = 5, slut = 2)
                     mc.name "Get ready, I'm gonna cum!"
                     "[the_person.title] is incoherent, and doesn't process your words."
                     "You plunge deep into her ass and hold it there while you cum. She gasps in time with each new shot of hot semen inside of her."
@@ -670,8 +668,7 @@ label erica_sex_watch(the_person, the_sex_person, the_position):
     if the_person.effective_sluttiness() < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
-        $ the_person.change_obedience(-2)
-        $ the_person.change_happiness(-1)
+        $ the_person.change_stats(happiness = -1, obedience = -2)
         "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
 
     elif the_person.effective_sluttiness() < the_position.slut_requirement - 10:
@@ -687,7 +684,7 @@ label erica_sex_watch(the_person, the_sex_person, the_position):
 
     elif the_person.effective_sluttiness() > the_position.slut_requirement and the_person.effective_sluttiness() < the_position.slut_cap:
         $ the_person.draw_person()
-        the_person "Oh my god that's... Wow that looks...Hot."
+        the_person "Oh my god that's... Wow that looks... Hot."
         $ change_report = the_person.change_slut(2)
         "[title] watches you and [the_sex_person.name] [the_position.verb]."
 

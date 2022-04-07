@@ -75,21 +75,24 @@ init 2 python:
             ActionMod._instances.add(self)
 
         def initialize(self):
-            if not self.initialization is None:
+            if self.initialization:
                 self.initialization(self)
 
         def show_options(self):
-            if not self.options_menu is None:
+            if self.options_menu and renpy.has_label(self.options_menu):
                 renpy.call(self.options_menu)
 
         def toggle_enabled(self):
             self.enabled = not self.enabled
             # trigger event
-            if not self.on_enabled_changed is None:
+            if self.on_enabled_changed:
                 self.on_enabled_changed(self.enabled)
 
     def action_mod_settings_requirement():
         return True
+
+    def action_mod_configuration_requirement():
+        return any(x for x in ActionMod._instances if x.options_menu)
 
     # check all ActionMod classes in the game and make sure we have one instance of each and update the action_mod_list
     def append_and_initialize_action_mods():
@@ -136,7 +139,7 @@ init 2 python:
 
     # mod settings action
     action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
-    action_mod_configuration_action = Action("MOD Configuration", action_mod_settings_requirement, "show_action_mod_configuration", menu_tooltip = "Change configuration for individual MODS")
+    action_mod_configuration_action = Action("MOD Configuration", action_mod_configuration_requirement, "show_action_mod_configuration", menu_tooltip = "Change configuration for individual MODS")
 
 init 4 python: # NOTE: Having it at 5 was causing errors after I moved things around. Haven't seen any side-effects of it.
     add_label_hijack("normal_start", "activate_action_mod_core")
@@ -196,10 +199,10 @@ label show_action_mod_settings():
 
 label show_action_mod_configuration():
     python:
-        while True:
-            action_mod_choice =  build_action_mod_configuration_menu()
+        action_mod_choice =  build_action_mod_configuration_menu()
 
-            if action_mod_choice == "Back":
-                renpy.return_statement()
-            else:
-                action_mod_choice.show_options()
+        if action_mod_choice == "Back":
+            renpy.return_statement()
+        else:
+            action_mod_choice.show_options()
+    jump show_action_mod_configuration

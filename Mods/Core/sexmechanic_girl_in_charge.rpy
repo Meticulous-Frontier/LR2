@@ -452,7 +452,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             $ mc.condom = False
             $ using_condom = False
         if current_node.position.requires_hard and mc.recently_orgasmed:
-            "Your post orgasm cock softens, stopping [the_person.possessive_title] for now."
+            "Your post-orgasm cock softens, stopping [the_person.possessive_title] for now."
             #TODO if this keeps us from accomplishing sex goal, consider rerunning this method from the beginning, or just ending the scene. Or creating a new path?
             $ finished = True
         else:
@@ -586,7 +586,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                     the_person "Hey... [the_person.mc_title]... what are you doing?"
                     mc.name "Shhh, quiet."
                     "With one smooth motion you push yourself inside of her."
-                    if the_person.effective_sluttiness() > 100:
+                    if the_person.effective_sluttiness() > 90:
                         the_person "Ohhh god. Go ahead and take what you want, I'll just be along for the ride."
                     elif the_person.effective_sluttiness() > 60:
                         the_person "Ohhhhhh. I'm not sure how long I can do this but if you need to finish that bad go ahead..."
@@ -644,19 +644,19 @@ init 1000 python:
         unit_test_count = 0
         while unit_test_count < count:
             mc.change_location(bedroom)
-            the_person = get_random_from_list(known_people_in_the_game())
+            the_person = renpy.random.choice(known_people_in_the_game())
             the_person.love = renpy.random.randint(-50,50)
             the_person.sluttiness = renpy.random.randint(60,120)
             mc.energy = mc.max_energy
             the_person.energy = the_person.max_energy
-            renpy.call("get_fucked", the_person, unit_test = True, the_goal = get_random_from_list(list_of_all_dom_sex_goals))
+            renpy.call("get_fucked", the_person, unit_test = True, the_goal = renpy.random.choice(list_of_all_dom_sex_goals))
             unit_test_count += 1
 
     def GIC_unit_test_2(count = 1):#Count is the number of times we repeat the unit test.
         unit_test_count = 0
         while unit_test_count < count:
             mc.change_location(bedroom)
-            the_person = get_random_from_list(known_people_in_the_game())
+            the_person = renpy.random.choice(known_people_in_the_game())
             the_person.love = -50
             the_person.sluttiness = renpy.random.randint(60,120)
             mc.energy = mc.max_energy

@@ -1,4 +1,5 @@
 init -2 python:
+    build.script_version = True
     build.classify("**.rpy", None) # don't include rpy files in build
     build.classify("**.bak", None)
     build.classify("**.ref", None)

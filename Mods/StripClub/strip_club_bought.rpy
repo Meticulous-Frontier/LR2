@@ -80,6 +80,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
         mc.name "Goodbye, [the_person.title]!"
     $ the_person.change_stats(happiness = 5, obedience = 3, love = 3)
     $ the_person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
+    $ the_person.job.quit_function = stripper_quit
     $ the_person.quit_job()
     $ the_person.change_location(the_person.home)
 
@@ -166,7 +167,7 @@ label strip_club_evaluate_stripper(the_person):
     "She puts a hand on your shoulder pressing her bosom against your body..."
     menu:
         "Yes" if mc.business.has_funds(500):
-            $ the_person.add_job(stripper_job)
+            $ the_person.add_job(stripclub_stripper_job, job_known = True)
             mc.name "Yes, you impressed me! Your salary will be $[the_person.stripper_salary] per day excluding tips, if you agree?"
             $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
             $ ran_num = __builtin__.int(((the_person.stripper_salary / 20) - 1) * 100)
@@ -194,6 +195,7 @@ label strip_club_evaluate_stripper(the_person):
                 $ the_person.change_stats(happiness = -10, obedience = 3, love = -5)
             else:
                 "Unable to argue with you, [the_person.title] quickly dresses back up and leaves the club, still in tears."
+            $ the_person.job.quit_function = stripper_quit
             $ the_person.quit_job()
             $ the_person.change_location(the_person.home)
             $ mc.location.show_background()

@@ -32,9 +32,15 @@ screen multi_person_info_ui(actors):
             xoffset 50
 
             for actor in sorted(actors, key=lambda a: a.sort_order):
+                python:
+                    arousal_info = get_arousal_with_token_string(actor.person.arousal, actor.person.max_arousal)
+                    energy_info = get_energy_string(actor.person.energy, actor.person.max_energy)
+                    sluttiness_info = get_heart_image_list(actor.person.sluttiness, actor.person.effective_sluttiness())
+
                 vbox:
                     hbox:
                         textbutton "{image=question_mark_small}":
+                            yoffset 4
                             style "transparent_style"
                             tooltip multi_person_info_ui_get_formatted_tooltip(actor.person)
                             action NullAction()
@@ -51,7 +57,7 @@ screen multi_person_info_ui(actors):
                                 sensitive True
 
                     if actor.person.arousal > 0:
-                        textbutton "Arousal: [actor.person.arousal]/[actor.person.max_arousal] (+" + get_red_heart(__builtin__.int(actor.person.arousal/4)) + ")":
+                        textbutton "Arousal: [arousal_info]":
                             style "transparent_style"
                             text_style "menu_text_style"
                             tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
@@ -65,7 +71,7 @@ screen multi_person_info_ui(actors):
                             action NullAction()
                             sensitive True
 
-                    textbutton "Energy: [actor.person.energy]/[actor.person.max_energy] {image=energy_token_small}":
+                    textbutton "Energy: [energy_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
                         tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night."
@@ -95,7 +101,7 @@ screen multi_person_info_ui(actors):
                                 sensitive True
 
                     hbox:
-                        textbutton "Sluttiness: " + get_heart_image_list(actor.person):
+                        textbutton "Sluttiness: [sluttiness_info]":
                             style "transparent_style"
                             text_style "menu_text_style"
                             tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."

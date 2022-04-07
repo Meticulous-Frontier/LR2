@@ -9,7 +9,7 @@ init 1 python:
 
 #Requirement functions
     def breeding_fetish_going_off_BC_requirement(the_person):
-        return True
+        return the_person.on_birth_control
 
     def breeding_fetish_bend_her_over_requirement(the_person):
         if the_person.energy < 50:
@@ -18,15 +18,16 @@ init 1 python:
             return "You're too tired"
         return True
 
-#Actions
+#Action triggered on breeding fetish
     breeding_fetish_going_off_BC = Action("She goes off BC", breeding_fetish_going_off_BC_requirement, "breeding_fetish_going_off_BC_label")
+#Actions
     breeding_fetish_bend_her_over = Action("Bend her over", breeding_fetish_bend_her_over_requirement, "breeding_fetish_bend_her_over_label", menu_tooltip = "Bend her over right here and give your breeding stock a creampie")
 
 #Role (vanilla actions + fetish actions)
     if 'get_breeder_role_actions' in dir(): # only exists in bugfix
-        breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = get_breeder_role_actions() + [breeding_fetish_going_off_BC, breeding_fetish_bend_her_over], on_day = SB_breeding_fetish_on_day)
+        breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = get_breeder_role_actions() + [breeding_fetish_bend_her_over], on_day = SB_breeding_fetish_on_day)
     else:
-        breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [breeding_fetish_going_off_BC, breeding_fetish_bend_her_over], on_day = SB_breeding_fetish_on_day)
+        breeding_fetish_role = Role(role_name = "Breeding Fetish", actions = [breeding_fetish_bend_her_over], on_day = SB_breeding_fetish_on_day)
 
 #Other breeding fetish calls
 
@@ -41,6 +42,7 @@ label breeding_fetish_going_off_BC_label(the_person):
     "She leans forward and whispers into your ear."
     the_person "Just thought you'd like to know... I decided to go off my birth control..."
     $ mc.change_locked_clarity(20)
+    $ manage_bc(the_person, False)
     "She leans back. You should be careful if you decide to fuck her, she might be fertile!"
     the_person "Is there something I can do for you?"
     return

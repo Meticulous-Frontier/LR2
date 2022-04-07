@@ -104,8 +104,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
             $ the_girl.cum_in_mouth()
             $ deepthroat.redraw_scene(the_girl)
             $ climax_controller.do_clarity_release(the_girl)
-            $ the_girl.change_obedience(1)
-            $ the_girl.change_happiness(-2)
+            $ the_girl.change_stats(happiness = -2, obedience = 1)
             the_girl "Ah... fuck. This was nice, but go a little easier on me next time, okay?"
             "She clears her throat, then kisses the side of your dick."
         $ the_girl.call_dialogue("cum_mouth")

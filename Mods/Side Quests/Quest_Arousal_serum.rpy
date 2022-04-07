@@ -293,7 +293,7 @@ label quest_arousal_serum_test_label():
     if the_person.sluttiness > 60:
         $ the_person.draw_person(position = "doggy")
         "[the_person.title] turns over onto her hands and knees. She starts to wiggle her ass at you."
-        the_person "The drug hasn't fully wore off yet though. I could really use a nice, hard cock inside me right now."
+        the_person "The drug hasn't fully worn off yet though. I could really use a nice, hard cock inside me right now."
         "You decide to do that. Watching her get off like that has got you hard and ready to go."
         call fuck_person(the_person, start_position = doggy, private= True, affair_ask_after = False) from _arousal_serum_fuck_test_1
         $ the_report = _return
@@ -307,7 +307,7 @@ label quest_arousal_serum_test_label():
         the_person "Amazing. I'll start working on the other pill... see if I can reverse engineer the effects."
         the_person "We might want to consider trying to tone down the effects a bit though. That was pretty excessive!"
         mc.name "Maybe some kind of slower release time frame? Something that would take effect over the course of the day, instead of inside an hour."
-        the_person "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
+        the_person "Yeah... something like that. Hey, I'm worn out. I'll get back to you about it, okay?"
         mc.name "Thanks."
         $ quest_arousal_serum().set_quest_flag(42)
     else:
@@ -321,7 +321,7 @@ label quest_arousal_serum_test_label():
             "Reverse Engineer":
                 mc.name "It's not for us to decide how it should be used. See if you can reverse engineer it."
             "Too Dangerous":
-                mc.name "You know, I think you are right. This drug is dangerous. Thanks for testing it, but lets not pursue it anything further."
+                mc.name "You know, I think you are right. This drug is dangerous. Thanks for testing it, but let's not pursue it anything further."
                 the_person "Alright."
                 $ quest_arousal_serum().set_quest_flag(49)
                 $ quest_arousal_serum().quest_completed()
@@ -330,7 +330,7 @@ label quest_arousal_serum_test_label():
         the_person "I'll start working on the other pill... see if I can reverse engineer the effects."
         the_person "We might want to consider trying to tone down the effects a bit though. That was pretty excessive!"
         mc.name "Maybe some kind of slower release time frame? Something that would take effect over the course of the day, instead of inside an hour."
-        the_person "Yeah... something like that. Hey I'm wore out. I'll get back to you about it, okay?"
+        the_person "Yeah... something like that. Hey, I'm worn out. I'll get back to you about it, okay?"
         mc.name "Thanks."
         $ quest_arousal_serum().set_quest_flag(41)
 

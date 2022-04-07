@@ -35,7 +35,7 @@ init 2:
                                 background "#33333388"
                                 xsize ui_xsize
                                 padding (2, 2)
-                                text log_item[0] style log_item[1] size 18 xsize ui_xsize - 20 first_indent 10 rest_indent 10 yoffset 2
+                                text "[log_item[0]]" style log_item[1] size 18 xsize ui_xsize - 20 first_indent 10 rest_indent 10 yoffset 2
                             frame:
                                 background "#ff000088"
                                 xsize ui_xsize

@@ -53,14 +53,14 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
             if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
-                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
+                the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
             "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
 
     elif the_choice == "Cum outside":
         if mc.condom == False and (the_girl.has_cum_fetish() or (the_girl.wants_creampie() and the_girl.obedience <150 and the_girl.get_opinion_score("taking control") > -1 and the_girl.get_opinion_score("creampies") > 0)):
             "Before you get the chance to pull back and out, [the_girl.title] lifts both her feet up and wraps her legs around you, locking her ankles together."
-            $ wordchoice = renpy.random.choice(["Oh God,", "Oh yes", "Oh.. OH! Yes "])
+            $ wordchoice = renpy.random.choice(["Oh God,", "Oh yes", "Oh... OH! Yes "])
             $ wordchoice2 = renpy.random.choice(["Cum for me!", "Cum inside!", "Cum for me!", "Cum in me!", "Pump it deep!", ""])
             if the_girl.love < 0:
                 "Where do think you're going, [the_girl.mc_title]?"
@@ -82,7 +82,7 @@ label outro_missionary_enhanced(the_girl, the_location, the_object):
             if the_girl.has_cum_fetish():
                 "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
-                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
+                the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
             $ wordchoice = renpy.random.choice(['Relax', "Don't panic", 'Stay calm', 'Chill', "It's okay"])
             $ wordchoice2 = renpy.random.choice(['the pill', 'birth control'])
@@ -181,7 +181,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
     elif the_choice == "Cum on her stomach":
         if mc.condom == False and (the_girl.has_cum_fetish() or (the_girl.wants_creampie() and the_girl.obedience <150 and the_girl.get_opinion_score("taking control") > -1 and the_girl.get_opinion_score("creampies") > 0)):
             "Before you get the chance to pull back and out, [the_girl.title] lifts both her feet up and wraps her legs around you, locking her ankles together."
-            $ wordchoice = renpy.random.choice(["Oh God,", "Oh yes", "Oh.. OH! Yes "])
+            $ wordchoice = renpy.random.choice(["Oh God,", "Oh yes", "Oh... OH! Yes "])
             $ wordchoice2 = renpy.random.choice(["Cum for me!", "Cum inside!", "Cum for me!", "Cum in me!", "Pump it deep!", ""])
             if the_girl.love < 0:
                 "Where do think you're going, [the_girl.mc_title]?"
@@ -204,7 +204,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
                 "Her body goes rigid as your cum pumps into her. Goosebumps erupt all over her body and her pupils dilate as her brain registers her creampie."
                 "She throws her head back in pleasure."
-                the_girl "Oh.. OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
+                the_girl "Oh... OH! Yes [the_girl.mc_title]! Pump it deep! You were meant to cum inside me!"
                 "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
             $ wordchoice = renpy.random.choice(['Relax', "Don't panic", 'Stay calm', 'Chill', "It's okay"])
             $ wordchoice2 = renpy.random.choice(['the pill', 'birth control'])
@@ -230,7 +230,7 @@ label outro_against_wall_enhanced(the_girl, the_location, the_object):
                 "You pull out of [the_girl.possessive_title] at the last moment and step back. You whip your condom off and blow your load over her stomach while she watches."
             else:
                 "You pull out of [the_girl.possessive_title] at the last moment and step back. You stroke yourself off and blow your load over her stomach while she watches."
-            if the_girl.effective_sluttiness() > 120:
+            if the_girl.effective_sluttiness() > 90:
                 the_girl "What a waste, that would have felt so much better inside of me..."
                 "She reaches down and runs a finger through the puddles of cum you've put on her, then licks her finger clean and winks at you."
             else:

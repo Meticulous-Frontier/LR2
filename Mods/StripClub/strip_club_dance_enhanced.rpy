@@ -54,7 +54,6 @@ label stripclub_dance_enhanced_label():
     "You nurse your beer while you wait for the next performer."
 
     $ the_person = get_next_stripper()
-    $ the_person.apply_outfit(stripclub_wardrobe.pick_random_outfit())
 
     $ title = the_person.title
     $ the_person.draw_person(position = "walking_away", the_animation = ass_bob)
@@ -93,6 +92,11 @@ label stripclub_dance_enhanced_label():
 
     else:
         $ title = the_person.create_formatted_title("The stripper")
+
+    # you seen her on stage, so you know she's a stripper...although you might not know her name
+    if not the_person.event_triggers_dict.get("job_known", True):
+        $ the_person.event_triggers_dict["job_known"] = True
+
     "She poses for a moment, and the crowd cheers around you. Then she starts to strut down the walkway."
     "She stops at the end of the stage, surrounded on three sides by eagerly watching men."
     "[title] starts to dance to the music, swinging her hips and turning slowly to show herself off to all members of the crowd."

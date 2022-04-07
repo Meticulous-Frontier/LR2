@@ -39,7 +39,7 @@ label prone_bone_double_orgasm(the_girl, the_location, the_object):
             $ the_girl.cum_in_vagina()
             $ prone_bone.redraw_scene(the_girl)
             $ climax_controller.do_clarity_release(the_girl)
-            "You slowly pull out of [the_girl.possessive_title], then rollover next to her."
+            "You slowly pull out of [the_girl.possessive_title], then roll over next to her."
 
     elif the_choice == "Cum on her ass":
         if mc.condom:
@@ -56,7 +56,7 @@ label prone_bone_double_orgasm(the_girl, the_location, the_object):
             "[the_girl.possessive_title]'s body goes rigid and goosebumps erupt all over her body as her brain registers your cum on her."
             "[the_girl.possessive_title] revels in bliss as she mindlessly rubs in your cum and licks of her fingers to heighten her orgasm."
             "She truly is addicted to your cum."
-        elif the_girl.sluttiness > 120:
+        elif the_girl.sluttiness > 90:
             the_girl "What a waste, you should have put that inside of me."
             "She reaches back and runs a finger through the puddles of cum you've put on her, then licks her finger clean."
         else:

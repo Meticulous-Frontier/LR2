@@ -3,21 +3,28 @@ init 2 python:
 
     ## uncontrollable_arousal_side_effect_functions ##
     def uncontrollable_arousal_side_effect_on_apply(the_person, the_serum, add_to_log):
-        the_person.change_slut(20, add_to_log = add_to_log)
+        change_amount = the_person.change_slut(20, add_to_log = add_to_log)
+        the_serum.effects_dict["uncontrollable_arousal_effect"] = change_amount
 
     def uncontrollable_arousal_side_effect_on_remove(the_person, the_serum, add_to_log):
-        the_person.change_slut(-20, add_to_log = add_to_log)
+        change_amount = the_serum.effects_dict.get("uncontrollable_arousal_effect", 20)
+        the_person.change_slut(-(20 if change_amount is None else change_amount), add_to_log = add_to_log)
 
     ## tryptamine_side_effect_functions ##
     def tryptamine_side_effect_on_apply(the_person, the_serum, add_to_log):
-        the_person.change_obedience(10, add_to_log = add_to_log)
+        change_amount = the_person.change_obedience(10, add_to_log = add_to_log)
+        the_serum.effects_dict["tryptamine_effect"] = change_amount
 
     def tryptamine_side_effect_on_remove(the_person, the_serum, add_to_log):
-        the_person.change_obedience(-10, add_to_log = add_to_log)
+        change_amount = the_serum.effects_dict.get("tryptamine_effect", 10)
+        the_person.change_obedience(-(10 if change_amount is None else change_amount), add_to_log = add_to_log)
 
     ## oxytocin_side_effect_functions ##
     def oxytocin_side_effect_on_turn(the_person, the_serum, add_to_log):
         the_person.change_love(1, max_modified_to = 40, add_to_log = False)
+
+    def skin_sensitivity_side_effect_on_turn(the_person, the_serum, add_to_log):
+        the_person.change_arousal(5, add_to_log = add_to_log)
 
     uncontrollable_arousal_side_effect = SerumTrait(name = "Uncontrollable Arousal",
         desc = "An unintended interaction produces a sudden and noticeable spike in the recipient's promiscuity, making them more agreeable to lewd interactions.",
@@ -44,6 +51,14 @@ init 2 python:
         on_turn = oxytocin_side_effect_on_turn,
         is_side_effect = True,
         mental_aspect = 3, physical_aspect = 0, sexual_aspect = 1, medical_aspect = 0, flaws_aspect = 1, attention = 1)
+
+    skin_sensitivity_side_effect = SerumTrait(name = "Skin Sensitivity",
+        desc = "An unintended interaction produces a heightened sensitivity of the skin.",
+        positive_slug = "+5 Arousal/Turn",
+        negative_slug = "",
+        on_turn = skin_sensitivity_side_effect_on_turn,
+        is_side_effect = True,
+        mental_aspect = 1, physical_aspect = 3, sexual_aspect = 2, medical_aspect = 0, flaws_aspect = 1, attention = 1)
 
     if "list_of_side_effects" in globals():
         list_of_side_effects.append(uncontrollable_arousal_side_effect)

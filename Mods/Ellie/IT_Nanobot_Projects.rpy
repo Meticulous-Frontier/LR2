@@ -7,52 +7,42 @@ init 1 python:
 
     def basic_clarity_reduction_on_apply():
         get_fetish_basic_serum().research_added = 100
-        get_fetish_basic_serum().negative_slug = "+100 Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def basic_clarity_reduction_on_remove():
         get_fetish_basic_serum().research_added = FETISH_RESEARCH_ADDED
-        get_fetish_basic_serum().negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def anal_clarity_reduction_on_apply():
         get_fetish_anal_serum().research_added = 100
-        get_fetish_anal_serum().negative_slug = "+100 Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def anal_clarity_reduction_on_remove():
         get_fetish_anal_serum().research_added = FETISH_RESEARCH_ADDED
-        get_fetish_anal_serum().negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def breeder_clarity_reduction_on_apply():
         get_fetish_breeding_serum().research_added = 100
-        get_fetish_breeding_serum().negative_slug = "+100 Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def breeder_clarity_reduction_on_remove():
         get_fetish_breeding_serum().research_added = FETISH_RESEARCH_ADDED
-        get_fetish_breeding_serum().negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def cum_clarity_reduction_on_apply():
         get_fetish_cum_serum().research_added = 100
-        get_fetish_cum_serum().negative_slug = "+100 Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def cum_clarity_reduction_on_remove():
         get_fetish_cum_serum().research_added = FETISH_RESEARCH_ADDED
-        get_fetish_cum_serum().negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def exhibition_clarity_reduction_on_apply():
         get_fetish_exhibition_serum().research_added = 100
-        get_fetish_exhibition_serum().negative_slug = "+100 Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def exhibition_clarity_reduction_on_remove():
         get_fetish_exhibition_serum().research_added = FETISH_RESEARCH_ADDED
-        get_fetish_exhibition_serum().negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost"
         return
 
     def anal_incest_project_on_apply():
@@ -98,18 +88,18 @@ init 1 python:
 init 1 python:
     ###Project requirement functions###
     def anal_incest_project_requirement():
-        return get_fetish_anal_serum().mastery_level > 3.0
+        return get_fetish_anal_serum().mastery_level >= 3.0
 
     def breeder_submission_project_requirement():
-        if get_fetish_breeding_serum().mastery_level > 3.0:
+        if get_fetish_breeding_serum().mastery_level >= 3.0:
             return True
         return "Low Mastery"
 
     def cum_thirst_project_requirement():
-        return get_fetish_cum_serum().mastery_level > 3.0
+        return get_fetish_cum_serum().mastery_level >= 3.0
 
     def exhibition_cheating_project_requirement():
-        if get_fetish_exhibition_serum().mastery_level > 3.0:
+        if get_fetish_exhibition_serum().mastery_level >= 3.0:
             return True
         return "Low Mastery"
 
