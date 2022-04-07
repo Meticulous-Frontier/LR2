@@ -318,7 +318,6 @@ init -1 python:
         if self.it_director:
             self.it_director.remove_role(IT_director_role)
             self.it_director = None
-            #cleanup_HR_director_meetings()
 
     Business.fire_IT_director = fire_IT_director
 
@@ -328,8 +327,11 @@ init -1 python:
         def remove_employee_wrapper(business, person):
             org_func(business, person)
 
-            if person is business.hr_director:
+            if person == business.hr_director:
                 business.fire_HR_director()
+
+            if person == business.it_director:
+                business.fire_IT_director()
 
             if person == cousin and get_strip_club_foreclosed_stage() == 0: # she goes back to stripping
                 stripclub_strippers.append(person)
