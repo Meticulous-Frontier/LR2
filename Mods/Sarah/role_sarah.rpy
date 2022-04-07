@@ -745,7 +745,7 @@ label Sarah_third_wheel_label():
     "You are able to restrain yourself, but only just barely."
     mc.name "[the_person.name] has an amazing body, and a great personality to go with it. If you and your boyfriend don't see that, I don't think anything with me can work out."
     naomi "Pfft, whatever. There's a dozen other dicks at the bar. Why don't you go find your date, she's probably sulking in the bathroom again!"
-    "You decide not to stoop to her level and to end your conversation there. You grab your and [the_person.title]'s drink and get up, not bothering to say goodbye."
+    "You decide not to stoop to her level and to end your conversation there. You grab your and [the_person.title]'s drinks and get up, not bothering to say goodbye."
     $ scene_manager.remove_actor(naomi)
     "You walk over to where the restrooms are and wait for [the_person.title]. You stand there for several minutes but start to get worried about her."
     "You don't see anyone come in or out of the women's restroom so you decide to risk it. You walk to the door and slowly open it."
@@ -1287,7 +1287,7 @@ label Sarah_catch_stealing_label():
     else:
         the_person "Oh, don't worry about it, it is just between me and her!"
         "You furrow your brow. Hopefully you can convince her to come clean with whatever it is that she is doing."
-        mc.name "I'm sure it is fine, but you ARE coming out of research on a Friday, after everyone has left for the weekend. Let me see what you have."
+        mc.name "I'm sure it is fine, but you ARE coming out of Research on a Friday, after everyone has left for the weekend. Let me see what you have."
         "Realizing that you aren't going to back down, she slowly brings her hand forward. In it are several glass vials with some prototype serum labeled 'T+'"
         the_person "Don't be mad! When you told me on Monday that we had come up with a breast enhancement serum, I knew I had to get my hands on one of the prototypes..."
     mc.name "It's okay. I didn't realize that was something you would be interested in. If you had asked me, I would have seen it arranged without you having to sneak around!"
@@ -1497,7 +1497,7 @@ label Sarah_workout_in_tshirt_label(the_person):    #60 sluttiness event
     "She has on a pair of tight workout shorts and a white camisole, and you are pretty sure she isn't wearing a bra underneath it..."
     "You walk over to her to say hello."
     mc.name "Hello [the_person.title]. Here for some yoga?"
-    the_person "Oh hi [the_person.mc_title]! Actually yoga was cancelled today, so I decided to come and get a good workout today!"
+    the_person "Oh hi [the_person.mc_title]! Actually yoga was cancelled today, so I decided to come and get a good workout instead!"
     mc.name "I see... are you sure your outfit is appropriate?"
     the_person "Of course... I've got everything covered! Although the shorts might be a little short."
     "[the_person.title] gives you a wink. It appears she knows exactly what is going to happen when she works up a good sweat."
@@ -3286,7 +3286,7 @@ label Sarah_naomi_visits_to_apologize_label():
                 "[sarah.possessive_title] smiles and reveals her new boobs."
                 $ scene_manager.strip_to_tits(sarah, visible_enough = True, prefer_half_off = True)
                 $ the_person.change_arousal(15)
-                the_person "Oh my, they look truly amazing, you have to give me the number of you doctor."
+                the_person "Oh my, they look truly amazing, you have to give me the number of your doctor."
                 $ scene_manager.update_actor(sarah, emotion = "happy")
                 "[sarah.possessive_title] looks up at you and gives you a big smile and a wink."
                 mc.name "Well, get down to business [the_person.title]."
