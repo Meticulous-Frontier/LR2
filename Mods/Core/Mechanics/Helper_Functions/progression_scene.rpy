@@ -15,10 +15,12 @@ init -2 python:
         time_of_day = 1
         return
 
+    list_of_progression_scenes = []
+
     class Progression_Scene():
 
         def __init__(self, compile_scenes, start_scene_list, req_list, trans_list, final_scene_list, intro_scene, exit_scene, progression_scene_action, choice_scene,
-            stage = -1, advance_time = True, business_action = False, person_action = False, is_random = False, unit_test_func = None,
+            stage = -1, advance_time = True, business_action = False, person_action = False, is_random = False, role_action = False, unit_test_func = None,
             is_multiple_choice = False, multiple_choice_scene = None, regress_scene_list = []):
 
             self.stage = stage  #The corruption level of the progression_scene event
@@ -27,14 +29,16 @@ init -2 python:
             self.exit_scene = exit_scene    #If MC decides not to participate.
             self.choice_scene = choice_scene    #Use this to determine if MC wants to stay or leave the event.
             self.progression_scene_action = progression_scene_action  #Use this as a generic action that can be added to any girl to proc the event.
+            self.name = self.progression_scene_action.name
             self.start_scene_list = start_scene_list    #Scene to play at the beginning of the progression_scene. Mostly to build lust and set the stage.
             self.req_list = req_list    #Requirements used to determine if we are advancing corruption levels
             self.trans_list = trans_list    #A transition between corruption levels.
             self.final_scene_list = final_scene_list    #The act of the progression_scene itself
             self.advance_time = advance_time    #IF the event should advance time. Probably yes?
-            self.business_action = business_action  #If the action should be a business crisis
-            self.person_action = person_action      #if the action should be a person crisis
+            self.business_action = business_action  #If the action should be a business (mandatory) crisis
+            self.person_action = person_action      #if the action should be a person (on room enter) crisis
             self.is_random = is_random              #If this action only pops up randomly.
+            self.role_action = role_action          #if this a selectable action and is part of a role.
             if unit_test_func == None:              #Set a unit test function
                 self.unit_test_func = progression_scene_test_func_default
             else:
@@ -65,8 +69,8 @@ init -2 python:
         def call_regress_scene(self, the_group):
             renpy.call(self.regress_scene_list[self.stage], the_group)
 
-        def call_final_scene(self, the_group):
-            renpy.call(self.final_scene_list[self.stage], the_group)
+        def call_final_scene(self, the_group, scene_transition):
+            renpy.call(self.final_scene_list[self.stage], the_group, scene_transition)
             return
 
         def call_exit_scene(self, the_group):
@@ -94,6 +98,31 @@ init -2 python:
                 self.call_scene(the_group)
                 self.unit_test_func(the_group)
             return
+
+        def reset_scene(self):
+            self.recompile_scenes()
+            self.scene_unlock_list = []
+            self.stage = -1
+            return
+
+        def progression_available(self):
+            return True
+            if self.is_multiple_choice:
+                pass
+                #Check all choices for possible progression.
+            elif len(self.req_list) > self.stage + 1: #Only try if there is another scene
+                if self.req_list[self.stage + 1]():
+                    return True
+            return False
+
+        def update(self):
+            if self.role_action:
+                if self.progression_available():
+                    self.progression_scene_action.name = self.name + " {image=gui/extra_images/lust_eye.png}"
+                else:
+                    self.progression_scene_action.name = self.name
+
+
 
 label progression_scene_label(progression_scene, the_group):
     #First, add the event back so that it recurs. For a role event, leave these two properties false.
@@ -125,23 +154,26 @@ label progression_scene_label(progression_scene, the_group):
     if progression_scene.is_multiple_choice:
         pass
 
-    scene_transition = False    #pass in to the final scene if we played a transition or not. It may change the final scene.
+    $ scene_transition = False    #pass in to the final scene if we played a transition or not. It may change the final scene.
 
     #if it is linear progression, first check if we can progress this scene.
     if len(progression_scene.req_list) > progression_scene.stage + 1: #Only try if there is another scene
-        if progression_scene.req_list[progression_scene.stage + 1](the_group):
+        if progression_scene.req_list[progression_scene.stage + 1]():
             $ progression_scene.stage = progression_scene.stage + 1
             $ progression_scene.call_trans_scene(the_group)
-            scene_transition = True
+            $ scene_transition = True
     #If the scene can regress, check and see if we need to regress a step
     if not progression_scene.is_progress_only() and progression_scene.stage != 0:
         if not progression_scene.req_list[progression_scene.stage](the_group):
             $ progression_scene.stage = progression_scene.stage - 1
             $ progression_scene.call_regress_scene(the_group)
-            scene_transition = True
+            $ scene_transition = True
 
     #Call the appropriate final scene.
     $ progression_scene.call_final_scene(the_group, scene_transition)
     if progression_scene.advance_time:
+        python:
+            for x in the_group:
+                x.apply_serum_study()
         call advance_time from _call_advance_progression_scene_class_01
     return

@@ -6,7 +6,7 @@ init -1 python:
         start_time = time.time()
         result = {}
         for place in [x for x in list_of_places if x.hide_in_known_house_map and x.visible]:
-            result[place.name] = [get_location_tooltip(place), get_location_on_enter_events(place)]
+            result[place.name] = [get_location_tooltip(place), get_location_on_enter_events(place), get_location_progression_events(place)]
 
         if debug_log_enabled:
             add_to_debug_log("Map Buildup Time: {total_time:.3f}", start_time)
@@ -47,6 +47,13 @@ init -1 python:
             return True
         return False
 
+    def get_location_progression_events(location):
+        for person in [x for x in location.people if x.on_room_enter_event_list]:
+            for test_scene in [y for y in list_of_progression_scenes if y.progression_available()]:      #Nested loooooooooops this logic sucks
+                if any(z for z in person.on_room_enter_event_list if z.name == test_scene.progression_scene_action.name):
+                    return True
+        return False
+
     def get_location_tile_text(location, tt_dict):
         info = []
         info.append(location.formal_name.replace(" ", "\n", 2))
@@ -57,6 +64,8 @@ init -1 python:
         info.append(")")
         if tt_dict[location.name][1]:
             info.append("\n{color=#FFFF00}Event!{/color}")
+        if tt_dict[location.name][2]:
+            info.append("\n{image=lust_eye_token_small}")
         return "".join(info)
 
 init 2:
