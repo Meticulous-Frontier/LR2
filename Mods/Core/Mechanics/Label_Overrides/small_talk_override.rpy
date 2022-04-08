@@ -166,8 +166,8 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
             if is_phone:
                 "You and [person.possessive_title] chat for a while. You don't feel like you've learned much about her, but you both enjoyed talking."
             else:
-                "[person.possessive_title] seems happy to chitchat, and you spend a couple of hours just hanging out."
-                "You don't feel like you've learned much about her, but least she seems to have enjoyed talking."
+                "[person.possessive_title] seems happy to chitchat, and you spend half an hour just hanging out."
+                "You don't feel like you've learned much about her, but at least she seems to have enjoyed talking."
 
     if not is_phone:
         $ person.apply_serum_study()

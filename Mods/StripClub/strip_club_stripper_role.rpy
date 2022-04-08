@@ -458,11 +458,11 @@ label stripper_performance_review_label(the_person):
                     elif the_person.get_job_happiness_score() > -25:
                         $ the_person.draw_person(position = "sitting", emotion = "angry")
                         the_person "What? I... I don't know what to say!"
-                        mc.name "Like I said, I'm sorry but it has to be done."
+                        mc.name "Like I said, I'm sorry, but it has to be done."
                     else: #She's so unhappy with her job she quits.
                         $ the_person.draw_person(position = "sitting", emotion = "angry")
                         the_person "What? I... I can't believe that [the_person.mc_title], why would you ever think I would stay here for less money?"
-                        mc.name "Like I said, I'm sorry but it has to be done."
+                        mc.name "Like I said, I'm sorry, but it has to be done."
                         the_person "Well you know what, I think I'm just going to find somewhere else to work. I quit."
                         $ clear_scene()
                         "[the_person.title] stands up and storms out of the room."

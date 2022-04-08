@@ -214,7 +214,7 @@ label quest_wet_tshirt_contest_hr_talk_label(the_person):
         "She seems a bit relieved."
         the_person "Oh! That makes sense. Let me see..."
     the_person "Give me a couple of days and I'll ask around the office. I'll come find you in a couple days and let you know if I can... staff it."
-    mc.name "Thanks [the_person.title]. I appreciate it."
+    mc.name "Thanks, [the_person.title]. I appreciate it."
     the_person "I'm sure you do..."
     #TODO link next event.
     return

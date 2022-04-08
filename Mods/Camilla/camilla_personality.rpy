@@ -106,7 +106,7 @@ label camilla_clothing_accept(the_person):
     if the_person.obedience > 130:
         the_person "It's for me? Thank you [the_person.mc_title], I'll add it to my wardrobe."
     else:
-        the_person "Thanks [the_person.mc_title]! I wonder if daddy would like to see me in this too."
+        the_person "Thanks, [the_person.mc_title]! I wonder if daddy would like to see me in this too."
     return
 
 #label camilla_clothing_reject(the_person):
@@ -581,7 +581,7 @@ label camilla_hookup_accept(the_person):
         "To your surprise [the_person.title] reaches back with both hands and grabs your hips, pulling you deep inside of her."
         "Her grip is startlingly strong. You don't think you could pull out even if you wanted to!"
         the_person "That's it, cum with me!"
-        "You cum erupts in a torrent. You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
+        "Your cum erupts in a torrent. Your seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
         $ the_person.have_orgasm()
         $ the_person.cum_in_vagina()
         $ the_person.draw_person(position = "standing_doggy") # redraw for cum
@@ -604,7 +604,7 @@ label camilla_hookup_accept(the_person):
                 return
             "Creampie":
                 "Her pussy feels too good. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
-                "You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
+                "Your seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
                 $ the_person.have_orgasm()
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "standing_doggy") # redraw for cum
@@ -645,7 +645,7 @@ label camilla_cum_mouth(the_person):
             the_person "Your cum tastes great [the_person.mc_title]! I bet I get another tasty load later..."
             "[the_person.possessive_title] winks at you as she swallows your cum."
         elif the_person.effective_sluttiness() > 50 or the_person.get_opinion_score("drinking cum") > 0:
-            the_person "Thanks [the_person.mc_title]. I hope daddy cums in my mouth later too!"
+            the_person "Thanks, [the_person.mc_title]. I hope daddy cums in my mouth later too!"
         else:
             "[the_person.title]'s face grimaces as she tastes your sperm in her mouth."
             the_person "Thank you [the_person.mc_title]. It doesn't taste the best, but I'm always a good little slut."
@@ -806,9 +806,9 @@ label camilla_cum_anal(the_person):
 
 # label camilla_talk_busy(the_person):
 #     if mc.location == downtown_bar:
-#         the_person "Hey, I'm really sorry but I need to keep on the lookout. Maybe another time?"
+#         the_person "Hey, I'm really sorry, but I need to keep on the lookout. Maybe another time?"
 #     if the_person.obedience > 120:
-#         the_person "Hey, I'm really sorry but I've got some stuff I need to take care of. Could we catch up some other time?"
+#         the_person "Hey, I'm really sorry, but I've got some stuff I need to take care of. Could we catch up some other time?"
 #     else:
 #         the_person "Hey, sorry [the_person.mc_title] but I've got some stuff to take care of. It was great talking though!"
 #     return

@@ -61,7 +61,7 @@ init 1310 python:
         desc = "Employees are free to choose their own uniform on Fridays. This would add some variety on Fridays and prevents uniform infractions.",
         toggleable = True,
         own_requirement = casual_uniform_policy,
-        dependant_policies =  casual_uniform_policy
+        dependant_policies = casual_uniform_policy
     )
     uniform_policies_list.append(casual_friday_uniform_policy)
 
@@ -74,6 +74,16 @@ init 1310 python:
         dependant_policies = corporate_enforced_nudity_policy
     )
     uniform_policies_list.append(creative_skimpy_uniform_policy)
+
+    commando_uniform_policy = Policy(
+        name = "Uniform Commando Policy",
+        cost = 10000,
+        desc = "Employees are no longer allowed to wear bras or panties with their uniforms.",
+        toggleable = True,
+        own_requirement = corporate_enforced_nudity_policy,
+        dependant_policies = corporate_enforced_nudity_policy
+    )
+    uniform_policies_list.append(commando_uniform_policy)
 
     def mandatory_vibe_policy_on_turn():
         if mc.business.is_open_for_business():

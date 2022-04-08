@@ -32,8 +32,8 @@ init 5 python:
         #"the": "thu",
         "nice": "fine",
         "your": "yahr",
-        "here": "heanh",
-        "like": "lac",
+        "here": "heah",
+        "like": "lahk",
         "red": "ray-ed",
         "just": "jis",
         "did": "done",
@@ -65,7 +65,7 @@ init 5 python:
         "ing": "in'",
         "some": "sum",
         "other": "uther",
-        "irst": "ursd",
+        "irst": "urst",
         "og": "awg",
     }
 
@@ -85,9 +85,9 @@ init 5 python:
         "got a ": "gotta ",
         "isn't": "ain't",
         "going to": "gonna",
-        "have to": "havtuh",
-        "got to": "gottuh",
-        " ought to": " outtuh",
+        "have to": "havta",
+        "got to": "gotta",
+        " ought to": " oughta",
         "want to": "wanna",
         "wanted to": "wanna",
         " am not ": " ain't ",
@@ -101,6 +101,7 @@ init 5 python:
         "yes sir": "yes", # replace with yes (word replacer will make it yessir)
         " is ": " ",   # often dropped in southern accent
         " are ": "'re ",  # should result in (those are -> those're)
+        "supposed to": "s'posed ta", #fixes bad word replacement e.g. "That wasn't supposed to happen" -> "That's wasn't reckon'd tuh happen"
     }
 
     def southern_belle(person, what):

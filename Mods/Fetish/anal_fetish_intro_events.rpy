@@ -868,7 +868,7 @@ label anal_fetish_stephanie_intro_label():
             call anal_fetish_stephanie_bimbo_label(the_person) from _anal_fetish_steph_bimbo_02
         else:
             if mc.location == mc.business.r_div: #Already in research
-                "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
+                "Suddenly, [the_person.possessive_title] looks up from her work and speaks up."
                 the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
                 mc.name "Sure, follow me to my office."
             else:
@@ -955,7 +955,7 @@ label anal_fetish_stephanie_normal_label(the_person):
     the_person "Oh! Okay! I think I'll try it out now..."
     "You see her reach behind herself and easily slide it in, her body still lubed up from your prior fucking."
     $ mc.change_locked_clarity(20)
-    the_person "Ah! Mmm I feel full. That's really nice. Not as good as you, but I guess in a pinch I could use it as a substitute."
+    the_person "Ah! Mmm, I feel full. That's really nice. Not as good as you, but I guess in a pinch I could use it as a substitute."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peeking out between her rosy ass cheeks."
     "Looks like [the_person.title] has an anal fetish now!"

@@ -491,7 +491,7 @@ label breeding_fetish_employee_high_fertility_crisis_label():
 
 label breeder_cowgirl_wakeup_label(the_person):
     "All night long, you have sexy dreams centered around [the_person.possessive_title]."
-    "She's on her knees, sucking you off expertly. Later, shes on her back while you pin her to the bed. Sometime later, shes on her hands and knees, taking your cock from behind like a pro."
+    "She's on her knees, sucking you off expertly. Later, she's on her back while you pin her to the bed. Sometime later, she's on her hands and knees, taking your cock from behind like a pro."
     "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. This time, however, there are some very pleasant sensations coming from your crotch."
     $ mc.change_locked_clarity(50)
     $ the_person.apply_outfit(special_fetish_nude_outfit)
@@ -502,7 +502,7 @@ label breeder_cowgirl_wakeup_label(the_person):
     "You reach up and grab her amazing ass cheeks. [the_person.possessive_title] looks in your eyes when she feels your hands on her."
     the_person "Good morning [the_person.mc_title]... Sorry but when I woke up I noticed you were hard so... I figured you wouldn't mind if I hopped on for a bit..."
     "[the_person.possessive_title] moans during one slow stroke."
-    "You decide to lay back and enjoy the ride"
+    "You decide to lay back and enjoy the ride."
     # call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBV50
     call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_bed(), skip_intro = True) from _call_sex_description_breeder_wakeup__01
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"

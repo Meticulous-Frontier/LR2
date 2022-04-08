@@ -48,7 +48,7 @@ label taboo_break_standing_cunnilingus(the_girl, the_location, the_object):  #be
     "Startled, she suddenly she looks at you."
     the_person "Are you serious? I thought you..."
     "You get down on your knees in front of her."
-    mc.name "Ha! Just kidding. Mmm I can't wait to taste your pussy..."
+    mc.name "Ha! Just kidding. Mmm, I can't wait to taste your pussy..."
     the_person "Ahh... you scared me there..."
     if not the_girl.vagina_available():
         "You quickly move some clothing out of the way..."

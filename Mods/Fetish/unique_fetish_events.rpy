@@ -30,7 +30,7 @@ init 2 python:
 
 label fetish_stephanie_first_fetish_label(the_person):
     if mc.location == mc.business.r_div: #Already in research
-        "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
+        "Suddenly, [the_person.possessive_title] looks up from her work and speaks up."
         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
         mc.name "Sure, follow me to my office."
     else:
@@ -356,7 +356,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
     "You give [the_person.possessive_title] a quick proposition."
     mc.name "Hey [the_person.title]. What do you say we get out that strap-on again? I bet your viewers would love that."
     "[the_person.possessive_title] looks at you and smiles."
-    the_person "Mmm that sounds pretty good [the_person.mc_title]... Here, let me take a couple... precautions."
+    the_person "Mmm, that sounds pretty good [the_person.mc_title]... Here, let me take a couple... precautions."
     "[the_person.possessive_title] walks over and closes her door and locks it. She turns on some music and turns the volume up."
     the_person "Don't want mom to find out..."
     $ the_person.draw_person(position = "standing_doggy")

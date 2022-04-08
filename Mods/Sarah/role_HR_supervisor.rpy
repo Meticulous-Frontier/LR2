@@ -387,7 +387,7 @@ label HR_director_initial_hire_label(the_person):
     the_person "Well, I am excited to have this opportunity. To be honest I'm not really even sure where to begin!"
     mc.name "I'll tell you what, for the rest of this week, why don't you just get to know the other employees and see how they perform. I'll send over to you my personal dossiers on all the employees, and as you have time you can look over them."
     the_person "Okay, I can do that. I'll look over them over the weekend as well. Do you want to plan on having a meeting sometime next week?"
-    mc.name "That sounds good. How about we do lunch on Monday? Since you are going to heading up the department, having a meeting every week might be a good idea."
+    mc.name "That sounds good. How about we do lunch on Monday? Since you are going to be heading up the department, having a meeting every week might be a good idea."
     $ the_person.draw_person(emotion = "happy")
     the_person "Great! I'll look forward to it. I'll try to have a plan ready for the meeting on Monday on what we can accomplish."
     "You say goodbye to [the_person.title]."
@@ -741,7 +741,7 @@ label HR_director_review_discoveries_label(the_person):
                 the_person "That would actually be useful... We could use some, in the coffee we make when we bring them in for meetings?"
                 mc.name "A version of the serum with a short useful life would be useful for giving the meetings more impact."
                 "[the_person.title] looks into more details of the serum."
-                the_person "Looks like the serum is fairly easy to produce. I'd say for about $500 we could probably set up something long term for the monday meetings..."
+                the_person "Looks like the serum is fairly easy to produce. I'd say for about $500 we could probably set up something long term for the Monday meetings..."
                 mc.name "Noted. I'll consider it and get back to you if I decide to do this."
                 the_person "Sounds good [the_person.mc_title]!"
 
@@ -1167,7 +1167,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             $ the_person.draw_person(position = "stand3")
             "[the_person.possessive_title] stands up."
             mc.name "Is there something wrong?"
-            the_person "No. You know, I love these monday meetings. Do you know why?"
+            the_person "No. You know, I love these Monday meetings. Do you know why?"
             $ scene_manager.strip_to_tits(person = the_person)
             $ mc.change_locked_clarity(30)
             "[the_person.title] starts taking some of her clothes off."
@@ -1225,14 +1225,14 @@ label HR_director_sexy_meeting_start_label(the_person):
             $ the_person.apply_planned_outfit()
             $ scene_manager.update_actor(the_person, position = "stand3")
             $ set_HR_director_unlock("anal lapdance", True)
-            "You make a mental note that from now on you can ask your HR director for some anal on mondays."
+            "You make a mental note that from now on you can ask your HR director for some anal on Mondays."
             return
 
     if get_HR_director_unlock("breeding fetish session") == False:
         if the_person.has_breeding_fetish() and the_person.is_highly_fertile():
             the_person "So, I know this is usually about you, and making sure your needs are met before the start of the week..."
             mc.name "... but?"
-            the_person "But... I swear to god I feel like I'm heat right now. It is all I can do to keep myself from jumping you everytime I see you in the hall!"
+            the_person "But... I swear to god I feel like I'm heat right now. It is all I can do to keep myself from jumping you every time I see you in the hall!"
             the_person "I know this is out of line... but would you mind? It's a good time for it too..."
             mc.name "Hmmm, I don't know..."
             the_person "Please? I'm not sure I can concentrate on my work until you give me a big fertile load!"
@@ -1241,7 +1241,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             $ scene_manager.update_actor(the_person, position = "standing_doggy")
             $ mc.change_locked_clarity(50)
             "[the_person.title] turns around. You quickly get her ready to fuck."
-            $ the_person.strip_to_vagina(the_person, position = "standing_doggy", prefer_half_off = True, visible_enough = True)
+            $ the_person.strip_to_vagina(visible_enough = True, prefer_half_off = True, position = "standing_doggy")
             call fuck_person(the_person, start_position = bent_over_breeding, private = True) from _call_hr_breeding_01
             if the_person.has_creampie_cum():
                 the_person "Oh fuck... every time you finish inside me is just so good..."
@@ -1398,11 +1398,11 @@ label HR_director_sexy_meeting_start_label(the_person):
 
     elif position_choice == "breeding fetish session":
         mc.name "Get over here, I'm going to bend you over my desk and creampie you."
-        the_person "Fuck I love mondays. Let's do it!"
+        the_person "Fuck I love Mondays. Let's do it!"
         $ scene_manager.update_actor(the_person, position = "standing_doggy")
         $ mc.change_locked_clarity(50)
         "[the_person.title] turns around. You quickly get her ready to fuck."
-        $ the_person.strip_to_vagina(the_person, position = "standing_doggy", prefer_half_off = True, visible_enough = True)
+        $ the_person.strip_to_vagina(visible_enough = True, prefer_half_off = True, position = "standing_doggy")
         call fuck_person(the_person, start_position = bent_over_breeding, private = True) from _call_hr_breeding_02
         if the_person.has_creampie_cum():
             the_person "Oh fuck... every time you finish inside me is just so good..."

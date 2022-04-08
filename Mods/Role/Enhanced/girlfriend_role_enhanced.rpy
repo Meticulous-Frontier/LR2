@@ -326,7 +326,7 @@ label girlfriend_wakeup_spooning_label(the_person):
     "You spit into your hand and rub it on your dick a few times, getting it lubed up."
     "When you feel good about it, you reach down and gently spread her cheeks apart. You position yourself at her entrance and give it a little push."
     "You are able to ease yourself about halfway in, but the angle makes it hard to get deep penetration."
-    the_person "Oh [the_person.mc_title]. Mmmmmm"
+    the_person "Oh [the_person.mc_title]. Mmmmmm..."
     "She's still asleep, but is still responding to your touch. She must be a heavy sleeper! Or maybe she is just really worn out from last night..."
     "You give her a few gentle, smooth strokes. You can feel her pussy getting wetter with each stroke as her body begins to respond to the stimulation."
     $ the_person.change_arousal(20)
@@ -336,7 +336,7 @@ label girlfriend_wakeup_spooning_label(the_person):
     "Your reach around her with your hand and grab one of her tits. You start to get a little rough with her and pinch and pull at one of her nipples."
     $ the_person.change_arousal(20)
     $ mc.change_locked_clarity(30)
-    the_person "Mmm that feels so... wait... [the_person.mc_title]?"
+    the_person "Mmm, that feels so... wait... [the_person.mc_title]?"
     $ the_person.draw_person( position = "back_peek", emotion = "happy")
     "[the_person.possessive_title] wakes up and looks back at you smiling."
     the_person "Oh my god that feels so good... Baby you know how to give a wakeup call, holy fuck!"
@@ -587,7 +587,7 @@ label girlfriend_underwear_shopping_label(the_person):
         "You buy the outfit at the counter. It's a little pricey, but you're sure it'll be worth the investment."
         $ mc.business.change_funds(-150)
         $ the_person.add_outfit(lingerie_outfit, outfit_type = "under")
-        the_person "Thanks [the_person.mc_title]! This was fun!"
+        the_person "Thanks, [the_person.mc_title]! This was fun!"
         if schedule_sleepover_available():
             the_person "So... want me to come over tonight? I'm not doing anything later..."
             menu:

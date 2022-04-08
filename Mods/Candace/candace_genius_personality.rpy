@@ -80,7 +80,7 @@ label genius_sex_responses_foreplay(the_person):
             else:
                 the_person "Oh god, I'm getting so hot. You'd better get me out of these clothes soon."
         else:
-            the_person "Mmm this feels amazing [the_person.mc_title]."
+            the_person "Mmm, this feels amazing [the_person.mc_title]."
 
     else:
         if the_person.sluttiness > 50:
@@ -220,7 +220,7 @@ label genius_clothing_accept(the_person):
     if the_person.obedience > 130:
         the_person "It's for me? Thank you [the_person.mc_title], I'll add it to my wardrobe."
     else:
-        the_person "Oh, it's cute! Thanks [the_person.mc_title]!"
+        the_person "Oh, it's cute! Thanks, [the_person.mc_title]!"
     return
 
 label genius_clothing_reject(the_person):
@@ -404,7 +404,7 @@ label genius_flirt_response_low(the_person):
     if the_person.outfit == the_person.planned_uniform:
         if the_person.judge_outfit(the_person.outfit):
             #She's in uniform and likes how it looks.
-            the_person "Thanks [the_person.mc_title]. I like these uniforms too. Did you design them yourself?"
+            the_person "Thanks, [the_person.mc_title]. I like these uniforms too. Did you design them yourself?"
             mc.name "I did."
             the_person "Amazing! I think you have a good eye for fashion."
             mc.name "It's easy when I have such good models for it all."
@@ -897,7 +897,7 @@ label genius_surprised_exclaim(the_person):
 
 label genius_talk_busy(the_person):
     if the_person.obedience > 120:
-        the_person "Hey, I'm really sorry but I've got some stuff I need to take care of. Could we catch up some other time?"
+        the_person "Hey, I'm really sorry, but I've got some stuff I need to take care of. Could we catch up some other time?"
     else:
         the_person "Hey, sorry [the_person.mc_title] but I've got some stuff to take care of. It was great talking though!"
     return

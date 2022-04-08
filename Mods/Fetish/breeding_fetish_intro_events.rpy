@@ -263,7 +263,7 @@ label breeding_fetish_family_intro_label(the_person):
     the_person "Ahhh, yeah! Oh god..."
     $ the_person.change_arousal(20)
     "You reach down and start to pull your cock out."
-    the_person "but... we're... you know... family..."
+    the_person "But... we're... you know... family..."
     mc.name "Shhh, it's okay. You can trust me, right? We're both consenting adults, who just happen to be related."
     "She bites her lip. It's clear from the look in her eyes that she wants it badly, but is afraid to take the leap."
     mc.name "Tell you what, let's go a little farther, and if it feels wrong we can stop."
@@ -517,7 +517,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     the_person "I was thinking... you could just lay back and hold the camera. I'll ride you reverse cowgirl, then when you finish you'll be to uhhh, you know, see it."
     $ mc.change_locked_clarity(20)
     mc.name "Mmm... that sounds amazing... for the viewers too!"
-    "She punches your arm half heartily and laughs."
+    "She punches your arm half-heartedly and laughs."
     "You walk over to her bed and lay down on it. After a minute she brings you the camera."
     "She goes back over to a the computer, and after a moment, she gives a countdown."
     the_person "Okay, we are streaming in 5, 4, 3..."
@@ -550,7 +550,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     "[the_person.possessive_title] wiggles back and forth a few more times, then looks back at you and smiles."
     the_person "Do you like that, bro? Ah! That is so good..."
     "[the_person.possessive_title] reaches back between her legs and cups your balls."
-    the_person "Mmm you feel so full... I want you to fill me up! I can't wait to milk all that cum out of you!"
+    the_person "Mmm, you feel so full... I want you to fill me up! I can't wait to milk all that cum out of you!"
     $ the_person.change_arousal(30)
     $ mc.change_locked_clarity(20)
     "Her dirty talking it having it's desired effect, and the taboo of doing this while anyone in the world can watch is just too much."
@@ -629,7 +629,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
             call breeding_fetish_stephanie_bimbo_label(the_person) from _breeding_fetish_steph_bimbo_02
         else:
             if mc.location == mc.business.r_div: #Already in research
-                "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
+                "Suddenly, [the_person.possessive_title] looks up from her work and speaks up."
                 the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
                 mc.name "Sure, follow me to my office."
             else:

@@ -378,11 +378,14 @@ screen screen_IT_return_button():
             align [0.5,0.5]
             auto "gui/button/choice_%s_background.png"
             focus_mask "gui/button/choice_idle_background.png"
-            action [Return(), Hide("it_project_screen"),
-                     Hide("IT_tooltip"),
-                     Hide("nanobot_project_screen"),
-                     Hide("business_project_screen"),
-                     Hide("screen_IT_active_project")]
+            action [
+                Hide("it_project_screen"),
+                Hide("IT_tooltip"),
+                Hide("nanobot_project_screen"),
+                Hide("business_project_screen"),
+                Hide("screen_IT_active_project"),
+                Return()
+            ]
         textbutton "Return" align [0.5,0.5] text_style "return_button_style"
 
 screen in_progress_text_box(x,y):

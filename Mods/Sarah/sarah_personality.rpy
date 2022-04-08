@@ -333,7 +333,7 @@ label Sarah_flirt_response_low(the_person):
         $ mc.change_locked_clarity(5)
     mc.name "Your body is fantastic, and the outfit is the icing on the cake."
     "She smiles and laughs."
-    the_person "Ah, so you are resorting to flattery then? You kind words are noted, [the_person.mc_title]!"
+    the_person "Ah, so you are resorting to flattery then? Your kind words are noted, [the_person.mc_title]!"
     return
 
 label Sarah_flirt_response_mid(the_person):
@@ -494,7 +494,7 @@ label Sarah_cum_face(the_person):
             "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
     else:
         if the_person.sluttiness > 80:
-            the_person "Mmm that's such a good feeling. Do you think I look cute like this?."
+            the_person "Mmm, that's such a good feeling. Do you think I look cute like this?."
             "[the_person.title] runs her tongue along her lips, then smiles and laughs."
         else:
             the_person "Whew, glad you got that over with. Take a good look while it lasts."
