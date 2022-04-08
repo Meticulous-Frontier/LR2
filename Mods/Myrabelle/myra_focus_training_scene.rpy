@@ -9,26 +9,26 @@
 
 
 init 1 python:
-    def myra_focus_progression_scene_0_req(the_group):    #Requirements for the basic scene. Should almost always be true.
+    def myra_focus_progression_scene_0_req():    #Requirements for the basic scene. Should almost always be true.
         return True
 
-    def myra_focus_progression_scene_1_req(the_group):    #Requirements for grope scene
-        if the_group[0].sluttiness > 20:
+    def myra_focus_progression_scene_1_req():    #Requirements for grope scene
+        if myra.sluttiness > 20:
             return True
         return False
 
-    def myra_focus_progression_scene_2_req(the_group):    #Requirements for fingering
-        if the_group[0].sluttiness > 40:
+    def myra_focus_progression_scene_2_req():    #Requirements for fingering
+        if myra.sluttiness > 40:
             return True
         return False
 
-    def myra_focus_progression_scene_3_req(the_group):    #Requirements for assjob scene
-        if the_group[0].sluttiness > 60:
+    def myra_focus_progression_scene_3_req():    #Requirements for assjob scene
+        if myra.sluttiness > 60:
             return True
         return False
 
-    def myra_focus_progression_scene_4_req(the_group):    #Requirements for anal
-        if the_group[0].sluttiness > 80:
+    def myra_focus_progression_scene_4_req():    #Requirements for anal
+        if myra.sluttiness > 80:
             return True
         return False
 
@@ -80,6 +80,7 @@ init 2 python:
             multiple_choice_scene = None,   #The scene that lets MC choose which final scene he wants.
             regress_scene_list = [])    #If the scene can regress, fill this with appropriate regression scenes to play between intro and final scenes.
         myra_focus_progression_scene.compile_scenes(myra_focus_progression_scene)   #This will populate the scenes that are blank above.
+        
 
 
 
@@ -197,6 +198,7 @@ label myra_focus_progression_scene_intro_scene(the_group):
     "Would increasing her suggestability make it easier to train her focus? You imagine so."
     "You can now train [the_person.title]'s focus once per day."
     "[the_person.title] and [alexia.title] are getting together on Friday night. You make a note to swing by see what they are up to..."
+    $ myra.add_unique_on_room_enter_event(myra_alexia_teamup_scene_action)
     call advance_time from _call_advance_myra_focus_progression_scene_adv_01
     return
 

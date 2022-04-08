@@ -52,10 +52,10 @@ init 2 python:
             tits="B",                               # "AA" "A" "B" "C" "D" "DD" "DDD" "E" "F" "FF"... blame vren for weird sizing.
             height = 0.92,                          # Not sure the limits on this one
             hair_colour="sky blue",                    # See game/mods/Core/Mechanics/Person_Extentions/more_hair_colours.rpy for options
-            hair_style = shaved_side_hair,                 # See game/clothing_lists.rpy for options
-            pubes_colour = "sky blue",                    # Same as hair colour
-            pubes_style = diamond_pubes,                     # shaved_pubes, landing_strip_pubes, diamond_pubes, trimmed_pubes, or default_pubes
-            skin="white",                           # "white" "black" "tan"
+            hair_style = shaved_side_hair,
+            #pubes_colour = "sky blue",
+            #pubes_style = diamond_pubes,                    
+            skin="white",
             tan_style = None,                       # ?Not sure, presumably mod related
             eyes = "light blue",                    # "dark blue", "light blue", "green", "brown", "grey", or "emerald"
             job = myra_job,                         # Generic job title. Use for random town people or people with jobs OUTSIDE of MC's company
