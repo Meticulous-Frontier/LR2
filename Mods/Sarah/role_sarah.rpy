@@ -1328,7 +1328,7 @@ label Sarah_catch_stealing_label():
                     if the_person.sluttiness > 40:
                         $ the_person.draw_person(position = "stand4", emotion = "happy")
                         the_person "Oh! Well that's an idea. Funny, why hadn't I thought of that?"
-                        if the_person.should_wear_uniform()
+                        if the_person.should_wear_uniform():
                             the_person "If I do that... Are you going to relax the dress code a bit? That's fine as long as I don't have to wear bras to work anymore..."
                             if not commando_uniform_policy.is_active():
                                 mc.name "I will definitely look into it, if it helps you make up your mind."
