@@ -39,7 +39,7 @@ label business_meeting_action_label():
     call business_meeting_introduction(the_person) from _call_business_meeting_introduction_1
     call business_meeting_flirtation(the_person) from _call_business_meeting_flirtation_1
     if the_person.effective_sluttiness() > 25:
-        call business_meeting_arrousal(the_person) from _call_business_meeting_arrousal_1
+        call business_meeting_arousal(the_person) from _call_business_meeting_arousal_1
         if (the_person.effective_sluttiness() > 40):
             call business_meeting_seduction(the_person) from _call_business_meeting_seduction_1
             $ done = _return
@@ -82,7 +82,7 @@ label business_meeting_flirtation(the_person):
     if the_person.effective_sluttiness() > 15:
         $ remove_person_shoes(the_person)
         $ mc.change_locked_clarity(10)
-        if the_person.outfit.feet_available:
+        if the_person.outfit.feet_available():
             "While talking about her proposal, you suddenly feel her bare foot moving up and down your leg."
         else:
             "While talking about her proposal, you suddenly feel her stockinged foot moving up and down your leg."
@@ -90,7 +90,7 @@ label business_meeting_flirtation(the_person):
         "You mind wanders off while she is talking..."
     return
 
-label business_meeting_arrousal(the_person):
+label business_meeting_arousal(the_person):
     if the_person.effective_sluttiness() > 30:
         "She moves up to your crotch and unzips your pants with her feet, sliding with her foot over you growing bulge."
         $ mc.change_locked_clarity(20)
