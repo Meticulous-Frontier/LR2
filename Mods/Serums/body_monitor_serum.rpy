@@ -36,9 +36,9 @@ init -2 python:
             exclude_tags = ["Nanobots"],
             clarity_cost = 1000,
             mental_aspect = 0,
-            physical_aspect = 5,
+            physical_aspect = 3,
             sexual_aspect = 0,
-            medical_aspect = 5,
+            medical_aspect = 3,
             flaws_aspect = 0,
             attention = 0)
 
