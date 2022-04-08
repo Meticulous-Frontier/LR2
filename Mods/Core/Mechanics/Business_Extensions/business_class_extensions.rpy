@@ -316,6 +316,7 @@ init -1 python:
 
     def fire_IT_director(self):
         if self.it_director:
+            self.set_override_schedule(None, the_days = [0, 1, 2, 3, 4], the_times = [1,2,3])
             self.it_director.remove_role(IT_director_role)
             self.it_director = None
 

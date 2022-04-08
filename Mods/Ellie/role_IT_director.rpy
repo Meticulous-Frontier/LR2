@@ -8,14 +8,10 @@ init 1 python:
             return mc.business.it_director.IT_tags.get(key, default)
 
     def update_IT_projects_requirement(the_person):
-        if mc.business.is_open_for_business():
-            return True
-        return False
+        return mc.business.it_director and mc.business.is_open_for_business()
 
     def IT_project_complete_requirement():
-        if mc.business.is_open_for_business() and mc.is_at_work():
-            return True
-        return False
+        return mc.business.it_director and mc.business.is_open_for_business() and mc.is_at_work()
 
     def IT_director_on_turn(the_person):
         if the_person.location == mc.business.r_div:
@@ -25,7 +21,6 @@ init 1 python:
             the_person.set_override_schedule(mc.business.r_div, the_days = [0, 1, 2, 3, 4], the_times = [1,2,3])
         else:
             the_person.set_override_schedule(None, the_days = [0, 1, 2, 3, 4], the_times = [1,2,3])
-
         return
 
     # def IT_director_on_move(the_person):
