@@ -49,6 +49,9 @@ init 5 python:
     vial_token_small_image = im.Scale(Image(get_file_handle("vial.png")), 18, 18)
     renpy.image("vial_token_small", vial_token_small_image)
 
+    progress_token_small_image = im.Scale(Image(get_file_handle("progress_token.png")), 18, 18)
+    renpy.image("progress_token_small", progress_token_small_image)
+
     vial_image = Image(get_file_handle("vial.png"))
     dna_image = Image(get_file_handle("dna.png"))
     question_image = Image(get_file_handle("question.png"))
