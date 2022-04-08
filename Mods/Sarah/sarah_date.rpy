@@ -130,7 +130,7 @@ label sarah_bar_date_label(the_person):
                     #TODO change this to sarah's special tit fuck when applicable
                     call get_fucked(the_person, the_goal = "body shot", private= True, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sex_description_sarah_weekend_titfuck_5
                     "[the_person.possessive_title] moans as she rubs your cum into her chest."
-                    the_person "It feels so sticky on my skin... Mmmm that was nice."
+                    the_person "It feels so sticky on my skin... Mmmm, that was nice."
                     "You clear your throat and then respond."
                     mc.name "That felt great!"
                     $ scene_manager.update_actor(the_person, position = "stand4")

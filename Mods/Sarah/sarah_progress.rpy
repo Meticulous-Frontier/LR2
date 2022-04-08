@@ -52,7 +52,7 @@ init 10 python:
         if sarah != mc.business.hr_director:
             return "[sarah.title] must be your HR Director to progress this story."
         else:
-            return "[sarah.title] will give you a special service during monday morning meeting soon."
+            return "[sarah.title] will give you a special service during your Monday morning meeting soon."
 
     def sarah_story_80_love_complete_func():
         return get_HR_director_unlock("anal lapdance")

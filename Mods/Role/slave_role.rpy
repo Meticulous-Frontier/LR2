@@ -236,7 +236,7 @@ label slave_alarm_clock_label(the_person):
             menu:
                 "Masturbate":
                     "You pull your underwear down, grab your hard cock, and start to stroke it."
-                    mc.name "Thanks [the_person.title], you're really helping me out this morning."
+                    mc.name "Thanks, [the_person.title], you're really helping me out this morning."
                     the_person "Anything to help you succeed."
                     $ the_person.draw_person(position = "back_peek")
                     "She wiggles her butt a bit as if to tease you, then turns her attention back to putting together an outfit for you."
@@ -384,7 +384,7 @@ label slave_alarm_clock_label(the_person):
                 "You watch as she slides her legs off the side of your bed, holds out a hand, and spits your cum out into it."
 
         the_person "Whew, I'm glad I was able to help with that [the_person.mc_title]. That was a lot more than I was expecting."
-        mc.name "Thanks [the_person.title], you're the best."
+        mc.name "Thanks, [the_person.title], you're the best."
         $ the_person.change_stats(love = 2)
         the_person "My pleasure, now you should be getting up or you'll be late for work!"
 

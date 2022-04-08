@@ -1488,7 +1488,7 @@ label camilla_formal_date_label():    #60
     "She hears you stir and turns her head to look at you."
     the_person "Good morning, señor..."
     mc.name "Good morning."
-    the_person "I need to run some errands... Sorry but I need to go."
+    the_person "I need to run some errands... Sorry, but I need to go."
     "You stand up and walk over to her. She turns as your approach her and you embrace."
     $ the_person.draw_person(position = "kissing")
     the_person "Thank you for last night... it was magical."

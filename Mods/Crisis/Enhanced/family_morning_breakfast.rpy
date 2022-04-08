@@ -24,7 +24,7 @@ label family_morning_breakfast_enhanced_label():
         $ scene_manager.add_actor(mom)
         "[mom.possessive_title] cracks open the door and leans in."
         mom "I'm making some breakfast for you and [lily.name]. Come on down if you'd like some."
-        mc.name "Thanks [mom.title], I'll be down in a minute."
+        mc.name "Thanks, [mom.title], I'll be down in a minute."
         $ scene_manager.update_actor(mom, emotion = "happy")
         "She flashes you a smile and closes the door."
         $ scene_manager.hide_actor(mom)

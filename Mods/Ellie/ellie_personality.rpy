@@ -252,7 +252,7 @@ label ellie_clothing_accept(the_person):
     if the_person.obedience > 130:
         the_person "It's for me? Thank you [the_person.mc_title], I'll add it to my wardrobe."
     else:
-        the_person "Oh, it's cute! Thanks [the_person.mc_title]!"
+        the_person "Oh, it's cute! Thanks, [the_person.mc_title]!"
     return
 
 label ellie_clothing_reject(the_person):
@@ -445,7 +445,7 @@ label ellie_flirt_response_low(the_person):
     if the_person.is_wearing_uniform():
         if the_person.judge_outfit(the_person.outfit):
             #She's in uniform and likes how it looks.
-            the_person "Thanks [the_person.mc_title]. I like these uniforms too. Did you design them yourself?"
+            the_person "Thanks, [the_person.mc_title]. I like these uniforms too. Did you design them yourself?"
             mc.name "I did."
             $ mc.change_locked_clarity(5)
             the_person "Amazing! I think you have a good eye for fashion."
@@ -1014,9 +1014,9 @@ label ellie_surprised_exclaim(the_person):
 
 label ellie_talk_busy(the_person):
     if the_person.obedience > 120:
-        the_person "Hey, I'm really sorry but I've got some stuff I need to take care of. Could we catch up some other time?"
+        the_person "Hey, I'm really sorry, but I've got some stuff I need to take care of. Could we catch up some other time?"
     else:
-        the_person "Hey, sorry [the_person.mc_title] but I've got some stuff to take care of. It was great talking though!"
+        the_person "Hey, sorry [the_person.mc_title], but I've got some stuff to take care of. It was great talking though!"
     return
 
 label ellie_sex_strip(the_person):
@@ -1115,7 +1115,7 @@ label ellie_work_enter_greeting(the_person):
         if the_person.obedience > 120:
             "[the_person.title] gives you a curt nod and then turns back to what she was doing."
         else:
-            "[the_person.title] glances at you when you enters the room then looks away quickly to avoid starting a conversation."
+            "[the_person.title] glances at you when you enters the room, then looks away quickly to avoid starting a conversation."
 
     elif the_person.happiness > 120:
         if the_person.sluttiness > 50:
@@ -1870,7 +1870,7 @@ label ellie_GIC_finish_response(the_person, the_goal):
     elif the_goal == "facial":
         the_person "How do it look? It feels good on my face."
     elif the_goal == "body shot":
-        the_person "Mmm your cum is so hot. I love the way it feels on my skin."
+        the_person "Mmm, your cum is so hot. I love the way it feels on my skin."
     elif the_goal == "oral creampie":
         the_person "You tasted great..."
     else:

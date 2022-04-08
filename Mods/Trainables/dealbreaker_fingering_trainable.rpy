@@ -201,7 +201,7 @@ label train_dealbreaker_fingering_label(the_person):
             mc.name "Feels good, doesn't it?"
             "She gives a little shudder."
             the_person "Yeah... it does..."
-            "Unfortunately, you aren't skilled enough to get her to cum, but she does atleast enjoy the sensations."
+            "Unfortunately, you aren't skilled enough to get her to cum, but she does at least enjoy the sensations."
 
     "You slowly let go of [the_person.title]. She turns around to face you."
     $ the_person.update_opinion_with_score("being fingered", after_training_opinion_score, add_to_log = True)

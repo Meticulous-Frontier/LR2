@@ -1383,6 +1383,7 @@ label erica_house_call_label(the_person):
     return
 
 label erica_money_problems_label(the_person):
+    mc.name "Hey, [the_person.title]. How've you been lately?"
     the_person "I'm doing okay, I guess."
     "Her uncertain response leaves you curious."
     mc.name "You guess?"
@@ -1670,7 +1671,7 @@ label erica_yoga_event_intro_label():
     yoga_assistant "Hello [yoga_assistant.mc_title]! The man of the hour! Here to make sure company funds are being spent wisely?"
     "[the_person.title] chuckles."
     mc.name "I have no doubt that you two will make this class a success. I'm just here to make sure all the first session jitters get worked out and to lend a hand if any problems arise."
-    the_person "Thanks [the_person.mc_title]. I really appreciate your support with this. It's just a yoga class, but having you here definitely helps me feel more confident trying to tackle this!"
+    the_person "Thanks, [the_person.mc_title]. I really appreciate your support with this. It's just a yoga class, but having you here definitely helps me feel more confident trying to tackle this!"
     yoga_assistant "Yeah, don't worry [the_person.name], [mc.name] is a great guy to work for! He really knows how to treat his employees!"
     mc.name "Alright, I'll be over there, getting some of the morning paperwork started. Let me know if you need anything."
     "You head to the side of the room and sit down at a computer terminal. You pull up some serum designs and get to work, analyzing them. After a bit, you glance up when you hear [yoga_assistant.possessive_title] starting things up."
@@ -2649,8 +2650,8 @@ label erica_lily_weekly_photoshoot_label(the_person):
     #TODO add outfits to wardrobes if they like them.
     #TODO add new outfits?
     "With the pictures done, you give the camera back to [lily.possessive_title]."
-    lily "Thanks [lily.mc_title]! You're the best!"
-    erica "Yeah, thanks [erica.mc_title]. [lily.name] is it still okay if I spend the night?"
+    lily "Thanks, [lily.mc_title]! You're the best!"
+    erica "Yeah, thanks, [erica.mc_title]. [lily.name] is it still okay if I spend the night?"
     lily "Of course! I could really use your help studying for my exam coming up."
     "You wish you could come up with a good excuse to stick around, but can't think of anything, so you say goodnight."
     $ scene_manager.clear_scene()
@@ -3234,8 +3235,8 @@ label erica_breeding_fetish_team_crisis_label():
     $ the_person.apply_planned_outfit()
     $ scene_manager.add_actor(the_person, display_transform = character_center_flipped)
     mc.name "Good morning."
-    the_person "Good morning [the_person.mc_title]... Sorry but I need to leave early, I've got some things I need to figure out..."
-    mc.name "Sure, let me just walk you to the door atleast."
+    the_person "Good morning [the_person.mc_title]... Sorry, but I need to leave early, I've got some things I need to figure out..."
+    mc.name "Sure, let me just walk you to the door at least."
     "You jump up out of bed, grab a pair of shorts and a t-shirt and throw them on."
     "You open your bedroom door and start to walk [the_person.title] to the front door..."
     $ scene_manager.add_actor(lily)

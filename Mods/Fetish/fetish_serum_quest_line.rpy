@@ -750,7 +750,7 @@ label fetish_serum_coding_activity_label():
                             call fuck_person(the_person,private = False, start_position = SB_doggy_standing, skip_intro = True, skip_condom = True) from _call_fuck_person_serum_coding_event_01
                             $ the_report = _return
                             if the_report.get("girl orgasms", 0) > 0:
-                                the_person "Ah... I think I'll actually be able to focus after that. Thanks [the_person.mc_title]."
+                                the_person "Ah... I think I'll actually be able to focus after that. Thanks, [the_person.mc_title]."
                             $ the_person.review_outfit()
                             $ the_person.draw_person(position = "sitting")
                             "Once [the_person.title] gets herself tidied up she sits down at her desk and goes back to work, as if nothing out of the ordinary happened."
@@ -760,7 +760,7 @@ label fetish_serum_coding_activity_label():
                             call fuck_person(the_person,private = True) from _call_fuck_person_serum_coding_event_02
                             $ the_report = _return
                             if the_report.get("girl orgasms", 0) > 0:
-                                the_person "Ah... I think I'll actually be able to focus after that. Thanks [the_person.mc_title]."
+                                the_person "Ah... I think I'll actually be able to focus after that. Thanks, [the_person.mc_title]."
                             "You get your clothes back on and head back to the lab, sitting down at the terminal. After a few minutes, [the_person.possessive_title] comes back in."
                             $ the_person.review_outfit()
                             $ the_person.draw_person(position = "sitting")

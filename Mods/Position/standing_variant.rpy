@@ -140,7 +140,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                             the_girl "You could do that... or you could pullout and cum all over my ass... wouldn't that be sexy?"
                             "She doesn't seem to be into being cum inside. Maybe you should consider finishing somewhere else..."
                         else:
-                            the_girl "Mmmmm I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
+                            the_girl "Mmmmm, I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
                             "Sounds like she just wants to please you, without being partial to a creampie or finishing some other way."
                     "I wanna cover your ass":
                         if the_girl.get_opinion_score("being covered in cum") > 0:
@@ -261,7 +261,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                             the_girl "You could do that... or you could pullout and cum all over my ass... wouldn't that be sexy?"
                             "She doesn't seem to be into being cum inside. Maybe you should consider finishing somewhere else..."
                         else:
-                            the_girl "Mmmmm I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
+                            the_girl "Mmmmm, I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
                             "Sounds like she just wants to please you, without being partial to a creampie or finishing some other way."
                     "I wanna cover your ass":
                         if the_girl.has_cum_fetish():

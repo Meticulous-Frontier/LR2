@@ -78,7 +78,7 @@ label milk_employee_crisis_label():
         "You start to squeeze them in rhythm. First one, then the other. It takes several seconds, but soon milk starts to dribble out of the tip."
         # We don't have access to multiple lactation sources yet, but assume at some point we can make cows that can really crank out milk
         if the_person.lactation_sources > 2:
-            "[the_person.title] gives a moan, and the floodgates open as her breasts let down. Milk is now coming out in a steady stream from both tits, and everytime you squeeze it spurts out forcefully."
+            "[the_person.title] gives a moan, and the floodgates open as her breasts let down. Milk is now coming out in a steady stream from both tits, and every time you squeeze it spurts out forcefully."
             the_person "Oh god... that feels so good..."
             $ the_person.change_arousal(20)
             $ mc.change_locked_clarity(30)

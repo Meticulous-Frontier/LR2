@@ -51,7 +51,7 @@ label intro_anal_on_lap(the_girl, the_location, the_object):
     "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
     "[the_girl.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
     if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl "Oh my god, I can't wait to ride this thing. Mmmm I feel so full."
+        the_girl "Oh my god, I can't wait to ride this thing. Mmmm, I feel so full."
         $ the_girl.discover_opinion("anal sex")
     else:
         the_girl "Wow! Okay... I think I'm ready... let's do this!"

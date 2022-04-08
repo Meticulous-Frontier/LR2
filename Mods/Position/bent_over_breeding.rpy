@@ -63,7 +63,7 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
         "The next time you push yourself in you push a little faster. She seems to be adapting to your fucking."
     elif the_girl.has_role(breeding_fetish_role):          #breeding fetish
         "After a particularly hard thrust, [the_girl.possessive_title] moans lewdly."
-        the_girl "That's it, fuck me harder! Fill me up so full you seed is spilling out, then fill me up again!"
+        the_girl "That's it, fuck me harder! Fill me up so full your seed is spilling out, then fill me up again!"
         "With one hand on her hip to control the pace, you grope and worship her ass cheeks with the other hand."
         "[the_girl.possessive_title] rocks her hips side to side each time you slam into her. Each time you pull back you can see her labia clinging to you."
         "You use both hands to grab her hips and slam yourself into her as deep as you can go."

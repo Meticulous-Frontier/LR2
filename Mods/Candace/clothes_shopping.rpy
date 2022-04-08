@@ -116,7 +116,6 @@ label candace_goes_clothes_shopping_label(the_person):
         mc.name "Yeah I'd be up for doing that again sometime!"
         "At the checkout line, you pay for the new clothes for [the_person.possessive_title]."
         $ mc.business.change_funds(-100 * _return)
-        the_person "You're sweet. Thanks for the shopping trip!"
     else:
         "You walk with [the_person.title] to the exit."
         the_person "God, that was fun! Just a shame we didn't find anything we both like!"

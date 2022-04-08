@@ -190,7 +190,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
                 "*SMACK*"
                 "She moans again. A red hand print is starting to form on her ass cheek."
                 "*SMACK*"
-                the_girl_2 "Ahh! Mmmmmmmm"
+                the_girl_2 "Ahh! Mmmmmmmm..."
                 "She cries out, enjoying your rough treatment of her body."
                 $ the_girl_2.change_arousal(20)
                 $ the_girl_1.change_arousal(7)

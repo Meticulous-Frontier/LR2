@@ -58,7 +58,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object):
             "You lean forward and whisper into her ear."
             mc.name "Baby... I'm going to fuck your ass now... just the way you like it!"
             "You can see goosebumps break out all over her body."
-            the_girl "Oh god, I touch myself everytime I think about the first time you fucked in one of these at the shop."
+            the_girl "Oh god, I touch myself every time I think about the first time you fucked in one of these at the shop."
             the_girl "Fuck me good, [the_girl.mc_title]! I want it so bad!"
             $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex"))
         else:
@@ -96,7 +96,7 @@ label scene_SB_anal_swing_1(the_girl, the_location, the_object):
         elif the_girl is lily:
             the_girl "That's it [the_girl.mc_title]! Fuck me harder! I'm [the_girl.possessive_title], hanging from a swing just to please you!"
         elif the_girl is starbuck:
-            the_girl "Yes! Don't let up! I think about you stringing me up like this everytime I see the swing in the store."
+            the_girl "Yes! Don't let up! I think about you stringing me up like this every time I see the swing in the store."
         else:
             the_girl "That's it, fuck me harder! Make me walk funny for a week!"
         "With your hands wrapped around the straps, you control the pace of your fucking."

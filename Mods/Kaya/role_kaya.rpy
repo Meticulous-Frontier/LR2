@@ -484,7 +484,7 @@ label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Li
     mc.name "Ah, hello there [the_person.title]."
     "She gives you a smile and chirps at you."
     the_person "We go out one night for drinks and you are stalking me at class, mister?"
-    "[the_person.title] is very quick-witted. You can tell she is half joking... but also seriously wanting to know what you are doing here."
+    "[the_person.title] is very quick-witted. You can tell she is half-joking... but also seriously wanting to know what you are doing here."
     mc.name "Ah, sorry I wasn't looking for you, to be honest... I was... er..."
     "Just then, you are saved by another familiar voice."
     lily "Oh hey, [lily.mc_title]!"
@@ -536,7 +536,7 @@ label kaya_meet_erica_at_uni_label(the_person):     #This label is a repalcement
     mc.name "Ah, hello there [the_person.title]."
     "She gives you a smile and chirps at you."
     the_person "We go out one night for drinks and you are stalking me at class, mister?"
-    "[the_person.title] is very quick-witted. You can tell she is half joking... but also seriously wanting to know what you are doing here."
+    "[the_person.title] is very quick-witted. You can tell she is half-joking... but also seriously wanting to know what you are doing here."
     mc.name "Ah, sorry I wasn't looking for you, to be honest... I was... er..."
     "Just then, you are saved by another familiar voice."
     erica "Oh hey, [erica.mc_title]!"
@@ -733,7 +733,7 @@ label kaya_lily_study_night_recurring_label(the_person):
     lily "Oh hey."
     the_person "Hey [the_person.mc_title]!"
     mc.name "Hey, I know you are busy studying, but just wanted to come say hi. Can I get you girls a snack or something?"
-    lily "Oh thanks [lily.mc_title]. Yeah can you get us some pretzels, and I wouldn't mind a glass of soda from the fridge. Do you want anything [the_person.name]?"
+    lily "Oh thanks, [lily.mc_title]. Yeah can you get us some pretzels, and I wouldn't mind a glass of soda from the fridge. Do you want anything [the_person.name]?"
     the_person "Soda would be nice!"
     lily "Yeah two sodas and pretzels!"
     mc.name "Sure."
@@ -821,7 +821,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     nora "Generally though, they want students to focus on their studies, so usually they ask that the hours be kept low, 10 hours a week or less."
     mc.name "Hmm, how much would it cost to set up something like that?"
     nora "Last time I checked, other similar programs paid about $5000 per intern. That covers the student's entire tuition, meal plan, and books for a semester."
-    nora "The time for the interns to work is up to you, but most programs I've seen are set up for weekends. Either one full day, or two half days."
+    nora "The time for the interns to work is up to you, but most programs I've seen are set up for weekends. Either one full day, or two half-days."
     mc.name "I see... so this is something that I could start with just [the_person.title], but could bring on more people as things go along?"
     nora "Yes, if you want to I could work with you on identifying potential candidates. However, there are a few people who would be ineligible."
     nora "While not illegal, the university takes a strong stance against nepotism, so your family member would not be eligible."
@@ -869,7 +869,7 @@ label kaya_uni_scholarship_intro_label(the_person):
     the_person "I've never heard of such a program... or applied for it?"
     mc.name "That's because it just got created today. I really think you should accept it."
     the_person "I don't know..."
-    mc.name "It is just for a few hours on the weekends. Half days on Saturdays and Sundays. It will give you some good job experience."
+    mc.name "It is just for a few hours on the weekends. Half-days on Saturdays and Sundays. It will give you some good job experience."
     mc.name "And if you are ever just too tired from family stuff... just text me and stay home."
     $ the_person.draw_person(emotion = "happy")
     the_person "I... I don't know what to say."
@@ -892,7 +892,7 @@ label kaya_HR_start_internship_program_label():
     $ the_person.draw_person(position = "sitting")
     mc.name "I've partnered up with the local university. I'm starting a STEM internship program for women to help get them work experience and a scholarship toward their studies."
     the_person "That's... wow! Okay. How can I help?"
-    mc.name "I've partnered with a former professor at the university who will help me decide who to award the internships to. The plan is to have them work here half days on Saturday and Sunday."
+    mc.name "I've partnered with a former professor at the university who will help me decide who to award the internships to. The plan is to have them work here half-days on Saturday and Sunday."
     the_person "Okay..."
     mc.name "For now, I'm only hiring for Production and Research, since it is a STEM focused scholarship."
     the_person "So... you know I don't work on weekends, right?"
@@ -1331,7 +1331,7 @@ label kaya_fuck_in_apartment_label(the_person): #We already have her bent over d
     "Bent over her counter, [the_person.possessive_title] wiggles her ass at you. You've been wanting to get her in this position for a long time."
     "You hands go to her hips. Time to get her naked."
     $ the_person.change_arousal(20)
-    $ the_person.strip_to_vagina(the_person, position = "standing_doggy", prefer_half_off = False)
+    $ the_person.strip_to_vagina(prefer_half_off = False, position = "standing_doggy")
     mc.name "Holy fuck your ass is amazing..."
     $ mc.change_locked_clarity(50)
     "You run your hands along her soft curves a few times, one time after running your hands down the sides, you them back up between her legs. Her cunt is soaked."
