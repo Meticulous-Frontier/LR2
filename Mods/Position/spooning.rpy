@@ -30,7 +30,7 @@ label intro_spooning(the_girl, the_location, the_object):
     "Your cock is hard. You rub it up against [the_girl.title]'s ass, grinding a bit."
     "When you feel good about it, you reach down and gently spread her cheeks apart. You position yourself at her entrance and give it a little push."
     "You are able to ease yourself about halfway in, but the angle makes it hard to get deep penetration."
-    the_girl "Oh [the_girl.mc_title]. Mmmmmm"
+    the_girl "Oh [the_girl.mc_title]. Mmmmmm..."
     "You give her a few tentative strokes, and soon you are established in a nice, easy rhythm."
     return
 
@@ -56,7 +56,7 @@ label scene_spooning_1(the_girl, the_location, the_object):
     else:
         if the_girl.outfit.tits_available():
             "[the_girl.possessive_title]'s cute [the_girl.tits_description] feel firm and hot in your hand."
-            the_girl "Oh! Mmm gentle with me [the_girl.mc_title]."
+            the_girl "Oh! Mmm, gentle with me [the_girl.mc_title]."
             "You rub her nipple for a moment and feel it get hard, then move to her other breast and do the same."
         else:
             $ top_clothing = the_girl.outfit.get_upper_top_layer()
@@ -139,7 +139,7 @@ label transition_default_spooning(the_girl, the_location, the_object):
     "Your cock is hard. You rub it up against [the_girl.title]'s ass, grinding a bit."
     "When you feel good about it, you reach down and gently spread her cheeks apart. You position yourself at her entrance and give it a little push."
     "You are able to ease yourself about halfway in, but the angle makes it hard to get deep penetration."
-    the_girl "Oh [the_girl.mc_title]. Mmmmmm"
+    the_girl "Oh [the_girl.mc_title]. Mmmmmm..."
     "You give her a few tentative strokes, and soon you are established in a nice, easy rhythm."
     return
 

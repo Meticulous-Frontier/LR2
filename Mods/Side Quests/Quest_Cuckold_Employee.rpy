@@ -658,7 +658,7 @@ label quest_cuckold_employee_gloryhole_label():
     anon_char "Mmmm, it's so good when it goes in."
     "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the thin wall is in the way."
     "You start to work your hips a bit, testing the limits of how far you can pull back without pulling all the way out of her."
-    anon_char "Yes! Mmm that feels good."
+    anon_char "Yes! Mmm, that feels good."
     "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
     "Actually... her voice sounds an awful lot like... [the_person.title]? Wasn't she asking you to knock her up the other day?"
     "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."

@@ -43,7 +43,7 @@ init 10 python:
         if lily_will_strip():
             lust_story_list.append("[lily.name] offered to strip for you for extra cash!")
         elif lily.sluttiness < 30:
-            lust_story_list.append("Raise [lily.name]'s sluttiness to atleast 30 to continue this story.")
+            lust_story_list.append("Raise [lily.name]'s sluttiness to at least 30 to continue this story.")
             return lust_story_list
         elif lily_get_serums_tested() < 4:
             story_string = "Have [lily.name] test " + str(4 - lily_get_serums_tested()) + " more serums."

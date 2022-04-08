@@ -117,7 +117,7 @@ label lazy_morning_crisis_action_label():
         "As your fingers push deep inside of her, she momentarily forgets to stroke you. You remind her by gently thrusting yourself into her hand and she immediately starts stroking you again."
         the_person "Mmmm, I love cuddling..."
         $ mc.change_locked_clarity(30)
-        mc.name "I do to... especially this kind of cuddling."
+        mc.name "I do too... especially this kind of cuddling."
         "[the_person.possessive_title] is getting wetter as you finger her. She is beginning to gasp and moan under hear breath."
         the_person "Oh [the_person.mc_title]..."
         "You feel her legs spread open a little wider, instinctively giving you better access with your fingers. Her soft hand stroking your cock feels great."

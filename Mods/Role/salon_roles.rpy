@@ -518,7 +518,7 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person "Well, he's just a friend. Remember when I used to do that for you?"
     ex_name "[the_person.name]... this isn't funny."
     the_person "What? It's nothing serious, you should come over tomorrow, I'll do the same for you."
-    ex_name "I'm sorry, this is getting out of control. I'm sorry but I'm blocking you."
+    ex_name "I'm sorry, this is getting out of control. I'm sorry, but I'm blocking you."
     the_person "Wow, after everything we've been through together? \n \'message not received\'"
     "... Ouch..."
     mc.name "[the_person.title]... I'm sorry."
@@ -808,7 +808,7 @@ label ophelia_revenge_date_label():
         the_person "Oh my god, I came harder than I ever did with [ex_name]. That was unbelievable!"
         $ the_person.change_love(5)
     else:
-        the_person "Mmm that was so hot. I can't wait to do that again!"
+        the_person "Mmm, that was so hot. I can't wait to do that again!"
     "As you both recover from your romp, there is an awkward silence in the room. You notice it is getting very late, and tomorrow is Monday."
     mc.name "I'm really sorry, I wish I could stick around longer, but I have to work in the morning..."
     $ scene_manager.update_actor(the_person, position = "stand3")
@@ -936,7 +936,7 @@ label ophelia_talk_about_candace_label(the_person):
     mc.name "I was just trying to give examples of how he had been taking advantage of her..."
     the_person "Alright, it's obvious to me that you DO need my help. So fuck yeah, I'm in!"
     the_person "Go ahead and talk to her about it, and when you feel like she is ready, have her come visit me here. We'll get it all set up!"
-    mc.name "Thanks [the_person.title]! I owe you one."
+    mc.name "Thanks, [the_person.title]! I owe you one."
     the_person "Nah, I still owe you a couple of favors. This is just you calling one in."
     "Oh dear. It is a little scary how excited she is getting about this."
     mc.name "Alright, well hopefully it will be soon. I'll let you know!"

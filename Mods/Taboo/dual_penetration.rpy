@@ -109,7 +109,7 @@ label lily_dual_penetration_taboo_break(the_person):
             mc.name "Come on, don't you want to experiment with someone you trust?"
         else:
             mc.name "Yeah, why not? I've already fucked all of your other holes, what's special about this one?"
-            the_person "It's not special, I just thought you'd want to fuck my pussy some more. Didn't you enjoy it last time."
+            the_person "It's not special, I just thought you'd want to fuck my pussy some more. Didn't you enjoy it last time?"
             mc.name "It was great, but I want to experiment a little more. Come on, don't you want to try something new?"
 
     else:

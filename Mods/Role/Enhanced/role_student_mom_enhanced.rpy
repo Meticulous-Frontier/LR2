@@ -71,7 +71,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
         "Add serum to [the_mom.possessive_title]'s wine" if mc.inventory.get_any_serum_count() > 0:
             call give_serum(the_mom) from _call_give_serum_student_dinner_enhanced
             if _return:
-                "You stand up and lean over the table, quickly emptying the contents of a small glass vial into [the_mom.possessive_title]'s half finished wine glass."
+                "You stand up and lean over the table, quickly emptying the contents of a small glass vial into [the_mom.possessive_title]'s half-finished wine glass."
                 "You give the glass a quick swirl, then sit back down and wait for [the_mom.possessive_title] and [the_student.possessive_title] to return."
             else:
                 "You reconsider, and instead sit back in your chair and wait for [the_mom.possessive_title] and [the_student.possessive_title] to return."

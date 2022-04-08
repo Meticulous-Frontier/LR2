@@ -136,7 +136,7 @@ label mom_sister_snooping_action_label():
         $ scene_manager.update_actor(mom, display_transform = character_center_flipped, position = "missionary")
         $ scene_manager.update_actor(lily, display_transform = character_right, position = "missionary")
         "When you finish, [mom.possessive_title] and your sister flop down on her bed next to each other."
-        lily "Thanks [lily.mc_title]. I think I'm just gonna... go back to sleep for a little bit..."
+        lily "Thanks, [lily.mc_title]. I think I'm just gonna... go back to sleep for a little bit..."
         "As fun as it would be to join them, you decide to excuse yourself to get ready for the day."
         mc.name "No problem. You two take it easy, I'm gonna go shower."
     elif mom.sluttiness >= 20:

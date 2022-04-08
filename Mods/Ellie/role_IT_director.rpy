@@ -37,9 +37,9 @@ init 1 python:
 
 label update_IT_projects_label(the_person):
     mc.name "I'd like to review the IT projects."
-    the_person "Ok. Here's what we have going on right now [the_person.mc_title]."
+    the_person "Ok. Here's what we have going on right now, [the_person.mc_title]."
     call screen it_project_screen()
-    the_person "Got it. Is there anything else I can do for you [the_person.mc_title]?"
+    the_person "Got it. Is there anything else I can do for you, [the_person.mc_title]?"
     return
 
 label IT_project_complete_label():

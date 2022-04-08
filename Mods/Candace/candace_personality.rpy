@@ -109,7 +109,7 @@ label candace_sex_responses_oral(the_person):
 
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
-            the_person "Ah! Hehe, that's feels so good!"
+            the_person "Ah! Hehe, that feels so good!"
             "She giggles happily, clearly having a good time."
         else:
             the_person "Oh wow! Mmmm, you're tongue is, like, driving me crazy [the_person.mc_title]!"
@@ -612,9 +612,9 @@ label candace_surprised_exclaim(the_person):
 
 label candace_talk_busy(the_person):
     if the_person.obedience > 120:
-        the_person "Hi, I'm like, really sorry but I have way more stuff than you can imagine that I have to get done right now. Could we catch up later?"
+        the_person "Hi, I'm like, really sorry, but I have way more stuff than you can imagine that I have to get done right now. Could we catch up later?"
     else:
-        the_person "Hey, I'm sorry but I'm just suuuper busy right now! Hit me up later though, I'd love to chat once I get all this stupid work done!"
+        the_person "Hey, I'm sorry, but I'm just suuuper busy right now! Hit me up later though, I'd love to chat once I get all this stupid work done!"
     return
 
 label candace_sex_strip(the_person):
@@ -745,7 +745,7 @@ label candace_date_seduction(the_person):
             the_person "[the_person.mc_title], I don't know how you do it but I swear you've been driving me, like, totally crazy all night."
             $ mc.change_locked_clarity(40)
             "[the_person.title] runs her hand along your arm and giggles."
-            the_person "I want you to come back to my place so I can have you all to my self."
+            the_person "I want you to come back to my place so I can have you all to myself."
             "She looks around and thinks for a second."
             the_person "I guess if I HAVE to stay and share you, I could do that too though!"
         else:

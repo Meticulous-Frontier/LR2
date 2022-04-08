@@ -91,7 +91,7 @@ label relaxed_GIC_finish_response(the_person, the_goal):
     elif the_goal == "facial":
         the_person "How do it look? It feels good on my face."
     elif the_goal == "body shot":
-        the_person "Mmm your cum is so hot. I love the way it feels on my skin."
+        the_person "Mmm, your cum is so hot. I love the way it feels on my skin."
     elif the_goal == "oral creampie":
         the_person "You tasted great..."
     else:

@@ -237,7 +237,7 @@ label scene_SB_anal_cowgirl_4(the_girl, the_location, the_object):
             mc.name "It's okay. Take your time."
             if the_girl.tits_available():
                 "You reach up and grab her tits. When you pinch her nipples you feel her ass clench your cock."
-                the_girl "Ah! Mmm that feels good, do that again..."
+                the_girl "Ah! Mmm, that feels good, do that again..."
                 "You pinch her nipples again. She moans in response."
             else:
                 "To help her relax, you decide to her off a little. You reach down with your hand and stroke her a slit."
@@ -382,7 +382,7 @@ label orgasm_SB_anal_cowgirl(the_girl, the_location, the_object):
     "With one last gasp she collapses down against you. Her thighs quiver as she climaxes. Her velvet smooth ass quivers around your erection as she cums."
     "After a second [the_girl.possessive_title] regains control of herself. Her breath is warm against your ear as she whispers to you."
     if the_girl.has_anal_fetish():
-        the_girl "Everytime you're in my ass, it's like I just can't stop cumming..."
+        the_girl "Every time you're in my ass, it's like I just can't stop cumming..."
     else:
         the_girl "I can't stop now, I want you to make me cum again!"
     "She leans back and starts to ride you faster than ever."

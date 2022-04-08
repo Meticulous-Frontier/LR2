@@ -467,7 +467,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     "Well that response certainly sounds promising."
     if the_person.has_taboo("touching_penis"):
         anon_char "Look at that thing, it's huge..."
-        "While talking you feel a soft hand grasp your member, giving at couple of strokes. You hear some movement, but you aren't sure what shes doing."
+        "While talking you feel a soft hand grasp your member, giving at couple of strokes. You hear some movement, but you aren't sure what she's doing."
         $ the_person.break_taboo("touching_penis", add_to_log = False)
     else:
         "You feel a soft hand grasp your member and give it a couple of strokes. You hear movement coming from the stall next to you but you aren't sure what she's doing."
@@ -481,7 +481,7 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     else:
         "Slowly, you feel a warm, wet tongue circling around the tip of your cock, licking the pre-cum from the tip."
 
-    anon_char "Mmmmmm"
+    anon_char "Mmmmmm..."
     $ mc.change_locked_clarity(20)
     "A moan rumbles around your dick as the girl on the other side of the wall opens her mouth and slides her mouth down your aching hard on."
     "One of your employees is on the other side. The warm, wet suction of her lips and tongue feels great."
@@ -530,7 +530,7 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
     $ mc.change_locked_clarity(30)
     "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the thin wall is in the way."
     "You start to work your hips a bit, testing the limits of how far you can pull back without pulling all the way out of her."
-    anon_char "Yes! Mmm that feels good."
+    anon_char "Yes! Mmm, that feels good."
     "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
     "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
     "The mystery cunt you are fucking feels like it's getting wetter and wetter. The slippery channel feels so good wrapped around you."
@@ -589,7 +589,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     "She slowly keeps descending until she hits the literal wall, separating you from your anonymous butt slut."
     "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the damn wall is in the way."
     "You start to thrust a little bit, testing the limits on how far to pull back without pulling out."
-    anon_char "Oh fuck it's good. Mmmmm"
+    anon_char "Oh fuck it's good. Mmmmm..."
     "One of your employees is on the other side of that wall, taking your cock in her ass. But who? You have some guesses, based on her voice, but there's no way to know for sure."
     "You are thrusting vigorously now. Her ass is so tight, it's like it is trying to milk the cum out of you."
     "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
@@ -667,7 +667,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             anon_char "Mmmm, it's so good when it goes in."
             "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the thin wall is in the way."
             "You start to work your hips a bit, testing the limits of how far you can pull back without pulling all the way out of her."
-            anon_char "Yes! Mmm that feels good."
+            anon_char "Yes! Mmm, that feels good."
             "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
             "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
             "The mystery cunt you are fucking feels like it's getting wetter and wetter. The slippery channel feels so good wrapped around you."

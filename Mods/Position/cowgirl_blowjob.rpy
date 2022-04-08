@@ -54,7 +54,7 @@ label scene_cowgirl_blowjob_1(the_girl, the_location, the_object):
     $ cowgirl_blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] is stroking you with her mouth at an easy pace. She has her eyes closed and is just enjoying the taste."
     "She pauses for a second while she licks the tip."
-    the_person "Mmm, it's so musky. It tastes good... mmmm"
+    the_person "Mmm, it's so musky. It tastes good... mmmm..."
     "Her mouth opens and her silky lips descend your cock again. You try to keep yourself from bucking your hips while she controls the pace."
     return
 
@@ -82,7 +82,7 @@ label scene_cowgirl_blowjob_3(the_girl, the_location, the_object):
     $ cowgirl_blowjob.current_modifier = "blowjob"
     $ cowgirl_blowjob.redraw_scene(the_girl)
     "[the_girl.possessive_title] is looking up at you, smiling with the corner of her lips and her eyes as she services you."
-    mc.name "Mmm [the_girl.title], that feels so good."
+    mc.name "Mmm, [the_girl.title], that feels so good."
     "Moaning her name only makes her work faster. Her smile and her eye contact is enchanting."
     "She starts swirling her tongue around the tip, driving you crazy."
     "Her lips close around the tip and she suckles it a bit, her tongue still circling it."

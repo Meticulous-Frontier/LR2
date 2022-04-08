@@ -94,11 +94,11 @@ init 2 python:
 label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.title] smiles and agrees."
     if the_girl_1.has_breeding_fetish():
-        the_girl_1 "Mmm I can't wait to feel your raw cock sliding into me..."
+        the_girl_1 "Mmm, I can't wait to feel your raw cock sliding into me..."
     elif the_girl_1.has_cum_fetish():
-        the_girl_1 "Mmm I can't wait to taste that sweet pussy..."
+        the_girl_1 "Mmm, I can't wait to taste that sweet pussy..."
     elif the_girl_1.has_anal_fetish():
-        the_girl_1 "Mmm that sounds good... maybe you could stick a finger in my ass once in a while too..."
+        the_girl_1 "Mmm, that sounds good... maybe you could stick a finger in my ass once in a while too..."
     else:
         the_girl_1 "Sounds good! I can't wait, I bet this is going to be amazing..."
     "[the_girl_1.title] starts to lay down. [the_girl_2.title] turns to you."

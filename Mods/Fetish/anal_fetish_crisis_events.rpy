@@ -176,7 +176,7 @@ label anal_fetish_employee_evening_approach_label():
         "She flashes you a quick smile. You wonder if she has in that butt plug she showed you last time you stayed late at the office with her..."
         $ mc.change_locked_clarity(20)
         mc.name "Sure, I can probably stick around for a little bit. Just give me a few minutes."
-        the_person "Oh! Thanks [the_person.mc_title], I'll be right back! You won't regret this!"
+        the_person "Oh! Thanks, [the_person.mc_title], I'll be right back! You won't regret this!"
         $ the_person.draw_person(position = "walking_away")
         "You finish up what you were doing and say goodbye to your employees. Your curiosity about what [the_person.possessive_title] needs is answered when she comes back into the room."
         $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_outfit))
@@ -200,7 +200,7 @@ label anal_fetish_employee_evening_approach_label():
     menu:
         "Fuck her ass":
             $ the_person.event_triggers_dict["LastAnalFetish"] = day
-            the_person "Mmmm I can't wait to feel it."
+            the_person "Mmmm, I can't wait to feel it."
             $ the_person.draw_person(position = "standing_doggy")
             "[the_person.possessive_title] walks over in front of you, with her hands on your desk."
             ###Anal Scene, standing variant###

@@ -356,7 +356,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
     "You give [the_person.possessive_title] a quick proposition."
     mc.name "Hey [the_person.title]. What do you say we get out that strap-on again? I bet your viewers would love that."
     "[the_person.possessive_title] looks at you and smiles."
-    the_person "Mmm that sounds pretty good [the_person.mc_title]... Here, let me take a couple... precautions."
+    the_person "Mmm, that sounds pretty good [the_person.mc_title]... Here, let me take a couple... precautions."
     "[the_person.possessive_title] walks over and closes her door and locks it. She turns on some music and turns the volume up."
     the_person "Don't want mom to find out..."
     $ the_person.draw_person(position = "standing_doggy")

@@ -955,7 +955,7 @@ label anal_fetish_stephanie_normal_label(the_person):
     the_person "Oh! Okay! I think I'll try it out now..."
     "You see her reach behind herself and easily slide it in, her body still lubed up from your prior fucking."
     $ mc.change_locked_clarity(20)
-    the_person "Ah! Mmm I feel full. That's really nice. Not as good as you, but I guess in a pinch I could use it as a substitute."
+    the_person "Ah! Mmm, I feel full. That's really nice. Not as good as you, but I guess in a pinch I could use it as a substitute."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "You say goodbye, and [the_person.possessive_title] turns and walks out of your office, her plug just peeking out between her rosy ass cheeks."
     "Looks like [the_person.title] has an anal fetish now!"

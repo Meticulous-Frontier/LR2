@@ -45,7 +45,7 @@ label scene_SB_Titfuck_Kneeling_2(the_girl, the_location, the_object):
             $ the_girl.change_arousal(5)
     else:                           #She has smaller tits
         "Her hands leave your ass and she brings her hands to the sides of her chest, squishing her tits together to try and stimulate you better."
-        mc.name "Mmm that's it, push them together like that."
+        mc.name "Mmm, that's it, push them together like that."
         "You keep thrusting. [the_girl.title] gathers some saliva in her mouth and then spits on the head of your cock."
         the_person "Gotta keep things lubricated..."
         "She spits again. You can feel her spit coating your cock and it slides a little smoother between her tits now."

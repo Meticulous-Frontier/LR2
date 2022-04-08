@@ -182,7 +182,7 @@ label quest_arousal_serum_receive_drug_label():
     "As you are getting ready for bed, [mom.title] knocks on your door. You open it up."
     mom "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
     "She hands you a small manila envelope."
-    mc.name "Thanks [mom.title]."
+    mc.name "Thanks, [mom.title]."
     $ mom.draw_person(position = "walking_away")
     "She turns and walks way, closing your door behind her."
     $ clear_scene()

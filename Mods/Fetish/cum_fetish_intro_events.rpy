@@ -155,7 +155,7 @@ label cum_fetish_employee_intro_label(the_person):
     $ mc.change_locked_clarity(20)
     the_person "I know this is really forward, but can I ask you for a favor?"
     mc.name "I'd say you are in a good position to do that."
-    the_person "I just wanted to know if I could suck you off. I'm not sure why, but lately everytime I think about your cock, my mouth starts to water and it sounds so good..."
+    the_person "I just wanted to know if I could suck you off. I'm not sure why, but lately every time I think about your cock, my mouth starts to water and it sounds so good..."
     "Wow, sounds like [the_person.title] is really hungry for your dick. You wonder if she might be developing a fetish from your cum proclivity serums."
     "Do you want to try and train her into a cumslut?"
     if the_person in get_cum_fetish_unique_dialogue_list():

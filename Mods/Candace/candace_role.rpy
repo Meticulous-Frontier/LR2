@@ -692,7 +692,7 @@ label candace_overhear_supply_order_label(the_person):
         $ mc.change_locked_clarity(20)
         "She takes the cam and brings up, point blank to her tits, with the little vial nestled between them."
     the_person "Are you getting a good look sir? Of the label, of course!"
-    "????" "Yeah, I see it now. Calcium phosphide. You've been most helpful! I can get you a discount on those if you'd like, as thanks for your big... help"
+    "????" "Yeah, I see it now. Calcium phosphide. You've been most helpful! I can get you a discount on those if you'd like, as thanks for your big... help."
     "[the_person.title] chuckles. You notice her nipples are getting a little stiffer... she seems to really be enjoying this..."
     the_person "No need! Maybe I could give you my number though... and you could show me your thanks later in... another way..."
     "She trades numbers with the supplier. Wait did she just turn down a discount? You watch as she says goodbye, making sure to lick her lips and wink before ending the call."
@@ -733,7 +733,7 @@ label candace_supply_order_discount_label():
     $ mc.change_locked_clarity(5)
     "That was... a lot of details."
     the_person "So... I kept going, and got almost all of our suppliers to give me some kind of discount! And it hasn't affected my umm... success rate... with sexting afterwards at all!"
-    "You consider the implication. Maybe you could have her negotiate new standard rates with all your suppliers? Negotiating might be a but tough for someone like her though..."
+    "You consider the implication. Maybe you could have her negotiate new standard rates with all your suppliers? Negotiating might be a bit tough for someone like her though..."
     "Fuck it, you decide to just let her get whatever discounts she happens to get and take the extra money without pushing your luck."
     mc.name "That's great. Thank you for your hard work."
     the_person "Yes sir!"

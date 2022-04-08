@@ -158,13 +158,13 @@ label hire_mother_work_crisis_label():
         $ the_mother.set_possessive_title(get_random_possessive_title(the_mother))
     else: #is "None
         if promised_sex: #You promised to do it for sex but don't want to hire her, mom is disappointed.
-            mc.name "I'm sorry but her credentials just aren't what they need to be. I could never justify hiring your mother."
+            mc.name "I'm sorry, but her credentials just aren't what they need to be. I could never justify hiring your mother."
             $ the_person.change_stats(happiness = -5, love = -2)
             $ the_person.draw_person(emotion = "sad")
             "[the_person.possessive_title] seems to deflate. She nods sadly."
             the_person "I understand. Thank you for the time."
         else:
-            mc.name "I'm sorry but I don't think her skills are where I would need them to be."
+            mc.name "I'm sorry, but I don't think her skills are where I would need them to be."
             $ the_person.change_obedience(1)
             the_person "I understand, thank you for at least taking a look for me."
 

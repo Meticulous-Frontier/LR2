@@ -32,18 +32,18 @@ init 10 python:
             if ellie.sluttiness < 20:
                 lust_story_list.append("Trying increasing her sluttiness to continue this story.")
             else:
-                lust_story_list.append("Try working while she is working on a nanobot proram to continue this story.")
+                lust_story_list.append("Try working while she is working on a nanobot program to continue this story.")
             return lust_story_list
         else:
             lust_story_list.append("Gave [ellie.title] her first orgasm with your fingers in her office!")
         if not ellie_has_given_handjob():   #Requires love story progress
-            lust_story_list.append("Try progressing [ellie.title]'s love story to coninute this story.")
+            lust_story_list.append("Try progressing [ellie.title]'s love story to continue this story.")
             return lust_story_list
         elif not ellie_has_given_blowjob(): #40 sluttiness event
             if ellie.sluttiness < 40:
                 lust_story_list.append("Trying increasing her sluttiness to continue this story.")
             elif not get_random_employees(1, exclude_list = [ellie], slut_required = 50):
-                lust_story_list.append("[ellie.title] doesn't know anyone we can confide her desires in. Raise another employees sluttiness to atleast 50.")
+                lust_story_list.append("[ellie.title] doesn't know anyone she can confide her desires in. Raise another employee's sluttiness to at least 50.")
             else:
                 lust_story_list.append("You may overhear a conversation [ellie.title] is having at work soon...")
             return lust_story_list

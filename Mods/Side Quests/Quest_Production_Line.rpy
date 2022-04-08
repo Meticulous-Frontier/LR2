@@ -452,6 +452,7 @@ label quest_production_line_help_move_label():
             the_person "You do?"
             mc.name "There are multiple ways of telling someone you love them. Some are more intimate than others. If it feels right, and both people consent, what's the harm?"
             the_person "Yeah! Exactly! Not many people think the way that we do though."
+            $ the_person.discover_opinion("incest")
             $ the_person.change_stats(happiness = 10, love = 5, obedience = 10)
             $ the_person.draw_person()
             "She stands up."
@@ -628,7 +629,7 @@ label princess_cum_vagina(the_person):
 
     if the_person.wants_creampie():
         if the_person.knows_pregnant():
-            the_person "Mmm [the_person.mc_title], your cum is so nice and warm..."
+            the_person "Mmm, [the_person.mc_title], your cum is so nice and warm..."
             "She sighs happily."
 
         elif the_person.on_birth_control:
