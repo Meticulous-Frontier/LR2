@@ -2799,7 +2799,7 @@ label erica_lily_post_insta_morning_label():
         "[the_person.title] starts to ride you pretty aggressively. You lay back and enjoy it."
         #Swap to scene manager because I was too lazy to do it earlier.
         $ scene_manager = Scene()
-        "You close your eyes, just enjoying the sensations. However, an out of place gasps causes you to open your eyes."
+        "You close your eyes, just enjoying the sensations. However, an out of place gasp causes you to open your eyes."
         $ scene_manager.add_actor(the_person, position = "cowgirl")
         $ scene_manager.add_actor(lily, display_transform = character_left_flipped(zoom = 0.7))
         "When you open your eyes, you see another figure in your doorway. Is that [lily.possessive_title]?"
@@ -2905,7 +2905,7 @@ label erica_lily_post_insta_morning_label():
         lily "*Yawn* Mmm, I should have known you two would be up to shenanigans again."
         "You pull your blanket down as the two girls get naked."
         $ scene_manager.strip_full_outfit()
-        "You can only watch in awe at the two sexy college coeds who are naked, in your room, and ready for a threesome."
+        "You can only stare in awe at the two sexy college coeds who are naked, in your room, and ready for a threesome."
         lily "Mmm, I'm too tired to think. [lily.mc_title], how do you want us?"
         call start_threesome(lily, the_person) from _threesome_erica_wakeup_02
         $ scene_manager.update_actor(lily, position = "back_peek", display_transform = character_center_flipped)
@@ -2918,17 +2918,17 @@ label erica_lily_post_insta_morning_label():
             mc.name "God you two are so hot. I must be the luckiest man alive."
             the_person "Mmm, and don't you forget it."
             if the_person.is_girlfriend():
-                the_person "Not many girls would okay with their boyfriend banging their sister..."
+                the_person "Not many girls would be okay with their boyfriend banging their sister..."
                 $ the_person.change_love(2)
         else:
             "The girls fall into your bed beside you. You relax for a little bit, enjoying the warmth of their bodies."
         the_person "I better get up, or I'm going to miss my workout..."
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.title] gets up and grabs her clothes. She carries them with her, probably going to change in the bathroom on her way out."
-        the_person "Goodnight [the_person.name]! I'd better get back to my room too, as fun as it would be to sleep in here..."
+        lily "Goodnight [the_person.name]! I'd better get back to my room too, as fun as it would be to sleep in here..."
         $ scene_manager.remove_actor(the_person)
         $ scene_manager.update_actor(lily, position = "walking_away", display_transform = character_right)
-        "You watch as [the_person.possessive_title] gets up and excuses herself, her ass swaying back and forth as she walks away."
+        "You watch as [lily.possessive_title] gets up and excuses herself, her ass swaying back and forth as she walks away."
         $ scene_manager.remove_actor(lily)
         "You fall back asleep. What an incredible midnight rendezvous..."
         $ mc.location.lighting_conditions = standard_indoor_lighting
@@ -2964,8 +2964,8 @@ label erica_post_insta_handjob_followup_label(the_person):
     return
 
 label erica_pre_insta_love_label(the_person):
-    "You walk down the hall to [lily.possessive_title]'s room, ready to help out with instapic."
-    "You knock on the door, but are surprised when it is answer by [the_person.possessive_title]."
+    "You walk down the hall to [lily.possessive_title]'s room, ready to help out with Instapic."
+    "You knock on the door, but are surprised when it is answered by [the_person.possessive_title]."
     $ the_person.draw_person()
     mc.name "Oh! Hey [the_person.title]."
     the_person "Hey! [lily.name] just left, she is going to pick us up some sushi tonight!"
@@ -2982,7 +2982,7 @@ label erica_pre_insta_love_label(the_person):
         the_person "You even welcomed me into your business, teaching yoga to a bunch of really neat ladies."
     the_person "I'm not really sure where everything is going, but I see all the hard work you put into things, and I guess I just want you to know that I notice and appreciate it."
     the_person "Just understand... I'm really busy, right? With school, and track, and everything. I don't have much more time for extracurricular stuff!"
-    mc.name "That is very kind of you to say, and don't worry, I understand we can't spend evert waking moment together, and I'm okay with that."
+    mc.name "That is very kind of you to say, and don't worry, I understand we can't spend every waking moment together, and I'm okay with that."
     the_person "So... I was thinking, since [lily.name] is gonna be gone for a bit, maybe I could SHOW you how much I appreciate you!"
     "[the_person.possessive_title] slides down onto the floor on her knees in front of you."
     $ the_person.draw_person(position = "blowjob")
@@ -3008,7 +3008,7 @@ label erica_pre_insta_love_label(the_person):
     $ mc.change_arousal(10)
     "It's so hot, getting a blowjob from [the_person.possessive_title] while sitting on your sister's bed!"
     call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = blowjob, skip_intro = True, ignore_taboo = True, allow_continue = False) from _erica_pre_insta_oral_01
-    "When you finish, [the_person.possessive_title] quickly starts to straight up her clothes and wipes the cum from her face."
+    "When you finish, [the_person.possessive_title] quickly starts to straighten up her clothes and wipes the cum from her face."
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person()
     mc.name "[the_person.title]... that was awesome."
@@ -3245,7 +3245,7 @@ label erica_breeding_fetish_team_crisis_label():
     if lily.sluttiness >= 40:
         lily "I thought I heard some action last night. Nice going!"
     else:
-        lily "I thought hear some... errm... strange noises last night..."
+        lily "I thought I heard some... errm... strange noises last night..."
     the_person "Yeah... that was us..."
     lily "Wow, [erica.name], you look amazing! You are positively glowing."
     lily "You're still coming over on Saturday right? Thirsty insta boys are gonna love the way you are developing..."
@@ -3312,7 +3312,7 @@ label erica_breeding_fetish_nora_followup_label(the_person):
     the_person "I'm not ready to jump to that conclusion yet, but the evidence I've seen has my attention."
     the_person "I don't know how those grades got changed the way they did, and I'd like to check with her other instructors before I move forward with anything."
     mc.name "Well, I really appreciate you looking in to this."
-    the_person "Give me a couple of days, and I'll get back with you about what I find out, okay?"
+    the_person "Give me a couple of days, and I'll get back to you about what I find out, okay?"
     mc.name "Sounds great."
     $ the_person.draw_person(position = "stand2", emotion = "happy")
     the_person "Always happy to help. Is there anything else you needed?"
@@ -3324,7 +3324,7 @@ label erica_breeding_nora_news_part_one_label():
     "Your phone goes off in your pocket. It's [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey, I just wanted to give you a quick update."
-    the_person "Talked to all of Ms. [erica.last_name]'s other instructors, and they've all said similar things."
+    the_person "I talked to all of Ms. [erica.last_name]'s other instructors, and they've all said similar things."
     the_person "None of them gave her those bad marks. I've kicked it up to internal affairs and IT."
     the_person "IT said there are some suspicious logs in the grade book program and are investigating."
     mc.name "That sounds promising."

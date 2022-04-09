@@ -331,7 +331,7 @@ init 5 python:
         menu_tooltip = "Costs money each week, but increases girls energy over time.")
     HR_director_gym_membership_tier_2_action = Action("Sponsor company health program", HR_director_gym_membership_tier_2_requirement, "HR_director_gym_membership_tier_2_label",
         menu_tooltip = "Costs money each week, but increases girls energy over time.")
-    HR_director_mind_control_action = Action("Produce mind control Serum", HR_director_mind_control_requirement, "HR_director_mind_control_label",
+    HR_director_mind_control_action = Action("Produce mind control serum", HR_director_mind_control_requirement, "HR_director_mind_control_label",
         menu_tooltip = "Costs $5000. Allows you to attempt mind control of employee.")
     HR_director_mind_control_attempt = Action("Attempt Mind Control {image=gui/heart/Time_Advance.png}", HR_director_mind_control_attempt_requirement, "HR_director_mind_control_attempt_label",
         menu_tooltip = "WARNING: May have side effects!")
@@ -495,7 +495,7 @@ label HR_director_monday_meeting_label(the_person):
         "Her cheeks a little flushed, she's obviously embarrassed about what she is about to ask."
         the_person "Well... I've noticed that, we only employ women here, and it must be hard on you to be around so many women all day long..."
         "You don't really see where she is going with this."
-        the_person "It would cause the company a lot of trouble if some sort of sexual harassment suit that would come up."
+        the_person "It would cause the company a lot of trouble if some sort of sexual harassment suit were to come up."
         mc.name "I suppose."
         the_person "So anyway, I thought maybe, to start the meeting, we could fool around a little."
         $ mc.change_locked_clarity(20)
@@ -542,7 +542,7 @@ label HR_director_monday_meeting_label(the_person):
 
     $ (HR_employee_list, HR_tier_talk) = build_HR_review_list(the_person, get_HR_director_tag("business_HR_coffee_tier", 0))
     if __builtin__.len(HR_employee_list) == 0:
-        the_person "Can do! I have currently no girls on my counselling list, perhaps next week."
+        the_person "Can do! I currently have no girls on my counselling list, perhaps next week."
     else:
         the_person "Can do! Did you want to call in a girl for a counselling session this week?"
         menu:
@@ -624,7 +624,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         if person_choice.sluttiness > 80:
             person_choice "Wow, not sure why you called me in here, but I hope it's for the same thing you have her in here for..."
         else:
-            person_choice "Is that... I'm sorry, what is that you needed, [person_choice.mc_title]?"
+            person_choice "Is that... I'm sorry, what is it that you needed, [person_choice.mc_title]?"
         $ person_choice.change_slut(2) # give her a temp slut boost to maybe have a threesome later...
     elif the_person.outfit.vagina_visible():
         $ mc.change_locked_clarity(20)
@@ -662,7 +662,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     elif opinion_chat == "research work":
         mc.name "I know that sometimes research work feels thankless, but I want you to know right now, I am so thankful for all the hard work you put into the department."
     elif opinion_chat == "marketing work":
-        mc.name "I know that marketing work is difficult. For every sale there's dozens of rejections. But I want you know that without your hard work, it doesn't matter how good our product is if no one knows it's being made."
+        mc.name "I know that marketing work is difficult. For every sale there's dozens of rejections. But I want you to know that without your hard work, it doesn't matter how good our product is if no one knows it's being made."
     elif opinion_chat == "supply work":
         mc.name "I know that sourcing chemicals and trying to keep costs down is thankless work, but I want you to know, as the owner of the company, I appreciate your hard work and dedication to doing what needs to be done."
     elif opinion_chat == "work uniforms":
@@ -761,7 +761,7 @@ label HR_director_review_discoveries_label(the_person):
                 else:
                     the_person "We already have the equipment set up from the previously researched serum. We should be able to modify it to take advantage of this advancement."
                     "[the_person.title] checks her notes on the synthesis process."
-                    the_person "I think for about $1500 we could probably set something similar up for this one. It would give out meetings considerably more impact."
+                    the_person "I think for about $1500 we could probably set something similar up for this one. It would give our meetings considerably more impact."
                     mc.name "Noted. I'll consider it and get back to you if I decide to do this."
                     the_person "Sounds good [the_person.mc_title]!"
 
@@ -1177,7 +1177,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             $ scene_manager.update_actor(the_person, position = "standing_doggy")
             $ scene_manager.strip_to_vagina(the_person, visible_enough = False, prefer_half_off = False)
             $ mc.change_locked_clarity(50)
-            the_person "Especially when it starts us messing around in your office!"
+            the_person "Especially when it starts with us messing around in your office!"
             "[the_person.possessive_title] gives her ass a little shake before standing back up."
             $ scene_manager.update_actor(the_person, position = "stand3")
             if the_person.has_taboo("anal_sex"):
@@ -1192,7 +1192,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                     the_person "I wouldn't normally do this, but your cock is so amazing... I just have to know what it would feel like in my ass!"
                 the_person "Don't worry, I want to do it for you. Just sit back in your chair and let me!"
             else:
-                the_person "This morning, I just want to make you feel good, and judging on last time, I think it will make me feel good too."
+                the_person "This morning, I just want to make you feel good, and judging by last time, I think it will make me feel good too."
                 mc.name "Oh yeah? What do you have in mind?"
                 the_person "Why don't you just sit back in your chair and find out."
             mc.name "Sounds good, do your thing."
@@ -1232,7 +1232,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         if the_person.has_breeding_fetish() and the_person.is_highly_fertile():
             the_person "So, I know this is usually about you, and making sure your needs are met before the start of the week..."
             mc.name "... but?"
-            the_person "But... I swear to god I feel like I'm heat right now. It is all I can do to keep myself from jumping you every time I see you in the hall!"
+            the_person "But... I swear to god I feel like I'm in heat right now. It is all I can do to keep myself from jumping you everytime I see you in the hall!"
             the_person "I know this is out of line... but would you mind? It's a good time for it too..."
             mc.name "Hmmm, I don't know..."
             the_person "Please? I'm not sure I can concentrate on my work until you give me a big fertile load!"
@@ -1333,7 +1333,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         the_person "Oh my!"
 
         if the_person.outfit.vagina_available() and the_person.outfit.vagina_visible():
-            "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bent her over your desk."
+            "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bend her over your desk."
         else:
             if the_person.outfit.can_half_off_to_vagina():
                 "You move [the_person.possessive_title]'s clothes out of the way."
@@ -1341,7 +1341,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             else:
                 "You start to strip [the_person.possessive_title] down."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_vagina_strip_list(), half_off_instead = False)
-            "As soon as her pussy is on full display in front of you, you bent her over your desk, exposing her round ass."
+            "As soon as her pussy is on full display in front of you, you bend her over your desk, exposing her round ass."
         $ scene_manager.update_actor(the_person, position="standing_doggy")
 
         "You don't waste any time. You pull your cock out and point it at her slit. You pull her hips back as you push inside of her with one smooth push."
@@ -1372,7 +1372,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ scene_manager.update_actor(the_person, position = "standing_doggy")
         "She bends over your desk and grabs her purse, looking through it."
         "Her ass is on full display for you, so you make sure to give it a couple of spanks and a firm grope."
-        "[the_person.title] hands back to you a bottle a lube she pulled from her bag."
+        "[the_person.title] hands back to you a bottle of lube she pulled from her bag."
         the_person "Here, can you lube me up?"
         mc.name "With pleasure."
         "You squirt a generous amount onto [the_person.title]'s ass. You work it all along her crack and then push a finger inside."
@@ -1442,7 +1442,7 @@ label HR_director_mind_control_label(the_person):
     $ mc.business.change_funds(- 5000)
     mc.name "I've been thinking about your proposal to create a specialized serum for mind control attempts. I would like to move forward with it."
     the_person "Sounds good sir! I'll head over to research and have them synthesize me some."
-    the_person "I'll make sure it stay locked away, and only you and I will have a key to get some out."
+    the_person "I'll make sure it stays locked away, and only you and I will have a key to get some out."
     mc.name "Sounds good."
     the_person "Did you need anything else, [the_person.mc_title]?"
     $ set_HR_director_tag("business_HR_serum_tier", 4)
@@ -1484,7 +1484,7 @@ label HR_mind_control_attempt(the_person, the_HR_dir):
     $ scene_manager.add_actor(the_HR_dir)
     $ scene_manager.add_actor(the_person, display_transform = character_left_flipped)
     the_person "You wanted to see me sir?"
-    mc.name "Ah, yes, thank you for coming. [the_person.title], we are trying a new experimental counselling method, that we are combining with one our recent serum developments."
+    mc.name "Ah, yes, thank you for coming. [the_person.title], we are trying a new experimental counselling method, that we are combining with one of our recent serum developments."
     mc.name "I've asked you to come, because I would like you to help us test it. [the_HR_dir.title] here is going to administer the session."
     "She looks a bit concerned when you tell her what you want her to do."
     if the_person.obedience > 130:

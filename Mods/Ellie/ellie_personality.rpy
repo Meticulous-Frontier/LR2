@@ -1618,7 +1618,7 @@ label ellie_underwear_nudity_taboo_break(the_person, the_clothing):
     if the_person.effective_sluttiness() > 30 - (the_person.get_opinion_score("skimpy outfits") * 5):
         the_person "You want to get a look at my underwear, huh?"
         if the_person.has_taboo(["bare_tits","bare_pussy"]):
-            mc.name "I do. You've got good fashion sense, I bet you wear wear some cute underwear too."
+            mc.name "I do. You've got good fashion sense, I bet you wear some cute underwear too."
             the_person "Well, let's get this off and you can check for yourself."
         else:
             mc.name "I do. I've already seen you naked, but I appreciate your fashion sense."
