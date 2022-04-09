@@ -148,7 +148,7 @@ label build_custom_rooms():
         coffee_shop = Room("coffee_shop", "Coffee Shop", [], standard_coffee_shop_backgrounds, coffee_shop_objects, [], [coffee_shop_get_coffee_action], True, [7,3], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(coffee_shop)
 
-        gaming_cafe = Room("gaming_cafe", "Gaming Cafe", [], standard_gaming_cafe_backgrounds, gaming_cafe_objects, [], [gaming_cafe_grind_character_action, gaming_cafe_buy_max_level_token_action], False, [6,2], None, False, lighting_conditions = standard_indoor_lighting)
+        gaming_cafe = Room("gaming_cafe", "Gaming Cafe", [], standard_gaming_cafe_backgrounds, gaming_cafe_objects, [], [gaming_cafe_grind_character_action, gaming_cafe_buy_max_level_token_action, gaming_cafe_adult_swim], False, [6,2], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(gaming_cafe)
 
     return

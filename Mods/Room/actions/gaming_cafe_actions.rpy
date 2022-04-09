@@ -15,6 +15,14 @@ init -1 python:
             return True
         return False
 
+    def gaming_cafe_adult_swim_requirement():
+        if myra_lewd_cafe_open():
+            if gaming_cafe_is_business_hours():
+                return True
+            else:
+                return "Gaming Cafe is Closed!"
+        return False
+
     def gaming_cafe_small_grind():  #Baseline 20% chance to increase level, up to 100% chance below level 10.
         if gaming_cafe_character_level() < GUILD_QUEST_MAX_LEVEL:
             if renpy.random.randint(0,100) < 20 + ((GUILD_QUEST_MAX_LEVEL - gaming_cafe_character_level()) * 2):
@@ -46,6 +54,7 @@ init -1 python:
     # actions available from entry point action
     gaming_cafe_grind_character_action = Action("Play Guild Quest 2", gaming_cafe_grind_character_requirement, "gaming_cafe_grind_character_label")
     gaming_cafe_buy_max_level_token_action = Action("Buy max level token for Guild Quest 2", gaming_cafe_buy_max_level_token_requirement, "gaming_cafe_buy_max_level_token_label")
+    gaming_cafe_adult_swim = Action("Enter Adult Section", gaming_cafe_adult_swim_requirement, "gaming_cafe_adult_swim_label")
 
 label gaming_cafe_grind_character_label():
     $ mc.business.event_triggers_dict["gaming_cafe_grind_day"] = day
@@ -352,4 +361,8 @@ label gaming_cafe_buy_max_level_token_label():
     $ myra.event_triggers_dict["character_bought"] = True
     "It is $20. Not a huge sum of money, but it kind of feels like cheating..."
     "Next time you play though, you'll be able to tackle anything in the game!"
+    return
+
+label gaming_cafe_adult_swim_label():
+    "In this label, MC explores the adult section of the gaming cafe and probably gets lucky."
     return
