@@ -2,10 +2,10 @@
 # instead of clicking return after each choice
 
 init -1 python:
-    def create_tooltip_dictionary():
+    def create_tooltip_dictionary(locations):
         start_time = time.time()
         result = {}
-        for place in [x for x in list_of_places if x.hide_in_known_house_map and x.visible]:
+        for place in locations:
             result[place.name] = [get_location_tooltip(place), get_location_on_enter_events(place)]
 
         if debug_log_enabled:
@@ -93,14 +93,14 @@ init 2:
         modal True
         zorder 100
 
-
-        default tt_dict = create_tooltip_dictionary()
+        default locations = [x for x in list_of_places if x.hide_in_known_house_map and x.visible]
+        default tt_dict = create_tooltip_dictionary(locations)
         default tt = Tooltip(None)
 
-        $ x_size_percent = 0.07
-        $ y_size_percent = 0.145
+        default x_size_percent = 0.07
+        default y_size_percent = 0.145
 
-        for place in [x for x in list_of_places if x.hide_in_known_house_map and x.visible]: #Draw the text buttons over the background
+        for place in locations: #Draw the text buttons over the background
             $ hex_x = x_size_percent * place.map_pos[0]
             $ hex_y = y_size_percent * place.map_pos[1]
             $ tile_info = get_location_tile_text(place, tt_dict)
@@ -164,4 +164,4 @@ init 2:
             textbutton "Return" align [0.5,0.5] style "transparent_style" text_style "return_button_style"
 
         if tt.value:
-            text "[tt.value]" style "textbutton_text_style" text_align 0.0 size 18 xalign 0.02 yalign 0.02
+            text "[tt.value]" style "textbutton_text_style" text_align 0.0 size 18 xalign 0.95 yalign 0.98
