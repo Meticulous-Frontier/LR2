@@ -19,6 +19,18 @@ init -1 python:
         tooltip = "You know " + str(__builtin__.len(known_people)) + (" person here:\n" if __builtin__.len(known_people) == 1 else " people here:\n")
         for person in known_people:
             info = []
+            #added girlfriend statuses to beginning
+            if person.has_exact_role(affair_role):
+                info.append(" {image=paramour_token_small}")
+            if person.has_exact_role(harem_role):
+                info.append(" {image=harem_token_small}")
+            if person.has_exact_role(girlfriend_role):
+                info.append(" {image=gf_token_small}")
+            #dialog infront of name to catch eye faster
+            if any(not isinstance(x, Limited_Time_Action) and x.is_action_enabled(person) for x in person.on_talk_event_list):
+                info.append("{image=speech_bubble_exclamation_token_small}")
+            elif any(x.name != "Ask new title" and x.is_action_enabled(person) for x in person.on_talk_event_list):
+                info.append("{image=speech_bubble_token_small}")
             info.append(person.name)
             info.append(person.last_name)
             if person.knows_pregnant():
@@ -27,10 +39,7 @@ init -1 python:
                 info.append("{image=vial_token_small}")
             if person.infractions:
                 info.append("{image=infraction_token_small}")
-            if any(not isinstance(x, Limited_Time_Action) and x.is_action_enabled(person) for x in person.on_talk_event_list):
-                info.append("{image=speech_bubble_exclamation_token_small}")
-            elif any(x.name != "Ask new title" and x.is_action_enabled(person) for x in person.on_talk_event_list):
-                info.append("{image=speech_bubble_token_small}")
+            
             if person.has_role([trance_role, heavy_trance_role, very_heavy_trance_role]):
                 info.append("{image=lust_eye_token_small}")
             if person.arousal > 60:
@@ -48,7 +57,52 @@ init -1 python:
         return False
 
     def get_location_tile_text(location, tt_dict):
+        #added to show icons in tile text to bring attention that there is something there worth checking out etc
+        known_people = sorted(known_people_at_location(location), key = lambda x: x.name)
+        #setting the catches
+        subextras = ""; gfcatch=0; haremcatch=0; affaircatch=0; questcatch = 0; diagcatch = 0; trancecatch = 0; pregcatch = 0; arousalcatch = 0;
         info = []
+        if __builtin__.len(known_people):
+            for person in known_people:
+                if any(not isinstance(x, Limited_Time_Action) and x.is_action_enabled(person) for x in person.on_talk_event_list):
+                    questcatch = 1
+                elif any(x.name != "Ask new title" and x.is_action_enabled(person) for x in person.on_talk_event_list):
+                    diagcatch = 1
+                #easy opportunity    
+                if person.arousal >=60:
+                    arousalcatch = 1
+                if person.has_exact_role(harem_role):
+                    haremcatch = 1
+                # if person.on_talk_event_list:
+                    # diagcatch = 1
+                if person.has_exact_role(girlfriend_role):
+                    gfcatch = 1
+                #shows that there is a chance to do a trance training
+                if person.has_role([trance_role, heavy_trance_role, very_heavy_trance_role]):
+                    if trance_train_requirement(person) == True:
+                        trancecatch = 1
+                if person.knows_pregnant()==True:
+                    pregcatch = 1
+                if person.has_exact_role(affair_role):
+                    affaircatch = 1
+        if gfcatch>0:
+            subextras += "{image=gf_token_small}"
+        if diagcatch>0:
+            subextras += "{image=speech_bubble_exclamation_token_small}"
+        if questcatch>0:
+            subextras += "{image=question_mark_small}"
+        if arousalcatch>0:
+            subextras += "{image=arousal_token_small}"
+        if trancecatch>0:
+            subextras += "{image=lust_eye_token_small}"
+        if pregcatch>0:
+            subextras += "{image=feeding_bottle_token_small}"
+        if affaircatch>0:
+            subextras += "{image=paramour_token_small}"
+        if haremcatch>0:
+            subextras += "{image=harem_token_small}"
+        if subextras !="":
+            info.append(subextras + "\n")
         info.append(location.formal_name.replace(" ", "\n", 2))
         info.append("\n(")
         info.append(str(len(known_people_at_location(location))))
