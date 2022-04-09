@@ -19,7 +19,9 @@ init 1 python:
 
 
     def myra_alexia_teamup_scene_action_req(the_person):  #Use this function to determine the requirement for when to actually run the scene itself.
-        return True
+        if day%7 == 4 and time_of_day == 4:
+            return True
+        return False
 
     def myra_alexia_teamup_unit_test_func(the_group):
         for person in the_group:
@@ -33,7 +35,7 @@ init 2 python:
         #WARNING: The order of the following lists is critical! They are referenced based on their indexes!!!
         the_progression_scene.start_scene_list = ["myra_alexia_teamup_scene_intro_0", "myra_alexia_teamup_scene_intro_1"]
         the_progression_scene.req_list = [myra_alexia_teamup_scene_0_req, myra_alexia_teamup_scene_1_req]
-        the_progression_scene.trans_list = ["kaya_erica_trans_scene_0", "kaya_erica_trans_scene_1"]
+        the_progression_scene.trans_list = ["myra_alexia_teamup_trans_scene_0", "myra_alexia_teamup_trans_scene_1"]
         the_progression_scene.final_scene_list = ["myra_alexia_teamup_scene_scene_0", "myra_alexia_teamup_scene_scene_1"]
         the_progression_scene.regress_scene_list = []   #Add labels for regression here if desired.
         return
@@ -62,7 +64,7 @@ init 2 python:
             multiple_choice_scene = None,   #The scene that lets MC choose which final scene he wants.
             regress_scene_list = [])    #If the scene can regress, fill this with appropriate regression scenes to play between intro and final scenes.
         myra_alexia_teamup_scene.compile_scenes(myra_alexia_teamup_scene)   #This will populate the scenes that are blank above.
-        
+
         return
 
 label myra_alexia_teamup_scene_action_label(the_person):  #Use (the_person) if this event is attached to a person, otherwise leave params blank, EG: myra_alexia_teamup_scene_action_label():

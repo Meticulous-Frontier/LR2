@@ -68,7 +68,7 @@ init 2 python:
             final_scene_list = [],  #Set via the compile action
             intro_scene = "myra_focus_progression_scene_intro_scene", #Scene that plays the first time this scene is run
             exit_scene = "myra_focus_progression_scene_exit_scene",   #Scene for if the player chooses to exit the scene
-            progression_scene_action = myra_focus_progression_scene_action,      #The action used to call for this progression scene.
+            progression_scene_action = myra_train_focus,      #The action used to call for this progression scene.
             choice_scene = "myra_focus_progression_scene_study_choice",   #The action used to let player decide if they want to continue the scene or leave
             stage = -1,     #-1 will play the intro
             person_action = False,   #If this progression scene should run when encountering a person
@@ -80,7 +80,7 @@ init 2 python:
             multiple_choice_scene = None,   #The scene that lets MC choose which final scene he wants.
             regress_scene_list = [])    #If the scene can regress, fill this with appropriate regression scenes to play between intro and final scenes.
         myra_focus_progression_scene.compile_scenes(myra_focus_progression_scene)   #This will populate the scenes that are blank above.
-        
+
 
 
 
@@ -199,6 +199,8 @@ label myra_focus_progression_scene_intro_scene(the_group):
     "You can now train [the_person.title]'s focus once per day."
     "[the_person.title] and [alexia.title] are getting together on Friday night. You make a note to swing by see what they are up to..."
     $ myra.add_unique_on_room_enter_event(myra_alexia_teamup_scene_action)
+    $ alexia.set_schedule(gaming_cafe, the_days = [4], the_times = [5])
+    $ myra.set_schedule(gaming_cafe, the_days = [4], the_times = [5])
     call advance_time from _call_advance_myra_focus_progression_scene_adv_01
     return
 
@@ -343,6 +345,7 @@ label myra_focus_progression_scene_study_choice(the_group):
             return False
     mc.name "Sure, I have time to do that. How about you go get logged in and I'll grab you an energy drink?"
     the_person "Okay! That sounds perfect. I'll see you over there."
+    $ the_person.event_triggers_dict["focus_train_day"] = day
     $ clear_scene()
     call myra_focus_train_get_energy_drink(the_person) from _myra_energy_drink_focus_scene_01
     return True

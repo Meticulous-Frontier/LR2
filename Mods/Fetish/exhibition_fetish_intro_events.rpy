@@ -158,7 +158,7 @@ label exhibition_fetish_sarah_intro_label():
     the_person "Yes sir!"
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] gleefully gets down on her knees and pulls down your zipper. After pulling your cock out, she smiles up at you, then licks the tip."
-    "You can here murmurs from some of the girls around you, but it doesn't seem to phase her. If anything, she seems to be emboldened..."
+    "You can hear murmurs from some of the girls around you, but it doesn't seem to phase her. If anything, she seems to be emboldened..."
 
     return
 
