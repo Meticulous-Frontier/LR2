@@ -349,6 +349,7 @@ label gaming_cafe_buy_max_level_token_label():
     "You are tired of the slow grind through Guild Quest 2, so you decide to buy one of the max level character tokens."
     $ mc.business.event_triggers_dict["guild_quest_level"] = 50
     $ mc.business.change_funds(-20)
+    $ myra.event_triggers_dict["character_bought"] = True
     "It is $20. Not a huge sum of money, but it kind of feels like cheating..."
     "Next time you play though, you'll be able to tackle anything in the game!"
     return
