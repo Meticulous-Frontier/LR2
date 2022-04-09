@@ -243,6 +243,18 @@ init 1 python:
             renpy.quit()
         return
 
+    def validate_harem_roles():
+        if not "harem_role" in globals():
+            global harem_role
+            harem_role = Role("Girlfriend in Polyamory", get_harem_role_actions(), role_dates = get_harem_role_dates(), looks_like = girlfriend_role) #Generic specific girlfriend role.
+        if not "cousin_girlfriend_role" in globals():
+            global cousin_girlfriend_role
+            cousin_girlfriend_role = Role("Girlfriend", get_girlfriend_role_actions(), role_dates = get_girlfriend_role_dates(), looks_like = girlfriend_role) #Generic specific girlfriend role.
+        if not "aunt_girlfriend_role" in globals():
+            global aunt_girlfriend_role
+            aunt_girlfriend_role = Role("Girlfriend", get_girlfriend_role_actions(), role_dates = get_girlfriend_role_dates(), looks_like = girlfriend_role) #Generic girlfriend role.
+        return
+
 label check_mod_installation(stack):
     $ validate_mod_installation_location()
 
@@ -265,6 +277,8 @@ label update_compatibility_fix(stack):
         $ crisis_tracker_dict = {}
 
     $ update_pinned_cache()
+
+    $ validate_harem_roles()
 
     $ cleanup_default_wardrobe()
 
