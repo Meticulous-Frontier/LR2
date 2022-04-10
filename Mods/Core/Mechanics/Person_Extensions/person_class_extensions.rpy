@@ -2530,7 +2530,7 @@ init -1 python:
 
         if self == sarah and sarah_threesomes_unlocked():
             return False
-        if self.love > 90 and self.obedience > 200:
+        if self.love > 90 or self.obedience > 200:
             return False
         return self.event_triggers_dict.get("is_jealous", True)
 
