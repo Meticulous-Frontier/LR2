@@ -1151,8 +1151,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         the_person "Aww, okay. Maybe next time..."
                         $ the_person.change_obedience(3)
 
-        $ the_relationship = town_relationships.get_relationship(the_watcher, the_person)
-        if the_relationship and the_relationship.get_type(the_watcher) in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
+        if town_relationships.is_family(the_watcher, the_person):
             call relationship_sex_watch(the_watcher, town_relationships.get_relationship_type(the_watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
             $ the_position.redraw_scene(the_person)
             call relationship_being_watched(the_person, the_watcher, town_relationships.get_relationship_type(the_person, the_watcher).lower(), the_position) from _call_relationship_being_watched
@@ -1165,7 +1164,6 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
             $ the_person.call_dialogue("being_watched", the_watcher = the_watcher, the_position = the_position) #Call her response to the person watching her.
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
             $ the_person.discover_opinion("public sex")
-        $ the_relationship = None
     $ del the_watcher
     return
 

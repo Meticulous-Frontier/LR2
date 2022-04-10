@@ -62,24 +62,15 @@ init 0 python:
         return color_string + str(attention) + "/" + str(max_attention) + "{/color}"
 
     def get_person_weight_string(person):
+        kg = person.weight
+        # add some weight based on number of days pregnant
+        if person.pregnancy_is_visible():
+            # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 11.4 kg
+            kg += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 11.4
+
         if use_imperial_system:
-            lbs = person.weight * 2.205
-
-            # add some weight based on number of days pregnant
-            if person.pregnancy_is_visible():
-                # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 25 pounds
-                lbs += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 25
-
-            return str(__builtin__.round(lbs, 1)) + " lbs"
-        else:
-            kg = person.weight
-
-            # add some weight based on number of days pregnant
-            if person.pregnancy_is_visible():
-                # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 11.4 kg
-                kg += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 11.4
-
-            return str(__builtin__.round(kg, 1)) + " kg"
+            return str(__builtin__.round(kg * 2.205, 1)) + " lbs"
+        return str(__builtin__.round(kg, 1)) + " kg"
 
     @renpy.pure
     def time_of_day_string(time_of_day):
