@@ -654,6 +654,15 @@ init 2 python:
     # wrap original function
     get_titles = get_titles_extended(get_titles)
 
+    def generate_random_mothers_and_daughters():
+        for person in [x for x in all_people_in_the_game(excluded_people = unique_character_list) if x.age > 35 or x.age < 25]:
+            if renpy.random.randint(0, 2) == 1:
+                if person.age > 35:
+                    person.generate_daughter(True)
+                else:
+                    person.generate_mother(True)
+        return
+
 init 2 python:
     global lingerie_wardrobe
     lingerie_wardrobe = lingerie_wardrobe.merge_wardrobes(wardrobe_from_xml("Lingerie_Extended_Wardrobe"), keep_primary_name = True)
@@ -685,6 +694,8 @@ label activate_generic_personality(stack):
 
         update_stephanie_opinions()
         update_alexia_opinions()
+
+        generate_random_mothers_and_daughters()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)

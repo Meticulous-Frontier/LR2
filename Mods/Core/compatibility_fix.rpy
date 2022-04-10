@@ -255,15 +255,6 @@ init 1 python:
             aunt_girlfriend_role = Role("Girlfriend", get_girlfriend_role_actions(), role_dates = get_girlfriend_role_dates(), looks_like = girlfriend_role) #Generic girlfriend role.
         return
 
-    def generate_random_mothers_and_daughters():
-        for person in [x for x in all_people_in_the_game([unique_character_list]) if x.age > 35 or x.age < 25]:
-            if renpy.random.randint(0, 2) == 1:
-                if person.age > 35:
-                    person.generate_daughter(True)
-                else:
-                    person.generate_mother(True)
-        return
-
 label check_mod_installation(stack):
     $ validate_mod_installation_location()
 
@@ -277,8 +268,6 @@ label activate_compatibility_fix(stack):
     $ update_pinned_cache()
 
     $ cleanup_default_wardrobe()
-
-    $ generate_random_mothers_and_daughters()
 
     $ execute_hijack_call(stack)
     return
