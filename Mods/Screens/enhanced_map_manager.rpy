@@ -70,6 +70,10 @@ init -1 python:
             extra_info.append("{image=feeding_bottle_token_small}")
         if any(x for x in known_people if x.has_role([trance_role, heavy_trance_role, very_heavy_trance_role]) and x.event_triggers_dict.get("trance_training_available", True)):
             extra_info.append("{image=lust_eye_token_small}")
+        if any(y for y in known_people if any(not isinstance(x, Limited_Time_Action) and x.is_action_enabled(y) for x in y.on_talk_event_list)):
+            extra_info.append("{image=speech_bubble_exclamation_token_small}")
+        if any(y for y in known_people if any(x.name != "Ask new title" and x.is_action_enabled(y) for x in y.on_talk_event_list)):
+            extra_info.append("{image=speech_bubble_token_small}")
         if any(x for x in known_people if x.arousal >= 60):
             extra_info.append("{image=arousal_token_small}")
 
