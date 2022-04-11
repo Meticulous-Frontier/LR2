@@ -86,7 +86,7 @@ label interview_action_description_enhanced():
 
                 candidates.clear() #Prevent it from using up extra memory
                 person = None
-                renpy.free_memory() # extra memory cleanup after interview screen
+                clean_memory() # extra memory cleanup after interview screen
 
             call advance_time from _call_advance_time_interview_action_enhanced
         "Never mind":

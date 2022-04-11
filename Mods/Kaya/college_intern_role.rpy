@@ -167,7 +167,7 @@ label hire_new_college_intern_label(the_person):
     call hire_select_process(candidates + [1]) from _call_intern_select_process_01
     $ candidates = [] #Prevent it from using up extra memory
     $ forced_opinions = None
-    $ renpy.free_memory() #Try and force a clean up of unused memory.
+    $ clean_memory() #Try and force a clean up of unused memory.
 
     if isinstance(_return, Person):
         $ new_person = _return

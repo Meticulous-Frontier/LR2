@@ -44,6 +44,11 @@ init -1 python:
             renpy.pop_call()
         renpy.jump("game_loop")
 
+    def clean_memory():
+        character_cache.clear()
+        renpy.free_memory()
+        return
+
 init 5 python:
     global crisis_chance
     global morning_crisis_chance
@@ -375,7 +380,7 @@ label advance_time_people_run_day_label():
 label advance_time_end_of_day_label():
     python:
         # we need to clear memory at least once a day (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
-        renpy.free_memory()
+        clean_memory()
         #$ renpy.profile_memory(.5, 1024)
         renpy.block_rollback()
 
