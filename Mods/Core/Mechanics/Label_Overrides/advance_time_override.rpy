@@ -45,7 +45,8 @@ init -1 python:
         renpy.jump("game_loop")
 
     def clean_memory():
-        character_cache.clear()
+        if "character_cache" in globals():
+            character_cache.clear()
         renpy.free_memory()
         return
 
