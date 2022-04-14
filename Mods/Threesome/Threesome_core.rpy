@@ -581,7 +581,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
 
     #Easy marker to add to log if EVERYONE orgasmed
     if report_log["girl one orgasms"] > 0 and report_log["girl two orgasms"] > 0 and report_log["guy orgasms"] > 0:
-        $ report_log["trifecta"] == True
+        $ report_log["trifecta"] = True
 
 
 
