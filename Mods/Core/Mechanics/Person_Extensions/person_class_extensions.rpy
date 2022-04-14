@@ -1508,6 +1508,17 @@ init -1 python:
     global character_cache
     character_cache = LRUCacheDict(127, expiration = 0)
 
+    def clean_cache(self):
+        if not "character_cache" in globals():
+            return
+
+        partial = "ID:{}".format(self.identifier)
+        obsolete = [x for x in character_cache.keys() if partial in x]
+        for x in obsolete:
+            del character_cache[x]
+
+    Person.clean_cache = clean_cache
+
     def build_person_displayable_enhanced(self, position = None, emotion = None, special_modifier = None, lighting = None, hide_list = [], outfit = None, cache_item = True): #Encapsulates what is done when drawing a person and produces a single displayable.
         if position is None:
             position = self.idle_pose

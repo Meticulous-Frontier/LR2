@@ -29,12 +29,7 @@ init 2 python:
         cs = renpy.current_screen()
         editing_target = cs.scope["editing_target"]
         if isinstance(editing_target, Person):
-            if "character_cache" in globals():
-                partial = "ID:{}".format(editing_target.identifier)
-                obsolete = [x for x in character_cache.keys() if partial in x]
-                for x in obsolete:
-                    del character_cache[x]
-
+            editing_target.clean_cache()
             editing_target.draw_person()
         return
 
