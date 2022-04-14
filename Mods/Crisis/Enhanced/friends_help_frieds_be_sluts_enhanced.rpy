@@ -448,7 +448,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                             call fuck_person(person_two, start_position = blowjob, skip_intro = True, position_locked = True, self_strip = False, affair_ask_after = True, ignore_taboo = True) from _call_fuck_person_friends_help_friends_be_sluts_enhanced
                             $ the_report = _return
                             if the_report.get("guy orgasms", 0) > 0:
-                                "You sit down in your office chair, thoroughly drained. [person_two.title] smiles, seemingly proud of her work."
+                                "You sit down in your office chair, thoroughly drained. [person_two.title] smiles, looking rather pleased with herself."
                                 mc.name "So, was that everything you wanted it to be?"
                                 person_two "It was fun, I can't wait to tell [person_one.name] all about it."
 
