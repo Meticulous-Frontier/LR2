@@ -8,12 +8,38 @@
 #Back rub - fingering - oral servicing - Full service - Free Use
 #
 
+# 16/25
 init 1 python:
     def myra_alexia_teamup_scene_0_req():    #Requirements for the basic scene. Should almost always be true.
         return True
 
-    def myra_alexia_teamup_scene_1_req():    #Requirements fo the second stage.
-        if myra.sluttiness > 20:
+    def myra_alexia_teamup_scene_1_req():    #Requirements for the second stage.
+        if myra.has_taboo("touching_vagina") or alexia.has_taboo("touching_vagina"):
+            return False
+        if myra.opinion_score_being_fingered() >-2 and alexia.opinion_score_being_fingered() >= -2:
+            if myra.sluttiness >= 40 and alexia.sluttiness >= 40:
+                return True
+        return False
+
+    def myra_alexia_teamup_scene_2_req():
+        if myra.has_taboo("licking_pussy") or alexia.has_taboo("licking_pussy"):
+            return False
+        if myra.opinion_score_getting_head() >-2 and alexia.opinion_score_getting_head() >= -2:
+            if myra.sluttiness >= 60 and alexia.sluttiness >= 60:
+                return True
+        return False
+
+    def myra_alexia_teamup_scene_3_req():
+        if myra.has_taboo("vaginal_sex") or alexia.has_taboo("vaginal_sex"):
+            return False
+        if myra.opinion_score_vaginal_sex() >-2 and alexia.opinion_score_vaginal_sex() >= -2:
+            if myra.sluttiness >= 80 and alexia.sluttiness >= 80 and willing_to_threesome(myra, alexia):
+                return True
+        return False
+
+    def myra_alexia_teamup_scene_4_req():    #Not yet full implemented, leave false for now.
+        return False
+        if myra.is_free_use() and alexia.is_free_use():
             return True
         return False
 
@@ -33,10 +59,10 @@ init 1 python:
 init 2 python:
     def myra_alexia_teamup_scene_compile_scenes(the_progression_scene):
         #WARNING: The order of the following lists is critical! They are referenced based on their indexes!!!
-        the_progression_scene.start_scene_list = ["myra_alexia_teamup_scene_intro_0", "myra_alexia_teamup_scene_intro_1"]
-        the_progression_scene.req_list = [myra_alexia_teamup_scene_0_req, myra_alexia_teamup_scene_1_req]
-        the_progression_scene.trans_list = ["myra_alexia_teamup_trans_scene_0", "myra_alexia_teamup_trans_scene_1"]
-        the_progression_scene.final_scene_list = ["myra_alexia_teamup_scene_scene_0", "myra_alexia_teamup_scene_scene_1"]
+        the_progression_scene.start_scene_list = ["myra_alexia_teamup_scene_intro_0", "myra_alexia_teamup_scene_intro_1", "myra_alexia_teamup_scene_intro_2", "myra_alexia_teamup_scene_intro_3", "myra_alexia_teamup_scene_intro_4"]
+        the_progression_scene.req_list = [myra_alexia_teamup_scene_0_req, myra_alexia_teamup_scene_1_req, myra_alexia_teamup_scene_2_req, myra_alexia_teamup_scene_3_req, myra_alexia_teamup_scene_4_req]
+        the_progression_scene.trans_list = ["myra_alexia_teamup_trans_scene_0", "myra_alexia_teamup_trans_scene_1", "myra_alexia_teamup_trans_scene_2", "myra_alexia_teamup_trans_scene_3", "myra_alexia_teamup_trans_scene_4"]
+        the_progression_scene.final_scene_list = ["myra_alexia_teamup_scene_scene_0", "myra_alexia_teamup_scene_scene_1", "myra_alexia_teamup_scene_scene_2", "myra_alexia_teamup_scene_scene_3", "myra_alexia_teamup_scene_scene_4"]
         the_progression_scene.regress_scene_list = []   #Add labels for regression here if desired.
         return
 
@@ -318,7 +344,7 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "sitting")
     "You walk to the back where the couches are and see the two girls playing the claymation fighting game again."
-    mc.name "Milkshakes time!"
+    mc.name "Milkshake time!"
     alexia "Yay!"
     the_person "Hey, thanks [the_person.mc_title]!"
     $ the_person.change_happiness(5)
@@ -425,20 +451,675 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "There was a lot of tension in the air tonight between you and the two girls. You know you can push things between you and them farther with a little more time..."
+    if myra.has_taboo("touching_vagina") or alexia.has_taboo("touching_vagina"):
+        "You aren't sure that you will be able to convince the girls to anything lewd when you haven't done much one on one yet."
+        "You should make sure you've fingered each girl atleast once before you try to make things go any farther..."
+    elif myra.opinion_score_being_fingered() == -2:
+        "You aren't sure that you will be able to manage it while [myra.title] hates getting fingered though..."
+    elif alexia.opinion_score_being_fingered() == -2:
+        "You aren't sure that you will be able to manage it while [alexia.title] hates getting fingered though..."
     # call advance_time from _call_advance_myra_alexia_teamup_scene_adv_01
     return
 
-label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #Groping intro
+label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #Fingering
     $ the_person = the_group[0]
-    "This is the second scene. I'm not coding it, but you could code it that she gets naked and bends over, preseting her ass here."
-    $ the_person.draw_person(position = "standing_doggy")
-    the_person "Don't worry, my ass is always ready for you!"
-    call fuck_person(the_person) from _call_sex_description_myra_alexia_teamup_scene_02
+    $ current_round = 1
+    $ round_count = 1
+    $ myra_wins = 0
+    $ alexia_wins = 0
+    $ the_target = None
+    if scene_transition != True:
+        $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
+        $ scene_manager.add_actor(the_person, position = "sitting")
+        "You walk to the back where the couches are and see the two girls playing the claymation fighting game again."
+        mc.name "Milkshake time!"
+        alexia "Yay!"
+        the_person "Hey, thanks [the_person.mc_title]!"
+        $ the_person.change_happiness(5)
+        $ alexia.change_happiness(5)
+        "The girls seem thankful for their drinks."
 
-    the_person "Oh my god I hope I can walk tomorrow!"
+
+        alexia "Same rules as last time, right? [alexia.mc_title] feels up the winner of each round during the next round?"
+        the_person "Yeah! And don't forget the most important part. Winner gets off while the loser has to jack him off!"
+        "Your cock twitches in your pants. You can't wait to get one of these girls' hands on your dick."
+    "As the girls get ready to play, you check your watch. It is already pretty late, but you want to watch enough matches to fairly declare a winner."
+    "How many wins will it take to win tonight?"
+    "NOTE: the larger the number, the longer the event."
+    menu:
+        "1":
+            pass
+        "2":
+            $ round_count = 2
+        "3":
+            $ round_count = 3
+    "The girls look at you. Which girl do you want to sit next to first?"
+    menu:
+        "[myra.title]":
+            $ the_target = myra
+        "[alexia.title]":
+            $ the_target = alexia
+
+    "You sit down next to [the_target.possessive_title]. You think you see a hint of jealousy in the other girl's eyes, but it quickly vanishes as the game starts up."
+    while myra_wins < round_count and alexia_wins < round_count:
+        #Get close to the target
+        if the_target == myra:
+            $ scene_manager.update_actor(myra, display_transform = character_right(yoffset = .2, zoom = 1.2))
+            $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = 0, zoom = 0.8))
+        else:
+            $ scene_manager.update_actor(the_person, display_transform = character_right(yoffset = 0, zoom = 0.8))
+            $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
+        "The character select screen comes up, and you get close to [the_target.title], your hands already running along her sides."
+        call myra_alexia_teamup_fight_round_label(the_group, (the_target == myra)) from _myra_alexia_back_massage_round_call_02
+        if _return == myra:
+            $ myra_wins += 1
+            $ the_target = myra
+            if the_target.arousal >= 60:
+                "[myra.title] gazes at you, her face a little flushed."
+                $ mc.change_locked_clarity(25)
+                if myra.tits_available():
+                    "Her nipples are hard, your hands have been on them a lot tonight."
+                myra "I win again? God you are getting me so worked up..."
+            elif the_target.arousal >= 30:
+                myra "Yes! I win again! Your hands feel amazing [myra.mc_title]!"
+                $ mc.change_locked_clarity(15)
+            else:
+                myra "Yes! Get to work [myra.mc_title]!"
+        else:
+            $ alexia_wins += 1
+            $ the_target = alexia
+            if the_target.arousal >= 60:
+                "[alexia.title] gazes at you, she bites her lip."
+                $ mc.change_locked_clarity(25)
+                if myra.tits_available():
+                    "Her nipples are hard, your hands have been on them a lot tonight."
+                alexia "Oh god, I'm getting so hot... this feels amazing..."
+            elif the_target.arousal >= 30:
+                alexia "Oh my god... I won again? This is great!"
+                $ mc.change_locked_clarity(15)
+            else:
+                alexia "Yay! You give great massages, [alexia.mc_title]!"
+
+    $ the_loser = None
+
+    if alexia_wins >= round_count:
+        "It's over. [alexia.possessive_title] is the winner for the night."
+        $ the_target = alexia
+        $ the_loser = myra
+    else:
+        "It's over. [myra.possessive_title] is the winner for the night."
+        $ the_target = myra
+        $ the_loser = alexia
+    mc.name "Alright girls, time for the winner to get her reward!"
+    if scene_transition != True:
+        if the_target == myra:
+            mc.name "[alexia.title], why don't you grab some snacks for you two while I work on [myra.title] for a bit?"
+        else:
+            mc.name "[myra.title], why don't you grab some snacks for you two while I work on [alexia.title] for a bit?"
+        "[the_target.possessive_title] looks at you, noticing your sizable bulge..."
+        the_target "Wait... I feel kind of bad."
+        "[the_target.title] turns to the other girl."
+        the_target "Look at him! He is turned on too. Is it really fair to leave him hanging?"
+        "Suddenly, [the_target.title] gets a big smile."
+        if the_target == myra:
+            the_target "[alexia.name], why don't you jack him off while he is touching me? Fitting end for the loser!"
+            mc.name "That's okay, we didn't agree on that at the beginning..."
+            alexia "I'll do it."
+            mc.name "I... what?"
+            alexia "She's right. That looks painful! It's only fair we let you touch us, and she DID win fair and square..."
+            "Holy shit, you were not expecting this when the night started!"
+        else:
+            the_target "How about... I'll touch you too? We can touch each other, and get each other off..."
+            mc.name "That's okay, we didn't agree on that at the beginning..."
+            myra "I'll do it."
+            mc.name "I... what?"
+            the_target "Huh?"
+            myra "I lost. Fair and square. It makes sense that the loser has to service him."
+            mc.name "You don't have to..."
+            myra "I know. But don't worry. You'll come back next week, right? All the more reason for me to focus and win next time!"
+            "Holy shit, you were not expecting this when the night started!"
+    "There's no easy way to do this, so you get positioned as best you can."
+    $ scene_manager.update_actor(the_target, position = "missionary", display_transform = character_right(yoffset = .2, zoom = 1.2))
+    "You sit down next to [the_target.possessive_title]. She spreads her legs a bit to give you access as your run your hand up and down the inside of her legs."
+    $ scene_manager.update_actor(the_loser, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.4))
+    "[the_loser.possessive_title] gets down on her knees between your legs. She pulls your pants and underwear off, and your cock springs out."
+    the_target "Wow... you look so hard..."
+    if the_target.vagina_available():
+        "You run your fingers up and down [the_target.title]'s pussy. She is already excited."
+    else:
+        "You run your hand under [the_target.title]'s clothes, your fingers running along her pussy. She is already excited."
+    if the_loser.opinion_score_giving_handjobs() == -2:
+        the_loser "God your cock is so hot."
+        "[the_loser.possessive_title] spits into her hands to help make some extra lube."
+        the_loser "I never realized it would be so hard..."
+        "She is mumbling a bit under her breath."
+        $ the_loser.increase_opinion_score("giving handjobs")
+        "You wonder if [the_loser.title] might be coming around to the idea of jacking you off..."
+        $ mc.change_locked_clarity(20)
+    else:
+        "[the_loser.title] spits in her hand then strokes your cock, alternating a few times until you are lubed up."
+        the_loser "God your cock is so hot..."
+        "She looks up at you from her knees."
+        the_loser "I almost don't mind losing, except I don't get off..."
+        $ mc.change_locked_clarity(20)
+    $ mc.change_arousal(20)
+    $ the_loser.break_taboo("touching_penis")
+    "You slide two fingers up into [the_target.title]'s cunt. She moans and bucks her hips, already worked up from your groping earlier."
+    "Seeing that thing have started, [the_loser.title] also gets to work. Her soft hands work their way up and down your cock."
+    "You slide your fingers in and out of her pussy, stroking the inside of that soft tunnel."
+    "Each movement draws moans of pleasure from [the_target.possessive_title], who looks over at you."
+    the_target "Can... can we kiss too?"
+    "Not seeing any harm in it, you move your neck forward. You lips meet with [the_target.title] as your fingers work her love tunnel."
+    $ the_target.change_love(2, 80)
+    $ the_target.break_taboo("kissing")
+    "As you make out, [the_target.possessive_title] let's out little moans, which are really turning you on."
+    "[the_loser.possessive_title] takes a moment to spit on her hand again, then keeps working your cock."
+    if the_loser == myra:
+        the_loser "Holy fuck you two... [alexia.name] are you sure you have a boyfriend?"
+        the_target "Quiet. I don't want to think about him right now..."
+        $ mc.change_locked_clarity(20)
+        "[the_target.title] is putty in your hands. It really doesn't matter who she gets with, does it? She seems to always come back to you."
+    else:
+        the_loser "God, you two are so hot together..."
+        $ mc.change_locked_clarity(20)
+        "[the_loser.title] is starting to touch herself, but you are pretty sure she knows better than to get herself off now."
+    "[the_target.possessive_title]'s moans are getting urgest. She's going to cum soon!"
+    the_target "Yes! Oh [the_target.mc_title]!"
+    "Her whole body tenses up and a shiver runs through her body as she climaxes."
+    $ the_target.call_dialogue("climax_responses_foreplay")
+    "She quivers with pleasure for a few seconds before her whole body relaxes."
+    $ the_target.have_orgasm(half_arousal = False)
+    $ mc.change_locked_clarity(50)
+    "Getting [the_target.title] off has you hugely turned on. Each stroke of [the_loser.possessive_title]'s hand is bringing you closer to orgasm."
+    "Partially recovered, [the_target.title] looks over at you."
+    the_target "Getting close? You should cum all over her face! I want to watch you cover her face in cum!"
+    "Hearing her encouragement is pushing you over the edge."
+    mc.name "Oh fuck, I'm gonna cum!"
+    "[the_loser.title] just looks up at you and speeds up, ready to accept the consequences of her poor gaming performance."
+    "You moan as you finish. Spurt after spurt of your cum covers [the_loser.possessive_title]'s face."
+    $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_loser)
+    $ the_loser.cum_on_face()
+    $ scene_manager.update_actor(the_loser)
+    "When you are finished, [the_loser.title] slowly opens her eyes and looks up at you and [the_target.title]."
+    "You enjoy your post orgasm bliss with [the_target.possessive_title] for a bit."
+    if the_target.opinion_score_cum_facials() <= 0 or the_target.opinion_score_being_covered_in_cum() <= 0:
+        the_target "Oh my god... that looks so hot... is this why guys love cumming all over you?"
+        mc.name "It looks hot, yeah, but part of it is also a masculine sense of... marking your territory I guess."
+        the_target "Yeah... that makes sense..."
+        "While normally not something she enjoys, you wonder if [the_target.title] might be more open to getting covered in your cum in the future..."
+        $ the_target.increase_opinion_score("cum facials", max_value = 1)
+        $ the_target.increase_opinion_score("being covered in cum", max_value = 1)
+    else:
+        the_target "Damn that's hot... maybe next time I should lose on purpose..."
+        "[the_target.title] reaches down and wipes a finger through your cum, then brings it back to her mouth. She quietly sucks it off."
+        the_target "Mmm..."
+    $ mc.change_locked_clarity(50)
+    $ the_target.change_slut(2, 65)
+    $ the_loser.change_slut(2, 70)
+    "Sadly, things seem to be winding down, and you aren't ready to push things with these two girls further yet."
+    the_loser "Hey... can you get some snacks [the_target.name]? While I umm... go clean up..."
+    the_target "Sure! [the_target.mc_title] do you want to have some?"
+    mc.name "No, I need to get going. Thanks though."
+    if scene_transition:
+        the_loser "We are doing it this way from now on though... right?"
+        the_target "Oh, want to get covered in cum again next week?"
+        the_loser "Errr, no way! Of course not! But I wouldn't mind watching him covering yours when I kick your ass!"
+
+    else:
+        the_loser "I can't wait until next week."
+        the_target "Oh, want to get covered in cum again next week?"
+        the_loser "No way! I mean... yeah but... I won't be! I'll be watching him cover yours when I kick your ass!"
+    "The girls start to play fight a little bit. It's cute, but you get up to leave."
+    $ scene_manager.clear_scene()
+    "You get up and head home."
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
+    "Things are progressing nicely with the two gamer girls. Obviously, you want to keep pushing things with them."
+    "The next logical step is to move to oral sex..."
+    if myra.has_taboo("licking_pussy") or alexia.has_taboo("licking_pussy"):
+        "You aren't sure that you will be able to convince the girls to anything lewd when you haven't done much one on one yet."
+        "You should make sure you've eaten out each girl atleast once before you try to make things go any farther..."
+    if myra.opinion_score_getting_head() == -2:
+        "You aren't sure that you will be able to manage it while [myra.title] hates getting head though..."
+    elif alexia.opinion_score_getting_head() == -2:
+        "You aren't sure that you will be able to manage it while [alexia.title] hates getting head though..."
+    # call advance_time from _call_advance_myra_alexia_teamup_scene_adv_01
     return
 
+label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #Oral
+    $ the_person = the_group[0]
+    $ current_round = 1
+    $ round_count = 1
+    $ myra_wins = 0
+    $ alexia_wins = 0
+    $ the_target = None
+    if scene_transition != True:
+        $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
+        $ scene_manager.add_actor(the_person, position = "sitting")
+        "You walk to the back where the couches are and see the two girls playing the claymation fighting game again."
+        mc.name "Milkshake time!"
+        alexia "Yay!"
+        mc.name "Hey, you two know the rules. Before you get your shakes, I want to see some tits!"
+        the_person "Ha! Fine!"
+        "The girls make a small show of shedding their tops."
+        $ scene_manager.strip_to_tits()
+        "When they finish, you hand them their milkshakes."
+        the_person "Hey, thanks [the_person.mc_title]!"
+        $ the_person.change_happiness(5)
+        $ alexia.change_happiness(5)
+        "The girls seem thankful for their drinks."
+        alexia "Same rules as last time, right? [alexia.mc_title] eats out the winner?"
+        the_person "Yeah! And don't forget the most important part. The loser has to suck him off!"
+        "Your cock twitches in your pants. You can't wait to get one of these girls' mouths on your dick."
+    "As the girls get ready to play, you check your watch. It is already pretty late, but you want to watch enough matches to fairly declare a winner."
+    "How many wins will it take to win tonight?"
+    "NOTE: the larger the number, the longer the event."
+    menu:
+        "1":
+            pass
+        "2":
+            $ round_count = 2
+        "3":
+            $ round_count = 3
+    "The girls look at you. Which girl do you want to sit next to first?"
+    menu:
+        "[myra.title]":
+            $ the_target = myra
+        "[alexia.title]":
+            $ the_target = alexia
 
+    "You sit down next to [the_target.possessive_title]. You think you see a hint of jealousy in the other girl's eyes, but it quickly vanishes as the game starts up."
+    while myra_wins < round_count and alexia_wins < round_count:
+        #Get close to the target
+        if the_target == myra:
+            $ scene_manager.update_actor(myra, display_transform = character_right(yoffset = .2, zoom = 1.2))
+            $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = 0, zoom = 0.8))
+        else:
+            $ scene_manager.update_actor(the_person, display_transform = character_right(yoffset = 0, zoom = 0.8))
+            $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
+        "The character select screen comes up, and you get close to [the_target.title], your hands already running along the soft skin on her sides."
+        call myra_alexia_teamup_fight_round_label(the_group, (the_target == myra)) from _myra_alexia_back_massage_round_call_03
+        if _return == myra:
+            $ myra_wins += 1
+            $ the_target = myra
+            if the_target.arousal >= 65:
+                "[myra.title] gazes at you, her face is flush with excitement."
+                $ mc.change_locked_clarity(35)
+                "There is no way she gets through another round without cumming."
+            elif the_target.arousal >= 30:
+                myra "Yes! I win again! Your hands feel amazing [myra.mc_title]!"
+                $ mc.change_locked_clarity(25)
+            else:
+                myra "Yes! Get to work [myra.mc_title]!"
+        else:
+            $ alexia_wins += 1
+            $ the_target = alexia
+            if the_target.arousal >= 65:
+                "[alexia.title] gazes at you, she bites her lip. Her face is flushed with arousal."
+                $ mc.change_locked_clarity(35)
+                "There is no way she gets through another round without cumming, and she knows it."
+            elif the_target.arousal >= 30:
+                alexia "Oh my god... I won again? This is great!"
+                $ mc.change_locked_clarity(25)
+            else:
+                alexia "Yay! You give great massages, [alexia.mc_title]!"
+
+    $ the_loser = None
+
+    if alexia_wins >= round_count:
+        "It's over. [alexia.possessive_title] is the winner for the night."
+        $ the_target = alexia
+        $ the_loser = myra
+    else:
+        "It's over. [myra.possessive_title] is the winner for the night."
+        $ the_target = myra
+        $ the_loser = alexia
+    mc.name "Alright girls, time for the winner to get her reward!"
+    if scene_transition:
+        the_target "This is amazing. How do you want to do this?"
+        mc.name "What if, why don't you lay on the table, and then I can sit down and [the_loser.title] can service me beneath the table."
+        the_target "Hmm, but I want to watch! What if like... YOU lay on the couch, and I can sit on your face while [the_loser.name] sucks you off?"
+        mc.name "I suppose that would be okay."
+    else:
+        mc.name "Alright, [the_target.title], we'll do it like last time again. You can sit on my face, okay?"
+        the_target "Okay!"
+    $ scene_manager.strip_full_outfit(the_target)
+    "[the_target.title] gets herself ready to be serviced."
+    "You lay down on the couch. [the_loser.possessive_title] gets between your legs and pulls your pants and underwear off, freeing your erection."
+    $ scene_manager.update_actor(the_loser, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.1))
+    if the_loser.opinion_score_giving_blowjobs() == -2:
+        the_loser "Fuck. I can't believe I am about to do this. I HATE giving blowjobs!"
+        the_target "Guess you should have won then!"
+    "[the_target.possessive_title] slowly swings a leg over your body, getting herself into position "
+    $ scene_manager.update_actor(the_target, position = "doggy", display_transform = character_right(yoffset = .2, zoom = 1.4))
+    "[the_target.title]'s sexy ass is now right in your face. You waste no time diving in and begin to lick up and down her slit."
+    $ face_fuck = False
+    if the_loser == myra and the_loser.opinion_score_giving_blowjobs() == -2:   #Special scene where Alexia trains Myra a bit on blowjobs
+        "Above you, you can hear [the_target.title] gives som encouragement."
+        the_target "Come on [the_loser.name]! Don't worry, it won't bite!"
+        the_loser "I know, I just... Ugh I don't know why I just can't stand giving blowjobs."
+        the_target "Why? It is SO much fun! They are so hot and you can make him squirm like a little... AH!"
+        "Your tongue hits a particularly sensitive spot, interrupting [the_target.title] for a second."
+        the_loser "I guess, I've just had a few bad experiences before where guys... got a little rough I guess."
+        the_target "Oh... I'm sorry. Well don't worry, if [the_target.mc_title] tries anything I'll just drown him for you."
+        the_loser "Ha! Yeah I mean... I guess it is kind of nice that he is so... preoccupied..."
+        "Your cock is aching, and after a few quiet moments, you finally feel [the_loser.title]'s soft tongue slide up and down it a few times."
+        "You make sure to moan appreciatively into [the_target.title]'s cunt as you eat her out. She moans in response too."
+        the_target "Ahhh... there see? It's no big deal."
+        the_loser "Yeah... I think so..."
+        if the_loser.love >40:
+            the_loser "I think something is different too... about [the_loser.mc_title]."
+            the_loser "Like... I would normally never do this but... I just want him to feel good. It makes me feel good to get him off!"
+        else:
+            the_loser "I don't know why I was so scared to do this. I don't know what has been up with me lately."
+            the_loser "Normally, I would never do this. But lately, I feel like I'm really starting to find myself, sexually, you know?"
+        "Another moment of silence, but this time instead of licks, you feel lips close around then sink down over the tip of your cock."
+        the_target "Don't worry, I get it. Mmm, I bet that feels good, doesn't it [the_target.mc_title]?"
+        "You moan appreciately into [the_target.possessive_title]'s cunt."
+        "You feel a small moan around your cock as [the_loser.title] starts to get into sucking you off. She isn't the most talented, but the whole situation has you really turned on."
+        $ myra.increase_opinion_score("giving blowjobs")
+    elif myra_finish_blowjob_training() and the_loser == myra and not myra.event_triggers_dict.get("shown_off_blowjob_skills", False):
+        $ myra.event_triggers_dict["shown_off_blowjob_skills"] = True
+        "As you begin licking, [the_loser.possessive_title] also gets to work, hungrily."
+        "You feel her lips wrap around your tip, then descend down your cock slowly, all the way to the base. Your head is hitting the back of her throat."
+        the_target "Wow... [the_loser.name] you've really been practicing that, haven't you?"
+        "A moaning affirmative is the only thing that escapes [the_loser.title]'s mouth as her tongue licks all around your balls."
+        "You realize that you are going to cum fast. You'd better get to work!"
+        "You eagerly lick up and down [the_target.title]'s slit, running circles around her clit for a few seconds in between strokes."
+        "[the_loser.possessive_title] pulls off your for a second."
+        the_loser "Hey, can you help me out? He normally does this for me, but he is a little busy right now."
+        the_target "Mmmm... yeah? What do you need?"
+        the_loser "Would you grab my hair and like, you know, force me down on him?"
+        the_target "Myr... you want me to... make you face fuck him?"
+        the_loser "Yes please!"
+        the_target "Fuck that's hot... Okay..."
+        "While you can't see past the amazing ass in front of you, you have a pretty good idea of what is happening."
+        "Suddenly, [the_loser.possessive_title]'s mouth forcefully descends your cock, her nose buried in your skin."
+        "Her mouth is licking at you as it goes up and down a few times rapidly. After a few seconds, you can feel her gag."
+        the_target "Oh my god, I'm sorry!"
+        the_loser "What? Why? Keep going this is so hot!"
+        the_target "Oh my god, oh fuck..."
+        $ face_fuck = True
+    elif the_target.opinion_score_giving_blowjobs() == 2 and the_target.opinion_score_being_submissive() > 0:
+        "As you begin licking, [the_loser.possessive_title] also gets to work, hungrily."
+        "You feel her lips wrap around your tip, then descend down your cock slowly, all the way to the base. Your head is hitting the back of her throat."
+        the_target "Wow, you like that don't you, you little whore? You love gaggin yourself on [the_target.mc_title]'s cock?"
+        "A moaning affirmative is all that escapes [the_loser.possessive_title]'s mouth."
+        "Suddenly, you feel her head bouncing up and down on your cock forcefully."
+        the_target "Do you like that too? When I pull your hair and force you down on it? That's it bitch, take it!"
+        "[the_target.title] rams [the_loser.possessive_title]'s face down on your cock and holds it there. You can feel her nose buried in your skin and she licks your balls a bit."
+        "After a few seconds, suddenly she pulls off, gasping for air."
+        the_loser "Holy fuck that was hot... keep going!"
+        "Fuck, [the_target.possessive_title] is about to fuck you with [the_loser.title]'s face!"
+        "You realize that you are going to cum fast. You'd better get to work!"
+        "You eagerly lick up and down [the_target.title]'s slit, running circles around her clit for a few seconds in between strokes."
+        $ face_fuck = True
+    else:
+        "As you begin licking, [the_loser.possessive_title] also gets to work."
+        "You feel her soft hand around the base of your cock, as she licks at the tip a few times, tasting your pre-cum."
+        if the_target.opinion_score_drinking_cum() > 0:
+            the_target "Mmmm, I bet that tastes good, doesn't it? Can I have some?"
+            "You feel [the_loser.title]'s soft hand give you a few stroke, while some weight shifts one the couch. Soon you hear the two girls making out."
+            the_target "Mmm, it DOES taste good!"
+            "The soft mouth of [the_loser.possessive_title] returns to your erection."
+        "Slowly, methodically, you feel her lips descend your cock and then hold it about halfway in for a few seconds, her tongue swirling around it."
+        "You moan appreciatively into the soaking wet cunt of [the_target.title]."
+    "You put both hands on [the_target.title]'s ass cheeks, pulling them apart to give you better access."
+    the_target "Ohhh god that's it [the_target.mc_title]. Your tongue feels so good!"
+    if face_fuck:
+        "[the_target.possessive_title] mercilessly fucks her gaming buddy's face with your cock. Once in a while you feel her gag around you, and the twitching feels amazing."
+        the_target "Look up at me [the_loser.name]. I want you to look at me this time."
+        "[the_loser.title] pulls off for a second, sputtering and catching her breath. After a second to catch her breath, her hot mouth slowly works its way down your cock again."
+        "You feel your hips buck a little, her tight throat feels incredible."
+    else:
+        the_target "Fuck, it is so hot to watch you suck him off..."
+        "[the_loser.possessive_title] moans a little bit as her mouth begins to stroke you."
+    "You lay on your back, just enjoy the amazing sensations of having your two gamer girls fucking around with you."
+    "You lick at [the_target.possessive_title]'s delicate pussy, spreading her lips and sending your tongue inside."
+    "She shivers with each touch, obviously enjoying the feeling."
+    "Her pussy is dripping wet, filling your mouth with the taste of her juices."
+    $ the_target.call_dialogue("sex_responses_oral")
+    if face_fuck:
+        "[the_target.title] is really getting off on her position controlling [the_loser.possessive_title]."
+        the_target "That's it. Taking it deep you little cum slut! If you can't play games, the least you can do is service [the_target.mc_title]'s cock!"
+        "The sensations are amazing as she gags and throats you. There is no way you are going to last much longer."
+    else:
+        "[the_loser.possessive_title] keeps working her tongue over your cock. She licks it bottom to top, then sucks on the tip, then licks it from the top back to the bottom."
+        "You can feel her hand stroking you as she gently sucks on your testicles, as if urging them to release your cum to her."
+    the_target "Oh fuck that feels so good... Oh god I'm gonna cum!"
+    "Licking and probing all around [the_target.possessive_title]'s clit, you can feel her start to quiver."
+    $ the_target.call_dialogue("climax_responses_oral")
+    "All at once the tension in her body is unleashed in a series of violent tremors. Her body collapes for a second, momentarily keeping you from breathing."
+    "You give her ass a slap, and she lifts up on her knees enough to get you some air."
+    $ the_target.have_orgasm(half_arousal = False)
+    "Having [the_target.title] cum all over your face has really get you turned on, you feel yourself getting ready to cum too."
+    mc.name "Oh god... [the_loser.title] I'm gonna cum!"
+    if face_fuck:
+        "You feel [the_loser.possessive_title]'s mouth get shoved forcefully down on your cock and it stays there. Her tongue is lapping all around your testicles."
+        the_target "That's it! Take it down your throat you little cum slut!"
+        "You can't take it anymore. You buck your hips as you start to cum down [the_loser.title]'s throat."
+        $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_loser)
+        $ the_loser.cum_in_mouth()
+        $ scene_manager.update_actor(the_loser)
+        "[the_loser.title] struggles to drink it all down, but doesn't try and pull off."
+        "When you finish, suddenly she pulls off when [the_target.title] lets go of her hair."
+        the_loser "Oh my god, I thought I was drowing..."
+        if the_loser.opinion_score_drinking_cum() > 0:
+            the_loser "It was amazing!"
+    else:
+        "You feel [the_loser.possessive_title]'s hand stroking you rapidly while she sucks on the tip, milking your cock."
+        the_target "That's it! Swallow it like a good little cum slut!"
+        "You can't take it anymore, and you start to cum in [the_loser.title]'s mouth."
+        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_loser)
+        $ the_loser.cum_in_mouth()
+        $ scene_manager.update_actor(the_loser)
+        "[the_lost.title] struggles to drink it all down, but doesn't pull off."
+        "A few seconds after your last spurt, she stops stroking you and pulls off."
+        if the_loser.opinion_score_drinking_cum() > 0:
+            the_loser "Mmmm, you came so much for me!"
+        else:
+            the_target "Mmmm, why the face? You know you like! Now be a good girl and swallow."
+            "A few seconds later, [the_loser.possessive_title] must have complied as she starts to talk."
+            the_loser "Yeah... call me crazy, but I think I'm getting used to that... For some reason it wasn't as bad as I remembered."
+            $ the_loser.increase_opinion_score("drinking cum")
+        if the_target.opinion_score_drinking_cum() > 0:
+            the_target "Oh hey, you got a little on your... mmm just come her..."
+            "You can't see anything around her ass, but you can hear [the_target.title] and [the_loser.possessive_title] start to kiss each other."
+            "They go at it for several seconds."
+            $ the_target.cum_in_mouth()
+            $ scene_manager.update_actor(the_target)
+            the_loser "Oh! Now you've got some... ahh..."
+
+    the_target "Well... should we let him up?"
+    the_loser "Yeah we probably should... although..."
+    the_target "Nope! You'll just have to get off on your own time!"
+    $ the_loser.change_obedience(10)
+    "The girls slowly get up, leaving you in a bit of a daze."
+    $ scene_manager.update_actor(alexia, display_transform = character_center_flipped, position = "stand3")
+    $ scene_manager.update_actor(myra, display_transform = character_right, position = "stand2")
+    alexia "Oh god, did we break him?"
+    myra "Hopefully not, we need him to come back next week!"
+    "[alexia.title] laughs a bit, but she still appears to be a bit concerned about you."
+    mc.name "Don't worry, I'm good. That was amazing, wow. You two are absolutely incredible."
+    $ the_target.change_stats(happiness = 10, slut = 2, max_slut = 80)
+    $ the_loser.change_stats(obedience = 10, slut = 2, max_slut = 80)
+    "The girls clearly appreciate your kind words."
+    "Sadly, things seem to be drawing to a natural conclusion for tonight."
+    the_loser "Hey... want to help me with the snacks [the_target.name]? I know I already had one, but I'm still kinda hungry."
+    the_target "Sure! [the_target.mc_name] do you want to have some?"
+    mc.name "No, I need to get going. Thanks though."
+    if scene_transition:
+        the_loser "We are doing it this way from now on though... right?"
+        the_target "Oh, want to swallow cum every week?"
+        the_loser "Errr, I mean a little bit... but it was so hot how you were on top of him like that, watching you get off..."
+    else:
+        the_loser "I can't wait until next week."
+        the_target "Oh, want to swallow another load next week?"
+        the_loser "No way! I mean... yeah but... I won't be! It was so hot watching you ride his face... I want a turn!"
+    "The girls start to play fight a little bit. It's cute, but you get up to leave."
+    $ scene_manager.clear_scene()
+    "You get up and head home."
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
+    "Things are progressing amazingly with the two gamer girls. Obviously, you want to keep pushing things with them."
+    "You feel like you are getting them ready for your end game, a full on threesome."
+    if myra.has_taboo("vaginal_sex") or alexia.has_taboo("vaginal_sex"):
+        "You aren't sure that you will be able to convince the girls to go that far together yet though."
+        "You should make sure you've fucked each girl atleast once before you try to make things go any farther..."
+    if myra.opinion_score_vaginal_sex() == -2:
+        "You aren't sure that you will be able to manage it while [myra.title] hates vaginal sex though..."
+    elif alexia.opinion_score_vaginal_sex() == -2:
+        "You aren't sure that you will be able to manage it while [alexia.title] hates vaginal sex though..."
+    # call advance_time from _call_advance_myra_alexia_teamup_scene_adv_01
+    return
+
+label myra_alexia_teamup_scene_scene_3(the_group, scene_transition = False):  #Sex
+    $ the_person = the_group[0]
+    $ current_round = 1
+    $ round_count = 1
+    $ myra_wins = 0
+    $ alexia_wins = 0
+    $ the_target = None
+    if scene_transition != True:
+        $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
+        $ scene_manager.add_actor(the_person, position = "sitting")
+        "You walk to the back where the couches are and see the two girls playing the claymation fighting game again."
+        mc.name "Milkshake time!"
+        alexia "Yay!"
+        mc.name "Hey, you two know the rules. Before you get your shakes, lose the clothes!"
+        the_person "Ha! Fine!"
+        "The girls make a small show of shedding their clothing."
+        $ scene_manager.strip_full_outfit()
+        "When they finish, you hand them their milkshakes."
+        the_person "Hey, thanks [the_person.mc_title]!"
+        $ the_person.change_happiness(5)
+        $ alexia.change_happiness(5)
+        "The girls seem thankful for their drinks."
+        alexia "Same rules as last time, right? [alexia.mc_title] fucks the winner?"
+        the_person "Yeah! And don't forget the most important part. The loser has to help!"
+        "Your cock twitches in your pants. You can't wait to fuck these beautiful girls."
+    "As the girls get ready to play, you check your watch. It is already pretty late, but you want to watch enough matches to fairly declare a winner."
+    "How many wins will it take to win tonight?"
+    "NOTE: the larger the number, the longer the event."
+    menu:
+        "1":
+            pass
+        "2":
+            $ round_count = 2
+        "3":
+            $ round_count = 3
+        "4":
+            $ round_count = 4
+    "The girls look at you. Which girl do you want to sit next to first?"
+    menu:
+        "[myra.title]":
+            $ the_target = myra
+        "[alexia.title]":
+            $ the_target = alexia
+
+    "You sit down next to [the_target.possessive_title]. You think you see a hint of jealousy in the other girl's eyes, but it quickly vanishes as the game starts up."
+    while myra_wins < round_count and alexia_wins < round_count:
+        #Get close to the target
+        if the_target == myra:
+            $ scene_manager.update_actor(myra, display_transform = character_right(yoffset = .2, zoom = 1.2))
+            $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = 0, zoom = 0.8))
+        else:
+            $ scene_manager.update_actor(the_person, display_transform = character_right(yoffset = 0, zoom = 0.8))
+            $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
+        "The character select screen comes up, and you get close to [the_target.title], your hands already running along the soft skin on her sides."
+        call myra_alexia_teamup_fight_round_label(the_group, (the_target == myra)) from _myra_alexia_back_massage_round_call_04
+        if _return == myra:
+            $ myra_wins += 1
+            $ the_target = myra
+            if the_target.arousal >= 65:
+                "[myra.title] gazes at you, her face is flush with excitement."
+                $ mc.change_locked_clarity(35)
+                "There is no way she gets through another round without cumming."
+            elif the_target.arousal >= 30:
+                myra "Yes! I win again! This is amazing [myra.mc_title]!"
+                $ mc.change_locked_clarity(25)
+            else:
+                myra "Yes! Get to work [myra.mc_title]!"
+        else:
+            $ alexia_wins += 1
+            $ the_target = alexia
+            if the_target.arousal >= 65:
+                "[alexia.title] gazes at you, she bites her lip. Her face is flushed with arousal."
+                $ mc.change_locked_clarity(35)
+                "There is no way she gets through another round without cumming, and she knows it."
+            elif the_target.arousal >= 30:
+                alexia "Oh my god... I won again? This is great!"
+                $ mc.change_locked_clarity(25)
+            else:
+                alexia "Yay! You give great massages, [alexia.mc_title]!"
+
+    $ the_loser = None
+
+    if alexia_wins >= round_count:
+        "It's over. [alexia.possessive_title] is the winner for the night."
+        $ the_target = alexia
+        $ the_loser = myra
+    else:
+        "It's over. [myra.possessive_title] is the winner for the night."
+        $ the_target = myra
+        $ the_loser = alexia
+    mc.name "Alright girls, time for the winner to get her reward!"
+    if scene_transition:
+        the_loser "No! I can't believe I lost!"
+        "She shakes her head in disbelief."
+        the_loser "Well, how are we going to do this?"
+        the_target "[the_target.mc_title], what if like... we don't HAVE to leave [the_loser.name] hanging?"
+        mc.name "Have something in mind?"
+        the_target "I mean, we could like, sixty nine, and then you could fuck me right in front of her!"
+        the_loser "Ohhh, wow that sounds nice..."
+        the_target "I know it was a competition but it can be so frustrating to be left out, and I want her to feel good too... just as much as I want you to!"
+        "You consider it for a second."
+        mc.name "Is that what you both want?"
+        the_loser "Yeah! And next week if I win I'll do the same!"
+        mc.name "Alright."
+    else:
+        mc.name "Alright, [the_target.title], we'll do it like last time again. Lay down and [the_loser.title] get on top of her."
+        the_target "Okay!"
+    call start_threesome(the_target, the_loser, start_position = Threesome_sixty_nine, position_locked = True) from _myra_alexia_postgame_threesome_01
+    $ the_report = _return
+    if the_report.get("trifecta", False) and scene_transition:
+        "When you finish, you can't believe how well it went. Everyone orgasmed and seems satisfied."
+        the_target "God that dick is amazing..."
+        the_loser "Your tongue was pretty good too..."
+        "There's no doubt in your mind that this has set a new precedent with the two girls."
+    elif the_report.get("trifecta", False):
+        "You lay with the two gamer girls for a bit. Everyone is enjoying their post orgasmic bliss."
+
+
+    "After a while, [alexia.title] breaks the silence."
+    alexia "I hate to do this but... my stomach is rumbling. is it snack time?"
+    myra "Yeah we probably should..."
+
+    $ scene_manager.update_actor(alexia, display_transform = character_center_flipped, position = "stand3")
+    $ scene_manager.update_actor(myra, display_transform = character_right, position = "stand2")
+    "You get up with the two girls."
+    myra "I know the answer is probably no, but... are you sticking around for snacks [myra.mc_title]?"
+    mc.name "No, but this has been a night to remember, for sure."
+    $ the_target.change_stats(happiness = 10, slut = 2, max_slut = 100)
+    $ the_loser.change_stats(obedience = 10, slut = 2, max_slut = 100)
+    "The girls clearly appreciate your kind words."
+    if scene_transition:
+        the_loser "We are doing it this way from now on though... right?"
+        the_target "Yeah, definitely."
+    else:
+        the_loser "I can't wait until next week."
+        the_target "Me too!"
+    "The girls start to chat as they walk towards the kitchen area."
+    $ scene_manager.clear_scene()
+    "You get up and head home."
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
+    "Things are amazing with the two gamer girls. Could it possibly even get any better?."
+    return
+
+label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    #Free use - Not yet written.
+    pass
+    return
 
 label myra_alexia_teamup_trans_scene_0(the_group):
     pass
@@ -450,7 +1131,7 @@ label myra_alexia_teamup_trans_scene_1(the_group):
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "sitting")
     "You walk to the back where the couches are and see the two girls playing the claymation fighting game again."
-    mc.name "Milkshakes time!"
+    mc.name "Milkshake time!"
     alexia "Yay!"
     the_person "Hey, thanks [the_person.mc_title]!"
     $ the_person.change_happiness(5)
@@ -461,10 +1142,130 @@ label myra_alexia_teamup_trans_scene_1(the_group):
     "Before [the_person.title] can answer, you reply."
     mc.name "Actually, I have an idea for how we can make game night a bit more exciting. For everyone."
     "Both girls look at you with eyebrows raised."
-
+    mc.name "As much as I enjoy rubbing your backs for an entire evening, I'd like to expand it some, to a full upper body massage."
+    "[the_person.title] starts to roll her eyes."
+    alexia "Sounds good to me!"
+    the_person "[alexia.name]... he just wants to feel us up!"
+    alexia "Yeah... so?"
+    the_person "So? You... you're okay with that?"
+    alexia "Yeah, why not?"
+    #TODO figure out if she has a boyfriend or not?
+    the_person "What would your boyfriend think about that?"
+    alexia "I mean, like earlier, what he doesn't know won't hurt him..."
+    the_person "But like, we'll just get all worked up from him touching us? And then what?"
+    mc.name "Well, that will be better incentive to win enough matches."
+    mc.name "Whoever the winner is, I'll get her off while the loser goes to make snacks."
+    "[the_person.title] looks exasperated."
+    alexia "Yeah! Let's do it!"
+    the_person "You know what? Fuck it. Let's do it. No mercy though [alexia.name]!"
+    alexia "Bring it bitch!"
     return
 
+label myra_alexia_teamup_trans_scene_2(the_group):
+    $ the_person = the_group[0]
+    $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    "You walk to the back where the couches are and see the two girls playing the claymation fighting game again."
+    mc.name "Milkshake time!"
+    alexia "Yay!"
+    the_person "Hey, thanks [the_person.mc_title]!"
+    $ the_person.change_happiness(5)
+    $ alexia.change_happiness(5)
+    "As the girls start to sip their milkshakes, you feel like you are ready to move game time to the next step."
+    "You admit that running your hands all over the girls is nice, but you want more."
+    alexia "Same rules as last time, right? Winner get's an upper body massage during the next round?"
+    "Before [the_person.title] can answer, you reply."
+    mc.name "Actually, I have an idea for how we can make game night a bit more exciting. For everyone."
+    "Both girls look at you with eyebrows raised."
+    the_person "Oh boy, here we go."
+    mc.name "First of all, don't misunderstand me, I love running my hands all over you two. You are very sexy."
+    the_person "But?"
+    mc.name "But... handjobs are great and all, but they aren't really anything special."
+    mc.name "I think to make it more fun, we should all start with no shirts on, and my hands are allowed to go anywhere during the rounds."
+    mc.name "I also think we should increase the stakes. I'll eat out the winner, but the loser has to give me a blowjob."
+    the_person "There it is."
+    "[the_person.title] starts to roll her eyes."
+    alexia "That sounds reasonable to me."
+    the_person "[alexia.name]... what!?!"
+    alexia "I mean, guys jack off all the time, right? I'm sure he can use his own hand with more skill than we have."
+    the_person "That's not the point..."
+    alexia "Besides, his tongue is even better than has fingers..."
+    "[the_person.title] stops her protest."
+    the_person "[alexia.name]... how would you even know..."
+    "Suddenly, [alexia.possessive_title] realizes what she said."
+    alexia "I mean, he probably does... that's how sex is, right? It get's better like..."
+    "[alexia.title] is rambling, trying to come up with a good excuse for why she knows what your tongue feels like."
+    the_person "Hey. It's okay. If you're fine with sucking off [the_person.mc_title] while he eats me out, that's fine by me."
+    alexia "If you WIN, you mean!"
+    the_person "WHEN I win!"
+    alexia "Not a chance!"
+    the_person "You know what? Fuck it. Let's do it. No mercy though [alexia.name]!"
+    alexia "Bring it bitch!"
+    "Oh my god, you did it. You can't wait to blow your load into one of these two girl's mouths."
+    return
 
+label myra_alexia_teamup_trans_scene_3(the_group):
+    $ the_person = the_group[0]
+    $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    $ scene_manager.strip_to_tits(alexia, delay = 0)
+    $ scene_manager.strip_to_tits(the_person, delay = 0)
+    "You walk to the back where the couches are and see the two girls playing the claymation fighting game again."
+    "They've already taken their tops off. You take a moment to enjoy their nice tits before you announce your presence."
+    mc.name "Milkshake time!"
+    alexia "Yay!"
+    the_person "Hey, thanks [the_person.mc_title]!"
+    $ the_person.change_happiness(5)
+    $ alexia.change_happiness(5)
+    "As the girls start to sip their milkshakes, you feel like you are ready to move game time to the final step."
+    "Your endgame all along has been to fuck the winner, and you feel like you've gotten them both ready for it."
+    alexia "Same rules as last time, right? Winner gets a happy ending with [alexia.mc_title]'s tongue?"
+    "Before [the_person.title] can answer, you reply."
+    mc.name "Actually, I have a proposal for you two."
+    "Both girls look at you, but it is clear that they were expecting this."
+    the_person "Go ahead, what are you thinking?"
+    mc.name "Well, I feel like there's no need to ignore the obvious sexual tension between the three of us anymore."
+    mc.name "But it is also clear that you two enjoy your little competition, so I think it is time that we raise the stakes again."
+    mc.name "I think we should all just start naked, and between rounds, I get full access to the previous round winner to do... whatever."
+    mc.name "Then at the end, the loser services the winner while I fuck her."
+    "The girls look at each other, then back at you."
+    alexia "That sounds like fun to me!"
+    the_person "Me too. I can't wait to win! That cock is MINE!"
+    alexia "No way! I'm going to win!"
+    "The girls are surprsingly willing. As they start to strip their remaining clothes, you can't wait to fuck them both..."
+    $ scene_manager.strip_full_outfit(alexia)
+    $ scene_manager.strip_full_outfit(the_person)
+    return
+
+label myra_alexia_teamup_trans_scene_4(the_group):
+    $ the_person = the_group[0]
+    $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
+    $ scene_manager.add_actor(the_person, position = "sitting")
+    $ scene_manager.strip_full_outfit(alexia, delay = 0)
+    $ scene_manager.strip_full_outfit(the_person, delay = 0)
+    "You walk to the back where the couches are and see the two girls playing a game."
+    "This time though, they are playing an older game with a puffy pink protoganist and a sidekick, instead of the usual fighting game. It looks like more of a cooperative game than competitive."
+    "They've already gotten naked. Damn you are one lucky bastard. You take a moment to enjoy their nice tits before you announce your presence."
+    mc.name "Milkshake time!"
+    alexia "Yay!"
+    the_person "Hey, thanks [the_person.mc_title]!"
+    $ the_person.change_happiness(5)
+    $ alexia.change_happiness(5)
+    "The girls happily take their milkshakes."
+    mc.name "Alright, remember the rules?"
+    alexia "Actually, we wanted to talk to you about that."
+    mc.name "Oh?"
+    the_person "[the_person.mc_title]... we don't want this to be a competition anymore."
+    alexia "We just want this to be a fun night, where we play some games, relax, and get fucked senseless."
+    the_person "We were wondering... While we are playing rounds, could you just fuck us both? Then whenever you are almost done with us, we could all just get off together?"
+    alexia "You can use us however you want! We just want to make you happy!"
+    "This is a surprising turn of events. However, this could be a lot of fun. Your two gamer girls, free for you use while they just play casually."
+    mc.name "Okay, that sounds great to me."
+    alexia "Yay!"
+    the_person "Here's what we were thinking. We could pull these two couches together and just lay on them on our stomachs while we play, and you can do... well anything."
+    alexia "Just promise you'll try to get us both off!"
+    mc.name "Of course!"
+    return
 
 label myra_alexia_teamup_scene_choice_label(the_group):
     $ the_person = the_group[0]
@@ -743,19 +1544,6 @@ label myra_alexia_teamup_light_distraction(the_person):
             "The game sounds off with a declaration of the winner, but you barely hear over her ass smacking against your lap with each thrust."
             $ mc.change_arousal(20)
             return 40
-    if myra_alexia_teamup_scene.stage == 4:
-        "You look down at [the_person.title] and her slutty holes, ready and open for you to use."
-        if the_person.arousal < 25:
-            pass
-        elif the_person.arousal < 50:
-            pass
-        elif the_person.arousal < 75:
-            pass
-        else:
-            "Her labia are swollen and wet, and she is breathing fairly hard. [the_person.possessive_title] is really turned on."
-            mc.name "Alright slut, I'm gonna make you cum now."
-            the_person "Sounds amazing [the_person.mc_title]!"
-
     return
 
 label myra_alexia_teamup_med_distraction(the_person):
@@ -1057,7 +1845,6 @@ label myra_alexia_teamup_large_distraction(the_person):
             return 50
 
     return
-
 
 label myra_alexia_teamup_orgasm_finish(the_person):
     if myra_alexia_teamup_scene.stage <= 1:

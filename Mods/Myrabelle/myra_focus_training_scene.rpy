@@ -5,6 +5,7 @@
 # Each scene progresses based on sluttiness AND on Myra's focus level.
 # Focus has increased chance of increasing based on suggestability.
 # If Myra is in trance, give MC a chance to raise Focus at the end of the scene if it is below MC's value for free.
+#7/13
 
 
 
@@ -185,7 +186,7 @@ label myra_focus_progression_scene_intro_scene(the_group):
         "Hmm, so friday [the_person.title] and [alexia.title] are going to get together..."
     "Maybe you should swing by? Just to say hello?"
     the_person "Okay girl. Yeah I'll text you. Sounds good! Bye!"
-    "[the_person] hangs up the phone then looks at you."
+    "[the_person.title] hangs up the phone then looks at you."
     the_person "You know what? I'm glad you swung by. Do you think, if you ever have some spare time, we could do more focus training?"
     the_person "I could pay you, if you need, I don't expect you to do it for free."
     the_person "You could be like my coach! Even though you don't play much yourself, you still have an idea of how it works and seem to have a knack for helping me improve."
@@ -199,8 +200,8 @@ label myra_focus_progression_scene_intro_scene(the_group):
     "You can now train [the_person.title]'s focus once per day."
     "[the_person.title] and [alexia.title] are getting together on Friday night. You make a note to swing by see what they are up to..."
     $ myra.add_unique_on_room_enter_event(myra_alexia_teamup_scene_action)
-    $ alexia.set_schedule(gaming_cafe, the_days = [4], the_times = [5])
-    $ myra.set_schedule(gaming_cafe, the_days = [4], the_times = [5])
+    $ alexia.set_schedule(gaming_cafe, the_days = [4], the_times = [4])
+    $ myra.set_schedule(gaming_cafe, the_days = [4], the_times = [4])
     call advance_time from _call_advance_myra_focus_progression_scene_adv_01
     return
 

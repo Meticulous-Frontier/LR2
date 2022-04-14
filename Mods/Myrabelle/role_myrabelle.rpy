@@ -9,7 +9,8 @@
 #
 # Teamup option is Alexia. On friday nights, they start to have all night gaming sessions. At first, MC just plays games with them, but it transitions to massages...
 # ... topless massages, fingering, eventually at full corruption start the night with them naked and MC has total free-use while they play video games.
-
+# progress = 2/29
+# 25/67
 # $ mother_role.actions.append(myra_focus_progression_scene_action)
 
 init 2 python:
