@@ -79,7 +79,7 @@ label mom_sister_snooping_action_label():
         $ scene_manager.strip_to_tits(person = lily)
         $ mc.change_locked_clarity(30)
         "Oh my... [lily.title] is topless!"
-        mom "See? Any man would be love to get their hands on you. You just have to learn to work with what you have."
+        mom "See? Any man would love to get their hands on you. You just have to learn to work with what you have."
         mom "I have to actively cover up, to keep from getting too much attention..."
         lily "Why would you do that!?! I'd kill to have your figure..."
         $ scene_manager.strip_to_tits(person = mom)
@@ -123,7 +123,7 @@ label mom_sister_snooping_action_label():
                 $ scene_manager.clear_scene()
                 return
 
-        "You accidentally let out a little gasp. It must have been audible, because [mom.possessive_title] looks up at notices you at the door."
+        "You accidentally let out a little gasp. It must have been audible, because [mom.possessive_title] looks up and notices you at the door."
         mom "Oh! [mom.mc_title]! Come in here honey."
         "You slowly walk in to your sister's room."
         mom "Ohh... Your sister is doing such a good job, I can hardly concentrate. Would you help me take care of her?"

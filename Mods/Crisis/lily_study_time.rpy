@@ -184,7 +184,7 @@ label sister_failed_test_label():
                     $ mc.change_arousal(15)
                 call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False, ) from _lily_study_time_handjob_01
 
-            "Ask for blowjob" if the_person.sluttiness >= 50 and mc.energy > 50:
+            "Ask for blowjob" if the_person.sluttiness >= 50 and mc.energy > 50 and not the_person.has_taboo("touching_penis"):
                 the_person "Mmm, okay. I'll do that for you [the_person.mc_title]."
                 $ the_person.draw_person(position = "kneeling1")
                 "[the_person.possessive_title] pulls the covers down and moves down to your legs. You lift her hips up when she pulls at your shorts, setting your erection free."
@@ -199,7 +199,7 @@ label sister_failed_test_label():
                     the_person "Its just a blowjob. Here it goes!"
                     "[the_person.title] opens her mouth and runs her tongue along the tip, tasting your precum. The attention makes your penis twitch with need."
                     $ the_person.break_taboo("sucking_cock")
-                    "The moment of truth arrives. [the_person.possessive_title] opens her mouth wide slowly slides your cock past her lips. Their velvet warmth feel amazing."
+                    "The moment of truth arrives. [the_person.possessive_title] opens her mouth wide and slowly slides your cock past her lips. Their velvet warmth feels amazing."
                     "[the_person.title] begins to slowly bob her head up and down."
                 else:
                     "[the_person.title] takes your cock in her hand and gives it a couple strokes."
@@ -210,10 +210,10 @@ label sister_failed_test_label():
                     "[the_person.title] opens her mouth and runs her tongue along the tip, tasting your precum. The attention makes your penis twitch with need."
                     mc.name "[the_person.title]... please..."
                     the_person "Mmm, I love to hear you beg."
-                    "[the_person.possessive_title] opens her mouth wide slowly slides your cock past her lips. Their velvet warmth feel amazing."
+                    "[the_person.possessive_title] opens her mouth wide and slowly slides your cock past her lips. Their velvet warmth feels amazing."
                     "[the_person.title] begins to slowly bob her head up and down."
                 call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False, ) from _lily_study_time_blowjob_01
-            "Ask for quickie" if the_person.sluttiness >= 70 and mc.energy > 50 and the_person.vagina_available():
+            "Ask for quickie" if the_person.sluttiness >= 70 and mc.energy > 50 and the_person.vagina_available() and not the_person.has_taboo("touching_penis") and not the_person.has_taboo("sucking_cock"):
                 if the_person.has_taboo("vaginal_sex"):
                     the_person "Wow... you want me to just... hop on and go for a ride? That's... a little crazy, don't you think?"
                     the_person "I mean, we've never even gone that far before..."
@@ -222,7 +222,7 @@ label sister_failed_test_label():
                     the_person "I mean... I didn't say no... I just wasn't expecting you to just say it so nonchalantly. Let's have a quickie."
                     "Her hand is still stroking you through the covers. It feels like she is speeding up some..."
                     the_person "It's not like I've been totally just waiting for you to ask me something like this..."
-                    "[the_person.title] pulls back the covers, you lift you hips when she pulls at your shorts, freeing your cock from its confines."
+                    "[the_person.title] pulls back the covers, you lift your hips when she pulls at your shorts, freeing your cock from its confines."
                     $ the_person.draw_person(position = "kneeling1")
                     the_person "God you always look so hard... I bet you really need to get off, don't you?"
                     mc.name "I know. This is what you do to me [the_person.title]."

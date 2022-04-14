@@ -34,7 +34,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
     if person_two.sluttiness > 70 and person_three.sluttiness > 70:
         person_one "Last night, I was dreaming of sucking [person_one.mc_title]'s big cock."
-        person_two "I wouldn't mind a giving that meat stick some affection myself."
+        person_two "I wouldn't mind giving that meat stick some affection myself."
         person_three "That would be perfect, when you two are done, I can tame and ride that monster."
     elif person_two.sluttiness > 40 and person_three.sluttiness > 40:
         person_one "Don't you think [person_one.mc_title] has a nice bulge in his pants."
@@ -111,7 +111,7 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
                     $ town_relationships.improve_relationship(person_two, person_three)
 
-                    "Amazing you just fucked two of your employees, wondering if other girls in your company might also be up for this."
+                    "Amazing you just fucked two of your employees, and are left wondering if other girls in your company might also be up for this."
 
                 "Punish them for inappropriate behaviour" if office_punishment.is_active():
                     mc.name "[person_three.title], [person_two.title], this is completely inappropriate, even if you're on your break."

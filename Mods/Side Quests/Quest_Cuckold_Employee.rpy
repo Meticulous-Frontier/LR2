@@ -336,7 +336,7 @@ label quest_cuckold_employee_decision_label():
     "After you walk in, you close the door and lock it."
     the_person "Let's do this. I'm ready. I'm ready to get bred!"
     $ the_person.draw_person(position = "kissing")
-    "You wrap your arms around [the_person.title]. She embraces you, and you start to kiss. You hands go down to her ass."
+    "You wrap your arms around [the_person.title]. She embraces you, and you start to kiss. Your hands go down to her ass."
     $ the_person.change_arousal(5)
     the_person "Okay, so... the best way to do this that I've read anyway, is good old fashioned missionary."
     mc.name "Get ready and lay down on my desk. I always wanted my own personal breeding stock."

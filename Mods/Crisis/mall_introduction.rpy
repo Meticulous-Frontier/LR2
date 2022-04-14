@@ -108,7 +108,7 @@ label mall_introduction_action_label():
 
     mc.name "It was great meeting you both here. I'll see you around [stranger.title]."
     if stranger.has_role(prostitute_role):
-        stranger "If you ever want some company, give me call, I'm sure we can come to some kind of arrangement."
+        stranger "If you ever want some company, give me a call, I'm sure we can come to some kind of arrangement."
         "She hands you a business card with her phone number."
         $ mc.phone.register_number(stranger)
 

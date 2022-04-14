@@ -387,7 +387,7 @@ label swap_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locati
 label intro_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
     "You watch as [the_girl_1.title] and [the_girl_2.title] get into position."
     if mc.recently_orgasmed:
-        "You put your hand on your soften cock and start to stroke it."
+        "You put your hand on your softening cock and start to stroke it."
     else:
         "You can't help but stroke yourself as you watch the girls begin to eat each other out."
     "The sound of muffled moans and slick licking motions fill the air."
@@ -455,6 +455,6 @@ label orgasm_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_locati
 label swap_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):
     "You step back for a second and just watch [the_girl_1.title] and [the_girl_2.title] as they eat each other out."
     if mc.recently_orgasmed:
-        "You put your hand on your soften cock and start to stroke it."
+        "You put your hand on your softening cock and start to stroke it."
     "The sound of muffled moans and slick licking motions fill the air."
     return

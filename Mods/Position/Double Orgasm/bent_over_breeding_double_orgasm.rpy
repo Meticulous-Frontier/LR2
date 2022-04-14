@@ -51,6 +51,6 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
         if the_girl.has_breeding_fetish():
             "As your cum starts to leak out, [the_girl.possessive_title] reaches back and tries to keep it inside with her hand."
         else:
-            "You cum leaks out of her dripping wet [the_girl.pubes_description] pussy."
+            "Your cum leaks out of her dripping wet [the_girl.pubes_description] pussy."
         $ post_double_orgasm(the_girl) #We have to put this at the end of each double orgasm scene because return doesn't return to where you think it will.
     return

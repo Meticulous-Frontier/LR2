@@ -92,6 +92,7 @@ label SB_fetish_vaginal_family_threesome_label():
         $ scene_manager.remove_actor(the_person)
 
     else:
+        $ the_clothing = mom.outfit.get_lower_top_layer()
         $ scene_manager.add_actor(mom, emotion = "angry")
         mom "Is that... [the_person.name]!?! What are you... why are you naked in [mom.mc_title]'s room?" #NOTE: the_person doesn't necessarily know mom's title for the MC, but still somewhat makes sense.
         "[mom.possessive_title] is shocked to discover that you and [the_person.possessive_title] are in your room, clearly about to get busy."
@@ -116,7 +117,7 @@ label SB_fetish_vaginal_family_threesome_label():
         if mom.outfit.vagina_available():
             "You glance over at [mom.possessive_title]. She is watching you and [the_person.possessive_title] intently and has one hand between her legs, stroking the outer lips of her pussy."
         else:
-            "You glance over and see that [mom.possessive_title] has her hand down her clothes, playing with herself as she watches."
+            "You glance over and see that [mom.possessive_title] has her hand in her [the_clothing.name], playing with herself as she watches."
         $ mc.change_locked_clarity(10)
         $ mom.change_arousal(10)
         "This is going better than you expected! You get a little braver."

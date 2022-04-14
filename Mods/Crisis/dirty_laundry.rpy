@@ -40,14 +40,17 @@ init 3 python:
         return
 
 label dirty_laundry_action_label():
-    $ the_person = get_random_from_list(people_in_mc_home([aunt]))
+    if aunt.event_triggers_dict.get("moving_apartment", 0) == -1:
+        $ the_person = get_random_from_list(people_in_mc_home([aunt]))
+    else:
+        $ the_person = get_random_from_list(people_in_mc_home())
     if the_person is None:
         return
 
     $ old_location = mc.location
     $ set_night_outfit(the_person)
 
-    "You are just drifting off to sleep when you suddenly you remember. You don't have any clean clothes for tomorrow!"
+    "You are just drifting off to sleep when you suddenly remember you don't have any clean clothes for tomorrow!"
     "You look at the clock. It is already pretty late."
     $ mc.change_location(laundry_room)
     $ mc.location.show_background()
@@ -75,7 +78,7 @@ label dirty_laundry_wash_your_clothes(the_person):
             "You take a quick look out the door to make sure the coast is clear, then close it behind you. You grab the panties and then pull your pants down."
             $ mc.change_locked_clarity(10)
             "You wrap the cloth of the panties around your cock and start to work them up and down. The satin texture feels great."
-            "You close your eyes and imagine [the_person.title]. You imagine her in the morning, pulling up her cum filled panties up and wearing them around all day long."
+            "You close your eyes and imagine [the_person.title]. You imagine her in the morning, pulling her cum filled panties up and wearing them around all day long."
             $ ran_num = renpy.random.randint(1,2) # increase for more situations
             if ran_num == 1: #No one catches you
                 $ mc.change_locked_clarity(10)
@@ -108,7 +111,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     the_person "Oh god... can I... can I watch you?"
                     mc.name "Go ahead."
                     "Her eyes go back down to your crotch as you continue to stroke yourself."
-                    mc.name "You should do it too, we all need to get off once a while!"
+                    mc.name "You should do it too, we all need to get off once in a while!"
                     "She looks at you, still a bit conflicted."
                     the_person "I could... I mean... you aren't going to tell anyone about this, are you?"
                     mc.name "Of course not."
@@ -147,7 +150,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                         $ mc.change_locked_clarity(10)
                         "Cupping her ass with your hands, you circle your tongue all around her wet, inviting cunt."
                         the_person "Oh [the_person.mc_title], you have no idea how bad I need this."
-                        "[the_person.possessive_title] runs her hands your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole."
+                        "[the_person.possessive_title] runs her hands through your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole."
                         $ mc.change_locked_clarity(10)
                         "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, your lips making wet, lewd smacking noises."
                         the_person "I am so close... you're gonna make me cum!"
@@ -214,7 +217,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                     "Soon, you feel a hand on yours. There's another whisper in your ear."
                     the_person "Let me... I want to feel you in my hand when you blow your load."
                     $ the_person.break_taboo("touching_penis")
-                    "You let go, and feel [the_person.title]'s hand take over. She continues you kiss and nibble on your neck."
+                    "You let go, and feel [the_person.title]'s hand take over. She continues to kiss and nibble on your neck."
                     $ mc.change_locked_clarity(10)
                     "The sensations are overwhelming, and soon you are ready to cum. She can sense it and jacks you enthusiastically."
                     the_person "Do it! Cum in my panties!"
@@ -282,7 +285,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                             $ the_person.break_taboo("vaginal_sex")
                             $ the_person.break_taboo("condomless_sex")
                             $ mc.change_locked_clarity(20)
-                            "You grab [the_person.title]'s hips and thrust your hips forward, pushing yourself deep inside her. You hold her hips place, enjoying being finally buried in her cunt. She moans loudly at the sudden penetration."
+                            "You grab [the_person.title]'s hips and thrust your hips forward, pushing yourself deep inside her. You hold her hips in place, enjoying being finally buried in her cunt. She moans loudly at the sudden penetration."
                             mc.name "Whoops! Sorry about that!"
                             "You apologize, but don't let go of her hips. She starts to grind against you."
                             the_person "Mmm, that's okay! Just try to pull out when you cum! I still want you to finish in my panties..."
@@ -291,7 +294,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                             $ mc.change_locked_clarity(10)
                             "At the last second, you pull back just enough to pull out of her pussy."
                             "Your first couple of spurts erupt and splash up against her cunt and along the front of her panties. She moans when she feels the splash."
-                            "You pull back completely now and grab your cock. You aim another spurt and one ass check, then for the next one at the other."
+                            "You pull back completely now and grab your cock. You aim a spurt at one ass check, then the next one at the other."
                             $ the_person.cum_on_ass()
 
                         "Finish like this":
@@ -300,7 +303,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                             "The heat coming from her sopping wet slit feels amazing, sliding up and down your erection."
                             "With all the action you've had up until this point, you feel yourself getting ready to finish."
                             "Your first couple of spurts erupt and splash up against her cunt and along the front of her panties. She moans when she feels the splash."
-                            "You pull back completely now and grab your cock. You aim another spurt and one ass check, then for the next one at the other."
+                            "You pull back completely now and grab your cock. You aim a spurt at one ass check, then the next one at the other."
                             $ the_person.cum_on_ass()
 
                     $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
@@ -444,7 +447,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 $ the_item = None
 
                 if not the_person.outfit.vagina_visible():
-                    "You quickly move [the_person.possessive_title] remaining clothing out of the way."
+                    "You quickly move [the_person.possessive_title]'s remaining clothing out of the way."
                     $ the_person.strip_to_vagina(visible_enough = True, prefer_half_off = True, position = "doggy")
                     $ mc.change_locked_clarity(10)
             else:
@@ -452,11 +455,11 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 "Seeing her [the_person.pubes_description] pussy, right in front of you, excites you even more."
 
             if the_person.has_anal_fetish():
-                "You quickly remove your shorts and position yourself behind [the_person.possessive_title] and slide your cock between her ass cheeks."
+                "You quickly remove your shorts, position yourself behind [the_person.possessive_title] and slide your cock between her ass cheeks."
                 the_person "Oh baby! Are you going to fuck my slutty asshole like {i}this{/i}?"
                 call fuck_person(the_person, start_position = doggy_anal, start_object = make_dryer(), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer_2
             else:
-                "You quickly remove your shorts and position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
+                "You quickly remove your shorts, position yourself behind [the_person.possessive_title] and push the tip of your cock against her wet slit."
                 the_person "What the fuck! You're going to fuck me like {i}this{/i}?"
                 mc.name "Yes, and don't pretend that you don't like it, because I know you do."
                 call fuck_person(the_person, start_position = doggy, start_object = make_dryer(), skip_intro = True, position_locked = True, skip_condom = True) from _call_fuck_person_dirty_laundry_stuck_in_dryer_1
@@ -466,7 +469,8 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 $ the_person.change_stats(happiness = -5, love = -5, obedience = -5)
                 $ the_person.draw_person(position = "stand4", emotion = "angry")
                 the_person "Did you really think I would let you fuck me like that?!"
-                the_person "You will be lucky, if I don't tell mom about the stunt you just tried."
+                if the_person is lily:
+                    the_person "You will be lucky, if I don't tell mom about the stunt you just tried."
             elif the_report.get("girl orgasms", 0) > 1:
                 "With your activities concluded, you help [the_person.title] out of the dryer onto shaky legs."
                 $ the_person.change_stats(happiness = 5, obedience = 3)
