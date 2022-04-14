@@ -2,7 +2,7 @@
 init 2 python:
     def milk_employee_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.get_employee_count() > 0:
-            return not select_girl_lactating() is None
+            return any(x for x in mc.business.get_employee_list() if x.lactation_sources > 0)
         return False
 
     def select_girl_lactating():

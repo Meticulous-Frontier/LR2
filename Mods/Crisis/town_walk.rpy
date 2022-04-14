@@ -19,11 +19,11 @@ init 2 python:
 label town_walk_crisis_action_label():
     ## You spy on a neighbor during your town walk activities
     $ the_person = get_town_walk_person()
-    $ old_location = mc.location
     if the_person is None: # this could be no one
         return
 
     # now you know where she lives
+    $ old_location = mc.location
     $ the_person.learn_home()
 
     "While walking around town, you see that the window in [the_person.possessive_title]'s house is open..."

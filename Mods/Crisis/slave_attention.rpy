@@ -3,7 +3,7 @@
 init 3 python:
     def slave_attention_crisis_requirement():
         if time_of_day > 0 and mc.is_home(): #She always sends you texts while you're not at home for the middle part of the day
-            return not get_unhappy_slave() is None
+            return any(x for x in known_people_in_the_game() if x.has_role(slave_role) and x.sex_record.get("Last Sex Day", 0) + 10 < day)
         return False
 
     def get_unhappy_slave():

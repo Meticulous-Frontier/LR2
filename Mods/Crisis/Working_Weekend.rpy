@@ -287,11 +287,11 @@ label SB_working_weekend_crisis_label_medium(person_one):
                     "You decide to ask about her general opinions."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["general"])
 
-                "Ask about a work opinion" if count_topic_opinions(person_one, working_weekend_topics["work"]) > 0:
+                "Ask about work opinions" if count_topic_opinions(person_one, working_weekend_topics["work"]) > 0:
                     "You decide to ask about her opinions about work."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["work"])
 
-                "Ask about a style opinion" if count_topic_opinions(person_one, working_weekend_topics["style"]) > 0:
+                "Ask about style opinions" if count_topic_opinions(person_one, working_weekend_topics["style"]) > 0:
                     "You decide to ask about her opinions about her personal style."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["style"])
 

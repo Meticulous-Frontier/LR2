@@ -22,18 +22,13 @@ init 2 python:
         return
 
     def one_on_one_training_requirement():
-        if not mc.business.is_weekend():
-            if mc.is_at_work():
-                if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-                    return not get_training_employee() is None
+        if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
+            if not mc.business.is_weekend() and mc.is_at_work():
+                return any(x for x in mc.business.get_employee_list() if x.obedience > 110 and x.int > 1 and (mc.hr_skill > x.hr_skill or mc.supply_skill > x.supply_skill or mc.market_skill > x.market_skill or mc.research_skill > x.research_skill or mc.production_skill > x.production_skill))
         return False
 
     def get_training_employee():
-        training_eligible = []
-        for person in [x for x in mc.business.get_employee_list() if x.obedience > 110 and x.int > 1]:
-            if mc.hr_skill > x.hr_skill or mc.supply_skill > x.supply_skill or mc.market_skill > x.market_skill or mc.research_skill > x.research_skill or mc.production_skill > x.production_skill:
-                training_eligible.append(person)
-        return get_random_from_list(training_eligible)
+        return get_random_from_list([x for x in mc.business.get_employee_list() if x.obedience > 110 and x.int > 1 and (mc.hr_skill > x.hr_skill or mc.supply_skill > x.supply_skill or mc.market_skill > x.market_skill or mc.research_skill > x.research_skill or mc.production_skill > x.production_skill)])
 
     def one_on_one_update_HR_skill(person):
         increase = renpy.random.randint(1,(mc.hr_skill - person.hr_skill))
@@ -112,7 +107,7 @@ label SB_one_on_one_label():
     menu:
         "Train HR" if the_person.hr_skill < mc.hr_skill and the_person.get_opinion_score("HR work") > -2:
             "You explain to [the_person.possessive_title] the ins and outs of HR work. You do it in pretty broad terms, but touch on all the important parts."
-            if the_person.get_opinion_score("HR work") == -1:
+            if the_person.get_opinion_score("HR work") < 0:
                 $ dislike = True
                 $ topic = "HR work"
             else:
@@ -120,7 +115,7 @@ label SB_one_on_one_label():
 
         "Train Supply" if the_person.supply_skill < mc.supply_skill and the_person.get_opinion_score("supply work") > -2:
             "You do some hands on training with [the_person.possessive_title], showing her various methods for securing the different chemicals required for serum production."
-            if the_person.get_opinion_score("supply work") == -1:
+            if the_person.get_opinion_score("supply work") < 0:
                 $ dislike = True
                 $ topic = "supply work"
             else:
@@ -128,7 +123,7 @@ label SB_one_on_one_label():
 
         "Train Marketing" if the_person.market_skill < mc.market_skill and the_person.get_opinion_score("marketing work") > -2:
             "You spend some time with [the_person.possessive_title], giving all kinds of advice on the art of the sale. It's not just about good deals, but making people understand they need the product you offer."
-            if the_person.get_opinion_score("marketing work") == -1:
+            if the_person.get_opinion_score("marketing work") < 0:
                 $ dislike = True
                 $ topic = "marketing work"
             else:
@@ -136,7 +131,7 @@ label SB_one_on_one_label():
 
         "Train Research" if the_person.research_skill < mc.research_skill and the_person.get_opinion_score("research work") > -2:
             "You talk with [the_person.possessive_title] about various chemicals and scientific methods, and how they apply to different portions of the brain."
-            if the_person.get_opinion_score("research work") == -1:
+            if the_person.get_opinion_score("research work") < 0:
                 $ dislike = True
                 $ topic = "research work"
             else:
@@ -144,7 +139,7 @@ label SB_one_on_one_label():
 
         "Train Production" if the_person.production_skill < mc.production_skill and the_person.get_opinion_score("production work") > -2:
             "You share some insights with [the_person.possessive_title] about the chemical processes and reactions between common serum elements."
-            if the_person.get_opinion_score("production work") == -1:
+            if the_person.get_opinion_score("production work") < 0:
                 $ dislike = True
                 $ topic = "production work"
             else:
@@ -167,8 +162,8 @@ label SB_one_on_one_label():
         else:
             "As you get further into the details you recall that [the_person.title] doesn't really like [topic]."
         "Since it is too late to start over you shift focus, talking up the positive and enjoyable parts of the job."
-        if renpy.random.randint(0, 100) < mc.charisma: #10% at best
-            "Suprisingly it seems to work and [the_person.title] starts to nod along as you finish talking."
+        if renpy.random.randint(0, 100) < mc.charisma * 5: # about 50% max success rate
+            "Surprisingly it seems to work and [the_person.title] starts to nod along as you finish talking."
             $ the_person.increase_opinion_score(topic)
             the_person "You know, when you say it that way, maybe it wouldn't be so bad to do that everyday."
         else:
@@ -179,4 +174,3 @@ label SB_one_on_one_label():
 
     $ clear_scene()
     return
-

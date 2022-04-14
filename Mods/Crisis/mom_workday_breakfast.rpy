@@ -101,15 +101,14 @@ label mom_breakfast_action_label_medium():
             "[the_person.title] gets up and gives you a quick peck on the cheek."
             $ scene_manager.update_actor(the_person, position = "stand4")
             the_person "You have a good day at work, I'm going to go umm, get changed!"
-            $ the_person.draw_person(position = "walking_away")
-            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 30)
-            $ planned_outfit = the_person.planned_outfit
-                if planned_outfit.get_panties():
-                    $ planned_outfit.remove_clothing(planned_outfit.get_panties())
-            $ the_person.planned_outfit = planned_outfit
-            $ the_person.apply_planned_outfit()
-            if the_person.sluttiness > 50:
-                $ mc.business.add_mandatory_crisis(mom_commando_day_selfie_action)
+            python:
+                the_person.draw_person(position = "walking_away")
+                the_person.change_stats(obedience = 5, slut = 1, max_slut = 30)
+                if the_person.planned_outfit.get_panties():
+                    the_person.planned_outfit.remove_clothing(the_person.planned_outfit.get_panties())
+                the_person.apply_planned_outfit()
+                if the_person.sluttiness > 50:
+                    mc.business.add_mandatory_crisis(mom_commando_day_selfie_action)
             return None
         "Give Her Some Attention":  #Sluttiness staircase event, take it farther the sluttier she is
             mc.name "I'm sorry [the_person.title], I didn't realize you were in need of some attention!"

@@ -59,11 +59,13 @@ init 3303 python:
         return False
 
     def mistress_hunt_for_me_prey(person):
-        valid_people_list = []
-        for target in known_people_at_location(mc.location, [person]):
-            if willing_to_threesome(person, target):
-                valid_people_list.append(target)
-        return get_random_from_list(valid_people_list)
+        # first find a non-employee target
+        target = get_random_from_list([x for x in known_people_at_location(mc.location, [person]) if not x.has_role([stripclub_mistress_role, stripclub_manager_role, stripclub_bdsm_performer_role, stripclub_waitress_role, stripclub_stripper_role])])
+        if target:
+            return target
+
+        # alternative find an employee target
+        return get_random_from_list([x for x in known_people_at_location(mc.location, [person]) if willing_to_threesome(person, x)])
 
     def promote_strip_club_stripper_to_manager(person):
         if person.love <= 0:
@@ -152,24 +154,26 @@ label mistress_role_remove_label(the_person):
     return
 
 label mistress_hunt_for_me_label(the_person):
+    $ scene_manager = Scene()
     mc.name "Do you think you can find a girl here to have some fun with?"
     the_person "Oh, 'that' kind of fun, [the_person.mc_title]? Sure, let me see..."
-    $ the_person.draw_person(position = "walking_away")
+    $ scene_manager.add_actor(the_person, position = "walking_away")
     "She starts scanning the room, looking for a new victim."
-    $ the_person.draw_person(position = "back_peek")
+    $ scene_manager.update_actor(the_person, position = "back_peek")
     the_person "I think I've found what we're looking for, let me work my magic."
-    $ the_person.draw_person(position = "walking_away")
+    $ scene_manager.update_actor(the_person, position = "walking_away")
     "She arranges her clothes and starts moving closer to her prey..."
     $ the_person_two = mistress_hunt_for_me_prey(the_person)
+    $ scene_manager.hide_actor(the_person)
     if the_person_two is None:
-        $ the_person.draw_person(emotion = "sad")
+        $ scene_manager.show_actor(the_person, position = "stand3", emotion = "sad")
         the_person "Amazing, she's not interested and I cannot find anyone else... Am I losing my touch?"
         return
     "After a couple of minutes the girls are back."
-    $ the_person.draw_person(emotion = "happy", position = "stand4")
+    $ scene_manager.show_actor(the_person, position = "stand4", emotion = "happy")
+    $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped, position = "stand2", emotion = "happy")
     the_person "I told her we have something nice planned for her, [the_person.mc_title]..."
     mc.name "Good choice [the_person.title]! So [the_person_two.title], would you like to join us?"
-    $ the_person_two.draw_person(emotion = "happy", position = "stand2")
     the_person_two "It would be my pleasure [the_person.mc_title]!" # Only known people answer this tnx to the high obedience required
     mc.name "Ok, let's find a more appropriate place, follow me girls!"
     $ mc.change_location(downtown_hotel)
@@ -179,10 +183,15 @@ label mistress_hunt_for_me_label(the_person):
     $ mc.business.change_funds(-80)
     $ downtown_hotel_room.show_background()
 
-    $ scene_manager = Scene()
-    $ scene_manager.add_actor(the_person_two, position = "walking_away")
-    $ scene_manager.add_actor(the_person, position = "back_peek")
+    $ scene_manager.update_actor(the_person, position = "back_peek")
+    $ scene_manager.update_actor(the_person_two, position = "walking_away")
     "You open the door of the room and motion the girls to come in. You notice [the_person.title] already grabbing [the_person_two.title]'s ass."
+    if not the_person.vagina_available():
+        "[the_person_two.possessive_title] starts moving some of your mistress's clothing to get access to her [the_person.pubes_description] pussy."
+        $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "back_peek")
+    if not the_person_two.vagina_available():
+        "Your mistress is eager to get access to [the_person_two.possessive_title]'s pussy."
+        $ the_person_two.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "walking_away")
     call start_threesome(the_person, the_person_two, girl_in_charge = the_person, start_object = make_bed(), affair_ask_after = False) from _call_start_threesome_mistress_hunt_for_me_label
     "Once you've all had your fun, you and the girls go back to the Strip Club."
     $ scene_manager.clear_scene()

@@ -13,31 +13,23 @@
 init 2 python:
     def SB_caught_masturbating_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
-            return len(girl_masturbating_list()) > 0
+            return any(x for x in mc.business.get_employee_list() if x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating")))
         return False
 
-    def girl_masturbating_list():
-        list = []
-        for person in [x for x in mc.business.get_employee_list() if x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))]:
-            list.append(person)
-        return list
+    def select_girl_masturbating(excluded = None):
+        return get_random_from_list([x for x in mc.business.get_employee_list() if not x == excluded and x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
 
     SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True)
 
 label SB_caught_masturbating_crisis_label():
-    $ the_list = girl_masturbating_list()
-    if the_list:
-        $ the_person = get_random_from_list(the_list)
-    else:
+    $ the_person = select_girl_masturbating()
+    if the_person is None:
         # "No one eligible for masturbating!"
         return
 
     $ the_clothing = the_person.outfit.get_lower_top_layer() #Get the very top item of clothing.
-
-    if len(the_list) > 1:
-        $ the_list.remove(the_person)
-        $ the_person_two = get_random_from_list(the_list)
+    $ the_person_two = select_girl_masturbating(the_person)
 
     "You decide to take a quick break from what you are doing. You stand up and stretch your legs, and go for a quick walk."
     "While you are walking by an unused storage room, you hear some muffled sounds coming from inside."
@@ -143,10 +135,7 @@ label SB_caught_masturbating_crisis_label():
                                 "You drop down on the floor in front of her. With her pussy exposed you waste no time diving right in."
                             else:                                              #Otherwise, strip her down.
                                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy."
-                                if the_person.outfit.can_half_off_to_vagina():
-                                    $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), position = "missionary", half_off_instead = True)
-                                else:
-                                    $ generalised_strip_description(the_person, the_person.outfit.get_full_strip_list(), position = "missionary")
+                                $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "missionary")
                                 $ mc.change_locked_clarity(20)
                                 "With her pussy finally exposed you waste no time diving right in."
                             $ the_person.break_taboo("bare_pussy")
@@ -276,12 +265,7 @@ label SB_caught_masturbating_crisis_label():
                     elif the_person.has_anal_fetish():
                         the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
                         if not the_person.outfit.vagina_available():
-                            "[the_person.possessive_title] moves her clothes out of the way."
-                            if the_person.outfit.can_half_off_to_vagina():
-                                $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "doggy")
-                            else:
-                                "[the_person.possessive_title] begins to pull off her clothes."
-                                $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "doggy")
+                            $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "doggy")
                         $ mc.change_locked_clarity(50)
                         $ the_person.break_taboo("bare_pussy")
                         the_person "Could you just like... stick it in my ass for a bit? I'm trying to masturbate but not getting anywhere with it... you know how much I love it in my ass..."
@@ -335,11 +319,7 @@ label SB_caught_masturbating_crisis_label():
                         the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
                         if not the_person.outfit.vagina_available():
                             "[the_person.possessive_title] moves her clothes out of the way."
-                            if the_person.outfit.can_half_off_to_vagina():
-                                $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "doggy")
-                            else:
-                                "[the_person.possessive_title] begins to pull off her clothes."
-                                $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "doggy")
+                            $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "doggy")
                         $ mc.change_locked_clarity(20)
                         $ the_person.break_taboo("bare_pussy")
                         the_person "Could you just give me a little quickie? I'm all warmed up, you could just stick it in right now..."

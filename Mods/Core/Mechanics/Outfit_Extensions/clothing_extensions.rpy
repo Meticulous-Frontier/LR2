@@ -16,7 +16,7 @@ init -1 python:
 
     # add clothing hash function
     def clothing_hash(self):
-        return hash((self.name, self.is_extension, self.pattern,
+        return hash((self.name, self.is_extension, self.pattern, self.half_off,
             tuple(x for x in map(hash, self.colour_pattern)),
             tuple(x for x in map(hash, self.colour)),
             ))

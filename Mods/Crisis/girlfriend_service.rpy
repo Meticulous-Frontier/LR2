@@ -2,7 +2,7 @@
 init 2 python:
     def girlfriend_service_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
-            return not girlfriend_service_get_person() is None
+            return any(x for x in mc.business.get_employee_list() if x.has_role(girlfriend_role))
         return False
 
     def girlfriend_service_get_person():
