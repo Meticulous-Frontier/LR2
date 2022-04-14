@@ -2585,6 +2585,18 @@ init -1 python:
 
     Person.is_in_trance = is_in_trance
 
+    def is_free_use(self):  #Use this function to determine if the girl is very slutty and basically down for anything.
+        if self.sluttiness < 80:
+            return False
+        for x in self.sexy_opinions: #Has any negative sexy opinions.
+            if self.get_opinion_score(x) < 0:
+                return False
+        if self.has_taboo("vaginal_sex") or self.has_taboo("anal_sex"):
+            return False
+        return True
+
+    Person.is_free_use = is_free_use
+
 #Intern functions
 
     def is_intern(self):
