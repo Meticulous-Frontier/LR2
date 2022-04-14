@@ -1137,7 +1137,7 @@ label kaya_erica_trans_scene_4(the_person_one, the_person_two):
     "You can't believe it... [kaya.possessive_title] just suggested a mandatory threesome!"
     $ mc.change_locked_clarity(100)
     erica "Ohhh... [kaya.name]. You are so sweet."
-    erica "I'm down for that! What do you think [erica.title]? I feel like no matter what happens it'll be a happy ending for you!"
+    erica "I'm down for that! What do you think [erica.mc_title]? I feel like no matter what happens it'll be a happy ending for you!"
     mc.name "Yes, I think those terms are acceptable. Let's get started!"
     if not kaya.outfit.vagina_visible():
         $ scene_manager.strip_to_vagina(kaya)
