@@ -1115,7 +1115,7 @@ label ellie_work_enter_greeting(the_person):
         if the_person.obedience > 120:
             "[the_person.title] gives you a curt nod and then turns back to what she was doing."
         else:
-            "[the_person.title] glances at you when you enters the room, then looks away quickly to avoid starting a conversation."
+            "[the_person.title] glances at you when you enter the room, then looks away quickly to avoid starting a conversation."
 
     elif the_person.happiness > 120:
         if the_person.sluttiness > 50:

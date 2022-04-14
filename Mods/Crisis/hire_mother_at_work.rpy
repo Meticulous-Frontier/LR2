@@ -3,7 +3,7 @@
 
 init 2 python:
     def hire_mother_work_crisis_requirement():
-        # Requires you to have an employee over a certain age, with at least one kid, who hasn't been introduced to the game yet.
+        # Requires you to have an employee under a certain age, with a mother, who hasn't been introduced to the game yet.
         # Requires you and her to be at work.
         # Requires you to have a free slot in the company
         if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.get_employee_count() < mc.business.max_employee_count:
@@ -76,7 +76,7 @@ label hire_mother_work_crisis_label():
 
                     "Tell her you aren't hiring":
                         if the_person.love < 10:
-                            mc.name "If I want to fuck you I wouldn't need to hire your mother to do it. Give it up, you look desperate."
+                            mc.name "If I wanted to fuck you I wouldn't need to hire your mother to do it. Give it up, you look desperate."
                             $ the_person.change_obedience(3)
                             "She steps back and looks away."
                             $ the_person.draw_person(emotion = "sad")
@@ -87,14 +87,14 @@ label hire_mother_work_crisis_label():
                             $ the_person.change_obedience(1)
                             "She takes the resume back and steps away from your desk, defeated."
                             $ the_person.draw_person(emotion = "sad")
-                            the_person "Right, of course. Sorry for wasting up your time."
+                            the_person "Right, of course. Sorry for wasting your time."
                         $ clear_scene()
                         return
             elif promised_sex:
                 the_person "There's nothing I could do? Nothing at all?"
                 "She moves to run a hand down your shirt, but you shove the resume back into her hand."
                 if the_person.love < 10:
-                    mc.name "If I want to fuck you I wouldn't need to hire your mother to do it. Give it up, you look desperate."
+                    mc.name "If I wanted to fuck you I wouldn't need to hire your mother to do it. Give it up, you look desperate."
                     $ the_person.change_obedience(3)
                     "She steps back and looks away."
                     $ the_person.draw_person(emotion = "sad")
@@ -105,7 +105,7 @@ label hire_mother_work_crisis_label():
                     $ the_person.change_obedience(1)
                     "She takes the resume back and steps away from your desk, defeated."
                     $ the_person.draw_person(emotion = "sad")
-                    the_person "Right, of course. Sorry for wasting up your time."
+                    the_person "Right, of course. Sorry for wasting your time."
                 $ clear_scene()
                 return
 

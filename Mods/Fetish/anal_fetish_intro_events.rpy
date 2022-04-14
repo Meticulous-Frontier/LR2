@@ -422,7 +422,7 @@ label anal_fetish_generic_intro_label(the_person):
 
     "[the_person.title] takes your hand. You take a few minutes to find somewhere private where you won't be interrupted."
     $ the_person.draw_person(position = "kissing")
-    "She throws her arms around you and you start to make out. You hands drop to her ass and you start to grope her aggressively."
+    "She throws her arms around you and you start to make out. Your hands drop to her ass and you start to grope her aggressively."
     the_person "Mmm... that feels nice..."
     "You give her ass a rough spank."
     $ the_person.change_arousal(5) #45
@@ -734,7 +734,7 @@ label anal_fetish_lily_intro_label():
     "[the_person.possessive_title] takes the lead."
     the_person "Yeah so, I was wondering, do you sell a special type of strap-on that came be used to... umm... strap on to a guy so he can fuck your pussy and ass at the same time?"
     "You can barely believe your ears. You knew that the serums you had been giving [the_person.title] were starting to really corrupt her, but you had no idea she was ready for something like this."
-    "And for her instapic channel? It's almost too good to be true."
+    "And for her InstaPic channel? It's almost too good to be true."
     $ mc.change_locked_clarity(30)
     $ starbuck.draw_person(emotion = "happy")
     starbuck "Oh! I've got just the thing! Follow me!"

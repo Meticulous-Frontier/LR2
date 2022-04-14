@@ -307,7 +307,7 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
                 $ the_girl.cum_in_ass()
                 $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
                 $ anal_on_lap.redraw_scene(the_girl)
-                "As soon as you let go of her she immediately pops off and stands over you. Her ass gives a little squelch as you cum leaks from it onto your lap."
+                "As soon as you let go of her she immediately pops off and stands over you. Her ass gives a little squelch as your cum leaks from it onto your lap."
                 the_person "God dammit, that's now how that was supposed to go. Next time I'm putting handcuffs on you first..."
             "Beg her to finish inside":
                 mc.name "No! Stop! Please! I want to cum inside you so bad!"

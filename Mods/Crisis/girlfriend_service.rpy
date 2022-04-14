@@ -146,7 +146,7 @@ label girlfriend_service_label():
                 "You can tell she is a little saddened, but she backs off and goes back to her work."
 
     if public_session:
-        "As you put your cock back in your pants, the activity in the room return to normal."
+        "As you put your cock back in your pants, the activity in the room returns to normal."
         "Your girlfriend has a smile on her face as she finishes cleaning up."
         $ the_person.change_happiness(5)
     $ clear_scene()

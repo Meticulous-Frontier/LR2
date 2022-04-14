@@ -33,9 +33,7 @@ label mom_breakfast_action_label():
         the_person = mom
         scene_manager = Scene()
     #"When you walk out to the kitchen, you see [the_person.title] just sitting down to some breakfast."
-    #$ the_person.draw_person(position = "sitting")
-
-    # surprise scene, you walk into the kitchen an mom and lily are going at it
+    # surprise scene, you walk into the kitchen and mom and lily are going at it
     if mc.business.event_triggers_dict.get("family_threesome", False) == True and renpy.random.randint(0, 3) == 1:
         call mom_breakfast_action_mom_and_lily_label() from _call_mom_breakfast_action_mom_and_lily_label
     else:
@@ -105,6 +103,11 @@ label mom_breakfast_action_label_medium():
             the_person "You have a good day at work, I'm going to go umm, get changed!"
             $ the_person.draw_person(position = "walking_away")
             $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 30)
+            $ planned_outfit = the_person.planned_outfit
+                if planned_outfit.get_panties():
+                    $ planned_outfit.remove_clothing(planned_outfit.get_panties())
+            $ the_person.planned_outfit = planned_outfit
+            $ the_person.apply_planned_outfit()
             if the_person.sluttiness > 50:
                 $ mc.business.add_mandatory_crisis(mom_commando_day_selfie_action)
             return None
@@ -137,7 +140,7 @@ label mom_breakfast_action_label_medium():
                         "Your hands return to her chest, her boobs feel hot and soft in your hands."
 
                     "Finish Massage":
-                        "[the_person.possessive_title] feel great, but eventually you decide it is too risky to keep going."
+                        "[the_person.possessive_title] feels great, but eventually you decide it is too risky to keep going."
                         "[the_person.title] shakes her head a bit as you sit back down, as if trying to clear some thoughts from her head."
                         return None
             #Assume we are still going
@@ -184,7 +187,7 @@ label mom_breakfast_action_label_medium():
             "You dip two fingers into her honeypot. She moans as your begin to stir your fingers for a bit."
             the_person "Oh honey, that feels so good..."
             $ the_person.change_arousal(20) #85
-            "Her hip are beginning to move on their own now, needily grinding against your hand."
+            "Her hips are beginning to move on their own now, needily grinding against your hand."
             "Her breathing is getting ragged. You begin to circle her clit with your fingers, trying to finish her off."
             the_person "Oh! That's it! Oh god I'm gonna..."
             "[the_person.title]'s body tenses, then convulses. She is able to muffle her noises to a whimper, trying not to alarm your sister."
@@ -215,7 +218,7 @@ label mom_breakfast_action_label_high():
     "[the_person.title] mutters to herself for a moment. Then she looks over at you."
     $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
     the_person "Say... you look awfully handsome this morning..."
-    "She looks around, and notices the door to sister's room is still closed. She must be sleeping in."
+    "She looks around, and notices the door to your sister's room is still closed. She must be sleeping in."
     the_person "I had some really crazy dreams last night, it would be nice if I could release a little tension before work. Are you up for a quickie?"
     menu:
         "Have a Quickie" if not the_person.has_taboo("condomless_sex"):

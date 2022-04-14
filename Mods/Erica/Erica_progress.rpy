@@ -3,13 +3,13 @@ init 10 python:
     def erica_story_love_list():
         love_story_list = []
         if erica_get_is_doing_yoga_sessions() and erica_get_is_doing_insta_sessions():
-            love_story_list.append("You helped [erica.title] earn some extra money doing Instapic and Yoga.")
+            love_story_list.append("You helped [erica.title] earn some extra money doing InstaPic and Yoga.")
         elif erica_get_is_doing_yoga_sessions():
             love_story_list.append("You helped [erica.title] earn some extra money doing Yoga.")
             love_story_list.append("Try working with [lily.title] to help [erica.title] earn some extra money.")
             return love_story_list
         elif erica_get_is_doing_insta_sessions():
-            love_story_list.append("You helped [erica.title] earn some extra money doing Instapic with [lily.title].")
+            love_story_list.append("You helped [erica.title] earn some extra money doing InstaPic with [lily.title].")
             love_story_list.append("Try working with your HR Director to help [erica.title] earn some extra money.")
             return love_story_list
         elif erica_is_looking_for_work():
@@ -24,7 +24,7 @@ init 10 python:
             return love_story_list
 
         if erica_pre_insta_blowjob_complete():
-            love_story_list.append("[erica.title] showed her appreciation by giving you a blowjob before an Instapic session!")
+            love_story_list.append("[erica.title] showed her appreciation by giving you a blowjob before an InstaPic session!")
         elif erica.love <= 40:
             love_story_list.append("Try increasing her love to continue this story.")
             return love_story_list
@@ -32,7 +32,7 @@ init 10 python:
             love_story_list.append("[erica.title] needs to be willing to give you a blowjob. Make sure her sluttiness is high enough and she doesn't hate that act!")
             return love_story_list
         else:
-            love_story_list.append("Make sure to be there to take pics for [erica.title] and [lily.title]'s next Instapic session.")
+            love_story_list.append("Make sure to be there to take pics for [erica.title] and [lily.title]'s next InstaPic session.")
             return love_story_list
 
         if erica_post_yoga_fuck_complete():

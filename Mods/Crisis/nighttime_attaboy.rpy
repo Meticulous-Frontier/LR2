@@ -34,8 +34,8 @@ init 1 python:
         "Handjob" : "I could barely get my hand around your monster cock and started stroking it.",
         "Kissing" : "When our lips met. The electric jolt I got, I knew this was going to be an amazing session.",
         "Missionary" : "You put me on my back and slid inside of me.",
-        "Piledriver" : "You lift up my ankles up in the air started pounding me.",
-        "Skull Fuck" : "You grabbed me by the hair and starting fucking my face.",
+        "Piledriver" : "You lift my ankles up in the air and started pounding me.",
+        "Skull Fuck" : "You grabbed me by the hair and started fucking my face.",
         "Fingering" : "Your fingers slipped inside of me.",
         "Groping" : "Your hands started to roam all over my body, it felt so good.",
         "Tit Fuck" : "I slipped your cock between my big tits.",
@@ -77,8 +77,8 @@ init 1 python:
         "fetish creampies" : "I tried to keep it all in, but I could feel your cum leaking from my pussy all day. I'm so turned on just thinking about it!",
         "fetish anal creampies" : "I'm touching myself right now and I can still feel a little of your cum leaking out.",
         "fetish drinking cum" : "Your cum tastes so good, I wish I could swallow another load right now!",
-        "fetish cum facials" : "Your cum feels so good, wish I could take another load right now!",
-        "fetish cum on tits" : "My tits are aching right now, wish you could cover them with another load right now!",
+        "fetish cum facials" : "Your cum feels so good, I wish I could take another load right now!",
+        "fetish cum on tits" : "My tits are aching right now, I wish you could cover them with another load right now!",
         "fetish cum on stomach" : "Each spurt felt like lightning on my skin!",
         "fetish cum on ass" : "You can bend me over and cum on my ass anytime!",
         "fetish public sex" : "I just love it when you fuck me while other people are watching."
@@ -180,7 +180,6 @@ label crisis_nighttime_attaboy_label():
     mc.name "What are you doing now?"
     the_person "Oh, not much. Wanna see?"
     mc.name "Hell yeah"
-    #TODO branch here if the person is at MC's house.
     if len(the_person.location.people) > 1:
         the_person "Sorry! There's too many people around for me to snap any sexy pics..."
         $ the_person.draw_person(emotion = "happy")
@@ -213,7 +212,7 @@ label crisis_nighttime_attaboy_label():
                 call fuck_person(the_person) from _call_fuck_person_attaboy_encore_01
                 "When you finish, [the_person.possessive_title] lays back in her bed."
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
-                the_person "I think I'll be able to sleep good now!"
+                the_person "I think I'll be able to sleep well now!"
                 "You say goodnght to [the_person.possessive_title], then quietly got back to your room for the night."
 
                 $ mc.location.show_background()

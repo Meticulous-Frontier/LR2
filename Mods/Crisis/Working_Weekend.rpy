@@ -136,7 +136,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                         "When her ass runs up against the desk, she reaches down and begins unzipping your pants."
                         $ mc.change_locked_clarity(30)
                         $ person_one.break_taboo("condomless_sex")
-                        "She pulls your your dick out and lays back. She lines you up with her pussy and push yourself into her."
+                        "She pulls your your dick out and lays back. She lines you up with her pussy and you push yourself into her."
                         call fuck_person(person_one, start_position = missionary, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_sex_description_SB15
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 0:
@@ -244,7 +244,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
     $ mc.change_locked_clarity(10)
     mc.name "Yes, [person_one.title], of course I do... but... it IS rather boring around here. I'd be grateful for a bit of company while I'm working"
     "[person_one.possessive_title] smiles at you. And was that a wink?"
-    person_one "Oh! [person_one.mc_title], I was about to go out, but seeing you here still working on the weekend, I'd be glad to stay here with you a bit and give you a bit of a... distraction for a bit."
+    person_one "Oh! [person_one.mc_title], I was about to go out, but seeing you here still working on the weekend, I'd be glad to stay here with you a bit and give you a bit of a... distraction."
     "The suggestion in her voice is apparent with the last statement. You briefly consider her offer before making a request..."
     menu:
         "How about a blowjob?\n{color=#ff0000}{size=18}Modifiers: +20 Sluttiness, +5 Obedience{/size}{/color}":
@@ -277,7 +277,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
             $ person_one.clear_situational_slut("seduction_approach")
             $ person_one.clear_situational_obedience("seduction_approach")
             $ person_one.draw_person()
-            "Eventually, [person_one.possessive_title] gets up. She says goodbye after giving you a quick kiss"
+            "Eventually, [person_one.possessive_title] gets up. She says goodbye after giving you a quick kiss."
         "Just Talk":
             "You decide to take the opportunity to learn a little more about [person_one.possessive_title]."
             "You chit chat about various things. You decide to probe a little further about her interests."
@@ -287,11 +287,11 @@ label SB_working_weekend_crisis_label_medium(person_one):
                     "You decide to ask about her general opinions."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["general"])
 
-                "Ask about a work opinions" if count_topic_opinions(person_one, working_weekend_topics["work"]) > 0:
+                "Ask about a work opinion" if count_topic_opinions(person_one, working_weekend_topics["work"]) > 0:
                     "You decide to ask about her opinions about work."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["work"])
 
-                "Ask about a style opinions" if count_topic_opinions(person_one, working_weekend_topics["style"]) > 0:
+                "Ask about a style opinion" if count_topic_opinions(person_one, working_weekend_topics["style"]) > 0:
                     "You decide to ask about her opinions about her personal style."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["style"])
 
@@ -312,7 +312,7 @@ label SB_working_weekend_crisis_label_low(person_one):
             person_one "Yes, absolutely. I'll do everything I can to make sure this business is successful."
 
         "Stress the importance of satisfaction":
-            mc.name "I've worked hard to build this place into what it is. Even though it is the weekend, I can't help but come out here and work on improving the business in anyway I can..."
+            mc.name "I've worked hard to build this place into what it is. Even though it is the weekend, I can't help but come out here and work on improving the business in any way I can..."
             mc.name "But it can be easy to burn yourself out in this line of business. Pay might not always be great and the hours might be long, but a good attitude is key."
             "[person_one.possessive_title] nods in agreement."
             mc.name "You are doing a great job for me so far, [person_one.title], but take care of yourself, and don't let yourself get burned out."

@@ -342,7 +342,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
     $ the_person.draw_person(position = "kissing")
-    "She throws her arms around you and you start to make out. You hands drop to her ass and you start to grope her aggressively."
+    "She throws her arms around you and you start to make out. Your hands drop to her ass and you start to grope her aggressively."
     the_person "Oh god, I'm not sure I can make it to the bedroom."
     $ the_person.draw_person(position = "against_wall")
     $ the_person.change_arousal(10) #50

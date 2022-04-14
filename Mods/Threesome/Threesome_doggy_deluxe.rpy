@@ -217,7 +217,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_l
         "You use both hands to grab her hips and slam yourself into her as deep as you can go."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     else:
-        "Fucking her hard, [the_girl_2.possessive_title] moans, matching each hip movement of yours with movement of her own."
+        "Fucking her hard, [the_girl_2.possessive_title] moans, matching each hip movement of yours with a movement of her own."
         "[the_girl_2.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accommodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     the_girl_1 "I know it feels good, but don't forget you need to get me off too!"
