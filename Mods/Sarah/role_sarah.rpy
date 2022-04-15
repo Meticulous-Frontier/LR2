@@ -3292,7 +3292,7 @@ label Sarah_naomi_visits_to_apologize_label():
                 mc.name "Well, get down to business [the_person.title]."
             $ scene_manager.update_actor(the_person, position = "doggy" , display_transform = Threesome_doggy_deluxe_girl_two_transform, z_order = 1)
             $ sarah.change_arousal(20)
-            "[the_person.name] moves between her friends legs, and slowly starts licking her [sarah.pubes_description] fold."
+            "[the_person.name] moves between her friend's legs, and slowly starts licking her [sarah.pubes_description] fold."
             sarah "Oh yes, right there, sweety."
             "While [the_person.name] is doing her best to satisfy [sarah.possessive_title], you position yourself right behind her."
             mc.name "I think she needs some extra motivation, don't you agree [sarah.title]?"
@@ -3300,7 +3300,7 @@ label Sarah_naomi_visits_to_apologize_label():
             the_person "*SLAP*... Aargh... *SLAP*... hmm... *SLAP*... MMM..."
             $ the_person.change_arousal(20)
             $ sarah.change_arousal(20)
-            "Occasionally, you move your hands between her legs to check how wet she is and she's is getting wetter by the minute."
+            "Occasionally, you move your hands between her legs to check how wet she is, and she's getting wetter by the minute."
             $ the_person.change_arousal(20)
             $ sarah.change_arousal(20)
             "[sarah.possessive_title] is close to orgasm, judging by her groans getting louder and louder."
@@ -3398,7 +3398,7 @@ label Sarah_date_ends_at_your_place_label(the_person):
         the_person "Thank you for the good time tonight. I love you."
         mc.name "I love you too."
         the_person "Do you care if I just stay here tonight? I umm... actually brought my toothbrush..."
-        mc.name "Of course! I wouldn't have it any other way!."
+        mc.name "Of course! I wouldn't have it any other way!"
         $ the_person.change_love(5)
         $ scene_manager.strip_full_outfit(person = the_person, strip_feet = True)
         $ scene_manager.update_actor(the_person, position = "walking_away")

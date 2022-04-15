@@ -262,7 +262,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
             else:
                 "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load as deep inside of her as you can get it."
                 if the_girl_2.wants_creampie():
-                    the_girl_2  "MMMM! Yes yes yeessshhhh"
+                    the_girl_2  "MMMM! Yes yes yeessshhhh..."
                     "You can make out a few words of excitement from [the_girl_2.possessive_title] as she buries her face in [the_girl_1.title]'s cunt."
                 $ the_girl_2.cum_in_vagina()
                 $ scene_manager.draw_scene()

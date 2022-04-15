@@ -1470,7 +1470,7 @@ label ellie_cunnilingus_office_label(the_person):
     "You continue to stroke and can feel her hips moving again. You lick her clit a few times now, and then start to suckle it again."
     $ the_person.change_arousal(15) #95
     "Your skillful assault on [the_person.possessive_title]'s body is paying off. She is writhing from your touch and her legs wrap around your back even more urgently now."
-    the_person "I'M.!. HOW IS THIS!?! [the_person.mc_title]??? I'M GONNA GO AGAIN!"
+    the_person "I'M!... HOW IS THIS!?! [the_person.mc_title]??? I'M GONNA GO AGAIN!"
     "That's your cue. Thankfully [the_person.title] is very vocal, so it is easy to gauge when it is time to focus."
     "You suckle her clit urgently now, and your finger strokes her silky insides as her entire body begins to tremble."
     $ the_person.have_orgasm(the_position = "missionary", half_arousal = False)

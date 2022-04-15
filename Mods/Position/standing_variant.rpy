@@ -121,7 +121,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                     "I wanna creampie you":
                         if the_girl.wants_creampie():
                             "[the_girl.possessive_title]'s legs shake for a second. She peeks back at you with lust in her eyes."
-                            the_girl "I'm already so full... I can't wait to feel you blow inside me"
+                            the_girl "I'm already so full... I can't wait to feel you blow inside me."
                             "She seems to be into creampies!"
                             mc.name "Don't worry, I'm gonna put this cum where it belongs."
                             $ the_girl.discover_opinion("creampies")
@@ -242,7 +242,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                             the_girl "Do it! Give me your cum! I want it so bad."
                         elif the_girl.wants_creampie():
                             "[the_girl.possessive_title]'s legs shake for a second. She peeks back at you with lust in her eyes."
-                            the_girl "I'm already so full... I can't wait to feel you blow inside me"
+                            the_girl "I'm already so full... I can't wait to feel you blow inside me."
                             "She seems to be into creampies!"
                             mc.name "Don't worry, I'm gonna put this cum where it belongs."
                             $ the_girl.discover_opinion("creampies")

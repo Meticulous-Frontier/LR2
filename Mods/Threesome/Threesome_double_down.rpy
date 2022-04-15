@@ -162,7 +162,7 @@ label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_lo
 
 label outro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "You feel yourself go past the point of no return, but there is nothing you can do. With [the_girl_2.title]'s pussy in your face, you can't really even get out a warning."
-    "You give [the_girl_2.possessive_title]'s ass a hard spank a moan, as you feel yourself begin to dump your cum inside of [the_girl_1.title]."
+    "You give [the_girl_2.possessive_title]'s ass a hard spank and moan as you feel yourself begin to dump your cum inside of [the_girl_1.title]."
     $ the_girl_1.cum_in_vagina()
     $ scene_manager.draw_scene()
     $ ClimaxController.manual_clarity_release(climax_type = "vagina", the_person = the_girl_1)

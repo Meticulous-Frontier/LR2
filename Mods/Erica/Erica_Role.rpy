@@ -1634,7 +1634,7 @@ label erica_yoga_event_intro_label():
         erica_apply_yoga_outfit_to_class([the_person, yoga_assistant] + yoga_list)
         erica.event_triggers_dict["yoga_assistant"] = yoga_assistant.identifier
 
-    "It's Tuesday morning, it is weekly morning yoga day! While you don't think you'll need to go every time, since this the inaugural session, it might be good for you to oversee, just in case there are any issues."
+    "It's Tuesday morning, it is weekly morning yoga day! While you don't think you'll need to go every time, since this is the inaugural session, it might be good for you to oversee it, just in case there are any issues."
     if mc.is_at_work():
         "You go down to the lobby to see how things are working out."
         $ mc.change_location(lobby)
@@ -3077,7 +3077,7 @@ label erica_post_yoga_love_label():
     mc.name "If what is going to work?"
     the_person "I ummm... errmm... I mean..."
     "She stutters, suddenly realizing what she said. Then she sighs."
-    the_person "I guess I mean us? Like, we've gotten really close latey... tell me it isn't just me feeling this way?"
+    the_person "I guess I mean us? Like, we've gotten really close lately... tell me it isn't just me feeling this way?"
     menu:
         "I feel the same way":
             the_person "Yes! Oh god, you have no idea how happy I am to hear that."

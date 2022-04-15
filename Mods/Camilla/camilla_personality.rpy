@@ -1032,7 +1032,7 @@ label camilla_creampie_taboo_break(the_person):
                 the_person "Ah, finally! I've wanted a load inside me for so long, I don't even care that it's not my [so_title] giving it to me!"
 
             else:
-                the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care I'm not on the pill!."
+                the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care I'm not on the pill!"
                 $ the_person.update_birth_control_knowledge()
 
             "She pants happily for a moment."

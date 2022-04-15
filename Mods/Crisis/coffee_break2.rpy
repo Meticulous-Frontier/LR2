@@ -161,7 +161,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                         $ mc.change_locked_clarity(10)
                         $ winner_one.change_stats(happiness = 3, slut = 1, max_slut = 100)
                     else:
-                        winner_one "Holy!... Wow I was not expecting this!"
+                        winner_one "Holy!... Wow, I was not expecting this!"
                         "[winner_one.title] watches you closely."
                     "You pound [loser.title] hard. She's so wet that you easily slide in and out of her."
                     $ mc.change_locked_clarity(20)
