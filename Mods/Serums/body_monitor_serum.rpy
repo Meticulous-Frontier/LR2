@@ -276,7 +276,7 @@ label body_monitor_phase_3_label():
 
 label body_monitor_phase_4_label():
     $ the_person = mc.business.it_director
-    $ mc.start_text_convo(person_1)
+    $ mc.start_text_convo(the_person)
     the_person "Just wanted to let you know that the improved nanobot program is uploaded to the database and ready to use."
     mc.name "That was quicker than I expected. Did you have any issues?"
     the_person "No, [the_person.mc_title]. Everything went smoothly. First tests showed a slight improvement of vital parameters. But its too early to notice any permanent improvements."
@@ -285,7 +285,7 @@ label body_monitor_phase_4_label():
     the_person "Good night, [the_person.mc_title]."
     $ mc.end_text_convo()
     "The Body Monitoring Nanobot Trait got enhanced with an additional effect."
-    $ get_body_monitor_serum().on_turn = body_monitor_on_turn
+    $ get_body_monitor_serum().on_day = body_monitor_on_day
     $ get_body_monitor_serum().desc = "Monitoring body functions and vital parameters and slowly improving body condition overnight. Remotely transferring data for further analysis to your R&D Division."
     $ get_body_monitor_serum().positive_slug = "Remote Mastery Improvement, +1 Max Energy/day (Max 180)"
     $ mc.business.event_triggers_dict["body_monitor_progress"] = body_monitor_progress_count() + 1
