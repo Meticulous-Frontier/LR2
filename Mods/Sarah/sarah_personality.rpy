@@ -367,7 +367,7 @@ label Sarah_flirt_response_mid(the_person):
         $ the_person.draw_person()
         "She turns back and giggles."
         if sarah_epic_tits_progress() >= 2:
-            the_person "Tongue tied?. That's okay, I've been having that effect on a lot of guys lately."
+            the_person "Tongue tied? That's okay, I've been having that effect on a lot of guys lately."
         mc.name "What can I say? Your body is hypnotizing."
     return
 
@@ -494,7 +494,7 @@ label Sarah_cum_face(the_person):
             "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
     else:
         if the_person.sluttiness > 80:
-            the_person "Mmm, that's such a good feeling. Do you think I look cute like this?."
+            the_person "Mmm, that's such a good feeling. Do you think I look cute like this?"
             "[the_person.title] runs her tongue along her lips, then smiles and laughs."
         else:
             the_person "Whew, glad you got that over with. Take a good look while it lasts."
@@ -1102,7 +1102,7 @@ label Sarah_creampie_taboo_break(the_person):
                     "She gets goosebumps and sighs."
                     the_person "... but so worth it. I feels so right inside me..."
                 else:
-                    the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care that I'm not on the pill!."
+                    the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care that I'm not on the pill!"
 
         else:
             if the_person.relationship != "Single":

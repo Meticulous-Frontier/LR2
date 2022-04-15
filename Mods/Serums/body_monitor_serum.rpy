@@ -140,10 +140,10 @@ label body_monitor_phase_1_label():
     "You lay your hand on [person_2.possessive_title]'s shoulder."
     $ scene_manager.update_actor(person_2, position = "stand3")
     "[person_2.possessive_title] jumps up, surprised by your sudden touch. She blushes as she recognizes you."
-    "You smile at her apologeticly."
+    "You smile at her apologetically."
     mc.name "Sorry, I didn't mean to startle you."
     "[person_2.possessive_title] smiles sheepishly."
-    person_2 "Hey [person_2.mc_title]. Do you need me for something?."
+    person_2 "Hey [person_2.mc_title]. Do you need me for something?"
     mc.name "Maybe. [person_1.title] told me that you have an idea to improve our test data acquisition?"
     $ scene_manager.update_actor(person_2, emotion = "happy")
     "[person_2.possessive_title] nods eagerly."
@@ -249,17 +249,17 @@ label body_monitor_phase_3_label():
     $scene_manager.update_actor(person_2, position = "sitting")
     "After [person_2.possessive_title] joins you at the desk, you give her a quick recap about the topic and then shift your attention towards [person_1.possessive_title]"
     mc.name "So, what do you have in mind?"
-    person_1 "I was thinking about using the nanobots to do something that would be beneficial for the subjects on the one side, but would also benefit your non-work related activities."
+    person_1 "I was thinking about using the nanobots to do something that would be beneficial for the subjects on the one side, but would also benefit your non-work-related activities."
     "[person_1.possessive_title] winks at you with a smirk on her face."
     "You nod, taking the hint."
     person_1 "We could use the idle phase of the nanobots to stimulate the cell rejuvenation process. That would improve the general health of the subject and make them more energetic over the course of time. And a healthier body could also potentially increase the data we can collect."
     mc.name "That sounds interesting. Would that be doable, [person_2.title]?"
     "[person_2.possessive_title] takes a moment to think it over."
     person_2 "That should be within the realm of possibilities. Using the data the nanobots collected during the day, they should be able to track down damaged cells and stimulate the regeneration of those."
-    person_2 "We won't be able to do miracles like curing severe diseases, but a general improvement of the bodies health is a possibility."
+    person_2 "We won't be able to do miracles like curing severe diseases, but a general improvement of the body's health is a possibility."
     mc.name "How long would it take to reprogram the bots?"
     person_2 "If I focus on my general work duties, about as long as it took to write the base program. Until next week would be my estimation."
-    mc.name "Good. [person_1.title], give her all the specifications she might need. I want this to be finished until monday morning, if possible."
+    mc.name "Good. [person_1.title], give her all the specifications she might need. I want this to be finished by Monday morning, if possible."
     $ scene_manager.update_actor(person_1, position = "stand3")
     person_1 "Understood, [person_1.mc_title]. I will give her everything she needs right away."
     $ scene_manager.update_actor(person_2, position = "stand3")

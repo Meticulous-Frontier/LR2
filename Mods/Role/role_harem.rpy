@@ -54,7 +54,7 @@
 
 init -1 python:
     def ask_harem_requirement(the_person):
-        #you can convert a girlfriend or affair into a polymorous relationship
+        #you can convert a girlfriend or affair into a polyamorous relationship
         if the_person.love >=80:
             if the_person.get_opinion_score("threesomes") > 0:
                 if the_person.has_exact_role(harem_role): #either they are or not
@@ -154,7 +154,7 @@ label harem_ask_leave_SO_label(the_person): #
     mc.name "[the_person.title] can we talk about something?"
     the_person "You know I've always got five minutes for you."
     $ so_title = SO_relationship_to_title(the_person.relationship)
-    mc.name "I want you to leave your [so_title] and join our polymorous completely."
+    mc.name "I want you to leave your [so_title] and join our polyamory completely."
     the_person "[the_person.mc_title]... Do you really mean that?"
     "You nod. She takes a long moment to think, then finally nods back and smiles happily."
     the_person "Okay, I'll do it for you!"

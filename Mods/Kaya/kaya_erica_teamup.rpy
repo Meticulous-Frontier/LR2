@@ -1113,7 +1113,7 @@ label kaya_erica_trans_scene_4(the_person_one, the_person_two):
     mc.name "No. It is clear to me that I have been going about this all wrong."
     erica "Wrong?"
     mc.name "I've been using negative reinforcement for wrong answers, when I should have been doing the opposite."
-    mc.name "This time, whoever gets the most right answer gets a reward."
+    mc.name "This time, whoever gets the most right answers gets a reward."
     kaya "Is that so? And what is the reward?"
     mc.name "I'll fuck whoever gets the most right."
     erica "Oh! Damn that IS a good rule change!"

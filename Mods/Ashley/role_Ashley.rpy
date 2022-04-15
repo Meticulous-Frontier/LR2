@@ -1600,7 +1600,7 @@ label ashley_sneaks_over_label():
     $ mc.start_text_convo(the_person)
     the_person "Hey, are you busy?"
     mc.name "Not really. Whats up?"
-    the_person "Good. I'm outside, can I come in?."
+    the_person "Good. I'm outside, can I come in?"
     $ mc.end_text_convo()
     "She's what? How does she even know where you live?"
     $ hall.show_background()

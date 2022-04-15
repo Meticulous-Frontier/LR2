@@ -259,7 +259,7 @@ label kaya_clothing_reject(the_person):
         if the_person.sluttiness > 60:
             the_person "Wow. I'm usually up for anything but I think that's going too far."
         else:
-            the_person "Wow. Where's the rest of it?."
+            the_person "Wow. Where's the rest of it?"
     return
 
 label kaya_clothing_review(the_person):
@@ -1787,7 +1787,7 @@ label kaya_sleepover_herplace_response(the_person): #Spending the night at her p
     if the_person.sluttiness < 80:
         the_person "Mmm, that sounds great! Bring a toothbrush, you can spend the night."
     else:
-        the_person "You don't need the wine. We can fuck whenever you get there!."
+        the_person "You don't need the wine. We can fuck whenever you get there!"
     return
 
 

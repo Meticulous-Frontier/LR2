@@ -1353,7 +1353,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, girl_in_charge = False, position_locked = True, private = True) from _call_sex_description_meeting_mid_four
 
     elif position_choice == "anal lapdance":
-        the_person "Oh god, you want your HR directors ass, do you? What a naughty CEO!"
+        the_person "Oh god, you want your HR director's ass, do you? What a naughty CEO!"
         $ the_person.change_arousal(20)
         if not (the_person.outfit.vagina_available() and the_person.outfit.vagina_visible()):
             if the_person.outfit.can_half_off_to_vagina():

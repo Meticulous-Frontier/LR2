@@ -496,7 +496,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     $ mc.change_locked_clarity(50)
     "She pauses for a second..."
     if the_person.knows_pregnant():
-        the_person "I know this is crazy... I'm already pregnant!.. but I don't want to stop now! I want to you to breed me over and over, like your personal breeding slave!"
+        the_person "I know this is crazy... I'm already pregnant!... but I don't want to stop now! I want to you to breed me over and over, like your personal breeding slave!"
     else:
         the_person "I know this is crazy... I want you to knock me up! And not just once! I want you to breed me over and over, like your personal breeding slave!"
     "The serums must have really done their job! She seems to have acquired a breeding fetish!"

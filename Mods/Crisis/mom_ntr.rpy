@@ -444,7 +444,7 @@ label mom_ntr_mod_action_label():
                                     "Some time later at night you are awoken again by the cries coming from the kitchen."
                                     the_person "Take me with your hard dick, [man_name]. I want to feel it again. Please, rape me again!"
                                     man_name "You're such a cock-hungry whore, [the_person.name]. Now lay on the table. I want to see your tits this time, watch them bounce as I fuck you."
-                                    the_person "Of course, [man_name]. You can take me however you want. Just keep filling me with your cum!."
+                                    the_person "Of course, [man_name]. You can take me however you want. Just keep filling me with your cum!"
                                     "It seems that [the_person.possessive_title] now does not wish the encounter to end as her screams and [man_name]'s moans keep on..."
                                 else:
                                     "You hurry back to your room, closing the door before [man_name] emerges. You hear his heavy footsteps down the hall, followed by a slam and the sound of a car peeling out."
@@ -580,7 +580,7 @@ label mom_ntr_mod_action_label():
                                     "You hurry back to your room, closing the door before [man_name] emerges. You hear his heavy footsteps down the hall, followed by a slam and the sound of a car peeling out."
                                     "You go back to bed, ignoring the sounds of sobbing from [the_person.possessive_title]'s room. After a while, you hear her shuffle down the hall and run a shower, no doubt cleaning the evidence of her shameful encounter from her body."
                 else:
-                    the_person "Oh, [man_name]. You clearly have some plans for tonight, don't you?."
+                    the_person "Oh, [man_name]. You clearly have some plans for tonight, don't you?"
                     if the_person.get_opinion_score("giving blowjobs") > 0:
                         "She strokes his penis a little."
                     else:
@@ -875,7 +875,7 @@ label mom_ntr_mod_action_label():
                                     $ the_person.draw_person(position = "blowjob")
                                     "She pushes him backwards, and his dick leaves her pussy with a wet sound. [the_person.possessive_title] gets on her knees in front of [man_name]'s cock."
                                     the_person "I want to taste your hot cum. I bet your wife never even goes down on you!"
-                                    man_name "[wife_name] never does anything more exciting than missionary. You're so much more exciting!."
+                                    man_name "[wife_name] never does anything more exciting than missionary. You're so much more exciting!"
                                     the_person "Well, now's your chance to try something new, [man_name]!"
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "She looks up into [man_name]'s eyes while sucking him off."
@@ -1511,7 +1511,7 @@ label mom_ntr_mod_action_label():
             "Keep looking":
                 "You decide to see what they are up to."
                 "They go on kissing. After a while [man_name] places his hands on [the_person.possessive_title]'s ass, slightly caressing it, while [man_name2] is fondling her tits."
-                the_person "Oh, [man_name]. You clearly have some plans for tonight, don't you?."
+                the_person "Oh, [man_name]. You clearly have some plans for tonight, don't you?"
                 if the_person.get_opinion_score("giving blowjobs") > 0:
                     "She strokes their cocks a little."
                 else:
