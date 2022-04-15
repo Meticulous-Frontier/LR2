@@ -337,8 +337,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
 
     "[the_person.title] takes your hand and you step away with her. After a few minutes of walking, you find yourself at her place."
     "She quickly unlocks the front door and pulls you inside."
-    if the_person.home not in mc.known_home_locations:
-        $ mc.known_home_locations.append(the_person.home)
+    $ the_person.learn_home()
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
     $ the_person.draw_person(position = "kissing")
