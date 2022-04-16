@@ -2588,14 +2588,14 @@ init -1 python:
     Person.have_orgasm = have_orgasm
 
     def favorite_colour(self):
-        if self.event_triggers_dict.get("favorite_colour", None): #We already have a favorite colour, so just return it
-            return self.event_triggers_dict.get("favorite_colour", None)
+        favored_colour = self.event_triggers_dict.get("favorite_colour", None)
+
+        #check if current favourite is still in list_of favourites
+        list_of_favorites = [x for x in WardrobeBuilder.color_prefs.keys() if self.get_opinion_score(x) == 2]
+        if favored_colour in list_of_favorites:
+            return favored_colour
+
         #If not, we need to find a favorite colour going forward.
-        list_of_colours = ["the colour blue", "the colour yellow", "the colour red", "the colour pink", "the colour black", "the colour green", "the colour purple", "the colour white", "the colour orange", "the colour brown"]
-        list_of_favorites = []
-        for colour in list_of_colours:
-            if self.get_opinion_score(colour) == 2:
-                list_of_favorites.append(colour)
         if len(list_of_favorites) > 0:
             self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_favorites)
         else:
