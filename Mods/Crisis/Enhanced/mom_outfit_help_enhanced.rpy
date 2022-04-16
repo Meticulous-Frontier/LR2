@@ -55,6 +55,7 @@ label mom_outfit_help_crisis_label_enhanced():
             "Say you're busy":
                 mc.name "Sorry [the_person.title], I should really be getting to bed."
                 the_person "That's okay [the_person.mc_title], I'll ask your sister then."
+                $ the_person.next_day_outfit = sister_helps_mom_with_next_day_outfit(the_person, lily)
                 $ clear_scene()
                 return
 
