@@ -2610,8 +2610,10 @@ init -1 python:
 
     Person.is_single = is_single
 
-    def is_in_trance(self):
-        return self.get_trance_multiplier() > 1.0
+    # just check if has any trance_role, when training_available = True also check if we can train her
+    def is_in_trance(self, training_available = False):
+        return self.has_role([trance_role, heavy_trance_role, very_heavy_trance_role]) and \
+            (not training_available or self.event_triggers_dict.get("trance_training_available", True))
 
     Person.is_in_trance = is_in_trance
 

@@ -111,16 +111,16 @@ init 2 python:
                     info.append("{image=speech_bubble_exclamation_token_small}")
                 elif any(x.name != "Ask new title" and x.is_action_enabled(item) for x in item.on_talk_event_list):
                     info.append("{image=speech_bubble_token_small}")
-                    
+
                 info.append(format_titles(item))
-                
+
                 if item.knows_pregnant():
                     info.append("{image=feeding_bottle_token_small}")
                 if item.serum_effects:
                     info.append("{image=vial_token_small}")
                 if item.infractions:
                     info.append("{image=infraction_token_small}")
-                if item.has_role([trance_role, heavy_trance_role, very_heavy_trance_role]):
+                if item.is_in_trance(training_available = True):
                     info.append("{image=lust_eye_token_small}")
                 if item.arousal > 60:
                     info.append("{image=arousal_token_small}")
