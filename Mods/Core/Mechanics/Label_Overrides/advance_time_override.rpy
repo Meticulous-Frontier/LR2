@@ -85,7 +85,7 @@ init 5 python:
     advance_time_next_action = ActionMod("Advances into the next time slot", advance_time_next_requirement,
         "advance_time_next_label", priority = 5, allow_disable = False)
 
-    advance_time_bankrupt_check_action = ActionMod("Determines if it is game over due to having gone bankrupt.", advance_time_bankrupt_check_requirement,
+    advance_time_bankrupt_check_action = ActionMod("Bankruptcy check (Game Over)", advance_time_bankrupt_check_requirement,
         "advance_time_bankrupt_check_label", priority = 6, category = "Gameplay")
 
     advance_time_end_of_day_action = ActionMod("Ends the day if time_of_day is 4", advance_time_end_of_day_requirement,
@@ -208,6 +208,7 @@ init 5 python:
         return
 
     def advance_time_run_day(people):
+        renpy.not_infinite_loop(5)
         for (person, _) in people:
             person.run_day()
 
@@ -220,7 +221,7 @@ init 5 python:
         return
 
     def advance_time_run_move(people):
-        renpy.execution.il_time = start_time + 10 # delay the infinite loop detector for 10 seconds
+        renpy.not_infinite_loop(10)
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
 
