@@ -31,7 +31,7 @@ label lady_of_the_night_label_enhanced():
             if the_report.get("girl orgasms",0) > 0:
                 "It takes [the_person.title] a few moments to catch her breath."
                 the_person "Maybe I should be paying you... Whew!"
-            elif the_report.get("girl orgasms", 0) > 0:
+            elif the_report.get("guy orgasms", 0) < 1:
                 "It takes [the_person.title] a few moments to catch her breath."
                 the_person "Am I not hot enough for you, darling?"
             else:

@@ -44,7 +44,7 @@ label cat_fight_crisis_enhanced_label():
     $ scene_manager.update_actor(person_two, position = "stand3")
     "[person_two.title] spins to glare at [person_one.title]."
     if person_one.sluttiness > 50:
-        person_two "At least I'm not slave to some guys dick like you are. You're such a worthless slut."
+        person_two "At least I'm not slave to some guy's dick like you are. You're such a worthless slut."
     else:
         person_two "Oh fuck you. You're just a stuck up bitch, you know that?"
 
@@ -209,7 +209,7 @@ label cat_fight_crisis_enhanced_label():
                     elif ran_num == 2:
                         if other_clothing:
                             $ scene_manager.draw_animated_removal(winner, other_clothing)
-                            "[winner.title] screams loudly and tries to grab [loser.title] by the waist. [loser.title] is fast enough to get to the side. She grabs [loser.title]'s [other_clothing.name] and yanks on it hard."
+                            "[winner.title] screams loudly and tries to grab [loser.title] by the waist. [loser.title] is fast enough to get to the side. She grabs [winner.title]'s [other_clothing.name] and yanks on it hard."
                             "[winner.title] struggles for a moment, then manages to slip free of the garment and steps back. [loser.title] drops it to the ground and they square off again."
                             $ mc.change_locked_clarity(10)
                         else:
@@ -235,7 +235,7 @@ label cat_fight_crisis_enhanced_label():
                     "[loser.title] stops fighting almost immediately, leaning against [winner.title] and breathing heavily. You've got a front row seat as [winner.title] starts to finger [loser.title]."
                     $ mc.change_locked_clarity(20)
                     $ loser.change_arousal(15)
-                    loser "Oh god... [winner.title], just... Ah!"
+                    loser "Oh god... [winner.name], just... Ah!"
                     "[winner.title] isn't going easy on [loser.title]. She shivers and bucks against [winner.title]."
                     $ loser.change_arousal(25)
                     "[winner.title] speeds up, pumping her fingers in and out of [loser.title]'s exposed cunt. She moans loudly and rolls her hips against [winner.title]'s."
@@ -261,7 +261,7 @@ label cat_fight_crisis_enhanced_label():
                     "[winner.title] smiles proudly picks up her clothes and walks off."
                     $ scene_manager.remove_actor(winner)
                     $ scene_manager.update_actor(loser, position = "walking_away")
-                    "It takes a few more minutes before [loser.title] is any state to go anywhere. When she's able to she gathers her things and head off to get cleaned up."
+                    "It takes a few more minutes before [loser.title] is in a state to go anywhere. When she's able to she gathers her things and heads off to get cleaned up."
                 else:
                     $ loser.change_stats(slut = 1, max_slut = 80, happiness = -10, obedience = -10)
                     $ scene_manager.update_actor(loser, position = "walking_away")
@@ -293,7 +293,7 @@ label cat_fight_crisis_enhanced_label():
             "They turn and leave the room together."
 
         "Have a team building exercise" if willing_to_threesome(person_one, person_two) and mc.energy > 30:
-            mc.name "Enough! It is obvious to me that we are too busy working against one another, and not enough working as a team."
+            mc.name "Enough! It is obvious to me that we are spending too much time working against one another, and not enough working as a team."
             $ scene_manager.update_actor(person_one, emotion="sad")
             person_one "But sir..."
             mc.name "Don't \"but sir\" me! It's time for you two to do a team building exercise. On your knees, both of you."
@@ -341,6 +341,7 @@ label cat_fight_crisis_enhanced_label():
 label cat_fight_pick_winner_enhanced(scene_manager, winner, loser):
     $ loser.change_stats(happiness = -5, obedience = -5)
     mc.name "Enough! [loser.title], I don't want to hear anything about this from you again. Consider this a formal warning."
+    $ loser.add_infraction(Infraction.inappropriate_behaviour_factory())
     loser "Wait, but I..."
     mc.name "That's the end of it, now I want both of you to get back to work. Thank you for bringing this to my attention [winner.title]."
     $ winner.change_stats(happiness = 5, obedience = 5)

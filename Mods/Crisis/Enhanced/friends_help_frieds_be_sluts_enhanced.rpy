@@ -97,7 +97,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     person_two "You're sure?"
                     mc.name "Of course I'm sure, but if I'm making you self conscious I'll give you some privacy."
                     $ scene_manager.update_actor(person_two, emotion = "happy")
-                    mc.name "Once you're done your break I expect to see you both back at work."
+                    mc.name "Once you're done with your break I expect to see you both back at work."
                     $ person_two.change_slut(2)
                     $ person_two.change_obedience(2)
                     $ mc.change_locked_clarity(5)
@@ -312,7 +312,7 @@ label friends_help_friends_be_sluts_enhanced_label():
 
                                 $ strip_list = None
 
-                                if person_two.get_opinion_score("showing her tits") > 0:
+                                if person_two.get_opinion_score("showing her tits") < 0:
                                     "When she has her tits out she crosses her arms in front of her in a small attempt to preserve her modesty."
                                     person_one "[person_one.mc_title] can't see them if you keep them covered up. Here..."
                                     "[person_one.title] takes her friend's hands and move them to her hips, then cups them and gives them a squeeze in front of you."

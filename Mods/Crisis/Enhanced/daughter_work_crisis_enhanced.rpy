@@ -64,7 +64,7 @@ label daughter_work_crisis_label_enhanced():
 
                     "Tell her you aren't hiring":
                         if the_person.love < 10:
-                            mc.name "If I want to fuck you I wouldn't need to hire your daughter to do it. Give it up, you look desperate."
+                            mc.name "If I wanted to fuck you I wouldn't need to hire your daughter to do it. Give it up, you look desperate."
                             $ the_person.change_obedience(3)
                             "She steps back and looks away."
                             the_person "Uh, right. Sorry for taking up your time."
@@ -73,14 +73,14 @@ label daughter_work_crisis_label_enhanced():
                             mc.name "I'm not hiring right now, and that's final. Now I'm sure you have work to do."
                             $ the_person.change_obedience(1)
                             "She takes the resume back and steps away from your desk, defeated."
-                            the_person "Right, of course. Sorry for wasting up your time."
+                            the_person "Right, of course. Sorry for wasting your time."
                         $ clear_scene()
                         return
             elif promised_sex:
                 the_person "There's nothing I could do? Nothing at all?"
                 "She moves to run a hand down your shirt, but you shove the resume back into her hand."
                 if the_person.love < 10:
-                    mc.name "If I want to fuck you I wouldn't need to hire your daughter to do it. Give it up, you look desperate."
+                    mc.name "If I want to fuck you I don't need to hire your daughter to do it. Give it up, you look desperate."
                     $ the_person.change_obedience(3)
                     "She steps back and looks away."
                     the_person "Uh, right. Sorry for taking up your time."
@@ -89,7 +89,7 @@ label daughter_work_crisis_label_enhanced():
                     mc.name "I'm not hiring right now, and that's final. Now I'm sure you have work to do."
                     $ the_person.change_obedience(1)
                     "She takes the resume back and steps away from your desk, defeated."
-                    the_person "Right, of course. Sorry for wasting up your time."
+                    the_person "Right, of course. Sorry for wasting your time."
                 $ clear_scene()
                 return
 
