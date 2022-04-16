@@ -2599,7 +2599,7 @@ init -1 python:
         if len(list_of_favorites) > 0:
             self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_favorites)
         else:
-            self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_colours)
+            self.event_triggers_dict["favorite_colour"] = renpy.random.choice(WardrobeBuilder.color_prefs.keys())
             self.update_opinion_with_score(self.favorite_colour(), 2, add_to_log = False)
         return self.favorite_colour()
 
