@@ -118,6 +118,9 @@ init 10 python:
     def sarah_story_80_lust_complete_func():
         return sarah_threesomes_unlocked()
 
+    def sarah_story_100_lust_complete_func():
+        return False
+
     def sarah_story_100_lust_hint():
         return "This story is complete for now..."
 
