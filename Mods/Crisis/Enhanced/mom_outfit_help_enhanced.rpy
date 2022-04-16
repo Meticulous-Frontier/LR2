@@ -1,6 +1,26 @@
 init 5 python:
     config.label_overrides["mom_outfit_help_crisis_label"] = "mom_outfit_help_crisis_label_enhanced"
 
+    def sister_helps_mom_with_next_day_outfit(mom, sister):
+        if sister.effective_sluttiness() >= mom.effective_sluttiness():
+            outfit_slut_points = __builtin__.min(__builtin__.int(sister.effective_sluttiness() / 8), 12)
+            allow_skimpy = False
+            max_alterations = 1
+            mom.change_stats(slut = 1, max_slut = (30 if sister.effective_sluttiness() >= 30 else sister.effective_sluttiness()))
+        else:
+            outfit_slut_points = __builtin__.min(__builtin__.int(mom.effective_sluttiness() / 8), 12)
+            allow_skimpy = True
+            max_alterations = 2
+
+        builder = WardrobeBuilder(sister)
+        thinks_appropriate = False
+        while not thinks_appropriate or outfit_slut_points < 0:
+            outfit = mom.personalize_outfit(builder.build_outfit(None, outfit_slut_points), opinion_color = sister.favorite_colour(), coloured_underwear = True, max_alterations = max_alterations, swap_bottoms = True, allow_skimpy = allow_skimpy)
+            thinks_appropriate = mom.judge_outfit(outfit)
+            outfit_slut_points -= 1
+        if thinks_appropriate and outfit:
+            return outfit
+        return None
 
 label mom_outfit_help_crisis_label_enhanced():
     $ the_person = mom
@@ -20,27 +40,7 @@ label mom_outfit_help_crisis_label_enhanced():
             "Say you're busy":
                 mc.name "Sorry [the_person.title], I'm a little busy at the moment."
                 the_person "Okay, I'll ask your sister."
-                $ builder = WardrobeBuilder(the_person)
-                $ builder2 = WardrobeBuilder(lily)
-                $ opinion_color = builder2.person.favorite_colour()
-                if lily.effective_sluttiness() >= the_person.effective_sluttiness():
-                    $ outfit_slut_points = __builtin__.min(__builtin__.int(lily.effective_sluttiness() / 8), 12)
-                    $ allow_skimpy = False
-                    $ max_alterations = 1
-                    $ max_slut = lily.effective_sluttiness()
-                    if max_slut > 30:
-                        $ max_slut = 30
-                    $ the_person.change_stats(slut = 1, max_slut = max_slut)
-                else:
-                    $ outfit_slut_points = __builtin__.min(__builtin__.int(the_person.effective_sluttiness() / 8), 12)
-                    $ allow_skimpy = True
-                    $ max_alterations = 2
-                $ thinks_appropriate = False
-                while not thinks_appropriate:
-                    $ first_outfit = builder.personalize_outfit(builder2.build_outfit(None, outfit_slut_points), opinion_color = opinion_color, coloured_underwear = True, max_alterations = max_alterations, swap_bottoms = True, allow_skimpy = allow_skimpy)
-                    $ thinks_appropriate = the_person.judge_outfit(first_outfit)
-                    $ outfit_slut_points -= 1
-                $ the_person.next_day_outfit = first_outfit
+                $ the_person.next_day_outfit = sister_helps_mom_with_next_day_outfit(the_person, lily)
                 $ clear_scene()
                 return
     else:
