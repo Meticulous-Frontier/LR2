@@ -185,7 +185,7 @@ label breeding_fetish_happy_breeder_crisis_label():
 
     $ the_person.draw_person(position="kissing")
     "[the_person.possessive_title] quickly turns and embraces you."
-    the_person "Oh, [the_person.mc_title], I'm sorry to just come over without asking like this but, I was at trying to sleep."
+    the_person "Oh, [the_person.mc_title], I'm sorry to just come over without asking like this but, I was at home trying to sleep."
     the_person "I kept thinking about the baby growing inside of me and I started getting all worked up..."
     "She stumbles over her words for a second."
     the_person "Oh geeze... I just couldn't stop thinking about how good it feels when you fuck me!"
