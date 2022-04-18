@@ -51,11 +51,11 @@ label sister_phone_crisis_action_label():
         $ ran_num = renpy.random.randint(1,2) #Used to determine which variant we use to avoid spamming the player with the exact same texts.
         if ran_num == 1:
             if mc.business.is_weekend():
-                the_person "I'm here at home and wishing it was you could help me take these pictures..."
+                the_person "I'm here at home and wishing you could help me take these pictures..."
                 $ the_person.strip_outfit(delay = 0)
                 $ the_person.draw_person(position = "standing_doggy")
                 $ mc.change_locked_clarity(20)
-                "[the_person.possessive_title] sends you a selfie her bedroom naked and bent over her bed."
+                "[the_person.possessive_title] sends you a selfie of her in her bedroom naked and bent over her bed."
             else:
                 the_person "I'm stuck here at school and all I can think about is you. Wish you were here..."
                 $ the_person.strip_outfit(delay = 0)
@@ -150,7 +150,7 @@ label sister_phone_crisis_action_label():
             else:
                 the_person "I'm busy here at school but I really wish I could be spending time with you instead. Do you think I'm pretty enough to spend time with ;)"
                 $ the_person.draw_person(emotion = "happy")
-                "[the_person.possessive_title] sends you a selfie without her shirt on. It looks like it's taken in the bathroom of her school."
+                "[the_person.possessive_title] sends you a selfie without her shirt on. It looks like it was taken in the bathroom of her school."
 
         else:
             $ the_clothing = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)

@@ -57,7 +57,7 @@ label family_morning_breakfast_enhanced_label():
     $ mom.update_outfit_taboos()
     $ scene_manager.update_actor(mom, position = "back_peek")
 
-    mom "Good morning [mom.mc_title]. I'm almost ready to serve, hopefully your [lily.name] will be here soon."
+    mom "Good morning [mom.mc_title]. I'm almost ready to serve, hopefully [lily.name] will be here soon."
     lily "I'm coming!"
 
     $ scene_manager.show_actor(lily)
@@ -90,13 +90,28 @@ label family_morning_breakfast_enhanced_label():
             mom "Want a little milk for your coffee, honey?"
             "[mom.title] gives you a quick wink."
             mc.name "Sure mom."
-            "[mom.possessive_title] bends over slight over your coffee. She takes one of her breasts in her hand and starts to squeeze."
+            "[mom.possessive_title] bends slightly over your coffee. She takes one of her breasts in her hand and starts to squeeze."
             "It takes a second, but soon a stream of her milk is pouring out into you coffee."
             mom "Just say when!"
             "You let her continue for a few more moments, until you can see the cream start to circulate around your hot coffee."
-            $ mom.change_stats(slut = 1, max_slut = 30, happiness = 5)
+            $ mom.change_stats(slut = 1, max_slut = 40, happiness = 5)
             mc.name "That's good!"
-        lily "Thanks Mom, you're the best!"
+            lily "Thanks Mom, you're the best!"
+        elif lily.lactation_sources > 0 and lily.tits_available():
+            mom "Want some coffe, honey?"
+            mc.name "Sure mom."
+            mom "Here you go, maybe [lily.name] could help you out with some milk."
+            "[mom.title] gives you a quick wink."
+            lily "Really, Mom?"
+            mc.name "I mean... if you don't mind it would be nice."
+            "[lily.possessive_title] gives an exasperated sigh, but then bends slightly over your coffee. She takes one of her breasts in her hand and starts to squeeze."
+            "It takes a second, but soon a stream of her milk is pouring out into you coffee."
+            lily "Let me know when you have enough."
+            "You let her continue for a few more moments, until you can see the cream start to circulate around your hot coffee."
+            $ lily.change_stats(slut = 1, max_slut = 40, happiness = 5)
+            mc.name "That's good!"
+        else:
+            lily "Thanks Mom, you're the best!"
         $ scene_manager.update_actor(mom, position = "sitting")
         mom "No problem, I'm just happy to spend my morning relaxing with my two favorite people!"
         "You enjoy a relaxing breakfast bonding with your mother and lily. [mom.possessive_title] seems particularly happy she gets to spend time with you."
@@ -176,7 +191,7 @@ label family_morning_breakfast_enhanced_label():
                     mc.name "I actually think [lily.title] is right, this is a little weird. Could you go put something on, for our sakes?"
                     $ lily.change_stats(obedience = -2, slut = 1, max_slut = 30)
                     $ mom.change_stats(happiness = -10, obedience = 2)
-                    mom "Oh you two, you're so silly. Fine, I'll be back in a moment. [lily.title], could you watch the eggs?"
+                    mom "Oh you two, you're so silly. Fine, I'll be back in a moment. [lily.name], could you watch the eggs?"
                     $ scene_manager.hide_actor(mom)
                     $ scene_manager.update_actor(lily, position = "walking_away", display_transform = character_left_flipped)
                     "Your mother leaves to get dressed. [lily.possessive_title] ends up serving out breakfast for all three of you."
@@ -236,7 +251,7 @@ label family_morning_breakfast_enhanced_label():
             $ lily.change_stats(obedience = 5, happiness = -5)
             $ mom.change_obedience(-2)
             $ scene_manager.show_actor(lily, position = "sitting")
-            "[lily.possessive_title] is back by the time Mom starts to plate breakfast. She sits down and starts to eat without saying anything."
+            "[lily.possessive_title] is back by the time [mom.title] starts to plate breakfast. She sits down and starts to eat without saying anything."
             $ scene_manager.update_actor(mom, position = "sitting")
 
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
@@ -252,7 +267,7 @@ label family_morning_breakfast_enhanced_label():
         mom "Go ahead, eat up!"
         $ lily.change_love(3)
         $ mom.change_stats(love = 3, happiness = 5)
-        "You enjoy a relaxing breakfast bonding with [mom.possessive_title] and [lily.name]. [mom.possessive_title] seems particularly happy she gets to spend time with you."
+        "You enjoy a relaxing breakfast bonding with [mom.title] and [lily.title]. [mom.possessive_title] seems particularly happy she gets to spend time with you."
         "When you're done you help [mom.possessive_title] put the dirty dishes away and get on with your day."
 
     $ scene_manager.clear_scene()

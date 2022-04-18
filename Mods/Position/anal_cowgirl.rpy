@@ -434,7 +434,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
                 $ the_girl.cum_in_ass()
                 $ SB_anal_cowgirl.redraw_scene(the_girl)
                 $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
-                "As soon as you let go of her she immediately pops off and stands over you. Her ass gives a little squelch as you cum leaks from it onto you chest."
+                "As soon as you let go of her she immediately pops off and stands over you. Her ass gives a little squelch as your cum leaks from it onto you chest."
                 the_person "God dammit, that's now how that was supposed to go. Next time I'm putting handcuffs on you first..."
             "Beg her to finish inside":
                 mc.name "No! Stop! Please! I want to cum inside you so bad!"
@@ -450,7 +450,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
                     $ the_girl.cum_in_ass()
                     $ SB_anal_cowgirl.redraw_scene(the_girl)
                     $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
-                    "As soon as you finish she immediately pops off and stands over you. Her ass gives a little squelch as you cum leaks from it onto you chest."
+                    "As soon as you finish she immediately pops off and stands over you. Her ass gives a little squelch as your cum leaks from it onto you chest."
                 else:
                     the_person "I love to hear you beg, but not a chance."
                     "She pulls of you completely and starts to stroke you with her hand. You groan but are immediately firing off your sperm into the air. It lands on your stomach, making a mess."

@@ -632,7 +632,7 @@ label candace_convince_to_quit_label(the_person):
     salon_manager "There we go! That will be a great picture to send with your break up text..."
     "Oh boy. Things are about to get juicy."
     salon_manager "Let me see your phone now. Okay here we go."
-    salon_manager "Guess who I met today, [ex_name]! Turns out we having something in common!.."
+    salon_manager "Guess who I met today, [ex_name]! Turns out we having something in common!..."
     "You spend the next hour or so getting [the_person.title] all set up. [salon_manager.title] really does think of everything."
     $ the_person.relationship = "Single"
     $ the_person.SO_name = None
@@ -1305,11 +1305,11 @@ label candace_cure_bimbo_label():
     the_person "What were you trying to make?"
     candace "It seems so silly now. It was a drug designed for espionage. To reduce someone to their basest desires and to be completely open to suggestion and to be truthful."
     candace "The implications of the drug in the hands of the intelligence agency were immense."
-    candace "But it was supposed to be temporary. In animal testing, the drug worked it's way out of the body within 24 hours."
+    candace "But it was supposed to be temporary. In animal testing, the drug worked its way out of the body within 24 hours."
     candace "Something went wrong with mine... The effects... Appear to have been permanent?"
     $ scene_manager.update_actor(candace, emotion = "angry")
     "She shakes her head. Her fists clench as she remembers the next events."
-    $ renpy.say(candace.char, "The lab shut down... I had no where to work, no money... And my libido had sky rocketed... I didn't know what to do. Then I met " + ophelia_get_ex_name() + "...")
+    $ renpy.say(candace.char, "The lab shut down... I had nowhere to work, no money... And my libido had skyrocketed... I didn't know what to do. Then I met " + ophelia_get_ex_name() + "...")
     candace "I was out in front of this strip club... Trying to find someone to take me home that night, when I ran into him. He could tell I was in a bad spot... And totally took advantage of it."
     candace "Soon I was his 'personal secretary', but he wasn't even paying me anything. I was doing all sorts of errands for him, trading sexual favors for discounts, among other things."
     $ scene_manager.update_actor(candace, emotion = "happy")
@@ -1363,7 +1363,7 @@ label candace_meet_doctor_candace_label():
     "Well, mostly anyway. Since that time, talking with her is like talking to an entirely different person... But also the same."
     "She still smells the same, she still twirls her hair around her finger the same way, she still smiles at you the same way."
     "Yet, every time she opens her mouth and speaks, she is completely different."
-    "A few days ago you walked by the break room while able trivia show was on, and [the_person.title] was spitting answers out before the host even finished with the question."
+    "A few days ago you walked by the break room while a trivia show was on, and [the_person.title] was spitting answers out before the host even finished with the question."
     "When she looks you in the eye and speaks, her words carry weight. You don't blow off her suggestions as if they are nonsense anymore."
     if candace_get_sex_record_difference_tier() == 0:
         "The changes have made you wary, especially of having sex with her. She still seems willing, but it just feels wrong."
@@ -1456,7 +1456,7 @@ label candace_meet_doctor_candace_label():
     the_person "It certainly is a very relaxing activity. When I was working on my thesis, I was calling up the poor guy I was seeing at the time all the time trying to de-stress."
     mc.name "Thesis? You mean... You have a doctorate?"
     the_person "Yes."
-    mc.name "So... I should be calling you doctor [the_person.last_name]?"
+    mc.name "So... I should be calling you Doctor [the_person.last_name]?"
     the_person "Ahh, let me just stop you right there. I would prefer things between us, and the girls here at the office, to remain more... Informal."
     "She sits back a bit and smiles."
     the_person "I'd prefer other titles. Candace is good, but what would be even better would be if you just called me... Your girlfriend..."
@@ -1475,7 +1475,7 @@ label candace_meet_doctor_candace_label():
                     $ the_person.add_role(girlfriend_role)
                 mc.name "So, what is your degree in, anyway?"
                 the_person "I received my doctorate for molecular biology and genetics... Though I'm not sure why that is relevant."
-                mc.name "Oh, I just wanted to know for when I have to introduce you to people as 'my girlfriend Dr. [the_person.last_name]."
+                mc.name "Oh, I just wanted to know for when I have to introduce you to people as \"my girlfriend, Dr. [the_person.last_name]\"."
                 $ the_person.change_stats(happiness = 15, love = 5)
                 the_person "Ahh! I suppose that would be okay... The first part anyway."
                 "She leans back a bit and gets kinda dreamy eyed."

@@ -48,7 +48,7 @@ init 2 python:
         # set relationships
         town_relationships.update_relationship(ashley, stephanie, "Sister")
         town_relationships.update_relationship(nora, ashley, "Friend")
-        town_relationships.update_relationship(lily, ashley, "Rival")
+        # town_relationships.update_relationship(lily, ashley, "Rival")
 
         #TODO make her know Nora from before graduation. She is familiar with serums and their effects
         #TODO add ashley to unique characters list?
@@ -1600,7 +1600,7 @@ label ashley_sneaks_over_label():
     $ mc.start_text_convo(the_person)
     the_person "Hey, are you busy?"
     mc.name "Not really. Whats up?"
-    the_person "Good. I'm outside, can I come in?."
+    the_person "Good. I'm outside, can I come in?"
     $ mc.end_text_convo()
     "She's what? How does she even know where you live?"
     $ hall.show_background()

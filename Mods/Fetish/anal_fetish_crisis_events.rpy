@@ -11,7 +11,7 @@ init 2 python:
 
     def aggressive_anal_employee_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
-            return not get_needy_anal_fetish_non_employee() is None
+            return not get_needy_anal_fetish_employee() is None
         return False
 
     def get_anal_fetish_employee():

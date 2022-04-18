@@ -87,24 +87,31 @@ init 5 python:
         return None
 
     def cheating_check_get_watcher(person):
-        other_people = [a_person for a_person in mc.location.people if a_person is not person] #Build a list with all the _other_ people in the room other than the one we're fucking.
+        other_people = [x for x in mc.location.people if x != person] #Build a list with all the _other_ people in the room other than the one we're fucking.
         # skip cheating check when person is Office Free Use Slut
         if not person.has_role(employee_freeuse_role):
             # only check if she is jealous and not willing to threesome with the girl
-            for a_person in [x for x in other_people if x.has_role([girlfriend_role, affair_role]) and x.is_jealous() and not willing_to_threesome(person, x)]:
-                if a_person.has_role(girlfriend_role) and the_position.slut_requirement > (a_person.sluttiness * .6) + (a_person.get_opinion_score("threesomes") * 5) : #You can get away with 60% as slutty as she would do +- threesome inclination
+            for other_person in [x for x in other_people if x.has_role([girlfriend_role, affair_role]) and x.is_jealous() and not willing_to_threesome(person, x)]:
+                if other_person.has_role(girlfriend_role) and the_position.slut_requirement > (other_person.sluttiness * .6) + (other_person.get_opinion_score("threesomes") * 5) + (5 * other_person.get_opinion_score("public sex")) : #You can get away with 60% as slutty as she would do +- threesome inclination / public sex
                     caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
-                    if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
-                        a_person.add_unique_on_room_enter_event(caught_cheating_action)
-                        renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                    if not exists_in_room_enter_list(other_person, "caught_cheating_label"):
+                        other_person.add_unique_on_room_enter_event(caught_cheating_action)
+                        renpy.say(None, other_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
-                elif a_person.has_role(affair_role) and the_position.slut_requirement > (a_person.sluttiness * .8) + (a_person.get_opinion_score("threesomes") * 5): #You can get away with 80% as slutty as she would do +- threesome inclination
+                elif other_person.has_role(affair_role) and the_position.slut_requirement > (other_person.sluttiness * .8) + (other_person.get_opinion_score("threesomes") * 5) + (5 * other_person.get_opinion_score("public sex")): #You can get away with 80% as slutty as she would do +- threesome inclination / public sex
                     caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
-                    if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
-                        a_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
-                        renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                    if not exists_in_room_enter_list(other_person, "caught_affair_cheating_label"):
+                        other_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
+                        renpy.say(None, other_person.title + " gasps when she sees what you and " + person.title + " are doing.")
 
-        return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
+        watcher = get_random_from_list(other_people)
+        if watcher:
+            if watcher.get_opinion_score("public sex") > 0:
+                watcher.add_situational_slut("public sex watcher", 5 * watcher.get_opinion_score("public sex"), "They're doing it right in front of me! That's so fucking hot!")
+            elif watcher.get_opinion_score("public sex") < 0:
+                watcher.add_situational_slut("public sex watcher", 5 * watcher.get_opinion_score("public sex"), "Right here in front of me?! That's disgusting!")
+
+        return watcher #Get a random person from the people in the area, if there are any.
 
     def apply_sex_modifiers(person, private = True):
         #Family situational modifiers
@@ -1151,8 +1158,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         the_person "Aww, okay. Maybe next time..."
                         $ the_person.change_obedience(3)
 
-        $ the_relationship = town_relationships.get_relationship(the_watcher, the_person)
-        if the_relationship and the_relationship.get_type(the_watcher) in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
+        if town_relationships.is_family(the_watcher, the_person):
             call relationship_sex_watch(the_watcher, town_relationships.get_relationship_type(the_watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
             $ the_position.redraw_scene(the_person)
             call relationship_being_watched(the_person, the_watcher, town_relationships.get_relationship_type(the_person, the_watcher).lower(), the_position) from _call_relationship_being_watched
@@ -1165,15 +1171,21 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
             $ the_person.call_dialogue("being_watched", the_watcher = the_watcher, the_position = the_position) #Call her response to the person watching her.
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
             $ the_person.discover_opinion("public sex")
-        $ the_relationship = None
-    $ del the_watcher
+
+        $ the_watcher.clear_situational_slut("public sex watcher")
+
+    $ the_watcher = None
     return
 
 label relationship_sex_watch(the_person, the_relation, the_position):
     $ title = the_person.title if the_person.title else "The stranger"
     if the_person.sluttiness < the_position.slut_requirement - 20:
         $ the_person.draw_person(emotion = "angry")
-        the_person "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. Don't either of you have any decency?"
+        if not the_person.relationship == "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            the_person "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. What would your [so_title] think of this?"
+        else:
+            the_person "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. Don't either of you have any decency?"
         $ the_person.change_stats(obedience = -2, happiness = -1)
         "[title] looks away while you and her [the_relation] [the_position.verb]."
 
@@ -1184,14 +1196,18 @@ label relationship_sex_watch(the_person, the_relation, the_position):
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
-        $ change_report = the_person.change_slut(1)
+        $ the_person.change_slut(1)
         "[title] tries to avert her gaze, but keeps glancing over while you and her [the_relation] [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
-        the_person "Oh my..."
-        $ change_report = the_person.change_slut(2)
-        "[title] watches quietly while you and her [the_relation] [the_position.verb]."
+        if not the_person.relationship == "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            the_person "Oh my... I wonder what your [so_title] would say..."
+        else:
+            the_person "Oh my..."
+        $ the_person.change_slut(2)
+        "[title] continues watching you and her [the_relation] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")

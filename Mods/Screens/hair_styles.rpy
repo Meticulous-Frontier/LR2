@@ -1,25 +1,23 @@
+init 2 python:
+    def restore_hair_style(person, hair_style, pubes_style):
+        person.hair_style = hair_style
+        person.hair_colour = hair_style.colour
+        person.pubes_style = pubes_style
+        return
+
 screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person and the variables holding the current hair style
     modal True
     default category_selected = "Hair Style"
     default selected_style = person.hair_style
 
-    python:
-        def revert_style(person, hair_style, pubes_style): #Function to properly assign values to the fields as Screen Actions are flimsy.
-
-            person.hair_style = hair_style
-            person.hair_colour = hair_style.colour
-            person.pubes_style = pubes_style
-
-
     default use_current_outfit = person.outfit
     default use_nude = Outfit("Nude")
 
     #default valid_categories = ["Hair Style", "Pubic Style"] #Holds the valid list of categories strings to be shown at the top.
-    $ categories_mapping = { # list of clothing | Apply method | Valid / sensitive check | nudity switch | tooltip string
-        "Hair Style": [hair_styles, Person.set_hair_style, True, "use_current_outfit"],
-        "Pubic Style": [pube_styles, Person.set_pubic_style, ophelia_person_wants_pubic_hair_included(person), "use_nude"] #Set the False bool to either true or a custom requirement function
-        }
-
+    default categories_mapping = { # list of clothing | Apply method | Valid / sensitive check | nudity switch | tooltip string
+        "Hair Style": [hair_styles, Person.set_hair_style, True, use_current_outfit],
+        "Pubic Style": [pube_styles, Person.set_pubic_style, ophelia_person_wants_pubic_hair_included(person), use_nude] #Set the False bool to either true or a custom requirement function
+    }
 
     default bar_select = 0 # 0 is nothing selected, 1 is red, 2 is green, 3 is blue, and 4 is alpha
 
@@ -72,8 +70,11 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                                 action [
                                     SetScreenVariable("category_selected", category),
                                     SetScreenVariable("selected_style", None),
-                                    SetScreenVariable("selected_colour", "colour")
-                                    ]
+                                    SetScreenVariable("selected_colour", "colour"),
+                                    SetField(person, "outfit", categories_mapping[category][3]),
+                                    Function(person.clean_cache),
+                                    Function(person.draw_person, show_person_info = False)
+                                ]
                             else:
                                 action NullAction()
                     # textbutton old_hair_colour:
@@ -112,12 +113,13 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                                             sensitive True
 
                                             action [
-                                                SetField(person, "outfit", renpy.current_screen().scope[categories_mapping[category_selected][3]]),
                                                 SetField(style_item, "colour", [current_r, current_g, current_b, current_a]),
                                                 SetScreenVariable("selected_colour", "colour"),
                                                 SetScreenVariable("selected_style", style_item.get_copy()),
                                                 Function(categories_mapping[category_selected][1], person, style_item),
-                                                Function(person.draw_person, show_person_info = False)]
+                                                Function(person.clean_cache),
+                                                Function(person.draw_person, show_person_info = False)
+                                            ]
 
                     frame:
                         #THIS IS WHERE SELECTED ITEM OPTIONS ARE SHOWN
@@ -162,6 +164,7 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                                             SetScreenVariable("selected_hair_colour", [current_r, current_g, current_b, current_a]),
                                             SetField(person, "hair_colour", [selected_hair_colour_name, [current_r, current_g, current_b, current_a]]),
                                             Function(categories_mapping[category_selected][1], person, selected_style),
+                                            Function(person.clean_cache),
                                             Function(person.draw_person, show_person_info = False)
                                         ]
 
@@ -275,6 +278,7 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                                                         SetScreenVariable("current_a", hair_colour[1][3]),
                                                         SetField(person, "hair_colour", hair_colour),
                                                         Function(categories_mapping[category_selected][1], person, selected_style),
+                                                        Function(person.clean_cache),
                                                         Function(person.draw_person, show_person_info = False)
                                                     ]
                                                     # We use a fixed pallette of hair colours
@@ -315,6 +319,6 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                         xalign 0.5
                         xanchor 0.5
                         spacing 50
-                        textbutton "Save Haircut" action [Return, SetField(person, "outfit", use_current_outfit), Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80) background "#222222" hover_background "#1a45a1"
+                        textbutton "Save Haircut" action [Return, Function(person.clean_cache), SetField(person, "outfit", use_current_outfit), Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (155,80) background "#222222" hover_background "#1a45a1"
 
-                        textbutton "Abandon Design" action [Function(revert_style, person, old_hair_style, old_pubes_style), SetField(person, "outfit", use_current_outfit), Return, Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80) background "#222222" hover_background "#1a45a1"
+                        textbutton "Abandon Design" action [Function(restore_hair_style, person, old_hair_style, old_pubes_style), Function(person.clean_cache), SetField(person, "outfit", use_current_outfit), Return, Hide("hair_creator")] style "textbutton_style" text_style "textbutton_text_style" tooltip "" text_text_align 0.5 text_xalign 0.5 xysize (185,80) background "#222222" hover_background "#1a45a1"

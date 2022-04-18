@@ -225,7 +225,7 @@ label cougar_seduction_response(the_person):
         if the_person.sluttiness > 50:
             the_person "Do you need the touch of an experienced woman, [the_person.mc_title]? I know how stressed you can get you."
         else:
-            the_person "Oh sweety... What do you need help with [the_person.mc_title]?."
+            the_person "Oh sweety... What do you need help with, [the_person.mc_title]?"
     else:
         if the_person.sluttiness > 50:
             the_person "Well, how about you let me take care of you for a change?"

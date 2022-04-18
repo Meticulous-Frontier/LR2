@@ -156,8 +156,7 @@ label girlfriend_sleepover_crisis_label():
     else:
         "It's time for your date with [the_person.title]. You swing by the store on the way and pick up a decent bottle of wine."
         $ mc.business.change_funds(-15)
-        if the_person.home not in mc.known_home_locations:
-            $ mc.known_home_locations.append(the_person.home)
+        $ the_person.learn_home()
         "You make your way to her place, then knock on the door. She quickly answers."
         $ the_person.draw_person()
         the_person "Ah! I'm so glad you're here. Come in!"

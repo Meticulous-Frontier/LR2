@@ -204,7 +204,7 @@ label silent_pregnant_transform_announce(start_day, the_person):
     $ the_person.change_happiness(10)
     if the_person.is_employee():
         the_person "Thank you! So obviously, when the baby comes, I'll need some time off work..."
-        mc.name "Just let me know when the time comes, if you can. We'll make due without you while you are giving birth."
+        mc.name "Just let me know when the time comes, if you can. We'll make do without you while you are giving birth."
     the_person "Thank you!"
     return
 

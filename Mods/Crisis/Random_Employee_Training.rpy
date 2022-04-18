@@ -22,18 +22,13 @@ init 2 python:
         return
 
     def one_on_one_training_requirement():
-        if not mc.business.is_weekend():
-            if mc.is_at_work():
-                if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-                    return not get_training_employee() is None
+        if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
+            if not mc.business.is_weekend() and mc.is_at_work():
+                return any(x for x in mc.business.get_employee_list() if x.obedience > 110 and x.int > 1 and (mc.hr_skill > x.hr_skill or mc.supply_skill > x.supply_skill or mc.market_skill > x.market_skill or mc.research_skill > x.research_skill or mc.production_skill > x.production_skill))
         return False
 
     def get_training_employee():
-        training_eligible = []
-        for person in [x for x in mc.business.get_employee_list() if x.obedience > 110 and x.int > 1]:
-            if mc.hr_skill > x.hr_skill or mc.supply_skill > x.supply_skill or mc.market_skill > x.market_skill or mc.research_skill > x.research_skill or mc.production_skill > x.production_skill:
-                training_eligible.append(person)
-        return get_random_from_list(training_eligible)
+        return get_random_from_list([x for x in mc.business.get_employee_list() if x.obedience > 110 and x.int > 1 and (mc.hr_skill > x.hr_skill or mc.supply_skill > x.supply_skill or mc.market_skill > x.market_skill or mc.research_skill > x.research_skill or mc.production_skill > x.production_skill)])
 
     def one_on_one_update_HR_skill(person):
         increase = renpy.random.randint(1,(mc.hr_skill - person.hr_skill))
@@ -104,29 +99,51 @@ label SB_one_on_one_label():
     $ the_person.draw_person()
     the_person "Oh, hey [the_person.mc_title]!"
     "You keep chatting with [the_person.possessive_title] for a while. Eventually, the subject of your role in the company and the various jobs you fulfill around the lab comes up."
-    the_person "Yeah, I've heard that you are pretty skilled at some of the different jobs are the lab here. I was wondering if maybe you could give me some pointers?"
+    the_person "Yeah, I've heard that you are pretty skilled at some of the different jobs in the lab here. I was wondering if maybe you could give me some pointers?"
     "You consider [the_person.possessive_title]'s request for a moment, taking into account her personal ambitions and skill level."
     $ done = False
+    $ dislike = False
+    $ topic = None
     menu:
-        "Train HR" if the_person.hr_skill < mc.hr_skill and the_person.get_opinion_score("HR work") > -1:
-            "You explain to [the_person.possessive_title] the ins and outs of HR work. You do it in pretty broad terms, but it seems like she gets the hang of it pretty quickly."
-            $ done = one_on_one_update_HR_skill(the_person)
+        "Train HR" if the_person.hr_skill < mc.hr_skill and the_person.get_opinion_score("HR work") > -2:
+            "You explain to [the_person.possessive_title] the ins and outs of HR work. You do it in pretty broad terms, but touch on all the important parts."
+            if the_person.get_opinion_score("HR work") < 0:
+                $ dislike = True
+                $ topic = "HR work"
+            else:
+                $ done = one_on_one_update_HR_skill(the_person)
 
-        "Train Supply" if the_person.supply_skill < mc.supply_skill and the_person.get_opinion_score("supply work") > -1:
-            "You do some hands on with [the_person.possessive_title], showing her various methods for securing the different chemicals required for serum production."
-            $ done = one_on_one_update_supply_skill(the_person)
+        "Train Supply" if the_person.supply_skill < mc.supply_skill and the_person.get_opinion_score("supply work") > -2:
+            "You do some hands on training with [the_person.possessive_title], showing her various methods for securing the different chemicals required for serum production."
+            if the_person.get_opinion_score("supply work") < 0:
+                $ dislike = True
+                $ topic = "supply work"
+            else:
+                $ done = one_on_one_update_supply_skill(the_person)
 
-        "Train Marketing" if the_person.market_skill < mc.market_skill and the_person.get_opinion_score("marketing work") > -1:
-            "You spend some time with [the_person.possessive_title], giving all kind of advice on the art of the sale. It's not just all about good deals, but making people understand they need the product you offer."
-            $ done = one_on_one_update_marketing_skill(the_person)
+        "Train Marketing" if the_person.market_skill < mc.market_skill and the_person.get_opinion_score("marketing work") > -2:
+            "You spend some time with [the_person.possessive_title], giving all kinds of advice on the art of the sale. It's not just about good deals, but making people understand they need the product you offer."
+            if the_person.get_opinion_score("marketing work") < 0:
+                $ dislike = True
+                $ topic = "marketing work"
+            else:
+                $ done = one_on_one_update_marketing_skill(the_person)
 
-        "Train Research" if the_person.research_skill < mc.research_skill and the_person.get_opinion_score("research work") > -1:
-            "You talk with [the_person.possessive_title] about various chemicals and scientific methods, and how they apply do different portions of the brain."
-            $ done = one_on_one_update_research_skill(the_person)
+        "Train Research" if the_person.research_skill < mc.research_skill and the_person.get_opinion_score("research work") > -2:
+            "You talk with [the_person.possessive_title] about various chemicals and scientific methods, and how they apply to different portions of the brain."
+            if the_person.get_opinion_score("research work") < 0:
+                $ dislike = True
+                $ topic = "research work"
+            else:
+                $ done = one_on_one_update_research_skill(the_person)
 
-        "Train Production" if the_person.production_skill < mc.production_skill and the_person.get_opinion_score("production work") > -1:
+        "Train Production" if the_person.production_skill < mc.production_skill and the_person.get_opinion_score("production work") > -2:
             "You share some insights with [the_person.possessive_title] about the chemical processes and reactions between common serum elements."
-            $ done = one_on_one_update_production_skill(the_person)
+            if the_person.get_opinion_score("production work") < 0:
+                $ dislike = True
+                $ topic = "production work"
+            else:
+                $ done = one_on_one_update_production_skill(the_person)
 
         "Too Busy":
             "You apologize. You are just too busy to offer one on one training right now."
@@ -139,6 +156,19 @@ label SB_one_on_one_label():
             if mc.production_skill == mc.max_work_skills:
                 "Sharing with someone a skill you thought you had wholly mastered reveals a few final deficient areas. You feel like you can take your skills even further now."
                 $ perk_system.add_stat_perk(Stat_Perk(description = "Teaching others has raised your skill ceiling to new levels. +1 work skills cap", skill_cap = 1), "Those Who Can, Do")
+    elif dislike:
+        if the_person.discover_opinion(topic):
+            "As you talk you catch glimmers of what could be disgust cross her face. It seems like [topic] might have been the thing to discuss with [the_person.title]."
+        else:
+            "As you get further into the details you recall that [the_person.title] doesn't really like [topic]."
+        "Since it is too late to start over you shift focus, talking up the positive and enjoyable parts of the job."
+        if renpy.random.randint(0, 100) < mc.charisma * 5: # about 50% max success rate
+            "Surprisingly it seems to work and [the_person.title] starts to nod along as you finish talking."
+            $ the_person.increase_opinion_score(topic)
+            the_person "You know, when you say it that way, maybe it wouldn't be so bad to do that everyday."
+        else:
+            "Unfortunately she doesn't seem to be moved by your words."
+            the_person "Sorry, I just don't think I would ever be happy doing [topic]."
     else:
         the_person "That's okay, [the_person.mc_title], I understand. Maybe another time then!"
 

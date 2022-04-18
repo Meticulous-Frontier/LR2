@@ -221,7 +221,7 @@ label strip_ask_spanking(the_girl, the_clothing, the_location, the_object):
             return False
 
 label orgasm_spanking(the_girl, the_location, the_object):
-    the_girl "Oh god, oh god, oh... OH... OHHHH"
+    the_girl "Oh god, oh god, oh... OH... OHHHH!"
     "Her whole body tenses up. You give her a few more spanks as she cums, just from the sensations of being spanked."
     $ the_girl.call_dialogue("climax_responses_foreplay")
     "She quivers with pleasure for a few seconds before her whole body relaxes."

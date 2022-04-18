@@ -131,7 +131,7 @@ label breeding_fetish_high_fertility_crisis_label():
         mc.name "Mmm, fuck I guess so!"
         "You start to piston your hips, savoring the highly fertile, bare pussy that is wrapped around you."
         the_person "Give it to me [the_person.mc_title]! Give me a fucking I'll never forget and pour your seed deep!"
-        call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, skip_condom = True, position_locked = True) from _highly_fertile_breeding_night_02
+        call fuck_person(the_person, start_position = breeding_missionary, start_object = make_bed(), private = True, skip_intro = True, skip_condom = True, position_locked = True) from _highly_fertile_breeding_night_02
         if the_person.has_creampie_cum():
             the_person "Its inside me! I'm pregnant! Don't ask me how I know... I can just feel it!"
             "She rubs her belly and sighs."
@@ -185,7 +185,7 @@ label breeding_fetish_happy_breeder_crisis_label():
 
     $ the_person.draw_person(position="kissing")
     "[the_person.possessive_title] quickly turns and embraces you."
-    the_person "Oh, [the_person.mc_title], I'm sorry to just come over without asking like this but, I was at trying to sleep."
+    the_person "Oh, [the_person.mc_title], I'm sorry to just come over without asking like this but, I was at home trying to sleep."
     the_person "I kept thinking about the baby growing inside of me and I started getting all worked up..."
     "She stumbles over her words for a second."
     the_person "Oh geeze... I just couldn't stop thinking about how good it feels when you fuck me!"

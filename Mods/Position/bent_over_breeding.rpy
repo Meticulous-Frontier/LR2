@@ -69,7 +69,7 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
         "You use both hands to grab her hips and slam yourself into her as deep as you can go."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     else:
-        "Fucking her hard, [the_girl.possessive_title] moans, matching each hip movement of yours with movement of her own."
+        "Fucking her hard, [the_girl.possessive_title] moans, matching each hip movement of yours with a movement of her own."
         the_girl "Oh god, you fuck me so good, I can barely keep up!"
         "[the_girl.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accommodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
@@ -233,7 +233,7 @@ label scene_bent_over_breeding_3(the_girl, the_location, the_object):
                 $ the_girl.change_arousal(mc.sex_skills["Anal"])
                 "Soon though, you feel the urge in your hips to start fucking her again, so you pull your finger out so you can grab both her hips."
         "Grope her ass":
-            "You hands are drawn to her cheeks. With a soft touch you trace your finger down around their delicious curve."
+            "Your hands are drawn to her cheeks. With a soft touch you trace your finger down around their delicious curve."
             "You grab a handful, her ass flesh feels tight and full in your hand. She moans and you give her a couple vigorous thrusts."
             mc.name "Your ass is amazing. Maybe I'll fuck you back there next..."
             "She moans and pushes back against you as you fuck."
@@ -284,7 +284,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
             the_girl "Oh fuck... I could get pregnant you know.."
 
         "You wait until your orgasm has passed completely, then pull out and stand back."
-        "You cum leaks out of her dripping wet [the_girl.pubes_description] pussy."
+        "Your cum leaks out of her dripping wet [the_girl.pubes_description] pussy."
 
 
     return

@@ -1,19 +1,8 @@
 ###Scene Idea: Girl is pumping milk. MC can help or watch
-#
-#   In this scene, player is walking by some kind of private room when he hears moaning coming from inside
-#   After investigating, player finds NPC masturbating
-#   Player choices include walking away and watching
-#   If watching, NPC has chance to notice PC watching. If slutty, NPC continues, if not, stops and gets angry
-#   If watching, and NPC is slutty, have a chance if we went unnoticed for NPC to call out PC name
-#   Give PC option to just continue watching, leave NPC a note saying thanks for the show, or to make self known
-#   If make self known trigger sex scene
-#
-#
-###
 init 2 python:
     def milk_employee_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.get_employee_count() > 0:
-            return not select_girl_lactating() is None
+            return any(x for x in mc.business.get_employee_list() if x.lactation_sources > 0)
         return False
 
     def select_girl_lactating():

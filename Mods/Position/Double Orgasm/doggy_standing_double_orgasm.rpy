@@ -61,7 +61,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
             if the_girl.has_breeding_fetish():
                 "As your cum starts to leak out, [the_girl.possessive_title] reaches back and tries to keep it inside with her hand."
             else:
-                "You cum leaks out of her dripping wet pussy."
+                "Your cum leaks out of her dripping wet pussy."
 
     elif the_choice == "Cum on her ass":
         if mc.condom:

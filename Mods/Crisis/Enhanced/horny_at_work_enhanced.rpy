@@ -259,7 +259,7 @@ label horny_at_work_crisis_enhanced_label():
 
                         if not isinstance(_return, Person):
                             if len(helpful_people) > 1:
-                                "You wave the girls back to their desk. They seem disappointed they didn't get a chance to service you."
+                                "You wave the girls back to their desks. They seem disappointed they didn't get a chance to service you."
                             else:
                                 "You wave her back to her desk. She seems disappointed that she didn't get a chance to service you."
                             $ wants_to_continue = False
@@ -435,11 +435,11 @@ label horny_at_work_crisis_enhanced_label():
                             "[lead_other.title] glances over and notices you jerking off at your desk in front of [the_person.title]."
                             if lead_other.effective_sluttiness() < 20:
                                 lead_other "Oh my god, [lead_other.mc_title], what are you doing?"
-                                the_person "It's okay [lead_other.title], this is my fault. I've gotten [the_person.mc_title] too horny to work."
+                                the_person "It's okay [lead_other.name], this is my fault. I've gotten [the_person.mc_title] too horny to work."
                                 the_person "So I'm going to help him cum."
 
                             else:
-                                lead_other "[the_person.title], what are you doing?"
+                                lead_other "[the_person.name], what are you doing?"
                                 the_person "I've gotten [the_person.mc_title] too excited, so I'm going to help him jerk off."
                             $ mc.change_locked_clarity(10)
                             $ del lead_other

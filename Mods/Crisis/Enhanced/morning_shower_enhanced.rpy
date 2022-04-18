@@ -134,7 +134,7 @@ label morning_shower_masturbation():
         elif ran_num == 1:
             "As she gets more and more turned on, her hand is moving faster and faster."
         elif ran_num == 2:
-            "She pushes 3 fingers inside, making a deep guttural noise."
+            "She pushes three fingers inside, making a deep guttural noise."
             the_person "Ahh, yes. Fuck me hard and deep."
         elif ran_num == 3:
             if the_person.get_opinion_score("anal sex") > 0:
@@ -259,7 +259,7 @@ label girl_shower_enter_enhanced(the_person):
 
                         $ apply_towel_outfit(the_person)
                         $ the_person.draw_person()
-                        "When you're finished [the_person.title] steps out of the shower and grabs a towel. She dries herself off, then wraps herself in it then turns to you."
+                        "When you're finished [the_person.title] steps out of the shower and grabs a towel. She dries herself off, then wraps herself in it and turns to you."
                         if the_report.get("girl orgasms",0)>0:
                             the_person "Well that's a good way to start the day. See you later."
                         elif the_report.get("guy orgasms",0)>0:

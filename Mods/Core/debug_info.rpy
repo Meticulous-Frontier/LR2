@@ -61,7 +61,7 @@ init 2 python:
         # keep texture memory at configured image_cache_size_in_mb; game slows down when this gets too high
         # check for 90% of available memory cache slows down dramatically when under pressure
         if renpy.display.draw.get_texture_size()[0] > (renpy.display.im.cache.cache_limit * 4 * .9):
-            renpy.free_memory() # use main free memory function
+            clean_memory()   # use main free memory function
         return
 
     def update_texture_info():

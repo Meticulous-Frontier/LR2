@@ -102,7 +102,7 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
         "You use both hands to grab her hips and slam yourself into her."
         "Buried deep inside, you stir your hips in a circular motion. Her rectum quivers and caresses you in response."
     else:
-        "Fucking her hard, [the_girl.possessive_title] moans, matching each hip movement of yours with movement of her own."
+        "Fucking her hard, [the_girl.possessive_title] moans, matching each hip movement of yours with a movement of her own."
         the_girl "Oh god, you fuck me so good, I can barely keep up!"
         "[the_girl.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her booty hole stretched wide to accommodate you."
         "Buried deep inside, you stir your hips in a circular motion. Her rectum quivers in response."

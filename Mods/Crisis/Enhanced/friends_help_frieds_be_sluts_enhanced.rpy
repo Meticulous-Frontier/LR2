@@ -97,7 +97,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     person_two "You're sure?"
                     mc.name "Of course I'm sure, but if I'm making you self conscious I'll give you some privacy."
                     $ scene_manager.update_actor(person_two, emotion = "happy")
-                    mc.name "Once you're done your break I expect to see you both back at work."
+                    mc.name "Once you're done with your break I expect to see you both back at work."
                     $ person_two.change_slut(2)
                     $ person_two.change_obedience(2)
                     $ mc.change_locked_clarity(5)
@@ -312,7 +312,7 @@ label friends_help_friends_be_sluts_enhanced_label():
 
                                 $ strip_list = None
 
-                                if person_two.get_opinion_score("showing her tits") > 0:
+                                if person_two.get_opinion_score("showing her tits") < 0:
                                     "When she has her tits out she crosses her arms in front of her in a small attempt to preserve her modesty."
                                     person_one "[person_one.mc_title] can't see them if you keep them covered up. Here..."
                                     "[person_one.title] takes her friend's hands and move them to her hips, then cups them and gives them a squeeze in front of you."
@@ -448,7 +448,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                             call fuck_person(person_two, start_position = blowjob, skip_intro = True, position_locked = True, self_strip = False, affair_ask_after = True, ignore_taboo = True) from _call_fuck_person_friends_help_friends_be_sluts_enhanced
                             $ the_report = _return
                             if the_report.get("guy orgasms", 0) > 0:
-                                "You sit down in your office chair, thoroughly drained. [person_two.title] smiles, seemingly proud of her work."
+                                "You sit down in your office chair, thoroughly drained. [person_two.title] smiles, looking rather pleased with herself."
                                 mc.name "So, was that everything you wanted it to be?"
                                 person_two "It was fun, I can't wait to tell [person_one.name] all about it."
 

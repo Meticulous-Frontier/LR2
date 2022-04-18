@@ -198,7 +198,7 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
                 "She is exhausted, but constantly moaning from your dominating approach."
         "Go easy on her":
             "You decide for now just to enjoy the wet hole [the_girl.possessive_title] has pointed up at you."
-            "You put both you hands around her, letting your weight pin her to the [the_object.name]."
+            "You put both your hands around her, letting your weight pin her to the [the_object.name]."
             "Her body is trying to push back against you as you fuck her, but her exhaustion your weight on top of her leave her helpless."
             the_girl "Mmmfff... god [the_girl.mc_title]... so good..."
     return

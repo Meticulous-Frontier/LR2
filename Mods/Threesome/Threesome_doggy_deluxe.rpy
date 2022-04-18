@@ -217,7 +217,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_l
         "You use both hands to grab her hips and slam yourself into her as deep as you can go."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     else:
-        "Fucking her hard, [the_girl_2.possessive_title] moans, matching each hip movement of yours with movement of her own."
+        "Fucking her hard, [the_girl_2.possessive_title] moans, matching each hip movement of yours with a movement of her own."
         "[the_girl_2.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accommodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     the_girl_1 "I know it feels good, but don't forget you need to get me off too!"
@@ -262,7 +262,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
             else:
                 "You grab [the_girl_2.possessive_title]'s hips and thrust deep. You dump your load as deep inside of her as you can get it."
                 if the_girl_2.wants_creampie():
-                    the_girl_2  "MMMM! Yes yes yeessshhhh"
+                    the_girl_2  "MMMM! Yes yes yeessshhhh..."
                     "You can make out a few words of excitement from [the_girl_2.possessive_title] as she buries her face in [the_girl_1.title]'s cunt."
                 $ the_girl_2.cum_in_vagina()
                 $ scene_manager.draw_scene()

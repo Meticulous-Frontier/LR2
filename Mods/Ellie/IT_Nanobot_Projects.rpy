@@ -142,7 +142,7 @@ init 1 python:
         tier = 10)
 
     anal_incest_project = IT_Project(name = "Familial Anal Adaptation",
-        desc = "Members of family may be more willing to accept acts of Anal. Adds Incest to opinions increased by the Anal Proclivity Nanobots.",
+        desc = "Members of family may be more willing to accept acts of anal sex. Adds Incest to opinions increased by the Anal Proclivity Nanobots.",
         cost = 0,
         requirement = anal_incest_project_requirement,
         toggleable = False,
@@ -214,7 +214,7 @@ init 1 python:
         tier = 10)
 
     cum_thirst_project = IT_Project(name = "Cum Thirst Adaptation",
-        desc = "Exposure to cum causes thirst. Makes girls more likely to seek out situations where they will be exposed to it. Adds taking control to the list of opinions increased by Semen Proclivity Nanobots.",
+        desc = "Sexual fixation on cum can inspire a powerful thirst, motivating girls to take a more active role in getting their fix. Adds taking control to the list of opinions increased by Semen Proclivity Nanobots.",
         cost = 0,
         requirement = cum_thirst_project_requirement,
         toggleable = False,
@@ -250,7 +250,7 @@ init 1 python:
         tier = 10)
 
     exhibition_cheating_project = IT_Project(name = "Risky Behavior Adaptation",
-        desc = "Exhibitionism is often encouraged by risky behavior. Adds cheating on men to the list of opinions increased by Social Sexual Proclivity Nanobots.",
+        desc = "Exhibitionism often encourages risky behavior. Adds cheating on men to the list of opinions increased by Social Sexual Proclivity Nanobots.",
         cost = 0,
         requirement = exhibition_cheating_project_requirement,
         toggleable = False,

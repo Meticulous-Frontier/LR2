@@ -73,7 +73,7 @@ label late_for_work_action_label():
                 if (upper_clothing):
                     mc.name "Well at least clean up your [upper_clothing.display_name], before you start."
                 else:
-                    mc.name "At least get that cum of your tits, before you go to work."
+                    mc.name "At least get that cum off your tits, before you go to work."
                 the_person "Thank you, [the_person.mc_title]!"
                 $ the_person.change_stats(obedience = -2, happiness = 2)
 
@@ -98,7 +98,7 @@ label late_for_work_action_label():
                     "She pulls your cock out and starts pumping until it's fully erect."
                     $ the_person.break_taboo("touching_penis")
                 else:
-                    "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
+                    "She quickly gets down on her knees. She pulls your cock out of your pants and gives it a couple strokes."
                 $ mc.change_locked_clarity(10)
 
                 if the_person.has_taboo(["sucking_cock"]):
@@ -165,7 +165,7 @@ label late_for_work_action_label():
                     "She pulls your cock out and starts pumping until it's fully erect."
                     $ the_person.break_taboo("touching_penis")
                 else:
-                    "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
+                    "She quickly gets down on her knees. She pulls your cock out of your pants and gives it a couple strokes."
                 $ mc.change_locked_clarity(10)
 
                 if the_person.has_taboo(["sucking_cock"]):
@@ -195,7 +195,7 @@ label late_for_work_action_label():
                 $ the_person.apply_outfit()
 
         $ the_person.draw_person(position = "walking_away")
-        "The client wires the money to your company account, but must have forgot to actually place an order."
+        "The client wires the money to your company account, but must have forgotten to actually place an order."
         $ mc.business.change_funds(250)
 
     else: #high sluttiness single girls
@@ -269,7 +269,7 @@ label late_for_work_action_label():
                     "She pulls your cock out and starts pumping until it's fully erect."
                     $ the_person.break_taboo("touching_penis")
                 else:
-                    "She quickly gets down on her knees. She pulls your cock out of you pants and gives it a couple strokes."
+                    "She quickly gets down on her knees. She pulls your cock out of your pants and gives it a couple strokes."
                 $ mc.change_locked_clarity(10)
 
                 if the_person.has_taboo(["sucking_cock"]):

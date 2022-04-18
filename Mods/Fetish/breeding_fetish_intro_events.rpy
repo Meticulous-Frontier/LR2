@@ -190,7 +190,7 @@ label breeding_fetish_employee_intro_label(the_person):
     mc.name "... and didn't stop until I dump my cum deep?"
     the_person "Oh god! Yes do it! Oh fuck!"
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _employee_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary, start_object = make_desk(), private = True, skip_intro = True, position_locked = True, skip_condom = True) from _employee_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
         the_person "Oh god! It's so deep! Oh thank you so much [the_person.mc_title]!"
     else:
@@ -285,7 +285,7 @@ label breeding_fetish_family_intro_label(the_person):
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
     "You run your cock along her slit a couple more times, then start to push it inside. She moans as you bottom out inside of her and start to fuck."
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _family_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary, start_object = make_bed(), private = True, skip_intro = True, position_locked = True, skip_condom = True) from _family_gets_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     $ the_person.draw_person(position = "missionary")
     if the_person.knows_pregnant():
@@ -337,12 +337,11 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
 
     "[the_person.title] takes your hand and you step away with her. After a few minutes of walking, you find yourself at her place."
     "She quickly unlocks the front door and pulls you inside."
-    if the_person.home not in mc.known_home_locations:
-        $ mc.known_home_locations.append(the_person.home)
+    $ the_person.learn_home()
     $ mc.change_location(the_person.home)
     $ mc.location.show_background()
     $ the_person.draw_person(position = "kissing")
-    "She throws her arms around you and you start to make out. You hands drop to her ass and you start to grope her aggressively."
+    "She throws her arms around you and you start to make out. Your hands drop to her ass and you start to grope her aggressively."
     the_person "Oh god, I'm not sure I can make it to the bedroom."
     $ the_person.draw_person(position = "against_wall")
     $ the_person.change_arousal(10) #50
@@ -373,7 +372,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
     "You decide to give her what she wants, for now. You grab her hips and then push yourself inside of her sopping wet cunt."
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _generic_anyone_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary, start_object = make_bed(), private = True, skip_intro = True, position_locked = True, skip_condom = True) from _generic_anyone_gets_breeding_fetish_01
     $ add_breeding_fetish(the_person)
     $ the_person.draw_person(position = "missionary")
     "When you finish, she lays back, just rubbing her hand along her belly."
@@ -496,7 +495,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     $ mc.change_locked_clarity(50)
     "She pauses for a second..."
     if the_person.knows_pregnant():
-        the_person "I know this is crazy... I'm already pregnant!.. but I don't want to stop now! I want to you to breed me over and over, like your personal breeding slave!"
+        the_person "I know this is crazy... I'm already pregnant!... but I don't want to stop now! I want to you to breed me over and over, like your personal breeding slave!"
     else:
         the_person "I know this is crazy... I want you to knock me up! And not just once! I want you to breed me over and over, like your personal breeding slave!"
     "The serums must have really done their job! She seems to have acquired a breeding fetish!"
@@ -777,7 +776,7 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
     the_person "Oh yes! Give it to me good!"
-    call fuck_person(the_person, start_position = bent_over_breeding , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _starbuck_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_counter(), private = True, skip_intro = True, position_locked = True, skip_condom = True) from _starbuck_gets_breeding_fetish_01
     if the_person.has_creampie_cum():
         the_person "Oh god! Baby making sex is so hot, I can't believe it..."
         "[the_person.title] reaches her hand back, trying to keep your cum inside of her, but failing, as your cum drips down the inside of her thighs."
@@ -934,7 +933,7 @@ label breeding_fetish_erica_intro_label():
     $ the_person.break_taboo("vaginal_sex")
     the_person "Oh god! Yes! Make me cum and fill me up [the_person.mc_title]."
     "Still holding her hands down, you start to thrust rapidly. It's time to give this horny slut a creampie!"
-    call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, position_locked = True, skip_condom = True) from _erica_gets_breeding_fetish_01
+    call fuck_person(the_person, start_position = breeding_missionary, start_object = make_table(), private = True, skip_intro = True, position_locked = True, skip_condom = True) from _erica_gets_breeding_fetish_01
     $ the_person.draw_person(position = "missionary")
     if the_person.has_creampie_cum():
         $ become_pregnant(the_person)
@@ -1064,7 +1063,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         $ the_person.break_taboo("condomless_sex")
         $ the_person.break_taboo("vaginal_sex")
         the_person "Yes!!!"
-        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, skip_condom = True) from _bimbo_candace_gets_breeding_fetish_01
+        call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), private = False, skip_intro = True, position_locked = True, skip_condom = True) from _bimbo_candace_gets_breeding_fetish_01
         if the_person.has_creampie_cum():
             "[the_person.title] reaches her hand back, rubbing the cum that has started to drip out of her all around her slit, playing with it."
         else:
@@ -1132,7 +1131,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         $ the_person.break_taboo("vaginal_sex")
         the_person "Yes!!!"
 
-        call fuck_person(the_person, start_position = bent_over_breeding , private = False, skip_intro = True, position_locked = True, skip_condom = True) from _bimbo_candace_gets_breeding_fetish_02
+        call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_desk(), private = False, skip_intro = True, position_locked = True, skip_condom = True) from _bimbo_candace_gets_breeding_fetish_02
         if the_person.has_creampie_cum():
             "[the_person.title] reaches her hand back, rubbing the cum that has started to drip out of her all around her slit, playing with it."
             if the_person.knows_pregnant():

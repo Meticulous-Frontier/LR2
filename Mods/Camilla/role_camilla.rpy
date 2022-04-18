@@ -437,7 +437,7 @@ label camilla_dance_lessons_label():
         "You take to salsa dancing like a natural. Throughout the night you have her spinning and moving to the music."
         "After a short time, you stop listening to the instructor and start doing things your own way. You lead [the_person.possessive_title] around the dance floor with authority."
         "At the end of the lesson, she is close to you again, breathless. A light sheen of sweat makes her skin shine."
-        "You hands on her body throughout the dancing has definitely put sexual tension in the air."
+        "Your hands on her body throughout the dancing has definitely put sexual tension in the air."
         $ mc.change_locked_clarity(30)
         $ the_person.change_slut(2, 50)
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
@@ -540,7 +540,7 @@ label camilla_take_pics_label(the_person):  #Not the first time.
             the_person "Mmmm, I can't wait any longer... I have to taste it!"
             $ the_person.break_taboo("sucking_cock")
             "She opens up her mouth and wraps her lips around your meat."
-            "You snap some pictures as she pulls of and begin to run her tongue up and down along the sides of your cock."
+            "You snap some pictures as she pulls off and begins to run her tongue up and down along the sides of your cock."
             mc.name "Mmm, that feels great [the_person.title]."
             "You decide to just enjoy her skilled mouth going down on you."
             # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH012
@@ -728,7 +728,7 @@ label camilla_dancing_sex_label(the_person):
             "Note: Dancing skill is based on MC's Charisma and Energy levels. Try increasing Charisma and make sure energy is high before attempting this scene."
             return
         $ scene_manager.update_actor(the_person, position = "kissing")
-        "[the_person.possessive_title] turns back to you and puts her arms around your shoulders. You hands start on her hips, but soon drift down to her ass."
+        "[the_person.possessive_title] turns back to you and puts her arms around your shoulders. Your hands start on her hips, but soon drift down to her ass."
         the_person "I love this song. Let's dance to this and then..."
         "You notice her glance over to the bar. You follow her eyes and notice the bartender, [the_person.SO_name] is watching you dance."
         "You look back at [the_person.title]. You squeeze her supple ass and grind up against her slightly."
@@ -834,7 +834,7 @@ label camilla_dancing_sex_label(the_person):
         "She gives a sigh and melts back into you. You let your hands roam all along the sides of her body, once in a while moving across the sides of her breasts."
         "The song ends and a slower song begins to play."
         $ the_person.draw_person (position = "kissing")
-        "[the_person.possessive_title] turns back to you and puts her arms around your shoulders. You hands start on her hips, but soon drift down to her ass."
+        "[the_person.possessive_title] turns back to you and puts her arms around your shoulders. Your hands start on her hips, but soon drift down to her ass."
         the_person "I love this song. Let's dance to this! Then we can head to the back and you can have your way with me..."
         "You squeeze her supple ass and grind up against her slightly."
         the_person "Mmm... fuck that feels good. You better make sure I cum all over that amazing cock of yours."
@@ -1373,7 +1373,7 @@ label camilla_formal_date_label():    #60
     "You lips meet with an immediate spark. There is something different about her this time."
     "Before when you would kiss, she was a bit reserved, holding back a piece of herself."
     "This time though, she isn't kissing you out of a duty to her husband. She's doing it because she WANTS to."
-    "You hands drop to her ass. She moans into your mouth as you make out."
+    "Your hands drop to her ass. She moans into your mouth as you make out."
     $ the_person.change_arousal(15)
     the_person "Señor! I'm ready... let's do this!"
     $ the_person.draw_person()

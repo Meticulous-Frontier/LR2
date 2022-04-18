@@ -16,7 +16,10 @@ init -1 python:
 
     # add outfit hash function
     def outfit_hash(self):
-        return hash(self.name)
+        return hash((self.name, tuple(x for x in map(hash, self.upper_body)),
+            tuple(x for x in map(hash, self.lower_body)),
+            tuple(x for x in map(hash, self.feet)),
+            tuple(x for x in map(hash, self.accessories))))
 
     Outfit.__hash__ = outfit_hash
     Outfit.hash = outfit_hash

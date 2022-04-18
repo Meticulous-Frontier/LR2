@@ -202,7 +202,7 @@ label Sarah_sex_accept(the_person):
 label Sarah_sex_obedience_accept(the_person):
     if the_person.sluttiness > 70:
         if the_person.event_triggers_dict.get("dating_path", False) == True:
-            the_person "I can't say no to you, can I? I want you feel good, use me however you want, [the_person.mc_title]!"
+            the_person "I can't say no to you, can I? I want you to feel good, use me however you want, [the_person.mc_title]!"
         else:
             the_person "God, what have you done to me? I should say no, but... I just want you to use me however you want, [the_person.mc_title]."
     else:
@@ -253,7 +253,7 @@ label Sarah_seduction_accept_crowded(the_person):
         if the_person.sluttiness < 20:
             the_person "Alright, let's slip away for a few minutes and you can convince me a little more."
         elif the_person.sluttiness < 50:
-            the_person "Come on, I know someplace nearby where we can get a few minutes privacy."
+            the_person "Come on, I know someplace nearby where we can get a few minutes of privacy."
         else:
             the_person "Oh my god. I hope you aren't planning on making me wait [the_person.mc_title], because I don't know if I can!"
     else:
@@ -358,7 +358,7 @@ label Sarah_flirt_response_mid(the_person):
 
     else:
         the_person "Buttering me up again, are you?"
-        the_person "You know, with that way you talk about me, a girl could get the wrong idea about what your intentions might be..."
+        the_person "You know, with the way you talk about me, a girl could get the wrong idea about what your intentions might be..."
         "[the_person.possessive_title] smiles and runs her hands down her hips. She hesitates for a moment, then turns around and pats her ass."
         $ the_person.draw_person(position = "back_peek")
         the_person "What exactly are your intentions, [the_person.mc_title]? You seem to have a hard time taking your eyes off of me..."
@@ -367,7 +367,7 @@ label Sarah_flirt_response_mid(the_person):
         $ the_person.draw_person()
         "She turns back and giggles."
         if sarah_epic_tits_progress() >= 2:
-            the_person "Tongue tied?. That's okay, I've been having that effect on a lot of guys lately."
+            the_person "Tongue tied? That's okay, I've been having that effect on a lot of guys lately."
         mc.name "What can I say? Your body is hypnotizing."
     return
 
@@ -412,7 +412,7 @@ label Sarah_flirt_response_high(the_person):
             mc.name "You'll pull your phone out and start taking blackmail pictures. There's no way I'm doing that."
             the_person "Me? Blackmail you? [the_person.mc_title] why I would never!"
             if the_person.has_taboo("touching_penis"):
-                mc.name "Do you what would actually be really helpful? I've gotten all worked up, why don't you just touch me with your hand for a bit."
+                mc.name "Do you know what would actually be really helpful? I've gotten all worked up, why don't you just touch me with your hand for a bit."
                 the_person "You want me... to give you a handjob?"
                 mc.name "You would be doing me a big favor..."
                 $ the_person.call_dialogue("touching_penis_taboo_break")
@@ -463,7 +463,7 @@ label Sarah_flirt_response_high(the_person):
                         the_person "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]!"
                         $ the_person.draw_person()
                     else:
-                        "She checks that nobody else is looking, the reaches down and grabs your package. You harden rapidly as she gives it a couple of strokes."
+                        "She checks that nobody else is looking, then reaches down and grabs your package. You harden rapidly as she gives it a couple of strokes."
                         the_person "Teasing a lady like me. You should be ashamed of yourself, [the_person.mc_title]!"
                     $ mc.change_locked_clarity(15)
                     mc.name "Jesus woman, you win!"
@@ -494,7 +494,7 @@ label Sarah_cum_face(the_person):
             "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
     else:
         if the_person.sluttiness > 80:
-            the_person "Mmm, that's such a good feeling. Do you think I look cute like this?."
+            the_person "Mmm, that's such a good feeling. Do you think I look cute like this?"
             "[the_person.title] runs her tongue along her lips, then smiles and laughs."
         else:
             the_person "Whew, glad you got that over with. Take a good look while it lasts."
@@ -880,7 +880,7 @@ label Sarah_sucking_cock_taboo_break(the_person):
         "You nod and she bites her lip in anticipation."
         the_person "Mmm, okay. I can't wait to hear you moan!"
     elif the_person.love >= 30:
-        the_person "I figured this this was coming soon."
+        the_person "I figured this was coming soon."
         mc.name "So..."
         "She gives you a warm smile."
         the_person "You mean a lot to me. I'll do it, just to make you feel good!"
@@ -911,7 +911,7 @@ label Sarah_licking_pussy_taboo_break(the_person):
     else:
         if the_person.has_taboo("sucking_cock"):
             the_person "Whoa, really?"
-            "She laughs nervously, but watch a wave of arousal sweep through her."
+            "She laughs nervously, but you see a wave of arousal sweep through her."
             the_person "Alright... You can eat me out if you really want to [the_person.mc_title]."
 
         else:
@@ -937,7 +937,7 @@ label Sarah_vaginal_sex_taboo_break(the_person):
                 "[the_person.title] giggles."
                 the_person "This feels so backwards! You've already been in my ass, but now we're doing it properly."
                 "She shrugs."
-                the_person "At lest this time it should be easier for you to fit inside."
+                the_person "At least this time it should be easier for you to fit inside."
         return
 
 label Sarah_anal_sex_taboo_break(the_person):
@@ -1009,7 +1009,7 @@ label Sarah_underwear_nudity_taboo_break(the_person, the_clothing):
     if the_person.effective_sluttiness() > 30 - (the_person.get_opinion_score("skimpy outfits") * 5):
         the_person "You want to get a look at my underwear, huh?"
         if the_person.has_taboo(["bare_tits","bare_pussy"]):
-            mc.name "I do. You've got good fashion sense, I bet you wear wear some cute underwear too."
+            mc.name "I do. You've got good fashion sense, I bet you wear some cute underwear too."
             the_person "Well, let's get this off and you can check for yourself."
         else:
             mc.name "I do. I've already seen you naked, but I appreciate your fashion sense."
@@ -1102,7 +1102,7 @@ label Sarah_creampie_taboo_break(the_person):
                     "She gets goosebumps and sighs."
                     the_person "... but so worth it. I feels so right inside me..."
                 else:
-                    the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care I'm not on the pill!."
+                    the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care that I'm not on the pill!"
 
         else:
             if the_person.relationship != "Single":
@@ -1148,7 +1148,7 @@ label Sarah_get_drunk_dialogue(the_person, intoxication_level):
             "[the_person.title] is carrying on, talking about a time that she was trying to hookup with a random guy on Tinder but it didn't go well."
             the_person "... So anyway, that's when I decided to start making sure to keep my pubic hair trimmed."
             mc.name "Yeah I bet. To be honest though, I probably would have eaten you out anyway."
-            the_person "Yeah right, and risk getting hair in your mouth? Hey, that reminds me of a joke I heard. What do you call a roman with a hair stuck in his teeth?"
+            the_person "Yeah right, and risk getting hair in your mouth? Hey, that reminds me of a joke I heard. What do you call a Roman with a hair stuck in his teeth?"
             mc.name "I don't know, what?"
             the_person "A gladiator!"
             "You share a laugh together and continue having your drinks."
@@ -1161,10 +1161,10 @@ label Sarah_get_drunk_dialogue(the_person, intoxication_level):
     elif intoxication_level < 5: # drunk
         if the_person.sluttiness > 60:
             "[the_person.title] is carrying on. She's had a few drinks and is starting to get pretty obvious, flirting with you."
-            the_person "... So anyway, that's why I'm banned from the weekly wine tasting. They keep saying to spit it out, but I always swallow."
+            the_person "... So anyway, that's why I'm banned from the weekly wine tasting. They kept saying to spit it out, but I always swallow."
             mc.name "Always?"
             the_person "Don't believe me?"
-            "[the_person.possessive_title] takes a deep sip of her drink, then makes a show, tiling her head back and swallowing it all with a loud gulp."
+            "[the_person.possessive_title] takes a deep sip of her drink, then makes a show, tilting her head back and swallowing it all with a loud gulp."
             the_person "The defense declares this evidence to be called exhibit A... maybe later I can show you exhibit D."
         else:
             "[the_person.title] is carrying on, talking about her time at her internship, before you hired her."

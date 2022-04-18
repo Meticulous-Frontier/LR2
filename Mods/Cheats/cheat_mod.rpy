@@ -29,6 +29,7 @@ init 2 python:
         cs = renpy.current_screen()
         editing_target = cs.scope["editing_target"]
         if isinstance(editing_target, Person):
+            editing_target.clean_cache()
             editing_target.draw_person()
         return
 

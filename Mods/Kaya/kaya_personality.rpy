@@ -259,7 +259,7 @@ label kaya_clothing_reject(the_person):
         if the_person.sluttiness > 60:
             the_person "Wow. I'm usually up for anything but I think that's going too far."
         else:
-            the_person "Wow. Where's the rest of it?."
+            the_person "Wow. Where's the rest of it?"
     return
 
 label kaya_clothing_review(the_person):
@@ -1100,7 +1100,7 @@ label kaya_work_enter_greeting(the_person):
         if the_person.obedience > 120:
             "[the_person.title] gives you a curt nod and then turns back to what she was doing."
         else:
-            "[the_person.title] glances at you when you enters the room then looks away quickly to avoid starting a conversation."
+            "[the_person.title] glances at you when you enter the room then looks away quickly to avoid starting a conversation."
 
     elif the_person.happiness > 120:
         if the_person.sluttiness > 50:
@@ -1605,7 +1605,7 @@ label kaya_underwear_nudity_taboo_break(the_person, the_clothing):
     if the_person.effective_sluttiness() > 30 - (the_person.get_opinion_score("skimpy outfits") * 5):
         the_person "You want to get a look at my underwear, huh?"
         if the_person.has_taboo(["bare_tits","bare_pussy"]):
-            mc.name "I do. You've got good fashion sense, I bet you wear wear some cute underwear too."
+            mc.name "I do. You've got good fashion sense, I bet you wear some cute underwear too."
             the_person "Well, let's get this off and you can check for yourself."
         else:
             mc.name "I do. I've already seen you naked, but I appreciate your fashion sense."
@@ -1787,7 +1787,7 @@ label kaya_sleepover_herplace_response(the_person): #Spending the night at her p
     if the_person.sluttiness < 80:
         the_person "Mmm, that sounds great! Bring a toothbrush, you can spend the night."
     else:
-        the_person "You don't need the wine. We can fuck whenever you get there!."
+        the_person "You don't need the wine. We can fuck whenever you get there!"
     return
 
 

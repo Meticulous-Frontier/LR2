@@ -1481,13 +1481,13 @@ init -1 python:
         else:   # when we are called from the scene manager we have to draw the other characters
             scene_manager.draw_scene(exclude_list = [self])
 
-        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting) # needs to be flattened for fade to work correctly
+        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, cache_item = False) # needs to be flattened for fade to work correctly
         for cloth in the_clothing:
             if half_off_instead:
                 self.outfit.half_off_clothing(cloth) #Half-off the clothing
             else:
                 self.outfit.remove_clothing(cloth) #Remove the clothing
-        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting)
+        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, cache_item = False)
 
         self.hide_person()
 
@@ -1504,7 +1504,22 @@ init -1 python:
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
-    def build_person_displayable_enhanced(self, position = None, emotion = None, special_modifier = None, lighting = None, hide_list = [], outfit = None): #Encapsulates what is done when drawing a person and produces a single displayable.
+    # cache the last 127 generated displayables
+    global character_cache
+    character_cache = LRUCacheDict(127, expiration = 0)
+
+    def clean_cache(self):
+        if not "character_cache" in globals():
+            return
+
+        partial = "ID:{}".format(self.identifier)
+        obsolete = [x for x in character_cache.keys() if partial in x]
+        for x in obsolete:
+            del character_cache[x]
+
+    Person.clean_cache = clean_cache
+
+    def build_person_displayable_enhanced(self, position = None, emotion = None, special_modifier = None, lighting = None, hide_list = [], outfit = None, cache_item = True): #Encapsulates what is done when drawing a person and produces a single displayable.
         if position is None:
             position = self.idle_pose
         if emotion is None:
@@ -1515,6 +1530,10 @@ init -1 python:
         forced_special_modifier = self.outfit.get_forced_modifier()
         if forced_special_modifier is not None:
             special_modifier = forced_special_modifier
+
+        disp_key = "ID:{}_P:{}_E:{}_SM:{}_L:{}_O:{}".format(self.identifier, position, emotion, special_modifier, hash(tuple(x for x in map(hash, lighting))), outfit.hash())
+        if disp_key in character_cache:
+            return character_cache[disp_key]
 
         displayable_list = []
         displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position,lighting)) #Add the body displayable
@@ -1554,7 +1573,11 @@ init -1 python:
         else:
             final_composite = character_composite
 
-        return Flatten(final_composite) # Create a composite image using all of the displayables
+        # Create a composite image using all of the displayables
+        if cache_item:
+            character_cache[disp_key] = Flatten(final_composite)
+            return character_cache[disp_key]
+        return Flatten(final_composite)
 
     Person.build_person_displayable = build_person_displayable_enhanced
 
@@ -1569,11 +1592,22 @@ init -1 python:
 
     Person.__call__ = person_call_extended(Person.__call__)
 
+    global portrait_cache
+    portrait_cache = LRUCacheDict(100, expiration = 0)
+
     def build_person_portrait(self, special_modifier = None):
         position = "stand5"
         emotion = "happy"
         special_modifier = None
         lighting = [.98,.98,.98]
+
+        disp_key = "P:{}_F:{}_H:{}_HC:{}_EC:{}".format(self.identifier,
+            self.face_style, self.hair_style.name,
+            hash(tuple(x for x in map(hash, self.hair_style.colour))),
+            hash(tuple(x for x in map(hash, self.eyes[1]))))
+
+        if disp_key in portrait_cache:
+            return portrait_cache[disp_key]
 
         displayable_list = []
         displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
@@ -1589,10 +1623,8 @@ init -1 python:
                 composite_list.append((0,0))
                 composite_list.append(display)
 
-        final_image = Flatten(Composite(*composite_list))
-        portrait = AlphaMask(final_image, Image("portrait_mask.png"))
-
-        return portrait
+        portrait_cache[disp_key] = AlphaMask(Flatten(Composite(*composite_list)), Image("portrait_mask.png"))
+        return portrait_cache[disp_key]
 
     Person.build_person_portrait = build_person_portrait
 
@@ -2530,7 +2562,7 @@ init -1 python:
 
         if self == sarah and sarah_threesomes_unlocked():
             return False
-        if self.love > 90 and self.obedience > 200:
+        if self.love > 90 or self.obedience > 200:
             return False
         return self.event_triggers_dict.get("is_jealous", True)
 
@@ -2556,19 +2588,19 @@ init -1 python:
     Person.have_orgasm = have_orgasm
 
     def favorite_colour(self):
-        if self.event_triggers_dict.get("favorite_colour", None): #We already have a favorite colour, so just return it
-            return self.event_triggers_dict.get("favorite_colour", None)
+        favored_colour = self.event_triggers_dict.get("favorite_colour", None)
+
+        #check if current favourite is still in list_of favourites
+        list_of_favorites = [x for x in WardrobeBuilder.color_prefs.keys() if self.get_opinion_score(x) == 2]
+        if favored_colour in list_of_favorites:
+            return favored_colour
+
         #If not, we need to find a favorite colour going forward.
-        list_of_colours = ["the colour blue", "the colour yellow", "the colour red", "the colour pink", "the colour black", "the colour green", "the colour purple", "the colour white", "the colour orange", "the colour brown"]
-        list_of_favorites = []
-        for colour in list_of_colours:
-            if self.get_opinion_score(colour) == 2:
-                list_of_favorites.append(colour)
         if len(list_of_favorites) > 0:
             self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_favorites)
         else:
-            self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_colours)
-            self.update_opinion_with_score(self.favorite_colour(), 2, add_to_log = False)
+            self.event_triggers_dict["favorite_colour"] = renpy.random.choice(WardrobeBuilder.color_prefs.keys())
+            self.update_opinion_with_score(self.event_triggers_dict["favorite_colour"], 2, add_to_log = False)
         return self.favorite_colour()
 
     Person.favorite_colour = favorite_colour
@@ -2578,10 +2610,10 @@ init -1 python:
 
     Person.is_single = is_single
 
-    def is_in_trance(self):
-        if self.get_trance_multiplier() > 1.2:
-            return True
-        return False
+    # just check if has any trance_role, when training_available = True also check if we can train her
+    def is_in_trance(self, training_available = False):
+        return self.has_role([trance_role, heavy_trance_role, very_heavy_trance_role]) and \
+            (not training_available or self.event_triggers_dict.get("trance_training_available", True))
 
     Person.is_in_trance = is_in_trance
 
