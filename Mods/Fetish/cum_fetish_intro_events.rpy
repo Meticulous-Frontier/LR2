@@ -187,7 +187,7 @@ label cum_fetish_employee_intro_label(the_person):
         the_person "Mmm, okay."
         $ the_person.strip_outfit(exclude_upper = False, exclude_lower = True)
         "When she finishes, she takes you back in her mouth, she runs her fingers along her breasts, pinching and pulling at her nipples."
-    call fuck_person(the_person, start_position = cum_fetish_blowjob, skip_intro = True, position_locked = True) from _call_fuck_cum_fetish_employee_intro_01
+    call fuck_person(the_person, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_cum_fetish_employee_intro_01
     mc.name "Damn that was good. You really got off on that, didn't you?"
     the_person "Mmm... yeah..."
     mc.name "I want you to wipe some cum on your fingers, and rub it into your tits."
@@ -619,7 +619,7 @@ label cum_fetish_rebecca_intro_label(the_person):
     else:
         "With enthusiasm, [the_person.title] takes your cock in her mouth and goes to work."
     $ the_person.add_situational_slut("Thirsty", 20, "Needs your cum")
-    call fuck_person(the_person, start_position = cum_fetish_blowjob, skip_intro = True, position_locked = True) from _call_fuck_cum_fetish_aunt_intro_01
+    call fuck_person(the_person, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_cum_fetish_aunt_intro_01
     $ the_person.clear_situational_slut("Thirsty")
     $ scene_manager.update_actor(the_person, position = "kneeling1")
     $ add_cum_fetish(the_person)

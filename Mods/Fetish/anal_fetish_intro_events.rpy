@@ -366,7 +366,7 @@ label anal_fetish_family_intro_label(the_person):
     $ the_person.break_taboo("anal_sex")
     the_person "Oh god... why does it... feel so good!!!"
     "[the_person.possessive_title]'s ass feels amazing as you start to fuck it. It's time to show her just how good you can make her feel this way."
-    call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True, skip_condom = True) from _call_fuck_person_anal_fetish_intro_family_01
+    call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_fuck_person_anal_fetish_intro_family_01
     $ the_person.max_opinion_score("anal sex")
     $ the_person.max_opinion_score("anal creampies")
     "[the_person.possessive_title] slowly stands up."
@@ -489,7 +489,7 @@ label anal_fetish_generic_intro_label(the_person):
     "She stops mid sentence as you give her a quick thrust."
     mc.name "It's okay to admit you are a buttslut. Now, let's just make sure you needs are sated before we part ways."
     "[the_person.possessive_title] is unable to reply as you begin to fuck her ass. It's time to show her just how good you can make her feel that way."
-    call fuck_person(the_person, start_position = SB_anal_standing, skip_intro = True, skip_condom = True) from _call_fuck_person_anal_fetish_intro_generic_01
+    call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_fuck_person_anal_fetish_intro_generic_01
     #$ the_person.SB_fetish = "anal sex"
     $ the_person.max_opinion_score("anal sex")
     $ the_person.max_opinion_score("anal creampies")
