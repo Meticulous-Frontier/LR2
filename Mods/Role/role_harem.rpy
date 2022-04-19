@@ -52,7 +52,7 @@
 # if Paramour joins Polyamory, they still are with their BF/husbands and can still leave them and join the poly.
 # - this will open up a whole bunch of extra events we can add
 
-init -1 python:
+init 1 python:
     def ask_harem_requirement(the_person):
         #you can convert a girlfriend or affair into a polyamorous relationship
         if the_person.love >=80:
@@ -117,6 +117,10 @@ init -1 python:
             return True
         else:
             return False
+
+    make_harem_action = Action("Ask her to join your harem", requirement = ask_harem_requirement, effect = "ask_to_join_harem_label",
+        menu_tooltip = "Ask her to start an official, polyamorous relationship and be part of your Harem.", priority = 10)
+    chat_actions.append(make_harem_action)
 
 label leave_harem_label(the_person):
     # Stop being in a relationship.
