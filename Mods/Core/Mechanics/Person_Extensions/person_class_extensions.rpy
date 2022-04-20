@@ -1265,7 +1265,7 @@ init -1 python:
             message.append(("+" if happiness > 0 else "") + str(happiness) + " {image=happy_token_small}")
         if not obedience is None:
             self.change_obedience(obedience, add_to_log = False)
-            message.append(("+" if obedience > 0 else "") + str(obedience) +" {image=padlock_token_small}")
+            message.append(("+" if obedience > 0 else "") + str(obedience) +" {image=triskelion_token_small}")
         if not arousal is None:
             self.change_arousal(arousal, add_to_log = False)
             message.append(("+" if arousal > 0 else "") + str(arousal) + " {image=arousal_token_small}")

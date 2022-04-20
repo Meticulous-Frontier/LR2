@@ -5,10 +5,10 @@ init 5 python:
     #Harem/girlfriend/affair
     gf_token_small_image = im.Scale(Image(get_file_handle("girlfriend.png")), 18, 18)
     renpy.image("gf_token_small", gf_token_small_image)
-    
+
     paramour_token_small_image = im.Scale(Image(get_file_handle("paramour.png")), 18, 18)
     renpy.image("paramour_token_small", paramour_token_small_image)
-    
+
     harem_token_small_image = im.Scale(Image(get_file_handle("harem.png")), 18, 18)
     renpy.image("harem_token_small", harem_token_small_image)
 
@@ -43,6 +43,9 @@ init 5 python:
 
     padlock_small_image = im.Scale(Image(get_file_handle("padlock.png")), 18, 18)
     renpy.image("padlock_token_small", padlock_small_image)
+
+    triskelion_small_image = im.Scale(Image(get_file_handle("triskelion.png")), 18, 18)
+    renpy.image("triskelion_token_small", triskelion_small_image)
 
     question_mark_small_image = im.Scale(Image(get_file_handle("question.png")), 18, 18)
     renpy.image("question_mark_small", question_mark_small_image)

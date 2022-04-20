@@ -46,7 +46,7 @@ init 2:
                         text "" style "menu_text_style" size 16
                         text "Happiness: [person.happiness]" style "menu_text_style" size 16
                         text "Sluttiness: [person.sluttiness] - " + get_gold_heart(person.sluttiness) style "menu_text_style" size 16
-                        text "Obedience: [person.obedience] - " + get_obedience_plaintext(person.obedience) style "menu_text_style" size 16
+                        text "Obedience: [person.obedience] {image=triskelion_token_small} " + get_obedience_plaintext(person.obedience) style "menu_text_style" size 16
                         text "Suggestibility: [person.suggestibility]%" style "menu_text_style" size 16
                         text "Height: " + height_to_string(person.height) style "menu_text_style" size 16
                         text "Eye Colour: " + person.eyes[0].title() style "menu_text_style" size 16

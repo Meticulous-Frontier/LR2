@@ -86,7 +86,7 @@ screen multi_person_info_ui(actors):
                         sensitive True
 
                     hbox:
-                        textbutton "Obedience: [actor.person.obedience] - " + get_obedience_plaintext(actor.person.obedience):
+                        textbutton "Obedience: [actor.person.obedience] {image=triskelion_token_small} " + get_obedience_plaintext(actor.person.obedience):
                             style "transparent_style"
                             text_style "menu_text_style"
                             tooltip "Girls with high obedience will listen to commands even when they would prefer not to and are willing to work for less pay. Girls who are told to do things they do not like will lose happiness, and low obedience girls are likely to refuse altogether."
