@@ -8,6 +8,8 @@
 # - if affair role - similar to gf role, if they leave SO = harem, continues affair as harem but for the children
 # - Harem_Mansion - eventually a place where they all can live together?
 # - Dialogs can be done way better than the way I did them XD
+init 5 python:
+    list_of_instantiation_labels.append("instantiate_harem_role")
 
 init 1 python:
     def ask_harem_requirement(the_person):
@@ -77,8 +79,13 @@ init 1 python:
     # - so you can make a relationship dependant on polycules = ie Emily will do threesome with mc and Sarah, but doesn't like others that way
     # - could use the relationship structure to define polycules between persons in the harem?
     # harem_role/cousin/aunt when they are girlfriend and added to the poly they get the generic girlfriend role, this is just to keep things tied up
-    # DEFINED IN COMPATIBILITY FIX DUE TO ROLE INIT AFTER GAME START
+    # ALSO DEFINED IN COMPATIBILITY FIX FOR OLD SAVE COMPATIBILITY
     # harem_role = Role("Girlfriend in Polyamory", get_harem_role_actions(), role_dates = get_harem_role_dates(), looks_like = girlfriend_role)
+
+label instantiate_harem_role():
+    python:
+        harem_role = Role("Girlfriend in Polyamory", get_harem_role_actions(), role_dates = get_harem_role_dates(), looks_like = girlfriend_role)
+    return
 
 label leave_harem_label(the_person):
     # Stop being in a relationship.

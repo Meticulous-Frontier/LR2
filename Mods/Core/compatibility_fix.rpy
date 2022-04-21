@@ -244,11 +244,9 @@ init 1 python:
         return
 
     def validate_harem_roles():
-        global harem_role
-        harem_role = Role("Girlfriend in Polyamory", get_harem_role_actions(), role_dates = get_harem_role_dates(), looks_like = girlfriend_role)
-        for person in [x for x in all_people_in_the_game() if x.has_role(harem_role)]:
-            x.remove_role(harem_role)
-            x.add_role(harem_role)
+        if not harem_role in globals():
+            global harem_role
+            harem_role = Role("Girlfriend in Polyamory", get_harem_role_actions(), role_dates = get_harem_role_dates(), looks_like = girlfriend_role)
         return
 
 label check_mod_installation(stack):

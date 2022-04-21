@@ -1793,12 +1793,12 @@ init -1 python:
                 self.increase_opinion_score("kissing")
 
             # special situation if she gets girlfriend role, she loses affair role and SO
-            if role is girlfriend_role:
+            if role == girlfriend_role:
                 self.remove_role(affair_role)
                 self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
                 self.SO_name = None
 
-            if role is harem_role:
+            if role == harem_role:
                 self.remove_role(girlfriend_role)
 
         return added
