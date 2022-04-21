@@ -52,7 +52,7 @@ init 2 python:
             return False
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
-        if not cousin.job == unemployed_job: # don't trigger event when cousin is not stripper
+        if not cousin in stripclub_strippers: # don't trigger event when cousin is not stripper
             return False
         if mc.business.has_funds(60000):
             if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
