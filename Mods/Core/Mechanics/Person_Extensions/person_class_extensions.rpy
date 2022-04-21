@@ -1789,7 +1789,7 @@ init -1 python:
 
         if added:
             # special condition if she hates kissing, but becomes your girlfriend or paramour she would allow kissing
-            if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role]:
+            if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role, harem_role]:
                 self.increase_opinion_score("kissing")
 
             # special situation if she gets girlfriend role, she loses affair role and SO
@@ -1797,6 +1797,9 @@ init -1 python:
                 self.remove_role(affair_role)
                 self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
                 self.SO_name = None
+
+            if role is harem_role:
+                self.remove_role(girlfriend_role)
 
         return added
     Person.add_role = add_role

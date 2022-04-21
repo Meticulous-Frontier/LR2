@@ -91,7 +91,7 @@ init 5 python:
         # skip cheating check when person is Office Free Use Slut
         if not person.has_role(employee_freeuse_role):
             # only check if she is jealous and not willing to threesome with the girl
-            for other_person in [x for x in other_people if x.has_role([girlfriend_role, affair_role]) and x.is_jealous() and not willing_to_threesome(person, x)]:
+            for other_person in [x for x in other_people if x.is_jealous() and not willing_to_threesome(person, x)]:
                 if other_person.has_role(girlfriend_role) and the_position.slut_requirement > (other_person.sluttiness * .6) + (other_person.get_opinion_score("threesomes") * 5) + (5 * other_person.get_opinion_score("public sex")) : #You can get away with 60% as slutty as she would do +- threesome inclination / public sex
                     caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
                     if not exists_in_room_enter_list(other_person, "caught_cheating_label"):
