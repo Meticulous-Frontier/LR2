@@ -1265,7 +1265,7 @@ init -1 python:
             message.append(("+" if happiness > 0 else "") + str(happiness) + " {image=happy_token_small}")
         if not obedience is None:
             self.change_obedience(obedience, add_to_log = False)
-            message.append(("+" if obedience > 0 else "") + str(obedience) +" {image=padlock_token_small}")
+            message.append(("+" if obedience > 0 else "") + str(obedience) +" {image=triskelion_token_small}")
         if not arousal is None:
             self.change_arousal(arousal, add_to_log = False)
             message.append(("+" if arousal > 0 else "") + str(arousal) + " {image=arousal_token_small}")
@@ -1789,14 +1789,17 @@ init -1 python:
 
         if added:
             # special condition if she hates kissing, but becomes your girlfriend or paramour she would allow kissing
-            if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role]:
+            if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role, harem_role]:
                 self.increase_opinion_score("kissing")
 
             # special situation if she gets girlfriend role, she loses affair role and SO
-            if role is girlfriend_role:
+            if role == girlfriend_role:
                 self.remove_role(affair_role)
                 self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
                 self.SO_name = None
+
+            if role == harem_role:
+                self.remove_role(girlfriend_role)
 
         return added
     Person.add_role = add_role

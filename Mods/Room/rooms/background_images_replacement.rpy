@@ -44,6 +44,9 @@ init 5 python:
     padlock_small_image = im.Scale(Image(get_file_handle("padlock.png")), 18, 18)
     renpy.image("padlock_token_small", padlock_small_image)
 
+    triskelion_small_image = im.Scale(Image(get_file_handle("triskelion.png")), 18, 18)
+    renpy.image("triskelion_token_small", triskelion_small_image)
+
     question_mark_small_image = im.Scale(Image(get_file_handle("question.png")), 18, 18)
     renpy.image("question_mark_small", question_mark_small_image)
 

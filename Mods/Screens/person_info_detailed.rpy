@@ -105,7 +105,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Status and Info" style "serum_text_style_header"
                         text "Happiness: [the_person.happiness]" style "menu_text_style"
                         text "Sluttiness: [the_person.sluttiness]%" style "menu_text_style"
-                        text "Obedience: [the_person.obedience] - [obedience_info]" style "menu_text_style"
+                        text "Obedience: [the_person.obedience] {image=triskelion_token_small} [obedience_info]" style "menu_text_style"
                         text "Love: [the_person.love]" style "menu_text_style"
                         text "Personality: [personality_info]" style "menu_text_style"
                         if the_person.has_role(girlfriend_role):

@@ -55,7 +55,7 @@ init 2:
                             text "" style "menu_text_style" size 16
                             text "Happiness: [the_candidate.happiness]" style "menu_text_style" size 16
                             text "Sluttiness: [the_candidate.sluttiness] - " + get_gold_heart(the_candidate.sluttiness) style "menu_text_style" size 16
-                            text "Obedience: [the_candidate.obedience] - " + get_obedience_plaintext(the_candidate.obedience) style "menu_text_style" size 16
+                            text "Obedience: [the_candidate.obedience] {image=triskelion_token_small} " + get_obedience_plaintext(the_candidate.obedience) style "menu_text_style" size 16
                         if recruitment_knowledge_three_policy.is_active():
                             text "" style "menu_text_style" size 16
 

@@ -49,7 +49,7 @@ init 2:
             happiness_info = str(__builtin__.int(person.happiness))
             love_info = str(__builtin__.int(person.love))
             sluttiness_info = get_heart_image_list(person.sluttiness, person.effective_sluttiness())
-            obedience_info = str(person.obedience) + " - " + get_obedience_plaintext(person.obedience)
+            obedience_info = str(person.obedience) + " {image=triskelion_token_small} " + get_obedience_plaintext(person.obedience)
             height_info = height_to_string(person.height)
             weight_info = get_person_weight_string(person)
 
