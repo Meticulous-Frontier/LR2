@@ -125,9 +125,14 @@ init -2 python:
             return
 
         def progression_available(self):
-            return True
             if self.is_multiple_choice:
-                pass
+                counter = 0
+                while counter < len(self.trans_list):
+                    if counter not in progression_scene.scene_unlock_list:
+                        if progression_scene.req_list[counter]():
+                            return True
+                    counter += 1
+                return False
                 #Check all choices for possible progression.
             elif len(self.req_list) > self.stage + 1: #Only try if there is another scene
                 if self.req_list[self.stage + 1]():
@@ -137,7 +142,7 @@ init -2 python:
         def update(self):
             if self.role_action:
                 if self.progression_available():
-                    self.progression_scene_action.name = self.name + " {image=gui/extra_images/lust_eye.png}"
+                    self.progression_scene_action.name = self.name + " {image=gui/extra_images/Progress24.png}"
                 else:
                     self.progression_scene_action.name = self.name
 

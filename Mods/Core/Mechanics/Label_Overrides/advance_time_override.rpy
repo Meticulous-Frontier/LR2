@@ -38,6 +38,9 @@ init -1 python:
     def advance_time_people_run_turn_requirement():
         return True
 
+    def advance_time_update_progression_scenes_requirement():
+        return True
+
     def jump_game_loop():
         # make sure we empty the call stack before jumping to main loop
         while renpy.call_stack_depth() > 1:
@@ -95,15 +98,20 @@ init 5 python:
     advance_time_people_run_move_action = ActionMod("Moves people to their destinations", advance_time_next_requirement,
         "advance_time_people_run_move_label", priority = 8, allow_disable = False)
 
+    advance_time_update_progression_scenes_action = ActionMod("Updates Progression Scenes", advance_time_update_progression_scenes_requirement,
+        "advance_time_update_progression_scenes_label", priority = 9, allow_disable = False)
+
     advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_mandatory_morning_crisis_requirement,
         "advance_time_mandatory_morning_crisis_label", priority = 10, category = "Gameplay", allow_disable = False)
 
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
         "advance_time_random_morning_crisis_label", priority = 11, category = "Gameplay")
 
+
+
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action,
-        advance_time_people_run_move_action, advance_time_bankrupt_check_action]
+        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_update_progression_scenes_action]
 
     # sort list on execution priority
     advance_time_action_list.sort(key = lambda x: x.priority)
@@ -240,6 +248,11 @@ init 5 python:
                         person.add_unique_on_talk_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
                     elif crisis[2] == "on_enter" and not crisis[0] in [x.the_action for x in person.on_room_enter_event_list if isinstance(x, Limited_Time_Action)]:
                         person.add_unique_on_room_enter_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
+        return
+
+    def advance_time_update_progression_scenes():
+        for x in list_of_progression_scenes:
+            x.update()
         return
 
 label advance_time_move_to_next_day():
@@ -462,4 +475,9 @@ label advance_time_people_run_move_label():
         advance_time_run_move(people_to_process)
         advance_time_assign_limited_time_events(people_to_process)
         renpy.suspend_rollback(False)
+    return
+
+label advance_time_update_progression_scenes_label():
+    python:
+        advance_time_update_progression_scenes()
     return
