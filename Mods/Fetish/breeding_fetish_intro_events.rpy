@@ -741,7 +741,7 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     "[the_person.possessive_title] locks the front door. She gets you a beer from her fridge and she grabs one for herself."
     "You make small talk for a bit. Finally, [the_person.title] starts to talk to you about why she asked you over."
     the_person "So... you are probably wondering why you are here. Today, something happened to me while I was working."
-    the_person "This young couple came in, looking for some new lingerie. They needed new because the woman had umm... grown out of her clothing."
+    the_person "This young couple came in, looking for some new lingerie. They needed new ones because the woman had umm... grown out of her clothing."
     the_person "She was... shall we say VERY pregnant. I think she was ready to pop any day!"
     if the_person.knows_pregnant():
         the_person "I know I'm already pregnant but... it was so hot! It made me realize how amazing it is to get bred."
