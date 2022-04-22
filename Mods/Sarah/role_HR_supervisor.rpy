@@ -489,51 +489,54 @@ label HR_director_monday_meeting_label(the_person):
 
     $ scene_manager.update_actor(the_person, position = "sitting")
     if the_person.sluttiness > 40 and get_HR_director_tag("business_HR_sexy_meeting", False) == False:
-        "For some reason, she doesn't begin with her usual efficiency talk. Instead, she seems to be keenly interested in watching you eat..."
-        the_person "So, before we get started today, I was wondering if umm..."
-        mc.name "Yes?"
-        "Her cheeks a little flushed, she's obviously embarrassed about what she is about to ask."
-        the_person "Well... I've noticed that, we only employ women here, and it must be hard on you to be around so many women all day long..."
-        "You don't really see where she is going with this."
-        the_person "It would cause the company a lot of trouble if some sort of sexual harassment suit were to come up."
-        mc.name "I suppose."
-        the_person "So anyway, I thought maybe, to start the meeting, we could fool around a little."
-        $ mc.change_locked_clarity(20)
-        the_person "It would help clear your mind when we talk about the staff as well as give you an outlet for all the tension you have being around women all day..."
-        mc.name "That's very generous of you. All in the name of efficiency?"
-        the_person "Well, plus it would be fun..."
-        "You consider her offer."
-        mc.name "That would be acceptable, and I can see how it would be helpful to start the meeting with a clear mind."
-        "She smiles widely when you accept her explanation. You can tell she really just wants to fuck around..."
         $ set_HR_director_tag("business_HR_sexy_meeting", True)
-        the_person "So... can we start today?"
-        menu:
-            "Let's go":
-                call HR_director_sexy_meeting_start_label(the_person) from sexy_meeting_start_one
-                $ scene_manager.update_actor(the_person, position = "sitting")
-                "Feeling good, [the_person.title] returns to her seat and starts to pull out her notes."
-            "Not Today":
-                the_person "Ahh, okay. I know this was short notice, but you can plan on it next week, okay?"
-                "She reaches down to her backpack and begins to pull out her notes from the previous week."
+        $ hr_director_prog_scene.call_scene([the_person])
+        # "For some reason, she doesn't begin with her usual efficiency talk. Instead, she seems to be keenly interested in watching you eat..."
+        # the_person "So, before we get started today, I was wondering if umm..."
+        # mc.name "Yes?"
+        # "Her cheeks a little flushed, she's obviously embarrassed about what she is about to ask."
+        # the_person "Well... I've noticed that, we only employ women here, and it must be hard on you to be around so many women all day long..."
+        # "You don't really see where she is going with this."
+        # the_person "It would cause the company a lot of trouble if some sort of sexual harassment suit were to come up."
+        # mc.name "I suppose."
+        # the_person "So anyway, I thought maybe, to start the meeting, we could fool around a little."
+        # $ mc.change_locked_clarity(20)
+        # the_person "It would help clear your mind when we talk about the staff as well as give you an outlet for all the tension you have being around women all day..."
+        # mc.name "That's very generous of you. All in the name of efficiency?"
+        # the_person "Well, plus it would be fun..."
+        # "You consider her offer."
+        # mc.name "That would be acceptable, and I can see how it would be helpful to start the meeting with a clear mind."
+        # "She smiles widely when you accept her explanation. You can tell she really just wants to fuck around..."
+        # $ set_HR_director_tag("business_HR_sexy_meeting", True)
+        # the_person "So... can we start today?"
+        # menu:
+        #     "Let's go":
+        #         call HR_director_sexy_meeting_start_label(the_person) from sexy_meeting_start_one
+        #         $ scene_manager.update_actor(the_person, position = "sitting")
+        #         "Feeling good, [the_person.title] returns to her seat and starts to pull out her notes."
+        #     "Not Today":
+        #         the_person "Ahh, okay. I know this was short notice, but you can plan on it next week, okay?"
+        #         "She reaches down to her backpack and begins to pull out her notes from the previous week."
     elif get_HR_director_tag("business_HR_sexy_meeting", False) == True:
-        if the_person.energy < 60:
-            "She looks at you before she begins."
-            the_person "So, normally I would offer to help with your... you know... needs..."
-            the_person "But honestly I'm pretty worn out from earlier. If you are still feeling needy later, let me know, okay?"
-            mc.name "Okay."
-            "She reaches down to her backpack and begins to pull out her notes from the previous week."
-
-        else:
-            "She looks at you intently."
-            the_person "So, need some relief before we get started today?"
-            menu:
-                "Let's go":
-                    call HR_director_sexy_meeting_start_label(the_person) from sexy_meeting_start_two
-                    $ scene_manager.update_actor(the_person, position = "sitting")
-                    "Feeling good, [the_person.title] returns to her seat and starts to pull out her notes."
-                "Not Today":
-                    the_person "Ahh, damn. Okay, give me a second and we can get started here."
-                    "She reaches down to her backpack and begins to pull out her notes from the previous week."
+        $ hr_director_prog_scene.call_scene([the_person])
+        # if the_person.energy < 60:
+        #     "She looks at you before she begins."
+        #     the_person "So, normally I would offer to help with your... you know... needs..."
+        #     the_person "But honestly I'm pretty worn out from earlier. If you are still feeling needy later, let me know, okay?"
+        #     mc.name "Okay."
+        #     "She reaches down to her backpack and begins to pull out her notes from the previous week."
+        #
+        # else:
+        #     "She looks at you intently."
+        #     the_person "So, need some relief before we get started today?"
+        #     menu:
+        #         "Let's go":
+        #             call HR_director_sexy_meeting_start_label(the_person) from sexy_meeting_start_two
+        #             $ scene_manager.update_actor(the_person, position = "sitting")
+        #             "Feeling good, [the_person.title] returns to her seat and starts to pull out her notes."
+        #         "Not Today":
+        #             the_person "Ahh, damn. Okay, give me a second and we can get started here."
+        #             "She reaches down to her backpack and begins to pull out her notes from the previous week."
     the_person "Here are my plans for the week. I think I have a few tweaks to efficiency I can make, but overall I wouldn't expect to see a big change company wide."
     $ HR_director_calculate_eff(the_person)
     "She hands you a few documents. You check them over."
