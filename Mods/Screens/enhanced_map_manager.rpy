@@ -58,7 +58,7 @@ init -1 python:
     def get_location_progression_events(location):
         for person in [x for x in location.people if x.on_room_enter_event_list]:
             for test_scene in [y for y in list_of_progression_scenes if y.progression_available()]:      #Nested loooooooooops this logic sucks
-                if any(z for z in person.on_room_enter_event_list if z.name == test_scene.progression_scene_action.name):
+                if any(z for z in person.on_room_enter_event_list if z.name == test_scene.progression_scene_action.name and z.is_action_enabled(person)):
                     return True
         return False
 
@@ -96,7 +96,7 @@ init -1 python:
         if tt_dict[location.name][1]:
             info.append("\n{color=#FFFF00}Event!{/color}")
         if tt_dict[location.name][2]:
-            info.append("\n{image=lust_eye_token_small}")
+            info.append("\n{image=progress_token_small}")
         return "".join(info)
 
 init 2:
