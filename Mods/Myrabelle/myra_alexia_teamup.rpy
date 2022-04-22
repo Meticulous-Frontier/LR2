@@ -96,7 +96,7 @@ init 2 python:
 label myra_alexia_teamup_scene_action_label(the_person):  #Use (the_person) if this event is attached to a person, otherwise leave params blank, EG: myra_alexia_teamup_scene_action_label():
     $ mc.change_location(gaming_cafe)
     $ mc.location.show_background()
-    "Test, is this working"
+    #"Test, is this working"
     call progression_scene_label(myra_alexia_teamup_scene, [the_person, alexia]) from _myra_alexia_teamup_scene_call_test_01
     return
 
@@ -551,7 +551,7 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
         $ the_target = myra
         $ the_loser = alexia
     mc.name "Alright girls, time for the winner to get her reward!"
-    if scene_transition != True:
+    if scene_transition:
         if the_target == myra:
             mc.name "[alexia.title], why don't you grab some snacks for you two while I work on [myra.title] for a bit?"
         else:

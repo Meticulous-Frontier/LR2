@@ -143,12 +143,14 @@ init 2 python:
 init 1 python:
     def gaming_cafe_owner_on_turn(person): #Use this function to determine if the gaming cafe is open or not. Would on move be better for this?
         if gaming_cafe_is_open():
-            if day%7 in [2,3,4] and time_of_day in [0,1]:   #Check if it is previous time slot
+            if day%7 in [2,3,4] and time_of_day in [1,2]:   #Check if it is previous time slot
                 gaming_cafe.public = True
-            elif day%7 in [5,6] and time_of_day in [0,1,2]:
+            elif day%7 in [5,6] and time_of_day in [1,2,3]:
                 gaming_cafe.public = True
             else:
                 gaming_cafe.public = False
+            if myra_at_cafe() and myra_has_exclusive_energy_drink():
+                gaming_cafe_dose_customers()
         #Here also run if Myra has energy drink and is at the cafe, dose people.
         return
 
@@ -330,12 +332,12 @@ init -2 python:
         return False
 
     def myra_esports_first_tournament_requirement():
-        if gaming_cafe_is_business_hours() and day%7 == 6:
+        if gaming_cafe_is_business_hours() and day%7 == 6 and myra.love >= 40:
             return True
         return False
 
     def myra_train_focus_intro_requirement(the_person):
-        if gaming_cafe_is_business_hours() and day%7 < 6 and myra_at_cafe() and the_person.love >= 40:
+        if gaming_cafe_is_business_hours() and day%7 < 6 and myra_at_cafe():
             return True
         return False
 
@@ -388,24 +390,115 @@ init 3 python:
 
 
 label myra_esports_practice_label(the_person):  #20 love event, on room enter event on myra
-    "In this event, you walk into the gaming cafe, but notice that [the_person.title] isn't behind the counter like usual"
-    "When you find her, a few people are watching. She is playing a game with a team as part of an esports qualifier."
-    "She manages to win the qualifier, therefore placing and earning a spot in an upcoming esports tournament."
+    "You step into the gaming cafe. As you start to walk over to the main counter, however, you realize that there isn't anyone there."
+    "You wonder where [the_person.possessive_title] might be? You scan the room."
+    "Near one side, you see a small group of about 8 people watching a computer. You can't tell who is playing, so you walk over."
+    "When you get there, you see [the_person.title] playing."
+    $ the_person.draw_person(position = "sitting")
+    "She appears to be in a pretty tight match. You ask one of the other people watching."
+    mc.name "Hey, why is everyone watching her play?"
+    "?????" "She's at the end of a tournament. If her team wins, they automatically qualify for the Esports tournament Battle of the Bay."
+    "Ahhh, so it is like a qualifying round."
+    "You watch as she plays. [the_person.possessive_title] is manhandling her competition."
+    "In a climactic battle, she manages to stall two attackers at home point while her team finishes off the other team at mid, securing the victory."
+    the_person "Yes! We did it!"
+    $ the_person.draw_person()
+    "[the_person.title] jumps to her feet. All the people watching her cheer and start to give each other high fives."
+    "?????" "Way to go!"
+    "?????" "Nice going!"
+    "The small group congratulate her on the win. Eventually she gets to you."
+    the_person "Oh hey [the_person.mc_title]! Did you see?"
+    mc.name "I did! Congratulations! When is the tournament?"
+    the_person "I'm actually not sure. I know it is usually on a Sunday, but I'm not sure how close it is."
+    mc.name "Neat. I can't wait to watch!"
+    the_person "Yeah! I'll have to set up something for it. It is an online thing, so I'll be able to play for the cafe here. Maybe I could put it up on the main projection screen."
+    mc.name "That is an excellent idea."
+    the_person "Thanks! Oh my god, I gotta go text [alexia.name], she is going to be so excited. I'll see you around, okay?"
+    mc.name "Sounds good."
     $ myra.event_triggers_dict["knows_plays_esports"] = True
     $ gaming_cafe.on_room_enter_event_list.append(myra_esports_first_tournament)
+    $ the_person.draw_person(position = "walking_away")
+    "Wow, so [the_person.possessive_title]'s eSports team has managed to qualify for a big tournament! You'll have to see if you can attend."
     return
 
 label myra_esports_first_tournament_label():    #Mandatory event. Preluded to during the first love event
     $ the_person = myra
-    "In this event, you watch [the_person.title] take part in her esports tournament."
-    "Unfortunately, during one of the early matches, she get distracted by the number of people watching and makes a few fatal mistakes, costing her team the match."
-    "You note that she has trouble focusing, and that maybe you can help her with that in the future."
+    "You feel your phone go off when you get a notification. It's a message from [alexia.possessive_title]"
+    $ mc.start_text_convo(alexia)
+    alexia "Hey! I don't know what you are doing right now, but get over to the gaming cafe!"
+    alexia "[the_person.name] is hosting a watch party for her eSports tournament! She asked me to text you because she doesn't have your number I guess."
+    alexia "It's going to start soon!"
+    mc.name "Thanks! I'm on my way. Save me a seat?"
+    alexia "Sure!"
+    $ mc.end_text_convo()
+
+    "Alright, this should be interesting. You head over to the gaming cafe."
+    $ mc.change_location(gaming_cafe)
+    $ mc.location.show_background()
+    $ scene_manager = Scene()
+    "When you get there, you look around. A bunch of seats have been set up to watch a projector screen. There is actually a fairly large crowd here... you estimate about 100 people."
+    "You look around. Eventually you spot [alexia.title] with an open seat next to her. You walk over and sit next to her."
+    $ scene_manager.add_actor(alexia, position = "sitting", display_transform = character_right)
+    mc.name "Hey! Thanks for saving me a seat."
+    alexia "Hey [alexia.mc_title]! I had to shoo away several cute guys, so I hope you can manage to keep me good company for this!"
+    if alexia.is_single():
+        mc.name "I'll do my best. Is [the_person.title] here?"
+    else:
+        mc.name "Ah, I didn't realize you were in the market for cute guys?"
+        alexia "I, ermm... I mean I'm not..."
+        mc.name "I'm just teasing. Is [the_person.title] here?"
+    alexia "Yeah. She's over there."
+    "You follower [alexia.possessive_title]'s finger pointing to a computer desk set up to the side of the project. [the_person.possessive_title] is there, getting setup."
+    $ scene_manager.add_actor(the_person, position = "sitting", display_transform = character_left(yoffset = 0, zoom = 0.5))
+    alexia "You are just in time, it is just getting started!"
+    mc.name "Nice. Can you fill me in on the details?"
+    alexia "Sure. This first match should be just a warm up for them. Technically it is an elimination match, but her team should win pretty easily."
+    mc.name "Nice."
+    "You chit chat with [alexia.title] for a bit, but soon the match starts up."
+    "You look over at [the_person.possessive_title]. Her hands are on the keyboard, but she is shaking a little bit. It appears her nerves might be getting to her a bit?"
+    mc.name "Has she ever played in something like this before?"
+    alexia "No, this is her first time in a big tournament like this."
+    "Oh boy. Nerves can be a powerful thing. You hope she is able to do well."
+    "The match begins. You watch on the projector as [the_person.possessive_title] starts out. She plays conservatively, sticking with her team as they attack the center point."
+    "The battle for the center point looks hard fought. You watch as [the_person.title]'s team manages to down an enemy, but when trying to finish them off, the enemy team successfully revives them."
+    "As her team pulls back, [the_person.title]'s team has a player get downed. She quickly stealths and is able to revive them quickly."
+    alexia "Wooo! You go girl!"
+    "Several people in the crowd cheer for her. However, the spike in noise almost seems to startle her. She looks up from her computer and sees how many people are watching."
+    "She turns back to the computer, but you note that her playstyle suddenly gets a bit rougher. She isn't capitalizing on as many opportunities and is playing too conservatively."
+    "When another teammate get's downed, she attempts to stealth again to revive them. This time, however, the enemy team uses a stealth removal skill and stun her. They manage to down her and kill off her teammate."
+    "A few seconds later, the enemy finishes her off, taking the center point. You hear some mumbles in the crowd as her respawn timer comes up."
+    mc.name "[alexia.title]... she is completely off her game. Her nerves are really getting to her."
+    alexia "Yeah... she'll pull through though! I'm sure she'll come back..."
+    "The match continues, but unfortunately, [the_person.possessive_title] is unable to shake off her first time tournament jitters."
+    "In an unfortunate encounter, she and a teammate engage the enemy two on two at her home point. Normally she is able to carry in these situations easily, but this time she fumbles."
+    "Pushing to far against a low health enemy, suddenly they counter her attack and stun her. Before she can react, the enemy pair down her. Caught far from her teammate, she can only watch as they finish her off."
+    $ scene_manager.update_actor(the_person, emotion = "sad")
+    "The match itself stays fairly close as [the_person.title] push back and forth at a couple points. However, she just isn't able to tip the balance in their favor."
+    "When the match is over, the score is close, but [the_person.possessive_title] is the worst performer on her team. If she had been able to focus better, they would have won."
+    "The crowd is stunned. You turn to [alexia.title]."
+    alexia "Oh... oh no... Myra..."
+    "The people who were watching the match start to get up. There are several murmurs but nobody reall says much."
+    "You watch as [the_person.title] gets up and quietly leaves the room. She looks pretty disappointed."
+    $ scene_manager.remove_actor(the_person)
+    $ scene_manager.update_actor(alexia, position = "stand3", emotion = "sad")
+    mc.name "That was too bad. She looked really off her normal game there."
+    alexia "I know! Gosh I don't know what to do... should I text her?"
+    mc.name "I don't know. She might just want some space after that."
+    alexia "You're right... I'll text her later."
+    mc.name "Yeah... anyway, [alexia.title], thanks for letting me know about this. I appreciate it."
+    alexia "Ah, of course."
+    mc.name "I'm going to get going. Take care."
+    alexia "See ya."
+    $ scene_manager.clear_scene()
+    "You stand up and walk out of the gaming cafe."
+    "That was hard to watch. You are sure that [the_person.possessive_title] is devasted at the result."
+    "You wonder to yourself. Could helping her with her focus be something that you could help with?"
+    "Surely there are ways that you could help her out. Maybe you should wait a few days and talk to her about it?"
     $ myra.event_triggers_dict["has_failed_tournament"] = True
     $ myra.add_unique_on_room_enter_event(myra_train_focus_intro)
     return
 
 label myra_train_focus_intro_label(the_person): #40 love, room entry event, allows for a recurring event after.
-    "After her tournament loss, on a later day, you offer to help [the_person.title] train her focus some."
     $ myra.event_triggers_dict["can_train_focus"] = True
     $ myra.event_triggers_dict["focus_train_day"] = day
     $ myra.add_unique_on_room_enter_event(myra_loses_sponsor)
@@ -413,7 +506,6 @@ label myra_train_focus_intro_label(the_person): #40 love, room entry event, allo
     return
 
 label myra_train_focus_label(the_person):   #Her standard corruption event. Slowly devolves from groping to anal. role action
-    "This is a recurring label, calling the progression scene for training her focus."
     $ myra_focus_progression_scene.call_scene([the_person])
     return
 
@@ -482,7 +574,7 @@ init -2 python:
 
     def myra_energy_drink_research_final_requirement():
         if mc.business.head_researcher.location == rd_division:
-            if renpy.random.randint(0,100) <= 90:
+            if renpy.random.randint(0,100) <= 100:
                 return True
         return False
 
@@ -513,35 +605,219 @@ init 3 python:
 
 
 label myra_develop_energy_drink_intro_label(the_person):  #20 sluttiness event. requires sponsorship. on room entry event. Why does this require sluttiness? Replace with something?
-    "In this event, MC suggests to [the_person.title] that he could develop a new branded energy drink for her to sell at her business."
-    "She indicates that she would be open to that, and requests her favorite flavor, blue raspberry."
+    $ the_person.draw_person(emotion = "angry")
+    "You step into the gaming cafe. You notice [the_person.possessive_title] talking on her phone angrily."
+    "You walk over to her and see what is going on."
+    the_person "No! Come on, that's crazy! Those are like my favorite!"
+    the_person "No... you know what? FINE! I'll just find a competitor!"
+    "She clicks her phone off."
+    mc.name "You okay?"
+    the_person "NO! I'm fucking not!"
+    mc.name "What's going on?"
+    the_person "I just got off the phone. My beverage supplier said they can't supply the store here with my favorite energy drinks anymore!"
+    the_person "How am I supposed to get my game on if I can't even concentrate!?!"
+    "You think about it for a moment. What is even in energy drinks? They can't be that hard to make... maybe you could make some?"
+    mc.name "I have a crazy idea."
+    the_person "I'm listening..."
+    mc.name "I run a pharmaceuticals company... it can't be that hard to come up with an energy drink formula."
+    mc.name "What if I put something together and I can supply you with energy drinks for you to distribute?"
+    mc.name "I mean, I'm already a sponsor. It would be good exposure for my company and you could have an exclusive deal on an energy drink."
+    the_person "Hmm..."
+    $ the_person.draw_person(emotion = "happy")
+    the_person "That is is actually a pretty damn good idea..."
+    mc.name "I know right? What is your favorite flavor?"
+    the_person "Me? Oh... well I've always loved blue raspberry flavored stuff..."
+    mc.name "Give me a few weeks and see what I can come up with. I'll come up with a formula and run some basic tests and if you like it, I'll supply it."
+    "She thinks about your proposal for a moment."
+    the_person "Alright... Let me know what you come up with!"
+    "You have agreed to try and provide [the_person.title] with a new energy drink for her gaming cafe!"
+    "The only problem is... you have no idea how to make energy drinks!"
+    "You should talk to your head researcher. Maybe she can help you formulate a new serum trait to mimic an energy drink syrup?"
     $ mc.business.head_researcher.add_unique_on_talk_event(myra_energy_drink_research_intro)
     $ myra.add_unique_on_room_enter_event(myra_distracted_gaming)
     return
 
 label myra_energy_drink_research_intro_label(the_person):     #On talk event. Propose to research lead energy drink creation
-    "MC gives his head researcher an energy drink and blue raspberry flavored candy and asks her to combine the two into a new serum trait."
+    "You step into the research and development wing and step over to your head researcher's desk."
+    $ the_person.draw_person(position = "sitting")
+    "You set down on her desk an energy drink and blue raspberry flavored hard candy."
+    the_person "Ah, hello [the_person.mc_title]. Is this supposed to help me get more research done? I'm not really into energy drinks..."
+    mc.name "No, but a lot of people DO like energy drinks. I was hoping you could do some research for me on how they work..."
+    mc.name "...And make it flavored like the blue raspberry, so we can market serums as energy drinks."
+    the_person "Ahah. I think I understand what you are trying to do. I'm pretty sure these things are just some B vitamins and caffeine..."
+    "She looks at the items for a moment."
+    the_person "Give me a few days and I'll let you know what I can come up with, okay?"
+    mc.name "Thank you [the_person.title]. I appreciate it."
+    "You step away from [the_person.possessive_title]'s desk. She will contact you when she comes up with a solution."
     $ mc.business.add_mandatory_crisis(myra_energy_drink_research_final)
     return
 
 label myra_energy_drink_research_final_label():     #On talk event. Test energy drink with head researcher
     $ the_person = mc.business.head_researcher
-    "Head researcher comes back to MC with details of a new serum trait. The flavor is strong enough to override any other serum traits in the drink."
+    if mc.location == mc.business.r_div:
+        the_person "[the_person.mc_title], I have some good news."
+
+    else:
+        $ mc.start_text_convo(the_person)
+        the_person "I have something for you to see. Can you come to the lab?"
+        mc.name "I'm on my way."
+        $ mc.end_text_convo()
+        "You make your way to the research division."
+        $ mc.business.r_div.show_background()
+    $ the_person.draw_person()
+    the_person "I have a serum trait that I think meets your specifications."
+    "[the_person.possessive_title] holds out a small blue vial."
+    the_person "Several B, C, and D vitamins, zinc, and caffeine."
+    the_person "Hit it hard with raspberry flavoring, blue dye, and some high fructose corn syrup, and voila!"
+    the_person "Add this to any serum, along with 8 ounces of carbonated water, and the flavor is strong enough to cover up any chemical tastes from the other serum traits we include."
+    mc.name "That's great. Any downsides?"
+    the_person "Well, watering down serums reduces the length of time that the serum is effective for. And it will take up a trait slot in the research phase from something more useful."
+    mc.name "That is great. Thank you [the_person.title]"
+    the_person "No problem."
+    $ myra_unlock_energy_drink_serum()
     $ myra.add_unique_on_talk_event(myra_energy_drink_test)
+    "You have unlocked the energy drink serum trait!"
+    "Create a new serum using the trait and take it to [myra.possessive_title], and if she likes it you can start distrubiting it there to the public!."
+    "For now, you should probably not do anything too controversial. Keep the attention of the serum 2 or less, and don't distribute any nanobots!"
     return
 
 label myra_energy_drink_test_label(the_person):
-    "After making a serum with the energy drink trait, take one to [the_person.title] to try it. She approves."
-    $ alexia.add_unique_on_room_enter_event(myra_energy_drink_distribution_intro)
+    $ the_serum = get_random_from_list(mc.inventory.get_serums_with_trait(energy_drink_serum_trait))
+    "You walk into the gaming cafe. At the main desk, you spot [the_person.title] and approach her."
+    $ the_person.draw_person()
+    mc.name "Good day [the_person.title]."
+    the_person "Hey [the_person.mc_title]."
+    mc.name "I have something for you."
+    "You set a can of your new energy drink and set it on the table."
+    mc.name "One proprietary, blue raspberry flavored energy drink."
+    the_person "Wow! This is neat... May I?"
+    mc.name "Of course."
+    "[the_person.possessive_title] takes the drink and opens it. She gives it a sniff, then takes a long sip."
+    $ mc.inventory.change_serum(the_serum,-1)
+    $ the_person.give_serum(copy.copy(the_serum), add_to_log = True)
+    "She smiles."
+    the_person "Hey... that is really good!"
+    "She takes another long sip."
+    the_person "What all is in it?"
+    mc.name "Well, I'll be honest, it was mostly done by my head researcher, but she said there are a lot of vitamins in it, some caffeine, and zinc."
+    "[the_person.title] keeps drinking it."
+    mc.name "After that, we had to balance the raspberry flavor, and added some sweetness with corn syrup."
+    "You conveniently leave out the remaining serum traits that went into the production. [the_person.possessive_title] takes several large gulps."
+    mc.name "We have nutritional facts we can publish, as well as an ingredient and allergen list."
+    "She tips up her drink and finishes it off."
+    the_person "This is incredible. I love it!"
+    $ the_person.change_love(2)
+    $ the_person.change_obedience(2)
+    the_person "I feel more energized already. Alright, if you can make delivery on Wednesday mornings, I'll set it up to sell!"
+    mc.name "Sounds good. I'll arrange for delivery with one of my employees."
+    the_person "This is fucking awesome. What do you call it?"
+    mc.name "Well, we have an internal name for it, but it isn't really something we would call on brand for you."
+    mc.name "Since it is made to your specifications, why not call it something like Myra's Gaming Fuel."
+    the_person "Ooo! I like it!"
+    $ the_person.draw_person(position = "kissing")
+    "[the_person.possessive_title] throws her arms around you and gives you a big hug."
+    the_person "Thank you [the_person.mc_title]! This is going to be great!"
+    mc.name "I agree."
+    $ clear_scene()
+    "You step away from the desk after saying goodbye. You should setup delivery of the serum with one of your employees."
+    $ delivery_person = None
+
+    if alexia.is_employee():
+        $ myra.event_triggers_dict["energy_drink_supplier"] = alexia.identifier
+        "Since [alexia.possessive_title] is working for you, it makes sense to have her do the deliveries. You should talk to her about it next chance you get."
+        $ delivery_person = alexia
+    else:
+        "No one really stands out to you as an obvious choice for who to have run the deliveries."
+        "Who should you talk to about it?"
+        call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
+        $ delivery_person = _return
+        $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
+        "You decide to talk to [delivery_person.title] about running the deliveries. You should talk to her about it as soon as practical."
+    $ delivery_person.add_unique_on_room_enter_event(myra_energy_drink_distribution_intro)
     return
 
 label myra_energy_drink_distribution_intro_label(the_person):     #On talk event. Work out details of distributing energy drink at gaming cafe with myra
-    "You talk to Alexia about taking some energy drink over to the gaming cafe every Wednesday."
+    $ the_person.draw_person()
+    mc.name "Hello [the_person.title]. I want to talk to you about something."
+    the_person "Oh? Go ahead."
+    if the_person == alexia:
+        mc.name "The company has developed a new energy drink for [myra.title] to sell over at the gaming cafe. I was hoping you could run the deliveries for me."
+        the_person "Oh! That is really neat! I bet she is exited! When do you want me to run the deliveries out?"
+    else:
+        mc.name "The company has started sponsoring an esports team at the local gaming cafe. We have developed an exclusive energy drink to sell there."
+        mc.name "I want you to be in charge of running the deliveries every week."
+        the_person "Okay, I can do that. When do you want me to do the deliveries?"
+    "You talk to [the_person.title] about taking some energy drink over to the gaming cafe every Wednesday."
+    the_person "Okay, I'll talk to you on Wednesday morning then."
     $ mc.business.add_mandatory_crisis(myra_energy_drink_weekly_distribution)
+    $ myra.event_triggers_dict["can_distribute_serum"] = True
+    "[the_person.possessive_title] will be running your deliveries. Make sure you have atleast 10 of the serum in the company's inventory to send to the gaming cafe."
     return
 
 label myra_energy_drink_weekly_distribution_label():          #mandatory event. select which serum to distribute for the week.
-    "This is a weekly recuring event. Alexia comes to MC and MC can select which serum to send over to the gaming cafe for the week."
+    $ contact = myra.event_triggers_dict.get("energy_drink_supplier", None)
+    $ new_delivery_person = False
+    $ finished = False
+    if contact == None:
+        "Unfortunately, your delivery person is not available anymore. You decide to appoint someone new to do it."
+        call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
+        $ the_person = _return
+        $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
+        $ new_delivery_person = True
+    else:
+        $ the_person = get_person_by_identifier(contact)
+        if not the_person.is_employee() or not the_person.is_available:
+            "Unfortunately, your delivery person is not available anymore. You decide to appoint someone new to do it."
+            call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
+            $ the_person = _return
+            $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
+            $ new_delivery_person = True
+
+    if new_delivery_person:
+        "You head to your office, paging [the_person.title] to meet you there."
+        $ mc.change_location(office)
+        $ ceo_office.show_background()
+        $ the_person.draw_person()
+        the_person "Hello [the_person.mc_title]!"
+        mc.name "Hi [the_person.title], I need you to do something for me."
+        mc.name "The company has started sponsoring an esports team at the local gaming cafe. We have developed an exclusive energy drink to sell there."
+        mc.name "I want you to be in charge of running the deliveries every week."
+        the_person "Okay, I can do that. When do you want me to go?"
+        mc.name "Now, let me just set up which serums I want you to deliver."
+    elif mc.is_at_work():
+        $ the_person.draw_person()
+        $ the_serum = None
+
+        the_person "Hey [the_person.mc_title]. I was just getting ready to take over the energy drinks for [myra.name]."
+        the_person "Which one did you want me to take over?"
+    else:
+        "You get a message from [the_person.title]. She wants to know which serums you want delivered to the gaming cafe this week."
+    "You take a look at your business' inventory. Time to decide which serum to send over to the gaming cafe for the next week."
+    while not finished:
+        "You quickly remind yourself, the serum must include the energy drink trait, and you need atleast 10."
+        call screen serum_inventory_select_ui(mc.business.inventory)
+        if not _return == "None":
+            $ the_serum = _return
+            if mc.business.inventory.get_serum_count(the_serum) >= 10 and myra_serum_is_acceptable_energy_drink(the_serum):
+                "You set it up for [the_person.title] to take 10 [the_serum.name]s to the gaming cafe."
+                "It will be distributed there for the next week to anyone who stops by."
+                $ myra_set_weekly_serum(the_serum)
+                $ mc.business.inventory.change_serum(the_serum, -10)
+                $ finished = True
+            elif mc.business.inventory.get_serum_count(the_serum) < 10:
+                "Unfortunately you don't have enough of that serum to send it over."
+            elif myra_serum_is_acceptable_energy_drink(the_serum):
+                "Unfortunately that serum isn't acceptable to send over to the gaming cafe."
+        else:
+            $ the_serum = None
+            "You decide not to send over any energy drinks this week."
+            $ myra_set_weekly_serum(None)
+            $ finished = True
+    if new_delivery_person or mc.is_at_work():
+        $ the_person.draw_person(position = "walking_away")
+        "[the_person.title] walks away."
+    else:
+        "You setup the delivery of the energy drink over the phone."
     $ mc.business.add_mandatory_crisis(myra_energy_drink_weekly_distribution)
     return
 
@@ -781,4 +1057,26 @@ init 3 python:
         return False
 
     def myra_mc_has_acceptable_energy_serum():
+        return mc.inventory.has_serum_with_trait(energy_drink_serum_trait)
+
+    def myra_serum_is_acceptable_energy_drink(the_serum):   #Make this a function so that as things progress we can loosen energy drink requirements.
+        if the_serum.has_trait(energy_drink_serum_trait) and the_serum.attention <= 2:
+            return True
         return False
+
+    def myra_set_weekly_serum(the_serum):
+        myra.event_triggers_dict["weekly_serum"] = copy.copy(the_serum)
+
+    def myra_unlock_energy_drink_serum():
+        the_serum = find_in_list(lambda x: x.name == "Energy Drink", list_of_traits)
+        the_serum.tier = 0
+        the_serum.researched = True
+        return
+
+    def gaming_cafe_dose_customers():
+        the_serum = copy.copy(myra_get_exclusive_energy_drink())
+        for person in gaming_cafe.people:
+            if the_serum not in person.serum_effects:
+                if len(person.serum_effects) < person.serum_tolerance:
+                    person.give_serum(copy.copy(the_serum), add_to_log = True)
+        return
