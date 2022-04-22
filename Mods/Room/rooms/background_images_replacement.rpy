@@ -5,10 +5,10 @@ init 5 python:
     #Harem/girlfriend/affair
     gf_token_small_image = im.Scale(Image(get_file_handle("girlfriend.png")), 18, 18)
     renpy.image("gf_token_small", gf_token_small_image)
-    
+
     paramour_token_small_image = im.Scale(Image(get_file_handle("paramour.png")), 18, 18)
     renpy.image("paramour_token_small", paramour_token_small_image)
-    
+
     harem_token_small_image = im.Scale(Image(get_file_handle("harem.png")), 18, 18)
     renpy.image("harem_token_small", harem_token_small_image)
 
@@ -59,7 +59,7 @@ init 5 python:
     vial_token_small_image = im.Scale(Image(get_file_handle("vial.png")), 18, 18)
     renpy.image("vial_token_small", vial_token_small_image)
 
-    progress_token_small_image = im.Scale(Image(get_file_handle("progress_token.png")), 18, 18)
+    progress_token_small_image = im.Scale(Image(get_file_handle("Progress32.png")), 18, 18)
     renpy.image("progress_token_small", progress_token_small_image)
 
     vial_image = Image(get_file_handle("vial.png"))
