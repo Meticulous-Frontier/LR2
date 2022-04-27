@@ -158,7 +158,7 @@ label progression_scene_label(progression_scene, the_group):
     # If the stage is -1, it has not been run before. Call the intro.
     if progression_scene.stage == -1:
         $ progression_scene.stage = 0
-        "Progressions stage should now be 0"
+        # "Progressions stage should now be 0"
 
         if progression_scene.intro_scene:
             $ progression_scene.call_intro(the_group)

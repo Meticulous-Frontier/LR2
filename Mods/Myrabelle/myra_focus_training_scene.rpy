@@ -14,6 +14,7 @@ init 1 python:
         return True
 
     def myra_focus_progression_scene_1_req():    #Requirements for grope scene
+        return False        #Disable this for now.
         if myra.sluttiness > 20:
             return True
         return False
@@ -70,7 +71,7 @@ init 2 python:
             intro_scene = "myra_focus_progression_scene_intro_scene", #Scene that plays the first time this scene is run
             exit_scene = "myra_focus_progression_scene_exit_scene",   #Scene for if the player chooses to exit the scene
             progression_scene_action = myra_train_focus,      #The action used to call for this progression scene.
-            choice_scene = "myra_focus_progression_scene_study_choice",   #The action used to let player decide if they want to continue the scene or leave
+            choice_scene = "myra_focus_progression_scene_choice",   #The action used to let player decide if they want to continue the scene or leave
             stage = -1,     #-1 will play the intro
             person_action = False,   #If this progression scene should run when encountering a person
             business_action = False,    #If this progression scene is a mandatory business event
@@ -260,7 +261,7 @@ label myra_focus_progression_scene_0(the_group, scene_transition = False):  #Inn
     "You walk over to the PC where [the_person.title] is sitting."
     $ the_person.draw_person(position = "sitting")
     "You set her energy drink down next to her keyboard. She is just getting logged in."
-
+    "This scene is currently broken on the beta branch, so the remainder has been disabled"
 
 
     $ clear_scene()
@@ -333,7 +334,7 @@ label myra_focus_trans_scene_4(the_group):
 
 
 
-label myra_focus_progression_scene_study_choice(the_group):
+label myra_focus_progression_scene_choice(the_group):
     $ the_person = the_group[0]
     $ the_person.draw_person()
     "Do you want to stick around and help [the_person.title] traing her focus?"
