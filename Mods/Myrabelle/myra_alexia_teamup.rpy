@@ -913,7 +913,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_loser)
         $ the_loser.cum_in_mouth()
         $ scene_manager.update_actor(the_loser)
-        "[the_lost.title] struggles to drink it all down, but doesn't pull off."
+        "[the_loser.title] struggles to drink it all down, but doesn't pull off."
         "A few seconds after your last spurt, she stops stroking you and pulls off."
         if the_loser.opinion_score_drinking_cum() > 0:
             the_loser "Mmmm, you came so much for me!"
@@ -946,7 +946,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
     "The girls clearly appreciate your kind words."
     "Sadly, things seem to be drawing to a natural conclusion for tonight."
     the_loser "Hey... want to help me with the snacks [the_target.name]? I know I already had one, but I'm still kinda hungry."
-    the_target "Sure! [the_target.mc_name] do you want to have some?"
+    the_target "Sure! [the_target.mc_title] do you want to have some?"
     mc.name "No, I need to get going. Thanks though."
     if scene_transition:
         the_loser "We are doing it this way from now on though... right?"
