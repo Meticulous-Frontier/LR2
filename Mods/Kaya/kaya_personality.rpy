@@ -10,8 +10,6 @@ init 1400 python:              #Because Vren Init personality functionns at 1300
         valid_possessive_titles = [person.title]
         valid_possessive_titles.append("Your favorite barista")
         valid_possessive_titles.append("Your native barista")
-        if kaya_mc_knows_relation():
-            valid_possessive_titles.append("Your half-sister")
         return valid_possessive_titles
 
     def kaya_player_titles(person):
