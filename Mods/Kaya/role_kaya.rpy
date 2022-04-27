@@ -174,6 +174,7 @@ init -2 python:
         return False
 
     def kaya_barista_fuck_intro_requirement(the_person):
+        return False    #Dsiable while WIP
         if the_person.location == coffee_shop and time_of_day == 2 and the_person.sluttiness >= 60:
             return true
         return False
