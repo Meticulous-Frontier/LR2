@@ -16,7 +16,7 @@ init 1 python:
     def myra_alexia_teamup_scene_1_req():    #Requirements for the second stage.
         if myra.has_taboo("touching_vagina") or alexia.has_taboo("touching_vagina"):
             return False
-        if myra.opinion_score_being_fingered() >-2 and alexia.opinion_score_being_fingered() >= -2:
+        if myra.opinion_score_being_fingered() >-2 and alexia.opinion_score_being_fingered() >-2:
             if myra.sluttiness >= 40 and alexia.sluttiness >= 40:
                 return True
         return False
@@ -24,7 +24,7 @@ init 1 python:
     def myra_alexia_teamup_scene_2_req():
         if myra.has_taboo("licking_pussy") or alexia.has_taboo("licking_pussy"):
             return False
-        if myra.opinion_score_getting_head() >-2 and alexia.opinion_score_getting_head() >= -2:
+        if myra.opinion_score_getting_head() >-2 and alexia.opinion_score_getting_head() >-2:
             if myra.sluttiness >= 60 and alexia.sluttiness >= 60:
                 return True
         return False
@@ -32,7 +32,7 @@ init 1 python:
     def myra_alexia_teamup_scene_3_req():
         if myra.has_taboo("vaginal_sex") or alexia.has_taboo("vaginal_sex"):
             return False
-        if myra.opinion_score_vaginal_sex() >-2 and alexia.opinion_score_vaginal_sex() >= -2:
+        if myra.opinion_score_vaginal_sex() >-2 and alexia.opinion_score_vaginal_sex() >-2:
             if myra.sluttiness >= 80 and alexia.sluttiness >= 80 and willing_to_threesome(myra, alexia):
                 return True
         return False
@@ -119,7 +119,7 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     alexia "Strawberry!"
     the_person "Chocolate for me..."
     mc.name "Okay, I'll be right back with those."
-    the_person "Sounds good. Do me a favor, I'll leave the door unlock but closed behind you. When you get back can you lock up behind you?"
+    the_person "Sounds good. Do me a favor, I'll leave the door unlocked but closed behind you. When you get back can you lock up behind you?"
     mc.name "Yeah I can do that."
     the_person "Great!"
     $ scene_manager.update_actor(the_person, position = "walking_away")
@@ -131,8 +131,8 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     "As you walk back to the cafe, you look around. The mall is deserted... maybe you should slip a couple serums in the milkshakes?"
     "You look at [the_person.possessive_title]'s drink."
     call give_serum(the_person) from _call_give_myra_serum_teamup_01
-    "You look at [alexia.set_possessive_title]'s drink."
-    call give_serum(the_person) from _call_give_elexia_serum_teamup_02
+    "You look at [alexia.possessive_title]'s drink."
+    call give_serum(alexia) from _call_give_alexia_serum_teamup_02
     "When you get back to the cafe, you step inside and lock the door behind you."
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -143,12 +143,12 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     $ the_person.change_happiness(5)
     $ alexia.change_happiness(5)
     "The girls seem thankful for their drinks. You sit down on the couch next to [the_person.title] and watch as the girls play."
-    "They are playing a fighting game where the character's look like they are made clay. A match is just getting ready to start."
+    "They are playing a fighting game where the character's look like they are made of clay. A match is just getting ready to start."
     the_person "Are you okay just watching? This game is only two player... maybe we play it where winner stays on?"
     mc.name "That's okay, I'm fine with just watching and hanging out with you two."
     $ alexia.change_love(1, 50)
     $ the_person.change_love(1,50)
-    alexia "Aww, that's sweet of you. Alright [myra.name], you're mine!"
+    alexia "Aww, that's sweet of you. Alright [the_person.name], you're mine!"
     "Round one starts, but it is clear that [the_person.possessive_title] is the better gamer. After two quick rounds, the game declares her as the winner."
     the_person "Yes!"
     alexia "Geeze! You just going to sit there and watch this slaughter [alexia.mc_title]? Or are you going to help me?"
@@ -156,7 +156,7 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     alexia "I don't know... distract her or something!"
     the_person "Oh! That's a good idea! Do that thing we did the other day, [the_person.mc_title]."
     alexia "Thing?"
-    the_person "Yeah, he is helping me train my focus while playing games while giving me backrubs. It makes it hard to play when you are feeling relaxed."
+    the_person "Yeah, he is helping me train my focus while playing games by giving me backrubs. It makes it hard to play when you are feeling relaxed."
     the_person "His hands are amazing though, so it helps me learn to focus, and at the same time it feels great..."
     "You glance at [alexia.title] and see a hint of jealousy in her face..."
     alexia "Ahh... yeah... I just didn't realize you two were getting to be so friendly I guess..."
@@ -200,7 +200,7 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     alexia "Get your ass over here [alexia.mc_title]! From the noises she was making, those hands must be magical!"
     "You move over next to [alexia.title]."
     $ scene_manager.update_actor(the_person, display_transform = character_right(yoffset = 0, zoom = 0.8))
-    $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
+    $ scene_manager.update_actor(alexia, position = "sitting", display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
     "You start to rub [alexia.possessive_title]'s back as the girls get ready to play another round. She let's out an exaggerated moan."
     alexia "MMMM that feels AMAZING [alexia.mc_title]!"
     $ mc.change_locked_clarity(10)
@@ -208,12 +208,12 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
         $ the_person.event_triggers_dict["knows_alexia_single"] = True
         the_person "Wow, should I give you two some privacy?"
         if alexia.sluttiness > 20:
-            alexia "Wow, you would do that? You're such a good friend [myra.name]!"
-            "[the_person.title] rolls her eyes."
+            alexia "Wow, you would do that? You're such a good friend [the_person.name]!"
         else:
             alexia "Just teasing, geesh! No need to take it so far."
-            "[the_person.title] rolls her eyes."
+        "[the_person.title] rolls her eyes."
     else:
+        # $ so_title = SO_relationship_to_title(alexia.relationship)
         $ the_person.event_triggers_dict["knows_alexia_single"] = False
         the_person "Wow, does your boyfriend know you're out getting backrubs from strange men tonight [alexia.name]?"
         "[alexia.title] rolls her eyes."
@@ -238,8 +238,8 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     alexia "Damn! I hate this game! I need a break."
     the_person "Me too. I have snacks, let me go grab some."
     mc.name "I think it is time for me to head out. You two have fun tonight."
-    $ scene_manager.update_actor(the_person, position = the_person.idle_pose, display_transform = character_right(yoffset = 0, zoom = 0))
-    $ scene_manager.update_actor(alexia, position = alexia.idle_pose, display_transform = character_center_flipped(yoffset = 0, zoom = 0))
+    $ scene_manager.update_actor(the_person, position = the_person.idle_pose, display_transform = character_right(yoffset = 0, zoom = 1))
+    $ scene_manager.update_actor(alexia, position = alexia.idle_pose, display_transform = character_center_flipped(yoffset = 0, zoom = 1))
     "When you stand up, so do both girls."
     alexia "Okay, I lied. That was super fun. I just need to get better."
     the_person "Yeah, honestly it is really nice playing a different game for a change too. We should do this more often!"
@@ -250,7 +250,7 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     mc.name "Certainly. Goodnight girls, have a good night!"
     alexia "Bye!"
     $ scene_manager.clear_scene()
-    "You let yourself and head home."
+    "You let yourself out and head home."
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "The friendship between [the_person.title] and [alexia.possessive_title] seems to be in good health. And this Friday night appointment seems to be a great opportunity."
@@ -295,6 +295,7 @@ label myra_alexia_teamup_scene_intro_2(the_group):
     "You step into the gaming cafe. It looks like [the_person.title] and [alexia.possessive_title] are chatting as they close up. They don't notice you right away..."
     $ scene_manager.add_actor(the_person)
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped)
+    # if alexia.is_employee:
     alexia "Yeah, well... let's just say working there has been... interesting."
     "[the_person.title] looks up an notices you. She quickly elbows [alexia.title]."
     the_person "Hey! You're here! We were wondering if you would be swinging by."
@@ -350,7 +351,7 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
     $ the_person.change_happiness(5)
     $ alexia.change_happiness(5)
     "The girls seem thankful for their drinks."
-    "As the girls get ready to play, you check your watch. It is already pretty late, but you want to watch enough matches to atleast declare a winner."
+    "As the girls get ready to play, you check your watch. It is already pretty late, but you want to watch enough matches to at least declare a winner."
     "How many wins will it take to win tonight?"
     "NOTE: the larger the number, the longer the event."
     menu:
@@ -361,7 +362,7 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
         "3":
             $ round_count = 3
 
-    alexia "Same rules as last time, right? Winner get's a back massage during the next round?"
+    alexia "Same rules as last time, right? Winner gets a back massage during the next round?"
     the_person "Sure, but I think we should put him to work right away. Why don't you sit down next to me and start that massage now? It'll be like a handicap."
     alexia "Hey, that's not fair! You should start with me, [alexia.mc_title]!"
     "Which girl do you want to sit next to first?"
@@ -410,6 +411,7 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
         mc.name "[alexia.title], why don't you grab some snacks for you two while I work on [myra.title] for a bit?"
         alexia "Fine. I need to use the ladies room anyway... just don't do anything too crazy while I'm gone you two!"
         myra "No promises!"
+        # if alexia.is_employee:
         alexia "[alexia.mc_title], I'll see you at work next week, okay?"
         mc.name "Bye [alexia.title]."
         "The girls laugh, but [alexia.possessive_title] gets up and heads towards the restroom."
@@ -429,7 +431,7 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
     the_target "Hey, I got an idea. I'm going to lay on my stomach and just relax, okay?"
     mc.name "Sure, sounds good."
     $ scene_manager.update_actor(the_target, position = "walking_away")
-    "You gently sit on [the_target.title]'s back, leaning forward as you begin your work on her back."
+    "You gently sit on [the_target.title]'s back, leaning forward as you begin your work on her back." # not sure we are sitting on her back. Straddling her legs?
     the_target "Ahhh, sweet victory."
     "You spend a while just rubbing and caressing her back. She sighs and coos as your massage her."
     $ the_target.change_love(2, 60)
@@ -452,8 +454,8 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
     $ mc.location.show_background()
     "There was a lot of tension in the air tonight between you and the two girls. You know you can push things between you and them farther with a little more time..."
     if myra.has_taboo("touching_vagina") or alexia.has_taboo("touching_vagina"):
-        "You aren't sure that you will be able to convince the girls to anything lewd when you haven't done much one on one yet."
-        "You should make sure you've fingered each girl atleast once before you try to make things go any farther..."
+        "You aren't sure that you will be able to convince the girls to do anything lewd when you haven't done much one on one yet."
+        "You should make sure you've fingered each girl at least once before you try to make things go any farther..."
     elif myra.opinion_score_being_fingered() == -2:
         "You aren't sure that you will be able to manage it while [myra.title] hates getting fingered though..."
     elif alexia.opinion_score_being_fingered() == -2:
@@ -605,7 +607,7 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
     $ mc.change_arousal(20)
     $ the_loser.break_taboo("touching_penis")
     "You slide two fingers up into [the_target.title]'s cunt. She moans and bucks her hips, already worked up from your groping earlier."
-    "Seeing that thing have started, [the_loser.title] also gets to work. Her soft hands work their way up and down your cock."
+    "Seeing that things have started, [the_loser.title] also gets to work. Her soft hands work their way up and down your cock."
     "You slide your fingers in and out of her pussy, stroking the inside of that soft tunnel."
     "Each movement draws moans of pleasure from [the_target.possessive_title], who looks over at you."
     the_target "Can... can we kiss too?"
@@ -615,6 +617,7 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
     "As you make out, [the_target.possessive_title] let's out little moans, which are really turning you on."
     "[the_loser.possessive_title] takes a moment to spit on her hand again, then keeps working your cock."
     if the_loser == myra:
+        # $ so_title = SO_relationship_to_title(alexia.relationship)
         the_loser "Holy fuck you two... [alexia.name] are you sure you have a boyfriend?"
         the_target "Quiet. I don't want to think about him right now..."
         $ mc.change_locked_clarity(20)
@@ -623,7 +626,7 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
         the_loser "God, you two are so hot together..."
         $ mc.change_locked_clarity(20)
         "[the_loser.title] is starting to touch herself, but you are pretty sure she knows better than to get herself off now."
-    "[the_target.possessive_title]'s moans are getting urgest. She's going to cum soon!"
+    "[the_target.possessive_title]'s moans are getting urgent. She's going to cum soon!"
     the_target "Yes! Oh [the_target.mc_title]!"
     "Her whole body tenses up and a shiver runs through her body as she climaxes."
     $ the_target.call_dialogue("climax_responses_foreplay")
@@ -663,12 +666,12 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
     if scene_transition:
         the_loser "We are doing it this way from now on though... right?"
         the_target "Oh, want to get covered in cum again next week?"
-        the_loser "Errr, no way! Of course not! But I wouldn't mind watching him covering yours when I kick your ass!"
+        the_loser "Errr, no way! Of course not! But I wouldn't mind watching him cover you when I kick your ass!"
 
     else:
         the_loser "I can't wait until next week."
         the_target "Oh, want to get covered in cum again next week?"
-        the_loser "No way! I mean... yeah but... I won't be! I'll be watching him cover yours when I kick your ass!"
+        the_loser "No way! I mean... yeah but... I won't be! I'll be watching him cover you when I kick your ass!"
     "The girls start to play fight a little bit. It's cute, but you get up to leave."
     $ scene_manager.clear_scene()
     "You get up and head home."
@@ -677,8 +680,8 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
     "Things are progressing nicely with the two gamer girls. Obviously, you want to keep pushing things with them."
     "The next logical step is to move to oral sex..."
     if myra.has_taboo("licking_pussy") or alexia.has_taboo("licking_pussy"):
-        "You aren't sure that you will be able to convince the girls to anything lewd when you haven't done much one on one yet."
-        "You should make sure you've eaten out each girl atleast once before you try to make things go any farther..."
+        "You aren't sure that you will be able to convince the girls to do anything lewd when you haven't done much one on one yet."
+        "You should make sure you've eaten out each girl at least once before you try to make things go any farther..."
     if myra.opinion_score_getting_head() == -2:
         "You aren't sure that you will be able to manage it while [myra.title] hates getting head though..."
     elif alexia.opinion_score_getting_head() == -2:
@@ -795,7 +798,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
     "[the_target.title]'s sexy ass is now right in your face. You waste no time diving in and begin to lick up and down her slit."
     $ face_fuck = False
     if the_loser == myra and the_loser.opinion_score_giving_blowjobs() == -2:   #Special scene where Alexia trains Myra a bit on blowjobs
-        "Above you, you can hear [the_target.title] gives som encouragement."
+        "Above you, you can hear [the_target.title] give some encouragement."
         the_target "Come on [the_loser.name]! Don't worry, it won't bite!"
         the_loser "I know, I just... Ugh I don't know why I just can't stand giving blowjobs."
         the_target "Why? It is SO much fun! They are so hot and you can make him squirm like a little... AH!"
@@ -826,7 +829,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         "A moaning affirmative is the only thing that escapes [the_loser.title]'s mouth as her tongue licks all around your balls."
         "You realize that you are going to cum fast. You'd better get to work!"
         "You eagerly lick up and down [the_target.title]'s slit, running circles around her clit for a few seconds in between strokes."
-        "[the_loser.possessive_title] pulls off your for a second."
+        "[the_loser.possessive_title] pulls off your cock for a second."
         the_loser "Hey, can you help me out? He normally does this for me, but he is a little busy right now."
         the_target "Mmmm... yeah? What do you need?"
         the_loser "Would you grab my hair and like, you know, force me down on him?"
@@ -859,7 +862,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         "You feel her soft hand around the base of your cock, as she licks at the tip a few times, tasting your pre-cum."
         if the_target.opinion_score_drinking_cum() > 0:
             the_target "Mmmm, I bet that tastes good, doesn't it? Can I have some?"
-            "You feel [the_loser.title]'s soft hand give you a few stroke, while some weight shifts one the couch. Soon you hear the two girls making out."
+            "You feel [the_loser.title]'s soft hand give you a few strokes, while some weight shifts on the couch. Soon you hear the two girls making out."
             the_target "Mmm, it DOES taste good!"
             "The soft mouth of [the_loser.possessive_title] returns to your erection."
         "Slowly, methodically, you feel her lips descend your cock and then hold it about halfway in for a few seconds, her tongue swirling around it."
@@ -892,7 +895,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
     "All at once the tension in her body is unleashed in a series of violent tremors. Her body collapes for a second, momentarily keeping you from breathing."
     "You give her ass a slap, and she lifts up on her knees enough to get you some air."
     $ the_target.have_orgasm(half_arousal = False)
-    "Having [the_target.title] cum all over your face has really get you turned on, you feel yourself getting ready to cum too."
+    "Having [the_target.title] cum all over your face has really gotten you turned on, you feel yourself getting ready to cum too."
     mc.name "Oh god... [the_loser.title] I'm gonna cum!"
     if face_fuck:
         "You feel [the_loser.possessive_title]'s mouth get shoved forcefully down on your cock and it stays there. Her tongue is lapping all around your testicles."
@@ -918,12 +921,12 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         if the_loser.opinion_score_drinking_cum() > 0:
             the_loser "Mmmm, you came so much for me!"
         else:
-            the_target "Mmmm, why the face? You know you like! Now be a good girl and swallow."
+            the_target "Mmmm, why the face? You know you like it! Now be a good girl and swallow."
             "A few seconds later, [the_loser.possessive_title] must have complied as she starts to talk."
             the_loser "Yeah... call me crazy, but I think I'm getting used to that... For some reason it wasn't as bad as I remembered."
             $ the_loser.increase_opinion_score("drinking cum")
         if the_target.opinion_score_drinking_cum() > 0:
-            the_target "Oh hey, you got a little on your... mmm just come her..."
+            the_target "Oh hey, you got a little on your... mmm just come here..."
             "You can't see anything around her ass, but you can hear [the_target.title] and [the_loser.possessive_title] start to kiss each other."
             "They go at it for several seconds."
             $ the_target.cum_in_mouth()
@@ -965,7 +968,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
     "You feel like you are getting them ready for your end game, a full on threesome."
     if myra.has_taboo("vaginal_sex") or alexia.has_taboo("vaginal_sex"):
         "You aren't sure that you will be able to convince the girls to go that far together yet though."
-        "You should make sure you've fucked each girl atleast once before you try to make things go any farther..."
+        "You should make sure you've fucked each girl at least once before you try to make things go any farther..."
     if myra.opinion_score_vaginal_sex() == -2:
         "You aren't sure that you will be able to manage it while [myra.title] hates vaginal sex though..."
     elif alexia.opinion_score_vaginal_sex() == -2:
@@ -1092,7 +1095,7 @@ label myra_alexia_teamup_scene_scene_3(the_group, scene_transition = False):  #S
 
 
     "After a while, [alexia.title] breaks the silence."
-    alexia "I hate to do this but... my stomach is rumbling. is it snack time?"
+    alexia "I hate to do this but... my stomach is rumbling. Is it snack time?"
     myra "Yeah we probably should..."
 
     $ scene_manager.update_actor(alexia, display_transform = character_center_flipped, position = "stand3")
@@ -1150,6 +1153,8 @@ label myra_alexia_teamup_trans_scene_1(the_group):
     the_person "So? You... you're okay with that?"
     alexia "Yeah, why not?"
     #TODO figure out if she has a boyfriend or not?
+    # if alexia.is_single() or alexia.is_girlfriend():
+    # $ so_title = SO_relationship_to_title(the_person.relationship)
     the_person "What would your boyfriend think about that?"
     alexia "I mean, like earlier, what he doesn't know won't hurt him..."
     the_person "But like, we'll just get all worked up from him touching us? And then what?"
@@ -1259,7 +1264,7 @@ label myra_alexia_teamup_trans_scene_4(the_group):
     alexia "We just want this to be a fun night, where we play some games, relax, and get fucked senseless."
     the_person "We were wondering... While we are playing rounds, could you just fuck us both? Then whenever you are almost done with us, we could all just get off together?"
     alexia "You can use us however you want! We just want to make you happy!"
-    "This is a surprising turn of events. However, this could be a lot of fun. Your two gamer girls, free for you use while they just play casually."
+    "This is a surprising turn of events. However, this could be a lot of fun. Your two gamer girls, free for you to use while they just play casually."
     mc.name "Okay, that sounds great to me."
     alexia "Yay!"
     the_person "Here's what we were thinking. We could pull these two couches together and just lay on them on our stomachs while we play, and you can do... well anything."
@@ -1347,10 +1352,11 @@ label myra_alexia_teamup_fight_round_label(the_group, myra_is_target):
     else:
         "You get on top of [the_target.title] as she lays on the couch. Her whole backside is open for you to do what you want with."
         "She gives a sigh and a little giggle when she feels your weight on her. She picks up her controller and the girls pick their characters."
+    # if myra_alexia_teamup_scene.stage != 4: else: no longer competing
     if skill_score > 2:
         "[the_target.possessive_title] has an excellent chance of winning the matchup..."
         "That is, of course, depending on if your magic hands happen to be a distraction."
-        "Maybe you should even up the match up a little?"
+        "Maybe you should even up the match a little?"
     if skill_score < -2:
         "[the_target.possessive_title] has a low chance of winning the matchup from what you have seen so far."
         "Maybe you should take the opportunity to have some fun with [the_target.title]..."
@@ -1439,7 +1445,7 @@ label myra_alexia_teamup_light_distraction(the_person):
                 "Some warmth is eminating from her exposed pussy as she slowly starts to get aroused."
             else:
                 "[the_person.title] squirms a bit as you touch her pussy over her clothes."
-            "The match has its ebbs and lulls, but you just keep slowly steady pressure on [the_person.title] as you touch her."
+            "The match has its ebbs and lulls, but you just keep slow steady pressure on [the_person.title] as you touch her."
             the_person "Mmm... ah..."
             "She gives a small moan as the matches are just about finished."
             if the_person.vagina_available():
@@ -1449,11 +1455,11 @@ label myra_alexia_teamup_light_distraction(the_person):
         elif the_person.arousal < 65:
             "[the_person.possessive_title] leans back against you. She sighs when your hands start to move along her skin."
             the_person "Mmm, that's nice..."
-            "You bring both hands up to her tits for a bit. Her nipples are hard with arousal, so give them a few light pinches as the game begins."
+            "You bring both hands up to her tits for a bit. Her nipples are hard with arousal, so you give them a few light pinches as the game begins."
             "You keep cupping her breast with one hand, then let the other work its way south."
             if the_person.vagina_available():
                 "Your hand slowly slides down her mound, then reaches her cunt."
-                "Her arousal is just barely starting leak out, moistening your fingers as you run them along her soft lips."
+                "Her arousal is just barely starting to leak out, moistening your fingers as you run them along her soft lips."
                 "You are careful not to push your fingers inside, as much as you want to, trying to keep her arousal building but not providing too big of a distraction."
             else:
                 "You run your hand along her mound on the outside of her clothes. You consider for a moment pulling them down."
@@ -1491,7 +1497,7 @@ label myra_alexia_teamup_light_distraction(the_person):
             "[the_person.title] wiggles her hips against you a bit, but mostly just concentrates on the game."
             "You keep sliding one hand around her skin, and with the other you reach down between her legs. She spreads her legs to give you easy access."
             "You run your fingers along her slit a few times. She is just starting to get warmed up, so you take your time."
-            "Her hips move a bit when apply some pressure. It feels amazing having your cock nestled between her cheeks."
+            "Her hips move a bit when you apply some pressure. It feels amazing having your cock nestled between her cheeks."
             "When you feel a bit of moisture, you slowly push your middle finger inside of her."
             the_person "Mmm... yes [the_person.mc_title]..."
             "The match is already almost over, so you spend the rest of it gently fingering her pussy, and getting her warmed up."
@@ -1506,8 +1512,8 @@ label myra_alexia_teamup_light_distraction(the_person):
             if the_person.has_large_tits():
                 "You reach around her body, cupping her generous tits in your hands. You jiggle and squeeze them pleasingly in your hands."
             else:
-                "You reach around her body, cupping her perky tits in your hands. She gasps when you thumbs graze her sensitive nipples."
-            "[the_person.possessive_title] wiggles her hips abit. Your cock twitches between her cheeks."
+                "You reach around her body, cupping her perky tits in your hands. She gasps when your thumbs graze her sensitive nipples."
+            "[the_person.possessive_title] wiggles her hips a bit. Your cock twitches between her cheeks."
             "You slide one hand down between her legs. She opens her legs giving you easy access."
             "Her cunt is wet and ready for penetration, so you push two fingers up inside of her."
             "You move your fingers slowly, but each stroke elicits a small gasp of pleasure from [the_person.possessive_title]."
@@ -1561,9 +1567,9 @@ label myra_alexia_teamup_med_distraction(the_person):
             "Your wrap your hands around her front, rubbing her stomach and working your way upward."
             "The fighting suddenly gets tense. Since she is distracted, you bring your hands up to her tits."
             the_person "Mmmm! Ahhh..."
-            "[the_person.title] gasps when you run your thumbs over he nipples. Her body wiggles back against you a bit as you grope her breasts."
+            "[the_person.title] gasps when you run your thumbs over her nipples. Her body wiggles back against you a bit as you grope her breasts."
             if the_person.tits_available():
-                "The heat and weight of her soft skin feels amazing in you hands. You eagerly knead her titflesh for the remainder of the match, much to her enjoyment."
+                "The heat and weight of her soft skin feels amazing in your hands. You eagerly knead her titflesh for the remainder of the match, much to her enjoyment."
                 return 30
             else:
                 "You wish you could put your hand under her clothes, but you don't want to distract her too much."
@@ -1572,7 +1578,7 @@ label myra_alexia_teamup_med_distraction(the_person):
         else:
             "[the_person.possessive_title] is breathing a little heavy in front of you. She seems to be pretty excited."
             if not the_person.tits_available():
-                "Not content touch her over her clothes, you quietly start to pull at her top."
+                "Not content to touch her over her clothes, you quietly start to pull at her top."
                 "[the_person.title] glances over at the other girl, but with the match already starting she quickly decides to let you."
                 $ scene_manager.strip_to_tits(the_person)
                 "Finally topless, you bring your hands up to her amazing tits."
@@ -1646,11 +1652,11 @@ label myra_alexia_teamup_med_distraction(the_person):
             "[the_person.title] wiggles her hips against you a bit, but mostly just tries to concentrate on the game."
             "You keep sliding one hand around her skin, and with the other you reach down between her legs. She spreads her legs to give you easy access."
             "You run your fingers along her slit a few times. You give her a bit to warm up."
-            "Her hips move a bit when apply some pressure. It feels amazing having your cock nestled between her cheeks."
+            "Her hips move a bit when you apply some pressure. It feels amazing having your cock nestled between her cheeks."
             "When you feel a bit of moisture, you slowly push your middle finger inside of her. When you can easily push that one in, you slowly slide in a second finger."
             the_person "Mmm...  fuck yes [the_person.mc_title]..."
             "The match is already almost over, so you speed up, intent on getting her warmed up."
-            "[the_person.title] squirms a bit under your touch, but clearly enjoys have your hands all over her as she finishes her match."
+            "[the_person.title] squirms a bit under your touch, but clearly enjoys having your hands all over her as she finishes her match."
             $ mc.change_arousal(10)
             return 40
         elif the_person.arousal < 50:
@@ -1662,9 +1668,9 @@ label myra_alexia_teamup_med_distraction(the_person):
             if the_person.has_large_tits():
                 "You reach around her body, cupping her generous tits in your hands. You jiggle and squeeze them pleasingly in your hands."
             else:
-                "You reach around her body, cupping her perky tits in your hands. She gasps when you thumbs graze her sensitive nipples."
+                "You reach around her body, cupping her perky tits in your hands. She gasps when your thumbs graze her sensitive nipples."
             "You give her nipples a hard pinch. She yelps and shoves her hips back against you. The friction of her soft cheeks against your cock feels great."
-            "[the_person.possessive_title] wiggles her hips abit. Your cock twitches between her cheeks."
+            "[the_person.possessive_title] wiggles her hips a bit. Your cock twitches between her cheeks."
             "You slide one hand down between her legs. She opens her legs giving you easy access."
             "Her cunt is wet and ready for penetration, so you push two fingers up inside of her."
             "You move your fingers slowly, but each stroke elicits a small gasp of pleasure from [the_person.possessive_title]."
@@ -1719,15 +1725,15 @@ label myra_alexia_teamup_large_distraction(the_person):
             $ scene_manager.strip_to_tits(the_person)
             "Finally topless, you bring your hands up to her amazing skin, running both hands down her sides."
         if the_person.arousal < 40:
-            "You let your hands roam up an down [the_person.possessive_title]'s soft skin on her back and sides."
-            "You don't even bother pretending to be gentle. With one hand you work on a knot you find on her back, with the other hand your reach around and grab one of her tits."
+            "You let your hands roam up and down [the_person.possessive_title]'s soft skin on her back and sides."
+            "You don't even bother pretending to be gentle. With one hand you work on a knot you find on her back, with the other hand you reach around and grab one of her tits."
             the_person "Mmm! God... take it easy..."
             "[the_person.title] is trying to concentrate as the match gets suddenly tense, but instead of letting up, you double down."
             "You reach both hands around now and give her nipples a little pinch."
             "She curses under her breath and squirms a bit as you are now shamelessly groping her."
             return 40
         else:
-            "[the_person.possessive_title] is breathing a heavy in front of you. She seems to be pretty excited."
+            "[the_person.possessive_title] is breathing heavy in front of you. She seems to be pretty excited."
             "[the_person.title] steals a quick glance at the other girl, then quietly takes your hand and guides it from her side up to her chest."
             the_person "Mmmm..."
             if the_person.has_large_tits():
@@ -1746,14 +1752,14 @@ label myra_alexia_teamup_large_distraction(the_person):
             "[the_person.title] starts to protest, but you quickly pull her clothes off her lower body anyway."
             $ scene_manager.strip_to_vagina(the_person)
         if the_person.arousal < 30:
-            "You softly run hands up and down [the_person.possessive_title]'s soft skin on her sides and belly."
+            "You softly run your hands up and down [the_person.possessive_title]'s soft skin on her sides and belly."
             "You couldn't care less about the match, to be honest, you just want to get her as needy as possible in the time you have."
             "You reach up with your right hand and grab her breast, kneading it and once in a while you give her nipple a pinch."
             "With your left hand, you reach down and cup her mound between her legs, applying pressure."
             "Your ring finger and middle finger dip into her labia, eliciting a moan from [the_person.title]"
-            the_person "Ah! Oh god... getting off to fast start don't you think?"
+            the_person "Ah! Oh god... getting off to a fast start don't you think?"
             "You grind the palm of your hand against her clit as your two fingers dip slightly into her vagina. She is rapidly getting wet."
-            the_person "Fuck! [the_person.mc_title], atleast just let me play a little first..."
+            the_person "Fuck! [the_person.mc_title], at least just let me play a little first..."
             "[the_person.possessive_title] whimpers and squirms under your touch. She is protesting, but it is obvious she is getting turned on."
             "She gives a moan, but the match is unfortunately almost over."
             return 45
@@ -1791,7 +1797,7 @@ label myra_alexia_teamup_large_distraction(the_person):
             "Her pussy has gotten wetter, and you slide back in much easier."
             the_person "Oh fuck..."
             "She doesn't help you at all, but you are able to lift her hips with your hands and then bring them back down a few more times."
-            "With each stroke you slide back in a little easier as he cunt gets wet with arousal."
+            "With each stroke you slide back in a little easier as her cunt gets wet with arousal."
             "She is trying to concentrate as much as possible on the match, but you are able to set a steady, albeit slow pace."
             "[the_person.title] is starting to gasp and her breathing is getting deeper when the match is almost over."
             $ mc.change_arousal(25)
@@ -1868,7 +1874,7 @@ label myra_alexia_teamup_orgasm_finish(the_person):
             the_person "Oh fuck me too!"
             if the_person.wants_creampie():
                 "[the_person.possessive_title] just keeps riding you as you orgasm."
-                "As you start to shoot your load inside of her, she suddenly falls back against you, bottoming out on top of you as she orgasm also."
+                "As you start to shoot your load inside of her, she suddenly falls back against you, bottoming out on top of you as she orgasms also."
                 the_person "Oh fuck! Oh yes fill me up [the_person.mc_title], OH!"
                 $ the_person.have_orgasm(half_arousal = True)
                 $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
@@ -1895,7 +1901,7 @@ label myra_alexia_teamup_orgasm_finish(the_person):
                 $ scene_manager.update_actor(the_person)
                 the_person "Oh fuck... cum all over me!"
                 "[the_person.title] reaches down and rubs circles around her slit like crazy as she finishes herself off."
-                "Your cock twitches as the couple waves erupt out of your cock and onto her ass."
+                "Your cock twitches as the couple waves erupt out of your cock and onto her ass." # not sure how to fix this line
                 $ the_person.have_orgasm(half_arousal = True)
                 if the_person == myra:
                     alexia "Wow! You two are so hot..."

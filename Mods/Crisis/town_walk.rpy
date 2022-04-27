@@ -14,7 +14,7 @@ init 2 python:
         return get_random_from_list(candidates)
 
     town_walk_crisis_action = ActionMod("Town Walk", town_walk_crisis_requirement, "town_walk_crisis_action_label", category = "Misc",
-        menu_tooltip = "On occasion when you walk down town, you notice, someone did not close their bedroom curtains.", is_crisis = True)
+        menu_tooltip = "On occasion when you walk downtown, you notice, someone did not close their bedroom curtains.", is_crisis = True)
 
 label town_walk_crisis_action_label():
     ## You spy on a neighbor during your town walk activities
