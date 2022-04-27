@@ -85,7 +85,7 @@ init 2 python:
             force_random = True,                    # If False, we may grab a pre-generated person for his function from patreon rewards and overwrite her properties!
             base_outfit = myrabelle_base_outfit,     #
             forced_opinions = [["punk", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", -1, False], ["the colour blue", 2, False], ["pants", 1, False], ["gaming", 2, False]],
-            forced_sexy_opinions = [["giving handjobs", 2, False], ["showing her ass", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -2, False], ["anal sex", 2, False], ["doggy style sex" ,1, False]])   #random_lists.rpy for list of sexy and normal opinions
+            forced_sexy_opinions = [["giving handjobs", 2, False], ["showing her ass", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -2, False], ["anal sex", 2, False], ["doggy style sex" ,1, False], "being submissive", 2, False])   #random_lists.rpy for list of sexy and normal opinions
 
         #myra.add_job(unemployed_job)
         myra.generate_home()                                    #Omit this if girl lives with someone else
@@ -355,7 +355,7 @@ init -2 python:
         return False
 
     def myra_gains_sponsor_requirement(the_person):
-        if myra_at_cafe() and time_of_day < 3 and mc.business.has_funds(20000):
+        if myra_at_cafe() and time_of_day < 3 and mc.business.has_funds(25000):
             return True
         return False
 
@@ -510,26 +510,318 @@ label myra_train_focus_label(the_person):   #Her standard corruption event. Slow
     return
 
 label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a date at the bar, unlock street fighter, option to sponsor her, spend the night at her place.
-    "In this event, you stumble on [the_person.title] closing down her shop early. She confides in MC that she lost her team a sponsorship from a major drink company."
-    "Rather lengthy event, you go with her to the bar to have drinks. You offer to sponsor her team, but for now she turns it down."
-    "At the bar she has a few drinks with MC and plays street fighter 2 at an arcade box."
-    "If MC loses street fighter, she claims it is because MC is distracted by her."
-    "MC suggests maybe she should distract opponents when she can during esports tournaments. She says she doesn't have the body for it."
-    "MC has the option to suggest bigger tits, which she laughs off for now."
-    "After bar date, [the_person.title] spends the night at MC's. Leaves the next morning after telling MC he has given her a LOT of things to think about."
+    $ the_person.draw_person(position = "walking_away")
+    $ the_person.change_happiness(-50)
+    "You walk up to the gaming cafe. [the_person.possessive_title] is at the front door, locking up."
+    mc.name "Hey [the_person.title]. Headed out early today?"
+    "She turns around after she finishes locking up."
+    $ the_person.draw_person()
+    the_person "Hey [the_person.mc_title]. Yeah you could say that."
+    the_person "I just go some bad news, so I decided to close up early tonight and hit the bar."
+    the_person "Want to come with me? I could use a drinking buddy. As a warning, I'm probably going to get fucking wasted tonight."
+    mc.name "I suppose I could go for a couple of drinks. I know a good place too."
+    the_person "Great! Let's get out of here."
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+    "You step out of the mall and start walking toward downtown."
+    mc.name "So... if you don't want to talk about it that's fine..."
+    the_person "Nah, it's fine. I got a call today from one of the team's sponsors, letting me know that they are pulling out."
+    the_person "Apparently my performance in the last tournament was not up to their standards."
+    mc.name "Ah. that is unfortunate."
+    the_person "Yeah. They make like, my favorite energy drinks too. That's okay though, who needs them!"
+    mc.name "Exactly."
+    $ mc.change_location(downtown_bar)
+    $ mc.location.show_background()
+    "You step inside the bar. Aftter a quick ID check, you walk with [the_person.title] up to the bar."
+    "Bartender" "Hey, what'll it be for you two?"
+    mc.name "I'll just have a bourbon. Neat."
+    the_person "Can I get a zombie?"
+    "Bartender" "Sure thing. You paying?"
+    mc.name "Yeah, let me open up a tab."
+    the_person "I can get my own..."
+    mc.name "Non sense. You just take it easy tonight and cut loose a little."
+    the_person "Thanks..."
+    $ the_person.change_love(1)
+    $ the_person.change_obedience(1)
+    "You walk with [the_person.title] over to a table and sit down."
+    $ the_person.draw_person(position = "sitting")
+    mc.name "So, a zombie huh? I probably should have had you pegged as a rum drinker."
+    the_person "Yeah, I like fruity. Passion fruit especially."
+    "You chit chat with [the_person.possessive_title] about some things while you both have your drinks."
+    "You think about [the_person.title]'s financial situation as you make some small talk."
+    call small_talk_person(the_person, apply_energy_cost = False) from _call_small_talk_person_myra_bar_date_01
+    "The drinks are empty."
+    mc.name "Hey, another round?"
+    the_person "Sounds great! I'm gonna hit up the lady's room real quick."
+    mc.name "Hoping to find a lady?"
+    the_person "Nah, but after an energy drink and some booze I've gotta piss!"
+    $ clear_scene()
+    "You chuckle to yourself a bit as you get up and head back to the bar. [the_person.title] is definitely a wild, outspoken person."
+    "You get two more drinks. You sit back down at the table and look at them. If you are careful, you can probably sneak a serum into hers..."
+    call give_serum(the_person) from _call_give_myra_serum_bar_date_01
+    "After another minute, [the_person.title] returns to the table."
+    $ the_person.draw_person(position = "sitting")
+    the_person "Yum, this looks good."
+    "She takes a big sip of her drink."
+    mc.name "So, I'm curious. Let's say a local business was interested in sponsoring your eSports team."
+    mc.name "How much would you be looking for, money wise?"
+    "[the_person.possessive_title] rolls her eyes a bit."
+    if the_person.has_large_tits():
+        the_person "I don't know. Maybe it's time for me to open one of those slutty picture accounts."
+        the_person "I bet a lot of nerds out there would pay for pics of a big titty blue haired girl playing games!"
+        mc.name "That's not what I was asking."
+        "[the_person.title] sticks her tongue out at you instead of replying."
+    else:
+        the_person "Probably not much, to be honest. It seems to get a sponsorship gaming as a woman these days you gotta have milkers out to HERE."
+        "[the_person.possessive_title] motions her hands over her chest, suggesting incredible endowment would be required."
+        the_person "Not that I have anything against big tits anyway. I'm just not what you would call blessed in the chest."
+        mc.name "Do you want to be?"
+        the_person "Ha! You make it sounds like it is a choice I can just make."
+        menu:
+            "Encourage her to get bigger tits":
+                mc.name "I mean, there are multiple ways of achieving that, if it is something you want to do."
+                the_person "I... I'm sorry, are you suggesting I get implants?"
+                mc.name "Not necessarily. It just seemed like you were interested in the possibility?"
+                the_person "Well, I'm not. Not through surgery anwyay."
+                mc.name "There are ways of achieving a larger bust without surgery"
+                the_person "Wow, well, that is a subject for another time... What were we talking about again?"
+                $ the_person.change_love(-1)
+                $ the_eprson.change_obedience(1)
+                $ myra.event_triggers_dict["suggested_bigger_tits"] = True
+                $ myra.add_unique_on_room_enter_event(myra_bigger_tits_intro)
+            "Change the subject":
+                mc.name "Hey, you're the one who brought up tits."
+                the_person "Right. Well, I would never get surgery for it. What were we talking about again?"
+    mc.name "Let me get staright to the point. How much money are you going to lose from the sponsorhip you lost today?"
+    "[the_person.title] quietly takes a long sip from her drink before responding."
+    the_person "Well... the one I lost today was for ten grand."
+    mc.name "I see. What if I sponsored you? My pharmaceutical company could use a bit more press."
+    the_person "Ugh, can we talk about it another time? I wanted to go out tonight to get AWAY from fucking finances."
+    $ the_person.change_happiness(-2)
+    "[the_person.possessive_title] takes a long sip from her drink, finishing it."
+    the_person "I just wanted to go out tonight, get wasted, and who knows? Maybe wind up in someone else's bed for once."
+    mc.name "You know what? That's fair. Actually, I think I can help you out with both of those."
+    the_person "Is that so?"
+    "[the_person.title] leans her head back and opens her mouth. The last couple drops of her drink fall onto her tongue, as she makes a show out of being out her drink being empty."
+    the_person "I'm not sure about that [the_person.mc_title], my glass seems awfully dry..."
+    mc.name "I'll be right back, let me go fix that."
+    "You start to get up."
+    the_person "Hey, meet me over there, I think I see some old arcade games."
+    "[the_person.title] points to the back corner where some older ardcade cabinets are set up."
+    mc.name "Sounds good, I'll meet you over there."
+    $ clear_scene()
+    "You head over to the bartender, ordering a couple more drinks for you and her."
+    "It takes a couple minutes, but you find them, then head over to where she is standing."
+    $ the_person.change_happiness(10)
+    $ the_person.draw_person(emotion = "happy")
+    the_person "Hey! It's about time. Get your ass over here!"
+    "You walk up to the cabinet she is standing next to."
+    the_person "That's right! I can't believe it, they have a legit Super Street Kombat 2 Turbo machine here!"
+    the_person "I already got quarters from the change machine. Prepare your ass! I am coming for you!"
+    mc.name "That is pretty much word for word what I'll be saying to you in a couple hours."
+    "She laughs."
+    the_person "Yeah right! More like, by the gods, that ass! I'm coming already!"
+    mc.name "Poe-Tay-Toe, Poe-Tah-Toe"
+    $ the_person.change_happiness(10)
+    "It feels good to see her smile. However, as she puts in two quarters, you brace yourself for the ass whooping you are likely about to receive from [the_person.possessive_title]."
+    call bar_date_arcade_round_label(the_person, skill_modifier = 50) from _myra_bar_date_round_1_fight_01
+    if _return:
+        "You can't believe it. You actually won."
+        "It makes no sense whatsoever, but you actually did it."
+        the_person "What? I... you must be cheating!"
+        mc.name "Me? Never!"
+        the_person "Yeah right..."
+    else:
+        "[the_person.possessive_title] gloats a bit. You got absolutely dismantled."
+        the_person "Fuck yeah! I still got it! I user to dominate at this game."
+        mc.name "I'm pretty sure you still do."
+    "?????" "Hey, that game is great. Can I get the next match?"
+    "You turn around. A group of three guys is behind you, and seem interested in the game."
+    the_person "Sure. I want to stay on though."
+    "The guys seem skeptical."
+    "?????" "No offense, but we don't want to play against a girl, we want some REAL competition."
+    "Oh shit."
+    the_person "Oh my. Is that so? Well I'll tell you guys what. First one of you guys to win against me gets to take me home, and I'll do anything you want."
+    "Oh shit. These guys have no idea who they are up against."
+    "?????" "Damn, I'm first!"
+    mc.name "Want another drink?"
+    the_person "Absolutely. Alright guys, if you want a shot, you gotta front the quarters!"
+    "She could probably hustle a lot of guys this way..."
+    $ clear_scene()
+    "You head over to the bar. You order another round for her, and just get a water for yourself. You are a little buzzed, but you don't want to get too drunk. You have a good feeling about the rest of the night."
+    "You take your time, even watch a little bit from the bar. Several guys have wandered over and have started watching her play."
+    "When you get her drink, you head back over. She is just finishing up her sixth win."
+    "?????" "Fuck! This bitch is good!"
+    the_person "Damn right!"
+    $ the_person.draw_person(emotion = "happy")
+    $ the_person.change_happiness(10)
+    "She looks to be having a great time, dismantling every challenger that faces her."
+    the_person "Ah! [the_persom.mc_title]. It's your turn!"
+    "She takes the drink from you. She brings it to her lips and drinks half of it in one go."
+    the_person "Don't forget the rules! If you win, I'm going home with you tonight."
+    "She gives you an almost imperceptible wink. You put in a quarter and the game starts up for another round."
+    call bar_date_arcade_round_label(the_person, skill_modifier = -500) from _myra_bar_date_round_1_fight_02
+    "There are groans from the guys watching after you win. There was no way she was trying her hardest that match!"
+    "?????" "Gah, that must be her boyfriend or something. Shoulda known..."
+    if the_person.is_girlfriend():
+        the_person "Yeah, sorry guys, you never REALLY had a chance."
+    else:
+        "[the_person.possessive_title] blushes a little at the comment."
+        the_person "He isn't my boyfriend... err..."
+        $ the_person.change_love(1, 80)
+        "It is clear from the way she said that, she wouldn't mind if it were true..."
+    "[the_person.title] takes her drink and finishes it off."
+    mc.name "Let me go settle up with the bartender and let's get out of here."
+    the_person "Yessir!"
+    "[the_person.possessive_title] is starting to slur her words a bit."
+    $ mc.business.change_funds(-100)
+    "You settle up with the bartender. You've run up quite the tab, but it was worth it for a fun night with [the_person.possessive_title]."
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
+    "You step outside with [the_person.title]."
+    the_person "Hey... so... we are going to your place... right?"
+    "[the_person.possessive_title] looks at you. You can tell she is a little apprehensive of your answer."
+    mc.name "If you have had too much to drink and can't, that is okay..."
+    "You lean forward and whisper into her ear."
+    mc.name "... but otherwise I plan to take you home and fuck your brains out."
+    $ the_person.change_arousal(20)
+    the_person "Mmm... that sounds nice..."
+    the_person "Lead on then!"
+    "You start walking towards your house."
+    mc.name "So, I should probably warn you about something..."
+    the_person "Oh god... you have a wife?"
+    mc.name "What? No... no."
+    mc.name "My umm... My dad isn't around anymore. I live with my sister and my mother."
+    the_person "Oh thank god. I totally thought you were about to say you have a wife!"
+    "She laughs a bit longer than is normal. But she is rather intoxicated."
+    the_person "I mean, you're still a loser for living with your mom, but atleast you aren't married!"
+    mc.name "Hey, you better watch your mouth."
+    the_person "Oh what?"
+    mc.name "I might have to find better uses for that mouth of yours."
+    $ the_person.change_arousal(10)
+    the_person "Mmm, I kind of hope you do..."
+    "Hmmm, this is interesting. Does [the_person.possessive_title] have a bit of a submissive streak?"
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
+    "You step into your house, and make it unaccosted to your bedroom."
+    $ the_person.draw_person(position = "back_peek")
+    "When the door is closed and locked, you grab her from behind."
+    $ the_person.add_situational_slut("Date", 20, "There's no reason to hold back, he's here to fuck me!")
+    the_person "Oh god, you can do anything you want to me."
+    mc.name "Mmm, is that so? Let's get this off you first..."
+    $ the_person.strip_outfit(position = "back_peek")
+    "You get her naked. You your hands all up and down her sides, her tits, her thighs..."
+    $ the_person.draw_person(position = "standing_doggy")
+    "You bend her over your bed. She sighs when you run your hand across her ass, groping at her cheeks."
+    mc.name "You love to put up such a tough front. But it's all an act, isn't it?"
+    the_person "I... I don't know what you mean..."
+    "You give her ass a hard spank."
+    $ the_person.change_arousal(5)
+    the_person "Ah!"
+    mc.name "You want someone to do that to you, don't you? To treat you like the fuck doll you want to be so bad."
+    "*SPANK*"
+    the_person "OH FUCK."
+    $ the_person.change_arousal(5)
+    "[the_person.possessive_title] moans when you spank her again. She has to be a closet sub, despite her normally wild attitude."
+    $ the_person.discover_opinion("being submissive")
+    the_person "I, I just like it when you use me... when I make you feel good..."
+    "You give her anothe spank."
+    $ the_person.change_arousal(5)
+    the_person "AH!"
+    mc.name "You liar. You don't like. You love it. I can tell. Look at how wet you are getting."
+    "You run your fingers along her slit. She loves the way you are getting rough with her. You make a note to spank her more in the future."
+    $ the_person.unlock_spanking()
+    mc.name "You are such a good little slut. What hole do you want it in?"
+    the_person "Umm, whichever one you want. I like it in either one..."
+    mc.name "Is that so? You want it in your tight little asshole?"
+    the_person "Ah, if you want... I'm okay with that."
+    mc.name "Maybe I will, but for now I'm going to fuck your pussy. Are you ready?"
+    the_person "Oh fuck yeah I'm ready..."
+    "You quickly pull off your clothes. You grab her by the hips and get behind her."
+    "[the_person.possessive_title] wiggles her ass back and forth when she feels you get close. You can feel the heat and humidity coming off her cunt as you line yourself up."
+    "She sighs when she feels the tip begin pushing into her."
+    the_person "Oh fuck that feels so good..."
+    "You slide yourself in inch by inch. [the_person.title]'s slippery cunt feels amazing as you push yourself in."
+    the_person "Fuck your cock feels so good..."
+    $ the_loser.break_taboo(vaginal_sex)
+    $ the_person.break_taboo("condomless_sex")
+    "Fully sheathed, you enjoy the heat coming off of [the_person.possessive_title]'s ass for a moment. You give her another spank."
+    "*SPANK*"
+    $ the_person.change_arousal(10)
+    the_person "Ah! Oh fuck me [the_person.mc_title]..."
+    "You pull back and start to give it to her."
+    call fuck_person(the_person, start_position = standing_doggy, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_sex_description_myra_post_drinks_01
+    $ the_person.draw_person(position = "missionary")
+    "[the_person.title] falls onto your bed when you finish. You lay down next to her."
+    the_person "That was just what I needed, god damn."
+    if not the_person.is_girlfriend():
+        the_person "You know what was funny? When one of the guys at the bar was like, oh damn, she's got a boyfriend. Wasn't that funny?"
+        mc.name "Funny? I suppose."
+        the_person "I mean, can you imagine? Us dating? Hah, I mean... I could imagine it..."
+        "[the_person.possessive_title] seems to be dropping pretty big hints that she is interested in making your relationship more official."
+        menu:
+            "Ask her to be your girlfriend":
+                mc.name "I don't know, I think that would be pretty nice."
+                the_person "Ah, I mean... I think it would be nice too..."
+                mc.name "Do you want to? Be my girlfriend?"
+                $ the_person.change_happiness(30)
+                $ the_person.change_love(5, 90)
+                the_person "Ah! Fuck, I didn't think you were ever gonna ask. I'm down for it if you are!"
+                if myra_alexia_teamup_scene.stage >= 2:
+                    "One thing bothers you a bit about it though."
+                    mc.name "What about when I come to game nights? You know, with you and [alexia.title]."
+                    the_person "Oh, I mean, she is such a good friend of mine, I wouldn't be too upset if we um... kept doing that."
+                $ the_person.add_role(girlfriend_role)
+            "Just be friends":
+                mc.name "I definitely enjoy spending time with you, especially doing stuff like this. But I'm not ready for anything serious."
+                the_person "Right, that's totally what I was thinking too. That's why it was funny... right?"
+                $ the_person.change_happiness(-3)
+                $ the_person.change_obedience(5)
+                "While her words are optimistic, you note a hint of sadness in her voice when she says that."
+    else:
+        the_person "God, it feels so good to be with you. That was so funny, at the bar! That guy was like, aww fuck she's got a boyfriend!"
+        the_person "Damn right! And his dick is AMAZING!"
+        mc.name "Poor guys thought they actually had a chance beating you at that game."
+        the_person "Yeah, I suppose that was kind of mean."
+    "You lay with [the_person.possessive_title] a little longer."
+    mc.name "Do you want to stay over?"
+    the_person "Ah, I can't. I actually have something I need to get done in the morning."
+    $ the_person.draw_person()
+    "[the_person.title] slowly gets up. You just watch her as she gets herself dressed again."
+    $ the_person.apply_planned_outfit()
+    $ the_person.draw_person()
+    the_person "I think I can see myself out. Goodnight [the_person.mc_title]."
+    mc.name "Goodnight."
+    $ clear_scene()
+    $ the_person.clear_situational_slut("Date")
     $ myra.event_triggers_dict["bar_arcade_avail"] = True
     $ myra.event_triggers_dict["can_sponsor"] = True
-
-    $ myra.event_triggers_dict["suggested_bigger_tits"] = True
-    $ myra.add_unique_on_room_enter_event(myra_bigger_tits_intro)
     $ myra.add_unique_on_room_enter_event(myra_gains_sponsor)
+    "You think about the fun night you had at the bar with [the_person.possessive_title]."
+    "Her business at the gaming cafe... You feel like there are some real opportunities there, if you can convince her to accept you as a sponsor."
+    "You resolve yourself to save up some funds to invest in her sports team. You make a mental note: save atleast $25000 and talk to her about it."
     return
 
 label myra_gains_sponsor_label(the_person):
-    "A few days after the bar date, she asks MC if he was serious about sponsoring her. She tells him the team lost 10k from original sponsor."
-    "MC offers a 15k sponsorship, with priority given for future business ventures at the gaming cafe."
-    "She accepts and MC thinks to self he should develop a new energy drink at the business. Starts the public serum distribution questline."
+    $ the_person.draw_person()
+    mc.name "Hey, we need to talk."
+    the_person "Oh? What is it, [the_person.mc_title]?"
+    mc.name "I want in. I want to sponsor your eSports team."
+    the_person "Seriously, you don't have to do that..."
+    mc.name "I have $15000 I want to invest. I'm want the opportunity to invest further in the business in the future also, as well as a small cut when your start dominating eSports tournaments."
+    the_person "Fuck, that's a lot of money. Are you sure? That's more than double what I was getting from my last sponsor."
+    mc.name "I am absolutely certain. Take it. Invest in your cafe. I believe in you, and I believe in your business."
+    $ the_person.change_obedience(10)
+    $ the_person.change_love(5, 90)
+    "You hand her a check, made out of the full amount."
+    the_person "Wow... okay... You are now a sponsor of the Predators eSports gaming team!"
+    "[the_person.possessive_title] smiles at you. You really do feel like this is going to be a worthwile busines venture."
+    the_person "I'm gonna go put this in the safe for the day, if you need anything else, come find me, okay?"
+    $ the_person.draw_person(position = "kissing")
+    "[the_person.title] throws her arms around you and gives you a big hug, before letting go and walking off."
+    $ clear_scene()
     $ myra.event_triggers_dict["has_been_sponsored"] = True
+    $ mc.business.change_funds(-15000)
     $ myra.add_unique_on_room_enter_event(myra_esports_second_tournament_intro)
     $ myra.add_unique_on_room_enter_event(myra_develop_energy_drink_intro)
     return
@@ -806,7 +1098,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
                 $ finished = True
             elif mc.business.inventory.get_serum_count(the_serum) < 10:
                 "Unfortunately you don't have enough of that serum to send it over."
-            elif myra_serum_is_acceptable_energy_drink(the_serum):
+            elif not myra_serum_is_acceptable_energy_drink(the_serum):
                 "Unfortunately that serum isn't acceptable to send over to the gaming cafe."
         else:
             $ the_serum = None
@@ -1078,5 +1370,5 @@ init 3 python:
         for person in gaming_cafe.people:
             if the_serum not in person.serum_effects:
                 if len(person.serum_effects) < person.serum_tolerance:
-                    person.give_serum(copy.copy(the_serum), add_to_log = True)
+                    person.give_serum(copy.copy(the_serum), add_to_log = False)
         return
