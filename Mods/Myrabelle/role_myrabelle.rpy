@@ -83,7 +83,7 @@ init 2 python:
             force_random = True,                    # If False, we may grab a pre-generated person for his function from patreon rewards and overwrite her properties!
             base_outfit = myrabelle_base_outfit,     #
             forced_opinions = [["punk", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", -1, False], ["the colour blue", 2, False], ["pants", 1, False], ["gaming", 2, False]],
-            forced_sexy_opinions = [["giving handjobs", 2, False], ["showing her ass", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -2, False], ["anal sex", 2, False], ["doggy style sex" ,1, False], "being submissive", 2, False])   #random_lists.rpy for list of sexy and normal opinions
+            forced_sexy_opinions = [["giving handjobs", 2, False], ["showing her ass", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -2, False], ["anal sex", 2, False], ["doggy style sex" ,1, False], ["being submissive", 2, False]])   #random_lists.rpy for list of sexy and normal opinions
 
         #myra.add_job(unemployed_job)
         myra.generate_home()                                    #Omit this if girl lives with someone else
@@ -177,7 +177,7 @@ init 3 python:
 label myra_rude_intro_label():
     $ the_person = myra
     $ myra.event_triggers_dict["intro_complete"] = True
-    "As you are walking around down town, you stop at a cross walk."
+    "As you are walking around downtown, you stop at a cross walk."
     $ the_person.draw_person()
     "As you stand there, a woman walks up and stands next to you, also waiting at the crosswalk."
     "You are struck by the woman's brightly colored hair. You decide to say hello."
