@@ -10,26 +10,26 @@
 #All stages should present opportunity to build sluttiness a bit.
 
 init 1 python:
-    def kaya_erica_teamup_0_req(the_person_one, the_person_two):
+    def kaya_erica_teamup_0_req():
         return True
 
-    def kaya_erica_teamup_1_req(the_person_one, the_person_two):
-        if the_person_one.sluttiness > 20 and the_person_two.sluttiness > 20:
+    def kaya_erica_teamup_1_req():
+        if kaya.sluttiness > 20 and erica.sluttiness > 20:
             return True
         return False
 
-    def kaya_erica_teamup_2_req(the_person_one, the_person_two):
-        if the_person_one.sluttiness >= 40 and the_person_two.sluttiness >= 40:
+    def kaya_erica_teamup_2_req():
+        if kaya.sluttiness >= 40 and erica.sluttiness >= 40:
             return True
         return False
 
-    def kaya_erica_teamup_3_req(the_person_one, the_person_two):
-        if the_person_one.sluttiness >= 60 and the_person_two.sluttiness >= 60:
+    def kaya_erica_teamup_3_req():
+        if kaya.sluttiness >= 60 and erica.sluttiness >= 60:
             return True
         return False
 
-    def kaya_erica_teamup_4_req(the_person_one, the_person_two):
-        if willing_to_threesome(the_person_one, the_person_two):
+    def kaya_erica_teamup_4_req():
+        if willing_to_threesome(kaya, erica):
             return True
         return False
 
@@ -50,28 +50,40 @@ init 2 python:
 
     def kaya_erica_teamup_init():
         global kaya_erica_teamup
-        kaya_erica_teamup = Teamup_Scene(
-            compile_scenes = kaya_erica_teamup_compile_scenes,
+        kaya_erica_teamup = Progression_Scene(compile_scenes = kaya_erica_teamup_compile_scenes,
             start_scene_list = [],
             req_list = [],
             trans_list = [],
             final_scene_list = [],
             intro_scene = "kaya_erica_teamup_intro_scene",
             exit_scene = "kaya_erica_teamup_exit_scene",
-            teamup_action = kaya_erica_teamup_action,
+            progression_scene_action = kaya_erica_teamup_action,
             choice_scene = "kaya_erica_teamup_study_choice",
-            stage = -1,
             person_action = True,
-            advance_time = True)
+            stage = -1)
+
+        # kaya_erica_teamup = Teamup_Scene(
+        #     compile_scenes = kaya_erica_teamup_compile_scenes,
+        #     start_scene_list = [],
+        #     req_list = [],
+        #     trans_list = [],
+        #     final_scene_list = [],
+        #     intro_scene = "kaya_erica_teamup_intro_scene",
+        #     exit_scene = "kaya_erica_teamup_exit_scene",
+        #     teamup_action = kaya_erica_teamup_action,
+        #     choice_scene = "kaya_erica_teamup_study_choice",
+        #     stage = -1,
+        #     person_action = True,
+        #     advance_time = True)
         kaya_erica_teamup.compile_scenes(kaya_erica_teamup)
 
 
 label kaya_erica_teamup_action_label(the_person):
     $ show_university_study_room_background()
-    call teamup_scene_label(kaya_erica_teamup, kaya, erica) from _teamup_scene_call_test_01
+    call progression_scene_label(kaya_erica_teamup, [kaya, erica]) from _erica_kaya_teamup_scene_call_test_02
     return
 
-label kaya_erica_teamup_intro_scene(the_person_one, the_person_two):
+label kaya_erica_teamup_intro_scene(the_group):
     "You head to the university. It is Tuesday night, and [erica.title] and [kaya.possessive_title] are planning a study night there."
     "You quickly text [kaya.title], letting her know you are here and asking where they are studying at."
     "Soon you step into a study room and see the two girls sitting at a small table with their books out."
@@ -122,7 +134,7 @@ label kaya_erica_teamup_intro_scene(the_person_one, the_person_two):
     call advance_time from _call_advance_kaya_erica_teamup_adv_01
     return
 
-label kaya_erica_teamup_intro_0(the_person_one, the_person_two):
+label kaya_erica_teamup_intro_0(the_group):
     "You head to the university. It is Tuesday night, and [erica.title] and [kaya.possessive_title] are planning a study night there."
     "The girls have a room they usually use for their study sessions, so you swing by and find them."
     $ scene_manager = Scene()
@@ -144,7 +156,7 @@ label kaya_erica_teamup_intro_0(the_person_one, the_person_two):
     "You step inside the room and sit down next to the two girls."
     return
 
-label kaya_erica_teamup_intro_1(the_person_one, the_person_two):
+label kaya_erica_teamup_intro_1(the_group):
     "You head to the university. It is Tuesday night, and [erica.title] and [kaya.possessive_title] are planning a study night there."
     "Recently, the sessions have included the girls stripping when they get questions wrong. It has been a wonderful diversion."
     "The girls have a room they usually use for their study sessions, so you swing by and find them."
@@ -169,7 +181,7 @@ label kaya_erica_teamup_intro_1(the_person_one, the_person_two):
     "You step inside the room and sit down next to the two girls."
     return
 
-label kaya_erica_teamup_intro_2(the_person_one, the_person_two):
+label kaya_erica_teamup_intro_2(the_group):
     "You head to the university. It is Tuesday night, and [erica.title] and [kaya.possessive_title] are planning a study night there."
     "Recently, you managed to convince them it would be good for the study session to get spanked when they get a question wrong."
     "Thoughts of their tight, reddened asses get you a little excited as you head towards the building they are in."
@@ -202,7 +214,7 @@ label kaya_erica_teamup_intro_2(the_person_one, the_person_two):
     "You step inside the room and sit down next to the two girls."
     return
 
-label kaya_erica_teamup_intro_3(the_person_one, the_person_two):
+label kaya_erica_teamup_intro_3(the_group):
     "You head to the university. It is Tuesday night, and [erica.title] and [kaya.possessive_title] are planning a study night there."
     "Recently, you managed to convince them it would be good for the study session to go down on you when they get a question wrong."
     "Thoughts of their soft lips wrapped around your cock get you excited just thinking about it."
@@ -235,7 +247,7 @@ label kaya_erica_teamup_intro_3(the_person_one, the_person_two):
     "You step inside the room and sit down next to the two girls."
     return
 
-label kaya_erica_teamup_intro_4(the_person_one, the_person_two):
+label kaya_erica_teamup_intro_4(the_group):
     "You head to the university. It is Tuesday night, and [erica.title] and [kaya.possessive_title] are planning a study night here."
     "Study sessions with the two college girls are incredible. When you finish studying, the threesome afterwords makes the whole session worth it."
     "[erica.title] and her fit young body and [kaya.title]'s deliciously dark skin has you fantasizing about it as you walk into the building."
@@ -265,7 +277,7 @@ label kaya_erica_teamup_intro_4(the_person_one, the_person_two):
     "You step inside the room and sit down next to the two girls."
     return
 
-label kaya_erica_teamup_scene_0(the_person_one, the_person_two):
+label kaya_erica_teamup_scene_0(the_group, scene_transition = False):
     mc.name "Of course I'll help, that's why I swung by."
     kaya "Great! We have a quiz tomorrow, we were wondering if you could quiz us on some of the material."
     erica "It would be great for figuring out what we need to be studying!"
@@ -293,7 +305,7 @@ label kaya_erica_teamup_scene_0(the_person_one, the_person_two):
     call advance_time from _call_advance_kaya_erica_teamup_adv_02
     return
 
-label kaya_erica_teamup_scene_1(the_person_one, the_person_two):
+label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
     mc.name "Let's get to studying. Let's go over the rules."
     mc.name "Three questions each. For each wrong answer, you have to remove an INTERESTING piece of clothing. No shoes or bracelets."
     kaya "Got it."
@@ -429,7 +441,7 @@ label kaya_erica_teamup_scene_1(the_person_one, the_person_two):
     call advance_time from _call_advance_kaya_erica_teamup_adv_03
     return
 
-label kaya_erica_teamup_scene_2(the_person_one, the_person_two):
+label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
     mc.name "Let's get to studying. Let's go over the rules."
     mc.name "Three questions each. For each wrong answer, you have bend over and get spanked while I ask your study pertner their question."
     kaya "Got it."
@@ -617,7 +629,7 @@ label kaya_erica_teamup_scene_2(the_person_one, the_person_two):
     call advance_time from _call_advance_kaya_erica_teamup_adv_04
     return
 
-label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
+label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
     mc.name "Let's get to studying. Let's go over the rules."
     mc.name "Three questions each. For each wrong answer, you get on your knees and service me for at least one minute while I ask your partner their question."
     kaya "Got it."
@@ -853,7 +865,7 @@ label kaya_erica_teamup_scene_3(the_person_one, the_person_two):
     call advance_time from _call_advance_kaya_erica_teamup_adv_05
     return
 
-label kaya_erica_teamup_scene_4(the_person_one, the_person_two):
+label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
     mc.name "Let's get to studying. Let's go over the rules."
     mc.name "Two questions each. After all the questions, if you girls got more right than wrong, you get to do whatever you want with me."
     mc.name "If it is two and two or if you got more wrong than right, you are both mine. Ready?"
@@ -1020,12 +1032,12 @@ label kaya_erica_teamup_scene_4(the_person_one, the_person_two):
     call advance_time from _call_advance_kaya_erica_teamup_adv_06
     return
 
-label kaya_erica_trans_scene_0(the_person_one, the_person_two):
+label kaya_erica_trans_scene_0(the_group):
     pass
     #This label should probably never be called.
     return
 
-label kaya_erica_trans_scene_1(the_person_one, the_person_two):
+label kaya_erica_trans_scene_1(the_group):
     "You are just getting ready to tell the girls you are going to help when [kaya.title] speaks up."
     kaya "You know, it is really nice of you to do this, but I kind of feel bad."
     erica "About what?"
@@ -1049,7 +1061,7 @@ label kaya_erica_trans_scene_1(the_person_one, the_person_two):
     "Nice! These study sessions just got a lot more interesting!"
     return
 
-label kaya_erica_trans_scene_2(the_person_one, the_person_two):
+label kaya_erica_trans_scene_2(the_group):
     "The two girls look at you with expectant faces. It seems they are excited to get started. Maybe it is time to push things to the next level?"
     "It's worth a try anyway."
     mc.name "Yes. The rules. I'm not sure they are still effective."
@@ -1075,7 +1087,7 @@ label kaya_erica_trans_scene_2(the_person_one, the_person_two):
     "Wow. This is going to be a fantastic study session."
     return
 
-label kaya_erica_trans_scene_3(the_person_one, the_person_two):
+label kaya_erica_trans_scene_3(the_group):
     "The two girls look at you with obvious desire in their eyes as they await your answer."
     "So far, the girls have been getting all the attention, and it is clear that even with spanking, they are starting to like it a little too much to be an effective punishment."
     mc.name "You are both far too eager for this. I think it is time to change things up again."
@@ -1103,7 +1115,7 @@ label kaya_erica_trans_scene_3(the_person_one, the_person_two):
     $ mc.change_locked_clarity(50)
     return
 
-label kaya_erica_trans_scene_4(the_person_one, the_person_two):
+label kaya_erica_trans_scene_4(the_group):
     "[erica.title] licks her lips. The girls are anxiously awaiting your response."
     "They both seem eager to suck your cock. Are they even here to study anymore? Is ANY sexual punishment going to actually work on them anymore?"
     "Suddenly you realize something. You are going about this all wrong. You shouldn't be punishing them for getting questions wrong..."
@@ -1144,10 +1156,10 @@ label kaya_erica_trans_scene_4(the_person_one, the_person_two):
         "Noticing her study partner is already naked, [erica.title] slips off her panties."
     return
 
-label kaya_erica_teamup_study_choice(the_person_one, the_person_two):
-    the_person_one "Are you going to stick around and help us study tonight?"
+label kaya_erica_teamup_study_choice(the_group):
+    kaya "Are you going to stick around and help us study tonight?"
     if kaya_erica_teamup.get_stage() > 0:
-        the_person_two "Don't worry, we haven't forgotten the rules..."
+        erica "Don't worry, we haven't forgotten the rules..."
         if kaya_erica_teamup.get_stage() == 2:
             "The girls' bodies on display in front of you makes it obvious they are ready for your firm punishments."
         elif kaya_erica_teamup.get_stage() == 3:
@@ -1164,7 +1176,7 @@ label kaya_erica_teamup_study_choice(the_person_one, the_person_two):
             return False
     return True
 
-label kaya_erica_teamup_exit_scene(the_person_one, the_person_two):
+label kaya_erica_teamup_exit_scene(the_group):
     mc.name "Unfortunately, I don't have time to help study tonight, but wanted to swing by and just say hello."
     kaya "Ah, okay. Well thanks for stopping in!"
     "You stand up and leave the room, leaving the girls to their study session."

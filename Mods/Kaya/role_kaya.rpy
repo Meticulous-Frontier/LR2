@@ -1712,6 +1712,8 @@ init 3 python:      #Use this section to make wrappers for determining where we 
     def kaya_mc_knows_relation():
         return kaya.event_triggers_dict.get("mc_knows_relation", False)
 
+    def kaya_can_get_work_quickie():
+        return kaya.event_triggers_dict.get("can_get_barista_quickie", False)
 
     def kaya_foreplay_position_filter(foreplay_positions):
         return True
