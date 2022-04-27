@@ -402,6 +402,30 @@ init -1 python:
 
     Business.date_scheduled_today = date_scheduled_today
 
+    # Day function wrappers
+
+    def set_event_day(self, dict_key, override = True, set_day = None):
+        if not override and self.event_triggers_dict.get(dict_key, None):
+            return False
+        if set_day != None:
+            self.event_triggers_dict[dict_key] = set_day
+        else:
+            self.event_triggers_dict[dict_key] = day
+        return
+
+    def get_event_day(self, dict_key):
+        return self.event_triggers_dict.get(dict_key, None)
+
+    def days_since_event(self, dict_key):
+        if self.event_triggers_dict.get(dict_key, None):
+            return day - self.event_triggers_dict.get(dict_key, None)
+        else:
+            return None
+
+    Business.set_event_day = set_event_day
+    Business.get_event_day = get_event_day
+    Business.days_since_event = days_since_event
+
     # College intern related functions
     def business_college_interns_research(self):
         if not hasattr(self, "_college_interns_research"):
