@@ -584,8 +584,9 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
                 mc.name "There are ways of achieving a larger bust without surgery"
                 the_person "Wow, well, that is a subject for another time... What were we talking about again?"
                 $ the_person.change_love(-1)
-                $ the_eprson.change_obedience(1)
+                $ the_person.change_obedience(1)
                 $ myra.event_triggers_dict["suggested_bigger_tits"] = True
+                $ mc.business.set_event_day("myra_bigger_tits_suggestion_day")
                 $ myra.add_unique_on_room_enter_event(myra_bigger_tits_intro)
             "Change the subject":
                 mc.name "Hey, you're the one who brought up tits."
@@ -1116,13 +1117,17 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
 init -2 python:
     def myra_bigger_tits_intro_requirement(the_person):
         if the_person.sluttiness >= 40 and myra_at_cafe():
-            return True
+            if mc.business.days_since_event("myra_bigger_tits_suggestion_day") > 7:
+                return True
         return False
 
     def myra_bigger_tits_serum_requirement(the_person):
         if myra_wants_bigger_tits() and not myra.has_large_tits():
             if myra_at_cafe():
-                return True
+                if mc.inventory.has_serum_with_trait(breast_enhancement):
+                    return True
+                else:
+                    return "Requires serum with Breast Enhancement Trait"
         return False
 
     def myra_bigger_tits_final_requirement(the_person):
@@ -1180,31 +1185,140 @@ init 3 python:
 #Bigger tits questline
 
 label myra_bigger_tits_intro_label(the_person):        #40 sluttiness event. If MC suggested bigger tits in love story, myra is interested now.
-    "[the_person.title] asks MC if he was being serious that she should get bigger tits."
-    "MC can choose yes or no. If no abandon this series."
-    "If yes, she says she is scared to get implants, that they might mess up or whatever."
-    "MC can say that his company has the ability to make an experimental serum to grow her tits naturally."
-    "She agrees to try them."
+    $ the_person.draw_person()
+    "You step into the gaming cafe. As you walk in, [the_person.possessive_title] notices you and walks over."
+    the_person "Hey, do you have a second? I wanted to talk to you about something..."
+    mc.name "Absolutely. What is on your mind [the_person.title]?"
+    the_person "The other day, you said something that kind of got some gears turning in my head..."
+    the_person "I've never been one to stress about looks, especially things that are outside of my control but..."
+    the_person "Do you really think I should get bigger tits?"
+    mc.name "That is a pretty loaded question."
+    the_person "I know, and honestly the prospect of getting surgery terrifies me but, I don't know, you seem like a good guy, and I thought you could give me an honest opinion."
+    mc.name "Well, I think you need to do what is right for you, first of all. But, I do have something that I think you might be interested in."
+    the_person "Oh?"
+    mc.name "As you know, I run a pharmaceutical company, and we are actually running tests on a drug that naturally increases breast size."
+    the_person "What? Like, without surgery?"
+    mc.name "That is correct."
+    the_person "Do you need anyone to help test it?"
+    mc.name "Actually yes. Would you be interested?"
+    the_person "Yeah. I think I am. I want to know what it is like... you know?"
+    mc.name "Well, I can't promise anything, but I'll make sure to keep you in mind if we do any trials soon."
+    the_person "Ah, thank you [the_person.title]! I'd better get back to the desk."
+    $ the_person.change_obedience(2)
+    $ the_person.change_happiness(2)
+    $ clear_scene()
+    "[the_person.title] will now accept breast enhancement serums."
     $ myra.event_triggers_dict["wants_bigger_tits"] = True  #This will open up the option on her role
     $ myra.add_unique_on_talk_event(myra_bigger_tits_final)
     return
 
 label myra_bigger_tits_serum_label(the_person):       #This option becomes available if Myra wants bigger tits.
-    "MC offers [the_person.title] the serum that will grow her tits."
+    mc.name "Hey, I have a breast enhancement serum for you to try. Still interested?"
+    the_person "I am, yes!"
+    call give_serum(the_person) from _call_give_myra_bigger_tits_serum_01
+    if _return:
+        "You hand her the serum, and she quickly drinks it down."
+        mc.name "It might be a few days until you see the effects."
+        the_person "Okay... I'll let you know how they work!"
+    else:
+        mc.name "Actually, I think I left them at the shop."
+        "[the_person.title] looks disappointed, but understands."
     return
 
 label myra_bigger_tits_final_label(the_person):       #If her tits are bigger, she thanks MC.
-    "Once [the_person.title]'s tit size passes the large tits threshold, she thanks MC and offers to let him fuck them."
+    "As you step into the gaming cafe, [the_person.possessive_title] spots you. She quickly walks up to you and grabs your hand."
+    $ the_person.draw_person(position = "walking_away")
+    the_person "Come on! I need to show you something!"
+    "As you follow after her, you feel like you notice a little more... jiggle? In her step?"
+    "She leads you to a stock room in the back. After practically shoving you in, she closes the door and locks it."
+    $ the_person.draw_person()
+    the_person "Sorry, I just had to do this. Check these out!"
+    $ the_person.strip_to_tits(position = "stand3")
+    "[the_person.possessive_title] quicky strips off her top, revealing a generous set of tits."
+    the_person "They're amazing! And they feel completely natural! Come, feel this..."
+    "She grabs your hand and drags it to her chest, forcing you to feel her up."
+    the_person "See? And..."
+    $ the_person.change_arousal(20)
+    the_person "And... they're so sensitive too..."
+    $ the_person.increase_opinion_score("showing her tits")
+    "You spend several seconds feeling up her new and improved rack. You admit, they are impressive."
+    $ mc.change_arousal(20)
+    "You can feel yourself getting excited as she starts to whimper from your touch."
+    the_person "They are awesome, right?"
+    "[the_person.possessive_title] looks down and notices your erection."
+    the_person "Hey... you know... I've never had big enough to like..."
+    "She looks at you for a moment."
+    the_person "Want to fuck my tits?"
+    mc.name "Yes. Yes I do."
+    the_person "Hell yeah let's do it. I bet it feels amazing..."
+    $ the_person.draw_person(position = "blowjob")
+    "As [the_person.possessive_title] gets down on her knees, you whip out your cock. She slides over to you."
+    the_person "I've like, never done this so... you might have to help me a bit..."
+    mc.name "I'm sure you'll do great."
+    "With your cock in her hand, she slides the tip of your cock into her cleavage. Your erection quietly disappears into her ample busom."
+    "Her soft tit flesh feels great wrapped around you."
+    $ the_person.change_arousal(10)
+    the_person "Wow, it feels so hot... God this is naughty... I love it!"
+    "[the_person.title] starts to move her chest up and down, stroking your cock."
+    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_myra_tits_reveal_1
+    "When you finish, [the_person.possessive_title] stands up."
+    $ the_person.draw_person()
+    the_person "Wow... We'll have to do that again sometime."
+    mc.name "Yes, anytime you need a cock between your tits, hit me up."
+    the_person "Ha! Okay 'coach'. I'll keep that in mind! I'd better get cleaned up and get back to work."
+    $ the_person.apply_planned_outfit()
     $ myra.event_triggers_dict["wants_bigger_tits"] = False
+    $ clear_scene()
     return
 
 label myra_distracted_gaming_label(the_person):       #40 sluttiness event. MC can suggest she should distract her opponents by dressing slutty. second chance to suggest bigger tits
     $ myra.event_triggers_dict["suggested_bigger_tits"] = True
-    "If MC didn't suggest bigger tits earlier, have a second chance."
-    "[the_person.title] is practicing. MC notices her using sultry tones and double entendres for callouts, causing a bit of a distraction for other players."
-    "After the match, MC can suggest she gets bigger tits to distract her opponents. If he doesn't, he just enjoys her teasing the opponents."
-    $ myra.event_triggers_dict["wants_bigger_tits"] = True
-    $ myra.add_unique_on_talk_event(myra_bigger_tits_final)
+    "You step into the gaming cafe. [the_person.title] isn't at the desk, where she usually is."
+    "Looking around, you see her playing a game with several guys. It looks like some kind of first person shooter game they are all playing together."
+    $ the_person.draw_person(position = "sitting")
+    "You walk over and watch from behind her."
+    the_person "That's it! Suck on THIS shaft boy!"
+    "[the_person.possessive_title] kills an enemy player with a long green link gun. You can't help but chuckle at the tone of her voice."
+    the_person "Ha! Kiss my ass. Or eat it! Your choice bitch!"
+    "Her trash talking is top notch, with obvious sexual tones. You look at some of the guys sitting close to her."
+    "They keep peeking over at her as she continues her sexual trash talk."
+    the_person "God damn bitch. Are you worried? Are you scared? Don't worry baby what's the worst thing that could happen."
+    "You realize that her trash talking is incredibly effective. Several of the guys she is playing against are either getting upset or clearly distracted by her."
+    "The match finishes up. This is an area of her game you hadn't really considered before. Has she ever though of dressing suggestively for matches?"
+    the_person "Alright, I better get back to the desk. I'll destroy your asses again some other time boys."
+    "The guys are muttering to themselves, but seem to agree it is a break and time and start to disperse for now."
+    $ the_person.draw_person()
+    "[the_person.possessive_title] stretches, and then stands up. She turns and notices you."
+    the_person "Oh hey [the_person.mc_title]. Good to see you! Something I can help you with?"
+    mc.name "Not at the moment, but I was watching that last match. That was quite the show!"
+    the_person "Ah, thank you 'coach'."
+    mc.name "Hey, I have a question. You were doing a lot of trash talking, and I noticed that it was really distracting to some of them."
+    mc.name "Have you ever thought about like, you know, dressing in a more provocative way for a match? Within rules obviously, but it might be an effective distraction."
+    the_person "Wow. Well, I guess I'd prefer to have a more neutral match. I don't want to win just because the other team is drooling all over me."
+    if not the_person.has_large_tits():
+        the_person "But, it doesn't really matter anyway. For that strategy to be effective, you gotta have a little more... up top... if you know what I mean."
+        "You take a moment to check out [the_person.possessive_title]. It might be effective if she were to level up a bit, in the chest."
+        menu:
+            "Encourage her to get bigger tits":
+                mc.name "Have you ever though about having bigger tits?"
+                the_person "Wow, straight to the point eh? I've thought about it, but honestly, surgery terrifies me. So I guess we'll never know?"
+                $ myra.event_triggers_dict["suggested_bigger_tits"] = True
+                $ myra.add_unique_on_room_enter_event(myra_bigger_tits_intro)
+                $ mc.business.set_event_day("myra_bigger_tits_suggestion_day", override = False)
+                "Hmmm, you wonder if you brought her a serum that would increase her chest size if she would agree to it."
+                "You decide for now to just move the conversation along."
+            "Move the conversation along":
+                "You decide not to encourage any body modification for now."
+    mc.name "I think if you dressed a little more provocatively, it might even help you business. You know, sex sells, and your target demographic here is a little on the nerdy side."
+    if the_person.opinion_score_skimpy_outfits() < 2:
+        $ the_person.increase_opinion_score("skimpy outfits")
+        the_person "You know, you might actually be on to something. That isn't a bad idea."
+    else:
+        the_person "You're preaching to the choir. I don't mind showing some skin, but I have to keep it legal, you know?"
+    the_person "Anyway, I need to get back to the desk. If you need anything, give me a hollar!"
+    $ the_person.draw_person(position = "walking_away")
+    "You watch as [the_person.possessive_title] walks away. There is a bit of a swagger in her step..."
+    $ clear_scene()
     $ myra.add_unique_on_room_enter_event(myra_blowjob_training_intro)
     return
 
