@@ -869,7 +869,7 @@ init -2 python:
         if mc.business.head_researcher.location == rd_division:
             if mc.business.days_since_event("energy_drink_start_research") > 7:
                 return True
-        if mc.business.set_event_day("energy_drink_start_research", override = False)
+        mc.business.set_event_day("energy_drink_start_research", override = False)
         return False
 
     def myra_energy_drink_test_requirement(the_person):
