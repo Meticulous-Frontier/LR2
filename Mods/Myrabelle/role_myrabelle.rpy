@@ -164,8 +164,9 @@ init -2 python:
         return False
 
     def myra_gaming_cafe_opening_requirement():
-        if gaming_cafe_is_business_hours() and alexia.is_employee():
+        if gaming_cafe_is_business_hours() and alexia.is_employee() and mc.business.days_since_event("myra_rude_intro") >= 7:
             return True
+        mc.business.set_event_day("myra_rude_intro", override = False)
         return False
 
 #Actions
@@ -193,6 +194,7 @@ label myra_rude_intro_label():
     $ clear_scene()
     "You continue walking, parting ways with the blue haired lady."
     $ mall.on_room_enter_event_list.append(myra_gaming_cafe_opening)
+    $ mc.business.set_event_day("myra_rude_intro")
     return
 
 label myra_gaming_cafe_opening_label():
@@ -865,8 +867,9 @@ init -2 python:
 
     def myra_energy_drink_research_final_requirement():
         if mc.business.head_researcher.location == rd_division:
-            if renpy.random.randint(0,100) <= 100:
+            if mc.business.days_since_event("energy_drink_start_research") > 7:
                 return True
+        if mc.business.set_event_day("energy_drink_start_research", override = False)
         return False
 
     def myra_energy_drink_test_requirement(the_person):
@@ -941,6 +944,7 @@ label myra_energy_drink_research_intro_label(the_person):     #On talk event. Pr
     mc.name "Thank you [the_person.title]. I appreciate it."
     "You step away from [the_person.possessive_title]'s desk. She will contact you when she comes up with a solution."
     $ mc.business.add_mandatory_crisis(myra_energy_drink_research_final)
+    $ mc.business.set_event_day("energy_drink_start_research")
     return
 
 label myra_energy_drink_research_final_label():     #On talk event. Test energy drink with head researcher
@@ -1147,13 +1151,15 @@ init -2 python:
         return False
 
     def myra_blowjob_training_progress_requirement(the_person):
-        if myra_at_cafe() and myra.event_triggers_dict.get("blowjob_progress_day", 9999) + 7 <= day:
+        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train")  >= 7:
             return True
+        mc.business.set_event_day("myra_bj_train", override = False)
         return False
 
     def myra_blowjob_training_final_requirement(the_person):
-        if myra_at_cafe() and myra.event_triggers_dict.get("blowjob_progress_day", 9999) + 7 <= day:
+        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train")  >= 7:
             return True
+        mc.business.set_event_day("myra_bj_train", override = False)
         return False
 
     def myra_adult_gaming_intro_requirement(the_person):
@@ -1332,7 +1338,7 @@ label myra_blowjob_training_intro_label(the_person):      #60 sluttiness event. 
     "Don't be fake, but enthusiasm goes a long way."
     "Setup the next event to be available in a week."
     $ myra.event_triggers_dict["blowjob_train_start"] = True
-    $ myra.event_triggers_dict["blowjob_progress_day"] = day
+    $ mc.business.set_event_day("myra_bj_train", override = True)
     $ myra.add_unique_on_room_enter_event(myra_blowjob_training_progress)
     return
 
@@ -1342,7 +1348,7 @@ label myra_blowjob_training_progress_label(the_person):
     "At the end, suggest that she practice deepthroating. Opens up the deepthroat position via filters."
     "Setup final scene to be available in a week."
     $ myra.event_triggers_dict["deepthroat_avail"] = True
-    $ myra.event_triggers_dict["blowjob_progress_day"] = day
+    $ mc.business.set_event_day("myra_bj_train", override = True)
     $ myra.add_unique_on_room_enter_event(myra_blowjob_training_final)
     return
 
