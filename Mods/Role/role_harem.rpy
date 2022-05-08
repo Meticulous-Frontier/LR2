@@ -36,6 +36,8 @@ init 1 python:
         return False
 
     def harem_break_up_requirement(the_person):
+        if the_person.home == harem_mansion:
+            return False
         #Set to only show up if happiness is below 100 or love is below 80, to keep it from popping up all the time
         return the_person.happiness <= 100 or the_person.love <= 80
 
@@ -50,20 +52,45 @@ init 1 python:
         return girlfriend_ask_trim_pubes_requirement(the_person)
 
     def harem_fuck_date_requirement(the_person):
+        if the_person.home == harem_mansion:    # already in mansion
+            return False
         if the_person.has_role(affair_role):
             return False
         return fuck_date_requirement(the_person)
 
+    def harem_move_to_mansion_requirement(the_person):
+        if the_person.home == harem_mansion:    # already in mansion
+            return False
+        if not mc.business.event_triggers_dict.get("harem_mansion_build", False): # mansion not build
+            return False
+        if the_person.has_role(affair_role): # she needs to leave her SO
+            return "Requires: Single"
+        return True
+
     def get_harem_role_actions():
+        ask_harem_move_to_mansion_action = Action("Move into Harem Mansion", harem_move_to_mansion_requirement, "harem_move_to_mansion_label", menu_tooltip = "Ask her to leave her current residence and move into your Harem Mansion.", priority = 10)
         ask_harem_break_up_action = Action("Break up with her", harem_break_up_requirement, "leave_harem_label", menu_tooltip = "Rip out her heart and stomp on it, will remove her from the Polyamory.")
         ask_harem_get_boobjob_action = Action("Ask her to get a boob job\n{color=#ff0000}{size=18}Costs: $7000{/size}{/color}", harem_ask_get_boobjob_requirement, "ask_get_boobjob_label", menu_tooltip = "A little silicone goes a long way. Ask her to get breast enhancement surgery for you.")
         girlfriend_ask_trim_pubes_action = Action("Ask her to trim her pubes", harem_ask_trim_pubes_requirement, "girlfriend_ask_trim_pubes_label", menu_tooltip = "Ask her to do a little personal landscaping. Tell her to wax it off, grow it out, or shape it into anything in between.")
-        return [ask_harem_get_boobjob_action, girlfriend_ask_trim_pubes_action, ask_harem_break_up_action]
+        return [ask_harem_move_to_mansion_action, ask_harem_get_boobjob_action, girlfriend_ask_trim_pubes_action, ask_harem_break_up_action]
 
     def get_harem_role_dates():
         plan_fuck_date_action = Action("Plan a fuck date at her place", harem_fuck_date_requirement, "plan_fuck_date_label", menu_tooltip = "Pick a night to go over there and spend nothing but \"quality time\" with each other.")
         girlfriend_shopping_date = Action("Go shopping together {image=gui/heart/Time_Advance.png}", shopping_date_requirement, "shopping_date_intro", menu_tooltip = "Take her to the mall and do some shopping together.")
         return [plan_fuck_date_action, girlfriend_shopping_date]
+
+    def move_into_harem(person):
+        # remove home location from visit map (if no other people live there)
+        # when currently home move to harem mansion
+        # change home location to mansion (sleep)
+        if not any(x for x in all_people_in_the_game(excluded_people = [person]) if x.home == person.home) \
+            and person.home in mc.known_home_locations:
+            mc.known_home_locations.remove(person.home)
+        if person.location == person.home:
+            person.change_location(harem_mansion)
+        person.set_schedule(harem_mansion, the_times = [0,4])
+        person.home = harem_mansion
+        return
 
     make_harem_action = Action("Ask her to join your harem", requirement = ask_harem_requirement, effect = "ask_to_join_harem_label",
         menu_tooltip = "Ask her to start an official, polyamorous relationship and be part of your Harem.", priority = 10)
@@ -212,5 +239,18 @@ label ask_to_join_harem_label(the_person):
         mc.name "Remember [the_person.title], we will never be alone again."
         mc.name "If you change your mind, I'll be here for you."
         "Perhaps her willingness to share you with another is not high enough (threesomes opinion)."
+
+    return
+
+
+label harem_move_to_mansion_label(the_person):
+    # TODO: Write more elaborate dialog for inviting to mansion
+    mc.name "[the_person.title], would you like to live with me?"
+    the_person "Oh [the_person.mc_title], I've been waiting for you to ask me this."
+    the_person "Ever since you asked me to explore out relationship further. Of course I want to live with you!"
+    mc.name "Perfect, I've already made arrangements, I will see you at my new mansion soon."
+
+    # if successful
+    $ move_into_harem(the_person)
 
     return

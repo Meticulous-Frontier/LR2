@@ -1800,6 +1800,8 @@ init -1 python:
 
             if role == harem_role:
                 self.remove_role(girlfriend_role)
+                mc.business.event_triggers_dict["harem_mansion_unlocked"] = True
+                #TODO: Add event with dialog to give info about unlocked harem mansion
 
         return added
     Person.add_role = add_role

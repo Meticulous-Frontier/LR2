@@ -9,16 +9,26 @@ init 15 python:
         make_couch(),
         make_bdsmbed(),
         make_pillory(),
+        make_wall(),
+        make_floor(),
+    ]
+    harem_objects =[
+        make_bed(),
+        make_couch(),
+        make_chair(),
+        make_wall(),
         make_floor(),
     ]
     downtown_bar_objects = [
         make_desk(),
         make_chair(),
+        make_wall(),
         make_floor()
     ]
     downtown_hotel_lobby_objects = [
         make_desk(),
         make_chair(),
+        make_wall(),
         make_floor(),
     ]
     downtown_hotel_room_objects = [
@@ -26,6 +36,7 @@ init 15 python:
         make_chair(),
         make_floor(),
         make_window(),
+        make_wall(),
         make_bed()
     ]
     purgatory_objects = [
@@ -36,6 +47,7 @@ init 15 python:
         make_woodhorse(),
         make_cage(),
         make_chair(),
+        make_wall(),
         make_floor(),
         make_bed(),
         make_couch(),
@@ -92,6 +104,10 @@ label build_custom_rooms():
         # Main Office Basement - Dungeon | dungeon_room_actions.rpy
         dungeon = Room("dungeon", "Dungeon", [], standard_dungeon_backgrounds, dungeon_objects, [], [dungeon_room_appoint_slave_action], False, [4,3], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(dungeon)
+
+        # TODO: Add actions that can be performed in mansion
+        harem_mansion = Room("harem_mansion", "Harem Mansion", [], standard_harem_mansion_backgrounds, harem_objects, [], [], False, [1, 3], None, False, lighting_conditions = standard_indoor_lighting)
+        list_of_places.append(harem_mansion)
 
         # Downtown Bar - The Downtown Distillery | downtown_bar_actions.rpy
         downtown_bar = Room("bar", "The Downtown Distillery", [], bar_background, downtown_bar_objects, [], [downtown_bar_drink_action], True, [5,4], None, True, lighting_conditions = standard_indoor_lighting)

@@ -90,6 +90,7 @@ init -1 python:
     # extra backgrounds
     standard_biotech_backgrounds = room_background_image("Biotech_Background.jpg")
     standard_dungeon_backgrounds = room_background_image("Dungeon_Background.jpg")
+    standard_harem_mansion_backgrounds = room_background_image("harem_mansion.jpg")
     standard_hotel_backgrounds = room_background_image("Hotel_Lobby_Background.jpg")
     standard_hotel_room_backgrounds = room_background_image("Hotel_Room_Background.jpg")
     standard_fancy_restaurant_backgrounds = room_background_image("Fancy_Restaurant_Background.jpg")
