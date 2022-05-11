@@ -552,6 +552,7 @@ label myra_focus_progression_scene_2(the_group, scene_transition = False):  #sit
     $ the_person.draw_person(position = "standing_doggy")
     "[the_person.possessive_title] gets up out her chair, leaving you just enough room to sit down. You give her ass a quick little spank before she can sit on your lap."
     the_person "Stop it fucker! I haven't even loaded in yet..."
+    $ mc.change_locked_clarity(10)
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] sits down on your lap and loads into a match. The countdown timer starts, and soon the fight is beginning."
     while myra_score < 100 and enemy_score < 100:
@@ -596,6 +597,7 @@ label myra_focus_progression_scene_2(the_group, scene_transition = False):  #sit
     if the_person.is_willing(blowjob):
         "[the_person.possessive_title] wiggles her hips a bit against your erection. She looks around the room."
         the_person "Hey... want a little help with that before we finish?"
+        $ mc.change_locked_clarity(30)
         mc.name "Fuck yeah."
         the_person "Mmm, I know just what to do..."
         "[the_person.title] quietly slides down the chair, below the computer desk and gets on her knees."
@@ -782,6 +784,7 @@ label myra_focus_light_distraction(the_person):
             "For now, you keep a light touch with [the_person.title]. You run your hands up and down her sides."
             "She shivers a bit from your touch, but otherwise continues to play undisturbed."
             $ the_person.change_arousal(10)
+            $ mc.change_locked_clarity(10)
         else:
             "You run your fingers lightly across [the_person.title]'s sides."
             if the_person.tits_available():
@@ -790,6 +793,7 @@ label myra_focus_light_distraction(the_person):
             else:
                 "Your hands run up her front. You trace a few circles around her tits through her clothes, but otherwise leaving her mostly undisturbed."
                 $ the_person.change_arousal(10)
+            $ mc.change_locked_clarity(20)
     elif myra_focus_progression_scene.get_stage() == 2: #finger while on lap
         if the_person.arousal < 30:
             "You run your hands along [the_person.title]'s soft skin on her sides. You let your hands travel up her body and play with her tits."
@@ -803,6 +807,7 @@ label myra_focus_light_distraction(the_person):
             the_person "Mmm, that's nice..."
             "[the_person.possessive_title] murmurs. She wiggles her hips a bit against your groin as you touch her."
             $ the_person.change_arousal(20)
+            $ mc.change_locked_clarity(20)
         elif the_person.arousal < 70:
             "You can feel [the_person.title] leaning back against you some as she begins her next encounter. She is getting excited."
             "For now, you want to just keep building her arousal without pushing things too fast."
@@ -816,6 +821,7 @@ label myra_focus_light_distraction(the_person):
             the_person "That's it... mmm..."
             "[the_person.possessive_title] sighs. She is absent mindedly wiggling her hips against you now.."
             $ the_person.change_arousal(25)
+            $ mc.change_locked_clarity(25)
         else:
             if not the_person.vagina_available():
                 the_person "Fuck this is so hot... give me one second..."
@@ -825,6 +831,7 @@ label myra_focus_light_distraction(the_person):
             the_person "That's it... oh [the_person.mc_title] I'm so close..."
             "[the_person.possessive_title] is whimpering, but still trying to concentrate on her fight. It seems impossible though, and it is clear that she is getting ready to cum!"
             $ the_person.change_arousal(35)
+            $ mc.change_locked_clarity(30)
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
         pass
     elif myra_focus_progression_scene.get_stage() == 4: #anal
@@ -854,6 +861,7 @@ label myra_focus_med_distraction(the_person):
                 "You grope [the_person.possessive_title]'s perky tits. They are small but soft in your hands, and she moans at every touch."
             "She yelps a bit when you pinch the nipples, wiggling a bit in her seat."
             $ the_person.change_arousal(20)
+        $ mc.change_locked_clarity(20)
     elif myra_focus_progression_scene.get_stage() == 2: #finger while on lap
         if the_person.arousal < 30:
             "While things are just getting started, you want to get [the_person.possessive_title] worked up to really push her focus."
@@ -896,6 +904,7 @@ label myra_focus_med_distraction(the_person):
             the_person "That's so good... oh god [the_person.mc_title]..."
             "She is desperately trying to concentrate on her match, but there is no way she doesn't cum soon."
             $ the_person.change_arousal(35)
+        $ mc.change_locked_clarity(30)
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
         pass
     elif myra_focus_progression_scene.get_stage() == 4: #anal
@@ -912,6 +921,7 @@ label myra_focus_heavy_distraction(the_person):
             "You really want to push [the_person.title]'s focus, but to do that, you need to get her top off. You start to strip her down."
             "[the_person.title] glances around to see if anyone is watching, but you feel safe in your secluded corner."
             $ the_person.strip_to_tits(position = "sitting")
+            $ mc.change_locked_clarity(20)
         if the_person.arousal < 30:
             "You bring your hands up her belly and to her tits. It's time to see if she has really made progress or not."
             "She protests a bit, but you shush her, as you pinch and pull at her nipples."
@@ -925,6 +935,7 @@ label myra_focus_heavy_distraction(the_person):
                 "You bring your hands up to her perky tits. Her hard nipples are just begging to be played with."
                 "[the_person.possessive_title] just moans when you pinch them, the pleasure mixed with pain testing her focus to the utmost."
             $ the_person.change_arousal(25)
+        $ mc.change_locked_clarity(30)
     elif myra_focus_progression_scene.get_stage() == 2: #finger while on lap
         if the_person.arousal < 70:
             if not the_person.vagina_available():
@@ -963,7 +974,7 @@ label myra_focus_heavy_distraction(the_person):
             the_person "That's so good... oh god [the_person.mc_title]..."
             "She is desperately trying to concentrate on her match, but there is no way she doesn't cum soon."
             $ the_person.change_arousal(45)
-
+        $ mc.change_locked_clarity(30)
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
         pass
     elif myra_focus_progression_scene.get_stage() == 4: #anal
@@ -976,6 +987,7 @@ label myra_focus_training_orgasm(the_person):
         "Is... is she cumming?"
         "She has stopped moving, and the other team is taking advantage of her."
         $ the_person.have_orgasm(half_arousal = True)
+        $ mc.change_locked_clarity(50)
         "Wow, she definitely just orgasmed. You hands really are magic?"
         "For several seconds, she rides her orgasm until she finally opens her eyes."
     elif myra_focus_progression_scene.get_stage() == 2: #finger while on lap
@@ -984,6 +996,7 @@ label myra_focus_training_orgasm(the_person):
         "Her pussy clenches down on your fingers as she begins to orgasm. She closes her eyes and her hips are bucking slightly."
         $ the_person.have_orgasm(half_arousal = True)
         $ the_person.arousal = 35
+        $ mc.change_locked_clarity(50)
         "For several seconds, she rides her orgasm until she finally opens her eyes."
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
         "You had no idea this was even possible, but something about your hands on her body and your cock against her ass has got [the_person.possessive_title] ready to cum."
@@ -991,8 +1004,10 @@ label myra_focus_training_orgasm(the_person):
         "[the_person.title] is shuddering as an orgasm starts to run through her body."
         $ the_person.have_orgasm(half_arousal = True)
         $ the_person.arousal = 35
+        $ mc.change_locked_clarity(50)
         "For several seconds, she rides her orgasm until she finally opens her eyes."
     elif myra_focus_progression_scene.get_stage() == 4: #anal
+        $ mc.change_locked_clarity(50)
         if mc.arousal > 100:    #dual orgasm
             "[the_person.possessive_title] is getting ready to cum, and you aren't far behind her."
             the_person "Fuck... Oh fuck!"

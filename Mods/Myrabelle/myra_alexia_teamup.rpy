@@ -30,7 +30,7 @@ init 1 python:
         return False
 
     def myra_alexia_teamup_scene_3_req():
-        if myra.has_taboo("vaginal_sex") or alexia.has_taboo("vaginal_sex"):
+        if myra.has_taboo("vaginal_sex") or alexia.has_taboo("vaginal_sex") or not myra.event_triggers_dict.get("shown_off_blowjob_skills", False):
             return False
         if myra.opinion_score_vaginal_sex() >-2 and alexia.opinion_score_vaginal_sex() >-2:
             if myra.sluttiness >= 80 and alexia.sluttiness >= 80 and willing_to_threesome(myra, alexia):
@@ -886,6 +886,17 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         "[the_target.title] is really getting off on her position controlling [the_loser.possessive_title]."
         the_target "That's it. Taking it deep you little cum slut! If you can't play games, the least you can do is service [the_target.mc_title]'s cock!"
         "The sensations are amazing as she gags and throats you. There is no way you are going to last much longer."
+    elif the_loser.sex_skills["Oral"] <= 2 and the_loser == myra:
+        "[the_loser.possessive_title] is trying her best to suck you off, but clearly does not have much experience. At one point she rakes her teeth up the underside, causing you to flinch."
+        mc.name "Mff! Hey!"
+        "You cry out, but it is muffled by [the_target.possessive_title]'s cunt."
+        the_target "Whoa, easy there [the_loser.name]! No teeth!"
+        the_loser "What?"
+        the_target "The poor guy is sensitive down there, don't use teeth!"
+        the_loser "Ah... right..."
+        "[the_loser.possessive_title] keeps trying, and [the_target.title] gives her a couple tips as she goes."
+        "Her technique is getting better, and it is starting to feel much better."
+        "Soon you feel the familiar urge growing in your body."
     else:
         "[the_loser.possessive_title] keeps working her tongue over your cock. She licks it bottom to top, then sucks on the tip, then licks it from the top back to the bottom."
         "You can feel her hand stroking you as she gently sucks on your testicles, as if urging them to release your cum to her."
