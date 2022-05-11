@@ -956,7 +956,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     "[the_person.title] uses her hands to move her big tits up and down your cock. The soft flesh feels amazing sliding up and down."
     $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(5)
-    mc.name "Ah, this feels amazing. I'm not doing to last very long like this. You know what is going to happen when I finish... right?"
+    mc.name "Ah, this feels amazing. I'm not going to last very long like this. You know what is going to happen when I finish... right?"
     the_person "It's gonna spurt out... right?"
     mc.name "Yeah."
     the_person "I... I'm getting all kinds of crazy feelings right now. I kind of want you to do it on my boo... on my titties, [the_person.mc_title]."

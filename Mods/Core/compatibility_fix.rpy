@@ -243,10 +243,15 @@ init 1 python:
             renpy.quit()
         return
 
+    # save compatibility (remove next version)
     def validate_harem_roles():
         if not harem_role in globals():
             global harem_role
             harem_role = Role("Girlfriend in Polyamory", get_harem_role_actions(), role_dates = get_harem_role_dates(), looks_like = girlfriend_role)
+        if not any(x for x in list_of_places if x.name == "harem_mansion"):
+            global harem_mansion
+            harem_mansion = Room("harem_mansion", "Harem Mansion", [], standard_harem_mansion_backgrounds, harem_objects, [], [], False, [1, 3], None, False, lighting_conditions = standard_indoor_lighting)
+            list_of_places.append(harem_mansion)
         return
 
 label check_mod_installation(stack):

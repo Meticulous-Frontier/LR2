@@ -82,6 +82,19 @@ init 0 python:
             return "Requires: $10000"
         return False
 
+    def harem_mansion_build_action_requirement():
+        if mc.business.event_triggers_dict.get("harem_mansion_build", False):
+            return False
+        if is_home_improvement_in_progress():
+            return "Wait for current project completion"
+        if not mc.business.is_open_for_business():
+            return "Only during business hours"
+        if mc.business.has_funds(200000):
+            return True
+        else:
+            return "Requires: $200000"
+        return False
+
 init 2 python:
     # ModAction initialization. Kicks off initial entry into code.
     add_mc_bedroom_renovate_action = ActionMod("Home Improvement", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_option_label",
@@ -107,6 +120,11 @@ init 2 python:
                 else:
                     bedroom_renovate_action = Action("Renovate room", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_label", menu_tooltip = "Renovates your bedroom into more impressive state (unlocks other home improvements). Cost $" + str(mc_bedroom_renovation_cost) + ".")
                     phone_menu[2].insert(1, bedroom_renovate_action)
+
+            if mc.business.event_triggers_dict.get("harem_mansion_unlocked", False):
+                if not mc.business.event_triggers_dict.get("harem_mansion_build", False):
+                    harem_mansion_build_action = Action("Build Harem Mansion", harem_mansion_build_action_requirement, "harem_build_label", menu_tooltip = "Build a mansion for your harem.")
+                    phone_menu[2].insert(1, harem_mansion_build_action)
 
             return phone_menu
 
@@ -140,9 +158,12 @@ init 2 python:
         dungeon_completed_action = Action("Dungeon Completed", home_renovation_completion_requirement, "dungeon_completed_label", requirement_args = day + 6 + renpy.random.randint(0,3))
         mc.business.add_mandatory_crisis(dungeon_completed_action)
 
+    def add_harem_build_completed_action():
+        harem_mansion_completed_action = Action("Harem Mansion Completed", home_renovation_completion_requirement, "harem_completed_label", requirement_args = day + 21 + renpy.random.randint(2, 7))
+        mc.business.add_mandatory_crisis(harem_mansion_completed_action)
+
     def upgrade_bedroom(room, background):
         room.background_image = background
-
         return
 
 
@@ -268,5 +289,26 @@ label dungeon_completed_label():
     "The dungeon at your house is now ready for use."
     $ mc.business.event_triggers_dict["dungeon_owned"] = True
     $ dungeon.visible = True
+    $ mc.business.event_triggers_dict["home_improvement_in_progress"] = False
+    return
+
+label harem_build_label():
+    "Now that you have a harem, it is time to build a living space for them."
+    "You pick up the phone and make a call."
+    mc.name "Good afternoon, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work near my house."
+    "You go over the details with the constructor and agree on a price of $200,000 for building a mansion for your harem."
+    "This will take some time to complete, so be patient."
+    $ mc.business.change_funds(-200000)
+    $ mc.business.event_triggers_dict["home_improvement_in_progress"] = True
+    $ add_harem_build_completed_action()
+    return
+
+label harem_completed_label():
+    "Going about your day, you get a call from your contractor."
+    man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
+    mc.name "Thank you [man_name], much appreciated."
+    "The harem mansion near your house is now ready for use."
+    $ mc.business.event_triggers_dict["harem_mansion_build"] = True
+    $ harem_mansion.visible = True
     $ mc.business.event_triggers_dict["home_improvement_in_progress"] = False
     return
