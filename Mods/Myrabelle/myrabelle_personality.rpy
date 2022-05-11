@@ -29,24 +29,26 @@ label myrabelle_introduction(the_person):
     mc.name "Excuse me, could I bother you for a moment?"
     "She turns around."
     $ the_person.set_title("???")
-    the_person "I guess? What do you need?"
-    mc.name "I know this is strange, but I saw you and I just needed to know your name."
-    "She laughs and blushes."
-    the_person "Really? You're just saying that to impress me, aren't you."
-    mc.name "Really, I really just wanted to talk to you."
-    $ title_choice = get_random_title(the_person)
-    $ formatted_title = the_person.create_formatted_title(title_choice)
-    the_person "Well fine, my name is [formatted_title]. It's nice to meet you..."
-    $ the_person.set_title(title_choice)
-    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
-    "She waits expectantly for you to introduce yourself."
-    return  #This runs the first time MC meets the girl. Useful for starting storylines.
+    the_person "Do I know you?"
+    mc.name "No, but..."
+    the_person "Then fuck off."
+    $ the_person.draw_person(position = "walking_away")
+    "She turns and walks away from you."
+    jump game_loop
+    return
 
 label myrabelle_greetings(the_person):
+    if myra_has_failed_tournament() and not myra_can_train_focus():
+        the_person "Hey, sorry I don't really feel like talking right now."
+        mc.name "I just wanted to make sure you were doing okay."
+        the_person "I am fine, I just don't want to talk, okay?"
+        mc.name "... Okay."
+        "It is clear [the_person.possessive_title] is still a little distraught from her tournament loss. You should give her a few more days."
+        jump game_loop
     if the_person.love < 0:
         the_person "Ugh, what do you want?"
-    elif the_person.happiness < 90:
-        the_person "Hey..."
+    elif myra_has_been_sponsored():
+        the_person "Oh hey! It's my favoroite sponsor! What can I do for you?"
     else:
         if the_person.sluttiness > 60:
             if the_person.obedience > 130:
@@ -63,13 +65,13 @@ label myrabelle_greetings(the_person):
 label myrabelle_sex_responses_foreplay(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Mmm.... You're good at getting me warmed up..."
+            the_person "Mmm.... Your hands feel amazing, you know that right?"
         else:
             the_person "Mmmm... Ah..."
 
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
-            the_person "Oh that's it. Mmm."
+            the_person "Mmm fuck, you are really getting me going aren't you?"
             "She purrs warmly."
         else:
             the_person "Oh my god..."
@@ -78,7 +80,7 @@ label myrabelle_sex_responses_foreplay(the_person):
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
             if the_person.outfit.wearing_panties():
-                the_person "Ah... If you get me any wetter I'm going to soak right through my panties."
+                the_person "Ah. fuck, are you trying to make me soak my panties?"
             elif the_person.outfit.vagina_available():
                 the_person "Good thing I'm not wearing any panties, you'd have me soaking right through them..."
             else:
@@ -89,19 +91,19 @@ label myrabelle_sex_responses_foreplay(the_person):
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":
-                the_person "Oh god, you might actually make me cum like this... Wow!"
+                the_person "Oh fuck, keep going I'm getting close!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person "I wish my [so_title] knew how to touch me like this. You might actually make me cum!"
         else:
-            the_person "Oh god... I think I might cum soon!"
+            the_person "Oh fuck... I think I might cum soon!"
 
     return
 
 label myrabelle_sex_responses_oral(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Oh you know what I want [the_person.mc_title]... Ah..."
+            the_person "Fuck yeah, finally but that mouth of yours to good use..."
         else:
             the_person "Oh wow... that's... Mph!"
 
@@ -113,19 +115,19 @@ label myrabelle_sex_responses_oral(the_person):
 
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
-            the_person "God, your tongue feels so good!"
+            the_person "Fuck [the_person.mc_title], where did you learn to that with your tongue?"
 
         else:
             "You're so good at that... Fuck, it's starting to drive me crazy!"
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":
-                the_person "You're going to get me there [the_person.mc_title], you're going to get me to cum!"
+                the_person "Oh fuck right there [the_person.mc_title]! You're going to get me to cum!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person "My [so_title] never does this for me any more... I feel horrible, but I need this so badly!"
         else:
-            the_person "Oh no... Oh god, you're going to make me..."
+            the_person "Oh yes! Oh god, you're going to make me..."
             the_person "Cum!"
 
     return
@@ -133,13 +135,14 @@ label myrabelle_sex_responses_oral(the_person):
 label myrabelle_sex_responses_vaginal(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Mmm, your cock feels real good inside me."
+            the_person "Mmm, it feels so good."
+            the_person "Just go slow for a bit, I need to get warmed up."
         else:
             the_person "Oh my god... Ah..."
 
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
-            the_person "Keep fucking me [the_person.mc_title], it feels fantastic!"
+            the_person "Fuck me [the_person.mc_title], it feels amazing!"
         else:
             the_person "Oh my god, that feeling..."
 
@@ -165,28 +168,27 @@ label myrabelle_sex_responses_vaginal(the_person):
 label myrabelle_sex_responses_anal(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Oh fuck, you're really stretching me out!"
+            the_person "Oh fuck, you stretch me so good!"
         else:
             the_person "Fuck, it feels so big... That's all of it, right? I can't take any more!"
 
     elif the_person.arousal < 50:
         if the_person.sluttiness > 50:
-            the_person "Fuck my ass [the_person.mc_title], I can take it!"
+            the_person "Fuck my ass like you mean it [the_person.mc_title]!"
         else:
             the_person "Oh fuck, my poor ass..."
             "Her groan is a mixture of pain and pleasure."
 
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
-            the_person "Oh my poor little ass, you're going to ruin me..."
-            "She doesn't seem very upset with the idea."
+            the_person "That's it [the_person.mc_title]! Stretch my ass and make it yours!"
         else:
             "[the_person.title] bites down on her lip and growls defiantly."
             the_person "Oh fuck... Fuck you're big!"
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":
-                the_person "Oh god, keep going! Stuff my ass and make me cum!"
+                the_person "Oh fuck, I'm getting close [the_person.mc_title]! Fuck my ass and make me cum!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
                 the_person "I never let my [so_title] do this, you know? My tight ass is only for you!"
@@ -198,6 +200,8 @@ label myrabelle_sex_responses_anal(the_person):
 
 
 label myrabelle_climax_responses_foreplay(the_person):
+    if renpy.is_seen(ever=False):   #Acts as a taboo break for a person cumming in this way
+        the_person "I can't believe it... I'm... I'm going to cum?"
     if the_person.sluttiness > 50:
         the_person "Oh my god! I'm going to... I'm going to..."
         the_person "{b}Cum!{/b} Ah!"
@@ -206,6 +210,9 @@ label myrabelle_climax_responses_foreplay(the_person):
     return
 
 label myrabelle_climax_responses_oral(the_person):
+    if renpy.is_seen(ever=False):
+        the_person "Your tongue [the_person.mc_title]! It's so good... I'm... I'm going to cum!?!"
+        return
     if the_person.sluttiness > 70:
         the_person "Oh fuck! Oh fuck, make me cum [the_person.mc_title]!"
         "She closes her eyes and squeals with pleasure."
@@ -215,6 +222,9 @@ label myrabelle_climax_responses_oral(the_person):
     return
 
 label myrabelle_climax_responses_vaginal(the_person):
+    if renpy.is_seen(ever=False):
+        the_person "Don't stop! I'm going to cum all over that amazing dick of yours [the_person.mc_title]!"
+        return
     if the_person.sluttiness > 70:
         the_person "I'm going to cum! Ah! Fuck me [the_person.mc_title], I want to cum so badly! Ah!"
         "She closes her eyes and squeals with pleasure."
@@ -223,6 +233,10 @@ label myrabelle_climax_responses_vaginal(the_person):
     return
 
 label myrabelle_climax_responses_anal(the_person):
+    if renpy.is_seen(ever=False):
+        the_person "Your cock [the_person.mc_title]! I... I didn't know this was possible?"
+        the_person "I'm going to cum, just from your cock in my ass!"
+        return
     if the_person.sluttiness > 80:
         the_person "I'm going to cum! Fuck my ass and make me cum!"
     else:
@@ -231,17 +245,17 @@ label myrabelle_climax_responses_anal(the_person):
 
 label myrabelle_clothing_accept(the_person):
     if the_person.obedience > 130:
-        the_person "It's for me? Thank you [the_person.mc_title], I'll add it to my wardrobe."
+        the_person "It's for me? Thank you [the_person.mc_title], I can actually see myself wearing this."
     else:
         the_person "Oh, it's cute! Thanks [the_person.mc_title]!"
     return
 
 label myrabelle_clothing_reject(the_person):
     if the_person.obedience > 130:
-        the_person "Is that really for me [the_person.mc_title]? I want to... but I don't think I could wear that without getting in some sort of trouble."
+        the_person "Are you being serious [the_person.mc_title]? There's no possible way I could wear that..."
     else:
         if the_person.sluttiness > 60:
-            the_person "Wow. I'm usually up for anything but I think that's going too far."
+            the_person "Fuck. I'm usually up for anything but I think that's going too far."
         else:
             the_person "Wow. It's a little... skimpy. I don't think I could wear that."
     return
@@ -249,7 +263,7 @@ label myrabelle_clothing_reject(the_person):
 label myrabelle_clothing_review(the_person):
     if the_person.outfit.cum_covered():
         if (the_person.sluttiness > 40 and the_person.get_opinion_score("being covered in cum") >=0) or the_person.get_opinion_score("being covered in cum") > 0:
-            the_person "I'm a mess! I need to get all of this cleaned up now..."
+            the_person "Fuck, look at how much you came? I need to get cleaned up though..."
             "[the_person.title] quickly wipes away all of your cum."
         else:
             the_person "My god, it's everywhere! I need to make sure I get all of it..."
@@ -258,7 +272,7 @@ label myrabelle_clothing_review(the_person):
     if the_person.should_wear_uniform():
         the_person "Oh, one second! I need to get back in uniform!"
     elif the_person.obedience > 130:
-        the_person "I'm sorry [the_person.mc_title], you shouldn't have to see me like this. I'll go and get cleaned up so I'm presentable again."
+        the_person "Don't worry [the_person.mc_title], I'll go and get cleaned up so I'm presentable again."
     else:
         if the_person.sluttiness > 40:
             the_person "Whew, I think we messed up my clothes a bit. Just give me a quick second to get dressed into something more decent."
@@ -270,7 +284,7 @@ label myrabelle_strip_reject(the_person, the_clothing, strip_type = "Full"):
     if the_person.obedience > 130:
         the_person "I'm sorry, but we need to leave my [the_clothing.display_name] on for now. Okay?"
     elif the_person.obedience < 70:
-        the_person "Slow down there, I'll decide when to take off my [the_clothing.display_name]."
+        the_person "Slow down there fella, I'll decide when to take off my [the_clothing.display_name]."
     else:
         the_person "I think that my [the_clothing.display_name] should stay where it is for now."
     return
@@ -291,19 +305,19 @@ label myrabelle_grope_body_reject(the_person):
         "She gives you another awkward smile and stays a little further away."
     else: #Fail point for touching waist
         "[the_person.possessive_title] shifts awkwardly, trying to pull away from your hand."
-        the_person "Hey, can you move your hand? It's no big deal, I'm just not super comfortable with it."
+        the_person "Hey, can you get more creepy? Hands to yourself."
         "You pull your hands back and nod apologetically."
         mc.name "Of course, sorry."
-        the_person "Don't worry about it, it's no big deal..."
+        the_person "Then maybe keep your fucking hands to yourself?"
         "She doesn't say anything more, but she still seems uncomfortable with the situation."
     return
 
 label myrabelle_sex_accept(the_person):
     if the_person.sluttiness > 70:
         if the_person.obedience < 70:
-            the_person "I was just about to suggest the same thing."
+            the_person "Damn, that sounds hot. Let's do it!"
         else:
-            the_person "Mmm, you have a dirty mind [the_person.mc_title], I like it."
+            the_person "You always suggest the hottest stuff [the_person.mc_title]. I love it."
     else:
         the_person "Okay, we can give that a try."
     return
@@ -472,7 +486,7 @@ label myrabelle_flirt_response_low(the_person):
     else:
         #She's in her own outfit.
         $ mc.change_locked_clarity(5)
-        the_person "Thank you, I thought it looked cute too."
+        the_person "Thanks. It's a little weird to hear that from you, but that is a nice thing to say."
         "[the_person.possessive_title] turns to give you a side on look of her and smiles at you."
     return
 
@@ -514,7 +528,7 @@ label myrabelle_flirt_response_mid(the_person):
             mc.name "They'd probably agree. You're a sexy looking lady."
             $ mc.change_locked_clarity(10)
             "[the_person.possessive_title] blushes."
-            the_person "Well I'm glad you like it. And I'm glad you like me."
+            the_person "Well I'm glad you like it. I'd be lying if I said I wasn't thinking about you a little bit when I picked it out this morning..."
 
         else:
             the_person "Well thank you. I thought it looked pretty cute when I picked it out."
@@ -522,11 +536,11 @@ label myrabelle_flirt_response_mid(the_person):
             mc.name "Of course I do."
             $ mc.change_locked_clarity(10)
             $ the_person.draw_person(position = "back_peek")
-            the_person "Do you think my butt looks good in it?"
+            the_person "Do you think it makes my ass look good?"
             "She wiggles her hips for you, just a little."
             mc.name "I think it looks great, I wish I could see some more of it."
             $ the_person.draw_person()
-            the_person "I'm sure you do. Maybe if you take me to dinner first."
+            the_person "I'm sure you do."
     return
 
 label myrabelle_flirt_response_high(the_person):
@@ -580,7 +594,7 @@ label myrabelle_flirt_response_high(the_person):
             else:
                 $ mc.change_locked_clarity(15)
                 "[the_person.possessive_title] smiles mischievously and wiggles her hips."
-            the_person "Maybe we can... fool around a little? Does that sound fun?"
+            the_person "I'd be down to mess around a little..."
             $ the_person.draw_person()
 
         menu:
@@ -614,6 +628,8 @@ label myrabelle_flirt_response_girlfriend(the_person):
             $ the_person.draw_person(position = "kissing")
             "She leans in and kisses you on the cheek a few times. When she leans back she glances around the room and blushes."
             the_person "Do you... want to find someplace quiet where I can kiss you a few more times?"
+            if myra_finish_blowjob_training():
+                the_person "And maybe somewhere other than on the lips?"
             menu:
                 "Find someplace quiet":
                     mc.name "That sounds fun, come on, let's go."
@@ -662,7 +678,7 @@ label myrabelle_flirt_response_girlfriend(the_person):
                         "[the_person.possessive_title] nibbles at your ear, then steps back and smiles happily."
     else:
         # You're alone, so she's open to fooling around.
-        the_person "Oh, you! Come here, I want to kiss you!"
+        the_person "Oh, mister! Come here!"
         $ the_person.draw_person(position = "kissing")
         "She puts her arms around you and leans in, quickly kissing you a few times on the lips."
         "When she's finished kissing you she rests her head on your shoulder and sighs happily."
@@ -779,22 +795,24 @@ label myrabelle_flirt_response_text(the_person):
 
 label myrabelle_condom_demand(the_person):
     if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
-        the_person "You need to put on a condom first."
+        the_person "You need to wrap that thing up first."
         the_person "I don't like making you wear one either, but we need to be safe."
     else:
-        the_person "Do you have a condom? You're going to have to put one on."
+        the_person "Do you have a condom? You're going to have to wrap that thing up if you want to do that."
     return
 
 label myrabelle_condom_ask(the_person):
     if the_person.on_birth_control:
         the_person "Hey, do you think you should put on a condom?"
-        the_person "I'm on birth control, so we don't really need one..."
+        the_person "I'm on birth control, so honestly it is kind of up to you..."
         $ the_person.update_birth_control_knowledge()
     elif the_person.get_opinion_score("creampies") > 0:
         $ the_person.discover_opinion("creampies")
         the_person "Hey, maybe you should put on a condom. If you don't you'll have to pull out."
     else:
         the_person "Were you going to put on a condom? It might be a good idea, unless you trust yourself to pull out."
+    the_person "I'm not on birth control, so it could get risky if you don't..."
+    $ the_person.update_birth_control_knowledge()
     return
 
 label myrabelle_condom_bareback_ask(the_person):
@@ -804,8 +822,10 @@ label myrabelle_condom_bareback_ask(the_person):
             $ the_person.update_birth_control_knowledge()
         else:
             the_person "Please don't put on a condom, I want you to feel everything when you fuck me."
-            the_person "And don't pull out either, it would make me so happy to feel you cum inside me!"
+            the_person "And don't pull out either, I love it when things get a little risky!"
         $ the_person.discover_opinion("creampies")
+    elif the_person.love > 60:
+        the_person "Please don't bother with a condom. I don't want there to be anything between us!"
     else:
         the_person "Don't put on a condom, I want to feel every single thing you do to me."
     return
@@ -813,9 +833,10 @@ label myrabelle_condom_bareback_ask(the_person):
 label myrabelle_condom_bareback_demand(the_person): # Lead in: mc.name "One sec, let me just get a condom on..."
     if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0: #Just likes raw sex
         if the_person.on_birth_control:
-            the_person "What? Forget it, you don't need one of those. Hurry up and fuck me!"
+            the_person "What? Why the fuck would you put on a rubber? I'm safe, just fuck me raw!"
+            $ the_person.update_birth_control_knowledge()
         else:
-            the_person "Forget it, you don't need one of those. If I was worried about getting pregnant I'd be on the pill."
+            the_person "Fuck that, you don't need a rubber. If I was worried about getting pregnant I'd be on the pill."
             the_person "I want you to fuck me, and I don't care what happens after!"
             $ the_person.update_birth_control_knowledge()
     else:
@@ -825,6 +846,7 @@ label myrabelle_condom_bareback_demand(the_person): # Lead in: mc.name "One sec,
         else:
             the_person "Don't waste time with that, just pull out if you're worried about getting me pregnant."
             the_person "Come on, hurry up and fuck me!"
+            $ the_person.update_birth_control_knowledge()
     return
 
 label myrabelle_cum_face(the_person):
@@ -889,7 +911,7 @@ label myrabelle_cum_pullout(the_person):
     else:
         if the_person.wants_creampie():
             if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
-                the_person "Cum wherever you want [the_person.mc_title]!"
+                the_person "Cum insisde me! You know you want to, [the_person.mc_title]!"
             elif the_person.get_opinion_score("creampies") > 0:
                 "[the_person.possessive_title] moans happily."
                 if the_person.on_birth_control: #She just likes creampies.
@@ -1119,23 +1141,23 @@ label myrabelle_work_enter_greeting(the_person):
 label myrabelle_date_seduction(the_person):
     if the_person.has_role(girlfriend_role):
         "She takes your hand and holds it in hers."
-        the_person "This was really fun, so..."
+        the_person "I had an amazing time tonight."
         "She gazes romantically into your eyes."
         $ mc.change_locked_clarity(30)
         if the_person.effective_sluttiness(["vaginal_sex", "condomless_sex"]) > 60 and the_person.wants_creampie() and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") >= 0 and the_person.get_opinion_score("creampies") >= 0 and not the_person.on_birth_control and not the_person.event_triggers_dict.get("preg_knows", False):
             if the_person.get_opinion_score("creampies") > 0: #No condoms, loves creampies, she's basically asking you to knock her up. So... have her ask you to knock her up!
-                the_person "Would you like to come home with me? You could, oh I don't know, pin me down and fuck me until I'm pregnant?"
-                the_person "We've been dating for a while, I think it's about time you bred me." #TODO Actually check if you've been dating for a while.
+                the_person "Want to go back to my place? We could end the night on an even more amazing note."
+                the_person "You could do anything you want. You could even pin me down, cum inside me and knock me up if you wanted to." #TODO Actually check if you've been dating for a while.
             else:
-                the_person "Would you like to come home with me? You could, oh I don't know, pin me down and fuck my unprotected pussy raw?"
+                the_person "Would you like to come home with me? You could pin me down and fuck my unprotected pussy raw?"
+        elif the_person.effective_sluttiness(["anal_sex"]) > 60 and the_person.get_opinion_score("anal sex") > 0:
+            the_person "Would you like to come home with me? We can see if that monster cock of yours will fit inside my tight little butt."
         elif the_person.effective_sluttiness(["vaginal_sex", "condomless_sex"]) > 60 and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") > 0:
             the_person "Would you like to come home and fuck me? Only one rule though: no condoms allowed. I want you to take me raw."
         elif the_person.effective_sluttiness(["vaginal_sex"]) > 50 and the_person.get_opinion_score("vaginal sex") > 0:
             the_person "Would you like to come home and slide yourself into my tight pussy?"
             the_person "It seems like the perfect way to end a perfect date."
-        elif the_person.effective_sluttiness(["anal_sex"]) > 60 and the_person.get_opinion_score("anal sex") > 0:
-            the_person "Would you like to come home with me? We can see if that monster cock of yours will fit inside my tight little butt."
-        elif the_person.effective_sluttiness(["sucking_cock"]) > 40 and the_person.get_opinion_score("sucking cock") > 0:
+        elif the_person.effective_sluttiness(["sucking_cock"]) > 40 and the_person.get_opinion_score("sucking cock") > 0 and myra_finish_blowjob_training():
             the_person "Would you like to come home with me? We can have a drink, watch some TV, and then I can throat your cock."
             the_person "I think that would be the perfect end to a perfect date, don't you?"
         elif the_person.effective_sluttiness() > 40 and the_person.get_opinion_score("being covered in cum") > 0:
@@ -1233,7 +1255,7 @@ label myrabelle_sex_end_early(the_person):
 
 label myrabelle_sex_take_control(the_person):
     if the_person.arousal > 60:
-        the_person "No no no, you can't just get worked up and then leave. We're finishing this, one way or another."
+        the_person "Ha! Fuck that! We're finishing this, one way or another."
     else:
         the_person "Wait, we're just getting started! You just relax and leave this to me."
     return
@@ -1397,26 +1419,24 @@ label myrabelle_improved_serum_unlock(the_person):
 ## Taboo break dialogue ##
 label myrabelle_kissing_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 30:
-        the_person "Don't be shy [the_person.mc_title], come on and kiss me."
+        the_person "Don't be shy [the_person.mc_title], come on and kiss me. I'll only bite a little bit."
     elif the_person.love >= 20:
-        the_person "So... Do you want to kiss me?"
-        mc.name "I do."
-        the_person "Good, because I've really wanted to kiss you too."
+        the_person "So... are you finally gonna do it?"
+        mc.name "Do what?"
+        the_person "Kiss me? I mean, it's okay if you're gay or something, I figured it would have happened by now though..."
+        mc.name "I didn't realize you wanted to. Come here."
     else:
-        the_person "Hey there..."
-        mc.name "Hey."
-        the_person "Are you sure we should be doing this? I mean, I barely know you, when you think about it."
+        the_person "Are you sure this is a good idea? We barely know each other."
         mc.name "I'm sure. Just close your eyes and relax."
     return
 
 label myrabelle_touching_body_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 30:
-        the_person "Are you as excited as I am? I... I've always wanted to feel your hands on me."
+        the_person "That's it, you can keep going. I don't mind if you want to touch me there."
     elif the_person.love >= 20:
-        the_person "Do you think we're ready for this? I like you, but it seems like a big step..."
-        mc.name "Tell me what you think?"
-        "You can see the answer in her eyes before she says anything."
-        the_person "I'm ready if you are."
+        the_person "I know this is a big step, but I think I'm ready for this."
+        "She bites her lip and looks in the eyes for a second."
+        the_person "Go ahead, you can touch me if you really want to."
     else:
         the_person "I don't know if I'm ready for this [the_person.mc_title]."
         the_person "It feel like we barely know each other, you know?"
@@ -1425,16 +1445,16 @@ label myrabelle_touching_body_taboo_break(the_person):
 
 label myrabelle_touching_penis_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 35:
-        the_person "Are you ready? I've wondered what your cock would feel like for a while."
+        the_person "Are you ready? I really want to know what you cock feels like."
         mc.name "Don't let me stop you then. Go for it."
     elif the_person.love >= 20:
         the_person "Your cock looks so big. I guess I shouldn't keep you waiting any longer then."
     else:
-        the_person "Oh my god, look at how hard you've gotten. I didn't think it would be so big."
+        the_person "Holy fuck, look at how hard you've gotten. I didn't think it would be so big."
         mc.name "Go on, give it a touch."
         the_person "I... I don't know if I should."
         mc.name "Why not? It's right there, I certainly don't mind."
-        the_person "Fine, but just for a second or two..."
+        the_person "Fine."
     return
 
 label myrabelle_touching_vagina_taboo_break(the_person):
@@ -1502,10 +1522,10 @@ label myrabelle_licking_pussy_taboo_break(the_person):
 
 label myrabelle_vaginal_sex_taboo_break(the_person): #TODO: add a "I dont do anal""you do for me" stle taboo break
     if the_person.effective_sluttiness() >= 60:
-        the_person "Whew, here we go! I'm so excited!"
+        the_person "Wow, its about fucking time! Let's do it!"
     elif the_person.love >= 45:
         "[the_person.title] nods eagerly."
-        the_person "I'm ready [the_person.mc_title], I'm ready to feel you inside me."
+        the_person "I want it too, [the_person.mc_title]. I'm ready to feel you inside me."
     else:
         if the_person.has_taboo("anal_sex"):
             the_person "So this is it, huh?"
@@ -1515,30 +1535,17 @@ label myrabelle_vaginal_sex_taboo_break(the_person): #TODO: add a "I dont do ana
             "[the_person.title] giggles."
             the_person "This feels so backwards! You've already been in my ass, but now we're doing it properly."
             "She shrugs."
-            the_person "At lest this time it should be easier for you to fit inside."
+            the_person "At least this time it should be easier for you to fit inside."
     return
 
 label myrabelle_anal_sex_taboo_break(the_person):
-    if the_person.effective_sluttiness() >= 75:
-        "[the_person.title] takes a few deep breaths."
-        the_person "Whew, I think I'm ready!"
-        the_person "Fuck me in the ass [the_person.mc_title]! Stretch me out and ruin me!"
-
-    elif the_person.love >= 60:
-        the_person "I can't believe we're doing this... Do you think you'll even fit?"
-        mc.name "I'll fit, but you might not be walking right for a few days."
-        the_person "Haha, sure thing..."
-        the_person "... You're kidding, right?"
-        mc.name "Let's find out."
-    else:
-        if the_person.has_taboo("vaginal_sex"):
-            the_person "Fuck, you must really like it tight. We've never even fucked and you're going right for my asshole!"
-            the_person "Are you even sure it's going to fit?"
-            mc.name "I'll make it fit, but you might not be walking right for a few days."
-            the_person "Oh fuck..."
-        else:
-            the_person "Oh my god, you're actually going to do it! Fuck, I hope you even fit!"
-            mc.name "Don't worry, I'll stretch out your ass like I've stretched out all your other holes."
+    the_person "You want to put it... in my ass?"
+    mc.name "Yes. That is exactly what I want to do."
+    "[the_person.possessive_title] looks at you for a moment."
+    the_person "Okay. I'm up for that. I actually kind of like it that way..."
+    mc.name "Is that so?"
+    "[the_person.title] gives you a salacious wink."
+    the_person "Don't tell my mother."
     return
 
 label myrabelle_condomless_sex_taboo_break(the_person):
