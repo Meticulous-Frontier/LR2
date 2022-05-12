@@ -274,7 +274,7 @@ label myra_focus_progression_scene_exit_scene(the_group):
     $ the_person = the_group[0]
     mc.name "Unfortunately, I don't have time to do that right now."
     the_person "Ah, that is too bad."
-    if myra_focus_progress_scene.get_stage() >= 2:
+    if myra_focus_progression_scene.get_stage() >= 2:
         the_person "The sessions have been so... productive... I've been looking forward to them more and more!"
     the_person "But anyway, was there something else you needed?"
     $ clear_scene()

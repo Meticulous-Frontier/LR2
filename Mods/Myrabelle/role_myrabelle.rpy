@@ -349,7 +349,7 @@ init -2 python:
 
     def myra_train_focus_requirement(the_person):
         if myra_at_cafe() and myra_can_train_focus():
-            if myra_last_focus_train_day() + 2 < day:
+            if myra_last_focus_train_day() + 1 < day:
                 return True
             else:
                 return "Trained focus too recently."
@@ -668,7 +668,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     $ the_person.draw_person(emotion = "happy")
     $ the_person.change_happiness(10)
     "She looks to be having a great time, dismantling every challenger that faces her."
-    the_person "Ah! [the_persom.mc_title]. It's your turn!"
+    the_person "Ah! [the_person.mc_title]. It's your turn!"
     "She takes the drink from you. She brings it to her lips and drinks half of it in one go."
     the_person "Don't forget the rules! If you win, I'm going home with you tonight."
     "She gives you an almost imperceptible wink. You put in a quarter and the game starts up for another round."
@@ -710,7 +710,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     "She laughs a bit longer than is normal. But she is rather intoxicated."
     the_person "I mean, you're still a loser for living with your mom, but atleast you aren't married!"
     mc.name "Hey, you better watch your mouth."
-    the_person "Oh what?"
+    the_person "Or what?"
     mc.name "I might have to find better uses for that mouth of yours."
     $ the_person.change_arousal(10)
     the_person "Yeah right. I don't give blowjobs on a first date, mister. Or ever."
@@ -768,7 +768,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     $ the_person.change_arousal(10)
     the_person "Ah! Oh fuck me [the_person.mc_title]..."
     "You pull back and start to give it to her."
-    call fuck_person(the_person, start_position = standing_doggy, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_sex_description_myra_post_drinks_01
+    call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_sex_description_myra_post_drinks_01
     $ the_person.draw_person(position = "missionary")
     "[the_person.title] falls onto your bed when you finish. You lay down next to her."
     the_person "That was just what I needed, god damn."
