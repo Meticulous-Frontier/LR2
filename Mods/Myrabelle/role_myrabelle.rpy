@@ -128,6 +128,13 @@ init 2 python:
         myra.event_triggers_dict["anal_position_filter"] = myra_anal_position_filter
         myra.event_triggers_dict["unique_sex_positions"] = myra_unique_sex_positions
 
+        myra.event_triggers_dict["story_dict"] = True
+        myra.story_character_description = "An aspriring professional gamer. Owns the Gaming Cafe at the mall."
+        myra.story_love_list = myra_story_love_list
+        myra.story_lust_list = myra_story_lust_list
+        myra.story_teamup_list = myra_story_teamup_list
+        myra.story_other_list = myra_story_other_list
+
 
 
         # Below is an example of how you could make a mandatory event that would start the myrabelle character's story. The label and the requirement functions are not included in this template.
@@ -366,6 +373,7 @@ label myra_gaming_cafe_opening_label():
     $ mc.business.event_triggers_dict["guild_quest_level"] = 6
     $ mc.business.event_triggers_dict["guild_quest_name"] = "Bud Lightyear"
     $ mc.business.event_triggers_dict["gaming_cafe_grind_day"] = day
+    $ myra.set_override_schedule(None)  #Weird glitch where Myra sometimes gets assigned an override schedule somehow
     $ myra.add_unique_on_room_enter_event(myra_esports_practice)
     return
 
@@ -1215,6 +1223,8 @@ init -2 python:
         return False
 
     def myra_lewd_game_fuck_requirement(the_person):
+        if not myra_lewd_game_fuck_avail():
+            return False
         if myra_at_cafe() and time_of_day == 3:
             if mc.energy < 40:
                 return "You are too tired"
@@ -1365,7 +1375,7 @@ label myra_bigger_tits_final_label(the_person):       #If her tits are bigger, s
     return
 
 label myra_distracted_gaming_label(the_person):       #20 sluttiness event. MC can suggest she should distract her opponents by dressing slutty. second chance to suggest bigger tits
-    $ myra.event_triggers_dict["suggested_bigger_tits"] = True
+    # $ myra.event_triggers_dict["suggested_bigger_tits"] = True
     "You step into the gaming cafe. [the_person.title] isn't at the desk, where she usually is."
     "Looking around, you see her playing a game with several guys. It looks like some kind of first person shooter game they are all playing together."
     $ the_person.draw_person(position = "sitting")
@@ -1413,6 +1423,7 @@ label myra_distracted_gaming_label(the_person):       #20 sluttiness event. MC c
     $ the_person.draw_person(position = "walking_away")
     "You watch as [the_person.possessive_title] walks away. There is a bit of a swagger in her step..."
     $ clear_scene()
+    $ myra.event_triggers_dict["distracts_gamers"] = True
     $ myra.add_unique_on_room_enter_event(myra_lewd_gaming)
     call advance_time from _call_advance_myra_lewd_games_05
     return
@@ -2105,6 +2116,9 @@ init 3 python:
     def myra_will_grind_with_mc():
         return myra.event_triggers_dict.get("will_grind_with_mc", False)
 
+    def myra_plays_esports():
+        return myra.event_triggers_dict.get("knows_plays_esports", False)
+
     def myra_last_focus_train_day():
         return myra.event_triggers_dict.get("focus_train_day", 9999)
 
@@ -2149,6 +2163,9 @@ init 3 python:
 
     def myra_mc_bought_character():
         return myra.event_triggers_dict.get("character_bought", False)
+
+    def myra_distracts_gamers():
+        return myra.event_triggers_dict.get("distracts_gamers", False)
 
     def myra_caught_masturbating():
         return myra.event_triggers_dict.get("lewd_game_oral", False)
