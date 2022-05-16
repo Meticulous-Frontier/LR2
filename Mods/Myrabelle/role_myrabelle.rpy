@@ -1280,97 +1280,7 @@ init 3 python:
     myra_harem_entry = Action("Harem: Myra", myra_harem_entry_requirement, "myra_harem_entry_label")
 
 
-label myra_bigger_tits_intro_label(the_person):        #40 sluttiness event. If MC suggested bigger tits in love story, myra is interested now.
-    $ the_person.draw_person()
-    "You step into the gaming cafe. As you walk in, [the_person.possessive_title] notices you and walks over."
-    the_person "Hey, do you have a second? I wanted to talk to you about something..."
-    mc.name "Absolutely. What is on your mind [the_person.title]?"
-    the_person "The other day, you said something that kind of got some gears turning in my head..."
-    the_person "I've never been one to stress about looks, especially things that are outside of my control but..."
-    the_person "Do you really think I should get bigger tits?"
-    $ mc.change_locked_clarity(30)
-    mc.name "That is a pretty loaded question."
-    the_person "I know, and honestly the prospect of getting surgery terrifies me but, I don't know, you seem like a good guy, and I thought you could give me an honest opinion."
-    mc.name "Well, I think you need to do what is right for you, first of all. But, I do have something that I think you might be interested in."
-    the_person "Oh?"
-    mc.name "As you know, I run a pharmaceutical company, and we are actually running tests on a drug that naturally increases breast size."
-    the_person "What? Like, without surgery?"
-    mc.name "That is correct."
-    the_person "Do you need anyone to help test it?"
-    mc.name "Actually yes. Would you be interested?"
-    the_person "Yeah. I think I am. I want to know what it is like... you know?"
-    mc.name "Well, I can't promise anything, but I'll make sure to keep you in mind if we do any trials soon."
-    the_person "Ah, thank you [the_person.title]! I'd better get back to the desk."
-    $ the_person.change_obedience(2)
-    $ the_person.change_happiness(2)
-    $ clear_scene()
-    "[the_person.title] will now accept breast enhancement serums."
-    $ myra.event_triggers_dict["wants_bigger_tits"] = True  #This will open up the option on her role
-    $ myra.add_unique_on_talk_event(myra_bigger_tits_final)
-    return
 
-label myra_bigger_tits_serum_label(the_person):       #This option becomes available if Myra wants bigger tits.
-    mc.name "Hey, I have a breast enhancement serum for you to try. Still interested?"
-    the_person "I am, yes!"
-    call give_serum(the_person) from _call_give_myra_bigger_tits_serum_01
-    if _return:
-        "You hand her the serum, and she quickly drinks it down."
-        mc.name "It might be a few days until you see the effects."
-        the_person "Okay... I'll let you know how they work!"
-    else:
-        mc.name "Actually, I think I left them at the shop."
-        "[the_person.title] looks disappointed, but understands."
-    return
-
-label myra_bigger_tits_final_label(the_person):       #If her tits are bigger, she thanks MC.
-    "As you step into the gaming cafe, [the_person.possessive_title] spots you. She quickly walks up to you and grabs your hand."
-    $ the_person.draw_person(position = "walking_away")
-    the_person "Come on! I need to show you something!"
-    "As you follow after her, you feel like you notice a little more... jiggle? In her step?"
-    "She leads you to a stock room in the back. After practically shoving you in, she closes the door and locks it."
-    $ the_person.draw_person()
-    the_person "Sorry, I just had to do this. Check these out!"
-    $ the_person.strip_to_tits(position = "stand3")
-    $ mc.change_locked_clarity(30)
-    "[the_person.possessive_title] quicky strips off her top, revealing a generous set of tits."
-    the_person "They're amazing! And they feel completely natural! Come, feel this..."
-    "She grabs your hand and drags it to her chest, forcing you to feel her up."
-    the_person "See? And..."
-    $ the_person.change_arousal(20)
-    the_person "And... they're so sensitive too..."
-    $ the_person.increase_opinion_score("showing her tits")
-    $ mc.change_locked_clarity(30)
-    "You spend several seconds feeling up her new and improved rack. You admit, they are impressive."
-    $ mc.change_arousal(20)
-    "You can feel yourself getting excited as she starts to whimper from your touch."
-    the_person "They are awesome, right?"
-    "[the_person.possessive_title] looks down and notices your erection."
-    the_person "Hey... you know... I've never had big enough tits to like..."
-    "She looks at you for a moment."
-    the_person "Want to fuck them?"
-    mc.name "Yes. Yes I do."
-    $ mc.change_locked_clarity(30)
-    the_person "Hell yeah let's do it. I bet it feels amazing..."
-    $ the_person.draw_person(position = "blowjob")
-    "As [the_person.possessive_title] gets down on her knees, you whip out your cock. She slides over to you."
-    the_person "I've like, never done this so... you might have to help me a bit..."
-    mc.name "I'm sure you'll do great."
-    "With your cock in her hand, she slides the tip of your cock into her cleavage. Your erection quietly disappears into her ample busom."
-    "Her soft tit flesh feels great wrapped around you."
-    $ the_person.change_arousal(10)
-    $ mc.change_locked_clarity(30)
-    the_person "Wow, it feels so hot... God this is naughty... I love it!"
-    "[the_person.title] starts to move her chest up and down, stroking your cock."
-    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_myra_tits_reveal_1
-    "When you finish, [the_person.possessive_title] stands up."
-    $ the_person.draw_person()
-    the_person "Wow... We'll have to do that again sometime."
-    mc.name "Yes, anytime you need a cock between your tits, hit me up."
-    the_person "Ha! Okay 'coach'. I'll keep that in mind! I'd better get cleaned up and get back to work."
-    $ the_person.apply_planned_outfit()
-    $ myra.event_triggers_dict["wants_bigger_tits"] = False
-    $ clear_scene()
-    return
 
 label myra_distracted_gaming_label(the_person):       #20 sluttiness event. MC can suggest she should distract her opponents by dressing slutty. second chance to suggest bigger tits
     # $ myra.event_triggers_dict["suggested_bigger_tits"] = True
@@ -1602,184 +1512,7 @@ label myra_lewd_game_fuck_label(the_person):    #Repeatable game reenactment sce
     call advance_time from _call_advance_myra_lewd_fuck_02
     return
 
-label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob training after sessions with MC and Alexia.
-    $ the_person.draw_person()
-    if myra.event_triggers_dict.get("blowjob_train_start", False):  #This has already run once.
-        return
-    $ myra.event_triggers_dict["blowjob_train_start"] = True
-    "When you step into the gaming cafe, you see [the_person.title], at her usual spot at the main desk."
-    "She spots you when you walk in. She smiles so you decide to go say hello."
-    mc.name "Good day [the_person.title]"
-    the_person "Hey."
-    "[the_person.possessive_title] looks around, then says to you in a hushed voice."
-    the_person "So... how'd you enjoy that other night with [alexia.name]? That was pretty wild, huh?"
-    mc.name "Yeah, but definitely in a good way."
-    the_person "Yeah, you WOULD say that..."
-    "[the_person.title] sticks her tongue into the side of her cheek, and briefly mimics a blowjob motion."
-    $ mc.change_locked_clarity(10)
-    mc.name "Oh come on, don't pretend like you didn't have a good time too."
-    the_person "The gaming nights are fun. Hanging with [alexia.name], hanging out with you..."
-    the_person "That doesn't mean I like giving blowjobs though."
-    mc.name "That's okay. I'll just throw the game for you next time. [alexia.title] gives way better head anyway."
-    $ the_person.draw_person(emotion = "angry")
-    $ the_person.change_happiness(-5)
-    the_person "What? Are you fucking kidding me? You get head from [alexia.name] often then?"
-    mc.name "What? I mean, it's completely true. Your blowjobs need work."
-    "It seems that comparing her to [alexia.possessive_title] has got her feeling competitive. You decide to push the issue."
-    the_person "Yeah right. And let me guess, you just happen to be the man to teach me."
-    mc.name "I mean, I am your coach. I guess it just depends. Is it a skill you WANT to be better at?"
-    mc.name "You might be able to beat [alexia.title] at games, but in the oral skills department, she has you outclassed, hands down."
-    the_person "Yeah right. Fuck off, I've got stuff to do."
-    mc.name "Alright. I'm just gonna go play something for a bit."
-    $ clear_scene()
-    "You step away from the desk. You find a computer and sit down."
-    "You aren't sure if that will work or not, but atleast it left her thinking about it. Maybe she'll come around to it."
-    "You hop on a computer and load up Guild Quest 2. You just play some overland stuff for a bit, your mind thinking about [the_person.title]."
-    "After a couple hours, you are just getting ready to get up..."
-    $ the_person.draw_person(emotion = "sad")
-    the_person "Hey..."
-    mc.name "Hey [the_person.title]."
-    the_person "Look, I'm sorry I got pissed earlier. Obviously I know that you fool around with [alexia.name]."
-    the_person "She talks about you way too much for things between you two to be just friendly."
-    mc.name "Oh... she talks about me a lot?"
-    the_person "I... look, I'm not here to talk about her, okay?"
-    mc.name "Ok... what are you here to talk about?"
-    the_person "I was thinking about it a lot. I DO want to get better, I had honestly just written off blowjob as something OTHER girls do..."
-    the_person "But the other night, the atmosphere was just... different? I WANTED to make you feel good. But I felt like I had no idea what I was doing..."
-    mc.name "Ah, so you really DO need a coach! Don't worry [the_person.title]. I'm here to help."
-    the_person "That's... why did I not see that reaction coming. You are so predictable."
-    mc.name "Don't worry, you'll have an up close look at me coming soon."
-    the_person "You are such a dumbass."
-    mc.name "Alright, let's go find somewhere private."
-    the_person "What, like... right now?"
-    mc.name "Of course! There's no time like the present."
-    the_person "Ummm, maybe we could start like some other..."
-    mc.name "Non sense! I'm your coach, I know what's best. Let's go."
-    $ the_person.change_obedience(5)
-    $ the_person.draw_person(position = "stand3")
-    "You stand up."
-    the_person "Umm, I guess there is a stock room where I keep spare computer parts."
-    mc.name "Lead the way."
-    $ the_person.draw_person(position = "walking_away")
-    "[the_person.possessive_title] turns away and you follow her. She goes into a door way, down a small hall, and into a small parts room."
-    $ the_person.draw_person()
-    the_person "Fuck, I can't believe I'm doing this."
-    mc.name "Don't worry. I'll help you develop skills that will be useful the rest of your life."
-    "[the_person.title] rolls her eyes."
-    the_person "So... what now coach?"
-    mc.name "Well, first, you need to drop the smartass attitude."
-    the_person "What? Fuck off, I'm just..."
-    mc.name "Let's be honest with each other. We both know WHY you are doing this. You are competitive by nature, and you can't stand the thought that [alexia.title] might be better than you."
-    mc.name "But the most important part about blowjobs has nothing to do with technique. It's all about attitude. Guys can tell when your forcing it, and it's a big turn-off."
-    "For a moment, [the_person.possessive_title] seems shocked at your forceful words. For a second, it seems she is about to tell you to fuck off again, but then she relaxes."
-    the_person "I... I DO want to be better..."
-    mc.name "That's great, but to get good at blowjobs, you have to WANT to give them. So far, all I can tell is that you are actively avoiding it."
-    mc.name "Here's what you need to do. Get on your knees. Take out my cock. And lick it, like you WANT to. You WANT to make it good. You WANT to do anything you can to make me feel good."
-    $ the_person.change_obedience(20)
-    the_person "Okay..."
-    $ the_person.draw_person(position = "blowjob")
-    $ mc.change_locked_clarity(30)
-    "Finally, [the_person.possessive_title] gets on her knees in front of you. She undoes your pants and slowly pulls them down with your underwear."
-    "She looks a little scared as she looks at your full size."
-    the_person "I... I'll never be able to... it's too big!"
-    mc.name "You let me worry about working up to handling the whole thing. For now, just lick it."
-    the_person "Okay..."
-    "You can feel [the_person.title]'s hot breath on your groin as she brings her face right up to it. She sticks out her tongue and runs it up the side a few times."
-    mc.name "That's it. Now be honest. Before you met me, how many blowjobs have you given before?"
-    the_person "I... don't see how that's relevant to my training..."
-    mc.name "Just answer. I'll decide what's relevant."
-    "[the_person.possessive_title] sighs."
-    the_person "Two."
-    mc.name "Really? Haven't had serious boyfriends before?"
-    the_person "I have, I just... I was with a guy once who kept begging for blowjobs all the time. I finally gave in and did it once, but..."
-    the_person "He... wasn't very gentle. He grabbed me by the hair and just kept..."
-    the_person "Honestly, at one point, I thought I was doing to die. I was gagging so hard."
-    mc.name "Ahh, I understand now. Don't worry [the_person.title]. We may work up to that point, but I won't do anything like that to you yet."
-    the_person "Yeah?"
-    "[the_person.possessive_title] takes another long couple of licks up and down your shaft."
-    $ mc.change_locked_clarity(30)
-    mc.name "Alright, we're gonna take this slow, okay? First, lick all around the tip, then put just the tip in your mouth."
-    the_person "Hmm... okay..."
-    "[the_person.title]'s hot tongue swirls around your tip a few times. "
-    "Finally, her lips open and you feel your tip enter her mouth. She quietly sucks on the tip for several seconds."
-    $ mc.change_arousal(10)
-    mc.name "Mmm, that's it. That feels really good."
-    $ the_person.change_happiness(5)
-    "[the_person.possessive_title] looks up at you, and your eyes meet. You can see the beginning of something new. Something passionate. She is ready to learn to service you."
-    "And more importantly, she WANTS to."
-    $ the_person.break_taboo("sucking_cock")
-    "[the_person.title] maintains her eye contact as she starts to bob her head a bit, servicing the tip of your cock."
-    $ mc.change_arousal(10)
-    $ mc.change_locked_clarity(50)
-    mc.name "Why don't you touch yourself a little too."
-    "[the_person.title] pops off your dick."
-    the_person "What? You want me to masturbate?"
-    mc.name "It'll help. Making yourself feel good will help get you in the mood. Plus little moans and gasps are fucking hot."
-    $ the_person.draw_person(position = "kneeling1")
-    the_person "I guess that makes sense..."
-    "[the_person.possessive_title] reaches down and starts to touch herself. You let her go for several seconds."
-    mc.name "See? Feels good, right?"
-    the_person "Mmm... yeah..."
-    mc.name "When you are feeling it, keep going. It'll make it easier."
-    the_person "Fuck... mmm.... okay..."
-    "[the_person.title] touches herself for several more seconds."
-    $ the_person.draw_person(position = "blowjob")
-    $ mc.change_locked_clarity(50)
-    "When she turns back to your cock, she opens her mouth and starts to suck on it, more eagerly this time. This is shaping up to be a good blowjob session now."
-    call fuck_person(the_person, start_position = blowjob, skip_intro = True, position_locked = True) from _call_sex_description_myra_bj_train_01
-    mc.name "That's enough for now."
-    $ the_report = _return
-    if the_report.get("guy orgasms", 0) > 0:
-        "That went way better than you had expected. It seems that you may have flipped a switch in [the_person.possessive_title]'s brain."
-    else:
-        "Even though you didn't finish, her eagerness shows that she is ready and willing to learn."
-        "It seems you may have flipped a switch in [the_person.possessive_title]'s brain."
-    $ myra.increase_sex_skill("Oral")
-    $ myra.increase_opinion_score("giving blowjobs")
-    $ mc.business.set_event_day("myra_bj_train", override = True)
-    $ myra.add_unique_on_room_enter_event(myra_blowjob_training_progress)
-    the_person "That actually was a lot more fun than I thought it would be."
-    mc.name "Yes. Your enthusiasm helped a lot. I want you to practice your technique for a bit."
-    the_person "My... technique?"
-    mc.name "Yeah. Another good idea would be to watch some videos. And by that, I mean porn."
-    the_person "Right... for science."
-    mc.name "Exactly."
-    $ the_person.draw_person()
-    "[the_person.possessive_title] stands up."
-    the_person "I'll umm... keep that in mind..."
-    mc.name "Of course, you're always welcome to practice on me also."
-    "[the_person.title] rolls her eyes."
-    the_person "Ah yes, the white knight offers graciously to let me suck his dick whenever I want. How gallant."
-    the_person "I'm going to get cleaned up, but I will keep your offer in mind..."
-    mc.name "Alright, I'll see you later."
-    $ clear_scene()
-    $ the_person.apply_outfit(the_person.planned_outfit)
-    "You step out of the stock room. The gaming nights your are having with [the_person.possessive_title] and [alexia.title] are paying off."
-    "A week ago, [the_person.title] would never even consider sucking you off, but now she seems interested, if only to show up her friend."
-    "You make a mental note to check back up with her in a week or so and see how her technique is progressing."
-    call advance_time from _call_advance_myra_bj_train_01_time_
-    return
 
-label myra_blowjob_training_progress_label(the_person):
-    "Part two of [the_person.title]'s blowjob training."
-    "MC works with her on going deep. Let's her set the pace for the most part. She gags a lot but struggles though it."
-    "At the end, suggest that she practice deepthroating. Opens up the deepthroat position via filters."
-    "Setup final scene to be available in a week."
-    $ myra.increase_sex_skill("Oral")
-    $ myra.increase_opinion_score("giving blowjobs")
-    $ myra.event_triggers_dict["deepthroat_avail"] = True
-    $ mc.business.set_event_day("myra_bj_train", override = True)
-    $ myra.add_unique_on_room_enter_event(myra_blowjob_training_final)
-    return
-
-label myra_blowjob_training_final_label(the_person):
-    "After training her throat for a week, [the_person.title] is ready for final training."
-    "In this session, you teach her to relax her throat and to be submissive."
-    "She struggles for a bit, but finally manages to let go and you face fuck her."
-    "At the end, she asks MC to help Alexia win gaming night this week, she wants to show off her face fucking skill to her friend."
-    $ myra.event_triggers_dict["blowjob_train_finish"] = True
-    $ myra.add_unique_on_room_enter_event(myra_adult_gaming_intro)
-    return
 
 label myra_adult_gaming_intro_label(the_person):    #80 sluttiness event. requires finishing her love story, Myra wabts to open adults only section of the cafe.
     "[the_person.title] asks MC for some feedback on an idea. Want's to know his opinion because he is sponsor and scared she will lose money."
@@ -2098,6 +1831,277 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
 
 # Obedience related events
 
+
+label myra_bigger_tits_intro_label(the_person):        #120 obedience event. If MC suggested bigger tits in love story, myra is interested now.
+    $ the_person.draw_person()
+    "You step into the gaming cafe. As you walk in, [the_person.possessive_title] notices you and walks over."
+    the_person "Hey, do you have a second? I wanted to talk to you about something..."
+    mc.name "Absolutely. What is on your mind [the_person.title]?"
+    the_person "The other day, you said something that kind of got some gears turning in my head..."
+    the_person "I've never been one to stress about looks, especially things that are outside of my control but..."
+    the_person "Do you really think I should get bigger tits?"
+    $ mc.change_locked_clarity(30)
+    mc.name "That is a pretty loaded question."
+    the_person "I know, and honestly the prospect of getting surgery terrifies me but, I don't know, you seem like a good guy, and I thought you could give me an honest opinion."
+    mc.name "Well, I think you need to do what is right for you, first of all. But, I do have something that I think you might be interested in."
+    the_person "Oh?"
+    mc.name "As you know, I run a pharmaceutical company, and we are actually running tests on a drug that naturally increases breast size."
+    the_person "What? Like, without surgery?"
+    mc.name "That is correct."
+    the_person "Do you need anyone to help test it?"
+    mc.name "Actually yes. Would you be interested?"
+    the_person "Yeah. I think I am. I want to know what it is like... you know?"
+    mc.name "Well, I can't promise anything, but I'll make sure to keep you in mind if we do any trials soon."
+    the_person "Ah, thank you [the_person.title]! I'd better get back to the desk."
+    $ the_person.change_obedience(2)
+    $ the_person.change_happiness(2)
+    $ clear_scene()
+    "[the_person.title] will now accept breast enhancement serums."
+    $ myra.event_triggers_dict["wants_bigger_tits"] = True  #This will open up the option on her role
+    $ myra.add_unique_on_talk_event(myra_bigger_tits_final)
+    return
+
+label myra_bigger_tits_serum_label(the_person):       #This option becomes available if Myra wants bigger tits.
+    mc.name "Hey, I have a breast enhancement serum for you to try. Still interested?"
+    the_person "I am, yes!"
+    call give_serum(the_person) from _call_give_myra_bigger_tits_serum_01
+    if _return:
+        "You hand her the serum, and she quickly drinks it down."
+        mc.name "It might be a few days until you see the effects."
+        the_person "Okay... I'll let you know how they work!"
+    else:
+        mc.name "Actually, I think I left them at the shop."
+        "[the_person.title] looks disappointed, but understands."
+    return
+
+label myra_bigger_tits_final_label(the_person):       #If her tits are bigger, she thanks MC.
+    "As you step into the gaming cafe, [the_person.possessive_title] spots you. She quickly walks up to you and grabs your hand."
+    $ the_person.draw_person(position = "walking_away")
+    the_person "Come on! I need to show you something!"
+    "As you follow after her, you feel like you notice a little more... jiggle? In her step?"
+    "She leads you to a stock room in the back. After practically shoving you in, she closes the door and locks it."
+    $ the_person.draw_person()
+    the_person "Sorry, I just had to do this. Check these out!"
+    $ the_person.strip_to_tits(position = "stand3")
+    $ mc.change_locked_clarity(30)
+    "[the_person.possessive_title] quicky strips off her top, revealing a generous set of tits."
+    the_person "They're amazing! And they feel completely natural! Come, feel this..."
+    "She grabs your hand and drags it to her chest, forcing you to feel her up."
+    the_person "See? And..."
+    $ the_person.change_arousal(20)
+    the_person "And... they're so sensitive too..."
+    $ the_person.increase_opinion_score("showing her tits")
+    $ mc.change_locked_clarity(30)
+    "You spend several seconds feeling up her new and improved rack. You admit, they are impressive."
+    $ mc.change_arousal(20)
+    "You can feel yourself getting excited as she starts to whimper from your touch."
+    the_person "They are awesome, right?"
+    "[the_person.possessive_title] looks down and notices your erection."
+    the_person "Hey... you know... I've never had big enough tits to like..."
+    "She looks at you for a moment."
+    the_person "Want to fuck them?"
+    mc.name "Yes. Yes I do."
+    $ mc.change_locked_clarity(30)
+    the_person "Hell yeah let's do it. I bet it feels amazing..."
+    $ the_person.draw_person(position = "blowjob")
+    "As [the_person.possessive_title] gets down on her knees, you whip out your cock. She slides over to you."
+    the_person "I've like, never done this so... you might have to help me a bit..."
+    mc.name "I'm sure you'll do great."
+    "With your cock in her hand, she slides the tip of your cock into her cleavage. Your erection quietly disappears into her ample busom."
+    "Her soft tit flesh feels great wrapped around you."
+    $ the_person.change_arousal(10)
+    $ mc.change_locked_clarity(30)
+    the_person "Wow, it feels so hot... God this is naughty... I love it!"
+    "[the_person.title] starts to move her chest up and down, stroking your cock."
+    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_myra_tits_reveal_1
+    "When you finish, [the_person.possessive_title] stands up."
+    $ the_person.draw_person()
+    the_person "Wow... We'll have to do that again sometime."
+    mc.name "Yes, anytime you need a cock between your tits, hit me up."
+    the_person "Ha! Okay 'coach'. I'll keep that in mind! I'd better get cleaned up and get back to work."
+    $ the_person.apply_planned_outfit()
+    $ myra.event_triggers_dict["wants_bigger_tits"] = False
+    $ clear_scene()
+    return
+
+label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob training after sessions with Alexia. Requires 140 obedience
+    $ the_person.draw_person()
+    if myra.event_triggers_dict.get("blowjob_train_start", False):  #This has already run once.
+        return
+    $ myra.event_triggers_dict["blowjob_train_start"] = True
+    "When you step into the gaming cafe, you see [the_person.title], at her usual spot at the main desk."
+    "She spots you when you walk in. She smiles so you decide to go say hello."
+    mc.name "Good day [the_person.title]"
+    the_person "Hey."
+    "[the_person.possessive_title] looks around, then says to you in a hushed voice."
+    the_person "So... how'd you enjoy that other night with [alexia.name]? That was pretty wild, huh?"
+    mc.name "Yeah, but definitely in a good way."
+    the_person "Yeah, you WOULD say that..."
+    "[the_person.title] sticks her tongue into the side of her cheek, and briefly mimics a blowjob motion."
+    $ mc.change_locked_clarity(10)
+    mc.name "Oh come on, don't pretend like you didn't have a good time too."
+    the_person "The gaming nights are fun. Hanging with [alexia.name], hanging out with you..."
+    the_person "That doesn't mean I like giving blowjobs though."
+    mc.name "That's okay. I'll just throw the game for you next time. [alexia.title] gives way better head anyway."
+    $ the_person.draw_person(emotion = "angry")
+    $ the_person.change_happiness(-5)
+    the_person "What? Are you fucking kidding me? You get head from [alexia.name] often then?"
+    mc.name "What? I mean, it's completely true. Your blowjobs need work."
+    "It seems that comparing her to [alexia.possessive_title] has got her feeling competitive. You decide to push the issue."
+    the_person "Yeah right. And let me guess, you just happen to be the man to teach me."
+    mc.name "I mean, I am your coach. I guess it just depends. Is it a skill you WANT to be better at?"
+    mc.name "You might be able to beat [alexia.title] at games, but in the oral skills department, she has you outclassed, hands down."
+    the_person "Yeah right. Fuck off, I've got stuff to do."
+    mc.name "Alright. I'm just gonna go play something for a bit."
+    $ clear_scene()
+    "You step away from the desk. You find a computer and sit down."
+    "You aren't sure if that will work or not, but atleast it left her thinking about it. Maybe she'll come around to it."
+    "You hop on a computer and load up Guild Quest 2. You just play some overland stuff for a bit, your mind thinking about [the_person.title]."
+    "After a couple hours, you are just getting ready to get up..."
+    $ the_person.draw_person(emotion = "sad")
+    the_person "Hey..."
+    mc.name "Hey [the_person.title]."
+    the_person "Look, I'm sorry I got pissed earlier. Obviously I know that you fool around with [alexia.name]."
+    the_person "She talks about you way too much for things between you two to be just friendly."
+    mc.name "Oh... she talks about me a lot?"
+    the_person "I... look, I'm not here to talk about her, okay?"
+    mc.name "Ok... what are you here to talk about?"
+    the_person "I was thinking about it a lot. I DO want to get better, I had honestly just written off blowjob as something OTHER girls do..."
+    the_person "But the other night, the atmosphere was just... different? I WANTED to make you feel good. But I felt like I had no idea what I was doing..."
+    mc.name "Ah, so you really DO need a coach! Don't worry [the_person.title]. I'm here to help."
+    the_person "That's... why did I not see that reaction coming. You are so predictable."
+    mc.name "Don't worry, you'll have an up close look at me coming soon."
+    the_person "You are such a dumbass."
+    mc.name "Alright, let's go find somewhere private."
+    the_person "What, like... right now?"
+    mc.name "Of course! There's no time like the present."
+    the_person "Ummm, maybe we could start like some other..."
+    mc.name "Non sense! I'm your coach, I know what's best. Let's go."
+    $ the_person.change_obedience(5)
+    $ the_person.draw_person(position = "stand3")
+    "You stand up."
+    the_person "Umm, I guess there is a stock room where I keep spare computer parts."
+    mc.name "Lead the way."
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] turns away and you follow her. She goes into a door way, down a small hall, and into a small parts room."
+    $ the_person.draw_person()
+    the_person "Fuck, I can't believe I'm doing this."
+    mc.name "Don't worry. I'll help you develop skills that will be useful the rest of your life."
+    "[the_person.title] rolls her eyes."
+    the_person "So... what now coach?"
+    mc.name "Well, first, you need to drop the smartass attitude."
+    the_person "What? Fuck off, I'm just..."
+    mc.name "Let's be honest with each other. We both know WHY you are doing this. You are competitive by nature, and you can't stand the thought that [alexia.title] might be better than you."
+    mc.name "But the most important part about blowjobs has nothing to do with technique. It's all about attitude. Guys can tell when your forcing it, and it's a big turn-off."
+    "For a moment, [the_person.possessive_title] seems shocked at your forceful words. For a second, it seems she is about to tell you to fuck off again, but then she relaxes."
+    the_person "I... I DO want to be better..."
+    mc.name "That's great, but to get good at blowjobs, you have to WANT to give them. So far, all I can tell is that you are actively avoiding it."
+    mc.name "Here's what you need to do. Get on your knees. Take out my cock. And lick it, like you WANT to. You WANT to make it good. You WANT to do anything you can to make me feel good."
+    $ the_person.change_obedience(20)
+    the_person "Okay..."
+    $ the_person.draw_person(position = "blowjob")
+    $ mc.change_locked_clarity(30)
+    "Finally, [the_person.possessive_title] gets on her knees in front of you. She undoes your pants and slowly pulls them down with your underwear."
+    "She looks a little scared as she looks at your full size."
+    the_person "I... I'll never be able to... it's too big!"
+    mc.name "You let me worry about working up to handling the whole thing. For now, just lick it."
+    the_person "Okay..."
+    "You can feel [the_person.title]'s hot breath on your groin as she brings her face right up to it. She sticks out her tongue and runs it up the side a few times."
+    mc.name "That's it. Now be honest. Before you met me, how many blowjobs have you given before?"
+    the_person "I... don't see how that's relevant to my training..."
+    mc.name "Just answer. I'll decide what's relevant."
+    "[the_person.possessive_title] sighs."
+    the_person "Two."
+    mc.name "Really? Haven't had serious boyfriends before?"
+    the_person "I have, I just... I was with a guy once who kept begging for blowjobs all the time. I finally gave in and did it once, but..."
+    the_person "He... wasn't very gentle. He grabbed me by the hair and just kept..."
+    the_person "Honestly, at one point, I thought I was doing to die. I was gagging so hard."
+    mc.name "Ahh, I understand now. Don't worry [the_person.title]. We may work up to that point, but I won't do anything like that to you yet."
+    the_person "Yeah?"
+    "[the_person.possessive_title] takes another long couple of licks up and down your shaft."
+    $ mc.change_locked_clarity(30)
+    mc.name "Alright, we're gonna take this slow, okay? First, lick all around the tip, then put just the tip in your mouth."
+    the_person "Hmm... okay..."
+    "[the_person.title]'s hot tongue swirls around your tip a few times. "
+    "Finally, her lips open and you feel your tip enter her mouth. She quietly sucks on the tip for several seconds."
+    $ mc.change_arousal(10)
+    mc.name "Mmm, that's it. That feels really good."
+    $ the_person.change_happiness(5)
+    "[the_person.possessive_title] looks up at you, and your eyes meet. You can see the beginning of something new. Something passionate. She is ready to learn to service you."
+    "And more importantly, she WANTS to."
+    $ the_person.break_taboo("sucking_cock")
+    "[the_person.title] maintains her eye contact as she starts to bob her head a bit, servicing the tip of your cock."
+    $ mc.change_arousal(10)
+    $ mc.change_locked_clarity(50)
+    mc.name "Why don't you touch yourself a little too."
+    "[the_person.title] pops off your dick."
+    the_person "What? You want me to masturbate?"
+    mc.name "It'll help. Making yourself feel good will help get you in the mood. Plus little moans and gasps are fucking hot."
+    $ the_person.draw_person(position = "kneeling1")
+    the_person "I guess that makes sense..."
+    "[the_person.possessive_title] reaches down and starts to touch herself. You let her go for several seconds."
+    mc.name "See? Feels good, right?"
+    the_person "Mmm... yeah..."
+    mc.name "When you are feeling it, keep going. It'll make it easier."
+    the_person "Fuck... mmm.... okay..."
+    "[the_person.title] touches herself for several more seconds."
+    $ the_person.draw_person(position = "blowjob")
+    $ mc.change_locked_clarity(50)
+    "When she turns back to your cock, she opens her mouth and starts to suck on it, more eagerly this time. This is shaping up to be a good blowjob session now."
+    call fuck_person(the_person, start_position = blowjob, skip_intro = True, position_locked = True) from _call_sex_description_myra_bj_train_01
+    mc.name "That's enough for now."
+    $ the_report = _return
+    if the_report.get("guy orgasms", 0) > 0:
+        "That went way better than you had expected. It seems that you may have flipped a switch in [the_person.possessive_title]'s brain."
+    else:
+        "Even though you didn't finish, her eagerness shows that she is ready and willing to learn."
+        "It seems you may have flipped a switch in [the_person.possessive_title]'s brain."
+    $ myra.increase_sex_skill("Oral")
+    $ myra.increase_opinion_score("giving blowjobs")
+    $ mc.business.set_event_day("myra_bj_train", override = True)
+    $ myra.add_unique_on_room_enter_event(myra_blowjob_training_progress)
+    the_person "That actually was a lot more fun than I thought it would be."
+    mc.name "Yes. Your enthusiasm helped a lot. I want you to practice your technique for a bit."
+    the_person "My... technique?"
+    mc.name "Yeah. Another good idea would be to watch some videos. And by that, I mean porn."
+    the_person "Right... for science."
+    mc.name "Exactly."
+    $ the_person.draw_person()
+    "[the_person.possessive_title] stands up."
+    the_person "I'll umm... keep that in mind..."
+    mc.name "Of course, you're always welcome to practice on me also."
+    "[the_person.title] rolls her eyes."
+    the_person "Ah yes, the white knight offers graciously to let me suck his dick whenever I want. How gallant."
+    the_person "I'm going to get cleaned up, but I will keep your offer in mind..."
+    mc.name "Alright, I'll see you later."
+    $ clear_scene()
+    $ the_person.apply_outfit(the_person.planned_outfit)
+    "You step out of the stock room. The gaming nights your are having with [the_person.possessive_title] and [alexia.title] are paying off."
+    "A week ago, [the_person.title] would never even consider sucking you off, but now she seems interested, if only to show up her friend."
+    "You make a mental note to check back up with her in a week or so and see how her technique is progressing."
+    call advance_time from _call_advance_myra_bj_train_01_time_
+    return
+
+label myra_blowjob_training_progress_label(the_person):
+    "Part two of [the_person.title]'s blowjob training."
+    "MC works with her on going deep. Let's her set the pace for the most part. She gags a lot but struggles though it."
+    "At the end, suggest that she practice deepthroating. Opens up the deepthroat position via filters."
+    "Setup final scene to be available in a week."
+    $ myra.increase_sex_skill("Oral")
+    $ myra.increase_opinion_score("giving blowjobs")
+    $ myra.event_triggers_dict["deepthroat_avail"] = True
+    $ mc.business.set_event_day("myra_bj_train", override = True)
+    $ myra.add_unique_on_room_enter_event(myra_blowjob_training_final)
+    return  #160 Obedience
+
+label myra_blowjob_training_final_label(the_person):
+    "After training her throat for a week, [the_person.title] is ready for final training."
+    "In this session, you teach her to relax her throat and to be submissive."
+    "She struggles for a bit, but finally manages to let go and you face fuck her."
+    "At the end, she asks MC to help Alexia win gaming night this week, she wants to show off her face fucking skill to her friend."
+    $ myra.event_triggers_dict["blowjob_train_finish"] = True
+    $ myra.add_unique_on_room_enter_event(myra_adult_gaming_intro)
+    return  #180 Obedience
 #Myra related wrappers
 init 3 python:
     def myra_intro_complete():

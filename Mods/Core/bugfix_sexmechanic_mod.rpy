@@ -593,6 +593,15 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ start_object = None
             # $ renpy.say(None, "Continue round => Position: " + position_choice.name + ", object: " + object_choice.name)
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
+                if report_log.get("used_obedience", False):
+                    $ happiness_change = (the_person.opinion_score_being_submissive() - 1 + report_log.get("girl orgasms", 0)) * 2
+                    if happiness_change > 0 and the_person.happiness > 200:
+                        pass
+                    else:
+                        $ the_person.change_happiness(happiness_change)    #defualt -2 happiness per turn, being submissive negates or subverts happiness loss.
+                    if the_person.opinion_score_being_submissive() == -2:
+                        $ the_person.change_obedience(-2)   #If she hates being submissive, she slowly gets less submissive
+
                 call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
 
                 # If the girl has an orgasm due to MC coming, she gets a guaranteed trance upgrade
@@ -775,7 +784,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
                     happiness_drop = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #Our initial conditions mean this is a negative number
                     the_person.change_arousal(the_person.get_opinion_score("being submissive")*2)
                     the_person.discover_opinion("being submissive")
-                    the_person.change_happiness(happiness_drop)
+                    # the_person.change_happiness(happiness_drop)
 
                 if not the_person.has_taboo(the_taboo):
                     $ the_person.call_dialogue("sex_obedience_accept")
