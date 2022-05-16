@@ -918,8 +918,6 @@ label myra_gaming_cafe_expansion_intro_label(the_person):   #100 love event. Myr
     $ myra.event_triggers_dict["is_expanding_business"] = True
     return
 
-###Sluttiness story labels
-
 #Public serum distribution questline
 
 init -2 python:
@@ -1184,6 +1182,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
 
 
 
+###Sluttiness story labels
 init -2 python:
     def myra_bigger_tits_intro_requirement(the_person):
         if the_person.sluttiness >= 40 and myra_at_cafe():
@@ -1272,7 +1271,7 @@ init 3 python:
     myra_distracted_gaming = Action("Myra Distracts Her Opponents", myra_distracted_gaming_requirement, "myra_distracted_gaming_label")
     myra_lewd_gaming = Action("Myra Plays Lewd Games", myra_lewd_gaming_requirement, "myra_lewd_gaming_label")
     myra_lewd_game_fuck_intro = Action("Myra Game Reenactment", myra_lewd_game_fuck_intro_requirement, "myra_lewd_game_fuck_intro_label")
-    myra_lewd_game_fuck = Action("Myra Lewd Game Reenactment", myra_lewd_game_fuck_requirement, "myra_lewd_game_fuck_label")
+    myra_lewd_game_fuck = Action("Lewd Game Reenactment", myra_lewd_game_fuck_requirement, "myra_lewd_game_fuck_label")
     myra_blowjob_training_intro = Action("Myra Needs Help", myra_blowjob_training_intro_requirement, "myra_blowjob_training_intro_label")
     myra_blowjob_training_progress = Action("Develop Myra Orally", myra_blowjob_training_progress_requirement, "myra_blowjob_training_progress_label")
     myra_blowjob_training_final = Action("Develop Myra Orally", myra_blowjob_training_final_requirement, "myra_blowjob_training_final_label")
@@ -1280,7 +1279,6 @@ init 3 python:
     myra_adult_gaming_opening = Action("Myra Opens Lewd Cafe", myra_adult_gaming_opening_requirement, "myra_adult_gaming_opening_label")
     myra_harem_entry = Action("Harem: Myra", myra_harem_entry_requirement, "myra_harem_entry_label")
 
-#Bigger tits questline
 
 label myra_bigger_tits_intro_label(the_person):        #40 sluttiness event. If MC suggested bigger tits in love story, myra is interested now.
     $ the_person.draw_person()
@@ -2097,6 +2095,8 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
     $ del current_position
     return True
 
+
+# Obedience related events
 
 #Myra related wrappers
 init 3 python:
