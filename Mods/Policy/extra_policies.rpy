@@ -38,7 +38,7 @@ init 1310 python:
     creative_colored_uniform_policy = Policy(
         name = "Relaxed Uniform Color Policy",
         cost = 1000,
-        desc = "Employees are given some leeway with the colors of their outfits. While active, employees where your uniform pieces but can select their own colors. Reduces happiness penalties for girls who hate work uniforms.",
+        desc = "Employees are given some leeway with the colors of their outfits. While active, employees wear your uniform pieces but can select their own colors. Reduces happiness penalties for girls who hate work uniforms.",
         toggleable = True,
         own_requirement = casual_uniform_policy,
         dependant_policies = casual_uniform_policy

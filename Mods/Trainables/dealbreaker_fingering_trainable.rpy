@@ -74,14 +74,14 @@ label train_dealbreaker_fingering_label(the_person):
             mc.name "We've done this before actually... remember?"
             the_person "Yes, of course."
             mc.name "Didn't it feel good? When my fingers first pushed up inside you..."
-            "[the_person.possessive_title] closes her eyes for a moment, remembering that moment. Her voice waivers."
+            "[the_person.possessive_title] closes her eyes for a moment, remembering that moment. Her voice wavers."
             the_person "I... I guess it felt good... but I just..."
             mc.name "Shhhh, it's okay. Remember that feeling, the sweet sensation of being touched intimately. Was it so bad?"
         elif the_person.has_broken_taboo("touching_body"):
             mc.name "You seem to like it when I touch you in other places. Your neck. Your legs. Your breasts."
             the_person "Mmm, yeah. That can feel nice."
             mc.name "Wouldn't it make sense that it would also feel good if I touched you somewhere more intimate?"
-            "[the_person.possessive_title] closes her eyes for a moment. Her voice waivers."
+            "[the_person.possessive_title] closes her eyes for a moment. Her voice wavers."
             the_person "I... I guess it would feel good, but I just..."
             mc.name "Shhh, it's okay. It's a natural progression of being touched in more and more intimate areas. Would that be so bad?"
         elif the_person.has_broken_taboo("touching_penis"):
@@ -89,7 +89,7 @@ label train_dealbreaker_fingering_label(the_person):
             mc.name "Remember how good you made me feel, when you wrapped your hand around my cock and stroked it."
             the_person "Mmm, yeah. It feels nice in my hand..."
             mc.name "You made me feel so good. Would it be so bad if I touched you the same way?"
-            "[the_person.possessive_title] closes her eyes for a moment. Her voice waivers."
+            "[the_person.possessive_title] closes her eyes for a moment. Her voice wavers."
             the_person "I... I know it would feel good, but I just..."
             mc.name "Shhh, I just want to do for you, what you've already done for me. Would that be so bad?"
         else:
