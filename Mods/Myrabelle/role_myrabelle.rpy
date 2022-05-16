@@ -357,7 +357,7 @@ label myra_gaming_cafe_opening_label():
     $ mc.business.change_funds(-20)
     "You spend a few minutes and buy the game. You've been playing for a while now though and you decide to be done for now."
     "The two girls are talking as you close the game down."
-    alexia "This is going to be great. I think I'll start coming her to play on the weekends. The computers are way better than mine, and being around other people is great!"
+    alexia "This is going to be great. I think I'll start coming here to play on the weekends. The computers are way better than mine, and being around other people is great!"
     the_person "It'll be fun having you around Blonde Cupcake! We'll be closed on Mondays and Tuesdays, but we have extended hours on the weekends!"
     $ alexia.set_schedule(gaming_cafe, the_days = [5,6], the_times = [2,3]) #Alexia plays at the cafe on weekends.
     mc.name "I need to get going, but this has been fun."
@@ -1184,26 +1184,6 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
 
 ###Sluttiness story labels
 init -2 python:
-    def myra_bigger_tits_intro_requirement(the_person):
-        if the_person.sluttiness >= 40 and myra_at_cafe():
-            if mc.business.days_since_event("myra_bigger_tits_suggestion_day") > 7:
-                return True
-        return False
-
-    def myra_bigger_tits_serum_requirement(the_person):
-        if myra_wants_bigger_tits() and not myra.has_large_tits():
-            if myra_at_cafe():
-                if mc.inventory.has_serum_with_trait(breast_enhancement):
-                    return True
-                else:
-                    return "Requires serum with Breast Enhancement Trait"
-        return False
-
-    def myra_bigger_tits_final_requirement(the_person):
-        if myra.has_large_tits() and myra_at_cafe():
-            return True
-        return False
-
     def myra_distracted_gaming_requirement(the_person):
         if the_person.sluttiness >= 20 and myra_at_cafe():
             return True
@@ -1232,23 +1212,7 @@ init -2 python:
             return True
         return False
 
-    def myra_blowjob_training_intro_requirement(the_person):
-        if myra_alexia_teamup_scene.get_stage() >= 2:
-            if myra_at_cafe():
-                return True
-        return False
 
-    def myra_blowjob_training_progress_requirement(the_person):
-        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train")  >= 7:
-            return True
-        mc.business.set_event_day("myra_bj_train", override = False)
-        return False
-
-    def myra_blowjob_training_final_requirement(the_person):
-        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train")  >= 7:
-            return True
-        mc.business.set_event_day("myra_bj_train", override = False)
-        return False
 
     def myra_adult_gaming_intro_requirement(the_person):
         if the_person.sluttiness >= 80:
@@ -1265,16 +1229,11 @@ init -2 python:
         return False
 
 init 3 python:
-    myra_bigger_tits_intro = Action("Myra Wants Bigger Tits", myra_bigger_tits_intro_requirement, "myra_bigger_tits_intro_label")
-    myra_bigger_tits_serum = Action("Give Serum for Bigger Tits", myra_bigger_tits_serum_requirement, "myra_bigger_tits_serum_label")
-    myra_bigger_tits_final = Action("Myra Gets Large Tits", myra_bigger_tits_final_requirement, "myra_bigger_tits_final_label")
+
     myra_distracted_gaming = Action("Myra Distracts Her Opponents", myra_distracted_gaming_requirement, "myra_distracted_gaming_label")
     myra_lewd_gaming = Action("Myra Plays Lewd Games", myra_lewd_gaming_requirement, "myra_lewd_gaming_label")
     myra_lewd_game_fuck_intro = Action("Myra Game Reenactment", myra_lewd_game_fuck_intro_requirement, "myra_lewd_game_fuck_intro_label")
     myra_lewd_game_fuck = Action("Lewd Game Reenactment", myra_lewd_game_fuck_requirement, "myra_lewd_game_fuck_label")
-    myra_blowjob_training_intro = Action("Myra Needs Help", myra_blowjob_training_intro_requirement, "myra_blowjob_training_intro_label")
-    myra_blowjob_training_progress = Action("Develop Myra Orally", myra_blowjob_training_progress_requirement, "myra_blowjob_training_progress_label")
-    myra_blowjob_training_final = Action("Develop Myra Orally", myra_blowjob_training_final_requirement, "myra_blowjob_training_final_label")
     myra_adult_gaming_intro = Action("Myra Wants Lewd Cafe", myra_adult_gaming_intro_requirement, "myra_adult_gaming_intro_label")
     myra_adult_gaming_opening = Action("Myra Opens Lewd Cafe", myra_adult_gaming_opening_requirement, "myra_adult_gaming_opening_label")
     myra_harem_entry = Action("Harem: Myra", myra_harem_entry_requirement, "myra_harem_entry_label")
@@ -1512,8 +1471,6 @@ label myra_lewd_game_fuck_label(the_person):    #Repeatable game reenactment sce
     call advance_time from _call_advance_myra_lewd_fuck_02
     return
 
-
-
 label myra_adult_gaming_intro_label(the_person):    #80 sluttiness event. requires finishing her love story, Myra wabts to open adults only section of the cafe.
     "[the_person.title] asks MC for some feedback on an idea. Want's to know his opinion because he is sponsor and scared she will lose money."
     "She wants to open an adults only lewd section to the gaming cafe. Want's to know what MC thinks about it."
@@ -1557,7 +1514,7 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
     the_person "Alright, got it ready..."
     if persistent.always_ask_condom or the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50 or the_person.has_taboo("condomless_sex"):
         $ condom_threshold = the_person.get_no_condom_threshold()
-        if the_person.has_breeding_fetish():
+        if the_person.has_breeding_fetish() or breeding_fetish_intro:
             the_person "Don't even think about wearing a condom. Hopefully the game has you finish deep inside of me..."
             $ the_person.change_arousal(10)
             $ mc.change_locked_clarity(20)
@@ -1642,19 +1599,23 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
     else:   #MC is cumming
         $ cum_target = None
         mc.name "Fuck. I'm gonna cum!"
-        # if the_person.has_breeding_fetish() and renpy.random.randint(0,100) < 60:   #She pretends to drop the mouse to force the MC to cum inside her.
-        #     "Suddenly, the wireless mouse she was holding clatters across the floor."
-        #     the_person "Ohhhh noooooo. I dropped the mouse. Guess you'd better just cum inside me then!"
-        #     "Her voice portrays absolutely no emotion. She obviously dropped it on purpose."
-        #     "That's fine with you though, time to finish!"
-        #     $ cum_target = "cum_inside_breeding"
-        # else:
-        "You hear [the_person.possessive_title] click the mouse. You look over at the screen to see how the sims finish."
         $ cum_target = get_random_from_list(["cum_inside", "face", "tits", "ass", "swallow"])
+        if breeding_fetish_intro or (the_person.has_breeding_fetish()and renpy.random.randint(0,100) < 60): #60 chance she makes you cum inside if she has a breeding fetish.
+            "Suddenly, the wireless mouse she was holding clatters across the floor."
+            the_person "Ohhhh noooooo. I dropped the mouse. Guess you'd better just cum inside me then!"
+            "Her voice is thick with lust and need. She obviously dropped it on purpose."
+            "That's fine with you though, time to breed this slut!"
+            $ cum_target = "cum_inside_breeding"
+        else:
+            "You hear [the_person.possessive_title] click the mouse. You look over at the screen to see how the sims finish."
         if cum_target == "cum_inside":
             "You watch as the sims keep going at it. The male sim moans and it is clear that he is finishing inside the female sim."
-            if the_person.has_breeding_fetish():
+            if the_person.has_breeding_fetish() or breeding_fetish_intro:
                 the_person "Oh fuck yes cum inside me [the_person.mc_title]!!!"
+                if the_person.knows_pregnant():
+                    the_person "Flood my womb with your seed! Over and over!"
+                else:
+                    the_person "Knock me up and make me your cow! Cum inside me over and over until we make a baby!"
             elif the_person.wants_creampie():
                 the_person "Oh my god, cum inside me [the_person.mc_title]!"
             elif mc.condom:
@@ -1673,19 +1634,61 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
                 $ current_position.redraw_scene(the_person)
                 "You fire wave after wave of cum into [the_person.possessive_title]'s unprotected cunt."
             "Neither of you move for several seconds. Eventually though, your cock starts to get too soft to stay inside her, so you slowly pull apart."
-            $ the_person.draw_person()
-            "You both stand up."
-            if mc.condom:
-                the_person "Wow, that thing looks full... that's just impressive."
-                $ the_person.change_obedience(2)
-                $ mc.condom = False
-            else:
-                "Your cum is slowly dripping down the inside of her legs."
-                if the_person.wants_creampie():
-                    the_person "Wow... that was so good..."
+            if the_person.has_breeding_fetish() or breeding_fetish_intro:
+                if current_position == missionary:
+                    "As you pull off her, [the_person.title] lifts her legs up a bit, angle her hips up to keep your cum inside."
                 else:
-                    the_person "Oh my god... I can't believe I let that go so far..."
-                    "She looks a little concerned, but there isn't much she can do about it now."
+                    the_person "Hang on!..."
+                    $ the_person.draw_person(position = "missionary")
+                    "[the_person.possessive_title] lays down on the couch, then lifts her legs, angling her hips up to keep as much cum inside as possible."
+                "You stand up and look down at your cum drink breeding stock."
+                $ the_person.change_happiness(20)
+                if breeding_fetish_intro:
+                    return
+                else:
+                    the_person "Fuck, another load of your fertile cum..."
+            else:
+                $ the_person.draw_person()
+                "You both stand up."
+                if mc.condom:
+                    the_person "Wow, that thing looks full... that's just impressive."
+                    $ the_person.change_obedience(2)
+                    $ mc.condom = False
+                else:
+                    "Your cum is slowly dripping down the inside of her legs."
+
+                    elif the_person.wants_creampie():
+                        the_person "Wow... that was so good..."
+                    else:
+                        the_person "Oh my god... I can't believe I let that go so far..."
+                        "She looks a little concerned, but there isn't much she can do about it now."
+        elif cum_target == "cum_inside_breeding":
+            "You growl at [the_person.possessive_title]."
+            mc.name "Get ready slut! I'm about to fill you up like a bitch in heat!"
+            the_person "Oh fuck yes cum inside me [the_person.mc_title]!!!"
+            if the_person.knows_pregnant():
+                the_person "Flood my womb with your seed! Over and over!"
+            else:
+                the_person "Knock me up and make me your cow! Cum inside me over and over until we make a baby!"
+            $ renpy.say(None, myra_random_positions_cum_inside_desc[current_position.name])
+            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
+            $ the_person.call_dialogue("cum_vagina")
+            $ the_person.cum_in_vagina()
+            $ current_position.redraw_scene(the_person)
+            "You fire wave after wave of cum into [the_person.possessive_title]'s unprotected cunt."
+            "Neither of you move for several seconds. Eventually though, your cock starts to get too soft to stay inside her, so you slowly pull apart."
+            if current_position == missionary:
+                "As you pull off her, [the_person.title] lifts her legs up a bit, angle her hips up to keep your cum inside."
+            else:
+                the_person "Hang on!..."
+                $ the_person.draw_person(position = "missionary")
+                "[the_person.possessive_title] lays down on the couch, then lifts her legs, angling her hips up to keep as much cum inside as possible."
+            "You stand up and look down at your cum drink breeding stock."
+            $ the_person.change_happiness(20)
+            if breeding_fetish_intro:
+                return
+            else:
+                the_person "Fuck, another load of your fertile cum..."
 
         elif cum_target == "face":
             "You watch as the female sim suddenly gets on her knees. The screen zooms in a bit as the male sim starts spraying her face down with cum."
@@ -1831,6 +1834,52 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
 
 # Obedience related events
 
+init -2 python:
+    def myra_bigger_tits_intro_requirement(the_person):
+        if the_person.obedience >= 120 and myra_at_cafe():
+            if mc.business.days_since_event("myra_bigger_tits_suggestion_day") > 7:
+                return True
+        return False
+
+    def myra_bigger_tits_serum_requirement(the_person):
+        if myra_wants_bigger_tits() and not myra.has_large_tits():
+            if myra_at_cafe():
+                if mc.inventory.has_serum_with_trait(breast_enhancement):
+                    return True
+                else:
+                    return "Requires serum with Breast Enhancement Trait"
+        return False
+
+    def myra_bigger_tits_final_requirement(the_person):
+        if myra.has_large_tits() and myra_at_cafe():
+            return True
+        return False
+
+    def myra_blowjob_training_intro_requirement(the_person):
+        if the_person.obedience >= 140:
+            if myra_at_cafe():
+                return True
+        return False
+
+    def myra_blowjob_training_progress_requirement(the_person):
+        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train") >= 7 and the_person.obedience >= 160:
+            return True
+        mc.business.set_event_day("myra_bj_train", override = False)
+        return False
+
+    def myra_blowjob_training_final_requirement(the_person):
+        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train")  >= 7 and the_person.obedience >= 180::
+            return True
+        mc.business.set_event_day("myra_bj_train", override = False)
+        return False
+
+init 3 python:
+    myra_bigger_tits_intro = Action("Myra Wants Bigger Tits", myra_bigger_tits_intro_requirement, "myra_bigger_tits_intro_label")
+    myra_bigger_tits_serum = Action("Give Serum for Bigger Tits", myra_bigger_tits_serum_requirement, "myra_bigger_tits_serum_label")
+    myra_bigger_tits_final = Action("Myra Gets Large Tits", myra_bigger_tits_final_requirement, "myra_bigger_tits_final_label")
+    myra_blowjob_training_intro = Action("Myra Needs Help", myra_blowjob_training_intro_requirement, "myra_blowjob_training_intro_label")
+    myra_blowjob_training_progress = Action("Develop Myra Orally", myra_blowjob_training_progress_requirement, "myra_blowjob_training_progress_label")
+    myra_blowjob_training_final = Action("Develop Myra Orally", myra_blowjob_training_final_requirement, "myra_blowjob_training_final_label")
 
 label myra_bigger_tits_intro_label(the_person):        #120 obedience event. If MC suggested bigger tits in love story, myra is interested now.
     $ the_person.draw_person()
@@ -1884,44 +1933,93 @@ label myra_bigger_tits_final_label(the_person):       #If her tits are bigger, s
     the_person "Sorry, I just had to do this. Check these out!"
     $ the_person.strip_to_tits(position = "stand3")
     $ mc.change_locked_clarity(30)
-    "[the_person.possessive_title] quicky strips off her top, revealing a generous set of tits."
-    the_person "They're amazing! And they feel completely natural! Come, feel this..."
-    "She grabs your hand and drags it to her chest, forcing you to feel her up."
-    the_person "See? And..."
-    $ the_person.change_arousal(20)
-    the_person "And... they're so sensitive too..."
-    $ the_person.increase_opinion_score("showing her tits")
-    $ mc.change_locked_clarity(30)
-    "You spend several seconds feeling up her new and improved rack. You admit, they are impressive."
-    $ mc.change_arousal(20)
-    "You can feel yourself getting excited as she starts to whimper from your touch."
-    the_person "They are awesome, right?"
-    "[the_person.possessive_title] looks down and notices your erection."
-    the_person "Hey... you know... I've never had big enough tits to like..."
-    "She looks at you for a moment."
-    the_person "Want to fuck them?"
-    mc.name "Yes. Yes I do."
-    $ mc.change_locked_clarity(30)
-    the_person "Hell yeah let's do it. I bet it feels amazing..."
-    $ the_person.draw_person(position = "blowjob")
-    "As [the_person.possessive_title] gets down on her knees, you whip out your cock. She slides over to you."
-    the_person "I've like, never done this so... you might have to help me a bit..."
-    mc.name "I'm sure you'll do great."
-    "With your cock in her hand, she slides the tip of your cock into her cleavage. Your erection quietly disappears into her ample busom."
-    "Her soft tit flesh feels great wrapped around you."
-    $ the_person.change_arousal(10)
-    $ mc.change_locked_clarity(30)
-    the_person "Wow, it feels so hot... God this is naughty... I love it!"
-    "[the_person.title] starts to move her chest up and down, stroking your cock."
-    call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_myra_tits_reveal_1
-    "When you finish, [the_person.possessive_title] stands up."
-    $ the_person.draw_person()
-    the_person "Wow... We'll have to do that again sometime."
-    mc.name "Yes, anytime you need a cock between your tits, hit me up."
-    the_person "Ha! Okay 'coach'. I'll keep that in mind! I'd better get cleaned up and get back to work."
+    if the_person.sluttiness >= 40 or the_person.love > 60:
+        "[the_person.possessive_title] quicky strips off her top, revealing a generous set of tits."
+        the_person "They're amazing! And they feel completely natural! Come, feel this..."
+        "She grabs your hand and drags it to her chest, forcing you to feel her up."
+        the_person "See? And..."
+        $ the_person.change_arousal(20)
+        the_person "And... they're so sensitive too..."
+        $ the_person.increase_opinion_score("showing her tits")
+        $ mc.change_locked_clarity(30)
+        "You spend several seconds feeling up her new and improved rack. You admit, they are impressive."
+        $ mc.change_arousal(20)
+        "You can feel yourself getting excited as she starts to whimper from your touch."
+        the_person "They are awesome, right?"
+        "[the_person.possessive_title] looks down and notices your erection."
+        the_person "Hey... you know... I've never had big enough tits to like..."
+        "She looks at you for a moment."
+        the_person "Want to fuck them?"
+        mc.name "Yes. Yes I do."
+        $ mc.change_locked_clarity(30)
+        the_person "Hell yeah let's do it. I bet it feels amazing..."
+        $ the_person.draw_person(position = "blowjob")
+        "As [the_person.possessive_title] gets down on her knees, you whip out your cock. She slides over to you."
+        the_person "I've like, never done this so... you might have to help me a bit..."
+        mc.name "I'm sure you'll do great."
+        "With your cock in her hand, she slides the tip of your cock into her cleavage. Your erection quietly disappears into her ample busom."
+        "Her soft tit flesh feels great wrapped around you."
+        $ the_person.change_arousal(10)
+        $ mc.change_locked_clarity(30)
+        the_person "Wow, it feels so hot... God this is naughty... I love it!"
+        "[the_person.title] starts to move her chest up and down, stroking your cock."
+        call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_myra_tits_reveal_1
+        "When you finish, [the_person.possessive_title] stands up."
+        $ the_person.draw_person()
+        the_person "Wow... We'll have to do that again sometime."
+        mc.name "Yes, anytime you need a cock between your tits, hit me up."
+        the_person "Ha! Okay 'coach'. I'll keep that in mind! I'd better get cleaned up and get back to work."
+    else:
+        "[the_person.title] quickly pulls off her top, giving you an amazing view of her tits."
+        mc.name "Damn. They look amazing."
+        the_person "Yeah... they feel so sensitive too..."
+        mc.name "Is that so?"
+        "You step close to her, she takes a half step back."
+        the_person "That's... what are you doing?"
+        mc.name "I want to feel them for myself. You don't mind, right?"
+        the_person "I suppose not... You did give me the drugs to do this I guess..."
+        "You step forward and again. You reach forward with both hands and take hold of her twin peaks."
+        "They feel hot and soft to the touch. She whimpers a bit as you feel her up."
+        $ the_person.change_arousal(20)
+        the_person "They are amazing. You should proud to show these girls off."
+        $ the_person.increase_opinion_score("showing her tits")
+        $ mc.change_locked_clarity(30)
+        the_person "Mmm... yeah I think so..."
+        "You pinch her nipples, then roll them between your thumb and fingers."
+        $ the_person.change_arousal(20)
+        the_person "Oh fuck they are so sensitive too..."
+        $ mc.change_arousal(20)
+        mc.name "Yeah you like it when I touch you like this don't you."
+        the_person "Mmm... I do..."
+        "You spend several seconds with [the_person.possessive_title], just enjoying the weight and softness of her improved rack."
+        $ mc.change_arousal(20)
+        mc.name "Damn. Now I'm all turned on. Why don't you get on your knees, let's see how they feel wrapped around my cock."
+        "[the_person.title] looks at you, conflicted. This is a little outside her comfort zone."
+        the_person "I... I don't know..."
+        mc.name "Come on now. I made this possible, don't I deserve a little reward? I gave you the serums, free of charge."
+        the_person "That's true."
+        "She thinks about it for a few more moments."
+        the_person "Fuck it. I was wondering what it would be like to do this anyway. Might as well be with you!"
+        $ the_person.draw_person(position = "blowjob")
+        "As [the_person.possessive_title] gets down on her knees, you whip out your cock. She slides over to you."
+        the_person "I've like, never done this so... you might have to help me a bit..."
+        mc.name "I'm sure you'll do great."
+        "With your cock in her hand, she slides the tip of your cock into her cleavage. Your erection quietly disappears into her ample busom."
+        "Her soft tit flesh feels great wrapped around you."
+        $ the_person.change_arousal(10)
+        $ mc.change_locked_clarity(30)
+        the_person "Wow, it feels so hot... God this is naughty... I love it!"
+        "[the_person.title] starts to move her chest up and down, stroking your cock."
+        call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_myra_tits_reveal_2
+        "When you finish, [the_person.possessive_title] stands up."
+        $ the_person.draw_person()
+        mc.name "Damn, that was amazing. We'll have to do this again sometime."
+        the_person "That was surprisingly pleasant. I wouldn't mind doing it again!"
+    $ the_person.increase_opinion_score("giving tit fucks")
     $ the_person.apply_planned_outfit()
     $ myra.event_triggers_dict["wants_bigger_tits"] = False
     $ clear_scene()
+    "You quietly exit the stock room. "
     return
 
 label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob training after sessions with Alexia. Requires 140 obedience
@@ -2079,6 +2177,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     "You step out of the stock room. The gaming nights your are having with [the_person.possessive_title] and [alexia.title] are paying off."
     "A week ago, [the_person.title] would never even consider sucking you off, but now she seems interested, if only to show up her friend."
     "You make a mental note to check back up with her in a week or so and see how her technique is progressing."
+    "She might also be more willing to further her blowjob skills if you increase her obedience as well..."
     call advance_time from _call_advance_myra_bj_train_01_time_
     return
 
@@ -2102,6 +2201,7 @@ label myra_blowjob_training_final_label(the_person):
     $ myra.event_triggers_dict["blowjob_train_finish"] = True
     $ myra.add_unique_on_room_enter_event(myra_adult_gaming_intro)
     return  #180 Obedience
+
 #Myra related wrappers
 init 3 python:
     def myra_intro_complete():

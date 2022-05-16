@@ -9,7 +9,9 @@ init 1 python:
         return False
 
     def breeding_fetish_myra_intro_requirement():
-        pass
+        if time_of_day == 4:
+            if mc.energy >80 and myra.energy > 80:
+                return True
         return False
 
     def anal_fetish_myra_intro_requirement():
@@ -38,41 +40,59 @@ label exhibition_fetish_myra_intro_label():
 label breeding_fetish_myra_intro_label(the_person):
     $ the_person = myra
     $ the_person.arousal = 40
-    "As you walk into [mc.location.name], you notice [the_person.title]. She notices you also and approaches."
-    $ the_person.draw_person()
-    the_person "Hello [the_person.mc_title]! I'm glad to see you!"
-    if the_person.tits_visible():
-        "You take a moment to look at her. Her cheeks are flushed, and her exposed nipples look hard as diamond. She is definitely aroused."
+    "You feel your phone go off when you get a notification. It's a message from [the_person.possessive_title]"
+    $ mc.start_text_convo(the_person)
+    the_person "Hey, can you PLEASE come to the cafe tonight? It'll be worth it... I promise!"
+    mc.name "Oh? What do you need?"
+    the_person "It involves The Sims. It'll be worth it, just cum!"
+    "You can't help but notice her spelling."
+    mc.name "Alright, I'm on my way."
+    $ mc.end_text_convo()
+    $ mc.change_location(gaming_cafe)
+    $ mc.location.show_background()
+    $ the_person.apply_outfit(special_fetish_nude_outfit)
+    "When you get to the gaming cafe, you find it unlocked. You let yourself in, then lock the door."
+    if lewd_cafe_open():
+        "You head to the back and into the adult's only section."
     else:
-        "You take a moment to look at her. Her cheeks seem flushed... Her nipples are poking against the fabric of her outfit. Is she... Aroused?"
-    mc.name "It's good to see you also."
-    the_person "Hey, do you think you could help me with something? I have something I need help with that only you can help me with!"
-    mc.name "I suppose."
-    $ the_person.draw_person(position = "walking_away")
-    "You follow [the_person.possessive_title] back to the adults only section of the gaming cafe. You notice her swinging her hips a bit more than usual as you follow her."
-    "She stops at one of the computers."
+        "You head to the back where you've played a lewd version of The Sims with [the_person.title]"
     $ the_person.draw_person()
-    the_person "I want to show you something really quick... can I sit on your lap?"
-    mc.name "Sure."
-    "You sit down at the computer and [the_person.possessive_title] sits on your lap. She sits all the way back, with her ass against your crotch. She wiggles her ass a bit as she pulls up a website."
-    the_person "I found this game recently, and I can't stop playing it..."
-    "The game screen loads up. The title screen displays proudly: 'Breeding Simulator'"
-    "She loads up her save game. When it loads you see her character, a very pregnant woman."
-    the_person "God, isn't she beautiful?"
-    if the_person.pregnancy_is_visible():
-        the_person "Being pregnant is so amazing, all the changes your body goes through..."
-    elif the_person.knows_pregnant():
-        the_person "I can't wait to look like that... god it looks amazing..."
+    the_person "Hey! You came!"
+    mc.name "Of course. And I can see I am a bit overdressed. Are we playing The Sims tonight?"
+    "You start to undress."
+    the_person "Yeah! I don't know why, but I'm feeling pretty lucky about the way the game finishes tonight..."
+    "[the_person.possessive_title] is definitely acting a bit odd. She is pretty forward about things, so you shouldn't be surprised she called you here this late."
+    "However, you can't help shake the feeling that she has rigged this somehow."
+    "You've been dosing her with reproduction proclivity serums recently. Maybe she is developing a breeding fetish?"
+    "You step out of the last of your clothes and look up. [the_person.possessive_title] is looking at your hungrily."
+    the_person "Fuck you look so... virile... let's get this going!"
+    call myra_sex_roullette_session_label(the_person, breeding_fetish_intro = True) from _myra_breeding_fetish_intro_session_01
+    "When you finish, she just stands there, running her hands over her belly."
+    "She obviously intended for you to cum inside her from the moment she texted you."
+    if the_person.knows_pregnant():
+        the_person "No wonder I'm pregnant... there is nothing as amazing as taking a hot load of cum."
     else:
-        the_person "I want to get knocked up so bad. It looks so amazing..."
-    "[the_person.title]'s ass is starting to wiggle back and forth against your crotch. It feels good..."
-    the_person "For some reason my hormones have been going crazy lately! It seems like just about the only thing I can think about, getting you to fuck me and cum inside me and knock me up!"
-    "You look down and realize that with one hand she has started touching herself."
-    
-
-
+        the_person "Oh god, that was fucking amazing. Do you think... maybe it really knocked me up?"
+    "It seems obvious now. After giving her multiple serums, [the_person.possessive_title] has developed a breeding fetish."
+    "Even now you see her looking at your cock, trying to decide if she can milk another load from it."
+    mc.name "You love it, don't you? You want to be by personal cum dumpster, to take my loads anytime and anywhere I want you to?"
+    the_person "Oh god yes..."
+    mc.name "You're going to love it, aren't you? When you show up for a tournament, your belly round, your big tits leaking milk. Everyone there is gonna know what a needy cunt you have."
+    the_person "Yes!"
+    mc.name "Everyone there is going to know you are hopeless, thirsty slut. You long for your master's cum sloshing around in your fertile womb all day long."
+    "[the_person.possessive_title]'s knees start to buckle for a second."
+    the_person "Yes please! Breed me again PLEASE?"
+    mc.name "I plan to. Keep your cunt ready for me, anytime I want to dump my load inside you."
+    the_person "Yes! Don't worry, I'll be ready!"
+    "You say goodbye to [the_person.title]."
+    "[the_person.possessive_title] now has a fetish to get bred by you!"
+    "If you re-enact a scene from The Sims in the future, she may also decide to force you to cum inside her too..."
     $ add_breeding_fetish(the_person)
+    $ mc.change_location(bedroom)
+    $ mc.location.show_background()
+    "You walk home and collapse into your bed. You can't wait to fill [the_person.possessive_title]'s needy cunt with your cum, over and over again."
     return
+
 
 label anal_fetish_myra_intro_label():
     $ the_person = myra

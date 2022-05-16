@@ -164,6 +164,8 @@ init -1 python:
         #     pass
         # elif person is sakari and False:
         #     pass
+        elif person is myra and myra_lewd_game_fuck_avail():
+            mc.business.add_mandatory_crisis(breeding_fetish_myra_intro)
         elif person.is_employee():
             breeding_fetish_employee_intro = Fetish_Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "breeding")
             mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
