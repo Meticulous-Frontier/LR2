@@ -1657,7 +1657,7 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
                 else:
                     "Your cum is slowly dripping down the inside of her legs."
 
-                    elif the_person.wants_creampie():
+                    if the_person.wants_creampie():
                         the_person "Wow... that was so good..."
                     else:
                         the_person "Oh my god... I can't believe I let that go so far..."
@@ -1868,7 +1868,7 @@ init -2 python:
         return False
 
     def myra_blowjob_training_final_requirement(the_person):
-        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train")  >= 7 and the_person.obedience >= 180::
+        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train")  >= 7 and the_person.obedience >= 180:
             return True
         mc.business.set_event_day("myra_bj_train", override = False)
         return False
