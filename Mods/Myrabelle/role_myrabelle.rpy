@@ -1215,13 +1215,13 @@ init -2 python:
 
 
     def myra_adult_gaming_intro_requirement(the_person):
-        if the_person.sluttiness >= 80:
+        if the_person.sluttiness >= 80 and mc.business.days_since_event("myra_lewd_game_fuck") >= 5:
             if myra_is_expanding_business() and myra_at_cafe():
                 return True
         return False
 
     def myra_adult_gaming_opening_requirement():
-        if myra_at_cafe() and myra.event_triggers_dict.get("adult_cafe_opening_day", 9999) + 14 <= day:
+        if myra_at_cafe() and mc.business.days_since_event("adult_cafe_opening_day") >= 14:
             return True
         return False
 
@@ -1439,6 +1439,7 @@ label myra_lewd_game_fuck_intro_label(the_person):
     "You can now visit [the_person.possessive_title] at the gaming cafe in the evening and she will let you fuck her in random positions, even letting you finish wherever it shows on the game!"
     $ myra.event_triggers_dict["lewd_game_fuck"] = True
     $ clear_scene()
+    $ mc.business.set_event_day("myra_lewd_game_fuck", override = True)
     #$ myra.add_unique_on_room_enter_event(myra_lewd_gaming)
     call advance_time from _call_advance_myra_lewd_fuck_01
     return
@@ -1467,6 +1468,7 @@ label myra_lewd_game_fuck_label(the_person):    #Repeatable game reenactment sce
     the_person "Yeah... I'm going to get cleaned up. See you [the_person.mc_title]!"
     $ clear_scene()
     $ the_person.apply_planned_outfit()
+    $ myra.add_unique_on_room_enter_event(myra_adult_gaming_intro)
     "You leave the gaming cafe."
     call advance_time from _call_advance_myra_lewd_fuck_02
     return
@@ -1476,7 +1478,7 @@ label myra_adult_gaming_intro_label(the_person):    #80 sluttiness event. requir
     "She wants to open an adults only lewd section to the gaming cafe. Want's to know what MC thinks about it."
     "MC thinks it is a great idea. She says check back at a later time."
     $ mc.business.add_mandatory_crisis(myra_adult_gaming_opening)
-    $ myra.event_triggers_dict["adult_cafe_opening_day"] = day
+    $ mc.business.set_event_day("adult_cafe_opening_day", override = True)
     return
 
 label myra_adult_gaming_opening_label():
@@ -1830,6 +1832,55 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
     $ del cum_target
     $ del current_position
     return True
+
+#End game sexual events
+init -2 python:
+    def myra_breeding_on_stream_requirement():
+        if myra.has_breeding_fetish() and myra.has_exhibition_fetish() and myra.is_highly_fertile():    #Pretty stringent requirements
+            if time_of_day == 3:
+                return True
+        return False
+
+
+label myra_breeding_on_stream_label():    #Requires breeding and exhibition fetish
+    $ the_person = myra
+    $ the_person.arousal = 40
+    "You feel your phone vibrate. It's a message from [the_person.possessive_title]."
+    $ mc.start_text_convo(the_person)
+    the_person "Hey! Can you come to the cafe? I need your help with something."
+    mc.name "What help do you need?"
+    the_person "Some of my streaming fans have been requesting something. I need your help with it though."
+    the_person "As a hint, I am super fertile right now ;)"
+    mc.name "I'll be right there."
+    $ mc.end_text_convo()
+    "Sounds like [the_person.title] wants to get bred on stream... seems to good to pass up!"
+    "You head over to the game cafe. Then make your way to the adults only section."
+    $ mc.change_location(gaming_cafe)
+    $ mc.location.show_background()
+    $ the_person.apply_outfit(special_fetish_nude_outfit)
+    "When you get there, you take a quick look around, then spot [the_person.possessive_title]. It appears she has already started her stream..."
+    $ the_person.draw_person(position = "walking_away")
+    "She is laying on a couch, facing a screen while she holds a controller. She is naked, and her ass is ripe and ready to be fucked."
+    "To one side, you see a computer screen where she has her streaming setup. There is a side angle view of her, showing off her curves on the couch."
+    the_person "Fuck yeah! Got you bitch!"
+    "As you start walking towards her, she manages to score a kill in the shooter she is playing. You know exactly what part you play in this stream."
+    "You have no doubt she really is fertile right now. You are about to knock her up live on stream."
+    "You take your clothes off, then slowly approach her from behind."
+    "You run your hand up her legs as you climb onto the couch. She peaks at the screen and sees that it's you, but otherwise doesn't let herself react at all."
+    "Her legs part just the slightest you run you hand up between them. You can feel the heat and humidity coming off her cunt when you hand gets to it."
+    "[the_person.title] is turned on and ready to fuck. You give her ass a little spank then climb onto her."
+    "The only indication she gives of what is about to happen, she says on the headset to her teammates."
+    if the_person.is_girlfriend():
+        the_person "Hey, sorry if I seem distracted for a bit. My boyfriend is her and he is going to knock me up now. No no, I'm going to keep playing."
+    else:
+        the_person "Hey, sorry my sperm donor is here and he's about to knock me up, sorry if I seem a bit distracted. No no, I'm going to keep playing."
+
+
+
+    return
+
+
+
 
 
 # Obedience related events
@@ -2199,7 +2250,7 @@ label myra_blowjob_training_final_label(the_person):
     "She struggles for a bit, but finally manages to let go and you face fuck her."
     "At the end, she asks MC to help Alexia win gaming night this week, she wants to show off her face fucking skill to her friend."
     $ myra.event_triggers_dict["blowjob_train_finish"] = True
-    $ myra.add_unique_on_room_enter_event(myra_adult_gaming_intro)
+
     return  #180 Obedience
 
 #Myra related wrappers
@@ -2299,7 +2350,7 @@ init 3 python:
         return mc.inventory.has_serum_with_trait(energy_drink_serum_trait)
 
     def myra_serum_is_acceptable_energy_drink(the_serum):   #Make this a function so that as things progress we can loosen energy drink requirements.
-        if the_serum.has_trait(energy_drink_serum_trait) and the_serum.attention <= 2:
+        if the_serum.has_trait(energy_drink_serum_trait) and the_serum.attention <= 3:
             return True
         return False
 
