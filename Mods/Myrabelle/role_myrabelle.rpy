@@ -1225,7 +1225,7 @@ init -2 python:
             return True
         return False
 
-    def myra_harem_entry_requirement():
+    def myra_harem_entry_requirement(the_person):
         return False
 
 init 3 python:
