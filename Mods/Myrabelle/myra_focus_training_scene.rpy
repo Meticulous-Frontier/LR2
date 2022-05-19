@@ -247,7 +247,10 @@ label myra_focus_progression_scene_intro_4(the_group):
     mc.name "Don't you mean focus training?"
     the_person "Of course! I mean, if I can win a game while your big dick is in my ass, nothing could possibly get in my way!"
     "[the_person.title] looks towards the back of the cafe and nods towards it."
-    the_person "The VIP section in the back is closed. Come on... you know you want to!"
+    if lewd_cafe_open():
+        the_person "This is why I made the adult's only section. Come on, you know you want to!"
+    else:
+        the_person "The section in the back is closed. Come on... you know you want to!"
     $ mc.change_locked_clarity(50)
     "[the_person.possessive_title] is eager to drag you to the back of the gaming cafe and stuff her ass with your cock while she plays a game."
     return
@@ -255,7 +258,7 @@ label myra_focus_progression_scene_intro_4(the_group):
 label myra_focus_progression_scene_choice(the_group):
     $ the_person = the_group[0]
     $ the_person.draw_person()
-    "Do you want to stick around and help [the_person.title] traing her focus?"
+    "Do you want to stick around and help [the_person.title] train her focus?"
     menu:
         "Training" if mc.energy >= 60:
             pass
@@ -357,7 +360,8 @@ label myra_focus_trans_scene_2(the_group):
 
 label myra_focus_trans_scene_3(the_group):
     $ the_person = the_group[0]
-    "You walk over to the PC where [the_person.title] is sitting."
+    "You walk over to the PC where [the_person.title] is sitting. She is already naked."
+    $ the_person.strip_full_outfit(delay = 0)
     $ the_person.draw_person(position = "sitting")
     "You set her energy drink down next to her keyboard."
     "You've been enjoying her training so far, but you feel like you could enjoy it even more. You decide it is time to try and push her further."
@@ -621,10 +625,74 @@ label myra_focus_progression_scene_2(the_group, scene_transition = False):  #sit
 
 label myra_focus_progression_scene_3(the_group, scene_transition = False):  #assjob / lapdance
     $ the_person = the_group[0]
-    if myra.event_triggers_dict.get("focus_train_assjob", False):
-        pass
+    $ myra_score = 0
+    $ enemy_score = 0
+    $ myra_wins = False
+    if not scene_transition:
+        $ the_person.strip_full_outfit(delay = 0)
+        "You walk over to the PC where [the_person.title] is sitting."
+        $ the_person.draw_person(position = "sitting")
+        "You set her energy drink down next to her keyboard. She is just getting logged in and is already naked."
+        the_person "Alright, ready to do this?"
+        "[the_person.title] nervously looks around the room a little. She has picked a computer in the back corner, away from anyone else."
+        mc.name "I am. let me sit down."
+        $ the_person.draw_person(position = "standing_doggy")
+        "[the_person.possessive_title] gets up out her chair, leaving you just enough room to sit down. You give her ass a quick little spank before she can sit on your lap."
+        the_person "Mmm! Harder..."
+        "You give [the_person.title]'s ass another spank. The sound echoes around the room. Her ass wobbles enticingly."
+        $ mc.change_locked_clarity(30)
+        "She sits down on your lap."
+        $ the_person.draw_person(position = "sitting")
+        "She takes a long sip from her energy drink as she gets logged in to the game. She sighs and wiggles her hips a bit as you reach up and grope one of her tits."
+    "The countdown timer starts, and soon the fight is beginning."
+    while myra_score < 100 and enemy_score < 100:
+        $ score_str = "The score is " + str(myra_score) + " to " + str(enemy_score) + "."
+        "[score_str]"
+        call myra_focus_training_encounter(the_person) from _myra_focus_train_loop_04
+        if _return:
+            $ myra_score += renpy.random.randint(15,25)
+            $ enemy_score += renpy.random.randint(0,10)
+        else:
+            $ myra_score += renpy.random.randint(1,10)
+            $ enemy_score += renpy.random.randint(15,25)
+    if myra_score > enemy_score:
+        $ myra_wins = True
+    if myra_wins:
+        the_person "Yes! I won!"
+        $ the_person.change_happiness(3)
+    else:
+        the_person "Wow, I lost?"
+        $ the_person.change_obedience(3)
+    "[the_person.possessive_title] turns her head, but remains sitting on your lap."
+    if myra_wins:
+        mc.name "I knew you could ignore the distractions and focus. Good job."
+        "When you say 'distractions', you give her tits one last squeeze."
+        the_person "Mmm, that felt amazing."
+        mc.name "Winning? or..."
+        the_person "Yes to both."
+        if the_person.focus < 7:
+            $ the_person.change_focus(1)
+            the_person "I think... I really do feel like this has helped me train my focus better. You know?"
+            mc.name "You're right. You are getting better and better."
+        else:
+            the_person "I don't know... I feel like I've almost gotten used to it, the way you touch me, you know?"
+            "Her voice trails off a bit, but she doesn't present any alternative distraction means."
+            $ the_person.change_slut(1, 90)
+    else:
+        the_person "To be honest... I don't even care that I lost. That felt amazing."
+        mc.name "Yeah, but you need to focus better. You can have an orgasm, AND win a match. I'm sure of it!"
+        "You may have distracted her a bit too much. To help her make progress, you should probably try and make sure she wins the match."
+
+    the_person "I think I need a break."
+    mc.name "Of course. I'll see you around."
+    $ the_person.apply_outfit(the_person.planned_outfit)
     $ clear_scene()
-    call advance_time from _call_advance_myra_focus_progression_scene_adv_05
+    $ the_person.arousal = 20
+    "Having [the_person.possessive_title]'s ass cheeks wrapped around your cock is amazing. You wonder if she'll be willing to take the final step soon."
+    if the_person.sluttiness < 80:
+        "For now though, she is probably about at the limit of what she will do. You should use your serums to try and make her sluttier."
+    elif the_person.focus <= 5:
+        "She clearly has trouble focusing right now. You should try and get her focus higher before you try and take things further with her."
     return
 
 label myra_focus_progression_scene_4(the_group, scene_transition = False):  #anal
@@ -653,6 +721,9 @@ label myra_focus_training_encounter(the_person):
     $ encounter_num = renpy.random.randint(0,9) #In approximate degree of difficulty
     $ encounter_won = False
     $ base_difficulty = myra_focus_progression_scene.get_stage() * 15
+    $ light_odds_string = "Light Distraction\n{color=ff0000}{size=18}" + str(myra_calc_encounter_odds(the_person, (encounter_num + 1) * 10, base_difficulty)) + "%% Chance{/size}{/color}"
+    $ med_odds_string = "Moderate Distraction\n{color=ff0000}{size=18}" + str(myra_calc_encounter_odds(the_person, (encounter_num + 1) * 10, base_difficulty + 20)) + "%% Chance{/size}{/color}"
+    $ large_odds_string = "Large Distraction\n{color=ff0000}{size=18}" + str(myra_calc_encounter_odds(the_person, (encounter_num + 1) * 10, base_difficulty + 40)) + "%% Chance{/size}{/color}"
     if encounter_num == 0:
         "[the_person.title] is pushing the middle. The other team seem distracted, presenting her team with a 2v4."
         "This should be an easy encounter for someone as skilled as [the_person.possessive_title]."
@@ -700,8 +771,10 @@ label myra_focus_training_encounter(the_person):
 
     $ encounter_won = myra_calc_encounter_outcome(the_person, (encounter_num + 1) * 10, base_difficulty)
     if the_person.arousal > 100:
-        call  myra_focus_training_orgasm(the_person) from _myra_focus_training_orgasms_01
+        call  myra_focus_training_orgasm(the_person) from _myra_focus_training_orgasms_03
         $ encounter_won = False
+    if mc.arousal > 100 and myra_focus_progression_scene.get_stage() >= 3:
+        call myra_focus_training_mc_orgasm(the_person) from _myra_focus_train_mc_cums_01
 
     if encounter_won:
         #Wins encounter
@@ -833,7 +906,12 @@ label myra_focus_light_distraction(the_person):
             $ the_person.change_arousal(35)
             $ mc.change_locked_clarity(30)
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
-        pass
+        if the_person.arousal < 30:
+            pass
+        elif the_person.arousal < 70:
+            pass
+        else:
+            pass
     elif myra_focus_progression_scene.get_stage() == 4: #anal
         pass
     return
@@ -906,7 +984,12 @@ label myra_focus_med_distraction(the_person):
             $ the_person.change_arousal(35)
         $ mc.change_locked_clarity(30)
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
-        pass
+        if the_person.arousal < 30:
+            pass
+        elif the_person.arousal < 70:
+            pass
+        else:
+            pass
     elif myra_focus_progression_scene.get_stage() == 4: #anal
         pass
     return
@@ -976,7 +1059,12 @@ label myra_focus_heavy_distraction(the_person):
             $ the_person.change_arousal(45)
         $ mc.change_locked_clarity(30)
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
-        pass
+        if the_person.arousal < 30:
+            pass
+        elif the_person.arousal < 70:
+            pass
+        else:
+            pass
     elif myra_focus_progression_scene.get_stage() == 4: #anal
         pass
     return
@@ -1033,6 +1121,13 @@ label myra_focus_training_orgasm(the_person):
             "She looks up and surveys the situation on her screen."
     return
 
+label myra_focus_training_mc_orgasm(the_person):
+    if myra_focus_progression_scene.get_stage() == 3:   #assjob
+        pass
+    elif myra_focus_progression_scene.get_stage() == 4: #anal
+        pass
+    pass
+
 init 4 python:
     #Encounter difficulty should be up to 100, depending on the scenario, with dif_modifier up to 100 also, for hardcore anal sex or impending orgasm.
     #Planned max stats of 8 focus and 6 foreplay should give about 80% success rate at full difficulty, and about 50% for easy encounters with zero stats.
@@ -1051,7 +1146,7 @@ init 4 python:
     def myra_calc_encounter_odds(the_person, the_difficulty, dif_modifier = 0):
         if the_person.arousal >= 100:   #Almost impossible to focus during impending orgasm.
             dif_modifier = 100
-        encounter_dif = difficulty + dif_modifier
+        encounter_dif = the_difficulty + dif_modifier
         skill_stat = (the_person.focus + the_person.sex_skills["Foreplay"]) * 10 #Max 140, min 20
         if encounter_dif < (skill_stat + 20):
             encounter_dif = skill_stat + 20
