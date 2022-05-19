@@ -58,7 +58,9 @@ init -1 python:
 
 label gaming_cafe_grind_character_label():
     $ mc.business.event_triggers_dict["gaming_cafe_grind_day"] = day
-    if alexia.location == gaming_cafe:
+    if alexia.location == gaming_cafe and myra.location == gaming_cafe and myra_will_grind_with_mc():
+        call gaming_cafe_grind_with_both from _grind_with_both_girls_gaming_cafe_01
+    elif alexia.location == gaming_cafe:
         call gaming_cafe_grind_with_alexia from _grind_with_alexia_01
 
     elif day%7 in [2,3,4] and myra.location == gaming_cafe:
@@ -263,6 +265,117 @@ label gaming_cafe_grind_with_alexia():
     $ clear_scene()
     return
 
+label gaming_cafe_grind_with_both():
+    $ scene_manager = Scene()
+    "You decide to play some Guild Quest 2. As you walk into the gaming cafe, you spot [alexia.title] at a computer."
+    "You look up, you also notice that [myra.possessive_title] is working at the moment."
+    "Maybe they would be willing to play with you?"
+    $ scene_manager.add_actor(myra)
+    myra "Hey [myra.mc_title]. Here to play some games?"
+    mc.name "Of course. I noticed that [alexia.title] is here. I thought maybe we could run something together?"
+    myra "I'm down. Things are pretty slow right now."
+    mc.name "Alright. Let me go check with her."
+    myra "Ok. I'll be over in a minute."
+    $ scene_manager.remove_actor(myra)
+    "You walk over to [alexia.title]."
+    $ scene_manager.add_actor(alexia, position = "sitting")
+    mc.name "Hey [alexia.title]."
+    alexia "[alexia.mc_title]! Good to see you. Want to play?"
+    mc.name "Yeah, actually I think [myra.title] wants to play. Want to play together?"
+    alexia "Sure! I need to take a break though, I need to pee and get a drink."
+    mc.name "Hey, I'll grab the drink. What do you want?"
+    alexia "Oh! A lemonade would be great. Thanks [alexia.mc_title]!"
+    mc.name "Sure."
+    $ scene_manager.remove_actor(alexia)
+    "You head over to the refreshments. You get a lemonade and en energy drink for the girls, and get yourself a water."
+    "You have time, you could probably add a serum to their drinks..."
+    "You look at [myra.possessive_title]'s energy drink."
+    call give_serum(myra) from _call_give_myra_serum_grinding_games_01
+    "You look at [alexia.set_possessive_title]'s lemonade."
+    call give_serum(alexia) from _call_give_alexeria_serum_grinding_games_02
+    "You walk back over to the game computher that [alexia.possessive_title] was at earlier. You set her lemonade at it, set your water next to it, then [myra.title]'s next to that."
+
+    $ scene_manager.add_actor(myra, display_transform = character_left_flipped)
+    myra "Heyyyyy, this for me?"
+    mc.name "You bet. [alexia.title] will be right back."
+    myra "Great!"
+    $ scene_manager.update_actor(myra, position = "sitting")
+    "She sits down and starts to log on. You do the same at your computer, paying the usage fee."
+    $ mc.business.change_funds(-5)
+    $ scene_manager.add_actor(alexia)
+    "Soon, [alexia.possessive_title] comes back."
+    alexia "Hey! Ohhh yum, thanks [alexia.mc_title]!"
+    $ scene_manager.update_actor(alexia, position = "sitting")
+
+    "You decide what you want to do."
+    menu:
+        "Group Dungeon\n{size=18}Gain 60 Energy{/size}":
+            mc.name "Let's run a dungeon. I could use the gear."
+            myra "Okay. I've already got all the gear I need from those, but I'll help you guys with one."
+            alexia "Thanks [myra.name]! I actually need some stuff from Hollowfang Lair."
+            mc.name "Yeah I think I need that one too."
+            "You find a fourth for your dungeon. It is tough, but with [myra.possessive_title] as tank and [alexia.title] as healer, you get through it."
+            "It took a lot of effort, but completing the difficult group content makes you feel good."
+            $ mc.change_energy(60)
+            $ progress = gaming_cafe_large_grind()
+            if gaming_cafe_character_level() == GUILD_QUEST_MAX_LEVEL:
+                "Your character is max level, but you manage to get some valuable gear."
+            elif progress:
+                $ prog_string = "You have leveled your character up to level " + str(progress) + "!"
+                "[prog_string]"
+            else:
+                "However, you didn't level up your character any. Guess you still need to grind some more."
+            "You notice your ass is starting to get sore from sitting. You look at the clock and realize you have been playing for three hours."
+            mc.name "Oh man. This has been fun you two, but I need to be done."
+            alexia "Yeah! That was awesome, and I got a really good piece of gear!"
+            myra "That is one of the better dungeons. Always good to practice tactics there!"
+            "they both seem to have enjoyed the time playing."
+            $ alexia.change_happiness(8)
+            $ alexia.change_love(1, 80)
+            $ alexia.change_obedience(3)
+            $ myra.change_happiness(8)
+            $ myra.change_love(1, 80)
+            $ myra.change_obedience(3)
+
+
+        "Raid\n{size=18}Costs 20 Energy{/size}" if mc.energy >=20:
+            mc.name "I want to run a raid. They are really fun in this game."
+            alexia "Oh... I don't normally like to run those... they are pretty tough..."
+            myra "Don't worry [alexia.name]! I'll tank, we'll do great!"
+            mc.name "Yeah, you're an awesome healer. There's this one I ran the other day that has really good healer gear."
+            alexia "Well okay... we can try..."
+            $ alexia.change_obedience(5)
+            "You get a group together and dive into the raid. It is tough, but with the girls next to you it is easy to communicate."
+            "[myra.title] leads the team, and with [alexia.possessive_title] healing you are able to get through fairly easily."
+            "You soon manage to finish the raid, but it took a lot of effort."
+            $ mc.change_energy(-20)
+            $ progress = gaming_cafe_large_grind()
+            if gaming_cafe_character_level() == GUILD_QUEST_MAX_LEVEL:
+                "Your character is max level, but you manage to get some valuable gear."
+            elif progress:
+                $ prog_string = "You have leveled your character up to level " + str(progress) + "!"
+                "[prog_string]"
+            else:
+                "However, you didn't level up your character any. Guess you still need to grind some more."
+            alexia "Yes! That is like best in slot!"
+            "[alexia.possessive_title] got a good piece of gear. She seems to be really thankful."
+            $ alexia.change_happiness(10)
+            $ alexia.change_love(1, 80)
+            $ alexia.change_obedience(10)
+            mc.name "See? Told you we could do it."
+            myra "Damn right. Nice work too [myra.mc_title], I think you had one of the higher DPS stats in the group."
+
+            $ myra.change_obedience(2)
+            $ myra.change_love(1, 80)
+            "You notice your ass is starting to get sore from sitting. You look at the clock and realize you have been playing for three hours."
+            mc.name "Oh man. This has been fun, but I need to be done."
+            "The girls had fun playing."
+
+        "Raid\n{color=#ff0000}{size=18}Requires: 20 Energy{/size}{/color} (disabled)" if mc.energy <20:
+            pass
+    $ scene_manager.clear_scene()
+    return
+
 label gaming_cafe_grind_solo():
     $ progress = False
     menu:
@@ -296,7 +409,6 @@ label gaming_cafe_grind_solo():
             pass
 
     return
-
 
 label gaming_cafe_grind_with_myra_intro():
     $ the_person = myra
