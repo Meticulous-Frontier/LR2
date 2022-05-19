@@ -30,7 +30,7 @@ init 1 python:
         return False
 
     def myra_alexia_teamup_scene_3_req():
-        if myra.has_taboo("vaginal_sex") or alexia.has_taboo("vaginal_sex") or not myra.event_triggers_dict.get("shown_off_blowjob_skills", False):
+        if myra.has_taboo("vaginal_sex") or alexia.has_taboo("vaginal_sex"):
             return False
         if myra.opinion_score_vaginal_sex() >-2 and alexia.opinion_score_vaginal_sex() >-2:
             if myra.sluttiness >= 80 and alexia.sluttiness >= 80 and willing_to_threesome(myra, alexia):
@@ -1181,7 +1181,7 @@ label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    
             "Finish up":
                 "You decide you want to be done for the evening."
                 $ finished = True
-        if mc.arousal = 0:
+        if mc.arousal == 0:
             "You take a few moments to catch your breath. That orgasm felt amazing."
             "Your dick starts to go soft... do you want to take a breather? Or just be done for the night?"
             menu:
@@ -1250,8 +1250,8 @@ label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    
             alexia "I know exactly what you are saying. I'll do it to!"
             $ alexia.add_role(harem_role)
         myra "Oh god. Come here..."
-        $ scene_manager.update_actor(alexia, position = "missionary")
-        $ scene_manager.update_actor(myra, position = "walking_away", display_transform = character_center_flipped)
+        $ scene_manager.update_actor(alexia, position = "missionary", display_transform = character_center(yoffset = .2, zoom = 1.2))
+        $ scene_manager.update_actor(myra, position = "walking_away", display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
         "[alexia.title] turns over on her back, and [myra.possessive_title] jumps on top of her. They embrace and start to make out..."
         $ mc.change_locked_clarity(500)
         "You've done it. Both girls are completely fine with sharing you in a romantic relationship. It is so hot to watch them make out..."
@@ -2153,7 +2153,7 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
     $ mc.change_energy(-12, add_to_log = False)
     if the_person.arousal > 100 and mc.arousal < 100:
         call orgasm_prone_anal(the_person, gaming_cafe, make_couch()) from _myra_alexia_anal_teamup_orgasm_01
-        $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = current_position.slut_requirement, reset_arousal = False)
+        $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = 100, reset_arousal = False)
         $ the_person.change_arousal(-70)
     elif mc.arousal > 100:
         $ her_orgasm = False
@@ -2169,7 +2169,7 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
         $ the_choice = climax_controller.show_climax_menu()
 
         if the_choice == "Cum inside of her":
-            "You use your full weight to push your cock deep inside of [the_person.possessive_title]'s ass as you climax. She gasps and moans as you pin her to the [the_object.name]."
+            "You use your full weight to push your cock deep inside of [the_person.possessive_title]'s ass as you climax. She gasps and moans as you pin her to the couch."
 
             $ climax_controller.do_clarity_release(the_person)
             #$ the_person.call_dialogue("cum_anal")
@@ -2207,7 +2207,7 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
             if her_orgasm:
                 "She slowly recovered from her own orgasm."
         if her_orgasm:
-            $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = current_position.slut_requirement, reset_arousal = False)
+            $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = 100, reset_arousal = False)
             $ the_person.change_arousal(-50)
         $ mc.arousal = 0
     else:
@@ -2222,5 +2222,103 @@ label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
     else:
         "[the_person.possessive_title]'s pristine pussy looks inviting, but you know she probably needs to get warmed up a bit."
         "You push forward, your cock right at her entrance. But instead of pushing it inside of her, you thrust along the length of her labia."
+        $ the_person.change_arousal(10)
+        the_person "Mmm... you feel so hard..."
+        "You let yourself grind against her cunt for a few seconds, getting your cock lubed up with her arousal."
+        "When you feel ready, you line yourself up, then slowly push into her pussy."
 
+    if the_person.arousal < 25: #Grab her shoulders
+        "You put your hands on [the_person.title]'s shoulders. The leverage helps you pound her harder."
+        the_person "Oh my god... ooohhhhh..."
+        "She is moaning as you thrust yourself in hard and deep. [the_person.possessive_title] is taking your cock like a slut."
+        mc.name "That's it. Be a good little cum dump and take it."
+        "She can only moan as you continue to have your way with her."
+        "You push your weight down again, leaving her helplessly pinned to the couch as you fuck her."
+    elif the_person.arousal < 50:   #Pull her hair
+        "Your reach up and run your hand though her hair, then grab a bunch at the base and pull back."
+        the_person "Oh my god... ooohhhhh..."
+        "She is moaning as you thrust yourself in hard and deep. [the_person.possessive_title] is taking your cock like a slut."
+        mc.name "That's it. Be a good little cum dump and take it."
+        "She can only moan as you continue to have your way with her."
+    elif the_person.arousal < 75:   #dominate her
+        "Being completely in control of [the_person.possessive_title] as you pound her prone is such a turn on."
+        "She is arching her back and moaning loudly as you fuck her."
+        the_person "Fuck me [the_person.mc_title], your cock feels so good!"
+        mc.name "Damn right it's good. You are such a cock hungry slut, your holes are just begging to be stuffed."
+        mc.name "Don't worry, I'm gonna fuck all your slutty holes until you can barely walk!"
+        "You grab her by the hair and pull a little bit as you fuck her harder for a bit."
+    else:                           #Tell her how you're gonna cum
+        mc.name "You're getting close, aren't you? You such a good slut. Do you want my cum too?"
+        the_person "Yeah! Oh... yes please!"
+        if mc.arousal < 80:
+            mc.name "I might even give it to you. I don't cum as easy as a whore like you though."
+        else:
+            mc.name "That's right. You act like you just want to play games, but really you are just here for a chance at my cum, aren't you?"
+        "You speed up. [the_person.possessive_title] is going to cum soon."
+    $ the_person.call_dialogue("sex_responses_anal")
+    $ the_person.change_arousal(18 * (1.0 + 0.1 * mc.sex_skills["Vaginal"]))
+    $ mc.change_arousal(15 * (1.0 + 0.1 * the_person.sex_skills["Vaginal"]))
+    $ mc.change_locked_clarity(200)
+    $ mc.change_energy(-12, add_to_log = False)
+    if the_person.arousal > 100 and mc.arousal < 100:
+        call orgasm_prone_bone(the_person, gaming_cafe, make_couch()) from _myra_alexia_vaginal_teamup_orgasm_01
+        $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = 100, reset_arousal = False)
+        $ the_person.change_arousal(-70)
+    elif mc.arousal > 100:
+        $ her_orgasm = False
+        if the_person.arousal > 100:
+            $ her_orgasm = True
+        "You get to hear every little gasp and moan from [the_person.title] as you're pressed up against her. Her quivering pussy soon pushes you past the point of no return."
+        mc.name "I'm going to cum!"
+        if her_orgasm:
+            the_person "Oh fuck, me too [the_person.mc_title]!!!"
+            "[the_person.title] is pushing her ass back against you desperately."
+        $ the_person.call_dialogue("cum_pullout")
+        $ climax_controller = ClimaxController(["Cum inside of her", "pussy"],["Cum on her ass","body"])
+        $ the_choice = climax_controller.show_climax_menu()
+
+        if the_choice == "Cum inside of her":
+            "You use your full weight to push your cock deep inside of [the_person.possessive_title]'s cunt as you climax. She gasps and moans as you pin her to the couch."
+
+            $ climax_controller.do_clarity_release(the_person)
+            #$ the_person.call_dialogue("cum_anal")
+            $ the_person.cum_in_vagina()
+            $ scene_manager.update_actor(the_person)
+            if her_orgasm:
+                "[the_person.title]'s cunt begins to spasm around you, as she joins you in orgasm. It feels incredible."
+            if the_person.has_cum_fetish() or the_person.has_breeding_fetish():
+                "[the_person.possessive_title]'s body goes rigid as your cum pours into her pussy. Goosebumps erupt all over her body as her brain registers her creampie."
+                the_person "Oh... OH! Yes [the_person.mc_title]! Pump it deep! I was made to take your cum inside me!"
+                "[the_person.possessive_title] revels in having her fetish fulfilled."
+                if not her_orgasm:
+                    $ her_orgasm = True
+                    "[the_person.title]'s cunt starts to spasm around you. It seems her anal creampie has triggered her own orgasm."
+                    "She moans like a whore as you finish filling her up."
+            else:
+                the_person "Oh god it's so deep."
+
+        elif the_choice == "Cum on her ass":
+            $ the_person.cum_on_ass()
+            $ scene_manager.update_actor(the_person)
+            "You pull out at the last moment and grab your cock. You kneel and stroke yourself off, blowing your load over [the_person.title]'s ass."
+            $ climax_controller.do_clarity_release(the_person)
+            if the_person.has_cum_fetish():
+                "[the_person.possessive_title]'s body goes rigid as your cum coats her ass. Goosebumps erupt all over her body as her brain registers your cum on her skin."
+                "[the_person.possessive_title] revels in bliss as your dick sprays jet after jet of seed across her ass. She moans lewdly."
+                "She truly is addicted to your cum."
+            if the_person.is_submissive():
+                "[the_person.title] lays there, whimpering. It seems you nearly fucked her senseless, and she loved it."
+                $ the_person.change_happiness(10)
+            elif the_person.is_dominant():
+                "[the_person.title] lays there, whimpering. It seems you nearly fucked her senseless, and it scared her."
+                $ the_person.change_stats(happiness = -5, obedience = 2)
+            "You sit back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s exhausted body covered in your semen."
+            if her_orgasm:
+                "She slowly recovered from her own orgasm."
+        if her_orgasm:
+            $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = 100, reset_arousal = False)
+            $ the_person.change_arousal(-50)
+        $ mc.arousal = 0
+    else:
+        "After a while of fucking her, you pull out from [the_person.possessive_title]. It might be time to move on to another needy hole."
     return
