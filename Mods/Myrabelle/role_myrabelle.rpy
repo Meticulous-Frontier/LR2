@@ -896,6 +896,7 @@ label myra_gains_sponsor_label(the_person):
     return
 
 label myra_esports_second_tournament_intro_label(the_person):   #Sets up for the second tournament. on room enter event. 80 love
+    "Starbuck" "Hey you! This event is for outline purposes, and is not yet written"
     "Requires significant progress in the focus training. [the_person.title] announces there is another tournament this weekend."
     "The gaming cafe has actually won the contract for the tournament to be held in person. She is excited but scared how it will go with all the people there."
     #Just use this event to set up anticipation for the tournament itself.
@@ -903,6 +904,7 @@ label myra_esports_second_tournament_intro_label(the_person):   #Sets up for the
     return
 
 label myra_esports_second_tournament_label(): #Mandatory event. Myra wins her second tournament
+    "Starbuck" "Hey you! This event is for outline purposes, and is not yet written"
     $ the_person = myra
     "The tournament itself occurs. [the_person.title] plays a key role on her team, and thanks to her focus training, they place 3rd overall at the tournament."
     "While this isn't first, it is a huge improvement over the last tournament's early exit. Thanks to your sponsorship, you gain a 5% market boost."
@@ -911,6 +913,7 @@ label myra_esports_second_tournament_label(): #Mandatory event. Myra wins her se
     return
 
 label myra_gaming_cafe_expansion_intro_label(the_person):   #100 love event. Myra approaches MC about further expander her business. offers to move in.
+    "Starbuck" "Hey you! This event is for outline purposes, and is not yet written"
     "With winnings from tournaments, [the_person.title] has bought two adjacent shops and is planning to expand her gaming cafe."
     "The gaming cafe expands their hours to open 7 days a week now. She remarks she feels like she barely goes home anymore."
     "She makes a remark that maybe she should just move in with MC because she can barely keep up around her apartment as a joke."
@@ -1474,6 +1477,7 @@ label myra_lewd_game_fuck_label(the_person):    #Repeatable game reenactment sce
     return
 
 label myra_adult_gaming_intro_label(the_person):    #80 sluttiness event. requires finishing her love story, Myra wabts to open adults only section of the cafe.
+    "Starbuck" "Hey you! This event is for outline purposes, and is not yet written"
     "[the_person.title] asks MC for some feedback on an idea. Want's to know his opinion because he is sponsor and scared she will lose money."
     "She wants to open an adults only lewd section to the gaming cafe. Want's to know what MC thinks about it."
     "MC thinks it is a great idea. She says check back at a later time."
@@ -1482,6 +1486,7 @@ label myra_adult_gaming_intro_label(the_person):    #80 sluttiness event. requir
     return
 
 label myra_adult_gaming_opening_label():
+    "Starbuck" "Hey you! This event is for outline purposes, and is not yet written"
     $ the_person = myra
     "[the_person.title] is excited, opens new adults only section of the gaming cafe. Texts MC to meet her there."
     "It has restricted entry via ID card scanner. Clothing is optional and anything goes there. PCs are loaded with pornographic games."
@@ -2233,6 +2238,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     return
 
 label myra_blowjob_training_progress_label(the_person):
+    "Starbuck" "Hey you! This event is for outline purposes, and is not yet written"
     "Part two of [the_person.title]'s blowjob training."
     "MC works with her on going deep. Let's her set the pace for the most part. She gags a lot but struggles though it."
     "At the end, suggest that she practice deepthroating. Opens up the deepthroat position via filters."
@@ -2245,6 +2251,7 @@ label myra_blowjob_training_progress_label(the_person):
     return  #160 Obedience
 
 label myra_blowjob_training_final_label(the_person):
+    "Starbuck" "Hey you! This event is for outline purposes, and is not yet written"
     "After training her throat for a week, [the_person.title] is ready for final training."
     "In this session, you teach her to relax her throat and to be submissive."
     "She struggles for a bit, but finally manages to let go and you face fuck her."
