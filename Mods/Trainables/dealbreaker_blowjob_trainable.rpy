@@ -192,7 +192,7 @@ label train_dealbreaker_blowjob_label(the_person):
     if the_person.get_opinion_score(orgasm_choice) > 0:
         $ after_training_opinion_score += 1
         "[the_person.title] seems to have enjoyed the grand finale."
-    elif the_person.get_opinion_score(orgasm_choice) < 0 and after_training_opinion_score >= 0:   #MAke sure we atleast increase by 1
+    elif the_person.get_opinion_score(orgasm_choice) < 0 and after_training_opinion_score >= 0:   #MAke sure we at least increase by 1
         "[the_person.title] seems to be put off by the way you finished. Unfortunately this will probably impact the effectiveness of the training..."
         $ after_training_opinion_score += (-1)
     else:

@@ -353,7 +353,7 @@ label camilla_get_a_drink_label(the_person):
                     the_person "I... you want to come over tonight?"
                     mc.name "Sure. I'm not doing anything."
                     "[the_person.possessive_title] gives you her address."
-                    the_person "Come over tonight, around 10pm. You won't regret it! I'm going to go now and get... setup..."
+                    the_person "Come over tonight, around 10pm. You won't regret it! I'm going to go now and get... set up..."
                     $ mc.business.add_mandatory_crisis(camilla_her_place)
                     $ the_person.learn_home()
                 "Soon":

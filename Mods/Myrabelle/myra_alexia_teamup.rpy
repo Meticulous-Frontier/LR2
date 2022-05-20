@@ -1212,10 +1212,10 @@ label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    
                         if alexia_warmed_up and alexia_ass_warmed_up:
                             "Both of [alexia.possessive_title]'s well fucked holes look like they could handle another round, while a bit of your cum has started to leak out of her."
                         else:
-                            "Your cum is starting to leak from insider her."
+                            "Your cum is starting to leak from inside her."
                     elif alexia.has_ass_cum():
                         $ mc.change_locked_clarity(40)
-                        "[alexia.possessive_title]'s ass is covered in your spunk. You couldn't help but mark your territoy all over her back side."
+                        "[alexia.possessive_title]'s ass is covered in your spunk. You couldn't help but mark your territoy all over her backside."
                     else:
                         $ mc.change_locked_clarity(30)
                         "[alexia.possessive_title]'s pristine ass looks ready for you to defile. You reach over and give it a quick spank."
@@ -1232,14 +1232,14 @@ label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    
     mc.name "I think I'm done for tonight."
     #Best dialogue if you came for each girl atleast once.
     if (ask_harem_requirement(myra) and (ask_harem_requirement(alexia) or alexia.has_role(harem_role))):
-        myra "You know, setting up gaming night with you [alexia.name] is probably the best thing I've done since I opened this cafe."
+        myra "You know, setting up gaming night with you and [alexia.name] is probably the best thing I've done since I opened this cafe."
         alexia "Yeah, it has been great."
         myra "I know we're both dating [myra.mc_title]... but honestly, I don't even mind it."
         myra "I actually... kind of like it, to be honest."
         alexia "I like it too..."
         myra "[myra.mc_title]... you have this relationship going... with other girls too... don't you?"
         mc.name "I do. But I think that is okay."
-        mc.name "You two, and me. We have a lot of love to share. Theres no reason we can't all be a part of something bigger."
+        mc.name "You two, and me. We have a lot of love to share. There's no reason we can't all be a part of something bigger."
         mc.name "I want us to be part of a strong and healthy polyamorous relationship. The three of us. And more."
         myra "I honestly never thought I would be in a relationship like this... but somehow, it just feels so right."
         myra "I'll do it. As long as [alexia.name] does too!"
@@ -2118,14 +2118,14 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
         "You work slowly, but with steady pressure, you push yourself into [the_person.possessive_title]'s tight anal passage."
     "Buried inside her, you let your weight pin her to the couch as you start to fuck her."
     if the_person.arousal < 25: #Spank her to warm her up
-        "You push yourself up abit. [the_person.title] is still getting warmed up, and you have an idea of how to help."
+        "You push yourself up a bit. [the_person.title] is still getting warmed up, and you have an idea of how to help."
         "*SMACK*"
         "You give her ass a solid spank. She yelps, but arches her back, pushing your cock deeper."
         mc.name "Sorry. Your ass is just so spankable. You love it when I treat you this way, don't you?"
         the_person "I do, I love it when you do anything you want to me..."
         "*SMACK*"
-        mc.name "Sounds about right. Let's get this start off right then."
-        "You push your weight down again, leaving her helpless pinned to the couch as you start fucking her puckered hole earnestly."
+        mc.name "Sounds about right. Let's get this started off right then."
+        "You push your weight down again, leaving her helplessly pinned to the couch as you start fucking her puckered hole earnestly."
     elif the_person.arousal < 50:   #Pull her hair
         "Your reach up and run your hand though her hair, then grab a bunch at the base and pull back."
         the_person "Oh my god... ooohhhhh..."
@@ -2137,7 +2137,7 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
         mc.name "You like being used, don't you? Every hole is an opportunity to pleasure a man and make him cum."
         mc.name "Don't worry. You're doing great."
         the_person "Oh god, thank you, I..."
-        "Her words get caught in her throat as fuck her forbidden hole mercilessly."
+        "Her words get caught in her throat as you fuck her forbidden hole mercilessly."
     else:                           #Tell her how you're gonna cum
         mc.name "You're getting close, aren't you? You little butt slut. I bet you're gonna love it when I pull out and cum all over your slutty ass."
         the_person "Yeah! Oh..."
@@ -2205,7 +2205,7 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
                 $ the_person.change_stats(happiness = -5, obedience = 2)
             "You sit back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s exhausted body covered in your semen."
             if her_orgasm:
-                "She slowly recovered from her own orgasm."
+                "She slowly recovers from her own orgasm."
         if her_orgasm:
             $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = 100, reset_arousal = False)
             $ the_person.change_arousal(-50)
@@ -2226,7 +2226,6 @@ label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
         the_person "Mmm... you feel so hard..."
         "You let yourself grind against her cunt for a few seconds, getting your cock lubed up with her arousal."
         "When you feel ready, you line yourself up, then slowly push into her pussy."
-
     if the_person.arousal < 25: #Grab her shoulders
         "You put your hands on [the_person.title]'s shoulders. The leverage helps you pound her harder."
         the_person "Oh my god... ooohhhhh..."
@@ -2276,10 +2275,8 @@ label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
         $ the_person.call_dialogue("cum_pullout")
         $ climax_controller = ClimaxController(["Cum inside of her", "pussy"],["Cum on her ass","body"])
         $ the_choice = climax_controller.show_climax_menu()
-
         if the_choice == "Cum inside of her":
             "You use your full weight to push your cock deep inside of [the_person.possessive_title]'s cunt as you climax. She gasps and moans as you pin her to the couch."
-
             $ climax_controller.do_clarity_release(the_person)
             #$ the_person.call_dialogue("cum_anal")
             $ the_person.cum_in_vagina()
@@ -2296,7 +2293,6 @@ label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
                     "She moans like a whore as you finish filling her up."
             else:
                 the_person "Oh god it's so deep."
-
         elif the_choice == "Cum on her ass":
             $ the_person.cum_on_ass()
             $ scene_manager.update_actor(the_person)
@@ -2314,7 +2310,7 @@ label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
                 $ the_person.change_stats(happiness = -5, obedience = 2)
             "You sit back and sigh contentedly, enjoying the sight of [the_person.possessive_title]'s exhausted body covered in your semen."
             if her_orgasm:
-                "She slowly recovered from her own orgasm."
+                "She slowly recovers from her own orgasm."
         if her_orgasm:
             $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = 100, reset_arousal = False)
             $ the_person.change_arousal(-50)

@@ -103,7 +103,7 @@ label myrabelle_sex_responses_foreplay(the_person):
 label myrabelle_sex_responses_oral(the_person):
     if the_person.arousal < 25:
         if the_person.sluttiness > 50:
-            the_person "Fuck yeah, finally but that mouth of yours to good use..."
+            the_person "Fuck yeah, finally put that mouth of yours to good use..."
         else:
             the_person "Oh wow... that's... Mph!"
 
@@ -115,7 +115,7 @@ label myrabelle_sex_responses_oral(the_person):
 
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
-            the_person "Fuck [the_person.mc_title], where did you learn to that with your tongue?"
+            the_person "Fuck [the_person.mc_title], where did you learn to do that with your tongue?"
 
         else:
             "You're so good at that... Fuck, it's starting to drive me crazy!"
@@ -1435,7 +1435,7 @@ label myrabelle_touching_body_taboo_break(the_person):
         the_person "That's it, you can keep going. I don't mind if you want to touch me there."
     elif the_person.love >= 20:
         the_person "I know this is a big step, but I think I'm ready for this."
-        "She bites her lip and looks in the eyes for a second."
+        "She bites her lip and looks you in the eyes for a second."
         the_person "Go ahead, you can touch me if you really want to."
     else:
         the_person "I don't know if I'm ready for this [the_person.mc_title]."
@@ -1445,7 +1445,7 @@ label myrabelle_touching_body_taboo_break(the_person):
 
 label myrabelle_touching_penis_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 35:
-        the_person "Are you ready? I really want to know what you cock feels like."
+        the_person "Are you ready? I really want to know what your cock feels like."
         mc.name "Don't let me stop you then. Go for it."
     elif the_person.love >= 20:
         the_person "Your cock looks so big. I guess I shouldn't keep you waiting any longer then."

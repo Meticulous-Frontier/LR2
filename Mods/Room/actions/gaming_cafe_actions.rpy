@@ -287,14 +287,13 @@ label gaming_cafe_grind_with_both():
     alexia "Oh! A lemonade would be great. Thanks [alexia.mc_title]!"
     mc.name "Sure."
     $ scene_manager.remove_actor(alexia)
-    "You head over to the refreshments. You get a lemonade and en energy drink for the girls, and get yourself a water."
+    "You head over to the refreshments. You get a lemonade and an energy drink for the girls, and get yourself a water."
     "You have time, you could probably add a serum to their drinks..."
     "You look at [myra.possessive_title]'s energy drink."
     call give_serum(myra) from _call_give_myra_serum_grinding_games_01
     "You look at [alexia.set_possessive_title]'s lemonade."
     call give_serum(alexia) from _call_give_alexeria_serum_grinding_games_02
     "You walk back over to the game computher that [alexia.possessive_title] was at earlier. You set her lemonade at it, set your water next to it, then [myra.title]'s next to that."
-
     $ scene_manager.add_actor(myra, display_transform = character_left_flipped)
     myra "Heyyyyy, this for me?"
     mc.name "You bet. [alexia.title] will be right back."
@@ -329,7 +328,7 @@ label gaming_cafe_grind_with_both():
             mc.name "Oh man. This has been fun you two, but I need to be done."
             alexia "Yeah! That was awesome, and I got a really good piece of gear!"
             myra "That is one of the better dungeons. Always good to practice tactics there!"
-            "they both seem to have enjoyed the time playing."
+            "They both seem to have enjoyed the time playing."
             $ alexia.change_happiness(8)
             $ alexia.change_love(1, 80)
             $ alexia.change_obedience(3)
@@ -364,7 +363,6 @@ label gaming_cafe_grind_with_both():
             $ alexia.change_obedience(10)
             mc.name "See? Told you we could do it."
             myra "Damn right. Nice work too [myra.mc_title], I think you had one of the higher DPS stats in the group."
-
             $ myra.change_obedience(2)
             $ myra.change_love(1, 80)
             "You notice your ass is starting to get sore from sitting. You look at the clock and realize you have been playing for three hours."

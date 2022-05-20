@@ -79,7 +79,7 @@ label breeding_fetish_myra_intro_label(the_person):
     the_person "Oh god yes..."
     mc.name "You're going to love it, aren't you? When you show up for a tournament, your belly round, your big tits leaking milk. Everyone there is gonna know what a needy cunt you have."
     the_person "Yes!"
-    mc.name "Everyone there is going to know you are hopeless, thirsty slut. You long for your master's cum sloshing around in your fertile womb all day long."
+    mc.name "Everyone there is going to know you are a hopeless, thirsty slut. You long for your master's cum sloshing around in your fertile womb all day long."
     "[the_person.possessive_title]'s knees start to buckle for a second."
     the_person "Yes please! Breed me again PLEASE?"
     mc.name "I plan to. Keep your cunt ready for me, anytime I want to dump my load inside you."
