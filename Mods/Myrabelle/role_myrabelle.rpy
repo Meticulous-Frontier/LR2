@@ -15,7 +15,7 @@ init 2 python:
     myrabelle_wardrobe = wardrobe_from_xml("Myrabelle_Wardrobe")
     def myrabelle_mod_initialization():
         #Start with her wardrobe and base outfit
-         #Requires creation of a new wardrobe file. Alternatively, you can use one of the default ones, IE "myra_Wardrobe"
+        #Requires creation of a new wardrobe file. Alternatively, you can use one of the default ones, IE "myra_Wardrobe"
         myrabelle_base_outfit = Outfit("myrabelle's base accessories")
         the_glasses = modern_glasses.get_copy()
         the_glasses.colour = [.15, .15, .15, 1.0]
@@ -158,12 +158,12 @@ init 2 python:
         cowgirl.name : "After the male sim lays down, the female gets on top and mounts him cowgirl style.",
         against_wall.name : "The male sim picks up the female and pushes her up against the wall.",
         missionary.name : "The female sim lays down and spreads her legs, and the male sim gets on top of her.",
-        doggy.name : "The female sim gets on her hands on knees on the bed, and the male gets behind her."
+        doggy.name : "The female sim gets on her hands and knees on the bed, and the male gets behind her."
     }
 
     myra_random_positions_intro = {
         SB_doggy_standing.name : "She turns and you quickly bend her over the couch. You grab her hips and line yourself up, pushing inside of her.",
-        SB_reverse_cowgirl.name : "You lay down on the couch. She climbs on top of you, and you admire the amazing view and she reaches between her legs, grabs your cock, lines it up, and sinks down on your cock.",
+        SB_reverse_cowgirl.name : "You lay down on the couch. She climbs on top of you, and you admire the amazing view as she reaches between her legs, grabs your cock, lines it up, and sinks down onto you.",
         prone_bone.name : "You grab her and shove her down on the couch. You pin her down with your weight, and it takes a couple seconds of poking around until your cock finds her wet cunt and pushes in.",
         cowgirl.name : "You lay down and she gets on top of you. She grabs your cock and lines it up, then moans as she lets herself sink down onto your cock.",
         against_wall.name : "She yelps as you pick her up and push her against the wall. Her legs wrap around you as you push into her.",
@@ -313,7 +313,7 @@ label myra_gaming_cafe_opening_label():
     alexia "Oh! You should! Sit next to me, and I can help you get started!"
     "You've never played this game before, but you figure it couldn't hurt to give it a shot."
     mc.name "Sure, why not."
-    the_person "The game has a free trial, but if you wind up liking it, you should probably buy it. Anyway, the PCs over here have the game setup and ready..."
+    the_person "The game has a free trial, but if you wind up liking it, you should probably buy it. Anyway, the PCs over here have the game set up and ready..."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "You and [alexia.title] follow [the_person.title] to a row of computers."
     "You follow [the_person.title] to one and [alexia.possessive_title] sits next to it."
@@ -325,7 +325,7 @@ label myra_gaming_cafe_opening_label():
     $ scene_manager.update_actor(myra, position = "stand3")
     "When she stands back up, she looks at you with a smirk. Did she notice you checking her out? You were trying to be discreet..."
     $ the_person.change_slut(1)
-    the_person "Alright, I've got it all setup for you! Have fun you two!"
+    the_person "Alright, I've got it all set up for you! Have fun you two!"
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.title] turns and starts to walk away. You check her out one last time then sit down at the computer."
     alexia "This game is great! You're going to love it!"
@@ -342,8 +342,8 @@ label myra_gaming_cafe_opening_label():
     $ scene_manager.add_actor(the_person, display_transform = character_right)
     "As she is urging you, [the_person.title] walks up, checking on you and [alexia.title]."
     the_person "Hey, everything working good here?"
-    alexia "Yeah this is great! And [alexia.mc_title] just finished up with trial. I'm trying to convince him to buy it!"
-    the_person "It is a great game, for hardcore and casual gamers a like, the way it is setup."
+    alexia "Yeah this is great! And [alexia.mc_title] just finished up with the trial. I'm trying to convince him to buy it!"
+    the_person "It is a great game, for hardcore and casual gamers alike, the way it is set up."
     "You think about it. It's only $20, and even though you don't play that many games anymore, it might be a good way to get closer with [alexia.title] and [the_person.title]."
     mc.name "Okay, why not. I'm not sure I'll be able to play much but it's only $20."
     $ alexia.change_happiness(5)
@@ -452,7 +452,7 @@ label myra_esports_practice_label(the_person):  #20 love event, on room enter ev
     $ the_person.draw_person(position = "sitting")
     "She appears to be in a pretty tight match. You ask one of the other people watching."
     mc.name "Hey, why is everyone watching her play?"
-    "?????" "She's at the end of a tournament. If her team wins, they automatically qualify for the Esports tournament Battle of the Bay."
+    "?????" "She's at the end of a tournament. If her team wins, they automatically qualify for the esports tournament Battle of the Bay."
     "Ahhh, so it is like a qualifying round."
     "You watch as she plays. [the_person.possessive_title] is manhandling her competition."
     "In a climactic battle, she manages to stall two attackers at home point while her team finishes off the other team at mid, securing the victory."
@@ -474,7 +474,7 @@ label myra_esports_practice_label(the_person):  #20 love event, on room enter ev
     $ myra.add_unique_on_room_enter_event(myra_distracted_gaming)
     $ gaming_cafe.on_room_enter_event_list.append(myra_esports_first_tournament)
     $ the_person.draw_person(position = "walking_away")
-    "Wow, so [the_person.possessive_title]'s eSports team has managed to qualify for a big tournament! You'll have to see if you can attend."
+    "Wow, so [the_person.possessive_title]'s esports team has managed to qualify for a big tournament! You'll have to see if you can attend."
     return
 
 label myra_esports_first_tournament_label():    #Mandatory event. Preluded to during the first love event
@@ -482,7 +482,7 @@ label myra_esports_first_tournament_label():    #Mandatory event. Preluded to du
     "You feel your phone go off when you get a notification. It's a message from [alexia.possessive_title]"
     $ mc.start_text_convo(alexia)
     alexia "Hey! I don't know what you are doing right now, but get over to the gaming cafe!"
-    alexia "[the_person.name] is hosting a watch party for her eSports tournament! She asked me to text you because she doesn't have your number I guess."
+    alexia "[the_person.name] is hosting a watch party for her esports tournament! She asked me to text you because she doesn't have your number I guess."
     alexia "It's going to start soon!"
     mc.name "Thanks! I'm on my way. Save me a seat?"
     alexia "Sure!"
@@ -504,7 +504,7 @@ label myra_esports_first_tournament_label():    #Mandatory event. Preluded to du
         alexia "I, ermm... I mean I'm not..."
         mc.name "I'm just teasing. Is [the_person.title] here?"
     alexia "Yeah. She's over there."
-    "You follower [alexia.possessive_title]'s finger pointing to a computer desk set up to the side of the project. [the_person.possessive_title] is there, getting setup."
+    "You follow [alexia.possessive_title]'s finger pointing to a computer desk set up to the side of the projector. [the_person.possessive_title] is there, getting set up."
     $ scene_manager.add_actor(the_person, position = "sitting", display_transform = character_left(yoffset = 0, zoom = 0.5))
     alexia "You are just in time, it is just getting started!"
     mc.name "Nice. Can you fill me in on the details?"
@@ -521,7 +521,7 @@ label myra_esports_first_tournament_label():    #Mandatory event. Preluded to du
     alexia "Wooo! You go girl!"
     "Several people in the crowd cheer for her. However, the spike in noise almost seems to startle her. She looks up from her computer and sees how many people are watching."
     "She turns back to the computer, but you note that her playstyle suddenly gets a bit rougher. She isn't capitalizing on as many opportunities and is playing too conservatively."
-    "When another teammate get's downed, she attempts to stealth again to revive them. This time, however, the enemy team uses a stealth removal skill and stun her. They manage to down her and kill off her teammate."
+    "When another teammate gets downed, she attempts to stealth again to revive them. This time, however, the enemy team uses a stealth removal skill and stun her. They manage to down her and kill off her teammate."
     "A few seconds later, the enemy finishes her off, taking the center point. You hear some mumbles in the crowd as her respawn timer comes up."
     mc.name "[alexia.title]... she is completely off her game. Her nerves are really getting to her."
     alexia "Yeah... she'll pull through though! I'm sure she'll come back..."
@@ -529,11 +529,11 @@ label myra_esports_first_tournament_label():    #Mandatory event. Preluded to du
     "In an unfortunate encounter, she and a teammate engage the enemy two on two at her home point. Normally she is able to carry in these situations easily, but this time she fumbles."
     "Pushing to far against a low health enemy, suddenly they counter her attack and stun her. Before she can react, the enemy pair down her. Caught far from her teammate, she can only watch as they finish her off."
     $ scene_manager.update_actor(the_person, emotion = "sad")
-    "The match itself stays fairly close as [the_person.title] push back and forth at a couple points. However, she just isn't able to tip the balance in their favor."
+    "The match itself stays fairly close as [the_person.title] pushes back and forth at a couple points. However, she just isn't able to tip the balance in their favor."
     "When the match is over, the score is close, but [the_person.possessive_title] is the worst performer on her team. If she had been able to focus better, they would have won."
     "The crowd is stunned. You turn to [alexia.title]."
     alexia "Oh... oh no... Myra..."
-    "The people who were watching the match start to get up. There are several murmurs but nobody reall says much."
+    "The people who were watching the match start to get up. There are several murmurs but nobody really says much."
     "You watch as [the_person.title] gets up and quietly leaves the room. She looks pretty disappointed."
     $ scene_manager.remove_actor(the_person)
     $ scene_manager.update_actor(alexia, position = "stand3", emotion = "sad")
@@ -574,7 +574,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     "She turns around after she finishes locking up."
     $ the_person.draw_person()
     the_person "Hey [the_person.mc_title]. Yeah you could say that."
-    the_person "I just go some bad news, so I decided to close up early tonight and hit the bar."
+    the_person "I just got some bad news, so I decided to close up early tonight and hit the bar."
     the_person "Want to come with me? I could use a drinking buddy. As a warning, I'm probably going to get fucking wasted tonight."
     mc.name "I suppose I could go for a couple of drinks. I know a good place too."
     the_person "Great! Let's get out of here."
@@ -596,7 +596,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     "Bartender" "Sure thing. You paying?"
     mc.name "Yeah, let me open up a tab."
     the_person "I can get my own..."
-    mc.name "Non sense. You just take it easy tonight and cut loose a little."
+    mc.name "Nonsense. You just take it easy tonight and cut loose a little."
     the_person "Thanks..."
     $ the_person.change_love(1)
     $ the_person.change_obedience(1)
@@ -621,7 +621,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     $ the_person.draw_person(position = "sitting")
     the_person "Yum, this looks good."
     "She takes a big sip of her drink."
-    mc.name "So, I'm curious. Let's say a local business was interested in sponsoring your eSports team."
+    mc.name "So, I'm curious. Let's say a local business was interested in sponsoring your esports team."
     mc.name "How much would you be looking for, money wise?"
     "[the_person.possessive_title] rolls her eyes a bit."
     if the_person.has_large_tits():
@@ -662,7 +662,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     the_person "I just wanted to go out tonight, get wasted, and who knows? Maybe wind up in someone else's bed for once."
     mc.name "You know what? That's fair. Actually, I think I can help you out with both of those."
     the_person "Is that so?"
-    "[the_person.title] leans her head back and opens her mouth. The last couple drops of her drink fall onto her tongue, as she makes a show out of being out her drink being empty."
+    "[the_person.title] leans her head back and opens her mouth. The last couple drops of her drink fall onto her tongue, as she makes a show out of her drink being empty."
     $ mc.change_locked_clarity(10)
     the_person "I'm not sure about that [the_person.mc_title], my glass seems awfully dry..."
     mc.name "I'll be right back, let me go fix that."
@@ -694,7 +694,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
         the_person "Yeah right..."
     else:
         "[the_person.possessive_title] gloats a bit. You got absolutely dismantled."
-        the_person "Fuck yeah! I still got it! I user to dominate at this game."
+        the_person "Fuck yeah! I still got it! I used to dominate at this game."
         mc.name "I'm pretty sure you still do."
     "?????" "Hey, that game is great. Can I get the next match?"
     "You turn around. A group of three guys is behind you, and seem interested in the game."
@@ -758,7 +758,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     mc.name "My umm... My dad isn't around anymore. I live with my sister and my mother."
     the_person "Oh thank god. I totally thought you were about to say you have a wife!"
     "She laughs a bit longer than is normal. But she is rather intoxicated."
-    the_person "I mean, you're still a loser for living with your mom, but atleast you aren't married!"
+    the_person "I mean, you're still a loser for living with your mom, but at least you aren't married!"
     mc.name "Hey, you better watch your mouth."
     the_person "Or what?"
     mc.name "I might have to find better uses for that mouth of yours."
@@ -775,7 +775,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     the_person "Oh god, you can do anything you want to me."
     mc.name "Mmm, is that so? Let's get this off you first..."
     $ the_person.strip_outfit(position = "back_peek")
-    "You get her naked. You your hands all up and down her sides, her tits, her thighs..."
+    "You get her naked. You run your hands all up and down her sides, her tits, her thighs..."
     $ the_person.draw_person(position = "standing_doggy")
     "You bend her over your bed. She sighs when you run your hand across her ass, groping at her cheeks."
     mc.name "You love to put up such a tough front. But it's all an act, isn't it?"
@@ -791,10 +791,10 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     "[the_person.possessive_title] moans when you spank her again. She has to be a closet sub, despite her normally wild attitude."
     $ the_person.discover_opinion("being submissive")
     the_person "I, I just like it when you use me... when I make you feel good..."
-    "You give her anothe spank."
+    "You give her another spank."
     $ the_person.change_arousal(5)
     the_person "AH!"
-    mc.name "You liar. You don't like. You love it. I can tell. Look at how wet you are getting."
+    mc.name "You liar. You don't like it. You love it. I can tell. Look at how wet you are getting."
     "You run your fingers along her slit. She loves the way you are getting rough with her. You make a note to spank her more in the future."
     $ the_person.unlock_spanking()
     $ mc.change_locked_clarity(30)
@@ -867,7 +867,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     $ myra.add_unique_on_room_enter_event(myra_gains_sponsor)
     "You think about the fun night you had at the bar with [the_person.possessive_title]."
     "Her business at the gaming cafe... You feel like there are some real opportunities there, if you can convince her to accept you as a sponsor."
-    "You resolve yourself to save up some funds to invest in her sports team. You make a mental note: save atleast $25000 and talk to her about it."
+    "You resolve yourself to save up some funds to invest in her sports team. You make a mental note: save at least $25000 and talk to her about it."
     call advance_time from _call_advance_myra_post_bar_day_advance_01
     return
 
@@ -875,15 +875,15 @@ label myra_gains_sponsor_label(the_person):
     $ the_person.draw_person()
     mc.name "Hey, we need to talk."
     the_person "Oh? What is it, [the_person.mc_title]?"
-    mc.name "I want in. I want to sponsor your eSports team."
+    mc.name "I want in. I want to sponsor your esports team."
     the_person "Seriously, you don't have to do that..."
-    mc.name "I have $15000 I want to invest. I'm want the opportunity to invest further in the business in the future also, as well as a small cut when your start dominating eSports tournaments."
+    mc.name "I have $15000 I want to invest. I want the opportunity to invest further in the business in the future also, as well as a small cut when you start dominating esports tournaments."
     the_person "Fuck, that's a lot of money. Are you sure? That's more than double what I was getting from my last sponsor."
     mc.name "I am absolutely certain. Take it. Invest in your cafe. I believe in you, and I believe in your business."
     $ the_person.change_obedience(10)
     $ the_person.change_love(5, 90)
-    "You hand her a check, made out of the full amount."
-    the_person "Wow... okay... You are now a sponsor of the Predators eSports gaming team!"
+    "You hand her a check, made out for the full amount."
+    the_person "Wow... okay... You are now a sponsor of the Predators esports gaming team!"
     "[the_person.possessive_title] smiles at you. You really do feel like this is going to be a worthwile busines venture."
     the_person "I'm gonna go put this in the safe for the day, if you need anything else, come find me, okay?"
     $ the_person.draw_person(position = "kissing")
@@ -1050,7 +1050,7 @@ label myra_energy_drink_test_label(the_person):
     mc.name "Good day [the_person.title]."
     the_person "Hey [the_person.mc_title]."
     mc.name "I have something for you."
-    "You set a can of your new energy drink and set it on the table."
+    "You set a can of your new energy drink on the table."
     mc.name "One proprietary, blue raspberry flavored energy drink."
     the_person "Wow! This is neat... May I?"
     mc.name "Of course."
@@ -1081,7 +1081,7 @@ label myra_energy_drink_test_label(the_person):
     the_person "Thank you [the_person.mc_title]! This is going to be great!"
     mc.name "I agree."
     $ clear_scene()
-    "You step away from the desk after saying goodbye. You should setup delivery of the serum with one of your employees."
+    "You step away from the desk after saying goodbye. You should set up delivery of the serum with one of your employees."
     $ delivery_person = None
 
     if alexia.is_employee():
@@ -1113,7 +1113,7 @@ label myra_energy_drink_distribution_intro_label(the_person):     #On talk event
     the_person "Okay, I'll talk to you on Wednesday morning then."
     $ mc.business.add_mandatory_crisis(myra_energy_drink_weekly_distribution)
     $ myra.event_triggers_dict["can_distribute_serum"] = True
-    "[the_person.possessive_title] will be running your deliveries. Make sure you have atleast 10 of the serum in the company's inventory to send to the gaming cafe."
+    "[the_person.possessive_title] will be running your deliveries. Make sure you have at least 10 of the serum in the company's inventory to send to the gaming cafe."
     return
 
 label myra_energy_drink_weekly_distribution_label():          #mandatory event. select which serum to distribute for the week.
@@ -1156,7 +1156,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
         "You get a message from [the_person.title]. She wants to know which serums you want delivered to the gaming cafe this week."
     "You take a look at your business' inventory. Time to decide which serum to send over to the gaming cafe for the next week."
     while not finished:
-        "You quickly remind yourself, the serum must include the energy drink trait, and you need atleast 10."
+        "You quickly remind yourself, the serum must include the energy drink trait, and you need at least 10."
         call screen serum_inventory_select_ui(mc.business.inventory)
         if not _return == "None":
             $ the_serum = _return
@@ -1179,7 +1179,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] walks away."
     else:
-        "You setup the delivery of the energy drink over the phone."
+        "You set up the delivery of the energy drink over the phone."
     $ mc.business.add_mandatory_crisis(myra_energy_drink_weekly_distribution)
     return
 
@@ -1259,7 +1259,7 @@ label myra_distracted_gaming_label(the_person):       #20 sluttiness event. MC c
     "You realize that her trash talking is incredibly effective. Several of the guys she is playing against are either getting upset or clearly distracted by her."
     "The match finishes up. This is an area of her game you hadn't really considered before. Has she ever though of dressing suggestively for matches?"
     the_person "Alright, I better get back to the desk. I'll destroy your asses again some other time boys."
-    "The guys are muttering to themselves, but seem to agree it is a break and time and start to disperse for now."
+    "The guys are muttering to themselves, but seem to agree it is a break time and start to disperse for now."
     $ the_person.draw_person()
     "[the_person.possessive_title] stretches, and then stands up. She turns and notices you."
     the_person "Oh hey [the_person.mc_title]. Good to see you! Something I can help you with?"
@@ -1349,7 +1349,7 @@ label myra_lewd_gaming_label(the_person):           #40 sluttiness event. Catch 
     "Sensing she isn't done yet, you bring up two fingers and easily slide them into her sloppy cunt."
     $ the_person.change_arousal(20)
     the_person "Oh fuck! That's so good... keep going I'm going to cum again..."
-    "[the_person.possessive_title]'s voice is waivering as she pleads with you to keep going."
+    "[the_person.possessive_title]'s voice is wavering as she pleads with you to keep going."
     "You pump your fingers inside of her as you lick her clit. You gently suck on it, and her moans are growing even more urgent."
     $ the_person.change_arousal(40)
     the_person "Yes... YES! Oh..."
@@ -1461,7 +1461,7 @@ label myra_lewd_game_fuck_label(the_person):    #Repeatable game reenactment sce
     call give_serum(the_person) from _call_give_myra_lewd_game_fuck_02
     "It takes her a while, but eventually [the_person.title] joins you in the back of the cafe."
     $ the_person.draw_person()
-    the_person "Alright. I was kind of hoping you swing by tonight. Let's get comfortable first."
+    the_person "Alright. I was kind of hoping you'd swing by tonight. Let's get comfortable first."
     "She gives you a wink as she starts to strip down."
     $ the_person.strip_full_outfit(position = "stand3")
     "[the_person.possessive_title] gets naked, so you do the same."
@@ -1594,14 +1594,14 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
         return False
     elif mc.arousal < 100:  #SHE wore out. Give the option to prone bone her.
         "[the_person.possessive_title] puts her hands out and stops you before you can continue the next position."
-        the_person "I'm sorry, I completely wore out. Can we stop?"
+        the_person "I'm sorry, I'm completely worn out. Can we stop?"
         call prone_decision_label(the_girl = the_person, the_location = gaming_cafe, the_object = make_couch(), the_position = current_position) from _prone_sex_myra_takeover_01
         if _return:
             call fuck_person(the_person, private= True, start_position = prone_bone, start_object = make_couch(), skip_intro = True, position_locked = True, report_log = None, affair_ask_after = False, skip_condom = True) from _myra_submissive_finish_01
             "You slowly stand up, the exhausted [the_person.possessive_title] laying face down on the couch."
             return True
         else:
-            mc.name "That's fine, I'm a little wore out as well."
+            mc.name "That's fine, I'm a little worn out as well."
             return False
     else:   #MC is cumming
         $ cum_target = None
@@ -1643,12 +1643,12 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
             "Neither of you move for several seconds. Eventually though, your cock starts to get too soft to stay inside her, so you slowly pull apart."
             if the_person.has_breeding_fetish() or breeding_fetish_intro:
                 if current_position == missionary:
-                    "As you pull off her, [the_person.title] lifts her legs up a bit, angle her hips up to keep your cum inside."
+                    "As you pull off her, [the_person.title] lifts her legs up a bit, angling her hips up to keep your cum inside."
                 else:
                     the_person "Hang on!..."
                     $ the_person.draw_person(position = "missionary")
                     "[the_person.possessive_title] lays down on the couch, then lifts her legs, angling her hips up to keep as much cum inside as possible."
-                "You stand up and look down at your cum drink breeding stock."
+                "You stand up and look down at your cum drunk breeding stock."
                 $ the_person.change_happiness(20)
                 if breeding_fetish_intro:
                     return
@@ -1685,12 +1685,12 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
             "You fire wave after wave of cum into [the_person.possessive_title]'s unprotected cunt."
             "Neither of you move for several seconds. Eventually though, your cock starts to get too soft to stay inside her, so you slowly pull apart."
             if current_position == missionary:
-                "As you pull off her, [the_person.title] lifts her legs up a bit, angle her hips up to keep your cum inside."
+                "As you pull off her, [the_person.title] lifts her legs up a bit, angling her hips up to keep your cum inside."
             else:
                 the_person "Hang on!..."
                 $ the_person.draw_person(position = "missionary")
                 "[the_person.possessive_title] lays down on the couch, then lifts her legs, angling her hips up to keep as much cum inside as possible."
-            "You stand up and look down at your cum drink breeding stock."
+            "You stand up and look down at your cum drunk breeding stock."
             $ the_person.change_happiness(20)
             if breeding_fetish_intro:
                 return
@@ -1723,7 +1723,6 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
                 $ the_person.cum_on_face()
                 $ the_person.draw_person(position = "blowjob")
                 "You let out a shuddering moan as you cum, pumping your sperm onto [the_person.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
-
             "You take a deep breath to steady yourself once you've finished cumming. [the_person.title] looks up at you from her knees, face covered in your semen."
             $ the_person.call_dialogue("cum_face")
             $ the_person.draw_person()
@@ -1755,8 +1754,7 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
                 the_person "God, your seed feels so fucking hot..."
                 "[the_person.title] licks her fingers clean."
             else:
-                the_person "Mmm, that it [the_person.mc_title], let it all out..."
-
+                the_person "Mmm, that's it [the_person.mc_title], let it all out..."
             "After several seconds, you look down at [the_person.possessive_title]. Her tits are coated in your spunk."
             $ the_person.draw_person()
             "You both stand up."
@@ -1773,22 +1771,20 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
             else:
                 $ the_person.draw_person(position = "standing_doggy")
                 "[the_person.title] bends over the couch and you get behind her."
-
             if mc.condom:
                 "You pull your condom off and start to stroke yourself."
                 $ mc.condom = False
-            "[the_person.possessive_title] wiggles her ass back at you as start to cum."
+            "[the_person.possessive_title] wiggles her ass back at you as you start to cum."
             $ the_person.cum_on_ass()
             $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
             $ the_person.draw_person(position = "standing_doggy")
-            "You watch as your cum coats [the_person.title]'s ass with spurt after spurt of cum."
+            "You watch as you coat [the_person.title]'s ass with spurt after spurt of cum."
             if the_person.opinion_score_being_covered_in_cum() < 0:
                 the_person "Ugh. It feels so sticky..."
             elif the_person.opinion_score_being_covered_in_cum() > 0:
                 the_person "God, your seed feels so fucking hot..."
             else:
-                the_person "Mmm, that it [the_person.mc_title], let it all out..."
-
+                the_person "Mmm, that's it [the_person.mc_title], let it all out..."
             "After several seconds, you look down at [the_person.possessive_title]. Her ass is coated in your spunk."
             $ the_person.draw_person()
             "You both stand up."
@@ -1807,7 +1803,7 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
                 $ mc.condom = False
             else:
                 "She opens her mouth and takes the tip, while she strokes your shaft with her hand rapidly..."
-            "After a couple strokes, you explode, dumping your cum into [the_person.possessive_title] mouth. Some of it drips down her chin."
+            "After a couple strokes, you explode, dumping your cum into [the_person.possessive_title]'s mouth. Some of it drips down her chin."
             $ the_person.cum_in_mouth()
             $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
             $ the_person.draw_person(position = "blowjob")
@@ -1815,7 +1811,7 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
                 "When you finish, [the_person.possessive_title] looks up at you. Her face isn't pleasant."
                 mc.name "Come on now. You saw the screen. Swallow like a good girl."
                 $ the_person.change_obedience(5)
-                "She gives you a middle finger, but eventually swallows, the gags a little and makes a face."
+                "She gives you a middle finger, but eventually swallows, then gags a little and makes a face."
                 the_person "Fuck, I hate doing that. You're a lucky son of a bitch, you know that?"
             elif the_person.opinion_score_drinking_cum() > 0:
                 "As you cum [the_person.possessive_title] eagerly drinks every drop."
@@ -1828,8 +1824,6 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
                 $ the_person.change_obedience(5)
                 "[the_person.title] grimaces a bit, but dutifully swallows your cum."
                 the_person "Mmm, that wasn't so bad."
-
-
             "You take a deep breath to steady yourself. [the_person.title] looks up at you from her knees, a bit of your cum still on her chin."
             $ the_person.draw_person()
             "You both stand up."
@@ -1858,7 +1852,7 @@ label myra_breeding_on_stream_label():    #Requires breeding and exhibition feti
     the_person "As a hint, I am super fertile right now ;)"
     mc.name "I'll be right there."
     $ mc.end_text_convo()
-    "Sounds like [the_person.title] wants to get bred on stream... seems to good to pass up!"
+    "Sounds like [the_person.title] wants to get bred on stream... seems too good to pass up!"
     "You head over to the game cafe. Then make your way to the adults only section."
     $ mc.change_location(gaming_cafe)
     $ mc.location.show_background()
@@ -1871,22 +1865,18 @@ label myra_breeding_on_stream_label():    #Requires breeding and exhibition feti
     "As you start walking towards her, she manages to score a kill in the shooter she is playing. You know exactly what part you play in this stream."
     "You have no doubt she really is fertile right now. You are about to knock her up live on stream."
     "You take your clothes off, then slowly approach her from behind."
-    "You run your hand up her legs as you climb onto the couch. She peaks at the screen and sees that it's you, but otherwise doesn't let herself react at all."
-    "Her legs part just the slightest you run you hand up between them. You can feel the heat and humidity coming off her cunt when you hand gets to it."
+    "You run your hand up her legs as you climb onto the couch. She peeks at the screen and sees that it's you, but otherwise doesn't let herself react at all."
+    "Her legs part just the slightest as you run your hand up between them. You can feel the heat and humidity coming off her cunt when your hand gets to it."
     "[the_person.title] is turned on and ready to fuck. You give her ass a little spank then climb onto her."
-    "The only indication she gives of what is about to happen, she says on the headset to her teammates."
+    "The only indication she gives of what is about to happen, she says on the headset to her teammates." #I'm not sure how to fix this line but it sounds wrong
     if the_person.is_girlfriend():
-        the_person "Hey, sorry if I seem distracted for a bit. My boyfriend is her and he is going to knock me up now. No no, I'm going to keep playing."
+        the_person "Hey, sorry if I seem distracted for a bit. My boyfriend is here and he is going to knock me up now. No no, I'm going to keep playing."
     else:
         the_person "Hey, sorry my sperm donor is here and he's about to knock me up, sorry if I seem a bit distracted. No no, I'm going to keep playing."
 
 
 
     return
-
-
-
-
 
 # Obedience related events
 
@@ -2013,7 +2003,7 @@ label myra_bigger_tits_final_label(the_person):       #If her tits are bigger, s
         "As [the_person.possessive_title] gets down on her knees, you whip out your cock. She slides over to you."
         the_person "I've like, never done this so... you might have to help me a bit..."
         mc.name "I'm sure you'll do great."
-        "With your cock in her hand, she slides the tip of your cock into her cleavage. Your erection quietly disappears into her ample busom."
+        "With your cock in her hand, she slides the tip of your cock into her cleavage. Your erection quietly disappears into her ample bosom."
         "Her soft tit flesh feels great wrapped around you."
         $ the_person.change_arousal(10)
         $ mc.change_locked_clarity(30)
@@ -2034,10 +2024,10 @@ label myra_bigger_tits_final_label(the_person):       #If her tits are bigger, s
         the_person "That's... what are you doing?"
         mc.name "I want to feel them for myself. You don't mind, right?"
         the_person "I suppose not... You did give me the drugs to do this I guess..."
-        "You step forward and again. You reach forward with both hands and take hold of her twin peaks."
+        "You step forward again. You reach forward with both hands and take hold of her twin peaks."
         "They feel hot and soft to the touch. She whimpers a bit as you feel her up."
         $ the_person.change_arousal(20)
-        the_person "They are amazing. You should proud to show these girls off."
+        the_person "They are amazing. You should be proud to show these girls off."
         $ the_person.increase_opinion_score("showing her tits")
         $ mc.change_locked_clarity(30)
         the_person "Mmm... yeah I think so..."
@@ -2060,7 +2050,7 @@ label myra_bigger_tits_final_label(the_person):       #If her tits are bigger, s
         "As [the_person.possessive_title] gets down on her knees, you whip out your cock. She slides over to you."
         the_person "I've like, never done this so... you might have to help me a bit..."
         mc.name "I'm sure you'll do great."
-        "With your cock in her hand, she slides the tip of your cock into her cleavage. Your erection quietly disappears into her ample busom."
+        "With your cock in her hand, she slides the tip of your cock into her cleavage. Your erection quietly disappears into her ample bosom."
         "Her soft tit flesh feels great wrapped around you."
         $ the_person.change_arousal(10)
         $ mc.change_locked_clarity(30)
@@ -2109,7 +2099,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     mc.name "Alright. I'm just gonna go play something for a bit."
     $ clear_scene()
     "You step away from the desk. You find a computer and sit down."
-    "You aren't sure if that will work or not, but atleast it left her thinking about it. Maybe she'll come around to it."
+    "You aren't sure if that will work or not, but at least it left her thinking about it. Maybe she'll come around to it."
     "You hop on a computer and load up Guild Quest 2. You just play some overland stuff for a bit, your mind thinking about [the_person.title]."
     "After a couple hours, you are just getting ready to get up..."
     $ the_person.draw_person(emotion = "sad")
@@ -2120,7 +2110,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     mc.name "Oh... she talks about me a lot?"
     the_person "I... look, I'm not here to talk about her, okay?"
     mc.name "Ok... what are you here to talk about?"
-    the_person "I was thinking about it a lot. I DO want to get better, I had honestly just written off blowjob as something OTHER girls do..."
+    the_person "I was thinking about it a lot. I DO want to get better, I had honestly just written off blowjobs as something OTHER girls do..."
     the_person "But the other night, the atmosphere was just... different? I WANTED to make you feel good. But I felt like I had no idea what I was doing..."
     mc.name "Ah, so you really DO need a coach! Don't worry [the_person.title]. I'm here to help."
     the_person "That's... why did I not see that reaction coming. You are so predictable."
@@ -2130,14 +2120,14 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     the_person "What, like... right now?"
     mc.name "Of course! There's no time like the present."
     the_person "Ummm, maybe we could start like some other..."
-    mc.name "Non sense! I'm your coach, I know what's best. Let's go."
+    mc.name "Nonsense! I'm your coach, I know what's best. Let's go."
     $ the_person.change_obedience(5)
     $ the_person.draw_person(position = "stand3")
     "You stand up."
     the_person "Umm, I guess there is a stock room where I keep spare computer parts."
     mc.name "Lead the way."
     $ the_person.draw_person(position = "walking_away")
-    "[the_person.possessive_title] turns away and you follow her. She goes into a door way, down a small hall, and into a small parts room."
+    "[the_person.possessive_title] turns away and you follow her. She goes into a doorway, down a small hall, and into a small parts room."
     $ the_person.draw_person()
     the_person "Fuck, I can't believe I'm doing this."
     mc.name "Don't worry. I'll help you develop skills that will be useful the rest of your life."
@@ -2230,9 +2220,9 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     mc.name "Alright, I'll see you later."
     $ clear_scene()
     $ the_person.apply_outfit(the_person.planned_outfit)
-    "You step out of the stock room. The gaming nights your are having with [the_person.possessive_title] and [alexia.title] are paying off."
+    "You step out of the stock room. The gaming nights you are having with [the_person.possessive_title] and [alexia.title] are paying off."
     "A week ago, [the_person.title] would never even consider sucking you off, but now she seems interested, if only to show up her friend."
-    "You make a mental note to check back up with her in a week or so and see how her technique is progressing."
+    "You make a mental note to check back in with her in a week or so and see how her technique is progressing."
     "She might also be more willing to further her blowjob skills if you increase her obedience as well..."
     call advance_time from _call_advance_myra_bj_train_01_time_
     return

@@ -4,11 +4,11 @@ init 10 python:
         love_story_list = []
         love_story_list.append("[myra.title] has opened a gaming cafe at the mall. Play games there to restore energy.")
         if not myra_will_grind_with_mc():
-            love_story_list.append("Get your character to atleast level 30 to play Guild Quest 2 with [myra.title].")
+            love_story_list.append("Get your character to at least level 30 to play Guild Quest 2 with [myra.title].")
         else:
             love_story_list.append("[myra.title] enjoys playing Guild Quest 2 with you.")
         if myra_plays_esports():
-            love_story_list.append("You learned she is a part of an eSports team.")
+            love_story_list.append("You learned she is a part of an esports team.")
         elif myra.love < 20:
             love_story_list.append("Increase [myra.title]'s love to learn more about her.")
             return love_story_list
@@ -16,7 +16,7 @@ init 10 python:
             love_story_list.append("Swing by the gaming cafe to learn more about [myra.title].")
             return love_story_list
         if myra_has_failed_tournament():
-            love_story_list.append("However, [myra.title] lost her first eSports tournament, badly.")
+            love_story_list.append("However, [myra.title] lost her first esports tournament, badly.")
         elif myra.love < 40:
             love_story_list.append("Increase [myra.title]'s love to learn more about her.")
             return love_story_list
@@ -32,7 +32,7 @@ init 10 python:
             love_story_list.append("Stop by the cafe in the evening to learn the repercussions of her loss.")
             return love_story_list
         if myra_has_been_sponsored():
-            love_story_list.append("You stepped up and sponsored her eSports team yourself.")
+            love_story_list.append("You stepped up and sponsored her esports team yourself.")
         if not mc.business.has_funds(25000):
             love_story_list.append("You need more money to step up and sponsor her yourself.")
             return love_story_list
@@ -124,7 +124,7 @@ init 10 python:
         elif myra_alexia_teamup_scene.get_stage() == 3:
             teamup_story_list.append([alexia, "[alexia.title] and [myra.title] compete for you to fuck them on Friday nights."])
         elif myra_alexia_teamup_scene.get_stage() == 3:
-            teamup_story_list.append([alexia, "[alexia.title] and [myra.title] have a friendly gaming night that always needs in a threesome on Friday nights."])
+            teamup_story_list.append([alexia, "[alexia.title] and [myra.title] have a friendly gaming night that always ends in a threesome on Friday nights."])
         return teamup_story_list
 
     def myra_story_other_list():
@@ -136,7 +136,7 @@ init 10 python:
             elif myra_focus_progression_scene.get_stage() == 1:
                 other_info_list.append("You distract her by groping her tits during training. Raise her sluttiness to take disitractions further.")
             elif myra_focus_progression_scene.get_stage() == 2:
-                other_info_list.append("You distract her by finger her during training. Raise her sluttiness to take disitractions further.")
+                other_info_list.append("You distract her by fingering her during training. Raise her sluttiness to take disitractions further.")
             elif myra_focus_progression_scene.get_stage() == 3:
                 other_info_list.append("You distract her by getting a lapdance during training. Raise her sluttiness to take disitractions further.")
             elif myra_focus_progression_scene.get_stage() == 4:
