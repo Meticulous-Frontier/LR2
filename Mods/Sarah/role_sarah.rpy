@@ -1132,13 +1132,13 @@ label Sarah_get_drinks_label():
     mom "Oh! You two look absolutely soaked! Are you okay?"
     mc.name "Thanks, [mom.title]! This is [the_person.title]! We got caught out in the rain walking back. Do you think you could grab us a few towels, and maybe have some dry clothes for her to wear for a bit?"
     if sarah_epic_tits_progress() == 0: #Small tits
-        mom "Yes of course! She looks about Lily's size, I'm sure I can find something..."
+        mom "Yes of course! She looks about [lily.name]'s size, I'm sure I can find something..."
     elif sarah_epic_tits_progress() == 2: #Big tits
         "[mom.title] looks her over for a moment, checking out her curves."
-        mom "Yes! I'm not sure Lily's clothes would work... I bet I have something I could give her, just give me a minute."
+        mom "Yes! I'm not sure [lily.name]'s clothes would work... I bet I have something I could give her, just give me a minute."
     elif sarah_epic_tits_progress() == 3: #Huge tits
         "[mom.possessive_title] eyes travel all over [the_person.title]'s body. Her eyes go wide when she see how big her tits are."
-        mom "I'm not sure I have... actually, I think Gabrielle might have left something that would fit her..."
+        mom "I'm not sure I have... actually, I think [cousin.name] might have left something that would fit her..."
     $ scene_manager.update_actor(mom, position = "walking_away")
     "[mom.title] leaves to go find something. [the_person.title] is shivering cold."
     mc.name "I'm sorry, you look so cold. Why don't you come here for a minute..."
@@ -1153,7 +1153,7 @@ label Sarah_get_drinks_label():
     "ABORT! You quickly let go of [the_person.title] when your mother interrupts you."
     mom "Sorry! I didn't... here you go!"
     "She quickly hands [the_person.title] a large towel and a set of clothes."
-    mom "There you are dear. I'm sorry, but Lily is in the bathroom right now, taking one of her ridiculously long showers..."
+    mom "There you are dear. I'm sorry, but [lily.name] is in the bathroom right now, taking one of her ridiculously long showers..."
     mc.name "That's okay, she can change in my room! I can wait out here."
     the_person "Thank you! I'll be quick!"
     $ scene_manager.update_actor(the_person, position = "walking_away")

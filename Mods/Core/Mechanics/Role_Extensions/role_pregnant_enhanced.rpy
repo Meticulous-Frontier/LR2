@@ -19,7 +19,6 @@ init 3 python:
                 if len(argument_info) > 0:
                     renpy.say(None, "Available: " + crisis.name + "\n" + argument_info)
 
-
     def silent_pregnant_tits_start_person(person):
         person.event_triggers_dict["preg_knows"] = True
         person.tits = get_larger_tits(person.tits) #Her tits start to swell.
@@ -182,8 +181,8 @@ label silent_pregnant_tits_start(the_person):
     return
 
 label silent_pregnant_tits_announce(start_day, the_person):
-    "As you being to talk to [the_person.title], you can't help but notice her tits seem... a little larger than your remember?"
-    "The way the bounce is enticing also. There is this glow that surrounds her in general. You wonder what is going on?"
+    "As you begin to talk to [the_person.title], you can't help but notice her tits seem... a little larger than your remember?"
+    "The way they bounce is enticing also. There is this glow that surrounds her in general. You wonder what is going on?"
     call talk_person(the_person) from _call_talk_person_silent_11
     return
 
@@ -210,24 +209,19 @@ label silent_pregnant_transform_announce(start_day, the_person):
 
 label silent_pregnant_finish_announce(the_person): #TODO: have more variants for girlfriend_role, affair_role, etc.
     $ silent_pregnant_finish_announce_person(the_person)
-
     if the_person.title is None or not mc.phone.has_number(the_person):
         return  # unknown girls should not announce delivery
 
     # The girl tells you she'll need a few days to have the kid and recover, and she'll be back in a few days.
     "You get a call from [the_person.possessive_title]. You answer it."
     mc.name "Hey [the_person.title], what's up?"
-
     if the_person.is_employee():
         the_person "Hi [the_person.mc_title]. I wanted to let you to know that I won't be at work for a few days."
     else:
         the_person "Hi [the_person.mc_title], I have some exciting news."
-
     the_person "I saw my doctor yesterday and he tells me I'm going to pop any day now."
-
     if day - the_person.event_triggers_dict.get("preg_start_date", day) <= 90: #It's unusually short
         the_person "It's earlier than I expected, but he tells me everything looks like it's perfectly normal."
-
     mc.name "That's amazing news. Do you need me to do anything?"
     the_person "No, I just wanted to let you know. Thanks for everything!"
     mc.name "Okay, I'll talk to you soon then."
@@ -236,12 +230,10 @@ label silent_pregnant_finish_announce(the_person): #TODO: have more variants for
 
 label silent_pregnant_finish(the_person):
     $ pregnant_finish_person(the_person)
-
     if the_person.title is None:
         return  # unknown girls should not about the delivery
 
     "You get a call from [the_person.possessive_title] early in the morning. You answer it."
-
     if the_person in [aunt, mom]:
         the_person "Hey [the_person.mc_title], good news! Two days ago I had a beautiful, healthy baby girl!"
         mc.name "That's amazing, where is she now?"

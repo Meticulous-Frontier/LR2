@@ -44,7 +44,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     the_person "You have keys for this place? You must have been a very good customer for that cheap fuck to give you some keys."
     $ strip_club.background_image = Image(get_file_handle("Club_Background.png")) # Set up the original background
     $ mc.location.show_background()
-    "You just smile and take her inside. About 30 minutes later, they're all there, eager to get their job back."
+    "You just smile and take her inside. About 30 minutes later, they're all there, eager to get their jobs back."
     $ strip_club_call_in_all_strippers()
     $ the_person.draw_person()
     the_person "Okay [mc.name], we're all here... Actually, what are we doing here? You wanted a private party?"
@@ -107,7 +107,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
         $ the_person = get_random_from_list([x for x in stripclub_strippers if x not in [cousin]])
         $ the_person.draw_person(emotion = "happy", position = "stand5")
         mc.name "Okay girls, the team is built. Enjoy the rest of your day, we will reopen the club tomorrow evening."
-        "Excited to have got back their job and the unexpected pay raise, the girls get dressed and walk out of the club."
+        "Excited to have got back their jobs and the unexpected pay raises, the girls get dressed and walk out of the club."
     elif __builtin__.len(stripclub_strippers) > 0:
         mc.name "Okay [stripclub_strippers[0].name], I will count on you. Enjoy the rest of the day, we will re-open the club tomorrow evening."
         "Excited to have got back her job and the unexpected pay raise, the girl puts her clothes back on and walks out."

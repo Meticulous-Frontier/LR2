@@ -200,7 +200,7 @@ label quest_production_line_intro_label(the_person):
     the_person "Okay, he said he actually has time tomorrow afternoon! He can meet with you and grab some coffee, maybe talk about some of the workflows and processes around here."
     mc.name "That sounds perfect."
     the_person "Yeah... He's really smart! I'm not sure if any of his ideas will be useful or not, but if anyone can help, I'm sure it would be him!"
-    the_person "He said to share his contact info and to meet him over at the coffee shop. His name is [dad_name]."
+    the_person "He said to share his contact info and to tell you to meet him over at the coffee shop. His name is [dad_name]."
     "You get his contact info and put it in your phone."
     mc.name "Thank you."
     the_person "No problem!"
@@ -256,7 +256,7 @@ label quest_production_line_coffee_label():
     mc.name "I understand."
     $ del dad_name
     "You get up and leave the coffee shop. So, if you want his help streamlining your production department, you should give [the_person.title] a raise."
-    "Next time you see her, maybe you could just give her a performance review? High praise for her performance followed by raise."
+    "Next time you see her, maybe you could just give her a performance review? High praise for her performance followed by a raise."
     $ quest_production_line().set_quest_flag(31)
     $ mall.remove_action(quest_production_line_coffee)
     $ mc.business.remove_mandatory_crisis("quest_production_line_coffee_miss_label")
@@ -281,7 +281,7 @@ label quest_production_line_raise_miss_label():
     "You have a message on your phone. It is from [dad_name]."
     dad_name "I asked my daughter last night if she had any good news about her job to share. She got suspicious and dragged out of me that I'd told you to give her a raise."
     dad_name "I told you to move quick. She missed a potential opportunity to rent a nice condo. The deal is off, good luck with your drug business, asshole."
-    "Yikes! Maybe you should have moved a little quicker on that meeting [dad_name]'s daughter..."
+    "Yikes! Maybe you should have moved a little quicker on that meeting with [dad_name]'s daughter..."
     #TODO lower girl opinions, causing her to probably quit ASAP.
     $ del dad_name
     $ quest_production_line().set_quest_flag(39)
@@ -335,7 +335,7 @@ label quest_production_line_after_raise_consult_label():
             mc.name "I'm sorry, I won't be able to help then."
             the_person "Damn... okay, I'm sure I'll be able to find someone."
             "You hang up the phone."
-            "You already gave her a raise. Besides, you really don't even know her that well. Why would you want to spend all evening help her move?"
+            "You already gave her a raise. Besides, you really don't even know her that well. Why would you want to spend all evening helping her move?"
             $ quest_production_line().set_quest_flag(69)
             $ quest_production_line().quest_completed()
     $ del dad_name
@@ -365,7 +365,7 @@ label quest_production_line_help_move_label():
         "Eventually, she lets go."
     the_person "Okay... let's get to work!"
     $ clear_scene()
-    "You spend about an hour helping [the_person.title] loading her things into a small rental trailer."
+    "You spend about an hour helping [the_person.title] load her things into a small rental trailer."
     "When you are done, you ride with her over to her new apartment."
     #TODO her apartment which is actually different than the place she was earlier.
     $ the_person.draw_person()
@@ -637,7 +637,7 @@ label princess_cum_vagina(the_person):
             "She sighs happily as you cum inside her."
 
         elif the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
-            the_person "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise we can do it again without condom next time?"
+            the_person "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise we can do it without a condom next time?"
 
         else:
             the_person "Oh [the_person.mc_title], so much hot cum... I love you [the_person.mc_title]."

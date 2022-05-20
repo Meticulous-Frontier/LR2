@@ -126,25 +126,23 @@ label stay_wet_label(the_person): # Can expand with dialogue options and degrees
 label slave_collar_person_label(the_person):
     if the_person.slave_collar:
         $ slave_remove_collar(the_person)
-        "You remove the collar from your [the_person.possessive_title]'s neck"
+        "You remove the collar from [the_person.possessive_title]'s neck"
     else:
         call screen enhanced_main_choice_display(build_menu_items([["Select Collar"] + [["Simple Collar", "Simple Collar"], ["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Spiked Choker", spiked_choker], ["Wide Lace Choker", wide_choker], ["Back", "Back"]]]))
         $ collar_choice = _return
-
         if collar_choice == "Back":
             return
 
         $ slave_assign_new_collar(the_person, collar_choice)
         $ del collar_choice
-
-        "You put one of the collars you bought around your [the_person.possessive_title]'s neck."
+        "You put one of the collars you bought around [the_person.possessive_title]'s neck."
 
     return
 
 label slave_trim_pubes_label(the_person):
     mc.name "You're going to trim your pubes for me."
     "[the_person.possessive_title] nods obediently."
-    the_person "Yes, Master. How do you prefer it?"
+    the_person "Yes, Master. How do you prefer them?"
     if the_person.event_triggers_dict.get("trimming_pubes", None) is not None:
         # She was already planning on a different style, so we can have some change your mind dialogue here
         $ mc.business.mandatory_crises_list.remove(the_person.event_triggers_dict.get("trimming_pubes",None)) #If she already had an event for this make sure to remove it.
@@ -208,18 +206,18 @@ label slave_alarm_clock_label(the_person):
         "You're woken up by the voice of [the_person.possessive_title]. You struggle to open your eyes and find her sitting on the edge of your bed."
         $ the_person.draw_person(position="sitting")
         mc.name "Uh... Huh?"
-        "You roll over and check your phone. It's a couple of minutes left until your alarm clock usually rings."
+        "You roll over and check your phone. It's a couple of minutes before your alarm clock usually rings."
         $ the_person.draw_person(position = "back_peek")
         "She smiles and stands up, unsure of what to do next."
         $ the_person.draw_person()
         "You sit up on the side of the bed and stretch, letting out a long yawn."
         if the_person.sluttiness < 20:
             the_person "Oh... I should... Uh..."
-            "[the_person.possessive_title] blushes and turns around suddenly. It takes you a moment to realize why: your morning wood pitching an impressive tent with your underwear."
+            "[the_person.possessive_title] blushes and turns around suddenly. It takes you a moment to realize why: your morning wood is pitching an impressive tent with your underwear."
             the_person "No, it's perfectly natural. I'll give you some privacy."
             $ the_person.change_slut(2)
             $ the_person.draw_person(position = "back_peek")
-            "She can't help but taking some quick glances at you, but seems to be trying her best to respect your privacy."
+            "She can't help but take some quick glances at you, but seems to be trying her best to respect your privacy."
 
         else:
             the_person "Oh, and you might want to take care of that before you go out [the_person.mc_title]."
@@ -288,21 +286,17 @@ label slave_alarm_clock_label(the_person):
 
                         "Climax":
                             "Knowing that [the_person.possessive_title] is just a step away watching you stroke your cock and waiting for you to cum pushes you over the edge."
-                            "You grunt and climax, firing your load out in an arc. [the_person.title] gasps softly and watches it fly, looks away."
+                            "You grunt and climax, firing your load out in an arc. [the_person.title] gasps softly and watches it fly, then looks away."
                             the_person "Well done [the_person.mc_title]. I'll make sure to clean that up while you're out today."
                             "She leans over and kisses you on the forehead."
                             the_person "Now get dressed or you'll be late for work."
                             $ clear_scene()
 
-
                 "Ask her to leave":
                     mc.name "I think it will take care of itself [the_person.title]. Thanks for the offer but I can pick out my own outfit."
-                    the_person "Oh, okay [the_person.mc_title]. Just make sure don't give any of those nice girls you work with a shock when you walk in."
+                    the_person "Oh, okay [the_person.mc_title]. Just make sure you don't give any of those nice girls you work with a shock when you walk in."
                     $ the_person.draw_person()
                     "She turns back to you and gives you a hug and a kiss. Her eyes continue to linger on your crotch."
-
-
-
 
     elif the_person.sluttiness < 70:
         "You're slowly awoken by a strange, pleasant sensation. When you open your eyes it takes a moment to realize you aren't still dreaming."
@@ -333,7 +327,7 @@ label slave_alarm_clock_label(the_person):
             "Climax":
                 mc.name "I'm almost there [the_person.title], keep going!"
                 "She nods and strokes your dick as fast as she can manage, pushing you over the edge."
-                "You grunt and fire your hot load into up into the air. It falls back down onto your stomach and [the_person.possessive_title]'s hand."
+                "You grunt and fire your hot load up into the air. It falls back down onto your stomach and [the_person.possessive_title]'s hand."
                 "[the_person.possessive_title] strokes you slowly for a few seconds, then lets go and places her hand on her lap while you take a second to recover."
 
         the_person "Whew, that was a lot. I hope that leaves you feeling relaxed for the rest of the day."
@@ -341,7 +335,6 @@ label slave_alarm_clock_label(the_person):
         $ the_person.draw_person(position = "back_peek")
         "She smiles and gets up. She pauses before she leaves your room."
         the_person "You better get ready now or you're going to be late!"
-
 
     elif the_person.sluttiness < 90:
         #TODO: image a lying down blowjob pose
@@ -375,7 +368,6 @@ label slave_alarm_clock_label(the_person):
                 "[the_person.possessive_title] takes a second gulp to make sure it's all gone, then opens her mouth and takes a deep breath."
                 $ the_person.call_dialogue("cum_mouth")
 
-
             "Order her to swallow\n{color=#ff0000}{size=18}Requires: 130 Obedience{/size}{/color} (disabled)" if the_person.obedience < 130:
                 pass
 
@@ -387,8 +379,6 @@ label slave_alarm_clock_label(the_person):
         mc.name "Thanks, [the_person.title], you're the best."
         $ the_person.change_stats(love = 2)
         the_person "My pleasure, now you should be getting up or you'll be late for work!"
-
-
 
     else:
         # First we need to take her and remove enough clothing that we can get to her vagina, otherwise none of this stuff makes sense.
@@ -404,7 +394,7 @@ label slave_alarm_clock_label(the_person):
             "Let [the_person.possessive_title] fuck you":
                 mc.name "That would be great [the_person.title]."
                 $ the_person.change_stats(happiness = 5, love = 2)
-                "You lie back relax as [the_person.possessive_title] lowers herself down onto your hard cock."
+                "You lie back and relax as [the_person.possessive_title] lowers herself down onto your hard cock."
                 # call fuck_person(the_person, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, girl_in_charge = True, position_locked = True) from _slave_alarm_clock_label_2
                 call get_fucked(the_person, the_goal = "vaginal creampie", private= True, start_position = cowgirl, start_object = bedroom.get_object_with_name("bed"), skip_intro = True, allow_continue = False) from _slave_alarm_clock_label_2
                 $ the_report = _return

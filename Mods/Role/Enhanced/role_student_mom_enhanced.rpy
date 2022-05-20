@@ -9,23 +9,21 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
         scene_manager = Scene()
         christina.home.show_background()
         scene_manager.add_actor(the_student, emotion = "happy")
-
     if first_time:
         "[the_student.possessive_title] leads you into a finely decorated dining room. She pulls out a chair and motions for you to sit down at the table."
     else:
         "[the_student.possessive_title] leads you into the dining room and pulls out a chair for you."
-
     the_student "You just have a seat, I'll get everything ready."
     $ scene_manager.update_actor(the_student, position = "sitting")
     "You sit down and wait while [the_student.possessive_title] sets out place mats and cutlery. When she's done she sits down in the seat next to you."
     $ scene_manager.add_actor(the_mom, display_transform = character_left_flipped)
     "After waiting for a few minutes [the_mom.possessive_title] steps out from the kitchen, carrying a tray of roasted chicken and a bottle of wine under her arm."
-    "She places the tray down, places the bottle of wine down, and sit down across from you and her daughter."
+    "She places the tray down, places the bottle of wine down, and sits down across from you and her daughter."
     $ scene_manager.update_actor(the_mom, display_transform = character_center_flipped, position = "sitting")
     the_mom "Mr.[the_mom.last_name] should be home any minute now, he's probably just held up at the office."
     mc.name "No problem, we can wait a little..."
     $ scene_manager.update_actor(the_mom, position = "walking_away")
-    "You're interrupted by the phone ringing. [the_mom.possessive_title] apologies and moves into the kitchen."
+    "You're interrupted by the phone ringing. [the_mom.possessive_title] apologizes and moves into the kitchen."
     $ scene_manager.hide_actor(the_mom)
     the_mom "Yes... Okay... [the_student.name]'s tutor is over for dinner... I'll tell him... We can talk when you get home..."
     $ scene_manager.show_actor(the_mom, position = "sitting", emotion = "sad")
@@ -36,7 +34,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
         the_mom "He wanted me to tell you how happy he is with your work."
         "[the_student.possessive_title] sits, uncomfortably quiet, as her mother uncorks the bottle of wine and pours herself a generous amount."
     else:
-        the_mom "My husband is going to be at the office later again. He told us to have dinner without him."
+        the_mom "My husband is going to be at the office late again. He told us to have dinner without him."
         "[the_student.possessive_title] sighs unhappily as her mother uncorks the bottle of wine. She pours herself a generous glass."
 
     the_mom "Let me pour you both a glass..."
@@ -81,7 +79,6 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
         "Leave her drink alone":
             "You lean back in your chair and relax while you wait for [the_mom.possessive_title] and [the_student.possessive_title] to return."
 
-
     "After another minute or two both of them come back from the kitchen, now carrying small bowls of ice cream."
     $ scene_manager.update_actor(the_mom, position = "stand3")
     $ scene_manager.update_actor(the_student, position = "sitting")
@@ -92,7 +89,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
     the_mom "It seems like my husband is always at work, it's nice to have some company."
     menu:
         "Talk about [the_student.possessive_title]":
-            mc.name "It's no trouble. It also gives us a perfect opportunity to talk about your daughters education."
+            mc.name "It's no trouble. It also gives us a perfect opportunity to talk about your daughter's education."
             if the_mom.event_triggers_dict.get("student_mom_extra_obedience", False):
                 the_mom "Yes, give me an update on how things are going."
                 "You give [the_mom.possessive_title] a recap of your work educating [the_student.possessive_title], leaving out anything too explicit."
@@ -118,7 +115,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
 
         "Touch [the_student.possessive_title]" if the_student.effective_sluttiness("touching_body") > 35:
             mc.name "I'm glad to be here. I'm always happy to spend time with you and your daughter."
-            "You move a hand to your side, then and onto [the_student.possessive_title]'s thigh, rubbing it gently."
+            "You move a hand to your side, and then onto [the_student.possessive_title]'s thigh, rubbing it gently."
             $ mc.change_locked_clarity(10)
             "You move your hand higher, up her thigh and to her crotch. You can feel her struggling to keep still in front of her mother."
 
@@ -141,21 +138,18 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
             the_mom "[the_student.name], could you clean things up for us?"
 
     $ scene_manager.update_actor(the_student, position = "walking_away")
-    "[the_student.possessive_title] collects up the dishes again when you finished dessert and carries them to the kitchen."
+    "[the_student.possessive_title] collects the dishes again when you've finished dessert and carries them to the kitchen."
     $ scene_manager.hide_actor(the_student)
     the_mom "It's been wonderful having you over [the_mom.mc_title], but I'm sure you're looking forward to getting home."
     $ scene_manager.update_actor(the_mom, position = "stand3")
     mc.name "The dinner was fantastic. I'm lucky to have such a generous, beautiful host."
-    "[the_mom.possessive_title] seems to blush, although it might just be wine taking effect."
-
+    "[the_mom.possessive_title] seems to blush, although it might just be the wine taking effect."
     $ her_hallway.show_background()
     $ scene_manager.show_actor(the_student, position = "stand4")
     "[the_mom.possessive_title] and [the_student.possessive_title] walk you to the door to say goodbye."
     the_student "Bye [the_student.mc_title], I hope you'll be by again soon!"
-
     if the_mom.effective_sluttiness("kissing") > 20 and not the_mom.event_triggers_dict.get("student_mom_door_kiss", 0) == 1: #TODO: Add a check that we haven't triggered the "I'm sorry" event.
         the_mom "[the_student.name], I need to have a private word with [the_mom.mc_title] before he goes."
-
         $ scene_manager.remove_actor(the_student)
         "[the_student.possessive_title] nods and goes upstairs to her room. [the_mom.possessive_title] waits until she is gone before turning back to you."
         if the_mom.event_triggers_dict.get("student_mom_door_kiss", 0) == 2: #TODO: Add a check that you've also triggered the "I'm sorry event

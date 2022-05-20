@@ -182,7 +182,7 @@ init -1 python:
 
 label strip_club_advance_time_label():
     if time_of_day == 4:
-        "Tired after you spent the night at the club, you go back home, to have a good nights rest."
+        "Tired after you spent the night at the club, you go back home, to have a good night's rest."
         $ mc.change_location(bedroom)
         $ mc.location.show_background()
     call advance_time from _call_advance_time_strip_club_end_of_day
@@ -206,7 +206,7 @@ label strip_club_bdsm_dildochair_MC_label(the_person): # MC use the dildo chair 
     the_person "Are you planning something naughty for me, [the_person.mc_title]?"
     menu:
         "Reward her (tooltip)Let her orgasm":
-            mc.name "Since you've been a good girl [the_person.title], I will let you have as many orgasm your body can take."
+            mc.name "Since you've been a good girl [the_person.title], I will let you have as many orgasm as your body can take."
             if mc.location.get_person_count() > 1 and get_bdsm_exhibitions(the_person) <= 3 and the_person.get_opinion_score("public sex") <= 0: # She's still a bit shy
                 the_person "Really [the_person.mc_title]? Here in front of everyone? I don't know if I..."
             elif the_person.obedience <= 200:
@@ -333,7 +333,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
             jump dildochair_reward_menu
         "Speed 3\n{color=#ff0000}{size=18}Requires at least 15 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if the_person.energy < 15:
             pass
-        "Max speed (tooltip)Extremely increase her arousal" if the_person.energy >= 25: # Each action use 10 energy and give 40 arousal and 4 obedience
+        "Max speed (tooltip)Extraordinarily increase her arousal" if the_person.energy >= 25: # Each action use 10 energy and give 40 arousal and 4 obedience
             "A loud buzz can be heard in the room, [the_person.title]'s tongue is out and begs to lick something!"
             $ dildochair_pleasure_loop_intensity(the_person, arousal = 10, energy = -5)
             if the_person.event_triggers_dict.get("dildochair_dildos") == 1: # One dildo in the pussy
@@ -403,7 +403,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
             elif the_person.arousal >= 90:
                 "While you stop the chair and start to release the restraints she looks at you with hopeful eyes."
                 the_person "Please [the_person.mc_title]... Master! Yes, Master... Please, let me cum at least one time!"
-                mc.name "I will consider you request for the next time, Slave. Now you can get dressed."
+                mc.name "I will consider your request for the next time, Slave. Now you can get dressed."
                 $ the_person.apply_planned_outfit()
                 $ scene_manager.update_actor(the_person, position = "stand3", emotion = "sad")
                 $ the_person.change_stats(obedience = 5, happiness = -5)
@@ -477,7 +477,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
             $ scene_manager.update_actor(the_person, emotion = "happy")
             call strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = mistress, is_punishment = False) from _call_strip_club_bdsm_dildochair_Mistress_reward
         "Punish her (tooltip)Deny her orgasm":
-            mc.name "Since you've not been a good slave [the_person.title], you will be pleased but you're not allowed to orgasm."
+            mc.name "Since you've not been a good slave [the_person.title], you will be pleasured but you're not allowed to orgasm."
             $ scene_manager.update_actor(the_person, emotion = "sad", position = "stand4")
             if get_bdsm_exhibitions(the_person) <= 3 and the_person.get_opinion_score("public sex") <= 0: # She's still a bit shy
                 the_person "Really [the_person.mc_title]? Here in front of everyone? I don't know if I..."
@@ -534,7 +534,7 @@ label cage_her_label(the_person):
         the_person "What? Are you crazy?"
         mc.name "Oh, don't worry [the_person.title], you'll enjoy it!"
         if the_person.sluttiness < 60:
-            the_person "There's no absolutely way I'll do it... Never in my life!"
+            the_person "There's absolutely no way I'll do it... Never in my life!"
             "Maybe I need to work a bit on her obedience or her sluttiness before she'll agree to this..."
             mc.name "Ok [the_person.title], but never say never!"
             return
@@ -543,17 +543,17 @@ label cage_her_label(the_person):
             the_person "It's so degrading... Do you promise me it'll be worth it?"
             mc.name "Have you ever been disappointed by your master?"
             "She looks deeply in your eyes, you can see her deepest dirty fantasies invade her mind."
-            "Then, without a word, she kneels and enter the cage."
+            "Then, without a word, she kneels and enters the cage."
     elif the_person.obedience < 200:
         $ the_person.draw_person(position = "stand3", emotion = "default")
         the_person "Are you sure it's really necessary?"
         mc.name "That's what I want from you right now, do you want to disappoint your master?"
-        "She know there's no return from this; if she accepts this she will forever be in your power."
-        "Then, without a word, she kneels and enter the cage."
+        "She knows there's no return from this; if she accepts this she will forever be in your power."
+        "Then, without a word, she kneels and enters the cage."
     else:
         $ the_person.draw_person(position = "stand3", emotion = "happy")
         the_person "As you wish, [the_person.mc_title]."
-        "Then she kneels and enter the cage."
+        "Then she kneels and enters the cage."
     $ the_person.add_role(caged_role)
     $ ran_num = renpy.random.randint(1,3)
     if ran_num == 1:
@@ -607,8 +607,8 @@ label caged_BJ_label(the_person):
             the_person "If it's the only way to please my master..."
         else:
             the_person "Don't you think it's degrading enough for me to being inside... 'this'?"
-            "Your gaze fixed in her eyes, you start a willingness fight: you know the first one who look down loses..."
-            "After a few seconds [the_person.title] realize where she is and, aware, looks the tip of your shoes."
+            "Your gaze fixed in her eyes, you start a willingness fight: you know the first one who looks down loses..."
+            "After a few seconds [the_person.title] realize where she is and, aware, looks down at the tip of your shoes."
             mc.name "My dear slave... Open your mouth, would you?"
     call fuck_person(the_person, private = False, start_position = blowjob, start_object = bdsm_room.get_object_with_name("Cage"), skip_intro = True, girl_in_charge = False, position_locked = True, ignore_taboo = True, affair_ask_after = False) from _call_caged_BJ
     $ the_person.clear_situational_slut("being_used_in_the_cage")
@@ -622,7 +622,7 @@ label caged_doggy_label(the_person):
         $ the_person.add_situational_slut("being_caged", 8, "Everyone can see the slut I am...")
     if the_person.get_opinion_score("public sex") >= 0:
         $ the_person.add_situational_slut("being_used_in_the_cage", (the_person.get_opinion_score("public sex")*5 +5), "Everyone can see the slut I am...")
-    "Meanwhile your finger play with [the_person.title]'s wet pussy, with the other hand you unzip your pants and set your hard dick free."
+    "Meanwhile your finger plays with [the_person.title]'s wet pussy, with the other hand you unzip your pants and set your hard dick free."
     if the_person.has_breeding_fetish() or the_person.get_opinion_score("doggy style sex") > 0:
         $ the_person.draw_person(position = "doggy", emotion = "happy")
         the_person "Oh! I like where this is going!"
@@ -641,7 +641,7 @@ label caged_doggy_label(the_person):
     return
 
 label caged_anal_doggy_label(the_person):
-    "Everyone now can see that [the_person.title] belongs to you... But there is a little something more you can do."
+    "Everyone can now see that [the_person.title] belongs to you... But there is a little something more you can do."
     "With your hand between the bars you start to caress [the_person.title]'s buttocks."
     if mc.location.get_person_count() > 1: # There's other people around
         $ the_person.add_situational_slut("being_caged", 8, "Everyone can see the slut I am...")

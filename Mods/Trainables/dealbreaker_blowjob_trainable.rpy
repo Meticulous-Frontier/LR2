@@ -66,13 +66,12 @@ label train_dealbreaker_blowjob_label(the_person):
         mc.name "Don't worry, you can go slow."
         "You wish you had a serum with you that you could give her that would help ease her into this."
 
-
     #Next up, if we have done similar acts, we bring up that they were good and she enjoyed them.
     if has_broken_similar_taboo:
         if the_person.has_broken_taboo("sucking_cock"):    # Somehow she now hates the position though.
             mc.name "You've done this before actually... remember?"
             the_person "Yes, of course."
-            mc.name "I know you probably don't like the taste, but it you can get used to it with a little practice."
+            mc.name "I know you probably don't like the taste, but you can get used to it with a little practice."
             the_person "I guess..."
             mc.name "It felt amazing, when your lips wrapped around my cock. Don't you like making me feel good?"
             "[the_person.possessive_title] closes her eyes for a moment, remembering that moment. Her voice wavers."
@@ -84,7 +83,7 @@ label train_dealbreaker_blowjob_label(the_person):
             mc.name "Wouldn't it make sense to return the favor? To make me feel as good as I make you feel when I get down between your legs and service you?"
             "[the_person.possessive_title] closes her eyes for a moment. Her voice wavers."
             the_person "I... I know I should, but it just..."
-            mc.name "Shhh, it's okay. Things between a man and woman are give and take, and when you get down on your knees and service him, it shows you are willing to give and no just take."
+            mc.name "Shhh, it's okay. Things between a man and woman are give and take, and when you get down on your knees and service him, it shows you are willing to give and not just take."
         elif the_person.has_broken_taboo("touching_penis"):
             mc.name "You are okay with using your hand. Don't you like it when you wrap your hand around it and start to jerk me off?"
             the_person "Mmm, yeah. It feels nice in my hand..."
@@ -111,14 +110,13 @@ label train_dealbreaker_blowjob_label(the_person):
         the_person "I do want to make you feel good. I think you talked me into trying it at least."
         "[the_person.possessive_title] is energetic. She actually seems a little eager to give it a try now that you've talked her into it."
     $ the_person.draw_person(position = "blowjob")
-    "[the_person.title] get's down on her knees in front of you. She waits patiently as you pull your dick out."
+    "[the_person.title] gets down on her knees in front of you. She waits patiently as you pull your dick out."
     mc.name "Good girl. Now, just go nice and slow. Focus on how you are making me feel, and let yourself enjoy it too."
     the_person "Okay..."
 
     #Copy blowjob position's taboo break scene.
     "She reaches out and gently holds onto your shaft with one hand and brings the tip closer to her lips."
     "She looks up at you just before the moment of truth, locking eyes as she opens her lips and slides the tip of your cock past them."
-
     "You sigh happily as you feel [the_person.title]'s warm mouth envelop your cock."
     "She moves slowly at first, gently working her head up and down over your sensitive tip."
 
@@ -157,11 +155,10 @@ label train_dealbreaker_blowjob_label(the_person):
             "You're almost disappointed when she opens her mouth wide and starts to blow you again."
 
     $ mc.change_locked_clarity(20)
-
-    "The sweet, pouty lips of [the_person.possessive_title] is getting you off. You are going to cum soon."
+    "The sweet, pouty lips of [the_person.possessive_title] are getting you off. You are going to cum soon."
     mc.name "I'm gonna cum!"
     $ mc.change_arousal(20)
-    "Suddenly, a look of panic in her eyes. She doesn't know what to do! She looks at you for direction."
+    "Suddenly, a look of panic is in her eyes. She doesn't know what to do! She looks at you for direction."
     $ orgasm_choice = renpy.display_menu(orgasm_location_formatted_menu(the_person, orgasm_options),True,"Choice")
     if orgasm_choice[0] == "On her face":
         "You take a step back, pulling your cock out of [the_person.possessive_title]'s mouth with a satisfyingly wet pop, and take aim at her face."
@@ -186,7 +183,7 @@ label train_dealbreaker_blowjob_label(the_person):
         "Once you've had a good long look at your work [the_person.title] leans over to the side and lets your cum dribble out slowly onto the ground."
         "She straightens up and wipes her lips with the back of her hand."
     elif orgasm_choice[0] == "On the floor":
-        "At the last second, you pull out of [the_person.possessive_title]'s mouth and start to stroke yourself off, pointing way from her."
+        "At the last second, you pull out of [the_person.possessive_title]'s mouth and start to stroke yourself off, pointing away from her."
         $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_person)
         "You don't want to ruin the training you've achieved so far by grossing her out with your cum. Cum training can happen later..."
     if the_person.get_opinion_score(orgasm_choice) > 0:
@@ -197,7 +194,6 @@ label train_dealbreaker_blowjob_label(the_person):
         $ after_training_opinion_score += (-1)
     else:
         "[the_person.title] seems to be indifferent to the way the blowjob ended."
-
 
     "After taking a moment to recover, [the_person.possessive_title] stands up and looks at you."
     $ the_person.update_opinion_with_score("giving blowjobs", after_training_opinion_score, add_to_log = True)

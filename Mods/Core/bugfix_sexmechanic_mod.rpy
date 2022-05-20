@@ -882,7 +882,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                             the_person "OK. Let me put this another way."
                             "[the_person.title] grabs the condom and throws it off to the side."
                             if skill_tag == "Vaginal":
-                                the_person "Either we fuck and come inside me or we don't fuck at all."
+                                the_person "Either we fuck and you come inside me or we don't fuck at all."
                             else:
                                 the_person "Either you fuck my ass raw or we don't fuck at all."
                             menu:
@@ -1040,7 +1040,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                             mc.name "I can't risk it [the_person.title], no matter how desperate you are for raw cock."
                             "You pull out a condom from your wallet, tear open the package, and start to unroll it down your dick."
                             mc.name "So you have a choice. You can have my cock inside you like this, or you can have no cock at all."
-                            "She whimpers like a sad puppy, but you know there's only once choice she would ever make."
+                            "She whimpers like a sad puppy, but you know there's only one choice she would ever make."
                             call put_on_condom_routine(the_person) from _call_put_on_condom_routine_9
 
                 "Fuck her raw":

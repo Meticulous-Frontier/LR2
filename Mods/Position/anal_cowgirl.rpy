@@ -466,7 +466,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
             $ mc.condom = False
         "Instead of going up and down, she starts rocking her hips forward and back, milking your cock while keeping it buried deep."
         the_person "Do it... I want to feel it deep!"
-        "Her words push you over the edge. Your cock explodes deep inside her bowel. She moans a she feels her body filling up."
+        "Her words push you over the edge. Your cock explodes deep inside her bowel. She moans as she feels her body filling up."
         $ the_girl.change_obedience(3)
         $ the_girl.cum_in_ass()
         $ SB_anal_cowgirl.redraw_scene(the_girl)

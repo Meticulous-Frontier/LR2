@@ -137,7 +137,7 @@ label aggressive_anal_fetish_non_employee_label():
             "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
             $ the_person.change_arousal(the_person.get_opinion_score("anal sex"))
             $ mc.change_locked_clarity(50)
-            the_person "Oh my god, I need you in my ass right now... shove your big cock up my fucking my ass right now!"
+            the_person "Oh my god, I need you in my ass right now... shove your big cock up my fucking ass right now!"
             $ the_person.break_taboo("anal_sex")
             "You drop your pants, take out your already hard cock and you shove it right up her greedy butt hole, eliciting a satisfying grunt from [the_person.possessive_title]."
 
@@ -191,7 +191,7 @@ label anal_fetish_employee_evening_approach_label():
         $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
         the_person "Hey, [the_person.mc_title]. I was wondering if you would be here on the weekend! Want to have some fun before you head home?"
-        "[the_person.possessive_title] is dressed to impress. You wonder if she has in that butt plug she showed you last time you stayed late at the office wit her..."
+        "[the_person.possessive_title] is dressed to impress. You wonder if she has in that butt plug she showed you last time you stayed late at the office with her..."
         "As if sensing your thoughts, [the_person.possessive_title] turns around."
         $ the_person.draw_person(position = "back_peek")
         "Between her pillowy cheeks is her pink jewelled butt plug."

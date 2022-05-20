@@ -40,7 +40,7 @@ label intro_bent_over_breeding(the_girl, the_location, the_object):
 
     if the_girl.arousal > 60:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. She moans, anticipating your penetration."
-        "You continue to rub your dick against her [the_girl.pubes_description] pussy and gather more of her juices. She is already so wet you are soon slick with her secretions"
+        "You continue to rub your dick against her [the_girl.pubes_description] pussy and gather more of her juices. She is already so wet you are soon slick with her secretions."
     else:
         "You rub the tip of your cock against [the_girl.possessive_title]'s cunt."
     "When you're ready you push forward. Her pussy feels amazing wrapped around your erection."
@@ -168,7 +168,7 @@ label scene_bent_over_breeding_2(the_girl, the_location, the_object):
             else:
                 the_girl "Mmm, I can't help it, you make me feel so good."
         "Rough Sex":
-            "You take one hand and start to need the back of her scalp. You grab a fistful of hair and pull."
+            "You take one hand and start to knead the back of her scalp. You grab a fistful of hair and pull."
             "[the_girl.possessive_title] arches her back in response."
             mc.name "That's a good slut. Take it nice and deep."
             if the_girl.get_opinion_score("being submissive") > 0 or the_girl.obedience > 130:
@@ -200,7 +200,7 @@ label scene_bent_over_breeding_3(the_girl, the_location, the_object):
     else:
         "Your hips begin to slap up against [the_girl.possessive_title]'s ass."
         "Her cheeks respond delightfully with each thrust."
-    "[the_girl.title] is thrusting back against you, using [the_object.name] as leverage to push herself back. Her ass is mesmerising."
+    "[the_girl.title] is thrusting back against you, using the [the_object.name] as leverage to push herself back. Her ass is mesmerising."
     menu:
         "Finger her ass":
             "You decide to give her ass a little extra attention. You work up some saliva in your mouth then pause fucking her for a second."
@@ -227,7 +227,7 @@ label scene_bent_over_breeding_3(the_girl, the_location, the_object):
             else:
                 "[the_girl.possessive_title] tenses slightly as you start to push your finger into her back passage, but otherwise doesn't resist."
                 the_girl "Go slow... I don't let just anyone touch me like this..."
-                "She forces herself to relax. You can feel her rectum physically unclench and begin to slowly move your finger in and out of her."
+                "She forces herself to relax. You can feel her rectum physically unclench, and you begin to slowly move your finger in and out of her."
                 the_girl "That feels good [the_girl.mc_title]... just be careful with me back there!"
                 "As you finger her ass, her hips remain stationary. She wills herself to relax, and manages to enjoy the stimulation."
                 $ the_girl.change_arousal(mc.sex_skills["Anal"])
