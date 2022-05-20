@@ -833,7 +833,7 @@ label candace_midnight_wakeup_label():
     "?????" "Hi. Is this [mc.name]?"
     mc.name "Yes..."
     "?????" "This is [police_chief.title] with the police department. We have a [the_person.name] [the_person.last_name] here who asked us to call you."
-    "Candace? Who do you know named Candace?"
+    "[candace.name]? Who do you know named [candace.name]?"
     mc.name "I'm sorry I'm not sure who that is..."
     police_chief "She also goes by Candi."
     "Oh shit! What is [the_person.name] doing at the police department?"
@@ -850,7 +850,7 @@ label candace_midnight_wakeup_label():
     $ police_station.show_background()
     "As you walk in, you walk up to the front desk. There's a good looking girl behind the desk. She smiles when she greets you."
     "?????" "Hello. Can I help you?"
-    mc.name "Yeah. I'm here to pick up Candace."
+    mc.name "Yeah. I'm here to pick up [candace.name]."
     "?????" "Ahh. Sure thing. First though, the chief wants to talk to you in her office, privately..."
     mc.name "Okay..."
     "?????" "Her office is right down the hall there."
@@ -860,7 +860,7 @@ label candace_midnight_wakeup_label():
     police_chief "Close the door, please."
     "You close the door behind you. Behind the desk is an official looking officer. She greets you with a scowl."
     $ police_chief.draw_person(position = "sitting", emotion = "angry")
-    police_chief "So you must be here to pick up that crazy bitch, Candace."
+    police_chief "So you must be here to pick up that crazy bitch, [candace.name]."
     mc.name "Yeah, something like that..."
     police_chief "We need to chat. I got a call from my deputy a few hours ago at home, saying I needed to get here right away. They said they had arrested someone they didn't know what to do with."
     "Oh boy, this is going to be interesting..."
@@ -871,13 +871,13 @@ label candace_midnight_wakeup_label():
     police_chief "She says she doesn't know, so I ask about friends and she says she just has a couple..."
     police_chief "We talk for a bit longer... And it's pretty clear from her conversation... This lady has no business being out in public. She is so far gone. Do you have any idea what is going on with her?"
     "You take a moment to consider how to answer this. You are going to need to proceed carefully."
-    mc.name "Well, when I met Candace, she was in a bad relationship. The guy she was with was taking advantage of her."
+    mc.name "Well, when I met [candace.name], she was in a bad relationship. The guy she was with was taking advantage of her."
     mc.name "I did some work on her background, and although I'm not sure where, I think she may have been involved in some sort of pharmaceutical experiment that made her like that."
     mc.name "I helped her get out of the relationship and set her up with a job at my business, trying to help her get independent again."
     police_chief "Hmm. I see. That's unfortunate, but she doesn't seem to understand that she can't just wander around downtown hitting on everything with a pulse. She's gonna wind up getting kidnapped... Or worse."
     mc.name "I agree. To be honest, I didn't realize she had been doing that."
     "The chief ponders for a few moments."
-    police_chief "Look... I can't force you to do this... But it is something you might consider. It's clear to me that Candace can't really take care of herself."
+    police_chief "Look... I can't force you to do this... But it is something you might consider. It's clear to me that [candace.name] can't really take care of herself."
     police_chief "We can't find any records pertaining to family in the area either."
     police_chief "If you put in a motion with the local courts filing for her power of conservatorship on the grounds that she is unable to function independently, I'd be willing to sign that in support."
     police_chief "With that, you could have her sent somewhere better designed to take care of folks like her. It'd be for her own good."
@@ -1290,7 +1290,7 @@ label candace_cure_bimbo_label():
     $ candace.int = 9       #Scary smart
     candace "[candace.mc_title]... This is incredible!"
     mc.name "Candi, are you okay?"
-    candace "Candi? Yes that's what I went by... But you can call me Candace."
+    candace "Candi? Yes that's what I went by... But you can call me [candace.name]."
     $ candace.set_title("Candace")
     "You feel a sense of relief, but also a bit of fear. Is this the same person still? Or is she someone completely different now?"
     mc.name "How are you feeling [candace.title]? Do you know where you are? What has been happening recently?"
@@ -1459,7 +1459,7 @@ label candace_meet_doctor_candace_label():
     mc.name "So... I should be calling you Doctor [the_person.last_name]?"
     the_person "Ahh, let me just stop you right there. I would prefer things between us, and the girls here at the office, to remain more... Informal."
     "She sits back a bit and smiles."
-    the_person "I'd prefer other titles. Candace is good, but what would be even better would be if you just called me... Your girlfriend..."
+    the_person "I'd prefer other titles. [candace.name] is good, but what would be even better would be if you just called me... Your girlfriend..."
     mc.name "I might take issue with you getting busy with your landlord if we're gonna do this."
     "She chuckles before responding."
     the_person "You goof. With a cock as good as yours, I won't need anything else..."
@@ -1468,7 +1468,7 @@ label candace_meet_doctor_candace_label():
     if the_person.is_girlfriend():
         "Well, it seems that [the_person.title] still has feelings for you and wants to continue being your girlfriend."
     else:
-        "Well, in quite the reversal of roles, Candace has asked you out officially. Do you want to accept?"
+        "Well, in quite the reversal of roles, [candace.name] has asked you out officially. Do you want to accept?"
         menu:
             "Accept":
                 if not the_person.is_girlfriend():

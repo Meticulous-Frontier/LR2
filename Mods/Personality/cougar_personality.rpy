@@ -134,7 +134,7 @@ label cougar_strip_reject(the_person, the_clothing, strip_type = "Full"):
     if the_person.obedience > 130:
         the_person "I know it would make your day [the_person.mc_title], but I don't think I should take my [the_clothing.display_name] off. I'm a lady, after all."
     elif the_person.obedience < 70:
-        the_person "Not yet sweety. You just need to relax and let [the_person.title] take care of you."
+        the_person "Not yet sweety. You just need to relax and let me take care of you."
     else:
         the_person "Don't touch that [the_person.mc_title]. Could you imagine if my [the_clothing.display_name] came off? I could be your mother, we shouldn't do this."
     return
@@ -146,7 +146,7 @@ label cougar_sex_accept(the_person):
         else:
             the_person "Whatever you want me to do [the_person.mc_title]. I just want to make sure you're happy."
     else:
-        the_person "Okay, let's try it this, I hope you don't mind having sex with an older woman?"
+        the_person "Okay, let's try this, I hope you don't mind having sex with an older woman?"
     return
 
 label cougar_sex_obedience_accept(the_person):
@@ -407,7 +407,7 @@ label cougar_flirt_response_low(the_person):
         if the_person.judge_outfit(the_person.outfit):
             # She's in uniform and likes how it looks.
             the_person "Thank you [the_person.mc_title]. I think these are nice uniforms as well."
-            mc.name "It helps having such an attractive employees to wear it."
+            mc.name "It helps having such an attractive employee to wear it."
             $ mc.change_locked_clarity(5)
             "[the_person.possessive_title] smiles."
             the_person "Well, thank you, young man, I appreciate the complement."
@@ -416,7 +416,7 @@ label cougar_flirt_response_low(the_person):
             $ mc.change_locked_clarity(5)
             if the_person.outfit.vagina_visible():
                 # Her pussy is on display.
-                the_person "I would not call it much of an uniform, if you know what it mean."
+                the_person "I would not call it much of an uniform, if you know what I mean."
                 the_person "I understand it's the company uniform, but a woman my age would like a little more coverage."
                 mc.name "It will take some getting used to, but I think it would be a shame to cover up your wonderful figure."
                 "[the_person.possessive_title] doesn't seem so sure, but she smiles and nods anyways."
@@ -553,7 +553,7 @@ label cougar_flirt_response_high(the_person):
             the_person "I... I don't know what you mean [the_person.mc_title]."
             mc.name "It's just the two of us, you don't need to hide how you feel. I feel the same way."
             "She nods and takes a deep breath, steadying herself."
-            the_person "Okay, you're right. What are you're intentions young man?"
+            the_person "Okay, you're right. What are your intentions young man?"
 
         else:  #You're not alone, but she doesn't care.
             the_person "Well I wouldn't want you to go into a frenzy. You'll just have to find a way to get me out of this outfit..."
@@ -856,7 +856,7 @@ label cougar_cum_face(the_person):
             if the_person.sex_record.get("Cum Facials", 0) < 3:
                 the_person "[the_person.mc_title], next time don't mess up my makeup like this."
             elif the_person.sex_record.get("Cum Facials", 0) < 6:
-                the_person "Again? Are you not listening? Cum messes up make up."
+                the_person "Again? Are you not listening? Cum messes up my make up."
             else:
                 "[the_person.title] just sighs."
             "She pulls out a tissue and wipes her face quickly."
@@ -910,7 +910,7 @@ label cougar_cum_pullout(the_person):
 
 label cougar_cum_condom(the_person):
     if the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
-        the_person "Oh... your fertile seed is so close to me. Just thin condom keeping your semen from my womb..."
+        the_person "Oh... your fertile seed is so close to me. Just a thin condom keeping your semen from my womb..."
     else:
         the_person "I can feel your young seed pulsing against the condom, it's so strong."
     return
@@ -1058,7 +1058,7 @@ label cougar_sex_watch(the_person, the_sex_person, the_position):
         $ the_person.draw_person(emotion = "happy")
         $ pronoun = person_body_shame_string(the_sex_person.body_type, "slut")
         the_person "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
-        "[title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
+        "[title] watches you eagerly while you are [the_position.verbing] [the_sex_person.name]."
 
     return
 
@@ -1452,7 +1452,7 @@ label cougar_bare_tits_taboo_break(the_person, the_clothing):
     elif the_person.love > 25:
         the_person "Oh, you want to get my breasts out?"
         if the_person.has_large_tits():
-            "She looks down at her own large rack, tits hidden restrained by her [the_clothing.display_name]."
+            "She looks down at her own large rack, tits hidden and restrained by her [the_clothing.display_name]."
             the_person "I don't have to ask why, but I'm glad you're interested in them."
         else:
             the_person "I'm glad you're still interested in smaller breasts. It seems like every man is mad boob-crazy these days."

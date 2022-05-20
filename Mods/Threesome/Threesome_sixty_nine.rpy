@@ -72,7 +72,6 @@ init 2 python:
         swap_description = "swap_threesome_sixty_nine_watch_girls",
         requirement = requirement_test)
 
-
     Threesome_sixty_nine = Threesome_Position(name = "Sixty Nine Plus One",
         slut_requirement = 60,
         position_one_tag = "missionary",
@@ -173,13 +172,11 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
             $the_girl_2.change_arousal(mc.sex_skills["Oral"])
         "Suck her nipples\n{color=#ff0000}{size=18}Obstructed by Clothing{/size}{/color} (disabled)" if not the_girl_2.outfit.tits_available():
             pass
-
     "While you give attention to [the_girl_2.possessive_title]'s tits, you never stop pistoning your cock in and out of [the_girl_1.title]'s slick pussy."
-
     return
 
 label scene_threesome_sixty_nine_oral_girl_two_1(the_girl_1, the_girl_2, the_location, the_object):
-    "You rest one hand on [the_girl_2.title]'s head, guiding her as she sucks you off. With you other hand you continue to finger fuck [the_girl_1.title]."
+    "You rest one hand on [the_girl_2.title]'s head, guiding her as she sucks you off. With your other hand you continue to finger fuck [the_girl_1.title]."
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
         "You can see that [the_girl_2.title] is really moving her hips back and forth roughly on [the_girl_1.title]'s face. She gets off on having a dick in her mouth!"
         $the_girl_2.change_arousal(the_girl_2.get_opinion_score("giving blowjobs") * 3)
@@ -189,21 +186,20 @@ label scene_threesome_sixty_nine_oral_girl_two_1(the_girl_1, the_girl_2, the_loc
     if the_girl_2.get_opinion_score("cum facials") > the_girl_2.get_opinion_score("drinking cum"):
         "[the_girl_2.possessive_title] pops off your cock for a second."
         the_girl_2 "I want you to just blow all over my face..."
-        if the_girl_1.has_cum_fetish() or the_girl_1.has_cum_fetish():
+        if the_girl_1.has_cum_fetish():
             "You hear a muffled voice speak up."
             the_girl_1 "Hey! [the_girl_1.mc_title], make sure I get some too!"
     else:
         "[the_girl_2.possessive_title] pops off your cock for a second."
         the_girl_2 "You should just cum in my mouth! I'll swallow it all for you..."
-        if the_girl_1.has_cum_fetish() or the_girl_1.has_cum_fetish():
+        if the_girl_1.has_cum_fetish():
             "You hear a muffled voice speak up."
             the_girl_1 "Hey! That's no fair! [the_girl_1.mc_title], make sure I get some too!"
     return
 
-
 label scene_threesome_sixty_nine_fuck_girl_one_2(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.title]'s whole body is jostling forward and backward as you fuck her roughly. Her tight pussy feels silky smooth around your dick."
-    "You lean forward and grab the back of [the_girl_2.title]'s head, bring her in for a kiss. Your tongues meet together and you start to make out on top of [the_girl_1.title]."
+    "You lean forward and grab the back of [the_girl_2.title]'s head, bringing her in for a kiss. Your tongues meet together and you start to make out on top of [the_girl_1.title]."
     "You decide it's time for [the_girl_2.possessive_title] to put her mouth to better use."
     "You pull back from making out with [the_girl_2.title]."
     mc.name "I think [the_girl_1.title] needs a little more attention..."
@@ -213,7 +209,6 @@ label scene_threesome_sixty_nine_fuck_girl_one_2(the_girl_1, the_girl_2, the_loc
     the_girl_1 "Mmmm..."
     "Muffled moans come from [the_girl_1.title]. Your cock is buried deep inside her while [the_girl_2.possessive_title] licks and sucks at her clit."
     $ the_girl_1.change_arousal(the_girl_2.sex_skills["Oral"] * 2)
-
     return
 
 label scene_threesome_sixty_nine_oral_girl_two_2(the_girl_1, the_girl_2, the_location, the_object):
@@ -236,7 +231,7 @@ label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
                 $ the_girl_1.change_happiness(5)
             $ the_girl_1.cum_in_vagina()
             $ scene_manager.draw_scene()
-            if the_girl_2.has_cum_fetish() or the_girl_2.has_cum_fetish():
+            if the_girl_2.has_cum_fetish():
                 the_girl_2 "Hey! No fair! I want some of that!"
                 "As you slowly pull out of [the_girl_1.title], a trickle of your cum starts to escape her."
                 "[the_girl_2.title] immediately moves her head down to [the_girl_1.title]'s pussy and starts to lick up the cum leaking out."
@@ -244,11 +239,10 @@ label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
                 $ the_girl_2.cum_in_mouth()
                 $ scene_manager.draw_scene()
                 if the_girl_2.arousal > 100:
-                    "Getting a dose of your cum triggers another orgasm in [the_girl_2.possessive_title]. Her body twitches as orgasm goes through it."
+                    "Getting a dose of your cum triggers another orgasm in [the_girl_2.possessive_title]. Her body twitches as an orgasm goes through it."
                 "When she finally sits up, you can see traces of your cum on the corners of [the_girl_2.title]'s mouth."
             else:
                 "As you slowly pull out of [the_girl_1.title], a trickle of your cum starts to escape her."
-
             "You give a sigh, deeply contented with having dumped your load inside of [the_girl_1.title]."
 
         "Cum on [the_girl_2.title]'s face":
@@ -267,23 +261,21 @@ label outro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
             if the_girl_1.has_cum_fetish():
                 "[the_girl_1.possessive_title]'s body quivers as your cum splashes down onto her. She runs her hands through your cum and rubs it into her belly."
             "You give a sigh. Two girls covered in your cum is an amazing sight to behold."
-
     return
 
 label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object):
-    "[the_girl_2.possessive_title]'s talented mouth suddenly pushes you past the point of no return. Her tongue slithers and swirly relentlessly around your cock."
+    "[the_girl_2.possessive_title]'s talented mouth suddenly pushes you past the point of no return. Her tongue slithers and swirls relentlessly around your cock."
     mc.name "Oh fuck I'm gonna cum!"
     menu:
         "Cum inside [the_girl_2.title]'s mouth":
             "You put your hand on the back of [the_girl_2.possessive_title]'s head."
             mc.name "That's it [the_girl_2.title]. I want you to swallow it all!"
-            "[the_girl_2.title] moans and looks you in the eyes. She pulls off until just the tip of your cock is in her mouth and she begins to stroke out off eagerly."
+            "[the_girl_2.title] moans and looks you in the eyes. She pulls off until just the tip of your cock is in her mouth and she begins to stroke you off eagerly."
             "Your cock explodes in orgasm into her greedy mouth."
             if the_girl_2.has_cum_fetish():
                 "Her pupils dilate as her cum addicted brain registers the presence of your cum in her mouth."
                 "[the_girl_2.possessive_title] is moaning uncontrollably around your twitching cock."
             $ the_girl_2.cum_in_mouth()
-
             $ scene_manager.draw_scene()
             "After you finish cumming, [the_girl_2.possessive_title] slowly pulls away from your cock."
             "You give a sigh, deeply contented with having dumped your load inside of [the_girl_2.possessive_title]'s mouth."
@@ -304,9 +296,7 @@ label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locat
             if the_girl_1.has_cum_fetish():
                 "[the_girl_1.possessive_title]'s body quivers as your cum splashes down onto her. She runs her hands through your cum and rubs it into her belly."
             "You give a sigh. Two girls covered in your cum is an amazing sight to behold."
-
     return
-
 
 label strip_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "This is just a test to see if this position is working."
@@ -341,9 +331,7 @@ label orgasm_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_loca
         $ the_girl_2.call_dialogue("climax_responses_oral")
         $ the_girl_2.run_orgasm()
         "[the_girl_2.title] grinds her pussy against the other girl's face as she orgasms."
-
     return
-
 
 label orgasm_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
@@ -361,7 +349,6 @@ label orgasm_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_loca
         "She orgasms, her pussy quivering around your fingers. You thrust them into her roughly."
         "As [the_girl_1.title] comes down from her orgasm you continue stimulating her with your hand."
         return
-
     elif the_girl_2.arousal > 100:   #Just girl 2 orgasms
         "[the_girl_2.title] moans around your cock as [the_girl_1.title] licks her in just the right spot."
         $ the_girl_2.run_orgasm()

@@ -87,7 +87,7 @@ label scene_SB_reverse_cowgirl_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s shapely ass looks amazing on display in front of you. You grasp one of her pliant cheeks in your hand as she grinds."
     menu:
         "Spank it":
-            "You bring your hand off [the_girl.possessive_title]'s ass and give it a firm slap"
+            "You bring your hand off [the_girl.possessive_title]'s ass and give it a firm slap."
             the_girl "Oh!"
             "You enjoy the way her tight ass jiggles and spank it again."
             if the_girl.get_opinion_score("showing her ass") > 0:
@@ -224,7 +224,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
         "You gaze at her shapely ass as a few drips of your seed drip out her pussy and onto [the_object.name]."
     elif the_girl.get_opinion_score("bareback sex") > 0:
         the_girl "That's it, shoot your seed in deep! I want to feel you flood my womb!"
-        "She stops her up and down movements and pushes herself down onto you, forcing you up inside her as deep a she can."
+        "She stops her up and down movements and pushes herself down onto you, forcing you up inside her as deep as she can."
         "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy. She holds herself still as you dump your load deep inside her."
         "You reach your hands forward and grab her hips, and push yourself up slightly, holding her hips in place."
         $ the_girl.cum_in_vagina()
@@ -376,7 +376,7 @@ label transition_SB_reverse_cowgirl_doggy(the_girl, the_location, the_object):
 label orgasm_SB_reverse_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title]'s cunt quivers and spasms around you, and then suddenly tenses up."
     $ the_girl.call_dialogue("climax_responses_vaginal")
-    "[the_girl.possessive_title] stirs her womb with your erection aggressively through her climax."
+    "[the_girl.possessive_title] stirs her womb aggressively with your erection throughout her climax."
     "After a couple of seconds [the_girl.possessive_title] sighs and the tension drains from her body."
     the_girl "God it feels so good, I wonder if you can last long enough to let me cum again..."
     return

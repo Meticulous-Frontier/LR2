@@ -25,7 +25,6 @@ label relaxed_dual_penetration_taboo_break(the_person):
         "[the_person.title] takes a few deep breaths."
         the_person "Whew, I think I'm ready!"
         the_person "Fuck me in the ass [the_person.mc_title]! Stretch me out and ruin me!"
-
     elif the_person.love >= 60:
         the_person "I can't believe we're doing this... Do you think you'll even fit?"
         mc.name "I'll fit, but you might not be walking right for a few days."
@@ -47,21 +46,18 @@ label reserved_dual_penetration_taboo_break(the_person):
     if the_person.effective_sluttiness() >= 75:
         "She takes a few deep breaths."
         the_person "I'm ready if you are [the_person.mc_title]. Come and fuck my ass."
-
     elif the_person.love >= 60:
         the_person "This is really something you want to do then [the_person.mc_title]?"
         mc.name "Yeah, it is."
         the_person "Okay then. It wouldn't be my first pick, but we can give it a try."
-        the_person "I don't know if you'll even fit though. You're penis is quite large."
+        the_person "I don't know if you'll even fit though. Your penis is quite large."
         mc.name "You'll stretch out more than you think."
     else:
         if the_person.has_taboo("vaginal_sex"):
             the_person "Oh lord, what happened to me?"
             the_person "I thought I was a respectable lady, now I'm about to get fucked in the ass..."
             the_person "We've never even had sex before and now I'm doing anal!"
-
             #TODO: "At least my vagina still belongs to my SO... At least I still have that one thing."
-
         else:
             the_person "I'm not sure about this [the_person.mc_title]... I'm not even sure if you can fit inside me there!"
             mc.name "I can stretch you out, don't worry about that."
@@ -76,7 +72,6 @@ label wild_dual_penetration_taboo_break(the_person):
         the_person "Oh god, it always surprises me how big your cock is! You're going to tear my ass in half with that monster!"
         "She seems more turned on by the idea than worried."
         mc.name "Don't worry, you'll be stretched out soon enough."
-
     elif the_person.love >= 60:
         the_person "So you really want to do this? It might be a little hard to fit all of your cock inside me..."
         mc.name "Don't worry about that, I'll have you stretched out soon enough."
@@ -97,7 +92,6 @@ label wild_dual_penetration_taboo_break(the_person):
             the_person "No time like the present then. Do it, before I chicken out!"
     return
 
-
 label lily_dual_penetration_taboo_break(the_person):
     if the_person.love > 60:
         the_person "Wait, do you really mean you want to try anal?"
@@ -111,7 +105,6 @@ label lily_dual_penetration_taboo_break(the_person):
             mc.name "Yeah, why not? I've already fucked all of your other holes, what's special about this one?"
             the_person "It's not special, I just thought you'd want to fuck my pussy some more. Didn't you enjoy it last time?"
             mc.name "It was great, but I want to experiment a little more. Come on, don't you want to try something new?"
-
     else:
         the_person "Wait, do you want to try anal?"
         mc.name "Yeah, I do. You've got a cute butt."
@@ -123,7 +116,6 @@ label lily_dual_penetration_taboo_break(the_person):
             the_person "What's wrong with my pussy? Didn't you enjoy it last time?"
             mc.name "It was great, I just want to try something new. Come on, you like experimenting, right?"
             the_person "I guess this way I don't have to worry about you pulling out..."
-
     "She sighs and gives in."
     the_person "Okay, but you need to be gentle with me."
     mc.name "I promise I will. Have you ever tried this before?"
@@ -142,7 +134,6 @@ label mom_dual_penetration_taboo_break(the_person):
             mc.name "I love you so much [the_person.title], I want to try every way possible to be close to each other."
             the_person "I guess it wouldn't really count. It's no different than me using my hand or my breasts, right?"
             mc.name "That's what I'm saying. Have you ever tried this before?"
-
         else:
             mc.name "Trust me [the_person.title], we can make it work."
             the_person "Isn't my pussy enough? Why do you want to try anal all of a sudden?"
@@ -151,15 +142,12 @@ label mom_dual_penetration_taboo_break(the_person):
                 the_person "Does it really feel that much better?"
                 mc.name "It really does."
                 the_person "Okay, for your happiness I'll give it a try."
-
             else:
                 mc.name "If I'm fucking your pussy I might get you pregnant, but with anal that can't happen."
                 the_person "Or you could put on a condom."
                 mc.name "Those feel like crap though [the_person.title]. I want to feel you wrapped around my cock."
                 the_person "Well... Okay, if it would make you happy we can give it a try."
             mc.name "Thank you [the_person.title]. Have you ever done this before?"
-
-
         "[the_person.possessive_title] shakes her head sheepishly."
         the_person "No. I never thought I would either."
         mc.name "I'll be as gentle as possible then."
@@ -170,17 +158,14 @@ label mom_dual_penetration_taboo_break(the_person):
         if the_person.has_taboo("vaginal_sex"):
             mc.name "Why not? It's not really incest if you can't get pregnant from it, right?"
             the_person "I kind of see what you mean..."
-
         else:
             if the_person.has_taboo("condomless_sex"):
                 mc.name "Why not? If I want to fuck your pussy I need to wear a condom, and they really kill the sensation."
                 mc.name "If we do anal I can go in raw and feel you wrapped around me."
-
             else:
                 mc.name "Why not? If I fuck your pussy I might get you pregnant, but that can't happen with anal."
                 the_person "Or you could wear a condom."
                 mc.name "They really kill the sensation. I want to feel you wrapped around my cock."
-
         the_person "That does sound nice..."
         mc.name "Have you ever tried anal before?"
         "She shakes her head."

@@ -25,7 +25,7 @@ init 1 python:
     SB_anal_standing.link_positions(doggy_anal, "transition_SB_anal_standing_doggy_anal")
 
 label intro_SB_anal_standing(the_girl, the_location, the_object):
-    "With you arms wrapped around [the_girl.possessive_title], you make out for a bit with her back to the [the_object.name]."
+    "With your arms wrapped around [the_girl.possessive_title], you make out for a bit with her back to the [the_object.name]."
     "You turn her around, and she leans over [the_object.name], presenting her ass to you."
     $ the_girl.draw_person(position = SB_anal_standing.position_tag)
     mc.name "That's it, [the_girl.title], I'm going to fuck your ass today."
@@ -68,7 +68,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_girl.possessive_title]."
     elif the_girl.arousal > 60:
         "You rub the tip of your penis against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. You rub your lubricated penis against her ass to help prepare her for your initial penetration."
-        "You rub your dick against her pussy again and gather more of her juices. She is already so wet you are soon slick with her secretions"
+        "You rub your dick against her pussy again and gather more of her juices. She is already so wet you are soon slick with her secretions."
     else:
         "You line yourself up with her ass, but the lack of lubricant makes it impossible to push it in. You pull on her hair to bring her head back around to face you."
         "You put your other hand in front of her face and she quickly opens her mouth and sucks on them. [the_girl.possessive_title] slobbers all over your fingers for a few a seconds before you pull them out with a loud pop."

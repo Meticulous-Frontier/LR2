@@ -14,9 +14,9 @@ init -1 python:
     def fetish_lily_stream_in_room_requirement(the_person):
         if the_person.get_fetish_count() > 0:
             if not mc.location is lily_bedroom:
-                return "Must be in Lily's bedroom"
+                return "Must be in [lily.name]'s bedroom"
             elif lily_bedroom.get_person_count() > 1:
-                return "Must be alone with Lily"
+                return "Must be alone with [lily.name]"
             elif mc.energy > 30:
                 return True
             else:

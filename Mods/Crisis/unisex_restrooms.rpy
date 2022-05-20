@@ -146,7 +146,7 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     $ overhear_topic = the_person_one.get_random_opinion(include_sexy = False)
     $ text_one = person_opinion_to_string(the_person_one, overhear_topic)[1]
     $ text_two = get_topic_text(overhear_topic)
-    the_person_one "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+    the_person_one "... but yeah, I'm not sure he realizes I [text_one] [text_two]."
     if the_person_one.discover_opinion(overhear_topic):
         "Oh! You didn't realize that [the_person_one.title] felt that way."
     "The girls keep talking. They keep bouncing back and forth between multiple topics."
@@ -194,7 +194,7 @@ label unisex_restroom_sexy_overhear_label():
         $ overhear_topic = the_person_one.get_random_opinion(include_sexy = True, include_normal = False)
         $ text_one = person_opinion_to_string(the_person_one, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        the_person_one "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+        the_person_one "... but yeah, I'm not sure he realizes I [text_one] [text_two]."
         if the_person_one.discover_opinion(overhear_topic):
             "Oh! You didn't realize that [the_person_one.title] felt that way."
         "The girls keep talking. They keep bouncing back and forth between multiple sexual topics."
@@ -208,7 +208,7 @@ label unisex_restroom_sexy_overhear_label():
         $ overhear_topic = the_person_one.get_random_opinion(include_sexy = True, include_normal = False)
         $ text_one = person_opinion_to_string(the_person_one, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        anon_char_one "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+        anon_char_one "... but yeah, I'm not sure he realizes I [text_one] [text_two]."
         "Oh damn! That info might be useful. But who is it!?!"
         "The girls keep talking. They keep bouncing back and forth between multiple sexual topics."
         $ overhear_topic_two = the_person_two.get_random_opinion(include_sexy = True, include_normal = False)

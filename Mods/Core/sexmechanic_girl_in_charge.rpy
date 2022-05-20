@@ -633,10 +633,10 @@ label remove_condom_go_raw(the_person, the_position):
     "She slowly pulls the condom off your cock."
     mc.name "[the_person.title]?"
     the_person "Sssshhh... I need to feel it... inside me..."
-    "[the_person.possessive_title] slowly sinks band down onto your shaft, raw this time."
+    "[the_person.possessive_title] slowly sinks back down onto your shaft, raw this time."
     $ the_person.change_arousal(5)
     $ mc.change_arousal(5)
-    "The heat from her body translates perfectly now that you have that piece of latex removed between you. It feels wonderful."
+    "The heat from her body translates perfectly now that you have that piece of latex between you removed. It feels wonderful."
     return
 
 init 1000 python:

@@ -1409,7 +1409,7 @@ label erica_money_problems_label(the_person):
         $ erica.event_triggers_dict["yoga_sessions_started"] = False
         $ mc.business.hr_director.add_unique_on_talk_event(erica_money_problems_sarah_talk)
         if lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
-            "Or maybe even talk to [lily.title], see about including Erica in some of her InstaPic sessions once in a while?"
+            "Or maybe even talk to [lily.title], see about including [erica.name] in some of her InstaPic sessions once in a while?"
             $ erica.event_triggers_dict["insta_pic_started"] = True
             $ lily.add_unique_on_talk_event(erica_lily_instapic_setup)
     elif lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
@@ -1487,7 +1487,7 @@ label erica_money_problems_sarah_talk_label(the_person):
         mc.name "Tell you what. We don't need to push it officially, but if you happen to take some of the serum and use it for that purpose... I would be willing to look the other way."
     else:
         mc.name "I don't think that is a good idea. But if you really want to make it happen, you could always use the power of persuasion to see if you can get people to come."
-    "Sarah gets a mischievous smile."
+    "[sarah.name] gets a mischievous smile."
     the_person "Okay! I'll let you know in a couple days if we have the people to make it happen... And if we don't... We'll see."
     "You part ways with [the_person.title] for now. You feel pretty confident at this point that, even if you don't have the numbers now, you'll have enough people to make it happen soon."
     if len(erica_get_yoga_class_list()) < 4:
@@ -1611,7 +1611,7 @@ label erica_money_problems_yoga_start_label(the_person):
     the_person "Wow... It's like you thought of everything!"
     $ the_person.draw_person(position = "kissing")
     $ mc.change_locked_clarity(10)
-    "Erica gives you a big hug. When she steps back, she ponders a moment."
+    "[erica.name] gives you a big hug. When she steps back, she ponders a moment."
     the_person "How about Tuesday mornings? I could go straight from there to class."
     mc.name "I'll make it happen. For compensation, I'll start you at $100 per session. Are you good to start next week?"
     the_person "That's great! I'll be ready!"
@@ -2479,7 +2479,7 @@ label erica_lily_post_photoshoot_label(the_person):
     the_person "Do you think we could make this a regular thing? Every Saturday night?"
     mc.name "I mean, that is kind of up to her, but I'll do what I can..."
     the_person "Don't take no for an answer! I know you can do it bro! Tell her I'll double her fee!"
-    "Sounds like you should probably talk to [erica.possessive_title] about doing more insta pics..."
+    "Sounds like you should probably talk to [erica.possessive_title] about doing more InstaPics..."
     $ erica.add_unique_on_room_enter_event(erica_post_photoshoot)
     return
 
@@ -2631,7 +2631,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.update_actor(lily, position = current_pos[0], emotion = "happy")
             $ scene_manager.update_actor(erica, position = current_pos[1], emotion = "happy")
             if (erica.sluttiness > 60 and lily.sluttiness > 60):
-                mc.name "Remember, these are for the thirsty insta boys. Work it for the camera!"
+                mc.name "Remember, these are for the thirsty InstaPic boys. Work it for the camera!"
                 "[current_pos[3]!i]"
                 $ mc.change_locked_clarity(50)
             else:
@@ -2685,7 +2685,7 @@ label erica_lily_post_insta_handjob_label():
     the_person "Yeah, it's me. I am just getting ready to head out for an early morning run. It's 5 am."
     mc.name "Wow. Your commitment to fitness is amazing, you know that?"
     "She chuckles before responding."
-    the_person "Thank you. I was just going to head out, but I wanted to come in and say thank you, for setting me up with [lily.name] and the insta pic stuff..."
+    the_person "Thank you. I was just going to head out, but I wanted to come in and say thank you, for setting me up with [lily.name] and the InstaPic stuff..."
     mc.name "It's fine, you don't have to come in at 5am to tell me that though."
     the_person "I know, but I wanted to make sure I had you alone for what I want to do to show you how thankful I am..."
     "Over your blankets, [the_person.title] reaches over and puts her hand on your chest, then starts to slide it down your body."
@@ -3250,9 +3250,9 @@ label erica_breeding_fetish_team_crisis_label():
         lily "I thought I heard some... errm... strange noises last night..."
     the_person "Yeah... that was us..."
     lily "Wow, [erica.name], you look amazing! You are positively glowing."
-    lily "You're still coming over on Saturday right? Thirsty insta boys are gonna love the way you are developing..."
+    lily "You're still coming over on Saturday right? Thirsty InstaPic boys are gonna love the way you are developing..."
     if lily.pregnancy_is_visible():
-        lily "I have to say, I started making considerably more money on insta when my tits starting swelling up with milk."
+        lily "I have to say, I started making considerably more money on InstaPic when my tits starting swelling up with milk."
     elif lily.sluttiness >= 60:
         lily "I've been thinking about doing something to make my tits a little bigger too, though maybe not getting pregnant..."
     else:

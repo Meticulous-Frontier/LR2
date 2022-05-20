@@ -116,7 +116,7 @@ label manager_role_remove_label(the_person):
     mc.name "I checked your management results and I can't say I'm happy, so I have decided to remove you from your management position."
     $ the_person.draw_person(emotion = "sad")
     the_person "I understand [the_person.mc_title], I can assure you I did my best..."
-    mc.name "I know, that's why I'm keeping you with me here."
+    mc.name "I know, that's why I'm still keeping you with me here, just as a stripper."
     $ the_person.change_stats(happiness = -10, obedience = 2)
     # this might increase the number of active strippers to 6
     $ the_person.add_job(stripclub_stripper_job, job_known = True)
@@ -136,7 +136,7 @@ label promote_to_mistress_label(the_person):
     the_person "What? No way! I will never agree to allow another woman to command me. If you do that, I will be forced to resign!"
     mc.name "And what if that commanding woman is you?"
     $ the_person.draw_person(emotion = "happy")
-    the_person "Really? Are you asking me to be, after you, the complete boss here?"
+    the_person "Really? Are you asking me to be, after you, the ultimate authority here?"
     mc.name "I know it's a dirty job, but someone needs to do it."
     "A malicious smile creeps over her face, while she glances over to the other girls."
     the_person "I will do my best... or worst, depending on my mood."
@@ -149,7 +149,7 @@ label mistress_role_remove_label(the_person):
     mc.name "I checked your management results and I can't say I'm happy, so I have decided to remove you from your management position."
     $ the_person.draw_person(emotion = "sad")
     the_person "I understand [the_person.mc_title], I can assure you I did my best..."
-    mc.name "I know, that's why I keep you with me here."
+    mc.name "I know, that's why I'll keep you with me here, just as a stripper."
     $ the_person.add_job(stripclub_stripper_job, job_known = True)
     return
 
@@ -179,7 +179,7 @@ label mistress_hunt_for_me_label(the_person):
     $ mc.change_location(downtown_hotel)
     $ mc.location.show_background()
     $ clear_scene()
-    "A couple of minutes later, you are in the hotel. You walk up to the reception to get a hotel room for one night."
+    "A couple of minutes later, you are in the hotel. You walk up to the reception desk to get a hotel room for one night."
     $ mc.business.change_funds(-80)
     $ downtown_hotel_room.show_background()
 

@@ -7,9 +7,9 @@ init 10 python:
     #First, setup the love storyline hints and functions.
 
     def test_story_20_love_hint():  #Use a requirement style system to return hints as necessary.
-        return "Trying talking to here a lot! She likes small talk."
+        return "Trying talking to her a lot! She likes small talk."
 
-    def test_story_20_love_complete_func():  #Probably some sort of story variable get's set if you completed an event.
+    def test_story_20_love_complete_func():  #Probably some sort of story variable gets set if you completed an event.
         return the_person.love>20
 
     #### Copy and paste these for the other 4 love story events.

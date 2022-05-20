@@ -85,7 +85,6 @@ label punishment_service_mc_label(the_person, the_infraction):
         mc.name "I have a new punishment for you. I want you to practice sucking cock for the next week. Then come back to me and try again."
         the_person "That's... that's crazy!"
         mc.name "What's crazy is how bad at giving head you are. You heard me, now get back to work."
-
         $ the_person.change_stats(happiness = -5, obedience = 2)
         $ add_practice_cocksucking_work_action(the_person)
     else:
@@ -115,12 +114,11 @@ label employee_cocksucking_practice_report_label(the_person):
     "You put your hands on her shoulders."
     mc.name "There's no time like the present. Now get on your knees and give this another shot."
     the_person "Ahh... okay..."
-
     $ the_person.draw_person(position = "blowjob")
     "[the_person.title] sinks down to her knees while you reach down and pull out your cock. She tentatively sticks her tongue out and runs it over the tip."
     mc.name "It's going to take a bit more than that. Now open up."
     $ the_person.break_taboo("sucking_cock")
-    "Finally relenting, [the_person.possessive_title] finally opens her mouth and takes you. While her technique isn't great, the soft confines of her mouth feel great."
+    "Finally relenting, [the_person.possessive_title] opens her mouth and takes you. While her technique isn't great, the soft confines of her mouth feel great."
     $ the_person.add_situational_obedience("punishment", 40, "I'm being punished, I don't have any right to refuse.")
     call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, affair_ask_after = False) from _call_custom_bj_punishment_02
     $ the_report = _return

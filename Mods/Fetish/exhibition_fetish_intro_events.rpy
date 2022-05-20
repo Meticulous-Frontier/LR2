@@ -149,7 +149,7 @@ label exhibition_fetish_sarah_intro_label():
     the_person "I try to take care of your urges for you at the Monday meetings..."
     mc.name "Well, maybe..."
     the_person "Do you need me to take care of you again? I know it's hump day... I could do it right here?"
-    "You look around. Several girls have already sat down at their desk and begun their work."
+    "You look around. Several girls have already sat down at their desks and begun their work."
     "You look back at [the_person.possessive_title]. Is she blushing?"
     "You've been testing Social Sexual Proclivity Nanobots quite a bit on her lately. Is she doing this BECAUSE all the other girls are here?"
     "You reply to her in a voice that is louder than necessary, making sure all the girls around you hear it."
