@@ -489,12 +489,12 @@ label camilla_hookup_accept(the_person):
             "Your brain is getting a little hazy with lust. Surely there's nothing wrong with that, right?"
             menu:
                 "Take It Off":
-                    "In one swift motion you  pull out of [the_person.title], pull the condom off, then shove yourself deep back inside her."
+                    "In one swift motion you pull out of [the_person.title], pull the condom off, then shove yourself deep back inside her."
                     "You wad up the condom then throw it on the counter. It lands with splat."
                     the_person "Yes! Cum for me! I want to feel it!"
                     $ the_person.change_arousal(20) #110 + 8
                     "Her excitement is too much. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
-                    the_person  "Yes! Fill me with your cum!"
+                    the_person "Yes! Fill me with your cum!"
                     "You feel her pussy convulsing around your dick as she also starts to orgasm."
                     $ the_person.change_stats(slut = 1, happiness = 2)
                     $ the_person.cum_in_vagina()

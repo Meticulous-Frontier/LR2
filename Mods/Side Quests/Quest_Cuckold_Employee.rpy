@@ -187,7 +187,7 @@ label quest_cuckold_employee_intro_label():
         return
     # lock selected person out of other quests
     $ quest_director.add_unavailable_person(the_person)
-    "You working diligently when a figure appears in your peripheral vision. You look up and see [the_person.title] standing in front of you."
+    "You're working diligently when a figure appears in your peripheral vision. You look up and see [the_person.title] standing in front of you."
     $ the_person.draw_person(emotion = "sad")
     mc.name "Hello [the_person.title]. Can I help you?"
     the_person "Hopefully! I was just wondering... we've worked on a lot of drugs around here... have we ever made any progress on drugs that can increase... fertility?"
@@ -227,13 +227,13 @@ label quest_cuckold_employee_decision_label():
     the_person "Well... my husband and I... we've been trying to have a baby lately, but after months of trying, still nothing."
     the_person "I did something I probably shouldn't have... I took a semen sample when we had sex a few days ago secretly and had it analyzed."
     the_person "He is basically infertile. I'm absolutely crushed! I love him so much, but I also want to have a baby so bad."
-    mc.name "I understand. It might take a while for you to grieve this if you need some time off."
+    mc.name "I understand. It might take a while for you to grieve about this if you need some time off."
     the_person "No, no, that's not it. I keep thinking, maybe there is some way, you know? Maybe a miracle will happen, or some drug or something will be invented that can help."
     the_person "I can't leave him, but my body is screaming at me. The urge to make a baby is SO strong!"
     mc.name "Have you considered something like a sperm bank?"
     the_person "No... I'd have to tell him that he is infertile. It would crush him! I'm not sure our relationship would survive that."
     "Hmmm... well... there is always another way of getting pregnant... You wonder if she has considered it at all."
-    "You could always offer to knock her up. But then again, impregnating another man's wife could lead  you to some heavy drama down the road..."
+    "You could always offer to knock her up. But then again, impregnating another man's wife could lead you to some heavy drama down the road..."
     menu:
         "Offer to help":
             mc.name "You know, [the_person.title]... there may be a solution that would allow you to have a baby AND stay with your husband."
@@ -243,7 +243,7 @@ label quest_cuckold_employee_decision_label():
             the_person "Oh... OH... Oh my..."
             "She stumbles for words for a moment."
             the_person "That's... wow... I don't know, that is an awfully big step."
-            the_person "I don't even know anyone. How could I even find a man that would that?"
+            the_person "I don't even know anyone. How could I even find a man that would do that?"
             if mc.charisma > 4: #Charisma check
                 mc.name "I know how much this means to you. I know I'm your boss, but I'm also your friend, and I want to see you happy."
                 mc.name "I would be glad to help you out if you decided that was a step you would like to take."
@@ -264,7 +264,7 @@ label quest_cuckold_employee_decision_label():
             else:
                 mc.name "It would be really no problem. I'd be glad to help you out with that..."
                 the_person "Umm, you? Oh geez. I'm sorry, you're my boss! That wouldn't be right!"
-                "She changes her voice to imitate a masculinity."
+                "She changes her voice to imitate a more masculine one."
                 the_person "Oh honey! The baby is so cute... but he looks just like your boss???"
                 "She shakes her head."
                 the_person "I appreciate the thought, you've definitely given me something to think about, but I'm not sure that is a good idea."
@@ -291,7 +291,7 @@ label quest_cuckold_employee_decision_label():
             the_person "That person would have to be careful, of course, to keep it a secret... a dirty little secret."
             mc.name "That is certainly a possible solution."
             the_person "So umm... what would you say if I asked you? To get me pregnant I mean."
-            "You weight the decision carefully."
+            "You weigh the decision carefully."
             menu:
                 "Help her":
                     mc.name "Let me see if I have this right. You are asking me, if I would be willing to fuck you, bareback, and fill you with my seed?"
@@ -584,7 +584,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
             "She looks down at your crotch for a second."
             the_person "In this case, a hard, throbbing, amazing thing..."
         the_person "I'm going to lay here for a while again."
-        mc.name "Okay. I'll lock the door behind me  when I leave."
+        mc.name "Okay. I'll lock the door behind me when I leave."
         the_person "Thank you [the_person.mc_title]. Let's keep our fingers crossed!"
         "With that, you leave your office, being careful to lock the door behind you."
         $ clear_scene()
@@ -646,7 +646,7 @@ label quest_cuckold_employee_gloryhole_label():
     if the_person.has_taboo("touching_penis"):
         $ the_person.break_taboo("touching_penis", add_to_log = False)
 
-    "You feel a soft hand grasp your member and give it a couple of strokes. You hear movement coming from the stall next to you but you aren't sure what's they are doing."
+    "You feel a soft hand grasp your member and give it a couple of strokes. You hear movement coming from the stall next to you but you aren't sure what they are doing."
 
     if the_person.has_taboo(["condomless_sex", "vaginal_sex"]):
         $ the_person.break_taboo("condomless_sex", add_to_log = False)
@@ -746,7 +746,7 @@ label quest_cuckold_employee_knocked_up_label():
     the_person "I know! I can't wait to tell my husband... It's so weird though, knowing in my head that it isn't even his?"
     menu:
         "Leave your [so_title] for me" if the_person.love + 10 > leave_SO_love_calculation(the_person):   #Hide yo wife
-            mc.name "[the_person.title], think it's time you left him so we can be together. It isn't right hiding this from him.."
+            mc.name "[the_person.title], I think it's time you left him so we can be together. It isn't right hiding this from him.."
             "[the_person.title] seems nervous, you can tell she is dealing with some guilt after cheating on her husband."
             the_person "I know... you're right. I know you're right! This has gone on long enough. I'll... I'll tell him later today."
             # she becomes your girlfriend

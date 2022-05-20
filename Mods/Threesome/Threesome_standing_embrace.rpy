@@ -144,7 +144,7 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
             else:
                 "You pull out of [the_girl_2.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She wiggles her ass for you as you cover her with your sperm."
             if the_girl_2.get_opinion_score("being covered in cum") > 0:
-                 the_girl_2 "Yes! Paint me with your sticky cum!"
+                the_girl_2 "Yes! Paint me with your sticky cum!"
             $ the_girl_2.cum_on_ass()
             $ scene_manager.draw_scene()
             $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl_2)

@@ -1547,7 +1547,7 @@ label kaya_lily_reveal_label(the_person):
 
 label kaya_barista_fuck_intro_label(the_person):
     $ kaya.event_triggers_dict["can_get_barista_quickie"] = False
-    # Kaya works out a deal with a co-worker to fuck you on her break
+    # Kaya works out a deal with a coworker to fuck you on her break
     return
 
 label kaya_barista_fuck_label(the_person):

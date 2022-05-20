@@ -98,6 +98,6 @@ init 2 python: # Declare variables to use
         return False
 
     salon_action = ActionMod("Schedule a haircut {image=gui/heart/Time_Advance.png}", salon_requirement, "salon_label", initialization = hair_salon_mod_initialization,
-        menu_tooltip = "Change a persons hair style and color.", category="Mall")
+        menu_tooltip = "Change a person's hair style and color.", category="Mall")
 
     salon_introduction_action = Action("Ophelia's Hair Salon", salon_introduction_action_requirement, "salon_manager_greetings", menu_tooltip = "Ophelia's Hair Salon")

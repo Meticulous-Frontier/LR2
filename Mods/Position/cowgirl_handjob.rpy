@@ -155,10 +155,10 @@ label strip_ask_cowgirl_handjob(the_girl, the_clothing, the_location, the_object
         "Leave it on":
             mc.name "No, I like how you look with it on."
             if the_girl.sluttiness < 60:
-                "She whispers in your ear a she starts to stroke you again."
+                "She whispers in your ear as she starts to stroke you again."
                 the_girl "Yeah? Do I look sexy in it?"
             else:
-                "She whispers in your ear a she starts to stroke you again."
+                "She whispers in your ear as she starts to stroke you again."
                 the_girl "Does it make me look like a good little slut? Or is your giant cock in my hand enough fro that?"
             $ return_value = False
 

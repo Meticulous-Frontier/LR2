@@ -178,7 +178,7 @@ label strip_club_hire_employee_label(the_person):
     mc.name "So [the_person.title], are you looking for a job?"
     $ ran_num = renpy.random.randint(0,100)
     if the_person is lily:
-        the_person "Hey [the_person.mc_title], you know I'm always looking for ways to boost my pocket money, a student has always a shortage of money."
+        the_person "Hey [the_person.mc_title], you know I'm always looking for ways to boost my pocket money, a student always has a shortage of money."
         mc.name "Then you might like the proposal I have for you."
     elif the_person is mom:
         the_person "Hi [the_person.mc_title], you know I have a lot of bills to pay, but I also have my job, so I'm not really looking for something else."
@@ -203,21 +203,21 @@ label strip_club_hire_employee_label(the_person):
             $ the_person.draw_person(emotion = "happy", position = "stand5")
             the_person "Ok, but after what you did last time, the pay should be magnificent!"
             mc.name "Your pay will be $[ran_num] a day. Do you think that will be good enough for you?"
-            the_person "Really you will pay me that much? Ok, then my answer is yes, I'll work as stripper again."
+            the_person "Really you will pay me that much? Ok, then my answer is yes, I'll work as a stripper again."
             $ hire_stripper(the_person, stripclub_stripper_job)
 
         elif _return is stripclub_bdsm_performer_role:
-            mc.name "I did it just because I already knew I had a better offer for a girl like you. How do you feel about coming back at the strip club to work as BDSM performer?"
+            mc.name "I did it just because I already knew I had a better offer for a girl like you. How do you feel about coming back to the strip club to work as a BDSM performer?"
             $ the_person.draw_person(emotion = "happy", position = "stand5")
-            the_person "Maybe, but as stripper I was getting good money, so if I do this, the pay should be a lot better!"
+            the_person "Maybe, but as a stripper I was getting good money, so if I do this, the pay should be a lot better!"
             mc.name "Your pay will be $[ran_num] a day. Do you think that is 'a lot better' for you?"
             the_person "Really you will pay me that much? Ok, then my answer is yes, I'll do some kinky stuff for you."
             $ hire_stripper(the_person, stripclub_bdsm_performer_job)
 
         else:
-            mc.name "I don't like the idea of you working as stripper, but how do you feel about coming back at the strip club to work as waitress?"
+            mc.name "I don't like the idea of you working as a stripper, but how do you feel about coming back to the strip club to work as a waitress?"
             $ the_person.draw_person(emotion = "happy", position = "stand5")
-            the_person "Ok, but as stripper I was getting good money, so the pay should be this good!"
+            the_person "Ok, but as a stripper I was getting good money, so the pay should be as good!"
             mc.name "Your pay will be $[ran_num] a day. Do you think that will be good enough for you?"
             the_person "Really you will pay me that much just to give people drinks and clean some tables? Ok, then my answer is yes."
             $ hire_stripper(the_person, stripclub_waitress_job)
@@ -237,7 +237,7 @@ label strip_club_hire_employee_label(the_person):
         the_person "Actually yes, I would like to take a break from being a [the_person.job.job_title]... Do you have something available for me?"
     elif ran_num > 67: # Any other 33% chance No
         the_person "No [the_person.mc_title], I'm quite happy with my job as [the_person.job.job_title]."
-        mc.name "Oh, that's good for you! If one day you'll change your mind, let me know."
+        mc.name "Oh, that's good for you! If one day you change your mind, let me know."
         the_person "Sure, thank you!"
         $ the_person.event_triggers_dict["stripper_ask_hire"] = day
         return
@@ -273,7 +273,7 @@ label strip_club_hire_employee_label(the_person):
         elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score(["showing her ass", "showing her tits"]) > 3:
             the_person "Maybe, if the money is good enough, I could give it a try..."
             mc.name "Your pay will be $[ran_num] a day. Do you think that will be good enough for you?"
-            the_person "Really you will pay me that much? Ok, then my answer is yes, I'll work as stripper for you."
+            the_person "Really you will pay me that much? Ok, then my answer is yes, I'll work as a stripper for you."
         else:
             the_person "I'm sorry [the_person.mc_title], I'm flattered you think I'm pretty enough for the job, but I don't think I would fit in there, showing so much skin..."
             "Maybe I can work on her sluttiness a bit, or change her attitude to 'showing some skin' and try again."
@@ -299,7 +299,7 @@ label strip_club_hire_employee_label(the_person):
         elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score("being submissive") + the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 4:
             the_person "Maybe, if the money is good enough, I could give it a try..."
             mc.name "Your pay will be $[ran_num] a day, is that good enough for you?"
-            the_person "Oh! Your offer was tempting, and for that money I don't care being a bit submissive and show some skin. Ok then, my answer is yes."
+            the_person "Oh! Your offer was tempting, and for that money I don't care about being a bit submissive and showing some skin. Ok then, my answer is yes."
         else:
             the_person "I'm sorry [the_person.mc_title], I'm flattered you think I'm pretty enough for the job, but I don't think I would fit in there, letting everyone know how slutty I am..."
             "Maybe I can work on her sluttiness a bit, or change her attitude to 'showing some skin' or 'being submissive' and try again."
@@ -315,7 +315,7 @@ label strip_club_hire_employee_label(the_person):
             mc.name "As long as you don't do it inside the club, you can do what ever you like."
             the_person "Great, then I'll be one of the best waitresses you will ever see."
         elif the_person.effective_sluttiness() > 50:
-            the_person "I would love being a waitress, showing some skin, have them groping my ass... Ok, where should I sign?"
+            the_person "I would love being a waitress, showing some skin, having them groping my ass... Ok, where should I sign?"
         elif the_person.effective_sluttiness() > 20 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 0:
             the_person "If it's just to be a waitress there, I don't mind showing some skin... Ok, where should I sign?"
         elif the_person.effective_sluttiness() > 10 and the_person.get_opinion_score("showing her ass") + the_person.get_opinion_score("showing her tits") > 2:
@@ -338,7 +338,7 @@ label strip_club_hire_employee_label(the_person):
 
 label strip_club_fire_employee_label(the_person):
     if the_person.has_role(stripper_role) or the_person.has_role(stripclub_waitress_role):
-        mc.name "[the_person.title], I've checked your performances on stage and it is absolutely unsatisfactory."
+        mc.name "[the_person.title], I've checked your performance on stage and it is absolutely unsatisfactory."
         mc.name "There's no a nice way to say this, but you're fired, you can finish your shift tonight and collect your severance pay."
         $ the_person.draw_person(emotion = "happy", position = "stand3")
         the_person "Are you sure [the_person.mc_title]? There's nothing I can do to make you change your mind?"
@@ -499,7 +499,7 @@ label stripper_performance_review_label(the_person):
                                     $ the_person.clear_situational_obedience("seduction_approach")
                                     $ the_person.apply_planned_outfit()
                                     $ the_person.change_stats(happiness = -5, obedience = 5, slut = 1, max_slut = 50)
-                                    mc.name "Okay [the_person.title], I'll keep you around for a little while longer, but you're going need to work on your act, else I might change my mind about keeping you here."
+                                    mc.name "Okay [the_person.title], I'll keep you around for a little while longer, but you're going to need to work on your act, or else I might change my mind about keeping you here."
                                     if the_person.effective_sluttiness() < 50:
                                         the_person "I'll do my best [the_person.mc_title], I promise."
                                     else:

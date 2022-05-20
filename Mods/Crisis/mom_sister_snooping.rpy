@@ -33,7 +33,7 @@ label mom_sister_snooping_action_label():
         $ overhear_topic = lily.get_random_opinion(include_sexy = False)
         $ text_one = person_opinion_to_string(lily, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        lily "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+        lily "... but yeah, I'm not sure he realizes I [text_one] [text_two]."
         if lily.discover_opinion(overhear_topic):
             "Oh! You didn't realize that [lily.title] felt that way."
         "The girls keep talking. They keep bouncing back and forth between multiple topics."
@@ -52,7 +52,7 @@ label mom_sister_snooping_action_label():
         $ overhear_topic = mom.get_random_opinion(include_sexy = True, include_normal = False)
         $ text_one = person_opinion_to_string(mom, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        mom "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+        mom "... but yeah, I'm not sure he realizes I [text_one] [text_two]."
         $ mc.change_locked_clarity(10)
         if mom.discover_opinion(overhear_topic):
             "Oh! You didn't realize that [mom.title] felt that way."
@@ -167,7 +167,7 @@ label mom_sister_snooping_action_label():
         lily "It's fine mom. I just roll it up a little at the top, no one even notices. Well, except for this one professor... I like to sit in the front and..."
         mom "That's enough... I don't need to hear about this! Young lady unroll that skirt right now."
         lily "Mom! It's fine! There's nothing wrong with a little fun. Besides, he really enjoys it. Especially if I leave the top couple buttons open on the blouse..."
-        mom "Oh my. Lily, what am I gonna do with you."
+        mom "Oh my. [lily.name], what am I gonna do with you."
         "[lily.title] gives a little laugh."
         lily "It's okay mom. Say, you should try something like this sometime!"
         mom "Why I would never..."

@@ -49,7 +49,6 @@ label fetish_anal_staylate_event_label(the_person):
         the_person "Oh... okay... well try to let me know next time before I stay late. I thought... anyway, maybe some other time. Bye!"
         $ the_person.change_stats(happiness = -5, love = -2)
         return
-
     $ ceo_office.show_background()
     "You finish up with your work for the day and return to your office. You are organizing some papers when [the_person.possessive_title] enters the room."
     $ the_person.apply_outfit(special_fetish_outfit)
@@ -57,7 +56,6 @@ label fetish_anal_staylate_event_label(the_person):
     $ mc.change_locked_clarity(30)
     "From the look of her attire, she seems to have guessed the purpose of your meeting correctly."
     the_person "Hey [the_person.mc_title]. You wanted to see me?"
-
     mc.name "That's right. While your job performance has been ideal, it has recently come to my attention that you may not be of sound moral character."
     "[the_person.possessive_title] smiles slightly. She can see where you are going with this conversation."
     mc.name "I asked you to stay late so I could punish you properly for your misconduct. Now, I want you to bend over my desk to prepare for your punishment."
@@ -73,7 +71,7 @@ label fetish_anal_staylate_event_label(the_person):
     menu:
         "Spank Her":
             "SMACK!"
-            "You hand lands a firm blow on her supple ass. Her knees buckle a bit and she arches her back, surprised by the sudden blow."
+            "Your hand lands a firm blow on her supple ass. Her knees buckle a bit and she arches her back, surprised by the sudden blow."
             mc.name "Quiet slut! You will speak only when spoken to. Do you understand?"
             the_person "Yes sir!"
             "You murmur a soft approval. You give her ass another hard spank."
@@ -113,12 +111,10 @@ label fetish_anal_staylate_event_label(the_person):
                 the_person "Okay... I guess we're done already?"
                 "[the_person.possessive_title] seems disappointed she didn't finish."
                 $ the_person.change_stats(happiness = -5, love = -2)
-
             $ the_person.event_triggers_dict["LastAnalFetish"] = day
             "[the_person.possessive_title] gets up and starts getting ready to go home."
             "You say goodbye to her as she walks out your office door."
             return
-
     menu:
         "Fuck Her Ass":
             "You firmly grasp one of her ass cheeks in one hand. It is hot to the touch."
@@ -147,12 +143,11 @@ label fetish_anal_staylate_event_label(the_person):
                 "[the_person.possessive_title] seems disappointed she didn't finish."
                 $ the_person.change_stats(happiness = -5, love = -2)
             $ the_person.event_triggers_dict["LastAnalFetish"] = day
-
             "[the_person.possessive_title] gets up and starts getting ready to go home."
             "You say goodbye to her as she walks out your office door. She walks a bit funny, clearly uncomfortable after the spanking she received."
         "Send her home":
             mc.name "That's enough for today [the_person.title]."
-            "[the_person.possessive_title] looks back at your, clearly surprised that you are sending her away already."
+            "[the_person.possessive_title] looks back at you, clearly surprised that you are sending her away already."
             the_person "What? I mean, already? Okay..."
             "She grabs her stuff and quickly makes an exit from your office."
             $ the_person.change_stats(happiness = -5, love = -2, obedience = 5)

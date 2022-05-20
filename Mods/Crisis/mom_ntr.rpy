@@ -402,7 +402,7 @@ label mom_ntr_mod_action_label():
                                     man_name "That's exactly where you belong, whore. I hope you understand that now."
                             elif finish == "usual":
                                 if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
-                                    "[the_person.possessive_title] seems to be enjoying the rough treatment now. She screams in rapture, clearly not caring or understanding that you or Lily might come to investigate."
+                                    "[the_person.possessive_title] seems to be enjoying the rough treatment now. She screams in rapture, clearly not caring or understanding that you or [lily.name] might come to investigate."
                                     the_person "Yes! Fuck! Tear me apart, [man_name]! I'm your bitch tonight and I need a proper fuck! Do it!"
                                     "The man keeps pumping her and slapping her already reddening ass. With each slap, [the_person.possessive_title] moans with pleasure."
                                     man_name "Didn't I say that you were just a slut, needing a push? I promised to give you a proper one, so you still owe me!"
@@ -777,7 +777,7 @@ label mom_ntr_mod_action_label():
                                         the_person "Indeed, [man_name]! It was great! Best fuck I had in some time! Now let me finish with my [the_person.mc_title]."
                                         "[the_person.possessive_title] speeds up her hand around your dick and in few seconds you cum in her palm."
                                         the_person "There we go. All finished!"
-                                        man_name "I don't believe it, [the_person.name]. You just let your [the_person.possessive_title] watch us fuck, then jerked him off!"
+                                        man_name "I don't believe it, [the_person.name]. You just let your son watch us fuck, then jerked him off!"
                                         $ the_person.draw_person(position = "stand2", emotion = "happy")
                                         "[the_person.possessive_title] stands up from the bed and smiles."
                                         the_person "Didn't that turn you on, [the_person.mc_title]?"
@@ -1254,7 +1254,7 @@ label mom_ntr_mod_action_label():
                             $ the_person.change_arousal(renpy.random.randint(10,50))
                             "[the_person.possessive_title] takes [man_name]'s dick out of her mouth, looks at his eyes."
                             the_person "I really like it, [man_name]. It feels great in my mouth."
-                            "Then she get's back to suck it."
+                            "Then she gets back to suck it."
                             menu:
                                 "Keep hiding...":
                                     $ hidden = True
@@ -1282,7 +1282,7 @@ label mom_ntr_mod_action_label():
                                         $ the_person.change_arousal (arousal_plus)
                                     "[the_person.possessive_title] takes guys cock out and looks up."
                                     the_person "Oh. I get so turned on with a cock im my mouth. I'm cumming!"
-                                    "She get's back to his dick as her body shivers with orgasm."
+                                    "She gets back to his dick as her body shivers with orgasm."
                                     man_name "Oh, [the_person.name], your tongue is driving me crazy! I think I will come soon!"
                                     $ finish = mom_ntr_select_finish(the_person)
                                     if finish == "facial":
@@ -1392,7 +1392,7 @@ label mom_ntr_mod_action_label():
                                     $ the_person.change_arousal(renpy.random.randint(10,50))
                                 "[the_person.possessive_title] takes guys cock out and looks up."
                                 the_person "Oh. I get so turned on with a cock im my mouth. I'm cumming!"
-                                "She get's back to his dick as her body shivers with orgasm."
+                                "She gets back to his dick as her body shivers with orgasm."
                                 $ finish = mom_ntr_select_finish(the_person)
                                 if finish == "facial":
                                     "She takes his dick out of her mouth."
@@ -1927,7 +1927,7 @@ label mom_ntr_mod_action_label():
                                 the_person "[the_person.mc_title], don't just stay there, come on in. [the_person.possessive_title] will help you relax as well."
                                 man_name2 "Wow, [the_person.name]! Two of us not enough for you?"
                                 if the_person.get_opinion_score("being submissive") > 0:
-                                    the_person "I want two of you to fuck me real hard so that I would scream like mad. I don't want to wake Lily so I need something to shut my mouth."
+                                    the_person "I want two of you to fuck me real hard so that I would scream like mad. I don't want to wake [lily.name] so I need something to shut my mouth."
                                     man_name "Wanna a rough fuck, [the_person.name]? Can do!"
                                 else:
                                     the_person "My house, my rules. So, come on [the_person.mc_title]. I will help you relax."
@@ -1941,7 +1941,7 @@ label mom_ntr_mod_action_label():
                                     if the_person.get_opinion_score("being submissive") > 0:
                                         "She pulls her head away from you."
                                         the_person "Oh God! Fuck me! Fuck! Fuck!"
-                                        "Afraid that she would wake up Lily, you grab her head and impale her wide open mouth on your dick."
+                                        "Afraid that she would wake up [lily.name], you grab her head and impale her wide open mouth on your dick."
                                         "It seems to turn her on even more."
                                     else:
                                         pass

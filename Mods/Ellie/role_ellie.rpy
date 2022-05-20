@@ -447,7 +447,7 @@ label ellie_end_blackmail_label():
     "She startles. She clearly had not expected this at all."
     the_person "Me? You... after I blackmailed you and..."
     mc.name "How did you get information on my company anyway? About the nanobots?"
-    the_person "Oh gee, finding your involvement was the hard part. Your password security is nonexistent. I used a dictionary attack and accessed Stephanie's emails using those stolen passwords." #BB- Even dated servers would have some kind of firewall. Having poor password policies is much more common and exploitable
+    the_person "Oh gee, finding your involvement was the hard part. Your password security is nonexistent. I used a dictionary attack and accessed [stephanie.name]'s emails using those stolen passwords." #BB- Even dated servers would have some kind of firewall. Having poor password policies is much more common and exploitable
     mc.name "I could really use someone with your talents to help me with stuff like that."
     the_person "I could help... but I can't... I signed a non-compete..."
     mc.name "I run a small company. We all know each other. I could make your official position be in HR, but you could run IT projects for me on the side. Your prior employer doesn't need to know."
@@ -1210,12 +1210,12 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     return
 
 label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness event. Also requires X number of oral encounters?
-    "You check up on Ellie while she is working on nanobot programming stuff."
+    "You check up on [ellie.name] while she is working on nanobot programming stuff."
     "She says working on this program is getting her really worked up. You can tell she's aroused (flushed cheeks, pointy nipples)."
     "She asks if you could fool around a little again. MC says he is tired of foreplay, says she probably just needs a good fucking."
     "She is embarrassed. Says she knows that but she is just scared of having sex for the first time."
     "MC asks if she would be open to sleeping with him if he promises to go slow and be gentle."
-    "Ellie is uncertain. Her mama would be so disappointed."
+    "[ellie.name] is uncertain. Her mama would be so disappointed."
     "MC offers to take her out on a proper date first, have a couple drinks, go back to her place, she can stop any point she wants to."
     "She says okay. Make a plan for dinner on... some day? Figure out best day."
     "She's still needy right now though. Quick detour to the office for sixty nine."
@@ -1224,7 +1224,7 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
     return
 
 label ellie_loses_her_virginity_label():
-    "You meet up with Ellie. Take her out for a nice dinner."
+    "You meet up with [ellie.name]. Take her out for a nice dinner."
     "Have the option to mess around a little under the table. If you use your foot to rub against her privates, she gains +1 public sex opinion."
     "Also have a drink. At some point she uses ladies room and you can serum her."
     "Like a normal dinner date gain love based on how fancy wine is, how fancy dinner is, etc."
@@ -1238,13 +1238,13 @@ label ellie_loses_her_virginity_label():
     "Lays down on bed. MC can be gentle for positive vaginal sex opinion, or rough for negative and obedience gain."
     "Mc can ask if she wants condom. She says she wants her first time natural, but appreciates it if MC asks and likes bareback sex. Otherwise dislikes bareback sex if MC doesn't ask."
     "After penetration, use creampie_cum but use red color to make it look like virginity taken."
-    "Sex scene. If Ellie cums twice or more she begs MC to finish inside her. Gain creampie like."
+    "Sex scene. If [ellie.name] cums twice or more she begs MC to finish inside her. Gain creampie like."
     "If not, she asks MC to pull out. If MC pulls out she likes cum on her body. If he doesn't, she dislikes creampies."
-    "Taking Ellie's virginity has made her putty in your hands now. She gains large love and obedience bonuses."
-    "Ellie can't believe she did that, she always thought growing up she was saving herself for marriage, but can't believe what she has been missing out on."
+    "Taking [ellie.name]'s virginity has made her putty in your hands now. She gains large love and obedience bonuses."
+    "[ellie.name] can't believe she did that, she always thought growing up she was saving herself for marriage, but can't believe what she has been missing out on."
     "With high love stat, MC has option to ask her to be his girlfriend. She accepts."
     "Leave her place and go home."
-    "You have unlocked Ellie's vaginal sex options."
+    "You have unlocked [ellie.name]'s vaginal sex options."
     $ ellie.event_triggers_dict["given_virginity"] = True
     return
 
@@ -1258,8 +1258,8 @@ label ellie_turned_on_while_working_intro_label(the_person):
     return
 
 label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered after unlocking Ellie's oral sex options, and procs when she is working on nanobot programming.
-    "During a break, you make the rounds to the different departments. When you swing by R&D, you decide to check up on Ellie"
-    "Ellie is masturbating, trying to type with one hand and playing with herself with the other."
+    "During a break, you make the rounds to the different departments. When you swing by R&D, you decide to check up on [ellie.name]"
+    "[ellie.name] is masturbating, trying to type with one hand and playing with herself with the other."
     "She is sorry. Working on this stuff gets her so horny."
     "Initially, you can chastise her (dislikes masturbation), encourage her (likes masturbation), or offer to help her."
     "If you offer to help her, you can do it right there in R&D (likes public sex), or find somewhere private."

@@ -870,7 +870,7 @@ label kaya_erica_teamup_scene_4(the_person_one, the_person_two):
     if _return:
         $ correct_count += 1
         $ kaya_count += 1
-        erica "Yes! Good one Kaya!"
+        erica "Yes! Good one [kaya.name]!"
     else:
         kaya "Noooo! I swear I had it..."
         mc.name "Definitely not."
@@ -890,7 +890,7 @@ label kaya_erica_teamup_scene_4(the_person_one, the_person_two):
     if _return:
         $ correct_count += 1
         $ kaya_count += 1
-        erica "Yes! Way to go Kaya!"
+        erica "Yes! Way to go [kaya.name]!"
     else:
         kaya "Noooo! I swear I had it..."
         mc.name "Definitely not."

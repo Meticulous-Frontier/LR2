@@ -75,7 +75,7 @@ label employee_find_out_home_location_label(the_person):
         the_person "I have a nice little place in the [opinion] apartment block on the [ran_num]th floor."
     else:
         $ opinion = get_random_from_list(["Lyon Estates just south of Hill Valley", "Bristol Avenue in Brentwood", "Carnarvon Park in Newbury", "Quimby Street in Cullen"])
-        the_person "We have a beautiful home at the [opinion]."
+        the_person "We have a beautiful home on [opinion]."
 
     "You just learned her home address and can visit her anytime you want."
     $ the_person.learn_home()

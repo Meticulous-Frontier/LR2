@@ -127,7 +127,7 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
 
         "Cum on her face":
             "You close your eyes and focus on the sensation of [the_girl.possessive_title]'s warm, soft breasts massaging your cock."
-            "As your orgasm builds to its peak, you step back, sliding your cock out from her cleavage and take it up in your own hand."
+            "As your orgasm builds to its peak, you step back, slide your cock out from her cleavage and take it up in your own hand."
             $ the_girl.draw_person(position = "kneeling1")
             if the_girl.effective_sluttiness() > 40 or the_girl.get_opinion_score("cum facials") > 0:
                 "[the_girl.title] understands immediately what is about to happen and tilts her head up, giving you a clear target."
@@ -143,7 +143,7 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
     return
 
 label transition_default_sarah_tit_fuck(the_girl, the_location, the_object):
-    "You grab a hold of sizeable tits and give them a gentle squeeze, bringing a little moan from her lips."
+    "You grab a hold of her sizeable tits and give them a gentle squeeze, bringing a little moan from her lips."
     mc.name "I want to feel my cock between these lovely tits again."
     "She smiles and nods, dropping to her knees in front of you. She gathers her tits up in her hands and presses them to the side of your shaft."
     return

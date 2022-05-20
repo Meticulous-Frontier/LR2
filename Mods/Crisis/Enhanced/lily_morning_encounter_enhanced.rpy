@@ -94,7 +94,7 @@ label lily_morning_encounter_enhanced_label():
                 "The view is pleasant, and as you walk together she seems to relax a bit with the idea of being mostly undressed around you."
                 $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 30)
                 $ the_person.draw_person(position = "walking_away")
-                "You reach the door to the kitchen and split up. You linger a second and enjoy the view as your [the_person.possessive_title] walks away."
+                "You reach the door to the kitchen and split up. You linger a second and enjoy the view as [the_person.possessive_title] walks away."
                 # Make a bad decision?
 
     elif the_person.effective_sluttiness("underwear_nudity") < 40:
@@ -141,7 +141,7 @@ label lily_morning_encounter_enhanced_label():
                 $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 30)
 
         $ the_person.draw_person(position = "walking_away")
-        "You reach the door to the kitchen and split up. You wait a second and enjoy the view as your [the_person.possessive_title] walks away."
+        "You reach the door to the kitchen and split up. You wait a second and enjoy the view as [the_person.possessive_title] walks away."
 
     else: #sluttiness >= 40-55
         #She likes being watched and teases you a little while you walk together.
