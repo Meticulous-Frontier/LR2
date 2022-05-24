@@ -20,6 +20,10 @@ label activate_myrabelle_mod_core(stack):
 label update_myrabelle_mod_core(stack):
     python:
         # This function runs when loading an existing save game. If you want to make your person appear in existing savegames, use this function to check if she exists and then run the init for her if she doesn't.
+        if "gaming_cafe" not in globals():
+            gaming_cafe = Room("gaming_cafe", "Gaming Cafe", [], standard_gaming_cafe_backgrounds, gaming_cafe_objects, [], [gaming_cafe_grind_character_action, gaming_cafe_buy_max_level_token_action, gaming_cafe_adult_swim], False, [6,2], None, False, lighting_conditions = standard_indoor_lighting)
+            list_of_places.append(gaming_cafe)
+
         if "myra" not in globals():
             myrabelle_mod_initialization()
             myra_focus_progression_scene_init()
