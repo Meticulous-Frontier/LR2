@@ -1290,7 +1290,7 @@ label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    
         del alexia_warmed_up
         del myra_warmed_up
         del finished
-        del the_target
+        #del the_target
     return
 
 label myra_alexia_teamup_trans_scene_0(the_group):
