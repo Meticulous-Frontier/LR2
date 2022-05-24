@@ -27,7 +27,7 @@ init 2:
                 frame:
                     background "#1a45a1aa"
                     xsize 420
-                    ysize 550
+                    ysize 450
                     vbox:
                         text "Personal Information" style "menu_text_style" size 26 xalign 0.5 xanchor 0.5 #Info about the person: age, height, happiness, obedience, etc.
                         text "Age: [person.age]" style "menu_text_style" size 16
@@ -55,7 +55,7 @@ init 2:
                 frame:
                     background "#1a45a1aa"
                     xsize 420
-                    ysize 550
+                    ysize 450
                     vbox:
                         text "Love Story Progress" style "menu_text_style" size 26 xalign 0.5 xanchor 0.5 #Info about the persons raw stats, work skills, and sex skills
                         for love_text in person.story_love_list():
@@ -65,7 +65,7 @@ init 2:
                     #$ master_opinion_dict = dict(person.opinions, **person.sexy_opinions)
                     background "#1a45a1aa"
                     xsize 420
-                    ysize 550
+                    ysize 450
                     vbox:
                         text "Lust Story Progress" style "menu_text_style" size 26 xalign 0.5 xanchor 0.5 #Info about the persons loves, likes, dislikes, and hates
                         for lust_text in person.story_lust_list():
@@ -76,7 +76,7 @@ init 2:
                 frame:
                     background "#1a45a1aa"
                     xsize 630
-                    ysize 200
+                    ysize 300
                     vbox:
                         text "Other information" style "menu_text_style" size 30
                         for other_info in person.story_other_list():
@@ -99,7 +99,7 @@ init 2:
                 frame:
                     background "#1a45a1aa"
                     xsize 630
-                    ysize 200
+                    ysize 300
                     vbox:
                         text "Teamups" style "menu_text_style" size 30
                         for teamup_info in [x for x in person.story_teamup_list() if isinstance(x, list) and len(x) == 2]:
