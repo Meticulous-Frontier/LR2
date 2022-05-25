@@ -6,7 +6,7 @@
 #Fetish options: for Anal, Jennifer asks for anal, for cum fetish, you cum on/in her as appropriate, and for vaginal, she asks for creampie.
 init 2 python:
     def mom_breakfast_crisis_requirement():
-        if mc.is_home() and mc.business.is_work_day() and not mom.is_employee():
+        if mc.is_home() and mc.business.is_work_day() and not mom.is_employee() and mom.is_available:
             return True
         return False
 
@@ -34,7 +34,7 @@ label mom_breakfast_action_label():
         scene_manager = Scene()
     #"When you walk out to the kitchen, you see [the_person.title] just sitting down to some breakfast."
     # surprise scene, you walk into the kitchen and mom and lily are going at it
-    if mc.business.event_triggers_dict.get("family_threesome", False) == True and renpy.random.randint(0, 3) == 1:
+    if mc.business.event_triggers_dict.get("family_threesome", False) == True and renpy.random.randint(0, 3) == 1 and lily.is_available:
         call mom_breakfast_action_mom_and_lily_label() from _call_mom_breakfast_action_mom_and_lily_label
     else:
         $ scene_manager.add_actor(the_person, position = "sitting")
@@ -257,7 +257,7 @@ label mom_breakfast_action_label_high():
         mc.name "Why does it matter if [lily.name] comes out?"
         the_person "Well, I mean it's not that I mind, but your mommy has needs [the_person.mc_title]..."
         menu:
-            "Insist [lily.title] join you" if willing_to_threesome(the_person, lily):
+            "Insist [lily.title] join you" if willing_to_threesome(the_person, lily) and lily.is_available:
                 mc.name "Don't worry [the_person.title]. I'll make sure you have your needs met."
                 the_person "I suppose that would be okay, just make sure I get to finish!"
                 mc.name "Of course!"

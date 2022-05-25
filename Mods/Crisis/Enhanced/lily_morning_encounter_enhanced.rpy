@@ -4,6 +4,8 @@ init 5 python:
 
 label lily_morning_encounter_enhanced_label():
     # You run into Lily early in the morning as she's going to get some fresh laundry. At low sluttiness she is embarrassed, at high she is completely naked.
+    if not lily.is_available:
+        return
     python:
         the_person = lily
         comfortable = False

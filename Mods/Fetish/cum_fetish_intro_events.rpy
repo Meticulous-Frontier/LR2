@@ -23,11 +23,12 @@ init 1 python:
     def cum_fetish_mom_intro_requirement():
         if mc_asleep():
             if mc.energy > 30:  #Must have the energy to handle a long sexy night
-                return True
+                if mom.is_available:
+                    return True
         return False
 
     def cum_fetish_lily_intro_requirement():
-        if not day%7 == 5 and mc_at_home():
+        if not day%7 == 5 and mc_at_home() and lily.is_available:
             return True
         return False
 
@@ -59,7 +60,7 @@ init 1 python:
         return False
 
     def cum_fetish_sarah_intro_requirement():
-        if time_of_day == 2 and mc.is_at_work() and mc.business.is_open_for_business():
+        if time_of_day == 2 and mc.is_at_work() and mc.business.is_open_for_business() and sarah.is_at_work():
             if day%7 != 0: #Not on mondays
                 return True
         return False

@@ -5,7 +5,8 @@ init 3 python:
         if mc_asleep():
             if not (day % 7 == 4 or day % 7 == 5):  # not on friday or saturday night, conflicts with story
                 if lily.effective_sluttiness() >= 30:
-                    return True
+                    if lily.is_available:
+                        return True
         return False
 
     def select_position(person):

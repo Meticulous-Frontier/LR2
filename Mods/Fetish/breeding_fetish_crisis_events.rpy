@@ -1,6 +1,6 @@
 init 2 python:
     def get_breeding_fetish_list():
-        return [x for x in known_people_in_the_game() if x.has_breeding_fetish() and x.event_triggers_dict.get("LastBreedingFetish", 0) + 12 < day]
+        return [x for x in known_people_in_the_game() if x.has_breeding_fetish() and x.is_available and x.event_triggers_dict.get("LastBreedingFetish", 0) + 12 < day]
 
     def get_highly_fertile_breeder():
         return get_random_from_list([x for x in get_breeding_fetish_list() if x.is_highly_fertile() and not x.is_employee()])
