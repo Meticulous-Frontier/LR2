@@ -16,17 +16,17 @@ init 1 python:
         return False
 
     def anal_fetish_generic_intro_requirement(the_person):
-        if the_person.location != the_person.home:
+        if the_person.location != the_person.home and the_person.is_available:
             return True
         return False
 
     def anal_fetish_mom_intro_requirement():
-        if time_of_day == 4 and mc_at_home(): #Nighttime event
+        if time_of_day == 4 and mc_at_home() and mom.is_available: #Nighttime event
             return True
         return False
 
     def anal_fetish_lily_intro_requirement():
-        if time_of_day == 3 and mc.business.is_open_for_business() and mc.is_at_work():
+        if time_of_day == 3 and mc.business.is_open_for_business() and mc.is_at_work() and lily.is_available:
             return True
         return False
 
@@ -39,7 +39,8 @@ init 1 python:
     def anal_fetish_stephanie_intro_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
             if renpy.random.randint(0,100) < 20 :
-                return True
+                if stephanie.is_available:
+                    return True
         return False
 
     def anal_fetish_alex_intro_requirement():
@@ -55,7 +56,7 @@ init 1 python:
         return False
 
     def anal_fetish_starbuck_intro_requirement():
-        if time_of_day == 3 and mc.is_at_work():
+        if time_of_day == 3 and mc.is_at_work() and starbuck.is_available:
             return True
         return False
 
@@ -72,7 +73,7 @@ init 1 python:
         return False
 
     def anal_fetish_erica_intro_requirement():
-        if day%7 == 6:  #Sunday Morning
+        if day%7 == 6 and erica.is_available:  #Sunday Morning
             return True
         return False
 

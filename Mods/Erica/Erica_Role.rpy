@@ -2350,6 +2350,8 @@ label erica_lily_instapic_proposal_label(the_person): #This should be assigned t
     return
 
 label erica_lily_instapic_intro_label():
+    if not lily.is_available or not erica.is_available:
+        return
     $ erica.event_triggers_dict["insta_pic_intro_complete"] = True
     $ scene_manager = Scene() #Clean Scene
 
@@ -2514,6 +2516,8 @@ label erica_post_photoshoot_label(the_person):
     return
 
 label erica_lily_weekly_photoshoot_label(the_person):
+    if not lily.is_available or not erica.is_available:
+        return
     $ scene_manager = Scene()
     $ lily_insta_outfit = insta_wardrobe.pick_random_outfit()
     $ mc.change_location(lily_bedroom)

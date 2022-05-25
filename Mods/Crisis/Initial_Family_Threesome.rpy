@@ -4,7 +4,8 @@
 init 2 python:
     def SB_fetish_vaginal_family_threesome_requirement():
         if mc_asleep() and mc.energy > 50:
-            return willing_to_threesome(lily, mom)
+            if lily.is_available and mom.is_available:
+                return willing_to_threesome(lily, mom)
         return False
 
     SB_fetish_vaginal_family_threesome = Action("Family Threesome",SB_fetish_vaginal_family_threesome_requirement,"SB_fetish_vaginal_family_threesome_label")

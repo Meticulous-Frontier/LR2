@@ -7,7 +7,7 @@ init -1 python:
         return False
 
     def breeding_fetish_generic_intro_requirement(the_person):
-        if the_person.location != the_person.home:
+        if the_person.location != the_person.home and the_person.is_available:
             return True
         return False
 
@@ -48,11 +48,12 @@ init -1 python:
     def breeding_fetish_starbuck_intro_requirement():
         if sex_shop_stage() > 0:
             if time_of_day == 3:
-                return True
+                if starbuck.is_available:
+                    return True
         return False
 
     def breeding_fetish_sarah_intro_requirement():
-        if not day%7 == 5 and mc_asleep() and sarah_threesomes_unlocked():
+        if not day%7 == 5 and mc_asleep() and sarah_threesomes_unlocked() and sarah.is_available:
             return True
         return False
 
@@ -60,7 +61,7 @@ init -1 python:
         return False
 
     def breeding_fetish_erica_intro_requirement():
-        if mc_asleep() and day%7 != 6:
+        if mc_asleep() and day%7 != 6 and erica.is_available:
             return True
         return False
 

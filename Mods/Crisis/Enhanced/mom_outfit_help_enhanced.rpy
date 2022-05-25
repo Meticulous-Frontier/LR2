@@ -24,6 +24,8 @@ init 5 python:
 
 label mom_outfit_help_crisis_label_enhanced():
     $ the_person = mom
+    if not mom.is_available:
+        return
     # Your mom asks for help planning an outfit for the next day. As a bonus you get to watch her strip down between outfits (peek/don't peek decision given, she doesn't care at high sluttiness)
     if not mom in mc.location.people:
         #She's in a different room, shh calls you in.

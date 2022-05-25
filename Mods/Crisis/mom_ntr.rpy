@@ -113,7 +113,7 @@ init 2 python:
         person.discover_opinion("being covered in cum")
 
     def mom_ntr_mod_requirement():
-        if mc_asleep() and mom.effective_sluttiness() >= 30:
+        if mc_asleep() and mom.effective_sluttiness() >= 30 and mom.is_available:
                 return True
         return False
 

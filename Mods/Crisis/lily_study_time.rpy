@@ -2,7 +2,7 @@ init 2 python:
     def sister_failed_test_requirement():
         if not lily.has_job(sister_student_job):
             return False
-        if mc_asleep() and mc.business.event_triggers_dict.get("sister_serum_test", False):
+        if mc_asleep() and mc.business.event_triggers_dict.get("sister_serum_test", False) and lily.is_available:
             return True
         return False
 
