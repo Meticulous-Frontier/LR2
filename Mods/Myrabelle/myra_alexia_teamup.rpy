@@ -772,8 +772,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         "It's over. [alexia.possessive_title] is the winner for the night."
         $ the_target = alexia
         $ the_loser = myra
-        if not myra.event_triggers_dict.get("blowjob_train_start", False):  #start Myra's BJ training sequence if appropriate.
-            $ myra.add_unique_on_room_enter_event(myra_blowjob_training_intro)
+
     else:
         "It's over. [myra.possessive_title] is the winner for the night."
         $ the_target = myra
