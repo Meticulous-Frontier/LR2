@@ -1906,7 +1906,7 @@ label myra_bigger_tits_intro_label(the_person):        #120 obedience event. If 
     mc.name "Actually yes. Would you be interested?"
     the_person "Yeah. I think I am. I want to know what it is like... you know?"
     mc.name "Well, I can't promise anything, but I'll make sure to keep you in mind if we do any trials soon."
-    the_person "Ah, thank you [the_person.title]! I'd better get back to the desk."
+    the_person "Ah, thank you [the_person.mc_title]! I'd better get back to the desk."
     $ the_person.change_obedience(2)
     $ the_person.change_happiness(2)
     $ clear_scene()
@@ -2038,7 +2038,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     the_person "Hey."
     "[the_person.possessive_title] looks around, then says to you in a hushed voice."
     if myra_alexia_teamup_scene.get_stage() >= 2:
-        the_person "So... how'd you enjoy that other night with [alexia.name]? That was pretty wild, huh?"
+        the_person "So... how'd you enjoy the other night with [alexia.name]? That was pretty wild, huh?"
         mc.name "Yeah, but definitely in a good way."
         the_person "Yeah, you WOULD say that..."
         "[the_person.title] sticks her tongue into the side of her cheek, and briefly mimics a blowjob motion."
@@ -2293,7 +2293,7 @@ label myra_blowjob_training_progress_label(the_person):
     the_person "Gah! Oh fuck. That was the first time I've had a real cock down my throat..."
     mc.name "Yeah? And was it all you hoped?"
     the_person "I was wrong about giving blowjobs... it is amazing. Your cock feels so hot and I can feel it twitching in my throat..."
-    "[the_person.title] stops talking and goes down on your again. She stops for just a moment at about three quarters deep, then takes you all the way again."
+    "[the_person.title] stops talking and goes down on you again. She stops for just a moment at about three quarters deep, then takes you all the way again."
     $ mc.change_arousal(15)
     $ mc.change_locked_clarity(50)
     "You put your hand on her head again. It's time for a proper deepthroat now."
@@ -2303,7 +2303,7 @@ label myra_blowjob_training_progress_label(the_person):
     if the_report.get("guy orgasms", 0) > 0:
         "[the_person.possessive_title] successfully drained your balls with her throat. Her training seems to be coming along nicely."
     else:
-        "Even though you didn't finish, her eagerness shows that her training is coming a long nicely."
+        "Even though you didn't finish, her eagerness shows that her training is coming along nicely."
         "You'll have to give it a go another time, when you both have more energy."
     mc.name "That was an impressive amount of progress, for such a short amount of time [the_person.title]."
     the_person "Yeah... am I the best you've had now?"

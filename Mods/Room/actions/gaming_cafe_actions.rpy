@@ -291,7 +291,7 @@ label gaming_cafe_grind_with_both():
     "You have time, you could probably add a serum to their drinks..."
     "You look at [myra.possessive_title]'s energy drink."
     call give_serum(myra) from _call_give_myra_serum_grinding_games_01
-    "You look at [alexia.set_possessive_title]'s lemonade."
+    "You look at [alexia.possessive_title]'s lemonade."
     call give_serum(alexia) from _call_give_alexeria_serum_grinding_games_02
     "You walk back over to the game computher that [alexia.possessive_title] was at earlier. You set her lemonade at it, set your water next to it, then [myra.title]'s next to that."
     $ scene_manager.add_actor(myra, display_transform = character_left_flipped)
