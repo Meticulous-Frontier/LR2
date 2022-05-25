@@ -413,18 +413,46 @@ init -1 python:
             self.event_triggers_dict[dict_key] = day
         return
 
-    def get_event_day(self, dict_key):
+    def get_event_day(self, dict_key, set_if_none = True):
+        if self.event_triggers_dict.get(dict_key, None) == None and set_if_none:
+            self.set_event_day(dict_key)
         return self.event_triggers_dict.get(dict_key, None)
 
-    def days_since_event(self, dict_key):
+    def days_since_event(self, dict_key, set_if_none = True):
+        if self.event_triggers_dict.get(dict_key, None) == None and set_if_none:
+            self.set_event_day(dict_key)
         if self.event_triggers_dict.get(dict_key, None):
             return day - self.event_triggers_dict.get(dict_key, None)
         else:
             return None
 
+    def string_since_event(self, dict_key, set_if_none = True): #Returns a string describing how long it has been since an event
+        if self.days_since_event(dict_key) < 1:
+            return "earlier"
+        elif self.days_since_event(dict_key) == 1:
+            return "yesterday"
+        elif self.days_since_event(dict_key) <= 4:
+            return "a few days ago"
+        elif self.days_since_event(dict_key) <= 10:
+            return "a week ago"
+        elif self.days_since_event(dict_key) <= 19:
+            return "a couple weeks ago"
+        elif self.days_since_event(dict_key) <= 28:
+            return "a few weeks ago"
+        elif self.days_since_event(dict_key) <= 45:
+            return "a month ago"
+        elif self.days_since_event(dict_key) <= 75:
+            return "a couple months ago"
+        elif self.days_since_event(dict_key) <= 145:
+            return "a few months ago"
+        else:
+            return "a while ago"
+
+
     Business.set_event_day = set_event_day
     Business.get_event_day = get_event_day
     Business.days_since_event = days_since_event
+    Business.string_since_event = string_since_event
 
     # College intern related functions
     def business_college_interns_research(self):
