@@ -784,7 +784,11 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
                     happiness_drop = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #Our initial conditions mean this is a negative number
                     the_person.change_arousal(the_person.get_opinion_score("being submissive")*2)
                     the_person.discover_opinion("being submissive")
-                    # the_person.change_happiness(happiness_drop)
+                    if the_person.opinion_score_being_submissive() == -2:
+                        the_person.change_happiness(happiness_drop)
+                    elif the_person.opinion_score_being_submissive() == -1:
+                        the_person.change_happiness(int(happiness_drop / 2))
+                    
 
                 if not the_person.has_taboo(the_taboo):
                     $ the_person.call_dialogue("sex_obedience_accept")
