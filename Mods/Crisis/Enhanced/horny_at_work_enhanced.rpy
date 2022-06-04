@@ -629,5 +629,50 @@ label horny_at_work_crisis_enhanced_label():
                             $ mc.business.change_team_effectiveness(-10)
 
                 $ scene_manager.clear_scene()
+
+        "Bend [the_person.title] over her desk (tooltip)Maximize efficiency by fucking her while she keeps working." if the_person is not None and the_person.is_willing(SB_doggy_standing):
+            call condition_test_bend_over_employee_label(the_person) from _enhanced_horny_at_work_fuck_01
+            if _return:
+                "You get yourself cleaned up and get back to work. You're able to focus perfectly now thanks to your post-orgasm clarity."
+            else:
+                "You still haven't gotten off, so you stroke your cock until you cum."
+                $ ClimaxController.manual_clarity_release()
+                "With that finally taken care of, you get yourself cleaned up and get back to work."
+                "Thanks to your post-orgasm clarity you're able to focus perfectly."
     $ clear_scene()
+    return
+
+label condition_test_bend_over_employee_label(the_person):
+    $ the_person.draw_person(position = "sitting")
+    "You walk over to where [the_person.possessive_title] is sitting. She is working diligently at a computer terminal."
+    "You put your hands on her shoulders."
+    the_person "Oh, hey [the_person.mc_title]. I was just doing some data entry."
+    mc.name "I see that. I need to do some entries of my own. Could you stand up for a second?"
+    the_person "Oh? Sure..."
+    $ the_person.draw_person()
+    mc.name "Ah, there, you can keep using the computer..."
+    "You turn her around and bend her over."
+    $ the_person.draw_person(position = "standing_doggy")
+    the_person "Oh! I'm sorry, I thought you needed..."
+    mc.name "To do an entry, yes, but not on the computer."
+    if the_person.vagina_available():
+        "You run your hand down her ass and along her slit."
+    else:
+        mc.name "One second, this is in the way."
+        $ the_person.strip_to_vagina(prefer_half_off = True, position = "standing_doggy")
+        "You pull her bottoms out of the way, exposing her cunt."
+    $ the_person.change_arousal(20)
+    the_person "Oh my..."
+    mc.name "Now, you just keep working, I'm sure you can handle it."
+    the_person "Yes sir..."
+    "You unzip and pull your cock out."
+    call fuck_person(the_person, private = False, condition = make_condition_computer_work(), start_position = SB_doggy_standing, start_object = make_desk())
+    $ the_report = _return
+    $ the_person.review_outfit()
+    $ the_person.draw_person(position = "sitting")
+    if the_report.get("guy orgasms", 0) == 0:
+        return False
+    else:
+        "Fully spent, you let [the_person.title] sit down and keep working, and you get back to work yourself."
+        return True
     return

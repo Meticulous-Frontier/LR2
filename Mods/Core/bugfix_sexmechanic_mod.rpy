@@ -273,9 +273,11 @@ init 5 python:
         person.add_situational_obedience("sex_object",picked_object.obedience_modifier, picked_object.name + " " + position.verbing)
         return picked_object
 
-    def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False):
+    def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False, condition = None):
         option_list = []
         option_list.append("Round Choices")
+        if not condition:
+            condition = make_condition_blank()
         if position_choice is not None:
             option_list.append(["Keep " + position_choice.verbing + " her","Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
 
@@ -283,7 +285,7 @@ init 5 python:
                 option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
 
-                    if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location):
+                    if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and condition.filter_condition_positions(position):
                         appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
@@ -291,7 +293,7 @@ init 5 python:
                 # allow transition to positions with same traits and skill requirements
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
-                        if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
+                        if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag and condition.filter_condition_positions(position):
                             appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
 
@@ -313,16 +315,17 @@ init 5 python:
                 option_list.append(["Stop and leave", "Leave"])
         return option_list
 
-    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False, prohibit_tags = []):
+    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False, prohibit_tags = [], condition = None):
         positions = {
             "Foreplay" : ["Pick Foreplay"],
             "Oral" : ["Pick Oral"],
             "Vaginal" : ["Pick Vaginal"],
             "Anal" : ["Pick Anal"]
         }
-
+        if not condition:
+            condition = make_condition_blank()
         for position in sorted(list_of_positions, key = lambda x: x.name):
-            if mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+            if mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits) and condition.filter_condition_positions(position): #There is a valid object and if it requires large tits she has them.
                 if allow_position(person, position):
                     willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
                     if not position.skill_tag in prohibit_tags:
@@ -433,6 +436,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
         $ report_log["positions_used"] = [] #This is a list, not an int.
+    if condition is None:
+        $ condition = make_condition_blank()
 
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
@@ -521,14 +526,14 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
-            call screen enhanced_main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo)]))
+            call screen enhanced_main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo, condition = condition)]))
             $ round_choice = _return #This gets the players choice for what to do this round.
 
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue":
             if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignroe all of that
                 if start_position is None: #The first time we get here,
-                    call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags) from _call_pick_position_bugfix
+                    call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition) from _call_pick_position_bugfix
                     $ position_choice = _return
                 else:
                     $ position_choice = start_position
@@ -601,6 +606,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         $ the_person.change_happiness(happiness_change)    #defualt -2 happiness per turn, being submissive negates or subverts happiness loss.
                     if the_person.opinion_score_being_submissive() == -2:
                         $ the_person.change_obedience(-2)   #If she hates being submissive, she slowly gets less submissive
+
+                $ condition.call_pre_label(the_person, position_choice, object_choice, report_log)
                 $ scene_private = private
                 if not private and mc.location.get_person_count() == 1:
                     $ scene_private = False #Only pass private to sex desc. if there is actually a witness
@@ -617,6 +624,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ the_person.change_arousal(-__builtin__.max(the_person.arousal/(report_log.get("girl orgasms", 0)+2), the_person.arousal - the_person.max_arousal - 1))
                     $ report_log["girl orgasms"] += 1
 
+                $ condition.call_post_label(the_person, position_choice, object_choice, report_log)
                 if not private:
                     call public_sex_post_round(the_person, position_choice, report_log) from _public_sex_post_round_01
                     if not _return:
@@ -734,8 +742,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             call describe_girl_climax(the_person, position_choice, object_choice, private, report_log) from _call_describe_girl_fuck_person_bugfix #Calls just the climax stuff without costing energy.
 
         $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the beginning of the loop we can set a mandatory choice for the first one.
-
+    $ condition.run_rewards(the_person, position_choice, object_choice, report_log)
+    
     python:
+
         clear_sex_modifiers(the_person)
 
         report_log["end arousal"] = the_person.arousal
@@ -743,6 +753,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         mc.condom = False
         mc.recently_orgasmed = False
+
 
     if affair_ask_after and private and not the_person.has_role([girlfriend_role, affair_role, prostitute_role]) and not the_person.relationship == "Single" and report_log.get("girl orgasms",0) >= 1:
         if not the_person.has_role([lifestyle_coach_role]): # don't exclude all unique characters (boss wife / emily mom -> affair should be possible)
@@ -796,7 +807,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
                         the_person.change_happiness(happiness_drop)
                     elif the_person.opinion_score_being_submissive() == -1:
                         the_person.change_happiness(int(happiness_drop / 2))
-                    
+
 
                 if not the_person.has_taboo(the_taboo):
                     $ the_person.call_dialogue("sex_obedience_accept")
@@ -1333,8 +1344,8 @@ label break_strip_outfit_taboos(the_person):
                 $ taboo_broken = True
     return taboo_broken
 
-label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False, prohibit_tags = []):
-    call screen enhanced_main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags)))
+label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False, prohibit_tags = [], condition = None):
+    call screen enhanced_main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition)))
     $ position_choice = _return
     return None if position_choice == "Nothing" else position_choice
 

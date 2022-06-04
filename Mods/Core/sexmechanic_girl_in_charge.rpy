@@ -371,6 +371,9 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         $ report_log["positions_used"] = []
         $ report_log["was_public"] = not private
 
+    if condition is None:
+        $ condition = make_condition_blank()
+
     if skip_intro:  #If we are alrady having sex, using whatever condom status presently is
         $ using_condom = mc.condom
     else:
@@ -456,11 +459,14 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             #TODO if this keeps us from accomplishing sex goal, consider rerunning this method from the beginning, or just ending the scene. Or creating a new path?
             $ finished = True
         else:
+            $ condition.call_pre_label(the_person, current_node.position, object_choice, report_log)
             $ scene_private = private
             if not private and mc.location.get_person_count() == 1:
                 $ scene_private = False #Only pass private to sex desc. if there is actually a witness
 
             call sex_description(the_person, current_node.position, object_choice, private = scene_private, report_log = report_log) from _call_sex_description_girl_in_charge_override_1
+
+            $ condition.call_post_label(the_person, current_node.position, object_choice, report_log)
 
             if not private:
                 call public_sex_post_round(the_person, current_node.position, report_log) from _public_sex_post_round_02
@@ -528,10 +534,10 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                 "Keep going":
                     mc.name 'Keep going, this is hot.'
                     the_person "Yes sir!"
-                    call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_01
+                    call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test, condition = condition) from GIC_keeps_going_01
                 "Take over":
                     mc.name "Come here, I'm not done with you yet."
-                    call fuck_person(the_person, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_01
+                    call fuck_person(the_person, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags, condition = condition) from GIC_guy_takes_over_01
                 "Finish":
                     mc.name "Let's be done for now."
                     the_person "Okay."
@@ -543,7 +549,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                 "Keep going":
                     mc.name 'Yes, please keep going.'
                     the_person "Okay, I can do that!"
-                    call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_02
+                    call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test, condition = condition) from GIC_keeps_going_02
                 "Finish":
                     mc.name "Let's be done for now."
                     the_person "Okay."
@@ -561,7 +567,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                     if renpy.random.randint(-150,0) < the_person.love:  #Even at -100 love, she has a 1/3 chance of continuing
                         the_person "Hmm, I guess it's only fair. Maybe I'll even finish again!"
                         $ the_person.change_stats(obedience = -5)
-                        call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test) from GIC_keeps_going_03
+                        call get_fucked(the_person, private= private, start_position = current_node.position, start_object = object_choice, skip_intro = True, report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, unit_test = unit_test, condition = condition) from GIC_keeps_going_03
                     else:
                         the_person "Ha! It was worth letting you defile me just to hear you beg. Not a chance!"
                         "[the_person.possessive_title] gets up, leaving you hanging."
@@ -578,7 +584,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             menu:
                 "Take over":
                     mc.name "Come here, I'm not done with you yet."
-                    call fuck_person(the_person, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_03
+                    call fuck_person(the_person, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags, condition = condition) from GIC_guy_takes_over_03
                 "Finish":
                     mc.name "Let's be done for now."
                     the_person "Okay."
@@ -604,12 +610,12 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                         mc.name "Quiet. I'm close to cumming, this will only take a minute."
                         $ the_person.add_situational_obedience("finish_him",40,"Whatever, just hurry up and finish.")
                         $ the_person.change_stats(happiness = -5, love = -5)
-                    call fuck_person(the_person,start_position = doggy, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags) from GIC_guy_takes_over_05
+                    call fuck_person(the_person,start_position = doggy, private = private, ignore_taboo = ignore_taboo, report_log = report_log, prohibit_tags = prohibit_tags, condition = condition) from GIC_guy_takes_over_05
                     $ the_person.clear_situational_obedience("finish_him")
                 "Finish":
                     "You decide to leave her be."
 
-
+    $ condition.run_rewards(the_person, position_choice, object_choice, report_log)
     python:
         clear_sex_modifiers(the_person)
 
