@@ -428,7 +428,7 @@ init 5 python:
 
 
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = []):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = None):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -445,8 +445,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ stop_stripping = False
 
     #Privacy modifiers
-    if mc.location.get_person_count() == 1 and not private:
-        $ private = True #If we're alone in the space we're always Private, even if we had left the possibility for people being around.
+    if mc.location.get_person_count() == 1 and not private and mc.location.privacy_level != 3 and mc.location.privacy_level != 1:
+        $ private = True #If we're alone in the space and its a private room or at work, set to Private
 
     # $ renpy.say(None, "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person, private = private)
@@ -500,7 +500,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 if has_taken_control:
                     $ has_taken_control = False
                     $ the_person.call_dialogue("sex_take_control")
-                    call get_fucked(the_person, private = private, the_goal = "get off",  report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags) from _call_get_fucked
+                    call get_fucked(the_person, private = private, the_goal = "get off",  report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition) from _call_get_fucked
                     $ round_choice = "Girl Leave"
 
                 if round_choice == "Change" and position_choice and object_choice:
@@ -601,8 +601,11 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         $ the_person.change_happiness(happiness_change)    #defualt -2 happiness per turn, being submissive negates or subverts happiness loss.
                     if the_person.opinion_score_being_submissive() == -2:
                         $ the_person.change_obedience(-2)   #If she hates being submissive, she slowly gets less submissive
+                $ scene_private = private
+                if not private and mc.location.get_person_count() == 1:
+                    $ scene_private = False #Only pass private to sex desc. if there is actually a witness
 
-                call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
+                call sex_description(the_person, position_choice, object_choice, private = scene_private, report_log = report_log) from _call_sex_description_bugfix
 
                 # If the girl has an orgasm due to MC coming, she gets a guaranteed trance upgrade
                 if the_person.arousal >= the_person.max_arousal:
@@ -613,6 +616,11 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = position_choice.slut_requirement, reset_arousal = False)
                     $ the_person.change_arousal(-__builtin__.max(the_person.arousal/(report_log.get("girl orgasms", 0)+2), the_person.arousal - the_person.max_arousal - 1))
                     $ report_log["girl orgasms"] += 1
+
+                if not private:
+                    call public_sex_post_round(the_person, position_choice, report_log) from _public_sex_post_round_01
+                    if not _return:
+                        $ finished = True
 
                 $ first_round = False
                 if not finished:    # when we switched to threesome finished is True
@@ -1329,3 +1337,64 @@ label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False
     call screen enhanced_main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags)))
     $ position_choice = _return
     return None if position_choice == "Nothing" else position_choice
+
+label public_sex_post_round(the_person, position_choice, report_log):
+    $ scrutiny = report_log.get("scrutiny",0)
+    $ scr_change = 0
+    if position_choice.skill_tag == "Foreplay":
+        $ scr_change = 1
+    elif position_choice.skill_tag == "Oral":
+        $ scr_change = 2
+    elif position_choice.skill_tag == "Vaginal":
+        $ scr_change = 3
+    elif position_choice.skill_tag == "Anal":
+        $ scr_change = 4
+    if mc.location.privacy_level == 0:  #Its a private room, don't do anything
+        return True
+    elif mc.location.privacy_level == 2:    #It's at work. possibly effect HR efficiency?
+        "You [position_choice.verb] [the_person.title] in front of everyone in the [mc.location.formal_name]."
+        if position_choice.slut_requirement < mc.location.room_average_slut():
+            "You hear a few murmurs and get a few looks, but mostly they don't seem to mind."
+        elif position_choice.slut_requirement < mc.location.room_average_slut() + 15:
+            "You are getting some dirty looks from the other employees in the room, but they keep working despite the distraction."
+            $ mc.business.change_team_effectiveness(-1)
+            $ mc.log_event("Business efficiency reduced", "float_text_yellow")
+        else:
+            "You are getting dirty looks and comments from your other employees. Your session is disrupting work."
+            $ mc.business.change_team_effectiveness(-3)
+            $ mc.log_event("Business efficiency reduced", "float_text_yellow")
+        return True
+    elif mc.location.privacy_level == 1:    #Somewhere things are not usually permitted but if kept low key can get away with it.
+        $ scrutiny += (scr_change * 3)
+        $ report_log["scrutiny"] = scrutiny
+        "You [position_choice.verb] [the_person.title] in public at the [mc.location.formal_name]."
+        if scrutiny < 25:
+            "So far, your actions are being mostly ignored. If you go quick and stay quiet, you might get away with it."
+        elif scrutiny < 50:
+            "A few employees have noticed what you are up to, but so far just seem annoyed. You should finish up."
+        elif scrutiny < 75:
+            "You are getting looks from the employees. Several have noticed your unwanted actions."
+        elif scrutiny < 100:
+            "Employees and customers have noticed what you are up to. You need to finish up quickly or things could get ugly."
+        else:
+            "Employee" "Hey! You can't do that here! Knock it off or I'm calling the cops!"
+            "Sadly, you pushed your luck too far. You decide to stop before you get in any real trouble."
+            return False
+        return True
+    elif mc.location.privacy_level == 3:    #You are out in public
+        $ scrutiny += (scr_change * 5)
+        $ report_log["scrutiny"] = scrutiny
+        "You [position_choice.verb] [the_person.title] in public at the [mc.location.formal_name]."
+        if scrutiny < 25:
+            "So far, your actions are being mostly ignored. If you go quick and stay quiet, you might get away with it."
+        elif scrutiny < 50:
+            "A few people have noticed what you are up to, but so far just seem annoyed. You should finish up."
+        elif scrutiny < 75:
+            "You are getting nasty looks from other people. Several have noticed your illegal actions."
+        elif scrutiny < 100:
+            "A small crowd has gathered to watch, and you are getting several comments from people to stop."
+        else:
+            call police_chief_public_sex_intervention(the_person) from _arrested_during_public_sex_01
+            return False
+        return True
+    return True

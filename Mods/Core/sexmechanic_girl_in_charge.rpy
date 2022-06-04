@@ -354,7 +354,7 @@ init 2:
             return False
 
 
-label get_fucked(the_person, the_goal = None, sex_path = None, private= True, start_position = None, start_object = None, skip_intro = False, report_log = None, ignore_taboo = False, prohibit_tags = [], unit_test = False, allow_continue = True):
+label get_fucked(the_person, the_goal = None, sex_path = None, private= True, start_position = None, start_object = None, skip_intro = False, report_log = None, ignore_taboo = False, prohibit_tags = [], unit_test = False, allow_continue = True, condition = None):
     $ apply_sex_modifiers(the_person, private = private) #Apply sex modifiers before choosing goals and positions to avoid choosing positions girl shouldn't accept
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ ask_for_threesome = False
@@ -409,7 +409,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         $ current_node = sex_path.pop(0)  #Pop the first node in the list of sex path nodes.
     #Next we mimic fuck_person() but only with applicable girl in charge parameters.
     #Privacy modifiers
-    if mc.location.get_person_count() == 1 and not private:
+    if mc.location.get_person_count() == 1 and not private and mc.location.privacy_level != 3 and mc.location.privacy_level != 1:
         $ private = True #If we're alone in the space we're always Private, even if we had left the possibility for people being around.
     #Next, check for generic conditions that keep us from continuing
 
@@ -456,8 +456,16 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             #TODO if this keeps us from accomplishing sex goal, consider rerunning this method from the beginning, or just ending the scene. Or creating a new path?
             $ finished = True
         else:
-            call sex_description(the_person, current_node.position, object_choice, private = private, report_log = report_log) from _call_sex_description_girl_in_charge_override_1
+            $ scene_private = private
+            if not private and mc.location.get_person_count() == 1:
+                $ scene_private = False #Only pass private to sex desc. if there is actually a witness
 
+            call sex_description(the_person, current_node.position, object_choice, private = scene_private, report_log = report_log) from _call_sex_description_girl_in_charge_override_1
+
+            if not private:
+                call public_sex_post_round(the_person, current_node.position, report_log) from _public_sex_post_round_02
+                if not _return:
+                    $ finished = True
         if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
             $ mc.condom = False
 

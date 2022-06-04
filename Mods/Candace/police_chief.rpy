@@ -70,6 +70,7 @@ init 5 python:
         police_chief.idle_pose = "stand3"   # forced idle pose
         police_chief.generate_home()
         police_chief.home.add_person(police_chief)
+        police_chief.event_triggers_dict["times_arrested"] = 0
         return
 
 label create_police_chief(stack):
@@ -233,3 +234,59 @@ label police_chief_flirt_response_high(the_person):
                 "If [the_person.title] has any feelings toward you, she does a good job hiding it, while staring in your eyes."
                 the_person "Well maybe if you entertain me when I'm off-duty, you can enlighten me."
     return
+
+label police_chief_public_sex_intervention(the_person):
+    police_chief "Hey! What are you doing? You can't do that at the [mc.location.formal_name]!"
+    $ police_chief.draw_person()
+    "Suddenly, a police officer arrives. You stop what you are doing with [the_person.possessive_title]."
+    police_chief "God, get decent. I'm taking you two downtown!"
+    $ the_person.apply_planned_outfit()
+    $ mc.change_location(police_station)
+    $ mc.location.show_background()
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(police_chief)
+    $ scene_manager.add_actor(the_person, position = "sitting", display_transform = character_left_flipped)
+    "You and [the_person.title] are escorted to the police station by the police officer. You spend a couple hours doing paperwork."
+    call mc_arrested_penalties from _arrested_public_sex_01
+    "You and [the_person.possessive_title] go your separate ways for now. She doesn't seem eager to chat about getting arrested."
+    call advance_time from _call_advance_time_after_arrested_1
+    jump game_loop
+    return
+
+label mc_arrested_penalties():
+    if mc_times_arrested() == 0:
+        $ mc.business.change_funds(-100)
+        "Since this is your first offense, you get off with a light fine."
+        $ police_chief.event_triggers_dict["times_arrested"] = 0
+    elif mc_times_arrested() == 1:
+        $ mc.business.change_funds(-500)
+        "Since this is your second offense, you get fined."
+        police_chief "Seriously, don't do that again. You can't be doing that stuff in public!"
+    elif mc_times_arrested() == 2:
+        $ mc.business.change_funds(-5000)
+        "Since this is your third offense, you receive a heavy fine."
+        police_chief "I guess you still haven't learned your lesson. I'm fining you the maximum amount under the law."
+        police_chief "If this happens again, I'll have to let the city know you got problems with authority. Catch my drift?"
+    elif mc_times_arrested() == 3:
+        $ mc.business.change_funds(-5000)
+        "You once again receive a heavy fine."
+        police_chief "Damn, you just can't keep your hands to yourself, can you?"
+        police_chief "Guess I'll have to call this in to the city. Where did you say you work again?"
+        $ mc.business.attention += 20
+    elif mc_times_arrested() == 3:
+        $ mc.business.change_funds(-5000)
+        "You once again receive a heavy fine."
+        police_chief "Still screwing around with whores in public are you?"
+        police_chief "Guess last time I didn't word my request with the city strongly enough."
+        $ mc.business.attention += 50
+    else:
+        $ mc.business.change_funds(-5000)
+        "You once again receive a heavy fine."
+        police_chief "Again. You're here AGAIN. "
+        police_chief "Enough is enough. Get out of here, I'm sure the city will be checking out your business now soon enough."
+        $ mc.business.attention += 100
+    $ police_chief.event_triggers_dict["times_arrested"] += 1
+    return
+init 2 python:
+    def mc_times_arrested():
+        return police_chief.event_triggers_dict.get("times_arrested", 0)

@@ -157,3 +157,39 @@ init -1 python:
     Room.has_anal_slut = has_anal_slut
     Room.has_breeder = has_breeder
     Room.has_exhibitionist = has_exhibitionist
+
+    #Room privacy levels. Useful for public interactions.
+    #Levels:
+    # 0: Private room. Sex and nudity permitted
+    # 1: Public nudity room. Place where nudity would be expected but not overt sexual acts.
+    # 2: Business. Use for work rooms, possibly changing permissions based on policies
+    # 3: Public. Use for normal public areas. Nudity and sex not expected or permitted
+
+    def get_room_privacy(self):
+        if not hasattr(self, "_privacy_int"):
+            self._privacy_int = 0
+        return self._privacy_int
+
+    def set_room_privacy(self, value):
+        self._privacy_int = value
+
+    def del_room_privacy(self):
+        del self._privacy_int
+
+
+    Room.privacy_level = property(get_room_privacy, set_room_privacy, del_room_privacy, "Expected privacy of the room.")
+
+    def is_private(self):
+        return self.privacy_level == 0
+
+    Room.is_private = is_private
+
+    def room_average_slut(self):
+        if len(self.people) == 0:
+            return 0
+        sum = 0
+        for person in self.people:
+            sum += person.sluttiness
+        return int(sum / len(self.people))
+
+    Room.room_average_slut = room_average_slut
