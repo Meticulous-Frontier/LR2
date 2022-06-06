@@ -743,7 +743,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the beginning of the loop we can set a mandatory choice for the first one.
     $ condition.run_rewards(the_person, position_choice, object_choice, report_log)
-    
+
     python:
 
         clear_sex_modifiers(the_person)
@@ -1352,6 +1352,8 @@ label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False
 label public_sex_post_round(the_person, position_choice, report_log):
     $ scrutiny = report_log.get("scrutiny",0)
     $ scr_change = 0
+    if position_choice == None: #We got here by accident
+        return
     if position_choice.skill_tag == "Foreplay":
         $ scr_change = 1
     elif position_choice.skill_tag == "Oral":
