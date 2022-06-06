@@ -1,7 +1,7 @@
 #Use this for fucking an employee while working.
 
 init -1 python:
-    def condition_computer_work_reward_req(the_person, the_location, the_object, report_log, the_condition):
+    def condition_computer_work_reward_req(the_person, the_position, the_object, report_log, the_condition):
         if report_log.get("girl orgasms", 0) > 0 and the_condition.condition_vars[0]:   #She orgasmed AND concentrated on her work
             return True
         return False
@@ -16,7 +16,7 @@ init -1 python:
         return computer_work_condition
 
 
-label condition_computer_work_pre_label(the_person, the_location, the_object, report_log, the_condition):
+label condition_computer_work_pre_label(the_person, the_position, the_object, report_log, the_condition):
     if the_person.arousal < 50 or the_condition.condition_vars[1] < 50:
         "[the_person.possessive_title] continues working on her computer while you take advantage of her."
     elif the_condition.condition_vars[0]:
@@ -49,11 +49,11 @@ label condition_computer_work_pre_label(the_person, the_location, the_object, re
                 pass
     return
 
-label condition_computer_work_post_label(the_person, the_location, the_object, report_log, the_condition):
+label condition_computer_work_post_label(the_person, the_position, the_object, report_log, the_condition):
     $ the_condition.condition_vars[1] += (report_log.get("girl orgasms", 0) * 40) + 25
     return
 
-label condition_computer_work_reward_label(the_person, the_location, the_object, report_log, the_condition):
+label condition_computer_work_reward_label(the_person, the_position, the_object, report_log, the_condition):
     $ the_person.draw_person(position = "standing_doggy")
     "[the_person.title] is still working on her computer, despite her orgasm."
     mc.name "Good work."
@@ -62,7 +62,7 @@ label condition_computer_work_reward_label(the_person, the_location, the_object,
     "[the_person.possessive_title] seems much more obedient now."
     return
 
-label condition_computer_work_fail_label(the_person, the_location, the_object, report_log, the_condition):
+label condition_computer_work_fail_label(the_person, the_position, the_object, report_log, the_condition):
     if not the_condition.condition_vars[0]:
         $ the_person.draw_person(position = "standing_doggy")
         "[the_person.title] has stopped working completely."

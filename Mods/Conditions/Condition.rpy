@@ -18,14 +18,14 @@ init -2 python:
 
             return
 
-        def call_pre_label(self, the_person, the_location, the_object, report_log):
+        def call_pre_label(self, the_person, the_position, the_object, report_log):
             if self.pre_label:
-                renpy.call(self.pre_label,the_person, the_location, the_object, report_log, self)
+                renpy.call(self.pre_label,the_person, the_position, the_object, report_log, self)
             return
 
-        def call_post_label(self, the_person, the_location, the_object, report_log):
+        def call_post_label(self, the_person, the_position, the_object, report_log):
             if self.post_label:
-                renpy.call(self.post_label,the_person, the_location, the_object, report_log, self)
+                renpy.call(self.post_label,the_person, the_position, the_object, report_log, self)
             return
 
         def filter_condition_positions(self, the_position):
@@ -39,10 +39,10 @@ init -2 python:
                 return True
             return True
 
-        def run_rewards(self, the_person, the_location, the_object, report_log):
+        def run_rewards(self, the_person, the_position, the_object, report_log):
             if self.reward_cond:
-                if self.reward_cond(the_person, the_location, the_object, report_log, self):
-                    renpy.call(self.reward_label,the_person, the_location, the_object, report_log, self)
+                if self.reward_cond(the_person, the_position, the_object, report_log, self):
+                    renpy.call(self.reward_label,the_person, the_position, the_object, report_log, self)
                 elif self.fail_label:
-                    renpy.call(self.fail_label,the_person, the_location, the_object, report_log, self)
+                    renpy.call(self.fail_label,the_person, the_position, the_object, report_log, self)
             return
