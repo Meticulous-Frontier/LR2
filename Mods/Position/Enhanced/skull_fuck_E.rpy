@@ -36,7 +36,7 @@ label scene_skull_fuck_4_enhanced(the_girl, the_location, the_object):
             menu:
                 "Keep fucking her throat" if the_girl.obedience >= 110:
                     mc.name "Not yet, you can do better than that."
-                    "You keep fucking [the_girl.title]'s troat deeply. She doesn't resist."
+                    "You keep fucking [the_girl.title]'s throat deeply. She doesn't resist."
                     "After a few more seconds [the_girl.title] tries to pull off again, forcing you to pull her back in."
                     menu:
                         "Keep fucking her throat" if the_girl.obedience >= 120:
@@ -63,7 +63,7 @@ label scene_skull_fuck_4_enhanced(the_girl, the_location, the_object):
                                                     "[the_girl.title] squirms and fidgets on her knees, but obeys your commands like a good girl."
                                                     "Little by little her movements slow down, her eyelids start to droop down over her rolled up eyes, and she slips into a half-conscious state."
                                                     $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))
-                                                    "[the_girl.possessive_title]'s body doesn't stop reacting to you and your cock. Her troat rhythmically milking your shaft and she keeps moaning softly."
+                                                    "[the_girl.possessive_title]'s body doesn't stop reacting to you and your cock. Her throat rhythmically milking your shaft and she keeps moaning softly."
                                                     "Satisfied, you keep fucking [the_girl.title]'s face. She keeps sucking on you in her oxygen deprived stupor."
                                                     mc.name "That's enough [the_girl.title], you've done enough."
                                                     "You pull back entirely. She leaves your cock with a satisfying, wet pop followed by a huge gasp for air."
