@@ -615,7 +615,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                 "Finish":
                     "You decide to leave her be."
 
-    $ condition.run_rewards(the_person, position_choice, object_choice, report_log)
+    $ condition.run_rewards(the_person, current_node.position, object_choice, report_log)
     python:
         clear_sex_modifiers(the_person)
 
