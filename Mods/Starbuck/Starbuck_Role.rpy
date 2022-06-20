@@ -2207,7 +2207,7 @@ label starbuck_candace_product_demo_label(the_person):
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
     $ mc.change_locked_clarity(30)
     "[starbuck.possessive_title] arches her back a bit. She steals a glance back at you while you enjoy the warm, slick grip of her pussy."
-    "You both look over at [the_person.title]. She is watching intently and was one hand between her legs, lightly touching herself."
+    "You both look over at [the_person.title]. She is watching intently and has one hand between her legs, lightly touching herself."
     "You put your hands on [starbuck.title]'s hips as you begin to fuck her. She moans and puts her hand on top of yours, encouraging you."
     starbuck "Give it to me [starbuck.mc_title]! I'm so hot from earlier..."
     $ starbuck.change_arousal(20)

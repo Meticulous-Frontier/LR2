@@ -108,7 +108,7 @@ label scene_anal_on_lap_2(the_girl, the_location, the_object):
                     $ the_girl.discover_opinion("being submissive")
                     "[the_girl.title] just moans, leaning back against you. You seize the opportunity."
                     "Pulling her back against you, you reach under her legs and force them up and open, so she is spread wide."
-                    "She whimpers helplessly as you fuck her backdoor mercilessly."
+                    "She whimpers helplessly as you fuck her backdoor without mercy."
                     $ the_girl.change_arousal(10)
                 elif the_girl.effective_sluttiness() > 95:
                     the_girl "Mmm, do it! Fuck me hard and make me cum!"
