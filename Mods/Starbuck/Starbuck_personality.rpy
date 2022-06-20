@@ -392,7 +392,7 @@ label starbuck_flirt_response_mid(the_person):
         the_person "Well I'm glad you like it. And I'm glad you like me."
 
     else:
-        the_person "Thanks! Same as movies, sex sells! I'm seen increased sales since I started dressing like this."
+        the_person "Thanks! Same as movies, sex sells! I've seen increased sales since I started dressing like this."
         the_person "Do you want a better look?"
         mc.name "Of course I do."
         $ the_person.draw_person(position = "back_peek")
