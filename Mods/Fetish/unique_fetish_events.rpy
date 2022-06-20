@@ -259,6 +259,8 @@ label fetish_mom_kitchen_label(the_person):
             $ the_person.event_triggers_dict["LastBreedingFetish"] = day
         "Creampie her\n{color=#ff0000}{size=18}Requires Breeding Fetish{/size}{/color} (disabled)" if not the_person.has_breeding_fetish():
             pass
+        "Give her a cum dosage" if the_person.has_cum_fetish():
+            call cum_fetish_get_dosage_label(the_person) from _call_cum_fetish_get_dosage_label_fetish_mom_kitchen
         "Cover her in cum\n{color=#ff0000}{size=18}Not yet written{/size}{/color} (disabled)" if the_person.has_cum_fetish():
             pass #TODO
         "Cover her in cum\n{color=#ff0000}{size=18}Requires Cum Fetish{/size}{/color} (disabled)" if not the_person.has_cum_fetish():
