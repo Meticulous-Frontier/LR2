@@ -24,13 +24,13 @@ init 1 python:
         return False
 
     def myra_focus_progression_scene_3_req():    #Requirements for assjob scene
-        return False
         if myra.sluttiness > 60:
             return True
         return False
 
     def myra_focus_progression_scene_4_req():    #Requirements for anal
-        if myra.sluttiness > 80:
+        return False
+        if myra.sluttiness > 80 and myra_lewd_cafe_open():
             return True
         return False
 
@@ -360,8 +360,8 @@ label myra_focus_trans_scene_2(the_group):
 
 label myra_focus_trans_scene_3(the_group):
     $ the_person = the_group[0]
-    "You walk over to the PC where [the_person.title] is sitting. She is already naked."
-    $ the_person.strip_full_outfit(delay = 0)
+    "You walk over to the PC where [the_person.title] is sitting. She is already topless."
+    $ the_person.strip_to_tits(delay = 0)
     $ the_person.draw_person(position = "sitting")
     "You set her energy drink down next to her keyboard."
     "You've been enjoying her training so far, but you feel like you could enjoy it even more. You decide it is time to try and push her further."
@@ -376,17 +376,17 @@ label myra_focus_trans_scene_3(the_group):
     mc.name "I want you to try gving me a lapdance while you play. Having to split your attention between two things will be a major challenge."
     "[the_person.possessive_title] just laughs."
     the_person "And let me guess. We should both be naked."
-    mc.name "Just you. At least at first."
+    mc.name "Of course. How distracting do you think a pair of trousers are?"
     "[the_person.title] shakes her head. At first, you think the jig is probably up, but then she surprises you."
     the_person "You know what? There's something about you. Ever since you showed up, things have progressed in ways I never would have imagined."
     $ the_person.change_obedience(10)
     the_person "If you think that will do the trick, let's give it a shot. I'm in."
-    "You are surprised. You assumed you would have to do a lot more convincing. She gets up and gets naked."
+    "You are surprised. You assumed you would have to do a lot more convincing. She gets up and takes off her bottoms."
     $ the_person.strip_full_outfit(position = "stand3")
     "You stare in aww at [the_person.possessive_title], standing naked in front of you."
     the_person "Well? You gonna stare all day? Or are you gonna sit down?"
-    "You quickly sit down in the chair, and she sits on your lap."
-    $ the_person.draw_person(position = "Sitting")
+    "You quickly sit down in the chair and pull your cock out. She sits on your lap."
+    $ the_person.draw_person(position = "sitting")
     "She takes a long sip from her energy drink as she gets logged in to the game. She sighs and wiggles her hips a bit as you reach up and grope one of her tits."
     return
 
@@ -404,13 +404,23 @@ label myra_focus_trans_scene_4(the_group):
     the_person "I think I know how to do it."
     mc.name "And how would that be?"
     the_person "I was thinking that, if I could win a match while you are fucking my ass, I think I could win a match no matter how many people are watching."
-    "Wow. You were not expecting this. She wants you to fuck her in the ass while she plays?"
+    if the_person.has_taboo("anal_sex"):
+        "Wow. You were not expecting this."
+        mc.name "I mean, it wouldn't necessarily have to be in your ass..."
+        the_person "Yeah, but I think that would be more challenging..."
+        the_person "Besides, I kind of like it that way..."
+        "[the_person.title] gives you a wink."
+        # TODO discover anal opinion?
+    else:
+        "Wow. You were not expecting this. She wants you to fuck her in the ass while she plays?"
+        "You knew she liked it that way, but to have her suggest it is a huge win."
     mc.name "That does sound like a pretty incredible challenge. Are you sure you are up for it?"
     the_person "We won't know unless we try it, will we?"
     "Thankfully, as part of the expansion of the gaming cafe, in the adult only section you can do something like this without worrying about getting caught."
     the_person "And if I can't do it the first time, we'll just have to keep trying until I manage it!"
     "You aren't sure if she is trying to convince you, or herself, but you decide to jump on the opportunity before it passes you by."
-
+    mc.name "Alright. If you think you are ready, let's give it a try."
+    "[the_person.title] stands up."
     $ the_person.strip_full_outfit(position = "standing_doggy")
     "You stare in aww at [the_person.possessive_title]'s ass as she bends over the desk."
     the_person "Well? You gonna stare all day? Or are you gonna sit down?"
@@ -634,7 +644,7 @@ label myra_focus_progression_scene_3(the_group, scene_transition = False):  #ass
         $ the_person.draw_person(position = "sitting")
         "You set her energy drink down next to her keyboard. She is just getting logged in and is already naked."
         the_person "Alright, ready to do this?"
-        "[the_person.title] nervously looks around the room a little. She has picked a computer in the back corner, away from anyone else."
+        "[the_person.title] looks around the room a little. She has picked a computer in the back corner, away from anyone else."
         mc.name "I am. let me sit down."
         $ the_person.draw_person(position = "standing_doggy")
         "[the_person.possessive_title] gets up out of her chair, leaving you just enough room to sit down. You give her ass a quick little spank before she can sit on your lap."
@@ -697,10 +707,95 @@ label myra_focus_progression_scene_3(the_group, scene_transition = False):  #ass
 
 label myra_focus_progression_scene_4(the_group, scene_transition = False):  #anal
     $ the_person = the_group[0]
-    if myra.event_triggers_dict.get("focus_train_anal", False):
-        pass
+    $ myra_score = 0
+    $ enemy_score = 0
+    $ myra_wins = False
+    if not scene_transition:
+        $ the_person.strip_full_outfit(delay = 0)
+        "You walk back to the adult section and over to the PC where [the_person.title] is sitting."
+        $ the_person.draw_person(position = "sitting")
+        "You set her energy drink down next to her keyboard. She is just getting logged in and is already naked."
+        the_person "Alright, ready to do this?"
+        mc.name "I am. let me sit down."
+        $ the_person.draw_person(position = "standing_doggy")
+        "[the_person.possessive_title] gets up out of her chair, leaving you just enough room to sit down. You give her ass a quick little spank before she can sit on your lap."
+        the_person "Mmm! Harder..."
+        "You give [the_person.title]'s ass another spank. The sound echoes around the room. Her ass wobbles enticingly."
+        $ mc.change_locked_clarity(30)
+        "She takes a long sip from her energy drink as she gets logged in to the game. She sighs and wiggles her hips a bit as you continue to grope her rear."
+    the_person "Ok... here we go..."
+    $ the_person.draw_person(position = "sitting")
+    "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
+    "[the_person.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
+    if scene_transition:
+        $ the_person.break_taboo("anal_sex")
+        the_person "Oh fuck... maybe I'm not ready for this..."
+        mc.name "Too late now. Let's just give it a go and see what happens."
+    else:
+        the_person "Oh fuck... I keep forgetting how intense this is... I don't know if this is going to work..."
+        mc.name "Too late now, the game is starting!"
+    "The countdown timer starts, and soon the fight is beginning."
+    while myra_score < 100 and enemy_score < 100:
+        $ score_str = "The score is " + str(myra_score) + " to " + str(enemy_score) + "."
+        "[score_str]"
+        call myra_focus_training_encounter(the_person) from _myra_focus_train_loop_05
+        if _return:
+            $ myra_score += renpy.random.randint(15,25)
+            $ enemy_score += renpy.random.randint(0,10)
+        else:
+            $ myra_score += renpy.random.randint(1,10)
+            $ enemy_score += renpy.random.randint(15,25)
+    if myra_score > enemy_score:
+        $ myra_wins = True
+    if myra_wins:
+        the_person "Yes! I won!"
+        $ the_person.change_happiness(3)
+    else:
+        the_person "Wow, I lost?"
+        $ the_person.change_obedience(3)
+    "[the_person.possessive_title] turns her head, but remains sitting on your lap."
+    if myra_wins:
+        mc.name "That was incredible."
+        the_person "I know! That felt amazing."
+        "She leaves it ambigious whether she is talking about winning or your cock that is still deep in her ass..."
+        if the_person.focus < 8:
+            $ the_person.change_focus(1)
+            the_person "I feel like I'm getting better and better. Thank you for your help."
+            mc.name "Of course. It is an honor to be your coach."
+        else:
+            mc.name "I have to say... I don't think there is anything more I can teach you."
+            mc.name "The fact that you can focus... through this..."
+            "You give your hips a thrust as you say it."
+            mc.name "I dare say your focus is near perfect."
+            the_person "Maybe... I think I might need to keep training though, to keep sharp!"
+            mc.name "Of course."
+        if mc.arousal > 50 or the_person.arousal > 70:
+            if the_person.arousal > 70:
+                "[the_person.title] slowly starts to move her hips again..."
+                the_person "God... it still feels so good... can... can we go for just a little bit longer?"
+            else:
+                "You run your hands along her sides, making her shiver. Her ass twitches around your cock."
+                the_person "Fuck... you are still so hard... do you want to go for just a little longer?"
+            mc.name "Yeah, but stand up. I want to fuck your ass properly."
+            the_person "Oh fuck..."
+            $ the_person.draw_person(position = "standing_doggy")
+            "You push the chair back as you stand up with [the_person.possessive_title], bending her over the computer desk."
+            "Still inside of her, you grab her hips and start to fuck her ass some more."
+            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_sex_description_myra_anal_post_focus_train_01
+    else:
+        the_person "To be honest... I don't even care that I lost. That felt amazing."
+        mc.name "Yeah, but I think you can do better."
+        "You may have distracted her a bit too much, but for now, you are just happy you got to fuck her in the ass."
+    $ the_person.draw_person()
+    #TODO trance training
+    "[the_person.title] slowly stands up, her legs a bit wobbly."
+    the_person "I think I need a break."
+    mc.name "Of course. I'll see you around."
+    $ the_person.apply_outfit(the_person.planned_outfit)
     $ clear_scene()
-    call advance_time from _call_advance_myra_focus_progression_scene_adv_06
+    $ the_person.arousal = 20
+    "Having [the_person.possessive_title]'s ass bouncing up and down on your cock as she plays games is amazing."
+    "You don't think you can take this any farther, but you look forward to your next training session."
     return
 
 
@@ -775,7 +870,8 @@ label myra_focus_training_encounter(the_person):
         $ encounter_won = False
     if mc.arousal > 100 and myra_focus_progression_scene.get_stage() >= 3:
         call myra_focus_training_mc_orgasm(the_person) from _myra_focus_train_mc_cums_01
-
+        if myra_focus_progression_scene.get_stage() == 3:
+            $ encounter_won = True
     if encounter_won:
         #Wins encounter
         if encounter_num == 0:
@@ -906,14 +1002,37 @@ label myra_focus_light_distraction(the_person):
             $ the_person.change_arousal(35)
             $ mc.change_locked_clarity(30)
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
+        if mc.arousal < 30:
+            "For now, you are content to let [the_person.title] gently rock her hips against you as she plays."
+            "You run your hands along her sides and up to her tits. She gives a soft moan when you play with her nipples."
+            the_person "Mmm, that feels good..."
+            $ the_person.change_arousal(10)
+            $ mc.change_locked_clarity(20)
+            $ mc.change_arousal(10)
+        elif mc.arousal < 80:
+            "[the_person.title] continues her steady grinding motions as she gives you a lap dance while she plays."
+            "The heat of her body against yours is really turning you on, but you don't want to distract her too much."
+            "You run one hand between her legs, stroking along her slit a few times, while you grope her tits with the other."
+            mc.name "God you are fucking hot. Keep working that ass girl..."
+            "[the_person.possessive_title] just moans as she keeps playing, grinding her ass against you."
+            $ the_person.change_arousal(15)
+            $ mc.change_locked_clarity(20)
+            $ mc.change_arousal(10)
+        else:
+            "[the_person.title]'s ass feels so good as she grinds up against you. Your balls are starting to churn a bit with urgency."
+            "You try not to distract her too much, but you slide a hand down between her legs."
+            "You slip two fingers inside her easily. Her soft moans are like music to your ears as you finger her a bit."
+            "[the_person.possessive_title] just moans as she keeps playing, grinding her ass against you."
+            $ the_person.change_arousal(20)
+            $ mc.change_locked_clarity(30)
+            $ mc.change_arousal(10)
+    elif myra_focus_progression_scene.get_stage() == 4: #anal
         if the_person.arousal < 30:
             pass
         elif the_person.arousal < 70:
             pass
         else:
             pass
-    elif myra_focus_progression_scene.get_stage() == 4: #anal
-        pass
     return
 
 label myra_focus_med_distraction(the_person):
@@ -984,14 +1103,40 @@ label myra_focus_med_distraction(the_person):
             $ the_person.change_arousal(35)
         $ mc.change_locked_clarity(30)
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
+        if mc.arousal < 30:
+            "You put your hands on her hips as [the_person.title] grinds up against you, guiding her at the pace you want."
+            "Her ass feels warm and soft as gives you a lapdance while she plays."
+            "You don't want to make things too easy for her to focus, so you let go of her hips with one hand and reach up and grope her tits."
+            the_person "Mmm, that feels good..."
+            "[the_person.possessive_title] squeals a bit when you give it a pinch. She loses her focus for just a moment from the surprise."
+            $ the_person.change_arousal(20)
+            $ mc.change_locked_clarity(20)
+            $ mc.change_arousal(10)
+        elif mc.arousal < 80:
+            "[the_person.title] continues her steady grinding motions as she gives you a lap dance while she plays."
+            "The heat of her body against yours is really turning you on. You can't help but run your hands all along her hot body."
+            "You run one hand between her legs. You stick a finger inside of her to get it wet, then run it in circles around her clit a few times."
+            the_person "Gah... fuck that feels good..."
+            "[the_person.possessive_title] just moans as she keeps playing, grinding her ass against you."
+            $ the_person.change_arousal(20)
+            $ mc.change_locked_clarity(20)
+            $ mc.change_arousal(15)
+        else:
+            "[the_person.title]'s ass feels so good as she grinds up against you. Your balls are starting to churn a bit with urgency."
+            "You can tell you aren't going to last much longer, so you decide to make her feel good too."
+            "You slip two fingers inside her easily. Her soft moans are like music to your ears as you finger her."
+            mc.name "Damn you are so hot. If you keep going you are going to make me cum..."
+            "[the_person.possessive_title] just moans as she keeps playing, grinding her ass against you. If anything she picks up her pace a little..."
+            $ the_person.change_arousal(20)
+            $ mc.change_locked_clarity(40)
+            $ mc.change_arousal(20)
+    elif myra_focus_progression_scene.get_stage() == 4: #anal
         if the_person.arousal < 30:
             pass
         elif the_person.arousal < 70:
             pass
         else:
             pass
-    elif myra_focus_progression_scene.get_stage() == 4: #anal
-        pass
     return
 
 label myra_focus_heavy_distraction(the_person):
@@ -1059,14 +1204,41 @@ label myra_focus_heavy_distraction(the_person):
             $ the_person.change_arousal(45)
         $ mc.change_locked_clarity(30)
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
+        if mc.arousal < 30:
+            "You put your hands on her hips as [the_person.title] grinds up against you, guiding her at the pace you want."
+            "You grind yourself against her as she wiggles against you. Her hot little body feels amazing as she gives you a lap dance."
+            "You let yourself have your way with her body. You reach up with both her and grab tits with both hands, pinching and pulling at her nipples."
+            the_person "Gah! Fuck take it easy..."
+            mc.name "Not a chance, slut."
+            "[the_person.possessive_title] squeals a bit when you give them another pinch. She loses her focus for just a moment from the sensations, but keeps playing."
+            $ the_person.change_arousal(25)
+            $ mc.change_locked_clarity(20)
+            $ mc.change_arousal(15)
+        elif mc.arousal < 80:
+            "[the_person.title] continues her steady grinding motions as she gives you a lap dance while she plays."
+            "The heat of her body against yours is really turning you on. You grope her roughly as she moves."
+            "You run one hand between her legs. Right as you stick two fingers inside of her, you lean forward and bite her shoulder."
+            the_person "Ahh! Fuck..."
+            "[the_person.possessive_title] just moans as she keeps playing, grinding her ass against you. You finger her roughly as she moves against you."
+            $ the_person.change_arousal(25)
+            $ mc.change_locked_clarity(40)
+            $ mc.change_arousal(20)
+        else:
+            "[the_person.title]'s ass feels so good as she grinds up against you. Your balls are starting to churn a bit with urgency."
+            mc.name "Damn, you are going to make me cum. You want to make me cum?"
+            the_person "Yeah! Please cum for me, [the_person.mc_title]!"
+            "You slip two fingers inside her easily. She moans with you as you finger her roughly."
+            "[the_person.possessive_title] just moans as she keeps playing, grinding her ass against you. She starts to pick up the pace as you finger her."
+            $ the_person.change_arousal(30)
+            $ mc.change_locked_clarity(50)
+            $ mc.change_arousal(30)
+    elif myra_focus_progression_scene.get_stage() == 4: #anal
         if the_person.arousal < 30:
             pass
         elif the_person.arousal < 70:
             pass
         else:
             pass
-    elif myra_focus_progression_scene.get_stage() == 4: #anal
-        pass
     return
 
 label myra_focus_training_orgasm(the_person):
@@ -1123,10 +1295,55 @@ label myra_focus_training_orgasm(the_person):
 
 label myra_focus_training_mc_orgasm(the_person):
     if myra_focus_progression_scene.get_stage() == 3:   #assjob
-        pass
+        "[the_person.possessive_title]'s hot ass grinding against your cock has got you ready burst."
+        mc.name "God damn keep going, I'm about to cum."
+        "[the_person.title] moves her hips up and down against you agressively. You grab her hips as you start to cum."
+        $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
+        $ the_person.cum_on_ass()
+        $ mc.arousal = 0
+        $ the_person.draw_person(position = "sitting")
+        the_person "Oh my god it's so warm..."
+        "[the_person.possessive_title] keeps playing, focusing on her encounter."
+        "You take a minute to recover. While you do that, [the_person.title] is able to focus completely on her current encounter."
+        mc.name "Get up for a second, let me see what a good little slut you are."
+        $ the_person.draw_person(position = "standing_doggy")
+        "[the_person.title] stands up, but bends over at the waist as she keeps playing, pointing her cum coated ass at you."
+        $ mc.change_arousal(10)
+        "You feel your erection returning as you check her out."
+        mc.name "Alright, sit back down and keep going."
+        $ the_person.draw_person(position = "sitting")
+        $ the_person.change_obedience(2)
+        "[the_person.title] is completely focused on her match, but obediently sits back down on your lap."
+        "When she starts to move her hips a bit again, your cum acts as sticky lube, quickly bringing you back up to full hardness."
+        $ mc.change_locked_clarity(50)
     elif myra_focus_progression_scene.get_stage() == 4: #anal
-        pass
-    pass
+        "[the_person.possessive_title] tight ass has you ready to cum."
+        mc.name "Get ready for it, I'm gonna cum!"
+        "[the_person.possessive_title] keeps playing as she rides you to your orgasm."
+        "Your grab her hips and pull her down as you start to shoot your load inside of her.."
+        the_person "That's it, fill my slutty ass with your cum [the_person.mc_title]!"
+        $ ClimaxController.manual_clarity_release(climax_type = "ass", the_person = the_person)
+        $ the_person.cum_in_ass()
+        "You pulse wave after wave of cum inside of her tight ass."
+        $ mc.arousal = 0
+        $ the_person.draw_person(position = "sitting")
+        the_person "Oh my god it's so warm..."
+        "[the_person.possessive_title] keeps playing, focusing on her encounter."
+        "You take a minute to recover. While you do that, [the_person.title] is able to focus completely on her current encounter."
+        mc.name "Get up for a second, let me see what a good little slut you are."
+        $ the_person.draw_person(position = "standing_doggy")
+        "[the_person.title] stands up, but bends over at the waist as she keeps playing."
+        "A small bit of cum is dripping down her crack and between legs, but most of it remains buried inside of her."
+        "You give her ass a hard spank. It wobbles enticingly."
+        $ mc.change_arousal(10)
+        "You feel your erection returning as you check her out."
+        mc.name "Alright, sit back down and keep going."
+        $ the_person.draw_person(position = "sitting")
+        $ the_person.change_obedience(2)
+        "[the_person.title] is completely focused on her match, but obediently sits back down on your lap."
+        "As your cock slips into her ass, your cum acts as sticky lube, quickly bringing you back up to full hardness."
+        $ mc.change_locked_clarity(50)
+    return
 
 init 4 python:
     #Encounter difficulty should be up to 100, depending on the scenario, with dif_modifier up to 100 also, for hardcore anal sex or impending orgasm.
