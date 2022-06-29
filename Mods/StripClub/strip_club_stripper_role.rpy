@@ -140,14 +140,6 @@ init 5 python:
             person.quit_job()
         return
 
-    # change stripper replace function
-    def stripper_replace_enhanced(person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
-        if person in stripclub_strippers:
-            stripclub_strippers.remove(person)
-
-        # add new stripper to replace the one that left
-        create_stripper()
-
     def stripper_quit(person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
         if person in stripclub_strippers:
             stripclub_strippers.remove(person)
@@ -168,9 +160,6 @@ label update_strip_club_show_requirement(stack):
             stripclub_bdsm_performers = MappedList(Person, all_people_in_the_game)
         if not "stripclub_waitresses" in globals():
             stripclub_waitresses = MappedList(Person, all_people_in_the_game)
-
-        # attach new replace function for better stripper creation
-        stripper_job.quit_function = stripper_replace_enhanced
 
         execute_hijack_call(stack)
     return

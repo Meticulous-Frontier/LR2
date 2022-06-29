@@ -76,6 +76,8 @@ init 2 python:
             return False # Don't trigger foreclosed event while strip club is open
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
+        if not cousin in stripclub_strippers: # don't trigger event when cousin is not stripper
+            return False
         if day > start_day:
             return True
         return False
