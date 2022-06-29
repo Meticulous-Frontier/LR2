@@ -52,7 +52,9 @@ init 2 python:
             return False
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
-        if not cousin in stripclub_strippers: # don't trigger event when cousin is not stripper
+        if cousin.event_triggers_dict.get("blackmail_level", 0) < 2:
+            return False
+        if cousin not in stripclub_strippers:
             return False
         if mc.business.has_funds(60000):
             if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
@@ -76,7 +78,7 @@ init 2 python:
             return False # Don't trigger foreclosed event while strip club is open
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
-        if not cousin in stripclub_strippers: # don't trigger event when cousin is not stripper
+        if cousin.event_triggers_dict.get("blackmail_level", 0) < 2:
             return False
         if day > start_day:
             return True

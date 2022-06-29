@@ -140,6 +140,9 @@ init 5 python:
             person.quit_job()
         return
 
+    def stripper_replace_enhanced(person):  # save compatibility
+        stripper_replace(person)
+
     def stripper_quit(person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
         if person in stripclub_strippers:
             stripclub_strippers.remove(person)
