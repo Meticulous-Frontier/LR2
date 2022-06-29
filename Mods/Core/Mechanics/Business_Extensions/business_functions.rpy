@@ -12,7 +12,7 @@ init -1 python:
     # Add Pay function to business object
     Business.change_funds = change_funds
 
-    def supply_purchase_enhanced(self,focus,cha,skill):
+    def supply_purchase_enhanced(self, focus, cha, skill, production_modifier = 1.0, cost_modifier = 1.0):
         max_supply = __builtin__.int(((5*focus) + (3*cha) + (3*skill) + 20) * (self.team_effectiveness / 100.0))
         if (self.supply_count / self.supply_goal) < 20 and self.supply_count < 250 and mc.business.IT_project_is_active(supply_inventory_project):
             max_supply *= 1.25
@@ -54,15 +54,15 @@ init -1 python:
             person.set_schedule(cousin.home, the_times = [4])
             person.event_triggers_dict["stripping"] = False # un-flag blackmail event
             if person in stripclub_strippers:
-                stripclub_strippers.remove(the_person)
+                stripclub_strippers.remove(person)
 
         # set names when hiring (if not set)
         if not person.title:
-            person.set_title(get_random_title(person))
+            person.set_title(person.get_random_title())
         if not person.possessive_title:
-            person.set_possessive_title(get_random_possessive_title(person))
+            person.set_possessive_title(person.get_random_possessive_title())
         if not person.mc_title or person.mc_title == "Stranger":
-            person.set_mc_title(get_random_player_title(person))
+            person.set_mc_title(person.get_random_player_title())
 
         # make sure she is dressed appropriately
         person.apply_outfit()

@@ -48,8 +48,8 @@ init 2 python:
         global sarah
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = ["chocolate", [.247, .0, .058, 1]], hair_style = windswept_hair, skin="white",\
             eyes = "dark blue", personality = Sarah_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = sarah_wardrobe, \
-            stat_array = [5,3,3], skill_array = [5,3,2,1,1], sex_array = [1,2,3,1], start_sluttiness = 3, start_obedience = 0, start_happiness = 102, start_love = 3, \
-            title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit,
+            stat_array = [5,3,3], skill_array = [5,3,2,1,1], sex_skill_array = [1,2,3,1], sluttiness = 3, happiness = 102, love = 3, \
+            title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit, type = 'story', \
             force_random = True, forced_opinions = [
                 ["HR work", 2, True],        # she loves HR work
                 ["work uniforms", 1, False], # she likes uniforms
@@ -67,7 +67,7 @@ init 2 python:
             ])
 
         sarah.generate_home()
-        sarah.add_job(sarah_initial_job, job_known = True)
+        sarah.change_job(sarah_initial_job, job_known = True)
         sarah.set_override_schedule(sarah.home)
         sarah.home.add_person(sarah)
 
@@ -432,7 +432,7 @@ init 2 python:
 
     def add_naomi_reconciliation_action():
         # make her free roaming so you can run into her.
-        naomi.add_job(unemployed_job)
+        naomi.change_job(unemployed_job)
         naomi.set_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[1,2,3])
 
         naomi_reconciliation_action = Action("Naomi reconciliation", naomi_reconciliation_requirement, "Sarah_naomi_reconciliation_label")
@@ -479,7 +479,8 @@ init 2 python:
         if "naomi" in globals():
             return
 
-        naomi = make_person(name = "Naomi", last_name = "Walters", age = 23, body_type = "thin_body", face_style = "Face_3", height = 0.94, hair_colour = ["alt blond", [.882, .733, .580, 1]], hair_style = braided_bun, skin="white", relationship = "Fiancée", kids = 0, tits = "DD", start_sluttiness = renpy.random.randint(25, 40), force_random = True, forced_opinions = [
+        naomi = make_person(name = "Naomi", last_name = "Walters", age = 23, body_type = "thin_body", face_style = "Face_3", height = 0.94, hair_colour = ["alt blond", [.882, .733, .580, 1]], hair_style = braided_bun, \
+            skin="white", relationship = "Fiancée", kids = 0, tits = "DD", sluttiness = renpy.random.randint(25, 40), type = 'story', force_random = True, forced_opinions = [
                 ["skirts", 1, False],
                 ["other girls", 1, False],
                 ["boots", 1, False],
@@ -501,7 +502,7 @@ init 2 python:
         downtown_bar.add_person(naomi)
         naomi.set_title(naomi.name)
         naomi.set_mc_title(mc.name)
-        naomi.set_possessive_title(get_random_possessive_title(the_person))
+        naomi.set_possessive_title(naomi.get_random_possessive_title())
         # hide her from player until she is reintroduced into the story
         naomi.set_schedule(naomi.home, the_days=[0, 1, 2, 3, 4, 5, 6], the_times =[0,1,2,3,4])
         sarah.event_triggers_dict["bar_friend"] = naomi.identifier
@@ -3217,7 +3218,7 @@ label Sarah_naomi_visits_to_apologize_label():
     $ scene_manager.update_actor(the_person, position = "sitting", display_transform = character_center_flipped)
     "You motion her to take a seat."
     mc.name "Would you like some coffee?"
-    $ coffee = get_random_coffee_style()
+    $ coffee = the_person.get_random_coffee_style()
     the_person "Yes, [coffee], please."
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         "You pour some of your serum enhanced coffee, to make her a little more open to suggestion."

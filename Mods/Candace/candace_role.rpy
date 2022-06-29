@@ -107,8 +107,8 @@ init 2 python:
         global candace
         candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "standard_body", face_style = "Face_12", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
             eyes = "light blue", personality = candace_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = candace_wardrobe, \
-            stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
-            title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit,
+            stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_skill_array = [2,3,4,1], sluttiness = 35, obedience_range = [50, 70], happiness = 76, love = 0, \
+            title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit, type = 'story',
             force_random = True, forced_opinions = [
                 ["supply work", 2, True],        # she loves HR work
                 ["skirts", 1, False],        #And Skirts
@@ -128,7 +128,7 @@ init 2 python:
             ])
 
         candace.generate_home()
-        candace.add_job(candace_job, job_known = True)
+        candace.change_job(candace_job, job_known = True)
         candace.set_schedule(office_store, the_times = [3], the_days = [0, 1, 2, 3, 4]) #Buying office supplies for her employer.
         candace.home.add_person(candace)
         candace.event_triggers_dict["met_at_store"] = 0
@@ -178,8 +178,8 @@ init 2 python:
         global candace
         candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "thin_body", face_style = "Face_3", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
             eyes = "light blue", personality = candace_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = candace_wardrobe, job = candace_job, \
-            stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
-            title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit,
+            stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_skill_array = [2,3,4,1], sluttiness = 35, obedience_range = [50, 70], happiness = 76, love = 0, \
+            title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Girlfriend", SO_name = ophelia_get_ex_name(), kids = 0, base_outfit = candace_base_outfit, type = 'story',
             force_random = True, forced_opinions = [
                 ["supply work", 2, True],        # she loves supply work
                 ["skirts", 1, False],        #And Skirts
@@ -250,8 +250,8 @@ init 2 python:
         global candace
         candace = make_person(name = "Candace", last_name = "Hooper", age = 29, body_type = "thin_body", face_style = "Face_3", tits = "F", height = 0.94, hair_colour = ["black",[0.09,0.07,0.09,1]], hair_style = curly_bun, skin="black",\
             eyes = "light blue", personality = genius_personality, name_color = "#d62cff", dial_color = "#d62cff", starting_wardrobe = candace_wardrobe, job = candace_job, \
-            stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_array = [2,3,4,1], start_sluttiness = 35, start_obedience = -40, start_happiness = 76, start_love = 0, \
-            title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = candace_base_outfit,
+            stat_array = [3,1,5], skill_array = [2,1,2,1,5], sex_skill_array = [2,3,4,1], sluttiness = 35, obedience_range = [50, 70], happiness = 76, love = 0, \
+            title = "Candi", possessive_title = "Your acquaintance",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = candace_base_outfit, type = 'story',
             force_random = True, forced_opinions = [
                 ["supply work", 2, True],        # she loves supply work
                 ["skirts", 1, False],        #And Skirts

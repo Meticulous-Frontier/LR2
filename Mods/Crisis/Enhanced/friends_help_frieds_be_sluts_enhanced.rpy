@@ -193,7 +193,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                 elif person_two.effective_sluttiness() < 40:
                     # The sluttier girl is talking about the less slutty girls tits when you walk in. She wants you to give a comparison, the less slutty girl begrudgingly agrees
                     # Note: At high love she hints that she's doing this as a favour to you.
-                    if rank_tits(person_one.tits) < rank_tits(person_two.tits):
+                    if Person.rank_tits(person_one.tits) < Person.rank_tits(person_two.tits):
                         # The slutty girl wants smaller, perkier tits.
                         person_two "Look at them though, they're the perfect shape. Mine just don't have the same perk yours do."
                         person_one "But they're so nice and big, I'd kill to have them like that. I bet they're nice and soft, too."
@@ -218,7 +218,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     menu:
                         "[person_one.name] has nicer tits": #She's already slutty, but gets a love boost
                             "You take a moment to consider, then nod towards [person_one.title]."
-                            if rank_tits(person_one.tits) < rank_tits(person_two.tits):
+                            if Person.rank_tits(person_one.tits) < Person.rank_tits(person_two.tits):
                                 mc.name "I've got to give it to [person_one.name]. I like them perky."
                             else:
                                 mc.name "I've got to give it to [person_one.name]. I like them big."
@@ -229,7 +229,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                             person_one "I suppose. Thanks for the help [person_one.mc_title]."
 
                         "[person_two.name] has nicer tits": # She gets a sluttiness boost along with a small love boost.
-                            if rank_tits(person_one.tits) > rank_tits(person_two.tits):
+                            if Person.rank_tits(person_one.tits) > Person.rank_tits(person_two.tits):
                                 mc.name "I've got to give it to [person_two.name]. I like them perky."
                             else:
                                 mc.name "I've got to give it to [person_two.name]. I like them big."
@@ -330,7 +330,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                             menu:
                                 "[person_one.name] has nicer tits": #She's already slutty, but gets a love boost
                                     "You take a moment to consider both of their naked racks, then nod towards [person_one.title]."
-                                    if rank_tits(person_one.tits) < rank_tits(person_two.tits):
+                                    if Person.rank_tits(person_one.tits) < Person.rank_tits(person_two.tits):
                                         mc.name "I've got to give it to [person_one.name]. I like them perky."
                                     else:
                                         mc.name "I've got to give it to [person_one.name]. I like them big."
@@ -346,7 +346,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                                     person_two "Uh huh. Come on, you've had your fun. We need to get back to work."
 
                                 "[person_two.name] has nicer tits": # She gets a sluttiness boost along with a small love boost.
-                                    if rank_tits(person_one.tits) > rank_tits(person_two.tits):
+                                    if Person.rank_tits(person_one.tits) > Person.rank_tits(person_two.tits):
                                         mc.name "I've got to give it to [person_two.name]. I like them perky."
                                     else:
                                         mc.name "I've got to give it to [person_two.name]. I like them big."

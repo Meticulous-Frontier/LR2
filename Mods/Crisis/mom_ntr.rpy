@@ -154,10 +154,10 @@ label mom_ntr_mod_action_label():
 
     $ mc.change_location(mom_bedroom)
     $ mc.location.show_background()
-    $ man_name = get_random_male_name()
-    $ wife_name = get_random_name()
+    $ man_name = Person.get_random_male_name()
+    $ wife_name = Person.get_random_name()
     while wife_name == the_person.name: ## Just to avoid stupid duplications
-        $ wife_name = get_random_name()
+        $ wife_name = Person.get_random_name()
 
     ## Now determine how many clothes mom will take off
     if the_person.sluttiness < 40:
@@ -1475,12 +1475,12 @@ label mom_ntr_mod_action_label():
             "Get back to bed":
                 "You decide that it is wrong to spy on [the_person.possessive_title]'s private life, so you go back to your room to sleep."
     elif ran_num == 2: ##For a scene with 2 men
-        $ man_name2 = get_random_male_name()
+        $ man_name2 = Person.get_random_male_name()
         while man_name == man_name2: ## Just to make sure that names don't match or it will look stupid
-            $ man_name2 = get_random_male_name()
-        $ wife_name2 = get_random_name()
+            $ man_name2 = Person.get_random_male_name()
+        $ wife_name2 = Person.get_random_name()
         while wife_name2 == the_person.name or wife_name == wife_name2: ## Just to avoid stupid duplications
-            $ wife_name2 = get_random_name()
+            $ wife_name2 = Person.get_random_name()
         ## let's create wives names here, just not to insert that in every scene it is required
         if the_person.get_opinion_score("giving blowjobs") > 0:
             $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")

@@ -54,15 +54,15 @@ init 3 python:
 
     def create_clone(person, clone_name, clone_last_name, clone_age):
         if clone_name is None:
-            clone_name = get_random_name()
+            clone_name = Person.get_random_name()
         if clone_last_name is None:
-            clone_last_name = get_random_last_name()
+            clone_last_name = Person.get_random_last_name()
         if clone_age is None:
             clone_age = person.age
 
-        clone = make_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = person.body_type, face_style = person.face_style, tits = person.tits, height = person.height, hair_colour = person.hair_colour, hair_style = person.hair_style, skin = person.skin, eyes = person.eyes, job = None,
-            personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = [person.charisma, person.int, person.focus], skill_array = [person.hr_skill, person.market_skill, person.research_skill, person.production_skill, person.supply_skill], sex_array = [person.sex_skills["Foreplay"], person.sex_skills["Oral"], person.sex_skills["Vaginal"], person.sex_skills["Anal"]],
-            start_sluttiness = person.sluttiness, start_obedience = person.obedience - 100, start_happiness = person.happiness, start_love = person.love, start_home = dungeon, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0, forced_sexy_opinions = [["being submissive", 2 , True]] , force_random = True)
+        clone = make_person(name = clone_name, last_name = clone_last_name, age = clone_age, body_type = person.body_type, face_style = person.face_style, tits = person.tits, height = person.height, hair_colour = person.hair_colour, hair_style = person.hair_style, skin = person.skin, eyes = person.eyes,
+            personality = person.personality, custom_font = None, name_color = None, dial_color = None, starting_wardrobe = person.wardrobe, stat_array = [person.charisma, person.int, person.focus], skill_array = [person.hr_skill, person.market_skill, person.research_skill, person.production_skill, person.supply_skill], sex_skill_array = [person.sex_skills["Foreplay"], person.sex_skills["Oral"], person.sex_skills["Vaginal"], person.sex_skills["Anal"]],
+            sluttiness = person.sluttiness, obedience = person.obedience, happiness = person.happiness, love = person.love, job = unemployed_job, suggestibility = 25, work_experience = person.work_experience, start_home = dungeon, title = "Clone", possessive_title = "Your creation", mc_title = "Creator", relationship = "Single", kids = 0, forced_sexy_opinions = [["being submissive", 2 , True]] , force_random = True)
 
         clone.set_schedule(dungeon, the_times = [0,1,2,3,4])
         clone.add_role(clone_role)
@@ -72,25 +72,25 @@ init 3 python:
 
     def build_body_type_choice_menu():
         body_types = []
-        for n in list_of_body_types:
+        for n in Person._list_of_body_types:
             body_types.append(n)
         body_types.append("Back")
         return renpy.display_menu(simple_list_format(body_types, n, string = "Body Type: ", ignore = "Back"), True, "Choice")
 
     def build_skin_style_choice_menu():
-        skin_styles = [x[0] for x in list_of_skins]
+        skin_styles = [x[0] for x in Person._list_of_skins]
         skin_styles.append("Back")
         return renpy.display_menu(simple_list_format(skin_styles, x[0], string = "Skin Type: ", ignore = "Back"), True, "Choice")
 
     def build_face_style_choice_menu():
         face_styles = []
-        for face in list_of_faces:
+        for face in Person._list_of_faces:
             face_styles.append(face)
         face_styles.append("Back")
         return renpy.display_menu(simple_list_format(face_styles, face, string = "Face Type: ", ignore = "Back"), True, "Choice")
 
     def build_cup_size_choice_menu():
-        cup_sizes = [x[0] for x in list_of_tits]
+        cup_sizes = [x[0] for x in Person._list_of_tits]
         cup_sizes.append("Back")
         return renpy.display_menu(simple_list_format(cup_sizes, x[0], string = "Cup Size: ", ignore = "Back"), True, "Choice")
 

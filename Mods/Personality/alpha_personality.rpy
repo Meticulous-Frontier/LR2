@@ -21,27 +21,19 @@ init 1400 python:
         valid_titles.append(person.formal_address + " " + person.last_name)
         if person.love > 20:
             valid_titles.append(person.name)
-        if person.love > 50 and person.has_role(stripclub_mistress_role):
-            valid_titles.append("Milady")
-        if person.sluttiness > 60 and person.has_role(stripclub_mistress_role):
-            valid_titles.append("Mistress")
         if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_titles.append("Anal Queen")
         return valid_titles
+
     def alpha_possessive_titles(person):
         valid_possessive_titles = []
         valid_possessive_titles.append(person.formal_address + " " + person.last_name)
-        if person.love > 10 and person.has_role(stripclub_manager_role):
-            valid_possessive_titles.append("Your manager")
-        if person.sluttiness > 60 and person.has_role(stripclub_manager_role):
-            valid_possessive_titles.append("Your naughty Manager")
-        if person.sluttiness > 60 and person.has_role(stripclub_mistress_role):
-            valid_possessive_titles.append("Your kinky Mistress")
         if person.sluttiness > 80 and (person.get_opinion_score("threesomes") > 0 or person.get_opinion_score("other girls") > 0):
             valid_possessive_titles.append("Your bi-sexual queen")
         if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_possessive_titles.append("Your anal queen")
         return valid_possessive_titles
+
     def alpha_player_titles(person):
         valid_player_titles = []
         valid_player_titles.append("Mr. " + mc.last_name)
@@ -90,11 +82,11 @@ label alpha_introduction(the_person):
     "She laughs and rolls her eyes."
     the_person "Is that so? You're not the first one... Maybe for today!"
     mc.name "Really, I just wanted to talk to you."
-    $ title_choice = get_random_title(the_person)
+    $ title_choice = the_person.get_random_title()
     $ formatted_title = the_person.create_formatted_title(title_choice)
     the_person "Well, if you insist, you can call me [formatted_title]."
     $ the_person.set_title(title_choice)
-    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+    $ the_person.set_possessive_title(the_person.get_random_possessive_title())
     "With a commanding gaze she waits for you to introduce yourself."
     return
 

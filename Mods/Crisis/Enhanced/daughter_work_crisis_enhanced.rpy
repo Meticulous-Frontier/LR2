@@ -133,9 +133,9 @@ label daughter_work_crisis_label_enhanced():
             the_person "Thank you so much!"
             call hire_someone(the_daughter) from _call_hire_someone_daughter_work_crisis_enhanced_2
         # make sure to set titles for the daughter (prevent introduction dialogs)
-        $ the_daughter.set_mc_title(get_random_from_list(get_player_titles(the_daughter)))
-        $ the_daughter.set_title(get_random_title(the_daughter))
-        $ the_daughter.set_possessive_title(get_random_possessive_title(the_daughter))
+        $ the_daughter.set_mc_title(get_random_from_list(the_daughter.get_player_titles()))
+        $ the_daughter.set_title(the_daughter.get_random_title())
+        $ the_daughter.set_possessive_title(the_daughter.get_random_possessive_title())
     else: #is "None
         $ the_daughter.remove_person_from_game()
         if promised_sex: #You promised to do it for sex but don't want to hire her, mom is disappointed.

@@ -52,16 +52,16 @@ label mall_introduction_action_label():
     # set titles for unknown person
     python:
         formatted_title = stranger.create_formatted_title(stranger.name + " " + stranger.last_name)
-        title_choice = get_random_title(stranger)
+        title_choice = stranger.get_random_title()
         stranger.set_title(title_choice)
-        stranger.set_possessive_title(get_random_possessive_title(stranger))
+        stranger.set_possessive_title(stranger.get_random_possessive_title())
 
     known_person "Let me introduce my friend [formatted_title]."
     "[formatted_title] holds her hand out to shake yours."
 
     # sets your title for unknown person
     python:
-        title_choice = get_random_from_list(get_player_titles(stranger))
+        title_choice = get_random_from_list(stranger.get_player_titles())
         stranger.set_mc_title(title_choice)
 
     if known_person.is_employee():

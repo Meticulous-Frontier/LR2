@@ -28,14 +28,14 @@ init 2 python:
         global kaya
         kaya = make_person(name = "Kaya", last_name ="Greene", age = 22, body_type = "thin_body", face_style = "Face_3",  tits="B", height = 0.94, hair_colour="black", hair_style = messy_hair, skin="tan" , \
             eyes = "brown", personality = kaya_personality, name_color = "#228b22", dial_color = "228b22",  \
-            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 88, start_love = 0, \
-            relationship = "Single", kids = 0, force_random = True, base_outfit = kaya_base_outfit,
+            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [4,2,2,2], sluttiness = 7, obedience_range = [70, 85], happiness = 88, love = 0, \
+            relationship = "Single", kids = 0, force_random = True, base_outfit = kaya_base_outfit, type = 'story',
             forced_opinions = [["billiards", 2, False], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour yellow", 2, False], ["the colour red", 1, False]],
             forced_sexy_opinions = [["vaginal sex", 2, False], ["bareback sex", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -1, False], ["missionary style sex", 2, False], ["creampies", 2, False]])
 
         kaya.generate_home()
         kaya.set_schedule(kaya.home, the_times = [0,1,2,3,4])
-        kaya.add_job(unemployed_job)
+        kaya.change_job(unemployed_job)
         kaya.home.add_person(kaya)
 
         kaya.event_triggers_dict["intro_complete"] = False    # True after first talk
@@ -226,7 +226,7 @@ label kaya_setup_intro_event_label():
         # init kaya role
         kaya_role = Role(role_name ="kaya", actions =[kaya_barista_fuck, kaya_get_drinks], hidden = True)
         kaya_barista_job = Job("Barista", kaya_role, coffee_shop, work_times = [2, 3])
-        kaya.add_job(kaya_barista_job, job_known = True)
+        kaya.change_job(kaya_barista_job, job_known = True)
         # she also studies
         kaya.set_schedule(None, the_times = [1,2,3])    # Free roam
         kaya.set_schedule(university, the_days = [0, 1, 2, 3, 4], the_times = [1])
@@ -984,7 +984,6 @@ label kaya_moving_in_with_mother_intro_label(the_person): #This label is called 
     $ kaya.event_triggers_dict["move_help_day"] = day + 7
     $ kaya.event_triggers_dict["can_get_drinks"] = False
     #$ kaya.event_triggers_dict["studies_with_lily"] = False
-    # $ the_person.set_override_schedule(None, the_days = [1], the_times = [4])
     return
 
 label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal. Something like a week later? Maybe less?

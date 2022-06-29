@@ -16,12 +16,12 @@ init 2 python:
         global ashley
         ashley = make_person(name = "Ashley", last_name =stephanie.last_name, age = 22, body_type = "standard_body", face_style = "Face_3",  tits="B", height = 0.89, hair_colour="brown", hair_style = ponytail, skin="white" , \
             eyes = "brown", personality = introvert_personality, name_color = "#228b22", dial_color = "#228b22" , starting_wardrobe = ashley_wardrobe, \
-            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
-            relationship = "Single", kids = 0, force_random = True, base_outfit = ashley_base_outfit,
+            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [4,2,2,2], sluttiness = 7, obedience_range = [70, 85], happiness = 119, love = 0, \
+            relationship = "Single", kids = 0, force_random = True, base_outfit = ashley_base_outfit, type = 'story',
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 2, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -1, False], ["public sex", -1, False]])
 
-        ashley.add_job(unemployed_job)
+        ashley.change_job(unemployed_job)
         ashley.set_schedule(stephanie.home, the_days=[0,1,2,3,4,5,6], the_times = [0,1,2,3,4])
         ashley.home = stephanie.home
         ashley.home.add_person(ashley)
@@ -247,7 +247,7 @@ label ashley_intro_label():
             $ mc.change_locked_clarity(20)
             the_person "You know I would do this anyway, right?"
             mc.name "Of course, but being reminded of your blowjob skills will probably help me make up my mind if I want to hire someone you're related to."
-            call fuck_person(the_person, start_position = blowjob, skip_intro = False, position_locked = True) from _call_sex_description_ashley_intro_bonus_BJ_1
+            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_sex_description_ashley_intro_bonus_BJ_1
             $ the_report = _return
             $ scene_manager.update_actor(the_person, position = "stand4")
             if the_report.get("guy orgasms", 0) > 0:
@@ -906,8 +906,8 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         the_person "Thank you for this chat. I feel better knowing what is going on with you two. Now... I think I'll get back to work?"
         "[the_person.title] turns and leaves your office. Things got a little sticky there, but you feel like you are now in the clear to pursue things with [ashley.title] from now on."
     $ clear_scene()
-    $ stephanie.set_schedule(coffee_shop, the_days = [6], the_times = [0])
-    $ ashley.set_schedule(coffee_shop, the_days = [6], the_times = [0])
+    $ stephanie.set_override_schedule(coffee_shop, the_days = [6], the_times = [0])
+    $ ashley.set_override_schedule(coffee_shop, the_days = [6], the_times = [0])
     $ ashley.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_intro)
     call advance_time from _call_advance_ashley_arrangement_01
     return

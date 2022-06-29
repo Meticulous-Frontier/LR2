@@ -478,11 +478,11 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         #TODO figure out what to do in the following three cases
 
 
-        if current_node.position.guy_energy > mc.energy - 5:
+        if current_node.position.calculate_energy_cost(mc) > mc.energy - 5:
             "You're too exhausted to let [the_person.possessive_title] keep [current_node.position.verbing] you."
             $ finished = True
 
-        elif current_node.position.girl_energy > the_person.energy - 5:
+        elif current_node.position.calculate_energy_cost(the_person) > the_person.energy - 5:
             the_person "I'm exhausted [the_person.mc_title], I can't keep this up..."
             $ finished = True
 

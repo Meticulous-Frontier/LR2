@@ -34,11 +34,11 @@ label ellie_introduction(the_person):
     "She glances around uncomfortably."
     the_person "Really? You're just saying that to impress me, aren't you."
     mc.name "Really, I really just wanted to talk to you."
-    $ title_choice = get_random_title(the_person)
+    $ title_choice = the_person.get_random_title()
     $ formatted_title = the_person.create_formatted_title(title_choice)
     the_person "Well fine, my name is [formatted_title]. It's nice to meet you..."
     $ the_person.set_title(title_choice)
-    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+    $ the_person.set_possessive_title(the_person.get_random_possessive_title())
     "She waits expectantly for you to introduce yourself."
     return  #This runs the first time MC meets the girl. Useful for starting storylines.
 

@@ -21,7 +21,7 @@ init 3 python:
 
     def silent_pregnant_tits_start_person(person):
         person.event_triggers_dict["preg_knows"] = True
-        person.tits = get_larger_tits(person.tits) #Her tits start to swell.
+        person.tits = Person.get_larger_tit(person.tits) #Her tits start to swell.
         person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1 #As her tits get larger they also become softer, unlike large fake tits. (Although even huge fake tits get softer)
 
         if not person.title is None:    # don't announce pregnancy for unknown girls
@@ -38,7 +38,7 @@ init 3 python:
 
         person.event_triggers_dict["pre_preg_body"] = person.body_type
         person.body_type = "standard_preg_body"
-        person.tits = get_larger_tits(person.tits) # Her tits get even larger
+        person.tits = Person.get_larger_tit(person.tits) # Her tits get even larger
         person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1 #As her tits get larger they also become softer, unlike large fake tits. (Although even huge fake tits get softer)
         person.lactation_sources += 1
 
@@ -88,7 +88,8 @@ init 3 python:
             return
 
         # clear any party schedules
-        person.set_override_schedule(None, the_times = [4])
+        if not person in unique_character_list:
+            person.set_override_schedule(None, the_times = [4])
         # historic start date of pregnancy
         start_day = day - progress_days
 
@@ -112,7 +113,7 @@ init 3 python:
 
         if day > person.event_triggers_dict.get("preg_tits_date", 0):
             person.event_triggers_dict["preg_knows"] = True
-            person.tits = get_larger_tits(person.tits) #Her tits start to swell.
+            person.tits = Person.get_larger_tit(person.tits) #Her tits start to swell.
             person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1
         else:
             target_label = "pregnant_tits_start" if person.is_mc_father() else "silent_pregnant_tits_start"
@@ -123,7 +124,7 @@ init 3 python:
         if day > person.event_triggers_dict.get("preg_transform_day", 0):
             person.event_triggers_dict["pre_preg_body"] = person.body_type
             person.body_type = "standard_preg_body"
-            person.tits = get_larger_tits(person.tits) # Her tits get even larger
+            person.tits = Person.get_larger_tit(person.tits) # Her tits get even larger
             person.personal_region_modifiers["breasts"] = person.personal_region_modifiers["breasts"] + 0.1 #As her tits get larger they also become softer, unlike large fake tits. (Although even huge fake tits get softer)
             person.lactation_sources += 1
 

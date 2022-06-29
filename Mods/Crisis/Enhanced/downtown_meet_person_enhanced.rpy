@@ -28,9 +28,9 @@ label meet_person_enhanced_label():
             mc.name "No problem, I'd do it for anyone."
 
             "She holds out her hand to shake yours."
-            $ title_choice = get_random_title(the_person)
+            $ title_choice = the_person.get_random_title()
             $ the_person.set_title(title_choice)
-            $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+            $ the_person.set_possessive_title(the_person.get_random_possessive_title())
             the_person "Thank you so much. I'm [the_person.title]."
             call person_introduction(the_person, girl_introduction = False) from _call_person_introduction_1_override
             $ mc.change_locked_clarity(5)

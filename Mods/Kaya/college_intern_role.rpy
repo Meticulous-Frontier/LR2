@@ -173,9 +173,9 @@ label hire_new_college_intern_label(the_person):
         $ new_person = _return
         $ new_person.generate_home() #Generate them a home location so they have somewhere to go at night.
         $ mc.business.hire_college_intern(new_person, the_dept, add_to_location = True)
-        $ new_person.set_title(get_random_title(new_person))
-        $ new_person.set_possessive_title(get_random_possessive_title(new_person))
-        $ new_person.set_mc_title(get_random_player_title(new_person))
+        $ new_person.set_title(new_person.get_random_title())
+        $ new_person.set_possessive_title(new_person.get_random_possessive_title())
+        $ new_person.set_mc_title(new_person.get_random_player_title())
         $ del new_person
         the_person "I'll pass this along to her. I'm sure she will be excited! Expect to see her on Saturday."
         mc.name "Thank you [the_person.title]."

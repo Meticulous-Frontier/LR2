@@ -39,7 +39,7 @@ init 5 python:
                             if file:
                                 file.load()
                                 time.sleep(self.load_delay)
-        
+
         def load_hair_styles(self):
             for cloth in hair_styles:
                 for position in supported_positions:
@@ -62,7 +62,7 @@ init 5 python:
 
         def load_emotions(self):
             for skin in ["white", "tan", "black"]:
-                for face in list_of_faces:
+                for face in Person._list_of_faces:
                     exp = emotion_images_dict[skin][face]
                     for position in supported_positions:
                         for emotion in Expression.emotion_set:
@@ -104,7 +104,7 @@ init 5 python:
     zip_manager = ZipManager()
 
     if persistent.zip_cache_preload:
-        # start background thread for pre-loading zip cache  
+        # start background thread for pre-loading zip cache
         background_thread = threading.Thread(target=zip_manager.preload)
         background_thread.setDaemon(True)
         background_thread.start()

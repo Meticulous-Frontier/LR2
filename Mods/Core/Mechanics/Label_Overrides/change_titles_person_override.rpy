@@ -6,11 +6,11 @@ init -1 python:
         mc_titles = []
         person_possessive_titles = []
 
-        for title in get_titles(person):
+        for title in person.get_titles():
             person_titles.append([title, [0, title]])
-        for title in get_player_titles(person):
+        for title in person.get_player_titles():
             mc_titles.append([title, [1, title]])
-        for title in get_possessive_titles(person):
+        for title in person.get_possessive_titles():
             person_possessive_titles.append([title, [2, title]])
 
         person_titles.insert(0, "Their Title")

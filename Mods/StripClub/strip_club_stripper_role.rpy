@@ -18,7 +18,7 @@ init 5 python:
 
     def calculate_stripper_salary(person):
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
-        tit_modifier = 10 - (__builtin__.abs(5 - rank_tits(person.tits)))   # optimal size is DD-Cup
+        tit_modifier = 10 - (__builtin__.abs(5 - Person.rank_tits(person.tits)))   # optimal size is DD-Cup
         age_modifier = 8 - (__builtin__.abs(25 - person.age) / 3.0)            # optimal age is 25
         slut_modifier = person.sluttiness / 20.0
         obed_modifier = 0
@@ -80,7 +80,7 @@ init 5 python:
         for stripper in stripclub_strippers[:]: # use copy of existing array
             stripper.job.quit_function = stripper_quit # replace base game stripper job quit_function
             stripper.quit_job() # use quit job because the role names match
-            stripper.add_job(stripclub_stripper_job, job_known = True)
+            stripper.change_job(stripclub_stripper_job, job_known = True)
 
     def allow_promote_to_manager_requirement(person):
         if get_strip_club_foreclosed_stage() < 5:
@@ -112,7 +112,8 @@ init 5 python:
         return [available_roles]
 
     def hire_stripper(person, job):
-        person.set_override_schedule(None, the_times = [4]) # clear party schedule
+        if not person in unique_character_list:
+            person.set_override_schedule(None, the_times = [4]) # clear party schedule
         if person.is_employee() or person in [lily, aunt, mom, nora]:    # moonlighting
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule(job.job_location, the_times = [4])
@@ -120,7 +121,7 @@ init 5 python:
             stripclub_strippers.append(person)
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
-            person.add_job(job, job_known = True)
+            person.change_job(job, job_known = True)
 
         salary = calculate_stripper_salary(person)
         if person.has_role(stripclub_waitress_role):

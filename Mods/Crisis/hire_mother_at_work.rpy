@@ -153,9 +153,9 @@ label hire_mother_work_crisis_label():
             the_person "Thank you so much!"
             call hire_someone(the_mother) from _call_hire_mother_work_2
         # make sure to set titles for the mother (prevent introduction dialogs)
-        $ the_mother.set_mc_title(get_random_from_list(get_player_titles(the_mother)))
-        $ the_mother.set_title(get_random_title(the_mother))
-        $ the_mother.set_possessive_title(get_random_possessive_title(the_mother))
+        $ the_mother.set_mc_title(get_random_from_list(the_mother.get_player_titles()))
+        $ the_mother.set_title(the_mother.get_random_title())
+        $ the_mother.set_possessive_title(the_mother.get_random_possessive_title())
     else: #is "None
         if promised_sex: #You promised to do it for sex but don't want to hire her, mom is disappointed.
             mc.name "I'm sorry, but her credentials just aren't what they need to be. I could never justify hiring your mother."

@@ -47,11 +47,11 @@ init 2 python:
 
         starbuck = make_person(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", face_style = "Face_4", tits="E", height = 0.89, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair, skin = "white",
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], pubes_style = landing_strip_pubes, personality = starbuck_personality, name_color = "#cd5c5c", dial_color = "#cd5c5c", starting_wardrobe = starbuck_wardrobe,  \
-            stat_array = [3,4,3], skill_array = [1,1,4,2,1], sex_array = [3,3,4,4], start_sluttiness = 27, start_obedience = -18, start_happiness = 119, start_love = 0, bonus_suggest = 6, \
-            relationship = "Single", kids = 0, force_random = True, base_outfit = starbuck_base)
+            stat_array = [3,4,3], skill_array = [1,1,4,2,1], sex_skill_array = [3,3,4,4], sluttiness = 27, obedience_range = [70, 85], happiness = 119, love = 0, \
+            relationship = "Single", kids = 0, force_random = True, base_outfit = starbuck_base, type = 'story')
 
         starbuck.generate_home()
-        starbuck.add_job(starbuck_job, job_known = True)
+        starbuck.change_job(starbuck_job, job_known = True)
         starbuck.home.add_person(starbuck)
         make_sex_shop_owner(starbuck)
 
@@ -2649,7 +2649,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
 init 2 python:
     def starbuck_intro_choose_title(person):
         title_tuple = []
-        for title in get_player_titles(person):
+        for title in person.get_player_titles():
             title_tuple.append([title,title])
 
         return renpy.display_menu(title_tuple, True, "Choice")
@@ -2676,11 +2676,11 @@ label starbuck_intro():
         # uses parts of the in-game introduction sequence tailored to SB
         if the_person.title is None:
             mc.name "Hello."
-            $ title_choice = get_random_title(the_person)
+            $ title_choice = the_person.get_random_title()
             $ formatted_title = the_person.create_formatted_title(title_choice)
             the_person "Let me introduce myself, I am [formatted_title]."
             $ the_person.set_title(title_choice)
-            $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+            $ the_person.set_possessive_title(the_person.get_random_possessive_title())
             "She holds her hand out to shake yours."
             the_person "And how may I address you?"
             $ title_choice = starbuck_intro_choose_title(the_person)

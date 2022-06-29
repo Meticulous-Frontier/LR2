@@ -9,7 +9,7 @@ init 1310 python:       # init after VREN personalities, but before our personal
         if person.sluttiness > 40:
             valid_titles.append("Cherry")
         if person.sluttiness > 60:
-            valid_titles.append("Whore")
+            valid_titles.append("Minx")
 
         return valid_titles
 

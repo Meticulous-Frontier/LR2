@@ -20,7 +20,7 @@ label student_dinner_enhanced(the_student, the_mom, first_time):
     "After waiting for a few minutes [the_mom.possessive_title] steps out from the kitchen, carrying a tray of roasted chicken and a bottle of wine under her arm."
     "She places the tray down, places the bottle of wine down, and sits down across from you and her daughter."
     $ scene_manager.update_actor(the_mom, display_transform = character_center_flipped, position = "sitting")
-    the_mom "Mr.[the_mom.last_name] should be home any minute now, he's probably just held up at the office."
+    the_mom "Mr. [the_mom.last_name] should be home any minute now, he's probably just held up at the office."
     mc.name "No problem, we can wait a little..."
     $ scene_manager.update_actor(the_mom, position = "walking_away")
     "You're interrupted by the phone ringing. [the_mom.possessive_title] apologizes and moves into the kitchen."

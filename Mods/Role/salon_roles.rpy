@@ -377,7 +377,10 @@ label ophelia_ex_bf_plan_pics_label(the_person):
     mc.name "What's in it for me?"
     "She groans."
     the_person "I don't know... I guess, if you take good pictures, I'll finish you off?"
-    mc.name "Hmm... you know, I wasn't doing anything interesting tonight anyway. Okay, I'll swing by."
+    if day%7 == 5 or day%7 == 6:
+        mc.name "Hmm... you know, I wasn't doing anything interesting Monday anyway. Okay, I'll swing by."
+    else:
+        mc.name "Hmm... you know, I wasn't doing anything interesting tonight anyway. Okay, I'll swing by."
     the_person "Great!"
     "You get the details from her for when she closes up and promise to swing by later."
     the_person "See you then!"

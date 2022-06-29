@@ -52,20 +52,43 @@ init 2 python:
                 setattr(persistent, generic_preference[pref][x][0], generic_preference[pref][x][1])
 
 
-    def get_random_skin():
+    @classmethod
+    def get_random_skin(cls):
         return get_random_from_weighted_list(build_generic_weighted_list("Skin Color"))
 
-    def get_random_body_type():
+    Person.get_random_skin = get_random_skin
+
+    @classmethod
+    def get_random_body_type(cls):
         return get_random_from_weighted_list(build_generic_weighted_list("Body Type"))
 
-    def get_random_tit():
-        return get_random_from_weighted_list(build_generic_weighted_list("Cup Size"))
+    Person.get_random_body_type = get_random_body_type
 
-    def get_random_pubes_style():
+    @classmethod
+    def get_random_tit(cls, min = None, max = None):
+        if not min:
+            start = 0
+        else:
+            start = cls.get_tit_index(min)
+        if not max:
+            end = len(cls._list_of_tits)
+        else:
+            end =  cls.get_tit_index(max)+1
+        return get_random_from_weighted_list(build_generic_weighted_list("Cup Size", start, end))
+
+    Person.get_random_tit = get_random_tit
+
+    @classmethod
+    def get_random_pubes_style(cls):
         return get_random_copy_from_named_list(build_generic_weighted_list("Pubes Style"), pube_styles)
 
-    def get_random_hair_style():
+    Person.get_random_pubes_style = get_random_pubes_style
+
+    @classmethod
+    def get_random_hair_style(cls):
         return get_random_copy_from_named_list(build_generic_weighted_list("Hair Style"), hair_styles)
+
+    Person.get_random_hair_style = get_random_hair_style
 
     def get_random_copy_from_named_list(weighted_list, item_list):
         name = get_random_from_weighted_list(weighted_list)
@@ -74,9 +97,18 @@ init 2 python:
             return found.get_copy()
         return None
 
-    def build_generic_weighted_list(pref):
+    def build_generic_weighted_list(pref, start = None, end = None):
         weighted_list = []
-        for x in generic_preference[pref]:
+        if start is None:
+            start = 0
+        if end is None:
+            end = len(generic_preference[pref])
+
+        pref_dict = OrderedDict(generic_preference[pref])
+        for x in pref_dict:
+            idx = pref_dict.keys().index(x)
+            if idx < start or idx > end:
+                continue
             if getattr(persistent, generic_preference[pref][x][0], generic_preference[pref][x][1]) > 0:
                 weighted_list.append([generic_preference[pref][x][0], getattr(persistent, generic_preference[pref][x][0], generic_preference[pref][x][1])])
         return weighted_list

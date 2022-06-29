@@ -64,7 +64,7 @@ label so_relationship_improve_label_enhanced():
     if the_person.relationship == "Single":
         $ the_person.change_happiness(10)
         "You get a notification on your phone."
-        $ guy_name = get_random_male_name()
+        $ guy_name = Person.get_random_male_name()
         "[the_person.title] has just changed her status on social media. She's now in a relationship with someone named [guy_name]."
         $ the_person.relationship = "Girlfriend"
         $ the_person.SO_name = guy_name

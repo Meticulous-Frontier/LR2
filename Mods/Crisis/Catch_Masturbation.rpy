@@ -104,7 +104,7 @@ label SB_caught_masturbating_crisis_label():
                 if renpy.random.randint(0,100) < success_chance: #If player does not get caught
                     "[the_person.possessive_title] is breathing heavily. It is clear from how vigorously she is touching herself that she is going to orgasm soon." #TODO finish this
                     if the_person.effective_sluttiness() < 30:   #She's not interested in MC yet...
-                        $ fantasy_guy = get_random_male_name()
+                        $ fantasy_guy = Person.get_random_male_name()
                         "[the_person.possessive_title] seems really into it. Her back is arched as her hand works its magic on her groin."
                         $ the_person.change_arousal(10)
                         the_person "Mmm, [fantasy_guy], that's it... I wanna be your slut..."

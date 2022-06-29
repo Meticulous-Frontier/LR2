@@ -54,7 +54,7 @@ label sister_ntr_crisis_action_label():
 
     $ mc.change_location(lily_bedroom)
     $ mc.location.show_background()
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
 
     if ran_num == 1: ## a scene with one man
         if the_person.sluttiness < 40:
@@ -460,9 +460,9 @@ label sister_ntr_crisis_action_label():
     if ran_num == 2: ## a scene with two men
         $ the_person.strip_outfit_to_max_sluttiness()
         $ target_position = select_position(the_person)
-        $ man_name2 = get_random_male_name()
+        $ man_name2 = Person.get_random_male_name()
         while man_name == man_name2: ## Just to make sure that names don't match or it will look stupid
-            $ man_name2 = get_random_male_name()
+            $ man_name2 = Person.get_random_male_name()
         $ the_person.change_arousal (75)
 
         if target_position == "missionary":

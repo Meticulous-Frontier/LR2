@@ -36,13 +36,13 @@ init 2 python:
         global camilla
         camilla = make_person(name = "Camilla", last_name ="Rojas", body_type = "thin_body", age = 34, face_style = "Face_2",  tits="D", height = 0.98, hair_colour="golden blonde", hair_style = braided_bun, skin="tan" , \
             personality = introvert_personality, name_color = "#228b22", dial_color = "228b22", starting_wardrobe = camilla_wardrobe, \
-            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
-            relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
+            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [4,2,2,2], sluttiness = 7, obedience_range = [70, 85], happiness = 119, love = 0, \
+            relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit, type = 'story',
             forced_opinions = [["dancing", 2, True], ["fashion", 2, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
             forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False], ["bareback sex", 2, False]])
 
         camilla.generate_home()
-        camilla.add_job(camilla_job, job_known = True)
+        camilla.change_job(camilla_job, job_known = True)
         camilla.set_schedule(downtown_bar, the_times = [3])
         camilla.home.add_person(camilla)
 
@@ -213,7 +213,7 @@ label camilla_get_a_drink_label(the_person):
     mc.name "Care to get a drink, [the_person.title]?"
     "You consider for a moment. If you offer to buy her a drink, you'll have a chance to slip a serum into it."
     $ ran_num = (mc.charisma + (the_person.effective_sluttiness() / 10)) * 10  #More willing to let you buy a drink for her as she gets sluttier
-    #$ bartender_name = get_random_male_name()
+    #$ bartender_name = Person.get_random_male_name()
     if camilla_can_go_dancing():
         $ ran_num = 100
     menu:

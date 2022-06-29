@@ -6,7 +6,7 @@ init 5 python:
 
         #Generates a list with a few (usually 4, unless there's some opinion collision, but it's not important enough to filter things out more intelligently) opinions, one of which she likes
         while len(opinion_question_list) < 3:
-            possible_opinion = get_random_opinion()
+            possible_opinion = the_person.get_random_opinion()
             if possible_opinion not in opinion_question_list:
                 opinion_question_list.append(possible_opinion)
 

@@ -199,8 +199,8 @@ label myra_focus_progression_scene_intro_scene(the_group):
     "You can now train [the_person.title]'s focus once per day."
     "[the_person.title] and [alexia.title] are getting together on Friday night. You make a note to swing by and see what they are up to..."
     $ myra.add_unique_on_room_enter_event(myra_alexia_teamup_scene_action)
-    $ alexia.set_schedule(gaming_cafe, the_days = [4], the_times = [4])
-    $ myra.set_schedule(gaming_cafe, the_days = [4], the_times = [4])
+    $ alexia.set_override_schedule(gaming_cafe, the_days = [4], the_times = [4])
+    $ myra.set_override_schedule(gaming_cafe, the_days = [4], the_times = [4])
     call advance_time from _call_advance_myra_focus_progression_scene_adv_01
     return
 

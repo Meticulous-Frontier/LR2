@@ -279,7 +279,7 @@ init 5 python:
         if not condition:
             condition = make_condition_blank()
         if position_choice is not None:
-            option_list.append(["Keep " + position_choice.verbing + " her","Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
+            option_list.append(["Keep " + position_choice.verbing + " her\n" + position_choice.build_energy_arousal_line(the_person), "Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
 
             if not position_locked and object_choice:
                 option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
@@ -637,13 +637,13 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if position_choice.requires_hard and mc.recently_orgasmed:
                         "Your post-orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
                         $ position_choice = None
-                    elif position_choice.guy_energy > mc.energy:
+                    elif position_choice.calculate_energy_cost(mc) > mc.energy:
                         if girl_in_charge:
                             "You're too exhausted to let [the_person.possessive_title] keep [position_choice.verbing] you."
                         else:
                             "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
                         $ position_choice = None
-                    elif position_choice.girl_energy > the_person.energy:
+                    elif position_choice.calculate_energy_cost(the_person) > the_person.energy:
                         #TODO: Add some differentiated dialogue depending on the position.
                         #TODO: Add "no energy" transitions where you keep fucking her anyways. (double TODO: Add a way of "breaking" her like this)
                         if not girl_in_charge:

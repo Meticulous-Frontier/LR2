@@ -293,7 +293,7 @@ init -2 python:
 init 1:
     python:
         def calculate_scale(height_factor):
-            return 0.7 - ((1 - height_factor) / 2)   # for now render at 70% size
+            return 0.7 - ((1 - height_factor) / 3)   # for now render at 70% size
 
     transform character_portrait_say():
         pos (360,-40)

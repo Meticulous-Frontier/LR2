@@ -27,16 +27,14 @@ init 2 python:
         the_choker.colour = [.15, .15, .15, 1.0]
         the_makeup = light_eye_shadow.get_copy()
         the_makeup.colour = [.0, .28, .67, 0.33]
-
-        myra_job = Job("Gaming Cafe Owner", critical_job_role, job_location = gaming_cafe, work_days = [2,3,4,5,6], work_times = [2,3])
-        myra_job.schedule.set_schedule(gaming_cafe, the_days = [5,6], the_times=[1,2,3])    #Extended hours on weekends
-
-
         myrabelle_base_outfit.add_accessory(the_lipstick)
         myrabelle_base_outfit.add_accessory(the_bracelet)
         myrabelle_base_outfit.add_accessory(the_glasses)
         myrabelle_base_outfit.add_accessory(the_choker)
         myrabelle_base_outfit.add_accessory(the_makeup)
+
+        myra_job = Job("Gaming Cafe Owner", critical_job_role, job_location = gaming_cafe, work_days = [2,3,4,5,6], work_times = [2,3])
+        myra_job.schedule.set_schedule(gaming_cafe, the_days = [5,6], the_times=[1,2,3])    #Extended hours on weekends
 
         # init myrabelle role
         myra_role = Role(role_name ="myrabelle", actions =[myra_train_focus, myra_bigger_tits_serum, myra_lewd_game_fuck], hidden = True, on_turn = gaming_cafe_owner_on_turn, on_move = None, on_day = gaming_cafe_owner_on_day)
@@ -65,11 +63,11 @@ init 2 python:
             starting_wardrobe = myrabelle_wardrobe,  # Leave None to make basic wardrobe
             stat_array = [1,3,3],                   # [charisma, int, focus]
             skill_array = [1,1,5,2,1],              # [HR, market, research, production, supply]
-            sex_array = [4,1,2,4],                  # [foreplay, oral, vagninal, anal]
-            start_sluttiness = 2,                   #
-            start_obedience = -5,                   # For some reason Vren adds 100 to this. Use negative values for disobedient girls
-            start_happiness = 115,                   #
-            start_love = 0,                         #
+            sex_skill_array = [4,1,2,4],            # [foreplay, oral, vagninal, anal]
+            sluttiness = 2,                         #
+            obedience_range = [95, 110],            #
+            happiness = 115,                        #
+            love = 0,                               #
             start_home = None,                      # Use if this girl is living with someone else
             title = None,                           # Only use if MC knows this girl from the start of the game or whenever she is generated
             possessive_title = None,                # Same as above
@@ -82,10 +80,11 @@ init 2 python:
             generate_onlyfans = None,               #
             force_random = True,                    # If False, we may grab a pre-generated person for his function from patreon rewards and overwrite her properties!
             base_outfit = myrabelle_base_outfit,     #
-            forced_opinions = [["punk", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", -1, False], ["the colour blue", 2, False], ["pants", 1, False], ["gaming", 2, False]],
+            type = 'story',
+            forced_opinions = [["punk music", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", -1, False], ["the colour blue", 2, False], ["pants", 1, False], ["gaming", 2, False]],
             forced_sexy_opinions = [["giving handjobs", 2, False], ["showing her ass", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -2, False], ["anal sex", 2, False], ["doggy style sex" ,1, False], ["being submissive", 2, False], ["getting head", 2, False]])   #random_lists.rpy for list of sexy and normal opinions
 
-        #myra.add_job(unemployed_job)
+        #myra.change_job(unemployed_job)
         myra.generate_home()                                    #Omit this if girl lives with someone else
         myra.set_schedule(myra.home, the_times = [0,1,2,3,4])   #Hide myrabelle at home until we are ready to use her
                                                                     #Any unused times, girl will wander public areas during those time slots.
@@ -374,7 +373,6 @@ label myra_gaming_cafe_opening_label():
     $ mc.business.event_triggers_dict["guild_quest_name"] = "Bud Lightyear"
     $ mc.business.event_triggers_dict["gaming_cafe_grind_day"] = day
     $ mc.business.set_event_day("gaming_cafe_open_day")
-    $ myra.set_override_schedule(None)  #Weird glitch where Myra sometimes gets assigned an override schedule somehow
     $ myra.add_unique_on_room_enter_event(myra_esports_practice)
     return
 

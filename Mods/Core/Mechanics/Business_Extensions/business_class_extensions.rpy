@@ -116,23 +116,6 @@ init -1 python:
 
     Business.add_uniform_to_company = add_uniform_to_company
 
-    def production_progress_enhanced(self,focus,int,skill,multiplier = 1.0):
-        #First, figure out how many production points we can produce total. Subtract that much supply and mark that much production down for the end of day report.
-        production_amount = __builtin__.int(((3*focus) + int + (2*skill) + 10) * (self.team_effectiveness / 100.0) * multiplier)
-        self.production_potential += production_amount
-
-        if production_amount > self.supply_count:
-            production_amount = self.supply_count #Figure out our total available production, before we split it up between tasks (which might not have 100% usage!)
-
-        for line in self.production_lines:
-            supply_used = line.add_production(production_amount) #NOTE: this is modified by the weighted use of the Line in particular. This allows for greater than 100% efficency.
-            self.supply_count += - supply_used
-            self.production_used += supply_used
-
-        return production_amount
-
-    Business.production_progress = production_progress_enhanced
-
     def get_business_stripper_wardrobe(self):
         if not hasattr(self, "_stripper_wardrobe"):
             self._stripper_wardrobe = stripclub_wardrobe
@@ -508,7 +491,7 @@ init -1 python:
         if not person in div_func[target_division][0]:
             div_func[target_division][0].append(person)
         person.add_role(college_intern_role)
-        person.add_job(student_job)
+        person.change_job(student_job)
         person.set_override_schedule(div_func[target_division][1], the_days = [5,6], the_times = [1,2])
         if add_to_location:
             university.add_person(person)
@@ -534,8 +517,6 @@ init -1 python:
             self.college_interns_market.remove(person)
         elif person in self.college_interns_HR:
             self.college_interns_HR.remove(person)
-        else:
-            pass    #Some kind of error here?
 
         person.set_override_schedule(None, the_days = [5,6], the_times = [1,2])
         person.remove_role(college_intern_role)

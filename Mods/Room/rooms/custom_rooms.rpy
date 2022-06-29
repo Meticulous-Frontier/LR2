@@ -134,7 +134,7 @@ label build_custom_rooms():
         downtown_hotel_room.privacy_level = 0
 
         #Creates a room specifically to keep girls we don't want to be accessible, so they are still updated.
-        purgatory = Room("purgatory", "Purgatory", [], None, purgatory_objects, [], [], False, [-5, -5], None, False, True, lighting_conditions = standard_indoor_lighting)
+        purgatory = Room("purgatory", "Hospital", [], None, purgatory_objects, [], [], False, [-5, -5], None, False, True, lighting_conditions = standard_indoor_lighting)
         purgatory.accessible = False
         list_of_places.append(purgatory)
         purgatory.privacy_level = 0
