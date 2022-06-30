@@ -443,10 +443,10 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
 
 label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
     mc.name "Let's get to studying. Let's go over the rules."
-    mc.name "Three questions each. For each wrong answer, you have bend over and get spanked while I ask your study pertner their question."
+    mc.name "Three questions each. For each wrong answer, you have bend over and get spanked while I ask your study partner their question."
     kaya "Got it."
     erica "Alright, let's do this!"
-    "Always competetive, [erica.possessive_title] seems excited by the challenge, while [kaya.title] seems calm but determined."
+    "Always competitive, [erica.possessive_title] seems excited by the challenge, while [kaya.title] seems calm but determined."
     mc.name "Okay, [kaya.title], here we go."
     $ previous_punished = False
     $ erica_spank_count = 0
