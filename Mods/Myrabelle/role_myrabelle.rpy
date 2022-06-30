@@ -2032,7 +2032,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     $ myra.event_triggers_dict["blowjob_train_start"] = True
     "When you step into the gaming cafe, you see [the_person.title], at her usual spot at the main desk."
     "She spots you when you walk in. She smiles so you decide to go say hello."
-    mc.name "Good day [the_person.title]"
+    mc.name "Good day [the_person.title]."
     the_person "Hey."
     "[the_person.possessive_title] looks around, then says to you in a hushed voice."
     if myra_alexia_teamup_scene.get_stage() >= 2:
