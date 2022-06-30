@@ -1017,7 +1017,7 @@ label Sarah_get_drinks_label():
     $ the_person.change_slut(2, 60)
     the_person "Ah, something caught your eye then?"
     "You quickly release her and then walk back to the table."
-    the_person "Yeah, something like that. I'm not sure what it was, but I'll let you know if I can put my finger on it..."
+    mc.name "Yeah, something like that. I'm not sure what it was, but I'll let you know if I can put my finger on it..."
     # "[the_person.title] is trying to focus on the dart board, but she keeps stealing glances back at you. Your flirting is having the desired effect on her!"
     # "She readies herself for the next round of darts."
     # $ scene_manager.hide_actor(the_person)
