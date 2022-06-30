@@ -140,7 +140,7 @@ label return_from_seminar_action_label(the_person):
             $ the_person.cum_on_tits()
             $ the_person.draw_person(position="kneeling1")
             "She closes her mouth to secure the load in her stomach while the excess cum drips down onto her tits, painting them white."
-            mc.name "There you go, [the_person.title]! That's how a decent [mc.business.name] employee should look like!"
+            mc.name "There you go, [the_person.title]! That's how a proper [mc.business.name] employee should look!"
             #"The image of [the_person.title] sitting contently in front of with her body coated in your sperm really fires you up."
             $ the_person.draw_person(position = "stand2", emotion = "happy")
             "[the_person.title] pushes herself up off the floor while you take in the spectacle of her body. Her eyes trail down her chest as drops of your sperm fall onto the carpet below."
