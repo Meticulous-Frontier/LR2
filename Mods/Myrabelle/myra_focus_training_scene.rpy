@@ -373,7 +373,7 @@ label myra_focus_trans_scene_3(the_group):
 
     "[the_person.title] rolls her eyes, but is listening to you so far."
     the_person "What did you have in mind this time?"
-    mc.name "I want you to try gving me a lapdance while you play. Having to split your attention between two things will be a major challenge."
+    mc.name "I want you to try gving me a lap dance while you play. Having to split your attention between two things will be a major challenge."
     "[the_person.possessive_title] just laughs."
     the_person "And let me guess. We should both be naked."
     mc.name "Of course. How distracting do you think a pair of trousers are?"
@@ -397,7 +397,7 @@ label myra_focus_trans_scene_4(the_group):
     "You walk over to the PC where [the_person.title] is sitting. She is already naked."
     $ the_person.draw_person(position = "sitting")
     "You set her energy drink down next to her keyboard."
-    "You've finally pushed her to giving you lapdances while she plays games. You are thoroughly enjoying each and every training session."
+    "You've finally pushed her to giving you lap dances while she plays games. You are thoroughly enjoying each and every training session."
     the_person "Hey coach, I got an idea."
     mc.name "Oh?."
     the_person "I've been thinking about it, you know, how I can take my focus to the next level."
@@ -633,7 +633,7 @@ label myra_focus_progression_scene_2(the_group, scene_transition = False):  #sit
         "She clearly has trouble focusing right now. You should try and get her focus higher before you try and take things further with her."
     return
 
-label myra_focus_progression_scene_3(the_group, scene_transition = False):  #assjob / lapdance
+label myra_focus_progression_scene_3(the_group, scene_transition = False):  #assjob / lap dance
     $ the_person = the_group[0]
     $ myra_score = 0
     $ enemy_score = 0
@@ -1105,7 +1105,7 @@ label myra_focus_med_distraction(the_person):
     elif myra_focus_progression_scene.get_stage() == 3: #assjob
         if mc.arousal < 30:
             "You put your hands on her hips as [the_person.title] grinds up against you, guiding her at the pace you want."
-            "Her ass feels warm and soft as gives you a lapdance while she plays."
+            "Her ass feels warm and soft as she gives you a lap dance while playing."
             "You don't want to make things too easy for her to focus, so you let go of her hips with one hand and reach up and grope her tits."
             the_person "Mmm, that feels good..."
             "[the_person.possessive_title] squeals a bit when you give it a pinch. She loses her focus for just a moment from the surprise."

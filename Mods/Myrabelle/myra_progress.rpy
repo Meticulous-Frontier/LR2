@@ -138,7 +138,7 @@ init 10 python:
             elif myra_focus_progression_scene.get_stage() == 2:
                 other_info_list.append("You distract her by fingering her during training. Raise her sluttiness to take disitractions further.")
             elif myra_focus_progression_scene.get_stage() == 3:
-                other_info_list.append("You distract her by getting a lapdance during training. Raise her sluttiness to take disitractions further.")
+                other_info_list.append("You distract her by getting a lap dance during training. Raise her sluttiness to take disitractions further.")
             elif myra_focus_progression_scene.get_stage() == 4:
                 other_info_list.append("You distract her by fucking her ass during training.")
         if myra_can_distribute_serum():
