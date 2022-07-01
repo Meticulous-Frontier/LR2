@@ -47,10 +47,15 @@ init -1 python:
 
         # requires the existence of a scene_manager with both actors
         def update_scene(self, person_one, person_two):
+            #print("Render: " + self.name + (" (Swapped)" if girl_swap_pos else ""))
             if girl_swap_pos:
+                #print(person_two.name + " at: " + self.position_one_tag + ", z-order: " + str(self.p1_z_order))
+                #print(person_one.name + " at: " + self.position_two_tag + ", z-order: " + str(self.p2_z_order))
                 scene_manager.update_actor(person_two, position = self.position_one_tag, display_transform = self.p1_transform, z_order = self.p1_z_order)
                 scene_manager.update_actor(person_one, position = self.position_two_tag, display_transform = self.p2_transform, z_order = self.p2_z_order)
             else:
+                #print(person_one.name + " at: " + self.position_one_tag + ", z-order: " + str(self.p1_z_order))
+                #print(person_two.name + " at: " + self.position_two_tag + ", z-order: " + str(self.p2_z_order))
                 scene_manager.update_actor(person_one, position = self.position_one_tag, display_transform = self.p1_transform, z_order = self.p1_z_order)
                 scene_manager.update_actor(person_two, position = self.position_two_tag, display_transform = self.p2_transform, z_order = self.p2_z_order)
             scene_manager.draw_scene()
@@ -353,10 +358,10 @@ init 5 python:
         option_list.append (["Finished", "Leave"])
         return option_list
 
-    def update_threesome_action_description(position, girl_swap_pos):
+    def update_threesome_action_description(position, swapped):
         for mc_pos in position.mc_position:
             if mc_pos.action_description:
-                if girl_swap_pos:
+                if swapped:
                     mc_pos.description = mc_pos.action_description.replace("{0}", "one" if mc_pos.default_action_person == "two" else "two")
                 else:
                     mc_pos.description = mc_pos.action_description.replace("{0}", "two" if mc_pos.default_action_person == "two" else "one")
@@ -366,12 +371,15 @@ init 5 python:
         for threeway in list_of_threesomes:
             if girl_one_choice == threeway.position_one_tag and girl_two_choice == threeway.position_two_tag:
                 position_choice = threeway
-                girl_swap_pos = False
+                swapped = False
             if girl_one_choice == threeway.position_two_tag and girl_two_choice == threeway.position_one_tag:
                 position_choice = threeway
-                girl_swap_pos = True
-        update_threesome_action_description(position_choice, girl_swap_pos)
-        return (position_choice, girl_swap_pos)
+                swapped = True
+
+        #print ("Chosen Position: " + threeway.name + (" (Swapped)" if girl_swap_pos else ""))
+
+        update_threesome_action_description(position_choice, swapped)
+        return (position_choice, swapped)
 
     def valid_threesome_position(position):
         return any([x for x in list_of_threesomes if position in [x.position_one_tag, x.position_two_tag]])

@@ -223,6 +223,7 @@ init -2 python:
         def draw_scene(self, exclude_list = []):
             self.draw_info_ui()
             for actor in sorted([x for x in self.actors if x.visible and x not in exclude_list], key = lambda x: x.z_order):
+                #print("Draw: " + actor.person.name + " at: " + str(actor.z_order))
                 actor.draw_actor()
 
         # update each actor and draw scene
@@ -284,7 +285,7 @@ init -2 python:
                 self._person = None
 
         def draw_actor(self):
-            self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, lighting = self.lighting, display_transform = self.display_transform, wipe_scene = False)
+            self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, lighting = self.lighting, display_transform = self.display_transform, display_zorder = self.z_order, wipe_scene = False)
 
 
 ##########################################
