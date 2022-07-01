@@ -2334,14 +2334,14 @@ label myra_blowjob_training_final_label(the_person):
     "It has been a while since your last training session with [the_person.possessive_title]."
     "You step into the gaming cafe. You look to the counter and see her there."
     $ the_person.draw_person()
-    "You think about how, just a short time ago, you met the independant gamer girl. Now, you've got her trained into being your personal cock sleeve."
+    "You think about how, just a short time ago, you met the independent gamer girl. Now, you've got her trained into being your personal cock sleeve."
     $ mc.change_locked_clarity(20)
     "Last time you trained her, you made sure she knew what the expectations were. It's time to see if she is ready."
     "You walk over to the counter."
     the_person "Hey [the_person.mc_title]. It's good to see you. Anything I can do for you today?"
     mc.name "You could say that."
     "[the_person.possessive_title] raises an eyebrow. She can tell you have something naughty in mind."
-    mc.name "I'm here to check on your progress. I want to see if you can me the, how did you put it? The best blowjob I've ever had?"
+    mc.name "I'm here to check on your progress. I want to see if you can give me the, how did you put it? The best blowjob I've ever had?"
     the_person "Fuck yeah I'm ready. Let's head to the back..."
     $ myra.event_triggers_dict["blowjob_train_finish"] = True
 
@@ -2371,7 +2371,7 @@ label myra_blowjob_training_final_label(the_person):
     "She looks up at you, you can see the determination in her eyes."
     $ the_person.change_obedience(5)
     "Holding her by the hair, you pull your hips back and then thrust down her throat. The only sound is some slurping as she throats you easily."
-    "[the_person.title] looks up at you. A mischevious smile is on her face."
+    "[the_person.title] looks up at you. A mischievous smile is on her face."
     "You pull her off for a second and let her get a breath. It is time to see what this slut can do."
     $ mc.change_arousal(15)
     $ mc.change_locked_clarity(50)
