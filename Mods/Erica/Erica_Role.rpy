@@ -247,8 +247,7 @@ init -2 python:
         if mc.business.is_open_for_business():
             if mc.business.hr_director and mc.is_at_work():
                 if len(erica_get_yoga_class_list()) >= 4:
-                    if renpy.random.randint(0,100) < 20:
-                        return True
+                    return True
         return False
 
     def erica_money_problems_yoga_start_requirement(person):
