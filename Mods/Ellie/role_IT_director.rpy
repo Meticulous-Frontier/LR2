@@ -54,3 +54,56 @@ label IT_project_complete_label():
     "When you finish reviewing her projects, [the_person.title] gets back to work."
 
     return
+
+label IT_director_nanobot_intro_label(the_person):
+    "You approach [the_person.possessive_title] to talk to her about your nanobot program."
+    $ the_person.draw_person()
+    mc.name "Hello [the_person.title]."
+    the_person "Hey [the_person.mc_title]. Need something?"
+    mc.name "I do. Our research department has hit a bit of a dead end with the nanobot development project, and I was wondering if you could lend your expertise."
+    the_person "I suppose. Didn't we already discuss the projects I could work on to improve your nanobots?"
+    mc.name "Yes, but I have ideas for completely new programs I would like to have designed."
+    the_person "Ah, I see."
+    mc.name "Can we go to my office?"
+    the_person "Sure."
+    $ ceo_office.show_background()
+    "You walk with [the_person.possessive_title] to your office. She sits down across from you."
+    $ the_person.draw_person()
+    if fetish_serum_unlock_count() == 1:
+        mc.name "Right, well as you know, we have a basic nanobot program, designed to increase a female's propensity for sexual activities."
+        the_person "errmm... right..."
+        mc.name "I have some ideas for programs that are a bit more... specific..."
+        "You explain to [the_person.possessive_title] your ideas for four new nanobot programs."
+        $ the_person.change_slut(1, 40)
+    elif fetish_serum_unlock_count() < 4:
+        mc.name "Right. As you know, we have a few basic programs for our nanobots, but I have ideas for more."
+        "You explain to [the_person.possessive_title] your ideas for new nanobot programs."
+        $ the_person.change_slut(1, 40)
+    elif fetish_serum_unlock_count() == 4:
+        mc.name "Right. As you know, we have a few programs for our nanobots, but I have an idea for one more."
+        "You explain to [the_person.possessive_title] your idea for a new nanobot program."
+        $ the_person.change_slut(1, 40)
+    else:
+        mc.name "Right. As you know, we have several programs for our nanobots, but we still know so little about how they actually effect people."
+    if fetish_serum_unlock_count() < 5:
+        "When you finish, her cheeks are flushed from embarassment."
+        the_person "I... I don't know... you're talking about..."
+        mc.name "I know. This is a little outside of your comfort zone, but as my only IT employee, I need you to step up and help out with it."
+        "She seems unconvinced for now, but relents."
+        the_person "I suppose I could do that."
+        $ the_person.change_obedience(3)
+        mc.name "Thank you. In addition, we know so little about how they actually effect people."
+    mc.name "I was hoping you would be willing to work with Research so we can learn more about them."
+    mc.name "Nothing crazy, just help monitor their effects as we run tests with them."
+    the_person "I suppose..."
+    mc.name "Great!"
+    $ the_person.draw_person()
+    "You both stand up."
+    the_person "I'll add those programs to the list of projects I can work on then... just let me know when you want me to work on them."
+    mc.name "Certainly."
+    $ the_person.draw_person(position = "walking_away")
+    $ mc.business.event_triggers_dict["fetish_to_IT"] = True
+    "[the_person.possessive_title] turns and walks out of your office."
+    "From now on, you can work with her towards perfect your nanobot programs."
+    "In addition, you can talk to her about the programs as you begin to master them."
+    return

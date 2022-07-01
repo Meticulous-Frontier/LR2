@@ -68,7 +68,7 @@ init -2 python: #Requirement Functions
 
     def ellie_start_intro_note_requirement():
         #return False
-        if fetish_serum_unlock_count() >= 2 and get_fetish_basic_serum().mastery_level > 3.0 and mc.business.head_researcher:
+        if fetish_serum_unlock_count() >= 1 and get_fetish_basic_serum().mastery_level > 3.0 and mc.business.head_researcher:
             if time_of_day == 2 and day%7 == 2:
                 return True
         return False

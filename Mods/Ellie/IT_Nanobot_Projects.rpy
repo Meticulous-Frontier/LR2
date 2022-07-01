@@ -85,6 +85,22 @@ init 1 python:
             FETISH_EXHIBITION_OPINION_LIST.remove("cheating on men")
         return
 
+    def anal_program_unlock_project_on_apply():
+        fetish_unlock_anal_serum()
+        return
+
+    def breeder_program_unlock_project_on_apply():
+        fetish_unlock_breeding_serum()
+        return
+
+    def cum_program_unlock_project_on_apply():
+        fetish_unlock_cum_serum()
+        return
+
+    def exhibition_program_unlock_project_on_apply():
+        fetish_unlock_exhibition_serum()
+        return
+
 init 1 python:
     ###Project requirement functions###
     def anal_incest_project_requirement():
@@ -280,6 +296,78 @@ init 1 python:
 
 
     nanobot_IT_project_list.sort(key = IT_project_sort)
+
+    anal_unlock_project = IT_Project(name = "Anal Program",
+        desc = "A new nanobot program that encourages anal stimulation.",
+        cost = 0,
+        requirement = None,
+        toggleable = False,
+        on_buy_function = None,
+        extra_arguments = None,
+        on_apply_function = anal_program_unlock_project_on_apply,
+        on_remove_function = None,
+        on_turn_function = None,
+        on_move_function = None,
+        on_day_function = None,
+        dependant_policies = None,
+        project_progress = 0,
+        project_cost = 100,
+        category = "anal",
+        tier = 0)
+
+    breeder_unlock_project = IT_Project(name = "Breeding Program",
+        desc = "A new nanobot program that encourages breeding behaviors.",
+        cost = 0,
+        requirement = None,
+        toggleable = False,
+        on_buy_function = None,
+        extra_arguments = None,
+        on_apply_function = breeder_program_unlock_project_on_apply,
+        on_remove_function = None,
+        on_turn_function = None,
+        on_move_function = None,
+        on_day_function = None,
+        dependant_policies = None,
+        project_progress = 0,
+        project_cost = 100,
+        category = "breeder",
+        tier = 0)
+
+    cum_unlock_project = IT_Project(name = "Cum Program",
+        desc = "A new nanobot program that encourages cum exposure.",
+        cost = 0,
+        requirement = None,
+        toggleable = False,
+        on_buy_function = None,
+        extra_arguments = None,
+        on_apply_function = cum_program_unlock_project_on_apply,
+        on_remove_function = None,
+        on_turn_function = None,
+        on_move_function = None,
+        on_day_function = None,
+        dependant_policies = None,
+        project_progress = 0,
+        project_cost = 100,
+        category = "cum",
+        tier = 0)
+
+    exhibition_unlock_project = IT_Project(name = "Exhibitionism Program",
+        desc = "A new nanobot program that encourages exhibitionism.",
+        cost = 0,
+        requirement = None,
+        toggleable = False,
+        on_buy_function = None,
+        extra_arguments = None,
+        on_apply_function = exhibition_program_unlock_project_on_apply,
+        on_remove_function = None,
+        on_turn_function = None,
+        on_move_function = None,
+        on_day_function = None,
+        dependant_policies = None,
+        project_progress = 0,
+        project_cost = 100,
+        category = "exhibition",
+        tier = 0)
 
     def IT_get_basic_bot_projects():
         return list(filter(lambda x: x.category == "basic", nanobot_IT_project_list))

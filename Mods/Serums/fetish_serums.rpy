@@ -44,7 +44,7 @@ init -1 python:
                 return False
 
         # chance to start the anal fetish quest
-        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person):
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
             return False
 
         if person is lily:
@@ -118,7 +118,7 @@ init -1 python:
                 return False
 
         # chance to start the anal fetish quest
-        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person):
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
             return False
 
         if person is mom:
@@ -192,7 +192,7 @@ init -1 python:
                 return False
 
         # chance to start the cum fetish quest
-        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person):
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
             return False
 
         if person is lily:
@@ -248,7 +248,7 @@ init -1 python:
             or person.sluttiness < 70:
             return False
 
-        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person):
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
             return False
 
         return False #None of them are written yet

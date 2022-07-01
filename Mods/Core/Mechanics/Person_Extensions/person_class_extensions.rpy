@@ -2622,6 +2622,11 @@ init -1 python:
 
     Person.is_in_trance = is_in_trance
 
+    def is_in_very_heavy_trance(self):
+        return self.has_role([very_heavy_trance_role])
+
+    Person.is_in_very_heavy_trance = is_in_very_heavy_trance
+
     def is_free_use(self):  #Use this function to determine if the girl is very slutty and basically down for anything.
         if self.sluttiness < 80:
             return False

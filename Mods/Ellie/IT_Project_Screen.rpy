@@ -117,6 +117,8 @@ init 5:
                         if fetish_breeding_serum_is_unlocked():
                             for proj in IT_get_breeder_bot_projects():
                                 use screen_IT_project_button(proj)
+                        elif nanobot_program_is_IT():
+                            use screen_IT_project_button(breeder_unlock_project)
                         else:
                             text "{color=#ff0000} Not Unlocked {/color}"  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5
 
@@ -131,6 +133,8 @@ init 5:
                         if fetish_anal_serum_is_unlocked():
                             for proj in IT_get_anal_bot_projects():
                                 use screen_IT_project_button(proj)
+                        elif nanobot_program_is_IT():
+                            use screen_IT_project_button(anal_unlock_project)
                         else:
                             text "{color=#ff0000} Not Unlocked {/color}"  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5
 
@@ -144,6 +148,8 @@ init 5:
                         if fetish_cum_serum_is_unlocked():
                             for proj in IT_get_cum_bot_projects():
                                 use screen_IT_project_button(proj)
+                        elif nanobot_program_is_IT():
+                            use screen_IT_project_button(cum_unlock_project)
                         else:
                             text "{color=#ff0000} Not Unlocked {/color}"  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5
 
@@ -157,6 +163,8 @@ init 5:
                         if fetish_exhibition_serum_is_unlocked():
                             for proj in IT_get_exhibition_bot_projects():
                                 use screen_IT_project_button(proj)
+                        elif nanobot_program_is_IT():
+                            use screen_IT_project_button(exhibition_unlock_project)
                         else:
                             text "{color=#ff0000} Not Unlocked {/color}"  style "menu_text_title_style" size 18 xanchor 0.5 xalign 0.5
 

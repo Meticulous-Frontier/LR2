@@ -1,6 +1,6 @@
 init 2 python:
     def fetish_serum_quest_intro_requirement():
-        if day > 40 and time_of_day == 2 and mc.business.research_tier >= 2:
+        if day > 14 and time_of_day == 2 and mc.business.research_tier >= 1:
             if mc.is_at_work() and mc.business.is_open_for_business() and mc.business.head_researcher:
                 return True
         return False
@@ -11,6 +11,8 @@ init 2 python:
         return False
 
     def fetish_serum_discuss_requirement(the_person):
+        if nanobot_program_is_IT():
+            return False
         if mc.is_at_work() and mc.business.is_open_for_business() and fetish_serum_unlock_count() > 0:
             return True
         return False
@@ -264,6 +266,13 @@ label fetish_serum_quest_intro_followup_label():
     return
 
 label fetish_serum_discuss_label(the_person):
+    if ellie.is_employee():
+        the_person "Unfortunately, my contact has completely ghosted me, and to be honest, I feel completely out of my league with this stuff."
+        the_person "Didn't you hire [ellie.name]? That IT girl? Maybe you should talk to her about the nanobots."
+        mc.name "That's a good idea. I think I'll do that."
+        "From now on, all nanobot progression will be made through your IT director!"
+
+        return
     if get_fetish_basic_serum().mastery_level < 5.0:
         the_person "Unfortunately, I feel like we still don't know enough about the nanobots to consider messing with their programming."
         mc.name "I understand. I'll make it a priority to observe their results more closely."
@@ -491,6 +500,9 @@ label fetish_serum_self_code_menu(the_person):
 
 label fetish_serum_exhibition_label():
     $ the_person = mc.business.head_researcher
+    if ellie.is_employee():
+        call fetish_serum_contact_ghost(the_person) from _fetish_serum_quest_reroute_01
+        return
     $ fetish_unlock_exhibition_serum()
     $ mc.business.event_triggers_dict["fetish_serum_research_active"] = False
     if mc.location == mc.business.r_div:
@@ -516,6 +528,9 @@ label fetish_serum_exhibition_label():
 
 label fetish_serum_anal_label():
     $ the_person = mc.business.head_researcher
+    if ellie.is_employee():
+        call fetish_serum_contact_ghost(the_person) from _fetish_serum_quest_reroute_02
+        return
     $ fetish_unlock_anal_serum()
     $ mc.business.event_triggers_dict["fetish_serum_research_active"] = False
     if mc.location == mc.business.r_div:
@@ -541,6 +556,9 @@ label fetish_serum_anal_label():
 
 label fetish_serum_cum_label():
     $ the_person = mc.business.head_researcher
+    if ellie.is_employee():
+        call fetish_serum_contact_ghost(the_person) from _fetish_serum_quest_reroute_03
+        return
     $ fetish_unlock_cum_serum()
     $ mc.business.event_triggers_dict["fetish_serum_research_active"] = False
     if mc.location == mc.business.r_div:
@@ -566,6 +584,9 @@ label fetish_serum_cum_label():
 
 label fetish_serum_breeding_label():
     $ the_person = mc.business.head_researcher
+    if ellie.is_employee():
+        call fetish_serum_contact_ghost(the_person) from _fetish_serum_quest_reroute_04
+        return
     $ fetish_unlock_breeding_serum()
     $ mc.business.event_triggers_dict["fetish_serum_research_active"] = False
     if mc.location == mc.business.r_div:
@@ -858,3 +879,40 @@ label fetish_serum_discuss_progress_label(the_person):
         else:
             the_person "I think we are at the limit of how far we can take the program on Reproduction Proclivity Nanobots."
     return
+
+label fetish_serum_contact_ghost(the_person):
+    if mc.location == mc.business.r_div:
+        "[the_person.title] walks in the door of the lab. She seems upset."
+    else:
+        $ mc.start_text_convo(the_person)
+        the_person "Hey, I need to see you in the lab"
+        mc.name "Be there in a few!"
+        $ mc.end_text_convo()
+        "You hurry down to the lab."
+        $ mc.change_location(mc.business.r_div)
+        $ mc.location.show_background()
+    $ the_person.draw_person()
+    the_person "You're not going to believe it."
+    mc.name "What?"
+    the_person "Remember my contact? The one that we got the nanobots from?"
+    mc.name "Yeah..."
+    the_person "He ghosted. And not just me, its like he doesn't exist anymore!"
+    mc.name "What?"
+    the_person "That's right. I can't find information about him anywhere."
+    mc.name "And the money for the program?"
+    the_person "Gone with him, I'm afraid."
+    "Damn. You knew that was a risk taking back channels to contact this guy though, so you suppose you shouldn't be too surprised."
+    "Still... you do have a new hire that is familiar with the technology..."
+    the_person "I'm sorry [the_person.mc_title]... I..."
+    mc.name "Don't worry. We'll be fine without him."
+    the_person "I... okay... I'll get back to work."
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] turns to get back to work. You should talk to [ellie.possessive_title] about the nanobots..."
+    return
+
+
+init 5 python:
+    def nanobot_program_is_IT():
+        if mc.business.event_triggers_dict.get("fetish_to_IT", False):
+            return True
+        return False
