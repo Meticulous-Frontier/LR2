@@ -2,7 +2,7 @@
 
 
 init -1 python:
-    def condition_blowjob_training_reward_req(the_person, the_position, the_object, report_log, the_condition):
+    def condition_blowjob_training_reward_req(self, the_person, report_log):
         if report_log.get("guy orgasms", 0) > 0:   #She finished off MC
             return True
         return False
@@ -66,7 +66,7 @@ label condition_blowjob_training_post_label(the_person, the_position, the_object
     $ the_person.change_obedience(1)
     return
 
-label condition_blowjob_training_reward_label(the_person, the_position, the_object, report_log, the_condition):
+label condition_blowjob_training_reward_label(the_person, report_log, the_condition):
     $ the_person.increase_sex_skill("Oral")
     $ the_person.change_obedience(10)
     "[the_person.possessive_title] seems pleased she managed to get you off during your training."

@@ -1,8 +1,8 @@
 #Use this for fucking an employee while working.
 
 init -1 python:
-    def condition_computer_work_reward_req(the_person, the_position, the_object, report_log, the_condition):
-        if report_log.get("girl orgasms", 0) > 0 and the_condition.condition_vars[0]:   #She orgasmed AND concentrated on her work
+    def condition_computer_work_reward_req(self, the_person, report_log):
+        if report_log.get("girl orgasms", 0) > 0 and self.condition_vars[0]:   #She orgasmed AND concentrated on her work
             return True
         return False
 
@@ -53,7 +53,7 @@ label condition_computer_work_post_label(the_person, the_position, the_object, r
     $ the_condition.condition_vars[1] += (report_log.get("girl orgasms", 0) * 40) + 25
     return
 
-label condition_computer_work_reward_label(the_person, the_position, the_object, report_log, the_condition):
+label condition_computer_work_reward_label(the_person, report_log, the_condition):
     $ the_person.draw_person(position = "standing_doggy")
     "[the_person.title] is still working on her computer, despite her orgasm."
     mc.name "Good work."
