@@ -46,9 +46,9 @@ init 5 python:
         global police_chief
         police_chief = make_person(name = "Christine", last_name = "Lavardin", age = 34, body_type = "thin_body", face_style = "Face_4", tits = "C", height = 0.91, \
             hair_colour = ["knight red", [.745, .117, .235, 1]], hair_style = short_hair, skin="white", eyes = "emerald", name_color = "#fcf7de", dial_color = "#fcf7de",  \
-            stat_array = [4,6,2], skill_array = [2,1,4,1,2], sex_array = [0,1,1,4], start_sluttiness = -20, start_obedience = -40, start_happiness = 89, start_love = 0, \
+            stat_array = [4,6,2], skill_array = [2,1,4,1,2], sex_skill_array = [0,1,1,4], sluttiness = -20, obedience_range = [50, 70], happiness = 89, love = 0, \
             generate_insta = False, generate_dikdok = False, generate_onlyfans = False, relationship = "Single", job = police_job, \
-            kids = 0, force_random = True, starting_wardrobe = police_chief_wardrobe, personality = police_chief_personality,
+            kids = 0, force_random = True, starting_wardrobe = police_chief_wardrobe, personality = police_chief_personality, type = 'story',
             forced_opinions = [
                 ["pants", 2, False],
                 ["the colour blue", 2, True],
@@ -85,11 +85,11 @@ label police_chief_introduction(the_person):
     $ the_person.set_title("???")
     the_person "Yes citizen, how can I be of service?"
     mc.name "Ah yes, how may I address you?"
-    $ title_choice = get_random_title(the_person)
+    $ title_choice = the_person.get_random_title()
     $ formatted_title = the_person.create_formatted_title(title_choice)
     the_person "Well then, you can address me as [formatted_title]."
     $ the_person.set_title(title_choice)
-    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+    $ the_person.set_possessive_title(the_person.get_random_possessive_title())
     "[the_person.possessive_title] looks you straight in the eyes."
     the_person "What's your name, citizen?"
     return

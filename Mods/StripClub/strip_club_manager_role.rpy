@@ -71,7 +71,7 @@ init 3303 python:
         if person.love <= 0:
             person.love = 5
         person.change_stats(happiness = 10, obedience = 5, love = 5)
-        person.add_job(stripclub_manager_job, job_known = True)
+        person.change_job(stripclub_manager_job, job_known = True)
         person.stripper_salary = __builtin__.round(person.stripper_salary * 1.1, 1)
 
         manager_role_status_acquisition(person)
@@ -82,7 +82,7 @@ init 3303 python:
         return
 
     def promote_strip_club_manager_to_mistress(person):
-        person.add_job(stripclub_mistress_job, job_known = True)
+        person.change_job(stripclub_mistress_job, job_known = True)
         person.stripper_salary = __builtin__.round(person.stripper_salary * 1.1, 1)
         return
 
@@ -119,7 +119,7 @@ label manager_role_remove_label(the_person):
     mc.name "I know, that's why I'm still keeping you with me here, just as a stripper."
     $ the_person.change_stats(happiness = -10, obedience = 2)
     # this might increase the number of active strippers to 6
-    $ the_person.add_job(stripclub_stripper_job, job_known = True)
+    $ the_person.change_job(stripclub_stripper_job, job_known = True)
     return
 
 label promote_to_mistress_label(the_person):
@@ -150,7 +150,7 @@ label mistress_role_remove_label(the_person):
     $ the_person.draw_person(emotion = "sad")
     the_person "I understand [the_person.mc_title], I can assure you I did my best..."
     mc.name "I know, that's why I'll keep you with me here, just as a stripper."
-    $ the_person.add_job(stripclub_stripper_job, job_known = True)
+    $ the_person.change_job(stripclub_stripper_job, job_known = True)
     return
 
 label mistress_hunt_for_me_label(the_person):

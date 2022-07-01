@@ -9,12 +9,12 @@ init 3302 python:
         return False
 
     def strip_club_bought_by_someone_else():
-        strip_club_owner = get_random_male_name()
+        strip_club_owner = Person.get_random_male_name()
         strip_club.background_image = Image(get_file_handle("Club_Background.png")) # Set up the original background
         strip_club.name = strip_club_owner + "'s Gentlemen's Club"
         strip_club.formal_name = strip_club_owner + "'s Gentlemen's Club"
         strip_club.add_action(strip_club_show_action) # Restore 'Watch a show' button
-        for person in stripclub_strippers: # rehire strippers
+        for person in [x for x in stripclub_strippers if x not in unique_character_list]: # rehire strippers
             person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
         set_strip_club_foreclosed_stage(-1) # end story line
         starbuck.remove_on_talk_event("talk_again_buying_club_starbuck_label")

@@ -174,7 +174,7 @@ label casual_hotwife_get_a_drink_label(the_person):
         the_person "Hey [the_person.mc_title]! A drink sounds great!"
     "You consider for a moment. If you offer to buy her a drink, you'll have a chance to slip a serum into it."
     $ ran_num = (mc.charisma + (the_person.effective_sluttiness() / 10)) * 10  #More willing to let you buy a drink for her as she gets sluttier
-    #$ bartender_name = get_random_male_name()
+    #$ bartender_name = Person.get_random_male_name()
     menu:
         "Offer to Buy\n{color=#ff0000}{size=18}Success Chance: [ran_num]%%{/size}{/color}":
             mc.name "Hey, let me buy you a drink."

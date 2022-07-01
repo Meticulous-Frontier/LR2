@@ -14,7 +14,7 @@ init 1400 python:
     def build_salon_manger_title_choice_menu(person):
         title_tuple = []
         title_choice = None
-        for title in get_player_titles(person):
+        for title in person.get_player_titles():
             title_tuple.append([title,title])
         return renpy.display_menu(title_tuple, True, "Choice")
 
@@ -36,11 +36,11 @@ label salon_manager_greetings(the_person):
         # uses parts of the in-game introduction sequence tailored to SB
         if the_person.title is None:
             mc.name "Hey, there."
-            $ title_choice = get_random_title(the_person)
+            $ title_choice = the_person.get_random_title()
             $ formatted_title = the_person.create_formatted_title(title_choice)
             the_person "I am [formatted_title], top stylist and owner."
             $ the_person.set_title(title_choice)
-            $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+            $ the_person.set_possessive_title(the_person.get_random_possessive_title())
             "She holds her hand out to shake yours."
             the_person "And how may I call you?"
             $ title_choice = build_salon_manger_title_choice_menu(the_person)

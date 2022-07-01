@@ -38,8 +38,8 @@ init 2 python:
         global sakari
         sakari = make_person(name = "Sakari", last_name ="Greene", age = 42, body_type = "thin_body", face_style = "Face_14",  tits="C", height = 0.92, hair_colour=["bald", [0.414, 0.305, 0.258,0]], hair_style = short_hair, skin="tan" , \
             eyes = "brown", personality = sakari_personality, name_color = "#228b22", dial_color = "228b22" , job = unemployed_job, \
-            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = 18, start_happiness = 88, start_love = 0, \
-            relationship = "Single", kids = 1, force_random = True, base_outfit = sakari_base_outfit,
+            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [4,2,2,2], sluttiness = 7, obedience_range = [100, 120], happiness = 88, love = 0, \
+            relationship = "Single", kids = 1, force_random = True, base_outfit = sakari_base_outfit, type = 'story',
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
             forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 1, False], ["drinking cum", -2, False], ["giving blowjobs", -1, False], ["creampies", 2, False]])
 
@@ -145,7 +145,7 @@ label sakari_intro_label(the_person):
     "An employee walks over, clearly looking for [the_person.title]."
     the_person "Ah, I need to get back to work. if you'll excuse me."
     mc.name "Certainly."
-    $ the_person.add_job(clothing_cashier_job, job_known = True)
+    $ the_person.change_job(clothing_cashier_job, job_known = True)
     $ the_person.set_schedule(None, the_times = [1,2,3]) # Free roam
     $ the_person.add_unique_on_room_enter_event(sakari_coffee_break)
     $ clear_scene()

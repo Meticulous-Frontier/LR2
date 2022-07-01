@@ -127,6 +127,7 @@ label kaya_erica_teamup_intro_scene(the_group):
     $ kaya.add_unique_on_talk_event(kaya_uni_scholarship_intro)
     $ kaya.event_triggers_dict["studies_with_erica"] = True
     "It is late, and you start your walk home."
+    $ downtown.show_background()
     "This arrangement between the two college girls could work to your advantage. The study rooms at the university seem fairly private..."
     "This could be an opportunity for you to make progress with the two girls, with opportunities to give them your serums."
     $ mc.change_location(bedroom)
@@ -310,7 +311,7 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
     mc.name "Three questions each. For each wrong answer, you have to remove an INTERESTING piece of clothing. No shoes or bracelets."
     kaya "Got it."
     erica "Alright, let's do this!"
-    "Always competetive, [erica.possessive_title] seems excited by the challenge, while [kaya.title] seems calm but determined."
+    "Always competitive, [erica.possessive_title] seems excited by the challenge, while [kaya.title] seems calm but determined."
     mc.name "Okay, [kaya.title], here we go."
     call kaya_erica_teamup_question_label(kaya) from _kaya_erica_teamup_strip_question_01
     if not _return:
@@ -443,10 +444,10 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
 
 label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
     mc.name "Let's get to studying. Let's go over the rules."
-    mc.name "Three questions each. For each wrong answer, you have bend over and get spanked while I ask your study pertner their question."
+    mc.name "Three questions each. For each wrong answer, you have bend over and get spanked while I ask your study partner their question."
     kaya "Got it."
     erica "Alright, let's do this!"
-    "Always competetive, [erica.possessive_title] seems excited by the challenge, while [kaya.title] seems calm but determined."
+    "Always competitive, [erica.possessive_title] seems excited by the challenge, while [kaya.title] seems calm but determined."
     mc.name "Okay, [kaya.title], here we go."
     $ previous_punished = False
     $ erica_spank_count = 0
@@ -634,7 +635,7 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
     mc.name "Three questions each. For each wrong answer, you get on your knees and service me for at least one minute while I ask your partner their question."
     kaya "Got it."
     erica "Alright, let's do this!"
-    "Always competetive, [erica.possessive_title] seems excited by the challenge, while [kaya.title] seems calm but determined."
+    "Always competitive, [erica.possessive_title] seems excited by the challenge, while [kaya.title] seems calm but determined."
     "You unzip your pants and pull out your cock, already hard from the anticipation."
     mc.name "Okay, [kaya.title], here we go."
     $ previous_punished = False
@@ -871,7 +872,7 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
     mc.name "If it is two and two or if you got more wrong than right, you are both mine. Ready?"
     kaya "Got it."
     erica "Alright, let's do this!"
-    "Always competetive, [erica.possessive_title] seems excited by the challenge, while [kaya.title] seems calm but determined."
+    "Always competitive, [erica.possessive_title] seems excited by the challenge, while [kaya.title] seems calm but determined."
     mc.name "Okay, [kaya.title], here we go."
     $ correct_count = 0
     $ kaya_count = 0
@@ -1021,7 +1022,7 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
 
     erica "Wow, that was a great session. Thanks, [erica.mc_title]!"
     kaya "Yes! Thank you so much, I feel like this has been a big help, and it was fun too!"
-    mc.name "You're talkin about the study session... right?"
+    mc.name "You're talking about the study session... right?"
     erica "Study?"
     kaya "Yes! Yes of course, a fantastic study session."
     "You stand up and leave the study room, waving goodbye to the girls."

@@ -19,14 +19,14 @@ init 2 python:
         global erica
         erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_4", tits="B", height = 0.89, hair_colour="chestnut brown", hair_style = braided_bun, skin="white" , \
             eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, \
-            stat_array = [2,4,4], skill_array = [4,1,3,3,1], sex_array = [3,2,3,2], start_sluttiness = 3, start_obedience = -18, start_happiness = 119, start_love = 0, \
-            title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True, base_outfit = erica_base_outfit, \
+            stat_array = [2,4,4], skill_array = [4,1,3,3,1], sex_skill_array = [3,2,3,2], sluttiness = 3, obedience_range = [70, 85], happiness = 119, love = 0, \
+            title = "Erica", possessive_title = "Your gym girl", mc_title = mc.name, relationship = "Single", kids = 0, force_random = True, base_outfit = erica_base_outfit, type = 'story', \
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["pants", 1, False], ["the colour blue", 2, False], ["yoga", 2, False], ["sports", 2, False]],
             forced_sexy_opinions = [["doggy style sex", 2, True], ["missionary style sex", -2, False], ["giving blowjobs", 1, False], ["getting head", 1, False], ["being submissive", 1, False], ["creampies", -2, False], ["public sex", 1, False]])
 
         erica.max_energy = 120
         erica.generate_home()
-        erica.add_job(erica_student_job, job_known = True)
+        erica.change_job(erica_student_job, job_known = True)
         erica.home.add_person(erica)
 
         erica.event_triggers_dict["reject_position"] = "standing_doggy"
@@ -247,8 +247,7 @@ init -2 python:
         if mc.business.is_open_for_business():
             if mc.business.hr_director and mc.is_at_work():
                 if len(erica_get_yoga_class_list()) >= 4:
-                    if renpy.random.randint(0,100) < 20:
-                        return True
+                    return True
         return False
 
     def erica_money_problems_yoga_start_requirement(person):
@@ -357,7 +356,7 @@ init -1 python:
         menu_tooltip = "Work up a sweat.")
     erica_phase_two = Action("Challenge to Race {image=gui/heart/Time_Advance.png}", erica_phase_two_requirement, "erica_phase_two_label",
         menu_tooltip = "No risk, no reward.")
-    erica_protein_shake = Action("Buy Protein Shake ($5)", erica_buy_protein_shake_requirement,"erica_buy_protein_shake_label", menu_tooltip = "Slip some serum in.")
+    erica_protein_shake = Action("Buy Protein Shake\n{color=#ff0000}{size=18}Costs: $5{/size}{/color}", erica_buy_protein_shake_requirement,"erica_buy_protein_shake_label", menu_tooltip = "Slip some serum in.")
     erica_house_call = Action("Take Charge {image=gui/heart/Time_Advance.png}", erica_house_call_requirement, "erica_house_call_label",
         menu_tooltip = "Pick her up.")
     erica_money_problems_sarah_talk = Action("Talk to HR Director", erica_money_problems_sarah_talk_requirement, "erica_money_problems_sarah_talk_label")

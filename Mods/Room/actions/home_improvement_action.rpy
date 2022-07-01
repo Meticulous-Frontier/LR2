@@ -183,7 +183,7 @@ label mc_bedroom_renovate_label():
     return
 
 label mc_bedroom_renovate_completed_label():
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
@@ -215,7 +215,7 @@ label lily_bedroom_renovate_label():
     return
 
 label lily_bedroom_renovate_completed_label():
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
@@ -237,7 +237,7 @@ label mom_bedroom_renovate_label():
     return
 
 label mom_bedroom_renovate_completed_label():
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
@@ -259,7 +259,7 @@ label home_shower_renovate_label():
     return
 
 label home_shower_renovate_completed_label():
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
@@ -281,7 +281,7 @@ label dungeon_build_label():
     return
 
 label dungeon_completed_label():
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."

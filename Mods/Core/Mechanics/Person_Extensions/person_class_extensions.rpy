@@ -358,7 +358,7 @@ init -1 python:
     Person.pubes_description = property(person_pubes_description_string, None, None, "Property that returns pussy pubes description for use in dialogs.")
 
     def person_tits_description_string(self):
-        rank = rank_tits(self.tits)
+        rank = self.rank_tits(self.tits)
         adjective = "perky"
         descriptor = "tits"
 
@@ -1035,19 +1035,19 @@ init -1 python:
         if discovered is None: # we didn't find any discovery information for opinion, so it's new and we passed None, so default set to false
             discovered = False
         if sexy_opinion is None:
-            if topic in sexy_opinions_list: # We didn't find the topic in existing opinions for person, check global list if it is sexy
+            if topic in Person._sexy_opinions_list: # We didn't find the topic in existing opinions for person, check global list if it is sexy
                 sexy_opinion = True
             sexy_opinion = False
 
         if sexy_opinion:
             self.sexy_opinions[topic] = [degree, discovered]
 
-            if topic not in sexy_opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
-                sexy_opinions_list.append(topic)
+            if topic not in Person._sexy_opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
+                Person._sexy_opinions_list.append(topic)
         else:
             self.opinions[topic] = [degree, discovered]
-            if topic not in opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
-                opinions_list.append(topic)
+            if topic not in Person._opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
+                Person._opinions_list.append(topic)
 
         if add_to_log:
             mc.log_event((self.title or self.name) + " " + opinion_score_to_string(degree) + " " + str(topic), "float_text_green")
@@ -1071,13 +1071,13 @@ init -1 python:
     Person.get_opinion_score = get_opinion_score_enhanced
 
     def update_opinion_with_score(self, topic, score, add_to_log = True):
-        if topic in sexy_opinions_list:
+        if topic in Person._sexy_opinions_list:
             if topic in self.sexy_opinions:
                 self.sexy_opinions[topic][0] = score
             else:
                 self.sexy_opinions[topic] = [score, add_to_log]
 
-        if topic in opinions_list:
+        if topic in Person._opinions_list:
             if topic in self.opinions:
                 self.opinions[topic][0] = score
             else:
@@ -1849,7 +1849,7 @@ init -1 python:
         if not self.job:
             return False
 
-        if self.job.job_role == job_role:
+        if job_role in self.job.job_roles:
             return True
         return False
 

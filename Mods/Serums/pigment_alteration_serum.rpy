@@ -1,7 +1,7 @@
 
 init -1 python:
     def pigment_serum_on_apply(person, the_serum, add_to_log):
-        skin_styles = [x[0] for x in list_of_skins]
+        skin_styles = [x[0] for x in Person._list_of_skins]
         skin_styles.remove(person.skin)
         new_skin = get_random_from_list(skin_styles)
         return person.match_skin(new_skin)

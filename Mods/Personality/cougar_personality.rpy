@@ -87,11 +87,11 @@ label cougar_introduction(the_person): # Copy paste from relaxed to fix crash
     "She laughs with a twinkle in her eyes."
     the_person "Is that so? You're trying to impress me, aren't you."
     mc.name "Really, I really just wanted to talk to you."
-    $ title_choice = get_random_title(the_person)
+    $ title_choice = the_person.get_random_title()
     $ formatted_title = the_person.create_formatted_title(title_choice)
     the_person "Well, if you insist, my name is [formatted_title]. It's nice to meet you..."
     $ the_person.set_title(title_choice)
-    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+    $ the_person.set_possessive_title(the_person.get_random_possessive_title())
     "With a predatory smile, she waits for you to introduce yourself."
     return
 

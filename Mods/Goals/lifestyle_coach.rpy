@@ -35,7 +35,7 @@ init -1 python:
     #     global dawn
     #     dawn = make_person(name = "Dawn", age = 42, body_type = "thin_body", \
     #         personality = relaxed_personality, job = dawn_job, \
-    #         sex_array = [3,3,4,3], start_obedience = -28, start_happiness = 129, start_love = 0, \
+    #         sex_skill_array = [3,3,4,3], obedience = -28, happiness = 129, love = 0, \
     #         title = "Dawn", possessive_title = "Your lifestyle coach", mc_title = mc.name, force_random = True,
     #         forced_opinions = [
     #             ["HR work", 2, True],

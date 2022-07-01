@@ -21,7 +21,7 @@ init 5 python:
         set_strip_club_foreclosed_stage(5)
         add_strip_club_hire_employee_action_to_mc_actions()
         for stripper in stripclub_strippers:
-            stripper.set_title(get_random_from_list(get_titles(stripper)))
+            stripper.set_title(get_random_from_list(stripper.get_titles()))
             stripper.set_mc_title("Boss")
             stripper.set_possessive_title("The stripper")
             stripper.change_stats(happiness = 10, obedience = 5, love = 5)
@@ -79,7 +79,8 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     else:
         mc.name "Goodbye, [the_person.title]!"
     $ the_person.change_stats(happiness = 5, obedience = 3, love = 3)
-    $ the_person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
+    if not the_person in unique_character_list:
+        $ the_person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
     $ the_person.job.quit_function = stripper_quit
     $ the_person.quit_job()
     $ the_person.change_location(the_person.home)
@@ -128,14 +129,16 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     return
 
 label strip_club_evaluate_stripper(the_person):
-    $ mc.location.show_background()
-    $ the_person.outfit = stripclub_wardrobe.pick_random_outfit()
-    $ the_person.draw_person(emotion = "happy", position = "stand4")
-    $ the_person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
+    python:
+        mc.location.show_background()
+        the_person.outfit = stripclub_wardrobe.pick_random_outfit()
+        the_person.draw_person(emotion = "happy", position = "stand4")
+        if the_person not in unique_character_list:
+            the_person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
     "A new song starts playing over the speakers and a stripper moves elegantly up on the stage."
 
     if the_person.title is None:
-        $ the_person.set_title(get_random_from_list(get_titles(the_person)))
+        $ the_person.set_title(get_random_from_list(the_person.get_titles()))
         $ the_person.set_mc_title("Boss")
         $ the_person.set_possessive_title("The stripper")
         the_person "Hi [the_person.mc_title], my name is [the_person.title] and I'm [the_person.age] years old."
@@ -167,7 +170,7 @@ label strip_club_evaluate_stripper(the_person):
     "She puts a hand on your shoulder pressing her bosom against your body..."
     menu:
         "Yes" if mc.business.has_funds(500):
-            $ the_person.add_job(stripclub_stripper_job, job_known = True)
+            $ the_person.change_job(stripclub_stripper_job, job_known = True)
             mc.name "Yes, you impressed me! Your salary will be $[the_person.stripper_salary] per day excluding tips, if you agree?"
             $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
             $ ran_num = __builtin__.int(((the_person.stripper_salary / 20) - 1) * 100)

@@ -138,6 +138,8 @@ label leave_harem_label(the_person):
         the_person.update_opinion_with_score("being submissive", 0)
         the_person.remove_role(harem_role)
         the_person.remove_role(affair_role) # also ends affair if still present
+        the_person.remove_role(girlfriend_role)
+        the_person.set_schedule(downtown_hotel, the_times=[0, 4]) # she moves to a hotel
     return
 
 label ask_to_join_harem_label(the_person):

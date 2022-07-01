@@ -380,7 +380,7 @@ init -1 python:
 
         # calculate bonus production (25% for each employee)
         for person in [x for x in mc.business.production_team if x in mc.business.p_div.people]:
-            mc.business.production_progress(person.focus,person.int,person.production_skill, multiplier = 0.25)
+            mc.business.production_progress(person.focus,person.int,person.production_skill, production_modifier = 0.25)
         return
 
     def research_team_building_project_on_day():

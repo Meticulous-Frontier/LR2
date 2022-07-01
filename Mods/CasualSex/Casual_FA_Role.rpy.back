@@ -127,8 +127,8 @@ init -1 python:
 init -1 python:
     class Casual_Flight_Attendant(Person):
         def __init__(self):
-            self.name = get_random_name()
-            self.last_name = get_random_last_name()
+            self.name = Person.get_random_name()
+            self.last_name = Person.get_random_last_name()
 
             self.title = self.name #Note: We format these down below!
             self.possessive_title = self.name #The way the girl is refered to in relation to you. For example "your sister", "your head researcher", or just their title again.
@@ -196,11 +196,11 @@ init -1 python:
 
             ## Physical things.
             self.age = renpy.random.randint(18,50)
-            self.body_type = get_random_body_type()
+            self.body_type = Person.get_random_body_type()
             self.tits = get_random_tit()
             self.height = 0.9 + (renpy.random.random()/10) #This is the scale factor for height, with the talest girl being 1.0 and the shortest being 0.8
             #self.body_images = body_images #instance of Clothing class, which uses full body shots.
-            self.face_style = get_random_face()
+            self.face_style = Person.get_random_face()
              #instance of the Expression class, which stores facial expressions for different skin colours
             self.hair_colour = generate_hair_colour() #A list of [description, color value], where colour value is a standard RGBA list.
             self.hair_style = get_random_from_list(hair_styles).get_copy()
@@ -553,11 +553,11 @@ label FA_introduction(the_person):
     the_person "Sorry, I don't live around here, so I'm not sure I can help you..."
     mc.name "I know this sounds crazy, but I saw you and just wanted to say hi and get your name."
     "She laughs and crosses her arms."
-    $ title_choice = get_random_title(the_person)
+    $ title_choice = the_person.get_random_title()
     $ formatted_title = the_person.create_formatted_title(title_choice)
     the_person "Yeah? Well I like the confidence, I'll say that. My name's [formatted_title]."
     $ the_person.set_title(title_choice)
-    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+    $ the_person.set_possessive_title(the_person.get_random_possessive_title())
     the_person "And what about you, random stranger? What's your name?"
     return
 #

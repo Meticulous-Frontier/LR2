@@ -92,7 +92,7 @@ label lily_morning_encounter_enhanced_label():
                 the_person "Fine, have it your way."
                 "You let [the_person.title] get a step ahead of you so you can look at her ass, but once she is past she swings her hands back to cover herself."
                 $ the_person.draw_person(position = "back_peek")
-                "She eyes you wearily and her gait is a bit stiff, but you keep up the smile and try to avoid staring too much."
+                "She eyes you warily and her gait is a bit stiff, but you keep up the smile and try to avoid staring too much."
                 "The view is pleasant, and as you walk together she seems to relax a bit with the idea of being mostly undressed around you."
                 $ the_person.change_stats(obedience = 2, slut = 1, max_slut = 30)
                 $ the_person.draw_person(position = "walking_away")

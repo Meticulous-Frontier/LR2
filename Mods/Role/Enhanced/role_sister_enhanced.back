@@ -145,7 +145,7 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
     the_mom "That was really fun, thanks for inviting me you two."
     $ scene_manager.update_actor(the_sister, position = "stand3")
     the_sister "It was! Oh, I should give [the_sister.mc_title] his cut for being our photographer."
-    $ money_amount = 100 + 50*(rank_tits(the_sister.tits)-4) + 50*(rank_tits(the_mom.tits)-4)
+    $ money_amount = 100 + 50*(Person.rank_tits(the_sister.tits)-4) + 50*(Person.rank_tits(the_mom.tits)-4)
     if money_amount < 50:
         $ money_amount = 50
 

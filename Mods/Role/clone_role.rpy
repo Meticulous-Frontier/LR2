@@ -14,7 +14,7 @@ init 2 python:
     clone_recall_action = Action("Recall clone", clone_recall_requirement, "clone_recall_label", menu_tooltip = "Bring the clone back to the dungeon for modifications")
 
     # Clone Rent House - Rent a house for your clone
-    clone_rent_apartment_action = Action("Rent Apartment (-$25000)", clone_rent_apartment_requirement, "clone_rent_apartment_label", menu_tooltip = "Rent a apartment for your clone.")
+    clone_rent_apartment_action = Action("Rent Apartment\n{color=#ff0000}{size=18}Costs: $25000{/size}{/color}", clone_rent_apartment_requirement, "clone_rent_apartment_label", menu_tooltip = "Rent a apartment for your clone.")
 
     clone_role = Role("Clone", [clone_recall_action, clone_rent_apartment_action])
 

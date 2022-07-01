@@ -61,7 +61,7 @@ init python:
 
 screen opinion_edit_menu():
 
-    default categories = {"Sexy Opinions": [sexy_opinions_list, "sexy_opinions"], "Normal Opinions": [opinions_list, "opinions"]}
+    default categories = {"Sexy Opinions": [Person._sexy_opinions_list, "sexy_opinions"], "Normal Opinions": [Person._opinions_list, "opinions"]}
     if "the_person" in globals():
         default target = the_person
     else:

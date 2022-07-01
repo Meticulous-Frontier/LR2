@@ -1498,8 +1498,8 @@ label myra_alexia_teamup_serum_label(the_group):
         "The girls are already basically putty in your hands."
     "You look at [the_person.possessive_title]'s drink."
     call give_serum(the_person) from _call_give_myra_serum_teamup_03
-    "You look at [alexia.set_possessive_title]'s drink."
-    call give_serum(alexia) from _call_give_elexia_serum_teamup_04
+    "You look at [alexia.possessive_title]'s drink."
+    call give_serum(alexia) from _call_give_alexia_serum_teamup_04
     "When you get back to the cafe, you step inside and lock the door behind you."
     return
 

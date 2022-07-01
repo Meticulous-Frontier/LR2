@@ -81,7 +81,7 @@ init 2 python:
             person.set_mc_title(remove_display_tags(person.mc_title))
 
     def cheat_person_job(person, job):
-        person.add_job(job, job_known = True)
+        person.change_job(job, job_known = True)
 
     def cheat_restore_screen():
         if "the_person" in globals():
@@ -175,7 +175,7 @@ screen cheat_menu():
         "Intelligence": ["int", "int", 1, 2, (0, 20)],
 
         "Age": ["age", "age", 1, 3, (18, 55)],
-        "Height": ["height", "height", .005, 4, (.8, 1)],
+        "Height": ["height", "height", .005, 4, (.72, 1.25)],
         "Energy": ["energy", "energy", 10.0, 5, (60,  400)],
         "Max Energy": ["max_energy", "max_energy", 10.0, 6, (60,  400)],
         "Serum Tolerance" : ["serum_tolerance", "serum_tolerance", 1, 8, (1, 5)],
@@ -189,19 +189,20 @@ screen cheat_menu():
         "Market Reach": ["market_reach", "market_reach", 1000,  24, (0, 100000000)]
         }
     default work_skills = {
-        "HR": ["hr_skill", "hr_skill", 1, 0, (0, 20)],
-        "Marketing": ["market_skill", "market_skill", 1, 1, (0, 20)],
-        "Researching": ["research_skill", "research_skill", 1, 2, (0, 20)],
-        "Production": ["production_skill", "production_skill", 1, 3, (0, 20)],
-        "Supplying": ["supply_skill", "supply_skill", 1, 4, (0, 20)],
+        "Work Experience": ["work_experience", "work_experience", 1, 0, (1, 8)],
+        "HR": ["hr_skill", "hr_skill", 1, 1, (0, 20)],
+        "Marketing": ["market_skill", "market_skill", 1, 2, (0, 20)],
+        "Researching": ["research_skill", "research_skill", 1, 3, (0, 20)],
+        "Production": ["production_skill", "production_skill", 1, 4, (0, 20)],
+        "Supplying": ["supply_skill", "supply_skill", 1, 5, (0, 20)],
         "Salary": ["salary", "salary", 1, 6, (0, 1000)],
 
-        "Max Employees": ["max_employee_count", "max_employee_count", 5, 5, (5, 80)],
-        "Serum Batch Size": ["batch_size", "batch_size", 1, 7, (1, 20)],
-        "Research Tier": ["research_tier", "research_tier", 1, 8, (0, 4)],
-        "Attention": ["attention", "attention", 10, 9, (0, 400)],
-        "Max Attention": ["max_attention", "max_attention", 10, 10, (0, 400)],
-        "Num of Contracts": ["max_offered_contracts", "max_offered_contracts", 1, 11, (1, 5)]
+        "Max Employees": ["max_employee_count", "max_employee_count", 5, 10, (5, 80)],
+        "Serum Batch Size": ["batch_size", "batch_size", 1, 11, (1, 20)],
+        "Research Tier": ["research_tier", "research_tier", 1, 12, (0, 4)],
+        "Attention": ["attention", "attention", 10, 13, (0, 400)],
+        "Max Attention": ["max_attention", "max_attention", 10, 13, (0, 400)],
+        "Num of Contracts": ["max_offered_contracts", "max_offered_contracts", 1, 15, (1, 5)]
         }
     default relation_stats = {
         "Love": ["love", "love", 10, 0, (-100, 100)],
@@ -236,12 +237,12 @@ screen cheat_menu():
             if "list_of_extra_personalities" in globals():
                 for x in list_of_extra_personalities: available_personalities[x.personality_type_prefix] = x
 
-    default available_faces = sorted(list_of_faces, key = lambda x: int(x.split("_")[1]))
-    default available_eyes = sorted(list_of_eyes,  key = lambda x: x[0])
-    default available_body_types = list_of_body_types
-    default available_breast_sizes = [x[0] for x in list_of_tits]
+    default available_faces = sorted(Person._list_of_faces, key = lambda x: int(x.split("_")[1]))
+    default available_eyes = sorted(Person._list_of_eyes,  key = lambda x: x[0])
+    default available_body_types = Person._list_of_body_types
+    default available_breast_sizes = [x[0] for x in Person._list_of_tits]
     default available_hair_styles = sorted(hair_styles, key = lambda x: x.name)
-    default available_hair_colours = sorted(list_of_hairs, key = lambda x: x[0])
+    default available_hair_colours = sorted(Person._list_of_hairs, key = lambda x: x[0])
     default available_pubes_styles = sorted(pube_styles, key = lambda x: x.name)
     default available_idle_poses = ["stand2","stand3","stand4","stand5"]
 

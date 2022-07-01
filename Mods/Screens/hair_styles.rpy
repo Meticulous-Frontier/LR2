@@ -254,7 +254,7 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
                                         text "Translucent" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                         xysize (120, 40)
                                         action SetScreenVariable("current_a", 0.8)
-                                for block_count, hair_colour_list in __builtin__.enumerate(split_list_in_blocks(list_of_hairs, 10)):
+                                for block_count, hair_colour_list in __builtin__.enumerate(split_list_in_blocks(Person._list_of_hairs, 10)):
                                     hbox:
                                         spacing 5
                                         xalign 0.5

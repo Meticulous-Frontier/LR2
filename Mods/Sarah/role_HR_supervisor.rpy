@@ -1651,9 +1651,9 @@ label HR_director_headhunt_interview_label(the_person):
         the_person "Alright! I'll give her the news."
         $ prospect.generate_home()
         call hire_someone(prospect, add_to_location = True) from _call_hire_HR_prospect_1
-        $ prospect.set_title(get_random_title(prospect))
-        $ prospect.set_possessive_title(get_random_possessive_title(prospect))
-        $ prospect.set_mc_title(get_random_player_title(prospect))
+        $ prospect.set_title(prospect.get_random_title())
+        $ prospect.set_possessive_title(prospect.get_random_possessive_title())
+        $ prospect.set_mc_title(prospect.get_random_player_title())
         the_person "Give me the rest of the week to catch up on my normal HR work. If you want me to start the process again, talk to me on Monday."
     else:
         mc.name "I'm sorry, this wasn't exactly what I had in mind."
@@ -1741,67 +1741,70 @@ init 1200 python:
 
     def generate_HR_recruit():
         # department boosted stats
-        main_stat = renpy.random.randint(5,7)
-        main_skill = renpy.random.randint(5,7)
+        main_stat = renpy.random.randint(Person.get_stat_floor() + 2, Person.get_stat_ceiling())
+        main_skill = renpy.random.randint(Person.get_skill_floor() + 2, Person.get_skill_ceiling())
+
+        main_stat += 1  # HR Boost
+        main_skill += 1 # HR Boost
         other_stat = 0
-
-        sex_skill = 5
-        if recruitment_sex_improvement_policy.is_active():
-            sex_skill = renpy.random.randint(5,7)
-
-        min_slut = (get_HR_director_tag("recruit_slut", 0) or 0) // 10
-        sex_array = [renpy.random.randint(min_slut,sex_skill), renpy.random.randint(min_slut,sex_skill), renpy.random.randint(min_slut,sex_skill), renpy.random.randint(min_slut,sex_skill)]
+        experience_stat = 0
 
         # extra boost / penalty for focused recruit
         if get_HR_director_tag("recruit_focused", False) == True:
-            main_stat += 2
-            main_skill += 2
-            other_stat = 2
+            main_stat += 2  # Focus Boost
+            main_skill += 2 # Focus Boost
+            other_stat = 2  # Focus Detractor
+            experience_stat = 1  # Experience boost
+
 
         recruit = make_person(tits = get_HR_director_tag("recruit_bust", None),
-            start_obedience = get_HR_director_tag("recruit_obedience", None),
-            start_sluttiness = get_HR_director_tag("recruit_slut", None),
+            obedience = get_HR_director_tag("recruit_obedience", None),
+            sluttiness = get_HR_director_tag("recruit_slut", None),
             relationship = get_HR_director_tag("recruit_marital", None),
             age = get_HR_director_tag("recruit_age", None),
             kids = get_HR_director_tag("recruit_kids", None),
             body_type = get_HR_director_tag("recruit_body", None),
             height = get_HR_director_tag("recruit_height", None),
-            sex_array = sex_array, force_random = True)
-
-        # make balanced stats
-        recruit.int = renpy.random.randint(3,6)
-        recruit.focus = renpy.random.randint(3,6)
-        recruit.charisma = renpy.random.randint(3,6)
-        recruit.production_skill = renpy.random.randint(3,6) - other_stat
-        recruit.hr_skill = renpy.random.randint(3,6) - other_stat
-        recruit.supply_skill = renpy.random.randint(3,6) - other_stat
-        recruit.market_skill = renpy.random.randint(3,6) - other_stat
-        recruit.research_skill = renpy.random.randint(3,6) - other_stat
+            stat_range_array = [[Person.get_stat_floor() + 1, Person.get_stat_ceiling() + 1] for x in range(0,3)],    # balanced stats
+            skill_range_array = [[Person.get_skill_floor() + 1, Person.get_skill_ceiling() + 1] for x in range(0,5)], # balanced skills
+            sex_skill_range_array = [[Person.get_sex_skill_floor() + experience_stat, Person.get_sex_skill_ceiling() + experience_stat] for x in range(0,4)],
+            work_experience_range = [Person.get_work_experience_floor() + experience_stat, Person.get_work_experience_ceiling() + experience_stat],
+            force_random = True)
 
         if get_HR_director_tag("recruit_dept") == "HR":
             recruit.charisma = main_stat
             recruit.hr_skill = main_skill
             recruit.focus -= other_stat
+            if recruit.focus < 1:
+                recruit.focus = 1
             recruit.opinions["HR work"] = [2, True]
         elif get_HR_director_tag("recruit_dept") == "supply":
             recruit.focus = main_stat
             recruit.supply_skill = main_skill
             recruit.int -= other_stat
+            if recruit.int < 1:
+                recruit.int = 1
             recruit.opinions["supply work"] = [2, True]
         elif get_HR_director_tag("recruit_dept") == "market":
             recruit.charisma = main_stat
             recruit.market_skill = main_skill
             recruit.int -= other_stat
+            if recruit.int < 1:
+                recruit.int = 1
             recruit.opinions["marketing work"] = [2, True]
         elif get_HR_director_tag("recruit_dept") == "research":
             recruit.int = main_stat
             recruit.research_skill = main_skill
             recruit.charisma -= other_stat
+            if recruit.charisma < 1:
+                recruit.charisma = 1
             recruit.opinions["research work"] = [2, True]
         elif get_HR_director_tag("recruit_dept") == "production":
             recruit.focus = main_stat
             recruit.production_skill = main_skill
             recruit.charisma -= other_stat
+            if recruit.charisma < 1:
+                recruit.charisma = 1
             recruit.opinions["production work"] = [2, True]
 
         # discover some opinions

@@ -61,7 +61,7 @@ init 1 python:
         quest = quest_production_line()
 
         quest.quest_event_dict["target"] = person.identifier
-        quest.quest_event_dict["father_name"] = get_random_male_name()
+        quest.quest_event_dict["father_name"] = Person.get_random_male_name()
         quest.quest_event_dict["initial_meeting_day"] = 9999
         quest.quest_event_dict["starting_pay"]  = person.salary
         quest.quest_event_dict["moving_day"] = 9999
@@ -436,7 +436,7 @@ label quest_production_line_help_move_label():
             mc.name "It's ok, [the_person.title]. You can tell me."
             "You can see her defenses breaking down."
             the_person "Oh god [the_person.mc_title], it's like you see right through me..."
-            the_person "Its not what you think! Mom left us when I was really young. When I was growing, my dad threw himself into his work, and all his spare time he spent raising me."
+            the_person "Its not what you think! Mom left us when I was really young. When I was growing up, my dad threw himself into his work, and all his spare time he spent raising me."
             the_person "He didn't have any time to himself. He didn't have time to date or meet anyone. He spent all his time with me. I love him so much."
             the_person "And then it happened. I was older, and I was over at a friend's house. I'd told him I was going to spend the night there, but I decided to come home instead."
             the_person "When I got home... he didn't hear me come in the door. He was in the living room on the computer, watching pornography. I know I should have looked away... but I just couldn't!"

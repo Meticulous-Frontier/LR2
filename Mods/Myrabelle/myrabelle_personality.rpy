@@ -48,7 +48,7 @@ label myrabelle_greetings(the_person):
     if the_person.love < 0:
         the_person "Ugh, what do you want?"
     elif myra_has_been_sponsored():
-        the_person "Oh hey! It's my favoroite sponsor! What can I do for you?"
+        the_person "Oh hey! It's my favorite sponsor! What can I do for you?"
     else:
         if the_person.sluttiness > 60:
             if the_person.obedience > 130:

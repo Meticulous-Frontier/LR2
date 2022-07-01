@@ -47,11 +47,11 @@ init 2 python:
 
         starbuck = make_person(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", face_style = "Face_4", tits="E", height = 0.89, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair, skin = "white",
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], pubes_style = landing_strip_pubes, personality = starbuck_personality, name_color = "#cd5c5c", dial_color = "#cd5c5c", starting_wardrobe = starbuck_wardrobe,  \
-            stat_array = [3,4,3], skill_array = [1,1,4,2,1], sex_array = [3,3,4,4], start_sluttiness = 27, start_obedience = -18, start_happiness = 119, start_love = 0, bonus_suggest = 6, \
-            relationship = "Single", kids = 0, force_random = True, base_outfit = starbuck_base)
+            stat_array = [3,4,3], skill_array = [1,1,4,2,1], sex_skill_array = [3,3,4,4], sluttiness = 27, obedience_range = [70, 85], happiness = 119, love = 0, \
+            relationship = "Single", kids = 0, force_random = True, base_outfit = starbuck_base, type = 'story')
 
         starbuck.generate_home()
-        starbuck.add_job(starbuck_job, job_known = True)
+        starbuck.change_job(starbuck_job, job_known = True)
         starbuck.home.add_person(starbuck)
         make_sex_shop_owner(starbuck)
 
@@ -1981,7 +1981,8 @@ label starbuck_cargo_shipment_label(the_person):
     mc.name "Well, unfortunately, it also destroyed most of her common sense. She is basically a dim witted bimbo."
     mc.name "I recruited her from her previous employer because he was taking advantage of her, paying her criminally low wages and forcing her to have sex for his own financial benefit."
     the_person "That's very kind of you... But won't asking her to let us do a demonstration video be basically the same thing?"
-    mc.name "Honestly, I think if we showed it to her, I'm not sure we could stop her from trying it. For sure though, we won't force her to do anything."
+    mc.name "Honestly... I think if we showed it to her... I'm not sure we could stop her from trying it."
+    mc.name "For sure though, we won't force her to do anything."
     mc.name "Maybe I could just bring her out here for a bit? We won't necessarily ask her to do it, but just get a feel for how she might respond. It would only be fair though, that we pay her some for her part in the demo."
     "[the_person.title] considers your proposal for a moment."
     the_person "I guess. Honestly, I kind of like doing the advertising, just me and you, ya know? But I guess once in a while bringing in a little extra talent couldn't hurt."
@@ -2113,7 +2114,7 @@ label starbuck_candace_product_demo_label(the_person):
     "You pinch your arm. Yeah! You aren't dreaming this!"
     "[starbuck.possessive_title] puts on the strap-on. You hand her the lube so she can get it ready."
     mc.name "Okay... It would probably be best if [starbuck.title] can be facing the camera since she is the shop owner. [the_person.title] why don't you get down on your hands and knees and she can get behind you?"
-    the_person "Mmm, that sounds good. And then you can come over boss and I'll suck your..."
+    the_person "Mmm, that sounds good. And then you can come over, Boss, and I'll suck your..."
     mc.name "I have to run the camera. Maybe when we are done with the video we can have some fun though."
     if starbuck.is_jealous():
         starbuck "Hey now... I'm your girlfriend [starbuck.mc_title], don't be planning anything like that without me!"
@@ -2252,7 +2253,7 @@ label starbuck_candace_product_demo_label(the_person):
     starbuck "Ah... yes that would be good. [the_person.name]... how would you like to help me do more product demos sometime?"
     the_person "Oh. my. god. YES! Yes please!"
     starbuck "What do you think about Saturday? We could even make it a regular thing."
-    "You go over to [starbuck.possessive_title] computer and start to work on the video. The two girls are talking about ideas for new videos."
+    "You go over to [starbuck.possessive_title]'s computer and start to work on the video. The two girls are talking about ideas for new videos."
     "By the time you finish a quick edit of the video, the two girls are talking like old friends. You feel like they have REALLY hit it off!"
     "Of course, sharing a love for sex and all things sex related has really helped."
     mc.name "Alright, the video is done. I'm going to head out now. Need anything before I go?"
@@ -2649,7 +2650,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
 init 2 python:
     def starbuck_intro_choose_title(person):
         title_tuple = []
-        for title in get_player_titles(person):
+        for title in person.get_player_titles():
             title_tuple.append([title,title])
 
         return renpy.display_menu(title_tuple, True, "Choice")
@@ -2676,11 +2677,11 @@ label starbuck_intro():
         # uses parts of the in-game introduction sequence tailored to SB
         if the_person.title is None:
             mc.name "Hello."
-            $ title_choice = get_random_title(the_person)
+            $ title_choice = the_person.get_random_title()
             $ formatted_title = the_person.create_formatted_title(title_choice)
             the_person "Let me introduce myself, I am [formatted_title]."
             $ the_person.set_title(title_choice)
-            $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+            $ the_person.set_possessive_title(the_person.get_random_possessive_title())
             "She holds her hand out to shake yours."
             the_person "And how may I address you?"
             $ title_choice = starbuck_intro_choose_title(the_person)

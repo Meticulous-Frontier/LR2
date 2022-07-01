@@ -16,8 +16,8 @@ label lady_of_the_night_label_enhanced():
             $ the_person.generate_home()
             $ downtown.add_person(the_person) #If you pay her add her to the location so that she is kept track of in the future.
             mc.name "That sounds nice. It's nice to meet you..."
-            $ the_person.set_title(get_random_title(the_person))
-            $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+            $ the_person.set_title(the_person.get_random_title())
+            $ the_person.set_possessive_title(the_person.get_random_possessive_title())
             the_person "You can call me [the_person.title]. For two hundred dollars I'll be your best friend for the next hour."
             $ mc.business.change_funds(-200)
             $ the_person.change_obedience(1)

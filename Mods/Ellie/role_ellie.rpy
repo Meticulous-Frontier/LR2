@@ -35,8 +35,8 @@ init 2 python:
         global ellie
         ellie = make_person(name = "Ellie", age = 24, body_type = "thin_body", face_style = "Face_13",  tits="DDD", height = 0.92, hair_colour="dark auburn", hair_style = bobbed_hair, skin="white" , \
             eyes = "light blue", personality = ellie_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ellie_wardrobe, job = ellie_job, \
-            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [1,1,1,1], start_sluttiness = 0, start_obedience = 5, start_happiness = 103, start_love = -3, \
-            relationship = "Single", kids = 0, force_random = True, base_outfit = ellie_base_outfit,
+            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [1,1,1,1], sluttiness = 0, obedience_range = [100, 110], happiness = 103, love = -3, \
+            relationship = "Single", kids = 0, force_random = True, base_outfit = ellie_base_outfit, type = 'story',
             forced_opinions = [["production work", 2, True], ["work uniforms", 1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["cooking", 2, False]])
 
         ellie.generate_home()
@@ -1461,11 +1461,11 @@ label ellie_cunnilingus_office_label(the_person):
     "[the_person.possessive_title]'s body is responding to your tongue, but you know that this time you'll need to use more than just that."
     "You take a break from suckling her clit for a moment and lick her slit up and down. Then you bring your index up and push it up against her virgin hole."
     the_person "That feels good, but I'm not sure that I can do this again [the_person.mc_title]..."
-    "Well, you'll be damned if you don't try anyway. With slow, gentle pressure, you push your finger into her incredible tight hole."
+    "Well, you'll be damned if you're not going to try anyway. With slow, gentle pressure, you push your finger into her incredible tight hole."
     the_person "Ah... Ohhh my..."
     "You manage to get it all the way in, but there isn't much room to work with. You turn your hand so your palm is facing up, and start to move it with a slow come-hither motion."
     $ the_person.change_arousal(10) #80
-    "As you stroke her, you soon find the little g-spot in the front of her vagina and start to stroke it with your finger. Her moans are starting to turn into growls."
+    "As you stroke her, you soon find the little g-spot in the front of her vagina and start to massage it with your finger. Her moans are starting to turn into growls."
     the_person "Agghghh... what is... ahhhhh. Maybe if you... aggghhhh..."
     "You continue to stroke and can feel her hips moving again. You lick her clit a few times now, and then start to suckle it again."
     $ the_person.change_arousal(15) #95

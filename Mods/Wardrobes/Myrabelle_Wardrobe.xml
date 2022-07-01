@@ -50,18 +50,6 @@
           </Feet>
           <Accessories />
       </Outfit>
-      <Outfit name="MyraBaseOutfit">
-          <UpperBody />
-          <LowerBody />
-          <Feet />
-          <Accessories>
-              <Item alpha="0.95" blue="0.15" green="0.15" name="Wide_Choker" red="0.15" />
-              <Item alpha="0.33" blue="0.04" green="0.26" name="Lipstick" red="0.8" />
-              <Item alpha="0.66" blue="0.671" green="0.278" name="Upper_Eye_Shadow" red="0" />
-              <Item alpha="0.95" blue="0.15" green="0.15" name="Modern_Glasses" red="0.15" />
-              <Item alpha="0.8" blue="0.929" green="0.58" name="Bead_Bracelet" red="0.392" />
-          </Accessories>
-      </Outfit>
   </FullSets>
   <UnderwearSets>
       <Outfit name="myrabasicunderwear">
