@@ -353,7 +353,7 @@ init 2 python:
             if found:
                 party_destinations.append(found)
 
-        for room in [downtown_bar, downtown_hotel, downtown, gaming_cafe]:
+        for room in [downtown_bar, downtown_hotel, downtown]:
             add_party_destination_by_room(room)
 
         if "get_strip_club_foreclosed_stage" in globals():
