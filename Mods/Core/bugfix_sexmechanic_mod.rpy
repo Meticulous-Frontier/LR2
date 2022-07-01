@@ -273,11 +273,9 @@ init 5 python:
         person.add_situational_obedience("sex_object",picked_object.obedience_modifier, picked_object.name + " " + position.verbing)
         return picked_object
 
-    def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False, condition = None):
+    def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False, condition = Condition_Type("Empty")):
         option_list = []
         option_list.append("Round Choices")
-        if not condition:
-            condition = make_condition_blank()
         if position_choice is not None:
             option_list.append(["Keep " + position_choice.verbing + " her\n" + position_choice.build_energy_arousal_line(the_person), "Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
 
@@ -315,15 +313,13 @@ init 5 python:
                 option_list.append(["Stop and leave", "Leave"])
         return option_list
 
-    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False, prohibit_tags = [], condition = None):
+    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False, prohibit_tags = [], condition = Condition_Type("Empty")):
         positions = {
             "Foreplay" : ["Pick Foreplay"],
             "Oral" : ["Pick Oral"],
             "Vaginal" : ["Pick Vaginal"],
             "Anal" : ["Pick Anal"]
         }
-        if not condition:
-            condition = make_condition_blank()
         for position in sorted(list_of_positions, key = lambda x: x.name):
             if mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits) and condition.filter_condition_positions(position): #There is a valid object and if it requires large tits she has them.
                 if allow_position(person, position):
@@ -431,13 +427,11 @@ init 5 python:
 
 
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = None):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = Condition_Type("Empty")):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
         $ report_log["positions_used"] = [] #This is a list, not an int.
-    if condition is None:
-        $ condition = make_condition_blank()
 
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
@@ -531,7 +525,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue":
-            if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignroe all of that
+            if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignore all of that
                 if start_position is None: #The first time we get here,
                     call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition) from _call_pick_position_bugfix
                     $ position_choice = _return
@@ -742,9 +736,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             call describe_girl_climax(the_person, position_choice, object_choice, private, report_log) from _call_describe_girl_fuck_person_bugfix #Calls just the climax stuff without costing energy.
 
         $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the beginning of the loop we can set a mandatory choice for the first one.
-    $ condition.run_rewards(the_person, position_choice, object_choice, report_log)
 
     python:
+        condition.run_rewards(the_person, report_log)
 
         clear_sex_modifiers(the_person)
 
@@ -1344,7 +1338,7 @@ label break_strip_outfit_taboos(the_person):
                 $ taboo_broken = True
     return taboo_broken
 
-label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False, prohibit_tags = [], condition = None):
+label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False, prohibit_tags = [], condition = Condition_Type("Empty")):
     call screen enhanced_main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition)))
     $ position_choice = _return
     return None if position_choice == "Nothing" else position_choice

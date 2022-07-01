@@ -62,7 +62,7 @@ label condition_computer_work_reward_label(the_person, the_position, the_object,
     "[the_person.possessive_title] seems much more obedient now."
     return
 
-label condition_computer_work_fail_label(the_person, the_position, the_object, report_log, the_condition):
+label condition_computer_work_fail_label(the_person, report_log, the_condition):
     if not the_condition.condition_vars[0]:
         $ the_person.draw_person(position = "standing_doggy")
         "[the_person.title] has stopped working completely."

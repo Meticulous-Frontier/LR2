@@ -30,19 +30,15 @@ init -2 python:
 
         def filter_condition_positions(self, the_position):
             if self.position_whitelist:
-                if the_position in self.position_whitelist:
-                    return True
-                return False
+                return the_position in self.position_whitelist
             if self.position_blacklist:
-                if the_position in self.position_blacklist:
-                    return False
-                return True
+                return the_position in self.position_blacklist
             return True
 
-        def run_rewards(self, the_person, the_position, the_object, report_log):
+        def run_rewards(self, the_person, report_log):
             if self.reward_cond:
-                if self.reward_cond(the_person, the_position, the_object, report_log, self):
-                    renpy.call(self.reward_label,the_person, the_position, the_object, report_log, self)
+                if self.reward_cond(the_person, report_log, self):
+                    renpy.call(self.reward_label, the_person, report_log, self)
                 elif self.fail_label:
-                    renpy.call(self.fail_label,the_person, the_position, the_object, report_log, self)
+                    renpy.call(self.fail_label, the_person, report_log, self)
             return
