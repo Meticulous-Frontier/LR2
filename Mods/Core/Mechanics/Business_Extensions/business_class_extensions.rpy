@@ -482,16 +482,16 @@ init -1 python:
 
     def hire_college_intern(self, person, target_division, add_to_location = False):
         div_func = {
-            "Research" : [ self.college_interns_research, self.r_div],
-            "Production" : [ self.college_interns_production, self.p_div],
-            "Supply" : [ self.college_interns_supply, self.s_div ],
-            "Marketing" : [ self.college_interns_market, self.m_div ],
-            "HR" : [ self.college_interns_HR, self.h_div ]
+            "Research" : [ self.college_interns_research, self.r_div, student_intern_rd_job],
+            "Production" : [ self.college_interns_production, self.p_div, student_intern_production_job],
+            "Supply" : [ self.college_interns_supply, self.s_div, student_intern_supply_job],
+            "Marketing" : [ self.college_interns_market, self.m_div, student_intern_market_job],
+            "HR" : [ self.college_interns_HR, self.h_div, student_intern_hr_job]
         }
         if not person in div_func[target_division][0]:
             div_func[target_division][0].append(person)
         person.add_role(college_intern_role)
-        person.change_job(student_job)
+        person.change_job(target_division[2])
         person.set_override_schedule(div_func[target_division][1], the_days = [5,6], the_times = [1,2])
         if add_to_location:
             university.add_person(person)

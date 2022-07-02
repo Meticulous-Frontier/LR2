@@ -15,6 +15,17 @@ label add_extra_room_job_definitions():
         list_of_jobs.append([bartender_downtown_bar_job, 3])
         list_of_jobs.append([waitress_downtown_bar_job, 3])
 
+        student_intern_rd_job = Job("Student (Biology)", generic_student_role, job_location = university, work_times = [1,2],
+            mandatory_duties = [research_work_duty], available_duties = [] + general_duties_list + general_rd_duties)
+        student_intern_production_job = Job("Student (Chemistry)", generic_student_role, job_location = university, work_times = [1,2],
+            mandatory_duties = [production_work_duty], available_duties = [] + general_duties_list + general_production_duties)
+        student_intern_market_job = Job("Student (Graphic Design)", generic_student_role, job_location = university, work_times = [1,2],
+            mandatory_duties = [market_work_duty], available_duties = [] + general_duties_list + general_market_duties)
+        student_intern_hr_job = Job("Student (Psychology)", generic_student_role, job_location = university, work_times = [1,2],
+            mandatory_duties = [hr_work_duty], available_duties = [] + general_duties_list + general_hr_duties)
+        student_intern_supply_job = Job("Student (Business)", generic_student_role, job_location = university, work_times = [1,2],
+            mandatory_duties = [supply_work_duty], available_duties = [] + general_duties_list + general_supply_duties)
+
         receptionist_hotel_job = Job("Receptionist", unimportant_job_role, job_location = downtown_hotel, work_days = [2,3,4,5,6], work_times = [1,2])
         maid_hotel_job = Job("Maid", unimportant_job_role, job_location = downtown_hotel, work_days = [0,2,4,6], work_times=[1,2])
         maid_hotel_job2 = Job("Maid", unimportant_job_role, job_location = downtown_hotel, work_days = [1,3,5], work_times=[1,2,3])
