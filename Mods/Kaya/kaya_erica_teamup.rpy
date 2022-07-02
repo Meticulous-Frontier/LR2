@@ -1202,7 +1202,7 @@ label kaya_erica_teamup_get_drinks_label():
         "Add serum to [erica.title]'s drink":
             call give_serum(erica) from _call_give_serum_erica_study_night_111
             if _return:
-                "You mix the serum into [the_person.possessive_title]'s water."
+                "You mix the serum into [erica.possessive_title]'s water."
             else:
                 "You decide not to give her any for now."
         "Leave her drink alone":
