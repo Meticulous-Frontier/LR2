@@ -306,11 +306,31 @@ init -1 python:
 init 6 python:
     def wearing_bra_enhanced(self): # specific cloth items don't count as bra
         if self.upper_body:
-            if self.get_upper_ordered()[0].underwear and not self.get_upper_ordered()[0] in [cincher, heart_pasties]:
+            if self.get_upper_ordered()[0].underwear and not self.get_upper_ordered()[0].layer == 0:
                 return True
         return False
 
     Outfit.wearing_bra = wearing_bra_enhanced
+
+    def get_full_strip_list_enhanced(self, strip_feet = True, strip_accessories = False): #TODO: This should support visible_enough at some point.
+        items_to_strip = self.lower_body + [x for x in self.upper_body if x.layer > 0]
+        if strip_feet:
+            items_to_strip.extend(self.feet)
+        if strip_accessories: # exclude make-up and earings
+            items_to_strip.extend([x for x in self.accessories if not x in earings_list])
+        items_to_strip.sort(key= lambda clothing: clothing.tucked, reverse = True) #Tucked upper body stuff draws after lower body.
+        items_to_strip.sort(key= lambda clothing: clothing.layer) #Sort the clothing so it is removed top to bottom based on layer.
+
+        extension_items = []
+        for item in items_to_strip:
+            if item.is_extension:
+                extension_items.append(item)
+
+        for item in extension_items:
+            items_to_strip.remove(item) #Don't try and strip extension directly.
+        return items_to_strip[::-1] #Put it in reverse order so when stripped it will be done from outside in.
+
+    Outfit.get_full_strip_list = get_full_strip_list_enhanced
 
     def get_total_slut_modifiers_enhanced(self):
         new_score = 0
