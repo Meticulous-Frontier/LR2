@@ -150,7 +150,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Production: [the_person.production_skill]" style "menu_text_style"
                         text "Supply Procurement: [the_person.supply_skill]" style "menu_text_style"
                         text "Work Experience Level: [the_person.work_experience]" style "menu_text_style"
-                        if the_person.has_role(employee_role):
+                        if the_person.has_role([employee_role, college_intern_role]):
                             textbutton "Review Duties: " + str(len(the_person.duties)) + "/" + str(the_person.work_experience):
                                 style "textbutton_style"
                                 text_style "menu_text_style"
