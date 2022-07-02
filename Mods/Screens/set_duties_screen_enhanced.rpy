@@ -6,7 +6,8 @@ init 2:
         default person_portrait = the_person.build_person_portrait()
         default person_job_info = person_info_ui_get_job_title(the_person)
         default visible_roles = ", ".join(info_detail_visible_roles(the_person))
-        default available_duties = [x for x in the_person.job.available_duties if x.check_requirement(person)]
+        default available_duties = [x for x in the_person.job.available_duties if x.check_requirement(the_person)]
+        default current_duties = the_person.duties
         default add_duties = []
         default remove_duties = []
         default selected_duty = None
@@ -52,7 +53,7 @@ init 2:
                             # viewport: #TODO: Add viewports when we have enough duties set to justify it
                             #     mousewheel True
                             #     scrollbars "vertical"
-                            for a_duty in sorted(list(set(available_duties) - set(the_person.duties) - set(add_duties)), key = lambda x: x.duty_name):
+                            for a_duty in sorted(list(set(available_duties) - (set(current_duties) - set(remove_duties)) - set(add_duties)), key = lambda x: x.duty_name):
                                 textbutton a_duty.duty_name:
                                     style "textbutton_style" text_style "textbutton_text_style"
                                     action SetScreenVariable("selected_duty", a_duty)
@@ -73,13 +74,13 @@ init 2:
                     xanchor 0.5
                     xalign 0.5
                     vbox:
-                        $ the_person.duties_title = "Current Duties (" + str(len(the_person.duties)-len(remove_duties)+len(add_duties)) + "/" + str(the_person.work_experience) + ")"
-                        text the_person.duties_title style "serum_text_style_header"
+                        $ duties_title = "Current Duties (" + str(len(current_duties)-len(remove_duties)+len(add_duties)) + "/" + str(the_person.work_experience) + ")"
+                        text duties_title style "serum_text_style_header"
                         # viewport:
                         #     mousewheel True
                         #     scrollbars "vertical"
                         vbox:
-                            for a_duty in sorted(list(set(the_person.duties + add_duties) - set(remove_duties)), key = lambda x: x.duty_name):
+                            for a_duty in sorted(list(set(current_duties + add_duties) - set(remove_duties)), key = lambda x: x.duty_name):
                                 textbutton a_duty.duty_name:
                                     style "textbutton_style" text_style "textbutton_text_style"
 
@@ -104,7 +105,7 @@ init 2:
                         if selected_duty is not None:
                             use duty_tooltip(selected_duty):
                                 if allow_changing_duties: #Hide the button so we can use this as a display.
-                                    if selected_duty in the_person.duties + add_duties:
+                                    if selected_duty in list(set(current_duties) - set(remove_duties)) + add_duties:
                                         if selected_duty in the_person.job.mandatory_duties:
                                             textbutton "Locked - Mandatory Duty":
                                                 style "textbutton_style"
@@ -132,7 +133,7 @@ init 2:
                                         $ button_name = "Add Duty"
                                         $ button_sensitive = selected_duty.check_requirement(the_person)
                                         if button_sensitive is True:
-                                            if len(the_person.duties) - len(remove_duties) + len(add_duties) >= the_person.work_experience:
+                                            if len(current_duties) - len(remove_duties) + len(add_duties) >= the_person.work_experience:
                                                 $ button_sensitive = "Max Duties Reached"
                                         if isinstance(button_sensitive, basestring):
                                             $ button_name += " - " + button_sensitive
