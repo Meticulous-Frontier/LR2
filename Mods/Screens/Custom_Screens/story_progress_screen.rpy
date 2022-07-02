@@ -35,7 +35,7 @@ init 2:
                             text "Required Salary: $[person.salary]/day" style "menu_text_style" size 16
                         text "Personality: " + person.personality.personality_type_prefix.capitalize() style "menu_text_style" size 16
                         if person.is_girlfriend():
-                            text "Relationship: [mc.name]'s girlfriend"
+                            text "Relationship: [mc.name]'s girlfriend" style "menu_text_style" size 16
                         elif person.relationship:
                             text "Relationship: " + person.relationship style "menu_text_style" size 16
                             if person.relationship != "Single":
