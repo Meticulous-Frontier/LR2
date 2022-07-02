@@ -213,7 +213,7 @@ label kaya_sex_responses_anal(the_person):
 label kaya_climax_responses_foreplay(the_person):
     if the_person.sluttiness > 50:
         the_person "Oh thank god I'm going to... I'm... OH!"
-        the_person "{b}I'm Cumming!{/b}{=kaya_lang}Moenga!{/=kaya_lang}"
+        the_person "{b}I'm Cumming!{/b} {=kaya_lang}Moenga!{/=kaya_lang}"
     else:
         the_person "Mmmmhm!"
     return
@@ -222,7 +222,7 @@ label kaya_climax_responses_oral(the_person):
     if the_person.sluttiness > 70:
         the_person "That's the spot! I'm done [the_person.mc_title]!"
         "She closes her eyes and squeals with pleasure."
-        the_person "{b}I'm Cumming!{/b}{=kaya_lang}Moenga!{/=kaya_lang}"
+        the_person "{b}I'm Cumming!{/b} {=kaya_lang}Moenga!{/=kaya_lang}"
     else:
         the_person "Oh my god, I'm going to cum. I'm going to cum!"
         "She closes her eyes and squeals with pleasure."
