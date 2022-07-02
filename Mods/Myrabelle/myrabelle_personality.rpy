@@ -811,8 +811,8 @@ label myrabelle_condom_ask(the_person):
         the_person "Hey, maybe you should put on a condom. If you don't you'll have to pull out."
     else:
         the_person "Were you going to put on a condom? It might be a good idea, unless you trust yourself to pull out."
-    the_person "I'm not on birth control, so it could get risky if you don't..."
-    $ the_person.update_birth_control_knowledge()
+        the_person "I'm not on birth control, so it could get risky if you don't..."
+        $ the_person.update_birth_control_knowledge()
     return
 
 label myrabelle_condom_bareback_ask(the_person):
