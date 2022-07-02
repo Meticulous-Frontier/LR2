@@ -220,14 +220,14 @@ init -1 python:
         if "get_strip_club_foreclosed_stage" in globals():
             if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
                 multiplier = 1
-                if __builtin__.len(people_in_role(stripclub_manager_role)) > 0 or __builtin__.len(people_in_role(stripclub_mistress_role)) > 0:
+                if any([x for x in all_people_in_the_game() if x.has_job([stripclub_manager_job, stripclub_mistress_job])]):
                     multiplier = 1.1 # +10% income
 
                 for person in known_people_in_the_game():
-                    if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role]):
+                    if person.has_job([stripclub_stripper_job, stripclub_waitress_job, stripclub_bdsm_performer_job]):
                         income += (calculate_stripper_profit(person) * multiplier)  # profit
 
-                    if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]):
+                    if person.has_job([stripclub_stripper_job, stripclub_waitress_job, stripclub_bdsm_performer_job, stripclub_manager_job, stripclub_mistress_job]):
                         income -= person.stripper_salary    # costs
 
         return __builtin__.int(income)  # round to whole dollars
@@ -491,7 +491,7 @@ init -1 python:
         if not person in div_func[target_division][0]:
             div_func[target_division][0].append(person)
         person.add_role(college_intern_role)
-        person.change_job(target_division[2])
+        person.change_job(div_func[target_division][2])
         person.set_override_schedule(div_func[target_division][1], the_days = [5,6], the_times = [1,2])
         if add_to_location:
             university.add_person(person)
