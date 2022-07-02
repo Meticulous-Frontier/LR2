@@ -30,7 +30,7 @@ init 2 python:
 
         # init ellie job (make her hidden on start)
         ellie_job = Job("IT Specialist", critical_job_role, purgatory, work_days = [0,1,2,3,4,5,6], work_times = [1,2,3],
-            mandatory_duties = [hr_work_duty, research_work_duty], available_duties = [] + general_duties_list + general_hr_duties + general_rd_duties)
+            mandatory_duties = [hr_work_duty], available_duties = [] + general_duties_list + general_hr_duties)
 
         #global ellie
         global ellie
