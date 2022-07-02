@@ -87,24 +87,26 @@ init 5 python:
         return None
 
     def cheating_check_get_watcher(person):
-        other_people = [x for x in mc.location.people if x != person] #Build a list with all the _other_ people in the room other than the one we're fucking.
         # skip cheating check when person is Office Free Use Slut
         if not person.has_role(employee_freeuse_role):
             # only check if she is jealous and not willing to threesome with the girl
-            for other_person in [x for x in other_people if x.is_jealous() and not willing_to_threesome(person, x)]:
+            for other_person in [y for y in [x for x in mc.location.people if x != person] if y.is_jealous() and not willing_to_threesome(person, y)]:
                 if other_person.has_role(girlfriend_role) and the_position.slut_requirement > (other_person.sluttiness * .6) + (other_person.get_opinion_score("threesomes") * 5) + (5 * other_person.get_opinion_score("public sex")) : #You can get away with 60% as slutty as she would do +- threesome inclination / public sex
                     caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
                     if not exists_in_room_enter_list(other_person, "caught_cheating_label"):
                         other_person.add_unique_on_room_enter_event(caught_cheating_action)
-                        renpy.say(None, other_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                        renpy.say(None, other_person.title + " gasps when she sees what you and " + person.title + " are doing and storms off.")
+                        other_person.change_location(other_person.home)
 
                 elif other_person.has_role(affair_role) and the_position.slut_requirement > (other_person.sluttiness * .8) + (other_person.get_opinion_score("threesomes") * 5) + (5 * other_person.get_opinion_score("public sex")): #You can get away with 80% as slutty as she would do +- threesome inclination / public sex
                     caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
                     if not exists_in_room_enter_list(other_person, "caught_affair_cheating_label"):
                         other_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
-                        renpy.say(None, other_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                        renpy.say(None, other_person.title + " gasps when she sees what you and " + person.title + " are doing and storms off.")
+                        other_person.change_location(other_person.home)
 
-        watcher = get_random_from_list(other_people)
+        # get watcher from remaining people
+        watcher = get_random_from_list([x for x in mc.location.people if x != person])
         if watcher:
             if watcher.get_opinion_score("public sex") > 0:
                 watcher.add_situational_slut("public sex watcher", 5 * watcher.get_opinion_score("public sex"), "They're doing it right in front of me! That's so fucking hot!")
