@@ -50,22 +50,23 @@ init 2:
                         xalign 0.5
                         vbox:
                             text "Available Duties" style "serum_text_style_header" size 22
-                            # viewport: #TODO: Add viewports when we have enough duties set to justify it
-                            #     mousewheel True
-                            #     scrollbars "vertical"
-                            for a_duty in sorted(list(set(available_duties) - (set(current_duties) - set(remove_duties)) - set(add_duties)), key = lambda x: x.duty_name):
-                                textbutton a_duty.duty_name:
-                                    style "textbutton_style" text_style "textbutton_text_style"
-                                    action SetScreenVariable("selected_duty", a_duty)
-                                    sensitive True
-                                    if not a_duty is selected_duty:
-                                        background "#000080"
+                            viewport:
+                                mousewheel True
+                                scrollbars "vertical"
+                                vbox:
+                                    for a_duty in sorted(list(set(available_duties) - (set(current_duties) - set(remove_duties)) - set(add_duties)), key = lambda x: x.duty_name):
+                                        textbutton a_duty.duty_name:
+                                            style "textbutton_style" text_style "textbutton_text_style"
+                                            action SetScreenVariable("selected_duty", a_duty)
+                                            sensitive True
+                                            if not a_duty is selected_duty:
+                                                background "#000080"
 
-                                    else:
-                                        background "#000040"
+                                            else:
+                                                background "#000040"
 
-                                    hover_background "#1a45a1"
-                                    insensitive_background "#222222"
+                                            hover_background "#1a45a1"
+                                            insensitive_background "#222222"
 
                 frame:
                     background "#1a45a1aa"
@@ -76,23 +77,23 @@ init 2:
                     vbox:
                         $ duties_title = "Current Duties (" + str(len(current_duties)-len(remove_duties)+len(add_duties)) + "/" + str(the_person.work_experience) + ")"
                         text duties_title style "serum_text_style_header"
-                        # viewport:
-                        #     mousewheel True
-                        #     scrollbars "vertical"
-                        vbox:
-                            for a_duty in sorted(list(set(current_duties + add_duties) - set(remove_duties)), key = lambda x: x.duty_name):
-                                textbutton a_duty.duty_name:
-                                    style "textbutton_style" text_style "textbutton_text_style"
+                        viewport:
+                            mousewheel True
+                            scrollbars "vertical"
+                            vbox:
+                                for a_duty in sorted(list(set(current_duties + add_duties) - set(remove_duties)), key = lambda x: x.duty_name):
+                                    textbutton a_duty.duty_name:
+                                        style "textbutton_style" text_style "textbutton_text_style"
 
-                                    action SetScreenVariable("selected_duty", a_duty)
-                                    sensitive True
-                                    if not a_duty is selected_duty:
-                                        background "#000080"
+                                        action SetScreenVariable("selected_duty", a_duty)
+                                        sensitive True
+                                        if not a_duty is selected_duty:
+                                            background "#000080"
 
-                                    else:
-                                        background "#000040"
-                                    hover_background "#1a45a1"
-                                    insensitive_background "#222222"
+                                        else:
+                                            background "#000040"
+                                        hover_background "#1a45a1"
+                                        insensitive_background "#222222"
                 frame:
                     background "#1a45a1aa"
                     xsize 500
