@@ -256,6 +256,7 @@ init 1 python:
 
 label check_mod_installation(stack):
     $ validate_mod_installation_location()
+    $ mod_installed = True
 
     $ execute_hijack_call(stack)
     return
@@ -272,6 +273,8 @@ label activate_compatibility_fix(stack):
     return
 
 label update_compatibility_fix(stack):
+    $ mod_installed = True
+
     if not "crisis_tracker_dict" in globals():
         $ crisis_tracker_dict = {}
 
