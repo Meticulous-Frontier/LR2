@@ -247,7 +247,7 @@ label body_monitor_phase_3_label():
     person_2 "Is there something wrong?"
     mc.name "No need to worry. We were just discussing something, and we need your work expertise about the topic. Please take a seat."
     $scene_manager.update_actor(person_2, position = "sitting")
-    "After [person_2.possessive_title] joins you at the desk, you give her a quick recap about the topic and then shift your attention towards [person_1.possessive_title]"
+    "After [person_2.possessive_title] joins you at the desk, you give her a quick recap about the topic and then shift your attention towards [person_1.possessive_title]."
     mc.name "So, what do you have in mind?"
     person_1 "I was thinking about using the nanobots to do something that would be beneficial for the subjects on the one side, but would also benefit your non-work-related activities."
     "[person_1.possessive_title] winks at you with a smirk on her face."
@@ -263,7 +263,7 @@ label body_monitor_phase_3_label():
     $ scene_manager.update_actor(person_1, position = "stand3")
     person_1 "Understood, [person_1.mc_title]. I will give her everything she needs right away."
     $ scene_manager.update_actor(person_2, position = "stand3")
-    person_2 "I will start working on it as soon as my schedule allows it, [person_2.mc_title]"
+    person_2 "I will start working on it as soon as my schedule allows it, [person_2.mc_title]."
     $ scene_manager.update_actor(person_1, position ="walking_away")
     $ scene_manager.update_actor(person_2, position ="walking_away")
     "You watch your employees leave your office with a smile on your face."
