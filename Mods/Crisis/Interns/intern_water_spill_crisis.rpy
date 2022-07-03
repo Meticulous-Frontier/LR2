@@ -1,6 +1,6 @@
 init 2 python:
     def intern_water_spill_crisis_requirement():
-        return (mc.business.any_intern_in_office() and mc.is_at_work())
+        return mc.is_at_work() and any(x for x in mc.business.get_intern_list() if x.is_at_work())
 
     intern_water_spill_crisis = ActionMod("Intern Water Spill Crisis",intern_water_spill_crisis_requirement,"intern_water_spill_crisis_label",
         menu_tooltip = "An intern spills her water", category = "Intern", is_crisis = True)

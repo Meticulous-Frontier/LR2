@@ -8,10 +8,10 @@ init 1 python:
 
     def college_intern_on_turn(the_person):
         for duty in the_person.duties:
-            if college_intern_is_at_work(the_person) or not duty.only_at_work:
+            if the_person.is_at_work() or not duty.only_at_work:
                 duty.on_turn(the_person)
 
-        if college_intern_is_at_work(the_person):
+        if the_person.is_at_work():
             the_person.event_triggers_dict["worked_today"] = True
         return
 
@@ -49,13 +49,10 @@ init 1 python:
         return False
 
     def college_intern_training_requirement(the_person):
-        if college_intern_is_at_work(the_person):
-            return True
-        return False
+        return the_person.is_at_work()
 
     def college_intern_recruit_market_requirement(the_person):
         return False
-
 
     def college_intern_recruit_hr_requirement():
         return False
@@ -66,7 +63,7 @@ init 1 python:
         return False
 
     def college_intern_set_duties_requirement(the_person):
-        if not college_intern_is_at_work(the_person):
+        if not the_person.is_at_work():
             return "Only in the office"
 
         if the_person.event_triggers_dict.get("work_duties_last_set", -1) < day:

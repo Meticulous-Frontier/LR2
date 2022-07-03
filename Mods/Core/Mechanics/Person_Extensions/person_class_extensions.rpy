@@ -1637,7 +1637,11 @@ init -1 python:
     Person.hide_person = hide_person_enhanced
 
     def person_is_at_work(self): #Checks to see if the character is at work.
-        if not self.job or not self.job.job_location:
+        # special handling for college interns
+        if self.has_role("College Intern") and self.location in [rd_division, p_division, m_division, office]:
+            return True
+
+        if not self.job:
             return False
 
         return self.location == self.job.job_location

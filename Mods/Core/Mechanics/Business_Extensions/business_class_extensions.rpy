@@ -544,11 +544,3 @@ init -1 python:
         return [x for x in self.college_interns_research + self.college_interns_production + self.college_interns_supply + self.college_interns_market + self.college_interns_HR if x.is_available]
 
     Business.get_intern_list = business_get_intern_list
-
-    def any_intern_in_office(self):
-        for x in self.get_intern_list():
-            if college_intern_is_at_work(x):
-                return True
-        return False
-
-    Business.any_intern_in_office = any_intern_in_office
