@@ -455,7 +455,7 @@ label ashley_classical_concert_date_label():
     the_person "Okay. Bye Steph!"
     $ scene_manager.hide_actor(stephanie)
     mc.name "Shall we?"
-    #TODO find concert hall background image to change to.
+    $ show_concert_hall_background()
     "You step into the concert hall, show your tickets, and make you way to your seats."
     $ scene_manager.update_actor(the_person, position = "sitting")
     "You have a few minutes before the concert starts, so you try making some small talk."
@@ -481,7 +481,6 @@ label ashley_classical_concert_date_label():
     "When the concert is over, the lights slowly come back on. You let go of her hand as you both start to get up."
     $ scene_manager.update_actor(the_person, position = "stand3")
     "You slowly file out of the concert hall, chatting about the concert."
-    #TODO change to downtown background
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     "When you get outside, [the_person.title] looks around."
