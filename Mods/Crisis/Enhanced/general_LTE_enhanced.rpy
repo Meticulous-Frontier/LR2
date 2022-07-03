@@ -14,9 +14,7 @@ init 2 python:
     def replace_work_spank_opportunity_requirement():
         found = next((x for x in limited_time_event_pool if x[0].effect == "work_spank_opportunity"), None)
         if found:
-            print("Found: " + found[0].name)
             found[0].requirement = work_spank_opportunity_all_employees_requirement
-            print("Replaced requirement")
         return
 
 label update_general_LTE(stack):
