@@ -264,6 +264,7 @@ label check_mod_installation(stack):
 label activate_compatibility_fix(stack):
     # make sure we store the crisis tracker in the save game
     $ crisis_tracker_dict = {}
+    $ mod_installed = True
 
     $ update_pinned_cache()
 
