@@ -49,7 +49,7 @@ init 1 python:
         return False
 
     def college_intern_training_requirement(the_person):
-        return the_person.is_at_work()
+        return the_person.is_at_work() and not the_person.location == university
 
     def college_intern_recruit_market_requirement(the_person):
         return False
@@ -63,7 +63,7 @@ init 1 python:
         return False
 
     def college_intern_set_duties_requirement(the_person):
-        if not the_person.is_at_work():
+        if not the_person.is_at_work() or the_person.location == university:
             return "Only in the office"
 
         if the_person.event_triggers_dict.get("work_duties_last_set", -1) < day:
