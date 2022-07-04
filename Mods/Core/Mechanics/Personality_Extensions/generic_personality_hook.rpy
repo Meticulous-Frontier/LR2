@@ -472,6 +472,10 @@ init 2 python:
             rebuild_wardrobe(person)
             update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
             create_party_schedule(person)
+
+        # setup christina as Trophy Wife
+        trophy_wife = Job("Trophy Wife", critical_job_role)
+        christina.change_job(trophy_wife)
         return
 
     def update_special_characters_opinions():
