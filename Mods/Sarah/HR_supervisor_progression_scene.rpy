@@ -376,7 +376,7 @@ label hr_director_prog_trans_scene_4(the_group):
     $ the_person = the_group[0]
     if the_person.is_girlfriend():
         the_person "[the_person.mc_title]... you know I love you, right?"
-        "Oh god, that is a very serious line to just throw out there."
+        "She seems very serious about what she's going to say."
         mc.name "Of course."
         the_person "Good."
     else:
