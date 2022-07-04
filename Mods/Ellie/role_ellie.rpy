@@ -1042,6 +1042,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     $ scene_manager.update_actor(the_person, position = "stand3")
     "[talk_person.possessive_title] looks at you a little concerned, but you give her quick wink. She gives a smile as you turn and walk back out of the room."
     $ scene_manager.clear_scene()
+    $ del talk_person
     "Silently you lead [the_person.title] to your office."
     $ ceo_office.show_background()
     "You let her step inside, then close the door, locking it quietly, motioning for her to sit down."

@@ -167,6 +167,7 @@ label body_monitor_phase_1_label():
     $ mc.business.event_triggers_dict["body_monitor_progress"] = body_monitor_progress_count() + 1
     $ mc.business.add_mandatory_crisis(body_monitor_phase_2_action)
     $ mc.business.add_mandatory_crisis(bm_on_hold_1_action)
+    $ workplace = None
     return
 
 label body_monitor_phase_2_label():

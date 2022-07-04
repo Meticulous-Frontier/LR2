@@ -1083,20 +1083,19 @@ label myra_energy_drink_test_label(the_person):
     mc.name "I agree."
     $ clear_scene()
     "You step away from the desk after saying goodbye. You should set up delivery of the serum with one of your employees."
-    $ delivery_person = None
 
     if alexia.is_employee():
         $ myra.event_triggers_dict["energy_drink_supplier"] = alexia.identifier
         "Since [alexia.possessive_title] is working for you, it makes sense to have her do the deliveries. You should talk to her about it next chance you get."
-        $ delivery_person = alexia
+        $ alexia.add_unique_on_room_enter_event(myra_energy_drink_distribution_intro)
     else:
         "No one really stands out to you as an obvious choice for who to have run the deliveries."
         "Who should you talk to about it?"
         call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
-        $ delivery_person = _return
-        $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
-        "You decide to talk to [delivery_person.title] about running the deliveries. You should talk to her about it as soon as practical."
-    $ delivery_person.add_unique_on_room_enter_event(myra_energy_drink_distribution_intro)
+        if isinstance(_return, Person):
+            $ _return.add_unique_on_room_enter_event(myra_energy_drink_distribution_intro)
+            $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
+            "You decide to talk to [delivery_person.title] about running the deliveries. You should talk to her about it as soon as practical."
     return
 
 label myra_energy_drink_distribution_intro_label(the_person):     #On talk event. Work out details of distributing energy drink at gaming cafe with myra
@@ -1125,7 +1124,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
         "Unfortunately, your delivery person is not available anymore. You decide to appoint someone new to do it."
         call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
         $ the_person = _return
-        $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
+        $ myra.event_triggers_dict["energy_drink_supplier"] = the_person.identifier
         $ new_delivery_person = True
     else:
         $ the_person = get_person_by_identifier(contact)
@@ -1133,8 +1132,9 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
             "Unfortunately, your delivery person is not available anymore. You decide to appoint someone new to do it."
             call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
             $ the_person = _return
-            $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
+            $ myra.event_triggers_dict["energy_drink_supplier"] = the_person.identifier
             $ new_delivery_person = True
+    $ contact = None
 
     if new_delivery_person:
         "You head to your office, paging [the_person.title] to meet you there."

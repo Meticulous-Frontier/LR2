@@ -685,6 +685,8 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
         "You aren't sure that you will be able to manage it while [myra.title] hates getting head though..."
     elif alexia.opinion_score_getting_head() == -2:
         "You aren't sure that you will be able to manage it while [alexia.title] hates getting head though..."
+    $ the_loser = None
+    $ the_target = None
     # call advance_time from _call_advance_myra_alexia_teamup_scene_adv_01
     return
 
@@ -984,6 +986,9 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         "You aren't sure that you will be able to manage it while [myra.title] hates vaginal sex though..."
     elif alexia.opinion_score_vaginal_sex() == -2:
         "You aren't sure that you will be able to manage it while [alexia.title] hates vaginal sex though..."
+
+    $ the_loser = None
+    $ the_target = None
     # call advance_time from _call_advance_myra_alexia_teamup_scene_adv_01
     return
 
@@ -1129,6 +1134,9 @@ label myra_alexia_teamup_scene_scene_3(the_group, scene_transition = False):  #S
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
     "Things are amazing with the two gamer girls. Could it possibly even get any better?."
+
+    $ the_loser = None
+    $ the_target = None
     return
 
 label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    #Free use - Not yet written.
