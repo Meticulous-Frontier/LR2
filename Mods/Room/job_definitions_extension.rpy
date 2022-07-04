@@ -41,11 +41,14 @@ label add_extra_room_job_definitions():
         architect_job = Job("Architect", critical_job_role, job_location = downtown, work_days = [0,1,2,3,4], work_times = [1,2])
         interior_decorator_job = Job("Interior Decorator", critical_job_role, job_location = downtown, work_days = [0,1,2,3,4], work_times = [1,2])
         fashion_designer_job = Job("Fashion Designer", critical_job_role, job_location = downtown, work_days = [0,1,2,3,4], work_times = [1,2])
+        pro_gamer_job = Job("Pro Gamer", critical_job_role, job_location = gaming_cafe, work_days = [2,4,5,6], work_times = [2, 3])
+
         list_of_jobs.append([lawyer_job, 2])
         list_of_jobs.append([doctor_job, 2])
         list_of_jobs.append([architect_job, 2])
         list_of_jobs.append([interior_decorator_job, 2])
         list_of_jobs.append([fashion_designer_job, 2])
+        list_of_jobs.append([pro_gamer_job, 2])
 
         # shuffle the list of jobs
         renpy.random.shuffle(list_of_jobs)
