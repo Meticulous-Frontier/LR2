@@ -1217,7 +1217,7 @@ label relationship_sex_watch(the_person, the_watcher, the_relation, the_position
         $ the_watcher.change_stats(obedience = -2, happiness = -1)
         "[title] looks away while you and her [the_relation] [the_position.verb]."
 
-    elif the_watcher.sluttiness < the_watcher.slut_requirement - 10:
+    elif the_watcher.sluttiness < the_position.slut_requirement - 10:
         $ the_watcher.draw_person()
         $ the_watcher.change_happiness(-1)
         "[title] shakes her head and tries to avoid watching you and her [the_relation] [the_position.verb]."
