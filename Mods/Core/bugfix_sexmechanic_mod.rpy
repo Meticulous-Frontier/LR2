@@ -1187,7 +1187,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         $ the_person.change_obedience(3)
 
         if town_relationships.is_family(the_watcher, the_person):
-            call relationship_sex_watch(the_watcher, town_relationships.get_relationship_type(the_watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
+            call relationship_sex_watch(the_person, the_watcher, town_relationships.get_relationship_type(the_watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
             $ the_position.redraw_scene(the_person)
             call relationship_being_watched(the_person, the_watcher, town_relationships.get_relationship_type(the_person, the_watcher).lower(), the_position) from _call_relationship_being_watched
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
@@ -1205,41 +1205,41 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
     $ the_watcher = None
     return
 
-label relationship_sex_watch(the_person, the_relation, the_position):
-    $ title = the_person.title if the_person.title else "The stranger"
-    if the_person.sluttiness < the_position.slut_requirement - 20:
-        $ the_person.draw_person(emotion = "angry")
+label relationship_sex_watch(the_person, the_watcher, the_relation, the_position):
+    $ title = the_watcher.title if the_watcher.title else "The stranger"
+    if the_watcher.sluttiness < the_position.slut_requirement - 20:
+        $ the_watcher.draw_person(emotion = "angry")
         if not the_person.relationship == "Single":
             $ so_title = SO_relationship_to_title(the_person.relationship)
-            the_person "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. What would your [so_title] think of this?"
+            the_watcher "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. What would your [so_title] think of this?"
         else:
-            the_person "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. Don't either of you have any decency?"
-        $ the_person.change_stats(obedience = -2, happiness = -1)
+            the_watcher "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. Don't either of you have any decency?"
+        $ the_watcher.change_stats(obedience = -2, happiness = -1)
         "[title] looks away while you and her [the_relation] [the_position.verb]."
 
-    elif the_person.sluttiness < the_position.slut_requirement - 10:
-        $ the_person.draw_person()
-        $ the_person.change_happiness(-1)
+    elif the_watcher.sluttiness < the_watcher.slut_requirement - 10:
+        $ the_watcher.draw_person()
+        $ the_watcher.change_happiness(-1)
         "[title] shakes her head and tries to avoid watching you and her [the_relation] [the_position.verb]."
 
-    elif the_person.sluttiness < the_position.slut_requirement:
-        $ the_person.draw_person()
-        $ the_person.change_slut(1)
+    elif the_watcher.sluttiness < the_position.slut_requirement:
+        $ the_watcher.draw_person()
+        $ the_watcher.change_slut(1)
         "[title] tries to avert her gaze, but keeps glancing over while you and her [the_relation] [the_position.verb]."
 
-    elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
-        $ the_person.draw_person()
+    elif the_watcher.sluttiness > the_position.slut_requirement and the_watcher.sluttiness < the_position.slut_cap:
+        $ the_watcher.draw_person()
         if not the_person.relationship == "Single":
             $ so_title = SO_relationship_to_title(the_person.relationship)
-            the_person "Oh my... I wonder what your [so_title] would say..."
+            the_watcher "Oh my... I wonder what your [so_title] would say..."
         else:
-            the_person "Oh my..."
-        $ the_person.change_slut(2)
+            the_watcher "Oh my..."
+        $ the_watcher.change_slut(2)
         "[title] continues watching you and her [the_relation] [the_position.verb]."
 
     else:
-        $ the_person.draw_person(emotion = "happy")
-        the_person "Glad to see you two are having a good time. [the_person.mc_title], careful you aren't too rough with my [the_relation]."
+        $ the_watcher.draw_person(emotion = "happy")
+        the_watcher "Glad to see you two are having a good time. [the_watcher.mc_title], careful you aren't too rough with my [the_relation]."
         "[title] watches quietly while you and her [the_relation] [the_position.verb]."
     return
 
