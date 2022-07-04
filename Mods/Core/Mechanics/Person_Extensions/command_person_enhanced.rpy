@@ -23,7 +23,7 @@ label command_person_enhanced(the_person):
     mc.name "[the_person.title], I want you to do something for me."
     the_person "Yes [the_person.mc_title]?"
 
-    if "action_mod_list" in globals():
+    if mod_installed:
         call screen enhanced_main_choice_display(build_menu_items([build_command_person_actions_menu2(the_person)]))
     else:
         call screen main_choice_display([build_command_person_actions_menu2(the_person)])

@@ -73,7 +73,7 @@ label persuade_person(the_person):
     mc.name "[the_person.title], I was hoping you would do something for me."
     the_person "Yes [the_person.mc_title]?"
 
-    if "action_mod_list" in globals():
+    if mod_installed:
         call screen enhanced_main_choice_display(build_menu_items([build_clarity_person_actions_menu(the_person)]))
     else:
         call screen main_choice_display([build_clarity_person_actions_menu(the_person)])

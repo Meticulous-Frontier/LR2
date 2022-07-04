@@ -187,7 +187,7 @@ label horny_at_work_crisis_enhanced_label():
                 else:
                     $ exit_option = "Just have her watch"
 
-                if "action_mod_list" in globals():
+                if mod_installed:
                     call screen enhanced_main_choice_display(build_menu_items([build_helpful_people_menu(helpful_people, exit_option)]))
                 else:
                     call screen main_choice_display([build_helpful_people_menu(helpful_people, exit_option)]) #Shows a list of people w/ predictive imaging when you hover
@@ -252,7 +252,7 @@ label horny_at_work_crisis_enhanced_label():
                             $ renpy.say(None, helpful_people[0].title + " is still standing next to your desk, and you haven't exhausted yourself quite yet...")
 
                         $ exit_option = "Finish up"
-                        if "action_mod_list" in globals():
+                        if mod_installed:
                             call screen enhanced_main_choice_display(build_menu_items([build_helpful_people_menu(helpful_people, exit_option)]))
                         else:
                             call screen main_choice_display([build_helpful_people_menu(helpful_people, exit_option)]) #Shows a list of people w/ predictive imaging when you hover
