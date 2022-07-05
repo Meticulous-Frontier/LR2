@@ -223,12 +223,14 @@ label cum_fetish_employee_intro_label(the_person):
     $ add_cum_fetish(the_person)
     the_person "That... was amazing..."
     "You put your cock back in your pants and grab your stuff."
+    $ the_person.draw_person()
     mc.name "You are such a good cum slut. I'll make sure to make use of your mouth again soon. Have a goodnight [the_person.title]."
     the_person "Good night [the_person.mc_title]!"
+    $ clear_scene()
+    $ mc.change_location(lobby)
+    $ mc.location.show_background()
     "You leave the office, setting the doors to lock automatically after [the_person.title] leaves. She definitely seems to have developed a fetish for your cum!"
-    python:
-        the_person.apply_planned_outfit()
-        clear_scene()
+    $ the_person.apply_planned_outfit()
     return True
 
 label cum_fetish_family_intro_label(the_person):
@@ -358,10 +360,9 @@ label cum_fetish_family_intro_label(the_person):
     "[the_person.possessive_title] slowly stands up and turns to you. You can see a tiny bit of your cum dribbling down her lip."
     mc.name "I need to get going. Take care [the_person.title]."
     "You say goodbye to [the_person.possessive_title] then leave her room. As you walk away, you can't help but smile."
+    $ clear_scene()
     "Your serums have turned her into your cumslut."
-    python:
-        the_person.apply_planned_outfit()
-        clear_scene()
+    $ the_person.apply_planned_outfit()
     return True
 
 label cum_fetish_generic_intro_label(the_person):
@@ -511,11 +512,11 @@ label cum_fetish_mom_intro_label():
     the_person "Okay... I think I'm good for now. It's time to get up! Why don't you hop in the shower while I go make some breakfast?"
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] leaves your room. Wow! What a night! She definitely has a fetish for your cum now."
+    $ clear_scene()
     "You grab some clothes and head for the shower."
     python:
         the_person.apply_planned_outfit()
         mc.location.show_background()
-        clear_scene()
     return "Advance Time"
 
 label cum_fetish_lily_intro_label():
@@ -572,12 +573,12 @@ label cum_fetish_lily_intro_label():
     mc.name "Of course, [the_person.title]. I'll always be here for you."
     "[the_person.possessive_title]'s body melts into yours as she hears your words."
     the_person "Okay... I'm going to hop out of the shower now."
+    $ clear_scene()
     "[the_person.possessive_title] gets out. You finish up with your shower, balls empty and ready for the day!"
     "She definitely seems to have developed a fetish for your cum."
     python:
         the_person.apply_planned_outfit()
         mc.location.show_background()
-        clear_scene()
     return
 
 label cum_fetish_rebecca_intro_label(the_person):
@@ -762,7 +763,9 @@ label cum_fetish_sarah_intro_label():
             the_person "Oh, I think I'm good for today... but I'm sure it won't be long until I get hungry again..."
             "She's been under the influence of your serums for a while now. She has definitely developed a cum fetish."
             "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
+            $ the_person.apply_planned_outfit()
             the_person "Thanks again, [the_person.mc_title]. We should do this again... and soon."
+            $ the_person.draw_person(position = "walking_away")
             "You wave goodbye to [the_person.possessive_title] and finish eating your lunch."
         "Refuse":
             the_person "I'm sorry to hear that..." #TODO finish this
