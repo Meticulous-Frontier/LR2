@@ -39,7 +39,7 @@ init 2 python:
 
     def girlfriend_quit_dikdok_requirement(the_person):
         if not the_person.has_role(dikdok_role):
-            return
+            return False
         if the_person in unique_character_list:
             return False
         if the_person.love < 40: # hide option will love is very low
