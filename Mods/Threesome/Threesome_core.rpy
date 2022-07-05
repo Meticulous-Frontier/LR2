@@ -810,10 +810,9 @@ init python:
 
         person_one_slut_req = THREESOME_BASE_SLUT_REQ
         person_two_slut_req = THREESOME_BASE_SLUT_REQ
-        if person_one in [mom, lily, cousin, aunt]:
-            person_one_slut_req += (-5 * person_one.get_opinion_score("incest")) #Incest modifier
-        if person_two in [mom, lily, cousin, aunt]:
-            person_two_slut_req += (-5 * person_one.get_opinion_score("incest")) #Incest modifier
+        if town_relationships.is_family(person_one, person_two):
+            person_one_slut_req += (-5 * (person_one.get_opinion_score("incest") - 2)) #Incest modifier
+            person_two_slut_req += (-5 * (person_two.get_opinion_score("incest") - 2)) #Incest modifier
 
         # threesome opinion modifier
         person_one_slut_req += (person_one.get_opinion_score("threesomes") * -5)
