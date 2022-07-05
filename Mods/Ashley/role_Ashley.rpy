@@ -1129,7 +1129,7 @@ label ashley_second_concert_date_label():
     mc.name "Are we still going to the concert?"
     ashley "Of course! I wasn't lying, and I'll be damned if I miss the opportunity to see the Los Angeles Philharmonic. Tickets weren't cheap you know! And my cheapskate boss barely pays me enough to cover the cost of living."
     "Wow, she is pretty sassy this evening. You tease each other a bit more but make your way into the concert."
-    #[Change background]
+    $ show_concert_hall_background()
     "As you take your seats, you try and fit in one last remark."
     mc.name "I would think as an intern, YOU should be the one on your knees under the desk servicing the boss during the workday, not the other way around."
     "A couple people near you give you a questioning look, but seem relieved when [the_person.title] starts to laugh."
@@ -1144,7 +1144,7 @@ label ashley_second_concert_date_label():
     ashley "Ha! Oh wow. You've been watching some good porn lately huh? I don't think Steph is really the sharing type... I'm usually not either..."
     mc.name "And yet, here you are, with your sister's boyfriend. Maybe you just haven't met someone worth sharing before?"
     "[the_person.title] is quiet. Right on cue, the lights turn down and the music begins."
-    #[Change lighting to dark]
+    $ show_concert_hall_background(darken = True)
     "The music begins, playing through some classical music that you aren't familiar with, but it is quite enjoyable. When you look over at [the_person.possessive_title] she seems to be really enjoying herself."
     "After a while, as the music goes through a crescendo, you feel her squeeze your hand, then turn it over, so her palm is against the back of your hand."
     "She puts your hand on her leg, then slowly starts to push it up, under her dress..."
@@ -1171,7 +1171,7 @@ label ashley_second_concert_date_label():
     "You slowly pull your hand away from her crotch. It's been wet with her arousal for so long it's starting to get a little wrinkled. She opens her clutch and starts to pull out a handkerchief, but you have another idea."
     "You bring it to your mouth and taste it. Her flavor is musky but sweet. You can't wait to taste the source."
     "[the_person.title] just watches as you clean your fingers."
-    # change lighting
+    $ show_concert_hall_background()
     "The lights come back on and people start to get up. You can see [ashley.title]'s chest rising and falling rapidly. She is breathing heavy and is really turned on."
     $ the_person.draw_person()
     mc.name "Well, I promised to get you home straight away."
@@ -1438,10 +1438,10 @@ label ashley_second_concert_date_label():
 
 
     if caught_ashley_cheating:
-        the_person "I can't believe it... you promised!!!"
+        stephanie "I can't believe it... you promised!!!"
         $ the_person.change_love(-50)
         mc.name "I..."
-        the_person "You should go."
+        stephanie "You should go."
         "There is probably no way for you to patch things up right now... You decide to do as she asks."
         "You gather your stuff and leave."
         $ mc.business.add_mandatory_crisis(ashley_steph_second_date_confrontation)
