@@ -139,13 +139,17 @@ init -1 python:
         renpy.show("university_library", what=Image(library_image), layer = "master")
         return
 
-    def show_university_study_room_background(*args, **kwargs):
+    def show_university_study_room_background(darken = False):
         university_study_room_image = university_study_room_backgrounds[time_of_day]
+        if darken:
+            university_study_room_image = im.MatrixColor(university_study_room_image, im.matrix.saturation(0.9)*im.matrix.tint(.9,.9,.9)*im.matrix.brightness(-0.25))
         renpy.show("university_study_room", what=Image(university_study_room_image), layer = "master")
         return
 
-    def show_concert_hall_background(*arg, **kwargs):
+    def show_concert_hall_background(darken = False):
         concert_hall_image = concert_hall_backgrounds[time_of_day]
+        if darken:
+            concert_hall_image = im.MatrixColor(concert_hall_image, im.matrix.saturation(0.9)*im.matrix.tint(.9,.9,.9)*im.matrix.brightness(-0.25))
         renpy.show("concert_hall", what = Image(concert_hall_image), layer = "master")
         return
 
