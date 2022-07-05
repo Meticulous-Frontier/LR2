@@ -75,7 +75,7 @@ init 2 python:
             stage = -1,     #-1 will play the intro
             person_action = False,   #If this progression scene should run when encountering a person
             business_action = False,    #If this progression scene is a mandatory business event
-            is_random = False,  #If this progression scene is a randomly occuring crisis event
+            is_random = False,  #If this progression scene is a randomly occurring crisis event
             unit_test_func = myra_focus_unit_test_func,  #Set a custom unit test function to test this progression event. Runs between every cycle
             advance_time = True,    #Currently this is broke. Advance time in the scenes themselves for now...
             is_multiple_choice = False, #If MC can choose what final scene he wants
@@ -116,7 +116,7 @@ label myra_focus_progression_scene_intro_scene(the_group):
     $ clear_scene()
     "You head over and sit down."
     "Your job now is to distract [the_person.possessive_title] as she plays the game. You wonder if you can make conversation enough to distract her?"
-    "You wonder if there is anythign else you could do to distract her also."
+    "You wonder if there is anything else you could do to distract her also."
     the_person "Alright, let's get this started."
     $ the_person.draw_person(position = "sitting")
     "[the_person.title] sits down at the desk, logs in and loads up the game."
@@ -195,7 +195,7 @@ label myra_focus_progression_scene_intro_scene(the_group):
     $ clear_scene()
     "Training [the_person.possessive_title]'s focus will be beneficial to her career in esports. You wonder if any of your serums could help out."
     "You bet that you could probably offer to get her an energy drink when you train her and dose it..."
-    "Would increasing her suggestability make it easier to train her focus? You imagine so."
+    "Would increasing her suggestibility make it easier to train her focus? You imagine so."
     "You can now train [the_person.title]'s focus once per day."
     "[the_person.title] and [alexia.title] are getting together on Friday night. You make a note to swing by and see what they are up to..."
     $ myra.add_unique_on_room_enter_event(myra_alexia_teamup_scene_action)
@@ -355,7 +355,7 @@ label myra_focus_trans_scene_2(the_group):
     else:
         "[the_person.possessive_title] perky tits drop as she takes her top off. The look firm and pleasing to the eye."
 
-    "She takes a long sip from her energy drink as she gets logged in to the game. She smacks your hand when you try to pre-emptively cop a feel."
+    "She takes a long sip from her energy drink as she gets logged in to the game. She smacks your hand when you try to pre-emptily cop a feel."
     return
 
 label myra_focus_trans_scene_3(the_group):
@@ -373,7 +373,7 @@ label myra_focus_trans_scene_3(the_group):
 
     "[the_person.title] rolls her eyes, but is listening to you so far."
     the_person "What did you have in mind this time?"
-    mc.name "I want you to try gving me a lap dance while you play. Having to split your attention between two things will be a major challenge."
+    mc.name "I want you to try giving me a lap dance while you play. Having to split your attention between two things will be a major challenge."
     "[the_person.possessive_title] just laughs."
     the_person "And let me guess. We should both be naked."
     mc.name "Of course. How distracting do you think a pair of trousers are?"
@@ -757,7 +757,7 @@ label myra_focus_progression_scene_4(the_group, scene_transition = False):  #ana
     if myra_wins:
         mc.name "That was incredible."
         the_person "I know! That felt amazing."
-        "She leaves it ambigious whether she is talking about winning or your cock that is still deep in her ass..."
+        "She leaves it ambiguous whether she is talking about winning or your cock that is still deep in her ass..."
         if the_person.focus < 8:
             $ the_person.change_focus(1)
             the_person "I feel like I'm getting better and better. Thank you for your help."
@@ -826,14 +826,14 @@ label myra_focus_training_encounter(the_person):
         "[the_person.title] defends her home point with two teammates. The other team has sent 2 attackers, for a 2v3."
         "The two enemies are already injured, [the_person.possessive_title] should be able to handle this encounter, under normal circumstances anyway..."
     elif encounter_num == 2:
-        "A 3v3 battle is occuring on the center point, which [the_person.title] quickly joins."
+        "A 3v3 battle is occurring on the center point, which [the_person.title] quickly joins."
         "Her allies were struggling, but with [the_person.possessive_title] they should be able to turn the tide."
     elif encounter_num == 3:
         "[the_person.title] joins in during a 1v2 battle her home point, evening up the battle."
         "[the_person.possessive_title] looks at the map sees an ally also just resurrected, if she can hold off the two attackers for a bit, a teammate will be there soon to assist."
     elif encounter_num == 4:
         "[the_person.title] finds herself in a team battle at the center point. This appears to be an even 3v3 battle."
-        "This should be a moderatly challenging scenario for someone as skilled as [the_person.possessive_title]."
+        "This should be a moderately challenging scenario for someone as skilled as [the_person.possessive_title]."
     elif encounter_num == 5:
         "[the_person.title] joins a team battle at the center point that is already in progress."
         "Her teammates have taken some damage, but with some skill and luck, [the_person.possessive_title] can turn the tide there."
@@ -933,7 +933,7 @@ label myra_focus_training_encounter(the_person):
             "The enemy manages to get their teammate back up, resulting in a 2v1. [the_person.possessive_title] tries to disengage, but gets snared and killed."
         elif encounter_num == 7:
             "[the_person.title] tries to play defensively while outnumbered at the center. However, because of your distractions, she misses it when one of the enemy player's stealths."
-            "The enemy player unstealths right next to her, knocking her down. Before she can react, the enemy team focuses and downs her, driving away her teammate."
+            "The enemy player un-stealths right next to her, knocking her down. Before she can react, the enemy team focuses and downs her, driving away her teammate."
         elif encounter_num == 8:
             "[the_person.title] plays defensively at her home point, but it is of little use."
             "Between your distractions and being outnumbered, the enemy team quickly downs her and takes the home point."
@@ -957,7 +957,7 @@ label myra_focus_light_distraction(the_person):
         else:
             "You run your fingers lightly across [the_person.title]'s sides."
             if the_person.tits_available():
-                "Your hands run up along her belly to the underside of her tits, teasting them a bit, but otherwise leaving her mostly undisturbed."
+                "Your hands run up along her belly to the underside of her tits, teasing them a bit, but otherwise leaving her mostly undisturbed."
                 $ the_person.change_arousal(15)
             else:
                 "Your hands run up her front. You trace a few circles around her tits through her clothes, but otherwise leaving her mostly undisturbed."
@@ -1297,7 +1297,7 @@ label myra_focus_training_mc_orgasm(the_person):
     if myra_focus_progression_scene.get_stage() == 3:   #assjob
         "[the_person.possessive_title]'s hot ass grinding against your cock has got you ready burst."
         mc.name "God damn keep going, I'm about to cum."
-        "[the_person.title] moves her hips up and down against you agressively. You grab her hips as you start to cum."
+        "[the_person.title] moves her hips up and down against you aggressively. You grab her hips as you start to cum."
         $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
         $ the_person.cum_on_ass()
         $ mc.arousal = 0

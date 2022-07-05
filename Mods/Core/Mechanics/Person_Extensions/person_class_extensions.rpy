@@ -1637,7 +1637,11 @@ init -1 python:
     Person.hide_person = hide_person_enhanced
 
     def person_is_at_work(self): #Checks to see if the character is at work.
-        if not self.job or not self.job.job_location:
+        # special handling for college interns
+        if self.has_role("College Intern") and self.location in [rd_division, p_division, m_division, office]:
+            return True
+
+        if not self.job:
             return False
 
         return self.location == self.job.job_location
@@ -1767,19 +1771,32 @@ init -1 python:
         return self.has_role(employee_role)
     Person.is_employee = is_employee
 
-    def has_role(self, role):
+    def has_role_enhanced(self, role):
         if isinstance(role, basestring):
             return any(x for x in self.special_role if x.role_name == role) \
                 or any(x for x in self.special_role if x.parent_role and x.parent_role.role_name == role)
         elif isinstance(role, list):
             return any(x in self.special_role for x in role) \
                 or any(x.parent_role in self.special_role for x in role)
-        else:
-            return role in self.special_role \
-                or role.parent_role in self.special_role \
-                or any(x for x in self.special_role if x.check_looks_like(role))
 
-    Person.has_role = has_role
+        return role in self.special_role \
+            or role.parent_role in self.special_role \
+            or any(x for x in self.special_role if x.check_looks_like(role))
+
+    Person.has_role = has_role_enhanced
+
+    def has_job_enhanced(self, job):
+        if not self.job:
+            return False
+
+        if isinstance(job, basestring):
+            return self.job.job_title == job
+        elif isinstance(job, list):
+            return self.job in job
+
+        return self.job == job
+
+    Person.has_job = has_job_enhanced
 
     def add_role(self, role):
         added = False
@@ -1787,23 +1804,26 @@ init -1 python:
             self.special_role.append(role)
             added = True
 
-        if added:
-            # special condition if she hates kissing, but becomes your girlfriend or paramour she would allow kissing
-            if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role, harem_role]:
-                self.increase_opinion_score("kissing")
+        if not added:
+            return False
 
-            # special situation if she gets girlfriend role, she loses affair role and SO
-            if role == girlfriend_role:
-                self.remove_role(affair_role)
-                self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
-                self.SO_name = None
+        # special condition if she hates kissing, but becomes your girlfriend or paramour she would allow kissing
+        if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role, harem_role]:
+            self.increase_opinion_score("kissing")
 
-            if role == harem_role:
-                self.remove_role(girlfriend_role)
-                mc.business.event_triggers_dict["harem_mansion_unlocked"] = True
-                #TODO: Add event with dialog to give info about unlocked harem mansion
+        # special situation if she gets girlfriend role, she loses affair role and SO
+        if role == girlfriend_role:
+            self.remove_role(affair_role)
+            self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
+            self.SO_name = None
+
+        if role == harem_role:
+            self.remove_role(girlfriend_role)
+            mc.business.event_triggers_dict["harem_mansion_unlocked"] = True
+            #TODO: Add event with dialog to give info about unlocked harem mansion
 
         return added
+
     Person.add_role = add_role
 
     def remove_role(self, role, remove_all = False, remove_linked = True):

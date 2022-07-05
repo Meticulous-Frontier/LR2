@@ -220,14 +220,14 @@ init -1 python:
         if "get_strip_club_foreclosed_stage" in globals():
             if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
                 multiplier = 1
-                if __builtin__.len(people_in_role(stripclub_manager_role)) > 0 or __builtin__.len(people_in_role(stripclub_mistress_role)) > 0:
+                if any([x for x in all_people_in_the_game() if x.has_job([stripclub_manager_job, stripclub_mistress_job])]):
                     multiplier = 1.1 # +10% income
 
                 for person in known_people_in_the_game():
-                    if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role]):
+                    if person.has_job([stripclub_stripper_job, stripclub_waitress_job, stripclub_bdsm_performer_job]):
                         income += (calculate_stripper_profit(person) * multiplier)  # profit
 
-                    if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]):
+                    if person.has_job([stripclub_stripper_job, stripclub_waitress_job, stripclub_bdsm_performer_job, stripclub_manager_job, stripclub_mistress_job]):
                         income -= person.stripper_salary    # costs
 
         return __builtin__.int(income)  # round to whole dollars
@@ -259,6 +259,19 @@ init -1 python:
             # run extension code
             if not person.job:
                 return None
+
+            if "college_intern_role" in globals():
+                # only use this part after the college interns unlocked
+                if person.job == student_intern_market_job and not person.location == university:
+                    return business.m_uniform
+                if person.job == student_intern_rd_job and not person.location == university:
+                    return business.r_uniform
+                if person.job == student_intern_production_job and not person.location == university:
+                    return business.p_uniform
+                if person.job == student_intern_supply_job and not person.location == university:
+                    return business.s_uniform
+                if person.job == student_intern_hr_job and not person.location == university:
+                    return business.h_uniform
 
             if person == police_chief:
                 if not "police_chief_uniform_wardrobe" in globals():    # save game compatibility remove after v0.49
@@ -482,16 +495,16 @@ init -1 python:
 
     def hire_college_intern(self, person, target_division, add_to_location = False):
         div_func = {
-            "Research" : [ self.college_interns_research, self.r_div],
-            "Production" : [ self.college_interns_production, self.p_div],
-            "Supply" : [ self.college_interns_supply, self.s_div ],
-            "Marketing" : [ self.college_interns_market, self.m_div ],
-            "HR" : [ self.college_interns_HR, self.h_div ]
+            "Research" : [ self.college_interns_research, self.r_div, student_intern_rd_job],
+            "Production" : [ self.college_interns_production, self.p_div, student_intern_production_job],
+            "Supply" : [ self.college_interns_supply, self.s_div, student_intern_supply_job],
+            "Marketing" : [ self.college_interns_market, self.m_div, student_intern_market_job],
+            "HR" : [ self.college_interns_HR, self.h_div, student_intern_hr_job]
         }
         if not person in div_func[target_division][0]:
             div_func[target_division][0].append(person)
         person.add_role(college_intern_role)
-        person.change_job(student_job)
+        person.change_job(div_func[target_division][2])
         person.set_override_schedule(div_func[target_division][1], the_days = [5,6], the_times = [1,2])
         if add_to_location:
             university.add_person(person)
@@ -544,11 +557,3 @@ init -1 python:
         return [x for x in self.college_interns_research + self.college_interns_production + self.college_interns_supply + self.college_interns_market + self.college_interns_HR if x.is_available]
 
     Business.get_intern_list = business_get_intern_list
-
-    def any_intern_in_office(self):
-        for x in self.get_intern_list():
-            if college_intern_is_at_work(x):
-                return True
-        return False
-
-    Business.any_intern_in_office = any_intern_in_office

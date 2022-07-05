@@ -132,13 +132,13 @@ init 10 python:
         if myra_focus_progression_scene.get_stage() >= 0:
             other_info_list.append("You can help [myra.title] train her focus to get better at gaming in distracting situations.")
             if myra_focus_progression_scene.get_stage() == 0:
-                other_info_list.append("You distract her with backrubs during training. Raise her sluttiness to take disitractions further.")
+                other_info_list.append("You distract her with back rubs during training. Raise her sluttiness to take distractions further.")
             elif myra_focus_progression_scene.get_stage() == 1:
-                other_info_list.append("You distract her by groping her tits during training. Raise her sluttiness to take disitractions further.")
+                other_info_list.append("You distract her by groping her tits during training. Raise her sluttiness to take distractions further.")
             elif myra_focus_progression_scene.get_stage() == 2:
-                other_info_list.append("You distract her by fingering her during training. Raise her sluttiness to take disitractions further.")
+                other_info_list.append("You distract her by fingering her during training. Raise her sluttiness to take distractions further.")
             elif myra_focus_progression_scene.get_stage() == 3:
-                other_info_list.append("You distract her by getting a lap dance during training. Raise her sluttiness to take disitractions further.")
+                other_info_list.append("You distract her by getting a lap dance during training. Raise her sluttiness to take distractions further.")
             elif myra_focus_progression_scene.get_stage() == 4:
                 other_info_list.append("You distract her by fucking her ass during training.")
         if myra_can_distribute_serum():

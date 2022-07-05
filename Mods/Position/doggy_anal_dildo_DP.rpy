@@ -90,7 +90,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
 
     else:
         "In response to your spanking, [the_girl.possessive_title] thrusts herself back against you. Your penis is completely consumed by her bowel and she moans lewdly."
-        "When she starts to pull off you give her other ass check a hard swat. She buries her face in the [the_object.name] and moans as she pushes herself back onto you again."
+        "When she starts to pull off you give her other ass cheek a hard swat. She buries her face in the [the_object.name] and moans as she pushes herself back onto you again."
         the_girl "Oh fuck [the_girl.mc_title], I needed this so bad. Make me cum all over that dildo!"
         "[the_girl.possessive_title]'s ass feels so tight you are tempted to let her continue setting the pace, but you worry she might get the wrong idea if you let this little slut take charge."
         menu:

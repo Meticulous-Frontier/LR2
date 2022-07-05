@@ -511,12 +511,12 @@ label myrabelle_flirt_response_mid(the_person):
             the_person "I think it shows off a little too much!"
             if the_person.outfit.vagina_visible():
                 the_person "Look at me, you can practically see everything!"
-                the_person "No offence, but this uniform makes me look like a whore."
+                the_person "No offense, but this uniform makes me look like a whore."
             elif the_person.outfit.tits_visible():
                 the_person "My boobs are just hanging out, for goodness sakes!"
-                the_person "No offence, but your uniform makes me look like a slut."
+                the_person "No offense, but your uniform makes me look like a slut."
             else:
-                the_person "No offence, but this uniform feels a little inappropriate."
+                the_person "No offense, but this uniform feels a little inappropriate."
             mc.name "I understand, but it's important for the business."
             the_person "Rules are rules, I suppose. I am glad you think I look good in it though."
             "[the_person.possessive_title] gives you an uncomfortable smile."
@@ -811,8 +811,8 @@ label myrabelle_condom_ask(the_person):
         the_person "Hey, maybe you should put on a condom. If you don't you'll have to pull out."
     else:
         the_person "Were you going to put on a condom? It might be a good idea, unless you trust yourself to pull out."
-    the_person "I'm not on birth control, so it could get risky if you don't..."
-    $ the_person.update_birth_control_knowledge()
+        the_person "I'm not on birth control, so it could get risky if you don't..."
+        $ the_person.update_birth_control_knowledge()
     return
 
 label myrabelle_condom_bareback_ask(the_person):
@@ -898,7 +898,7 @@ label myrabelle_cum_pullout(the_person):
                 "She seems almost desperate as she moans."
                 the_person "I don't care if you knock me up! I'm just your... breeding slut!"
 
-            menu: #TODO: Add a varient of this normally so you can stealth a girl (don't do that in real life, it's super fucked up).
+            menu: #TODO: Add a variant of this normally so you can stealth a girl (don't do that in real life, it's super fucked up).
                 "Take off the condom":
                     "You don't have much time to spare. You pull out, barely clearing her pussy, and pull the condom off as quickly as you can manage."
                     $ mc.condom = False
@@ -1243,7 +1243,7 @@ label myrabelle_sex_end_early(the_person):
     else:
         if the_person.love > 40:
             if the_person.arousal > 60:
-                the_person "You don't want to take this any further? I thought we had a real connction."
+                the_person "You don't want to take this any further? I thought we had a real connection."
             else:
                 the_person "That's all? Well, maybe we can try again some other time."
         else:
@@ -1849,7 +1849,7 @@ label myrabelle_GIC_finish_response(the_person, the_goal):
     elif the_goal == "waste cum":
         the_person "Keep that cum where it belongs... far away from me!"
     elif the_goal == "hate fuck":
-        the_person "God I needed to get off. Did you finish? Ah nevermind I don't care anyway."
+        the_person "God I needed to get off. Did you finish? Ah never mind, I don't care anyway."
     elif the_goal == "vaginal creampie":
         if the_person.has_breeding_fetish():
             the_person "MMmmm, I can feel your cum so deep..."

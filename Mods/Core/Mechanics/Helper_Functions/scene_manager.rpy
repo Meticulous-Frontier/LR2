@@ -67,8 +67,10 @@ init -2 python:
                 actor.lighting = lighting
             if display_transform:
                 actor.display_transform = display_transform
-            if z_order:
+            if not z_order is None:
                 actor.z_order = z_order
+
+            # print("Update actor:" + actor.person.name + " (position: " + actor.position + ", z-order: " + str(actor.z_order) + ")")
             self.draw_scene()
 
         def strip_actor_outfit_to_max_sluttiness(self, person, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, temp_sluttiness_boost = 0):

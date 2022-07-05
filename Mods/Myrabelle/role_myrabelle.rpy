@@ -224,7 +224,7 @@ init -2 python:
 #Actions
 init 3 python:
     myra_rude_intro = Action("Meet Myra", myra_rude_intro_requirement, "myra_rude_intro_label")
-    myra_gaming_cafe_opening = Action("Gameing Cafe Gran Opening", myra_gaming_cafe_opening_requirement, "myra_gaming_cafe_opening_label")
+    myra_gaming_cafe_opening = Action("Gaming Cafe Grand Opening", myra_gaming_cafe_opening_requirement, "myra_gaming_cafe_opening_label")
 
 #Story Labels
 label myra_rude_intro_label():
@@ -546,7 +546,7 @@ label myra_esports_first_tournament_label():    #Mandatory event. Preluded to du
     alexia "See ya."
     $ scene_manager.clear_scene()
     "You stand up and walk out of the gaming cafe."
-    "That was hard to watch. You are sure that [the_person.possessive_title] is devasted at the result."
+    "That was hard to watch. You are sure that [the_person.possessive_title] is devastated at the result."
     "You wonder to yourself. Could helping her with her focus be something that you could help with?"
     "Surely there are ways that you could help her out. Maybe you should wait a few days and talk to her about it?"
     $ myra.event_triggers_dict["has_failed_tournament"] = True
@@ -588,7 +588,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     mc.name "Exactly."
     $ mc.change_location(downtown_bar)
     $ mc.location.show_background()
-    "You step inside the bar. Aftter a quick ID check, you walk with [the_person.title] up to the bar."
+    "You step inside the bar. After a quick ID check, you walk with [the_person.title] up to the bar."
     "Bartender" "Hey, what'll it be for you two?"
     mc.name "I'll just have a bourbon. Neat."
     the_person "Can I get a zombie?"
@@ -639,7 +639,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
                 mc.name "I mean, there are multiple ways of achieving that, if it is something you want to do."
                 the_person "I... I'm sorry, are you suggesting I get implants?"
                 mc.name "Not necessarily. It just seemed like you were interested in the possibility?"
-                the_person "Well, I'm not. Not through surgery anwyay."
+                the_person "Well, I'm not. Not through surgery anyway."
                 mc.name "There are ways of achieving a larger bust without surgery"
                 the_person "Wow, well, that is a subject for another time... What were we talking about again?"
                 $ the_person.change_love(-1)
@@ -651,7 +651,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
             "Change the subject":
                 mc.name "Hey, you're the one who brought up tits."
                 the_person "Right. Well, I would never get surgery for it. What were we talking about again?"
-    mc.name "Let me get straight to the point. How much money are you going to lose from the sponsorhip you lost today?"
+    mc.name "Let me get straight to the point. How much money are you going to lose from the sponsorship you lost today?"
     "[the_person.title] quietly takes a long sip from her drink before responding."
     the_person "Well... the one I lost today was for ten grand."
     mc.name "I see. What if I sponsored you? My pharmaceutical company could use a bit more press."
@@ -667,7 +667,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     mc.name "I'll be right back, let me go fix that."
     "You start to get up."
     the_person "Hey, meet me over there, I think I see some old arcade games."
-    "[the_person.title] points to the back corner where some older ardcade cabinets are set up."
+    "[the_person.title] points to the back corner where some older arcade cabinets are set up."
     mc.name "Sounds good, I'll meet you over there."
     $ clear_scene()
     "You head over to the bartender, ordering a couple more drinks for you and her."
@@ -883,7 +883,7 @@ label myra_gains_sponsor_label(the_person):
     $ the_person.change_love(5, 90)
     "You hand her a check, made out for the full amount."
     the_person "Wow... okay... You are now a sponsor of the Predators esports gaming team!"
-    "[the_person.possessive_title] smiles at you. You really do feel like this is going to be a worthwile busines venture."
+    "[the_person.possessive_title] smiles at you. You really do feel like this is going to be a worthwhile business venture."
     the_person "I'm gonna go put this in the safe for the day, if you need anything else, come find me, okay?"
     $ the_person.draw_person(position = "kissing")
     "[the_person.title] throws her arms around you and gives you a big hug, before letting go and walking off."
@@ -1040,7 +1040,7 @@ label myra_energy_drink_research_final_label():     #On talk event. Test energy 
     $ myra_unlock_energy_drink_serum()
     $ myra.add_unique_on_talk_event(myra_energy_drink_test)
     "You have unlocked the energy drink serum trait!"
-    "Create a new serum using the trait and take it to [myra.possessive_title], and if she likes it you can start distrubiting it there to the public!."
+    "Create a new serum using the trait and take it to [myra.possessive_title], and if she likes it you can start distributing it there to the public!."
     "For now, you should probably not do anything too controversial. Keep the attention of the serum 2 or less, and don't distribute any nanobots!"
     return
 
@@ -1083,20 +1083,19 @@ label myra_energy_drink_test_label(the_person):
     mc.name "I agree."
     $ clear_scene()
     "You step away from the desk after saying goodbye. You should set up delivery of the serum with one of your employees."
-    $ delivery_person = None
 
     if alexia.is_employee():
         $ myra.event_triggers_dict["energy_drink_supplier"] = alexia.identifier
         "Since [alexia.possessive_title] is working for you, it makes sense to have her do the deliveries. You should talk to her about it next chance you get."
-        $ delivery_person = alexia
+        $ alexia.add_unique_on_room_enter_event(myra_energy_drink_distribution_intro)
     else:
         "No one really stands out to you as an obvious choice for who to have run the deliveries."
         "Who should you talk to about it?"
         call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
-        $ delivery_person = _return
-        $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
-        "You decide to talk to [delivery_person.title] about running the deliveries. You should talk to her about it as soon as practical."
-    $ delivery_person.add_unique_on_room_enter_event(myra_energy_drink_distribution_intro)
+        if isinstance(_return, Person):
+            $ _return.add_unique_on_room_enter_event(myra_energy_drink_distribution_intro)
+            $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
+            "You decide to talk to [delivery_person.title] about running the deliveries. You should talk to her about it as soon as practical."
     return
 
 label myra_energy_drink_distribution_intro_label(the_person):     #On talk event. Work out details of distributing energy drink at gaming cafe with myra
@@ -1125,7 +1124,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
         "Unfortunately, your delivery person is not available anymore. You decide to appoint someone new to do it."
         call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
         $ the_person = _return
-        $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
+        $ myra.event_triggers_dict["energy_drink_supplier"] = the_person.identifier
         $ new_delivery_person = True
     else:
         $ the_person = get_person_by_identifier(contact)
@@ -1133,8 +1132,9 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
             "Unfortunately, your delivery person is not available anymore. You decide to appoint someone new to do it."
             call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
             $ the_person = _return
-            $ myra.event_triggers_dict["energy_drink_supplier"] = delivery_person.identifier
+            $ myra.event_triggers_dict["energy_drink_supplier"] = the_person.identifier
             $ new_delivery_person = True
+    $ contact = None
 
     if new_delivery_person:
         "You head to your office, paging [the_person.title] to meet you there."
@@ -1937,7 +1937,7 @@ label myra_bigger_tits_final_label(the_person):       #If her tits are bigger, s
     $ the_person.strip_to_tits(position = "stand3")
     $ mc.change_locked_clarity(30)
     if the_person.sluttiness >= 40 or the_person.love > 60:
-        "[the_person.possessive_title] quicky strips off her top, revealing a generous set of tits."
+        "[the_person.possessive_title] quickly strips off her top, revealing a generous set of tits."
         the_person "They're amazing! And they feel completely natural! Come, feel this..."
         "She grabs your hand and drags it to her chest, forcing you to feel her up."
         the_person "See? And..."

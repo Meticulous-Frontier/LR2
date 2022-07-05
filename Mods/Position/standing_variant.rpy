@@ -304,7 +304,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
     "You didn't have any plans of stopping anyway."
     if mc.sex_skills["Vaginal"] > the_girl.sex_skills["Vaginal"]: #If MC is better at sex than girl
         "In fact, you decide it's time to take things to the next level and really pleasure her."
-        "You shift our hips to the side, changing the angle of penetration to give increased friction against her G-spot."
+        "You shift your hips to the side, changing the angle of penetration to give increased friction against her G-spot."
         "You give [the_girl.possessive_title] a few short, shallow thrusts, the shove yourself deep and bottom out. You reach around her body and grope at her breast with your free hand."
         the_girl "[the_girl.mc_title] you fuck me so good... I don't know how you do it!"
         if the_girl.arousal > 130: #Sex gets more intense the more she has orgasmed

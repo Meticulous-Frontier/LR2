@@ -161,7 +161,7 @@ label hr_director_prog_scene_choice_label(the_group):
         the_person "So, need some relief before we get started today? I'd be glad to help!"
         menu:
             "Let's go {image=gui/extra_images/Progress24.png}" if prog_avail:
-                "Something about the look in her eye tells you it is a good day to accept."
+                "Something about the look in her eyes tells you it is a good day to accept."
                 mc.name "I could definitely use some relief today."
                 return True
             # "Let's go" if not hr_director_prog_scene.progression_available():
@@ -376,7 +376,7 @@ label hr_director_prog_trans_scene_4(the_group):
     $ the_person = the_group[0]
     if the_person.is_girlfriend():
         the_person "[the_person.mc_title]... you know I love you, right?"
-        "Oh god, that is a very serious line to just throw out there."
+        "She seems very serious about what she's going to say."
         mc.name "Of course."
         the_person "Good."
     else:

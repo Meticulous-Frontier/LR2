@@ -373,7 +373,7 @@ init 2 python:
 
         if person in unique_character_list:
             return  # don't touch unique characters
-        if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]) or person in stripclub_strippers:
+        if person.has_role([stripper_role, stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role]) or person in stripclub_strippers:
             return  # no party for the working girls
         if person.pregnancy_is_visible():
             return  # no party for girls who already show the baby bump
@@ -472,6 +472,10 @@ init 2 python:
             rebuild_wardrobe(person)
             update_person_outfit(person, -0.2) # choose a less slutty outfit as planned outfit
             create_party_schedule(person)
+
+        # setup christina as Trophy Wife
+        trophy_wife = Job("Trophy Wife", critical_job_role)
+        christina.change_job(trophy_wife)
         return
 
     def update_special_characters_opinions():
