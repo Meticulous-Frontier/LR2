@@ -260,16 +260,18 @@ init -1 python:
             if not person.job:
                 return None
 
-            if person.job == student_intern_market_job and not person.location == university:
-                return business.m_uniform
-            if person.job == student_intern_rd_job and not person.location == university:
-                return business.r_uniform
-            if person.job == student_intern_production_job and not person.location == university:
-                return business.p_uniform
-            if person.job == student_intern_supply_job and not person.location == university:
-                return business.s_uniform
-            if person.job == student_intern_hr_job and not person.location == university:
-                return business.h_uniform
+            if "college_intern_role" in globals():
+                # only use this part after the college interns unlocked
+                if person.job == student_intern_market_job and not person.location == university:
+                    return business.m_uniform
+                if person.job == student_intern_rd_job and not person.location == university:
+                    return business.r_uniform
+                if person.job == student_intern_production_job and not person.location == university:
+                    return business.p_uniform
+                if person.job == student_intern_supply_job and not person.location == university:
+                    return business.s_uniform
+                if person.job == student_intern_hr_job and not person.location == university:
+                    return business.h_uniform
 
             if person == police_chief:
                 if not "police_chief_uniform_wardrobe" in globals():    # save game compatibility remove after v0.49
