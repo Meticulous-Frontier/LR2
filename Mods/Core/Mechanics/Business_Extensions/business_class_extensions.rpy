@@ -274,14 +274,6 @@ init -1 python:
                     return business.h_uniform
 
             if person == police_chief:
-                if not "police_chief_uniform_wardrobe" in globals():    # save game compatibility remove after v0.49
-                    cop_outfit = police_chief.wardrobe.get_outfit_with_name("Cop").get_copy()
-
-                    global police_chief_uniform_wardrobe
-                    police_chief_uniform_wardrobe = Wardrobe("Cop Uniform")
-                    police_chief_uniform_wardrobe.add_outfit(cop_outfit)
-                    police_chief.wardrobe.remove_outfit(cop_outfit)
-
                 return police_chief_uniform_wardrobe
             if person.job == stripper_job: # base game stripper
                 return stripclub_wardrobe
