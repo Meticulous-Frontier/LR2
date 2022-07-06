@@ -671,35 +671,37 @@ init -1 python:
 
         # add modifiers
         if self.has_family_taboo():
-            final_slut_requirement -= 20
+            final_slut_requirement += (self.get_opinion_score("incest") - 2) * 5          # love incest negates requirement penalty
 
         if self.has_role(prostitute_role):
-            final_slut_requirement += 20
+            final_slut_requirement -= 20        # prostitutes are more willing by nature
         elif self.relationship == "Girlfriend":
-            final_slut_requirement += (self.get_opinion_score("cheating on men") * 5 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 10)
+            final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 2  # love negates requirement penalty
         elif self.relationship == "Fiancée":
-            final_slut_requirement += (self.get_opinion_score("cheating on men") * 8 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 15)
+            final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 3  # love negates requirement penalty
         elif self.relationship == "Married":
-            final_slut_requirement += (self.get_opinion_score("cheating on men") * 10 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 20)
+            final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 5 # love negates requirement penalty
 
         if not private:
-            final_slut_requirement += ((-10 if self.sluttiness < 50 else 0) + self.get_opinion_score("public sex") * 5) if self.sluttiness < 50 else self.get_opinion_score("public sex") * 5
+            multiplier = 5 if self.sluttiness < 50 else 2
+            final_slut_requirement -= (self.get_opinion_score("public sex") - 2) * multiplier # love negates requirement penalty
 
         if self.love < 0:
-            final_slut_requirement -= self.love
+            final_slut_requirement += self.love
         elif private:
-            if self.has_role([girlfriend_role, affair_role]):
+            if self.has_role([girlfriend_role, affair_role]):               # girlfriend lowers requirement by love
                 final_slut_requirement -= self.love
             elif self.is_family():
-                final_slut_requirement -= __builtin__.int(self.love / 4.0)
+                final_slut_requirement -= __builtin__.int(self.love / 4.0)  # family lowers requirement by love / 4
             else:
-                final_slut_requirement -= __builtin__.int(self.love / 2.0)
+                final_slut_requirement -= __builtin__.int(self.love / 2.0)  # default lowers requirement by love / 2
 
-        final_slut_requirement += __builtin__.int((self.happiness - 100)/4.0)
+        final_slut_requirement -= __builtin__.min(__builtin__.int((self.happiness - 100)/4.0), 20) # happiness can lower requirement by up to 20 points
 
         if not ignore_taboo and the_position.associated_taboo:
-            final_slut_requirement += 10
+            final_slut_requirement += 10    # taboo increases requirement by 10
 
+        print("Position: " + the_position.name + "[Sluttiness: " + str(self.sluttiness) + ", Required: " + str(final_slut_requirement) + "]")
         if self.sluttiness >= final_slut_requirement:
             return True
         return False
@@ -1643,6 +1645,10 @@ init -1 python:
 
         if not self.job:
             return False
+
+        # she works around town, so when the job has a scheduled location, she's at work
+        if self == police_chief:
+            return not self.job.schedule.get_destination() is None
 
         return self.location == self.job.job_location
 
