@@ -751,7 +751,8 @@ label candace_topless_at_mall_label(the_person):
             police_chief.set_possessive_title("the police chief")
             police_chief.set_mc_title("Mr. " + mc.last_name)
             police_chief.set_title("Officer " + police_chief.last_name)
-            police_chief.wear_uniform()
+
+        police_chief.wear_uniform() # make sure whe wears her uniform
 
     "As you walk around the mall, you notice a commotion. A small group of mostly men have gathered around someone, you walk over to see what is going on."
     "When you walk over, you find [the_person.possessive_title], and it immediately becomes clear why there is a crowd gathering around..."
