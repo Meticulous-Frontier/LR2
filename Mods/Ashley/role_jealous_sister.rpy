@@ -208,4 +208,5 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     $ jealous_sister.reset_all_jealousy()
     $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
     $ the_person.apply_planned_outfit()
+    $ jealous_sister = None
     return

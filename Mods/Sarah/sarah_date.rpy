@@ -43,8 +43,8 @@ label sarah_bar_date_ask_label(the_person):
     mc.name "Sounds good. We'll get together on Saturday night."
 
     python:
-        sarah_bar_date_action = Action("Bar date", sarah_bar_date_requirement, "sarah_bar_date_label", args=the_person, requirement_args=5) #it happens on a saturday
-        mc.business.mandatory_crises_list.append(sarah_bar_date_action)
+        # it happens on a saturday
+        mc.business.mandatory_crises_list.append(Action("Bar date", sarah_bar_date_requirement, "sarah_bar_date_label", args=the_person, requirement_args=5))
         mc.business.event_triggers_dict["sat_date_scheduled"] = True
 
     return "Advance Time"
