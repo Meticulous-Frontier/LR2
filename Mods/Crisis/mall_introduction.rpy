@@ -1,7 +1,7 @@
 ## Mall Introduction Crisis Mod by Tristimdorion
 init 2 python:
     def get_mall_locations():
-        locations = [mall, gym, home_store, clothing_store, sex_store]
+        locations = [mall, gym, home_store, clothing_store, sex_store, electronics_store]
         if "mall_salon" in globals():
             locations.append(mall_salon)
         if "coffee_shop" in globals():
