@@ -18,15 +18,20 @@ init 2 python:
 
         # init jobs after rooms are created
         global stripclub_waitress_job
-        stripclub_waitress_job = Job("Waitress", stripclub_waitress_role, strip_club, strip_club_hire_waitress, strip_club_fire_waitress, work_days=[0,1,2,3,4,5,6], work_times = [3,4])
+        stripclub_waitress_job = Job("Waitress", stripclub_waitress_role, strip_club, strip_club_hire_waitress, strip_club_fire_waitress, work_days=[0,1,2,3,4,5,6], work_times = [3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
         global stripclub_bdsm_performer_job
-        stripclub_bdsm_performer_job = Job("BDSM Performer", stripclub_bdsm_performer_role, bdsm_room, strip_club_hire_bdsm_performer, strip_club_fire_bdsm_performer, work_days = [0,1,2,3,4,5,6], work_times = [3,4])
+        stripclub_bdsm_performer_job = Job("BDSM Performer", stripclub_bdsm_performer_role, bdsm_room, strip_club_hire_bdsm_performer, strip_club_fire_bdsm_performer, work_days = [0,1,2,3,4,5,6], work_times = [3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
         global stripclub_manager_job
-        stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [2,3,4])
+        stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [2,3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
         global stripclub_mistress_job
-        stripclub_mistress_job = Job("Mistress", stripclub_mistress_role, bdsm_room, work_days=[0,1,2,3,4,5,6], work_times = [2,3,4])
+        stripclub_mistress_job = Job("Mistress", stripclub_mistress_role, bdsm_room, work_days=[0,1,2,3,4,5,6], work_times = [2,3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
         global stripclub_stripper_job
-        stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit)
+        stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit,
+            mandatory_duties = [daily_serum_dosage_duty])
         return
 
     def get_strip_club_foreclosed_stage():

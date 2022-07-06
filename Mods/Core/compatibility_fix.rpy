@@ -231,27 +231,10 @@ init 1 python:
             renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
-    def validate_stripclub_stripper_role():
-        if not "stripclub_stripper_job" in globals():
-            global stripclub_stripper_job
-            stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit)
-        return
-
     def check_bugfix_installed(*args, **kwargs): #allow passing of any number of parameters
         if not bugfix_installed:
             renpy.say("Warning", "You are running the game without bugfix installed, the mod no longer works without this bugfix due to the many issues in the base game. Download {a=https://github.com/Tristimdorion/Lab-Rats-2/releases}the correct version here{/a}. The game will now exit.")
             renpy.quit()
-        return
-
-    # save compatibility (remove next version)
-    def validate_harem_roles():
-        if not harem_role in globals():
-            global harem_role
-            harem_role = Role("Girlfriend in Polyamory", get_harem_role_actions(), role_dates = get_harem_role_dates(), looks_like = girlfriend_role)
-        if not any(x for x in list_of_places if x.name == "harem_mansion"):
-            global harem_mansion
-            harem_mansion = Room("harem_mansion", "Harem Mansion", [], standard_harem_mansion_backgrounds, harem_objects, [], [], False, [1, 3], None, False, lighting_conditions = standard_indoor_lighting)
-            list_of_places.append(harem_mansion)
         return
 
 label check_mod_installation(stack):
@@ -281,16 +264,7 @@ label update_compatibility_fix(stack):
 
     $ update_pinned_cache()
 
-    $ validate_harem_roles()
-
     $ cleanup_default_wardrobe()
-
-    # make beta saves compatible
-    if not list_of_jobs or not isinstance(list_of_jobs[0], list):
-        call instantiate_jobs() from _call_instantiate_jobs
-        call add_extra_room_job_definitions() from _call_add_extra_room_job_definitions
-
-    $ validate_stripclub_stripper_role()
 
     $ execute_hijack_call(stack)
     return

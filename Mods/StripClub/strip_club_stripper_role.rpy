@@ -140,9 +140,6 @@ init 5 python:
             person.quit_job()
         return
 
-    def stripper_replace_enhanced(person):  # save compatibility
-        stripper_replace(person)
-
     def stripper_quit(person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
         if person in stripclub_strippers:
             stripclub_strippers.remove(person)
@@ -151,7 +148,8 @@ init 5 python:
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
     strip_club_stripper_performance_review_action = Action("Review her performance", strip_club_review_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
 
-    stripclub_stripper_role = Role("Stripper", get_stripper_role_actions() + [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = True)
+    stripclub_stripper_role = Role("Stripper", get_stripper_role_actions() + [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action],
+        on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
 
 
 label update_strip_club_show_requirement(stack):
