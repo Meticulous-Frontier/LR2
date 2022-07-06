@@ -152,3 +152,21 @@ init 2 style float_text:
     bold False
     outlines [(2,"#222222",0,0)]
     yalign 0.5
+
+init 2 style float_text_pink is float_text:
+    color "#d0759e"
+
+init 2 style float_text_red is float_text:
+    color "#b14343"
+
+init 2 style float_text_grey is float_text:
+    color "#696969"
+
+init 2 style float_text_green is float_text:
+    color "#43B197"
+
+init 2 style float_text_yellow is float_text:
+    color "#d0d010"
+
+init 2 style float_text_blue is float_text:
+    color "#6394ED"

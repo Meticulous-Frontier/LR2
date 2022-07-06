@@ -32,7 +32,7 @@ init 2:
                                 $ time_diff = fade_time
 
                             frame:
-                                background "#33333388"
+                                background "#11334488"
                                 xsize ui_xsize
                                 padding (2, 2)
                                 text "[log_item[0]]" style log_item[1] size 18 xsize ui_xsize - 20 first_indent 10 rest_indent 10 yoffset 2
