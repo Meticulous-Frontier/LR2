@@ -1643,6 +1643,11 @@ init -1 python:
         if self.has_role("College Intern") and self.location in [rd_division, p_division, m_division, office]:
             return True
 
+        # special handling for unique characters working at stripclub (use roles since unique chars only get role instead of job)
+        if self.has_role([stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]) \
+            and self.location in [strip_club, bdsm_room]:
+                return True
+
         if not self.job:
             return False
 

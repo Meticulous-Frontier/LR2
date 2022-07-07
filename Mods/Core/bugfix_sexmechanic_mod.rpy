@@ -1164,7 +1164,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
         # you only get one chance for starting a threesome per public sex action (avoid spamming threesome question)
         # threesome has no watcher loop, so all watching stops when threesome has started.
         # TODO: add watchers to threesome core
-        if not ask_for_threesome and willing_to_threesome(the_person, the_watcher):
+        if not ask_for_threesome and willing_to_threesome(the_person, the_watcher) and not the_person.has_role(caged_role):
             $ the_watcher.draw_person()
             the_watcher "Oh my god, that looks amazing..."
             if can_join_threesome(the_watcher, the_person, the_position.position_tag):
