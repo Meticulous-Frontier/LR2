@@ -18,13 +18,13 @@ init 1 python:
         elif the_person in mc.business.hr_team:
             the_serum = mc.business.h_serum
         elif get_strip_club_foreclosed_stage() >= 5:
-            if the_person in stripclub_strippers:
+            if the_person in stripclub_strippers and hasattr(mc.business, "strippers_serum"):
                 the_serum = mc.business.strippers_serum
-            elif the_person in stripclub_waitresses:
+            elif the_person in stripclub_waitresses and hasattr(mc.business, "waitresses_serum"):
                 the_serum = mc.business.waitresses_serum
-            elif the_person in stripclub_bdsm_performers:
+            elif the_person in stripclub_bdsm_performers and hasattr(mc.business, "bdsm_performers_serum"):
                 the_serum = mc.business.bdsm_performers_serum
-            elif the_person.has_job(stripclub_manager_job) or the_person.has_job(stripclub_mistress_job):
+            elif hasattr(mc.business, "manager_serum") and (the_person.has_job(stripclub_manager_job) or the_person.has_job(stripclub_mistress_job)):
                 the_serum = mc.business.manager_serum
 
         if the_serum is not None:
