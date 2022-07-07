@@ -166,21 +166,21 @@ init 5 python:
     }
 
     swap_bottoms_map = {
-        "Jeans": long_skirt,
-        "Suit_Pants": pencil_skirt,
-        "Capris": skirt,
-        "Leggings": belted_skirt,
-        "Jean_Hotpants": belted_skirt,
-        "Booty_Shorts": mini_skirt,
-        "Daisy_Dukes": micro_skirt,
+        "Jeans": [long_skirt],
+        "Suit_Pants": [pencil_skirt, long_skirt],
+        "Capris": [pencil_skirt, skirt],
+        "Leggings": [skirt, lace_skirt],
+        "Jean_Hotpants": [lace_skirt, belted_skirt],
+        "Booty_Shorts": [mini_skirt, belted_skirt],
+        "Daisy_Dukes": [mini_skirt, micro_skirt],
 
-        "Long_Skirt": jeans,
-        "Pencil_Skirt": suitpants,
-        "Lace_Skirt": capris,
-        "Skirt": capris,
-        "Belted_Skirt": leggings,
-        "Mini_Skirt": booty_shorts,
-        "Micro_Skirt": daisy_dukes
+        "Long_Skirt": [jeans, suitpants],
+        "Pencil_Skirt": [suitpants, capris],
+        "Lace_Skirt": [leggings, capris],
+        "Skirt": [capris, leggings],
+        "Belted_Skirt": [leggings, jean_hotpants],
+        "Mini_Skirt": [booty_shorts, daisy_dukes],
+        "Micro_Skirt": [daisy_dukes]
     }
 
     coverup_upper_list = [lab_coat, suit_jacket, vest]
@@ -237,7 +237,7 @@ init 5 python:
     def swap_outfit_bottoms(outfit):
         for item in outfit.lower_body:
             if (item in real_pants_list or item in skirts_list) and item.proper_name in swap_bottoms_map.keys():
-                swap_item = swap_bottoms_map[item.proper_name].get_copy()
+                swap_item = get_random_from_list(swap_bottoms_map[item.proper_name]).get_copy()
                 swap_item.colour = item.colour
                 outfit.lower_body.remove(item)
                 outfit.add_lower(swap_item)
