@@ -117,7 +117,8 @@ init 5 python:
         if person.is_employee() or person in [lily, aunt, mom, nora]:    # moonlighting
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule(job.job_location, the_times = [4])
-            person.add_role(job.job_role)
+            for role in job.job_roles:
+                person.add_role(role)
             stripclub_strippers.append(person)
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
