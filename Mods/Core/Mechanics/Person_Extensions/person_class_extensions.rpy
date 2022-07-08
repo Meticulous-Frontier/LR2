@@ -1860,7 +1860,7 @@ init -1 python:
     Person.is_dominant = is_dominant
 
     def is_girlfriend(self):
-        return self.has_role(girlfriend_role)
+        return self.has_role([girlfriend_role, harem_role])
 
     Person.is_girlfriend = is_girlfriend
 
@@ -2003,7 +2003,7 @@ init -1 python:
 
     Person.apply_yoga_shoes = apply_yoga_shoes
 
-    def apply_planned_outfit(self):
+    def apply_planned_outfit(self, ignore_base = False, update_taboo = False):
         if time_of_day != 0:    # in timeslot 0 we pick new outfits
             self.restore_all_clothing() # restore half-off clothing items of current outfit.
 
@@ -2012,12 +2012,12 @@ init -1 python:
         elif self.should_wear_maid_outfit():
             self.wear_maid_outfit()
         elif self.location in [gym, university] and self.location_outfit:
-            self.apply_outfit(self.location_outfit)
+            self.apply_outfit(self.location_outfit, ignore_base = ignore_base, update_taboo = update_taboo)
         else:
             if not self.planned_outfit: # extra validation to make sure we have a planned outfit
                 self.planned_outfit = self.decide_on_outfit()
 
-            self.apply_outfit(self.planned_outfit)
+            self.apply_outfit(self.planned_outfit, ignore_base = ignore_base, update_taboo = update_taboo)
         return
 
     Person.apply_planned_outfit = apply_planned_outfit
