@@ -62,7 +62,7 @@ init 10 python:
         person.base_outfit.add_accessory(new_collar)
 
         person.slave_collar = True
-        person.apply_outfit(person.planned_outfit)
+        person.apply_planned_outfit()
         person.draw_person()
         return
 
