@@ -29,7 +29,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     mc.name "[the_girl.title], I want you to get on your hands and knees for me. I want to fuck your ass and your pussy."
     "You secure the strap-on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title]."
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_doggy_anal_dildo_dp.position_tag, visible_enough = True, prefer_half_off = True)
 
@@ -346,7 +346,7 @@ label transition_doggy_doggy_anal_dp(the_girl, the_location, the_object):
 
 label transition_default_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     "[the_girl.possessive_title] gets on her hands and knees as you kneel behind her."
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_doggy_anal_dildo_dp.position_tag, visible_enough = True, prefer_half_off = True)
     "You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."

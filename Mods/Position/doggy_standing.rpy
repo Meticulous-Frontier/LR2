@@ -39,7 +39,7 @@ label intro_SB_doggy_standing(the_girl, the_location, the_object):
     else:
         the_girl "Okay [the_girl.mc_title], I'll play along this time."
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_doggy_standing.position_tag, visible_enough = True, prefer_half_off = True)
 

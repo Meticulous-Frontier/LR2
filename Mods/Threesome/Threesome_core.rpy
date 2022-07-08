@@ -455,6 +455,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
             $ round_choice = "Leave"
         elif not skip_intro:
             $ active_mc_position.call_intro(the_person_one, the_person_two, mc.location, object_choice)
+            $ scene_manager.draw_scene()    # intro can cause stripping and wrong layer drawing
             $ round_choice = None
         else:
             $ round_choice = None
@@ -493,6 +494,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                     $ finished = True
                 else:
                     $ active_mc_position.call_intro(the_person_one, the_person_two, mc.location, object_choice)
+                    $ scene_manager.draw_scene() # call intro can cause stripping and wrong z-order draw
 
             $ start_position = None #Clear start positions/objects so they aren't noticed next round.
             $ start_object = None

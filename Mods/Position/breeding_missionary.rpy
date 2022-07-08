@@ -29,7 +29,7 @@ label intro_breeding_missionary(the_girl, the_location, the_object):
     $ the_girl.draw_person(position = breeding_missionary.position_tag)
     "She nods meekly and lies down on the [the_object.name], waiting while you climb on top of her."
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = breeding_missionary.position_tag, visible_enough = True, prefer_half_off = True)
 

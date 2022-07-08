@@ -131,6 +131,11 @@ init:
 
 label intro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.possessive_title] lays down on her back. [the_girl_2.possessive_title] gets down between her legs and start to lick her threesome partner."
+
+    if not the_girl_2.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl_2.strip_to_vagina(position = Threesome_doggy_deluxe.position_two_tag, display_transform = Threesome_doggy_deluxe.p2_transform, visible_enough = True, prefer_half_off = True)
+
     "Face down, ass up, exactly what you were looking for. You move forward behind [the_girl_2.title] and run your hands along her ass a few times."
     "You put your cock between her cheeks, enjoying the feeling of her soft, pliant flesh. She wiggles her hips back at you for a second before turning her head to look at you."
     if the_girl_2.has_breeding_fetish():
@@ -325,6 +330,11 @@ label swap_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loca
 label intro_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.possessive_title] lays down on her back. [the_girl_2.possessive_title] gets down between her legs and start to lick her threesome partner."
     "You spend a moment, admiring the ass exposed in front of you, waiting for you to have your way."
+
+    if not the_girl_2.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl_2.strip_to_vagina(position = Threesome_doggy_deluxe.position_two_tag, display_transform = Threesome_doggy_deluxe.p2_transform, visible_enough = True, prefer_half_off = True)
+
     "You grab your strap-on and secure it. It hangs below your cock, ready to fuck [the_girl_2.title]'s cunt while you fuck her ass."
     "You use some spit to make sure your cock is lubed, then grab [the_girl_2.possessive_title]'s hips and get into position."
     "When you're ready you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
@@ -452,4 +462,3 @@ label swap_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_locati
     else:
         "[the_girl_2.title] grimaces a bit, but manages to take you completely by forcing herself to relax."
     return
-    

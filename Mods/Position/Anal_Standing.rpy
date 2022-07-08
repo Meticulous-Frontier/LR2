@@ -40,7 +40,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
     else:
         the_girl "I don't know, are you sure that thing is gonna fit in me back there?"
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_anal_standing.position_tag, visible_enough = True, prefer_half_off = True)
 

@@ -91,6 +91,10 @@ label intro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
     "You give yourself a couple strokes as you watch."
     the_girl_1 "Mmm, come on [the_girl_1.mc_title]."
     the_girl_2 "I'm ready for you!"
+    if not the_girl_2.vagina_visible():
+        "[the_girl_2.title] quickly moves some clothing out of the way..."
+        $ the_girl_2.strip_to_vagina(position = Threesome_standing_embrace.position_two_tag, display_transform = Threesome_standing_embrace.p2_transform, visible_enough = True, prefer_half_off = True)
+
     "You step up behind [the_girl_2.possessive_title]. She arches her back a bit to give you easier access."
     $ the_girl_2.break_taboo("vaginal_sex")
     $ the_girl_2.break_taboo("condomless_sex")

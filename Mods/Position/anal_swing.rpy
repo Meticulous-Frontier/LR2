@@ -36,7 +36,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object):
     else:
         the_girl "I don't know, are you sure this thing is safe?"
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_anal_swing.position_tag, visible_enough = True, prefer_half_off = True)
 
@@ -303,7 +303,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
 label transition_default_SB_anal_swing(the_girl, the_location, the_object):
     "[the_girl.possessive_title] sits down in the [the_object.name]. Her ass is hanging off the back end."
     "You run your hands along her supple hips."
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_anal_swing.position_tag, visible_enough = True, prefer_half_off = True)
     "You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."
