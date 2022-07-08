@@ -142,7 +142,8 @@ init 5 python:
     def fire_stripper(person):
         if person.is_employee() or person in [lily, aunt, mom, nora]:   # moonlighting
             person.set_schedule(person.home, the_times = [4])
-            person.remove_role([stripclub_stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role])
+            for role in [stripclub_stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role]:
+                person.remove_role(role)
             if person in stripclub_strippers:
                 stripclub_strippers.remove(person)
             if person in stripclub_bdsm_performers:
