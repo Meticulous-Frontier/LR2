@@ -6,7 +6,7 @@ init 2 python:
     def clone_rent_apartment_requirement(person):
         if not person.home is dungeon:
             return False
-        if  not mc.business.has_funds(25000):
+        if not mc.business.has_funds(25000):
             return "Requires: $25,000"
         return person.home is dungeon
 

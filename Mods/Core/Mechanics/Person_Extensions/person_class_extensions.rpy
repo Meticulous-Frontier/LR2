@@ -1643,6 +1643,9 @@ init -1 python:
         if self.has_role("College Intern") and self.location in [rd_division, p_division, m_division, office]:
             return True
 
+        if self.has_role(maid_role):
+            return not self.job.schedule.get_destination() is None
+
         # special handling for unique characters working at stripclub (use roles since unique chars only get role instead of job)
         if self.has_role([stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]) \
             and self.location in [strip_club, bdsm_room]:
@@ -1891,8 +1894,8 @@ init -1 python:
 ################################################
 
     def should_wear_maid_outfit(self):
-        if self.has_role([maid_role]):
-            return maid_at_work(self)
+        if self.has_role(maid_role) or self.has_job(maid_job):
+            return self.is_at_work(self)
         return False
 
     Person.should_wear_maid_outfit = should_wear_maid_outfit
