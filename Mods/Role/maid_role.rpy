@@ -18,13 +18,13 @@ init 2 python:
 
     # in effect assign her as many work locations as you see fit
     def add_maid_work_location(person, location, the_days = None, the_times = None):
-        if not person.has_job(maid_job):
+        if not person.has_role(maid_role):
             return False
         person.job.schedule.set_schedule(location, the_days, the_times)
         return True
 
     def remove_maid_work_location(person, location = None):
-        if not person.has_job(maid_job) or location is None:
+        if not person.has_role(maid_role) or location is None:
             return False
 
         person.job.schedule.remove_location(location)
@@ -32,7 +32,7 @@ init 2 python:
 
     def get_maid_work_locations(person):
         locations = []
-        if not person.has_job(maid_job):
+        if not person.has_role(maid_role):
             return locations
 
         for day_number in range(0, 7):

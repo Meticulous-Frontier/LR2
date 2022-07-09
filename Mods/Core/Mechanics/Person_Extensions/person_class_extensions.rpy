@@ -1894,7 +1894,7 @@ init -1 python:
 ################################################
 
     def should_wear_maid_outfit(self):
-        if self.has_role(maid_role) or self.has_job(maid_job):
+        if self.has_role(maid_role):
             return self.is_at_work(self)
         return False
 
