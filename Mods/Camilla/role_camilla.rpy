@@ -938,6 +938,8 @@ label camilla_her_place_label():
         the_person "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
         "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dressed and quietly excuse yourself from the bedroom."
     $ clear_scene()
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
     "You make your way back home. You can hardly believe your luck, fucking [the_person.title] in her house, in front of her husband, who is also the bartender!"
     $ perk_system.add_stat_perk(Stat_Perk(description = "Fucking Camilla in front of her husband has made you feel more charismatic.", cha_bonus = 1, bonus_is_temp = False), "Camilla Charisma Bonus")
     $ mc.change_location(bedroom)
