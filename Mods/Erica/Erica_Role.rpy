@@ -425,7 +425,7 @@ label erica_intro_label(the_person):
     $ the_person.draw_person()
     the_person "There, now it should be good to go!"
     mc.name "Thanks! That is really helpful. I'm [mc.name]."
-    the_person "[the_person.name]. Nice to meet you."
+    the_person "[the_person.fname]. Nice to meet you."
     $ the_person.set_title(the_person.name)
     $ the_person.set_possessive_title("Your gym girl")
     $ the_person.set_mc_title(mc.name)
@@ -932,7 +932,7 @@ label erica_race_crisis_label(the_person):
         "As you are trash-talking each other, [lily.title] and [yoga_assistant.title] surprise you when they walk up."
         $ scene_manager.add_actor(lily, display_transform = character_left)
         $ scene_manager.add_actor(yoga_assistant, display_transform = character_center)
-        lily "Wow bro, you're running in a charity race? And I had to hear about it from [the_person.name]?"
+        lily "Wow bro, you're running in a charity race? And I had to hear about it from [the_person.fname]?"
         yoga_assistant "I know right? And for breast cancer research? I don't run much, but I probably would've signed up if I'd known about it earlier!"
         the_person "Ah! Thanks for coming out!"
         "Caught by surprise, you can't think of anything to say, so you let the girls chat."
@@ -958,7 +958,7 @@ label erica_race_crisis_label(the_person):
     elif erica_get_is_doing_insta_sessions():
         "As you are trash-talking each other, [lily.title] surprises you when she walks up."
         $ scene_manager.add_actor(lily, display_transform = character_center)
-        lily "Wow, so it is true? My brother is running a charity race? And I had to hear it from [the_person.name]."
+        lily "Wow, so it is true? My brother is running a charity race? And I had to hear it from [the_person.fname]."
         the_person "Ah! Thanks for coming out!"
         lily "I wouldn't miss it! This is going to be so exciting, watching you whip [lily.mc_title] in the race!"
         "You start to defend yourself, but [the_person.possessive_title] jumps in first."
@@ -1307,7 +1307,7 @@ label erica_buy_protein_shake_label(the_person):
         the_person "I guess that would be okay."
         mc.name "Good girl. I'll be right back."
     else:
-        mc.name "Hey [the_person.name], I see you're working pretty hard today! Can I get you a protein shake?"
+        mc.name "Hey [the_person.fname], I see you're working pretty hard today! Can I get you a protein shake?"
         "[the_person.possessive_title] looks at you and smiles."
         the_person "That sounds great!"
     $ clear_scene()
@@ -1408,7 +1408,7 @@ label erica_money_problems_label(the_person):
         $ erica.event_triggers_dict["yoga_sessions_started"] = False
         $ mc.business.hr_director.add_unique_on_talk_event(erica_money_problems_sarah_talk)
         if lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
-            "Or maybe even talk to [lily.title], see about including [erica.name] in some of her InstaPic sessions once in a while?"
+            "Or maybe even talk to [lily.title], see about including [erica.fname] in some of her InstaPic sessions once in a while?"
             $ erica.event_triggers_dict["insta_pic_started"] = True
             $ lily.add_unique_on_talk_event(erica_lily_instapic_setup)
     elif lily.event_triggers_dict.get("sister_instathot_pic_count", 0) > 0:
@@ -1486,7 +1486,7 @@ label erica_money_problems_sarah_talk_label(the_person):
         mc.name "Tell you what. We don't need to push it officially, but if you happen to take some of the serum and use it for that purpose... I would be willing to look the other way."
     else:
         mc.name "I don't think that is a good idea. But if you really want to make it happen, you could always use the power of persuasion to see if you can get people to come."
-    "[sarah.name] gets a mischievous smile."
+    "[sarah.fname] gets a mischievous smile."
     the_person "Okay! I'll let you know in a couple days if we have the people to make it happen... And if we don't... We'll see."
     "You part ways with [the_person.title] for now. You feel pretty confident at this point that, even if you don't have the numbers now, you'll have enough people to make it happen soon."
     if len(erica_get_yoga_class_list()) < 4:
@@ -1509,10 +1509,10 @@ label erica_money_problems_sarah_update_label():
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
         the_person "So... Do you think that... you know, it would be okay if I, umm... used some of the serum we have for the one-on-ones...?"
         "You had forgotten about her using the serum, and you are glad she reminded you."
-        mc.name "Yeah, that sounds fine. Let me know if you manage to convince enough employees and I'll speak with [erica.name] about starting that morning yoga class."
+        mc.name "Yeah, that sounds fine. Let me know if you manage to convince enough employees and I'll speak with [erica.fname] about starting that morning yoga class."
     else:
         the_person "So, do you think it would be okay if I tried to talk people into coming? I think over time I might be able to convince enough people to come."
-        mc.name "That sounds fine. Let me know if you manage to convince enough people and I'll speak with [erica.name] about starting that program."
+        mc.name "That sounds fine. Let me know if you manage to convince enough people and I'll speak with [erica.fname] about starting that program."
     $ the_person.draw_person(emotion = "happy")
     "[the_person.possessive_title] smiles wide. She seems to really be into this..."
     the_person "Yes sir! Don't worry, I'm sure we'll be able to get this going soon!"
@@ -1583,7 +1583,7 @@ label erica_money_problems_sarah_final_update_label():
     $ the_person.draw_person()
     "[the_person.title] comes and finds you as you work. She seems excited."
     the_person "Hey! Guess what! As of this morning, I have enough girls willing to attend a morning yoga class once a week! As soon as you give me the day, I'll put out a notice."
-    mc.name "Great! Let me talk to [erica.name] about it. I'm not sure what day it will be yet, it will probably depend on her class schedule, but I will let you know."
+    mc.name "Great! Let me talk to [erica.fname] about it. I'm not sure what day it will be yet, it will probably depend on her class schedule, but I will let you know."
     the_person "Alright. I'm going to get back to work. Looking forward to it though!"
     $ erica.add_unique_on_talk_event(erica_money_problems_yoga_start)
     return
@@ -1610,7 +1610,7 @@ label erica_money_problems_yoga_start_label(the_person):
     the_person "Wow... It's like you thought of everything!"
     $ the_person.draw_person(position = "kissing")
     $ mc.change_locked_clarity(10)
-    "[erica.name] gives you a big hug. When she steps back, she ponders a moment."
+    "[erica.fname] gives you a big hug. When she steps back, she ponders a moment."
     the_person "How about Tuesday mornings? I could go straight from there to class."
     mc.name "I'll make it happen. For compensation, I'll start you at $100 per session. Are you good to start next week?"
     the_person "That's great! I'll be ready!"
@@ -1672,7 +1672,7 @@ label erica_yoga_event_intro_label():
     "[the_person.title] chuckles."
     mc.name "I have no doubt that you two will make this class a success. I'm just here to make sure all the first session jitters get worked out and to lend a hand if any problems arise."
     the_person "Thanks, [the_person.mc_title]. I really appreciate your support with this. It's just a yoga class, but having you here definitely helps me feel more confident trying to tackle this!"
-    yoga_assistant "Yeah, don't worry [the_person.name], [mc.name] is a great guy to work for! He really knows how to treat his employees!"
+    yoga_assistant "Yeah, don't worry [the_person.fname], [mc.name] is a great guy to work for! He really knows how to treat his employees!"
     mc.name "Alright, I'll be over there, getting some of the morning paperwork started. Let me know if you need anything."
     "You head to the side of the room and sit down at a computer terminal. You pull up some serum designs and get to work, analyzing them. After a bit, you glance up when you hear [the_person.possessive_title] starting things up."
     the_person "Good morning everyone! Thanks for coming out. Since today is our first session, we are going to start out with just some basic poses and breathing techniques! Does anyone have any questions before we get started?"
@@ -2052,7 +2052,7 @@ label erica_weekly_yoga_label(the_person):
                     call start_threesome(the_person, yoga_assistant) from _nude_yoga_aftermath_threesome_02
                     "Satisfied for now, you decide to get cleaned up and ready for work."
                     the_person "Mmm, that was great!"
-                    yoga_assistant "Hey [the_person.name], did you want to get together this weekend?"
+                    yoga_assistant "Hey [the_person.fname], did you want to get together this weekend?"
                     the_person "I'm not sure yet, I'll have to see how much homework I get! I'll text you."
                     "It's been amazing witnessing the two girls develop such a deep friendship."
                     call erica_nude_yoga_office_aftermath_label() from _nude_yoga_lobby_survey_02
@@ -2100,7 +2100,7 @@ label erica_weekly_yoga_label(the_person):
         $ yoga_assistant.change_stats(slut = 1, max_slut = 70)
     else:
         the_person "Yeah, that was great!"
-        yoga_assistant "Hey [the_person.name], did you want to get together this weekend?"
+        yoga_assistant "Hey [the_person.fname], did you want to get together this weekend?"
         the_person "I'm not sure yet, I'll have to see how much homework I get! I'll text you."
         "It's been amazing witnessing the two girls develop such a deep friendship. You decide it is time for you to start your workday proper now also."
     python:
@@ -2136,7 +2136,7 @@ label erica_no_yoga_session_this_week():
     else:
         $ scene_manager.add_actor(yoga_assistant)
         mc.name "Hey [yoga_assistant.title], no class today?"
-        yoga_assistant "Hey [yoga_assistant.mc_title], nah, [erica.name], couldn't make it today, we rescheduled to next week."
+        yoga_assistant "Hey [yoga_assistant.mc_title], nah, [erica.fname], couldn't make it today, we rescheduled to next week."
         mc.name "Ok, thanks."
 
     python:
@@ -2299,12 +2299,12 @@ label erica_lily_instapic_setup_label(the_person):#This should be an event assig
     if mom.event_triggers_dict.get("mom_instathot_pic_count",0) > 0:
         mc.name "Something similar to what we've done with mom. You know how things took off with her, right?"
     the_person "What's her name?"
-    mc.name "Her name is [erica.name]."
+    mc.name "Her name is [erica.fname]."
     "[the_person.title] thinks about it for a minute."
     the_person "I think I know her... We might have had a general class together a year ago?"
     "She's considering it, but you can tell she isn't a big fan of the idea. You might have to sweeten the deal a little bit to get her to agree to it."
     the_person "I think I'm okay with it. But what if it doesn't pull in any extra money? I don't want to have to split the profit if it turns out to be a dud."
-    mc.name "Tell you what... For the first session, I'll donate the $100 you normally pay me to run the camera. I'll tell [erica.name] for the first session it's a straight $100 fee, and if it is successful there may be more opportunities in the future?"
+    mc.name "Tell you what... For the first session, I'll donate the $100 you normally pay me to run the camera. I'll tell [erica.fname] for the first session it's a straight $100 fee, and if it is successful there may be more opportunities in the future?"
     the_person "Aww, you're gonna let her have your share? You must like this girl!"
     "[the_person.title] starts to tease you, but you also detect a hint of jealousy in her voice."
     the_person "You have a crush on this girl, don't you? Does mom know you're *in love*?"
@@ -2335,14 +2335,14 @@ label erica_lily_instapic_proposal_label(the_person): #This should be assigned t
         the_person "That's awful nice of you! You sound like a good big brother!"
         $ the_person.change_love(3)
     the_person "What was your sister's name?"
-    mc.name "It's [lily.name]. She said she thinks you might have had a class together once."
+    mc.name "It's [lily.fname]. She said she thinks you might have had a class together once."
     "She wrinkles her nose as she tries to remember. It's kind of a cute look for her."
     the_person "I think I remember her... She seemed pretty nice. Kinda chatty?"
     mc.name "That's her."
     the_person "Okay... But you can't use my name or anything! I'm not sure I'm supposed to do stuff like that while I'm on a college sports team."
-    mc.name "Yeah, [lily.name] doesn't use any personally identifying info in the channel."
+    mc.name "Yeah, [lily.fname] doesn't use any personally identifying info in the channel."
     the_person "Oh god... Okay! I'll try it! My schedule is pretty busy right now... Maybe this weekend? Saturday night?"
-    mc.name "Okay. I'll text you my address. I'll give [lily.name] your contact info also. She might need your clothes sizes."
+    mc.name "Okay. I'll text you my address. I'll give [lily.fname] your contact info also. She might need your clothes sizes."
     the_person "Alright. I'll see you on Saturday!"
     "You let [the_person.possessive_title] get back to her workout. You text [lily.title] about [the_person.title]'s info. You can't wait to snap some sexy pics of the duo!"
     $ mc.business.add_mandatory_crisis(erica_lily_instapic_intro)
@@ -2372,7 +2372,7 @@ label erica_lily_instapic_intro_label():
     "You lead her to [lily.possessive_title]'s room. As she steps in, you see the two girls make eye contact. Recognition dawns on both of their faces."
     $ lily_bedroom.show_background()
     $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
-    lily "Oh my gosh... [erica.name]? I totally remember you! You were in my psych class! You sat next to that girl that kept flirting with the professor!"
+    lily "Oh my gosh... [erica.fname]? I totally remember you! You were in my psych class! You sat next to that girl that kept flirting with the professor!"
     erica "Ah! Yes I remember you now! You were at the study group for the midterm!"
     lily "I never realized you were on the track team! But God, I can tell now! You look amazing! No wonder my brother is crushing on you."
     erica "Aww, thank you!... Wait, your brother what?"
@@ -2474,7 +2474,7 @@ label erica_lily_instapic_intro_label():
 label erica_lily_post_photoshoot_label(the_person):
     the_person "[the_person.mc_title]! You won't believe it."
     mc.name "Yeah?"
-    the_person "My follower count went up almost FORTY PERCENT from the pics we did with [erica.name] the other night!"
+    the_person "My follower count went up almost FORTY PERCENT from the pics we did with [erica.fname] the other night!"
     mc.name "Wow, that's great!"
     the_person "I know! I'm already getting all kinds of requests from people. You HAVE to convince her to do it again, okay?"
     the_person "Do you think we could make this a regular thing? Every Saturday night?"
@@ -2528,7 +2528,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
     $ scene_manager.add_actor(erica, position = "back_peek")
     "As you open the door, the two girls are standing in front of [lily.title]'s closet, looking back at you."
     lily "Oh hey [lily.mc_title]. Good timing! We were just picking out what to wear for tonights photos!"
-    erica "[lily.name] thinks we should match, but I was thinking about just wearing something else. What do you think?"
+    erica "[lily.fname] thinks we should match, but I was thinking about just wearing something else. What do you think?"
     "It's clear the your opinion is important to her. You think about it for a moment."
     menu:
         "You should match":
@@ -2656,7 +2656,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
     #TODO add new outfits?
     "With the pictures done, you give the camera back to [lily.possessive_title]."
     lily "Thanks, [lily.mc_title]! You're the best!"
-    erica "Yeah, thanks, [erica.mc_title]. [lily.name] is it still okay if I spend the night?"
+    erica "Yeah, thanks, [erica.mc_title]. [lily.fname] is it still okay if I spend the night?"
     lily "Of course! I could really use your help studying for my exam coming up."
     "You wish you could come up with a good excuse to stick around, but can't think of anything, so you say goodnight."
     $ scene_manager.clear_scene()
@@ -2688,7 +2688,7 @@ label erica_lily_post_insta_handjob_label():
     the_person "Yeah, it's me. I am just getting ready to head out for an early morning run. It's 5 am."
     mc.name "Wow. Your commitment to fitness is amazing, you know that?"
     "She chuckles before responding."
-    the_person "Thank you. I was just going to head out, but I wanted to come in and say thank you, for setting me up with [lily.name] and the InstaPic stuff..."
+    the_person "Thank you. I was just going to head out, but I wanted to come in and say thank you, for setting me up with [lily.fname] and the InstaPic stuff..."
     mc.name "It's fine, you don't have to come in at 5am to tell me that though."
     the_person "I know, but I wanted to make sure I had you alone for what I want to do to show you how thankful I am..."
     "Over your blankets, [the_person.title] reaches over and puts her hand on your chest, then starts to slide it down your body."
@@ -2810,9 +2810,9 @@ label erica_lily_post_insta_morning_label():
         "When you open your eyes, you see another figure in your doorway. Is that [lily.possessive_title]?"
         $ scene_manager.update_actor(lily,display_transform = character_left_flipped(zoom = 1.0))
         "She steps into your room."
-        lily "Ah, here you are [erica.name]. I guess I should have known you would sneak in here."
+        lily "Ah, here you are [erica.fname]. I guess I should have known you would sneak in here."
         "[the_person.title] suddenly stops rocking her hips."
-        the_person "[lily.name]? Oh my..."
+        the_person "[lily.fname]? Oh my..."
         lily "You guys are going to wake up mom if you aren't careful, but now that I'm up, can I join you?"
         the_person "You want to join... us?"
         lily "Sure, you just keep doing what you are doing, I'm sure I can put [lily.mc_title]'s tongue to good use."
@@ -2842,7 +2842,7 @@ label erica_lily_post_insta_morning_label():
             "The girls fall into your bed beside you. You relax for a little bit, enjoying the warmth of their bodies."
         the_person "I think I'm going to take it easy during my workout this morning... you two about wore me out."
         lily "God I know, I think I'm gonna go back to bed..."
-        the_person "Next Saturday then [lily.name]?"
+        the_person "Next Saturday then [lily.fname]?"
         lily "Of course, and if you're gonna sneak into my brother's room let me know next time okay?"
         the_person "Mmm, maybe. I might want him all to myself though..."
         $ scene_manager.clear_scene()
@@ -2901,7 +2901,7 @@ label erica_lily_post_insta_morning_label():
         call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), allow_continue = False) from _anal_fetish_erica_morning_wakeup_01
         $ the_person.change_slut(2, 100)
     elif position_choice == "threesome":
-        the_person "I'll go get [lily.name]. She DID say to let her know when I sneak back in anyway..."
+        the_person "I'll go get [lily.fname]. She DID say to let her know when I sneak back in anyway..."
         $ clear_scene
         "[the_person.possessive_title] leaves the room. A minute later, she returns with [lily.title] following her."
         $ scene_manager = Scene()
@@ -2930,7 +2930,7 @@ label erica_lily_post_insta_morning_label():
         the_person "I better get up, or I'm going to miss my workout..."
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.title] gets up and grabs her clothes. She carries them with her, probably going to change in the bathroom on her way out."
-        lily "Goodnight [the_person.name]! I'd better get back to my room too, as fun as it would be to sleep in here..."
+        lily "Goodnight [the_person.fname]! I'd better get back to my room too, as fun as it would be to sleep in here..."
         $ scene_manager.remove_actor(the_person)
         $ scene_manager.update_actor(lily, position = "walking_away", display_transform = character_right)
         "You watch as [lily.possessive_title] gets up and excuses herself, her ass swaying back and forth as she walks away."
@@ -2973,7 +2973,7 @@ label erica_pre_insta_love_label(the_person):
     "You knock on the door, but are surprised when it is answered by [the_person.possessive_title]."
     $ the_person.draw_person()
     mc.name "Oh! Hey [the_person.title]."
-    the_person "Hey! [lily.name] just left, she is going to pick us up some sushi tonight!"
+    the_person "Hey! [lily.fname] just left, she is going to pick us up some sushi tonight!"
     mc.name "Oh, that's great. Have her come get me when she gets back and we can start."
     the_person "Ok... why don't you just come in now? Actually I've been meaning to talk to you about something."
     mc.name "Oh, okay. Sure."
@@ -2988,7 +2988,7 @@ label erica_pre_insta_love_label(the_person):
     the_person "I'm not really sure where everything is going, but I see all the hard work you put into things, and I guess I just want you to know that I notice and appreciate it."
     the_person "Just understand... I'm really busy, right? With school, and track, and everything. I don't have much more time for extracurricular stuff!"
     mc.name "That is very kind of you to say, and don't worry, I understand we can't spend every waking moment together, and I'm okay with that."
-    the_person "So... I was thinking, since [lily.name] is gonna be gone for a bit, maybe I could SHOW you how much I appreciate you!"
+    the_person "So... I was thinking, since [lily.fname] is gonna be gone for a bit, maybe I could SHOW you how much I appreciate you!"
     "[the_person.possessive_title] slides down onto the floor on her knees in front of you."
     $ the_person.draw_person(position = "blowjob")
     $ mc.change_locked_clarity(20)
@@ -2999,14 +2999,14 @@ label erica_pre_insta_love_label(the_person):
     if the_person.has_taboo("sucking_cock"):
         the_person "I've been wanting to do this for a while. Mmm, you smell so manly."
         "[the_person.possessive_title] gives the tip a few exploring licks."
-        the_person "I guess I'd better get to work... I'm not sure how long [lily.name] is going to be gone."
+        the_person "I guess I'd better get to work... I'm not sure how long [lily.fname] is going to be gone."
         "[the_person.title] opens her mouth. She slides her wet, velvet lips down your erection."
         $ the_person.break_taboo("sucking_cock")
         $ mc.change_locked_clarity(50)
     else:
         the_person "Mmm, you smell so manly. I love the way you taste and the way you feel so hot in my mouth."
         "[the_person.possessive_title] gives the tip a few exploring licks."
-        the_person "I guess I'd better get to work... I'm not sure how long [lily.name] is going to be gone."
+        the_person "I guess I'd better get to work... I'm not sure how long [lily.fname] is going to be gone."
         "[the_person.title] opens her mouth. She slides her wet, velvet lips down your erection"
         $ mc.change_locked_clarity(50)
     "[the_person.title] starts to bob her head up and down, eager to satisfy you with her mouth."
@@ -3017,7 +3017,7 @@ label erica_pre_insta_love_label(the_person):
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person()
     mc.name "[the_person.title]... that was awesome."
-    the_person "Mmm, thanks! But you should probably get out before [lily.name] gets back!"
+    the_person "Mmm, thanks! But you should probably get out before [lily.fname] gets back!"
     the_person "Just go back to your room and pretend like nothing happened."
     mc.name "Should I come back to take pics?"
     the_person "Up to you! Now go!"
@@ -3182,7 +3182,7 @@ label erica_breeding_fetish_team_crisis_label():
     "[the_person.possessive_title] pulls up her grade sheet on her phone, then shows it to you."
     "Damn, D, C+, F?, D... wait."
     "You notice one of the classes, chemistry 201 with professor [nora.last_name] is now showing a D."
-    mc.name "Chemistry... is that with [nora.name] [nora.last_name]?"
+    mc.name "Chemistry... is that with [nora.fname] [nora.last_name]?"
     the_person "Yeah?"
     mc.name "I actually know her. Cooperating to get someone kicked off the track team because she got pregnant isn't something she would do."
     the_person "But... I mean... she did though?"
@@ -3245,14 +3245,14 @@ label erica_breeding_fetish_team_crisis_label():
     "You jump up out of bed, grab a pair of shorts and a t-shirt and throw them on."
     "You open your bedroom door and start to walk [the_person.title] to the front door..."
     $ scene_manager.add_actor(lily)
-    lily "Morning [lily.mc_title], you're up early... Oh! Hey [erica.name]!"
+    lily "Morning [lily.mc_title], you're up early... Oh! Hey [erica.fname]!"
     the_person "Hey..."
     if lily.sluttiness >= 40:
         lily "I thought I heard some action last night. Nice going!"
     else:
         lily "I thought I heard some... errm... strange noises last night..."
     the_person "Yeah... that was us..."
-    lily "Wow, [erica.name], you look amazing! You are positively glowing."
+    lily "Wow, [erica.fname], you look amazing! You are positively glowing."
     lily "You're still coming over on Saturday right? Thirsty InstaPic boys are gonna love the way you are developing..."
     if lily.pregnancy_is_visible():
         lily "I have to say, I started making considerably more money on InstaPic when my tits starting swelling up with milk."
@@ -3287,7 +3287,7 @@ label erica_breeding_fetish_nora_followup_label(the_person):
     the_person "I can give you a minunte."
     mc.name "I was hoping I could talk to you about one of your students. She is a friend of mine and is confused about a recent drop in her grades."
     the_person "Hmm, okay. What's her name?"
-    mc.name "[erica.name] [erica.last_name]. She is in your Chemistry 201 class."
+    mc.name "[erica.fname] [erica.last_name]. She is in your Chemistry 201 class."
     the_person "Mmmm... I'm not sure, there's a lot of students in that class."
     mc.name "She is on the track team. She got pregnant and is just starting to show."
     the_person "Oh! Yeah I think I remember her. Sweet girl. You say her grades have been dropping?"
@@ -3306,7 +3306,7 @@ label erica_breeding_fetish_nora_followup_label(the_person):
     $ the_person.draw_person(position = "sitting", emotion = "angry")
     "[the_person.possessive_title]'s brow furrows as she goes through some of her recent grades."
     the_person "[the_person.mc_title]... You wouldn't have come to me unless you thought something was going on... What exactly is going on here? I did NOT give her these grades!"
-    mc.name "Well, this is kind of a longshot, but, [erica.name] thinks her track coach is sabatoging her grades to get her kicked off the track team."
+    mc.name "Well, this is kind of a longshot, but, [erica.fname] thinks her track coach is sabatoging her grades to get her kicked off the track team."
     the_person "Oh my. That is a very serious allegation. But yet, here in front of me is possible incriminating data."
     the_person "I'm going to save a copy of this and correct her grades immediately. While I do that, do you think you could get me a list of her other instructors?"
     mc.name "Sure."
@@ -3360,7 +3360,7 @@ label erica_breeding_nora_news_part_two_label():
     the_person "The new coach has already reached out to her with an offer for a full ride, unconditional scholarship and placement back on the track team."
     mc.name "Wow, so the guy really was tampering with grades."
     the_person "Yes, he was."
-    mc.name "Well that is great news. I'm sure [erica.name] will be excited when she hears about it."
+    mc.name "Well that is great news. I'm sure [erica.fname] will be excited when she hears about it."
     $ erica.event_triggers_dict["team_reinstate_day"] = day
     $ erica.add_unique_on_talk_event(erica_breeding_fetish_team_rejoin)
 
@@ -3402,7 +3402,7 @@ label erica_breeding_fetish_team_rejoin_label(the_person):
 label erica_discuss_morning_wakeup_label(the_person):
     mc.name "Hey, I wanted to talk to you about something."
     the_person "Yeah?"
-    mc.name "You know how sometimes, you sneak into my room after spending the night with [lily.name] in the early morning?"
+    mc.name "You know how sometimes, you sneak into my room after spending the night with [lily.fname] in the early morning?"
     the_person "Oh yeah..."
     menu:
         "Don't do that anymore":

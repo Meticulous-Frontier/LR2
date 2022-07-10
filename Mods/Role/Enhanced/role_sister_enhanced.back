@@ -171,7 +171,7 @@ label sister_instathot_label_mom_enhanced(the_sister, the_mom):
             the_mom "Thank you, it really does help."
 
     if the_mom.judge_outfit(insta_outfit_mom) and not the_mom.wardrobe.has_outfit_with_name(insta_outfit_mom.name):
-        the_mom "Say [the_sister.name], do you need this outfit back?"
+        the_mom "Say [the_sister.fname], do you need this outfit back?"
         the_sister "No, you can keep it if you want. It's obviously not my size, and I don't think they'll take returns."
         $ the_mom.wardrobe.add_outfit(insta_outfit_mom)
         $ the_mom.planned_outfit = insta_outfit_mom #She wears it for the rest of the day.

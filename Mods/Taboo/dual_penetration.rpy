@@ -83,7 +83,7 @@ label wild_dual_penetration_taboo_break(the_person):
             the_person "Oh fuck..."
         else:
             "She closes her eyes and talks quietly to herself."
-            the_person "Whew, deep breathes [the_person.name]. You can do this..."
+            the_person "Whew, deep breathes [the_person.fname]. You can do this..."
             mc.name "Are you okay?"
             the_person "Yeah, of course. I'm just... a little nervous. Fuck, I don't normally feel like this."
             "She laughs and shakes her head."

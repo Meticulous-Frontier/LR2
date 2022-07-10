@@ -309,67 +309,67 @@ label starbuck_sex_watch(the_person, the_sex_person, the_position):
         $ the_person.draw_person(emotion = "angry")
         the_person "Ugh, for crying out loud, you two. Get a room or something, nobody wants to see this."
         $ the_person.change_stats(happiness = -1, obedience = -2)
-        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person()
         the_person "Could you two at least keep it down? This is fucking ridiculous."
         $ the_person.change_happiness(-1)
-        "[title] tries to avert her gaze and ignore you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze and ignore you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
-        the_person "You're certainly feeling bold today [the_sex_person.name]. At least it looks like you're having a good time..."
+        the_person "You're certainly feeling bold today [the_sex_person.fname]. At least it looks like you're having a good time..."
         $ the_person.change_slut(1)
-        "[title] watches for a moment, then turns away  while you and [the_sex_person.name] keep [the_position.verb]."
+        "[title] watches for a moment, then turns away  while you and [the_sex_person.fname] keep [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh wow that's hot. I should sell tickets to this!"
         $ the_person.change_slut(2)
-        "[title] watches you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches you and [the_sex_person.fname] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")
-        the_person "Come on [the_person.mc_title], [the_sex_person.name] is going to fall asleep at this rate! You're going to have to give her a little more than that."
-        "[title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+        the_person "Come on [the_person.mc_title], [the_sex_person.fname] is going to fall asleep at this rate! You're going to have to give her a little more than that."
+        "[title] watches eagerly while you and [the_sex_person.fname] [the_position.verb]."
     return
 
 label starbuck_being_watched(the_person, the_watcher, the_position):
     if the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
         #They agree you should give it to her harder
-        the_person "I can handle it [the_person.mc_title]. Let's show [the_watcher.name] how it's done!"
+        the_person "I can handle it [the_person.mc_title]. Let's show [the_watcher.fname] how it's done!"
         $ the_person.change_arousal(1)
-        "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.possessive_title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's super slutty and doesn't care what people think.
-        the_person "Don't listen to [the_watcher.name]. This is a sex shop, surely they expect to see something like this when they walk in?"
+        the_person "Don't listen to [the_watcher.fname]. This is a sex shop, surely they expect to see something like this when they walk in?"
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #She's super slutty and encourages the watcher to be slutty.
         $ the_person.change_arousal(1)
-        the_person "I don't usually demonstrate the goods like this, [the_watcher.name]. You understand, right?"
-        "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        the_person "I don't usually demonstrate the goods like this, [the_watcher.fname]. You understand, right?"
+        "[the_person.possessive_title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
         #She's into it and encouraged by the slut watching her.
-        the_person "Oh [the_person.mc_title], [the_watcher.name] is watching you fuck my brains out!"
+        the_person "Oh [the_person.mc_title], [the_watcher.fname] is watching you fuck my brains out!"
         $ the_person.change_arousal(2)
-        "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.possessive_title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
         the_person "Fuck [the_person.mc_title], maybe we should have gone to the back room?"
         $ the_person.change_stats(arousal= -1)
-        "[the_person.possessive_title] seems uncomfortable with [the_watcher.name] nearby."
+        "[the_person.possessive_title] seems uncomfortable with [the_watcher.fname] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
-        the_person "Ah, now this is a party! Maybe when he's done you can tap in and take a turn [the_watcher.name]!"
+        the_person "Ah, now this is a party! Maybe when he's done you can tap in and take a turn [the_watcher.fname]!"
         the_person "Orgy day at Starbuck's Sex Shop... that's actually a pretty good idea!"
         $ the_person.change_stats(arousal = 1, slut = 1, max_slut = 30)
-        "[the_person.possessive_title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
+        "[the_person.possessive_title] seems more comfortable [the_position.verbing] you with [the_watcher.fname] around."
 
     return
 

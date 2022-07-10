@@ -177,7 +177,7 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     $ jealous_sister.draw_person(position = "cowgirl")
     #TODO make her actually naked
     "Her lower half is naked, and she straddles your hips with her cunt pressed against your rapidly hardening cock."
-    "You start to say something, but [ashley.name] puts a finger on your lips."
+    "You start to say something, but [ashley.fname] puts a finger on your lips."
     jealous_sister "Shhhh, if we're quiet, she'll never even know."
     $ mc.change_locked_clarity(30)
     "She leans forward and replaces her finger with her lips. She kisses you hungrily, making her need for you known."

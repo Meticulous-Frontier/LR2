@@ -90,23 +90,23 @@ label mall_introduction_action_label():
     if known_person.sluttiness > 20 or known_person.love > 20:
         if known_person.is_employee():
             if known_person.sluttiness > 40:
-                known_person "You should get to know him more intimately [stranger.name], you should apply for a position in the company."
+                known_person "You should get to know him more intimately [stranger.fname], you should apply for a position in the company."
             else:
-                known_person "I promise you [stranger.name], he is a great boss. You should go out with him sometime."
+                known_person "I promise you [stranger.fname], he is a great boss. You should go out with him sometime."
         else:
             if known_person.sluttiness > 40:
-                known_person "He can show you a really good time [stranger.name], if you know what I mean."
+                known_person "He can show you a really good time [stranger.fname], if you know what I mean."
             else:
-                known_person "I have to tell you [stranger.name], he is a great person to hang out with."
+                known_person "I have to tell you [stranger.fname], he is a great person to hang out with."
 
         $ stranger.change_stats(happiness = 10, love = 5)
 
         if stranger.sluttiness > 30:
-            stranger "Well, he's very handsome [known_person.name], I wouldn't mind going on a date with him."
+            stranger "Well, he's very handsome [known_person.fname], I wouldn't mind going on a date with him."
         elif stranger.sluttiness > 10:
-            stranger "He is very cute [known_person.name], I might just do that."
+            stranger "He is very cute [known_person.fname], I might just do that."
         else:
-            stranger "I trust your judgement [known_person.name], perhaps we could go out sometime."
+            stranger "I trust your judgement [known_person.fname], perhaps we could go out sometime."
 
     mc.name "It was great meeting you both here. I'll see you around [stranger.title]."
     if stranger.has_role(prostitute_role):

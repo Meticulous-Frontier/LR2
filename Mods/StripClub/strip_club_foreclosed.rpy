@@ -144,7 +144,7 @@ label strip_club_closes_down_label():
         strip_club.visible = True   # make sure the strip club is on the map
 
     "While reading a newspaper you find out that your favorite Strip Club is no longer in business."
-    "Perhaps you should talk to your cousin [cousin.name] about it, when your aunt cannot overhear your conversation."
+    "Perhaps you should talk to your cousin [cousin.fname] about it, when your aunt cannot overhear your conversation."
     return
 
 label cousin_talk_about_strip_club_label(the_person):

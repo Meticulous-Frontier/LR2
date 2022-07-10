@@ -46,7 +46,7 @@ label daughter_work_crisis_label_enhanced():
         "[the_person.title] hands over a printed out resume and waits nervously for you to look it over."
 
     menu:
-        "Look at the resume for [the_person.name]'s daughter":
+        "Look at the resume for [the_person.fname]'s daughter":
             pass
 
         "Tell her you aren't hiring":
@@ -58,7 +58,7 @@ label daughter_work_crisis_label_enhanced():
                 "She puts her arms behind her back and puffs out her chest in a clear attempt to show off her tits."
                 $ mc.change_locked_clarity(5)
                 menu:
-                    "Look at the resume for [the_person.name]'s daughter":
+                    "Look at the resume for [the_person.fname]'s daughter":
                         "Convinced, you start to read through the resume."
                         $ promised_sex = True
 

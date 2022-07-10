@@ -128,11 +128,11 @@ label body_monitor_phase_1_label():
     $ scene_manager.add_actor(person_2, display_transform = character_center_flipped, position = "sitting")
     "You approach your two employees."
     mc.name "Hey, what are you two working on?"
-    person_1 "I was just in the middle of showing [person_2.name] how we process the data from our field studies."
+    person_1 "I was just in the middle of showing [person_2.fname] how we process the data from our field studies."
     "You nod and look at [person_2.possessive_title], who seems to be so deeply absorbed by her studies that she doesn't seem to be aware of your presence."
     mc.name "I see. Anything I can help you with?"
     "[person_1.possessive_title] shakes her head."
-    person_1 "No, I can handle that. But there is something we wanted to talk to you about. As you can see, [person_2.name] is really interested in the data we have acquired so far."
+    person_1 "No, I can handle that. But there is something we wanted to talk to you about. As you can see, [person_2.fname] is really interested in the data we have acquired so far."
     person_1 "While she was reading over the data files, she mentioned that she might know of a way to improve the data we are collecting, and I thought that you might be interested in hearing about it as well. That's why I called you over."
     "Improving the data from your field studies is definitely something you are interested in."
     mc.name "Okay. You got my attention."
@@ -223,7 +223,7 @@ label body_monitor_phase_3_label():
     person_1 "I wanted to talk to you about the Body Monitoring Nanobot Program."
     mc.name "The Program? Is there a problem with it?"
     person_1 "No, not really a problem. Just something I noticed while going over the last batch of data we received."
-    mc.name "Have you talked to [person_2.name] about it?"
+    mc.name "Have you talked to [person_2.fname] about it?"
     person_1 "Not yet. I wanted to talk to you about it before I take any further steps."
     mc.name "Okay. Then let's go to my office."
     $ scene_manager.update_actor(person_1, position = "walking_away")
@@ -239,7 +239,7 @@ label body_monitor_phase_3_label():
     "You nod in agreement."
     mc.name "I see. And I assume you would like to make use of that missed potential?"
     person_1 "Exactly."
-    mc.name "Okay. Then we should call in [person_2.name] as well. She is most capable of deciding if any idea you might come up with is feasible or not."
+    mc.name "Okay. Then we should call in [person_2.fname] as well. She is most capable of deciding if any idea you might come up with is feasible or not."
     "You send [person_2.possessive_title] a quick text and some minutes later, you hear a knock at your door."
     mc.name "Come in!"
     $ scene_manager.add_actor(person_2, display_transform = character_center_flipped, position = "stand3")

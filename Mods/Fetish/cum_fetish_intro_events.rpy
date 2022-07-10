@@ -596,7 +596,7 @@ label cum_fetish_rebecca_intro_label(the_person):
     "Definitely unusual for [the_person.possessive_title]. She is usually ready for a glass anytime. You walk over to her and sit down."
     "When you sit down, she scoots over close to you. You raise your arm up and put it around her as she lays her head on your shoulder."
     "You feel her hand on your leg, rubbing your thigh. It slowly starts to creep higher until she is eventually rubbing your crotch."
-    the_person "You know... [cousin.name] won't be home for hours... she's always out so late these days."
+    the_person "You know... [cousin.fname] won't be home for hours... she's always out so late these days."
     the_person "Want to have some fun on the couch? I'm not in the mood for wine, but I would love to have a drink of something else..."
     $ mc.change_locked_clarity(20)
     "Your pants are getting tight. Sounds like your sexy aunt wants to taste your cum!"

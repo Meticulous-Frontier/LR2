@@ -311,7 +311,7 @@ label gaming_cafe_grind_with_both():
         "Group Dungeon\n{size=18}Gain 60 Energy{/size}":
             mc.name "Let's run a dungeon. I could use the gear."
             myra "Okay. I've already got all the gear I need from those, but I'll help you guys with one."
-            alexia "Thanks [myra.name]! I actually need some stuff from Hollowfang Lair."
+            alexia "Thanks [myra.fname]! I actually need some stuff from Hollowfang Lair."
             mc.name "Yeah I think I need that one too."
             "You find a fourth for your dungeon. It is tough, but with [myra.possessive_title] as tank and [alexia.title] as healer, you get through it."
             "It took a lot of effort, but completing the difficult group content makes you feel good."
@@ -340,7 +340,7 @@ label gaming_cafe_grind_with_both():
         "Raid\n{size=18}Costs 20 Energy{/size}" if mc.energy >=20:
             mc.name "I want to run a raid. They are really fun in this game."
             alexia "Oh... I don't normally like to run those... they are pretty tough..."
-            myra "Don't worry [alexia.name]! I'll tank, we'll do great!"
+            myra "Don't worry [alexia.fname]! I'll tank, we'll do great!"
             mc.name "Yeah, you're an awesome healer. There's this one I ran the other day that has really good healer gear."
             alexia "Well okay... we can try..."
             $ alexia.change_obedience(5)

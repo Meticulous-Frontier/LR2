@@ -59,7 +59,7 @@ label SB_fetish_vaginal_family_threesome_label():
     "You are so busy checking out [the_person.possessive_title], your brain barely registers a knock on your door. [the_person.possessive_title] is just sitting down in your lap when you hear a gasp from your door."
     if mc.business.event_triggers_dict.get("family_threesome", False) == True:
         $ scene_manager.add_actor(mom, emotion = "happy")
-        mom "Is that [the_person.name]? Ah good, I thought I heard you come in here."
+        mom "Is that [the_person.fname]? Ah good, I thought I heard you come in here."
         the_person "Mom! Going to join us again tonight?"
         mom "If that's okay with you two... I don't want to be a bother."
         mc.name "[mom.title]. Having you here can only make things even better."
@@ -95,7 +95,7 @@ label SB_fetish_vaginal_family_threesome_label():
     else:
         $ the_clothing = mom.outfit.get_lower_top_layer()
         $ scene_manager.add_actor(mom, emotion = "angry")
-        mom "Is that... [the_person.name]!?! What are you... why are you naked in [mom.mc_title]'s room?" #NOTE: the_person doesn't necessarily know mom's title for the MC, but still somewhat makes sense.
+        mom "Is that... [the_person.fname]!?! What are you... why are you naked in [mom.mc_title]'s room?" #NOTE: the_person doesn't necessarily know mom's title for the MC, but still somewhat makes sense.
         "[mom.possessive_title] is shocked to discover that you and [the_person.possessive_title] are in your room, clearly about to get busy."
         the_person "Mom! Nothing was... wait... what are you wearing?"
         "[mom.possessive_title] quickly realizes that [the_person.possessive_title] is here... doing exactly what she was coming here to do. Her cheeks turn red with embarrassment."
@@ -110,7 +110,7 @@ label SB_fetish_vaginal_family_threesome_label():
         "You draw her into your arms. She melts into you giving you a kiss."
         $ mc.change_locked_clarity(10)
         "Your lips lock together in a passionate kiss. [the_person.possessive_title]'s body melts into yours in surrender, even as [mom.possessive_title] looks on."
-        mom "Oh my... [mom.mc_title]... [the_person.name]..."
+        mom "Oh my... [mom.mc_title]... [the_person.fname]..."
         "You move your hands down [the_person.possessive_title]'s waist and around to her butt. You give both cheeks a squeeze."
         "She presses her body against yours and sighs."
         the_person "Mmm... I can't wait for you to fuck me..."

@@ -167,7 +167,7 @@ label mom_sister_snooping_action_label():
         lily "It's fine mom. I just roll it up a little at the top, no one even notices. Well, except for this one professor... I like to sit in the front and..."
         mom "That's enough... I don't need to hear about this! Young lady unroll that skirt right now."
         lily "Mom! It's fine! There's nothing wrong with a little fun. Besides, he really enjoys it. Especially if I leave the top couple buttons open on the blouse..."
-        mom "Oh my. [lily.name], what am I gonna do with you."
+        mom "Oh my. [lily.fname], what am I gonna do with you."
         "[lily.title] gives a little laugh."
         lily "It's okay mom. Say, you should try something like this sometime!"
         mom "Why I would never..."

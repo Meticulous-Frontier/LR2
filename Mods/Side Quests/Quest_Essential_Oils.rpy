@@ -255,7 +255,7 @@ label quest_essential_oils_discover_supplier_label(the_person):
     the_person "Well, I get mine from over at the mall. There's a nice lady over there who sells them. One of those, lifestyle coach, naturalist type people."
     mc.name "Do you remember her name?"
     "She thinks about it for a minute."
-    the_person "Yes, I'm pretty sure her name is [camilla.name]. She has a small kiosk setup in the mall itself."
+    the_person "Yes, I'm pretty sure her name is [camilla.fname]. She has a small kiosk setup in the mall itself."
     mc.name "Thank you."
     the_person "Yup! Anything else I can do for you?"
     $ camilla.add_unique_on_talk_event(quest_essential_oils_decision)

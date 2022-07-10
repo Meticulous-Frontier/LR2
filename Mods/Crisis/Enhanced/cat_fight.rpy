@@ -31,11 +31,11 @@ label cat_fight_crisis_enhanced_label():
     $ scene_manager.add_actor(person_one, emotion = "angry")
     $ scene_manager.add_actor(person_two, emotion = "angry", display_transform = character_center_flipped)
     "You feel a tap on your back while you're working. [person_one.title] and [person_two.title] are glaring at each other while they wait to get your attention."
-    person_one "I was just in the break room and saw [person_two.name] digging around in the fridge looking for other people's lunches."
+    person_one "I was just in the break room and saw [person_two.fname] digging around in the fridge looking for other people's lunches."
     $ scene_manager.update_actor(person_two, position = "stand4")
     person_two "That's a lie and you know it! I was looking for my own lunch and you're just trying to get me in trouble!"
     "[person_two.title] looks at you and pleads."
-    person_two "You have to believe me, [person_one.name] is making all of this up! That's just the kind of thing she would do, too."
+    person_two "You have to believe me, [person_one.fname] is making all of this up! That's just the kind of thing she would do, too."
     $ scene_manager.update_actor(person_one, position = "stand4")
     if person_two.sluttiness > 50:
         person_one "Jesus, why don't you just suck his cock and get it over with. That's how you normally convince people, right?"
@@ -50,12 +50,12 @@ label cat_fight_crisis_enhanced_label():
 
     $ scene_manager.update_actor(person_one, position = "stand2")
     menu:
-        "Side with [person_one.name]":
+        "Side with [person_one.fname]":
             #Obedience and happiness boost to p1, reduction for p2
             call cat_fight_pick_winner_enhanced(scene_manager, person_one, person_two) from _call_cat_fight_pick_winner_enhanced_1
 
 
-        "Side with [person_two.name]":
+        "Side with [person_two.fname]":
             #Obedience and happiness boost to p2, reductio n for p1
             call cat_fight_pick_winner_enhanced(scene_manager, person_two, person_one) from _call_cat_fight_pick_winner_enhanced_2
 
@@ -72,7 +72,7 @@ label cat_fight_crisis_enhanced_label():
                 "You bring the girls hands together and wrap yours around both of theirs."
                 person_one "Sorry sir, you're right."
                 $ scene_manager.update_actor(person_two, emotion="sad")
-                person_two "You're right, I'm sorry sir. And I'm sorry [person_one.name]."
+                person_two "You're right, I'm sorry sir. And I'm sorry [person_one.fname]."
                 "You bring your hands back, leaving [person_one.title] and [person_two.title] holding hands. They look away from each other sheepishly."
                 mc.name "Good to hear. Now kiss and make up, then you can get back to work."
                 "The girls glance at you, then at each other. After a moment of hesitation [person_two.title] leans forward and kisses [person_one.title] on the lips."
@@ -235,7 +235,7 @@ label cat_fight_crisis_enhanced_label():
                     "[loser.title] stops fighting almost immediately, leaning against [winner.title] and breathing heavily. You've got a front row seat as [winner.title] starts to finger [loser.title]."
                     $ mc.change_locked_clarity(20)
                     $ loser.change_arousal(15)
-                    loser "Oh god... [winner.name], just... Ah!"
+                    loser "Oh god... [winner.fname], just... Ah!"
                     "[winner.title] isn't going easy on [loser.title]. She shivers and bucks against [winner.title]."
                     $ loser.change_arousal(25)
                     "[winner.title] speeds up, pumping her fingers in and out of [loser.title]'s exposed cunt. She moans loudly and rolls her hips against [winner.title]'s."
@@ -286,8 +286,8 @@ label cat_fight_crisis_enhanced_label():
             $ scene_manager.update_actor(person_one, emotion = "sad")
             person_one "Really? I..."
             $ scene_manager.update_actor(person_two, emotion = "sad")
-            person_two "See what happens when you go around making things up [person_one.name]. Sorry [person_two.mc_title], we'll get back to work right away."
-            person_one "Ugh, whatever. Come on [person_two.name], let's go."
+            person_two "See what happens when you go around making things up [person_one.fname]. Sorry [person_two.mc_title], we'll get back to work right away."
+            person_one "Ugh, whatever. Come on [person_two.fname], let's go."
             $ scene_manager.update_actor(person_one, position = "walking_away")
             $ scene_manager.update_actor(person_two, position = "walking_away")
             "They turn and leave the room together."
