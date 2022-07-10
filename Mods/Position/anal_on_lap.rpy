@@ -27,7 +27,7 @@ init python:
 label intro_anal_on_lap(the_girl, the_location, the_object):
     "You sit down on the [the_object.name] and motion [the_person.possessive_title] over to you. You turn her around so her ass is facing you."
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = "back_peek", visible_enough = True, prefer_half_off = True)
 
@@ -51,7 +51,7 @@ label intro_anal_on_lap(the_girl, the_location, the_object):
     "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
     "[the_girl.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
     if the_girl.get_opinion_score("anal sex") > 0 :
-        the_girl "Oh my god, I can't wait to ride this thing. Mmmm I feel so full."
+        the_girl "Oh my god, I can't wait to ride this thing. Mmmm, I feel so full."
         $ the_girl.discover_opinion("anal sex")
     else:
         the_girl "Wow! Okay... I think I'm ready... let's do this!"
@@ -108,7 +108,7 @@ label scene_anal_on_lap_2(the_girl, the_location, the_object):
                     $ the_girl.discover_opinion("being submissive")
                     "[the_girl.title] just moans, leaning back against you. You seize the opportunity."
                     "Pulling her back against you, you reach under her legs and force them up and open, so she is spread wide."
-                    "She whimpers helplessly as you fuck her backdoor mercilessly."
+                    "She whimpers helplessly as you fuck her backdoor without mercy."
                     $ the_girl.change_arousal(10)
                 elif the_girl.effective_sluttiness() > 95:
                     the_girl "Mmm, do it! Fuck me hard and make me cum!"
@@ -307,7 +307,7 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
                 $ the_girl.cum_in_ass()
                 $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_girl)
                 $ anal_on_lap.redraw_scene(the_girl)
-                "As soon as you let go of her she immediately pops off and stands over you. Her ass gives a little squelch as you cum leaks from it onto your lap."
+                "As soon as you let go of her she immediately pops off and stands over you. Her ass gives a little squelch as your cum leaks from it onto your lap."
                 the_person "God dammit, that's now how that was supposed to go. Next time I'm putting handcuffs on you first..."
             "Beg her to finish inside":
                 mc.name "No! Stop! Please! I want to cum inside you so bad!"

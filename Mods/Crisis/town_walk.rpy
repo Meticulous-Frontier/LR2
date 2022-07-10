@@ -8,22 +8,22 @@ init 2 python:
 
     def get_town_walk_person():
         if mc.business.is_weekend():
-            candidates = [x for x in known_people_in_the_game(excluded_people = [mom, lily, aunt, cousin])]
+            candidates = [x for x in known_people_in_the_game(excluded_people = unique_character_list)]
         else:
-            candidates = [x for x in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + [mom, lily, aunt, cousin])]
+            candidates = [x for x in known_people_in_the_game(excluded_people = mc.business.get_employee_list() + unique_character_list)]
         return get_random_from_list(candidates)
 
     town_walk_crisis_action = ActionMod("Town Walk", town_walk_crisis_requirement, "town_walk_crisis_action_label", category = "Misc",
-        menu_tooltip = "On occasion when you walk down town, you notice, someone did not close their bedroom curtains.", is_crisis = True)
+        menu_tooltip = "On occasion when you walk downtown, you notice, someone did not close their bedroom curtains.", is_crisis = True)
 
 label town_walk_crisis_action_label():
     ## You spy on a neighbor during your town walk activities
     $ the_person = get_town_walk_person()
-    $ old_location = mc.location
     if the_person is None: # this could be no one
         return
 
     # now you know where she lives
+    $ old_location = mc.location
     $ the_person.learn_home()
 
     "While walking around town, you see that the window in [the_person.possessive_title]'s house is open..."
@@ -105,7 +105,7 @@ label town_walk_crisis_action_label():
                 if the_person.outfit.vagina_available():
                     "Both her hands move really fast around her wide-spread pussy."
                 else:
-                    "[the_person.possessive_title] pinches her nipples and squeezes the other vigorously between her legs."
+                    "[the_person.possessive_title] pinches her nipples with one hand and squeezes the other vigorously between her legs."
                 the_person "Ahh, yes. That's it. Just what I need."
             elif ran_num == 2:
                 if the_person.outfit.vagina_available():
@@ -120,14 +120,14 @@ label town_walk_crisis_action_label():
         $ the_person.draw_person(position = "missionary", emotion = "orgasm")
         $ mc.change_locked_clarity(20)
         #"You see [the_person.possessive_title]'s body shiver as she reaches orgasm." NOTE: Things like this gets mentioned in the climax_responses
-        the_person "Wow, that was intense. Need to be quieter or someone might just hear me - the window is still open... I would be so ashamed."
+        the_person "Wow, that was intense. I need to be quieter or someone might just hear me - the window is still open... I would be so ashamed."
         $ the_person.reset_arousal()
         $ the_person.change_stats(arousal = renpy.random.randint(0,60))
 
     menu:
         "Join her":
             "You decide to use this opportunity and join her."
-            mc.name "I was passing by, heard some noise  and decided to investigate. All these robberies, you know..."
+            mc.name "I was passing by, heard some noise and decided to investigate. All these robberies, you know..."
             mc.name "And I see that that you indeed require some attention, [the_person.title]. Should I join?"
             if the_person.sluttiness > 50 or the_person.arousal > 50:
                 $ the_person.draw_person(position = "stand5", emotion = "happy")

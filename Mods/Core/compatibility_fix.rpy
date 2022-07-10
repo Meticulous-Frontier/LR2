@@ -231,12 +231,6 @@ init 1 python:
             renpy.say("Warning", "The game mod is not installed correctly, make sure the 'Mods' folder is directly in your 'game' folder\nIt should read like '<base>/game/Mods'.")
         return
 
-    def validate_stripclub_stripper_role():
-        if not "stripclub_stripper_job" in globals():
-            global stripclub_stripper_job
-            stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit)
-        return
-
     def check_bugfix_installed(*args, **kwargs): #allow passing of any number of parameters
         if not bugfix_installed:
             renpy.say("Warning", "You are running the game without bugfix installed, the mod no longer works without this bugfix due to the many issues in the base game. Download {a=https://github.com/Tristimdorion/Lab-Rats-2/releases}the correct version here{/a}. The game will now exit.")
@@ -245,6 +239,7 @@ init 1 python:
 
 label check_mod_installation(stack):
     $ validate_mod_installation_location()
+    $ mod_installed = True
 
     $ execute_hijack_call(stack)
     return
@@ -252,6 +247,7 @@ label check_mod_installation(stack):
 label activate_compatibility_fix(stack):
     # make sure we store the crisis tracker in the save game
     $ crisis_tracker_dict = {}
+    $ mod_installed = True
 
     $ update_pinned_cache()
 
@@ -261,19 +257,14 @@ label activate_compatibility_fix(stack):
     return
 
 label update_compatibility_fix(stack):
+    $ mod_installed = True
+
     if not "crisis_tracker_dict" in globals():
         $ crisis_tracker_dict = {}
 
     $ update_pinned_cache()
 
     $ cleanup_default_wardrobe()
-
-    # make beta saves compatible
-    if not list_of_jobs or not isinstance(list_of_jobs[0], list):
-        call instantiate_jobs() from _call_instantiate_jobs
-        call add_extra_room_job_definitions() from _call_add_extra_room_job_definitions
-
-    $ validate_stripclub_stripper_role()
 
     $ execute_hijack_call(stack)
     return

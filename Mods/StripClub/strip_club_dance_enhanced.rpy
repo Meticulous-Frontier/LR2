@@ -55,6 +55,7 @@ label stripclub_dance_enhanced_label():
 
     $ the_person = get_next_stripper()
 
+    $ the_person.apply_outfit(stripclub_wardrobe.pick_random_outfit()) #TODO: Add more stripper outfits
     $ title = the_person.title
     $ the_person.draw_person(position = "walking_away", the_animation = ass_bob)
     "A new song starts playing over the speakers and a girl steps out onto the stage."

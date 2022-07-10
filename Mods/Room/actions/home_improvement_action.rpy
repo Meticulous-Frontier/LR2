@@ -82,10 +82,23 @@ init 0 python:
             return "Requires: $10000"
         return False
 
+    def harem_mansion_build_action_requirement():
+        if mc.business.event_triggers_dict.get("harem_mansion_build", False):
+            return False
+        if is_home_improvement_in_progress():
+            return "Wait for current project completion"
+        if not mc.business.is_open_for_business():
+            return "Only during business hours"
+        if mc.business.has_funds(200000):
+            return True
+        else:
+            return "Requires: $200000"
+        return False
+
 init 2 python:
     # ModAction initialization. Kicks off initial entry into code.
     add_mc_bedroom_renovate_action = ActionMod("Home Improvement", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_option_label",
-        menu_tooltip = "Enables a series of renovations for your home into more impressive state (with some bonuses), including home dungeon.", category = "Home", is_crisis = True)
+        menu_tooltip = "Enables a series of renovations to make your home more impressive (with some bonuses), including building a home dungeon.", category = "Home", is_crisis = True)
 
     # extend the default build phone menu function with renovations
     def build_phone_menu_home_improvement_extended(org_func):
@@ -95,8 +108,8 @@ init 2 python:
             # run extension code
             if mc.business.event_triggers_dict.get("home_improvement_unlocked", False):
                 if mc.business.event_triggers_dict.get("home_improvement_bedroom_renovated", False):
-                    lily_bedroom_renovate_action = Action("Renovate Lily's bedroom", lily_bedroom_renovate_requirement, "lily_bedroom_renovate_label", menu_tooltip = "Renovates Lily's bedroom into more impressive state and increases her love for you. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
-                    mom_bedroom_renovate_action = Action("Renovate Mom's bedroom", mom_bedroom_renovate_requirement, "mom_bedroom_renovate_label", menu_tooltip = "Renovates Mom's bedroom into more impressive state and increases her love for you. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
+                    lily_bedroom_renovate_action = Action("Renovate Lily's bedroom", lily_bedroom_renovate_requirement, "lily_bedroom_renovate_label", menu_tooltip = "Renovates Lily's bedroom into a more impressive state and increases her love for you. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
+                    mom_bedroom_renovate_action = Action("Renovate Mom's bedroom", mom_bedroom_renovate_requirement, "mom_bedroom_renovate_label", menu_tooltip = "Renovates Mom's bedroom into a more impressive state and increases her love for you. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
                     home_shower_renovate_action = Action("Renovate bathroom", home_shower_renovate_requirement, "home_shower_renovate_label", menu_tooltip = "Renovates the shower in your house and increases your daily energy. Cost $" + str(mc_bedroom_renovation_cost) + ".", priority = 10)
                     dungeon_build_action = Action("Build a dungeon", dungeon_build_action_requirement, "dungeon_build_label", menu_tooltip = "Clear the cellar and build a Sex Dungeon, complete with \"Guest Accommodations\". Cost $10000.", priority = 10)
 
@@ -105,8 +118,13 @@ init 2 python:
                     phone_menu[2].insert(1, mom_bedroom_renovate_action)
                     phone_menu[2].insert(1, lily_bedroom_renovate_action)
                 else:
-                    bedroom_renovate_action = Action("Renovate room", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_label", menu_tooltip = "Renovates your bedroom into more impressive state (unlocks other home improvements). Cost $" + str(mc_bedroom_renovation_cost) + ".")
+                    bedroom_renovate_action = Action("Renovate room", mc_bedroom_renovate_requirement, "mc_bedroom_renovate_label", menu_tooltip = "Renovates your bedroom into a more impressive state (unlocks other home improvements). Cost $" + str(mc_bedroom_renovation_cost) + ".")
                     phone_menu[2].insert(1, bedroom_renovate_action)
+
+            if mc.business.event_triggers_dict.get("harem_mansion_unlocked", False):
+                if not mc.business.event_triggers_dict.get("harem_mansion_build", False):
+                    harem_mansion_build_action = Action("Build Harem Mansion", harem_mansion_build_action_requirement, "harem_build_label", menu_tooltip = "Build a mansion for your harem.")
+                    phone_menu[2].insert(1, harem_mansion_build_action)
 
             return phone_menu
 
@@ -140,11 +158,13 @@ init 2 python:
         dungeon_completed_action = Action("Dungeon Completed", home_renovation_completion_requirement, "dungeon_completed_label", requirement_args = day + 6 + renpy.random.randint(0,3))
         mc.business.add_mandatory_crisis(dungeon_completed_action)
 
+    def add_harem_build_completed_action():
+        harem_mansion_completed_action = Action("Harem Mansion Completed", home_renovation_completion_requirement, "harem_completed_label", requirement_args = day + 21 + renpy.random.randint(2, 7))
+        mc.business.add_mandatory_crisis(harem_mansion_completed_action)
+
     def upgrade_bedroom(room, background):
         room.background_image = background
-
         return
-
 
 label mc_bedroom_renovate_option_label():
     "It occurs to you that your bedroom still looks like that of a poor college student rather than someone who owns a business. Perhaps you should consider spending some time and money renovating?"
@@ -163,7 +183,7 @@ label mc_bedroom_renovate_label():
     return
 
 label mc_bedroom_renovate_completed_label():
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
@@ -178,14 +198,14 @@ label home_improvement_unlocked_label():
     $ the_person = mom
     $ mc.start_text_convo(the_person)
     mom "Wow [mom.mc_title], you did a great job on renovating your bedroom. You know if you feel like it, keep going! The house sure could use some upgrades. Just give us a heads up on what you want to do."
-    mc.name "Okay, will think about it. And see when we have budget free."
+    mc.name "Okay, I'll think about it. And see when we have budget free."
     mom "No pressure, I know money's tight. But wow, if you could, that would be fantastic! Love you!"
     $ mc.end_text_convo()
     $ mc.business.event_triggers_dict["home_improvement_bedroom_renovated"] = True
     return
 
 label lily_bedroom_renovate_label():
-    "You decide to renovate [lily.title]'s bedroom. After discussing with your [lily.possessive_title] what she wants, you call your contractor."
+    "You decide to renovate [lily.title]'s bedroom. After discussing with [lily.possessive_title] what she wants, you call your contractor."
     mc.name "Good day, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
     "You go over the details to vastly improve your bedroom from a college student's decor to something more befitting the head of a successful company."
     python:
@@ -195,11 +215,11 @@ label lily_bedroom_renovate_label():
     return
 
 label lily_bedroom_renovate_completed_label():
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
-    "Your [lily.possessive_title]'s bedroom renovation is complete."
+    "[lily.possessive_title]'s bedroom renovation is complete."
     python:
         upgrade_bedroom(lily.home, lily_bedroom_background)
         lily.change_stats(love = 3 + mc.charisma, obedience = 1 + mc.charisma)
@@ -207,9 +227,9 @@ label lily_bedroom_renovate_completed_label():
     return
 
 label mom_bedroom_renovate_label():
-    "You decide to renovate [mom.title]'s bedroom. After discussing with your [mom.possessive_title] what she wants, you call your contractor."
+    "You decide to renovate [mom.title]'s bedroom. After discussing with [mom.possessive_title] what she wants, you call your contractor."
     mc.name "Good day, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
-    "You go over the details to vastly improve your [mom.possessive_title]'s bedroom."
+    "You go over the details to vastly improve [mom.possessive_title]'s bedroom."
     python:
         mc.business.change_funds(- mc_bedroom_renovation_cost)
         mc.business.event_triggers_dict["home_improvement_in_progress"] = True
@@ -217,7 +237,7 @@ label mom_bedroom_renovate_label():
     return
 
 label mom_bedroom_renovate_completed_label():
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
@@ -229,7 +249,7 @@ label mom_bedroom_renovate_completed_label():
     return
 
 label home_shower_renovate_label():
-    "You decide to renovate the home shower, a little more luxury in the morning can go a long way. After talking it over with Mom and Lily, you call your contractor."
+    "You decide to renovate the home shower, a little more luxury in the morning can go a long way. After talking it over with [mom.title] and [lily.title], you call your contractor."
     mc.name "Good day, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
     "You go over the details to vastly improve your home shower."
     python:
@@ -239,7 +259,7 @@ label home_shower_renovate_label():
     return
 
 label home_shower_renovate_completed_label():
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
@@ -251,7 +271,7 @@ label home_shower_renovate_completed_label():
     return
 
 label dungeon_build_label():
-    "You decide to build a dungeon at your house that would allow you to turn obedient girls into slaves who fulfill your deepest desires, telling your [mom.possessive_title] that it will be a \"Home Workshop\" of a sorts."
+    "You decide to build a dungeon at your house that would allow you to turn obedient girls into slaves who fulfill your deepest desires, telling [mom.possessive_title] that it will be a \"Home Workshop\" of a sorts."
     "You pick up the phone and make a call."
     mc.name "Good afternoon, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work done at my house."
     "You go over the details with the constructor and agree on a price of $10,000 for converting your existing cellar into a dungeon, fully soundproofed of course."
@@ -261,12 +281,33 @@ label dungeon_build_label():
     return
 
 label dungeon_completed_label():
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
     "The dungeon at your house is now ready for use."
     $ mc.business.event_triggers_dict["dungeon_owned"] = True
     $ dungeon.visible = True
+    $ mc.business.event_triggers_dict["home_improvement_in_progress"] = False
+    return
+
+label harem_build_label():
+    "Now that you have a harem, it is time to build a living space for them."
+    "You pick up the phone and make a call."
+    mc.name "Good afternoon, this is [mc.name] [mc.last_name] from [mc.business.name], I need some construction work near my house."
+    "You go over the details with the constructor and agree on a price of $200,000 for building a mansion for your harem."
+    "This will take some time to complete, so be patient."
+    $ mc.business.change_funds(-200000)
+    $ mc.business.event_triggers_dict["home_improvement_in_progress"] = True
+    $ add_harem_build_completed_action()
+    return
+
+label harem_completed_label():
+    "Going about your day, you get a call from your contractor."
+    man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
+    mc.name "Thank you [man_name], much appreciated."
+    "The harem mansion near your house is now ready for use."
+    $ mc.business.event_triggers_dict["harem_mansion_build"] = True
+    $ harem_mansion.visible = True
     $ mc.business.event_triggers_dict["home_improvement_in_progress"] = False
     return

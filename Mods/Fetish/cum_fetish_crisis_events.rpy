@@ -32,7 +32,6 @@ init 2 python:
     cum_fetish_non_employee_dosage_request_crisis = ActionMod("Someone asks for cum", cum_fetish_non_employee_dosage_request_requirement, "cum_fetish_non_employee_dosage_request_label",
         menu_tooltip = "Someone calls and asks for a favor.", category = "Fetish", is_crisis = True)
 
-
 label cum_fetish_morning_shower_label():
     $ the_person = get_fetish_shower_cum_girl()
     if the_person is None:
@@ -73,7 +72,6 @@ label cum_fetish_employee_dosage_request_label():
     $ the_person = get_fetish_cum_dosage_employee()
     if the_person is None:
         return
-
     "As you finish up with one of your work tasks, you decide to take a quick break."
     $ ceo_office.show_background()
     "You step into your office and sit down for a minute. You hop on your laptop and start browsing the internet."
@@ -92,7 +90,7 @@ label cum_fetish_employee_dosage_request_label():
         "You are surprised to see her, considering the business is closed for the day."
         mc.name "Hello [the_person.title], come in."
         "[the_person.possessive_title] walks into your office."
-        the_person "Oh [the_person.mc_title]! Thank goodness you are here, you are just the man I wanted to see."
+        the_person "Oh [the_person.mc_title]! Thank goodness you are here, you're just the man I wanted to see."
         the_person "You know how much I need your cum... so I was wondering... want to take a five minute break? I promise I won't be a bother!"
     $ mc.change_locked_clarity(20)
     menu:
@@ -103,7 +101,7 @@ label cum_fetish_employee_dosage_request_label():
             $ the_person.draw_person(position = "blowjob")
             ###cum Scene, standing variant###
             call fuck_person(the_person, start_position = cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, skip_intro = True, position_locked = True) from _call_fuck_person_SBC20
-            the_person "Oh my god, thank you [the_person.mc_title]... I wish I had time make you cum again... but I know you're a busy a man..."
+            the_person "Oh my god, thank you [the_person.mc_title]... I wish I had time to make you cum again... but I know you're a busy man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
             the_person "Thanks again, [the_person.mc_title]. Don't hesitate to ask if you ever need to be... you know... serviced."
             "You wave goodbye to [the_person.possessive_title] as she leaves your office. Damn that was good!"
@@ -127,15 +125,12 @@ label cum_fetish_non_employee_dosage_request_label():
     if the_person is None:
         return
     "While going about your day, your phone suddenly rings."
-
     the_person "Hello, [the_person.mc_title]? Do you have a minute?"
     mc.name "Oh, hey [the_person.title], it's you. Sure, what's up?"
     the_person "Could we meet up, right now? I have a little problem, that I need you to solve."
     mc.name "What kind of problem?"
     the_person "Well, eh, I'm desperately in need of some proteins."
-
     "It seems she is desperate for you to satisfy her cum fetish, what will you do?"
-
     menu:
         "All right":
             $ the_person.event_triggers_dict["LastCumFetish"] = day
@@ -144,20 +139,18 @@ label cum_fetish_non_employee_dosage_request_label():
             $ mc.change_location(hall)
             $ mc.location.show_background()
             "You just got home, when your doorbell rings."
-
             $ the_person.draw_person()
             the_person "Hey [the_person.mc_title], I came as fast as I could."
             "[the_person.possessive_title] pushes you inside and immediately drops down on her knees. You consider asking her to strip down a bit, but she is already fishing your cock out of your pants."
             $ the_person.draw_person(position = "blowjob")
             call fuck_person(the_person, start_position = cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, skip_intro = True, position_locked = True) from _call_fuck_person_SB_fetish_cum_dosage_non_employee_label
-            the_person "Oh my god, thank you [the_person.mc_title]... I wish I had time make you cum again... but I know you're a busy a man..."
+            the_person "Oh my god, thank you [the_person.mc_title]... I wish I had time to make you cum again... but I know you're a busy man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
             $ the_person.apply_planned_outfit()
             $ the_person.draw_person(emotion = "happy")
-            the_person "Thanks again, [the_person.mc_title]. Don't hesitate to give me a call when... you know... need my service."
+            the_person "Thanks again, [the_person.mc_title]. Don't hesitate to give me a call when you... you know... need my service."
             $ the_person.draw_person(position = "walking_away")
             "She gives you a smile and a wink, turns around and walks out of the door."
-
         "Sorry":
             mc.name "I'm sorry, I don't have time right now."
             "[the_person.possessive_title] is caught completely off guard by your refusal."

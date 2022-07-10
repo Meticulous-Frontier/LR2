@@ -1,11 +1,13 @@
 ## Mall Introduction Crisis Mod by Tristimdorion
 init 2 python:
     def get_mall_locations():
-        locations = [mall, gym, home_store, clothing_store, sex_store]
+        locations = [mall, gym, home_store, clothing_store, sex_store, electronics_store]
         if "mall_salon" in globals():
             locations.append(mall_salon)
         if "coffee_shop" in globals():
             locations.append(coffee_shop)
+        if "gaming_cafe" in globals():
+            locations.append(gaming_cafe)
         return locations
 
     def mall_introduction_get_people_with_status():
@@ -52,16 +54,16 @@ label mall_introduction_action_label():
     # set titles for unknown person
     python:
         formatted_title = stranger.create_formatted_title(stranger.name + " " + stranger.last_name)
-        title_choice = get_random_title(stranger)
+        title_choice = stranger.get_random_title()
         stranger.set_title(title_choice)
-        stranger.set_possessive_title(get_random_possessive_title(stranger))
+        stranger.set_possessive_title(stranger.get_random_possessive_title())
 
     known_person "Let me introduce my friend [formatted_title]."
     "[formatted_title] holds her hand out to shake yours."
 
     # sets your title for unknown person
     python:
-        title_choice = get_random_from_list(get_player_titles(stranger))
+        title_choice = get_random_from_list(stranger.get_player_titles())
         stranger.set_mc_title(title_choice)
 
     if known_person.is_employee():
@@ -88,27 +90,27 @@ label mall_introduction_action_label():
     if known_person.sluttiness > 20 or known_person.love > 20:
         if known_person.is_employee():
             if known_person.sluttiness > 40:
-                known_person "You should get to know him more intimately [stranger.name], you should apply for a position in the company."
+                known_person "You should get to know him more intimately [stranger.fname], you should apply for a position in the company."
             else:
-                known_person "I promise you [stranger.name], he is a great boss. You should go out with him sometime."
+                known_person "I promise you [stranger.fname], he is a great boss. You should go out with him sometime."
         else:
             if known_person.sluttiness > 40:
-                known_person "He can show you a really good time [stranger.name], if you know what I mean."
+                known_person "He can show you a really good time [stranger.fname], if you know what I mean."
             else:
-                known_person "I have to tell you [stranger.name], he is a great person to hang out with."
+                known_person "I have to tell you [stranger.fname], he is a great person to hang out with."
 
         $ stranger.change_stats(happiness = 10, love = 5)
 
         if stranger.sluttiness > 30:
-            stranger "Well, he's very handsome [known_person.name], I wouldn't mind going on a date with him."
+            stranger "Well, he's very handsome [known_person.fname], I wouldn't mind going on a date with him."
         elif stranger.sluttiness > 10:
-            stranger "He is very cute [known_person.name], I might just do that."
+            stranger "He is very cute [known_person.fname], I might just do that."
         else:
-            stranger "I trust your judgement [known_person.name], perhaps we could go out sometime."
+            stranger "I trust your judgement [known_person.fname], perhaps we could go out sometime."
 
     mc.name "It was great meeting you both here. I'll see you around [stranger.title]."
     if stranger.has_role(prostitute_role):
-        stranger "If you ever want some company, give me call, I'm sure we can come to some kind of arrangement."
+        stranger "If you ever want some company, give me a call, I'm sure we can come to some kind of arrangement."
         "She hands you a business card with her phone number."
         $ mc.phone.register_number(stranger)
 

@@ -14,9 +14,9 @@ init -1 python:
     def fetish_lily_stream_in_room_requirement(the_person):
         if the_person.get_fetish_count() > 0:
             if not mc.location is lily_bedroom:
-                return "Must be in Lily's bedroom"
+                return "Must be in [lily.fname]'s bedroom"
             elif lily_bedroom.get_person_count() > 1:
-                return "Must be alone with Lily"
+                return "Must be alone with [lily.fname]"
             elif mc.energy > 30:
                 return True
             else:
@@ -30,7 +30,7 @@ init 2 python:
 
 label fetish_stephanie_first_fetish_label(the_person):
     if mc.location == mc.business.r_div: #Already in research
-        "Suddenly, [the_person.possessive_title] looks up from her work and and speaks up."
+        "Suddenly, [the_person.possessive_title] looks up from her work and speaks up."
         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we go somewhere private?"
         mc.name "Sure, follow me to my office."
     else:
@@ -259,6 +259,8 @@ label fetish_mom_kitchen_label(the_person):
             $ the_person.event_triggers_dict["LastBreedingFetish"] = day
         "Creampie her\n{color=#ff0000}{size=18}Requires Breeding Fetish{/size}{/color} (disabled)" if not the_person.has_breeding_fetish():
             pass
+        "Give her a cum dosage" if the_person.has_cum_fetish():
+            call cum_fetish_get_dosage_label(the_person) from _call_cum_fetish_get_dosage_label_fetish_mom_kitchen
         "Cover her in cum\n{color=#ff0000}{size=18}Not yet written{/size}{/color} (disabled)" if the_person.has_cum_fetish():
             pass #TODO
         "Cover her in cum\n{color=#ff0000}{size=18}Requires Cum Fetish{/size}{/color} (disabled)" if not the_person.has_cum_fetish():
@@ -325,20 +327,20 @@ label fetish_mom_kitchen_label(the_person):
         "Leave Mom's food alone":
             pass
     menu:
-        "Add serum to [lily.name]'s food":
+        "Add serum to [lily.fname]'s food":
             call give_serum(lily) from _call_give_mom_kitchen_fetish_02
-        "Leave [lily.name]'s food alone":
+        "Leave [lily.fname]'s food alone":
             pass
     if hall.has_person(aunt):
         menu:
-            "Add serum to [aunt.name]'s food":
+            "Add serum to [aunt.fname]'s food":
                 call give_serum(aunt)from _call_give_mom_kitchen_fetish_03
-            "Leave [aunt.name]'s food alone":
+            "Leave [aunt.fname]'s food alone":
                 pass
         menu:
-            "Add serum to [cousin.name]'s food":
+            "Add serum to [cousin.fname]'s food":
                 call give_serum(cousin) from _call_give_mom_kitchen_fetish_04
-            "Leave [cousin.name]'s food alone":
+            "Leave [cousin.fname]'s food alone":
                 pass
     "Just as you are finishing up with plating the food, when [the_person.possessive_title] walks back into the kitchen."
     $ the_person.apply_planned_outfit()
@@ -356,7 +358,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
     "You give [the_person.possessive_title] a quick proposition."
     mc.name "Hey [the_person.title]. What do you say we get out that strap-on again? I bet your viewers would love that."
     "[the_person.possessive_title] looks at you and smiles."
-    the_person "Mmm that sounds pretty good [the_person.mc_title]... Here, let me take a couple... precautions."
+    the_person "Mmm, that sounds pretty good [the_person.mc_title]... Here, let me take a couple... precautions."
     "[the_person.possessive_title] walks over and closes her door and locks it. She turns on some music and turns the volume up."
     the_person "Don't want mom to find out..."
     $ the_person.draw_person(position = "standing_doggy")

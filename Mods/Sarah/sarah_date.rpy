@@ -43,8 +43,8 @@ label sarah_bar_date_ask_label(the_person):
     mc.name "Sounds good. We'll get together on Saturday night."
 
     python:
-        sarah_bar_date_action = Action("Bar date", sarah_bar_date_requirement, "sarah_bar_date_label", args=the_person, requirement_args=5) #it happens on a saturday
-        mc.business.mandatory_crises_list.append(sarah_bar_date_action)
+        # it happens on a saturday
+        mc.business.mandatory_crises_list.append(Action("Bar date", sarah_bar_date_requirement, "sarah_bar_date_label", args=the_person, requirement_args=5))
         mc.business.event_triggers_dict["sat_date_scheduled"] = True
 
     return "Advance Time"
@@ -130,7 +130,7 @@ label sarah_bar_date_label(the_person):
                     #TODO change this to sarah's special tit fuck when applicable
                     call get_fucked(the_person, the_goal = "body shot", private= True, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sex_description_sarah_weekend_titfuck_5
                     "[the_person.possessive_title] moans as she rubs your cum into her chest."
-                    the_person "It feels so sticky on my skin... Mmmm that was nice."
+                    the_person "It feels so sticky on my skin... Mmmm, that was nice."
                     "You clear your throat and then respond."
                     mc.name "That felt great!"
                     $ scene_manager.update_actor(the_person, position = "stand4")

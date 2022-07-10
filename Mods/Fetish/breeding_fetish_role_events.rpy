@@ -86,7 +86,7 @@ label breeding_fetish_bend_her_over_label(the_person):
         else:
             the_person "At the salon? That's kind of a weird place don't you think?"
             mc.name "Not at all. Don't you want to?"
-            the_person "Of course!.. Okay... I'll do it!"
+            the_person "Of course!... Okay... I'll do it!"
     else:
         the_person "Right here? In front of everyone?"
         mc.name "Of course"

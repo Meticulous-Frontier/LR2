@@ -106,7 +106,7 @@ label camilla_clothing_accept(the_person):
     if the_person.obedience > 130:
         the_person "It's for me? Thank you [the_person.mc_title], I'll add it to my wardrobe."
     else:
-        the_person "Thanks [the_person.mc_title]! I wonder if daddy would like to see me in this too."
+        the_person "Thanks, [the_person.mc_title]! I wonder if daddy would like to see me in this too."
     return
 
 #label camilla_clothing_reject(the_person):
@@ -424,11 +424,11 @@ label camilla_hookup_accept(the_person):
             "[the_person.title] convulses as she orgasms. She moans and runs her hands through your hair."
             "You continue to stroke her G-spot for several more seconds."
         else:   #Not skilled enough to make her orgasm.
-            "You are feverishly working at her pussy, but for some reason you can seem to find the right spot."
+            "You are feverishly working at her pussy, but for some reason you can't seem to find the right spot."
             "Soon, your wrist starts to cramp up from the bad angle forcing you to slow. She is a little frustrated but still very aroused."
     $ the_person.change_arousal(-30) #50 + 8
     the_person "Mmm, that was a great warmup. Let me return the favor."
-    "[the_person.possessive_title] quickly helps your undress, then gets down on her knees in front of you."
+    "[the_person.possessive_title] quickly helps you undress, then gets down on her knees in front of you."
 
     $ the_person.draw_person(position = "blowjob")
     the_person "Here, don't forget this!"
@@ -445,7 +445,7 @@ label camilla_hookup_accept(the_person):
         the_person "Do you want to put on a condom first?"
         menu:
             "Put on a condom":
-                mc.name "Yeah, I'd probably better. I may not be able to resist pulling out."
+                mc.name "Yeah, I'd probably better. I may not be able to resist not pulling out."
                 if the_person.effective_sluttiness() > 60:
                     the_person "I mean... it's okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
                     if the_person.effective_sluttiness() > 90:
@@ -465,7 +465,7 @@ label camilla_hookup_accept(the_person):
                     the_person "Okay, just make sure to pull out before you finish, okay?"
     else:
         the_person "You have a condom right? Make sure you put one on..."
-        mc.name "Right! I'd probably better. I may not be able to resist pulling out."
+        mc.name "Right! I'd probably better. I may not be able to resist not pulling out."
         "You get a condom and put it on quickly."
         $ mc.condom = True
     "You put your hands on her hips and put your dick at her entrance. She is still soaked from your fingering earlier, so you easily slide into her."
@@ -482,24 +482,24 @@ label camilla_hookup_accept(the_person):
         if the_person.arousal > 100:
             $ the_person.have_orgasm()
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
-        "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
+        "After the stimulation from her blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
         mc.name "That's it, bitch. I'm about to cum!"
         if the_person.effective_sluttiness() > 90: #She is so slutty, she begs for your cum.
             the_person "The condom! Take it off! Please!?! Your cock is so good, I want to feel you dump your load inside me!"
             "Your brain is getting a little hazy with lust. Surely there's nothing wrong with that, right?"
             menu:
                 "Take It Off":
-                    "In one swift you pull out of [the_person.title], pull the condom off, then shove yourself deep back inside her."
+                    "In one swift motion you pull out of [the_person.title], pull the condom off, then shove yourself deep back inside her."
                     "You wad up the condom then throw it on the counter. It lands with splat."
                     the_person "Yes! Cum for me! I want to feel it!"
                     $ the_person.change_arousal(20) #110 + 8
                     "Her excitement is too much. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
-                    the_person  "Yes! Fill me with your cum!"
+                    the_person "Yes! Fill me with your cum!"
                     "You feel her pussy convulsing around your dick as she also starts to orgasm."
                     $ the_person.change_stats(slut = 1, happiness = 2)
                     $ the_person.cum_in_vagina()
                     $ the_person.draw_person( position = "standing_doggy") # redraw with cum
-                    "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
+                    "You wait until your orgasm has passed completely, then pull out and stand back. Your cum leaks from her well used pussy."
                     "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
                     "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the restroom."
                     return
@@ -553,7 +553,7 @@ label camilla_hookup_accept(the_person):
                     "With your hands firmly on her hips, you slowly push forward. It takes several seconds of steady pressure until you finally bottom out."
                     the_person "Oh god you make me feel so dirty... I love it!"
                     "You fuck her hard but at a steady, even pace."
-                    "[the_person.possessive_title] moans, matching each hip movement of yours with movement of her own."
+                    "[the_person.possessive_title] moans, matching each hip movement of yours with a movement of her own."
                     the_person "It feels so deep... I can't... my legs!"
                     "Her knees give out, but you are too close to stop fucking her. You grab her hips roughly and pick up the pace."
                     $ the_person.change_arousal(20)#110 + 8
@@ -581,11 +581,11 @@ label camilla_hookup_accept(the_person):
         "To your surprise [the_person.title] reaches back with both hands and grabs your hips, pulling you deep inside of her."
         "Her grip is startlingly strong. You don't think you could pull out even if you wanted to!"
         the_person "That's it, cum with me!"
-        "You cum erupts in a torrent. You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
+        "Your cum erupts in a torrent. Your seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
         $ the_person.have_orgasm()
         $ the_person.cum_in_vagina()
         $ the_person.draw_person(position = "standing_doggy") # redraw for cum
-        "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
+        "You wait until your orgasm has passed completely, then pull out and stand back. Your cum leaks from her well used pussy."
         "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the restroom."
         return
@@ -604,11 +604,11 @@ label camilla_hookup_accept(the_person):
                 return
             "Creampie":
                 "Her pussy feels too good. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
-                "You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
+                "Your seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
                 $ the_person.have_orgasm()
                 $ the_person.cum_in_vagina()
                 $ the_person.draw_person(position = "standing_doggy") # redraw for cum
-                "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
+                "You wait until your orgasm has passed completely, then pull out and stand back. Your cum leaks from her well used pussy."
                 "You use her phone and get several close up pictures of her well used snatch with your load dripping out of it."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the restroom."
                 return
@@ -645,7 +645,7 @@ label camilla_cum_mouth(the_person):
             the_person "Your cum tastes great [the_person.mc_title]! I bet I get another tasty load later..."
             "[the_person.possessive_title] winks at you as she swallows your cum."
         elif the_person.effective_sluttiness() > 50 or the_person.get_opinion_score("drinking cum") > 0:
-            the_person "Thanks [the_person.mc_title]. I hope daddy cums in my mouth later too!"
+            the_person "Thanks, [the_person.mc_title]. I hope daddy cums in my mouth later too!"
         else:
             "[the_person.title]'s face grimaces as she tastes your sperm in her mouth."
             the_person "Thank you [the_person.mc_title]. It doesn't taste the best, but I'm always a good little slut."
@@ -806,9 +806,9 @@ label camilla_cum_anal(the_person):
 
 # label camilla_talk_busy(the_person):
 #     if mc.location == downtown_bar:
-#         the_person "Hey, I'm really sorry but I need to keep on the lookout. Maybe another time?"
+#         the_person "Hey, I'm really sorry, but I need to keep on the lookout. Maybe another time?"
 #     if the_person.obedience > 120:
-#         the_person "Hey, I'm really sorry but I've got some stuff I need to take care of. Could we catch up some other time?"
+#         the_person "Hey, I'm really sorry, but I've got some stuff I need to take care of. Could we catch up some other time?"
 #     else:
 #         the_person "Hey, sorry [the_person.mc_title] but I've got some stuff to take care of. It was great talking though!"
 #     return
@@ -840,29 +840,29 @@ label camilla_cum_anal(the_person):
 #         the_person "Holy shit, are you really doing this in front of everyone?"
 #         $ the_person.change_obedience(-2)
 #         $ the_person.change_happiness(-1)
-#         "[the_person.title] looks away while you and [the_sex_person.name] [the_position.verb]."
+#         "[the_person.title] looks away while you and [the_sex_person.fname] [the_position.verb]."
 #
 #     elif the_person.effective_sluttiness() < the_position.slut_requirement - 10:
 #         $ the_person.draw_person()
 #         $ the_person.change_happiness(-1)
-#         "[the_person.title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
+#         "[the_person.title] tries to avert her gaze while you and [the_sex_person.fname] [the_position.verb]."
 #
 #     elif the_person.effective_sluttiness() < the_position.slut_requirement:
 #         $ the_person.draw_person()
 #         the_person "Oh my god, you two are just... Wow..."
 #         $ change_report = the_person.change_slut(1)
-#         "[the_person.title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
+#         "[the_person.title] averts her gaze, but keeps glancing over while you and [the_sex_person.fname] [the_position.verb]."
 #
 #     elif the_person.effective_sluttiness() > the_position.slut_requirement and the_person.effective_sluttiness() < the_position.slut_cap:
 #         $ the_person.draw_person()
 #         the_person "Oh my god that's... Wow that looks...Hot."
 #         $ change_report = the_person.change_slut(2)
-#         "[the_person.title] watches you and [the_sex_person.name] [the_position.verb]."
+#         "[the_person.title] watches you and [the_sex_person.fname] [the_position.verb]."
 #
 #     else:
 #         $ the_person.draw_person(emotion = "happy")
 #         the_person "Come on [the_person.mc_title], you can give her a little more than that. I'm sure she can handle it."
-#         "[the_person.title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+#         "[the_person.title] watches eagerly while you and [the_sex_person.fname] [the_position.verb]."
 #
 #     return
 
@@ -909,7 +909,7 @@ label camilla_cum_anal(the_person):
 #         if the_person.obedience > 120:
 #             "[the_person.title] gives you a curt nod and then turns back to what she was doing."
 #         else:
-#             "[the_person.title] glances at you when you enters the room then looks away quickly to avoid starting a conversation."
+#             "[the_person.title] glances at you when you enter the room then looks away quickly to avoid starting a conversation."
 #
 #     elif the_person.happiness > 120:
 #         if the_person.effective_sluttiness() > 50:
@@ -1032,7 +1032,7 @@ label camilla_creampie_taboo_break(the_person):
                 the_person "Ah, finally! I've wanted a load inside me for so long, I don't even care that it's not my [so_title] giving it to me!"
 
             else:
-                the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care I'm not on the pill!."
+                the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care I'm not on the pill!"
                 $ the_person.update_birth_control_knowledge()
 
             "She pants happily for a moment."

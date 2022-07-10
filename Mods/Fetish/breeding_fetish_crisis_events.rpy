@@ -1,6 +1,6 @@
 init 2 python:
     def get_breeding_fetish_list():
-        return [x for x in known_people_in_the_game() if x.has_breeding_fetish() and x.event_triggers_dict.get("LastBreedingFetish", 0) + 12 < day]
+        return [x for x in known_people_in_the_game() if x.has_breeding_fetish() and x.is_available and x.event_triggers_dict.get("LastBreedingFetish", 0) + 12 < day]
 
     def get_highly_fertile_breeder():
         return get_random_from_list([x for x in get_breeding_fetish_list() if x.is_highly_fertile() and not x.is_employee()])
@@ -65,12 +65,11 @@ label breeding_fetish_high_fertility_crisis_label():
         return
 
     $ update_breeding_fetish_state(the_person)
-
     if the_person == mom or the_person == lily:
         "You hear a knock on your door."
-        mc.name "Its open!"
+        mc.name "It's open!"
         $ the_person.draw_person()
-        "Its [the_person.possessive_title]. She steps into your room, closes your door, and locks it..."
+        "It's [the_person.possessive_title]. She steps into your room, closes your door, and locks it..."
         mc.name "Something you need tonight [the_person.title]?"
         the_person "Yeah... something like that!"
     else:
@@ -99,7 +98,7 @@ label breeding_fetish_high_fertility_crisis_label():
         "She runs a hand down her belly, to her mound and across her slit. You can see moisture already starting to collect there."
         $ the_person.draw_person(position = "cowgirl")
         $ mc.change_locked_clarity(30)
-        "[the_person.possessive_title] reaches down and pulls your pants off and then climbs up on top of you, your cock at her entrance."
+        "[the_person.possessive_title] reaches down and pulls your pants off and then climbs up on top of you, positioning your cock at her entrance."
         the_person "Oh god... this is it. I can feel it! Tonight's the night you finally knock me up..."
         "She holds your cock with one hand and slowly starts to sink down onto you. She gasps when your dick parts her labia."
         $ the_person.break_taboo("condomless_sex")
@@ -109,13 +108,12 @@ label breeding_fetish_high_fertility_crisis_label():
         the_person "Oh god... here we go!"
         call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _highly_fertile_breeding_901
         if the_person.has_creampie_cum():
-            the_person "Its inside me! It worked! Don't ask me how I know... I can just feel it!"
+            the_person "It's inside me! It worked! Don't ask me how I know... I can just feel it!"
             "She rubs her belly and sighs."
             $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
         else:
             "Too tired to continue, [the_person.possessive_title] pulls off you a little frustrated."
             the_person "I can't believe it... just... let's make sure we try again soon okay?"
-
     else:
         mc.name "One knocked up cum slut, coming right up!"
         "You reach down and start to pull her bottoms off."
@@ -131,13 +129,13 @@ label breeding_fetish_high_fertility_crisis_label():
         mc.name "Mmm, fuck I guess so!"
         "You start to piston your hips, savoring the highly fertile, bare pussy that is wrapped around you."
         the_person "Give it to me [the_person.mc_title]! Give me a fucking I'll never forget and pour your seed deep!"
-        call fuck_person(the_person, start_position = breeding_missionary , private = True, skip_intro = True, skip_condom = True, position_locked = True) from _highly_fertile_breeding_night_02
+        call fuck_person(the_person, start_position = breeding_missionary, start_object = make_bed(), private = True, skip_intro = True, skip_condom = True, position_locked = True) from _highly_fertile_breeding_night_02
         if the_person.has_creampie_cum():
-            the_person "Its inside me! I'm pregnant! Don't ask me how I know... I can just feel it!"
+            the_person "It's inside me! I'm pregnant! Don't ask me how I know... I can just feel it!"
             "She rubs her belly and sighs."
             $ become_pregnant(the_person, mc_father = True) #Guaranteed to knock her up
         else:
-            "Too tired to continue, [the_person.possessive_title] looks up at you little frustrated."
+            "Too tired to continue, [the_person.possessive_title] looks up at you a little frustrated."
             the_person "I can't believe it... just... let's make sure we try again soon okay?"
         "Finished for now, [the_person.title] excuses herself."
     the_person "I'd better get going..."
@@ -155,38 +153,34 @@ label breeding_fetish_happy_breeder_crisis_label():
         return
 
     $ update_breeding_fetish_state(the_person)
-
     if the_person == mom or the_person == lily:
         "You hear a knock on your door."
         "You stand up and open your door. It's [the_person.title], dressed very nicely..."
-
         $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
         $ mc.change_locked_clarity(20)
-        "Its [the_person.possessive_title]. She steps into your room, closes your door, and locks it..."
+        "She steps into your room, closes your door, and locks it..."
         mc.name "Something you need tonight [the_person.title]?"
         the_person "Yeah... something like that!"
     else:
         "*Ding Dong*"
         "You're roused from your bed by a ring on your doorbell."
-        # make sure we are at the hall
         $ mc.change_location(hall)
         $ mc.location.show_background()
         "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provocative outfit."
         $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
         $ mc.change_locked_clarity(20)
-        ###Draw the girl###
         "You quickly open the door and invite her inside."
         "To avoid any situations with [mom.possessive_title] or [lily.possessive_title], you quickly invite her to your room."
         $ mc.change_location(bedroom)
         $ mc.location.show_background()
-        "You walk in your room, close the door and lock it."
+        "You walk into your room, close the door and lock it."
 
     $ the_person.draw_person(position="kissing")
     "[the_person.possessive_title] quickly turns and embraces you."
-    the_person "Oh, [the_person.mc_title], I'm sorry to just come over without asking like this but, I was at trying to sleep."
-    the_person "I kept thinking about the baby growing inside of me and I started getting all worked up..."
+    the_person "Oh, [the_person.mc_title], I'm sorry to just come over without asking like this."
+    the_person "I was in bed trying to sleep but I kept thinking about the baby growing inside of me and I started getting all worked up..."
     "She stumbles over her words for a second."
     the_person "Oh geeze... I just couldn't stop thinking about how good it feels when you fuck me!"
     "You are hardly surprised. [the_person.possessive_title]'s breeding fetish makes her a cum starved slut..."
@@ -198,16 +192,14 @@ label breeding_fetish_happy_breeder_crisis_label():
             "[the_person.possessive_title] walks over to the windows and looks out of it. You see her hips move side to side for a second, and then she peeks back at you."
             $ the_person.draw_person(position = "back_peek")
             the_person "It so pretty out tonight... Why don't you come over here?"
-            "You walk over and stand behind [the_person.possessive_title] as she looks by the window."
-            ###Sex Scene, standing variant at window###
-            "You put your hands on her hips. She sticks her ass out slightly as you line yourself and then gently push your cock inside her."
+            "You walk over and stand behind [the_person.possessive_title] as she looks out the window."
+            "You put your hands on her hips. She sticks her ass out slightly as you line yourself up and then gently push your cock inside her."
             $ the_person.break_taboo("condomless_sex")
             $ the_person.break_taboo("vaginal_sex")
             call fuck_person(the_person, start_position = SB_facing_wall, start_object = make_window(), skip_intro = True, skip_condom = True) from _call_fuck_person_preg_breeder_nightscene_01
             "[the_person.possessive_title] walks over to your bed and lays down on her back and takes off any remaining clothing."
             $ the_person.strip_outfit(exclude_feet = False, position = "missionary")
             $ the_person.draw_person(position = "missionary")
-
             "You join her on the bed. She raises her arm and you lay your head down on her breast."
             "You both catch your breath and just enjoy the warmth of each other's bodies."
             "After a few minutes of cuddling, you reach your hand up and begin to fondle her other breast."
@@ -248,19 +240,15 @@ label breeding_fetish_happy_breeder_crisis_label():
                 $ the_person.change_energy(30)
                 "Soon you are getting hard again. It's time for round two."
             "You roll over on top of [the_person.possessive_title]. She wraps her arms around you as you slowly sink your cock into her moist cunt."
-            ###Sex scene, missionary###
             call fuck_person(the_person, start_position = breeding_missionary, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_fuck_person_preg_breeder_nightscene_02
 
             the_person "Oh god [the_person.mc_title], tonight has been incredible... excuse me for a second."
             $ the_person.draw_person(position = "walking_away")
-            ###The girl walking away draw
             "[the_person.possessive_title] excuses herself to your restroom. After a few minutes she comes back. She sits down on the side of the bed."
             $ the_person.draw_person(position = "sitting")
-            ###The girl sitting###
             the_person "Why don't... why don't you come sit on the side of the bed? I know you're tired but... I could really go for one more round..."
             "You sit up and move to the side of the bed."
             "[the_person.possessive_title] smiles and gets down on her knees below you."
-            ###Draw the girl on knees###
             $ the_person.draw_person(position = "blowjob")
             the_person "I'm sorry [the_person.mc_title]... I just can't help it. It feels so good inside of me..."
             "[the_person.possessive_title] reaches down and starts to stroke your mostly soft cock."
@@ -280,7 +268,7 @@ label breeding_fetish_happy_breeder_crisis_label():
                 mc.name "Why don't you put it in your mouth for a while?"
                 "[the_person.possessive_title] smiles up at you."
                 the_person "Anything for you, [the_person.mc_title]."
-                "[the_person.possessive_title] looks up at you while she scoots closer to you, then lowers her head down and begins to lick and up down your groin."
+                "[the_person.possessive_title] looks up at you while she scoots closer to you, then lowers her head down and begins to lick up and down your groin."
                 $ mc.change_locked_clarity(30)
                 "She moves her head to the tip and slowly moves her head up and down your shaft a few times. She pulls off for a second then looks up at you."
                 the_person "Mmm, I can taste the remnants of earlier... I can't wait to feel you inside me again..."
@@ -321,7 +309,6 @@ label breeding_fetish_family_sleep_crisis_label():
         return
 
     $ update_breeding_fetish_state(the_person)
-
     if the_person == lily:
         "Before going to bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
         the_person "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
@@ -414,10 +401,8 @@ label breeding_fetish_family_sleep_crisis_label():
     $ the_person.break_taboo("condomless_sex")
     $ the_person.break_taboo("vaginal_sex")
     call fuck_person(the_person, start_position = breeding_missionary, private = True, start_object = make_bed(), skip_intro = True, skip_condom = True) from _call_fuck_person_breeding_fetish_family_sleep_crisis
-
     "After you finish your rutting, you and [the_person.possessive_title] get under the covers of your bed."
     "Spooning behind [the_person.possessive_title], you drift off to a wonderful night's sleep. Her body heat and the feeling of her naked skin against yours give you very pleasant dreams."
-
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_breeding_fetish_family_sleep_crisis
     call breeder_cowgirl_wakeup_label(the_person) from _call_breeder_overnight_cowgirl_wakeup_02
     return "Advance Time"
@@ -428,7 +413,6 @@ label breeding_fetish_employee_high_fertility_crisis_label():
         return
 
     $ update_breeding_fetish_state(the_person)
-
     $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_black_outfit))
     "As you are working, you get a text on your phone."
     $ mc.start_text_convo(the_person)
@@ -446,7 +430,7 @@ label breeding_fetish_employee_high_fertility_crisis_label():
     the_person "Though what happens here might become a happy little tax break in 9 months..."
     "As you start walking over to her, she moves her hips back and forth a little."
     the_person "I know you're busy, so I wanted to make this as easy as possible. I'm fertile."
-    "You walk up behind her and put your hands on the hips. She sighs from the contact."
+    "You walk up behind her and put your hands on her hips. She sighs from the contact."
     the_person "It's easy... just stick it in, and make sure to push deep when you finish..."
     "You give her ass a playful spank. It jiggles enticingly from the contact."
     mc.name "God you are such a good little slut. Presenting me your wet little pussy to fuck so I can knock you up."
@@ -491,18 +475,17 @@ label breeding_fetish_employee_high_fertility_crisis_label():
 
 label breeder_cowgirl_wakeup_label(the_person):
     "All night long, you have sexy dreams centered around [the_person.possessive_title]."
-    "She's on her knees, sucking you off expertly. Later, shes on her back while you pin her to the bed. Sometime later, shes on her hands and knees, taking your cock from behind like a pro."
+    "She's on her knees, sucking you off expertly. Later, she's on her back while you pin her to the bed. Sometime later, she's on her hands and knees, taking your cock from behind like a pro."
     "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. This time, however, there are some very pleasant sensations coming from your crotch."
     $ mc.change_locked_clarity(50)
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     $ the_person.draw_person(position = "cowgirl")
     $ the_person.change_arousal(35)
-
     "You slowly open your eyes and discover that [the_person.possessive_title] is on top of you, riding you in the cowgirl position."
     "You reach up and grab her amazing ass cheeks. [the_person.possessive_title] looks in your eyes when she feels your hands on her."
     the_person "Good morning [the_person.mc_title]... Sorry but when I woke up I noticed you were hard so... I figured you wouldn't mind if I hopped on for a bit..."
     "[the_person.possessive_title] moans during one slow stroke."
-    "You decide to lay back and enjoy the ride"
+    "You decide to lay back and enjoy the ride."
     # call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBV50
     call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_bed(), skip_intro = True) from _call_sex_description_breeder_wakeup__01
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"

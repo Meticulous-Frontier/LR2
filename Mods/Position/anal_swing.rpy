@@ -36,7 +36,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object):
     else:
         the_girl "I don't know, are you sure this thing is safe?"
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_anal_swing.position_tag, visible_enough = True, prefer_half_off = True)
 
@@ -58,7 +58,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object):
             "You lean forward and whisper into her ear."
             mc.name "Baby... I'm going to fuck your ass now... just the way you like it!"
             "You can see goosebumps break out all over her body."
-            the_girl "Oh god, I touch myself everytime I think about the first time you fucked in one of these at the shop."
+            the_girl "Oh god, I touch myself every time I think about the first time you fucked in one of these at the shop."
             the_girl "Fuck me good, [the_girl.mc_title]! I want it so bad!"
             $ the_girl.change_arousal(the_girl.get_opinion_score("anal sex"))
         else:
@@ -72,7 +72,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object):
             "When you're ready you push forward. Her back passage greedily accepts your erection, eliciting a satisfied sigh from [the_girl.possessive_title]."
     elif the_girl.arousal > 60:
         "You rub the tip of your penis against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. You rub your lubricated penis against her ass to help prepare her for your initial penetration."
-        "You rub your dick against her pussy again and gather more of her juices. She is already so wet you are soon slick with her secretions"
+        "You rub your dick against her pussy again and gather more of her juices. She is already so wet you are soon slick with her secretions."
     else:
         "You line yourself up with her ass, but the lack of lubricant makes it impossible to push it in. You pull on her hair to bring her head back around to face you."
         "You put your other hand in front of her face and she quickly opens her mouth and sucks on them. [the_girl.possessive_title] slobbers all over your fingers for a few a seconds before you pull them out with a loud pop"
@@ -96,7 +96,7 @@ label scene_SB_anal_swing_1(the_girl, the_location, the_object):
         elif the_girl is lily:
             the_girl "That's it [the_girl.mc_title]! Fuck me harder! I'm [the_girl.possessive_title], hanging from a swing just to please you!"
         elif the_girl is starbuck:
-            the_girl "Yes! Don't let up! I think about you stringing me up like this everytime I see the swing in the store."
+            the_girl "Yes! Don't let up! I think about you stringing me up like this every time I see the swing in the store."
         else:
             the_girl "That's it, fuck me harder! Make me walk funny for a week!"
         "With your hands wrapped around the straps, you control the pace of your fucking."
@@ -303,7 +303,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
 label transition_default_SB_anal_swing(the_girl, the_location, the_object):
     "[the_girl.possessive_title] sits down in the [the_object.name]. Her ass is hanging off the back end."
     "You run your hands along her supple hips."
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_anal_swing.position_tag, visible_enough = True, prefer_half_off = True)
     "You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."

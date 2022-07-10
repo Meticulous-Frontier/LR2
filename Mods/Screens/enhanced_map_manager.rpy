@@ -2,11 +2,11 @@
 # instead of clicking return after each choice
 
 init -1 python:
-    def create_tooltip_dictionary():
+    def create_tooltip_dictionary(locations):
         start_time = time.time()
         result = {}
-        for place in [x for x in list_of_places if x.hide_in_known_house_map and x.visible]:
-            result[place.name] = [get_location_tooltip(place), get_location_on_enter_events(place)]
+        for place in locations:
+            result[place.name] = [get_location_tooltip(place), get_location_on_enter_events(place), get_location_progression_events(place)]
 
         if debug_log_enabled:
             add_to_debug_log("Map Buildup Time: {total_time:.3f}", start_time)
@@ -19,14 +19,30 @@ init -1 python:
         tooltip = "You know " + str(__builtin__.len(known_people)) + (" person here:\n" if __builtin__.len(known_people) == 1 else " people here:\n")
         for person in known_people:
             info = []
+            #added girlfriend statuses to beginning
+            if person.has_exact_role(affair_role):
+                info.append(" {image=paramour_token_small}")
+            if person.has_exact_role(harem_role):
+                info.append(" {image=harem_token_small}")
+            if person.has_exact_role(girlfriend_role):
+                info.append(" {image=gf_token_small}")
+            #dialog infront of name to catch eye faster
+            if any(not isinstance(x, Limited_Time_Action) and x.is_action_enabled(person) for x in person.on_talk_event_list):
+                info.append("{image=speech_bubble_exclamation_token_small}")
+            elif any(x.name != "Ask new title" and x.is_action_enabled(person) for x in person.on_talk_event_list):
+                info.append("{image=speech_bubble_token_small}")
             info.append(person.name)
             info.append(person.last_name)
-            if any([not isinstance(x, Limited_Time_Action) and x.is_action_enabled(person) for x in person.on_talk_event_list]):
-                info.append("{image=speech_bubble_exclamation_token_small}")
+            if person.knows_pregnant():
+                info.append("{image=feeding_bottle_token_small}")
             if person.serum_effects:
                 info.append("{image=vial_token_small}")
             if person.infractions:
                 info.append("{image=infraction_token_small}")
+            if person.is_in_trance(training_available = True):
+                info.append("{image=lust_eye_token_small}")
+            if person.arousal > 60:
+                info.append("{image=arousal_token_small}")
             info.append("\n")
             tooltip += " ".join(info)
         return tooltip
@@ -39,8 +55,38 @@ init -1 python:
             return True
         return False
 
+    def get_location_progression_events(location):
+        for person in [x for x in location.people if x.on_room_enter_event_list]:
+            for test_scene in [y for y in list_of_progression_scenes if y.progression_available()]:      #Nested loooooooooops this logic sucks
+                if any(z for z in person.on_room_enter_event_list if z.name == test_scene.progression_scene_action.name and z.is_action_enabled(person)):
+                    return True
+        return False
+
     def get_location_tile_text(location, tt_dict):
+        #added to show icons in tile text to bring attention that there is something there worth checking out etc
+        known_people = known_people_at_location(location)
+        #setting the catches
+        extra_info = []
+        if any(x for x in known_people if x.has_exact_role(harem_role)):
+            extra_info.append("{image=harem_token_small}")
+        if any(x for x in known_people if x.has_exact_role(affair_role)):
+            extra_info.append("{image=paramour_token_small}")
+        if any(x for x in known_people if x.has_exact_role(girlfriend_role)):
+            extra_info.append("{image=gf_token_small}")
+        if any(x for x in known_people if x.knows_pregnant()):
+            extra_info.append("{image=feeding_bottle_token_small}")
+        if any(x for x in known_people if x.is_in_trance(training_available = True)):
+            extra_info.append("{image=lust_eye_token_small}")
+        if any(y for y in known_people if any(not isinstance(x, Limited_Time_Action) and x.is_action_enabled(y) for x in y.on_talk_event_list)):
+            extra_info.append("{image=speech_bubble_exclamation_token_small}")
+        if any(y for y in known_people if any(x.name != "Ask new title" and x.is_action_enabled(y) for x in y.on_talk_event_list)):
+            extra_info.append("{image=speech_bubble_token_small}")
+        if any(x for x in known_people if x.arousal >= 60):
+            extra_info.append("{image=arousal_token_small}")
+
         info = []
+        if extra_info:
+            info.append(" ".join(extra_info) + "\n")
         info.append(location.formal_name.replace(" ", "\n", 2))
         info.append("\n(")
         info.append(str(len(known_people_at_location(location))))
@@ -49,6 +95,8 @@ init -1 python:
         info.append(")")
         if tt_dict[location.name][1]:
             info.append("\n{color=#FFFF00}Event!{/color}")
+        if tt_dict[location.name][2]:
+            info.append("\n{image=progress_token_small}")
         return "".join(info)
 
 init 2:
@@ -57,14 +105,14 @@ init 2:
         modal True
         zorder 100
 
-
-        default tt_dict = create_tooltip_dictionary()
+        default locations = [x for x in list_of_places if x.hide_in_known_house_map and x.visible]
+        default tt_dict = create_tooltip_dictionary(locations)
         default tt = Tooltip(None)
 
-        $ x_size_percent = 0.07
-        $ y_size_percent = 0.145
+        default x_size_percent = 0.07
+        default y_size_percent = 0.145
 
-        for place in [x for x in list_of_places if x.hide_in_known_house_map and x.visible]: #Draw the text buttons over the background
+        for place in locations: #Draw the text buttons over the background
             $ hex_x = x_size_percent * place.map_pos[0]
             $ hex_y = y_size_percent * place.map_pos[1]
             $ tile_info = get_location_tile_text(place, tt_dict)
@@ -128,4 +176,4 @@ init 2:
             textbutton "Return" align [0.5,0.5] style "transparent_style" text_style "return_button_style"
 
         if tt.value:
-            text "[tt.value]" style "textbutton_text_style" text_align 0.0 size 18 xalign 0.02 yalign 0.02
+            text "[tt.value]" style "textbutton_text_style" text_align 0.0 size 18 xalign 0.95 yalign 0.98

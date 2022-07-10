@@ -42,7 +42,7 @@ label mom_fuck_during_housework_label(the_person):
             $ the_report = _return
             if the_person.get_opinion_score("being submissive") < 2:
                 if renpy.random.randint(0,100)< (the_report.get("girl orgasms", 0) * 10) + the_person.suggestibility:  #Odds for improvement are 10% per orgasm plus suggestibility.
-                    the_person "Oh... it good to know I have a son who will discipline me if I get too naughty!"
+                    the_person "Oh... it's good to know I have a son who will discipline me if I get too naughty!"
                     $ the_person.increase_opinion_score("being submissive")
             elif not the_person.can_be_spanked():
                 $ the_person.unlock_spanking()

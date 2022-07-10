@@ -3,11 +3,11 @@
 init 3 python:
     def slave_attention_crisis_requirement():
         if time_of_day > 0 and mc.is_home(): #She always sends you texts while you're not at home for the middle part of the day
-            return not get_unhappy_slave() is None
+            return any(x for x in known_people_in_the_game() if x.has_role(slave_role) and x.sex_record.get("Last Sex Day", 0) + 10 < day)
         return False
 
     def get_unhappy_slave():
-        return get_random_from_list([x for x in known_people_in_the_game() if x.has_role(slave_role) and x.sex_record.get("Last Sex Day", 0) + 10 < day])
+        return get_random_from_list([x for x in known_people_in_the_game() if x.has_role(slave_role) and x.is_available and x.sex_record.get("Last Sex Day", 0) + 10 < day])
 
     slave_attention_crisis_action = ActionMod("Slave Needs Attention",slave_attention_crisis_requirement,"slave_attention_crisis_action_label",
         menu_tooltip = "One of your slaves feels you are ignoring her and demands your attention", category="Home", is_crisis = True)

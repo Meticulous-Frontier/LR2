@@ -50,14 +50,14 @@ label prone_decision_label(the_girl, the_location, the_object, the_position):
     #TODO check her willingness here, if she is not usually willing take a happiness hit. Can probably copy paste code from sex system
     $ prone_bone.redraw_scene(the_girl)
     if the_girl.is_submissive():
-        "[the_girl.possessive_title] gives a moan as you line yourself and push back into her. She is completely helpless but submits to you obediently."
+        "[the_girl.possessive_title] gives a moan as you line yourself up and push back into her. She is completely helpless but submits to you obediently."
         $ the_girl.change_happiness(5)
     elif the_girl.is_dominant():
         the_girl "Are you serious? Can't we just take a quick break?..."
-        "[the_girl.possessive_title]'s question gets cut off as you line yourself and push back into her. She isn't happy with being used like this but is too tired to resist."
+        "[the_girl.possessive_title]'s question gets cut off as you line yourself up and push back into her. She isn't happy with being used like this but is too tired to resist."
         $ the_girl.change_happiness(5)
     else:
-        "[the_girl.possessive_title] gives a little yelp as you line yourself and push back into her. She is completely helpless but submits to you obediently."
+        "[the_girl.possessive_title] gives a little yelp as you line yourself up and push back into her. She is completely helpless but submits to you obediently."
         $ the_girl.change_obedience(5)
     return the_object
 
@@ -198,7 +198,7 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
                 "She is exhausted, but constantly moaning from your dominating approach."
         "Go easy on her":
             "You decide for now just to enjoy the wet hole [the_girl.possessive_title] has pointed up at you."
-            "You put both you hands around her, letting your weight pin her to the [the_object.name]."
+            "You put both your hands around her, letting your weight pin her to the [the_object.name]."
             "Her body is trying to push back against you as you fuck her, but her exhaustion your weight on top of her leave her helpless."
             the_girl "Mmmfff... god [the_girl.mc_title]... so good..."
     return

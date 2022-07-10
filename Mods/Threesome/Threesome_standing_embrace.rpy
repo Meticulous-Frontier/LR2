@@ -91,6 +91,10 @@ label intro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
     "You give yourself a couple strokes as you watch."
     the_girl_1 "Mmm, come on [the_girl_1.mc_title]."
     the_girl_2 "I'm ready for you!"
+    if not the_girl_2.vagina_visible():
+        "[the_girl_2.title] quickly moves some clothing out of the way..."
+        $ the_girl_2.strip_to_vagina(position = Threesome_standing_embrace.position_two_tag, display_transform = Threesome_standing_embrace.p2_transform, visible_enough = True, prefer_half_off = True)
+
     "You step up behind [the_girl_2.possessive_title]. She arches her back a bit to give you easier access."
     $ the_girl_2.break_taboo("vaginal_sex")
     $ the_girl_2.break_taboo("condomless_sex")
@@ -144,7 +148,7 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
             else:
                 "You pull out of [the_girl_2.possessive_title] at the last moment, stroking your shaft as you blow your load over her ass. She wiggles her ass for you as you cover her with your sperm."
             if the_girl_2.get_opinion_score("being covered in cum") > 0:
-                 the_girl_2 "Yes! Paint me with your sticky cum!"
+                the_girl_2 "Yes! Paint me with your sticky cum!"
             $ the_girl_2.cum_on_ass()
             $ scene_manager.draw_scene()
             $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl_2)

@@ -129,7 +129,7 @@ label erica_clothing_accept(the_person):
     if the_person.obedience > 130:
         the_person "It's for me? Thank you [the_person.mc_title], I'll add it to my wardrobe."
     else:
-        the_person "Thanks [the_person.mc_title]! I wonder if I could wear this at the gym."
+        the_person "Thanks, [the_person.mc_title]! I wonder if I could wear this at the gym."
     return
 
 #label erica_clothing_reject(the_person):
@@ -375,11 +375,11 @@ label erica_hookup_accept(the_person):
             "You continue your assault for several more seconds."
         else:   #Not skilled enough to make her orgasm.
             $ mc.change_locked_clarity(10)
-            "You are feverishly working at her pussy, but for some reason you can seem to find the right spot."
-            "Soon, the stimulation gets to be too much for her and she puts her hand on your hand and slowly pushes it back."
+            "You are feverishly working at her pussy, but for some reason you can't seem to find the right spot."
+            "Soon, the stimulation gets to be too much for her and she puts her hand on your head and slowly pushes it back."
     $ the_person.change_arousal(-30) #50 + 8
     the_person "Mmm, that was a great warmup. Let me return the favor."
-    "[the_person.possessive_title] hops down from the sink. She quickly helps your undress, then gets down on her knees in front of you."
+    "[the_person.possessive_title] hops down from the sink. She quickly helps you undress, then gets down on her knees in front of you."
     $ the_person.draw_person(position = "blowjob")
     "She gives your cock a few slow strokes before she begins to lick the tip. Her tongue feels like wet velvet as it circles around your glans."
     "[the_person.title] opens her mouth and then envelopes the end of your dick with her warm, wet mouth."
@@ -393,7 +393,7 @@ label erica_hookup_accept(the_person):
         the_person "Do you want to put on a condom first?"
         menu:
             "Put on a condom":
-                mc.name "Yeah, I'd probably better. I may not be able to resist pulling out."
+                mc.name "Yeah, I'd probably better. I may not be able to resist not pulling out."
                 if the_person.effective_sluttiness() > 60:
                     the_person "I mean... it's okay with me if you wanted to stick it in for a little bit without one on, you know, just to get started..."
                     if the_person.effective_sluttiness() > 90:
@@ -413,7 +413,7 @@ label erica_hookup_accept(the_person):
                     the_person "Okay, just make sure to pull out before you finish, okay?"
     else:
         the_person "You have a condom right? Make sure you put one on..."
-        mc.name "Right! I'd probably better. I may not be able to resist pulling out."
+        mc.name "Right! I'd probably better. I may not be able to resist not pulling out."
         "You get a condom and put it on quickly."
         $ mc.condom = True
     "You put your hands on her hips and put your dick at her entrance. She is still soaked from your oral earlier, so you easily slide into her."
@@ -430,7 +430,7 @@ label erica_hookup_accept(the_person):
         if the_person.arousal > 100:
             $ the_person.have_orgasm()
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
-        "After the stimulation from hew blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
+        "After the stimulation from her blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
         mc.name "That's it, bitch. I'm about to cum!"
         if the_person.effective_sluttiness() > 90: #She is so slutty, she begs for your cum.
             the_person "The condom! Take it off! Please!?! Your cock is so good, I want to feel you dump your load inside me!"
@@ -438,8 +438,8 @@ label erica_hookup_accept(the_person):
             menu:
                 "Take It Off":
                     $ mc.condom = False
-                    "In one swift you pull out of [the_person.title], pull the condom off, then shove yourself deep back inside her."
-                    "You wad up the condom then throw it on the counter. It lands with splat."
+                    "In one swift motion you pull out of [the_person.title], pull the condom off, then shove yourself deep back inside her."
+                    "You wad up the condom then throw it on the counter. It lands with a splat."
                     the_person "Yes! Cum for me! I want to feel it!"
                     $ the_person.change_arousal(20) #110 + 8
                     $ mc.change_locked_clarity(20)
@@ -453,7 +453,7 @@ label erica_hookup_accept(the_person):
                         the_person.draw_person( position = "standing_doggy") # draw cum
                         ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
 
-                    "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
+                    "You wait until your orgasm has passed completely, then pull out and stand back. Your cum leaks from her well used pussy."
                     "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the locker room."
                     return
                 "Leave It On":
@@ -487,7 +487,7 @@ label erica_hookup_accept(the_person):
         the_person "You should umm, you know, stick a finger in my other hole..."
         "Wow, it's not every day you have a beautiful woman ask you to finger her ass while you bend her over and fuck her!"
         "You reach a hand forward and put your index finger in front of her face. She quickly gets the idea and opens her mouth with her tongue out, and begins slathering your finger with saliva."
-        "When satisfied, you bring you fingers back to her tight back passage. You pull your cock almost completely out and stop you hip motion as you begin to press your finger against [the_person.title]'s puckered hole."
+        "When satisfied, you bring you finger back to her tight back passage. You pull your cock almost completely out and stop you hip motion as you begin to press your finger against [the_person.title]'s puckered hole."
         "She forces her sphincter to relax and your finger begins to slip inside her."
         the_person "Ohh, yes. You can move your hips, that feels good..."
         $ mc.change_locked_clarity(30)
@@ -512,7 +512,7 @@ label erica_hookup_accept(the_person):
                     the_person "Oh god you make me feel so dirty... I love it!"
                     $ mc.change_locked_clarity(30)
                     "You fuck her hard but at a steady, even pace."
-                    "[the_person.possessive_title] moans, matching each hip movement of yours with movement of her own."
+                    "[the_person.possessive_title] moans, matching each hip movement of yours with a movement of her own."
                     the_person "It feels so deep... I can't... my legs!"
                     "Her knees give out, but you are too close to stop fucking her. You grab her hips roughly and pick up the pace."
                     $ the_person.change_arousal(20)#110 + 8
@@ -542,13 +542,13 @@ label erica_hookup_accept(the_person):
         "Her grip is startlingly strong. You don't think you could pull out even if you wanted to!"
         $ mc.change_locked_clarity(30)
         the_person "That's it, cum with me!"
-        "You cum erupts in a torrent. You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
+        "Your cum erupts in a torrent. Your seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
         python:
             the_person.have_orgasm()
             the_person.cum_in_vagina()
             the_person.draw_person( position = "standing_doggy") # draw cum
             ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
-        "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
+        "You wait until your orgasm has passed completely, then pull out and stand back. Your cum leaks from her well used pussy."
         "You take a moment to recover. Then you and [the_person.title] get cleaned up and dress. You quietly sneak out of the locker room."
         return
     elif the_person.effective_sluttiness() > 60:
@@ -568,13 +568,13 @@ label erica_hookup_accept(the_person):
                 return
             "Creampie":
                 "Her pussy feels too good. You bottom out and cum, dumping wave after wave of your semen deep inside of her."
-                "You seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
+                "Your seed spills deep inside [the_person.title]. Her entire body begins to spasm as she joins you in orgasm."
                 python:
                     the_person.have_orgasm()
                     the_person.cum_in_vagina()
                     the_person.draw_person(position = "standing_doggy")
                     ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
-                "You wait until your orgasm has passed completely, then pull out and stand back. You cum leaks from her well used pussy."
+                "You wait until your orgasm has passed completely, then pull out and stand back. Your cum leaks from her well used pussy."
                 "You take a moment to recover. Then you and [the_person.title] get cleaned up and dressed. You quietly sneak out of the locker room."
                 return
     else:
@@ -610,7 +610,7 @@ label erica_cum_mouth(the_person):
             the_person "Your cum tastes great [the_person.mc_title]! Thanks for giving me so much extra protein!"
             "[the_person.possessive_title] winks at you as she swallows your load."
         elif the_person.effective_sluttiness() > 50 or the_person.get_opinion_score("drinking cum") > 0:
-            the_person "Thanks [the_person.mc_title]. I could really use the extra protein after that workout!"
+            the_person "Thanks, [the_person.mc_title]. I could really use the extra protein after that workout!"
         else:
             "[the_person.title]'s face grimaces as she tastes your sperm in her mouth."
             the_person "Thank you [the_person.mc_title]. It doesn't taste the best, but I could always use a little extra protein."
@@ -635,9 +635,9 @@ label erica_cum_mouth(the_person):
 
 label erica_talk_busy(the_person):
     if mc.location == gym:
-        the_person "Hey, I'm really sorry but I need to keep my workout going. Maybe another time?"
+        the_person "Hey, I'm really sorry, but I need to keep my workout going. Maybe another time?"
     if the_person.obedience > 120:
-        the_person "Hey, I'm really sorry but I've got some stuff I need to take care of. Could we catch up some other time?"
+        the_person "Hey, I'm really sorry, but I've got some stuff I need to take care of. Could we catch up some other time?"
     else:
         the_person "Hey, sorry [the_person.mc_title] but I've got some stuff to take care of. It was great talking though!"
     return
@@ -669,29 +669,29 @@ label erica_sex_watch(the_person, the_sex_person, the_position):
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
         $ the_person.change_stats(happiness = -1, obedience = -2)
-        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.effective_sluttiness() < the_position.slut_requirement - 10:
         $ the_person.draw_person()
         $ the_person.change_happiness(-1)
-        "[title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.effective_sluttiness() < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person "Oh my god, you two are just... Wow..."
         $ change_report = the_person.change_slut(1)
-        "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
+        "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.effective_sluttiness() > the_position.slut_requirement and the_person.effective_sluttiness() < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh my god that's... Wow that looks... Hot."
         $ change_report = the_person.change_slut(2)
-        "[title] watches you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches you and [the_sex_person.fname] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         the_person "Come on [the_person.mc_title], you can give her a little more than that. I'm sure she can handle it."
-        "[title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches eagerly while you and [the_sex_person.fname] [the_position.verb]."
 
     return
 
@@ -700,36 +700,36 @@ label erica_being_watched(the_person, the_watcher, the_position):
         #They agree you should give it to her harder
         the_person "I can handle it [the_person.mc_title], you can be rough with me."
         $ the_person.change_arousal(1)
-        "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.effective_sluttiness() >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's super slutty and doesn't care what people think.
-        the_person "Don't listen to [the_watcher.name], I'm having a great time. Look, she can't stop peeking over."
+        the_person "Don't listen to [the_watcher.fname], I'm having a great time. Look, she can't stop peeking over."
 
     elif the_person.effective_sluttiness() >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #She's super slutty and encourages the watcher to be slutty.
         $ the_person.change_arousal(1)
-        "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
         #She's into it and encouraged by the slut watching her.
         the_person "Oh god, having you watch us like this..."
         $ the_person.change_arousal(1)
-        "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], maybe we shouldn't be doing this here..."
         $ the_person.change_arousal(-1)
         $ the_person.change_slut(-1)
-        "[the_person.title] seems uncomfortable with [the_watcher.name] nearby."
+        "[the_person.title] seems uncomfortable with [the_watcher.fname] nearby."
 
     else: #the_person.effective_sluttiness() < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "Oh my god, having you watch us do this feels so dirty. I think I like it!"
         $ the_person.change_arousal(1)
         $ the_person.change_slut(1)
-        "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
+        "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.fname] around."
 
     return
 
@@ -738,7 +738,7 @@ label erica_work_enter_greeting(the_person):
         if the_person.obedience > 120:
             "[the_person.title] gives you a curt nod and then turns back to what she was doing."
         else:
-            "[the_person.title] glances at you when you enters the room then looks away quickly to avoid starting a conversation."
+            "[the_person.title] glances at you when you enter the room then looks away quickly to avoid starting a conversation."
 
     elif the_person.happiness > 120:
         if the_person.effective_sluttiness() > 50:

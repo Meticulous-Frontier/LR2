@@ -51,11 +51,11 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
     winner_one "Ok, listen up girls, whoever gets the shortest straw will pick up the food from the delivery guy in the lobby."
     $ scene_manager.update_actor(winner_two, emotion = "happy")
     "[winner_two.possessive_title] draws a long straw."
-    winner_one "Right, [loser.name], it's between you and me now, pick one."
+    winner_one "Right, [loser.fname], it's between you and me now, pick one."
     $ scene_manager.update_actor(winner_one, emotion = "happy")
     $ scene_manager.update_actor(loser, emotion = "sad")
     "[loser.possessive_title] draws the short straw."
-    winner_two "Don't forget [loser.name], you have to take off some clothes before you pick up the food."
+    winner_two "Don't forget [loser.fname], you have to take off some clothes before you pick up the food."
     if loser.effective_sluttiness() >= 40:
         $ scene_manager.update_actor(loser, emotion = "happy")
         loser "Great, let's give this guy a show!"
@@ -161,9 +161,9 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                         $ mc.change_locked_clarity(10)
                         $ winner_one.change_stats(happiness = 3, slut = 1, max_slut = 100)
                     else:
-                        winner_one "Holy!... Wow I was not expecting this!"
+                        winner_one "Holy!... Wow, I was not expecting this!"
                         "[winner_one.title] watches you closely."
-                    "You pound [loser.title] hard. She so wet that you easily slide in and out of her."
+                    "You pound [loser.title] hard. She's so wet that you easily slide in and out of her."
                     $ mc.change_locked_clarity(20)
                     "You look down and see the soft wet lips of her labia gripping and pulling at you every time you start to slide out. It feels amazing."
                     if winner_two.effective_sluttiness() > 80 and winner_two.get_opinion_score("public sex") > 0:
@@ -217,7 +217,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
             "You decide to go back to work and let the girls sort this out."
 
     else:
-        loser "This is not fair [winner_one.name], you wanted me to lose."
+        loser "This is not fair [winner_one.fname], you wanted me to lose."
         winner_one "No I didn't. And you know the rules!"
 
         $ scene_manager.update_actor(loser, emotion = "angry")

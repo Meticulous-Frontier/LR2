@@ -2,7 +2,7 @@
 init 2 python:
     def girlfriend_service_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
-            return not girlfriend_service_get_person() is None
+            return any(x for x in mc.business.get_employee_list() if x.has_role(girlfriend_role))
         return False
 
     def girlfriend_service_get_person():
@@ -146,7 +146,7 @@ label girlfriend_service_label():
                 "You can tell she is a little saddened, but she backs off and goes back to her work."
 
     if public_session:
-        "As you put your cock back in your pants, the activity in the room return to normal."
+        "As you put your cock back in your pants, the activity in the room returns to normal."
         "Your girlfriend has a smile on her face as she finishes cleaning up."
         $ the_person.change_happiness(5)
     $ clear_scene()

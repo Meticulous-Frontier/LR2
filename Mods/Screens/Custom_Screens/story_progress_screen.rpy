@@ -27,15 +27,15 @@ init 2:
                 frame:
                     background "#1a45a1aa"
                     xsize 420
-                    ysize 550
+                    ysize 450
                     vbox:
-                        text "Personal Information" style "menu_text_style" size 26 xalign 0.5 xanchor 0.5 #Info about the person: age, height, happiness, obedience, etc.
+                        text "Personal Information" style "serum_text_style_header" #Info about the person: age, height, happiness, obedience, etc.
                         text "Age: [person.age]" style "menu_text_style" size 16
                         if person.is_employee():
                             text "Required Salary: $[person.salary]/day" style "menu_text_style" size 16
                         text "Personality: " + person.personality.personality_type_prefix.capitalize() style "menu_text_style" size 16
                         if person.is_girlfriend():
-                            text "Relationship: [mc.name]'s girlfriend"
+                            text "Relationship: [mc.name]'s girlfriend" style "menu_text_style" size 16
                         elif person.relationship:
                             text "Relationship: " + person.relationship style "menu_text_style" size 16
                             if person.relationship != "Single":
@@ -46,7 +46,7 @@ init 2:
                         text "" style "menu_text_style" size 16
                         text "Happiness: [person.happiness]" style "menu_text_style" size 16
                         text "Sluttiness: [person.sluttiness] - " + get_gold_heart(person.sluttiness) style "menu_text_style" size 16
-                        text "Obedience: [person.obedience] - " + get_obedience_plaintext(person.obedience) style "menu_text_style" size 16
+                        text "Obedience: [person.obedience] {image=triskelion_token_small} " + get_obedience_plaintext(person.obedience) style "menu_text_style" size 16
                         text "Suggestibility: [person.suggestibility]%" style "menu_text_style" size 16
                         text "Height: " + height_to_string(person.height) style "menu_text_style" size 16
                         text "Eye Colour: " + person.eyes[0].title() style "menu_text_style" size 16
@@ -55,30 +55,40 @@ init 2:
                 frame:
                     background "#1a45a1aa"
                     xsize 420
-                    ysize 550
+                    ysize 450
                     vbox:
-                        text "Love Story Progress" style "menu_text_style" size 26 xalign 0.5 xanchor 0.5 #Info about the persons raw stats, work skills, and sex skills
-                        for love_text in person.story_love_list():
-                            text love_text style "menu_text_style" size 16
+                        text "Love Story Progress" style "serum_text_style_header" #Info about the persons raw stats, work skills, and sex skills
+                        viewport:
+                            scrollbars "vertical"
+                            draggable False
+                            mousewheel True
+                            vbox:
+                                for love_text in person.story_love_list():
+                                    text love_text style "menu_text_style" size 16 text_align 0.0
 
                 frame:
                     #$ master_opinion_dict = dict(person.opinions, **person.sexy_opinions)
                     background "#1a45a1aa"
                     xsize 420
-                    ysize 550
+                    ysize 450
                     vbox:
-                        text "Lust Story Progress" style "menu_text_style" size 26 xalign 0.5 xanchor 0.5 #Info about the persons loves, likes, dislikes, and hates
-                        for lust_text in person.story_lust_list():
-                            text lust_text style "menu_text_style" size 16
+                        text "Lust Story Progress" style "serum_text_style_header" #Info about the persons loves, likes, dislikes, and hates
+                        viewport:
+                            scrollbars "vertical"
+                            draggable False
+                            mousewheel True
+                            vbox:
+                                for lust_text in person.story_lust_list():
+                                    text lust_text style "menu_text_style" size 16 text_align 0.0
             hbox:
                 xsize 1320
                 spacing 60
                 frame:
                     background "#1a45a1aa"
                     xsize 630
-                    ysize 200
+                    ysize 300
                     vbox:
-                        text "Other information" style "menu_text_style" size 30
+                        text "Other information" style "serum_text_style_header"
                         for other_info in person.story_other_list():
                             text other_info style "menu_text_style" size 16
                         if person.get_fetish_count() == 0:
@@ -99,23 +109,28 @@ init 2:
                 frame:
                     background "#1a45a1aa"
                     xsize 630
-                    ysize 200
+                    ysize 300
                     vbox:
-                        text "Teamups" style "menu_text_style" size 30
-                        for teamup_info in [x for x in person.story_teamup_list() if isinstance(x, list) and len(x) == 2]:
-
-                            if teamup_info[0] != " ":
-                                vbox:
-                                    textbutton teamup_info[0].title:
-                                        action [
-                                            Function(person.hide_person,draw_layer="8"),
-                                            Function(teamup_info[0].draw_person, draw_layer="8", wipe_scene = False),
-                                            Show("story_progress",person=teamup_info[0])
-                                        ]
-                                        style "textbutton_style"
-                                        text_style "textbutton_text_style"
+                        text "Teamups" style "serum_text_style_header"
+                        viewport:
+                            scrollbars "vertical"
+                            draggable False
+                            mousewheel True
                             vbox:
-                                text teamup_info[1] style "menu_text_style" size 16
+                                for teamup_info in [x for x in person.story_teamup_list() if isinstance(x, list) and len(x) == 2]:
+
+                                    if teamup_info[0] != " ":
+                                        vbox:
+                                            textbutton teamup_info[0].title:
+                                                action [
+                                                    Function(person.hide_person,draw_layer="8"),
+                                                    Function(teamup_info[0].draw_person, draw_layer="8", wipe_scene = False),
+                                                    Show("story_progress",person=teamup_info[0])
+                                                ]
+                                                style "textbutton_style"
+                                                text_style "textbutton_text_style"
+                                    vbox:
+                                        text teamup_info[1] style "menu_text_style" size 16
             frame:
                 background None
                 anchor [0.5,1]

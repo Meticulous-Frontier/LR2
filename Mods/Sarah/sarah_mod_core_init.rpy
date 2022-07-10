@@ -5,7 +5,8 @@ init 5 python:
 
 label activate_sarah_mod_core(stack):
     python:
-        Sarah_mod_initialization() 
+        Sarah_mod_initialization()
+        hr_director_prog_scene_init()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
@@ -21,5 +22,10 @@ label update_sarah_mod_core(stack):
             # also prevents the event from occurring at start of game.
             update_hire_daughter_crisis(0)
             update_hire_mother_crisis(0)
+
+        if "hr_director_prog_scene" not in globals():
+            hr_director_prog_scene_init()
+        else:
+            hr_director_prog_scene.compile_scenes(hr_director_prog_scene)
         execute_hijack_call(stack)
     return

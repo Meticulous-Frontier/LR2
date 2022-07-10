@@ -116,7 +116,6 @@ label candace_goes_clothes_shopping_label(the_person):
         mc.name "Yeah I'd be up for doing that again sometime!"
         "At the checkout line, you pay for the new clothes for [the_person.possessive_title]."
         $ mc.business.change_funds(-100 * _return)
-        the_person "You're sweet. Thanks for the shopping trip!"
     else:
         "You walk with [the_person.title] to the exit."
         the_person "God, that was fun! Just a shame we didn't find anything we both like!"
@@ -143,7 +142,7 @@ label invite_to_clothes_shopping_label():
         $ the_person.change_location(mc.location)
         $ the_person.apply_outfit()
 
-        "You send a message to [the_person.name] about going clothes shopping."
+        "You send a message to [the_person.fname] about going clothes shopping."
         "After some time you get a response..."
         if the_person.obedience > 100:
             the_person "Okay! I'll meet you there [the_person.mc_title]!"

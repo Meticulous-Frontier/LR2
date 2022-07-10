@@ -87,24 +87,33 @@ init 5 python:
         return None
 
     def cheating_check_get_watcher(person):
-        other_people = [a_person for a_person in mc.location.people if a_person is not person] #Build a list with all the _other_ people in the room other than the one we're fucking.
         # skip cheating check when person is Office Free Use Slut
         if not person.has_role(employee_freeuse_role):
             # only check if she is jealous and not willing to threesome with the girl
-            for a_person in [x for x in other_people if x.has_role([girlfriend_role, affair_role]) and x.is_jealous() and not willing_to_threesome(person, x)]:
-                if a_person.has_role(girlfriend_role) and the_position.slut_requirement > (a_person.sluttiness * .6) + (a_person.get_opinion_score("threesomes") * 5) : #You can get away with 60% as slutty as she would do +- threesome inclination
+            for other_person in [y for y in [x for x in mc.location.people if x != person] if y.is_jealous() and not willing_to_threesome(person, y)]:
+                if other_person.has_role(girlfriend_role) and the_position.slut_requirement > (other_person.sluttiness * .6) + (other_person.get_opinion_score("threesomes") * 5) + (5 * other_person.get_opinion_score("public sex")) : #You can get away with 60% as slutty as she would do +- threesome inclination / public sex
                     caught_cheating_action = Action("Caught cheating action", caught_cheating_requirement, "caught_cheating_label", args = person)
-                    if not exists_in_room_enter_list(a_person, "caught_cheating_label"):
-                        a_person.add_unique_on_room_enter_event(caught_cheating_action)
-                        renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                    if not exists_in_room_enter_list(other_person, "caught_cheating_label"):
+                        other_person.add_unique_on_room_enter_event(caught_cheating_action)
+                        renpy.say(None, other_person.title + " gasps when she sees what you and " + person.title + " are doing and storms off.")
+                        other_person.change_location(other_person.home)
 
-                elif a_person.has_role(affair_role) and the_position.slut_requirement > (a_person.sluttiness * .8) + (a_person.get_opinion_score("threesomes") * 5): #You can get away with 80% as slutty as she would do +- threesome inclination
+                elif other_person.has_role(affair_role) and the_position.slut_requirement > (other_person.sluttiness * .8) + (other_person.get_opinion_score("threesomes") * 5) + (5 * other_person.get_opinion_score("public sex")): #You can get away with 80% as slutty as she would do +- threesome inclination / public sex
                     caught_affair_cheating_action = Action("Caught affair cheating action", caught_affair_cheating_requirement, "caught_affair_cheating_label", args = person)
-                    if not exists_in_room_enter_list(a_person, "caught_affair_cheating_label"):
-                        a_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
-                        renpy.say(None,a_person.title + " gasps when she sees what you and " + person.title + " are doing.")
+                    if not exists_in_room_enter_list(other_person, "caught_affair_cheating_label"):
+                        other_person.add_unique_on_room_enter_event(caught_affair_cheating_action)
+                        renpy.say(None, other_person.title + " gasps when she sees what you and " + person.title + " are doing and storms off.")
+                        other_person.change_location(other_person.home)
 
-        return get_random_from_list(other_people) #Get a random person from the people in the area, if there are any.
+        # get watcher from remaining people
+        watcher = get_random_from_list([x for x in mc.location.people if x != person])
+        if watcher:
+            if watcher.get_opinion_score("public sex") > 0:
+                watcher.add_situational_slut("public sex watcher", 5 * watcher.get_opinion_score("public sex"), "They're doing it right in front of me! That's so fucking hot!")
+            elif watcher.get_opinion_score("public sex") < 0:
+                watcher.add_situational_slut("public sex watcher", 5 * watcher.get_opinion_score("public sex"), "Right here in front of me?! That's disgusting!")
+
+        return watcher #Get a random person from the people in the area, if there are any.
 
     def apply_sex_modifiers(person, private = True):
         #Family situational modifiers
@@ -266,17 +275,17 @@ init 5 python:
         person.add_situational_obedience("sex_object",picked_object.obedience_modifier, picked_object.name + " " + position.verbing)
         return picked_object
 
-    def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False):
+    def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False, condition = Condition_Type("Empty")):
         option_list = []
         option_list.append("Round Choices")
         if position_choice is not None:
-            option_list.append(["Keep " + position_choice.verbing + " her","Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
+            option_list.append(["Keep " + position_choice.verbing + " her\n" + position_choice.build_energy_arousal_line(the_person), "Continue"]) #NOTE: you're prevented from continuing if the energy cost would be too high by the pre-round checks.
 
             if not position_locked and object_choice:
                 option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
 
-                    if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location):
+                    if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and condition.filter_condition_positions(position):
                         appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
@@ -284,7 +293,7 @@ init 5 python:
                 # allow transition to positions with same traits and skill requirements
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
-                        if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag:
+                        if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag and condition.filter_condition_positions(position):
                             appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
 
@@ -306,16 +315,15 @@ init 5 python:
                 option_list.append(["Stop and leave", "Leave"])
         return option_list
 
-    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False, prohibit_tags = []):
+    def build_grouped_sex_position_menu(person, allow_none = True, ignore_taboo = False, prohibit_tags = [], condition = Condition_Type("Empty")):
         positions = {
             "Foreplay" : ["Pick Foreplay"],
             "Oral" : ["Pick Oral"],
             "Vaginal" : ["Pick Vaginal"],
             "Anal" : ["Pick Anal"]
         }
-
         for position in sorted(list_of_positions, key = lambda x: x.name):
-            if mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+            if mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits) and condition.filter_condition_positions(position): #There is a valid object and if it requires large tits she has them.
                 if allow_position(person, position):
                     willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
                     if not position.skill_tag in prohibit_tags:
@@ -421,7 +429,7 @@ init 5 python:
 
 
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = []):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = Condition_Type("Empty")):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -438,8 +446,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ stop_stripping = False
 
     #Privacy modifiers
-    if mc.location.get_person_count() == 1 and not private:
-        $ private = True #If we're alone in the space we're always Private, even if we had left the possibility for people being around.
+    if mc.location.get_person_count() == 1 and not private and mc.location.privacy_level != 3 and mc.location.privacy_level != 1:
+        $ private = True #If we're alone in the space and its a private room or at work, set to Private
 
     # $ renpy.say(None, "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person, private = private)
@@ -493,7 +501,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 if has_taken_control:
                     $ has_taken_control = False
                     $ the_person.call_dialogue("sex_take_control")
-                    call get_fucked(the_person, private = private, the_goal = "get off",  report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags) from _call_get_fucked
+                    call get_fucked(the_person, private = private, the_goal = "get off",  report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition) from _call_get_fucked
                     $ round_choice = "Girl Leave"
 
                 if round_choice == "Change" and position_choice and object_choice:
@@ -514,14 +522,14 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
-            call screen enhanced_main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo)]))
+            call screen enhanced_main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo, condition = condition)]))
             $ round_choice = _return #This gets the players choice for what to do this round.
 
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue":
-            if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignroe all of that
+            if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignore all of that
                 if start_position is None: #The first time we get here,
-                    call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags) from _call_pick_position_bugfix
+                    call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition) from _call_pick_position_bugfix
                     $ position_choice = _return
                 else:
                     $ position_choice = start_position
@@ -586,7 +594,21 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ start_object = None
             # $ renpy.say(None, "Continue round => Position: " + position_choice.name + ", object: " + object_choice.name)
             if position_choice and object_choice: #If we have both an object and a position we're good to go, otherwise we loop and they have a chance to choose again.
-                call sex_description(the_person, position_choice, object_choice, private = private, report_log = report_log) from _call_sex_description_bugfix
+                if report_log.get("used_obedience", False):
+                    $ happiness_change = (the_person.opinion_score_being_submissive() - 1 + report_log.get("girl orgasms", 0)) * 2
+                    if happiness_change > 0 and the_person.happiness > 200:
+                        pass
+                    else:
+                        $ the_person.change_happiness(happiness_change)    #defualt -2 happiness per turn, being submissive negates or subverts happiness loss.
+                    if the_person.opinion_score_being_submissive() == -2:
+                        $ the_person.change_obedience(-2)   #If she hates being submissive, she slowly gets less submissive
+
+                $ condition.call_pre_label(the_person, position_choice, object_choice, report_log)
+                $ scene_private = private
+                if not private and mc.location.get_person_count() == 1:
+                    $ scene_private = False #Only pass private to sex desc. if there is actually a witness
+
+                call sex_description(the_person, position_choice, object_choice, private = scene_private, report_log = report_log) from _call_sex_description_bugfix
 
                 # If the girl has an orgasm due to MC coming, she gets a guaranteed trance upgrade
                 if the_person.arousal >= the_person.max_arousal:
@@ -598,6 +620,12 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ the_person.change_arousal(-__builtin__.max(the_person.arousal/(report_log.get("girl orgasms", 0)+2), the_person.arousal - the_person.max_arousal - 1))
                     $ report_log["girl orgasms"] += 1
 
+                $ condition.call_post_label(the_person, position_choice, object_choice, report_log)
+                if not private:
+                    call public_sex_post_round(the_person, position_choice, report_log) from _public_sex_post_round_01
+                    if not _return:
+                        $ finished = True
+
                 $ first_round = False
                 if not finished:    # when we switched to threesome finished is True
                     if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
@@ -605,13 +633,13 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if position_choice.requires_hard and mc.recently_orgasmed:
                         "Your post-orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
                         $ position_choice = None
-                    elif position_choice.guy_energy > mc.energy:
+                    elif position_choice.calculate_energy_cost(mc) > mc.energy:
                         if girl_in_charge:
                             "You're too exhausted to let [the_person.possessive_title] keep [position_choice.verbing] you."
                         else:
                             "You're too exhausted to continue [position_choice.verbing] [the_person.possessive_title]."
                         $ position_choice = None
-                    elif position_choice.girl_energy > the_person.energy:
+                    elif position_choice.calculate_energy_cost(the_person) > the_person.energy:
                         #TODO: Add some differentiated dialogue depending on the position.
                         #TODO: Add "no energy" transitions where you keep fucking her anyways. (double TODO: Add a way of "breaking" her like this)
                         if not girl_in_charge:
@@ -712,6 +740,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
         $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the beginning of the loop we can set a mandatory choice for the first one.
 
     python:
+        condition.run_rewards(the_person, report_log)
+
         clear_sex_modifiers(the_person)
 
         report_log["end arousal"] = the_person.arousal
@@ -719,6 +749,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         mc.condom = False
         mc.recently_orgasmed = False
+
 
     if affair_ask_after and private and not the_person.has_role([girlfriend_role, affair_role, prostitute_role]) and not the_person.relationship == "Single" and report_log.get("girl orgasms",0) >= 1:
         if not the_person.has_role([lifestyle_coach_role]): # don't exclude all unique characters (boss wife / emily mom -> affair should be possible)
@@ -768,7 +799,11 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
                     happiness_drop = the_person.effective_sluttiness(the_taboo) - final_slut_requirement #Our initial conditions mean this is a negative number
                     the_person.change_arousal(the_person.get_opinion_score("being submissive")*2)
                     the_person.discover_opinion("being submissive")
-                    the_person.change_happiness(happiness_drop)
+                    if the_person.opinion_score_being_submissive() == -2:
+                        the_person.change_happiness(happiness_drop)
+                    elif the_person.opinion_score_being_submissive() == -1:
+                        the_person.change_happiness(int(happiness_drop / 2))
+
 
                 if not the_person.has_taboo(the_taboo):
                     $ the_person.call_dialogue("sex_obedience_accept")
@@ -875,7 +910,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                             the_person "OK. Let me put this another way."
                             "[the_person.title] grabs the condom and throws it off to the side."
                             if skill_tag == "Vaginal":
-                                the_person "Either we fuck and come inside me or we don't fuck at all."
+                                the_person "Either we fuck and you come inside me or we don't fuck at all."
                             else:
                                 the_person "Either you fuck my ass raw or we don't fuck at all."
                             menu:
@@ -1033,7 +1068,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                             mc.name "I can't risk it [the_person.title], no matter how desperate you are for raw cock."
                             "You pull out a condom from your wallet, tear open the package, and start to unroll it down your dick."
                             mc.name "So you have a choice. You can have my cock inside you like this, or you can have no cock at all."
-                            "She whimpers like a sad puppy, but you know there's only once choice she would ever make."
+                            "She whimpers like a sad puppy, but you know there's only one choice she would ever make."
                             call put_on_condom_routine(the_person) from _call_put_on_condom_routine_9
 
                 "Fuck her raw":
@@ -1129,7 +1164,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
         # you only get one chance for starting a threesome per public sex action (avoid spamming threesome question)
         # threesome has no watcher loop, so all watching stops when threesome has started.
         # TODO: add watchers to threesome core
-        if not ask_for_threesome and willing_to_threesome(the_person, the_watcher):
+        if not ask_for_threesome and willing_to_threesome(the_person, the_watcher) and not the_person.has_role(caged_role):
             $ the_watcher.draw_person()
             the_watcher "Oh my god, that looks amazing..."
             if can_join_threesome(the_watcher, the_person, the_position.position_tag):
@@ -1151,9 +1186,8 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
                         the_person "Aww, okay. Maybe next time..."
                         $ the_person.change_obedience(3)
 
-        $ the_relationship = town_relationships.get_relationship(the_watcher, the_person)
-        if the_relationship and the_relationship.get_type(the_watcher) in ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"]:
-            call relationship_sex_watch(the_watcher, town_relationships.get_relationship_type(the_watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
+        if town_relationships.is_family(the_watcher, the_person):
+            call relationship_sex_watch(the_person, the_watcher, town_relationships.get_relationship_type(the_watcher, the_person).lower(), the_position) from _call_relationship_sex_watch
             $ the_position.redraw_scene(the_person)
             call relationship_being_watched(the_person, the_watcher, town_relationships.get_relationship_type(the_person, the_watcher).lower(), the_position) from _call_relationship_being_watched
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
@@ -1165,37 +1199,47 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
             $ the_person.call_dialogue("being_watched", the_watcher = the_watcher, the_position = the_position) #Call her response to the person watching her.
             $ the_person.change_arousal(the_person.get_opinion_score("public sex"))
             $ the_person.discover_opinion("public sex")
-        $ the_relationship = None
-    $ del the_watcher
+
+        $ the_watcher.clear_situational_slut("public sex watcher")
+
+    $ the_watcher = None
     return
 
-label relationship_sex_watch(the_person, the_relation, the_position):
-    $ title = the_person.title if the_person.title else "The stranger"
-    if the_person.sluttiness < the_position.slut_requirement - 20:
-        $ the_person.draw_person(emotion = "angry")
-        the_person "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. Don't either of you have any decency?"
-        $ the_person.change_stats(obedience = -2, happiness = -1)
+label relationship_sex_watch(the_person, the_watcher, the_relation, the_position):
+    $ title = the_watcher.title if the_watcher.title else "The stranger"
+    if the_watcher.sluttiness < the_position.slut_requirement - 20:
+        $ the_watcher.draw_person(emotion = "angry")
+        if not the_person.relationship == "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            the_watcher "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. What would your [so_title] think of this?"
+        else:
+            the_watcher "Oh my god [the_relation], I can't believe you're doing that here in front of everyone. Don't either of you have any decency?"
+        $ the_watcher.change_stats(obedience = -2, happiness = -1)
         "[title] looks away while you and her [the_relation] [the_position.verb]."
 
-    elif the_person.sluttiness < the_position.slut_requirement - 10:
-        $ the_person.draw_person()
-        $ the_person.change_happiness(-1)
+    elif the_watcher.sluttiness < the_position.slut_requirement - 10:
+        $ the_watcher.draw_person()
+        $ the_watcher.change_happiness(-1)
         "[title] shakes her head and tries to avoid watching you and her [the_relation] [the_position.verb]."
 
-    elif the_person.sluttiness < the_position.slut_requirement:
-        $ the_person.draw_person()
-        $ change_report = the_person.change_slut(1)
+    elif the_watcher.sluttiness < the_position.slut_requirement:
+        $ the_watcher.draw_person()
+        $ the_watcher.change_slut(1)
         "[title] tries to avert her gaze, but keeps glancing over while you and her [the_relation] [the_position.verb]."
 
-    elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
-        $ the_person.draw_person()
-        the_person "Oh my..."
-        $ change_report = the_person.change_slut(2)
-        "[title] watches quietly while you and her [the_relation] [the_position.verb]."
+    elif the_watcher.sluttiness > the_position.slut_requirement and the_watcher.sluttiness < the_position.slut_cap:
+        $ the_watcher.draw_person()
+        if not the_person.relationship == "Single":
+            $ so_title = SO_relationship_to_title(the_person.relationship)
+            the_watcher "Oh my... I wonder what your [so_title] would say..."
+        else:
+            the_watcher "Oh my..."
+        $ the_watcher.change_slut(2)
+        "[title] continues watching you and her [the_relation] [the_position.verb]."
 
     else:
-        $ the_person.draw_person(emotion = "happy")
-        the_person "Glad to see you two are having a good time. [the_person.mc_title], careful you aren't too rough with my [the_relation]."
+        $ the_watcher.draw_person(emotion = "happy")
+        the_watcher "Glad to see you two are having a good time. [the_watcher.mc_title], careful you aren't too rough with my [the_relation]."
         "[title] watches quietly while you and her [the_relation] [the_position.verb]."
     return
 
@@ -1296,7 +1340,70 @@ label break_strip_outfit_taboos(the_person):
                 $ taboo_broken = True
     return taboo_broken
 
-label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False, prohibit_tags = []):
-    call screen enhanced_main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags)))
+label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False, prohibit_tags = [], condition = Condition_Type("Empty")):
+    call screen enhanced_main_choice_display(build_menu_items(build_grouped_sex_position_menu(the_person, allow_none = allow_none, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition)))
     $ position_choice = _return
     return None if position_choice == "Nothing" else position_choice
+
+label public_sex_post_round(the_person, position_choice, report_log):
+    $ scrutiny = report_log.get("scrutiny",0)
+    $ scr_change = 0
+    if position_choice == None: #We got here by accident
+        return
+    if position_choice.skill_tag == "Foreplay":
+        $ scr_change = 1
+    elif position_choice.skill_tag == "Oral":
+        $ scr_change = 2
+    elif position_choice.skill_tag == "Vaginal":
+        $ scr_change = 3
+    elif position_choice.skill_tag == "Anal":
+        $ scr_change = 4
+    if mc.location.privacy_level == 0:  #Its a private room, don't do anything
+        return True
+    elif mc.location.privacy_level == 2:    #It's at work. possibly effect HR efficiency?
+        "You [position_choice.verb] [the_person.title] in front of everyone in the [mc.location.formal_name]."
+        if position_choice.slut_requirement < mc.location.room_average_slut():
+            "You hear a few murmurs and get a few looks, but mostly they don't seem to mind."
+        elif position_choice.slut_requirement < mc.location.room_average_slut() + 15:
+            "You are getting some dirty looks from the other employees in the room, but they keep working despite the distraction."
+            $ mc.business.change_team_effectiveness(-1)
+            $ mc.log_event("Business efficiency reduced", "float_text_yellow")
+        else:
+            "You are getting dirty looks and comments from your other employees. Your session is disrupting work."
+            $ mc.business.change_team_effectiveness(-3)
+            $ mc.log_event("Business efficiency reduced", "float_text_yellow")
+        return True
+    elif mc.location.privacy_level == 1:    #Somewhere things are not usually permitted but if kept low key can get away with it.
+        $ scrutiny += (scr_change * 3)
+        $ report_log["scrutiny"] = scrutiny
+        "You [position_choice.verb] [the_person.title] in public at the [mc.location.formal_name]."
+        if scrutiny < 25:
+            "So far, your actions are being mostly ignored. If you go quick and stay quiet, you might get away with it."
+        elif scrutiny < 50:
+            "A few employees have noticed what you are up to, but so far just seem annoyed. You should finish up."
+        elif scrutiny < 75:
+            "You are getting looks from the employees. Several have noticed your unwanted actions."
+        elif scrutiny < 100:
+            "Employees and customers have noticed what you are up to. You need to finish up quickly or things could get ugly."
+        else:
+            "Employee" "Hey! You can't do that here! Knock it off or I'm calling the cops!"
+            "Sadly, you pushed your luck too far. You decide to stop before you get in any real trouble."
+            return False
+        return True
+    elif mc.location.privacy_level == 3:    #You are out in public
+        $ scrutiny += (scr_change * 5)
+        $ report_log["scrutiny"] = scrutiny
+        "You [position_choice.verb] [the_person.title] in public at the [mc.location.formal_name]."
+        if scrutiny < 25:
+            "So far, your actions are being mostly ignored. If you go quick and stay quiet, you might get away with it."
+        elif scrutiny < 50:
+            "A few people have noticed what you are up to, but so far just seem annoyed. You should finish up."
+        elif scrutiny < 75:
+            "You are getting nasty looks from other people. Several have noticed your illegal actions."
+        elif scrutiny < 100:
+            "A small crowd has gathered to watch, and you are getting several comments from people to stop."
+        else:
+            call police_chief_public_sex_intervention(the_person) from _arrested_during_public_sex_01
+            return False
+        return True
+    return True

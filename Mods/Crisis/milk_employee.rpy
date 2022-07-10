@@ -1,19 +1,8 @@
 ###Scene Idea: Girl is pumping milk. MC can help or watch
-#
-#   In this scene, player is walking by some kind of private room when he hears moaning coming from inside
-#   After investigating, player finds NPC masturbating
-#   Player choices include walking away and watching
-#   If watching, NPC has chance to notice PC watching. If slutty, NPC continues, if not, stops and gets angry
-#   If watching, and NPC is slutty, have a chance if we went unnoticed for NPC to call out PC name
-#   Give PC option to just continue watching, leave NPC a note saying thanks for the show, or to make self known
-#   If make self known trigger sex scene
-#
-#
-###
 init 2 python:
     def milk_employee_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.get_employee_count() > 0:
-            return not select_girl_lactating() is None
+            return any(x for x in mc.business.get_employee_list() if x.lactation_sources > 0)
         return False
 
     def select_girl_lactating():
@@ -78,7 +67,7 @@ label milk_employee_crisis_label():
         "You start to squeeze them in rhythm. First one, then the other. It takes several seconds, but soon milk starts to dribble out of the tip."
         # We don't have access to multiple lactation sources yet, but assume at some point we can make cows that can really crank out milk
         if the_person.lactation_sources > 2:
-            "[the_person.title] gives a moan, and the floodgates open as her breasts let down. Milk is now coming out in a steady stream from both tits, and everytime you squeeze it spurts out forcefully."
+            "[the_person.title] gives a moan, and the floodgates open as her breasts let down. Milk is now coming out in a steady stream from both tits, and every time you squeeze it spurts out forcefully."
             the_person "Oh god... that feels so good..."
             $ the_person.change_arousal(20)
             $ mc.change_locked_clarity(30)

@@ -43,7 +43,7 @@ init 10 python:
         if lily_will_strip():
             lust_story_list.append("[lily.name] offered to strip for you for extra cash!")
         elif lily.sluttiness < 30:
-            lust_story_list.append("Raise [lily.name]'s sluttiness to atleast 30 to continue this story.")
+            lust_story_list.append("Raise [lily.name]'s sluttiness to at least 30 to continue this story.")
             return lust_story_list
         elif lily_get_serums_tested() < 4:
             story_string = "Have [lily.name] test " + str(4 - lily_get_serums_tested()) + " more serums."
@@ -58,7 +58,7 @@ init 10 python:
     def lily_story_teamup_list():
         teamup_story_list = []
         if erica_get_is_doing_insta_sessions():
-            teamup_story_list.append([erica,"Help [erica.title] take insta pics with [lily.title] every Saturday night in [lily.title]'s room!"])
+            teamup_story_list.append([erica,"Help [erica.title] take InstaPics with [lily.title] every Saturday night in [lily.title]'s room!"])
         elif not erica_is_looking_for_work():
             teamup_story_list.append([erica,"Try progressing [erica.title]'s story."])
         elif lily.event_triggers_dict.get("sister_instathot_pic_count", 0) == 0:

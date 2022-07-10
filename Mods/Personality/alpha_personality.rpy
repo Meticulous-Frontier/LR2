@@ -21,27 +21,19 @@ init 1400 python:
         valid_titles.append(person.formal_address + " " + person.last_name)
         if person.love > 20:
             valid_titles.append(person.name)
-        if person.love > 50 and person.has_role(stripclub_mistress_role):
-            valid_titles.append("Milady")
-        if person.sluttiness > 60 and person.has_role(stripclub_mistress_role):
-            valid_titles.append("Mistress")
         if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_titles.append("Anal Queen")
         return valid_titles
+
     def alpha_possessive_titles(person):
         valid_possessive_titles = []
         valid_possessive_titles.append(person.formal_address + " " + person.last_name)
-        if person.love > 10 and person.has_role(stripclub_manager_role):
-            valid_possessive_titles.append("Your manager")
-        if person.sluttiness > 60 and person.has_role(stripclub_manager_role):
-            valid_possessive_titles.append("Your naughty Manager")
-        if person.sluttiness > 60 and person.has_role(stripclub_mistress_role):
-            valid_possessive_titles.append("Your kinky Mistress")
         if person.sluttiness > 80 and (person.get_opinion_score("threesomes") > 0 or person.get_opinion_score("other girls") > 0):
             valid_possessive_titles.append("Your bi-sexual queen")
         if person.sluttiness > 90 and person.get_opinion_score("anal sex") > 0 and person.sex_skills["Anal"] > 4:
             valid_possessive_titles.append("Your anal queen")
         return valid_possessive_titles
+
     def alpha_player_titles(person):
         valid_player_titles = []
         valid_player_titles.append("Mr. " + mc.last_name)
@@ -90,11 +82,11 @@ label alpha_introduction(the_person):
     "She laughs and rolls her eyes."
     the_person "Is that so? You're not the first one... Maybe for today!"
     mc.name "Really, I just wanted to talk to you."
-    $ title_choice = get_random_title(the_person)
+    $ title_choice = the_person.get_random_title()
     $ formatted_title = the_person.create_formatted_title(title_choice)
     the_person "Well, if you insist, you can call me [formatted_title]."
     $ the_person.set_title(title_choice)
-    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+    $ the_person.set_possessive_title(the_person.get_random_possessive_title())
     "With a commanding gaze she waits for you to introduce yourself."
     return
 
@@ -130,7 +122,7 @@ label alpha_clothing_review(the_person):
             $ so_title = SO_relationship_to_title(the_person.relationship)
             the_person "Oh my, what would my [so_title] say if he saw me here, like this... with you? Turn around, I need to get dressed."
         else:
-            the_person "Oh [the_person.mc_title], I'm at my best! Turn around now, I need to get dressed."
+            the_person "Oh [the_person.mc_title], I'm not at my best! Turn around now, I need to get dressed."
     return
 
 label alpha_strip_reject(the_person, the_clothing, strip_type = "Full"):
@@ -232,7 +224,7 @@ label alpha_seduction_response(the_person):
         if the_person.sluttiness > 50:
             the_person "Do you need the touch of a skilled woman, [the_person.mc_title]? I know how stressed you can get you."
         else:
-            the_person "Oh darling... What do you need my help with [the_person.mc_title]?."
+            the_person "Oh darling... What do you need my help with, [the_person.mc_title]?"
     else:
         if the_person.sluttiness > 50:
             the_person "Well, how about you let me take care of you for a change? I'm the best..."
@@ -251,7 +243,7 @@ label alpha_seduction_accept_crowded(the_person):
             the_person "Come on, I'm sure we can find a quiet place were you can take care of me."
         elif the_person.sluttiness < 70:
             "[the_person.possessive_title] smiles and devours your body with her eyes, making sure nobody around you notices."
-            the_person "Okay, but we need to be discreet: I have a repute. Let's find someplace quiet."
+            the_person "Okay, but we need to be discreet: I have a reputation to uphold. Let's find someplace quiet."
         else:
             the_person "Oh my, [the_person.mc_title]... why don't you take care of me right here!"
     else:
@@ -323,7 +315,7 @@ label alpha_sex_responses_oral(the_person):
         if the_person.sluttiness > 50:
             the_person "Yes, just like that! Mmmmmh!"
         else:
-            the_person "Keep doing that [the_person.mc_title], it excite me so badly!"
+            the_person "Keep doing that [the_person.mc_title], it excites me so badly!"
 
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
@@ -388,14 +380,14 @@ label alpha_sex_responses_anal(the_person):
         if the_person.sluttiness > 50:
             the_person "I hope my ass isn't too tight for you, I don't want you to cum too early."
         else:
-            the_person "I think I'll have some problem walking in public after this!"
+            the_person "I think I'll have some problems walking in public after this!"
     else:
         if the_person.sluttiness > 50:
             if the_person.relationship == "Single":
                 the_person "Your cock feels like it was made to perfectly fill me! Keep going, I might actually climax!"
             else:
                 $ so_title = SO_relationship_to_title(the_person.relationship)
-                the_person "My [so_title] give me some anal, but I never felt like this, you can take my ass anytime, [the_person.mc_title]!"
+                the_person "My [so_title] gave me some anal, but I never felt like this, you can take my ass anytime, [the_person.mc_title]!"
         else:
             the_person "Oh lord, this is actually starting to feel good, keep this up, Yes, I'm going to cum!"
     return
@@ -458,7 +450,7 @@ label alpha_flirt_response_low(the_person):
         mc.name "Well, you make it look good."
         $ mc.change_locked_clarity(5)
         "She smiles and laughs proud of herself."
-        the_person "Men will be always men."
+        the_person "Men will always be men."
     return
 
 label alpha_flirt_response_mid(the_person):
@@ -536,7 +528,7 @@ label alpha_flirt_response_high(the_person):
                 "[the_person.possessive_title] nods and follows a step behind you."
                 "You walk down the corridor into an empty office space."
                 "Once you're alone you put one hand around her waist, pulling her close against you. She looks into your eyes."
-                the_person "And what are you planning now that you win the big prize?"
+                the_person "And what are you planning now that you won the big prize?"
 
                 if the_person.has_taboo("kissing"):
                     $ the_person.call_dialogue("kissing_taboo_break")
@@ -720,7 +712,7 @@ label alpha_flirt_response_affair(the_person):
             "Just flirt":
                 mc.name "I want to, but I'm going to have to wait until we have more time together for that."
                 $ mc.change_locked_clarity(10)
-                "Her hand moves lower, until she reaches you crotch, giving your cock as squeeze, sending a brief shiver up your spine."
+                "Her hand moves lower, until she reaches you crotch, giving your cock a squeeze, sending a brief shiver up your spine."
                 the_person "I understand. When we have the chance you can take your time and give me some pleasure."
     return
 
@@ -982,31 +974,31 @@ label alpha_sex_watch(the_person, the_sex_person, the_position):
         $ the_person.draw_person(emotion = "angry")
         the_person "[the_person.mc_title]! Why do you want me to watch that!"
         $ the_person.change_stats(happiness = -1, obedience = -2)
-        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person(emotion = "sad")
         $ the_person.change_happiness(-1)
         the_person "[the_person.mc_title]! Could you at least try a more private place?"
-        "[title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person(emotion = "default")
         the_person "[the_person.mc_title], why are you doing this here..."
         $ the_person.change_slut(1)
-        "[title] looks in another direction, but she keeps glancing at you and [the_sex_person.name]."
+        "[title] looks in another direction, but she keeps glancing at you and [the_sex_person.fname]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person(emotion = "happy")
         the_person "Well, [the_person.mc_title]! I might show you my personal skills someday..."
         $ the_person.change_slut(2)
-        "[title] judges [the_sex_person.name]'s performance while you [the_position.verb] her."
+        "[title] judges [the_sex_person.fname]'s performance while you [the_position.verb] her."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         $ pronoun = person_body_shame_string(the_sex_person.body_type, "slut")
         the_person "You can do better [the_person.mc_title], give that little [pronoun] what she needs."
-        "[title] watches you eagerly while [the_position.verbing] [the_sex_person.name]."
+        "[title] watches you eagerly while you are [the_position.verbing] [the_sex_person.fname]."
 
     return
 
@@ -1015,37 +1007,37 @@ label alpha_being_watched(the_person, the_watcher, the_position):
         #They agree you should give it to her harder
         the_person "Come on [the_person.mc_title], do me a little harder."
         $ the_person.change_arousal(1)
-        "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.possessive_title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's super slutty and doesn't care what people think.
-        the_person "Don't listen to [the_watcher.name]. I'm just taking care of you, [the_person.mc_title]!"
+        the_person "Don't listen to [the_watcher.fname]. I'm just taking care of you, [the_person.mc_title]!"
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #She's super slutty and encourages the watcher to be slutty.
         $ the_person.change_arousal(1)
-        the_person "[the_person.mc_title], I think [the_watcher.name] sees that, you can satisfy me."
-        "[the_person.possessive_title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        the_person "[the_person.mc_title], I think [the_watcher.fname] sees that, you can satisfy me."
+        "[the_person.possessive_title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
         #She's into it and encouraged by the slut watching her.
         the_person "Oh [the_person.mc_title], I know it's wrong, but what you are doing just feels right."
         $ the_person.change_arousal(1)
-        "The longer [the_watcher.name] keeps watching, the more turned on [the_person.possessive_title] gets."
+        "The longer [the_watcher.fname] keeps watching, the more turned on [the_person.possessive_title] gets."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], don't do that, not here. I have a reputation to keep."
         $ the_person.change_arousal(-1)
         $ the_person.change_slut(-1)
-        "[the_person.possessive_title] is very uneasy with [the_watcher.name] watching."
+        "[the_person.possessive_title] is very uneasy with [the_watcher.fname] watching."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
-        the_person "[the_watcher.name], just have a good look, I may let you try him one day."
+        the_person "[the_watcher.fname], just have a good look, I may let you try him one day."
         $ the_person.change_arousal(1)
         $ the_person.change_slut(1)
-        "[the_watcher.name] seems more comfortable, watching you [the_position.verbing] [the_person.possessive_title]."
+        "[the_watcher.fname] seems more comfortable, watching you [the_position.verbing] [the_person.possessive_title]."
 
     return
 
@@ -1319,7 +1311,7 @@ label alpha_condomless_sex_taboo_break(the_person):
             if the_person.on_birth_control:
                 the_person "When you're going to finish, I want you to fill me up with your hot load."
             else:
-                the_person "Although I would like to feel you're cum filling me up, you can't cum inside me, understood!"
+                the_person "Although I would like to feel your cum filling me up, you can't cum inside me, understood!"
         elif the_person.get_opinion_score("creampies") < 0:
             if the_person.kids == 0:
                 the_person "You will pull out, do you understand? I really don't plan to become a mother."
@@ -1345,7 +1337,7 @@ label alpha_condomless_sex_taboo_break(the_person):
             the_person "You might be right about that."
             "She takes a moment to think, then nods."
             if the_person.on_birth_control:
-                "She takes a moment to think, then nods."
+                the_person "Fine, you don't need a condom. I'm on birth control, so let's go wild."
             else:
                 the_person "Fine, you don't need a condom, but be very careful where you finish, do you understand?"
     return
@@ -1373,7 +1365,7 @@ label alpha_underwear_nudity_taboo_break(the_person, the_clothing):
     else:
         the_person "If I take off my [the_clothing.display_name] you'll see me in my underwear."
         mc.name "That's the plan, yes."
-        the_person "I shouldn't be going around half naked for men I barely know. What would people think?"
+        the_person "I shouldn't be going around half-naked for men I barely know. What would people think?"
 
         if the_person.has_taboo(["bare_tits","bare_pussy"]):
             mc.name "Why do you care what other people think? Forget about them and just focus on the moment."
@@ -1396,7 +1388,7 @@ label alpha_bare_tits_taboo_break(the_person, the_clothing):
     elif the_person.love > 25:
         the_person "Oh, you want to get my breasts out?"
         if the_person.has_large_tits():
-            "She looks down at her own large rack, tits hidden restrained by her [the_clothing.display_name]."
+            "She looks down at her own large rack, tits hidden and restrained by her [the_clothing.display_name]."
             the_person "I don't have to ask why, but I'm glad you're interested in them."
         else:
             the_person "I'm glad you're still interested in smaller breasts. It seems like every man is mad boob-crazy these days."

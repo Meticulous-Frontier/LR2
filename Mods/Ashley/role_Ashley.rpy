@@ -16,12 +16,12 @@ init 2 python:
         global ashley
         ashley = make_person(name = "Ashley", last_name =stephanie.last_name, age = 22, body_type = "standard_body", face_style = "Face_3",  tits="B", height = 0.89, hair_colour="brown", hair_style = ponytail, skin="white" , \
             eyes = "brown", personality = introvert_personality, name_color = "#228b22", dial_color = "#228b22" , starting_wardrobe = ashley_wardrobe, \
-            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
-            relationship = "Single", kids = 0, force_random = True, base_outfit = ashley_base_outfit,
+            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [4,2,2,2], sluttiness = 7, obedience_range = [70, 85], happiness = 119, love = 0, \
+            relationship = "Single", kids = 0, force_random = True, base_outfit = ashley_base_outfit, type = 'story',
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 2, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -1, False], ["public sex", -1, False]])
 
-        ashley.add_job(unemployed_job)
+        ashley.change_job(unemployed_job)
         ashley.set_schedule(stephanie.home, the_days=[0,1,2,3,4,5,6], the_times = [0,1,2,3,4])
         ashley.home = stephanie.home
         ashley.home.add_person(ashley)
@@ -48,7 +48,7 @@ init 2 python:
         # set relationships
         town_relationships.update_relationship(ashley, stephanie, "Sister")
         town_relationships.update_relationship(nora, ashley, "Friend")
-        town_relationships.update_relationship(lily, ashley, "Rival")
+        # town_relationships.update_relationship(lily, ashley, "Rival")
 
         #TODO make her know Nora from before graduation. She is familiar with serums and their effects
         #TODO add ashley to unique characters list?
@@ -247,7 +247,7 @@ label ashley_intro_label():
             $ mc.change_locked_clarity(20)
             the_person "You know I would do this anyway, right?"
             mc.name "Of course, but being reminded of your blowjob skills will probably help me make up my mind if I want to hire someone you're related to."
-            call fuck_person(the_person, start_position = blowjob, skip_intro = False, position_locked = True) from _call_sex_description_ashley_intro_bonus_BJ_1
+            call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_sex_description_ashley_intro_bonus_BJ_1
             $ the_report = _return
             $ scene_manager.update_actor(the_person, position = "stand4")
             if the_report.get("guy orgasms", 0) > 0:
@@ -265,7 +265,7 @@ label ashley_intro_label():
         $ mc.business.add_employee_production(ashley)
         $ ashley.set_schedule(None, the_times = [1,2,3]) #Free roam when not working
 
-        "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
+        "You complete the necessary paperwork and hire [ashley.fname], assigning her to the production department."
         "As you finish up, you notice [the_person.possessive_title] is already calling her sister with the news."
         $ scene_manager.update_actor(the_person, position = "walking_away")
         the_person "Hey Ash! Guess what? I got you a starting position at that place I've been..."
@@ -283,12 +283,12 @@ label ashley_hire_directed_label():
     $ the_person = stephanie
     mc.name "I wanted to talk to you again about your sister."
     the_person "Oh? Have you decided to reconsider?"
-    mc.name "I have. Do you still have her documents that I could look over them again?"
+    mc.name "I have. Do you still have her documents that I could look over again?"
     the_person "Of course! Let me get them."
     "[the_person.possessive_title] runs over to her desk and comes back with a folder."
     the_person "Here you go!"
     "You pick up her documents and look over them."
-    "From her skill set, it is obvious the best choice of department for here would be in production. The only question is, should you hire her or not?"
+    "From her skill set, it is obvious the best choice of department for her would be in production. The only question is, should you hire her or not?"
     call hire_select_process([ashley, 1]) from _call_hire_ashley_2
     $ the_person.draw_person()
     if _return == ashley:
@@ -298,7 +298,7 @@ label ashley_hire_directed_label():
         $ remove_ashley_hire_later_action()
         $ mc.business.add_employee_production(ashley)
 
-        "You complete the necessary paperwork and hire [ashley.name], assigning her to the production department."
+        "You complete the necessary paperwork and hire [ashley.fname], assigning her to the production department."
         "As you finish up and start to leave, you notice [the_person.possessive_title] is already calling her sister with the news."
         $ the_person.draw_person(position = "walking_away")
         the_person "Hey Ash! Guess what? I got you a starting position at that place I've been..."
@@ -315,12 +315,12 @@ label ashley_hire_directed_label():
 
 label ashley_first_talk_label(the_person):
     $ the_person.draw_person()
-    mc.name "Hello there. You must be [the_person.name]. I'm [mc.name], the one who owns this place."
+    mc.name "Hello there. You must be [the_person.fname]. I'm [mc.name], the one who owns this place."
     "She looks at you, and see a hint of surprise on her face."
     the_person "Oh!... hello sir. It's nice to meet you. I'm sorry, my sister said this place was all women..."
     mc.name "That's right. Except me, the owner."
     the_person "Ah... I see... Well, thank you for the opportunity. I appreciate the work."
-    mc.name "Of course, [stephanie.name] is a good friend. Do you go by [the_person.name]? Or something else?"
+    mc.name "Of course, [stephanie.fname] is a good friend. Do you go by [the_person.fname]? Or something else?"
     $ the_person.set_title(the_person.name)
     $ the_person.set_possessive_title("Your quiet employee")
     $ the_person.set_mc_title(mc.name)
@@ -335,12 +335,12 @@ label ashley_first_talk_label(the_person):
 label ashley_room_excitement_overhear_label(the_person):
     $ the_person = ashley # on_room_enter_event so the_person isn't defined
     $ the_person.draw_person(position = "standing_doggy")
-    "As you step into the room, you can overhear [the_person.title] talking excitedly to another co-worker."
+    "As you step into the room, you can overhear [the_person.title] talking excitedly to another coworker."
     the_person "I know! I can't wait to go. All of my friends say it's so much fun..."
     "But as you enter the room, she notices, and immediately stops talking."
     $ the_person.draw_person()
     the_person "..."
-    "Clearly she has no issue talking to her co-workers... why is she so quiet with you? Maybe you should ask her sister about it."
+    "Clearly she has no issue talking to her coworkers... why is she so quiet with you? Maybe you should ask her sister about it."
     $ stephanie.add_unique_on_talk_event(ashley_ask_sister_about_attitude)
     $ ashley.event_triggers_dict["excitement_overhear"] = True
     return
@@ -350,13 +350,13 @@ label ashley_ask_sister_about_attitude_label(the_person):
     mc.name "Hello [the_person.title]. Do you have a moment?"
     the_person "Of course sir. What can I do for you?"
     "You lower your voice. You don't necessarily need anyone overhearing you."
-    mc.name "Well... I'm not sure how to say this but, I'm a little concerned about [ashley.name]."
+    mc.name "Well... I'm not sure how to say this but, I'm a little concerned about [ashley.fname]."
     "A grimace forms on her face, but she waits for you to continue."
     mc.name "Earlier, I was walking by and I could hear her carrying on with her coworkers. But as soon as I entered the room, she went completely silent."
     "[the_person.title] nods her head as you keep going."
     mc.name "She barely says a word anytime I talk to her. I feel like I've gotten off to a bad start with her. Do you have any advice?"
     "[the_person.title] clears her throat."
-    the_person "Well... [ashley.name] is a bit complicated. She has trouble talking to, and being around men in general..."
+    the_person "Well... [ashley.fname] is a bit complicated. She has trouble talking to, and being around men in general..."
     mc.name "Oh? Oh! I see, I mean I guess that makes sense, not everyone is heterosexual..."
     the_person "Noooo, no. It isn't that. She's had boyfriends in the past. But something happened between her and her last boyfriend in college."
     the_person "They broke up all of a sudden, and she's never been the same way around men since then."
@@ -374,7 +374,7 @@ label ashley_room_warming_up_label(the_person):
     $ the_person.draw_person(position = "standing_doggy")
     "As you step into the room, you can overhear [the_person.title] talking excitedly to another coworker."
     the_person "I know, I just need to find someone to go with!"
-    "As you enter the room, she looks and stops talking."
+    "As you enter the room, she looks up and stops talking."
     $ the_person.draw_person()
     the_person "Ahh... hello sir. Having a good day?"
     "Whoa. She actually said hi to you? Maybe she is warming up to you a little bit?"
@@ -390,7 +390,7 @@ label ashley_room_overhear_classical_label(the_person):
     $ the_person.draw_person(position = "standing_doggy")
     "As you step into the room, you can overhear [the_person.title] talking excitedly to another coworker."
     the_person "I know, the city symphony is performing a collection of Johannes Brahms' symphonies. I want to go so bad, but I can't find anyone to go with..."
-    "As you enter the room, she looks and stops talking."
+    "As you enter the room, she looks up and stops talking."
     $ the_person.draw_person()
     the_person "Ahh... hello sir. Having a good day?"
     "She has been slowly warming up to you over the last few weeks."
@@ -412,7 +412,7 @@ label ashley_ask_date_classic_concert_label(the_person):
         the_person "I suppose... I mean... Steph keeps telling me you are a nice guy..."
     else:
         the_person "I don't know, I mean you seem like a nice guy but..."
-        mc.name "I'll tell you what. We could let [stephanie.name] know when it is. She could drop you off and pick you up afterwards."
+        mc.name "I'll tell you what. We could let [stephanie.fname] know when it is. She could drop you off and pick you up afterwards."
         "[the_person.title] mumbles something for a second, then relents."
         the_person "I suppose... I mean... Steph keeps telling me I need to go out more."
     mc.name "Ah, great! Do you know when the concert is?"
@@ -455,7 +455,7 @@ label ashley_classical_concert_date_label():
     the_person "Okay. Bye Steph!"
     $ scene_manager.hide_actor(stephanie)
     mc.name "Shall we?"
-    #TODO find concert hall background image to change to.
+    $ show_concert_hall_background()
     "You step into the concert hall, show your tickets, and make you way to your seats."
     $ scene_manager.update_actor(the_person, position = "sitting")
     "You have a few minutes before the concert starts, so you try making some small talk."
@@ -481,7 +481,6 @@ label ashley_classical_concert_date_label():
     "When the concert is over, the lights slowly come back on. You let go of her hand as you both start to get up."
     $ scene_manager.update_actor(the_person, position = "stand3")
     "You slowly file out of the concert hall, chatting about the concert."
-    #TODO change to downtown background
     $ mc.change_location(downtown)
     $ mc.location.show_background()
     "When you get outside, [the_person.title] looks around."
@@ -501,7 +500,7 @@ label ashley_classical_concert_date_label():
     the_person "Steph! We had a great time. The performers were amazing..."
     stephanie "And I assume you were a perfect gentleman?"
     "[stephanie.title] gives you a look. She smiles, but you can tell she is genuinely protective of [the_person.title]."
-    mc.name "As always, [stephanie.name]."
+    mc.name "As always, [stephanie.fname]."
     the_person "He really was. Thanks again [the_person.mc_title]!"
     "It's late, so you all agree to part ways."
     mc.name "Alright, don't forget work tomorrow. I'll see you both then."
@@ -535,7 +534,7 @@ label ashley_porn_video_discover_label():
     "She turns and puts her ass right in his face. She starts to ride his face roughly."
     $ mc.change_locked_clarity(10)
     "[the_person.possessive_title] strokes the guy a little bit, but basically ignores his cock as she rides his face."
-    "She does this for several minutes, until she starts to moan and really ride the guy roughly. Her moans get loud, sounds like she is finishing."
+    "She does this for several minutes, until she starts to moan and really ride the guy roughly. Her moans get loud, it sounds like she is finishing."
     $ scene_manager.update_actor(the_person, position = "cowgirl")
     "She turns around and puts a condom on the guy. She starts to tease him."
     the_person "You want this in my pussy, bitch? Yeah right... like you deserve that."
@@ -547,7 +546,7 @@ label ashley_porn_video_discover_label():
     the_person "Pathetic... maybe someday I'll let you touch me... but not today, that's for sure!"
     $ scene_manager.clear_scene()
     "Wow... shy [the_person.title]..."
-    "This seems pretty crazy. She seems to some kind of closet dom? It's hard to believe."
+    "This seems pretty crazy. She seems to be some kind of closet dom? It's hard to believe."
     "She is so quiet... there's no way you can talk to her about it yet. Maybe you should bring it up with [stephanie.title] first?"
     $ stephanie.add_unique_on_talk_event(ashley_ask_sister_about_porn_video)
     $ ashley.event_triggers_dict["porn_discovered"] = True
@@ -564,7 +563,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     if the_person.sluttiness > 50:
         "As she sits down, you notice [the_person.possessive_title]'s posture. She is sticking her chest out. She probably thinks you brought her to your office for some... personal time."
         $ mc.change_locked_clarity(20)
-    mc.name "I wanted to talk to you again, about your sister, [ashley.name]."
+    mc.name "I wanted to talk to you again, about your sister, [ashley.fname]."
     the_person "Oh!... right..."
     if the_person.sluttiness > 50:
         "Her back slumps noticeably when you say that."
@@ -651,7 +650,7 @@ label ashley_ask_about_porn_label(the_person):
     the_person "The, umm... the video. Did you watch the whole thing?"
     mc.name "Yeah... yeah I did."
     "She looks a little sheepish, but continues."
-    the_person "Did... you know... you like it?"
+    the_person "Did you... you know... like it?"
     "Wow, the conversation appears to be turning quickly."
     mc.name "I did. You're very sexy."
     "She gets a wide smile on her face."
@@ -676,7 +675,7 @@ label ashley_ask_about_porn_label(the_person):
     the_person "Mmmm, I can tell you want it too!"
     "[the_person.title] has some skilled hands... You close your eyes and enjoy her stroking you for a moment."
     $ mc.change_locked_clarity(20)
-    "You hear a zipper some fabric rustle for a moment, then suddenly feel her warm hand on your dick, skin to skin. You look down and see her pulling your dick out."
+    "You hear a zipper, some fabric rustles for a moment, then suddenly you feel her warm hand on your dick, skin to skin. You look down and see her pulling your dick out."
     if the_person.has_taboo("touching_penis"):
         the_person "Oh my god... it's so big... You've been hiding this from me, [the_person.mc_title]?"
         "She gives you a couple eager strokes. You can only moan in response. It feels good to finally feel her hands on you."
@@ -771,7 +770,7 @@ label ashley_post_handjob_convo_label(the_person):
     if ashley_steph_relationship_status() == "stephanie":
         the_person "Well... I mean... we're sisters, so we talk about everything. Ever since you started the business up, she's been talking about you, almost non-stop..."
         the_person "She definitely has a thing for you... it would be wrong for me to let you pursue anything further with me..."
-        mc.name "I understand that, but isn't what I want important too? I've known Stephanie for years, but I've only just recently met you."
+        mc.name "I understand that, but isn't what I want important too? I've known [stephanie.fname] for years, but I've only just recently met you."
         the_person "I... I guess..."
     elif ashley_steph_relationship_status() == "ashley":
         the_person "Yeah... I mean, I guess this whole thing has just happened really fast, but I would be lying if I said it wasn't exciting me."
@@ -790,10 +789,10 @@ label ashley_post_handjob_convo_label(the_person):
         "Let's keep us secret":
             mc.name "I think I know what to do, where we can all be happy."
             the_person "Oh?"
-            mc.name "Alright, let me explain the whole thing before you make up your mind. What if we keep things between us strictly physical, and don't tell [stephanie.name]?"
+            mc.name "Alright, let me explain the whole thing before you make up your mind. What if we keep things between us strictly physical, and don't tell [stephanie.fname]?"
             the_person "Errrm... you want to do what now?"
             $ the_person.change_stats(love = -5, happiness = -5, obedience = 5)
-            mc.name "Look, [stephanie.name] was the one in the first place that told me to ask you out. She wants you to be happy, and I think she knows you're going through a dry spell."
+            mc.name "Look, [stephanie.fname] was the one in the first place that told me to ask you out. She wants you to be happy, and I think she knows you're going through a dry spell."
             mc.name "I'll help take care of your physical needs... then if you happen to find another guy or if things with your sister don't work out..."
             the_person "I don't know... I'm not sure I'll be able to lie to her about this..."
             mc.name "You don't have to lie about it, just don't talk about it. It'll be just like friends with benefits... but just between you and me."
@@ -808,7 +807,7 @@ label ashley_post_handjob_convo_label(the_person):
             $ assign_jealous_sister_role(the_person, stephanie)
         "I want to be friends with both of you" if ((ashley_steph_relationship_status() == "both" or mc.charisma > 4) and not stephanie.is_girlfriend()):
             mc.name "There are a lot of feelings going on right now, but I think we all need to calm down a bit."
-            mc.name "[stephanie.name] and I go back a ways, but I just think of her as a friend."
+            mc.name "[stephanie.fname] and I go back a ways, but I just think of her as a friend."
             mc.name "I'm not going to lie, I really enjoy the way things are developing between us... but I have to be honest. I'm not looking to get tied down right now."
             the_person "Ahh... I see..."
             mc.name "I understand though, that everyone has needs. If you want some help relieving sexual tension, I'd be glad to help you out whenever you need it."
@@ -833,25 +832,25 @@ label ashley_stephanie_arrange_relationship_label(the_person):
     "It's time to talk to [the_person.title]. You approach her in the lab."
     mc.name "Hey, we need to chat. Can you come with me to my office?"
     the_person "Sounds good."
-    "You walk to your office. She enters first, and you close the door behind your you both take a seat."
+    "You walk to your office. She enters first, and you close the door behind your back as you both take a seat."
     $ ceo_office.show_background()
     $ the_person.draw_person(position = "sitting")
-    mc.name "So, I want to talk to you about me and [ashley.name]..."
+    mc.name "So, I want to talk to you about me and [ashley.fname]..."
     the_person "Yeah, I figured. Look, I know, I encouraged the whole thing, so I shouldn't be surprised when you two were messing around..."
     if ashley_is_secret_path():
-        mc.name "It's not like that, [the_person.title]. Me and [ashley.name] got caught up in the moment, yes, but we've talked it over and decided to be just friends."
+        mc.name "It's not like that, [the_person.title]. Me and [ashley.fname] got caught up in the moment, yes, but we've talked it over and decided to be just friends."
         "You feel a little bit bad about trying to keep your relationship with [ashley.possessive_title] a secret, but you're sure if you play your cards right it'll be worth it long term."
         if the_person.is_girlfriend():
             the_person "I have to admit... I'm a little bit relieved to hear that. I thought I was losing my boyfriend! And to my sister!.. we haven't always gotten along, but I was really hoping it hadn't come to that."
             mc.name "I'm sorry for what happened. It won't happen again."
         else:
-            the_person "I... I don't understand... Why aren't you interested in Ashley?"
+            the_person "I... I don't understand... Why aren't you interested in [ashley.fname]?"
             mc.name "It isn't that I'm not interested, as much as that I'm currently interested in someone else..."
             "You give [the_person.title] a wink. When she realizes what you mean, she blushes."
             the_person "Oh wow, I didn't realize that you felt the same way... Oh [the_person.mc_title]... Can we just make it official? I want everyone to know that I'm your girlfriend!"
             "Realizing that your plan to keep things secret with [ashley.title] isn't going to work unless you take things further with [the_person.title], you agree."
             mc.name "Here, let me do this, officially. [the_person.title], will you be my girlfriend?"
-            the_person "Yes! Oh yay! I thought for sure you were gonna get with Ashley... I was so jealous... When I saw..."
+            the_person "Yes! Oh yay! I thought for sure you were gonna get with [ashley.fname]... I was so jealous... When I saw..."
             $ the_person.add_role(girlfriend_role)
             mc.name "I'm sorry, it won't happen again."
         the_person "... I guess I should warn you about this. This isn't the first time this has happened..."
@@ -864,14 +863,14 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         mc.name "Thank you for letting me know."
         "[the_person.title] jumps up, you stand up also as she walks around the desk."
         $ the_person.draw_person(position = "kissing")
-        "You puts her arms around her and you pull her close. You bring your face to hers and you kiss for a few moments. She slowly steps back."
+        "You puts your arms around her and you pull her close. You bring your face to hers and you kiss for a few moments. She slowly steps back."
         $ the_person.draw_person(position = "stand2")
         the_person "Alright... I'm going to get back to work. I'm so glad we got to talk!"
         "As [the_person.possessive_title] leaves the room, you wonder if you are being smart. Keeping your relationship with her sister secret, even it's only physical, might be difficult."
     elif ashley_is_fwb_path():
-        mc.name "I know it seems like things between [ashley.name] and I are moving really fast, but I want you to know it probably isn't what you are thinking."
+        mc.name "I know it seems like things between [ashley.fname] and I are moving really fast, but I want you to know it probably isn't what you are thinking."
         the_person "Oh? I mean... You went on a date and then she was giving you a handjob in your office..."
-        mc.name "[ashley.name] is an interesting girl, for sure, but I'm not interested in a relationship with her. We both have some physical needs, so we've decided to be friends... With benefits..."
+        mc.name "[ashley.fname] is an interesting girl, for sure, but I'm not interested in a relationship with her. We both have some physical needs, so we've decided to be friends... With benefits..."
         if the_person.love > 50:
             the_person "Wow... Okay... I did not see that coming."
         if the_person.has_taboo("vaginal_sex"):
@@ -889,7 +888,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         if the_person.love > 50:
             "[the_person.title] is looking down, not making eye contact. You know she has feelings for you also, and is struggling with your newfound affection for her sister."
             the_person "That's... I mean, I guess I'm a good matchmaker, eh? I encouraged the whole thing, I shouldn't be surprised by it..."
-            mc.name "And thank you for that. If it weren't for you, I never would have met [ashley.name]."
+            mc.name "And thank you for that. If it weren't for you, I never would have met [ashley.fname]."
             the_person "Yeah... Just being honest here... It's hard not to be a little jealous?"
             mc.name "I'm sorry... I'll try not to make things awkward..."
             the_person "I guess that means we probably shouldn't fuck anymore..."
@@ -899,15 +898,15 @@ label ashley_stephanie_arrange_relationship_label(the_person):
             if the_person.sluttiness > 40:
                 the_person "It's going to be hard for me to keep my hands off of you from now on, but my sister deserves it. We may not have always gotten along, but I'm glad she's found someone like you."
             else:
-                "Ash is a special girl, okay? You better take good care of her. We may not have always gotten along, but I'm glad she's found someone to make her happy."
+                the_person "Ash is a special girl, okay? You better take good care of her. We may not have always gotten along, but I'm glad she's found someone to make her happy."
         mc.name "Thank you. It means a lot to get your approval of this."
         $ the_person.draw_person(position = "stand2")
         "[the_person.possessive_title] stands up and smiles. It looks a little forced, but she's trying to be genuine."
         the_person "Thank you for this chat. I feel better knowing what is going on with you two. Now... I think I'll get back to work?"
         "[the_person.title] turns and leaves your office. Things got a little sticky there, but you feel like you are now in the clear to pursue things with [ashley.title] from now on."
     $ clear_scene()
-    $ stephanie.set_schedule(coffee_shop, the_days = [6], the_times = [0])
-    $ ashley.set_schedule(coffee_shop, the_days = [6], the_times = [0])
+    $ stephanie.set_override_schedule(coffee_shop, the_days = [6], the_times = [0])
+    $ ashley.set_override_schedule(coffee_shop, the_days = [6], the_times = [0])
     $ ashley.add_unique_on_room_enter_event(ashley_stephanie_saturday_coffee_intro)
     call advance_time from _call_advance_ashley_arrangement_01
     return
@@ -918,10 +917,10 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     $ scene_manager.add_actor(the_person, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(stephanie, position = "sitting")
     $ mc.business.add_mandatory_crisis(ashley_blows_during_meeting)
-    "As you are walking downtown, you pass by the coffee shop. Looking inside, you are surprised to see Ashley and Stephanie sitting inside."
+    "As you are walking downtown, you pass by the coffee shop. Looking inside, you are surprised to see [ashley.fname] and [stephanie.fname] sitting inside."
     "You decide to step inside and say hello."
     mc.name "Hey girls, good to see you."
-    "They are surprised to see you. Ashley blushes and looks down at her coffee as Stephanie responds."
+    "They are surprised to see you. [ashley.fname] blushes and looks down at her coffee as [stephanie.fname] responds."
     stephanie "Hey boss! Me and Ash are just having a cup of coffee before we go our separate ways. It's kind of become our little tradition every Sunday morning, since she moved in with me."
     "She looks over at her sister and starts to tease her."
     stephanie "I think she said something about hitting up the gym today... I think there's a guy she's trying to impress!"
@@ -946,13 +945,13 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     "You order your coffee, and soon the hot brew is in your hand. As you walk back to the table, you decide to use the opportunity to try and get to know them both a little better."
     "The sisters are sitting opposite to each other at the booth... Who should you sit next to?"
     menu:
-        "[the_person.name]" if not ashley_is_secret_path():    #Depending on previous choices, MC may have to sit next to a particular girl.
+        "[the_person.fname]" if not ashley_is_secret_path():    #Depending on previous choices, MC may have to sit next to a particular girl.
             "[the_person.possessive_title] scoots over to give you room to sit next to her. She sneaks a peek at you and you see a slight smile on her lips."
             $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .1, zoom = 1.1))
             $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.1, zoom = 0.9))
             $ the_person.change_stats(love = 3, happiness = 5)
             $ ashley_set_coffee_partner(the_person)
-        "[stephanie.name]" if not ashley_is_normal_path():
+        "[stephanie.fname]" if not ashley_is_normal_path():
             "[stephanie.possessive_title] scoots over so you have room to sit next to her."
             stephanie "Have a seat, [stephanie.mc_title]."
             $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.1, zoom = 0.9))
@@ -974,7 +973,7 @@ label ashley_stephanie_saturday_coffee_intro_label(the_person):
     "You stand up and both girls also get up."
     mc.name "Thank you for the pleasant morning. You two have a good day."
     stephanie "You bet boss! We do this pretty much every Sunday. Feel free to join us!"
-    "[stephanie.possessive_title]'s invitation is tempting. [the_person.title] is smiling at you, clearly mirroring her sisters invitation to join again."
+    "[stephanie.possessive_title]'s invitation is tempting. [the_person.title] is smiling at you, clearly mirroring her sister's invitation to join again."
     stephanie "Next week you're buying the coffees though!"
     mc.name "That's acceptable. With us all being employees, I'll just put it down as a company expense."
     "You say your goodbyes and go separate ways. This could be an interesting opportunity in the future to learn more about the sisters."
@@ -1024,18 +1023,18 @@ label ashley_stephanie_saturday_coffee_recur_label(the_person):
     else:
         "The sisters are sitting opposite to each other at the booth... Who should you sit next to?"
         menu:
-            "[the_person.name]":    #Depending on previous choices, MC may have to sit next to a particular girl.
+            "[the_person.fname]":    #Depending on previous choices, MC may have to sit next to a particular girl.
                 "[the_person.possessive_title] scoots over to give you room to sit next to her. She sneaks a peek at you and you see a slight smile on her lips."
                 $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = .1, zoom = 1.1))
                 $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = -.1, zoom = 0.9))
                 $ the_person.change_stats(love = 3, happiness = 5)
                 $ ashley_set_coffee_partner(the_person)
-            "[stephanie.name]":
+            "[stephanie.fname]":
                 "[stephanie.possessive_title] scoots over so you have room to sit next to her."
                 stephanie "Have a seat, [stephanie.mc_title]."
                 $ scene_manager.update_actor(stephanie, display_transform = character_right(yoffset = -.1, zoom = 0.9))
                 $ scene_manager.update_actor(the_person, display_transform = character_center_flipped(yoffset = .1, zoom = 1.1))
-                "She pats the seat next to her. You sit down and see her smirking at you before she keeps talking to her sister."
+                "She pats the seat next to her. You sit down and see her smirking at you as she keeps talking to her sister."
                 $ stephanie.change_stats(love = 3, happiness = 5)
                 $ ashley_set_coffee_partner(stephanie)
     "As you sit down, the girls are sharing their plans for the weekend. You take a few sips of your coffee enjoying the flavor."
@@ -1078,7 +1077,7 @@ label ashley_second_concert_intro_label(the_person):
     "[stephanie.possessive_title] gives you a little wink and puts her hand on your thigh. Suddenly [the_person.title] speaks up."
     the_person "Yes!!! Oh my god, Steph! I need to borrow your boyfriend tonight!"
     stephanie "I... errrmm... I guess?"
-    the_person "The Los Angeles Philharmonic had sold out for the show tonight... fucking scalpers... but this morning they release a bunch of extra tickets. I managed to grab two!"
+    the_person "The Los Angeles Philharmonic had sold out for the show tonight... fucking scalpers... but this morning they released a bunch of extra tickets. I managed to grab two!"
     stephanie "Ok... but... why do you need to borrow my boyfriend?"
     the_person "I mean, I know you hate going to classical shows, and I don't know anyone else who would want to go... Please? It's just one night!"
     "[stephanie.title] mumbles something under her breath. She is clearly not happy with the situation, but relents."
@@ -1087,7 +1086,7 @@ label ashley_second_concert_intro_label(the_person):
     stephanie "Don't let her get handsy with you again..."
     "[stephanie.possessive_title]'s hand moves to your crotch, giving it a couple quick strokes."
     $ mc.change_locked_clarity(10)
-    stephanie "I know she's hot, but your MY boyfriend. Got it?"
+    stephanie "I know she's hot, but you're MY boyfriend. Got it?"
     "Well, sounds like the two sisters have made plans for you tonight. From the excitement on [the_person.title]'s face, you decide to go with it."
     "You nod at [stephanie.title]."
     mc.name "Sounds good. When do you want to meet [the_person.title]?"
@@ -1115,11 +1114,11 @@ label ashley_second_concert_date_label():
     $ the_person.apply_outfit(the_person.planned_outfit)
     $ the_person.event_triggers_dict["second_date_complete"] = True
     "Evening falls and soon it is time to make your way downtown to meet [the_person.title], your girlfriend's sister, for a date to another classical music concert."
-    "Things with the two girls have gotten complicated. Ashley has been able to keep things between you a secret from her sister, but is getting more and more demanding and needy."
+    "Things with the two girls have gotten complicated. [ashley.fname] has been able to keep things between you a secret from her sister, but is getting more and more demanding and needy."
     "Lately it seems like [stephanie.title] is getting a little suspicious, and [the_person.possessive_title]'s demand to share you for a date is certain to have her unsettled."
     $ mc.change_location(downtown)
     $ mc.location.show_background()
-    "When you arrive, you looked around for a minute, but don't see Ashley yet at your agreed on meeting place. You decide to give her a few minutes. You are just about to pull out your phone and text her when you see her approaching."
+    "When you arrive, you looked around for a minute, but don't see [ashley.fname] yet at your agreed on meeting place. You decide to give her a few minutes. You are just about to pull out your phone and text her when you see her approaching."
     "She is wearing a sexy black dress, and your eyes are immediately drawn to its curves. There's not a doubt in your mind that [the_person.title] has something planned for you this evening..."
     $ mc.change_locked_clarity(20)
     $ the_person.draw_person()
@@ -1130,7 +1129,7 @@ label ashley_second_concert_date_label():
     mc.name "Are we still going to the concert?"
     ashley "Of course! I wasn't lying, and I'll be damned if I miss the opportunity to see the Los Angeles Philharmonic. Tickets weren't cheap you know! And my cheapskate boss barely pays me enough to cover the cost of living."
     "Wow, she is pretty sassy this evening. You tease each other a bit more but make your way into the concert."
-    #[Change background]
+    $ show_concert_hall_background()
     "As you take your seats, you try and fit in one last remark."
     mc.name "I would think as an intern, YOU should be the one on your knees under the desk servicing the boss during the workday, not the other way around."
     "A couple people near you give you a questioning look, but seem relieved when [the_person.title] starts to laugh."
@@ -1141,11 +1140,11 @@ label ashley_second_concert_date_label():
     "But with the serums... Maybe you could eventually convince the two girls that they can both get what they want? You decide to plant that seed now, and see how she reacts."
     mc.name "You know what? I can't wait."
     ashley "Oh? What for?"
-    mc.name "When we can go do stuff like this more often, then go back to your place after, and me, you, and Stephanie all hop in bed together and screw until the sun comes up."
+    mc.name "When we can go do stuff like this more often, then go back to your place after, and me, you, and [stephanie.fname] all hop in bed together and screw until the sun comes up."
     ashley "Ha! Oh wow. You've been watching some good porn lately huh? I don't think Steph is really the sharing type... I'm usually not either..."
     mc.name "And yet, here you are, with your sister's boyfriend. Maybe you just haven't met someone worth sharing before?"
     "[the_person.title] is quiet. Right on cue, the lights turn down and the music begins."
-    #[Change lighting to dark]
+    $ show_concert_hall_background(darken = True)
     "The music begins, playing through some classical music that you aren't familiar with, but it is quite enjoyable. When you look over at [the_person.possessive_title] she seems to be really enjoying herself."
     "After a while, as the music goes through a crescendo, you feel her squeeze your hand, then turn it over, so her palm is against the back of your hand."
     "She puts your hand on her leg, then slowly starts to push it up, under her dress..."
@@ -1172,20 +1171,20 @@ label ashley_second_concert_date_label():
     "You slowly pull your hand away from her crotch. It's been wet with her arousal for so long it's starting to get a little wrinkled. She opens her clutch and starts to pull out a handkerchief, but you have another idea."
     "You bring it to your mouth and taste it. Her flavor is musky but sweet. You can't wait to taste the source."
     "[the_person.title] just watches as you clean your fingers."
-    # change lighting
+    $ show_concert_hall_background()
     "The lights come back on and people start to get up. You can see [ashley.title]'s chest rising and falling rapidly. She is breathing heavy and is really turned on."
     $ the_person.draw_person()
     mc.name "Well, I promised to get you home straight away."
     "You give her a wink as you say it. She chuckles and winks back."
     $ mc.change_location(downtown)
     $ mc.location.show_background()
-    "You step outside and start to walk her home. However, as you pass an empty alleyway, you feel her hand tug at your as she drags you back the alley."
+    "You step outside and start to walk her home. However, as you pass an empty alleyway, you feel her hand tug at yours as she drags you back into the alley."
     "You both take a quick look around. Certain that you are alone, you push her up against the wall."
     $ the_person.draw_person(position = "kissing")
     "[the_person.possessive_title] moans as you kiss her neck. You feel her hands on your shoulders, pushing you down on your knees."
     "You go with it. You're sure that after all that edging, she is probably close to cumming anyway."
     $ the_person.draw_person(position = "against_wall")
-    "[the_person.title] props her leg up on a box, giving you easy access to her cunt. As you start to lick along the inside her thighs, she runs her hands through you hair."
+    "[the_person.title] props her leg up on a box, giving you easy access to her cunt. As you start to lick along the inside of her thighs, she runs her hands through your hair."
     the_person "Mmm, do a good job and I'll repay the favor..."
     "If you do good, she'll probably repay you. But you should be careful, you still have to go see [stephanie.possessive_title] later! If you make it too obvious, she'll probably know something is up..."
     call fuck_person(the_person, start_position = standing_cunnilingus, skip_intro = True, position_locked = True, private = True) from _call_sex_description_ashley_second_date_cunnilingus_01
@@ -1194,12 +1193,11 @@ label ashley_second_concert_date_label():
     if the_report.get("girl orgasms", 0) == 0:
         $ the_person.draw_person()
         "[the_person.title] puts her leg down. She is incredulous."
-        the_person "Seriously? [stephanie.name] really has you wrapped around her finger, doesn't she? I don't know why I bother with you..."
+        the_person "Seriously? [stephanie.fname] really has you wrapped around her finger, doesn't she? I don't know why I bother with you..."
         $ the_person.change_stats(happiness = -10, obedience = -5)
         "She seems pretty pissed you couldn't even get her off."
     elif the_report.get("girl orgasms", 0) == 1:
         $ the_person.draw_person()
-
         "[the_person.title] puts her leg down. She gives you a little smile."
         the_person "Mmm... not bad... but honestly, I was expecting more."
         menu:
@@ -1233,7 +1231,6 @@ label ashley_second_concert_date_label():
                 "[the_person.possessive_title] pulls a couple wipes from her clutch and wipes herself clean."
     elif the_report.get("girl orgasms", 0) == 2:
         $ the_person.draw_person(position = "kissing")
-
         "When you finish, you start to stand up. [the_person.possessive_title]'s legs are a little wobbly, and she reaches out for you for support."
         the_person "Fuck that was nice... you made me cum twice!"
         "You lean in and start to make out. Her tongue searches out yours eagerly, tasting herself on your tongue. You make out for several seconds before she backs away."
@@ -1249,7 +1246,7 @@ label ashley_second_concert_date_label():
                 $ the_person.draw_person(position = "blowjob")
                 "As she gets down on her knees, she quickly undoes your zipper and pulls your cock out."
                 "She gives it a couple strokes, then looks up at you and smiles."
-                the_person "You'd probably better cum in my mouth... don't want to get it all over my clothes before we go back and see [stephanie.name]."
+                the_person "You'd probably better cum in my mouth... don't want to get it all over my clothes before we go back and see [stephanie.fname]."
                 $ mc.change_locked_clarity(30)
                 $ date_outcome = "blowjob"
                 "You put your hand on the back of her head."
@@ -1284,8 +1281,8 @@ label ashley_second_concert_date_label():
                         $ date_outcome = "raw sex"
                         $ mc.condom = False
                         "You growl at [the_person.possessive_title]."
-                        mc.name "You let me worry about [stephanie.name]."
-                        "Without waiting further response, you line yourself up and push your cock into [the_person.title]'s drenched pussy."
+                        mc.name "You let me worry about [stephanie.fname]."
+                        "Without waiting for further response, you line yourself up and push your cock into [the_person.title]'s drenched pussy."
                     "Put on a condom":
                         $ date_outcome = "protected sex"
                         $ mc.condom = True
@@ -1310,11 +1307,9 @@ label ashley_second_concert_date_label():
                         "[the_person.possessive_title]'s face is covered in your cum. Somehow, it doesn't seem like any of it got on her dress..."
                     else:
                         "[the_person.possessive_title]'s face is covered in your cum. Thankfully her dress came off at some point, so no cum dripped on it."
-
-
             "Help her recover":
                 mc.name "I understand. Here, let me help you."
-                "You grab her arm and help her stand. It takes her several minutes, but finally gets her legs back."
+                "You grab her arm and help her stand. It takes her several minutes, but she finally gets her legs back."
                 $ the_person.draw_person()
     if date_outcome:
         if cum_clue:
@@ -1385,7 +1380,7 @@ label ashley_second_concert_date_label():
             "Make up an excuse (Lie)":
                 mc.name "No, but I have to be honest about something."
                 stephanie "Oh? About what?"
-                mc.name "I was little worried I might get tempted... so I masturbated beforehand."
+                mc.name "I was a little worried I might get tempted... so I masturbated beforehand."
                 stephanie "Oh! I guess that makes sense..."
                 "She starts to suck on your cock again. You think she bought your excuse."
                 "Her tongue swirls all around you, licking up your pre-cum and soon you are hard as a rock."
@@ -1443,10 +1438,10 @@ label ashley_second_concert_date_label():
 
 
     if caught_ashley_cheating:
-        the_person "I can't believe it... you promised!!!"
+        stephanie "I can't believe it... you promised!!!"
         $ the_person.change_love(-50)
         mc.name "I..."
-        the_person "You should go."
+        stephanie "You should go."
         "There is probably no way for you to patch things up right now... You decide to do as she asks."
         "You gather your stuff and leave."
         $ mc.business.add_mandatory_crisis(ashley_steph_second_date_confrontation)
@@ -1560,10 +1555,10 @@ label ashley_blows_during_meeting_label():
     mc.name "Yes, sorry, please continue."
     "[ashley.possessive_title] takes you in her mouth again as her sister continues to talk about the serum issue."
     "[ashley.title]'s soft mouth is working your shaft hard. There is no way you don't cum soon."
-    stephanie "Actually, maybe if homogenized the base before we mixed in the catalyst, that would help..."
+    stephanie "Actually, maybe if I homogenized the base before we mixed in the catalyst, that would help..."
     mc.name "Yes I think that sounds... good..."
     $ mc.change_locked_clarity(40)
-    "You put your hand on [ashley.possessive_title]'s head again and force her down again as you start to cum, right down her throat."
+    "You put your hand on [ashley.possessive_title]'s head and force her down again as you start to cum, right down her throat."
     $ ashley.cum_in_mouth()
     $ scene_manager.update_actor(ashley)
     "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
@@ -1596,11 +1591,11 @@ label ashley_sneaks_over_label():
         the_person.event_triggers_dict["sneaks_over_complete"] = True
 
     "After a long day, you sit down at your computer to work on a couple things before bedtime."
-    "After getting through some emails, you phone vibrates."
+    "After getting through some emails, your phone vibrates."
     $ mc.start_text_convo(the_person)
     the_person "Hey, are you busy?"
     mc.name "Not really. Whats up?"
-    the_person "Good. I'm outside, can I come in?."
+    the_person "Good. I'm outside, can I come in?"
     $ mc.end_text_convo()
     "She's what? How does she even know where you live?"
     $ hall.show_background()
@@ -1617,25 +1612,25 @@ label ashley_sneaks_over_label():
         the_person "I know it was both of us messing around, but I started a lot of it, so..."
         the_person "I'm sorry."
         $ the_person.change_obedience(20)
-        mc.name "It's okay. I'm not sure what is going to happen with [stephanie.name], but I'm hopeful I can patch things up somehow."
+        mc.name "It's okay. I'm not sure what is going to happen with [stephanie.fname], but I'm hopeful I can patch things up somehow."
         "[the_person.possessive_title] nods in understanding."
         the_person "So you really like her too..."
         mc.name "Yes."
         the_person "I understand that, I really do. But tonight... I'm here. Maybe for one night, we could just like, pretend?"
-        the_person "I know I'm just a booty call to you, but can I spend the night tonight? And treat me the way you treated her?"
+        the_person "I know I'm just a booty call to you, but can I spend the night tonight? And would you treat me the way you treated her?"
     else:
-        the_person "So, ever since our date the other night, I can't stop thinking about how how it was."
-        the_person "I'm so tired of the subterfuge... I swiped [stephanie.name]'s phone and got your address from it and saw you didn't have any plans with her tonight..."
+        the_person "So, ever since our date the other night, I can't stop thinking about how it was."
+        the_person "I'm so tired of the subterfuge... I swiped [stephanie.fname]'s phone and got your address from it and saw you didn't have any plans with her tonight..."
         mc.name "[the_person.title]..."
         the_person "I get it, that you and Steph are like, banging each other's brains out every chance you get."
         the_person "I understand that, I really do. But tonight... I'm here. Maybe for one night, we could just like, pretend?"
-        the_person "I know I'm just a booty call to you, but can I spend the night tonight? And treat me the way you treat her?"
+        the_person "I know I'm just a booty call to you, but can I spend the night tonight? And can you treat me the way you treat her?"
     "Obviously [the_person.possessive_title] has been having jealousy issues for a while, but you assumed they were mostly physical needs."
     "Now, she's exposing her real feelings, and it seems she's caught feelings for you that run deeper than just sex."
     $ mc.energy = mc.max_energy
     $ mc.change_locked_clarity(20)
-    "Seeing her expose herself in this way gives you a burst of energy. She want's the girlfriend treatment? You can give it to her."
-    mc.name "Of course you can stay the night. Don't get mad at me though if [stephanie.name] get's suspicious when you have trouble walking tomorrow."
+    "Seeing her expose herself in this way gives you a burst of energy. She wants the girlfriend treatment? You can give it to her."
+    mc.name "Of course you can stay the night. Don't get mad at me though if [stephanie.fname] gets suspicious when you have trouble walking tomorrow."
     $ the_person.change_stats(happiness = 10, love = 3)
     the_person "Me? You'll be lucky if you can get out of bed at all tomorrow!"
     $ the_person.draw_person(position = "against_wall")
@@ -1703,7 +1698,7 @@ label ashley_sneaks_over_label():
         the_person "What would you do if I just sat on it right now? Not even a condom between us?"
         mc.name "Sounds hot. Do it."
         if the_person.wants_creampie():
-            the_person "What if I can't stop and pull off in time? What if I just ride you until you shoot your lode right up inside me?"
+            the_person "What if I can't stop and pull off in time? What if I just ride you until you shoot your load right up inside me?"
             mc.name "Are you on birth control?"
             the_person "Does it matter? Birth control isn't perfect. You could knock me up either way. Do you want to knock up your girlfriend's sister?"
             $ mc.change_arousal(15)
@@ -1714,12 +1709,12 @@ label ashley_sneaks_over_label():
         else:
             the_person "Mmm, god I hope I can pull off in time..."
             $ ashley_sex_goal = "body shot"
-        "[the_person.possessive_title] stops rolling her hips. With one smooth movement she slides you deep raw into her tight cunt."
+        "[the_person.possessive_title] stops rolling her hips. With one smooth movement she slides your raw cock deep into her tight cunt."
     else:
         the_person "Where do you keep your condoms at? I hope you have enough, you're going to need them!"
         "You point to the nightstand. She quickly grabs the box and throws them on the bed after grabbing one."
         $ ashley_sex_goal = "get mc off"
-        "[the_person.possessive_title] rolls it onto you, then points your at her entrance."
+        "[the_person.possessive_title] rolls it onto you, then points you at her entrance."
         $ mc.condom = True
         "[the_person.title] points your cock toward her slit, then starts to rub against it. Her arousal glistens at the tip of the condom as she moves her hips back and forth."
         the_person "Here we go. Round one!"
@@ -1793,7 +1788,7 @@ label ashley_sneaks_over_label():
     "Her ass wiggles a bit back against you."
     the_person "It's nice... I could get used to this..."
     $ the_person.change_happiness(5)
-    "[the_person.title]'s ass wiggle against you soon has you getting hard. She wiggles more when she feels it."
+    "[the_person.title]'s ass wiggling against you soon has you getting hard. She wiggles more when she feels it."
     the_person "One more for the road? No telling if we'll have this chance again..."
     mc.name "Sounds good to me..."
     $ mc.change_locked_clarity(50)
@@ -1852,12 +1847,12 @@ label ashley_steph_drinks_out_label():
 #TODO should this be actions? It would make setting requirements way easier... parse just like  crisis list...
 label coffee_time_innocent_chat_label():
     $ the_person = ashley
-    "The two sisters are chatting about kinds of different things."
-    "Its fun to be in a situation where [the_person.title] opens up and actually... talks..."
+    "The two sisters are chatting about different kinds of things."
+    "It's fun to be in a situation where [the_person.title] opens up and actually... talks..."
     $ overhear_topic = the_person.get_random_opinion(include_sexy = False)
     $ text_one = person_opinion_to_string(the_person, overhear_topic)[1]
     $ text_two = get_topic_text(overhear_topic)
-    the_person "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+    the_person "... but yeah, I'm not sure he realizes I [text_one] [text_two]."
     if the_person.discover_opinion(overhear_topic):
         "Oh! You didn't realize that [the_person.title] felt that way."
     "The girls keep talking. They keep bouncing back and forth between multiple topics. You just listen as you sip your coffee."
@@ -1917,7 +1912,7 @@ label coffee_time_steph_gets_handsy_label():
         "With the public setting of the booth, you don't dare to push things any farther."
         if stephanie.is_girlfriend():
             "[stephanie.title] leans over and whispers in your ear."
-            stephanie "Why don't I come over to your place tonight, and we can do something like this, but with way less clothes..."
+            stephanie "Why don't I come over to your place tonight, and we can do something like this, but with way fewer clothes..."
             $ mc.change_locked_clarity(15)
             menu:
                 "Have her come over" if schedule_sleepover_available():
@@ -1932,7 +1927,7 @@ label coffee_time_steph_gets_handsy_label():
         "You and [stephanie.title] pet each other for a few minutes, but stroking each other through you clothes can only take things so far."
         if stephanie.get_opinion_score("public sex") > 0:
             "She decides to push things further. You feel her hand clumsily reach into your pants, eventually pulling your cock out. The soft skin of her hand feels great."
-            "Not to be outdone, you bring your hand up Stephanie's body, then slowly slide it under her clothes. When you get to her slit, you push you middle finger inside of her, while pressing your palm against her clit."
+            "Not to be outdone, you bring your hand up [stephanie.fname]'s body, then slowly slide it under her clothes. When you get to her slit, you push you middle finger inside of her, while pressing your palm against her clit."
             "She sighs, but doesn't seem particularly concerned about other people around."
             $ mc.change_locked_clarity(20)
         else:
@@ -1945,7 +1940,7 @@ label coffee_time_steph_gets_handsy_label():
             "You and [stephanie.title] continue to pet each other at the booth, sipping your coffees once in a while with your free hands."
             "Across the table, [the_person.title] appears to be completely oblivious. [stephanie.possessive_title] is beginning to squirm as you stroke her g-spot with your finger."
             $ stephanie.change_arousal(30)
-            the_person "So... I'm thinking about going to the spa later treat myself to something... Do you want to go Steph?"
+            the_person "So... I'm thinking about going to the spa later to treat myself to something... Do you want to go Steph?"
             stephanie "Oh!!! Uhh... Yesssss..."
             "[stephanie.title] practically growls. She's getting close and having trouble hanging on. You use the palm of your hand to grip her pussy harder, while your finger runs circles around her g spot."
             $ stephanie.change_arousal(30)
@@ -2025,7 +2020,7 @@ label coffee_time_steph_gets_handsy_label():
             $ stephanie.have_orgasm(half_arousal = False, the_position = "sitting")
             "After several seconds, [stephanie.title] slowly opens her eyes and glances around as you withdraw your hand."
             if ashley_is_fwb_path():
-                "Wow, that looked hot... [the_person.mc_title] will you do something like that to me later?"
+                the_person "Wow, that looked hot... [the_person.mc_title] will you do something like that to me later?"
                 "TODO give hookup option here"
             if stephanie.get_opinion_score("public sex") >= 0 and stephanie.get_opinion_score("giving blowjobs") >= 0 and (stephanie.get_opinion_score("public sex") > 0 or stephanie.get_opinion_score("giving blowjobs") > 0):
                 stephanie "Hey Ash... Can you act natural for a minute and cover me? I need to take care of something..."
@@ -2075,7 +2070,7 @@ label coffee_time_steph_gets_handsy_label():
                 elif ashley_is_fwb_path():
                     the_person "Jesus... Right here? You two are crazy..."
                     "[the_person.title] looks at you with a sparkle in her eye."
-                    "[the_person.mc_title]... Does that mean I get you after this?"
+                    the_person "[the_person.mc_title]... Does that mean I get you after this?"
                     $ mc.change_locked_clarity(20)
                     #TODO Ash gains sluttiness and obedience
                     #TODO [Give mc option to promise to get with Ashley after]
@@ -2243,12 +2238,12 @@ label ashley_clothes_shopping_label(the_person):
         "You say goodbye to [the_person.title] for now."
     elif the_person.jealous_score() > 0:
         "Before she starts to change back, [the_person.title] starts to tease you."
-        the_person "So... I can't help but notice that [stephanie.name] has been getting a lot of attention lately..."
+        the_person "So... I can't help but notice that [stephanie.fname] has been getting a lot of attention lately..."
         $ the_person.strip_outfit(exclude_lower = True)
         $ desc_tuple = the_person.jealous_sister_get_revenge_tuple()
         the_person "[desc_tuple[0]]"
         $ the_person.strip_outfit()
-        the_person "I can't help like feel like it should be my turn to get off..."
+        the_person "I can't help but feel like it should be my turn to get off..."
         "She walks over to you. Sitting on the bench, her cunt is now just inches away."
         $ mc.change_locked_clarity(20)
         $ the_position = cowgirl
@@ -2264,7 +2259,7 @@ label ashley_clothes_shopping_label(the_person):
             $ the_person.reset_all_jealousy()
             $ the_person.change_stats(slut = 1, love = 3)
         else:
-            the_person "Wow, really? You can't give me the same treatment that [stephanie.name] gave you? She got you all worn out?"
+            the_person "Wow, really? You can't give me the same treatment that [stephanie.fname] gave you? She got you all worn out?"
             "She looks pissed."
             $ the_person.change_stats(slut = -1, love = -3)
             $ the_person.jealous_change_score(3) #Add points to jealous score so ashley gets more desperate.
@@ -2310,7 +2305,7 @@ label ashley_test_outfit_scene():
     $ ashley.apply_outfit(new_outfit)
     $ stephanie.apply_outfit(new_outfit)
     $ scene_manager.add_actor(ashley)
-    "[ashley.name] models her new outfits for you."
+    "[ashley.fname] models her new outfits for you."
 
     python:
         del bystander

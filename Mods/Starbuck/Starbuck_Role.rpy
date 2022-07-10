@@ -47,11 +47,11 @@ init 2 python:
 
         starbuck = make_person(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", face_style = "Face_4", tits="E", height = 0.89, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair, skin = "white",
             eyes = ["green",[0.245, 0.734, 0.269, 1.0]], pubes_style = landing_strip_pubes, personality = starbuck_personality, name_color = "#cd5c5c", dial_color = "#cd5c5c", starting_wardrobe = starbuck_wardrobe,  \
-            stat_array = [3,4,3], skill_array = [1,1,4,2,1], sex_array = [3,3,4,4], start_sluttiness = 27, start_obedience = -18, start_happiness = 119, start_love = 0, bonus_suggest = 6, \
-            relationship = "Single", kids = 0, force_random = True, base_outfit = starbuck_base)
+            stat_array = [3,4,3], skill_array = [1,1,4,2,1], sex_skill_array = [3,3,4,4], sluttiness = 27, obedience_range = [70, 85], happiness = 119, love = 0, \
+            relationship = "Single", kids = 0, force_random = True, base_outfit = starbuck_base, type = 'story')
 
         starbuck.generate_home()
-        starbuck.add_job(starbuck_job, job_known = True)
+        starbuck.change_job(starbuck_job, job_known = True)
         starbuck.home.add_person(starbuck)
         make_sex_shop_owner(starbuck)
 
@@ -592,7 +592,7 @@ label starbuck_sex_store_investment_three_label(the_person):
     the_person "Well, I don't know about EVERY thing, but we definitely have a great selection now."
     mc.name "What do you mean?"
     the_person "Well, goodness, there is so much stuff out there, there's no way we could fit it all in this little store. That's why I'm saving up."
-    the_person "The store next to us recently went out of business, once I save up enough money, I'm gonna buy it out and expand my store. Turn this place into [the_person.name]'s MEGA sex shop!"
+    the_person "The store next to us recently went out of business, once I save up enough money, I'm gonna buy it out and expand my store. Turn this place into [the_person.fname]'s MEGA sex shop!"
     "You consider what she is saying."
     mc.name "What kind of stuff could you carry with the extra space that you aren't carrying now?"
     the_person "Oh, well in here we sell mostly accessories, lingerie, that kind of thing, but with more room we could get in all kinds of kinky stuff. Sex furniture, like chairs and swings, massage tables..."
@@ -759,7 +759,7 @@ label starbuck_sex_store_promo_one_label(the_person):
     $ starbuck.draw_person(position = "stand2", emotion = "happy")
     $ the_person.change_arousal(30)
     "The attention you are giving her is really starting to excite [the_person.possessive_title]. You can see her nipples sticking out proudly in her outfit."
-    "The last item for her to model is a dildo. You figure since you are mainly targeting a male audience with this advertisement, a good pose for her would be on her knees, like shes getting ready to put it in her mouth."
+    "The last item for her to model is a dildo. You figure since you are mainly targeting a male audience with this advertisement, a good pose for her would be on her knees, like she's getting ready to put it in her mouth."
     "Which lingerie should you have her use for this?"
     menu:
         "The classic black set":
@@ -909,7 +909,7 @@ label starbuck_sex_store_promo_two_label(the_person):
     "[the_person.possessive_title] starts going over the details of how she wants to do it. You take mental notes. Soon you are ready to begin."
     "You get the camera recording as [the_person.possessive_title] begins her reviews."
     $ the_person.draw_person(position = "stand4")
-    the_person "Hello! This is [the_person.name]! Owner of [the_person.name]'s sex shop, and welcome to my review of the Ramboner dildo by..."
+    the_person "Hello! This is [the_person.fname]! Owner of [the_person.fname]'s sex shop, and welcome to my review of the Ramboner dildo by..."
     "You check to make sure she is in frame. She talks for a few minutes about the quality of the toy."
     the_person "Okay! Time to try it out!"
     $ the_person.draw_person(position = "missionary")
@@ -978,7 +978,7 @@ label starbuck_sex_store_promo_two_label(the_person):
             else:
                 "You get up and start getting dressed. [the_person.possessive_title] calls out to you."
                 the_person "Thank you [the_person.mc_title], for all your help. I wouldn't have made it this far without you."
-            mc.name "Thanks [the_person.title]. It has been a pleasure helping you out. Please let me know if you'd like... help... again in the future with your reviews!"
+            mc.name "Thanks, [the_person.title]. It has been a pleasure helping you out. Please let me know if you'd like... help... again in the future with your reviews!"
             $ the_person.change_stats(love = 5, happiness = 10, slut = 1, max_slut = 50)
             $ perk_system.add_stat_perk(Stat_Perk(description = "Increase vaginal skill after helping Starbuck with her demonstration video. +1 Vaginal Skill", vaginal_bonus = 1, bonus_is_temp =False), "Starbuck Vaginal Bonus")
             "Fucking and pleasing an experienced woman like [the_person.title] makes you feel more confident in your vaginal skills."
@@ -1047,7 +1047,7 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     else:
         the_person "You just gonna watch? Or are you ready to get started?"
     "You walk over and start up the camera. You give her a nod to show her that it's running."
-    the_person "Hello! This is [the_person.name], from [the_person.name]'s Sex Shop! Here to review another couple of products."
+    the_person "Hello! This is [the_person.fname], from [the_person.fname]'s Sex Shop! Here to review another couple of products."
     the_person "Today, we are going to review a couple of products meant for couples! So today I've asked a friend to be here to help me review them..."
     "You step into frame next to [the_person.possessive_title]."
     the_person "This is [the_person.mc_title], and we are going to review some edible underwear by Skinworks, and some neat fuzzy handcuffs by PowerTrips Inc..."
@@ -1066,16 +1066,16 @@ label starbuck_sex_store_promo_three_label(the_person): #Cunnilingus, ends in ro
     "You are starting to make good size holes in the cherry flavored covering. One is close enough to her slit, you are able to snake your tongue through it and along her moist fuckhole."
     $ the_person.change_arousal(10)#20
     $ mc.change_locked_clarity(20)
-    the_person "Oh! Mmm that felt good. These panties would be good if you had a significant other who... maybe doesn't usually like to go down on you..."
+    the_person "Oh! Mmm, that felt good. These panties would be good if you had a significant other who... maybe doesn't usually like to go down on you..."
     "You chew the hole a little wider. You can now access her clit easily through the hole. You take the opportunity to roll her clit between your lips for a few seconds before resuming your panty eating."
     $ the_person.change_arousal(15)#35
-    the_person "Oooohhhhh, he just go through to my clit... Mmmm that feels so good."
+    the_person "Oooohhhhh, he just go through to my clit... Mmmm, that feels so good."
     "[the_person.possessive_title] reaches down and tears a piece off her panties, now giving you almost free reign to eat her pussy."
     the_person "Okay, let's see how they taste..."
     "She takes a bite of the panties, chews and swallows. While she does that you push your tongue deep into her cunt."
     $ the_person.change_arousal(15)#50
     $ mc.change_locked_clarity(30)
-    the_person "Yes! Mmm they actually taste pretty good, I can see why [the_person.mc_title] here is so eager..."
+    the_person "Yes! Mmm, they actually taste pretty good, I can see why [the_person.mc_title] here is so eager..."
     $ strip_choice = the_person.choose_strip_clothing_item()
     $ the_person.draw_animated_removal(strip_choice)
     $ the_person.draw_person(position = "missionary")
@@ -1233,7 +1233,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     $ mc.change_locked_clarity(20)
     the_person "Okay! Let's start with the whip, go ahead and get the camera rolling, and I'll do the introduction."
     "You step over to the camera. When [the_person.possessive_title] is in frame you hit the record button."
-    the_person "Hello! This is [the_person.name], from [the_person.name]'s Sex Shop! Here to review another couple of products."
+    the_person "Hello! This is [the_person.fname], from [the_person.fname]'s Sex Shop! Here to review another couple of products."
     the_person "Today, we are going to review a couple of products meant for those who are look to get things a little... kinkier in the bedroom..."
     "[the_person.possessive_title] talks about the whip she has in her hand. After explaining tips and tricks to proper usage, she cues you."
     the_person "And now, to demonstrate proper usage, I'm going to invite [the_person.mc_title] back to help me demonstrate it..."
@@ -1279,7 +1279,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     "You give her one last spank, just for good measure... You can see her pussy is starting to glisten with excitement."
     $ the_person.draw_person(position = "stand2")
     $ mc.change_locked_clarity(30)
-    the_person "Okay... time to move on. The other thing we have to demonstrate today is... mmm that felt good..."
+    the_person "Okay... time to move on. The other thing we have to demonstrate today is... mmm, that felt good..."
     "[the_person.possessive_title] takes a second to gather her thoughts."
     the_person "We are going to demonstrate proper usage of a special type of strap-on. This strap-on goes around a man and sits just below the penis..."
     "[the_person.possessive_title] explains the basics of the strap-on in her hand. When she gets done talking about it, she gets down on her knees."
@@ -1323,7 +1323,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
         mc.name "But don't worry. If it helps the business grow, there's no reason not to record it. It doesn't make the sex any less meaningful to me. I mean really, you could ask any guy in here to do this stuff..."
         the_person "I can't imagine it though... doing this whole venture with anyone else as my partner. Thank you, [the_person.mc_title]."
     else:
-        the_person "Thanks [the_person.mc_title]. That was amazing... UGH I can barely get up."
+        the_person "Thanks, [the_person.mc_title]. That was amazing... UGH I can barely get up."
         $ the_person.draw_person(position = "stand2", emotion = "happy")
         "[the_person.possessive_title] slowly stands up. Her feet are a bit wobbly."
     "[the_person.possessive_title] rubs her ass a bit where you spanked her earlier."
@@ -1403,7 +1403,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     $ mc.change_locked_clarity(30)
     the_person "Okay! I'm ready to do this! Go ahead and start up the camera, this is gonna be great!"
     "You step behind the camera. You make sure everything is in frame, then hit record. You give [the_person.possessive_title] a thumbs up."
-    the_person "Hello! This is [the_person.name], from [the_person.name]'s Sex Shop! Here to review a new product we've just gotten in to the store!"
+    the_person "Hello! This is [the_person.fname], from [the_person.fname]'s Sex Shop! Here to review a new product we've just gotten in to the store!"
     the_person "Today, I am going to be reviewing the FEMco Sex Swing 3000..."
     "[the_person.possessive_title] starts talking about the swing set. As she talks, she is using hand gestures to illustrate some of the set up methods."
     "Every time she moves her hands back and forth, her amazing tits quiver a bit."
@@ -1425,7 +1425,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     "Turning off the video camera, you turn to [the_person.possessive_title]."
     $ the_person.event_triggers_dict["shop_investment_rate"] = 6.0
     mc.name "Wow, that was good. You are so sexy."
-    the_person "Aww, thanks [the_person.mc_title]. Now, I promised that if you helped me make the video, I'd give you a swing for you to have."
+    the_person "Aww, thanks, [the_person.mc_title]. Now, I promised that if you helped me make the video, I'd give you a swing for you to have."
     mc.name "Thanks, but you don't need to do that."
     the_person "No no, it's okay, I want you to have one... I was thinking... you helped me set up this one, why don't you let me come over and I'll help you set up one?"
     "Hmm, she is offering to come over to your place!"
@@ -1459,7 +1459,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
                 "You see her digging around in her pocket."
                 the_person "Here... I want you to have this. It's a key to my apartment. You don't have to come over if you don't want to, but I just want you to know, you're always welcome in my bed."
                 $ the_person.learn_home()
-                mc.name "Thanks [the_person.title]. It will be nice to be able to share a warm bed with a beautiful woman like you once in a while."
+                mc.name "Thanks, [the_person.title]. It will be nice to be able to share a warm bed with a beautiful woman like you once in a while."
                 $the_person.draw_person(position = "kissing")
                 "She hugs you again and begins kissing you on your neck."
                 the_person "You make me feel so good, [the_person.mc_title]... come visit me soon okay?"
@@ -1546,7 +1546,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
             the_person "Mmm, that was so good, thank you [the_person.mc_title]..."
             "[the_person.possessive_title] rolls off you and lays down on the bed next to you."
         "[the_person.title] doesn't bother to get up, she just cuddles up next to you."
-        the_person "Thanks [the_person.mc_title], I needed that so bad."
+        the_person "Thanks, [the_person.mc_title], I needed that so bad."
         "She stretches her arms out and yawns."
         the_person "I'm worn out! Goodnight!"
         "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
@@ -1591,7 +1591,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
             $ morning_fun_chance = 100 #She didn't finish, so she comes for you in the morning.
         "You lay down on the bed, hopping in the covers."
         "[the_person.title] doesn't bother to get up, she just cuddles up next to you."
-        the_person "Thanks [the_person.mc_title], I didn't know I needed that until you got here."
+        the_person "Thanks, [the_person.mc_title], I didn't know I needed that until you got here."
         "She stretches her arms out and yawns."
         the_person "You wore me out! Goodnight!"
         "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
@@ -1613,7 +1613,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 $ mc.change_locked_clarity(30)
                 mc.name "Have room for me in there?"
                 the_person "Of course! I was hoping you would join me..."
-                "You strip down and enter the shower. [the_person.name] gives you a turn under the hot running water."
+                "You strip down and enter the shower. [the_person.fname] gives you a turn under the hot running water."
                 the_person "Great timing... can you wash my back?"
                 $ mc.change_arousal(10)
                 "She hands you her loofah and you begin to work circles up and down her back. The soap bubbles make her already smooth skin slick and soft."
@@ -1943,7 +1943,7 @@ label starbuck_replay_anal_on_swing_label(the_person):
 label starbuck_cargo_shipment_label(the_person):
     $ the_person.event_triggers_dict["Candi_event_start"] = True
     the_person "Hey partner. I was wondering if I might see you! I just got in some new stock. Want to check it out?"
-    "Normally, going through freight at a mall store would be about the most boring thing you could imagine"
+    "Normally, going through freight at a mall store would be about the most boring thing you could imagine."
     "But this is not just any store! Going through boxes of sex store merchandise with [the_person.possessive_title] actually sounds pretty fun..."
     mc.name "Sure. Let's go take a look."
     "[the_person.title] puts a sign on the counter to ring the bell for service and motions for you to follow her. In the back storage area is a pallet of assorted toys, lingerie, videos, and other sex related items."
@@ -1973,7 +1973,7 @@ label starbuck_cargo_shipment_label(the_person):
     "Of course you know someone like that. [candace.title], the bimbo who you recently convinced to dump her boyfriend and work for you."
     "You aren't sure if she's ever ridden something that big, but you do know she would be up for trying. Now, you just consider how to bring it up with [the_person.title]..."
     mc.name "So... Let's say I knew someone... Who could do a demonstration video for us..."
-    "[the_person.possessive_title] looks at your incredulously."
+    "[the_person.possessive_title] looks at you incredulously."
     the_person "I mean... I guess if there is a woman out there whose super power is taking enormous dildos, but I don't see how any normal person could manage this!"
     mc.name "Well... I have an employee who I sort of recruited from another company."
     mc.name "I don't know all the details of it, but I'm pretty sure she was drugged with something that has what seems to be permanent side effects. Some of which are an enormous sex drive, and the ability to take just about anything..."
@@ -1981,7 +1981,8 @@ label starbuck_cargo_shipment_label(the_person):
     mc.name "Well, unfortunately, it also destroyed most of her common sense. She is basically a dim witted bimbo."
     mc.name "I recruited her from her previous employer because he was taking advantage of her, paying her criminally low wages and forcing her to have sex for his own financial benefit."
     the_person "That's very kind of you... But won't asking her to let us do a demonstration video be basically the same thing?"
-    mc.name "Honestly, I think if we showed it to her, I'm not sure we could stop her from trying it. For sure though, we won't force her to do anything."
+    mc.name "Honestly... I think if we showed it to her... I'm not sure we could stop her from trying it."
+    mc.name "For sure though, we won't force her to do anything."
     mc.name "Maybe I could just bring her out here for a bit? We won't necessarily ask her to do it, but just get a feel for how she might respond. It would only be fair though, that we pay her some for her part in the demo."
     "[the_person.title] considers your proposal for a moment."
     the_person "I guess. Honestly, I kind of like doing the advertising, just me and you, ya know? But I guess once in a while bringing in a little extra talent couldn't hurt."
@@ -2029,7 +2030,7 @@ label starbuck_candace_product_demo_label(the_person):
     "You start to answer but [the_person.possessive_title] immediately starts talking over you."
     the_person "Oh my God I'm more than okay! My boss just brought me here for the first time to this AMAZING PLACE. He said he even knows the owner? Can you believe it!?!"
     "Realization dawns on [starbuck.title]'s face."
-    mc.name "Right. [the_person.name], this is [starbuck.name]. She's the one who owns this shop."
+    mc.name "Right. [the_person.fname], this is [starbuck.fname]. She's the one who owns this shop."
     the_person "Oh my god! It's so good to meet you!"
     $ scene_manager.update_actor(the_person, display_transform = character_center, position = "walking_away", z_order = 2)
     $ scene_manager.update_actor(starbuck, position = "kissing", z_order = 1)
@@ -2113,31 +2114,31 @@ label starbuck_candace_product_demo_label(the_person):
     "You pinch your arm. Yeah! You aren't dreaming this!"
     "[starbuck.possessive_title] puts on the strap-on. You hand her the lube so she can get it ready."
     mc.name "Okay... It would probably be best if [starbuck.title] can be facing the camera since she is the shop owner. [the_person.title] why don't you get down on your hands and knees and she can get behind you?"
-    the_person "Mmm that sounds good. And then you can come over boss and I'll suck your..."
+    the_person "Mmm, that sounds good. And then you can come over, Boss, and I'll suck your..."
     mc.name "I have to run the camera. Maybe when we are done with the video we can have some fun though."
     if starbuck.is_jealous():
         starbuck "Hey now... I'm your girlfriend [starbuck.mc_title], don't be planning anything like that without me!"
     else:
         starbuck "I'll be surprised if you can walk after this hun, but if so I'm sure we can do something fun!"
     $ scene_manager.update_actor(the_person, display_transform = character_center, z_order = 2, position = "cowgirl")
-    "Your [the_person.title] gets into position already wiggling her ass back an forth."
+    "Your [the_person.title] gets into position already wiggling her ass back and forth."
     the_person "I'm ready, stick it in!"
     $ scene_manager.update_actor(starbuck, display_transform = character_right_flipped, z_order = 1, position = "stand3")
     mc.name "Hang on, we have to start the video first. Usually [starbuck.title] does an intro too, then we'll get to the demo."
     the_person "Ugh, fine! What a tease!"
     "Everything appears to be all set up. You give a quick countdown, and then begin the video."
-    starbuck "Hello folks! This is [starbuck.name], from [starbuck.name]'s Sex Shop, here with another demonstration video! This time we are demonstrating the brand new, Double Girth Maxx 5000!"
+    starbuck "Hello folks! This is [starbuck.fname], from [starbuck.fname]'s Sex Shop, here with another demonstration video! This time we are demonstrating the brand new, Double Girth Maxx 5000!"
     "[starbuck.title] has an extra that she picks up and begins to go over the details to the camera."
     starbuck "Have a size queen in your life that won't shut up about big dicks? This double dildo has a full money-back guarantee that it will shut her up! Made with..."
     "You kind of zone out a bit as she goes over the construction and cleaning requirements. You notice [the_person.title] is starting to get a bit impatient also."
     the_person "Hey, are you gonna put that thing in me or not?"
     "[starbuck.title] just smiles and then introduces her assistant."
-    starbuck "Today, to help me with the demonstration, is [the_person.name]. One of my favorite features of this product is the suction cups, which have allowed me to attach it to these!"
+    starbuck "Today, to help me with the demonstration, is [the_person.fname]. One of my favorite features of this product is the suction cups, which have allowed me to attach it to these!"
     $ scene_manager.update_actor(starbuck, display_transform = character_center_flipped, z_order = 1, position = "kneeling1")
     "[starbuck.possessive_title] motions at the strap-on she's fashioned. While moving behind [the_person.possessive_title]."
     starbuck "Now, let's see if that guarantee holds up! Are you ready dear?"
     the_person "About time! I wasn't sure you were ever gonna... OHHHH!"
-    "[the_person.possessive_title]'s eyes go wide as the enormous pair of phallus line up with her holes. [starbuck.title] holds her hips in place as she starts to push. [the_person.title] groans, only managing to sputter a couple of words out."
+    "[the_person.possessive_title]'s eyes go wide as the enormous pair of phalli line up with her holes. [starbuck.title] holds her hips in place as she starts to push. [the_person.title] groans, only managing to sputter a couple of words out."
     the_person "So... full..."
     starbuck "Don't worry dear, it's about halfway in."
     "For a short moment, you think you notice a look of fear on [the_person.possessive_title]'s face, but it quickly changes to resolve."
@@ -2207,7 +2208,7 @@ label starbuck_candace_product_demo_label(the_person):
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
     $ mc.change_locked_clarity(30)
     "[starbuck.possessive_title] arches her back a bit. She steals a glance back at you while you enjoy the warm, slick grip of her pussy."
-    "You both look over at [the_person.title]. She is watching intently and was one hand between her legs, lightly touching herself."
+    "You both look over at [the_person.title]. She is watching intently and has one hand between her legs, lightly touching herself."
     "You put your hands on [starbuck.title]'s hips as you begin to fuck her. She moans and puts her hand on top of yours, encouraging you."
     starbuck "Give it to me [starbuck.mc_title]! I'm so hot from earlier..."
     $ starbuck.change_arousal(20)
@@ -2249,14 +2250,14 @@ label starbuck_candace_product_demo_label(the_person):
     mc.name "Well... I'd call today a complete success. I'm going to go ahead and edit that video while you two recover..."
     $ scene_manager.update_actor(starbuck, position = "stand4")
     $ scene_manager.update_actor(the_person, display_transform = character_center_flipped, position = "stand3")
-    starbuck "Ah... yes that would be good. [the_person.name]... how would you like to help me do more product demos sometime?"
+    starbuck "Ah... yes that would be good. [the_person.fname]... how would you like to help me do more product demos sometime?"
     the_person "Oh. my. god. YES! Yes please!"
     starbuck "What do you think about Saturday? We could even make it a regular thing."
-    "You go over to [starbuck.possessive_title] computer and start to work on the video. The two girls are talking about ideas for new videos."
+    "You go over to [starbuck.possessive_title]'s computer and start to work on the video. The two girls are talking about ideas for new videos."
     "By the time you finish a quick edit of the video, the two girls are talking like old friends. You feel like they have REALLY hit it off!"
     "Of course, sharing a love for sex and all things sex related has really helped."
     mc.name "Alright, the video is done. I'm going to head out now. Need anything before I go?"
-    starbuck "Nope! [the_person.name] and I are going to hang out for a bit. Thanks for bringing her out [starbuck.mc_title]!"
+    starbuck "Nope! [the_person.fname] and I are going to hang out for a bit. Thanks for bringing her out [starbuck.mc_title]!"
     the_person "Yeah! I like... can't believe how amazing today has been!"
     "You turn to leave the two girls as they chat... still naked..."
     "They have become almost instant best friends, and it sounds like they are planning to get together every Saturday here at the shop. Maybe you should swing by and join them sometime?"
@@ -2293,17 +2294,17 @@ label starbuck_candace_recurring_event_label(the_person):
         "You round the corner and see the two girls sitting at a table and chatting."
         $ scene_manager.add_actor(the_person, position = "sitting")
         $ scene_manager.add_actor(candace, position = "sitting", display_transform = character_center_flipped)
-        the_person "Wow! That's amazing. This is so incredible [candace.name]..."
+        the_person "Wow! That's amazing. This is so incredible [candace.fname]..."
         candace "It really is."
         "As you enter the room, the girls notice you."
         the_person "Ah!!! [the_person.mc_title]! The man of the hour!"
         $ scene_manager.update_actor(the_person, position = "kissing")
         "[the_person.title] jumps up and runs over to you, wrapping her arms around you in a huge hug."
-        the_person "I can't believe it! You managed to restore [candace.name]... you know..."
+        the_person "I can't believe it! You managed to restore [candace.fname]... you know..."
         "She lets go of you, then punches you in the arm."
         $ scene_manager.update_actor(the_person, position = "stand2", emotion = "angry")
         the_person "You didn't even tell me! God I feel like we've become almost best friends since you introduced us... and you don't even tell me what you were up to!?!"
-        candace "There was no telling if it would even be effective or not. It was truly groundbreaking [the_person.name]."
+        candace "There was no telling if it would even be effective or not. It was truly groundbreaking [the_person.fname]."
         the_person "I know! I know... I just... I mean that could have gone wrong too, right?"
         candace "I didn't realize it at the time, but in hindsight, I agree that it was worth the risk. I'm very fortunate [candace.mc_title] made the decisions he did!"
         "You see her expression soften."
@@ -2342,12 +2343,12 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
         mc.name "Good evening ladies. Having some coffee?"
         the_person_two "Tea, actually. I brought some oolong tea I got from an Asian market. Would you like some?"
         "You nod. [the_person_two.title] starts to pour you a cup as you come and sit with the two girls."
-        the_person_one "Well [the_person_two.name], so far so good!"
+        the_person_one "Well [the_person_two.fname], so far so good!"
         mc.name "What is so good?"
         the_person_one "She bet that you would show up tonight. We decided to make another bet, one you can help us out with here in a bit..."
         mc.name "Oh? What would that be?"
         "[the_person_two.title] quickly cuts you off."
-        the_person_two "You'll find out, but we weren't supposed to tell you about it yet, were we [the_person_one.name]!?!"
+        the_person_two "You'll find out, but we weren't supposed to tell you about it yet, were we [the_person_one.fname]!?!"
         the_person_one "Right you are honey."
         "[the_person_one.title] shifts in her seat a bit awkwardly."
         $ the_person_one.change_arousal(15)
@@ -2400,7 +2401,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
         the_person_one "Oh! That's the fun part. We bet that whoever could go the longest without cumming or tipping you off to what was going on would win. The winner gets to fuck you while the loser has to watch!"
         $ mc.change_locked_clarity(50)
 
-        the_person_two "Oh man... I wanted to win so bad... But as soon as you sat down and the scent of your cologne hit me it was over. You smell so good and manly... Mmmm"
+        the_person_two "Oh man... I wanted to win so bad... But as soon as you sat down and the scent of your cologne hit me it was over. You smell so good and manly... Mmmm..."
         mc.name "I mean, I'm sure I could probably go a couple rounds..."
 
         the_person_one "Not a chance! She thought she could win but I totally called her bluff and now you are mine!"
@@ -2482,13 +2483,13 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
                     "You step over behind [the_person_one.possessive_title]. You rub her shoulders gently and lean down next to her ear. She gets goosebumps when you whisper."
                     mc.name "Be a good girl and cum for me..."
                     "You lick and nibble at her ear and slowly work your way down her neck."
-                    the_person_one "Ahhh, fuck... I think it's [the_person_two.name]'s turn next!"
+                    the_person_one "Ahhh, fuck... I think it's [the_person_two.fname]'s turn next!"
                     $ the_person_one.change_arousal(the_person_one.get_opinion_score("kissing") + 5)
                 "Kiss [the_person_two.title]'s neck":
                     "You step over behind [the_person_two.possessive_title]. You rub her shoulders gently and lean down next to her ear. She gets goosebumps when you whisper."
                     mc.name "Be a good girl and cum for me..."
                     "You lick and nibble at her ear and slowly work your way down her neck."
-                    the_person_two "Isn't it [the_person_one.name]'s turn now?"
+                    the_person_two "Isn't it [the_person_one.fname]'s turn now?"
                     $ the_person_two.change_arousal(the_person_two.get_opinion_score("kissing") + 5)
                 "Grope [the_person_one.title]'s tits" if the_person_one.tits_available():
                     "You get behind [the_person_one.possessive_title]. You run your hands slowly around he neck, collar, and down until they rest on her chest."
@@ -2634,7 +2635,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
             $ scene_manager.update_actor(the_person_two, position = None, display_transform = character_center_flipped)
             $ scene_manager.update_actor(the_person_one, position = None, display_transform = character_right)
             "After finishing, [the_person_one.title] gets up off of you. You notice [the_person_two.title] has recovered from her earlier orgasm and is standing to the side, watching."
-            the_person_two "God I cum so easily. Next time grope [the_person_two.name] the whole time [the_person_one.mc_title]!"
+            the_person_two "God I cum so easily. Next time grope [the_person_two.fname] the whole time [the_person_one.mc_title]!"
             the_person_one "Resorting to cheating? I bet I could even handle that! Next week?"
             "The girls agree to meet again next week."
             the_person_two "Mmm... I see some cum on you..."
@@ -2649,7 +2650,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
 init 2 python:
     def starbuck_intro_choose_title(person):
         title_tuple = []
-        for title in get_player_titles(person):
+        for title in person.get_player_titles():
             title_tuple.append([title,title])
 
         return renpy.display_menu(title_tuple, True, "Choice")
@@ -2676,11 +2677,11 @@ label starbuck_intro():
         # uses parts of the in-game introduction sequence tailored to SB
         if the_person.title is None:
             mc.name "Hello."
-            $ title_choice = get_random_title(the_person)
+            $ title_choice = the_person.get_random_title()
             $ formatted_title = the_person.create_formatted_title(title_choice)
             the_person "Let me introduce myself, I am [formatted_title]."
             $ the_person.set_title(title_choice)
-            $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+            $ the_person.set_possessive_title(the_person.get_random_possessive_title())
             "She holds her hand out to shake yours."
             the_person "And how may I address you?"
             $ title_choice = starbuck_intro_choose_title(the_person)
@@ -2933,7 +2934,7 @@ label starbuck_anal_fetish_swing_demo_label(the_person):
         "[the_person.title] has noticed and is smiling wide."
         the_person "So... as you can see... the swing makes a wide variety of sexual maneuvers possible... For anyone who attended, I'd like to offer a discount!"
         "You hear a few murmurs of approval. [the_person.title] looks up at you and winks."
-        the_person "Thanks [the_person.mc_title], that was amazing. Alright, you run a long now! Don't worry about me, I'll get cleaned up and back out front in a quick minute."
+        the_person "Thanks, [the_person.mc_title], that was amazing. Alright, you run a long now! Don't worry about me, I'll get cleaned up and back out front in a quick minute."
         "You excuse yourself. You wonder if this will help sell the swing any!"
         $ del person_one
 

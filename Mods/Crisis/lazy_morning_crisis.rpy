@@ -19,7 +19,10 @@ label lazy_morning_crisis_action_label():
     if the_person is None:
         return
 
-    "Your eyes slowly open when you alarm goes off. It feels like your arms weigh a hundred pounds each when you reach over and turn off your alarm."#TODO change pounds to kilos if metric is active.
+    if use_imperial_system:
+        "Your eyes slowly open when your alarm goes off. It feels like your arms weigh a hundred pounds each when you reach over and turn off your alarm."
+    else:
+        "Your eyes slowly open when your alarm goes off. It feels like your arms weigh a hundred kilos each when you reach over and turn off your alarm."
     "It's time to get up... but is it really though? It's the weekend. There's probably some things you could get done."
     "But what sounds even better? You roll over and enjoy the comfort of your bed. You know you should get up, do something productive. But wouldn't you be more productive long term, if you got more sleep now?"
     "You finally stop reasoning with yourself and drift back to sleep."
@@ -81,7 +84,7 @@ label lazy_morning_crisis_action_label():
             the_person "Do you think I could... you know... touch it? It feels so hot and hard!"
             "You are surprised. She's never done anything like this before!"
             mc.name "Yeah, that would be great..."
-            "You feel her hand move down your body and then grasps your cock through your underwear. She gives it a few gentle strokes."
+            "You feel her hand move down your body and then grasp your cock through your underwear. She gives it a few gentle strokes."
             mc.name "That feels great. You should put your hand down my underwear and do that."
             the_person "I'm not sure that's a good idea..."
             mc.name "Please? I want to feel how soft your hands are, it would be so nice..."
@@ -117,8 +120,8 @@ label lazy_morning_crisis_action_label():
         "As your fingers push deep inside of her, she momentarily forgets to stroke you. You remind her by gently thrusting yourself into her hand and she immediately starts stroking you again."
         the_person "Mmmm, I love cuddling..."
         $ mc.change_locked_clarity(30)
-        mc.name "I do to... especially this kind of cuddling."
-        "[the_person.possessive_title] is getting wetter as you finger her. She is beginning to gasp and moan under hear breath."
+        mc.name "I do too... especially this kind of cuddling."
+        "[the_person.possessive_title] is getting wetter as you finger her. She is beginning to gasp and moan under her breath."
         the_person "Oh [the_person.mc_title]..."
         "You feel her legs spread open a little wider, instinctively giving you better access with your fingers. Her soft hand stroking your cock feels great."
 

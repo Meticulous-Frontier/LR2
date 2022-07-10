@@ -20,12 +20,10 @@ label relaxed_sleepover_herplace_response(the_person): #Spending the night at he
         the_person "You don't need the wine to seduce me."
     return
 
-
 label relaxed_sleepover_yourplace_sex_start(the_person): #Right before sexy times at your place
     "[the_person.title] slowly walks over to you, purposefully exaggerating her hip movements with each step."
     the_person "Thanks... you ready for some fun?"
     return
-
 
 label relaxed_sleepover_herplace_sex_start(the_person): #Right before sexy times at her place
     the_person "Mmm... what do you say we stay in and just cuddle tonight?"
@@ -40,7 +38,6 @@ label relaxed_sleepover_impressed_response(the_person):  #If you've made her cum
     "[the_person.title] lies down in bed and catches her breath."
     the_person "I think I can keep going... I'm gonna be sore in the morning though!"
     return
-
 
 label relaxed_sleepover_good_response(the_person):  #If you've made her cum
     the_person "Ahhh, that was nice..."
@@ -66,7 +63,7 @@ label relaxed_lingerie_shopping_excited_response(the_person):
 label relaxed_lingerie_shopping_wow_response(the_person):
     the_person "Wow! I can honestly say I was not expecting you to go all in like this!"
     mc.name "If you don't feel comfortable with it, that's okay."
-    "She is quiet, but you can hear here rustling around inside as she starts getting changed."
+    "She is quiet, but you can hear her rustling around inside as she starts getting changed."
     the_person "It's okay... This is just to wear in private with you anyway... right?"
     return
 
@@ -89,9 +86,9 @@ label relaxed_GIC_finish_response(the_person, the_goal):
         else:
             the_person "I can't help it, it feels so good when you finish inside me..."
     elif the_goal == "facial":
-        the_person "How do it look? It feels good on my face."
+        the_person "How does it look? It feels good on my face."
     elif the_goal == "body shot":
-        the_person "Mmm your cum is so hot. I love the way it feels on my skin."
+        the_person "Mmm, your cum is so hot. I love the way it feels on my skin."
     elif the_goal == "oral creampie":
         the_person "You tasted great..."
     else:

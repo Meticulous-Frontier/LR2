@@ -4,15 +4,16 @@ init 0 python:
     # currently between (147cm) - (197cm).
     @renpy.pure
     def height_to_string(person_height): #Height is a value between 0.8 and 1.0
-        total_inches = __builtin__.round(((person_height * 250) - 53) / 2.54)
-        feet = __builtin__.int(total_inches // 12)
-        inches = __builtin__.int(total_inches % 12)
+        rounded_height = __builtin__.round(person_height,3) #Round height to 3 decimal points.
+        height_in_inches = __builtin__.round((rounded_height)*100/1.5, 3)
+        feet = __builtin__.int(math.floor(height_in_inches/12))
+        inches = __builtin__.int(height_in_inches % 12)
 
         if use_imperial_system:
-            return str(feet) + "' " + str(inches) + "\""
+            return "{}' {}\"".format(feet,inches)
         else:
-            cm = __builtin__.round(total_inches * 2.54, 1)
-            return str(cm) + " cm"
+            cm = __builtin__.round(height_in_inches * 2.54, 1)
+            return __builtin__.str(cm) + " cm"
 
     # override without the 'ERROR' message (just use 'husband' as fallback)
     @renpy.pure
@@ -62,24 +63,15 @@ init 0 python:
         return color_string + str(attention) + "/" + str(max_attention) + "{/color}"
 
     def get_person_weight_string(person):
+        kg = person.weight
+        # add some weight based on number of days pregnant
+        if person.pregnancy_is_visible():
+            # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 11.4 kg
+            kg += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 11.4
+
         if use_imperial_system:
-            lbs = person.weight * 2.205
-
-            # add some weight based on number of days pregnant
-            if person.pregnancy_is_visible():
-                # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 25 pounds
-                lbs += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 25
-
-            return str(__builtin__.round(lbs, 1)) + " lbs"
-        else:
-            kg = person.weight
-
-            # add some weight based on number of days pregnant
-            if person.pregnancy_is_visible():
-                # calculates a factor for the current day in relation to show day and due day, multiplied by average pregnancy weight of 11.4 kg
-                kg += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 11.4
-
-            return str(__builtin__.round(kg, 1)) + " kg"
+            return str(__builtin__.round(kg * 2.205, 1)) + " lbs"
+        return str(__builtin__.round(kg, 1)) + " kg"
 
     @renpy.pure
     def time_of_day_string(time_of_day):

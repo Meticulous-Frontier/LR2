@@ -47,12 +47,12 @@ label aunt_drunk_cuddle_label():
     mc.name "Sure thing."
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     "You pour two glasses of water and hand one to [the_person.possessive_title]."
-    the_person "It has been so nice of your family to let me and Gabrielle stay here for a bit. I hope we haven't been too much of a bother?"
+    the_person "It has been so nice of your family to let me and [cousin.fname] stay here for a bit. I hope we haven't been too much of a bother?"
     mc.name "Of course not. You are family, and honestly it is nice having you close by."
     the_person "That's sweet of you to say. Well, goodnight!"
     mc.name "Night."
     $ scene_manager.update_actor(the_person, position = "walking_away")
-    "[the_person.possessive_title] turns and walks out of the kitchen. However, a moment louder you hear a loud yelp and the sound of glass breaking. You run into the living room."
+    "[the_person.possessive_title] turns and walks out of the kitchen. However, a moment later you hear a loud yelp and the sound of glass breaking. You run into the living room."
     $ aunt_apartment.show_background()
     $ scene_manager.update_actor(the_person, position = "doggy")
     "[the_person.title] is on the floor on her hands and knees. Her water glass is shattered on the floor next to the couch, and the couch is soaked."
@@ -103,7 +103,7 @@ label aunt_drunk_cuddle_label():
     $ scene_manager.update_actor(the_person, position = "walking_away")
     mc.name "Goodnight."
     the_person "Goodnight..."
-    "After a few minutes, [the_person.possessive_title] fidget around a bit then asks you."
+    "After a few minutes, [the_person.possessive_title] fidgets around a bit then asks you."
     the_person "Hey... could you... you know... cuddle up with me?"
     mc.name "You... want me to be your big spoon?"
     the_person "Ahhh, sorry... that's silly..."
@@ -137,7 +137,7 @@ label aunt_drunk_cuddle_label():
             the_person "Shhh... do it honey... I want you to..."
             "[the_person.possessive_title]'s soothing encouragement pushes you over the edge. You gasp and moan as you dump your load in your underwear against her."
             the_person "Ahhh... that's it baby..."
-            "When you finish, you are exhausted. You consider getting up and cleaning up, but it feels to good to be up against [the_person.title]'s body still..."
+            "When you finish, you are exhausted. You consider getting up and cleaning up, but it feels too good to be up against [the_person.title]'s body still..."
             $ the_person.change_slut(5)
             $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_person)
             the_person "Goodnight..."
@@ -148,7 +148,7 @@ label aunt_drunk_cuddle_label():
             the_person "Could you... you know... just... take it out? It feels good, but I'm getting a wedgie like this..."
             "You can't believe your ears. You quickly pull your cock out. As you are doing so, you feel [the_person.title] wiggling under the covers..."
             $ scene_manager.strip_to_vagina(person = the_person)
-            "When you push up against her again, you realize she was taking her panties off! Your cock is now push up against [the_person.possessive_title]'s naked ass."
+            "When you push up against her again, you realize she was taking her panties off! Your cock is now pushed up against [the_person.possessive_title]'s naked ass."
             $ mc.change_locked_clarity(20)
             the_person "Oh god... you feel so hard..."
             "She pushes back against you and begins to grind against you again. It feels amazing to push yourself between her soft ass cheeks."
@@ -212,7 +212,7 @@ label aunt_drunk_cuddle_label():
     "You notice as you walk past them to the coffee pot, your aunt is sneaking looks your way. Her cheeks a little rosey and blushed."
     $ mc.change_locked_clarity(5)
     "You pour yourself a cup and lean against the counter. The two sisters are chatting about plans for a bit, when suddenly [mom.possessive_title] stands up."
-    mom "Well, I need to head out. Good luck with the apartment [aunt.name]!"
+    mom "Well, I need to head out. Good luck with the apartment [aunt.fname]!"
     the_person "Thank you! I'm sure we'll be out of here soon."
     $ scene_manager.update_actor(mom, position = "walking_away")
     "As [mom.possessive_title] leaves the room, an awkward silence ensues."

@@ -9,12 +9,12 @@ init 3302 python:
         return False
 
     def strip_club_bought_by_someone_else():
-        strip_club_owner = get_random_male_name()
+        strip_club_owner = Person.get_random_male_name()
         strip_club.background_image = Image(get_file_handle("Club_Background.png")) # Set up the original background
         strip_club.name = strip_club_owner + "'s Gentlemen's Club"
         strip_club.formal_name = strip_club_owner + "'s Gentlemen's Club"
         strip_club.add_action(strip_club_show_action) # Restore 'Watch a show' button
-        for person in stripclub_strippers: # rehire strippers
+        for person in [x for x in stripclub_strippers if x not in unique_character_list]: # rehire strippers
             person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
         set_strip_club_foreclosed_stage(-1) # end story line
         starbuck.remove_on_talk_event("talk_again_buying_club_starbuck_label")
@@ -70,9 +70,9 @@ label strip_club_offer_expire_label(): # Event trigger with timer
     "You're absorbed in your thoughts when suddenly you remember that you still need to decide if you want to buy the strip club or not..."
     if strip_club_buy_days_left() > 1:
         $ ran_num = strip_club_buy_days_left()
-        "You still have [ran_num] days to make your final decision, I need to see [starbuck.title] when I change my mind."
+        "You still have [ran_num] days to make your final decision, you need to see [starbuck.title] if you change my mind."
     else:
-        "This is the last day to make your decision. I need to see [starbuck.title] if I want to buy it."
+        "This is the last day to make your decision. You need to see [starbuck.title] if you want to buy it."
 
     $ add_strip_club_offer_expire_action()
     return
@@ -91,7 +91,7 @@ label starbuck_talk_about_strip_club_label(the_person): # On_enter event
     the_person "When he died I decided to chase our dream, but a strip club is something completely different."
     the_person "Look here [the_person.mc_title], they sent me all the required documents by email..."
     $ the_person.draw_person(emotion = "happy")
-    the_person "YOU should be the one buying it! You're young and full of energy, and the place surroundings could be very 'stimulating'!"
+    the_person "YOU should be the one buying it! You're young and full of energy, and the place's environment could be very 'stimulating'!"
     mc.name "Actually [the_person.title], my company already gives me enough troubles and requires all my attention, I don't think..."
     the_person "Yeah, yeah, I get you. Anyway, I'll forward you the email with the papers I got from the bank. Promise me that you'll think about it, okay?"
     mc.name "I suppose it isn't worth arguing with you. I'll have my accountant take a look at them."
@@ -112,7 +112,7 @@ label think_about_buying_strip_club_label(the_person):
     "Buying this place could be a really good investment, not to mention the 'side bonuses' you could get as the club's owner."
     mc.name "$50,000 is a lot of money, but I guess it will be worth the effort... the benefits are really tempting..."
     mc.name "Okay, maybe I can invest my money in it, but running a place like this for sure will require a lot of time and effort..."
-    mc.name "Perhaps I should find some kind of manager, but it need to be someone I could trust..."
+    mc.name "Perhaps I should find some kind of manager, but it needs to be someone I could trust..."
     mc.name "I need to think some more about buying this place, but I admit I'm very tempted... I need to talk again with [the_person.title]."
     "You're close to a decision about the Club, but now it's time to return back home and have a nice restoring sleep."
     $ mc.change_location(bedroom)
@@ -143,7 +143,7 @@ label discuss_buying_club_with_starbuck_label(the_person): # The event trigger w
             the_person "I totally understand, [the_person.mc_title]... I think you should take your time."
             #TODO Add offer end
             $ ran_num = strip_club_buy_days_left()
-            the_person "The bank said you have [ran_num] days left to decide, come see me again in a few days, if you've change your mind."
+            the_person "The bank said you have [ran_num] days left to decide, come see me again in a few days, if you've changed your mind."
             $ set_strip_club_foreclosed_stage(3) # stay at stage 3 with updated last action day
             $ add_talk_again_buying_club_starbuck_action()
             $ add_strip_club_offer_expire_action()
@@ -244,7 +244,7 @@ label starbuck_celebration_strip_event(the_person):
                     "[the_person.possessive_title] peels off her [the_item.display_name], slowly revealing her cute pussy."
                     if the_person.has_taboo("bare_pussy"):
                         the_person "Am I really doing this? Am I, Yes, I am!"
-                        "[the_person.title] takes a deep breath and continue to remove her clothes."
+                        "[the_person.title] takes a deep breath and continues to remove her clothes."
                         $ the_person.break_taboo("bare_pussy")
                 else:
                     "[the_person.possessive_title] takes off her [the_item.display_name]."
@@ -268,20 +268,15 @@ label starbuck_celebration_strip_event(the_person):
 label starbuck_name_the_new_club_label(the_person):
     $ strip_club_owner = mc.name
     $ mc.business.remove_mandatory_crisis("strip_club_offer_expire_label") # remove expiry event
-
     the_person "Just a second, [the_person.mc_title]. What will you call your new strip club?"
-
     $ name_string = str(renpy.input("New Strip Club Name: ", strip_club_owner + "'s Gentlemen's Club"))
     $ strip_club.name = name_string
     $ strip_club.formal_name = name_string
-
-    "The strip club name now is [name_string]. You pick up your phone and call [cousin.title]."
-
+    "The strip club name is now [name_string]. You pick up your phone and call [cousin.title]."
     mc.name "Hey [cousin.title], meet me tomorrow evening at the old Strip Club."
     cousin "What? Why?"
     mc.name "No questions now, just do it."
     cousin "Fine, I'll be there."
-
     $ add_cousin_meet_at_strip_club()
     $ set_strip_club_foreclosed_stage(4)
     return

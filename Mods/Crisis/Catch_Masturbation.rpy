@@ -13,11 +13,11 @@
 init 2 python:
     def SB_caught_masturbating_requirement():
         if mc.business.is_open_for_business() and mc.is_at_work():
-            return not select_girl_masturbating() is None
+            return any(x for x in mc.business.get_employee_list() if x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating")))
         return False
 
-    def select_girl_masturbating():
-        return get_random_from_list([x for x in mc.business.get_employee_list() if x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
+    def select_girl_masturbating(excluded = None):
+        return get_random_from_list([x for x in mc.business.get_employee_list() if not x == excluded and x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
 
     SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True)
@@ -29,13 +29,12 @@ label SB_caught_masturbating_crisis_label():
         return
 
     $ the_clothing = the_person.outfit.get_lower_top_layer() #Get the very top item of clothing.
-
-    $ the_person_two = select_girl_masturbating()
+    $ the_person_two = select_girl_masturbating(the_person)
 
     "You decide to take a quick break from what you are doing. You stand up and stretch your legs, and go for a quick walk."
     "While you are walking by an unused storage room, you hear some muffled sounds coming from inside."
 
-    if the_person_two and not the_person is the_person_two and willing_to_threesome(the_person, the_person_two):
+    if the_person_two and willing_to_threesome(the_person, the_person_two):
         $ scene_manager = Scene()
         $ the_person.strip_outfit(delay = 0)
         $ the_person_two.strip_outfit(delay = 0)
@@ -105,7 +104,7 @@ label SB_caught_masturbating_crisis_label():
                 if renpy.random.randint(0,100) < success_chance: #If player does not get caught
                     "[the_person.possessive_title] is breathing heavily. It is clear from how vigorously she is touching herself that she is going to orgasm soon." #TODO finish this
                     if the_person.effective_sluttiness() < 30:   #She's not interested in MC yet...
-                        $ fantasy_guy = get_random_male_name()
+                        $ fantasy_guy = Person.get_random_male_name()
                         "[the_person.possessive_title] seems really into it. Her back is arched as her hand works its magic on her groin."
                         $ the_person.change_arousal(10)
                         the_person "Mmm, [fantasy_guy], that's it... I wanna be your slut..."
@@ -136,10 +135,7 @@ label SB_caught_masturbating_crisis_label():
                                 "You drop down on the floor in front of her. With her pussy exposed you waste no time diving right in."
                             else:                                              #Otherwise, strip her down.
                                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy."
-                                if the_person.outfit.can_half_off_to_vagina():
-                                    $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), position = "missionary", half_off_instead = True)
-                                else:
-                                    $ generalised_strip_description(the_person, the_person.outfit.get_full_strip_list(), position = "missionary")
+                                $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "missionary")
                                 $ mc.change_locked_clarity(20)
                                 "With her pussy finally exposed you waste no time diving right in."
                             $ the_person.break_taboo("bare_pussy")
@@ -148,7 +144,7 @@ label SB_caught_masturbating_crisis_label():
                             $ the_person.change_arousal(10)
                             $ mc.change_locked_clarity(5)
                             the_person "Oh [the_person.mc_title], you have no idea how bad I need this."
-                            "[the_person.possessive_title] runs her hands your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole."
+                            "[the_person.possessive_title] runs her hands through your hair. You bury your nose in her mound and flick your tongue in and out of her slick hole."
                             "You circle her clit a few times with your tongue. You suck it into your mouth roughly a couple of times and then release it, your lips making wet, lewd smacking noises."
                             $ the_person.change_arousal(10)
                             the_person "I am so close... I'm sorry [the_person.mc_title], I'm not going to last much longer."
@@ -170,11 +166,11 @@ label SB_caught_masturbating_crisis_label():
                             $ the_person.change_arousal(10)
                             "You hear [the_person.possessive_title] mumble your name. She's fantasizing about you! You stay as quiet as possible and continue to watch in amazement."
                             if the_person.get_opinion_score("giving blowjobs") > 0:
-                                the_person "Yeah [the_person.mc_title]... that it... let me suck on that delicious cock... I'll take care of it for you..."
+                                the_person "Yeah [the_person.mc_title]... that's it... let me suck on that delicious cock... I'll take care of it for you..."
                                 "She's fantasizing about sucking you off! Maybe you should pay her a visit later..."
                                 $ the_person.discover_opinion("giving blowjobs")
                             elif the_person.get_opinion_score("anal sex") > 0:
-                                the_person "Oh god [the_person.mc_title], be careful! It feels so full when stick it in my ass like that..."
+                                the_person "Oh god [the_person.mc_title], be careful! It feels so full when you stick it in my ass like that..."
                                 "She's fantasizing about you fucking her ass! Maybe you should pay her a visit later..."
                                 $ the_person.discover_opinion("anal sex")
                             else:
@@ -201,7 +197,7 @@ label SB_caught_masturbating_crisis_label():
                             $ mc.end_text_convo()
 
                 else: #Player gets caught
-                    "Straining to get a better a view, for a brief moment you lose your focus. You accidentally drop a pen you were holding onto and it clatters loudly across the floor."
+                    "Straining to get a better view, for a brief moment you lose your focus. You accidentally drop a pen you were holding onto and it clatters loudly across the floor."
                     "[the_person.possessive_title] immediately stops and looks back at the source of the noise. She immediately locks eyes with you and the realization that she just got caught masturbating at work sinks in."
                     if the_person.effective_sluttiness() < 30: #She is not slutty. 50/50 she runs out of the room apologizing or gets pissed
                         $ the_person.draw_person()
@@ -250,7 +246,7 @@ label SB_caught_masturbating_crisis_label():
                         if the_person.get_opinion_score("public sex") > 0:
                             "[the_person.possessive_title]'s cheeks are flush with arousal. Her eyes stare straight into yours as she continues to touch herself."
                             the_person "Does it excite you, [the_person.mc_title]? To see me here, touching myself like this...?"
-                            "You can tell tell she likes having an audience."
+                            "You can tell she likes having an audience."
                             mc.name "Of course, [the_person.title]. And you like having someone here to watch you, don't you?"
                             "[the_person.possessive_title] doesn't respond with words, but moans at your words. It is clear she enjoys when others watch her doing sexual things..."
                             $ the_person.discover_opinion("public sex")
@@ -269,20 +265,15 @@ label SB_caught_masturbating_crisis_label():
                     elif the_person.has_anal_fetish():
                         the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
                         if not the_person.outfit.vagina_available():
-                            "[the_person.possessive_title] moves her clothes out of the way."
-                            if the_person.outfit.can_half_off_to_vagina():
-                                $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "doggy")
-                            else:
-                                "[the_person.possessive_title] begins to pull off her clothes."
-                                $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "doggy")
+                            $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "doggy")
                         $ mc.change_locked_clarity(50)
                         $ the_person.break_taboo("bare_pussy")
                         the_person "Could you just like... stick it in my ass for a bit? I'm trying to masturbate but not getting anywhere with it... you know how much I love it in my ass..."
                         menu:
-                            "Fuck her ass": # only show sex option if you had sex before
+                            "Fuck her ass":  # only show sex option if you had sex before
                                 mc.name "Sure, I could spare a few minutes for your ass."
                                 "You quickly pull your pants down. [the_person.possessive_title] is wiggling her ass back and forth, waiting for you."
-                                "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is so wet, your cock is soon nice lubed up."
+                                "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is so wet, your cock is soon nicely lubed up."
                                 "When you're ready you move your cock up to her back door. With some gentle pressure, you slip into her well exercised hole."
                                 call fuck_person(the_person, start_position = doggy_anal, start_object = make_floor(), skip_intro = True, skip_condom = True) from _call_sex_sb_event_masturbation_30
                                 $ the_report = _return
@@ -328,11 +319,7 @@ label SB_caught_masturbating_crisis_label():
                         the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
                         if not the_person.outfit.vagina_available():
                             "[the_person.possessive_title] moves her clothes out of the way."
-                            if the_person.outfit.can_half_off_to_vagina():
-                                $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "doggy")
-                            else:
-                                "[the_person.possessive_title] begins to pull off her clothes."
-                                $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "doggy")
+                            $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "doggy")
                         $ mc.change_locked_clarity(20)
                         $ the_person.break_taboo("bare_pussy")
                         the_person "Could you just give me a little quickie? I'm all warmed up, you could just stick it in right now..."
@@ -350,7 +337,7 @@ label SB_caught_masturbating_crisis_label():
                                 else:
                                     "[the_person.possessive_title] quickly recovers after you finish."
                                     $ the_person.change_stats(happiness = 3)
-                                the_person "Mmmm, thanks [the_person.mc_title]! That was just what I needed..."
+                                the_person "Mmmm, thanks, [the_person.mc_title]! That was just what I needed..."
                                 "You decide to give [the_person.possessive_title] a chance to recover. You make yourself decent, then leave the room, closing the door on the way out."
                                 "You finish up your walk and return back to your previous work."
 
@@ -365,7 +352,7 @@ label SB_caught_masturbating_crisis_label():
                                 if the_person.get_opinion_score("public sex") > 0:
                                     "[the_person.possessive_title]'s cheeks are flush with arousal. She peeks back and stares straight into your eyes as she continues to touch herself."
                                     the_person "Does it excite you, [the_person.mc_title]? To see me here, touching myself like this...?"
-                                    "You can tell tell she likes having an audience."
+                                    "You can tell she likes having an audience."
                                     mc.name "Of course, [the_person.title]. And you like having someone here to watch you, don't you?"
                                     "[the_person.possessive_title] moans. It is clear she enjoys when others watch her doing sexual things..."
                                     $ the_person.discover_opinion("public sex")

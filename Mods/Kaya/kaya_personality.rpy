@@ -10,8 +10,6 @@ init 1400 python:              #Because Vren Init personality functionns at 1300
         valid_possessive_titles = [person.title]
         valid_possessive_titles.append("Your favorite barista")
         valid_possessive_titles.append("Your native barista")
-        if kaya_mc_knows_relation():
-            valid_possessive_titles.append("Your half-sister")
         return valid_possessive_titles
 
     def kaya_player_titles(person):
@@ -35,11 +33,11 @@ label kaya_introduction(the_person):
     "She laughs and crosses her arms."
     the_person "Really? You're just saying that to impress me, aren't you."
     mc.name "Really, I really just wanted to talk to you."
-    $ title_choice = get_random_title(the_person)
+    $ title_choice = the_person.get_random_title()
     $ formatted_title = the_person.create_formatted_title(title_choice)
     the_person "Well fine, my name is [formatted_title]. It's nice to meet you..."
     $ the_person.set_title(title_choice)
-    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+    $ the_person.set_possessive_title(the_person.get_random_possessive_title())
     "She waits expectantly for you to introduce yourself."
     return
 
@@ -215,7 +213,7 @@ label kaya_sex_responses_anal(the_person):
 label kaya_climax_responses_foreplay(the_person):
     if the_person.sluttiness > 50:
         the_person "Oh thank god I'm going to... I'm... OH!"
-        the_person "{b}I'm Cumming!{/b}{=kaya_lang}Moenga!{/=kaya_lang}"
+        the_person "{b}I'm Cumming!{/b} {=kaya_lang}Moenga!{/=kaya_lang}"
     else:
         the_person "Mmmmhm!"
     return
@@ -224,7 +222,7 @@ label kaya_climax_responses_oral(the_person):
     if the_person.sluttiness > 70:
         the_person "That's the spot! I'm done [the_person.mc_title]!"
         "She closes her eyes and squeals with pleasure."
-        the_person "{b}I'm Cumming!{/b}{=kaya_lang}Moenga!{/=kaya_lang}"
+        the_person "{b}I'm Cumming!{/b} {=kaya_lang}Moenga!{/=kaya_lang}"
     else:
         the_person "Oh my god, I'm going to cum. I'm going to cum!"
         "She closes her eyes and squeals with pleasure."
@@ -249,7 +247,7 @@ label kaya_clothing_accept(the_person):
     if the_person.obedience > 130:
         the_person "It's for me? Thank you [the_person.mc_title], I'll add it to my wardrobe."
     else:
-        the_person "Oh, it's cute! Thanks [the_person.mc_title]!"
+        the_person "Oh, it's cute! Thanks, [the_person.mc_title]!"
     return
 
 label kaya_clothing_reject(the_person):
@@ -259,7 +257,7 @@ label kaya_clothing_reject(the_person):
         if the_person.sluttiness > 60:
             the_person "Wow. I'm usually up for anything but I think that's going too far."
         else:
-            the_person "Wow. Where's the rest of it?."
+            the_person "Wow. Where's the rest of it?"
     return
 
 label kaya_clothing_review(the_person):
@@ -442,7 +440,7 @@ label kaya_flirt_response_low(the_person):
     if the_person.is_wearing_uniform():
         if the_person.judge_outfit(the_person.outfit):
             #She's in uniform and likes how it looks.
-            the_person "Thanks [the_person.mc_title]. I like these uniforms too. Did you design them yourself?"
+            the_person "Thanks, [the_person.mc_title]. I like these uniforms too. Did you design them yourself?"
             mc.name "I did."
             $ mc.change_locked_clarity(5)
             the_person "Amazing! I think you have a good eye for fashion."
@@ -999,7 +997,7 @@ label kaya_surprised_exclaim(the_person):
 
 label kaya_talk_busy(the_person):
     if the_person.obedience > 120:
-        the_person "Hey, I'm really sorry but I've got some stuff I need to take care of. Could we catch up some other time?"
+        the_person "Hey, I'm really sorry, but I've got some stuff I need to take care of. Could we catch up some other time?"
     else:
         the_person "Hey, sorry [the_person.mc_title] but I've got some stuff to take care of. It was great talking though!"
     return
@@ -1031,29 +1029,29 @@ label kaya_sex_watch(the_person, the_sex_person, the_position):
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
         $ the_person.change_stats(happiness = -1, obedience = -2)
-        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person()
         $ the_person.change_happiness(-1)
-        "[title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person "Oh my god, you two are just... Wow..."
         $ change_report = the_person.change_slut(1)
-        "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
+        "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness >= the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh my god that's... Wow that looks... Hot."
         $ change_report = the_person.change_slut(2)
-        "[title] watches you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches you and [the_sex_person.fname] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         the_person "Come on [the_person.mc_title], you can give her a little more than that. I'm sure she can handle it."
-        "[title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches eagerly while you and [the_sex_person.fname] [the_position.verb]."
 
     return
 
@@ -1100,7 +1098,7 @@ label kaya_work_enter_greeting(the_person):
         if the_person.obedience > 120:
             "[the_person.title] gives you a curt nod and then turns back to what she was doing."
         else:
-            "[the_person.title] glances at you when you enters the room then looks away quickly to avoid starting a conversation."
+            "[the_person.title] glances at you when you enter the room then looks away quickly to avoid starting a conversation."
 
     elif the_person.happiness > 120:
         if the_person.sluttiness > 50:
@@ -1605,7 +1603,7 @@ label kaya_underwear_nudity_taboo_break(the_person, the_clothing):
     if the_person.effective_sluttiness() > 30 - (the_person.get_opinion_score("skimpy outfits") * 5):
         the_person "You want to get a look at my underwear, huh?"
         if the_person.has_taboo(["bare_tits","bare_pussy"]):
-            mc.name "I do. You've got good fashion sense, I bet you wear wear some cute underwear too."
+            mc.name "I do. You've got good fashion sense, I bet you wear some cute underwear too."
             the_person "Well, let's get this off and you can check for yourself."
         else:
             mc.name "I do. I've already seen you naked, but I appreciate your fashion sense."
@@ -1787,7 +1785,7 @@ label kaya_sleepover_herplace_response(the_person): #Spending the night at her p
     if the_person.sluttiness < 80:
         the_person "Mmm, that sounds great! Bring a toothbrush, you can spend the night."
     else:
-        the_person "You don't need the wine. We can fuck whenever you get there!."
+        the_person "You don't need the wine. We can fuck whenever you get there!"
     return
 
 
@@ -1861,7 +1859,7 @@ label kaya_GIC_finish_response(the_person, the_goal):
     elif the_goal == "facial":
         the_person "How do it look? It feels good on my face."
     elif the_goal == "body shot":
-        the_person "Mmm your cum is so hot. I love the way it feels on my skin."
+        the_person "Mmm, your cum is so hot. I love the way it feels on my skin."
     elif the_goal == "oral creampie":
         the_person "You taste great..."
     else:

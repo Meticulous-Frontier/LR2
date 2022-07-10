@@ -52,7 +52,7 @@ init 10 python:
         if sarah != mc.business.hr_director:
             return "[sarah.title] must be your HR Director to progress this story."
         else:
-            return "[sarah.title] will give you a special service during monday morning meeting soon."
+            return "[sarah.title] will give you a special service during your Monday morning meeting soon."
 
     def sarah_story_80_love_complete_func():
         return get_HR_director_unlock("anal lapdance")
@@ -118,11 +118,11 @@ init 10 python:
     def sarah_story_80_lust_complete_func():
         return sarah_threesomes_unlocked()
 
+    def sarah_story_100_lust_complete_func():
+        return False
+
     def sarah_story_100_lust_hint():
         return "This story is complete for now..."
-
-    def sarah_story_80_lust_complete_func():
-        return False
 
     #### Copy and paste these for the 4 other lust events.
 
@@ -136,7 +136,6 @@ init 10 python:
 
     def sarah_story_teamup_1_complete_func():
         return erica_get_is_doing_yoga_sessions()
-
 
     #### Repeat this for all different teamups.
 
@@ -221,8 +220,6 @@ init 10 python:
             teamup_story_list.append("Watch [sarah.title] do yoga with [erica.title] every Tuesday morning at the office!")
         else:
             teamup_story_list.append(sarah_story_teamup_1_hint())
-
-
 
         sarah_story_dict["teamup_list"] = teamup_story_list
 

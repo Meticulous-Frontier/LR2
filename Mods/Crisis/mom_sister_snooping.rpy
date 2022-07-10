@@ -6,7 +6,7 @@
 #At high sluttiness you discover them fucking, option to join or observe
 init 2 python:
     def mom_sister_snooping_requirement():
-        if not day%7 == 5 and mc.is_home() and not lily.is_employee(): # not on saturday mornings
+        if not day%7 == 5 and mc.is_home() and not lily.is_employee() and lily.is_available and mom.is_available: # not on saturday mornings
             return True
         return False
 
@@ -33,7 +33,7 @@ label mom_sister_snooping_action_label():
         $ overhear_topic = lily.get_random_opinion(include_sexy = False)
         $ text_one = person_opinion_to_string(lily, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        lily "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+        lily "... but yeah, I'm not sure he realizes I [text_one] [text_two]."
         if lily.discover_opinion(overhear_topic):
             "Oh! You didn't realize that [lily.title] felt that way."
         "The girls keep talking. They keep bouncing back and forth between multiple topics."
@@ -52,7 +52,7 @@ label mom_sister_snooping_action_label():
         $ overhear_topic = mom.get_random_opinion(include_sexy = True, include_normal = False)
         $ text_one = person_opinion_to_string(mom, overhear_topic)[1]
         $ text_two = get_topic_text(overhear_topic)
-        mom "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
+        mom "... but yeah, I'm not sure he realizes I [text_one] [text_two]."
         $ mc.change_locked_clarity(10)
         if mom.discover_opinion(overhear_topic):
             "Oh! You didn't realize that [mom.title] felt that way."
@@ -79,7 +79,7 @@ label mom_sister_snooping_action_label():
         $ scene_manager.strip_to_tits(person = lily)
         $ mc.change_locked_clarity(30)
         "Oh my... [lily.title] is topless!"
-        mom "See? Any man would be love to get their hands on you. You just have to learn to work with what you have."
+        mom "See? Any man would love to get their hands on you. You just have to learn to work with what you have."
         mom "I have to actively cover up, to keep from getting too much attention..."
         lily "Why would you do that!?! I'd kill to have your figure..."
         $ scene_manager.strip_to_tits(person = mom)
@@ -123,7 +123,7 @@ label mom_sister_snooping_action_label():
                 $ scene_manager.clear_scene()
                 return
 
-        "You accidentally let out a little gasp. It must have been audible, because [mom.possessive_title] looks up at notices you at the door."
+        "You accidentally let out a little gasp. It must have been audible, because [mom.possessive_title] looks up and notices you at the door."
         mom "Oh! [mom.mc_title]! Come in here honey."
         "You slowly walk in to your sister's room."
         mom "Ohh... Your sister is doing such a good job, I can hardly concentrate. Would you help me take care of her?"
@@ -136,7 +136,7 @@ label mom_sister_snooping_action_label():
         $ scene_manager.update_actor(mom, display_transform = character_center_flipped, position = "missionary")
         $ scene_manager.update_actor(lily, display_transform = character_right, position = "missionary")
         "When you finish, [mom.possessive_title] and your sister flop down on her bed next to each other."
-        lily "Thanks [lily.mc_title]. I think I'm just gonna... go back to sleep for a little bit..."
+        lily "Thanks, [lily.mc_title]. I think I'm just gonna... go back to sleep for a little bit..."
         "As fun as it would be to join them, you decide to excuse yourself to get ready for the day."
         mc.name "No problem. You two take it easy, I'm gonna go shower."
     elif mom.sluttiness >= 20:
@@ -167,7 +167,7 @@ label mom_sister_snooping_action_label():
         lily "It's fine mom. I just roll it up a little at the top, no one even notices. Well, except for this one professor... I like to sit in the front and..."
         mom "That's enough... I don't need to hear about this! Young lady unroll that skirt right now."
         lily "Mom! It's fine! There's nothing wrong with a little fun. Besides, he really enjoys it. Especially if I leave the top couple buttons open on the blouse..."
-        mom "Oh my. Lily, what am I gonna do with you."
+        mom "Oh my. [lily.fname], what am I gonna do with you."
         "[lily.title] gives a little laugh."
         lily "It's okay mom. Say, you should try something like this sometime!"
         mom "Why I would never..."

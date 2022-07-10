@@ -7,14 +7,24 @@ init 2:
 
         def build_recruitment_traits_slug():
             traits = []
+            if recruitment_stat_improvement_policy.is_active():
+                if recruitment_stat_minimums_policy.is_active():
+                    traits.append("Highly Skilled Worker")
+                else:
+                    traits.append("Skilled Worker")
             if recruitment_suggest_improvement_policy.is_active():
                 traits.append("Suggestible")
             if recruitment_obedience_improvement_policy.is_active():
                 traits.append("Obedient")
             if recruitment_slut_improvement_policy.is_active():
                 traits.append("Slutty")
-            return ', '.join(traits)
+            if recruitment_sex_improvement_policy.is_active():
+                if recruitment_sex_minimums_policy.is_active():
+                    traits.append("Sexual Expert")
+                else:
+                    traits.append("Sexual Skills")
 
+            return ', '.join(traits)
 
     screen interview_ui(the_candidates, count):
         default requirements = mc.business.generate_candidate_requirements()
@@ -41,35 +51,47 @@ init 2:
                     ysize 550
                     vbox:
                         text "Personal Information" style "menu_text_title_style" size 20 #Info about the person: age, height, happiness, obedience, etc.
-                        text "Age: [the_candidate.age]" style "menu_text_style" size 16
-                        text "Required Salary: $[the_candidate.salary]/day" style "menu_text_style" size 16
-                        if recruitment_knowledge_one_policy.is_active():
-                            text "Personality: " + the_candidate.personality.personality_type_prefix.capitalize() style "menu_text_style" size 16
-                        if recruitment_knowledge_two_policy.is_active():
-                            text "Relationship: " + the_candidate.relationship style "menu_text_style" size 16
-                            if the_candidate.relationship != "Single":
-                                text "Significant Other: " + the_candidate.SO_name style "menu_text_style" size 16
-                            if the_candidate.kids > 0:
-                                text "Kids: " + str(the_candidate.kids) style "menu_text_style" size 16
-                        if recruitment_stat_improvement_policy.is_active():
-                            text "" style "menu_text_style" size 16
-                            text "Happiness: [the_candidate.happiness]" style "menu_text_style" size 16
-                            text "Sluttiness: [the_candidate.sluttiness] - " + get_gold_heart(the_candidate.sluttiness) style "menu_text_style" size 16
-                            text "Obedience: [the_candidate.obedience] - " + get_obedience_plaintext(the_candidate.obedience) style "menu_text_style" size 16
-                        if recruitment_knowledge_three_policy.is_active():
-                            text "" style "menu_text_style" size 16
-
-                            text "Suggestibility: [the_candidate.suggestibility]%" style "menu_text_style" size 16
+                        if interview_reveal_age():
+                            text "Age: [the_candidate.age]" style "menu_text_style" size 16
+                        if interview_reveal_height():
                             text "Height: " + height_to_string(the_candidate.height) style "menu_text_style" size 16
-                            text "Eye Colour: " + the_candidate.eyes[0].title() style "menu_text_style" size 16
-                            text "Cup size: [the_candidate.tits]" style "menu_text_style" size 16
                             text "Weight: " + get_person_weight_string(the_candidate) style "menu_text_style" size 16
+                        if interview_reveal_happiness():
+                            text "Happiness: [the_candidate.happiness]" style "menu_text_style" size 16
+                        if interview_reveal_suggestibility():
+                            text "Suggestibility: [the_candidate.suggestibility]" style "menu_text_style" size 16
+                        if interview_reveal_sluttiness():
+                            text "Sluttiness: [the_candidate.sluttiness]" style "menu_text_style" size 16
+                        if interview_reveal_love():
+                            text "Love: [the_candidate.love]" style "menu_text_style" size 16
+                        if interview_reveal_obedience():
+                            text "Obedience: [the_candidate.obedience] - " + get_obedience_plaintext(the_candidate.obedience) style "menu_text_style" size 16
+                        if interview_reveal_tits():
+                            text "Cup Size: [the_candidate.tits]" style "menu_text_style" size 16
+                            text "Eye Colour: " + the_candidate.eyes[0].title() style "menu_text_style" size 16
+                        if interview_reveal_relationship():
+                            if the_candidate.has_role(girlfriend_role):
+                                text "Relationship: Girlfriend" style "menu_text_style" size 16
+                            else:
+                                text "Relationship: [the_candidate.relationship]" style "menu_text_style" size 16
+
+                            if the_candidate.relationship != "Single":
+                                text "Significant Other: [the_candidate.SO_name]" style "menu_text_style" size 16
+                            elif the_candidate.has_role(girlfriend_role):
+                                text "Significant Other: [mc.name]" style "menu_text_style" size 16
+
+                        if interview_reveal_kids():
+                            text "Kids: [the_candidate.kids]" style "menu_text_style" size 16
+
+                        text "Required Salary: $[the_candidate.salary]/day" style "menu_text_style" size 16
+
                 frame:
                     background "#1a45a1aa"
                     xsize 420
                     ysize 550
                     vbox:
                         text "Stats and Skills" style "menu_text_title_style" size 20 #Info about the persons raw stats, work skills, and sex skills
+                        text "Work Experience Level: [the_candidate.work_experience]" style "menu_text_style" size 16
                         text "Stats" style "menu_text_style" size 20
                         text "    Charisma: [the_candidate.charisma]" style "menu_text_style" size 16
                         text "    Intelligence: [the_candidate.int]" style "menu_text_style" size 16

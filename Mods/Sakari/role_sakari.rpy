@@ -38,8 +38,8 @@ init 2 python:
         global sakari
         sakari = make_person(name = "Sakari", last_name ="Greene", age = 42, body_type = "thin_body", face_style = "Face_14",  tits="C", height = 0.92, hair_colour=["bald", [0.414, 0.305, 0.258,0]], hair_style = short_hair, skin="tan" , \
             eyes = "brown", personality = sakari_personality, name_color = "#228b22", dial_color = "228b22" , job = unemployed_job, \
-            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = 18, start_happiness = 88, start_love = 0, \
-            relationship = "Single", kids = 1, force_random = True, base_outfit = sakari_base_outfit,
+            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [4,2,2,2], sluttiness = 7, obedience_range = [100, 120], happiness = 88, love = 0, \
+            relationship = "Single", kids = 1, force_random = True, base_outfit = sakari_base_outfit, type = 'story',
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
             forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 1, False], ["drinking cum", -2, False], ["giving blowjobs", -1, False], ["creampies", 2, False]])
 
@@ -113,7 +113,7 @@ label sakari_intro_label(the_person):
     "?????" "Okay, what do you want done with the product up there?"
     the_person "We need to clearance it out. It's been up for far too long."
     "One of the other workers speaks up."
-    "It's good to have you around running things again, [the_person.name]"
+    "It's good to have you around running things again, [the_person.fname]"
     the_person "Ah, believe me it is good to be back."
     "The employees grab a couple boxes of merchandise and set off with it."
     "Alone now, [the_person.possessive_title] looks up and notices you. She seems a little out of breath."
@@ -128,9 +128,9 @@ label sakari_intro_label(the_person):
     mc.name "So, you are feeling better this week?"
     the_person "Yes, feeling better is a good way to say that."
     "It's obvious from the way she is saying it that she is hiding something, but you decide for now to let it go."
-    mc.name "I'm sure [kaya.name] will be glad to hear that you are at the store. She is very worried about you."
+    mc.name "I'm sure [kaya.fname] will be glad to hear that you are at the store. She is very worried about you."
     $ the_person.draw_person(emotion = "sad")
-    the_person "Yes, my dear [kaya.name]..."
+    the_person "Yes, my dear [kaya.fname]..."
     if kaya.is_girlfriend():
         the_person "You are taking good care of her, right? She talks about you... a LOT."
         mc.name "Of course."
@@ -145,7 +145,7 @@ label sakari_intro_label(the_person):
     "An employee walks over, clearly looking for [the_person.title]."
     the_person "Ah, I need to get back to work. if you'll excuse me."
     mc.name "Certainly."
-    $ the_person.add_job(clothing_cashier_job, job_known = True)
+    $ the_person.change_job(clothing_cashier_job, job_known = True)
     $ the_person.set_schedule(None, the_times = [1,2,3]) # Free roam
     $ the_person.add_unique_on_room_enter_event(sakari_coffee_break)
     $ clear_scene()
@@ -181,14 +181,14 @@ label sakari_coffee_break_label(the_person):
 
     the_person "Lately, we've been getting to know each other better, so I wanted to make sure you understand what is going on with me."
     if kaya.is_girlfriend():
-        the_person "Especially since you are so close with [kaya.name]... my dear daughter..."
+        the_person "Especially since you are so close with [kaya.fname]... my dear daughter..."
     the_person "I have an illness called myeloma. It is a type of recurring blood cancer."
     the_person "The prognosis is terminal, and unfortunately I have entered the final stage of the illness."
     mc.name "Ah [the_person.title]. I'm so sorry..."
     the_person "There are many experimental treatments... and unfortunately they have all failed."
     the_person "I recently decided to go off all treatments. I'm feeling much better, but it will only be a short term thing."
     mc.name "Ah, so that's why you have been back at the store a bit."
-    the_person "Yes. I want to leave things ready... for [kaya.name]."
+    the_person "Yes. I want to leave things ready... for [kaya.fname]."
     the_person "The last estimate I heard, was one to three months..."
 
     "There is a long silence as you soak in the information you just learned."
@@ -223,7 +223,7 @@ label sakari_coffee_break_label(the_person):
     "The weight of your conversation sits heavy on your chest for a while."
     "You should decide, and fairly quickly. Do you want to spend more time with [the_person.possessive_title]?"
     "If you wait too long to decide, you might miss the opportunity completely."
-    "Starbuck" "NOTE TO PLAYERS: [sakari.name]'s max energy will decrease over time due to her sickness."
+    "Starbuck" "NOTE TO PLAYERS: [sakari.fname]'s max energy will decrease over time due to her sickness."
     "Starbuck" "Once it hits a low enough threshold, she will get removed from the game!"
     # $ ellie.add_unique_on_room_enter_event(nanobot_cure_ellie_inspiration)    #NOTE this is probably going to just be a new conversation option that opens up.
     $ mc.business.add_mandatory_crisis(sakari_business_proposition)
@@ -264,7 +264,7 @@ label sakari_goes_skinny_dipping_label():   #mandatory event
     $ the_person = sakari
     "As you are getting ready for bed, your phone vibrates. You are surpised by who it appears to be from."
     $ mc.start_text_convo(the_person)
-    the_person "Hello [the_person.mc_title]. This is [sakari.name], [kaya.name]'s mother."
+    the_person "Hello [the_person.mc_title]. This is [sakari.fname], [kaya.fname]'s mother."
     "You didn't know she even had your number. Maybe she got it from [kaya.title]?"
     mc.name "Hello, how are you doing?"
     the_person "Good. I've been thinking a lot about what you said. You know, about mortality giving you a fresh perspective on things."

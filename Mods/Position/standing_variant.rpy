@@ -29,9 +29,9 @@ label intro_SB_facing_wall(the_girl, the_location, the_object):
     $ SB_facing_wall.redraw_scene(the_girl)
     "You turn [the_girl.possessive_title] so she faces away from you and push her up against the [the_object.name]."
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = SB_facing_wall.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = SB_facing_wall.position_tag, visible_enough = True, prefer_half_off = True)
 
     "You rub your dick along her slit a few times, first up and down, and then side to side. You line yourself up and begin to push inside of her."
     the_girl "Oh my god..."
@@ -121,7 +121,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                     "I wanna creampie you":
                         if the_girl.wants_creampie():
                             "[the_girl.possessive_title]'s legs shake for a second. She peeks back at you with lust in her eyes."
-                            the_girl "I'm already so full... I can't wait to feel you blow inside me"
+                            the_girl "I'm already so full... I can't wait to feel you blow inside me."
                             "She seems to be into creampies!"
                             mc.name "Don't worry, I'm gonna put this cum where it belongs."
                             $ the_girl.discover_opinion("creampies")
@@ -140,7 +140,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                             the_girl "You could do that... or you could pullout and cum all over my ass... wouldn't that be sexy?"
                             "She doesn't seem to be into being cum inside. Maybe you should consider finishing somewhere else..."
                         else:
-                            the_girl "Mmmmm I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
+                            the_girl "Mmmmm, I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
                             "Sounds like she just wants to please you, without being partial to a creampie or finishing some other way."
                     "I wanna cover your ass":
                         if the_girl.get_opinion_score("being covered in cum") > 0:
@@ -242,7 +242,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                             the_girl "Do it! Give me your cum! I want it so bad."
                         elif the_girl.wants_creampie():
                             "[the_girl.possessive_title]'s legs shake for a second. She peeks back at you with lust in her eyes."
-                            the_girl "I'm already so full... I can't wait to feel you blow inside me"
+                            the_girl "I'm already so full... I can't wait to feel you blow inside me."
                             "She seems to be into creampies!"
                             mc.name "Don't worry, I'm gonna put this cum where it belongs."
                             $ the_girl.discover_opinion("creampies")
@@ -261,7 +261,7 @@ label scene_SB_facing_wall_1(the_girl, the_location, the_object):
                             the_girl "You could do that... or you could pullout and cum all over my ass... wouldn't that be sexy?"
                             "She doesn't seem to be into being cum inside. Maybe you should consider finishing somewhere else..."
                         else:
-                            the_girl "Mmmmm I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
+                            the_girl "Mmmmm, I love it when you fill me up... Or you could pull out and cum all over my ass... Whatever you want!"
                             "Sounds like she just wants to please you, without being partial to a creampie or finishing some other way."
                     "I wanna cover your ass":
                         if the_girl.has_cum_fetish():
@@ -304,7 +304,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
     "You didn't have any plans of stopping anyway."
     if mc.sex_skills["Vaginal"] > the_girl.sex_skills["Vaginal"]: #If MC is better at sex than girl
         "In fact, you decide it's time to take things to the next level and really pleasure her."
-        "You shift our hips to the side, changing the angle of penetration to give increased friction against her G-spot."
+        "You shift your hips to the side, changing the angle of penetration to give increased friction against her G-spot."
         "You give [the_girl.possessive_title] a few short, shallow thrusts, the shove yourself deep and bottom out. You reach around her body and grope at her breast with your free hand."
         the_girl "[the_girl.mc_title] you fuck me so good... I don't know how you do it!"
         if the_girl.arousal > 130: #Sex gets more intense the more she has orgasmed

@@ -31,7 +31,7 @@ label intro_standing_cunnilingus(the_girl, the_location, the_object):
     the_person "I want you to kiss me for a little bit..."
     "You decide to go with it, for now. You slowly kiss your way down her body. She moans softly when you get close to her groin."
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = standing_cunnilingus.position_tag, visible_enough = True, prefer_half_off = True)
 
@@ -48,11 +48,11 @@ label taboo_break_standing_cunnilingus(the_girl, the_location, the_object):  #be
     "Startled, she suddenly she looks at you."
     the_person "Are you serious? I thought you..."
     "You get down on your knees in front of her."
-    mc.name "Ha! Just kidding. Mmm I can't wait to taste your pussy..."
+    mc.name "Ha! Just kidding. Mmm, I can't wait to taste your pussy..."
     the_person "Ahh... you scared me there..."
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = standing_cunnilingus.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = standing_cunnilingus.position_tag, visible_enough = True, prefer_half_off = True)
     "She runs her fingers through your hair as you get closer, her cunt inches from your face."
     "You slide forward and bring your head even closer. [the_girl.possessive_title] takes a sharp breath and turns her head to the side."
     "You bring one hand up to her [the_girl.pubes_description] pussy and spread it open to reveal the tender pink inside."
@@ -101,9 +101,9 @@ label transition_default_standing_cunnilingus(the_girl, the_location, the_object
     $ standing_cunnilingus.redraw_scene(the_girl) #Draw her sitting down.
     the_person "I want you to kiss me for a little bit..."
     "You decide to go with it, for now. You slowly kiss your way down her body. She moans softly when you get close to her groin."
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = standing_cunnilingus.position_tag, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = standing_cunnilingus.position_tag, visible_enough = True, prefer_half_off = True)
     "You lean forward and run your tongue along her slit. She groans as soon as you make contact."
     the_girl "Oh [the_girl.mc_title]..."
     return

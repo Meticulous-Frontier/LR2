@@ -2,6 +2,16 @@ init 5 python:
     add_label_hijack("normal_start", "updated_room_background")
     add_label_hijack("after_load", "updated_room_background")
 
+    #Harem/girlfriend/affair
+    gf_token_small_image = im.Scale(Image(get_file_handle("girlfriend.png")), 18, 18)
+    renpy.image("gf_token_small", gf_token_small_image)
+
+    paramour_token_small_image = im.Scale(Image(get_file_handle("paramour.png")), 18, 18)
+    renpy.image("paramour_token_small", paramour_token_small_image)
+
+    harem_token_small_image = im.Scale(Image(get_file_handle("harem.png")), 18, 18)
+    renpy.image("harem_token_small", harem_token_small_image)
+
     # scaled images
     taboo_break_image = im.Scale(Image(get_file_handle("taboo_lock_alt.png")), 16, 22)
     renpy.image("taboo_break", taboo_break_image)
@@ -22,6 +32,9 @@ init 5 python:
     lust_eye_token_small_image = im.Scale(Image(get_file_handle("lust_eye.png")), 18, 18)
     renpy.image("lust_eye_token_small", lust_eye_token_small_image)
 
+    feeding_bottle_token_small_image = im.Scale(Image(get_file_handle("feeding_bottle.png")), 18, 18)
+    renpy.image("feeding_bottle_token_small", feeding_bottle_token_small_image)
+
     happy_small_image = im.Scale(Image(get_file_handle("happy.png")), 18, 18)
     renpy.image("happy_token_small", happy_small_image)
 
@@ -30,6 +43,9 @@ init 5 python:
 
     padlock_small_image = im.Scale(Image(get_file_handle("padlock.png")), 18, 18)
     renpy.image("padlock_token_small", padlock_small_image)
+
+    triskelion_small_image = im.Scale(Image(get_file_handle("triskelion.png")), 18, 18)
+    renpy.image("triskelion_token_small", triskelion_small_image)
 
     question_mark_small_image = im.Scale(Image(get_file_handle("question.png")), 18, 18)
     renpy.image("question_mark_small", question_mark_small_image)
@@ -45,6 +61,9 @@ init 5 python:
 
     vial_token_small_image = im.Scale(Image(get_file_handle("vial.png")), 18, 18)
     renpy.image("vial_token_small", vial_token_small_image)
+
+    progress_token_small_image = im.Scale(Image(get_file_handle("Progress32.png")), 18, 18)
+    renpy.image("progress_token_small", progress_token_small_image)
 
     vial_image = Image(get_file_handle("vial.png"))
     dna_image = Image(get_file_handle("dna.png"))
@@ -74,6 +93,7 @@ init -1 python:
     # extra backgrounds
     standard_biotech_backgrounds = room_background_image("Biotech_Background.jpg")
     standard_dungeon_backgrounds = room_background_image("Dungeon_Background.jpg")
+    standard_harem_mansion_backgrounds = room_background_image("harem_mansion.jpg")
     standard_hotel_backgrounds = room_background_image("Hotel_Lobby_Background.jpg")
     standard_hotel_room_backgrounds = room_background_image("Hotel_Room_Background.jpg")
     standard_fancy_restaurant_backgrounds = room_background_image("Fancy_Restaurant_Background.jpg")
@@ -86,9 +106,11 @@ init -1 python:
     standard_police_station_backgrounds = room_background_image("Police_Station_Background.jpg", darken = False)
     standard_police_jail_backgrounds = room_background_image("Police_Jail_Background.jpg", darken = False)
     standard_coffee_shop_backgrounds = room_background_image("Coffee_Shop_Background.jpg")
+    standard_gaming_cafe_backgrounds = room_background_image("Internet_Cafe_Background.jpg")
     luxury_apartment_backgrounds = room_background_image("Luxury_Apartment_Background.jpg", darken = False)
     university_library_backgrounds = room_background_image("University_Library_Background.jpg")
     university_study_room_backgrounds = room_background_image("Study_Room_Background.jpg")
+    concert_hall_backgrounds = room_background_image("Concert_Hall_Background.jpg")
     # bedroom backgrounds
     standard_bedroom1_background = room_background_image("Generic_Bedroom1_Background.jpg")
     standard_bedroom2_background = room_background_image("Generic_Bedroom2_Background.jpg")
@@ -117,9 +139,18 @@ init -1 python:
         renpy.show("university_library", what=Image(library_image), layer = "master")
         return
 
-    def show_university_study_room_background(*args, **kwargs):
-        library_image = university_study_room_backgrounds[time_of_day]
-        renpy.show("university_study_room", what=Image(library_image), layer = "master")
+    def show_university_study_room_background(darken = False):
+        university_study_room_image = university_study_room_backgrounds[time_of_day]
+        if darken:
+            university_study_room_image = im.MatrixColor(university_study_room_image, im.matrix.saturation(0.9)*im.matrix.tint(.9,.9,.9)*im.matrix.brightness(-0.25))
+        renpy.show("university_study_room", what=Image(university_study_room_image), layer = "master")
+        return
+
+    def show_concert_hall_background(darken = False):
+        concert_hall_image = concert_hall_backgrounds[time_of_day]
+        if darken:
+            concert_hall_image = im.MatrixColor(concert_hall_image, im.matrix.saturation(0.9)*im.matrix.tint(.9,.9,.9)*im.matrix.brightness(-0.25))
+        renpy.show("concert_hall", what = Image(concert_hall_image), layer = "master")
         return
 
 label updated_room_background(stack):

@@ -51,6 +51,8 @@ init -1 python:
             not_met_yet_list.append(sakari)
         if "ellie" in globals() and ellie.mc_title == 'Stranger':
             not_met_yet_list.append(ellie)
+        if "myra" in globals() and myra.mc_title == 'Stranger':
+            not_met_yet_list.append(myra)
         return not_met_yet_list
 
     @lru_cache_function(max_size=3, expiration=5)

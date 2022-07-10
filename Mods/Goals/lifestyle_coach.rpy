@@ -35,7 +35,7 @@ init -1 python:
     #     global dawn
     #     dawn = make_person(name = "Dawn", age = 42, body_type = "thin_body", \
     #         personality = relaxed_personality, job = dawn_job, \
-    #         sex_array = [3,3,4,3], start_obedience = -28, start_happiness = 129, start_love = 0, \
+    #         sex_skill_array = [3,3,4,3], obedience = -28, happiness = 129, love = 0, \
     #         title = "Dawn", possessive_title = "Your lifestyle coach", mc_title = mc.name, force_random = True,
     #         forced_opinions = [
     #             ["HR work", 2, True],
@@ -55,7 +55,7 @@ label lifestyle_coach_intro_label(the_person):
     "As you walk around, you spot a kiosk that catches your attention."
     "Lifestyle Coaches: We help you set and achieve long term and short term goals!"
     "You walk around the kiosk a bit, there are all kinds of testimonials and adverts up for the service."
-    the_person "Hello there! I'm [the_person.name]."
+    the_person "Hello there! I'm [the_person.fname]."
     $ scene_manager.add_actor(the_person)
     mc.name "I'm [mc.name]."
     $ the_person.set_title(the_person.name)
@@ -72,7 +72,6 @@ label lifestyle_coach_intro_label(the_person):
     "You share some of your basic short term, and a few long term goals, both for your business and for yourself, personally."
     the_person "I see. Those sound like interesting goals! Might I offer a few alternatives also?"
     mc.name "Sure."
-    #TODO call the screen for the goal system.
     $ hide_ui()
     call screen lifestyle_goal_sheet()
     $ show_ui()
@@ -113,7 +112,7 @@ label lifestyle_coach_choose_sexy_goal_label(the_person):
     $ mc.change_locked_clarity(10)
     "You close your eyes."
     "Try as you might, you can't get images of her sexy body out of your head."
-    the_person "That's it. Visualize what you want. What drives you? What get's you out of bed every morning? Your endgame?"
+    the_person "That's it. Visualize what you want. What drives you? What gets you out of bed every morning? Your endgame?"
     "Try as you might, you can't get the women in your life out of your brain. Maybe... all the money... the company... is really all about?"
     "Having the women in your life serve your needs, physically, emotionally, sexually..."
     $ mc.change_locked_clarity(30)
@@ -141,7 +140,7 @@ label lifestyle_coach_choose_sexy_goal_label(the_person):
         the_person "Then I suppose it's a good thing I don't want to say no!"
         $ the_person.draw_person(position = "blowjob")
         "[the_person.title] gets on her knees and puts her tits between her hands. She looks up into your eyes as your cock slowly slides between them."
-        "Yeah, this feels amazing. You know in your head, this is exactly what you goals are. To have women serve you, fuck you, make you cum."
+        "Yeah, this feels amazing. You know in your head, this is exactly what your goals are. To have women serve you, fuck you, make you cum."
         "You can't wait to cum all over her incredible tits."
         call get_fucked(the_person, the_goal = "body shot", private= True, start_position = tit_fuck, skip_intro = True, allow_continue = False) from _life_coach_tit_fuck_01
         the_person "Oh my god... that was so hot..."
@@ -154,10 +153,9 @@ label lifestyle_coach_choose_sexy_goal_label(the_person):
         "You decide that in the future, you'll be open to cumming all over a girl's fun bags whenever the mood strikes you."
         $ tits_man_perk_unlock()
         "You have unlocked the perk 'Tits Man'! You now have the same clarity multiplier for cumming on tits as you do for creampies!"
-        the_person "I'm going to get cleaned up... you should probably slip out when can..."
+        the_person "I'm going to get cleaned up... you should probably slip out when you can..."
         mc.name "I'll do that. Thanks for the help, [the_person.title]."
         $ clear_scene()
         $ the_person.apply_planned_outfit()
         "You quietly exit the bathroom and go about your day."
-
     return

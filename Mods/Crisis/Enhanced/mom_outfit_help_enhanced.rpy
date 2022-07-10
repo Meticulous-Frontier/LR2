@@ -1,9 +1,31 @@
 init 5 python:
     config.label_overrides["mom_outfit_help_crisis_label"] = "mom_outfit_help_crisis_label_enhanced"
 
+    def sister_helps_mom_with_next_day_outfit(mom, sister):
+        if sister.effective_sluttiness() >= mom.effective_sluttiness():
+            outfit_slut_points = __builtin__.min(__builtin__.int(sister.effective_sluttiness() / 8), 12)
+            allow_skimpy = False
+            max_alterations = 1
+            mom.change_stats(slut = 1, max_slut = (30 if sister.effective_sluttiness() >= 30 else sister.effective_sluttiness()))
+        else:
+            outfit_slut_points = __builtin__.min(__builtin__.int(mom.effective_sluttiness() / 8), 12)
+            allow_skimpy = True
+            max_alterations = 2
+
+        builder = WardrobeBuilder(sister)
+        thinks_appropriate = False
+        while not thinks_appropriate or outfit_slut_points < 0:
+            outfit = mom.personalize_outfit(builder.build_outfit(None, outfit_slut_points), opinion_color = sister.favorite_colour(), coloured_underwear = True, max_alterations = max_alterations, swap_bottoms = True, allow_skimpy = allow_skimpy)
+            thinks_appropriate = mom.judge_outfit(outfit)
+            outfit_slut_points -= 1
+        if thinks_appropriate and outfit:
+            return outfit
+        return None
 
 label mom_outfit_help_crisis_label_enhanced():
     $ the_person = mom
+    if not mom.is_available:
+        return
     # Your mom asks for help planning an outfit for the next day. As a bonus you get to watch her strip down between outfits (peek/don't peek decision given, she doesn't care at high sluttiness)
     if not mom in mc.location.people:
         #She's in a different room, shh calls you in.
@@ -15,11 +37,12 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ mom_bedroom.show_background()
                 $ the_person.draw_person()
                 "You step into [the_person.possessive_title]. She's standing at the foot of her bed and laying out a few sets of clothing."
-                mc.name "Hey Mom, what's up?"
+                mc.name "Hey [the_person.title], what's up?"
 
             "Say you're busy":
                 mc.name "Sorry [the_person.title], I'm a little busy at the moment."
                 the_person "Okay, I'll ask your sister."
+                $ the_person.next_day_outfit = sister_helps_mom_with_next_day_outfit(the_person, lily)
                 $ clear_scene()
                 return
     else:
@@ -32,8 +55,9 @@ label mom_outfit_help_crisis_label_enhanced():
                 "[the_person.possessive_title] goes over to her closet and pulls out a few sets of clothing. She starts to lay them out."
 
             "Say you're busy":
-                mc.name "Sorry Mom, I should really be getting to bed."
+                mc.name "Sorry [the_person.title], I should really be getting to bed."
                 the_person "That's okay [the_person.mc_title], I'll ask your sister then."
+                $ the_person.next_day_outfit = sister_helps_mom_with_next_day_outfit(the_person, lily)
                 $ clear_scene()
                 return
 
@@ -70,7 +94,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                 while strip_choice and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
-                    "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
+                    "You watch as [the_person.possessive_title] take's off her [strip_choice.display_name]."
                     $ mc.change_locked_clarity(2)
                     if renpy.random.randint(0,100) < 10: #you got caught
                         the_person "I'll be done in just a second [the_person.mc_title]..."
@@ -121,14 +145,14 @@ label mom_outfit_help_crisis_label_enhanced():
     "You take a moment to think before responding."
     menu:
         "Say it's too revealing":
-            mc.name "I don't think it's very appropriate for work Mom. Maybe you should try something a little less... revealing."
+            mc.name "I don't think it's very appropriate for work [the_person.title]. Maybe you should try something a little less... revealing."
             $ the_person.change_slut(-2)
             the_person "Maybe you're right. Okay, I'll try something a little more conservative for this next outfit."
             $ outfit_slut_points = __builtin__.max(outfit_slut_points - 1, 0)
             $ second_outfit = builder.personalize_outfit(builder.build_outfit(None, outfit_slut_points)) #Note that if we have impossible values for this function it'll keep exanding the threshold until it's possible
 
         "Say she looks beautiful in it":
-            mc.name "You look beautiful Mom, I think it would be perfect."
+            mc.name "You look beautiful [the_person.title], I think it would be perfect."
             $ the_person.change_stats(happiness = 5, love = 1)
             "She smiles and blushes."
             the_person "You aren't just saying that, are you? I want your real opinion"
@@ -137,7 +161,7 @@ label mom_outfit_help_crisis_label_enhanced():
             $ second_outfit = builder.personalize_outfit(builder.build_outfit(None, outfit_slut_points))
 
         "Say it's not revealing enough":
-            mc.name "I don't know Mom, it's a little stuffy, isn't it? Maybe you should pick something that's a little more modern and fun."
+            mc.name "I don't know [the_person.title], it's a little stuffy, isn't it? Maybe you should pick something that's a little more modern and fun."
             $ the_person.change_slut(1+the_person.get_opinion_score("skimpy uniforms"))
             $ outfit_slut_points = __builtin__.min(outfit_slut_points + 1, 12)
             $ the_person.discover_opinion("skimpy uniforms")
@@ -146,7 +170,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 "She nods and turns towards her closet."
                 the_person "Okay, I'll give something else a try then."
             else:
-                the_person "Oh no, I hate having to dress in those skimpy little outfits everyone wants their secretary in these days."
+                the_person "Oh no, I hate having to dress in those skimpy little outfits everyone wants their secretaries in these days."
                 "She sighs and shrugs."
                 the_person "Well, if that's what you think I'll give something else a try."
             $ second_outfit = builder.personalize_outfit(builder.build_outfit(None, outfit_slut_points))
@@ -172,7 +196,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                 while strip_choice and not caught:
                     $ the_person.draw_animated_removal(strip_choice)
-                    "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
+                    "You watch as [the_person.possessive_title] take's off her [strip_choice.display_name]."
                     $ mc.change_locked_clarity(2)
                     if renpy.random.randint(0,100) < 10: #you got caught
                         the_person "I'll be done in just a second [the_person.mc_title]..."
@@ -244,11 +268,24 @@ label mom_outfit_help_crisis_label_enhanced():
             $ the_person.draw_person()
 
             if third_outfit == None:
-                "You try a few different combinations, but you can't come up with anything you think Mom will like."
-                mc.name "Sorry Mom, I thought I had an idea but I guess I was wrong."
-                the_person "That's fine [the_person.mc_title]. I think I'm going to go with the first one anyway."
-                $ the_person.change_happiness(5)
-                $ the_person.next_day_outfit = first_outfit
+                "You try a few different combinations, but you can't come up with anything you think [the_person.title] will like."
+                mc.name "Sorry [the_person.title], I thought I had an idea but I guess I was wrong."
+                the_person "That's fine [the_person.mc_title]. Do you want to pick one of my outfits instead?"
+                menu:
+                    "Suggest the first outfit":
+                        mc.name "I think you looked best in the first outfit, you should wear that."
+                        "She smiles and nods."
+                        $ the_person.change_happiness(2)
+                        $ the_person.next_day_outfit = first_outfit
+                        the_person "I think you're right, I'll put it away for tomorrow."
+
+                    "Suggest the second outfit":
+                        mc.name "I think this one suits you better, you should wear it tomorrow."
+                        "She smiles and nods."
+                        $ the_person.change_happiness(2)
+                        $ the_person.next_day_outfit = second_outfit
+                        the_person "I think you're right, it does look good on me."
+
             else:
                 "You lay the outfit out for [the_person.possessive_title]. She looks it over and nods."
                 the_person "I'll try it on, but I think I like it!"
@@ -271,7 +308,7 @@ label mom_outfit_help_crisis_label_enhanced():
                             $ strip_choice = the_person.outfit.remove_random_any(top_layer_first = True, do_not_remove = True)
                             while strip_choice and not caught:
                                 $ the_person.draw_animated_removal(strip_choice)
-                                "You watch as [the_person.possessive_title] take off her [strip_choice.display_name]."
+                                "You watch as [the_person.possessive_title] takes off her [strip_choice.display_name]."
                                 $ mc.change_locked_clarity(2)
                                 if renpy.random.randint(0,100) < 10: #you got caught
                                     the_person "I'll be done in just a second [the_person.mc_title]..."
@@ -336,7 +373,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 the_person "I'm sure it was hard for you... to watch your mother undress like that... right in front of you..."
                 $ the_person.draw_person(position = "kissing")
                 "She wraps her arms around you. The heat coming from her chest radiates against you. It feels great."
-                "You pull her close as your embrace. Your erection is now rubbing up against her belly..."
+                "You pull her close as you embrace. Your erection is now rubbing up against her belly..."
                 the_person "Oh my... you feel so hard. Why don't you let your mother take care of that for you?"
                 "Slowly, [the_person.possessive_title] slides down to her knees. She pulls your zipper down and takes your cock out."
                 $ the_person.draw_person(position = "blowjob")
@@ -345,9 +382,9 @@ label mom_outfit_help_crisis_label_enhanced():
                 if the_person.is_willing(blowjob) and the_person.get_opinion_score("giving blowjobs") >= the_person.get_opinion_score("giving tit fucks"):
                     "[the_person.possessive_title]'s lips part and she runs the tip of your cock back and forth across her tongue."
                     if the_person.has_taboo("sucking_cock"):
-                        the_person "Oh my god... I just can't stop myself. I'm sorry honey, I know I should be doing this..."
+                        the_person "Oh my god... I just can't stop myself. I'm sorry honey, I know I shouldn't be doing this..."
                         the_person "I'll stop if you want me too. You probably think I'm crazy!"
-                        mc.name "I don't think your crazy. This is a great way to say thank you. I can't believe I'm so lucky."
+                        mc.name "I don't think you're crazy. This is a great way to say thank you. I can't believe I'm so lucky."
                         the_person "I'm glad to hear that... I just... need to taste it!!!"
                         $ the_person.break_taboo("sucking_cock")
                     "Suddenly, she opens a bit wider and takes your cock into her mouth. Your hands run through her hair as her head starts to bob up and down."
@@ -358,7 +395,7 @@ label mom_outfit_help_crisis_label_enhanced():
                     if the_person.has_taboo("touching_body"):
                         the_person "Oh my god... it's so hot... I just want to make it feel good!"
                         the_person "I'll stop if you want me too. You probably think I'm crazy!"
-                        mc.name "I don't think your crazy. This is a great way to say thank you. I can't believe I'm so lucky."
+                        mc.name "I don't think you're crazy. This is a great way to say thank you. I can't believe I'm so lucky."
                         the_person "I'm glad to hear that... I just... want to feel it blow all over me!"
                         $ the_person.break_taboo("touching_body")
                     "[the_person.possessive_title] slowly starts to rock her body up and down, stroking your cock with her tits."
@@ -366,7 +403,7 @@ label mom_outfit_help_crisis_label_enhanced():
                 mc.name "That was nice... if you ever need any more outfit advice, let me know!"
             elif the_person.is_willing(SB_doggy_standing):
                 the_person "I mean... you are such a virile young man... maybe you could think of some way I could thank you..."
-                "[the_person.possessive_title] turns around and bends over as she starts to take off what is left over her outfit. She takes her time..."
+                "[the_person.possessive_title] turns around and bends over as she starts to take off what is left of her outfit. She takes her time..."
                 $ the_person.strip_outfit(position = "standing_doggy")
                 "When she finishes, she stays bent over her bed. Her hips wiggle back and forth a bit, making it obvious what she has in mind..."
                 $ mc.change_locked_clarity(20)

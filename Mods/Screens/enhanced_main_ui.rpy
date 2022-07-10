@@ -45,7 +45,7 @@ init 2:
                 textbutton "Energy: [energy_info]":
                     style "transparent_style"
                     text_style "menu_text_style"
-                    tooltip "Many actions require energy to perform, sex especially. Energy comes back slowly throughout the day, and most of it is recovered after a good nights sleep."
+                    tooltip "Many actions require energy to perform, sex especially. Energy comes back slowly throughout the day, and most of it is recovered after a good night's sleep."
                     action NullAction()
                     sensitive True
 

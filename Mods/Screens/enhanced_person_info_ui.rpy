@@ -33,6 +33,24 @@ init -1 python:
                 tooltip += "{name}: {duration} Turns Left\n".format(name = serum.name, duration = serum.duration - serum.duration_counter)
         return tooltip
 
+    def person_info_ui_get_special_role_information(person):
+        info_list = []
+        fetish_roles = [anal_fetish_role, cum_fetish_role, breeding_fetish_role, exhibition_fetish_role]
+        for role in [x for x in person.special_role if not x.hidden and x not in fetish_roles]:
+            info_list.append(role.role_name)
+
+        active_fetishes = []
+        if anal_fetish_role in person.special_role:
+            active_fetishes.append("Anal")
+        if cum_fetish_role in person.special_role:
+            active_fetishes.append("Cum")
+        if breeding_fetish_role in person.special_role:
+            active_fetishes.append("Breeding")
+        if exhibition_fetish_role in person.special_role:
+            active_fetishes.append("Exhibition")
+
+        return (sorted(info_list), active_fetishes)
+
     def person_info_ui_get_job_title(person):
         if person.event_triggers_dict.get("job_known", False):
             return person.job.job_title
@@ -49,9 +67,11 @@ init 2:
             happiness_info = str(__builtin__.int(person.happiness))
             love_info = str(__builtin__.int(person.love))
             sluttiness_info = get_heart_image_list(person.sluttiness, person.effective_sluttiness())
-            obedience_info = str(person.obedience) + " - " + get_obedience_plaintext(person.obedience)
+            obedience_info = str(person.obedience) + " {image=triskelion_token_small} " + get_obedience_plaintext(person.obedience)
             height_info = height_to_string(person.height)
             weight_info = get_person_weight_string(person)
+            (role_list, fetish_list) = person_info_ui_get_special_role_information(person)
+            fetish_info = ", ".join(fetish_list)
 
         frame:
             background im.Alpha("gui/topbox.png", .9)
@@ -68,7 +88,7 @@ init 2:
                 vbox:
                     text format_titles(person) style "menu_text_style" size 30
 
-                    text "     Job: [job_title]" style "menu_text_style"
+                    text "Job: [job_title]" style "menu_text_style" xoffset 40
 
                     viewport:
                         scrollbars "vertical"
@@ -76,8 +96,11 @@ init 2:
                         xsize 220
                         ysize 100
                         vbox:
-                            for role in [x for x in person.special_role if not x.hidden]:
-                                text "       - [role.role_name]" style "menu_text_style" size 14
+                            if len(fetish_list) > 0:
+                                text "- Fetishes: [fetish_info]" style "menu_text_style" size 12 xoffset 60
+
+                            for role in role_list:
+                                text "- [role]" style "menu_text_style" size 12 xoffset 60
 
                 vbox:
                     yoffset 10

@@ -99,7 +99,7 @@ label scene_cum_fetish_blowjob_2(the_girl, the_location, the_object):
         "[the_girl.possessive_title] turns her eyes up and meets your gaze. She eagerly swallows as your push yourself down her throat, her tongue eagerly licking at the bottom of your shaft."
         mc.name "Fuck that feels good [the_girl.title]."
         "In response she bottoms out on your dick. She rocks her head left and right, grinding her face into your crotch to take as much of your length as possible."
-        "She tenses and and relaxes her throat rhythmically, gently massaging your shaft with it."
+        "She tenses and relaxes her throat rhythmically, gently massaging your shaft with it."
         "You moan at the intense sensations.You let go of her head and she slowly comes up for air."
         the_girl "Oh god you taste so good. Just promise me you'll warn me before you cum..."
         the_girl "... I want to wear your cum all over my face, like a good slut! I want to walk around the rest a day with it obvious you've blown your load all over to everyone who sees me..."

@@ -36,8 +36,8 @@ init 2 python: # Declare variables to use
 
         global salon_manager
         salon_manager = make_person(name = "Ophelia", last_name = "von Friseur", age = renpy.random.randint(26,35), body_type = "thin_body", skin="tan", face_style = "Face_11", hair_colour = ["barn red", [.486, .039, .007, 1]], hair_style = messy_hair,
-            personality = salon_manager_personality, starting_wardrobe = salon_wardrobe, eyes="green", sex_array = [1,5,3,1], start_sluttiness = 10,
-            possessive_title = "Your Stylist", relationship = "Single", force_random = True, base_outfit = ophelia_base_outfit,
+            personality = salon_manager_personality, starting_wardrobe = salon_wardrobe, eyes="green", sex_skill_array = [1,5,3,1], sluttiness = 10,
+            possessive_title = "Your Stylist", relationship = "Single", force_random = True, base_outfit = ophelia_base_outfit, type = 'story',
                 forced_opinions = [
                 ["dark chocolate", 2, False],
                 ["hiking", 2, False],
@@ -52,7 +52,7 @@ init 2 python: # Declare variables to use
         salon_manager.add_unique_on_room_enter_event(salon_introduction_action)
 
         # create home for salon manager
-        salon_manager.add_job(salon_job, job_known = True)
+        salon_manager.change_job(salon_job, job_known = True)
         salon_manager.generate_home()
         salon_manager.home.add_person(salon_manager)
 
@@ -78,7 +78,7 @@ init 2 python: # Declare variables to use
         salon_manager.event_triggers_dict["vaginal_position_filter"] = ophelia_vaginal_position_filter
         salon_manager.event_triggers_dict["anal_position_filter"] = ophelia_anal_position_filter
         salon_manager.event_triggers_dict["unique_sex_positions"] = ophelia_unique_sex_positions
-        salon_manager.event_triggers_dict["ex_name"] = get_random_male_name()
+        salon_manager.event_triggers_dict["ex_name"] = Person.get_random_male_name()
         salon_manager.event_triggers_dict["favorite_drink"] = "gin sour"
         salon_manager.event_triggers_dict["over_her_ex"] = 0
         salon_manager.event_triggers_dict["talk_about_candace"] = 0
@@ -98,6 +98,6 @@ init 2 python: # Declare variables to use
         return False
 
     salon_action = ActionMod("Schedule a haircut {image=gui/heart/Time_Advance.png}", salon_requirement, "salon_label", initialization = hair_salon_mod_initialization,
-        menu_tooltip = "Change a persons hair style and color.", category="Mall")
+        menu_tooltip = "Change a person's hair style and color.", category="Mall")
 
     salon_introduction_action = Action("Ophelia's Hair Salon", salon_introduction_action_requirement, "salon_manager_greetings", menu_tooltip = "Ophelia's Hair Salon")

@@ -222,7 +222,7 @@ label strip_club_manager_bdsm_room_reminder_label(): # phone call
     return
 
 label strip_club_manager_bdsm_room_built_label(): # (time event)
-    $ man_name = get_random_male_name()
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."

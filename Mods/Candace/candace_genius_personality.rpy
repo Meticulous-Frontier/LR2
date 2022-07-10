@@ -12,7 +12,7 @@ init 1400:
             return mc.name
 
         genius_personality = Personality("genius", default_prefix = relaxed_personality.default_prefix,
-        common_likes = ["pants", "the weekend", "small talk", "the colour pink", "research work", "supply work", "flirting","punk","pop"],
+        common_likes = ["pants", "the weekend", "small talk", "the colour pink", "research work", "supply work", "flirting","punk music","pop music"],
         common_sexy_likes = ["missionary style sex", "kissing", "masturbating", "being submissive", "drinking cum", "cum facials"],
         common_dislikes = ["Mondays", "the colour yellow", "research work", "work uniforms"],
         common_sexy_dislikes = ["taking control", "doggy style sex", "showing her tits", "showing her ass", "bareback sex", "creampies"],
@@ -30,11 +30,11 @@ label genius_introduction(the_person):
     "She laughs and blushes."
     the_person "Really? You're just saying that to impress me, aren't you."
     mc.name "Really, I really just wanted to talk to you."
-    $ title_choice = get_random_title(the_person)
+    $ title_choice = the_person.get_random_title()
     $ formatted_title = the_person.create_formatted_title(title_choice)
     the_person "Well fine, my name is [formatted_title]. It's nice to meet you..."
     $ the_person.set_title(title_choice)
-    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+    $ the_person.set_possessive_title(the_person.get_random_possessive_title())
     "She waits expectantly for you to introduce yourself."
     return
 
@@ -80,7 +80,7 @@ label genius_sex_responses_foreplay(the_person):
             else:
                 the_person "Oh god, I'm getting so hot. You'd better get me out of these clothes soon."
         else:
-            the_person "Mmm this feels amazing [the_person.mc_title]."
+            the_person "Mmm, this feels amazing [the_person.mc_title]."
 
     else:
         if the_person.sluttiness > 50:
@@ -220,7 +220,7 @@ label genius_clothing_accept(the_person):
     if the_person.obedience > 130:
         the_person "It's for me? Thank you [the_person.mc_title], I'll add it to my wardrobe."
     else:
-        the_person "Oh, it's cute! Thanks [the_person.mc_title]!"
+        the_person "Oh, it's cute! Thanks, [the_person.mc_title]!"
     return
 
 label genius_clothing_reject(the_person):
@@ -404,7 +404,7 @@ label genius_flirt_response_low(the_person):
     if the_person.outfit == the_person.planned_uniform:
         if the_person.judge_outfit(the_person.outfit):
             #She's in uniform and likes how it looks.
-            the_person "Thanks [the_person.mc_title]. I like these uniforms too. Did you design them yourself?"
+            the_person "Thanks, [the_person.mc_title]. I like these uniforms too. Did you design them yourself?"
             mc.name "I did."
             the_person "Amazing! I think you have a good eye for fashion."
             mc.name "It's easy when I have such good models for it all."
@@ -897,7 +897,7 @@ label genius_surprised_exclaim(the_person):
 
 label genius_talk_busy(the_person):
     if the_person.obedience > 120:
-        the_person "Hey, I'm really sorry but I've got some stuff I need to take care of. Could we catch up some other time?"
+        the_person "Hey, I'm really sorry, but I've got some stuff I need to take care of. Could we catch up some other time?"
     else:
         the_person "Hey, sorry [the_person.mc_title] but I've got some stuff to take care of. It was great talking though!"
     return
@@ -929,29 +929,29 @@ label genius_sex_watch(the_person, the_sex_person, the_position):
         $ the_person.draw_person(emotion = "angry")
         the_person "Holy shit, are you really doing this in front of everyone?"
         $ the_person.change_stats(happiness = -1, obedience = -2)
-        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person()
         $ the_person.change_happiness(-1)
-        "[title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
         the_person "Oh my god, you two are just... Wow..."
         $ change_report = the_person.change_slut(1)
-        "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
+        "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh my god that's... Wow that looks... Hot."
         $ change_report = the_person.change_slut(2)
-        "[title] watches you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches you and [the_sex_person.fname] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         the_person "Come on [the_person.mc_title], you can give her a little more than that. I'm sure she can handle it."
-        "[title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches eagerly while you and [the_sex_person.fname] [the_position.verb]."
 
     return
 
@@ -960,36 +960,36 @@ label genius_being_watched(the_person, the_watcher, the_position):
         #They agree you should give it to her harder
         the_person "I can handle it [the_person.mc_title], you can be rough with me."
         $ the_person.change_arousal(1)
-        "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's super slutty and doesn't care what people think.
-        the_person "Don't listen to [the_watcher.name], I'm having a great time. Look, she can't stop peeking over."
+        the_person "Don't listen to [the_watcher.fname], I'm having a great time. Look, she can't stop peeking over."
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #She's super slutty and encourages the watcher to be slutty.
         $ the_person.change_arousal(1)
-        "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
         #She's into it and encouraged by the slut watching her.
         the_person "Oh god, having you watch us like this..."
         $ the_person.change_arousal(1)
-        "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], maybe we shouldn't be doing this here..."
         $ the_person.change_arousal(-1)
         $ the_person.change_slut(-1)
-        "[the_person.title] seems uncomfortable with [the_watcher.name] nearby."
+        "[the_person.title] seems uncomfortable with [the_watcher.fname] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "Oh my god, having you watch us do this feels so dirty. I think I like it!"
         $ the_person.change_arousal(1)
         $ the_person.change_slut(1)
-        "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
+        "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.fname] around."
 
     return
 
@@ -998,7 +998,7 @@ label genius_work_enter_greeting(the_person):
         if the_person.obedience > 120:
             "[the_person.title] gives you a curt nod and then turns back to what she was doing."
         else:
-            "[the_person.title] glances at you when you enters the room then looks away quickly to avoid starting a conversation."
+            "[the_person.title] glances at you when you enter the room then looks away quickly to avoid starting a conversation."
 
     elif the_person.happiness > 120:
         if the_person.sluttiness > 50:
@@ -1303,7 +1303,7 @@ label genius_underwear_nudity_taboo_break(the_person, the_clothing):
     if the_person.effective_sluttiness() > 30 - (the_person.get_opinion_score("skimpy outfits") * 5):
         the_person "You want to get a look at my underwear, huh?"
         if the_person.has_taboo(["bare_tits","bare_pussy"]):
-            mc.name "I do. You've got good fashion sense, I bet you wear wear some cute underwear too."
+            mc.name "I do. You've got good fashion sense, I bet you wear some cute underwear too."
             the_person "Well, let's get this off and you can check for yourself."
         else:
             mc.name "I do. I've already seen you naked, but I appreciate your fashion sense."
@@ -1415,7 +1415,7 @@ label genius_creampie_taboo_break(the_person):
                 the_person "Ah, finally! I've wanted a load inside me for so long, I don't even care that it's not my [so_title] giving it to me!"
 
             else:
-                the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care I'm not on the pill!."
+                the_person "Ah, finally! I've wanted you to put a load inside me for so long! I don't even care I'm not on the pill!"
                 $ the_person.update_birth_control_knowledge()
 
             "She pants happily for a moment."

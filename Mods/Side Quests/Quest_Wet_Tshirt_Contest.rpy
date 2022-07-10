@@ -132,7 +132,7 @@ label quest_wet_tshirt_contest_intro_label(the_person):
     the_person "Hello [the_person.mc_title], I could use your help with something."
     mc.name "What do you need?"
     the_person "I've been looking into different methods we could use to help market product, but I've kind of hit a wall."
-    the_person "As you know, there's been a huge reason rise in live-streaming as a source of marketing potential, but I can't figure out what we could do that would get us the eyeballs we are looking for."
+    the_person "As you know, there's been a huge recent rise in live-streaming as a source of marketing potential, but I can't figure out what we could do that would get us the eyeballs we are looking for."
     mc.name "You mean you want to have... some kind of broadcast?"
     the_person "Right. I think we could make a live-stream for our product, and if we targeted the right audience, it would help drive up demand for the product, while being extremely cheap to produce."
     mc.name "Hmm... that's an interesting idea."
@@ -214,7 +214,7 @@ label quest_wet_tshirt_contest_hr_talk_label(the_person):
         "She seems a bit relieved."
         the_person "Oh! That makes sense. Let me see..."
     the_person "Give me a couple of days and I'll ask around the office. I'll come find you in a couple days and let you know if I can... staff it."
-    mc.name "Thanks [the_person.title]. I appreciate it."
+    mc.name "Thanks, [the_person.title]. I appreciate it."
     the_person "I'm sure you do..."
     #TODO link next event.
     return

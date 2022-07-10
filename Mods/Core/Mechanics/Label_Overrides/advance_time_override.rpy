@@ -38,11 +38,20 @@ init -1 python:
     def advance_time_people_run_turn_requirement():
         return True
 
+    def advance_time_update_progression_scenes_requirement():
+        return True
+
     def jump_game_loop():
         # make sure we empty the call stack before jumping to main loop
         while renpy.call_stack_depth() > 1:
             renpy.pop_call()
         renpy.jump("game_loop")
+
+    def clean_memory():
+        if "character_cache" in globals():
+            character_cache.clear()
+        renpy.free_memory()
+        return
 
 init 5 python:
     global crisis_chance
@@ -79,7 +88,7 @@ init 5 python:
     advance_time_next_action = ActionMod("Advances into the next time slot", advance_time_next_requirement,
         "advance_time_next_label", priority = 5, allow_disable = False)
 
-    advance_time_bankrupt_check_action = ActionMod("Determines if it is game over due to having gone bankrupt.", advance_time_bankrupt_check_requirement,
+    advance_time_bankrupt_check_action = ActionMod("Bankruptcy check (Game Over)", advance_time_bankrupt_check_requirement,
         "advance_time_bankrupt_check_label", priority = 6, category = "Gameplay")
 
     advance_time_end_of_day_action = ActionMod("Ends the day if time_of_day is 4", advance_time_end_of_day_requirement,
@@ -89,15 +98,20 @@ init 5 python:
     advance_time_people_run_move_action = ActionMod("Moves people to their destinations", advance_time_next_requirement,
         "advance_time_people_run_move_label", priority = 8, allow_disable = False)
 
+    advance_time_update_progression_scenes_action = ActionMod("Updates Progression Scenes", advance_time_update_progression_scenes_requirement,
+        "advance_time_update_progression_scenes_label", priority = 9, allow_disable = False)
+
     advance_time_mandatory_morning_crisis_action = ActionMod("Run mandatory morning crisis events", advance_time_mandatory_morning_crisis_requirement,
         "advance_time_mandatory_morning_crisis_label", priority = 10, category = "Gameplay", allow_disable = False)
 
     advance_time_random_morning_crisis_action = ActionMod("Run random morning crisis events", advance_time_random_morning_crisis_requirement,
         "advance_time_random_morning_crisis_label", priority = 11, category = "Gameplay")
 
+
+
     advance_time_action_list = [advance_time_people_run_turn_action, advance_time_people_run_day_action, advance_time_end_of_day_action, advance_time_next_action, advance_time_mandatory_crisis_action,
         advance_time_random_crisis_action, advance_time_mandatory_morning_crisis_action, advance_time_random_morning_crisis_action,
-        advance_time_people_run_move_action, advance_time_bankrupt_check_action]
+        advance_time_people_run_move_action, advance_time_bankrupt_check_action, advance_time_update_progression_scenes_action]
 
     # sort list on execution priority
     advance_time_action_list.sort(key = lambda x: x.priority)
@@ -202,6 +216,7 @@ init 5 python:
         return
 
     def advance_time_run_day(people):
+        renpy.not_infinite_loop(5)
         for (person, _) in people:
             person.run_day()
 
@@ -214,7 +229,7 @@ init 5 python:
         return
 
     def advance_time_run_move(people):
-        renpy.execution.il_time = start_time + 10 # delay the infinite loop detector for 10 seconds
+        renpy.not_infinite_loop(10)
         for (person, place) in people: #Now move everyone to where the should be in the next time chunk. That may be home, work, etc.
             person.run_move(place)
 
@@ -233,6 +248,11 @@ init 5 python:
                         person.add_unique_on_talk_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
                     elif crisis[2] == "on_enter" and not crisis[0] in [x.the_action for x in person.on_room_enter_event_list if isinstance(x, Limited_Time_Action)]:
                         person.add_unique_on_room_enter_event(Limited_Time_Action(crisis[0], crisis[0].event_duration))
+        return
+
+    def advance_time_update_progression_scenes():
+        for x in list_of_progression_scenes:
+            x.update()
         return
 
 label advance_time_move_to_next_day():
@@ -375,7 +395,7 @@ label advance_time_people_run_day_label():
 label advance_time_end_of_day_label():
     python:
         # we need to clear memory at least once a day (so the texture_cache gets cleared, it will throw an out of memory exception otherwise)
-        renpy.free_memory()
+        clean_memory()
         #$ renpy.profile_memory(.5, 1024)
         renpy.block_rollback()
 
@@ -455,4 +475,9 @@ label advance_time_people_run_move_label():
         advance_time_run_move(people_to_process)
         advance_time_assign_limited_time_events(people_to_process)
         renpy.suspend_rollback(False)
+    return
+
+label advance_time_update_progression_scenes_label():
+    python:
+        advance_time_update_progression_scenes()
     return

@@ -34,6 +34,8 @@ init -1 python:
         self.locked_clarity += amount
 
         arousal = __builtin__.int(amount * .2)
+        if arousal > 5:
+            arousal = 5
         self.arousal += arousal
 
         if add_to_log and amount != 0:

@@ -13,6 +13,14 @@ init 5 python:
             person.change_stats(happiness = happiness, obedience = obedience)
         return
 
+    def broken_AC_crisis_update_uniforms():
+        for person in mc.business.p_div.people:
+            if person.should_wear_uniform():
+                person.planned_uniform = person.outfit.get_copy()
+            else:
+                person.planned_outfit = person.outfit.get_copy()
+        return
+
     def broken_AC_crisis_update_sluttiness():
         for person in mc.business.p_div.people:
             person.change_slut(2, add_to_log = False)
@@ -49,14 +57,14 @@ label broken_AC_crisis_label_enhanced():
 
     $ scene_manager = Scene()
     "There is a sudden bang in the office, followed by a strange silence. A quick check reveals the air conditioning has died!"
-    "The machines running at full speed in the production department kick out a significant amount of heat. Without air condition the temperature quickly rises to uncomfortable levels."
+    "The machines running at full speed in the production department kick out a significant amount of heat. Without air conditioning the temperature quickly rises to uncomfortable levels."
     $ mc.business.p_div.show_background()
     #We're going to use the most slutty girl of the group lead the pack. She'll be the one we pay attention to.
     $ scene_manager.add_actor(the_person)
     if mc.business.p_div.get_person_count() == 1:
-        "The air conditioner was under warranty, and a quick call has one of their repair men over in a couple of hours. Until then [the_person.name] wants to know what to do."
+        "The air conditioner was under warranty, and a quick call will have one of their repair men over in a couple of hours. Until then [the_person.fname] wants to know what to do."
     else:
-        "The air conditioner was under warranty, and a quick call has one of their repair men over in a couple of hours. Until then, the production staff want to know what to do."
+        "The air conditioner was under warranty, and a quick call will have one of their repair men over in a couple of hours. Until then, the production staff want to know what to do."
 
     menu:
         "Take a break":
@@ -72,7 +80,7 @@ label broken_AC_crisis_label_enhanced():
 
         "Tell everyone to strip down and keep working" if casual_uniform_policy.is_active():
             if mc.business.p_div.get_person_count() > 1: #We have more than one person, do a group strip scene.
-                mc.name "I know it's uncomfortable in here right now, but we're just going to have to make due."
+                mc.name "I know it's uncomfortable in here right now, but we're just going to have to make do."
                 mc.name "If anyone feels the need to take something off to get comfortable, I'm lifting the dress code until the air conditioning is fixed."
 
                 $ scene_manager.update_actor(the_person, emotion = "happy")
@@ -85,8 +93,8 @@ label broken_AC_crisis_label_enhanced():
 
             else: #There's just one person here, have them strip down.
                 $ scene_manager.update_actor(the_person, emotion = "sad")
-                mc.name "[the_person.title], I know it's uncomfortable in here right now, but we're going to have to make due."
-                mc.name "If you feel like it would help to take something off, I'm lifting the dress code until the air condition is fixed."
+                mc.name "[the_person.title], I know it's uncomfortable in here right now, but we're going to have to make do."
+                mc.name "If you feel like it would help to take something off, I'm lifting the dress code until the air conditioner is fixed."
                 if the_person.effective_sluttiness() < 20:
                     the_person "Taking some of this off would be a lot more comfortable..."
                 else:
@@ -119,7 +127,7 @@ label broken_AC_crisis_label_enhanced():
                         $ girl_choice.change_slut(2)
                         if girl_choice.effective_sluttiness() < 40:
                             $ scene_manager.update_actor(girl_choice, emotion = "sad")
-                            "[girl_choice.title] definitely saw you watching her as she stripped. She looks at you and blushes slightly and avoids making eye contact."
+                            "[girl_choice.title] definitely saw you watching her as she stripped. She looks at you, blushes slightly and avoids making eye contact."
                         else:
                             $ scene_manager.update_actor(girl_choice, emotion = "happy")
                             $ girl_choice.change_love(2)
@@ -132,14 +140,14 @@ label broken_AC_crisis_label_enhanced():
                         "The girls laugh and tease each other as they strip down, and they all seem to be more comfortable with the heat once they are less clothed."
                         "For a while all of the girls work in various states of undress while under your watchful eye."
                         $ broken_ac_crisis_strip_other_girls(the_person, girl_choice)
-                        if time_of_day >= 3:
-                            "The repair man shows up quickly, and you lead him directly to the AC unit. The problem turns out to be a quick fix, and the production room will be back to a comfortable temperature the next day."
-                        else:
-                            "The repair man shows up quickly, and you lead him directly to the AC unit. The problem turns out to be a quick fix, and the production room will be back to a comfortable temperature within an hour."
+                        # if time_of_day >= 3:
+                            # "The repair man shows up quickly, and you lead him directly to the AC unit. The problem turns out to be a quick fix, and the production room will be back to a comfortable temperature the next day."
+                        # else:
+                        "The repair man shows up quickly, and you lead him directly to the AC unit. The problem turns out to be a quick fix, and the production room will be back to a comfortable temperature within an hour."
 
                     $ girl_choice = None
                 else:
-                    "The other girls exchange glances, and everyone seems decides it's best not to take this too far."
+                    "The other girls exchange glances, and everyone seems to decide it's best not to take this too far."
                     "They get back to work fully dressed, and soon the repair man has shown up. The problem turns out to be a quick fix, and production will be back to a comfortable temperature the next day."
             else:
                 if removed_something:
@@ -155,6 +163,7 @@ label broken_AC_crisis_label_enhanced():
         "Tell everyone to strip down and keep working.\n{color=#ff0000}{size=18}Requires: [casual_uniform_policy.name]{/size}{/color} (disabled)" if not casual_uniform_policy.is_active():
             pass
 
+    $ broken_AC_crisis_update_uniforms()
     $ scene_manager.clear_scene()
     $ clear_scene()
     return
@@ -186,7 +195,7 @@ label broken_AC_crisis_break_taboo(the_girl):
             $ the_girl.break_taboo("bare_pussy")
     else:
         $ mc.change_locked_clarity(10)
-        "[the_girl.possessive_title] finishes stripping and looks at back at you."
+        "[the_girl.possessive_title] finishes stripping and looks back at you."
         if (the_girl.outfit.wearing_panties() and not the_girl.outfit.panties_covered()) or (the_girl.outfit.wearing_bra() and not the_girl.outfit.bra_covered()):
             if the_girl.has_taboo("underwear_nudity"):
                 "She seems nervous at first, but quickly gets used to being in her underwear in front of you."

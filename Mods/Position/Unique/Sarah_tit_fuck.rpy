@@ -59,7 +59,7 @@ label taboo_break_sarah_tit_fuck(the_girl, the_location, the_object):
         "She lifts your hands off of her chest and kneels down, taking her tits up into her own hands"
     $ the_girl.draw_person(position = "blowjob")
     "She hefts her breasts up and presses them on either side of your shaft."
-    if rank_tits(the_girl.tits) >= 7: #E sized or larger
+    if Person.rank_tits(the_girl.tits) >= 7: #E sized or larger
         "They're warm, soft, and feel like they melt around your sensitive dick. Her breasts are so large the tip of your cock doesn't even make it to the top of her cleavage."
     else:
         "They're warm, soft, and feel like they melt around your sensitive dick. The tip of your cock just barely pops out of the top of her cleavage."
@@ -127,7 +127,7 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
 
         "Cum on her face":
             "You close your eyes and focus on the sensation of [the_girl.possessive_title]'s warm, soft breasts massaging your cock."
-            "As your orgasm builds to its peak, you step back, sliding your cock out from her cleavage and take it up in your own hand."
+            "As your orgasm builds to its peak, you step back, slide your cock out from her cleavage and take it up in your own hand."
             $ the_girl.draw_person(position = "kneeling1")
             if the_girl.effective_sluttiness() > 40 or the_girl.get_opinion_score("cum facials") > 0:
                 "[the_girl.title] understands immediately what is about to happen and tilts her head up, giving you a clear target."
@@ -143,7 +143,7 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
     return
 
 label transition_default_sarah_tit_fuck(the_girl, the_location, the_object):
-    "You grab a hold of sizeable tits and give them a gentle squeeze, bringing a little moan from her lips."
+    "You grab a hold of her sizeable tits and give them a gentle squeeze, bringing a little moan from her lips."
     mc.name "I want to feel my cock between these lovely tits again."
     "She smiles and nods, dropping to her knees in front of you. She gathers her tits up in her hands and presses them to the side of your shaft."
     return

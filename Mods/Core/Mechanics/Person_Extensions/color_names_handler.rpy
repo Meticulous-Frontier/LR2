@@ -13,12 +13,12 @@ init 6 python:
 
 
     hair_color_names_to_hex = {}
-    for color in list_of_hairs:
+    for color in Person._list_of_hairs:
         hair_color_names_to_hex[color[0]] = normalize_hex(rgb_to_hex(rgb_fraction_to_rgb((color[1][0], color[1][1], color[1][2]))))
     hair_color_hex_to_names  = _reversedict(hair_color_names_to_hex)
 
     eye_color_names_to_hex = {}
-    for color in list_of_eyes:
+    for color in Person._list_of_eyes:
         eye_color_names_to_hex[color[0]] = normalize_hex(rgb_to_hex(rgb_fraction_to_rgb((color[1][0], color[1][1], color[1][2]))))
     eye_color_hex_to_names  = _reversedict(eye_color_names_to_hex)
 

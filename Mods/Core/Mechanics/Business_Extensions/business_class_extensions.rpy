@@ -116,23 +116,6 @@ init -1 python:
 
     Business.add_uniform_to_company = add_uniform_to_company
 
-    def production_progress_enhanced(self,focus,int,skill,multiplier = 1.0):
-        #First, figure out how many production points we can produce total. Subtract that much supply and mark that much production down for the end of day report.
-        production_amount = __builtin__.int(((3*focus) + int + (2*skill) + 10) * (self.team_effectiveness / 100.0) * multiplier)
-        self.production_potential += production_amount
-
-        if production_amount > self.supply_count:
-            production_amount = self.supply_count #Figure out our total available production, before we split it up between tasks (which might not have 100% usage!)
-
-        for line in self.production_lines:
-            supply_used = line.add_production(production_amount) #NOTE: this is modified by the weighted use of the Line in particular. This allows for greater than 100% efficency.
-            self.supply_count += - supply_used
-            self.production_used += supply_used
-
-        return production_amount
-
-    Business.production_progress = production_progress_enhanced
-
     def get_business_stripper_wardrobe(self):
         if not hasattr(self, "_stripper_wardrobe"):
             self._stripper_wardrobe = stripclub_wardrobe
@@ -237,15 +220,13 @@ init -1 python:
         if "get_strip_club_foreclosed_stage" in globals():
             if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
                 multiplier = 1
-                if __builtin__.len(people_in_role(stripclub_manager_role)) > 0 or __builtin__.len(people_in_role(stripclub_mistress_role)) > 0:
+                if any([x for x in all_people_in_the_game() if x.is_at_work() and x.has_job([stripclub_manager_job, stripclub_mistress_job])]):
                     multiplier = 1.1 # +10% income
 
-                for person in known_people_in_the_game():
-                    if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role]):
-                        income += (calculate_stripper_profit(person) * multiplier)  # profit
-
-                    if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]):
-                        income -= person.stripper_salary    # costs
+                # use roles instead of jobs (unique chars only get role (the keep their normal jobs))
+                for person in [x for x in known_people_in_the_game() if x.is_at_work() and x.has_role([stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role])]:
+                    income += (calculate_stripper_profit(person) * multiplier)  # profit
+                    income -= person.stripper_salary    # costs
 
         return __builtin__.int(income)  # round to whole dollars
 
@@ -277,27 +258,32 @@ init -1 python:
             if not person.job:
                 return None
 
+            if "college_intern_role" in globals():
+                # only use this part after the college interns unlocked
+                if person.job == student_intern_market_job and not person.location == university:
+                    return business.m_uniform
+                if person.job == student_intern_rd_job and not person.location == university:
+                    return business.r_uniform
+                if person.job == student_intern_production_job and not person.location == university:
+                    return business.p_uniform
+                if person.job == student_intern_supply_job and not person.location == university:
+                    return business.s_uniform
+                if person.job == student_intern_hr_job and not person.location == university:
+                    return business.h_uniform
+
             if person == police_chief:
-                if not "police_chief_uniform_wardrobe" in globals():    # save game compatibility remove after v0.49
-                    cop_outfit = police_chief.wardrobe.get_outfit_with_name("Cop").get_copy()
-
-                    global police_chief_uniform_wardrobe
-                    police_chief_uniform_wardrobe = Wardrobe("Cop Uniform")
-                    police_chief_uniform_wardrobe.add_outfit(cop_outfit)
-                    police_chief.wardrobe.remove_outfit(cop_outfit)
-
                 return police_chief_uniform_wardrobe
             if person.job == stripper_job: # base game stripper
                 return stripclub_wardrobe
-            if person.job == stripclub_stripper_job: # stripclub bought stripper
+            if person.job == stripclub_stripper_job or person.has_role(stripclub_stripper_role): # stripclub bought stripper
                 return business.stripper_wardrobe
-            if person.job == stripclub_waitress_job:
+            if person.job == stripclub_waitress_job or person.has_role(stripclub_waitress_role):
                 return business.waitress_wardrobe
-            if person.job == stripclub_bdsm_performer_job:
+            if person.job == stripclub_bdsm_performer_job or person.has_role(stripclub_bdsm_performer_role):
                 return business.bdsm_wardrobe
-            if person.job == stripclub_mistress_job:
+            if person.job == stripclub_mistress_job or person.has_role(stripclub_mistress_role):
                 return business.mistress_wardrobe
-            if person.job == stripclub_manager_job:
+            if person.job == stripclub_manager_job or person.has_role(stripclub_manager_role):
                 return business.manager_wardrobe
             return None
 
@@ -316,9 +302,9 @@ init -1 python:
 
     def fire_IT_director(self):
         if self.it_director:
+            self.set_override_schedule(None, the_days = [0, 1, 2, 3, 4], the_times = [1,2,3])
             self.it_director.remove_role(IT_director_role)
             self.it_director = None
-            #cleanup_HR_director_meetings()
 
     Business.fire_IT_director = fire_IT_director
 
@@ -328,8 +314,11 @@ init -1 python:
         def remove_employee_wrapper(business, person):
             org_func(business, person)
 
-            if person is business.hr_director:
+            if person == business.hr_director:
                 business.fire_HR_director()
+
+            if person == business.it_director:
+                business.fire_IT_director()
 
             if person == cousin and get_strip_club_foreclosed_stage() == 0: # she goes back to stripping
                 stripclub_strippers.append(person)
@@ -399,6 +388,58 @@ init -1 python:
 
     Business.date_scheduled_today = date_scheduled_today
 
+    # Day function wrappers
+
+    def set_event_day(self, dict_key, override = True, set_day = None):
+        if not override and self.event_triggers_dict.get(dict_key, None):
+            return False
+        if set_day != None:
+            self.event_triggers_dict[dict_key] = set_day
+        else:
+            self.event_triggers_dict[dict_key] = day
+        return
+
+    def get_event_day(self, dict_key, set_if_none = True):
+        if self.event_triggers_dict.get(dict_key, None) == None and set_if_none:
+            self.set_event_day(dict_key)
+        return self.event_triggers_dict.get(dict_key, None)
+
+    def days_since_event(self, dict_key, set_if_none = True):
+        if self.event_triggers_dict.get(dict_key, None) == None and set_if_none:
+            self.set_event_day(dict_key)
+        if self.event_triggers_dict.get(dict_key, None):
+            return day - self.event_triggers_dict.get(dict_key, None)
+        else:
+            return None
+
+    def string_since_event(self, dict_key, set_if_none = True): #Returns a string describing how long it has been since an event
+        if self.days_since_event(dict_key) < 1:
+            return "earlier"
+        elif self.days_since_event(dict_key) == 1:
+            return "yesterday"
+        elif self.days_since_event(dict_key) <= 4:
+            return "a few days ago"
+        elif self.days_since_event(dict_key) <= 10:
+            return "a week ago"
+        elif self.days_since_event(dict_key) <= 19:
+            return "a couple weeks ago"
+        elif self.days_since_event(dict_key) <= 28:
+            return "a few weeks ago"
+        elif self.days_since_event(dict_key) <= 45:
+            return "a month ago"
+        elif self.days_since_event(dict_key) <= 75:
+            return "a couple months ago"
+        elif self.days_since_event(dict_key) <= 145:
+            return "a few months ago"
+        else:
+            return "a while ago"
+
+
+    Business.set_event_day = set_event_day
+    Business.get_event_day = get_event_day
+    Business.days_since_event = days_since_event
+    Business.string_since_event = string_since_event
+
     # College intern related functions
     def business_college_interns_research(self):
         if not hasattr(self, "_college_interns_research"):
@@ -444,16 +485,16 @@ init -1 python:
 
     def hire_college_intern(self, person, target_division, add_to_location = False):
         div_func = {
-            "Research" : [ self.college_interns_research, self.r_div],
-            "Production" : [ self.college_interns_production, self.p_div],
-            "Supply" : [ self.college_interns_supply, self.s_div ],
-            "Marketing" : [ self.college_interns_market, self.m_div ],
-            "HR" : [ self.college_interns_HR, self.h_div ]
+            "Research" : [ self.college_interns_research, self.r_div, student_intern_rd_job],
+            "Production" : [ self.college_interns_production, self.p_div, student_intern_production_job],
+            "Supply" : [ self.college_interns_supply, self.s_div, student_intern_supply_job],
+            "Marketing" : [ self.college_interns_market, self.m_div, student_intern_market_job],
+            "HR" : [ self.college_interns_HR, self.h_div, student_intern_hr_job]
         }
         if not person in div_func[target_division][0]:
             div_func[target_division][0].append(person)
         person.add_role(college_intern_role)
-        person.add_job(student_job)
+        person.change_job(div_func[target_division][2])
         person.set_override_schedule(div_func[target_division][1], the_days = [5,6], the_times = [1,2])
         if add_to_location:
             university.add_person(person)
@@ -479,8 +520,6 @@ init -1 python:
             self.college_interns_market.remove(person)
         elif person in self.college_interns_HR:
             self.college_interns_HR.remove(person)
-        else:
-            pass    #Some kind of error here?
 
         person.set_override_schedule(None, the_days = [5,6], the_times = [1,2])
         person.remove_role(college_intern_role)
@@ -508,11 +547,3 @@ init -1 python:
         return [x for x in self.college_interns_research + self.college_interns_production + self.college_interns_supply + self.college_interns_market + self.college_interns_HR if x.is_available]
 
     Business.get_intern_list = business_get_intern_list
-
-    def any_intern_in_office(self):
-        for x in self.get_intern_list():
-            if college_intern_is_at_work(x):
-                return True
-        return False
-
-    Business.any_intern_in_office = any_intern_in_office

@@ -165,8 +165,8 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
         $ jealous_sister = ashley
     else:
         $ jealous_sister = stephanie
-    the_person "I'm gonna hop in the shower. Try not to miss me too much while I'm in there's okay?"
-    "Of course."
+    the_person "I'm gonna hop in the shower. Try not to miss me too much while I'm in there okay?"
+    mc.name "Of course."
     $ the_person.draw_person(position = "back_peek")
     "[the_person.title] hops out of bed and heads to the shower. She stops at the door, then turns back and blows you a kiss."
     $ mc.change_locked_clarity(20)
@@ -177,7 +177,7 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     $ jealous_sister.draw_person(position = "cowgirl")
     #TODO make her actually naked
     "Her lower half is naked, and she straddles your hips with her cunt pressed against your rapidly hardening cock."
-    "You start to say something, but Ashley puts a finger on your lips."
+    "You start to say something, but [ashley.fname] puts a finger on your lips."
     jealous_sister "Shhhh, if we're quiet, she'll never even know."
     $ mc.change_locked_clarity(30)
     "She leans forward and replaces her finger with her lips. She kisses you hungrily, making her need for you known."
@@ -193,10 +193,12 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     mc.name "No thanks, I'd probably better head out."
     the_person "Hmm, okay. Thanks for coming over last night... It was nice."
     $ clear_scene()
+    $ her_hallway.show_background()
     "You get yourself dressed and say goodbye. You step out of [the_person.title]'s room and into the hall."
     $ jealous_sister.planned_outfit = jealous_sister.decide_on_outfit() # choose a new outfit for the day
     $ jealous_sister.apply_planned_outfit()
     $ jealous_sister.draw_person(position = "sitting")
+    $ hall.show_background()
     "As you walk to the door, you see [jealous_sister.title] at the table, having a cup of coffee and some toast."
     jealous_sister "Bye [jealous_sister.mc_title], hope you had a good time..."
     "She gives you a wink."
@@ -206,4 +208,5 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     $ jealous_sister.reset_all_jealousy()
     $ the_person.planned_outfit = the_person.decide_on_outfit() # choose a new outfit for the day
     $ the_person.apply_planned_outfit()
+    $ jealous_sister = None
     return

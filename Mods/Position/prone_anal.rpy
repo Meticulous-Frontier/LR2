@@ -54,10 +54,10 @@ label prone_anal_decision_label(the_girl, the_location, the_object, the_position
         $ the_girl.change_happiness(5)
     elif the_girl.is_dominant():
         the_girl "Are you serious? Can't we just take a quick break?..."
-        "[the_girl.possessive_title]'s question gets cut off as you line yourself and push back into her ass. She isn't happy with being used like this but is too tired to resist."
+        "[the_girl.possessive_title]'s question gets cut off as you line yourself up and push back into her ass. She isn't happy with being used like this but is too tired to resist."
         $ the_girl.change_happiness(-5)
     else:
-        "[the_girl.possessive_title] gives a little yelp as you line yourself and push back into her. She is completely helpless but submits to you obediently."
+        "[the_girl.possessive_title] gives a little yelp as you line yourself up and push back into her. She is completely helpless but submits to you obediently."
         $ the_girl.change_obedience(5)
     return the_object
 
@@ -201,7 +201,7 @@ label scene_prone_anal_2(the_girl, the_location, the_object):
                 "She is exhausted, but constantly moaning from your dominating approach."
         "Go easy on her":
             "You decide for now just to enjoy the puckered hole [the_girl.possessive_title] has pointed up at you."
-            "You put both you hands around her, letting your weight pin her to the [the_object.name]."
+            "You put both your hands around her, letting your weight pin her to the [the_object.name]."
             "Her body is trying to push back against you as you fuck her, but her exhaustion and your weight on top of her leave her helpless."
             the_girl "Mmmfff... god [the_girl.mc_title]... so good..."
     return

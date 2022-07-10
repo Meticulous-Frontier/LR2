@@ -182,9 +182,9 @@ label quest_arousal_serum_receive_drug_label():
     "As you are getting ready for bed, [mom.title] knocks on your door. You open it up."
     mom "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
     "She hands you a small manila envelope."
-    mc.name "Thanks [mom.title]."
+    mc.name "Thanks, [mom.title]."
     $ mom.draw_person(position = "walking_away")
-    "She turns and walks way, closing your door behind her."
+    "She turns and walks away, closing your door behind her."
     $ clear_scene()
     "You open up the package. It's the two pills you ordered. The highly acclaimed Female Viagra."
     "You note on the package an expiration date. Holy hell, this stuff expires in a week?"
@@ -300,7 +300,7 @@ label quest_arousal_serum_test_label():
         if the_report.get("girl orgasms", 0) > 0:
             $ the_person.draw_person(position = "missionary")
             "Completely spent, [the_person.title] sprawls out on the table."
-            the_person "Fuck. I'd say that stuff works. I haven't had sex like that in... I don't know I've ever had sex that good before..."
+            the_person "Fuck. I'd say that stuff works. I haven't had sex like that in... I don't know if I've ever had sex that good before..."
         $ the_person.draw_person()
         "[the_person.title] slowly gets up."
         mc.name "Are you okay?"

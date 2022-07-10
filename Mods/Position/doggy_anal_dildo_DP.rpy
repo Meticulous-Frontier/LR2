@@ -29,7 +29,7 @@ label intro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     mc.name "[the_girl.title], I want you to get on your hands and knees for me. I want to fuck your ass and your pussy."
     "You secure the strap-on dildo to your cock. A quick lube application later, you get behind [the_girl.possessive_title]."
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_doggy_anal_dildo_dp.position_tag, visible_enough = True, prefer_half_off = True)
 
@@ -90,7 +90,7 @@ label scene_SB_doggy_anal_dildo_dp_1(the_girl, the_location, the_object):
 
     else:
         "In response to your spanking, [the_girl.possessive_title] thrusts herself back against you. Your penis is completely consumed by her bowel and she moans lewdly."
-        "When she starts to pull off you give her other ass check a hard swat. She buries her face in the [the_object.name] and moans as she pushes herself back onto you again."
+        "When she starts to pull off you give her other ass cheek a hard swat. She buries her face in the [the_object.name] and moans as she pushes herself back onto you again."
         the_girl "Oh fuck [the_girl.mc_title], I needed this so bad. Make me cum all over that dildo!"
         "[the_girl.possessive_title]'s ass feels so tight you are tempted to let her continue setting the pace, but you worry she might get the wrong idea if you let this little slut take charge."
         menu:
@@ -346,7 +346,7 @@ label transition_doggy_doggy_anal_dp(the_girl, the_location, the_object):
 
 label transition_default_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     "[the_girl.possessive_title] gets on her hands and knees as you kneel behind her."
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_doggy_anal_dildo_dp.position_tag, visible_enough = True, prefer_half_off = True)
     "You bounce your hard shaft on her ass a couple of times before lining yourself up with her sphincter."

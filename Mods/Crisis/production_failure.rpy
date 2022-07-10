@@ -55,20 +55,26 @@ label production_failure_action_label():
 
         "Call in an overnight repair man":
             "You call the repair man and tell him to come in that night, and warn him not to alert anyone and to wear a gas mask."
-            "You decide to monitor the situation first hand and move to the [the_person.job.job_location.formal_name]."
-            $ mc.change_location(the_person.job.job_location)
+            if mc.location != the_person.job.job_location:
+                "You decide to monitor the situation first hand and move to the [the_person.job.job_location.formal_name]."
+                $ mc.change_location(the_person.job.job_location)
+            else:
+                "You decide to monitor the situation first hand and stay in the [the_person.job.job_location.formal_name]."
             $ mc.location.show_background()
 
             $ ran_num = renpy.random.randint(0,100)
             if ran_num > 45: # 55% chance it's a mixture that alters behavior (slutty)
                 "For the first half hour everything seems fine, but then you notice a sudden shift in behavior."
-                "The girls are clearly hot and bothered. They barely keep their focus on their work. Spending much of their time eyeing you and each other."
-
+                if mc.location.get_person_count() > 1:
+                    "The girls are clearly hot and bothered. They barely keep their focus on their work, spending much of their time eyeing you and each other."
+                    "[the_person.fname] appears to have been particularly affected."
+                else:
+                    "[the_person.fname] is clearly hot and bothered. She can barely keep her focus on her work, spending much of her time eyeing you."
                 $ production_failure_increase_sluttiness(the_person)
                 $ the_person.draw_person(position = "stand2", emotion = "happy")
                 $ the_person.change_slut(2)
-                "[the_person.name] appears to have been particularly effected."
-                "[the_person.name] looks around desperately trying to figure out the source of her sudden arousal. When she sees you she immediately loses control."
+
+                "[the_person.fname] looks around desperately trying to figure out the source of her sudden arousal. When she sees you she immediately loses control."
                 the_person "Please [the_person.mc_title], I need you... please help me..."
                 $ the_person.break_taboo("touching_penis")
                 $ mc.change_locked_clarity(20)

@@ -45,7 +45,7 @@ label mother_daughter_doubleteam_action_label():
     $ mc.change_locked_clarity(10)
     "They both look at you as you walk into the break room."
     the_mother "Hey [the_mother.mc_title], maybe you could help us settle something. In your experience, who gives better blowjobs, enthusiastic, younger girls or experienced older women?"
-    "Oh boy, you walked into hornet's nest."
+    "Oh boy, you walked into a hornet's nest."
     mc.name "Well, to be honest I've had both that were amazing, it really just depends on the situation."
     the_daughter "See mom? It's totally plausible I'm just as good, if not better than you."
     the_mother "I suppose, but, I really feel like you are underestimating your mother here dear."

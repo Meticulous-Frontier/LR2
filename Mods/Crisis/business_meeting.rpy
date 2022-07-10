@@ -39,7 +39,7 @@ label business_meeting_action_label():
     call business_meeting_introduction(the_person) from _call_business_meeting_introduction_1
     call business_meeting_flirtation(the_person) from _call_business_meeting_flirtation_1
     if the_person.effective_sluttiness() > 25:
-        call business_meeting_arrousal(the_person) from _call_business_meeting_arrousal_1
+        call business_meeting_arousal(the_person) from _call_business_meeting_arousal_1
         if (the_person.effective_sluttiness() > 40):
             call business_meeting_seduction(the_person) from _call_business_meeting_seduction_1
             $ done = _return
@@ -82,14 +82,17 @@ label business_meeting_flirtation(the_person):
     if the_person.effective_sluttiness() > 15:
         $ remove_person_shoes(the_person)
         $ mc.change_locked_clarity(10)
-        "While talking about her proposal, you suddenly feel her bare foot moving up and down your leg."
+        if the_person.outfit.feet_available():
+            "While talking about her proposal, you suddenly feel her bare foot moving up and down your leg."
+        else:
+            "While talking about her proposal, you suddenly feel her stockinged foot moving up and down your leg."
     else:
         "You mind wanders off while she is talking..."
     return
 
-label business_meeting_arrousal(the_person):
+label business_meeting_arousal(the_person):
     if the_person.effective_sluttiness() > 30:
-        "She moves up to your crotch and unzips your pants with her feet, sliding with her foot over you growing bulge."
+        "She moves up to your crotch and unzips your pants with her feet, sliding her foot over your growing bulge."
         $ mc.change_locked_clarity(20)
         the_person "Oh my, [the_person.mc_title] it seems my proposal got you all excited."
     else:
@@ -131,14 +134,14 @@ label business_meeting_seduction(the_person):
                     $ the_person.call_dialogue("sex_review", the_report = _return)
                     return True
                 "Not Now":
-                    mc.name "I'm sorry [the_person.title], i've got another meeting to attend."
+                    mc.name "I'm sorry [the_person.title], I've got another meeting to attend."
                     $ the_person.draw_person(position = "stand4", emotion="sad")
                     "[the_person.possessive_title] stands up with a disappointed look on her face."
                     $ the_person.change_happiness(-5)
                     return False
         elif the_person.effective_sluttiness() > 60:
             "After spending a few more minutes talking she suddenly perks up."
-            the_person "I'm sorry [the_person.mc_title], it seems i've dropped something..."
+            the_person "I'm sorry [the_person.mc_title], it seems I've dropped something..."
 
             $ the_person.draw_person(position = "blowjob")
             $ mc.change_locked_clarity(20)
@@ -162,7 +165,7 @@ label business_meeting_seduction(the_person):
                         the_person "What? I don't know... it looks quite tasty though."
                         $ mc.change_locked_clarity(20)
                         "She kisses the tip slowly at first, but soon after she starts moving her tongue along the base of the head."
-                        mc.name "Now try sliding into your mouth and sucking on it, like eating a popsicle."
+                        mc.name "Now try sliding it into your mouth and sucking on it, like eating a popsicle."
                         $ mc.change_locked_clarity(30)
                         "[the_person.possessive_title] only nods slightly and starts to move your member into her mouth."
                         $ the_person.break_taboo("sucking_cock")
@@ -171,15 +174,15 @@ label business_meeting_seduction(the_person):
                     $ the_person.call_dialogue("sex_review", the_report = _return)
                     return True
                 "Not now":
-                    mc.name "I'm sorry [the_person.title], i've got another meeting to attend."
+                    mc.name "I'm sorry [the_person.title], I've got another meeting to attend."
                     $ the_person.draw_person(position = "stand4", emotion="sad")
                     "[the_person.possessive_title] stands up with a disappointed look on her face."
                     $ the_person.change_happiness(-5)
         else:
             "You can't help but admire [the_person.possessive_title] boldness, while she keeps on talking."
     else:
-        "After while [the_person.title] stops rubbing your exposed member."
-        the_person "I will leave you now, it seems you have some other business to take care off."
+        "After a while [the_person.title] stops rubbing your exposed member."
+        the_person "I will leave you now, it seems you have some other business to take care of."
     return False
 
 label business_meeting_end(the_person, done):
@@ -191,7 +194,7 @@ label business_meeting_end(the_person, done):
         the_person "Thank you, [the_person.mc_title], I hope you liked my contribution."
 
     if not done:
-        "You thank [the_person.title] for her time and that you will look into the matter."
+        "You thank [the_person.title] for her time and assure her that you will look into the matter."
     else:
         mc.name "You did well [the_person.title], this was very productive and relaxing."
 

@@ -1,8 +1,8 @@
 init 1 python: #Original code is at -1, so make sure we are higher than that for custom code
     #This is the requirement for the punishment itself
     def punishment_service_mc_requirement(the_person, the_infraction):
-        if the_infraction.severity < 4:
-            return "Severity 4"
+        if the_infraction.severity < 3:
+            return "Severity 3"
         elif not corporal_punishment.is_active():
             return "Requires Policy: Corporal Punishment"
         else:
@@ -73,9 +73,9 @@ label punishment_service_mc_label(the_person, the_infraction):
     "[the_person.title] sinks down to her knees while you reach down and pull out your cock. She tentatively sticks her tongue out and runs it over the tip."
     mc.name "It's going to take a bit more than that. Now open up."
     $ the_person.break_taboo("sucking_cock")
-    "Finally relenting, [the_person.possessive_title] opens her mouth and takes you. While her technique isn't great, the soft confines of her mouth feel great."
+    "Finally relenting, [the_person.possessive_title] opens her mouth and takes you. While her technique isn't amazing, the soft confines of her mouth feels great."
     $ the_person.add_situational_obedience("punishment", 40, "I'm being punished, I don't have any right to refuse.")
-    call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, affair_ask_after = False) from _call_custom_bj_punishment_01
+    call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, affair_ask_after = False, condition = make_condition_blowjob_training()) from _call_custom_bj_punishment_01
     $ the_report = _return
     $ the_person.clear_situational_obedience("punishment")
 
@@ -85,7 +85,6 @@ label punishment_service_mc_label(the_person, the_infraction):
         mc.name "I have a new punishment for you. I want you to practice sucking cock for the next week. Then come back to me and try again."
         the_person "That's... that's crazy!"
         mc.name "What's crazy is how bad at giving head you are. You heard me, now get back to work."
-
         $ the_person.change_stats(happiness = -5, obedience = 2)
         $ add_practice_cocksucking_work_action(the_person)
     else:
@@ -115,14 +114,13 @@ label employee_cocksucking_practice_report_label(the_person):
     "You put your hands on her shoulders."
     mc.name "There's no time like the present. Now get on your knees and give this another shot."
     the_person "Ahh... okay..."
-
     $ the_person.draw_person(position = "blowjob")
     "[the_person.title] sinks down to her knees while you reach down and pull out your cock. She tentatively sticks her tongue out and runs it over the tip."
     mc.name "It's going to take a bit more than that. Now open up."
     $ the_person.break_taboo("sucking_cock")
-    "Finally relenting, [the_person.possessive_title] finally opens her mouth and takes you. While her technique isn't great, the soft confines of her mouth feel great."
+    "Finally relenting, [the_person.possessive_title] opens her mouth and takes you. While her technique isn't great, the soft confines of her mouth feel great."
     $ the_person.add_situational_obedience("punishment", 40, "I'm being punished, I don't have any right to refuse.")
-    call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, affair_ask_after = False) from _call_custom_bj_punishment_02
+    call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, affair_ask_after = False, condition = make_condition_blowjob_training()) from _call_custom_bj_punishment_02
     $ the_report = _return
     $ the_person.clear_situational_obedience("punishment")
     if the_report.get("guy orgasms", 0) == 0: #She didn't finish you off. Berate her verbally.

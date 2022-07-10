@@ -494,7 +494,7 @@ label modify_wardrobe_label(the_person):
                     mc.name "Actually, just get rid of panties, you can keep wearing bras."
                     $ alterations += panty_removal(the_person)
                 "No underwear":
-                    mc.name "That sounds even better, thanks [the_person.title]."
+                    mc.name "That sounds even better, thanks, [the_person.title]."
                     $ alterations += bra_removal(the_person)
                     $ alterations += panty_removal(the_person)
         else:

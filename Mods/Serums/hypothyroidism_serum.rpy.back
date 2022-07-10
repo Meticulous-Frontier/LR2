@@ -8,7 +8,7 @@ init -1 python:
         hypothyroidism_serum_trait = SerumTraitMod(name = "Hypothyroidism Trait",
             desc = "Increase target subject body mass, by reducing hormones from the thyroid gland slowing down metabolism, thus causing weight gain.",
             positive_slug = "50% Chance/Turn to increase body mass by 500 grams, +$5 Value",
-            negative_slug = "+125 Serum Research",
+            negative_slug = "",
             value_added = 5,
             research_added = 125,
             base_side_effect_chance = 20,

@@ -164,6 +164,8 @@ init -1 python:
         #     pass
         # elif person is sakari and False:
         #     pass
+        elif person is myra and myra_lewd_game_fuck_avail():
+            mc.business.add_mandatory_crisis(breeding_fetish_myra_intro)
         elif person.is_employee():
             breeding_fetish_employee_intro = Fetish_Action("Employee breeding fetish intro", breeding_fetish_employee_intro_requirement, "breeding_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "breeding")
             mc.business.mandatory_crises_list.append(breeding_fetish_employee_intro)
@@ -528,7 +530,7 @@ init -1 python:
         fetish_basic_serum = SerumTraitMod(name = "Sexual Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase general positive sexual responses based on suggestibility.",
             positive_slug = "Increases sexual opinions, slowly increases Foreplay skill",
-            negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+            negative_slug = "+" + str(FETISH_PRODUCTION_COST) + " Production/Batch",
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
@@ -547,7 +549,7 @@ init -1 python:
         fetish_exhibition_serum = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase general positive opinions of public sexual encounters based on suggestibility.",
             positive_slug = "Increases exhibitionistic behavior, slow increases sluttiness",
-            negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+            negative_slug = "+" + str(FETISH_PRODUCTION_COST) + " Production/Batch",
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
@@ -566,7 +568,7 @@ init -1 python:
         fetish_anal_serum = SerumTraitMod(name = "Anal Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase pleasure received from anal stimulation based on suggestibility.",
             positive_slug = "Increases Anal sexual opinions, slowly increases Anal skill, Slowly increases obedience",
-            negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+            negative_slug = "+" + str(FETISH_PRODUCTION_COST) + " Production/Batch",
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
@@ -585,7 +587,7 @@ init -1 python:
         fetish_cum_serum = SerumTraitMod(name = "Semen Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase pleasure received when in contact with semen based on suggestibility.",
             positive_slug = "Increases Cum related sexual opinions, slowly increases sluttiness, slowly increases Oral skill",
-            negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+            negative_slug = "+" + str(FETISH_PRODUCTION_COST) + " Production/Batch",
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
@@ -604,7 +606,7 @@ init -1 python:
         fetish_breeding_serum = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
             desc = "Targeted endorphin emitters increase reproduction drive and associated opinions based on suggestibility.",
             positive_slug = "Increases reproduction sexual opinions, slowly increases Vaginal skill",
-            negative_slug = "+" + str(FETISH_RESEARCH_ADDED) + " Serum Research, +" + str(FETISH_PRODUCTION_COST) + " Production Cost",
+            negative_slug = "+" + str(FETISH_PRODUCTION_COST) + " Production/Batch",
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,

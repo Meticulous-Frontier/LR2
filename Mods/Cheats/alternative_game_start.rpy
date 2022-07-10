@@ -56,7 +56,7 @@ label alternative_start():
                 for val in range(0, len(return_arrays[array])):
                     return_arrays[array][val] += 2
 
-    call initialize_game_state(store.name,store.b_name,store.l_name,return_arrays[0],return_arrays[1],return_arrays[2], max_num_of_random = 3) from _call_initialize_game_state
+    call initialize_game_state(store.name,store.b_name,store.l_name,return_arrays[0],return_arrays[1],return_arrays[2], max_num_of_random = 2) from _call_initialize_game_state
 
     python:
         if easy_mode:

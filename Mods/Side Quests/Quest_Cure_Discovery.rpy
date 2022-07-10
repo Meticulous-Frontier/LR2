@@ -186,7 +186,7 @@ label quest_cure_discovery_intro_label():
     mc.name "Oh?"
     if the_target == alexia:
         the_person "She's a recent college graduate and seems to have a good handle on things over there. I bet she could manage it!"
-        mc.name "Noted. I'm not sure I'll have to time, but I'll talk to her when I can."
+        mc.name "Noted. I'm not sure I'll have time, but I'll talk to her when I can."
     elif the_target == lily or the_person == mom or the_person == cousin or the_person == aunt:
         the_person "Corporate espionage is huge, and a discovery like this could make big waves."
         the_person "You should probably ask someone you can trust to handle this, like someone from your family."
@@ -321,7 +321,7 @@ label quest_cure_discovery_patent_kept_label():
                 mc.name "Yes. Come in, and lock the door behind you."
                 the_person "Oh my..."
                 "[the_person.title] does as you ask. Her voice takes on a sultry tone."
-                the_person "So, did you have something in mind? How I can make all this up to you?"
+                the_person "So, did you have something in mind? How can I make all of this up to you?"
                 mc.name "I do, come around here and get on your knees."
                 the_person "Oh god, yes [the_person.mc_title]."
                 $ the_person.draw_person(position = "blowjob")
@@ -362,7 +362,7 @@ label quest_cure_discovery_patent_kept_label():
 
 label quest_cure_discovery_market_missed_label():
     $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
-    "Before headed for bed, you check on the latest news on your computer. A headline catches your attention."
+    "Before heading for bed, you check on the latest news on your computer. A headline catches your attention."
     "NEWS""BREAKING NEWS: Scientists at BIOFIRM announce possible cure for [the_disease]."
     "Wait a minute... isn't that the disease your head researcher recently found a possible cure for?"
     "FUCK, she was right. You probably should have moved on those patent rights faster!"

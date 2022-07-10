@@ -36,13 +36,13 @@ init 2 python:
         global camilla
         camilla = make_person(name = "Camilla", last_name ="Rojas", body_type = "thin_body", age = 34, face_style = "Face_2",  tits="D", height = 0.98, hair_colour="golden blonde", hair_style = braided_bun, skin="tan" , \
             personality = introvert_personality, name_color = "#228b22", dial_color = "228b22", starting_wardrobe = camilla_wardrobe, \
-            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_array = [4,2,2,2], start_sluttiness = 7, start_obedience = -18, start_happiness = 119, start_love = 0, \
-            relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit,
+            stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [4,2,2,2], sluttiness = 7, obedience_range = [70, 85], happiness = 119, love = 0, \
+            relationship = "Married", kids = 0, force_random = True, base_outfit = camilla_base_outfit, type = 'story',
             forced_opinions = [["dancing", 2, True], ["fashion", 2, False], ["flirting", 1, False], ["working", 1, False], ["the colour purple", 2, False], ["dresses", 2, False], ["the colour blue", -2, False], ["skirts", 1, False]],
             forced_sexy_opinions = [["being submissive", 2, False], ["getting head", 2, False], ["drinking cum", 1, False], ["giving blowjobs", 2, False], ["public sex", 1, False], ["showing her ass", 2, False], ["anal sex", -2, False], ["bareback sex", 2, False]])
 
         camilla.generate_home()
-        camilla.add_job(camilla_job, job_known = True)
+        camilla.change_job(camilla_job, job_known = True)
         camilla.set_schedule(downtown_bar, the_times = [3])
         camilla.home.add_person(camilla)
 
@@ -190,7 +190,7 @@ label camilla_spot_at_bar_label(the_person):
     "?????" "Sure. A beer and another paloma for the lovely miss [the_person.last_name]."
     "The bartender walks off. He seems to know [the_person.title]. She must be a regular here?"
     mc.name "Ah, you come here often then?"
-    the_person "I do. I'm here most evenings. I like have a drink before I head home each night. My husband works late."
+    the_person "I do. I'm here most evenings. I like to have a drink before I head home each night. My husband works late."
     mc.name "I see. I'm here somewhat often as well. Maybe we could have a drink together once in a while?"
     the_person "I... I suppose that would be alright."
     "You sit back in the chair and chat with [the_person.possessive_title] for a while. You both enjoy the time together, getting to know one another as friends."
@@ -213,7 +213,7 @@ label camilla_get_a_drink_label(the_person):
     mc.name "Care to get a drink, [the_person.title]?"
     "You consider for a moment. If you offer to buy her a drink, you'll have a chance to slip a serum into it."
     $ ran_num = (mc.charisma + (the_person.effective_sluttiness() / 10)) * 10  #More willing to let you buy a drink for her as she gets sluttier
-    #$ bartender_name = get_random_male_name()
+    #$ bartender_name = Person.get_random_male_name()
     if camilla_can_go_dancing():
         $ ran_num = 100
     menu:
@@ -222,7 +222,7 @@ label camilla_get_a_drink_label(the_person):
             if renpy.random.randint(0,100) < ran_num:  #Success
                 the_person "Hmm... Okay! That sounds great! I'll go find us a table!"
                 "You head over to the bar and order yourself a beer, and a cocktail for [the_person.title]."
-                the_person.SO_name "Here you go, one beer, and a cocktail for the beautiful [the_person.name]."
+                the_person.SO_name "Here you go, one beer, and a cocktail for the beautiful [the_person.fname]."
                 "Sounds like the bartender knows [the_person.title] pretty well. She must be in here often!"
                 "The place is busy, so it's easy to slip some serum into her drink."
                 call give_serum(the_person) from _call_give_serum_camilla_01
@@ -320,7 +320,7 @@ label camilla_get_a_drink_label(the_person):
             "In the background, you hear the music shift a bit as some salsa music begins to play."
             "[the_person.possessive_title] looks you up and down for moment, then downs the remainder of her drink."
             the_person "Nothing like a stiff drink. Would you like to dance, [the_person.mc_title]?"
-            "Something about the way she asks you make it clear that she might be up for more than just dancing."
+            "Something about the way she asks you makes it clear that she might be up for more than just dancing."
             mc.name "Let's do it."
             call camilla_dancing_sex_label(the_person) from _camilla_dance_and_fuck_01
         else:
@@ -353,7 +353,7 @@ label camilla_get_a_drink_label(the_person):
                     the_person "I... you want to come over tonight?"
                     mc.name "Sure. I'm not doing anything."
                     "[the_person.possessive_title] gives you her address."
-                    the_person "Come over tonight, around 10pm. You won't regret it! I'm going to go now and get... setup..."
+                    the_person "Come over tonight, around 10pm. You won't regret it! I'm going to go now and get... set up..."
                     $ mc.business.add_mandatory_crisis(camilla_her_place)
                     $ the_person.learn_home()
                 "Soon":
@@ -401,7 +401,7 @@ label camilla_dance_lessons_label():
     "You get close to [the_person.title] as the music starts. You listen as the instructor begins to issue commands."
     "Alvero" "Alright fellas, remember, your sole purpose while salsa dancing is to display the beautiful flower you are partners with."
     $ scene_manager.update_actor(the_person, position = "kissing", display_transform = character_left_flipped)
-    "You try one of the moves as instructed, moving [the_person.possessive_title] away from you a bit and allowing her make a graceful spin back to you."
+    "You try one of the moves as instructed, moving [the_person.possessive_title] away from you a bit and allowing her to make a graceful spin back to you."
     $ scene_manager.update_actor(the_person, position = "back_peek", display_transform = character_right)
     "She spins beautifully and stops with her back to you. She looks back and gives you a sly smile."
     if mc_dancing_skill() < 4:
@@ -437,7 +437,7 @@ label camilla_dance_lessons_label():
         "You take to salsa dancing like a natural. Throughout the night you have her spinning and moving to the music."
         "After a short time, you stop listening to the instructor and start doing things your own way. You lead [the_person.possessive_title] around the dance floor with authority."
         "At the end of the lesson, she is close to you again, breathless. A light sheen of sweat makes her skin shine."
-        "You hands on her body throughout the dancing has definitely put sexual tension in the air."
+        "Your hands on her body throughout the dancing has definitely put sexual tension in the air."
         $ mc.change_locked_clarity(30)
         $ the_person.change_slut(2, 50)
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
@@ -501,7 +501,7 @@ label camilla_take_pics_label(the_person):  #Not the first time.
                 "You grab her phone and snap a couple pictures of her ass with your cum covering it."
             elif the_person.has_creampie_cum():       #We assume we finished inside her#
                 $ the_person.draw_person(position = "missionary")
-                "[the_person.possessive_title]'s sits on the edge of the bathroom sink, mirroring her pose before you started fucking."
+                "[the_person.possessive_title] sits on the edge of the bathroom sink, mirroring her pose before you started fucking."
                 "This time though, her cunt is a little gaped and your seed is clearly leaking out and down her legs."
                 "You grab her phone and snap a couple pictures of her well used pussy with your cum dripping out of it."
             else:   #We have no idea where the cum is. It got wasted?
@@ -540,7 +540,7 @@ label camilla_take_pics_label(the_person):  #Not the first time.
             the_person "Mmmm, I can't wait any longer... I have to taste it!"
             $ the_person.break_taboo("sucking_cock")
             "She opens up her mouth and wraps her lips around your meat."
-            "You snap some pictures as she pulls of and begin to run her tongue up and down along the sides of your cock."
+            "You snap some pictures as she pulls off and begins to run her tongue up and down along the sides of your cock."
             mc.name "Mmm, that feels great [the_person.title]."
             "You decide to just enjoy her skilled mouth going down on you."
             # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH012
@@ -573,7 +573,7 @@ label camilla_bathroom_blowjob_label(the_person):
     "She takes a quick look around."
     the_person "Let me just go talk to the bartender... head to the lady's room and wait outside... I'll be over in a second."
     $ the_person.draw_person(position = "walking_away")
-    "[the_person.possessive_title] walk away to talk to the bartender. You make your way over to the lady's room."
+    "[the_person.possessive_title] walks away to talk to the bartender. You make your way over to the lady's room."
     $ the_person.draw_person(position = "stand4")
     "Soon, [the_person.title] comes over, holding a sign that says 'Bathroom closed for renovations: Please use men's room"
     $ mc.change_location(work_bathroom)
@@ -720,7 +720,7 @@ label camilla_dancing_sex_label(the_person):
             $ scene_manager.update_actor(the_person, position = "stand3")
             mc.name "Sorry, I..."
             the_person "It's okay... let's just dance."
-            "After your little mishap, it is clear that the energy between the two of you isn't as intense as it as. It takes all your concentration to keep from tripping her up again."
+            "After your little mishap, it is clear that the energy between the two of you isn't as intense as it was. It takes all your concentration to keep from tripping her up again."
             "When you finish, [the_person.possessive_title] moves to the side of the dance floor."
             the_person "Thank you for the dance, [the_person.mc_title], but I need to get going..."
             $ clear_scene()
@@ -728,7 +728,7 @@ label camilla_dancing_sex_label(the_person):
             "Note: Dancing skill is based on MC's Charisma and Energy levels. Try increasing Charisma and make sure energy is high before attempting this scene."
             return
         $ scene_manager.update_actor(the_person, position = "kissing")
-        "[the_person.possessive_title] turns back to you and puts her arms around your shoulders. You hands start on her hips, but soon drift down to her ass."
+        "[the_person.possessive_title] turns back to you and puts her arms around your shoulders. Your hands start on her hips, but soon drift down to her ass."
         the_person "I love this song. Let's dance to this and then..."
         "You notice her glance over to the bar. You follow her eyes and notice the bartender, [the_person.SO_name] is watching you dance."
         "You look back at [the_person.title]. You squeeze her supple ass and grind up against her slightly."
@@ -741,7 +741,7 @@ label camilla_dancing_sex_label(the_person):
         $ clear_scene()
         $ mc.change_location(work_bathroom)
         $ mc.location.show_background()
-        "You head to women's restroom and [the_person.title] soon meets you there."
+        "You head to the women's restroom and [the_person.title] soon meets you there."
         $ the_person.draw_person (position = "against_wall")
         "You grab her and pick her up. Her legs wrap around you."
         the_person "Oh god... I can't believe I'm doing this... but I need it so bad!"
@@ -834,7 +834,7 @@ label camilla_dancing_sex_label(the_person):
         "She gives a sigh and melts back into you. You let your hands roam all along the sides of her body, once in a while moving across the sides of her breasts."
         "The song ends and a slower song begins to play."
         $ the_person.draw_person (position = "kissing")
-        "[the_person.possessive_title] turns back to you and puts her arms around your shoulders. You hands start on her hips, but soon drift down to her ass."
+        "[the_person.possessive_title] turns back to you and puts her arms around your shoulders. Your hands start on her hips, but soon drift down to her ass."
         the_person "I love this song. Let's dance to this! Then we can head to the back and you can have your way with me..."
         "You squeeze her supple ass and grind up against her slightly."
         the_person "Mmm... fuck that feels good. You better make sure I cum all over that amazing cock of yours."
@@ -846,7 +846,7 @@ label camilla_dancing_sex_label(the_person):
         $ clear_scene()
         $ mc.change_location(work_bathroom)
         $ mc.location.show_background()
-        "You head to women's restroom and [the_person.title] soon meets you there."
+        "You head to the women's restroom and [the_person.title] soon meets you there."
         $ the_person.draw_person (position = "stand4")
         the_person "Okay, I want you to sit on the bathroom sink. I'm gonna get naked for you."
         "She hands you her phone."
@@ -856,7 +856,7 @@ label camilla_dancing_sex_label(the_person):
         the_person "Come on, let's fuck!"
         call fuck_person(the_person, start_object = make_sink(), private = True) from _call_casual_sex_mod_camilla_022
         "As you finish up, you make sure to take some pictures of the aftermath. You notice [the_person.possessive_title] is touching herself."
-        the_person "Oh god, daddy is fuck me so rough tonight when he reclaims me tonight... I'm gonna be so sore. I can't wait!"
+        the_person "Oh god, daddy is gonna fuck me so rough when he reclaims me tonight... I'm gonna be so sore. I can't wait!"
         "You almost think she is going to make herself cum again until she stops."
         $ the_person.draw_person("stand3")
         the_person "Thanks again [the_person.mc_title]. You know where to look for me next time you need some... action."
@@ -870,8 +870,6 @@ label camilla_dancing_sex_label(the_person):
     "You grab your clothes and quickly get yourself presentable, before sneaking your way out of the lady's room."
     call advance_time from _call_advance_camilla_dancing
     return
-
-
 
 #CSH30
 label camilla_sex_invite_label(the_person):
@@ -924,22 +922,24 @@ label camilla_her_place_label():
         "[the_person.possessive_title] collapses onto the bed after your performance. You get up and start to get dressed."
         "You nod at [the_person.SO_name], and he nods back. He goes over to a bedside table and gets out a set of handcuffs."
         "After you fucked her brains out, [the_person.title] lays helpless on the bed as he starts to cuff her hands behind her back."
-        "You finished getting dressed and decide to leave them to it, so you quietly excuse yourself from the bedroom."
+        "You've finished getting dressed and decide to leave them to it, so you quietly excuse yourself from the bedroom."
     elif the_report.get("girl orgasms", 0) > 0: #She had one orgasm
         the_person "Oh god, I came so hard... That was good [the_person.mc_title]."
         $ the_person.draw_person (position = "missionary")
         "[the_person.possessive_title] rolls over on her back and spreads her legs wide."
         the_person "[the_person.SO_name]... I've been a bad girl..."
         "[the_person.SO_name] gets up from his chair and gets some handcuffs from a bedside table. You get yourself dressed."
-        "[the_person.SO_name] begins cuffing [the_person.title]'s hands to the bedpost. You finish getting dress and quietly excuse yourself from the bedroom."
+        "[the_person.SO_name] begins cuffing [the_person.title]'s hands to the bedpost. You finish getting dressed and quietly excuse yourself from the bedroom."
     else:                           #You left her hanging
         "Surprised you are finished so soon, [the_person.title] gets up and sits at the edge of the bed."
         $ the_person.draw_person( position = "sitting")
         the_person "Thanks for getting me warmed up..."
         "[the_person.SO_name] gets up from his chair and gets some handcuffs from a bedside table. You get yourself dressed."
         the_person "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
-        "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dress and quietly excuse yourself from the bedroom."
+        "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dressed and quietly excuse yourself from the bedroom."
     $ clear_scene()
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
     "You make your way back home. You can hardly believe your luck, fucking [the_person.title] in her house, in front of her husband, who is also the bartender!"
     $ perk_system.add_stat_perk(Stat_Perk(description = "Fucking Camilla in front of her husband has made you feel more charismatic.", cha_bonus = 1, bonus_is_temp = False), "Camilla Charisma Bonus")
     $ mc.change_location(bedroom)
@@ -969,21 +969,21 @@ label camilla_home_sex_label(the_person):
         "[the_person.possessive_title] collapses onto the bed after your performance. You get up and start to get dressed."
         "You nod at [the_person.SO_name], and he nods back. He goes over to a bedside table and gets out a set of handcuffs."
         "After you fucked her brains out, [the_person.title] lays helpless on the bed as he starts to cuff her hands behind her back."
-        "You finished getting dressed and decide to leave them to it, so you quietly excuse yourself from the bedroom."
+        "You've finished getting dressed and decide to leave them to it, so you quietly excuse yourself from the bedroom."
     elif the_report.get("girl orgasms", 0) > 0:
         the_person "Oh god, I came so hard... That was good [the_person.mc_title]."
         $ the_person.draw_person (position = "missionary")
         "[the_person.possessive_title] rolls over on her back and spreads her legs wide."
         the_person "[the_person.SO_name]... I've been a bad girl..."
         "[the_person.SO_name] gets up from his chair and gets some handcuffs from a bedside table. You get yourself dressed."
-        "[the_person.SO_name] begins cuffing [the_person.title]'s hands to the bedpost. You finish getting dress and quietly excuse yourself from the bedroom."
+        "[the_person.SO_name] begins cuffing [the_person.title]'s hands to the bedpost. You finish getting dressed and quietly excuse yourself from the bedroom."
     else:                           #You left her hanging
         "Surprised you are finished so soon, [the_person.title] gets up and sits at the edge of the bed."
         $ the_person.draw_person( position = "sitting")
         the_person "Thanks for getting me warmed up..."
         "[the_person.SO_name] gets up from his chair and gets some handcuffs from a bedside table. You get yourself dressed."
         the_person "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
-        "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dress and quietly excuse yourself from the bedroom."
+        "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dressed and quietly excuse yourself from the bedroom."
     $ clear_scene()
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
@@ -1151,11 +1151,9 @@ label camilla_lingerie_help_label(the_person):  #40
     mc.name "Alright, I think I'm down for that."
     "When you get to the dressing rooms, [the_person.possessive_title] takes a quick look around to make sure the coast is clear, then quickly drags you into the changing room with her."
     the_person "Shh, just be quiet. It'll be easier if you're in here with me while I try these on."
-
     $ the_person.strip_outfit(exclude_feet = False)
     $ mc.change_locked_clarity(20)
     "Quietly, [the_person.possessive_title] strips down in front of you. She gives you a sheepish smile when she is naked, before donning her underwear set."
-
     $ the_person.apply_outfit(camilla_lingerie_1, update_taboo = True)
     $ the_person.draw_person(position = "stand2")
     "[the_person.title] whispers to you."
@@ -1165,13 +1163,10 @@ label camilla_lingerie_help_label(the_person):  #40
     "You enjoy a good long look."
     $ mc.change_locked_clarity(20)
     $ the_person.draw_person(position = "stand2")
-
     the_person "Alright, one second..."
-
     $ the_person.strip_outfit(exclude_feet = False)
     $ mc.change_locked_clarity(20)
     "Quietly, [the_person.possessive_title] strips down in front of you again."
-
     $ the_person.apply_outfit(camilla_lingerie_2, update_taboo = True)
     $ the_person.draw_person(position = "stand4")
     "[the_person.title] whispers to you."
@@ -1181,9 +1176,7 @@ label camilla_lingerie_help_label(the_person):  #40
     $ mc.change_locked_clarity(20)
     "You swear you see a little wiggle in her hips as you check her out."
     $ the_person.draw_person(position = "stand4")
-
     the_person "What do you think? Which set did you like better?"
-
     menu:
         "The first set":
             the_person "Ah, okay. One second..."
@@ -1202,7 +1195,7 @@ label camilla_lingerie_help_label(the_person):  #40
     mc.name "Sure."
     "[the_person.title] hands you her phone with her camera app pulled up. She strikes a few poses for you."
     $ the_person.draw_person(position = "stand4")
-    "[the_person.possessive_title] strikes a few poses for you. You make sure to take snap pics showing off her incredible body as best you can."
+    "[the_person.possessive_title] strikes a few poses for you. You make sure to snap pics showing off her incredible body as best you can."
     $ the_person.draw_person(position = "standing_doggy")
     if camilla_will_fuck():
         "Bending over, you get an awesome view of [the_person.title]'s ass."
@@ -1215,7 +1208,7 @@ label camilla_lingerie_help_label(the_person):  #40
     $ the_person.draw_person(position = "sitting")
     "You snap a few more pictures of [the_person.possessive_title] as she sits on the bench, showcasing her long, sexy legs."
     "Suddenly, you are struck by just how picture perfect she really is. Long legs, nice tits, and her tanned skin gives her an exotic appearance."
-    mc.name "[the_person.name]... have you ever thought about shooting some professional pictures?"
+    mc.name "[the_person.fname]... have you ever thought about shooting some professional pictures?"
     the_person "Umm... you mean like... modeling?"
     mc.name "Not necessarily modeling... but like, boudoir photos? You really do have the body for it."
     $ the_person.change_stats(slut = 1, max_slut = 60, love = 2, max_love = 80)
@@ -1309,7 +1302,7 @@ label camilla_formal_date_label():    #60
     "The waiter seats you both and turns to you."
     "WAITER" "Can I get your started with anything? Our house red wine is delightful for a beautiful young couple such as yourselves."
     the_person "Ha!... ahhh..."
-    "[the_person.title] lets out a snort. For a second, the waiter looks at you in distress, thinking he's embarassed you by assuming you were a couple, but you just smile."
+    "[the_person.title] lets out a snort. For a second, the waiter looks at you in distress, thinking he's embarrassed you by assuming you were a couple, but you just smile."
     mc.name "That sounds great. Start with two glasses?"
     "WAITER" "Yes sir. I'll have those right out."
     "As the waiter walks away, [the_person.possessive_title] looks at you and laughs."
@@ -1332,7 +1325,7 @@ label camilla_formal_date_label():    #60
     the_person "I have no idea... the menu all looks so good. I was thinking maybe the salmon."
     mc.name "That does sound good..."
     the_person "Yeah. I had a friend tell me once it's a good aphrodisiac. Might be good for when it's time to get out of here."
-    "The sulty tone in [the_person.possessive_title]'s voice makes it clear that she is hoping for there to be a part two to this date."
+    "The sultry tone in [the_person.possessive_title]'s voice makes it clear that she is hoping for there to be a part two to this date."
     "The waiter brings out the wine and takes your orders. Before long you've drank two glasses each. The waiter returns and sees your empty glasses."
     "WAITER" "Sir, you and your friend here seem to be enjoying the wine tonight. Might I bring a full bottle for you?"
     mc.name "That sounds great."
@@ -1348,7 +1341,7 @@ label camilla_formal_date_label():    #60
     the_person "And, well, they've been fucking around for a LOT longer than we have..."
     the_person "But that hey! It's okay right? We're all in the lifestyle together now right?"
     the_person "She pointed out her husband. Asked if I was interested. I said maybe, but honestly I just got sick to my stomach."
-    mc.name "[the_person.name]... I'm sorry..."
+    mc.name "[the_person.fname]... I'm sorry..."
     $ the_person.change_stats(happiness = -5, love = 2, max_love = 80)
     the_person "It's ok. You didn't have anything to do with it. I just... I just don't understand, why he kept it all a secret from me... you know?"
     "[the_person.title] turns away for a second and wipes her eyes."
@@ -1373,14 +1366,14 @@ label camilla_formal_date_label():    #60
     "You lips meet with an immediate spark. There is something different about her this time."
     "Before when you would kiss, she was a bit reserved, holding back a piece of herself."
     "This time though, she isn't kissing you out of a duty to her husband. She's doing it because she WANTS to."
-    "You hands drop to her ass. She moans into your mouth as you make out."
+    "Your hands drop to her ass. She moans into your mouth as you make out."
     $ the_person.change_arousal(15)
     the_person "Señor! I'm ready... let's do this!"
     $ the_person.draw_person()
     "With a shove, she pushes you onto your back on your bed. She stands in front of you as she strips down."
     $ the_person.strip_outfit()
     $ mc.change_locked_clarity(50)
-    "[the_person.possessive_title] stands in front of you, completely naked, ready for a full night of fun. She slowly climb on top of you."
+    "[the_person.possessive_title] stands in front of you, completely naked, ready for a full night of fun. She slowly climbs on top of you."
     $ the_person.draw_person(position = "cowgirl")
     the_person "Like what you see, señor?"
     mc.name "Fuck yes. You are so sexy..."
@@ -1442,7 +1435,7 @@ label camilla_formal_date_label():    #60
     $ the_person.draw_person(position = "walking_away")
     "In the middle of the night, you stir a bit. The warm body next to you continues sleeping."
     "It takes you a few moments to remember... [the_person.possessive_title] invited herself over last night, and she's naked, right next to you!"
-    "Your hand is cupping her chest. You give her hefty tits a squeeze, enjoying their weight heat and weight."
+    "Your hand is cupping her chest. You give her hefty tits a squeeze, enjoying their heat and weight."
     $ mc.change_locked_clarity(50)
     $ the_person.change_arousal(10)
     the_person "Mmm..."
@@ -1488,7 +1481,7 @@ label camilla_formal_date_label():    #60
     "She hears you stir and turns her head to look at you."
     the_person "Good morning, señor..."
     mc.name "Good morning."
-    the_person "I need to run some errands... Sorry but I need to go."
+    the_person "I need to run some errands... Sorry, but I need to go."
     "You stand up and walk over to her. She turns as your approach her and you embrace."
     $ the_person.draw_person(position = "kissing")
     the_person "Thank you for last night... it was magical."

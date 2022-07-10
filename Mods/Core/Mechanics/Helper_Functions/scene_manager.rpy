@@ -67,8 +67,10 @@ init -2 python:
                 actor.lighting = lighting
             if display_transform:
                 actor.display_transform = display_transform
-            if z_order:
+            if not z_order is None:
                 actor.z_order = z_order
+
+            # print("Update actor:" + actor.person.name + " (position: " + actor.position + ", z-order: " + str(actor.z_order) + ")")
             self.draw_scene()
 
         def strip_actor_outfit_to_max_sluttiness(self, person, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, narrator_messages = None, temp_sluttiness_boost = 0):
@@ -223,6 +225,7 @@ init -2 python:
         def draw_scene(self, exclude_list = []):
             self.draw_info_ui()
             for actor in sorted([x for x in self.actors if x.visible and x not in exclude_list], key = lambda x: x.z_order):
+                #print("Draw: " + actor.person.name + " at: " + str(actor.z_order))
                 actor.draw_actor()
 
         # update each actor and draw scene
@@ -284,7 +287,7 @@ init -2 python:
                 self._person = None
 
         def draw_actor(self):
-            self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, lighting = self.lighting, display_transform = self.display_transform, wipe_scene = False)
+            self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, lighting = self.lighting, display_transform = self.display_transform, display_zorder = self.z_order, wipe_scene = False)
 
 
 ##########################################
@@ -293,7 +296,7 @@ init -2 python:
 init 1:
     python:
         def calculate_scale(height_factor):
-            return 0.7 - ((1 - height_factor) / 2)   # for now render at 70% size
+            return 0.7 - ((1 - height_factor) / 3)   # for now render at 70% size
 
     transform character_portrait_say():
         pos (360,-40)

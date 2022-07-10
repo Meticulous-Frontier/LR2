@@ -7,14 +7,12 @@ transform Threesome_double_down_girl_one_transform():
     xanchor 1.0
     zoom 0.8
 
-
 transform Threesome_double_down_girl_two_transform():
     yalign 0.57
     yanchor 0.5
     xalign 1.07
     xanchor 1.0
     zoom 1.4 #Her ass is in your face!
-
 
 init:
     python:
@@ -65,8 +63,6 @@ init:
             #requirement = requirement_hard_both_vagina_both_like_anal)
             requirement = requirement_disable_position)  #Disabled until it gets written
 
-
-
         Threesome_double_down = Threesome_Position(name = "Double Down",
             slut_requirement = 60,
             position_one_tag = "cowgirl",
@@ -85,12 +81,18 @@ init:
         Threesome_double_down.mc_position = [Threesome_double_down_fuck_girl_one, Threesome_double_down_ass_play]
         list_of_threesomes.append(Threesome_double_down)
 
-
 label intro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "You lay down on your back as the girls get into position."
+    if not the_girl_1.vagina_visible():
+        "[the_girl_1.title] quickly moves some clothing out of the way..."
+        $ the_girl_1.strip_to_vagina(position = Threesome_double_down.position_one_tag, display_transform = Threesome_double_down.p1_transform, visible_enough = True, prefer_half_off = True)
     $ the_girl_1.break_taboo("vaginal_sex")
     $ the_girl_1.break_taboo("condomless_sex")
     "You briefly see [the_girl_1.title] sigh as she sinks down onto your cock, before [the_girl_2.possessive_title] swings a leg over your head."
+
+    if not the_girl_2.vagina_visible():
+        "[the_girl_2.title] quickly moves some clothing out of the way..."
+        $ the_girl_2.strip_to_vagina(position = Threesome_double_down.position_two_tag, display_transform = Threesome_double_down.p2_transform, visible_enough = True, prefer_half_off = True)
     "With both girls on top of you, you waste no time diving into [the_girl_2.title]'s pussy."
     return
 
@@ -133,18 +135,17 @@ label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_lo
     "You put both hands on [the_girl_2.title]'s ass cheeks, pulling them apart to give you better access."
     "[the_girl_1.possessive_title] stops bouncing for a moment, and instead grinds her hips against you for a bit, changing the angle of penetration."
     "You can hear lips smacking coming from above you as the girls begin to makeout while they ride you."
-    "You lay your head back for a second and just enjoy the view of [the_girl_2.title]'s ass hovering right about your face. Maybe you should put a finger in?"
+    "You lay your head back for a second and just enjoy the view of [the_girl_2.title]'s ass hovering right above your face. Maybe you should put a finger in?"
     menu:
         "Finger her pussy":
             "You push two fingers into [the_girl_2.title]'s sopping wet pussy. From this angle, it's easy to angle your fingers down and find her G-spot."
             "The girls continue to make out as they ride you. You notice [the_girl_1.title] reach back and spank [the_girl_2.possessive_title]'s ass."
             the_girl_2 "Mmmm..."
             "[the_girl_2.title] begins to twist and pull at [the_girl_1.possessive_title]'s nipples. You can feel her pussy clamp down on you as she stimulates her breasts."
-
         "Finger her ass":
             "You lick your index finger quickly, getting it lubed up, then press it against [the_girl_2.title]'s ass. You slowly push it inside of her."
             if the_girl_2.get_opinion_score("anal sex") < 0:
-                "She immediately stops making out with [the_girl_2.title] and pulls away from you."
+                "She immediately stops making out with [the_girl_1.title] and pulls away from you."
                 the_girl_2 "Hey! No butt stuff, you know I hate that!"
                 "Damn, guess you won't be exploring her rectum today!"
             else:
@@ -162,22 +163,21 @@ label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_lo
 
 label outro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "You feel yourself go past the point of no return, but there is nothing you can do. With [the_girl_2.title]'s pussy in your face, you can't really even get out a warning."
-    "You give [the_girl_2.possessive_title]'s ass a hard spank a moan, as you feel yourself begin to dump your cum inside of [the_girl_1.title]."
+    "You give [the_girl_2.possessive_title]'s ass a hard spank and moan as you feel yourself begin to dump your cum inside of [the_girl_1.title]."
     $ the_girl_1.cum_in_vagina()
     $ scene_manager.draw_scene()
     $ ClimaxController.manual_clarity_release(climax_type = "vagina", the_person = the_girl_1)
     the_girl_1 "Oh god! He's cumming inside me! I can feel it!"
     "She drops her hips down, taking you as deep as she can. She rotates her hips instead of thrusting, milking your cum as best she can."
-    if the_girl_2.has_cum_fetish() or the_girl_2.has_cum_fetish():
+    if the_girl_2.has_cum_fetish():
         the_girl_2 "Hey! No fair! I want some of that!"
         "You feel [the_girl_1.title] slowly pull off of you, your cock cold and aching to be back inside of her."
-        "[the_girl_2.title] leans forward and takes your cock in her mouth, sucking the remains of your cum of your shaft."
+        "[the_girl_2.title] leans forward and takes your cock in her mouth, sucking the remains of your cum off your shaft."
         $ the_girl_2.cum_in_mouth()
         $ scene_manager.draw_scene()
         "You feel a few more licks along your pelvic area, which you assume is her cleaning up any remaining drops of cum."
         the_girl_2 "Mmmm, I'm not letting a drop go to waste..."
     "You give a sigh, deeply contented with having dumped your load inside of [the_girl_1.title]."
-
     return
 
 label strip_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
@@ -198,7 +198,7 @@ label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loc
         $ the_girl_2.run_orgasm()
         the_girl_2 "Oh god I'm cumming too!"
         "[the_girl_2.title] is grinding your face when she cums, her juices running down the sides of her legs."
-        "[the_girl_2.possessive_title] slams her body down on top of you as she begins to cum at the same time. Her pussy is convulsing all around you."
+        "[the_girl_1.possessive_title] slams her body down on top of you as she begins to cum at the same time. Her pussy is convulsing all around you."
         "You just lay back and enjoy yourself as the two girls moan and writhe on top of you."
         return
 
@@ -216,14 +216,12 @@ label orgasm_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_loc
         $ the_girl_2.run_orgasm()
         "[the_girl_2.title] grinds her pussy against you. [the_girl_1.title] pinches and pulls at her nipples, sending her over the edge."
         "[the_girl_2.title]'s juices are beginning to run down the inside of her legs, you do your best to lap them up and then continue licking her."
-
     return
 
 label swap_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     $ the_girl_1.break_taboo("vaginal_sex")
     $ the_girl_1.break_taboo("condomless_sex")
     "[the_girl_1.title] slowly sinks down onto your cock, enjoying the sensations as you penetrate her pussy."
-    "[the_girl_2.title] wiggles her hips back and forth, so your grab her ass cheeks with your hands and spread them apart."
+    "[the_girl_2.title] wiggles her hips back and forth, so you grab her ass cheeks with your hands and spread them apart."
     "You dive into her pussy with vigor, determined to get her off with your tongue."
-
     return

@@ -3,7 +3,7 @@
 
 init 2 python:
     def hire_mother_work_crisis_requirement():
-        # Requires you to have an employee over a certain age, with at least one kid, who hasn't been introduced to the game yet.
+        # Requires you to have an employee under a certain age, with a mother, who hasn't been introduced to the game yet.
         # Requires you and her to be at work.
         # Requires you to have a free slot in the company
         if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.get_employee_count() < mc.business.max_employee_count:
@@ -58,7 +58,7 @@ label hire_mother_work_crisis_label():
         "[the_person.title] hands over a printed out resume and waits nervously for you to look it over."
 
     menu:
-        "Look at the resume for [the_person.name]'s mother":
+        "Look at the resume for [the_person.fname]'s mother":
             pass
 
         "Tell her you aren't hiring":
@@ -70,13 +70,13 @@ label hire_mother_work_crisis_label():
                 "She puts her arms behind her back and puffs out her chest in a clear attempt to show off her tits."
                 $ mc.change_locked_clarity(5)
                 menu:
-                    "Look at the resume for [the_person.name]'s mother":
+                    "Look at the resume for [the_person.fname]'s mother":
                         "Convinced, you start to read through the resume."
                         $ promised_sex = True
 
                     "Tell her you aren't hiring":
                         if the_person.love < 10:
-                            mc.name "If I want to fuck you I wouldn't need to hire your mother to do it. Give it up, you look desperate."
+                            mc.name "If I wanted to fuck you I wouldn't need to hire your mother to do it. Give it up, you look desperate."
                             $ the_person.change_obedience(3)
                             "She steps back and looks away."
                             $ the_person.draw_person(emotion = "sad")
@@ -87,14 +87,14 @@ label hire_mother_work_crisis_label():
                             $ the_person.change_obedience(1)
                             "She takes the resume back and steps away from your desk, defeated."
                             $ the_person.draw_person(emotion = "sad")
-                            the_person "Right, of course. Sorry for wasting up your time."
+                            the_person "Right, of course. Sorry for wasting your time."
                         $ clear_scene()
                         return
             elif promised_sex:
                 the_person "There's nothing I could do? Nothing at all?"
                 "She moves to run a hand down your shirt, but you shove the resume back into her hand."
                 if the_person.love < 10:
-                    mc.name "If I want to fuck you I wouldn't need to hire your mother to do it. Give it up, you look desperate."
+                    mc.name "If I wanted to fuck you I wouldn't need to hire your mother to do it. Give it up, you look desperate."
                     $ the_person.change_obedience(3)
                     "She steps back and looks away."
                     $ the_person.draw_person(emotion = "sad")
@@ -105,7 +105,7 @@ label hire_mother_work_crisis_label():
                     $ the_person.change_obedience(1)
                     "She takes the resume back and steps away from your desk, defeated."
                     $ the_person.draw_person(emotion = "sad")
-                    the_person "Right, of course. Sorry for wasting up your time."
+                    the_person "Right, of course. Sorry for wasting your time."
                 $ clear_scene()
                 return
 
@@ -153,18 +153,18 @@ label hire_mother_work_crisis_label():
             the_person "Thank you so much!"
             call hire_someone(the_mother) from _call_hire_mother_work_2
         # make sure to set titles for the mother (prevent introduction dialogs)
-        $ the_mother.set_mc_title(get_random_from_list(get_player_titles(the_mother)))
-        $ the_mother.set_title(get_random_title(the_mother))
-        $ the_mother.set_possessive_title(get_random_possessive_title(the_mother))
+        $ the_mother.set_mc_title(get_random_from_list(the_mother.get_player_titles()))
+        $ the_mother.set_title(the_mother.get_random_title())
+        $ the_mother.set_possessive_title(the_mother.get_random_possessive_title())
     else: #is "None
         if promised_sex: #You promised to do it for sex but don't want to hire her, mom is disappointed.
-            mc.name "I'm sorry but her credentials just aren't what they need to be. I could never justify hiring your mother."
+            mc.name "I'm sorry, but her credentials just aren't what they need to be. I could never justify hiring your mother."
             $ the_person.change_stats(happiness = -5, love = -2)
             $ the_person.draw_person(emotion = "sad")
             "[the_person.possessive_title] seems to deflate. She nods sadly."
             the_person "I understand. Thank you for the time."
         else:
-            mc.name "I'm sorry but I don't think her skills are where I would need them to be."
+            mc.name "I'm sorry, but I don't think her skills are where I would need them to be."
             $ the_person.change_obedience(1)
             the_person "I understand, thank you for at least taking a look for me."
 

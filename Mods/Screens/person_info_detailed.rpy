@@ -105,7 +105,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Status and Info" style "serum_text_style_header"
                         text "Happiness: [the_person.happiness]" style "menu_text_style"
                         text "Sluttiness: [the_person.sluttiness]%" style "menu_text_style"
-                        text "Obedience: [the_person.obedience] - [obedience_info]" style "menu_text_style"
+                        text "Obedience: [the_person.obedience] {image=triskelion_token_small} [obedience_info]" style "menu_text_style"
                         text "Love: [the_person.love]" style "menu_text_style"
                         text "Personality: [personality_info]" style "menu_text_style"
                         if the_person.has_role(girlfriend_role):
@@ -149,6 +149,12 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Research & Development: [the_person.research_skill]" style "menu_text_style"
                         text "Production: [the_person.production_skill]" style "menu_text_style"
                         text "Supply Procurement: [the_person.supply_skill]" style "menu_text_style"
+                        text "Work Experience Level: [the_person.work_experience]" style "menu_text_style"
+                        if the_person.has_role(employee_role) or the_person.has_role("College Intern"):
+                            textbutton "Review Duties: " + str(len(the_person.duties)) + "/" + str(the_person.work_experience):
+                                style "textbutton_style"
+                                text_style "menu_text_style"
+                                action Show("set_duties_screen", the_person = the_person, allow_changing_duties = False, show_available_duties = True, hide_on_exit = True)
 
                 frame:
                     background "#1a45a1aa"

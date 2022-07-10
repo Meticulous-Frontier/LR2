@@ -1,6 +1,6 @@
 init 2 python:
     def intern_water_spill_crisis_requirement():
-        return (mc.business.any_intern_in_office() and mc.is_at_work())
+        return mc.is_at_work() and any(x for x in mc.business.get_intern_list() if x.is_at_work())
 
     intern_water_spill_crisis = ActionMod("Intern Water Spill Crisis",intern_water_spill_crisis_requirement,"intern_water_spill_crisis_label",
         menu_tooltip = "An intern spills her water", category = "Intern", is_crisis = True)
@@ -45,6 +45,7 @@ label intern_water_spill_crisis_label():
         if thinks_appropriate:
             the_person "I'm so sorry about this [the_person.mc_title]. Let me just take this off, you keep talking."
             $ the_person.draw_animated_removal(the_clothing)
+            $ the_person.update_outfit_taboos()
             if the_person.outfit.tits_visible():
                 "[the_person.title] strips off her [the_clothing.name], letting you get a nice good look at her [the_person.tits] sized tits."
                 $ mc.change_locked_clarity(30)
@@ -66,7 +67,7 @@ label intern_water_spill_crisis_label():
                     elif the_person.outfit.tits_visible():
                         mc.name "You already have your tits out for me, what's a little more skin?"
                     elif the_person.outfit.vagina_visible():
-                        mc.name "I mean, I can already see your cunt. What's a little more skin at that point?"
+                        mc.name "I mean, I can already see your cunt. What's a little more skin at this point?"
 
                     if the_person.judge_outfit(the_person.outfit, -25): #How comfortable are they with their current outfit? If they have an extra 20 sluttiness start stripping!
                         "[the_person.title] smiles mischievously and starts to strip down some more."
@@ -88,7 +89,7 @@ label intern_water_spill_crisis_label():
                             the_person.draw_animated_removal(next_piece)
                             renpy.say(None,the_person.title + " takes off her " + next_piece.name + " and drops it on the floor.")
                             next_piece = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
-
+                    $ the_person.update_outfit_taboos()
                     the_person "There, I hope that's good enough."
                     mc.name "Much better. Now, back to your homework."
                     python:
@@ -146,6 +147,7 @@ label intern_water_spill_crisis_label():
                     $ the_person.change_stats(happiness = -5, slut = 2, obedience =2)
                     $ mc.business.change_team_effectiveness(-10)
                     "[the_person.title] clearly isn't happy, but she takes off her [the_clothing.name] and resumes talking about her homework."
+                    $ the_person.update_outfit_taboos()
                     "You're sure she'll probably make a complaint with HR..."
                     if test_outfit.tits_visible():
                         "Getting a good look at her tits makes the boring topic much more interesting. After a few minutes you've sorted out her problems. She goes to dry her top while you get back to work."

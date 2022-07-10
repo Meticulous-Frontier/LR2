@@ -18,15 +18,26 @@ init 2 python:
 
         # init jobs after rooms are created
         global stripclub_waitress_job
-        stripclub_waitress_job = Job("Waitress", stripclub_waitress_role, strip_club, strip_club_hire_waitress, strip_club_fire_waitress, work_days=[0,1,2,3,4,5,6], work_times = [3,4])
+        stripclub_waitress_job = Job("Waitress", stripclub_waitress_role, strip_club, strip_club_hire_waitress, strip_club_fire_waitress, work_days=[0,1,2,3,4,5,6], work_times = [3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
         global stripclub_bdsm_performer_job
-        stripclub_bdsm_performer_job = Job("BDSM Performer", stripclub_bdsm_performer_role, bdsm_room, strip_club_hire_bdsm_performer, strip_club_fire_bdsm_performer, work_days = [0,1,2,3,4,5,6], work_times = [3,4])
+        stripclub_bdsm_performer_job = Job("BDSM Performer", stripclub_bdsm_performer_role, bdsm_room, strip_club_hire_bdsm_performer, strip_club_fire_bdsm_performer, work_days = [0,1,2,3,4,5,6], work_times = [3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
         global stripclub_manager_job
-        stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [2,3,4])
+        stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [2,3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
         global stripclub_mistress_job
-        stripclub_mistress_job = Job("Mistress", stripclub_mistress_role, bdsm_room, work_days=[0,1,2,3,4,5,6], work_times = [2,3,4])
+        stripclub_mistress_job = Job("Mistress", stripclub_mistress_role, bdsm_room, work_days=[0,1,2,3,4,5,6], work_times = [2,3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
         global stripclub_stripper_job
-        stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit)
+        stripclub_stripper_job = Job("Stripper", stripclub_stripper_role, job_location = strip_club, work_days = [0,1,2,3,4,5,6], work_times = [3,4], hire_function = stripper_hire, quit_function = stripper_quit,
+            mandatory_duties = [daily_serum_dosage_duty])
+
+        # init stripclub daily serum attributes
+        mc.business.strippers_serum = None
+        mc.business.waitresses_serum = None
+        mc.business.bdsm_performers_serum = None
+        mc.business.manager_serum = None
         return
 
     def get_strip_club_foreclosed_stage():
@@ -52,7 +63,9 @@ init 2 python:
             return False
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
-        if not cousin.job == unemployed_job: # don't trigger event when cousin is not stripper
+        if cousin.event_triggers_dict.get("blackmail_level", 0) < 2:
+            return False
+        if cousin not in stripclub_strippers:
             return False
         if mc.business.has_funds(60000):
             if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
@@ -76,12 +89,14 @@ init 2 python:
             return False # Don't trigger foreclosed event while strip club is open
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
+        if cousin.event_triggers_dict.get("blackmail_level", 0) < 2:
+            return False
         if day > start_day:
             return True
         return False
 
     def strip_club_foreclosed_change_stripper_schedules():
-        for person in stripclub_strippers:
+        for person in [x for x in stripclub_strippers if x not in unique_character_list]:
             # clear any party schedules
             person.set_override_schedule(None, the_times = [4])
             person.set_override_schedule(person.home, the_days = [0,1,2,3,4,5,6], the_times = [3, 4])
@@ -129,7 +144,7 @@ label strip_club_closes_down_label():
         strip_club.visible = True   # make sure the strip club is on the map
 
     "While reading a newspaper you find out that your favorite Strip Club is no longer in business."
-    "Perhaps you should talk to your cousin Gabrielle about it, when your aunt cannot overhear your conversation."
+    "Perhaps you should talk to your cousin [cousin.fname] about it, when your aunt cannot overhear your conversation."
     return
 
 label cousin_talk_about_strip_club_label(the_person):
@@ -243,134 +258,8 @@ label club_foreclosed_strip_label(the_person):
                 $ the_person.add_situational_slut("desperate", 20, "She is desperate for cash.")
 
             "You hand over the cash and [the_person.title] stares at you for a moment, sighs and slowly start to dance for you."
-            if the_person.effective_sluttiness("underwear_nudity") <= 20: # She only wants to show her underwear.
-                if the_person.outfit.wearing_bra(): # If she's wearing a bra strip down to it.
-                    while the_person.outfit.bra_covered():
-                        $ the_item = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
-                        $ the_person.draw_animated_removal(the_item)
-                        "[the_person.possessive_title] takes off her [the_item.display_name]."
-                else: #She's not wearing a bra and doesn't want you to see her tits.
-                    "[the_person.title] seems nervous and plays with her shirt."
-                    mc.name "What's wrong?"
-                    the_person "I don't have a bra on... I can't take this off."
-                    mc.name "Come on, you know the deal."
-                    $ the_person.change_stats(happiness = -5, obedience = 2)
 
-                if the_person.outfit.wearing_panties(): # If she's wearing a panties strip down to it.
-                    while the_person.outfit.panties_covered():
-                        $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True)
-                        $ the_person.draw_animated_removal(the_item)
-                        "[the_person.possessive_title] now takes off the [the_item.display_name]."
-                else: #She's not wearing panties and doesn't want you to see her pussy.
-                    the_person "I'm not wearing any panties right now. That means I can't take this off."
-                    mc.name "Come on, that's not what the deal is."
-                    the_person "Sad you don't get to see my tight, wet pussy [the_person.mc_title]?"
-                    "She laughs and shakes her head."
-                    the_person "Deal with it. Go cry to mommy if it matters that much to you."
-
-                $ the_person.draw_person(position = "back_peek")
-
-                if the_person.outfit.wearing_panties() and the_person.outfit.wearing_bra():
-                    "Once [the_person.possessive_title] has stripped down to her underwear, she turns around to let you look at her ass."
-                else:
-                    "Once [the_person.possessive_title] has stripped down as far as she's willing, she turns around to let you look at her ass."
-                the_person "Are you happy now ? I bet you're about to cream your fucking pants looking at this."
-                "You take a second to enjoy the view."
-                mc.name "Alright, that'll do."
-                the_person "Finally... Pervert!"
-                $ clear_scene()
-                "A moment later she's back in the bathroom changing her clothes again."
-                $ the_person.update_outfit_taboos()
-                $ the_person.apply_planned_outfit()
-                $ the_person.change_slut(5)
-                $ the_person.draw_person(emotion = "happy", position = "stand4")
-                the_person "Thank you for the money, see you!"
-                $ the_person.draw_person(position = "walking_away")
-                "Happily [the_person.title] leaves the room and closes the door behind her."
-            elif the_person.effective_sluttiness("bare_tits") <= 40: # She'll show tits and panties.
-                while not the_person.outfit.tits_visible(): # If she's wearing a top strip it down.
-                    $ the_item = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
-                    $ the_person.draw_animated_removal(the_item)
-                    if the_person.outfit.tits_visible():
-                        "[the_person.possessive_title] takes off her [the_item.display_name] slowly, teasing you as she frees her tits."
-                        if the_person.has_taboo("bare_tits"):
-                            the_person "God, I can't believe you're going to see my tits. You're a fucking dick of a cousin, you know that?"
-                            mc.name "Whatever. Pull those girls out so I can have a look."
-                            the_person "I don't know why my Mom likes you... Fine."
-                            $ the_person.break_taboo("bare_tits")
-                    else:
-                        "[the_person.possessive_title] takes off her [the_item.display_name]."
-                if the_person.outfit.wearing_panties():
-                    while the_person.outfit.panties_covered():
-                        $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True)
-                        $ the_person.draw_animated_removal(the_item)
-                        "[the_person.possessive_title] takes off her [the_item.display_name]."
-                else:
-                    the_person "I'm not wearing any panties right now. That means I can't take this off."
-                    mc.name "Come on, that's not what the deal is."
-                    the_person "Sad you don't get to see my tight, wet pussy [the_person.mc_title]?"
-                    "She laughs and shakes her head."
-                    the_person "Deal with it. Go cry to mommy if it matters that much to you."
-                $ the_person.draw_person(position = "back_peek")
-                if the_person.outfit.wearing_panties():
-                    "Once [the_person.possessive_title] has stripped down to her panties, she turns around to let you look at her ass."
-                else:
-                    "Once [the_person.possessive_title] has stripped down, she turns around to let you look at her ass."
-                the_person "Are you happy now? I bet you're about to cream your fucking pants looking at this."
-                "You take a second to enjoy the view."
-                mc.name "Alright, that'll do."
-                the_person "Finally... Pervert!"
-                $ clear_scene()
-                "A moment later she's back in the bathroom changing again her clothes."
-                $ the_person.update_outfit_taboos()
-                $ the_person.apply_planned_outfit()
-                $ the_person.change_slut(5)
-                $ the_person.draw_person(emotion = "happy", position = "stand4")
-                the_person "Thank you for the money, see you!"
-                $ the_person.draw_person(position = "walking_away")
-                "Happily [the_person.title] leaves the room and closes the door behind her."
-            else: #She'll get completely naked.
-                while not the_person.outfit.tits_visible():
-                    $ the_item = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
-                    $ the_person.draw_animated_removal(the_item)
-                    if the_person.outfit.tits_visible():
-                        "[the_person.possessive_title] takes off her [the_item.display_name] slowly, teasing you as she frees her tits."
-                        if the_person.has_taboo("bare_tits"):
-                            the_person "God, I can't believe you're going to see my tits. You're a fucking dick of a cousin, you know that?"
-                            mc.name "Whatever. Pull those girls out so I can have a look."
-                            the_person "I don't know why my Mom likes you... Fine."
-                            $ the_person.break_taboo("bare_tits")
-                    else:
-                        "[the_person.possessive_title] takes off her [the_item.display_name]."
-                while not the_person.outfit.vagina_visible(): # Strip down completely naked.
-                    $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True)
-                    $ the_person.draw_animated_removal(the_item)
-                    if the_person.outfit.vagina_visible():
-                        "[the_person.possessive_title] peels off her [the_item.display_name], slowly revealing her cute little pussy."
-                        if the_person.has_taboo("bare_pussy"):
-                            "[the_person.title] pauses and takes a deep breath."
-                            mc.name "What's the hold up?"
-                            the_person "Nothing! I though you would have chickened out by now, but whatever."
-                            $ the_person.break_taboo("bare_pussy")
-                    else:
-                        "[the_person.possessive_title] takes off her [the_item.display_name]."
-                the_person "There, are you satisfied?"
-                $ the_person.draw_person(position = "back_peek")
-                "She spins on the spot, letting you get a look at her ass."
-                the_person "I know you like my ass, I bet you're about to cream your fucking pants looking at this."
-                "You take a second to enjoy the view."
-                mc.name "You're right, I like your ass!"
-                $ the_person.draw_person(position = "stand4")
-                the_person "Pervert!"
-                $ clear_scene()
-                "A moment later she's back in the bathroom changing again her clothes."
-                $ the_person.update_outfit_taboos()
-                $ the_person.apply_planned_outfit()
-                $ the_person.change_slut(5)
-                $ the_person.draw_person(emotion = "happy", position = "stand4")
-                the_person "Thank you for the money, see you!"
-                $ the_person.draw_person(position = "walking_away")
-                "Happily [the_person.title] leaves the room and closes the door behind her."
+            call strip_tease(the_person, for_pay = False, skip_intro = True) from _call_strip_tease_cousin_club_foreclosed_strip
 
             $ the_person.clear_situational_slut("desperate")
 

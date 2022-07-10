@@ -11,7 +11,7 @@ init 2 python:
 
     def aggressive_anal_employee_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
-            return not get_needy_anal_fetish_non_employee() is None
+            return not get_needy_anal_fetish_employee() is None
         return False
 
     def get_anal_fetish_employee():
@@ -137,7 +137,7 @@ label aggressive_anal_fetish_non_employee_label():
             "You slowly pull out the pink jewelled butt plug from [the_person.possessive_title]'s rectum. She quivers in anticipation of what you are about to do to her."
             $ the_person.change_arousal(the_person.get_opinion_score("anal sex"))
             $ mc.change_locked_clarity(50)
-            the_person "Oh my god, I need you in my ass right now... shove your big cock up my fucking my ass right now!"
+            the_person "Oh my god, I need you in my ass right now... shove your big cock up my fucking ass right now!"
             $ the_person.break_taboo("anal_sex")
             "You drop your pants, take out your already hard cock and you shove it right up her greedy butt hole, eliciting a satisfying grunt from [the_person.possessive_title]."
 
@@ -176,7 +176,7 @@ label anal_fetish_employee_evening_approach_label():
         "She flashes you a quick smile. You wonder if she has in that butt plug she showed you last time you stayed late at the office with her..."
         $ mc.change_locked_clarity(20)
         mc.name "Sure, I can probably stick around for a little bit. Just give me a few minutes."
-        the_person "Oh! Thanks [the_person.mc_title], I'll be right back! You won't regret this!"
+        the_person "Oh! Thanks, [the_person.mc_title], I'll be right back! You won't regret this!"
         $ the_person.draw_person(position = "walking_away")
         "You finish up what you were doing and say goodbye to your employees. Your curiosity about what [the_person.possessive_title] needs is answered when she comes back into the room."
         $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_outfit))
@@ -191,7 +191,7 @@ label anal_fetish_employee_evening_approach_label():
         $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
         the_person "Hey, [the_person.mc_title]. I was wondering if you would be here on the weekend! Want to have some fun before you head home?"
-        "[the_person.possessive_title] is dressed to impress. You wonder if she has in that butt plug she showed you last time you stayed late at the office wit her..."
+        "[the_person.possessive_title] is dressed to impress. You wonder if she has in that butt plug she showed you last time you stayed late at the office with her..."
         "As if sensing your thoughts, [the_person.possessive_title] turns around."
         $ the_person.draw_person(position = "back_peek")
         "Between her pillowy cheeks is her pink jewelled butt plug."
@@ -200,7 +200,7 @@ label anal_fetish_employee_evening_approach_label():
     menu:
         "Fuck her ass":
             $ the_person.event_triggers_dict["LastAnalFetish"] = day
-            the_person "Mmmm I can't wait to feel it."
+            the_person "Mmmm, I can't wait to feel it."
             $ the_person.draw_person(position = "standing_doggy")
             "[the_person.possessive_title] walks over in front of you, with her hands on your desk."
             ###Anal Scene, standing variant###

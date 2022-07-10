@@ -44,14 +44,12 @@ label train_dealbreaker_fingering_label(the_person):
         person_is_tired = the_person.energy <= DEALBREAKER_LOW_ENERGY
         mc_has_high_skill = mc.sex_skills["Foreplay"] > DEALBREAKER_HIGH_SEX_SKILL
 
-
-
     mc.name "I've got something to talk to you about [the_person.title]."
     "She nods and listens attentively."
     mc.name "I've noticed that you won't let me touch you intimately with my hands. This is a dealbreaker for me."
     mc.name "I want you to reconsider. I think if you try it again, with an open mind, you might be pleasantly surprised."
     the_person "You want to what!?!"
-    "For a second, it almost appears that her hatred of being fingered has snapper her out of her trance, but your soothing words soon have her back to her trance state."
+    "For a second, it almost appears that her hatred of being fingered has snapped her out of her trance, but your soothing words soon have her back to her trance state."
     mc.name "It's okay that you may not necessarily like it, but I think with the right partner and some patience, you could actually enjoy it some."
     the_person "Hmmm... I don't know..."
     if has_effective_serum: #First, use a serum to loosen her up if possible
@@ -74,14 +72,14 @@ label train_dealbreaker_fingering_label(the_person):
             mc.name "We've done this before actually... remember?"
             the_person "Yes, of course."
             mc.name "Didn't it feel good? When my fingers first pushed up inside you..."
-            "[the_person.possessive_title] closes her eyes for a moment, remembering that moment. Her voice waivers."
+            "[the_person.possessive_title] closes her eyes for a moment, remembering that moment. Her voice wavers."
             the_person "I... I guess it felt good... but I just..."
             mc.name "Shhhh, it's okay. Remember that feeling, the sweet sensation of being touched intimately. Was it so bad?"
         elif the_person.has_broken_taboo("touching_body"):
             mc.name "You seem to like it when I touch you in other places. Your neck. Your legs. Your breasts."
             the_person "Mmm, yeah. That can feel nice."
             mc.name "Wouldn't it make sense that it would also feel good if I touched you somewhere more intimate?"
-            "[the_person.possessive_title] closes her eyes for a moment. Her voice waivers."
+            "[the_person.possessive_title] closes her eyes for a moment. Her voice wavers."
             the_person "I... I guess it would feel good, but I just..."
             mc.name "Shhh, it's okay. It's a natural progression of being touched in more and more intimate areas. Would that be so bad?"
         elif the_person.has_broken_taboo("touching_penis"):
@@ -89,7 +87,7 @@ label train_dealbreaker_fingering_label(the_person):
             mc.name "Remember how good you made me feel, when you wrapped your hand around my cock and stroked it."
             the_person "Mmm, yeah. It feels nice in my hand..."
             mc.name "You made me feel so good. Would it be so bad if I touched you the same way?"
-            "[the_person.possessive_title] closes her eyes for a moment. Her voice waivers."
+            "[the_person.possessive_title] closes her eyes for a moment. Her voice wavers."
             the_person "I... I know it would feel good, but I just..."
             mc.name "Shhh, I just want to do for you, what you've already done for me. Would that be so bad?"
         else:
@@ -132,7 +130,7 @@ label train_dealbreaker_fingering_label(the_person):
         "You start slow, caressing her and slowly building up her arousal."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(10)
-        "As her passage gets wetter, you reach up with your other hand and caress her chest, linking good feelings of your fingers with her breasts being touched."
+        "As her passage gets wetter, you reach up with your other hand and caress her chest, linking the good feelings from your fingers with her breasts being touched."
         "She gives a little moan, but you can tell she is still trying to hold back."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(10)
@@ -201,7 +199,7 @@ label train_dealbreaker_fingering_label(the_person):
             mc.name "Feels good, doesn't it?"
             "She gives a little shudder."
             the_person "Yeah... it does..."
-            "Unfortunately, you aren't skilled enough to get her to cum, but she does atleast enjoy the sensations."
+            "Unfortunately, you aren't skilled enough to get her to cum, but she does at least enjoy the sensations."
 
     "You slowly let go of [the_person.title]. She turns around to face you."
     $ the_person.update_opinion_with_score("being fingered", after_training_opinion_score, add_to_log = True)
@@ -213,7 +211,7 @@ label train_dealbreaker_fingering_label(the_person):
         the_person "... as a warm up maybe?"
     elif after_training_opinion_score == 0:
         the_person "That was nice. I think you're right."
-        mc.name "Do you would be up for it again sometime?"
+        mc.name "So you would be up for it again sometime?"
         the_person "Yeah, I could be up for that once in a while, or as a good warmup!"
     elif after_training_opinion_score == 1:
         the_person "You are right. I think I still prefer other things, but it felt really good..."
@@ -221,7 +219,7 @@ label train_dealbreaker_fingering_label(the_person):
         the_person "I... I can't believe you made me cum! Yeah, I umm... when can we do it again?"
         mc.name "Soon, don't worry."
     else:
-        "This is an error, you shouldn't be here. Please let know Starbuck know on discord this event is bugged!"
+        "This is an error, you shouldn't be here. Please let Starbuck know on discord this event is bugged!"
     "You feel like you made excellent headway with [the_person.possessive_title]."
     python:
         del after_training_opinion_score

@@ -16,7 +16,7 @@ label crisis_TEMPLATE_label():
 
     #opening dialogue
     "You hear a knock on your door. [mom.possessive_title] appears at your door."
-    mom "Hey! [the_person.name] stopped by to join us for breakfast! I'm making pancakes!"
+    mom "Hey! [the_person.fname] stopped by to join us for breakfast! I'm making pancakes!"
     $ scene_manager.clear_scene()
 
     "You stumble out of bed and into the kitchen. [lily.title] and [the_person.possessive_title] are sitting at the table while [mom.title] makes breakfast."

@@ -118,7 +118,7 @@ label return_from_seminar_action_label(the_person):
         "She speeds up stroking your dick while cupping and massaging your balls with her other hand."
         the_person "I hope the company will come to benefit from the techniques the seminar taught me... Don't you agree, [the_person.mc_title]?"
         $ the_person.draw_person(position="blowjob", special_modifier="blowjob")
-        "Before you can answer her, [the_person.title] swallows all of your cock into her mouth and begins moaning into it."
+        "Before you can answer her, [the_person.title] swallows all of your cock into her mouth and begins moaning around it."
         the_person "Mrmrmm... Mrmmmmm..."
         "[the_person.title] continues to speed up and you begin to feel that it won't be long before you explode."
         if the_person.get_opinion_score("giving blowjobs") > 0:
@@ -139,16 +139,16 @@ label return_from_seminar_action_label(the_person):
             "Soon [the_person.title]'s mouth is filled to the brim with your sperm from the torrent you're unleashing upon her, but you just cannot stop."
             $ the_person.cum_on_tits()
             $ the_person.draw_person(position="kneeling1")
-            "She closes her mouth shut to secure the load in her stomach while the excess cum drips down onto her tits, painting them white."
-            mc.name "There you go, [the_person.title]! That's how a decent [mc.business.name] employee should look like!"
-            #"The image of [the_person.title] sitting contently in front of with her body sealed in your sperm really fires you up."
+            "She closes her mouth to secure the load in her stomach while the excess cum drips down onto her tits, painting them white."
+            mc.name "There you go, [the_person.title]! That's how a proper [mc.business.name] employee should look!"
+            #"The image of [the_person.title] sitting contently in front of with her body coated in your sperm really fires you up."
             $ the_person.draw_person(position = "stand2", emotion = "happy")
             "[the_person.title] pushes herself up off the floor while you take in the spectacle of her body. Her eyes trail down her chest as drops of your sperm fall onto the carpet below."
             the_person "Really, [the_person.mc_title]? Maybe you would like to have a better look?"
             $ the_person.draw_person(position = "back_peek")
             "[the_person.title] starts to turn around with the intention of striking various poses, allowing you to enjoy the sight of her cum drenched body."
             $ the_person.draw_person(position = "missionary", emotion = "happy")
-            "She lies herself back onto the floor before spreading her legs, giving you a perfect view of her now dripping vagina. Her juices flow onto the carpet, mixing itself with yours."
+            "She lies herself back onto the floor before spreading her legs, giving you a perfect view of her now dripping vagina. Her juices flow onto the carpet, mixing themselves with yours."
             the_person "Do you prefer this view? My pussy is yours to use however you want for the sake of [mc.business.name]." # Should probably include some less NTR- suggestive dialogue depending on preferences etc.
             "She basks in the pleasurable sensation of announcing her devotion to you and [mc.business.name]."
             the_person "If my pussy is off limits... then how about this."
@@ -160,7 +160,7 @@ label return_from_seminar_action_label(the_person):
             $ the_person.draw_person(position = "standing_doggy", emotion = "happy", the_animation = ass_bob, animation_effect_strength = 0.7)
             "[the_person.title] then rotates her back towards you, reaching up to support herself by resting her arms on the desk as she arches her back, pushing her ass in your direction, wiggling it left and right."
             if persistent.show_ntr:
-                the_person "You should also check up this ass. It is also usable if you would like so."
+                the_person "You should also check out this ass. It is usable if you would like."
                 the_person "I wouldn't mind if you share this ass of mine with your investors or friends either. I'd actually love that, [the_person.mc_title]!"
             $ the_person.draw_person(position = "back_peek", emotion = "happy")
             "[the_person.title] straightens her back then walks towards the door that leads out of your office. In the doorway she stops and turns to you."

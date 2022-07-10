@@ -202,7 +202,7 @@ label fetish_serum_quest_intro_label():
     the_person "Well, I just got off the phone with an old friend. Nerdy guy I kinda had a thing with at the university before I met you."
     the_person "He has been posting a bunch of stuff on Facebook about his work in robotics, and something he posted caught my eye."
     mc.name "Oh?"
-    the_person "Yeah, basically, they've managed to make small robot nano bots that are designed to administer drugs in micro-doses to specific places in the body."
+    the_person "Yeah, basically, they've managed to make small robot nanobots that are designed to administer drugs in micro-doses to specific places in the body."
     mc.name "How could this technology help us?"
     the_person "If we program the nanobots to deliver targeted doses of endorphins and combined them with our suggestibility serums, it could change someone's opinions, depending on how we program the bots."
     "You consider briefly the implications of how this technology could help your business. Maybe you could have the bots help girls be more accepting of sexual acts?"
@@ -210,7 +210,7 @@ label fetish_serum_quest_intro_label():
     "[the_person.possessive_title] shakes her head."
     the_person "No... but ummm, this friend of mine kind of owes me a favor. I was thinking about paying him a visit this weekend. He still lives locally."
     mc.name "Hmm, maybe you could make some kind of deal with him... supply us with these bots? Then maybe set up a basic program we can use for our initial batches."
-    mc.name "Eventually we could design new programs, but for initial testing, we could keep it basic."
+    mc.name "Eventually we could design new programs, but for initial testing, we should keep it basic."
     the_person "That sounds like a good idea. I'll talk to him, maybe he would be willing to write us the first round of code. What kind of triggers should we put in the first round?"
     mc.name "Well, so far our research has been on making people more... open... to different experiences. Maybe we could base it on some basic sexual acts?"
     if the_person.sluttiness < 20:
@@ -250,7 +250,7 @@ label fetish_serum_quest_intro_followup_label():
         $ mc.change_location(mc.business.r_div)
         $ mc.location.show_background()
     $ the_person.draw_person()
-    the_person "Guess what! I got the first set of those nano bots. He did me a favor and spent all weekend coding the program for our first batch!"
+    the_person "Guess what! I got the first set of those nanobots. He did me a favor and spent all weekend coding the program for our first batch!"
     "You look at her desk. There is a small container filled with what appears to be a silver liquid."
     the_person "All we have to do is add a little bit to a serum, set the program, and it should be good to go!"
     the_person "However, he did give me a warning. He said this tech is still technically top secret, so we absolutely CANNOT advertise what's in it or how they work."
@@ -580,7 +580,7 @@ label fetish_serum_breeding_label():
         $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "My contact emailed me the new program late last night. We should be able to program a new set of nanobots with it immediately."
-    the_person "The new program should make it so that people will have positive reactions to exposure to reproducing and other associated body functions, such as lactation."
+    the_person "The new program should make it so that people will have positive reactions to reproducing and other associated bodily functions, such as lactation."
     mc.name "Excellent."
     the_person "We'll have to make new formulas for it though, and due to production limitations, we can't combine more than one set of bots in a single serum dose."
     "You have unlocked Reproduction Proclivity Nanobots."
@@ -688,10 +688,10 @@ label fetish_serum_exhibition_warning_label():
     the_person "So, I've been running some experiments with those Public Sexual Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
     the_person "I ran some modified version of them on some rats. I obviously expected for there to be some interesting results, but this was beyond my expectations."
-    the_person "Normal rats usually are night active and retreat during the daytime in a protected shelter."
+    the_person "Normal rats usually are night active and retreat during the daytime into a protected shelter."
     the_person "But they no longer seemed to care, foraging and running around all day long and copulating wherever they find a mate."
     mc.name "That is very interesting."
-    the_person "It wouldn't surprise me if repeated doses could lead someone to develop a exhibitionist fixation or fetish."
+    the_person "It wouldn't surprise me if repeated doses could lead someone to develop an exhibitionist fixation or fetish."
     mc.name "I understand. Thank you for the update."
     "Hmm, repeat doses could lead to a fetish? This warrants further investigation."
     return
@@ -709,7 +709,7 @@ label fetish_serum_coding_activity_label():
             pass #HR gets impatient, asks to fuck
             $ the_person.arousal = 40
             $ the_person.draw_person()
-            "[the_person.possessive_title] walks up behind, looking over your shoulder as your work."
+            "[the_person.possessive_title] walks up behind you, looking over your shoulder at your work."
             the_person "Hey, I was just looking at that program earlier..."
             "You feel her hands on your shoulders. She starts to rub your back. It feels nice and is very relaxing."
             if the_person.effective_sluttiness() > SB_doggy_standing.slut_requirement + 5 and mc.energy > 50 and the_person.energy > 50:
@@ -750,7 +750,7 @@ label fetish_serum_coding_activity_label():
                             call fuck_person(the_person,private = False, start_position = SB_doggy_standing, skip_intro = True, skip_condom = True) from _call_fuck_person_serum_coding_event_01
                             $ the_report = _return
                             if the_report.get("girl orgasms", 0) > 0:
-                                the_person "Ah... I think I'll actually be able to focus after that. Thanks [the_person.mc_title]."
+                                the_person "Ah... I think I'll actually be able to focus after that. Thanks, [the_person.mc_title]."
                             $ the_person.review_outfit()
                             $ the_person.draw_person(position = "sitting")
                             "Once [the_person.title] gets herself tidied up she sits down at her desk and goes back to work, as if nothing out of the ordinary happened."
@@ -760,11 +760,11 @@ label fetish_serum_coding_activity_label():
                             call fuck_person(the_person,private = True) from _call_fuck_person_serum_coding_event_02
                             $ the_report = _return
                             if the_report.get("girl orgasms", 0) > 0:
-                                the_person "Ah... I think I'll actually be able to focus after that. Thanks [the_person.mc_title]."
+                                the_person "Ah... I think I'll actually be able to focus after that. Thanks, [the_person.mc_title]."
                             "You get your clothes back on and head back to the lab, sitting down at the terminal. After a few minutes, [the_person.possessive_title] comes back in."
                             $ the_person.review_outfit()
                             $ the_person.draw_person(position = "sitting")
-                            "Once [the_person.title] has gotten herself tidied up and she sits down at her desk and goes back to work, as if nothing out of the ordinary happened."
+                            "Once [the_person.title] has gotten herself tidied up she sits down at her desk and goes back to work, as if nothing out of the ordinary happened."
                         "You start back to work on coding, but the distraction of fucking [the_person.title] makes it difficult to focus and make much progress."
                         $ fetish_serum_update_coding_progress(fetish_serum_get_estimated_coding_progress() / 4)
 
@@ -801,7 +801,7 @@ label fetish_serum_coding_activity_label():
         mc.name "Hey [the_person.title], come here."
         $ the_person.draw_person(position = the_person.idle_pose)
         "[the_person.title] quickly walks over."
-        mc.name "The program is done. Let's load this on to a batch of those nano bots."
+        mc.name "The program is done. Let's load this on to a batch of those nanobots."
         the_person "That's great! I'll get it up and running."
         the_person "We'll have to make new formulas for it though, and due to production limitations, we can't combine more than one set of bots in a single serum dose."
         # fully unlock the newly researched serum
@@ -833,7 +833,7 @@ label fetish_serum_discuss_progress_label(the_person):
         the_person "I think we have exhausted all the possibilities for new nanobot programs, for now at least."
         return
 
-    "Here is the current status of our specialize nanobot programs."
+    the_person "Here is the current status of our specialized nanobot programs."
     if fetish_exhibition_serum_is_unlocked():
         # if not is_exhibition_fetish_unlocked(): #TODO once we make an exhibitionist fetish, uncomment this
         #     the_person "I think there are more possibilities with the Social Sexual Proclivity Nanobots. You should observe the effects of them on test subjects more!"

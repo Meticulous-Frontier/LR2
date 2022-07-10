@@ -46,7 +46,7 @@ label daughter_work_crisis_label_enhanced():
         "[the_person.title] hands over a printed out resume and waits nervously for you to look it over."
 
     menu:
-        "Look at the resume for [the_person.name]'s daughter":
+        "Look at the resume for [the_person.fname]'s daughter":
             pass
 
         "Tell her you aren't hiring":
@@ -58,13 +58,13 @@ label daughter_work_crisis_label_enhanced():
                 "She puts her arms behind her back and puffs out her chest in a clear attempt to show off her tits."
                 $ mc.change_locked_clarity(5)
                 menu:
-                    "Look at the resume for [the_person.name]'s daughter":
+                    "Look at the resume for [the_person.fname]'s daughter":
                         "Convinced, you start to read through the resume."
                         $ promised_sex = True
 
                     "Tell her you aren't hiring":
                         if the_person.love < 10:
-                            mc.name "If I want to fuck you I wouldn't need to hire your daughter to do it. Give it up, you look desperate."
+                            mc.name "If I wanted to fuck you I wouldn't need to hire your daughter to do it. Give it up, you look desperate."
                             $ the_person.change_obedience(3)
                             "She steps back and looks away."
                             the_person "Uh, right. Sorry for taking up your time."
@@ -73,14 +73,14 @@ label daughter_work_crisis_label_enhanced():
                             mc.name "I'm not hiring right now, and that's final. Now I'm sure you have work to do."
                             $ the_person.change_obedience(1)
                             "She takes the resume back and steps away from your desk, defeated."
-                            the_person "Right, of course. Sorry for wasting up your time."
+                            the_person "Right, of course. Sorry for wasting your time."
                         $ clear_scene()
                         return
             elif promised_sex:
                 the_person "There's nothing I could do? Nothing at all?"
                 "She moves to run a hand down your shirt, but you shove the resume back into her hand."
                 if the_person.love < 10:
-                    mc.name "If I want to fuck you I wouldn't need to hire your daughter to do it. Give it up, you look desperate."
+                    mc.name "If I want to fuck you I don't need to hire your daughter to do it. Give it up, you look desperate."
                     $ the_person.change_obedience(3)
                     "She steps back and looks away."
                     the_person "Uh, right. Sorry for taking up your time."
@@ -89,7 +89,7 @@ label daughter_work_crisis_label_enhanced():
                     mc.name "I'm not hiring right now, and that's final. Now I'm sure you have work to do."
                     $ the_person.change_obedience(1)
                     "She takes the resume back and steps away from your desk, defeated."
-                    the_person "Right, of course. Sorry for wasting up your time."
+                    the_person "Right, of course. Sorry for wasting your time."
                 $ clear_scene()
                 return
 
@@ -133,19 +133,19 @@ label daughter_work_crisis_label_enhanced():
             the_person "Thank you so much!"
             call hire_someone(the_daughter) from _call_hire_someone_daughter_work_crisis_enhanced_2
         # make sure to set titles for the daughter (prevent introduction dialogs)
-        $ the_daughter.set_mc_title(get_random_from_list(get_player_titles(the_daughter)))
-        $ the_daughter.set_title(get_random_title(the_daughter))
-        $ the_daughter.set_possessive_title(get_random_possessive_title(the_daughter))
+        $ the_daughter.set_mc_title(get_random_from_list(the_daughter.get_player_titles()))
+        $ the_daughter.set_title(the_daughter.get_random_title())
+        $ the_daughter.set_possessive_title(the_daughter.get_random_possessive_title())
     else: #is "None
         $ the_daughter.remove_person_from_game()
         if promised_sex: #You promised to do it for sex but don't want to hire her, mom is disappointed.
-            mc.name "I'm sorry but her credentials just aren't what they need to be. I could never justify hiring your daughter."
+            mc.name "I'm sorry, but her credentials just aren't what they need to be. I could never justify hiring your daughter."
             $ the_person.change_stats(happiness = -5, love = -1)
             $ the_person.draw_person(emotion = "sad")
             "[the_person.possessive_title] seems to deflate. She nods sadly."
             the_person "I understand. Thank you for your time."
         else:
-            mc.name "I'm sorry but I don't think her skills are where I would need them to be."
+            mc.name "I'm sorry, but I don't think her skills are where I would need them to be."
             $ the_person.change_obedience(1)
             the_person "I understand, thank you for at least taking a look for me."
 

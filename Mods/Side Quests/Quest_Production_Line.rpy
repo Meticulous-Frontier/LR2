@@ -61,7 +61,7 @@ init 1 python:
         quest = quest_production_line()
 
         quest.quest_event_dict["target"] = person.identifier
-        quest.quest_event_dict["father_name"] = get_random_male_name()
+        quest.quest_event_dict["father_name"] = Person.get_random_male_name()
         quest.quest_event_dict["initial_meeting_day"] = 9999
         quest.quest_event_dict["starting_pay"]  = person.salary
         quest.quest_event_dict["moving_day"] = 9999
@@ -200,7 +200,7 @@ label quest_production_line_intro_label(the_person):
     the_person "Okay, he said he actually has time tomorrow afternoon! He can meet with you and grab some coffee, maybe talk about some of the workflows and processes around here."
     mc.name "That sounds perfect."
     the_person "Yeah... He's really smart! I'm not sure if any of his ideas will be useful or not, but if anyone can help, I'm sure it would be him!"
-    the_person "He said to share his contact info and to meet him over at the coffee shop. His name is [dad_name]."
+    the_person "He said to share his contact info and to tell you to meet him over at the coffee shop. His name is [dad_name]."
     "You get his contact info and put it in your phone."
     mc.name "Thank you."
     the_person "No problem!"
@@ -239,7 +239,7 @@ label quest_production_line_coffee_label():
     dad_name "Ah, nice to meet you."
     "You chat for a few minutes, exchanging some of the details of your work with each other."
     "[dad_name] is a very smart chemist, he clearly knows his stuff."
-    mc.name "So, [the_person.name] said you might have some ideas for how I could increase the efficiency of my production."
+    mc.name "So, [the_person.fname] said you might have some ideas for how I could increase the efficiency of my production."
     dad_name "She's right, I do. I'm willing to help you, however, I need you to do me a favor first."
     mc.name "Oh? What is that?"
     dad_name "This job that my baby girl is doing... it's her first real job, you know? She's had a couple part time jobs, but nothing like this."
@@ -256,7 +256,7 @@ label quest_production_line_coffee_label():
     mc.name "I understand."
     $ del dad_name
     "You get up and leave the coffee shop. So, if you want his help streamlining your production department, you should give [the_person.title] a raise."
-    "Next time you see her, maybe you could just give her a performance review? High praise for her performance followed by raise."
+    "Next time you see her, maybe you could just give her a performance review? High praise for her performance followed by a raise."
     $ quest_production_line().set_quest_flag(31)
     $ mall.remove_action(quest_production_line_coffee)
     $ mc.business.remove_mandatory_crisis("quest_production_line_coffee_miss_label")
@@ -281,7 +281,7 @@ label quest_production_line_raise_miss_label():
     "You have a message on your phone. It is from [dad_name]."
     dad_name "I asked my daughter last night if she had any good news about her job to share. She got suspicious and dragged out of me that I'd told you to give her a raise."
     dad_name "I told you to move quick. She missed a potential opportunity to rent a nice condo. The deal is off, good luck with your drug business, asshole."
-    "Yikes! Maybe you should have moved a little quicker on that meeting [dad_name]'s daughter..."
+    "Yikes! Maybe you should have moved a little quicker on that meeting with [dad_name]'s daughter..."
     #TODO lower girl opinions, causing her to probably quit ASAP.
     $ del dad_name
     $ quest_production_line().set_quest_flag(39)
@@ -300,7 +300,7 @@ label quest_production_line_after_raise_consult_label():
     mc.name "That's right, I gave her a pay hike."
     dad_name "Alright. Glad to hear it."
     mc.name "So, would you like to come out to the lab for the consult?"
-    dad_name "No need! [the_person.name] told me about your process for separating chemicals. The centrifuges you are currently using are ancient technology."
+    dad_name "No need! [the_person.fname] told me about your process for separating chemicals. The centrifuges you are currently using are ancient technology."
     dad_name "I pulled some strings at work, we have some that are a bit more state of the art. I'll have them delivered to your lab ASAP."
     dad_name "Using the new centrifuges should increase your serum output."
     mc.name "Ah, well thank you for the help. I'm still new to this, owning a business thing, and every little bit helps."
@@ -335,7 +335,7 @@ label quest_production_line_after_raise_consult_label():
             mc.name "I'm sorry, I won't be able to help then."
             the_person "Damn... okay, I'm sure I'll be able to find someone."
             "You hang up the phone."
-            "You already gave her a raise. Besides, you really don't even know her that well. Why would you want to spend all evening help her move?"
+            "You already gave her a raise. Besides, you really don't even know her that well. Why would you want to spend all evening helping her move?"
             $ quest_production_line().set_quest_flag(69)
             $ quest_production_line().quest_completed()
     $ del dad_name
@@ -365,7 +365,7 @@ label quest_production_line_help_move_label():
         "Eventually, she lets go."
     the_person "Okay... let's get to work!"
     $ clear_scene()
-    "You spend about an hour helping [the_person.title] loading her things into a small rental trailer."
+    "You spend about an hour helping [the_person.title] load her things into a small rental trailer."
     "When you are done, you ride with her over to her new apartment."
     #TODO her apartment which is actually different than the place she was earlier.
     $ the_person.draw_person()
@@ -436,7 +436,7 @@ label quest_production_line_help_move_label():
             mc.name "It's ok, [the_person.title]. You can tell me."
             "You can see her defenses breaking down."
             the_person "Oh god [the_person.mc_title], it's like you see right through me..."
-            the_person "Its not what you think! Mom left us when I was really young. When I was growing, my dad threw himself into his work, and all his spare time he spent raising me."
+            the_person "Its not what you think! Mom left us when I was really young. When I was growing up, my dad threw himself into his work, and all his spare time he spent raising me."
             the_person "He didn't have any time to himself. He didn't have time to date or meet anyone. He spent all his time with me. I love him so much."
             the_person "And then it happened. I was older, and I was over at a friend's house. I'd told him I was going to spend the night there, but I decided to come home instead."
             the_person "When I got home... he didn't hear me come in the door. He was in the living room on the computer, watching pornography. I know I should have looked away... but I just couldn't!"
@@ -452,6 +452,7 @@ label quest_production_line_help_move_label():
             the_person "You do?"
             mc.name "There are multiple ways of telling someone you love them. Some are more intimate than others. If it feels right, and both people consent, what's the harm?"
             the_person "Yeah! Exactly! Not many people think the way that we do though."
+            $ the_person.discover_opinion("incest")
             $ the_person.change_stats(happiness = 10, love = 5, obedience = 10)
             $ the_person.draw_person()
             "She stands up."
@@ -628,7 +629,7 @@ label princess_cum_vagina(the_person):
 
     if the_person.wants_creampie():
         if the_person.knows_pregnant():
-            the_person "Mmm [the_person.mc_title], your cum is so nice and warm..."
+            the_person "Mmm, [the_person.mc_title], your cum is so nice and warm..."
             "She sighs happily."
 
         elif the_person.on_birth_control:
@@ -636,7 +637,7 @@ label princess_cum_vagina(the_person):
             "She sighs happily as you cum inside her."
 
         elif the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
-            the_person "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise we can do it again without condom next time?"
+            the_person "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise we can do it without a condom next time?"
 
         else:
             the_person "Oh [the_person.mc_title], so much hot cum... I love you [the_person.mc_title]."

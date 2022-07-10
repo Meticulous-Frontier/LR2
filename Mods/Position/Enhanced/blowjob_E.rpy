@@ -132,7 +132,7 @@ label transition_blowjob_deepthroat_enhanced(the_girl, the_location, the_object)
             the_girl "I'll... I'll do my best."
 
         if the_girl.sex_skills["Oral"] < 3:
-            "She kisses the tip of your cock, then slides it into her mouth. Gets your length half way down, then gags softly on it and pauses."
+            "She kisses the tip of your cock, then slides it into her mouth. Gets your length halfway down, then gags softly on it and pauses."
             $ deepthroat.current_modifier = "blowjob"
             $ deepthroat.redraw_scene(the_girl)
             "[the_girl.possessive_title] collects herself then keeps going, fighting her gag reflex until she manages to fit three quarters of your shaft down her throat."
@@ -160,7 +160,7 @@ label transition_blowjob_to_deepthroat_taboo_break_label(the_girl, the_location,
         the_girl "I'll... I'll give it a try..."
 
     if the_girl.sex_skills["Oral"] < 3:
-        "She kisses the tip of your cock, then slides it into her mouth. Gets your length half way down, then gags softly on it and pauses."
+        "She kisses the tip of your cock, then slides it into her mouth. Gets your length halfway down, then gags softly on it and pauses."
         $ deepthroat.current_modifier = "blowjob"
         $ deepthroat.redraw_scene(the_girl)
         "[the_girl.possessive_title] collects herself then keeps going, fighting her gag reflex until she manages to fit three quarters of your shaft down her throat."
@@ -185,7 +185,7 @@ label transition_default_deepthroat_enhanced(the_girl, the_location, the_object)
             if the_girl.has_cum_fetish() or the_girl.get_opinion_score("giving blowjobs") > 1:
                 "Without hesitation, [the_girl.possessive_title] leans forward and slides your dick down her throat."
             else:
-                "She gives a nod and slowly slides your cock half way down, until she starts gagging and pulls back."
+                "She gives a nod and slowly slides your cock halfway down, until she starts gagging and pulls back."
                 the_girl "Erm, I still need to get used to your size."
 
         "Guide her":

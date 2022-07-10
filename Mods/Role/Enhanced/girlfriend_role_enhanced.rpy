@@ -39,7 +39,7 @@ init 2 python:
 
     def girlfriend_quit_dikdok_requirement(the_person):
         if not the_person.has_role(dikdok_role):
-            return
+            return False
         if the_person in unique_character_list:
             return False
         if the_person.love < 40: # hide option will love is very low
@@ -61,8 +61,8 @@ init 2 python:
     girlfriend_morning_action_list.append(girlfriend_wakeup_spooning)
     girlfriend_morning_action_list.append(girlfriend_wakeup_jealous_sister)
 
-    girlfriend_quit_dikdok_action = Action("Quit Dikdok", girlfriend_quit_dikdok_requirement, "girlfriend_quit_dikdok_label",
-        menu_tooltip = "Ask your girlfriend to stop showing herself off on Dikdok.")
+    girlfriend_quit_dikdok_action = Action("Quit DikDok", girlfriend_quit_dikdok_requirement, "girlfriend_quit_dikdok_label",
+        menu_tooltip = "Ask your girlfriend to stop showing herself off on DikDok.")
 
 
 
@@ -156,8 +156,7 @@ label girlfriend_sleepover_crisis_label():
     else:
         "It's time for your date with [the_person.title]. You swing by the store on the way and pick up a decent bottle of wine."
         $ mc.business.change_funds(-15)
-        if the_person.home not in mc.known_home_locations:
-            $ mc.known_home_locations.append(the_person.home)
+        $ the_person.learn_home()
         "You make your way to her place, then knock on the door. She quickly answers."
         $ the_person.draw_person()
         the_person "Ah! I'm so glad you're here. Come in!"
@@ -254,7 +253,7 @@ label girlfriend_sleepover_crisis_label():
                     elif renpy.random.randint(0,100) < ((the_person.get_opinion_score("taking control") + 1) * 15): #Baseline 15% chance, max 45% if she loves it
                         the_person "Mmm, lay back. I want to be on top this time..."
                         $ mc.change_locked_clarity(30)
-                        "You pushes you on your back, you decide to take it easy for now and let her have her way with you."
+                        "[the_person.possessive_title] pushes you on your back, you decide to take it easy for now and let her have her way with you."
                         call get_fucked(the_person, private = True)  from _call_get_fucked_sleepover_gf_03
                         $ the_report = _return
                         $ girl_came += the_report.get("girl orgasms", 0)
@@ -302,7 +301,7 @@ label girlfriend_wakeup_spooning_label(the_person):
     "She is still sleeping, but her skin is setting off electric sparks everywhere it is touching yours."
     $ mc.change_locked_clarity(50)
     if the_person.has_large_tits():
-        "Your hands cup and squeeze one of her [the_person.tits_description]. It's so full and hot, they feel so good in your hands."
+        "Your hands cup and squeeze one of her [the_person.tits_description]. It's so full and hot, it feels so good in your hands."
     else:
         "Your hand cups one of her [the_person.tits_description]. It's so soft and warm, it feels good in your hand."
     the_person "Mmmmmmmm......"
@@ -326,8 +325,8 @@ label girlfriend_wakeup_spooning_label(the_person):
     "You spit into your hand and rub it on your dick a few times, getting it lubed up."
     "When you feel good about it, you reach down and gently spread her cheeks apart. You position yourself at her entrance and give it a little push."
     "You are able to ease yourself about halfway in, but the angle makes it hard to get deep penetration."
-    the_person "Oh [the_person.mc_title]. Mmmmmm"
-    "She's still asleep, but is still responding to your touch. She must be a heavy sleeper! Or maybe she is just really worn out from last night..."
+    the_person "Oh [the_person.mc_title]. Mmmmmm..."
+    "She's asleep, but is still responding to your touch. She must be a heavy sleeper! Or maybe she is just really worn out from last night..."
     "You give her a few gentle, smooth strokes. You can feel her pussy getting wetter with each stroke as her body begins to respond to the stimulation."
     $ the_person.change_arousal(20)
     $ mc.change_locked_clarity(30)
@@ -336,7 +335,7 @@ label girlfriend_wakeup_spooning_label(the_person):
     "Your reach around her with your hand and grab one of her tits. You start to get a little rough with her and pinch and pull at one of her nipples."
     $ the_person.change_arousal(20)
     $ mc.change_locked_clarity(30)
-    the_person "Mmm that feels so... wait... [the_person.mc_title]?"
+    the_person "Mmm, that feels so... wait... [the_person.mc_title]?"
     $ the_person.draw_person( position = "back_peek", emotion = "happy")
     "[the_person.possessive_title] wakes up and looks back at you smiling."
     the_person "Oh my god that feels so good... Baby you know how to give a wakeup call, holy fuck!"
@@ -396,7 +395,7 @@ label girlfriend_roleplay_step_sister_label(the_person):
     $ the_person.roleplay_personality_swap(lily_personality)
 
     if mc.business.event_triggers_dict.get("your_place", True):
-        "Your girlfriend doesn't emerge from the bathroom right away, but eventually hear her calling out."
+        "Your girlfriend doesn't emerge from the bathroom right away, but eventually you hear her calling out."
         the_person "Help me! Someone help!"
         "You quickly get up and run into the bathroom."
         $ the_person.draw_person(position = "standing_doggy")
@@ -413,14 +412,13 @@ label girlfriend_roleplay_step_sister_label(the_person):
         if the_person.vagina_available():
             "[the_person.possessive_title]'s ass, exposed and pointing at you, makes an enticing target. You run your hands along her hips and then grope it."
         else:
-            "You walk over to [the_person.title]. You pull away at the clothing between you and her ass."
+            "You walk over to [the_person.title]. You pull away the clothing between you and her ass."
             $ the_person.strip_outfit(top_layer_first = True, exclude_upper = True, exclude_lower = False, exclude_feet = True)
         $ the_person.change_arousal(15)
         $ mc.change_locked_clarity(30)
         the_person "Oh my gooooooddd... [the_person.mc_title], what are you doing back there?"
         "You dip a finger into her cunt."
         mc.name "Just checking the plumbing, [the_person.title]. Nothing to worry about..."
-
     $ the_person.roleplay_title_revert()
     $ the_person.roleplay_mc_title_revert()
     $ the_person.roleplay_possessive_title_revert()
@@ -446,9 +444,8 @@ label girlfriend_underwear_shopping_label(the_person):
         menu:
             "Have her pick something out":
                 if lingerie_outfit == None:
-
                     the_person "Okay! I'll go with something I would normally wear, and you can let me know what you think, okay?"
-                    mc.name "Sounds good. We can always made modifications to it or try something different if we need to."
+                    mc.name "Sounds good. We can always make modifications to it or try something different if we need to."
                 else:
                     mc.name "I think we should start over. Why don't you pick something out?"
                     the_person "Aww, I thought we were getting close. Ah well, I'll go pick something out."
@@ -508,7 +505,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 call screen outfit_creator(Outfit("New Outfit"), outfit_type = "under")
                 if _return != "Not_New":
                     $ lingerie_outfit = _return
-                    "You pick out an outfit and take them to [the_person.possessive_title]. You set them on the top of the dressing room door."
+                    "You pick out an outfit and take the clothes to [the_person.possessive_title]. You set them on the top of the dressing room door."
                     mc.name "Here you go, try this."
                     $ the_person.apply_outfit(lingerie_outfit, update_taboo = True)
                     if lingerie_outfit.slut_requirement <= the_person.sluttiness and lingerie_outfit.slut_requirement <= 40: #She likes it enough to try it on.
@@ -587,7 +584,7 @@ label girlfriend_underwear_shopping_label(the_person):
         "You buy the outfit at the counter. It's a little pricey, but you're sure it'll be worth the investment."
         $ mc.business.change_funds(-150)
         $ the_person.add_outfit(lingerie_outfit, outfit_type = "under")
-        the_person "Thanks [the_person.mc_title]! This was fun!"
+        the_person "Thanks, [the_person.mc_title]! This was fun!"
         if schedule_sleepover_available():
             the_person "So... want me to come over tonight? I'm not doing anything later..."
             menu:
@@ -612,7 +609,7 @@ label girlfriend_underwear_shopping_label(the_person):
 label girlfriend_quit_dikdok_label(the_person):
     mc.name "Hey [the_person.title], would you do something for me?"
     the_person "Sure, [the_person.mc_title], what do you need?"
-    mc.name "I'm not very comfortable with you on Dikdok, so I would prefer if you closed your account."
+    mc.name "I'm not very comfortable with you on DikDok, so I would prefer if you closed your account."
     the_person "Well, since I have you in my life, I don't see why not."
     $ the_person.remove_role(dikdok_role)
     "She pulls out her phone and closes her account right there."

@@ -1,34 +1,29 @@
 init 2 python:
     config.label_overrides["interview_action_description"] = "interview_action_description_enhanced"
 
-    def get_candidate_count():
+    def get_candidate_count_costs():
+        interview_cost = mc.business.recruitment_cost
         count = 3 #Num of people to generate, by default is 3. Changed with some policies
-        if recruitment_batch_three_policy.is_owned():
-            count = 10
-        elif recruitment_batch_two_policy.is_owned():
-            count = 6
-        elif recruitment_batch_one_policy.is_owned():
-            count = 4
-        return count
+        for recruitment_policy in recruitment_policies_list:
+            if recruitment_policy.is_active():
+                count += recruitment_policy.extra_data.get("recruitment_batch_adjust",0)
+                interview_cost +=  recruitment_policy.extra_data.get("interview_cost_adjust",0)
+
+        return count, interview_cost
 
     def interview_build_candidates_list(count):
         start_time = time.time()
         candidates = []
         for x in __builtin__.range(0, count): #NOTE: count is given +1 because the screen tries to pre-calculate the result of button presses. This leads to index out-of-bounds, unless we pad it with an extra character (who will not be reached).
-            requirements = mc.business.generate_candidate_requirements()
-            candidates.append(make_person(**requirements))
+            candidates.append(make_person(**(mc.business.generate_candidate_requirements())))
 
         reveal_count = 0
         reveal_sex = False
-        if recruitment_knowledge_one_policy.is_owned():
-            reveal_count += 2
-        if recruitment_knowledge_two_policy.is_owned():
-            reveal_count += 2
-        if recruitment_knowledge_three_policy.is_owned():
-            reveal_count += 2
-            reveal_sex = True
-        if recruitment_knowledge_four_policy.is_owned():
-            reveal_count += 2
+
+        for recruitment_policy in recruitment_policies_list:
+            if recruitment_policy.is_active():
+                reveal_count += recruitment_policy.extra_data.get("reveal_count_adjust",0)
+                reveal_sex = reveal_sex or recruitment_policy.extra_data.get("reveal_sex_opinion",False)
 
         for a_candidate in candidates:
             for x in __builtin__.range(0,reveal_count): #Reveal all of their opinions based on our policies.
@@ -47,8 +42,7 @@ init 2 python:
 
 
 label interview_action_description_enhanced():
-    $ count = get_candidate_count()
-    $ interview_cost = mc.business.recruitment_cost
+    $ count, interview_cost = get_candidate_count_costs()
 
     "Bringing in [count] people for an interview will cost $[interview_cost]. Do you want to spend time interviewing potential employees?"
     menu:
@@ -67,9 +61,9 @@ label interview_action_description_enhanced():
                 $ candidates.remove(new_person)
 
                 call hire_someone(new_person, add_to_location = True) from _call_hire_someone_interview_action_enhanced
-                $ new_person.set_title(get_random_title(new_person))
-                $ new_person.set_possessive_title(get_random_possessive_title(new_person))
-                $ new_person.set_mc_title(get_random_player_title(new_person))
+                $ new_person.set_title(new_person.get_random_title())
+                $ new_person.set_possessive_title(new_person.get_random_possessive_title())
+                $ new_person.set_mc_title(new_person.get_random_player_title())
                 $ del new_person
             else:
                 "You decide against hiring anyone new for now."
@@ -86,7 +80,7 @@ label interview_action_description_enhanced():
 
                 candidates.clear() #Prevent it from using up extra memory
                 person = None
-                renpy.free_memory() # extra memory cleanup after interview screen
+                clean_memory() # extra memory cleanup after interview screen
 
             call advance_time from _call_advance_time_interview_action_enhanced
         "Never mind":

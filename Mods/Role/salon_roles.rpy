@@ -161,7 +161,7 @@ init 2 python:
 
     cut_hair_action = Action("Change hairstyle", cut_hair_requirement, "cut_hair_label", menu_tooltip = "Customize hair style and color")
     ophelia_gets_dumped = Action("Ophelia gets dumped", ophelia_gets_dumped_requirement, "ophelia_gets_dumped_label", menu_tooltip = "Ophelia is back on the market")
-    ophelia_coworker_conversation_overhear = Action("Ophelia talks with a co-worker", ophelia_coworker_conversation_overhear_requirement, "ophelia_coworker_conversation_overhear_label", menu_tooltip = "Ophelia vents to a co-worker")
+    ophelia_coworker_conversation_overhear = Action("Ophelia talks with a coworker", ophelia_coworker_conversation_overhear_requirement, "ophelia_coworker_conversation_overhear_label", menu_tooltip = "Ophelia vents to a coworker")
     ophelia_give_chocolate = Action("Buy Ophelia Dark Chocolates", ophelia_give_chocolate_requirement, "ophelia_give_chocolate_label", menu_tooltip = "Buy Ophelia some chocolates. Can use to apply serum")
     ophelia_learn_chocolate_love = Action("Learn Ophelia loves chocolate", ophelia_learn_chocolate_love_requirement, "ophelia_learn_chocolate_love_label")
     ophelia_ex_bf_plan_pics = Action("Ask about Ex", ophelia_ex_bf_plan_pics_requirement, "ophelia_ex_bf_plan_pics_label", menu_tooltip = "See if you can help")
@@ -172,7 +172,7 @@ init 2 python:
     ophelia_revenge_date =  Action("Date with Ophelia",  ophelia_revenge_date_requirement, "ophelia_revenge_date_label")
     ophelia_revenge_aftermath = Action("Talk about what happened", ophelia_revenge_aftermath_requirement, "ophelia_revenge_aftermath_label")
     ophelia_is_over_her_ex =  Action("Ophelia finally moves on",  ophelia_is_over_her_ex_requirement, "ophelia_is_over_her_ex_label")
-    ophelia_talk_about_candace =  Action("Talk about [candace.name]",  ophelia_talk_about_candace_requirement, "ophelia_talk_about_candace_label", menu_tooltip = "Tread carefully, this will be a sore subject")
+    ophelia_talk_about_candace =  Action("Talk about [candace.fname]",  ophelia_talk_about_candace_requirement, "ophelia_talk_about_candace_label", menu_tooltip = "Tread carefully, this will be a sore subject")
     ophelia_increased_service_begin = Action("Ophelia increases services",  ophelia_increased_service_begin_requirement, "ophelia_increased_service_begin_label")
     ophelia_choose_service_test = Action("Pick employee for salon visit",ophelia_choose_service_test_requirement ,"ophelia_choose_service_test_label", menu_tooltip = "Select a girl you want to have her hair and pubic hair cut and styled")
     ophelia_add_service_full_body_massage = Action ("Ophelia wants to do massages", ophelia_add_service_full_body_massage_requirement, "ophelia_add_service_full_body_massage_label")
@@ -213,7 +213,7 @@ label ophelia_gets_dumped_label(the_person):
     "?????" "Well, obviously that isn't going to happen anymore."
     "It looks like [the_person.title] is struggling to hold back tears."
     the_person "I don't... I thought you were the one! 8 months we've been dating... And now... it's over?"
-    "?????" "I'm sorry. I need to get going. Take care [the_person.name]."
+    "?????" "I'm sorry. I need to get going. Take care [the_person.fname]."
     "The man turns and walks off. [the_person.possessive_title] is in shock."
     $ the_person.change_happiness(-50)
     $ the_person.event_triggers_dict["dump_witnessed"] = 1
@@ -223,7 +223,7 @@ label ophelia_gets_dumped_label(the_person):
 
 label ophelia_coworker_conversation_overhear_label(the_person):
     $ ex_name = ophelia_get_ex_name()
-    "You walk into the salon. You notice [the_person.title] talking to one of her co-workers, probably about her recent breakup."
+    "You walk into the salon. You notice [the_person.title] talking to one of her coworkers, probably about her recent breakup."
     the_person "I know! But it gets worse! He is still friends with me on Facebook, you know?"
     the_person "This morning I got a notification, [ex_name] is now in a relationship. I was like... what the fuck?"
     the_person "So I look her up. It's the fucking secretary at his office! They're already planning a vacation together this summer!"
@@ -232,7 +232,7 @@ label ophelia_coworker_conversation_overhear_label(the_person):
     "[the_person.title] motions her hands in a way that makes it clear that this woman her ex is dating is very well endowed."
     "?????" "It's not her fault she's blessed in the chest."
     the_person "In her photo history was a pic of her in a bikini... there's absolutely no way they are real."
-    "[the_person.title] and her co-worker continue their banter for a bit."
+    "[the_person.title] and her coworker continue their banter for a bit."
     $ the_person.event_triggers_dict["coworker_overhear"] = 1
     "Maybe you should chat with her for a bit? See if you can learn something about her that would give you an opportunity to cheer her up?"
     "You never know what you might learn with some small talk."
@@ -325,7 +325,7 @@ label ophelia_ex_bf_plan_pics_label(the_person):
         "She sighs before she starts to explain."
         the_person "Yeah, something like that. My boyfriend dumped me a few weeks ago. I keep trying to convince him we should umm, hang out again sometime, just for fun."
         the_person "But apparently he is already dating some slut he met at his job or something."
-        the_person "I saw a picture of them on Facebook. She has huge tits, but she looks so dumb, I bet she doesn't give blowjobs like I do!"
+        the_person "I saw a picture of them on Facebook. She has huge tits, but she looks so dumb, and I'm sure she doesn't give blowjobs like I do!"
         $ the_person.event_triggers_dict["pics_to_ex_plan_made"] = 1
     elif ophelia_get_ex_pics_planned() == 1:
         mc.name "Any luck with talking with your ex?"
@@ -342,7 +342,7 @@ label ophelia_ex_bf_plan_pics_label(the_person):
             mc.name "Maybe you could try making him jealous? If you really are that good, do something to remind him what he is missing out on."
             the_person "Yeah... you might be right."
             "You lower your voice a bit."
-            mc.name "I'm sure if your oral skills are as good as you boast, you'll be able to figure out an way to remind him."
+            mc.name "I'm sure if your oral skills are as good as you boast, you'll be able to figure out a way to remind him."
 
         "Try making him jealous\n{color=#ff0000}{size=18}Requires: More Intelligence{/size}{/color} (disabled)" if mc.int<= 2:
             pass
@@ -360,7 +360,7 @@ label ophelia_ex_bf_plan_pics_label(the_person):
         "I don't believe you\n{color=#ff0000}{size=18}Not slutty enough to fall for this{/size}{/color} (disabled)" if the_person.sluttiness <= 40:
             pass
 
-    "She considers what you said for a bit. Then, a light goes off and her eyes light up."
+    "She considers what you said for a bit. Then a flash of inspiration lights up her eyes."
     the_person "Hey... I got an idea!"
     "She looks you over from head to toe before continuing."
     the_person "How would you like to help me do something to make him jealous?"
@@ -377,7 +377,10 @@ label ophelia_ex_bf_plan_pics_label(the_person):
     mc.name "What's in it for me?"
     "She groans."
     the_person "I don't know... I guess, if you take good pictures, I'll finish you off?"
-    mc.name "Hmm... you know, I wasn't doing anything interesting tonight anyway. Okay, I'll swing by."
+    if day%7 == 5 or day%7 == 6:
+        mc.name "Hmm... you know, I wasn't doing anything interesting Monday anyway. Okay, I'll swing by."
+    else:
+        mc.name "Hmm... you know, I wasn't doing anything interesting tonight anyway. Okay, I'll swing by."
     the_person "Great!"
     "You get the details from her for when she closes up and promise to swing by later."
     the_person "See you then!"
@@ -402,7 +405,7 @@ label ophelia_make_blowjob_pics_label():
     mc.name "So, am I supposed to be taking pictures?"
     the_person "Ah! Right! Here..."
     $ the_person.draw_person(position = "walking_away")
-    "[the_person.possessive_title] jumps up and walks off. You see her reach into a purse sitting on the counter and pulls out her phone."
+    "[the_person.possessive_title] jumps up and walks off. You see her reach into a purse sitting on the counter and pull out her phone."
     "She comes back and messes with it for a minute."
     $ the_person.draw_person(position = "stand3")
     the_person "Here you go! God I can't believe I almost forgot."
@@ -458,7 +461,7 @@ label ophelia_make_blowjob_pics_label():
     "As [the_person.title] stands up, you put your cock away. You see her slowly rubbing your cum into the skin on her face with two fingers..."
     mc.name "Okay, I admit it. You have the best mouth I have ever experienced."
     the_person "I told you! I guess years of practicing and being born without a gag reflex will do that though."
-    "A hah! There's the secret... no gag reflex..."
+    "Aha! There's the secret... no gag reflex..."
     "You feel amazing, but this is a bit awkward. You decide to offer to reciprocate."
     mc.name "So uhh, it just so happens I'm not too bad with my tongue, either."
     the_person "Is that so?"
@@ -472,7 +475,7 @@ label ophelia_make_blowjob_pics_label():
         "[the_person.possessive_title] leads you to the front door."
     else:
         the_person "I mean, I'm trying to get back with my ex..."
-        mc.name "But who knows how long that'll be? Besides, he's off doing whatever with that other girl. Surely you could let yourself go and get a little relief your self?"
+        mc.name "But who knows how long that'll be? Besides, he's off doing whatever with that other girl. Surely you could let yourself go and get a little relief yourself?"
         the_person "Oh god, it would be really nice to not have to masturbate tonight."
         "She looks at you for a moment, then down at the ground."
         the_person "What did you have in mind, anyway?"
@@ -516,9 +519,9 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person "OH SHIT, sorry, wrong person."
     ex_name "Just happy for you that you found someone."
     the_person "Well, he's just a friend. Remember when I used to do that for you?"
-    ex_name "[the_person.name]... this isn't funny."
+    ex_name "[the_person.fname]... this isn't funny."
     the_person "What? It's nothing serious, you should come over tomorrow, I'll do the same for you."
-    ex_name "I'm sorry, this is getting out of control. I'm sorry but I'm blocking you."
+    ex_name "I'm sorry, this is getting out of control. I'm sorry, but I'm blocking you."
     the_person "Wow, after everything we've been through together? \n \'message not received\'"
     "... Ouch..."
     mc.name "[the_person.title]... I'm sorry."
@@ -657,7 +660,7 @@ label ophelia_revenge_date_label():
     "They?"
     "As you consider what she said, the last person between you and the host walks towards their table."
     "Host" "Hello there. Reservations?"
-    the_person "Yes! Under [the_person.name]."
+    the_person "Yes! Under [the_person.fname]."
     "Host" "I see. Right this way then."
     "You walk into the restaurant. You get led past several dining guests, eventually to an empty table set for two."
     "You pull out [the_person.title]'s chair. When she sits down you push it in for her."
@@ -701,7 +704,7 @@ label ophelia_revenge_date_label():
     "You watch as [candace.title] gets down on her knees, then lifts the tablecloth up and disappears under it."
     $ scene_manager.hide_actor(candace)
     $ mc.change_locked_clarity(10)
-    "You can hardly believe it... but you can just barely make out her legs just behind the tablecloth, on her knees, inches over towards [ex_name]."
+    "You can hardly believe it... but you can just barely make out her legs just behind the tablecloth, on her knees, as she inches over towards [ex_name]."
     "You see [ex_name] pick up his phone and dial someone... a moment later [the_person.possessive_title]'s phone is ringing. Oh boy, you can see where this is going..."
     the_person "Hello? Why are you calling me?"
     the_person "What do you mean? I would have done anything for you... look at what?"
@@ -715,7 +718,7 @@ label ophelia_revenge_date_label():
     "For a moment, you consider alerting one of the staff to the current situation, but you decide against it. If that were you, you would appreciate the discretion, even if you don't agree with how [ex_name] used it against [the_person.title]."
     $ candace.cum_on_face()
     $ scene_manager.show_actor(candace, display_transform = character_left_flipped(xoffset = .1, yoffset = -.15, zoom = .5), position = "sitting")
-    "You ask for the check. You decide to just go ahead and pick it up. As you are waiting, you notice the bimbo return to her seat. It is hard to tell from this distance, but assume the liquid on her face is cum."
+    "You ask for the check. You decide to just go ahead and pick it up. As you are waiting, you notice the bimbo return to her seat. It is hard to tell from this distance, but you assume the liquid on her face is cum."
     $ mc.business.change_funds(-200)
     $ scene_manager.remove_actor(candace)
     "You pay the tab, then head outside. You look around and eventually notice [the_person.title] around the corner."
@@ -808,7 +811,7 @@ label ophelia_revenge_date_label():
         the_person "Oh my god, I came harder than I ever did with [ex_name]. That was unbelievable!"
         $ the_person.change_love(5)
     else:
-        the_person "Mmm that was so hot. I can't wait to do that again!"
+        the_person "Mmm, that was so hot. I can't wait to do that again!"
     "As you both recover from your romp, there is an awkward silence in the room. You notice it is getting very late, and tomorrow is Monday."
     mc.name "I'm really sorry, I wish I could stick around longer, but I have to work in the morning..."
     $ scene_manager.update_actor(the_person, position = "stand3")
@@ -826,7 +829,7 @@ label ophelia_revenge_date_label():
     $ mc.location.show_background()
     "You walk home. As you are walking, you consider the events of the evening."
     "Tonight was a real breakthrough with [the_person.title]. She was a great fuck, hopefully you can get in her pants again soon."
-    "The scene at the restaurant was crazy, with that bimbo, [candace.title] and [ex_name]. You'll have to keep an eye out for her. Maybe you'll run into her again?"
+    "The scene at the restaurant was crazy with [ex_name] and that bimbo [candace.title]. You'll have to keep an eye out for her. Maybe you'll run into her again?"
     $ the_person.clear_situational_slut("Date")
     $ the_person.add_unique_on_room_enter_event(ophelia_is_over_her_ex)
     $ the_person.add_unique_on_talk_event(ophelia_revenge_aftermath)
@@ -847,7 +850,6 @@ label ophelia_revenge_aftermath_label(the_person):
     the_person "Of course! And feel free to send any of your employees my way. I'll still give them a discount!"
     the_person "Is there anything else you wanted to talk about?"
     return
-
 
 label ophelia_special_blowjob_label(the_person):
     return
@@ -874,7 +876,7 @@ label ophelia_is_over_her_ex_label(the_person):
     mc.name "Believe me, the pleasure was... maybe not all, but mostly mine."
     the_person "Don't sell yourself short! Anyway, I was thinking about how I could repay you. We are both business owners, and so I thought, maybe we could partner up a bit."
     mc.name "What do you have in mind?"
-    the_person "Well, I'll give you some referral cards you put up in your business. If any of your employees wants to come get their hair cut or dyed, I'll give them half off!"
+    the_person "Well, I'll give you some referral cards you can put up in your business. If any of your employees wants to come get their hair cut or dyed, I'll give them half off!"
     mc.name "I know a few employees who will probably take you up on that."
     the_person "I'm also thinking about other ways to expand my business too. I'm sure in the future I'll be able to do more."
     mc.name "That sounds great. I really appreciate it."
@@ -899,7 +901,7 @@ label ophelia_talk_about_candace_label(the_person):
     the_person "Concerned? Honey, me and him are over, there's no reason for you to be concerned."
     mc.name "For you, sure."
     the_person "Then for who? And how did you learn more about [ex_name], anyway?"
-    mc.name "Well, you see, I've been talking a little with the girl he is dating, [candace.name]."
+    mc.name "Well, you see, I've been talking a little with the girl he is dating, [candace.fname]."
     $ the_person.draw_person(emotion = "angry")
     the_person "What the fuck? That two timing hussy? What the fuck have you been talking to her for?"
     mc.name "Just hear me out! You know how you said she is, well, dumb as a bag of rocks?"
@@ -913,9 +915,9 @@ label ophelia_talk_about_candace_label(the_person):
     mc.name "Well, I think he has been taking advantage of her."
     $ the_person.draw_person(emotion ="sad")
     the_person "Taking advantage? Like how?"
-    mc.name "Well, I found out, he is crazy controlling in their relationship. He controls everything from how she dresses to where she goes and does for fun."
+    mc.name "Well, I found out, he is crazy controlling in their relationship. He controls everything from how she dresses to where she goes and what she does for fun."
     the_person "That... actually sounds a bit like him. He never did like it that I like to go camping and hiking on my days off by myself. Said I was probably out cheating on him."
-    mc.name "Yeah... about that... that is called projection. It turns out he was dating [candace.name] while you two were also still together."
+    mc.name "Yeah... about that... that is called projection. It turns out he was dating [candace.fname] while you two were also still together."
     the_person "Yeah. To be honest, I had kind of come to the same conclusion."
     mc.name "I'm sorry."
     the_person "It's okay. So, I guess I can understand why you want to help her, what is the plan?"
@@ -924,7 +926,7 @@ label ophelia_talk_about_candace_label(the_person):
     mc.name "For the last few weeks, I've been slowly convincing her that she should quit, and if she does, I'll hire her at my company doing basically the same thing she is doing now, but for a fair wage."
     the_person "Ok... why are you talking to me about this again? Seems like you've got it all figured out."
     mc.name "[ex_name] has told her that if she quits, he is dumping her. But you and I both know, she isn't smart enough to secure her personal accounts and other things."
-    mc.name "Remember when you found his Facebook logged on in your laptop? You said, locking down social media accounts is part of breakup 101!"
+    mc.name "Remember when you found his Facebook logged in on your laptop? You said, locking down social media accounts is part of breakup 101!"
     the_person "Yeah, that's true."
     mc.name "I can get her job security, but I don't know how to handle [ex_name]. You have more experience with that!"
     the_person "So... let me get this straight."
@@ -936,7 +938,7 @@ label ophelia_talk_about_candace_label(the_person):
     mc.name "I was just trying to give examples of how he had been taking advantage of her..."
     the_person "Alright, it's obvious to me that you DO need my help. So fuck yeah, I'm in!"
     the_person "Go ahead and talk to her about it, and when you feel like she is ready, have her come visit me here. We'll get it all set up!"
-    mc.name "Thanks [the_person.title]! I owe you one."
+    mc.name "Thanks, [the_person.title]! I owe you one."
     the_person "Nah, I still owe you a couple of favors. This is just you calling one in."
     "Oh dear. It is a little scary how excited she is getting about this."
     mc.name "Alright, well hopefully it will be soon. I'll let you know!"
@@ -1009,7 +1011,7 @@ label ophelia_choose_service_test_label():
     else: #The person is not slutty but is here due to high obedience.
         the_person "Oh my... I'm not sure I feel comfortable having another woman cutting my hair down there..."
         mc.name "Well, not usually, I'm sure, but this would be a really big favor for me. Just this once?"
-        the_person "Oh, well I supposed I could do it. For your sake of course!"
+        the_person "Oh, well I suppose I could do it. For your sake of course!"
         the_person "So... when do we go?"
     mc.name "Let's head over now."
     $ mc.change_location(mall_salon)
@@ -1025,7 +1027,7 @@ label ophelia_choose_service_test_label():
         "[the_person.possessive_title] is looking around the salon, completely oblivious to your conversation with [salon_manager.title]."
     else:
         salon_manager "Oh! This is perfect! Hi I'm [salon_manager.name]."
-        the_person "[the_person.name], nice to meet you."
+        the_person "[the_person.fname], nice to meet you."
     salon_manager "I have a private room all set up for when a girl comes in looking for the full body hair cut style and dye. Let's head back there."
     "You and [the_person.title] follow [salon_manager.possessive_title] to the private room. It's a great setup, with a very comfy looking styling chair."
     salon_manager "When I open it, I plan to have wine coolers or mimosas I can offer, along with a hot towel."
@@ -1064,7 +1066,7 @@ label ophelia_choose_service_test_label():
     $ the_person.change_stats(happiness = 5, obedience = 5)
     $ scene_manager.update_actor(salon_manager, position = "stand3")
     "[salon_manager.title] returns and hands [the_person.possessive_title] her business card."
-    salon_manager "Thanks again, both of you, for doing this. I think I'm going to move forward with adding the service to general customers!"
+    salon_manager "Thanks again, both of you, for doing this. I think I'm going to move forward with adding the service for general customers!"
     salon_manager "From now on, if the girl wants me to, I'd be glad to give them the same treatment."
     mc.name "That sounds great. I'll definitely keep that in mind."
     "You turn to [the_person.title]."
@@ -1082,7 +1084,7 @@ label ophelia_add_service_full_body_massage_label(the_person):
     $ the_person.draw_person()
     the_person "Aha! Just the man I wanted to see."
     mc.name "For some reason every time I hear that phrase, good things happen. What can I do for you [the_person.title]?"
-    "She smiles wide at you."
+    "She smiles widely at you."
     the_person "I have another idea for how I can expand my business again! I wanted to hear what you think about it again... and maybe provide another 'test subject'."
     mc.name "I'm listening. What's the idea?"
     "She takes a deep breath."

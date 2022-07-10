@@ -7,7 +7,7 @@ init -1 python:
             return "You're too tired"
 
 init 2 python:
-     cum_fetish_get_dosage = Action("Give her cum dosage",  cum_fetish_get_dosage_requirement, "cum_fetish_get_dosage_label",
+    cum_fetish_get_dosage = Action("Give her a cum dosage",  cum_fetish_get_dosage_requirement, "cum_fetish_get_dosage_label",
         menu_tooltip = "Give her cum, right here, right now.")
 
 init 3 python:
@@ -30,7 +30,7 @@ label cum_fetish_post_sex_cleanup_label(the_person_one, the_person_two):
     $ scene_manager.add_actor(the_person_one)
     $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped)
     "When you finish with [the_person_one.possessive_title], you notice that [the_person_two.title] is watching you intently."
-    the_person_two "You done? Does [the_person_one.name] need some help... cleaning up?"
+    the_person_two "You done? Does [the_person_one.fname] need some help... cleaning up?"
     mc.name "Go for it."
     the_person_two "Yes! Thank you!"
     if the_person_one.outfit.has_ass_cum() or the_person_one.outfit.has_creampie_cum():

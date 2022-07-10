@@ -12,7 +12,7 @@ init 1400:
             valid_mc_titles.append("Boss")
             return valid_mc_titles
         candace_personality = Personality("candace", default_prefix = bimbo_personality.default_prefix,
-        common_likes = ["skirts", "small talk", "the colour pink", "makeup", "pop"],
+        common_likes = ["skirts", "small talk", "the colour pink", "makeup", "pop music"],
         common_sexy_likes = ["giving blowjobs", "missionary style sex", "being submissive", "skimpy outfits", "showing her tits", "showing her ass", "not wearing anything", "not wearing underwear", "lingerie", "cum facials"],
         common_dislikes = ["working", "research work", "work uniforms", "conservative outfits", "Mondays", "pants"],
         common_sexy_dislikes = ["taking control", "masturbating"],
@@ -25,7 +25,7 @@ label candace_introduction(the_person):
     $ the_person.set_title("???")
     the_person "Oh you're cute! Okay, cutie, what do you need?"
     mc.name "I just wanted to get your name. I saw you walking past and..."
-    $ title_choice = get_random_title(the_person)
+    $ title_choice = the_person.get_random_title()
     $ formatted_title = the_person.create_formatted_title(title_choice)
     if the_person.has_large_tits():
         the_person "And you liked my tits? Yeah, I get that a lot. I'm [formatted_title], it's nice to meet you!"
@@ -34,7 +34,7 @@ label candace_introduction(the_person):
     $ mc.change_locked_clarity(5)
     #the_person "Well then, I suppose I shouldn't disappoint you. You can call me [formatted_title]."
     $ the_person.set_title(title_choice)
-    $ the_person.set_possessive_title(get_random_possessive_title(the_person))
+    $ the_person.set_possessive_title(the_person.get_random_possessive_title())
     the_person "So what's your name?"
     return
 
@@ -109,7 +109,7 @@ label candace_sex_responses_oral(the_person):
 
     elif the_person.arousal < 75:
         if the_person.sluttiness > 50:
-            the_person "Ah! Hehe, that's feels so good!"
+            the_person "Ah! Hehe, that feels so good!"
             "She giggles happily, clearly having a good time."
         else:
             the_person "Oh wow! Mmmm, you're tongue is, like, driving me crazy [the_person.mc_title]!"
@@ -612,9 +612,9 @@ label candace_surprised_exclaim(the_person):
 
 label candace_talk_busy(the_person):
     if the_person.obedience > 120:
-        the_person "Hi, I'm like, really sorry but I have way more stuff than you can imagine that I have to get done right now. Could we catch up later?"
+        the_person "Hi, I'm like, really sorry, but I have way more stuff than you can imagine that I have to get done right now. Could we catch up later?"
     else:
-        the_person "Hey, I'm sorry but I'm just suuuper busy right now! Hit me up later though, I'd love to chat once I get all this stupid work done!"
+        the_person "Hey, I'm sorry, but I'm just suuuper busy right now! Hit me up later though, I'd love to chat once I get all this stupid work done!"
     return
 
 label candace_sex_strip(the_person):
@@ -644,30 +644,30 @@ label candace_sex_watch(the_person, the_sex_person, the_position):
         $ the_person.draw_person(emotion = "angry")
         the_person "Is that, like, allowed? I thought that was illegal or something. Ugh."
         $ the_person.change_stats(happiness = -1, obedience = -2)
-        "[title] looks away while you and [the_sex_person.name] [the_position.verb]."
+        "[title] looks away while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement - 10:
         $ the_person.draw_person()
         the_person "Could you two get a room or something? There are some of us here who are trying to focus and you're being very distracting."
         $ the_person.change_happiness(-1)
-        "[title] tries to avert her gaze while you and [the_sex_person.name] [the_position.verb]."
+        "[title] tries to avert her gaze while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_requirement:
         $ the_person.draw_person()
-        the_person "Wow [the_sex_person.name] you're so adventurous, I don't think I could ever do that. But it looks, like, super fun!"
+        the_person "Wow [the_sex_person.fname] you're so adventurous, I don't think I could ever do that. But it looks, like, super fun!"
         $ change_report = the_person.change_slut(1)
-        "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.name] [the_position.verb]."
+        "[title] averts her gaze, but keeps glancing over while you and [the_sex_person.fname] [the_position.verb]."
 
     elif the_person.sluttiness > the_position.slut_requirement and the_person.sluttiness < the_position.slut_cap:
         $ the_person.draw_person()
         the_person "Oh. My. God. That is so fucking hot... Keep it up girl, you're doing great!"
         $ change_report = the_person.change_slut(2)
-        "[title] watches you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches you and [the_sex_person.fname] [the_position.verb]."
 
     else:
         $ the_person.draw_person(emotion = "happy")
         the_person "Mmm, come on [the_person.mc_title], you should do something more to her. I bet she wants it real bad. I know I do..."
-        "[title] watches eagerly while you and [the_sex_person.name] [the_position.verb]."
+        "[title] watches eagerly while you and [the_sex_person.fname] [the_position.verb]."
     return
 
 label candace_being_watched(the_person, the_watcher, the_position):
@@ -675,36 +675,36 @@ label candace_being_watched(the_person, the_watcher, the_position):
         #They agree you should give it to her harder
         the_person "I can handle it [the_person.mc_title], you can be rough with me."
         $ the_person.change_arousal(1)
-        "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's super slutty and doesn't care what people think.
-        the_person "Don't listen to [the_watcher.name], I'm having a great time. Look, she can't stop peeking over."
+        the_person "Don't listen to [the_watcher.fname], I'm having a great time. Look, she can't stop peeking over."
 
     elif the_person.sluttiness >= the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #She's super slutty and encourages the watcher to be slutty.
         $ the_person.change_arousal(1)
-        "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness >= the_position.slut_cap:
         #She's into it and encouraged by the slut watching her.
         the_person "Oh god, having you watch us like this..."
         $ the_person.change_arousal(1)
-        "[the_person.title] seems turned on by [the_watcher.name] watching you and her [the_position.verb]."
+        "[the_person.title] seems turned on by [the_watcher.fname] watching you and her [the_position.verb]."
 
     elif the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_requirement:
         #She's into it but shamed by the prude watching her.
         the_person "[the_person.mc_title], maybe we shouldn't be doing this here..."
         $ the_person.change_arousal(-1)
         $ the_person.change_slut(-1)
-        "[the_person.title] seems uncomfortable with [the_watcher.name] nearby."
+        "[the_person.title] seems uncomfortable with [the_watcher.fname] nearby."
 
     else: #the_person.sluttiness < the_position.slut_cap and the_watcher.sluttiness < the_position.slut_cap:
         #They're both into it but not fanatical about it.
         the_person "Oh my god, having you watch us do this feels so dirty. I think I like it!"
         $ the_person.change_arousal(1)
         $ the_person.change_slut(1)
-        "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.name] around."
+        "[the_person.title] seems more comfortable [the_position.verbing] you with [the_watcher.fname] around."
 
     return
 
@@ -745,7 +745,7 @@ label candace_date_seduction(the_person):
             the_person "[the_person.mc_title], I don't know how you do it but I swear you've been driving me, like, totally crazy all night."
             $ mc.change_locked_clarity(40)
             "[the_person.title] runs her hand along your arm and giggles."
-            the_person "I want you to come back to my place so I can have you all to my self."
+            the_person "I want you to come back to my place so I can have you all to myself."
             "She looks around and thinks for a second."
             the_person "I guess if I HAVE to stay and share you, I could do that too though!"
         else:

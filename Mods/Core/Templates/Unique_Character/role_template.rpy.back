@@ -41,11 +41,11 @@ init 2 python:
             starting_wardrobe = TEMPLATE_wardrobe,  # Leave None to make basic wardrobe
             stat_array = [1,4,4],                   # [charisma, int, focus]
             skill_array = [1,1,3,5,1],              # [HR, market, research, production, supply]
-            sex_array = [4,2,2,2],                  # [foreplay, oral, vagnila, anal]
-            start_sluttiness = 7,                   #
-            start_obedience = 18,                   # For some reason Vren adds 100 to this. Use negative values for disobedient girls
-            start_happiness = 88,                   #
-            start_love = 0,                         #
+            sex_skill_array = [4,2,2,2],                  # [foreplay, oral, vagnila, anal]
+            sluttiness = 7,                   #
+            obedience = 18,                   # For some reason Vren adds 100 to this. Use negative values for disobedient girls
+            happiness = 88,                   #
+            love = 0,                         #
             start_home = None,                      # Use if this girl is living with someone else
             title = None,                           # Only use if MC knows this girl from the start of the game or whenever she is generated
             possessive_title = None,                # Same as above

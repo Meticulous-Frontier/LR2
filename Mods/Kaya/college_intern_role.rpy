@@ -1,4 +1,4 @@
-init -1 python:
+init 1 python:
     DAYS_AS_INTERN = 70 #10 weeks as intern
 
     def college_intern_days(the_person):
@@ -6,21 +6,21 @@ init -1 python:
             return -1
         return (day - person.event_triggers_dict.get("intern_since", 9999))
 
-    def college_intern_on_turn(person):
-        if person.location == rd_division:
-            mc.business.research_progress(person.int,person.focus,person.research_skill)
-        elif person.location == p_division:
-            mc.business.production_progress(person.focus,person.int,person.production_skill)
-        elif person.location == office and person in mc.business.college_interns_supply:
-            mc.business.supply_purchase(person.focus,person.charisma,person.supply_skill)
-        elif person.location == m_division:
-            mc.business.sale_progress(person.charisma, person.focus, person.market_skill)
-        elif person.location == office and person in mc.business.college_interns_HR:
-            mc.business.hr_progress(person.charisma,person.int,person.hr_skill)
+    def college_intern_on_turn(the_person):
+        for duty in the_person.duties:
+            if the_person.is_at_work() or not duty.only_at_work:
+                duty.on_turn(the_person)
+
+        if the_person.is_at_work():
+            the_person.event_triggers_dict["worked_today"] = True
         return
 
     def college_intern_on_day(the_person):  #Use this to figure out when to end the internship
-        pass
+        for duty in the_person.duties:
+            if the_person.event_triggers_dict.get("worked_today", False) or not duty.only_at_work: #Only perform on_day functions if they had work that day.
+                duty.on_day(the_person)
+
+        the_person.event_triggers_dict["worked_today"] = False #Reset this for the next day.
         return
 
     def college_intern_on_move(the_person):
@@ -49,13 +49,10 @@ init -1 python:
         return False
 
     def college_intern_training_requirement(the_person):
-        if college_intern_is_at_work(the_person):
-            return True
-        return False
+        return the_person.is_at_work() and not the_person.location == university
 
     def college_intern_recruit_market_requirement(the_person):
         return False
-
 
     def college_intern_recruit_hr_requirement():
         return False
@@ -64,6 +61,14 @@ init -1 python:
         if erica.event_triggers_dict.get("team_reinstate_day", 9999) + 14 < day and mc.business.college_interns_unlocked:
             return True
         return False
+
+    def college_intern_set_duties_requirement(the_person):
+        if not the_person.is_at_work() or the_person.location == university:
+            return "Only in the office"
+
+        if the_person.event_triggers_dict.get("work_duties_last_set", -1) < day:
+            return True
+        return "Duties already changed today"
 
     def get_intern_candidates(count, stat_array, skill_array, forced_opinions):
         candidates = []
@@ -78,19 +83,37 @@ init -1 python:
                 a_candidate.discover_opinion(a_candidate.get_random_opinion(include_known = False, include_sexy = False),add_to_log = False) #Get a random opinion and reveal it.
         return candidates
 
+    def college_intern_quit(person):
+        person.remove_role(college_intern_role)
+        return
 
-init 1 python:
+init 2 python:
     hire_new_college_intern = Action("Hire new intern", hire_new_college_intern_requirement, "hire_new_college_intern_label")   #TODO tooltip
-    college_intern_training = Action("Train your intern", college_intern_training_requirement, "college_intern_training_label")   #TODO tooltip
     college_intern_recruit_market = Action("Recruit Marketing Interns", college_intern_recruit_market_requirement, "college_intern_recruit_market_label")
     college_intern_recruit_hr = Action("Recruit HR Interns", college_intern_recruit_hr_requirement, "college_intern_recruit_hr_label")
     college_intern_recruit_supply = Action("Recruit Supply Interns", college_intern_recruit_supply_requirement, "college_intern_recruit_supply_label")
 
+    college_intern_training = Action("Train your intern", college_intern_training_requirement, "college_intern_training_label")   #TODO tooltip
+    college_intern_duty_set_action = Action("Set her work duties", college_intern_set_duties_requirement, "employee_set_duties_label", menu_tooltip = "Review and set her work duties.")
+
 label unlock_college_interns():
-    $ college_intern_role = Role("College Intern", actions = [college_intern_training], hidden = False, on_turn = college_intern_on_turn, on_move = college_intern_on_move, on_day = college_intern_on_day)
-    $ mc.business.college_interns_unlocked = True
-    if hire_new_college_intern not in nora_role.actions:
-        $ nora_role.add_action(hire_new_college_intern)
+    python:
+        college_intern_role = Role("College Intern", actions = [college_intern_training, college_intern_duty_set_action], hidden = True, on_turn = college_intern_on_turn, on_move = college_intern_on_move, on_day = college_intern_on_day)
+
+        student_intern_rd_job = Job("Student (Biology)", generic_student_role, job_location = university, work_times = [1,2],
+            mandatory_duties = [research_work_duty], available_duties = [] + general_duties_list + general_rd_duties, quit_function = college_intern_quit)
+        student_intern_production_job = Job("Student (Chemistry)", generic_student_role, job_location = university, work_times = [1,2],
+            mandatory_duties = [production_work_duty], available_duties = [] + general_duties_list + general_production_duties, quit_function = college_intern_quit)
+        student_intern_market_job = Job("Student (Graphic Design)", generic_student_role, job_location = university, work_times = [1,2],
+            mandatory_duties = [market_work_duty], available_duties = [] + general_duties_list + general_market_duties, quit_function = college_intern_quit)
+        student_intern_hr_job = Job("Student (Psychology)", generic_student_role, job_location = university, work_times = [1,2],
+            mandatory_duties = [hr_work_duty], available_duties = [] + general_duties_list + general_hr_duties, quit_function = college_intern_quit)
+        student_intern_supply_job = Job("Student (Business)", generic_student_role, job_location = university, work_times = [1,2],
+            mandatory_duties = [supply_work_duty], available_duties = [] + general_duties_list + general_supply_duties, quit_function = college_intern_quit)
+
+        mc.business.college_interns_unlocked = True
+        if hire_new_college_intern not in nora_role.actions:
+            nora_role.add_action(hire_new_college_intern)
     return
 
 label unlock_college_supply_interns():
@@ -167,15 +190,15 @@ label hire_new_college_intern_label(the_person):
     call hire_select_process(candidates + [1]) from _call_intern_select_process_01
     $ candidates = [] #Prevent it from using up extra memory
     $ forced_opinions = None
-    $ renpy.free_memory() #Try and force a clean up of unused memory.
+    $ clean_memory() #Try and force a clean up of unused memory.
 
     if isinstance(_return, Person):
         $ new_person = _return
         $ new_person.generate_home() #Generate them a home location so they have somewhere to go at night.
         $ mc.business.hire_college_intern(new_person, the_dept, add_to_location = True)
-        $ new_person.set_title(get_random_title(new_person))
-        $ new_person.set_possessive_title(get_random_possessive_title(new_person))
-        $ new_person.set_mc_title(get_random_player_title(new_person))
+        $ new_person.set_title(new_person.get_random_title())
+        $ new_person.set_possessive_title(new_person.get_random_possessive_title())
+        $ new_person.set_mc_title(new_person.get_random_player_title())
         $ del new_person
         the_person "I'll pass this along to her. I'm sure she will be excited! Expect to see her on Saturday."
         mc.name "Thank you [the_person.title]."

@@ -358,7 +358,7 @@ init -1 python:
     Person.pubes_description = property(person_pubes_description_string, None, None, "Property that returns pussy pubes description for use in dialogs.")
 
     def person_tits_description_string(self):
-        rank = rank_tits(self.tits)
+        rank = self.rank_tits(self.tits)
         adjective = "perky"
         descriptor = "tits"
 
@@ -464,7 +464,7 @@ init -1 python:
     # Takes into account their liking for working (if she doesn't she is more likely to quit)
     def get_job_happiness_score_enhanced(self):
         happy_points = self.happiness - 100 #Happiness over 100 gives a bonus to staying, happiness less than 100 gives a penalty
-        happy_points += self.obedience - 95 #A more obedient character is more likely to stay, even if they're unhappy. Default characters can be a little disobedint without any problems.
+        happy_points += max(-20, self.obedience - 90) #A more obedient character is more likely to stay, even if they're unhappy. Even highly independant girls will stay if they are happy and/or paid well
         happy_points += self.salary - self.calculate_base_salary() #A real salary greater than her base is a bonus, less is a penalty. TODO: Make this dependent on salary fraction, not abosolute pay.
         happy_points += self.get_opinion_score("working") * 5 # Does she like working? It affects her happiness score.
 
@@ -671,35 +671,37 @@ init -1 python:
 
         # add modifiers
         if self.has_family_taboo():
-            final_slut_requirement -= 20
+            final_slut_requirement += (self.get_opinion_score("incest") - 2) * 5          # love incest negates requirement penalty
 
         if self.has_role(prostitute_role):
-            final_slut_requirement += 20
+            final_slut_requirement -= 20        # prostitutes are more willing by nature
         elif self.relationship == "Girlfriend":
-            final_slut_requirement += (self.get_opinion_score("cheating on men") * 5 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 10)
+            final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 2  # love negates requirement penalty
         elif self.relationship == "Fiancée":
-            final_slut_requirement += (self.get_opinion_score("cheating on men") * 8 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 15)
+            final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 3  # love negates requirement penalty
         elif self.relationship == "Married":
-            final_slut_requirement += (self.get_opinion_score("cheating on men") * 10 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 20)
+            final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 5 # love negates requirement penalty
 
         if not private:
-            final_slut_requirement += ((-10 if self.sluttiness < 50 else 0) + self.get_opinion_score("public sex") * 5) if self.sluttiness < 50 else self.get_opinion_score("public sex") * 5
+            multiplier = 5 if self.sluttiness < 50 else 2
+            final_slut_requirement -= (self.get_opinion_score("public sex") - 2) * multiplier # love negates requirement penalty
 
         if self.love < 0:
-            final_slut_requirement -= self.love
+            final_slut_requirement += self.love
         elif private:
-            if self.has_role([girlfriend_role, affair_role]):
+            if self.has_role([girlfriend_role, affair_role]):               # girlfriend lowers requirement by love
                 final_slut_requirement -= self.love
             elif self.is_family():
-                final_slut_requirement -= __builtin__.int(self.love / 4.0)
+                final_slut_requirement -= __builtin__.int(self.love / 4.0)  # family lowers requirement by love / 4
             else:
-                final_slut_requirement -= __builtin__.int(self.love / 2.0)
+                final_slut_requirement -= __builtin__.int(self.love / 2.0)  # default lowers requirement by love / 2
 
-        final_slut_requirement += __builtin__.int((self.happiness - 100)/4.0)
+        final_slut_requirement -= __builtin__.min(__builtin__.int((self.happiness - 100)/4.0), 20) # happiness can lower requirement by up to 20 points
 
         if not ignore_taboo and the_position.associated_taboo:
-            final_slut_requirement += 10
+            final_slut_requirement += 10    # taboo increases requirement by 10
 
+        print("Position: " + the_position.name + "[Sluttiness: " + str(self.sluttiness) + ", Required: " + str(final_slut_requirement) + "]")
         if self.sluttiness >= final_slut_requirement:
             return True
         return False
@@ -1035,19 +1037,19 @@ init -1 python:
         if discovered is None: # we didn't find any discovery information for opinion, so it's new and we passed None, so default set to false
             discovered = False
         if sexy_opinion is None:
-            if topic in sexy_opinions_list: # We didn't find the topic in existing opinions for person, check global list if it is sexy
+            if topic in Person._sexy_opinions_list: # We didn't find the topic in existing opinions for person, check global list if it is sexy
                 sexy_opinion = True
             sexy_opinion = False
 
         if sexy_opinion:
             self.sexy_opinions[topic] = [degree, discovered]
 
-            if topic not in sexy_opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
-                sexy_opinions_list.append(topic)
+            if topic not in Person._sexy_opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
+                Person._sexy_opinions_list.append(topic)
         else:
             self.opinions[topic] = [degree, discovered]
-            if topic not in opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
-                opinions_list.append(topic)
+            if topic not in Person._opinions_list: # Appends to the opinion pool #TODO: should we add this to the game pool here? Prevents person specific opinions...
+                Person._opinions_list.append(topic)
 
         if add_to_log:
             mc.log_event((self.title or self.name) + " " + opinion_score_to_string(degree) + " " + str(topic), "float_text_green")
@@ -1071,13 +1073,13 @@ init -1 python:
     Person.get_opinion_score = get_opinion_score_enhanced
 
     def update_opinion_with_score(self, topic, score, add_to_log = True):
-        if topic in sexy_opinions_list:
+        if topic in Person._sexy_opinions_list:
             if topic in self.sexy_opinions:
                 self.sexy_opinions[topic][0] = score
             else:
                 self.sexy_opinions[topic] = [score, add_to_log]
 
-        if topic in opinions_list:
+        if topic in Person._opinions_list:
             if topic in self.opinions:
                 self.opinions[topic][0] = score
             else:
@@ -1265,7 +1267,7 @@ init -1 python:
             message.append(("+" if happiness > 0 else "") + str(happiness) + " {image=happy_token_small}")
         if not obedience is None:
             self.change_obedience(obedience, add_to_log = False)
-            message.append(("+" if obedience > 0 else "") + str(obedience) +" {image=padlock_token_small}")
+            message.append(("+" if obedience > 0 else "") + str(obedience) +" {image=triskelion_token_small}")
         if not arousal is None:
             self.change_arousal(arousal, add_to_log = False)
             message.append(("+" if arousal > 0 else "") + str(arousal) + " {image=arousal_token_small}")
@@ -1481,13 +1483,13 @@ init -1 python:
         else:   # when we are called from the scene manager we have to draw the other characters
             scene_manager.draw_scene(exclude_list = [self])
 
-        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting) # needs to be flattened for fade to work correctly
+        bottom_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, cache_item = False) # needs to be flattened for fade to work correctly
         for cloth in the_clothing:
             if half_off_instead:
                 self.outfit.half_off_clothing(cloth) #Half-off the clothing
             else:
                 self.outfit.remove_clothing(cloth) #Remove the clothing
-        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting)
+        top_displayable = self.build_person_displayable(position, emotion, special_modifier, lighting, cache_item = False)
 
         self.hide_person()
 
@@ -1504,7 +1506,22 @@ init -1 python:
 
     Person.draw_animated_removal = draw_animated_removal_enhanced
 
-    def build_person_displayable_enhanced(self, position = None, emotion = None, special_modifier = None, lighting = None, hide_list = [], outfit = None): #Encapsulates what is done when drawing a person and produces a single displayable.
+    # cache the last 127 generated displayables
+    global character_cache
+    character_cache = LRUCacheDict(127, expiration = 0)
+
+    def clean_cache(self):
+        if not "character_cache" in globals():
+            return
+
+        partial = "ID:{}".format(self.identifier)
+        obsolete = [x for x in character_cache.keys() if partial in x]
+        for x in obsolete:
+            del character_cache[x]
+
+    Person.clean_cache = clean_cache
+
+    def build_person_displayable_enhanced(self, position = None, emotion = None, special_modifier = None, lighting = None, hide_list = [], outfit = None, cache_item = True): #Encapsulates what is done when drawing a person and produces a single displayable.
         if position is None:
             position = self.idle_pose
         if emotion is None:
@@ -1515,6 +1532,10 @@ init -1 python:
         forced_special_modifier = self.outfit.get_forced_modifier()
         if forced_special_modifier is not None:
             special_modifier = forced_special_modifier
+
+        disp_key = "ID:{}_P:{}_E:{}_SM:{}_L:{}_O:{}".format(self.identifier, position, emotion, special_modifier, hash(tuple(x for x in map(hash, lighting))), outfit.hash())
+        if disp_key in character_cache:
+            return character_cache[disp_key]
 
         displayable_list = []
         displayable_list.append(self.body_images.generate_item_displayable(self.body_type,self.tits,position,lighting)) #Add the body displayable
@@ -1554,7 +1575,11 @@ init -1 python:
         else:
             final_composite = character_composite
 
-        return Flatten(final_composite) # Create a composite image using all of the displayables
+        # Create a composite image using all of the displayables
+        if cache_item:
+            character_cache[disp_key] = Flatten(final_composite)
+            return character_cache[disp_key]
+        return Flatten(final_composite)
 
     Person.build_person_displayable = build_person_displayable_enhanced
 
@@ -1569,11 +1594,22 @@ init -1 python:
 
     Person.__call__ = person_call_extended(Person.__call__)
 
+    global portrait_cache
+    portrait_cache = LRUCacheDict(100, expiration = 0)
+
     def build_person_portrait(self, special_modifier = None):
         position = "stand5"
         emotion = "happy"
         special_modifier = None
         lighting = [.98,.98,.98]
+
+        disp_key = "P:{}_F:{}_H:{}_HC:{}_EC:{}".format(self.identifier,
+            self.face_style, self.hair_style.name,
+            hash(tuple(x for x in map(hash, self.hair_style.colour))),
+            hash(tuple(x for x in map(hash, self.eyes[1]))))
+
+        if disp_key in portrait_cache:
+            return portrait_cache[disp_key]
 
         displayable_list = []
         displayable_list.append(self.expression_images.generate_emotion_displayable(position,emotion, special_modifier = special_modifier, eye_colour = self.eyes[1], lighting = lighting)) #Get the face displayable
@@ -1589,10 +1625,8 @@ init -1 python:
                 composite_list.append((0,0))
                 composite_list.append(display)
 
-        final_image = Flatten(Composite(*composite_list))
-        portrait = AlphaMask(final_image, Image("portrait_mask.png"))
-
-        return portrait
+        portrait_cache[disp_key] = AlphaMask(Flatten(Composite(*composite_list)), Image("portrait_mask.png"))
+        return portrait_cache[disp_key]
 
     Person.build_person_portrait = build_person_portrait
 
@@ -1605,8 +1639,24 @@ init -1 python:
     Person.hide_person = hide_person_enhanced
 
     def person_is_at_work(self): #Checks to see if the character is at work.
-        if not self.job or not self.job.job_location:
+        # special handling for college interns
+        if self.has_role("College Intern") and self.location in [rd_division, p_division, m_division, office]:
+            return True
+
+        if self.has_role(maid_role):
+            return not self.job.schedule.get_destination() is None
+
+        # special handling for unique characters working at stripclub (use roles since unique chars only get role instead of job)
+        if self.has_role([stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]) \
+            and self.location in [strip_club, bdsm_room]:
+                return True
+
+        if not self.job:
             return False
+
+        # she works around town, so when the job has a scheduled location, she's at work
+        if self == police_chief:
+            return not self.job.schedule.get_destination() is None
 
         return self.location == self.job.job_location
 
@@ -1735,19 +1785,32 @@ init -1 python:
         return self.has_role(employee_role)
     Person.is_employee = is_employee
 
-    def has_role(self, role):
+    def has_role_enhanced(self, role):
         if isinstance(role, basestring):
             return any(x for x in self.special_role if x.role_name == role) \
                 or any(x for x in self.special_role if x.parent_role and x.parent_role.role_name == role)
         elif isinstance(role, list):
             return any(x in self.special_role for x in role) \
                 or any(x.parent_role in self.special_role for x in role)
-        else:
-            return role in self.special_role \
-                or role.parent_role in self.special_role \
-                or any(x for x in self.special_role if x.check_looks_like(role))
 
-    Person.has_role = has_role
+        return role in self.special_role \
+            or role.parent_role in self.special_role \
+            or any(x for x in self.special_role if x.check_looks_like(role))
+
+    Person.has_role = has_role_enhanced
+
+    def has_job_enhanced(self, job):
+        if not self.job:
+            return False
+
+        if isinstance(job, basestring):
+            return self.job.job_title == job
+        elif isinstance(job, list):
+            return self.job in job
+
+        return self.job == job
+
+    Person.has_job = has_job_enhanced
 
     def add_role(self, role):
         added = False
@@ -1755,18 +1818,26 @@ init -1 python:
             self.special_role.append(role)
             added = True
 
-        if added:
-            # special condition if she hates kissing, but becomes your girlfriend or paramour she would allow kissing
-            if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role]:
-                self.increase_opinion_score("kissing")
+        if not added:
+            return False
 
-            # special situation if she gets girlfriend role, she loses affair role and SO
-            if role is girlfriend_role:
-                self.remove_role(affair_role)
-                self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
-                self.SO_name = None
+        # special condition if she hates kissing, but becomes your girlfriend or paramour she would allow kissing
+        if self.get_opinion_score("kissing") <= -2 and role in [girlfriend_role, affair_role, harem_role]:
+            self.increase_opinion_score("kissing")
+
+        # special situation if she gets girlfriend role, she loses affair role and SO
+        if role == girlfriend_role:
+            self.remove_role(affair_role)
+            self.relationship = "Single" #Technically they aren't "single", but the MC has special roles for their girlfriend.
+            self.SO_name = None
+
+        if role == harem_role:
+            self.remove_role(girlfriend_role)
+            mc.business.event_triggers_dict["harem_mansion_unlocked"] = True
+            #TODO: Add event with dialog to give info about unlocked harem mansion
 
         return added
+
     Person.add_role = add_role
 
     def remove_role(self, role, remove_all = False, remove_linked = True):
@@ -1792,7 +1863,7 @@ init -1 python:
     Person.is_dominant = is_dominant
 
     def is_girlfriend(self):
-        return self.has_role(girlfriend_role)
+        return self.has_role([girlfriend_role, harem_role])
 
     Person.is_girlfriend = is_girlfriend
 
@@ -1812,7 +1883,7 @@ init -1 python:
         if not self.job:
             return False
 
-        if self.job.job_role == job_role:
+        if job_role in self.job.job_roles:
             return True
         return False
 
@@ -1823,8 +1894,8 @@ init -1 python:
 ################################################
 
     def should_wear_maid_outfit(self):
-        if self.has_role([maid_role]):
-            return maid_at_work(self)
+        if self.has_role(maid_role):
+            return self.is_at_work(self)
         return False
 
     Person.should_wear_maid_outfit = should_wear_maid_outfit
@@ -1935,7 +2006,7 @@ init -1 python:
 
     Person.apply_yoga_shoes = apply_yoga_shoes
 
-    def apply_planned_outfit(self):
+    def apply_planned_outfit(self, ignore_base = False, update_taboo = False):
         if time_of_day != 0:    # in timeslot 0 we pick new outfits
             self.restore_all_clothing() # restore half-off clothing items of current outfit.
 
@@ -1944,12 +2015,12 @@ init -1 python:
         elif self.should_wear_maid_outfit():
             self.wear_maid_outfit()
         elif self.location in [gym, university] and self.location_outfit:
-            self.apply_outfit(self.location_outfit)
+            self.apply_outfit(self.location_outfit, ignore_base = ignore_base, update_taboo = update_taboo)
         else:
             if not self.planned_outfit: # extra validation to make sure we have a planned outfit
                 self.planned_outfit = self.decide_on_outfit()
 
-            self.apply_outfit(self.planned_outfit)
+            self.apply_outfit(self.planned_outfit, ignore_base = ignore_base, update_taboo = update_taboo)
         return
 
     Person.apply_planned_outfit = apply_planned_outfit
@@ -1964,6 +2035,12 @@ init -1 python:
             self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
         else:
             self.planned_uniform = uniform.get_copy()
+
+        if commando_uniform_policy.is_active():
+            for item in [x for x in self.planned_uniform.get_upper_ordered() if x.underwear]:
+                self.planned_uniform.remove_clothing(item)
+            for item in [x for x in self.planned_uniform.get_lower_ordered() if x.underwear]:
+                self.planned_uniform.remove_clothing(item)
 
         if wear_now:
             self.wear_uniform()
@@ -2524,7 +2601,7 @@ init -1 python:
 
         if self == sarah and sarah_threesomes_unlocked():
             return False
-        if self.love > 90 and self.obedience > 200:
+        if self.love > 90 or self.obedience > 200:
             return False
         return self.event_triggers_dict.get("is_jealous", True)
 
@@ -2550,19 +2627,19 @@ init -1 python:
     Person.have_orgasm = have_orgasm
 
     def favorite_colour(self):
-        if self.event_triggers_dict.get("favorite_colour", None): #We already have a favorite colour, so just return it
-            return self.event_triggers_dict.get("favorite_colour", None)
+        favored_colour = self.event_triggers_dict.get("favorite_colour", None)
+
+        #check if current favourite is still in list_of favourites
+        list_of_favorites = [x for x in WardrobeBuilder.color_prefs.keys() if self.get_opinion_score(x) == 2]
+        if favored_colour in list_of_favorites:
+            return favored_colour
+
         #If not, we need to find a favorite colour going forward.
-        list_of_colours = ["the colour blue", "the colour yellow", "the colour red", "the colour pink", "the colour black", "the colour green", "the colour purple", "the colour white", "the colour orange", "the colour brown"]
-        list_of_favorites = []
-        for colour in list_of_colours:
-            if self.get_opinion_score(colour) == 2:
-                list_of_favorites.append(colour)
         if len(list_of_favorites) > 0:
             self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_favorites)
         else:
-            self.event_triggers_dict["favorite_colour"] = renpy.random.choice(list_of_colours)
-            self.update_opinion_with_score(self.favorite_colour(), 2, add_to_log = False)
+            self.event_triggers_dict["favorite_colour"] = renpy.random.choice(WardrobeBuilder.color_prefs.keys())
+            self.update_opinion_with_score(self.event_triggers_dict["favorite_colour"], 2, add_to_log = False)
         return self.favorite_colour()
 
     Person.favorite_colour = favorite_colour
@@ -2572,12 +2649,24 @@ init -1 python:
 
     Person.is_single = is_single
 
-    def is_in_trance(self):
-        if self.get_trance_multiplier() > 1.2:
-            return True
-        return False
+    # just check if has any trance_role, when training_available = True also check if we can train her
+    def is_in_trance(self, training_available = False):
+        return self.has_role([trance_role, heavy_trance_role, very_heavy_trance_role]) and \
+            (not training_available or self.event_triggers_dict.get("trance_training_available", True))
 
     Person.is_in_trance = is_in_trance
+
+    def is_free_use(self):  #Use this function to determine if the girl is very slutty and basically down for anything.
+        if self.sluttiness < 80:
+            return False
+        for x in self.sexy_opinions: #Doesn't hate any sexual actions.
+            if self.get_opinion_score(x) < -1:
+                return False
+        if self.has_taboo("vaginal_sex") or self.has_taboo("anal_sex"):
+            return False
+        return True
+
+    Person.is_free_use = is_free_use
 
 #Intern functions
 

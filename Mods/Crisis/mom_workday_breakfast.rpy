@@ -6,7 +6,7 @@
 #Fetish options: for Anal, Jennifer asks for anal, for cum fetish, you cum on/in her as appropriate, and for vaginal, she asks for creampie.
 init 2 python:
     def mom_breakfast_crisis_requirement():
-        if mc.is_home() and mc.business.is_work_day() and not mom.is_employee():
+        if mc.is_home() and mc.business.is_work_day() and not mom.is_employee() and mom.is_available:
             return True
         return False
 
@@ -33,10 +33,8 @@ label mom_breakfast_action_label():
         the_person = mom
         scene_manager = Scene()
     #"When you walk out to the kitchen, you see [the_person.title] just sitting down to some breakfast."
-    #$ the_person.draw_person(position = "sitting")
-
-    # surprise scene, you walk into the kitchen an mom and lily are going at it
-    if mc.business.event_triggers_dict.get("family_threesome", False) == True and renpy.random.randint(0, 3) == 1:
+    # surprise scene, you walk into the kitchen and mom and lily are going at it
+    if mc.business.event_triggers_dict.get("family_threesome", False) == True and renpy.random.randint(0, 3) == 1 and lily.is_available:
         call mom_breakfast_action_mom_and_lily_label() from _call_mom_breakfast_action_mom_and_lily_label
     else:
         $ scene_manager.add_actor(the_person, position = "sitting")
@@ -70,7 +68,7 @@ label mom_breakfast_action_label_low():
             $ the_person.change_stats(happiness = 2, love = 5)
 
         "Emphasize Happiness": #This will increase happiness (duh)
-            mc.name "I'm sorry work is such a pain. Just think about the weekend coming up, maybe you and [lily.title] can go shopping or something?"
+            mc.name "I'm sorry work is such a pain. Just think about the weekend coming up, maybe you and [lily.fname] can go shopping or something?"
             "Your kind words bring a smile to her face."
             $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
             the_person "Thank you, [the_person.mc_title], for your kind words. You and your sister mean so much to me, it's a good reminder why I do what I do sometimes."
@@ -103,10 +101,14 @@ label mom_breakfast_action_label_medium():
             "[the_person.title] gets up and gives you a quick peck on the cheek."
             $ scene_manager.update_actor(the_person, position = "stand4")
             the_person "You have a good day at work, I'm going to go umm, get changed!"
-            $ the_person.draw_person(position = "walking_away")
-            $ the_person.change_stats(obedience = 5, slut = 1, max_slut = 30)
-            if the_person.sluttiness > 50:
-                $ mc.business.add_mandatory_crisis(mom_commando_day_selfie_action)
+            python:
+                the_person.draw_person(position = "walking_away")
+                the_person.change_stats(obedience = 5, slut = 1, max_slut = 30)
+                if the_person.planned_outfit.get_panties():
+                    the_person.planned_outfit.remove_clothing(the_person.planned_outfit.get_panties())
+                the_person.apply_planned_outfit()
+                if the_person.sluttiness > 50:
+                    mc.business.add_mandatory_crisis(mom_commando_day_selfie_action)
             return None
         "Give Her Some Attention":  #Sluttiness staircase event, take it farther the sluttier she is
             mc.name "I'm sorry [the_person.title], I didn't realize you were in need of some attention!"
@@ -137,7 +139,7 @@ label mom_breakfast_action_label_medium():
                         "Your hands return to her chest, her boobs feel hot and soft in your hands."
 
                     "Finish Massage":
-                        "[the_person.possessive_title] feel great, but eventually you decide it is too risky to keep going."
+                        "[the_person.possessive_title] feels great, but eventually you decide it is too risky to keep going."
                         "[the_person.title] shakes her head a bit as you sit back down, as if trying to clear some thoughts from her head."
                         return None
             #Assume we are still going
@@ -164,14 +166,14 @@ label mom_breakfast_action_label_medium():
                         "Finish Massage":
                             "You decide for now just to tease her. You pet her through her clothes for a minute longer then stop, kissing her on her neck."
                             "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
-                            mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
+                            mc.name "Don't want to go too far, [lily.fname] could walk out at any moment..."
                             "She shakes her head for a moment, trying to clear her thoughts, but it is obvious her mind continues to dwell on how it could go if you had kept going..."
                             $ the_person.change_stats(obedience = 5)
                             return "Advance Time"
                 "Finish Massage":
                     "You pinch and pull at her nipples for a few more minutes, but eventually you decide just to tease her for now."
                     "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
-                    mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
+                    mc.name "Don't want to go too far, [lily.fname] could walk out at any moment..."
                     $ the_person.change_stats(obedience = 5)
                     return "Advance Time"
                 "Finger Her" if the_person.sluttiness > 50 and the_person.outfit.vagina_available() and not the_person.has_taboo("touching_vagina"):
@@ -184,7 +186,7 @@ label mom_breakfast_action_label_medium():
             "You dip two fingers into her honeypot. She moans as your begin to stir your fingers for a bit."
             the_person "Oh honey, that feels so good..."
             $ the_person.change_arousal(20) #85
-            "Her hip are beginning to move on their own now, needily grinding against your hand."
+            "Her hips are beginning to move on their own now, needily grinding against your hand."
             "Her breathing is getting ragged. You begin to circle her clit with your fingers, trying to finish her off."
             the_person "Oh! That's it! Oh god I'm gonna..."
             "[the_person.title]'s body tenses, then convulses. She is able to muffle her noises to a whimper, trying not to alarm your sister."
@@ -215,7 +217,7 @@ label mom_breakfast_action_label_high():
     "[the_person.title] mutters to herself for a moment. Then she looks over at you."
     $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
     the_person "Say... you look awfully handsome this morning..."
-    "She looks around, and notices the door to sister's room is still closed. She must be sleeping in."
+    "She looks around, and notices the door to your sister's room is still closed. She must be sleeping in."
     the_person "I had some really crazy dreams last night, it would be nice if I could release a little tension before work. Are you up for a quickie?"
     menu:
         "Have a Quickie" if not the_person.has_taboo("condomless_sex"):
@@ -252,10 +254,10 @@ label mom_breakfast_action_label_high():
     the_person "Oh! We'd better go quick, your sister could come out at any time..."
 
     if mc.business.event_triggers_dict.get("family_threesome", False) == True:
-        mc.name "Why does it matter if [lily.name] comes out?"
+        mc.name "Why does it matter if [lily.fname] comes out?"
         the_person "Well, I mean it's not that I mind, but your mommy has needs [the_person.mc_title]..."
         menu:
-            "Insist [lily.title] join you" if willing_to_threesome(the_person, lily):
+            "Insist [lily.title] join you" if willing_to_threesome(the_person, lily) and lily.is_available:
                 mc.name "Don't worry [the_person.title]. I'll make sure you have your needs met."
                 the_person "I suppose that would be okay, just make sure I get to finish!"
                 mc.name "Of course!"
@@ -328,7 +330,7 @@ label mom_breakfast_action_label_high():
         $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person)
 
         "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
-        the_person "Oh god... [lily.name] could walk out any second!"
+        the_person "Oh god... [lily.fname] could walk out any second!"
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.title] quickly gets up and hurries away. She calls back before she gets to her room."
         the_person "I love you, have a good day at work!"
@@ -358,7 +360,7 @@ label mom_breakfast_action_label_high():
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
 
     "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
-    the_person "Oh god... [lily.name] could walk out any second!"
+    the_person "Oh god... [lily.fname] could walk out any second!"
     $ the_person.apply_planned_outfit()
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     "She quickly gets up and puts her clothes back on, leaning close to your ear."

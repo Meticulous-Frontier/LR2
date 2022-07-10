@@ -59,17 +59,19 @@ init 3303 python:
         return False
 
     def mistress_hunt_for_me_prey(person):
-        valid_people_list = []
-        for target in known_people_at_location(mc.location, [person]):
-            if willing_to_threesome(person, target):
-                valid_people_list.append(target)
-        return get_random_from_list(valid_people_list)
+        # first find a non-employee target
+        target = get_random_from_list([x for x in known_people_at_location(mc.location, [person]) if not x.has_role([stripclub_mistress_role, stripclub_manager_role, stripclub_bdsm_performer_role, stripclub_waitress_role, stripclub_stripper_role])])
+        if target:
+            return target
+
+        # alternative find an employee target
+        return get_random_from_list([x for x in known_people_at_location(mc.location, [person]) if willing_to_threesome(person, x)])
 
     def promote_strip_club_stripper_to_manager(person):
         if person.love <= 0:
             person.love = 5
         person.change_stats(happiness = 10, obedience = 5, love = 5)
-        person.add_job(stripclub_manager_job, job_known = True)
+        person.change_job(stripclub_manager_job, job_known = True)
         person.stripper_salary = __builtin__.round(person.stripper_salary * 1.1, 1)
 
         manager_role_status_acquisition(person)
@@ -80,7 +82,7 @@ init 3303 python:
         return
 
     def promote_strip_club_manager_to_mistress(person):
-        person.add_job(stripclub_mistress_job, job_known = True)
+        person.change_job(stripclub_mistress_job, job_known = True)
         person.stripper_salary = __builtin__.round(person.stripper_salary * 1.1, 1)
         return
 
@@ -89,8 +91,10 @@ init 3303 python:
     mistress_role_remove_action = Action("Remove as Mistress", has_mistress_role_requirement, "mistress_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club mistress.")
     mistress_hunt_for_me_action = Action("Hunt for me", mistress_hunt_for_me_requirement, "mistress_hunt_for_me_label", menu_tooltip = "Ask [the_person.title] to find you a girl for a threesome.")
 
-    stripclub_manager_role = Role("Manager", [manager_role_remove_action, promote_to_mistress_action], hidden = True)
-    stripclub_mistress_role = Role("Mistress", [mistress_role_remove_action, mistress_hunt_for_me_action], hidden = True)
+    stripclub_manager_role = Role("Manager", [manager_role_remove_action, promote_to_mistress_action],
+        on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
+    stripclub_mistress_role = Role("Mistress", [mistress_role_remove_action, mistress_hunt_for_me_action],
+        on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
 
 label promote_to_manager_label(the_person):
     $ the_person.event_triggers_dict["stripclub_last_promotion_day"] = day
@@ -114,10 +118,10 @@ label manager_role_remove_label(the_person):
     mc.name "I checked your management results and I can't say I'm happy, so I have decided to remove you from your management position."
     $ the_person.draw_person(emotion = "sad")
     the_person "I understand [the_person.mc_title], I can assure you I did my best..."
-    mc.name "I know, that's why I'm keeping you with me here."
+    mc.name "I know, that's why I'm still keeping you with me here, just as a stripper."
     $ the_person.change_stats(happiness = -10, obedience = 2)
     # this might increase the number of active strippers to 6
-    $ the_person.add_job(stripclub_stripper_job, job_known = True)
+    $ the_person.change_job(stripclub_stripper_job, job_known = True)
     return
 
 label promote_to_mistress_label(the_person):
@@ -134,7 +138,7 @@ label promote_to_mistress_label(the_person):
     the_person "What? No way! I will never agree to allow another woman to command me. If you do that, I will be forced to resign!"
     mc.name "And what if that commanding woman is you?"
     $ the_person.draw_person(emotion = "happy")
-    the_person "Really? Are you asking me to be, after you, the complete boss here?"
+    the_person "Really? Are you asking me to be, after you, the ultimate authority here?"
     mc.name "I know it's a dirty job, but someone needs to do it."
     "A malicious smile creeps over her face, while she glances over to the other girls."
     the_person "I will do my best... or worst, depending on my mood."
@@ -147,42 +151,49 @@ label mistress_role_remove_label(the_person):
     mc.name "I checked your management results and I can't say I'm happy, so I have decided to remove you from your management position."
     $ the_person.draw_person(emotion = "sad")
     the_person "I understand [the_person.mc_title], I can assure you I did my best..."
-    mc.name "I know, that's why I keep you with me here."
-    $ the_person.add_job(stripclub_stripper_job, job_known = True)
+    mc.name "I know, that's why I'll keep you with me here, just as a stripper."
+    $ the_person.change_job(stripclub_stripper_job, job_known = True)
     return
 
 label mistress_hunt_for_me_label(the_person):
+    $ scene_manager = Scene()
     mc.name "Do you think you can find a girl here to have some fun with?"
     the_person "Oh, 'that' kind of fun, [the_person.mc_title]? Sure, let me see..."
-    $ the_person.draw_person(position = "walking_away")
+    $ scene_manager.add_actor(the_person, position = "walking_away")
     "She starts scanning the room, looking for a new victim."
-    $ the_person.draw_person(position = "back_peek")
+    $ scene_manager.update_actor(the_person, position = "back_peek")
     the_person "I think I've found what we're looking for, let me work my magic."
-    $ the_person.draw_person(position = "walking_away")
+    $ scene_manager.update_actor(the_person, position = "walking_away")
     "She arranges her clothes and starts moving closer to her prey..."
     $ the_person_two = mistress_hunt_for_me_prey(the_person)
+    $ scene_manager.hide_actor(the_person)
     if the_person_two is None:
-        $ the_person.draw_person(emotion = "sad")
+        $ scene_manager.show_actor(the_person, position = "stand3", emotion = "sad")
         the_person "Amazing, she's not interested and I cannot find anyone else... Am I losing my touch?"
         return
     "After a couple of minutes the girls are back."
-    $ the_person.draw_person(emotion = "happy", position = "stand4")
+    $ scene_manager.show_actor(the_person, position = "stand4", emotion = "happy")
+    $ scene_manager.add_actor(the_person_two, display_transform = character_center_flipped, position = "stand2", emotion = "happy")
     the_person "I told her we have something nice planned for her, [the_person.mc_title]..."
     mc.name "Good choice [the_person.title]! So [the_person_two.title], would you like to join us?"
-    $ the_person_two.draw_person(emotion = "happy", position = "stand2")
     the_person_two "It would be my pleasure [the_person.mc_title]!" # Only known people answer this tnx to the high obedience required
     mc.name "Ok, let's find a more appropriate place, follow me girls!"
     $ mc.change_location(downtown_hotel)
     $ mc.location.show_background()
     $ clear_scene()
-    "A couple of minutes later, you are in the hotel. You walk up to the reception to get a hotel room for one night."
+    "A couple of minutes later, you are in the hotel. You walk up to the reception desk to get a hotel room for one night."
     $ mc.business.change_funds(-80)
     $ downtown_hotel_room.show_background()
 
-    $ scene_manager = Scene()
-    $ scene_manager.add_actor(the_person_two, position = "walking_away")
-    $ scene_manager.add_actor(the_person, position = "back_peek")
+    $ scene_manager.update_actor(the_person, position = "back_peek")
+    $ scene_manager.update_actor(the_person_two, position = "walking_away")
     "You open the door of the room and motion the girls to come in. You notice [the_person.title] already grabbing [the_person_two.title]'s ass."
+    if not the_person.vagina_available():
+        "[the_person_two.possessive_title] starts moving some of your mistress's clothing to get access to her [the_person.pubes_description] pussy."
+        $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "back_peek")
+    if not the_person_two.vagina_available():
+        "Your mistress is eager to get access to [the_person_two.possessive_title]'s pussy."
+        $ the_person_two.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "walking_away")
     call start_threesome(the_person, the_person_two, girl_in_charge = the_person, start_object = make_bed(), affair_ask_after = False) from _call_start_threesome_mistress_hunt_for_me_label
     "Once you've all had your fun, you and the girls go back to the Strip Club."
     $ scene_manager.clear_scene()
