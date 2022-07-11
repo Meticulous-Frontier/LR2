@@ -475,6 +475,10 @@ init 5 python:
                 if score > -2: # don't append colors she hates
                     color_list.extend([[WardrobeBuilder.color_prefs[cp][x][:], (score + 2) ^ 3] for x in WardrobeBuilder.color_prefs[cp]])
 
+            if not color_list:  # if she hates all colours
+                for cp in WardrobeBuilder.color_prefs:
+                    color_list.extend([[WardrobeBuilder.color_prefs[cp][x][:], 5] for x in WardrobeBuilder.color_prefs[cp]])
+
             # renpy.random.shuffle(color_list)
             return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
 
