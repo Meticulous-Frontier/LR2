@@ -2025,28 +2025,31 @@ init -1 python:
 
     Person.apply_planned_outfit = apply_planned_outfit
 
-    def set_uniform_enhanced(self, uniform, wear_now = False):
-        if uniform is None:
+    def person_wear_uniform(self):
+        if self.planned_uniform:    # quick exit, use planned uniform
+            self.apply_outfit(self.planned_uniform)
             return
 
-        if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
-            (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform.get_copy())
-        elif creative_colored_uniform_policy.is_active():
-            self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
+        if self.event_triggers_dict.get("forced_uniform", False):
+            uniform = self.event_triggers_dict.get("forced_uniform").get_copy()
         else:
-            self.planned_uniform = uniform.get_copy()
+            uniform = mc.business.get_uniform_wardrobe_for_person(self).decide_on_uniform(self)
+
+        if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
+            (uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform)
+        elif creative_colored_uniform_policy.is_active():
+            uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
 
         if commando_uniform_policy.is_active():
-            for item in [x for x in self.planned_uniform.get_upper_ordered() if x.underwear]:
-                self.planned_uniform.remove_clothing(item)
+            for item in [x for x in uniform.get_upper_ordered() if x.underwear]:
+                uniform.remove_clothing(item)
             for item in [x for x in self.planned_uniform.get_lower_ordered() if x.underwear]:
-                self.planned_uniform.remove_clothing(item)
+                uniform.remove_clothing(item)
 
-        if wear_now:
-            self.wear_uniform()
+        self.set_uniform(uniform, True)
         return
 
-    Person.set_uniform = set_uniform_enhanced
+    Person.wear_uniform = person_wear_uniform
 
     def person_is_wearing_uniform_extended(org_func):
         def is_wearing_uniform_wrapper(person):
