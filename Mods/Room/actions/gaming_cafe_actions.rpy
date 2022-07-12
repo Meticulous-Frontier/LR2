@@ -178,7 +178,7 @@ label gaming_cafe_grind_with_alexia():
     "You decide to play some Guild Quest 2. As you walk into the gaming cafe, you spot [the_person.title] at a computer."
     $ the_person.draw_person(position = "sitting")
     "The seat next to her is open, so you sit down."
-    mc.name "Fancy seeing you here, Blonde Cupcake."
+    mc.name "Fancy seeing you here, Cupcake."
     the_person "Oh! Hey [the_person.mc_title]. Want to play with me?"
     mc.name "Absolutely. Let me just log on here."
     "You pay the $5 for your time slot and load up the game."
