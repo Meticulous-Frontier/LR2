@@ -2033,7 +2033,11 @@ init -1 python:
         if self.event_triggers_dict.get("forced_uniform", False):
             uniform = self.event_triggers_dict.get("forced_uniform").get_copy()
         else:
-            uniform = mc.business.get_uniform_wardrobe_for_person(self).decide_on_uniform(self)
+            uniform_wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
+            if uniform_wardrobe:
+                uniform = uniform_wardrobe.decide_on_uniform(self)
+            else: # we have no valid wardrobe, pick an outfit from wardrobe as uniform
+                self.wardrobe.decide_on_outfit2(self)
 
             if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
                 (uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform)
