@@ -465,7 +465,7 @@ label myra_esports_practice_label(the_person):  #20 love event, on room enter ev
     mc.name "I did! Congratulations! When is the tournament?"
     the_person "I'm actually not sure. I know it is usually on a Sunday, but I'm not sure how close it is."
     mc.name "Neat. I can't wait to watch!"
-    the_person "Yeah! I'll have to set up something for it. It is an online thing, so I'll be able to play for the cafe here. Maybe I could put it up on the main projection screen."
+    the_person "Yeah! I'll have to set up something for it. It is an online thing, so I'll be able to play from the cafe here. Maybe I could put it up on the main projection screen."
     mc.name "That is an excellent idea."
     the_person "Thanks! Oh my god, I gotta go text [alexia.fname], she is going to be so excited. I'll see you around, okay?"
     mc.name "Sounds good."
@@ -1288,7 +1288,7 @@ label myra_distracted_gaming_label(the_person):       #20 sluttiness event. MC c
         the_person "You know, you might actually be on to something. That isn't a bad idea."
     else:
         the_person "You're preaching to the choir. I don't mind showing some skin, but I have to keep it legal, you know?"
-    the_person "Anyway, I need to get back to the desk. If you need anything, give me a hollar!"
+    the_person "Anyway, I need to get back to the desk. If you need anything, give me a holler!"
     $ the_person.draw_person(position = "walking_away")
     "You watch as [the_person.possessive_title] walks away. There is a bit of a swagger in her step..."
     $ clear_scene()
