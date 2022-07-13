@@ -2406,7 +2406,7 @@ label erica_lily_instapic_intro_label():
 
     "When they finish, [lily.title] hands her the outfit. They both quickly get dressed. The outfits look great."
     $ lily.apply_outfit(insta_wardrobe.pick_random_outfit(), update_taboo = True)
-    $ erica.apply_outfit(erica.personalize_outfit(insta_wardrobe.pick_random_outfit(), coloured_underwear = True, max_alterations = 2), update_taboo = True)
+    $ erica.apply_outfit(erica.personalize_outfit(insta_wardrobe.pick_random_outfit(), coloured_underwear = True, max_alterations = 2, allow_skimpy = False), update_taboo = True)
     $ scene_manager.update_actor(lily)
     $ scene_manager.update_actor(erica)
     $ mc.change_locked_clarity(25)
@@ -2534,9 +2534,9 @@ label erica_lily_weekly_photoshoot_label(the_person):
         "You should match":
             $ erica_insta_outfit = lily_insta_outfit.get_copy()
         "You should wear something similar, but not matching":
-            $ erica_insta_outfit = erica.personalize_outfit(lily_insta_outfit.get_copy())
+            $ erica_insta_outfit = erica.personalize_outfit(lily_insta_outfit.get_copy(), allow_skimpy = False)
         "You should wear your own thing":
-            $ erica_insta_outfit = erica.personalize_outfit(insta_wardrobe.pick_random_outfit())
+            $ erica_insta_outfit = erica.personalize_outfit(insta_wardrobe.pick_random_outfit(), allow_skimpy = False)
     erica "Thanks! I'm still pretty new at this, so it's nice to have your opinion on it."
     $ erica.change_stats(happiness = 1, obedience = 1)
     lily "Alright, before we get going, I need to grab a soda or something. I'm parched!"
