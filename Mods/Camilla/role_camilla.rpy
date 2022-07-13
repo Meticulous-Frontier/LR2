@@ -145,6 +145,12 @@ init -1 python:
 
 #Additional Camilla Functions
 init 2 python:
+    def camilla_wear_salsa_dress():
+        salsa_dress = camilla.wardrobe.get_outfit_with_name("Camilla Sexy Salsa Outfit")
+        if salsa_dress:
+            camilla.apply_outfit(salsa_dress)
+        return
+
     def get_camilla_lingerie_set_white():
         outfit = Outfit("Lingerie Set Classic White")
         outfit.add_upper(teddy.get_copy(),colour_white)
@@ -379,6 +385,7 @@ label camilla_get_a_drink_label(the_person):
 
 label camilla_dance_lessons_label():
     $ the_person = camilla
+    $ camilla_wear_salsa_dress()
     $ scene_manager = Scene()
     "It's Wednesday night, and you have a date with [the_person.possessive_title] at the bar to learn salsa dancing."
     $ mc.change_location(downtown_bar)
