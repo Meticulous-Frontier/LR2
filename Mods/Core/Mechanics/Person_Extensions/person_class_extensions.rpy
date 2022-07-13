@@ -2037,18 +2037,19 @@ init -1 python:
             if uniform_wardrobe:
                 uniform = uniform_wardrobe.decide_on_uniform(self)
             else: # we have no valid wardrobe, pick an outfit from wardrobe as uniform
-                self.wardrobe.decide_on_outfit2(self)
+                uniform = self.wardrobe.decide_on_outfit2(self)
 
-            if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
-                (uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform)
-            elif creative_colored_uniform_policy.is_active():
-                uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
+            if uniform:
+                if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
+                    (uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform)
+                elif creative_colored_uniform_policy.is_active():
+                    uniform = WardrobeBuilder(self).personalize_outfit(uniform, max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
 
-            if commando_uniform_policy.is_active():
-                for item in [x for x in uniform.get_upper_ordered() if x.underwear]:
-                    uniform.remove_clothing(item)
-                for item in [x for x in self.planned_uniform.get_lower_ordered() if x.underwear]:
-                    uniform.remove_clothing(item)
+                if commando_uniform_policy.is_active():
+                    for item in [x for x in uniform.get_upper_ordered() if x.underwear]:
+                        uniform.remove_clothing(item)
+                    for item in [x for x in uniform.get_lower_ordered() if x.underwear]:
+                        uniform.remove_clothing(item)
 
         self.set_uniform(uniform, True)
         return
