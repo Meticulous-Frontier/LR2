@@ -671,35 +671,37 @@ init -1 python:
 
         # add modifiers
         if self.has_family_taboo():
-            final_slut_requirement -= 20
+            final_slut_requirement += (self.get_opinion_score("incest") - 2) * 5          # love incest negates requirement penalty
 
         if self.has_role(prostitute_role):
-            final_slut_requirement += 20
+            final_slut_requirement -= 20        # prostitutes are more willing by nature
         elif self.relationship == "Girlfriend":
-            final_slut_requirement += (self.get_opinion_score("cheating on men") * 5 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 10)
+            final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 2  # love negates requirement penalty
         elif self.relationship == "Fiancée":
-            final_slut_requirement += (self.get_opinion_score("cheating on men") * 8 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 15)
+            final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 3  # love negates requirement penalty
         elif self.relationship == "Married":
-            final_slut_requirement += (self.get_opinion_score("cheating on men") * 10 if self.get_opinion_score("cheating on men") > 0 else self.get_opinion_score("cheating on men") * 20)
+            final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 5 # love negates requirement penalty
 
         if not private:
-            final_slut_requirement += ((-10 if self.sluttiness < 50 else 0) + self.get_opinion_score("public sex") * 5) if self.sluttiness < 50 else self.get_opinion_score("public sex") * 5
+            multiplier = 5 if self.sluttiness < 50 else 2
+            final_slut_requirement -= (self.get_opinion_score("public sex") - 2) * multiplier # love negates requirement penalty
 
         if self.love < 0:
-            final_slut_requirement -= self.love
+            final_slut_requirement += self.love
         elif private:
-            if self.has_role([girlfriend_role, affair_role]):
+            if self.has_role([girlfriend_role, affair_role]):               # girlfriend lowers requirement by love
                 final_slut_requirement -= self.love
             elif self.is_family():
-                final_slut_requirement -= __builtin__.int(self.love / 4.0)
+                final_slut_requirement -= __builtin__.int(self.love / 4.0)  # family lowers requirement by love / 4
             else:
-                final_slut_requirement -= __builtin__.int(self.love / 2.0)
+                final_slut_requirement -= __builtin__.int(self.love / 2.0)  # default lowers requirement by love / 2
 
-        final_slut_requirement += __builtin__.int((self.happiness - 100)/4.0)
+        final_slut_requirement -= __builtin__.min(__builtin__.int((self.happiness - 100)/4.0), 20) # happiness can lower requirement by up to 20 points
 
         if not ignore_taboo and the_position.associated_taboo:
-            final_slut_requirement += 10
+            final_slut_requirement += 10    # taboo increases requirement by 10
 
+        print("Position: " + the_position.name + "[Sluttiness: " + str(self.sluttiness) + ", Required: " + str(final_slut_requirement) + "]")
         if self.sluttiness >= final_slut_requirement:
             return True
         return False
@@ -1641,8 +1643,20 @@ init -1 python:
         if self.has_role("College Intern") and self.location in [rd_division, p_division, m_division, office]:
             return True
 
+        if self.has_role(maid_role):
+            return not self.job.schedule.get_destination() is None
+
+        # special handling for unique characters working at stripclub (use roles since unique chars only get role instead of job)
+        if self.has_role([stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]) \
+            and self.location in [strip_club, bdsm_room]:
+                return True
+
         if not self.job:
             return False
+
+        # she works around town, so when the job has a scheduled location, she's at work
+        if self == police_chief:
+            return not self.job.schedule.get_destination() is None
 
         return self.location == self.job.job_location
 
@@ -1849,7 +1863,7 @@ init -1 python:
     Person.is_dominant = is_dominant
 
     def is_girlfriend(self):
-        return self.has_role(girlfriend_role)
+        return self.has_role([girlfriend_role, harem_role])
 
     Person.is_girlfriend = is_girlfriend
 
@@ -1880,8 +1894,8 @@ init -1 python:
 ################################################
 
     def should_wear_maid_outfit(self):
-        if self.has_role([maid_role]):
-            return maid_at_work(self)
+        if self.has_role(maid_role):
+            return self.is_at_work(self)
         return False
 
     Person.should_wear_maid_outfit = should_wear_maid_outfit
@@ -1992,7 +2006,7 @@ init -1 python:
 
     Person.apply_yoga_shoes = apply_yoga_shoes
 
-    def apply_planned_outfit(self):
+    def apply_planned_outfit(self, ignore_base = False, update_taboo = False):
         if time_of_day != 0:    # in timeslot 0 we pick new outfits
             self.restore_all_clothing() # restore half-off clothing items of current outfit.
 
@@ -2001,38 +2015,46 @@ init -1 python:
         elif self.should_wear_maid_outfit():
             self.wear_maid_outfit()
         elif self.location in [gym, university] and self.location_outfit:
-            self.apply_outfit(self.location_outfit)
+            self.apply_outfit(self.location_outfit, ignore_base = ignore_base, update_taboo = update_taboo)
         else:
             if not self.planned_outfit: # extra validation to make sure we have a planned outfit
                 self.planned_outfit = self.decide_on_outfit()
 
-            self.apply_outfit(self.planned_outfit)
+            self.apply_outfit(self.planned_outfit, ignore_base = ignore_base, update_taboo = update_taboo)
         return
 
     Person.apply_planned_outfit = apply_planned_outfit
 
-    def set_uniform_enhanced(self, uniform, wear_now = False):
-        if uniform is None:
+    def person_wear_uniform(self):
+        if self.planned_uniform:    # quick exit, use planned uniform
+            self.apply_outfit(self.planned_uniform)
             return
 
-        if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
-            (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform.get_copy())
-        elif creative_colored_uniform_policy.is_active():
-            self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
+        if self.event_triggers_dict.get("forced_uniform", False):
+            uniform = self.event_triggers_dict.get("forced_uniform").get_copy()
         else:
-            self.planned_uniform = uniform.get_copy()
+            uniform_wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
+            if uniform_wardrobe:
+                uniform = uniform_wardrobe.decide_on_uniform(self)
+            else: # we have no valid wardrobe, pick an outfit from wardrobe as uniform
+                uniform = self.wardrobe.decide_on_outfit2(self)
 
-        if commando_uniform_policy.is_active():
-            for item in [x for x in self.planned_uniform.get_upper_ordered() if x.underwear]:
-                self.planned_uniform.remove_clothing(item)
-            for item in [x for x in self.planned_uniform.get_lower_ordered() if x.underwear]:
-                self.planned_uniform.remove_clothing(item)
+            if uniform:
+                if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
+                    (uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform)
+                elif creative_colored_uniform_policy.is_active():
+                    uniform = WardrobeBuilder(self).personalize_outfit(uniform, max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
 
-        if wear_now:
-            self.wear_uniform()
+                if commando_uniform_policy.is_active():
+                    for item in [x for x in uniform.get_upper_ordered() if x.underwear]:
+                        uniform.remove_clothing(item)
+                    for item in [x for x in uniform.get_lower_ordered() if x.underwear]:
+                        uniform.remove_clothing(item)
+
+        self.set_uniform(uniform, True)
         return
 
-    Person.set_uniform = set_uniform_enhanced
+    Person.wear_uniform = person_wear_uniform
 
     def person_is_wearing_uniform_extended(org_func):
         def is_wearing_uniform_wrapper(person):

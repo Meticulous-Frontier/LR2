@@ -14,9 +14,9 @@ init -1 python:
     def fetish_lily_stream_in_room_requirement(the_person):
         if the_person.get_fetish_count() > 0:
             if not mc.location is lily_bedroom:
-                return "Must be in [lily.name]'s bedroom"
+                return "Must be in [lily.fname]'s bedroom"
             elif lily_bedroom.get_person_count() > 1:
-                return "Must be alone with [lily.name]"
+                return "Must be alone with [lily.fname]"
             elif mc.energy > 30:
                 return True
             else:
@@ -327,20 +327,20 @@ label fetish_mom_kitchen_label(the_person):
         "Leave Mom's food alone":
             pass
     menu:
-        "Add serum to [lily.name]'s food":
+        "Add serum to [lily.fname]'s food":
             call give_serum(lily) from _call_give_mom_kitchen_fetish_02
-        "Leave [lily.name]'s food alone":
+        "Leave [lily.fname]'s food alone":
             pass
     if hall.has_person(aunt):
         menu:
-            "Add serum to [aunt.name]'s food":
+            "Add serum to [aunt.fname]'s food":
                 call give_serum(aunt)from _call_give_mom_kitchen_fetish_03
-            "Leave [aunt.name]'s food alone":
+            "Leave [aunt.fname]'s food alone":
                 pass
         menu:
-            "Add serum to [cousin.name]'s food":
+            "Add serum to [cousin.fname]'s food":
                 call give_serum(cousin) from _call_give_mom_kitchen_fetish_04
-            "Leave [cousin.name]'s food alone":
+            "Leave [cousin.fname]'s food alone":
                 pass
     "Just as you are finishing up with plating the food, when [the_person.possessive_title] walks back into the kitchen."
     $ the_person.apply_planned_outfit()

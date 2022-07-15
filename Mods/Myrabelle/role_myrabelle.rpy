@@ -271,12 +271,12 @@ label myra_gaming_cafe_opening_label():
     alexia "Oh hey [alexia.mc_title]! Here to check out the new gaming cafe?"
     mc.name "Indeed I am."
     "The girl behind the counter notices you. You think she remembers you, you notice her scrunch her nose a bit as she looks at you."
-    the_person "You know this guy, [alexia.name]?"
+    the_person "You know this guy, [alexia.fname]?"
     alexia "Yeah! We went to the university around the same time, so we have known each other for a while, but he is actually my boss these days..."
     "The blue haired girl behind the counter appears to be sizing you up."
     mc.name "I'm [mc.name]."
     "She's quiet for a moment longer."
-    the_person "I'm [the_person.name], but you can call me Myra."
+    the_person "I'm [the_person.fname], but you can call me Myra."
     $ the_person.set_title("Myra")
     $ the_person.set_possessive_title("Your gamer girl")
     $ the_person.set_mc_title(mc.name)
@@ -297,10 +297,10 @@ label myra_gaming_cafe_opening_label():
     alexia "Yep! I've been playing this game called Guild Quest 2, and she is the guild leader."
     mc.name "So you met... playing a game?"
     alexia "No, we go back farther than that, but lately it is mainly when playing that game."
-    the_person "Yep! Blonde Cupcake and I go way back."
+    the_person "Yep! Cupcake and I go way back."
     alexia "Oh my gosh don't tell..."
-    mc.name "Blonde... Cupcake?"
-    the_person "That's her character name."
+    mc.name "Cupcake?"
+    the_person "Well that's her character name, 'Blonde Cupcake'."
     "You laugh out loud."
     mc.name "Ha! Oh my, that is perfect for her!"
     "[alexia.possessive_title] just sighs."
@@ -332,7 +332,7 @@ label myra_gaming_cafe_opening_label():
     "You turn to the computer. You make an account, and soon you have a brand new level 1 ranger named Bud Lightyear."
     alexia "Alright, this is the tutorial area..."
     "You play the game for a while with [alexia.possessive_title]. After a couple hours, you are level 6. "
-    "You finish up an event where a giant undead monster rises up out of the swamp. With the help of Blonde Cupcake, you manage to kill it."
+    "You finish up an event where a giant undead monster rises up out of the swamp. With the help of Cupcake, you manage to kill it."
     alexia "Alright! Even though I'm max level, when you help noobs in this game, you can still get decent rewards."
     mc.name "That's good, I don't want to be a drag."
     alexia "Don't worry. Well, that is it for the free trial. What did you think?"
@@ -357,7 +357,7 @@ label myra_gaming_cafe_opening_label():
     "You spend a few minutes and buy the game. You've been playing for a while now though and you decide to be done for now."
     "The two girls are talking as you close the game down."
     alexia "This is going to be great. I think I'll start coming here to play on the weekends. The computers are way better than mine, and being around other people is great!"
-    the_person "It'll be fun having you around Blonde Cupcake! We'll be closed on Mondays and Tuesdays, but we have extended hours on the weekends!"
+    the_person "It'll be fun having you around Cupcake! We'll be closed on Mondays and Tuesdays, but we have extended hours on the weekends!"
     $ alexia.set_schedule(gaming_cafe, the_days = [5,6], the_times = [2,3]) #Alexia plays at the cafe on weekends.
     mc.name "I need to get going, but this has been fun."
     alexia "See ya [alexia.mc_title]."
@@ -465,9 +465,9 @@ label myra_esports_practice_label(the_person):  #20 love event, on room enter ev
     mc.name "I did! Congratulations! When is the tournament?"
     the_person "I'm actually not sure. I know it is usually on a Sunday, but I'm not sure how close it is."
     mc.name "Neat. I can't wait to watch!"
-    the_person "Yeah! I'll have to set up something for it. It is an online thing, so I'll be able to play for the cafe here. Maybe I could put it up on the main projection screen."
+    the_person "Yeah! I'll have to set up something for it. It is an online thing, so I'll be able to play from the cafe here. Maybe I could put it up on the main projection screen."
     mc.name "That is an excellent idea."
-    the_person "Thanks! Oh my god, I gotta go text [alexia.name], she is going to be so excited. I'll see you around, okay?"
+    the_person "Thanks! Oh my god, I gotta go text [alexia.fname], she is going to be so excited. I'll see you around, okay?"
     mc.name "Sounds good."
     $ myra.event_triggers_dict["knows_plays_esports"] = True
     $ myra.add_unique_on_room_enter_event(myra_distracted_gaming)
@@ -481,7 +481,7 @@ label myra_esports_first_tournament_label():    #Mandatory event. Preluded to du
     "You feel your phone go off when you get a notification. It's a message from [alexia.possessive_title]"
     $ mc.start_text_convo(alexia)
     alexia "Hey! I don't know what you are doing right now, but get over to the gaming cafe!"
-    alexia "[the_person.name] is hosting a watch party for her esports tournament! She asked me to text you because she doesn't have your number I guess."
+    alexia "[the_person.fname] is hosting a watch party for her esports tournament! She asked me to text you because she doesn't have your number I guess."
     alexia "It's going to start soon!"
     mc.name "Thanks! I'm on my way. Save me a seat?"
     alexia "Sure!"
@@ -1151,7 +1151,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
         $ the_person.draw_person()
         $ the_serum = None
 
-        the_person "Hey [the_person.mc_title]. I was just getting ready to take over the energy drinks for [myra.name]."
+        the_person "Hey [the_person.mc_title]. I was just getting ready to take over the energy drinks for [myra.fname]."
         the_person "Which one did you want me to take over?"
     else:
         "You get a message from [the_person.title]. She wants to know which serums you want delivered to the gaming cafe this week."
@@ -1288,7 +1288,7 @@ label myra_distracted_gaming_label(the_person):       #20 sluttiness event. MC c
         the_person "You know, you might actually be on to something. That isn't a bad idea."
     else:
         the_person "You're preaching to the choir. I don't mind showing some skin, but I have to keep it legal, you know?"
-    the_person "Anyway, I need to get back to the desk. If you need anything, give me a hollar!"
+    the_person "Anyway, I need to get back to the desk. If you need anything, give me a holler!"
     $ the_person.draw_person(position = "walking_away")
     "You watch as [the_person.possessive_title] walks away. There is a bit of a swagger in her step..."
     $ clear_scene()
@@ -1376,9 +1376,9 @@ label myra_lewd_gaming_label(the_person):           #40 sluttiness event. Catch 
     $ the_person.change_energy(-40)
     "When she finishes, her body goes limp. She is completely spent."
     $ the_person.draw_person(position="sitting")
-    "You slowly stand up. Looking around, it appears that your oral session went unnoticed. Actually it appears there isn't anyone else here."
+    "You slowly stand up. Looking around, it appears that no one else was here to have noticed your oral session."
     the_person "That... holy fuck..."
-    "[the_person.possessive_title] is in a post orgasm stupor. She seems like she would be receptive to some training."
+    "[the_person.possessive_title] is in a post orgasm stupor. It seems like she would be receptive to some training."
     call do_training(the_person) from _call_do_training_myra_post_oral_01
     the_person "I don't think I can get up."
     mc.name "Sure you can. Here, let me help you."
@@ -2036,18 +2036,18 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     the_person "Hey."
     "[the_person.possessive_title] looks around, then says to you in a hushed voice."
     if myra_alexia_teamup_scene.get_stage() >= 2:
-        the_person "So... how'd you enjoy the other night with [alexia.name]? That was pretty wild, huh?"
+        the_person "So... how'd you enjoy the other night with [alexia.fname]? That was pretty wild, huh?"
         mc.name "Yeah, but definitely in a good way."
         the_person "Yeah, you WOULD say that..."
         "[the_person.title] sticks her tongue into the side of her cheek, and briefly mimics a blowjob motion."
         $ mc.change_locked_clarity(10)
         mc.name "Oh come on, don't pretend like you didn't have a good time too."
-        the_person "The gaming nights are fun. Hanging with [alexia.name], hanging out with you..."
+        the_person "The gaming nights are fun. Hanging with [alexia.fname], hanging out with you..."
         the_person "That doesn't mean I like giving blowjobs though."
         mc.name "That's okay. I'll just throw the game for you next time. [alexia.title] gives way better head anyway."
         $ the_person.draw_person(emotion = "angry")
         $ the_person.change_happiness(-5)
-        the_person "What? Are you fucking kidding me? You get head from [alexia.name] often then?"
+        the_person "What? Are you fucking kidding me? You get head from [alexia.fname] often then?"
         mc.name "What? I mean, it's completely true. Your blowjobs need work."
         "It seems that comparing her to [alexia.possessive_title] has got her feeling competitive. You decide to push the issue."
         the_person "Yeah right. And let me guess, you just happen to be the man to teach me."
@@ -2089,7 +2089,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     the_person "Hey..."
     mc.name "Hey [the_person.title]."
     if myra_alexia_teamup_scene.get_stage() >= 2:
-        the_person "Look, I'm sorry I got pissed earlier. Obviously I know that you fool around with [alexia.name]."
+        the_person "Look, I'm sorry I got pissed earlier. Obviously I know that you fool around with [alexia.fname]."
         the_person "She talks about you way too much for things between you two to be just friendly."
         mc.name "Oh... she talks about me a lot?"
         the_person "I... look, I'm not here to talk about her, okay?"

@@ -83,9 +83,16 @@ init:
 
 label intro_threesome_double_down_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "You lay down on your back as the girls get into position."
+    if not the_girl_1.vagina_visible():
+        "[the_girl_1.title] quickly moves some clothing out of the way..."
+        $ the_girl_1.strip_to_vagina(position = Threesome_double_down.position_one_tag, display_transform = Threesome_double_down.p1_transform, visible_enough = True, prefer_half_off = True)
     $ the_girl_1.break_taboo("vaginal_sex")
     $ the_girl_1.break_taboo("condomless_sex")
     "You briefly see [the_girl_1.title] sigh as she sinks down onto your cock, before [the_girl_2.possessive_title] swings a leg over your head."
+
+    if not the_girl_2.vagina_visible():
+        "[the_girl_2.title] quickly moves some clothing out of the way..."
+        $ the_girl_2.strip_to_vagina(position = Threesome_double_down.position_two_tag, display_transform = Threesome_double_down.p2_transform, visible_enough = True, prefer_half_off = True)
     "With both girls on top of you, you waste no time diving into [the_girl_2.title]'s pussy."
     return
 

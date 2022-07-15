@@ -694,7 +694,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
                 mc.name "I have one more thing for you before you go..."
                 person_choice "Yes sir?"
                 mc.name "Having this meeting has been great, but, I think you could use a little more... hands on training."
-                person_choice "Mmm, that sounds nice, is [the_person.name] going to join us?"
+                person_choice "Mmm, that sounds nice, is [the_person.fname] going to join us?"
                 $ mc.change_locked_clarity(20)
                 if the_person.outfit.check_outfit_cum():
                     "With [the_person.title] still wearing your cum from her service earlier, you get a burst of energy and arousal."

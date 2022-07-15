@@ -62,7 +62,7 @@ label broken_AC_crisis_label_enhanced():
     #We're going to use the most slutty girl of the group lead the pack. She'll be the one we pay attention to.
     $ scene_manager.add_actor(the_person)
     if mc.business.p_div.get_person_count() == 1:
-        "The air conditioner was under warranty, and a quick call will have one of their repair men over in a couple of hours. Until then [the_person.name] wants to know what to do."
+        "The air conditioner was under warranty, and a quick call will have one of their repair men over in a couple of hours. Until then [the_person.fname] wants to know what to do."
     else:
         "The air conditioner was under warranty, and a quick call will have one of their repair men over in a couple of hours. Until then, the production staff want to know what to do."
 

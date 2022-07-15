@@ -220,15 +220,13 @@ init -1 python:
         if "get_strip_club_foreclosed_stage" in globals():
             if get_strip_club_foreclosed_stage() >= 5: # The player owns the club
                 multiplier = 1
-                if any([x for x in all_people_in_the_game() if x.has_job([stripclub_manager_job, stripclub_mistress_job])]):
+                if any([x for x in all_people_in_the_game() if x.is_at_work() and x.has_job([stripclub_manager_job, stripclub_mistress_job])]):
                     multiplier = 1.1 # +10% income
 
-                for person in known_people_in_the_game():
-                    if person.has_job([stripclub_stripper_job, stripclub_waitress_job, stripclub_bdsm_performer_job]):
-                        income += (calculate_stripper_profit(person) * multiplier)  # profit
-
-                    if person.has_job([stripclub_stripper_job, stripclub_waitress_job, stripclub_bdsm_performer_job, stripclub_manager_job, stripclub_mistress_job]):
-                        income -= person.stripper_salary    # costs
+                # use roles instead of jobs (unique chars only get role (the keep their normal jobs))
+                for person in [x for x in known_people_in_the_game() if x.is_at_work() and x.has_role([stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role])]:
+                    income += (calculate_stripper_profit(person) * multiplier)  # profit
+                    income -= person.stripper_salary    # costs
 
         return __builtin__.int(income)  # round to whole dollars
 
@@ -274,26 +272,18 @@ init -1 python:
                     return business.h_uniform
 
             if person == police_chief:
-                if not "police_chief_uniform_wardrobe" in globals():    # save game compatibility remove after v0.49
-                    cop_outfit = police_chief.wardrobe.get_outfit_with_name("Cop").get_copy()
-
-                    global police_chief_uniform_wardrobe
-                    police_chief_uniform_wardrobe = Wardrobe("Cop Uniform")
-                    police_chief_uniform_wardrobe.add_outfit(cop_outfit)
-                    police_chief.wardrobe.remove_outfit(cop_outfit)
-
                 return police_chief_uniform_wardrobe
             if person.job == stripper_job: # base game stripper
                 return stripclub_wardrobe
-            if person.job == stripclub_stripper_job: # stripclub bought stripper
+            if person.job == stripclub_stripper_job or person.has_role(stripclub_stripper_role): # stripclub bought stripper
                 return business.stripper_wardrobe
-            if person.job == stripclub_waitress_job:
+            if person.job == stripclub_waitress_job or person.has_role(stripclub_waitress_role):
                 return business.waitress_wardrobe
-            if person.job == stripclub_bdsm_performer_job:
+            if person.job == stripclub_bdsm_performer_job or person.has_role(stripclub_bdsm_performer_role):
                 return business.bdsm_wardrobe
-            if person.job == stripclub_mistress_job:
+            if person.job == stripclub_mistress_job or person.has_role(stripclub_mistress_role):
                 return business.mistress_wardrobe
-            if person.job == stripclub_manager_job:
+            if person.job == stripclub_manager_job or person.has_role(stripclub_manager_role):
                 return business.manager_wardrobe
             return None
 

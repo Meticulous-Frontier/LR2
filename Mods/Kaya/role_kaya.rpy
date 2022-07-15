@@ -258,7 +258,7 @@ label kaya_intro_label(the_person):
     mc.name "Ah, good for you. Well, best of luck with your studies. If you are as smart as you are beautiful, I'm sure you will do well."
     the_person "Ah, thank you..."
     mc.name "I'm [mc.name]."
-    the_person "[the_person.name]."
+    the_person "[the_person.fname]."
     $ the_person.set_title(the_person.name)
     $ the_person.set_possessive_title("Your favorite barista")
     $ the_person.set_mc_title(mc.name)
@@ -506,7 +506,7 @@ label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Li
     the_person "Ahhh... I see... you aren't here to see me..."
     "[lily.title] suddenly realizes you were talking with [the_person.possessive_title]. The edge of jealously is clear in [the_person.title]'s voice."
     lily "Oh! Sorry, I didn't realize you were talking to her..."
-    mc.name "Ah, let me introduce you. [the_person.name], this is my sister, [lily.name]. She is taking classes here also."
+    mc.name "Ah, let me introduce you. [the_person.fname], this is my sister, [lily.fname]. She is taking classes here also."
     $ scene_manager.update_actor(the_person, emotion = "happy")
     "Relief is obvious on the face of [the_person.title]."
     the_person "Ah! Of course, you look so similar. Of course you are siblings! Nice to meet you."
@@ -558,7 +558,7 @@ label kaya_meet_erica_at_uni_label(the_person):     #This label is a repalcement
     the_person "Ahhh... I see... you aren't here to see me..."
     "[erica.title] suddenly realizes you were talking with [the_person.possessive_title]. The edge of jealously is clear in [the_person.title]'s voice."
     erica "Oh! Sorry, I didn't realize you were talking to her..."
-    mc.name "Ah, let me introduce you. [the_person.name], this is [erica.name]. She is taking classes here also, and we workout together once in a while."
+    mc.name "Ah, let me introduce you. [the_person.fname], this is [erica.fname]. She is taking classes here also, and we workout together once in a while."
     $ scene_manager.update_actor(the_person, emotion = "sad")
     "You can tell [the_person.title] is still skeptical."
     the_person "Ah... so you are... workout buddies?"
@@ -579,7 +579,7 @@ label kaya_meet_erica_at_uni_label(the_person):     #This label is a repalcement
     the_person "[the_person.mc_title]?"
     erica "Earth to [mc.name]?"
     mc.name "I'm sorry... I spaced out for a second."
-    the_person "[erica.name] just asked if you ever took molecular biology when you were here..."
+    the_person "[erica.fname] just asked if you ever took molecular biology when you were here..."
     mc.name "Oh! Yes, actually that is one of my specialties. I use it every day at my pharmaceutical company."
     erica "Ah! You should join us sometime. I bet you could help us out if we get stuck."
     the_person "If it isn't too much of a bother."
@@ -640,7 +640,7 @@ label kaya_lily_study_night_intro_label():
     mom "Hi dear. Who is your friend?"
     lily "Oh! You mean [mc.name]'s friend!"
     "[lily.possessive_title] winks at you in a painfully obvious way."
-    the_person "Hi, I'm [the_person.name]. I'm studying with [lily.name]. We have the same class at the university..."
+    the_person "Hi, I'm [the_person.fname]. I'm studying with [lily.fname]. We have the same class at the university..."
     "You get another wine glass out, and quickly pour two for the girls."
     mom "I see... [mc.name] do you know each other too?"
     "Before you can say anything, your annoyingly wonderful little sister speaks up."
@@ -650,7 +650,7 @@ label kaya_lily_study_night_intro_label():
     mom "I see."
     "You hand the girls their glasses, [lily.title] goes over to the fridge to look for a snack."
     $ scene_manager.update_actor(lily, position = "walking_away")
-    mom "Nice to meet you [the_person.name]. You... look awfully familiar... what was your last name?"
+    mom "Nice to meet you [the_person.fname]. You... look awfully familiar... what was your last name?"
     the_person "[the_person.last_name], ma'am."
     mom "I see..."
     lily "Hey, what do you think about having some of this?"
@@ -717,7 +717,7 @@ label kaya_lily_study_night_apology_label(the_person):
     the_person "Oh! It was great! Your sister and I had a great time studying and hanging out. She is so funny!"
     mc.name "I just wanted to... wait what?"
     the_person "I know she was trying to embarrass you, and me for that matter, but honestly I had to laugh."
-    the_person "[lily.name] is great. She's like the sister I never had! I hope it's okay, I'm going to come over again on Tuesday night to study again?"
+    the_person "[lily.fname] is great. She's like the sister I never had! I hope it's okay, I'm going to come over again on Tuesday night to study again?"
     mc.name "That is fine of course."
     the_person "In fact, we might be making a thing of it. It was really handy being able to study for that class together."
     the_person "Of course... I still want to see you..."
@@ -744,7 +744,7 @@ label kaya_lily_study_night_recurring_label(the_person):
     lily "Oh hey."
     the_person "Hey [the_person.mc_title]!"
     mc.name "Hey, I know you are busy studying, but just wanted to come say hi. Can I get you girls a snack or something?"
-    lily "Oh thanks, [lily.mc_title]. Yeah can you get us some pretzels, and I wouldn't mind a glass of soda from the fridge. Do you want anything [the_person.name]?"
+    lily "Oh thanks, [lily.mc_title]. Yeah can you get us some pretzels, and I wouldn't mind a glass of soda from the fridge. Do you want anything [the_person.fname]?"
     the_person "Soda would be nice!"
     lily "Yeah two sodas and pretzels!"
     mc.name "Sure."
@@ -840,8 +840,8 @@ label kaya_uni_scholarship_intro_label(the_person):
         mc.name "I... ha, I would never... of course..."
     else:
         mc.name "Family?"
-    nora "So [lily.name], your sister, would not be eligible."
-    mc.name "[lily.name], right."
+    nora "So [lily.fname], your sister, would not be eligible."
+    mc.name "[lily.fname], right."
     mc.name "Are there any other limits to who I can hire? As interns?"
     nora "Not really, but you should be careful not to discriminate against protected classes with your awards."
     mc.name "What if I wanted to support a protected class?"
@@ -977,7 +977,7 @@ label kaya_moving_in_with_mother_intro_label(the_person): #This label is called 
     the_person "It seems that she probably will not survive much longer, so I need to spend as much time with her as I can."
     mc.name "I am so sorry. If there is anything I can do for you, please let me know."
     the_person "Thank you. It means a lot to hear that from you."
-    the_person "If you want to swing by, I still make time to study with [erica.name] on Tuesdays, but my schedule is pretty much maxed out now..."
+    the_person "If you want to swing by, I still make time to study with [erica.fname] on Tuesdays, but my schedule is pretty much maxed out now..."
     $ the_person.change_love(5)
     "Unfortunately, it seems that [the_person.possessive_title] may not be able to spend much time with you going forward."
     $ mc.business.add_mandatory_crisis(kaya_asks_for_help_moving)
@@ -1269,9 +1269,9 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     $ scene_manager.add_actor(sakari, display_transform = character_center_flipped)
     sakari "{=kaya_lang}Tamahine!{/=kaya_lang}"
     "[the_person.title]'s mother steps out from the hallway. She is surprised when she sees you."
-    sakari "Ah, [kaya.name]! You did not tell me you were bringing a man back here the first day!"
+    sakari "Ah, [kaya.fname]! You did not tell me you were bringing a man back here the first day!"
     "She speaks in the same accent that [the_person.title] has, but much thicker."
-    the_person "Ah, mom! This is [mc.name]. [mc.name], this is my mother, [sakari.name]."
+    the_person "Ah, mom! This is [mc.name]. [mc.name], this is my mother, [sakari.fname]."
     mc.name "A pleasure to meet you."
     sakari "Of course dear."
     $ sakari.set_title(sakari.name)
@@ -1290,7 +1290,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     sakari "Ah, thank you for all your help, young man."
     "Her eyes follow yours to the picture on the wall."
     mc.name "That's a nice picture. Who is the man?"
-    sakari "That would be [the_person.name]'s father. He and I had, I guess you would call it an office romance."
+    sakari "That would be [the_person.fname]'s father. He and I had, I guess you would call it an office romance."
     sakari "We worked together for a while, but then things got complicated."
     mc.name "I'm sorry to hear that."
     sakari "Yes. He died a while ago, and I miss him. He was a good man."
@@ -1430,7 +1430,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
             if not the_person.is_girlfriend():
                 $ the_person.add_role(girlfriend_role)
                 the_person "Does that mean... are we?"
-                mc.name "[the_person.name], will you be my girlfriend?"
+                mc.name "[the_person.fname], will you be my girlfriend?"
                 the_person "Oh! Yes of course!"
             else:
                 the_person "I'm so glad to hear that you don't want to give up on things between us."

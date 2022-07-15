@@ -36,7 +36,8 @@ init 10 python:
     strip_club_dildochair_MC_action = Action("Use the dildo chair {image=gui/heart/Time_Advance.png}", strip_club_bdsm_dildochair_MC_requirements, "strip_club_bdsm_dildochair_MC_label", menu_tooltip = "Use the dildo chair with your BDSM performer.")
     strip_club_dildochair_Mistress_action = Action("Mistress use the chair {image=gui/heart/Time_Advance.png}", strip_club_bdsm_dildochair_Mistress_requirements, "strip_club_bdsm_dildochair_Mistress_label", menu_tooltip = "Have the Mistress use the dildo chair with your BDSM performer.")
 
-    stripclub_bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action, strip_club_dildochair_MC_action, strip_club_dildochair_Mistress_action], hidden = True)
+    stripclub_bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action, strip_club_dildochair_MC_action, strip_club_dildochair_Mistress_action],
+        on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
 
     def strip_club_get_caged():
         caged = people_in_role(caged_role)
@@ -429,7 +430,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
             $ the_person.event_triggers_dict["dildochair_dildos"] = 1
         "Two dildos" if the_person.get_opinion_score("anal sex") >= 2:
             $ the_person.event_triggers_dict["dildochair_dildos"] = 2
-    mistress "Ok, [the_person.name]... Come here and take off your clothes!"
+    mistress "Ok, [the_person.fname]... Come here and take off your clothes!"
     $ scene_manager.add_actor(the_person, display_transform = character_center_flipped, position = "stand3", emotion = "happy")
     if mc.location.get_person_count() > 1: # There's other people around
         $ the_person.add_situational_slut("being_chaired", 8, "Everyone can see the slut I am...")
@@ -447,7 +448,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
             else:
                 the_person "I'm [the_person.mc_title]'s slave [mistress.title], and a slave obeys."
             $ scene_manager.update_actor(mistress, position = "stand5")
-            mistress "Sit on this chair [the_person.name], I'm going to restrain you."
+            mistress "Sit on this chair [the_person.fname], I'm going to restrain you."
             if the_person.event_triggers_dict.get("dildochair_dildos") == 1 and the_person.get_opinion_score("anal sex") >= 2:
                 the_person "Where should I put the dildo?"
                 menu:
@@ -486,7 +487,7 @@ label strip_club_bdsm_dildochair_Mistress_label(the_person): # The Mistress use 
             else:
                 the_person "I'm [the_person.mc_title]'s slave [mistress.title], and a slave obeys."
             $ scene_manager.update_actor(mistress, position = "stand5")
-            mistress "Sit on this chair [the_person.name], I'm going to restrain you."
+            mistress "Sit on this chair [the_person.fname], I'm going to restrain you."
             if the_person.event_triggers_dict.get("dildochair_dildos") == 1 and the_person.get_opinion_score("anal sex") >= 2:
                 the_person "Where should I put the dildo?"
                 menu:

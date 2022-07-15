@@ -544,7 +544,7 @@ label anal_fetish_mom_intro_label():
     $ mc.change_locked_clarity(50)
     "When you look up, you are stunned at the outfit that [the_person.possessive_title] is wearing."
     mc.name "[the_person.title]... wow! But... but what about..."
-    the_person "[lily.name] is out for the night, spending it at a friend's house. We have the house to ourselves for the night..."
+    the_person "[lily.fname] is out for the night, spending it at a friend's house. We have the house to ourselves for the night..."
     "[the_person.title] slowly walks over to you. Her hips and body are mesmerizing."
     the_person "Here... let me help..."
     $ the_person.draw_person (position = "blowjob")
@@ -1099,7 +1099,7 @@ label anal_fetish_erica_intro_label():
     "[the_person.title] finishes sliding herself down, your morning wood now plunged completely into her well lubed backside."
     "She must have walked in the room completely ready for this."
     the_person "Oh my god... I swear I was thinking about this all night long."
-    the_person "[lily.name] and I, we had these outfits that really accentuated the ass, and all I could think about was wishing you would just rip them off and violate me!"
+    the_person "[lily.fname] and I, we had these outfits that really accentuated the ass, and all I could think about was wishing you would just rip them off and violate me!"
     "[the_person.possessive_title] has been dosed recently with some of your anal enhancing serums. You wonder if she is ready to awaken a new love of anal sex."
     mc.name "And now, you got it. Is it as good as you hoped? Filling your slutty ass with my cock?"
     $ the_person.change_arousal(10)

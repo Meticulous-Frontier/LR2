@@ -439,7 +439,7 @@ label horny_at_work_crisis_enhanced_label():
                                 the_person "So I'm going to help him cum."
 
                             else:
-                                lead_other "[the_person.name], what are you doing?"
+                                lead_other "[the_person.fname], what are you doing?"
                                 the_person "I've gotten [the_person.mc_title] too excited, so I'm going to help him jerk off."
                             $ mc.change_locked_clarity(10)
                             $ del lead_other

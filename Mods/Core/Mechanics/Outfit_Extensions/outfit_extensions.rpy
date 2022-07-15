@@ -212,20 +212,20 @@ init -1 python:
 
     def get_body_parts_slut_score(self, extra_modifier = False):
         new_score = 0
-        if self.tits_available():
-            new_score += 15
-        elif self.tits_visible():
+        if self.tits_visible():
             new_score += 30
+        elif self.tits_available():
+            new_score += 15
         if extra_modifier and (not self.wearing_bra() or not self.bra_covered()):
             new_score += 15
 
-        if self.vagina_available():
-            new_score += 15
-        elif self.vagina_visible():
+        if self.vagina_visible():
             new_score += 30
+        elif self.vagina_available():
+            new_score += 15
         if extra_modifier and (not self.wearing_panties() or not self.panties_covered()):
             new_score += 15
-        return __builtin__.int(new_score * .9)
+        return __builtin__.int(new_score * .89)
 
     Outfit.get_body_parts_slut_score = get_body_parts_slut_score
 

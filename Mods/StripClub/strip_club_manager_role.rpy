@@ -91,8 +91,10 @@ init 3303 python:
     mistress_role_remove_action = Action("Remove as Mistress", has_mistress_role_requirement, "mistress_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club mistress.")
     mistress_hunt_for_me_action = Action("Hunt for me", mistress_hunt_for_me_requirement, "mistress_hunt_for_me_label", menu_tooltip = "Ask [the_person.title] to find you a girl for a threesome.")
 
-    stripclub_manager_role = Role("Manager", [manager_role_remove_action, promote_to_mistress_action], hidden = True)
-    stripclub_mistress_role = Role("Mistress", [mistress_role_remove_action, mistress_hunt_for_me_action], hidden = True)
+    stripclub_manager_role = Role("Manager", [manager_role_remove_action, promote_to_mistress_action],
+        on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
+    stripclub_mistress_role = Role("Mistress", [mistress_role_remove_action, mistress_hunt_for_me_action],
+        on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
 
 label promote_to_manager_label(the_person):
     $ the_person.event_triggers_dict["stripclub_last_promotion_day"] = day

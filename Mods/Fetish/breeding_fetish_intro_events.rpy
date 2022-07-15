@@ -910,7 +910,7 @@ label breeding_fetish_erica_intro_label():
     "There is some significant urgency in her voice. [the_person.possessive_title] is willing to give up her sports team, just to have your babies! This is a total no-brainer."
     "You reach over the table, and pick up her birth control. You stand up, take it to the trash can, and throw it away. She observes your movements closely."
     the_person "You just... Does that mean?"
-    mc.name "Lie down on the table, [erica.name]."
+    mc.name "Lie down on the table, [erica.fname]."
     the_person "Oh! Oh my god..."
     $ the_person.draw_person(position = "missionary")
     if the_person.outfit.vagina_available():

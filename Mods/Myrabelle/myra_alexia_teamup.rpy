@@ -111,7 +111,7 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     alexia "[alexia.mc_title] is here?"
     "You hear [alexia.possessive_title] call out from the back of the cafe. [the_person.title] has a couple couches and some retro consoles set up back there."
     mc.name "I knew you two were gonna hang out tonight, just thought maybe I'd swing by for a bit."
-    the_person "Oh... I suppose we could all hang out for a bit. Hey [alexia.name]! Do you care if he hangs out with us some?"
+    the_person "Oh... I suppose we could all hang out for a bit. Hey [alexia.fname]! Do you care if he hangs out with us some?"
     alexia "Sure! Let's put him to work though. The food court is probably almost closed, can you go get me a milkshake?"
     the_person "Ooooh! That sounds good! Get me one too!"
     mc.name "Ummm, sure... what flavors?"
@@ -147,7 +147,7 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     mc.name "That's okay, I'm fine with just watching and hanging out with you two."
     $ alexia.change_love(1, 50)
     $ the_person.change_love(1,50)
-    alexia "Aww, that's sweet of you. Alright [the_person.name], you're mine!"
+    alexia "Aww, that's sweet of you. Alright [the_person.fname], you're mine!"
     "Round one starts, but it is clear that [the_person.possessive_title] is the better gamer. After two quick rounds, the game declares her as the winner."
     the_person "Yes!"
     alexia "Geeze! You just going to sit there and watch this slaughter [alexia.mc_title]? Or are you going to help me?"
@@ -207,14 +207,14 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
         $ the_person.event_triggers_dict["knows_alexia_single"] = True
         the_person "Wow, should I give you two some privacy?"
         if alexia.sluttiness > 20:
-            alexia "Wow, you would do that? You're such a good friend [the_person.name]!"
+            alexia "Wow, you would do that? You're such a good friend [the_person.fname]!"
         else:
             alexia "Just teasing, geesh! No need to take it so far."
         "[the_person.title] rolls her eyes."
     else:
         # $ so_title = SO_relationship_to_title(alexia.relationship)
         $ the_person.event_triggers_dict["knows_alexia_single"] = False
-        the_person "Wow, does your boyfriend know you're out getting backrubs from strange men tonight [alexia.name]?"
+        the_person "Wow, does your boyfriend know you're out getting backrubs from strange men tonight [alexia.fname]?"
         "[alexia.title] rolls her eyes."
         alexia "What he doesn't know won't hurt him..."
         $ alexia.change_slut(1, 50)
@@ -563,7 +563,7 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
         the_target "Look at him! He is turned on too. Is it really fair to leave him hanging?"
         "Suddenly, [the_target.title] gets a big smile."
         if the_target == myra:
-            the_target "[alexia.name], why don't you jack him off while he is touching me? Fitting end for the loser!"
+            the_target "[alexia.fname], why don't you jack him off while he is touching me? Fitting end for the loser!"
             mc.name "That's okay, we didn't agree on that at the beginning..."
             alexia "I'll do it."
             mc.name "I... what?"
@@ -617,7 +617,7 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
     "[the_loser.possessive_title] takes a moment to spit on her hand again, then keeps working your cock."
     if the_loser == myra:
         # $ so_title = SO_relationship_to_title(alexia.relationship)
-        the_loser "Holy fuck you two... [alexia.name] are you sure you have a boyfriend?"
+        the_loser "Holy fuck you two... [alexia.fname] are you sure you have a boyfriend?"
         the_target "Quiet. I don't want to think about him right now..."
         $ mc.change_locked_clarity(20)
         "[the_target.title] is putty in your hands. It really doesn't matter who she gets with, does it? She seems to always come back to you."
@@ -783,7 +783,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
     if scene_transition:
         the_target "This is amazing. How do you want to do this?"
         mc.name "What if, why don't you lay on the table, and then I can sit down and [the_loser.title] can service me beneath the table."
-        the_target "Hmm, but I want to watch! What if like... YOU lay on the couch, and I can sit on your face while [the_loser.name] sucks you off?"
+        the_target "Hmm, but I want to watch! What if like... YOU lay on the couch, and I can sit on your face while [the_loser.fname] sucks you off?"
         mc.name "I suppose that would be okay."
     else:
         mc.name "Alright, [the_target.title], we'll do it like last time again. You can sit on my face, okay?"
@@ -801,7 +801,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
     $ face_fuck = False
     if the_loser == myra and the_loser.opinion_score_giving_blowjobs() == -2:   #Special scene where Alexia trains Myra a bit on blowjobs
         "Above you, you can hear [the_target.title] give some encouragement."
-        the_target "Come on [the_loser.name]! Don't worry, it won't bite!"
+        the_target "Come on [the_loser.fname]! Don't worry, it won't bite!"
         the_loser "I know, I just... Ugh I don't know why I just can't stand giving blowjobs."
         the_target "Why? It is SO much fun! They are so hot and you can make him squirm like a little... AH!"
         "Your tongue hits a particularly sensitive spot, interrupting [the_target.title] for a second."
@@ -827,7 +827,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         $ myra.event_triggers_dict["shown_off_blowjob_skills"] = True
         "As you begin licking, [the_loser.possessive_title] also gets to work, hungrily."
         "You feel her lips wrap around your tip, then descend down your cock slowly, all the way to the base. Your head is hitting the back of her throat."
-        the_target "Wow... [the_loser.name] you've really been practicing that, haven't you?"
+        the_target "Wow... [the_loser.fname] you've really been practicing that, haven't you?"
         "A moaning affirmative is the only thing that escapes [the_loser.title]'s mouth as her tongue licks all around your balls."
         "You realize that you are going to cum fast. You'd better get to work!"
         "You eagerly lick up and down [the_target.title]'s slit, running circles around her clit for a few seconds in between strokes."
@@ -873,7 +873,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
     the_target "Ohhh god, that's it [the_target.mc_title]. Your tongue feels so good!"
     if face_fuck:
         "[the_target.possessive_title] mercilessly fucks her gaming buddy's face with your cock. Once in a while you feel her gag around you, and the twitching feels amazing."
-        the_target "Look up at me [the_loser.name]. I want you to look at me this time."
+        the_target "Look up at me [the_loser.fname]. I want you to look at me this time."
         "[the_loser.title] pulls off for a second, sputtering and catching her breath. After a second to catch her breath, her hot mouth slowly works its way down your cock again."
         "You feel your hips buck a little, her tight throat feels incredible."
     else:
@@ -892,7 +892,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         "[the_loser.possessive_title] is trying her best to suck you off, but clearly does not have much experience. At one point she rakes her teeth up the underside, causing you to flinch."
         mc.name "Mff! Hey!"
         "You cry out, but it is muffled by [the_target.possessive_title]'s cunt."
-        the_target "Whoa, easy there [the_loser.name]! No teeth!"
+        the_target "Whoa, easy there [the_loser.fname]! No teeth!"
         the_loser "What?"
         the_target "The poor guy is sensitive down there, don't use teeth!"
         the_loser "Ah... right..."
@@ -1087,7 +1087,7 @@ label myra_alexia_teamup_scene_scene_3(the_group, scene_transition = False):  #S
         the_loser "No! I can't believe I lost!"
         "She shakes her head in disbelief."
         the_loser "Well, how are we going to do this?"
-        the_target "[the_target.mc_title], what if like... we don't HAVE to leave [the_loser.name] hanging?"
+        the_target "[the_target.mc_title], what if like... we don't HAVE to leave [the_loser.fname] hanging?"
         mc.name "Have something in mind?"
         the_target "I mean, we could like, sixty nine, and then you could fuck me right in front of her!"
         the_loser "Ohhh, wow that sounds nice..."
@@ -1239,7 +1239,7 @@ label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    
     mc.name "I think I'm done for tonight."
     #Best dialogue if you came for each girl atleast once.
     if (ask_harem_requirement(myra) and (ask_harem_requirement(alexia) or alexia.has_role(harem_role))):
-        myra "You know, setting up gaming night with you and [alexia.name] is probably the best thing I've done since I opened this cafe."
+        myra "You know, setting up gaming night with you and [alexia.fname] is probably the best thing I've done since I opened this cafe."
         alexia "Yeah, it has been great."
         myra "I know we're both dating [myra.mc_title]... but honestly, I don't even mind it."
         myra "I actually... kind of like it, to be honest."
@@ -1249,7 +1249,7 @@ label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    
         mc.name "You two, and me. We have a lot of love to share. There's no reason we can't all be a part of something bigger."
         mc.name "I want us to be part of a strong and healthy polyamorous relationship. The three of us. And more."
         myra "I honestly never thought I would be in a relationship like this... but somehow, it just feels so right."
-        myra "I'll do it. As long as [alexia.name] does too!"
+        myra "I'll do it. As long as [alexia.fname] does too!"
         $ myra.add_role(harem_role)
         if alexia.has_role(harem_role):
             alexia "I umm... well I already decided to do that, so yeah, I'm in!"
@@ -1324,7 +1324,7 @@ label myra_alexia_teamup_trans_scene_1(the_group):
     mc.name "As much as I enjoy rubbing your backs for an entire evening, I'd like to expand it some, to a full upper body massage."
     "[the_person.title] starts to roll her eyes."
     alexia "Sounds good to me!"
-    the_person "[alexia.name]... he just wants to feel us up!"
+    the_person "[alexia.fname]... he just wants to feel us up!"
     alexia "Yeah... so?"
     the_person "So? You... you're okay with that?"
     alexia "Yeah, why not?"
@@ -1338,7 +1338,7 @@ label myra_alexia_teamup_trans_scene_1(the_group):
     mc.name "Whoever the winner is, I'll get her off while the loser goes to make snacks."
     "[the_person.title] looks exasperated."
     alexia "Yeah! Let's do it!"
-    the_person "You know what? Fuck it. Let's do it. No mercy though [alexia.name]!"
+    the_person "You know what? Fuck it. Let's do it. No mercy though [alexia.fname]!"
     alexia "Bring it bitch!"
     return
 
@@ -1367,12 +1367,12 @@ label myra_alexia_teamup_trans_scene_2(the_group):
     the_person "There it is."
     "[the_person.title] starts to roll her eyes."
     alexia "That sounds reasonable to me."
-    the_person "[alexia.name]... what!?!"
+    the_person "[alexia.fname]... what!?!"
     alexia "I mean, guys jack off all the time, right? I'm sure he can use his own hand with more skill than we have."
     the_person "That's not the point..."
     alexia "Besides, his tongue is even better than has fingers..."
     "[the_person.title] stops her protest."
-    the_person "[alexia.name]... how would you even know..."
+    the_person "[alexia.fname]... how would you even know..."
     "Suddenly, [alexia.possessive_title] realizes what she said."
     alexia "I mean, he probably does... that's how sex is, right? It get's better like..."
     "[alexia.title] is rambling, trying to come up with a good excuse for why she knows what your tongue feels like."
@@ -1380,7 +1380,7 @@ label myra_alexia_teamup_trans_scene_2(the_group):
     alexia "If you WIN, you mean!"
     the_person "WHEN I win!"
     alexia "Not a chance!"
-    the_person "You know what? Fuck it. Let's do it. No mercy though [alexia.name]!"
+    the_person "You know what? Fuck it. Let's do it. No mercy though [alexia.fname]!"
     alexia "Bring it bitch!"
     "Oh my god, you did it. You can't wait to blow your load into one of these two girl's mouths."
     return

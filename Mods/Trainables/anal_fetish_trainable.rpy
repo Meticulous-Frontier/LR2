@@ -68,7 +68,7 @@ label train_anal_fetish_label(the_person):
                 "Slide in a second finger":
                     "You lube up a second finger with your saliva and push both fingers inside."
                     the_person "Ahhh... YES... stretch my dirty hole [the_person.mc_title]."
-                    mc.name "You are going to be my slutty anal bitch, aren't you [the_person.name]?"
+                    mc.name "You are going to be my slutty anal bitch, aren't you [the_person.fname]?"
                     the_person "Yes... I will... hmmm... right there..."
                     "You continue to shove your fingers up her bum, until her [the_person.pubes_description] pussy gets really wet."
 

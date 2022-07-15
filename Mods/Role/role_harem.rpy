@@ -31,10 +31,6 @@ init 1 python:
             return "Requires: be your girlfriend"
         return True
 
-    #only for save compatibility (remove next version)
-    def harem_ask_leave_SO_requirement(the_person):
-        return False
-
     def harem_break_up_requirement(the_person):
         if the_person.home == harem_mansion:
             return False
@@ -106,8 +102,6 @@ init 1 python:
     # - so you can make a relationship dependant on polycules = ie Emily will do threesome with mc and Sarah, but doesn't like others that way
     # - could use the relationship structure to define polycules between persons in the harem?
     # harem_role/cousin/aunt when they are girlfriend and added to the poly they get the generic girlfriend role, this is just to keep things tied up
-    # ALSO DEFINED IN COMPATIBILITY FIX FOR OLD SAVE COMPATIBILITY
-    # harem_role = Role("Girlfriend in Polyamory", get_harem_role_actions(), role_dates = get_harem_role_dates(), looks_like = girlfriend_role)
 
 label instantiate_harem_role():
     python:

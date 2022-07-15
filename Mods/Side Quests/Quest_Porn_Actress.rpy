@@ -136,7 +136,7 @@ label quest_porn_actress_intro_label():
 
     "You get up to stretch your legs for a bit and to check on the different departments, making sure everything is running smoothly."
     "As you pass by the break room, you overhear something."
-    the_person_one "Oh my... is that really [the_person.name]? It looks just like her... That's what the other girls are saying!"
+    the_person_one "Oh my... is that really [the_person.fname]? It looks just like her... That's what the other girls are saying!"
     the_person_two "Wow, I think it is! If not it's her twin sister!"
     "You walk into the break room."
     $ scene_manager = Scene() # make sure we have a clean scene manager
@@ -145,7 +145,7 @@ label quest_porn_actress_intro_label():
     "You see [the_person_one.possessive_title] and [the_person_two.title] looking at a phone. The sound of erotic moaning is coming from the phone."
     "[the_person_one.title] notices you walk in."
     the_person_one "Oh hey [the_person_one.mc_title]. Have you seen this?"
-    the_person_two "Yeah, it looks just like [the_person.name]!"
+    the_person_two "Yeah, it looks just like [the_person.fname]!"
     "[the_person_one.title] turns the phone to you. It is a porn video of a woman who looks exactly like [the_person.title]. She is taking a cock like a champ doggy style."
     "... And sounds suspiciously like [the_person.title]..."
     "... Wow, that has to be her!"

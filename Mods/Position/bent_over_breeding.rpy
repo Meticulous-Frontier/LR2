@@ -34,7 +34,7 @@ label intro_bent_over_breeding(the_girl, the_location, the_object):
     else:
         the_girl "Oh thank god, I've been daydreaming about getting filled up all day long."
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = bent_over_breeding.position_tag, visible_enough = True, prefer_half_off = True)
 

@@ -85,6 +85,8 @@ init 5 python:
     def allow_promote_to_manager_requirement(person):
         if get_strip_club_foreclosed_stage() < 5:
             return False
+        if person.is_employee() or person in [mom, lily, aunt, nora]:
+            return False
         if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role]) and not strip_club_get_manager():
             # if person.age < 25: # As requested from a lot of people to hire Gabrielle as manager
                 # return "Requires: age >= 25"
@@ -117,8 +119,14 @@ init 5 python:
         if person.is_employee() or person in [lily, aunt, mom, nora]:    # moonlighting
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule(job.job_location, the_times = [4])
-            person.add_role(job.job_role)
-            stripclub_strippers.append(person)
+            for role in job.job_roles:
+                person.add_role(role)
+                if role == stripclub_stripper_role:
+                    stripclub_strippers.append(person)
+                elif role == stripclub_waitress_role:
+                    stripclub_waitresses.append(person)
+                elif role == stripclub_bdsm_performer_role:
+                    stripclub_bdsm_performers.append(person)
         else:
             person.event_triggers_dict["strip_club_shifts"] = 2
             person.change_job(job, job_known = True)
@@ -134,14 +142,17 @@ init 5 python:
     def fire_stripper(person):
         if person.is_employee() or person in [lily, aunt, mom, nora]:   # moonlighting
             person.set_schedule(person.home, the_times = [4])
-            person.remove_role([stripclub_stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role])
-            stripclub_strippers.remove(person)
+            for role in [stripclub_stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role]:
+                person.remove_role(role)
+            if person in stripclub_strippers:
+                stripclub_strippers.remove(person)
+            if person in stripclub_bdsm_performers:
+                stripclub_bdsm_performers.remove(person)
+            if person in stripclub_waitresses:
+                stripclub_waitresses.remove(person)
         else:
             person.quit_job()
         return
-
-    def stripper_replace_enhanced(person):  # save compatibility
-        stripper_replace(person)
 
     def stripper_quit(person): # on_quit function called for strippers to make sure there's always someone working at the club. Also removes them from the list of dancers
         if person in stripclub_strippers:
@@ -151,7 +162,8 @@ init 5 python:
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
     strip_club_stripper_performance_review_action = Action("Review her performance", strip_club_review_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
 
-    stripclub_stripper_role = Role("Stripper", get_stripper_role_actions() + [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action], hidden = True)
+    stripclub_stripper_role = Role("Stripper", get_stripper_role_actions() + [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action],
+        on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
 
 
 label update_strip_club_show_requirement(stack):

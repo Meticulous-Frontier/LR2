@@ -172,7 +172,7 @@ init 2 python:
     ophelia_revenge_date =  Action("Date with Ophelia",  ophelia_revenge_date_requirement, "ophelia_revenge_date_label")
     ophelia_revenge_aftermath = Action("Talk about what happened", ophelia_revenge_aftermath_requirement, "ophelia_revenge_aftermath_label")
     ophelia_is_over_her_ex =  Action("Ophelia finally moves on",  ophelia_is_over_her_ex_requirement, "ophelia_is_over_her_ex_label")
-    ophelia_talk_about_candace =  Action("Talk about [candace.name]",  ophelia_talk_about_candace_requirement, "ophelia_talk_about_candace_label", menu_tooltip = "Tread carefully, this will be a sore subject")
+    ophelia_talk_about_candace =  Action("Talk about [candace.fname]",  ophelia_talk_about_candace_requirement, "ophelia_talk_about_candace_label", menu_tooltip = "Tread carefully, this will be a sore subject")
     ophelia_increased_service_begin = Action("Ophelia increases services",  ophelia_increased_service_begin_requirement, "ophelia_increased_service_begin_label")
     ophelia_choose_service_test = Action("Pick employee for salon visit",ophelia_choose_service_test_requirement ,"ophelia_choose_service_test_label", menu_tooltip = "Select a girl you want to have her hair and pubic hair cut and styled")
     ophelia_add_service_full_body_massage = Action ("Ophelia wants to do massages", ophelia_add_service_full_body_massage_requirement, "ophelia_add_service_full_body_massage_label")
@@ -213,7 +213,7 @@ label ophelia_gets_dumped_label(the_person):
     "?????" "Well, obviously that isn't going to happen anymore."
     "It looks like [the_person.title] is struggling to hold back tears."
     the_person "I don't... I thought you were the one! 8 months we've been dating... And now... it's over?"
-    "?????" "I'm sorry. I need to get going. Take care [the_person.name]."
+    "?????" "I'm sorry. I need to get going. Take care [the_person.fname]."
     "The man turns and walks off. [the_person.possessive_title] is in shock."
     $ the_person.change_happiness(-50)
     $ the_person.event_triggers_dict["dump_witnessed"] = 1
@@ -519,7 +519,7 @@ label ophelia_blowjob_pics_review_label(the_person):
     the_person "OH SHIT, sorry, wrong person."
     ex_name "Just happy for you that you found someone."
     the_person "Well, he's just a friend. Remember when I used to do that for you?"
-    ex_name "[the_person.name]... this isn't funny."
+    ex_name "[the_person.fname]... this isn't funny."
     the_person "What? It's nothing serious, you should come over tomorrow, I'll do the same for you."
     ex_name "I'm sorry, this is getting out of control. I'm sorry, but I'm blocking you."
     the_person "Wow, after everything we've been through together? \n \'message not received\'"
@@ -660,7 +660,7 @@ label ophelia_revenge_date_label():
     "They?"
     "As you consider what she said, the last person between you and the host walks towards their table."
     "Host" "Hello there. Reservations?"
-    the_person "Yes! Under [the_person.name]."
+    the_person "Yes! Under [the_person.fname]."
     "Host" "I see. Right this way then."
     "You walk into the restaurant. You get led past several dining guests, eventually to an empty table set for two."
     "You pull out [the_person.title]'s chair. When she sits down you push it in for her."
@@ -901,7 +901,7 @@ label ophelia_talk_about_candace_label(the_person):
     the_person "Concerned? Honey, me and him are over, there's no reason for you to be concerned."
     mc.name "For you, sure."
     the_person "Then for who? And how did you learn more about [ex_name], anyway?"
-    mc.name "Well, you see, I've been talking a little with the girl he is dating, [candace.name]."
+    mc.name "Well, you see, I've been talking a little with the girl he is dating, [candace.fname]."
     $ the_person.draw_person(emotion = "angry")
     the_person "What the fuck? That two timing hussy? What the fuck have you been talking to her for?"
     mc.name "Just hear me out! You know how you said she is, well, dumb as a bag of rocks?"
@@ -917,7 +917,7 @@ label ophelia_talk_about_candace_label(the_person):
     the_person "Taking advantage? Like how?"
     mc.name "Well, I found out, he is crazy controlling in their relationship. He controls everything from how she dresses to where she goes and what she does for fun."
     the_person "That... actually sounds a bit like him. He never did like it that I like to go camping and hiking on my days off by myself. Said I was probably out cheating on him."
-    mc.name "Yeah... about that... that is called projection. It turns out he was dating [candace.name] while you two were also still together."
+    mc.name "Yeah... about that... that is called projection. It turns out he was dating [candace.fname] while you two were also still together."
     the_person "Yeah. To be honest, I had kind of come to the same conclusion."
     mc.name "I'm sorry."
     the_person "It's okay. So, I guess I can understand why you want to help her, what is the plan?"
@@ -1027,7 +1027,7 @@ label ophelia_choose_service_test_label():
         "[the_person.possessive_title] is looking around the salon, completely oblivious to your conversation with [salon_manager.title]."
     else:
         salon_manager "Oh! This is perfect! Hi I'm [salon_manager.name]."
-        the_person "[the_person.name], nice to meet you."
+        the_person "[the_person.fname], nice to meet you."
     salon_manager "I have a private room all set up for when a girl comes in looking for the full body hair cut style and dye. Let's head back there."
     "You and [the_person.title] follow [salon_manager.possessive_title] to the private room. It's a great setup, with a very comfy looking styling chair."
     salon_manager "When I open it, I plan to have wine coolers or mimosas I can offer, along with a hot towel."

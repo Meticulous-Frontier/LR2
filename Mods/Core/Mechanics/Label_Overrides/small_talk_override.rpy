@@ -39,6 +39,25 @@ init 5 python:
         opinion_list.insert(0, "Smalltalk")
         return opinion_list
 
+    def get_learned_opinion(person):
+        # remove randomness for dark chocolate opinion
+        if person.get_opinion_score("dark chocolate") != person.get_known_opinion_score("dark chocolate"):
+            opinion_learned = "dark chocolate"
+        else:
+            opinion_learned = person.get_random_opinion(include_known = True, include_sexy = person.effective_sluttiness() > 50)
+            retries = 0
+            while opinion_learned == the_person.event_triggers_dict.get("last_opinion_learned", "unknown") and retries < 3:
+                opinion_learned = person.get_random_opinion(include_known = True, include_sexy = person.effective_sluttiness() > 50)
+                retries += 1
+
+        talk_opinion_text = opinion_learned
+        if opinion_learned in opinions_talk_mapping:
+            talk_opinion_text = opinions_talk_mapping[opinion_learned]
+
+        return (opinion_learned, talk_opinion_text)
+
+
+
 label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = False):
     python:
         if apply_energy_cost:
@@ -67,18 +86,7 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
             else:
                 "She seems uncomfortable with making small talk, but after a little work you manage to get her talking."
 
-        python:
-            # remove randomness for dark chocolate opinion
-            if person.get_opinion_score("dark chocolate") != person.get_known_opinion_score("dark chocolate"):
-                opinion_learned = "dark chocolate"
-            else:
-                opinion_learned = person.get_random_opinion(include_known = True, include_sexy = person.effective_sluttiness() > 50)
-                while opinion_learned == the_person.event_triggers_dict.get("last_opinion_learned", "unknown"):
-                    opinion_learned = person.get_random_opinion(include_known = True, include_sexy = person.effective_sluttiness() > 50)
-            talk_opinion_text = opinion_learned
-            if opinion_learned in opinions_talk_mapping:
-                talk_opinion_text = opinions_talk_mapping[opinion_learned]
-
+        $ (opinion_learned, talk_opinion_text) = get_learned_opinion(person)
         if not opinion_learned is None:
             $ opinion_state = person.get_opinion_topic(opinion_learned)
             $ opinion_string = opinion_score_to_string(opinion_state[0])

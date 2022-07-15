@@ -208,6 +208,8 @@ init -1 python:
 
                 if not full_outfit: # fallback if we cannot find anything for our sluttiness or preferences
                     full_outfit = valid_wardrobe.pick_outfit_with_lowest_sluttiness()
+                    if not full_outfit:
+                        full_outfit = self.pick_outfit_with_lowest_sluttiness()
 
                 if full_outfit:
                     return full_outfit.get_copy()
@@ -229,9 +231,10 @@ init -1 python:
 
             if not uniform_under:
                 uniform_under = valid_wardrobe.pick_underwear_with_lowest_sluttiness()
+                if not uniform_under:
+                    uniform_under = self.pick_underwear_with_lowest_sluttiness()
 
             if not uniform_under:
-                # renpy.say(None, "Unable to find underwear in uniform wardrobe, pick any underwear from personal wardrobe.")
                 uniform_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets", swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
 
         else:
@@ -240,9 +243,10 @@ init -1 python:
 
             if not uniform_under:
                 uniform_under = valid_wardrobe.pick_underwear_with_lowest_sluttiness()
+                if not uniform_under:
+                    uniform_under = self.pick_underwear_with_lowest_sluttiness()
 
             if not uniform_under:
-                # renpy.say(None, "Unable to find underwear in uniform wardrobe, pick any underwear from personal wardrobe.")
                 uniform_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets", swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
 
             if uniform_under:
@@ -254,14 +258,14 @@ init -1 python:
 
             if not uniform_over:
                 uniform_over = valid_wardrobe.pick_overwear_with_lowest_sluttiness()
+                if not uniform_over:
+                    uniform_over = self.pick_overwear_with_lowest_sluttiness()
 
             if not uniform_over:
-                # renpy.say(None, "Unable to find overwear in uniform wardrobe, pick any underwear from personal wardrobe.")
                 uniform_over = generate_random_appropriate_outfit(person, outfit_type = "OverwearSets", swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
 
         #At this point we have our under and over, if at all possible.
         if not uniform_over or not uniform_under:
-            # renpy.say(None, "Failed to find any combined uniform, select generic outfit.")
             # Something's gone wrong and we don't have one of our sets. Last attempt on getting a full outfit from any wardrobe.
             return generate_random_appropriate_outfit(person, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
 

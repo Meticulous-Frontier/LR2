@@ -27,7 +27,7 @@ init python:
 label intro_anal_on_lap(the_girl, the_location, the_object):
     "You sit down on the [the_object.name] and motion [the_person.possessive_title] over to you. You turn her around so her ass is facing you."
 
-    if not the_girl.vagina_available():
+    if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = "back_peek", visible_enough = True, prefer_half_off = True)
 

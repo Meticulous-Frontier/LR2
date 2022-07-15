@@ -6,7 +6,7 @@ init 2 python:
     def clone_rent_apartment_requirement(person):
         if not person.home is dungeon:
             return False
-        if  not mc.business.has_funds(25000):
+        if not mc.business.has_funds(25000):
             return "Requires: $25,000"
         return person.home is dungeon
 
@@ -31,7 +31,7 @@ label clone_recall_label(the_person):
 
 label clone_rent_apartment_label(the_person):
     $ the_person.draw_person()
-    mc.name "Listen, [the_person.name], you are very dear to me and I have decided that you are mature enough to live on your own."
+    mc.name "Listen, [the_person.fname], you are very dear to me and I have decided that you are mature enough to live on your own."
     mc.name "So I am willing to rent you a place where you can live by yourself."
     the_person "Please [the_person.mc_title], I love being with you, do I really have to go?"
     menu:
@@ -50,7 +50,7 @@ label clone_rent_apartment_label(the_person):
                 mc.business.change_funds(-25000)
                 the_person.set_schedule(None, the_times = [1,2,3])
 
-            "You make all the necessary arrangements, your clone [the_person.name] will now stay at her own place at night and live her life."
+            "You make all the necessary arrangements, your clone [the_person.fname] will now stay at her own place at night and live her life."
 
     $ clear_scene()
     return

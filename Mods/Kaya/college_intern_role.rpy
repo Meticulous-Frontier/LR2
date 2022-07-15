@@ -83,6 +83,9 @@ init 1 python:
                 a_candidate.discover_opinion(a_candidate.get_random_opinion(include_known = False, include_sexy = False),add_to_log = False) #Get a random opinion and reveal it.
         return candidates
 
+    def college_intern_quit(person):
+        person.remove_role(college_intern_role)
+        return
 
 init 2 python:
     hire_new_college_intern = Action("Hire new intern", hire_new_college_intern_requirement, "hire_new_college_intern_label")   #TODO tooltip
@@ -98,15 +101,15 @@ label unlock_college_interns():
         college_intern_role = Role("College Intern", actions = [college_intern_training, college_intern_duty_set_action], hidden = True, on_turn = college_intern_on_turn, on_move = college_intern_on_move, on_day = college_intern_on_day)
 
         student_intern_rd_job = Job("Student (Biology)", generic_student_role, job_location = university, work_times = [1,2],
-            mandatory_duties = [research_work_duty], available_duties = [] + general_duties_list + general_rd_duties)
+            mandatory_duties = [research_work_duty], available_duties = [] + general_duties_list + general_rd_duties, quit_function = college_intern_quit)
         student_intern_production_job = Job("Student (Chemistry)", generic_student_role, job_location = university, work_times = [1,2],
-            mandatory_duties = [production_work_duty], available_duties = [] + general_duties_list + general_production_duties)
+            mandatory_duties = [production_work_duty], available_duties = [] + general_duties_list + general_production_duties, quit_function = college_intern_quit)
         student_intern_market_job = Job("Student (Graphic Design)", generic_student_role, job_location = university, work_times = [1,2],
-            mandatory_duties = [market_work_duty], available_duties = [] + general_duties_list + general_market_duties)
+            mandatory_duties = [market_work_duty], available_duties = [] + general_duties_list + general_market_duties, quit_function = college_intern_quit)
         student_intern_hr_job = Job("Student (Psychology)", generic_student_role, job_location = university, work_times = [1,2],
-            mandatory_duties = [hr_work_duty], available_duties = [] + general_duties_list + general_hr_duties)
+            mandatory_duties = [hr_work_duty], available_duties = [] + general_duties_list + general_hr_duties, quit_function = college_intern_quit)
         student_intern_supply_job = Job("Student (Business)", generic_student_role, job_location = university, work_times = [1,2],
-            mandatory_duties = [supply_work_duty], available_duties = [] + general_duties_list + general_supply_duties)
+            mandatory_duties = [supply_work_duty], available_duties = [] + general_duties_list + general_supply_duties, quit_function = college_intern_quit)
 
         mc.business.college_interns_unlocked = True
         if hire_new_college_intern not in nora_role.actions:

@@ -47,7 +47,7 @@ label aunt_drunk_cuddle_label():
     mc.name "Sure thing."
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     "You pour two glasses of water and hand one to [the_person.possessive_title]."
-    the_person "It has been so nice of your family to let me and [cousin.name] stay here for a bit. I hope we haven't been too much of a bother?"
+    the_person "It has been so nice of your family to let me and [cousin.fname] stay here for a bit. I hope we haven't been too much of a bother?"
     mc.name "Of course not. You are family, and honestly it is nice having you close by."
     the_person "That's sweet of you to say. Well, goodnight!"
     mc.name "Night."
@@ -212,7 +212,7 @@ label aunt_drunk_cuddle_label():
     "You notice as you walk past them to the coffee pot, your aunt is sneaking looks your way. Her cheeks a little rosey and blushed."
     $ mc.change_locked_clarity(5)
     "You pour yourself a cup and lean against the counter. The two sisters are chatting about plans for a bit, when suddenly [mom.possessive_title] stands up."
-    mom "Well, I need to head out. Good luck with the apartment [aunt.name]!"
+    mom "Well, I need to head out. Good luck with the apartment [aunt.fname]!"
     the_person "Thank you! I'm sure we'll be out of here soon."
     $ scene_manager.update_actor(mom, position = "walking_away")
     "As [mom.possessive_title] leaves the room, an awkward silence ensues."

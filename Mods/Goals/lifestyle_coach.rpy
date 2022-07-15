@@ -55,7 +55,7 @@ label lifestyle_coach_intro_label(the_person):
     "As you walk around, you spot a kiosk that catches your attention."
     "Lifestyle Coaches: We help you set and achieve long term and short term goals!"
     "You walk around the kiosk a bit, there are all kinds of testimonials and adverts up for the service."
-    the_person "Hello there! I'm [the_person.name]."
+    the_person "Hello there! I'm [the_person.fname]."
     $ scene_manager.add_actor(the_person)
     mc.name "I'm [mc.name]."
     $ the_person.set_title(the_person.name)

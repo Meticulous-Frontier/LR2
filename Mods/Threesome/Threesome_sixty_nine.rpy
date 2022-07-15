@@ -92,6 +92,10 @@ init 2 python:
 
 label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "[the_girl_1.title] smiles and agrees."
+    if not the_girl_1.vagina_visible():
+        "[the_girl_1.title] quickly moves some clothing out of the way..."
+        $ the_girl_1.strip_to_vagina(position = Threesome_sixty_nine.position_one_tag, display_transform = Threesome_sixty_nine.p1_transform, visible_enough = True, prefer_half_off = True)
+
     if the_girl_1.has_breeding_fetish():
         the_girl_1 "Mmm, I can't wait to feel your raw cock sliding into me..."
     elif the_girl_1.has_cum_fetish():
@@ -109,6 +113,11 @@ label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
         the_girl_2 "Sounds good! [the_girl_1.name] could you move your tongue into my little sphincter too, that would drive me wild..."
     else:
         the_girl_2 "Sounds good! Don't forget to change it up once in a while... I'd be glad to take a turn sucking you off..."
+
+    if not the_girl_2.vagina_visible():
+        "[the_girl_2.title] quickly moves some clothing out of the way..."
+        $ the_girl_2.strip_to_vagina(position = Threesome_sixty_nine.position_two_tag, display_transform = Threesome_sixty_nine.p2_transform, visible_enough = True, prefer_half_off = True)
+
     "[the_girl_2.title] climbs on top of [the_girl_1.title] and slowly lowers her pussy down onto her face. She moans as [the_girl_1.title] starts to lick between her legs."
     "You get down on your knees and spread [the_girl_1.title]'s legs. You position your hips in line with hers and move your cock along her slit."
     if the_girl_2.arousal > 60:

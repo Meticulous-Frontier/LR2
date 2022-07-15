@@ -68,7 +68,7 @@ label mom_breakfast_action_label_low():
             $ the_person.change_stats(happiness = 2, love = 5)
 
         "Emphasize Happiness": #This will increase happiness (duh)
-            mc.name "I'm sorry work is such a pain. Just think about the weekend coming up, maybe you and [lily.title] can go shopping or something?"
+            mc.name "I'm sorry work is such a pain. Just think about the weekend coming up, maybe you and [lily.fname] can go shopping or something?"
             "Your kind words bring a smile to her face."
             $ scene_manager.update_actor(the_person, position = "sitting", emotion="happy")
             the_person "Thank you, [the_person.mc_title], for your kind words. You and your sister mean so much to me, it's a good reminder why I do what I do sometimes."
@@ -166,14 +166,14 @@ label mom_breakfast_action_label_medium():
                         "Finish Massage":
                             "You decide for now just to tease her. You pet her through her clothes for a minute longer then stop, kissing her on her neck."
                             "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
-                            mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
+                            mc.name "Don't want to go too far, [lily.fname] could walk out at any moment..."
                             "She shakes her head for a moment, trying to clear her thoughts, but it is obvious her mind continues to dwell on how it could go if you had kept going..."
                             $ the_person.change_stats(obedience = 5)
                             return "Advance Time"
                 "Finish Massage":
                     "You pinch and pull at her nipples for a few more minutes, but eventually you decide just to tease her for now."
                     "[the_person.title] looks at you as you sit down, arousal clear in her eyes."
-                    mc.name "Don't want to go too far, [lily.name] could walk out at any moment..."
+                    mc.name "Don't want to go too far, [lily.fname] could walk out at any moment..."
                     $ the_person.change_stats(obedience = 5)
                     return "Advance Time"
                 "Finger Her" if the_person.sluttiness > 50 and the_person.outfit.vagina_available() and not the_person.has_taboo("touching_vagina"):
@@ -254,7 +254,7 @@ label mom_breakfast_action_label_high():
     the_person "Oh! We'd better go quick, your sister could come out at any time..."
 
     if mc.business.event_triggers_dict.get("family_threesome", False) == True:
-        mc.name "Why does it matter if [lily.name] comes out?"
+        mc.name "Why does it matter if [lily.fname] comes out?"
         the_person "Well, I mean it's not that I mind, but your mommy has needs [the_person.mc_title]..."
         menu:
             "Insist [lily.title] join you" if willing_to_threesome(the_person, lily) and lily.is_available:
@@ -330,7 +330,7 @@ label mom_breakfast_action_label_high():
         $ ClimaxController.manual_clarity_release(climax_type = "anal", the_person = the_person)
 
         "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
-        the_person "Oh god... [lily.name] could walk out any second!"
+        the_person "Oh god... [lily.fname] could walk out any second!"
         $ scene_manager.update_actor(the_person, position = "walking_away")
         "[the_person.title] quickly gets up and hurries away. She calls back before she gets to her room."
         the_person "I love you, have a good day at work!"
@@ -360,7 +360,7 @@ label mom_breakfast_action_label_high():
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
 
     "As her orgasm subsides, [the_person.possessive_title] suddenly returns to her senses."
-    the_person "Oh god... [lily.name] could walk out any second!"
+    the_person "Oh god... [lily.fname] could walk out any second!"
     $ the_person.apply_planned_outfit()
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     "She quickly gets up and puts her clothes back on, leaning close to your ear."

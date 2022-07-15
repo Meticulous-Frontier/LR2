@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<Wardrobe name="Exported_Wardrobe">
+<Wardrobe name="Mistress_Wardrobe">
     <FullSets>
         <Outfit name="Mistress_1">
             <UpperBody>
@@ -92,7 +92,7 @@
                 <Item alpha="0.8" blue="0.36" green="0.92" name="Colourful_Bracelets" red="0.98" />
                 <Item alpha="0.8" blue="0.36" green="0.92" name="Copper_Ring_Set" red="0.98" />
             </Accessories>
-        </Outfit>	
+        </Outfit>
     </FullSets>
     <UnderwearSets />
     <OverwearSets />

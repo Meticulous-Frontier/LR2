@@ -145,6 +145,12 @@ init -1 python:
 
 #Additional Camilla Functions
 init 2 python:
+    def camilla_wear_salsa_dress():
+        salsa_dress = camilla.wardrobe.get_outfit_with_name("Camilla Sexy Salsa Outfit")
+        if salsa_dress:
+            camilla.apply_outfit(salsa_dress)
+        return
+
     def get_camilla_lingerie_set_white():
         outfit = Outfit("Lingerie Set Classic White")
         outfit.add_upper(teddy.get_copy(),colour_white)
@@ -222,7 +228,7 @@ label camilla_get_a_drink_label(the_person):
             if renpy.random.randint(0,100) < ran_num:  #Success
                 the_person "Hmm... Okay! That sounds great! I'll go find us a table!"
                 "You head over to the bar and order yourself a beer, and a cocktail for [the_person.title]."
-                the_person.SO_name "Here you go, one beer, and a cocktail for the beautiful [the_person.name]."
+                the_person.SO_name "Here you go, one beer, and a cocktail for the beautiful [the_person.fname]."
                 "Sounds like the bartender knows [the_person.title] pretty well. She must be in here often!"
                 "The place is busy, so it's easy to slip some serum into her drink."
                 call give_serum(the_person) from _call_give_serum_camilla_01
@@ -379,6 +385,7 @@ label camilla_get_a_drink_label(the_person):
 
 label camilla_dance_lessons_label():
     $ the_person = camilla
+    $ camilla_wear_salsa_dress()
     $ scene_manager = Scene()
     "It's Wednesday night, and you have a date with [the_person.possessive_title] at the bar to learn salsa dancing."
     $ mc.change_location(downtown_bar)
@@ -938,6 +945,8 @@ label camilla_her_place_label():
         the_person "Oh... [the_person.SO_name], I've been a bad girl... what are you gonna do with those handcuffs?"
         "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dressed and quietly excuse yourself from the bedroom."
     $ clear_scene()
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
     "You make your way back home. You can hardly believe your luck, fucking [the_person.title] in her house, in front of her husband, who is also the bartender!"
     $ perk_system.add_stat_perk(Stat_Perk(description = "Fucking Camilla in front of her husband has made you feel more charismatic.", cha_bonus = 1, bonus_is_temp = False), "Camilla Charisma Bonus")
     $ mc.change_location(bedroom)
@@ -1206,7 +1215,7 @@ label camilla_lingerie_help_label(the_person):  #40
     $ the_person.draw_person(position = "sitting")
     "You snap a few more pictures of [the_person.possessive_title] as she sits on the bench, showcasing her long, sexy legs."
     "Suddenly, you are struck by just how picture perfect she really is. Long legs, nice tits, and her tanned skin gives her an exotic appearance."
-    mc.name "[the_person.name]... have you ever thought about shooting some professional pictures?"
+    mc.name "[the_person.fname]... have you ever thought about shooting some professional pictures?"
     the_person "Umm... you mean like... modeling?"
     mc.name "Not necessarily modeling... but like, boudoir photos? You really do have the body for it."
     $ the_person.change_stats(slut = 1, max_slut = 60, love = 2, max_love = 80)
@@ -1339,7 +1348,7 @@ label camilla_formal_date_label():    #60
     the_person "And, well, they've been fucking around for a LOT longer than we have..."
     the_person "But that hey! It's okay right? We're all in the lifestyle together now right?"
     the_person "She pointed out her husband. Asked if I was interested. I said maybe, but honestly I just got sick to my stomach."
-    mc.name "[the_person.name]... I'm sorry..."
+    mc.name "[the_person.fname]... I'm sorry..."
     $ the_person.change_stats(happiness = -5, love = 2, max_love = 80)
     the_person "It's ok. You didn't have anything to do with it. I just... I just don't understand, why he kept it all a secret from me... you know?"
     "[the_person.title] turns away for a second and wipes her eyes."

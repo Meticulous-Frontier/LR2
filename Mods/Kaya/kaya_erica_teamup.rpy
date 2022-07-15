@@ -190,7 +190,7 @@ label kaya_erica_teamup_intro_2(the_group):
     $ scene_manager = Scene()
     $ scene_manager.add_actor(kaya, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(erica, position = "sitting")
-    kaya "Hey! [erica.name] he's here!"
+    kaya "Hey! [erica.fname] he's here!"
     erica "Hey! I figured you would come!"
     mc.name "Sounds like you girls are working hard."
     kaya "Yeah, we were just talking about how we were kind of hoping you would swing by tonight..."
@@ -223,7 +223,7 @@ label kaya_erica_teamup_intro_3(the_group):
     $ scene_manager = Scene()
     $ scene_manager.add_actor(kaya, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(erica, position = "sitting")
-    kaya "Hey! [erica.name] he's here!"
+    kaya "Hey! [erica.fname] he's here!"
     erica "Hey! I was really hoping you would make it out tonight..."
     mc.name "Sounds like you girls are working hard."
     kaya "Yeah! Having you here helps us study nice and hard..."
@@ -883,7 +883,7 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
     if _return:
         $ correct_count += 1
         $ kaya_count += 1
-        erica "Yes! Good one [kaya.name]!"
+        erica "Yes! Good one [kaya.fname]!"
     else:
         kaya "Noooo! I swear I had it..."
         mc.name "Definitely not."
@@ -903,7 +903,7 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
     if _return:
         $ correct_count += 1
         $ kaya_count += 1
-        erica "Yes! Way to go [kaya.name]!"
+        erica "Yes! Way to go [kaya.fname]!"
     else:
         kaya "Noooo! I swear I had it..."
         mc.name "Definitely not."
@@ -969,7 +969,7 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
     elif correct_count == 3:
         mc.name "Alright, you got three out of four. How do you girls want to do this?"
         if kaya_count == 2:
-            erica "Well, [kaya.name] got both of hers right... I say we should just focus on her!"
+            erica "Well, [kaya.fname] got both of hers right... I say we should just focus on her!"
             kaya "That's okay, you really don't have..."
             "You stand up."
             mc.name "Excellent plan, let's reward [kaya.title] for doing such a good job!"
@@ -983,7 +983,7 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
                 $ kaya.change_stats(happiness = 5, love = 5, obedience = 5)
                 "Eventually, she starts to recover."
         else:
-            kaya "Well, [erica.name] got both of hers right... we should make her cum like crazy!"
+            kaya "Well, [erica.fname] got both of hers right... we should make her cum like crazy!"
             erica "That's okay, you really don't have..."
             "You stand up."
             mc.name "Excellent plan, let's reward [erica.title] for doing such a good job!"
@@ -1134,14 +1134,14 @@ label kaya_erica_trans_scene_4(the_group):
     mc.name "Oh... umm... I guess I'll just have to fuck you both."
     kaya "Ha! Yeah right. Can you even keep up with two college girls at the same time?"
     erica "Ummm, yeah... yeah he probably can..."
-    erica "We've been working out a lot together. He has some pretty serious stamina [kaya.name]..."
+    erica "We've been working out a lot together. He has some pretty serious stamina [kaya.fname]..."
     "[erica.possessive_title]'s inflection makes it clear that by working out, she means having sex."
     kaya "Oh! Ah... I see."
     "The girls look at each other, but it is clear from their facial expressions that they both want to say yes, but are afraid to."
     "Finally, the silence breaks."
     kaya "I have another idea."
     "You are surprised, but she quickly continues."
-    kaya "[erica.name]... I don't want either of us to get left out. How about we work together... as a team?"
+    kaya "[erica.fname]... I don't want either of us to get left out. How about we work together... as a team?"
     kaya "You still have to fuck both of us no matter what."
     kaya "But if between the two of us, we got more right than we got wrong, WE get to pick the postion? If we don't, you get to use us both however you want."
     if not kaya.outfit.vagina_visible():
@@ -1149,7 +1149,7 @@ label kaya_erica_trans_scene_4(the_group):
         "As she finishes talking, you notice [kaya.title] is already stripping off her panties."
     "You can't believe it... [kaya.possessive_title] just suggested a mandatory threesome!"
     $ mc.change_locked_clarity(100)
-    erica "Ohhh... [kaya.name]. You are so sweet."
+    erica "Ohhh... [kaya.fname]. You are so sweet."
     erica "I'm down for that! What do you think [erica.mc_title]? I feel like no matter what happens it'll be a happy ending for you!"
     mc.name "Yes, I think those terms are acceptable. Let's get started!"
     if not erica.outfit.vagina_visible():

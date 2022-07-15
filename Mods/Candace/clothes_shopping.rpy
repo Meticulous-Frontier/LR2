@@ -142,7 +142,7 @@ label invite_to_clothes_shopping_label():
         $ the_person.change_location(mc.location)
         $ the_person.apply_outfit()
 
-        "You send a message to [the_person.name] about going clothes shopping."
+        "You send a message to [the_person.fname] about going clothes shopping."
         "After some time you get a response..."
         if the_person.obedience > 100:
             the_person "Okay! I'll meet you there [the_person.mc_title]!"

@@ -131,7 +131,7 @@ label myra_focus_progression_scene_intro_scene(the_group):
     "She easily pushes her team to control the center point, wiping the four enemy players in the process."
     the_person "This isn't working. Is that the best you can do?"
     "You desperately try to come up with something to talk about."
-    mc.name "So, where do you and [alexia.name] know each other from?"
+    mc.name "So, where do you and [alexia.fname] know each other from?"
     the_person "Ah, we used to live in the same neighborhood growing up. Our mom's were friends and we use to hang out a lot, even though I was older than her."
     the_person "Sometimes I would even babysit... SHIT."
     "[the_person.title] pushed for the far point, but her team held back, and she now finds herself in a 2v1 on the far point."
@@ -172,7 +172,7 @@ label myra_focus_progression_scene_intro_scene(the_group):
     the_person "You know, I think that might actually have worked..."
     mc.name "Yeah, but I mean about the other thing we talked about."
     the_person "What other thing?"
-    mc.name "Why don't you invite [alexia.name] to hang out sometime?"
+    mc.name "Why don't you invite [alexia.fname] to hang out sometime?"
     the_person "You know what? I'm going to. I'm going to call her right now."
     "[the_person.possessive_title] pulls out her phone. She dials her friend from her contacts."
     the_person "Hey girl! Yeah it's me. Hey, I was just wondering something..."
@@ -816,9 +816,6 @@ label myra_focus_training_encounter(the_person):
     $ encounter_num = renpy.random.randint(0,9) #In approximate degree of difficulty
     $ encounter_won = False
     $ base_difficulty = myra_focus_progression_scene.get_stage() * 15
-    $ light_odds_string = "Light Distraction\n{color=ff0000}{size=18}" + str(myra_calc_encounter_odds(the_person, (encounter_num + 1) * 10, base_difficulty)) + "%% Chance{/size}{/color}"
-    $ med_odds_string = "Moderate Distraction\n{color=ff0000}{size=18}" + str(myra_calc_encounter_odds(the_person, (encounter_num + 1) * 10, base_difficulty + 20)) + "%% Chance{/size}{/color}"
-    $ large_odds_string = "Large Distraction\n{color=ff0000}{size=18}" + str(myra_calc_encounter_odds(the_person, (encounter_num + 1) * 10, base_difficulty + 40)) + "%% Chance{/size}{/color}"
     if encounter_num == 0:
         "[the_person.title] is pushing the middle. The other team seem distracted, presenting her team with a 2v4."
         "This should be an easy encounter for someone as skilled as [the_person.possessive_title]."
@@ -850,17 +847,15 @@ label myra_focus_training_encounter(the_person):
         "After her team splits between home and far, the enemy team looks to take the center point from [the_person.title]."
         "The odds are against her as she finds herself in a 3v1, she needs to survive long enough for teammates to clear their points and help."
     "As [the_person.title] engages, you consider her odds. How much do you want to distract her?"
-    #TODO distraction % strings
+
+    $ distraction_percentages = myra_calculate_success_percentages(the_person, encounter_num, base_difficulty)
     menu:
-        "Light distraction":
-            pass
+        "Light Distraction\n{color=ff0000}{size=18}[distraction_percentages[0]]%% Chance{/size}{/color}":
             call myra_focus_light_distraction(the_person) from _myra_focus_train_light_distr_01
-        "Moderate distraction":
-            pass
+        "Moderate Distraction\n{color=ff0000}{size=18}[distraction_percentages[1]]%% Chance{/size}{/color}":
             $ base_difficulty += 20
             call myra_focus_med_distraction(the_person) from _myra_focus_train_med_distr_01
-        "Large distraction":
-            pass
+        "Large Distraction\n{color=ff0000}{size=18}[distraction_percentages[2]]%% Chance{/size}{/color}":
             $ base_difficulty += 40
             call myra_focus_heavy_distraction(the_person) from _myra_focus_train_heavy_distr_01
 
@@ -1346,26 +1341,29 @@ label myra_focus_training_mc_orgasm(the_person):
     return
 
 init 4 python:
-    #Encounter difficulty should be up to 100, depending on the scenario, with dif_modifier up to 100 also, for hardcore anal sex or impending orgasm.
-    #Planned max stats of 8 focus and 6 foreplay should give about 80% success rate at full difficulty, and about 50% for easy encounters with zero stats.
-    def myra_calc_encounter_outcome(the_person, difficulty, dif_modifier = 0):
-        if the_person.arousal >= 100:   #Almost impossible to focus during impending orgasm.
-            dif_modifier = 100
-        encounter_dif = difficulty + dif_modifier
+    def myra_calculate_stat_and_difficulty(the_person, difficulty, dif_modifier = 0):
+        encounter_dif = difficulty + dif_modifier + min(the_person.arousal, 100)
         skill_stat = (the_person.focus + the_person.sex_skills["Foreplay"]) * 10 #Max 140, min 20
-        if encounter_dif < (skill_stat + 20):
-            encounter_dif = skill_stat + 20
+
+        #print("Skill stat: " + str(skill_stat) + " Difficulty: " + str(difficulty) + " Modifier: " + str(dif_modifier) + " Final Difficulty: " + str(encounter_dif))
+        return (skill_stat, encounter_dif)
+
+    def myra_calc_encounter_outcome(the_person, difficulty, dif_modifier = 0):
+        (skill_stat, encounter_dif) = myra_calculate_stat_and_difficulty(the_person, difficulty, dif_modifier)
         if skill_stat > renpy.random.randint(0,encounter_dif):
             return True
         return False
 
     #Return odds for the purpose of creating a menu string
-    def myra_calc_encounter_odds(the_person, the_difficulty, dif_modifier = 0):
-        if the_person.arousal >= 100:   #Almost impossible to focus during impending orgasm.
-            dif_modifier = 100
-        encounter_dif = the_difficulty + dif_modifier
-        skill_stat = (the_person.focus + the_person.sex_skills["Foreplay"]) * 10 #Max 140, min 20
-        if encounter_dif < (skill_stat + 20):
-            encounter_dif = skill_stat + 20
-        chance = int((skill_stat / encounter_dif) * 100)
+    def myra_calc_encounter_odds(the_person, difficulty, dif_modifier = 0):
+        (skill_stat, encounter_dif) = myra_calculate_stat_and_difficulty(the_person, difficulty, dif_modifier)
+        chance = int(((encounter_dif - skill_stat) * 1.0 / encounter_dif) * 100)
+
+        if chance < 0:
+            chance = 0
         return chance
+
+    def myra_calculate_success_percentages(person, encounter, difficulty):
+        return [myra_calc_encounter_odds(person, (encounter + 1) * 10, difficulty),
+            myra_calc_encounter_odds(person, (encounter + 1) * 10, difficulty + 20),
+            myra_calc_encounter_odds(person, (encounter + 1) * 10, difficulty + 40)]
