@@ -908,6 +908,7 @@ label fetish_serum_contact_ghost(the_person):
     the_person "I... okay... I'll get back to work."
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] turns to get back to work. You should talk to [ellie.possessive_title] about the nanobots..."
+    $ ellie.add_unique_on_talk_event(IT_director_nanobot_intro)
     return
 
 

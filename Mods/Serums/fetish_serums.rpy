@@ -4,8 +4,9 @@ init -3 python:
     FETISH_CUM_OPINION_LIST = ["being covered in cum","drinking cum", "cum facials", "giving blowjobs", "anal creampies", "creampies"]
     FETISH_BREEDING_OPINION_LIST = ["bareback sex","vaginal sex", "creampies", "missionary style sex"]
     FETISH_EXHIBITION_OPINION_LIST = ["public sex", "not wearing underwear", "not wearing anything", "showing her tits", "showing her ass", "skimpy outfits", "skimpy uniforms", "sex standing up" ]
-    FETISH_RESEARCH_ADDED = 1000     #Research Difficulty
-    FETISH_PRODUCTION_COST = 50    #Production Difficulty
+    FETISH_RESEARCH_ADDED = 300     #Research Difficulty
+    FETISH_PRODUCTION_COST = 30    #Production Difficulty
+    FETISH_SERUM_ATTENTION = 3      #Attention stat. Can be reduced via IT procedures
     #relation fetishes (impact relationship with people) still need to workout how to make this happen
     FETISH_RELATION_OPTION_LIST = ["cheating on men", "incest"]
     # these fetishes could be used for 'slave' / 'dominatrix'
@@ -534,7 +535,7 @@ init -1 python:
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
-            base_side_effect_chance = 10,
+            base_side_effect_chance = 0,
             on_apply = fetish_basic_function_on_apply,
             on_remove = fetish_basic_function_on_remove,
             on_turn = fetish_basic_function_on_turn,
@@ -543,7 +544,7 @@ init -1 python:
             research_needed = 1000,
             exclude_tags = ["Nanobots"],
             clarity_cost = 1000,
-            mental_aspect = 3, physical_aspect = 3, sexual_aspect = 5, medical_aspect = 0, flaws_aspect = 0, attention = 2
+            mental_aspect = 3, physical_aspect = 3, sexual_aspect = 5, medical_aspect = 0, flaws_aspect = 0, attention = FETISH_SERUM_ATTENTION
         )
 
         fetish_exhibition_serum = SerumTraitMod(name = "Social Sexual Proclivity Nanobots",
@@ -562,7 +563,7 @@ init -1 python:
             research_needed = 1200,
             exclude_tags = ["Nanobots"],
             clarity_cost = 1000,
-            mental_aspect = 5, physical_aspect = 2, sexual_aspect = 5, medical_aspect = 0, flaws_aspect = 0, attention = 4
+            mental_aspect = 5, physical_aspect = 2, sexual_aspect = 5, medical_aspect = 0, flaws_aspect = 0, attention = FETISH_SERUM_ATTENTION
         )
 
         fetish_anal_serum = SerumTraitMod(name = "Anal Proclivity Nanobots",
@@ -572,7 +573,7 @@ init -1 python:
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
-            base_side_effect_chance = 10,
+            base_side_effect_chance = 0,
             on_apply = fetish_anal_function_on_apply,
             on_remove = fetish_anal_function_on_remove,
             on_turn = fetish_anal_function_on_turn,
@@ -581,7 +582,7 @@ init -1 python:
             research_needed = 2000,
             exclude_tags = ["Nanobots"],
             clarity_cost = 1500,
-            mental_aspect = 4, physical_aspect = 6, sexual_aspect = 6, medical_aspect = 1, flaws_aspect = 0, attention = 3
+            mental_aspect = 4, physical_aspect = 6, sexual_aspect = 6, medical_aspect = 1, flaws_aspect = 0, attention = FETISH_SERUM_ATTENTION
         )
 
         fetish_cum_serum = SerumTraitMod(name = "Semen Proclivity Nanobots",
@@ -591,7 +592,7 @@ init -1 python:
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
-            base_side_effect_chance = 10,
+            base_side_effect_chance = 0,
             on_apply = fetish_cum_function_on_apply,
             on_remove = fetish_cum_function_on_remove,
             on_turn = fetish_cum_function_on_turn,
@@ -600,7 +601,7 @@ init -1 python:
             research_needed = 2000,
             exclude_tags = ["Nanobots"],
             clarity_cost = 1500,
-            mental_aspect = 5, physical_aspect = 3, sexual_aspect = 6, medical_aspect = 0, flaws_aspect = 0, attention = 3
+            mental_aspect = 5, physical_aspect = 3, sexual_aspect = 6, medical_aspect = 0, flaws_aspect = 0, attention = FETISH_SERUM_ATTENTION
         )
 
         fetish_breeding_serum = SerumTraitMod(name = "Reproduction Proclivity Nanobots",
@@ -610,7 +611,7 @@ init -1 python:
             research_added = FETISH_RESEARCH_ADDED,
             slots_added = 1,
             production_added = FETISH_PRODUCTION_COST,
-            base_side_effect_chance = 10,
+            base_side_effect_chance = 0,
             on_apply = fetish_breeding_function_on_apply,
             on_remove = fetish_breeding_function_on_remove,
             on_turn = fetish_breeding_function_on_turn,
@@ -619,7 +620,7 @@ init -1 python:
             research_needed = 2000,
             exclude_tags = ["Nanobots"],
             clarity_cost = 1500,
-            mental_aspect = 5, physical_aspect = 5, sexual_aspect = 5, medical_aspect = 0, flaws_aspect = 0, attention = 2
+            mental_aspect = 5, physical_aspect = 5, sexual_aspect = 5, medical_aspect = 0, flaws_aspect = 0, attention = FETISH_SERUM_ATTENTION
         )
         return
 

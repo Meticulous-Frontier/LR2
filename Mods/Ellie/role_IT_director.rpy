@@ -23,6 +23,11 @@ init 1 python:
             the_person.set_override_schedule(None, the_days = [0, 1, 2, 3, 4], the_times = [1,2,3])
         return
 
+    def IT_director_nanobot_intro_requirement(the_person):
+        if mc.is_at_work():
+            return True
+        return False
+
     # def IT_director_on_move(the_person):
     #     if mc.business.is_open_for_business() and mc.business.IT_project_in_progress:
 
@@ -30,6 +35,7 @@ init 1 python:
     update_IT_projects_action = Action("Review IT Projects", update_IT_projects_requirement, "update_IT_projects_label",
         menu_tooltip = "Start, change, activate, or deactivate IT projects.", priority = 5)
     IT_project_complete_action = Action("IT Project Complete", IT_project_complete_requirement, "IT_project_complete_label")
+    IT_director_nanobot_intro = Action("Nanobot Programs", IT_director_nanobot_intro_requirement, "IT_director_nanobot_intro_label")
 
     IT_director_role = Role("IT Director", [update_IT_projects_action], on_turn = IT_director_on_turn)
 
@@ -95,6 +101,19 @@ label IT_director_nanobot_intro_label(the_person):
         mc.name "Thank you. In addition, we know so little about how they actually effect people."
     mc.name "I was hoping you would be willing to work with Research so we can learn more about them."
     mc.name "Nothing crazy, just help monitor their effects as we run tests with them."
+    the_person "I'm not sure this is a good idea..."
+    "It seems like [the_person.title] might need some convincing..."
+    menu:
+        "Do it for me.\n{color=#ff0000}{size=18}Increases love{/size}{/color}":
+            mc.name "I know this seems odd, but I need you to trust me, okay?"
+            mc.name "Don't worry, I have a plan, and I need someone like you to get this done."
+            $ the_person.change_love(3)
+        "It'll be fun.\n{color=#ff0000}{size=18}Increases sluttiness{/size}{/color}":
+            mc.name "Don't worry. We'll be able to use it to have all kinds of fun."
+            $ the_person.change_slut(3, 60)
+        "I'm the boss.\n{color=#ff0000}{size=18}Increases obedience{/size}{/color}":
+            mc.name "I know it seems odd, but remember who makes out your paychecks, okay?"
+            $ the_person.change_obedience(3)
     the_person "I suppose..."
     mc.name "Great!"
     $ the_person.draw_person()

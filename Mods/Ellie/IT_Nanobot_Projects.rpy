@@ -13,12 +13,28 @@ init 1 python:
         get_fetish_basic_serum().research_added = FETISH_RESEARCH_ADDED
         return
 
+    def basic_attention_reduction_on_apply():
+        get_fetish_basic_serum().attention = 0
+        return
+
+    def basic_attention_reduction_on_remove():
+        get_fetish_basic_serum().attention = FETISH_SERUM_ATTENTION
+        return
+
     def anal_clarity_reduction_on_apply():
         get_fetish_anal_serum().research_added = 100
         return
 
     def anal_clarity_reduction_on_remove():
         get_fetish_anal_serum().research_added = FETISH_RESEARCH_ADDED
+        return
+
+    def anal_attention_reduction_on_apply():
+        get_fetish_anal_serum().attention = 0
+        return
+
+    def anal_attention_reduction_on_remove():
+        get_fetish_anal_serum().attention = FETISH_SERUM_ATTENTION
         return
 
     def breeder_clarity_reduction_on_apply():
@@ -29,6 +45,14 @@ init 1 python:
         get_fetish_breeding_serum().research_added = FETISH_RESEARCH_ADDED
         return
 
+    def breeder_attention_reduction_on_apply():
+        get_fetish_breeder_serum().attention = 0
+        return
+
+    def breeder_attention_reduction_on_remove():
+        get_fetish_breeder_serum().attention = FETISH_SERUM_ATTENTION
+        return
+
     def cum_clarity_reduction_on_apply():
         get_fetish_cum_serum().research_added = 100
         return
@@ -37,12 +61,28 @@ init 1 python:
         get_fetish_cum_serum().research_added = FETISH_RESEARCH_ADDED
         return
 
+    def cum_attention_reduction_on_apply():
+        get_fetish_cum_serum().attention = 0
+        return
+
+    def cum_attention_reduction_on_remove():
+        get_fetish_cum_serum().attention = FETISH_SERUM_ATTENTION
+        return
+
     def exhibition_clarity_reduction_on_apply():
         get_fetish_exhibition_serum().research_added = 100
         return
 
     def exhibition_clarity_reduction_on_remove():
         get_fetish_exhibition_serum().research_added = FETISH_RESEARCH_ADDED
+        return
+
+    def exhibition_attention_reduction_on_apply():
+        get_fetish_exhibition_serum().attention = 0
+        return
+
+    def exhibition_attention_reduction_on_remove():
+        get_fetish_exhibition_serum().attention = FETISH_SERUM_ATTENTION
         return
 
     def anal_incest_project_on_apply():
@@ -103,32 +143,48 @@ init 1 python:
 
 init 1 python:
     ###Project requirement functions###
+
+    def basic_attention_reduction_project_requirement():
+        return get_fetish_basic_serum().mastery_level >= 5.0
+
     def anal_incest_project_requirement():
         return get_fetish_anal_serum().mastery_level >= 3.0
+
+    def anal_attention_reduction_project_requirment():
+        return get_fetish_anal_serum().mastery_level >= 5.0
 
     def breeder_submission_project_requirement():
         if get_fetish_breeding_serum().mastery_level >= 3.0:
             return True
         return "Low Mastery"
 
+    def breeder_attention_reduction_project_requirement():
+        return get_fetish_breeder_serum().mastery_level >= 5.0
+
     def cum_thirst_project_requirement():
         return get_fetish_cum_serum().mastery_level >= 3.0
+
+    def cum_attention_reduction_project_requirement():
+        return get_fetish_cum_serum().mastery_level >= 5.0
 
     def exhibition_cheating_project_requirement():
         if get_fetish_exhibition_serum().mastery_level >= 3.0:
             return True
         return "Low Mastery"
 
+    def exhibition_attention_reduction_project_requirement():
+        return get_fetish_exhibition_serum().mastery_level >= 5.0
+
 init 1 python:
 
     basic_clarity_reduction_project = IT_Project(name = "Chemical Adaptation",
-        desc = "Changes nanobot adjustment strategy. Instead of adjusting serum composition for nanobots, adjust nanobot programming to handle different chemicals. Reduces clarity requirement.",
+        desc = "Changes nanobot adjustment strategy. Instead of adjusting serum composition for nanobots, adjust nanobot programming to handle different chemicals. Reduces research requirement.",
         cost = 0,
         requirement = None,
         toggleable = False,
         on_buy_function = None,
         extra_arguments = None,
-        on_apply_function = basic_clarity_reduction_on_apply,
+        on_apply_function = basic_clarity_reduction_on_apply,   #Heckin typos. too lazy to fix, this is research_added, not clarity
         on_remove_function = basic_clarity_reduction_on_remove,
         on_turn_function = None,
         on_move_function = None,
@@ -138,6 +194,24 @@ init 1 python:
         project_cost = 100,
         category = "basic",
         tier = 10)
+
+    basic_attention_reduction_project = IT_Project(name = "Deceptive Programming",
+        desc = "Updates nanobot programming to automatically hide themselves from all known interception and detection strategies. Reduces attention.",
+        cost = 0,
+        requirement = None,
+        toggleable = True,
+        on_buy_function = None,
+        extra_arguments = None,
+        on_apply_function = basic_attention_reduction_on_apply,
+        on_remove_function = basic_attention_reduction_on_remove,
+        on_turn_function = None,
+        on_move_function = None,
+        on_day_function = None,
+        dependant_policies = None,
+        project_progress = 0,
+        project_cost = 200,
+        category = "basic",
+        tier = 30)
 
     anal_clarity_reduction_project = IT_Project(name = "Anal Chemical Adaptation",
         desc = "Changes nanobot adjustment strategy. Instead of adjusting serum composition for nanobots, adjust nanobot programming to handle different chemicals. Reduces research requirement.",
@@ -175,6 +249,24 @@ init 1 python:
         category = "anal",
         tier = 20)
 
+    anal_attention_reduction_project = IT_Project(name = "Evasive Programming",
+       desc = "Updates nanobot programming to automatically hide themselves from all known interception and detection strategies. Reduces attention.",
+       cost = 0,
+       requirement = anal_attention_reduction_project_requirment,
+       toggleable = True,
+       on_buy_function = None,
+       extra_arguments = None,
+       on_apply_function = anal_attention_reduction_on_apply,
+       on_remove_function = anal_attention_reduction_on_remove,
+       on_turn_function = None,
+       on_move_function = None,
+       on_day_function = None,
+       dependant_policies = None,
+       project_progress = 0,
+       project_cost = 200,
+       category = "anal",
+       tier = 30)
+
     breeder_clarity_reduction_project = IT_Project(name = "Breeding Chemical Adaptation",
         desc = "Changes nanobot adjustment strategy. Instead of adjusting serum composition for nanobots, adjust nanobot programming to handle different chemicals. Reduces research requirement.",
         cost = 0,
@@ -210,6 +302,24 @@ init 1 python:
         project_cost = 150,
         category = "breeder",
         tier = 20)
+
+    breeder_attention_reduction_project = IT_Project(name = "Evasive Programming",
+       desc = "Updates nanobot programming to automatically hide themselves from all known interception and detection strategies. Reduces attention.",
+       cost = 0,
+       requirement = None,
+       toggleable = True,
+       on_buy_function = None,
+       extra_arguments = None,
+       on_apply_function = breeder_attention_reduction_on_apply,
+       on_remove_function = breeder_attention_reduction_on_remove,
+       on_turn_function = None,
+       on_move_function = None,
+       on_day_function = None,
+       dependant_policies = None,
+       project_progress = 0,
+       project_cost = 200,
+       category = "breeder",
+       tier = 30)
 
     cum_clarity_reduction_project = IT_Project(name = "Cum Chemical Adaptation",
         desc = "Changes nanobot adjustment strategy. Instead of adjusting serum composition for nanobots, adjust nanobot programming to handle different chemicals. Reduces research requirement.",
@@ -247,6 +357,24 @@ init 1 python:
         category = "cum",
         tier = 20)
 
+    cum_attention_reduction_project = IT_Project(name = "Evasive Programming",
+       desc = "Updates nanobot programming to automatically hide themselves from all known interception and detection strategies. Reduces attention.",
+       cost = 0,
+       requirement = None,
+       toggleable = True,
+       on_buy_function = None,
+       extra_arguments = None,
+       on_apply_function = cum_attention_reduction_on_apply,
+       on_remove_function = cum_attention_reduction_on_remove,
+       on_turn_function = None,
+       on_move_function = None,
+       on_day_function = None,
+       dependant_policies = None,
+       project_progress = 0,
+       project_cost = 200,
+       category = "cum",
+       tier = 30)
+
     exhibition_clarity_reduction_project = IT_Project(name = "Exhibition Chemical Adaptation",
         desc = "Changes nanobot adjustment strategy. Instead of adjusting serum composition for nanobots, adjust nanobot programming to handle different chemicals. Reduces research requirement.",
         cost = 0,
@@ -283,16 +411,39 @@ init 1 python:
         category = "exhibition",
         tier = 20)
 
+    exhibition_attention_reduction_project = IT_Project(name = "Evasive Programming",
+       desc = "Updates nanobot programming to automatically hide themselves from all known interception and detection strategies. Reduces attention.",
+       cost = 0,
+       requirement = None,
+       toggleable = True,
+       on_buy_function = None,
+       extra_arguments = None,
+       on_apply_function = exhibition_attention_reduction_on_apply,
+       on_remove_function = exhibition_attention_reduction_on_remove,
+       on_turn_function = None,
+       on_move_function = None,
+       on_day_function = None,
+       dependant_policies = None,
+       project_progress = 0,
+       project_cost = 200,
+       category = "exhibition",
+       tier = 30)
+
 
     nanobot_IT_project_list.append(basic_clarity_reduction_project)
+    nanobot_IT_project_list.append(basic_attention_reduction_project)
     nanobot_IT_project_list.append(anal_clarity_reduction_project)
     nanobot_IT_project_list.append(anal_incest_project)
+    nanobot_IT_project_list.append(anal_attention_reduction_project)
     nanobot_IT_project_list.append(breeder_clarity_reduction_project)
     nanobot_IT_project_list.append(breeder_submission_project)
+    nanobot_IT_project_list.append(breeder_attention_reduction_project)
     nanobot_IT_project_list.append(cum_clarity_reduction_project)
     nanobot_IT_project_list.append(cum_thirst_project)
+    nanobot_IT_project_list.append(cum_attention_reduction_project)
     nanobot_IT_project_list.append(exhibition_clarity_reduction_project)
     nanobot_IT_project_list.append(exhibition_cheating_project)
+    nanobot_IT_project_list.append(exhibition_attention_reduction_project)
 
 
     nanobot_IT_project_list.sort(key = IT_project_sort)
