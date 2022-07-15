@@ -1376,9 +1376,9 @@ label myra_lewd_gaming_label(the_person):           #40 sluttiness event. Catch 
     $ the_person.change_energy(-40)
     "When she finishes, her body goes limp. She is completely spent."
     $ the_person.draw_person(position="sitting")
-    "You slowly stand up. Looking around, it appears that your oral session went unnoticed. Actually it appears there isn't anyone else here."
+    "You slowly stand up. Looking around, it appears that no one else was here to have noticed your oral session."
     the_person "That... holy fuck..."
-    "[the_person.possessive_title] is in a post orgasm stupor. She seems like she would be receptive to some training."
+    "[the_person.possessive_title] is in a post orgasm stupor. It seems like she would be receptive to some training."
     call do_training(the_person) from _call_do_training_myra_post_oral_01
     the_person "I don't think I can get up."
     mc.name "Sure you can. Here, let me help you."
