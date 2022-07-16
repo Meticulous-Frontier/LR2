@@ -65,26 +65,26 @@ init 2:
                         style "textbutton_no_padding_highlight"
                         text_style "cheat_text_style"
                         xsize 250
-                        if get_HR_director_tag("recruit_obedience") and get_HR_director_tag("recruit_obedience", 0) < -10:
+                        if get_HR_director_tag("recruit_obedience") and get_HR_director_tag("recruit_obedience", 0) < 90:
                             background "#4f7ad6"
                             hover_background "#4f7ad6"
-                        action [Function(set_HR_director_tag, "recruit_obedience", -renpy.random.randint(11,30))]
+                        action [Function(set_HR_director_tag, "recruit_obedience", 100-renpy.random.randint(11,30))]
                     textbutton "Obedient":
                         style "textbutton_no_padding_highlight"
                         text_style "cheat_text_style"
                         xsize 250
-                        if get_HR_director_tag("recruit_obedience") and get_HR_director_tag("recruit_obedience", 0) > 10:
+                        if get_HR_director_tag("recruit_obedience") and get_HR_director_tag("recruit_obedience", 0) > 110:
                             background "#4f7ad6"
                             hover_background "#4f7ad6"
-                        action [Function(set_HR_director_tag, "recruit_obedience", renpy.random.randint(11,30))]
+                        action [Function(set_HR_director_tag, "recruit_obedience", 100 + renpy.random.randint(11,30))]
                     textbutton "InBetween":
                         style "textbutton_no_padding_highlight"
                         text_style "cheat_text_style"
                         xsize 250
-                        if get_HR_director_tag("recruit_obedience") and get_HR_director_tag("recruit_obedience", 0) >= -10 and get_HR_director_tag("recruit_obedience", 0) <= 10:
+                        if get_HR_director_tag("recruit_obedience") and get_HR_director_tag("recruit_obedience", 0) >= 90 and get_HR_director_tag("recruit_obedience", 0) <= 110:
                             background "#4f7ad6"
                             hover_background "#4f7ad6"
-                        action [Function(set_HR_director_tag, "recruit_obedience", renpy.random.randint(-10,10))]
+                        action [Function(set_HR_director_tag, "recruit_obedience", 100 + renpy.random.randint(-10,10))]
                     textbutton "Not Relevant":
                         style "textbutton_no_padding_highlight"
                         text_style "cheat_text_style"
@@ -99,7 +99,7 @@ init 2:
                     frame:
                         xsize 500
                         text "Software Upgrade Locked" style "serum_text_style_header"
-  
+
 
             frame:
                 background "#000080"
@@ -433,4 +433,3 @@ init 2:
                     focus_mask "gui/button/choice_idle_background.png"
                     action [Return(True), Hide("serum_tooltip")]
                 textbutton "Start Recruitment" align [0.5,0.5] style "return_button_style"
-
