@@ -8,6 +8,9 @@ init 1 python:  #Multiple init 1 blocks to make organization easier.
             return True
         return "Requires 3 HR employees"
 
+    def hr_hack_cell_tower_requirement():
+        return True
+
     def supply_inventory_project_requirement():
         return True
 
@@ -107,6 +110,26 @@ init 1 python:
         tier = 20)
 
     business_IT_project_list.append(hr_task_manager_project)
+
+    hr_hack_cell_tower_project = IT_Project(name = "Hack Cell Towers",
+        desc = "Hack the city cell towers to track the location of people's phones, will add location information to the phone menu.",
+        requirement = hr_hack_cell_tower_requirement,
+        cost = 0,
+        toggleable = False,
+        on_buy_function = None,
+        extra_arguments = None,
+        on_apply_function = hr_hack_cell_tower_project_on_apply,
+        on_remove_function = None,
+        on_turn_function = None,
+        on_move_function = None,
+        on_day_function = None,
+        dependant_policies = None,
+        project_progress = 0,
+        project_cost = 200,
+        category = "HR",
+        tier = 30)
+
+    business_IT_project_list.append(hr_hack_cell_tower_project)
 
     supply_inventory_project = IT_Project(name = "JiT Inventory",
         desc = "Just in Time inventory practices help increase efficiency. Increased supply procurement when the company is low on supplies.",
@@ -318,6 +341,10 @@ init -1 python:
         mc.business.effectiveness_cap += -5
         if get_HR_director_tag("business_HR_eff_bonus"):
             set_HR_director_tag("business_HR_eff_bonus", get_HR_director_tag("business_HR_eff_bonus") + -5)
+        return
+
+    def hr_hack_cell_tower_project_on_apply():
+        mc.business.event_triggers_dict["gps_tracker_enabled"] = True
         return
 
     def market_photo_filter_project_on_apply():
