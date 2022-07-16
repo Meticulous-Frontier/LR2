@@ -303,6 +303,7 @@ label harem_build_label():
     return
 
 label harem_completed_label():
+    $ man_name = Person.get_random_male_name()
     "Going about your day, you get a call from your contractor."
     man_name "Hello Sir, this is [man_name] from Turner Construction. I just wanted you to know that we have finished our work."
     mc.name "Thank you [man_name], much appreciated."
