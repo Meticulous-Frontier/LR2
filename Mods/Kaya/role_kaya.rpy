@@ -1567,7 +1567,7 @@ label kaya_barista_fuck_intro_label(the_person):    #60 sluttiness
     the_person "Yeah, I'm just getting ready to take my break. Let me just tell my coworker to take over for me."
     $ the_person.draw_person(position = "walking_away")
     "She turns to her coworker, from the looks of it another college student. He just nods at her and gives you a quick wave."
-    $ the_person.draw_persion()
+    $ the_person.draw_person()
     the_person "Okay, follow me!"
     $ the_person.draw_person(position = "walking_away")
     "You follow [the_person.possessive_title] behind the counter and into a back storage area. You don't think you've ever been back here before?"
@@ -1618,14 +1618,14 @@ label kaya_barista_fuck_intro_label(the_person):    #60 sluttiness
     kaya "Oh god... that was so good..."
     $ the_person.draw_person()
     "[the_person.title] stands up."
-    kaya "Alright, I'd better straigten myself up and get back to work. There's a door back there that leads out into the alley... do you mind letting yourself out?"
+    kaya "Alright, I'd better straighten myself up and get back to work. There's a door back there that leads out into the alley... do you mind letting yourself out?"
     mc.name "Uhh sure, that would be no problem."
     kaya "Thanks! Now, we can't do this too often, maximum every few days, okay?"
     mc.name "Sounds good to me."
     $ kaya.apply_planned_outfit()
     $ clear_scene()
     "You step out of the back door and into the alley, leaving [the_person.possessive_title] to finish her shift."
-    "This is an ineresting development with [the_person.title]. Once in a while, you can swing by the coffee shop during the afternoon for a quickie."
+    "This is an interesting development with [the_person.title]. Once in a while, you can swing by the coffee shop during the afternoon for a quickie."
     "While not as satisfying as full on sex, a quickie is better than nothing."
     if kaya_has_started_internship():
         "You should enjoy this phase of your relationship with her while it lasts. She is already your intern, and you doubt she is going to keep working here once she graduates!"
