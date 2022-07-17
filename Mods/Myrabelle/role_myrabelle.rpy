@@ -2120,13 +2120,13 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     mc.name "Don't worry. I'll help you develop skills that will be useful the rest of your life."
     "[the_person.title] rolls her eyes."
     the_person "So... what now coach?"
-    mc.name "Well, first, you need to drop the smartass attitude."
+    mc.name "Well, first, you need to drop the smart-ass attitude."
     the_person "What? Fuck off, I'm just..."
     if myra_alexia_teamup_scene.get_stage() >= 2:
         mc.name "Let's be honest with each other. We both know WHY you are doing this. You are competitive by nature, and you can't stand the thought that [alexia.title] might be better than you."
     else:
         mc.name "Let's be honest with each other. WE both know WHY you are doing this. You are competitive by nature, and you can't stand the thought that a guy is thinking about some other girl when you're going down on him."
-    mc.name "But the most important part about blowjobs has nothing to do with technique. It's all about attitude. Guys can tell when your forcing it, and it's a big turn-off."
+    mc.name "But the most important part about blowjobs has nothing to do with technique. It's all about attitude. Guys can tell when you're forcing it, and it's a big turn-off."
     "For a moment, [the_person.possessive_title] seems shocked at your forceful words. For a second, it seems she is about to tell you to fuck off again, but then she relaxes."
     the_person "I... I DO want to be better..."
     mc.name "That's great, but to get good at blowjobs, you have to WANT to give them. So far, all I can tell is that you are actively avoiding it."
