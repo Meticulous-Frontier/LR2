@@ -1810,7 +1810,9 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
         #     pass
         # "Anal on the swingset" if get_shop_investment_rate() >= 6.0:
 
-    "[the_person.title] lets out a big yawn."
+    $ the_person.apply_planned_outfit()
+    $ the_person.draw_person()
+    "[the_person.title] lets out a big yawn, while rearranging her clothes."
 
     if the_person.is_in_trance():
         "[the_person.title] is tired and in a suggestible state, you can take a moment to train her."
