@@ -159,7 +159,7 @@ init 2 python:
         mc.business.add_mandatory_crisis(dungeon_completed_action)
 
     def add_harem_build_completed_action():
-        harem_mansion_completed_action = Action("Harem Mansion Completed", home_renovation_completion_requirement, "harem_completed_label", requirement_args = day + 21 + renpy.random.randint(2, 7))
+        harem_mansion_completed_action = Action("Harem Mansion Completed", home_renovation_completion_requirement, "harem_completed_label", requirement_args = day + 14 + renpy.random.randint(2, 7))
         mc.business.add_mandatory_crisis(harem_mansion_completed_action)
 
     def upgrade_bedroom(room, background):
