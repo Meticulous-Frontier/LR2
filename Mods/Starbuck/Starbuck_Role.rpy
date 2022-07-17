@@ -1809,7 +1809,13 @@ label starbuck_close_up_label(the_person): #You offer to help her close up. Main
         # "Use whip and strap on" if get_shop_investment_rate() >= 5.0:
         #     pass
         # "Anal on the swingset" if get_shop_investment_rate() >= 6.0:
+
     "[the_person.title] lets out a big yawn."
+
+    if the_person.is_in_trance():
+        "[the_person.title] is tired and in a suggestible state, you can take a moment to train her."
+        call do_training(the_person) from _call_do_training_starbuck_close_up_01
+
     the_person "You really wore me out! Good night [the_person.mc_title]."
     "She walks you to the door of the business and you walk out together, before going your separate ways."
 
