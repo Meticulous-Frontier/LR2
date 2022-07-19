@@ -672,7 +672,7 @@ label candace_overhear_supply_order_label(the_person):
     the_person "Yes sir that's right. We need more of this stuff! Looks like it's called up... cal... calcium... phos... oh balls"
     "????" "I'm not sure I understand what you need. Do you have a label you can show me?"
     the_person "Oh! Certainly... I'd be glad to show you anything you want... let me see here."
-    "She goes through a draw in her desk and pulls out an empty vial. She tries holding it up to the camera."
+    "She goes through a drawer in her desk and pulls out an empty vial. She tries holding it up to the camera."
     if the_person.outfit.tits_available():
         "????" "It's too close... can you back it up a little bit?... Yeah a bit farther..."
         "With her tits out, she pulls the vial back until it is resting in her cleavage."
