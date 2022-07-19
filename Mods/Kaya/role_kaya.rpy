@@ -328,7 +328,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     "You must have given her a funny look."
     the_person "What? You seem like a nice guy, I just want to be a cheap date!"
     "Ah, so she must be very budget conscious. You suppose there are certainly worse personality traits to have!"
-    "You order yourself an old fashioned, something to sip on while you chat."
+    "You order yourself an Old Fashioned, something to sip on while you chat."
     "Once you have your drinks, you look around. The table you were looking at is full... looks like everything is full..."
     the_person "Ah! Look! An open pool table! Let's play!"
     $ the_person.discover_opinion("billiards")
@@ -391,7 +391,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     # $ mc.business.add_mandatory_crisis(kaya_get_drinks)
     $ kaya.event_triggers_dict["bar_date"] = True
     $ clear_scene()
-    "You walk back up to the bartender. You order yourself another old fashioned and a top shelf manhattan with an orange twist for [the_person.title]."
+    "You walk back up to the bartender. You order yourself another Old Fashioned and a top shelf manhattan with an orange twist for [the_person.title]."
     "When he brings you the drinks, you ask for change for a dollar to play another round of pool. When he goes to make change for you, you look down at the drinks..."
     "You could probably slip a serum into her drink if you do it quickly..."
     call give_serum(the_person) from _call_give_kaya_serum_bar_01
