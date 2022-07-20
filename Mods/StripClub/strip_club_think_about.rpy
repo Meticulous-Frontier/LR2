@@ -210,8 +210,10 @@ label starbuck_celebration_strip_event(the_person):
             "[the_person.title] starts to dance to the music, swinging her hips and turning slowly to show herself off all around."
             $ the_person.draw_person(emotion = "happy", position = "stand5")
             "Slowly she starts to unbutton a bit and show some cleavage, you are amazed by her round [the_person.tits]-cup boobs."
-            while not the_person.outfit.tits_visible():
-                $ the_item = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
+            $ strip_list = the_person.outfit.get_tit_strip_list(visible_enough = True)
+            $ ran_num = 0
+            while ran_num < len(strip_list):
+                $ the_item = strip_list[ran_num]
                 menu:
                     "Throw some cash\n{color=#ff0000}{size=18}Costs: $20{/size}{/color}":
                         $ mc.business.change_funds(-20)
@@ -228,10 +230,13 @@ label starbuck_celebration_strip_event(the_person):
                         $ the_person.break_taboo("bare_tits")
                 else:
                     "[the_person.title] takes off her [the_item.display_name]."
+                $ ran_num += 1
 
             $ the_person.draw_person(emotion = "happy", position = "stand4")
-            while not the_person.outfit.vagina_visible():
-                $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True)
+            $ strip_list = the_person.outfit.get_full_strip_list(strip_feet = False)
+            $ ran_num = 0
+            while ran_num < len(strip_list):
+                $ the_item = strip_list[ran_num]
                 menu:
                     "Throw some cash\n{color=#ff0000}{size=18}Costs: $20{/size}{/color}":
                         $ mc.business.change_funds(-20)
@@ -248,6 +253,7 @@ label starbuck_celebration_strip_event(the_person):
                         $ the_person.break_taboo("bare_pussy")
                 else:
                     "[the_person.possessive_title] takes off her [the_item.display_name]."
+                $ ran_num += 1
 
             $ the_person.draw_person(emotion = "happy", position = "stand3")
             "Now completely naked, [the_person.title] continues for a few minutes dancing seductively, knowing your eyes are glued to her body."

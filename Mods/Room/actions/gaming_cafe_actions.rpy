@@ -129,7 +129,7 @@ label gaming_cafe_grind_with_myra():
             $ text_two = get_topic_text(overhear_topic)
             the_person "... but yeah, I guess you could say I [text_one] [text_two]"
             if the_person.discover_opinion(overhear_topic):
-                mc.name "Oh! You I didn't realize you felt that way, [the_person.title]."
+                mc.name "Oh! I didn't realize you felt that way, [the_person.title]."
             "You keep chatting. It is very relaxing to just play for a bit. With [the_person.possessive_title] playing with you, you tear thru a large chunk of content."
 
             $ mc.change_energy(60)
@@ -194,7 +194,7 @@ label gaming_cafe_grind_with_alexia():
             $ text_two = get_topic_text(overhear_topic)
             the_person "... but yeah, I'm not sure he realizes I [text_one] [text_two]"
             if the_person.discover_opinion(overhear_topic):
-                mc.name "Oh! You I didn't realize you felt that way, [the_person.title]."
+                mc.name "Oh! I didn't realize you felt that way, [the_person.title]."
             "You keep chatting. It is very relaxing to just play for a bit. With [the_person.possessive_title] playing with you, you tear thru a large chunk of content."
             $ mc.change_energy(100)
             $ progress = gaming_cafe_med_grind()

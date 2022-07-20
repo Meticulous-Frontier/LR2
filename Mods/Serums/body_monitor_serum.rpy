@@ -227,7 +227,7 @@ label body_monitor_phase_3_label():
     person_1 "Not yet. I wanted to talk to you about it before I take any further steps."
     mc.name "Okay. Then let's go to my office."
     $ scene_manager.update_actor(person_1, position = "walking_away")
-    "You grab a cup of coffee for you and [person_1.possessive_title]"
+    "You grab a cup of coffee for you and [person_1.possessive_title]."
     # add a dose of serum to her coffee? Don't want to mess around with that yet. Maybe later, once I figure out how to do it ^^
     "You think about adding a dose of serum to her coffee, but decide against it. You don't know what exactly she wants to talk about and dosing her could have unpredictable consequences."
     $ ceo_office.show_background()

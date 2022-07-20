@@ -132,7 +132,7 @@ label myra_focus_progression_scene_intro_scene(the_group):
     the_person "This isn't working. Is that the best you can do?"
     "You desperately try to come up with something to talk about."
     mc.name "So, where do you and [alexia.fname] know each other from?"
-    the_person "Ah, we used to live in the same neighborhood growing up. Our mom's were friends and we use to hang out a lot, even though I was older than her."
+    the_person "Ah, we used to live in the same neighborhood growing up. Our moms were friends and we used to hang out a lot, even though I was older than her."
     the_person "Sometimes I would even babysit... SHIT."
     "[the_person.title] pushed for the far point, but her team held back, and she now finds herself in a 2v1 on the far point."
     "Now is the time to push for answers and distract her."
@@ -353,9 +353,9 @@ label myra_focus_trans_scene_2(the_group):
     if the_person.has_large_tits():
         "[the_person.possessive_title] takes off her top. Her generous tits spill free, wobbling enticingly."
     else:
-        "[the_person.possessive_title] perky tits drop as she takes her top off. The look firm and pleasing to the eye."
+        "[the_person.possessive_title]'s perky tits drop as she takes her top off. They look firm and pleasing to the eye."
 
-    "She takes a long sip from her energy drink as she gets logged in to the game. She smacks your hand when you try to pre-emptily cop a feel."
+    "She takes a long sip from her energy drink as she gets logged in to the game. She smacks your hand when you try to pre-emptively cop a feel."
     return
 
 label myra_focus_trans_scene_3(the_group):

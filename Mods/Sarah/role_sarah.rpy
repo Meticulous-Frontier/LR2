@@ -3246,19 +3246,45 @@ label Sarah_naomi_visits_to_apologize_label():
     mc.name "Right, [sarah.title], I think it would be only fair if you did the spanking."
     "[sarah.possessive_title] finally seems to figure out where you are going and leans into the role."
     $ scene_manager.update_actor(sarah, position = "stand4", emotion = "default")
-    if not naomi.vagina_visible():
+    if not the_person.vagina_visible():
         sarah "Right, this won't do at all [the_person.fname], a good spanking is done on a bare butt, show it to me."
         "[the_person.fname] looks at you and only sees you nodding, reluctantly she moves her clothes out of the way."
-        $ scene_manager.strip_to_vagina(the_person, visible_enough = True, prefer_half_off = True)
+        $ scene_manager.strip_to_vagina(the_person, visible_enough = True, prefer_half_off = False)
     $ the_person.change_arousal(15)
     $ sarah.change_arousal(15)
     sarah "Good, I see you are committed to apologizing."
     $ scene_manager.update_actor(sarah, position = "stand5")
     "And with that [sarah.possessive_title] starts slapping away at [the_person.fname]'s naked ass cheeks."
+    $ spank_factor_increment(the_person)
     the_person "Oh shit!... Fuck!... Aaarg!"
     sarah "Now you little bitch, tell me how sorry you are!"
     the_person "Aaah... I'm... shit... really... Ouch... SORRY!!"
-    "As you are watching this scene you see [the_person.fname]'s bottom turn a nice shade of red, but what's even more interesting, her pussy seems to get wet also."
+    $ spank_factor_increment(the_person)
+    mc.name "I don't think she's really sorry yet [sarah.fname]."
+    sarah "I agree, [sarah.mc_title]."
+    while the_person.event_triggers_dict.get("spank_level", 0) < 8:
+        $ spank_factor_increment(the_person)
+        $ rnd_num = renpy.random.randint(0,2)
+        if rnd_num == 0:
+            the_person "Oh... I'm sorry [sarah.fname]! Oh god..."
+            "She keeps her ass still, taking [sarah.possessive_title]'s punishment with pride."
+        elif rnd_num == 1:
+            the_person "Please... ah... fuck... [sarah.fname], please... ouch..."
+        else:
+            "[sarah.possessive_title] keeps slapping her old friends ass like there is no tomorrow."
+
+        if the_person.event_triggers_dict.get("spank_level", 0) % 2 == 1:
+            $ ass_desc = spanking_get_ass_description(the_person)
+            "You look down at [the_person.fname]'s ass. It is [ass_desc]"
+
+        if the_person.event_triggers_dict.get("spank_level", 0) < 8:
+            mc.name "Just keep going, there is some room for improvement"
+            if the_person.event_triggers_dict.get("spank_level", 0) > 6:
+                "As you are watching this scene you see [the_person.fname]'s [the_person.pubes_description] pussy seems to get wet also."
+        else:
+            mc.name "I think that should be enough."
+
+    "How to continue?"
     menu:
         "Degrade [the_person.title]":
             mc.name "Hey [sarah.title], I think she is ready to make some further amends."
@@ -3330,7 +3356,7 @@ label Sarah_naomi_visits_to_apologize_label():
         "The girls rearrange their outfits."
     else:
         "[the_person.fname] puts her clothes in order."
-    $ scene_manager.review_outfits(dialogue = False)
+    $ scene_manager.apply_outfits()
     the_person "Why don't you give me a tour of this place [sarah.fname]?"
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "She grabs [sarah.possessive_title] by the hand and drags her out of your office."

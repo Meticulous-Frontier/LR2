@@ -52,6 +52,12 @@ init -2 python:
             for person in [actor.person for actor in self.actors]:
                 person.review_outfit(dialogue = dialogue, draw_person = draw_person)
 
+        def apply_outfits(self, draw_person = True):
+            for actor in self.actors:
+                actor.person.apply_planned_outfit()
+                if draw_person:
+                    actor.draw_actor()
+
         def update_actor(self, person, position = None, emotion = None, special_modifier = None, lighting = None, display_transform = None, z_order = None):
             actor = next((x for x in self.actors if x.person == person), None)
             if not actor:

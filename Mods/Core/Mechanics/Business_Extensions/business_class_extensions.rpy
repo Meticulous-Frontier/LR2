@@ -287,6 +287,11 @@ init -1 python:
                 return business.mistress_wardrobe
             if person.job == stripclub_manager_job or person.has_role(stripclub_manager_role):
                 return business.manager_wardrobe
+            if person.has_role(maid_role) or person.job in [maid_hotel_job, maid_hotel_job2]:
+                return maid_wardrobe
+            if person.job.job_title == "Barista":
+                return barista_wardrobe
+
             return None
 
         return get_uniform_wardrobe_for_person_wrapper

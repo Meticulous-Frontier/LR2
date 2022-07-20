@@ -1768,7 +1768,7 @@ init 1200 python:
             stat_range_array = [[Person.get_stat_floor() + 1, Person.get_stat_ceiling() + 1] for x in range(0,3)],    # balanced stats
             skill_range_array = [[Person.get_skill_floor() + 1, Person.get_skill_ceiling() + 1] for x in range(0,5)], # balanced skills
             sex_skill_range_array = [[Person.get_sex_skill_floor() + experience_stat, Person.get_sex_skill_ceiling() + experience_stat] for x in range(0,4)],
-            work_experience_range = [Person.get_work_experience_floor() + experience_stat, Person.get_work_experience_ceiling() + experience_stat],
+            work_experience_range = [Person.get_work_experience_floor() + 1 + experience_stat, Person.get_work_experience_ceiling() + experience_stat],
             force_random = True)
 
         if get_HR_director_tag("recruit_dept") == "HR":

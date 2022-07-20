@@ -527,7 +527,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 $ report_log["girl two orgasms"] = _return["girl orgasms"]
 
                             "Done for now":
-                                "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
+                                mc.name "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
                         $ finished = True
                     else:
                         the_person_two "Yeah me too. I think I need a break!"
@@ -548,7 +548,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
                                 $ scene_manager.show_actor(the_person_two, display_transform = character_center_flipped)
                                 $ report_log["girl one orgasms"] = _return["girl orgasms"]
                             "Done for now":
-                                "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
+                                mc.name "I think we should just be done for now." #TODO girl takes over if she needs to cum and hasn't yet
                         $ finished = True
 
                         pass

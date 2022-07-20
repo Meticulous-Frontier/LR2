@@ -911,7 +911,7 @@ label myrabelle_cum_pullout(the_person):
     else:
         if the_person.wants_creampie():
             if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
-                the_person "Cum insisde me! You know you want to, [the_person.mc_title]!"
+                the_person "Cum inside me! You know you want to, [the_person.mc_title]!"
             elif the_person.get_opinion_score("creampies") > 0:
                 "[the_person.possessive_title] moans happily."
                 if the_person.on_birth_control: #She just likes creampies.

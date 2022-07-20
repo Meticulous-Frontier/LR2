@@ -61,8 +61,6 @@ label sister_failed_test_label():
                 "After looking at your serums, you decide none of them would be useful."
                 mc.name "Actually, I don't have the right ones with me. Come on let me just help you study."
 
-        "Nothing" if mc.inventory.get_any_serum_count() <= 0:
-            mc.name "Actually... I can't think of anything. Come on let me just help you study."
         "Strip" if mc.business.event_triggers_dict.get("sister_strip",False) and not (the_person.tits_available() or the_person.vagina_available()):
             $ strip_path = True
             mc.name "Why don't you take off some of your clothes, that way I have something nice to look at while we study?"
@@ -106,6 +104,9 @@ label sister_failed_test_label():
                 the_person "There. Does this convince you to help me study?"
                 mc.name "Yes, it does."
                 the_person "Okay! Let's get started!"
+
+        "Just Study":
+            mc.name "Actually... I can't think of anything. Come on let me just help you study."
 
     # switch to strip path if she is teasing you (even without stripping)
     if not strip_path and (the_person.vagina_available() or the_person.tits_available()):

@@ -338,7 +338,7 @@ label quest_cuckold_employee_decision_label():
     $ the_person.draw_person(position = "kissing")
     "You wrap your arms around [the_person.title]. She embraces you, and you start to kiss. Your hands go down to her ass."
     $ the_person.change_arousal(5)
-    the_person "Okay, so... the best way to do this that I've read anyway, is good old fashioned missionary."
+    the_person "Okay, so... the best way to do this that I've read anyway, is a good old-fashioned missionary."
     mc.name "Get ready and lay down on my desk. I always wanted my own personal breeding stock."
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     "[the_person.possessive_title] gets on your desk and lays on her back."
