@@ -1,4 +1,6 @@
 init -1 python:
+    OPTION_DAYS_BETWEEN_STORY_EVENTS = 3
+
     def get_hr_director(self):
         if not hasattr(self, "_hr_director"):
             self._hr_director = None

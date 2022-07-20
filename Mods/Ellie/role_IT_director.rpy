@@ -16,11 +16,6 @@ init 1 python:
     def IT_director_on_turn(the_person):
         if the_person.location == mc.business.r_div:
             mc.business.IT_increase_project_progress(amount = (the_person.int * 2) + (the_person.focus))
-
-        if mc.business.IT_project_in_progress:
-            the_person.set_override_schedule(mc.business.r_div, the_days = [0, 1, 2, 3, 4], the_times = [1,2,3])
-        else:
-            the_person.set_override_schedule(None, the_days = [0, 1, 2, 3, 4], the_times = [1,2,3])
         return
 
     def IT_director_nanobot_intro_requirement(the_person):
