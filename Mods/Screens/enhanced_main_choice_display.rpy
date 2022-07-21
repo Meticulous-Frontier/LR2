@@ -63,17 +63,17 @@ init 2 python:
                     load_image(cloth.position_sets[person.idle_pose].get_image(actual_body_type(person, cloth), actual_tit_size(person, cloth)))
             return
 
-    def build_menu_items(elements_list, draw_hearts_for_people = True, draw_person_previews = True, person_preview_args = None):
+    def build_menu_items(elements_list, draw_hearts_for_people = True, draw_person_previews = True, show_location = False, person_preview_args = None):
         result = []
         for count in __builtin__.range(__builtin__.len(elements_list)):
             if __builtin__.len(elements_list[count]) > 1:
                 if not isinstance(elements_list[count][1], MenuItem):
-                    result.append(build_menu_item_list(elements_list[count], draw_person_previews, draw_hearts_for_people, person_preview_args))
+                    result.append(build_menu_item_list(elements_list[count], draw_person_previews, draw_hearts_for_people, show_location, person_preview_args))
                 else:
                     result.append(elements_list[count])
         return result
 
-    def build_menu_item_list(element_list, draw_hearts_for_people = True, draw_person_previews = True, person_preview_args = None):
+    def build_menu_item_list(element_list, draw_hearts_for_people = True, draw_person_previews = True, show_location = False, person_preview_args = None):
         def find_and_replace_tooltip_property(item, extra_args):
             groups = re.search("\[[^]]*\]", item.menu_tooltip)
             if groups and isinstance(extra_args, Person):
@@ -124,6 +124,8 @@ init 2 python:
                     info.append("{image=lust_eye_token_small}")
                 if item.arousal > 60:
                     info.append("{image=arousal_token_small}")
+                if show_location:
+                    info.append("\n{size=15}<" + item.location.formal_name + ">{/size}")
                 if draw_hearts_for_people:
                     info.append("\n" + get_heart_image_list(item.sluttiness, item.effective_sluttiness()))
                 if person_preview_args is None:

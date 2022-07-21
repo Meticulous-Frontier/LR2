@@ -1893,27 +1893,6 @@ init -1 python:
 # Outfit functions - wear a specialized outfit #
 ################################################
 
-    def should_wear_maid_outfit(self):
-        if self.has_role(maid_role):
-            return self.is_at_work(self)
-        return False
-
-    Person.should_wear_maid_outfit = should_wear_maid_outfit
-
-    def wear_maid_outfit(self):
-        if self.maid_outfit:
-            self.apply_outfit(self.maid_outfit)
-            return
-
-        if self.should_wear_maid_outfit():
-            self.maid_outfit = maid_wardrobe.decide_on_outfit2(self)
-
-        if self.maid_outfit:
-            self.apply_outfit(self.maid_outfit)
-        return
-
-    Person.wear_maid_outfit = wear_maid_outfit
-
     def person_is_wearing_uniform(self):
         return self.outfit == self.planned_uniform and self.planned_uniform != self.planned_outfit
 
@@ -1926,6 +1905,8 @@ init -1 python:
             # run extension code
             if result and day%7 == 4 and casual_friday_uniform_policy.is_active():
                 result = False
+            if person.is_at_work() and person.job == doctor_job:
+                result = True # force True for doctor
             return result
 
         return should_wear_uniform_wrapper
@@ -1937,8 +1918,6 @@ init -1 python:
     def current_planned_outfit(self):
         if self.should_wear_uniform() and self.planned_uniform:
             return self.planned_uniform
-        elif self.should_wear_maid_outfit() and self.maid_outfit:
-            return self.maid_outfit
         elif self.location in [gym, university] and self.location_outfit:
             return self.location_outfit
         return self.planned_outfit
@@ -2012,8 +1991,6 @@ init -1 python:
 
         if self.should_wear_uniform():
             self.wear_uniform()
-        elif self.should_wear_maid_outfit():
-            self.wear_maid_outfit()
         elif self.location in [gym, university] and self.location_outfit:
             self.apply_outfit(self.location_outfit, ignore_base = ignore_base, update_taboo = update_taboo)
         else:
@@ -2025,28 +2002,39 @@ init -1 python:
 
     Person.apply_planned_outfit = apply_planned_outfit
 
-    def set_uniform_enhanced(self, uniform, wear_now = False):
-        if uniform is None:
+    def person_wear_uniform(self):
+        if self.planned_uniform:    # quick exit, use planned uniform
+            self.apply_outfit(self.planned_uniform)
             return
 
-        if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
-            (self.planned_uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform.get_copy())
-        elif creative_colored_uniform_policy.is_active():
-            self.planned_uniform = WardrobeBuilder(self).personalize_outfit(uniform.get_copy(), max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
+        if self.event_triggers_dict.get("forced_uniform", False):
+            uniform = self.event_triggers_dict.get("forced_uniform").get_copy()
         else:
-            self.planned_uniform = uniform.get_copy()
+            uniform_wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
+            if uniform_wardrobe:
+                uniform = uniform_wardrobe.decide_on_uniform(self)
+            else: # we have no valid wardrobe, pick an outfit from wardrobe as uniform
+                uniform = self.wardrobe.decide_on_outfit2(self)
 
-        if commando_uniform_policy.is_active():
-            for item in [x for x in self.planned_uniform.get_upper_ordered() if x.underwear]:
-                self.planned_uniform.remove_clothing(item)
-            for item in [x for x in self.planned_uniform.get_lower_ordered() if x.underwear]:
-                self.planned_uniform.remove_clothing(item)
+            if uniform and self.is_employee():  # only apply policies for employees
+                if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
+                    (uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform)
+                elif creative_colored_uniform_policy.is_active():
+                    uniform = WardrobeBuilder(self).personalize_outfit(uniform, max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
 
-        if wear_now:
-            self.wear_uniform()
+                if commando_uniform_policy.is_active():
+                    for item in [x for x in uniform.get_upper_ordered() if x.underwear]:
+                        uniform.remove_clothing(item)
+                    for item in [x for x in uniform.get_lower_ordered() if x.underwear]:
+                        uniform.remove_clothing(item)
+
+            if uniform and self.job == doctor_job:  # add lab coat for doctors
+                uniform.add_upper(lab_coat.get_copy(), colour_white)
+
+        self.set_uniform(uniform, True)
         return
 
-    Person.set_uniform = set_uniform_enhanced
+    Person.wear_uniform = person_wear_uniform
 
     def person_is_wearing_uniform_extended(org_func):
         def is_wearing_uniform_wrapper(person):

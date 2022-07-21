@@ -1,19 +1,18 @@
 init 0 python:
     # Overrides VREN's height function, so we display the height based on the weight property
     # instead of the fixed weight on zoom factor
-    # currently between (147cm) - (197cm).
+    # using new VREN calculations (122cm) - (215cm).
     @renpy.pure
     def height_to_string(person_height): #Height is a value between 0.8 and 1.0
-        rounded_height = __builtin__.round(person_height,3) #Round height to 3 decimal points.
-        height_in_inches = __builtin__.round((rounded_height)*100/1.5, 3)
+        rounded_height = __builtin__.round(person_height,5) #Round height to 5 decimal points.
+        height_in_inches = __builtin__.round((rounded_height * 100)/1.5, 3)
         feet = __builtin__.int(math.floor(height_in_inches/12))
         inches = __builtin__.int(height_in_inches % 12)
 
         if use_imperial_system:
             return "{}' {}\"".format(feet,inches)
         else:
-            cm = __builtin__.round(height_in_inches * 2.54, 1)
-            return __builtin__.str(cm) + " cm"
+            return "{:.0f} cm".format(height_in_inches * 2.54)
 
     # override without the 'ERROR' message (just use 'husband' as fallback)
     @renpy.pure

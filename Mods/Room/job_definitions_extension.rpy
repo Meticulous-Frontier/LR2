@@ -1,6 +1,8 @@
 init 5 python:
     list_of_instantiation_labels.append("add_extra_room_job_definitions")
 
+    barista_wardrobe = wardrobe_from_xml("Barista_Wardrobe")
+
 label add_extra_room_job_definitions():
     # runs right after the base game jobs have been created
     python:

@@ -98,7 +98,7 @@ label family_morning_breakfast_enhanced_label():
             mc.name "That's good!"
             lily "Thanks Mom, you're the best!"
         elif lily.lactation_sources > 0 and lily.tits_available():
-            mom "Want some coffe, honey?"
+            mom "Want some coffee, honey?"
             mc.name "Sure mom."
             mom "Here you go, maybe [lily.fname] could help you out with some milk."
             "[mom.title] gives you a quick wink."

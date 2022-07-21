@@ -65,6 +65,13 @@ init 2 python:
             return time_of_day == 2 and day >= candace_get_cure_day() + 7
         return False
 
+    def candace_check_police_chief_met():
+        if police_chief.title is None:  # haven't met, set title
+            police_chief.set_possessive_title("The police chief")
+            police_chief.set_mc_title("Mr. " + mc.last_name)
+            police_chief.set_title("Officer " + police_chief.last_name)
+        return
+
     #Candace Actions (define actions in init)
     candace_meet_at_office_store = Action("Meet Candi", candace_meet_at_office_store_requirement, "candace_meet_at_office_store_label")
     candace_get_to_know = Action("Get to know her {image=gui/heart/Time_Advance.png}", candace_get_to_know_requirement, "candace_get_to_know_label", menu_tooltip = "Find out more about Candi")
@@ -672,7 +679,7 @@ label candace_overhear_supply_order_label(the_person):
     the_person "Yes sir that's right. We need more of this stuff! Looks like it's called up... cal... calcium... phos... oh balls"
     "????" "I'm not sure I understand what you need. Do you have a label you can show me?"
     the_person "Oh! Certainly... I'd be glad to show you anything you want... let me see here."
-    "She goes through a draw in her desk and pulls out an empty vial. She tries holding it up to the camera."
+    "She goes through a drawer in her desk and pulls out an empty vial. She tries holding it up to the camera."
     if the_person.outfit.tits_available():
         "????" "It's too close... can you back it up a little bit?... Yeah a bit farther..."
         "With her tits out, she pulls the vial back until it is resting in her cleavage."
@@ -700,14 +707,14 @@ label candace_overhear_supply_order_label(the_person):
     "You walk up to her desk. She smiles at you when she sees you approach."
     the_person "Hello [the_person.mc_title]! Anything I can do for you today?"
     "You get ready to speak... but you notice her posture subtly change as she finishes that sentence. Did she just push her chest out a bit? You shake it off."
-    mc.name "Yes, sorry I couldn't help but overheard your conversation with that supplier."
+    mc.name "Yes, sorry I couldn't help but overhear your conversation with that supplier."
     the_person "Yes... sorry I just couldn't help but have a little fun with the guy..."
     mc.name "That's perfectly fine, I didn't mind that at all."
     the_person "Oh? That's good!"
     mc.name "Yeah, I'm just curious. Why did you turn down the discount? If they are offering to discount the product..."
     the_person "Oh, that. Well, I've had several suppliers start to offer discounts the last few days. I would say yes but... I was concerned they might get the wrong idea about... why I am showing them my body..."
     the_person "I've gotten dick pics from three different suppliers in the last few days... it's been great! I want them to feel like they owe me!"
-    mc.name "I'm sure that if you accepted their offer of a discount, they would still send you dick pics."
+    mc.name "I'm sure that if you accepted their discount offer, they would still send you dick pics."
     "She thinks about what you said for a bit."
     the_person "I don't know... are you sure?"
     mc.name "I'll tell you what, try it on your next call and see what happens. If it doesn't go the way you want, you don't have to accept it anymore."
@@ -747,11 +754,7 @@ label candace_supply_order_discount_label():
 label candace_topless_at_mall_label(the_person):
     $ scene_manager = Scene()
     python:
-        if police_chief.title is None:  # haven't met, set title
-            police_chief.set_possessive_title("the police chief")
-            police_chief.set_mc_title("Mr. " + mc.last_name)
-            police_chief.set_title("Officer " + police_chief.last_name)
-
+        candace_check_police_chief_met()
         police_chief.wear_uniform() # make sure whe wears her uniform
 
     "As you walk around the mall, you notice a commotion. A small group of mostly men have gathered around someone, you walk over to see what is going on."
@@ -817,11 +820,7 @@ label candace_topless_at_mall_label(the_person):
 
 label candace_midnight_wakeup_label():
     python:
-        if police_chief.title is None:  # haven't met, set title
-            police_chief.set_possessive_title("the police chief")
-            police_chief.set_mc_title("Mr. " + mc.last_name)
-            police_chief.set_title("Officer " + police_chief.last_name)
-
+        candace_check_police_chief_met()
         # make sure she is in the police station wearing her uniform
         police_chief.change_location(police_station)
         police_chief.wear_uniform()

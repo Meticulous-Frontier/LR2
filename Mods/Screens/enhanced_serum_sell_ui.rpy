@@ -1,7 +1,25 @@
 init 2:
     screen serum_sell_ui():
         add "Science_Menu_Background.png"
-        #use serum_tooltip
+
+        python:
+            market_reach = "{market_reach:,}".format(market_reach = __builtin__.int(mc.business.market_reach))
+            funds = "${funds:,}".format(funds = __builtin__.int(mc.business.funds))
+            attention_info = get_attention_string(mc.business.attention, mc.business.max_attention) + " (-" + str(mc.business.attention_bleed) + "/Day)"
+            mental_price = "{value:.2f}".format(value = mc.business.get_aspect_price("Mental"))
+            physical_price = "{value:.2f}".format(value = mc.business.get_aspect_price("Physical"))
+            sexual_price = "{value:.2f}".format(value = mc.business.get_aspect_price("Sexual"))
+            medical_price = "{value:.2f}".format(value = mc.business.get_aspect_price("Medical"))
+            flaw_cost = "{value:.2f}".format(value = mc.business.get_aspect_price("Flaw"))
+            mental_percentage = "{value:.0f}".format(value = 200*mc.business.get_aspect_percent("Mental"))
+            physical_percentage = "{value:.0f}".format(value = 200*mc.business.get_aspect_percent("Physical"))
+            sexual_percentage = "{value:.0f}".format(value = 200*mc.business.get_aspect_percent("Sexual"))
+            medical_percentage = "{value:.0f}".format(value = 200*mc.business.get_aspect_percent("Medical"))
+            flaw_percentage = "{value:.0f}".format(value = 200*mc.business.get_aspect_percent("Flaw"))
+            active_contracts = "{number}".format(number = len(mc.business.active_contracts))
+            max_active_contracts = "{number}".format(number = mc.business.max_active_contracts)
+            number_of_contracts = "{number}".format(number = len(mc.business.offered_contracts))
+
         modal True
         hbox:
             spacing 40
@@ -20,38 +38,36 @@ init 2:
                         scrollbars "vertical"
                         vbox:
                             for serum_stock in mc.business.inventory.serums_held:
-                                $ the_serum = serum_stock[0]
-                                $ serum_amount = serum_stock[1]
                                 hbox:
-                                    $ serum_dose_value = mc.business.get_serum_base_value(the_serum, round_value = True)
-                                    use serum_design_menu_item(the_serum, name_addition = ": " + str(serum_amount) + " Doses, $" + str(serum_dose_value) + "/Dose")
+                                    $ serum_dose_value = mc.business.get_serum_base_value(serum_stock[0], round_value = True)
+                                    use serum_design_menu_item(serum_stock[0], name_addition = ": " + str(serum_stock[1]) + " Doses, $" + str(serum_dose_value) + "/Dose")
                                     textbutton "1":
                                         ysize 64
                                         xsize 50
                                         text_yalign 0.5
                                         text_xalign 0.5
                                         text_yanchor 0.5
-                                        action Function(mc.business.sell_serum, the_serum)
+                                        action Function(mc.business.sell_serum, serum_stock[0])
                                         style "textbutton_style" text_style "textbutton_text_style"
-                                        sensitive serum_amount >= 1
+                                        sensitive serum_stock[1] >= 1
                                     textbutton "10":
                                         ysize 64
                                         xsize 50
                                         text_yalign 0.5
                                         text_xalign 0.5
                                         text_yanchor 0.5
-                                        action Function(mc.business.sell_serum, the_serum, serum_count = 10)
+                                        action Function(mc.business.sell_serum, serum_stock[0], serum_count = 10)
                                         style "textbutton_style" text_style "textbutton_text_style"
-                                        sensitive serum_amount >= 10
+                                        sensitive serum_stock[1] >= 10
                                     textbutton "All":
                                         ysize 64
                                         xsize 50
                                         text_yalign 0.5
                                         text_xalign 0.5
                                         text_yanchor 0.5
-                                        action Function(mc.business.sell_serum, the_serum, serum_count = serum_amount)
+                                        action Function(mc.business.sell_serum, serum_stock[0], serum_count = serum_stock[1])
                                         style "textbutton_style" text_style "textbutton_text_style"
-                                        sensitive serum_amount > 0
+                                        sensitive serum_stock[1] > 0
 
 
                 #TODO: This holds the current serem selections
@@ -69,18 +85,17 @@ init 2:
                                 action VrenNullAction style "textbutton_style" text_style "textbutton_text_style"
                                 tooltip "How many people have heard about your business. The larger your market reach the more each serum aspect point is worth."
 
-                            text str(mc.business.market_reach) + " People" style "textbutton_text_style" yalign 0.5
+                            text "[market_reach] People" style "textbutton_text_style" yalign 0.5
 
                             null width 50
 
-                            text "Current Funds: {color=#98fb98}$" + str(mc.business.funds) + "{/color}" style "textbutton_text_style" yalign 0.5
+                            text "Current Funds: {color=#98fb98}[funds]{/color}" style "textbutton_text_style" yalign 0.5
 
                         hbox:
                             textbutton "Attention:":
                                 action VrenNullAction style "textbutton_style" text_style "textbutton_text_style"
                                 tooltip "How much attention your business has drawn. If this gets too high the authorities will act, outlawing a serum design, leveling a fine, or seizing your inventory."
 
-                            $ attention_info = get_attention_string(mc.business.attention, mc.business.max_attention) + " (-" + str(mc.business.attention_bleed) + "/Day)"
                             text "[attention_info]" style "textbutton_text_style" yalign 0.5
 
                         null height 8
@@ -100,25 +115,25 @@ init 2:
                                 text "Flaws" style "menu_text_style" color "#AAAAAA"
 
                                 text ("Values") style "menu_text_style"
-                                text "$" + str("%.2f" % mc.business.get_aspect_price("Mental")) style "menu_text_style"
-                                text "$" + str("%.2f" % mc.business.get_aspect_price("Physical")) style "menu_text_style"
-                                text "$" + str("%.2f" % mc.business.get_aspect_price("Sexual")) style "menu_text_style"
-                                text "$" + str("%.2f" % mc.business.get_aspect_price("Medical")) style "menu_text_style"
-                                text "-$" + str("%.2f" % -mc.business.get_aspect_price("Flaw")) style "menu_text_style"
+                                text "$ [mental_price]" style "menu_text_style"
+                                text "$ [physical_price]" style "menu_text_style"
+                                text "$ [sexual_price]" style "menu_text_style"
+                                text "$ [medical_price]" style "menu_text_style"
+                                text "$ [flaw_cost]" style "menu_text_style"
 
                                 text ("Desire") style "menu_text_style"
-                                text str("%.0f" % (200*mc.business.get_aspect_percent("Mental"))) + "%" style "menu_text_style"
-                                text str("%.0f" % (200*mc.business.get_aspect_percent("Physical"))) + "%" style "menu_text_style"
-                                text str("%.0f" % (200*mc.business.get_aspect_percent("Sexual"))) + "%" style "menu_text_style"
-                                text str("%.0f" % (200*mc.business.get_aspect_percent("Medical"))) + "%" style "menu_text_style"
-                                text str("-%.0f" % (200*mc.business.get_aspect_percent("Flaw"))) + "%" style "menu_text_style"
+                                text "[mental_percentage]%" style "menu_text_style"
+                                text "[physical_percentage]%" style "menu_text_style"
+                                text "[sexual_percentage]%" style "menu_text_style"
+                                text "[medical_percentage]%" style "menu_text_style"
+                                text "-[flaw_percentage]%" style "menu_text_style"
 
                 frame:
                     background "#1a45a1aa"
                     xsize 800 ysize 550
                     vbox:
                         ysize 400
-                        text "Active Contracts (" + str(len(mc.business.active_contracts)) + "/" + str(mc.business.max_active_contracts) + " Max)" style "menu_text_title_style"
+                        text "Active Contracts ([active_contracts]/[max_active_contracts] Max)" style "menu_text_title_style"
                         viewport:
                             mousewheel True
                             scrollbars "vertical"
@@ -150,7 +165,7 @@ init 2:
                                             sensitive contract.can_finish_contract()
 
 
-                    textbutton "New Contracts: " + str(len(mc.business.offered_contracts)) + " Available":
+                    textbutton "New Contracts: [number_of_contracts] Available":
                         style "textbutton_style"
                         text_style "textbutton_text_style"
                         yanchor 1.0
@@ -176,6 +191,8 @@ init 2:
             textbutton "Return" align [0.5,0.5] style "return_button_style" text_style "return_button_style"
 
     screen serum_design_menu_item(the_design, given_x_size = 500, given_y_size = 64, name_addition = ""):
+        python:
+            serum_name = "{name}{addition}".format(name = the_design.name, addition = name_addition)
         frame:
             background None
 
@@ -198,5 +215,5 @@ init 2:
                 xalign 1.0
                 xfill True
                 yfill True
-                text the_design.name + name_addition style "textbutton_text_style" xoffset 16 yoffset 10
+                text "[serum_name]" style "textbutton_text_style" xoffset 16 yoffset 10
                 use aspect_grid(the_design, given_xalign = 0.03, given_xanchor = 0.0)
