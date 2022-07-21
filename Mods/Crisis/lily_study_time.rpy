@@ -21,8 +21,7 @@ label sister_failed_test_label():
         $ failed_subject = get_random_from_list( ["Calculus", "Biology", "Chemistry", "Physics", "Geology"])
     else:
         $ student = False
-        $ work = "work"
-        $ job = the_person.job.job_title
+        $ word = "work"
     $ mc.change_location(bedroom) #Make sure we're in our bedroom.
     $ mc.location.show_background()
     "Laying in your bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
@@ -38,7 +37,7 @@ label sister_failed_test_label():
         the_person "I'm having some troubles in my [failed_subject] class... I thought maybe you would be willing to [word] with me for a little bit?"
         "In her hand is a failed quiz."
     else:
-        the_person "I'm having some troubles with my [job] tasks... I thought maybe you would be willing to [word] with me for a little bit?"
+        the_person "I'm having some troubles with my [the_person.job.job_title] tasks... I thought maybe you would be willing to [word] with me for a little bit?"
         if the_person.job == market_job:
             "In her hand are some phone scripts for cold calling."
         if the_person.job == rd_job or the_person.job == head_researcher_job:
@@ -46,7 +45,7 @@ label sister_failed_test_label():
         if the_person.job == production_job:
             "In her hand is a manual for one of the machines you use on the assembly line."
         if the_person.job == supply_job:
-            "In her hand is a spreedsheet of chemicals and their prices."
+            "In her hand is a spreadsheet of chemicals and their prices."
         if the_person.job == hr_job:
             "In her hand is an employee file for one of her coworkers."
     menu:
@@ -142,7 +141,7 @@ label sister_failed_test_label():
             if the_person.judge_outfit(the_person.planned_uniform):
                 the_person "That's not too bad. It will help me get into the proper head space too."
             else:
-                the_person "God, this is so embarassing. At least at work I'm not the only one dressed like a slut."
+                the_person "God, this is so embarrassing. At least at work I'm not the only one dressed like a slut."
             if office_punishment.is_active():
                 mc.name "Now strip."
                 if the_person.sluttiness > 60: #Eager
@@ -215,6 +214,7 @@ label sister_failed_test_label():
         if the_person.job == hr_job:
             $ other_person = get_random_from_list(mc.business.get_employee_list())
             "You flip through the folder about [other_person.title] trying to figure out what is causing problems."
+            $ other_person = None
         if mc.int > 5:
             "Even if you don't do her job every day you quickly recall the information you use working in the [the_person.job.job_location.name]."
             "You quickly mark some places with sticky notes and help [the_person.title] figure out how to get past the road blocks."
@@ -229,7 +229,7 @@ label sister_failed_test_label():
             if the_person.job == hr_job:
                 $ the_person.change_hr_skill(1)
         elif mc.int >2:
-            "Wworking in the [the_person.job.job_location.name] is not your favorite thing, and it takes you quite a bit of time to figure out where all the information is located."
+            "Working in the [the_person.job.job_location.name] is not your favorite thing, and it takes you quite a bit of time to figure out where all the information is located."
             $ mc.change_energy(-5)
             "Eventually, you are able to help [the_person.title] solve most of her problems."
         else:
@@ -323,7 +323,7 @@ label sister_failed_test_label():
                     "[the_person.possessive_title] opens her mouth wide and slowly slides your cock past her lips. Their velvet warmth feels amazing."
                     "[the_person.title] begins to slowly bob her head up and down."
                 call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False, ) from _lily_study_time_blowjob_01
-            "Ask for quickie" if the_person.sluttiness >= 70 and mc.energy > 50 and the_person.vagina_available() and not the_person.has_taboo("touching_penis") and not the_person.has_taboo("sucking_cock"):
+            "Ask for quickie" if the_person.sluttiness >= 60 and mc.energy > 50 and the_person.vagina_available() and not the_person.has_taboo("touching_penis") and not the_person.has_taboo("sucking_cock"):
                 if the_person.has_taboo("vaginal_sex"):
                     the_person "Wow... you want me to just... hop on and go for a ride? That's... a little crazy, don't you think?"
                     the_person "I mean, we've never even gone that far before..."
