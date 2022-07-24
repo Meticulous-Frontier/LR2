@@ -682,7 +682,7 @@ label camilla_blowjob_text_label(the_person):
     "You shift uncomfortably. This story is starting to turn you on!"
     $ mc.change_locked_clarity(20)
     the_person "Haaa... sorry! I probably should have just said that it went well."
-    mc.name "No it's' alright. I was a little concerned with how things would go for you, but I'm glad that it turned out well."
+    mc.name "No it's alright. I was a little concerned with how things would go for you, but I'm glad that it turned out well."
     $ the_person.draw_person(position = "stand4", emotion = "happy")
     the_person "It really did! So uhh, if you wanna go again, just ask. I'd be happy to be of service, BUT, we need to set some ground rules first!"
     mc.name "Okay, I'm down for that."

@@ -1299,7 +1299,7 @@ label candace_cure_bimbo_label():
     the_person "Anything you can tell us? About what originally happened to you? Or how you got here?"
     $ scene_manager.update_actor(candace, emotion = "sad")
     "Her brow furrows as she starts to recall."
-    candace "I was the lead researcher, at another company, but we had just received word that our government funding was going to get cut if we couldn't get results."
+    candace "I was the lead researcher, at another company, and we had just received word that our government funding was going to get cut if we couldn't get results."
     "She clears her throat and continues."
     candace "I was desperate, but also overconfident. I wanted to rush human trials, but my boss said no. So I decided to take it myself."
     the_person "What were you trying to make?"

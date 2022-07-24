@@ -779,6 +779,7 @@ label ophelia_revenge_date_label():
     $ scene_manager.update_actor(the_person, position = "kissing")
     "[the_person.title] wraps her arms around you. Your faces close, you lean in and kiss her."
     $ the_person.add_situational_slut("Date", 20, "There's no reason to hold back, he's here to fuck me!")
+    $ scene_manager.update_actor(the_person, position = "kissing", special_modifier = "kissing")
     "She kisses you back, responding immediately. Her body melts into yours."
     $ the_person.change_arousal(15)
     $ mc.arousal += 10

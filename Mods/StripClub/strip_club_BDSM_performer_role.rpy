@@ -648,7 +648,7 @@ label caged_anal_doggy_label(the_person):
         $ the_person.add_situational_slut("being_caged", 8, "Everyone can see the slut I am...")
     if the_person.get_opinion_score("public sex") >= 0:
         $ the_person.add_situational_slut("being_used_in_the_cage", (the_person.get_opinion_score("public sex")*5 +5), "Everyone can see the slut I am...")
-    "Meanwhile your finger circle [the_person.title]'s asshole, with the other hand you unzip your pants and set your hard dick free."
+    "Meanwhile your finger circles [the_person.title]'s asshole, with the other hand you unzip your pants and set your hard dick free."
     if the_person.has_role(anal_fetish_role) or the_person.get_opinion_score("anal sex") >= 2:
         $ the_person.draw_person(position = "doggy", emotion = "happy")
         the_person "Oh! I like where this is going!"
