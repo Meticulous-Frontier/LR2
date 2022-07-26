@@ -30,6 +30,30 @@ label alternative_start():
         "Realistic pregnancy content\n{size=16}Birth control is not 100%% effective. Girls may not be taking birth control.{/size}":
             $ persistent.pregnancy_pref = 2
 
+    python:
+        global TIER_1_TIME_DELAY
+        global TIER_2_TIME_DELAY
+        global TIER_3_TIME_DELAY
+
+    "MOD" "Starbuck here! How quickly would you like stories from the mod to play out? This will affect spacing between story events."
+    menu:
+        "Quick":
+            $ TIER_1_TIME_DELAY = 1
+            $ TIER_2_TIME_DELAY = 3
+            $ TIER_3_TIME_DELAY = 7
+        "Standard":
+            $ TIER_1_TIME_DELAY = 3
+            $ TIER_2_TIME_DELAY = 7
+            $ TIER_3_TIME_DELAY = 14
+        "Epic":
+            $ TIER_1_TIME_DELAY = 5
+            $ TIER_2_TIME_DELAY = 12
+            $ TIER_3_TIME_DELAY = 20
+        "Marathon":
+            $ TIER_1_TIME_DELAY = 7
+            $ TIER_2_TIME_DELAY = 15
+            $ TIER_3_TIME_DELAY = 30
+
     $ easy_mode = False
     "MOD" "Do you want to play with original game difficulty or make the game easier?"
     menu:
