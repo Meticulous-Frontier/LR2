@@ -666,10 +666,9 @@ init 2 python:
                 if person.sluttiness > 50 and person.has_job(stripper_job):
                     list_of_titles.append("Pole-Slut")
                 if person.love > 50 and person.has_job(stripclub_mistress_job):
-                    valid_titles.append("Milady")
+                    list_of_titles.append("Milady")
                 if person.sluttiness > 60 and person.has_job(stripclub_mistress_job):
-                    valid_titles.append("Mistress")
-
+                    list_of_titles.append("Mistress")
 
             return list(set(list_of_titles))
 
