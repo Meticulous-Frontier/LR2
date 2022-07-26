@@ -216,7 +216,7 @@ init -2 python:
         return False
 
     def myra_gaming_cafe_opening_requirement():
-        if gaming_cafe_is_business_hours() and alexia.is_employee() and mc.business.days_since_event("myra_rude_intro") >= 7 and alexia.days_employed > 4:
+        if gaming_cafe_is_business_hours() and alexia.is_employee() and mc.business.days_since_event("myra_rude_intro") >= TIER_2_TIME_DELAY and alexia.days_employed > TIER_1_TIME_DELAY:
             return True
         mc.business.set_event_day("myra_rude_intro", override = False)
         return False
@@ -380,7 +380,7 @@ label myra_gaming_cafe_opening_label():
 
 init -2 python:
     def myra_esports_practice_requirement(the_person):
-        if the_person.love >= 20 and gaming_cafe_is_business_hours() and day%7 < 5 and mc.business.days_since_event("gaming_cafe_open_day") > 7:
+        if the_person.love >= 20 and gaming_cafe_is_business_hours() and day%7 < 5 and mc.business.days_since_event("gaming_cafe_open_day") > TIER_2_TIME_DELAY:
             return True
         return False
 
@@ -390,7 +390,7 @@ init -2 python:
         return False
 
     def myra_train_focus_intro_requirement(the_person):
-        if gaming_cafe_is_business_hours() and mc.business.days_since_event("myra_fails_tournament") > 5 and myra_at_cafe():
+        if gaming_cafe_is_business_hours() and mc.business.days_since_event("myra_fails_tournament") > TIER_1_TIME_DELAY and myra_at_cafe():
             return True
         mc.business.set_event_day("myra_fails_tournament", override = False)
         return False
@@ -404,7 +404,7 @@ init -2 python:
         return False
 
     def myra_loses_sponsor_requirement(the_person):
-        if the_person.love >= 60 and gaming_cafe_is_business_hours() and myra_at_cafe() and time_of_day == 3 and mc.business.days_since_event("myra_fails_tournament") > 12:
+        if the_person.love >= 60 and gaming_cafe_is_business_hours() and myra_at_cafe() and time_of_day == 3 and mc.business.days_since_event("myra_fails_tournament") > TIER_3_TIME_DELAY:
             return True
         return False
 
@@ -414,7 +414,7 @@ init -2 python:
         return False
 
     def myra_esports_second_tournament_intro_requirement(the_person):
-        if the_person.love >= 80 and mc.business.days_since_event("myra_sponsor_day") > 7:
+        if the_person.love >= 80 and mc.business.days_since_event("myra_sponsor_day") > TIER_2_TIME_DELAY:
             if myra_focus_progression_scene.get_stage() >= 2 and gaming_cafe_is_business_hours() and myra_at_cafe() and day%7 < 4:
                 return True
         return False
@@ -425,7 +425,7 @@ init -2 python:
         return False
 
     def myra_gaming_cafe_expansion_intro_requirement(the_person):
-        if the_person.love >= 95 and mc.business.days_since_event("myra_tourn_win_day") > 10:
+        if the_person.love >= 95 and mc.business.days_since_event("myra_tourn_win_day") > TIER_2_TIME_DELAY:
             if gaming_cafe_is_business_hours() and myra_at_cafe() and day%7 != 6:
                 return True
         return False
@@ -937,7 +937,7 @@ init -2 python:
 
     def myra_energy_drink_research_final_requirement():
         if mc.business.head_researcher.location == rd_division:
-            if mc.business.days_since_event("energy_drink_start_research") > 7:
+            if mc.business.days_since_event("energy_drink_start_research") > TIER_2_TIME_DELAY:
                 return True
         mc.business.set_event_day("energy_drink_start_research", override = False)
         return False
@@ -1194,14 +1194,14 @@ init -2 python:
         return False
 
     def myra_lewd_gaming_requirement(the_person):
-        if the_person.sluttiness >= 40 and myra_at_cafe() and time_of_day == 3 and mc.business.days_since_event("myra_distracted_day") > 5:
+        if the_person.sluttiness >= 40 and myra_at_cafe() and time_of_day == 3 and mc.business.days_since_event("myra_distracted_day") > TIER_1_TIME_DELAY:
             return True
         return False
 
     def myra_lewd_game_fuck_intro_requirement(the_person):
         if the_person.has_taboo("vaginal_sex"):
             return False
-        if the_person.sluttiness >= 60 and myra_at_cafe() and time_of_day == 3 and mc.business.days_since_event("myra_lewd_game_day") > 5:
+        if the_person.sluttiness >= 60 and myra_at_cafe() and time_of_day == 3 and mc.business.days_since_event("myra_lewd_game_day") > TIER_1_TIME_DELAY:
             return True
         return False
 
@@ -1219,13 +1219,13 @@ init -2 python:
 
 
     def myra_adult_gaming_intro_requirement(the_person):
-        if the_person.sluttiness >= 80 and mc.business.days_since_event("myra_lewd_game_fuck") >= 5:
+        if the_person.sluttiness >= 80 and mc.business.days_since_event("myra_lewd_game_fuck") >= TIER_2_TIME_DELAY:
             if myra_is_expanding_business() and myra_at_cafe():
                 return True
         return False
 
     def myra_adult_gaming_opening_requirement():
-        if myra_at_cafe() and mc.business.days_since_event("adult_cafe_opening_day") >= 14:
+        if myra_at_cafe() and mc.business.days_since_event("adult_cafe_opening_day") >= TIER_3_TIME_DELAY:
             return True
         return False
 
@@ -1865,13 +1865,13 @@ init -2 python:
         return False
 
     def myra_blowjob_training_progress_requirement(the_person):
-        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train") >= 7 and the_person.obedience >= 160:
+        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train") >= TIER_2_TIME_DELAY and the_person.obedience >= 160:
             return True
         mc.business.set_event_day("myra_bj_train", override = False)
         return False
 
     def myra_blowjob_training_final_requirement(the_person):
-        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train")  >= 7 and the_person.obedience >= 180:
+        if myra_at_cafe() and mc.business.days_since_event("myra_bj_train")  >= TIER_2_TIME_DELAY and the_person.obedience >= 180:
             return True
         mc.business.set_event_day("myra_bj_train", override = False)
         return False
