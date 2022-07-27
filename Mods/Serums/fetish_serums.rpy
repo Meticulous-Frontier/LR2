@@ -487,7 +487,7 @@ init -1 python:
     def unlock_fetish_serum(serum):
         if not serum or serum.researched: # prevent duplicate unlock calls
             return
-        serum.tier = 2
+        serum.tier = 1
         serum.researched = True
         mc.business.event_triggers_dict["fetish_serum_count"] = fetish_serum_unlock_count() + 1
         return
