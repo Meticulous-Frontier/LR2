@@ -193,3 +193,45 @@ init -1 python:
         return int(sum / len(self.people))
 
     Room.room_average_slut = room_average_slut
+
+    def room_max_slut(self):
+        if len(self.people) == 0:
+            return 0
+        sum = 0
+        for person in self.people:
+            sum = max(person.sluttiness, sum)
+        return int(sum)
+
+    Room.room_max_slut = room_max_slut
+
+    def room_outfit_average_sluttiness(self):
+        if len(self.people) == 0:
+            return 0
+        sum = 0
+        for person in self.people:
+            sum += person.outfit.get_full_outfit_slut_score()
+        return int(sum / len(self.people))
+
+    def room_outfit_max_sluttiness(self):
+        if len(self.people) == 0:
+            return 0
+        sum = 0
+        for person in self.people:
+            sum = max(person.outfit.get_full_outfit_slut_score(), sum)
+        return int(sum)
+
+    def room_outfit_eye_candy_score(self):
+        if len(self.people) == 0:
+            return 0
+        sum = 0
+        for person in self.people:
+
+
+            sum += int(person.outfit.get_full_outfit_slut_score() / 5)
+            sum += person.outfit.check_outfit_cum() * 5
+
+        return int(sum)
+
+    Room.room_outfit_average_sluttiness = room_outfit_average_sluttiness
+    Room.room_outfit_max_sluttiness = room_outfit_max_sluttiness
+    Room.room_outfit_eye_candy_score = room_outfit_eye_candy_score
