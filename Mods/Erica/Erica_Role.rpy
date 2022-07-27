@@ -777,12 +777,13 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
         menu:
             "Fuck her":
                 "You step closer to her. You put your hands on her hips and pull her in."
-                $ the_person.draw_person(position = "kissing")
+                $ the_person.draw_person(position = "kissing", special_modifier="kissing")
                 "You lean in and kiss [the_person.possessive_title] hungrily. Her hips are grinding against yours."
                 $ the_person.change_arousal(10)
                 $ mc.change_locked_clarity(10)
                 $ the_person.add_situational_slut("horny", 10, "You take charge")
                 $ the_person.add_situational_obedience("submissive", 20, "She submits to you")
+                $ the_person.draw_person(position = "kissing")
                 the_person "Mmm, I'm ready... do whatever you want, [the_person.mc_title]..."
                 call fuck_person(the_person, private = True) from _erica_gets_fucked_by_her_man_in_lockerroom_01
             "Let her take the lead":

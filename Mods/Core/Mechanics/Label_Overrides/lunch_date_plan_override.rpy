@@ -5,7 +5,7 @@ init 5 python:
         opinion_question_list = []
 
         #Generates a list with a few (usually 4, unless there's some opinion collision, but it's not important enough to filter things out more intelligently) opinions, one of which she likes
-        while len(opinion_question_list) < 3:
+        for x in __builtin__.range(3):
             possible_opinion = the_person.get_random_opinion()
             if possible_opinion not in opinion_question_list:
                 opinion_question_list.append(possible_opinion)
@@ -14,6 +14,9 @@ init 5 python:
 
         if key_opinion is not None and key_opinion not in opinion_question_list:
             opinion_question_list.append(key_opinion)
+
+        if len(opinion_question_list) == 0:
+            opinion_question_list.append("small talk")
 
         renpy.random.shuffle(opinion_question_list)
 

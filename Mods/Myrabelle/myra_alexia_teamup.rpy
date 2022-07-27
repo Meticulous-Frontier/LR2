@@ -1370,11 +1370,11 @@ label myra_alexia_teamup_trans_scene_2(the_group):
     the_person "[alexia.fname]... what!?!"
     alexia "I mean, guys jack off all the time, right? I'm sure he can use his own hand with more skill than we have."
     the_person "That's not the point..."
-    alexia "Besides, his tongue is even better than has fingers..."
+    alexia "Besides, his tongue is even better than his fingers..."
     "[the_person.title] stops her protest."
     the_person "[alexia.fname]... how would you even know..."
     "Suddenly, [alexia.possessive_title] realizes what she said."
-    alexia "I mean, he probably does... that's how sex is, right? It get's better like..."
+    alexia "I mean, he probably does... that's how sex is, right? It gets better like..."
     "[alexia.title] is rambling, trying to come up with a good excuse for why she knows what your tongue feels like."
     the_person "Hey. It's okay. If you're fine with sucking off [the_person.mc_title] while he eats me out, that's fine by me."
     alexia "If you WIN, you mean!"
@@ -1795,7 +1795,7 @@ label myra_alexia_teamup_med_distraction(the_person):
             "[the_person.possessive_title] leans back against you. She sighs when your other hand gropes her tit."
             the_person "Mmm, that feels so good."
             "Her body is melting into yours. She is trying to concentrate on the match, but is thoroughly enjoying your touch too."
-            "Her pussy is getting so wet, and her hips are rocking a bit as you touch her."
+            "Her pussy is getting very wet, and her hips are rocking a bit as you touch her."
             "She is still in the match, but it is clear she is really enjoying the way you are touching her."
             return 40
         else:
@@ -1944,7 +1944,7 @@ label myra_alexia_teamup_large_distraction(the_person):
             "You reach down with your other hand and easily slide two fingers into her cunt. Her arousal is clear from her smell and her gasps."
             the_person "Mmm, that feels so good."
             "Her body is melting into yours. She is trying to concentrate on the match, but is thoroughly enjoying your touch too."
-            "Her pussy is getting so wet, and her hips are rocking a bit as you touch her."
+            "Her pussy is extremely wet, and her hips are rocking a bit as you touch her."
             "You don't hold anything back. You grope her tit, pinching her nipple roughly as you finger fuck her."
             "Suddenly though, the match is over. She is close to orgasm, but not quite there..."
             return 40

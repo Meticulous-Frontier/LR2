@@ -454,6 +454,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     mc.name "Your charm is difficult to resist. And the coffee is good too."
     $ the_person.draw_person(position = "kissing")
     "[the_person.title] holds her arms out for a hug, and you draw her close. She is looking up at you, and feeling right, you kiss her."
+    $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
     "She responds immediately and starts kissing you back. Her mouth opens and your tongues intertwine in a passionate kiss."
     "Your hands start to roam around [the_person.possessive_title]'s back. She gives a little moan when your hand wanders down to her ass, but reaches back and moves your hand back up."
     $ the_person.change_arousal(15)
@@ -778,7 +779,7 @@ label kaya_lily_study_night_recurring_label(the_person):
 
 label kaya_uni_scholarship_intro_label(the_person):
     "You go for a walk, eventually coming to the university grounds. You decide to walk about for a bit, admiring the architecture and the people."
-    "The four years you spent going here, you feel a connection to this place and to the students. It feels good to be on the grounds."
+    "After the four years you spent going here, you feel a connection to this place and to the students. It feels good to be on the grounds."
     "As you walk around, you spot [the_person.possessive_title]. She is stepping out of a building, and seems down."
     $ the_person.draw_person(emotion = "sad")
     mc.name "Hey [the_person.title]. Doing okay?"
@@ -1033,13 +1034,14 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     "Seeing that she is clearly distraught, you step forward and put your arms around [the_person.title]."
     "She pushes her face into your chest for a minute. She doesn't cry, but you can feel the emotions stirring inside her."
     the_person "I have a lot to be afraid of right now... but that doesn't mean I can't take time to do things that make me happy sometimes too."
-    $ the_person.draw_person(position = "kissing", emotion = "happy")
+    $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
     "[the_person.possessive_title] looks up at you. She brings her arms around your neck and you lean in and begin to kiss."
     "It starts docile, but quickly heats up. Her tongue is hungry for yours and soon you are making out earnestly."
     $ the_person.change_arousal(10)
     $ mc.change_locked_clarity(20)
     "Your hands reach down and grope [the_person.possessive_title]'s ass. You've been waiting a while to get a piece of this!"
     "But still, something feels off. She seems desperate, and you wonder if her emotional state is okay."
+    $ the_person.draw_person(position = "kissing")
     "You break off the kiss for a moment and look at her."
     mc.name "Are you sure you are okay with this? You've been through a lot lately, I feel like I'm kind of taking advantage of you."
     the_person "God... you are just perfect, aren't you?"
@@ -1189,9 +1191,10 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
             "Fuck her":
                 "You can't take it anymore. You step forward and grab her by the waist. She immediately grabs on to you."
                 "You start making out."
-                $ scene_manager.update_actor(the_person, position = "kissing")
+                $ scene_manager.update_actor(the_person, position = "kissing", special_modifier = "kissing")
                 "The sexual tension is incredible. Her body responds to every touch and caress as your hands roam all over her."
                 "Primitive urges are overtaking you both. It isn't long until clothes start to come off."
+                $ scene_manager.update_actor(the_person, special_modifier = None)
                 $ scene_manager.strip_to_tits(person = the_person, prefer_half_off = True)
                 "With her perky tits out, you quickly kiss down the side of her neck and to her chest. You lick and suckle on one nipple while you grope her other tit with your hands."
                 the_person "{=kaya_lang}He pai te ahua{/=kaya_lang}"
@@ -1441,10 +1444,11 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     "[the_person.possessive_title] stands up."
     the_person "Come with me!"
     "You follow her to a backroom, away from the big windows facing the street."
-    $ the_person.draw_person(position = "kissing")
+    $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
     "She pulls you close and you start to make out. She moans when your hand grabs her ass."
     $ the_person.change_arousal(15)
     $ mc.change_locked_clarity(30)
+    $ the_person.draw_person(position = "kissing")
     the_person "You'd better take me now. I'm not sure how often we will be able to do this, so we'll need to take advantage of every opportunity."
     if kaya_had_condom_talk():#You've probably done this by now. If not, we definitely have the talk now.
         mc.name "You don't have to tell me twice."

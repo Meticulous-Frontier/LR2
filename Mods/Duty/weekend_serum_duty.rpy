@@ -58,7 +58,8 @@ init 1 python:
         "Receive a dose of serum from management at the start of every weekend, unless a previous dose will last the weekend. Serum type can be varied by department and set from the main office (daily serum dose).",
         requirement_function = weekend_serum_dosage_duty_requirement,
         on_move_function = weekend_serum_dosage_duty_on_move, #NOTE: A flag makes sure this is only triggered once per day.
-        on_day_function = daily_serum_dosage_duty_on_day)
+        on_day_function = daily_serum_dosage_duty_on_day,
+        only_at_work = False)
 
     serum_policies_list.append(weekend_serum_dosage_policy)
     general_duties_list.append(weekend_serum_dosage_duty)

@@ -227,7 +227,7 @@ label ask_to_join_harem_label(the_person):
         else:
             the_person "Oh my god, I'm so happy! Yes, I want to be part of your flock!"
         "She puts her arms around you and pulls you close."
-        $ the_person.draw_person(position = "kissing", emotion = "happy", special_modifier = "kissing")
+        $ the_person.draw_person(position = "kissing", special_modifier = "kissing")
         $ mc.change_locked_clarity(10)
         "She kisses you, and you kiss her back just as happily."
         $ the_person.add_role(harem_role)

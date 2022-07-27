@@ -2,7 +2,7 @@ init 5 python:
     doggy.double_orgasm = "doggy_double_orgasm"
 
 label doggy_double_orgasm(the_girl, the_location, the_object):
-    "[the_girl.title] lifts one leg off [the_object.name] as you fuck her hard, in the final stretch before your orgasm."
+    "[the_girl.title] lifts one leg off the [the_object.name] as you fuck her hard, in the final stretch before your orgasm."
     the_girl "Oh god it's so good! Oh [the_girl.mc_title] I'm gonna cum!"
     "Hearing her call out your name is pushing you over the edge. You are about to cum too."
     mc.name "I'm cumming too!"
