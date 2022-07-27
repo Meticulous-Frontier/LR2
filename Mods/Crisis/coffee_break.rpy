@@ -14,6 +14,7 @@ label coffee_break_action_label():
     if not (isinstance(person_one, Person) and isinstance(person_two, Person) and isinstance(person_three, Person)):
         return
 
+
     $ mc.change_location(lobby)
     $ mc.location.show_background()
     "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
@@ -51,6 +52,14 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         scene_manager.update_actor(person_three, emotion="happy")
 
     "The girls start laughing at [person_three.title]'s last remark."
+
+    if not perk_system.has_ability_perk("Situational Awareness"):
+        "You quickly check out the three girls as they chit chat. You suddenly realize how hot all three of them are."
+        "You're building your own company, staffing it with beautiful women you hand select. You realize how unaware you are sometimes of how lucky you are."
+        "You make a quick mental note to take better notice of the girls around you, and to enjoy their physical attractiveness."
+        $ situational_awareness_perk_unlock()
+        "You have unlocked the Situational Awareness perk! You now gain lust every turn based on the outfits of girls in the same room."
+        "The girls resume their banter."
 
     person_one "That was very funny [person_three.name], but I have to get back to work."
 

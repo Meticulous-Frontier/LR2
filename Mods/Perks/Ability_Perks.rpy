@@ -44,3 +44,16 @@ init -1 python:
             return
         perk_system.add_ability_perk(Ability_Perk(description = "Gain energy back more rapidly with high lust.", toggle = True, togglable = True, usable = False, update_func = lustful_youth_perk_update_func), "Lustful Youth")
         return
+
+    def situational_awareness_perk_update_func():
+        if len(mc.location.people) > 0:
+            mc.change_locked_clarity(int(mc.location.room_outfit_eye_candy_score()), add_to_log = False)
+            log_string = "You gain " + str(int(mc.location.room_outfit_eye_candy_score())) + " Lust from eye candy in this room."
+            mc.log_event(log_string, "float_text_blue")
+        return
+
+    def situational_awareness_perk_unlock():
+        if perk_system.has_ability_perk("Situational Awareness"):
+            return
+        perk_system.add_ability_perk(Ability_Perk(description = "Gain lust based on sluttiness of girl's outfits in the area.", toggle = True, togglable = True, usable = False, update_func = situational_awareness_perk_update_func), "Situational Awareness")
+        return
