@@ -271,7 +271,7 @@ label fetish_serum_discuss_label(the_person):
         the_person "Didn't you hire [ellie.name]? That IT girl? Maybe you should talk to her about the nanobots."
         mc.name "That's a good idea. I think I'll do that."
         "From now on, all nanobot progression will be made through your IT director!"
-
+        $ ellie.add_unique_on_talk_event(IT_director_nanobot_intro)
         return
     if get_fetish_basic_serum().mastery_level < 5.0:
         the_person "Unfortunately, I feel like we still don't know enough about the nanobots to consider messing with their programming."
