@@ -396,8 +396,8 @@ init -1 python:
     # Returns True when the persons height has changed; otherwise False
     # chance is probability percentage that height change for amount will occur (used by serums)
     def change_height(self, amount, chance):
-        lower_limit = person.get_height_floor(initial=False)
-        upper_limit = person.get_height_ceiling(initial=False)
+        lower_limit = Person.get_height_floor(initial=False)
+        upper_limit = Person.get_height_ceiling(initial=False)
 
         if amount == 0 or (self.height <= lower_limit and amount < 0) or (self.height >= upper_limit and amount > 0):
             return False
