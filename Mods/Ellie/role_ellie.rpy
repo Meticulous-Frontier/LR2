@@ -526,7 +526,7 @@ label ellie_end_blackmail_label():
     $ mc.location.lighting_conditions = standard_outdoor_lighting
     $ mc.change_location(bedroom)
     $ mc.location.show_background()
-    $ mb.business.set_event_day("hired_ellie_IT")
+    $ mc.business.set_event_day("hired_ellie_IT")
     return
 
 label ellie_work_welcome_label():
@@ -1021,8 +1021,8 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     the_person "Oh god, I read about this... okay..."
     "[the_person.possessive_title] keeps stroking you, clearly with no idea what is really about to happen, her face just inches from your cock."
     mc.name "Oh fuck don't stop... don't stop!"
-    $ the_girl.cum_on_face()
-    $ the_girl.draw_person(position = "blowjob")
+    $ the_person.cum_on_face()
+    $ the_person.draw_person(position = "blowjob")
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
     "You start to blow your load right onto [the_person.title]'s face. She flinches with each shot, but dutifully keeps stroking you."
     "Spurt after spurt erupts onto her. When you finish, you look down and admire her handywork."
