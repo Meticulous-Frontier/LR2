@@ -465,6 +465,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 
             $ condition.call_post_label(the_person, current_node.position, object_choice, report_log)
 
+            $ report_log["last_position"] = position_choice
             if not private:
                 call public_sex_post_round(the_person, current_node.position, report_log) from _public_sex_post_round_02
                 if not _return:
