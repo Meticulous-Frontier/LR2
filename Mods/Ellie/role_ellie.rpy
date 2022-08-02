@@ -197,8 +197,9 @@ init -2 python: #Requirement Functions
             return True
         return False
 
-    def ellie_dinner_date_intro_requirement():
-        return False
+    def ellie_dinner_date_intro_requirement(the_person):
+        if the_person.love >= 60 and mc.is_at_work() and mc.business.is_open_for_business():
+            return True
 
     def ellie_dinner_date_requirement():
         return False
@@ -1164,7 +1165,7 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
         "You leave your office together and go back to the work day."
     $ mc.business.set_event_day("ellie_love_event", override = True)
     $ ellie.apply_planned_outfit()
-    $ mc.business.add_mandatory_crisis(ellie_dinner_date_intro)
+    $ ellie.add_unique_on_talk_event(ellie_dinner_date_intro)
     $ clear_scene()
     $ mc.location.show_background()
     return
@@ -1313,12 +1314,77 @@ label ellie_cunnilingus_office_label(the_person):
     "You can't help but laugh. She smacks your shoulder but doesn't have the strength to put any real force into it."
     return
 
-label ellie_dinner_date_intro_label():
-    pass
+label ellie_dinner_date_intro_label(the_person): #Ellie invites MC over for dinner
+    $ the_person.draw_person(position = "sitting")
+    "You walk into the research lab. You notice [the_person.possessive_title], sitting at her station and getting some work done."
+    "Recently, you have grown a bit fond of the southern redhead. Something about her innocence has made your playtime fun."
+    "You decide to go see how she is doing. You walk over to her desk."
+    mc.name "Hey [the_person.title]. How's it going over here?"
+    "She looks up from her work and smiles."
+    the_person "Oh hey [the_person.mc_title]. I was hoping I would see you today."
+    mc.name "Oh? And why is that?"
+    the_person "I know you know this, but, I love to cook. I was thinking about making up something and thought maybe you'd like to come over and have dinner with me?"
+    mc.name "Dinner? At your place?"
+    the_person "Yeah, pretty much. I was thinking maybe Sunday night if it isn't any trouble for you."
+    "Apparently [the_person.possessive_title] has been enjoying your time together, also. The chance to be alone with her, at her place, could make for some interesting opportunities."
+    if ellie_has_given_virginity():
+        "You can hardly forget how hot it was, when you took her virginity. It appears she is enjoying her new found sexuality also."
+    else:
+        "You wonder if this might be the opportunity you finally need to deflower the busty redhead..."
+    mc.name "That sounds great. Sunday night. I'll bring a bottle of wine?"
+    the_person "Oh, you don't have to bring anything, but if you really want to that would be sweet of you."
+    mc.name "Sunday night then."
+    $ clear_scene()
+    "You step away from [the_person.title]'s desk. Sounds like you have a dinner date Sunday!"
     return
 
 label ellie_dinner_date_label():
+    $ the_person = ellie
     $ ellie.event_triggers_dict["dinner_date"] = False
+    "It is Sunday night. You have a dinner date with [the_person.title] tonight. You shoot her a text and she sends you her address."
+    "You swing by a store on the way there and pick up a bottle of mid range red wine. The make your way to her place."
+    "Soon, you are at the front door to her apartment, knocking on her door."
+    $ the_person.learn_home()
+    $ the_person.draw_person()
+    the_person "Ah! You're here! Come in!"
+    $ mc.change_location(the_person.home)
+    $ mc.location.show_background()
+    "When you step inside, you are immediately assaulted by number of heavenly smells."
+    mc.name "Oh my god. It smells amazing in here."
+    the_person "Ah, thank you! I made up some jambalaya and cornbread. Dessert is still in the oven but I hope you like peach cobbler..."
+    "Your mouth is watering. This girl can cook!"
+    mc.name "That sounds incredible. Here, I brought this."
+    "You hand her the bottle of wine"
+
+    "blah blah blah dinner stuff"
+
+    $ had_sex = True
+
+    "You finish the last bite of your peach cobbler. You look up at [the_person.possessive_title]. There is an obvious tension in the air."
+    if ellie_has_given_virginity():
+        "You decide it is time to make your move. You get up from your chair and walk around to [the_person.title]."
+        the_person "Ah, what are you coming over here for AH."
+        "You pick her up roughly and she clings to you."
+        $ the_person.draw_person(position = "against_wall")
+        mc.name "Which way to the bedroom."
+        the_person "Back there!"
+        "She points to her bedroom door. You quickly open up and maneuver her through it, then throw her down on the bed."
+        $ the_person.draw_person(position = "missionary")
+        the_person "I know you aren't the typical romance type... but once in a while it is nice to do things the old fashioned way!"
+        mc.name "Don't worry. What we are about to do is VERY old fashioned."
+        "You decide to get her naked before you go any further."
+        mc.name "Let's get these pesky clothes off you now, [the_person.title]."
+        $ the_person.strip_outfit(position = "missionary")
+        "You look down at [the_person.possessive_title]. Time to get some."
+        call fuck_person(the_person, private = True) from _call_sex_description_ellie_after_dinner_encore_01
+        $ had_sex = True
+    else:
+        mc.name "Thank you [the_person.title]. That was delicious."
+        the_person "Aww, it was nothing..."
+        "She takes a long sip from her wine glass, finishing it off."
+        the_person "You ummm... want some coffee or something?"
+        mc.name "Not particularly. "
+
     return
 
 #Sluttiness EVents
