@@ -99,3 +99,25 @@ init -1 python:
             return list(result)[0]
 
         return tuple(result)
+
+    def get_random_interns(number_of_interns, exclude_list = None, **intern_args):
+        result = set([])
+        list_of_possible_people = [x for x in mc.business.get_requirement_intern_list(exclude_list = exclude_list, **intern_args) if x.is_available]
+        if len(list_of_possible_people) < number_of_interns:
+            if number_of_interns == 1:
+                return None
+
+            result.add(None) # build up tuple with correct number of items
+            for i in __builtin__.range(1, number_of_interns):
+                result.add(i)
+            return tuple(result)
+
+        for i in __builtin__.range(number_of_interns):
+            person = get_random_from_list(list_of_possible_people)
+            result.add(person)
+            list_of_possible_people.remove(person)
+
+        if number_of_interns == 1:
+            return list(result)[0]
+
+        return tuple(result)

@@ -554,3 +554,15 @@ init -1 python:
         return [x for x in self.college_interns_research + self.college_interns_production + self.college_interns_supply + self.college_interns_market + self.college_interns_HR if x.is_available]
 
     Business.get_intern_list = business_get_intern_list
+
+    def get_requirement_intern_list(self, exclude_list = None, **kargs): #Get a list of interns who pass the validrequirements. Pass the same arguments as person_meets_requirements expects as named args.
+        interns_meeting_requirement = []
+        if exclude_list is None:
+            exclude_list = []
+        for person in self.get_intern_list():
+            if person not in exclude_list:
+                if person.person_meets_requirements(**kargs):
+                    interns_meeting_requirement.append(person)
+        return interns_meeting_requirement
+
+    Business.get_requirement_intern_list = get_requirement_intern_list

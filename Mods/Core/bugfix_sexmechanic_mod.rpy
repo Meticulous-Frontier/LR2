@@ -610,6 +610,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
                 call sex_description(the_person, position_choice, object_choice, private = scene_private, report_log = report_log) from _call_sex_description_bugfix
 
+                $ report_log["last_position"] = position_choice
                 # If the girl has an orgasm due to MC coming, she gets a guaranteed trance upgrade
                 if the_person.arousal >= the_person.max_arousal:
                     if report_log.get("girl orgasms", 0) == 0:
