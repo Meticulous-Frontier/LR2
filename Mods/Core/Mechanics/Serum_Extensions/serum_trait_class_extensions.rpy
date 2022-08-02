@@ -50,3 +50,13 @@ init -1 python:
         return "\n".join(return_slug)
 
     SerumTrait.build_negative_slug = build_negative_slug_enhanced
+
+    def build_test_serum(self):
+
+        serum = SerumDesign()
+        serum.add_trait(self)
+        serum.duration = 1  #Expires after one turn
+        serum.name = self.name + " Test Serum"
+        return serum
+
+    SerumTrait.build_test_serum = build_test_serum
