@@ -29,8 +29,14 @@ init 2: # Need to allow for None name roles in this screen as well.
         default personality_info = the_person.personality.base_personality_prefix.capitalize()
         default novelty_info = str(the_person.novelty)
         default height_info = height_to_string(the_person.height)
-        default hair_info = the_person.hair_colour[0].title()
-        default eyes_info = the_person.eyes[0].title()
+        if isinstance(the_person.hair_colour, list) and isinstance(the_person.hair_colour[0], basestring):
+            default hair_info = the_person.hair_colour[0].title()
+        else:
+            default hair_info = ""
+        if isinstance(the_person.eyes, list) and isinstance(the_person.eyes[0], basestring):
+            default eyes_info = the_person.eyes[0].title()
+        else:
+            default eyes_info = ""
         default desired_salary = the_person.calculate_base_salary()
 
         vbox:
