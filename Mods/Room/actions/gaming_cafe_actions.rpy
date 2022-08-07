@@ -39,7 +39,7 @@ init -1 python:
 
 
     def gaming_cafe_large_grind():
-        if gaming_cafe_character_level() > GUILD_QUEST_MAX_LEVEL:
+        if gaming_cafe_character_level() < GUILD_QUEST_MAX_LEVEL:
             gaming_cafe_increase_character_level()
             return gaming_cafe_character_level()
         return False
