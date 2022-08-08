@@ -7,12 +7,22 @@ init 2 python:
             return "Requires: 30 Sluttiness or 30 Love"
         return True
 
+    def make_onlyfans_together_requirement(person):
+        if person.obedience < 150:
+            return "Requires: 150 Obedience"
+        if not the_person.has_role(onlyfans_role):
+            return "No OnlyFans Account"
+        return True
+
     # extend the bugfix build_command_person_actions_menu function
     def build_command_person_actions_menu2(the_person):
         result = build_command_person_actions_menu(the_person)
         give_panties_action = Action("Give me your panties", requirement = give_panties_requirement, effect = "give_panties_label", args = the_person, requirement_args = the_person,
             menu_tooltip = "Ask " + the_person.title + " to hand over her panties.", priority = -5)
+        make_onlyfans_together_action = Action("Make a OnlyFans video together", requirement = make_onlyfans_together_requirement, effect = "make_onlyfans_together_label", args = the_person, requirement_args = the_person,
+            menu_tooltip = "Order " + the_person.title + " to make a OnlyFans video together with you.", priority = -5)
         result.insert(4, give_panties_action)
+        result.insert(7, make_onlyfans_together_action)
         return result
 
     # this only works when we can enhance the menu from the bugfix
@@ -85,4 +95,25 @@ label give_panties_label(the_person):
         "She quickly puts her clothes back on."
     else:
         the_person "Is this what you were looking for?"
+    return
+
+label make_onlyfans_together_label(the_person):
+    mc.name "Hey, aren't you a content creator on OnlyFans?"
+    the_person "Yeah, I am."
+    mc.name "Let's make a video together. I bet I can help you pull in a ton of views."
+    if the_person.effective_sluttiness() < 60:
+        the_person "I'm not sure that is a good idea..."
+        mc.name "Why not? I mean, you're already on there, what's wrong with me dicking you down?"
+        the_person "I... okay, I guess we can do that..."
+    else:
+        the_person "Sure! Just make sure you finish. My customers pay way better if there's a good cumshot, okay?"
+        mc.name "I aim to please."
+    "You find a private area with [the_person.possessive_title] where you won't be disturbed."
+    call fuck_person(the_person, private = True, condition = make_condition_onlyfans_recording()) from _call_fuck_person_make_onlyfans_command_01
+    "You hand [the_person.possessive_title]'s phone back to her."
+    mc.name "If you want to make another video sometime, just let me know."
+    the_person "Sure thing!"
+    $ the_person.apply_planned_outfit()
+    $ clear_scene
+    $ jump_game_loop()
     return
