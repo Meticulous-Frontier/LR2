@@ -67,8 +67,8 @@ init 6 python:
 
         if change_pubes:
             pubes_colour = new_colour.shade(1.0-darken_pubes_amount)
-            self.pubes_colour = [pubes_colour.rgb[0], pubes_colour.rgb[1], pubes_colour.rgb[2], 1.0]
-            self.pubes_colour = pubes_colour
+            self.pubes_style.colour = [pubes_colour.rgb[0], pubes_colour.rgb[1], pubes_colour.rgb[2], 1.0]
+            self.pubes_colour = self.pubes_style.colour
         self.hair_style.colour = hair_colour_list
 
     Person.set_hair_colour = person_set_hair_colour

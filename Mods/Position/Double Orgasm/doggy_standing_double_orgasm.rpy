@@ -112,7 +112,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
             $ climax_controller.do_clarity_release(the_girl)
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
             the_girl "Oh god... it feels so good on my skin..."
         elif the_girl.sluttiness > 60:
             "[the_girl.possessive_title] closes her eyes and waits patiently for you to cum."
@@ -120,14 +120,14 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
             $ climax_controller.do_clarity_release(the_girl)
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
         else:
             "[the_girl.possessive_title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
             "She reaches down and begins to touch herself, bringing herself to orgasm at the same time as you."
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
             $ climax_controller.do_clarity_release(the_girl)
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
         "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from her knees, face covered in your semen."
         $ the_girl.call_dialogue("cum_face")
 

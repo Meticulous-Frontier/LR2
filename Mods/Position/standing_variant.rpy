@@ -563,7 +563,7 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             "[the_girl.possessive_title] begins stroking you while pointing your cock straight at her eager face."
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. After your first spurt a big smile spreads across her face as you cover it with your cum."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. After your first spurt a big smile spreads across her face as you cover it with your cum."
             "[the_girl.possessive_title] keeps stroking you as you finish your orgasm. She grasps your penis at the base and slowly milks out the last couple of drops, letting fall down and on to her cheek."
             the_girl "Ohhhh... damn that is so hot..."
             "[the_girl.possessive_title] uses her hand to rub your cum into her skin, revealing in the sticky texture. A couple of times she licks her fingers clean."
@@ -571,18 +571,18 @@ label outro_SB_facing_wall(the_girl, the_location, the_object):
             "[the_girl.possessive_title] sticks out her tongue for you and holds still, eager to take your hot load."
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face and into her open mouth. She makes sure to wait until you're completely finished."
             the_girl "Oh god... it feels so good on my skin..."
         elif the_girl.sluttiness > 60:
             "[the_girl.possessive_title] closes her eyes and waits patiently for you to cum."
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She waits until she's sure you're finished, then opens one eye and looks up at you."
         else:
             "[the_girl.possessive_title] closes her eyes and turns away, presenting her cheek to you as you finally climax."
             $ the_girl.cum_on_face()
             $ the_girl.draw_person(position = "kneeling1")
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She flinches as the first splash of warm liquid lands on her cheek, but doesn't pull away entirely."
         if the_girl.get_opinion_score("being covered in cum") > 0:
             "[the_girl.possessive_title] runs her fingers through your cum on her face a few times. She quickly licks her fingers clean."
             the_girl "Mmm, your hot, sticky seed feels so good all over me..."

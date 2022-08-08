@@ -280,18 +280,18 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
             "[the_girl.possessive_title] presses her tits together with her hands, eager to take your hot load."
             $ the_girl.cum_on_tits()
             $ the_girl.draw_person(position = "sitting")
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She makes sure to wait until you're completely finished."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She makes sure to wait until you're completely finished."
             the_girl "Oh god... it feels so good on my skin..."
         elif the_girl.sluttiness > 60:
             "[the_girl.possessive_title] looks up at you and waits patiently for you to cum."
             $ the_girl.cum_on_tits()
             $ the_girl.draw_person(position = "sitting")
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She waits until she's sure you're finished."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She waits until she's sure you're finished."
         else:
             "[the_girl.possessive_title] closes her eyes and turns away."
             $ the_girl.cum_on_tits()
             $ the_girl.draw_person(position = "sitting")
-            "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She flinches as the first splash of warm liquid lands on her body, but doesn't pull away entirely."
+            "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s chest. She flinches as the first splash of warm liquid lands on her body, but doesn't pull away entirely."
         $ climax_controller.do_clarity_release(the_girl)
         "You take a deep breath to steady yourself once you've finished orgasming. [the_girl.possessive_title] looks up at you from the swing, her tits covered in your seed."
         the_girl "Wow, that was really intense..."

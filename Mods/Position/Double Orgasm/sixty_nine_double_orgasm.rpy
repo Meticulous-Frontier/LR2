@@ -18,7 +18,7 @@ label SB_sixty_nine_double_orgasm(the_girl, the_location, the_object):
         else:
             "[the_girl.possessive_title] is cumming with you, moaning loudly as you blow your load all over her face."
         #$ SB_sixty_nine.redraw_scene(the_girl)
-        "You let out a shudder moaning as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She is panting for breath as you finish"
+        "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She is panting for breath as you finish"
         $ the_girl.call_dialogue("cum_face")
     else:
         if the_girl.has_cum_fetish():
