@@ -1676,7 +1676,7 @@ init -2 python: #Requirement functions
     def ellie_start_search_requirement(the_person):
         if mc.business.days_since_event("ellie_obedience_event") < TIER_2_TIME_DELAY:
             return False
-        if ellie.obedience >= 140:
+        if ellie.obedience >= 140 and nanobot_program_is_IT():  #Need to make sure we know contact has ghosted head researcher.
             return False
         return False
 

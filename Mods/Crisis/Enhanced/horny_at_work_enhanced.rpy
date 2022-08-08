@@ -666,7 +666,7 @@ label condition_test_bend_over_employee_label(the_person):
     mc.name "Now, you just keep working, I'm sure you can handle it."
     the_person "Yes sir..."
     "You unzip and pull your cock out."
-    call fuck_person(the_person, private = False, condition = make_condition_computer_work(), start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True)
+    call fuck_person(the_person, private = False, condition = make_condition_computer_work(), start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True) from _call_horny_at_work_condition_fuck
     $ the_report = _return
     $ the_person.review_outfit()
     $ the_person.draw_person(position = "sitting")
