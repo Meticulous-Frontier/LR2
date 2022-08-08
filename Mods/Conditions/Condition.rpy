@@ -32,7 +32,7 @@ init -2 python:
             if self.position_whitelist:
                 return the_position in self.position_whitelist
             if self.position_blacklist:
-                return the_position in self.position_blacklist
+                return the_position not in self.position_blacklist
             return True
 
         def run_rewards(self, the_person, report_log):
