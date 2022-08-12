@@ -88,7 +88,7 @@ init 5 python:
 
     def cheating_check_get_watcher(person):
         # skip cheating check when person is Office Free Use Slut
-        if not person.has_role(employee_freeuse_role):
+        if not person.has_role([employee_freeuse_role, harem_role]):
             # only check if she is jealous and not willing to threesome with the girl
             for other_person in [y for y in [x for x in mc.location.people if x != person] if y.is_jealous() and not willing_to_threesome(person, y)]:
                 if other_person.has_role(girlfriend_role) and the_position.slut_requirement > (other_person.sluttiness * .6) + (other_person.get_opinion_score("threesomes") * 5) + (5 * other_person.get_opinion_score("public sex")) : #You can get away with 60% as slutty as she would do +- threesome inclination / public sex
