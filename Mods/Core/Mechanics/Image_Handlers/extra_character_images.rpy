@@ -140,7 +140,8 @@ init 2 python:
             if self.layer == 0:
                 cloth_info += "{image=gui/extra_images/sexy_underwear_token.png}"
 
-        cloth_info += "+" +str(self.slut_value) + "{image=gui/heart/red_heart.png}"
+        # Match modifier in `get_total_slut_modifiers_enhanced()` for now
+        cloth_info += "+" +str(__builtin__.int(self.get_slut_value() * 0.9)) + "{image=gui/heart/red_heart.png}"
         return cloth_info
 
     Clothing.generate_stat_slug = clothing_generate_stat_slug

@@ -335,23 +335,8 @@ init 6 python:
     def get_total_slut_modifiers_enhanced(self):
         new_score = 0
         for cloth in self.accessories + self.upper_body + self.lower_body + self.feet:
-            new_score += cloth.slut_value
-            if WardrobeBuilder.clothing_in_preferences("skimpy outfits", cloth):
-                new_score += 1
-            # if WardrobeBuilder.clothing_in_preferences("conservative outfits", cloth):
-            #     new_score -= 3
-            if WardrobeBuilder.clothing_in_preferences("showing her tits", cloth):
-                new_score += 2
-            if WardrobeBuilder.clothing_in_preferences("showing her ass", cloth):
-                new_score += 2
-            if WardrobeBuilder.clothing_in_preferences("lingerie", cloth):
-                new_score += 1
-            if WardrobeBuilder.clothing_in_preferences("high heels", cloth):
-                new_score += 1
-            if cloth in [pumps, high_heels, leggings]:
-                new_score += 3 # small extra modifier
-            if cloth in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, micro_skirt, daisy_dukes, jean_hotpants]:
-                new_score += 5 # extremely slutty clothing (applies extra modifier)
+            new_score += cloth.get_slut_value()
+
             if cloth in [pinafore]:
                 if not any(x for x in self.upper_body if x.layer == 1 or x.layer == 2):
                     new_score += 5 # tits not covered in pinafore
