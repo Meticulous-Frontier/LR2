@@ -38,6 +38,17 @@ init 2 python:
         ashley.event_triggers_dict["story_path"] = None
         ashley.event_triggers_dict["second_date"] = False
         ashley.event_triggers_dict["sneaks_over_complete"] = False
+        mc.business.event_triggers_dict["mc_serum_duration"] = 3
+        mc.business.event_triggers_dict["mc_serum_aura_tier"] = 0
+        mc.business.event_triggers_dict["mc_serum_cum_tier"] = 0
+        mc.business.event_triggers_dict["mc_serum_energy_tier"] = 0
+        mc.business.event_triggers_dict["mc_serum_physical_tier"] = 0
+        mc.business.event_triggers_dict["mc_serum_aura_unlocked"] = False
+        mc.business.event_triggers_dict["mc_serum_cum_unlocked"] = False
+        mc.business.event_triggers_dict["mc_serum_energy_unlocked"] = False
+        mc.business.event_triggers_dict["mc_serum_physical_unlocked"] = False
+        mc.business.event_triggers_dict["mc_serum_max_quant"] = 1
+
 
         # add appoint
         #office.add_action(HR_director_appointment_action)
@@ -264,6 +275,7 @@ label ashley_intro_label():
 
         $ mc.business.add_employee_production(ashley)
         $ ashley.set_schedule(None, the_times = [1,2,3]) #Free roam when not working
+        $ ashley.add_role(prod_assistant_role)
 
         "You complete the necessary paperwork and hire [ashley.fname], assigning her to the production department."
         "As you finish up, you notice [the_person.possessive_title] is already calling her sister with the news."
@@ -297,6 +309,7 @@ label ashley_hire_directed_label():
         the_person "Oh! This is great news! I'm sure she'll probably want to get started right away!"
         $ remove_ashley_hire_later_action()
         $ mc.business.add_employee_production(ashley)
+        $ ashley.add_role(prod_assistant_role)
 
         "You complete the necessary paperwork and hire [ashley.fname], assigning her to the production department."
         "As you finish up and start to leave, you notice [the_person.possessive_title] is already calling her sister with the news."

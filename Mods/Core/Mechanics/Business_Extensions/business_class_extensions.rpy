@@ -1,6 +1,4 @@
 init -1 python:
-    OPTION_DAYS_BETWEEN_STORY_EVENTS = 3
-
     def get_hr_director(self):
         if not hasattr(self, "_hr_director"):
             self._hr_director = None
@@ -34,6 +32,23 @@ init -1 python:
 
     # add follow_mc attribute to person class (without sub-classing)
     Business.it_director = property(get_it_director, set_it_director, del_it_director, "The company IT director position.")
+
+    def get_prod_assistant(self):
+        if not hasattr(self, "_prod_assistant"):
+            self._prod_assistant = None
+        return next((x for x in all_people_in_the_game() if x.identifier == self._prod_assistant), None)
+
+    def set_prod_assistant(self, item):
+        if isinstance(item, Person):
+            self._prod_assistant = item.identifier
+        else:
+            self._prod_assistant = None
+
+    def del_prod_assistant(self):
+        del self._prod_assistant
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Business.prod_assistant = property(get_prod_assistant, set_prod_assistant, del_prod_assistant, "The company Production Assistant.")
 
     def get_funds_yesterday(self):
         if not hasattr(self, "_funds_yesterday"):
@@ -315,6 +330,11 @@ init -1 python:
 
     Business.fire_IT_director = fire_IT_director
 
+    def fire_production_assistant(self):
+        if self.prod_assistant:
+            self.prod_assistant.remove_role(prod_assistant_role)
+            self.prod_assistant = None
+
 
     # wrap default remove_employee function to also trigger the fire_HR_director code when needed
     def business_remove_employee_extended(org_func):
@@ -326,6 +346,9 @@ init -1 python:
 
             if person == business.it_director:
                 business.fire_IT_director()
+
+            if person == business.prod_assistant:
+                business.fire_production_assistant()
 
             if person == cousin and get_strip_club_foreclosed_stage() == 0: # she goes back to stripping
                 stripclub_strippers.append(person)
