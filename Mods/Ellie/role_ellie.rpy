@@ -152,7 +152,7 @@ init -2 python: #Requirement Functions
 
     def ellie_never_been_kissed_requirement(the_person):
         if ellie_is_working_on_nanobots() or ellie.sluttiness >= 20:
-            if mc.business.days_since_event("hired_ellie_IT") >= OPTION_DAYS_BETWEEN_STORY_EVENTS:
+            if mc.business.days_since_event("hired_ellie_IT") >= TIER_1_TIME_DELAY:
                 return True
         return False
 
@@ -1674,16 +1674,20 @@ init -2 python: #Requirement functions
         return False
 
     def ellie_start_search_requirement(the_person):
-        if mc.business.days_since_event("ellie_obedience_event") < TIER_2_TIME_DELAY:
+        if mc.business.days_since_event("ellie_obedience_event") < TIER_2_TIME_DELAY or mc.business.get_event_day("IT_dir_nanobot_takeover_day") < TIER_3_TIME_DELAY:
             return False
-        if ellie.obedience >= 140 and nanobot_program_is_IT():  #Need to make sure we know contact has ghosted head researcher.
+        if ellie.obedience >= 140 and nanobot_program_is_IT() and mc.business.is_open_for_business():  #Need to make sure we know contact has ghosted head researcher.
             return False
         return False
 
     def ellie_search_update_requirement(the_person):
+        if mc.business.days_since_event("ellie_obedience_event") < TIER_2_TIME_DELAY:
+            return False
         return False
 
     def ellie_search_finish_requirement(the_person):
+        if mc.business.days_since_event("ellie_obedience_event") < TIER_2_TIME_DELAY:
+            return False
         return False
 
     def ellie_submission_requirement(the_person):
@@ -1820,8 +1824,109 @@ label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     return
 
 label ellie_start_search_label(the_person): #140 obedience. Scene where you talk to ellie and Steph about the contact
-    pass
+    $ scene_manager = Scene()
+    $ the_researcher = mc.business.head_researcher
+    "You walk into the Research department. As you step in, you see [the_researcher.title] look up from her work and walk over to you."
+    $ scene_manager.add_actor(the_researcher)
+    the_researcher "Hey [the_researcher.mc_title]. You'll never believe what just happened to me."
+    mc.name "What's that?"
+    the_researcher "Remember my nanobot contact? The guy that ghosted us?"
+    mc.name "Of course."
+    the_researcher "Well, I was posting some selfies to my DikDok, and I got a bunch of comments from him!"
+    mc.name "Wow... how do you know it was him?... And you are on DikDok?"
+    the_researcher "Yes, and I know because he has a very unique last name, and his username was basically just his first initial and last name..."
+    mc.name "Huh. You know who might be interested in that?"
+    the_researcher "Who?"
+    "You look over to the other side of the lab."
+    mc.name "Hey [the_person.title]! Come her for a second!"
+    $ scene_manager.add_actor(the_person, display_transform = character_center_flipped)
+    the_person "Hey, what's the fuss?"
+    mc.name "Remember the guy from your last employer that set you up and got you fired?"
+    the_person "Stars, how could I forget that jerk!"
+    mc.name "He is hitting on [the_researcher.title] on DikDok."
+    $ scene_manager.update_actor(the_person, emotion = "angry")
+    the_person "He... He what!?!"
+    the_researcher "Yeah. He keeps asking for nudes, but doesn't want to pay for em'. I keep blowing him off."
+    the_researcher "His last message, he said he lives in the same area as me and was willing to pay $100 for a blowjob."
+    the_person "UGH. Typical. What I wouldn't do to get my hands on that good for nothin'..."
+    "As [the_person.possessive_title] goes off about the guy, a plan slowly begins to form in your head..."
+    "He sounds like a total creep... but you would score major bonus points with [the_person.title] if you could help her get back at him."
+    "You wonder... could you lure the guy in? Then capture him offering to pay for sex on video and blackmail him... or even get him arrested?"
+    "You probably shouldn't turn him over to the authorities... but blackmail could work..."
+    mc.name "Hey [the_researcher.title]. On DikDok, it isn't uncommon to do shoutouts, right? Especially to new accounts?"
+    the_researcher "Yeah I think I've seen a few of those."
+    mc.name "[the_person.title]... I have an idea."
+    the_person "Yeah?"
+    $ scene_manager.update_actor(the_person, emotion = "happy")
+    mc.name "We're going to set you up with a DikDok account and have [the_researcher.title] do a shoutout for you."
+    mc.name "He is sure to see it. We already know he's willing to pay for sexual favors. We'll use the account to lure him in and get dirt on him."
+    the_researcher "Damn, a classic honeypot."
+    the_person "I ahm, I don't know. Isn't that thing for like, women who send out pictures of themselves naked?"
+    mc.name "That is precisely what it is. And for making money off them."
+    the_person "I don't know if I can do something like that..."
+    mc.name "Non sense. Of course you can. It isn't like you are just doing it for fun, we could use them to get back at him."
+    "[the_person.possessive_title] seems to be wavering a bit, so you decide to push her a bit..."
+    mc.name "Here, let me see your phone, I'll help you set up an account."
+    the_person "Ah, okay, I guess we can try."
+    $ the_person.add_role(dikdok_role)
+    $ the_person.event_triggers_dict["dikdok_known"] = True
+    "You walk her through getting her account set up."
+    "Of course you make note of the name so you can check up on it."
+    $ the_person.change_stats(obedience = 3)
+    mc.name "Alright, once in a while make a new posting with a pic of you doing something naughty, but first lets get you a promo."
+    mc.name "Let's go back to the testing room."
+    #TODO make a testing room background and transition to it here.
+    "You walk with the girls back to the serum testing room for privacy."
+    mc.name "Alright, [the_researcher.title], you make a video. Say something like, hey guys, just found out my super hot coworker has an account too and everyone should check it out."
+    if the_person.tits_available():
+        mc.name "Then you can zoom in on [the_person.title]'s tits and she'll shake em' around or something. Then plug her username and we'll see if we can get a hit. Sound good?"
+    else:
+        mc.name "Then you can zoom in on [the_person.title] and she'll take her top off. Then plug her username and we'll see if we can get hit. Sound good?"
+    the_researcher "Sounds great to me!"
+    the_person "You... you wanna take a video of mah tits?"
+    mc.name "That's the idea, yeah."
+    the_person "I... I dunno, I'm not sure I want a video like that going around on the internet..."
+    mc.name "Don't worry. We're just doing this to help you get even, remember?"
+    the_researcher "Don't worry, it is fun too!"
+    the_person "Okay... I guess..."
+    "You make a mental note to thank [the_researcher.possessive_title] for helping convince [the_person.title] to take some topless pics later..."
+    mc.name "Alright, well, this should be straight forward. [the_researcher.title]... whenever you are ready?"
+    the_researcher "Okay."
+    "[the_researcher.possessive_title] pulls out her phone and takes a few seconds to boot up the app."
+    "She takes a few seconds to straighten her hair, then starts the video."
+    the_researcher "Hey guys! Guess what!?!"
+    "Her mock enthusiasm is amusing, but you keep yourself from laughing and ruining the video."
+    the_researcher "I just found out... the new girl at work... has a DikDok account too! And she JUST STARTED!"
+    the_researcher "She is smoking hot too... I just wanted to give her a quick shoutout!"
+    "[the_researcher.title] takes her phone and moves the camera around to get [the_person.title] in frame."
+    the_researcher "Here she is! Show my viewers what they're missing!"
+    if the_person.tits_available():
+        $ scene_manager.update_actor(the_person, position = "kneeling1")
+        "[the_person.title] smiles, then takes her tits in her hands and pushes them together, giving them a squeeze."
+    else:
+        $ scene_manager.strip_to_tits(the_person)
+        "[the_person.title] smiles, then takes her top off, revealing her big tits."
+    $ mc.change_locked_clarity(30)
+    "[the_researcher.possessive_title] brings the camera back to her."
+    the_researcher "Damn, right? Anyway, here's her username..."
+    "[the_researcher.title] finishes up the promo video."
+    $ scene_manager.update_actor(the_person, position = "stand3")
+    mc.name "There, that wasn't so bad, was it?"
+    the_person "No... actually it was kinda fun... do you think people will like it?"
+    the_researcher "I mean, I'm mostly straight, but I loved it. Your tits are fantastic."
+    the_person "Aww, thanks [the_researcher.name]."
+    $ the_person.increase_opinion_score("showing her tits", max_value = 1)
+    mc.name "Alright, [the_person.title], once or twice a day, take a video or a couple pics and drop them on there."
+    mc.name "[the_researcher.title] will give you the guy's username. If you get any DMs from him, start talking to him and see if you can get anything going, okay?"
+    the_person "Yessir."
+    "The two girls get together and start to talk about the mysterious contact. You decide to leave them to it."
+    $ scene_manager.remove_actor(the_person)
+    $ scene_manager.remove_actor(the_researcher)
+    "You step out of the examination room. You have no idea if this plan will work or not, but you know it will take time to find out."
+    "Even if the guy never bites, atleast you convinced [the_person.title] to start a DikDok account..."
+    $ del the_researcher
     $ mc.business.set_event_day("ellie_obedience_event", override = True)
+    $ the_person.add_unique_on_room_enter_event(ellie_search_update)
     return
 
 label ellie_search_update_label(the_person):    #You locate the contact with Sarah's help

@@ -120,5 +120,6 @@ label IT_director_nanobot_intro_label(the_person):
     "[the_person.possessive_title] turns and walks out of your office."
     "From now on, you can work with her towards perfect your nanobot programs."
     "In addition, you can talk to her about the programs as you begin to master them."
+    $ mc.business.set_event_day("IT_dir_nanobot_takeover_day")
     $ clear_scene()
     return
