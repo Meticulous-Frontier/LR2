@@ -60,3 +60,6 @@ init -1 python:
         return serum
 
     SerumTrait.build_test_serum = build_test_serum
+
+    def find_serum_by_name(name):
+        return find_in_list(lambda x: x.name == name, list_of_traits)
