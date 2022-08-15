@@ -1,6 +1,4 @@
 init 5 python:
-    from collections import OrderedDict
-
     #def casual_sex_mod_initialization(action_mod):
     university_wardrobe = wardrobe_from_xml("University_Wardrobe")
 

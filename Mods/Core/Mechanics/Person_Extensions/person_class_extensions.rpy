@@ -1,6 +1,4 @@
 init -1 python:
-    import hashlib
-
     def remove_person_from_game(self):
         my_location = self.location
         if my_location:
