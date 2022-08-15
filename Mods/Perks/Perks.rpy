@@ -318,6 +318,10 @@ init -1 python:
                     self.update_func()
             return
 
+        def remove(self):
+            pass
+            return
+
     def second_wind_func():
         mc.change_energy(mc.max_energy / 2)
         #renpy.say(None,"You take a deep breath, getting your second wind. You recover some energy!") #TODO this doesn't work. probably just delete
