@@ -715,6 +715,9 @@ init 2 python:
     global lingerie_wardrobe
     lingerie_wardrobe = lingerie_wardrobe.merge_wardrobes(wardrobe_from_xml("Lingerie_Extended_Wardrobe"), keep_primary_name = True)
 
+    global prostitute_wardrobe
+    prostitute_wardrobe = wardrobe_from_xml("Prostitute_Wardrobe")
+
 label activate_generic_personality(stack):
     python:
         create_unique_character_list()
