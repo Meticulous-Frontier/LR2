@@ -704,11 +704,38 @@ init 2 python:
 
     def generate_random_mothers_and_daughters():
         for person in [x for x in all_people_in_the_game(excluded_people = unique_character_list) if x.age > 35 or x.age < 25]:
-            if renpy.random.randint(0, 2) == 1:
+            if renpy.random.randint(0, 1) == 1:
                 if person.age > 35:
-                    person.generate_daughter(True)
+                    for count in range(0, renpy.random.randint(1, 3)):
+                        person.generate_daughter(True)
                 else:
                     person.generate_mother(True)
+
+    def generate_random_sisters_cousins_nieces():
+        mothers = [x for x in all_people_in_the_game(excluded_people = unique_character_list) if town_relationships.get_existing_child_count(x) > 0]
+        linked_mothers = []
+
+        def get_new_mother_from_list():
+            available_mothers = [x for x in mothers if x not in linked_mothers]
+            if not available_mothers:
+                return None
+            mother = renpy.random.choice(available_mothers)
+            linked_mothers.append(mother)
+            return mother
+
+        for i in range(4):
+            mother = get_new_mother_from_list()
+            other_mother = get_new_mother_from_list()
+
+            if not mother or not other_mother:
+                break
+
+            town_relationships.update_relationship(mother, other_mother, "Sister")
+            for cousin in town_relationships.get_existing_children(mother):
+                town_relationships.update_relationship(other_mother, cousin, "Niece", "Aunt")
+                for other_cousin in town_relationships.get_existing_children(other_mother):
+                    town_relationships.update_relationship(cousin, other_cousin, "Cousin")
+                    town_relationships.update_relationship(mother, other_cousin, "Niece", "Aunt")
         return
 
 init 2 python:
@@ -747,6 +774,8 @@ label activate_generic_personality(stack):
         update_alexia_opinions()
 
         generate_random_mothers_and_daughters()
+
+        generate_random_sisters_cousins_nieces()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
