@@ -2574,3 +2574,8 @@ init 3 python:
 
     def ashley_non_con_enabled():
         return ashley.event_triggers_dict.get("non_con", False)
+
+    def ashley_on_default_path():
+        if stephanie.is_girlfriend() and not ashley.is_girlfriend() and stephanie == mc.business.head_researcher:
+            return True
+        return False

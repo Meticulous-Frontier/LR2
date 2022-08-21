@@ -21,7 +21,7 @@ init 1 python:
 
 #Requirement functions
 init -1 python:
-    def mc_serum_intro_requirement():
+    def mc_serum_intro_requirement(the_person):
         return False
 
     def mc_serum_timeout_requirement():
@@ -56,20 +56,75 @@ init -1 python:
         return False
 
 
-label mc_serum_intro_label():
-    "In this label, we go through an introduction process for how MC begins taking serums that are specifically designed for him."
-    "The Production assistant provides him with a serum to test that will increase his abilities slightly."
-    "We also introduce the possibility of side effects, which are short lived negative stat consequences."
+label mc_serum_intro_label(the_person):
+    $ the_person.draw_person()
+    "You step into the production lab. As you are walking in, [the_person.possessive_title] is just walking out."
+    the_person "Oh hey [the_person.mc_title], great timing. I was just getting coffee... do you want some?"
+    mc.name "Oh, sure I could do that."
+    the_person "How do you like it?"
+    mc.name "Just black is fine."
+    the_person "Alright."
+    $ clear_scene()
+    "She disappears out the door, headed toward the break room. You walk around the production room for a minute, checking up on the serum processing."
+    "After you make a round, [the_person.title] reappears with two cups of coffee."
+    $ the_person.draw_person()
+    the_person "Here we go! Hey, have a few minutes? I wanted to talk to you about something."
+    mc.name "Sure."
+    $ the_person.draw_person(position = "sitting")
+    "You sit down at [the_person.possessive_title]'s desk across from her and start to chat."
+    "She talks with you for a while about how she is settling in and how much she appreciates you hiring her."
+    "You drink your coffee fairly quickly. It is a nice to take a break from work and you feel re-energized."
+    $ mc.change_energy(50)
+    $ mc_serum_energy_regen.apply_trait()
+    "As you finish up with your drink, she changes the subject."
+    if ashley_on_default_path() and the_person == ashley:
+        the_person "So I was talking with Steph about how things are going here at work."
+        the_person "She was just gushing all about how her 'boyfriend' built her a special room just for her science work."
+    else:
+        the_person "So I was talking with the head researcher about how things are going with me settling in here."
+        the_person "She was going on and on about the specialized research room you built over in the lab."
+    the_person "And of course, as we were talking, I had to ask her the obvious question..."
+    the_person "These serums we keep making... they are designed entirely to be used by, and tested on, women."
+    the_person "Why not work on similar designs to be used on men?"
+    mc.name "Ah, well, there are a number of reasons..."
+    the_person "Yeah, yeah I'm sure there are... But I asked her, why don't you ever test any of these serums?"
+    the_person "I mean, some of these have some amazing effects..."
+    mc.name "Well, I'm the owner of the business, and the business itself is built on marketing the serums to a specific demographic..."
+    "[the_person.title] rolls her eyes."
+    the_person "Yeah, she gave me a similar excuse. But why not? If we made something here that would be beneficial for you, specifically, why not try it?"
+    mc.name "I guess I would certainly consider it, but I wouldn't want that to be the main focus for the employees here."
+    the_person "Let me put it this way. If I made a serum, with help from the research department, for you, would you try it?"
+    mc.name "I mean, I would need some assurances that some basic safeguards are in place..."
+    the_person "Like the safeguards you put in place for the employees you are testing serums on?"
+    mc.name "Look. I understand you have some concerns about the way things are done here, but..."
+    the_person "So that's a no?"
+    mc.name "No."
+    "[the_person.possessive_title] shakes her head."
+    the_person "That's too bad. I figured you would say that. But unfortunately, science stops for no man."
+    mc.name "I'm not going to take one..."
+    the_person "That's okay! You already have!"
+    "... You look down at your empty coffee with a sudden realization. Holy shit, this bitch just used your own tactic against you?"
+    the_person "Hey! Don't look at me like that! The coffee has you feeling good, doesn't it? Almost... re-energized?"
+    mc.name "I... actually yeah, I do feel like I have more energy."
+    "[the_person.title] smiles wide."
+    the_person "There, see? All I did was adapt the caffeine infusion trait for your much more manly body."
+    the_person "That burst of energy you got from the coffee? I think it should actually last a few days."
+    "You are still a bit shocked by the revelation that [the_person.possessive_title] dosed you without your knowledge..."
+    mc.name "Okay... we'll see how this one goes, okay?"
+    mc.name "But I don't want you to spend all your work time on it, this is just a side project."
+    the_person "Yes! Don't worry, this is gonna be great."
+    "Yeah. Great... Great for who though?"
+    mc.name "Alright. Get back to work, I'm going to do the same."
+    the_person "You got it boss!"
+    $ clear_scene()
     $ mc.business.event_triggers_dict["mc_serum_energy_unlocked"] = True
+    "You get up and step out of the serum production area."
+    "You definitely feel conflicted about what just happened... but you have to admit, the prospect of getting your hands on serums that would enhance your personal performance is tempting."
+    "You decide to go along with it for now, but you definitely need to keep a closer eye on [the_person.possessive_title] and her activities."
     return
 
 label mc_serum_timout_label():
-    if mc.business.event_triggers_dict.get("serum_timout_reminder", True):
-        if mc.business.prod_assistant:
-            "You feel a bit different. Your personal serums have worn off. You should talk to [mc.business.prod_assistant.title] if you want to refresh them."
-        else:
-            "You feel a bit different. Your personal serums have worn off. However, you no longer have a Production Assistant."
-            "You should consider assigning someone new to the position if you want to refresh your personal serums."
+
     return
 
 label mc_serum_review_label(the_person):
