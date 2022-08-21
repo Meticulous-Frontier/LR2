@@ -208,13 +208,13 @@ init python: #For now default init. May change later if we know better.
         if not quest_cuckold_employee in quest_director.quest_list:
             quest_director.add_new_quest(quest_cuckold_employee)
 
-        quest_essential_oils = Side_Quest(quest_name = "Essential Oils",
-            quest_init_label = "quest_essential_oils_init_label",
-            quest_tracker = quest_essential_oils_tracker,
-            start_requirement = quest_essential_oils_start_requirement,
-            quest_cleanup = quest_essential_oils_cleanup)
-        if not quest_essential_oils in quest_director.quest_list:
-            quest_director.add_new_quest(quest_essential_oils)
+        # quest_essential_oils = Side_Quest(quest_name = "Essential Oils",
+        #     quest_init_label = "quest_essential_oils_init_label",
+        #     quest_tracker = quest_essential_oils_tracker,
+        #     start_requirement = quest_essential_oils_start_requirement,
+        #     quest_cleanup = quest_essential_oils_cleanup)
+        # if not quest_essential_oils in quest_director.quest_list:
+        #     quest_director.add_new_quest(quest_essential_oils)
 
         quest_arousal_serum = Side_Quest(quest_name = "Arousal Serum",
             quest_init_label = "quest_arousal_serum_init_label",
