@@ -7,7 +7,7 @@ init 1 python:
     mc_serum_intro = Action("Discover MC Serums",mc_serum_intro_requirement,"mc_serum_intro_label")
     mc_serum_timeout = Action("Serums runout",mc_serum_timeout_requirement,"mc_serum_timeout_label")
     mc_serum_review = Action("Review Personal Serums",mc_serum_review_requirement,"mc_serum_review_label", menu_tooltip = "Review your personal serum options, research progress, and refresh your dose.")
-    prod_assistant_essential_oils = Action("Essential Oils Intro",prod_assistant_essential_oils_requirement,"prod_assistant_essential_oils_label")
+    prod_assistant_essential_oils_intro = Action("Essential Oils Intro",prod_assistant_essential_oils_intro_requirement,"prod_assistant_essential_oils_intro_label")
     prod_assistant_unlock_auras = Action("Unlock Aura Personal Serums",prod_assistant_unlock_auras_requirement,"prod_assistant_unlock_auras_label")
     prod_assistant_unlock_cum = Action("Unlock Cum Personal Serums",prod_assistant_unlock_cum_requirement,"prod_assistant_unlock_cum_label")
     prod_assistant_unlock_physical = Action("Unlock Physical Personal Serums",prod_assistant_unlock_physical_requirement,"prod_assistant_unlock_physical_label")
@@ -30,7 +30,7 @@ init -1 python:
     def mc_serum_review_requirement(the_person):
         return True
 
-    def prod_assistant_essential_oils_requirement(the_person):
+    def prod_assistant_essential_oils_intro_requirement(the_person):
         return False
 
     def prod_assistant_unlock_auras_requirement(the_person):
@@ -117,14 +117,18 @@ label mc_serum_intro_label(the_person):
     mc.name "Alright. Get back to work, I'm going to do the same."
     the_person "You got it boss!"
     $ clear_scene()
-    $ mc.business.event_triggers_dict["mc_serum_energy_unlocked"] = True
+    $ mc.business.add_mandatory_crisis(mc_serum_timeout)
     "You get up and step out of the serum production area."
     "You definitely feel conflicted about what just happened... but you have to admit, the prospect of getting your hands on serums that would enhance your personal performance is tempting."
     "You decide to go along with it for now, but you definitely need to keep a closer eye on [the_person.possessive_title] and her activities."
     return
 
 label mc_serum_timout_label():
-
+    "Something about you feels different. You have... less energy?"
+    "The serum that [ashley.possessive_title] gave you must have worn off."
+    "Maybe you should talk to her about getting another dose? It definitely had a positive effect on you."
+    $ mc.business.event_triggers_dict["mc_serum_energy_unlocked"] = True
+    $ ashley.add_unique_on_room_enter_event(prod_assistant_essential_oils_intro)
     return
 
 label mc_serum_review_label(the_person):
@@ -136,8 +140,114 @@ label mc_serum_review_label(the_person):
     return
 
 label prod_assistant_essential_oils_intro_label(the_person):
-    "Mostly copy paste of the essential oils quest."
-    "Tells MC to take these to head researcher to make a serum trait out of it."
+    "As you walk into the production area, a very strange mixture of smells enter your nostrils."
+    "You are having trouble placing the smell... Is there a chemical leak somewhere!?!"
+    "You quickly scan the room. You notice [the_person.title] at a desk... with a strange chemical diffuser sitting next to her?"
+    $ the_person.draw_person(position = "sitting")
+    "You walk over. The smell is definitely coming from the diffuser."
+    mc.name "[the_person.title]... can I ask what you are diffusing into the room?"
+    the_person "Oh! Hello [the_person.mc_title]! Yeah I was having some trouble concentrating, so I got out my essential oil diffuser."
+    "She can't be serious..."
+    the_person "It's my own personal mix of peppermint, rosemary, and lemon oils! Really helps me... Ahhhh ha ha ha ha I'm just kidding."
+    the_person "Can you believe that people actually buy this stuff?"
+    "You take another whiff... the smell is very confusing. And personally you find it a bit distracting."
+    mc.name "Well, I don't think it is a good idea to be diffusing that around here. We have a lot of chemicals we store in the building, and for a minute I thought we had a leak or spill."
+    the_person "Oh, yes sir! Don't worry, this batch is almost out anyway. This stuff is so expensive. Actually, you would be surprised how much money people spend on this garbage!"
+    "Hmmm... expensive?"
+    mc.name "So, this is something people pay a lot of money for? These, essential oils?"
+    the_person "Yeah, the whole thing is nuts. I had a shop owner at the mall pawn these off on me as a free sample the other day, but they are crazy expensive."
+    the_person "Some people diffuse them, rub them on their skin, even take them orally."
+    mc.name "That's interesting. So you can take them orally? And they are perfectly safe?"
+    the_person "Yeah, from what I've seen, they don't do a thing if taken orally. Good or bad."
+    "You consider this for a moment. Maybe this is something you could use?"
+    the_person "You know what you could do? Take some to [mc.business.head_researcher.fname]. I bet she could figure out how to make a serum trait out of them."
+    the_person "You could probably use them to help turn a significant profit."
+    mc.name "That's a good idea."
+    the_person "Here, take these. I was just trying to annoy the other girls with them anyway, but it doesn't seem to be having much of an effect on them."
+    $ mc.business.head_researcher.add_unique_on_talk_event(quest_essential_oils_research_start)
+    "You take the essential oils from [the_person.title]. You should take them to your head researcher."
+    return
+
+label quest_essential_oils_research_start_label(the_person):
+    $ the_person.draw_person()
+    "You greet your head researcher."
+    mc.name "Hello, I have a quick question for you. Have you ever heard of essential oils?"
+    the_person "Oh god, don't start with that bullshit..."
+    mc.name "Right, well, I was talking to another employee, and apparently there are people out there who will pay big money for them."
+    the_person "There's a sucker born every minute, or so I've heard."
+    mc.name "So... would it be possible to create a serum trait using essential oils? Not to do anything meaningful, but as a way of driving up the price."
+    "[the_person.title] stops and considers what you are saying for a moment."
+    the_person "I... think so? I don't know if there's any major negative side effects associated with them. I could look into it the next couple of days and get back to you."
+    mc.name "Perfect. Let me know what you find out."
+    the_person "Okay. Is there anything else I can do you for you?"
+    $ mc.business.head_researcher.add_unique_on_talk_event(quest_essential_oils_research_end)
+    return
+
+label quest_essential_oils_research_end_label(the_person):
+    $ the_person.draw_person()
+    the_person "Hey [the_person.mc_title]. Just the man I was hoping to see. I did some research on those essential oils you were asking about."
+    mc.name "And?"
+    the_person "Well, they are mostly related to placebo effect. People think they work, so they imagine they feel better or whatever else after they use them."
+    the_person "Most of them also have some sort of negative side effect, but they are all mostly benign. It wouldn't be too hard to make a serum trait like you were asking."
+    mc.name "That's great, that is exactly what I was hoping to hear."
+    the_person "Just to give you a heads up though. Some of those oils are hard to extract, and for our company we would need to buy them in pretty bulk sizes..."
+    mc.name "Hmm, so I may need to find a supplier."
+    the_person "Yup! Sorry, I don't know where you could source this stuff. Here's a list of which ones would be appropriate for us to use."
+    mc.name "Thanks, that's exactly what I needed."
+    "It was [mc.business.prod_assistant.possessive_title] that suggested it in the beginning. Maybe she can tell you where to get more from?"
+    $ mc.business.prod_assistant.add_unique_on_talk_event(quest_essential_oils_discover_supplier)
+    return
+
+label quest_essential_oils_discover_supplier_label(the_person):
+    $ the_person.draw_person()
+    mc.name "Hello, I have a quick question for you."
+    the_person "Yeah [the_person.mc_title]?"
+    mc.name "Those oils you had the other day in here. Where did you get them from?"
+    the_person "Well, I get mine from over at the mall. I like to hang out there on the weekend sometimes. The one I got is from the weird lifestyle coach lady.."
+    mc.name "Do you remember her name?"
+    "She thinks about it for a minute."
+    the_person "Yes, I'm pretty sure her name is [camilla.fname]. She has a small kiosk setup in the mall itself."
+    mc.name "Thank you."
+    the_person "Yup! Anything else I can do for you?"
+    $ camilla.add_unique_on_talk_event(quest_essential_oils_decision)
+    return
+
+label quest_essential_oils_decision_label(the_person):
+    mc.name "I have an employee who told me she got some essential oils from you. Would you happen to be able to procure a bulk order?"
+    the_person "Oh? How big are we talking?"
+    mc.name "Well, I am interested in using them in a small run of pharmaceuticals I am developing."
+    the_person "Ah, I could set you up with a gallon size for now? A little bit of these things go a long way!"
+    mc.name "That sounds good. Here is a list of the ones I need."
+    "You hand her the list from your researcher."
+    the_person "Okay, I'll need $500 to cover the cost. Do you want to do that up front? Or should I invoice it?"
+    menu:
+        "Pay it up front":
+            mc.name "I'll pay it all now. I have the cash on me."
+            the_person "Ok, great!"
+            "[the_person.title] takes your information and money."
+            $ mc.business.change_funds(-500)
+            the_person "I'll make sure it gets delivered out to your business right away!"
+            $ quest_essential_oils().set_quest_flag(101)
+            $ quest_essential_oils().quest_completed()
+        "Invoice":
+            mc.name "I don't have that amount of money on me. Could you please invoice my business?"
+            the_person "Sure, I can do that. Accounts to be payable in no less than one week, of course."
+            "[the_person.title] takes your information."
+            the_person "I'll make sure it gets delivered out to your business right away!"
+            $ quest_essential_oils().set_quest_flag(102)
+            $ add_quest_essential_oils_invoice()
+    $ clear_scene()
+    #$ add_essential_oil_serum_trait()
+    $ list_of_traits.append(essential_oil_trait)
+    $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_unlock_auras)
+    if mc.business.head_researcher is None:
+        # we fired the head researcher, so we don't bother checking in with them.
+        return
+    "You step away from the kiosk. You give your head researcher a call."
+    mc.business.head_researcher "Hello?"
+    mc.name "Hey, I've procured an order of essential oils. They should be delivered sometime today."
+    mc.business.head_researcher "Okay. If you want to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
+    "You hang up the phone. You now have access to the Essential Oils serum trait. It has a high value, but no positive effects and high chance of a negative side effect."
     return
 
 label prod_assistant_unlock_auras_label(the_person):
