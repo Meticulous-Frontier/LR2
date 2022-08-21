@@ -34,6 +34,7 @@ label alternative_start():
         global TIER_1_TIME_DELAY
         global TIER_2_TIME_DELAY
         global TIER_3_TIME_DELAY
+        global GAME_SPEED_FACTOR = 1.0
 
     "MOD" "How quickly would you like stories from the mod to play out? This will affect spacing between story events."
     menu:
@@ -41,18 +42,22 @@ label alternative_start():
             $ TIER_1_TIME_DELAY = 1
             $ TIER_2_TIME_DELAY = 3
             $ TIER_3_TIME_DELAY = 7
+            $ GAME_SPEED_FACTOR = 1.5
         "Standard":
             $ TIER_1_TIME_DELAY = 3
             $ TIER_2_TIME_DELAY = 7
             $ TIER_3_TIME_DELAY = 14
+            $ GAME_SPEED_FACTOR = 1.0
         "Epic":
             $ TIER_1_TIME_DELAY = 5
             $ TIER_2_TIME_DELAY = 12
             $ TIER_3_TIME_DELAY = 20
+            $ GAME_SPEED_FACTOR = 0.75
         "Marathon":
             $ TIER_1_TIME_DELAY = 7
             $ TIER_2_TIME_DELAY = 15
             $ TIER_3_TIME_DELAY = 30
+            $ GAME_SPEED_FACTOR = 0.60
 
     $ easy_mode = False
     "MOD" "Do you want to play with original game difficulty or make the game easier?"
