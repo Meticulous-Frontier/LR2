@@ -30,9 +30,6 @@ init 2:
                 label get_debug_log()
 
 init 2 python:
-    import sys
-    import collections
-
     class SystemInfo():
         def __init__(self):
             self.total_zip_size = 0

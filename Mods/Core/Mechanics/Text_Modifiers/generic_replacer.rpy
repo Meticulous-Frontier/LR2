@@ -1,6 +1,4 @@
 init 2 python:
-    import re
-
     rc_word_finder = re.compile(r"\b[A-Za-z_]\w*\b(?!(\w*\.)?\w*\])")
 
     # replace each word in text with word from replace_dict

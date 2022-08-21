@@ -37,3 +37,29 @@ init -1 python:
         return True
 
     Clothing.__ne__ = clothing_ne
+
+    #######################################
+    # Enhanced Methods For Clothing Class #
+    #######################################
+
+    def get_slut_value_enhanced(self):
+        new_score = self.slut_value
+        if WardrobeBuilder.clothing_in_preferences("skimpy outfits", self):
+            new_score += 1
+        # if WardrobeBuilder.clothing_in_preferences("conservative outfits", self):
+        #     new_score -= 3
+        if WardrobeBuilder.clothing_in_preferences("showing her tits", self):
+            new_score += 2
+        if WardrobeBuilder.clothing_in_preferences("showing her ass", self):
+            new_score += 2
+        if WardrobeBuilder.clothing_in_preferences("lingerie", self):
+            new_score += 1
+        if WardrobeBuilder.clothing_in_preferences("high heels", self):
+            new_score += 1
+        if self in [pumps, high_heels, leggings]:
+            new_score += 3 # small extra modifier
+        if self in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, micro_skirt, daisy_dukes, jean_hotpants]:
+            new_score += 5 # extremely slutty clothing (applies extra modifier)
+        return new_score
+
+    Clothing.get_slut_value = get_slut_value_enhanced

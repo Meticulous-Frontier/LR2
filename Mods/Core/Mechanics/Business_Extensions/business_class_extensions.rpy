@@ -304,6 +304,8 @@ init -1 python:
                 return business.manager_wardrobe
             if person.has_role(maid_role) or person.job in [maid_hotel_job, maid_hotel_job2]:
                 return maid_wardrobe
+            if person.job == prostitute_job:
+                return prostitute_wardrobe
             if person.job.job_title == "Barista":
                 return barista_wardrobe
 

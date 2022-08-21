@@ -442,7 +442,7 @@ label ellie_flirt_response(the_person):
     return
 
 label ellie_flirt_response_low(the_person):
-    if the_person.is_wearing_uniform():
+    if the_person.is_wearing_uniform() and the_person.is_employee():
         if the_person.judge_outfit(the_person.outfit):
             #She's in uniform and likes how it looks.
             the_person "Thanks, [the_person.mc_title]. I like these uniforms too. Did you design them yourself?"
@@ -496,7 +496,7 @@ label ellie_flirt_response_low(the_person):
     return
 
 label ellie_flirt_response_mid(the_person):
-    if the_person.is_wearing_uniform():
+    if the_person.is_wearing_uniform() and the_person.is_employee():
         if the_person.judge_outfit(the_person.outfit):
             $ mc.change_locked_clarity(10)
             the_person "No surprises there, since you're the one who designed this uniform."

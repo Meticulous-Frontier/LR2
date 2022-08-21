@@ -1,6 +1,4 @@
 init -1 python:
-    import hashlib
-
     def remove_person_from_game(self):
         my_location = self.location
         if my_location:
@@ -701,7 +699,7 @@ init -1 python:
         if not ignore_taboo and the_position.associated_taboo:
             final_slut_requirement += 10    # taboo increases requirement by 10
 
-        print("Position: " + the_position.name + "[Sluttiness: " + str(self.sluttiness) + ", Required: " + str(final_slut_requirement) + "]")
+        # print("Position: " + the_position.name + "[Sluttiness: " + str(self.sluttiness) + ", Required: " + str(final_slut_requirement) + "]")
         if self.sluttiness >= final_slut_requirement:
             return True
         return False

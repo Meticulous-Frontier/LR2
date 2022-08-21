@@ -401,7 +401,7 @@ label genius_flirt_response(the_person):
     return
 
 label genius_flirt_response_low(the_person):
-    if the_person.outfit == the_person.planned_uniform:
+    if the_person.is_wearing_uniform() and the_person.is_employee():
         if the_person.judge_outfit(the_person.outfit):
             #She's in uniform and likes how it looks.
             the_person "Thanks, [the_person.mc_title]. I like these uniforms too. Did you design them yourself?"
