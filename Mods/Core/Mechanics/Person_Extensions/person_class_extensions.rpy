@@ -2758,3 +2758,58 @@ init -1 python:
     Person.story_teamup_list = story_teamup_list
     Person.story_other_list = story_other_list
     Person.story_character_description = ""
+
+
+###### Person copy of time based events ######
+
+    # Day function wrappers
+
+    def person_set_event_day(self, dict_key, override = True, set_day = None):
+        if not override and self.event_triggers_dict.get(dict_key, None):
+            return False
+        if set_day != None:
+            self.event_triggers_dict[dict_key] = set_day
+        else:
+            self.event_triggers_dict[dict_key] = day
+        return
+
+    def person_get_event_day(self, dict_key, set_if_none = True):
+        if self.event_triggers_dict.get(dict_key, None) == None and set_if_none:
+            self.set_event_day(dict_key)
+        return self.event_triggers_dict.get(dict_key, None)
+
+    def person_days_since_event(self, dict_key, set_if_none = True):
+        if self.event_triggers_dict.get(dict_key, None) == None and set_if_none:
+            self.set_event_day(dict_key)
+        if self.event_triggers_dict.get(dict_key, None):
+            return day - self.event_triggers_dict.get(dict_key, None)
+        else:
+            return None
+
+    def person_string_since_event(self, dict_key, set_if_none = True): #Returns a string describing how long it has been since an event
+        if self.days_since_event(dict_key) < 1:
+            return "earlier"
+        elif self.days_since_event(dict_key) == 1:
+            return "yesterday"
+        elif self.days_since_event(dict_key) <= 4:
+            return "a few days ago"
+        elif self.days_since_event(dict_key) <= 10:
+            return "a week ago"
+        elif self.days_since_event(dict_key) <= 19:
+            return "a couple weeks ago"
+        elif self.days_since_event(dict_key) <= 28:
+            return "a few weeks ago"
+        elif self.days_since_event(dict_key) <= 45:
+            return "a month ago"
+        elif self.days_since_event(dict_key) <= 75:
+            return "a couple months ago"
+        elif self.days_since_event(dict_key) <= 145:
+            return "a few months ago"
+        else:
+            return "a while ago"
+
+
+    Person.set_event_day = person_set_event_day
+    Person.get_event_day = person_get_event_day
+    Person.days_since_event = person_days_since_event
+    Person.string_since_event = person_string_since_event
