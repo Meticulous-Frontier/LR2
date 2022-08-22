@@ -104,29 +104,7 @@ init 1 python:
                 return True
         return False
 
-    def quest_essential_oils_research_start_requirement(the_person):
-        if mc.business.is_open_for_business():
-            if mc.is_at_work():
-                return True
-        return False
 
-    def quest_essential_oils_research_end_requirement(the_person):
-        if mc.business.is_open_for_business():
-            if mc.is_at_work():
-                if day > quest_essential_oils().quest_event_dict.get("research_day", 0):
-                    return True
-        return False
-
-    def quest_essential_oils_discover_supplier_requirement(the_person):
-        if mc.business.is_open_for_business():
-            if mc.is_at_work():
-                return True
-        return False
-
-    def quest_essential_oils_decision_requirement(the_person):
-        if time_of_day > 0 and time_of_day < 4:
-            return True
-        return False
 
     def quest_essential_oils_abandon_requirement():
         if day > quest_essential_oils().quest_event_dict.get("timeout_day", 0):

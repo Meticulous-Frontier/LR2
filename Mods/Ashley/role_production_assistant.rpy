@@ -8,6 +8,10 @@ init 1 python:
     mc_serum_timeout = Action("Serums runout",mc_serum_timeout_requirement,"mc_serum_timeout_label")
     mc_serum_review = Action("Review Personal Serums",mc_serum_review_requirement,"mc_serum_review_label", menu_tooltip = "Review your personal serum options, research progress, and refresh your dose.")
     prod_assistant_essential_oils_intro = Action("Essential Oils Intro",prod_assistant_essential_oils_intro_requirement,"prod_assistant_essential_oils_intro_label")
+    quest_essential_oils_research_start = Action("Essential Oil Research", quest_essential_oils_research_start_requirement, "quest_essential_oils_research_start_label")
+    quest_essential_oils_research_end = Action("Essential Oil Outcome", quest_essential_oils_research_end_requirement, "quest_essential_oils_research_end_label")
+    quest_essential_oils_discover_supplier = Action("Find a Supplier", quest_essential_oils_discover_supplier_requirement, "quest_essential_oils_discover_supplier_label")
+    quest_essential_oils_decision = Action("Talk to Supplier", quest_essential_oils_decision_requirement, "quest_essential_oils_decision_label")
     prod_assistant_unlock_auras = Action("Unlock Aura Personal Serums",prod_assistant_unlock_auras_requirement,"prod_assistant_unlock_auras_label")
     prod_assistant_unlock_cum = Action("Unlock Cum Personal Serums",prod_assistant_unlock_cum_requirement,"prod_assistant_unlock_cum_label")
     prod_assistant_unlock_physical = Action("Unlock Physical Personal Serums",prod_assistant_unlock_physical_requirement,"prod_assistant_unlock_physical_label")
@@ -31,6 +35,30 @@ init -1 python:
         return True
 
     def prod_assistant_essential_oils_intro_requirement(the_person):
+        return False
+
+    def quest_essential_oils_research_start_requirement(the_person):
+        if mc.business.is_open_for_business():
+            if mc.is_at_work():
+                return True
+        return False
+
+    def quest_essential_oils_research_end_requirement(the_person):
+        if mc.business.is_open_for_business():
+            if mc.is_at_work():
+                if mc.business.days_since_event("essential_oils_research_start") > TIER_2_TIME_DELAY:
+                    return True
+        return False
+
+    def quest_essential_oils_discover_supplier_requirement(the_person):
+        if mc.business.is_open_for_business():
+            if mc.is_at_work():
+                return True
+        return False
+
+    def quest_essential_oils_decision_requirement(the_person):
+        if time_of_day > 0 and time_of_day < 4:
+            return True
         return False
 
     def prod_assistant_unlock_auras_requirement(the_person):
@@ -181,6 +209,7 @@ label quest_essential_oils_research_start_label(the_person):
     mc.name "Perfect. Let me know what you find out."
     the_person "Okay. Is there anything else I can do you for you?"
     $ mc.business.head_researcher.add_unique_on_talk_event(quest_essential_oils_research_end)
+    $ mc.business.set_event_day("essential_oils_research_start", override = True)
     return
 
 label quest_essential_oils_research_end_label(the_person):

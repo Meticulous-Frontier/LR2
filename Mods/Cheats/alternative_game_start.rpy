@@ -34,7 +34,7 @@ label alternative_start():
         global TIER_1_TIME_DELAY
         global TIER_2_TIME_DELAY
         global TIER_3_TIME_DELAY
-        global GAME_SPEED_FACTOR = 1.0
+        global GAME_SPEED_FACTOR
 
     "MOD" "How quickly would you like stories from the mod to play out? This will affect spacing between story events."
     menu:
