@@ -224,7 +224,7 @@ label cum_fetish_employee_intro_label(the_person):
     the_person "That... was amazing..."
     "You put your cock back in your pants and grab your stuff."
     $ the_person.draw_person()
-    mc.name "You are such a good cum slut. I'll make sure to make use of your mouth again soon. Have a goodnight [the_person.title]."
+    mc.name "You are such a good cum slut. I'll make sure to make use of your mouth again soon. Goodnight [the_person.title]."
     the_person "Good night [the_person.mc_title]!"
     $ clear_scene()
     $ mc.change_location(lobby)

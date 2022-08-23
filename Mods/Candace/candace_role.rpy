@@ -909,7 +909,7 @@ label candace_midnight_wakeup_label():
     $ mc.change_locked_clarity(10)
     mc.name "Let's get back to your place first, okay?"
     the_person "Aww, okay."
-    "It's pretty clear you that if you don't do anything, [the_person.fname] is going to get herself into real trouble. Is this really something you want to get yourself involved in though?"
+    "It's pretty clear to you that if you don't do anything, [the_person.fname] is going to get herself into real trouble. Is this really something you want to get yourself involved in though?"
     "You get to her apartment, and soon she is walking through the front door... Which was completely unlocked..."
     #candi home background
     $ mc.change_location(the_person.home)
