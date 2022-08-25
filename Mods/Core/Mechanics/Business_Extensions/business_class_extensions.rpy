@@ -555,6 +555,15 @@ init -1 python:
 
     Business.get_intern_list = business_get_intern_list
 
+    def business_is_open_for_internship(self):
+        if self.is_weekend():
+            if time_of_day == 1 or time_of_day == 2:
+                if self.get_intern_list():
+                    return True
+        return False
+    
+    Business.is_open_for_internship = business_is_open_for_internship
+
     def get_requirement_intern_list(self, exclude_list = None, **kargs): #Get a list of interns who pass the validrequirements. Pass the same arguments as person_meets_requirements expects as named args.
         interns_meeting_requirement = []
         if exclude_list is None:
