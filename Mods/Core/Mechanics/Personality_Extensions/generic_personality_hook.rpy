@@ -738,6 +738,32 @@ init 2 python:
                     town_relationships.update_relationship(mother, other_cousin, "Niece", "Aunt")
         return
 
+    def generate_random_sisters():
+        no_family = [x for x in all_people_in_the_game(excluded_people = unique_character_list) if x.age < 30 and len(town_relationships.get_relationship_type_list(x, types = ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"])) == 0]
+        linked_sisters = []
+
+        def get_new_sister_from_list():
+            available_sisters = [x for x in no_family if x not in linked_sisters]
+            if not available_sisters:
+                return None
+            sister = renpy.random.choice(no_family)
+            linked_sisters.append(sister)
+            return sister
+
+        for i in range(4):
+            sister = get_new_sister_from_list()
+            other_sister = get_new_sister_from_list()
+
+            if not sister or not other_sister:
+                break
+
+            town_relationships.update_relationship(sister, other_sister, "Sister")
+            # when not married, their last names should be identical
+            if other_sister.relationship != "Married" and sister.relationship != "Married":
+                other_sister.last_name = sister.last_name
+        return
+
+
 init 2 python:
     global lingerie_wardrobe
     lingerie_wardrobe = lingerie_wardrobe.merge_wardrobes(wardrobe_from_xml("Lingerie_Extended_Wardrobe"), keep_primary_name = True)
@@ -776,6 +802,8 @@ label activate_generic_personality(stack):
         generate_random_mothers_and_daughters()
 
         generate_random_sisters_cousins_nieces()
+
+        generate_random_sisters()
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
