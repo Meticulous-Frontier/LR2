@@ -16,6 +16,8 @@ init -2 python:
 
         def apply_trait(self):
             perk_system.add_ability_perk(self.perk_list[self.get_trait_tier()](), self.name)
+            if mc.business.prod_assistant == ashley and not ashley_mc_submission_story_complete():
+                ashley.event_triggers_dict["mc_obedience"] += 1
             return
 
         def menu_name(self):

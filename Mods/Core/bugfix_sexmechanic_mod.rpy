@@ -175,6 +175,13 @@ init 5 python:
             person.add_situational_slut("happiness_modifier", happiness_effect, "I'm so happy, I'm up for anything!")
         elif happiness_effect >= 10:
             person.add_situational_slut("happiness_modifier", happiness_effect, "Today's a good day, let's see where this goes!")
+
+        # Serum Modifiers
+        if perk_system.has_ability_perk("Serum: Aura of Compliance"):
+            if mc_serum_aura_obedience.get_trait_tier() == 1:
+                person.add_situational_obedience("aura",10,"He has an overpowering aura about him...")
+            elif mc_serum_aura_obedience.get_trait_tier() >= 2:
+                person.add_situational_obedience("aura",20,"His aura is overpowering!")
         return
 
     def clear_sex_modifiers(person):
@@ -185,7 +192,9 @@ init 5 python:
         person.clear_situational_slut("cheating")
         person.clear_situational_slut("taboo_sex")
         person.clear_situational_slut("sex_object")
+        person.clear_situational_slut("aura")
         person.clear_situational_obedience("sex_object")
+        person.clear_situational_obedience("aura")
         return
 
     def allow_position(person, position):
@@ -193,6 +202,8 @@ init 5 python:
             for opinion in position.opinion_tags:
                 if person.get_known_opinion_score(opinion) == -2:
                     if person.has_role(slave_role) and person.obedience > 200: #A slave does what she is told.
+                        return True
+                    if perk_system.has_ability_perk("Serum: Aura of Compliance") and mc_serum_aura_obedience.get_trait_tier() >= 2:
                         return True
                     return False
         return True
@@ -302,6 +313,9 @@ init 5 python:
 
             if person.has_role(hypno_orgasm_role) and object_choice is not None and not person.event_triggers_dict.get("hypno_orgasmed_recently", False):
                 option_list.append(["Trigger an orgasm","Hypno_Orgasm"])
+
+            if perk_system.has_ability_perk("Serum: Feat of Orgasm Control") and mc_serum_feat_orgasm_control.get_trait_tier() >= 1:
+                option_list.append(["Orgasm Early","early_orgasm"])
 
             if not hide_leave: #TODO: Double check that we can always get out
                 option_list.append(["Stop " + position_choice.verbing + " her and leave", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
@@ -526,7 +540,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ round_choice = _return #This gets the players choice for what to do this round.
 
         # Now that a round_choice has been picked we can do something.
-        if round_choice == "Change" or round_choice == "Continue":
+        if round_choice == "Change" or round_choice == "Continue" or round_choice == "early_orgasm":
             if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignore all of that
                 if start_position is None: #The first time we get here,
                     call pick_position(the_person, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition) from _call_pick_position_bugfix
@@ -607,7 +621,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 $ scene_private = private
                 if not private and mc.location.get_person_count() == 1:
                     $ scene_private = False #Only pass private to sex desc. if there is actually a witness
-
+                if round_choice == "early_orgasm":
+                    "You rapidly build arousal, using your orgasm control to force yourself to cum early."
+                    $ mc.change_arousal(100)
                 call sex_description(the_person, position_choice, object_choice, private = scene_private, report_log = report_log) from _call_sex_description_bugfix
 
                 $ report_log["last_position"] = position_choice
@@ -632,6 +648,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
                         $ mc.condom = False
                     if position_choice.requires_hard and mc.recently_orgasmed:
+                        if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 2 and mc.energy > 50:
+                            $ mc.recently_orgasmed = False
+                            "Despite your orgasm, becuase of your Energy Regeneration Serum, your cock stays hard, allowing you to continue [position_choice.verbing] [the_person.possessive_title] if you want."
+                    elif position_choice.requires_hard and mc.recently_orgasmed:
                         "Your post-orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
                         $ position_choice = None
                     elif position_choice.calculate_energy_cost(mc) > mc.energy:

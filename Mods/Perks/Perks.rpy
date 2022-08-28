@@ -146,8 +146,6 @@ init -1 python:
                 self.ability_perks[perk_name].click_perk()
             return
 
-
-
         def get_stat_perk_list(self):  #This function returns a list of all three perk lists.
             return self.stat_perks
 
@@ -170,7 +168,9 @@ init -1 python:
                         ret_text += " (On Cooldown)"
             return ret_text
 
-
+        def perk_on_cum(self, the_person = None, the_place = None):
+            for perk_name in self.ability_perks:
+                self.ability_perks[perk_name].on_cum(the_person, the_place)
 
     class Stat_Perk(renpy.store.object):
         # owner can be MC or any other Person object (default is MC)
@@ -274,7 +274,7 @@ init -1 python:
                 self.owner = mc
 
     class Ability_Perk(renpy.store.object):
-        def __init__(self, description, owner = None, toggle = True, togglable = False, usable = False, bonus_is_temp = False, duration = 0, usable_func = None, usable_cd = 0, update_func = None, save_load = None):
+        def __init__(self, description, owner = None, toggle = True, togglable = False, usable = False, bonus_is_temp = False, duration = 0, usable_func = None, usable_cd = 0, update_func = None, save_load = None, cum_func = None):
             self.owner = owner
             self.description = description
             self.usable = usable            #Is this a usable ability
@@ -288,6 +288,7 @@ init -1 python:
             self.usable_day = 0
             self.save_load = save_load
             self.update_func = update_func
+            self.cum_func = cum_func
 
             if self.owner is None:
                 self.owner = mc
@@ -320,6 +321,12 @@ init -1 python:
 
         def remove(self):
             pass
+            return
+
+        def on_cum(self, the_person = None, the_place = None):
+            if hasattr(self, "cum_func"):
+                if self.cum_func != None and self.toggle:
+                    self.cum_func(the_person, the_place)
             return
 
     def second_wind_func():

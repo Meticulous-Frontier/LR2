@@ -451,6 +451,10 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             call remove_condom_go_raw(the_person, current_node.position) from _go_raw__girl_in_charge_01
             $ mc.condom = False
             $ using_condom = False
+        if position_choice.requires_hard and mc.recently_orgasmed:
+            if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 2 and mc.energy > 50:
+                $ mc.recently_orgasmed = False
+                "Despite your orgasm, becuase of your Energy Regeneration Serum, your cock stays hard, allowing [the_person.possessive_title] to continue."
         if current_node.position.requires_hard and mc.recently_orgasmed:
             "Your post-orgasm cock softens, stopping [the_person.possessive_title] for now."
             #TODO if this keeps us from accomplishing sex goal, consider rerunning this method from the beginning, or just ending the scene. Or creating a new path?

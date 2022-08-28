@@ -121,3 +121,12 @@ init -1 python:
             return list(result)[0]
 
         return tuple(result)
+
+    #Return a list of people in the same room as MC. If MC is home, return everyone at MC's home.
+    def get_nearby_people():
+        result = []
+        if mc.is_home():
+            result = hall.people + bedroom.people + lily_bedroom.people + mom_bedroom.people + kitchen.people + home_bathroom.people + dungeon.people + home_shower.people + harem_mansion.people
+        else:
+            result = mc.location.people
+        return result
