@@ -1688,6 +1688,7 @@ init -1 python:
         def cum_in_vagina_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
+            perk_system.perk_on_cum(the_person = person, the_place = "creampies")
             # run extension code
             person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("creampies"), add_to_log = add_to_record)
         return cum_in_vagina_wrapper
@@ -1699,6 +1700,7 @@ init -1 python:
         def cum_in_ass_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
+            perk_system.perk_on_cum(the_person = person, the_place = "anal creampies")
             # run extension code
             person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("anal creampies"), add_to_log = add_to_record)
         return cum_in_ass_wrapper
@@ -1710,6 +1712,7 @@ init -1 python:
         def cum_on_face_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
+            perk_system.perk_on_cum(the_person = person, the_place = "cum facials")
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
@@ -1724,6 +1727,7 @@ init -1 python:
         def cum_on_tits_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
+            perk_system.perk_on_cum(the_person = person, the_place = "being covered in cum")
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
@@ -1738,6 +1742,7 @@ init -1 python:
         def cum_on_stomach_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
+            perk_system.perk_on_cum(the_person = person, the_place = "being covered in cum")
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
@@ -1752,6 +1757,7 @@ init -1 python:
         def cum_on_ass_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
+            perk_system.perk_on_cum(the_person = person, the_place = "being covered in cum")
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
@@ -1766,6 +1772,7 @@ init -1 python:
         def cum_in_mouth_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
+            perk_system.perk_on_cum(the_person = person, the_place = "drinking cum")
             # run extension code
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["drinking cum"] = report_log.get("drinking cum", 0) + 1

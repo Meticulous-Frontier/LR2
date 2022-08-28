@@ -33,15 +33,15 @@ init 1 python:  #Associated Perks
 
     def perk_cum_obedience_small():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "When exposed to your cum, girls gain up to 5 obedience, to a maximum of 150.", toggle = False, usable = False, cum_func = perk_cum_obedience_small_on_cum, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "When exposed to your cum, girls gain up to 5 obedience, to a maximum of 150.", usable = False, cum_func = perk_cum_obedience_small_on_cum, bonus_is_temp = True, duration = duration)
 
     def perk_cum_obedience_med():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "When exposed to your cum, girls gain up to 10 obedience, to a maximum of 200 and if disliked, her opinion of the cumshot is shifted positively.", toggle = False, usable = False, cum_func = perk_cum_obedience_med_on_cum, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "When exposed to your cum, girls gain up to 10 obedience, to a maximum of 200 and if disliked, her opinion of the cumshot is shifted positively.", usable = False, cum_func = perk_cum_obedience_med_on_cum, bonus_is_temp = True, duration = duration)
 
     def perk_cum_obedience_large():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "When exposed to your cum, girls gain up to 20 obedience, to a maximum of 250 and her opinion of the cumshot is shifted positively. If she isn't already in a trance, she is put in one.", toggle = False, usable = False, cum_func = perk_cum_obedience_large_on_cum, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "When exposed to your cum, girls gain up to 20 obedience, to a maximum of 250 and her opinion of the cumshot is shifted positively. If she isn't already in a trance, she is put in one.", usable = False, cum_func = perk_cum_obedience_large_on_cum, bonus_is_temp = True, duration = duration)
 
     def perk_cum_obedience_advance_req_01():
         return False

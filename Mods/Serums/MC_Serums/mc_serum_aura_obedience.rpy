@@ -32,15 +32,15 @@ init 1 python:  #Associated Perks
 
     def perk_aura_obedience_small():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "Girls near you slowly gain obedience up to 150 and never refuse small favors.", toggle = False, usable = False, update_func = perk_aura_obedience_small_update, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "Girls near you slowly gain obedience up to 150 and never refuse small favors.", usable = False, update_func = perk_aura_obedience_small_update, bonus_is_temp = True, duration = duration)
 
     def perk_aura_obedience_med():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "Girls near you slowly gain obedience up to 200 and never refuse small or medium favors, and have +10 obedience during sex.", toggle = False, usable = False, update_func = perk_aura_obedience_med_update, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "Girls near you slowly gain obedience up to 200 and never refuse small or medium favors, and have +10 obedience during sex.", usable = False, update_func = perk_aura_obedience_med_update, bonus_is_temp = True, duration = duration)
 
     def perk_aura_obedience_large():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "Girls near you slowly gain obedience up to 250 and never refuse any favors, have +20 obedience during sex, and never refuse a sex position based on her opinions.", toggle = False, usable = False, update_func = perk_aura_obedience_large_update, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "Girls near you slowly gain obedience up to 250 and never refuse any favors, have +20 obedience during sex, and never refuse a sex position based on her opinions.", usable = False, update_func = perk_aura_obedience_large_update, bonus_is_temp = True, duration = duration)
 
     def perk_aura_obedience_advance_req_01():
         return False

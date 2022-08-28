@@ -28,7 +28,7 @@ init 5 python:
 
     # include a visual indication
     def build_position_willingness_string_enhanced(self, person, ignore_taboo = False): #NOTE: Returns a list instead of string. If you want it to be a single string then do "".join(position.build_position_willingness_string(person))
-    #Generates a list of strings for this position that includes a tooltip and coloured willingness for the person given.
+        #Generates a list of strings for this position that includes a tooltip and coloured willingness for the person given.
 
         willingness_string = ""
         tooltip_string = ""
@@ -250,10 +250,16 @@ init 5 python:
     Position.double_orgasm = property(get_double_orgasm, set_double_orgasm, del_double_orgasm, "Double orgasm label")
 
     def call_orgasm_enhanced(self, the_person, the_location, the_object):
-        if self.double_orgasm and mc.arousal >= mc.max_arousal:
-            renpy.call(self.double_orgasm, the_person, the_location, the_object)
-        else:
-            renpy.call(self.orgasm_description, the_person, the_location, the_object)
+        renpy.call("call_orgasm_enhanced_label", the_person, the_location, the_object, self)
+        # orgasm_choice = True
+        # if self.double_orgasm and perk_system.has_ability_perk("Serum: Feat of Orgasm Control") and mc_serum_feat_orgasm_control.get_trait_tier() >= 1:
+        #     orgasm_choice = climax_check_double_orgasm_control()
+        # elif self.double_orgasm and perk_system.has_ability_perk("Serum: Feat of Orgasm Control") and mc.arousal >= mc.max_arousal:
+        #     orgasm_choice = climax_check_double_orgasm_control()
+        # if self.double_orgasm and mc.arousal >= mc.max_arousal and orgasm_choice:
+        #     renpy.call(self.double_orgasm, the_person, the_location, the_object)
+        # else:
+        #     renpy.call(self.orgasm_description, the_person, the_location, the_object)
         return
 
     Position.call_orgasm = call_orgasm_enhanced
@@ -265,3 +271,18 @@ init 5 python:
         if "report_log" in globals():
             report_log["guy orgasms"] = report_log.get("guy orgasms", 0) + 1
         return
+
+label call_orgasm_enhanced_label(the_person, the_location, the_object, the_position):
+    $ orgasm_choice = True
+    if the_position.double_orgasm and perk_system.has_ability_perk("Serum: Feat of Orgasm Control") and mc_serum_feat_orgasm_control.get_trait_tier() >= 1:
+        call climax_check_double_orgasm_control_label() from _double_orgasm_check_01
+        $ orgasm_choice = _return
+    elif the_position.double_orgasm and perk_system.has_ability_perk("Serum: Feat of Orgasm Control") and mc.arousal >= mc.max_arousal:
+        call climax_check_double_orgasm_control_label() from _double_orgasm_check_02
+        $ orgasm_choice = _return
+
+    if the_position.double_orgasm and mc.arousal >= mc.max_arousal and orgasm_choice:
+        $ renpy.call(the_position.double_orgasm, the_person, the_location, the_object)
+    else:
+        $ renpy.call(the_position.orgasm_description, the_person, the_location, the_object)
+    return

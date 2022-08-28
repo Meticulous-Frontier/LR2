@@ -20,15 +20,15 @@ init 1 python:  #Associated Perks
 
     def perk_energy_regen_small():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "You naturally regenerate a small amount of energy throughout the day.", toggle = False, usable = False, update_func = perk_energy_regen_small_update, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "You naturally regenerate a small amount of energy throughout the day.", usable = False, update_func = perk_energy_regen_small_update, bonus_is_temp = True, duration = duration)
 
     def perk_energy_regen_med():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "You naturally regenerate a moderate amount of energy throughout the day. ", toggle = False, usable = False, update_func = perk_energy_regen_med_update, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "You naturally regenerate a moderate amount of energy throughout the day. ", usable = False, update_func = perk_energy_regen_med_update, bonus_is_temp = True, duration = duration)
 
     def perk_energy_regen_large():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "You naturally regenerate a large amount of energy throughout the day. During sex, only lose erection when low on Energy.", toggle = False, usable = False, update_func = perk_energy_regen_large_update, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "You naturally regenerate a large amount of energy throughout the day. During sex, only lose erection when low on Energy.", usable = False, update_func = perk_energy_regen_large_update, bonus_is_temp = True, duration = duration)
 
     def perk_energy_regen_advance_req_01():
         return False

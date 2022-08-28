@@ -12,6 +12,13 @@ init 2 python:
     list_of_mc_traits.append(mc_serum_physical_test)
 
 init 1 python:
+    def test_mc_serum_01():
+        mc_serum_aura_obedience.apply_trait()
+        mc_serum_cum_obedience.apply_trait()
+        mc_serum_energy_regen.apply_trait()
+        mc_serum_feat_orgasm_control.apply_trait()
+        return
+
     def perk_test_energy_01():
         duration = get_mc_serum_duration()
         return Ability_Perk(description = "Test Energy Perk 1.", bonus_is_temp = True, duration = duration)

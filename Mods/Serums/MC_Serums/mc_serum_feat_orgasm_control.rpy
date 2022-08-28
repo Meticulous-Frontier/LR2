@@ -17,15 +17,15 @@ init 1 python:  #Associated Perks
 
     def perk_feat_orgasm_control_small():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "During sex, you can hold off orgasm indefinitely, but orgasms cost 20 energy.", toggle = False, usable = False, update_func = perk_feat_orgasm_control_small_update, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "During sex, you can hold off orgasm indefinitely, but orgasms cost 20 energy.", usable = False, bonus_is_temp = True, duration = duration)
 
     def perk_feat_orgasm_control_med():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "During sex, cum early or hold off indefinitely, but orgasms cost 20 energy.", toggle = False, usable = False, update_func = perk_feat_orgasm_control_med_update, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "During sex, cum early or hold off indefinitely, but orgasms cost 20 energy.", usable = False, bonus_is_temp = True, duration = duration)
 
     def perk_feat_orgasm_control_large():
         duration = get_mc_serum_duration()
-        return Ability_Perk(description = "During sex, cum early or hold off indefinitely, and once per day you can quickly orgasm during a conversation before the other person can react. Orgasms cost 20 energy.", toggle = False, usable = False, update_func = perk_feat_orgasm_control_large_update, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "During sex, cum early or hold off indefinitely, and once per day you can quickly orgasm during a conversation before the other person can react. Orgasms cost 20 energy.", usable = False, bonus_is_temp = True, duration = duration)
 
     def perk_feat_orgasm_control_advance_req_01():
         return False
@@ -43,3 +43,25 @@ label climax_check_orgasm_control():
             return False
 
     return is_cumming
+
+
+
+label climax_check_double_orgasm_control_label():
+    $ is_cumming = False
+    "It looks like she is getting ready to cum. Do you want cum with her?"
+    menu:
+        "Cum now":
+            "You focus on the pleasure and let yourself go."
+            $ mc.change_energy(-20)
+            $ mc.change_arousal(120)
+            return True
+        "Delay orgasm":
+            "You put off your orgasm for a bit longer."
+            return False
+
+    return is_cumming
+
+init 1 python:
+    def climax_check_double_orgasm_control():
+        renpy.call("climax_check_double_orgasm_control_label")
+        return _return
