@@ -85,6 +85,16 @@ init 2 python:
     def mc_ask_take_serum_requirement(person):
         return True #Consider only allow asking non employees to take serum.
 
+    def do_a_favor_requirement(person):
+        if person.days_since_event("obedience_favor") == None:
+            person.set_event_day("obedience_favor", set_day = -1)
+        if person.is_family():
+            return False
+        if person.days_since_event("obedience_favor") >= 1:
+            return True
+        if mc.energy < 15:
+            return "Requires: 15{image=gui/extra_images/energy_token.png}"
+        return "Asked for a favor too recently"
 
 init 5 python:
     # Schedule Actions
@@ -127,6 +137,10 @@ init 5 python:
     mc_remove_person_action = ActionMod("Remove from game", mc_remove_person_requirement, "mc_remove_person_label", menu_tooltip = "You are not interested in [the_person.title]. This will remove her from the game.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     main_character_actions_list = [mc_schedule_person_action, mc_start_follow_action, mc_stop_follow_action, mc_rename_person_action, mc_spend_the_night_action, mc_lasik_surgery_action, mc_remove_person_action]
+
+    do_a_favor_action = Action("Ask for a Favor   {color=#FFFF00}-15{/color} {image=gui/extra_images/energy_token.png}", do_a_favor_requirement, "do_a_favor_label",
+        menu_tooltip = "Ask for a favor. Successfully asking for a favor tends to build obedience in your relationship.")
+    chat_actions.append(do_a_favor_action)
 
 
 label mc_pay_to_strip_label(person):
@@ -317,4 +331,126 @@ label mc_remove_person_label(person):
             $ jump_game_loop()
         "Reconsider":
             pass
+    return
+
+label do_a_favor_label(the_person):
+    $ mc.change_energy(-15)
+    mc.name "Hey. I was wondering if you would be willing to do me a favor."
+    if the_person.obedience < 70:
+        "[the_person.possessive_title] scoffs and rolls her eyes."
+        the_person "Probably not, but shoot your shot, [the_person.mc_title]."
+    elif the_person.obedience < 100:
+        the_person "Maybe, what do you need?"
+    elif the_person.obedience < 130:
+        "[the_person.possessive_title] smiles."
+        the_person "If I have time. What do you need?"
+    else:
+        "[the_person.possessive_title] smiles wide."
+        the_person "Anything for you, [the_person.mc_title]."
+    menu:
+        "Small Favor":
+            $ favor_success = True
+            if mc_at_home():
+                mc.name "Hey, I'm a little short. Any chance I can borrow $5 to grab some coffee?"
+                if favor_success:
+                    the_person "Uhh, yeah I guess that would be okay."
+                    "[the_person.possessive_title] grabs her purse and hands you a $5 bill from it."
+                    mc.name "Thanks!"
+                    $ mc.business.change_funds(5)
+                    if the_person.obedience < 130:
+                        $ the_person.change_obedience(1)
+                else:
+                    the_person "I'm not your personal bank account, [the_person.mc_title]."
+                    mc.name "Ah, sorry."
+            elif mc.is_at_work():
+                mc.name "I accidentally left my wallet at home. Can I borrow $5 to grab something from the vending machine?"
+                if favor_success:
+                    the_person "Oh, sure. I'm sure you're good for it, right?"
+                    mc.name "Of course."
+                    $ mc.business.change_funds(5)
+                    if the_person.obedience < 130:
+                        $ the_person.change_obedience(1)
+                else:
+                    the_person "Aren't you supposed to be paying me? Sorry, I don't carry cash, anyway..."
+                    mc.name "Right, sorry."
+            else:
+                mc.name "Hey, I left my wallet at home. Can you spot me $5 for a coffee?"
+                if favor_success:
+                    the_person "Oh, sure. I'm sure you're good for it, right?"
+                    mc.name "Of course."
+                    $ mc.business.change_funds(5)
+                    if the_person.obedience < 130:
+                        $ the_person.change_obedience(1)
+                else:
+                    the_person "Sorry, I don't carry cash [the_person.mc_title]"
+                    mc.name "Right, sorry."
+
+        "Moderate Favor" if the_person.days_since_event("obedience_med_favor", set_if_none = True) > TIER_1_TIME_DELAY:
+            $ favor_success = True  #calculate this instead of assuming true
+            if not mc.phone.has_number(the_person):
+                mc.name "I was just wondering if I could get your number."
+                if favor_success:
+                    the_person "I suppose that would be okay. Just no drunk 3 am phone calls, okay?"
+                    mc.name "Of course."
+                    "You grab your phone and quickly put her number in as she lists it off for you."
+                    $ mc.phone.register_number(the_person)
+                    if the_person.obedience < 150:
+                        $ the_person.change_obedience(2)
+                else:
+                    the_person "Yeah right, I don't think we're close enough for something like that."
+                    "Ouch."
+            else:
+                mc.name "You look amazing in that outfit. Can I snap a picture to update your profile on my phone?"
+                if favor_success:
+                    the_person "Yeah, I can do that!"
+                    $ the_person.draw_person(position = "stand3")
+                    "You quickly snap a picture of [the_person.possessive_title]"
+                    $ the_person.draw_person(position = the_person.idle_pose)
+                    if the_person.obedience < 150:
+                        $ the_person.change_obedience(2)
+                else:
+                    the_person "Sorry, I'm not here to play dress up for you."
+                    "Ouch."
+            $ the_person.set_event_day("obedience_med_favor", override = True)
+        "Large Favor" if the_person.days_since_event("obedience_large_favor") > TIER_2_TIME_DELAY and mc.phone.has_number(the_person):
+            $ favor_success = True  #calculate this instead of assuming true
+            if not the_person.home in mc.known_home_locations:
+                mc.name "Can I get your address? It would be handy to have."
+                if favor_success:
+                    the_person "I guess. Just no unannounced 3 am booty calls, okay?"
+                    mc.name "Of course."
+                    $ the_person.learn_home()
+                    if the_person.obedience < 160:
+                        $ the_person.change_obedience(3)
+                else:
+                    the_person "Yeah right! That is need to know information only, mister."
+                    mc.name "Ah, okay..."
+            elif the_person.has_role(instapic_role):
+                mc.name "Your instapics have been so hot lately. Could you take a few more today? I like to check it when I go to bed."
+                if favor_success:
+                    the_person "Oh! I'm glad you like them. Yeah I could do that."
+                    mc.name "Great! I appreciate it."
+                    $ the_person.event_triggers_dict["insta_generate_pic"] = True
+                    if the_person.obedience < 160:
+                        $ the_person.change_obedience(3)
+                else:
+                    the_person "Ummm, I just post when I get the chance. Sorry I'm not sure if I'll get around to it today or not."
+                    mc.name "Ah, okay."
+            else:
+                mc.name "You look amazing today. Have you ever thought about starting an Instapic account?"
+                mc.name "You really should. I know I would check it out!"
+                if favor_success:
+                    the_person "You know, I had been considering doing that. I think you've convinced me, I'll do it later!"
+                    mc.name "Great! I can't wait to see you post!"
+                    $ the_person.event_triggers_dict["insta_known"] = True
+                    $ the_person.add_role(instapic_role)
+                    if the_person.obedience < 160:
+                        $ the_person.change_obedience(3)
+                else:
+                    the_person "Sorry, I'm not really into social media."
+                    mc.name "Okay, well if you ever change your mind, you would be great!"
+
+
+            $ the_person.set_event_day("obedience_large_favor", override = True)
+    $ the_person.set_event_day("obedience_favor", override = True)
     return

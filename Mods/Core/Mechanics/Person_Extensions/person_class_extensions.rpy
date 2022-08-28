@@ -2784,7 +2784,7 @@ init -1 python:
         if self.event_triggers_dict.get(dict_key, None):
             return day - self.event_triggers_dict.get(dict_key, None)
         else:
-            return None
+            return day
 
     def person_string_since_event(self, dict_key, set_if_none = True): #Returns a string describing how long it has been since an event
         if self.days_since_event(dict_key) < 1:
