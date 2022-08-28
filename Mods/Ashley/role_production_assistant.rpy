@@ -26,15 +26,24 @@ init 1 python:
 #Requirement functions
 init -1 python:
     def mc_serum_intro_requirement(the_person):
+        if mc.business.days_since_event("prod_assistant_advance") > TIER_2_TIME_DELAY:
+            if mc.business.is_open_for_business() and mc.is_at_work():
+                return True
         return False
 
     def mc_serum_timeout_requirement():
+        if mc.business.days_since_event("prod_assistant_advance") > get_mc_serum_duration():
+            return True
         return False
 
     def mc_serum_review_requirement(the_person):
-        return True
+        if mc.business.event_triggers_dict.get("mc_serum_energy_unlocked", False) and mc.business.is_open_for_business():
+            return True
+        return False
 
     def prod_assistant_essential_oils_intro_requirement(the_person):
+        if mc.business.is_open_for_business() and mc.business.days_since_event("prod_assistant_advance") > TIER_2_TIME_DELAY:
+            return True
         return False
 
     def quest_essential_oils_research_start_requirement(the_person):
@@ -62,7 +71,6 @@ init -1 python:
         return False
 
     def prod_assistant_unlock_auras_requirement(the_person):
-
         return False
 
     def prod_assistant_unlock_cum_requirement(the_person):
@@ -149,6 +157,7 @@ label mc_serum_intro_label(the_person):
     "You get up and step out of the serum production area."
     "You definitely feel conflicted about what just happened... but you have to admit, the prospect of getting your hands on serums that would enhance your personal performance is tempting."
     "You decide to go along with it for now, but you definitely need to keep a closer eye on [the_person.possessive_title] and her activities."
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
 label mc_serum_timout_label():
@@ -157,6 +166,7 @@ label mc_serum_timout_label():
     "Maybe you should talk to her about getting another dose? It definitely had a positive effect on you."
     $ mc.business.event_triggers_dict["mc_serum_energy_unlocked"] = True
     $ ashley.add_unique_on_room_enter_event(prod_assistant_essential_oils_intro)
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
 label mc_serum_review_label(the_person):
@@ -249,22 +259,12 @@ label quest_essential_oils_decision_label(the_person):
     mc.name "That sounds good. Here is a list of the ones I need."
     "You hand her the list from your researcher."
     the_person "Okay, I'll need $500 to cover the cost. Do you want to do that up front? Or should I invoice it?"
-    menu:
-        "Pay it up front":
-            mc.name "I'll pay it all now. I have the cash on me."
-            the_person "Ok, great!"
-            "[the_person.title] takes your information and money."
-            $ mc.business.change_funds(-500)
-            the_person "I'll make sure it gets delivered out to your business right away!"
-            $ quest_essential_oils().set_quest_flag(101)
-            $ quest_essential_oils().quest_completed()
-        "Invoice":
-            mc.name "I don't have that amount of money on me. Could you please invoice my business?"
-            the_person "Sure, I can do that. Accounts to be payable in no less than one week, of course."
-            "[the_person.title] takes your information."
-            the_person "I'll make sure it gets delivered out to your business right away!"
-            $ quest_essential_oils().set_quest_flag(102)
-            $ add_quest_essential_oils_invoice()
+    mc.name "I'll pay it all now. I have the cash on me."
+    the_person "Ok, great!"
+    "[the_person.title] takes your information and money."
+    $ mc.business.change_funds(-500)
+    the_person "I'll make sure it gets delivered out to your business right away!"
+
     $ clear_scene()
     #$ add_essential_oil_serum_trait()
     $ list_of_traits.append(essential_oil_trait)
@@ -277,6 +277,8 @@ label quest_essential_oils_decision_label(the_person):
     mc.name "Hey, I've procured an order of essential oils. They should be delivered sometime today."
     mc.business.head_researcher "Okay. If you want to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
     "You hang up the phone. You now have access to the Essential Oils serum trait. It has a high value, but no positive effects and high chance of a negative side effect."
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_unlock_auras)
     return
 
 label prod_assistant_unlock_auras_label(the_person):
