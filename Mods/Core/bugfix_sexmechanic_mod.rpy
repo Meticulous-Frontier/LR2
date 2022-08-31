@@ -1351,8 +1351,6 @@ label public_sex_post_round(the_person, position_choice, report_log):
     $ scr_change = 0
     if position_choice == None: #We got here by accident
         return
-    if the_person == police_chief: #Exclude scrutiny when doing the police chief
-        return
     if position_choice.skill_tag == "Foreplay":
         $ scr_change = 1
     elif position_choice.skill_tag == "Oral":
@@ -1406,7 +1404,10 @@ label public_sex_post_round(the_person, position_choice, report_log):
         elif scrutiny < 100:
             "A small crowd has gathered to watch, and you are getting several comments from people to stop."
         else:
-            call police_chief_public_sex_intervention(the_person) from _arrested_during_public_sex_01
+            if the_person == police_chief: #Exclude scrutiny when doing the police chief
+                "A small crowd is watching you and [the_person.possessive_title], but they are too intimidated to interfere."
+            else:
+                call police_chief_public_sex_intervention(the_person) from _arrested_during_public_sex_01
             return False
         return True
     return True
