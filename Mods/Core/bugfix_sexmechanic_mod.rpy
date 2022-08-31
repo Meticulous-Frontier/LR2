@@ -1408,6 +1408,6 @@ label public_sex_post_round(the_person, position_choice, report_log):
                 "A small crowd is watching you and [the_person.possessive_title], but they are too intimidated to interfere."
             else:
                 call police_chief_public_sex_intervention(the_person) from _arrested_during_public_sex_01
-            return False
+                return False
         return True
     return True
