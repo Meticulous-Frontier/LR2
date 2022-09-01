@@ -225,7 +225,7 @@ label kaya_setup_intro_event_label():
     python:
         # init kaya role
         kaya_role = Role(role_name ="kaya", actions =[kaya_barista_fuck, kaya_get_drinks], hidden = True)
-        kaya_barista_job = Job("Barista", kaya_role, coffee_shop, work_times = [2, 3])
+        kaya_barista_job = Job("Barista", [kaya_role, generic_student_role], coffee_shop, work_times = [2, 3])
         kaya.change_job(kaya_barista_job, job_known = True)
         # she also studies
         kaya.set_schedule(None, the_times = [1,2,3])    # Free roam
