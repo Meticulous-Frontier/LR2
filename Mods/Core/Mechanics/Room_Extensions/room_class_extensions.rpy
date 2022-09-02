@@ -48,7 +48,7 @@ init -1 python:
             if not person.follow_mc and not room is destination:
                 if person.location == gym:
                     person.apply_gym_outfit()
-                elif person.location == university and not person is nora:
+                elif person.location == university and person.has_role(generic_student_role):
                     person.apply_university_outfit()
                 else:
                     person.apply_planned_outfit()
