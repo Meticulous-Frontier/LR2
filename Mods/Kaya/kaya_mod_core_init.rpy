@@ -18,6 +18,8 @@ label update_kaya_mod_core(stack):
     python:
         if "kaya" not in globals():
             kaya_mod_initialization()
+        elif not kaya.has_role(generic_student_role):
+            kaya.add_role(generic_student_role)
         if "kaya_erica_teamup" not in globals():
             kaya_erica_teamup_init()
         if not isinstance(kaya_erica_teamup, Progression_Scene):

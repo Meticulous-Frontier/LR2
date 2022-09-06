@@ -12,10 +12,6 @@ init 2 python:
         erica_base_outfit.add_accessory(the_eye_shadow)
         erica_base_outfit.add_accessory(the_rings)
 
-        erica_student_job = Job("College Athlete", erica_role, job_location = university, work_times = [2])
-        erica_student_job.schedule.set_schedule(gym, the_times = [1, 3])
-        erica_student_job.schedule.set_schedule(gym, the_days = [5, 6], the_times = [1, 2])
-
         global erica
         erica = make_person(name = "Erica", age = 19, body_type = "thin_body", face_style = "Face_4", tits="B", height = 0.89, hair_colour="chestnut brown", hair_style = braided_bun, skin="white" , \
             eyes = "light blue", personality = erica_personality, name_color = "#89CFF0", dial_color = "89CFF0" , starting_wardrobe = erica_wardrobe, \
@@ -390,6 +386,15 @@ init -1 python:
 
     erica_role = Role(role_name ="College Athlete", actions =[erica_get_to_know , erica_phase_one, erica_phase_two, erica_protein_shake, erica_house_call, erica_money_problems_update, erica_discuss_morning_wakeup], hidden = True)
 
+label erica_instantiate_jobs(stack):
+    python:
+        erica_student_job = Job("College Athlete", [erica_role, generic_student_role], job_location = university, work_times = [2])
+        erica_student_job.schedule.set_schedule(gym, the_times = [1, 3])
+        erica_student_job.schedule.set_schedule(gym, the_days = [5, 6], the_times = [1, 2])
+
+            # continue on the hijack stack if needed
+        execute_hijack_call(stack)
+    return
 
 #*************Mandatory Crisis******************#
 init 1 python:
