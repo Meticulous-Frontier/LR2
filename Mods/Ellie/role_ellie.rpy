@@ -118,6 +118,7 @@ init 2 python:
         the_blood.colour = [.71, .1, .1, 0.8]
         the_blood.layer = 0
         the_person.outfit.add_accessory(the_blood)
+        the_person.event_triggers_dict["given_virginity"] = True
         return
 
 init -2 python: #Requirement Functions
@@ -1356,9 +1357,6 @@ label ellie_dinner_date_label():
     mc.name "That sounds incredible. Here, I brought this."
     "You hand her the bottle of wine"
 
-    "blah blah blah dinner stuff"
-
-    $ had_sex = True
 
     "You finish the last bite of your peach cobbler. You look up at [the_person.possessive_title]. There is an obvious tension in the air."
     if ellie_has_given_virginity():
@@ -1383,7 +1381,118 @@ label ellie_dinner_date_label():
         the_person "Aww, it was nothing..."
         "She takes a long sip from her wine glass, finishing it off."
         the_person "You ummm... want some coffee or something?"
-        mc.name "Not particularly. "
+        mc.name "Not particularly, but I'm also not ready to leave yet."
+        the_person "Well umm, I just realized, I hadn't give you a tour of the place yet..."
+        "She looks around."
+        the_person "I mean... it's just an apartment but ummm..."
+        mc.name "Well I wouldn't mind seeing the inside of the bedroom."
+        $ the_person.change_arousal(5)
+        the_person "Oh! That's a great idea..."
+        $ the_person.draw_person(position = "walking_away")
+        "You get up and follow [the_person.possessive_title] into her bedroom."
+        $ the_person.draw_person(position = the_person.idle_pose)
+        the_person "This is it... this is where I..."
+        "Her voice drifts off as you close in on her."
+        $ the_person.draw_person(position = "kissing")
+        "You both wrap your arms around each other. Your tongues meet and you eagerly make out."
+        $ the_person.change_arousal(5)
+        $ mc.change_arousal(5)
+        "You reach behind her and grab her ass. She gives a little moan as you start to knead it."
+        "You grab her ass with both hands now and roughly lift her up."
+        $ the_person.draw_person(position = "against_wall")
+        the_person "Mmm... oh [the_person.mc_title]..."
+        "[the_person.possessive_title] wraps her legs around you. Your cock is now nestled between her legs as she rubs herself against you."
+        "You walk forward to her bed and then fall forward onto it."
+        $ the_person.draw_person(position = "missionary")
+        $ the_person.change_arousal(15)
+        $ mc.change_arousal(15)
+        the_person "Oh stars, you make me feel so good [the_person.mc_title]..."
+        "You stop making out for a second, and she looks into your eyes."
+        the_person "Will you... you know..."
+        "She leaves her question unasked."
+        mc.name "No... I don't know. What do you want?"
+        the_person "I... I want you, [the_person.mc_title]..."
+        the_person "I know it sounds crazy, but I can't stop thinking about you. I know you may not feel the same way but... I want my first time to be with you."
+        "Yes! It is finally time to take [the_person.title]'s cherry."
+        mc.name "[the_person.title]. If you are certain, I would be proud to be your first."
+        the_person "I am. I know the first time is gonna hurt... but it's okay. I want you to take me, and don't stop until you finish, okay?"
+        mc.name "Alright. If you're sure. But first, you're wearing way too many clothes..."
+        "You quickly start to peel off all of [the_person.possessive_title]'s clothing."
+        $ the_person.strip_outfit(position = "missionary")
+        "Once she is naked, you quickly strip down yourself, then take a moment to admire the busty redhead beneath you."
+        "It isn't every day you get to take a woman's virginity, so you want to savor this."
+        mc.name "Do you... want me to wear a condom?"
+        "[the_person.title] shakes her head."
+        the_person "I know I should... but for my first time... I want to experience everything..."
+        mc.name "Are you on birth control?"
+        the_person "No... I... I never thought I would need to..."
+        mc.name "Do you understand... it is possible that you could get pregnant?"
+        the_person "Yes... I understand."
+        "Fuck! Looks like it is up to you. Are you going to go into this raw?"
+        menu:
+            "Put on a condom":
+                $ mc.condom = True
+                mc.name "I'm sorry, but I don't trust myself to pull out, and I'm not quite ready to take that chance."
+                the_person "I understand. Take me how you want."
+                "You reach over to your pants, grab your wallet and quickly pull out a condom. You quickly slide it on."
+            "Go bareback":
+                mc.name "The odds are pretty slim... but it is possible that I won't be able to pull out in time."
+                the_person "I know. I kind of want to know what it is like... to feel it... I mean..."
+                "[the_person.possessive_title] blushes with the last of her words."
+                $ the_person.increase_opinion_score("bareback sex")
+                $ the_person.increase_opinion_score("creampies")
+        "You get into position on top of her. She spreads her legs wide and puts her hands on your back."
+        $ the_person.change_arousal(15)
+        mc.name "Alright, last chance to back out. After this, there is no going back."
+        the_person "Do it... I'm ready!"
+        mc.name "Okay..."
+        "With her legs spread wide, your cock easily finds her slick entrance. She is wet and about as ready as she can be."
+        "You slowly push yourself inside her. Barely inside, you hit her hyman. She winces a bit."
+        mc.name "Alright. Here we go. 1...2...3..."
+        "At three, you push inside forcefully. Her body resists for just a moment, then gives way, giving you access to her depths."
+        the_person "Fuck! Oh stars..."
+        $ take_virginity(the_person)
+        $ the_person.draw_person(position = "missionary")
+        call fuck_person(the_person, private=True, start_position = missionary, start_object = make_bed(), skip_intro = True, skip_condom = True, condition = make_condition_taking_virginity()) from _call_fuck_person_ellie_love_60_01
+
+    $ the_person.draw_person(position = "missionary")
+    "When you are finish, you collapse onto [the_person.title]'s bed next to her."
+    the_person "That was amazing."
+    mc.name "Yeah."
+    if the_person.is_girlfriend():
+        pass
+    else:
+        the_person "So umm... I don't know if this is something you had considered or not but..."
+        the_person "Don't people usually like... say they are boyfriend and girlfriend when they do stuff like that?"
+        mc.name "Some people do."
+        the_person "Ah... umm... do you?"
+        "[the_person.possessive_title] is curious if you want to make your relationship a bit more official. What do you want to do?"
+        menu:
+            "Ask her to be your girlfriend":
+                mc.name "I do. [the_person.title], will you make it official? Will you be my girlfriend?"
+                the_person "Oh thank the stars, yes!"
+                $ the_person.add_role(girlfriend_role)
+                $ the_person.change_love(5, 80)
+                $ the_person.change_happiness(10)
+                "[the_person.possessive_title] rolls over and gives you a lingering kiss on the lips."
+                the_person "You... you wanna stay the night?"
+                mc.name "I'm sorry, I didn't arrange for that. But I definitely will soon."
+                the_person "Okay."
+            "Say you aren't sure yet":
+                mc.name "I really enjoy spending time with you [the_person.title], but things are moving really fast. I'm not sure I'm ready to commit to that yet."
+                the_person "Ah... yeah... they have moved really fast, ain't they."
+                $ the_person.change_love(-2, 80)
+                $ the_person.change_happiness(-2)
+                "You can tell she is a little disappointed, but she tries to hide it."
+    "You get up and get your clothes back on. [the_person.possessive_title] stays in bed."
+    mc.name "I can see myself out. Have a good night."
+    the_person "Goodnight [the_person.mc_title]!"
+    $ clear_scene()
+    "You step out of [the_person.possessive_title]'s apartment."
+    $ the_person.add_unique_on_room_enter_event(ellie_lingerie_shopping)
+    return
+
+label ellie_lingerie_shopping_label(the_person):    #Ellie's 80 love event. She asks MC to take her shopping for exciting underwear to wear for him.
 
     return
 
@@ -1663,6 +1772,9 @@ label ellie_turned_on_while_working_label():    #Crisis event. Can be triggered 
     "Sex scene."
     return
 
+label ellie_asks_to_join_harem_label(the_person):   #100 sluttiness event. Ellie asks to join MCs harem.
+    pass
+    return
 
 # Obedience Events
 init -2 python: #Requirement functions
@@ -1963,7 +2075,6 @@ init -1 python:
     ellie_nanobot_fetish_testing = Action("Ellie's first fetish", ellie_nanobot_fetish_testing_requirement, "ellie_nanobot_fetish_testing_label")
     ellie_nanobot_fetish = Action("Give Ellie another fetish", ellie_nanobot_fetish_requirement, "ellie_nanobot_fetish_label")
 
-
 init -1 python:
     def ellie_is_working_on_nanobots():
         if ellie.location == mc.business.r_div and mc.business.IT_project_in_progress != None:
@@ -2005,3 +2116,23 @@ init -1 python:
 
     def ellie_work_crisis_unlocked():
         return ellie.event_triggers_dict.get("work_turnon", False)
+
+    def ellie_has_anal_fetish():
+        if "ellie" in globals():
+            return ellie.has_anal_fetish()
+        return False
+
+    def ellie_has_cum_fetish():
+        if "ellie" in globals():
+            return ellie.has_cum_fetish()
+        return False
+
+    def ellie_has_breeding_fetish():
+        if "ellie" in globals():
+            return ellie.has_breeding_fetish()
+        return False
+
+    def ellie_has_exhibition_fetish():
+        if "ellie" in globals():
+            return ellie.has_exhibition_fetish()
+        return False

@@ -153,6 +153,9 @@ init 1 python:
     def anal_attention_reduction_project_requirment():
         return get_fetish_anal_serum().mastery_level >= 5.0
 
+    def anal_fetish_increase_project_requirment():
+        return ellie_has_anal_fetish()
+
     def breeder_submission_project_requirement():
         if get_fetish_breeding_serum().mastery_level >= 3.0:
             return True
@@ -161,11 +164,17 @@ init 1 python:
     def breeder_attention_reduction_project_requirement():
         return get_fetish_breeder_serum().mastery_level >= 5.0
 
+    def breeder_fetish_increase_project_requirment():
+        return ellie_has_breeding_fetish()
+
     def cum_thirst_project_requirement():
         return get_fetish_cum_serum().mastery_level >= 3.0
 
     def cum_attention_reduction_project_requirement():
         return get_fetish_cum_serum().mastery_level >= 5.0
+
+    def cum_fetish_increase_project_requirment():
+        return ellie_has_cum_fetish()
 
     def exhibition_cheating_project_requirement():
         if get_fetish_exhibition_serum().mastery_level >= 3.0:
@@ -174,6 +183,9 @@ init 1 python:
 
     def exhibition_attention_reduction_project_requirement():
         return get_fetish_exhibition_serum().mastery_level >= 5.0
+
+    def exhibition_fetish_increase_project_requirment():
+        return ellie_has_exhibition_fetish()
 
 init 1 python:
 
@@ -267,6 +279,24 @@ init 1 python:
        category = "anal",
        tier = 30)
 
+    anal_fetish_increase_project = IT_Project(name = "Anal Fetish Prioritization",
+       desc = "Greatly increases the chances of causing an anal fetish after exposure.",
+       cost = 0,
+       requirement = anal_fetish_increase_project_requirment,
+       toggleable = True,
+       on_buy_function = None,
+       extra_arguments = None,
+       on_apply_function = None,
+       on_remove_function = None,
+       on_turn_function = None,
+       on_move_function = None,
+       on_day_function = None,
+       dependant_policies = None,
+       project_progress = 0,
+       project_cost = 250,
+       category = "anal",
+       tier = 40)
+
     breeder_clarity_reduction_project = IT_Project(name = "Breeding Chemical Adaptation",
         desc = "Changes nanobot adjustment strategy. Instead of adjusting serum composition for nanobots, adjust nanobot programming to handle different chemicals. Reduces research requirement.",
         cost = 0,
@@ -320,6 +350,25 @@ init 1 python:
        project_cost = 200,
        category = "breeder",
        tier = 30)
+
+
+    breeder_fetish_increase_project = IT_Project(name = "Breeding Fetish Prioritization",
+       desc = "Greatly increases the chances of causing a breeding fetish after exposure.",
+       cost = 0,
+       requirement = breeder_fetish_increase_project_requirment,
+       toggleable = True,
+       on_buy_function = None,
+       extra_arguments = None,
+       on_apply_function = None,
+       on_remove_function = None,
+       on_turn_function = None,
+       on_move_function = None,
+       on_day_function = None,
+       dependant_policies = None,
+       project_progress = 0,
+       project_cost = 250,
+       category = "breeder",
+       tier = 40)
 
     cum_clarity_reduction_project = IT_Project(name = "Cum Chemical Adaptation",
         desc = "Changes nanobot adjustment strategy. Instead of adjusting serum composition for nanobots, adjust nanobot programming to handle different chemicals. Reduces research requirement.",
@@ -375,6 +424,24 @@ init 1 python:
        category = "cum",
        tier = 30)
 
+    cum_fetish_increase_project = IT_Project(name = "Cum Fetish Prioritization",
+       desc = "Greatly increases the chances of causing a cum fetish after exposure.",
+       cost = 0,
+       requirement = cum_fetish_increase_project_requirment,
+       toggleable = True,
+       on_buy_function = None,
+       extra_arguments = None,
+       on_apply_function = None,
+       on_remove_function = None,
+       on_turn_function = None,
+       on_move_function = None,
+       on_day_function = None,
+       dependant_policies = None,
+       project_progress = 0,
+       project_cost = 250,
+       category = "cum",
+       tier = 40)
+
     exhibition_clarity_reduction_project = IT_Project(name = "Exhibition Chemical Adaptation",
         desc = "Changes nanobot adjustment strategy. Instead of adjusting serum composition for nanobots, adjust nanobot programming to handle different chemicals. Reduces research requirement.",
         cost = 0,
@@ -429,21 +496,43 @@ init 1 python:
        category = "exhibition",
        tier = 30)
 
+    exhbition_fetish_increase_project = IT_Project(name = "Exhibitionism Fetish Prioritization",
+       desc = "Greatly increases the chances of causing an exhbitionist fetish after exposure.",
+       cost = 0,
+       requirement = exhibition_fetish_increase_project_requirment,
+       toggleable = True,
+       on_buy_function = None,
+       extra_arguments = None,
+       on_apply_function = None,
+       on_remove_function = None,
+       on_turn_function = None,
+       on_move_function = None,
+       on_day_function = None,
+       dependant_policies = None,
+       project_progress = 0,
+       project_cost = 250,
+       category = "exhibition",
+       tier = 40)
+
 
     nanobot_IT_project_list.append(basic_clarity_reduction_project)
     nanobot_IT_project_list.append(basic_attention_reduction_project)
     nanobot_IT_project_list.append(anal_clarity_reduction_project)
     nanobot_IT_project_list.append(anal_incest_project)
     nanobot_IT_project_list.append(anal_attention_reduction_project)
+    nanobot_IT_project_list.append(anal_fetish_increase_project)
     nanobot_IT_project_list.append(breeder_clarity_reduction_project)
     nanobot_IT_project_list.append(breeder_submission_project)
     nanobot_IT_project_list.append(breeder_attention_reduction_project)
+    nanobot_IT_project_list.append(breeder_fetish_increase_project)
     nanobot_IT_project_list.append(cum_clarity_reduction_project)
     nanobot_IT_project_list.append(cum_thirst_project)
     nanobot_IT_project_list.append(cum_attention_reduction_project)
+    nanobot_IT_project_list.append(cum_fetish_increase_project)
     nanobot_IT_project_list.append(exhibition_clarity_reduction_project)
     nanobot_IT_project_list.append(exhibition_cheating_project)
     nanobot_IT_project_list.append(exhibition_attention_reduction_project)
+    nanobot_IT_project_list.append(exhibition_fetish_increase_project)
 
 
     nanobot_IT_project_list.sort(key = IT_project_sort)

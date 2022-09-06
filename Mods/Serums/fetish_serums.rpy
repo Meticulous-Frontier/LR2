@@ -45,8 +45,9 @@ init -1 python:
                 return False
 
         # chance to start the anal fetish quest
-        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
-            return False
+        if not mc.business.IT_project_is_active(anal_fetish_increase_project):
+            if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
+                return False
 
         if person is lily:
             mc.business.mandatory_crises_list.append(anal_fetish_lily_intro)
@@ -119,8 +120,9 @@ init -1 python:
                 return False
 
         # chance to start the anal fetish quest
-        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
-            return False
+        if not mc.business.IT_project_is_active(breeder_fetish_increase_project):
+            if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
+                return False
 
         if person is mom:
             mc.business.mandatory_morning_crises_list.append(breeding_fetish_mom_intro)
@@ -193,8 +195,9 @@ init -1 python:
                 return False
 
         # chance to start the cum fetish quest
-        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
-            return False
+        if not mc.business.IT_project_is_active(cum_fetish_increase_project):
+            if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
+                return False
 
         if person is lily:
             mc.business.mandatory_morning_crises_list.append(cum_fetish_lily_intro)
@@ -249,8 +252,9 @@ init -1 python:
             or person.sluttiness < 70:
             return False
 
-        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
-            return False
+        if not mc.business.IT_project_is_active(exhibition_fetish_increase_project):
+            if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person) and not person.is_in_very_heavy_trance():
+                return False
 
         return False #None of them are written yet
 
