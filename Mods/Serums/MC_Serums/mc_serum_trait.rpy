@@ -15,7 +15,7 @@ init -2 python:
             return
 
         def apply_trait(self):
-            perk_system.add_ability_perk(self.perk_list[self.get_trait_tier()](), self.name)
+            perk_system.add_ability_perk(self.perk_list[self.get_trait_tier() - 1](), self.name)
             if mc.business.prod_assistant == ashley and not ashley_mc_submission_story_complete():
                 ashley.event_triggers_dict["mc_obedience"] += 1
             return
@@ -24,8 +24,8 @@ init -2 python:
             return self.name.replace('Serum: ', '')
 
         def get_trait_tier(self):
-            base_tier = 0
-            return 2
+            base_tier = 1
+            return 3
             dict_key = "mc_serum_" + self.category + "_tier"    #Determine category tier
             base_tier += mc.business.event_triggers_dict.get(dict_key, 0)
             for req_func in self.perk_advance_reqs: #Now determine individual tier level
@@ -51,7 +51,12 @@ init -2 python:
                 return the_serum.researched
             return False
 
-        def is_active(self):
+        def is_active(self, min_tier = 0, exact_tier = None):
+            if min_tier > self.get_trait_tier():
+                return False
+            if exact_tier != None:
+                if exact_tier != self.get_trait_tier():
+                    return False
             return perk_system.has_ability_perk(self.name)
 
         def is_available(self):

@@ -178,9 +178,9 @@ init 5 python:
 
         # Serum Modifiers
         if perk_system.has_ability_perk("Serum: Aura of Compliance"):
-            if mc_serum_aura_obedience.get_trait_tier() == 1:
+            if mc_serum_aura_obedience.get_trait_tier() == 2:
                 person.add_situational_obedience("aura",10,"He has an overpowering aura about him...")
-            elif mc_serum_aura_obedience.get_trait_tier() >= 2:
+            elif mc_serum_aura_obedience.get_trait_tier() >= 3:
                 person.add_situational_obedience("aura",20,"His aura is overpowering!")
         return
 
@@ -203,7 +203,7 @@ init 5 python:
                 if person.get_known_opinion_score(opinion) == -2:
                     if person.has_role(slave_role) and person.obedience > 200: #A slave does what she is told.
                         return True
-                    if perk_system.has_ability_perk("Serum: Aura of Compliance") and mc_serum_aura_obedience.get_trait_tier() >= 2:
+                    if perk_system.has_ability_perk("Serum: Aura of Compliance") and mc_serum_aura_obedience.get_trait_tier() >= 3:
                         return True
                     return False
         return True
@@ -314,7 +314,7 @@ init 5 python:
             if person.has_role(hypno_orgasm_role) and object_choice is not None and not person.event_triggers_dict.get("hypno_orgasmed_recently", False):
                 option_list.append(["Trigger an orgasm","Hypno_Orgasm"])
 
-            if perk_system.has_ability_perk("Serum: Feat of Orgasm Control") and mc_serum_feat_orgasm_control.get_trait_tier() >= 1:
+            if perk_system.has_ability_perk("Serum: Feat of Orgasm Control") and mc_serum_feat_orgasm_control.get_trait_tier() >= 2:
                 option_list.append(["Orgasm Early","early_orgasm"])
 
             if not hide_leave: #TODO: Double check that we can always get out
@@ -648,7 +648,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
                         $ mc.condom = False
                     if mc.recently_orgasmed:
-                        if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 2 and mc.energy > 30:
+                        if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 3 and mc.energy > 30:
                             $ mc.recently_orgasmed = False
                             "Despite your orgasm, becuase of your Energy Regeneration Serum, your cock stays hard, allowing you to continue [position_choice.verbing] [the_person.possessive_title] if you want."
                     if position_choice.requires_hard and mc.recently_orgasmed:
