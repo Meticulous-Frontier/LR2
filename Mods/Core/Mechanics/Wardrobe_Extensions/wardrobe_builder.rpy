@@ -840,11 +840,11 @@ init 5 python:
                         outfit.remove_random_upper(top_layer_first = True)
                         alterations += 1
 
-            #TODO determine if underwear is on, and if it is boring. If girl wants she can swap underwear for sexier set
-            self.set_sexier_panties(self.person, outfit, underwear_colour)
-            self.set_sexier_bra(self.person, outfit, underwear_colour)
-            #Next, determine what kind of outfit this is.
+                #TODO determine if underwear is on, and if it is boring. If girl wants she can swap underwear for sexier set
+                self.set_sexier_panties(self.person, outfit, underwear_colour)
+                self.set_sexier_bra(self.person, outfit, underwear_colour)
 
+            #Next, determine what kind of outfit this is.
             if outfit.has_dress(): #If it is a dress, let the dress be the focal point of the outfit.
                 # renpy.say ("", "Suitable dress set")
                 for item in outfit.upper_body:
