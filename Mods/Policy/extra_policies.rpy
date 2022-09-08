@@ -70,8 +70,8 @@ init 1310 python:
         cost = 10000,
         desc = "Employees are given some leeway on uniforms. While active, employees may choose not to wear a piece or two of the uniform as a form of self expression.",
         toggleable = True,
-        own_requirement = corporate_enforced_nudity_policy,
-        dependant_policies = corporate_enforced_nudity_policy
+        own_requirement = [corporate_enforced_nudity_policy, creative_colored_uniform_policy],
+        dependant_policies = [corporate_enforced_nudity_policy, creative_colored_uniform_policy]
     )
     uniform_policies_list.append(creative_skimpy_uniform_policy)
 
