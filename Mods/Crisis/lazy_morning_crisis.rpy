@@ -75,7 +75,7 @@ label lazy_morning_crisis_action_label():
         mc.name "Why don't you hop on top of me and let me get a taste of you at the same time."
         the_person "Mmm... that sounds nice..."
         call fuck_person(the_person, private = True, start_position = SB_sixty_nine, start_object = mc.location.get_object_with_name("bed"), skip_intro = False, girl_in_charge = True, self_strip = True, hide_leave = False, position_locked = True, report_log = None, affair_ask_after = False, ignore_taboo = False, skip_condom = False) from _call_fuck_person_lazy_morning_69
-        the_person "That was certianly a nice way to start the day."
+        the_person "That was certainly a nice way to start the day."
         mc.name "Yeah, I think I might need to sleep in more often."
         the_person "Mmmm, yeah. If you do be sure to let me know so I can come cuddle with you again."
         mc.name "Absolutely!"
@@ -217,5 +217,6 @@ label lazy_morning_crisis_action_label():
     python:
         the_person.apply_planned_outfit()
         mc.location.show_background()
+        call advance_time from _call_advance_time_lazy_morning
         clear_scene()
     return
