@@ -46,7 +46,7 @@ init 1 python:
         return
 
     def breeder_attention_reduction_on_apply():
-        get_fetish_breeder_serum().attention = 0
+        get_fetish_breeding_serum().attention = 0
         return
 
     def breeder_attention_reduction_on_remove():
@@ -496,7 +496,7 @@ init 1 python:
        category = "exhibition",
        tier = 30)
 
-    exhbition_fetish_increase_project = IT_Project(name = "Exhibitionism Fetish Prioritization",
+    exhibition_fetish_increase_project = IT_Project(name = "Exhibitionism Fetish Prioritization",
        desc = "Greatly increases the chances of causing an exhbitionist fetish after exposure.",
        cost = 0,
        requirement = exhibition_fetish_increase_project_requirment,
