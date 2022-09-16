@@ -91,8 +91,8 @@ init 1 python:
 
             if not (slut_score <= sluttiness_limit and slut_score >= sluttiness_min):
                 return False
-            if __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) == 0:
-                return False # No clothing at all should not be in person wardrobe by default
+            if not self.no_clothes and __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) == 0:
+                return False
             if self.no_clothes and __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) > (is_overwear and 3 or 5):
                 return False
             if self.prefer_clothes and __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) < (is_overwear and 2 or 4):
@@ -135,7 +135,7 @@ init 1 python:
                 return "is too slutty"
             if slut_score < sluttiness_min:
                 return "is too conservative"
-            if __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) == 0:
+            if not self.no_clothes and __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) == 0:
                 return "leaves me completely naked"
             if self.no_clothes and __builtin__.len(outfit.upper_body + outfit.lower_body + outfit.feet) > (is_overwear and 3 or 5):
                 return "has too many layers"
