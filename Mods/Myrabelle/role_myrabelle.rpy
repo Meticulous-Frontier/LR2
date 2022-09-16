@@ -441,8 +441,6 @@ init 3 python:
     myra_esports_second_tournament = Action("Myra's Redemption", myra_esports_second_tournament_requirement, "myra_esports_second_tournament_label")
     myra_gaming_cafe_expansion_intro = Action("Myra Wants to Expand", myra_gaming_cafe_expansion_intro_requirement, "myra_gaming_cafe_expansion_intro_label")
 
-
-
 label myra_esports_practice_label(the_person):  #20 love event, on room enter event on myra
     "You step into the gaming cafe. As you start to walk over to the main counter, however, you realize that there isn't anyone there."
     "You wonder where [the_person.possessive_title] might be? You scan the room."

@@ -25,7 +25,6 @@ init -2 python:
 
         def get_trait_tier(self):
             base_tier = 1
-            return 3
             dict_key = "mc_serum_" + self.category + "_tier"    #Determine category tier
             base_tier += mc.business.event_triggers_dict.get(dict_key, 0)
             for req_func in self.perk_advance_reqs: #Now determine individual tier level

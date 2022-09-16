@@ -201,7 +201,7 @@ label fetish_serum_quest_intro_label():
         mc.name "Go ahead."
 
     $ the_person.draw_person(position = "sitting")
-    the_person "Well, I just got off the phone with an old friend. Nerdy guy I kinda had a thing with at the university before I met you."
+    the_person "Well, I just got off the phone with an old friend. Nerdy guy named Alan I kinda had a thing with at the university before I met you."
     the_person "He has been posting a bunch of stuff on Facebook about his work in robotics, and something he posted caught my eye."
     mc.name "Oh?"
     the_person "Yeah, basically, they've managed to make small robot nanobots that are designed to administer drugs in micro-doses to specific places in the body."
