@@ -452,7 +452,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             $ mc.condom = False
             $ using_condom = False
         if mc.recently_orgasmed:
-            if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 3 and mc.energy > 30:
+            if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 2 and mc.energy > 30:
                 $ mc.recently_orgasmed = False
                 "Despite your orgasm, becuase of your Energy Regeneration Serum, your cock stays hard, allowing [the_person.possessive_title] to continue."
         if current_node.position.requires_hard and mc.recently_orgasmed:
