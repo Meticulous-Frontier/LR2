@@ -15,7 +15,7 @@ init 1 python:
     prod_assistant_unlock_auras = Action("Unlock Aura Personal Serums",prod_assistant_unlock_auras_requirement,"prod_assistant_unlock_auras_label")
     prod_assistant_unlock_cum = Action("Unlock Cum Personal Serums",prod_assistant_unlock_cum_requirement,"prod_assistant_unlock_cum_label")
     prod_assistant_unlock_physical = Action("Unlock Physical Personal Serums",prod_assistant_unlock_physical_requirement,"prod_assistant_unlock_physical_label")
-    prod_assistant_energy_upgrade = Action("Upgrade Energy Serums",prod_assistant_energy_upgrade_requirement,"prod_assistant_energy_upgrade_label")
+    prod_assistant_performance_upgrade = Action("Upgrade Performance Serums",prod_assistant_performance_upgrade_requirement,"prod_assistant_performance_upgrade_label")
     prod_assistant_aura_upgrade = Action("Upgrade Aura Serums",prod_assistant_aura_upgrade_requirement,"prod_assistant_aura_upgrade_label")
     prod_assistant_cum_upgrade = Action("Upgrade Cum Serums",prod_assistant_cum_upgrade_requirement,"prod_assistant_cum_upgrade_label")
     prod_assistant_physical_upgrade = Action("Upgrade Physical Serums",prod_assistant_physical_upgrade_requirement,"prod_assistant_physical_upgrade_label")
@@ -71,24 +71,45 @@ init -1 python:
         return False
 
     def prod_assistant_unlock_auras_requirement(the_person):
+        if mc.business.is_open_for_business():
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_1_TIME_DELAY:
+                return True
         return False
 
     def prod_assistant_unlock_cum_requirement(the_person):
+        if mc.business.is_open_for_business() and the_person.sluttiness > 40:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+                return True
         return False
 
     def prod_assistant_unlock_physical_requirement(the_person):
+        if mc.business.is_open_for_business() and the_person.obedience > 140:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+                return True
         return False
 
-    def prod_assistant_energy_upgrade_requirement(the_person):
+    def prod_assistant_performance_upgrade_requirement(the_person):
+        if mc.business.is_open_for_business() and mc.business.research_tier >= 2:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+                return True
         return False
 
     def prod_assistant_aura_upgrade_requirement(the_person):
+        if mc.business.is_open_for_business() and mc.business.research_tier >= 2:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+                return True
         return False
 
     def prod_assistant_cum_upgrade_requirement(the_person):
+        if mc.business.is_open_for_business() and mc.business.research_tier >= 3:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+                return True
         return False
 
     def prod_assistant_physical_upgrade_requirement(the_person):
+        if mc.business.is_open_for_business() and mc.business.research_tier >= 2:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+                return True
         return False
 
 
@@ -112,7 +133,7 @@ label mc_serum_intro_label(the_person):
     "You drink your coffee fairly quickly. It is a nice to take a break from work and you feel re-energized."
     $ mc.change_energy(50)
     $ mc_serum_energy_regen.apply_trait()
-    "As you finish up with your drink, she changes the subject."
+    "As you finish up with your coffee, she changes the subject."
     if ashley_on_default_path() and the_person == ashley:
         the_person "So I was talking with Steph about how things are going here at work."
         the_person "She was just gushing all about how her 'boyfriend' built her a special room just for her science work."
@@ -136,7 +157,7 @@ label mc_serum_intro_label(the_person):
     the_person "So that's a no?"
     mc.name "No."
     "[the_person.possessive_title] shakes her head."
-    the_person "That's too bad. I figured you would say that. But unfortunately, science stops for no man."
+    the_person "That's too bad. I figured you would say that. But fortunately, science stops for no man."
     mc.name "I'm not going to take one..."
     the_person "That's okay! You already have!"
     "... You look down at your empty coffee with a sudden realization. Holy shit, this bitch just used your own tactic against you?"
@@ -160,12 +181,13 @@ label mc_serum_intro_label(the_person):
     $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
-label mc_serum_timout_label():
+label mc_serum_timeout_label():
     "Something about you feels different. You have... less energy?"
-    "The serum that [ashley.possessive_title] gave you must have worn off."
+    "The serum that [mc.business.prod_assistant.possessive_title] gave you must have worn off."
     "Maybe you should talk to her about getting another dose? It definitely had a positive effect on you."
     $ mc.business.event_triggers_dict["mc_serum_energy_unlocked"] = True
-    $ ashley.add_unique_on_room_enter_event(prod_assistant_essential_oils_intro)
+    $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_performance_upgrade)
+    $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_essential_oils_intro)
     $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
@@ -252,6 +274,7 @@ label quest_essential_oils_discover_supplier_label(the_person):
     return
 
 label quest_essential_oils_decision_label(the_person):
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
     mc.name "I have an employee who told me she got some essential oils from you. Would you happen to be able to procure a bulk order?"
     the_person "Oh? How big are we talking?"
     mc.name "Well, I am interested in using them in a small run of pharmaceuticals I am developing."
@@ -270,6 +293,7 @@ label quest_essential_oils_decision_label(the_person):
     $ list_of_traits.append(essential_oil_trait)
     $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_unlock_auras)
     if mc.business.head_researcher is None:
+        "You now have access to the Essential Oils serum trait. It has a high value, but no positive effects and high chance of a negative side effect."
         # we fired the head researcher, so we don't bother checking in with them.
         return
     "You step away from the kiosk. You give your head researcher a call."
@@ -277,15 +301,31 @@ label quest_essential_oils_decision_label(the_person):
     mc.name "Hey, I've procured an order of essential oils. They should be delivered sometime today."
     mc.business.head_researcher "Okay. If you want to research a new serum that uses them, let me know, we should be able to start developing one ASAP."
     "You hang up the phone. You now have access to the Essential Oils serum trait. It has a high value, but no positive effects and high chance of a negative side effect."
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
-    $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_unlock_auras)
     return
 
 label prod_assistant_unlock_auras_label(the_person):
-    "In this label, the production assistant has the idea from the essential oils for MC to gain pheremone auras."
-    "Convinces MC to give them a try."
-    "Unlocks auras in the MC Serum screen."
+    "You walk into the production room. When you do, [the_person.possessive_title] notices you and waves you over to her desk."
+    $ the_person.draw_person()
     $ mc.business.event_triggers_dict["mc_serum_aura_unlocked"] = True
+    the_person "Hey [the_person.mc_title]. I heard about the essential oils. I'm sure they will help out with business profitability!"
+    the_person "Dealing with them made me get curious a bit. Would it be possible to replicate the supposed results of essential oils?"
+    the_person "Essential oils are obviously umm... shall we say... bogus... but do you know what aren't? Pheremones."
+    mc.name "Right, the natural chemicals a person puts out that can act as signal markers to people around them."
+    the_person "Exactly. Science has done some studies on their effects on various mammals, but effects on humans are notoriously hard to conduct studies on..."
+    the_person "Anyway, with some of the research we've been doing on various pheremones, I think it is possible to make a serum for you that would modify your personal pheremone signature."
+    if mc_serum_aura_obedience.get_unlocked():
+        the_person "I have a prototype for one that I think might make women near you... how do you say... more obedient."
+        mc.name "That does sound useful..."
+        the_person "Let me know if you want to give it a try."
+        "You have unlocked Personal Aura serums! These serums effect girls around you with every passage of time."
+    else:
+        the_person "I haven't come up with a prototype yet, but I think with some more research into other traits it might be something worth pursuing."
+        mc.name "That does sound useful. Let me know if you come up with something."
+        "You have unlocked Personal Aura serums! These serums effect girls around you with every passage of time."
+        "Check the serum review screen for information on what to research to enable them!"
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_aura_upgrade)
+    $ the_person.add_unique_on_room_enter_event(prod_assistant_unlock_cum)
     return
 
 label prod_assistant_unlock_cum_label(the_person):
@@ -293,6 +333,9 @@ label prod_assistant_unlock_cum_label(the_person):
     "Has a method that should be able to accomplish this."
     "Unlocks cum MC serums."
     $ mc.business.event_triggers_dict["mc_serum_cum_unlocked"] = True
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_cum_upgrade)
+    $ the_person.add_unique_on_room_enter_event(prod_assistant_unlock_physical)
     return
 
 label prod_assistant_unlock_physical_label(the_person):
@@ -300,24 +343,38 @@ label prod_assistant_unlock_physical_label(the_person):
     "Asks if MC would be interested in trying some of the beneficial ones."
     "Unlocks physical MC serums."
     $ mc.business.event_triggers_dict["mc_serum_physical_unlocked"] = True
+    $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_physical_upgrade)
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
-label prod_assistant_energy_upgrade_label(the_person):
-    "Use this label to start to process of upgrading energy serums."
+label prod_assistant_performance_upgrade_label(the_person):
+    "Use this label to start to process of upgrading performance serums."
+    "In this label, the production assistant discusses recent progression with performance related serums."
+    "All performance related serums increase in tier by 1 after this label."
     $ mc.business.event_triggers_dict["mc_serum_energy_tier"] = 1
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
 label prod_assistant_aura_upgrade_label(the_person):
     "Use this label to start to process of upgrading aura serums."
+    "In this label, the production assistant discusses recent progression with aura related serums."
+    "All aura related serums increase in tier by 1 after this label."
     $ mc.business.event_triggers_dict["mc_serum_aura_tier"] = 1
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
 label prod_assistant_cum_upgrade_label(the_person):
     "Use this label to start to process of upgrading cum serums."
+    "In this label, the production assistant discusses recent progression with cum related serums."
+    "All performance related serums increase in tier by 1 after this label."
     $ mc.business.event_triggers_dict["mc_serum_cum_tier"] = 1
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
 label prod_assistant_physical_upgrade_label(the_person):
     "Use this label to start to process of upgrading physical serums."
+    "In this label, the production assistant discusses recent progression with physical related serums."
+    "All physical related serums increase in tier by 1 after this label."
     $ mc.business.event_triggers_dict["mc_serum_physical_tier"] = 0
+    $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return

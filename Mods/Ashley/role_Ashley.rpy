@@ -147,6 +147,7 @@ init -1 python:
 
 
     def ashley_room_excitement_overhear_requirement(the_person):
+        return False
         if the_person.is_at_work():
             if the_person.days_employed > 5: #Been working for at least a few days week.
                 return True
@@ -341,6 +342,7 @@ label ashley_first_talk_label(the_person):
     $ ashley.event_triggers_dict["intro_complete"] = True
     $ ashley.add_unique_on_room_enter_event(ashley_room_excitement_overhear)
     $ ashley.add_role(prod_assistant_role)
+    $ mc.business.prod_assistant = ashley
     $ ashley.add_unique_on_room_enter_event(mc_serum_intro)
     return
 
