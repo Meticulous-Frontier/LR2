@@ -214,9 +214,8 @@ label lazy_morning_crisis_action_label():
         $ the_person.change_slut(2)
         $ mc.change_locked_clarity(10)
         "You try for a bit to get back to sleep but it doesn't work. Instead you get up and start your day."
-    python:
-        the_person.apply_planned_outfit()
-        mc.location.show_background()
-        call advance_time from _call_advance_time_lazy_morning
-        clear_scene()
+    $ the_person.apply_planned_outfit()
+    $ mc.location.show_background()
+    call advance_time from _call_advance_time_lazy_morning
+    $ clear_scene()
     return
