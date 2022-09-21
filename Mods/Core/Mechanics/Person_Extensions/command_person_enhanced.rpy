@@ -183,12 +183,12 @@ label bend_over_your_desk_label(the_person):
             "You stand up and pull your cock out. You rub yourself along her slit for a moment."
             the_person "Ah... sir?"
             mc.name "Just keep working. This will only take a moment."
-            call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = False, position_locked = True, used_obedience = True)from _obedience_lust_loop_doggy_finish_01
+            call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), condition = make_condition_computer_work(), skip_intro = False, position_locked = True, used_obedience = True)from _obedience_lust_loop_doggy_finish_01
         "Fuck her ass" if (the_person.obedience >= 190 or the_person.is_willing(SB_anal_standing, private = False)) and the_person.vagina_available():
             "You stand up and pull your cock out. You rub yourself along her slit for a moment."
             the_person "Ah... sir?"
             mc.name "Just keep working. This will only take a moment."
-            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_desk(), skip_intro = False, position_locked = True, used_obedience = True)from _obedience_lust_loop_anal_finish_01
+            call fuck_person(the_person, start_position = SB_anal_standing, condition = make_condition_computer_work(), start_object = make_desk(), skip_intro = False, position_locked = True, used_obedience = True)from _obedience_lust_loop_anal_finish_01
         "Leave her alone" if not (get_lust_tier() >= 4 or (get_lust_tier() * 2 > mc.focus)):
             pass
     mc.name "Thank you, [the_person.title]. That was just what I needed."
@@ -273,7 +273,7 @@ label employee_lust_build_loop_label(the_person):
                     $ the_person.change_obedience(-spank_factor)
                     $ the_person.change_love(spank_factor)
 
-            "Pull her bottoms off" if not the_person.vagina_available() and (the_person.sluttiness > 30 or the_person.obedience > 140):
+            "Pull her bottoms off" if not (the_person.vagina_available() or the_person.vagina_visible()) and (the_person.sluttiness > 30 or the_person.obedience > 140):
                 "You decide that it is time to get a better view. You pull at her clothing."
                 the_person "Sir... I..."
                 mc.name "Shh, just keep working."
