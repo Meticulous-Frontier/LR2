@@ -443,7 +443,7 @@ init 5 python:
 
 
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = Condition_Type("Empty")):
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = Condition_Type("Empty"), used_obedience = False):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
@@ -458,6 +458,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ use_condom = mc.condom if skip_condom else False
     $ stealth_orgasm = False
     $ stop_stripping = False
+    if used_obedience:
+        $ report_log["used_obedience"] = True
 
     #Privacy modifiers
     if mc.location.get_person_count() == 1 and not private and mc.location.privacy_level != 3 and mc.location.privacy_level != 1:

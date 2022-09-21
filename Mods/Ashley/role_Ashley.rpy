@@ -646,7 +646,7 @@ label ashley_sneaks_over_label():
         "[the_person.title] points your cock toward her slit, then starts to rub against it. Her arousal glistens at the tip of the condom as she moves her hips back and forth."
         the_person "Here we go. Round one!"
         "[the_person.possessive_title] stops rolling her hips. With one smooth movement she slides you deep into her tight cunt."
-    call get_fucked(the_person, start_position = cowgirl, the_goal = ashley_sex_goal, private = True, skip_intro = True, allow_continue = False, ) from _ashley_comes_over_cowgirl_01
+    call get_fucked(the_person, start_position = cowgirl, the_goal = ashley_sex_goal, private = True, skip_intro = True, allow_continue = False) from _ashley_comes_over_cowgirl_01
     $ the_person.draw_person(position = "missionary")
 
     $ the_report = _return
