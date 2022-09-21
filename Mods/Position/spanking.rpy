@@ -23,7 +23,7 @@ init 1 python:
             #TODO transitions to standing anal
 
     def calc_spank_factor(person):  #Returns an int that is representative of how much someone likes this round of spanking.
-        factor = 5 + (person.get_opinion_score("being submissive") * 2)
+        factor = 3 + (person.get_opinion_score("being submissive") * 3)
         factor += (- (person.event_triggers_dict.get("spank_level", 0)))
         return factor
 

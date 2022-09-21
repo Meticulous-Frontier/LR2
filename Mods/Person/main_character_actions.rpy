@@ -86,7 +86,7 @@ init 2 python:
         return True #Consider only allow asking non employees to take serum.
 
     def do_a_favor_requirement(person):
-        if person.days_since_event("obedience_favor") == None:
+        if person.days_since_event("obedience_favor", set_if_none = False) == None:
             person.set_event_day("obedience_favor", set_day = -1)
         if person.is_family():
             return False
@@ -333,6 +333,7 @@ label mc_remove_person_label(person):
             pass
     return
 
+#Obedience Actions
 label do_a_favor_label(the_person):
     $ mc.change_energy(-15)
     mc.name "Hey. I was wondering if you would be willing to do me a favor."
