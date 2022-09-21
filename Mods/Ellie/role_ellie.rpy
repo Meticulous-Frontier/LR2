@@ -862,12 +862,12 @@ label ellie_text_message_apology_label():
 init -1 python:
 
     def ellie_brings_lunch_requirement():
-        if ellie.love >= 40 and mc.is_at_work() and mc.business.is_open_for_business() and time_of_day == 1 and ellie.days_since_event("love_event") >= TIER_2_TIME_DELAY:
+        if ellie.love >= 40 and mc.is_at_work() and mc.business.is_open_for_business() and time_of_day == 1 and ellie.days_since_event("love_event") >= TIER_2_TIME_DELAY and ellie.days_since_event("story_event") >= TIER_1_TIME_DELAY:
             return True
         return False
 
     def ellie_dinner_date_intro_requirement(the_person):
-        if the_person.love >= 60 and mc.is_at_work() and mc.business.is_open_for_business() and ellie.days_since_event("love_event") >= TIER_2_TIME_DELAY:
+        if the_person.love >= 60 and mc.is_at_work() and mc.business.is_open_for_business() and ellie.days_since_event("love_event") >= TIER_2_TIME_DELAY and ellie.days_since_event("story_event") >= TIER_1_TIME_DELAY:
             return True
 
     def ellie_dinner_date_requirement():
@@ -876,7 +876,7 @@ init -1 python:
         return False
 
     def ellie_lingerie_shopping_requirement(the_person):
-        if ellie.days_since_event("love_event") >= TIER_2_TIME_DELAY:
+        if ellie.days_since_event("love_event") >= TIER_2_TIME_DELAY and ellie.days_since_event("story_event") >= TIER_1_TIME_DELAY:
             return False
         return False
 
@@ -1058,6 +1058,7 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ ellie.set_event_day("obedience_event", override = True)
     $ ellie.set_event_day("love_event", override = True)
     $ ellie.set_event_day("slut_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     $ mc.business.add_mandatory_crisis(ellie_tit_fuck)
     # Link to her team up scenes here also?
     return
@@ -1068,6 +1069,7 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
     $ the_person = ellie
     $ ellie.event_triggers_dict["brought_lunch"] = True
     $ ellie.set_event_day("love_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     "It's the end of the morning shift. You finish up with your work and are just getting ready to head to the breakroom for lunch."
     $ the_person.draw_person()
     the_person "Hey. Doing anything for lunch?"
@@ -1156,6 +1158,7 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
         $ the_person.draw_person()
         "You leave your office together and go back to the work day."
     $ ellie.set_event_day("love_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     $ ellie.apply_planned_outfit()
     $ ellie.add_unique_on_talk_event(ellie_dinner_date_intro)
     $ clear_scene()
@@ -1334,6 +1337,7 @@ label ellie_dinner_date_label():
     $ the_person = ellie
     $ ellie.event_triggers_dict["dinner_date"] = False
     $ ellie.set_event_day("love_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     "It is Sunday night. You have a dinner date with [the_person.title] tonight. You shoot her a text and she sends you her address."
     "You swing by a store on the way there and pick up a bottle of mid range red wine. The make your way to her place."
     "Soon, you are at the front door to her apartment, knocking on her door."
@@ -1486,6 +1490,7 @@ label ellie_dinner_date_label():
 
 label ellie_lingerie_shopping_label(the_person):    #Ellie's 80 love event. She asks MC to take her shopping for exciting underwear to wear for him.
     $ ellie.set_event_day("love_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     return
 
 #Sluttiness EVents
@@ -1493,7 +1498,7 @@ label ellie_lingerie_shopping_label(the_person):    #Ellie's 80 love event. She 
 init -1 python:
 
     def ellie_never_tasted_cock_requirement(the_person):
-        if the_person.sluttiness >= 40 and mc.is_at_work() and mc.business.is_open_for_business() and ellie.days_since_event("slut_event") >= TIER_2_TIME_DELAY:
+        if the_person.sluttiness >= 40 and mc.is_at_work() and mc.business.is_open_for_business() and ellie.days_since_event("slut_event") >= TIER_2_TIME_DELAY and ellie.days_since_event("story_event") >= TIER_1_TIME_DELAY:
             if get_random_employees(1, exclude_list = [the_person], slut_required = 50):
                 return True
         return False
@@ -1518,6 +1523,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
     $ talk_person = get_random_employees(1, exclude_list = [the_person], slut_required = 50)
     $ scene_manager = Scene()
     $ ellie.set_event_day("slut_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     "As you walk towards the entrance of research and development, you begin to overhear a conversation."
     "You stop and listen in before walking in the door, not because of what is being talked about, but because of WHO is talking."
     if ellie_has_given_blowjob():
@@ -1763,6 +1769,7 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
 
 label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness event. Also requires X number of oral encounters?
     $ ellie.set_event_day("slut_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     #This label is completely fucked up. Replace entirely
 
     "You check up on [ellie.fname] while she is working on nanobot programming stuff."
@@ -1780,6 +1787,7 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
 
 label ellie_loses_her_virginity_label():
     $ ellie.set_event_day("slut_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     "You meet up with [ellie.fname]. Take her out for a nice dinner."
     "Have the option to mess around a little under the table. If you use your foot to rub against her privates, she gains +1 public sex opinion."
     "Also have a drink. At some point she uses ladies room and you can serum her."
@@ -1807,6 +1815,7 @@ label ellie_loses_her_virginity_label():
 label ellie_never_tried_anal_label():   #This is Ellie's 80 sluttiness rating. Must have anal nanobots unlocked.
     pass
     $ ellie.set_event_day("slut_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     $ ellie.event_triggers_dict["given_anal_virginity"] = True
     return
 
@@ -1831,7 +1840,7 @@ label ellie_asks_to_join_harem_label(the_person):   #100 sluttiness event. Ellie
 # Obedience Events
 init -2 python: #Requirement functions
     def ellie_tit_fuck_requirement():
-        if ellie.days_since_event("obedience_event") >= TIER_2_TIME_DELAY:
+        if ellie.days_since_event("obedience_event") >= TIER_2_TIME_DELAY and ellie.days_since_event("story_event") >= TIER_1_TIME_DELAY:
             return False
         if mc.location == mc.business.r_div and ellie.obedience >= 120 and mc.business.is_open_for_business():
             return True
@@ -1845,19 +1854,19 @@ init -2 python: #Requirement functions
         return False
 
     def ellie_search_update_requirement(the_person):
-        if ellie.days_since_event("obedience_event") <= TIER_2_TIME_DELAY:
+        if ellie.days_since_event("obedience_event") <= TIER_2_TIME_DELAY or ellie.days_since_event("story_event") <= TIER_1_TIME_DELAY:
             return False
         if not ellie_has_given_blowjob():
             return False
         return True
 
     def ellie_search_finish_requirement():
-        if ellie.days_since_event("obedience_event") >= TIER_2_TIME_DELAY and time_of_day == 3:
+        if ellie.days_since_event("obedience_event") >= TIER_2_TIME_DELAY and time_of_day == 3 and ellie.days_since_event("story_event") >= TIER_1_TIME_DELAY:
             return True
         return False
 
     def ellie_submission_requirement():
-        if ellie.obedience > 160 and time_of_day == 3 and ellie.days_since_event("obedience_event") >= TIER_2_TIME_DELAY:
+        if ellie.obedience > 160 and time_of_day == 3 and ellie.days_since_event("obedience_event") >= TIER_2_TIME_DELAY and ellie.days_since_event("story_event") >= TIER_1_TIME_DELAY:
             if mc.business.is_open_for_business() and mc.is_at_work():
                 return True
         return False
@@ -1989,6 +1998,7 @@ label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     $ mc.location.show_background()
     $ mc.business.add_mandatory_crisis(ellie_start_search)
     $ ellie.set_event_day("obedience_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     $ clear_scene()
     return
 
@@ -2096,6 +2106,7 @@ label ellie_start_search_label(): #140 obedience. Scene where you talk to ellie 
     "Even if the guy never bites, atleast you convinced [the_person.title] to start a DikDok account..."
     $ del the_researcher
     $ ellie.set_event_day("obedience_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     $ the_person.add_unique_on_room_enter_event(ellie_search_update)
     return
 
@@ -2241,6 +2252,7 @@ label ellie_search_update_label(the_person):    #You locate the contact
         starbuck "Oh! What are you looking for?"
     "..."
     $ ellie.set_event_day("obedience_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     $ mc.business.add_mandatory_crisis(ellie_search_finish)
     return
 
@@ -2548,6 +2560,7 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     the_person "Yes [the_person.mc_title]!"
     $ mc.business.add_mandatory_crisis(ellie_submission)
     $ ellie.set_event_day("obedience_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     return
 
 label ellie_submission_label():   #Ellie submits herself to be used by MC
@@ -2718,17 +2731,20 @@ label ellie_submission_label():   #Ellie submits herself to be used by MC
     "You should try to keep increasing her obedience and see what happens."
     $ ellie.event_triggers_dict["has_submit"] = True
     $ ellie.set_event_day("obedience_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     $ ellie.add_unique_on_room_enter_event(ellie_nanobot_fetish_testing)
     return
 
 label ellie_nanobot_fetish_testing_label(the_person):   #MC has ellie test fetish impact of nanobots
     $ ellie.event_triggers_dict["fetish_avail"] = True
     $ ellie.set_event_day("obedience_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     return
 
 label ellie_nanobot_fetish_label(the_person):   #After first test, MC can give ellie additional fetishes at will.
     pass
     $ ellie.set_event_day("obedience_event", override = True)
+    $ ellie.set_event_day("story_event", override = True)
     return
 
 init -1 python:
