@@ -47,15 +47,7 @@ init 1 python:
     def quest_cure_set_market_contact(person):
         quest_cure_discovery().quest_event_dict["market_contact"] = person.identifier
 
-    def quest_cure_discovery_disease_name():
-        if mc.business.research_tier == 0:
-            return "Rabies"
-        elif mc.business.research_tier == 1:
-            return "Dengue fever"
-        elif mc.business.research_tier == 2:
-            return "Crohn's disease"
-        else:
-            return "Parkinson's disease"
+
 
 #Quest defining functions
     def quest_cure_discovery_tracker():

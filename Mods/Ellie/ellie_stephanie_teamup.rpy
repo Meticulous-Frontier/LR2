@@ -92,7 +92,7 @@ init 2 python:
             business_action = False,    #If this progression scene is a mandatory business event
             is_random = False,  #If this progression scene is a randomly occuring crisis event
             unit_test_func = ellie_stephanie_teamup_unit_test_func,  #Set a custom unit test function to test this progression event. Runs between every cycle
-            advance_time = True,    #Currently this is broke. Advance time in the scenes themselves for now...
+            advance_time = True,    # Advance time in the scenes themselves for now...
             is_multiple_choice = False, #If MC can choose what final scene he wants
             multiple_choice_scene = None,   #The scene that lets MC choose which final scene he wants.
             regress_scene_list = [])    #If the scene can regress, fill this with appropriate regression scenes to play between intro and final scenes.
@@ -197,7 +197,7 @@ label ellie_stephanie_teamup_progression_scene_intro_scene(the_group):
     pick_1 "Uhhh... yeah... incredibly strong actually..."
     "You can see [the_researcher.title] and [the_person.possessive_title] chatting for a few moments, but can't really tell what they are saying..."
     "Then, you see [the_researcher.possessive_title] look over at you and give a quick wink."
-    the_researcher "Alright, remember this is for science. Go ahead and masturbate, and let is know if anything feels different than usual."
+    the_researcher "Alright, remember this is for science. Go ahead and masturbate, and let us know if anything feels different than usual."
     pick_1 "Ahh, umm... okay..."
     the_researcher "If it makes you feel uncomfortable we can have [the_researcher.mc_title] leave the room."
     "You shoot her a quick glare. Thankfully [pick_1.title] doesn't seem to notice."
