@@ -4,6 +4,7 @@ init 5:
         modal True
         zorder 100
         use screen_mc_serum_return_button()
+        use screen_mc_serum_basic_stats()
         vbox:
 
             xcenter 960
@@ -22,7 +23,7 @@ init 5:
                     xanchor 0.5
                     vbox:
                         xsize 300
-                        text "Energy" style "menu_text_title_style" size 32 xalign 0.5
+                        text "Performance" style "menu_text_title_style" size 32 xalign 0.5
                         for trait in mc_serum_get_energy_list():
                             use screen_personal_serum_button(trait)
 
@@ -87,6 +88,32 @@ screen screen_mc_serum_return_button():
             ]
         textbutton "Return" align [0.5,0.5] text_style "return_button_style"
 
+screen screen_mc_serum_basic_stats():
+        zorder 100
+        $ length_desc = "Trait duration: " + str(get_mc_serum_duration()) + " days"
+        $ quant_desc = "Maximum quantity: " + str(mc_serum_max_quantity()) + " serums"
+        frame:
+            background "#1a45a1aa"
+            xcenter 1100
+            #xalign 0.1
+            ycenter 900
+            xsize 510
+            ysize 150
+
+            vbox:
+                spacing 5
+                frame:
+                    background Frame(proj_desc_back, 5,5)
+                    xsize 500
+                    ysize 140
+                    ypadding 15
+                    xpadding 30
+                    vbox:
+                        spacing 0
+                        text "{size=24}Serum Stats{/size}" style "menu_text_title_style" xalign 0 text_align 0 xpos 2
+                        text "{size=18}[length_desc]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
+                        text "{size=18}[quant_desc]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
+
 screen screen_personal_serum_button(trait):
     $ box_text = "??????"
     hbox:
@@ -121,6 +148,7 @@ screen screen_personal_serum_button(trait):
                     hover it_imagebutton_hover
                     selected_idle it_imagebutton_active
                     selected_hover it_imagebutton_hover
+                    # action screen confirm(message="Take this serum?", Function (trait.apply_trait), no_action=return)
                     action Function (trait.apply_trait)
                     sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
                     hovered [
@@ -141,7 +169,6 @@ screen screen_personal_serum_button(trait):
 
 
     # use supplemental_text_info(proj)
-
 
 screen supplemental_text_info(proj):
     python:
