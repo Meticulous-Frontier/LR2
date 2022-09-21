@@ -194,9 +194,59 @@ label mc_serum_timeout_label():
 label mc_serum_review_label(the_person):
     "In this label, we take a moment to talk about progress we've made on MC related serums."
     "Then we ask MC if he wants to change serum duration or max amount of serums at a time."
+    call mc_serum_review_duration_label(the_person) from _serum_review_duration_01
+    call mc_serum_review_quantity_label(the_person) from _serum_review_quantity_01
     "Then if we have a serum slot available pull up the MC serum screen."
     call screen mc_personal_serum_screen()
     "You have tested the serum screen."
+    return
+
+label mc_serum_review_duration_label(the_person):
+    if get_mc_serum_duration() == 3:
+        $ the_serum = find_in_list(lambda x: x.name == "Improved Reagent Purification", list_of_traits)
+        if the_serum.mastery_level >= 3.0:
+            call prod_assistant_increase_duration_1_label(the_person) from _prod_assist_increase_duration_01
+        else:
+            the_person "Right now, we expect your serums to last about three days."
+            the_person "If we work on researching and mastering duration enhancing traits, I think we could extend this to be longer."
+    elif get_mc_serum_duration() == 5:
+        $ the_serum = find_in_list(lambda x: x.name == "Low Volatility Reagents", list_of_traits)
+        if the_serum.mastery_level >= 3.0:
+            call prod_assistant_increase_duration_2_label(the_person) from _prod_assist_increase_duration_02
+        else:
+            the_person "Right now, we expect your serums to last about five days."
+            the_person "If we work on researching and mastering more duration enhancing traits, I think we could extend this to be even longer."
+    else:
+        the_person "Right now, we expect your serums to last about seven days."
+        the_person "I'm not sure they can be extended longer than that safely, but maybe someday I'll be proven wrong."
+    return
+
+label mc_serum_review_quantity_label(the_person):
+    if mc_serum_max_quantity() == 1:
+        $ the_serum = find_in_list(lambda x: x.name == "Improved Serum Production", list_of_traits)
+        if the_serum.mastery_level >= 3.0:
+            call prod_assistant_increase_production_1_label(the_person) from _prod_assist_increase_production_01
+        else:
+            the_person "Right now, we can only safely give you one serum at a time."
+            the_person "If we work on researching and mastering production traits, we could probably give you more than one serum at the same time."
+    elif mc_serum_max_quantity() == 2:
+        $ the_serum = find_in_list(lambda x: x.name == "Advanced Serum Production", list_of_traits)
+        if the_serum.mastery_level >= 3.0:
+            call prod_assistant_increase_production_2_label(the_person) from _prod_assist_increase_production_02
+        else:
+            the_person "Right now, we can only safely give you two serums at a time."
+            the_person "If we work on researching and mastering production traits, we could probably give you more serums at the same time."
+    elif mc_serum_max_quantity() == 3:
+        $ the_serum = find_in_list(lambda x: x.name == "Futuristic Serum Production", list_of_traits)
+        if the_serum.mastery_level >= 3.0:
+            call prod_assistant_increase_production_3_label(the_person) from _prod_assist_increase_production_03
+        else:
+            the_person "Right now, we can safely give you three serums at a time."
+            the_person "If we work on researching and mastering production traits, we could probably give you even more serums at the same time."
+
+    else:
+        the_person "Right now, we can safely give you four serums at a time."
+        the_person "I think this is about the limit of how many serums you can take simultaneously."
     return
 
 label prod_assistant_essential_oils_intro_label(the_person):
@@ -377,4 +427,34 @@ label prod_assistant_physical_upgrade_label(the_person):
     "All physical related serums increase in tier by 1 after this label."
     $ mc.business.event_triggers_dict["mc_serum_physical_tier"] = 0
     $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    return
+
+label prod_assistant_increase_duration_1_label(the_person):
+    "This is an outline label."
+    "In this label, [the_person.title] explains that after research, the serums she gives MC now last an additional 2 days, total of 5 days."
+    $ mc.business.event_triggers_dict["mc_serum_duration"] = 5
+    return
+
+label prod_assistant_increase_duration_2_label(the_person):
+    "This is an outline label."
+    "In this label, [the_person.title] explains that after research, the serums she gives MC now last an additional 2 days, total of 7 days."
+    $ mc.business.event_triggers_dict["mc_serum_duration"] = 7
+    return
+
+label prod_assistant_increase_production_1_label(the_person):
+    "This is an outline label."
+    "In this label, [the_person.title] explains that after research, MC can now take 2 serums at the same time."
+    $ mc.business.event_triggers_dict["mc_serum_max_quant"] = 2
+    return
+
+label prod_assistant_increase_production_2_label(the_person):
+    "This is an outline label."
+    "In this label, [the_person.title] explains that after research, MC can now take 3 serums at the same time."
+    $ mc.business.event_triggers_dict["mc_serum_max_quant"] = 3
+    return
+
+label prod_assistant_increase_production_3_label(the_person):
+    "This is an outline label."
+    "In this label, [the_person.title] explains that after research, MC can now take 4 serums at the same time."
+    $ mc.business.event_triggers_dict["mc_serum_max_quant"] = 4
     return
