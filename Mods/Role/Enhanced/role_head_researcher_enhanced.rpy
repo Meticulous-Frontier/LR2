@@ -74,7 +74,7 @@ init -1 python:
 
     def quest_cure_discovery_intro_requirement():
         if mc.business.is_open_for_business() and mc.business.head_researcher != None: #Only trigger if people are in the office.
-            if mc.business.head_researcher.days_since_event("obedience_event") >= TIER_2_TIME_DELAY:
+            if mc.business.head_researcher.days_since_event("obedience_event") >= TIER_2_TIME_DELAY and mc.business.head_researcher.obedience >= 160:
                 return True
         return False
 
@@ -101,6 +101,7 @@ init -1 python:
     head_researcher_testing_room_intro = Action("Testing Room Intro", head_researcher_testing_room_intro_requirement, "head_researcher_testing_room_intro_label")
     head_researcher_serum_trait_test = Action("Test a Serum Trait", head_researcher_serum_trait_test_requirement, "head_researcher_serum_trait_test_label",
         menu_tooltip = "Perform intensive serum trait test with the help of your head researcher on an employee.")
+    head_researcher_strip_tease = Action("Head Researcher Strip Tease", head_researcher_strip_tease_requirement, "head_researcher_strip_tease_label")
     quest_cure_discovery_intro = Action("Begin Cure Discovery Quest", quest_cure_discovery_intro_requirement, "quest_cure_discovery_intro_label")
     quest_cure_discovery_market_patent = Action("Attempt to sell patent", quest_cure_discovery_market_patent_requirement, "quest_cure_discovery_market_patent_label")
     quest_cure_discovery_patent_sold = Action("Patent Sold", quest_cure_discovery_patent_sold_requirement, "quest_cure_discovery_patent_sold_label")
@@ -461,7 +462,7 @@ label quest_cure_discovery_patent_kept_label():
 label head_researcher_testing_room_intro_label(the_person):
     "In this label, we go with the head researcher to the new serum testing room, where we introduce the idea of an intensive serum trait test."
     $ mc.business.set_event_day("serum_trait_test", override = True)
-    $ the_person.add_unique_on_room_enter_event()
+    $ the_person.add_unique_on_room_enter_event(head_researcher_strip_tease)
     $ the_person.set_event_day("obedience_event", override = True)
     return
 
