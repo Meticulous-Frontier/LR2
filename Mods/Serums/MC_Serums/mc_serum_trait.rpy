@@ -12,9 +12,10 @@ init -2 python:
             self.category = category
             self.perk_list = perk_list
             self.perk_advance_reqs = perk_advance_reqs
+            self.base_tier = 1
             return
 
-        def apply_trait(self):
+        def apply_trait(self):  #Apply this trait to MC
             perk_system.add_ability_perk(self.perk_list[self.get_trait_tier() - 1](), self.name)
             if mc.business.prod_assistant == ashley and not ashley_mc_submission_story_complete():
                 ashley.event_triggers_dict["mc_obedience"] += 1
@@ -23,17 +24,14 @@ init -2 python:
         def menu_name(self):
             return self.name.replace('Serum: ', '')
 
-        def get_trait_tier(self):
-            base_tier = 1
+        def get_trait_tier(self):   #Calculate the current tier
+            calc_tier = self.base_tier
             dict_key = "mc_serum_" + self.category + "_tier"    #Determine category tier
-            base_tier += mc.business.event_triggers_dict.get(dict_key, 0)
-            for req_func in self.perk_advance_reqs: #Now determine individual tier level
-                if req_func():
-                    base_tier += 1
-            return base_tier
+            calc_tier += mc.business.event_triggers_dict.get(dict_key, 0)
+            return calc_tier
 
-        def get_trait_desc(self):
-            return self.perk_list[self.get_trait_tier()]().description
+        def get_trait_desc(self):   #Return text description
+            return self.perk_list[self.get_trait_tier() - 1]().description
 
         def get_side_effect_chance(self):
             base_side_effect_chance = 0
@@ -43,14 +41,14 @@ init -2 python:
             base_side_effect_chance += get_mc_serum_duration_side_effect_chance()
             return base_side_effect_chance
 
-        def get_unlocked(self):
+        def get_unlocked(self): #Returns true of the category AND serum trait itself should be unlocked
             dict_key = "mc_serum_" + self.category + "_unlocked"
             if mc.business.event_triggers_dict.get(dict_key, True):
                 the_serum = find_in_list(lambda x: x.name == self.linked_trait, list_of_traits)
                 return the_serum.researched
             return False
 
-        def is_active(self, min_tier = 0, exact_tier = None):
+        def is_active(self, min_tier = 0, exact_tier = None):   #Returns true if this trait is currently active on MC.
             if min_tier > self.get_trait_tier():
                 return False
             if exact_tier != None:
@@ -58,7 +56,7 @@ init -2 python:
                     return False
             return perk_system.has_ability_perk(self.name)
 
-        def is_available(self):
+        def is_available(self):     #Returns true of the serum is able to be used.
             if self.get_unlocked(): #Determine if its unlocked first
                 active_traits = 0
                 for trait in list_of_mc_traits:
@@ -70,6 +68,33 @@ init -2 python:
                     return False
                 return True
             return False
+
+        def check_upgrade(self):    #Returns true if this trait is ready to be upgraded
+            if self.base_tier > len(self.perk_advance_reqs):    #We are at max tier already
+                return False
+            if not self.get_unlocked():
+                return False
+            if self.perk_advance_reqs[self.base_tier -1]():
+                return True
+            return False
+
+        def upgrade_with_string(self, the_person):   #fabricate a string to return if we are upgrading this trait, upgrade string accordingly.
+            self.base_tier += 1
+            upg_str = get_random_from_list(["We have researched and mastered enough traits to increse the potential of the ",
+                "After extensive research we can increase the potential of the ",
+                "I worked with research to create an updated formula of the "])
+            upg_str += self.name
+            upg_str = upg_str.replace("Serum: ", "")
+            upg_str += " serum trait."
+            renpy.say(the_person, upg_str)
+            return True
+
+        def on_load(self):  #Use this to determine the tier of the serum
+            if "list_of_upgraded_mc_serums" in globals():
+                if self.name in list_of_upgraded_mc_serums:
+                    self.base_tier = 2
+            return
+
 
     list_of_mc_traits = []
 
@@ -110,3 +135,47 @@ init -2 python:
 
     def mc_serum_max_quantity():
         return mc.business.event_triggers_dict.get("mc_serum_max_quant", 1)
+
+    def mc_serum_energy_serum_is_active():
+        for trait in mc_serum_get_energy_list():
+            if trait.is_active():
+                return True
+        return False
+
+    def mc_serum_aura_serum_is_active():
+        for trait in mc_serum_get_aura_list():
+            if trait.is_active():
+                return True
+        return False
+
+    def mc_serum_cum_serum_is_active():
+        for trait in mc_serum_get_cum_list():
+            if trait.is_active():
+                return True
+        return False
+
+    def mc_serum_physical_serum_is_active():
+        for trait in mc_serum_get_physical_list():
+            if trait.is_active():
+                return True
+        return False
+
+    def mc_serum_list_of_upgradable_serums():
+        list_of_upgrades = []
+        if not mc_serum_energy_serum_is_active():
+            for trait in mc_serum_get_energy_list():
+                if trait.check_upgrade():
+                    list_of_upgrades.append(trait)
+        if not mc_serum_aura_serum_is_active():
+            for trait in mc_serum_get_aura_list():
+                if trait.check_upgrade():
+                    list_of_upgrades.append(trait)
+        if not mc_serum_cum_serum_is_active():
+            for trait in mc_serum_get_cum_list():
+                if trait.check_upgrade():
+                    list_of_upgrades.append(trait)
+        if not mc_serum_physical_serum_is_active():
+            for trait in mc_serum_get_physical_list():
+                if trait.check_upgrade():
+                    list_of_upgrades.append(trait)
+        return list_of_upgrades

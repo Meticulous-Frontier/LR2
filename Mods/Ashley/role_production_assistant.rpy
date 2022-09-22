@@ -28,7 +28,8 @@ init -1 python:
     def mc_serum_intro_requirement(the_person):
         if mc.business.days_since_event("prod_assistant_advance") > TIER_2_TIME_DELAY:
             if mc.business.is_open_for_business() and mc.is_at_work():
-                return True
+                the_serum = find_in_list(lambda x: x.name == mc_serum_energy_regen.linked_trait, list_of_traits)
+                return the_serum.researched
         return False
 
     def mc_serum_timeout_requirement():
@@ -90,25 +91,25 @@ init -1 python:
 
     def prod_assistant_performance_upgrade_requirement(the_person):
         if mc.business.is_open_for_business() and mc.business.research_tier >= 2:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY and not mc_serum_energy_serum_is_active():
                 return True
         return False
 
     def prod_assistant_aura_upgrade_requirement(the_person):
         if mc.business.is_open_for_business() and mc.business.research_tier >= 2:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY and not mc_serum_aura_serum_is_active():
                 return True
         return False
 
     def prod_assistant_cum_upgrade_requirement(the_person):
         if mc.business.is_open_for_business() and mc.business.research_tier >= 3:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY and not mc_serum_cum_serum_is_active():
                 return True
         return False
 
     def prod_assistant_physical_upgrade_requirement(the_person):
         if mc.business.is_open_for_business() and mc.business.research_tier >= 2:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY and not mc_serum_physical_serum_is_active():
                 return True
         return False
 
@@ -192,13 +193,27 @@ label mc_serum_timeout_label():
     return
 
 label mc_serum_review_label(the_person):
-    "In this label, we take a moment to talk about progress we've made on MC related serums."
-    "Then we ask MC if he wants to change serum duration or max amount of serums at a time."
+    mc.name "I want to discuss my personal serums."
+    the_person "Okay, let me see if I have any updated serum formulas."
+    call mc_serum_review_upgrades_label(the_person) from _serum_review_upgrades_01
+    the_person "The serums themselves have limited duration as well."
     call mc_serum_review_duration_label(the_person) from _serum_review_duration_01
+    the_person "We also can only give you so many serums at a time safely."
     call mc_serum_review_quantity_label(the_person) from _serum_review_quantity_01
-    "Then if we have a serum slot available pull up the MC serum screen."
+    the_person "Alright, here are the serums that I have available."
     call screen mc_personal_serum_screen()
-    "You have tested the serum screen."
+    mc.name "Thank you [the_person.title]. Keep up the good work."
+    return
+
+label mc_serum_review_upgrades_label(the_person):
+    $ list_of_upgrades = mc_serum_list_of_upgradable_serums()
+    if len(list_of_upgrades) == 0:
+        the_person "Looks like we don't have any updated serum formulas right now."
+    else:
+        python:
+            for trait in list_of_upgrades:
+                trait.upgrade_with_string(the_person)
+                list_of_upgraded_mc_serums.append(trait.name)
     return
 
 label mc_serum_review_duration_label(the_person):

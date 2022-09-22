@@ -12,6 +12,7 @@ label activate_ashley_mod_core(stack):
 
 label update_ashley_mod_core(stack):
     python:
-
+        for trait in list_of_mc_traits:
+            trait.on_load()
         execute_hijack_call(stack)
     return

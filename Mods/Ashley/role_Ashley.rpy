@@ -59,7 +59,8 @@ init 2 python:
         mc.business.event_triggers_dict["mc_serum_energy_unlocked"] = False
         mc.business.event_triggers_dict["mc_serum_physical_unlocked"] = False
         mc.business.event_triggers_dict["mc_serum_max_quant"] = 1
-
+        global list_of_upgraded_mc_serums
+        list_of_upgraded_mc_serums = [] #Use this list to store serums that have had their base tiers upgraded for save / load purposes.
 
 
         # add appoint
