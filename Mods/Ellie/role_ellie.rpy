@@ -2624,7 +2624,7 @@ label ellie_submission_label():   #Ellie submits herself to be used by MC
     else:
         mc.name "Of course, if we are going to do this properly, we're going to have to get these out of the way..."
         "[the_person.possessive_title] ass shakes pleasantly as you pull her bottoms down..."
-        $ the_person.strip_to_vagina(prefer_half_off = True, position = "doggy")
+        $ the_person.strip_to_vagina(prefer_half_off = False, position = "doggy")
         "Once her ass is bare, you gently rub the two red circles starting to form, one on each cheek."
     "*SLAP*, *SLAP*"
     "You give each rosey cheek another spank. Her voice trembles with a moan."
