@@ -12,5 +12,5 @@ init 3304 python:
 
     waitress_wardrobe = wardrobe_from_xml("Waitresses_Wardrobe")
 
-    stripclub_waitress_role = Role("Waitress", [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action],
+    stripclub_waitress_role = Role("Waitress", [promote_to_manager_action, strip_club_stripper_move_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action],
         on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)

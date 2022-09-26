@@ -139,6 +139,36 @@ init 5 python:
         person.stripper_salary = __builtin__.round(salary, 1)
         return
 
+    def move_stripper(person, job):
+        old_salary = person.stripper_salary
+        if person.has_role(stripclub_waitress_role):
+            old_salary *= 2
+
+        if person.is_employee() or person in [lily, aunt, mom, nora]:   # moonlighting
+            for role in [stripclub_stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role]:
+                person.remove_role(role)
+            if person in stripclub_strippers:
+                stripclub_strippers.remove(person)
+            if person in stripclub_bdsm_performers:
+                stripclub_bdsm_performers.remove(person)
+            if person in stripclub_waitresses:
+                stripclub_waitresses.remove(person)
+
+            for role in job.job_roles:
+                person.add_role(role)
+                if role == stripclub_stripper_role:
+                    stripclub_strippers.append(person)
+                elif role == stripclub_waitress_role:
+                    stripclub_waitresses.append(person)
+                elif role == stripclub_bdsm_performer_role:
+                    stripclub_bdsm_performers.append(person)
+        else:
+            person.change_job(job)
+        
+        if person.has_role(stripclub_bdsm_performer_role):
+            old_salary *= 1.1
+        person.stripper_salary = __builtin__.round(old_salary, 1)
+
     def fire_stripper(person):
         if person.is_employee() or person in [lily, aunt, mom, nora]:   # moonlighting
             person.set_schedule(person.home, the_times = [4])
@@ -159,10 +189,11 @@ init 5 python:
             stripclub_strippers.remove(person)
 
     promote_to_manager_action = Action("Appoint as Manager", allow_promote_to_manager_requirement, "promote_to_manager_label", menu_tooltip = "Appoint [the_person.title] as strip club manager.")
+    strip_club_stripper_move_action = Action("Move to new role", is_strip_club_stripper_requirement, "strip_club_move_employee_label", menu_tooltip = "Move [the_person.title] to a different role within the strip club.")
     strip_club_stripper_fire_action = Action("Fire her", is_strip_club_stripper_requirement, "strip_club_fire_employee_label", menu_tooltip = "Fire [the_person.title] from her stripper job in your strip club.")
     strip_club_stripper_performance_review_action = Action("Review her performance", strip_club_review_requirement, "stripper_performance_review_label", menu_tooltip = "Review [the_person.title]'s performances on stage.")
 
-    stripclub_stripper_role = Role("Stripper", get_stripper_role_actions() + [promote_to_manager_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action],
+    stripclub_stripper_role = Role("Stripper", get_stripper_role_actions() + [promote_to_manager_action, strip_club_stripper_move_action, strip_club_stripper_fire_action, strip_club_stripper_performance_review_action],
         on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
 
 
@@ -175,6 +206,12 @@ label update_strip_club_show_requirement(stack):
             stripclub_bdsm_performers = MappedList(Person, all_people_in_the_game)
         if not "stripclub_waitresses" in globals():
             stripclub_waitresses = MappedList(Person, all_people_in_the_game)
+
+        # TODO: Remove with compatibility break
+        if not strip_club_stripper_move_action in next(x for x in stripclub_stripper_job.job_roles if x.role_name == "Stripper").actions:
+            next(x for x in stripclub_stripper_job.job_roles if x.role_name == "Stripper").add_action(strip_club_stripper_move_action)
+            next(x for x in stripclub_waitress_job.job_roles if x.role_name == "Waitress").add_action(strip_club_stripper_move_action)
+            next(x for x in stripclub_bdsm_performer_job.job_roles if x.role_name == "BDSM performer").add_action(strip_club_stripper_move_action)
 
         execute_hijack_call(stack)
     return
@@ -339,6 +376,60 @@ label strip_club_hire_employee_label(the_person):
     "You ask her to sign the standard contract and [the_person.title] now works for you in the [strip_club.formal_name]."
 
     the_person "Thank you for the opportunity [the_person.mc_title], I'll try my best!"
+    return
+
+label strip_club_move_employee_label(the_person):
+    mc.name "[the_person.title], I want you to work in a different position."
+    $ the_person.draw_person(emotion = "happy")
+    if the_person.has_role(stripclub_bdsm_performer_role):
+        the_person "Like this?"
+        $ the_person.draw_person(position = "missionary", emotion = "happy")
+        "[the_person.title] sits on the stage and spreads her legs wide"
+        $ mc.change_locked_clarity(5)
+        mc.name "Not quite. A different job position."
+    else:
+        the_person "What did you have in mind?"
+
+    call screen enhanced_main_choice_display(build_menu_items(build_strip_club_hire_role_menu(the_person)))
+
+    if _return is stripper_role:
+        mc.name "I want you to work on our main stage, stripping for all of customers."
+        if the_person.has_role(stripper_role):
+            the_person "Don't I already do that?"
+            mc.name "Oh, you do? My mistake."
+            $ the_person.change_stats(love = -1)
+            return
+        if the_person.has_role(stripclub_waitress_role):
+            mc.name "It comes with a major pay bump."
+        else:
+            mc.name "Don't worry, there's no pay decrease."
+        the_person "Alright. I'll be on the stage next shift."
+        $ move_stripper(the_person, stripclub_stripper_job)
+    elif _return is stripclub_waitress_role:
+        mc.name "I want you to work on the floor, serving drinks to the customers."
+        if the_person.has_role(stripclub_waitress_role):
+            the_person "Don't I already do that?"
+            mc.name "Oh, you do? My mistake."
+            $ the_person.change_stats(love = -1)
+            return
+        mc.name "Don't worry, there's no pay decrease."
+        the_person "Alright. I'll report to the bar next shift."
+        $ move_stripper(the_person, stripclub_waitress_job)
+    elif _return is stripclub_bdsm_performer_role:
+        mc.name "I want you in the back, performing BDSM shows"
+        if the_person.has_role(stripclub_bdsm_performer_role):
+            the_person "Don't I already do that?"
+            mc.name "Oh, you do? My mistake."
+            $ the_person.change_stats(love = -1)
+            return
+        if the_person.has_role(stripclub_waitress_role):
+            mc.name "It comes with a major pay bump."
+        else:
+            mc.name "It comes with a minor pay bump."
+        the_person "Alright. Next shift, I'll be back there."
+        $ move_stripper(the_person, stripclub_bdsm_performer_job)
+    else:
+        mc.name "On second thought, I like you exactly where you are."
     return
 
 label strip_club_fire_employee_label(the_person):
