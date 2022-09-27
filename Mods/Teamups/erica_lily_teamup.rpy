@@ -50,11 +50,6 @@ init -2 python:
             return True
         return False
 
-    def erica_discuss_morning_wakeup_requirement(the_person):
-        if erica_has_given_morning_handjob() and time_of_day != 0 and time_of_day != 4:
-            return True
-        return False
-
 init -1 python:
     erica_lily_instapic_setup = Action("Talk to Lily about Erica", erica_lily_instapic_setup_requirement, "erica_lily_instapic_setup_label")
     erica_lily_instapic_proposal = Action("Propose InstaPic session to Erica", erica_lily_instapic_proposal_requirement, "erica_lily_instapic_proposal_label")
@@ -65,8 +60,6 @@ init -1 python:
     erica_lily_post_insta_handjob = Action("Erica wakes you up", erica_lily_post_insta_handjob_requirement, "erica_lily_post_insta_handjob_label")
     erica_post_insta_handjob_followup = Action("Talk about Handjob", erica_post_insta_handjob_followup_requirement, "erica_post_insta_handjob_followup_label")
     erica_lily_post_insta_morning_mand = Action("Erica wakes you up", erica_lily_post_insta_morning_requirement, "erica_lily_post_insta_morning_label")
-    erica_discuss_morning_wakeup = Action("Discuss wakeup plans", erica_discuss_morning_wakeup_requirement, "erica_discuss_morning_wakeup_label",
-        menu_tooltip = "Talk to Erica about whether she should wake you up in the morning after spending the night with Lily.")
     erica_pre_insta_love = Action("Erica blows you", erica_pre_insta_love_requirement, "erica_pre_insta_love_label")
 
 init 2 python:
@@ -812,28 +805,7 @@ label erica_pre_insta_love_label(the_person):
     $ erica.event_triggers_dict["pre_insta_blowjob"] = True
     return
 
-label erica_discuss_morning_wakeup_label(the_person):
-    mc.name "Hey, I wanted to talk to you about something."
-    the_person "Yeah?"
-    mc.name "You know how sometimes, you sneak into my room after spending the night with [lily.fname] in the early morning?"
-    the_person "Oh yeah..."
-    menu:
-        "Don't do that anymore":
-            $ erica.event_triggers_dict["morning_wakeup_pref"] = 0
-            pass
-        "Surprise me once in a while":
-            $ erica.event_triggers_dict["morning_wakeup_pref"] = 1
-            pass
-        "Do it every chance you get":
-            $ erica.event_triggers_dict["morning_wakeup_pref"] = 2
-            pass
-    the_person "Okay, I can do that! Anything else?"
-    return
-
 init 2 python:
-    def erica_has_given_morning_handjob():
-        return erica.event_triggers_dict.get("post_insta_handy", False) == True
-
     def erica_get_wakeup_options():
         return erica.event_triggers_dict.get("wake_up_options", [])
 
