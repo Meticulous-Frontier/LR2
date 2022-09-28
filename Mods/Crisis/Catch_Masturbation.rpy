@@ -12,12 +12,19 @@
 ###
 init 2 python:
     def SB_caught_masturbating_requirement():
-        if mc.business.is_open_for_business() and mc.is_at_work():
-            return any(x for x in mc.business.get_employee_list() if x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating")))
+        if mc.is_at_work():
+            if mc.business.is_open_for_business():
+                return any(x for x in mc.business.get_employee_list() if x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating")))
+            if mc.business.is_open_for_internship():
+                return any(x for x in mc.business.get_intern_list() if x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating")))
         return False
 
     def select_girl_masturbating(excluded = None):
-        return get_random_from_list([x for x in mc.business.get_employee_list() if not x == excluded and x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
+        if mc.business.is_open_for_business():
+            return get_random_from_list([x for x in mc.business.get_employee_list() if not x == excluded and x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
+        if mc.business.is_open_for_internship():
+            return get_random_from_list([x for x in mc.business.get_intern_list() if not x == excluded and x.energy > 30 and x.effective_sluttiness() > 30 - (5 * x.get_opinion_score("masturbating"))])
+        return None
 
     SB_caught_masturbating_crisis = ActionMod("Office Masturbation",SB_caught_masturbating_requirement,"SB_caught_masturbating_crisis_label",
         menu_tooltip = "You find an employee masturbating in an empty storage room.", category = "Business", is_crisis = True)
@@ -63,7 +70,7 @@ label SB_caught_masturbating_crisis_label():
                 else:
                     "Once you're finished you quickly get dressed and say goodbye to the girls."
 
-            "Punish them for inappropriate behaviour" if office_punishment.is_active():
+            "Punish them for inappropriate behaviour" if office_punishment.is_active() and mc.business.is_open_for_business():
                 mc.name "[the_person.title], [the_person_two.title], this is totally inappropriate behaviour during office hours, even when you are on a break."
                 mc.name "I don't have any choice but to record you both for disciplinary actions later."
                 $ the_person.add_infraction(Infraction.inappropriate_behaviour_factory())
@@ -368,7 +375,7 @@ label SB_caught_masturbating_crisis_label():
                                 "You decide to give [the_person.possessive_title] a chance to recover. You nod to her and then back out of the room."
                                 "You finish up your walk and return back to your previous work."
 
-            "Punish her for inappropriate behaviour" if office_punishment.is_active():
+            "Punish her for inappropriate behaviour" if office_punishment.is_active() and mc.business.is_open_for_business():
                 mc.name "[the_person.title], this isn't appropriate for the office. I'm going to have to write you up for this."
                 the_person "Oh, I... I'm sorry [the_person.mc_title], I didn't think you would care..."
                 $ the_person.add_infraction(Infraction.inappropriate_behaviour_factory())
