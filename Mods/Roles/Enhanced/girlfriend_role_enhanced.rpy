@@ -1,7 +1,7 @@
 #This file is to add new options to girlfriends. Ideas include: afternoon delight, my place / your place, sexting, clothes shopping.
 #Roleplays: These are scenes that will involve your girlfriend pretending to be someone/something else. Designed to take the place of the initial fucking scene.
 
-init 2 python:
+init 3 python:
     girlfriend_morning_action_list = []     #Requirement functions can check mc.location to tell if it's myplace/yourplace if necessary.
     girlfriend_sleepover_interruption_list = []     #Ideas, daughter/mother walk in, phone call,
     girlfriend_roleplay_list = []           #When a roleplay is created, add it here as an option. list of ACTIONS
