@@ -47,7 +47,7 @@ init 5 python:
         return False
 
     def strip_club_hire_employee_requirement(person):
-        if person.has_role([stripper_role, stripclub_waitress_role, stripclub_manager_role, stripclub_mistress_role, stripclub_bdsm_performer_role]):
+        if person.is_strip_club_employee():
             return False
         if person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
             return False
@@ -164,7 +164,7 @@ init 5 python:
                     stripclub_bdsm_performers.append(person)
         else:
             person.change_job(job)
-        
+
         if person.has_role(stripclub_bdsm_performer_role):
             old_salary *= 1.1
         person.stripper_salary = __builtin__.round(old_salary, 1)

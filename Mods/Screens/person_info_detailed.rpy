@@ -126,7 +126,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                             text "Kids: [the_person.kids]" style "menu_text_style"
                         if the_person.is_employee():
                             text "Salary: $[the_person.salary]/day" style "menu_text_style"
-                        if get_strip_club_foreclosed_stage() >= 5 and the_person.has_role([stripper_role, stripclub_stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role, stripclub_manager_role, stripclub_mistress_role]):
+                        if get_strip_club_foreclosed_stage() >= 5 and the_person.is_strip_club_employee():
                             text "Club Salary: $[the_person.stripper_salary]/day" style "menu_text_style"
 
                 frame:

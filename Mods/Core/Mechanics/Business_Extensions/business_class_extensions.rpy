@@ -223,8 +223,7 @@ init -1 python:
                 if any([x for x in all_people_in_the_game() if x.is_at_work() and x.has_job([stripclub_manager_job, stripclub_mistress_job])]):
                     multiplier = 1.1 # +10% income
 
-                # use roles instead of jobs (unique chars only get role (the keep their normal jobs))
-                for person in [x for x in known_people_in_the_game() if x.is_at_work() and x.has_role([stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role])]:
+                for person in [x for x in known_people_in_the_game() if x.is_at_work() and x.is_strip_club_employee()]:
                     income += (calculate_stripper_profit(person) * multiplier)  # profit
                     income -= person.stripper_salary    # costs
 
@@ -561,7 +560,7 @@ init -1 python:
                 if self.get_intern_list():
                     return True
         return False
-    
+
     Business.is_open_for_internship = business_is_open_for_internship
 
     def get_requirement_intern_list(self, exclude_list = None, **kargs): #Get a list of interns who pass the validrequirements. Pass the same arguments as person_meets_requirements expects as named args.
