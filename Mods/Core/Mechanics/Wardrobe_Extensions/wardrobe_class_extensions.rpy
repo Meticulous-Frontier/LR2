@@ -171,6 +171,8 @@ init -1 python:
             valid_underwear_sets = [x for x in self.underwear_sets if x.get_underwear_slut_score() <= underwear_limit]
             if not valid_underwear_sets: # get underwear sets from personal wardrobe
                 valid_underwear_sets =  [x for x in person.wardrobe.underwear_sets if x.get_underwear_slut_score() <= underwear_limit]
+                if not valid_underwear_sets: # get underwear sets from default wardrobe
+                    valid_underwear_sets = [x for x in default_wardrobe.underwear_sets if x.get_underwear_slut_score() <= underwear_limit]
 
         valid_overwear_sets = [x for x in self.overwear_sets if x.get_overwear_slut_score() <= slut_limit]
 
