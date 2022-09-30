@@ -6,21 +6,24 @@ init 2 python:
         # Requires you to have an employee under a certain age, with a mother, who hasn't been introduced to the game yet.
         # Requires you and her to be at work.
         # Requires you to have a free slot in the company
-        if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.get_employee_count() < mc.business.max_employee_count:
+        if mc.is_at_work() and mc.business.get_employee_count() < mc.business.max_employee_count:
             return not hire_mother_work_crisis_get_daughter() is None
         return False
 
     def hire_mother_work_crisis_get_daughter():
         valid_people_list = []
-        for person in [x for x in mc.business.get_employee_list() if x.age < 34 and not x.has_role(clone_role) and not quest_director.is_person_blocked(x) and x not in unique_character_list]:
-            if town_relationships.get_existing_parent_count(person) == 0: #The mother for this character is not yet in the game
-                valid_people_list.append(person)
-
+        if mc.business.is_open_for_business():
+            for person in [x for x in mc.business.get_employee_list() if x.age < 34 and not x.has_role(clone_role) and not quest_director.is_person_blocked(x) and x not in unique_character_list]:
+                if town_relationships.get_existing_parent_count(person) == 0: #The mother for this character is not yet in the game
+                    valid_people_list.append(person)
+        if mc.business.is_open_for_internship():
+            for person in [x for x in mc.business.get_intern_list() if x.age < 34 and not x.has_role(clone_role) and not quest_director.is_person_blocked(x) and x not in unique_character_list]:
+                if town_relationships.get_existing_parent_count(person) == 0: #The mother for this character is not yet in the game
+                    valid_people_list.append(person)
         return get_random_from_list(valid_people_list) #Pick someone appropriate from the company.
 
     hire_mother_work_crisis = ActionMod("Mother Work Crisis", hire_mother_work_crisis_requirement,"hire_mother_work_crisis_label",
         menu_tooltip = "Allow you to hire the mothers of girls working for you.", category = "Business", is_crisis = True)
-
 
 label hire_mother_work_crisis_label():
     if mc.business.get_employee_count() >= mc.business.max_employee_count:
