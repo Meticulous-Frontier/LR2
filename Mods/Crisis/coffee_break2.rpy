@@ -1,22 +1,30 @@
 ## Coffee Break 2 Crisis Mod by Tristimdorion
 init 2 python:
     def coffee_break2_requirement():
-        if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-            if not mc.business.is_weekend() and mc.is_at_work():
+        if mc.is_at_work(): # only during morning afternoon or evening
+            if mc.business.is_open_for_business():
                 return __builtin__.len([x for x in mc.business.get_employee_list() if x.effective_sluttiness() > 20]) >= 3
+            if mc.business.is_open_for_internship():
+                return __builtin__.len([x for x in mc.business.get_intern_list() if x.effective_sluttiness() > 20]) >= 3
         return False
 
     coffee_break2_action = ActionMod("Coffee Break 2", coffee_break2_requirement, "coffee_break2_action_label",
         menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True)
 
 label coffee_break2_action_label():
-    $ (person_one, person_two, person_three) = get_random_employees(3, slut_required = 20)
+    if mc.business.is_open_for_business():
+        $ (person_one, person_two, person_three) = get_random_employees(3, slut_required = 20)
+    else:
+        $ (person_one, person_two, person_three) = get_random_interns(3, slut_required = 20)
     if not (isinstance(person_one, Person) and isinstance(person_two, Person) and isinstance(person_three, Person)):
         return
 
     $ mc.change_location(lobby)
     $ mc.location.show_background()
-    "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
+    if mc.business.is_open_for_business:
+        "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
+    else:
+        "As you are walking around the office, you see several interns at the coffee machine. They haven't noticed you, but you can hear what they are saying."
     call coffee_break2_food_delivery_label(person_one, person_two, person_three) from _call_coffee_break2_food_delivery_label_1
 
     python:
@@ -199,7 +207,6 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     if winner_two.effective_sluttiness() > 90 and winner_two.get_opinion_score("public sex") > 0:
                         winner_two "God... Damn... maybe next time I can set it up so I get the short straw."
                     "You pull up your pants, turn around and walk out of the room without saying a word. You can feel the three girls looking at you as you leave the room."
-
                 else:
                     "While enjoying the view you decide to go back to work."
             else:
@@ -215,7 +222,6 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
             "[loser.possessive_title] turns around walking down to the lobby to pick up the food."
             $ scene_manager.update_actor(loser, position = "walking_away")
             "You decide to go back to work and let the girls sort this out."
-
     else:
         loser "This is not fair [winner_one.fname], you wanted me to lose."
         winner_one "No I didn't. And you know the rules!"
