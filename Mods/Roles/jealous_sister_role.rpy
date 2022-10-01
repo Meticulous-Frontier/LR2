@@ -3,9 +3,8 @@
 # when scores get high enough, jealous sister may approach MC looking for sex or force satisfaction.
 # Possibly add an option to convince a girl to stop being so jealous
 
-
-
-init 2 python:
+# Must be initialized after girlfriend_role_enhanced, which is init 2
+init 3 python:
     def jealous_sister_on_turn(person):
         if len(person.jealous_witness_publix_sex_list()) > 0:
             the_score = 1
@@ -137,8 +136,6 @@ init 2 python:
 
     Person.jealous_sister_get_revenge_tuple = jealous_sister_get_revenge_tuple
 
-
-
     jealous_sister_role = Role("Jealous sister", [], hidden = True,  on_turn = jealous_sister_on_turn, on_move = None, on_day = jealous_sister_on_day)
 
     def assign_jealous_sister_role(person, the_target):
@@ -150,21 +147,30 @@ init 2 python:
     def is_jealous_sister(person):
         return person.has_role(jealous_sister_role)
 
-    def girlfriend_wakeup_jealous_sister_requirement(the_person):
+    def get_jealous_sister(person, slut_requirement = 0):
+        # May have multiple jealous sisters. Only grabs the first available one for consistency.
+        for relation in town_relationships.get_relationship_list(person, types = "Sister"):
+            sister = relation.get_other_person(person)
+            if is_jealous_sister(sister) and sister.effective_sluttiness() >= slut_requirement:
+                return sister
+        return None
 
-        if the_person == stephanie and is_jealous_sister(ashley) and ashley.sluttiness > 60:
-            return True
-        if the_person == ashley and is_jealous_sister(stephanie) and stephanie.sluttiness > 60:
-            return True
-        return False
+    def girlfriend_wakeup_jealous_sister_requirement(the_person):
+        sister = get_jealous_sister(the_person, slut_requirement = 60)
+        if sister is None:
+            return False
+        return (mc.location == the_person.home
+            and the_person.location == the_person.home
+            and sister.location == the_person.home
+        )
+
+    girlfriend_wakeup_jealous_sister = Action("Jealous wakeup", girlfriend_wakeup_jealous_sister_requirement, "girlfriend_wakeup_jealous_sister_label")
+    girlfriend_morning_action_list.append(girlfriend_wakeup_jealous_sister)
 
 
 label girlfriend_wakeup_jealous_sister_label(the_person):
-    $ jealous_sister = None
-    if the_person == stephanie:
-        $ jealous_sister = ashley
-    else:
-        $ jealous_sister = stephanie
+    $ jealous_sister = get_jealous_sister(the_person, slut_requirement = 60)
+
     the_person "I'm gonna hop in the shower. Try not to miss me too much while I'm in there okay?"
     mc.name "Of course."
     $ the_person.draw_person(position = "back_peek")
@@ -174,10 +180,10 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     "[the_person.possessive_title] disappears behind the door as she closes it behind her. You can hear the shower turn on and you start to drift off to sleep again."
     "..."
     "You don't hear her come in, but the weight on the bed shifts. You open your eyes and see [jealous_sister.title], climbing on top of you."
+    $ jealous_sister.outfit.strip_to_vagina()
     $ jealous_sister.draw_person(position = "cowgirl")
-    #TODO make her actually naked
     "Her lower half is naked, and she straddles your hips with her cunt pressed against your rapidly hardening cock."
-    "You start to say something, but [ashley.fname] puts a finger on your lips."
+    "You start to say something, but [jealous_sister.fname] puts a finger on your lips."
     jealous_sister "Shhhh, if we're quiet, she'll never even know."
     $ mc.change_locked_clarity(30)
     "She leans forward and replaces her finger with her lips. She kisses you hungrily, making her need for you known."
