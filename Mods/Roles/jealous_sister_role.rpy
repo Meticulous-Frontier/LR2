@@ -3,32 +3,8 @@
 # when scores get high enough, jealous sister may approach MC looking for sex or force satisfaction.
 # Possibly add an option to convince a girl to stop being so jealous
 
-init 6 python:
-    list_of_instantiation_labels.append("jealous_sister_instantiate")
-    add_label_hijack("after_load", "jealous_sister_instantiate")
-
-label jealous_sister_instantiate(stack = []):
-    # Only if not already instantiated
-    if "jealous_sister_role" not in globals():
-        # Check prerequisites
-        if "girlfriend_morning_action_list" in globals():
-            python:
-                # Actions
-                girlfriend_wakeup_jealous_sister = Action("Jealous wakeup", girlfriend_wakeup_jealous_sister_requirement, "girlfriend_wakeup_jealous_sister_label")
-                girlfriend_morning_action_list.append(girlfriend_wakeup_jealous_sister)
-
-                # Roles
-                jealous_sister_role = Role("Jealous sister", [], hidden = True,  on_turn = jealous_sister_on_turn, on_move = None, on_day = jealous_sister_on_day)
-        else:
-            # Retry if prerequisites not instantiated yet
-            $ list_of_instantiation_labels.append("jealous_sister_instantiate")
-            $ if stack: stack.append("jealous_sister_instantiate")
-
-    # continue on the hijack stack if needed
-    $ execute_hijack_call(stack)
-    return
-
-init 2 python:
+# Must be initialized after girlfriend_role_enhanced, which is init 2
+init 3 python:
     def jealous_sister_on_turn(person):
         if len(person.jealous_witness_publix_sex_list()) > 0:
             the_score = 1
@@ -70,6 +46,7 @@ init 2 python:
             self.event_triggers_dict["jealous_list"].append([the_description, the_act])
             self.jealous_change_score(jealous_act_get_score(the_act))
         return
+
     Person.add_jealous_event = add_jealous_event
 
     def get_jealous_description(self):
@@ -77,25 +54,30 @@ init 2 python:
             this_tuple = self.get_jealous_list()[-1]
             return this_tuple[0]
         return "I'm not jealous of anyone right now, I just want to fuck!"
+
     Person.get_jealous_description = get_jealous_description
 
     def get_jealous_act(self):
         if is_jealous_sister(self):
             return self.event_triggers_dict.get("jealous_list", [("", "vaginal")])[-1][1]
         return "vaginal"
+
     Person.get_jealous_act = get_jealous_act
 
     def reset_jealous_list(self):
         self.event_triggers_dict["jealous_list"] = []
         return
+
     Person.reset_jealous_list = reset_jealous_list
 
     def get_jealous_list(self):
         return self.event_triggers_dict.get("jealous_list", [("", "")])
+
     Person.get_jealous_list = get_jealous_list
 
     def jealous_score(self):
         return self.event_triggers_dict.get("jealous_score", 0)
+
     Person.jealous_score = jealous_score
 
     def jealous_score_reset(self):
@@ -106,6 +88,7 @@ init 2 python:
     def jealous_change_score(self, the_score):
         self.event_triggers_dict["jealous_score"] = self.event_triggers_dict.get("jealous_score", 0) + the_score
         return
+
     Person.jealous_change_score = jealous_change_score
 
     def reset_all_jealousy(self):
@@ -114,19 +97,23 @@ init 2 python:
         self.event_triggers_dict["jealous_public_act"] = []
         #TODO as we make mandatory events using jealousy, probably clear them out here
         return
+
     Person.reset_all_jealousy = reset_all_jealousy
 
     def jealous_witness_public_sex(self, the_act):
         self.event_triggers_dict["jealous_public_act"].append(the_act)
         return
+
     Person.jealous_witness_public_sex = jealous_witness_public_sex
 
     def jealous_witness_publix_sex_list(self):
         return self.event_triggers_dict.get("jealous_public_act", [])
+
     Person.jealous_witness_publix_sex_list = jealous_witness_publix_sex_list
 
     def jealous_sister_get_target_ident(self):
         return self.event_triggers_dict.get("jealous_target", None)
+
     Person.jealous_sister_get_target_ident = jealous_sister_get_target_ident
 
     def jealous_sister_get_revenge_tuple(self):   #Use a combination of her sluttiness and what acts she has witnessed to determine how she settles the score.
@@ -146,7 +133,10 @@ init 2 python:
                 return self.get_jealous_list()[i]
         # No matching event, so we just return the most recent event.
         return  self.get_jealous_list()[-1]
+
     Person.jealous_sister_get_revenge_tuple = jealous_sister_get_revenge_tuple
+
+    jealous_sister_role = Role("Jealous sister", [], hidden = True,  on_turn = jealous_sister_on_turn, on_move = None, on_day = jealous_sister_on_day)
 
     def assign_jealous_sister_role(person, the_target):
         person.add_role(jealous_sister_role)
@@ -173,6 +163,10 @@ init 2 python:
             and the_person.location == the_person.home
             and sister.location == the_person.home
         )
+
+    girlfriend_wakeup_jealous_sister = Action("Jealous wakeup", girlfriend_wakeup_jealous_sister_requirement, "girlfriend_wakeup_jealous_sister_label")
+    girlfriend_morning_action_list.append(girlfriend_wakeup_jealous_sister)
+
 
 label girlfriend_wakeup_jealous_sister_label(the_person):
     $ jealous_sister = get_jealous_sister(the_person, slut_requirement = 60)
