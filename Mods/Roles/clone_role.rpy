@@ -1,26 +1,3 @@
-init 5 python:
-    list_of_instantiation_labels.append("clone_role_instantiate")
-    add_label_hijack("after_load", "clone_role_instantiate")
-
-label clone_role_instantiate(stack = []):
-    # Only if not already instantiated
-    if "clone_role" not in globals():
-        python:
-            # Actions
-            # Clone Recall - Brings the clone back to base
-            clone_recall_action = Action("Recall clone", clone_recall_requirement, "clone_recall_label",
-                menu_tooltip = "Bring the clone back to the dungeon for modifications")
-            # Clone Rent House - Rent a house for your clone
-            clone_rent_apartment_action = Action("Rent Apartment\n{color=#ff0000}{size=18}Costs: $25000{/size}{/color}", clone_rent_apartment_requirement, "clone_rent_apartment_label",
-                menu_tooltip = "Rent a apartment for your clone.")
-
-            # Roles
-            clone_role = Role("Clone", [clone_recall_action, clone_rent_apartment_action])
-
-    # continue on the hijack stack if needed
-    $ execute_hijack_call(stack)
-    return
-
 init 2 python:
     def clone_recall_requirement(person):
         if person not in dungeon.people:
@@ -32,6 +9,16 @@ init 2 python:
         if not mc.business.has_funds(25000):
             return "Requires: $25,000"
         return person.home is dungeon
+
+    # Clone Recall - Brings the clone back to base
+    clone_recall_action = Action("Recall clone", clone_recall_requirement, "clone_recall_label", menu_tooltip = "Bring the clone back to the dungeon for modifications")
+
+    # Clone Rent House - Rent a house for your clone
+    clone_rent_apartment_action = Action("Rent Apartment\n{color=#ff0000}{size=18}Costs: $25000{/size}{/color}", clone_rent_apartment_requirement, "clone_rent_apartment_label", menu_tooltip = "Rent a apartment for your clone.")
+
+    clone_role = Role("Clone", [clone_recall_action, clone_rent_apartment_action])
+
+
 
 # Labels
 label clone_recall_label(the_person):
