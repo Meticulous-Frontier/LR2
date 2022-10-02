@@ -1,11 +1,44 @@
 #This file is to add new options to girlfriends. Ideas include: afternoon delight, my place / your place, sexting, clothes shopping.
 #Roleplays: These are scenes that will involve your girlfriend pretending to be someone/something else. Designed to take the place of the initial fucking scene.
 
-init 2 python:
-    girlfriend_morning_action_list = []     #Requirement functions can check mc.location to tell if it's myplace/yourplace if necessary.
-    girlfriend_sleepover_interruption_list = []     #Ideas, daughter/mother walk in, phone call,
-    girlfriend_roleplay_list = []           #When a roleplay is created, add it here as an option. list of ACTIONS
+init 5 python:
+    list_of_instantiation_labels.append("girlfriend_role_enhanced_instantiate")
+    add_label_hijack("after_load", "girlfriend_role_enhanced_instantiate")
 
+label girlfriend_role_enhanced_instantiate(stack = []):
+    # Only if not already instantiated
+    if "girlfriend_morning_action_list" not in globals():
+        python:
+            # Variables
+            girlfriend_morning_action_list = []     #Requirement functions can check mc.location to tell if it's myplace/yourplace if necessary.
+            girlfriend_sleepover_interruption_list = []     #Ideas, daughter/mother walk in, phone call,
+            girlfriend_roleplay_list = []           #When a roleplay is created, add it here as an option. list of ACTIONS
+
+            # Actions
+            girlfriend_sleepover_action = Action("Arrange a sleepover", girlfriend_myplace_yourplace_requirement, "girlfriend_myplace_yourplace_label",
+                menu_tooltip = "Ask your girlfriend if she wants to sleep together tonight.")
+            girlfriend_sleepover_crisis = Action("Have a sleepover", girlfriend_sleepover_crisis_requirement, "girlfriend_sleepover_crisis_label")
+            girlfriend_underwear_shopping = Action("Shop for new lingerie", girlfriend_underwear_shopping_requirement , "girlfriend_underwear_shopping_label",
+                menu_tooltip = "Take your girlfriend out to shop for some exciting underwear to wear for you.")
+            girlfriend_quit_dikdok_action = Action("Quit DikDok", girlfriend_quit_dikdok_requirement, "girlfriend_quit_dikdok_label",
+                menu_tooltip = "Ask your girlfriend to stop showing herself off on DikDok.")
+
+            girlfriend_wakeup_spooning = Action("Spooning wakeup", girlfriend_wakeup_spooning_requirement, "girlfriend_wakeup_spooning_label")
+            girlfriend_morning_action_list.append(girlfriend_wakeup_spooning)
+
+            # Role Enhancements
+            girlfriend_role.add_action(girlfriend_sleepover_action)
+            girlfriend_role.add_action(girlfriend_underwear_shopping)
+            girlfriend_role.add_action(girlfriend_quit_dikdok_action)
+
+            sister_girlfriend_role.add_action(girlfriend_underwear_shopping)
+            mom_girlfriend_role.add_action(girlfriend_underwear_shopping)
+
+    # continue on the hijack stack if needed
+    $ execute_hijack_call(stack)
+    return
+
+init 2 python:
     def girlfriend_myplace_yourplace_requirement(the_person):
         if schedule_sleepover_available():
             if time_of_day < 4:
@@ -48,26 +81,7 @@ init 2 python:
             return "Requires: 60 Love"
         return True
 
-
-    girlfriend_sleepover_action = Action("Arrange a sleepover", girlfriend_myplace_yourplace_requirement, "girlfriend_myplace_yourplace_label",
-        menu_tooltip = "Ask your girlfriend if she wants to sleep together tonight.")
-    girlfriend_sleepover_crisis = Action("Have a sleepover", girlfriend_sleepover_crisis_requirement, "girlfriend_sleepover_crisis_label")
-    girlfriend_underwear_shopping = Action("Shop for new lingerie", girlfriend_underwear_shopping_requirement , "girlfriend_underwear_shopping_label",
-        menu_tooltip = "Take your girlfriend out to shop for some exciting underwear to wear for you.")
-
-    girlfriend_wakeup_spooning = Action("Spooning wakeup", girlfriend_wakeup_spooning_requirement, "girlfriend_wakeup_spooning_label")
-
-    girlfriend_morning_action_list.append(girlfriend_wakeup_spooning)
-
-    girlfriend_quit_dikdok_action = Action("Quit DikDok", girlfriend_quit_dikdok_requirement, "girlfriend_quit_dikdok_label",
-        menu_tooltip = "Ask your girlfriend to stop showing herself off on DikDok.")
-
-
-
 init 5 python:
-    add_label_hijack("normal_start", "activate_girlfriend_role_enhancement")
-    add_label_hijack("after_load", "activate_girlfriend_role_enhancement")
-
     def schedule_sleepover_in_story(person, your_place = True):
         mc.business.event_triggers_dict["girlfriend_person"] = person.identifier
         mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
@@ -91,18 +105,6 @@ init 5 python:
                 wakeup_scene.args = [person]
                 possible_action_list.append(wakeup_scene)
         return get_random_from_list(possible_action_list)
-
-label activate_girlfriend_role_enhancement(stack):
-    python:
-        girlfriend_role.add_action(girlfriend_sleepover_action)
-        girlfriend_role.add_action(girlfriend_underwear_shopping)
-        girlfriend_role.add_action(girlfriend_quit_dikdok_action)
-
-        sister_girlfriend_role.add_action(girlfriend_underwear_shopping)
-        mom_girlfriend_role.add_action(girlfriend_underwear_shopping)
-
-        execute_hijack_call(stack)
-    return
 
 label girlfriend_myplace_yourplace_label(the_person):
     mc.name "So, I'm kinda busy right now, but I thought that maybe later we could get together."
