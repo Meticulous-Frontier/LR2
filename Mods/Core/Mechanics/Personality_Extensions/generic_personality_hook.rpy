@@ -739,16 +739,22 @@ init 2 python:
         return
 
     def generate_random_sisters():
-        no_family = [x for x in all_people_in_the_game(excluded_people = unique_character_list) if x.age < 30 and len(town_relationships.get_relationship_type_list(x, types = ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"])) == 0]
         linked_sisters = []
 
         def get_new_sister_from_list():
+            no_family = [x for x in all_people_in_the_game(excluded_people = unique_character_list) if x.age < 30 and len(town_relationships.get_relationship_type_list(x, types = ["Mother", "Daughter", "Sister", "Cousin", "Niece", "Aunt", "Grandmother", "Granddaughter"])) == 0]
             available_sisters = [x for x in no_family if x not in linked_sisters]
             if not available_sisters:
                 return None
             sister = renpy.random.choice(no_family)
             linked_sisters.append(sister)
             return sister
+
+        def update_sister_relationship(sister, other_sister):
+            town_relationships.update_relationship(sister, other_sister, "Sister")
+            # when not married, their last names should be identical
+            if other_sister.relationship != "Married" and sister.relationship != "Married":
+                other_sister.last_name = sister.last_name
 
         for i in range(4):
             sister = get_new_sister_from_list()
@@ -757,10 +763,8 @@ init 2 python:
             if not sister or not other_sister:
                 break
 
-            town_relationships.update_relationship(sister, other_sister, "Sister")
-            # when not married, their last names should be identical
-            if other_sister.relationship != "Married" and sister.relationship != "Married":
-                other_sister.last_name = sister.last_name
+            update_sister_relationship(sister, other_sister)
+
         return
 
 
