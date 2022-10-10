@@ -31,8 +31,10 @@ init 2:
                     vbox:
                         text "Personal Information" style "serum_text_style_header" #Info about the person: age, height, happiness, obedience, etc.
                         text "Age: [person.age]" style "menu_text_style" size 16
-                        if person.is_employee():
+                        if person.only_normal_employee():
                             text "Required Salary: $[person.salary]/day" style "menu_text_style" size 16
+                        if person.is_strip_club_employee():
+                            text "Club Salary: $[person.stripper_salary]/day" style "menu_text_style" size 16
                         text "Personality: " + person.personality.personality_type_prefix.capitalize() style "menu_text_style" size 16
                         if person.is_girlfriend():
                             text "Relationship: [mc.name]'s girlfriend" style "menu_text_style" size 16

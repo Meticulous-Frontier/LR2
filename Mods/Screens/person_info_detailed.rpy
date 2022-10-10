@@ -124,9 +124,9 @@ init 2: # Need to allow for None name roles in this screen as well.
                             text "Significant Other: [mc.name]" style "menu_text_style"
                         if the_person.kids > 0:
                             text "Kids: [the_person.kids]" style "menu_text_style"
-                        if the_person.is_employee():
+                        if the_person.only_normal_employee():
                             text "Salary: $[the_person.salary]/day" style "menu_text_style"
-                        if get_strip_club_foreclosed_stage() >= 5 and the_person.is_strip_club_employee():
+                        if  the_person.is_strip_club_employee():
                             text "Club Salary: $[the_person.stripper_salary]/day" style "menu_text_style"
 
                 frame:
@@ -257,7 +257,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Research: [research_base] Research Points" style "menu_text_style"
                         text "Production: [prod_base] Production Points" style "menu_text_style"
                         text "Supply: [supply_base] Supply Units" style "menu_text_style"
-                        if the_person.is_employee():
+                        if the_person.only_normal_employee():
                             text "Desired Salary: $[desired_salary]/day" style "menu_text_style"
 
                 frame:
