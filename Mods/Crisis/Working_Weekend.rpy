@@ -10,7 +10,7 @@
 ###
 init 2 python:
     def SB_working_weekend_requirement():
-        if mc.business.is_weekend() and mc.is_at_work() and mc.location.get_person_count() <= 1:
+        if mc.business.is_weekend() and mc.is_at_work() and mc.location.get_person_count() < 1:
             return mc.business.get_employee_count() > 2
         return False
 
@@ -82,19 +82,16 @@ init 2 python:
         menu_tooltip = "While working weekends an employee comes into the office.", category = "Business", is_crisis = True)
 
 label SB_working_weekend_crisis_label():
-    $ person_one = get_random_employees(1)
-    if person_one == sarah and sarah_epic_tits_progress() == 1: #Don't give sarah during epic tits weekend
-        return
-
+    $ person_one = get_random_employees(1, exclude_list = [] if not sarah_epic_tits_progress() == 1 else [sarah])
     if person_one is None:
         return
-
     $ scene_manager = Scene()
-
     "Even though it is the weekend, you find yourself working."
-    "Deep in thought, and with the company normally deserted, it takes you by surprise when you see movement out of the corner of your eye."
+    if mc.business.is_open_for_internship():
+        "Deep in thought, and with the [mc.location.name] normally deserted, it takes you by surprise when you see movement out of the corner of your eye."
+    else:
+        "Deep in thought, and with the company normally deserted, it takes you by surprise when you see movement out of the corner of your eye."
     "Looking aside, you see [person_one.possessive_title]."
-
     $ scene_manager.add_actor(person_one, emotion="default")
     $ scene_manager.draw_scene()
     "You can tell by the look on her face that [person_one.possessive_title] is also surprised to see you."
@@ -104,7 +101,6 @@ label SB_working_weekend_crisis_label():
         call SB_working_weekend_crisis_label_medium(person_one) from _call_SB_working_weekend_crisis_label_medium
     else:
         call SB_working_weekend_crisis_label_high(person_one) from _call_SB_working_weekend_crisis_label_high
-
     $ scene_manager.clear_scene()
     $ person_one.apply_planned_outfit()
     $ del person_one
@@ -113,7 +109,11 @@ label SB_working_weekend_crisis_label():
 
 label SB_working_weekend_crisis_label_high(person_one):
     person_one "Oh hey [person_one.mc_title]! Are you here all by yourself?"
-    "You give her a quick nod as your finish up what you were doing."
+    if mc.business.is_open_for_internship():
+        mc.name "Well there is an intern working somewhere, but I'm alone here."
+        "You explain as you finish up what you were doing."
+    else:
+        "You give her a quick nod as your finish up what you were doing."
     "Seeing that you are here all by yourself, [person_one.possessive_title] grabs a chair and sits close to you."
     $ scene_manager.update_actor(person_one, position = "sitting")
     person_one "Wow, your dedication to this place is pretty sexy... would you like to maybe... blow off a little steam?"
@@ -127,9 +127,12 @@ label SB_working_weekend_crisis_label_high(person_one):
             $ person_one.change_slut(2)
             call strip_tease(person_one, for_pay = False) from _free_strip_scene_3
             $ mc.change_locked_clarity(50)
-            $ person_two = get_random_employees(1, exclude_list = [person_one])
-            if not willing_to_threesome(person_one, person_two) or (person_two == sarah and sarah_epic_tits_progress() == 1):
-                "You're pretty sure she's ready for next step if you are ready."
+            if mc.business.is_open_for_internship():
+                $ person_two = get_random_interns(1)
+            else:
+                $ person_two = get_random_employees(1, exclude_list = [person_one] if not sarah_epic_tits_progress() == 1 else [sarah, person_one])
+            if not willing_to_threesome(person_one, person_two):
+                "You're pretty sure she's ready for next step if you are."
                 menu:
                     "Fuck her on your desk" if not person_one.has_taboo("vaginal_sex"): # only show sex option if you had sex before:
                         "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
@@ -148,12 +151,27 @@ label SB_working_weekend_crisis_label_high(person_one):
                         $ person_one.apply_outfit()
                         $ person_one.draw_person()
                         "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
+                    "Explore her body":
+                        "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
+                        "When her ass runs up against the desk you set her down and take a half step back."
+                        $ mc.change_locked_clarity(30)
+                        "Judging by the moisture glistening on her pussy, the show got her almost as excited as you."
+                        call fuck_person(person_one, start_position = standing_fingering, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_sex_description_SB15_2
+                        $ the_report = _return
+                        if the_report.get("girl orgasms", 0) > 0:
+                            "[person_one.possessive_title] lays there for a while, recovering from her orgasm."
+                            $ person_one.change_stats(slut = 3, love = 5)
+                        else:   #She didn't cum
+                            "[person_one.possessive_title] lays there for a bit, clearly disappointed she didn't orgasm."
+                            $ person_one.change_stats(slut = 1, happiness = -5)
+                        $ person_one.apply_outfit()
+                        $ person_one.draw_person()
+                        "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
                     "Thank her for the show":
                         mc.name "Thanks for that very pleasant distraction, [person_one.title], but I need to get back to work now."
                         "[person_one.possessive_title] can barely hide their disappointment. There's a hint of anger in their voice when they reply."
                         person_one "Wow, really? After I stripped for you? Okay then, I hope your day goes better than mine..."
                         $ person_one.change_stats(slut = 2, happiness = -5, love = -5)
-
             else:  #Someone walks in, threesome opportunity#
                 "You walk over to [person_one.possessive_title]. She wraps her arms around you as you roughly grab her ass and pick her up. She's grinding herself against you as you carry her over to your desk."
                 $ scene_manager.update_actor(person_one, position = "kissing")
@@ -192,9 +210,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                 $ person_one.apply_planned_outfit()
                 $ scene_manager.update_actor(person_one, position = "stand3")
                 "She eventually gets up and gets herself dressed again. You say goodbye as she leaves the office."
-
             $ del person_two
-
         "Just Talk":
             "While her offer is tempting, you decide to take the opportunity to learn a little more about [person_one.possessive_title]."
             mc.name "Sorry, I can't while I'm in the middle of this, but maybe you could stay and talk to me for a little while."
@@ -202,26 +218,22 @@ label SB_working_weekend_crisis_label_high(person_one):
             "What do you ask about?"
             menu:
                 "Positions" if count_topic_opinions(person_one, working_weekend_topics["positions"]) > 0:
-                    mc.name "So, how do you feel about different sex positions, [person_one.title]?"
+                    mc.name "So, how do you feel about different sexual positions, [person_one.title]?"
                     "[person_one.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                     person_one "Well..."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["positions"])
-
                 "Sex types" if count_topic_opinions(person_one, working_weekend_topics["sex_types"]) > 0:
-                    mc.name "So, how do you feel about different sex types, [person_one.title]?"
+                    mc.name "So, how do you feel about different types of sex, [person_one.title]?"
                     "[person_one.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["sex_types"])
-
                 "Cum" if count_topic_opinions(person_one, working_weekend_topics["cum"]) > 0:
                     mc.name "So, how do you feel about cum, [person_one.title]?"
                     "[person_one.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["cum"])
-
                 "Sexy Clothing" if count_topic_opinions(person_one, working_weekend_topics["sexy_clothing"]) > 0:
                     mc.name "So, how do you feel about sexy clothing and outfits, [person_one.title]?"
                     "[person_one.possessive_title] smiles when she realizes you are going to keep the topic interesting."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["sexy_clothing"])
-
                 "Other Kinks" if count_topic_opinions(person_one, working_weekend_topics["kinks"]) > 0:
                     mc.name "So, do you have any kinks, [person_one.title]? Something that might be more fun for me to know about?"
                     "[person_one.possessive_title] smiles when she realizes you are going to keep the topic interesting."
@@ -273,7 +285,6 @@ label SB_working_weekend_crisis_label_medium(person_one):
             $ person_one.add_situational_slut("seduction_approach",20, "Your dedication turns me on.")
             $ person_one.add_situational_obedience("seduction_approach", 5, "I will do this for you.")
             call fuck_person(person_one, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_SB1
-
             $ person_one.clear_situational_slut("seduction_approach")
             $ person_one.clear_situational_obedience("seduction_approach")
             $ person_one.draw_person()
@@ -286,15 +297,12 @@ label SB_working_weekend_crisis_label_medium(person_one):
                 "Ask about general opinions" if count_topic_opinions(person_one, working_weekend_topics["general"]) > 0:
                     "You decide to ask about her general opinions."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["general"])
-
                 "Ask about work opinions" if count_topic_opinions(person_one, working_weekend_topics["work"]) > 0:
                     "You decide to ask about her opinions about work."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["work"])
-
                 "Ask about style opinions" if count_topic_opinions(person_one, working_weekend_topics["style"]) > 0:
                     "You decide to ask about her opinions about her personal style."
                     $ SB_discover_opinion_count = display_topic_opinions(person_one, working_weekend_topics["style"])
-
             "You chat with [person_one.possessive_title] for a bit longer, but eventually she says goodbye and leaves."
     return
 
@@ -310,7 +318,6 @@ label SB_working_weekend_crisis_label_low(person_one):
             mc.name "You are doing a great job so far, [person_one.title], can I count on you to listen and obey the tasks I set out for you?"
             $ person_one.change_obedience(10)
             person_one "Yes, absolutely. I'll do everything I can to make sure this business is successful."
-
         "Stress the importance of satisfaction":
             mc.name "I've worked hard to build this place into what it is. Even though it is the weekend, I can't help but come out here and work on improving the business in any way I can..."
             mc.name "But it can be easy to burn yourself out in this line of business. Pay might not always be great and the hours might be long, but a good attitude is key."
@@ -318,7 +325,6 @@ label SB_working_weekend_crisis_label_low(person_one):
             mc.name "You are doing a great job for me so far, [person_one.title], but take care of yourself, and don't let yourself get burned out."
             $ person_one.change_happiness(10)
             person_one "Yes sir, I do enjoy being here."
-
         "Stress the importance of work hard, play hard":
             mc.name "Yes, it is true that I work late into the days and even on the weekends, but that doesn't mean that I'm all business."
             mc.name "It is important though, that when you work hard, you can also play hard."
@@ -326,6 +332,5 @@ label SB_working_weekend_crisis_label_low(person_one):
             mc.name "You are doing a great job for me so far, [person_one.title]. Maybe some time we should play hard together?"
             $ person_one.change_slut(1, 30)
             person_one "Oh! I suppose I might be up for something like that, sometime anyway."
-
     "After a minute of chit chat, [person_one.possessive_title] eventually says goodbye and walks out of the room."
     return
