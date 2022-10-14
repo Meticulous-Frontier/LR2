@@ -266,7 +266,7 @@ label strip_club_hire_employee_label(the_person):
 
         mc.name "See you at the club."
         return
-    elif person.only_normal_employee():
+    elif the_person.only_normal_employee():
         if mc.business.is_open_for_business():
             the_person "What do you mean? I already have a job, right here, right now."
             mc.name "Don't worry, it won't interfere with this job, I just thought you might like to make something extra on the side."
