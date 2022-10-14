@@ -22,13 +22,18 @@ init 2 python:
         return
 
     def one_on_one_training_requirement():
-        if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-            if not mc.business.is_weekend() and mc.is_at_work():
+        if mc.is_at_work():
+            if mc.business.is_open_for_business():
                 return any(x for x in mc.business.get_employee_list() if x.obedience > 110 and x.int > 1 and (mc.hr_skill > x.hr_skill or mc.supply_skill > x.supply_skill or mc.market_skill > x.market_skill or mc.research_skill > x.research_skill or mc.production_skill > x.production_skill))
+            if mc.business.is_open_for_internship():
+                return any(x for x in mc.business.get_intern_list() if x.obedience > 110 and x.int > 1 and (mc.hr_skill > x.hr_skill or mc.supply_skill > x.supply_skill or mc.market_skill > x.market_skill or mc.research_skill > x.research_skill or mc.production_skill > x.production_skill))
         return False
 
     def get_training_employee():
         return get_random_from_list([x for x in mc.business.get_employee_list() if x.obedience > 110 and x.int > 1 and (mc.hr_skill > x.hr_skill or mc.supply_skill > x.supply_skill or mc.market_skill > x.market_skill or mc.research_skill > x.research_skill or mc.production_skill > x.production_skill)])
+
+    def get_training_intern():
+        return get_random_from_list([x for x in mc.business.get_intern_list() if x.obedience > 110 and x.int > 1 and (mc.hr_skill > x.hr_skill or mc.supply_skill > x.supply_skill or mc.market_skill > x.market_skill or mc.research_skill > x.research_skill or mc.production_skill > x.production_skill)])
 
     def one_on_one_update_HR_skill(person):
         increase = renpy.random.randint(1,(mc.hr_skill - person.hr_skill))
@@ -89,10 +94,11 @@ init 2 python:
         menu_tooltip = "You give an employee on the job training.", category = "Business", is_crisis = True)
 
 label SB_one_on_one_label():
-    $ the_person = get_training_employee()
-
-    if the_person is None:
-        # "No one eligible for training!"
+    if mc.business.is_open_for_business():
+        $ the_person = get_training_employee()
+    else:
+        $ the_person = get_training_intern()
+    if the_person is None: # "No one eligible for training!"
         return
 
     "You take a quick break from work to go get a quick snack from the vending machine. While you are trying do decide what snack to buy, [the_person.possessive_title] enters the break room."
@@ -171,6 +177,5 @@ label SB_one_on_one_label():
             the_person "Sorry, I just don't think I would ever be happy doing [topic]."
     else:
         the_person "That's okay, [the_person.mc_title], I understand. Maybe another time then!"
-
     $ clear_scene()
     return
