@@ -406,7 +406,7 @@ label advance_time_end_of_day_label():
         # renpy.restart_interaction()
         mc.business.clear_messages()
         # increase morning crisis chance (once a day)
-        morning_crisis_chance += 2
+        morning_crisis_chance += len(people_in_mc_home())
 
         mc.business.funds_yesterday = mc.business.funds
     return
