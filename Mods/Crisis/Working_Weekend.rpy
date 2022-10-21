@@ -156,7 +156,7 @@ label SB_working_weekend_crisis_label_high(person_one):
                         "When her ass runs up against the desk you set her down and take a half step back."
                         $ mc.change_locked_clarity(30)
                         "Judging by the moisture glistening on her pussy, the show got her almost as excited as you."
-                        call fuck_person(person_one, start_position = standing_fingering, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_sex_description_SB15_2
+                        call fuck_person(person_one, start_position = standing_finger, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_sex_description_SB15_2
                         $ the_report = _return
                         if the_report.get("girl orgasms", 0) > 0:
                             "[person_one.possessive_title] lays there for a while, recovering from her orgasm."
