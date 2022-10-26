@@ -47,7 +47,9 @@ init -2 python:
 
     def erica_lily_post_insta_morning_requirement():
         if day%7 == 6 and erica_has_given_morning_handjob():
-            return True
+            if erica_get_morning_wakeup_pref() != 0:
+                if the_person.sex_record.get("Last Sex Day", 9999) != day: #If mandatory and random crisis happen to fire on the same day, suppress the second event.
+                    return True
         return False
 
 init -1 python:
@@ -497,8 +499,6 @@ label erica_lily_post_insta_handjob_label():
 
 label erica_lily_post_insta_morning_label():
     $ the_person = erica
-    if erica_get_morning_wakeup_pref() == 0:
-        return
     if the_person.sex_record.get("Last Sex Day", 9999) == day: #If mandatory and random crisis happen to fire on the same day, suppress the second event.
         return
 

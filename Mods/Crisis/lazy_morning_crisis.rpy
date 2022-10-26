@@ -2,7 +2,7 @@
 
 init 2 python:
     def lazy_morning_crisis_requirement():
-        if mc.is_home() and mc.business.is_weekend() and len(people_in_mc_home()) > 0:
+        if mc.is_home() and mc.business.is_weekend() and __builtin__.len(people_in_mc_home()) > 0:
             return True
         return False
 

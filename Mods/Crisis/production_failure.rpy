@@ -4,7 +4,8 @@ init 2 python:
         if not mc.business.is_weekend():
             if mc.is_at_work():
                 if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-                    return True
+                    if __builtin__.len(rd_division.people + p_division.people) > 0: # Must have RD or Prod employee
+                        return True
         return False
 
     def production_failure_increase_sluttiness(person):

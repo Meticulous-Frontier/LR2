@@ -8,7 +8,7 @@
 # high sluttiness they put the panties on and have MC cum in the panties while they wear them
 init 2 python:
     def dirty_laundry_requirement():
-        return mc_asleep()
+        return mc_asleep() and __builtin__.len(people_in_mc_home()) > 0
 
     dirty_laundry_action = ActionMod("Dirty Laundry", dirty_laundry_requirement, "dirty_laundry_action_label",
         menu_tooltip = "Start your laundry before bed", category = "Home", is_crisis = True)
