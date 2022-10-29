@@ -250,7 +250,7 @@ init 5 python:
             if mc.business.IT_project_is_active(hr_task_manager_project):
                 for hr_person in mc.business.hr_team:
                     if hr_person != mc.business.hr_director:
-                        HR_dir_factor += round(((hr_person.charisma * 2 ) + hr_person.hr_skill) / 2)
+                        HR_dir_factor += __builtin__.round(((hr_person.charisma * 2 ) + hr_person.hr_skill) / 2)
         HR_dir_factor += get_HR_director_tag("business_HR_eff_bonus")
         mc.business.effectiveness_cap = (100 + HR_dir_factor)   #100% base effectiveness
         return

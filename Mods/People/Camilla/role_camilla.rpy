@@ -1545,7 +1545,7 @@ init -1 python:
         return camilla.event_triggers_dict.get("lost_anal_virginity", False)
 
     def mc_dancing_skill(): #Wrapper for measuring MC's progress learning to salsa dance.
-        return mc.charisma + round((mc.max_energy - 100) / 20)
+        return mc.charisma + __builtin__.round((mc.max_energy - 100) / 20)
 
     def camilla_is_fertile():   #Just make this a function name. Can come back and make the method once we decide triggers for making her fertile.
         return False
