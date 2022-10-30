@@ -579,7 +579,7 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the damn wall is in the way."
     "You start to thrust a little bit, testing the limits on how far to pull back without pulling out."
     anon_char "Oh fuck it's good. Mmmmm..."
-    if mc.busines.is_open_for_business():
+    if mc.business.is_open_for_business():
         "One of your employees is on the other side of that wall, taking your cock in her ass. But who? You have some guesses, based on her voice, but there's no way to know for sure."
     else:
         "One of your interns is on the other side of that wall, taking your cock in her ass. But who? You have some guesses, based on her voice, but there's no way to know for sure."
