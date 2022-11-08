@@ -1,24 +1,29 @@
 ###Scene Idea: Girl is pumping milk. MC can help or watch
 init 2 python:
     def milk_employee_requirement():
-        if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.get_employee_count() > 0:
-            return any(x for x in mc.business.get_employee_list() if x.lactation_sources > 0)
+        if mc.is_at_work():
+            if mc.business.is_open_for_business() and mc.business.get_employee_count() > 0:
+                return any(x for x in mc.business.get_employee_list() if x.lactation_sources > 0)
+            if mc.business.is_open_for_internship():
+                return any(x for x in mc.business.get_intern_list() if x.lactation_sources > 0)
         return False
 
     def select_girl_lactating():
-        return get_random_from_list([x for x in mc.business.get_employee_list() if x.lactation_sources > 0])
+        if mc.business.is_open_for_business():
+            return get_random_from_list([x for x in mc.business.get_employee_list() if x.lactation_sources > 0])
+        if mc.business.is_open_for_internship():
+            return get_random_from_list([x for x in mc.business.get_intern_list() if x.lactation_sources > 0])
+        return None
 
     milk_employee_crisis = ActionMod("Employee Needs Milked",milk_employee_requirement,"milk_employee_crisis_label",
         menu_tooltip = "An employee is struggling to milk herself.", category = "Business", is_crisis = True)
 
 label milk_employee_crisis_label():
     $ the_person = select_girl_lactating()
-    if the_person is None:
-        # "No one is lactating!"
+    if the_person is None: # "No one is lactating!"
         return
 
-    $the_person.strip_outfit(exclude_lower = True, exclude_feet = True, delay = 0) #Make sure she is topless
-
+    $ the_person.strip_outfit(exclude_lower = True, exclude_feet = True, delay = 0) #Make sure she is topless
     "You decide to take a quick break from what you are doing. You stand up and stretch your legs, and go for a quick walk."
     "While you are walking by the break room, you hear someone inside muttering to herself."
     the_person "These stupid pumps... I hate these things..."

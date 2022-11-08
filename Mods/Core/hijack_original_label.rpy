@@ -8,7 +8,7 @@
 #         execute_hijack_call(stack)
 
 init -1 python:
-    hijack_list = []
+    hijack_list = {}
 
     # Keep track of the old callback so it can still be called
     original_label_callback = config.label_callback
@@ -20,16 +20,18 @@ init -1 python:
             original_label_callback(original_label, abnormal)
 
         # create call stack of hijacked labels (allows for multiple hijacks of same label)
-        call_stack = []
-        for hijack in hijack_list:
-            if original_label == hijack[0].split(':')[0]:  # base game label called
-                if not renpy.has_label(hijack[1]):
-                    renpy.say(None, "Unknown label " + hijack[1])
+        if original_label in hijack_list:
+            call_stack = []
+            for hijack in hijack_list[original_label]:
+                if not renpy.has_label(hijack):
+                    renpy.say(None, "Unknown label " + hijack)
                 else:
-                    call_stack.append(hijack[1])
+                    call_stack.append(hijack)
 
-        # call first label on the stack
-        execute_hijack_call(call_stack)
+            # print("Original label: {0} -> stack size {1}".format(original_label, len(call_stack)))
+
+            # call first label on the stack
+            execute_hijack_call(call_stack)
         return
 
     def execute_hijack_call(stack):
@@ -44,14 +46,17 @@ init -1 python:
 
     config.label_callback = hijack_label_callback
 
-    def add_label_hijack(orginal_label_name, hijack_label_name):
-        hijack_list.append([orginal_label_name, hijack_label_name])
+    def add_label_hijack(original_label_name, hijack_label_name):
+        if original_label_name in hijack_list:
+            hijack_list[original_label_name].append(hijack_label_name)
+        else:
+            hijack_list[original_label_name] = [hijack_label_name]
         return
 
     def remove_label_hijack(hijack_label_name):
-        if hijack_label_name in hijack_list[1]:
-            item_index = hijack_list[1].index(hijack_label_name)
-            del hijack_list[item_index]
+        for original, hijacks in hijack_list:
+            if hijack_label_name in hijacks:
+                hijack_list[original].remove(hijack_label_name)
         return
 
 

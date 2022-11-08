@@ -60,7 +60,7 @@ init 3303 python:
 
     def mistress_hunt_for_me_prey(person):
         # first find a non-employee target
-        target = get_random_from_list([x for x in known_people_at_location(mc.location, [person]) if not x.has_role([stripclub_mistress_role, stripclub_manager_role, stripclub_bdsm_performer_role, stripclub_waitress_role, stripclub_stripper_role])])
+        target = get_random_from_list([x for x in known_people_at_location(mc.location, [person]) if not x.is_strip_club_employee()])
         if target:
             return target
 

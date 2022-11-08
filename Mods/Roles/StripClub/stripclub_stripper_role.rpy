@@ -47,7 +47,7 @@ init 5 python:
         return False
 
     def strip_club_hire_employee_requirement(person):
-        if person.has_role([stripper_role, stripclub_waitress_role, stripclub_manager_role, stripclub_mistress_role, stripclub_bdsm_performer_role]):
+        if person.is_strip_club_employee():
             return False
         if person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
             return False
@@ -85,7 +85,7 @@ init 5 python:
     def allow_promote_to_manager_requirement(person):
         if get_strip_club_foreclosed_stage() < 5:
             return False
-        if person.is_employee() or person in [mom, lily, aunt, nora]:
+        if person.only_normal_employee() or person in [mom, lily, aunt, nora]:
             return False
         if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role]) and not strip_club_get_manager():
             # if person.age < 25: # As requested from a lot of people to hire Gabrielle as manager
@@ -116,7 +116,7 @@ init 5 python:
     def hire_stripper(person, job):
         if not person in unique_character_list:
             person.set_override_schedule(None, the_times = [4]) # clear party schedule
-        if person.is_employee() or person in [lily, aunt, mom, nora]:    # moonlighting
+        if person.only_normal_employee() or person in [lily, aunt, mom, nora]:    # moonlighting
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule(job.job_location, the_times = [4])
             for role in job.job_roles:
@@ -144,7 +144,7 @@ init 5 python:
         if person.has_role(stripclub_waitress_role):
             old_salary *= 2
 
-        if person.is_employee() or person in [lily, aunt, mom, nora]:   # moonlighting
+        if person.only_normal_employee() or person in [lily, aunt, mom, nora]:   # moonlighting
             for role in [stripclub_stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role]:
                 person.remove_role(role)
             if person in stripclub_strippers:
@@ -164,13 +164,13 @@ init 5 python:
                     stripclub_bdsm_performers.append(person)
         else:
             person.change_job(job)
-        
+
         if person.has_role(stripclub_bdsm_performer_role):
             old_salary *= 1.1
         person.stripper_salary = __builtin__.round(old_salary, 1)
 
     def fire_stripper(person):
-        if person.is_employee() or person in [lily, aunt, mom, nora]:   # moonlighting
+        if person.only_normal_employee() or person in [lily, aunt, mom, nora]:   # moonlighting
             person.set_schedule(person.home, the_times = [4])
             for role in [stripclub_stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role]:
                 person.remove_role(role)
@@ -266,7 +266,7 @@ label strip_club_hire_employee_label(the_person):
 
         mc.name "See you at the club."
         return
-    elif the_person.is_employee():
+    elif the_person.only_normal_employee():
         if mc.business.is_open_for_business():
             the_person "What do you mean? I already have a job, right here, right now."
             mc.name "Don't worry, it won't interfere with this job, I just thought you might like to make something extra on the side."

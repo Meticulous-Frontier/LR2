@@ -159,7 +159,7 @@ label hire_new_college_intern_label(the_person):
             $ the_dept = "Marketing"
             $ stat_array = [3,1,2]
             $ skill_array = [1,2,1,1,1]
-            $ forced_opinions = [["market work", renpy.random.randint(1, 2), True]]
+            $ forced_opinions = [["marketing work", renpy.random.randint(1, 2), True]]
         "Graphic Design (Marketing) (disabled)":    #In the future we may have opportunities to recruit interns for these programs.
             pass
         "Psychology (HR)" if len(mc.business.college_interns_HR) < mc.business.max_interns_by_division and mc.business.college_hr_interns_unlocked:

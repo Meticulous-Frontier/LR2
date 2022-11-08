@@ -2,7 +2,7 @@
 
 init 2 python:
     def lazy_morning_crisis_requirement():
-        if mc.is_home() and mc.business.is_weekend() and len(people_in_mc_home()) > 0:
+        if mc.is_home() and mc.business.is_weekend() and __builtin__.len(people_in_mc_home()) > 0:
             return True
         return False
 
@@ -22,6 +22,8 @@ label lazy_morning_crisis_action_label():
     "It's time to get up... but is it really though? It's the weekend. There's probably some things you could get done."
     "But what sounds even better? You roll over and enjoy the comfort of your bed. You know you should get up, do something productive. But wouldn't you be more productive long term, if you got more sleep now?"
     "You finally stop reasoning with yourself and drift back to sleep."
+    # Advance time here to make it daylight for the main event.
+    call advance_time_enhanced(no_events = True, jump_to_game_loop = False) from _call_advance_time_lazy_morning
     $ mc.location.show_background()
     "You aren't sure how long it is, but you are startled awake when your bedroom door suddenly opens."
     the_person "[the_person.mc_title] I have a quick question about... OH!"
@@ -29,7 +31,7 @@ label lazy_morning_crisis_action_label():
     if the_person is mom:
         the_person "I'm sorry honey! I didn't realize you were sleeping in!"
     elif the_person is lily:
-        the_person "What? You're still sleeping? You know the morning is almost over right?"
+        the_person "What? You're still sleeping? You know it's almost noon, right?"
     elif the_person is aunt:
         the_person "I'm sorry, I didn't realize you weren't up yet!"
     elif the_person is cousin:
@@ -206,16 +208,15 @@ label lazy_morning_crisis_action_label():
         $ del climax_controller
         $ del the_choice
     else: #Not slutty, she excuses herself.
-        "She is looking at you pretty intently. You realize you have crazy morning wood. Your cock is making the blanket tent and she is having trouble taking her eyes off of it."
-        mc.name "What do you want?!?"
-        the_person "I'm sorry, I wasn't staring... I mean... Ah!"
+        "She is making a pointed effort to not look your direction. You realize you have crazy morning wood. Your cock is making the blanket tent and she is pretending not to have noticed."
+        mc.name "What do you want?"
+        the_person "Oh, I was just.. I'm sorry for interupting... I mean... Ah!"
         $ the_person.draw_person(position = "walking_away")
-        "[the_person.title] turns and flees your room, leaving you tired and frustrated. She was totally checking you out a little though..."
+        "[the_person.title] turns and flees your room, leaving you tired and frustrated."
         $ the_person.change_slut(2)
         $ mc.change_locked_clarity(10)
         "You try for a bit to get back to sleep but it doesn't work. Instead you get up and start your day."
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
-    call advance_time from _call_advance_time_lazy_morning
     $ clear_scene()
     return

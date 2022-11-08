@@ -282,7 +282,7 @@ init 2:
                                 background "#000080"
                                 xsize 270
 
-                                $ calculated_profit = round(mc.business.get_serum_base_value(starting_serum)-(starting_serum.production_cost/mc.business.batch_size))
+                                $ calculated_profit = __builtin__.round(mc.business.get_serum_base_value(starting_serum)-(starting_serum.production_cost/mc.business.batch_size))
                                 if calculated_profit >= 0:
                                     text "Expected Profit:{color=#98fb98} $[calculated_profit]{/color}" style "serum_text_style"
                                 else:

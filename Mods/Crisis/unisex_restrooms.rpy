@@ -19,9 +19,12 @@ init 1400 python:
     organisation_policies_list.append(Unisex_bathroom_creation_policy)
 
     def unisex_restroom_fantasy_actout_requirement(the_person):
-        if mc.business.is_open_for_business(): #Only trigger if people are in the office.
-            if mc.is_at_work(): #Check to see if the main character is at work
+        if mc.is_at_work(): #Check to see if the main character is at work
+            if mc.business.is_open_for_business(): #Only trigger if people are in the office.
                 return True
+            if mc.business.is_open_for_internship():
+                if the_person.is_at_work():
+                    return True
         return False
 
     def unisex_restroom_gloryhole_wait_requirement():
@@ -30,6 +33,11 @@ init 1400 python:
                 return True
             else:
                 return "You should hire more employees"
+        elif mc.business.is_open_for_internship():
+            if __builtin__.len(mc.business.get_intern_list()) > 3:
+                return True
+            else:
+                return "You should hire more interns"
         else:
             return "The business isn't open!"
         return False
@@ -39,10 +47,14 @@ init 1400 python:
 
 init 2 python:
     def unisex_restroom_crisis_requirement():
-        if __builtin__.len(mc.business.get_employee_list()) > 2: #Have at least 3 employees.
-            if mc.business.is_open_for_business(): #Only trigger if people are in the office.
-                if mc.is_at_work(): #Check to see if the main character is at work
+        if mc.is_at_work():
+            if __builtin__.len(mc.business.get_employee_list()) > 2: #Have at least 3 employees.
+                if mc.business.is_open_for_business(): #Only trigger if people are in the office.
                     return True
+            if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) > 5:
+                if __builtin__.len(mc.business.get_intern_list()) > 2:
+                    if mc.business.is_open_for_internship():
+                        return True
         return False
 
     def gloryhole_get_response(person):    #this function creates a weight list of possible outcomes for the glory hole responses.
@@ -59,8 +71,6 @@ init 2 python:
                 gloryhole_list.append("JoinMe")
             if person.sluttiness > 85:
                 gloryhole_list.append("Anal")
-
-
         # actions based on fetishes (will always be added regardless of sluttiness)
         if person.has_cum_fetish():
             gloryhole_list.append("Blowjob")
@@ -68,13 +78,11 @@ init 2 python:
             gloryhole_list.append("Vaginal")
         if person.has_anal_fetish():
             gloryhole_list.append("Anal")
-
         return get_random_from_list(gloryhole_list)
 
     def get_anon_person(person):        #This function returns an anonymous version of a character.
         anon_person = person.char.copy()
         anon_person.name = "?????"
-
         return anon_person
 
     unisex_restroom_crisis_action = ActionMod("Unisex Restroom", unisex_restroom_crisis_requirement,"unisex_restroom_action_label",
@@ -90,7 +98,6 @@ label unisex_restroom_action_label():
         $ unisex_bathroom_policy_unlock(ran_num + 1)
     else:
         $ ran_num = renpy.random.randint(1, mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0))
-
     if ran_num == 1:
         call unisex_restroom_door_greet_label() from _call_unisex_restroom_greet_call_1
     if ran_num == 2:
@@ -102,7 +109,6 @@ label unisex_restroom_action_label():
             call unisex_restroom_unlock_gloryhole_label() from _call_unisex_restroom_gloryhole_unlock_1
         else:
             call unisex_restroom_gloryhole_option_label() from _call_unisex_restroom_gloryhole_option_1
-
     return
 
 label unisex_restroom_overhear_label():
@@ -120,7 +126,6 @@ label unisex_restroom_overhear_label():
         the_person "So, the other day I was down in production, trying to find some notes on the serums we've been making lately, when suddenly all the coffee I drank that morning hit me."
         the_person "I realized the only women's restroom we have in the whole place is all the way back by HR, on the other side of the building!"
         the_person "I mean, [the_person.mc_title] is the only guy who works here, I wish they would just make both restrooms unisex. I bet the girls in production would appreciate it too!"
-
     "The complaint seems... actually fairly reasonable."
     "There are only two restrooms, one for men and one for women, and they are on opposite sides of the building."
     "It would be a pretty minor investment to convert them into unisex restrooms. Plus, you never know what you might overhear when you happen to be in there..."
@@ -128,11 +133,14 @@ label unisex_restroom_overhear_label():
     return
 
 label unisex_restroom_door_greet_label():   #You have a chance to learn a couple new opinions
-    $ (the_person_one, the_person_two) = get_random_employees(2)
+    if mc.business.is_open_for_business():
+        $ (the_person_one, the_person_two) = get_random_employees(2)
+        "During the workday, you get up and head towards the restroom."
+    else:
+        $ (the_person_one, the_person_two) = get_random_interns(2)
+        "As you work on the weekend, you get up and head towards the restroom."
     if the_person_one is None:
         return
-
-    "During the workday, you get up and head towards the restroom."
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person_one, display_transform = character_center_flipped)
     $ scene_manager.add_actor(the_person_two)
@@ -157,7 +165,6 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     if the_person_two.discover_opinion(overhear_topic):
         "Wow, you can learn all kinds of stuff just hanging out in the bathroom stall, or so it seems..."
     "The girls are still talking but you hear the bathroom door open. Their voices fade away as they exit."
-
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
     $ mc.location.show_background()
     $ del overhear_topic
@@ -168,15 +175,16 @@ label unisex_restroom_door_greet_label():   #You have a chance to learn a couple
     return
 
 label unisex_restroom_sexy_overhear_label():
-    $ (the_person_one, the_person_two) = get_random_employees(2)
+    if mc.business.is_open_for_business():
+        $ (the_person_one, the_person_two) = get_random_employees(2)
+    else:
+        $ (the_person_one, the_person_two) = get_random_interns(2)
     if the_person_one is None:
         return
 
     $ discover_identity = False
     $ anon_char_one = get_anon_person(the_person_one)
-    #$ anon_char_one.name = "?????"
     $ anon_char_two = get_anon_person(the_person_two)
-    #$ anon_char_two.name = "?????"
     $ work_bathroom.show_background()
     "You step into the restroom and walk into one of the stalls."
     "As you are relieving yourself, you hear a couple girls enter the restroom, talking. They seem to be talking about some interesting stuff."
@@ -217,7 +225,6 @@ label unisex_restroom_sexy_overhear_label():
         anon_char_two "... But I [text_one] [text_two], so I'm not sure what to do."
         "Wow, you can learn all kinds of stuff just hanging out in the bathroom stall. If only you knew who it was!"
     "You hear the girls finish up and leave the restroom. You wash your hands and leave as well."
-
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
     $ mc.location.show_background()
     $ del the_person_one
@@ -229,7 +236,10 @@ label unisex_restroom_sexy_overhear_label():
     return
 
 label unisex_restroom_fantasy_overhear_label():
-    $ (the_person_one, the_person_two) = get_random_employees(2)
+    if mc.business.is_open_for_business():
+        $ (the_person_one, the_person_two) = get_random_employees(2)
+    else:
+        $ (the_person_one, the_person_two) = get_random_interns(2)
     if the_person_one is None:
         return
 
@@ -238,9 +248,7 @@ label unisex_restroom_fantasy_overhear_label():
         return
     $ discover_identity = False
     $ anon_char_one = get_anon_person(the_person_one)
-    #$ anon_char_one.name = "?????"
     $ anon_char_two = get_anon_person(the_person_two)
-    #$ anon_char_two.name = "?????"
     $ work_bathroom.show_background()
     "You step into the restroom and walk into one of the stalls."
     "As you are relieving yourself, you hear a couple girls enter the restroom, talking. They seem to be talking about some interesting stuff."
@@ -250,7 +258,7 @@ label unisex_restroom_fantasy_overhear_label():
         anon_char_one "I'm not usually into like... doing things out in the open..."
     else:
         anon_char_one "Well, you know I've always had this fantasy of having sex like... out in front of other people..."
-    "Damn! you like where this conversation is going. You focus and try and figure out who is talking, but it is hard to focus, considering they are talking about sex with you!"
+    "Damn! You like where this conversation is going. You focus and try and figure out who is talking, but it is hard to concentrate, considering they are talking about sex with you!"
     if renpy.random.randint(0,100) < (25 + (mc.focus * 15)):  #base 25% chance, +15% for every point of focus.
         "As they talk, you pick up on subtle voice inflections and personality. It's [the_person_one.title] and [the_person_two.title]!"
         $ discover_identity = True
@@ -282,7 +290,6 @@ label unisex_restroom_fantasy_overhear_label():
     "The girls finish up and leave the restroom, leaving you alone inside."
     if discover_identity:
         "That was some pretty hot storytelling. You should definitely go see [the_person_one.title] later and act it out maybe?"
-
     $ town_relationships.improve_relationship(the_person_one, the_person_two)
     # if we don't have the fantasy actout limited time event for the person, add it to the on_talk_event_list.
     if discover_identity:
@@ -297,6 +304,7 @@ label unisex_restroom_fantasy_overhear_label():
 label unisex_restroom_fantasy_actout_label(the_person):
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person, position = "walking_away")
+
     "You walk up behind [the_person.title]. She's the one you overheard in the restroom that had a fantasy of getting fucked by you in front of the whole office."
     "Should you try and act it out?"
     menu:
@@ -306,7 +314,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
             "You decide to play it safe for now."
             $ scene_manager.clear_scene()
             return
-    "Remembering her words you heard earlier, you walk up behind [the_person.title] and your hands firmly on her hips."
+    "Remembering her words you heard earlier, you walk up behind [the_person.title] and place your hands firmly on her hips."
     the_person "Huh? Oh, [the_person.mc_title]? What are..."
     mc.name "Shhh, just hold still."
     the_person "Why? I don't under... oh my god..."
@@ -342,7 +350,6 @@ label unisex_restroom_fantasy_actout_label(the_person):
     else:
         the_person "Fuck... I need to finish so bad! Why can't I just get off today?"
         $ the_person.change_stats(happiness = -10, love = -5)
-
     $ the_person.review_outfit()
     return
 
@@ -383,7 +390,10 @@ label unisex_restroom_gloryhole_option_label():
     return
 
 label unisex_restroom_use_gloryhole_label():
-    $ the_person = get_random_employees(1)
+    if mc.business.is_open_for_business():
+        $ the_person = get_random_employees(1)
+    else:
+        $ the_person = get_random_interns(1)
     if the_person is None:
         return
     "As you are waiting, you hear someone enter the restroom and walk into the stall next to yours."
@@ -406,7 +416,6 @@ label unisex_restroom_use_gloryhole_label():
         call unisex_restroom_gloryhole_joinme_label(the_person) from _call_gloryhole_joinme_response_1
     else:
         "Why aren't we catching anything here?"
-
     return _return
 
 label unisex_restroom_gloryhole_wait_label():
@@ -427,21 +436,18 @@ label unisex_restroom_gloryhole_wait_label():
 
 label unisex_restroom_gloryhole_handjob_label(the_person):
     $ anon_char = get_anon_person(the_person)
-    #$ anon_char.name = "?????"
     anon_char "Oh... I can't believe..."
     "The tone of voice on the other side of the wall has you a little bit concerned. Maybe this was a bad idea?"
-
     if the_person.has_taboo("touching_penis"):
         anon_char "It's so big, do you mind if I touch it?"
         mc.name "Go for it."
         $ the_person.break_taboo("touching_penis", add_to_log = False)
     else:
         "You are just getting ready to pull back when you feel a soft hand grasp your member and start to stroke it."
-
     $ mc.change_locked_clarity(20)
     "You give an appreciative moan as the soft hand starts to slowly work your cock."
     anon_char "Ohhh... it's so big..."
-    "The hand is warm and soft as it slides up and down your cock. Suddenly you feel it leave you, and you can her the sound of her spitting."
+    "The hand is warm and soft as it slides up and down your cock. Suddenly you feel it leave you, and you can hear the sound of her spitting."
     "A considerably more slippery hand starts to stroke you again. You buck your hips a bit against the sensation."
     "This feels good, you can feel yourself really getting into this. Having no idea who is next door really heightens your arousal."
     "The unknown woman next door rubs her thumb over your tip, spreading your precum over it and then working it back to the shaft."
@@ -452,25 +458,21 @@ label unisex_restroom_gloryhole_handjob_label(the_person):
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person, add_to_log = False)
     "After you finish, she gives you a few extra strokes, drawing out any remaining cum. You feel a pair of lips lightly kiss the tip."
     "You slowly pull back. You grab some toilet paper and wipe your cock off."
-
     # the person is happy and a sluttier (don't log as to preserve anonymity)
     $ the_person.change_stats(slut = 1, max_slut = 50, happiness = 2, add_to_log = False)
-
     $ del anon_char
     return
 
 label unisex_restroom_gloryhole_blowjob_label(the_person):
     $ anon_char = get_anon_person(the_person)
-    #$ anon_char.name = "?????"
     anon_char "Oh! Mmmm, yum..."
     "Well that response certainly sounds promising."
     if the_person.has_taboo("touching_penis"):
         anon_char "Look at that thing, it's huge..."
-        "While talking you feel a soft hand grasp your member, giving it a couple of strokes. You hear some movement, but you aren't sure what she's doing."
+        "While she is talking you feel a soft hand grasp your member, giving it a couple of strokes. You hear some movement, but you aren't sure what she's doing."
         $ the_person.break_taboo("touching_penis", add_to_log = False)
     else:
         "You feel a soft hand grasp your member and give it a couple of strokes. You hear movement coming from the stall next to you but you aren't sure what she's doing."
-
     $ mc.change_locked_clarity(10)
     if the_person.has_taboo("sucking_cock"):
         anon_char "Would you mind, if I gave you a blowjob?"
@@ -479,11 +481,13 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
         $ the_person.break_taboo("sucking_cock", add_to_log = False)
     else:
         "Slowly, you feel a warm, wet tongue circling around the tip of your cock, licking the pre-cum from the tip."
-
     anon_char "Mmmmmm..."
     $ mc.change_locked_clarity(20)
     "A moan rumbles around your dick as the girl on the other side of the wall opens her mouth and slides her mouth down your aching hard on."
-    "One of your employees is on the other side. The warm, wet suction of her lips and tongue feels great."
+    if mc.business.is_open_for_business():
+        "One of your employees is on the other side. The warm, wet suction of her lips and tongue feels great."
+    else:
+        "One of your interns is on the other side. The warm, wet suction of her lips and tongue feels great."
     "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
     "The mysterious mouth pulls off your penis for a second and you feel her tongue sliding up and down your full length."
     "It swirls around the tip for a few moments until the anonymous maw in the neighboring stall opens up and greedily sucks on your shaft again."
@@ -494,37 +498,30 @@ label unisex_restroom_gloryhole_blowjob_label(the_person):
     $ the_person.cum_in_mouth(add_to_record = False)
     $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person, add_to_log = False)
     "She moans in delight as your cream fills her mouth. She eagerly works every last drop from your pulsating prick."
-
     # the person is happy and a sluttier (don't log as to preserve anonymity)
     $ the_person.change_stats(slut = 2, max_slut = 70, happiness = 3, add_to_log = False)
-
     $ del anon_char
     return
 
 label unisex_restroom_gloryhole_vaginal_label(the_person):
     $ anon_char = get_anon_person(the_person)
-    #$ anon_char.name = "?????"
     anon_char "Oh! Just what I needed..."
     #TODO condom check.
     "Sounds like your bathroom stall neighbor is taking the bait."
-
     if the_person.has_taboo("touching_penis"):
         anon_char "It's so big, do you mind if I touch it?"
         mc.name "Go for it."
         $ the_person.break_taboo("touching_penis", add_to_log = False)
     else:
         "You feel a soft hand grasp your member and give it a couple of strokes. You hear movement coming from the stall next to you but you aren't sure what they are doing."
-
     $ mc.change_locked_clarity(10)
     if the_person.has_taboo(["condomless_sex", "vaginal_sex"]):
         anon_char "I really need to feel your cock, but I didn't bring any condoms, do you mind?"
         mc.name "I don't mind, show me what you can do."
         $ the_person.break_taboo("condomless_sex", add_to_log = False)
         $ the_person.break_taboo("vaginal_sex", add_to_log = False)
-
     "You feel her hand hold you rigidly in place as you begin to slowly feel a hot, wet sleeve enveloping your cock."
     "It feels like she is taking you in her pussy! You let out a moan of appreciation."
-
     anon_char "Mmmm, it's so good when it goes in."
     $ mc.change_locked_clarity(30)
     "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the thin wall is in the way."
@@ -550,17 +547,13 @@ label unisex_restroom_gloryhole_vaginal_label(the_person):
         anon_char "All done, Sir!"
     else:
         "You pull out. You grab some toilet paper and wipe your cock off."
-
     # the person is happy and a sluttier (don't log as to preserve anonymity)
     $ the_person.change_stats(slut = 2, max_slut = 80, happiness = 5, add_to_log = False)
-
     $ del anon_char
     return
 
 label unisex_restroom_gloryhole_anal_label(the_person):
     $ anon_char = get_anon_person(the_person)
-    #$ anon_char.name = "?????"
-
     if the_person.has_taboo("touching_penis"):
         anon_char "It's so big, do you mind if I touch it?"
         mc.name "Go for it."
@@ -568,19 +561,16 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     else:
         anon_char "Oh! So hard! I know somewhere I can put that..."
         "Sounds like your bathroom stall neighbor likes what she sees."
-
     $ mc.change_locked_clarity(10)
     "You feel a soft hand grasp your member and give it a couple of strokes. You hear movement coming from the stall next to you but you aren't sure what they are doing."
     "You hear the sound of... was that spitting? Suddenly the hand stroking you is significantly wetter."
     "Similar sounds continue. Whoever it is, she seems to be lubing you up really good with her spit!"
     "It feels like saliva is dripping off your cock now, when you hear more motion coming from the stall."
-
     if the_person.has_taboo(["condomless_sex", "anal_sex"]):
         anon_char "I really need to feel your cock, but I didn't bring any condoms, do you mind?"
         mc.name "I don't mind, show me what you can do."
         $ the_person.break_taboo("condomless_sex", add_to_log = False)
         $ the_person.break_taboo("anal_sex", add_to_log = False)
-
     $ mc.change_locked_clarity(30)
     "You feel her hand hold you rigidly in place as you begin to slowly feel a hot, smooth, fleshy vice slowly swallowing your cock."
     "Shit! It feels like she is sticking you in her ass! She gets about halfway then stops for a moment."
@@ -589,7 +579,10 @@ label unisex_restroom_gloryhole_anal_label(the_person):
     "You press yourself against the wall to try and push yourself as deep as you can. You are almost balls deep, but the damn wall is in the way."
     "You start to thrust a little bit, testing the limits on how far to pull back without pulling out."
     anon_char "Oh fuck it's good. Mmmmm..."
-    "One of your employees is on the other side of that wall, taking your cock in her ass. But who? You have some guesses, based on her voice, but there's no way to know for sure."
+    if mc.business.is_open_for_business():
+        "One of your employees is on the other side of that wall, taking your cock in her ass. But who? You have some guesses, based on her voice, but there's no way to know for sure."
+    else:
+        "One of your interns is on the other side of that wall, taking your cock in her ass. But who? You have some guesses, based on her voice, but there's no way to know for sure."
     "You are thrusting vigorously now. Her ass is so tight, it's like it is trying to milk the cum out of you."
     "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
     anon_char "Oh god don't stop, please don't stop!"
@@ -607,10 +600,8 @@ label unisex_restroom_gloryhole_anal_label(the_person):
         anon_char "All done, Sir!"
     else:
         "You pull out. You grab some toilet paper and wipe your cock off."
-
     # the person is happy and a sluttier (don't log as to preserve anonymity)
     $ the_person.change_stats(slut = 2, max_slut = 90, happiness = 7, add_to_log = False)
-
     $ del anon_char
     return
 
@@ -623,7 +614,6 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
         anon_char "Do you mind if I touch it?"
         mc.name "Go for it."
         $ the_person.break_taboo("touching_penis", add_to_log = False)
-
     $ mc.change_locked_clarity(10)
     "You feel a soft hand begin to stroke you. Her delicate fingers feel great wrapped around your erection."
     "She gives you a few good strokes, but then she stops."
@@ -659,7 +649,6 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
                 mc.name "I don't mind, show me what you can do."
                 $ the_person.break_taboo("condomless_sex", add_to_log = False)
                 $ the_person.break_taboo("vaginal_sex", add_to_log = False)
-
             $ mc.change_locked_clarity(20)
             "You feel her hand hold you rigidly in place as you begin to slowly feel a hot, wet sleeve enveloping your cock."
             "It feels like she is taking you in her pussy! You let out a moan of appreciation."
@@ -670,13 +659,11 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             "It's so hot, not knowing for sure who is on the other side of the wall. You have some guesses, based on her voice, but there's no way to know for sure."
             "You're giving whoever it is good hard thrusts now. Once in a while you thrust a little too hard and your hips ram into the stall wall."
             "The mystery cunt you are fucking feels like it's getting wetter and wetter. The slippery channel feels so good wrapped around you."
-
             "Moaning and panting coming from the other stall is getting urgent now. She must be enjoying this as much as you are!"
             anon_char "Oh god don't stop, please don't stop!"
             "Ha! Stopping was never even an option. You can feel her cunt starting to quiver and twitch. It feels TOO good!"
             "You give several more strong thrusts as you pass the point of no return. You moan as you begin to dump your load inside of her."
             anon_char "Yes. Yes! Oh fuck yes!"
-
             $ the_person.have_orgasm(add_to_log = False)
             $ the_person.cum_in_vagina(add_to_record = False)
             $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person, add_to_log = False)
@@ -688,9 +675,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
                 anon_char "All done, Sir!"
             else:
                 "You pull out. You grab some toilet paper and wipe your cock off."
-
             # the person is happy and a sluttier (don't log as to preserve anonymity)
             $ the_person.change_stats(slut = 2, max_slut = 60, happiness = 5, add_to_log = False)
-
     $ del anon_char
     return

@@ -1,8 +1,10 @@
 ## Late for Work Crisis Mod by Tristimdorion
 init 2 python:
     def late_for_work_requirement():
-        if time_of_day <= 1 and mc.business.get_employee_count() > 2:
-            if mc.business.is_work_day() and mc.is_at_work():
+        if time_of_day <= 1 and mc.is_at_work():
+            if mc.business.is_work_day() and mc.business.get_employee_count() > 2:
+                return True
+            if mc.business.is_open_for_internship() and __builtin__.len(mc.business.get_intern_list()) > 2:
                 return True
         return False
 
@@ -11,15 +13,16 @@ init 2 python:
 
 label late_for_work_action_label():
     #Lets get the girl of interest (exclude Sarah on mondays).
-    $ the_person = get_random_employees(1, exclude_list = [] if day%7 != 0 else [sarah])
+    if mc.business.is_work_day():
+        $ the_person = get_random_employees(1, exclude_list = [] if day%7 != 0 else [sarah])
+    else:
+        $ the_person = get_random_interns(1)
     if the_person is None:
         return
 
     $ mc.change_location(lobby)
     $ mc.location.show_background()
-
     "As you are walking through the main corridor you spot [the_person.possessive_title] rushing through the entrance doors."
-
     if the_person.sluttiness < 40:
         $ the_person.draw_person(position="stand3", emotion="default")
         menu:
@@ -30,7 +33,7 @@ label late_for_work_action_label():
                 mc.name "I don't care what you have to do, but I need you to be here on time. Now get going..."
                 $ the_person.change_stats(obedience = 3, happiness = -2)
 
-            "Punish her for being late" if office_punishment.is_active():
+            "Punish her for being late" if office_punishment.is_active() and mc.business.is_work_day():
                 mc.name "Do you know what time we start here [the_person.title]?"
                 the_person "Sorry [the_person.mc_title], I missed my bus."
                 mc.name "That's not my problem [the_person.title]. I'm going to have to write you up for this."
@@ -61,7 +64,7 @@ label late_for_work_action_label():
                     mc.name "I don't care, next time be on time and make your tits presentable."
                 $ the_person.change_stats(obedience = 3, happiness = -2)
 
-            "Punish her for being late" if office_punishment.is_active():
+            "Punish her for being late" if office_punishment.is_active() and mc.business.is_work_day():
                 mc.name "Do you know what time we start here [the_person.title]?"
                 the_person "I am really sorry [the_person.mc_title]."
                 mc.name "I don't care [the_person.title]. I'm going to have to write you up for this."
@@ -126,7 +129,7 @@ label late_for_work_action_label():
         $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] rushes to the ladies room to clean up."
         $ upper_clothing = None
-    elif persistent.show_ntr and the_person.sluttiness > 80 and not the_person.has_role(girlfriend_role): # NTR Enabled very slutty single girls
+    elif persistent.show_ntr and the_person.sluttiness > 80 and not the_person.has_role(girlfriend_role) and mc.business.is_work_day(): # NTR Enabled very slutty single girls
         $ the_person.cum_on_face(add_to_record = False)
         $ the_person.cum_on_tits(add_to_record = False)
         $ the_person.draw_person(position="stand3", emotion="default")
@@ -142,7 +145,7 @@ label late_for_work_action_label():
                 else:
                     the_person "Of course [the_person.mc_title]."
 
-            "Punish her for inappropriate behaviour" if office_punishment.is_active():
+            "Punish her for inappropriate behaviour" if office_punishment.is_active() and mc.business.is_work_day():
                 mc.name "That's not how we do business around here [the_person.title]."
                 the_person "Really, I thought..."
                 mc.name "I don't care [the_person.title]. I'm going to have to write you up for this."
@@ -204,7 +207,10 @@ label late_for_work_action_label():
         "You feel yourself roll you eyes for a moment involuntarily."
         the_person "I just had to... ummm... my car had a... a thing wrong with it!"
         mc.name "Oh? What was it doing?"
-        the_person "It was... Look I'm sorry I'm late, it won't happen again. Please don't write me up!"
+        if mc.business.is_work_day():
+            the_person "It was... Look I'm sorry I'm late, it won't happen again. Please don't write me up!"
+        else:
+            the_person "It was... Look I'm sorry I'm late, it won't happen again."
         $ the_person.draw_person(position="stand4", emotion="happy")
         "She gives you a big fake smile and strikes a pose."
         the_person "I could do something... you know... to make it up to you!"
@@ -222,7 +228,7 @@ label late_for_work_action_label():
                 mc.name "Well, ok, now quickly run along [the_person.title]."
                 $ the_person.change_stats(obedience = -2, happiness = 2)
 
-            "Punish her for trying to seduce you" if office_punishment.is_active():
+            "Punish her for trying to seduce you" if office_punishment.is_active() and mc.business.is_work_day():
                 mc.name "Do you know what time we start here [the_person.title]?"
                 the_person "I am really sorry [the_person.mc_title]."
                 mc.name "I don't care [the_person.title]. I'm going to have to write you up for this."
@@ -251,7 +257,6 @@ label late_for_work_action_label():
                 $ the_person.outfit.restore_all_clothing()
                 $ the_person.draw_person()
                 "She quickly brings her clothing in order."
-
 
             "Make it up to me":
                 mc.name "If you want to make it up to me, get on your knees."

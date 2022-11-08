@@ -1,28 +1,48 @@
 ## Coffee Break Crisis Mod by Tristimdorion
 init 2 python:
     def coffee_break_requirement():
-        if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-            if not mc.business.is_weekend() and mc.is_at_work():
+        if mc.is_at_work(): # only during morning afternoon or evening
+            if mc.business.is_open_for_business():
                 return __builtin__.len([x for x in mc.business.get_employee_list() if x.effective_sluttiness() > 20]) >= 3
+            if mc.business.is_open_for_internship():
+                return __builtin__.len([x for x in mc.business.get_intern_list() if x.effective_sluttiness() > 20]) >= 3
         return False
 
     coffee_break_action = ActionMod("Coffee Break", coffee_break_requirement, "coffee_break_action_label",
         menu_tooltip = "A group of employees is having a coffee break.", category = "Business", is_crisis = True)
 
 label coffee_break_action_label():
-    $ (person_one, person_two, person_three) = get_random_employees(3, slut_required = 20)
+    if mc.business.is_open_for_business():
+        $ word = "employee"
+        if __builtin__.len([x for x in mc.business.get_employee_list() if x.effective_sluttiness() > 60]) >= 2:
+            $ (person_two, person_three) = get_random_employees(2, slut_required = 61)
+        elif __builtin__.len([x for x in mc.business.get_employee_list() if x.effective_sluttiness() > 40]) >= 2:
+            $ (person_two, person_three) = get_random_employees(2, slut_required = 41)
+        else:
+            $ (person_two, person_three) = get_random_employees(2, slut_required = 20)
+        $ person_one = get_random_employees(1, exclude_list = [person_two, person_three], slut_required = 20)
+    else:
+        $ word = "intern"
+        if __builtin__.len([x for x in mc.business.get_intern_list() if x.effective_sluttiness() > 60]) >= 2:
+            $ (person_two, person_three) = get_random_interns(2, slut_required = 61)
+        elif __builtin__.len([x for x in mc.business.get_intern_list() if x.effective_sluttiness() > 40]) >= 2:
+            $ (person_two, person_three) = get_random_interns(2, slut_required = 41)
+        else:
+            $ (person_two, person_three) = get_random_interns(2, slut_required = 20)
+        $ person_one = get_random_interns(1, exclude_list = [person_two, person_three], slut_required = 20)
     if not (isinstance(person_one, Person) and isinstance(person_two, Person) and isinstance(person_three, Person)):
         return
 
 
     $ mc.change_location(lobby)
     $ mc.location.show_background()
-    "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
+    "As you are walking around the office, you see several [word]s at the coffee machine. They haven't noticed you, but you can hear what they are saying."
     call coffee_break_chit_chat_label(person_one, person_two, person_three) from _call_coffee_break_chit_chat_label_1
     python:     # Release variables
         del person_one
         del person_two
         del person_three
+        del word
         mc.location.show_background()
     return
 
@@ -120,9 +140,9 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
 
                     $ town_relationships.improve_relationship(person_two, person_three)
 
-                    "Amazing you just fucked two of your employees, and are left wondering if other girls in your company might also be up for this."
+                    "Amazing you just fucked two of your [word]s, and are left wondering if other girls in your company might also be up for this."
 
-                "Punish them for inappropriate behaviour" if office_punishment.is_active():
+                "Punish them for inappropriate behaviour" if office_punishment.is_active() and mc.business.is_open_for_business():
                     mc.name "[person_three.title], [person_two.title], this is completely inappropriate, even if you're on your break."
                     mc.name "I don't have any choice but to record this for disciplinary action later."
                     $ person_three.add_infraction(Infraction.inappropriate_behaviour_factory())

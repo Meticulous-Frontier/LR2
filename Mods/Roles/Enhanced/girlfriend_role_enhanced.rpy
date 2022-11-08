@@ -56,10 +56,8 @@ init 2 python:
         menu_tooltip = "Take your girlfriend out to shop for some exciting underwear to wear for you.")
 
     girlfriend_wakeup_spooning = Action("Spooning wakeup", girlfriend_wakeup_spooning_requirement, "girlfriend_wakeup_spooning_label")
-    girlfriend_wakeup_jealous_sister = Action("Jealous wakeup", girlfriend_wakeup_jealous_sister_requirement, "girlfriend_wakeup_jealous_sister_label")
 
     girlfriend_morning_action_list.append(girlfriend_wakeup_spooning)
-    girlfriend_morning_action_list.append(girlfriend_wakeup_jealous_sister)
 
     girlfriend_quit_dikdok_action = Action("Quit DikDok", girlfriend_quit_dikdok_requirement, "girlfriend_quit_dikdok_label",
         menu_tooltip = "Ask your girlfriend to stop showing herself off on DikDok.")

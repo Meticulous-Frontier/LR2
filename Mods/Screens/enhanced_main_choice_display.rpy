@@ -100,6 +100,10 @@ init 2 python:
                     mi.return_value = item[1]
 
             if isinstance(item,Person): #It's a person. Format it for a person list.
+                # Pre-load early
+                if not (renpy.mobile or renpy.android): # don't load person on mobile
+                    renpy.invoke_in_thread(mi.preload)
+                
                 info = []
                 if item.has_exact_role(harem_role):
                     info.append("{image=harem_token_small}")
@@ -138,8 +142,6 @@ init 2 python:
                 mi.display_scale = scale_person(item.height)
                 if draw_person_previews:
                     mi.display_func = item.build_person_displayable
-                if not (renpy.mobile or renpy.android): # don't load person on mobile
-                    renpy.invoke_in_thread(mi.preload)
 
             if isinstance(item, Action):
                 mi.title = ""

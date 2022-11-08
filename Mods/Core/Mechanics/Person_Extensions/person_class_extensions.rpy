@@ -1645,7 +1645,7 @@ init -1 python:
             return not self.job.schedule.get_destination() is None
 
         # special handling for unique characters working at stripclub (use roles since unique chars only get role instead of job)
-        if self.has_role([stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]) \
+        if self.is_strip_club_employee() \
             and self.location in [strip_club, bdsm_room]:
                 return True
 
@@ -1790,6 +1790,14 @@ init -1 python:
         return self.has_role(employee_role)
     Person.is_employee = is_employee
 
+    def is_strip_club_employee(self):
+        return get_strip_club_foreclosed_stage() >= 5 and self.has_role([stripper_role, stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role])
+    Person.is_strip_club_employee = is_strip_club_employee
+
+    def only_normal_employee(self):
+        return self.is_employee() and not self.is_strip_club_employee()
+    Person.only_normal_employee = only_normal_employee
+
     def has_role_enhanced(self, role):
         if isinstance(role, basestring):
             return any(x for x in self.special_role if x.role_name == role) \
@@ -1908,7 +1916,7 @@ init -1 python:
             # run original function
             result = org_func(person)
             # run extension code
-            if result and day%7 == 4 and casual_friday_uniform_policy.is_active():
+            if result and day%7 == 4 and casual_friday_uniform_policy.is_active() and not person.is_strip_club_employee():
                 result = False
             if person.is_at_work() and person.job == doctor_job:
                 result = True # force True for doctor
