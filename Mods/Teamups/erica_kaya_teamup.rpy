@@ -77,7 +77,6 @@ init 2 python:
         #     advance_time = True)
         kaya_erica_teamup.compile_scenes(kaya_erica_teamup)
 
-
 label kaya_erica_teamup_action_label(the_person):
     $ show_university_study_room_background()
     call progression_scene_label(kaya_erica_teamup, [kaya, erica]) from _erica_kaya_teamup_scene_call_test_02
@@ -251,7 +250,7 @@ label kaya_erica_teamup_intro_3(the_group):
 label kaya_erica_teamup_intro_4(the_group):
     "You head to the university. It is Tuesday night, and [erica.title] and [kaya.possessive_title] are planning a study night here."
     "Study sessions with the two college girls are incredible. When you finish studying, the threesome afterwords makes the whole session worth it."
-    "[erica.title] and her fit young body and [kaya.title]'s deliciously dark skin has you fantasizing about it as you walk into the building."
+    "[erica.title] and her fit young body and [kaya.title]'s deliciously dark skin have you fantasizing about it as you walk into the building."
     "The girls have a room they usually use for their study sessions, so you swing by and find them."
     $ scene_manager = Scene()
     $ scene_manager.add_actor(kaya, display_transform = character_center_flipped, position = "sitting")
@@ -330,7 +329,6 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
             kaya "I don't have anything to take off though."
             mc.name "Hmm... maybe we need to come up with something more punishing if you are showing up to study time already naked?"
             $ kaya.change_slut(2, 40)
-
     mc.name "Alright, [erica.title], your first question."
     call kaya_erica_teamup_question_label(erica) from _kaya_erica_teamup_strip_question_02
     if not _return:
@@ -349,7 +347,6 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
             erica "I don't have anything to take off."
             mc.name "Hmm... maybe we need to come up with something more punishing if you are showing up to study time already naked?"
             $ erica.change_slut(2, 40)
-
     mc.name "Alright, on to the second round of questions."
     call kaya_erica_teamup_question_label(kaya) from _kaya_erica_teamup_strip_question_03
     if not _return:
@@ -368,7 +365,6 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
             kaya "I don't have anything to take off though."
             mc.name "Hmm... maybe we need to come up with something more punishing if you are already naked?"
             $ kaya.change_slut(2, 40)
-
     mc.name "Alright, [erica.title], next question."
     call kaya_erica_teamup_question_label(erica) from _kaya_erica_teamup_strip_question_04
     if not _return:
@@ -387,7 +383,6 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
             erica "I don't have anything to take off."
             mc.name "Hmm... maybe we need to come up with something more punishing if you are already naked?"
             $ erica.change_slut(2, 40)
-
     mc.name "Alright, on to the final round of questions."
     call kaya_erica_teamup_question_label(kaya) from _kaya_erica_teamup_strip_question_05
     if not _return:
@@ -406,7 +401,6 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
             kaya "I don't have anything to take off though."
             mc.name "Hmm... maybe we need to come up with something more punishing if you are already naked?"
             $ kaya.change_slut(2, 40)
-
     mc.name "Alright, [erica.title], last question."
     call kaya_erica_teamup_question_label(erica) from _kaya_erica_teamup_strip_question_06
     if not _return:
@@ -425,7 +419,6 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
             erica "I don't have anything left to take off!"
             mc.name "Hmm... maybe we need to come up with something more punishing if you are already naked?"
             $ erica.change_slut(2, 40)
-
     "Finished with your questions, you have a pretty good idea of where to direct their study time."
     $ kaya.change_stats(happiness = 2, love = 2, max_love = 40)
     $ erica.change_stats(happiness = 2, love = 2, max_love = 40)
@@ -466,7 +459,6 @@ label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
         $ kaya.change_slut(1, 60)
         $ mc.change_locked_clarity(20)
         "As you spank her, you turn to [erica.possessive_title]."
-
     mc.name "Alright, [erica.title], your first question."
     call kaya_erica_teamup_question_label(erica, active_punishment = previous_punished, punished_person = kaya) from _kaya_erica_teamup_spank_question_02
     if not _return:
@@ -494,7 +486,6 @@ label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
             $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
             "[kaya.title] takes her seat."
         $ previous_punished = False
-
     mc.name "Alright, on to the second round of questions."
     call kaya_erica_teamup_question_label(kaya, active_punishment = previous_punished, punished_person = erica) from _kaya_erica_teamup_spank_question_03
     if not _return:
@@ -522,8 +513,6 @@ label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
             $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
             "She takes her seat."
         $ previous_punished = False
-
-
     mc.name "Alright, [erica.title], next question."
     call kaya_erica_teamup_question_label(erica, active_punishment = previous_punished, punished_person = kaya) from _kaya_erica_teamup_spank_question_04
     if not _return:
@@ -551,7 +540,6 @@ label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
             $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
             "She takes her seat."
         $ previous_punished = False
-
     mc.name "Alright, on to the final round of questions."
     call kaya_erica_teamup_question_label(kaya, active_punishment = previous_punished, punished_person = erica) from _kaya_erica_teamup_spank_question_05
     if not _return:
@@ -580,8 +568,6 @@ label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
             $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
             "She takes her seat."
         $ previous_punished = False
-
-
     mc.name "Alright, [erica.title], last question."
     call kaya_erica_teamup_question_label(erica, active_punishment = previous_punished, punished_person = kaya) from _kaya_erica_teamup_spank_question_06
     if not _return:
@@ -613,7 +599,6 @@ label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
             $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
             "She takes her seat."
         $ previous_punished = False
-
     "Finished with your questions, you have a pretty good idea of where to direct their study time."
     $ kaya.change_stats(happiness = 2, love = 2, max_love = 40)
     $ erica.change_stats(happiness = 2, love = 2, max_love = 40)
@@ -639,7 +624,6 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
     "You unzip your pants and pull out your cock, already hard from the anticipation."
     mc.name "Okay, [kaya.title], here we go."
     $ previous_punished = False
-
     call kaya_erica_teamup_question_label(kaya) from _kaya_erica_teamup_oral_question_01
     if not _return:
         kaya "Oh no! Okay, I guess I'm first up..."
@@ -654,7 +638,6 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
         $ mc.change_locked_clarity(40)
         $ kaya.increase_opinion_score("giving blowjobs", weighted = True)
         "You turn to [erica.possessive_title]."
-
     mc.name "Alright, [erica.title], your first question."
     call kaya_erica_teamup_question_label(erica, active_punishment = previous_punished, punished_person = kaya) from _kaya_erica_teamup_oral_question_02
     if not _return:
@@ -682,7 +665,6 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
             call kaya_erica_teamup_blowjob_condition() from _kaya_erica_teamup_oral_debrief_02
             $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
         $ previous_punished = False
-
     mc.name "Alright, on to the second round of questions."
     call kaya_erica_teamup_question_label(kaya, active_punishment = previous_punished, punished_person = erica) from _kaya_erica_teamup_oral_question_03
     if not _return:
@@ -710,8 +692,6 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
             call kaya_erica_teamup_blowjob_condition() from _kaya_erica_teamup_oral_debrief_04
             $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
         $ previous_punished = False
-
-
     mc.name "Alright, [erica.title], next question."
     call kaya_erica_teamup_question_label(erica, active_punishment = previous_punished, punished_person = kaya) from _kaya_erica_teamup_oral_question_04
     if not _return:
@@ -740,8 +720,6 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
             call kaya_erica_teamup_blowjob_condition() from _kaya_erica_teamup_oral_debrief_06
             $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
         $ previous_punished = False
-
-
     mc.name "Alright, on to the final round of questions."
     call kaya_erica_teamup_question_label(kaya, active_punishment = previous_punished, punished_person = erica) from _kaya_erica_teamup_oral_question_05
     if not _return:
@@ -770,8 +748,6 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
             call kaya_erica_teamup_blowjob_condition() from _kaya_erica_teamup_oral_debrief_08
             $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
         $ previous_punished = False
-
-
     mc.name "Alright, [erica.title], last question."
     call kaya_erica_teamup_question_label(erica, active_punishment = previous_punished, punished_person = kaya) from _kaya_erica_teamup_oral_question_06
     if not _return:
@@ -849,7 +825,6 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
         kaya "I know, I just couldn't let you go home like that! It looked so painful!"
         $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
         "[kaya.possessive_title] slides back in her seat."
-
     "Finished with your questions, you have a pretty good idea of where to direct their study time."
     $ kaya.change_stats(happiness = 2, love = 2, max_love = 40)
     $ erica.change_stats(happiness = 2, love = 2, max_love = 40)
@@ -917,7 +892,6 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
     else:
         erica "What!?! Are you sure?"
         mc.name "Yes, I am certain."
-
     "Alright, quiz time is over, now it's time for fun."
     if correct_count == 0:
         "You shake your head. They didn't get a single question right."
@@ -952,7 +926,6 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
         "Finished for tonight, you decide to put your cock away while [erica.possessive_title] and [kaya.possessive_title] get up."
         $ scene_manager.update_actor(kaya, position="stand3", display_transform = character_center_flipped)
         $ scene_manager.update_actor(erica, position = "stand4", display_transform = character_right)
-
     elif correct_count == 2:
         mc.name "Not bad. You got half of them right. But by the rules, you are both still mine for the night."
         erica "Oh boy!"
@@ -1019,7 +992,6 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
         "Finished for tonight, you decide to put your cock away while [erica.possessive_title] and [kaya.possessive_title] get up."
         $ scene_manager.update_actor(kaya, position="stand3", display_transform = character_center_flipped)
         $ scene_manager.update_actor(erica, position = "stand4", display_transform = character_right)
-
     erica "Wow, that was a great session. Thanks, [erica.mc_title]!"
     kaya "Yes! Thank you so much, I feel like this has been a big help, and it was fun too!"
     mc.name "You're talking about the study session... right?"
@@ -1261,7 +1233,6 @@ label kaya_erica_teamup_question_label(the_person, active_punishment = False, pu
                     "When you finish stating the question, [the_person.title] gives you a smirk and easily comes up with the correct answer."
                     mc.name "That's correct."
                     return True
-
         "Give her a tough question":
             if active_punishment and mc.arousal >= 100 and kaya_erica_teamup.get_stage() == 3:
                 "You try to come up with a fair question, but the soft lips of [punished_person.possessive_title] are too hard to ignore any longer."
@@ -1330,7 +1301,6 @@ label kaya_erica_teamup_question_label(the_person, active_punishment = False, pu
             "[the_person.title] immediately gives you the correct answer."
             mc.name "That's correct."
             return True
-
     return true
 
 label kaya_erica_teamup_spank_ass_condition(the_person, spank_count):
@@ -1345,7 +1315,6 @@ label kaya_erica_teamup_spank_ass_condition(the_person, spank_count):
             "[the_person.possessive_title]'s ass glows bright red, despite her dark skin."
             "She whimpers and trembles when her spanking is complete."
             mc.name "Maybe next week you'll actually study, unless you like getting your ass whipped like this?"
-
     elif the_person.skin == "black": #TODO three variants all base on the_person.skin for serum alterations
         if spank_count == 1:
             "[the_person.possessive_title]'s ass shows just the lightest hint of pink on her dark skin."
@@ -1357,7 +1326,6 @@ label kaya_erica_teamup_spank_ass_condition(the_person, spank_count):
             "[the_person.possessive_title]'s ass glows bright red, despite her dark skin."
             "She whimpers and trembles when her spanking is complete."
             mc.name "Maybe next week you'll actually study, unless you like getting your ass whipped like this?"
-
     else:
         if spank_count == 1:
             "[the_person.possessive_title]'s tight ass shows just the lightest hint of pink."
@@ -1409,5 +1377,4 @@ label kaya_erica_teamup_blowjob_condition(inc_mouth = False, final = False):
         else:
             "You long for another mouth to take over and finish you off."
             "It is obvious just by looking at it that whoever gets the next question wrong is probably going to get a mouthful of your cum."
-
     return
