@@ -75,13 +75,22 @@ init 1310 python:
     )
     uniform_policies_list.append(creative_skimpy_uniform_policy)
 
-    commando_uniform_policy = Policy(
-        name = "Uniform Commando Policy",
-        cost = 10000,
-        desc = "Employees are no longer allowed to wear bras or panties with their uniforms.",
+    dress_code_policy = Policy(
+        name = "Dress Code",
+        cost = 500,
+        desc = "Employees are required to abide by a dress code. Personal outfits worn to work may not exceed uniform sluttiness limits.",
         toggleable = True,
-        own_requirement = corporate_enforced_nudity_policy,
-        dependant_policies = corporate_enforced_nudity_policy
+        own_requirement = casual_uniform_policy
+    )
+    uniform_policies_list.append(dress_code_policy)
+
+    commando_uniform_policy = Policy(
+        name = "Commando Dress Code Policy",
+        cost = 10000,
+        desc = "Unless required as part of a uniform, employees are forbidden from wearing bras or panties.",
+        toggleable = True,
+        own_requirement = [corporate_enforced_nudity_policy, dress_code_policy],
+        dependant_policies = dress_code_policy
     )
     uniform_policies_list.append(commando_uniform_policy)
 
