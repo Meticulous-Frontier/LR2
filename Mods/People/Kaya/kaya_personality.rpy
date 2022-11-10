@@ -42,6 +42,21 @@ label kaya_introduction(the_person):
     return
 
 label kaya_greetings(the_person):
+    if kaya.event_triggers_dict.get("share_news_day", 0) > day:
+        the_person "Sorry, I can't talk right now."
+        if kaya.event_triggers_dict.get("brush_off", 0) == 0:
+            $ kaya.event_triggers_dict["brush_off"] = 0
+        $ kaya.event_triggers_dict["brush_off"] += 1
+        if kaya.event_triggers_dict.get("brush_off", 0)%4 < 1:
+            "Maybe another time"
+        elif kaya.event_triggers_dict.get("brush_off", 0)%4 < 2:
+            "She seems busy."
+        elif kaya.event_triggers_dict.get("brush_off", 0)%4 < 3:
+            "Weird, something might be going on."
+        else:
+            "Should you be worried about this?"
+        $ clear_scene()
+        $ jump_game_loop()
     if the_person.is_at_work():
         if the_person.love < 0:
             the_person "Back again? What do you want this time?"
@@ -208,7 +223,6 @@ label kaya_sex_responses_anal(the_person):
             "She struggles to catch her breath."
             the_person "... I can't believe you might make me cum!"
     return
-
 
 label kaya_climax_responses_foreplay(the_person):
     if the_person.sluttiness > 50:
@@ -810,6 +824,7 @@ label kaya_flirt_response_text(the_person):
 #         the_person "Do you have a condom? You're going to have to put one on."
 #     return
 #
+
 label kaya_condom_ask(the_person):
     if the_person.on_birth_control:
         the_person "Hey, do you think you should put on a condom?"
@@ -1788,12 +1803,10 @@ label kaya_sleepover_herplace_response(the_person): #Spending the night at her p
         the_person "You don't need the wine. We can fuck whenever you get there!"
     return
 
-
 label kaya_sleepover_yourplace_sex_start(the_person): #Right before sexy times at your place
     "[the_person.title] slowly walks over to you, purposefully exaggerating her hip movements with each step."
     the_person "Thanks... you ready for some fun?"
     return
-
 
 label kaya_sleepover_herplace_sex_start(the_person): #Right before sexy times at her place
     the_person "Mmm... what do you say we stay in and just cuddle tonight?"
@@ -1808,7 +1821,6 @@ label kaya_sleepover_impressed_response(the_person):  #If you've made her cum a 
     "[the_person.title] lies down in bed and catches her breath."
     the_person "I think I can keep going... I'm gonna be sore in the morning though!"
     return
-
 
 label kaya_sleepover_good_response(the_person):  #If you've made her cum
     the_person "Ahhh, that was nice..."
