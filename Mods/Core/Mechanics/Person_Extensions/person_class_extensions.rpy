@@ -1900,21 +1900,30 @@ init -1 python:
 
     Person.is_wearing_uniform = person_is_wearing_uniform
 
-    def person_should_wear_uniform_extended(org_func):
-        def should_wear_uniform_wrapper(person):
-            # run original function
-            result = org_func(person)
-            # run extension code
-            if result and day%7 == 4 and casual_friday_uniform_policy.is_active() and not person.is_strip_club_employee():
-                result = False
-            if person.is_at_work() and person.job == doctor_job:
-                result = True # force True for doctor
-            return result
+    def person_should_wear_uniform_enhanced(self):
+            if not self.is_at_work():  # quick exit
+                return False
 
-        return should_wear_uniform_wrapper
+            if self.event_triggers_dict.get("forced_uniform", False):
+                return True
+            
+            wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
+            if wardrobe is None:
+                return False
 
-    # wrap up the should_wear_uniform function
-    Person.should_wear_uniform = person_should_wear_uniform_extended(Person.should_wear_uniform)
+            if (self.is_employee() or self.is_intern()):
+                # Check for uniform or dress code
+                if  (wardrobe.get_count() > 0 or dress_code_policy.is_active()):
+                    # Casual fridays for employees only
+                    if not (day%7 == 4 and casual_friday_uniform_policy.is_active()):
+                        return True
+            # Non-employees
+            else:
+                return True # Everybody else wears a uniform while at work
+
+            return False
+
+    Person.should_wear_uniform = person_should_wear_uniform_enhanced
 
     @property
     def current_planned_outfit(self):
@@ -2003,40 +2012,6 @@ init -1 python:
         return
 
     Person.apply_planned_outfit = apply_planned_outfit
-
-    def person_wear_uniform(self):
-        if self.planned_uniform:    # quick exit, use planned uniform
-            self.apply_outfit(self.planned_uniform)
-            return
-
-        if self.event_triggers_dict.get("forced_uniform", False):
-            uniform = self.event_triggers_dict.get("forced_uniform").get_copy()
-        else:
-            uniform_wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
-            if uniform_wardrobe:
-                uniform = uniform_wardrobe.decide_on_uniform(self)
-            else: # we have no valid wardrobe, pick an outfit from wardrobe as uniform
-                uniform = self.wardrobe.decide_on_outfit2(self)
-
-            if uniform and self.is_employee():  # only apply policies for employees
-                if not creative_colored_uniform_policy.is_active() and personal_bottoms_uniform_policy.is_active():
-                    (uniform, swapped) = WardrobeBuilder(self).apply_bottom_preference(self, uniform)
-                elif creative_colored_uniform_policy.is_active():
-                    uniform = WardrobeBuilder(self).personalize_outfit(uniform, max_alterations = 2, swap_bottoms = personal_bottoms_uniform_policy.is_active(), allow_skimpy = creative_skimpy_uniform_policy.is_active())
-
-                if commando_uniform_policy.is_active():
-                    for item in [x for x in uniform.get_upper_ordered() if x.underwear]:
-                        uniform.remove_clothing(item)
-                    for item in [x for x in uniform.get_lower_ordered() if x.underwear]:
-                        uniform.remove_clothing(item)
-
-            if uniform and self.job == doctor_job:  # add lab coat for doctors
-                uniform.add_upper(lab_coat.get_copy(), colour_white)
-
-        self.set_uniform(uniform, True)
-        return
-
-    Person.wear_uniform = person_wear_uniform
 
     def person_is_wearing_uniform_extended(org_func):
         def is_wearing_uniform_wrapper(person):
@@ -2661,9 +2636,7 @@ init -1 python:
 #Intern functions
 
     def is_intern(self):
-        if self.has_role(college_intern_role):
-            return True
-        return False
+        return "college_intern_role" in globals() and self.has_role(college_intern_role)
     Person.is_intern = is_intern
 
 ##### Roleplay functions. Used in scenarios where MC is roleplaying with someone, EG, girlfriend
