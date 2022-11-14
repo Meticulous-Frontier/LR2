@@ -2801,6 +2801,19 @@ init -1 python:
         else:
             return day
 
+    def person_story_event_ready(self, dict_key):
+        if self.days_since_event("story_event") < TIER_1_TIME_DELAY:        #In general, we want to keep tier 1 between all events with a certain person
+            return False
+        check_key = dict_key + "_event"
+        if self.days_since_event(check_key) >= TIER_2_TIME_DELAY:           #Events of the same type should be spaced out a little further
+            return True
+        return False
+
+    def person_story_event_log(self, dict_key):
+        self.set_event_day(dict_key + "_event")
+        self.set_event_day("story_event")
+        return
+
     def person_string_since_event(self, dict_key, set_if_none = True): #Returns a string describing how long it has been since an event
         if self.days_since_event(dict_key) < 1:
             return "earlier"
@@ -2827,4 +2840,6 @@ init -1 python:
     Person.set_event_day = person_set_event_day
     Person.get_event_day = person_get_event_day
     Person.days_since_event = person_days_since_event
+    Person.story_event_ready = person_story_event_ready
+    Person.story_event_log =  person_story_event_log
     Person.string_since_event = person_string_since_event
