@@ -239,8 +239,12 @@ label ashley_intro_label():
     the_person "You see, it's my sister. She just graduated from college, but is having trouble finding work in her degree. She's had to move in with me because she can't find work!"
     the_person "She's really smart, but kind of wild. It has been hard for her to get through interviews."
     mc.name "What is her degree in?"
-    the_person "It's in Forensic Chemisty. Look, I know this isn't going to be her final career, but having that first real job experience would really help her get a career started."
+    the_person "She actually just finished her nursing certification and pre-med degree, but is taking a year off before returning to school."
+    mc.name "She's a nurse and... she can't find work?"
+    the_person "Errr, well she had a little incident at the hospital with an HR issue..."
+    the_person "Look, I know that this won't be her final job, but having something to help fill in the gaps would be huge for her."
     the_person "I brought her resume, will you at least take a look at it? I think she would be great over in production."
+    the_person "And it would be a huge favor for me!"
     menu:
         "Take a look":
             pass
@@ -331,18 +335,16 @@ label ashley_first_talk_label(the_person):
     "She looks at you and smiles."
     the_person "Hello! So you're the guy my sister won't stop going on and on about. Nice to meet you."
     mc.name "Ah, yes I supposed that would be me.."
-    the_person "Thank you for the opportunity. I appreciate the work, especially in a chemistry related field, it will really help my job prospects in the future."
+    the_person "Thank you for the opportunity. I appreciate the work, especially in a pharma related field, it will really help my job prospects in the future."
     mc.name "Of course, [stephanie.fname] is a good friend. Do you go by [the_person.fname]? Or something else?"
     $ the_person.set_title(the_person.name)
     $ the_person.set_possessive_title("Your quiet employee")
     $ the_person.set_mc_title(mc.name)
     the_person "[the_person.title] is fine..."
     mc.name "[the_person.title] it is then."
-    "You chit chat with [the_person.title] for a minute, but she speaks in short, one- or two-word replies. She seems very reserved."
-    "Maybe she is just shy? You decide to let her get back to work."
     $ ashley.event_triggers_dict["intro_complete"] = True
     $ ashley.add_unique_on_room_enter_event(ashley_room_excitement_overhear)
-    $ ashley.add_role(prod_assistant_role)
+    $ ashley.special_role.insert(0, prod_assistant_role)
     $ mc.business.prod_assistant = ashley
     $ ashley.add_unique_on_room_enter_event(mc_serum_intro)
     return
@@ -1726,8 +1728,6 @@ label ashley_room_warming_up_label(the_person):
     return
 
 
-
-
 label ashley_mandatory_ask_about_porn_label():
     "You've had some time to think about [ashley.possessive_title], since you went on your date and discovered she was in a porn video unwittingly."
     "She seems to have warmed up to you enough; you decide that maybe it is the right time to talk to her about it."
@@ -1817,11 +1817,6 @@ label ashley_stephanie_arrange_relationship_label(the_person):
     $ ashley.add_unique_on_room_enter_event(ashley_stephanie_progression_scene_action)
     call advance_time from _call_advance_ashley_arrangement_01
     return
-
-
-
-
-
 
 
 label ashley_clothes_shopping_label(the_person):

@@ -6,6 +6,7 @@ init 1 python:
     #Action List
     mc_serum_intro = Action("Discover MC Serums",mc_serum_intro_requirement,"mc_serum_intro_label")
     mc_serum_timeout = Action("Serums runout",mc_serum_timeout_requirement,"mc_serum_timeout_label")
+    mc_serum_review_intro = Action("Serum Setup",mc_serum_review_intro_requirement,"mc_serum_review_intro_label")
     mc_serum_review = Action("Review Personal Serums",mc_serum_review_requirement,"mc_serum_review_label", menu_tooltip = "Review your personal serum options, research progress, and refresh your dose.")
     prod_assistant_essential_oils_intro = Action("Essential Oils Intro",prod_assistant_essential_oils_intro_requirement,"prod_assistant_essential_oils_intro_label")
     quest_essential_oils_research_start = Action("Essential Oil Research", quest_essential_oils_research_start_requirement, "quest_essential_oils_research_start_label")
@@ -33,7 +34,12 @@ init -1 python:
         return False
 
     def mc_serum_timeout_requirement():
-        if mc.business.days_since_event("prod_assistant_advance") > get_mc_serum_duration():
+        if mc.business.days_since_event("prod_assistant_advance") > TIER_1_TIME_DELAY:
+            return True
+        return False
+
+    def mc_serum_review_intro_requirement(the_person):
+        if mc.business.is_open_for_business():
             return True
         return False
 
@@ -78,7 +84,7 @@ init -1 python:
         return False
 
     def prod_assistant_unlock_cum_requirement(the_person):
-        if mc.business.is_open_for_business() and the_person.sluttiness > 40:
+        if mc.business.is_open_for_business() and the_person.sluttiness > 30:
             if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
                 return True
         return False
@@ -90,26 +96,26 @@ init -1 python:
         return False
 
     def prod_assistant_performance_upgrade_requirement(the_person):
-        if mc.business.is_open_for_business() and mc.business.research_tier >= 2:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY and not mc_serum_energy_serum_is_active():
+        if mc.business.is_open_for_business() and serum_production_2_policy.is_active():
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
                 return True
         return False
 
     def prod_assistant_aura_upgrade_requirement(the_person):
-        if mc.business.is_open_for_business() and mc.business.research_tier >= 2:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY and not mc_serum_aura_serum_is_active():
+        if mc.business.is_open_for_business() and serum_production_3_policy.is_active():
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
                 return True
         return False
 
     def prod_assistant_cum_upgrade_requirement(the_person):
-        if mc.business.is_open_for_business() and mc.business.research_tier >= 3:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY and not mc_serum_cum_serum_is_active():
+        if mc.business.is_open_for_business() and mc.business.research_tier >= 3 and the_person.sluttiness > 60 and not the_person.has_taboo("vaginal_sex"):
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
                 return True
         return False
 
     def prod_assistant_physical_upgrade_requirement(the_person):
-        if mc.business.is_open_for_business() and mc.business.research_tier >= 2:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY and not mc_serum_physical_serum_is_active():
+        if mc.business.is_open_for_business() and mc.business.research_tier >= 3:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
                 return True
         return False
 
@@ -134,6 +140,7 @@ label mc_serum_intro_label(the_person):
     "You drink your coffee fairly quickly. It is a nice to take a break from work and you feel re-energized."
     $ mc.change_energy(50)
     $ mc_serum_energy_regen.apply_trait()
+    $ mc_serum_energy_regen.is_selected = True
     "As you finish up with your coffee, she changes the subject."
     if ashley_on_default_path() and the_person == ashley:
         the_person "So I was talking with Steph about how things are going here at work."
@@ -183,12 +190,43 @@ label mc_serum_intro_label(the_person):
     return
 
 label mc_serum_timeout_label():
+    $ mc_serum_energy_regen.remove_trait()
+    $ mc_serum_energy_regen.is_selected = False
     "Something about you feels different. You have... less energy?"
     "The serum that [mc.business.prod_assistant.possessive_title] gave you must have worn off."
     "Maybe you should talk to her about getting another dose? It definitely had a positive effect on you."
+    "You feel like this is a direction worth pursuing. You decide to talk to her about taking it regularly."
     $ mc.business.event_triggers_dict["mc_serum_energy_unlocked"] = True
+    $ mc.business.prod_assistant.add_unique_on_room_enter_event(mc_serum_review_intro)
+    return
+
+label mc_serum_review_intro_label(the_person):
+    "You approach [the_person.title] about the energy serum she gave you."
+    $ the_person.draw_person()
+    mc.name "Hello [the_person.title]. Can I have one moment?"
+    the_person "Oh hey [the_person.mc_title]. Sure."
+    mc.name "I wanted to let you know, I think that serum you gave me the other day was successful. I definitely felt more energy after."
+    mc.name "I am curious... is this something that I could take regularly? I would like to have the option atleast."
+    the_person "That's great! Yeah I've been thinking about that too."
+    the_person "In the medical world, we use a medication's half life to determine dosing requirements."
+    the_person "It seem like a small, daily dose of these serums might be ideal in order to keep a consistent effect."
+    mc.name "That makes sense."
+    the_person "If you like, I could prepare your daily dose and leave it with your things in your office each day before I leave."
+    the_person "I'll make a couple extra for the weekend on Fridays too. Then you can take one each morning when you wake up for consistent results."
+    mc.name "Alright, that sounds like a good plan. I may not use them all the time, but it makes sense to do it that way."
+    the_person "I have ideas for other beneficial serum effects we could try also! We should start small, but if I come up with anything I'll let you know."
+    "[the_person.possessive_title] seems eager to use you as a guinea pig..."
+    the_person "Here is what I have so far... take a look, and I can something ready for you at the end of the day if you want."
+    $ the_person.draw_person(position = "standing_doggy")
+    "[the_person.title] turns and pulls up some serum info at her computer terminal."
+    the_person "Here we go."
+    call screen mc_personal_serum_screen()
+    $ the_person.draw_person()
+    the_person "Alright. Just let me know if you want to discuss something serum related, or change what you are taking."
+    mc.name "Sounds good."
     $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_performance_upgrade)
     $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_essential_oils_intro)
+    "You step away from [the_person.possessive_title]. You can now talk to her at work about serums for personal use."
     $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
@@ -196,8 +234,6 @@ label mc_serum_review_label(the_person):
     mc.name "I want to discuss my personal serums."
     the_person "Okay, let me see if I have any updated serum formulas."
     call mc_serum_review_upgrades_label(the_person) from _serum_review_upgrades_01
-    the_person "The serums themselves have limited duration as well."
-    call mc_serum_review_duration_label(the_person) from _serum_review_duration_01
     the_person "We also can only give you so many serums at a time safely."
     call mc_serum_review_quantity_label(the_person) from _serum_review_quantity_01
     the_person "Alright, here are the serums that I have available."
@@ -212,11 +248,14 @@ label mc_serum_review_upgrades_label(the_person):
     else:
         python:
             for trait in list_of_upgrades:
-                trait.upgrade_with_string(the_person)
                 list_of_upgraded_mc_serums.append(trait.name)
+                trait.upgrade_with_string(the_person)
+
     return
 
 label mc_serum_review_duration_label(the_person):
+    "Serum duration has been removed. Edit this"
+    return
     if get_mc_serum_duration() == 3:
         $ the_serum = find_in_list(lambda x: x.name == "Improved Reagent Purification", list_of_traits)
         if the_serum.mastery_level >= 3.0:
@@ -244,6 +283,7 @@ label mc_serum_review_quantity_label(the_person):
         else:
             the_person "Right now, we can only safely give you one serum at a time."
             the_person "If we work on researching and mastering production traits, we could probably give you more than one serum at the same time."
+            the_person "Spefically, look at the Improved Serum Production trait. I think there is potential there."
     elif mc_serum_max_quantity() == 2:
         $ the_serum = find_in_list(lambda x: x.name == "Advanced Serum Production", list_of_traits)
         if the_serum.mastery_level >= 3.0:
@@ -251,6 +291,7 @@ label mc_serum_review_quantity_label(the_person):
         else:
             the_person "Right now, we can only safely give you two serums at a time."
             the_person "If we work on researching and mastering production traits, we could probably give you more serums at the same time."
+            the_person "Spefically, look at the Advanced Serum Production trait. I think there is potential there."
     elif mc_serum_max_quantity() == 3:
         $ the_serum = find_in_list(lambda x: x.name == "Futuristic Serum Production", list_of_traits)
         if the_serum.mastery_level >= 3.0:
@@ -258,6 +299,7 @@ label mc_serum_review_quantity_label(the_person):
         else:
             the_person "Right now, we can safely give you three serums at a time."
             the_person "If we work on researching and mastering production traits, we could probably give you even more serums at the same time."
+            the_person "Spefically, look at the Futuristic Serum Production trait. I think there is potential there."
 
     else:
         the_person "Right now, we can safely give you four serums at a time."
@@ -394,9 +436,23 @@ label prod_assistant_unlock_auras_label(the_person):
     return
 
 label prod_assistant_unlock_cum_label(the_person):
-    "Production assistant has an idea. What if we put a concentrated pheremones into MC's cum."
-    "Has a method that should be able to accomplish this."
-    "Unlocks cum MC serums."
+    $ the_person.draw_person()
+    "When you walk into the production room, [the_person.possessive_title] sees you and waves you over."
+    mc.name "Hello [the_person.title]."
+    the_person "Good day [the_person.mc_title]. I have a question for you."
+    mc.name "Go ahead?"
+    the_person "Did you know, there was a study done once, that women who regulary get creampied by their partners are less depressed and are less likely to attempt suicide?"
+    mc.name "I umm... isn't that an urban myth?"
+    the_person "Nope! It was an actual study. The researchers hypothesize that semen contains hormones and chemicals that, when absorbed by women vaginally... or anally or orally really..."
+    the_person "Will increase seratonin and other hormone levels."
+    mc.name "I see... feeling depressed?"
+    the_person "Ah, not particularly! Although I wouldn't be against a prevantative dose sometime..."
+    the_person "Anyway, I got to looking at the pathways for hormones in men that involve how semen itself is produced."
+    the_person "I think I have a viable method for altering these hormones in semen, allowing for a customization of the hormonal properties."
+    the_person "It could be used to enhance the anti-depressant effects, or possibly introduce other effects."
+    mc.name "That sounds very useful."
+    the_person "I've added some info for prototypes to the database. Let me know if you want to try one of the new formulas!"
+    "You have unlocked a new category of personal serum traits! This new category changes the effect of your semen on women exposed to it."
     $ mc.business.event_triggers_dict["mc_serum_cum_unlocked"] = True
     $ mc.business.set_event_day("prod_assistant_advance", override = True)
     $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_cum_upgrade)
@@ -413,25 +469,116 @@ label prod_assistant_unlock_physical_label(the_person):
     return
 
 label prod_assistant_performance_upgrade_label(the_person):
-    "Use this label to start to process of upgrading performance serums."
-    "In this label, the production assistant discusses recent progression with performance related serums."
-    "All performance related serums increase in tier by 1 after this label."
+    $ the_person.draw_person()
+    "When you walk into the production room, [the_person.possessive_title] sees you and waves you over."
+    mc.name "Hello [the_person.title]."
+    the_person "[the_person.mc_title], I have some good news."
+    mc.name "Oh?"
+    the_person "A recent production equipment upgrade has allowed me to increase the potency of your performance related serums."
+    the_person "The equipment that allows us to produce more complicated serums will also allow me to improve the entire category of effects."
+    mc.name "Excellent."
+    "All performance related personal serums haved increased in tier by 1!"
     $ mc.business.event_triggers_dict["mc_serum_energy_tier"] = 1
     $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
 label prod_assistant_aura_upgrade_label(the_person):
-    "Use this label to start to process of upgrading aura serums."
-    "In this label, the production assistant discusses recent progression with aura related serums."
-    "All aura related serums increase in tier by 1 after this label."
+    $ the_person.draw_person()
+    "When you walk into the production room, [the_person.possessive_title] sees you and waves you over."
+    mc.name "Hello [the_person.title]."
+    the_person "[the_person.mc_title], I have some good news."
+    mc.name "Oh?"
+    the_person "A recent production equipment upgrade has allowed me to increase the potency of your aura related serums."
+    the_person "The equipment that allows us to produce more complicated serums will also allow me to improve the entire category of effects."
+    mc.name "Excellent."
+    "All aura related personal serums increase in tier by 1!."
     $ mc.business.event_triggers_dict["mc_serum_aura_tier"] = 1
     $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
 label prod_assistant_cum_upgrade_label(the_person):
-    "Use this label to start to process of upgrading cum serums."
-    "In this label, the production assistant discusses recent progression with cum related serums."
-    "All performance related serums increase in tier by 1 after this label."
+    $ the_person.draw_person()
+    "When you walk into the production room, [the_person.possessive_title] sees you and walks over."
+    the_person "Hey, I could really use your help with something. Can we go to your office?"
+    mc.name "Certainly."
+    "You walk with [the_person.title] from the production area to your office."
+    $ ceo_office.show_background()
+    "You step inside, and [the_person.possessive_title] steps in after you and locks your door. You like where this is going."
+    the_person "Take your pants and underwear off and lie down on your desk. I'll take care of the rest."
+    mc.name "Damn, not even dinner first? You think I'm some kind of slut?"
+    the_person "Very funny. I need a semen sample, and I'd prefer to get it the fun way, but if you are feeling shy I can get your a porn mag, a cup, and some private time?"
+    mc.name "Oh... a sample? I guess..."
+    "You decide to go ahead and take off your pants and underwear, then sit down on your desk."
+    "[the_person.title] walks over to you, then gets down on her knees in front of you."
+    $ the_person.draw_person(position = "blowjob")
+    if mc.arousal > 30:
+        "Your cock is already rock hard. [the_person.possessive_title] runs her tongue along the side a few times, givin you shivers."
+    else:
+        "[the_person.possessive_title] leans forward and sucks in the tip of your rapidly hardening cock."
+        "She strokes is softly with her hand as her tongue goes in circles around the tip."
+        $ mc.change_arousal(20)
+        "She gives you several seconds of attention until you are fully erect."
+    "[the_person.title] pulls out a condom and opens the package, then skillfully rolls it down your penis."
+    mc.name "A condom? Really?"
+    if the_person.opinion_score_creampies() > 0:
+        the_person "Believe me, I'd love to ride this thing to a satisfying conclusion... but I really do need an uncontaminated sample."
+    elif the_person.opinion_score_bareback_sex() > 0:
+        the_person "Believe me, I'd love to hop on this thing raw and go for a ride, but I really do need an uncontaminated sample."
+    else:
+        the_person "Sorry, I need an uncomtaminated sample."
+    $ the_person.draw_person(position = the_person.idle_pose)
+    "She stands up and starts to push you back onto the desk."
+    the_person "Lay back. No reason we can't both have a good time doing this."
+    if the_person.vagina_available():
+        "You lay back on the desk, and [the_person.possessive_title] climbs up on top of you."
+    else:
+        "You lay back on the desk, and [the_person.possessive_title] strips off her bottoms."
+        $ the_person.strip_to_vagina(prefer_half_off = False)
+        "She climbs up on top of you."
+    $ the_person.draw_person(position = "cowgirl")
+    "[the_person.title] gives you a few strokes with her hand, checking the condom for any issues, then points it up at her pussy and slowly lets herself down on it."
+    $ the_person.change_arousal(15)
+    $ mc.change_arousal(15)
+    the_person "Oh fuck..."
+    mc.name "So... what do you need a sample for... anyway?"
+    "[the_person.title] starts to roll her hips a bit before she answers."
+    the_person "I ah, found some research involving diet and cum potency. I think that if I analyze your semen, I can better formulate your semen related personal serums."
+    mc.name "You mean like, make them more effective?"
+    the_person "Exactly... Mmmm it's so big..."
+    $ the_person.change_arousal(35)
+    $ mc.change_arousal(20)
+    "This whole scenario feels oddly clinical... but it is still hot to have [the_person.possessive_title] riding you like this... for science."
+    the_person "Mmm... oh yeah... I'm glad we did this... the fun way..."
+    $ the_person.change_arousal(35)
+    $ mc.change_arousal(20)
+    "[the_person.title] stops rocking her hips and starts bouncing on your cock instead. She is REALLY enjoying herself."
+    the_person "Fuck your cock is so good... I think I'm gonna cum!"
+    $ the_person.change_arousal(55)
+    $ mc.change_arousal(35)
+    "Her moans crescendo as her body starts to twitch in pleasure. You give in to the pleasure as well."
+    mc.name "Me too. I'm cumming!"
+    $ climax_controller = ClimaxController(["Cum inside of her", "pussy"])
+    $ climax_controller.show_climax_menu()
+    the_person "Yes! Ah!"
+    "[the_person.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
+    "Her breath catches in her throat when you pulse out your hot load of cum into the condom."
+    $ the_person.have_orgasm(the_position = "cowgirl")
+    $ climax_controller.do_clarity_release(the_person)
+    $ mc.arousal = 0
+    "[the_person.possessive_title] holds herself in place until you are comletely spent."
+    the_person "Alright... let me do this..."
+    "She carefully climbs off you, then produces a small sterile sample cup."
+    "She pulls your condom off, being cautious not to spill any, and trasnfers it over to the cup."
+    $ the_person.draw_person(position = the_person.idle_pose)
+    the_person "Ah ha! That should do it."
+    mc.name "So... you think this will increase the potency of my serums?"
+    the_person "Yeah, give me a bit to get it analyzed, but I think it should increase the potency of the cum related person serums across the board."
+    mc.name "That sounds great. I'm just going to take a minute..."
+    the_person "I'll leave you to recover then."
+    $ the_person.apply_planned_outfit()
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] quickly gets dressed, then walks out of your office with her sample."
+    "All cum related personal serums have increased in tier by 1!"
     $ mc.business.event_triggers_dict["mc_serum_cum_tier"] = 1
     $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
