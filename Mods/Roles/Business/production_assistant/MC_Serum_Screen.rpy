@@ -90,7 +90,7 @@ screen screen_mc_serum_return_button():
 
 screen screen_mc_serum_basic_stats():
         zorder 100
-        $ length_desc = "Trait duration: " + str(get_mc_serum_duration()) + " days"
+        # $ length_desc = "Trait duration: " + str(get_mc_serum_duration()) + " days"
         $ quant_desc = "Maximum quantity: " + str(mc_serum_max_quantity()) + " serums"
         frame:
             background "#1a45a1aa"
@@ -111,7 +111,7 @@ screen screen_mc_serum_basic_stats():
                     vbox:
                         spacing 0
                         text "{size=24}Serum Stats{/size}" style "menu_text_title_style" xalign 0 text_align 0 xpos 2
-                        text "{size=18}[length_desc]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
+                        # text "{size=18}[length_desc]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
                         text "{size=18}[quant_desc]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
 
 screen screen_personal_serum_button(trait):
@@ -131,12 +131,12 @@ screen screen_personal_serum_button(trait):
                     ]
         else:
             $ box_text = trait.menu_name()
-            if trait.is_active():    #The trait is currently active. Show a green box.
+            if trait.is_selected:    #The trait is currently active. Show a green box.
                 imagebutton:
                     idle it_imagebutton_active
-                    hover it_imagebutton_active
+                    hover it_imagebutton_hover
                     sensitive True
-                    action NullAction()
+                    action Function (trait.click_trait)
                     hovered [
                         Hide("mc_serum_unknown_tooltip"),
                         Show("mc_serum_tooltip",None,trait)
@@ -149,7 +149,7 @@ screen screen_personal_serum_button(trait):
                     selected_idle it_imagebutton_active
                     selected_hover it_imagebutton_hover
                     # action screen confirm(message="Take this serum?", Function (trait.apply_trait), no_action=return)
-                    action Function (trait.apply_trait)
+                    action Function (trait.click_trait)
                     sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
                     hovered [
                         Hide("mc_serum_unknown_tooltip"),
@@ -190,6 +190,7 @@ screen mc_serum_tooltip(the_trait):
     $ trait_link = the_trait.linked_trait
     $ trait_name = the_trait.name
     $ trait_tier = str(the_trait.get_trait_tier())
+    $ trait_upg_string = the_trait.get_upg_string()
 
 
     zorder 100
@@ -212,7 +213,7 @@ screen mc_serum_tooltip(the_trait):
                 vbox:
                     spacing 0
                     text "{size=24}[trait_name]{/size}" style "menu_text_title_style" xalign 0 text_align 0 xpos 2
-                    text "{size=14}Linked Serum Trait: [trait_link]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
+                    text "{size=14}Upgrade Requirement: [trait_upg_string]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
                     text "{size=18}[trait_desc]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
                     text "{size=18}Tier: [trait_tier]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
 

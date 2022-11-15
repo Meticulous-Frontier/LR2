@@ -17,21 +17,29 @@ init -1 python:
                         perk_names.append(key)
                 return perk_names
 
-            def remove_perk(perk_dict, perk_name):
-                perk_dict[perk_name].remove()
-                perk_dict.pop(perk_name)
-
             for perk_name in expired_perks(self.stat_perks):
-                remove_perk(self.stat_perks, perk_name)
+                remove_perk(perk_name)
 
             for perk_name in expired_perks(self.item_perks):
-                remove_perk(self.item_perks, perk_name)
+                remove_perk(perk_name)
 
             for perk_name in expired_perks(self.ability_perks):
-                remove_perk(self.ability_perks, perk_name)
+                remove_perk(perk_name)
 
             for perk_name in self.ability_perks:
                 self.ability_perks[perk_name].update()
+            return
+
+        def remove_perk(self, perk_name):
+            if perk_name in self.stat_perks:
+                self.stat_perks[perk_name].remove()
+                self.stat_perks.pop(perk_name)
+            if perk_name in self.item_perks:
+                self.item_perks[perk_name].remove()
+                self.item_perks.pop(perk_name)
+            if perk_name in self.ability_perks:
+                self.ability_perks[perk_name].remove()
+                self.ability_perks.pop(perk_name)
             return
 
         def save_load(self):

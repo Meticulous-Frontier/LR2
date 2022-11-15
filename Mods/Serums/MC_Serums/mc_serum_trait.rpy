@@ -6,19 +6,29 @@
 
 init -2 python:
     class MC_Serum_Trait(renpy.store.object):
-        def __init__(self, name, linked_trait, category, perk_list, perk_advance_reqs):
+        def __init__(self, name, linked_trait, category, perk_list, perk_advance_reqs, upg_label, upg_string = None):
             self.name = name
             self.linked_trait = linked_trait
             self.category = category
             self.perk_list = perk_list
             self.perk_advance_reqs = perk_advance_reqs
             self.base_tier = 1
+            self.is_selected = False
+            self.upg_label = upg_label
+            if upg_string == None:
+                self.upg_string = "Unknown upgrade requirements."
+            else:
+                self.upg_string = upg_string
             return
 
         def apply_trait(self):  #Apply this trait to MC
             perk_system.add_ability_perk(self.perk_list[self.get_trait_tier() - 1](), self.name)
             if mc.business.prod_assistant == ashley and not ashley_mc_submission_story_complete():
                 ashley.event_triggers_dict["mc_obedience"] += 1
+            return
+
+        def remove_trait(self):
+            perk_system.remove_perk(self.name)
             return
 
         def menu_name(self):
@@ -60,7 +70,7 @@ init -2 python:
             if self.get_unlocked(): #Determine if its unlocked first
                 active_traits = 0
                 for trait in list_of_mc_traits:
-                    if trait.is_active():
+                    if trait.is_selected:
                         active_traits += 1
                         if trait.category == self.category:   #Check and see if another trait in the same catagory is available.
                             return False
@@ -78,15 +88,16 @@ init -2 python:
                 return True
             return False
 
+        def is_upgraded(self):
+            if self.base_tier > 1:
+                return True
+            return False
+
         def upgrade_with_string(self, the_person):   #fabricate a string to return if we are upgrading this trait, upgrade string accordingly.
             self.base_tier += 1
-            upg_str = get_random_from_list(["We have researched and mastered enough traits to increse the potential of the ",
-                "After extensive research we can increase the potential of the ",
-                "I worked with research to create an updated formula of the "])
-            upg_str += self.name
-            upg_str = upg_str.replace("Serum: ", "")
-            upg_str += " serum trait."
-            renpy.say(the_person, upg_str)
+            if self.is_active():
+                self.is_selected = False
+            renpy.call(self.upg_label, the_person)
             return True
 
         def on_load(self):  #Use this to determine the tier of the serum
@@ -95,11 +106,31 @@ init -2 python:
                     self.base_tier = 2
             return
 
+        def click_trait(self):
+            if self.is_selected:
+                self.is_selected = False
+            elif self.is_available():
+                self.is_selected = True
+            return
+
+        def get_upg_string(self):
+            if self.base_tier > 1:
+                return "Fully Upgraded"
+            else:
+                return self.upg_string
 
     list_of_mc_traits = []
 
+    def mc_serum_trait_run_day():
+        for trait in list_of_mc_traits:
+            if trait.is_active():   #Re apply traits Daily
+                trait.remove_trait()
+            if trait.is_selected:
+                trait.apply_trait()
+        return
+
     def get_mc_serum_duration():
-        return mc.business.event_triggers_dict.get("mc_serum_duration", 3)
+        return 6
 
     def get_mc_serum_category_side_effect_chance(category):
         pass
@@ -160,22 +191,18 @@ init -2 python:
                 return True
         return False
 
-    def mc_serum_list_of_upgradable_serums():
+    def mc_serum_list_of_upgradable_serums():   #Rework this so we can upgrade active traits
         list_of_upgrades = []
-        if not mc_serum_energy_serum_is_active():
-            for trait in mc_serum_get_energy_list():
-                if trait.check_upgrade():
-                    list_of_upgrades.append(trait)
-        if not mc_serum_aura_serum_is_active():
-            for trait in mc_serum_get_aura_list():
-                if trait.check_upgrade():
-                    list_of_upgrades.append(trait)
-        if not mc_serum_cum_serum_is_active():
-            for trait in mc_serum_get_cum_list():
-                if trait.check_upgrade():
-                    list_of_upgrades.append(trait)
-        if not mc_serum_physical_serum_is_active():
-            for trait in mc_serum_get_physical_list():
-                if trait.check_upgrade():
-                    list_of_upgrades.append(trait)
+        for trait in mc_serum_get_energy_list():
+            if trait.check_upgrade():
+                list_of_upgrades.append(trait)
+        for trait in mc_serum_get_aura_list():
+            if trait.check_upgrade():
+                list_of_upgrades.append(trait)
+        for trait in mc_serum_get_cum_list():
+            if trait.check_upgrade():
+                list_of_upgrades.append(trait)
+        for trait in mc_serum_get_physical_list():
+            if trait.check_upgrade():
+                list_of_upgrades.append(trait)
         return list_of_upgrades

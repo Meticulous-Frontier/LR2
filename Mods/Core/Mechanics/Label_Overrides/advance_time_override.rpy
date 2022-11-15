@@ -226,6 +226,7 @@ init 5 python:
             project.on_day()
         if "quest_director" in globals():
             quest_director.run_day()
+        mc_serum_trait_run_day()
         return
 
     def advance_time_run_move(people):

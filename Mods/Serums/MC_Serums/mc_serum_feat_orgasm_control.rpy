@@ -1,7 +1,13 @@
 #The very first Mc serum trait. Regenerates extra energy for the MC every turn.
 
 init 2 python:
-    mc_serum_feat_orgasm_control = MC_Serum_Trait("Serum: Feat of Orgasm Control", "Pleasure Center Stimulator", "physical", [perk_feat_orgasm_control_small, perk_feat_orgasm_control_med, perk_feat_orgasm_control_large], [perk_feat_orgasm_control_advance_req_01])
+    mc_serum_feat_orgasm_control = MC_Serum_Trait("Serum: Feat of Orgasm Control",
+    "Pleasure Center Stimulator",
+    "physical",
+    [perk_feat_orgasm_control_small, perk_feat_orgasm_control_med, perk_feat_orgasm_control_large],
+    [perk_feat_orgasm_control_advance_req_01],
+    "perk_feat_orgasm_control_upg_label",
+    upg_string = "Master the Mind Control Agent trait to upgrade this serum formula.")
 
     list_of_mc_traits.append(mc_serum_feat_orgasm_control)
 
@@ -16,19 +22,25 @@ init 1 python:  #Associated Perks
         return
 
     def perk_feat_orgasm_control_small():
-        duration = get_mc_serum_duration()
-        return Ability_Perk(description = "During sex, you can hold off orgasm indefinitely, but orgasms cost 20 energy.", usable = False, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "During sex, you can hold off orgasm indefinitely, but orgasms cost 20 energy.", usable = False)
 
     def perk_feat_orgasm_control_med():
-        duration = get_mc_serum_duration()
-        return Ability_Perk(description = "During sex, cum early or hold off indefinitely, but orgasms cost 20 energy.", usable = False, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "During sex, cum early or hold off indefinitely, but orgasms cost 20 energy.", usable = False)
 
     def perk_feat_orgasm_control_large():
-        duration = get_mc_serum_duration()
-        return Ability_Perk(description = "During sex, cum early or hold off indefinitely, and once per day you can quickly orgasm during a conversation before the other person can react. Orgasms cost 20 energy.", usable = False, bonus_is_temp = True, duration = duration)
+        return Ability_Perk(description = "During sex, cum early or hold off indefinitely, and once per day you can quickly orgasm during a conversation before the other person can react. Orgasms cost 20 energy.", usable = False)
 
     def perk_feat_orgasm_control_advance_req_01():
+        the_serum = find_serum_by_name("Mind Control Agent")
+        if the_serum.mastery_level >= 10:
+            return True
         return False
+
+label perk_feat_orgasm_control_upg_label(the_person):
+    the_person "Research with the Mind Control Agent serum trait has yielded states in some test subjects that is borderline hypnosis."
+    the_person "By adding some of those agents to the Orgasm Control serum, you should be able to tap into a borderline hypnotic state, gaining incredible control over your orgasms."
+    mc.name "That sounds very useful. I'll give it a try when I have the chance."
+    return
 
 label climax_check_orgasm_control():
     $ is_cumming = False
