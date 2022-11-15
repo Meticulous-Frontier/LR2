@@ -1338,6 +1338,7 @@ label ellie_dinner_date_intro_label(the_person): #Ellie invites MC over for dinn
     mc.name "Sunday night then."
     $ clear_scene()
     "You step away from [the_person.title]'s desk. Sounds like you have a dinner date Sunday!"
+    $ mc.business.add_mandatory_crisis(ellie_dinner_date)
     return
 
 label ellie_dinner_date_label():
@@ -1520,6 +1521,8 @@ init -1 python:
         return False
 
     def ellie_never_been_fucked_requirement(the_person):
+        if the_person.sluttiness >= 60 and mc.is_at_work() and mc.business.is_open_for_business() and ellie.story_event_ready("slut"):
+            return True
         return False
 
     def ellie_loses_her_virginity_requirement():
@@ -1977,16 +1980,6 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
         the_person "[the_person.mc_title]! Get me a tissue or something, stars!"
         "You laugh and quickly grab some wipes from your desk."
         $ the_person.draw_person(position = the_person.idle_pose)
-
-
-
-    "She is embarrassed. Says she knows that but she is just scared of having sex for the first time."
-    "MC asks if she would be open to sleeping with him if he promises to go slow and be gentle."
-    "[ellie.fname] is uncertain. Her mama would be so disappointed."
-    "MC offers to take her out on a proper date first, have a couple drinks, go back to her place, she can stop any point she wants to."
-    "She says okay. Make a plan for dinner on... some day? Figure out best day."
-    "She's still needy right now though. Quick detour to the office for sixty nine."
-    "She goes back to work."
 
 
     return

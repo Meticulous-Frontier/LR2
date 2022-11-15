@@ -148,7 +148,6 @@ init -1 python:
 
 
     def ashley_room_excitement_overhear_requirement(the_person):
-        return False
         if the_person.is_at_work():
             if the_person.days_employed > 5: #Been working for at least a few days week.
                 return True
@@ -334,7 +333,7 @@ label ashley_first_talk_label(the_person):
     mc.name "Hello there. You must be [the_person.fname]. I'm [mc.name], the one who owns this place."
     "She looks at you and smiles."
     the_person "Hello! So you're the guy my sister won't stop going on and on about. Nice to meet you."
-    mc.name "Ah, yes I supposed that would be me.."
+    mc.name "Ah, yes I supposed that would be me."
     the_person "Thank you for the opportunity. I appreciate the work, especially in a pharma related field, it will really help my job prospects in the future."
     mc.name "Of course, [stephanie.fname] is a good friend. Do you go by [the_person.fname]? Or something else?"
     $ the_person.set_title(the_person.name)
@@ -798,7 +797,8 @@ label ashley_porn_video_discover_label():   #20 Sluttiness
     $ scene_manager.add_actor (the_person, position = "stand4", emotion = "happy")
     $ mc.change_locked_clarity(10)
     "There's a guy and a girl, who you immediately recognize as [the_person.title]. This looks like one of those hidden camera type videos."
-    "The guy is tied up, with his four limbs tied to the four corners of a bed. You watch as [the_person.title] gets up on the bed and crawls on top of him."
+    "In the background is what appears to be some sort of medical office."
+    "The guy is tied up, with his four limbs tied to the four corners of a bed. You watch as [the_person.title] gets up on the examination table and crawls on top of him."
     $ scene_manager.update_actor(the_person, position = "doggy")
     "She turns and puts her ass right in his face. She starts to ride his face roughly."
     $ mc.change_locked_clarity(10)
@@ -814,9 +814,10 @@ label ashley_porn_video_discover_label():   #20 Sluttiness
     "She quickly hops off. The guy fills up the condom while [the_person.title] basically ignores him."
     the_person "Pathetic... maybe someday I'll let you touch me... but not today, that's for sure!"
     $ scene_manager.clear_scene()
-    "Wow... shy [the_person.title]..."
+    "Wow... [the_person.title]..."
     "This seems pretty crazy. She seems to be some kind of closet dom? It's hard to believe."
-    "She is so quiet... there's no way you can talk to her about it yet. Maybe you should bring it up with [stephanie.title] first?"
+    "And the bakground... was this done in a real hospital room?"
+    "There's no way you can talk to her about it yet. Maybe you should bring it up with [stephanie.title] first?"
     $ stephanie.add_unique_on_talk_event(ashley_ask_sister_about_porn_video)
     $ ashley.event_triggers_dict["porn_discovered"] = True
     return
@@ -842,7 +843,7 @@ label ashley_ask_about_porn_label(the_person):
     the_person "Oh... you're not? Then... what did you want me here for?"
     "You clear your throat. You are going to have to phrase this very carefully."
     mc.name "Well, I had a great time at the concert the other night, and honestly I've gotten very fond of you..."
-    "[the_person.title] smiles and blushes a bit. She is so shy, but so cute when she does that."
+    "[the_person.title] smiles and blushes a bit. She is a little shy, but so cute when she does that."
     mc.name "So, before I move on, I just want you to know that I want to support you and help you in any way that I can."
     "Her face changes to a look of confusion."
     the_person "Help with what?"
@@ -860,8 +861,8 @@ label ashley_ask_about_porn_label(the_person):
     mc.name "Grossed out? Why would I be grossed out?"
     the_person "I mean... the relationship I had with my last boyfriend was... not normal."
     mc.name "Hey, everyone has kinks. I'm not here to kink-shame you."
-    mc.name "I just wanted to tell you, I'm sorry about what happened. If you need any assistance going forward, please don't hesitate. I want to help if I can."
-    the_person "Well... Steph and I... We worked hard to get that video off the internet. But once it's out there, it's out there, I guess."
+    the_person "And I mean... I was on break, but it was on company property... well my previous company anyway."
+    mc.name "As far as I'm concerned, break time is yours to do what you want, as long as you can get some privacy anyway."
     "She looks down and thinks for a bit."
     the_person "The, umm... the video. Did you watch the whole thing?"
     mc.name "Yeah... yeah I did."
@@ -953,7 +954,7 @@ label ashley_post_handjob_convo_label(the_person):
     "[the_person.possessive_title] is blushing hard. It's kind of cute actually."
     $ downtown.show_background()
     "As you step out of the office building, [the_person.title] is following along behind you. You give her a second to catch up so you can walk side by side."
-    "She's looking down at her feet. She's so shy, you can tell she is uncomfortable."
+    "She's looking down at her feet, you can tell she is uncomfortable."
     menu:
         "Hold her hand" if the_person.love >= 20:
             mc.name "Don't worry, [the_person.title]. I just wanted to get out of the office to chat about things. Also to limit the possibility of an interruption..."
@@ -1166,24 +1167,22 @@ label ashley_ask_sister_about_porn_video_label(the_person): # at 10
     mc.name "Oh... deleted?"
     $ scene_manager.update_actor (the_person, emotion = "sad")
     the_person "Yeah, she had this boyfriend a while back. It came out after they broke up that he was secretly filming them having sex and posting it online..."
+    the_person "Unfortunately, they were doing it while she was on break at her job..."
     the_person "We did everything we could to shut it down once we found out, but the internet is crazy. Once it's out there, it's out there!"
     mc.name "Wow, I feel awful, I had no idea."
-    the_person "Yeah. Unfortunately, having that happen really got to her. That was like, over a year ago? And she hasn't been out with anyone since."
-    the_person "As you probably saw... she was pretty... adventurous... with guys."
-    the_person "But now it's almost like she can't trust any guys anymore."
+    the_person "Someone at the hospital eventually found out about it, and that was the HR issue that wound up getting her fired."
+    mc.name "Ahhh, that makes sense."
     "You both look at each other for a moment, considering the circumstance."
-    mc.name "I want to do something, but I don't know what."
-    if the_person.love > 30:
-        the_person "I don't know either... I guess just... keep being you?"
-        the_person "You are a wonderful guy. Just be there for her, okay? You are, like, the only guy she interacts with any more."
+    the_person "As you probably saw... she is pretty... adventurous... with guys."
+    the_person "I don't know why but... she has this thing, ever since we were little. Some kind of sibling rivalry."
+    if the_person.is_girlfriend():
+        the_person "It wouldn't surprise me she takes a pass at you, especially since we are dating."
     else:
-        the_person "I mean, you are, like, the only guy she interacts with... at all. She has completely cut herself off from men."
-        the_person "Maybe you could try, like, you know, being there for her? Help her learn that not all men are total assholes?"
-    mc.name "I suppose. Anything specific?"
-    the_person "Honestly? I'm not really sure. Ash moving back in with me only just happened, and we didn't really see each other much while going through college."
-    "After a few solemn moments, you decide to move on with your day."
-    mc.name "That's enough for now I suppose. Let me know if you think of anything."
-    the_person "Yes sir... and the same for you."
+        the_person "I umm... I wouldn't be surprised if she takes a pass at you."
+    "Interesting... but you wonder if getting busy with a dom like that is really what you want to do?"
+    "Maybe with some serums, you could try taming her a bit... so she can see what the other side of it is like..."
+    the_person "Look umm... just so I make myself clear here... be careful with her. She can be sneaky, and knows a lot more than she lets on."
+    mc.name "I understand. Thank you [the_person.title]."
     "You both walk back to the [mc.location.formal_name]."
     $ mc.location.show_background()
     $ scene_manager.clear_scene()
@@ -1248,7 +1247,7 @@ label ashley_second_concert_intro_label(the_person):    #120 obedience, requires
     "You take a sip of your coffee. It seems the sisters are finally ready to move on with their conversation."
     $ mc.business.event_triggers_dict["girlfriend_sleepover_scheduled"] = True
     $ mc.business.add_mandatory_crisis(ashley_second_concert_date)
-    return  #40 Love
+    return
 
 label ashley_second_concert_date_label():
     $ the_person = ashley

@@ -447,6 +447,7 @@ label prod_assistant_unlock_cum_label(the_person):
     the_person "Will increase seratonin and other hormone levels."
     mc.name "I see... feeling depressed?"
     the_person "Ah, not particularly! Although I wouldn't be against a prevantative dose sometime..."
+    $ mc.change_locked_clarity(20)
     the_person "Anyway, I got to looking at the pathways for hormones in men that involve how semen itself is produced."
     the_person "I think I have a viable method for altering these hormones in semen, allowing for a customization of the hormonal properties."
     the_person "It could be used to enhance the anti-depressant effects, or possibly introduce other effects."
@@ -518,6 +519,7 @@ label prod_assistant_cum_upgrade_label(the_person):
         "She strokes is softly with her hand as her tongue goes in circles around the tip."
         $ mc.change_arousal(20)
         "She gives you several seconds of attention until you are fully erect."
+    $ mc.change_locked_clarity(30)
     "[the_person.title] pulls out a condom and opens the package, then skillfully rolls it down your penis."
     mc.name "A condom? Really?"
     if the_person.opinion_score_creampies() > 0:
@@ -536,6 +538,7 @@ label prod_assistant_cum_upgrade_label(the_person):
         $ the_person.strip_to_vagina(prefer_half_off = False)
         "She climbs up on top of you."
     $ the_person.draw_person(position = "cowgirl")
+    $ mc.change_locked_clarity(30)
     "[the_person.title] gives you a few strokes with her hand, checking the condom for any issues, then points it up at her pussy and slowly lets herself down on it."
     $ the_person.change_arousal(15)
     $ mc.change_arousal(15)
@@ -547,14 +550,17 @@ label prod_assistant_cum_upgrade_label(the_person):
     the_person "Exactly... Mmmm it's so big..."
     $ the_person.change_arousal(35)
     $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(50)
     "This whole scenario feels oddly clinical... but it is still hot to have [the_person.possessive_title] riding you like this... for science."
     the_person "Mmm... oh yeah... I'm glad we did this... the fun way..."
     $ the_person.change_arousal(35)
     $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(50)
     "[the_person.title] stops rocking her hips and starts bouncing on your cock instead. She is REALLY enjoying herself."
     the_person "Fuck your cock is so good... I think I'm gonna cum!"
     $ the_person.change_arousal(55)
     $ mc.change_arousal(35)
+    $ mc.change_locked_clarity(50)
     "Her moans crescendo as her body starts to twitch in pleasure. You give in to the pleasure as well."
     mc.name "Me too. I'm cumming!"
     $ climax_controller = ClimaxController(["Cum inside of her", "pussy"])
