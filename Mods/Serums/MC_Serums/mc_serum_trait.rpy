@@ -6,7 +6,7 @@
 
 init -2 python:
     class MC_Serum_Trait(renpy.store.object):
-        def __init__(self, name, linked_trait, category, perk_list, perk_advance_reqs, upg_label, upg_string = None):
+        def __init__(self, name, linked_trait, category, perk_list, perk_advance_reqs, upg_label, upg_string = None, on_apply = None, on_remove = None):
             self.name = name
             self.linked_trait = linked_trait
             self.category = category
@@ -19,15 +19,21 @@ init -2 python:
                 self.upg_string = "Unknown upgrade requirements."
             else:
                 self.upg_string = upg_string
+            self.on_apply = on_apply
+            self.on_remove = on_remove
             return
 
         def apply_trait(self):  #Apply this trait to MC
             perk_system.add_ability_perk(self.perk_list[self.get_trait_tier() - 1](), self.name)
             if mc.business.prod_assistant == ashley and not ashley_mc_submission_story_complete():
                 ashley.event_triggers_dict["mc_obedience"] += 1
+            if self.on_apply is not None:
+                self.on_apply()
             return
 
         def remove_trait(self):
+            if self.on_remove is not None:
+                self.on_remove()
             perk_system.remove_perk(self.name)
             return
 

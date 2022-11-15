@@ -7,7 +7,9 @@ init 2 python:
     [perk_feat_orgasm_control_small, perk_feat_orgasm_control_med, perk_feat_orgasm_control_large],
     [perk_feat_orgasm_control_advance_req_01],
     "perk_feat_orgasm_control_upg_label",
-    upg_string = "Master the Mind Control Agent trait to upgrade this serum formula.")
+    upg_string = "Master the Mind Control Agent trait to upgrade this serum formula.",
+    on_apply = perk_feat_orgasm_control_on_apply,
+    on_remove = perk_feat_orgasm_control_on_remove)
 
     list_of_mc_traits.append(mc_serum_feat_orgasm_control)
 
