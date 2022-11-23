@@ -1967,7 +1967,7 @@ init -1 python:
 
     def apply_university_outfit(self):
         if university_wardrobe:
-            self.location_outfit = university_wardrobe.decide_on_outfit2(self)
+            self.location_outfit = university_wardrobe.build_uniform_wardrobe(self.wardrobe).decide_on_outfit2(self)
             # get personal copy of outfit, so we don't change the university wardrobe (in any events)
             self.apply_outfit(self.location_outfit)
         return
