@@ -13,8 +13,12 @@ init 10 python:
         cs = renpy.current_screen()
         if cs.scope["selected_colour"] == "colour_pattern":
             cloth_to_color.colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+            if cloth_to_color.has_extension:
+                cloth_to_color.has_extension.colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
         else:
             cloth_to_color.colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+            if cloth_to_color.has_extension:
+                cloth_to_color.has_extension.colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
         return
 
     def hide_mannequin():
@@ -156,29 +160,45 @@ init 10 python:
             cs.scope["current_a"] = __builtin__.round(float(new_value),2)
             if cs.scope["selected_colour"] == "colour_pattern":
                 cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
+                if cs.scope["selected_clothing"].has_extension:
+                    cs.scope["selected_clothing"].has_extension.colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
             else:
                 cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
+                if cs.scope["selected_clothing"].has_extension:
+                    cs.scope["selected_clothing"].has_extension.colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
 
         if bar_value == "current_r":
             cs.scope["current_r"] = __builtin__.round(float(new_value),2)
             if cs.scope["selected_colour"] == "colour_pattern":
                 cs.scope["selected_clothing"].colour_pattern = [__builtin__.round(float(new_value),2), cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+                if cs.scope["selected_clothing"].has_extension:
+                    cs.scope["selected_clothing"].has_extension.colour_pattern = [__builtin__.round(float(new_value),2), cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
             else:
                 cs.scope["selected_clothing"].colour = [__builtin__.round(float(new_value),2), cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
+                if cs.scope["selected_clothing"].has_extension:
+                    cs.scope["selected_clothing"].has_extension.colour = [__builtin__.round(float(new_value),2), cs.scope["current_g"], cs.scope["current_b"], cs.scope["current_a"]]
 
         if bar_value == "current_g":
             cs.scope["current_g"] = __builtin__.round(float(new_value),2)
             if cs.scope["selected_colour"] == "colour_pattern":
                 cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], __builtin__.round(float(new_value),2), cs.scope["current_b"], cs.scope["current_a"]]
+                if cs.scope["selected_clothing"].has_extension:
+                    cs.scope["selected_clothing"].has_extension.colour_pattern = [cs.scope["current_r"], __builtin__.round(float(new_value),2), cs.scope["current_b"], cs.scope["current_a"]]
             else:
                 cs.scope["selected_clothing"].colour = [cs.scope["current_r"], __builtin__.round(float(new_value),2), cs.scope["current_b"], cs.scope["current_a"]]
+                if cs.scope["selected_clothing"].has_extension:
+                    cs.scope["selected_clothing"].has_extension.colour = [cs.scope["current_r"], __builtin__.round(float(new_value),2), cs.scope["current_b"], cs.scope["current_a"]]
 
         if bar_value == "current_b":
             cs.scope["current_b"] = __builtin__.round(float(new_value),2)
             if cs.scope["selected_colour"] == "colour_pattern":
                 cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
+                if cs.scope["selected_clothing"].has_extension:
+                    cs.scope["selected_clothing"].has_extension.colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
             else:
                 cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
+                if cs.scope["selected_clothing"].has_extension:
+                    cs.scope["selected_clothing"].has_extension.colour = [cs.scope["current_r"], cs.scope["current_g"], __builtin__.round(float(new_value),2), cs.scope["current_a"]]
         preview_outfit()
         renpy.restart_interaction()
         return
@@ -189,8 +209,12 @@ init 10 python:
         cs.scope["current_a"] = __builtin__.round(float(new_value),2)
         if cs.scope["selected_colour"] == "colour_pattern":
             cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
+            if cs.scope["selected_clothing"].has_extension:
+                cs.scope["selected_clothing"].has_extension.colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
         else:
             cs.scope["selected_clothing"].colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
+            if cs.scope["selected_clothing"].has_extension:
+                cs.scope["selected_clothing"].has_extension.colour = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
         preview_outfit()
         return
 
