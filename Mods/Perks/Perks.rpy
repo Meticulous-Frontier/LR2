@@ -18,13 +18,13 @@ init -1 python:
                 return perk_names
 
             for perk_name in expired_perks(self.stat_perks):
-                remove_perk(perk_name)
+                self.remove_perk(perk_name)
 
             for perk_name in expired_perks(self.item_perks):
-                remove_perk(perk_name)
+                self.remove_perk(perk_name)
 
             for perk_name in expired_perks(self.ability_perks):
-                remove_perk(perk_name)
+                self.remove_perk(perk_name)
 
             for perk_name in self.ability_perks:
                 self.ability_perks[perk_name].update()

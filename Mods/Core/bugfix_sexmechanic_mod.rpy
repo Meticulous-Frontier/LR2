@@ -441,6 +441,18 @@ init 5 python:
             alternate_position = suggest_alt_anal_sex_position(person, the_position, the_object, ignore_taboo = ignore_taboo)
         return alternate_position
 
+    def get_position_opinion_score(person, position):   #An override of this function to avoid girls getting bored of positions.
+        opinion_score = 0
+        for opinion_tag in position.opinion_tags:
+            opinion_score += person.get_opinion_score(opinion_tag) #Add a bonus or penalty if she likes or dislikes the position.
+            person.discover_opinion(opinion_tag)
+        if opinion_score <= 0 and perk_system.has_ability_perk("Serum: Aura of Arousal") and mc_serum_aura_arousal.get_trait_tier() >= 2:
+            if position_choice.skill_tag == "Vaginal" or position_choice.skill_tag == "Anal":
+                opinion_score = 1
+            elif mc_serum_aura_arousal.get_trait_tier() >= 3:
+                opinion_score = 1
+
+        return opinion_score
 
 
 label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = Condition_Type("Empty"), used_obedience = False):

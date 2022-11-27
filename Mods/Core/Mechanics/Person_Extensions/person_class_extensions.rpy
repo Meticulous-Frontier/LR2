@@ -1917,7 +1917,7 @@ init -1 python:
 
             if self.event_triggers_dict.get("forced_uniform", False):
                 return True
-            
+
             wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
             if wardrobe is None:
                 return False
@@ -2816,3 +2816,17 @@ init -1 python:
     Person.story_event_ready = person_story_event_ready
     Person.story_event_log =  person_story_event_log
     Person.string_since_event = person_string_since_event
+
+#Suggestibility mod work
+
+    def person_change_modded_suggestibility(self, amount, max_amt = 30):
+        if self.event_triggers_dict.get("mod_suggest_amt", 0) >= max_amt:
+            return
+        change_amount = amount
+        if self.event_triggers_dict.get("mod_suggest_amt", 0) + amount > max_amt:
+            change_amount = max_amt - self.event_triggers_dict.get("mod_suggest_amt", 0)
+        self.change_suggest(change_amount, add_to_log = True)
+        self.event_triggers_dict["mod_suggest_amt"] = self.event_triggers_dict.get("mod_suggest_amt", 0) + change_amount
+        return
+
+    Person.change_modded_suggestibility = person_change_modded_suggestibility
