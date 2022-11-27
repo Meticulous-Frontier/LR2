@@ -145,6 +145,23 @@ init -1 python:
             return True
         return False
 
+    def ashley_room_overhear_classical_requirement(the_person):
+        if the_person.is_at_work():
+            if the_person.days_employed > TIER_2_TIME_DELAY:
+                return True
+        return False
+
+    def ashley_ask_date_classic_concert_requirement(the_person):
+        if ashley_get_concert_overheard() and not ashley_get_concert_date_stage() > 0:
+            return the_person.is_at_work()
+        return False
+
+    def ashley_classical_concert_date_requirement():
+        if time_of_day == 3 and day%7 == 3:  #Thursday
+            return ashley_get_concert_date_stage() == 1
+        return False
+
+
 
 
     def ashley_room_excitement_overhear_requirement(the_person):
@@ -337,7 +354,7 @@ label ashley_first_talk_label(the_person):
     the_person "Thank you for the opportunity. I appreciate the work, especially in a pharma related field, it will really help my job prospects in the future."
     mc.name "Of course, [stephanie.fname] is a good friend. Do you go by [the_person.fname]? Or something else?"
     $ the_person.set_title(the_person.name)
-    $ the_person.set_possessive_title("Your quiet employee")
+    $ the_person.set_possessive_title("Your production assistant")
     $ the_person.set_mc_title(mc.name)
     the_person "[the_person.title] is fine..."
     mc.name "[the_person.title] it is then."
@@ -348,38 +365,6 @@ label ashley_first_talk_label(the_person):
     $ ashley.add_unique_on_room_enter_event(mc_serum_intro)
     return
 
-
-#Ashley Love Path
-init -1 python:
-    def ashley_room_overhear_classical_requirement(the_person):
-        if the_person.is_at_work():
-            if the_person.days_employed > 18:
-                return True
-        return False
-
-    def ashley_ask_date_classic_concert_requirement(the_person):
-        if ashley_get_concert_overheard() and not ashley_get_concert_date_stage() > 0:
-            return the_person.is_at_work() and the_person.love > 20
-        return False
-
-    def ashley_classical_concert_date_requirement():
-        if time_of_day == 3 and day%7 == 3:  #Thursday
-            return ashley_get_concert_date_stage() == 1
-        return False
-
-    def ashley_jealous_at_work_requirement():
-        return False
-
-    def ashley_sneaks_over_requirement():
-        if schedule_sleepover_available() and time_of_day == 4: #No sleepover expected
-            if ashley.love >= 60 and ashley.is_willing(cowgirl):    #Needs to be willing to commit the acts in the event
-                return ashley_second_date_complete()
-        return False
-
-    def ashley_steph_drinks_out_requirement():
-        return False
-
-
 label ashley_room_overhear_classical_label(the_person):
     $ the_person = ashley # on_room_enter_event so the_person isn't defined
     $ the_person.draw_person(position = "standing_doggy")
@@ -387,34 +372,32 @@ label ashley_room_overhear_classical_label(the_person):
     the_person "I know, the city symphony is performing a collection of Johannes Brahms' symphonies. I want to go so bad, but I can't find anyone to go with..."
     "As you enter the room, she looks up and stops talking."
     $ the_person.draw_person()
-    the_person "Ahh... hello sir. Having a good day?"
-    "She has been slowly warming up to you over the last few weeks."
+    the_person "Oh, hey [the_person.mc_title]. Having a good day?"
+    "[the_person.title] has been stepping into a role on her own as your production assistant. You feel like you are really starting to warm up to her."
     mc.name "It's been great so far. And you?"
     the_person "Oh, I've been good. Thanks for asking."
     mc.name "Glad to hear it."
     "Hmm... she is looking for someone to go with her to a classical music concert. Maybe that person could be you?"
     $ ashley.event_triggers_dict["concert_overheard"] = True
-    return  #20 Love
+    return
 
 label ashley_ask_date_classic_concert_label(the_person):
     mc.name "So... I couldn't help hearing earlier, you are looking to go to the Brahms symphony recital, but you don't have anyone to go with?"
     the_person "Ummm yeah, something like that..."
-    "She is looking down, avoiding eye contact with you."
     mc.name "That sounds like a great cultural event. I was wondering if you would be willing to let me take you?"
     "She is caught off guard. She wasn't expecting you to ask something like this!"
-    the_person "Oh! I uhh, I'm not sure..."
-    if stephanie.love > 30 or stephanie.obedience > 130:
-        the_person "I suppose... I mean... Steph keeps telling me you are a nice guy..."
-    else:
-        the_person "I don't know, I mean you seem like a nice guy but..."
-        mc.name "I'll tell you what. We could let [stephanie.fname] know when it is. She could drop you off and pick you up afterwards."
-        "[the_person.title] mumbles something for a second, then relents."
-        the_person "I suppose... I mean... Steph keeps telling me I need to go out more."
+    the_person "Oh! I uhh, I'm not sure if Steph would be okay with that..."
+    mc.name "Why wouldn't she be okay with it?"
+    the_person "I... well..."
+    "She mutters something unintelligible."
+    the_person "I guess there's no reason, really."
+    mc.name "Well, I would really like to take you, if you want to go."
+    the_person "I suppose."
     mc.name "Ah, great! Do you know when the concert is?"
     the_person "It's on Thursday night."
     mc.name "Ok. I'll plan to meet you there on Thursday night then?"
     the_person "Okay, if you're sure about this..."
-    "You feel good about this as you finish up your conversation. Maybe you can finally get her to come out of her shell a little..."
+    "You feel good about this as you finish up your conversation."
     $ ashley.event_triggers_dict["concert_date"] = 1
     $ mc.business.add_mandatory_crisis(ashley_classical_concert_date)
     return
@@ -506,6 +489,38 @@ label ashley_classical_concert_date_label():
     if ashley_get_porn_discussed():
         $ ashley.event_triggers_dict["porn_convo_day"] = day + 3
     return
+
+
+
+#Ashley Love Path
+init -1 python:
+    def ashley_room_overhear_classical_requirement(the_person):
+        if the_person.is_at_work():
+            if the_person.days_employed > 18:
+                return True
+        return False
+
+    def ashley_ask_date_classic_concert_requirement(the_person):
+        if ashley_get_concert_overheard() and not ashley_get_concert_date_stage() > 0:
+            return the_person.is_at_work() and the_person.love > 20
+        return False
+
+    def ashley_classical_concert_date_requirement():
+        if time_of_day == 3 and day%7 == 3:  #Thursday
+            return ashley_get_concert_date_stage() == 1
+        return False
+
+    def ashley_jealous_at_work_requirement():
+        return False
+
+    def ashley_sneaks_over_requirement():
+        if schedule_sleepover_available() and time_of_day == 4: #No sleepover expected
+            if ashley.love >= 60 and ashley.is_willing(cowgirl):    #Needs to be willing to commit the acts in the event
+                return ashley_second_date_complete()
+        return False
+
+    def ashley_steph_drinks_out_requirement():
+        return False
 
 label ashley_jealous_at_work_label():
     "In this label, Ashley approaches MC for sex because she can't stand her sister bragging about getting banged by you."
