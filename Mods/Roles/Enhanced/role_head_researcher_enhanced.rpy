@@ -183,7 +183,7 @@ label head_researcher_strip_tease_label(the_person):    #140 obedience event
     $ mc.change_locked_clarity(50)
     "You walk over and sit down at her desk, her ass is right in your face. She looks around the room a bit nervously."
     if the_person.location.get_person_count() >1:
-        "She is a bit embrassed, and your other employees in the area are watching to see what happens."
+        "She is a bit embarassed, and your other employees in the area are watching to see what happens."
     else:
         "However, the room is empty. Just the two of you are here, for now."
     mc.name "Damn, your ass is amazing. You know that right?"
