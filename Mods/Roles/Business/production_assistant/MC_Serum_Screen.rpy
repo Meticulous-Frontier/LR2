@@ -113,6 +113,7 @@ screen screen_mc_serum_basic_stats():
                         text "{size=24}Serum Stats{/size}" style "menu_text_title_style" xalign 0 text_align 0 xpos 2
                         # text "{size=18}[length_desc]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
                         text "{size=18}[quant_desc]{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
+                        text "{size=18}Select serums will take effect tomorrow morning with their first dose.{/size}" style "serum_text_style_traits" xalign 0 text_align 0 xpos 2
 
 screen screen_personal_serum_button(trait):
     $ box_text = "??????"
