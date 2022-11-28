@@ -317,6 +317,9 @@ init 5 python:
             if perk_system.has_ability_perk("Serum: Feat of Orgasm Control") and mc_serum_feat_orgasm_control.get_trait_tier() >= 2:
                 option_list.append(["Orgasm Early","early_orgasm"])
 
+            if perk_system.has_ability_perk("Serum: Feat of Hypnotism") and not person.is_in_trance() and mc.energy >30:
+                option_list.append(["Hypnotize Her","hypnotize"])
+
             if not hide_leave: #TODO: Double check that we can always get out
                 option_list.append(["Stop " + position_choice.verbing + " her and leave", "Leave"]) #TODO: Have this appear differently depending on if you've cum yet, she's cum yet, or you've both cum.
 
@@ -771,6 +774,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             $ the_person.change_arousal(the_person.max_arousal)
             "[the_person.possessive_title] whimpers with pleasure as your training takes hold of her brain."
             call describe_girl_climax(the_person, position_choice, object_choice, private, report_log) from _call_describe_girl_fuck_person_bugfix #Calls just the climax stuff without costing energy.
+
+        elif round_choice == "hypnotize":
+            call hypnotize_in_sex_label(the_person, position_choice) from _hypnosis_in_sex_01
 
         $ round_choice = None #Get rid of our round choice at the end of the round to prepare for the next one. By doing this at the end instead of the beginning of the loop we can set a mandatory choice for the first one.
 
