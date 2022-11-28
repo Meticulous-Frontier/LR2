@@ -88,8 +88,6 @@ init 2 python:
     def do_a_favor_requirement(person):
         if person.days_since_event("obedience_favor", set_if_none = False) == None:
             person.set_event_day("obedience_favor", set_day = -1)
-        if person.is_family():
-            return False
         if person.days_since_event("obedience_favor") >= 1:
             return True
         if mc.energy < 15:
@@ -415,7 +413,36 @@ label do_a_favor_label(the_person):
             $ the_person.set_event_day("obedience_med_favor", override = True)
         "Large Favor" if the_person.days_since_event("obedience_large_favor") > TIER_2_TIME_DELAY and mc.phone.has_number(the_person):
             $ favor_success = True  #calculate this instead of assuming true
-            if not the_person.home in mc.known_home_locations:
+            if the_person.is_family():
+                if mc_at_home():
+                    mc.name "Hey, can I ask for a huge favor?"
+                    the_person "Umm, maybe. What do you need?"
+                    if time_of_day < 2:
+                        mc.name "I really need to get going, could you pack me a lunch? I don't think I have time today."
+                    else:
+                        mc.name "Can you get the trash and the dishes tonight? I know it's my turn, but I have work stuff I really need to get done."
+                    if favor_success:
+                        the_person "I... yeah I guess I can do that. Just this once?"
+                        mc.name "Of course."
+
+                        if the_person.obedience < 160:
+                            $ the_person.change_obedience(3)
+                    else:
+                        the_person "Nope! the world doesn't revolve around you, find a way to get it done yourself!"
+                else:
+                    mc.name "Hey, can I ask for a favor?"
+                    the_person "Umm, maybe?"
+                    mc.name "I accidentally left my wallet at home, but I need to grab some food at the office today."
+                    mc.name "Can you front me $20?"
+                    if favor_success:
+                        the_person "I... yeah I guess I can do that. Try not to make a habit out of this, okay?"
+                        mc.name "Of course."
+                        $ mc.business.change_funds(20)
+                        if the_person.obedience < 160:
+                            $ the_person.change_obedience(3)
+                    else:
+                        the_person "No way! If I give you money I'll never see it again!"
+            elif not the_person.home in mc.known_home_locations:
                 mc.name "Can I get your address? It would be handy to have."
                 if favor_success:
                     the_person "I guess. Just no unannounced 3 am booty calls, okay?"
