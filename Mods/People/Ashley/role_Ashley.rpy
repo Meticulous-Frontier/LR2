@@ -185,6 +185,7 @@ init -1 python:
 
 
     def ashley_porn_video_discover_requirement():
+        return False    #Disabled while working on her story.
         if time_of_day == 4 and ashley.sluttiness > 20 and mc.energy > 80:
             return ashley_get_attitude_discussed()
         return False
@@ -301,7 +302,7 @@ label ashley_intro_label():
         $ scene_manager.update_actor(the_person, position = "walking_away")
         the_person "Hey Ash! Guess what? I got you a starting position at that place I've been..."
         "Her voice trails off as she leaves the room. You hope you made the right decision!"
-        $ ashley.add_unique_on_talk_event(ashley_first_talk)
+        $ ashley.add_unique_on_room_enter_event(ashley_first_talk)
     else:
         mc.name "I'm sorry, I don't think she is a good fit at this time. But I will keep her in mind for the future, okay?"
         the_person "Ahhh, okay. I understand, but please let me know ASAP if you change your mind!"
@@ -485,7 +486,15 @@ label ashley_classical_concert_date_label():
     the_person "Bye!"
     stephanie "See ya then!"
     $ scene_manager.clear_scene()
+    $ ashley.set_event_day("obedience_event", override = True)
+    $ ashley.set_event_day("love_event", override = True)
+    $ ashley.set_event_day("slut_event", override = True)
+    $ ashley.set_event_day("story_event", override = True)
     $ ashley.event_triggers_dict["concert_date"] = 2
+    #Add events for Ashley's three story lines
+    $ mc.business.add_mandatory_crisis(ashley_porn_video_discover)
+    $ mc.business.add_mandatory_crisis(ashley_after_hours)
+    $ mc.business.add_mandatory_crisis(ashley_demands_relief)
     if ashley_get_porn_discussed():
         $ ashley.event_triggers_dict["porn_convo_day"] = day + 3
     return
@@ -494,6 +503,13 @@ label ashley_classical_concert_date_label():
 
 #Ashley Love Path
 init -1 python:
+    def ashley_after_hours_requirement():
+        return False    #Disabled while working on her story.
+        if mc.is_at_work() and time_of_day == 3:
+            if ashley.love >= 20 and ashley.story_event_ready("love"):
+                return True
+        return False
+
     def ashley_room_overhear_classical_requirement(the_person):
         if the_person.is_at_work():
             if the_person.days_employed > 18:
@@ -521,6 +537,14 @@ init -1 python:
 
     def ashley_steph_drinks_out_requirement():
         return False
+
+init 1 python:
+    ashley_after_hours = Action("Ashley approach you", ashley_after_hours_requirement, "ashley_after_hours_label")
+
+label ashley_after_hours_label():   #Ashley looks for an opportunity to get MC alone, waits until after closing when Steph is for sure gone to approach him.
+    pass
+    $ the_person = ashley
+    return
 
 label ashley_jealous_at_work_label():
     "In this label, Ashley approaches MC for sex because she can't stand her sister bragging about getting banged by you."
@@ -1162,6 +1186,14 @@ label ashley_tests_serum_on_sister_label(): #100 sluttiness
 
 #Ashley Obedience Path
 #Ashley taking command path
+init -1 python:
+    def ashley_demands_relief_requirement():
+        pass    #Disabled while working on her story.
+        return False
+
+init 1 python:
+    ashley_demands_relief = Action("Ashley needs relief", ashley_demands_relief_requirement, "ashley_demands_relief_label")
+
 label ashley_ask_sister_about_porn_video_label(the_person): # at 10
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person)
@@ -1737,7 +1769,7 @@ label ashley_room_warming_up_label(the_person):
     mc.name "It's been great so far. And you?"
     the_person "Oh... it's been good I guess..."
     mc.name "Glad to hear it."
-    $ mc.business.add_mandatory_crisis(ashley_porn_video_discover)
+
     $ ashley.add_unique_on_room_enter_event(ashley_room_overhear_classical)
     return
 
