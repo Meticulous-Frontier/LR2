@@ -3,10 +3,9 @@ init 5 python:
 
     def show_satisfying_people_information(person):
         my_string = "The following people currently satisfy the requirements: "
-        satisfying_list = mc.business.get_requirement_employee_list(slut_required = 50, obedience_required = 130, exclude_list = [person])
+        satisfying_list = mc.business.get_requirement_employee_list(slut_required = 40, obedience_required = 120, exclude_list = [person])
         if satisfying_list:
-            for person in satisfying_list:
-                my_string += person.name + " " + person.last_name + ", "
+            my_string += ", ".join([person.name + " " + person.last_name for person in satisfying_list])
         else:
             my_string = "There is currently nobody in your company who meets these requirements."
         renpy.say(None, my_string)
