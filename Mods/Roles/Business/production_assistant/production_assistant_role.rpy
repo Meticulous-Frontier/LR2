@@ -611,19 +611,24 @@ label prod_assistant_increase_duration_2_label(the_person):
     return
 
 label prod_assistant_increase_production_1_label(the_person):
-    "This is an outline label."
-    "In this label, [the_person.title] explains that after research, MC can now take 2 serums at the same time."
+    the_person "I have some good news. As we have gained mastery of Improved Serum Production, the risks of side effects from combining serum traits has reduced drastically!"
+    the_person "I believe we are at a point where we can combine two of your personal serums now with minimal risk of side effects."
+    mc.name "That's great."
+    the_person "However, we should be careful not to mix two serums that use similar bio mechanisms. I've broken them down by category to avoid this."
+    mc.name "Sounds smart, I'll take a look."
     $ mc.business.event_triggers_dict["mc_serum_max_quant"] = 2
     return
 
 label prod_assistant_increase_production_2_label(the_person):
-    "This is an outline label."
-    "In this label, [the_person.title] explains that after research, MC can now take 3 serums at the same time."
+    the_person "As our mastery of Advanced Serum Production has increased, as a company, we have gotten better at combing several serum effects at once."
+    the_person "While my previous advice on not combining serum traits that have the same bio mechanisms holds, I think we can safely combine up to three serums now."
+    mc.name "Excellent. I'll review the available serum list shortly."
     $ mc.business.event_triggers_dict["mc_serum_max_quant"] = 3
     return
 
 label prod_assistant_increase_production_3_label(the_person):
-    "This is an outline label."
-    "In this label, [the_person.title] explains that after research, MC can now take 4 serums at the same time."
+    the_person "Our mastery of Futuristic Serum Production has allowed us to create previously thought impossible serum combinations."
+    the_person "I can safely create one serum from all four categories now for you to use simultaneously."
+    mc.name "Thank you [the_person.title], I'll take a look at the available list in a moment."
     $ mc.business.event_triggers_dict["mc_serum_max_quant"] = 4
     return
