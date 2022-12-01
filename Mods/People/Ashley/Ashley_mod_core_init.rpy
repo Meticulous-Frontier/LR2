@@ -14,5 +14,6 @@ label update_ashley_mod_core(stack):
     python:
         for trait in list_of_mc_traits:
             trait.on_load()
+        mc_serum_load_active_list()
         execute_hijack_call(stack)
     return

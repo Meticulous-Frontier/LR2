@@ -212,3 +212,19 @@ init -2 python:
             if trait.check_upgrade():
                 list_of_upgrades.append(trait)
         return list_of_upgrades
+
+    def mc_serum_save_active_list():
+        list_active_traits = []
+        for trait in list_of_mc_traits:
+            if trait.is_active():
+                list_active_traits.append(trait)
+
+        mc.business.event_triggers_dict["active_mc_serums_list"] = list_active_traits
+        return
+
+    def mc_serum_load_active_list():
+        list_active_traits = mc.business.event_triggers_dict.get("active_mc_serums_list", [])
+        for trait in list_of_mc_traits:
+            if trait in list_active_traits:
+                trait.is_selected = True
+        return
