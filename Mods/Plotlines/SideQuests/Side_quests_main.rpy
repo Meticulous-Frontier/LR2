@@ -184,13 +184,13 @@ init python: #For now default init. May change later if we know better.
         for person in unique_character_list:
             quest_director.add_unavailable_person(person)
 
-        quest_production_line = Side_Quest(quest_name = "Chemist's Baby Girl",
-            quest_init_label = "quest_production_line_init_label",
-            quest_tracker = quest_production_line_tracker,
-            start_requirement = quest_production_line_start_requirement,
-            quest_cleanup = quest_production_line_cleanup)
-        if not quest_production_line in quest_director.quest_list:
-            quest_director.add_new_quest(quest_production_line)
+        # quest_production_line = Side_Quest(quest_name = "Chemist's Baby Girl",
+        #     quest_init_label = "quest_production_line_init_label",
+        #     quest_tracker = quest_production_line_tracker,
+        #     start_requirement = quest_production_line_start_requirement,
+        #     quest_cleanup = quest_production_line_cleanup)
+        # if not quest_production_line in quest_director.quest_list:
+        #     quest_director.add_new_quest(quest_production_line)
 
         # quest_cure_discovery = Side_Quest(quest_name = "Medical Breakthrough",
         #     quest_init_label = "quest_cure_discovery_init_label",
@@ -200,13 +200,13 @@ init python: #For now default init. May change later if we know better.
         # if not quest_cure_discovery in quest_director.quest_list:
         #     quest_director.add_new_quest(quest_cure_discovery)
 
-        quest_cuckold_employee = Side_Quest(quest_name = "Cuckold Employee",
-            quest_init_label = "quest_cuckold_employee_init_label",
-            quest_tracker = quest_cuckold_employee_tracker,
-            start_requirement = quest_cuckold_employee_start_requirement,
-            quest_cleanup = quest_cuckold_employee_cleanup)
-        if not quest_cuckold_employee in quest_director.quest_list:
-            quest_director.add_new_quest(quest_cuckold_employee)
+        # quest_cuckold_employee = Side_Quest(quest_name = "Cuckold Employee",
+        #     quest_init_label = "quest_cuckold_employee_init_label",
+        #     quest_tracker = quest_cuckold_employee_tracker,
+        #     start_requirement = quest_cuckold_employee_start_requirement,
+        #     quest_cleanup = quest_cuckold_employee_cleanup)
+        # if not quest_cuckold_employee in quest_director.quest_list:
+        #     quest_director.add_new_quest(quest_cuckold_employee)
 
         # quest_essential_oils = Side_Quest(quest_name = "Essential Oils",
         #     quest_init_label = "quest_essential_oils_init_label",
