@@ -12,6 +12,7 @@ init -1 python: #Requirement functions
         if mc.business.unisex_restroom_unlocks.get("unisex_restroom_gloryhole", 0) == 0:
             return False  # disabled until gloryhole unlocked
 
+        return False    #Leave storyline disabled for now
         # check if we have a married woman without kids who is slutty enough for breeding
         return not find_avail_cuckold_employee() is None
 
