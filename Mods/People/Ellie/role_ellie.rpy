@@ -194,14 +194,10 @@ init 1 python:
     ellie_never_been_kissed = Action("Ellie Gets Kissed", ellie_never_been_kissed_requirement, "ellie_never_been_kissed_label")
     ellie_grope_followup = Action("Ellie confronts you", ellie_grope_followup_requirement, "ellie_grope_followup_label")
     ellie_text_message_apology = Action("Ellie texts you", ellie_text_message_apology_requirement, "ellie_text_message_apology_label")
-    ellie_never_given_handjob = Action("Ellie wants to touch", ellie_never_given_handjob_requirement, "ellie_never_given_handjob_label")
     ellie_never_tasted_cock = Action("Ellie wants to taste", ellie_never_tasted_cock_requirement, "ellie_never_tasted_cock_label")
     ellie_never_been_fucked = Action("Ellie wants to fuck", ellie_never_been_fucked_requirement, "ellie_never_been_fucked_label")
-    ellie_loses_her_virginity = Action("Ellie loses her cherry", ellie_loses_her_virginity_requirement, "ellie_loses_her_virginity_label")
     ellie_never_tried_anal = Action("Ellie tries anal", ellie_never_tried_anal_requirement, "ellie_never_tried_anal_label")
-    ellie_brings_lunch = Action("Ellie likes cooking", ellie_brings_lunch_requirement, "ellie_brings_lunch_label")
-    ellie_dinner_date_intro = Action("Ellie asks for a dinner date", ellie_dinner_date_intro_requirement, "ellie_dinner_date_intro_label")
-    ellie_dinner_date = Action("Ellie cooks for you", ellie_dinner_date_requirement, "ellie_dinner_date_label")
+
     ellie_turned_on_while_working_intro = Action("Ellie gets horny", ellie_turned_on_while_working_intro_requirement, "ellie_turned_on_while_working_intro_label")
     ellie_turned_on_while_working = Action("Ellie gets horny", ellie_turned_on_while_working_requirement, "ellie_turned_on_while_working_label")    #NOTE: This should probably get moved to a separate crisis file
 
@@ -888,6 +884,14 @@ init -1 python:
             return False
         return False
 
+init 1 python:
+    ellie_never_given_handjob = Action("Ellie wants to touch", ellie_never_given_handjob_requirement, "ellie_never_given_handjob_label")
+    ellie_brings_lunch = Action("Ellie likes cooking", ellie_brings_lunch_requirement, "ellie_brings_lunch_label")
+    ellie_dinner_date_intro = Action("Ellie asks for a dinner date", ellie_dinner_date_intro_requirement, "ellie_dinner_date_intro_label")
+    ellie_dinner_date = Action("Ellie cooks for you", ellie_dinner_date_requirement, "ellie_dinner_date_label")
+    ellie_lingerie_shopping = Action("Ellie dresses up for you", ellie_lingerie_shopping_requirement, "ellie_lingerie_shopping_label")
+
+
 label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut event.
     $ the_person = ellie
     $ the_person.arousal = 0
@@ -1076,8 +1080,7 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
         return
     $ the_person = ellie
     $ ellie.event_triggers_dict["brought_lunch"] = True
-    $ ellie.set_event_day("love_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("love")
     "It's the end of the morning shift. You finish up with your work and are just getting ready to head to the breakroom for lunch."
     $ the_person.draw_person()
     the_person "Hey. Doing anything for lunch?"
@@ -1165,8 +1168,7 @@ label ellie_brings_lunch_label():   #40 love scene. Brings MC lunch to have a da
         "You stand up and [the_person.title] does the same."
         $ the_person.draw_person()
         "You leave your office together and go back to the work day."
-    $ ellie.set_event_day("love_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("love")
     $ ellie.apply_planned_outfit()
     $ ellie.add_unique_on_talk_event(ellie_dinner_date_intro)
     $ clear_scene()
@@ -1344,8 +1346,7 @@ label ellie_dinner_date_intro_label(the_person): #Ellie invites MC over for dinn
 label ellie_dinner_date_label():
     $ the_person = ellie
     $ ellie.event_triggers_dict["dinner_date"] = False
-    $ ellie.set_event_day("love_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("love")
     "It is Sunday night. You have a dinner date with [the_person.title] tonight. You shoot her a text and she sends you her address."
     "You swing by a store on the way there and pick up a bottle of mid range red wine. The make your way to her place."
     "Soon, you are at the front door to her apartment, knocking on her door."
@@ -1359,9 +1360,33 @@ label ellie_dinner_date_label():
     the_person "Ah, thank you! I made up some jambalaya and cornbread. Dessert is still in the oven but I hope you like peach cobbler..."
     "Your mouth is watering. This girl can cook!"
     mc.name "That sounds incredible. Here, I brought this."
-    "You hand her the bottle of wine"
-
-
+    "You hand her the bottle of wine. She takes it and sets it on the counter."
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.title] starts working on portioning out some food. You walk up behind her and wrap your arms around her stomach. She sighs."
+    the_person "Ah it's almost... almost ready..."
+    "You kiss her on the neck a bit, running one hand up her stomach and up to her generous chest..."
+    $ the_person.change_arousal(10)
+    $ the_person.draw_person(position = "back_peek")
+    the_person "Ahh... sit yourself down... I didn't make this soup for nothing!"
+    "Reluctantly, you let her go, then sit down at her table."
+    $ the_person.draw_person(position = "sitting")
+    "[the_person.possessive_title] finishes putting out food, then sits down beside you."
+    "You dig in to the jambalaya. It has considerable heat, but tastes amazing."
+    "As you eat, you make some small talk with [the_person.title]. However, you can feel sexual tension building throughout the meal."
+    "At one point, you feel [the_person.possessive_title]'s foot next to yours, and she slides it up and down the side of your legs a couple times."
+    "A buzzer goes off in the kitchen."
+    the_person "Ah! The cobbler should be done! Let me go pull it out..."
+    $ the_person.draw_person(position = "walking_away")
+    "Last time anyone says that tonight..."
+    "She jumps up and heads back to the kitche. You watch her as she walks away from the table."
+    $ the_person.draw_person(position = the_person.idle_pose)
+    "In a few minutes, she re-emerges with two bowls of peach cobbler with a scoop of vanilla ice cream."
+    "She sets one down next to you, then sits down."
+    $ the_person.draw_person(position = "sitting")
+    the_person "This is one of my favorites. My momma made this for me when I was growing up."
+    "You take a bite. The peaches and ice cream meld together into a savory dessert."
+    mc.name "Wow... this is really good..."
+    "You dig in, barely saying a word as you down it."
     "You finish the last bite of your peach cobbler. You look up at [the_person.possessive_title]. There is an obvious tension in the air."
     if ellie_has_given_virginity():
         "Note from the author. You have already had sex with [the_person.title]."
@@ -1392,7 +1417,7 @@ label ellie_dinner_date_label():
     else:
         mc.name "Thank you [the_person.title]. That was delicious."
         the_person "Aww, it was nothing..."
-        "She takes a long sip from her wine glass, finishing it off."
+        "She scoops the last of her dessert from her bowl, finishing it off."
         the_person "You ummm... want some coffee or something?"
         mc.name "Not particularly, but I'm also not ready to leave yet."
         the_person "Well umm, I just realized, I hadn't give you a tour of the place yet..."
@@ -1506,8 +1531,7 @@ label ellie_dinner_date_label():
     return
 
 label ellie_lingerie_shopping_label(the_person):    #Ellie's 80 love event. She asks MC to take her shopping for exciting underwear to wear for him.
-    $ ellie.set_event_day("love_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("slut")
     return
 
 #Sluttiness EVents
@@ -1525,9 +1549,6 @@ init -1 python:
             return True
         return False
 
-    def ellie_loses_her_virginity_requirement():
-        return False
-
     def ellie_never_tried_anal_requirement():
         return False
 
@@ -1541,8 +1562,7 @@ init -1 python:
 label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness event.
     $ talk_person = get_random_employees(1, exclude_list = [the_person], slut_required = 50)
     $ scene_manager = Scene()
-    $ ellie.set_event_day("slut_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("slut")
     "As you walk towards the entrance of research and development, you begin to overhear a conversation."
     "You stop and listen in before walking in the door, not because of what is being talked about, but because of WHO is talking."
     if ellie_has_given_blowjob():
@@ -1825,7 +1845,155 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
             "No.":
                 pass
     if ellie_has_given_virginity():
-        pass
+        mc.name "It is clear to me that you need some relief... again..."
+        the_person "I... I do appreciate it [the_person.mc_title]."
+        mc.name "I think it is time for you to take the lead though."
+        the_person "Sir?"
+        "You step close to her, putting on hand on her shoulder."
+        mc.name "Let's get naked. I'll sit down in my chair, and then you can come sit on my lap."
+        the_person "Ah, you want me to... be on top? Are you sure?"
+        "She bites her lip. You lift your hand up from her shoulder to her cheek. She looks up into your eyes... then melts."
+        the_person "Okay... I can try that..."
+        mc.name "Alright, let's get naked."
+        $ the_person.strip_outfit(position = the_person.idle_pose)
+        "You both quickly get undressed. You check out [the_person.possessive_title]."
+        "Her nipples are stuff, and her labia are puffy and aroused. Clearly she is really turned on already."
+        "You step over to your chair and sit down."
+        mc.name "Alright, come here."
+        $ the_person.draw_person(position = "cowgirl")
+        "[the_person.title] walks over to you, then gets on your lap, her amazing tits are right in your face."
+        mc.name "God your tits are fantastic."
+        "You cup one in your hand, bringing your mouth up to the other one. You quicly suck and nip at her nipple, eliciting a loud moan from [the_person.possessive_title]."
+        "You feel her hand on the back of your head, running her hand through your hair as you suckle her tit."
+        the_person "Ahh. Okay, just gonna... do this... for a bit..."
+        "[the_person.title] slowly adjusts her hips wider, until you can feel her humid groin get closer to yours, and then finally makes contact."
+        the_person "Stars! It's so hard! Ahhh..."
+        "She groans as she starts to rub herself up against you. Her soaking wet cunt is leaking fluid as she presses her hips eagerly against you and starts to grind."
+        $ the_person.change_arousal(15) #85
+        "You let go of her chest with your hand and put both your hands on her ass. You grab it to use for leverage as you start to thrust yourself up against her."
+        the_person "[the_person.mc_title]! Be careful I'm... I'm already so... so close!"
+        "Fuck it. You're sure you can make her cum more than once like this. You give her ass a smack but don't let up."
+        $ the_person.change_arousal(20) #105
+        the_person "Ah! I can't take it...!"
+        $ the_person.have_orgasm(the_position = "cowgirl", half_arousal = True, force_trance = True) #52
+        "[the_person.possessive_title] suddenly starts to shake as she begins to orgasm. Her legs stop moving and she moans loudly."
+        if ellie_is_a_squirter():
+            "You feel an alarming amount of fluid in your lap as she orgasms, squirting as she cums."
+        "She spends several seconds with her legs and arms rigid as you thrust up against her, your hands groping her ass."
+        "When she finishes, she opens her eyes and looks at you."
+        the_person "That was so good... your thing is so... hard..."
+        "She pushes herself back a bit on your lap, then reaches down and takes your cock in her hand."
+        $ the_person.draw_person(position = "kneeling1")
+        "She gives you a few slow strokes with her hand, your cock is heavily lubricated from rubbing against her slit."
+        the_person "Stars, it's throbbing!..."
+        "[the_person.possessive_title] sits up a bit and leans forward. With your cock in hand, she rubs it up and down her slit again a few times."
+        the_person "It's so hard... I can't wait to feel it inside..."
+        $ the_person.change_arousal(10) #62
+        "After several seconds, she looks at you."
+        the_person "Okay... I think I'm ready."
+        "After several seconds, she lifts her hips up and rotates them forward a bit. She takes the base of your cock in her hand."
+        "Slowly, she lets her body weight down as you feel your tip push slightly up and into her vagina."
+        the_person "Oh... [the_person.mc_title], it's so big... it feels amazing!"
+        $ the_person.draw_person(position = "cowgirl")
+        "[the_person.title] leans forward and wraps her arms around you. Your face is buried in her cleavage."
+        "[the_person.title] takes a deep breath."
+        "You feel movement a she begins to let herself down, using her body weight to sink down onto you."
+        $ the_person.change_arousal(20)    #82
+        $ the_person.draw_person(position = "cowgirl")
+        the_person "Ah! Oh stars OH!"
+        "Her body goes rigid for several seconds... Did... she cum again?"
+        the_person "Whew... that was close... Ha!"
+        "You start to lick and suck on her nipple, and you feel her body shudder for a moment."
+        "You spend several seconds on her tits before you feel her start to move."
+        $ the_person.change_arousal(30) #112
+        the_person "Ah! I'm not gonna last... I'm... OH!"
+        $ mc.change_arousal(20)
+        $ the_person.have_orgasm(the_position = "cowgirl", half_arousal = True, force_trance = True) #56
+        "[the_person.possessive_title] is cumming again! You grope her tits aggressively as her body twitches and spasms."
+        if ellie_is_a_squirter():
+            "Another orgasm, another flood as she squirters in your lap."
+        the_person "Ah... I can't believe it..."
+        "She leans back, her nipple leaves your mouth with a loud smack. You can feel her pussy quiver around you."
+        mc.name "Damn. Twice already? Will I get a proper fuck?"
+        the_person "Ah, of course... just give me a minute..."
+        "[the_person.possessive_title]'s pussy is so warm and tight wrapped around you. It wasn't so long ago you took her virginity."
+        "You reach with your hands behind her again and grab her ass. Her warm cheeks feel so good in your hands."
+        the_person "Alright. I think I'm ready to get this thing going!"
+        mc.name "What do you want me to do when I'm ready to finish?"
+        if the_person.wants_creampie():
+            the_person "You know how I want it. Right up inside me where it belongs..."
+            mc.name "Alright. One cum stuffed cunt, coming right up."
+        else:
+            the_person "I should probably pull off... just in case..."
+            mc.name "Alright. I'll warn you when I'm getting ready to cum, but that is up to you."
+        "[the_person.title] starts to move her hips up and down."
+        $ the_person.change_arousal(20) #76
+        "[the_person.title]'s poor little cunt is quivering all around you. You have an almost overwhelming urge to grab her ass and slam it into her and fuck her silly, but you resist for now."
+        mc.name "God damn your cunt is so good. Don't worry I probably won't last long either."
+        "She leans forward to try a different angle now, her tits now back in range of your mouth. You eagerly sink your face into her tit flesh."
+        $ the_person.change_arousal(20) #96
+        the_person "[the_person.mc_title]! Your cock is so big, it's filling me up!"
+        "You just murmur your agreement as you assault a nipple with your tongue. She is gasping with every thrust now."
+        $ the_person.change_arousal(20) #92
+        "The southern belle is moaning and gasping as you fuck her. She is getting close to cumming."
+        "The heat of the situation is getting to you as well."
+        "You grab her hips with your hands. Instead of allowing her to keeping move front to back, you pick up her body a few inches above you."
+        the_person "[the_person.mc_title]? What are you..."
+        "With room to work now, you thrust your hips forcefully up into hers. Her ass makes a loud smack as you begin to fuck her."
+        $ the_person.change_arousal(20) #112
+        the_person "Ah! Oh my stars it's too good! I'm... I'm cumming!"
+        "[the_person.possessive_title]'s body goes rigid again as she starts to cum. Her tight, quivering little hole feels too good and pushes you over the edge too."
+        mc.name "Oh fuck, me too!"
+        $ the_person.have_orgasm(the_position = "cowgirl", half_arousal = True, force_trance = True)
+        if the_person.wants_creampie():
+            the_person "Do it! I have to feel it!"
+            $ the_person.cum_in_vagina()
+            $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
+            $ the_person.draw_person(position = "cowgirl")
+            "You slam her hips down onto yours, pushing yourself as deep as possible as you start to cum."
+            "Her entire body is twitching and spasming as she cums with you. It feels like her cunt is milking you for every last drop."
+            if ellie_is_a_squirter():
+                "You can feel her copious juices running down between your legs and onto your chair."
+            "Your cock twitches and pulses as you send out the last few spurts of your cum inside her. She clings to you helplessly."
+        else:
+            the_person "Ah! I should... I should get up..."
+            "Her voice is shaky as she tries to gather the will to pull off. With a push or a pull on her hips, you could probably finish any way you want..."
+            $ climax_controller = ClimaxController(["Pull her down and cum inside her", "pussy"],["Let her pull off and cum on her stomach", "body"])
+            $ the_choice = climax_controller.show_climax_menu()
+            if the_choice == "Pull her down and cum inside her":
+                "You reach up and grab [the_person.possessive_title] by the hips. With one confident pull she plunges back onto your cock, gasping with pleasure."
+                "The feeling of her warm, wet pussy sliding down and engulfing your cock again pushes you over the edge. You pull [the_person.title] tight against you and unload inside of her."
+                the_person "Ah! Just... Just this once!"
+                $ the_person.call_dialogue("cum_vagina")
+                $ climax_controller.do_clarity_release(the_person)
+                $ the_person.cum_in_vagina()
+                $ the_person.change_obedience(5)
+                $ the_person.draw_person(position = "cowgirl")
+
+            elif the_choice == "Let her pull off and cum on her stomach":
+                "You reach up and grab [the_person.possessive_title] by the hips. With one push your cock slips out from her warm cunt."
+                "She grinds the lips of her pussy against your shaft as you climax. You fire your hot load over her stomach."
+                $ the_person.cum_on_stomach()
+                $ climax_controller.do_clarity_release(the_person)
+                $ cowgirl.redraw_scene(the_person)
+                the_person "Whew, that was close..."
+        "For several seconds, [the_person.title] just sits on top of you."
+        the_person "That was incredible. Three... three times!"
+        mc.name "Maybe now you can concentrate on work."
+        "She laughs for a moment. You give her ass a playful smack."
+        "There are several moments of silence."
+        the_person "I don't want to get up."
+        mc.name "Take your time. Work can wait."
+        $ the_person.change_happiness(5)
+        $ the_person.change_obedience(2)
+        the_person "Ah... yes sir."
+        "Eventually, she slowly gets up."
+        $ the_person.draw_person(position = "standing_doggy")
+        the_person "Ah, we made such a mess..."
+        "She turns around and starts looking in your desk drawers for something to clean herself with."
+        "You just watch her ass sway back and forth in front of you in an orgasm addled bliss."
+        "Eventually, she finds your wipes and stands up."
+        $ the_person.draw_person(position = the_person.idle_pose)
     else:
         mc.name "It is clear to me that you need some relief... again..."
         the_person "I... I do appreciate it [the_person.mc_title]."
@@ -1952,7 +2120,7 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
         the_person "Ah! Oh my stars it's too good! I'm... I'm cumming!"
         "[the_person.possessive_title]'s body goes rigid again as she starts to cum. Her tight, quivering little hole feels too good and pushes you over the edge too."
         mc.name "Of fuck, me too!"
-        $ the_person.have_orgasm(the_position = "cowgirl", half_arousal = True)
+        $ the_person.have_orgasm(the_position = "cowgirl", half_arousal = True, force_trance = True)
         the_person "Do it! I have to feel it!"
         $ the_person.cum_in_vagina()
         $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
@@ -1980,41 +2148,25 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
         the_person "[the_person.mc_title]! Get me a tissue or something, stars!"
         "You laugh and quickly grab some wipes from your desk."
         $ the_person.draw_person(position = the_person.idle_pose)
-
-
-    return
-
-label ellie_loses_her_virginity_label():
-    $ ellie.set_event_day("slut_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
-    "You meet up with [ellie.fname]. Take her out for a nice dinner."
-    "Have the option to mess around a little under the table. If you use your foot to rub against her privates, she gains +1 public sex opinion."
-    "Also have a drink. At some point she uses ladies room and you can serum her."
-    "Like a normal dinner date gain love based on how fancy wine is, how fancy dinner is, etc."
-    "When finished, she asks MC back to her place, but says she is still scared."
-    "Discover her place."
-    "She's nervous, you make out with her for a bit to get her warmed up."
-    "Finally go back to her bedroom. She wants to strip for you."
-    "Positive remarks give positive view on showing tits, showing ass, no clothes at all, and love gain."
-    "Degrading remarks give negative opinion, but gain obedience and sluttiness."
-    "If she likes getting head, asks for just a bit of oral. Arousal gain here that sets up MC to make her orgasm more later."
-    "Lays down on bed. MC can be gentle for positive vaginal sex opinion, or rough for negative and obedience gain."
-    "Mc can ask if she wants condom. She says she wants her first time natural, but appreciates it if MC asks and likes bareback sex. Otherwise dislikes bareback sex if MC doesn't ask."
-    "After penetration, use creampie_cum but use red color to make it look like virginity taken."
-    "Sex scene. If [ellie.fname] cums twice or more she begs MC to finish inside her. Gain creampie like."
-    "If not, she asks MC to pull out. If MC pulls out she likes cum on her body. If he doesn't, she dislikes creampies."
-    "Taking [ellie.fname]'s virginity has made her putty in your hands now. She gains large love and obedience bonuses."
-    "[ellie.fname] can't believe she did that, she always thought growing up she was saving herself for marriage, but can't believe what she has been missing out on."
-    "With high love stat, MC has option to ask her to be his girlfriend. She accepts."
-    "Leave her place and go home."
-    "You have unlocked [ellie.fname]'s vaginal sex options."
-    $ ellie.event_triggers_dict["given_virginity"] = True
+    "[the_person.title] is standing in front of you, starting to clean herself up. You can tell from the look in her eyes she is in a bit of a daze."
+    "Or is that a trance? You decide to try and do some post orgasm training..."
+    call do_training(the_person) from _call_do_training_ellie_after_fuck_01
+    "[the_person.possessive_title] cleans herself up."
+    $ the_person.apply_planned_outfit()
+    $ the_person.draw_person()
+    the_person "I'm going to get back to work..."
+    mc.name "Sounds good. I'll have to check your productivity at the end of the day. If it goes up, we might have to make this a regular thing."
+    the_person "Oh... I'd better work hard then!"
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.title] turns and starts to walk out of your office. You can't believe how far she has come."
+    "From a blackmailing virgin, she is getting to be one of your favorite office cumdumps."
+    "You smile as you think about how far things are going to go with her."
+    $ the_person.add_unique_on_room_enter_event(ellie_never_tried_anal)
     return
 
 label ellie_never_tried_anal_label():   #This is Ellie's 80 sluttiness rating. Must have anal nanobots unlocked.
     pass
-    $ ellie.set_event_day("slut_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("slut")
     $ ellie.event_triggers_dict["given_anal_virginity"] = True
     return
 
@@ -2037,7 +2189,7 @@ label ellie_asks_to_join_harem_label(the_person):   #100 sluttiness event. Ellie
     return
 
 # Obedience Events
-init -2 python: #Requirement functions
+init -1 python: #Requirement functions
     def ellie_tit_fuck_requirement():
         if not ellie.story_event_ready("obedience"):
             return False
@@ -2075,6 +2227,15 @@ init -2 python: #Requirement functions
 
     def ellie_nanobot_fetish_requirement(the_person):
         return False
+
+init 1 python:
+    ellie_tit_fuck = Action("Use Ellie's Tits", ellie_tit_fuck_requirement, "ellie_tit_fuck_label")
+    ellie_start_search = Action("Ellie was framed", ellie_start_search_requirement, "ellie_start_search_label")
+    ellie_search_update = Action("Finding the Culprit", ellie_search_update_requirement, "ellie_search_update_label")
+    ellie_search_finish = Action("Ellie's Revenge", ellie_search_finish_requirement, "ellie_search_finish_label")
+    ellie_submission = Action("Ellie's submission", ellie_submission_requirement, "ellie_submission_label")
+    ellie_nanobot_fetish_testing = Action("Ellie's first fetish", ellie_nanobot_fetish_testing_requirement, "ellie_nanobot_fetish_testing_label")
+    ellie_nanobot_fetish = Action("Give Ellie another fetish", ellie_nanobot_fetish_requirement, "ellie_nanobot_fetish_label")
 
 label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     $ the_person = ellie
@@ -2305,8 +2466,7 @@ label ellie_start_search_label(): #140 obedience. Scene where you talk to ellie 
     "You step out of the examination room. You have no idea if this plan will work or not, but you know it will take time to find out."
     "Even if the guy never bites, atleast you convinced [the_person.title] to start a DikDok account..."
     $ del the_researcher
-    $ ellie.set_event_day("obedience_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("obedience")
     $ the_person.add_unique_on_room_enter_event(ellie_search_update)
     return
 
@@ -2451,8 +2611,7 @@ label ellie_search_update_label(the_person):    #You locate the contact
         mc.name "Hello. I was hoping to place a special order for some... roleplaying outfits..."
         starbuck "Oh! What are you looking for?"
     "..."
-    $ ellie.set_event_day("obedience_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("obedience")
     $ mc.business.add_mandatory_crisis(ellie_search_finish)
     return
 
@@ -2759,8 +2918,7 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     mc.name "Now let's get going. We have a lot of work to do, but let's get some rest now."
     the_person "Yes [the_person.mc_title]!"
     $ mc.business.add_mandatory_crisis(ellie_submission)
-    $ ellie.set_event_day("obedience_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("obedience")
     return
 
 label ellie_submission_label():   #Ellie submits herself to be used by MC
@@ -2939,31 +3097,21 @@ label ellie_submission_label():   #Ellie submits herself to be used by MC
     "[the_person.possessive_title] is getting more and more submissive. You feel like you are so close to breaking her completely to your will."
     "You should try to keep increasing her obedience and see what happens."
     $ ellie.event_triggers_dict["has_submit"] = True
-    $ ellie.set_event_day("obedience_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("obedience")
     $ ellie.add_unique_on_room_enter_event(ellie_nanobot_fetish_testing)
     return
 
 label ellie_nanobot_fetish_testing_label(the_person):   #MC has ellie test fetish impact of nanobots
     $ ellie.event_triggers_dict["fetish_avail"] = True
-    $ ellie.set_event_day("obedience_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("obedience")
     return
 
 label ellie_nanobot_fetish_label(the_person):   #After first test, MC can give ellie additional fetishes at will.
     pass
-    $ ellie.set_event_day("obedience_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.story_event_log("obedience")
     return
 
-init -1 python:
-    ellie_tit_fuck = Action("Use Ellie's Tits", ellie_tit_fuck_requirement, "ellie_tit_fuck_label")
-    ellie_start_search = Action("Ellie was framed", ellie_start_search_requirement, "ellie_start_search_label")
-    ellie_search_update = Action("Finding the Culprit", ellie_search_update_requirement, "ellie_search_update_label")
-    ellie_search_finish = Action("Ellie's Revenge", ellie_search_finish_requirement, "ellie_search_finish_label")
-    ellie_submission = Action("Ellie's submission", ellie_submission_requirement, "ellie_submission_label")
-    ellie_nanobot_fetish_testing = Action("Ellie's first fetish", ellie_nanobot_fetish_testing_requirement, "ellie_nanobot_fetish_testing_label")
-    ellie_nanobot_fetish = Action("Give Ellie another fetish", ellie_nanobot_fetish_requirement, "ellie_nanobot_fetish_label")
+
 
 init -1 python:
     def ellie_is_working_on_nanobots(): #This should probably always return true now since she is in R&D
