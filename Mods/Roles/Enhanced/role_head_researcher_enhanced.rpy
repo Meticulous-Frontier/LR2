@@ -42,6 +42,68 @@ init 1400 python:
         contact = get_random_from_list(mc.business.market_team)
         return contact
 
+    def determine_test_serum_flags(the_serum_trait):
+        slutty_serum = 0 #positive if it increases, negative if it decreases.
+        happy_serum = 0
+        arousal_serum = 0
+        love_serum = 0
+        obedience_serum = 0
+        work_serum = 0
+        sex_skill_serum = 0
+        energy_serum = 0
+        suggest_serum = 0
+
+        test_person = create_random_person()
+        test_person.serum_tolerance = 5
+        test_person.energy = 50
+        test_person.arousal = 20
+
+
+        start_happinesss = test_person.happiness
+        start_sluttiness = test_person.effective_sluttiness()
+        start_max_arousal = test_person.max_arousal
+        start_arousal = test_person.arousal
+        start_love = test_person.love
+        start_obedience = test_person.obedience
+        start_work = test_person.calculate_base_salary()
+        start_sex_skill = test_person.sex_skills["Foreplay"] + test_person.sex_skills["Oral"] + test_person.sex_skills["Vaginal"] + test_person.sex_skills["Anal"]
+        start_energy = test_person.energy
+        start_suggest = test_person.suggestibility
+
+        test_person.give_serum(the_serum_trait.build_test_serum(), add_to_log = False)
+
+        energy_serum = test_person.energy - start_energy
+        arousal_serum = test_person.arousal - start_arousal
+        happy_serum = test_person.happiness - start_happinesss
+        slutty_serum = test_person.sluttiness - start_sluttiness
+        love_serum = test_person.love - start_love
+        obedience_serum = test_person.obedience - start_obedience
+        work_serum = test_person.calculate_base_salary() - start_work
+        sex_skill_serum = (test_person.sex_skills["Foreplay"] + test_person.sex_skills["Oral"] + test_person.sex_skills["Vaginal"] + test_person.sex_skills["Anal"]) - start_sex_skill
+        suggest_serum = test_person.suggestibility - start_suggest
+
+        test_person.run_turn()
+        if slutty_serum == 0:
+            slutty_serum = test_person.sluttiness - start_sluttiness
+        if happy_serum == 0:
+            happy_serum = test_person.happiness - start_happinesss
+        if love_serum == 0:
+            love_serum = test_person.love - start_love
+        if obedience_serum == 0:
+            obedience_serum = test_person.obedience - start_obedience
+
+
+
+        return ([slutty_serum,
+            happy_serum,
+            arousal_serum,
+            love_serum,
+            obedience_serum,
+            work_serum,
+            sex_skill_serum,
+            energy_serum,
+            suggest_serum])
+
 #Requirement Functions
 init -1 python:
     def head_researcher_suggest_testing_room_requirement():
@@ -449,7 +511,7 @@ label quest_cure_discovery_patent_kept_label():
             else: #Just a BJ
                 "[the_person.possessive_title] licks her lips, she seems to have enjoyed getting on her knees for you."
                 mc.name "Thank you for doing the right thing, but please let me know before you take actions like that again."
-                $ the_person.change_stats(love = 5, slut = 1, max_slut = 70)
+                $ the_person.change_stats(love = 3, slut = 1, max_slut = 70)
                 the_person "Yes sir."
             mc.name "That'll be all for now."
             $ the_person.draw_person(position = "walking_away")
@@ -467,6 +529,160 @@ label head_researcher_testing_room_intro_label(the_person):
     return
 
 label head_researcher_serum_trait_test_label(the_person):
-    "In this label, we test a serum on a someone with the help of the head researcher."
+    mc.name "There is a serum trait that I would like to study. Get a random volunteer and meet me in the study room."
+    the_person "Okay."
+    $ clear_scene()
+    $ scene_manager = Scene()
+    $ the_tester = get_random_from_list(mc.business.get_requirement_employee_list(obedience_required = 110, exclude_list = [the_person]))
+    "You head down to the testing room. After a few minutes, [the_person.possessive_title] returns with today's test subject."
+    $ scene_manager.add_actor(the_person, display_transform = character_left_flipped)
+    $ scene_manager.add_actor(the_tester, display_transform = character_right)
+    mc.name "Hello [the_tester.title]. Are you ready to begin the test?"
+    call serum_research_tester_response_label(the_tester) from _research_serum_mastery_01
+    "You sit down at the computer and select a serum to be tested."
+    call serum_research_trait_selection_label() from _research_serum_mastery_02
+    $ the_serum_trait = _return
+    the_person "Got it. Let me grab the test sample for that."
+    "[the_person.title] walks it over to [the_tester.possessive_title]."
+    $ scene_manager.update_actor(the_person, display_transform = character_right, position = "walking_away")
+    "She gives her the serum then steps back to her observation station."
+    $ scene_manager.add_actor(the_person, display_transform = character_left_flipped, position = the_person.idle_pose)
+    the_tester "Okay... here we go!"
+    $ the_tester.give_serum(the_serum_trait.build_test_serum(), add_to_log = True)
+    "She drinks the serum."
+    mc.name "Alright, [the_person.title] is going to run a series of tests with you while we observe the effects."
+    the_tester "Alright."
+    "[the_person.possessive_title] begins her questions for [the_tester.possessive_title]."
+    call serum_research_serum_results_label(the_person, the_tester, the_serum_trait) from _research_serum_master_03
+    $ test_positive_flags = _return
+    mc.name "Thank you, [the_person.title] and [the_tester.title]. I appreciate your cooperation."
+    the_person "Of course. I'm going to file these results in the main lab."
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "[the_person.possessive_title] steps out, leaving you alone with [the_tester.title] in the testing room."
+
+    #Use this section to determine what extra curriculars we want to engage in.
+    if ("love" in test_positive_flags and the_tester.love > 30) or the_tester.is_girlfriend():    #She asks MC on a date.
+        the_tester "Well, honestly, it was nice just being able spend some time in here with you."
+        the_tester "I was wondering... would you want to catch a movie sometime? It would nice to just hang out!"
+        mc.name "You want to go on a date?"
+        the_tester "Yeah, it could be fun! right? How about Tuesday?"
+        if mc.business.event_triggers_dict.get("movie_date_scheduled", False):
+            mc.name "I'm sorry, I've already got plans for that evening."
+            the_tester "Ah, I see..."
+        else:
+            menu:
+                "Accept Date":
+                    mc.name "Sure, I can do Tuesday."
+                    $ create_movie_date_action(the_tester)
+                    the_tester "Great!"
+                    $ the_tester.change_happiness(2)
+                "Decline Date":
+                    mc.name "I'm sorry, work keeps me too busy, most days I'm just exhausted."
+                    the_tester "Ah, its okay. Don't worry about it."
+    else:
+        the_tester "Well, hopefully you got the data you needed. Can I get back to work?"
+        mc.name "Yes. Thank you for you help, [the_tester.title]."
+    $ scene_manager.clear_scene()
+    "[the_tester.title] steps out of the room also. Your work here has increased your mastery of [the_serum_trait.name]!"
     $ mc.business.set_event_day("serum_trait_test", override = True)
+    call advance_time from _call_advance_time_mastery_research_01
+    return "Advance Time"
+
+label serum_research_tester_response_label(the_tester):
+    the_tester "Well... you're the boss, so I guess I don't have much of a choice then?"
+    mc.name "Not really, no."
+    the_tester "Let's get this over with then."
     return
+
+label serum_research_trait_selection_label():
+    "Note from the Author: I'm working on a screen for this. For now, please accept my apologies and select one of the following:"
+    menu:
+        "Low Concentration Sedatives":
+            return find_serum_by_name("Low Concentration Sedatives")
+        "Inhibition Suppression":
+            return find_serum_by_name("Inhibition Suppression")
+        "Love Potion":
+            return find_serum_by_name("Love Potion")
+        "Off Label Pharmaceuticals":
+            return find_serum_by_name("Off Label Pharmaceuticals")
+    return
+
+label serum_research_serum_results_label(the_person, the_tester, the_serum_trait):
+    $ serum_trait_result_list = determine_test_serum_flags(the_serum_trait)
+    $ positive_flags = []
+    $ negative_flags = []
+    #The high notes
+    the_person "Alright, I have some initial results from our quick study. First are the positive effects."
+    if serum_trait_result_list[0] > 0:  #Slutty Serum
+        $ positive_flags.append("slut")
+        the_person "This serum definitely changes her sexual appetite."
+    if serum_trait_result_list[1] > 0:  #Happy Serum
+        $ positive_flags.append("happy")
+        the_person "She seems to be happier and more satisfied with her life and work situation than at the start."
+    if serum_trait_result_list[2] > 0:  #Arousal Serum
+        $ positive_flags.append("arousal")
+        the_person "She is showing subtle cues and body language associated with arousal."
+    if serum_trait_result_list[3] > 0:  #Love Serum
+        $ positive_flags.append("love")
+        the_person "She actually seems to be showing a more favorable response to questions involving you."
+    if serum_trait_result_list[4] > 0:  #obedience Serum
+        $ positive_flags.append("obedience")
+        the_person "As the test went on, she showed better response and obedience to questions and directions."
+    if serum_trait_result_list[5] > 0:  #Work skill Serum
+        $ positive_flags.append("work")
+        the_person "She is showing greater aptitude for work related tasks than before the serum."
+    if serum_trait_result_list[6] > 0:  #sex skill serum
+        $ positive_flags.append("sex")
+        the_person "She appears to be more able to pick up subtle clues in words and body language associated with sex, possibly making her a better partner."
+    if serum_trait_result_list[7] > 0:  #Energy Serum
+        $ positive_flags.append("energy")
+        the_person "As the test continued, she appeared to be more energetic doing the survey instead of less."
+    if serum_trait_result_list[8] > 0:  #Suggest Serum
+        $ positive_flags.append("suggest")
+        the_person "She seems to be more suspectible to suggestions about her behavior and beliefs."
+    if len(positive_flags) == 0:    #No obvious immediate positive effects.
+        the_person "Unforunately, I don't think that this serum trait has any positive immediate effects. There is a little bit of variability in the results, but it is hard to make a pattern of."
+        the_person "It is likely it has longer term effects in longer laster serum cocktails than in the simple production run we use for these tests."
+
+    the_person "Next, the negative effects."
+    if serum_trait_result_list[0] < 0:  #Slutty Serum
+        $ negative_flags.append("slut")
+        the_person "She seems to have a reduced sex drive."
+    if serum_trait_result_list[1] < 0:  #Happy Serum
+        $ negative_flags.append("happy")
+        the_person "Her demeanor shifted negatively throughout the study, indicating less work and relationship satisfaction."
+    if serum_trait_result_list[2] < 0:  #Arousal Serum
+        $ negative_flags.append("arousal")
+        the_person "She seemed to get less aroused by sexual related questions and cues."
+    if serum_trait_result_list[3] < 0:  #Love Serum
+        $ negative_flags.append("love")
+        the_person "Her opinion of you shifted negatively."
+    if serum_trait_result_list[4] < 0:  #obedience Serum
+        $ negative_flags.append("obedience")
+        the_person "She started to show negative signs of submission to authority during the test."
+    if serum_trait_result_list[5] < 0:  #Work skill Serum
+        $ negative_flags.append("work")
+        the_person "She seems to be less qualifed for her work related tasts while under the effects of this serum."
+    if serum_trait_result_list[6] < 0:  #sex skill serum
+        $ negative_flags.append("sex")
+        the_person "Strangely, she seems to be less in tune to the needs and desires of those around her."
+    if serum_trait_result_list[7] < 0:  #Energy Serum
+        $ negative_flags.append("energy")
+        the_person "She tired out quickly during the testing."
+    if serum_trait_result_list[8] < 0:  #Suggest Serum
+        $ negative_flags.append("suggest")
+        the_person "Her beliefs became more firm throughout the testing, indicating a reduced willingness to change."
+    if len(negative_flags) == 0:
+        the_person "Thankfully, I don't see any immediate negative effects from the serum."
+
+    if len(positive_flags) > 0 and len(negative_flags) > 0:
+        $ the_serum_trait.add_mastery(3)
+        $ mc.log_event("Mastery of " + the_serum_trait.name + " increased by 3.", "float_text_blue")
+    elif len(positive_flags) > 0 or len(negative_flags) > 0:
+        $ the_serum_trait.add_mastery(2)
+        $ mc.log_event("Mastery of " + the_serum_trait.name + " increased by 2.", "float_text_blue")
+    else:
+        $ the_serum_trait.add_mastery(1)
+        $ mc.log_event("Mastery of " + the_serum_trait.name + " increased by 1.", "float_text_blue")
+    the_tester"Wow, that's crazy."
+    return positive_flags
