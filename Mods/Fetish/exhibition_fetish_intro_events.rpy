@@ -1,3 +1,24 @@
+init -1 python:
+    def start_exhibition_fetish_quest(person):
+        if not is_breeding_fetish_unlocked():
+            return False
+        if has_started_exhibition_fetish(person):
+            return False
+        if person.has_taboo(["sucking_cock", "vaginal_sex"]):
+            return False
+
+        if person.get_opinion_score("public sex") < 2 \
+            or person.sex_skills["Oral"] < 4 \
+            or person.sex_skills["Vaginal"] < 4 \
+            or person.sex_skills["Anal"] < 4 \
+            or person.sluttiness < 70:
+            return False
+
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_EXHIBITION_OPINION_LIST, person):
+            return False
+
+        return False #None of them are written yet
+
 init 1 python:
     #Requirement functions
     def exhibition_fetish_employee_intro_requirement():

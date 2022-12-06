@@ -27,7 +27,6 @@ init -2 python:
         return 4 #Edge case, has suggestibility not yet in game
 
 init -1 python:
-
     def fetish_serum_unlock_count():
         return mc.business.event_triggers_dict.get("fetish_serum_count", 0)
 

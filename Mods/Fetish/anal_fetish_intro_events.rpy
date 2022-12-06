@@ -1,3 +1,74 @@
+init -1 python:
+    def start_anal_fetish_quest(person):
+        if not is_anal_fetish_unlocked():
+            return False
+        if has_started_anal_fetish(person):
+            return False
+        if person.has_taboo("anal_sex"):
+            return False
+
+        if person.get_opinion_score("anal sex") < 2 \
+            or person.sex_skills["Anal"] < 4 \
+            or person.sluttiness < 70:
+                return False
+
+        # chance to start the anal fetish quest
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_ANAL_OPINION_LIST, person):
+            return False
+
+        if person is lily:
+            mc.business.mandatory_crises_list.append(anal_fetish_lily_intro)
+            return True
+        elif person is mom:
+            mc.business.mandatory_crises_list.append(anal_fetish_mom_intro)
+            return True
+        # elif person is aunt and False:
+        #     pass
+        # elif person is cousin and False:
+        #     pass
+        elif person is starbuck and get_shop_investment_rate() >= 6.0:
+            mc.business.mandatory_crises_list.append(anal_fetish_starbuck_intro)
+            return True
+        elif person is stephanie:
+            mc.business.mandatory_crises_list.append(anal_fetish_stephanie_intro)
+            return True
+        # elif person is emily and False:
+        #     pass
+        # elif person is christina and False:
+        #     pass
+        # elif person is sarah and False:
+        #     pass
+        # elif person is salon_manager and False:
+        #     pass
+        elif person is erica and erica_has_given_morning_handjob():
+            mc.business.add_mandatory_morning_crisis(anal_fetish_erica_intro)
+            return True
+        elif "candace" in globals() and person is candace and False:
+            pass
+        # elif person is ashley and False:
+        #     pass
+        # elif person is alexia and False:
+        #     pass
+        # elif person is kaya and False:
+        #     pass
+        # elif person is ellie and False:
+        #     pass
+        # elif person is camilla and False:
+        #     pass
+        # elif person is sakari and False:
+        #     pass
+        elif person.is_employee():
+            anal_fetish_employee_intro = Fetish_Action("Employee Anal Fetish Intro", anal_fetish_employee_intro_requirement, "anal_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "anal")
+            mc.business.add_mandatory_crisis(anal_fetish_employee_intro)
+            return True
+        elif person.is_family():
+            person.add_unique_on_room_enter_event(anal_fetish_family_intro)
+            return True
+        else:
+            person.add_unique_on_talk_event(anal_fetish_generic_intro)
+            return True
+        return False
+
 init 1 python:
     #Requirement functions
 

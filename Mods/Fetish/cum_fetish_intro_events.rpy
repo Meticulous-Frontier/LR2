@@ -1,3 +1,59 @@
+init -1 python:
+    def start_cum_fetish_quest(person):
+        if not is_cum_fetish_unlocked():
+            return False
+        if has_started_cum_fetish(person):
+            return False
+        if person.has_taboo(["sucking_cock", "condomless_sex"]):
+            return False
+
+        if person.get_opinion_score("being covered in cum") < 2 \
+            or person.sex_skills["Oral"] < 4 \
+            or person.sluttiness < 70:
+                return False
+
+        # chance to start the cum fetish quest
+        if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_CUM_OPINION_LIST, person):
+            return False
+
+        if person is lily:
+            mc.business.mandatory_morning_crises_list.append(cum_fetish_lily_intro)
+            return True
+        elif person is mom:
+            mc.business.mandatory_crises_list.append(cum_fetish_mom_intro)
+            return True
+        elif person is aunt:
+            person.add_unique_on_room_enter_event(cum_fetish_rebecca_intro)
+            return True
+        elif person is stephanie and person.has_role(head_researcher) and person.personality != bimbo_personality and False:
+            pass
+        elif person is sarah:
+            mc.business.mandatory_crises_list.append(cum_fetish_sarah_intro)
+            return True
+        elif person is erica and erica_get_progress() >= 4:
+            erica.add_unique_on_room_enter_event(cum_fetish_erica_intro)
+            return True
+        # elif person is kaya and False:
+        #     pass
+        # elif person is ellie and False:
+        #     pass
+        # elif person is camilla and False:
+        #     pass
+        # elif person is sakari and False:
+        #     pass
+        elif person.is_employee():
+            cum_fetish_employee_intro = Fetish_Action("Employee cum fetish intro", cum_fetish_employee_intro_requirement, "cum_fetish_employee_intro_label", args = person, priority = 10, fetish_type = "cum")
+            mc.business.mandatory_crises_list.append(cum_fetish_employee_intro)
+            return True
+        elif person.is_family():
+            person.add_unique_on_room_enter_event(cum_fetish_family_intro)
+            return True
+        else:
+            cum_fetish_generic_intro = Fetish_Action("Someone needs cum", cum_fetish_generic_intro_requirement, "cum_fetish_generic_intro_label", args = person, priority = 10, fetish_type = "cum")
+            mc.business.add_mandatory_crisis(cum_fetish_generic_intro)
+            return True
+        return False
+
 init 1 python:
     #Requirement functions
 
