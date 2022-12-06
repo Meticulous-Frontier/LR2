@@ -7,7 +7,7 @@ init 2 python: #Trainable declared at -2
         elif the_person.has_exact_role(very_heavy_trance_role):
             trance_modifier = 0.5
 
-        mc.log_event("Custom cost function run", "float_text_green")
+        # mc.log_event("Custom cost function run", "float_text_green")
 
         if mc_serum_feat_hypnotist.is_active():
             if mc_serum_feat_hypnotist.get_trait_tier() == 2:
