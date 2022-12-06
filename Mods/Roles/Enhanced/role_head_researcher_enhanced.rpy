@@ -559,6 +559,7 @@ label head_researcher_serum_trait_test_label(the_person):
     the_person "Of course. I'm going to file these results in the main lab."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.possessive_title] steps out, leaving you alone with [the_tester.title] in the testing room."
+    $ scene_manager.remove_actor(the_person)
 
     #Use this section to determine what extra curriculars we want to engage in.
     if ("love" in test_positive_flags and the_tester.love > 30) or the_tester.is_girlfriend():    #She asks MC on a date.

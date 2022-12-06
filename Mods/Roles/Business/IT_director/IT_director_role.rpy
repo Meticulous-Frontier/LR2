@@ -23,6 +23,12 @@ init 1 python:
             return True
         return False
 
+    def IT_director_teamup_start_requirement():
+        if mc.is_at_work() and mc.business.it_director and mc.business.is_open_for_business():
+            if mc.business.days_since_event("IT_dir_nanobot_takeover_day") >= TIER_2_TIME_DELAY:
+                return True
+        return False
+
     # def IT_director_on_move(the_person):
     #     if mc.business.is_open_for_business() and mc.business.IT_project_in_progress:
 
@@ -31,6 +37,7 @@ init 1 python:
         menu_tooltip = "Start, change, activate, or deactivate IT projects.", priority = 5)
     IT_project_complete_action = Action("IT Project Complete", IT_project_complete_requirement, "IT_project_complete_label")
     IT_director_nanobot_intro = Action("Nanobot Programs", IT_director_nanobot_intro_requirement, "IT_director_nanobot_intro_label")
+    IT_director_teamup_start = Action("IT and RnD Teamup Intro", IT_director_teamup_start_requirement, "IT_director_teamup_start_label")
 
     IT_director_role = Role("IT Director", [update_IT_projects_action], on_turn = IT_director_on_turn)
 
@@ -121,5 +128,10 @@ label IT_director_nanobot_intro_label(the_person):
     "From now on, you can work with her towards perfect your nanobot programs."
     "In addition, you can talk to her about the programs as you begin to master them."
     $ mc.business.set_event_day("IT_dir_nanobot_takeover_day")
+    $ mc.business.add_mandatory_crisis(IT_director_teamup_start)
     $ clear_scene()
+    return
+
+label IT_director_teamup_start_label():
+    call ellie_stephanie_teamup_progression_scene_action_label(ellie) from _it_director_teamup_intro_prog_scene_intro_01
     return

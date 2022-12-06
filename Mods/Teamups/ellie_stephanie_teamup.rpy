@@ -52,6 +52,7 @@ init 1 python:
 
 
     def ellie_stephanie_teamup_progression_scene_action_req(the_person):  #Use this function to determine the requirement for when to actually run the scene itself.
+        return False    #Disabled for now
         if time_of_day == 1 and day%7 == 2:
             if mc.business.head_researcher != None:
                 return True
@@ -101,7 +102,7 @@ init 2 python:
 
 label ellie_stephanie_teamup_progression_scene_action_label(the_person):  #Use (the_person) if this event is attached to a person, otherwise leave params blank, EG: ellie_stephanie_teamup_progression_scene_action_label():
     pass
-    call progression_scene_scene_label(ellie_stephanie_teamup_progression_scene, [the_person, mc.business.head_researcher]) from _ellie_stephanie_teamup_progression_scene_call_test_01  #[the_person] parameter should be a list of people in the scene itself, IE [mom], [mom,lily], [sarah,erica,mom], etc
+    call progression_scene_label(ellie_stephanie_teamup_progression_scene, [the_person, mc.business.head_researcher]) from _ellie_stephanie_teamup_progression_scene_call_test_01  #[the_person] parameter should be a list of people in the scene itself, IE [mom], [mom,lily], [sarah,erica,mom], etc
     return
 
 label ellie_stephanie_teamup_progression_scene_intro_scene(the_group):
