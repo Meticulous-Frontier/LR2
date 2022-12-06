@@ -7,8 +7,14 @@ init -1 python: #Requirement functions
 init 1 python:      #Actions
     pass
 
-init 2 python:      #Other python functions
-    pass
+# init 2 python:      #Other python functions
+#     def prod_line_target_unique_sex_positions(person, prohibit_tags = []):
+#         positions = []
+#         if "Foreplay" not in prohibit_tags:
+#             positions.append([spanking, 1])
+#
+#         return positions
+#     pass
 
 # story labels
 label chemist_daughter_init_label():
@@ -368,3 +374,132 @@ label chemist_daughter_daddy_title_label(the_person): #This label is activated i
     $ the_person.unlock_spanking()
     $ the_person.draw_person()
     return
+
+# #Daddy's girl personality overrides
+# init 1400 python:
+#     def daddy_girl_titles(the_person):
+#         return "Baby Girl"
+#     def daddy_girl_possessive_titles(the_person):
+#         return "Your Baby Girl"
+#     def daddy_girl_player_titles(the_person):
+#         return "Daddy"
+#     def get_daddy_girl_personality(the_person): #Use a function to get this so we can keep the girls prefix so her personality doesn't change TOO much
+#         daddy_girl = Personality("princess", default_prefix = the_person.personality.default_prefix,
+#         common_likes = [],
+#         common_sexy_likes = [],
+#         common_dislikes = [],
+#         common_sexy_dislikes = [],
+#         titles_function = daddy_girl_titles, possessive_titles_function = daddy_girl_possessive_titles, player_titles_function = daddy_girl_player_titles)
+#         return daddy_girl
+#
+# label princess_greetings(the_person):
+#     $ update_ass_condition(the_person)
+#     if the_person.sluttiness > 40:
+#         if renpy.random.randint(0,2) == 1: # only bring up spanking once in a while
+#             if the_person.event_triggers_dict.get("spank_level", 0) < 2: #Flawless
+#                 the_person "Hi [the_person.mc_title]! I've been so good lately!"
+#                 "She lowers her voice a little."
+#                 the_person "But maybe a little too good... Are you sure I don't need a spanking?"
+#             elif the_person.event_triggers_dict.get("spank_level", 0) < 6: #Flawless
+#                 the_person "Hi [the_person.mc_title]! I'm trying to be good!'"
+#                 "She lowers her voice a little."
+#                 the_person "I'm still a little sore, but if you need to spank me, I understand!"
+#             else:
+#                 the_person "Hi [the_person.mc_title]! I'm being good I promise!"
+#                 the_person "I'm still sore, I swear I don't need a spanking!"
+#             mc.name "Hello [the_person.title]. I'll be the judge of when you need spanking."
+#         else:
+#             the_person "Hi [the_person.mc_title]!"
+#     elif the_person.love < 0:
+#         the_person "Ugh, what do you want?"
+#     elif the_person.happiness < 90:
+#         the_person "Hey..."
+#     else:
+#         if the_person.sluttiness > 60:
+#             if the_person.obedience > 130:
+#                 the_person "Hello [the_person.mc_title], it's good to see you."
+#             else:
+#                 the_person "Hey there handsome, feeling good?"
+#         else:
+#             if the_person.obedience > 130:
+#                 the_person "Hello [the_person.mc_title]."
+#             else:
+#                 the_person "Hey there!"
+#     return
+#
+# label princess_clothing_accept(the_person):
+#     if the_person.obedience > 130:
+#         the_person "You want me to wear this [the_person.mc_title]? Anything for you!"
+#     else:
+#         the_person "Oh [the_person.mc_title]! Are you sure I can wear this out of the house?"
+#     return
+#
+# label princess_clothing_reject(the_person):
+#     the_person "I want to wear this for you [the_person.mc_title], but I'm not sure I can!"
+#     return
+#
+# label princess_sex_accept(the_person):
+#     if the_person.sluttiness > 70:
+#         the_person "Oh [the_person.mc_title]! I'll do ANYTHING for you."
+#     else:
+#         the_person "Okay [the_person.mc_title], we can give that a try."
+#     return
+#
+# label princess_sex_obedience_accept(the_person):
+#     the_person "I'll do it, but only because it's for you [the_person.mc_title]."
+#
+#     return
+#
+# label princess_cum_face(the_person):
+#     the_person "Oh [the_person.mc_title], do I look cute covered in your cum?"
+#     if the_person.sluttiness > 60:
+#         "[the_person.title] licks her lips, cleaning up a few drops of your semen that had run down her face."
+#     else:
+#         "[the_person.title] runs a finger along her cheek, wiping away some of your semen."
+#     return
+#
+# label princess_cum_condom(the_person):
+#     if the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
+#         the_person "God [the_person.mc_title], I can feel it in the condom! If I'm good will you promise not to use one next time?"
+#     else:
+#         the_person "[the_person.mc_title]... I can feel how warm your cum is through the condom. Thank you so much."
+#     return
+#
+# label princess_cum_vagina(the_person):
+#     if the_person.has_taboo("creampie"):
+#         $ the_person.call_dialogue("creampie_taboo_break")
+#         $ the_person.break_taboo("creampie")
+#         return
+#
+#     if the_person.wants_creampie():
+#         if the_person.knows_pregnant():
+#             the_person "Mmm, [the_person.mc_title], your cum is so nice and warm..."
+#             "She sighs happily."
+#
+#         elif the_person.on_birth_control:
+#             the_person "Oh [the_person.mc_title], it's so nice and warm. I can feel it inside me..."
+#             "She sighs happily as you cum inside her."
+#
+#         elif the_person.effective_sluttiness() > 75 or the_person.get_opinion_score("creampies") > 0:
+#             the_person "God [the_person.mc_title], your cum feels so warm! If I'm good will you promise we can do it without a condom next time?"
+#
+#         else:
+#             the_person "Oh [the_person.mc_title], so much hot cum... I love you [the_person.mc_title]."
+#
+#     else: #She's angry
+#         if not the_person.on_birth_control:
+#             the_person "Oh [the_person.mc_title], I told you to pull out! What if your little girl got pregnant."
+#             the_person "Well maybe it ain't that bad."
+#
+#         elif the_person.get_opinion_score("creampies") < 0:
+#             the_person "Ugh [the_person.mc_title], I told you to pull out! I'm a mess, I want to look pretty for you..."
+#
+#         else:
+#             the_person "[the_person.mc_title], didn't I ask you to pull out?"
+#             the_person "Well maybe it ain't that bad."
+#     return
+#
+# label princess_surprised_exclaim(the_person):
+#     $rando = renpy.random.choice(["Daddy!","Shit!","Oh fuck!","Fuck me!","Ah! Oh fuck!", "Ah!", "Fucking tits!", "Holy shit Daddy!", "Fucking shit!"])
+#     the_person "[rando]"
+#     return
