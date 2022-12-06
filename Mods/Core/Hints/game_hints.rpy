@@ -49,9 +49,6 @@ init -1 python:
     game_hints.append(Hint("Research Mastered", "Your development effort is directed at a well-researched component, your efforts might be better spent on something else.", "mc.business.active_research_design and isinstance(mc.business.active_research_design, SerumTrait) and mc.business.active_research_design.mastery_level >= 2 and mc.business.active_research_design.get_effective_side_effect_chance() < 5", "mc.business.active_research_design and isinstance(mc.business.active_research_design, SerumTrait) and mc.business.active_research_design.get_effective_side_effect_chance() > 5"))
     game_hints.append(Hint("Advance Research", "You have researched all traits for your current research level, talk to your head researcher about advancing your research to the next level.", "mc.business.research_tier < 3 and researched_all_at_level()", "not researched_all_at_level()"))
 
-    # Hint for Active Quest (description is retrieved by object function)
-    game_hints.append(Hint("Active Quest", None, "not quest_director.active_quest is None", "quest_director.active_quest is None", description_func_string = "quest_director.active_quest_name"))
-
     # Hints for Strip Club
     game_hints.append(Hint("The Strip Club is closed", "Wait a few days and have a chat with the sex shop owner.", "get_strip_club_foreclosed_stage() == 1", "get_strip_club_foreclosed_stage() == 3"))
     game_hints.append(Hint("Buy the strip club or not?", "When you have at least $60.000 have a chat with the sex shop owner.", "get_strip_club_foreclosed_stage() == 3", "get_strip_club_foreclosed_stage() == 4"))

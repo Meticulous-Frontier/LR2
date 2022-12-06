@@ -209,8 +209,6 @@ init 5 python:
         for project in mc.business.active_IT_projects:
             project.on_turn()
         mc.run_turn()
-        if "quest_director" in globals():
-            quest_director.run_turn()
         if "perk_system" in globals():
             perk_system.update()  #TEST to see if this is a good time for this.
         return
@@ -224,8 +222,6 @@ init 5 python:
         mc.business.run_day()
         for project in mc.business.active_IT_projects:
             project.on_day()
-        if "quest_director" in globals():
-            quest_director.run_day()
         mc_serum_trait_run_day()
         return
 

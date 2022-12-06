@@ -16,6 +16,9 @@ init 10 python:  # load quest tracker last on stack (higher init number is later
     def side_character_is_unavail(the_person):
         return the_person.identifier in mc.business.event_triggers_dict.get("side_character_unavail_list", [])
 
+    def side_character_unavail_list():
+        return [x for x in known_people_in_the_game() if x.identifier in mc.business.event_triggers_dict.get("side_character_unavail_list", [])]
+
 
 label activate_side_character_mod_core(stack):
     python:

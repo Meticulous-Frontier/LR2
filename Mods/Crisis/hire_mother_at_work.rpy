@@ -13,11 +13,11 @@ init 2 python:
     def hire_mother_work_crisis_get_daughter():
         valid_people_list = []
         if mc.business.is_open_for_business():
-            for person in [x for x in mc.business.get_employee_list() if x.age < 34 and not x.has_role(clone_role) and not quest_director.is_person_blocked(x) and x not in unique_character_list]:
+            for person in [x for x in mc.business.get_employee_list() if x.age < 34 and not x.has_role(clone_role) and not side_character_is_unavail(x) and x not in unique_character_list]:
                 if town_relationships.get_existing_parent_count(person) == 0: #The mother for this character is not yet in the game
                     valid_people_list.append(person)
         if mc.business.is_open_for_internship():
-            for person in [x for x in mc.business.get_intern_list() if x.age < 34 and not x.has_role(clone_role) and not quest_director.is_person_blocked(x) and x not in unique_character_list]:
+            for person in [x for x in mc.business.get_intern_list() if x.age < 34 and not x.has_role(clone_role) and not side_character_is_unavail(x) and x not in unique_character_list]:
                 if town_relationships.get_existing_parent_count(person) == 0: #The mother for this character is not yet in the game
                     valid_people_list.append(person)
         return get_random_from_list(valid_people_list) #Pick someone appropriate from the company.
