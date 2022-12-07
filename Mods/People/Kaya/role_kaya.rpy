@@ -1112,7 +1112,7 @@ label kaya_work_fuck_label(the_person):
     "You slowly push into her. She reaches back and grabs your leg, urging you forward as her cunt stretches to receive you."
     "She keeps her voice hushed, as she urges you in between moans."
     the_person "That's it, now don't stop until you fill me up...!"
-    call fuck_person(the_person, start_position = bent_over_breeding.position_tag, start_object = make_table(), skip_intro = True, skip_condom = True, private = True) from _call_fuck_person_kaya_work
+    call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_table(), skip_intro = True, skip_condom = True, private = True) from _call_fuck_person_kaya_work
     $ report_log = _return
     $ the_person.draw_person(position = "standing_doggy")
     if report_log.get("creampies", 0) > 0 and report_log.get("girl orgasms", 0) > 0:
