@@ -28,7 +28,9 @@ init 1400 python:
         extra_arguments = { "unlock" : 1})
     serum_policies_list.insert(9, testing_room_creation_policy)
 
-    def quest_cure_discovery_disease_name():
+    def head_researcher_cure_discovery_disease_name():
+        if mc.business.event_triggers_dict.get("head_researcher_cure_disease_name", None) != None:
+            return mc.business.event_triggers_dict.get("head_researcher_cure_disease_name", None)
         if mc.business.research_tier == 0:
             return "Rabies"
         elif mc.business.research_tier == 1:
@@ -38,7 +40,7 @@ init 1400 python:
         else:
             return "Parkinson's disease"
 
-    def quest_cure_get_market_contact():
+    def head_researcher_cure_get_market_contact():
         contact = get_random_from_list(mc.business.market_team)
         return contact
 
@@ -134,28 +136,33 @@ init -1 python:
                     return True
         return False
 
-    def quest_cure_discovery_intro_requirement():
+    def head_researcher_cure_discovery_intro_requirement():
         if mc.business.is_open_for_business() and mc.business.head_researcher != None: #Only trigger if people are in the office.
             if mc.business.head_researcher.days_since_event("obedience_event") >= TIER_2_TIME_DELAY and mc.business.head_researcher.obedience >= 160:
                 return True
         return False
 
-    def quest_cure_discovery_market_patent_requirement(the_person):
+    def head_researcher_cure_discovery_market_patent_requirement(the_person):
         if mc.business.is_open_for_business():
             if the_person.is_at_work():
                 return True #Only while she is at work
         return False
 
-    def quest_cure_discovery_patent_sold_requirement():
+    def head_researcher_cure_discovery_patent_sold_requirement(the_person):
         if mc.business.is_open_for_business() and mc.business.head_researcher != None:
             if mc.business.head_researcher.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
                 return True
         return False
 
-    def quest_cure_discovery_patent_kept_requirement():
+    def head_researcher_cure_discovery_patent_kept_requirement():
         if mc.business.is_open_for_business() and mc.business.head_researcher != None:
             if mc.business.head_researcher.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
                 return True
+        return False
+
+    def head_researcher_cure_finish_requirement(the_person):
+        if mc.business.is_open_for_business() and mc.business.head_researcher != None:
+            return True
         return False
 
 #Action definitions
@@ -164,10 +171,11 @@ init -1 python:
     head_researcher_serum_trait_test = Action("Test a Serum Trait", head_researcher_serum_trait_test_requirement, "head_researcher_serum_trait_test_label",
         menu_tooltip = "Perform intensive serum trait test with the help of your head researcher on an employee.")
     head_researcher_strip_tease = Action("Head Researcher Strip Tease", head_researcher_strip_tease_requirement, "head_researcher_strip_tease_label")
-    quest_cure_discovery_intro = Action("Begin Cure Discovery Quest", quest_cure_discovery_intro_requirement, "quest_cure_discovery_intro_label")
-    quest_cure_discovery_market_patent = Action("Attempt to sell patent", quest_cure_discovery_market_patent_requirement, "quest_cure_discovery_market_patent_label")
-    quest_cure_discovery_patent_sold = Action("Patent Sold", quest_cure_discovery_patent_sold_requirement, "quest_cure_discovery_patent_sold_label")
-    quest_cure_discovery_patent_kept = Action("Patent Stolen", quest_cure_discovery_patent_kept_requirement, "quest_cure_discovery_patent_kept_label")
+    head_researcher_cure_discovery_intro = Action("Begin Cure Discovery Quest", head_researcher_cure_discovery_intro_requirement, "head_researcher_cure_discovery_intro_label")
+    head_researcher_cure_discovery_market_patent = Action("Attempt to sell patent", head_researcher_cure_discovery_market_patent_requirement, "head_researcher_cure_discovery_market_patent_label")
+    head_researcher_cure_discovery_patent_sold = Action("Patent Sold", head_researcher_cure_discovery_patent_sold_requirement, "head_researcher_cure_discovery_patent_sold_label")
+    head_researcher_cure_discovery_patent_kept = Action("Patent Stolen", head_researcher_cure_discovery_patent_kept_requirement, "head_researcher_cure_discovery_patent_kept_label")
+    head_researcher_cure_finish = Action("Cure Reward", head_researcher_cure_finish_requirement, "head_researcher_cure_finish_label")
 
 label head_researcher_suggest_testing_room_label():
     if mc.business.event_triggers_dict.get("testing_room_policy_avail",0) == 1: #We've already run this event.
@@ -304,13 +312,13 @@ label head_researcher_strip_tease_label(the_person):    #140 obedience event
     "You can now order an employee to bend over her desk and present her ass to you, if she is obedient enough."
     "The more obedient she is, the farther you can take things with her."
     $ mc.business.event_triggers_dict["employee_over_desk_unlock"] = True
-    $ mc.business.add_mandatory_crisis(quest_cure_discovery_intro)
+    $ mc.business.add_mandatory_crisis(head_researcher_cure_discovery_intro)
     return
 
-label quest_cure_discovery_intro_label():
+label head_researcher_cure_discovery_intro_label():
     $ the_person = mc.business.head_researcher
-    $ the_disease = quest_cure_discovery_disease_name()
-
+    $ the_disease = head_researcher_cure_discovery_disease_name()
+    $ mc.business.event_triggers_dict["head_researcher_cure_disease_name"] = the_disease
     if the_person == None:
         return #Bad end
     if mc.location != rd_division:
@@ -349,11 +357,11 @@ label quest_cure_discovery_intro_label():
             "She really doesn't like your answer. Hopefully you haven't burned any bridges?"
             "As you turn to leave, you can hear her muttering something."
             $ del the_disease
-            $ mc.business.add_mandatory_crisis(quest_cure_discovery_patent_kept)
+            $ mc.business.add_mandatory_crisis(head_researcher_cure_discovery_patent_kept)
             return
         "Convince me":
             mc.name "Some cash infusion to the company would be great. That's a great idea, [the_person.title]."
-    $ the_target = quest_cure_get_market_contact()
+    $ the_target = head_researcher_cure_get_market_contact()
     the_person "Personally, I think you should talk to [the_target.name]. You know, over in marketing?"
     mc.name "Oh?"
     if the_target == alexia:
@@ -371,16 +379,14 @@ label quest_cure_discovery_intro_label():
     "So... you should talk to [the_target.possessive_title] about selling your patent rights to the cure for [the_disease]."
 
     python:
-        mc.business.event_triggers_dict["head_researcher_obedience_disease"] = the_disease
-
-        the_target.add_unique_on_talk_event(quest_cure_discovery_market_patent)
+        the_target.add_unique_on_talk_event(head_researcher_cure_discovery_market_patent)
         del the_disease
         del the_target
     return
 
-label quest_cure_discovery_market_patent_label(the_person):
+label head_researcher_cure_discovery_market_patent_label(the_person):
     $ the_person.draw_person()
-    $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
+    $ the_disease = head_researcher_cure_discovery_disease_name()
     mc.name "Hello [the_person.title], do you have a moment?"
     the_person "Of course. What can I do for you sir?"
     if the_person == alexia:
@@ -403,52 +409,54 @@ label quest_cure_discovery_market_patent_label(the_person):
     mc.name "That's exactly right."
     the_person "Okay! I can do that. Give me a couple of days and I'll see what I can find!"
     mc.name "Thank you, [the_person.title]."
-    $ quest_cure_set_market_contact(the_person)
-    $ quest_cure_discovery().quest_event_dict["market_day"] = day
+    # $ head_researcher_cure_discovery().quest_event_dict["market_day"] = day
     $ del the_disease
-    $ quest_cure_discovery().set_quest_flag(31)
-    $ mc.business.remove_mandatory_crisis("quest_cure_discovery_market_missed_label")
-    $ mc.business.add_mandatory_crisis(quest_cure_discovery_patent_sold)
+    $ the_person.add_unique_on_room_enter_event(head_researcher_cure_discovery_patent_sold)
     return
 
-label quest_cure_discovery_patent_sold_label():
-    $ the_disease = mc.business.event_triggers_dict.get("head_researcher_obedience_disease", "Rabies")
-    $ the_person = mc.business.head_researcher
+label head_researcher_cure_discovery_patent_sold_label(the_person):
+    $ the_disease = head_researcher_cure_discovery_disease_name()
     if the_person == None:
         return
-    #TODO test to make sure market contact still works for us.
-    $ the_person.set_event_day("obedience_event", override = True)
-    $ mc.start_text_convo(the_person)
-    the_person "Hey there! I just got some good news from marketing on that patent we have for [the_disease]."
+    the_person "Hey there! I have some good news about that patent for [the_disease]."
     mc.name "Glad to hear it. What is the news?"
-    if quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 0:
+    if the_disease == "Rabies":
         the_person "Well, [the_disease] has very few cases annually, so the prospects of a lucrative deal for the patent rights were pretty slim."
         the_person "After negotiating, they were able to sell them for $1500. I hope that is okay."
         $ mc.business.change_funds(1500)
         mc.name "I understand. That is still very helpful. Thank you [the_person.title]."
-    elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 1:
+    elif the_disease == "Dengue fever":
         the_person "Well, [the_disease] really only propagates in poor, tropical areas, due to the way it spreads."
         the_person "While the good this drug can do is great, the profit potential is pretty low. They were able to sell it for $3500. I hope that is okay."
         $ mc.business.change_funds(3500)
         mc.name "Thank you [the_person.title], I just hope the drug can be put to good use."
-    elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) == 2:
+    elif the_disease == "Crohn's disease":
         the_person "[the_disease] is widespread in the developed world. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
         the_person "After negotiating, they were able to sell the patent for $15000. I hope that is okay."
         $ mc.business.change_funds(15000)
         mc.name "That is still a considerable sum. Thank you [the_person.title]."
-    elif quest_cure_discovery().quest_event_dict.get("cure_tier", 0) >= 3:
+    elif the_disease == "Parkinson's disease":
         the_person "[the_disease] is widespread in older populations. However, because this treatment has only been shown effective in rats, the over all effectiveness is unknown."
         the_person "After negotiating, they were able to sell the patent for $50000. I hope that is okay."
         $ mc.business.change_funds(50000)
         mc.name "That is a significant sum. Thank you [the_person.title]."
-    $ mc.end_text_convo()
+    else:
+        the_person "Well, not much is actually known about [the_disease]. However, with the rapid effects from the compound, I was still able to sell it."
+        the_person "After negotiating, I was able to sell the patent for $5000. I hope that is okay."
+        $ mc.business.change_funds(5000)
+        mc.name "Thank you [the_person.title], I just hope the drug can be put to good use."
     "The patent is sold! And you made a little extra money for the business."
+    if mc.business.head_researcher:
+        "You might want to check back with your head researcher and let her know the good news."
+        $ mc.business.head_researcher.add_unique_on_talk_event(head_researcher_cure_finish)
+    else:
+        "Unfortunately, you no longer have a head researcher to share the good news with."
     $ del the_disease
     return
 
-label quest_cure_discovery_patent_kept_label():
+label head_researcher_cure_discovery_patent_kept_label():
     $ the_person = mc.business.head_researcher
-    $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
+    $ the_disease = head_researcher_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
     "You get a notification on your phone and you check it. It's from the Red Cross?"
     "Red Cross""Thank you for donating your patent for [the_disease]!"
     "Red Cross""With this donation, we promise we will work to the best of our abilities to get this cure into the hands of everyone who needs it, worldwide."
@@ -468,57 +476,62 @@ label quest_cure_discovery_patent_kept_label():
     the_person "I'm not going to lie... yes, that was me. You have to understand! This could help a lot of people!"
     "She sounds very sincere. It's hard to be mad, and maybe this is something that really COULD help a lot of people."
     the_person "Please don't fire me, I love working here, but I just couldn't sit by while something that could help people..."
-    menu:
-        "Fire her":
-            mc.name "Clean out your desk. I can't have someone undermining me as my head researcher. You're fired."
-            "Stunned silence on the other end of the call. Finally she speaks up."
-            the_person "I understand. I'll be out before the end of the day."
-            $ mc.business.remove_employee(the_person)
-        "It's okay":
-            mc.name "It's okay, [the_person.title]. I'm not going to fire you."
-            "She sounds relieved."
-            the_person "Oh [the_person.mc_title], I knew you were a reasonable man! I'll make it up to you, I promise!"
-            mc.name "I think I know how you can make it up to me. Come to my office."
-            the_person "Yes sir!"
-            $ ceo_office.show_background()
-            $ the_person.draw_person()
-            "You hear a knock. You look up and see [the_person.possessive_title]."
-            the_person "You wanted to see me?"
-            mc.name "Yes. Come in, and lock the door behind you."
-            the_person "Oh my..."
-            "[the_person.title] does as you ask. Her voice takes on a sultry tone."
-            the_person "So, did you have something in mind? How can I make all of this up to you?"
-            mc.name "I do, come around here and get on your knees."
-            the_person "Oh god, yes [the_person.mc_title]."
-            $ the_person.draw_person(position = "blowjob")
-            "You pull your dick out of your pants and put it right on her face."
-            mc.name "You know what to do."
-            "You could let her just give you a blowjob, but if you push things a little rougher, it would really drive the point home, but her admiration for you would probably decrease."
-            "[the_person.title] opens her mouth and takes the tip of your cock in her hot mouth. She gives you a few strokes as you rapidly harden in her mouth."
-            call fuck_person(the_person, start_position = blowjob, start_object = mc.location.get_object_with_trait("Kneel"), skip_intro = True, position_locked = True, ignore_taboo = True) from _quest_cure_sex_path_05
-            $ the_report = _return
-            if skull_fuck in the_report.get("positions_used", []):  #You really roughed her up
-                "[the_person.possessive_title] mascara is running from tears caused by being gagged when you roughly fucked her throat."
-                mc.name "I know that this story had a happy ending, with the patent going to the Red Cross, but remember, this is my business. Don't do things behind my back again."
-                $ the_person.change_stats(obedience = 10, love = -10, slut = 3, max_slut = 70)
-                "Her voice is trembling as she responds."
-                the_person "Yes... yes sir..."
-            elif deepthroat in the_report.get("positions_used", []):  #She took it deep.
-                "[the_person.possessive_title] is recovering from taking your cock deep down her throat."
-                mc.name "I know this story had a happy ending, with the patent going to the Red Cross, but please don't do things behind my back like that again."
-                $ the_person.change_stats(obedience = 5, slut = 2, max_slut = 70)
-                the_person "Yes sir, it won't happen again!"
-            else: #Just a BJ
-                "[the_person.possessive_title] licks her lips, she seems to have enjoyed getting on her knees for you."
-                mc.name "Thank you for doing the right thing, but please let me know before you take actions like that again."
-                $ the_person.change_stats(love = 3, slut = 1, max_slut = 70)
-                the_person "Yes sir."
-            mc.name "That'll be all for now."
-            $ the_person.draw_person(position = "walking_away")
-            "Well, you may have missed a financial opportunity, but at least you got a blowjob out of it!"
+    mc.name "I'm not firing you, [the_person.title]."
+    "She sounds relieved."
+    the_person "Oh [the_person.mc_title], I knew you were a reasonable man! I'll make it up to you, I promise!"
+    mc.name "Of course you are going to make it up to me. Get to my office, NOW."
+    the_person "Yes sir!"
+    $ ceo_office.show_background()
+    $ the_person.draw_person()
+    "You hear a knock. You look up and see [the_person.possessive_title]."
+    the_person "You wanted to see me?"
+    mc.name "Yes. Come in, and lock the door behind you."
+    the_person "Oh my..."
+    "[the_person.title] does as you ask. Her voice takes on a sultry tone."
+    the_person "So, did you have something in mind? How can I make all of this up to you?"
+    mc.name "I do, come around here and get on your knees."
+    the_person "Oh god, yes [the_person.mc_title]."
+    $ the_person.draw_person(position = "blowjob")
+    "You pull your dick out of your pants and put it right on her face."
+    mc.name "You know what to do."
+    "You could let her just give you a blowjob, but if you push things a little rougher, it would really drive the point home, but her admiration for you would probably decrease."
+    "[the_person.title] opens her mouth and takes the tip of your cock in her hot mouth. She gives you a few strokes as you rapidly harden in her mouth."
+    call fuck_person(the_person, start_position = blowjob, start_object = mc.location.get_object_with_trait("Kneel"), skip_intro = True, position_locked = True, ignore_taboo = True) from _quest_cure_sex_path_05
+    $ the_report = _return
+    if skull_fuck in the_report.get("positions_used", []):  #You really roughed her up
+        "[the_person.possessive_title] mascara is running from tears caused by being gagged when you roughly fucked her throat."
+        mc.name "I know that this story had a happy ending, with the patent going to the Red Cross, but remember, this is my business. Don't do things behind my back again."
+        $ the_person.change_stats(obedience = 10, love = -10, slut = 3, max_slut = 70)
+        "Her voice is trembling as she responds."
+        the_person "Yes... yes sir..."
+    elif deepthroat in the_report.get("positions_used", []):  #She took it deep.
+        "[the_person.possessive_title] is recovering from taking your cock deep down her throat."
+        mc.name "I know this story had a happy ending, with the patent going to the Red Cross, but please don't do things behind my back like that again."
+        $ the_person.change_stats(obedience = 5, slut = 2, max_slut = 70)
+        the_person "Yes sir, it won't happen again!"
+    else: #Just a BJ
+        "[the_person.possessive_title] licks her lips, she seems to have enjoyed getting on her knees for you."
+        mc.name "Thank you for doing the right thing, but please let me know before you take actions like that again."
+        $ the_person.change_stats(love = 3, slut = 1, max_slut = 70)
+        the_person "Yes sir."
+    mc.name "That'll be all for now."
+    $ the_person.draw_person(position = "walking_away")
+    "Well, you may have missed a financial opportunity, but at least you got a blowjob out of it!"
     $ del the_disease
     return
 
+label head_researcher_cure_finish_label(the_person):
+    $ the_disease = head_researcher_cure_discovery_disease_name()
+    the_person "Hello [the_person.mc_title]."
+    mc.name "I have some good news. Remember that patent on a [the_disease] drug? It sold."
+    the_person "Oh! That's great! Hopefully it will help a lot of people."
+    mc.name "I think it will. I appreciate you making that patent when you did. You are exactly the type of person I need running this department."
+    the_person "Thank you sir!"
+    "She seems to really appreciate your praise."
+    $ the_person.change_obedience(3)
+    $ the_person.change_happiness(10)
+    the_person "Is there anything else you need?"
+    return
 #Head researcher testing progression event
 
 label head_researcher_testing_room_intro_label(the_person):

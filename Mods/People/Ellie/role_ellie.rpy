@@ -1549,7 +1549,7 @@ init -1 python:
             return True
         return False
 
-    def ellie_never_tried_anal_requirement():
+    def ellie_never_tried_anal_requirement(the_person):
         return False
 
     def ellie_turned_on_while_working_intro_requirement(the_person):
