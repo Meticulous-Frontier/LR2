@@ -263,6 +263,11 @@ label fetish_serum_quest_intro_followup_label():
     the_person "Okay! This is exciting stuff!"
     "You have unlocked Sexual Proclivity Nanobots. These can be added to any serum design, and do not take up a trait slot. However, they do increase the production cost."
     "New versions of the nanobots can be unlocked after observing the results of this version. To advance, raise their mastery level to at least 5.0"
+    python:
+        mc.business.mandatory_crises_list.append(fetish_serum_anal_warning)
+        mc.business.mandatory_crises_list.append(fetish_serum_cum_warning)
+        mc.business.mandatory_crises_list.append(fetish_serum_breeding_warning)
+        # mc.business.mandatory_crises_list.append(fetish_serum_exhibition_warning) #TODO uncomment this one exhibitionist fetish is created
     return
 
 label fetish_serum_discuss_label(the_person):
@@ -523,7 +528,6 @@ label fetish_serum_exhibition_label():
     "You have unlocked Social Sexual Proclivity Nanobots."
     "You wonder what kind of possibilities this will open up? You should get a batch of serums produced using it and research it."
     "You can learn more about it at mastery level 3.0."
-    # $ mc.business.mandatory_crises_list.append(fetish_serum_exhibition_warning) #TODO uncomment this one exhibitionist fetish is created
     return
 
 label fetish_serum_anal_label():
@@ -551,7 +555,7 @@ label fetish_serum_anal_label():
     "You have unlocked Anal Sexual Proclivity Nanobots."
     "You wonder what kind of possibilities this will open up? You should get a batch of serums produced using it and research it."
     "You can learn more about it at mastery level 3.0."
-    $ mc.business.mandatory_crises_list.append(fetish_serum_anal_warning)
+
     return
 
 label fetish_serum_cum_label():
@@ -579,7 +583,7 @@ label fetish_serum_cum_label():
     "You have unlocked Semen Proclivity Nanobots."
     "You wonder what kind of possibilities this will open up? You should get a batch of serums produced using it and research it."
     "You can learn more about it at mastery level 3.0."
-    $ mc.business.mandatory_crises_list.append(fetish_serum_cum_warning)
+
     return
 
 label fetish_serum_breeding_label():
@@ -607,7 +611,7 @@ label fetish_serum_breeding_label():
     "You have unlocked Reproduction Proclivity Nanobots."
     "You wonder what kind of possibilities this will open up? You should get a batch of serums produced using it and research it."
     "You can learn more about it at mastery level 3.0."
-    $ mc.business.mandatory_crises_list.append(fetish_serum_breeding_warning)
+
     return
 
 label fetish_serum_anal_warning_label():
