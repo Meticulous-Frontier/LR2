@@ -266,9 +266,17 @@ label ellie_stephanie_teamup_progression_scene_intro_scene(the_group):
 
 label ellie_stephanie_teamup_progression_scene_intro_0(the_group):
     $ the_person = the_group[0]
-    "This is the most basic intro scene. It should run after you have experienced the intro."
-    $ the_person.draw_person()
-    the_person "Hey, down to fuck?"
+    $ the_researcher = the_group[1]
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(the_person)
+    $ scene_manager.add_actor(the_researcher, display_transform = character_center_flipped)
+    "You walk into the research department. It is Wednesday morning, and [the_person.title] and [the_researcher.possessive_title] are setting up for their weekly nanobot test."
+    the_researcher "These are some interesting optimizations. Do you think they will help?"
+    the_person "Yeah, I do."
+    the_researcher "Oh hey [the_researcher.mc_title]."
+    mc.name "[the_person.fname], [the_researcher.fname]."
+    the_person "Hello sir. Will you be joining us for the weekly nanotech test?"
+    "You consider it. With the sexual nature of the bots, there will likely be something interesting to watch..."
     return
 
 label ellie_stephanie_teamup_progression_scene_intro_1(the_group):
@@ -293,12 +301,70 @@ label ellie_stephanie_teamup_trans_scene_1(the_group):
 
 label ellie_stephanie_teamup_progression_scene_scene_0(the_group):
     $ the_person = the_group[0]
-    "This is the most basic final scene.."
-    $ the_person.draw_person()
-    the_person "Alright, let's do it!"
-    call fuck_person(the_person) from _call_sex_description_ellie_stephanie_teamup_scene_01
+    $ the_researcher = the_group[1]
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(the_person)
+    $ scene_manager.add_actor(the_researcher, display_transform = character_center_flipped)
+    $ nano_opinion_list = []
+    $ bot_selection = ""
+    "You step into the research room and hand the two girls their coffees."
+    the_researcher "Thanks. Now, did you have anyone in particular in mind? I brought up a list of possible testers on the computer."
+    mc.name "Let me see..."
+    $ possible_picks = mc.business.get_requirement_employee_list(obedience_required = 110, exclude_list = [the_person, the_researcher])
+    call screen employee_overview(white_list = possible_picks, person_select = True)
+    $ pick_1 = _return
+    if pick_1 == None:
+        mc.name "Sorry, I don't know who to call in."
+        the_researcher "Hang on, I'll just select someone at random."
+        $ pick_1 = get_random_from_list(mc.business.get_requirement_employee_list(exclude_list = [the_person, the_researcher]))
+        the_researcher "Ah, here we go."
+    the_researcher "I'll go get her."
+    $ scene_manager.update_actor(the_researcher, position = "walking_away")
+    "As she goes to leave, [the_person.title] looks at you."
+    $ scene_manager.remove_actor(the_researcher)
+    the_person "So, what program do you want to test today?"
+    menu:
+        "Exhibitionist Program" if fetish_exhibition_serum_is_unlocked():
+            $ nano_opinion_list = FETISH_EXHIBITION_OPINION_LIST
+            $ bot_selection = "exhibition"
+            mc.name "I'd like to commission a new program, based on these specifications."
 
-    the_person "Whew! that was great!"
+        "Anal Program" if fetish_anal_serum_is_unlocked():
+            $ nano_opinion_list = FETISH_ANAL_OPINION_LIST
+            $ bot_selection = "anal"
+        "Cum Program" if fetish_cum_serum_is_unlocked():
+            $ nano_opinion_list = FETISH_CUM_OPINION_LIST
+            $ bot_selection = "cum"
+        "Breeding Program" if fetish_breeding_serum_is_unlocked():
+            $ nano_opinion_list = FETISH_BREEDING_OPINION_LIST
+            $ bot_selection = "breeding"
+        "Basic Program":
+            $ nano_opinion_list = FETISH_BASIC_OPINION_LIST
+            $ bot_selection = "basic"
+    the_person "Alright, I'll get a tab of those loaded up..."
+    "After a moment, [the_researcher.title] returns with you test subject."
+    "[the_resarcher.possessive_title] and [the_person.title] take their position while [pick_1.title] sits down on the exam bed."
+
+    $ scene_manager.update_actor(the_person, display_transform = character_researcher_1)
+    $ scene_manager.update_actor(the_researcher, display_transform = character_researcher_2)
+    $ scene_manager.update_actor(pick_1, display_transform = character_right, position = "sitting")
+    "The two researchers stand to one side, while your test subject sits on the exam table."
+    "You take the tablet from [the_person.possessive_title]."
+    mc.name "Alright, here you go [pick_1.title]. The effects should happen fairly quickly, so I want you to try and be mindful of what you are feeling."
+    "You hand the tablet to [pick_1.possessive_title]. She swallows it with a glass of water."
+    the_researcher "Alright, while we are waiting, let's go over a quick questionaire. We can compare them between the before and after."
+    pick_1 "Okay..."
+    "You listen as [the_researcher.possessive_title] starts to ask some standard survey questions... It goes on for a while..."
+    $ fetish_serum_increase_opinion(nano_opinion_list, 2, pick_1)
+    $ pick_1.change_arousal(15)
+    "However, as you watch [pick_1.title]..."
+    $ fetish_serum_increase_opinion(nano_opinion_list, 2, pick_1)
+    $ pick_1.change_arousal(15)
+    "She seems to be getting aroused... some of her answers are starting to take longer than they should..."
+    call ellie_stephanie_teamup_final_opinion_shift_label(pick_1, bot_selection, nano_opinion_list)
+    $ pick_1.change_arousal(35)
+    "[the_researcher.title] seems to be picking up on it also."
+    the_resarcher "[pick_1.fname]... can you describe what you are feeling right now?"
     #You probably want to to advance time after this
     # call advance_time from _call_advance_ellie_stephanie_teamup_progression_scene_adv_02
     return
@@ -318,29 +384,181 @@ label ellie_stephanie_teamup_progression_scene_scene_1(the_group):
 
 label ellie_stephanie_teamup_progression_scene_choice(the_group):
     $ the_person = the_group[0]
-    "Use this scene to give MC a chance to bail out."
-    "Are you going to fuck her?"
+    $ the_researcher = the_group[1]
+    "It will take up most of your morning though."
     menu:
-        "Fuck her":
-            return True
-        "Leave":
+        "Stay for the test":
+            pass
+        "Don't stay":
             return False
+    mc.name "Yeah, I'd like to observe. Can I get you two coffee while you setup?"
+    the_researcher "Yeah I'll take one."
+    the_person "Me too."
+    mc.name "Sounds good. I'll meet you in the testing room."
+    $ scene_manager.clear_scene()
+    "You head to the break and pour three coffees. No one is around, you look down at [the_person.possessive_title]'s coffee..."
+    "You look at [the_person.possessive_title]'s coffee."
+    call give_serum(the_person) from _call_give_ellie_serum_teamup_05
+    "You look at [the_researcher.possessive_title]'s coffee."
+    call give_serum(the_researcher) from _call_give_head_researcher_serum_teamup_06
+    "You pick up the coffees and head down to the testing room."
     return True
 
 label ellie_stephanie_teamup_progression_scene_exit_scene(the_group):
     $ the_person = the_group[0]
-    "Use this scene to show MC bailing out."
-    mc.name "Unfortunately, I don't have time to fuck you. Goodbye."
-    the_person "Bye!"
-    "You stand up and leave the room, leaving the girls to their study session."
+    $ the_researcher = the_group[1]
+    mc.name "I'm afraid I have quite a bit of work to get done this morning, so you'll have to carry on without me today."
+    the_researcher "Bummer."
+    the_person "I understand. Maybe next week [the_person.mc_title]."
+    mc.name "Maybe."
     $ clear_scene()
     return
 
+label ellie_stephanie_teamup_final_opinion_shift_label(the_tester, program_name, program_opinion_list):
+    if program_name = "basic":
+        if the_tester.opinion_score_masturbating() < 2:
+            $ the_tester.max_opinion_score("masturbating", add_to_log = True)
+        else:
+            $ fetish_serum_increase_opinion(program_opinion_list, 2, the_tester)
+    elif program_name = "anal":
+        if the_tester.opinion_score_anal_sex() < 2:
+            $ the_tester.max_opinion_score("anal sex", add_to_log = True)
+        else:
+            $ fetish_serum_increase_opinion(program_opinion_list, 2, the_tester)
+    elif program_name = "cum":
+        if the_tester.opinion_score_being_covered_in_cum() < 2:
+            $ the_tester.max_opinion_score("being covered in cum", add_to_log = True)
+        else:
+            $ fetish_serum_increase_opinion(program_opinion_list, 2, the_tester)
+    elif program_name = "breeding":
+        if the_tester.opinion_score_bareback_sex() < 2:
+            $ the_tester.max_opinion_score("bareback sex", add_to_log = True)
+        else:
+            $ fetish_serum_increase_opinion(program_opinion_list, 2, the_tester)
+    elif program_name = "exhibition":
+        if the_tester.opinion_score_public_sex() < 2:
+            $ the_tester.max_opinion_score("public sex", add_to_log = True)
+        else:
+            $ fetish_serum_increase_opinion(program_opinion_list, 2, the_tester)
+    return
+
+label ellie_stephanie_tester_reaction_basic_label(the_tester, the_person, the_researcher):
+    the_tester "I'm sorry... I'm just having a really hard time concentrating... I just... I'm feeling really hot..."
+    the_researcher "Hot how? Like sweaty hot?"
+    the_tester "No, more like I really feel the need to... touch myself."
+    "So, a similar reaction to the last time you tested this program."
+    the_researcher "Would you say that you feel a strong urge to masturbate?"
+    the_tester "Uhhh... yeah... incredibly strong actually..."
+    "You can see [the_researcher.title] and [the_person.possessive_title] chatting for a few moments, but can't really tell what they are saying..."
+    "Then, you see [the_researcher.possessive_title] look over at you and give a quick wink."
+    the_researcher "Alright, remember this is for science. Go ahead and masturbate, and let us know if anything feels different than usual."
+    the_tester "Ahh, umm... okay..."
+    "Thankfully this time [the_researcher.possessive_title] doesn't offer to make you leave the room."
+    $ scene_manager.update_actor(the_tester, position = "kneeling1")
+    if the_tester.vagina_available():
+        "[the_tester.possessive_title] repositions herself and slowly runs a hand down between her legs."
+        "You watch as she dips a finger into her exposed pussy while using her palm to press down on her clit."
+        $ mc.change_locked_clarity(30)
+    else:
+        "[the_tester.possessive_title] repositions herself and slowly runs a hand down between her legs."
+        "Her hand disappears under her clothes as she starts to touch herself."
+        $ mc.change_locked_clarity(10)
+    the_tester "Ahh.... mmm..."
+    $ the_tester.change_arousal(30)
+    "[the_tester.possessive_title] doesn't waste any time. She moans as she touches herself."
+    the_tester "Oh god... it feels so good... I feel like my whole body is on fire..."
+    "[the_tester.title] bites her lip and looks you straight in the eyes as she continues to touch herself."
+    "Her eyes flicker down to your crotch a couple of times. You can tell she wants you to step in, but you stick to observing."
+    $ the_tester.change_arousal(50)
+    "You can see [the_tester.possessive_title] has really picked up the pace and eyes are starting to glaze over a bit. She's almost finished."
+    the_tester "Oh fuck... oh!"
+    $ the_tester.have_orgasm(half_arousal = False)
+    $ mc.change_locked_clarity(50)
+    $ the_tester.change_obedience(5)
+    $ the_tester.change_slut(2, 50)
+    "[the_tester.title]'s legs shake a bit as she starts to orgasm. Her moans echo through the small test room as you watch."
+    "Eventually she finishes, slowly moving her hand away from her crotch."
+    the_researcher "How do you feel now? Was that helpful?"
+    "[the_tester.title] startles at the sudden question."
+    the_tester "Oh! Uhhh... yeah... but I think I need to lay down for a bit..."
+    the_researcher "That's fine. We will leave you the room to recover."
+    "You step out of the room with [the_researcher.title] and [the_person.possessive_title], leaving the test subject to recover."
+    return
+
+label ellie_stephanie_tester_reaction_anal_label(the_tester, the_person, the_researcher):
+    the_tester "I'm sorry... I'm just having a really hard time concentrating... I just... I'm feeling really strange!"
+    the_researcher "Strange how?"
+    if the_tester.sluttiness < 60:  #
+        the_tester "Like I'm just... I don't know... empty."
+        the_researcher "Like you need to eat?"
+        the_tester "No"
+    else:
+        the_tester "No, like my ass is so empty! I... I need someone to fuck my ass!"
+        "You hear a small gasp from the testing booth, but you aren't sure if it is from [the_researcher.title] or [the_person.possessive_title]."
+        the_tester "[the_tester.mc_title]... will you? I need it! Please!?!"
+        "[the_tester.title] has started begging. You glance at [the_researcher.possessive_title] and [the_person.title]."
+        the_researcher "I mean, I think we have the data that we need..."
+        the_person "It would be kinda mean to get her all worked up like this and leave her hanging..."
 
 
 
 
+    "So, a similar reaction to the last time you tested this program."
+    the_researcher "Would you say that you feel a strong urge to masturbate?"
+    the_tester "Uhhh... yeah... incredibly strong actually..."
+    "You can see [the_researcher.title] and [the_person.possessive_title] chatting for a few moments, but can't really tell what they are saying..."
+    "Then, you see [the_researcher.possessive_title] look over at you and give a quick wink."
+    the_researcher "Alright, remember this is for science. Go ahead and masturbate, and let us know if anything feels different than usual."
+    the_tester "Ahh, umm... okay..."
+    "Thankfully this time [the_researcher.possessive_title] doesn't offer to make you leave the room."
+    $ scene_manager.update_actor(the_tester, position = "kneeling1")
+    if the_tester.vagina_available():
+        "[the_tester.possessive_title] repositions herself and slowly runs a hand down between her legs."
+        "You watch as she dips a finger into her exposed pussy while using her palm to press down on her clit."
+        $ mc.change_locked_clarity(30)
+    else:
+        "[the_tester.possessive_title] repositions herself and slowly runs a hand down between her legs."
+        "Her hand disappears under her clothes as she starts to touch herself."
+        $ mc.change_locked_clarity(10)
+    the_tester "Ahh.... mmm..."
+    $ the_tester.change_arousal(30)
+    "[the_tester.possessive_title] doesn't waste any time. She moans as she touches herself."
+    the_tester "Oh god... it feels so good... I feel like my whole body is on fire..."
+    "[the_tester.title] bites her lip and looks you straight in the eyes as she continues to touch herself."
+    "Her eyes flicker down to your crotch a couple of times. You can tell she wants you to step in, but you stick to observing."
+    $ the_tester.change_arousal(50)
+    "You can see [the_tester.possessive_title] has really picked up the pace and eyes are starting to glaze over a bit. She's almost finished."
+    the_tester "Oh fuck... oh!"
+    $ the_tester.have_orgasm(half_arousal = False)
+    $ mc.change_locked_clarity(50)
+    $ the_tester.change_obedience(5)
+    $ the_tester.change_slut(2, 50)
+    "[the_tester.title]'s legs shake a bit as she starts to orgasm. Her moans echo through the small test room as you watch."
+    "Eventually she finishes, slowly moving her hand away from her crotch."
+    the_researcher "How do you feel now? Was that helpful?"
+    "[the_tester.title] startles at the sudden question."
+    the_tester "Oh! Uhhh... yeah... but I think I need to lay down for a bit..."
+    the_researcher "That's fine. We will leave you the room to recover."
+    "You step out of the room with [the_researcher.title] and [the_person.possessive_title], leaving the test subject to recover."
+    return
 
-#This is for reusable scenes and functions required for the scene.
-#If there are any special functions or scenes you want to add, do it here.
-#For example, for the above scene, you could write a script where the girl strips her bottoms and presents her ass to MC.
+label ellie_stephanie_tester_reaction_cum_label(the_tester, the_person, the_researcher):
+    pass
+    return
+
+label ellie_stephanie_tester_reaction_breeding_label(the_tester, the_person, the_researcher):
+    pass
+    return
+
+label ellie_stephanie_tester_reaction_exhibition_label(the_tester, the_person, the_researcher):
+    pass
+    return
+
+init 5 python:
+    def head_researcher_needy_tester_response(the_person, program_name):
+        if the_person.sluttiness < 20:
+            pass
+            # the_person "[the_person.mc_title], this seems like a bad idea. Getting involved like that could invalidate our data!"
+        elif the_person.sluttiness < 40:
+            pass
+        return
