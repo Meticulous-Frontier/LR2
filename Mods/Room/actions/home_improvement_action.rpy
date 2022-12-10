@@ -31,7 +31,7 @@ init 0 python:
         return bedroom.background_image == standard_bedroom3_background
 
     def lily_bedroom_renovate_requirement():
-        if lily.home.background_image == lily_bedroom_background:
+        if lily_bedroom.background_image == lily_bedroom_background:
             return False
         if is_home_improvement_in_progress():
             return "Wait for current project completion"
@@ -44,7 +44,7 @@ init 0 python:
         return False
 
     def mom_bedroom_renovate_requirement():
-        if mom.home.background_image == standard_bedroom1_background:
+        if mom_bedroom.background_image == standard_bedroom1_background:
             return False
         if is_home_improvement_in_progress():
             return "Wait for current project completion"
@@ -221,7 +221,7 @@ label lily_bedroom_renovate_completed_label():
     mc.name "Thank you [man_name], much appreciated."
     "[lily.possessive_title]'s bedroom renovation is complete."
     python:
-        upgrade_bedroom(lily.home, lily_bedroom_background)
+        upgrade_bedroom(lily_bedroom, lily_bedroom_background)
         lily.change_stats(love = 3 + mc.charisma, obedience = 1 + mc.charisma)
         mc.business.event_triggers_dict["home_improvement_in_progress"] = False
     return
@@ -243,7 +243,7 @@ label mom_bedroom_renovate_completed_label():
     mc.name "Thank you [man_name], much appreciated."
     "The bedroom renovation is complete."
     python:
-        upgrade_bedroom(mom.home, standard_bedroom1_background)
+        upgrade_bedroom(mom_bedroom, standard_bedroom1_background)
         mom.change_stats(love = 3 + mc.charisma, obedience = 1 + mc.charisma)
         mc.business.event_triggers_dict["home_improvement_in_progress"] = False
     return
