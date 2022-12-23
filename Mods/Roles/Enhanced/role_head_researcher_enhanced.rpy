@@ -1043,7 +1043,7 @@ label serum_tester_suggest_help_label(the_person):
                 mc.name "I have another idea."
                 "You grab your dildo and show it to her."
                 the_person "Oh! That looks like fun too... okay!"
-            "Use Dildo\n{color=#ff0000}{size=18}Requires: Dildo{/size}{/color}" if not perk_system.has_item_perk("Dildo"):
+            "Use Dildo\n{color=#ff0000}{size=18}Requires: Dildo{/size}{/color} (disabled)" if not perk_system.has_item_perk("Dildo"):
                 pass
             "Finger her":
                 $ help_choice = "finger"
@@ -1081,7 +1081,7 @@ label serum_tester_suggest_help_label(the_person):
                 mc.name "I have another idea."
                 "You grab your dildo and show it to her."
                 the_person "Oh! That looks like fun too... okay!"
-            "Use Dildo\n{color=#ff0000}{size=18}Requires: Dildo{/size}{/color}" if not perk_system.has_item_perk("Dildo"):
+            "Use Dildo\n{color=#ff0000}{size=18}Requires: Dildo{/size}{/color} (disabled)" if not perk_system.has_item_perk("Dildo"):
                 pass
             "Finger her":
                 $ help_choice = "finger"
