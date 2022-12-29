@@ -24,3 +24,12 @@ init 5 python:
             return "Requires: 110 Obedience"
         return True
     demand_strip_requirement = demand_strip_requirement_enhanced
+
+    def demand_strip_get_obedience_req(the_person, new_outfit, min = 100, private = False):
+        # TODO: take into account preferences
+        obedience_req = new_outfit.get_full_outfit_slut_score() - the_person.effective_sluttiness() / 2
+
+        if private:
+            obedience_req /= 2  # privacy reduces obedience requirements
+
+        return __builtin__.max(min, __builtin__.int(__builtin__.round(100 + obedience_req, -1)))
