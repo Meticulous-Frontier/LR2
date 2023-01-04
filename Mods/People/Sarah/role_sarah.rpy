@@ -103,7 +103,7 @@ init 2 python:
         sarah.story_dict = sarah_story_build_dict
 
         Sarah_intro = Action("Sarah_intro",Sarah_intro_requirement,"Sarah_intro_label") #Set the trigger day for the next monday. Monday is day%7 == 0
-        mc.business.add_mandatory_crisis(Sarah_intro) #Add the event here so that it pops when the requirements are met.
+        mc.business.add_mandatory_morning_crisis(Sarah_intro) #Add the event here so that it pops when the requirements are met.
         return
 
     def Sarah_reset_vars():
@@ -175,7 +175,7 @@ init 2 python:
         return sarah.event_triggers_dict.get("drinks_out_progress", 0) >= 2
 
     def Sarah_intro_requirement():
-        return day > 2 and time_of_day < 4 and day%7 != 5 and day%7 !=6 and mc.is_home()
+        return day >= TIER_1_TIME_DELAY and mc.is_home()
 
     def Sarah_hire_requirement(day_trigger):
         if day > day_trigger and HR_director_creation_policy.is_owned():
@@ -514,7 +514,10 @@ init 2 python:
 label Sarah_intro_label():
     $ the_person = sarah
     "*DING DONG*"
-    "You hear the doorbell ring. You don't remember expecting anyone? You go and answer it."
+    "You hear the doorbell ring. You look at the clock. It's early."
+    "It rings again... isn't anyone going to get that?"
+    "You get up and stumble out of your room. Your sister and mom are nowhere to be scene."
+    "You make your way to your front door and open it."
     $ mc.change_location(hall)
     $ mc.location.show_background()
     $ the_person.draw_person()
