@@ -200,7 +200,7 @@ label hr_director_prog_scene_multiple_choice_scene(the_group):
             return 5
         "Breed Her" if 6 in hr_director_prog_scene.scene_unlock_list:
             return 6
-        "anal Fetish Scene" if 7 in hr_director_prog_scene.scene_unlock_list:
+        "Anal Fetish Scene" if 7 in hr_director_prog_scene.scene_unlock_list:
             return 7
 
     $ position_choice = HR_director_choose_position()
