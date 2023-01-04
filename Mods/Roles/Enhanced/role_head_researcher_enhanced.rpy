@@ -605,17 +605,8 @@ label head_researcher_serum_trait_test_label(the_person):
                 mc.name "Certainly."
                 $ scene_manager.remove_actor(the_person)
                 "[the_person.title] steps away, leaving you alone outside the testing room door... while [the_tester.possessive_title] is masturbating inside..."
-                "You quietly put your ear up to the door..."
-                the_tester "Ahh.... mmm...."
-                "You can hear some muffled moans through the door..."
-                $ mc.change_locked_clarity(30)
-                "You decide not to intrude on her masturbation session. It could effect the data from the test, anyway..."
-                $ the_tester.have_orgasm(force_trance = True)
-                "After several minutes, the light on the outside of the door iluminates, so you step inside."
-                $ scene_manager.add_actor(the_tester, position = "sitting")
-                "[the_tester.possessive_title] is sitting on the edge of the bed."
-                mc.name "Finished?"
-                the_tester "I umm... yeah..."
+                call serum_tester_masturbate_privately_label(the_tester) from _test_serum_private_masturbation_label_01
+
                 call serum_tester_trance_label(the_tester) from _serum_test_trance_finish_01
             else:
                 the_tester "Oh... umm... can [the_tester.mc_title] stay?"
@@ -641,6 +632,7 @@ label head_researcher_serum_trait_test_label(the_person):
                 mc.name "Alright, just pretend like I'm not here."
                 the_tester "Okay, try not to look too close..."
                 call serum_tester_masturbation_show_label(the_tester) from _serum_test_masturbation_show_01
+                call serum_tester_trance_label(the_tester) from _serum_test_trance_finish_02
             else:
                 the_tester "Oh! I suppose that sounds nice. If that is what you need for the test."
                 mc.name "We do."
@@ -666,6 +658,7 @@ label head_researcher_serum_trait_test_label(the_person):
                 mc.name "Alright, just pretend like I'm not here."
                 the_tester "Okay, try not to look too close..."
                 call serum_tester_masturbation_show_label(the_tester) from _serum_test_masturbation_show_02
+                call serum_tester_trance_label(the_tester) from _serum_test_trance_finish_03
             elif not willing_to_threesome(the_person, the_tester):  #She's atleast somewhat slutty but not willing to threesome.
                 the_tester "I don't think I need both of you. [the_tester.mc_title] can help?"
                 mc.name "Of course, I'd be glad to."
@@ -1115,8 +1108,38 @@ label serum_tester_trance_label(the_tester):
     call do_training(the_person) from _call_do_training_serum_testing_01
     return
 
+label serum_tester_masturbate_privately_label(the_tester):
+    "You quietly put your ear up to the door..."
+    the_tester "Ahh.... mmm...."
+    "You can hear some muffled moans through the door..."
+    $ mc.change_locked_clarity(30)
+    if the_tester.sluttiness >= 30:
+        the_tester "Oh fuck... that's it [the_tester.mc_title]..."
+        $ mc.change_locked_clarity(30)
+        "Oh damn... she's fantasizing about you!"
+        "You consider stepping inside and helping out... but ultimately, you decide you'd better stick to your agreement to step out."
+    else:
+        "You decide not to intrude on her masturbation session. It could effect the data from the test, anyway..."
+    $ the_tester.have_orgasm(force_trance = True)
+    "After several minutes, the light on the outside of the door iluminates, so you step inside."
+    $ scene_manager.add_actor(the_tester, position = "sitting")
+    "[the_tester.possessive_title] is sitting on the edge of the bed."
+    mc.name "Finished?"
+    the_tester "I umm... yeah..."
+    return
+
 label serum_tester_masturbation_show_label(the_tester):
-    pass
+    if True:
+        "[the_tester.possessive_title] almost starts to get undressed, but then stops."
+        the_tester "I'm sorry... I just can't... can you just wait outside?"
+        mc.name "I suppose. You are helping out, so if that is what you need."
+        the_tester "Yes, I'm sorry."
+        $ scene_manager.clear_scene()
+        "You step outside of the testing room to give [the_tester.title] some privacy."
+        call serum_tester_masturbate_privately_label(the_tester) from _temp_label_call_masturbation_show_01
+    else:
+        pass
+        "Sorry, Starbuck still needs to write this."
     return
 
 label serum_tester_finger_aid_label(the_person):
