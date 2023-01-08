@@ -700,24 +700,27 @@ init 5 python:
             outfit = Outfit("Overwear")
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme(self.person)
-            upper_item_list = real_dress_list + real_shirt_list
 
-            # find upper body item
-            item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(upper_item_list, points, min_points), points, ["not wearing anything"])
-            if item:
-                outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_upper, self.get_color_hate_list())))
+            # decide if person will wear overwear
+            if not(points >= 10 and self.person.get_opinion_score("not wearing anything") > 0 and renpy.random.randint(0, 4 - self.person.get_opinion_score("not wearing anything")) == 0):
+                upper_item_list = real_dress_list + real_shirt_list
 
-            # we added a overlay item, so find a real upper item this time
-            if item and item.layer == 3:
-                item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(upper_item_list, points, min_points, layers = [2]), points, ["not wearing anything"])
+                # find upper body item
+                item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(upper_item_list, points, min_points), points, ["not wearing anything"])
                 if item:
-                    outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_lower, self.get_color_hate_list())))
+                    outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_upper, self.get_color_hate_list())))
 
-            # find lowerbody item
-            if item is None or (not item.has_extension or item.has_extension.layer == 1):
-                item = self.get_item_from_list(self.person, "lower_body", self.build_filter_list(real_pants_list + skirts_list, points, min_points), points, ["not wearing anything"])
-                if item:
-                    outfit.add_lower(*make_lower_item_transparent(item, points, self.get_item_color(item, color_lower, self.get_color_hate_list(), 0.9)))
+                # we added a overlay item, so find a real upper item this time
+                if item and item.layer == 3:
+                    item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(upper_item_list, points, min_points, layers = [2]), points, ["not wearing anything"])
+                    if item:
+                        outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_lower, self.get_color_hate_list())))
+
+                # find lowerbody item
+                if item is None or (not item.has_extension or item.has_extension.layer == 1):
+                    item = self.get_item_from_list(self.person, "lower_body", self.build_filter_list(real_pants_list + skirts_list, points, min_points), points, ["not wearing anything"])
+                    if item:
+                        outfit.add_lower(*make_lower_item_transparent(item, points, self.get_item_color(item, color_lower, self.get_color_hate_list(), 0.9)))
 
             # find feet item
             item = self.get_item_from_list(self.person, "feet", self.build_filter_list(shoes_list, points, min_points))
@@ -750,23 +753,25 @@ init 5 python:
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme(self.person, match_percent = 80) # underwear mismatch is less likely
 
-            # find upper body item
-            item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(real_bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points, min_points), points, ["showing her tits", "not wearing underwear"])
-            if item:
-                outfit.add_upper(*make_upper_item_transparent(item, points, color_upper))
-
-            # random chance of adding sexy underwear part (heart pasties / cincher)
-            if points >= 7 and renpy.random.randint(0, 3 - self.person.get_opinion_score("lingerie")) == 0:
-                outfit.add_upper(*make_upper_item_transparent(renpy.random.choice([cincher, heart_pasties]), points, color_upper))
-
-            # find lower body item
-            if not item or not item.has_extension:
-                if item and item.proper_name in self.matching_underwear:
-                    item = self.get_item_from_list(self.person, "lower_body", self.build_filter_list(self.matching_underwear[item.proper_name], points, min_points), points, ["showing her ass", "not wearing underwear"])
-                else:
-                    item = self.get_item_from_list(self.person, "lower_body", self.build_filter_list(panties_list, points, min_points), points, ["showing her ass", "not wearing underwear"])
+            # decide if person will wear underewear
+            if not(points >= 6 and self.person.get_opinion_score("not wearing underwear") > -2 and renpy.random.randint(0, 3 - self.person.get_opinion_score("not wearing underwear")) == 0):
+                # find upper body item
+                item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(real_bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points, min_points), points, ["showing her tits", "not wearing underwear"])
                 if item:
-                    outfit.add_lower(*make_lower_item_transparent(item, points, color_lower if item in [cincher, heart_pasties] else color_upper))
+                    outfit.add_upper(*make_upper_item_transparent(item, points, color_upper))
+
+                # random chance of adding sexy underwear part (heart pasties / cincher)
+                if points >= 7 and renpy.random.randint(0, 3 - self.person.get_opinion_score("lingerie")) == 0:
+                    outfit.add_upper(*make_upper_item_transparent(renpy.random.choice([cincher, heart_pasties]), points, color_upper))
+
+                # find lower body item
+                if not item or not item.has_extension:
+                    if item and item.proper_name in self.matching_underwear:
+                        item = self.get_item_from_list(self.person, "lower_body", self.build_filter_list(self.matching_underwear[item.proper_name], points, min_points), points, ["showing her ass", "not wearing underwear"])
+                    else:
+                        item = self.get_item_from_list(self.person, "lower_body", self.build_filter_list(panties_list, points, min_points), points, ["showing her ass", "not wearing underwear"])
+                    if item:
+                        outfit.add_lower(*make_lower_item_transparent(item, points, color_lower if item in [cincher, heart_pasties] else color_upper))
 
             # random socks
             if renpy.random.randint(0, 1) == 0:
