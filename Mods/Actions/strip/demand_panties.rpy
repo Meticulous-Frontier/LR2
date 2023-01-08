@@ -30,7 +30,7 @@ label demand_panties_label(the_person):
 
     if the_person.location.privacy_level == 3 or the_person.location.get_person_count() > 1:
         the_person "Right here? In public?"
-        if the_person.judge_outfit(test_outfit, temp_sluttiness_boost = -10):
+        if demand_strip_judge_public(the_person, test_outfit, "not wearing underewar"):
             $ the_person.draw_person(emotion = "happy")
             "[the_person.title] smiles, clearly excited by the idea."
             jump .start_stripping
@@ -44,10 +44,7 @@ label demand_panties_label(the_person):
                 the_person "Maybe next time..."
 
     else:
-        $ apply_sex_modifiers(the_person) # quickly add and remove modifiers to get that sweet, sweet love bonus
-        $ judge = the_person.judge_outfit(test_outfit)
-        $ clear_sex_modifiers(the_person)
-        if judge:
+        if demand_strip_judge_private(the_person, test_outfit, "not wearing underwear"):
             jump .start_stripping
         else:
             the_person "I'm sorry [the_person.mc_title], but my panties stay on for now."

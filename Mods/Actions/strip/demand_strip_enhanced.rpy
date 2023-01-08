@@ -33,3 +33,12 @@ init 5 python:
             obedience_req /= 2  # privacy reduces obedience requirements
 
         return __builtin__.max(min, __builtin__.int(__builtin__.round(100 + obedience_req, -1)))
+
+    def demand_strip_judge_public(the_person, new_outfit, opinion):
+        return the_person.judge_outfit(new_outfit, temp_sluttiness_boost = -10 + 5 * the_person.get_opinion_score(opinion))
+
+    def demand_strip_judge_private(the_person, new_outfit, opinion):
+        apply_sex_modifiers(the_person) # quickly add and remove modifiers to get that sweet, sweet love bonus
+        judge = the_person.judge_outfit(test_outfit, temp_sluttiness_boost = 5 * the_person.get_opinion_score(opinion))
+        clear_sex_modifiers(the_person)
+        return judge
