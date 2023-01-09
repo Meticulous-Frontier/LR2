@@ -2,7 +2,7 @@ init 5 python:
     config.label_overrides["demand_strip_underwear_label"] = "demand_strip_underwear_label_enhanced"
     
     def demand_strip_underwear_requirement_enhanced(the_person):
-        if the_person.outfit.tits_visible() or the_person.outfit.vagina_visible():
+        if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
             return False #Can't strip if we're already past underwear
         elif the_person.outfit.wearing_panties() and not the_person.outfit.panties_covered() and the_person.outfit.wearing_bra() and not the_person.outfit.bra_covered():
             return False #Can't strip if we can already see all of her underwear.
@@ -31,6 +31,8 @@ label demand_strip_underwear_label_enhanced(the_person):
     $ test_outfit.strip_to_underwear(visible_enough = False)
     $ willing_private = demand_strip_judge_private(the_person, test_outfit, "lingerie")
     $ willing_public = demand_strip_judge_public(the_person, test_outfit, "lingerie")
+
+    $ the_person.discover_opinion("lingerie")
 
     if the_person.location.get_person_count() > 1: #You aren't alone
         if willing_public: #She's into it
@@ -146,12 +148,12 @@ label .start_stripping(private = False, ordered = False):
             mc.name "Your underwear is too cute to hide it away, you should should stay in it for a while."
             if willing_public:
                 the_person "Okay, if that's what you want me to do [the_person.mc_title]."
-                $ the_person.planned_outfit = the_person.outfit
+                $ the_person.planned_outfit = the_person.outfit.get_copy()
             elif ordered:
                 the_person "I... Okay, if that's what you want [the_person.mc_title]."
                 $ the_person.change_slut(1, 35)
                 $ the_person.change_happiness(-2)
-                $ the_person.planned_outfit = the_person.outfit
+                $ the_person.planned_outfit = the_person.outfit.get_copy()
             else:
                 the_person "Very funny. I'm not about to go out like this."
                 "She starts putting her clothes back on."

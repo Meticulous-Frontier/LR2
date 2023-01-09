@@ -2,7 +2,7 @@ init 5 python:
     config.label_overrides["demand_strip_tits_label"] = "demand_strip_tits_label_enhanced"
 
     def demand_strip_tits_requirement_enhanced(the_person):
-        if the_person.outfit.tits_visible():
+        if the_person.outfit.tits_visible() and the_person.outfit.tits_available():
             return False #Can't strip if they're already visible
         elif the_person.obedience < 130:
             return "Requires: 130 Obedience"
@@ -14,50 +14,92 @@ init 5 python:
 label demand_strip_tits_label_enhanced(the_person):
     #TODO: Most of this dialogue should be moved into a personality specific branch. A task for next update.
     mc.name "You're going to get your tits out for me."
+
+
+    $ test_outfit = the_person.outfit.get_copy()
+    $ test_outfit.strip_to_tits(visible_enough = False)
+    $ willing_private = demand_strip_judge_private(the_person, test_outfit, "showing her tits")
+    $ willing_public = demand_strip_judge_public(the_person, test_outfit, "showing her tits")
+
     $ strip_list = the_person.outfit.get_tit_strip_list()
     $ first_item = strip_list[0]
-    if the_person.effective_sluttiness("bare_tits") < (40 - (5*the_person.get_opinion_score("showing her tits"))): # She wouldn't normally show off her tits.
-        $ the_person.discover_opinion("showing her tits")
-        if mc.location.get_person_count() > 1: #We're in public, so she's shy.
-            "[the_person.possessive_title] looks around nervously, then back at you."
+
+    $ the_person.discover_opinion("showing her tits")
+
+    if the_person.location.get_person_count() > 1: #You aren't alone
+        if willing_public: #She's into it
+            "[the_person.possessive_title] doesn't seem to care about the other people around and starts to pull off her [first_item.display_name] right away."
+            call .start_stripping()
+            return
+
+        "[the_person.possessive_title] looks around nervously, then back at you."
+        $ obedience_requirement = demand_strip_get_obedience_req(the_person, test_outfit, min = 130)
+        if willing_private: # She's willing, but shy
             the_person "But... Here? Can we go somewhere without other people around first?"
             menu:
                 "Find somewhere private":
                     mc.name "Fine, if that's what you need."
                     "She is visibly relieved, and follows you as you find somewhere private for the two of you."
                     "Once you're finally alone she moves to pull off her [first_item.display_name] for you."
+                    call .start_stripping(private = True)
+                    return
 
-
-                "Stay right here" if the_person.obedience >= 140:
+                "Stay right here" if the_person.obedience >= obedience_requirement:
                     "You shake your head."
                     mc.name "No, we're going to stay right here."
                     "[the_person.possessive_title] doesn't argue. She just blushes and starts to pull off her [first_item.display_name] for you."
+                    call .start_stripping(ordered = True)
+                    return
 
-                "Stay right here\n{color=#ff0000}{size=18}Requires: 140 Obedience{/size}{/color} (disabled)" if the_person.obedience < 140:
+                "Stay right here\n{color=#ff0000}{size=18}Requires: [obedience_requirement] Obedience{/size}{/color} (disabled)" if the_person.obedience < obedience_requirement:
                     pass
-            $ top_strip_description(the_person, strip_list)
 
+                "Never mind":
+                    mc.name "Never mind. Let's do something else."
+                    return
 
-        else:
-            #We're in private, so she's a little more brave. If she loves you she might even do it for fun
-            if the_person.effective_sluttiness("bare_tits") + the_person.love < (40 - (5*the_person.get_opinion_score("showing her tits"))):
-                #Pure Obedience going on
-                "[the_person.possessive_title] seems uncomfortable, but she doesn't hesitate to follow instructions. She begins to take off her [first_item.display_name]."
+        else: # She doesn't even want to do it in private
+            the_person "Do... do I have to?"
+            menu:
+                "That's an order" if the_person.obedience >= obedience_requirement:
+                    mc.name "Of course you don't. But I'd be disappointed, and you don't want to disappoint me, do you?"
+                    "[the_person.possessive_title] stops arguing and meekly starts to pull off her [first_item.display_name]."
+                    call .start_stripping(ordered = True)
+                    return
 
-            else:
-                #She loves you, this is just cutting to the chase.
-                "[the_person.possessive_title] nods obediently and begins to take off her [first_item.display_name] while you watch."
-            $ top_strip_description(the_person, strip_list)
+                "That's an order\n{color=#ff0000}{size=18}Requires: [obedience_requirement] Obedience{/size}{/color} (disabled)" if the_person.obedience < obedience_requirement:
+                    pass
 
-    else:
-        # She doesn't have any problem showing off her tits, so she doesn't care if she's in public or not.
-        $ the_person.discover_opinion("showing her tits")
-        the_person "Oh, is that all?"
-        if mc.location.get_person_count() > 1:
-            "[the_person.possessive_title] doesn't seem to care about the other people around and starts to pull off her [first_item.display_name] right away."
-        else:
-            "[the_person.possessive_title] starts to pull off her [first_item.display_name] right away."
-        $ top_strip_description(the_person, strip_list)
+                "Never mind":
+                    mc.name "Of course you don't. I just thought it'd be fun. Let's do something else."
+                    return
+
+    else: #You are alone
+        if willing_private: #She's into it.
+            "[the_person.possessive_title] nods obediently and begins to take off her [first_item.display_name] while you watch."
+            call .start_stripping(private = True)
+            return
+
+        $ obedience_requirement = demand_strip_get_obedience_req(the_person, test_outfit, min = 130, private = True)
+        "[the_person.possessive_title] seems uncomfortable and hesitates to follow instructions."
+        the_person "Do... do I have to?"
+        menu:
+            "That's an order" if the_person.obedience >= obedience_requirement:
+                mc.name "Of course you don't. But I'd be disappointed, and you don't want to disappoint me, do you?"
+                "[the_person.possessive_title] stops arguing and meekly begins to take off her [first_item.display_name]."
+                call .start_stripping(private = True, ordered = True)
+                return
+
+            "That's an order\n{color=#ff0000}{size=18}Requires: [obedience_requirement] Obedience{/size}{/color} (disabled)" if the_person.obedience < obedience_requirement:
+                pass
+
+            "Never mind":
+                mc.name "Of course you don't. I just thought it'd be fun. Let's do something else."
+                return
+    return
+
+label .start_stripping(private = False, ordered = False):
+    $ top_strip_description(the_person, strip_list)
 
     $ del first_item
     $ strip_list = None
@@ -90,10 +132,18 @@ label demand_strip_tits_label_enhanced(the_person):
 
         "Keep your tits out":
             mc.name "I think you look good with your tits out. Stay like this for a while, okay?"
-            if the_person.effective_sluttiness() < (40 - (5*the_person.get_opinion_score("showing her tits"))):
+            if willing_public:
+                the_person "Okay, if that's what you want me to do [the_person.mc_title]."
+                $ the_person.planned_outfit = the_person.outfit.get_copy()
+            elif ordered:
                 the_person "I... Okay, if that's what you want [the_person.mc_title]."
                 $ the_person.change_slut(1, 35)
                 $ the_person.change_happiness(-2)
+                $ the_person.planned_outfit = the_person.outfit.get_copy()
             else:
-                the_person "Okay, if that's what you want me to do [the_person.mc_title]."
+                the_person "Very funny. I'm not about to go out like this."
+                "She starts putting her clothes back on."
+                $ the_person.change_obedience(-2)
+                $ the_person.apply_outfit()
+                $ the_person.draw_person()
     return
