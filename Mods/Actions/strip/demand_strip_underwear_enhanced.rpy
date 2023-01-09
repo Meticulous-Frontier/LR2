@@ -14,13 +14,17 @@ init 5 python:
 
 label demand_strip_underwear_label_enhanced(the_person):
     mc.name "You're going to strip into your underwear for me."
-    if not the_person.outfit.wearing_panties() and not the_person.outfit.wearing_bra():
+
+    # If person is already topless or bottomless, they will only care about missing underwear we *can't* see
+    $ secretly_no_panties = not the_person.outfit.wearing_panties() and not the_person.outfit.vagina_visible()
+    $ secretly_no_bra = not the_person.outfit.wearing_bra() and not the_person.outfit.tits_visible()
+    if secretly_no_panties or secretly_no_bra:
         the_person "I can't do that [the_person.mc_title]."
         mc.name "Yes you can, you..."
         "She interrupts you."
-        if not the_person.outfit.vagina_visible() and not the_person.outfit.tits_visible():
+        if secretly_no_panties and secretly_no_bra:
             the_person "No, I can't show you my underwear because... I'm not wearing any."
-        elif not the_person.outfit.vagina_visible():
+        elif secretly_no_panties:
             the_person "No, I can't show you my underwear because... I'm not wearing any panties."
         else:
             the_person "No, I can't show you my underwear because... I'm not wearing a bra in the first place."

@@ -69,7 +69,6 @@ label .thats_an_order(private = False):
             $ the_person.draw_person(emotion = "angry")
             the_person "..."
             $ the_person.draw_person(emotion = "sad")
-            the_person "...{fast}okay."
             $ the_person.change_stats(happiness = -2)
             "[the_person.title] is cowed into compliance by the tone of your voice."
             $ was_ordered = True
