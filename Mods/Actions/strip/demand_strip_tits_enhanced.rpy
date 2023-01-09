@@ -104,9 +104,9 @@ label .start_stripping(private = False, ordered = False):
     $ del first_item
     $ strip_list = None
 
-    $ the_person.update_outfit_taboos()
+    $ person_is_shy = not the_person.judge_outfit(the_person.outfit, temp_sluttiness_boost = 5 * the_person.get_opinion_score("showing her tits"))
 
-    if the_person.effective_sluttiness() < (40 - (5*the_person.get_opinion_score("showing her tits"))): # She's shy
+    if the_person.update_outfit_taboos() or person_is_shy: # She's shy
         "[the_person.title] brings her hands up to cover her breasts."
         the_person "Are we done?"
         mc.name "I want to get a look first, and I can't see anything if you're hiding like this."

@@ -14,13 +14,13 @@ init 5 python:
 
 label demand_strip_underwear_label_enhanced(the_person):
     mc.name "You're going to strip into your underwear for me."
-    if not the_person.outfit.wearing_panties() or not the_person.outfit.wearing_bra():
+    if not the_person.outfit.wearing_panties() and not the_person.outfit.wearing_bra():
         the_person "I can't do that [the_person.mc_title]."
         mc.name "Yes you can, you..."
         "She interrupts you."
-        if not the_person.outfit.wearing_panties() and not the_person.outfit.wearing_bra():
+        if not the_person.outfit.vagina_visible() and not the_person.outfit.tits_visible():
             the_person "No, I can't show you my underwear because... I'm not wearing any."
-        elif not the_person.outfit.wearing_panties():
+        elif not the_person.outfit.vagina_visible():
             the_person "No, I can't show you my underwear because... I'm not wearing any panties."
         else:
             the_person "No, I can't show you my underwear because... I'm not wearing a bra in the first place."
@@ -110,10 +110,9 @@ label demand_strip_underwear_label_enhanced(the_person):
 
 label .start_stripping(private = False, ordered = False):
     $ underwear_strip_description(the_person)
-    $ the_person.update_outfit_taboos()
     $ person_is_shy = not the_person.judge_outfit(the_person.outfit, temp_sluttiness_boost = 5 * the_person.get_opinion_score("lingere"))
 
-    if person_is_shy: # She's shy
+    if the_person.update_outfit_taboos() or person_is_shy: # She's shy
         the_person "Um... So what do we do now?"
         mc.name "Just relax and let me take a look. You look cute."
         $ mc.change_locked_clarity(10)
