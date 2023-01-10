@@ -41,7 +41,7 @@ label demand_strip_underwear_label_enhanced(the_person):
     if the_person.location.get_person_count() > 1: #You aren't alone
         if willing_public: #She's into it
             "[the_person.possessive_title] nods obediently, seemingly unbothered by your command."
-            call .start_stripping()
+            call .start_stripping() from _demand_strip_underwear_willing_public
             return
 
         "[the_person.possessive_title] looks around nervously, then back at you."
@@ -53,14 +53,15 @@ label demand_strip_underwear_label_enhanced(the_person):
                     mc.name "Fine, if that's what you need."
                     "She is visibly relieved, and follows you as you find somewhere private for the two of you."
                     "Once you're there she starts to pull off her clothes for you."
-                    call .start_stripping(private = True)
+                    call .start_stripping(private = True) from _demand_strip_underwear_move_to_private
                     return
 
                 "Stay right here" if the_person.obedience >= obedience_requirement:
                     "You shake your head."
                     mc.name "No, we're going to stay right here."
+                    $ the_person.change_stats(happiness = -2)
                     "[the_person.possessive_title] doesn't argue. She just blushes and starts to pull off her clothes."
-                    call .start_stripping(ordered = True)
+                    call .start_stripping(ordered = True) from _demand_strip_underwear_stay_in_public
                     return
 
                 "Stay right here\n{color=#ff0000}{size=18}Requires: [obedience_requirement] Obedience{/size}{/color} (disabled)" if the_person.obedience < obedience_requirement:
@@ -68,15 +69,17 @@ label demand_strip_underwear_label_enhanced(the_person):
 
                 "Never mind":
                     mc.name "Never mind. Let's do something else."
+                    $ the_person.change_stats(obedience = -1)
                     return
 
-        else: # She doesn't even want to do it in private
+        elif the_person.obedience >= obedience_requirement - 20: # She doesn't even want to do it in private
             the_person "Do... do I have to?"
             menu:
                 "That's an order" if the_person.obedience >= obedience_requirement:
-                    mc.name "Of course you don't. But I'd be disappointed, and you don't want to disappoint me, do you?"
-                    "[the_person.possessive_title] stops arguing and meekly starts to pull off her clothes."
-                    call .start_stripping(ordered = True)
+                    mc.name "Of course you do. I {i}want{/i} you to."
+                    $ the_person.change_stats(happiness = -2)
+                    "[the_person.possessive_title] stops arguing and resignedly starts to pull off her clothes."
+                    call .start_stripping(ordered = True) from _demand_strip_underwear_ordered_public
                     return
 
                 "That's an order\n{color=#ff0000}{size=18}Requires: [obedience_requirement] Obedience{/size}{/color} (disabled)" if the_person.obedience < obedience_requirement:
@@ -84,31 +87,47 @@ label demand_strip_underwear_label_enhanced(the_person):
 
                 "Never mind":
                     mc.name "Of course you don't. I just thought it'd be fun. Let's do something else."
+                    $ the_person.change_stats(obedience = -1)
                     return
+        else:
+            $ the_person.change_stats(obedience = -1)
+            the_person "I don't think I will. My clothes stay on for now."
+            mc.name "For now?"
+            "[the_person.title] smirks and changes the subject."
+            return
 
     else: #You are alone
         if willing_private: #She's into it.
             the_person "Okay, whatever you want [the_person.mc_title]."
             "She starts to strip down for you."
-            call .start_stripping(private = True)
+            call .start_stripping(private = True) from _demand_strip_underwear_willing_private
             return
 
         $ obedience_requirement = demand_strip_get_obedience_req(the_person, test_outfit, min = 130, private = True)
-        "[the_person.possessive_title] seems uncomfortable at your request."
-        the_person "Do... do I have to?"
-        menu:
-            "That's an order" if the_person.obedience >= obedience_requirement:
-                mc.name "Of course you don't. But I'd be disappointed, and you don't want to disappoint me, do you?"
-                "[the_person.possessive_title] stops arguing and meekly starts to pull off her clothes."
-                call .start_stripping(private = True, ordered = True)
-                return
+        if the_person.obedience >= obedience_requirement - 20: # She's considering it
+            "[the_person.possessive_title] seems uncomfortable at your request."
+            the_person "Do... do I have to?"
+            menu:
+                "That's an order" if the_person.obedience >= obedience_requirement:
+                    mc.name "Of course you do. I {i}want{/i} you to."
+                    $ the_person.change_stats(happiness = -2)
+                    "[the_person.possessive_title] stops arguing and resignedly starts to pull off her clothes."
+                    call .start_stripping(private = True, ordered = True) from _demand_strip_underwear_ordered_private
+                    return
 
-            "That's an order\n{color=#ff0000}{size=18}Requires: [obedience_requirement] Obedience{/size}{/color} (disabled)" if the_person.obedience < obedience_requirement:
-                pass
+                "That's an order\n{color=#ff0000}{size=18}Requires: [obedience_requirement] Obedience{/size}{/color} (disabled)" if the_person.obedience < obedience_requirement:
+                    pass
 
-            "Never mind":
-                mc.name "Of course you don't. I just thought it'd be fun. Let's do something else."
-                return
+                "Never mind":
+                    mc.name "Of course you don't. I just thought it'd be fun. Let's do something else."
+                    $ the_person.change_stats(obedience = -1)
+                    return
+        else:
+            $ the_person.change_stats(obedience = -1)
+            the_person "I don't think I will. My clothes stay on for now."
+            mc.name "For now?"
+            "[the_person.title] smirks and changes the subject."
+            return
 
     return
 
@@ -148,20 +167,18 @@ label .start_stripping(private = False, ordered = False):
             $ the_person.draw_person()
 
         "Stay in your underwear":
-            mc.name "Your underwear is too cute to hide it away, you should should stay in it for a while."
+            mc.name "Your underwear is too cute to hide it away, you should should stay in it for the rest of the day."
             if willing_public:
                 the_person "Okay, if that's what you want me to do [the_person.mc_title]."
                 $ the_person.planned_outfit = the_person.outfit.get_copy()
-            elif ordered:
+            elif the_person.obedience >= demand_strip_get_obedience_req(the_person, test_outfit, min = 130):
+                $ the_person.change_stats(obedience = 1, slut = 1, max_slut = 35, happiness = -2)
                 the_person "I... Okay, if that's what you want [the_person.mc_title]."
-                $ the_person.change_slut(1, 35)
-                $ the_person.change_happiness(-2)
                 $ the_person.planned_outfit = the_person.outfit.get_copy()
             else:
+                $ the_person.change_stats(obedience = -1, love = -1)
                 the_person "Very funny. I'm not about to go out like this."
                 "She starts putting her clothes back on."
-                $ the_person.change_obedience(-2)
                 $ the_person.apply_outfit()
                 $ the_person.draw_person()
-
     return
