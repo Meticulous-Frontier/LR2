@@ -65,7 +65,7 @@ init 1400 python:
 
 
         start_happinesss = test_person.happiness
-        start_sluttiness = test_person.effective_sluttiness()
+        start_sluttiness = test_person.sluttiness
         start_max_arousal = test_person.max_arousal
         start_arousal = test_person.arousal
         start_love = test_person.love
