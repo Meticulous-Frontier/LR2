@@ -42,6 +42,8 @@ init 1400 python:
             return "Parkinson's disease"
 
     def head_researcher_cure_get_market_contact():
+        if alexia in mc.business.market_team:
+            return alexia
         contact = get_random_from_list(mc.business.market_team)
         return contact
 
@@ -156,7 +158,8 @@ init -1 python:
     def head_researcher_cure_discovery_intro_requirement():
         if mc.business.is_open_for_business() and mc.business.head_researcher != None: #Only trigger if people are in the office.
             if mc.business.head_researcher.days_since_event("obedience_event") >= TIER_2_TIME_DELAY and mc.business.head_researcher.obedience >= 160:
-                return True
+                if len(mc.business.market_team) > 0:
+                    return True
         return False
 
     def head_researcher_cure_discovery_market_patent_requirement(the_person):
@@ -383,7 +386,7 @@ label head_researcher_cure_discovery_intro_label():
     mc.name "Oh?"
     if the_target == alexia:
         the_person "She's a recent college graduate and seems to have a good handle on things over there. I bet she could manage it!"
-        mc.name "Noted. I'm not sure I'll have time, but I'll talk to her when I can."
+        mc.name "Noted. I'll talk to her when I can."
     elif the_target == lily or the_person == mom or the_person == cousin or the_person == aunt:
         the_person "Corporate espionage is huge, and a discovery like this could make big waves."
         the_person "You should probably ask someone you can trust to handle this, like someone from your family."
