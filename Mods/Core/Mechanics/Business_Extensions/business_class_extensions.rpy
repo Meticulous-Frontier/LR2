@@ -336,6 +336,8 @@ init -1 python:
             self.prod_assistant.remove_role(prod_assistant_role)
             self.prod_assistant = None
 
+    Business.fire_production_assistant = fire_production_assistant
+
 
     # wrap default remove_employee function to also trigger the fire_HR_director code when needed
     def business_remove_employee_extended(org_func):
