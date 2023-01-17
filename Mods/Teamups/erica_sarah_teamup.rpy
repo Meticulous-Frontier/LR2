@@ -48,6 +48,13 @@ init -2 python:
     def erica_money_problems_sarah_talk_requirement(person):
         return mc.business.hr_director and person.is_at_work()
 
+    def erica_money_problems_sarah_update_requirement():
+        if mc.business.is_open_for_business():
+            if mc.business.hr_director and mc.is_at_work():
+                if day >= erica.event_triggers_dict.get("yoga_quest_hr_talk_day", 0) + TIER_1_TIME_DELAY:
+                    return True
+        return False
+
     def erica_money_problem_sarah_convincing_employee_requirement():
         if mc.business.is_open_for_business():
             if mc.business.hr_director and mc.is_at_work():
@@ -55,18 +62,10 @@ init -2 python:
                     return True
         return False
 
-    def erica_money_problems_sarah_update_requirement():
-        if mc.business.is_open_for_business():
-            if mc.business.hr_director and mc.is_at_work():
-                if len(erica_get_yoga_class_list()) < 4:
-                    if renpy.random.randint(0,100) < 10:
-                        return True
-        return False
-
     def erica_money_problems_sarah_final_update_requirement():
         if mc.business.is_open_for_business():
             if mc.business.hr_director and mc.is_at_work():
-                if len(erica_get_yoga_class_list()) >= 4:
+                if day >= erica.event_triggers_dict.get("yoga_quest_hr_talk_day", 0) + TIER_1_TIME_DELAY:
                     return True
         return False
 
@@ -81,8 +80,8 @@ init -2 python:
 
 init -1 python:
     erica_money_problems_sarah_talk = Action("Talk to HR Director", erica_money_problems_sarah_talk_requirement, "erica_money_problems_sarah_talk_label")
+    erica_money_problems_sarah_update = Action("Sarah reports back about yoga", erica_money_problems_sarah_update_requirement, "erica_money_problems_sarah_update_label")
     erica_money_problem_sarah_convincing_employee = Action("Sarah doses another employee", erica_money_problem_sarah_convincing_employee_requirement, "erica_money_problem_sarah_convincing_employee_label")
-    erica_money_problems_sarah_update = Action("Sarah doesn't have enough attendants", erica_money_problems_sarah_update_requirement, "erica_money_problems_sarah_update_label")
     erica_money_problems_sarah_final_update = Action("Sarah has enough attendants", erica_money_problems_sarah_final_update_requirement, "erica_money_problems_sarah_final_update_label")
     erica_money_problems_yoga_start = Action("Talk to Erica about yoga", erica_money_problems_yoga_start_requirement, "erica_money_problems_yoga_start_label")
     erica_yoga_event_intro = Action("First yoga class", erica_yoga_event_intro_requirement, "erica_yoga_event_intro_label")
@@ -131,6 +130,8 @@ label erica_money_problems_sarah_talk_label(the_person):
     "[sarah.fname] gets a mischievous smile."
     the_person "Okay! I'll let you know in a couple days if we have the people to make it happen... And if we don't... We'll see."
     "You part ways with [the_person.title] for now. You feel pretty confident at this point that, even if you don't have the numbers now, you'll have enough people to make it happen soon."
+
+    $ erica.event_triggers_dict["yoga_quest_hr_talk_day"] = day
     if len(erica_get_yoga_class_list()) < 4:
         $ mc.business.add_mandatory_crisis(erica_money_problems_sarah_update)
     else:
@@ -138,6 +139,10 @@ label erica_money_problems_sarah_talk_label(the_person):
     return
 
 label erica_money_problems_sarah_update_label():
+    # If we have enough people, we finish the quest
+    if __builtin__.len(erica_get_yoga_class_list()) >= 4:
+        jump erica_money_problems_sarah_final_update_label
+
     $ the_person = mc.business.hr_director
     $ the_person.draw_person(emotion = "sad")
     "[the_person.title] seeks you out as you work. She seems a bit disappointed."
@@ -162,6 +167,10 @@ label erica_money_problems_sarah_update_label():
     return
 
 label erica_money_problem_sarah_convincing_employee_label():
+    # If we have enough people, we finish the quest
+    if __builtin__.len(erica_get_yoga_class_list()) >= 4:
+        jump erica_money_problems_sarah_final_update_label
+
     python:
         scene_manager = Scene()
         the_person = mc.business.hr_director
@@ -210,7 +219,7 @@ label erica_money_problem_sarah_convincing_employee_label():
     python:
         scene_manager.clear_scene()
         clear_scene()
-        if len(erica_get_yoga_class_list()) < 4:
+        if __builtin__.len(erica_get_yoga_class_list()) < 4:
             mc.business.add_mandatory_crisis(erica_money_problem_sarah_convincing_employee)
         else:
             mc.business.add_mandatory_crisis(erica_money_problems_sarah_final_update)
@@ -218,9 +227,10 @@ label erica_money_problem_sarah_convincing_employee_label():
     return
 
 label erica_money_problems_sarah_final_update_label():
-    if len(erica_get_yoga_class_list()) < 4:
+    if __builtin__.len(erica_get_yoga_class_list()) < 4:
         $ mc.business.add_mandatory_crisis(erica_money_problem_sarah_convincing_employee)
         return
+
     $ the_person = mc.business.hr_director
     $ the_person.draw_person()
     "[the_person.title] comes and finds you as you work. She seems excited."
