@@ -450,7 +450,7 @@ init 5 python:
             opinion_score += person.get_opinion_score(opinion_tag) #Add a bonus or penalty if she likes or dislikes the position.
             person.discover_opinion(opinion_tag)
         if opinion_score <= 0 and perk_system.has_ability_perk("Serum: Aura of Arousal") and mc_serum_aura_arousal.get_trait_tier() >= 2:
-            if position_choice.skill_tag == "Vaginal" or position_choice.skill_tag == "Anal":
+            if position.skill_tag == "Vaginal" or position.skill_tag == "Anal":
                 opinion_score = 1
             elif mc_serum_aura_arousal.get_trait_tier() >= 3:
                 opinion_score = 1
