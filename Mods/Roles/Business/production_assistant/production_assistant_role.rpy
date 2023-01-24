@@ -239,7 +239,7 @@ label mc_serum_review_label(the_person):
     the_person "Alright, here are the serums that I have available."
     call screen mc_personal_serum_screen()
     mc.name "Thank you [the_person.title]. Keep up the good work."
-    $ mc_serum_save_active_list()
+    $ mc_serum_save_selected_list()
     return
 
 label mc_serum_review_upgrades_label(the_person):
