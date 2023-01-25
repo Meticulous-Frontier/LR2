@@ -217,7 +217,7 @@ init -2 python:
         list_selected_traits = []
         for trait in list_of_mc_traits:
             if trait.is_selected:
-                list_selected_traits.append(trait)
+                list_selected_traits.append(trait.name)
 
         mc.business.event_triggers_dict["selected_mc_serums_list"] = list_selected_traits
         return
@@ -225,6 +225,6 @@ init -2 python:
     def mc_serum_load_selected_list():
         list_selected_traits = mc.business.event_triggers_dict.get("selected_mc_serums_list", [])
         for trait in list_of_mc_traits:
-            if trait in list_selected_traits:
+            if trait.name in list_selected_traits:
                 trait.is_selected = True
         return
