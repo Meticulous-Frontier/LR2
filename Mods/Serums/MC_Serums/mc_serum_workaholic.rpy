@@ -50,7 +50,7 @@ init 1 python:  #Associated Perks
 
     def perk_workaholic_advance_req_01():
         the_serum = find_serum_by_name("Quick Release Nootropics")
-        if the_serum.mastery_level >= 10:
+        if the_serum.mastery_level >= 5:
             return True
         return False
 
