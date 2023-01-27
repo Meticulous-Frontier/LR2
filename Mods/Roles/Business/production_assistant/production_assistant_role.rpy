@@ -27,7 +27,7 @@ init 1 python:
 #Requirement functions
 init -1 python:
     def mc_serum_intro_requirement(the_person):
-        if mc.business.days_since_event("prod_assistant_advance") > TIER_2_TIME_DELAY:
+        if mc.business.days_since_event("prod_assistant_advance") > TIER_1_TIME_DELAY:
             if mc.business.is_open_for_business() and mc.is_at_work():
                 the_serum = find_in_list(lambda x: x.name == mc_serum_energy_regen.linked_trait, list_of_traits)
                 return the_serum.researched
@@ -49,7 +49,7 @@ init -1 python:
         return False
 
     def prod_assistant_essential_oils_intro_requirement(the_person):
-        if mc.business.is_open_for_business() and mc.business.days_since_event("prod_assistant_advance") > TIER_2_TIME_DELAY:
+        if mc.business.is_open_for_business() and mc.business.days_since_event("prod_assistant_advance") > TIER_1_TIME_DELAY:
             return True
         return False
 
@@ -62,7 +62,7 @@ init -1 python:
     def quest_essential_oils_research_end_requirement(the_person):
         if mc.business.is_open_for_business():
             if mc.is_at_work():
-                if mc.business.days_since_event("essential_oils_research_start") > TIER_2_TIME_DELAY:
+                if mc.business.days_since_event("essential_oils_research_start") > TIER_1_TIME_DELAY:
                     return True
         return False
 
@@ -85,37 +85,37 @@ init -1 python:
 
     def prod_assistant_unlock_cum_requirement(the_person):
         if mc.business.is_open_for_business() and the_person.sluttiness > 30:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_1_TIME_DELAY:
                 return True
         return False
 
     def prod_assistant_unlock_physical_requirement(the_person):
         if mc.business.is_open_for_business() and the_person.obedience > 140:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_1_TIME_DELAY:
                 return True
         return False
 
     def prod_assistant_performance_upgrade_requirement(the_person):
         if mc.business.is_open_for_business() and serum_production_2_policy.is_active():
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_1_TIME_DELAY:
                 return True
         return False
 
     def prod_assistant_aura_upgrade_requirement(the_person):
         if mc.business.is_open_for_business() and serum_production_3_policy.is_active():
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_1_TIME_DELAY:
                 return True
         return False
 
     def prod_assistant_cum_upgrade_requirement(the_person):
         if mc.business.is_open_for_business() and mc.business.research_tier >= 3 and the_person.sluttiness > 60 and not the_person.has_taboo("vaginal_sex"):
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_1_TIME_DELAY:
                 return True
         return False
 
     def prod_assistant_physical_upgrade_requirement(the_person):
         if mc.business.is_open_for_business() and mc.business.research_tier >= 3:
-            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_2_TIME_DELAY:
+            if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_1_TIME_DELAY:
                 return True
         return False
 
@@ -227,6 +227,7 @@ label mc_serum_review_intro_label(the_person):
     $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_performance_upgrade)
     $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_essential_oils_intro)
     "You step away from [the_person.possessive_title]. You can now talk to her at work about serums for personal use."
+    "She will leave them in your office for you each work day. If she needs your attention on something, she may hang around and wait for you to pick them up."
     $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
 
