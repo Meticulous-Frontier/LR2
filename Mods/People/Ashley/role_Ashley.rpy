@@ -1346,6 +1346,7 @@ init 1 python:
 
 #These labels are for MC hitting specific personal serum requirements.
 label ashley_demands_relief_label():    #at 30
+    $ the_person = ashley
     "In this label, Ashley approaches MC and demands he gets her off."
     "MC seems conflicted, but ultimately sides with her and gets her off, but questions why would he take orders from her."
     $ ashley_clear_after_work_setup()
