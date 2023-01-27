@@ -65,12 +65,6 @@ init 2 python:
             return time_of_day == 2 and day >= candace_get_cure_day() + 7
         return False
 
-    def candace_check_police_chief_met():
-        if police_chief.title is None:  # haven't met, set title
-            police_chief.set_possessive_title("The police chief")
-            police_chief.set_mc_title("Mr. " + mc.last_name)
-            police_chief.set_title("Officer " + police_chief.last_name)
-        return
 
     #Candace Actions (define actions in init)
     candace_meet_at_office_store = Action("Meet Candi", candace_meet_at_office_store_requirement, "candace_meet_at_office_store_label")
@@ -754,7 +748,7 @@ label candace_supply_order_discount_label():
 label candace_topless_at_mall_label(the_person):
     $ scene_manager = Scene()
     python:
-        candace_check_police_chief_met()
+        check_police_chief_met()
         police_chief.wear_uniform() # make sure whe wears her uniform
 
     "As you walk around the mall, you notice a commotion. A small group of mostly men have gathered around someone, you walk over to see what is going on."
@@ -820,7 +814,7 @@ label candace_topless_at_mall_label(the_person):
 
 label candace_midnight_wakeup_label():
     python:
-        candace_check_police_chief_met()
+        check_police_chief_met()
         # make sure she is in the police station wearing her uniform
         police_chief.change_location(police_station)
         police_chief.wear_uniform()
