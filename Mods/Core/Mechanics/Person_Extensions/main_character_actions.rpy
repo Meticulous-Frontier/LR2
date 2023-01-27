@@ -90,7 +90,7 @@ init 2 python:
             return "Requires: 15{image=gui/extra_images/energy_token.png}"
         if person.days_since_event("obedience_favor", set_if_none = False) == None:
             person.set_event_day("obedience_favor", set_day = -1)
-        if person.days_since_event("obedience_favor") >= 1:
+        if person.days_since_event("obedience_favor") >= TIER_0_TIME_DELAY:
             return True
         return "Asked for a favor too recently"
 
