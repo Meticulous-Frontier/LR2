@@ -4,7 +4,7 @@
 #     add_label_hijack("after_load", "update_teamup_mod_core")
 #
 #     def teamup_mod_initialization():
-#         kaya_erica_teamup_init()
+#         erica_kaya_teamup_init()
 #         return
 #
 # label activate_teamup_mod_core(stack):
@@ -16,9 +16,9 @@
 #
 # label update_teamup_mod_core(stack):
 #     python:
-#         if "kaya_erica_teamup" not in globals():
+#         if "erica_kaya_teamup" not in globals():
 #             teamup_mod_initialization()
 #         else:
-#             kaya_erica_teamup.compile_scenes(kaya_erica_teamup)
+#             erica_kaya_teamup.compile_scenes(erica_kaya_teamup)
 #         execute_hijack_call(stack)
 #     return

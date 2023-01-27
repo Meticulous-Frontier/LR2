@@ -1248,7 +1248,7 @@ label camilla_lingerie_help_label(the_person):  #40
         mc.name "I don't have the ability right now to do that, but I'll let you know in the future if that is something I can pull off."
         "She looks disappointed, but also relieved."
         the_person "Okay. I appreciate the thought."
-    $ camilla_alexia_boudoir_intro_setup()
+    $ alexia_camilla_boudoir_intro_setup()
     "You snap a couple more photos. Just when you think you are finishing up, [the_person.title] gets down on her knees and slides over to you."
     $ the_person.draw_person(position = "blowjob")
     "[the_person.possessive_title] grabs your zipper and starts to pull it down. A couple quick motions later, and your cock is out and inches from her face."

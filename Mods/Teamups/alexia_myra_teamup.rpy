@@ -10,10 +10,10 @@
 
 # 16/25
 init 1 python:
-    def myra_alexia_teamup_scene_0_req():    #Requirements for the basic scene. Should almost always be true.
+    def alexia_myra_teamup_scene_0_req():    #Requirements for the basic scene. Should almost always be true.
         return True
 
-    def myra_alexia_teamup_scene_1_req():    #Requirements for the second stage.
+    def alexia_myra_teamup_scene_1_req():    #Requirements for the second stage.
         if myra.has_taboo("touching_vagina") or alexia.has_taboo("touching_vagina"):
             return False
         if myra.opinion_score_being_fingered() >-2 and alexia.opinion_score_being_fingered() >-2:
@@ -21,7 +21,7 @@ init 1 python:
                 return True
         return False
 
-    def myra_alexia_teamup_scene_2_req():
+    def alexia_myra_teamup_scene_2_req():
         if myra.has_taboo("licking_pussy") or alexia.has_taboo("licking_pussy"):
             return False
         if myra.opinion_score_getting_head() >-2 and alexia.opinion_score_getting_head() >-2:
@@ -29,7 +29,7 @@ init 1 python:
                 return True
         return False
 
-    def myra_alexia_teamup_scene_3_req():
+    def alexia_myra_teamup_scene_3_req():
         if myra.has_taboo("vaginal_sex") or alexia.has_taboo("vaginal_sex"):
             return False
         if myra.opinion_score_vaginal_sex() >-2 and alexia.opinion_score_vaginal_sex() >-2:
@@ -37,18 +37,18 @@ init 1 python:
                 return True
         return False
 
-    def myra_alexia_teamup_scene_4_req():    #Not yet full implemented, leave false for now.
+    def alexia_myra_teamup_scene_4_req():    #Not yet full implemented, leave false for now.
         if myra.is_free_use() and alexia.is_free_use():
             return True
         return False
 
 
-    def myra_alexia_teamup_scene_action_req(the_person):  #Use this function to determine the requirement for when to actually run the scene itself.
+    def alexia_myra_teamup_scene_action_req(the_person):  #Use this function to determine the requirement for when to actually run the scene itself.
         if day%7 == 4 and time_of_day == 4:
             return True
         return False
 
-    def myra_alexia_teamup_unit_test_func(the_group):
+    def alexia_myra_teamup_unit_test_func(the_group):
         for person in the_group:
             person.change_slut(20)
             person.change_energy(200)
@@ -56,50 +56,50 @@ init 1 python:
         return
 
 init 2 python:
-    def myra_alexia_teamup_scene_compile_scenes(the_progression_scene):
+    def alexia_myra_teamup_scene_compile_scenes(the_progression_scene):
         #WARNING: The order of the following lists is critical! They are referenced based on their indexes!!!
-        the_progression_scene.start_scene_list = ["myra_alexia_teamup_scene_intro_0", "myra_alexia_teamup_scene_intro_1", "myra_alexia_teamup_scene_intro_2", "myra_alexia_teamup_scene_intro_3", "myra_alexia_teamup_scene_intro_4"]
-        the_progression_scene.req_list = [myra_alexia_teamup_scene_0_req, myra_alexia_teamup_scene_1_req, myra_alexia_teamup_scene_2_req, myra_alexia_teamup_scene_3_req, myra_alexia_teamup_scene_4_req]
-        the_progression_scene.trans_list = ["myra_alexia_teamup_trans_scene_0", "myra_alexia_teamup_trans_scene_1", "myra_alexia_teamup_trans_scene_2", "myra_alexia_teamup_trans_scene_3", "myra_alexia_teamup_trans_scene_4"]
-        the_progression_scene.final_scene_list = ["myra_alexia_teamup_scene_scene_0", "myra_alexia_teamup_scene_scene_1", "myra_alexia_teamup_scene_scene_2", "myra_alexia_teamup_scene_scene_3", "myra_alexia_teamup_scene_scene_4"]
+        the_progression_scene.start_scene_list = ["alexia_myra_teamup_scene_intro_0", "alexia_myra_teamup_scene_intro_1", "alexia_myra_teamup_scene_intro_2", "alexia_myra_teamup_scene_intro_3", "alexia_myra_teamup_scene_intro_4"]
+        the_progression_scene.req_list = [alexia_myra_teamup_scene_0_req, alexia_myra_teamup_scene_1_req, alexia_myra_teamup_scene_2_req, alexia_myra_teamup_scene_3_req, alexia_myra_teamup_scene_4_req]
+        the_progression_scene.trans_list = ["alexia_myra_teamup_trans_scene_0", "alexia_myra_teamup_trans_scene_1", "alexia_myra_teamup_trans_scene_2", "alexia_myra_teamup_trans_scene_3", "alexia_myra_teamup_trans_scene_4"]
+        the_progression_scene.final_scene_list = ["alexia_myra_teamup_scene_scene_0", "alexia_myra_teamup_scene_scene_1", "alexia_myra_teamup_scene_scene_2", "alexia_myra_teamup_scene_scene_3", "alexia_myra_teamup_scene_scene_4"]
         the_progression_scene.regress_scene_list = []   #Add labels for regression here if desired.
         return
 
-    myra_alexia_teamup_scene_action = Action("Myra and Alexia's Game Night", myra_alexia_teamup_scene_action_req, "myra_alexia_teamup_scene_action_label")
+    alexia_myra_teamup_scene_action = Action("Myra and Alexia's Game Night", alexia_myra_teamup_scene_action_req, "alexia_myra_teamup_scene_action_label")
 
-    def myra_alexia_teamup_scene_init():  #Run this during init only
-        global myra_alexia_teamup_scene
-        myra_alexia_teamup_scene = Progression_Scene(
-            compile_scenes = myra_alexia_teamup_scene_compile_scenes,
+    def alexia_myra_teamup_scene_init():  #Run this during init only
+        global alexia_myra_teamup_scene
+        alexia_myra_teamup_scene = Progression_Scene(
+            compile_scenes = alexia_myra_teamup_scene_compile_scenes,
             start_scene_list = [],  #Set via the compile action
             req_list = [],  #Set via the compile action
             trans_list = [],    #Set via the compile action
             final_scene_list = [],  #Set via the compile action
-            intro_scene = "myra_alexia_teamup_scene_intro_scene", #Scene that plays the first time this scene is run
-            exit_scene = "myra_alexia_teamup_scene_exit_scene",   #Scene for if the player chooses to exit the scene
-            progression_scene_action = myra_alexia_teamup_scene_action,      #The action used to call for this progression scene.
-            choice_scene = "myra_alexia_teamup_scene_choice_label",   #The action used to let player decide if they want to continue the scene or leave
+            intro_scene = "alexia_myra_teamup_scene_intro_scene", #Scene that plays the first time this scene is run
+            exit_scene = "alexia_myra_teamup_scene_exit_scene",   #Scene for if the player chooses to exit the scene
+            progression_scene_action = alexia_myra_teamup_scene_action,      #The action used to call for this progression scene.
+            choice_scene = "alexia_myra_teamup_scene_choice_label",   #The action used to let player decide if they want to continue the scene or leave
             stage = -1,     #-1 will play the intro
             person_action = True,   #If this progression scene should run when encountering a person
             business_action = False,    #If this progression scene is a mandatory business event
             is_random = False,  #If this progression scene is a randomly occuring crisis event
-            unit_test_func = myra_alexia_teamup_unit_test_func,  #Set a custom unit test function to test this progression event. Runs between every cycle
+            unit_test_func = alexia_myra_teamup_unit_test_func,  #Set a custom unit test function to test this progression event. Runs between every cycle
             advance_time = True,    #Currently this is broke. Advance time in the scenes themselves for now...
             is_multiple_choice = False, #If MC can choose what final scene he wants
             multiple_choice_scene = None,   #The scene that lets MC choose which final scene he wants.
             regress_scene_list = [])    #If the scene can regress, fill this with appropriate regression scenes to play between intro and final scenes.
-        myra_alexia_teamup_scene.compile_scenes(myra_alexia_teamup_scene)   #This will populate the scenes that are blank above.
+        alexia_myra_teamup_scene.compile_scenes(alexia_myra_teamup_scene)   #This will populate the scenes that are blank above.
 
         return
 
-label myra_alexia_teamup_scene_action_label(the_person):  #Use (the_person) if this event is attached to a person, otherwise leave params blank, EG: myra_alexia_teamup_scene_action_label():
+label alexia_myra_teamup_scene_action_label(the_person):  #Use (the_person) if this event is attached to a person, otherwise leave params blank, EG: alexia_myra_teamup_scene_action_label():
     $ mc.change_location(gaming_cafe)
     $ mc.location.show_background()
     #"Test, is this working"
-    call progression_scene_label(myra_alexia_teamup_scene, [the_person, alexia]) from _myra_alexia_teamup_scene_call_test_01
+    call progression_scene_label(alexia_myra_teamup_scene, [the_person, alexia]) from _alexia_myra_teamup_scene_call_test_01
     return
 
-label myra_alexia_teamup_scene_intro_scene(the_group):
+label alexia_myra_teamup_scene_intro_scene(the_group):
     $ the_person = the_group[0]
     $ scene_manager = Scene()
     "Walking through the mall, nearly everything is closing down. It is a bit of a ghost town as you make your way to the gaming cafe."
@@ -254,10 +254,10 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     $ mc.location.show_background()
     "The friendship between [the_person.title] and [alexia.possessive_title] seems to be in good health. And this Friday night appointment seems to be a great opportunity."
     "You are pretty sure that if you offer to grab milkshakes for the girls, you can probably continue to test serums on them... you wonder how far you can push things at Friday Night game night!"
-    # call advance_time from _call_advance_myra_alexia_teamup_scene_adv_01
+    # call advance_time from _call_advance_alexia_myra_teamup_scene_adv_01
     return
 
-label myra_alexia_teamup_scene_intro_0(the_group):
+label alexia_myra_teamup_scene_intro_0(the_group):
     $ the_person = the_group[0]
     $ scene_manager = Scene()
     "You step into the gaming cafe. It looks like [the_person.title] is getting ready to close up."
@@ -277,7 +277,7 @@ label myra_alexia_teamup_scene_intro_0(the_group):
     "You can feel some friendly competition in the air."
     return
 
-label myra_alexia_teamup_scene_intro_1(the_group):
+label alexia_myra_teamup_scene_intro_1(the_group):
     $ the_person = the_group[0]
     $ scene_manager = Scene()
     "You step into the gaming cafe. It looks like [the_person.title] and [alexia.possessive_title] are chatting as they close up."
@@ -288,7 +288,7 @@ label myra_alexia_teamup_scene_intro_1(the_group):
     "She gives you a big wink."
     return
 
-label myra_alexia_teamup_scene_intro_2(the_group):
+label alexia_myra_teamup_scene_intro_2(the_group):
     $ the_person = the_group[0]
     $ scene_manager = Scene()
     "You step into the gaming cafe. It looks like [the_person.title] and [alexia.possessive_title] are chatting as they close up. They don't notice you right away..."
@@ -302,7 +302,7 @@ label myra_alexia_teamup_scene_intro_2(the_group):
     "She gives you a big wink."
     return
 
-label myra_alexia_teamup_scene_intro_3(the_group):
+label alexia_myra_teamup_scene_intro_3(the_group):
     $ the_person = the_group[0]
     $ scene_manager = Scene()
     "You step into the gaming cafe. It looks like [the_person.title] and [alexia.possessive_title] are chatting as they close up."
@@ -314,7 +314,7 @@ label myra_alexia_teamup_scene_intro_3(the_group):
     "She gives you a big wink."
     return
 
-label myra_alexia_teamup_scene_intro_4(the_group):
+label alexia_myra_teamup_scene_intro_4(the_group):
     $ the_person = the_group[0]
     $ scene_manager = Scene()
     "You go to the gaming cafe. As you try to enter the door though, it is already locked. Are you late?"
@@ -334,7 +334,7 @@ label myra_alexia_teamup_scene_intro_4(the_group):
 
 #For more progression, add more scenes.
 
-label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #Massages
+label alexia_myra_teamup_scene_scene_0(the_group, scene_transition = False):  #Massages
     $ the_person = the_group[0]
     $ current_round = 1
     $ round_count = 1
@@ -381,7 +381,7 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
             $ scene_manager.update_actor(the_person, display_transform = character_right(yoffset = 0, zoom = 0.8))
             $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
         "The character select screen comes up, and you get close to [the_target.title], ready to begin your back massage."
-        call myra_alexia_teamup_fight_round_label(the_group, (the_target == myra)) from _myra_alexia_back_massage_round_call_01
+        call alexia_myra_teamup_fight_round_label(the_group, (the_target == myra)) from _alexia_myra_back_massage_round_call_01
         if _return == myra:
             $ myra_wins += 1
             $ the_target = myra
@@ -459,10 +459,10 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
         "You aren't sure that you will be able to manage it while [myra.title] hates getting fingered though..."
     elif alexia.opinion_score_being_fingered() == -2:
         "You aren't sure that you will be able to manage it while [alexia.title] hates getting fingered though..."
-    # call advance_time from _call_advance_myra_alexia_teamup_scene_adv_01
+    # call advance_time from _call_advance_alexia_myra_teamup_scene_adv_01
     return
 
-label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #Fingering
+label alexia_myra_teamup_scene_scene_1(the_group, scene_transition = False):  #Fingering
     $ the_person = the_group[0]
     $ current_round = 1
     $ round_count = 1
@@ -511,7 +511,7 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
             $ scene_manager.update_actor(the_person, display_transform = character_right(yoffset = 0, zoom = 0.8))
             $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
         "The character select screen comes up, and you get close to [the_target.title], your hands already running along her sides."
-        call myra_alexia_teamup_fight_round_label(the_group, (the_target == myra)) from _myra_alexia_back_massage_round_call_02
+        call alexia_myra_teamup_fight_round_label(the_group, (the_target == myra)) from _alexia_myra_back_massage_round_call_02
         if _return == myra:
             $ myra_wins += 1
             $ the_target = myra
@@ -687,10 +687,10 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
         "You aren't sure that you will be able to manage it while [alexia.title] hates getting head though..."
     $ the_loser = None
     $ the_target = None
-    # call advance_time from _call_advance_myra_alexia_teamup_scene_adv_01
+    # call advance_time from _call_advance_alexia_myra_teamup_scene_adv_01
     return
 
-label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #Oral
+label alexia_myra_teamup_scene_scene_2(the_group, scene_transition = False):  #Oral
     $ the_person = the_group[0]
     $ current_round = 1
     $ round_count = 1
@@ -742,7 +742,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
             $ scene_manager.update_actor(the_person, display_transform = character_right(yoffset = 0, zoom = 0.8))
             $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
         "The character select screen comes up, and you get close to [the_target.title], your hands already running along the soft skin on her sides."
-        call myra_alexia_teamup_fight_round_label(the_group, (the_target == myra)) from _myra_alexia_back_massage_round_call_03
+        call alexia_myra_teamup_fight_round_label(the_group, (the_target == myra)) from _alexia_myra_back_massage_round_call_03
         if _return == myra:
             $ myra_wins += 1
             $ the_target = myra
@@ -989,10 +989,10 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
 
     $ the_loser = None
     $ the_target = None
-    # call advance_time from _call_advance_myra_alexia_teamup_scene_adv_01
+    # call advance_time from _call_advance_alexia_myra_teamup_scene_adv_01
     return
 
-label myra_alexia_teamup_scene_scene_3(the_group, scene_transition = False):  #Sex
+label alexia_myra_teamup_scene_scene_3(the_group, scene_transition = False):  #Sex
     $ the_person = the_group[0]
     $ current_round = 1
     $ round_count = 1
@@ -1046,7 +1046,7 @@ label myra_alexia_teamup_scene_scene_3(the_group, scene_transition = False):  #S
             $ scene_manager.update_actor(the_person, display_transform = character_right(yoffset = 0, zoom = 0.8))
             $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
         "The character select screen comes up, and you get close to [the_target.title], your hands already running along the soft skin on her sides."
-        call myra_alexia_teamup_fight_round_label(the_group, (the_target == myra)) from _myra_alexia_back_massage_round_call_04
+        call alexia_myra_teamup_fight_round_label(the_group, (the_target == myra)) from _alexia_myra_back_massage_round_call_04
         if _return == myra:
             $ myra_wins += 1
             $ the_target = myra
@@ -1099,7 +1099,7 @@ label myra_alexia_teamup_scene_scene_3(the_group, scene_transition = False):  #S
     else:
         mc.name "Alright, [the_target.title], we'll do it like last time again. Lay down and [the_loser.title] get on top of her."
         the_target "Okay!"
-    call start_threesome(the_target, the_loser, start_position = Threesome_sixty_nine, position_locked = True) from _myra_alexia_postgame_threesome_01
+    call start_threesome(the_target, the_loser, start_position = Threesome_sixty_nine, position_locked = True) from _alexia_myra_postgame_threesome_01
     $ the_report = _return
     if the_report.get("trifecta", False) and scene_transition:
         "When you finish, you can't believe how well it went. Everyone orgasmed and seems satisfied."
@@ -1139,7 +1139,7 @@ label myra_alexia_teamup_scene_scene_3(the_group, scene_transition = False):  #S
     $ the_target = None
     return
 
-label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    #Free use - Not yet written.
+label alexia_myra_teamup_scene_scene_4(the_group, scene_transition = False):    #Free use - Not yet written.
     $ the_person = the_group[0]
     $ finished = False
     $ myra_ass_warmed_up = False
@@ -1168,22 +1168,22 @@ label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    
             "[myra.title]'s ass":
                 $ scene_manager.update_actor(myra, display_transform = character_right(yoffset = .2, zoom = 1.2))
                 $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = 0, zoom = 0.8))
-                call myra_alexia_teamup_anal_prone(myra, myra_ass_warmed_up) from _myra_alexia_teamup_anal_myra_01
+                call alexia_myra_teamup_anal_prone(myra, myra_ass_warmed_up) from _alexia_myra_teamup_anal_myra_01
                 $ myra_ass_warmed_up = True
             "[myra.title]'s pussy":
                 $ scene_manager.update_actor(myra, display_transform = character_right(yoffset = .2, zoom = 1.2))
                 $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = 0, zoom = 0.8))
-                call myra_alexia_teamup_vaginal_prone(myra, myra_warmed_up) from _myra_alexia_teamup_prone_myra_01
+                call alexia_myra_teamup_vaginal_prone(myra, myra_warmed_up) from _alexia_myra_teamup_prone_myra_01
                 $ myra_warmed_up = True
             "[alexia.title]'s ass":
                 $ scene_manager.update_actor(the_person, display_transform = character_right(yoffset = 0, zoom = 0.8))
                 $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
-                call myra_alexia_teamup_anal_prone(alexia, alexia_ass_warmed_up) from _myra_alexia_teamup_anal_alexia_01
+                call alexia_myra_teamup_anal_prone(alexia, alexia_ass_warmed_up) from _alexia_myra_teamup_anal_alexia_01
                 $ alexia_ass_warmed_up = True
             "[alexia.title]'s pussy":
                 $ scene_manager.update_actor(the_person, display_transform = character_right(yoffset = 0, zoom = 0.8))
                 $ scene_manager.update_actor(alexia, display_transform = character_center_flipped(yoffset = .2, zoom = 1.2))
-                call myra_alexia_teamup_vaginal_prone(alexia, alexia_warmed_up) from _myra_alexia_teamup_prone_alexia_01
+                call alexia_myra_teamup_vaginal_prone(alexia, alexia_warmed_up) from _alexia_myra_teamup_prone_alexia_01
                 $ alexia_warmed_up = True
             "Finish up":
                 "You decide you want to be done for the evening."
@@ -1300,12 +1300,12 @@ label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    
         #del the_target
     return
 
-label myra_alexia_teamup_trans_scene_0(the_group):
+label alexia_myra_teamup_trans_scene_0(the_group):
     pass
     #This label should probably never be called because this event can't regress.
     return
 
-label myra_alexia_teamup_trans_scene_1(the_group):
+label alexia_myra_teamup_trans_scene_1(the_group):
     $ the_person = the_group[0]
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -1342,7 +1342,7 @@ label myra_alexia_teamup_trans_scene_1(the_group):
     alexia "Bring it bitch!"
     return
 
-label myra_alexia_teamup_trans_scene_2(the_group):
+label alexia_myra_teamup_trans_scene_2(the_group):
     $ the_person = the_group[0]
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -1385,7 +1385,7 @@ label myra_alexia_teamup_trans_scene_2(the_group):
     "Oh my god, you did it. You can't wait to blow your load into one of these two girl's mouths."
     return
 
-label myra_alexia_teamup_trans_scene_3(the_group):
+label alexia_myra_teamup_trans_scene_3(the_group):
     $ the_person = the_group[0]
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -1418,7 +1418,7 @@ label myra_alexia_teamup_trans_scene_3(the_group):
     $ scene_manager.strip_full_outfit(the_person)
     return
 
-label myra_alexia_teamup_trans_scene_4(the_group):
+label alexia_myra_teamup_trans_scene_4(the_group):
     $ the_person = the_group[0]
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -1448,20 +1448,20 @@ label myra_alexia_teamup_trans_scene_4(the_group):
     mc.name "Of course!"
     return
 
-label myra_alexia_teamup_scene_choice_label(the_group):
+label alexia_myra_teamup_scene_choice_label(the_group):
     $ the_person = the_group[0]
     the_person "So, are you going to stick around? Or just stopping by?"
     "[alexia.possessive_title] looks at you, you can tell she wants you to hang out."
-    if myra_alexia_teamup_scene.stage < 2:
+    if alexia_myra_teamup_scene.stage < 2:
         alexia "Please [alexia.mc_title]? It's not the same without your magic hands to play for!"
         the_person "Ha! Yeah having something to play for definitely makes it more fun!"
-    elif myra_alexia_teamup_scene.stage == 2:
+    elif alexia_myra_teamup_scene.stage == 2:
         alexia "I honestly don't even care if I win or lose... but you should stick around!"
         "[alexia.title] glances down at your crotch and licks her lips. She's clearly thinking about what would happen if she loses..."
         the_person "Not me! I want to win for sure!"
         $ mc.change_locked_clarity(25)
         "Thought's of eating out [the_person.title] while [alexia.possessive_title] sucks your cock are certainly tantalizing..."
-    elif myra_alexia_teamup_scene.stage == 3:
+    elif alexia_myra_teamup_scene.stage == 3:
         alexia "You can warm me up while we play the first few rounds! You should stick around!"
         "[alexia.title] appears ready to start getting naked already."
     else:
@@ -1481,10 +1481,10 @@ label myra_alexia_teamup_scene_choice_label(the_group):
     alexia "One for me too please!"
     mc.name "Okay, I'll be right back."
     $ scene_manager.clear_scene(reset_actor = False)
-    call myra_alexia_teamup_serum_label(the_group) from _myra_alexia_milkshake_serums_02
+    call alexia_myra_teamup_serum_label(the_group) from _alexia_myra_milkshake_serums_02
     return True
 
-label myra_alexia_teamup_scene_exit_scene(the_group):
+label alexia_myra_teamup_scene_exit_scene(the_group):
     $ the_person = the_group[0]
     mc.name "Sorry, it has been a really long week and I need to head home."
     alexia "What? Damn..."
@@ -1494,12 +1494,12 @@ label myra_alexia_teamup_scene_exit_scene(the_group):
     "You leave the gaming cafe, leaving the girls to their game night"
     return
 
-label myra_alexia_teamup_serum_label(the_group):
+label alexia_myra_teamup_serum_label(the_group):
     "You walk down to the food court. Most places are closing up, but a few are still open."
     "Luckily, the stand that sells milkshakes is still open. You purchase a strawberry and a chocolate and head back towards the gaming cafe."
     $ mc.business.change_funds(-10)
     "As you walk back to the cafe, you look around. The mall is deserted... time to decide if you want to drop a serum in."
-    if myra_alexia_teamup_scene.stage != 4:
+    if alexia_myra_teamup_scene.stage != 4:
         "If you wanted a particular girl to win, you could probably influence it with a serum you put in."
         "To be good at games, someone needs to have focus, and be good with their hands... (foreplay)"
     else:
@@ -1511,7 +1511,7 @@ label myra_alexia_teamup_serum_label(the_group):
     "When you get back to the cafe, you step inside and lock the door behind you."
     return
 
-label myra_alexia_teamup_fight_round_label(the_group, myra_is_target):
+label alexia_myra_teamup_fight_round_label(the_group, myra_is_target):
     #Use skill score to determine the likely winner. Foreplay and focus score, with arousal being a distraction.
     $ skill_score = int(((myra.focus + myra.sex_skills["Foreplay"]) - (myra.arousal / 10) ) - ((alexia.focus + alexia.sex_skills["Foreplay"]) - (alexia.arousal / 10) ))
     if myra_is_target:
@@ -1520,15 +1520,15 @@ label myra_alexia_teamup_fight_round_label(the_group, myra_is_target):
         $ the_target = alexia
         $ skill_score = (-skill_score)
 
-    if myra_alexia_teamup_scene.stage < 3:
+    if alexia_myra_teamup_scene.stage < 3:
         "[the_target.title] leans back against you as the girls pick their characters. The heat of her body feels good against your chest."
-    elif myra_alexia_teamup_scene.stage == 3:
+    elif alexia_myra_teamup_scene.stage == 3:
         "[the_target.title] sits on your lap and leans back against you, your cock nestled in the crack of her ass."
         "She gives a sigh and a little giggle as she picks up her controller and the girls pick their characters."
     else:
         "You get on top of [the_target.title] as she lays on the couch. Her whole backside is open for you to do what you want with."
         "She gives a sigh and a little giggle when she feels your weight on her. She picks up her controller and the girls pick their characters."
-    # if myra_alexia_teamup_scene.stage != 4: else: no longer competing
+    # if alexia_myra_teamup_scene.stage != 4: else: no longer competing
     if skill_score > 2:
         "[the_target.possessive_title] has an excellent chance of winning the matchup..."
         "That is, of course, depending on if your magic hands happen to be a distraction."
@@ -1543,18 +1543,18 @@ label myra_alexia_teamup_fight_round_label(the_group, myra_is_target):
     "How much should you distract [the_target.title]?"
     menu:
         "Light Distraction":
-            call myra_alexia_teamup_light_distraction(the_target) from _myra_alexia_teamup_light_dist_0101
+            call alexia_myra_teamup_light_distraction(the_target) from _alexia_myra_teamup_light_dist_0101
             $ skill_score -= 1
         "Moderate Distraction":
-            call myra_alexia_teamup_med_distraction(the_target) from _myra_alexia_teamup_med_dist_0101
+            call alexia_myra_teamup_med_distraction(the_target) from _alexia_myra_teamup_med_dist_0101
             $ skill_score -= 3
         "Major Distraction":
-            call myra_alexia_teamup_large_distraction(the_target) from _myra_alexia_teamup_large_dist_0101
+            call alexia_myra_teamup_large_distraction(the_target) from _alexia_myra_teamup_large_dist_0101
             $ skill_score -= 5
     if _return:
         $ the_target.change_arousal(_return)
     if the_target.arousal >= 100:   #You drive her to orgasm and she loses her match
-        call myra_alexia_teamup_orgasm_finish(the_target)
+        call alexia_myra_teamup_orgasm_finish(the_target)
         if myra_is_target:
             return alexia
         else:
@@ -1576,15 +1576,15 @@ label myra_alexia_teamup_fight_round_label(the_group, myra_is_target):
             return myra
     return
 
-label myra_alexia_teamup_light_distraction(the_person):
-    if myra_alexia_teamup_scene.stage == 0:
+label alexia_myra_teamup_light_distraction(the_person):
+    if alexia_myra_teamup_scene.stage == 0:
         "You put your hands on [the_person.possessive_title]'s shoulders and start a soft massage."
         "You keep your hands light to make sure not to distract her too much."
         "At a couple points in time, the fight gets tense, so you take a second and let [the_person.title] fight before resuming your back rub."
         the_person "Mmm..."
         "[the_person.title] sighs as you hit a particularly sensitive area. She feels good and relaxed."
         return 10
-    if myra_alexia_teamup_scene.stage == 1:
+    if alexia_myra_teamup_scene.stage == 1:
         if the_person.arousal < 40:
             "You let your hands roam up an down [the_person.possessive_title]'s back for a bit as the match gets started."
             "She wiggles a bit when you put your hands on her sides and pull her back against you a little bit more."
@@ -1611,7 +1611,7 @@ label myra_alexia_teamup_light_distraction(the_person):
                 "You wish you could put your hand under her clothes, but you don't want to distract her too much."
                 "You softly knead her tits through her clothes for the remainder of the match."
                 return 15
-    if myra_alexia_teamup_scene.stage == 2:
+    if alexia_myra_teamup_scene.stage == 2:
         if the_person.arousal < 30:
             "You softly run hands up and down [the_person.possessive_title]'s soft skin on her sides and belly as the match gets started."
             "You don't want to be too much of a distraction, you just want to get her slowly turned on as the match progresses."
@@ -1664,7 +1664,7 @@ label myra_alexia_teamup_light_distraction(the_person):
             "You try to back off again, but [the_person.title] has other ideas. She grabs your hand with hers, shifts forward a bit, then sits on your hand, pinning it to the couch."
             "Completely ignoring the game, [the_person.possessive_title] starts rocking her hips, grinding herself on your hand."
             return 40
-    if myra_alexia_teamup_scene.stage == 3:
+    if alexia_myra_teamup_scene.stage == 3:
         "For now, you are content to let the girls have a mostly fair match. You decide to enjoy the hot young body of [the_person.possessive_title] on your lap without going overboard."
         if the_person.arousal < 25:
             "Her sides, her stomach, her thighs, her chest, her crotch... you let your hands roam her body."
@@ -1728,15 +1728,15 @@ label myra_alexia_teamup_light_distraction(the_person):
             return 40
     return
 
-label myra_alexia_teamup_med_distraction(the_person):
-    if myra_alexia_teamup_scene.stage == 0:
+label alexia_myra_teamup_med_distraction(the_person):
+    if alexia_myra_teamup_scene.stage == 0:
         "You put your hands on [the_person.possessive_title]'s shoulders and start a massage."
         "She has several tense areas, so you alternate between a light and more forceful massage, trying to get her tensest areas loosened up."
         "At a couple points in time, the fight gets tense, so you keep your touch light on [the_person.title] for a few seconds so you aren't TOO much of a distraction."
         the_person "Mmm... that's nice..."
         "[the_person.title] sighs as you hit a particularly sensitive area. She feels good and relaxed."
         return 15
-    if myra_alexia_teamup_scene.stage == 1:
+    if alexia_myra_teamup_scene.stage == 1:
         if the_person.arousal < 40:
             "You let your hands roam up an down [the_person.possessive_title]'s back for a bit as the match gets started."
             "She wiggles a bit when you put your hands on her sides and pull her back against you a little bit more."
@@ -1764,7 +1764,7 @@ label myra_alexia_teamup_med_distraction(the_person):
             "You grope and massage [the_person.possessive_title]'s tits. You keep a steady pace, not slowing down even when the matchup gets tense."
             "[the_person.title] gasps and squirms under your touch. She's trying to hide her pleasure, but she is barely keeping it together."
             return 30
-    if myra_alexia_teamup_scene.stage == 2:
+    if alexia_myra_teamup_scene.stage == 2:
         if the_person.arousal < 30:
             "You softly run hands up and down [the_person.possessive_title]'s soft skin on her sides and belly."
             "Your goal isn't necessarily to throw the match, but you want to get her aroused and needy as the match progresses."
@@ -1814,7 +1814,7 @@ label myra_alexia_teamup_med_distraction(the_person):
             "This time, you don't back off of [the_person.title]. She gasps when you start to finger her rapidly."
             "Completely ignoring the game, [the_person.possessive_title] starts rocking her hips, grinding herself on your hand."
             return 40
-    if myra_alexia_teamup_scene.stage == 3:
+    if alexia_myra_teamup_scene.stage == 3:
         if the_person.arousal >= 50:
             "You can tell that [the_person.title] is getting really turned on. You decide to fuck her for a bit as the match starts."
             "With one hand you urge her hips back up. She gets off your lap just enough for you to reach down and take your cock in your hand."
@@ -1885,8 +1885,8 @@ label myra_alexia_teamup_med_distraction(the_person):
             return 40
     return
 
-label myra_alexia_teamup_large_distraction(the_person):
-    if myra_alexia_teamup_scene.stage == 0:
+label alexia_myra_teamup_large_distraction(the_person):
+    if alexia_myra_teamup_scene.stage == 0:
         "You put your hands on [the_person.possessive_title]'s shoulders and start a massage."
         "She has several tense areas, so you press your hands into her muscles with urgency."
         "[the_person.title] gasps, trying to concentrate on the fight, but your hands are relentless."
@@ -1894,7 +1894,7 @@ label myra_alexia_teamup_large_distraction(the_person):
         the_person "God... that feels amazing [the_person.mc_title]..."
         "[the_person.title] sighs as you hit a particularly sensitive area. She feels good but you have definitely distracted her."
         return 20
-    if myra_alexia_teamup_scene.stage == 1:
+    if alexia_myra_teamup_scene.stage == 1:
         if not the_person.tits_available():
             "You are immediately annoyed by her top. You decide to take it off, whether she likes it or not."
             "[the_person.title] starts to protest, but you quickly pull her clothes off her upper body anyway."
@@ -1920,7 +1920,7 @@ label myra_alexia_teamup_large_distraction(the_person):
             the_person "Mmm! God... take it easy..."
             "[the_person.title] gasps and squirms under your touch. She's trying to hide her pleasure, but she is barely keeping it together."
             return 40
-    if myra_alexia_teamup_scene.stage == 2:
+    if alexia_myra_teamup_scene.stage == 2:
         if not the_person.vagina_available():
             "[the_person.possessive_title] needs to be taught a lesson in humility. You need to get her bottoms off for the best effect."
             "You reach down and start to take her bottoms off."
@@ -1957,7 +1957,7 @@ label myra_alexia_teamup_large_distraction(the_person):
             the_person "[the_person.mc_title]... I'm so close... just... just..."
             "Completely ignoring the game, [the_person.possessive_title] starts rocking her hips, grinding herself on your hand."
             return 45
-    if myra_alexia_teamup_scene.stage == 3:
+    if alexia_myra_teamup_scene.stage == 3:
         "With one hand you urge her hips back up. She gets off your lap just enough for you to reach down and take your cock in your hand."
         "You point it up and then gently urge her back down."
         if the_person.arousal < 25:
@@ -2028,21 +2028,21 @@ label myra_alexia_teamup_large_distraction(the_person):
 
     return
 
-label myra_alexia_teamup_orgasm_finish(the_person):
-    if myra_alexia_teamup_scene.stage <= 1:
+label alexia_myra_teamup_orgasm_finish(the_person):
+    if alexia_myra_teamup_scene.stage <= 1:
         "[the_person.title] suddenly starts to shudder. She gasps and moans under her breath."
         "Is... is she cumming?"
         "Her character has stopped moving in the game. The other girl easily finishes her off."
         $ the_person.have_orgasm(half_arousal = True)
         "Wow, she definitely just orgasmed. You hands really are magic?"
         "For several seconds, she rides her orgasm until she finally opens her eyes, discovering she has lost the match."
-    elif myra_alexia_teamup_scene.stage == 2:
+    elif alexia_myra_teamup_scene.stage == 2:
         "[the_person.title] is still holding her controller, but has stopped playing as you finger her urgently."
         the_person "Oh god... oh... OH!"
         "Her pussy clenches down on your fingers as she begins to orgasm. She closes her eyes and her hips are bucking slightly."
         $ the_person.have_orgasm(half_arousal = True)
         "For several seconds, she rides her orgasm until she finally opens her eyes, discovering she has lost the match."
-    elif myra_alexia_teamup_scene.stage == 3:
+    elif alexia_myra_teamup_scene.stage == 3:
         "Her controller on the floor, [the_person.title] is riding your cock with abandon."
         if mc.arousal >= 100:   #Cum together.
             "Her hot pussy and urgent moans are too much. You are going to cum too."
@@ -2103,7 +2103,7 @@ label myra_alexia_teamup_orgasm_finish(the_person):
         pass
     return
 
-label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
+label alexia_myra_teamup_anal_prone(the_person, warmed_up = True):
     "You get on top of [the_person.possessive_title]. Her puckered back door beckons you."
     if warmed_up:
         "It still gapes a little bit from earlier. She moans a bit when you lean forward and slowly push your cock inside her."
@@ -2159,7 +2159,7 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
     $ mc.change_locked_clarity(200)
     $ mc.change_energy(-12, add_to_log = False)
     if the_person.arousal > 100 and mc.arousal < 100:
-        call orgasm_prone_anal(the_person, gaming_cafe, make_couch()) from _myra_alexia_anal_teamup_orgasm_01
+        call orgasm_prone_anal(the_person, gaming_cafe, make_couch()) from _alexia_myra_anal_teamup_orgasm_01
         $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = 100, reset_arousal = False)
         $ the_person.change_arousal(-70)
     elif mc.arousal > 100:
@@ -2221,7 +2221,7 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
         "After a while of fucking her ass, you pull out from [the_person.possessive_title]. It might be time to move on to another needy hole."
     return
 
-label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
+label alexia_myra_teamup_vaginal_prone(the_person, warmed_up = True):
     "You get on top of [the_person.title]. You can't wait to use her cunt for your pleasure."
     if warmed_up:
         "[the_person.possessive_title]'s pussy is engorged with arousal from your previous fucking."
@@ -2267,7 +2267,7 @@ label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
     $ mc.change_locked_clarity(200)
     $ mc.change_energy(-12, add_to_log = False)
     if the_person.arousal > 100 and mc.arousal < 100:
-        call orgasm_prone_bone(the_person, gaming_cafe, make_couch()) from _myra_alexia_vaginal_teamup_orgasm_01
+        call orgasm_prone_bone(the_person, gaming_cafe, make_couch()) from _alexia_myra_vaginal_teamup_orgasm_01
         $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = 100, reset_arousal = False)
         $ the_person.change_arousal(-70)
     elif mc.arousal > 100:

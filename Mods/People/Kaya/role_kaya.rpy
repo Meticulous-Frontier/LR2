@@ -673,7 +673,7 @@ label kaya_meet_erica_at_uni_label(the_person):     #This label is a repalcement
     mc.name "No, I'll try to swing by sometime.."
     "[the_person.possessive_title] and [erica.title] trade phone numbers. Sounds like you have a study party to crash on Tuesday!"
     $ town_relationships.update_relationship(erica, kaya, "Friend")
-    $ kaya.add_unique_on_room_enter_event(kaya_erica_teamup_action)
+    $ kaya.add_unique_on_room_enter_event(erica_kaya_teamup_action)
     $ kaya.event_triggers_dict["has_started_internship"] = False
     $ kaya.set_override_schedule(university, the_days = [1], the_times = [4])
     $ erica.set_override_schedule(university, the_days = [1], the_times = [4])
@@ -787,7 +787,7 @@ label kaya_lily_study_night_intro_label():
     "Alone in the kitchen, you are left with more questions than answers. As you walk down the hall back to your bedroom, you hear the girls in [lily.title]'s room, but decide to leave them alone."
     $ the_person.set_override_schedule(lily_bedroom, the_days = [1], the_times = [4])
     $ lily.set_override_schedule(lily_bedroom, the_days = [1], the_times = [4])  #This should already be set, but just in case, make sure she is there.
-    $ kaya.add_unique_on_room_enter_event(kaya_erica_teamup_action)
+    $ kaya.add_unique_on_room_enter_event(erica_kaya_teamup_action)
     $ kaya.add_unique_on_talk_event(kaya_uni_scholarship_intro)
     $ kaya.event_triggers_dict["studies_with_lily"] = True
     return

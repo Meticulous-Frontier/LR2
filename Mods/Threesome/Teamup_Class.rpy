@@ -121,4 +121,4 @@ label teamup_scene_label(teamup, the_person_one, the_person_two):
     $ teamup.call_final_scene(the_person_one, the_person_two)
     return
 
-# call teamup_scene_label(kaya_erica_teamup, kaya, erica)
+# call teamup_scene_label(erica_kaya_teamup, kaya, erica)

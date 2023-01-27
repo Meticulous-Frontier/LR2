@@ -121,15 +121,15 @@ init 10 python:
 
         #Study
         if kaya_studies_with_erica():
-            if kaya_erica_teamup.get_stage() == 0:
+            if erica_kaya_teamup.get_stage() == 0:
                 teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights."])
-            elif kaya_erica_teamup.get_stage() == 1:
+            elif erica_kaya_teamup.get_stage() == 1:
                 teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes getting naked for you."])
-            elif kaya_erica_teamup.get_stage() == 2:
+            elif erica_kaya_teamup.get_stage() == 2:
                 teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes letting you spank them."])
-            elif kaya_erica_teamup.get_stage() == 3:
+            elif erica_kaya_teamup.get_stage() == 3:
                 teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, sometimes sucking you off."])
-            elif kaya_erica_teamup.get_stage() == 4:
+            elif erica_kaya_teamup.get_stage() == 4:
                 teamup_story_list.append([kaya,"[erica.title] and [kaya.title] study together on Tuesday nights, and are down for a threesome after!"])
         elif kaya_has_finished_intro():
             teamup_story_list.append([kaya,"[erica.title] and [kaya.title] are both college students..."])

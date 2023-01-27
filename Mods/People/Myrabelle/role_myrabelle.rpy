@@ -832,7 +832,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
                 $ the_person.change_happiness(30)
                 $ the_person.change_love(5, 90)
                 the_person "Ah! Fuck, I didn't think you were ever gonna ask. I'm down for it if you are!"
-                if myra_alexia_teamup_scene.stage >= 2:
+                if alexia_myra_teamup_scene.stage >= 2:
                     "One thing bothers you a bit about it though."
                     mc.name "What about when I come to game nights? You know, with you and [alexia.title]."
                     the_person "Oh, I mean, she is such a good friend of mine, I wouldn't be too upset if we um... kept doing that."
@@ -2033,7 +2033,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     mc.name "Good day [the_person.title]."
     the_person "Hey."
     "[the_person.possessive_title] looks around, then says to you in a hushed voice."
-    if myra_alexia_teamup_scene.get_stage() >= 2:
+    if alexia_myra_teamup_scene.get_stage() >= 2:
         the_person "So... how'd you enjoy the other night with [alexia.fname]? That was pretty wild, huh?"
         mc.name "Yeah, but definitely in a good way."
         the_person "Yeah, you WOULD say that..."
@@ -2086,7 +2086,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     $ the_person.draw_person(emotion = "sad")
     the_person "Hey..."
     mc.name "Hey [the_person.title]."
-    if myra_alexia_teamup_scene.get_stage() >= 2:
+    if alexia_myra_teamup_scene.get_stage() >= 2:
         the_person "Look, I'm sorry I got pissed earlier. Obviously I know that you fool around with [alexia.fname]."
         the_person "She talks about you way too much for things between you two to be just friendly."
         mc.name "Oh... she talks about me a lot?"
@@ -2120,7 +2120,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     the_person "So... what now coach?"
     mc.name "Well, first, you need to drop the smart-ass attitude."
     the_person "What? Fuck off, I'm just..."
-    if myra_alexia_teamup_scene.get_stage() >= 2:
+    if alexia_myra_teamup_scene.get_stage() >= 2:
         mc.name "Let's be honest with each other. We both know WHY you are doing this. You are competitive by nature, and you can't stand the thought that [alexia.title] might be better than you."
     else:
         mc.name "Let's be honest with each other. WE both know WHY you are doing this. You are competitive by nature, and you can't stand the thought that a guy is thinking about some other girl when you're going down on him."
@@ -2208,7 +2208,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
     mc.name "Alright, I'll see you later."
     $ clear_scene()
     $ the_person.apply_outfit(the_person.planned_outfit)
-    if myra_alexia_teamup_scene.get_stage() >= 2:
+    if alexia_myra_teamup_scene.get_stage() >= 2:
         "You step out of the stock room. The gaming nights you are having with [the_person.possessive_title] and [alexia.title] are paying off."
         "A week ago, [the_person.title] would never even consider sucking you off, but now she seems interested, if only to show up her friend."
     else:

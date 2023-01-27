@@ -7,9 +7,9 @@ label activate_kaya_mod_core(stack):
     python:
 
         kaya_mod_initialization()
-        kaya_erica_teamup_init()
-        if kaya_erica_teamup not in list_of_progression_scenes:
-            list_of_progression_scenes.append(kaya_erica_teamup)
+        erica_kaya_teamup_init()
+        if erica_kaya_teamup not in list_of_progression_scenes:
+            list_of_progression_scenes.append(erica_kaya_teamup)
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return
@@ -20,12 +20,12 @@ label update_kaya_mod_core(stack):
             kaya_mod_initialization()
         elif not kaya.has_role(generic_student_role):
             kaya.add_role(generic_student_role)
-        if "kaya_erica_teamup" not in globals():
-            kaya_erica_teamup_init()
-        if not isinstance(kaya_erica_teamup, Progression_Scene):
-            kaya_erica_teamup_init()
-        kaya_erica_teamup.compile_scenes(kaya_erica_teamup)
-        if kaya_erica_teamup not in list_of_progression_scenes:
-            list_of_progression_scenes.append(kaya_erica_teamup)
+        if "erica_kaya_teamup" not in globals():
+            erica_kaya_teamup_init()
+        if not isinstance(erica_kaya_teamup, Progression_Scene):
+            erica_kaya_teamup_init()
+        erica_kaya_teamup.compile_scenes(erica_kaya_teamup)
+        if erica_kaya_teamup not in list_of_progression_scenes:
+            list_of_progression_scenes.append(erica_kaya_teamup)
         execute_hijack_call(stack)
     return

@@ -53,7 +53,7 @@ init 2 python:
         #WARNING: The order of the following lists is critical! They are referenced based on their indexes!!!
         the_progression_scene.start_scene_list = ["TEMPLATE_progression_scene_intro_0", "TEMPLATE_progression_scene_intro_1"]
         the_progression_scene.req_list = [TEMPLATE_progression_scene_0_req, TEMPLATE_progression_scene_1_req]
-        the_progression_scene.trans_list = ["kaya_erica_trans_scene_0", "kaya_erica_trans_scene_1"]
+        the_progression_scene.trans_list = ["erica_kaya_trans_scene_0", "erica_kaya_trans_scene_1"]
         the_progression_scene.final_scene_list = ["TEMPLATE_progression_scene_scene_0", "TEMPLATE_progression_scene_scene_1"]
         the_progression_scene.regress_scene_list = []   #Add labels for regression here if desired.
         return

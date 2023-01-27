@@ -29,14 +29,14 @@ init 3 python:
 
 #Story wrappers
 init 3 python:
-    def sakari_ophelia_teamup_started():
+    def ophelia_sakari_teamup_started():
         return sakari.event_triggers_dict.get("ophelia_teamup_started", False)
 
-    def sakari_ophelia_teamup_active():
+    def ophelia_sakari_teamup_active():
         return sakari.event_triggers_dict.get("opehlia_teamup", False)
 
-    def sakari_rebecca_teamup_started():
+    def rebecca_sakari_teamup_started():
         return sakari.event_triggers_dict.get("rebecca_teamup_started", False)
 
-    def sakari_rebecca_teamup_active():
+    def rebecca_sakari_teamup_active():
         return sakari.event_triggers_dict.get("rebecca_teamup", False)

@@ -113,17 +113,17 @@ init 10 python:
         teamup_story_list = []
 
         #Alexia
-        if myra_alexia_teamup_scene.get_stage() == -1:
+        if alexia_myra_teamup_scene.get_stage() == -1:
             teamup_story_list.append([alexia, "[alexia.title] is her good friend. Maybe there will be an opportunity here someday"])
-        elif myra_alexia_teamup_scene.get_stage() == 0:
+        elif alexia_myra_teamup_scene.get_stage() == 0:
             teamup_story_list.append([alexia, "[alexia.title] meets with her every Friday night. You can rub their backs if you join them."])
-        elif myra_alexia_teamup_scene.get_stage() == 1:
+        elif alexia_myra_teamup_scene.get_stage() == 1:
             teamup_story_list.append([alexia, "[alexia.title] and [myra.title] compete for you to finger them on Friday nights."])
-        elif myra_alexia_teamup_scene.get_stage() == 2:
+        elif alexia_myra_teamup_scene.get_stage() == 2:
             teamup_story_list.append([alexia, "[alexia.title] and [myra.title] compete for you to eat them out on Friday nights."])
-        elif myra_alexia_teamup_scene.get_stage() == 3:
+        elif alexia_myra_teamup_scene.get_stage() == 3:
             teamup_story_list.append([alexia, "[alexia.title] and [myra.title] compete for you to fuck them on Friday nights."])
-        elif myra_alexia_teamup_scene.get_stage() == 3:
+        elif alexia_myra_teamup_scene.get_stage() == 3:
             teamup_story_list.append([alexia, "[alexia.title] and [myra.title] have a friendly gaming night that always ends in a threesome on Friday nights."])
         return teamup_story_list
 

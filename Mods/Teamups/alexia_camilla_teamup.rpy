@@ -14,45 +14,45 @@
 
 
 init 1 python:
-    def camilla_alexia_boudoir_intro_setup():   #Use this function to add the appropriate labels to the game for when boudoir photos can begin.
+    def alexia_camilla_boudoir_intro_setup():   #Use this function to add the appropriate labels to the game for when boudoir photos can begin.
         if mc_business_has_expensive_camera() and alexia_is_model():
-            alexia.add_unique_on_room_enter_event(camilla_alexia_boudoir_setup_intro)
+            alexia.add_unique_on_room_enter_event(alexia_camilla_boudoir_setup_intro)
         else:
-            mc.business.add_mandatory_crisis(camilla_alexia_boudoir_setup_reminder)
+            mc.business.add_mandatory_crisis(alexia_camilla_boudoir_setup_reminder)
         return
 
-    camilla_alexia_boudoir_setup_reminder = Action("Boudoir Reminder", camilla_alexia_boudoir_setup_reminder_requirement, "camilla_alexia_boudoir_setup_reminder_label")
-    camilla_alexia_boudoir_setup_intro = Action("Arrange photos with Alexia", camilla_alexia_boudoir_setup_intro_requirement, "camilla_alexia_boudoir_setup_intro_label")
-    # camilla_alexia_boudoir_final_setup
-    # camilla_alexia_boudoir_intro
-    # camilla_alexia_boudoir_recur
+    alexia_camilla_boudoir_setup_reminder = Action("Boudoir Reminder", alexia_camilla_boudoir_setup_reminder_requirement, "alexia_camilla_boudoir_setup_reminder_label")
+    alexia_camilla_boudoir_setup_intro = Action("Arrange photos with Alexia", alexia_camilla_boudoir_setup_intro_requirement, "alexia_camilla_boudoir_setup_intro_label")
+    # alexia_camilla_boudoir_final_setup
+    # alexia_camilla_boudoir_intro
+    # alexia_camilla_boudoir_recur
 
 
 
 
 #Requirement Functions
 init -1 python:
-    def camilla_alexia_boudoir_setup_reminder_requirement():
+    def alexia_camilla_boudoir_setup_reminder_requirement():
         if mc_business_has_expensive_camera() and alexia_is_model():
             if time_of_day == 2 and renpy.random.randint(0,100) < 30:
                 return True
         return False
 
-    def camilla_alexia_boudoir_setup_intro_requirement(the_person):
+    def alexia_camilla_boudoir_setup_intro_requirement(the_person):
         return False
 
 
 
 #Labels
 
-label camilla_alexia_boudoir_setup_reminder_label():
+label alexia_camilla_boudoir_setup_reminder_label():
     "While working in your office, you start daydreaming about some of your recent sexual adventures."
     "Suddenly, you remember [camilla.possessive_title], and your conversation about taking boudoir photos of her when you helped her pickup out some lingerie."
     "Recently, you purchased a camera and have started taking pictures with [alexia.title]. Maybe you could talk to her about doing them?"
-    $ camilla_alexia_boudoir_intro_setup()
+    $ alexia_camilla_boudoir_intro_setup()
     return
 
-label camilla_alexia_boudoir_setup_intro_label(the_person):
+label alexia_camilla_boudoir_setup_intro_label(the_person):
     mc.name "Hey [the_person.title]. Have a moment?"
     the_person "Uhh, sure [the_person.mc_title]."
     mc.name "You know how we take pictures of your for the ads to run, right?"
@@ -71,10 +71,10 @@ label camilla_alexia_boudoir_setup_intro_label(the_person):
     mc.name "Perfect. I'll talk to her and get back to you."
     $ clear_scene()
     "You let [the_person.title] go. You should talk to [camilla.title] and get the photoshoot finalized!"
-    $ camilla.add_unique_on_talk_event(camilla_alexia_boudoir_final_setup)
+    $ camilla.add_unique_on_talk_event(alexia_camilla_boudoir_final_setup)
     return
 
-label camilla_alexia_boudoir_final_setup_label(the_person):
+label alexia_camilla_boudoir_final_setup_label(the_person):
     mc.name "Hey [the_person.title]. Guess what!"
     the_person "What?"
     if (day % 7 != 2):
@@ -93,10 +93,10 @@ label camilla_alexia_boudoir_final_setup_label(the_person):
     the_person "See you there!"
     $ clear_scene()
     "Alright! You've got the time and place set for a sexy photoshoot!"
-    $ mc.business.add_mandatory_crisis(camilla_alexia_boudoir_intro)
+    $ mc.business.add_mandatory_crisis(alexia_camilla_boudoir_intro)
     return
 
-label camilla_alexia_boudoir_intro_label():
+label alexia_camilla_boudoir_intro_label():
     $ scene_manager = Scene()
     "It's Wednesday. The boudoir photoshoot with [camilla.possessive_title] and [alexia.title] is tonight!"
     if mc.is_at_work():
@@ -119,7 +119,7 @@ label camilla_alexia_boudoir_intro_label():
 #In the intro portion, we basically talk about what we have done so far as a group.
 #In the transition stage, we introduce what will be occuring during this session. If MC has unlocked the next tier of sluttiness stuff, we find out about it here.
 #In the final stage, the sex act occurs.
-label camilla_alexia_boudoir_recur_label(the_person):
+label alexia_camilla_boudoir_recur_label(the_person):
     "It's Wednesday. The boudoir photoshoot with [camilla.possessive_title] and [alexia.title] is tonight!"
     if mc.is_at_work():
         "You finish up quickly with the last of your daily tasks before going to your office."
