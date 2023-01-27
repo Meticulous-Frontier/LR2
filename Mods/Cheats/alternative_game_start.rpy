@@ -30,10 +30,14 @@ label alternative_start():
         "Predictable pregnancy content\n{size=16}Birth control is 100%% effective. Girls always default to taking birth control.{/size}":
             $ persistent.pregnancy_pref = 1
 
-        "Realistic pregnancy content\n{size=16}Birth control is not 100%% effective. Girls may not be taking birth control.{/size}":
+        "Semi-Realistic pregnancy content\n{size=16}Birth control is not 100%% effective. Girls may not be taking birth control.{/size}":
             $ persistent.pregnancy_pref = 2
 
+        "Realistic pregnancy content\n{size=16}Realistic cycles. Girls know their fertile times. Pulling out not 100%% effective. Girls don't want to get pregnant.{/size}":
+            $ persistent.pregnancy_pref = 3
+
     python:
+        global TIER_0_TIME_DELAY
         global TIER_1_TIME_DELAY
         global TIER_2_TIME_DELAY
         global TIER_3_TIME_DELAY
@@ -42,21 +46,25 @@ label alternative_start():
     "MOD" "How quickly would you like stories from the mod to play out? This will affect spacing between story events."
     menu:
         "Quick":
+            $ TIER_0_TIME_DELAY = -1
             $ TIER_1_TIME_DELAY = 1
             $ TIER_2_TIME_DELAY = 3
             $ TIER_3_TIME_DELAY = 7
             $ GAME_SPEED_FACTOR = 1.5
         "Standard":
+            $ TIER_0_TIME_DELAY = 1
             $ TIER_1_TIME_DELAY = 3
             $ TIER_2_TIME_DELAY = 7
             $ TIER_3_TIME_DELAY = 14
             $ GAME_SPEED_FACTOR = 1.0
         "Epic":
+            $ TIER_0_TIME_DELAY = 1
             $ TIER_1_TIME_DELAY = 5
             $ TIER_2_TIME_DELAY = 12
             $ TIER_3_TIME_DELAY = 20
             $ GAME_SPEED_FACTOR = 0.75
         "Marathon":
+            $ TIER_0_TIME_DELAY = 2
             $ TIER_1_TIME_DELAY = 7
             $ TIER_2_TIME_DELAY = 15
             $ TIER_3_TIME_DELAY = 30

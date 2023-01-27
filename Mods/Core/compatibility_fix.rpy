@@ -128,6 +128,7 @@ init -2:
     default persistent.zip_cache_size = 0 # default is small size
     default persistent.show_ntr = False     # default turn of NTR
     default persistent.keep_patreon_characters = True  # keep VREN original characters from hire process
+    default persistent.mc_noncon_pref = 0   #Default to disabled. MC does not allow himself to be raped in any situation.
 
 init python: # place first on the hijack stack
     add_label_hijack("after_load", "check_save_version")

@@ -53,7 +53,8 @@ init 2: # Add some additional
                             label "Pregnancy Settings"
                             textbutton "Disabled" action SetField(persistent, "pregnancy_pref", 0)
                             textbutton "Predictable" action SetField(persistent, "pregnancy_pref", 1)
-                            textbutton "Realistic" action SetField(persistent, "pregnancy_pref", 2)
+                            textbutton "Semi Realistic" action SetField(persistent, "pregnancy_pref", 2)
+                            textbutton "Realistic" action SetField(persistent, "pregnancy_pref", 3)
 
                         vbox:
                             style_prefix "radio"
@@ -86,6 +87,19 @@ init 2: # Add some additional
                                 action [
                                     SetField(persistent, "always_ask_condom", False)
                                 ]
+
+                    null height (2 * gui.pref_spacing)
+
+                    hbox:
+                        spacing 20
+
+                        vbox:
+                            style_prefix "radio"
+                            label "MC Non Consent"
+                            textbutton "Disabled" action SetField(persistent, "mc_noncon_pref", 0)
+                            textbutton "Roleplay" action SetField(persistent, "mc_noncon_pref", 1)
+                            textbutton "Enabled" action SetField(persistent, "mc_noncon_pref", 2)
+
 
                     null height (2 * gui.pref_spacing)
 

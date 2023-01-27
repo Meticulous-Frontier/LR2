@@ -193,6 +193,7 @@ init 3 python:
         person.update_sex_skill("Vaginal", 6)
         person.event_triggers_dict["LastBreedingFetish"] = day
         fetish_add_collar(person, breed_collar)
+        person.change_baby_desire(500)
         return
 
 init 50 python:

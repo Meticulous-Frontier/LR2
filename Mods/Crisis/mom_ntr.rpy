@@ -22,12 +22,12 @@ init 2 python:
         if persistent.pregnancy_pref > 0 and not pregnant_role in person.special_role:
             if persistent.pregnancy_pref == 1 and person.on_birth_control: #Establish how likely her birth contorl is to work (if needed, and if present)
                 bc_percent = 100 - person.bc_penalty
-            elif persistent.pregnancy_pref == 2 and person.on_birth_control:
+            elif persistent.pregnancy_pref >= 2 and person.on_birth_control:
                 bc_percent = 90 - person.bc_penalty
             else:
                 bc_percent = 0
 
-            if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
+            if persistent.pregnancy_pref >= 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
                 modified_fertility = person.calculate_realistic_fertility()
             else:
                 modified_fertility = person.fertility_percent

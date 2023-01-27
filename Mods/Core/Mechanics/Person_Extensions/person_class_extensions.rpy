@@ -999,6 +999,10 @@ init -1 python:
             # when breeding fetish, she always wants a creampie
             if person.has_breeding_fetish():
                 return True
+            if persistent.pregnancy_pref == 3 and person.is_highly_fertile():
+                if person.baby_desire > 200:
+                    return True
+                return False
             return org_func(person)
 
         return wants_creampie_wrapper
@@ -1294,6 +1298,19 @@ init -1 python:
 
     Person.change_stats = change_stats
 
+    def drift_stats(self, obedience = 0, love = 0, sluttiness = 0): #Use this function to slowly drift a girls stats back to a given default
+        if obedience > 0:
+            if self.obedience > obedience:
+                self.obedience += (int((self.obedience - obedience) / 8) - 1)
+        if love > 0:
+            if self.love > love:
+                self.love += (int((self.love - love) / 8) - 1)
+        if sluttiness > 0:
+            if self.sluttiness > sluttiness:
+                self.sluttiness += (int((self.sluttiness - sluttiness) / 8) - 1)
+
+    Person.drift_stats = drift_stats
+
     # returns number of hearts of sluttiness for easy scene building.
     def sluttiness_tier(self):
         if self.sluttiness < 20:
@@ -1360,6 +1377,78 @@ init -1 python:
         return person_change_love_wrapper
 
     Person.change_love = person_change_love_extended(Person.change_love)
+
+    def get_unwilling_tags(self):
+        if not hasattr(self, "_unwilling_tags"):
+            self._unwilling_tags = []
+        return self._unwilling_tags
+
+    def set_unwilling_tags(self, value):
+        self._unwilling_tags = value
+
+    def del_unwilling_tags(self):
+        del self._unwilling_tags
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Person.unwilling_tags = property(get_unwilling_tags, set_unwilling_tags, del_unwilling_tags, "Unwilling sexual acts tags.")
+
+    #Use baby desire to describe how much a girl wants to have a baby with MC.
+    def get_baby_desire(self):
+        if not hasattr(self, "_baby_desire"):
+            if persistent.pregnancy_pref == 3:
+                self._baby_desire = -200
+            else:
+                self._baby_desire = 0
+        return self._baby_desire
+
+    def set_baby_desire(self, value):
+        self._baby_desire = value
+
+    def del_baby_desire(self):
+        del self._baby_desire
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Person.baby_desire = property(get_baby_desire, set_baby_desire, del_baby_desire, "How much she wants a baby with MC.")
+
+    def person_change_baby_desire(self, value):
+        if self.baby_desire + value < -500:
+            self.baby_desire = -500
+        elif self.baby_desire + value > 500:
+            self.baby_desire = 500
+        else:
+            self.baby_desire += value
+
+    Person.change_baby_desire = person_change_baby_desire
+
+    #Use baby desire to describe how much a girl wants to have a baby with MC.
+    def get_base_fertility(self):
+        if not hasattr(self, "_base_fertility"):
+            self._base_fertility = 6
+        return self._base_fertility
+
+    def set_base_fertility(self, value):
+        self._base_fertility = value
+
+    def del_base_fertility(self):
+        del self._base_fertility
+
+    # add follow_mc attribute to person class (without sub-classing)
+    Person.base_fertility = property(get_base_fertility, set_base_fertility, del_base_fertility, "Realistic creampie odds of pregnancy.")
+
+    def person_change_base_fertility(self, value, max_amt = 100, min_amt = -100):
+        #First, determine if fertility is already above or below max. If so and value wouldn't change this, just return.
+        if self.base_fertility > max_amt and self.base_fertility + value > max_amt:
+            return
+        if self.base_fertility < min_amt and self.base_fertility + value < min_amt:
+            return
+        self.base_fertility += value
+        if self.base_fertility > max_amt:
+            self.base_fertility = max_amt
+        elif self.base_fertility < min_amt:
+            self.base_fertility = min_amt
+        return
+
+    Person.change_base_fertility = person_change_base_fertility
 
     ## CHANGE WILLPOWER EXTENSION
     # changes the willpower of a person by set amount
@@ -2408,7 +2497,7 @@ init -1 python:
     Person.is_highly_fertile = is_highly_fertile
 
     def pregnancy_chance_string(self): #Turns the difference of days from her ideal fertile day into a string
-        if persistent.pregnancy_pref == 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
+        if persistent.pregnancy_pref >= 2: # On realistic pregnancy a girls chance to become pregnant fluctuates over the month.
             preg_chance = self.calculate_realistic_fertility()
         else:
             preg_chance = self.fertility_percent
@@ -2746,6 +2835,33 @@ init -1 python:
     Person.story_teamup_list = story_teamup_list
     Person.story_other_list = story_other_list
     Person.story_character_description = ""
+
+    def person_tag_sex_record(self, record_class = ""):    #Tag a sex record for later comparision
+        if record_class == "":
+            return False
+        tag_string = "tag_sex_record_" + record_class
+        self.event_triggers_dict[tag_string] = self.sex_record.get(record_class, 0)
+        return True
+
+    def person_comp_sex_record(self, record_class = ""):   #Compare the current sex record with a previous tagged value.
+        if record_class == "":
+            return -1
+        tag_string = "tag_sex_record_" + record_class
+        return (self.sex_record.get(record_class, 0) - self.event_triggers_dict.get(tag_string, 0))
+
+    Person.tag_sex_record = person_tag_sex_record
+    Person.comp_sex_record = person_comp_sex_record
+
+    def person_cum_exposure_count(self):
+        total_sum = 0
+        total_sum += self.sex_record.get("Vaginal Creampies", 0)
+        total_sum += self.sex_record.get("Anal Creampies", 0)
+        total_sum += self.sex_record.get("Cum Facials", 0)
+        total_sum += self.sex_record.get("Cum in Mouth", 0)
+        total_sum += self.sex_record.get("Cum Covered", 0)
+        return total_sum
+
+    Person.cum_exposure_count = person_cum_exposure_count
 
 
 ###### Person copy of time based events ######

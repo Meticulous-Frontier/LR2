@@ -365,6 +365,7 @@ init -1 python:
             return # this fetish already triggered (prevents stacking multiple basic fetish serums)
 
         fetish_serum_increase_counter(person, "nano_bots_bc")
+        person.change_baby_desire(5)
 
         # determine if we trigger on this turn (long running serums with high suggestibility have a higher chance of working)
         if person.event_triggers_dict.get("nano_bots_bc", 0) < FETISH_SERUM_TRIGGER_VALUE:
