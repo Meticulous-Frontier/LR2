@@ -84,7 +84,7 @@ init -1 python:
         return False
 
     def prod_assistant_unlock_cum_requirement(the_person):
-        if mc.business.is_open_for_business() and the_person.sluttiness > 30:
+        if mc.business.is_open_for_business() and the_person.cum_exposure_count() > 0:
             if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_1_TIME_DELAY:
                 return True
         return False
@@ -108,7 +108,7 @@ init -1 python:
         return False
 
     def prod_assistant_cum_upgrade_requirement(the_person):
-        if mc.business.is_open_for_business() and mc.business.research_tier >= 3 and the_person.sluttiness > 60 and not the_person.has_taboo("vaginal_sex"):
+        if mc.business.is_open_for_business() and mc.business.research_tier >= 3 and the_person.cum_exposure_count() >= 7:
             if mc.is_at_work() and mc.business.days_since_event("prod_assistant_advance") >= TIER_1_TIME_DELAY:
                 return True
         return False
