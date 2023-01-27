@@ -68,25 +68,36 @@ init 2:
 
 
         if selected_research:
-            $ research_verb = "Scrap"
-            if select_instead_of_delete:
-                $ research_verb = "Select"
             if isinstance(selected_research, SerumDesign):
                 use serum_tooltip(selected_research, given_align = (0.96,0.02), given_anchor = (1.0,0.0)):
-                    textbutton "[research_verb] Design":
+                    hbox:
+                        xalign 0.5
                         if select_instead_of_delete:
-                            action Return(selected_research)
+                            textbutton "Select Design":
+                                action Return(selected_research)
+                                style "textbutton_style" text_style "menu_text_title_style"
                         else:
-                            action [Function(mc.business.remove_serum_design,selected_research), SetScreenVariable("selected_research", None)]
-                        style "textbutton_style" text_style "menu_text_title_style" xanchor 0.5 xalign 0.5
+                            textbutton "Rename Design":
+                                action Call("rename_serum_label", selected_research, noun = "serum design", from_current=True)
+                                style "textbutton_style" text_style "menu_text_title_style"
+                            textbutton "Scrap Design":
+                                action [Function(mc.business.remove_serum_design,selected_research), SetScreenVariable("selected_research", None)]
+                                style "textbutton_style" text_style "menu_text_title_style"
             if isinstance(selected_research, SerumTrait):
                 use trait_tooltip(selected_research, given_align = (0.96,0.02), given_anchor = (1.0,0.0)):
-                    textbutton "[research_verb] Trait":
+                    hbox:
+                        xalign 0.5
                         if select_instead_of_delete:
-                            action Return(selected_research)
+                            textbutton "Select Trait":
+                                action Return(selected_research)
+                                style "textbutton_style" text_style "menu_text_title_style"
                         else:
-                            action [Function(mc.business.remove_trait,selected_research), SetScreenVariable("selected_research", None)]
-                        style "textbutton_style" text_style "menu_text_title_style" xanchor 0.5 xalign 0.5
+                            textbutton "Rename Trait":
+                                action Call("rename_serum_label", selected_research, noun = "trait", from_current=True)
+                                style "textbutton_style" text_style "menu_text_title_style"
+                            textbutton "Scrap Trait":
+                                action [Function(mc.business.remove_trait,selected_research), SetScreenVariable("selected_research", None)]
+                                style "textbutton_style" text_style "menu_text_title_style"
 
         if allow_exit:
             frame:
@@ -100,3 +111,7 @@ init 2:
                     focus_mask "gui/button/choice_idle_background.png"
                     action Return()
                 textbutton "Return" align [0.5,0.5] style "return_button_style" text_style "return_button_style"
+
+label rename_serum_label(selected_research, noun = "item"):
+    $ selected_research.name = renpy.input("Please give this [noun] a new name.", default = selected_research.name)
+    return
