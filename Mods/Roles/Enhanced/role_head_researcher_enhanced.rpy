@@ -476,7 +476,7 @@ label head_researcher_cure_discovery_patent_sold_label(the_person):
 
 label head_researcher_cure_discovery_patent_kept_label():
     $ the_person = mc.business.head_researcher
-    $ the_disease = head_researcher_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
+    $ the_disease = head_researcher_cure_discovery_disease_name()
     "You get a notification on your phone and you check it. It's from the Red Cross?"
     "Red Cross""Thank you for donating your patent for [the_disease]!"
     "Red Cross""With this donation, we promise we will work to the best of our abilities to get this cure into the hands of everyone who needs it, worldwide."
