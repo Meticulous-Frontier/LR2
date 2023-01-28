@@ -9,6 +9,9 @@ init 3304 python:
 
     waitress_wardrobe = wardrobe_from_xml("Waitresses_Wardrobe")
 
+    def strip_club_waitress_count():
+        return __builtin__.len(stripclub_waitresses)
+
     def strip_club_hire_waitress(person):
         stripclub_waitresses.append(person)
 

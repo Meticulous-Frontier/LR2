@@ -3,6 +3,9 @@
 # When the strip club has a BDSM room, the role will be improved as Mistress.
 # The role is incompatible with: low Charisma, slave_role, having collar.
 
+default plotline.strip_club.manager = None
+default plotline.strip_club.mistress = None
+
 init 3303 python:
     list_of_instantiation_labels.append("instantiate_stripclub_manager_job")
 
@@ -88,6 +91,22 @@ init 3303 python:
         person.stripper_salary = __builtin__.round(person.stripper_salary * 1.1, 1)
         return
 
+    def stripclub_manager_hire(the_person):
+        if plotline.strip_club.manager is None:
+            plotline.strip_club.manager = the_person
+
+    def stripclub_manager_quit(the_person):
+        if plotline.strip_club.manager is the_person:
+            plotline.strip_club.manager = None
+
+    def stripclub_mistress_hire(the_person):
+        if plotline.strip_club.mistress is None:
+            plotline.strip_club.mistress = the_person
+
+    def stripclub_mistress_quit(the_person):
+        if plotline.strip_club.mistress is the_person:
+            plotline.strip_club.mistress = None
+
     manager_role_remove_action = Action("Remove as Manager", has_manager_role_requirement, "manager_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club manager.")
     promote_to_mistress_action = Action("Promote to Mistress", allow_promote_to_mistress_requirement, "promote_to_mistress_label", menu_tooltip = "Promote [the_person.title] as strip club mistress.")
     mistress_role_remove_action = Action("Remove as Mistress", has_mistress_role_requirement, "mistress_role_remove_label", menu_tooltip = "Remove [the_person.title] as strip club mistress.")
@@ -102,8 +121,10 @@ init 3303 python:
 label instantiate_stripclub_manager_job(stack = []):
     python:
         stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [2,3,4],
+            hire_function = stripclub_manager_hire, quit_function = stripclub_manager_quit,
             mandatory_duties = [daily_serum_dosage_duty])
         stripclub_mistress_job = Job("Mistress", stripclub_mistress_role, bdsm_room, work_days=[0,1,2,3,4,5,6], work_times = [2,3,4],
+            hire_function = stripclub_mistress_hire, quit_function = stripclub_mistress_quit,
             mandatory_duties = [daily_serum_dosage_duty])
     $ execute_hijack_call(stack)
     return

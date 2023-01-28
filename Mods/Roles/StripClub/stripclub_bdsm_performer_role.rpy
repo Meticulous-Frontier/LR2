@@ -7,6 +7,11 @@ default stripclub_bdsm_performers = MappedList(Person, all_people_in_the_game)
 init 10 python:
     list_of_instantiation_labels.append("instantiate_bdsm_performer_job")
 
+    BDSM_performer_wardrobe = wardrobe_from_xml("BDSM_Wardrobe")
+
+    def strip_club_bdsm_performer_count():
+        return __builtin__.len(stripclub_bdsm_performers)
+
     def get_bdsm_exhibitions(person):
         return person.event_triggers_dict.get("exhibitions", 0)
 
@@ -33,8 +38,6 @@ init 10 python:
     def strip_club_fire_bdsm_performer(person):
         if person in stripclub_bdsm_performers:
             stripclub_bdsm_performers.remove(person)
-
-    BDSM_performer_wardrobe = wardrobe_from_xml("BDSM_Wardrobe")
 
     strip_club_dildochair_MC_action = Action("Use the dildo chair {image=gui/heart/Time_Advance.png}", strip_club_bdsm_dildochair_MC_requirements, "strip_club_bdsm_dildochair_MC_label", menu_tooltip = "Use the dildo chair with your BDSM performer.")
     strip_club_dildochair_Mistress_action = Action("Mistress use the chair {image=gui/heart/Time_Advance.png}", strip_club_bdsm_dildochair_Mistress_requirements, "strip_club_bdsm_dildochair_Mistress_label", menu_tooltip = "Have the Mistress use the dildo chair with your BDSM performer.")

@@ -7,16 +7,10 @@ default plotline.strip_club.bdsm_decision_day = None
 
 init 3304 python:
     def strip_club_get_manager():
-        managers = people_in_role(stripclub_manager_role)
-        if __builtin__.len(managers) > 0:
-            return managers[0]
-        return None
+        return plotline.strip_club.manager
 
     def strip_club_get_mistress():
-        mistresses = people_in_role(stripclub_mistress_role)
-        if __builtin__.len(mistresses) > 0:
-            return mistresses[0]
-        return None
+        return plotline.strip_club.mistress
 
     def strip_club_manager_reminder_requirement():
         if day >= (get_strip_club_foreclosed_last_action_day() + 7): # the event start to trigger after 7 days MC bought the club.
@@ -43,26 +37,26 @@ init 3304 python:
             mc.business.add_mandatory_crisis(strip_club_manager_hire_more_stripper_reminder_action)
 
     def strip_club_manager_waitresses_suggestion_requirement():
-        if __builtin__.len(stripclub_waitresses) < 2: # the event only trigger if there's not the max nr. of waitresses (2)
+        if strip_club_waitress_count() < 2: # the event only trigger if there's not the max nr. of waitresses (2)
             if strip_club_get_manager(): # the event only trigger if there's a Manager
                 if day % 5 == 2 and time_of_day == 2: # the event trigger every 5 days in the afternoon. (phone call)
                     return True
         return False
 
     def add_strip_club_manager_waitresses_suggestion_action():
-        if __builtin__.len(stripclub_waitresses) < 2:
+        if strip_club_waitress_count() < 2:
             strip_club_manager_waitresses_suggestion_action = Action("Your strip club manager suggests you hire a couple of waitresses.", strip_club_manager_waitresses_suggestion_requirement, "strip_club_manager_waitresses_suggestion_label")
             mc.business.add_mandatory_crisis(strip_club_manager_waitresses_suggestion_action)
 
     def strip_club_manager_hire_more_waitresses_reminder_requirement():
-        if __builtin__.len(stripclub_waitresses) < 2: # the event only trigger if there's not the max nr. of waitresses (2)
+        if strip_club_waitress_count() < 2: # the event only trigger if there's not the max nr. of waitresses (2)
             if strip_club_get_manager(): # the event only trigger if there's a Manager
                 if day % 5 == 2 and time_of_day == 2: # the event trigger every 5 days in the afternoon. (phone call)
                     return True
         return False
 
     def add_strip_club_manager_hire_more_waitresses_reminder_action():
-        if __builtin__.len(stripclub_waitresses) < 2: # the event only trigger if there's not the max nr. of waitresses (2)
+        if strip_club_waitress_count() < 2: # the event only trigger if there's not the max nr. of waitresses (2)
             strip_club_manager_hire_more_waitresses_reminder_action = Action("A simple reminder from the strip club manager to hire more waitresses", strip_club_manager_hire_more_waitresses_reminder_requirement, "strip_club_manager_hire_more_waitresses_reminder_label")
             mc.business.add_mandatory_crisis(strip_club_manager_hire_more_waitresses_reminder_action)
 
@@ -70,7 +64,7 @@ init 3304 python:
         if not plotline.strip_club.has_bdsm_room:
             if day >= (get_strip_club_foreclosed_last_action_day() + TIER_3_TIME_DELAY): # the event trigger after 15 days you have a manager
                 if not plotline.strip_club.bdsm_room_suggested: # Not suggested yet
-                    if __builtin__.len(stripclub_waitresses) > 0 and strip_club_get_manager():
+                    if strip_club_waitress_count() > 0 and strip_club_get_manager():
                         if not mc.location is strip_club and time_of_day == 3:
                             return True
         return False
@@ -138,7 +132,7 @@ label strip_club_manager_hire_more_stripper_reminder_label(): # phone call
     return
 
 label strip_club_manager_hire_more_waitresses_reminder_label(): # phone call
-    if __builtin__.len(stripclub_waitresses) >= 2:
+    if strip_club_waitress_count() >= 2:
         return
     "Your smartphone rings. It's your strip club manager."
     $ the_person = strip_club_get_manager()
