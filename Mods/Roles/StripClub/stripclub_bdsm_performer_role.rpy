@@ -2,7 +2,10 @@
 #  BDSM performers role definition.
 #  The role is appended to BDSM performers after they start to work for you.
 
+default stripclub_bdsm_performers = MappedList(Person, all_people_in_the_game)
+
 init 10 python:
+    list_of_instantiation_labels.append("instantiate_bdsm_performer_job")
 
     def get_bdsm_exhibitions(person):
         return person.event_triggers_dict.get("exhibitions", 0)
@@ -39,6 +42,14 @@ init 10 python:
     stripclub_bdsm_performer_role = Role("BDSM performer", [promote_to_manager_action, strip_club_move_action, strip_club_fire_action, strip_club_performance_review_action, strip_club_dildochair_MC_action, strip_club_dildochair_Mistress_action],
         on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
 
+label instantiate_bdsm_performer_job(stack = []):
+    python:
+        stripclub_bdsm_performer_job = Job("BDSM Performer", stripclub_bdsm_performer_role, bdsm_room, strip_club_hire_bdsm_performer, strip_club_fire_bdsm_performer, work_days = [0,1,2,3,4,5,6], work_times = [3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
+    $ execute_hijack_call(stack)
+    return
+
+init 10 python:
     def strip_club_get_caged():
         caged = people_in_role(caged_role)
         if __builtin__.len(caged) > 0:

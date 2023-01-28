@@ -4,6 +4,8 @@
 # The role is incompatible with: low Charisma, slave_role, having collar.
 
 init 3303 python:
+    list_of_instantiation_labels.append("instantiate_stripclub_manager_job")
+
     manager_wardrobe = wardrobe_from_xml("Manager_Wardrobe")
     mistress_wardrobe = wardrobe_from_xml("Mistress_Wardrobe")
 
@@ -95,6 +97,16 @@ init 3303 python:
         on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
     stripclub_mistress_role = Role("Mistress", [mistress_role_remove_action, mistress_hunt_for_me_action],
         on_turn = stripclub_employee_on_turn, on_move = stripclub_employee_on_move, on_day = stripclub_employee_on_day, hidden = True)
+
+# init jobs after rooms are created
+label instantiate_stripclub_manager_job(stack = []):
+    python:
+        stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [2,3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
+        stripclub_mistress_job = Job("Mistress", stripclub_mistress_role, bdsm_room, work_days=[0,1,2,3,4,5,6], work_times = [2,3,4],
+            mandatory_duties = [daily_serum_dosage_duty])
+    $ execute_hijack_call(stack)
+    return
 
 label promote_to_manager_label(the_person):
     $ the_person.event_triggers_dict["stripclub_last_promotion_day"] = day

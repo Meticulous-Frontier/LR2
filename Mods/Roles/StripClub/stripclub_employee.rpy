@@ -193,13 +193,6 @@ init 5 python:
 label update_strip_club_show_requirement(stack):
     python:
         strip_club_show_action.requirement = strip_club_show_requirement_enhanced #strip_club_show_action is not defined until we begin the game.
-
-        # make sure we store the stripclub performers
-        if not "stripclub_bdsm_performers" in globals():
-            stripclub_bdsm_performers = MappedList(Person, all_people_in_the_game)
-        if not "stripclub_waitresses" in globals():
-            stripclub_waitresses = MappedList(Person, all_people_in_the_game)
-
         execute_hijack_call(stack)
     return
 
