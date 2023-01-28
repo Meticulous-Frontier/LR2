@@ -56,7 +56,7 @@ init 5 python:
                 return False
             if person.sluttiness < 100:
                 return "Try at max sluttiness"
-        if __builtin__.len(stripclub_strippers) >= 7 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) or __builtin__.len(stripclub_bdsm_performers) >= 5):
+        if __builtin__.len(stripclub_strippers) >= 7 and (not strip_club_get_manager() or __builtin__.len(stripclub_waitresses) >= 2) and (not plotline.strip_club.has_bdsm_room or __builtin__.len(stripclub_bdsm_performers) >= 5):
             return "At maximum Strip Club employees"
         if day < person.event_triggers_dict.get("stripper_ask_hire", 0) + 3:
             return "Asked too recently"
@@ -105,7 +105,7 @@ init 5 python:
             available_roles.append(["Stripper", stripper_role])
         if strip_club_get_manager() and __builtin__.len(stripclub_waitresses) < 2:
             available_roles.append(["Waitress", stripclub_waitress_role])
-        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and __builtin__.len(stripclub_bdsm_performers) < 5:
+        if plotline.strip_club.has_bdsm_room and __builtin__.len(stripclub_bdsm_performers) < 5:
             available_roles.append(["BDSM Performer", stripclub_bdsm_performer_role])
 
         available_roles.append(["Forget It", "None"])

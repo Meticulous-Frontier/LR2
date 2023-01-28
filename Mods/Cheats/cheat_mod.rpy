@@ -116,7 +116,7 @@ init 5 python:
             divisions["Strippers"] = [stripclub_strippers, False, 5]
             if "stripclub_waitresses" in globals() and strip_club_get_manager():
                 divisions["Waitresses"] = [stripclub_waitresses, False, 6]
-            if "stripclub_bdsm_performers" in globals() and mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+            if "stripclub_bdsm_performers" in globals() and plotline.strip_club.has_bdsm_room:
                 divisions["BDSM Performers"] = [stripclub_bdsm_performers, False, 7]
 
         return OrderedDict(sorted(divisions.items(), key=lambda t: t[1][2]))

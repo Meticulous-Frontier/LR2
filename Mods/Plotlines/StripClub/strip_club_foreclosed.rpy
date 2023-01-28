@@ -7,14 +7,16 @@
 #   foreclosed_stage = 5 Stripclub: foreclosed finished
 #   foreclosed_stage = -1 Stripclub new other owner
 
+default plotline.strip_club.foreclosed_stage = 0
+default plotline.strip_club.foreclosed_day = None
+default plotline.strip_club.foreclosed_last_action_day = 0
+default plotline.strip_club.old_owner = None
+default plotline.strip_club.old_name = None
+default plotline.strip_club.decision_day = None
+default plotline.strip_club.foreclosed_countdown = False
+
 init 2 python:
     def init_strip_club_mod(action_mod):
-        mc.business.event_triggers_dict["foreclosed_stage"] = 0
-        mc.business.event_triggers_dict["foreclosed_last_action_day"] = 0
-        mc.business.event_triggers_dict["old_strip_club_owner"] = None
-        mc.business.event_triggers_dict["old_strip_club_name"] = None
-        mc.business.event_triggers_dict["strip_club_decision_day"] = 0
-        mc.business.event_triggers_dict["strip_club_has_bdsm_room"] = False
 
         # init jobs after rooms are created
         global stripclub_waitress_job
@@ -45,25 +47,25 @@ init 2 python:
         return
 
     def get_strip_club_foreclosed_stage():
-        return mc.business.event_triggers_dict.get("foreclosed_stage", 0)
+        return plotline.strip_club.foreclosed_stage
 
     def set_strip_club_foreclosed_stage(value):
-        mc.business.event_triggers_dict["foreclosed_last_action_day"] = day
-        mc.business.event_triggers_dict["foreclosed_stage"] = value
+        plotline.strip_club.foreclosed_last_action_day = day
+        plotline.strip_club.foreclosed_stage = value
         return
 
     def strip_club_is_closed():
         return strip_club.name == "Foreclosed" or (get_strip_club_foreclosed_stage() > 0 and get_strip_club_foreclosed_stage() < 5)
 
     def get_strip_club_foreclosed_last_action_day():
-        return mc.business.event_triggers_dict.get("foreclosed_last_action_day", 0)
+        return plotline.strip_club.foreclosed_last_action_day
 
     def strip_club_foreclosed_event_requirement():
         if time_of_day >= 3:
             return False # Don't trigger foreclosed event while strip club is open
         if get_strip_club_foreclosed_stage() != 0:
             return False
-        if mc.business.event_triggers_dict.get("strip_club_foreclosed_countdown", False):
+        if plotline.strip_club.foreclosed_countdown:
             return False
         if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
@@ -128,14 +130,14 @@ init 2 python:
 label club_foreclosed_event_label():
     # delay the actual shutdown for 10 to 16 days after initial requirements are met.
     $ add_start_strip_club_foreclosed_countdown_action()
-    $ mc.business.event_triggers_dict["strip_club_foreclosed_countdown"] = True
+    $ plotline.strip_club.foreclosed_countdown = True
     return
 
 label strip_club_closes_down_label():
     python:
-        mc.business.event_triggers_dict["old_strip_club_owner"] = strip_club_owner
-        mc.business.event_triggers_dict["foreclosed_day"] = day
-        mc.business.event_triggers_dict["old_strip_club_name"] = strip_club.formal_name
+        plotline.strip_club.old_owner = strip_club_owner
+        plotline.strip_club.foreclosed_day = day
+        plotline.strip_club.old_name = strip_club.formal_name
         strip_club_owner = "Foreclosed"
         strip_club.name = "Foreclosed"
         strip_club.formal_name = "Foreclosed"
@@ -159,7 +161,7 @@ label cousin_talk_about_strip_club_label(the_person):
     mc.name "Any idea about what happened?"
     the_person "For sure I don't know, but I heard some rumours about a lot of unpaid taxes..."
     mc.name "The business was in that much trouble?"
-    $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
+    $ name_string = plotline.strip_club.old_owner or "that cheap fuck"
     the_person "Actually the business was running very well, but looks like [name_string], the boss there, just disappeared a few days ago with all the Club's money..."
     the_person "That fucking asshole didn't even pay me nor the other girls for our last week."
     "She looks at you and suddenly shifts her demeanor."

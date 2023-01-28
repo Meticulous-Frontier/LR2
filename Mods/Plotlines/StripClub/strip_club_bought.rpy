@@ -12,9 +12,9 @@ init 5 python:
 
     # for testing purposes, convert strip club to player owned.
     def test_strip_club():
-        mc.business.event_triggers_dict["old_strip_club_owner"] = strip_club_owner
-        mc.business.event_triggers_dict["foreclosed_day"] = day
-        mc.business.event_triggers_dict["old_strip_club_name"] = strip_club.formal_name
+        plotline.strip_club.old_owner = strip_club_owner
+        plotline.strip_club.foreclosed_day = day
+        plotline.strip_club.old_name = strip_club.formal_name
         strip_club.name = "Starlight Club"
         strip_club.formal_name = "Starlight Club"
         strip_club.visible = True
@@ -53,7 +53,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     mc.name "If you all are still looking to get your old jobs back, I think we need to discuss it a bit, don't you agree?"
     $ the_person.draw_person(emotion = "angry")
     the_person "You bought this place, [mc.name]? Really? What does that mean for us? We can get our old jobs back? What about our back pay?"
-    $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
+    $ name_string = plotline.strip_club.old_owner or "that cheap fuck"
     mc.name "For your back pay, I can't do anything about that. The money [name_string] owed you is gone."
     mc.name "I'm not stupid, so I recognize that hiring skilled and experienced workers has its advantages."
     mc.name "Here's my offer: you girls show me your skills on the stage, and I will decide if I'm going to give you your old job back..."
@@ -172,7 +172,7 @@ label strip_club_evaluate_stripper(the_person):
         "Yes" if mc.business.has_funds(500):
             $ the_person.change_job(stripclub_stripper_job, job_known = True)
             mc.name "Yes, you impressed me! Your salary will be $[the_person.stripper_salary] per day excluding tips, if you agree?"
-            $ name_string = mc.business.event_triggers_dict.get("old_strip_club_owner", "that cheap fuck")
+            $ name_string = plotline.strip_club.old_owner or "that cheap fuck"
             $ ran_num = __builtin__.int(((the_person.stripper_salary / 20) - 1) * 100)
             if ran_num < 5: # make sure we are >= 5%
                 $ ran_num = 5

@@ -27,7 +27,7 @@ init 3303 python:
         return False
 
     def allow_promote_to_mistress_requirement(person):
-        if person.has_role(stripclub_manager_role) and mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and not strip_club_get_mistress():
+        if person.has_role(stripclub_manager_role) and plotline.strip_club.has_bdsm_room and not strip_club_get_mistress():
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formal_name]"
             if day - the_person.event_triggers_dict.get("stripclub_last_promotion_day", -7) < 7:

@@ -359,7 +359,7 @@ init 2 python:
         if "get_strip_club_foreclosed_stage" in globals():
             if not strip_club_is_closed():
                 add_party_destination_by_room(strip_club)
-                if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+                if plotline.strip_club.has_bdsm_room:
                     add_party_destination_by_room(bdsm_room)
         else:
             add_party_destination_by_room(strip_club)

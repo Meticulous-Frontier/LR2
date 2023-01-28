@@ -1,6 +1,10 @@
 ## Stripclub storyline Mod by Corrado
 # You have some strippers but the business could improve.
 
+default plotline.strip_club.has_bdsm_room = False
+default plotline.strip_club.bdsm_room_suggested = False
+default plotline.strip_club.bdsm_decision_day = None
+
 init 3304 python:
     def strip_club_get_manager():
         managers = people_in_role(stripclub_manager_role)
@@ -63,34 +67,34 @@ init 3304 python:
             mc.business.add_mandatory_crisis(strip_club_manager_hire_more_waitresses_reminder_action)
 
     def strip_club_manager_bdsm_room_suggestion_requirement():
-        if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-            if day >= (get_strip_club_foreclosed_last_action_day() + 15): # the event trigger after 15 days you have a manager
-                if not mc.business.event_triggers_dict.get("strip_club_bdsm_decision_day", None): # Not suggested yet
+        if not plotline.strip_club.has_bdsm_room:
+            if day >= (get_strip_club_foreclosed_last_action_day() + TIER_3_TIME_DELAY): # the event trigger after 15 days you have a manager
+                if not plotline.strip_club.bdsm_room_suggested: # Not suggested yet
                     if __builtin__.len(stripclub_waitresses) > 0 and strip_club_get_manager():
                         if not mc.location is strip_club and time_of_day == 3:
                             return True
         return False
 
     def add_strip_club_manager_bdsm_room_suggestion_action():
-        if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+        if not plotline.strip_club.has_bdsm_room:
             strip_club_manager_bdsm_room_suggestion_action = Action("Your strip club manager suggests you build a new BDSM room.", strip_club_manager_bdsm_room_suggestion_requirement, "strip_club_manager_bdsm_room_suggestion_label")
             mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_suggestion_action)
 
     def strip_club_manager_bdsm_room_reminder_requirement():
-        if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and mc.business.event_triggers_dict.get("strip_club_bdsm_decision_day") == 0: # the event only trigger if the bdsm_room isn't started yet
+        if plotline.strip_club.bdsm_room_suggested and plotline.strip_club.bdsm_decision_day is None: # the event only trigger if the bdsm_room isn't started yet
             if day % 5 == 2 and time_of_day == 2: # the event trigger every 5 days in the afternoon. (phone call)
                 return True
         return False
 
     def add_strip_club_manager_bdsm_room_reminder_action():
-        if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+        if not plotline.strip_club.has_bdsm_room:
             strip_club_manager_bdsm_room_reminder_action = Action("A simple reminder from the strip club manager to build a BDSM room.", strip_club_manager_bdsm_room_reminder_requirement, "strip_club_manager_bdsm_room_reminder_label")
             mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_reminder_action)
 
     def strip_club_manager_bdsm_room_build_requirement():
         if not mc.business.has_funds(10000):
             return False
-        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+        if plotline.strip_club.has_bdsm_room:
             return False
         if not mc.business.is_open_for_business():
             return "Only during business hours"
@@ -101,7 +105,7 @@ init 3304 python:
     strip_club_manager_bdsm_room_build_action = Action("Build a BDSM room\n{color=#ff0000}{size=18}Costs: $10,000{/size}{/color}", strip_club_manager_bdsm_room_build_requirement, "strip_club_manager_bdsm_room_build_label")
 
     def strip_club_manager_bdsm_room_built_requirement():
-        if day >= (mc.business.event_triggers_dict.get("strip_club_bdsm_decision_day") + 5):
+        if (day - TIER_2_TIME_DELAY) >= plotline.strip_club.bdsm_decision_day:
             if mc.business.is_open_for_business(): # only during work hours
                 return True
         return False
@@ -111,9 +115,7 @@ init 3304 python:
         mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_built_event)
 
     def strip_club_switch_rooms_requirement():
-        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-            return True
-        return False
+        return plotline.strip_club.has_bdsm_room
 
     strip_club_switch_rooms_action = Action("Switch rooms", strip_club_switch_rooms_requirement, "strip_club_switch_rooms_label", menu_tooltip = "Switch between Stripclub and BDSM rooms.")
 
@@ -198,7 +200,7 @@ label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)
     $ the_person.draw_person(emotion = "happy", position = "stand4")
     "As you glance over the documents, you quickly realize that the $10,000 investment could be very, very profitable."
     $ add_strip_club_manager_bdsm_room_reminder_action()
-    $ mc.business.event_triggers_dict["strip_club_bdsm_decision_day"] = 0
+    $ plotline.strip_club.bdsm_room_suggested = True
     $ strip_club.add_action(strip_club_manager_bdsm_room_build_action)
     return
 
@@ -209,7 +211,7 @@ label strip_club_manager_bdsm_room_build_label(): # (action button)
     $ mc.business.change_funds(-10000)
     $ add_strip_club_manager_bdsm_room_built_event()
     $ strip_club.remove_action(strip_club_manager_bdsm_room_build_action)
-    $ mc.business.event_triggers_dict["strip_club_bdsm_decision_day"] = day
+    $ plotline.strip_club.bdsm_decision_day = day
     return
 
 label strip_club_manager_bdsm_room_reminder_label(): # phone call
@@ -230,7 +232,7 @@ label strip_club_manager_bdsm_room_built_label(): # (time event)
     $ strip_club.add_action(strip_club_switch_rooms_action)
     $ bdsm_room.add_action(strip_club_switch_rooms_action)
     $ add_strip_club_cage_her_action_to_mc_actions()
-    $ mc.business.event_triggers_dict["strip_club_has_bdsm_room"] = True
+    $ plotline.strip_club.has_bdsm_room = True
     return
 
 label strip_club_switch_rooms_label():

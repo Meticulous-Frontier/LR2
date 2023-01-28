@@ -21,7 +21,7 @@ init 3302 python:
         return
 
     def strip_club_buy_days_left():
-        return (19 + mc.business.event_triggers_dict.get("strip_club_decision_day", 0) - day)
+        return (5 + TIER_3_TIME_DELAY + plotline.strip_club.decision_day - day)
 
     def discuss_buying_club_with_starbuck_requirement(person):
         if get_strip_club_foreclosed_stage() == 3 and mc.business.has_funds(60000):
@@ -101,7 +101,7 @@ label starbuck_talk_about_strip_club_label(the_person): # On_enter event
     return
 
 label think_about_buying_strip_club_label(the_person):
-    $ name_string = mc.business.event_triggers_dict.get("old_strip_club_name", "Strip Club")
+    $ name_string = plotline.strip_club.old_name or "Strip Club"
     "As you are wandering downtown with your mind full of thoughts, you find yourself in front of the old [name_string]..."
     $ mc.change_location(strip_club)
     $ mc.location.show_background()
@@ -122,7 +122,7 @@ label think_about_buying_strip_club_label(the_person):
     return
 
 label discuss_buying_club_with_starbuck_label(the_person): # The event trigger with an action button
-    $ mc.business.event_triggers_dict["strip_club_decision_day"] = day
+    $ plotline.strip_club.decision_day = day
     $ the_person.draw_person(emotion = "happy", position = "stand4")
     mc.name "Hi [the_person.title]! I think I'm going to buy the strip club as you suggested, can you call your contact at the bank?"
     the_person "Really [the_person.mc_title]? Wow, I'm so exited and happy for you! Sure, let's call him immediately."
