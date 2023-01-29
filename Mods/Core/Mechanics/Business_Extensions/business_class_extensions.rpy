@@ -287,7 +287,7 @@ init -1 python:
                 if person.job == student_intern_hr_job and not person.location == university:
                     return business.h_uniform
 
-            if person == police_chief:
+            if "police_chief" in globals() and person == police_chief:
                 return police_chief_uniform_wardrobe
             if person.job == stripper_job: # base game stripper
                 return stripclub_wardrobe

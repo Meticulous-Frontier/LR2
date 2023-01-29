@@ -1742,7 +1742,7 @@ init -1 python:
             return False
 
         # she works around town, so when the job has a scheduled location, she's at work
-        if self == police_chief:
+        if "police_chief" in globals() and self == police_chief:
             return not self.job.schedule.get_destination() is None
 
         return self.location == self.job.job_location

@@ -1444,10 +1444,10 @@ label public_sex_post_round(the_person, position_choice, report_log):
         elif scrutiny < 100:
             "A small crowd has gathered to watch, and you are getting several comments from people to stop."
         else:
-            if the_person == police_chief: #Exclude scrutiny when doing the police chief
-                "A small crowd is watching you and [the_person.possessive_title], but they are too intimidated to interfere."
-            elif police_chief is None: # Nobody can arrest you
+            if "police_chief" not in globals() or police_chief is None: # Nobody can arrest you
                 "Now is when the police would normally show up, but they are missing for some reason."
+            elif the_person == police_chief: #Exclude scrutiny when doing the police chief
+                "A small crowd is watching you and [the_person.possessive_title], but they are too intimidated to interfere."
             else:
                 call police_chief_public_sex_intervention(the_person) from _arrested_during_public_sex_01
                 return False
