@@ -2001,27 +2001,27 @@ init -1 python:
     Person.is_wearing_uniform = person_is_wearing_uniform
 
     def person_should_wear_uniform_enhanced(self):
-            if not self.is_at_work():  # quick exit
-                return False
-
-            if self.event_triggers_dict.get("forced_uniform", False):
-                return True
-
-            wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
-            if wardrobe is None:
-                return False
-
-            if (self.is_employee() or self.is_intern()):
-                # Check for uniform or dress code
-                if  (wardrobe.get_count() > 0 or dress_code_policy.is_active()):
-                    # Casual fridays for employees only
-                    if not (day%7 == 4 and casual_friday_uniform_policy.is_active()):
-                        return True
-            # Non-employees
-            else:
-                return True # Everybody else wears a uniform while at work
-
+        if not self.is_at_work():  # quick exit
             return False
+
+        if self.event_triggers_dict.get("forced_uniform", False):
+            return True
+
+        wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
+        if wardrobe is None:
+            return False
+
+        if (self.is_employee() or self.is_intern()):
+            # Check for uniform or dress code
+            if  (wardrobe.get_count() > 0 or dress_code_policy.is_active()):
+                # Casual fridays for employees only
+                if not (day%7 == 4 and casual_friday_uniform_policy.is_active()):
+                    return True
+        # Non-employees
+        else:
+            return True # Everybody else wears a uniform while at work
+
+        return False
 
     Person.should_wear_uniform = person_should_wear_uniform_enhanced
 
