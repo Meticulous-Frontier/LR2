@@ -245,7 +245,7 @@ init -1 python:
     def decide_on_uniform_enhanced(self, person):
         slut_limit = 999
         valid_wardrobe = None
-        if (person.is_employee() or person.is_intern()) and dress_code_policy.is_active():
+        if person.is_employee() or person.is_intern():
             slut_limit, underwear_limit, _limited_to_top = mc.business.get_uniform_limits()
             valid_wardrobe = self.build_uniform_wardrobe(person.wardrobe, slut_limit, underwear_limit, commando_uniform_policy.is_active())
         else:
@@ -284,6 +284,12 @@ init -1 python:
 
         target_sluttiness = __builtin__.int(person.sluttiness * (1.0 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
         target_sluttiness = __builtin__.min(target_sluttiness, slut_limit)
+
+        # enforce dress code policy when selecting outfit during work days
+        if (person.is_employee() or person.is_intern()) and mc.business.is_work_day() and dress_code_policy.is_active():
+            target_sluttiness, underwear_limit, _limited_to_top = mc.business.get_uniform_limits()
+            allow_skimpy = creative_skimpy_uniform_policy.is_active()
+            swap_bottoms = personal_bottoms_uniform_policy.is_active()
 
         minimum_sluttiness = calculate_minimum_sluttiness(person, target_sluttiness)
 

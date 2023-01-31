@@ -2011,12 +2011,10 @@ init -1 python:
         if wardrobe is None:
             return False
 
-        if (self.is_employee() or self.is_intern()):
-            # Check for uniform or dress code
-            if  (wardrobe.get_count() > 0 or dress_code_policy.is_active()):
-                # Casual fridays for employees only
-                if not (day%7 == 4 and casual_friday_uniform_policy.is_active()):
-                    return True
+        if (self.is_employee() or self.is_intern()) and wardrobe.get_count() > 0:
+            # Casual fridays for employees only
+            if not (day%7 == 4 and casual_friday_uniform_policy.is_active()):
+                return True
         # Non-employees
         else:
             return True # Everybody else wears a uniform while at work
