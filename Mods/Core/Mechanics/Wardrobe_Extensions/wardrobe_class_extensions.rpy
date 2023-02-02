@@ -161,16 +161,7 @@ init -1 python:
         valid_full_outfits = []
         for full_outfit in full_outfits:
             if commando:
-                full_outfit = full_outfit.get_copy()
-                if full_outfit.wearing_panties():
-                    full_outfit.remove_clothing(full_outfit.get_panties())
-                if full_outfit.wearing_bra():
-                    full_outfit.remove_clothing(full_outfit.get_bra())
-                # Special handling for leotards
-                # TODO: delete when `remove_clothing()` can remove using extensions
-                for clothing in full_outfit.upper_body:
-                    if clothing.is_similar(leotard):
-                        full_outfit.remove_clothing(clothing)
+                full_outfit = _remove_underwear(full_outfit.get_copy())
             # Only add if outfit if below uniform limits
             # Employees are not allowed to slut it up if there is a strict dress code.
             if slut_limit is None or full_outfit.get_full_outfit_slut_score() <= slut_limit:
@@ -198,7 +189,17 @@ init -1 python:
                 valid_overwear_sets.append(overwear)
         return valid_overwear_sets
 
-    # Combines buisiness wardrobe with employee's personal wardrobe
+    def _remove_underwear(outfit):
+        if outfit.wearing_panties():
+            outfit.remove_clothing(outfit.get_panties())
+        if outfit.wearing_bra():
+            outfit.remove_clothing(outfit.get_bra())
+        for cloth in outfit.upper_body:
+            if cloth.is_similar(leotard):
+                outfit.remove_clothing(cloth)
+        return outfit
+
+    # Combines business wardrobe with employee's personal wardrobe
     # Takes commando_uniform_policy into account only for personal wardrobes
     def build_uniform_wardrobe(self, personal_wardrobe = Wardrobe("Empty"), slut_limit = None, underwear_limit = None, commando = False):
         # Bump underwear limit to non-zero
@@ -285,8 +286,8 @@ init -1 python:
         target_sluttiness = __builtin__.int(person.sluttiness * (1.0 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
         target_sluttiness = __builtin__.min(target_sluttiness, slut_limit)
 
-        # enforce dress code policy when selecting outfit during work days
-        if (person.is_employee() or person.is_intern()) and mc.business.is_work_day() and dress_code_policy.is_active():
+        enforce_dress_code = (person.is_employee() or person.is_intern()) and mc.business.is_work_day() and dress_code_policy.is_active()
+        if enforce_dress_code:
             target_sluttiness, underwear_limit, _limited_to_top = mc.business.get_uniform_limits()
             allow_skimpy = creative_skimpy_uniform_policy.is_active()
             swap_bottoms = personal_bottoms_uniform_policy.is_active()
@@ -315,7 +316,10 @@ init -1 python:
                     full_outfit = self.pick_outfit_with_lowest_sluttiness()
 
                 if full_outfit:
-                    return full_outfit.get_copy()
+                    if enforce_dress_code and commando_uniform_policy.is_active():
+                        return _remove_underwear(full_outfit.get_copy())
+                    else:
+                        return full_outfit.get_copy()
 
         #If we get to here we are assembling an outfit out of underwear or overwear.
         outfit_over = self.get_random_appropriate_overwear(target_sluttiness, minimum_sluttiness, preferences = preferences)
@@ -363,9 +367,13 @@ init -1 python:
         #At this point we have our under and over, if at all possible.
         if not outfit_over or not outfit_under:
             # Something's gone wrong and we don't have one of our sets. Last attempt on getting a full outfit from any wardrobe.
-            return generate_random_appropriate_outfit(person, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, sluttiness = slut_limit_remaining)
+            full_outfit = generate_random_appropriate_outfit(person, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, sluttiness = slut_limit_remaining)
+        else:
+            full_outfit = build_assembled_outfit(outfit_under, outfit_over)
 
-        return build_assembled_outfit(outfit_under, outfit_over)
+        if enforce_dress_code and commando_uniform_policy.is_active():
+            return _remove_underwear(full_outfit)
+        return full_outfit
 
     Wardrobe.decide_on_outfit2 = decide_on_outfit_enhanced
 
