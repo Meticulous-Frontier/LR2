@@ -444,14 +444,14 @@ label ashley_classical_concert_date_label():
     the_person "Okay..."
     "You walk over and greet the pair."
     menu:
-        "Cheerful greeting. \n{color=#ff0000}{size=18}Increases love{/size}{/color}":
+        "Cheerful greeting\n{color=#ff0000}{size=18}Increases love{/size}{/color}":
             mc.name "Hello! Thanks for this, I've been looking forward to this ever since we arranged it. [the_person.title], you look great tonight!"
             the_person "Ah... thank you."
             $ the_person.change_stats(happiness = 2, love = 1)
             "[stephanie.title] gives you a smile after your kind words to her sister."
             $ stephanie.change_stats(obedience = 1, love = 1)
 
-        "Sexual greeting. \n{color=#ff0000}{size=18}Increases sluttiness{/size}{/color}":
+        "Sexual greeting\n{color=#ff0000}{size=18}Increases sluttiness{/size}{/color}":
             mc.name "Wow. What a couple of hotties. You could hang on my other arm [stephanie.title]."
             "[stephanie.possessive_title] rolls her eyes."
             stephanie "Yeah right. Like you could handle both of us."
@@ -461,7 +461,7 @@ label ashley_classical_concert_date_label():
             $ the_person.change_stats(happiness = 1, slut = 1, max_slut = 50)
             $ stephanie.change_stats(obedience = 1, slut = 1, max_slut = 50)
 
-        "Commanding greeting. \n{color=#ff0000}{size=18}Increases obedience{/size}{/color}":
+        "Commanding greeting\n{color=#ff0000}{size=18}Increases obedience{/size}{/color}":
             mc.name "Yeah, don't be silly. [stephanie.title] doesn't need to hear us talk about her anyway."
             the_person "Ha! I suppose I could share some secrets of hers."
             stephanie "Wow, gossiping is starting already, is it?"
@@ -471,7 +471,7 @@ label ashley_classical_concert_date_label():
 
     #End of love option
     stephanie "Alright you two, go enjoy your classical concert. Ash, just text me when you get done, I'm gonna go have a couple drinks."
-    the_person "Okay. Bye Steph!"
+    the_person "Okay. Bye [stephanie.title]!"
     $ scene_manager.hide_actor(stephanie)
     mc.name "Shall we?"
     $ show_concert_hall_background()
@@ -492,17 +492,17 @@ label ashley_classical_concert_date_label():
     "You and [the_person.possessive_title] sit together silently, enjoying the music."
     "It goes through emotional highs and lows. At one point, you look over and you think you see a tear on [the_person.title]'s cheek."
     menu:
-        "Hold her hand. \n{color=#ff0000}{size=18}Increases love{/size}{/color}":
+        "Hold her hand\n{color=#ff0000}{size=18}Increases love{/size}{/color}":
             "You reach down and take her hand. She jumps at the contact, but quickly takes your hand in hers as the music reaches an especially poignant moment."
             $ mc.change_locked_clarity(5)
             $ the_person.change_stats(love = 5, happiness = 5)
             "You hold hands for the duration of the concert. You both share comments now and then about specific parts that you liked."
-        "Put your hand on her leg. \n{color=#ff0000}{size=18}Increases sluttiness{/size}{/color}":
+        "Put your hand on her leg\n{color=#ff0000}{size=18}Increases sluttiness{/size}{/color}":
             "You reach down and put your hand on her thigh, just above her knee. She jumps at the contact, but puts her hand on top of yours."
             $ mc.change_locked_clarity(15)
             $ the_person.change_stats(slut = 2, happiness = 5)
             "You leave your hand on her leg for the duration of the concert."
-        "Put your arm around her. \n{color=#ff0000}{size=18}Increases obedience{/size}{/color}":
+        "Put your arm around her\n{color=#ff0000}{size=18}Increases obedience{/size}{/color}":
             "You reach your arm around her and put your hand on her shoulder. You pull her closer to you."
             "At first she is a little reluctant, but after a tug, she leans towards you and puts her head on your shoulder."
             $ mc.change_locked_clarity(15)
@@ -529,7 +529,7 @@ label ashley_classical_concert_date_label():
     stephanie "Hey Ash! Hey [stephanie.mc_title]! How'd it go?"
     the_person "Steph! We had a great time. The performers were amazing..."
     stephanie "And I assume you were a perfect gentleman?"
-    "[stephanie.title] gives you a look. She smiles, but you can tell she is genuinely protective of [the_person.title]."
+    "[stephanie.possessive_title] gives you a look. She smiles, but you can tell she is genuinely protective of [the_person.fname]."
     mc.name "As always, [stephanie.fname]."
     the_person "He really was. Thanks again [the_person.mc_title]!"
     "It's late, so you all agree to part ways."
