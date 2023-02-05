@@ -24,6 +24,12 @@ init -1 python:
             #self.req_sluttiness = req_sluttiness
             self.tier = tier
 
+        @property
+        def identifier(self):
+            if not hasattr(self, "_identifier"):
+                self._identifier = hashlib.md5(self.name + self.category).hexdigest()
+            return self._identifier
+
         def __cmp__(self, other):
             if isinstance(self, other.__class__):
                 if self.category == other.category and self.name == other.name:
@@ -36,7 +42,7 @@ init -1 python:
 
         # add side_quest hash function
         def __hash__(self):
-            return hash(self.category, self.name)
+            return hash((self.category, self.name))
 
         def __eq__(self, other):
             if isinstance(self, other.__class__):
