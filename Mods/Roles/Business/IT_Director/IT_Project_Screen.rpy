@@ -362,6 +362,7 @@ screen screen_IT_project_button(proj):
             text proj.name size 28 xalign 0.5 xanchor 0.5 style "textbutton_text_style"
             if mc.business.IT_partial_projects.has_key(proj.identifier):
                 bar:
+                    xoffset 40
                     value mc.business.IT_partial_projects.get(proj.identifier, 0)
                     range proj.project_cost
                     xysize (200, 10)
