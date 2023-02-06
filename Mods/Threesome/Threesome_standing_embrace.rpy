@@ -126,7 +126,7 @@ label outro_threesome_standing_embrace_fuck_girl_two(the_girl_1, the_girl_2, the
     menu:
         "Cum inside of her":
             if mc.condom:
-                "You pull back on [the_girl_2.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
+                "You pull back on [the_girl_2.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps when she feels you filling the condom deep inside of her."
                 "You wait until your orgasm has passed completely, then pull out and stand back. You condom is bulged on the end where it is filled with your seed."
                 "[the_girl_1.possessive_title] reaches down for your cock, removes the condom, and ties the end in a knot for you."
                 the_girl_1 "Damn that was hot... is it my turn next?"

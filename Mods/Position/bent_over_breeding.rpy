@@ -256,7 +256,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
         the_girl "You were... seriously? You had a condom on? Why would you do that?"
         "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
     else:
-        "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
+        "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She gasps softly in time with each new shot of hot semen inside of her."
 
         if the_girl.wants_creampie():
             the_girl  "Yes! Fill me with your cum!"

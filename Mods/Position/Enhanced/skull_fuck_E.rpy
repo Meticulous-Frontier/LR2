@@ -59,7 +59,7 @@ label scene_skull_fuck_4_enhanced(the_girl, the_location, the_object):
                                             "Several more long seconds pass. Pushed to her limit, [the_girl.title] pulls back harder and starts to tap on your leg."
                                             menu:
                                                 "Choke her out" if the_girl.obedience >= 170:
-                                                    mc.name "I said don't hold still. Not until I'm done with you."
+                                                    mc.name "I said hold still. Not until I'm done with you."
                                                     "[the_girl.title] squirms and fidgets on her knees, but obeys your commands like a good girl."
                                                     "Little by little her movements slow down, her eyelids start to droop down over her rolled up eyes, and she slips into a half-conscious state."
                                                     $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))

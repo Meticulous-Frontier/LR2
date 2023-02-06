@@ -1857,13 +1857,13 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
         mc.name "Alright, let's get naked."
         $ the_person.strip_outfit(position = the_person.idle_pose)
         "You both quickly get undressed. You check out [the_person.possessive_title]."
-        "Her nipples are stuff, and her labia are puffy and aroused. Clearly she is really turned on already."
+        "Her nipples are stiff, and her labia are puffy and aroused. Clearly she is really turned on already."
         "You step over to your chair and sit down."
         mc.name "Alright, come here."
         $ the_person.draw_person(position = "cowgirl")
         "[the_person.title] walks over to you, then gets on your lap, her amazing tits are right in your face."
         mc.name "God your tits are fantastic."
-        "You cup one in your hand, bringing your mouth up to the other one. You quicly suck and nip at her nipple, eliciting a loud moan from [the_person.possessive_title]."
+        "You cup one in your hand, bringing your mouth up to the other one. You quickly suck and nip at her nipple, eliciting a loud moan from [the_person.possessive_title]."
         "You feel her hand on the back of your head, running her hand through your hair as you suckle her tit."
         the_person "Ahh. Okay, just gonna... do this... for a bit..."
         "[the_person.title] slowly adjusts her hips wider, until you can feel her humid groin get closer to yours, and then finally makes contact."
@@ -2018,13 +2018,13 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
         mc.name "Alright, let's get naked."
         $ the_person.strip_outfit(position = the_person.idle_pose)
         "You both quickly get undressed. You check out [the_person.possessive_title]."
-        "Her nipples are stuff, and her labia are puffy and aroused. Clearly she is really turned on already."
+        "Her nipples are stiff, and her labia are puffy and aroused. Clearly she is really turned on already."
         "You step over to your chair and sit down."
         mc.name "Alright, come here."
         $ the_person.draw_person(position = "cowgirl")
         "[the_person.title] walks over to you, then gets on your lap, her amazing tits are right in your face."
         mc.name "God your tits are fantastic."
-        "You cup one in your hand, bringing your mouth up to the other one. You quicly suck and nip at her nipple, eliciting a loud moan from [the_person.possessive_title]."
+        "You cup one in your hand, bringing your mouth up to the other one. You quickly suck and nip at her nipple, eliciting a loud moan from [the_person.possessive_title]."
         "You feel her hand on the back of your head, running her hand through your hair as you suckle her tit."
         the_person "Ahh. Okay, just gonna... do this... for a bit..."
         "[the_person.title] slowly adjusts her hips wider, until you can feel her humid groin get closer to yours, and then finally makes contact."
@@ -2032,7 +2032,7 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
         "She groans as she starts to rub herself up against you. Her soaking wet cunt is leaking fluid as she presses her hips eagerly against you and starts to grind."
         $ the_person.change_arousal(15) #85
         "You let go of her chest with your hand and put both your hands on her ass. You grab it to use for leverage as you start to thrust yourself up against her."
-        the_person "[the_person.mc_title]! Be careful I'm... I'm alerady so... so close!"
+        the_person "[the_person.mc_title]! Be careful I'm... I'm already so... so close!"
         "Fuck it. You're sure you can make her cum more than once like this. You give her ass a smack but don't let up."
         $ the_person.change_arousal(20) #105
         the_person "Ah! I can't take it...!"
@@ -2313,7 +2313,7 @@ label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(20) #70
     "[the_person.title] is clumsily jiggling her tits around your cock. Thankfully her flesh is so soft it feels pretty good anyway."
-    "You reach down and grab [the_person.title]'s tits yourself. You place your hands over hers and hold them in place."
+    "You reach down and grab [the_person.title]'s tits yourself. She places her hands over yours and holds them in place."
     the_person "Stars... your thing is so warm..."
     "You squeeze down hard on her breasts and work your hips, fucking her soft cleavage. [the_person.title] moans in response."
     $ the_person.change_arousal(30)
@@ -2684,10 +2684,10 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     $ the_person.apply_outfit(prost_outfit)
     $ the_researcher.apply_outfit(cop_outfit)
     $ scene_manager.update_scene()
-    "You check out the two girls and their outifts. Your police officer uniform seems to fit perfectly."
+    "You check out the two girls and their outfits. Your police officer uniform seems to fit perfectly."
     the_researcher "Wow, this looks just like a real uniform!"
     the_person "I umm... this is pretty umm..."
-    the_person "Wow [the_person.fname]! You look so hot. Alan is gonna fall into this for sure!"
+    the_person "Wow [the_researcher.fname]! You look so hot. Alan is gonna fall into this for sure!"
     the_researcher "Ahh, yah think so?"
     mc.name "Definitely. This is going to work."
     "You step out of the dressing room with the two girls. A couple is shopping nearby, and the guy notices you, then gives you a wink and thumbs up."
@@ -2695,9 +2695,9 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     $ scene_manager.add_actor(starbuck, display_transform = character_left_flipped)
     starbuck "Oh! Those turned out so good!"
     mc.name "They really did. How much do we owe you for the outfits?"
-    starbuck "They were about $100 each... OH one second, I almost forot!"
+    starbuck "They were about $100 each... OH one second, I almost forgot!"
     "[starbuck.possessive_title] quickly reaches down to a shelf behind the counter, then drops some handcuffs on the counter."
-    starbuck "The cop suites came with these. They aren't real, so there is a quick escape button on the side!"
+    starbuck "The cop suits came with these. They aren't real, so there is a quick escape button on the side!"
     mc.name "Thanks [starbuck.title]."
     "You pay for the outfits before setting out from the sex shop."
     starbuck "Have fun everyone!"
@@ -2737,7 +2737,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     the_researcher "Huh... it is like he was stalking me... he makes notes about how my social media got increasingly sexual..."
     the_researcher "What kind of production equipment? Is that what this heavy duty stuff is?"
     "As you look through the office, you are reminded on the monitor that [the_person.title] is in the next room with him..."
-    the_person "Mmm, remember the dael though, right? $100 and..."
+    the_person "Mmm, remember the deal though, right? $100 and..."
     "Alan" "Yeah yeah... I was wondering about..."
     "For now, it seems he is still trying to talk her out of charging... you aren't sure if he is suspicious, or just cheap."
     the_researcher "Oh my god... I know what this is..."
@@ -2749,7 +2749,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     mc.name "What is it?"
     the_researcher "The sick fuck... he was testing them on his SISTER."
     mc.name "Oh my god. What a sick fuck."
-    the_researcher "I know... thankfully he had basically zero success. He didn't realize we were combining them with the suggestability serums..."
+    the_researcher "I know... thankfully he had basically zero success. He didn't realize we were combining them with the suggestibility serums..."
     mc.name "Do you have copies of his research data?"
     the_researcher "Almost... it is still copying..."
     "Alan" "Okay, okay. $100 it is. I have the cash right here."
