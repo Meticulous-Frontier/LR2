@@ -84,6 +84,16 @@ init 1310 python:
     )
     uniform_policies_list.append(dress_code_policy)
 
+    easier_access_policy = Policy(
+        name = "Easier Access Policy",
+        cost = 2000,
+        desc = "Employees are required to wear skirts while working, unless given a specific uniform or the Relaxed Uniform Bottoms Policy is active.",
+        toggleable = True,
+        own_requirement = dress_code_policy,
+        dependant_policies = dress_code_policy
+    )
+    uniform_policies_list.append(easier_access_policy)
+
     commando_uniform_policy = Policy(
         name = "Commando Dress Code Policy",
         cost = 10000,

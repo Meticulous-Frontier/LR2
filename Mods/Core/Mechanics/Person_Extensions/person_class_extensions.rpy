@@ -222,6 +222,19 @@ init -1 python:
 
     Person.location_outfit = property(get_person_location_outfit, set_person_location_outfit, del_person_location_outfit, "Store outfit for specific location (only valid 1 timeslot).")
 
+    def get_person_dress_code_outfit(self):
+        if not hasattr(self, "_dress_code_outfit"):
+            self._dress_code_outfit = None
+        return self._dress_code_outfit
+
+    def set_person_dress_code_outfit(self, value):
+        self._dress_code_outfit = value
+
+    def del_person_dress_code_outfit(self):
+        del self._dress_code_outfit
+
+    Person.dress_code_outfit = property(get_person_dress_code_outfit, set_person_dress_code_outfit, del_person_dress_code_outfit, "Store outfit that complies with dress code.")
+
     # change idle position based on location
     def get_person_idle_pose(self):
         if not "downtown_bar" in globals(): # skip this when running tutorial
@@ -905,6 +918,7 @@ init -1 python:
             else:
                 self.planned_outfit = None
             self.planned_uniform = None
+            self.dress_code_outfit = None
             self.maid_outfit = None
             self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
 
@@ -2012,9 +2026,10 @@ init -1 python:
             return False
 
         if self.is_employee() or self.is_intern():
-            if wardrobe.get_count() > 0:
-                # Casual fridays for employees only
-                if not (day%7 == 4 and casual_friday_uniform_policy.is_active()):
+            # Casual fridays for employees only
+            if not (day%7 == 4 and casual_friday_uniform_policy.is_active()):
+                # Check for uniform
+                if wardrobe.get_count() > 0:
                     return True
         # Non-employees
         else:
@@ -2024,10 +2039,41 @@ init -1 python:
 
     Person.should_wear_uniform = person_should_wear_uniform_enhanced
 
+    def person_should_wear_dress_code_outfit(self):
+        if not self.is_at_work():  # quick exit
+            return False
+
+        if self.is_employee() or self.is_intern():
+            # Casual fridays for employees only
+            if not (day%7 == 4 and casual_friday_uniform_policy.is_active()):
+                # Check for dress code and whether planned outfit applies
+                if dress_code_policy.is_active():
+                    # Workaround for a crash involving a stripper staying in the club overnight
+                    # TODO: Should we generate instead of just assuming it won't match?
+                    if self.planned_outfit is None:
+                        return True
+
+                    if not self.planned_outfit.is_within_dress_code():
+                        return True
+        return False
+    Person.should_wear_dress_code_outfit = person_should_wear_dress_code_outfit
+
+    def person_wear_dress_code_outfit(self): #Puts the girl into her uniform, if it exists.
+        if self.dress_code_outfit is None:
+            # If we don't have a uniform planned for today get one.
+            # We can actually use the uniform logic here by passing in an empty wardrobe
+            self.dress_code_outfit = Wardrobe("Empty").decide_on_uniform(self)
+
+        if self.dress_code_outfit is not None: #If our planned uniform is STILL None it means we are unable to construct a valid uniform. Only assign it as our outfit if we have managed to construct a uniform.
+            self.apply_outfit(self.dress_code_outfit) #We apply clothing taboos to uniforms because the character is assumed to have seen them in them.
+    Person.wear_dress_code_outfit = person_wear_dress_code_outfit
+
     @property
     def current_planned_outfit(self):
         if self.should_wear_uniform() and self.planned_uniform:
             return self.planned_uniform
+        elif self.should_wear_dress_code_outfit() and self.dress_code_outfit:
+            return self.dress_code_outfit
         elif self.location in [gym, university] and self.location_outfit:
             return self.location_outfit
         return self.planned_outfit
@@ -2041,6 +2087,7 @@ init -1 python:
         if not self.outfit.matches(self.current_planned_outfit) \
             and (__builtin__.len(self.location.people) > 1 \
             or (self.should_wear_uniform() and not self.is_wearing_uniform()) \
+            or (self.should_wear_dress_code_outfit() and not self.outfit.is_within_dress_code()) \
             or (self.outfit.slut_requirement > self.sluttiness)):
             self.apply_planned_outfit()
             if draw_person:
@@ -2101,6 +2148,8 @@ init -1 python:
 
         if self.should_wear_uniform():
             self.wear_uniform()
+        elif self.should_wear_dress_code_outfit():
+            self.wear_dress_code_outfit()
         elif self.location in [gym, university] and self.location_outfit:
             self.apply_outfit(self.location_outfit, ignore_base = ignore_base, update_taboo = update_taboo)
         else:
