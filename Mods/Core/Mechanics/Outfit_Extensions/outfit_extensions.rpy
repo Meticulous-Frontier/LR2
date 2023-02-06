@@ -221,6 +221,90 @@ init -1 python:
 
     Outfit.remove_all_collars = remove_all_collars
 
+    def is_easier_access(self):
+        return not any(x for x in self.lower_body if x.layer >= 2 and x.anchor_below)
+    Outfit.is_easier_access = is_easier_access
+
+    def make_easier_access(self):
+        changed = False
+        if self.has_pants():
+            swap_outfit_bottoms(self)
+            changed = True
+
+        for item in self.upper_body:
+            if item.is_similar(pinafore):
+                new_item_top = vest.get_copy()
+                new_item_top.colour = item.colour
+                new_item_bottom = skirt.get_copy()
+                new_item_bottom.colour = item.colour
+                self.remove_clothing(item)
+                self.add_upper(new_item_top)
+                self.add_lower(new_item_bottom)
+                changed = True
+        for item in self.lower_body:
+            if item.is_similar(long_skirt) or item.is_similar(pencil_skirt):
+                new_item = skirt.get_copy()
+                new_item.colour = item.colour
+                self.remove_clothing(item)
+                self.add_lower(new_item)
+                changed = True
+        return changed
+    Outfit.make_easier_access = make_easier_access
+
+    def remove_bra_and_panties(self):
+        if self.wearing_panties():
+            self.remove_clothing(self.get_panties())
+        if self.wearing_bra():
+            self.remove_clothing(self.get_bra())
+        # Special handling for leotards
+        # TODO: delete when `remove_clothing()` can remove using extensions
+        for clothing in self.upper_body:
+            if clothing.is_similar(leotard):
+                self.remove_clothing(clothing)
+        return
+    Outfit.remove_bra_and_panties = remove_bra_and_panties
+
+    def get_overwear(self):
+        overwear = Outfit(self.name + " Overwear")
+        overwear.upper_body = list(x for x in self.upper_body if x.layer >= 2)
+        overwear.lower_body = list(x for x in self.lower_body if x.layer >= 2)
+        overwear.feet = list(x for x in self.feet if x.layer >= 2)
+        overwear.accessories = list(x for x in self.accessories if x.layer >= 2)
+        return overwear
+    Outfit.get_overwear = get_overwear
+
+    def get_underwear(self):
+        underwear = Outfit(self.name + " Underwear")
+        underwear.upper_body = list(x for x in self.upper_body if x.layer < 2)
+        underwear.lower_body = list(x for x in self.lower_body if x.layer < 2)
+        underwear.feet = list(x for x in self.feet if x.layer < 2)
+        underwear.accessories = list(x for x in self.accessories if x.layer < 2)
+        return underwear
+    Outfit.get_underwear = get_underwear
+
+    def is_within_dress_code(self, slut_limit = None, underwear_limit = None, easier_access = None, commando = None):
+        business_slut_limit, business_underwear_limit, _limited_to_top = mc.business.get_uniform_limits()
+        if slut_limit is None:
+            slut_limit = business_slut_limit + 5 # A bit of leeway
+        if underwear_limit is None:
+            underwear_limit = business_underwear_limit + 5 # A bit of leeway
+        if easier_access is None:
+            easier_access = easier_access_policy.is_active()
+        if commando is None:
+            commando = commando_uniform_policy.is_active()
+
+        if self.get_full_outfit_slut_score() > slut_limit:
+            if self.get_overwear().get_overwear_slut_score() > slut_limit:
+                return False
+            if self.get_underwear().get_underwear_slut_score() > underwear_limit:
+                return False
+        if easier_access and not self.is_easier_access():
+            return False
+        if commando and (self.wearing_bra() or self.wearing_panties()):
+            return False
+        return True
+    Outfit.is_within_dress_code = is_within_dress_code
+
     # Calculates transparency on a scale 0.0--1.0, with 0.0 being opaque
     def get_lower_body_transparency(self):
         transparency = 1.0
