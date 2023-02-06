@@ -2687,8 +2687,8 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     "You check out the two girls and their outfits. Your police officer uniform seems to fit perfectly."
     the_researcher "Wow, this looks just like a real uniform!"
     the_person "I umm... this is pretty umm..."
-    the_person "Wow [the_researcher.fname]! You look so hot. Alan is gonna fall into this for sure!"
-    the_researcher "Ahh, yah think so?"
+    the_researcher "Wow [the_person.fname]! You look so hot. Alan is gonna fall into this for sure!"
+    the_person "Ahh, yah think so?"
     mc.name "Definitely. This is going to work."
     "You step out of the dressing room with the two girls. A couple is shopping nearby, and the guy notices you, then gives you a wink and thumbs up."
     "You walk over to the checkout counter."
@@ -2699,6 +2699,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     "[starbuck.possessive_title] quickly reaches down to a shelf behind the counter, then drops some handcuffs on the counter."
     starbuck "The cop suits came with these. They aren't real, so there is a quick escape button on the side!"
     mc.name "Thanks [starbuck.title]."
+    $ mc.business.change_funds(300)
     "You pay for the outfits before setting out from the sex shop."
     starbuck "Have fun everyone!"
     $ scene_manager.remove_actor(starbuck)
@@ -2714,9 +2715,11 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     the_person "Alright... here goes..."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.title] turns and walks way, off to meet with Alan for dinner."
+    $ scene_manager.hide_actor(the_person)
     the_researcher "Here is a receiver, push this button to talk into it, otherwise it will just receive and record."
     mc.name "Alright, let's find somewhere discreet to be, before someone realizes we aren't really cops..."
 
+    # TODO write rest of scene
     "This part is outlined. Have a scene with the head researcher in discreet while listening to Ellie have dinner."
     "Pick back up following Ellie to Alan's."
 
@@ -2752,6 +2755,9 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     the_researcher "I know... thankfully he had basically zero success. He didn't realize we were combining them with the suggestibility serums..."
     mc.name "Do you have copies of his research data?"
     the_researcher "Almost... it is still copying..."
+    $ the_person.bedroom.show_background()
+    $ scene_manager.hide_actor(the_researcher)
+    $ scene_manager.show_actor(the_person, position = "stand3")
     "Alan" "Okay, okay. $100 it is. I have the cash right here."
     the_person "Oh! That's... perfect... let me just count it real quick..."
     "Alan" "It's all there. Now get on your knees whore, I need this."
@@ -2765,6 +2771,9 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
                 mc.name "Don't worry, we'll be there in a few seconds, help is on the way [the_person.title]."
                 $ the_person.change_love(3, 80)
                 $ the_person.change_happiness(5)
+                $ the_person.home.show_background()
+                $ scene_manager.hide_actor(the_person)
+                $ scene_manager.show_actor(the_researcher)
                 "You look at [the_researcher.title]."
                 mc.name "We need to get in there. Let these things keep copying... we might have to improvise a little."
                 the_researcher "Ok, I'm sure we can still get the information we need..."
@@ -2783,9 +2792,13 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
                 "Alan" "Yeah, it IS big, ain't it?"
                 the_person "Oh uhh, yeah. So big..."
                 "Alan" "That's right. Now choke on it whore."
+                $ scene_manager.update_actor(the_person, position = "blowjob")
                 "Through the receiver, you listen as blowjob noises begin."
                 "You can hear [the_person.title] lips smack and the soft sounds of sucking start coming through the received."
                 "Alan" "Ohh, that's it. Swallow it all bitch."
+                $ the_person.home.show_background()
+                $ scene_manager.hide_actor(the_person)
+                $ scene_manager.show_actor(the_researcher)
                 mc.name "Alright, she's buying us some extra time, let's make sure we get everything we need."
                 the_researcher "Poor [the_person.fname]... she's taking one for the team, so to speak..."
                 "You continue going through the research notes, while you hear the blowjob noises continue on the other side of the receiver..."
@@ -2799,7 +2812,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
                 mc.name "Get your handcuffs ready."
                 the_researcher "They aren't real?"
                 mc.name "Yeah, but HE doesn't know that."
-                "Alan" "Oh fuck, that's it bitch! Get ready I'm going to cum all over that poutty little face of yours!"
+                "Alan" "Oh fuck, that's it bitch! Get ready I'm going to cum all over that pouty little face of yours!"
                 "You hear a loud pop in the receiver you assume is the contact pulling out of [the_person.title]'s mouth..."
                 "Alan" "Fuck! OH FUCK YEAH!"
                 $ cum_on_face_ntr(the_person)
@@ -2820,7 +2833,8 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
         mc.name "Yeah, but HE doesn't know that."
     "You step out of the office and next to the bedroom door."
     "You count down from 3, then kick the door open as loudly as possible."
-    $ scene_manager.add_actor(the_person, display_transform = character_left_flipped, position = "standing_doggy")
+    $ the_person.bedroom.show_background()
+    $ scene_manager.show_actor(the_person, display_transform = character_left_flipped, position = "standing_doggy")
     mc.name "POLICE! Stop right there!!!"
     "[the_person.possessive_title] is bent over the contact, his cock in her hand."
     "Alan" "Wha... what!?!"
@@ -2847,7 +2861,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     "Alan" "It isn't what you think!"
     mc.name "Isn't it? No matter. We'll be taking that with us. Along with the production equipment."
     "Alan" "Hey! You can't steal that!"
-    mc.name "Can't we? Are you telling me you acquired it legitmately? What exactly are you going to do about it?"
+    mc.name "Can't we? Are you telling me you acquired it legitimately? What exactly are you going to do about it?"
     "The contact turns red in the face as he realizes just how much shit he is in. Stolen equipment, unethical research, you've got him by the balls."
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     the_person "That's right! And making it look like I was the one who did it!"
@@ -2858,15 +2872,20 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     "Alan" "You... you aren't going to release any of that data... are you?"
     mc.name "Maybe. Maybe not. We'll see. But secrets carry a price. Be ready for it."
     "The contact just looks down. You look at the two girls and motion for them to follow you out of the room."
+    $ the_person.home.show_background()
     "You leave him there, cuffed to a chair, going back to his office."
     if ellie_ntr:
         the_person "Let me just... wash up really quick..."
+        $ scene_manager.hide_actor(the_person)
         $ the_person.apply_outfit(prost_outfit)
         $ scene_manager.update_scene()
     $ scene_manager.update_actor(the_researcher, position = "standing_doggy")
     "[the_researcher.possessive_title] checks the computer."
     the_researcher "Looks like the drives are done copying. We should have everything we need."
     "She unplugs the drives and collects them. You look at the production equipment."
+    if ellie_ntr:
+        $ scene_manager.show_actor(the_person, emotion = "happy")
+        "Your [the_person.possessive_title] walks back in, with a smile."
     mc.name "Let's take this with us."
     the_person "If you ever get caught with it, there could be serious legal implications."
     mc.name "Then let's not get caught."
@@ -2895,7 +2914,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     mc.name "Sure."
     if ellie_ntr:
         the_person "I know it is important that we got all the stuff that we did but... I really wish you hadn't let things go so far with me and Alan."
-        the_person "It was awful... the whole time I just kept telling myself... just pretend it's [the_person.mc_name]..."
+        the_person "It was awful... the whole time I just kept telling myself... just pretend it's [the_person.mc_title]..."
         the_person "I don't know if I can ever do that again... please don't make me do that again, okay?"
     else:
         the_person "Thank you for stepping in when you did. I... I really thought I was going to have to suck that man's dick."
