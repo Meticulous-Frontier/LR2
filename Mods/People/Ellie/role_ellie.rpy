@@ -2597,7 +2597,7 @@ label ellie_search_update_label(the_person):    #You locate the contact
     the_person "Yes sir."
     "You share a few more details of your plan with [the_person.possessive_title], then she returns to work."
     $ the_person.draw_person(position = "walking_away")
-    "You aren't sure what kind matieral you will find, going into this guy's apartment, but you are sure you will be able to find something."
+    "You aren't sure what kind material you will find, going into this guy's apartment, but you are sure you will be able to find something."
     "There is just one more piece to the puzzle you need..."
     if starbuck_is_business_partner():
         "You place a phone call to your business partner at the mall."
@@ -2615,7 +2615,7 @@ label ellie_search_update_label(the_person):    #You locate the contact
     $ mc.business.add_mandatory_crisis(ellie_search_finish)
     return
 
-label ellie_search_finish_label():    #You and Ellie sabatoge the contact
+label ellie_search_finish_label():    #You and Ellie sabotage the contact
     $ police_chief_wardrobe = wardrobe_from_xml("Cop_Wardrobe")
     $ cop_outfit = police_chief_wardrobe.get_outfit_with_name("Cop")
     $ prostitute_ward = wardrobe_from_xml("Prostitute_Wardrobe")
@@ -2637,14 +2637,14 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     "You hurry to your office. [the_person.title] is right behind you."
     $ scene_manager.add_actor(the_person, position = "sitting")
     "She sits down at your desk and starts to talk hurriedly, clearly nervous."
-    the_person "I got hime to agree to meet up tonight! He wants to meet for a quick bite, then back to his place to 'see what happens'."
+    the_person "I got him to agree to meet up tonight! He wants to meet for a quick bite, then back to his place to 'see what happens'."
     "She cringes a bit with the last part of the sentence."
     mc.name "Excellent job."
     $ scene_manager.add_actor(the_researcher, display_transform = character_center_flipped)
     "[the_researcher.possessive_title] walks into your office, carrying some electronics."
     mc.name "[the_researcher.title], thanks for coming. Did you get the equipment?"
     the_researcher "I sure did. Here's the hard drives, they have software installed to immediately begin imaging and copying any systems they get plugged into..."
-    the_researcher "And here is the wire. It should fit nicely into her ear, and with her long hair it will be basically imperceptable unless someone goes looking for it."
+    the_researcher "And here is the wire. It should fit nicely into her ear, and with her long hair it will be basically imperceptible unless someone goes looking for it."
     the_person "The wire?"
     mc.name "We are going to give you a recoding and 2 way communication device, that way we can monitor your situation and hopefully get some blackmail material that way as well."
     the_person "I see."
@@ -2661,7 +2661,7 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
         mc.name "Hello [starbuck.title]. I'm here to pick up those outfits I called about the other day."
         starbuck "Oh! The two police uniforms and one 'lady of night' costumes?"
         mc.name "That is them."
-        starbuck "Ah! I don't know what you have planend for those, but I wish I could join! You umm... have room for one more?"
+        starbuck "Ah! I don't know what you have planned for those, but I wish I could join! You umm... have room for one more?"
         mc.name "Not this time."
         starbuck "What a shame. Give me a moment I'll find them."
     else:
