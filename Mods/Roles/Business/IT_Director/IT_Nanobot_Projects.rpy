@@ -50,7 +50,7 @@ init 1 python:
         return
 
     def breeder_attention_reduction_on_remove():
-        get_fetish_breeder_serum().attention = FETISH_SERUM_ATTENTION
+        get_fetish_breeding_serum().attention = FETISH_SERUM_ATTENTION
         return
 
     def cum_clarity_reduction_on_apply():
@@ -162,7 +162,7 @@ init 1 python:
         return "Low Mastery"
 
     def breeder_attention_reduction_project_requirement():
-        return get_fetish_breeder_serum().mastery_level >= 5.0
+        return get_fetish_breeding_serum().mastery_level >= 5.0
 
     def breeder_fetish_increase_project_requirment():
         return ellie_has_breeding_fetish()
