@@ -3,13 +3,13 @@
 init 2 python:
 
     camilla_spot_at_bar = Action("Camilla at the bar", camilla_spot_at_bar_requirement, "camilla_spot_at_bar_label")
-    camilla_get_a_drink = Action("Get a drink", camilla_get_a_drink_requirement, "camilla_get_a_drink_label")
+    camilla_get_a_drink = Action("Get a drink {image=gui/heart/Time_Advance.png}", camilla_get_a_drink_requirement, "camilla_get_a_drink_label", is_fast = False)
     camilla_go_dancing = Action("Salsa Dancing", camilla_go_dancing_requirement, "camilla_go_dancing_label")
-    camilla_take_pics = Action("Take Sexy Pics", camilla_take_pics_requirement, "camilla_take_pics_label")
+    camilla_take_pics = Action("Take Sexy Pics {image=gui/heart/Time_Advance.png}", camilla_take_pics_requirement, "camilla_take_pics_label", is_fast = False)
     camilla_dance_lessons = Action("Dancing Lessons", camilla_dance_lessons_requirement, "camilla_dance_lessons_label")
     camilla_blowjob_text = Action("Blowjob Discussion", camilla_blowjob_text_requirement, "camilla_blowjob_text_label")
     camilla_her_place = Action("Cuckold Visit", camilla_her_place_requirement, "camilla_her_place_label")
-    camilla_home_sex = Action("Cuckold Visit", camilla_home_sex_requirement, "camilla_home_sex_label")
+    camilla_home_sex = Action("Cuckold Visit {image=gui/heart/Time_Advance.png}", camilla_home_sex_requirement, "camilla_home_sex_label", is_fast = False)
     camilla_outfit_help = Action("Shopping Trip", camilla_outfit_help_requirement, "camilla_outfit_help_label")
     camilla_lingerie_help = Action("Lingerie Shopping", camilla_lingerie_help_requirement, "camilla_lingerie_help_label")
     camilla_formal_date = Action("Camilla Comes Over", camilla_formal_date_requirement, "camilla_formal_date_label")
