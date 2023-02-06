@@ -550,7 +550,7 @@ label ellie_stephanie_tester_reaction_anal_label(the_tester, the_person, the_res
             else:
                 "[the_tester.title] watches you eagerly as you start to walk over to her."
             mc.name "I know it is hard to reach your asshole yourself, so I'll finger it for you until the urges pass."
-            $ the_person.change_arousal(10)
+            $ the_tester.change_arousal(10)
             the_tester "Mmm, that sounds amazing right now..."
             call ellie_stephanie_tester_anal_finger_label(the_tester) from _anal_bot_anal_finger_01
         "Fuck her ass" if the_tester.is_willing(prone_anal, private = True, ignore_taboo = True):
@@ -562,7 +562,7 @@ label ellie_stephanie_tester_reaction_anal_label(the_tester, the_person, the_res
             "She gasps when you take off your pants, revealing your erection."
             mc.name "You and I both know that the cravings you are having right now can only be satisfied by one thing."
             if the_tester.sluttiness < 60:
-                "[the_person.title] looks concerned, but not afraid."
+                "[the_tester.title] looks concerned, but not afraid."
                 the_tester "I don't know... are you sure that... monster... is going to fit?"
                 mc.name "Definitely. But don't worry, we can take it slow if we need to."
                 the_tester "Mmm... okay..."
@@ -630,7 +630,7 @@ label ellie_stephanie_tester_reaction_breeding_label(the_tester, the_person, the
             "She gasps when you take off your pants, revealing your erection."
             mc.name "You and I both know that the cravings you are having right now can only be satisfied by one thing."
             if the_tester.sluttiness < 60:
-                "[the_person.title] looks concerned, but not afraid."
+                "[the_tester.title] looks concerned, but not afraid."
                 the_tester "I don't know... are you sure that... monster... is going to fit?"
                 mc.name "Definitely. But don't worry, we can take it slow if we need to."
                 the_tester "Mmm... okay..."
