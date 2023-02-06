@@ -24,7 +24,7 @@ init -1 python:
         if trait.exclude_tags:
             trait_tags = "\nExcludes Other: "
             for a_tag in trait.exclude_tags:
-                trait_tags += "[" + a_tag + "]"
+                trait_tags += "{color=#FFFF00}[" + a_tag + "]{/color}"
         return trait_tags
 
     def get_trait_display_title(trait):
