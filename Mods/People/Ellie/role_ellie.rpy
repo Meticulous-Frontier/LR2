@@ -1428,6 +1428,7 @@ label ellie_dinner_date_label():
         the_person "Oh! That's a great idea..."
         $ the_person.draw_person(position = "walking_away")
         "You get up and follow [the_person.possessive_title] into her bedroom."
+        $ the_person.bedroom.show_background()
         $ the_person.draw_person(position = the_person.idle_pose)
         the_person "This is it... this is where I..."
         "Her voice drifts off as you close in on her."
