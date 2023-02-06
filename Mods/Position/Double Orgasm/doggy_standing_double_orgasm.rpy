@@ -28,7 +28,7 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] turns around and reaches for your cock. She removes the condom and ties the end in a knot, before throwing it away."
             "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
         else:
-            "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
+            "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
 
             if the_girl.wants_creampie():
                 the_girl "Yes! Fill me with your cum!"

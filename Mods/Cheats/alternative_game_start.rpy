@@ -1,6 +1,13 @@
 init -1:
     default persistent.stats = {}
 
+    # initialize with defaults (standard)
+    default TIER_0_TIME_DELAY = 1
+    default TIER_1_TIME_DELAY = 3
+    default TIER_2_TIME_DELAY = 7
+    default TIER_3_TIME_DELAY = 14
+    default GAME_SPEED_FACTOR = 1.0
+
 init 2 python:
     config.label_overrides["start"] = "alternative_start"
 
@@ -35,13 +42,6 @@ label alternative_start():
 
         "Realistic pregnancy content\n{size=16}Realistic cycles. Girls know their fertile times. Pulling out not 100%% effective. Girls don't want to get pregnant.{/size}":
             $ persistent.pregnancy_pref = 3
-
-    python:
-        global TIER_0_TIME_DELAY
-        global TIER_1_TIME_DELAY
-        global TIER_2_TIME_DELAY
-        global TIER_3_TIME_DELAY
-        global GAME_SPEED_FACTOR
 
     "MOD" "How quickly would you like stories from the mod to play out? This will affect spacing between story events."
     menu:

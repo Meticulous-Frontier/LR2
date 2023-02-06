@@ -440,7 +440,7 @@ init 2:
                                         $ apply_method = categories_mapping[category_selected][2]
                                         $ cloth_list_length = __builtin__.len(categories_mapping[category_selected][0])
 
-                                        for cloth in sorted(categories_mapping[category_selected][0], key = lambda x: (x.layer, x.slut_value, x.name)):
+                                        for cloth in sorted(categories_mapping[category_selected][0], key = lambda x: (x.layer, x.get_slut_value(), x.name)):
                                             python:
                                                 name = cloth.name.title()
                                                 stat_slut = cloth.generate_stat_slug()

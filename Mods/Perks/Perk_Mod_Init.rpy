@@ -1,3 +1,5 @@
+default perk_system = None
+
 init 5 python:
     add_label_hijack("normal_start", "activate_perk_mod_core")
     add_label_hijack("after_load", "update_perk_mod_core")
@@ -21,9 +23,7 @@ label activate_perk_mod_core(stack):
 
 label update_perk_mod_core(stack):
     python:
-        try:
-            perk_system
-        except NameError:
+        if perk_system is None:
             Perk_mod_initialization()
 
         if mc.business.event_triggers_dict.get("perk_tutorial", 1) < 2:

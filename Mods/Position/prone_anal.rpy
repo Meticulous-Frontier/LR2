@@ -195,7 +195,7 @@ label scene_prone_anal_2(the_girl, the_location, the_object):
             else:
                 the_girl "That's it... oh god it's so good..."
                 "You reach forward and grab her hair near the base of her head and pull it back some."
-                the_girl "Oh fuck! Oh god fuck my ass[the_girl.mc_title]!"
+                the_girl "Oh fuck! Oh god fuck my ass [the_girl.mc_title]!"
                 $ the_girl.change_stats(obedience = 2, arousal = 5)
                 "You oblige her, helping correlate in her head your rough treatment with the pleasure of sex. Her ass clenches around you as you pull her hair."
                 "She is exhausted, but constantly moaning from your dominating approach."

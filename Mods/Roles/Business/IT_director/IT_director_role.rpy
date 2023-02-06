@@ -94,7 +94,7 @@ label IT_director_nanobot_intro_label(the_person):
     else:
         mc.name "Right. As you know, we have several programs for our nanobots, but we still know so little about how they actually effect people."
     if fetish_serum_unlock_count() < 5:
-        "When you finish, her cheeks are flushed from embarassment."
+        "When you finish, her cheeks are flushed from embarrassment."
         the_person "I... I don't know... you're talking about..."
         mc.name "I know. This is a little outside of your comfort zone, but as my only IT employee, I need you to step up and help out with it."
         "She seems unconvinced for now, but relents."
@@ -106,14 +106,14 @@ label IT_director_nanobot_intro_label(the_person):
     the_person "I'm not sure this is a good idea..."
     "It seems like [the_person.title] might need some convincing..."
     menu:
-        "Do it for me.\n{color=#ff0000}{size=18}Increases love{/size}{/color}":
+        "Do it for me\n{color=#ff0000}{size=18}Increases love{/size}{/color}":
             mc.name "I know this seems odd, but I need you to trust me, okay?"
             mc.name "Don't worry, I have a plan, and I need someone like you to get this done."
             $ the_person.change_love(3)
-        "It'll be fun.\n{color=#ff0000}{size=18}Increases sluttiness{/size}{/color}":
+        "It'll be fun\n{color=#ff0000}{size=18}Increases sluttiness{/size}{/color}":
             mc.name "Don't worry. We'll be able to use it to have all kinds of fun."
             $ the_person.change_slut(3, 60)
-        "I'm the boss.\n{color=#ff0000}{size=18}Increases obedience{/size}{/color}":
+        "I'm the boss\n{color=#ff0000}{size=18}Increases obedience{/size}{/color}":
             mc.name "I know it seems odd, but remember who makes out your paychecks, okay?"
             $ the_person.change_obedience(3)
     the_person "I suppose..."
@@ -129,6 +129,7 @@ label IT_director_nanobot_intro_label(the_person):
     "In addition, you can talk to her about the programs as you begin to master them."
     $ mc.business.set_event_day("IT_dir_nanobot_takeover_day")
     $ mc.business.add_mandatory_crisis(IT_director_teamup_start)
+    $ mc.location.show_background()
     $ clear_scene()
     return
 

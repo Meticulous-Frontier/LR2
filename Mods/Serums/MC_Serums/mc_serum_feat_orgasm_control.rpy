@@ -13,14 +13,18 @@ init 2 python:
 
     list_of_mc_traits.append(mc_serum_feat_orgasm_control)
 
-init 1 python:  #Associated Perks
+    add_label_hijack("after_load", "reset_label_override_for_orgasm_control")
 
+init 1 python:  #Associated Perks
     def perk_feat_orgasm_control_on_apply():
+        mc.business.event_triggers_dict['orgasm_control_active'] = True
         config.label_overrides["climax_check"] = "climax_check_orgasm_control"
         return
 
     def perk_feat_orgasm_control_on_remove():
-        del config.label_overrides["climax_check"]
+        mc.business.event_triggers_dict['orgasm_control_active'] = False
+        if 'climax_check' in config.label_overrides:
+            del config.label_overrides["climax_check"]
         return
 
     def perk_feat_orgasm_control_small():
@@ -37,6 +41,16 @@ init 1 python:  #Associated Perks
         if the_serum.mastery_level >= 5:
             return True
         return False
+
+label reset_label_override_for_orgasm_control(stack):
+    python:
+        if mc.business.event_triggers_dict.get('orgasm_control_active', False):
+            perk_feat_orgasm_control_on_apply()
+        else:
+            perk_feat_orgasm_control_on_remove()
+
+        execute_hijack_call(stack)
+    return
 
 label perk_feat_orgasm_control_upg_label(the_person):
     the_person "Research with the Mind Control Agent serum trait has yielded states in some test subjects that is borderline hypnosis."

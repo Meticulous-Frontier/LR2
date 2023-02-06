@@ -304,6 +304,8 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     "You step outside and sit down, sipping your coffee."
     "You spend some time on your phone, and follow up on a couple of work emails while you wait. It's a pretty pleasant evening."
     "Pretty soon you hear [the_person.possessive_title] clear her throat nearby. You look up from your phone."
+    # change out of uniform
+    $ the_person.apply_outfit(the_person.decide_on_outfit())
     $ the_person.draw_person()
     mc.name "Ah, you're right, that was quick!"
     the_person "Yes... hey... I need to be honest about something..."
@@ -486,6 +488,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     $ the_person.add_unique_on_room_enter_event(kaya_moving_in_with_mother_intro)   #Link this for now. Probably will change to a different place later on.
     $ the_person.add_unique_on_room_enter_event(kaya_meet_erica_at_uni)
     $ kaya.event_triggers_dict["drink_date_complete"] = True
+    call advance_time() from _call_advance_time_kaya_ask_out
     return
 
 label kaya_get_drinks_label(the_person):  #Repeatable date night with Kaya
@@ -509,6 +512,8 @@ label kaya_get_drinks_label(the_person):  #Repeatable date night with Kaya
         "You step outside and sit down, sipping your coffee."
         "You spend some time on your phone, and follow up on a couple of work emails while you wait. It's a pretty pleasant evening."
         "Pretty soon you hear [the_person.possessive_title] clear her throat nearby. You look up from your phone."
+        # change out of uniform
+        $ the_person.apply_outfit(the_person.decide_on_outfit())
         $ the_person.draw_person()
         mc.name "Ah, you're right, that was quick!"
         "You stand up, making sure to throw your coffee cup away and leave the table clean. You start to walk with [the_person.title] a couple blocks to the bar."

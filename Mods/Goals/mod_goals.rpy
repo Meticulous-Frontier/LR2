@@ -4,6 +4,7 @@ init 5 python:
 
 init 2 python:
     def daily_profit_count_function(the_goal, profit):
+        the_goal.arg_dict["count"] = profit # To make "progress" show
         if profit >= the_goal.arg_dict["required"]:
             return True
         return False

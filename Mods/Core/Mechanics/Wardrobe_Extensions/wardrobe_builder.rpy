@@ -790,7 +790,7 @@ init 5 python:
             outfit.update_name()
             return outfit
 
-        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True):
+        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, easier_access = False):
             def change_colour_alpha(new_colour, old_colour):
                 alpha_blended = new_colour
                 alpha_blended[3] = old_colour[3]
@@ -830,6 +830,10 @@ init 5 python:
             if swap_bottoms:
                 (outfit, swapped) = self.apply_bottom_preference(self.person, outfit)
                 if swapped:
+                    alterations += 1
+            elif easier_access:
+                changed = outfit.make_easier_access()
+                if changed:
                     alterations += 1
 
             if allow_skimpy:
