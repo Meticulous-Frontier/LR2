@@ -89,7 +89,7 @@ init 5:
             xcenter 960
             yalign 0.1
             # background "#1a45a1aa"
-            text "Select a New Nanobot Project" style "menu_text_title_style" size 48 xanchor 0.5 xalign 0.5
+            text "Select a New Nanobot Project" style "menu_text_title_style" size 42 xanchor 0.5 xalign 0.5
             null height 60
             hbox:
                 xanchor 0.5
@@ -102,7 +102,7 @@ init 5:
                     xanchor 0.5
                     vbox:
                         xsize 300
-                        text "Basic Bots" style "menu_text_title_style" size 32 xalign 0.5
+                        text "Basic" style "menu_text_title_style" size 28 xalign 0.5
                         for proj in IT_get_basic_bot_projects():
                             use screen_IT_project_button(proj)
 
@@ -113,7 +113,7 @@ init 5:
                     vbox:
 
                         xsize 300
-                        text "Breeder Bots" style "menu_text_title_style" size 32 xalign 0.5
+                        text "Breeder" style "menu_text_title_style" size 28 xalign 0.5
                         if fetish_breeding_serum_is_unlocked():
                             for proj in IT_get_breeder_bot_projects():
                                 use screen_IT_project_button(proj)
@@ -129,7 +129,7 @@ init 5:
                     vbox:
 
                         xsize 300
-                        text "Anal Bots" style "menu_text_title_style" size 32 xalign 0.5
+                        text "Anal" style "menu_text_title_style" size 28 xalign 0.5
                         if fetish_anal_serum_is_unlocked():
                             for proj in IT_get_anal_bot_projects():
                                 use screen_IT_project_button(proj)
@@ -144,7 +144,7 @@ init 5:
                     xanchor 0.5
                     vbox:
                         xsize 300
-                        text "Cum Bots" style "menu_text_title_style" size 32 xalign 0.5
+                        text "Cum" style "menu_text_title_style" size 28 xalign 0.5
                         if fetish_cum_serum_is_unlocked():
                             for proj in IT_get_cum_bot_projects():
                                 use screen_IT_project_button(proj)
@@ -159,7 +159,7 @@ init 5:
                     xanchor 0.5
                     vbox:
                         xsize 300
-                        text "Exhbitionism Bots" style "menu_text_title_style" size 32 xalign 0.5
+                        text "Exhibitionism" style "menu_text_title_style" size 28 xalign 0.5
                         if fetish_exhibition_serum_is_unlocked():
                             for proj in IT_get_exhibition_bot_projects():
                                 use screen_IT_project_button(proj)
@@ -179,7 +179,7 @@ init 5:
             xcenter 960
             yalign 0.1
             # background "#1a45a1aa"
-            text "Select a New Business IT Project" style "menu_text_title_style" size 48 xanchor 0.5 xalign 0.5
+            text "Select a New Business IT Project" style "menu_text_title_style" size 42 xanchor 0.5 xalign 0.5
             null height 60
             hbox:
                 xanchor 0.5
@@ -192,7 +192,7 @@ init 5:
                     xanchor 0.5
                     vbox:
                         xsize 300
-                        text "HR" style "menu_text_title_style" size 32 xalign 0.5
+                        text "HR" style "menu_text_title_style" size 28 xalign 0.5
                         for proj in IT_get_HR_projects():
                             use screen_IT_project_button(proj)
 
@@ -202,7 +202,7 @@ init 5:
                     xanchor 0.5
                     vbox:
                         xsize 300
-                        text "Supply" style "menu_text_title_style" size 32 xalign 0.5
+                        text "Supply" style "menu_text_title_style" size 28 xalign 0.5
                         for proj in IT_get_supply_projects():
                             use screen_IT_project_button(proj)
 
@@ -212,7 +212,7 @@ init 5:
                     xanchor 0.5
                     vbox:
                         xsize 300
-                        text "Marketing" style "menu_text_title_style" size 32 xalign 0.5
+                        text "Marketing" style "menu_text_title_style" size 28 xalign 0.5
                         for proj in IT_get_market_projects():
                             use screen_IT_project_button(proj)
 
@@ -223,7 +223,7 @@ init 5:
                     vbox:
 
                         xsize 300
-                        text "Research" style "menu_text_title_style" size 32 xalign 0.5
+                        text "Research" style "menu_text_title_style" size 28 xalign 0.5
                         for proj in IT_get_research_projects():
                             use screen_IT_project_button(proj)
 
@@ -233,7 +233,7 @@ init 5:
                     xanchor 0.5
                     vbox:
                         xsize 300
-                        text "Production" style "menu_text_title_style" size 32 xalign 0.5
+                        text "Production" style "menu_text_title_style" size 28 xalign 0.5
                         for proj in IT_get_production_projects():
                             use screen_IT_project_button(proj)
 
@@ -248,7 +248,7 @@ screen IT_tooltip(the_project):
         background "#1a45a1aa"
         xcenter 440
         #xalign 0.1
-        ycenter 900
+        ycenter 940
         xsize 760
         ysize window_height
 
@@ -277,7 +277,7 @@ screen screen_IT_active_project():
         background "#1a45a1aa"
         xcenter 1160
         #xalign 0.1
-        ycenter 900
+        ycenter 940
         xsize 360
         ysize window_height
 
@@ -304,11 +304,14 @@ screen screen_IT_active_project():
                             xysize (200, 20)
 
 screen screen_IT_project_button(proj):
-    hbox:
+    frame:
+        background None
+        ysize 160
         xalign 0.5
         if proj not in mc.business.IT_projects:
             if proj.requirement() == True:
                 imagebutton:
+                    ysize 160
                     insensitive it_imagebutton_inactive
                     idle it_imagebutton_idle
                     hover it_imagebutton_hover
@@ -323,6 +326,7 @@ screen screen_IT_project_button(proj):
                         ]
             elif proj.requirement():
                 imagebutton:
+                    ysize 160
                     idle it_imagebutton_locked
                     hover it_imagebutton_locked
                     hovered [
@@ -330,6 +334,7 @@ screen screen_IT_project_button(proj):
                         ]
             else:
                 imagebutton:
+                    ysize 160
                     idle it_imagebutton_locked
                     hover it_imagebutton_locked
                     hovered [
@@ -338,6 +343,7 @@ screen screen_IT_project_button(proj):
 
         if proj in mc.business.IT_projects:
             imagebutton:
+                ysize 160
                 insensitive it_imagebutton_inactive
                 idle it_imagebutton_inactive
                 hover it_imagebutton_hover
@@ -349,32 +355,29 @@ screen screen_IT_project_button(proj):
                 hovered [
                     Show("IT_tooltip",None,proj)
                     ]
+        vbox:
+            yanchor 0.0
+            xysize (280, 150)
+            yoffset 5
+            text proj.name size 28 xalign 0.5 xanchor 0.5 style "textbutton_text_style"
+            if mc.business.IT_partial_projects.has_key(proj.identifier):
+                bar:
+                    xoffset 40
+                    value mc.business.IT_partial_projects.get(proj.identifier, 0)
+                    range proj.project_cost
+                    xysize (200, 10)
 
-    text proj.name size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
-    if mc.business.IT_partial_projects.has_key(proj.identifier):
-        bar:
-            value mc.business.IT_partial_projects.get(proj.identifier, 0)
-            range proj.project_cost
-            xalign 0.5
-            yalign 0.5
-            ypos -70
-            xysize (200, 10)
+            python:
+                supplemental_text = ""
+                if mc.business.IT_project_in_progress != None:
+                    if proj == mc.business.IT_project_in_progress[0]:
+                        supplemental_text = "In Progress"
+                if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
+                    supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
+                elif proj not in mc.business.IT_projects and not  proj.requirement():
+                    supplemental_text = "{color=#ff0000} Unknown Req {/color}"
 
-    use supplemental_text_info(proj)
-
-
-screen supplemental_text_info(proj):
-    python:
-        supplemental_text = ""
-        if mc.business.IT_project_in_progress != None:
-            if proj == mc.business.IT_project_in_progress[0]:
-                supplemental_text = "In Progress"
-        if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-            supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-        elif proj not in mc.business.IT_projects and not  proj.requirement():
-            supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-    text supplemental_text  style "menu_text_style" size 16 xanchor 0.5 xalign 0.5 ypos -75
+            text supplemental_text style "menu_text_style" size 16 xalign 0.5 xanchor 0.5 yanchor 1.0
 
 screen screen_IT_return_button():
     frame:

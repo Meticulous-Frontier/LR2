@@ -1857,13 +1857,13 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
         mc.name "Alright, let's get naked."
         $ the_person.strip_outfit(position = the_person.idle_pose)
         "You both quickly get undressed. You check out [the_person.possessive_title]."
-        "Her nipples are stuff, and her labia are puffy and aroused. Clearly she is really turned on already."
+        "Her nipples are stiff, and her labia are puffy and aroused. Clearly she is really turned on already."
         "You step over to your chair and sit down."
         mc.name "Alright, come here."
         $ the_person.draw_person(position = "cowgirl")
         "[the_person.title] walks over to you, then gets on your lap, her amazing tits are right in your face."
         mc.name "God your tits are fantastic."
-        "You cup one in your hand, bringing your mouth up to the other one. You quicly suck and nip at her nipple, eliciting a loud moan from [the_person.possessive_title]."
+        "You cup one in your hand, bringing your mouth up to the other one. You quickly suck and nip at her nipple, eliciting a loud moan from [the_person.possessive_title]."
         "You feel her hand on the back of your head, running her hand through your hair as you suckle her tit."
         the_person "Ahh. Okay, just gonna... do this... for a bit..."
         "[the_person.title] slowly adjusts her hips wider, until you can feel her humid groin get closer to yours, and then finally makes contact."
@@ -2018,13 +2018,13 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
         mc.name "Alright, let's get naked."
         $ the_person.strip_outfit(position = the_person.idle_pose)
         "You both quickly get undressed. You check out [the_person.possessive_title]."
-        "Her nipples are stuff, and her labia are puffy and aroused. Clearly she is really turned on already."
+        "Her nipples are stiff, and her labia are puffy and aroused. Clearly she is really turned on already."
         "You step over to your chair and sit down."
         mc.name "Alright, come here."
         $ the_person.draw_person(position = "cowgirl")
         "[the_person.title] walks over to you, then gets on your lap, her amazing tits are right in your face."
         mc.name "God your tits are fantastic."
-        "You cup one in your hand, bringing your mouth up to the other one. You quicly suck and nip at her nipple, eliciting a loud moan from [the_person.possessive_title]."
+        "You cup one in your hand, bringing your mouth up to the other one. You quickly suck and nip at her nipple, eliciting a loud moan from [the_person.possessive_title]."
         "You feel her hand on the back of your head, running her hand through your hair as you suckle her tit."
         the_person "Ahh. Okay, just gonna... do this... for a bit..."
         "[the_person.title] slowly adjusts her hips wider, until you can feel her humid groin get closer to yours, and then finally makes contact."
@@ -2032,7 +2032,7 @@ label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness
         "She groans as she starts to rub herself up against you. Her soaking wet cunt is leaking fluid as she presses her hips eagerly against you and starts to grind."
         $ the_person.change_arousal(15) #85
         "You let go of her chest with your hand and put both your hands on her ass. You grab it to use for leverage as you start to thrust yourself up against her."
-        the_person "[the_person.mc_title]! Be careful I'm... I'm alerady so... so close!"
+        the_person "[the_person.mc_title]! Be careful I'm... I'm already so... so close!"
         "Fuck it. You're sure you can make her cum more than once like this. You give her ass a smack but don't let up."
         $ the_person.change_arousal(20) #105
         the_person "Ah! I can't take it...!"
@@ -2313,7 +2313,7 @@ label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     $ mc.change_locked_clarity(30)
     $ the_person.change_arousal(20) #70
     "[the_person.title] is clumsily jiggling her tits around your cock. Thankfully her flesh is so soft it feels pretty good anyway."
-    "You reach down and grab [the_person.title]'s tits yourself. You place your hands over hers and hold them in place."
+    "You reach down and grab [the_person.title]'s tits yourself. She places her hands over yours and holds them in place."
     the_person "Stars... your thing is so warm..."
     "You squeeze down hard on her breasts and work your hips, fucking her soft cleavage. [the_person.title] moans in response."
     $ the_person.change_arousal(30)
@@ -2597,7 +2597,7 @@ label ellie_search_update_label(the_person):    #You locate the contact
     the_person "Yes sir."
     "You share a few more details of your plan with [the_person.possessive_title], then she returns to work."
     $ the_person.draw_person(position = "walking_away")
-    "You aren't sure what kind matieral you will find, going into this guy's apartment, but you are sure you will be able to find something."
+    "You aren't sure what kind material you will find, going into this guy's apartment, but you are sure you will be able to find something."
     "There is just one more piece to the puzzle you need..."
     if starbuck_is_business_partner():
         "You place a phone call to your business partner at the mall."
@@ -2615,7 +2615,7 @@ label ellie_search_update_label(the_person):    #You locate the contact
     $ mc.business.add_mandatory_crisis(ellie_search_finish)
     return
 
-label ellie_search_finish_label():    #You and Ellie sabatoge the contact
+label ellie_search_finish_label():    #You and Ellie sabotage the contact
     $ police_chief_wardrobe = wardrobe_from_xml("Cop_Wardrobe")
     $ cop_outfit = police_chief_wardrobe.get_outfit_with_name("Cop")
     $ prostitute_ward = wardrobe_from_xml("Prostitute_Wardrobe")
@@ -2637,14 +2637,14 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     "You hurry to your office. [the_person.title] is right behind you."
     $ scene_manager.add_actor(the_person, position = "sitting")
     "She sits down at your desk and starts to talk hurriedly, clearly nervous."
-    the_person "I got hime to agree to meet up tonight! He wants to meet for a quick bite, then back to his place to 'see what happens'."
+    the_person "I got him to agree to meet up tonight! He wants to meet for a quick bite, then back to his place to 'see what happens'."
     "She cringes a bit with the last part of the sentence."
     mc.name "Excellent job."
     $ scene_manager.add_actor(the_researcher, display_transform = character_center_flipped)
     "[the_researcher.possessive_title] walks into your office, carrying some electronics."
     mc.name "[the_researcher.title], thanks for coming. Did you get the equipment?"
     the_researcher "I sure did. Here's the hard drives, they have software installed to immediately begin imaging and copying any systems they get plugged into..."
-    the_researcher "And here is the wire. It should fit nicely into her ear, and with her long hair it will be basically imperceptable unless someone goes looking for it."
+    the_researcher "And here is the wire. It should fit nicely into her ear, and with her long hair it will be basically imperceptible unless someone goes looking for it."
     the_person "The wire?"
     mc.name "We are going to give you a recoding and 2 way communication device, that way we can monitor your situation and hopefully get some blackmail material that way as well."
     the_person "I see."
@@ -2661,7 +2661,7 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
         mc.name "Hello [starbuck.title]. I'm here to pick up those outfits I called about the other day."
         starbuck "Oh! The two police uniforms and one 'lady of night' costumes?"
         mc.name "That is them."
-        starbuck "Ah! I don't know what you have planend for those, but I wish I could join! You umm... have room for one more?"
+        starbuck "Ah! I don't know what you have planned for those, but I wish I could join! You umm... have room for one more?"
         mc.name "Not this time."
         starbuck "What a shame. Give me a moment I'll find them."
     else:
@@ -2684,21 +2684,22 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     $ the_person.apply_outfit(prost_outfit)
     $ the_researcher.apply_outfit(cop_outfit)
     $ scene_manager.update_scene()
-    "You check out the two girls and their outifts. Your police officer uniform seems to fit perfectly."
+    "You check out the two girls and their outfits. Your police officer uniform seems to fit perfectly."
     the_researcher "Wow, this looks just like a real uniform!"
     the_person "I umm... this is pretty umm..."
-    the_person "Wow [the_person.fname]! You look so hot. Alan is gonna fall into this for sure!"
-    the_researcher "Ahh, yah think so?"
+    the_researcher "Wow [the_person.fname]! You look so hot. Alan is gonna fall into this for sure!"
+    the_person "Ahh, yah think so?"
     mc.name "Definitely. This is going to work."
     "You step out of the dressing room with the two girls. A couple is shopping nearby, and the guy notices you, then gives you a wink and thumbs up."
     "You walk over to the checkout counter."
     $ scene_manager.add_actor(starbuck, display_transform = character_left_flipped)
     starbuck "Oh! Those turned out so good!"
     mc.name "They really did. How much do we owe you for the outfits?"
-    starbuck "They were about $100 each... OH one second, I almost forot!"
+    starbuck "They were about $100 each... OH one second, I almost forgot!"
     "[starbuck.possessive_title] quickly reaches down to a shelf behind the counter, then drops some handcuffs on the counter."
-    starbuck "The cop suites came with these. They aren't real, so there is a quick escape button on the side!"
+    starbuck "The cop suits came with these. They aren't real, so there is a quick escape button on the side!"
     mc.name "Thanks [starbuck.title]."
+    $ mc.business.change_funds(300)
     "You pay for the outfits before setting out from the sex shop."
     starbuck "Have fun everyone!"
     $ scene_manager.remove_actor(starbuck)
@@ -2714,9 +2715,11 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     the_person "Alright... here goes..."
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "[the_person.title] turns and walks way, off to meet with Alan for dinner."
+    $ scene_manager.hide_actor(the_person)
     the_researcher "Here is a receiver, push this button to talk into it, otherwise it will just receive and record."
     mc.name "Alright, let's find somewhere discreet to be, before someone realizes we aren't really cops..."
 
+    # TODO write rest of scene
     "This part is outlined. Have a scene with the head researcher in discreet while listening to Ellie have dinner."
     "Pick back up following Ellie to Alan's."
 
@@ -2737,7 +2740,7 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     the_researcher "Huh... it is like he was stalking me... he makes notes about how my social media got increasingly sexual..."
     the_researcher "What kind of production equipment? Is that what this heavy duty stuff is?"
     "As you look through the office, you are reminded on the monitor that [the_person.title] is in the next room with him..."
-    the_person "Mmm, remember the dael though, right? $100 and..."
+    the_person "Mmm, remember the deal though, right? $100 and..."
     "Alan" "Yeah yeah... I was wondering about..."
     "For now, it seems he is still trying to talk her out of charging... you aren't sure if he is suspicious, or just cheap."
     the_researcher "Oh my god... I know what this is..."
@@ -2749,9 +2752,12 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     mc.name "What is it?"
     the_researcher "The sick fuck... he was testing them on his SISTER."
     mc.name "Oh my god. What a sick fuck."
-    the_researcher "I know... thankfully he had basically zero success. He didn't realize we were combining them with the suggestability serums..."
+    the_researcher "I know... thankfully he had basically zero success. He didn't realize we were combining them with the suggestibility serums..."
     mc.name "Do you have copies of his research data?"
     the_researcher "Almost... it is still copying..."
+    $ the_person.bedroom.show_background()
+    $ scene_manager.hide_actor(the_researcher)
+    $ scene_manager.show_actor(the_person, position = "stand3")
     "Alan" "Okay, okay. $100 it is. I have the cash right here."
     the_person "Oh! That's... perfect... let me just count it real quick..."
     "Alan" "It's all there. Now get on your knees whore, I need this."
@@ -2765,6 +2771,9 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
                 mc.name "Don't worry, we'll be there in a few seconds, help is on the way [the_person.title]."
                 $ the_person.change_love(3, 80)
                 $ the_person.change_happiness(5)
+                $ the_person.home.show_background()
+                $ scene_manager.hide_actor(the_person)
+                $ scene_manager.show_actor(the_researcher)
                 "You look at [the_researcher.title]."
                 mc.name "We need to get in there. Let these things keep copying... we might have to improvise a little."
                 the_researcher "Ok, I'm sure we can still get the information we need..."
@@ -2783,9 +2792,13 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
                 "Alan" "Yeah, it IS big, ain't it?"
                 the_person "Oh uhh, yeah. So big..."
                 "Alan" "That's right. Now choke on it whore."
+                $ scene_manager.update_actor(the_person, position = "blowjob")
                 "Through the receiver, you listen as blowjob noises begin."
                 "You can hear [the_person.title] lips smack and the soft sounds of sucking start coming through the received."
                 "Alan" "Ohh, that's it. Swallow it all bitch."
+                $ the_person.home.show_background()
+                $ scene_manager.hide_actor(the_person)
+                $ scene_manager.show_actor(the_researcher)
                 mc.name "Alright, she's buying us some extra time, let's make sure we get everything we need."
                 the_researcher "Poor [the_person.fname]... she's taking one for the team, so to speak..."
                 "You continue going through the research notes, while you hear the blowjob noises continue on the other side of the receiver..."
@@ -2799,7 +2812,7 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
                 mc.name "Get your handcuffs ready."
                 the_researcher "They aren't real?"
                 mc.name "Yeah, but HE doesn't know that."
-                "Alan" "Oh fuck, that's it bitch! Get ready I'm going to cum all over that poutty little face of yours!"
+                "Alan" "Oh fuck, that's it bitch! Get ready I'm going to cum all over that pouty little face of yours!"
                 "You hear a loud pop in the receiver you assume is the contact pulling out of [the_person.title]'s mouth..."
                 "Alan" "Fuck! OH FUCK YEAH!"
                 $ cum_on_face_ntr(the_person)
@@ -2820,7 +2833,8 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
         mc.name "Yeah, but HE doesn't know that."
     "You step out of the office and next to the bedroom door."
     "You count down from 3, then kick the door open as loudly as possible."
-    $ scene_manager.add_actor(the_person, display_transform = character_left_flipped, position = "standing_doggy")
+    $ the_person.bedroom.show_background()
+    $ scene_manager.show_actor(the_person, display_transform = character_left_flipped, position = "standing_doggy")
     mc.name "POLICE! Stop right there!!!"
     "[the_person.possessive_title] is bent over the contact, his cock in her hand."
     "Alan" "Wha... what!?!"
@@ -2847,7 +2861,7 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     "Alan" "It isn't what you think!"
     mc.name "Isn't it? No matter. We'll be taking that with us. Along with the production equipment."
     "Alan" "Hey! You can't steal that!"
-    mc.name "Can't we? Are you telling me you acquired it legitmately? What exactly are you going to do about it?"
+    mc.name "Can't we? Are you telling me you acquired it legitimately? What exactly are you going to do about it?"
     "The contact turns red in the face as he realizes just how much shit he is in. Stolen equipment, unethical research, you've got him by the balls."
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     the_person "That's right! And making it look like I was the one who did it!"
@@ -2858,15 +2872,20 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     "Alan" "You... you aren't going to release any of that data... are you?"
     mc.name "Maybe. Maybe not. We'll see. But secrets carry a price. Be ready for it."
     "The contact just looks down. You look at the two girls and motion for them to follow you out of the room."
+    $ the_person.home.show_background()
     "You leave him there, cuffed to a chair, going back to his office."
     if ellie_ntr:
         the_person "Let me just... wash up really quick..."
+        $ scene_manager.hide_actor(the_person)
         $ the_person.apply_outfit(prost_outfit)
         $ scene_manager.update_scene()
     $ scene_manager.update_actor(the_researcher, position = "standing_doggy")
     "[the_researcher.possessive_title] checks the computer."
     the_researcher "Looks like the drives are done copying. We should have everything we need."
     "She unplugs the drives and collects them. You look at the production equipment."
+    if ellie_ntr:
+        $ scene_manager.show_actor(the_person, emotion = "happy")
+        "Your [the_person.possessive_title] walks back in, with a smile."
     mc.name "Let's take this with us."
     the_person "If you ever get caught with it, there could be serious legal implications."
     mc.name "Then let's not get caught."
@@ -2895,7 +2914,7 @@ label ellie_search_finish_label():    #You and Ellie sabatoge the contact
     mc.name "Sure."
     if ellie_ntr:
         the_person "I know it is important that we got all the stuff that we did but... I really wish you hadn't let things go so far with me and Alan."
-        the_person "It was awful... the whole time I just kept telling myself... just pretend it's [the_person.mc_name]..."
+        the_person "It was awful... the whole time I just kept telling myself... just pretend it's [the_person.mc_title]..."
         the_person "I don't know if I can ever do that again... please don't make me do that again, okay?"
     else:
         the_person "Thank you for stepping in when you did. I... I really thought I was going to have to suck that man's dick."

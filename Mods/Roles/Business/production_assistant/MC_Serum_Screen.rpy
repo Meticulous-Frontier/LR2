@@ -169,21 +169,6 @@ screen screen_personal_serum_button(trait):
     text box_text size 28 xanchor 0.5 xalign 0.5 style "textbutton_text_style" ypos -80
 
 
-    # use supplemental_text_info(proj)
-
-screen supplemental_text_info(proj):
-    python:
-        supplemental_text = ""
-        if mc.business.IT_project_in_progress != None:
-            if proj == mc.business.IT_project_in_progress[0]:
-                supplemental_text = "In Progress"
-        if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():
-            supplemental_text = "{color=#ff0000}" + proj.requirement() + "{/color}"
-        elif proj not in mc.business.IT_projects and not  proj.requirement():
-            supplemental_text = "{color=#ff0000} Unknown Req {/color}"
-
-    text supplemental_text  style "menu_text_style" size 16 xanchor 0.5 xalign 0.5 ypos -75
-
 screen mc_serum_tooltip(the_trait):
     $ hint_height = 150
     $ window_height = hint_height

@@ -24,6 +24,37 @@ init -1 python:
             #self.req_sluttiness = req_sluttiness
             self.tier = tier
 
+        @property
+        def identifier(self):
+            if not hasattr(self, "_identifier"):
+                self._identifier = hashlib.md5(self.name + self.category).hexdigest()
+            return self._identifier
+
+        def __cmp__(self, other):
+            if isinstance(self, other.__class__):
+                if self.category == other.category and self.name == other.name:
+                    return 0
+
+            if self.__hash__() < other.__hash__():
+                return -1
+            else:
+                return 1
+
+        # add side_quest hash function
+        def __hash__(self):
+            return hash((self.category, self.name))
+
+        def __eq__(self, other):
+            if isinstance(self, other.__class__):
+                return self.category == other.category and self.name == other.name
+            return False
+
+        def __ne__(self, other):
+            if isinstance(self, other.__class__):
+                return self.category != other.category and self.name != other.name
+            return True
+
+
         def apply_policy(self):
             mc.business.active_IT_projects.append(self)
             if self.on_apply_function is not None:

@@ -18,7 +18,7 @@ label bent_over_breeding_double_orgasm(the_girl, the_location, the_object):
         $ the_girl.change_happiness(-5)
         "You sigh contentedly and enjoy the post-orgasm feeling of relaxation."
     else:
-        "You pull back on [the_girl.possessive_title]'s hips and drive your cock as deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
+        "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
         "You feel her pussy convulsing around your dick as she also starts to orgasm."
 
         if the_girl.wants_creampie():

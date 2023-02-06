@@ -86,7 +86,12 @@ init -1 python:
 
     Business.IT_project_in_progress = None
 
-    Business.IT_partial_projects = {}
+    def partial_IT_projects(self):
+        if not hasattr(self, "_partial_IT_projects"):
+            self._partial_IT_projects = dict()
+        return self._partial_IT_projects
+
+    Business.IT_partial_projects = property(partial_IT_projects, None, None, "Partially completed IT Projects")
 
     def set_active_IT_project(project):
         if mc.business.IT_project_in_progress != None:
