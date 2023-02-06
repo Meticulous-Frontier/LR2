@@ -122,6 +122,7 @@ init 2 python:
         the_blood_2.colour = [.71, .1, .1, 0.6]
         the_blood_2.layer = 0
         the_person.outfit.add_accessory(the_blood_2)
+        the_person.break_taboo("vaginal_sex")
         the_person.event_triggers_dict["given_virginity"] = True
         return
 
