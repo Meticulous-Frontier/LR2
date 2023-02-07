@@ -68,14 +68,14 @@ init -1 python:
         if not self.wearing_bra():
             return False
 
-        return _get_transparency_factor(x for x in self.upper_body if x.layer >= 2) < 1.0
+        return _get_transparency_factor(self.upper_body, overwear = True) < 1.0
     Outfit.bra_covered = bra_covered_enhanced
 
     def panties_covered_enhanced(self):
         if not self.wearing_panties():
             return False
 
-        return _get_transparency_factor(x for x in self.lower_body if x.layer >= 2) < 1.0
+        return _get_transparency_factor(self.lower_body, overwear = True) < 1.0
     Outfit.panties_covered = panties_covered_enhanced
 
     def remove_random_upper_enhanced(self, top_layer_first = False, do_not_remove = False):
@@ -319,10 +319,10 @@ init -1 python:
     Outfit.is_within_dress_code = is_within_dress_code
 
     # Calculates effective visibility, where 1.0 is fully visible (66% opacity)
-    def _get_transparency_factor(iter):
+    def _get_transparency_factor(cloth_list, overwear = False):
         transparency = 1.0
-        for cloth in iter:
-            if cloth.hide_below and not (cloth.half_off and cloth.half_off_gives_access):
+        for cloth in cloth_list:
+            if cloth.hide_below and not (cloth.half_off and cloth.half_off_gives_access) and (not overwear or cloth.layer >= 2):
                 transparency *= 1 - cloth.get_alpha()
 
         factor = (transparency - .05)/(.33 - .05) # 5% transparency is opaque, 33% transparency is visible
