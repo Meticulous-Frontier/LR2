@@ -1528,6 +1528,7 @@ label ellie_dinner_date_label():
     mc.name "I can see myself out. Have a good night."
     the_person "Goodnight [the_person.mc_title]! I'll see you at work tomorrow..."
     $ clear_scene()
+    $ downtown.show_background()
     "You step out of [the_person.possessive_title]'s apartment."
     $ the_person.add_unique_on_room_enter_event(ellie_lingerie_shopping)
     return
