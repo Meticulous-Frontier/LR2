@@ -670,6 +670,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 2 and mc.energy > 30:
                             $ mc.recently_orgasmed = False
                             $ allow_transitions = False
+                            if use_condom:  # you already determined you are going to fuck her with condom
+                                $ mc.condom = True
                             "Despite your orgasm, because of your Energy Regeneration Serum, your cock quickly gets hard again, allowing you to continue [position_choice.verbing] [the_person.possessive_title] if you want."
                     if position_choice.requires_hard and mc.recently_orgasmed:
                         "Your post-orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
