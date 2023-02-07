@@ -369,7 +369,7 @@ label ellie_stephanie_teamup_progression_scene_scene_0(the_group, scene_transiti
     "You take the tablet from [the_person.possessive_title]."
     mc.name "Alright, here you go [pick_1.title]. The effects should happen fairly quickly, so I want you to try and be mindful of what you are feeling."
     "You hand the tablet to [pick_1.possessive_title]. She swallows it with a glass of water."
-    the_researcher "Alright, while we are waiting, let's go over a quick questionaire. We can compare them between the before and after."
+    the_researcher "Alright, while we are waiting, let's go over a quick questionnaire. We can compare them between the before and after."
     pick_1 "Okay..."
     "You listen as [the_researcher.possessive_title] starts to ask some standard survey questions... It goes on for a while..."
     $ fetish_serum_increase_opinion(nano_opinion_list, 2, pick_1)

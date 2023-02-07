@@ -707,7 +707,7 @@ label threesome_round(the_person_one, the_person_two, position_choice, object_ch
         $ mc.reset_arousal()
         if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 2 and mc.energy > 30:
             $ mc.recently_orgasmed = False
-            "Despite your orgasm, becuase of your Energy Regeneration Serum, your cock stays hard, allowing you to continue."
+            "Despite your orgasm, because of your Energy Regeneration Serum, your cock quickly gets hard again, allowing you to continue."
         else:
             $ mc.recently_orgasmed = True
         $ report_log["guy orgasms"] += 1
