@@ -286,7 +286,7 @@ init 5 python:
         person.add_situational_obedience("sex_object",picked_object.obedience_modifier, picked_object.name + " " + position.verbing)
         return picked_object
 
-    def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False, condition = Condition_Type("Empty")):
+    def build_round_choice_menu(person, position_choice, position_locked, object_choice, ignore_taboo = False, condition = Condition_Type("Empty"), allow_transitions = True):
         option_list = []
         option_list.append("Round Choices")
         if position_choice is not None:
@@ -296,7 +296,7 @@ init 5 python:
                 option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
 
-                    if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and condition.filter_condition_positions(position):
+                    if allow_transitions and allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and condition.filter_condition_positions(position):
                         appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
@@ -304,7 +304,7 @@ init 5 python:
                 # allow transition to positions with same traits and skill requirements
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
-                        if allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag and condition.filter_condition_positions(position):
+                        if allow_transitions and allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag and condition.filter_condition_positions(position):
                             appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
 
@@ -468,6 +468,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
     $ guy_orgasms_before_control = 0
+    $ allow_transitions = True
     $ ask_for_condom = skip_condom
     $ ask_for_threesome = False
     $ use_condom = mc.condom if skip_condom else False
@@ -553,9 +554,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         if round_choice is None: #If there is no set round_choice
             #TODO: Add a variant of this list when the girl is in control to ask if you want to resist or ask/beg for something.
-            call screen enhanced_main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo, condition = condition)]))
+            call screen enhanced_main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo, condition = condition, allow_transitions = allow_transitions)]))
             $ round_choice = _return #This gets the players choice for what to do this round.
 
+        $ allow_transitions = True
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue" or round_choice == "early_orgasm":
             if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignore all of that
@@ -667,6 +669,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if mc.recently_orgasmed:
                         if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 2 and mc.energy > 30:
                             $ mc.recently_orgasmed = False
+                            $ allow_transitions = False
                             "Despite your orgasm, because of your Energy Regeneration Serum, your cock quickly gets hard again, allowing you to continue [position_choice.verbing] [the_person.possessive_title] if you want."
                     if position_choice.requires_hard and mc.recently_orgasmed:
                         "Your post-orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
