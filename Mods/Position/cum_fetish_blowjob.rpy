@@ -194,9 +194,8 @@ label orgasm_cum_fetish_blowjob(the_girl, the_location, the_object):
     "You push her back down, hard. [the_girl.possessive_title] keeps her mouth open wide and fits you all the way in, quivering as she climaxes."
     mc.name "A cock sleeve like you deserves to have her throat stuffed when she cums."
     if the_girl.get_opinion_score("being submissive") > 0:
-        if the_girl.sluttiness > the_girl.sluttiness and the_girl.sluttiness < cum_fetish_blowjob.slut_cap:
+        if the_girl.sluttiness < cum_fetish_blowjob.slut_cap:
             $ the_girl.change_slut(the_girl.get_opinion_score("being submissive")) #If she likes being submissive this makes her cum and become sluttier super hard.
-            $ the_girl.change_slut(-the_girl.get_opinion_score("being submissive"))
         $ the_girl.change_obedience(2*the_girl.get_opinion_score("being submissive"))
         "[the_girl.possessive_title] closes her eyes tight. You can feel her throat spasm around your shaft in time with her orgasmic contractions."
         if the_girl.outfit.vagina_visible():
