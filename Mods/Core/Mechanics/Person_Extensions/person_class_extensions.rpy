@@ -2884,7 +2884,7 @@ init -1 python:
     Person.story_other_list = story_other_list
     Person.story_character_description = ""
 
-    def person_tag_sex_record(self, record_class = ""):    #Tag a sex record for later comparision
+    def person_tag_sex_record(self, record_class = ""):    #Tag a sex record for later comparison
         if record_class == "":
             return False
         tag_string = "tag_sex_record_" + record_class
