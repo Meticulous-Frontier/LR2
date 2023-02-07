@@ -1183,7 +1183,7 @@ label anal_fetish_erica_intro_label():
     "[the_person.possessive_title] leans forward and whispers in your ear."
     the_person "I want you to cum in my ass... okay?"
     mc.name "Mmm, okay, let's see what you can do."
-    call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), allow_continue = False) from _anal_fetish_erica_intro_01
+    call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _anal_fetish_erica_intro_01
     $ add_anal_fetish(the_person)
     $ the_person.arousal = 60
     "When you finish, you quickly get up."

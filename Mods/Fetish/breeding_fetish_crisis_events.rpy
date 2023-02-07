@@ -487,7 +487,7 @@ label breeder_cowgirl_wakeup_label(the_person):
     "[the_person.possessive_title] moans during one slow stroke."
     "You decide to lay back and enjoy the ride."
     # call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBV50
-    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_bed(), skip_intro = True) from _call_sex_description_breeder_wakeup__01
+    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _call_sex_description_breeder_wakeup__01
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
     if the_person == mom:
         "[the_person.possessive_title] looks at you and smiles."
