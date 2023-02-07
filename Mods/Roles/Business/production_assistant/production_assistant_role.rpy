@@ -206,7 +206,7 @@ label mc_serum_review_intro_label(the_person):
     mc.name "Hello [the_person.title]. Can I have one moment?"
     the_person "Oh hey [the_person.mc_title]. Sure."
     mc.name "I wanted to let you know, I think that serum you gave me the other day was successful. I definitely felt more energy after."
-    mc.name "I am curious... is this something that I could take regularly? I would like to have the option atleast."
+    mc.name "I am curious... is this something that I could take regularly? I would like to have the option at least."
     the_person "That's great! Yeah I've been thinking about that too."
     the_person "In the medical world, we use a medication's half life to determine dosing requirements."
     the_person "It seem like a small, daily dose of these serums might be ideal in order to keep a consistent effect."
@@ -285,7 +285,7 @@ label mc_serum_review_quantity_label(the_person):
         else:
             the_person "Right now, we can only safely give you one serum at a time."
             the_person "If we work on researching and mastering production traits, we could probably give you more than one serum at the same time."
-            the_person "Spefically, look at the Improved Serum Production trait. I think there is potential there."
+            the_person "Specifically, look at the Improved Serum Production trait. I think there is potential there."
     elif mc_serum_max_quantity() == 2:
         $ the_serum = find_in_list(lambda x: x.name == "Advanced Serum Production", list_of_traits)
         if the_serum.mastery_level >= 3.0:
@@ -293,7 +293,7 @@ label mc_serum_review_quantity_label(the_person):
         else:
             the_person "Right now, we can only safely give you two serums at a time."
             the_person "If we work on researching and mastering production traits, we could probably give you more serums at the same time."
-            the_person "Spefically, look at the Advanced Serum Production trait. I think there is potential there."
+            the_person "Specifically, look at the Advanced Serum Production trait. I think there is potential there."
     elif mc_serum_max_quantity() == 3:
         $ the_serum = find_in_list(lambda x: x.name == "Futuristic Serum Production", list_of_traits)
         if the_serum.mastery_level >= 3.0:
@@ -301,7 +301,7 @@ label mc_serum_review_quantity_label(the_person):
         else:
             the_person "Right now, we can safely give you three serums at a time."
             the_person "If we work on researching and mastering production traits, we could probably give you even more serums at the same time."
-            the_person "Spefically, look at the Futuristic Serum Production trait. I think there is potential there."
+            the_person "Specifically, look at the Futuristic Serum Production trait. I think there is potential there."
 
     else:
         the_person "Right now, we can safely give you four serums at a time."
@@ -418,10 +418,10 @@ label prod_assistant_unlock_auras_label(the_person):
     $ mc.business.event_triggers_dict["mc_serum_aura_unlocked"] = True
     the_person "Hey [the_person.mc_title]. I heard about the essential oils. I'm sure they will help out with business profitability!"
     the_person "Dealing with them made me get curious a bit. Would it be possible to replicate the supposed results of essential oils?"
-    the_person "Essential oils are obviously umm... shall we say... bogus... but do you know what aren't? Pheremones."
+    the_person "Essential oils are obviously umm... shall we say... bogus... but do you know what aren't? Pheromones."
     mc.name "Right, the natural chemicals a person puts out that can act as signal markers to people around them."
     the_person "Exactly. Science has done some studies on their effects on various mammals, but effects on humans are notoriously hard to conduct studies on..."
-    the_person "Anyway, with some of the research we've been doing on various pheremones, I think it is possible to make a serum for you that would modify your personal pheremone signature."
+    the_person "Anyway, with some of the research we've been doing on various pheromones, I think it is possible to make a serum for you that would modify your personal pheremone signature."
     if mc_serum_aura_obedience.get_unlocked():
         the_person "I have a prototype for one that I think might make women near you... how do you say... more obedient."
         mc.name "That does sound useful..."
@@ -443,12 +443,12 @@ label prod_assistant_unlock_cum_label(the_person):
     mc.name "Hello [the_person.title]."
     the_person "Good day [the_person.mc_title]. I have a question for you."
     mc.name "Go ahead?"
-    the_person "Did you know, there was a study done once, that women who regulary get creampied by their partners are less depressed and are less likely to attempt suicide?"
+    the_person "Did you know, there was a study done once, that women who regularly get creampied by their partners are less depressed and are less likely to attempt suicide?"
     mc.name "I umm... isn't that an urban myth?"
     the_person "Nope! It was an actual study. The researchers hypothesize that semen contains hormones and chemicals that, when absorbed by women vaginally... or anally or orally really..."
-    the_person "Will increase seratonin and other hormone levels."
+    the_person "Will increase serotonin and other hormone levels."
     mc.name "I see... feeling depressed?"
-    the_person "Ah, not particularly! Although I wouldn't be against a prevantative dose sometime..."
+    the_person "Ah, not particularly! Although I wouldn't be against a preventative dose sometime..."
     $ mc.change_locked_clarity(20)
     the_person "Anyway, I got to looking at the pathways for hormones in men that involve how semen itself is produced."
     the_person "I think I have a viable method for altering these hormones in semen, allowing for a customization of the hormonal properties."
@@ -480,7 +480,7 @@ label prod_assistant_performance_upgrade_label(the_person):
     the_person "A recent production equipment upgrade has allowed me to increase the potency of your performance related serums."
     the_person "The equipment that allows us to produce more complicated serums will also allow me to improve the entire category of effects."
     mc.name "Excellent."
-    "All performance related personal serums haved increased in tier by 1!"
+    "All performance related personal serums have increased in tier by 1!"
     $ mc.business.event_triggers_dict["mc_serum_energy_tier"] = 1
     $ mc.business.set_event_day("prod_assistant_advance", override = True)
     return
@@ -529,7 +529,7 @@ label prod_assistant_cum_upgrade_label(the_person):
     elif the_person.opinion_score_bareback_sex() > 0:
         the_person "Believe me, I'd love to hop on this thing raw and go for a ride, but I really do need an uncontaminated sample."
     else:
-        the_person "Sorry, I need an uncomtaminated sample."
+        the_person "Sorry, I need an uncontaminated sample."
     $ the_person.draw_person(position = the_person.idle_pose)
     "She stands up and starts to push you back onto the desk."
     the_person "Lay back. No reason we can't both have a good time doing this."
@@ -573,10 +573,10 @@ label prod_assistant_cum_upgrade_label(the_person):
     $ the_person.have_orgasm(the_position = "cowgirl")
     $ climax_controller.do_clarity_release(the_person)
     $ mc.arousal = 0
-    "[the_person.possessive_title] holds herself in place until you are comletely spent."
+    "[the_person.possessive_title] holds herself in place until you are completely spent."
     the_person "Alright... let me do this..."
     "She carefully climbs off you, then produces a small sterile sample cup."
-    "She pulls your condom off, being cautious not to spill any, and trasnfers it over to the cup."
+    "She pulls your condom off, being cautious not to spill any, and transfers it over to the cup."
     $ the_person.draw_person(position = the_person.idle_pose)
     the_person "Ah ha! That should do it."
     mc.name "So... you think this will increase the potency of my serums?"
