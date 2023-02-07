@@ -144,12 +144,12 @@ label lazy_morning_crisis_action_label():
                 if the_person.pubes_style == shaved_pubes:
                     "When your hand slides over her smooth mound, she stops you."
                 else:
-                    "When your hand touches her pubic hair, she stops you."
+                    "When your hand touches her [the_person.pubes_description], she stops you."
             else:
                 if the_person.pubes_style == shaved_pubes:
                     "You slide your hand further down, under her clothes. When your hand slides over her smooth mound, she stops you."
                 else:
-                    "You slide your hand further down, under her clothes. When your hand touches her pubic hair, she stops you."
+                    "You slide your hand further down, under her clothes. When your hand touches her [the_person.pubes_description] pussy, she stops you."
             $ the_person.call_dialogue("touching_vagina_taboo_break")
             $ the_person.break_taboo("touching_vagina")
             "You move your fingers further down along [the_person.title]'s slit."
@@ -158,12 +158,12 @@ label lazy_morning_crisis_action_label():
                 if the_person.pubes_style == shaved_pubes:
                     "[the_person.title] arches her back when your hand reaches her smooth mound."
                 else:
-                    "[the_person.title] arches her back when your hand reaches her pubic hair."
+                    "[the_person.title] arches her back when your hand reaches her [the_person.pubes_description] pussy."
             else:
                 if the_person.pubes_style == shaved_pubes:
                     "You slide your hand further down, under her clothes. [the_person.title] arches her back when your hand reaches her smooth mound."
                 else:
-                    "You slide your hand further down, under her clothes. [the_person.title] arches her back when your hand reaches her pubic hair."
+                    "You slide your hand further down, under her clothes. [the_person.title] arches her back when your hand reaches her [the_person.pubes_description] pussy."
         "You slide a finger between [the_person.possessive_title]'s labia, rubbing all along her slit."
         "She moans quietly as you slide two fingers into her cunt."
         "As your fingers push deep inside of her, she momentarily forgets to stroke you. You remind her by gently thrusting yourself into her hand and she immediately starts stroking you again."
