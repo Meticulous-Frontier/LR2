@@ -120,6 +120,10 @@ init 3303 python:
 # init jobs after rooms are created
 label instantiate_stripclub_manager_job(stack = []):
     python:
+        # mark them as employees
+        stripclub_manager_role.looks_like = [employee_role]
+        stripclub_mistress_role.looks_like = [employee_role]
+
         stripclub_manager_job = Job("Manager", stripclub_manager_role, strip_club, work_days = [0,1,2,3,4,5,6], work_times = [2,3,4],
             hire_function = stripclub_manager_hire, quit_function = stripclub_manager_quit,
             mandatory_duties = [daily_serum_dosage_duty])

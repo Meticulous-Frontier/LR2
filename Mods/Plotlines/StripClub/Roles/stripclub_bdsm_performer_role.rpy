@@ -47,6 +47,9 @@ init 10 python:
 
 label instantiate_bdsm_performer_job(stack = []):
     python:
+        # mark them as employees
+        stripclub_bdsm_performer_role.looks_like = [employee_role]
+
         stripclub_bdsm_performer_job = Job("BDSM Performer", stripclub_bdsm_performer_role, bdsm_room, strip_club_hire_bdsm_performer, strip_club_fire_bdsm_performer, work_days = [0,1,2,3,4,5,6], work_times = [3,4],
             mandatory_duties = [daily_serum_dosage_duty])
     $ execute_hijack_call(stack)

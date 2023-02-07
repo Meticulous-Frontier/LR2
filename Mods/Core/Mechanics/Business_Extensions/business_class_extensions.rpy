@@ -291,16 +291,17 @@ init -1 python:
                 return police_chief_uniform_wardrobe
             if person.job == stripper_job: # base game stripper
                 return stripclub_wardrobe
-            if person.job == stripclub_stripper_job or person.has_role(stripclub_stripper_role): # stripclub bought stripper
-                return business.stripper_wardrobe
-            if person.job == stripclub_waitress_job or person.has_role(stripclub_waitress_role):
-                return business.waitress_wardrobe
-            if person.job == stripclub_bdsm_performer_job or person.has_role(stripclub_bdsm_performer_role):
-                return business.bdsm_wardrobe
-            if person.job == stripclub_mistress_job or person.has_role(stripclub_mistress_role):
-                return business.mistress_wardrobe
-            if person.job == stripclub_manager_job or person.has_role(stripclub_manager_role):
-                return business.manager_wardrobe
+            if hasattr(plotline, "strip_club"):
+                if person.job == stripclub_stripper_job or person.has_role(stripclub_stripper_role): # stripclub bought stripper
+                    return business.stripper_wardrobe
+                if person.job == stripclub_waitress_job or person.has_role(stripclub_waitress_role):
+                    return business.waitress_wardrobe
+                if person.job == stripclub_bdsm_performer_job or person.has_role(stripclub_bdsm_performer_role):
+                    return business.bdsm_wardrobe
+                if person.job == stripclub_mistress_job or person.has_role(stripclub_mistress_role):
+                    return business.mistress_wardrobe
+                if person.job == stripclub_manager_job or person.has_role(stripclub_manager_role):
+                    return business.manager_wardrobe
             if person.has_role(maid_role) or person.job in [maid_hotel_job, maid_hotel_job2]:
                 return maid_wardrobe
             if person.job == prostitute_job:

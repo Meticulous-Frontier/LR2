@@ -11,7 +11,7 @@ init 2 python:
         if the_person.has_role("College Intern") and not the_person.location == university:
             return True
 
-        return the_person.has_role([employee_role, stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_mistress_role, stripclub_manager_role])
+        return the_person.has_role(employee_role)
 
 
     def replace_work_spank_opportunity_requirement():

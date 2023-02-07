@@ -254,12 +254,13 @@ init -1 python:
                     self.event_triggers_dict["gym_pose"] = pose
                 return pose
 
-        if self.has_role(caged_role):
-            pose = self.event_triggers_dict.get("bdsm_room_pose", None)
-            if not pose: # store preferred position in bdsm room (prevent switching on hover)
-                pose = renpy.random.choice(["cowgirl", "kneeling1", "blowjob"])
-                self.event_triggers_dict["bdsm_room_pose"] = pose
-            return pose
+        if hasattr(plotline, "strip_club"): # TODO: handle within role itself
+            if self.has_role(caged_role):
+                pose = self.event_triggers_dict.get("bdsm_room_pose", None)
+                if not pose: # store preferred position in bdsm room (prevent switching on hover)
+                    pose = renpy.random.choice(["cowgirl", "kneeling1", "blowjob"])
+                    self.event_triggers_dict["bdsm_room_pose"] = pose
+                return pose
         return self._idle_pose
 
     def set_person_idle_pose(self, value):
@@ -1894,7 +1895,10 @@ init -1 python:
     Person.is_employee = is_employee
 
     def is_strip_club_employee(self):
-        return get_strip_club_foreclosed_stage() >= 5 and self.has_role([stripper_role, stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role])
+        if hasattr(plotline, "strip_club"):
+            if get_strip_club_foreclosed_stage() >= 5 and self.has_role([stripper_role, stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role]):
+                return True
+        return False
     Person.is_strip_club_employee = is_strip_club_employee
 
     def only_normal_employee(self):

@@ -16,6 +16,30 @@ init 5 python:
             return "Not enough cash"
         return True
 
+    def update_stripclub_strippers():
+        # create new set of stripper characters
+        for person in stripclub_strippers[:]:   #use copy of array
+            person.job.quit_function = stripper_quit # override quit function to prevent new generation
+            person.quit_job()
+            person.remove_person_from_game()
+
+        # make sure we have the original quit_function on the stripper_job
+        stripper_job.quit_function = stripper_replace
+
+        for i in __builtin__.range(0,4):
+            person = create_stripper()
+
+        # make sure one of the strippers an alpha-personality (simplifies stripclub story-line)
+        alpha_stripper = get_random_from_list([x for x in stripclub_strippers if x.age >= 25 and not x.personality == alpha_personality])
+        if alpha_stripper:
+            alpha_stripper.original_personality = alpha_stripper.personality
+            alpha_stripper.personality = alpha_personality
+            alpha_stripper.charisma = 5
+            alpha_stripper.int = 6
+            alpha_stripper.update_opinion_with_score(2, "taking control", False)
+            alpha_stripper.update_opinion_with_score(-1, "being submissive", False)
+        return
+
     def calculate_stripper_salary(person):
         shifts = person.event_triggers_dict.get("strip_club_shifts", 2)
         tit_modifier = 10 - (__builtin__.abs(5 - Person.rank_tits(person.tits)))   # optimal size is DD-Cup

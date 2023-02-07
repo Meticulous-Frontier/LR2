@@ -24,6 +24,9 @@ init 3304 python:
 
 label instantiate_waitress_job(stack = []):
     python:
+        # mark them as employees
+        stripclub_waitress_role.looks_like = [employee_role]
+
         stripclub_waitress_job = Job("Waitress", stripclub_waitress_role, strip_club, strip_club_hire_waitress, strip_club_fire_waitress, work_days=[0,1,2,3,4,5,6], work_times = [3,4],
             mandatory_duties = [daily_serum_dosage_duty])
     $ execute_hijack_call(stack)
