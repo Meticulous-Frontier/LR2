@@ -8,7 +8,7 @@ init 5 python:
     # override default strip_club show requirement
     def strip_club_show_requirement_enhanced():
         # check available strippers in club (not possible strippers)
-        if __builtin__.len([x for x in stripclub_strippers if x in mc.location.people]) == 0:
+        if not any(x in mc.location.people for x in stripclub_strippers):
             return False
         if time_of_day in [0,1,2]:
             return "Too early for performances"

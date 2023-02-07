@@ -16,14 +16,6 @@ default plotline.strip_club.decision_day = None
 default plotline.strip_club.foreclosed_countdown = False
 
 init 2 python:
-    def init_strip_club_mod(action_mod):
-        # init stripclub daily serum attributes
-        mc.business.strippers_serum = None
-        mc.business.waitresses_serum = None
-        mc.business.bdsm_performers_serum = None
-        mc.business.manager_serum = None
-        return
-
     def get_strip_club_foreclosed_stage():
         return plotline.strip_club.foreclosed_stage
 
@@ -33,7 +25,7 @@ init 2 python:
         return
 
     def strip_club_is_closed():
-        return strip_club.name == "Foreclosed" or (get_strip_club_foreclosed_stage() > 0 and get_strip_club_foreclosed_stage() < 5)
+        return strip_club.name == "Foreclosed" or (0 < get_strip_club_foreclosed_stage() < 5)
 
     def get_strip_club_foreclosed_last_action_day():
         return plotline.strip_club.foreclosed_last_action_day
@@ -42,19 +34,18 @@ init 2 python:
         if time_of_day >= 3:
             return False # Don't trigger foreclosed event while strip club is open
         if get_strip_club_foreclosed_stage() != 0:
-            return False
+            return "Plotline started"
         if plotline.strip_club.foreclosed_countdown:
+            return "Plotline started"
+        if "sarah_epic_tits_progress" in globals() and sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
-        if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
-            return False
-        if cousin.event_triggers_dict.get("blackmail_level", 0) < 2:
+        if cousin.event_triggers_dict.get("blackmail_level", -1) < 2:
             return False
         if cousin not in stripclub_strippers:
             return False
-        if mc.business.has_funds(60000):
-            if cousin.event_triggers_dict.get("seen_cousin_stripping", False) == True or cousin.event_triggers_dict.get("blackmail_level", -1) >= 2:
-                return True
-        return False
+        if not mc.business.has_funds(60000):
+            return "Not enough money"
+        return True
 
     def cousin_talk_about_strip_club_requirement(person):
         if not person.location in [cousin_bedroom]:
@@ -63,7 +54,7 @@ init 2 python:
 
     def starbuck_talk_about_strip_club_requirement(person):
         if get_strip_club_foreclosed_stage() == 1:
-            if day > get_strip_club_foreclosed_last_action_day() + 2:
+            if day >= get_strip_club_foreclosed_last_action_day() + TIER_1_TIME_DELAY:
                 if starbuck in sex_store.people:
                     return True
         return False
@@ -71,7 +62,7 @@ init 2 python:
     def strip_club_foreclosed_countdown_requirement(start_day):
         if time_of_day >= 3:
             return False # Don't trigger foreclosed event while strip club is open
-        if sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
+        if "sarah_epic_tits_progress" in globals() and sarah_epic_tits_progress() == 1: # don't start while Sarah epic tits event in progress
             return False
         if cousin.event_triggers_dict.get("blackmail_level", 0) < 2:
             return False
@@ -102,8 +93,9 @@ init 2 python:
         return
 
     strip_club_foreclosed_mod_action = ActionMod("Strip Club Story Line", strip_club_foreclosed_event_requirement, "club_foreclosed_event_label",
-        menu_tooltip = "At a certain point the strip club is closed and you get the chance to buy it.", category = "Misc",
-        initialization = init_strip_club_mod, is_mandatory_crisis = True)
+        menu_tooltip = "At a certain point the strip club is closed and you get the chance to buy it.", category = "Misc", is_mandatory_crisis = True)
+
+    game_hints.append(Hint("The Strip Club is in financial trouble", "The strip club may be closing soon. Make sure you have $60,000 to buy it!", "strip_club_foreclosed_event_requirement() is not False", "get_strip_club_foreclosed_stage() != 0"))
 
 label club_foreclosed_event_label():
     # delay the actual shutdown for 10 to 16 days after initial requirements are met.

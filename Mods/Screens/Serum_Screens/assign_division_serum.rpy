@@ -37,8 +37,8 @@ init 2:
             ["Human Resources", mc.business, "h_serum"]
         ]
         python:
-            if "strip_club" in plotline:
-                if plotline.strip_club.foreclosed_stage >= 5 and not ["Strippers", mc.business, "strippers_serum"] in division_serums:
+            if "strip_club" in plotline and plotline.strip_club.foreclosed_stage >= 5:
+                if not ["Strippers", mc.business, "strippers_serum"] in division_serums:
                     division_serums.append(["Strippers", mc.business, "strippers_serum"])
                 if strip_club_waitress_count() > 0 and not ["Waitresses", mc.business, "waitresses_serum"] in division_serums:
                     division_serums.append(["Waitresses", mc.business, "waitresses_serum"])

@@ -62,6 +62,9 @@ init 3302 python:
         talk_again_buying_club_starbuck_action = Action("Buy the Stripclub", discuss_buying_club_with_starbuck_requirement, "talk_again_buying_club_starbuck_label")
         starbuck.add_unique_on_talk_event(talk_again_buying_club_starbuck_action)
 
+    game_hints.append(Hint("The Strip Club is closed", "Wait a few days and have a chat with the sex shop owner.", "get_strip_club_foreclosed_stage() == 1", "get_strip_club_foreclosed_stage() == 3"))
+    game_hints.append(Hint("Buy the strip club or not?", "When you have at least $60.000 have a chat with the sex shop owner.", "get_strip_club_foreclosed_stage() == 3", "get_strip_club_foreclosed_stage() == 4"))
+
 label strip_club_offer_expire_label(): # Event trigger with timer
     if strip_club_buy_days_left() <= 0:
         $ strip_club_bought_by_someone_else()

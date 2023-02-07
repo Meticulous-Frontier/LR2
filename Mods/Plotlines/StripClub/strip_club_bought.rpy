@@ -20,12 +20,15 @@ init 5 python:
         strip_club.visible = True
         set_strip_club_foreclosed_stage(5)
         add_strip_club_hire_employee_action_to_mc_actions()
+        strip_club_init_serums()
         for stripper in stripclub_strippers:
             stripper.set_title(get_random_from_list(stripper.get_titles()))
             stripper.set_mc_title("Boss")
             stripper.set_possessive_title("The stripper")
             stripper.change_stats(happiness = 10, obedience = 5, love = 5)
         return
+
+    game_hints.append(Hint("Talk with cousin", "You've bought the strip club, meet up with your cousin to get your strip club up and running.", "get_strip_club_foreclosed_stage() == 4", "get_strip_club_foreclosed_stage() == 5"))
 
 label strip_club_bought_strippers_selection_label(the_person): # Talk event
     python:
@@ -119,6 +122,7 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
     $ set_strip_club_foreclosed_stage(5)
     $ strip_club.add_action(strip_club_show_action)
     $ add_strip_club_hire_employee_action_to_mc_actions()
+    $ strip_club_init_serums()
 
     "As the last one left in the club, you turn off the lights, close the doors, and return home eager for a good night's rest."
     $ mc.change_location(bedroom)
