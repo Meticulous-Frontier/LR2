@@ -55,15 +55,28 @@ init -1 python:
     #####################################
 
     def vagina_visible_enhanced(self):
-            return self.get_lower_body_transparency_factor() >= 1.0
+            return _get_transparency_factor(self.lower_body) >= 1.0
 
     Outfit.vagina_visible = vagina_visible_enhanced
 
     def tits_visible_enhanced(self):
-            return self.get_upper_body_transparency_factor() >= 1.0
+            return _get_transparency_factor(self.upper_body) >= 1.0
 
     Outfit.tits_visible = tits_visible_enhanced
 
+    def bra_covered_enhanced(self):
+        if not self.wearing_bra():
+            return False
+
+        return _get_transparency_factor(x for x in self.upper_body if x.layer >= 2) < 1.0
+    Outfit.bra_covered = bra_covered_enhanced
+
+    def panties_covered_enhanced(self):
+        if not self.wearing_panties():
+            return False
+
+        return _get_transparency_factor(x for x in self.lower_body if x.layer >= 2) < 1.0
+    Outfit.panties_covered = panties_covered_enhanced
 
     def remove_random_upper_enhanced(self, top_layer_first = False, do_not_remove = False):
         #if top_layer_first only the upper most layer is removed, otherwise anything unanchored is a valid target.
@@ -305,41 +318,15 @@ init -1 python:
         return True
     Outfit.is_within_dress_code = is_within_dress_code
 
-    # Calculates transparency on a scale 0.0--1.0, with 0.0 being opaque
-    def get_lower_body_transparency(self):
+    # Calculates effective visibility, where 1.0 is fully visible (66% opacity)
+    def _get_transparency_factor(iter):
         transparency = 1.0
-        for cloth in self.lower_body:
+        for cloth in iter:
             if cloth.hide_below and not (cloth.half_off and cloth.half_off_gives_access):
-                transparency *= 1 - cloth.colour[3]
-        return transparency
+                transparency *= 1 - cloth.get_alpha()
 
-    Outfit.get_lower_body_transparency = get_lower_body_transparency
-
-    # Calculates body part effective visibility, where 1.0 is fully visible (66% opacity)
-    def get_lower_body_transparency_factor(self):
-        trans = self.get_lower_body_transparency()
-        factor = (trans - .05)/(.33 - .05) # 5% transparency is opaque, 33% transparency is visible
+        factor = (transparency - .05)/(.33 - .05) # 5% transparency is opaque, 33% transparency is visible
         return __builtin__.max(0.0, __builtin__.min(1.0, factor))
-
-    Outfit.get_lower_body_transparency_factor = get_lower_body_transparency_factor
-
-    # Calculates transparency on a scale 0.0--1.0, with 0.0 being opaque
-    def get_upper_body_transparency(self):
-        transparency = 1.0
-        for cloth in self.upper_body:
-            if cloth.hide_below and not cloth in [vest, suit_jacket] and not (cloth.half_off and cloth.half_off_gives_access):
-                transparency *= 1 - cloth.colour[3]
-        return transparency
-
-    Outfit.get_upper_body_transparency = get_upper_body_transparency
-
-    # Calculates body part effective visibility, where 1.0 is fully visible (66% opacity)
-    def get_upper_body_transparency_factor(self):
-        trans = self.get_upper_body_transparency()
-        factor = (trans - .05)/(.33 - .05) # 5% transparency is opaque, 33% transparency is visible
-        return __builtin__.max(0.0, __builtin__.min(1.0, factor))
-
-    Outfit.get_upper_body_transparency_factor = get_upper_body_transparency_factor
 
     def get_underwear_body_parts_slut_score(self):
         # No underwear is 32 slut
@@ -348,11 +335,11 @@ init -1 python:
         if self.tits_available():
             new_score += 16
         else:
-            new_score += __builtin__.int(16 * self.get_upper_body_transparency_factor())
+            new_score += __builtin__.int(16 * _get_transparency_factor(self.upper_body))
         if self.vagina_available():
             new_score += 16
         else:
-            new_score += __builtin__.int(16 * self.get_lower_body_transparency_factor())
+            new_score += __builtin__.int(16 * _get_transparency_factor(self.lower_body))
         return new_score
 
     Outfit.get_underwear_body_parts_slut_score = get_underwear_body_parts_slut_score
@@ -361,8 +348,8 @@ init -1 python:
         # No overwear is 48 slut
         # 12 from upper body, 12 from lower body, 24 from general visibility
         new_score = 0
-        u_factor = self.get_upper_body_transparency_factor()
-        l_factor = self.get_lower_body_transparency_factor()
+        u_factor = _get_transparency_factor(self.upper_body)
+        l_factor = _get_transparency_factor(self.lower_body)
         new_score += __builtin__.int(24 * __builtin__.max(u_factor, l_factor)) # The most visible body part contributes the most to sluttiness
         new_score += __builtin__.int(12 * u_factor)
         new_score += __builtin__.int(12 * l_factor)
@@ -378,8 +365,8 @@ init -1 python:
         # Exception: opacity is subtractive, not additive. The math gets a bit weird, but it should be continuous
 
         new_score = 0
-        u_factor = self.get_upper_body_transparency_factor()
-        l_factor = self.get_lower_body_transparency_factor()
+        u_factor = _get_transparency_factor(self.upper_body)
+        l_factor = _get_transparency_factor(self.lower_body)
 
         new_score += __builtin__.int(24 * __builtin__.max(u_factor, l_factor)) # The most visible body part contributes the most to sluttiness
 

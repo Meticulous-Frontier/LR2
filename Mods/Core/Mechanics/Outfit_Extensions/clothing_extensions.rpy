@@ -63,3 +63,13 @@ init -1 python:
         return new_score
 
     Clothing.get_slut_value = get_slut_value_enhanced
+
+    #######################################
+    # Extended Methods For Clothing Class #
+    #######################################
+
+    def get_alpha(self):
+        if self.is_similar(thin_dress):
+            return self.colour[3] * 0.75
+        return self.colour[3]
+    Clothing.get_alpha = get_alpha
