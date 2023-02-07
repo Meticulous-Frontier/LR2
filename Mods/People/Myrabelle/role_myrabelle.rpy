@@ -550,6 +550,7 @@ label myra_esports_first_tournament_label():    #Mandatory event. Preluded to du
     $ myra.event_triggers_dict["has_failed_tournament"] = True
     $ mc.business.set_event_day("myra_fails_tournament")
     $ myra.add_unique_on_room_enter_event(myra_train_focus_intro)
+    call advance_time() from _call_advance_time_myra_esports_first_tournament
     return
 
 label myra_train_focus_intro_label(the_person): #40 love, room entry event, allows for a recurring event after.
@@ -2216,7 +2217,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
         "A week ago, she never would have considered sucking you off, but now she seems interested."
     "You make a mental note to check back in with her in a week or so and see how her technique is progressing."
     "She might also be more willing to further her blowjob skills if you increase her obedience as well..."
-    call advance_time from _call_advance_myra_bj_train_01_time_
+    call advance_time from _call_advance_myra_bj_train_01_time
     return
 
 label myra_blowjob_training_progress_label(the_person):
@@ -2325,7 +2326,7 @@ label myra_blowjob_training_progress_label(the_person):
     "You step out of the supply closet. Things are definitely moving in the right direction with [the_person.title]'s obedience training."
     "You make a mental note to check back in with her in a week or so and see if she has what it takes to be the best."
     "She might also be more willing to further her deepthroat skills if you increase her obedience as well..."
-    call advance_time from _call_advance_myra_bj_train_02_time_
+    call advance_time from _call_advance_myra_bj_train_02_time
     return  #160 Obedience
 
 label myra_blowjob_training_final_label(the_person):
@@ -2397,7 +2398,7 @@ label myra_blowjob_training_final_label(the_person):
     $ the_person.apply_outfit(the_person.planned_outfit)
     "You step out of the supply closet."
     "You make a mental note. You should try and give her an opportunity to show off her oral skills sometime..."
-    call advance_time from _call_advance_myra_bj_train_03_time_
+    call advance_time from _call_advance_myra_bj_train_03_time
     return  #160 Obedience
 
 #End game sexual events
