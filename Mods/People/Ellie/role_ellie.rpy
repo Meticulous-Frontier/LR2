@@ -122,6 +122,7 @@ init 2 python:
         the_blood_2.colour = [.71, .1, .1, 0.6]
         the_blood_2.layer = 0
         the_person.outfit.add_accessory(the_blood_2)
+        the_person.break_taboo("vaginal_sex")
         the_person.event_triggers_dict["given_virginity"] = True
         return
 
@@ -1428,6 +1429,7 @@ label ellie_dinner_date_label():
         the_person "Oh! That's a great idea..."
         $ the_person.draw_person(position = "walking_away")
         "You get up and follow [the_person.possessive_title] into her bedroom."
+        $ the_person.bedroom.show_background()
         $ the_person.draw_person(position = the_person.idle_pose)
         the_person "This is it... this is where I..."
         "Her voice drifts off as you close in on her."
@@ -1526,6 +1528,8 @@ label ellie_dinner_date_label():
     mc.name "I can see myself out. Have a good night."
     the_person "Goodnight [the_person.mc_title]! I'll see you at work tomorrow..."
     $ clear_scene()
+    $ mc.change_location(downtown)
+    $ mc.location.show_background()
     "You step out of [the_person.possessive_title]'s apartment."
     $ the_person.add_unique_on_room_enter_event(ellie_lingerie_shopping)
     return
