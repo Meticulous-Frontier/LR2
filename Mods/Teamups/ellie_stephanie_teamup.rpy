@@ -7,17 +7,18 @@ init 1: #Use these transforms for having the two girls observe your research.
     transform character_researcher_1(xoffset = 0, yoffset = 0, zoom = 0.7):
         yalign (0.85 + yoffset)
         yanchor 1.0
-        xalign (0.5 + xoffset)
+        xalign (0.50 + xoffset)
         xanchor 1.0
-        xzoom -(zoom)
+        xzoom -.95
         zoom zoom
 
-    transform character_researcher_2(xoffset = 0, yoffset = 0, zoom = 0.7):
-        yalign (0.85 + yoffset)
+    transform character_researcher_2(xoffset = 0, yoffset = 0, zoom = 0.8):
+        yalign (0.9 + yoffset)
         yanchor 1.0
         xalign (0.4 + xoffset)
         xanchor 1.0
-        yzoom zoom
+        xzoom .95
+        zoom zoom
 
 
 init 5 python:
@@ -396,7 +397,7 @@ label ellie_stephanie_teamup_progression_scene_scene_0(the_group, scene_transiti
 
 label ellie_stephanie_teamup_progression_scene_scene_1(the_group, scene_transition = False):
     $ the_person = the_group[0]
-    "This is the second scene. I'm not coding it, but you could code it that she gets naked and bends over, preseting her ass here."
+    "This is the second scene. I'm not coding it, but you could code it that she gets naked and bends over, presenting her ass here."
     $ the_person.draw_person(position = "standing_doggy")
     the_person "Don't worry, my ass is always ready for you!"
     call fuck_person(the_person) from _call_sex_description_ellie_stephanie_teamup_scene_02
