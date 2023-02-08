@@ -13,6 +13,7 @@ init 5 python:
     demand_strip_underwear_requirement = demand_strip_underwear_requirement_enhanced
 
 label demand_strip_underwear_label_enhanced(the_person):
+    $ mc.change_energy(-5)
     mc.name "You're going to strip into your underwear for me."
 
     # If person is already topless or bottomless, they will only care about missing underwear we *can't* see

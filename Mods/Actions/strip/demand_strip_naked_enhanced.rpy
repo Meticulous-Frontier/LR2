@@ -11,6 +11,7 @@ init 5 python:
     demand_strip_naked_requirement = demand_strip_naked_requirement_enhanced
 
 label demand_strip_naked_label_enhanced(the_person):
+    $ mc.change_energy(-5)
     mc.name "You're going to strip naked for me."
 
     $ test_outfit = Outfit("Nude") # Doesn't include accessories. Don't actually apply this outfit.

@@ -12,9 +12,9 @@ init 5 python:
 
 
 label demand_strip_tits_label_enhanced(the_person):
+    $ mc.change_energy(-5)
     #TODO: Most of this dialogue should be moved into a personality specific branch. A task for next update.
     mc.name "You're going to get your tits out for me."
-
 
     $ test_outfit = the_person.outfit.get_copy()
     $ test_outfit.strip_to_tits(visible_enough = False)

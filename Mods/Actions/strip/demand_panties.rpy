@@ -8,6 +8,7 @@ init 5 python:
 
 
 label demand_panties_label(the_person):
+    $ mc.change_energy(-5)
     "You lean over and whisper softly in her ear..."
     mc.name "I want you to give me your panties..."
 
