@@ -21,18 +21,18 @@ init 1 python:  #Associated Perks
     def perk_aura_obedience_med_update():
         for person in get_nearby_people():
             if person.obedience < 150:
-                person.change_obedience(1, add_to_log = True)
-            if person.obedience < 200:
+                person.change_obedience(2, add_to_log = True)
+            elif person.obedience < 200:
                 person.change_obedience(1, add_to_log = True)
         return
 
     def perk_aura_obedience_large_update():
         for person in get_nearby_people():
             if person.obedience < 150:
-                person.change_obedience(1, add_to_log = True)
-            if person.obedience < 200:
-                person.change_obedience(1, add_to_log = True)
-            if person.obedience < 250:
+                person.change_obedience(3, add_to_log = True)
+            elif person.obedience < 200:
+                person.change_obedience(2, add_to_log = True)
+            elif person.obedience < 250:
                 person.change_obedience(1, add_to_log = True)
         return
 

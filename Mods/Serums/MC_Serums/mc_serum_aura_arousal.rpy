@@ -23,8 +23,8 @@ init 1 python:  #Associated Perks
     def perk_aura_arousal_med_update():
         for person in get_nearby_people():
             if person.arousal < 25:
-                person.change_arousal(1, add_to_log = False)
-            if person.arousal < 50:
+                person.change_arousal(2, add_to_log = False)
+            elif person.arousal < 50:
                 person.change_arousal(1, add_to_log = False)
         return
 
@@ -43,7 +43,7 @@ init 1 python:  #Associated Perks
         return Ability_Perk(description = "Girls near you slowly gain up to 50 arousal, and never find vaginal and anal positions boring.", usable = False, update_func = perk_aura_arousal_med_update)
 
     def perk_aura_arousal_large():
-        return Ability_Perk(description = "Girls near you slowly gain up to 75 arousal, and neve find any sexual positions boring.", usable = False, update_func = perk_aura_arousal_large_update)
+        return Ability_Perk(description = "Girls near you slowly gain up to 75 arousal, and never find any sexual positions boring.", usable = False, update_func = perk_aura_arousal_large_update)
 
     def perk_aura_arousal_advance_req_01():
         the_serum = find_serum_by_name("Pleasure Center Stimulator")
