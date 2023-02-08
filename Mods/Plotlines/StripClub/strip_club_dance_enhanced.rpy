@@ -104,6 +104,7 @@ label stripclub_dance_enhanced_label():
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced
     $ the_person.draw_person(position = "back_peek", the_animation = ass_bob, animation_effect_strength = 0.7)
     "She spins and poses for her audience, who respond with whoops and cheers."
+    $ the_person.change_arousal(2)
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_1
     if the_person.has_large_tits():
         if the_person.outfit.tits_available():
@@ -115,16 +116,20 @@ label stripclub_dance_enhanced_label():
     else:
         $ mc.change_locked_clarity(5)
         "As the music builds, [title]'s dance becomes more energetic. She runs her hands over her tight body, accentuating her curves."
+    $ the_person.change_arousal(3)
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_2
     $ the_person.draw_person(position = get_random_from_list(cousin_strip_pose_list), the_animation = blowjob_bob, animation_effect_strength = 0.7)
     $ mc.change_locked_clarity(5)
     "Her music hits its crescendo and her dancing does the same. [title] holds onto the pole in the middle of the stage and spins herself around it."
+    $ the_person.change_arousal(4)
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_3
     $ the_person.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.8)
     if the_person.outfit.vagina_visible():
+        $ the_person.change_arousal(8)
         $ mc.change_locked_clarity(15)
         "As the song comes to an end, the dancer lowers herself to all fours, showing off her ass and pussy to the crowd."
     else:
+        $ the_person.change_arousal(5)
         $ mc.change_locked_clarity(10)
         "As the song comes to an end, the dancer lowers herself to all fours. She spreads her legs and works her hips, jiggling her ass for the crowd's amusement."
 
