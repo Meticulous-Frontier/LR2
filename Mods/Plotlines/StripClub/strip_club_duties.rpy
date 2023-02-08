@@ -1,11 +1,9 @@
 init 1 python:
     def daily_serum_dosage_duty_on_move_enhanced(the_person):
-        print("Daily serum dosage on move {}".format(the_person.name))
         if the_person.event_triggers_dict.get("daily_serum_distributed", False):
             return #Give it to them first thing in the morning, but only once
 
         elif not the_person.is_at_work():
-            print("Not giving {} a serum, because she is not at work ({}).".format(the_person.name, the_person.job.job_title))
             return #Don't give it to them if they aren't at work.
 
         the_serum = None
@@ -66,7 +64,6 @@ init 1 python:
             if the_person.event_triggers_dict.get("worked_today", False) or not duty.only_at_work: #Only perform on_day functions if they had work that day.
                 duty.on_day(the_person)
 
-        print("Reset worked today for {} as {}".format(the_person.name, the_person.job.job_title))
         the_person.event_triggers_dict["worked_today"] = False #Reset this for the next day
         the_person.event_triggers_dict["daily_serum_distributed"] = False #Reset for the next day
         return
