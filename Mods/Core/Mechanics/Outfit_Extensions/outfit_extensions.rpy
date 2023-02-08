@@ -365,28 +365,29 @@ init -1 python:
         # Exception: opacity is subtractive, not additive. The math gets a bit weird, but it should be continuous
 
         new_score = 0
-        u_factor = _get_transparency_factor(self.upper_body)
-        l_factor = _get_transparency_factor(self.lower_body)
+        u_factor_over = _get_transparency_factor(self.upper_body, overwear = True)
+        l_factor_over = _get_transparency_factor(self.lower_body, overwear = True)
+        u_factor_under = _get_transparency_factor(self.upper_body)
+        l_factor_under = _get_transparency_factor(self.lower_body)
 
-        new_score += __builtin__.int(24 * __builtin__.max(u_factor, l_factor)) # The most visible body part contributes the most to sluttiness
+        new_score += __builtin__.int(16 * __builtin__.max(u_factor_over, l_factor_over)) # The most visible body part contributes the most to sluttiness
+        new_score += __builtin__.int(8 * __builtin__.max(u_factor_under, l_factor_under))
 
         tits_score = 0
         if self.wearing_bra():
-            if not self.bra_covered():
-                tits_score += 24
+            tits_score += __builtin__.int(16 * u_factor_over)
         else:
             tits_score = 16
-        new_score += __builtin__.max(tits_score, __builtin__.int((12 + 16) * u_factor)) # Floor at tits visibility slut score. 12 from overwear scores, 16 from underwear.
+        new_score += __builtin__.max(tits_score, __builtin__.int((16 + 12) * u_factor_under)) # Floor at tits visibility slut score. 12 from overwear scores, 16 from underwear.
 
         vagina_score = 0
         if self.vagina_available():
             vagina_score += 8
         if self.wearing_panties():
-            if not self.panties_covered():
-                vagina_score += 24
+            vagina_score += __builtin__.int(16 * l_factor_over)
         else:
             vagina_score += 12 # This is lower than tits equivalent by half "vagina_available" factor
-        new_score += __builtin__.max(vagina_score, __builtin__.int((12 + 16) * l_factor)) # Floor at vagina visibility slut score. 12 from overwear scores, 16 from underwear.
+        new_score += __builtin__.max(vagina_score, __builtin__.int((16 + 12) * l_factor_under)) # Floor at vagina visibility slut score. 12 from overwear scores, 16 from underwear.
 
         return new_score
 
