@@ -153,8 +153,9 @@ init -1 python:
         wardrobe_builder = WardrobeBuilder(person)
         if sluttiness is None:
             sluttiness = person.sluttiness
-        base_sluttiness = __builtin__.max(sluttiness - 10, 0) # first 15 points of sluttiness don't impact outfit builder
-        outfit = wardrobe_builder.build_outfit(outfit_type, __builtin__.min(base_sluttiness / 7, 12), __builtin__.min(base_sluttiness / 18, 5))
+        base_sluttiness = __builtin__.max(sluttiness - 15, 0) # first 15 points of sluttiness don't impact outfit builder
+        min_sluttiness = __builtin__.min(base_sluttiness / 18, 5) if sluttiness > 50 else 0 # prevent override of person preferences until she's slutty enough not to care
+        outfit = wardrobe_builder.build_outfit(outfit_type, __builtin__.min(base_sluttiness / 7, 12), min_sluttiness)
         return wardrobe_builder.personalize_outfit(outfit, max_alterations = 2, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, easier_access = easier_access)
 
     def _filter_full_outfits(full_outfits, slut_limit, easier_access, commando):
