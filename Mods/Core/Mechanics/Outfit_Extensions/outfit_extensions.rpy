@@ -496,19 +496,7 @@ init 6 python:
     Outfit.get_full_strip_list = get_full_strip_list_enhanced
 
     def get_total_slut_modifiers_enhanced(self):
-        new_score = 0
-        for cloth in self.accessories + self.upper_body + self.lower_body + self.feet:
-            new_score += cloth.get_slut_value()
-
-            if cloth in [pinafore]:
-                if not any(x for x in self.upper_body if x.layer == 1 or x.layer == 2):
-                    new_score += 5 # tits not covered in pinafore
-            if cloth in [lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, leotard]:
-                if not any(x for x in self.upper_body if x.layer == 2):
-                    new_score += 5 # upper part not covered
-                if not any(x for x in self.lower_body if x.layer == 2):
-                    new_score += 10 # lower part not covered
-        return __builtin__.int(new_score * 0.9)
+        return sum(x.get_slut_value() for x in self.accessories + self.upper_body + self.lower_body + self.feet)
 
     Outfit.get_total_slut_modifiers = get_total_slut_modifiers_enhanced
 

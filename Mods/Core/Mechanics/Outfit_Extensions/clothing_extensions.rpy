@@ -60,6 +60,8 @@ init -1 python:
             new_score += 3 # small extra modifier
         if self in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, micro_skirt, daisy_dukes, jean_hotpants]:
             new_score += 5 # extremely slutty clothing (applies extra modifier)
+        if self in [pinafore, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, leotard]:
+            new_score += 5 # migrated in from outfit_extensions. Remove?
         return new_score
 
     Clothing.get_slut_value = get_slut_value_enhanced
