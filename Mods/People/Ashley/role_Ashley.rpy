@@ -1623,7 +1623,7 @@ label ashley_submission_titfuck_taboo_restore_label():
         "But it keeps happening..." if ashley.event_triggers_dict.get("sub_titfuck_count", 0) >= 3 or the_person.opinion_score_giving_tit_fucks() == 2:
             mc.name "If it needs to stop why does it keep happening [the_person.title]?"
             mc.name "Let's stop pretending. You enjoy it when you service my cock with your tits once in a while."
-            mc.name "I'm not it needs to be this way everyday, but once in a while, you need to take a turn being the submissive one."
+            mc.name "I'm not saying it needs to be this way everyday, but once in a while, you need to take a turn being the submissive one."
             "[the_person.possessive_title] seems like she wants to argue, but even she can understand you're right."
             the_person "Fine. But don't kid yourself into thinking I'm going to take things any farther."
             $ outcome_convince = True
