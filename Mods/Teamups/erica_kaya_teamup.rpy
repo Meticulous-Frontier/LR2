@@ -1141,7 +1141,7 @@ label kaya_erica_teamup_study_choice(the_group):
             "The sexual tension in the room is intense. It is obvious the girls are here for what happens after the study session primarily..."
     "Do you want to stick around and help the girls study?"
     menu:
-        "Help them study\n{image=gui/heart/Time_Advance.png}":
+        "Help them study {image=gui/heart/Time_Advance.png}":
             "You slide closer to the table, ready to help the girls with their study session."
             $ scene_manager.update_actor(kaya, display_transform = character_left_flipped)
             return True
