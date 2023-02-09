@@ -4,10 +4,10 @@ init 5 python:
     def demand_strip_tits_requirement_enhanced(the_person):
         if the_person.outfit.tits_visible() and the_person.outfit.tits_available():
             return False #Can't strip if they're already visible
-        elif the_person.obedience < 140:
+        if the_person.obedience < 140:
             return "Requires: 140 Obedience"
-        else:
-            return True
+        return len(the_person.outfit.get_tit_strip_list(visible_enough = False)) > 0
+
     demand_strip_tits_requirement = demand_strip_tits_requirement_enhanced
 
 

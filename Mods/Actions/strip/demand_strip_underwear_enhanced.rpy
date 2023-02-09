@@ -1,15 +1,15 @@
 init 5 python:
     config.label_overrides["demand_strip_underwear_label"] = "demand_strip_underwear_label_enhanced"
-    
+
     def demand_strip_underwear_requirement_enhanced(the_person):
         if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
             return False #Can't strip if we're already past underwear
-        elif the_person.outfit.wearing_panties() and not the_person.outfit.panties_covered() and the_person.outfit.wearing_bra() and not the_person.outfit.bra_covered():
+        if the_person.outfit.wearing_panties() and not the_person.outfit.panties_covered() and the_person.outfit.wearing_bra() and not the_person.outfit.bra_covered():
             return False #Can't strip if we can already see all of her underwear.
-        elif the_person.obedience < 130:
+        if the_person.obedience < 130:
             return "Requires: 130 Obedience"
-        else:
-            return True
+        return True
+
     demand_strip_underwear_requirement = demand_strip_underwear_requirement_enhanced
 
 label demand_strip_underwear_label_enhanced(the_person):
