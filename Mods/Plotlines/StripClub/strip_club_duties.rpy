@@ -51,6 +51,9 @@ init 1 python:
         for duty in the_person.duties:
             if the_person.is_at_work() or not duty.only_at_work:
                 duty.on_turn(the_person)
+
+        if the_person.is_at_work():
+            the_person.event_triggers_dict["worked_today"] = True
         return
 
     def stripclub_employee_on_move(the_person):
@@ -65,5 +68,4 @@ init 1 python:
                 duty.on_day(the_person)
 
         the_person.event_triggers_dict["worked_today"] = False #Reset this for the next day
-        the_person.event_triggers_dict["daily_serum_distributed"] = False #Reset for the next day
         return
