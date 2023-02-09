@@ -413,7 +413,7 @@ init -1 python:
     Business.employees_with_children_with_mc = business_employees_with_children_with_mc
 
     def business_employees_knocked_up_by_mc(self):
-        return [x for x in self.get_employee_list if (x.is_pregnant() and x.is_mc_father())]
+        return [x for x in self.get_employee_list() if (x.is_pregnant() and x.is_mc_father())]
 
     Business.employees_knocked_up_by_mc = business_employees_knocked_up_by_mc
 

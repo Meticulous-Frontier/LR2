@@ -24,6 +24,7 @@ label activate_side_character_mod_core(stack):
     python:
         side_character_init()
         # continue on the hijack stack if needed
+        mc.business.add_mandatory_crisis(cuckold_employee_init)
         execute_hijack_call(stack)
     return
 
@@ -31,6 +32,7 @@ label update_side_character_mod_core(stack):
     python:
         if mc.business.event_triggers_dict.get("side_character_unavail_list", None) == None:
             side_character_init()
-
+        if cuckold_employee_get() == None:
+            mc.business.add_mandatory_crisis(cuckold_employee_init)
         execute_hijack_call(stack)
     return
