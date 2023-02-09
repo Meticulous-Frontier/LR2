@@ -1472,7 +1472,7 @@ label myra_alexia_teamup_scene_choice_label(the_group):
 
     "Are you going to stay while the girls play?"
     menu:
-        "Stay":
+        "Stay\n{image=gui/heart/Time_Advance.png}":
             pass
         "Leave":
             return False
