@@ -1,6 +1,6 @@
 init 2 python:
     def fetish_serum_quest_intro_requirement():
-        if day > 14 and time_of_day == 2 and mc.business.research_tier >= 1:
+        if day > TIER_3_TIME_DELAY + TIER_2_TIME_DELAY and time_of_day == 2 and mc.business.research_tier >= 1:
             if mc.is_at_work() and mc.business.is_open_for_business() and mc.business.head_researcher:
                 return True
         return False
