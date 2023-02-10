@@ -10,6 +10,7 @@ init 1400 python:
     def unisex_bathroom_policy_unlock(unlock):
         mc.business.unisex_restroom_unlocks["unisex_policy_unlock"] = unlock
 
+
     Unisex_bathroom_creation_policy = Policy(name = "Make Restrooms Unisex",
         desc = "Some basic remodeling and a change of signs will make all company restrooms unisex.",
         cost = 1000,
@@ -57,6 +58,17 @@ init 2 python:
                         return True
         return False
 
+    def unisex_restroom_use_requirement():
+        if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) > 0:
+            if __builtin__.len(mc.business.get_employee_list()) > 2: #Have at least 3 employees.
+                if mc.business.is_open_for_business(): #Only trigger if people are in the office.
+                    return True
+            if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) > 5:
+                if __builtin__.len(mc.business.get_intern_list()) > 2:
+                    if mc.business.is_open_for_internship():
+                        return True
+        return False
+
     def gloryhole_get_response(person):    #this function creates a weight list of possible outcomes for the glory hole responses.
         gloryhole_list = []
         if person.sluttiness < 20: #They get pissed and refuse to do anything
@@ -88,8 +100,16 @@ init 2 python:
     unisex_restroom_crisis_action = ActionMod("Unisex Restroom", unisex_restroom_crisis_requirement,"unisex_restroom_action_label",
         menu_tooltip = "Change company restrooms to unisex and enjoy the results.", category="Business", is_crisis = True)
 
+    unisex_restroom_room_use_action = Action("Use Unisex Restroom {image=gui/heart/Time_Advance.png}", unisex_restroom_use_requirement,"unisex_restroom_use_action_label")
+
+label unisex_restroom_use_action_label():
+    call unisex_restroom_action_label from _use_restroom_on_purpose_01
+    call advance_time from _unisex_restroom_advance_time
+    return
+
 label unisex_restroom_action_label():
     if mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0) == 0:  #unisex restroom not yet created. Go to suggestion label
+        $ lobby.add_action(unisex_restroom_room_use_action)
         call unisex_restroom_overhear_label() from _call_unisex_restroom_over_call_1
         return
 
@@ -359,7 +379,7 @@ label unisex_restroom_unlock_gloryhole_label():
     "The restroom is empty, so you find an empty stall and enter it."
     "Much to your surprise, you discover a small hole cut out. The girls have made a gloryhole!"
     $ mc.business.unisex_restroom_unlocks["unisex_restroom_gloryhole"] = 1
-    $ office.add_action(unisex_restroom_gloryhole_wait)
+    $ lobby.add_action(unisex_restroom_gloryhole_wait)
     "Since you are the only man in the company, you have to assume that this was made with you in mind."
     "You finish relieving yourself, and then consider. Should you wait and see if someone comes along? Or maybe try some other time?"
     menu:
