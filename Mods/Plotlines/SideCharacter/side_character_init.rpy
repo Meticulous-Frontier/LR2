@@ -25,6 +25,7 @@ label activate_side_character_mod_core(stack):
         side_character_init()
         # continue on the hijack stack if needed
         mc.business.add_mandatory_crisis(cuckold_employee_init)
+        mc.business.add_mandatory_crisis(chemist_daughter_init)
         execute_hijack_call(stack)
     return
 
@@ -34,5 +35,7 @@ label update_side_character_mod_core(stack):
             side_character_init()
         if cuckold_employee_get() == None:
             mc.business.add_mandatory_crisis(cuckold_employee_init)
+        if chemist_daughter_employee_get() == None:
+            mc.business.add_mandatory_crisis(chemist_daughter_init)
         execute_hijack_call(stack)
     return
