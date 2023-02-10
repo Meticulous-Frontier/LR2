@@ -1,7 +1,7 @@
 ## Late for Work Crisis Mod by Tristimdorion
 init 2 python:
     def late_for_work_requirement():
-        if time_of_day <= 1 and mc.is_at_work():
+        if time_of_day <= 2 and mc.is_at_work():
             if mc.business.is_work_day() and mc.business.get_employee_count() > 2:
                 return True
             if mc.business.is_open_for_internship() and __builtin__.len(mc.business.get_intern_list()) > 2:
@@ -70,6 +70,9 @@ label late_for_work_action_label():
                 mc.name "I don't care [the_person.title]. I'm going to have to write you up for this."
                 $ the_person.add_infraction(Infraction.disobedience_factory())
                 mc.name "I'm sure you'll learn your lesson in the future."
+
+            "Spank her right here":
+                call late_for_work_spanking(the_person) from _call_late_for_work_spanking_1
 
             "Let it slide":
                 $ the_person.draw_person(emotion = 'happy')
@@ -151,6 +154,9 @@ label late_for_work_action_label():
                 mc.name "I don't care [the_person.title]. I'm going to have to write you up for this."
                 $ the_person.add_infraction(Infraction.inappropriate_behaviour_factory())
                 mc.name "I'm sure you'll learn your lesson in the future."
+
+            "Spank her right here":
+                call late_for_work_spanking(the_person) from _call_late_for_work_spanking_2
 
             "Request her service":
                 mc.name "Very good, now I require the same level of dedication, make your boss happy and get on your knees."
@@ -236,27 +242,7 @@ label late_for_work_action_label():
                 mc.name "I'm sure you'll learn your lesson in the future."
 
             "Spank her right here":
-                mc.name "A naughty employee like you needs to be punished. But just lecturing you wouldn't do the trick, would it?"
-                the_person "I'm not sure what you're saying..."
-                mc.name "Turn around, [the_person.title]. I'm going to give you the spanking you deserve."
-                if the_person.get_opinion_score("being submissive") > 0:
-                    $ the_person.change_stats(arousal = 35, obedience = 5, happiness = 5, slut = 1, max_slut = 30)
-                    the_person "Oh god, yes sir anything you say!"
-                else:
-                    $ the_person.change_stats(arousal = 25, obedience = 2, happiness = 2)
-                    the_person "If you insist, [the_person.mc_title]."
-                call fuck_person(the_person, start_position = spanking, position_locked = True) from _spank_employee_coming_in_late_01
-                if the_person.get_opinion_score("being submissive") > 0:
-                    if not the_person.can_be_spanked():
-                        $ the_person.unlock_spanking()
-                        the_person "Oh god, [the_person.mc_title]... that was hot... I'm sorry, I'll try not to be late again!"
-                        "She really seemed to enjoy her spanking. Maybe you should work it into your normal foreplay..."
-                $ the_person.draw_person()
-                mc.name "That's enough for now. Try to be on time from now on, or I'll have to spank you again."
-                the_person "Yes sir!"
-                $ the_person.outfit.restore_all_clothing()
-                $ the_person.draw_person()
-                "She quickly brings her clothing in order."
+                call late_for_work_spanking(the_person) from _call_late_for_work_spanking_3
 
             "Make it up to me":
                 mc.name "If you want to make it up to me, get on your knees."
@@ -306,4 +292,28 @@ label late_for_work_action_label():
     $ clear_scene()
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
+    return
+
+label late_for_work_spanking(the_person):
+    mc.name "A naughty employee like you needs to be punished. But just lecturing you wouldn't do the trick, would it?"
+    the_person "I'm not sure what you're saying..."
+    mc.name "Turn around, [the_person.title]. I'm going to give you the spanking you deserve."
+    if the_person.get_opinion_score("being submissive") > 0:
+        $ the_person.change_stats(arousal = 35, obedience = 5, happiness = 5, slut = 1, max_slut = 30)
+        the_person "Oh god, yes sir anything you say!"
+    else:
+        $ the_person.change_stats(arousal = 25, obedience = 2, happiness = 2)
+        the_person "If you insist, [the_person.mc_title]."
+    call fuck_person(the_person, start_position = spanking, position_locked = True) from _spank_employee_coming_in_late_01
+    if the_person.get_opinion_score("being submissive") > 0:
+        if not the_person.can_be_spanked():
+            $ the_person.unlock_spanking()
+            the_person "Oh god, [the_person.mc_title]... that was hot... I'm sorry, I'll try not to be late again!"
+            "She really seemed to enjoy her spanking. Maybe you should work it into your normal foreplay..."
+    $ the_person.draw_person()
+    mc.name "That's enough for now. Try to be on time from now on, or I'll have to spank you again."
+    the_person "Yes sir!"
+    $ the_person.outfit.restore_all_clothing()
+    $ the_person.draw_person()
+    "She quickly brings her clothing in order."
     return

@@ -413,7 +413,7 @@ label ellie_stephanie_teamup_progression_scene_choice(the_group):
     $ the_researcher = the_group[1]
     "It will take up most of your morning though."
     menu:
-        "Stay for the test\n{image=gui/heart/Time_Advance.png}":
+        "Stay for the test {image=gui/heart/Time_Advance.png}":
             pass
         "Don't stay":
             return False

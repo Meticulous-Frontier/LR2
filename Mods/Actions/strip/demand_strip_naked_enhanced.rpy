@@ -4,10 +4,10 @@ init 5 python:
     def demand_strip_naked_requirement_enhanced(the_person):
         if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible() and the_person.outfit.tits_available() and the_person.outfit.vagina_available():
             return False
-        elif the_person.obedience < 150:
+        if the_person.obedience < 150:
             return "Requires: 150 Obedience"
-        else:
-            return True
+        return True
+
     demand_strip_naked_requirement = demand_strip_naked_requirement_enhanced
 
 label demand_strip_naked_label_enhanced(the_person):
