@@ -762,8 +762,8 @@ label candace_topless_at_mall_label(the_person):
     if mc.business.topless_is_legal():  #Right now it is always illegal
         pass
     else:
+        $ the_person.outfit.remove_all_upper_clothing()
         $ scene_manager.add_actor(the_person)
-        $ scene_manager.strip_to_tits(person = the_person, delay = 0)
         $ scene_manager.update_actor(the_person)
         "[the_person.title] is walking around the PUBLIC mall topless. Something that you are pretty sure is illegal."
         mc.name "[the_person.title], what are you doing?"
@@ -793,6 +793,7 @@ label candace_topless_at_mall_label(the_person):
         $ mc.location.show_background()
         "You grab the first t-shirt you find and have her put it on."
         $ the_person.outfit.add_upper(tanktop.get_copy(), [1.0, 1.0, 1.0, 1.0])
+        $ scene_manager.draw_scene()
         the_person "This shirt is boring!"
         mc.name "[the_person.title], I know. But you can't be doing that, okay?"
         the_person "I still don't understand what I was doing wrong!"

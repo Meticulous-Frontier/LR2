@@ -1387,10 +1387,10 @@ label myra_alexia_teamup_trans_scene_2(the_group):
 
 label myra_alexia_teamup_trans_scene_3(the_group):
     $ the_person = the_group[0]
+    $ scene_manager.outfit.remove_all_upper_clothing()
+    $ scene_manager.outfit.remove_all_upper_clothing()
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "sitting")
-    $ scene_manager.strip_to_tits(alexia, delay = 0)
-    $ scene_manager.strip_to_tits(the_person, delay = 0)
     "You walk to the back where the couches are and see the two girls playing the claymation fighting game again."
     "They've already taken their tops off. You take a moment to enjoy their nice tits before you announce your presence."
     mc.name "Milkshake time!"

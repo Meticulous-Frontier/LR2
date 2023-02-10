@@ -204,9 +204,9 @@ label kaya_erica_teamup_intro_2(the_group):
     "You step out of the room."
     call kaya_erica_teamup_get_drinks_label() from _kaya_erica_teamup_intro_drinks_04
     $ kaya.strip_to_underwear(delay = 0)
-    $ kaya.strip_to_tits(delay = 0)
+    $ kaya.outfit.remove_all_upper_clothing()
     $ erica.strip_to_underwear(delay = 0)
-    $ erica.strip_to_tits(delay = 0)
+    $ erica.outfit.remove_all_upper_clothing()
     $ scene_manager.add_actor(kaya, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(erica, position = "sitting")
     "When you get back to the room, you notice the girls have already stripped down to their panties while you were gone."
@@ -237,9 +237,9 @@ label kaya_erica_teamup_intro_3(the_group):
     "You step out of the room."
     call kaya_erica_teamup_get_drinks_label() from _kaya_erica_teamup_intro_drinks_05
     $ kaya.strip_to_underwear(delay = 0)
-    $ kaya.strip_to_tits(delay = 0)
+    $ kaya.outfit.remove_all_upper_clothing()
     $ erica.strip_to_underwear(delay = 0)
-    $ erica.strip_to_tits(delay = 0)
+    $ erica.outfit.remove_all_upper_clothing()
     $ scene_manager.add_actor(kaya, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(erica, position = "sitting")
     "When you get back to the room, you notice the girls have already stripped down to their panties while you were gone."

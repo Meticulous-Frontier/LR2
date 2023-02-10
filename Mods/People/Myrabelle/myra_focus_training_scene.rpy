@@ -361,7 +361,7 @@ label myra_focus_trans_scene_2(the_group):
 label myra_focus_trans_scene_3(the_group):
     $ the_person = the_group[0]
     "You walk over to the PC where [the_person.title] is sitting. She is already topless."
-    $ the_person.strip_to_tits(delay = 0)
+    $ the_person.outfit.remove_all_upper_clothing()
     $ the_person.draw_person(position = "sitting")
     "You set her energy drink down next to her keyboard."
     "You've been enjoying her training so far, but you feel like you could enjoy it even more. You decide it is time to try and push her further."
@@ -556,7 +556,7 @@ label myra_focus_progression_scene_2(the_group, scene_transition = False):  #sit
     $ enemy_score = 0
     $ myra_wins = False
     if not scene_transition:
-        $ the_person.strip_to_tits(delay = 0)
+        $ the_person.outfit.remove_all_upper_clothing()
         "You walk over to the PC where [the_person.title] is sitting."
         $ the_person.draw_person(position = "sitting")
         "You set her energy drink down next to her keyboard. She is just getting logged in and is already topless."

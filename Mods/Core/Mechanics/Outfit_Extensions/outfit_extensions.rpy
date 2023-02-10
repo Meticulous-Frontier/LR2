@@ -264,6 +264,14 @@ init -1 python:
         return changed
     Outfit.make_easier_access = make_easier_access
 
+    # Quickly make her show tits
+    # ignores stripping logic where skirt / pants might be removed to show tits
+    def remove_all_upper_clothing(self):
+        for item in self.get_upper_ordered():
+            self.remove_clothing(item)
+        return
+    Outfit.remove_all_upper_clothing = remove_all_upper_clothing
+
     def remove_bra_and_panties(self):
         if self.wearing_panties():
             self.remove_clothing(self.get_panties())
