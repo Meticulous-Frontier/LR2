@@ -1,7 +1,9 @@
 init 1 python:  #Multiple init 1 blocks to make organization easier.
 
     def hr_organized_chaos_project_requirement():
-        return True
+        if mc.business.hr_director:
+            return True
+        return "Requires HR Director"
 
     def hr_task_manager_project_requirement():
         if len(mc.business.hr_team) >= 3:
@@ -20,16 +22,20 @@ init 1 python:  #Multiple init 1 blocks to make organization easier.
         return "Requires 3 supply employees"
 
     def market_photo_filter_project_requirement():
-        return True
+        if mc.business.company_model:
+            return True
+        return "Requires Company Model"
 
     def market_targeted_advertising_project_requirement():
-        return True #TODO lock behind modeling policy
+        if mc.business.company_model:
+            return True
+        return "Requires Company Model" #TODO lock behind modeling policy
 
     def research_peerless_review_project_requirement():
         return True
 
     def research_group_discovery_project_requirement():
-        return "Unknown Requirement"
+        return "!! Not Implemented !!"
 
     def research_team_building_project_requirement():
         if len(mc.business.research_team) >= 3:
