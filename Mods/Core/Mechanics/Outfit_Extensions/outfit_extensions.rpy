@@ -105,6 +105,16 @@ init -1 python:
 
     Outfit.remove_random_upper = remove_random_upper_enhanced
 
+    def is_suitable_underwear_set_enhanced(self): #Returns true if the outfit could qualify as an underwear set.
+        return not any(x for x in self.accessories + self.upper_body + self.lower_body + self.feet if x.layer > 2)
+
+    Outfit.is_suitable_underwear_set = is_suitable_underwear_set_enhanced
+
+    def is_suitable_overwear_set_enhanced(self): #Returns true if the outfit could qualify as an overwear set.
+        return not any(x for x in self.accessories + self.upper_body + self.lower_body + self.feet if x.layer < 2)
+
+    Outfit.is_suitable_overwear_set = is_suitable_overwear_set_enhanced
+
     ######################################
     # Extension Methods For Outfit Class #
     ######################################
