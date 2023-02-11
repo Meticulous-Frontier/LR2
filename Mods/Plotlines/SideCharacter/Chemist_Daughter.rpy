@@ -10,8 +10,8 @@ init -1 python: #Requirement functions
             return False  # wait until we have a sizeable business
         return not find_avail_princess_employee() is None
 
-    def chemist_daughter_intro_requirement(the_person):
-        if time_of_day >= 2 and mc.business.is_open_for_business() and the_person.is_at_work():
+    def chemist_daughter_intro_requirement(person):
+        if time_of_day >= 2 and mc.business.is_open_for_business() and person.is_at_work():
             return True
         return False
 
@@ -26,24 +26,24 @@ init -1 python: #Requirement functions
         return False
 
     def chemist_daughter_after_raise_consult_requirement():
-        the_person = chemist_daughter_employee_get()
-        if the_person == None:
+        person = chemist_daughter_employee_get()
+        if person is None:
             return True
-        if the_person.salary > the_person.event_triggers_dict.get("starting_pay", 0) and time_of_day != 0 and time_of_day != 4:
+        if person.salary > person.event_triggers_dict.get("starting_pay", 0) and time_of_day != 0 and time_of_day != 4:
             return True
         return False
 
     def chemist_daughter_help_move_requirement():
-        the_person = chemist_daughter_employee_get()
-        if the_person == None:
+        person = chemist_daughter_employee_get()
+        if person is None:
             return True
-        if day >= the_person.event_triggers_dict.get("moving_day", 0):
+        if day >= person.event_triggers_dict.get("moving_day", 0):
             if time_of_day == 3:
                 return True
         return False
 
-    def chemist_daughter_daddy_title_requirement():
-        if the_person.sluttiness > 40 and mc.is_at_work() and mc.business.is_open_for_business(): # only trigger at work
+    def chemist_daughter_daddy_title_requirement(person):
+        if person.sluttiness > 40 and mc.is_at_work() and mc.business.is_open_for_business(): # only trigger at work
             return True
         return False
 
@@ -62,12 +62,12 @@ init 1 python:      #Actions
 
 init 2 python:      #Other python functions
     def chemist_daughter_employee_get():
-        the_person = get_person_by_identifier(mc.business.event_triggers_dict.get("chemist_daughter_ident", None))
-        if the_person == None:
+        person = get_person_by_identifier(mc.business.event_triggers_dict.get("chemist_daughter_ident", None))
+        if person is None:
             return None
-        if not the_person.is_employee():
+        if not person.is_employee():
             return None
-        return the_person
+        return person
 
     def chemist_daughter_incest_interest_trigger(): #Use family members cum exposure to determine how interested MC is in incest.
         return (lily.cum_exposure_count() + mom.cum_exposure_count() + aunt.cum_exposure_count() + cousin.cum_exposure_count())
@@ -85,29 +85,29 @@ init 2 python:      #Other python functions
         return mc.business.event_triggers_dict.get("chemist_daughter_employee_finish",False)
 
     def setup_chemist_daughter():
-        the_person = find_avail_princess_employee()
-        if the_person == None:
+        person = find_avail_princess_employee()
+        if person is None:
             #Probably reset this event somehow.
             return
 
         # lock selected person out of other quests
-        side_character_set_unavail(the_person)
+        side_character_set_unavail(person)
 
         # make sure 'selected person' is single and has no kids
         # although the player might have seen other information
         # it is more disturbing when this information does not
         # match the story line
-        the_person.kids = 0
-        the_person.relationship = "Single"
-        the_person.SO_name = None
-        the_person.remove_role(affair_role)   # make sure we don't have a affair
-        the_person.update_opinion_with_score("incest", 2, add_to_log = False) # this method updates or adds the opinion
-        the_person.update_opinion_with_score("being submissive", 2, add_to_log = False) # this method updates or adds the opinion
+        person.kids = 0
+        person.relationship = "Single"
+        person.SO_name = None
+        person.remove_role(affair_role)   # make sure we don't have a affair
+        person.update_opinion_with_score("incest", 2, add_to_log = False) # this method updates or adds the opinion
+        person.update_opinion_with_score("being submissive", 2, add_to_log = False) # this method updates or adds the opinion
 
-        mc.business.event_triggers_dict["chemist_daughter_ident"] = the_person.identifier
+        mc.business.event_triggers_dict["chemist_daughter_ident"] = person.identifier
 
-        the_person.event_triggers_dict["moving_day"] = 9999
-        the_person.add_unique_on_room_enter_event(chemist_daughter_intro)
+        person.event_triggers_dict["moving_day"] = 9999
+        person.add_unique_on_room_enter_event(chemist_daughter_intro)
         # game_hints.append(Hint("Chemist's Baby Girl", "Check production for a disturbance.", "quest_production_line().get_quest_flag() <= 1", "quest_production_line().get_quest_flag() > 1"))
         # game_hints.append(Hint("Chemist's Baby Girl", "Don't forget to meet the Chemist at the Mall in the afternoon.", "quest_production_line().get_quest_flag() == 11", "quest_production_line().get_quest_flag() != 11"))
         # hint_string = "Give " + person.title + " a raise with a positive performance review."
@@ -156,7 +156,7 @@ label chemist_daughter_intro_label(the_person):
 
 label chemist_daughter_coffee_reminder_label():
     $ the_person = chemist_daughter_employee_get()
-    if the_person == None:
+    if the_person is None:
         return
     "You receive a text message on your phone."
     $ mc.start_text_convo(the_person)
@@ -173,7 +173,7 @@ label chemist_daughter_coffee_label():
     $ dad_name = chemist_daughter_dad_name
     $ the_person = chemist_daughter_employee_get()
     $ mall.remove_action(chemist_daughter_coffee)
-    if the_person == None:
+    if the_person is None:
         #Do something and return a negative result here.
         return
     "You text [the_person.title]'s father, [dad_name]. He tells you the name of the coffee shop. You quickly find it."
@@ -209,7 +209,7 @@ label chemist_daughter_coffee_label():
 label chemist_daughter_after_raise_consult_label():
     $ dad_name = chemist_daughter_dad_name
     $ the_person = chemist_daughter_employee_get()
-    if the_person == None:
+    if the_person is None:
         return
     "Your phone is ringing. It is [dad_name], [the_person.title]'s father. You answer."
     mc.name "Hello?"
@@ -259,7 +259,7 @@ label chemist_daughter_after_raise_consult_label():
 
 label chemist_daughter_help_move_label():
     $ the_person = chemist_daughter_employee_get()
-    if the_person == None:
+    if the_person is None:
         return
     $ the_person.apply_outfit(the_person.planned_outfit)    # make sure she is not in uniform
     "You promised to help [the_person.title] move now. She texts you the address so you head out."
