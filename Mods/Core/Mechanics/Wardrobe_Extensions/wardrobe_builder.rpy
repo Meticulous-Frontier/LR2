@@ -293,7 +293,7 @@ init 5 python:
     only_socks_list = [x for x in socks_list if x not in [thigh_highs, fishnets, garter_with_fishnets]]
     real_pantyhose_list = [x for x in socks_list if x not in only_socks_list]
     earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
-    neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Wool_Scarf"]]
+    neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Wool_Scarf", "Spiked Choker"]]
 
     class WardrobeBuilder():
         default_person = None
@@ -503,7 +503,7 @@ init 5 python:
             return (color_upper, color_lower, color_feet)
 
         @staticmethod
-        def build_filter_list(item_list, points, min_points = 0, filter_list = [], layers = [1, 2, 3]):
+        def build_filter_list(item_list, points, min_points = 0, filter_list = [], layers = [1, 2, 3, 4]):
             # extend range until we have items
             while not any(x for x in item_list if x.slut_value >= min_points and x.slut_value <= points and x.layer in layers and x not in filter_list):
                 if min_points > 0:
@@ -687,13 +687,13 @@ init 5 python:
         def build_overwear(self, points = 0, min_points = 0):
             def make_upper_item_transparent(item, points, colour):
                 colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
-                if item.layer == 2 and item.slut_value > 0 and points >= 4 and item in real_shirt_list + real_dress_list:
+                if item.layer == 3 and item.slut_value > 0 and points >= 4 and item in real_shirt_list + real_dress_list:
                     colour[3] = .8 + (renpy.random.randint(0, 15) / 100.0)
                 return item.get_copy(), colour
 
             def make_lower_item_transparent(item, points, colour):
                 colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
-                if item.layer == 2 and item.slut_value > 0 and points >= 4 and item in skirts_list + [suitpants, leggings, booty_shorts]:
+                if item.layer == 3 and item.slut_value > 0 and points >= 4 and item in skirts_list + [suitpants, leggings, booty_shorts]:
                     colour[3] = .8 + (renpy.random.randint(0, 15) / 100.0)
                 return item.get_copy(), colour
 
@@ -711,13 +711,13 @@ init 5 python:
                     outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_upper, self.get_color_hate_list())))
 
                 # we added a overlay item, so find a real upper item this time
-                if item and item.layer == 3:
-                    item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(upper_item_list, points, min_points, layers = [2]), points, ["not wearing anything"])
+                if item and item.layer == 4:
+                    item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(upper_item_list, points, min_points, layers = [3]), points, ["not wearing anything"])
                     if item:
                         outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_lower, self.get_color_hate_list())))
 
                 # find lowerbody item
-                if item is None or (not item.has_extension or item.has_extension.layer == 1):
+                if item is None or (not item.has_extension or item.has_extension.layer == 2):
                     item = self.get_item_from_list(self.person, "lower_body", self.build_filter_list(real_pants_list + skirts_list, points, min_points), points, ["not wearing anything"])
                     if item:
                         outfit.add_lower(*make_lower_item_transparent(item, points, self.get_item_color(item, color_lower, self.get_color_hate_list(), 0.9)))
@@ -726,6 +726,11 @@ init 5 python:
             item = self.get_item_from_list(self.person, "feet", self.build_filter_list(shoes_list, points, min_points))
             if item:
                 outfit.add_feet(item, self.get_item_color(item, color_feet, self.get_color_hate_list(), 0.8))
+
+            # random chance of adding outfit custom makeup (base on pref for make-up)
+            if self.person.get_opinion_score("makeup") > -2 and renpy.random.randint(0, 4 - self.person.get_opinion_score("makeup")) == 0:
+                # add makeup to outfit (overrides makeup in base_outfit)
+                add_make_up_to_outfit(self.person, outfit)
 
             self.add_accessory_from_list(outfit, self.build_filter_list(earings_only_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
             self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
@@ -782,10 +787,20 @@ init 5 python:
                 if item:
                     outfit.add_feet(item.get_copy(), color_feet)
 
+            # random shoes
+            if (min_points > 2) or renpy.random.randint(0, 1) == 0:
+                item = self.get_item_from_list(self.person, "feet", self.build_filter_list(shoes_list, points, min_points))
+                if item:
+                    outfit.add_feet(item, self.get_item_color(item, color_feet, self.get_color_hate_list(), 0.8))
+
             # random chance of adding outfit custom makeup (base on pref for make-up)
             if self.person.get_opinion_score("makeup") > -2 and renpy.random.randint(0, 4 - self.person.get_opinion_score("makeup")) == 0:
                 # add makeup to outfit (overrides makeup in base_outfit)
                 add_make_up_to_outfit(self.person, outfit)
+
+            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_without_collars, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
 
             outfit.update_name()
             return outfit

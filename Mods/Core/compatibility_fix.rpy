@@ -161,6 +161,16 @@ init 1 python:
     # pencil skirt pussy usable to False
     pencil_skirt.anchor_below = True
 
+    # change clothing layers (make layer 2 in between (available in under and overwear))
+    for x in pants_list + skirts_list + [x for x in dress_list if x not in [lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear]] + shirts_list:
+        x.layer += 1
+        if x.has_extension:
+            x.has_extension.layer += 1
+
+    # move makeup to layer 2 (in between layer)
+    for x in [light_eye_shadow, heavy_eye_shadow, blush, lipstick]:
+        x.layer += 1
+
     # disable gl2 extensions
     if renpy.android or renpy.mobile:
         config.gl2 = False

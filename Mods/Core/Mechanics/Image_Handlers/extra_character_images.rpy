@@ -121,24 +121,47 @@ init 2 python:
 
     def clothing_generate_stat_slug(self): #Generates a string of text/tokens representing what layer this clothing item is/covers
         cloth_info = ""
-        if self.layer == 3:
+        if self.layer == 4:
             cloth_info += "{image=gui/extra_images/overwear_token.png}"
+        if self.layer == 3:
+            if self in neckwear_list:
+                cloth_info += "{image=gui/extra_images/necklace_token.png}"
+            else:
+                cloth_info += "{image=gui/extra_images/clothing_token.png}"
         if self.layer == 2:
-            cloth_info += "{image=gui/extra_images/clothing_token.png}"
+            if self in shoes_list:
+                cloth_info += "{image=gui/extra_images/shoes_token.png}"
+            elif self in [light_eye_shadow, heavy_eye_shadow, blush, lipstick]:
+                cloth_info += "{image=gui/extra_images/makeup_token.png}"
+            else:
+                cloth_info += "{image=gui/extra_images/accessory_token.png}"
         if self.layer == 1:
-            cloth_info += "{image=gui/extra_images/underwear_token.png}"
+            if self in socks_list:
+                cloth_info += "{image=gui/extra_images/stocking_token.png}"
+            else:
+                cloth_info += "{image=gui/extra_images/underwear_token.png}"
         if self.layer == 0:
             cloth_info += "{image=gui/extra_images/sexy_underwear_token.png}"
 
         if self.has_extension: #Display a second token if the clothing item is a different part (split coverage into top and bottom?)
-            if self.has_extension.layer == 3:
+            if self.has_extension.layer == 4:
                 cloth_info += "|{image=gui/extra_images/overwear_token.png}"
+            if self.has_extension.layer == 3:
+                if self.has_extension in [neckwear_list]:
+                    cloth_info += "|{image=gui/extra_images/accessory_token.png}"
+                else:
+                    cloth_info += "|{image=gui/extra_images/clothing_token.png}"
             if self.has_extension.layer == 2:
-                cloth_info += "|{image=gui/extra_images/clothing_token.png}"
+                if self.has_extension == leotard_bottom:
+                    cloth_info += "|{image=gui/extra_images/clothing_token.png}"
+                elif self.has_extension in shoes_list:
+                    cloth_info += "|{image=gui/extra_images/shoes_token.png}"
+                else:
+                    cloth_info += "|{image=gui/extra_images/accessory_token.png}"
             if self.has_extension.layer == 1:
                 cloth_info += "|{image=gui/extra_images/underwear_token.png}"
-            if self.layer == 0:
-                cloth_info += "{image=gui/extra_images/sexy_underwear_token.png}"
+            if self.has_extension.layer == 0:
+                cloth_info += "|{image=gui/extra_images/sexy_underwear_token.png}"
 
         # Match modifier in `get_total_slut_modifiers_enhanced()` for now
         cloth_info += "+" +str(self.get_slut_value()) + "{image=gui/heart/red_heart.png}"
