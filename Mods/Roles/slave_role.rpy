@@ -128,7 +128,7 @@ label slave_collar_person_label(the_person):
         $ slave_remove_collar(the_person)
         "You remove the collar from [the_person.possessive_title]'s neck"
     else:
-        call screen enhanced_main_choice_display(build_menu_items([["Select Collar"] + [["Simple Collar", "Simple Collar"], ["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Spiked Choker", spiked_choker], ["Wide Lace Choker", wide_choker], ["Back", "Back"]]]))
+        call screen enhanced_main_choice_display(build_menu_items([["Select Collar"] + [["Simple Collar", "Simple Collar"], ["Breed Me", breed_collar], ["Cum Slut", cum_slut_collar], ["Fuck Doll", fuck_doll_collar], ["Spiked Choker", spiked_choker], ["Back", "Back"]]]))
         $ collar_choice = _return
         if collar_choice == "Back":
             return

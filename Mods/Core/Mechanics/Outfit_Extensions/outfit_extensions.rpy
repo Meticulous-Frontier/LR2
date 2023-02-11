@@ -226,7 +226,7 @@ init -1 python:
     Outfit.full_access = full_access
 
     def remove_all_collars(self):
-        for proper_name in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Spiked_Choker", "Wide_Choker"]:
+        for proper_name in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Spiked_Choker"]:
             found = find_in_list(lambda x: x.proper_name == proper_name, self.accessories)
             if found:
                 self.accessories.remove(found)
