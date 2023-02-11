@@ -25,7 +25,7 @@ init -1 python:
         return mc.business.event_triggers_dict.get("dungeon_unlocked", False) == True
 
     def change_locked_clarity_enhanced(self, amount, add_to_log = True): #TODO: Decide if we need a max locked clarity thing to gate progress in some way.
-        if "perk_system" in globals():
+        if "perk_system" in globals() and perk_system is not None:
             amount = amount * get_clarity_multiplier()
             if perk_system.get_ability_flag("Lustful Priorities"):
                 amount += 5
