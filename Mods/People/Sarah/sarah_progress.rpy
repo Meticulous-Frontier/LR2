@@ -106,7 +106,7 @@ init 10 python:
         return sarah.event_triggers_dict.get("gym_tshirt",False)
 
     def sarah_story_80_lust_hint():
-        if sarah.event_triggers_dict.get("initial_threesome_target", None) != None:
+        if sarah.event_triggers_dict.get("initial_threesome_target", None) is not None:
             return "Arrange the threesome with the person you chose."
         if sarah.sluttiness < 80:
             return "Try increasing [sarah.title]'s sluttiness."

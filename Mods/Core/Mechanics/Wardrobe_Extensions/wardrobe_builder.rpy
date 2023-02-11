@@ -185,7 +185,7 @@ init 5 python:
     coverup_lower_list = []
 
     def neutralize_item_colour(item, the_colour = None):
-        if item == None:
+        if item is None:
             return None
 
         current_alpha = item.colour[3]
@@ -818,7 +818,7 @@ init 5 python:
             alterations = 0
 
             #First, get a theme color
-            if opinion_color == None:
+            if opinion_color is None:
                 if main_colour:
                     opinion_color = self.get_color_opinion(main_colour)
                 elif renpy.random.randint(0,100) < 50:  #50% chance we go straight to a favorite color.
@@ -828,7 +828,7 @@ init 5 python:
                     opinion_color = self.person.favorite_colour()
 
             color_list = [self.color_prefs[opinion_color][x][:] for x in self.color_prefs[opinion_color]]
-            if main_colour == None:
+            if main_colour is None:
                 main_colour = renpy.random.choice(color_list)
 
             if coloured_underwear:

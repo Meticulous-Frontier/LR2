@@ -13,7 +13,7 @@ init -1 python:
             on_buy_function = None, extra_arguments = None, on_apply_function = None, on_remove_function = None, on_turn_function = None, on_move_function = None, on_day_function = None, dependant_policies = None,
             project_progress = 0, project_cost = 100, category = "",  tier = 0):
 
-            if requirement == None:
+            if requirement is None:
                 requirement = IT_proj_generic_req_True
             super(IT_Project, self).__init__(name, desc, cost, requirement = requirement, toggleable = toggleable,
                 on_buy_function = on_buy_function, extra_arguments = extra_arguments, on_apply_function = on_apply_function, on_remove_function = on_remove_function,

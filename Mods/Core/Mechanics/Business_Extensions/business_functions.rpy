@@ -94,7 +94,7 @@ init -1 python:
     Business.IT_partial_projects = property(partial_IT_projects, None, None, "Partially completed IT Projects")
 
     def set_active_IT_project(project):
-        if mc.business.IT_project_in_progress != None:
+        if mc.business.IT_project_in_progress is not None:
             if mc.business.IT_project_in_progress[0] == project.identifier:
                 return
         if mc.business.IT_project_in_progress and mc.business.IT_project_in_progress[1] < mc.business.IT_project_in_progress[0].project_cost and mc.business.IT_project_in_progress[1] > 0:

@@ -1119,7 +1119,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
     $ contact = myra.event_triggers_dict.get("energy_drink_supplier", None)
     $ new_delivery_person = False
     $ finished = False
-    if contact == None:
+    if contact is None:
         "Unfortunately, your delivery person is not available anymore. You decide to appoint someone new to do it."
         call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
         $ the_person = _return

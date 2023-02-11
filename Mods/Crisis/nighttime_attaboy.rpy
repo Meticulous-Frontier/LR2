@@ -142,7 +142,7 @@ init 1 python:
 
 label crisis_nighttime_attaboy_label():
     $ the_person = get_person_by_identifier(attaboy_target)
-    if the_person == None:
+    if the_person is None:
         return
 
     if the_person.arousal < 60:

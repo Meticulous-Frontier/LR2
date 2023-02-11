@@ -215,7 +215,7 @@ init -1 python:
 
             if self.owner is None:
                 self.owner = mc
-            if description == None:
+            if description is None:
                 self.description = ""
 
 
@@ -323,7 +323,7 @@ init -1 python:
 
         def update(self):
             if hasattr(self, "update_func"):
-                if self.update_func != None and self.toggle:
+                if self.update_func is not None and self.toggle:
                     self.update_func()
             return
 
@@ -333,7 +333,7 @@ init -1 python:
 
         def on_cum(self, the_person = None, the_place = None):
             if hasattr(self, "cum_func"):
-                if self.cum_func != None and self.toggle:
+                if self.cum_func is not None and self.toggle:
                     self.cum_func(the_person, the_place)
             return
 

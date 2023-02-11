@@ -52,7 +52,7 @@ label update_IT_projects_label(the_person):
 
 label IT_project_complete_label():
     $ the_person = mc.business.it_director
-    if the_person == None:
+    if the_person is None:
         return
     $ the_person.draw_person()
     "[the_person.possessive_title] tracks you down while you are working."

@@ -5,7 +5,7 @@ init 1 python:
     #   if mc.inventory.has_serum_with_trait(blood_brain_pen):
     #       # DO SOMETHING
     def has_serum_with_trait(self, the_trait):
-        return next((x for x in self.get_serum_type_list() if x.has_trait(the_trait)), None) != None
+        return next((x for x in self.get_serum_type_list() if x.has_trait(the_trait)), None) is not None
 
     SerumInventory.has_serum_with_trait = has_serum_with_trait
 

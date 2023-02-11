@@ -267,7 +267,7 @@ label mom_outfit_help_crisis_label_enhanced():
             $ third_outfit = _return
             $ the_person.draw_person()
 
-            if third_outfit == None:
+            if third_outfit is None:
                 "You try a few different combinations, but you can't come up with anything you think [the_person.title] will like."
                 mc.name "Sorry [the_person.title], I thought I had an idea but I guess I was wrong."
                 the_person "That's fine [the_person.mc_title]. Do you want to pick one of my outfits instead?"

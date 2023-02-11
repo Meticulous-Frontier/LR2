@@ -1649,7 +1649,7 @@ init 3 python:
 
     def candace_get_sex_record_difference_tier(): #Use this to determine what dialogue to run after curing her bimboism. Made a function because messy
         old_dict = candace.event_triggers_dict.get("sex_record_snapshot", None)
-        if old_dict == None:
+        if old_dict is None:
             return 0
         if old_dict["Vaginal Sex"] < candace.sex_record["Vaginal Sex"] or old_dict["Anal Sex"] < candace.sex_record["Anal Sex"]: #You fucked her at least once
             if old_dict["Vaginal Sex"] + old_dict["Anal Sex"] + 2 <= candace.sex_record["Vaginal Sex"] + candace.sex_record["Anal Sex"]: #Sex at least twice

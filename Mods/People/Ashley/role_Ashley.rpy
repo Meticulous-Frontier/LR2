@@ -2278,7 +2278,7 @@ label ashley_second_concert_date_label():
     stephanie "Mmm, I've been thinking about riding on this all night. Let's get you nice and hard."
     "[stephanie.title] leans forward and licks all around the top of the shaft, then starts to suck on the tip."
     $ mc.change_locked_clarity(30)
-    if (date_outcome == "handjob" and not cum_clue) or date_outcome == None:
+    if (date_outcome == "handjob" and not cum_clue) or date_outcome is None:
         "Her tongue swirls all around you, licking up your pre-cum. Soon you are hard as a rock."
     elif date_outcome == "handjob" and cum_clue:
         "She pulls off for a bit, giving you a few strokes with her hand."

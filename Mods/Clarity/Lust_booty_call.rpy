@@ -64,7 +64,7 @@ label lust_booty_call_intro_label():
     "Instead, you open up your contacts."
     "You wonder... surely you could convince someone to come over?"
     call screen enhanced_main_choice_display(build_menu_items([["Text who?"] + lust_get_booty_call_list()], draw_hearts_for_people = True))
-    if _return == "Leave" or _return == None:
+    if _return == "Leave" or _return is None:
         "After looking at your phone contacts, you change your mind. Maybe another opportunity will present itself later."
         $ mc.business.add_mandatory_crisis(lust_booty_call_intro)
         return
@@ -144,7 +144,7 @@ label lust_booty_call_label():
     else:
         "Before you head home for the day, you can feel all the sexual tension you've built up throughout the day, so you decide to make a booty call."
     call screen enhanced_main_choice_display(build_menu_items([["Text who?"] + lust_get_booty_call_list() + ["No one"]], draw_hearts_for_people = True))
-    if _return == "No one" or _return == None:
+    if _return == "No one" or _return is None:
         "After looking at your contact list, you change your mind. Maybe another opportunity will present itself later."
         return
     $ the_person = _return

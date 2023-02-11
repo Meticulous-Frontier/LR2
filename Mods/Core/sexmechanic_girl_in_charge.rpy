@@ -132,7 +132,7 @@ init 2:
         #Use this function to make a "random" sex goal. Weights outcome based on the person and how far things have already gone.
         #weight is scale 0-100
         def create_sex_goal(the_person, report_log = None):
-            if report_log != None: #First, check if we are here
+            if report_log is not None: #First, check if we are here
                 if report_log.get("guy orgasms", 0) > 0 and report_log.get("girl orgasms", 0) == 0:   #We are here because Mc finished too fast.
                     pass #TODO do this here or in the original call?
 
@@ -294,7 +294,7 @@ init 2:
 
             ###Now we construct our path.
             sex_path = []
-            if first_position == None:  #We are going straight to our final position
+            if first_position is None:  #We are going straight to our final position
                 sex_path.append(final_node)
                 return sex_path
             else:
@@ -325,10 +325,10 @@ init 2:
             return dom_requirement_get_mc_off
 
         def sex_can_continue(the_person, the_position = None, the_node = None): #Use this to check and see if girl would be up to continue the current position
-            if the_node != None:
+            if the_node is not None:
                 the_position = the_node.position
 
-            if the_position != None:
+            if the_position is not None:
                 if not the_position.check_clothing(the_person):
                     return False
                 if the_person.energy < the_position.girl_energy * 2:  #Enough for at least 2 more rounds
@@ -495,7 +495,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             if len(sex_path) > 0:
                 $ current_node = sex_path.pop(0)
                 $ object_choice = girl_choose_object_enhanced(the_person, current_node.position)
-                if object_choice == None:
+                if object_choice is None:
                     if current_node.position.requires_location == "kneel" or current_node.position.requires_location == "lay":
                         $ object_choice = make_floor()
                     elif current_node.position.requires_location == "lean":

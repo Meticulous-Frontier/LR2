@@ -31,11 +31,11 @@ label activate_side_character_mod_core(stack):
 
 label update_side_character_mod_core(stack):
     python:
-        if mc.business.event_triggers_dict.get("side_character_unavail_list", None) == None:
+        if mc.business.event_triggers_dict.get("side_character_unavail_list", None) is None:
             side_character_init()
-        if cuckold_employee_get() == None:
+        if cuckold_employee_get() is None:
             mc.business.add_mandatory_crisis(cuckold_employee_init)
-        if chemist_daughter_employee_get() == None:
+        if chemist_daughter_employee_get() is None:
             mc.business.add_mandatory_crisis(chemist_daughter_init)
         execute_hijack_call(stack)
     return

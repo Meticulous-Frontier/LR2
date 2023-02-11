@@ -92,7 +92,7 @@ init -2 python:
         return True
 
     def kaya_add_HR_program_event_requirement(): #Not attached to anything
-        if mc.business.hr_director != None and renpy.random.randint(0,5) == 1:
+        if mc.business.hr_director is not None and renpy.random.randint(0,5) == 1:
             return True
         return False
 

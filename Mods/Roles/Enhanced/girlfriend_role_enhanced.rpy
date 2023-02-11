@@ -125,7 +125,7 @@ label girlfriend_myplace_yourplace_label(the_person):
 
 label girlfriend_sleepover_crisis_label():
     $ the_person = schedule_sleepover_get_girlfriend_person()
-    if the_person == None:
+    if the_person is None:
         return
     #TODO give player the option to cancel the sleepover. she's probably sad.
     if mc.business.event_triggers_dict.get("your_place", True):
@@ -441,7 +441,7 @@ label girlfriend_underwear_shopping_label(the_person):
     while done == False:
         menu:
             "Have her pick something out":
-                if lingerie_outfit == None:
+                if lingerie_outfit is None:
                     the_person "Okay! I'll go with something I would normally wear, and you can let me know what you think, okay?"
                     mc.name "Sounds good. We can always make modifications to it or try something different if we need to."
                 else:
@@ -461,7 +461,7 @@ label girlfriend_underwear_shopping_label(the_person):
                 "The door opens, and there stands your girlfriend."
                 the_person "Aha! What do you think?"
                 "You check her out for a bit. Should you change it? Or start over?"
-            "Modify current outfit" if lingerie_outfit != None:
+            "Modify current outfit" if lingerie_outfit is not None:
                 mc.name "I like it... but I'd like to make a few changes. Is that okay?"
                 the_person "Okay! Grab what you think would look good, I'll be in the dressing room until you figure it out."
                 $ clear_scene()
@@ -492,7 +492,7 @@ label girlfriend_underwear_shopping_label(the_person):
 
             "Pick something yourself":
                 mc.name "Let me pick something out for you."
-                if lingerie_outfit != None:
+                if lingerie_outfit is not None:
                     the_person "Awww, okay. I kinda like this one, but I don't mind letting you dress me up a bit more."
                     the_person "I'll get changed, and while I do that, you pick something out for me, okay?"
                 else:
@@ -525,13 +525,13 @@ label girlfriend_underwear_shopping_label(the_person):
                     "She quickly gets dressed then emerges."
                     the_person "Okay... do you want to start over then?"
 
-            "Buy this" if lingerie_outfit != None:
+            "Buy this" if lingerie_outfit is not None:
                 $ done = True
                 $ mc.change_locked_clarity(30)
                 $ the_person.change_novelty(5)
-            "Give up" if lingerie_outfit == None:
+            "Give up" if lingerie_outfit is None:
                 $ done = True
-    if lingerie_outfit == None:
+    if lingerie_outfit is None:
         $ the_person.draw_person(emotion = "sad")
         the_person "Ah, okay. That's alright, maybe we could try again another time?"
         mc.name "Yeah, I think that might be for the better."

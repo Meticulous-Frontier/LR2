@@ -15,7 +15,7 @@ init -2 python:
             self.base_tier = 1
             self.is_selected = False
             self.upg_label = upg_label
-            if upg_string == None:
+            if upg_string is None:
                 self.upg_string = "Unknown upgrade requirements."
             else:
                 self.upg_string = upg_string
@@ -67,7 +67,7 @@ init -2 python:
         def is_active(self, min_tier = 0, exact_tier = None):   #Returns true if this trait is currently active on MC.
             if min_tier > self.get_trait_tier():
                 return False
-            if exact_tier != None:
+            if exact_tier is not None:
                 if exact_tier != self.get_trait_tier():
                     return False
             return perk_system.has_ability_perk(self.name)

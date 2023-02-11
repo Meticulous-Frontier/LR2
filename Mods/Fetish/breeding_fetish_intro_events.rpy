@@ -1142,7 +1142,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         else:
             #TODO what to put here?
             pass
-        if camera_person == None:
+        if camera_person is None:
             "You grab your phone off the desk and stop the video. You quickly put it in an email to [the_person.title] so she can have a copy of it."
         else:
             camera_person "Wow..."

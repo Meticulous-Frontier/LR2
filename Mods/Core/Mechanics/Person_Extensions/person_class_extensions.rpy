@@ -1202,7 +1202,7 @@ init -1 python:
             skill_name = "Supply Skill"
             current = self.supply_skill
 
-        if skill_name == None:
+        if skill_name is None:
             return
 
         if current == score:
@@ -2919,19 +2919,19 @@ init -1 python:
     def person_set_event_day(self, dict_key, override = True, set_day = None):
         if not override and self.event_triggers_dict.get(dict_key, None):
             return False
-        if set_day != None:
+        if set_day is not None:
             self.event_triggers_dict[dict_key] = set_day
         else:
             self.event_triggers_dict[dict_key] = day
         return
 
     def person_get_event_day(self, dict_key, set_if_none = True):
-        if self.event_triggers_dict.get(dict_key, None) == None and set_if_none:
+        if self.event_triggers_dict.get(dict_key, None) is None and set_if_none:
             self.set_event_day(dict_key)
         return self.event_triggers_dict.get(dict_key, None)
 
     def person_days_since_event(self, dict_key, set_if_none = True):
-        if self.event_triggers_dict.get(dict_key, None) == None and set_if_none:
+        if self.event_triggers_dict.get(dict_key, None) is None and set_if_none:
             self.set_event_day(dict_key)
         if self.event_triggers_dict.get(dict_key, None):
             return day - self.event_triggers_dict.get(dict_key, None)

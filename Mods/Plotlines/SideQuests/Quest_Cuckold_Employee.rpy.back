@@ -71,7 +71,7 @@ init 1 python:
                 # readd the breeding session (we talked to her without breeding)
                 person.add_unique_on_talk_event(quest_cuckold_employee_breeding_session)
         if quest_cuckold_employee().get_quest_flag() <= 101:
-            if person == None:
+            if person is None:
                 quest_cuckold_employee().quest_completed()
                 return
         return
@@ -181,7 +181,7 @@ label quest_cuckold_employee_init_label(): #Use this function to set quest speci
 
 label quest_cuckold_employee_intro_label():
     $ the_person = quest_cuckold_employee_get_target()
-    if the_person == None:
+    if the_person is None:
         #ABORT ABORT, we fucked up somewhere.
         $ quest_cuckold_employee().quest_completed()
         return
@@ -213,7 +213,7 @@ label quest_cuckold_employee_intro_label():
 label quest_cuckold_employee_decision_label():
     $ the_person = quest_cuckold_employee_get_target()
     $ quest_cuckold_employee().quest_event_dict["decision_day"] = day
-    if the_person == None:
+    if the_person is None:
         #ABORT ABORT, we fucked up somewhere.
         $ quest_cuckold_employee().quest_completed()
         return

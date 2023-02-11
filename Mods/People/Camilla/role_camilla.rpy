@@ -1086,7 +1086,7 @@ label camilla_outfit_help_label(the_person):    #20
             $ camilla_outfit_3 = _return
             #$ the_person.draw_person()
 
-            if camilla_outfit_3 == None:
+            if camilla_outfit_3 is None:
                 "You try a few different combinations, but you can't come up with anything. You head back to the changing room."
                 $ the_person.apply_planned_outfit()
                 $ the_person.draw_person()

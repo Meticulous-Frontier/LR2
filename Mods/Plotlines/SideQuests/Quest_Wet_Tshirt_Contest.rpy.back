@@ -166,7 +166,7 @@ label quest_wet_tshirt_contest_intro_label(the_person):
         the_person "Why don't you talk to the HR director, [mc.business.hr_director.name]? I bet she could help you figure out who would be good for it..."
     else:
         $ contact = get_random_from_list(mc.business.hr_team)
-        if contact == None: #No one in HR? We try to just talk to girls directly? Or fail quest?
+        if contact is None: #No one in HR? We try to just talk to girls directly? Or fail quest?
             the_person "Hmm... I'm not really sure who you would talk to about it to make it happen. Maybe you should just talk to some girls around the office?"
             mc.name "Hmm... maybe..."
             #TODO this

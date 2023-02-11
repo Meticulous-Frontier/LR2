@@ -53,7 +53,7 @@ init 1 python:
     def quest_cure_discovery_tracker():
         quest = quest_cure_discovery()
         if quest.get_quest_flag() <= 101 and quest.get_quest_flag() > 1:
-            if quest_cure_get_market_contact() == None: #We lose our marketing contact
+            if quest_cure_get_market_contact() is None: #We lose our marketing contact
                 quest.quest_completed()
         return
 
@@ -130,7 +130,7 @@ label quest_cure_discovery_intro_label():
     $ the_person = mc.business.head_researcher
     $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
     $ quest_cure_discovery().quest_event_dict["start_day"] = day
-    if the_person == None:
+    if the_person is None:
         return #Bad end
     if mc.location != rd_division:
         $ mc.start_text_convo(the_person)
@@ -235,7 +235,7 @@ label quest_cure_discovery_market_patent_label(the_person):
 label quest_cure_discovery_patent_sold_label():
     $ the_disease = quest_cure_discovery().quest_event_dict.get("disease_name", "Rabies")
     $ the_person = quest_cure_get_market_contact()
-    if the_person == None:
+    if the_person is None:
         return
     #TODO test to make sure market contact still works for us.
     $ mc.start_text_convo(the_person)
@@ -278,7 +278,7 @@ label quest_cure_discovery_patent_kept_label():
     "Red Cross""Thank you for donating your patent for [the_disease]!"
     "Red Cross""With this donation, we promise we will work to the best of our abilities to get this cure into the hands of everyone who needs it, worldwide."
     "Donated? What the hell? You didn't donate that!"
-    if the_person == None:
+    if the_person is None:
         "Suddenly, you realize what must have happened. After clearing out her desk, the old head researcher must have donated the patent she discovered!"
         "Well, maybe you should have considered selling the patent. Either way, that business opportunity is now gone."
         $del the_disease

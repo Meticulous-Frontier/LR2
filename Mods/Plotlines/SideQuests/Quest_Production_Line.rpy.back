@@ -85,7 +85,7 @@ init 1 python:
         quest = quest_production_line()
         person = quest_production_line_get_target()
         if quest.get_quest_flag() < 100:
-            if person == None:          #quest target is fired or otherwise out of the game
+            if person is None:          #quest target is fired or otherwise out of the game
                 quest.quest_completed()
                 return
         if quest.get_quest_flag() == 31: #agreed to give raise.

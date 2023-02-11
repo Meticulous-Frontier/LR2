@@ -61,7 +61,7 @@ init 2 python:
 
 label breeding_fetish_high_fertility_crisis_label():
     $ the_person = get_highly_fertile_breeder()
-    if the_person == None:
+    if the_person is None:
         return
 
     $ update_breeding_fetish_state(the_person)

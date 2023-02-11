@@ -294,7 +294,7 @@ label body_monitor_phase_4_label():
     return
 
 label bm_on_hold_1_label():
-    if mc.business.it_director == None:
+    if mc.business.it_director is None:
         "Since your IT director position is vacant at the moment, you decide to put the new nanobot program project on hold, but keep the notes left behind by your former IT Director to be able to continue the project once the position is filled again."
     else:
         "Since your head researcher position is vacant now, you tell [mc.business.it_director.possessive_title] to put the new nanobot program project on hold until you assign a new Head Researcher."

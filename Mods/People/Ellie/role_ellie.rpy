@@ -318,7 +318,7 @@ label ellie_meet_ellie_intro_label():
 
 label ellie_head_researcher_halfway_intro_label():
     $ the_person = mc.business.head_researcher
-    if the_person == None:
+    if the_person is None:
         $ mc.business.add_mandatory_crisis(ellie_unnecessary_payment)
         return
     "You feel your phone vibrate in your pocket. It's [the_person.possessive_title]."
@@ -3138,13 +3138,13 @@ label ellie_nanobot_fetish_label(the_person):   #After first test, MC can give e
 
 init -1 python:
     def ellie_is_working_on_nanobots(): #This should probably always return true now since she is in R&D
-        if ellie.location == mc.business.r_div and mc.business.IT_project_in_progress != None:
+        if ellie.location == mc.business.r_div and mc.business.IT_project_in_progress is not None:
             if mc.business.IT_project_in_progress in nanobot_IT_project_list:
                 return True
         return False
 
     def ellie_is_working_on_project():
-        if ellie.location == mc.business.r_div and mc.business.IT_project_in_progress != None:
+        if ellie.location == mc.business.r_div and mc.business.IT_project_in_progress is not None:
             return True
         return False
 
