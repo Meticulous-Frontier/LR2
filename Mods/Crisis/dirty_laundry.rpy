@@ -40,11 +40,11 @@ init 3 python:
         return
 
 label dirty_laundry_action_label():
-    if aunt.event_triggers_dict.get("moving_apartment", 0) == -1:
+    if aunt.event_triggers_dict.get("moving_apartment", 0) != 0:
         $ the_person = get_random_from_list(people_in_mc_home([aunt]))
     else:
         $ the_person = get_random_from_list(people_in_mc_home())
-    if the_person is None:
+    if the_person is None or the_person.has_limited_time_event("sleeping_walk_in_label"):
         return
 
     $ old_location = mc.location

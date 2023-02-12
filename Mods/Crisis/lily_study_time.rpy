@@ -2,6 +2,8 @@ init 2 python:
     def sister_failed_test_requirement():
         if not lily.has_job(sister_student_job) and not lily.is_employee():
             return False
+        if lily.has_limited_time_event("sleeping_walk_in_label"):
+            return False
         if mc_asleep() and mc.business.event_triggers_dict.get("sister_serum_test", False) and lily.is_available:
             return True
         return False

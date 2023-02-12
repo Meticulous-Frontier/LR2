@@ -7,6 +7,8 @@
 init 2 python:
     def mom_sister_snooping_requirement():
         if not day%7 == 5 and mc.is_home() and not lily.is_employee() and lily.is_available and mom.is_available: # not on saturday mornings
+            if mom.has_limited_time_event("sleeping_walk_in_label") or lily.has_limited_time_event("sleeping_walk_in_label"):
+                return False
             return True
         return False
 
