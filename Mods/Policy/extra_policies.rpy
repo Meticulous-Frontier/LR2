@@ -97,7 +97,7 @@ init 1310 python:
     commando_uniform_policy = Policy(
         name = "Commando Dress Code Policy",
         cost = 10000,
-        desc = "Unless required as part of a uniform, employees are forbidden from wearing bras or panties.",
+        desc = "Employees are forbidden from wearing bras or panties as part of their dress code or uniform.",
         toggleable = True,
         own_requirement = [corporate_enforced_nudity_policy, dress_code_policy],
         dependant_policies = dress_code_policy

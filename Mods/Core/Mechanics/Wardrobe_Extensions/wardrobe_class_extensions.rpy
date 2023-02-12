@@ -132,10 +132,6 @@ init -1 python:
 
     def build_assembled_outfit(outfit_under, outfit_over):
         assembled_outfit = outfit_under.get_copy()
-        assembled_outfit.name = outfit_under.name + " + " + outfit_over.name
-
-        # renpy.say(None, "Assembled outfit: " + assembled_outfit.name)
-
         for upper in outfit_over.upper_body:
             assembled_outfit.upper_body.append(upper.get_copy())
 
@@ -147,64 +143,42 @@ init -1 python:
 
         for acc in outfit_over.accessories:
             assembled_outfit.accessories.append(acc.get_copy())
+
+        assembled_outfit.build_outfit_name()
+
         return assembled_outfit
 
-    def generate_random_appropriate_outfit(person, outfit_type = "FullSets", swap_bottoms = False, allow_skimpy = False, sluttiness = None, easier_access = False):
+    def generate_random_appropriate_outfit(person, outfit_type = "FullSets", sluttiness = None):
         wardrobe_builder = WardrobeBuilder(person)
         if sluttiness is None:
             sluttiness = person.sluttiness
         base_sluttiness = __builtin__.max(sluttiness - 15, 0) # first 15 points of sluttiness don't impact outfit builder
         min_sluttiness = __builtin__.min(base_sluttiness / 18, 5) if sluttiness > 50 else 0 # prevent override of person preferences until she's slutty enough not to care
-        outfit = wardrobe_builder.build_outfit(outfit_type, __builtin__.min(base_sluttiness / 7, 12), min_sluttiness)
-        return wardrobe_builder.personalize_outfit(outfit, max_alterations = 2, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, easier_access = easier_access)
+        return wardrobe_builder.build_outfit(outfit_type, __builtin__.min(base_sluttiness / 7, 12), min_sluttiness)
 
-    def _filter_full_outfits(full_outfits, slut_limit, easier_access, commando):
+    def _filter_full_outfits(full_outfits, slut_limit):
         valid_full_outfits = []
-        modified_full_outfits = []
-        for full_outfit in full_outfits:
-            if commando:
-                full_outfit = full_outfit.get_copy()
-                full_outfit.remove_bra_and_panties()
-            # Only add if outfit if below uniform limits
-            # Employees are not allowed to slut it up if there is a strict dress code.
-            if slut_limit is None or full_outfit.get_full_outfit_slut_score() <= slut_limit:
-                if not easier_access or full_outfit.is_easier_access():
-                    valid_full_outfits.append(full_outfit)
-                else:
-                    full_outfit = full_outfit.get_copy()
-                    full_outfit.make_easier_access()
-                    modified_full_outfits.append(full_outfit)
-        # We try to return unmodified outfits, but if none are available, we modify
-        return valid_full_outfits or modified_full_outfits
+        for current_outfit in full_outfits:
+            if slut_limit is None or current_outfit.get_full_outfit_slut_score() <= slut_limit:
+                valid_full_outfits.append(current_outfit)
+        return valid_full_outfits
 
-    def _filter_underwear_sets(underwear_sets, underwear_limit, commando):
+    def _filter_underwear_sets(underwear_sets, underwear_limit):
         valid_underwear_sets = []
-        for underwear in underwear_sets:
-            if commando:
-                underwear = underwear.get_copy()
-                underwear.remove_bra_and_panties()
-            # Only add if underwear if below uniform limits
-            if underwear_limit is None or underwear.get_underwear_slut_score() <= underwear_limit:
-                valid_underwear_sets.append(underwear)
+        for current_underwear in underwear_sets:
+            if underwear_limit is None or current_underwear.get_underwear_slut_score() <= underwear_limit:
+                valid_underwear_sets.append(current_underwear)
         return valid_underwear_sets
 
-    def _filter_overwear_sets(overwear_sets, slut_limit, easier_access):
+    def _filter_overwear_sets(overwear_sets, slut_limit):
         valid_overwear_sets = []
-        modified_overwear_sets = []
-        for overwear in overwear_sets:
-            if slut_limit is None or overwear.get_overwear_slut_score() <= slut_limit:
-                if not easier_access or overwear.is_easier_access():
-                    valid_overwear_sets.append(overwear)
-                else:
-                    overwear = overwear.get_copy()
-                    overwear.make_easier_access()
-                    modified_overwear_sets.append(overwear)
-        # We try to return unmodified outfits, but if none are available, we modify
-        return valid_overwear_sets or modified_overwear_sets
+        for current_overwear in overwear_sets:
+            if slut_limit is None or current_overwear.get_overwear_slut_score() <= slut_limit:
+                valid_overwear_sets.append(current_overwear)
+        return valid_overwear_sets
 
     # Combines business wardrobe with employee's personal wardrobe
-    # Takes commando_uniform_policy into account only for personal wardrobes
-    def build_uniform_wardrobe(self, personal_wardrobe = Wardrobe("Empty"), slut_limit = None, underwear_limit = None, easier_access = False, commando = False):
+    def build_uniform_wardrobe(self, personal_wardrobe, slut_limit = None, underwear_limit = None):
         # Bump underwear limit to non-zero
         if underwear_limit is not None and underwear_limit < 10:
             underwear_limit = 10
@@ -214,27 +188,19 @@ init -1 python:
         overwear_sets = []
 
         if self.outfits:
-            full_outfits = self.outfits.copy()
+            full_outfits = _filter_full_outfits(self.outfits, slut_limit)
+        if not full_outfits:
+            full_outfits = _filter_full_outfits(personal_wardrobe.outfits, slut_limit)
 
-        if self.overwear_sets and self.underwear_sets:
-            overwear_sets = self.overwear_sets.copy()
-            underwear_sets = self.underwear_sets.copy()
-        elif self.overwear_sets and not self.underwear_sets:
-            overwear_sets = self.overwear_sets.copy()
-            underwear_sets = _filter_underwear_sets(personal_wardrobe.underwear_sets, underwear_limit, commando)
-        elif not self.overwear_sets and self.underwear_sets:
-            overwear_sets = _filter_overwear_sets(personal_wardrobe.overwear_sets, slut_limit, easier_access)
-            underwear_sets = self.underwear_sets
+        if self.overwear_sets:
+            overwear_sets = _filter_overwear_sets(self.overwear_sets, slut_limit)
+        if not self.overwear_sets:
+            overwear_sets = _filter_overwear_sets(personal_wardrobe.overwear_sets, slut_limit)
 
-        # If we haven't added anything, add *everything*
-        if not full_outfits and not underwear_sets and not overwear_sets:
-            full_outfits = _filter_full_outfits(personal_wardrobe.outfits, slut_limit, easier_access, commando)
-            underwear_sets = _filter_underwear_sets(personal_wardrobe.underwear_sets, underwear_limit, commando)
-            overwear_sets = _filter_overwear_sets(personal_wardrobe.overwear_sets, slut_limit, easier_access)
-
-        # If there *still* isn't any underwear, just add an empty set.
-        if commando and (overwear_sets or not full_outfits) and not underwear_sets:
-            underwear_sets = [Outfit("No Underwear")]
+        if self.underwear_sets:
+            underwear_sets = _filter_underwear_sets(self.underwear_sets, underwear_limit)
+        if not self.underwear_sets:
+            underwear_sets = _filter_underwear_sets(personal_wardrobe.underwear_sets, underwear_limit)
 
         return Wardrobe("Valid Uniform Wardrobe", full_outfits, underwear_sets, overwear_sets)
 
@@ -248,29 +214,33 @@ init -1 python:
         valid_wardrobe = None
         if (person.is_employee() or person.is_intern()) and dress_code_policy.is_active():
             slut_limit, underwear_limit, _limited_to_top = mc.business.get_uniform_limits()
-            valid_wardrobe = self.build_uniform_wardrobe(person.wardrobe, slut_limit, underwear_limit,
-                easier_access = easier_access_policy.is_active(),
-                commando = commando_uniform_policy.is_active())
+            valid_wardrobe = self.build_uniform_wardrobe(person.wardrobe, slut_limit, underwear_limit)
         else:
             valid_wardrobe = self.build_uniform_wardrobe(person.wardrobe)
 
         sluttiness_modifier = person.get_opinion_score("work uniforms") / 40.0 # low impact on sluttiness
-        uniform = valid_wardrobe.decide_on_outfit2(person, sluttiness_modifier = sluttiness_modifier, slut_limit = slut_limit,
-            swap_bottoms = personal_bottoms_uniform_policy.is_active(),
-            allow_skimpy = creative_skimpy_uniform_policy.is_active(),
-            easier_access = easier_access_policy.is_active())
+
+        uniform = valid_wardrobe.decide_on_outfit2(person, sluttiness_modifier = sluttiness_modifier, slut_limit = slut_limit)
 
         if uniform and (person.is_employee() or person.is_intern()):  # only apply policies for employees
             if creative_colored_uniform_policy.is_active():
                 uniform = WardrobeBuilder(person).personalize_outfit(uniform, max_alterations = 2,
                     swap_bottoms = personal_bottoms_uniform_policy.is_active(),
-                    allow_skimpy = creative_skimpy_uniform_policy.is_active(),
-                    easier_access = easier_access_policy.is_active())
+                    allow_skimpy = creative_skimpy_uniform_policy.is_active())
             elif personal_bottoms_uniform_policy.is_active():
                 (uniform, _swapped) = WardrobeBuilder(person).apply_bottom_preference(person, uniform)
+            elif easier_access_policy.is_active(): # only when creative and relaxed are not active
+                uniform.make_easier_access()
+
+            if commando_uniform_policy.is_active(): # always applied, overrides uniform
+                uniform.remove_bra_and_panties()
 
         if uniform and person.job == doctor_job:
             uniform.add_upper(lab_coat.get_copy(), colour_white)
+
+        uniform.build_outfit_name()
+
+        # print("Picked uniform: {} ({})".format(uniform.name, uniform.get_full_outfit_slut_score()))
 
         return uniform
 
@@ -278,11 +248,7 @@ init -1 python:
     Wardrobe.decide_on_uniform = decide_on_uniform_enhanced
 
     # An outfit selector that takes personal preferences into account
-    # swap_bottoms, allow_skimpy, and easier_access apply *only* to fallback generated outfits
-    def decide_on_outfit_enhanced(self, person, sluttiness_modifier = 0.0, slut_limit = 999, swap_bottoms = False, allow_skimpy = None, easier_access = False):
-        if allow_skimpy is None:
-            allow_skimpy = person.sluttiness > 50
-
+    def decide_on_outfit_enhanced(self, person, sluttiness_modifier = 0.0, slut_limit = 999):
         conservative_score = person.get_opinion_score("conservative outfits") / 20.0
         skimpy_outfit_score = person.get_opinion_score("skimpy outfits") / 20.0
         marketing_score = 0
@@ -297,7 +263,7 @@ init -1 python:
 
         if not self.outfits and not self.underwear_sets and not self.overwear_sets:
             #We have nothing to make a outfit out of. Use default builder function.
-            return generate_random_appropriate_outfit(person, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, sluttiness = target_sluttiness, easier_access = easier_access)
+            return generate_random_appropriate_outfit(person, sluttiness = target_sluttiness)
 
         preferences = WardrobePreference(person)
 
@@ -335,7 +301,7 @@ init -1 python:
 
             if not outfit_under:
                 # renpy.say(None, "Unable to find underwear in wardrobe, pick any underwear from personal wardrobes.")
-                outfit_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets", swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, sluttiness = slut_limit_remaining, easier_access = easier_access)
+                outfit_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets", sluttiness = slut_limit_remaining)
 
         else:
             #There are no tops, so we're going to try and get a bottom and use one of the persons tops.
@@ -346,7 +312,7 @@ init -1 python:
 
             if not outfit_under:
                 # renpy.say(None, "Unable to find underwear in wardrobe, pick any underwear from personal wardrobes.")
-                outfit_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets", swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, sluttiness = target_sluttiness, easier_access = easier_access)
+                outfit_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets", sluttiness = target_sluttiness)
 
             if outfit_under:
                 slut_limit_remaining = target_sluttiness - outfit_under.get_underwear_slut_score()
@@ -360,12 +326,12 @@ init -1 python:
 
                 if not outfit_over:
                     # renpy.say(None, "Unable to find overwear in uniform wardrobe, pick any underwear from personal wardrobes.")
-                    outfit_over = generate_random_appropriate_outfit(person, outfit_type = "OverwearSets", swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, sluttiness = slut_limit_remaining, easier_access = easier_access)
+                    outfit_over = generate_random_appropriate_outfit(person, outfit_type = "OverwearSets", sluttiness = slut_limit_remaining)
 
         #At this point we have our under and over, if at all possible.
         if not outfit_over or not outfit_under:
             # Something's gone wrong and we don't have one of our sets. Last attempt on getting a full outfit from any wardrobe.
-            return generate_random_appropriate_outfit(person, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy, sluttiness = slut_limit_remaining, easier_access = easier_access)
+            return generate_random_appropriate_outfit(person, sluttiness = target_sluttiness)
 
         return build_assembled_outfit(outfit_under, outfit_over)
 

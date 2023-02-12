@@ -500,6 +500,11 @@ init 5 python:
                 color_lower = alternate_color
                 color_feet = alternate_color
 
+            # print("Upper: {}, Lower: {}, Feet: {}".format(
+            #     closest_preference_color(Color(rgb=(color_upper[0], color_upper[1], color_upper[2]))),
+            #     closest_preference_color(Color(rgb=(color_lower[0], color_lower[1], color_lower[2]))),
+            #     closest_preference_color(Color(rgb=(color_feet[0], color_feet[1], color_feet[2])))))
+
             return (color_upper, color_lower, color_feet)
 
         @staticmethod
@@ -758,8 +763,10 @@ init 5 python:
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme(self.person, match_percent = 80) # underwear mismatch is less likely
 
-            # decide if person will wear underewear
-            if not(points >= 6 and self.person.get_opinion_score("not wearing underwear") > -2 and renpy.random.randint(0, 3 - self.person.get_opinion_score("not wearing underwear")) == 0):
+            # decide if person will wear underwear
+            if self.person.get_opinion_score("not wearing underwear") <= -2 \
+                or not (points >= 6 and renpy.random.randint(0, 3 - self.person.get_opinion_score("not wearing underwear")) == 0):
+
                 # find upper body item
                 item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(real_bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points, min_points), points, ["showing her tits", "not wearing underwear"])
                 if item:
@@ -805,7 +812,7 @@ init 5 python:
             outfit.update_name()
             return outfit
 
-        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, easier_access = False):
+        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True):
             def change_colour_alpha(new_colour, old_colour):
                 alpha_blended = new_colour
                 alpha_blended[3] = old_colour[3]
@@ -845,10 +852,6 @@ init 5 python:
             if swap_bottoms:
                 (outfit, swapped) = self.apply_bottom_preference(self.person, outfit)
                 if swapped:
-                    alterations += 1
-            elif easier_access:
-                changed = outfit.make_easier_access()
-                if changed:
                     alterations += 1
 
             if allow_skimpy:
