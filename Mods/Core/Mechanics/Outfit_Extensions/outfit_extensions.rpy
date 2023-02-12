@@ -444,7 +444,7 @@ init -1 python:
 
     def build_outfit_name_custom(self):
         def get_clothing_items(outfit_part):
-            for layer in range(2, 0, -1):
+            for layer in range(3, 0, -1):
                 items = filter(lambda x: x.layer == layer, outfit_part)
                 if items:
                     return items
