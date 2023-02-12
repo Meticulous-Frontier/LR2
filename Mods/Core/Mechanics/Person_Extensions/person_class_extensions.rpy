@@ -2168,8 +2168,8 @@ init -1 python:
 
     Person.is_wearing_uniform = person_is_wearing_uniform_extended(Person.is_wearing_uniform)
 
-    def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True):
-        return WardrobeBuilder(self).personalize_outfit(outfit, opinion_color = opinion_color, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
+    def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, main_colour = None, swap_bottoms = False, allow_skimpy = True):
+        return WardrobeBuilder(self).personalize_outfit(outfit, opinion_color = opinion_color, coloured_underwear = coloured_underwear, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
 
     Person.personalize_outfit = personalize_outfit
 
@@ -2389,9 +2389,9 @@ init -1 python:
 
     Person.get_random_appropriate_outfit = person_get_random_appropriate_outfit
 
-    def person_generate_random_appropriate_outfit(self, outfit_type = "FullSets", max_alterations = 0, swap_bottoms = False, allow_skimpy = False):
+    def person_generate_random_appropriate_outfit(self, outfit_type = "FullSets", swap_bottoms = False, allow_skimpy = False):
         outfit = generate_random_appropriate_outfit(self, outfit_type = outfit_type)
-        return self.personalize_outfit(outfit, max_alterations = max_alterations, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
+        return self.personalize_outfit(outfit, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
 
     Person.generate_random_appropriate_outfit = person_generate_random_appropriate_outfit
 

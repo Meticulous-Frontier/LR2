@@ -2822,7 +2822,7 @@ label ashley_obedience_struggle():  #Use this label to describe an internal stru
 #         "Although she doesn't say a word, [the_person.title] doesn't make any move to cover herself either. Her body is on display as she reaches for her outfit..."
 #     else:
 #         "[the_person.title] absentmindedly covers her mound with one hand as she reaches for her outfit."
-#     $ the_person.apply_outfit(the_person.personalize_outfit(ashley_get_observed_outfit(), coloured_underwear = True, max_alterations = 1))
+#     $ the_person.apply_outfit(the_person.personalize_outfit(ashley_get_observed_outfit(), coloured_underwear = True))
 #     $ the_person.draw_person()
 #     "When she finishes putting on her new outfit, she steps back so you can get a good look."
 #     the_person "Okay... What do you think?"
@@ -2952,7 +2952,7 @@ label ashley_obedience_struggle():  #Use this label to describe an internal stru
 #     $ scene_manager.remove_actor(bystander)
 #     the_person "Wow, did you see that?"
 #
-#     $ new_outfit = the_person.personalize_outfit(bystander.outfit, opinion_color = "the colour green", coloured_underwear = True, max_alterations = 1)
+#     $ new_outfit = the_person.personalize_outfit(bystander.outfit, opinion_color = "the colour green", coloured_underwear = True)
 #
 #     $ ashley.apply_outfit(new_outfit)
 #     $ stephanie.apply_outfit(new_outfit)

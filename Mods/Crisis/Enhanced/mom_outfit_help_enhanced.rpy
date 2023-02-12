@@ -5,17 +5,15 @@ init 5 python:
         if sister.effective_sluttiness() >= mom.effective_sluttiness():
             outfit_slut_points = __builtin__.min(__builtin__.int(sister.effective_sluttiness() / 8), 12)
             allow_skimpy = False
-            max_alterations = 1
             mom.change_stats(slut = 1, max_slut = (30 if sister.effective_sluttiness() >= 30 else sister.effective_sluttiness()))
         else:
             outfit_slut_points = __builtin__.min(__builtin__.int(mom.effective_sluttiness() / 8), 12)
             allow_skimpy = True
-            max_alterations = 2
 
         builder = WardrobeBuilder(sister)
         thinks_appropriate = False
         while not thinks_appropriate or outfit_slut_points < 0:
-            outfit = mom.personalize_outfit(builder.build_outfit(None, outfit_slut_points), opinion_color = sister.favorite_colour(), coloured_underwear = True, max_alterations = max_alterations, swap_bottoms = True, allow_skimpy = allow_skimpy)
+            outfit = mom.personalize_outfit(builder.build_outfit(None, outfit_slut_points), opinion_color = sister.favorite_colour(), coloured_underwear = True, swap_bottoms = True, allow_skimpy = allow_skimpy)
             thinks_appropriate = mom.judge_outfit(outfit)
             outfit_slut_points -= 1
         if thinks_appropriate and outfit:

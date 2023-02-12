@@ -224,7 +224,7 @@ init -1 python:
 
         if uniform and (person.is_employee() or person.is_intern()):  # only apply policies for employees
             if creative_colored_uniform_policy.is_active():
-                uniform = WardrobeBuilder(person).personalize_outfit(uniform, max_alterations = 2,
+                uniform = WardrobeBuilder(person).personalize_outfit(uniform,
                     swap_bottoms = personal_bottoms_uniform_policy.is_active(),
                     allow_skimpy = creative_skimpy_uniform_policy.is_active())
             elif personal_bottoms_uniform_policy.is_active():
@@ -240,7 +240,7 @@ init -1 python:
 
         uniform.build_outfit_name()
 
-        # print("Picked uniform: {} ({})".format(uniform.name, uniform.get_full_outfit_slut_score()))
+        print("Picked uniform: {} ({})".format(uniform.name, uniform.get_full_outfit_slut_score()))
 
         return uniform
 

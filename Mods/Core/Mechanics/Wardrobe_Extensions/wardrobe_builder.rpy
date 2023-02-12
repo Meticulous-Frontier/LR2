@@ -812,7 +812,7 @@ init 5 python:
             outfit.update_name()
             return outfit
 
-        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True):
+        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, main_colour = None, swap_bottoms = False, allow_skimpy = True):
             def change_colour_alpha(new_colour, old_colour):
                 alpha_blended = new_colour
                 alpha_blended[3] = old_colour[3]
@@ -822,7 +822,6 @@ init 5 python:
             outfit.remove_all_cum()
 
             underwear_colour = None
-            alterations = 0
 
             #First, get a theme color
             if opinion_color is None:
@@ -844,30 +843,11 @@ init 5 python:
                 else:
                     color_list = []
                     underwear_colour = self.get_color(self.person, main_colour)
-                    # for col in self.color_prefs[under_colour]:
-                    #     color_list.append(self.color_prefs[under_colour][col])
-                    # underwear_colour = renpy.random.choice(color_list)
 
-            #First alteration we look at is bottom swap. Allow it if alterations are allowed or if we specifically allow bottom swaps.
             if swap_bottoms:
                 (outfit, swapped) = self.apply_bottom_preference(self.person, outfit)
-                if swapped:
-                    alterations += 1
 
             if allow_skimpy:
-                if alterations < max_alterations and outfit.has_dress() or outfit.has_skirt():  #Next, if we are wearing a dress or skirt, have slutty girls have a chance to drop their panties.
-                    if outfit.get_full_outfit_slut_score() + 20 < self.person.sluttiness and renpy.random.randint(0, 1) == 1:
-                        item = outfit.get_panties()
-                        if item:
-                            outfit.lower_body.remove(item)
-                            alterations += 1
-
-                if alterations < max_alterations and outfit.has_pants() or outfit.has_shirt():   #If the outfit has pants, have a chance to drop a layer off the top
-                    if outfit.get_full_outfit_slut_score() + 20 < self.person.sluttiness and renpy.random.randint(0, 1) == 1:
-                        outfit.remove_random_upper(top_layer_first = True)
-                        alterations += 1
-
-                #TODO determine if underwear is on, and if it is boring. If girl wants she can swap underwear for sexier set
                 self.set_sexier_panties(self.person, outfit, underwear_colour)
                 self.set_sexier_bra(self.person, outfit, underwear_colour)
 

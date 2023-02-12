@@ -184,7 +184,7 @@ label erica_lily_instapic_intro_label():
 
     "When they finish, [lily.title] hands her the outfit. They both quickly get dressed. The outfits look great."
     $ lily.apply_outfit(insta_wardrobe.pick_random_outfit(), update_taboo = True)
-    $ erica.apply_outfit(erica.personalize_outfit(insta_wardrobe.pick_random_outfit(), coloured_underwear = True, max_alterations = 2, allow_skimpy = False), update_taboo = True)
+    $ erica.apply_outfit(erica.personalize_outfit(insta_wardrobe.pick_random_outfit(), coloured_underwear = True, allow_skimpy = False), update_taboo = True)
     $ scene_manager.update_actor(lily)
     $ scene_manager.update_actor(erica)
     $ mc.change_locked_clarity(25)
