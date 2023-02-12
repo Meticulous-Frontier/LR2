@@ -23,12 +23,15 @@ init 3 python:
     night_clothes_sexy = Outfit("Sexy Night Clothes")
     night_clothes_sexy.add_upper(nightgown_dress.get_copy(),colour_pink)
     night_clothes_sexy.add_lower(cute_lace_panties.get_copy(),colour_pink)
+    night_clothes_sexy.add_feet(thigh_highs.get_copy(), colour_pink)
+    night_clothes_sexy.add_feet(high_heels.get_copy(), colour_pink)
 
     night_clothes_slutty = Outfit("Slutty Night Clothes")
     night_clothes_slutty.add_upper(strappy_bra.get_copy(),colour_yellow)
     night_clothes_slutty.add_lower(strappy_panties.get_copy(),colour_yellow)
     night_clothes_slutty.add_feet(pumps.get_copy(),colour_black)
     night_clothes_slutty.add_feet(fishnets.get_copy(),colour_black)
+    night_clothes_slutty.add_accessory(colourful_bracelets.get_copy(), colour_yellow)
 
     def set_night_outfit(person):
         if person.sluttiness > 70 or person.arousal > 70:
