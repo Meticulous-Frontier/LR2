@@ -436,7 +436,6 @@ label chemist_daughter_daddy_title_label(the_person): #This label is activated i
     the_person "Do you think you could... spank me? For a bit? Please [the_person.mc_title]?"
     mc.name "Oh [the_person.title]... you HAVE been bad..."
     "Your hand drops to her ass. You give it a squeeze."
-    $ the_person.event_triggers_dict["unique_sex_positions"] = prod_line_target_unique_sex_positions
     $ the_person.personality = get_daddy_girl_personality(the_person)
     call fuck_person(the_person, start_position = spanking) from _spank_production_assistant_02
     $ the_person.increase_opinion_score("being submissive")
