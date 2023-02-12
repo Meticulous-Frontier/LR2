@@ -156,46 +156,33 @@ init -1 python:
         min_sluttiness = __builtin__.min(base_sluttiness / 18, 5) if sluttiness > 50 else 0 # prevent override of person preferences until she's slutty enough not to care
         return wardrobe_builder.build_outfit(outfit_type, __builtin__.min(base_sluttiness / 7, 12), min_sluttiness)
 
-    def _filter_full_outfits(full_outfits, slut_limit):
-        valid_full_outfits = []
-        for current_outfit in full_outfits:
-            if slut_limit is None or current_outfit.get_full_outfit_slut_score() <= slut_limit:
-                valid_full_outfits.append(current_outfit)
-        return valid_full_outfits
-
-    def _filter_underwear_sets(underwear_sets, underwear_limit):
-        valid_underwear_sets = []
-        for current_underwear in underwear_sets:
-            if underwear_limit is None or current_underwear.get_underwear_slut_score() <= underwear_limit:
-                valid_underwear_sets.append(current_underwear)
-        return valid_underwear_sets
-
-    def _filter_overwear_sets(overwear_sets, slut_limit):
-        valid_overwear_sets = []
-        for current_overwear in overwear_sets:
-            if slut_limit is None or current_overwear.get_overwear_slut_score() <= slut_limit:
-                valid_overwear_sets.append(current_overwear)
-        return valid_overwear_sets
-
     # Combines business wardrobe with employee's personal wardrobe
-    def build_uniform_wardrobe(self, personal_wardrobe, slut_limit = None, underwear_limit = None):
-        # Bump underwear limit to non-zero
-        if underwear_limit is not None and underwear_limit < 10:
-            underwear_limit = 10
+    def build_uniform_wardrobe(self, personal_wardrobe, slut_limit = 999, underwear_limit = 999, limited_to_top = False):
+        def _filter_full_outfits(full_outfits, slut_limit = 999):
+            return [x for x in full_outfits if x.get_full_outfit_slut_score() <= slut_limit]
+
+        def _filter_underwear_sets(underwear_sets, underwear_limit = 999):
+            return [x for x in underwear_sets if x.get_underwear_slut_score() <= underwear_limit]
+
+        def _filter_overwear_sets(overwear_sets, slut_limit = 999):
+            return [x for x in overwear_sets if x.get_overwear_slut_score() <= slut_limit]
 
         full_outfits = []
         underwear_sets = []
         overwear_sets = []
 
-        if self.outfits:
-            full_outfits = _filter_full_outfits(self.outfits, slut_limit)
-        if not full_outfits:
-            full_outfits = _filter_full_outfits(personal_wardrobe.outfits, slut_limit)
-
         if self.overwear_sets:
             overwear_sets = _filter_overwear_sets(self.overwear_sets, slut_limit)
         if not self.overwear_sets:
             overwear_sets = _filter_overwear_sets(personal_wardrobe.overwear_sets, slut_limit)
+
+        if limited_to_top:
+            return Wardrobe("Valid Uniform Wardrobe", full_outfits, underwear_sets, overwear_sets)
+
+        if self.outfits:
+            full_outfits = _filter_full_outfits(self.outfits, slut_limit)
+        if not full_outfits:
+            full_outfits = _filter_full_outfits(personal_wardrobe.outfits, slut_limit)
 
         if self.underwear_sets:
             underwear_sets = _filter_underwear_sets(self.underwear_sets, underwear_limit)
@@ -213,8 +200,8 @@ init -1 python:
         slut_limit = 999
         valid_wardrobe = None
         if (person.is_employee() or person.is_intern()) and dress_code_policy.is_active():
-            slut_limit, underwear_limit, _limited_to_top = mc.business.get_uniform_limits()
-            valid_wardrobe = self.build_uniform_wardrobe(person.wardrobe, slut_limit, underwear_limit)
+            slut_limit, underwear_limit, limited_to_top = mc.business.get_uniform_limits()
+            valid_wardrobe = self.build_uniform_wardrobe(person.wardrobe, slut_limit, underwear_limit, limited_to_top)
         else:
             valid_wardrobe = self.build_uniform_wardrobe(person.wardrobe)
 
