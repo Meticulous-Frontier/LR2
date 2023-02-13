@@ -228,7 +228,7 @@ init -1 python:
 
         uniform.build_outfit_name()
 
-        print("Picked uniform: {} ({})".format(uniform.name, uniform.get_full_outfit_slut_score()))
+        # print("Picked uniform: {} ({})".format(uniform.name, uniform.get_full_outfit_slut_score()))
 
         return uniform
 
