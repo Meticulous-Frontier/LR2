@@ -131,18 +131,19 @@ init -1 python:
         return minimum_sluttiness
 
     def build_assembled_outfit(outfit_under, outfit_over):
-        assembled_outfit = outfit_under.get_copy()
-        for upper in outfit_over.upper_body:
-            assembled_outfit.upper_body.append(upper.get_copy())
+        assembled_outfit = outfit_over.get_copy()
 
-        for lower in outfit_over.lower_body:
-            assembled_outfit.lower_body.append(lower.get_copy())
+        for upper in outfit_under.upper_body:
+            assembled_outfit.add_upper(upper.get_copy())
 
-        for feet_wear in outfit_over.feet:
-            assembled_outfit.feet.append(feet_wear.get_copy())
+        for lower in outfit_under.lower_body:
+            assembled_outfit.add_lower(lower.get_copy())
 
-        for acc in outfit_over.accessories:
-            assembled_outfit.accessories.append(acc.get_copy())
+        for feet_wear in outfit_under.feet:
+            assembled_outfit.add_feet(feet_wear.get_copy())
+
+        for acc in outfit_under.accessories:
+            assembled_outfit.add_accessory(acc.get_copy())
 
         assembled_outfit.build_outfit_name()
 
