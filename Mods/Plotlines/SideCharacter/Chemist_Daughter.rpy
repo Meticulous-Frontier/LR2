@@ -164,7 +164,7 @@ label chemist_daughter_coffee_reminder_label():
     if mc.location == mall:
         mc.name "Thanks, I'm already at the mall."
     else:
-        mc.name "Thanks, I'll keeep that in mind."
+        mc.name "Thanks, I'll keep that in mind."
     $ mc.end_text_convo()
     "If you are going to go meet with the chemist, go to the business meeting."
     return
