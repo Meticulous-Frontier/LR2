@@ -282,11 +282,21 @@ init -1 python:
         return
     Outfit.remove_all_upper_clothing = remove_all_upper_clothing
 
-    def remove_bra_and_panties(self):
-        if self.wearing_panties():
-            self.remove_clothing(self.get_panties())
+    def remove_bra(self):
         if self.wearing_bra():
             self.remove_clothing(self.get_bra())
+        return
+    Outfit.remove_bra = remove_bra
+
+    def remove_panties(self):
+        if self.wearing_panties():
+            self.remove_clothing(self.get_panties())
+        return
+    Outfit.remove_panties = remove_panties
+
+    def remove_bra_and_panties(self):
+        self.remove_bra()
+        self.remove_panties()
         return
     Outfit.remove_bra_and_panties = remove_bra_and_panties
 

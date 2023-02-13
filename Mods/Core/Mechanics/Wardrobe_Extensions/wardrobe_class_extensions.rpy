@@ -151,11 +151,8 @@ init -1 python:
 
     def generate_random_appropriate_outfit(person, outfit_type = "FullSets", sluttiness = None):
         wardrobe_builder = WardrobeBuilder(person)
-        if sluttiness is None:
-            sluttiness = person.sluttiness
-        base_sluttiness = __builtin__.max(sluttiness - 15, 0) # first 15 points of sluttiness don't impact outfit builder
-        min_sluttiness = __builtin__.min(base_sluttiness / 18, 5) if sluttiness > 50 else 0 # prevent override of person preferences until she's slutty enough not to care
-        return wardrobe_builder.build_outfit(outfit_type, __builtin__.min(base_sluttiness / 7, 12), min_sluttiness)
+        (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person)
+        return wardrobe_builder.build_outfit(outfit_type, max_slut, min_slut)
 
     # Combines business wardrobe with employee's personal wardrobe
     def build_uniform_wardrobe(self, personal_wardrobe, slut_limit = 999, underwear_limit = 999, limited_to_top = False):
@@ -221,7 +218,13 @@ init -1 python:
                 uniform.make_easier_access()
 
             if commando_uniform_policy.is_active(): # always applied, overrides uniform
-                uniform.remove_bra_and_panties()
+                if person.has_large_tits():
+                    uniform.remove_panties()    # they still need the support ;)
+                    if not uniform.wearing_bra(): # probably a body suit, she will show a real bra to wear
+                        uniform.add_upper(sports_bra.get_copy(), neutral_palette[renpy.random.choice(neutral_color_map["Underwear"])])
+                        WardrobeBuilder.set_sexier_bra(person, uniform) # update for sexier version if slutty enough
+                else:
+                    uniform.remove_bra_and_panties()
 
         if uniform and person.job == doctor_job:
             uniform.add_upper(lab_coat.get_copy(), colour_white)

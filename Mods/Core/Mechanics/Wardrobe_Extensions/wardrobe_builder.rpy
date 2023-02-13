@@ -564,6 +564,12 @@ init 5 python:
             return item
 
         @staticmethod
+        def get_clothing_min_max_slut_value(person):
+            base_sluttiness = __builtin__.max(person.sluttiness - 15, 0) # first 15 points of sluttiness don't impact outfit builder
+            min_sluttiness = __builtin__.min(base_sluttiness / 18, 5) if person.sluttiness > 50 else 0 # prevent override of person preferences until she's slutty enough not to care
+            return (min_sluttiness, __builtin__.min(base_sluttiness / 7, 12))
+
+        @staticmethod
         def apply_bottom_preference(person, outfit):
             swapped = False
             if outfit.has_pants() and person.get_opinion_score("skirts") > person.get_opinion_score("pants"): #Outfit has pants and girl prefers skirts
@@ -579,15 +585,12 @@ init 5 python:
             panties = outfit.get_panties()
             if panties is None or panties.is_extension: # no panties or one-piece
                 return False
-            slut_tier = get_slut_tier(person)
+            (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person)
 
-            if slut_tier <= panties.slut_value:
+            if panties.slut_value >= min_slut:
                 return False
-            if slut_tier >= 4 and renpy.random.randint(0, 3) == 2: # high slut level chance for no panties
-                outfit.remove_clothing(panties)
-                return True
 
-            new_panties = get_random_from_list([x for x in panties_list if x.slut_value == slut_tier])
+            new_panties = get_random_from_list([x for x in panties_list if x.slut_value >= min_slut and x.slut_value <= max_slut])
             if new_panties:
                 if the_colour is None:
                     new_panties.colour = panties.colour
@@ -603,8 +606,9 @@ init 5 python:
             bra = outfit.get_bra()
             if bra is None or bra.has_extension: # no bra or one-piece
                 return False
-            slut_tier = get_slut_tier(person)
-            if slut_tier <= bra.slut_value:
+            (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person)
+
+            if bra.slut_value >= min_slut:
                 return False
 
             panties = outfit.get_panties()
@@ -612,11 +616,7 @@ init 5 python:
                 outfit.remove_clothing(bra)
                 return True
 
-            if slut_tier >= 4 and renpy.random.randint(0, 3) == 2: # high slut level chance for no bra
-                outfit.remove_clothing(bra)
-                return True
-
-            new_bra = get_random_from_list([x for x in real_bra_list if x.slut_value == slut_tier])
+            new_bra = get_random_from_list([x for x in real_bra_list if x.slut_value >= min_slut and x.slut_value <= max_slut])
             if new_bra:
                 if the_colour is None:
                     new_bra.colour = bra.colour
