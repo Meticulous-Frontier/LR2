@@ -348,7 +348,7 @@ init 2:
             return False
 
         def go_raw_mid_sex(the_person):
-            if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold(situational_modifier = 25):
+            if the_person.effective_sluttiness("condomless_sex") > the_person.get_no_condom_threshold(situational_modifier = 25):
                 if renpy.random.randint(0,100) < 10:  #10% chance per round over sluttiness threshold
                     return True
             return False
