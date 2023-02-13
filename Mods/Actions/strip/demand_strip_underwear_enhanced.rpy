@@ -4,7 +4,7 @@ init 5 python:
     def demand_strip_underwear_requirement_enhanced(the_person):
         if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
             return False #Can't strip if we're already past underwear
-        if the_person.outfit.wearing_panties() and not the_person.outfit.panties_covered() and the_person.outfit.wearing_bra() and not the_person.outfit.bra_covered():
+        if the_person.outfit.are_panties_visible() and the_person.outfit.is_bra_visible():
             return False #Can't strip if we can already see all of her underwear.
         if the_person.obedience < 130:
             return "Requires: 130 Obedience"

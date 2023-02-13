@@ -16,9 +16,9 @@ label lily_morning_encounter_enhanced_label():
 
         if the_person.outfit.wearing_panties() and the_person.outfit.wearing_bra():
             comfortable = True
-        elif the_person.outfit.wearing_panties() and the_person.effective_sluttiness("bare_tits") > 40:
+        elif the_person.outfit.wearing_bra() or the_person.effective_sluttiness("bare_tits") > 40:
             comfortable = True
-        elif the_person.outfit.wearing_bra() and the_person.effective_sluttiness("bare_pussy") > 40:
+        elif the_person.outfit.wearing_panties() or the_person.effective_sluttiness("bare_pussy") > 40:
             comfortable = True
         elif the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) > 40:
             comfortable = True

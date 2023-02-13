@@ -287,11 +287,6 @@ init -1 python:
             self.remove_clothing(self.get_panties())
         if self.wearing_bra():
             self.remove_clothing(self.get_bra())
-        # Special handling for leotards
-        # TODO: delete when `remove_clothing()` can remove using extensions
-        for clothing in self.upper_body:
-            if clothing.is_similar(leotard):
-                self.remove_clothing(clothing)
         return
     Outfit.remove_bra_and_panties = remove_bra_and_panties
 
@@ -313,8 +308,20 @@ init -1 python:
         return underwear
     Outfit.get_underwear = get_underwear
 
+    def is_wearing_underwear(self):
+        return self.wearing_bra() or self.wearing_panties()
+    Outfit.is_wearing_underwear = is_wearing_underwear
+
+    def is_bra_visible(self):
+        return self.wearing_bra() and not self.bra_covered()
+    Outfit.is_bra_visible = is_bra_visible
+
+    def are_panties_visible(self):
+        return self.wearing_panties() and not self.panties_covered()
+    Outfit.are_panties_visible = are_panties_visible
+
     def is_within_dress_code(self, slut_limit = None, underwear_limit = None, easier_access = None, commando = None):
-        business_slut_limit, business_underwear_limit, _limited_to_top = mc.business.get_uniform_limits()
+        business_slut_limit, business_underwear_limit, limited_to_top = mc.business.get_uniform_limits()
         if slut_limit is None:
             slut_limit = business_slut_limit + 5 # A bit of leeway
         if underwear_limit is None:
@@ -327,11 +334,11 @@ init -1 python:
         if self.get_full_outfit_slut_score() > slut_limit:
             if self.get_overwear().get_overwear_slut_score() > slut_limit:
                 return False
-            if self.get_underwear().get_underwear_slut_score() > underwear_limit:
+            if not limited_to_top and self.get_underwear().get_underwear_slut_score() > underwear_limit:
                 return False
         if easier_access and not self.is_easier_access():
             return False
-        if commando and (self.wearing_bra() or self.wearing_panties()):
+        if commando and self.is_wearing_underwear():
             return False
         return True
     Outfit.is_within_dress_code = is_within_dress_code
@@ -487,12 +494,22 @@ init -1 python:
 # initialize this part after wardrobe builder is initialized
 init 6 python:
     def wearing_bra_enhanced(self): # specific cloth items don't count as bra
-        if self.upper_body:
-            if self.get_upper_ordered()[0].underwear and not self.get_upper_ordered()[0].layer == 0:
-                return True
-        return False
-
+        return any(x for x in self.upper_body if (x.underwear and not x.layer == 0))
     Outfit.wearing_bra = wearing_bra_enhanced
+
+    def get_bra_enhanced(self):
+        return next((x for x in self.upper_body if x.underwear and not x.layer == 0), None)
+    Outfit.get_bra = get_bra_enhanced
+
+    def wearing_panties_enhanced(self):
+        return any(x for x in self.lower_body if x.underwear and not x.layer == 0) \
+            or any(x for x in self.upper_body if x in [leotard])
+    Outfit.wearing_panties = wearing_panties_enhanced
+
+    def get_panties_enhanced(self):
+        return next((x for x in self.lower_body if x.underwear and not x.layer == 0), \
+                next((x for x in self.upper_body if x in [leotard]), None))
+    Outfit.get_panties = get_panties_enhanced
 
     def get_full_strip_list_enhanced(self, strip_feet = True, strip_accessories = False): #TODO: This should support visible_enough at some point.
         items_to_strip = self.lower_body + [x for x in self.upper_body if x.layer > 0]

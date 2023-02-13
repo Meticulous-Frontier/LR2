@@ -958,7 +958,7 @@ init -1 python:
             self.change_slut(lingerie_bonus, max_modified_to = 30, add_to_log = False)
 
         # not wearing underwear only impacts sluttiness to level 40
-        if self.outfit and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+        if self.outfit and not (self.outfit.wearing_bra() or self.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
             underwear_bonus = 0
             if not self.outfit.wearing_bra():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
@@ -2300,6 +2300,18 @@ init -1 python:
         return self.outfit.panties_covered()
 
     Person.panties_covered = person_panties_covered
+
+    def person_is_wearing_underwear(self):
+        return self.outfit.is_wearing_underwear()
+    Person.is_wearing_underwear = person_is_wearing_underwear
+
+    def person_is_bra_visible(self):
+        return self.outfit.is_bra_visible()
+    Person.is_bra_visible = person_is_bra_visible
+
+    def person_are_panties_visible(self):
+        return self.outfit.are_panties_visible()
+    Person.are_panties_visible = person_are_panties_visible
 
     def person_get_bra(self):
         return self.outfit.get_bra()

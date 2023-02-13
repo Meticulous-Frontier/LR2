@@ -37,7 +37,7 @@ init 5 python:
                     other_girl.break_taboo("bare_tits")
                 if other_girl.outfit.vagina_visible():
                     other_girl.break_taboo("bare_pussy")
-                if (other_girl.outfit.wearing_panties() and not other_girl.outfit.panties_covered()) or (other_girl.outfit.wearing_bra() and not other_girl.outfit.bra_covered()):
+                if (other_girl.outfit.are_panties_visible()) or (other_girl.outfit.is_bra_visible()):
                     other_girl.break_taboo("underwear_nudity")
             else:
                 scene_manager.update_actor(other_girl, emotion = "sad")
@@ -196,7 +196,7 @@ label broken_AC_crisis_break_taboo(the_girl):
     else:
         $ mc.change_locked_clarity(10)
         "[the_girl.possessive_title] finishes stripping and looks back at you."
-        if (the_girl.outfit.wearing_panties() and not the_girl.outfit.panties_covered()) or (the_girl.outfit.wearing_bra() and not the_girl.outfit.bra_covered()):
+        if (the_girl.outfit.are_panties_visible()) or (the_girl.outfit.is_bra_visible()):
             if the_girl.has_taboo("underwear_nudity"):
                 "She seems nervous at first, but quickly gets used to being in her underwear in front of you."
                 $ the_girl.break_taboo("underwear_nudity")
