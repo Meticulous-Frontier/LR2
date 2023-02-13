@@ -1379,7 +1379,7 @@ label ellie_dinner_date_label():
     the_person "Ah! The cobbler should be done! Let me go pull it out..."
     $ the_person.draw_person(position = "walking_away")
     "Last time anyone says that tonight..."
-    "She jumps up and heads back to the kitche. You watch her as she walks away from the table."
+    "She jumps up and heads back to the kitchen. You watch her as she walks away from the table."
     $ the_person.draw_person(position = the_person.idle_pose)
     "In a few minutes, she re-emerges with two bowls of peach cobbler with a scoop of vanilla ice cream."
     "She sets one down next to you, then sits down."
