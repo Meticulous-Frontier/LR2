@@ -2,6 +2,8 @@
 # Based on the Pilotus13 Vanilla extension
 init 3 python:
     def sister_ntr_crisis_requirement():
+        if lily.has_limited_time_event("sleeping_walk_in_label"):
+            return False
         if mc_asleep():
             if not (day % 7 == 4 or day % 7 == 5):  # not on friday or saturday night, conflicts with story
                 if lily.effective_sluttiness() >= 30:
@@ -53,7 +55,6 @@ label sister_ntr_crisis_action_label():
         $ ran_num = 1
 
     $ mc.change_location(lily_bedroom)
-    $ mc.location.show_background()
     $ man_name = Person.get_random_male_name()
 
     if ran_num == 1: ## a scene with one man
@@ -945,6 +946,5 @@ label sister_ntr_crisis_action_label():
     $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ clear_scene()
     return

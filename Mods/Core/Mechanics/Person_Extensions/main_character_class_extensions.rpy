@@ -1,9 +1,11 @@
 init -1 python:
-    def change_location_enhanced(self, new_location):
-        self.location = new_location
-
-        for person in [x for x in all_people_in_the_game() if x.follow_mc]:
-            person.change_location(new_location)
+    def change_location_enhanced(self, new_location, show_background = True):
+        if isinstance(new_location, Room):
+            self.location = new_location
+            for person in [x for x in all_people_in_the_game() if x.follow_mc]:
+                person.change_location(new_location)
+            if show_background:
+                self.location.show_background()
         return
 
     MainCharacter.change_location = change_location_enhanced
@@ -25,7 +27,7 @@ init -1 python:
         return mc.business.event_triggers_dict.get("dungeon_unlocked", False) == True
 
     def change_locked_clarity_enhanced(self, amount, add_to_log = True): #TODO: Decide if we need a max locked clarity thing to gate progress in some way.
-        if "perk_system" in globals():
+        if "perk_system" in globals() and perk_system is not None:
             amount = amount * get_clarity_multiplier()
             if perk_system.get_ability_flag("Lustful Priorities"):
                 amount += 5

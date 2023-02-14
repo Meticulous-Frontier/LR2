@@ -616,7 +616,6 @@ label candace_convince_to_quit_label(the_person):
     the_person "Lead the way!"
     "Thankfully, the office supply store is right next to the mall, so it is a quick walk over to the salon."
     $ mc.change_location(mall_salon)
-    $ mc.location.show_background()
     "As you walk into the salon, you notice that [salon_manager.title] is working with a customer."
     mc.name "Okay, she's over there, but she's with a customer right now. While we wait for her, why don't we do the paperwork for your new employment?"
     the_person "Okay... let's do it!"
@@ -762,8 +761,8 @@ label candace_topless_at_mall_label(the_person):
     if mc.business.topless_is_legal():  #Right now it is always illegal
         pass
     else:
+        $ the_person.outfit.remove_all_upper_clothing()
         $ scene_manager.add_actor(the_person)
-        $ scene_manager.strip_to_tits(person = the_person, delay = 0)
         $ scene_manager.update_actor(the_person)
         "[the_person.title] is walking around the PUBLIC mall topless. Something that you are pretty sure is illegal."
         mc.name "[the_person.title], what are you doing?"
@@ -790,9 +789,9 @@ label candace_topless_at_mall_label(the_person):
         "You quickly grab [the_person.possessive_title]'s hand and lead her into the clothing store."
         $ scene_manager.remove_actor(police_chief)
         $ mc.change_location(clothing_store)
-        $ mc.location.show_background()
         "You grab the first t-shirt you find and have her put it on."
         $ the_person.outfit.add_upper(tanktop.get_copy(), [1.0, 1.0, 1.0, 1.0])
+        $ scene_manager.draw_scene()
         the_person "This shirt is boring!"
         mc.name "[the_person.title], I know. But you can't be doing that, okay?"
         the_person "I still don't understand what I was doing wrong!"
@@ -913,7 +912,6 @@ label candace_midnight_wakeup_label():
     "You get to her apartment, and soon she is walking through the front door... Which was completely unlocked..."
     #candi home background
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     the_person "Finally! Let's have some fun!"
     mc.name "Wait... We need to talk first."
     the_person "God damnit why does everyone just want to talk? Just like... Let's get naked and then like... Let our bodies do the talking?"
@@ -1648,7 +1646,7 @@ init 3 python:
 
     def candace_get_sex_record_difference_tier(): #Use this to determine what dialogue to run after curing her bimboism. Made a function because messy
         old_dict = candace.event_triggers_dict.get("sex_record_snapshot", None)
-        if old_dict == None:
+        if old_dict is None:
             return 0
         if old_dict["Vaginal Sex"] < candace.sex_record["Vaginal Sex"] or old_dict["Anal Sex"] < candace.sex_record["Anal Sex"]: #You fucked her at least once
             if old_dict["Vaginal Sex"] + old_dict["Anal Sex"] + 2 <= candace.sex_record["Vaginal Sex"] + candace.sex_record["Anal Sex"]: #Sex at least twice

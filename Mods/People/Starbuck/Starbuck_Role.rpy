@@ -1422,7 +1422,6 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
 
     #TODO move the scene to the player's bedroom. and get dressed
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ the_person.draw_person(position = "stand4")
     "You and [the_person.possessive_title] head back to your place. Having already put one together, you and her quick have it all set up."
 
@@ -1690,7 +1689,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
     #Good morning!
     $ perk_system.add_stat_perk(Stat_Perk(description = "Temporary increase max energy after sleeping with a lover. +20 Energy Cap", energy_bonus = 20, bonus_is_temp = True, duration = 2,  energy_cap = 20), "Overnight Lover")
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
 
     $ clear_scene()
     $ the_roll = renpy.random.randint(0,100)

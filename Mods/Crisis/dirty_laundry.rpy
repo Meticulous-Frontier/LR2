@@ -23,12 +23,15 @@ init 3 python:
     night_clothes_sexy = Outfit("Sexy Night Clothes")
     night_clothes_sexy.add_upper(nightgown_dress.get_copy(),colour_pink)
     night_clothes_sexy.add_lower(cute_lace_panties.get_copy(),colour_pink)
+    night_clothes_sexy.add_feet(thigh_highs.get_copy(), colour_pink)
+    night_clothes_sexy.add_feet(high_heels.get_copy(), colour_pink)
 
     night_clothes_slutty = Outfit("Slutty Night Clothes")
     night_clothes_slutty.add_upper(strappy_bra.get_copy(),colour_yellow)
     night_clothes_slutty.add_lower(strappy_panties.get_copy(),colour_yellow)
     night_clothes_slutty.add_feet(pumps.get_copy(),colour_black)
     night_clothes_slutty.add_feet(fishnets.get_copy(),colour_black)
+    night_clothes_slutty.add_accessory(colourful_bracelets.get_copy(), colour_yellow)
 
     def set_night_outfit(person):
         if person.sluttiness > 70 or person.arousal > 70:
@@ -40,20 +43,19 @@ init 3 python:
         return
 
 label dirty_laundry_action_label():
-    if aunt.event_triggers_dict.get("moving_apartment", 0) == -1:
+    if aunt.event_triggers_dict.get("moving_apartment", 0) != 0:
         $ the_person = get_random_from_list(people_in_mc_home([aunt]))
     else:
         $ the_person = get_random_from_list(people_in_mc_home())
-    if the_person is None:
+    if the_person is None or the_person.has_limited_time_event("sleeping_walk_in_label"):
         return
 
-    $ old_location = mc.location
     $ set_night_outfit(the_person)
 
     "You are just drifting off to sleep when you suddenly remember you don't have any clean clothes for tomorrow!"
     "You look at the clock. It is already pretty late."
+    $ old_location = mc.location
     $ mc.change_location(laundry_room)
-    $ mc.location.show_background()
     "You guess that your family is already asleep, so you grab your laundry and take it to the laundry room just wearing your boxers."
 
     $ ran_num = renpy.random.randint(0, 3)
@@ -64,8 +66,7 @@ label dirty_laundry_action_label():
 
     $ clear_scene()
     $ mc.change_location(old_location)
-    $ the_person.apply_planned_outfit()
-    $ del old_location
+    $ old_location = None
     return
 
 label dirty_laundry_wash_your_clothes(the_person):

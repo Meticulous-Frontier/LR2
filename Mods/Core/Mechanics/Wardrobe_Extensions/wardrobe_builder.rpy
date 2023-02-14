@@ -185,7 +185,7 @@ init 5 python:
     coverup_lower_list = []
 
     def neutralize_item_colour(item, the_colour = None):
-        if item == None:
+        if item is None:
             return None
 
         current_alpha = item.colour[3]
@@ -293,7 +293,7 @@ init 5 python:
     only_socks_list = [x for x in socks_list if x not in [thigh_highs, fishnets, garter_with_fishnets]]
     real_pantyhose_list = [x for x in socks_list if x not in only_socks_list]
     earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
-    neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Wool_Scarf"]]
+    neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Wool_Scarf", "Spiked Choker"]]
 
     class WardrobeBuilder():
         default_person = None
@@ -500,10 +500,15 @@ init 5 python:
                 color_lower = alternate_color
                 color_feet = alternate_color
 
+            # print("Upper: {}, Lower: {}, Feet: {}".format(
+            #     closest_preference_color(Color(rgb=(color_upper[0], color_upper[1], color_upper[2]))),
+            #     closest_preference_color(Color(rgb=(color_lower[0], color_lower[1], color_lower[2]))),
+            #     closest_preference_color(Color(rgb=(color_feet[0], color_feet[1], color_feet[2])))))
+
             return (color_upper, color_lower, color_feet)
 
         @staticmethod
-        def build_filter_list(item_list, points, min_points = 0, filter_list = [], layers = [1, 2, 3]):
+        def build_filter_list(item_list, points, min_points = 0, filter_list = [], layers = [1, 2, 3, 4]):
             # extend range until we have items
             while not any(x for x in item_list if x.slut_value >= min_points and x.slut_value <= points and x.layer in layers and x not in filter_list):
                 if min_points > 0:
@@ -559,6 +564,12 @@ init 5 python:
             return item
 
         @staticmethod
+        def get_clothing_min_max_slut_value(person):
+            base_sluttiness = __builtin__.max(person.sluttiness - 15, 0) # first 15 points of sluttiness don't impact outfit builder
+            min_sluttiness = __builtin__.min(base_sluttiness / 18, 5) if person.sluttiness > 50 else 0 # prevent override of person preferences until she's slutty enough not to care
+            return (min_sluttiness, __builtin__.min(base_sluttiness / 7, 12))
+
+        @staticmethod
         def apply_bottom_preference(person, outfit):
             swapped = False
             if outfit.has_pants() and person.get_opinion_score("skirts") > person.get_opinion_score("pants"): #Outfit has pants and girl prefers skirts
@@ -574,15 +585,12 @@ init 5 python:
             panties = outfit.get_panties()
             if panties is None or panties.is_extension: # no panties or one-piece
                 return False
-            slut_tier = get_slut_tier(person)
+            (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person)
 
-            if slut_tier <= panties.slut_value:
+            if panties.slut_value >= min_slut:
                 return False
-            if slut_tier >= 4 and renpy.random.randint(0, 3) == 2: # high slut level chance for no panties
-                outfit.remove_clothing(panties)
-                return True
 
-            new_panties = get_random_from_list([x for x in panties_list if x.slut_value == slut_tier])
+            new_panties = get_random_from_list([x for x in panties_list if x.slut_value >= min_slut and x.slut_value <= max_slut])
             if new_panties:
                 if the_colour is None:
                     new_panties.colour = panties.colour
@@ -598,8 +606,9 @@ init 5 python:
             bra = outfit.get_bra()
             if bra is None or bra.has_extension: # no bra or one-piece
                 return False
-            slut_tier = get_slut_tier(person)
-            if slut_tier <= bra.slut_value:
+            (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person)
+
+            if bra.slut_value >= min_slut:
                 return False
 
             panties = outfit.get_panties()
@@ -607,11 +616,7 @@ init 5 python:
                 outfit.remove_clothing(bra)
                 return True
 
-            if slut_tier >= 4 and renpy.random.randint(0, 3) == 2: # high slut level chance for no bra
-                outfit.remove_clothing(bra)
-                return True
-
-            new_bra = get_random_from_list([x for x in real_bra_list if x.slut_value == slut_tier])
+            new_bra = get_random_from_list([x for x in real_bra_list if x.slut_value >= min_slut and x.slut_value <= max_slut])
             if new_bra:
                 if the_colour is None:
                     new_bra.colour = bra.colour
@@ -687,13 +692,13 @@ init 5 python:
         def build_overwear(self, points = 0, min_points = 0):
             def make_upper_item_transparent(item, points, colour):
                 colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
-                if item.layer == 2 and item.slut_value > 0 and points >= 4 and item in real_shirt_list + real_dress_list:
+                if item.layer == 3 and item.slut_value > 0 and points >= 4 and item in real_shirt_list + real_dress_list:
                     colour[3] = .8 + (renpy.random.randint(0, 15) / 100.0)
                 return item.get_copy(), colour
 
             def make_lower_item_transparent(item, points, colour):
                 colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
-                if item.layer == 2 and item.slut_value > 0 and points >= 4 and item in skirts_list + [suitpants, leggings, booty_shorts]:
+                if item.layer == 3 and item.slut_value > 0 and points >= 4 and item in skirts_list + [suitpants, leggings, booty_shorts]:
                     colour[3] = .8 + (renpy.random.randint(0, 15) / 100.0)
                 return item.get_copy(), colour
 
@@ -711,13 +716,13 @@ init 5 python:
                     outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_upper, self.get_color_hate_list())))
 
                 # we added a overlay item, so find a real upper item this time
-                if item and item.layer == 3:
-                    item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(upper_item_list, points, min_points, layers = [2]), points, ["not wearing anything"])
+                if item and item.layer == 4:
+                    item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(upper_item_list, points, min_points, layers = [3]), points, ["not wearing anything"])
                     if item:
                         outfit.add_upper(*make_upper_item_transparent(item, points, self.get_item_color(item, color_lower, self.get_color_hate_list())))
 
                 # find lowerbody item
-                if item is None or (not item.has_extension or item.has_extension.layer == 1):
+                if item is None or (not item.has_extension or item.has_extension.layer == 2):
                     item = self.get_item_from_list(self.person, "lower_body", self.build_filter_list(real_pants_list + skirts_list, points, min_points), points, ["not wearing anything"])
                     if item:
                         outfit.add_lower(*make_lower_item_transparent(item, points, self.get_item_color(item, color_lower, self.get_color_hate_list(), 0.9)))
@@ -726,6 +731,11 @@ init 5 python:
             item = self.get_item_from_list(self.person, "feet", self.build_filter_list(shoes_list, points, min_points))
             if item:
                 outfit.add_feet(item, self.get_item_color(item, color_feet, self.get_color_hate_list(), 0.8))
+
+            # random chance of adding outfit custom makeup (base on pref for make-up)
+            if self.person.get_opinion_score("makeup") > -2 and renpy.random.randint(0, 4 - self.person.get_opinion_score("makeup")) == 0:
+                # add makeup to outfit (overrides makeup in base_outfit)
+                add_make_up_to_outfit(self.person, outfit)
 
             self.add_accessory_from_list(outfit, self.build_filter_list(earings_only_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
             self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
@@ -753,8 +763,10 @@ init 5 python:
 
             color_upper, color_lower, color_feet = self.get_main_color_scheme(self.person, match_percent = 80) # underwear mismatch is less likely
 
-            # decide if person will wear underewear
-            if not(points >= 6 and self.person.get_opinion_score("not wearing underwear") > -2 and renpy.random.randint(0, 3 - self.person.get_opinion_score("not wearing underwear")) == 0):
+            # decide if person will wear underwear
+            if self.person.get_opinion_score("not wearing underwear") <= -2 \
+                or not (points >= 6 and renpy.random.randint(0, 3 - self.person.get_opinion_score("not wearing underwear")) == 0):
+
                 # find upper body item
                 item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(real_bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points, min_points), points, ["showing her tits", "not wearing underwear"])
                 if item:
@@ -782,15 +794,25 @@ init 5 python:
                 if item:
                     outfit.add_feet(item.get_copy(), color_feet)
 
+            # random shoes
+            if (min_points > 2) or renpy.random.randint(0, 1) == 0:
+                item = self.get_item_from_list(self.person, "feet", self.build_filter_list(shoes_list, points, min_points))
+                if item:
+                    outfit.add_feet(item, self.get_item_color(item, color_feet, self.get_color_hate_list(), 0.8))
+
             # random chance of adding outfit custom makeup (base on pref for make-up)
             if self.person.get_opinion_score("makeup") > -2 and renpy.random.randint(0, 4 - self.person.get_opinion_score("makeup")) == 0:
                 # add makeup to outfit (overrides makeup in base_outfit)
                 add_make_up_to_outfit(self.person, outfit)
 
+            self.add_accessory_from_list(outfit, self.build_filter_list(rings_list, points, min_points, self.person.base_outfit.accessories), 3, color_lower)
+            self.add_accessory_from_list(outfit, self.build_filter_list(bracelet_list, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
+            self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_without_collars, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
+
             outfit.update_name()
             return outfit
 
-        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True, easier_access = False):
+        def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, main_colour = None, swap_bottoms = False, allow_skimpy = True):
             def change_colour_alpha(new_colour, old_colour):
                 alpha_blended = new_colour
                 alpha_blended[3] = old_colour[3]
@@ -800,10 +822,9 @@ init 5 python:
             outfit.remove_all_cum()
 
             underwear_colour = None
-            alterations = 0
 
             #First, get a theme color
-            if opinion_color == None:
+            if opinion_color is None:
                 if main_colour:
                     opinion_color = self.get_color_opinion(main_colour)
                 elif renpy.random.randint(0,100) < 50:  #50% chance we go straight to a favorite color.
@@ -813,7 +834,7 @@ init 5 python:
                     opinion_color = self.person.favorite_colour()
 
             color_list = [self.color_prefs[opinion_color][x][:] for x in self.color_prefs[opinion_color]]
-            if main_colour == None:
+            if main_colour is None:
                 main_colour = renpy.random.choice(color_list)
 
             if coloured_underwear:
@@ -822,34 +843,11 @@ init 5 python:
                 else:
                     color_list = []
                     underwear_colour = self.get_color(self.person, main_colour)
-                    # for col in self.color_prefs[under_colour]:
-                    #     color_list.append(self.color_prefs[under_colour][col])
-                    # underwear_colour = renpy.random.choice(color_list)
 
-            #First alteration we look at is bottom swap. Allow it if alterations are allowed or if we specifically allow bottom swaps.
             if swap_bottoms:
                 (outfit, swapped) = self.apply_bottom_preference(self.person, outfit)
-                if swapped:
-                    alterations += 1
-            elif easier_access:
-                changed = outfit.make_easier_access()
-                if changed:
-                    alterations += 1
 
             if allow_skimpy:
-                if alterations < max_alterations and outfit.has_dress() or outfit.has_skirt():  #Next, if we are wearing a dress or skirt, have slutty girls have a chance to drop their panties.
-                    if outfit.get_full_outfit_slut_score() + 20 < self.person.sluttiness and renpy.random.randint(0, 1) == 1:
-                        item = outfit.get_panties()
-                        if item:
-                            outfit.lower_body.remove(item)
-                            alterations += 1
-
-                if alterations < max_alterations and outfit.has_pants() or outfit.has_shirt():   #If the outfit has pants, have a chance to drop a layer off the top
-                    if outfit.get_full_outfit_slut_score() + 20 < self.person.sluttiness and renpy.random.randint(0, 1) == 1:
-                        outfit.remove_random_upper(top_layer_first = True)
-                        alterations += 1
-
-                #TODO determine if underwear is on, and if it is boring. If girl wants she can swap underwear for sexier set
                 self.set_sexier_panties(self.person, outfit, underwear_colour)
                 self.set_sexier_bra(self.person, outfit, underwear_colour)
 

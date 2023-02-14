@@ -101,7 +101,6 @@ label candace_goes_clothes_shopping_label(the_person):
 
     $ the_person.change_location(clothing_store)
     $ mc.change_location(clothing_store)
-    $ mc.location.show_background()
     $ the_person.draw_person()
 
     "You leave the business and soon find yourself at the mall. You let [the_person.possessive_title] lead the way into the first store."

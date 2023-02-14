@@ -707,7 +707,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         if not stop_stripping:
                             call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
 
-                        if girl_in_charge and position_choice != None: # girls in charge and wants to spice things up
+                        if girl_in_charge and position_choice is not None: # girls in charge and wants to spice things up
                             if the_person.effective_sluttiness() > position_choice.slut_cap and the_person.arousal > position_choice.slut_cap:
                                 "[the_person.title] wants to spice things up."
                                 $ position_choice = None
@@ -1379,7 +1379,7 @@ label break_strip_outfit_taboos(the_person):
             $ taboo_broken = True
     else:
         "[the_person.possessive_title] finishes stripping and looks back at you."
-        if (the_person.outfit.wearing_panties() and not the_person.outfit.panties_covered()) or (the_person.outfit.wearing_bra() and not the_person.outfit.bra_covered()):
+        if (the_person.are_panties_visible()) or (the_person.is_bra_visible()):
             if the_person.has_taboo("underwear_nudity"):
                 "She seems nervous at first, but quickly gets used to being in her underwear in front of you."
                 $ the_person.break_taboo("underwear_nudity")
@@ -1394,7 +1394,7 @@ label pick_position_enhanced(the_person, allow_none = True, ignore_taboo = False
 label public_sex_post_round(the_person, position_choice, report_log):
     $ scrutiny = report_log.get("scrutiny",0)
     $ scr_change = 0
-    if position_choice == None: #We got here by accident
+    if position_choice is None: #We got here by accident
         return
     if position_choice.skill_tag == "Foreplay":
         $ scr_change = 1

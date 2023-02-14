@@ -319,7 +319,7 @@ screen screen_IT_project_button(proj):
                     selected_hover it_imagebutton_hover
                     action Function (set_active_IT_project, proj)
                     sensitive True # (proj.identifier == mc.business.IT_project_in_progress[0])
-                    if mc.business.IT_project_in_progress != None:
+                    if mc.business.IT_project_in_progress is not None:
                         selected proj == mc.business.IT_project_in_progress[0]
                     hovered [
                         Show("IT_tooltip",None,proj)
@@ -369,7 +369,7 @@ screen screen_IT_project_button(proj):
 
             python:
                 supplemental_text = ""
-                if mc.business.IT_project_in_progress != None:
+                if mc.business.IT_project_in_progress is not None:
                     if proj == mc.business.IT_project_in_progress[0]:
                         supplemental_text = "In Progress"
                 if proj not in mc.business.IT_projects and proj.requirement() != True and proj.requirement():

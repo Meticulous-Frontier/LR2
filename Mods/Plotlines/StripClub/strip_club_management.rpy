@@ -151,7 +151,6 @@ label strip_club_manager_waitresses_suggestion_label(): # (personal contact)
     the_person "Hi [the_person.mc_title]! Can you join me here at the Club ? I need to talk with you."
     mc.name "Sure [the_person.title], I'm coming."
     $ mc.change_location(strip_club)
-    $ mc.location.show_background()
     $ the_person.draw_person(emotion = "happy", position = "stand3")
     mc.name "Here I am [the_person.title], how are things going here?"
     the_person "That's exactly what I wanna talk to you about: you spent a lot of money to buy this place, don't you wanna make it more profitable?"
@@ -174,7 +173,6 @@ label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)
     the_person "Hi [the_person.mc_title]! Can you join me here at the club? I need to talk with you."
     mc.name "Sure [the_person.title], I'll be right over."
     $ mc.change_location(strip_club)
-    $ mc.location.show_background()
     $ the_person.draw_person(emotion = "happy", position = "stand3")
     mc.name "Okay, here I am [the_person.title], how things are going here?"
     the_person "That's exactly what I wanna talk to you about, I have an idea to make the business here more profitable."
@@ -236,8 +234,6 @@ label strip_club_manager_bdsm_room_built_label(): # (time event)
 label strip_club_switch_rooms_label():
     if mc.location is strip_club:
         $ mc.change_location(bdsm_room)
-        $ mc.location.show_background()
     elif mc.location is bdsm_room:
         $ mc.change_location(strip_club)
-        $ mc.location.show_background()
     return

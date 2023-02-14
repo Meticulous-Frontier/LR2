@@ -56,7 +56,6 @@ init 3 python:
 
 label lust_booty_call_intro_label():
     $ mc.change_location(bedroom)   # make sure we are in the bedroom
-    $ mc.location.show_background()
     "You lay down in your bed and try to go to sleep."
     "You toss and turn for a while. This is impossible! You feel like you have so much energy."
     "What you wouldn't give for a bedwarmer to play with right about now..."
@@ -64,7 +63,7 @@ label lust_booty_call_intro_label():
     "Instead, you open up your contacts."
     "You wonder... surely you could convince someone to come over?"
     call screen enhanced_main_choice_display(build_menu_items([["Text who?"] + lust_get_booty_call_list()], draw_hearts_for_people = True))
-    if _return == "Leave" or _return == None:
+    if _return == "Leave" or _return is None:
         "After looking at your phone contacts, you change your mind. Maybe another opportunity will present itself later."
         $ mc.business.add_mandatory_crisis(lust_booty_call_intro)
         return
@@ -144,7 +143,7 @@ label lust_booty_call_label():
     else:
         "Before you head home for the day, you can feel all the sexual tension you've built up throughout the day, so you decide to make a booty call."
     call screen enhanced_main_choice_display(build_menu_items([["Text who?"] + lust_get_booty_call_list() + ["No one"]], draw_hearts_for_people = True))
-    if _return == "No one" or _return == None:
+    if _return == "No one" or _return is None:
         "After looking at your contact list, you change your mind. Maybe another opportunity will present itself later."
         return
     $ the_person = _return
@@ -162,7 +161,6 @@ label lust_booty_call_label():
         if mc.location != bedroom:
             "You quickly go to your bedroom"
             $ mc.change_location(bedroom)
-            $ mc.location.show_background()
         "You use the time to make sure your bedroom is cleaned up and ready for your booty call."
         "Soon, your phone is going off."
         the_person "I'm here."
@@ -172,7 +170,6 @@ label lust_booty_call_label():
         $ mc.end_text_convo()
         "You head home. Thankfully, the timing works out that you get home the same time [the_person.title] gets there."
         $ mc.change_location(bedroom) #Make sure we're in our bedroom.
-        $ mc.location.show_background()
         "You sneak into your room with her."
     $ the_person.draw_person()
     mc.name "Let's get down to business."

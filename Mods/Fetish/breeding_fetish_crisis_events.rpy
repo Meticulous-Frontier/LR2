@@ -61,7 +61,7 @@ init 2 python:
 
 label breeding_fetish_high_fertility_crisis_label():
     $ the_person = get_highly_fertile_breeder()
-    if the_person == None:
+    if the_person is None:
         return
 
     $ update_breeding_fetish_state(the_person)
@@ -166,7 +166,6 @@ label breeding_fetish_happy_breeder_crisis_label():
         "*Ding Dong*"
         "You're roused from your bed by a ring on your doorbell."
         $ mc.change_location(hall)
-        $ mc.location.show_background()
         "You head to your front door and see [the_person.possessive_title] standing there... outside... in a very provocative outfit."
         $ the_person.apply_outfit(the_person.personalize_outfit(special_fetish_outfit))
         $ the_person.draw_person()
@@ -174,7 +173,6 @@ label breeding_fetish_happy_breeder_crisis_label():
         "You quickly open the door and invite her inside."
         "To avoid any situations with [mom.possessive_title] or [lily.possessive_title], you quickly invite her to your room."
         $ mc.change_location(bedroom)
-        $ mc.location.show_background()
         "You walk into your room, close the door and lock it."
 
     $ the_person.draw_person(position="kissing")
@@ -419,7 +417,7 @@ label breeding_fetish_employee_high_fertility_crisis_label():
     the_person "Hey, can you help me with something? I'll be in your office."
     mc.name "Sure, I'll be right there."
     $ mc.end_text_convo()
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You step into your office."
     mc.name "I swear if this is about taxes..."
     $ the_person.draw_person(position = "standing_doggy")
@@ -461,7 +459,6 @@ label breeding_fetish_employee_high_fertility_crisis_label():
         the_person "Is it okay if I just lay like this for a bit? I read that it can help..."
         mc.name "That's fine. I'll lock the door behind me."
         the_person "Okay. Thank you [the_person.mc_title]."
-        "You leave your office and resume your workday."
     else:
         $ the_person.draw_person(position = "stand3")
         the_person "That's it?..."
@@ -469,7 +466,6 @@ label breeding_fetish_employee_high_fertility_crisis_label():
         the_person "Okay... just... try again soon, okay?"
         $ the_person.change_happiness(-15)
         "You can tell she is really disappointed."
-        "You leave your office and resume your workday."
     $ clear_scene()
     return
 

@@ -27,7 +27,6 @@ label aunt_drunk_cuddle_label():
         scene_manager = Scene()
         the_person = aunt
         mc.change_location(kitchen)
-        mc.location.show_background()
         scene_manager.add_actor(the_person, position = "sitting")
         scene_manager.add_actor(mom, position = "sitting", emotion = "happy", display_transform = character_center_flipped)
 
@@ -75,7 +74,6 @@ label aunt_drunk_cuddle_label():
 
     $ the_person.add_situational_slut("Drunk", 10, "More than a little tipsy.")
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     $ set_night_outfit(the_person)
     $ the_person.apply_outfit(the_person.personalize_outfit(the_person.outfit))
 
@@ -202,7 +200,6 @@ label aunt_drunk_cuddle_label():
 
     "You wake up, but [the_person.possessive_title] isn't there. You slowly get up and walk out of your room and into the kitchen."
     $ mc.change_location(kitchen)
-    $ mc.location.show_background()
     $ scene_manager.add_actor(the_person, position = "sitting")
     $ scene_manager.add_actor(mom, position = "sitting", emotion = "happy", display_transform = character_center_flipped)
     "[mom.title] and [the_person.title] are sitting at the kitchen table, drinking some coffee."

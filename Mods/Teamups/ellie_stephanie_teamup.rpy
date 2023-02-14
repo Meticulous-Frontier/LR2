@@ -61,7 +61,7 @@ init 1 python:
     def ellie_stephanie_teamup_progression_scene_action_req(the_person):  #Use this function to determine the requirement for when to actually run the scene itself.
         # return False    #Disabled for now
         if time_of_day == 1 and day%7 == 2:
-            if mc.business.head_researcher != None:
+            if mc.business.head_researcher is not None:
                 return True
         return False
 
@@ -125,7 +125,6 @@ label ellie_stephanie_teamup_progression_scene_intro_scene(the_group):
         $ mc.end_text_convo()
         "You walk down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
 
     $ scene_manager.add_actor(the_person)
     the_person "Hey [the_person.mc_title]. I've run into a bit of a situation with the nanobots."
@@ -151,7 +150,7 @@ label ellie_stephanie_teamup_progression_scene_intro_scene(the_group):
     $ possible_picks = mc.business.get_requirement_employee_list(obedience_required = 110, exclude_list = [the_person, the_researcher])
     call screen employee_overview(white_list = possible_picks, person_select = True)
     $ pick_1 = _return
-    if pick_1 == None:
+    if pick_1 is None:
         mc.name "Sorry, I don't think any of these girls will work..."
         the_researcher "Bullshit. Hang on, I'll pick one..."
         $ pick_1 = get_random_from_list(mc.business.get_requirement_employee_list(obedience_required = 110, exclude_list = [the_person, the_researcher]))
@@ -333,7 +332,7 @@ label ellie_stephanie_teamup_progression_scene_scene_0(the_group, scene_transiti
     # $ possible_picks = mc.business.get_requirement_employee_list(obedience_required = 110, exclude_list = [the_person, the_researcher])
     # call screen employee_overview(white_list = possible_picks, person_select = True)
     # $ pick_1 = _return
-    # if pick_1 == None:
+    # if pick_1 is None:
     mc.name "Sorry, I don't know who to call in."
     the_researcher "Hang on, I'll just select someone at random."
     $ pick_1 = get_random_from_list(mc.business.get_requirement_employee_list(exclude_list = [the_person, the_researcher]))

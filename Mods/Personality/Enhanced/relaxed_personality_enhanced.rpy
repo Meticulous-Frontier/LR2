@@ -68,7 +68,7 @@ label relaxed_lingerie_shopping_wow_response(the_person):
     return
 
 label relaxed_GIC_finish_response(the_person, the_goal):
-    if the_goal == None:
+    if the_goal is None:
         the_person "Mmm, that was exactly what I was hoping for!"
     elif the_goal == "get mc off":
         the_person "Did that feel good? I just want to make you feel good..."

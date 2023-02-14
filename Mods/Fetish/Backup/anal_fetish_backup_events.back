@@ -9,8 +9,6 @@
 #     "You're just getting out of bed when [the_person.possessive_title] calls from downstairs."
 #     the_person "[the_person.mc_title], could we talk for a moment?"
 #     mc.name "Sure, down in a second."
-#     $ mc.change_location(kitchen)
-#     $ mc.location.show_background()
 #     $ the_person.draw_person(position = "sitting")
 #     "[the_person.possessive_title] is sitting at the kitchen table, a collection of bills laid out in front of her."
 #     "She is fidgeting a bit. You can tell she is a little nervous about something."
@@ -39,7 +37,6 @@
 #             call free_strip_scene(the_person) from _call_free_strip_scene_SBA40
 #             "Now that she is naked, [the_person.possessive_title] quickly grabs your hand and leads you to her bedroom. When you get to her bed, she shoves you down on your back."
 #             $ mc.change_location(mom_bedroom)
-#             $ mc.location.show_background()
 #             the_person "Oh god, I need this so bad honey. You just lay back and let momma take care of you now."
 #             "[the_person.possessive_title] quickly strips you down. She reaches into her nightstand and grabs some lube. She hands it to you."
 #             the_person "Here! Can you get me, you know... ready?"
@@ -172,7 +169,6 @@
 #             # $ the_person.apply_outfit(special_fetish_nude_outfit)
 #             # "The next morning, you slowly wake up. The bed next to you is cold. You look around and see [the_person.possessive_title] getting ready for the day in the bathroom."
 #             # $ mc.change_location(mom_bedroom)
-#             # $ mc.location.show_background()
 #             # #Position peek back
 #             # $ the_person.draw_person(position = "walking_away")
 #             # "You walk up behind [the_person.possessive_title] and wrap your arms around her. She arches her back against you as your hands roam across her chest."
@@ -226,8 +222,7 @@
 #         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
 #         "You text her back."
 #     mc.name "Sure, meet me in my office."
-#     $ mc.change_location(office)
-#     $ ceo_office.show_background()
+#     $ mc.change_location(ceo_office)
 #     $ scene_manager = Scene()
 #     $ scene_manager.add_actor(the_person)
 #     "[the_person.title] meets you there. You sit down and notice she closes the office door... and then locks it."

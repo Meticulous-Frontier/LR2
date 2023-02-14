@@ -104,7 +104,6 @@ label think_about_buying_strip_club_label(the_person):
     $ name_string = mc.business.event_triggers_dict.get("old_strip_club_name", "Strip Club")
     "As you are wandering downtown with your mind full of thoughts, you find yourself in front of the old [name_string]..."
     $ mc.change_location(strip_club)
-    $ mc.location.show_background()
     "It's so strange to see the club this way, no people around, no music..."
     "You've checked the documents [the_person.title] got from the bank and your accountant confirmed it is a solid investment."
     "When you decided to invest in [the_person.title]'s shop, you never imagined it could be so profitable."
@@ -116,7 +115,6 @@ label think_about_buying_strip_club_label(the_person):
     mc.name "I need to think some more about buying this place, but I admit I'm very tempted... I need to talk again with [the_person.title]."
     "You're close to a decision about the Club, but now it's time to return back home and have a nice restoring sleep."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ set_strip_club_foreclosed_stage(3)
     $ add_discuss_buying_club_with_starbuck_action()
     return

@@ -392,7 +392,6 @@ label ophelia_make_blowjob_pics_label():
     $ the_person = salon_manager
     "Remembering your promise to [the_person.title], you head over to the hair salon."
     $ mc.change_location(mall_salon)
-    $ mc.location.show_background()
     $ the_person.draw_person()
     "[the_person.title] lets you in, then locks the front door behind her. It seems she is the only employee remaining."
     the_person "Hey! Thanks for coming back. So uhh... ready to get started?"
@@ -601,7 +600,6 @@ label ophelia_revenge_date_label():
     if mc.location != mall_salon:
         "It's time for your date with [the_person.title]. You head over to the hair salon."
         $ mc.change_location(mall_salon)
-        $ mc.location.show_background()
     else:
         "You hang around at the Salon until it is time for your date with [the_person.title]."
     $ scene_manager = Scene() # make sure we have a clean scene manager
@@ -615,7 +613,6 @@ label ophelia_revenge_date_label():
     "You have your doubts, but you know better than to voice them right now."
     the_person "Alright, let's get going. Don't want to be late!"
     $ mc.change_location(fancy_restaurant)
-    $ mc.location.show_background()
     "You arrive at the restaurant. There are a few people in front of you, also waiting on their tables. It seems they are running a little bit behind tonight."
     the_person "Hey, I'm just gonna run to the lady's room to check my hair, I'll be right back!"
     mc.name "Sure thing."
@@ -723,7 +720,6 @@ label ophelia_revenge_date_label():
     $ scene_manager.remove_actor(candace)
     "You pay the tab, then head outside. You look around and eventually notice [the_person.title] around the corner."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     $ scene_manager.show_actor(the_person, position = "stand3", emotion = "sad")
     mc.name "[the_person.title]... I'm sorry..."
     the_person "No... no... don't be. You've been very nice throughout this whole thing."
@@ -741,7 +737,6 @@ label ophelia_revenge_date_label():
     $ mc.change_locked_clarity(5)
     $ the_person.event_triggers_dict["first_date_finished"] = 1
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     $ the_person.learn_home()
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     "Soon, you are walking through her front door."
@@ -827,7 +822,6 @@ label ophelia_revenge_date_label():
     mc.name "Goodnight!"
     $ scene_manager.clear_scene()
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "You walk home. As you are walking, you consider the events of the evening."
     "Tonight was a real breakthrough with [the_person.title]. She was a great fuck, hopefully you can get in her pants again soon."
     "The scene at the restaurant was crazy with [ex_name] and that bimbo [candace.title]. You'll have to keep an eye out for her. Maybe you'll run into her again?"
@@ -1016,7 +1010,6 @@ label ophelia_choose_service_test_label():
         the_person "So... when do we go?"
     mc.name "Let's head over now."
     $ mc.change_location(mall_salon)
-    $ mc.location.show_background()
     "You go with [the_person.title] over to the salon."
     $ scene_manager.add_actor(salon_manager, display_transform = character_center_flipped)
     "[salon_manager.title] spots you as you walk in."

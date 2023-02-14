@@ -145,47 +145,69 @@ init 1 python:
     ###Project requirement functions###
 
     def basic_attention_reduction_project_requirement():
-        return get_fetish_basic_serum().mastery_level >= 5.0
+        if get_fetish_basic_serum().mastery_level >= 5.0:
+            return True
+        return "Low Trait Mastery (> 5)"
 
     def anal_incest_project_requirement():
-        return get_fetish_anal_serum().mastery_level >= 3.0
+        if get_fetish_anal_serum().mastery_level >= 3.0:
+            return True
+        return "Low Trait Mastery (> 3)"
 
     def anal_attention_reduction_project_requirment():
-        return get_fetish_anal_serum().mastery_level >= 5.0
+        if get_fetish_anal_serum().mastery_level >= 5.0:
+            return True
+        return "Low Trait Mastery (> 5)"
 
     def anal_fetish_increase_project_requirment():
-        return ellie_has_anal_fetish()
+        if ellie_has_anal_fetish():
+            return True
+        return "IT Girl Anal Fetish"
 
     def breeder_submission_project_requirement():
         if get_fetish_breeding_serum().mastery_level >= 3.0:
             return True
-        return "Low Mastery"
+        return "Low Trait Mastery (> 3)"
 
     def breeder_attention_reduction_project_requirement():
-        return get_fetish_breeding_serum().mastery_level >= 5.0
+        if get_fetish_breeding_serum().mastery_level >= 5.0:
+            return True
+        return "Low Trait Mastery (> 5)"
 
     def breeder_fetish_increase_project_requirment():
-        return ellie_has_breeding_fetish()
+        if ellie_has_breeding_fetish():
+            return True
+        return "IT Girl Breeding Fetish"
 
     def cum_thirst_project_requirement():
-        return get_fetish_cum_serum().mastery_level >= 3.0
+        if get_fetish_cum_serum().mastery_level >= 3.0:
+            return True
+        return "Low Trait Mastery (> 3)"
 
     def cum_attention_reduction_project_requirement():
-        return get_fetish_cum_serum().mastery_level >= 5.0
+        if get_fetish_cum_serum().mastery_level >= 5.0:
+            return True
+        return "Low Trait Master (> 5)"
 
     def cum_fetish_increase_project_requirment():
-        return ellie_has_cum_fetish()
+        if ellie_has_cum_fetish():
+            return True
+        return "IT Girl Cum Fetish"
 
     def exhibition_cheating_project_requirement():
         if get_fetish_exhibition_serum().mastery_level >= 3.0:
             return True
-        return "Low Mastery"
+        return "Low Trait Mastery (> 3)"
 
     def exhibition_attention_reduction_project_requirement():
-        return get_fetish_exhibition_serum().mastery_level >= 5.0
+        if get_fetish_exhibition_serum().mastery_level >= 5.0:
+            return True
+        return "Low Trait Mastery (> 5)"
 
     def exhibition_fetish_increase_project_requirment():
-        return ellie_has_exhibition_fetish()
+        if ellie_has_exhibition_fetish():
+            return True
+        return "IT Girl Exhibition Fetish"
 
 init 1 python:
 

@@ -242,7 +242,6 @@ label police_chief_public_sex_intervention(the_person):
     police_chief "God, get decent. I'm taking you two downtown!"
     $ the_person.apply_planned_outfit()
     $ mc.change_location(police_station)
-    $ mc.location.show_background()
     $ scene_manager = Scene()
     $ scene_manager.add_actor(police_chief)
     $ scene_manager.add_actor(the_person, position = "sitting", display_transform = character_left_flipped)

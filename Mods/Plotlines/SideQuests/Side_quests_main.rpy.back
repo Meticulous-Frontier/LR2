@@ -151,8 +151,8 @@ init python: #For now default init. May change later if we know better.
             return
 
         def attempt_force_quest(self, quest_name = None, override_active = False):  #Use this command in the console to attempt to for a new quest. optional param to force a specific quest for debug purpuses.
-            if self.active_quest == None or override_active:
-                if quest_name == None:
+            if self.active_quest is None or override_active:
+                if quest_name is None:
                     return self.start_new_quest()
 
                 else:

@@ -63,19 +63,18 @@ init 4 python:
 
 label lust_blowjob_intro_label():
     $ the_person = None
-    $ the_location = mc.location
     "In between shifts, you make your way around the office. You stop once in a while to admire some of the women you have employed."
     "Someone stops and asks you about something... it takes several seconds of staring at their tits before you realize they are talking to you."
     "Your sexual tension is starting to distract you from your work. You decide to hide in your office. You lock the door behind you."
+    $ old_location = mc.location
     $ mc.change_location(ceo_office)
-    $ mc.location.show_background()
     "You sit down at your computer and lookup some porn. You browse for a bit, looking for something good to watch."
     "As you are looking around though, you start to rethink this decision."
     "You own this business. You employ all these women. With the progress you've made with the serums, surely you could convince someone to help you out?"
     "You pull up your employee list on your computer... who should you call down?"
     call screen enhanced_main_choice_display(build_menu_items([["Call in"] + get_willing_lust_blowjob_girl_list()], draw_hearts_for_people = False))
     $ the_person = _return
-    if the_person == None:
+    if the_person is None:
         return
     "You walk over to your door and unlock it as you call [the_person.possessive_title]. You tell her to come to your office ASAP."
     "You walk back to your desk and sit down. Soon, there's a knock on your door."
@@ -132,20 +131,20 @@ label lust_blowjob_intro_label():
     "But now... why bother repressing it? You make a mental note to stop repressing it. Now whenever you would normally gain lust, you gain extra."
     $ add_lust_gain_perk()
     "You have gained a new perk! Every time you normally gain lust, you gain 5 extra."
-    $ mc.change_location(the_location)
-    $ mc.location.show_background()
+    $ mc.change_location(old_location)
+    $ old_location = None
     return
 
 label lust_blowjob_office_label():
     "All the skin and sexy outfits you've been exposed to at work has got you hard as a rock and you need some relief."
     "You decide to call an employee in for a blowjob and pull up your employee list on your phone."
     call screen enhanced_main_choice_display(build_menu_items([["Call in"] + lust_blowjob_build_employee_list()], draw_hearts_for_people = True))
-    if _return == "Leave" or _return == None:
+    if _return == "Leave" or _return is None:
         "After looking at your employee list, you change your mind. Maybe another opportunity will present itself later."
         return
     $ the_person = _return
     "You call [the_person.possessive_title] and tell her to come to your office ASAP."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "Soon, there's a knock on your door."
     mc.name "Come in."
     $ the_person.draw_person()

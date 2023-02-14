@@ -520,7 +520,7 @@ label GIC_outro_SB_sixty_nine(the_girl, the_location, the_object, the_goal = Non
         $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)
         "You let out a shuddering moan as you cum, pumping your sperm onto [the_girl.possessive_title]'s face. She sighs when you're completely finished."
         $ the_girl.call_dialogue("cum_face")
-    elif the_goal == "get mc off" or the_goal == "anal creampie" or the_goal == "vaginal creampie" or the_goal == "get off" or the_goal == None:
+    elif the_goal == "get mc off" or the_goal == "anal creampie" or the_goal == "vaginal creampie" or the_goal == "get off" or the_goal is None:
         $ SB_sixty_nine.call_default_outro(the_girl, the_location, the_object)
     elif the_goal == "oral creampie":
         "Little by little the soft, warm mouth of [the_girl.title] brings you closer to orgasm. One last pass across her velvet tongue is enough to push you past the point of no return."

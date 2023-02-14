@@ -2,7 +2,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
     $ the_goal = the_girl.get_sex_goal()
 
     #Perhaps an option where she hesitates and you grab her hips and pull her down while you cum.
-    if the_goal == None or the_goal == "get mc off" or the_goal == "anal creampie":
+    if the_goal is None or the_goal == "get mc off" or the_goal == "anal creampie":
         $ cowgirl.call_default_outro(the_girl, the_location, the_object)
 
     else:

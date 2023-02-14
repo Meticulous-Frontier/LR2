@@ -383,7 +383,6 @@ label camilla_hookup_rejection(the_person):
 
 label camilla_hookup_accept(the_person):
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
 
     "A few minutes later, you walk into the bar. You start walking back toward the women's restroom. The bartender nods to you as you pass the bar."
     $ work_bathroom.show_background()

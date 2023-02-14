@@ -22,7 +22,7 @@ init -1 python: #Requirement functions
 
     def cuckold_employee_decision_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
-            if cuckold_employee_get() == None:
+            if cuckold_employee_get() is None:
                 return True #Return true so that the vvent clears and we clean up at the start of the label.
             elif cuckold_employee_get().days_since_event("breeding_event") >= TIER_1_TIME_DELAY:
                 return True
@@ -30,7 +30,7 @@ init -1 python: #Requirement functions
 
     def cuckold_employee_rethink_decision_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
-            if cuckold_employee_get() == None:
+            if cuckold_employee_get() is None:
                 return True #Return true so that the vvent clears and we clean up at the start of the label.
             elif cuckold_employee_get().days_since_event("breeding_event") >= TIER_1_TIME_DELAY:
                 return True
@@ -46,7 +46,7 @@ init -1 python: #Requirement functions
 
     def cuckold_employee_gloryhole_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
-            if cuckold_employee_get() == None:
+            if cuckold_employee_get() is None:
                 return True #Return true so that the vvent clears and we clean up at the start of the label.
             elif cuckold_employee_get().days_since_event("breeding_event") >= TIER_1_TIME_DELAY:
                 return True
@@ -54,7 +54,7 @@ init -1 python: #Requirement functions
 
     def cuckold_employee_after_window_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
-            if cuckold_employee_get() == None:
+            if cuckold_employee_get() is None:
                 return True #Return true so that the vvent clears and we clean up at the start of the label.
             elif cuckold_employee_get().days_since_event("breeding_event") >= 7:    #One week of fucking
                 return True
@@ -65,7 +65,7 @@ init -1 python: #Requirement functions
 
     def cuckold_employee_knocked_up_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
-            if cuckold_employee_get() == None:
+            if cuckold_employee_get() is None:
                 return True #Return true so that the vvent clears and we clean up at the start of the label.
             elif cuckold_employee_get().days_since_event("breeding_event") >= TIER_1_TIME_DELAY:
                 return True
@@ -73,7 +73,7 @@ init -1 python: #Requirement functions
 
     def cuckold_employee_fertile_return_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
-            if cuckold_employee_get() == None:
+            if cuckold_employee_get() is None:
                 return True #Return true so that the vvent clears and we clean up at the start of the label.
             elif cuckold_employee_get().is_highly_fertile():    #She has started a new fertile period
                 return True
@@ -96,7 +96,7 @@ init 1 python:      #Actions
 init 2 python:      #Other python functions
     def setup_cuckold_employee():
         the_person = find_avail_cuckold_employee()
-        if the_person == None:
+        if the_person is None:
             #Probably reset this event somehow.
             return
         mc.business.event_triggers_dict["cuckold_employee_ident"] = the_person.identifier
@@ -125,7 +125,7 @@ init 2 python:      #Other python functions
 
     def cuckold_employee_get():
         the_person = get_person_by_identifier(mc.business.event_triggers_dict.get("cuckold_employee_ident", None))
-        if the_person == None:
+        if the_person is None:
             return None
         if not the_person.is_employee():
             return None
@@ -140,7 +140,7 @@ label cuckold_employee_init_label(): #Use this function to set quest specific va
 
 label cuckold_employee_intro_label():
     $ the_person = cuckold_employee_get()    #Find a way to get the target.
-    if the_person == None or not the_person.is_employee():
+    if the_person is None or not the_person.is_employee():
         #ABORT ABORT, we fucked up somewhere.
         #Loop back to init?
         call cuckold_employee_init_label() from _starbuck_sucks_at_programming_01   #If we can't find the person, run init again to reset the whole thing.
@@ -170,7 +170,7 @@ label cuckold_employee_intro_label():
 
 label cuckold_employee_decision_label():
     $ the_person = cuckold_employee_get()
-    if the_person == None:
+    if the_person is None:
         #ABORT ABORT, we fucked up somewhere.
         # $ cuckold_employee().quest_completed()
         return
@@ -285,8 +285,7 @@ label cuckold_employee_decision_label():
                     return
     # only get here if we are gonna breed in the office.
     "[the_person.possessive_title] follows you to your office."
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "After you walk in, you close the door and lock it."
     the_person "Let's do this. I'm ready. I'm ready to get bred!"
     $ the_person.draw_person(position = "kissing")
@@ -368,7 +367,7 @@ label cuckold_employee_decision_label():
 
 label cuckold_employee_rethink_decision_label():
     $ the_person = cuckold_employee_get()
-    if the_person == None:
+    if the_person is None:
         #ABORT ABORT, we fucked up somewhere.
         return
     $ the_person.ideal_fertile_day = (day % 30) + 2  #Peak fertility is in 2 days.
@@ -380,8 +379,7 @@ label cuckold_employee_rethink_decision_label():
     the_person "I think so... can we talk in private?"
     mc.name "Certainly, let's go to my office."
     "[the_person.possessive_title] follows you to your office."
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     mc.name "So, what is on your mind?"
     "She is fidgeting a bit. She is clearly nervous about what she has to say."
     the_person "Well... ever since the other day, when you offered to help me with my... you know... fertility issue? I just can't seem to get the idea out of my head!"
@@ -485,8 +483,7 @@ label cuckold_employee_breeding_session_label(the_person):
     mc.name "Yes that is exactly right. I really need help with something in my office, could you please come give me a hand?"
     the_person "Of course! Let's go!"
     "[the_person.possessive_title] follows you to your office."
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "After you walk in, you close the door and lock it."
     $ mc.change_arousal(5)
     $ the_person.change_arousal(5)
@@ -552,7 +549,7 @@ label cuckold_employee_breeding_session_label(the_person):
 
 label cuckold_employee_reload_breeding_session_label():
     $ the_person = cuckold_employee_get()
-    if the_person == None:
+    if the_person is None:
         #ABORT ABORT, we fucked up somewhere.
         return
     $ the_person.add_unique_on_talk_event(cuckold_employee_breeding_session)
@@ -561,7 +558,7 @@ label cuckold_employee_reload_breeding_session_label():
 
 label cuckold_employee_gloryhole_label():
     $ the_person = cuckold_employee_get()
-    if the_person == None:
+    if the_person is None:
         #ABORT ABORT, we fucked up somewhere.
         return
     $ anon_char = get_anon_person(the_person)
@@ -641,7 +638,7 @@ label cuckold_employee_gloryhole_label():
 
 label cuckold_employee_after_window_label():
     $ the_person = cuckold_employee_get()
-    if the_person == None:
+    if the_person is None:
         #ABORT ABORT, we fucked up somewhere.
         return
     $ the_person.set_event_day("breeding_event", override = True)
@@ -687,7 +684,7 @@ label cuckold_employee_reconsider_label(the_person):
 
 label cuckold_employee_knocked_up_label():
     $ the_person = cuckold_employee_get()
-    if the_person == None:
+    if the_person is None:
         #ABORT ABORT, we fucked up somewhere.
         return
     $ the_person.remove_on_talk_event(cuckold_employee_breeding_session)
@@ -696,8 +693,7 @@ label cuckold_employee_knocked_up_label():
     the_person "Hey! I need to see you in your office, ASAP!"
     mc.name "Ok, I'll be there soon."
     $ mc.end_text_convo()
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     $ the_person.draw_person(position = "stand4")
     $ the_person.event_triggers_dict["preg_knows"] = True
     "As you step into your office, you see [the_person.possessive_title]."
@@ -748,7 +744,7 @@ label cuckold_employee_knocked_up_label():
 label cuckold_employee_fertile_return_label():
     #In this label, we repeat the previous pattern, to give MC a chance to knock her up.
     $ the_person = cuckold_employee_get()
-    if the_person == None:
+    if the_person is None:
         #ABORT ABORT, we fucked up somewhere.
         # $ cuckold_employee().quest_completed()
         return

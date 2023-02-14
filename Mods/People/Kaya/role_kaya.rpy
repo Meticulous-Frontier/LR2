@@ -92,7 +92,7 @@ init -2 python:
         return True
 
     def kaya_add_HR_program_event_requirement(): #Not attached to anything
-        if mc.business.hr_director != None and renpy.random.randint(0,5) == 1:
+        if mc.business.hr_director is not None and renpy.random.randint(0,5) == 1:
             return True
         return False
 
@@ -246,7 +246,6 @@ label kaya_setup_intro_event_label():
 label kaya_intro_label(the_person):
     "Even though it is later in the day, you decide to swing by the coffee-shop for a pick me up."
     $ mc.change_location(coffee_shop)
-    $ mc.location.show_background()
     $ the_person.draw_person()
     "When you step inside, there's a new girl working there you haven't seen before."
     "You listen as the person ahead of you orders."
@@ -300,7 +299,6 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     the_person "Okay... don't worry I get off soon!"
     $ clear_scene()
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "You step outside and sit down, sipping your coffee."
     "You spend some time on your phone, and follow up on a couple of work emails while you wait. It's a pretty pleasant evening."
     "Pretty soon you hear [the_person.possessive_title] clear her throat nearby. You look up from your phone."
@@ -326,7 +324,6 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     $ the_person.change_love(2)
     the_person "Ahhh... I'm glad to know I wasn't mistaken."
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
     "Soon, you arrive at the bar. You point her to a high top you spot that looks open."
     mc.name "Hey, if you want to go grab that table, what is your drink of choice?"
     the_person "Oh, umm, let me walk up with you instead, I want to see if they have any specials."
@@ -446,7 +443,6 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     mc.name "Of course."
     "You both finish off what is left of your drinks, then leave the bar together."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "You step out on to the sidewalk and start to walk [the_person.possessive_title] home. Sensing a connection with her, you hold out your hand and she takes it."
     mc.name "So, you're going to class at the university, right?"
     the_person "That's right."
@@ -508,7 +504,6 @@ label kaya_get_drinks_label(the_person):  #Repeatable date night with Kaya
 
         $ clear_scene()
         $ mc.change_location(downtown)
-        $ mc.location.show_background()
         "You step outside and sit down, sipping your coffee."
         "You spend some time on your phone, and follow up on a couple of work emails while you wait. It's a pretty pleasant evening."
         "Pretty soon you hear [the_person.possessive_title] clear her throat nearby. You look up from your phone."
@@ -518,7 +513,6 @@ label kaya_get_drinks_label(the_person):  #Repeatable date night with Kaya
         mc.name "Ah, you're right, that was quick!"
         "You stand up, making sure to throw your coffee cup away and leave the table clean. You start to walk with [the_person.title] a couple blocks to the bar."
         $ mc.change_location(downtown_bar)
-        $ mc.location.show_background()
         "Soon, you arrive at the bar. You point her towards an empty pool table."
         mc.name "Hey, if you want to go grab that table, I'll get us some drinks."
         "You order yourself an Old Fashioned and a Manhattan with an orange twist for [the_person.title]."
@@ -546,7 +540,6 @@ label kaya_get_drinks_label(the_person):  #Repeatable date night with Kaya
         mc.name "Of course."
         "You both finish off what is left of your drinks, then leave the bar together."
         $ mc.change_location(downtown)
-        $ mc.location.show_background()
         "You step out on to the sidewalk and start to walk [the_person.possessive_title] home. She reaches out for your hand before you have time to offer it."
         # put something here
         $ the_person.draw_person(position = "kissing")
@@ -692,7 +685,6 @@ label kaya_lily_study_night_intro_label():
     "You remember that [the_person.possessive_title] was supposed to come over tonight to study with [lily.title]."
     "You decide to go say hi."
     $ mc.change_location(lily_bedroom)
-    $ mc.location.show_background()
     $ scene_manager.add_actor(lily)
     $ scene_manager.add_actor(the_person, position = "sitting", display_transform = character_center_flipped)
     "You knock on the door and a second later [lily.possessive_title] swings the door open. [the_person.title] is sitting on her bed."
@@ -710,7 +702,6 @@ label kaya_lily_study_night_intro_label():
     $ scene_manager.clear_scene()
     "You quickly bail out of that conversation and head for the kitchen."
     $ mc.change_location(kitchen)
-    $ mc.location.show_background()
     "Once in the kitchen you find the bottle of wine in the fridge and quickly get it open."
     "You grab two wine glasses and pour one. Hmm... maybe you could slip a serum into the girls drink really quick..."
     call give_serum(mom, add_to_log = False) from _call_give_kaya_serum_home_study_01
@@ -829,7 +820,6 @@ label kaya_lily_study_night_recurring_label(the_person):
     $ scene_manager = Scene()
     "You remember that [the_person.possessive_title] was supposed to come over tonight to study with [lily.title], so you swing by her room."
     $ mc.change_location(lily_bedroom)
-    $ mc.location.show_background()
     $ scene_manager.add_actor(lily)
     $ scene_manager.add_actor(the_person, position = "sitting", display_transform = character_center_flipped)
     "[lily.possessive_title] opens the door. [the_person.title] is sitting behind her on the bed."
@@ -843,7 +833,6 @@ label kaya_lily_study_night_recurring_label(the_person):
     $ scene_manager.clear_scene()
     "You head for the kitchen."
     $ mc.change_location(kitchen)
-    $ mc.location.show_background()
     "You pour a couple glasses of soda and grab some pretzels. You look around to make sure no one is there. Do you want to put some serum in the sodas?"
     menu:
         "Add serum to [lily.title]'s drink":
@@ -1158,7 +1147,6 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     $ mc.end_text_convo()
     "You make your way over to the coffee shop. When you get there the door is locked, since it is closed for the night, but after knocking [the_person.possessive_title] quickly lets you in."
     $ mc.change_location(coffee_shop)
-    $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "Hey! Thanks for coming... can I get you any coffee? It's on the house..."
     mc.name "No thanks. It's pretty late for that."
@@ -1186,7 +1174,6 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     $ the_person.draw_person()
     "You step out of the coffee shop into the night with [the_person.possessive_title]. You soon find yourself walking into her apartment."
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     "There are a few basic things still out, but most of her belongings have been put into boxes."
     $ the_person.add_situational_slut("Lonely", 20, "I don't want to spend the night alone!")
     "[the_person.possessive_title] turns to you."
@@ -1298,7 +1285,6 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
     "You get your clothes back on, and say goodnight to [the_person.title], who is still laying on her bed."
     "You walk home and fall into your bed, exhausted from your long day."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ mc.business.add_mandatory_crisis(kaya_moving_day)
     $ the_person.clear_situational_slut("Lonely")
     return
@@ -1311,7 +1297,6 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     if mc.business.is_open_for_business():
         "You make sure to let work know you won't be in today."
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     "You walk over and soon you are knocking on [the_person.possessive_title]'s front door. She swings it open."
     $ scene_manager.add_actor(the_person)
     the_person "Hey! You're here!"
@@ -1422,7 +1407,6 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     "The truck ride is pretty quiet. You wonder what her mother is like. You guess you'll find out soon."
     #TODO have different backgrounds for Kaya and Sakari's homesteads. This will not feel right in the mean time.
     $ mc.change_location(sakari.home)
-    $ mc.location.show_background()
     $ scene_manager.update_actor(the_person, position = "walking_away")
     "Soon you arrive. [the_person.possessive_title] goes to the front door and lets herself in. You follow closely behind her."
     the_person "{=kaya_lang}Whaea! Kei konei ahau!{/=kaya_lang}(?????)"
@@ -1478,7 +1462,6 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     "You say goodbye and leave. You can hear the moving truck start up as you walk away."
     $ clear_scene()
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     # set kaya living with her mom
     $ kaya.home = sakari.home
     $ kaya.set_schedule(the_location = sakari.home, the_times = [0,4])  #Should still meet with erica on tuesday.
@@ -1539,7 +1522,6 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     the_person "See you soon!"
     $ mc.end_text_convo()
     $ mc.change_location(coffee_shop)
-    $ mc.location.show_background()
     "You head to your favorite coffee shop. After a knock on the door, [the_person.possessive_title] swings it open."
     $ the_person.draw_person()
     the_person "Hey! Have a seat, everyone else is gone."
@@ -1690,7 +1672,6 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
     $ the_person.apply_outfit(the_person.planned_outfit)
     $ clear_scene()
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "You leave the coffee shop and start to walk around downtown some, lost in your thoughts."
     "Last week, you found out the hot barista you've been hitting on's mom is dying and her dad is already gone."
     "And now... you are dating?"

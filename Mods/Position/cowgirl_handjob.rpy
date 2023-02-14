@@ -174,7 +174,7 @@ label orgasm_cowgirl_handjob(the_girl, the_location, the_object):
 label GIC_outro_cowgirl_handjob(the_girl, the_location, the_object, the_goal = None):
     $ the_goal = the_girl.get_sex_goal()
 
-    if the_goal == "get off" or the_goal == "hate fuck" or the_goal == "vaginal creampie" or the_goal == "anal creampie" or the_goal == None or the_goal == "get mc off":
+    if the_goal == "get off" or the_goal == "hate fuck" or the_goal == "vaginal creampie" or the_goal == "anal creampie" or the_goal is None or the_goal == "get mc off":
         $ cowgirl_handjob.call_default_outro(the_girl, the_location, the_object)
     elif the_goal == "waste cum":
         "Little by little the soft hand of [the_girl.title] brings you closer to orgasm."

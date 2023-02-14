@@ -17,7 +17,6 @@ label crisis_template_label():
 
     #You go downtown
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
 
     if stephanie.get_opinion_score("public sex") > 0:
         "Dialoague branches yay"

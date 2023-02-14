@@ -130,7 +130,6 @@ label kaya_erica_teamup_intro_scene(the_group):
     "This arrangement between the two college girls could work to your advantage. The study rooms at the university seem fairly private..."
     "This could be an opportunity for you to make progress with the two girls, with opportunities to give them your serums."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_01
     return
 
@@ -204,9 +203,9 @@ label kaya_erica_teamup_intro_2(the_group):
     "You step out of the room."
     call kaya_erica_teamup_get_drinks_label() from _kaya_erica_teamup_intro_drinks_04
     $ kaya.strip_to_underwear(delay = 0)
-    $ kaya.strip_to_tits(delay = 0)
+    $ kaya.outfit.remove_all_upper_clothing()
     $ erica.strip_to_underwear(delay = 0)
-    $ erica.strip_to_tits(delay = 0)
+    $ erica.outfit.remove_all_upper_clothing()
     $ scene_manager.add_actor(kaya, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(erica, position = "sitting")
     "When you get back to the room, you notice the girls have already stripped down to their panties while you were gone."
@@ -237,9 +236,9 @@ label kaya_erica_teamup_intro_3(the_group):
     "You step out of the room."
     call kaya_erica_teamup_get_drinks_label() from _kaya_erica_teamup_intro_drinks_05
     $ kaya.strip_to_underwear(delay = 0)
-    $ kaya.strip_to_tits(delay = 0)
+    $ kaya.outfit.remove_all_upper_clothing()
     $ erica.strip_to_underwear(delay = 0)
-    $ erica.strip_to_tits(delay = 0)
+    $ erica.outfit.remove_all_upper_clothing()
     $ scene_manager.add_actor(kaya, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(erica, position = "sitting")
     "When you get back to the room, you notice the girls have already stripped down to their panties while you were gone."
@@ -301,7 +300,6 @@ label kaya_erica_teamup_scene_0(the_group, scene_transition = False):
     $ scene_manager.clear_scene()
     "It is late, and you start your walk home."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_02
     return
 
@@ -431,7 +429,6 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
     $ scene_manager.clear_scene()
     "It is late, and you start your walk home."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_03
     return
 
@@ -611,7 +608,6 @@ label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
     $ scene_manager.clear_scene()
     "It is late, and you start your walk home."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_04
     return
 
@@ -837,7 +833,6 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
     $ scene_manager.clear_scene()
     "It is late, and you start your walk home."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_05
     return
 
@@ -1001,7 +996,6 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
     $ scene_manager.clear_scene()
     "It is late, and you start your walk home."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_06
     return
 

@@ -367,7 +367,6 @@ init 1400 python:
 
 label HR_director_initial_hire_label(the_person):
     $ mc.change_location(lobby)
-    $ mc.location.show_background()
 
     $ the_person.draw_person()
     if the_person is sarah:
@@ -417,8 +416,7 @@ label HR_director_first_monday_label(the_person):
     "It's lunchtime, so you prepare to have your first meeting with your new HR Director, [the_person.title]."
     "You grab your lunch from the break room, head to your office, and sit down."
     $ scene_manager = Scene()
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     $ the_person.draw_person()
     "Soon, [the_person.title] appears in your door."
     the_person "Knock knock!"
@@ -475,8 +473,7 @@ label HR_director_monday_meeting_label(the_person):
 
     if mc.location != office:
         "You hurry to your office for your weekly meeting with your HR director [the_person.title]."
-        $ mc.change_location(office)
-        $ ceo_office.show_background()
+        $ mc.change_location(ceo_office)
         the_person "Hello [the_person.mc_title]!"
         $ scene_manager.add_actor(the_person)
         mc.name "Hi [the_person.title], come in and take a seat."
@@ -1622,8 +1619,7 @@ label HR_director_headhunt_interview_label(the_person):
             "You promise to do so."
             return
         mc.name "Sure, meet me in my office."
-        $ mc.change_location(office)
-        $ ceo_office.show_background()
+        $ mc.change_location(ceo_office)
         the_person "Hello [the_person.mc_title]!"
         $ scene_manager.add_actor(the_person)
         mc.name "Hi [the_person.title], come in and take a seat."

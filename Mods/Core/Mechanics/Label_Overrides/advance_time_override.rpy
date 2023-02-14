@@ -209,7 +209,7 @@ init 5 python:
         for project in mc.business.active_IT_projects:
             project.on_turn()
         mc.run_turn()
-        if "perk_system" in globals():
+        if "perk_system" in globals() and perk_system is not None:
             perk_system.update()  #TEST to see if this is a good time for this.
         return
 

@@ -115,7 +115,7 @@ init 1 python:
         return False
 
     def quest_arousal_serum_fire_HR_requirement():
-        if mc.business.head_researcher == None:
+        if mc.business.head_researcher is None:
             return True
         return False
 
@@ -143,7 +143,6 @@ label quest_arousal_serum_init_label():
 label quest_arousal_serum_intro_label():
     # make sure we are at home
     $ mc.change_location(hall)
-    $ mc.location.show_background()
 
     "As you are getting ready for bed, you notice [mom.title] sitting on the couch, watching some TV. It is currently a commercial."
     $ mom.draw_person(position = "sitting")
@@ -156,7 +155,6 @@ label quest_arousal_serum_intro_label():
 
     $ clear_scene()
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
 
     "The site is gaudy. Lots of claimed reviews call it a miracle drug. Taking a look, it is pretty pricey. Two doses for $100."
     menu:
@@ -177,7 +175,6 @@ label quest_arousal_serum_intro_label():
 label quest_arousal_serum_receive_drug_label():
     # make sure we are in bedroom
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ mom.draw_person()
     "As you are getting ready for bed, [mom.title] knocks on your door. You open it up."
     mom "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
@@ -189,7 +186,7 @@ label quest_arousal_serum_receive_drug_label():
     "You open up the package. It's the two pills you ordered. The highly acclaimed Female Viagra."
     "You note on the package an expiration date. Holy hell, this stuff expires in a week?"
     "Hmm... what to do with this? With two doses, you figure you could test one dose, and if it works, use the second one to try and reverse engineer the drug."
-    if mc.business.head_researcher == None:
+    if mc.business.head_researcher is None:
         "If only you had a head researcher... Well, if you want to this stuff, you should make sure you appoint a new one."
     else:
         "Your head researcher, [mc.business.head_researcher.title], is the obvious choice for who to give it to. And if it turns out to work, she could use the other one to analyze it."
@@ -221,7 +218,7 @@ label quest_arousal_serum_arrange_test_label(the_person):
 label quest_arousal_serum_test_label():
     $ the_person = mc.business.head_researcher
     $ the_person.arousal = 0 #Make sure we start at zero arousal for this event.
-    if the_person == None: #we fired HR, bad end
+    if the_person is None: #we fired HR, bad end
         $ quest_arousal_serum().quest_completed()
         return
     "After closing up the lab, it is time for you to test the pills with [the_person.title]."
@@ -343,7 +340,7 @@ label quest_arousal_serum_test_label():
 
 label quest_arousal_serum_researched_label():
     $ the_person = mc.business.head_researcher
-    if the_person == None: #we fired HR, bad end
+    if the_person is None: #we fired HR, bad end
         $ quest_arousal_serum().quest_completed()
         return
 
@@ -353,7 +350,6 @@ label quest_arousal_serum_researched_label():
         mc.name "On my way!"
         $ mc.end_text_convo()
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
         $ the_person.draw_person()
     else:
         $ the_person.draw_person()

@@ -30,7 +30,7 @@ init 1400 python:
     serum_policies_list.insert(9, testing_room_creation_policy)
 
     def head_researcher_cure_discovery_disease_name():
-        if mc.business.event_triggers_dict.get("head_researcher_cure_disease_name", None) != None:
+        if mc.business.event_triggers_dict.get("head_researcher_cure_disease_name", None) is not None:
             return mc.business.event_triggers_dict.get("head_researcher_cure_disease_name", None)
         if mc.business.research_tier == 0:
             return "Rabies"
@@ -156,7 +156,7 @@ init -1 python:
         return False
 
     def head_researcher_cure_discovery_intro_requirement():
-        if mc.business.is_open_for_business() and mc.business.head_researcher != None: #Only trigger if people are in the office.
+        if mc.business.is_open_for_business() and mc.business.head_researcher is not None: #Only trigger if people are in the office.
             if mc.business.head_researcher.days_since_event("obedience_event") >= TIER_2_TIME_DELAY and mc.business.head_researcher.obedience >= 160:
                 if len(mc.business.market_team) > 0:
                     return True
@@ -169,19 +169,19 @@ init -1 python:
         return False
 
     def head_researcher_cure_discovery_patent_sold_requirement(the_person):
-        if mc.business.is_open_for_business() and mc.business.head_researcher != None:
+        if mc.business.is_open_for_business() and mc.business.head_researcher is not None:
             if mc.business.head_researcher.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
                 return True
         return False
 
     def head_researcher_cure_discovery_patent_kept_requirement():
-        if mc.business.is_open_for_business() and mc.business.head_researcher != None:
+        if mc.business.is_open_for_business() and mc.business.head_researcher is not None:
             if mc.business.head_researcher.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
                 return True
         return False
 
     def head_researcher_cure_finish_requirement(the_person):
-        if mc.business.is_open_for_business() and mc.business.head_researcher != None:
+        if mc.business.is_open_for_business() and mc.business.head_researcher is not None:
             return True
         return False
 
@@ -210,7 +210,6 @@ label head_researcher_suggest_testing_room_label():
         $ mc.end_text_convo()
         "You walk down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "Hey! Thanks for coming. I wanted to show you something really quick."
     $ the_person.draw_person(position = "walking_away")
@@ -339,7 +338,7 @@ label head_researcher_cure_discovery_intro_label():
     $ the_person = mc.business.head_researcher
     $ the_disease = head_researcher_cure_discovery_disease_name()
     $ mc.business.event_triggers_dict["head_researcher_cure_disease_name"] = the_disease
-    if the_person == None:
+    if the_person is None:
         return #Bad end
     if mc.location != rd_division:
         $ mc.start_text_convo(the_person)
@@ -348,7 +347,6 @@ label head_researcher_cure_discovery_intro_label():
         $ mc.end_text_convo()
         "You quickly head to the lab."
         $ mc.change_location(rd_division)
-        $ mc.location.show_background()
     $ the_person.set_event_day("obedience_event", override = True)
     $ the_person.draw_person()
     the_person "Hey! I need to talk to you about something."
@@ -436,7 +434,7 @@ label head_researcher_cure_discovery_market_patent_label(the_person):
 
 label head_researcher_cure_discovery_patent_sold_label(the_person):
     $ the_disease = head_researcher_cure_discovery_disease_name()
-    if the_person == None:
+    if the_person is None:
         return
     the_person "Hey there! I have some good news about that patent for [the_disease]."
     mc.name "Glad to hear it. What is the news?"
@@ -481,7 +479,7 @@ label head_researcher_cure_discovery_patent_kept_label():
     "Red Cross""Thank you for donating your patent for [the_disease]!"
     "Red Cross""With this donation, we promise we will work to the best of our abilities to get this cure into the hands of everyone who needs it, worldwide."
     "Donated? What the hell? You didn't donate that!"
-    if the_person == None:
+    if the_person is None:
         "Suddenly, you realize what must have happened. After clearing out her desk, the old head researcher must have donated the patent she discovered!"
         "Well, maybe you should have considered selling the patent. Either way, that business opportunity is now gone."
         $ del the_disease

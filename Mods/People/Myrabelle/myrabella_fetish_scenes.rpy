@@ -49,7 +49,6 @@ label breeding_fetish_myra_intro_label(the_person):
     mc.name "Alright, I'm on my way."
     $ mc.end_text_convo()
     $ mc.change_location(gaming_cafe)
-    $ mc.location.show_background()
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     "When you get to the gaming cafe, you find it unlocked. You let yourself in, then lock the door."
     if lewd_cafe_open():
@@ -89,7 +88,6 @@ label breeding_fetish_myra_intro_label(the_person):
     "If you re-enact a scene from The Sims in the future, she may also decide to force you to cum inside her too..."
     $ add_breeding_fetish(the_person)
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "You walk home and collapse into your bed. You can't wait to fill [the_person.possessive_title]'s needy cunt with your cum, over and over again."
     return
 

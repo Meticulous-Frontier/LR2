@@ -519,7 +519,6 @@ label Sarah_intro_label():
     "You get up and stumble out of your room. Your sister and mom are nowhere to be scene."
     "You make your way to your front door and open it."
     $ mc.change_location(hall)
-    $ mc.location.show_background()
     $ the_person.draw_person()
     "Standing at your door is a cute brunette, fairly short, and strikingly familiar..."
     "She appears to be holding some kind of clipboard. A door to door saleswoman? Do those still exist?"
@@ -645,7 +644,6 @@ label Sarah_third_wheel_label():
 
     "By yourself on the weekend at work, you get up for a minute and decide to stretch your legs and walk the hallways for a bit."
     $ mc.change_location(office)
-    $ mc.location.show_background()
     "As you pass by the HR offices, you notice the HR Director's office door is open and the light is on. You decide to investigate."
     $ scene_manager = Scene() # make sure we have a clean scene manager
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -671,7 +669,6 @@ label Sarah_third_wheel_label():
     "You head downtown with [the_person.char]. You decide to walk since it isn't very far, and enjoy talking with her as you go."
 
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
 
     $ scene_manager.update_actor(the_person, position = "stand2")
     "Getting curious, you decide to ask her why she needed the condom at the office."
@@ -706,7 +703,6 @@ label Sarah_third_wheel_label():
     "[the_person.possessive_title] turns and continues walking. You walk beside her the rest of the way to the bar in silence."
 
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
 
     $ naomi = create_naomi()
     "When you get to the bar, [the_person.title] quickly spots her friend and leads you over to the table."
@@ -784,7 +780,6 @@ label Sarah_third_wheel_label():
     mc.name "That sounds like a perfect way to end the evening. Let's go."
 
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
 
     $ scene_manager.update_actor(the_person, position = "stand3")
     "You walk together with [the_person.title] through the streets as she slowly leads the way. You converse a bit, but things are mostly quiet as you walk."
@@ -915,7 +910,6 @@ label Sarah_get_drinks_label():
     "You lock up on your way out and head toward downtown."
 
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
 
 
     "You enjoy pleasant conversation with [the_person.possessive_title] as you walk downtown."
@@ -928,7 +922,6 @@ label Sarah_get_drinks_label():
 
 
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
 
     "You walk into the bar. [the_person.title] spots an empty booth."
     the_person "Hey, there's an empty table over there!"
@@ -1076,7 +1069,6 @@ label Sarah_get_drinks_label():
     mc.name "I can see there's no talking you out of it. And to be honest, I would appreciate the company."
     "She smiles at you. You leave the bar with her and start walking home."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     #TODO set to night time
     $ time_of_day = 3 #Hopefully this works
 
@@ -1112,7 +1104,6 @@ label Sarah_get_drinks_label():
     "You quickly open the door and let [the_person.title] in."
 
     $ mc.change_location(hall)
-    $ mc.location.show_background()
 
     # make sure we don't alter the outfit in her wardrobe
     $ test_outfit = the_person.outfit.get_copy()
@@ -1196,7 +1187,6 @@ label Sarah_get_drinks_label():
     "You creep slowly up to your door and listen. You don't hear much coming from within, so you slowly inch the door open and then peek inside."
 
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
 
     $ scene_manager.show_actor(the_person, position = "walking_away")
     "You see that [the_person.title] is just starting to peel off her clothes."
@@ -1278,7 +1268,6 @@ label Sarah_catch_stealing_label():
     $ sarah.event_triggers_dict["epic_tits_progress"] = 1
     "As you walk the halls of your company, getting ready to pack things up for the weekend, you notice [the_person.title] sneaking out of the research division."
     $ mc.change_location(rd_division)
-    $ mc.location.show_background()
     $ the_person.draw_person()
     mc.name "Hello [the_person.title]... what brings you to research on a late Friday evening?"
     "She looks down at the ground and mutters for a second, trying to think of something. It is clear she is hiding something."
@@ -1409,13 +1398,10 @@ label Sarah_new_tits_label():
 
 label Sarah_tits_reveal_label():
     $ the_person = sarah
-    if not mc.location == office:
-        "Your phone rings. It's [the_person.possessive_title]. You answer it."
-        the_person "Hello [the_person.mc_title], could you meet me in your office? It's urgent."
-        "You put your phone in your pocket and head to your office."
-        $ mc.change_location(office)
-
-    $ ceo_office.show_background()
+    "Your phone rings. It's [the_person.possessive_title]. You answer it."
+    the_person "Hello [the_person.mc_title], could you meet me in your office? It's urgent."
+    "You put your phone in your pocket and head to your office."
+    $ mc.change_location(ceo_office)
 
     $ the_person.draw_person()
     "[the_person.title] steps confidently into your office."
@@ -1489,6 +1475,7 @@ label Sarah_tits_reveal_label():
     "She gets up and leaves the room. You smile to yourself, thinking about how good her new tits felt around your cock."
     $ the_person.apply_planned_outfit()
     $ add_sarah_workout_in_tshirt_action()
+    $ mc.change_location(hall)
     return
 
 label Sarah_workout_in_tshirt_label(the_person):    #60 sluttiness event
@@ -1566,7 +1553,6 @@ label Sarah_stripclub_story_label():
     the_person "You'll just have to see! Let's go!"
 
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     if the_person.event_triggers_dict.get("dating_path", False) == True:
         "[the_person.possessive_title] holds your hand as you leave the lab and head downtown."
         "You pass the bar you usually go to. Where is this girl taking you?"
@@ -1586,7 +1572,6 @@ label Sarah_stripclub_story_label():
     mc.name "Sounds great!"
 
     $ mc.change_location(strip_club)
-    $ mc.location.show_background()
 
     "You head inside. Your senses are assaulted by everything going on. The loud bass music thumps in your ears. On stage you see a girl shaking her ass for a group of guys."
     "You check around quickly... looks like [the_person.title] is one of the few women in the crowd with you."
@@ -1759,7 +1744,6 @@ label Sarah_stripclub_story_label():
     mc.name "Absolutely."
     "You both head out and are soon walking through your front door."
     $ mc.change_location(hall)
-    $ mc.location.show_background()
     $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_right)
     the_person "Oh god I can't wait to get to your bedroom and..."
     $ scene_manager.add_actor(mom, display_transform = character_left_flipped)
@@ -1774,7 +1758,6 @@ label Sarah_stripclub_story_label():
     $ scene_manager.remove_actor(mom)
 
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
 
     "Finally, you reach your bedroom and quickly close and lock the door."
     mc.name "God I'm sorry, if you aren't in the mood anymore..."
@@ -1981,7 +1964,6 @@ label Sarah_threesome_request_label():
         mc.name "Why don't we start down in research? I'm sure we have some extra beakers we could use."
         the_person "Let's go!"
         $ mc.change_location(rd_division)
-        $ mc.location.show_background()
     mc.name "Pull up a seat."
     $ scene_manager.update_actor(the_person, position = "sitting")
     "You grab a couple vials from one of the desks. [the_person.possessive_title] hands you the bottle and you pour the first round."
@@ -2125,7 +2107,6 @@ label Sarah_threesome_request_label():
     "You get home and walk through the front door."
 
     $ mc.change_location(hall)
-    $ mc.location.show_background()
 
     if person_choice is aunt:
         $ scene_manager.add_actor(mom, display_transform = character_left_flipped, position = "sitting")
@@ -2185,7 +2166,6 @@ label Sarah_threesome_request_label():
         $ scene_manager.remove_actor(mom)
         $ scene_manager.remove_actor(lily)
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "You get to your room. When you walk in, [the_person.possessive_title] starts to strip down."
     the_person "Hope you don't mind if I sleep naked!"
     mc.name "That would actually be ideal, if I'm being honest."
@@ -2310,7 +2290,6 @@ label Sarah_initial_threesome_label():
 
     "It's Saturday night. You quickly head home, you have an exciting night ahead of you."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "You make sure your bedroom is nice and tidy."
     $ mc.start_text_convo(sarah)
     sarah "Hey, I'm here."
@@ -2414,7 +2393,6 @@ label Sarah_initial_threesome_label():
 label Sarah_ask_for_baby_label():
     $ the_person = sarah
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ scene_manager = Scene()
     $ mc.start_text_convo(the_person)
     the_person "Hey, can I come over tonight? I had something I wanted to talk to you about."
@@ -2941,7 +2919,6 @@ label Sarah_weekend_date_grab_drinks_label():
     $ the_person = sarah
     $ scene_manager = Scene()
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
     $ scene_manager.add_actor(the_person, emotion = "happy")
     $ intoxication_level = 0 #Start at 0, options may open up depending on how drunk you get her.
     "After a short walk, you arrive at the bar that you and [the_person.title] have been to a few times recently."
@@ -3054,7 +3031,6 @@ label Sarah_weekend_date_strip_club_label():
     $ the_person = sarah
     $ scene_manager = Scene()
     $ mc.change_location(strip_club)
-    $ mc.location.show_background()
     $ scene_manager.add_actor(the_person, emotion = "happy")
     "After a short walk, you and [the_person.possessive_title] enter the front door of the now familiar strip club."
     "Your senses are assaulted by everything going on. The loud bass music thumps in your ears. On stage you see a girl shaking her ass for a group of guys."
@@ -3156,7 +3132,6 @@ label Sarah_talk_about_naomi_label(the_person):
     mc.name "Don't worry, it's personal."
     the_person "Ok, let's go then."
     $ mc.change_location(ceo_office)
-    $ mc.location.show_background()
     "You gesture [the_person.possessive_title] to sit down."
     $ the_person.draw_person(position = "sitting")
     mc.name "Guess who I bumped into the other day..."
@@ -3207,12 +3182,10 @@ label Sarah_naomi_visits_to_apologize_label():
         the_person = naomi
         scene_manager = Scene()
         mc.change_location(lobby)
-        mc.location.show_background()
         scene_manager.add_actor(the_person)
     the_person "Hello [the_person.mc_title], thank you again for doing this for me."
     mc.name "Hi [the_person.fname], good to see you, let's go to my office."
     $ mc.change_location(ceo_office)
-    $ mc.location.show_background()
     $ scene_manager.update_actor(the_person, position = "sitting", display_transform = character_center_flipped)
     "You motion her to take a seat."
     mc.name "Would you like some coffee?"
@@ -3372,7 +3345,6 @@ label Sarah_naomi_visits_to_apologize_label():
 
 label Sarah_date_ends_at_your_place_label(the_person):
     $ mc.change_location(hall)
-    $ mc.location.show_background()
     $ scene_manager.update_actor(the_person, position = "stand2", display_transform = character_right)
     if the_person.is_highly_fertile():
         the_person "Oh god, I can't wait to feel you fill me up again..."
@@ -3402,7 +3374,6 @@ label Sarah_date_ends_at_your_place_label(the_person):
     $ scene_manager.remove_actor(mom)
 
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
 
     "You reach your bedroom and quickly close and lock the door."
     "[the_person.possessive_title] looks at you."

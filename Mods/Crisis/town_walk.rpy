@@ -151,7 +151,6 @@ label town_walk_crisis_action_label():
     python:
         the_person.apply_planned_outfit()
         mc.change_location(old_location)
-        mc.location.show_background()
         clear_scene()
-        del old_location
+        old_location = None
     return

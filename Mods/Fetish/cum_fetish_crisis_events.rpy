@@ -17,7 +17,7 @@ init 2 python:
         return False
 
     def get_fetish_shower_cum_girl():
-        return get_random_from_list([x for x in [mom, lily] if x.has_cum_fetish() and x.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
+        return get_random_from_list([x for x in [mom, lily] if x.has_cum_fetish() and not x.has_limited_time_event("sleeping_walk_in_label") and x.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
 
     def get_fetish_cum_dosage_employee():
         return get_random_from_list([x for x in mc.business.get_employee_list() if x.has_cum_fetish() and x.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
@@ -73,7 +73,7 @@ label cum_fetish_employee_dosage_request_label():
     if the_person is None:
         return
     "As you finish up with one of your work tasks, you decide to take a quick break."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You step into your office and sit down for a minute. You hop on your laptop and start browsing the internet."
     "*KNOCK KNOCK*"
     $ the_person.draw_person()
@@ -137,7 +137,6 @@ label cum_fetish_non_employee_dosage_request_label():
             mc.name "All right, meet me at my place in 10 minutes."
             $ mc.change_locked_clarity(30)
             $ mc.change_location(hall)
-            $ mc.location.show_background()
             "You just got home, when your doorbell rings."
             $ the_person.draw_person()
             the_person "Hey [the_person.mc_title], I came as fast as I could."

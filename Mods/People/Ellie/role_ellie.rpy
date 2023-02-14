@@ -242,7 +242,6 @@ label ellie_meet_ellie_intro_label():
     $ the_person = mc.business.head_researcher
     "As night falls, you make your way downtown. Tonight you are meeting with your mysterious blackmailer."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
     "You text [the_person.possessive_title] to make sure she is still going to be there."
     $ mc.start_text_convo(the_person)
@@ -282,7 +281,6 @@ label ellie_meet_ellie_intro_label():
     $ mc.end_text_convo()
     $ mc.location.lighting_conditions = standard_outdoor_lighting
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
     "You grab a secluded table away from the crowd around the bar with [the_person.title]."
     $ the_person.draw_person(position = "sitting")
     the_person "So, how'd it go?"
@@ -318,7 +316,7 @@ label ellie_meet_ellie_intro_label():
 
 label ellie_head_researcher_halfway_intro_label():
     $ the_person = mc.business.head_researcher
-    if the_person == None:
+    if the_person is None:
         $ mc.business.add_mandatory_crisis(ellie_unnecessary_payment)
         return
     "You feel your phone vibrate in your pocket. It's [the_person.possessive_title]."
@@ -370,7 +368,6 @@ label ellie_unnecessary_payment_label():    #Use this scene each week if MC can'
     $ the_person = ellie
     "As night falls, you make your way downtown. Tonight you are meeting with your blackmailer."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
     "The time comes so you head for the alley. As you approach, you hear the southern twang of her accent as she steps from the shadows."
     $ the_person.draw_person()
@@ -442,7 +439,6 @@ label ellie_end_blackmail_label():
     $ the_person = ellie
     "As night falls, you make your way downtown. Tonight you are meeting with your blackmailer."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
     "The time comes so you head for the alley. As you approach, you hear the southern twang of her accent as she steps from the shadows."
     $ the_person.draw_person()
@@ -501,7 +497,6 @@ label ellie_end_blackmail_label():
     $ mc.business.add_mandatory_crisis(ellie_work_welcome)
     $ mc.location.lighting_conditions = standard_outdoor_lighting
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ mc.business.set_event_day("hired_ellie_IT")
     return
 
@@ -1355,7 +1350,6 @@ label ellie_dinner_date_label():
     $ the_person.draw_person()
     the_person "Ah! You're here! Come in!"
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     "When you step inside, you are immediately assaulted by number of heavenly smells."
     mc.name "Oh my god. It smells amazing in here."
     the_person "Ah, thank you! I made up some jambalaya and cornbread. Dessert is still in the oven but I hope you like peach cobbler..."
@@ -1379,7 +1373,7 @@ label ellie_dinner_date_label():
     the_person "Ah! The cobbler should be done! Let me go pull it out..."
     $ the_person.draw_person(position = "walking_away")
     "Last time anyone says that tonight..."
-    "She jumps up and heads back to the kitche. You watch her as she walks away from the table."
+    "She jumps up and heads back to the kitchen. You watch her as she walks away from the table."
     $ the_person.draw_person(position = the_person.idle_pose)
     "In a few minutes, she re-emerges with two bowls of peach cobbler with a scoop of vanilla ice cream."
     "She sets one down next to you, then sits down."
@@ -1529,7 +1523,6 @@ label ellie_dinner_date_label():
     the_person "Goodnight [the_person.mc_title]! I'll see you at work tomorrow..."
     $ clear_scene()
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "You step out of [the_person.possessive_title]'s apartment."
     $ the_person.add_unique_on_room_enter_event(ellie_lingerie_shopping)
     return
@@ -3138,13 +3131,13 @@ label ellie_nanobot_fetish_label(the_person):   #After first test, MC can give e
 
 init -1 python:
     def ellie_is_working_on_nanobots(): #This should probably always return true now since she is in R&D
-        if ellie.location == mc.business.r_div and mc.business.IT_project_in_progress != None:
+        if ellie.location == mc.business.r_div and mc.business.IT_project_in_progress is not None:
             if mc.business.IT_project_in_progress in nanobot_IT_project_list:
                 return True
         return False
 
     def ellie_is_working_on_project():
-        if ellie.location == mc.business.r_div and mc.business.IT_project_in_progress != None:
+        if ellie.location == mc.business.r_div and mc.business.IT_project_in_progress is not None:
             return True
         return False
 

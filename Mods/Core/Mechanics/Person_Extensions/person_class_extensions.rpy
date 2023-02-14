@@ -157,7 +157,6 @@ init -1 python:
     # use dedicated locations, since each location has different objects
     def change_to_person_bedroom(self):
         mc.change_location(self.bedroom)
-        mc.location.show_background()
         return
 
     Person.change_to_bedroom = change_to_person_bedroom
@@ -165,7 +164,6 @@ init -1 python:
     # use dedicated locations, since each location has different objects
     def change_to_person_hallway(self):
         mc.change_location(her_hallway) # use generic hallway
-        mc.location.show_background()
         return
 
     Person.change_to_hallway = change_to_person_hallway
@@ -958,7 +956,7 @@ init -1 python:
             self.change_slut(lingerie_bonus, max_modified_to = 30, add_to_log = False)
 
         # not wearing underwear only impacts sluttiness to level 40
-        if self.outfit and (not self.outfit.wearing_bra() or not self.outfit.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+        if self.outfit and not (self.outfit.wearing_bra() or self.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
             underwear_bonus = 0
             if not self.outfit.wearing_bra():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
@@ -1202,7 +1200,7 @@ init -1 python:
             skill_name = "Supply Skill"
             current = self.supply_skill
 
-        if skill_name == None:
+        if skill_name is None:
             return
 
         if current == score:
@@ -2029,8 +2027,7 @@ init -1 python:
             # Casual fridays for employees only
             if not (day%7 == 4 and casual_friday_uniform_policy.is_active()):
                 # Check for uniform
-                if wardrobe.get_count() > 0:
-                    return True
+                return wardrobe.get_count() != 0
         # Non-employees
         else:
             return True # Everybody else wears a uniform while at work
@@ -2043,29 +2040,25 @@ init -1 python:
         if not self.is_at_work():  # quick exit
             return False
 
-        if self.is_employee() or self.is_intern():
+        if self.is_employee() and not self.is_intern() and not self.is_strip_club_employee():
             # Casual fridays for employees only
             if not (day%7 == 4 and casual_friday_uniform_policy.is_active()):
                 # Check for dress code and whether planned outfit applies
-                if dress_code_policy.is_active():
-                    # Workaround for a crash involving a stripper staying in the club overnight
-                    # TODO: Should we generate instead of just assuming it won't match?
-                    if self.planned_outfit is None:
-                        return True
-
-                    if not self.planned_outfit.is_within_dress_code():
-                        return True
+                return dress_code_policy.is_active()
         return False
+
     Person.should_wear_dress_code_outfit = person_should_wear_dress_code_outfit
 
     def person_wear_dress_code_outfit(self): #Puts the girl into her uniform, if it exists.
         if self.dress_code_outfit is None:
-            # If we don't have a uniform planned for today get one.
-            # We can actually use the uniform logic here by passing in an empty wardrobe
-            self.dress_code_outfit = Wardrobe("Empty").decide_on_uniform(self)
+            self.dress_code_outfit = mc.business.get_uniform_wardrobe_for_person(self).decide_on_uniform(self)
 
-        if self.dress_code_outfit is not None: #If our planned uniform is STILL None it means we are unable to construct a valid uniform. Only assign it as our outfit if we have managed to construct a uniform.
-            self.apply_outfit(self.dress_code_outfit) #We apply clothing taboos to uniforms because the character is assumed to have seen them in them.
+        if self.dress_code_outfit is not None:
+            self.apply_outfit(self.dress_code_outfit)
+        else:
+            self.apply_outfit(self.planned_outfit)
+        return
+
     Person.wear_dress_code_outfit = person_wear_dress_code_outfit
 
     @property
@@ -2102,7 +2095,6 @@ init -1 python:
         if workout_wardrobe:
             self.location_outfit = self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self))
             self.apply_outfit(self.location_outfit)
-            # self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
         return
 
     Person.apply_gym_outfit = apply_gym_outfit
@@ -2110,25 +2102,26 @@ init -1 python:
     def apply_university_outfit(self):
         if university_wardrobe:
             self.location_outfit = university_wardrobe.build_uniform_wardrobe(self.wardrobe).decide_on_outfit2(self)
-            # get personal copy of outfit, so we don't change the university wardrobe (in any events)
             self.apply_outfit(self.location_outfit)
         return
 
     Person.apply_university_outfit = apply_university_outfit
 
     def apply_yoga_outfit(self):
-        self.apply_planned_outfit()
         # strip to underwear or else pick workout outfit
         if self.effective_sluttiness("underwear_nudity") >= 60:
-            # use her current planned underwear
-            self.strip_to_underwear(delay = 0)
-            # take off shoes and socks
-            self.strip_outfit(delay = 0, exclude_upper = True, exclude_lower = True, exclude_feet = False)
-            # add black slips
-            self.outfit.add_feet(slips.get_copy(), colour_black)
+            self.location_outfit = Outfit("Yoga Outfit")
+            for cloth in [x for x in self.planned_outfit.upper_body if x.layer <= 2]:
+                self.location_outfit.add_upper(cloth)
+            for cloth in [x for x in self.planned_outfit.lower_body if x.layer <= 2]:
+                self.location_outfit.add_lower(cloth)
+            for item in [x for x in self.planned_outfit.accessories]:
+                self.location_outfit.add_accessory(item)
+            self.location_outfit.add_feet(slips.get_copy(), colour_black)
         elif workout_wardrobe:
-            self.apply_outfit(self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self)))
-            #self.apply_outfit(workout_wardrobe.decide_on_outfit2(self))
+            self.location_outfit = self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self))
+
+        self.apply_outfit(self.location_outfit)
         return
 
     Person.apply_yoga_outfit = apply_yoga_outfit
@@ -2173,8 +2166,8 @@ init -1 python:
 
     Person.is_wearing_uniform = person_is_wearing_uniform_extended(Person.is_wearing_uniform)
 
-    def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, max_alterations = 0, main_colour = None, swap_bottoms = False, allow_skimpy = True):
-        return WardrobeBuilder(self).personalize_outfit(outfit, opinion_color = opinion_color, coloured_underwear = coloured_underwear, max_alterations = max_alterations, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
+    def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, main_colour = None, swap_bottoms = False, allow_skimpy = True):
+        return WardrobeBuilder(self).personalize_outfit(outfit, opinion_color = opinion_color, coloured_underwear = coloured_underwear, main_colour = main_colour, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
 
     Person.personalize_outfit = personalize_outfit
 
@@ -2306,6 +2299,18 @@ init -1 python:
 
     Person.panties_covered = person_panties_covered
 
+    def person_is_wearing_underwear(self):
+        return self.outfit.is_wearing_underwear()
+    Person.is_wearing_underwear = person_is_wearing_underwear
+
+    def person_is_bra_visible(self):
+        return self.outfit.is_bra_visible()
+    Person.is_bra_visible = person_is_bra_visible
+
+    def person_are_panties_visible(self):
+        return self.outfit.are_panties_visible()
+    Person.are_panties_visible = person_are_panties_visible
+
     def person_get_bra(self):
         return self.outfit.get_bra()
 
@@ -2389,13 +2394,14 @@ init -1 python:
     def person_get_random_appropriate_outfit(self, guarantee_output = False):
         outfit = self.wardrobe.get_random_appropriate_outfit(sluttiness_limit = self.effective_sluttiness(), preferences = WardrobePreference(self))
         if guarantee_output and not outfit: # when no outfit and we need one, generate one
-            outfit = self.generate_random_appropriate_outfit(swap_bottoms = False, allow_skimpy = self.sluttiness > 50)
-        return outfit
+            outfit = self.wardrobe.generate_random_appropriate_outfit(self, sluttiness = self.get_effective_sluttiness())
+        return self.personalize_outfit(outfit, allow_skimpy = False)
 
     Person.get_random_appropriate_outfit = person_get_random_appropriate_outfit
 
     def person_generate_random_appropriate_outfit(self, outfit_type = "FullSets", swap_bottoms = False, allow_skimpy = False):
-        return generate_random_appropriate_outfit(self, outfit_type = outfit_type, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
+        outfit = generate_random_appropriate_outfit(self, outfit_type = outfit_type)
+        return self.personalize_outfit(outfit, swap_bottoms = swap_bottoms, allow_skimpy = allow_skimpy)
 
     Person.generate_random_appropriate_outfit = person_generate_random_appropriate_outfit
 
@@ -2919,19 +2925,19 @@ init -1 python:
     def person_set_event_day(self, dict_key, override = True, set_day = None):
         if not override and self.event_triggers_dict.get(dict_key, None):
             return False
-        if set_day != None:
+        if set_day is not None:
             self.event_triggers_dict[dict_key] = set_day
         else:
             self.event_triggers_dict[dict_key] = day
         return
 
     def person_get_event_day(self, dict_key, set_if_none = True):
-        if self.event_triggers_dict.get(dict_key, None) == None and set_if_none:
+        if self.event_triggers_dict.get(dict_key, None) is None and set_if_none:
             self.set_event_day(dict_key)
         return self.event_triggers_dict.get(dict_key, None)
 
     def person_days_since_event(self, dict_key, set_if_none = True):
-        if self.event_triggers_dict.get(dict_key, None) == None and set_if_none:
+        if self.event_triggers_dict.get(dict_key, None) is None and set_if_none:
             self.set_event_day(dict_key)
         if self.event_triggers_dict.get(dict_key, None):
             return day - self.event_triggers_dict.get(dict_key, None)

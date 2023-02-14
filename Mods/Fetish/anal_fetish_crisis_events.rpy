@@ -47,8 +47,7 @@ label aggressive_anal_fetish_employee_label():
     the_person "Hey, I really need your help with something. Can you meet me in your office really quick?"
     mc.name "Sure, I'll meet you there in five."
     $ mc.end_text_convo()
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You step into your office. [the_person.possessive_title] isn't there yet so you sit down at your desk."
     $ the_person.draw_person()
     "In a minute, you see her step into your office, close the door and lock it."
@@ -123,7 +122,6 @@ label aggressive_anal_fetish_non_employee_label():
             $ the_person.event_triggers_dict["LastAnalFetish"] = day
             mc.name "All right, meet me at my place in 10 minutes."
             $ mc.change_location(hall)
-            $ mc.location.show_background()
             "You just got home, when your doorbell rings."
 
             $ the_person.draw_person()

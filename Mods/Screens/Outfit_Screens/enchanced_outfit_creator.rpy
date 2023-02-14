@@ -105,7 +105,7 @@ init 10 python:
 
     def personalize_generated_outfit():
         cs = renpy.current_screen()
-        cs.scope["outfit_builder"].personalize_outfit(cs.scope["demo_outfit"], max_alterations = 2, swap_bottoms = True)
+        cs.scope["outfit_builder"].personalize_outfit(cs.scope["demo_outfit"], swap_bottoms = True)
         cs.scope["demo_outfit"].update_name()
         duplicate_outfit(cs.scope["starting_outfit"], cs.scope["demo_outfit"])
         preview_outfit()
@@ -332,13 +332,13 @@ init 2:
         default hide_list = []
 
         if outfit_type == "under":
-            $ valid_layers = [0,1]
+            $ valid_layers = [0,1,2]
             $ outfit_class_selected = "UnderwearSets"
         elif outfit_type == "over":
-            $ valid_layers = [2,3]
+            $ valid_layers = [2,3,4]
             $ outfit_class_selected = "OverwearSets"
         else:
-            $ valid_layers = [0,1,2,3]
+            $ valid_layers = [0,1,2,3,4]
             $ outfit_class_selected = "FullSets"
 
         default valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"] #Holds the valid list of categories strings to be shown at the top.

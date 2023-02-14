@@ -39,7 +39,7 @@ init -2 python:
             self.person_action = person_action      #if the action should be a person (on room enter) crisis
             self.is_random = is_random              #If this action only pops up randomly.
             self.role_action = role_action          #if this a selectable action and is part of a role.
-            if unit_test_func == None:              #Set a unit test function
+            if unit_test_func is None:              #Set a unit test function
                 self.unit_test_func = progression_scene_test_func_default
             else:
                 self.unit_test_func = unit_test_func

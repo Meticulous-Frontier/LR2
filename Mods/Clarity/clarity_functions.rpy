@@ -1,7 +1,7 @@
 init 3 python:
     def get_clarity_multiplier():
         multiplier = 1.0
-        if "perk_system" in globals():
+        if "perk_system" in globals() and perk_system is not None:
             if perk_system.has_ability_perk("Intelligent Clarity"):
                 multiplier += (mc.int * .05) #5% increase per intelligence point
             if perk_system.has_ability_perk("Charismatic Clarity"):

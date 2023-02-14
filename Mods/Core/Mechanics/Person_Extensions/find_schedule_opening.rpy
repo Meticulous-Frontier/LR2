@@ -10,7 +10,7 @@ init 2 python:
                     continue
                 list_of_times.append([the_day, the_time])
                 for person in people_list:
-                    if person.schedule[the_day][the_time] != None:
+                    if person.schedule[the_day][the_time] is not None:
                         list_of_times.remove([the_day, the_time])
                         break
         return list_of_times

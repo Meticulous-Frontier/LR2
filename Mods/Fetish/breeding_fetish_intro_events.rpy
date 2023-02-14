@@ -293,7 +293,6 @@ label breeding_fetish_employee_intro_label(the_person):
 
 label breeding_fetish_family_intro_label(the_person):
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     $ the_person.draw_person(position = "back_peek")
     "You walk into [the_person.possessive_title]'s bedroom. She is looking at herself in the mirror, but turns to look when she hears you walk in."
     the_person "Oh hey [the_person.mc_title]. I was just getting ready to head for bed."
@@ -418,7 +417,6 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     "She quickly unlocks the front door and pulls you inside."
     $ the_person.learn_home()
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     $ the_person.draw_person(position = "kissing")
     "She throws her arms around you and you start to make out. Your hands drop to her ass and you start to grope her aggressively."
     the_person "Oh god, I'm not sure I can make it to the bedroom."
@@ -523,7 +521,6 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     $ the_person = lily
     "Note: This scene was written assuming that eventually you fuck [the_person.title] on a live stream, but so far Vren has not written this step."
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     "You step into [the_person.possessive_title]'s room. She is standing next to her mirror playing with her hair, but looks over at you and smiles when she hears the door."
     $ the_person.draw_person()
     the_person "Oh hey [the_person.mc_title]! I was wondering if you were going to be around tonight. Want to stream with me tonight?"
@@ -685,8 +682,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
             mc.name "Sure, I'll meet you there."
             $ mc.change_locked_clarity(20)
             $ mc.end_text_convo()
-            $ mc.change_location(office)
-            $ ceo_office.show_background()
+            $ mc.change_location(ceo_office)
             $ scene_manager = Scene()
             $ scene_manager.add_actor(the_person)
             the_person "Oh hey! You're here!"
@@ -712,8 +708,7 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
                 mc.name "Sure, meet me in my office."
                 $ mc.end_text_convo()
 
-            $ mc.change_location(office)
-            $ ceo_office.show_background()
+            $ mc.change_location(ceo_office)
             $ scene_manager = Scene()
             $ scene_manager.add_actor(the_person)
             "You walk with [the_person.possessive_title]. When you get there, she locks the door. You sit down at your desk."
@@ -723,9 +718,9 @@ label breeding_fetish_stephanie_intro_label():  #Needs Testing
             mc.name "Certainly. I'll always be here to help you with your needs."
             call breeding_fetish_stephanie_normal_label(the_person) from _breeding_fetish_steph_normal_02
 
+    $ clear_scene()
     $ scene_manager.clear_scene()
     $ the_person.apply_planned_outfit()
-    $ clear_scene()
     return #Needs testing
 
 label breeding_fetish_stephanie_bimbo_label(the_person):
@@ -806,7 +801,6 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     $ mc.end_text_convo()
     "You make your way over to the sex shop."
     $ mc.change_location(sex_store)
-    $ mc.location.show_background()
     $ the_person.draw_person()
     "When you get to the store, you look around. It seems like the store is already pretty clean."
     mc.name "Good evening [the_person.title]. Still need help? Things look pretty good around here to me..."
@@ -879,7 +873,6 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
 label breeding_fetish_sarah_intro_label():   #Needs Testing
     $ the_person = sarah
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ scene_manager = Scene()
     $ mc.start_text_convo(the_person)
     the_person "Hey, can I come over tonight? I had something I wanted to talk to you about."
@@ -956,7 +949,6 @@ label breeding_fetish_erica_intro_label():
     mc.name "Sure, I'm on my way over."
     $ mc.end_text_convo()
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     "You swing by [the_person.possessive_title]'s. You knock on the door and soon she opens it."
     $ the_person.draw_person()
     the_person "Hi! Come in..."
@@ -1034,7 +1026,6 @@ label breeding_fetish_erica_intro_label():
     the_person "I'll let you know when I find out for sure... daddy!"
     "You say goodnight and head home. It seems that you have given [the_person.possessive_title] a breeding fetish! You look forward to many creampies in your future together."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ the_person.add_unique_on_room_enter_event(erica_breeding_fetish_followup)
     return
 
@@ -1142,7 +1133,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         else:
             #TODO what to put here?
             pass
-        if camera_person == None:
+        if camera_person is None:
             "You grab your phone off the desk and stop the video. You quickly put it in an email to [the_person.title] so she can have a copy of it."
         else:
             camera_person "Wow..."

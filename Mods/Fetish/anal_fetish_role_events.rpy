@@ -49,7 +49,7 @@ label fetish_anal_staylate_event_label(the_person):
         the_person "Oh... okay... well try to let me know next time before I stay late. I thought... anyway, maybe some other time. Bye!"
         $ the_person.change_stats(happiness = -5, love = -2)
         return
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You finish up with your work for the day and return to your office. You are organizing some papers when [the_person.possessive_title] enters the room."
     $ the_person.apply_outfit(special_fetish_outfit)
     $ the_person.draw_person()

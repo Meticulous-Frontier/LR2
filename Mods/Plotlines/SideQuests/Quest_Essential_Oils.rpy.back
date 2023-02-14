@@ -51,28 +51,28 @@ init 1 python:
     def quest_essential_oils_tracker():
         quest = quest_essential_oils()
         if quest.get_quest_flag() <= 101:    #If head researcher quits or get fired before quest completion then quest fails
-            if mc.business.head_researcher == None:
+            if mc.business.head_researcher is None:
                 quest.quest_completed()
                 return
 
         person = quest_essential_oils_get_target()
         if quest.get_quest_flag() <= 1:
-            if person == None:
+            if person is None:
                 person = quest_essential_oils_find_employee()
-                if person == None:
+                if person is None:
                     quest.quest_completed()
                     return
                 quest.quest_event_dict["target"] = person.identifier
             person.add_unique_on_room_enter_event(quest_essential_oils_intro)
         elif quest.get_quest_flag() >= 11 and quest.get_quest_flag() <= 31:
-            if person == None:#The quest has started but we fired or the target quit.
+            if person is None:#The quest has started but we fired or the target quit.
                 quest.quest_completed()
         return
 
     def quest_essential_oils_start_requirement():
         if day < 21:
             return False    # don't start this too soon
-        if mc.business.head_researcher == None:
+        if mc.business.head_researcher is None:
             return False    # we need a head researcher
         if quest_essential_oils_find_employee() is None:
             return False    # we need a 'gullable' person

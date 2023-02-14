@@ -33,7 +33,7 @@ init -2 python:
             self.business_action = business_action  #If the action should be a business crisis
             self.person_action = person_action      #if the action should be a person crisis
             self.is_random = is_random              #If this action only pops up randomly.
-            if unit_test_func == None:
+            if unit_test_func is None:
                 self.unit_test_func = teamup_test_func_default
             else:
                 self.unit_test_func = unit_test_func

@@ -28,7 +28,6 @@ label friends_help_friends_be_sluts_enhanced_label():
         return
 
     $ mc.change_location(lobby)
-    $ mc.location.show_background()
     $ scene_manager = Scene()
 
     if person_one.effective_sluttiness() < 30: #If our slutty person isn't very slutty in the first place.
@@ -383,7 +382,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                     "[person_one.title] grabs her friend's hand and they walk over to you together."
                     person_one "[person_one.mc_title], could me and [person_two.fname] talk to you privately for a moment?"
                     mc.name "Sure, follow me to my office."
-                    $ ceo_office.show_background()
+                    $ mc.change_location(ceo_office)
 
                     if person_two.effective_sluttiness("sucking_cock") < 50: #She's embarrassed, but wants to do it
                         person_two "It's nothing important, it could probably wait until later. In fact, never mind at all."
@@ -489,6 +488,7 @@ label friends_help_friends_be_sluts_enhanced_label():
                             $ scene_manager.update_actor(person_one, position = "walking_away")
                             "She turns and leaves your office, following after her friend."
 
+                    $ mc.change_location(lobby)
             "Ignore them":
                 "You leave them to their discussion and circle back to your desk."
 

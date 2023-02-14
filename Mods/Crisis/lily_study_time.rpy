@@ -2,6 +2,8 @@ init 2 python:
     def sister_failed_test_requirement():
         if not lily.has_job(sister_student_job) and not lily.is_employee():
             return False
+        if lily.has_limited_time_event("sleeping_walk_in_label"):
+            return False
         if mc_asleep() and mc.business.event_triggers_dict.get("sister_serum_test", False) and lily.is_available:
             return True
         return False
@@ -23,7 +25,6 @@ label sister_failed_test_label():
         $ student = False
         $ word = "work"
     $ mc.change_location(bedroom) #Make sure we're in our bedroom.
-    $ mc.location.show_background()
     "Laying in your bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
     the_person "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
     mc.name "It's open."

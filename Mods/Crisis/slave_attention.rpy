@@ -21,8 +21,6 @@ label slave_attention_crisis_action_label():
     if the_person is None:
         return
 
-    $ old_location = mc.location
-
     if the_person.sex_record.get("Last Sex Day", 0) > day + 21: # she is very upset
         $ the_person.draw_person(emotion = "angry")
         the_person "[the_person.mc_title]! You have been neglecting your slave, don't you want me to be your slave anymore?"
@@ -30,6 +28,7 @@ label slave_attention_crisis_action_label():
         $ the_person.draw_person(emotion = "sad")
         the_person "[the_person.mc_title], you haven't used me for a long time, did I displease you in any way?"
 
+    $ old_location = mc.location
     if not mc.location is dungeon:
         mc.name "Follow me, we need a more appropriate surrounding for this conversation."
         $ mc.change_location(dungeon)
@@ -180,6 +179,5 @@ label slave_attention_crisis_action_label():
     if old_location != dungeon:
         "You move back to [old_location.formal_name]."
     $ mc.change_location(old_location)
-    $ mc.location.show_background()
     $ old_location = None
     return

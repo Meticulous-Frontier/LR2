@@ -400,7 +400,7 @@ label taboo_break_SB_reverse_cowgirl(the_girl, the_location, the_object):
 label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal = None):
     $ the_goal = the_girl.get_sex_goal()
 
-    if the_goal == "get off" or the_goal == "anal creampie" or the_goal == "facial" or the_goal == "oral creampie" or the_goal == None or the_goal == "get mc off":
+    if the_goal == "get off" or the_goal == "anal creampie" or the_goal == "facial" or the_goal == "oral creampie" or the_goal is None or the_goal == "get mc off":
         $ SB_reverse_cowgirl.call_default_outro(the_girl, the_location, the_object)
     elif the_goal == "waste cum":
         "[the_girl.possessive_title]'s sweet cunt milks your cock, the wet friction pushes you past the point of no return."

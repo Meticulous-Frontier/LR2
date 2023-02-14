@@ -183,7 +183,6 @@ label erica_money_problem_sarah_convincing_employee_label():
 
     # change location to lobby, since break room is located here
     $ mc.change_location(lobby)
-    $ mc.location.show_background()
 
     "Passing by the break room, you can hear [the_person.possessive_title] talking to someone else inside."
     $ scene_manager.add_actor(the_person, position = "sitting")
@@ -289,12 +288,10 @@ label erica_yoga_event_intro_label():
     if mc.is_at_work():
         "You go down to the lobby to see how things are working out."
         $ mc.change_location(lobby)
-        $ mc.location.show_background()
         "As you walk into the main lobby, you see some of your employees just getting ready to set up."
     else:
         "You head to the office early, to see how things are working out."
         $ mc.change_location(lobby)
-        $ mc.location.show_background()
         "When you walk into the main lobby, you see some of your employees just getting ready to set up."
 
     $ scene_manager.add_actor(the_person)
@@ -1110,7 +1107,7 @@ init 2 python:
 
     def erica_get_is_yoga_nude():
         return erica.event_triggers_dict.get("nude_yoga", False) == True
-        
+
     def erica_post_yoga_fuck_complete():
         return erica.event_triggers_dict.get("post_yoga_fuck", False)
 

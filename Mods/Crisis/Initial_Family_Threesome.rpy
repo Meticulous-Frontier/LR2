@@ -16,7 +16,6 @@ label SB_fetish_vaginal_family_threesome_label():
     $ scene_manager = Scene()
 
     $ mc.change_location(bedroom) #Make sure we're in our bedroom.
-    $ mc.location.show_background()
 
     #Make sure everyone is up for this because sex is fun and getting tired after one round of sex isn't
     if the_person.energy < the_person.max_energy:

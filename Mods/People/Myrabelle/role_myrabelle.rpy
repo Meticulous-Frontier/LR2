@@ -259,7 +259,6 @@ label myra_gaming_cafe_opening_label():
     "GRAND OPENING: Predator LAN Gaming Cafe! Play for free during our grand opening!"
     "A gaming cafe? That seems interesting. You decide to head over to it."
     $ mc.change_location(gaming_cafe)
-    $ mc.location.show_background()
     "As you walk in, the place looks amazing. There are dozens of gaming PCs set up all over the place."
     "The place is pretty crowded, but you still see several open PCs. At the front counter, you spot someone familiar talking to someone behind the counter."
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped)
@@ -487,7 +486,6 @@ label myra_esports_first_tournament_label():    #Mandatory event. Preluded to du
 
     "Alright, this should be interesting. You head over to the gaming cafe."
     $ mc.change_location(gaming_cafe)
-    $ mc.location.show_background()
     $ scene_manager = Scene()
     "When you get there, you look around. A bunch of seats have been set up to watch a projector screen. There is actually a fairly large crowd here... you estimate about 100 people."
     "You look around. Eventually you spot [alexia.title] with an open seat next to her. You walk over and sit next to her."
@@ -577,7 +575,6 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     mc.name "I suppose I could go for a couple of drinks. I know a good place too."
     the_person "Great! Let's get out of here."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "You step out of the mall and start walking toward downtown."
     mc.name "So... if you don't want to talk about it that's fine..."
     the_person "Nah, it's fine. I got a call today from one of the team's sponsors, letting me know that they are pulling out."
@@ -586,7 +583,6 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     the_person "Yeah. They make like, my favorite energy drinks too. That's okay though, who needs them!"
     mc.name "Exactly."
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
     "You step inside the bar. After a quick ID check, you walk with [the_person.title] up to the bar."
     "Bartender" "Hey, what'll it be for you two?"
     mc.name "I'll just have a bourbon. Neat."
@@ -737,7 +733,6 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     $ mc.business.change_funds(-100)
     "You settle up with the bartender. You've run up quite the tab, but it was worth it for a fun night with [the_person.possessive_title]."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "You step outside with [the_person.title]."
     the_person "Hey... so... we are going to your place... right?"
     $ mc.change_locked_clarity(10)
@@ -765,7 +760,6 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     the_person "You can use my other holes however you want though..."
     "Hmmm, this is interesting. Does [the_person.possessive_title] have a bit of a submissive streak?"
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "You step into your house, and make it unaccosted to your bedroom."
     $ the_person.draw_person(position = "back_peek")
     "When the door is closed and locked, you grab her from behind."
@@ -1119,7 +1113,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
     $ contact = myra.event_triggers_dict.get("energy_drink_supplier", None)
     $ new_delivery_person = False
     $ finished = False
-    if contact == None:
+    if contact is None:
         "Unfortunately, your delivery person is not available anymore. You decide to appoint someone new to do it."
         call screen enhanced_main_choice_display(build_menu_items([["Call in"] + mc.business.get_employee_list() ], draw_hearts_for_people = False))
         $ the_person = _return
@@ -1137,8 +1131,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
 
     if new_delivery_person:
         "You head to your office, paging [the_person.title] to meet you there."
-        $ mc.change_location(office)
-        $ ceo_office.show_background()
+        $ mc.change_location(ceo_office)
         $ the_person.draw_person()
         the_person "Hello [the_person.mc_title]!"
         mc.name "Hi [the_person.title], I need you to do something for me."
@@ -2424,7 +2417,6 @@ label myra_breeding_on_stream_label():    #Requires breeding and exhibition feti
     "Sounds like [the_person.title] wants to get bred on stream... seems too good to pass up!"
     "You head over to the game cafe. Then make your way to the adults only section."
     $ mc.change_location(gaming_cafe)
-    $ mc.location.show_background()
     $ the_person.apply_outfit(special_fetish_nude_outfit)
     "When you get there, you take a quick look around, then spot [the_person.possessive_title]. It appears she has already started her stream..."
     $ the_person.draw_person(position = "walking_away")

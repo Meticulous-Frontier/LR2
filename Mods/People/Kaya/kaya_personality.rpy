@@ -1561,7 +1561,9 @@ label kaya_anal_sex_taboo_break(the_person):
     return
 
 label kaya_condomless_sex_taboo_break(the_person):
-    if the_person.get_opinion_score("bareback sex") > 0:
+    if the_person.knows_pregnant():
+        the_person "I don't mind, it's not like I could get more pregnant."
+    elif the_person.get_opinion_score("bareback sex") > 0:
         the_person "You want to do me raw? That's so hot."
         if the_person.on_birth_control:
             the_person "I'm on the pill, so it should be fine, right? Maybe you should pull out, just in case."
@@ -1851,7 +1853,7 @@ label kaya_lingerie_shopping_wow_response(the_person):
     return
 
 label kaya_GIC_finish_response(the_person, the_goal):
-    if the_goal == None:
+    if the_goal is None:
         the_person "Mmm, that was exactly what I was hoping for!"
     elif the_goal == "get mc off":
         the_person "Did that feel good? I just want to make you feel good..."

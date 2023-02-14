@@ -421,7 +421,7 @@ label start_threesome(the_person_one, the_person_two, start_position = None, sta
     #Love modifiers. Always applies if negative, but only adds a bonus if you are in private.
 
     #If no initial position set, get one now
-    if start_position == None:
+    if start_position is None:
         call pick_threesome(the_person_one, the_person_two) from threesome_initial_position_set
         $ position_choice = _return
     else:

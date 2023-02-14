@@ -64,8 +64,8 @@ label enhanced_special_training_crisis_label():
 
 label return_from_seminar_action_label(the_person):
     if the_person.effective_sluttiness() >= 20:
+        $ mc.change_location(ceo_office)
         $ the_person.draw_person(position="stand4")
-        $ ceo_office.show_background()
         "[the_person.title] enters your office where you are in your chair, idly tending to your duties."
         the_person "There you are, [the_person.mc_title]! I'm back from the seminar and ready to show you the gratitude I promised."
         $ the_clothing = the_person.outfit.remove_random_upper(top_layer_first = True, do_not_remove = True)
