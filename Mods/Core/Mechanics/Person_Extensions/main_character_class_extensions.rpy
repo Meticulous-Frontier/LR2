@@ -1,5 +1,5 @@
 init -1 python:
-    def change_location_enhanced(self, new_location):
+    def change_location_enhanced(self, new_location, show_background = True):
         if isinstance(new_location, Room):
             self.location = new_location
             for person in [x for x in all_people_in_the_game() if x.follow_mc]:
