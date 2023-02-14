@@ -601,11 +601,12 @@ init 1 python:
     ashley_steph_harem_entry = Action("Ashley and Steph join your harem", ashley_steph_harem_entry_requirement, "ashley_steph_harem_entry_label")
 
 label ashley_after_hours_label():   #Ashley looks for an opportunity to get MC alone, waits until after closing when Steph is for sure gone to approach him.
+    $ scene_manager = Scene()
     $ the_person = ashley
     $ the_person.story_event_log("love")
     "It is the end of the day, so you swing by your office to pick up your daily serum dose."
     $ ceo_office.show_background()
-    $ the_person.draw_person(emotion = "happy")
+    $ scene_manager.add_actor(the_person, emotion = "happy")
     "As you open the door, you see [the_person.possessive_title] standing there, waiting for you."
     mc.name "Ah, hello [the_person.title]."
     the_person "Hello [the_person.mc_title]."
@@ -631,13 +632,83 @@ label ashley_after_hours_label():   #Ashley looks for an opportunity to get MC a
     mc.name "That internship actually led to a LOT of what we are doing now."
     the_person "Huh... interesting."
     the_person "I think I remember her saying something about that, but I was pretty busy with my own thing at the time."
-
-
+    "You walk a little more while [the_person.title] reflects on some things."
+    the_person "Actually... I was umm... not the nicest person in university, if I'm being honest."
+    the_person "I kind of ignored my sister a lot... And to be honest I kind of had a bit of a drinking problem."
+    the_person "It umm... wasn't uncommon for me to wakeup at a frat house with no idea how I got there. I had more than one girl get pissed at me for screwing around with their boyfriends..."
+    the_person "I've never been one for exclusive relationship myself, but for some reason, I find guys who are in relationships with other girls to be very attractive."
+    "You had a suspicion of much, with how [stephanie.title] warned you about her."
+    the_person "I actually quit drinking this summer though! I got fired from my other job and I could feel things almost spiraling out of control."
+    mc.name "That is an admirable thing, to feel yourself at the edge of the abyss and to pull yourself back. Not everyone manages to."
+    the_person "Yeah... I suppose..."
+    "You continue walking, eventually you get to your house."
+    "You step up to your front door."
+    mc.name "Well, this is my house. I live here with my sister and my mother."
+    the_person "Oh? I figured you for a bachelor type, out living alone."
+    mc.name "Not yet. Maybe someday, but to be honest, I'm really hoping for the business to do well so I can take care of my family."
+    $ the_person.change_love(3)
+    the_person "That sounds very nice..."
+    lily "I SAID FUCK OFF, ASSHOLE!"
+    $ scene_manager.add_actor(lily, emotion = "angry", display_transform = character_left_flipped)
+    "Suddenly, the front door swings open and a very angry [lily.title] appears."
+    lily "I'M SO SICK OF... Oh."
+    $ scene_manager.update_actor(lily, emotion = "happy")
+    lily "Hey bro, I'm sorry, I thought... there was this guy at the mall being super creepy and who started following me home..."
+    "[lily.title] smiles at you, then looks at [ashley.fname] and suddenly gets angry again."
+    lily "I... hey, what the hell? What is SHE doing here?"
+    $ scene_manager.add_actor(lily, emotion = "angry", display_transform = character_left_flipped)
+    the_person "AGH, oh boy..."
+    mc.name "What do you mean? [lily.fname], this is..."
+    lily "[the_person.fname], yes, believe me, I'm familiar!!!"
+    lily "Remember the boyfriend I had last year? And things were starting to get serious but I caught him cheating on me?"
+    "Oh no"
+    the_person "Well, it probably a good time for me to go..."
+    mc.name "[lily.title], she is an employee of mine."
+    if lily.is_employee():
+        mc.name "I'm surprised you haven't seen her around by now."
+    mc.name "She was just walking me home. Thank you for that, [the_person.title], I appreciate it."
+    the_person "Umm... right... I'm gonna go ahead and bail out now."
+    "[lily.possessive_title] let's out an exasperated sigh and turns around, going back inside."
+    $ scene_manager.remove_actor(lily)
+    mc.name "Right. Well, I'll see you at work."
+    the_person "Bye!"
+    $ scene_manager.update_actor(the_person, position = "kissing")
+    "Suddenly, [the_person.title] puts her arms around you nad gives you a hug, then plants a quick kiss on your cheek."
+    "As quickly as it started, she backs away."
+    $ scene_manager.update_actor(the_person,position = "walking_away")
+    "[the_person.title] turns and starts to walk away. You watch her for a bit, admiring her figure, before going inside."
+    $ scene_manager.clear_scene()
+    "So it turns out, your sister and [the_person.possessive_title] already know each other... but definitely not in a good way."
+    "If you want to get close to [the_person.title], you might have to work on repairing their relationship."
     $ mc.business.add_mandatory_crisis(ashley_asks_about_lily)
     return
 
 label ashley_asks_about_lily_label():   #Ashley talks to MC about Lily and how she is doing. Expresses remorse for cheating issue. 40 love
     $ the_person = ashley
+    "You are deep in though as your work on some algorithms related to the latest set of research results. Suddenly, a throat clearing alerts you to someone standing next to you."
+    $ the_person.draw_person()
+    "It is [the_person.possessive_title]."
+    mc.name "Ah, hello [the_person.title]."
+    the_person "[the_person.mc_title]... have a sec?"
+    mc.name "Sure."
+    "She steps around the desk and sits down on the other side of it."
+    $ the_person.draw_person(position = "sitting")
+    the_person "So. I've been thinking about the other day, when I walked you back to your house, and then the thing... with your sister?"
+    the_person "I feel really bad about it. I... was wondering if maybe we could like... try something."
+    mc.name "Like what?"
+    the_person "I really enjoyed just spending the time with you, walking back to your place... I was kind of hoping... maybe we could hang out at your place more often."
+    the_person "It would be away from Steph, so she wouldn't know about it."
+    the_person "But it won't work unless I get the chance to talk to your sister and apoligize."
+    mc.name "Yeah, having you come by once in a while would be problematic if she's pissed at you."
+    "You think about it for a bit."
+    mc.name "You know what she loves? Old comedy movies. And all the feel good vibes that go with them."
+    mc.name "I'll text her and see if she wants to hang out sometime and watch one. You can come over and hang out with us, and I won't tell her you're coming."
+    mc.name "It would be a good chance for you two to maybe make up a little."
+    the_person "Yeah... I mean, I kind of have my doubts, but that might actually work."
+    the_person "I think it'll help that you're her brother, and not her boyfriend!"
+    mc.name "Oh yeah, totally."
+    
+
     "In this label, Ashley approach MC at work."
     "She brings up the encounter with Lily."
     "She shares that she has this problem. She finds taken men to be extremely attractive. Makes sense why she is stealing other girls boyfriends."
