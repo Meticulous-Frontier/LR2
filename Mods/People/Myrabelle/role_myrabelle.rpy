@@ -413,7 +413,7 @@ init -2 python:
         return False
 
     def myra_esports_second_tournament_intro_requirement(the_person):
-        if the_person.love >= 80 and mc.business.days_since_event("myra_sponsor_day") > TIER_2_TIME_DELAY:
+        if the_person.love >= 80 and mc.business.days_since_event("energy_drink_start_research") > TIER_2_TIME_DELAY:
             if myra_focus_progression_scene.get_stage() >= 2 and gaming_cafe_is_business_hours() and myra_at_cafe() and day%7 < 4:
                 return True
         return False
@@ -760,7 +760,7 @@ label myra_loses_sponsor_label(the_person):   #mandatory 60 love event. Has a da
     the_person "You can use my other holes however you want though..."
     "Hmmm, this is interesting. Does [the_person.possessive_title] have a bit of a submissive streak?"
     $ mc.change_location(bedroom)
-    "You step into your house, and make it unaccosted to your bedroom."
+    "You step into your house, and make it un-accosted to your bedroom."
     $ the_person.draw_person(position = "back_peek")
     "When the door is closed and locked, you grab her from behind."
     $ the_person.add_situational_slut("Date", 20, "There's no reason to hold back, he's here to fuck me!")
@@ -920,7 +920,8 @@ label myra_gaming_cafe_expansion_intro_label(the_person):   #100 love event. Myr
 init -2 python:
     def myra_develop_energy_drink_intro_requirement(the_person):
         if the_person.sluttiness > 20 and myra_focus_progression_scene.get_stage() >= 1:    #Must have started focus training
-            return True
+            if mc.business.days_since_event("myra_sponsor_day") > TIER_2_TIME_DELAY:
+                return True
         return False
 
     def myra_energy_drink_research_intro_requirement(the_person):
