@@ -50,13 +50,12 @@ label dirty_laundry_action_label():
     if the_person is None or the_person.has_limited_time_event("sleeping_walk_in_label"):
         return
 
-    $ old_location = mc.location
     $ set_night_outfit(the_person)
 
     "You are just drifting off to sleep when you suddenly remember you don't have any clean clothes for tomorrow!"
     "You look at the clock. It is already pretty late."
+    $ old_location = mc.location
     $ mc.change_location(laundry_room)
-    $ mc.location.show_background()
     "You guess that your family is already asleep, so you grab your laundry and take it to the laundry room just wearing your boxers."
 
     $ ran_num = renpy.random.randint(0, 3)
@@ -67,8 +66,7 @@ label dirty_laundry_action_label():
 
     $ clear_scene()
     $ mc.change_location(old_location)
-    $ the_person.apply_planned_outfit()
-    $ del old_location
+    $ old_location = None
     return
 
 label dirty_laundry_wash_your_clothes(the_person):

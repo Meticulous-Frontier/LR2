@@ -328,7 +328,6 @@ label horny_at_work_crisis_enhanced_label():
                 #You were followed.
                 $ old_location = mc.location
                 $ mc.change_location(work_bathroom)
-                $ mc.location.show_background()
                 "You relax when you reach the bathroom, but a moment after you enter [active_person.title] opens the door and comes inside too."
                 $ active_person.draw_person()
                 mc.name "[active_person.title], I..."
@@ -375,8 +374,7 @@ label horny_at_work_crisis_enhanced_label():
 
                 $ del active_person
                 $ mc.change_location(old_location)
-                $ mc.location.show_background()
-                $ del old_location
+                $ old_location = None
 
             else:
                 "Once you have some privacy you pull some porn up on your phone, pull out your dick, and take matters into your own hand."

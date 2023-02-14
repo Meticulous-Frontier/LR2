@@ -389,7 +389,6 @@ label camilla_dance_lessons_label():
     $ scene_manager = Scene()
     "It's Wednesday night, and you have a date with [the_person.possessive_title] at the bar to learn salsa dancing."
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
     "When you get there, you step inside. You see [the_person.title] at the bar, in a very nice dress."
     $ scene_manager.add_actor(the_person)
     "You walk over to her. When she sees you she smiles."
@@ -467,7 +466,6 @@ label camilla_take_pics_label(the_person):  #Not the first time.
     "[the_person.possessive_title] flashes you her beautiful smile."
     the_person "Si! You know what to do!"
     $ mc.change_location(work_bathroom)
-    $ mc.location.show_background()
     "You head to the lady's room. [the_person.title] soon follows behind you. She locks the door as she closes it."
     $ the_person.draw_person (position = "kissing")
     "You waste no time. She throws her arms around you and you begin to make out."
@@ -565,7 +563,6 @@ label camilla_take_pics_label(the_person):  #Not the first time.
     the_person "Mmm, that was great [the_person.mc_title]! I can't wait until I get home tonight... I hope daddy gets the handcuffs out again..."
     $ clear_scene()
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
     "You say goodbye and excuse yourself while she gets herself cleaned up. This arrangement is working out to be very beneficial!"
     $ the_person.apply_planned_outfit()
     call advance_time from _call_advance_camilla_bathroom_blowjob
@@ -584,7 +581,6 @@ label camilla_bathroom_blowjob_label(the_person):
     $ the_person.draw_person(position = "stand4")
     "Soon, [the_person.title] comes over, holding a sign that says 'Bathroom closed for renovations: Please use men's room"
     $ mc.change_location(work_bathroom)
-    $ mc.location.show_background()
     "You both take a quick look around, and when the coast is clear, you both walk into the bathroom and lock the door behind you."
     "You waste no time, you quickly wrap your arms around [the_person.title] and start making out with her."
     $ the_person.draw_person(position = "kissing")
@@ -657,7 +653,6 @@ label camilla_bathroom_blowjob_label(the_person):
     the_person "Alright, I'm going to clean up. I'll see you."
     $ clear_scene()
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
     "You sneak your way out of the bathroom while [the_person.possessive_title] cleans herself up. You hope everything goes well with her tonight!"
     $ the_person.event_triggers_dict["camilla_blowjob_pic_day"] = day + 1
     $ the_person.apply_planned_outfit()
@@ -747,7 +742,6 @@ label camilla_dancing_sex_label(the_person):
         the_person "Ok... you know what to do... I'll meet you in the Lady's room in just a minute..."
         $ clear_scene()
         $ mc.change_location(work_bathroom)
-        $ mc.location.show_background()
         "You head to the women's restroom and [the_person.title] soon meets you there."
         $ the_person.draw_person (position = "against_wall")
         "You grab her and pick her up. Her legs wrap around you."
@@ -820,7 +814,6 @@ label camilla_dancing_sex_label(the_person):
         $ clear_scene()
         $ the_person.apply_planned_outfit()
         $ mc.change_location(downtown_bar)
-        $ mc.location.show_background()
         "After straightening up, you step out of the restroom and into the bar."
         "You just fucked [the_person.possessive_title], a married woman, in the bar bathroom! And you know this is probably not just going to be a one time thing."
         return
@@ -852,7 +845,6 @@ label camilla_dancing_sex_label(the_person):
         the_person "Ok! I didn't think that song was ever going to end. I'll meet you in the Lady's room in just a minute."
         $ clear_scene()
         $ mc.change_location(work_bathroom)
-        $ mc.location.show_background()
         "You head to the women's restroom and [the_person.title] soon meets you there."
         $ the_person.draw_person (position = "stand4")
         the_person "Okay, I want you to sit on the bathroom sink. I'm gonna get naked for you."
@@ -873,7 +865,6 @@ label camilla_dancing_sex_label(the_person):
         $ clear_scene()
 
     $ mc.change_location(downtown_bar)
-    $ mc.location.show_background()
     "You grab your clothes and quickly get yourself presentable, before sneaking your way out of the lady's room."
     call advance_time from _call_advance_camilla_dancing
     return
@@ -905,7 +896,6 @@ label camilla_her_place_label():
     the_person "Señor! I wasn't sure you would actually come!"
     mc.name "Of course!"
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     "You check her out. She definitely looks ready for some action! She takes your hand and slowly walks you back to the bedroom."
     the_person "[the_person.SO_name] and I were just getting started... you came at the perfect time..."
     "[the_person.SO_name]? Why does that sound so familiar?"
@@ -946,11 +936,9 @@ label camilla_her_place_label():
         "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dressed and quietly excuse yourself from the bedroom."
     $ clear_scene()
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "You make your way back home. You can hardly believe your luck, fucking [the_person.title] in her house, in front of her husband, who is also the bartender!"
     $ perk_system.add_stat_perk(Stat_Perk(description = "Fucking Camilla in front of her husband has made you feel more charismatic.", cha_bonus = 1, bonus_is_temp = False), "Camilla Charisma Bonus")
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ the_person.event_triggers_dict["her_place"] = True
     #$ the_person.event_triggers_dict["camilla_progress"] = 5
     return
@@ -958,7 +946,6 @@ label camilla_her_place_label():
 #CSH50
 label camilla_home_sex_label(the_person):
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     mc.name "So, want to have some fun tonight?"
     the_person "Sounds great! Just give me a minute to get ready..."
     $ the_person.draw_person(position = "walking_away")
@@ -993,7 +980,6 @@ label camilla_home_sex_label(the_person):
         "[the_person.SO_name] begins cuffing [the_person.title]'s behind her back. You finish getting dressed and quietly excuse yourself from the bedroom."
     $ clear_scene()
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "You make your way back home after a sexy evening with [the_person.possessive_title]."
 
     call advance_time from _call_advance_camilla_home_sex
@@ -1030,7 +1016,6 @@ label camilla_outfit_help_label(the_person):    #20
     mc.name "Sure, I can help out."
     the_person "Great! I'm about due for a break. Let me just put up a be right back sign and we can head over to the clothing store and I'll use the changing room there."
     $ mc.change_location(clothing_store)
-    $ mc.location.show_background()
     "You walk with her to the clothing store and back towards the dressing rooms."
     mc.name "So, a hot date huh? Any idea what you are gonna do?"
     the_person "I have no idea! I just want to make sure I look nice for it!"
@@ -1151,7 +1136,6 @@ label camilla_lingerie_help_label(the_person):  #40
     the_person "Well, I have a couple more outfits I kind of wanted to get your opinion on, but they are for a more intimate encounter than last time..."
     mc.name "Wow, sounds great! Lead the way!"
     $ mc.change_location(clothing_store)
-    $ mc.location.show_background()
     "You walk with her to the clothing store and back towards the dressing rooms."
     the_person "So, I have a special night planned with the hubby... I was hoping you could give me your opinion on some lingerie sets..."
     the_person "And then snap a couple quick pictures that I can send to him as a tease!"
@@ -1293,7 +1277,6 @@ label camilla_formal_date_label():    #60
     $ mc.end_text_convo()
     "You double check and make sure you look okay for the occasion, then head over to the restaurant."
     $ mc.change_location(fancy_restaurant)
-    $ mc.location.show_background()
     "When you arrive, you check in at the front counter. You wait a few minutes, but your date soon arrives."
 
     $ the_person.planned_outfit = the_person.wardrobe.get_outfit_with_name("Camilla Summer Dress") or the_person.get_random_appropriate_outfit(guarantee_output = True)
@@ -1360,7 +1343,6 @@ label camilla_formal_date_label():    #60
     $ mc.business.change_funds(-200)
     "You quickly grab the check, putting the dinner on the company card. A short walk later, you are walking into your house with [the_person.possessive_title]."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     #TODO if MC has fixed up bedroom camilla is impressed, if not she says something of colour.
     $ the_person.draw_person()
     the_person "Wow... I've not been in a man's bedroom in... a long time."

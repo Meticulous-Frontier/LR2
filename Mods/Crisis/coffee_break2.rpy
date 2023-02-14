@@ -20,7 +20,6 @@ label coffee_break2_action_label():
         return
 
     $ mc.change_location(lobby)
-    $ mc.location.show_background()
     if mc.business.is_open_for_business:
         "As you are walking around the office, you see several employees at the coffee machine. They haven't noticed you, but you can hear what they are saying."
     else:
@@ -28,7 +27,6 @@ label coffee_break2_action_label():
     call coffee_break2_food_delivery_label(person_one, person_two, person_three) from _call_coffee_break2_food_delivery_label_1
 
     python:
-        mc.location.show_background()
         # Release variables
         del person_one
         del person_two

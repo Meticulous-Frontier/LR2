@@ -155,7 +155,6 @@ label mom_ntr_mod_action_label():
         $ ran_num = 1
 
     $ mc.change_location(mom_bedroom)
-    $ mc.location.show_background()
     $ man_name = Person.get_random_male_name()
     $ wife_name = Person.get_random_name()
     while wife_name == the_person.name: ## Just to avoid stupid duplications
@@ -2489,6 +2488,5 @@ label mom_ntr_mod_action_label():
     $ the_person.reset_arousal()
     $ the_person.apply_planned_outfit()
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ clear_scene()
     return

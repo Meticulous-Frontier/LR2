@@ -774,7 +774,6 @@ label erica_race_crisis_label(the_person):
     $ yoga_assistant = erica_get_yoga_assistant()
     "It's race day! You make your way downtown, ready for your race with [the_person.title]."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "You find where they are organizing the race. It is a 5 kilometer race, which is about three miles long."
     "You look around and eventually find [the_person.title]."
     $ the_person.apply_gym_outfit()
@@ -936,7 +935,6 @@ label erica_race_crisis_label(the_person):
     $ the_person.learn_home()
     "You call for an Uber and she gives you her address. Soon you are walking into [the_person.title]'s apartment."
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     "Your mind is racing. She is going to be completely at your mercy. It's now or never, time to make a decision on which direction you want to take things."
     "You walk in the door. What do you want to do? WARNING: This decision is permanent."
     menu:
@@ -1343,7 +1341,6 @@ label erica_breeding_fetish_team_crisis_label():
     $ the_person = erica
     $ the_person.happiness = 70
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "You are in your room, getting ready for bed when your phone vibrates. It's [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "Hey, sorry I know it's late. Can I come over?"
@@ -1538,7 +1535,6 @@ label erica_breeding_nora_news_part_two_label():
         mc.name "Sure, I'll be right there."
         $ mc.end_text_convo()
         $ mc.change_location(university)
-        $ mc.location.show_background()
     else:
         "Walking around the university grounds, [the_person.possessive_title] spots you and hurries over to you."
     $ the_person.draw_person()

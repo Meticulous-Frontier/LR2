@@ -31,7 +31,6 @@ label mom_breakfast_action_label():
 
     python:
         mc.change_location(kitchen)
-        mc.location.show_background()
         the_person = mom
         scene_manager = Scene()
     #"When you walk out to the kitchen, you see [the_person.title] just sitting down to some breakfast."
@@ -437,7 +436,6 @@ label mom_breakfast_action_mom_and_lily_label():
                 call start_threesome(the_person, lily, start_position = Threesome_sixty_nine, start_object = make_table(), position_locked = True, skip_intro = True) from _call_start_threesome_mom_breakfast_action_mom_and_lily_label_1
                 "Once you're finished you pick up your clothes and say goodbye to the girls, who seem determined to continue for a while."
                 $ mc.change_location(hall)
-                $ mc.location.show_background()
                 return "Advance Time"
             "Walk away":
                 return None
@@ -462,7 +460,6 @@ label mom_breakfast_action_mom_and_lily_label():
                 call start_threesome(the_person, lily, start_position = Threesome_doggy_deluxe, start_object = make_floor(), position_locked = True, skip_intro = True) from _call_start_threesome_mom_breakfast_action_mom_and_lily_label_2
                 "Once you're finished you pick up your clothes and say goodbye to the girls, who seem determined to continue for a while."
                 $ mc.change_location(hall)
-                $ mc.location.show_background()
                 return "Advance Time"
             "Walk away":
                 return None

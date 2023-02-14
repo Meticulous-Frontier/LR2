@@ -178,7 +178,6 @@ label chemist_daughter_coffee_label():
         return
     "You text [the_person.title]'s father, [dad_name]. He tells you the name of the coffee shop. You quickly find it."
     $ mc.change_location(coffee_shop)
-    $ mc.location.show_background()
     #TODO get generic dad sprite to use? Placeholder? There's no male images in the game...
     mc.name "Hello there, you must be [dad_name]."
     dad_name "Ah, nice to meet you."
@@ -264,7 +263,6 @@ label chemist_daughter_help_move_label():
     $ the_person.apply_outfit(the_person.planned_outfit)    # make sure she is not in uniform
     "You promised to help [the_person.title] move now. She texts you the address so you head out."
     $ mc.change_location(the_person.home) #TODO instead of showing this, have it show the elevator background? So when we are at her new place later it actually looks different.
-    $ mc.location.show_background()
     $ the_person.draw_person()
     "When you show up, she greets you at the door."
     the_person "Oh my god, thank you so much for coming!"

@@ -120,7 +120,6 @@ label body_monitor_phase_1_label():
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
         "As you enter,  you see [person_1.possessive_title] standing by her work station while [person_2.possessive_title] is sitting next to her studying some research documents."
         "When [person_1.possessive_title] notices you, she waves at you and signals you to come over."
     $ scene_manager = Scene()
@@ -162,7 +161,6 @@ label body_monitor_phase_1_label():
     mc.name "Good. I think I have some work waiting for me. Let me know if there is something else I can help you with."
     "You take your leave and return to your workplace."
     $ mc.change_location(workplace)
-    $ mc.location.show_background()
     $ scene_manager.clear_scene()
     $ mc.business.event_triggers_dict["body_monitor_progress"] = body_monitor_progress_count() + 1
     $ mc.business.add_mandatory_crisis(body_monitor_phase_2_action)

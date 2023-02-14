@@ -157,7 +157,6 @@ init -1 python:
     # use dedicated locations, since each location has different objects
     def change_to_person_bedroom(self):
         mc.change_location(self.bedroom)
-        mc.location.show_background()
         return
 
     Person.change_to_bedroom = change_to_person_bedroom
@@ -165,7 +164,6 @@ init -1 python:
     # use dedicated locations, since each location has different objects
     def change_to_person_hallway(self):
         mc.change_location(her_hallway) # use generic hallway
-        mc.location.show_background()
         return
 
     Person.change_to_hallway = change_to_person_hallway

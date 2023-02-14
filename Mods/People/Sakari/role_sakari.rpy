@@ -276,7 +276,6 @@ label sakari_goes_skinny_dipping_label():   #mandatory event
     $ mc.end_text_convo()
     "You change back into your regular clothes, then head out."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "15 minutes later, you are downtown. Eventually, you spot [the_person.title] and walk up to her."
     $ the_person.draw_person()
     mc.name "Good evening [the_person.title]."

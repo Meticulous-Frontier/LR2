@@ -247,7 +247,7 @@ label anal_fetish_employee_intro_label(the_person):
     "It's clear from the tone of her voice she's hoping for some personal attention."
     mc.name "That sounds perfect. See you there."
     $ clear_scene()
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You head to your office and wait a few minutes. Shortly after you hear a knock at the door."
     $ the_person.draw_person()
     mc.name "Come in. Please have a seat."
@@ -345,7 +345,6 @@ label anal_fetish_family_intro_label(the_person):
         $ abort_anal_fetish_intro(the_person)
         return
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     $ the_person.arousal = 30
     $ the_person.draw_person(position = "standing_doggy")
     "As you walk into the room, you notice [the_person.possessive_title]. She is bent over and appears to be reading something on her phone."
@@ -580,7 +579,6 @@ label anal_fetish_generic_intro_label(the_person):
 
 label anal_fetish_mom_intro_label():
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ the_person = mom
     "Playing around on your phone for a bit before bed, you hear a knock on your door."
     mc.name "It's open."
@@ -913,8 +911,7 @@ label anal_fetish_stephanie_intro_label():
             mc.name "Sure, I'll see you there."
             $ mc.change_locked_clarity(20)
             $ mc.end_text_convo()
-            $ mc.change_location(office)
-            $ ceo_office.show_background()
+            $ mc.change_location(ceo_office)
             $ scene_manager = Scene()
             $ scene_manager.add_actor(the_person)
             the_person "Oh hey! You're here!"
@@ -939,8 +936,7 @@ label anal_fetish_stephanie_intro_label():
                 the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
                 mc.name "Sure, meet me in my office."
                 $ mc.end_text_convo()
-            $ mc.change_location(office)
-            $ ceo_office.show_background()
+            $ mc.change_location(ceo_office)
             $ scene_manager = Scene()
             $ scene_manager.add_actor(the_person)
             "You walk with [the_person.possessive_title]. When you get there, she locks the door. You sit down at your desk."
@@ -949,6 +945,7 @@ label anal_fetish_stephanie_intro_label():
             the_person "I just wanted to make sure that we still have an understanding, right?"
             mc.name "Certainly. I'll always be here to help you with your needs."
             call anal_fetish_stephanie_normal_label(the_person) from _anal_fetish_steph_normal_02
+
     $ the_person.apply_planned_outfit()
     $ clear_scene()
     return True
@@ -1056,7 +1053,6 @@ label anal_fetish_starbuck_intro_label():
     mc.name "Sure, I'll be there in 10 minutes."
     $ mc.end_text_convo()
     $ mc.change_location(sex_store)
-    $ mc.location.show_background()
     "The door is locked so you give it a knock. [the_person.possessive_title] appears in the glass and quickly opens it for you."
     the_person "[the_person.mc_title]! You came!"
     "She gives you a quick wink."

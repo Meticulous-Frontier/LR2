@@ -39,8 +39,7 @@ label fetish_stephanie_first_fetish_label(the_person):
         mc.name "Sure, meet me in my office."
         $ mc.end_text_convo()
 
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person)
     "[the_person.title] meets you there. You sit down and notice she closes the office door... and then locks it."

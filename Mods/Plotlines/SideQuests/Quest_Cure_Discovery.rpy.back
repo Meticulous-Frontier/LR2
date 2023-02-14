@@ -139,7 +139,6 @@ label quest_cure_discovery_intro_label():
         $ mc.end_text_convo()
         "You quickly head to the lab."
         $ mc.change_location(rd_division)
-        $ mc.location.show_background()
 
     $ the_person.draw_person()
     the_person "Hey! I need to talk to you about something."

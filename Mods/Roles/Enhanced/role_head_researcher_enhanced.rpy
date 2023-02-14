@@ -210,7 +210,6 @@ label head_researcher_suggest_testing_room_label():
         $ mc.end_text_convo()
         "You walk down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "Hey! Thanks for coming. I wanted to show you something really quick."
     $ the_person.draw_person(position = "walking_away")
@@ -348,7 +347,6 @@ label head_researcher_cure_discovery_intro_label():
         $ mc.end_text_convo()
         "You quickly head to the lab."
         $ mc.change_location(rd_division)
-        $ mc.location.show_background()
     $ the_person.set_event_day("obedience_event", override = True)
     $ the_person.draw_person()
     the_person "Hey! I need to talk to you about something."

@@ -285,8 +285,7 @@ label cuckold_employee_decision_label():
                     return
     # only get here if we are gonna breed in the office.
     "[the_person.possessive_title] follows you to your office."
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "After you walk in, you close the door and lock it."
     the_person "Let's do this. I'm ready. I'm ready to get bred!"
     $ the_person.draw_person(position = "kissing")
@@ -380,8 +379,7 @@ label cuckold_employee_rethink_decision_label():
     the_person "I think so... can we talk in private?"
     mc.name "Certainly, let's go to my office."
     "[the_person.possessive_title] follows you to your office."
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     mc.name "So, what is on your mind?"
     "She is fidgeting a bit. She is clearly nervous about what she has to say."
     the_person "Well... ever since the other day, when you offered to help me with my... you know... fertility issue? I just can't seem to get the idea out of my head!"
@@ -485,8 +483,7 @@ label cuckold_employee_breeding_session_label(the_person):
     mc.name "Yes that is exactly right. I really need help with something in my office, could you please come give me a hand?"
     the_person "Of course! Let's go!"
     "[the_person.possessive_title] follows you to your office."
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "After you walk in, you close the door and lock it."
     $ mc.change_arousal(5)
     $ the_person.change_arousal(5)
@@ -696,8 +693,7 @@ label cuckold_employee_knocked_up_label():
     the_person "Hey! I need to see you in your office, ASAP!"
     mc.name "Ok, I'll be there soon."
     $ mc.end_text_convo()
-    $ mc.change_location(office)
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     $ the_person.draw_person(position = "stand4")
     $ the_person.event_triggers_dict["preg_knows"] = True
     "As you step into your office, you see [the_person.possessive_title]."

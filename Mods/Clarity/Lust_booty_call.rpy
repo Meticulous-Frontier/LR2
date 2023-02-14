@@ -56,7 +56,6 @@ init 3 python:
 
 label lust_booty_call_intro_label():
     $ mc.change_location(bedroom)   # make sure we are in the bedroom
-    $ mc.location.show_background()
     "You lay down in your bed and try to go to sleep."
     "You toss and turn for a while. This is impossible! You feel like you have so much energy."
     "What you wouldn't give for a bedwarmer to play with right about now..."
@@ -162,7 +161,6 @@ label lust_booty_call_label():
         if mc.location != bedroom:
             "You quickly go to your bedroom"
             $ mc.change_location(bedroom)
-            $ mc.location.show_background()
         "You use the time to make sure your bedroom is cleaned up and ready for your booty call."
         "Soon, your phone is going off."
         the_person "I'm here."
@@ -172,7 +170,6 @@ label lust_booty_call_label():
         $ mc.end_text_convo()
         "You head home. Thankfully, the timing works out that you get home the same time [the_person.title] gets there."
         $ mc.change_location(bedroom) #Make sure we're in our bedroom.
-        $ mc.location.show_background()
         "You sneak into your room with her."
     $ the_person.draw_person()
     mc.name "Let's get down to business."

@@ -243,7 +243,6 @@ label erica_lily_instapic_intro_label():
     "She gives you a quick kiss, then turns and leaves."
     $ scene_manager.remove_actor(erica)
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "You turn around and walk to your room. Damn... what a hot photo session!"
     "You should wait a couple days, then talk to [lily.title] and see how the pics did..."
     $ lily.add_unique_on_talk_event(erica_lily_post_photoshoot)
@@ -298,7 +297,6 @@ label erica_lily_weekly_photoshoot_label(the_person):
     $ scene_manager = Scene()
     $ lily_insta_outfit = insta_wardrobe.pick_random_outfit()
     $ mc.change_location(lily_bedroom)
-    $ mc.location.show_background()
     "You walk down the hall toward [lily.possessive_title]'s room. As you approach her door, you can hear laughter and giggling from the other side."
     "Sounds like [erica.title] is already here! You knock on the door."
     lily "Come in!"
@@ -329,7 +327,6 @@ label erica_lily_weekly_photoshoot_label(the_person):
             $ scene_manager.clear_scene()
             "You step out of [lily.possessive_title]'s room and head to the kitchen."
             $ mc.change_location(kitchen)
-            $ mc.location.show_background()
             "First, you make a glass with lots of ice for [erica.title]..."
             menu:
                 "Add serum to [erica.title]'s drink" if mc.inventory.get_any_serum_count() > 0:
@@ -360,7 +357,6 @@ label erica_lily_weekly_photoshoot_label(the_person):
                     "You top it off with soda."
             "You pick up both drinks and walk back down the hall to [lily.title]'s room. You open the door and step inside."
             $ mc.change_location(lily_bedroom)
-            $ mc.location.show_background()
             $ lily.apply_outfit(lily_insta_outfit, update_taboo = True)
             $ erica.apply_outfit(erica_insta_outfit, update_taboo = True)
             $ scene_manager.add_actor(lily, display_transform = character_center_flipped)
@@ -455,7 +451,6 @@ label erica_lily_weekly_photoshoot_label(the_person):
 label erica_lily_post_insta_handjob_label():
     $ the_person = erica
     $ mc.change_location(bedroom) # switch to mc bedroom
-    $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
     $ erica.event_triggers_dict["post_insta_handy"] = True
     "You hear the door to your room slowly open, slowly waking you up."
@@ -503,7 +498,6 @@ label erica_lily_post_insta_morning_label():
         return
 
     $ mc.change_location(bedroom) # switch to mc bedroom
-    $ mc.location.show_background()
     $ mc.location.lighting_conditions = dark_lighting
     $ option_list = erica_get_wakeup_options()
     "You hear the door to your room slowly open, waking you up."
@@ -799,7 +793,6 @@ label erica_pre_insta_love_label(the_person):
     the_person "Up to you! Now go!"
     $ clear_scene()
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "You clear out of [lily.possessive_title]'s room and head back to yours. Damn, now you feel so tired."
     "Should you go back and take pics? You have a bit to think about it."
     $ erica.event_triggers_dict["pre_insta_blowjob"] = True

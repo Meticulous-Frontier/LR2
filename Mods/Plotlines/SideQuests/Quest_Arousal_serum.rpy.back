@@ -143,7 +143,6 @@ label quest_arousal_serum_init_label():
 label quest_arousal_serum_intro_label():
     # make sure we are at home
     $ mc.change_location(hall)
-    $ mc.location.show_background()
 
     "As you are getting ready for bed, you notice [mom.title] sitting on the couch, watching some TV. It is currently a commercial."
     $ mom.draw_person(position = "sitting")
@@ -156,7 +155,6 @@ label quest_arousal_serum_intro_label():
 
     $ clear_scene()
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
 
     "The site is gaudy. Lots of claimed reviews call it a miracle drug. Taking a look, it is pretty pricey. Two doses for $100."
     menu:
@@ -177,7 +175,6 @@ label quest_arousal_serum_intro_label():
 label quest_arousal_serum_receive_drug_label():
     # make sure we are in bedroom
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ mom.draw_person()
     "As you are getting ready for bed, [mom.title] knocks on your door. You open it up."
     mom "Hey, you got this in the mail today. At first I thought it was junk, but it has your name on it, so I figured you could figure out what to do with it."
@@ -353,7 +350,6 @@ label quest_arousal_serum_researched_label():
         mc.name "On my way!"
         $ mc.end_text_convo()
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
         $ the_person.draw_person()
     else:
         $ the_person.draw_person()

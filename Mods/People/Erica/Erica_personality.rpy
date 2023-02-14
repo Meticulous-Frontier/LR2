@@ -334,7 +334,6 @@ label erica_hookup_accept(the_person):
     "You put your phone in your pocket and head to the gym."
 
     $ mc.change_location(gym)
-    $ mc.location.show_background()
 
     "A few minutes later, you walk into the gym. You locate the family locker room and discover it to be unlocked. You quietly let yourself in."
     $ the_person.draw_person(position = "missionary")

@@ -8,7 +8,6 @@ init -1 python:
 
 label Perk_Tutorial_Crisis_label():
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ the_person = mom
     $ scene_manager = Scene()
     $ mc.business.event_triggers_dict["perk_tutorial"] = 1

@@ -284,14 +284,12 @@ label cum_fetish_employee_intro_label(the_person):
     the_person "Good night [the_person.mc_title]!"
     $ clear_scene()
     $ mc.change_location(lobby)
-    $ mc.location.show_background()
     "You leave the office, setting the doors to lock automatically after [the_person.title] leaves. She definitely seems to have developed a fetish for your cum!"
     $ the_person.apply_planned_outfit()
     return True
 
 label cum_fetish_family_intro_label(the_person):
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ the_person.arousal = 40
     $ towel_outfit = Outfit("Towel")
     $ towel_outfit.add_dress(towel.get_copy())
@@ -423,7 +421,6 @@ label cum_fetish_family_intro_label(the_person):
 
 label cum_fetish_generic_intro_label(the_person):
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "Some time late in the night, you're awoken by the buzz of your phone getting a text. You roll over and ignore it."
     "A few minutes later it buzzes again, then again. You're forced to wake up and see what is the matter."
     $ mc.phone.add_non_convo_message(the_person, "Hey, are you awake?")
@@ -490,7 +487,6 @@ label cum_fetish_mom_intro_label():
     $ the_person = mom
     $ the_person.event_triggers_dict["LastCumFetish"] = day
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "Tired from a long day, you quickly fall asleep."
     "You are having some very pleasant dreams. [the_person.possessive_title] is posing for you in some sexy lingerie, then gets down on her knees..."
     "Her velvet soft mouth wraps around your cock, and she begins to bob her head eagerly up and down your erection."
@@ -579,7 +575,6 @@ label cum_fetish_lily_intro_label():
     $ the_person = lily
     $ the_person.event_triggers_dict["LastCumFetish"] = day
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
     $ home_shower.show_background()
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
@@ -1009,8 +1004,7 @@ label unit_test_cum_fetish_intro():
 #         the_person "Hey [the_person.mc_title], I need to talk to you about something. Can we meet somewhere private?"
 #         "You text her back."
 #     mc.name "Sure, meet me in my office."
-#     $ mc.change_location(office)
-#     $ ceo_office.show_background()
+#     $ mc.change_location(ceo_office)
 #     $ scene_manager = Scene()
 #     $ scene_manager.add_actor(the_person)
 #     "[the_person.title] meets you there. You sit down and notice she closes the office door... and then locks it."

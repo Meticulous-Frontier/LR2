@@ -94,7 +94,6 @@ init 2 python:
 
 label myra_alexia_teamup_scene_action_label(the_person):  #Use (the_person) if this event is attached to a person, otherwise leave params blank, EG: myra_alexia_teamup_scene_action_label():
     $ mc.change_location(gaming_cafe)
-    $ mc.location.show_background()
     #"Test, is this working"
     call progression_scene_label(myra_alexia_teamup_scene, [the_person, alexia]) from _myra_alexia_teamup_scene_call_test_01
     return
@@ -251,7 +250,6 @@ label myra_alexia_teamup_scene_intro_scene(the_group):
     $ scene_manager.clear_scene()
     "You let yourself out and head home."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "The friendship between [the_person.title] and [alexia.possessive_title] seems to be in good health. And this Friday night appointment seems to be a great opportunity."
     "You are pretty sure that if you offer to grab milkshakes for the girls, you can probably continue to test serums on them... you wonder how far you can push things at Friday Night game night!"
     # call advance_time from _call_advance_myra_alexia_teamup_scene_adv_01
@@ -450,7 +448,6 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
     $ scene_manager.clear_scene()
     "You get up and head home."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "There was a lot of tension in the air tonight between you and the two girls. You know you can push things between you and them farther with a little more time..."
     if myra.has_taboo("touching_vagina") or alexia.has_taboo("touching_vagina"):
         "You aren't sure that you will be able to convince the girls to do anything lewd when you haven't done much one on one yet."
@@ -675,7 +672,6 @@ label myra_alexia_teamup_scene_scene_1(the_group, scene_transition = False):  #F
     $ scene_manager.clear_scene()
     "You get up and head home."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "Things are progressing nicely with the two gamer girls. Obviously, you want to keep pushing things with them."
     "The next logical step is to move to oral sex..."
     if myra.has_taboo("licking_pussy") or alexia.has_taboo("licking_pussy"):
@@ -976,7 +972,6 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
     $ scene_manager.clear_scene()
     "You get up and head home."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "Things are progressing amazingly with the two gamer girls. Obviously, you want to keep pushing things with them."
     "You feel like you are getting them ready for your end game, a full on threesome."
     if myra.has_taboo("vaginal_sex") or alexia.has_taboo("vaginal_sex"):
@@ -1132,7 +1127,6 @@ label myra_alexia_teamup_scene_scene_3(the_group, scene_transition = False):  #S
     $ scene_manager.clear_scene()
     "You get up and head home."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "Things are amazing with the two gamer girls. Could it possibly even get any better?."
 
     $ the_loser = None
@@ -1289,7 +1283,6 @@ label myra_alexia_teamup_scene_scene_4(the_group, scene_transition = False):    
     $ scene_manager.clear_scene()
     "You get up and head home."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     "Things are amazing with the two gamer girls. You can't wait to stuff their holes again next week."
     python:
         del alexia_ass_warmed_up

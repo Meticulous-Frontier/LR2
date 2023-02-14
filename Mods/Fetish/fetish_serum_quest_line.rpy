@@ -186,7 +186,7 @@ label fetish_serum_quest_intro_label():
         $ the_person.draw_person()
         the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can we talk in your office?"
         mc.name "Sure, let's go."
-        $ ceo_office.show_background()
+        $ mc.change_location(ceo_office)
         "A few minutes later, you and [the_person.title] enter your office and sit down."
     else:
         "As you are going about your daily business..."
@@ -194,9 +194,9 @@ label fetish_serum_quest_intro_label():
         the_person "Hey, I just got a lead on some new technology that I think would be beneficial. Can we meet up?"
         mc.name "Sure, meet me in my office."
         $ mc.end_text_convo()
-        $ ceo_office.show_background()
-        $ the_person.draw_person()
+        $ mc.change_location(ceo_office)
         "A few minutes later, [the_person.title] is standing at your door."
+        $ the_person.draw_person()
         the_person "Hey [the_person.mc_title]. Mind if I sit down?"
         mc.name "Go ahead."
 
@@ -250,7 +250,6 @@ label fetish_serum_quest_intro_followup_label():
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "Guess what! I got the first set of those nanobots. He did me a favor and spent all weekend coding the program for our first batch!"
     "You look at her desk. There is a small container filled with what appears to be a silver liquid."
@@ -519,7 +518,6 @@ label fetish_serum_exhibition_label():
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "My contact emailed me the new program late last night. We should be able to program a new set of nanobots with it immediately."
     the_person "The new program should make it so that people will be more willing to show their bodies in public, or commit sexual acts in front of others."
@@ -546,7 +544,6 @@ label fetish_serum_anal_label():
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "My contact emailed me the new program late last night. We should be able to program a new set of nanobots with it immediately."
     the_person "The new program should make it so that people will be more willing to commit acts of sodomy in submission to their partner."
@@ -574,7 +571,6 @@ label fetish_serum_cum_label():
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "My contact emailed me the new program late last night. We should be able to program a new set of nanobots with it immediately."
     the_person "The new program should make it so that people will have positive reactions to exposure to semen."
@@ -602,7 +598,6 @@ label fetish_serum_breeding_label():
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "My contact emailed me the new program late last night. We should be able to program a new set of nanobots with it immediately."
     the_person "The new program should make it so that people will have positive reactions to reproducing and other associated bodily functions, such as lactation."
@@ -626,7 +621,6 @@ label fetish_serum_anal_warning_label():
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Anal Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
@@ -652,7 +646,6 @@ label fetish_serum_cum_warning_label():
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Semen Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
@@ -682,7 +675,6 @@ label fetish_serum_breeding_warning_label():
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Reproduction Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
@@ -708,7 +700,6 @@ label fetish_serum_exhibition_warning_label():
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "So, I've been running some experiments with those Public Sexual Proclivity Nanobots. The results have been... interesting."
     mc.name "Oh?"
@@ -894,7 +885,6 @@ label fetish_serum_contact_ghost(the_person):
         $ mc.end_text_convo()
         "You hurry down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
     $ the_person.draw_person()
     the_person "You're not going to believe it."
     mc.name "What?"

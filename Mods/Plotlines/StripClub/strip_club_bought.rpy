@@ -122,7 +122,6 @@ label strip_club_bought_strippers_selection_label(the_person): # Talk event
 
     "As the last one left in the club, you turn off the lights, close the doors, and return home eager for a good night's rest."
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ add_strip_club_manager_reminder_action()
     call advance_time from _call_advance_time_club_bought_strippers_selection
     # since we are in a talk event with Gabrielle, we need to exit using a jump.

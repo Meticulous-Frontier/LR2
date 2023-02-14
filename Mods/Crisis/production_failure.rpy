@@ -61,7 +61,6 @@ label production_failure_action_label():
                 $ mc.change_location(the_person.job.job_location)
             else:
                 "You decide to monitor the situation first hand and stay in the [the_person.job.job_location.formal_name]."
-            $ mc.location.show_background()
 
             $ ran_num = renpy.random.randint(0,100)
             if ran_num > 45: # 55% chance it's a mixture that alters behavior (slutty)

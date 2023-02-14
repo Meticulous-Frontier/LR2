@@ -32,9 +32,9 @@ label mother_daughter_doubleteam_action_label():
             renpy.return_statement()
 
         mc.change_location(lobby)
-        mc.location.show_background()
 
         scene_manager = Scene() # make sure we have a clean scene manager
+
     "As you are walking around the office, you hear some arguing coming from the break room."
     "When you look inside, you see [the_mother.possessive_title] having a discussion with her daughter."
     $ scene_manager.add_actor(the_mother)
@@ -62,7 +62,7 @@ label mother_daughter_doubleteam_action_label():
             the_daughter "Yes! Let's do it mom! Loser has to cook dinner tonight!"
             the_mother "Okay, let's do it!"
             mc.name "Let's go to my office for some privacy."
-            $ ceo_office.show_background()
+            $ mc.change_location(ceo_office)
             "As soon as mother and daughter get to your office, they drop to their knees, giving you a burst of anticipation energy. A competitive blowjob. This should be fun!"
             python:
                 mc.change_energy(50)
@@ -96,7 +96,6 @@ label mother_daughter_doubleteam_action_label():
 
     $ scene_manager.clear_scene()
     python:
-        mc.location.show_background()
         # Release variables
         del the_mother
         del the_daughter

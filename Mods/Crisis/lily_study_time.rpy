@@ -25,7 +25,6 @@ label sister_failed_test_label():
         $ student = False
         $ word = "work"
     $ mc.change_location(bedroom) #Make sure we're in our bedroom.
-    $ mc.location.show_background()
     "Laying in your bed, you hear a knock on your door. You hear [the_person.possessive_title] from the other side of the door."
     the_person "Hey [the_person.mc_title], you still up? I was just wondering if I could come in for a bit?"
     mc.name "It's open."

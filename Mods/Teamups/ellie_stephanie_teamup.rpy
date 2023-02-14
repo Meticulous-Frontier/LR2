@@ -125,7 +125,6 @@ label ellie_stephanie_teamup_progression_scene_intro_scene(the_group):
         $ mc.end_text_convo()
         "You walk down to the lab."
         $ mc.change_location(mc.business.r_div)
-        $ mc.location.show_background()
 
     $ scene_manager.add_actor(the_person)
     the_person "Hey [the_person.mc_title]. I've run into a bit of a situation with the nanobots."

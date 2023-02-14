@@ -92,7 +92,6 @@ label TEMPLATE_progression_scene_action_label(the_person):  #Use (the_person) if
 label TEMPLATE_progression_scene_intro_scene(the_group):
     $ the_person = the_group[0]
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     "This is an intro scene for the first time you encounter this event."
     $ the_person.draw_person()
     the_person "Good job!"

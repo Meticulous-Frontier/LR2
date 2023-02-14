@@ -24,7 +24,6 @@ label lily_morning_encounter_enhanced_label():
             comfortable = True
 
         mc.change_location(hall)
-        mc.location.show_background()
 
     "You wake up in the morning to your alarm. You get dressed and leave your room to get some breakfast."
     $ the_person.draw_person()
@@ -235,7 +234,6 @@ label lily_morning_encounter_enhanced_label():
 
 label lily_morning_encounter_follow_up_one_label(the_person):
     $ mc.change_location(laundry_room)
-    $ mc.location.show_background()
     "Not satisfied to let things go there, you follow her into the laundry room."
     the_person "Oh, [the_person.mc_title] I thought you were going to the kitchen."
     mc.name "I was, but I don't think I can leave you like this in good conscience."
@@ -258,7 +256,6 @@ label lily_morning_encounter_follow_up_one_label(the_person):
     the_person "Thanks bro, now get out of here, so I can do my laundry."
     $ clear_scene()
     $ mc.change_location(kitchen)
-    $ mc.location.show_background()
     "You walk back to the kitchen to get some breakfast."
     return True
 
@@ -285,7 +282,6 @@ label lily_morning_encounter_follow_up_two_label(the_person):
     the_person "What, in the kitchen? What about mom?"
     mc.name "She'll have to wait her turn."
     $ mc.change_location(kitchen)
-    $ mc.location.show_background()
     if the_other_person and renpy.random.randint(0, 1) == 1: #someone is already there 25%
         the_person "I'm serious, what if sh..."
         $ scene_manager.add_actor(the_other_person, display_transform = character_left_flipped, position = "sitting", emotion = "happy")

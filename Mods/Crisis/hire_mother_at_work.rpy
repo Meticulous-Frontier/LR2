@@ -37,7 +37,7 @@ label hire_mother_work_crisis_label():
     $ the_person.draw_person()
     the_person "[the_person.mc_title], could I talk to you for a moment in your office?"
     mc.name "Of course. What's up?"
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You and [the_person.possessive_title] step into your office. You sit down at your desk while she closes the door."
     $ ran_num = renpy.random.randint(0,2)
     if ran_num == 0:

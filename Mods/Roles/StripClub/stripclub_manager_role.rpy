@@ -179,7 +179,6 @@ label mistress_hunt_for_me_label(the_person):
     the_person_two "It would be my pleasure [the_person.mc_title]!" # Only known people answer this tnx to the high obedience required
     mc.name "Ok, let's find a more appropriate place, follow me girls!"
     $ mc.change_location(downtown_hotel)
-    $ mc.location.show_background()
     $ clear_scene()
     "A couple of minutes later, you are in the hotel. You walk up to the reception desk to get a hotel room for one night."
     $ mc.business.change_funds(-80)
@@ -198,5 +197,4 @@ label mistress_hunt_for_me_label(the_person):
     "Once you've all had your fun, you and the girls go back to the Strip Club."
     $ scene_manager.clear_scene()
     $ mc.change_location(strip_club)
-    $ mc.location.show_background()
     return

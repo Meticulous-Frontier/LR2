@@ -35,7 +35,6 @@ label coffee_break_action_label():
 
 
     $ mc.change_location(lobby)
-    $ mc.location.show_background()
     "As you are walking around the office, you see several [word]s at the coffee machine. They haven't noticed you, but you can hear what they are saying."
     call coffee_break_chit_chat_label(person_one, person_two, person_three) from _call_coffee_break_chit_chat_label_1
     python:     # Release variables
@@ -43,7 +42,6 @@ label coffee_break_action_label():
         del person_two
         del person_three
         del word
-        mc.location.show_background()
     return
 
 label coffee_break_chit_chat_label(person_one, person_two, person_three):
@@ -176,6 +174,5 @@ label coffee_break_chit_chat_label(person_one, person_two, person_three):
         "You watch [person_two.title] and [person_three.title] walk away together."
 
     # clear scene
-    $ mc.location.show_background()
     $ scene_manager.clear_scene()
     return

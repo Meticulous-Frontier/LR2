@@ -185,7 +185,6 @@ label strip_club_advance_time_label():
     if time_of_day == 4:
         "Tired after you spent the night at the club, you go back home, to have a good night's rest."
         $ mc.change_location(bedroom)
-        $ mc.location.show_background()
     call advance_time from _call_advance_time_strip_club_end_of_day
     return
 

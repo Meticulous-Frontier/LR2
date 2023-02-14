@@ -130,7 +130,6 @@ label kaya_erica_teamup_intro_scene(the_group):
     "This arrangement between the two college girls could work to your advantage. The study rooms at the university seem fairly private..."
     "This could be an opportunity for you to make progress with the two girls, with opportunities to give them your serums."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_01
     return
 
@@ -301,7 +300,6 @@ label kaya_erica_teamup_scene_0(the_group, scene_transition = False):
     $ scene_manager.clear_scene()
     "It is late, and you start your walk home."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_02
     return
 
@@ -431,7 +429,6 @@ label kaya_erica_teamup_scene_1(the_group, scene_transition = False):
     $ scene_manager.clear_scene()
     "It is late, and you start your walk home."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_03
     return
 
@@ -611,7 +608,6 @@ label kaya_erica_teamup_scene_2(the_group, scene_transition = False):
     $ scene_manager.clear_scene()
     "It is late, and you start your walk home."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_04
     return
 
@@ -837,7 +833,6 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
     $ scene_manager.clear_scene()
     "It is late, and you start your walk home."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_05
     return
 
@@ -1001,7 +996,6 @@ label kaya_erica_teamup_scene_4(the_group, scene_transition = False):
     $ scene_manager.clear_scene()
     "It is late, and you start your walk home."
     $ mc.change_location(bedroom)
-    $ bedroom.show_background()
     call advance_time from _call_advance_kaya_erica_teamup_adv_06
     return
 

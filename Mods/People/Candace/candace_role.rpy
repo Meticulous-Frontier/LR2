@@ -616,7 +616,6 @@ label candace_convince_to_quit_label(the_person):
     the_person "Lead the way!"
     "Thankfully, the office supply store is right next to the mall, so it is a quick walk over to the salon."
     $ mc.change_location(mall_salon)
-    $ mc.location.show_background()
     "As you walk into the salon, you notice that [salon_manager.title] is working with a customer."
     mc.name "Okay, she's over there, but she's with a customer right now. While we wait for her, why don't we do the paperwork for your new employment?"
     the_person "Okay... let's do it!"
@@ -790,7 +789,6 @@ label candace_topless_at_mall_label(the_person):
         "You quickly grab [the_person.possessive_title]'s hand and lead her into the clothing store."
         $ scene_manager.remove_actor(police_chief)
         $ mc.change_location(clothing_store)
-        $ mc.location.show_background()
         "You grab the first t-shirt you find and have her put it on."
         $ the_person.outfit.add_upper(tanktop.get_copy(), [1.0, 1.0, 1.0, 1.0])
         $ scene_manager.draw_scene()
@@ -914,7 +912,6 @@ label candace_midnight_wakeup_label():
     "You get to her apartment, and soon she is walking through the front door... Which was completely unlocked..."
     #candi home background
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     the_person "Finally! Let's have some fun!"
     mc.name "Wait... We need to talk first."
     the_person "God damnit why does everyone just want to talk? Just like... Let's get naked and then like... Let our bodies do the talking?"

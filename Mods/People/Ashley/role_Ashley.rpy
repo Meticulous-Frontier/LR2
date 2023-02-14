@@ -430,7 +430,6 @@ label ashley_classical_concert_date_label():
     "It's Thursday. You have a date planned with [the_person.title]. It's taken a while for her to warm up to you, so you don't even consider cancelling."
     "You head downtown. The plan is just to meet up at the concert hall itself. [stephanie.title] is going to drop her sister off and pick her up afterwards."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     # make sure stephanie is wearing normal clothes (instead of uniform)
     $ stephanie.apply_outfit(stephanie.decide_on_outfit())
     # ashley is wearing something nice
@@ -512,7 +511,6 @@ label ashley_classical_concert_date_label():
     $ scene_manager.update_actor(the_person, position = "stand3")
     "You slowly file out of the concert hall, chatting about the concert."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "When you get outside, [the_person.title] looks around."
     the_person "Oh! I was supposed to text Steph. I was having fun and totally forgot!"
     "She pulls out her phone and texts her sister."
@@ -623,7 +621,6 @@ label ashley_after_hours_label():   #Ashley looks for an opportunity to get MC a
     the_person "Sure."
     "You finish closing up the business, then step out into the evening."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "As you start to make your way home, you chat a bit with [the_person.possessive_title]."
     the_person "So... I never really understood something. How DID you meet Steph, anyway?"
     mc.name "Well, the summer before my senior year, I got to do this internship at the university."
@@ -762,7 +759,6 @@ init 1 python:
 label ashley_porn_video_discover_label():   #20 Sluttiness
     # make sure we are in the bedroom
     $ mc.change_location(bedroom)
-    $ mc.location.show_background()
     $ the_person = ashley
     $ the_person.outfit = the_person.wardrobe.get_random_appropriate_underwear(50, sluttiness_min = 20, guarantee_output = True) #Hopefully this gets a slutty underwear set
     $ scene_manager = Scene()
@@ -2032,7 +2028,6 @@ label ashley_second_concert_date_label():
     "Things with the two girls have gotten complicated. [ashley.fname] has been able to keep things between you a secret from her sister, but is getting more and more demanding and needy."
     "Lately it seems like [stephanie.title] is getting a little suspicious, and [the_person.possessive_title]'s demand to share you for a date is certain to have her unsettled."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "When you arrive, you looked around for a minute, but don't see [ashley.fname] yet at your agreed on meeting place. You decide to give her a few minutes. You are just about to pull out your phone and text her when you see her approaching."
     "She is wearing a sexy black dress, and your eyes are immediately drawn to its curves. There's not a doubt in your mind that [the_person.title] has something planned for you this evening..."
     $ mc.change_locked_clarity(20)
@@ -2092,7 +2087,6 @@ label ashley_second_concert_date_label():
     mc.name "Well, I promised to get you home straight away."
     "You give her a wink as you say it. She chuckles and winks back."
     $ mc.change_location(downtown)
-    $ mc.location.show_background()
     "You step outside and start to walk her home. However, as you pass an empty alleyway, you feel her hand tug at yours as she drags you back into the alley."
     "You both take a quick look around. Certain that you are alone, you push her up against the wall."
     $ the_person.draw_person(position = "kissing")
@@ -2241,7 +2235,6 @@ label ashley_second_concert_date_label():
     "You take a couple wipes for yourself, cleaning your face and hands of her juices."
     the_person "Alright, ready to escort me home like a gentleman?"
     $ mc.change_location(the_person.home)
-    $ mc.location.show_background()
     $ scene_manager = Scene()
     $ scene_manager.add_actor(ashley)
     $ scene_manager.add_actor(stephanie, display_transform = character_center_flipped)
@@ -2426,7 +2419,6 @@ label ashley_steph_second_date_confrontation_label():
 label ashley_sneaks_over_label():   #Requires 60 love and 60 sluttiness events complete.
     python:
         mc.change_location(bedroom)
-        mc.location.show_background()
         the_person = ashley
         the_person.event_triggers_dict["sneaks_over_complete"] = True
         ashley.set_event_day("story_event", override = True)

@@ -131,7 +131,6 @@ label girlfriend_sleepover_crisis_label():
     if mc.business.event_triggers_dict.get("your_place", True):
         "You go home for the night. Knowing that [the_person.title] is coming over, you quickly hop in the shower."
         $ mc.change_location(bedroom)
-        $ mc.location.show_background()
         "When you finish, you go to your room. You make sure everything is nice and tidy."
         $ mc.start_text_convo(the_person)
         the_person "Hey, I'm here, let me in?"
@@ -159,7 +158,6 @@ label girlfriend_sleepover_crisis_label():
         $ the_person.draw_person()
         the_person "Ah! I'm so glad you're here. Come in!"
         $ mc.change_location(the_person.home)
-        $ mc.location.show_background()
         "You step inside. She leads you to the kitchen, where you set the wine."
         $ the_person.draw_person(position = "walking_away")
         the_person "That looks great! Let me get a couple wine glasses..."
@@ -433,7 +431,6 @@ label girlfriend_underwear_shopping_label(the_person):
         the_person "This will be great! You can tell me what you like, and then I'll know what to wear whenever I want to get your engine revving."
     "You walk with your girlfriend to the mall. Soon you are in the clothes store, walking around the underwear section."
     $ mc.change_location(clothing_store)
-    $ mc.location.show_background()
     "Normally this would be a bit awkward by yourself, but with [the_person.title], it's not so bad..."
     the_person "Hmm, how should we do this? Want me to pick something out first? Or do you want to?"
     $ lingerie_outfit = None
