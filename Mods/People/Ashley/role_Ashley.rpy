@@ -141,6 +141,13 @@ init 2 python:
     def ashley_get_mc_obedience():
         return ashley.event_triggers_dict.get("mc_obedience", 0)
 
+label jumpstart_ashley():
+        $ ashley.sluttiness = 20
+        $ ashley.obedience = 110
+        $ ashley.love = 20
+        call ashley_intro_label() from _ashley_jumpstart_function
+        return
+
 #Requirement Labels
 init -1 python:
     def ashley_intro_requirement():   #After discovering an obedience serum trait and there is a position available. Must be at work.
@@ -266,6 +273,8 @@ init 1 python:
 
 #Intro Labels
 label ashley_intro_label():
+    if ashley.is_employee():    #We already hired her somehow.
+        return
     $ the_person = stephanie
     "You are deep in your work when a voice startles you from your concentration."
     the_person "Hey [the_person.mc_title]. Sorry to bug you, do you have a minute?"
@@ -704,7 +713,7 @@ label ashley_asks_about_lily_label():   #Ashley talks to MC about Lily and how s
     the_person "Yeah... I mean, I kind of have my doubts, but that might actually work."
     the_person "I think it'll help that you're her brother, and not her boyfriend!"
     mc.name "Oh yeah, totally."
-    
+
 
     "In this label, Ashley approach MC at work."
     "She brings up the encounter with Lily."
@@ -1360,13 +1369,14 @@ init -1 python:
         return False
 
     def ashley_submission_blowjob_requirement():
-        return False    #Current writing spot
+        return False
         if ashley.obedience > 140 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
             if time_of_day == 3:
                 return True
         return False
 
     def ashley_submission_fuck_requirement():
+        return False    #Current writing spot
         if ashley.obedience > 160 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
             if time_of_day == 3:
                 return True
@@ -1383,7 +1393,7 @@ init -1 python:
             return True
         return False
 
-    def ashley_submission_titfuck_taboo_restore_requirement():
+    def ashley_submission_blowjob_taboo_restore_requirement():
         if ashley.comp_sex_record("Blowjobs") >= 1 and ashley_submission_taboo_restore_requirement():
             return True
         return False
@@ -1628,13 +1638,14 @@ label ashley_submission_titfuck_label():  #at 20
         "You sigh. Maybe now she'll be able to accept that it is okay to be the submissive partner during sex once in a while?"
         "Either way, you are sure you'll hear about this soon."
 
-    $ ashley.event_triggers_dict["sub_titfuck_count"] = ashley.event_triggers_dict.get("sub_titfuck_count", 0) + 1
+
     $ ashley.sex_record["Tit Fucks"] += 1   #Make sure to augment this so the break functions
     return
 
 label ashley_submission_titfuck_taboo_restore_label():
     $ outcome_convince = False
     $ the_person = ashley
+    $ ashley.event_triggers_dict["sub_titfuck_count"] = ashley.event_triggers_dict.get("sub_titfuck_count", 0) + 1
     $ first_time = the_person.event_triggers_dict.get("sub_titfuck_count", 0) == 1
     $ the_person.draw_person(emotion = "angry")
     $ ashley.tag_sex_record("Tit Fucks")
@@ -1687,7 +1698,10 @@ label ashley_submission_titfuck_taboo_restore_label():
         "I thought you liked to make me feel good\n{color=#ff0000}{size=18}Requires: Love Story Progress{/size}{/color} (disabled)":
             pass
 
-        "But it keeps happening..." if ashley.event_triggers_dict.get("sub_titfuck_count", 0) >= 3 or the_person.opinion_score_giving_tit_fucks() == 2:
+        "You are that type of girl." if the_person.opinion_score_giving_tit_fucks() == 2:
+            pass
+
+        "But it keeps happening..." if ashley.event_triggers_dict.get("sub_titfuck_count", 0) >= 3:
             mc.name "If it needs to stop why does it keep happening [the_person.title]?"
             mc.name "Let's stop pretending. You enjoy it when you service my cock with your tits once in a while."
             mc.name "I'm not saying it needs to be this way everyday, but once in a while, you need to take a turn being the submissive one."
@@ -1723,9 +1737,246 @@ label ashley_submission_blowjob_label():  #140 obedience
     $ first_time = the_person.event_triggers_dict.get("sub_blowjob_count", 0) == 0
     $ ashley_clear_after_work_setup()
     $ the_person.story_event_log("obedience")
+    if first_time:
+        $ mc.arousal = 0
+        $ mc.business.add_mandatory_crisis(ashley_submission_titfuck_taboo_restore)
+        "It is the end of the day, so you swing by your office to pick up your daily serum dose."
+        $ ceo_office.show_background()
+        $ the_person.draw_person(emotion = "happy")
+        "As you open the door, you see [the_person.possessive_title] standing next to your desk."
+        mc.name "Ah, hello [the_person.title]."
+        the_person "Oh hey. I was just dropping off your serums for you. Have a good evening."
+        if the_person.tits_visible():
+            "[the_person.possessive_title]'s big tits are on full display for you. They heave a little with each breath and movement she makes."
+        else:
+            "You check her out. Her big tits seem to bounce enticingly with each movement she makes."
+        "You've been having fun with her tits lately, and she notices you checking her out."
+        the_person "Oh my... I know that look."
+        "She reaches up and gives her chest a couple heaves."
+        the_person "Thinking about getting that cock of yours between the girls again?"
+        mc.name "Well, if I wasn't before, I certainly am now!"
+        the_person "I think I'm up for that."
+        "You pull your cock out from your pants."
+        mc.name "Good, because I wasn't going to bother asking."
+        if not the_person.tits_visible():
+            the_person "Give me one moment."
+            $ the_person.strip_to_tits(prefer_half_off = False)
+            "She quietly strips down until her big tits spring free."
+            mc.name "Damn. That never gets old."
+        "[the_person.possessive_title] steps toward you, then drops to her knees."
+        $ the_person.draw_person(position = "blowjob")
+        $ the_person.change_arousal(20)
+        "She reaches out and gives your cock a couple strokes with her hand. She spits into her hand then gives you a couple more strokes."
+        "She spends several seconds getting your cock lubed up, then lets some of her saliva drop from her mouth down between her tits."
+        the_person "Mmm, okay. Here we go..."
+        "[the_person.title] slides your erection in between her soft, pillowy tit flesh and start to move them up and down on you."
+        $ mc.change_arousal(20) #20
+        "She bites her lip as she looks up at you. [the_person.possessive_title] is finally servicing you the way a good employee should."
+        "You are getting so turned on, a bit of pre-cum starts to drip from the tip. You decide it is time to push her boundaries a little bit further."
+        mc.name "Hang on a second."
+        "She stops."
+        the_person "Yeah?"
+        mc.name "Look how much you are turning me on."
+        "You reach down and give yourself a firm stroke, gripping hard to squeeze as much pre-cum from the shaft as you can, it gathers on the tip."
+        the_person "Yeah..."
+        mc.name "Taste it. Taste how much you are turning me on."
+        the_person "I... what? Are you serious right now?"
+        mc.name "Of course I am. Go on now, just stick out your tongue."
+        the_person "I don't want to taste... that!"
+        mc.name "Sure you do. Go on now."
+        "You put your hand on the back of her head. You don't force her, but you give a gentle pull toward your crotch."
+        the_person "I... I guess..."
+        $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
+        "[the_person.possessive_title] licks the tip of your cock, then quickly pulls back and closes her mouth, grimacing."
+        $ the_person.draw_person(position = "blowjob", special_modifier=None)
+        mc.name "There, see? Damn, that was hot. You liked that, didn't you?"
+        the_person "No, not at all. That's gross."
+        mc.name "Aww don't talk like that. You liked it, tasting my arousal. That's what happens when you turn a man on with those big tits of yours."
+        "She looks up at you, realizing what you are planning."
+        the_person "Look, I licked it, can we just go back to my tits?"
+        mc.name "Sure."
+        "For a little bit, anyway. You think to yourself. You decide to go back to using her tits for a bit, until you have another sample of pre-cum to give her."
+        "She seems relieved, and after adding a bit more saliva as lubricant, she happily wraps her tits around you and resumes pumping up and down."
+        "You reach down and grab [the_person.title]'s tits. You hold them in place for her as she works them up an down."
+        $ mc.change_arousal(20) #40
+        "Her bust feels great as she strokes you, but you are filled with desire to take it one step further. You look down and see a long dribble of pre-cum leaking out the tip now."
+        $ the_person.change_arousal(15)
+        mc.name "Look, you did it again. Be a good girl and lick that up too."
+        "She stops and glares up at you."
+        the_person "Again? I already did it once..."
+        mc.name "I know, and it felt amazing. Why don't you suck on the tip a little and make sure you get it all out this time."
+        the_person "No way! I'll just lick it off again..."
+        "Your subtle mind game has successfully shifted the goal again, making it seem like licking your pre-cum is a compromise."
+        $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
+        "[the_person.possessive_title] leans forward and licks the tip again. Her tongue lingers a little longer this time, and her breath on your skin makes you twitch."
+        mc.name "Mmm, wait hang on, you missed some..."
+        "She circles the tip with her tongue a couple times, looking for the pre-cum she missed. Then she pulls back again."
+        $ the_person.draw_person(position = "blowjob", special_modifier=None)
+        mc.name "Perfect. Let's keep going."
+        "You grab her tits and lean forward, pushing yourself between them. You make sure to start before she has a chance to spit on you again."
+        "[the_person.title] just holds still while you use her breasts, on her knees looking up at you."
+        "It doesn't take long until the friction starts to build up from the lack of saliva. You let go of her tits and then put your hand on the back of her head."
+        mc.name "Mmm, it is getting kind of dry. Just stick your tongue out for a bit."
+        $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
+        "Surprisingly, she obediently opens her mouth and sticks out her tongue. Without giving her a chance to rethink it, you pull her head toward you."
+        "Her eyes close when her tongue makes contact with the shaft. Her wet, slick tongue feels heavenly as you start to slide it up and down your hardness."
+        $ the_person.change_arousal(15)
+        the_person "Mmmf..."
+        "Was... was that a moan? This is progressing better than you expected. She starts to move her head a bit now, moving her tongue side to side as you move your hips up and down."
+        $ mc.change_arousal(20)
+        "Fuck it feels so good. At one point the tip of your cock rubs against her check and long strand of pre-cum connects it to you as you keeping stroking yourself with her tongue."
+        "You pull back and she opens her eyes, looking up at you."
+        $ the_person.draw_person(position = "blowjob", special_modifier=None)
+        mc.name "It's leaking again. Now be a good girl and..."
+        $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
+        "Before you can finish the sentence, she leans forward and sucks the tip of your cock into her mouth."
+        "Her tongue swirls around the tip several times, cleaning the tip of your pre-cum, then pulls back, her lips smacking."
+        $ the_person.draw_person(position = "blowjob", special_modifier=None)
+        the_person "You aren't going to settle for anything less than a blowjob, are you?"
+        mc.name "Nope! Those lips feel amazing."
+        "You put your hand on the back of her head again. She sighs."
+        the_person "Fine, just this once!"
+        mc.name "Yeah, yeah, of course..."
+        $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
+        "[the_person.possessive_title] opens her mouth obediently and leans forward, sliding the tip of your cock past her red, pouty lips."
+    elif the_person.opinion_score_giving_blowjobs() < 2:
+        mc.name "You know, you really DO have some incredible tits."
+        the_person "Ah geeze. This again?"
+        $ the_person.change_happiness(2)
+        "She questions you, but you notice a hint of a smile on her face."
+        mc.name "I mean, can you blame me?"
+        the_person "Yes. Yes I can."
 
-    "In this event, [the_person.title] starts to fuck MC with her tits, but MC pushes for a blowjob."
-    "He finishes with cumming in her mouth and her opinion of giving blowjobs shifts positively."
+    "[the_person.title]'s head starts to bob up and down on your dick, the blowjob beginning in earnest now."
+    "You savor the sensations of the busty girl, servicing you obediently with her mouth."
+    "Her soft lips give you shivers as they stroke your length repeatedly."
+    $ mc.change_arousal(20)
+    if first_time:
+        mc.name "Fuck, your mouth is incredible. "
+    "You reach forward with both hands and cup her big tits. They feel soft and hot to the touch."
+    "You keep your touch light for now, but grasp both of them. She sighs as enjoy feeling her up."
+    "She gives a little yelp when you pinch her nipples at the same time."
+    if first_time:
+        the_person "Ah! Easy..."
+        mc.name "I don't know. I think you like it a little rough once in a while, don't you?"
+        "She falls quiet. Her silence tells you what the answer is."
+    else:
+        the_person "Ah! You're always so rough..."
+        mc.name "You like it rough though, don't you?"
+        "She falls silent. She won't admit it, but you can tell you are turning her on."
+    $ the_person.change_arousal(20)
+    "[the_person.title]'s breathing is getting quicker. Groping her tits is getting you really turned on as well."
+    $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(30)
+    "After a bit longer, you decide it is time to make your move. You reach down and unzip your pants, pulling out your cock."
+    if first_time:
+        "She gasps when she sees what you are doing."
+        the_person "What... what are you doing?"
+    else:
+        "She sighs when she sees what you are doing."
+        the_person "Oh god... not again..."
+    mc.name "[the_person.title], your tits are incredible. Get on your knees, I want to feel them wrapped around my cock."
+    "You are careful to frame the statement as a command, not a question. She could say no, but you feel confident she will do it."
+    if first_time:
+        the_person "I... I guess... maybe just this once?"
+        mc.name "Of course."
+    else:
+        the_person "We said... we weren't going to do this again..."
+        mc.name "Are you saying you don't want to? You don't want to feel my hard cock between your big juicy tits?"
+        the_person "I... I shouldn't..."
+        mc.name "But you do. It's okay to want to."
+    "She sighs, but obediently gets on her knees."
+    $ the_person.draw_person(position = "blowjob")
+    if first_time:
+        "This is the first time you've gotten her to submit to you like this, and the sight of her on her knees for you gets you harder."
+    else:
+        "You got he on her knees again. Making her submit to you like this just gets you harder."
+    $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(30)
+    "She looks up at you, just a hint of defiance in her eyes. You step forward a bit until your cock is up against her cleavage."
+    "The defiance dies when she feels your cock against her hot tit flesh."
+    $ the_person.change_arousal(10)
+    $ the_person.break_taboo("touching_penis")
+    "[the_person.possessive_title] takes her tits in her hands and wraps them around your erection. At last her enticing melons are smothering your cock."
+    mc.name "Mmm, your tits are amazing. This is going to feel so good."
+    "She moves her tits up and down a couple times, but the friction feels a little rough. She looks down and spits a large glob of saliva that drips down into her cleavage."
+    "She works her tits around your cock, spreading her saliva all over you. She repeats this a couple more times until your member glides easily back and forth between them."
+    "[the_person.title] looks up at you and starts to move up and down a bit. Her heavenly titflesh massages your dick."
+    $ mc.change_arousal(20) #60
+    $ the_person.change_arousal(10)
+    mc.name "God you are so hot. That's it [the_person.title], fuck my cock with your big tits."
+    "You let her do all the work for now. Her breasts wobble enticingly as the slide up and down your length."
+    $ mc.change_arousal(20) #60
+    $ the_person.change_arousal(10)
+    $ mc.change_locked_clarity(50)
+    mc.name "You like it too, don't you?"
+    $ the_person.increase_opinion_score("giving tit fucks")
+    if first_time:
+        mc.name "Is this your first time, letting a guy fuck those massive sweater puppies?"
+        the_person "No... I've had boyfriends in the past do this... but I've never liked it... before..."
+        mc.name "Well, you hadn't met me before, had you? You just needed to find the right man to make getting on your knees feel this good."
+        "[the_person.title] is quiet. She is clearly enjoying herself now, but is having trouble letting herself go."
+        "She has stopped moving for now as she thinks about what you said."
+    elif the_person.opinion_score_giving_tit_fucks() >= 2:  #She orgasms.
+        $ the_person.change_arousal(20)
+        "[the_person.title] is looking up at you, but her eyes are glazing over. She's... going to orgasm?"
+        mc.name "Oh my god, look at you. You are going to cum aren't you? Just from giving me a titty fuck!"
+        the_person "Oh shit... Oh fuck!"
+        $ the_person.change_arousal(20)
+        mc.name "Look at me and tell me how much you love it and cum while you fuck me with those enormous titties you little slut!"
+        the_person "Fuck! I love it! I love fucking your hot cock with my tits! Oh fuck [the_person.mc_title] I'm cumming!"
+        "Her whole body starts to quake as she cums. Her tits tremble all around you as her body twitches in pleasure."
+        $ the_person.have_orgasm(force_trance = True)
+        "When she is finished she stops moving."
+        $ mc.change_locked_clarity(100)
+    else:
+        the_person "That doesn't matter."
+        mc.name "Of course it matters. Why are you doing this to yourself? Don't hold out on yourself. Just admit that you love it and move on."
+        the_person "Love and like are two very different things."
+        mc.name "Fine. Just admit that you like it. You like getting on your knees for me."
+        "[the_person.possessive_title] stops moving and remains quiet. Sometimes she drives you nuts, remaining quiet when she should just be honest and submit."
+    mc.name "Tired? That's okay, I can finish myself."
+    "You reach down and grab her tits. You start to move yourself up down, fucking her tits in earnest."
+    the_person "Ahhh, you don't need to..."
+    mc.name "Nah, I can tell you are wearing out. Don't worry, I'm almost ready to cum. I can't wait to cover those tits of yours!"
+    if mc_serum_cum_serum_is_active():
+        "She suddenly looks up at you. She obviously knows you are on a serum now that changes you cum's properties."
+        the_person "No... not on me!"
+        mc.name "Of course on you. How do you think a tit fuck ends?"
+    $ mc.change_arousal(40)
+    $ mc.change_locked_clarity(50)
+    "You speed up, hitting the point of no return. You pull out from between her tits at the last second and fire your load off all over her chest."
+    $ the_person.cum_on_tits()
+    $ the_person.draw_person(position = "blowjob")
+    "You fire wave after wave onto her breasts. When you finish, you look down at your incredible artwork."
+    mc.name "Fuck, that was amazing."
+    the_person "Yes... incredible..."
+    if first_time:
+        "Hah! You finally got her to admit it."
+    else:
+        "Hah! You got her to admit it again."
+    $ the_person.draw_person(position = "stand2")
+    "[the_person.possessive_title] slowly stands up. A small drip of cum slowly oozes off the edge of one her breasts and onto the floor."
+    if first_time:
+        the_person "I can't believe I just did that."
+    else:
+        the_person "I can't believe I just did that. Again."
+    mc.name "It's okay. I'm sure it won't be that good EVERY time."
+    the_person "I need to go..."
+    "[the_person.title] quickly grabs her stuff and walks away."
+    $ the_person.draw_person(position = "walking_away")
+    "She quickly steps out of your office and then disappears into the hall."
+    $ clear_scene()
+    if first_time:
+        "[the_person.possessive_title] has always been a little bit hard to predict."
+        "You have a feeling you are going to hear about this event again from her."
+    else:
+        "You sigh. Maybe now she'll be able to accept that it is okay to be the submissive partner during sex once in a while?"
+        "Either way, you are sure you'll hear about this soon."
+
+
+    $ ashley.sex_record["Tit Fucks"] += 1   #Make sure to augment this so the break functions
+    return
 
     $ mc.business.add_mandatory_crisis(ashley_submission_blowjob_taboo_restore)
     $ ashley.event_triggers_dict["sub_titfuck_count"] = ashley.event_triggers_dict.get("sub_blowjob_count", 0) + 1
