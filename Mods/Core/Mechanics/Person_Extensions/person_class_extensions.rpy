@@ -2012,6 +2012,11 @@ init -1 python:
 
     Person.is_wearing_uniform = person_is_wearing_uniform
 
+    def person_is_wearing_dress_code(self):
+        return self.outfit == self.dress_code_outfit and self.dress_code_outfit != self.planned_outfit
+
+    Person.is_wearing_dress_code = person_is_wearing_dress_code
+
     def person_should_wear_uniform_enhanced(self):
         if not self.is_at_work():  # quick exit
             return False
@@ -2036,7 +2041,7 @@ init -1 python:
 
     Person.should_wear_uniform = person_should_wear_uniform_enhanced
 
-    def person_should_wear_dress_code_outfit(self):
+    def person_should_wear_dress_code(self):
         if not self.is_at_work():  # quick exit
             return False
 
@@ -2047,11 +2052,11 @@ init -1 python:
                 return dress_code_policy.is_active()
         return False
 
-    Person.should_wear_dress_code_outfit = person_should_wear_dress_code_outfit
+    Person.should_wear_dress_code = person_should_wear_dress_code
 
-    def person_wear_dress_code_outfit(self): #Puts the girl into her uniform, if it exists.
+    def person_wear_dress_code(self): #Puts the girl into her uniform, if it exists.
         if self.dress_code_outfit is None:
-            self.dress_code_outfit = mc.business.get_uniform_wardrobe_for_person(self).decide_on_uniform(self)
+            self.dress_code_outfit = self.wardrobe.decide_on_uniform(self)
 
         if self.dress_code_outfit is not None:
             self.apply_outfit(self.dress_code_outfit)
@@ -2059,13 +2064,13 @@ init -1 python:
             self.apply_outfit(self.planned_outfit)
         return
 
-    Person.wear_dress_code_outfit = person_wear_dress_code_outfit
+    Person.wear_dress_code = person_wear_dress_code
 
     @property
     def current_planned_outfit(self):
         if self.should_wear_uniform() and self.planned_uniform:
             return self.planned_uniform
-        elif self.should_wear_dress_code_outfit() and self.dress_code_outfit:
+        elif self.should_wear_dress_code() and self.dress_code_outfit:
             return self.dress_code_outfit
         elif self.location in [gym, university] and self.location_outfit:
             return self.location_outfit
@@ -2080,7 +2085,7 @@ init -1 python:
         if not self.outfit.matches(self.current_planned_outfit) \
             and (__builtin__.len(self.location.people) > 1 \
             or (self.should_wear_uniform() and not self.is_wearing_uniform()) \
-            or (self.should_wear_dress_code_outfit() and not self.outfit.is_within_dress_code()) \
+            or (self.should_wear_dress_code() and not self.outfit.is_wearing_dress_code()) \
             or (self.outfit.slut_requirement > self.sluttiness)):
             self.apply_planned_outfit()
             if draw_person:
@@ -2101,7 +2106,7 @@ init -1 python:
 
     def apply_university_outfit(self):
         if university_wardrobe:
-            self.location_outfit = university_wardrobe.build_uniform_wardrobe(self.wardrobe).decide_on_outfit2(self)
+            self.location_outfit = university_wardrobe.build_uniform_wardrobe().decide_on_outfit2(self)
             self.apply_outfit(self.location_outfit)
         return
 
@@ -2141,8 +2146,8 @@ init -1 python:
 
         if self.should_wear_uniform():
             self.wear_uniform()
-        elif self.should_wear_dress_code_outfit():
-            self.wear_dress_code_outfit()
+        elif self.should_wear_dress_code():
+            self.wear_dress_code()
         elif self.location in [gym, university] and self.location_outfit:
             self.apply_outfit(self.location_outfit, ignore_base = ignore_base, update_taboo = update_taboo)
         else:

@@ -50,6 +50,11 @@ init -1 python:
 
     Outfit.matches = matches
 
+    def outfit_iterator(self):
+        return iter(self.upper_body + self.lower_body + self.feet + self.accessories)
+
+    Outfit.__iter__ = outfit_iterator
+
     #####################################
     # Enhanced Methods for Outfit Class #
     #####################################
@@ -106,12 +111,12 @@ init -1 python:
     Outfit.remove_random_upper = remove_random_upper_enhanced
 
     def is_suitable_underwear_set_enhanced(self): #Returns true if the outfit could qualify as an underwear set.
-        return not any(x for x in self.accessories + self.upper_body + self.lower_body + self.feet if x.layer > 2)
+        return not any(x for x in self if x.layer > 2)
 
     Outfit.is_suitable_underwear_set = is_suitable_underwear_set_enhanced
 
     def is_suitable_overwear_set_enhanced(self): #Returns true if the outfit could qualify as an overwear set.
-        return not any(x for x in self.accessories + self.upper_body + self.lower_body + self.feet if x.layer < 2)
+        return not any(x for x in self if x.layer < 2)
 
     Outfit.is_suitable_overwear_set = is_suitable_overwear_set_enhanced
 
@@ -330,25 +335,20 @@ init -1 python:
         return self.wearing_panties() and not self.panties_covered()
     Outfit.are_panties_visible = are_panties_visible
 
-    def is_within_dress_code(self, slut_limit = None, underwear_limit = None, easier_access = None, commando = None):
-        business_slut_limit, business_underwear_limit, limited_to_top = mc.business.get_uniform_limits()
-        if slut_limit is None:
-            slut_limit = business_slut_limit + 5 # A bit of leeway
-        if underwear_limit is None:
-            underwear_limit = business_underwear_limit + 5 # A bit of leeway
-        if easier_access is None:
-            easier_access = easier_access_policy.is_active()
-        if commando is None:
-            commando = commando_uniform_policy.is_active()
+    def is_within_dress_code(self):
+        slut_limit, underwear_limit, limited_to_top = mc.business.get_uniform_limits()
+        easier_access = easier_access_policy.is_active()
+        commando = commando_uniform_policy.is_active()
 
-        if self.get_full_outfit_slut_score() > slut_limit:
-            if self.get_overwear().get_overwear_slut_score() > slut_limit:
+        # check if within sluttiness range (allow for slight overshoot)
+        if self.get_full_outfit_slut_score() > slut_limit + 5:
+            if self.get_overwear_slut_score() > slut_limit + 5:
                 return False
-            if not limited_to_top and self.get_underwear().get_underwear_slut_score() > underwear_limit:
+            if not limited_to_top and self.get_underwear_slut_score() > underwear_limit + 5:
                 return False
         if easier_access and not self.is_easier_access():
             return False
-        if commando and self.is_wearing_underwear():
+        if commando and self.wearing_panties():
             return False
         return True
     Outfit.is_within_dress_code = is_within_dress_code
@@ -363,90 +363,84 @@ init -1 python:
         factor = (transparency - .05)/(.33 - .05) # 5% transparency is opaque, 33% transparency is visible
         return __builtin__.max(0.0, __builtin__.min(1.0, factor))
 
-    def get_underwear_body_parts_slut_score(self):
-        # No underwear is 32 slut
-        # 16 from bra, 16 from panties
-        new_score = 0
-        if self.tits_available():
-            new_score += 16
-        else:
-            new_score += __builtin__.int(16 * _get_transparency_factor(self.upper_body))
-        if self.vagina_available():
-            new_score += 16
-        else:
-            new_score += __builtin__.int(16 * _get_transparency_factor(self.lower_body))
-        return new_score
-
-    Outfit.get_underwear_body_parts_slut_score = get_underwear_body_parts_slut_score
-
-    def get_overwear_body_parts_slut_score(self):
-        # No overwear is 48 slut
-        # 12 from upper body, 12 from lower body, 24 from general visibility
-        new_score = 0
-        u_factor = _get_transparency_factor(self.upper_body)
-        l_factor = _get_transparency_factor(self.lower_body)
-        new_score += __builtin__.int(24 * __builtin__.max(u_factor, l_factor)) # The most visible body part contributes the most to sluttiness
-        new_score += __builtin__.int(12 * u_factor)
-        new_score += __builtin__.int(12 * l_factor)
-        return new_score
-
-    Outfit.get_overwear_body_parts_slut_score = get_overwear_body_parts_slut_score
-
-    def get_full_outfit_body_parts_slut_score(self):
-        # Full nudity should be no more than 80 sluttiness, per corporate_enforced_nudity_policy
-        # 32 slut from underwear, 24 slut from overwear, 24 slut from general visibility
-        # Tries to be the sum of underwear/overwear scores
-        # Exception: when not wearing panties, pants slightly less slutty than sum, skirts more slutty
-        # Exception: opacity is subtractive, not additive. The math gets a bit weird, but it should be continuous
-
-        new_score = 0
-        u_factor_over = _get_transparency_factor(self.upper_body, overwear = True)
-        l_factor_over = _get_transparency_factor(self.lower_body, overwear = True)
-        u_factor_under = _get_transparency_factor(self.upper_body)
-        l_factor_under = _get_transparency_factor(self.lower_body)
-
-        new_score += __builtin__.int(16 * __builtin__.max(u_factor_over, l_factor_over)) # The most visible body part contributes the most to sluttiness
-        new_score += __builtin__.int(8 * __builtin__.max(u_factor_under, l_factor_under))
-
-        tits_score = 0
-        if self.wearing_bra():
-            tits_score += __builtin__.int(16 * u_factor_over)
-        else:
-            tits_score = 16
-        new_score += __builtin__.max(tits_score, __builtin__.int((16 + 12) * u_factor_under)) # Floor at tits visibility slut score. 12 from overwear scores, 16 from underwear.
-
-        vagina_score = 0
-        if self.vagina_available():
-            vagina_score += 8
-        if self.wearing_panties():
-            vagina_score += __builtin__.int(16 * l_factor_over)
-        else:
-            vagina_score += 12 # This is lower than tits equivalent by half "vagina_available" factor
-        new_score += __builtin__.max(vagina_score, __builtin__.int((16 + 12) * l_factor_under)) # Floor at vagina visibility slut score. 12 from overwear scores, 16 from underwear.
-
-        return new_score
-
-    Outfit.get_full_outfit_body_parts_slut_score = get_full_outfit_body_parts_slut_score
-
     def get_underwear_slut_score_enhanced(self): #Calculates the sluttiness of this outfit assuming it's an underwear set. We assume a modest overwear set is used (ie. one that covers visibility).
+        def _get_underwear_body_parts_slut_score(self):
+            # No underwear is 32 slut
+            # 16 from bra, 16 from panties
+            new_score = 0
+            if self.tits_available():
+                new_score += 16
+            else:
+                new_score += __builtin__.int(16 * _get_transparency_factor(self.upper_body))
+            if self.vagina_available():
+                new_score += 16
+            else:
+                new_score += __builtin__.int(16 * _get_transparency_factor(self.lower_body))
+            return new_score
+
         new_score = 0
-        new_score += self.get_underwear_body_parts_slut_score()
-        new_score += self.get_total_slut_modifiers()
+        new_score += _get_underwear_body_parts_slut_score(self)
+        new_score += self.get_underwear().get_total_slut_modifiers()
         return new_score if new_score < 100 else 100
 
     Outfit.get_underwear_slut_score = get_underwear_slut_score_enhanced
 
     def get_overwear_slut_score_enhanced(self): #Calculates the sluttiness of this outfit assuming it's an overwear set. That means we assume a modest underwear set is used (ie. one that denies access).
+        def _get_overwear_body_parts_slut_score(self):
+            # No overwear is 48 slut
+            # 12 from upper body, 12 from lower body, 24 from general visibility
+            new_score = 0
+            u_factor = _get_transparency_factor(self.upper_body)
+            l_factor = _get_transparency_factor(self.lower_body)
+            new_score += __builtin__.int(24 * __builtin__.max(u_factor, l_factor)) # The most visible body part contributes the most to sluttiness
+            new_score += __builtin__.int(12 * u_factor)
+            new_score += __builtin__.int(12 * l_factor)
+            return new_score
+
         new_score = 0
-        new_score += self.get_overwear_body_parts_slut_score()
-        new_score += self.get_total_slut_modifiers()
+        new_score += _get_overwear_body_parts_slut_score(self)
+        new_score += self.get_overwear().get_total_slut_modifiers()
         return new_score if new_score < 100 else 100
 
     Outfit.get_overwear_slut_score = get_overwear_slut_score_enhanced
 
     def get_full_outfit_slut_score_enhanced(self): #Calculates the sluttiness of this outfit assuming it's a full outfit. Full penalties and such apply.
+        def _get_full_outfit_body_parts_slut_score(self):
+            # Full nudity should be no more than 80 sluttiness, per corporate_enforced_nudity_policy
+            # 32 slut from underwear, 24 slut from overwear, 24 slut from general visibility
+            # Tries to be the sum of underwear/overwear scores
+            # Exception: when not wearing panties, pants slightly less slutty than sum, skirts more slutty
+            # Exception: opacity is subtractive, not additive. The math gets a bit weird, but it should be continuous
+
+            new_score = 0
+            u_factor_over = _get_transparency_factor(self.upper_body, overwear = True)
+            l_factor_over = _get_transparency_factor(self.lower_body, overwear = True)
+            u_factor_under = _get_transparency_factor(self.upper_body)
+            l_factor_under = _get_transparency_factor(self.lower_body)
+
+            new_score += __builtin__.int(16 * __builtin__.max(u_factor_over, l_factor_over)) # The most visible body part contributes the most to sluttiness
+            new_score += __builtin__.int(8 * __builtin__.max(u_factor_under, l_factor_under))
+
+            tits_score = 0
+            if self.wearing_bra():
+                tits_score += __builtin__.int(16 * u_factor_over)
+            else:
+                tits_score = 16
+            new_score += __builtin__.max(tits_score, __builtin__.int((16 + 12) * u_factor_under)) # Floor at tits visibility slut score. 12 from overwear scores, 16 from underwear.
+
+            vagina_score = 0
+            if self.vagina_available():
+                vagina_score += 8
+            if self.wearing_panties():
+                vagina_score += __builtin__.int(16 * l_factor_over)
+            else:
+                vagina_score += 12 # This is lower than tits equivalent by half "vagina_available" factor
+            new_score += __builtin__.max(vagina_score, __builtin__.int((16 + 12) * l_factor_under)) # Floor at vagina visibility slut score. 12 from overwear scores, 16 from underwear.
+
+            return new_score
+
         new_score = 0
-        new_score += self.get_full_outfit_body_parts_slut_score()
+        new_score += _get_full_outfit_body_parts_slut_score(self)
         new_score += self.get_total_slut_modifiers()
         return new_score if new_score < 100 else 100
 
@@ -542,7 +536,7 @@ init 6 python:
     Outfit.get_full_strip_list = get_full_strip_list_enhanced
 
     def get_total_slut_modifiers_enhanced(self):
-        return sum(x.get_slut_value() for x in self.accessories + self.upper_body + self.lower_body + self.feet)
+        return sum(x.get_slut_value() for x in self)
 
     Outfit.get_total_slut_modifiers = get_total_slut_modifiers_enhanced
 

@@ -154,8 +154,7 @@ init -1 python:
         (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person)
         return wardrobe_builder.build_outfit(outfit_type, max_slut, min_slut)
 
-    # Combines business wardrobe with employee's personal wardrobe
-    def build_uniform_wardrobe(self, personal_wardrobe, slut_limit = 999, underwear_limit = 999, limited_to_top = False):
+    def build_uniform_wardrobe(self, slut_limit = 999, underwear_limit = 999, limited_to_top = False):
         def _filter_full_outfits(full_outfits, slut_limit = 999):
             return [x for x in full_outfits if x.get_full_outfit_slut_score() <= slut_limit]
 
@@ -171,21 +170,15 @@ init -1 python:
 
         if self.overwear_sets:
             overwear_sets = _filter_overwear_sets(self.overwear_sets, slut_limit)
-        if not self.overwear_sets:
-            overwear_sets = _filter_overwear_sets(personal_wardrobe.overwear_sets, slut_limit)
 
         if limited_to_top:
             return Wardrobe("Valid Uniform Wardrobe", full_outfits, underwear_sets, overwear_sets)
 
         if self.outfits:
             full_outfits = _filter_full_outfits(self.outfits, slut_limit)
-        if not full_outfits:
-            full_outfits = _filter_full_outfits(personal_wardrobe.outfits, slut_limit)
 
         if self.underwear_sets:
             underwear_sets = _filter_underwear_sets(self.underwear_sets, underwear_limit)
-        if not self.underwear_sets:
-            underwear_sets = _filter_underwear_sets(personal_wardrobe.underwear_sets, underwear_limit)
 
         return Wardrobe("Valid Uniform Wardrobe", full_outfits, underwear_sets, overwear_sets)
 
@@ -199,9 +192,9 @@ init -1 python:
         valid_wardrobe = None
         if (person.is_employee() or person.is_intern()) and dress_code_policy.is_active():
             slut_limit, underwear_limit, limited_to_top = mc.business.get_uniform_limits()
-            valid_wardrobe = self.build_uniform_wardrobe(person.wardrobe, slut_limit, underwear_limit, limited_to_top)
+            valid_wardrobe = self.build_uniform_wardrobe(slut_limit, underwear_limit, limited_to_top)
         else:
-            valid_wardrobe = self.build_uniform_wardrobe(person.wardrobe)
+            valid_wardrobe = self.build_uniform_wardrobe()
 
         sluttiness_modifier = person.get_opinion_score("work uniforms") / 40.0 # low impact on sluttiness
 
@@ -291,6 +284,9 @@ init -1 python:
                 outfit_under = self.pick_underwear_with_lowest_sluttiness()
 
             if not outfit_under:
+                outfit_under = person.wardrobe.get_random_appropriate_underwear(slut_limit_remaining, preferences = preferences)
+
+            if not outfit_under:
                 # renpy.say(None, "Unable to find underwear in wardrobe, pick any underwear from personal wardrobes.")
                 outfit_under = generate_random_appropriate_outfit(person, outfit_type = "UnderwearSets", sluttiness = slut_limit_remaining)
 
@@ -300,6 +296,9 @@ init -1 python:
 
             if not outfit_under:
                 outfit_under = self.pick_underwear_with_lowest_sluttiness()
+
+            if not outfit_under:
+                outfit_under = person.wardrobe.get_random_appropriate_underwear(target_sluttiness, preferences = preferences)
 
             if not outfit_under:
                 # renpy.say(None, "Unable to find underwear in wardrobe, pick any underwear from personal wardrobes.")
@@ -314,6 +313,9 @@ init -1 python:
 
                 if not outfit_over:
                     outfit_over = self.pick_overwear_with_lowest_sluttiness()
+
+                if not outfit_over:
+                    person.wardrobe.get_random_appropriate_overwear(slut_limit_remaining, preferences = preferences)
 
                 if not outfit_over:
                     # renpy.say(None, "Unable to find overwear in uniform wardrobe, pick any underwear from personal wardrobes.")
