@@ -52,7 +52,7 @@ init 2 python:
     girlfriend_sleepover_action = Action("Arrange a sleepover", girlfriend_myplace_yourplace_requirement, "girlfriend_myplace_yourplace_label",
         menu_tooltip = "Ask your girlfriend if she wants to sleep together tonight.")
     girlfriend_sleepover_crisis = Action("Have a sleepover", girlfriend_sleepover_crisis_requirement, "girlfriend_sleepover_crisis_label")
-    girlfriend_underwear_shopping = Action("Shop for new lingerie", girlfriend_underwear_shopping_requirement , "girlfriend_underwear_shopping_label",
+    girlfriend_underwear_shopping = Action("Shop for new lingerie {image=gui/heart/Time_Advance.png}", girlfriend_underwear_shopping_requirement , "girlfriend_underwear_shopping_label",
         menu_tooltip = "Take your girlfriend out to shop for some exciting underwear to wear for you.")
 
     girlfriend_wakeup_spooning = Action("Spooning wakeup", girlfriend_wakeup_spooning_requirement, "girlfriend_wakeup_spooning_label")
