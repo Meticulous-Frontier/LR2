@@ -151,7 +151,7 @@ init -1 python:
 
     def generate_random_appropriate_outfit(person, outfit_type = "FullSets", sluttiness = None):
         wardrobe_builder = WardrobeBuilder(person)
-        (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person)
+        (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(sluttiness or person.sluttiness)
         return wardrobe_builder.build_outfit(outfit_type, max_slut, min_slut)
 
     def build_uniform_wardrobe(self, slut_limit = 999, underwear_limit = 999, limited_to_top = False):

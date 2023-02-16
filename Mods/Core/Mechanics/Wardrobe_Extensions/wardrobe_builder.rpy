@@ -564,9 +564,9 @@ init 5 python:
             return item
 
         @staticmethod
-        def get_clothing_min_max_slut_value(person):
-            base_sluttiness = __builtin__.max(person.sluttiness - 15, 0) # first 15 points of sluttiness don't impact outfit builder
-            min_sluttiness = __builtin__.min(base_sluttiness / 18, 5) if person.sluttiness > 50 else 0 # prevent override of person preferences until she's slutty enough not to care
+        def get_clothing_min_max_slut_value(sluttiness):
+            base_sluttiness = __builtin__.max(sluttiness - 15, 0) # first 15 points of sluttiness don't impact outfit builder
+            min_sluttiness = __builtin__.min(base_sluttiness / 18, 5) if sluttiness > 50 else 0 # prevent override of person preferences until she's slutty enough not to care
             return (min_sluttiness, __builtin__.min(base_sluttiness / 7, 12))
 
         @staticmethod
@@ -585,7 +585,7 @@ init 5 python:
             panties = outfit.get_panties()
             if panties is None or panties.is_extension: # no panties or one-piece
                 return False
-            (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person)
+            (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person.sluttiness)
 
             if panties.slut_value >= min_slut:
                 return False
@@ -606,7 +606,7 @@ init 5 python:
             bra = outfit.get_bra()
             if bra is None or bra.has_extension: # no bra or one-piece
                 return False
-            (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person)
+            (min_slut, max_slut) = WardrobeBuilder.get_clothing_min_max_slut_value(person.sluttiness)
 
             if bra.slut_value >= min_slut:
                 return False
