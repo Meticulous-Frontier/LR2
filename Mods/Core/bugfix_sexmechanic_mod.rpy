@@ -704,7 +704,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         else:
                             $ position_choice = None
                     elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
-                        if not stop_stripping:
+                        if self_strip and not stop_stripping:
                             call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
 
                         if girl_in_charge and position_choice is not None: # girls in charge and wants to spice things up
