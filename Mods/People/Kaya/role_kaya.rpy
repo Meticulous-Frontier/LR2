@@ -186,7 +186,7 @@ init -2 python:
                 else:
                     return "Only in the afternoon"
             else:
-                "Wait a few days"
+                return "Wait a few days"
         return False
 
     def kaya_work_fuck_requirement(the_person):
@@ -200,7 +200,7 @@ init -2 python:
                 else:
                     return "Only in the afternoon"
             else:
-                "Wait for next week"
+                return "Wait for next week"
         return False
 
     def kaya_jennifer_confrontation_requirement():
