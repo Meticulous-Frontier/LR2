@@ -48,7 +48,7 @@ init -2 python:
     def erica_lily_post_insta_morning_requirement():
         if day%7 == 6 and erica_has_given_morning_handjob():
             if erica_get_morning_wakeup_pref() != 0:
-                if the_person.sex_record.get("Last Sex Day", 9999) != day: #If mandatory and random crisis happen to fire on the same day, suppress the second event.
+                if erica.sex_record.get("Last Sex Day", 9999) != day: #If mandatory and random crisis happen to fire on the same day, suppress the second event.
                     return True
         return False
 
