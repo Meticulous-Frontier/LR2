@@ -205,14 +205,14 @@ label fetish_mom_kitchen_label(the_person):
                 "You quickly pull your cock out and begin to rub it between her cheeks."
             else:                                              #Otherwise, strip her down.
                 "You don't bother to reply, instead you begin stripping away anything between you and her supple ass."
-                $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
+                $ the_person.strip_to_vagina(visible_enough = True, prefer_half_off = True, position = "standing_doggy")
                 "With her ass finally exposed you waste no time. You quickly pull your cock out and rub it between her cheeks."
             "[the_person.possessive_title] pulls some lube out of one of the kitchen drawers."
             mc.name "Wait... you keep lube in the...?"
             the_person "Shut up just fuck me before your sister notices!"
             "You rub some lube on your cock and on [the_person.title]'s ass hole. You grab her by the hips and then roughly pull her back until your cock is buried inside her rump."
             $ the_person.break_taboo("anal_sex")
-            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_table(), skip_intro = True, skip_condom = True) from _call_sex_description_SBR40
+            call fuck_person(the_person, start_position = SB_anal_standing, start_object = make_table(), skip_intro = True, self_strip = False, skip_condom = True) from _call_sex_description_SBR40
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] is positively glowing. She knows that even while preparing dinner, you may come and fuck her ass at any time."
@@ -244,11 +244,11 @@ label fetish_mom_kitchen_label(the_person):
                 "You quickly pull your cock out and line it up with her wet slit."
             else:                                              #Otherwise, strip her down.
                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
-                $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
+                $ the_person.strip_to_vagina(visible_enough = True, prefer_half_off = True, position = "standing_doggy")
                 "With her pussy finally exposed you waste no time. You quickly pull your cock out and line it up with her wet slit."
             $ the_person.break_taboo("condomless_sex")
             $ the_person.break_taboo("vaginal_sex")
-            call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_table(), skip_intro = True, skip_condom = True) from _call_sex_mom_kitchen_breeding_01
+            call fuck_person(the_person, start_position = bent_over_breeding, start_object = make_table(), skip_intro = True, self_strip = False, skip_condom = True) from _call_sex_mom_kitchen_breeding_01
             $ the_report = _return
             if the_report.get("girl orgasms", 0) > 0:
                 "[the_person.possessive_title] is positively glowing. She knows that even while preparing dinner, you may come and fuck her at any time."
@@ -290,7 +290,7 @@ label fetish_mom_kitchen_label(the_person):
                 "You quickly pull your cock out and line it up with her wet slit."
             else:                                              #Otherwise, strip her down.
                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
-                $ the_person.strip_outfit(position = "standing_doggy", exclude_upper = True)
+                $ the_person.strip_to_vagina(visible_enough = True, prefer_half_off = True, position = "standing_doggy")
                 "With her pussy finally exposed you waste no time. You quickly pull your cock out and line it up with her wet slit."
             "You thrust yourself inside of her slowly. Her pussy accepts your length easily, well lubricated from your spanking."
             $ the_person.change_arousal(15)
@@ -310,7 +310,7 @@ label fetish_mom_kitchen_label(the_person):
             "Holy shit she is actually gonna sell that."
             lily "Well... okay, if you're sure."
             "You take the opportunity now to pick up the pace. You are really giving it to [the_person.possessive_title] now."
-            call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_table(), skip_intro = True, skip_condom = True) from _call_sex_mom_kitchen_loud_sex_01
+            call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_table(), skip_intro = True, self_strip = False, skip_condom = True) from _call_sex_mom_kitchen_loud_sex_01
             $ the_report = _return
             $ the_person.event_triggers_dict["LastExhibitionFetish"] = day
         "Fuck her loudly\n{color=#ff0000}{size=18}Requires Exhibitionist Fetish{/size}{/color} (disabled)" if not the_person.has_exhibition_fetish():
