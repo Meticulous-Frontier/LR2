@@ -455,30 +455,27 @@ init -1 python:
 
     def build_outfit_name_custom(self):
         def get_clothing_items(outfit_part):
-            for layer in range(3, 0, -1):
-                items = filter(lambda x: x.layer == layer, outfit_part)
-                if items:
-                    return items
-            return None
+            return sorted([x for x in outfit_part if not x.is_extension and (x in [pinafore] or x.layer < 4)], key = lambda x: x.layer, reverse = True)
 
         outfitname = ""
-
         upper = get_clothing_items(self.upper_body)
         if upper:
             outfitname += upper[0].name
 
-        if not upper or (not upper[0].has_extension or upper[0].has_extension.layer <= 1):
-            lower = get_clothing_items(self.lower_body)
-            if upper and lower:
-                outfitname += " and "
-            if lower:
-                outfitname += lower[0].name
+        lower = get_clothing_items(self.lower_body)
+        if upper and lower:
+            outfitname += " and "
+        if lower:
+            outfitname += lower[0].name
 
         feet = get_clothing_items(self.feet)
         if feet:
-            if __builtin__.len(outfitname) != 0:
-                outfitname += " with "
-            outfitname += feet[0].name
+            if len(outfitname) == 0:
+                outfitname = " with ".join([x.name for x in feet])
+            else:
+                if __builtin__.len(outfitname) != 0:
+                    outfitname += " with "
+                outfitname += feet[0].name
 
         if __builtin__.len(outfitname) == 0:
             return "Naked"
