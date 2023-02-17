@@ -79,7 +79,6 @@ init 2:
                         xsize 250
                         yanchor 0.5
                         yalign 0.5
-                        sensitive True
                         hovered Function(draw_average_mannequin, given_uniform.outfit)
                         unhovered Function(hide_mannequin)
                         action NullAction()
@@ -91,7 +90,6 @@ init 2:
                         text_xalign 0.5
                         yanchor 0.5
                         yalign 0.5
-                        sensitive True
                         hovered Function(draw_average_mannequin, given_uniform.outfit)
                         unhovered Function(hide_mannequin)
                         action [Function(hide_mannequin), RemoveFromSet(mc.business.business_uniforms, given_uniform)]

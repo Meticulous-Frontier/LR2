@@ -844,8 +844,6 @@ init 2:
                                         text_style "serum_text_style"
                                         xfill True
 
-                                        action NullAction()
-
                             hbox:
                                 spacing 5
                                 vbox:

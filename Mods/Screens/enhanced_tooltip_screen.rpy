@@ -3,7 +3,7 @@
 init 2:
 
     screen tooltip_screen():
-        zorder 50
+        zorder 500
 
         default hovered_enough_time = False
         $ tooltip = GetTooltip()
@@ -13,10 +13,10 @@ init 2:
             if hovered_enough_time:
                 $ mouse_xy = renpy.get_mouse_pos()
                 frame:
-                    if mouse_xy[1] > 1080/2:
-                        xsize 450 xpos mouse_xy[0] ypos mouse_xy[1] yanchor 1.0
-                    else:
-                        xsize 450 xpos mouse_xy[0] ypos mouse_xy[1]
+                    xanchor (0 if mouse_xy[0] < 1920 - 500 else 1.0)
+                    yanchor (1.0 if mouse_xy[1] > 1080/2 else 0.0)
+                    xsize 450
+                    pos (mouse_xy[0], mouse_xy[1])
                     text "[tooltip]":
                         style "serum_text_style"
                         xalign 0.5

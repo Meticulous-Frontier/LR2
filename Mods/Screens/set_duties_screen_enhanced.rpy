@@ -113,8 +113,6 @@ init 2:
                                                 text_style "textbutton_text_style"
                                                 xanchor 0.5
                                                 xalign 0.5
-                                                action NullAction()
-                                                sensitive False
                                                 insensitive_background "#222222"
                                         else:
                                             textbutton "Remove Duty":

@@ -26,7 +26,6 @@ init 2:
                     text_style "menu_text_style"
                     tooltip "Your current and maximum number of employees. Purchase new business policies from your main office to increase the number of employees you can have."
                     action NullAction()
-                    sensitive True
 
                 textbutton "Company Funds: [funds]":
                     style "transparent_style"
@@ -35,28 +34,24 @@ init 2:
                         text_color "#DD0000"
                     tooltip "The amount of money in your business account. If you are in the negatives for more than three days your loan defaults and the game is over!"
                     action NullAction()
-                    sensitive True
 
                 textbutton "Daily Salary Cost: [daily_salary]":
                     style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "The amount of money spent daily to pay your employees along with daily operating costs. Neither apply during the weekend."
                     action NullAction()
-                    sensitive True
 
                 textbutton "Company Efficiency: [efficiency]":
                     style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "The more employees you have the faster your company will become inefficient. Perform HR work at your office or hire someone to do it for you to raise your company Efficiency. All productivity is modified by company Efficiency."
                     action NullAction()
-                    sensitive True
 
                 textbutton "Current Raw Supplies: [supplies]":
                     style "transparent_style"
                     text_style "menu_text_style"
                     tooltip "Your current and goal amounts of serum supply. Manufacturing serum requires supplies, spend time ordering supplies from your office or hire someone to do it for you. Raise your supply goal from your office if you want to keep more supply stockpiled."
                     action NullAction()
-                    sensitive True
 
                 if not mc.business.active_research_design is None:
                     textbutton "Current Research:":
@@ -68,7 +63,6 @@ init 2:
                         text_color "#43B197"
                         tooltip "The current research task of your R&D division. Visit them to set a new goal or to assemble a new serum design."
                         action NullAction()
-                        sensitive True
 
                 else:
                     textbutton ("Current Research: None!" if not theoretical_research.is_active() else "Current Research: Theoretical Research"):
@@ -77,7 +71,6 @@ init 2:
                         text_color "#B14365"
                         tooltip "The current research task of your R&D division. Visit them to set a new goal or to assemble a new serum design."
                         action NullAction()
-                        sensitive True
 
                 hbox:
                     vbox:
@@ -100,5 +93,4 @@ init 2:
                                     unhovered [
                                         Hide("game_hints_tooltip")
                                     ]
-                                    sensitive True
                                 text "[count]" style "serum_text_style_header" yoffset 10
