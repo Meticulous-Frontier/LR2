@@ -1,7 +1,7 @@
 init 2:
     screen goal_hud_ui():
         frame:
-            background "Goal_Frame_1.png"
+            background Transform("Goal_Frame_1.png", alpha=persistent.hud_alpha)
             yalign 0.5
             xysize (260, 250)
             vbox:

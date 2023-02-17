@@ -11,7 +11,7 @@ init 2:
                 current_research = "(" + str(__builtin__.int(mc.business.active_research_design.current_research)) + "/" + str(__builtin__.int(mc.business.active_research_design.research_needed)) + ")"
 
         frame:
-            background im.Flip("Info_Frame_1.png",vertical=True)
+            background Transform(im.Flip("Info_Frame_1.png",vertical=True), alpha=persistent.hud_alpha)
             xsize 600
             ysize 400
             yalign 1.0

@@ -19,7 +19,7 @@ init 2:
             attention_info = get_attention_string(mc.business.attention, mc.business.max_attention)
 
         frame:
-            background "Info_Frame_1.png"
+            background Transform("Info_Frame_1.png", alpha=persistent.hud_alpha)
             xsize 600
             ysize 400
             yalign 0.0

@@ -21,7 +21,7 @@ init 2 python:
 screen multi_person_info_ui(actors):
     layer "solo"
     frame:
-        background im.Alpha("gui/topbox.png", .9)
+        background Transform("gui/topbox.png", alpha=persistent.hud_alpha)
         xsize 1100
         ysize 200
         yalign 0.0

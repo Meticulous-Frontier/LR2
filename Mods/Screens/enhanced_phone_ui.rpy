@@ -9,7 +9,7 @@ init 2:
         modal False
 
         frame:
-            background "#0a142688"
+            background Transform("#0a142688", alpha=persistent.hud_alpha)
             xsize ui_xsize + 20
             ysize 440
             xanchor 1.0
@@ -32,7 +32,7 @@ init 2:
                                 $ time_diff = fade_time
 
                             frame:
-                                background "#11334488"
+                                background Transform("#11334488", alpha=persistent.hud_alpha)
                                 xsize ui_xsize
                                 padding (2, 2)
                                 text "[log_item[0]]" style log_item[1] size 18 xsize ui_xsize - 20 first_indent 10 rest_indent 10 yoffset 2

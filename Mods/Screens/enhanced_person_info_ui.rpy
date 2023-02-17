@@ -74,7 +74,7 @@ init 2:
             fetish_info = ", ".join(fetish_list)
 
         frame:
-            background im.Alpha("gui/topbox.png", .9)
+            background Transform("gui/topbox.png", alpha=persistent.hud_alpha)
             xsize 1100
             ysize 200
             yalign 0.0

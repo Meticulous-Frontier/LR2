@@ -100,6 +100,14 @@ init 2: # Add some additional
                             textbutton "Roleplay" action SetField(persistent, "mc_noncon_pref", 1)
                             textbutton "Enabled" action SetField(persistent, "mc_noncon_pref", 2)
 
+                        vbox:
+                            style_prefix "check"
+                            label "In Game Notifications"
+                            textbutton "Serum Related" action [ToggleField(persistent, "serum_messages", True, False)]
+                            textbutton "Clarity Related" action [ToggleField(persistent, "clarity_messages", True, False)]
+                            textbutton "Stat Changes" action [ToggleField(persistent, "stat_change_messages", True, False)]
+                            textbutton "Skill Changes" action [ToggleField(persistent, "skill_change_messages", True, False)]
+
 
                     null height (2 * gui.pref_spacing)
 
@@ -115,23 +123,14 @@ init 2: # Add some additional
                             textbutton "All Effects" action [ToggleField(persistent, "text_effects", True, False)]
 
                         vbox:
-                            style_prefix "radio"
-                            label "Text Size"
-                            textbutton "18" action [SetField(persistent, "display_text_size", 18), Function(set_text_size, 18)]
-                            textbutton "20" action [SetField(persistent, "display_text_size", 20), Function(set_text_size, 20)]
-                            textbutton "22" action [SetField(persistent, "display_text_size", 22), Function(set_text_size, 22)]
-                            textbutton "24" action [SetField(persistent, "display_text_size", 24), Function(set_text_size, 24)]
-                            textbutton "26" action [SetField(persistent, "display_text_size", 26), Function(set_text_size, 26)]
-                            #bar value FieldValue(style.get("textbutton_text_style"), "size", range = 50, step = 2, force_step = True) changed style.rebuild #action SetField(style.get("textbutton_text_style"), "size")
-                            #textbutton "Text Size:" + str(style.get("textbutton_text_style").size) action NullAction() #[SetField(style.get("textbutton_text_style"), "size", 1)), Function(style.rebuild)]
-
-                        vbox:
                             style_prefix "check"
-                            label "In Game Notifications"
-                            textbutton "Serum Related" action [ToggleField(persistent, "serum_messages", True, False)]
-                            textbutton "Clarity Related" action [ToggleField(persistent, "clarity_messages", True, False)]
-                            textbutton "Stat Changes" action [ToggleField(persistent, "stat_change_messages", True, False)]
-                            textbutton "Skill Changes" action [ToggleField(persistent, "skill_change_messages", True, False)]
+                            label "Visualization"
+                            textbutton "Show Portrait" action [ToggleField(persistent, "show_portrait", True, False)] text_size 24
+                            label "Dialog Opacity" text_size 18
+                            bar value FieldValue(persistent, 'say_window_alpha', 1.0, max_is_zero=False, offset=0, step=.1) ysize 20 xsize 300
+                            label "Hud Opacity" text_size 18
+                            bar value FieldValue(persistent, 'hud_alpha', 1.0, max_is_zero=False, offset=0, step=.1) ysize 20 xsize 300
+
 
                         # vbox:
                         #     style_prefix "radio"
@@ -236,11 +235,6 @@ init 2: # Add some additional
                             label _("Auto-Forward Time")
 
                             bar value Preference("auto-forward time")
-
-                            label "Text Box Opacity"
-                            bar value FieldValue(persistent, 'say_window_alpha', 1.0, max_is_zero=False, offset=0, step=.1) xsize 525 ysize 44
-
-                            textbutton "Show Portrait" style_prefix "check" action [ToggleField(persistent, "show_portrait", True, False)] text_size 24
 
                         vbox:
 

@@ -1,8 +1,10 @@
 
-init 2:
-    default persistent.say_window_alpha = 0.9
+init 1:
+    default persistent.hud_alpha = 1
+    default persistent.say_window_alpha = 1
     default persistent.show_portrait = True
 
+init 2:
     screen say(who, what):
         default show_phone = False #If True the phone is shown. If having a text conversation with "who" then that message is displayed on the phone. The say window has priority on displaying dialogue.
         default show_say_window = True #If True the say window is shown. If also showing the phone this will be on top, and is for narration or dialogue with other characters.
