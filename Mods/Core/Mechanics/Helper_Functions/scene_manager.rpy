@@ -293,7 +293,7 @@ init -2 python:
                 self._person = None
 
         def draw_actor(self):
-            self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, lighting = self.lighting, display_transform = self.display_transform, display_zorder = self.z_order, wipe_scene = False)
+            self.person.draw_person(position = self.position, emotion = self.emotion, special_modifier = self.special_modifier, lighting = self.lighting, display_transform = self.display_transform, display_zorder = self.z_order, wipe_scene = False, show_person_info = False)
 
 
 ##########################################
