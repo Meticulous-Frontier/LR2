@@ -1547,7 +1547,7 @@ label myra_alexia_teamup_fight_round_label(the_group, myra_is_target):
     if _return:
         $ the_target.change_arousal(_return)
     if the_target.arousal >= 100:   #You drive her to orgasm and she loses her match
-        call myra_alexia_teamup_orgasm_finish(the_target)
+        call myra_alexia_teamup_orgasm_finish(the_target) from _call_myra_alexia_teamup_orgasm_finish
         if myra_is_target:
             return alexia
         else:

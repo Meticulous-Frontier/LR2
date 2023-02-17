@@ -14,7 +14,7 @@ label activate_erica_mod_core(stack):
 
 label update_erica_mod_core(stack):
     if "erica" not in globals():
-        call erica_instantiate_jobs([])
+        call erica_instantiate_jobs([]) from _call_erica_instantiate_jobs
         python:
             erica_mod_initialization()
     # TODO: remove when breaking save compatibility

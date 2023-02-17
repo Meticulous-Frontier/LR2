@@ -378,7 +378,7 @@ label ellie_stephanie_teamup_progression_scene_scene_0(the_group, scene_transiti
     $ fetish_serum_increase_opinion(nano_opinion_list, 2, pick_1)
     $ pick_1.change_arousal(15)
     "She seems to be getting aroused... some of her answers are starting to take longer than they should..."
-    call ellie_stephanie_teamup_final_opinion_shift_label(pick_1, bot_selection, nano_opinion_list)
+    call ellie_stephanie_teamup_final_opinion_shift_label(pick_1, bot_selection, nano_opinion_list) from _call_ellie_stephanie_teamup_final_opinion_shift_label
     $ pick_1.change_arousal(35)
     "[the_researcher.title] seems to be picking up on it also."
     the_researcher "[pick_1.fname]... can you describe what you are feeling right now?"
