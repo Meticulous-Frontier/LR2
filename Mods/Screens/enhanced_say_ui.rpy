@@ -1,5 +1,8 @@
 
 init 2:
+    default persistent.say_window_alpha = 0.9
+    default persistent.show_portrait = True
+
     screen say(who, what):
         default show_phone = False #If True the phone is shown. If having a text conversation with "who" then that message is displayed on the phone. The say window has priority on displaying dialogue.
         default show_say_window = True #If True the say window is shown. If also showing the phone this will be on top, and is for narration or dialogue with other characters.
@@ -39,16 +42,16 @@ init 2:
                 #     text vren_test id "what"
                 # else:
                 text what id "what"
+                background Transform("gui/textbox.png", alpha=persistent.say_window_alpha, xalign=0.5, yalign=1.0)
 
                 if who is not None:
                     window:
                         style "namebox"
                         text who id "who" xoffset 80
 
-                    if "portrait_say" in globals() and isinstance(portrait_say, renpy.display.core.Displayable):
+                    if persistent.show_portrait and "portrait_say" in globals() and isinstance(portrait_say, renpy.display.core.Displayable):
                         imagebutton:
                             idle portrait_say at character_portrait_say()
-
 
         #     # If there's a side image, display it above the text. Do not display
         #     # on the phone variant - there's no room.

@@ -237,6 +237,11 @@ init 2: # Add some additional
 
                             bar value Preference("auto-forward time")
 
+                            label "Text Box Opacity"
+                            bar value FieldValue(persistent, 'say_window_alpha', 1.0, max_is_zero=False, offset=0, step=.1) xsize 525 ysize 44
+
+                            textbutton "Show Portrait" style_prefix "check" action [ToggleField(persistent, "show_portrait", True, False)] text_size 24
+
                         vbox:
 
                             if config.has_music:
