@@ -1,11 +1,9 @@
 screen pick_position_screen(the_person, allow_none = True, ignore_taboo = False):
-
     default non_sex_options = {} # Add options that are not of the Position class. Key is display, [0] is return value
     python:
         if allow_none:
             non_sex_options["Nothing"] = "None"
     zorder 49 # Tooltip screen is zorder 50
-    $ tooltip = GetTooltip(renpy.current_screen().screen_name)
     vbox:
         spacing -12
         xalign 0.3
@@ -64,7 +62,6 @@ screen pick_position_screen(the_person, allow_none = True, ignore_taboo = False)
 screen pick_round_choice_screen(the_person, option_list, position_choice, ignore_taboo = False):
 
     # This screen gets passed a list in a format like this: [["Transition to" + Position.name, Position], ["Strip her down", "Strip"]] #NOTE Position objects or strings.
-    $ tooltip = GetTooltip(renpy.current_screen().screen_name)
     zorder 49
     frame:
         xalign 0.3

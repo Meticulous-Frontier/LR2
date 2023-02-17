@@ -97,10 +97,6 @@ screen mc_perk_sheet():
                                     hovered [
                                     Show("perk_tooltip",None,ability_perk)
                                     ]
-                                #tooltip perk_system.get_perk_desc(ability_perk)
-
-
-                #$ tooltip = GetTooltip()
 
 
     # frame:
