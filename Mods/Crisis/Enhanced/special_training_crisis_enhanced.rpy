@@ -60,6 +60,7 @@ label enhanced_special_training_crisis_label():
             the_person "Noted, maybe some other time then."
 
     $ mc.end_text_convo()
+    hide screen person_info_ui
     return
 
 label return_from_seminar_action_label(the_person):
