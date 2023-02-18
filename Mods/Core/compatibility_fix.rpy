@@ -143,7 +143,7 @@ init 5 python: # add to stack later then other mods
 init 100 python:
     add_label_hijack("normal_start", "store_game_version")
 
-init 1 python:
+init 0 python:
     global is64Bit
     is64Bit = sys.maxsize > 2**32
 
@@ -221,16 +221,24 @@ init 1 python:
     # remove full outfits / overwear from default wardrobe that have no shoes or no layer 2 clothing items (nude outfits)
     # to prevent messed up outfits to be used by girls in daily life
     def cleanup_default_wardrobe():
+        # reload wardrobes with new clothing layers (loaded before init 0)
+        default_wardrobe = wardrobe_from_xml("Master_Default_Wardrobe")
+        lingerie_wardrobe = wardrobe_from_xml("Lingerie_Wardrobe")
+        insta_wardrobe = wardrobe_from_xml("Insta_Wardrobe")
+        business_wardrobe = wardrobe_from_xml("Business_Wardrobe")
+        stripclub_wardrobe = wardrobe_from_xml("Stripper_Wardrobe")
+
         remove = []
         for outfit in default_wardrobe.outfits + default_wardrobe.overwear_sets:
             if not any(x for x in outfit.feet if x.layer == 2):
                 remove.append(outfit)
-            elif not any(x for x in outfit.upper_body if x.layer == 2 or x.layer == 3):
+            elif not any(x for x in outfit.upper_body if x.layer == 3 or x.layer == 4):
                 remove.append(outfit)
-            elif not any(x for x in outfit.upper_body if x.layer == 2 and x.has_extension) and \
-                not any(x for x in outfit.lower_body if x.layer == 2):
+            elif not any(x for x in outfit.upper_body if x.layer == 3 and x.has_extension) and \
+                not any(x for x in outfit.lower_body if x.layer == 3):
                 remove.append(outfit)
 
+        # print("Removing {} outfits from default wardrobe.".format(len(remove)))
         for outfit in remove:
             # print("Removing: " + outfit.name)
             default_wardrobe.remove_outfit(outfit)
