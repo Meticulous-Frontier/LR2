@@ -48,8 +48,9 @@ init -1 python:
     def situational_awareness_perk_update_func():
         if len(mc.location.people) > 0:
             mc.change_locked_clarity(int(mc.location.room_outfit_eye_candy_score()), add_to_log = False)
-            log_string = "You gain " + str(int(mc.location.room_outfit_eye_candy_score())) + " Lust from eye candy in this room."
-            mc.log_event(log_string, "float_text_blue")
+            if persistent.clarity_messages:
+                log_string = "You gain " + str(int(mc.location.room_outfit_eye_candy_score())) + " Lust from eye candy in this room."
+                mc.log_event(log_string, "float_text_blue")
         return
 
     def situational_awareness_perk_unlock():
