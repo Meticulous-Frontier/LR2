@@ -294,6 +294,7 @@ init 5 python:
     real_pantyhose_list = [x for x in socks_list if x not in only_socks_list]
     earings_only_list = [chandelier_earings, gold_earings, modern_glasses]
     neckwear_without_collars = [x for x in neckwear_list if x.proper_name not in ["Collar_Breed", "Collar_Cum_Slut", "Collar_Fuck_Doll", "Wool_Scarf", "Spiked Choker"]]
+    makeup_list = [lipstick, light_eye_shadow, heavy_eye_shadow, blush]
 
     class WardrobeBuilder():
         default_person = None

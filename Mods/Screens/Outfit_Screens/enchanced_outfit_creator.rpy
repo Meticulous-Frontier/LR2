@@ -341,7 +341,7 @@ init 2:
             $ valid_layers = [0,1,2,3,4]
             $ outfit_class_selected = "FullSets"
 
-        default valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"] #Holds the valid list of categories strings to be shown at the top.
+        default valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Makeup", "Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"] #Holds the valid list of categories strings to be shown at the top.
 
         default categories_mapping = {
             "Panties": [panties_list, Outfit.can_add_lower, Outfit.add_lower],  #Maps each category to the function it should use to determine if it is valid and how it should be added to the outfit.
@@ -352,7 +352,8 @@ init 2:
             "Shirts": [[x for x in shirts_list if not x in [cop_blouse]], Outfit.can_add_upper, Outfit.add_upper],
             "Socks": [socks_list, Outfit.can_add_feet, Outfit.add_feet],
             "Shoes": [shoes_list, Outfit.can_add_feet, Outfit.add_feet],
-            "Facial": [earings_list, Outfit.can_add_accessory, Outfit.add_accessory],
+            "Makeup": [makeup_list, Outfit.can_add_accessory, Outfit.add_accessory],
+            "Facial": [[x for x in earings_list if x not in makeup_list], Outfit.can_add_accessory, Outfit.add_accessory],
             "Rings": [rings_list, Outfit.can_add_accessory, Outfit.add_accessory],
             "Bracelets": [bracelet_list, Outfit.can_add_accessory, Outfit.add_accessory],
             "Neckwear": [neckwear_list, Outfit.can_add_accessory, Outfit.add_accessory],
