@@ -2053,7 +2053,7 @@ label ashley_submission_fuck_label(): #160 obedience
 
     "In this event, [the_person.title] offers to give MC a blowjob, but MC refuses."
     "He bends her over his desk and fucks her roughly. She loves it."
-    "At the end, MC chooses where to cum, and she gains a point torwards being submissive."
+    "At the end, MC chooses where to cum, and she gains a point towards being submissive."
 
     $ mc.business.add_mandatory_crisis(ashley_submission_fuck_taboo_restore)
     $ ashley.event_triggers_dict["sub_fuck_count"] = ashley.event_triggers_dict.get("sub_fuck_count", 0) + 1

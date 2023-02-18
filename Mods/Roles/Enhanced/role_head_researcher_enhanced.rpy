@@ -186,7 +186,7 @@ init -1 python:
         return False
 
 #Action definitions
-    head_researcher_suggest_testing_room = Action("Testing room reuqest", head_researcher_suggest_testing_room_requirement, "head_researcher_suggest_testing_room_label")
+    head_researcher_suggest_testing_room = Action("Testing room request", head_researcher_suggest_testing_room_requirement, "head_researcher_suggest_testing_room_label")
     head_researcher_testing_room_intro = Action("Testing Room Intro", head_researcher_testing_room_intro_requirement, "head_researcher_testing_room_intro_label")
     head_researcher_serum_trait_test = Action("Test a Serum Trait", head_researcher_serum_trait_test_requirement, "head_researcher_serum_trait_test_label",
         menu_tooltip = "Perform intensive serum trait test with the help of your head researcher on an employee.")

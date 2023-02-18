@@ -27,10 +27,11 @@ init 1 python:
 #Requirement functions
 init -1 python:
     def mc_serum_intro_requirement(the_person):
-        if mc.business.days_since_event("prod_assistant_advance") > TIER_1_TIME_DELAY:
-            if mc.business.is_open_for_business() and mc.is_at_work():
-                the_serum = find_in_list(lambda x: x.name == mc_serum_energy_regen.linked_trait, list_of_traits)
-                return the_serum.researched
+        if mc.business.days_since_event("prod_assistant_advance") > TIER_2_TIME_DELAY:
+            if testing_room_creation_policy.is_active():
+                if mc.business.is_open_for_business() and mc.is_at_work():
+                    the_serum = find_in_list(lambda x: x.name == mc_serum_energy_regen.linked_trait, list_of_traits)
+                    return the_serum.researched
         return False
 
     def mc_serum_timeout_requirement():
