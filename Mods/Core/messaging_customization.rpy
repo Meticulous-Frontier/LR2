@@ -70,6 +70,7 @@ init 2 python:
     Person.change_novelty = generic_messages_extended(Person.change_novelty, "stat_change_messages", True)
     Person.change_energy = generic_messages_extended(Person.change_energy, "stat_change_messages", True)
     Person.change_max_energy = generic_messages_extended(Person.change_max_energy, "stat_change_messages", True)
+    Person.change_stats = generic_messages_extended(Person.change_stats, "stat_change_messages", True)
 
     MainCharacter.change_energy = generic_messages_extended(MainCharacter.change_energy, "stat_change_messages", True)
     MainCharacter.change_max_energy = generic_messages_extended(MainCharacter.change_max_energy, "stat_change_messages", True)
