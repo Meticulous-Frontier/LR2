@@ -6,6 +6,7 @@ init 2:
         zorder 100
         default demo_outfit = None
         default hide_underwear = False
+        default hide_shoes = False
         default hide_base = False
         default hide_overwear = False
         default hide_list = []
