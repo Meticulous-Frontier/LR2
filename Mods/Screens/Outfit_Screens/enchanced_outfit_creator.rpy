@@ -34,11 +34,14 @@ init 10 python:
         cs = renpy.current_screen()
         hide_list = []
         if cs.scope["hide_underwear"]:
+            hide_list.append(0)
             hide_list.append(1)
-        if cs.scope["hide_base"]:
+        if cs.scope["hide_shoes"]:
             hide_list.append(2)
-        if cs.scope["hide_overwear"]:
+        if cs.scope["hide_base"]:
             hide_list.append(3)
+        if cs.scope["hide_overwear"]:
+            hide_list.append(4)
 
         cs.scope["hide_list"] = hide_list
         if cs.scope["mannequin"] == "mannequin":
@@ -327,6 +330,7 @@ init 2:
         default outfit_builder = WardrobeBuilder(None)
         default max_slut = outfit_type == "over" and 8 or 12
         default hide_underwear = False
+        default hide_shoes = False
         default hide_base = False
         default hide_overwear = False
         default hide_list = []
@@ -927,21 +931,28 @@ init 2:
                                                 textbutton "Under":
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "serum_text_style"
-                                                    xsize 78
+                                                    xsize 62
                                                     hover_background "#143869"
                                                     background ("#171717" if hide_underwear else "#14386988")
                                                     action [ToggleScreenVariable("hide_underwear", False, True), Function(preview_outfit)]
-                                                textbutton "Clothing":
+                                                textbutton "Shoe":
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "serum_text_style"
-                                                    xsize 86
+                                                    xsize 62
+                                                    hover_background "#143869"
+                                                    background ("#171717" if hide_shoes else "#14386988")
+                                                    action [ToggleScreenVariable("hide_shoes", False, True), Function(preview_outfit)]
+                                                textbutton "Cloth":
+                                                    style "textbutton_no_padding_highlight"
+                                                    text_style "serum_text_style"
+                                                    xsize 62
                                                     hover_background "#143869"
                                                     background ("#171717" if hide_base else "#14386988")
                                                     action [ToggleScreenVariable("hide_base", False, True), Function(preview_outfit)]
                                                 textbutton "Over":
                                                     style "textbutton_no_padding_highlight"
                                                     text_style "serum_text_style"
-                                                    xsize 78
+                                                    xsize 62
                                                     hover_background "#143869"
                                                     background ("#171717" if hide_overwear else "#14386988")
                                                     action [ToggleScreenVariable("hide_overwear", False, True), Function(preview_outfit)]
