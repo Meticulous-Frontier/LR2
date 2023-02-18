@@ -85,3 +85,4 @@ init 2 python:
     Person.change_int = generic_messages_extended(Person.change_int, "skill_change_messages", True)
     Person.change_focus = generic_messages_extended(Person.change_focus, "skill_change_messages", True)
     Person.change_sex_skill = generic_messages_extended(Person.change_sex_skill, "skill_change_messages", True)
+    Person.update_work_skill = generic_messages_extended(Person.update_work_skill, "skill_change_messages", True)
