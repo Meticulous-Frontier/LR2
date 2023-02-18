@@ -167,6 +167,9 @@ init 0 python:
         if x.has_extension:
             x.has_extension.layer += 1
 
+    # special case, it's part upper (layer 3) and part underwear (layer 1)
+    leotard_bottom.layer = 1
+
     # move makeup to layer 2 (in between layer)
     for x in [light_eye_shadow, heavy_eye_shadow, blush, lipstick]:
         x.layer += 1
