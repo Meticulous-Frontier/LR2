@@ -583,7 +583,7 @@ init 6 python:
             outfit = self.get_overwear()
             return any(x for x in outfit if x in WardrobeBuilder.preferences["showing her ass"]["lower_body"] + WardrobeBuilder.preferences["showing her ass"]["upper_body"])
         else:
-            return any(x for x in outfit if x in WardrobeBuilder.preferences["showing her ass"]["lower_body"] + WardrobeBuilder.preferences["showing her ass"]["upper_body"])
+            return any(x for x in self if x in WardrobeBuilder.preferences["showing her ass"]["lower_body"] + WardrobeBuilder.preferences["showing her ass"]["upper_body"])
 
     Outfit.shows_off_her_ass = shows_off_her_ass
 
@@ -592,6 +592,6 @@ init 6 python:
             outfit = self.get_overwear()
             return any(x for x in outfit if x in WardrobeBuilder.preferences["showing her tits"])
         else:
-            return any(x for x in outfit if x in WardrobeBuilder.preferences["showing her tits"])
+            return any(x for x in self if x in WardrobeBuilder.preferences["showing her tits"])
 
     Outfit.shows_off_her_tits = shows_off_her_tits
