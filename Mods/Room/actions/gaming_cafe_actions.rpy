@@ -52,7 +52,7 @@ init -1 python:
         return mc.business.event_triggers_dict.get("guild_quest_level", 8)
 
     # actions available from entry point action
-    gaming_cafe_grind_character_action = Action("Play Guild Quest 2", gaming_cafe_grind_character_requirement, "gaming_cafe_grind_character_label")
+    gaming_cafe_grind_character_action = Action("Play Guild Quest 2 {image=gui/heart/Time_Advance.png}", gaming_cafe_grind_character_requirement, "gaming_cafe_grind_character_label")
     gaming_cafe_buy_max_level_token_action = Action("Buy max level token for Guild Quest 2", gaming_cafe_buy_max_level_token_requirement, "gaming_cafe_buy_max_level_token_label")
     gaming_cafe_adult_swim = Action("Enter Adult Section", gaming_cafe_adult_swim_requirement, "gaming_cafe_adult_swim_label")
 
