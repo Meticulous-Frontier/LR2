@@ -452,7 +452,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             call remove_condom_go_raw(the_person, current_node.position) from _go_raw__girl_in_charge_01
             $ mc.condom = False
             $ using_condom = False
-        if mc.recently_orgasmed and not used_mc_energy_serum:
+        if mc.recently_orgasmed and not used_mc_energy_serum and allow_continue:
             if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 2 and mc.energy > 30:
                 $ mc.recently_orgasmed = False
                 $ used_mc_energy_serum = True   # prevent too long looping if she has a lot of energy

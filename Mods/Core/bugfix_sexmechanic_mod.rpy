@@ -533,7 +533,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 if has_taken_control:
                     $ has_taken_control = False
                     $ the_person.call_dialogue("sex_take_control")
-                    call get_fucked(the_person, private = private, the_goal = "get off",  report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition) from _call_get_fucked
+                    call get_fucked(the_person, private = private, the_goal = "get off",  report_log = report_log, ignore_taboo = ignore_taboo, prohibit_tags = prohibit_tags, condition = condition, allow_continue = not position_locked) from _call_get_fucked
                     $ round_choice = "Girl Leave"
 
                 if round_choice == "Change" and position_choice and object_choice:
@@ -666,7 +666,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 if not finished:    # when we switched to threesome finished is True
                     if mc.condom and mc.recently_orgasmed: # you orgasmed so you used your condom.
                         $ mc.condom = False
-                    if mc.recently_orgasmed:
+                    if mc.recently_orgasmed and not position_locked:
                         if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 2 and mc.energy > 30:
                             $ mc.recently_orgasmed = False
                             $ allow_transitions = False
