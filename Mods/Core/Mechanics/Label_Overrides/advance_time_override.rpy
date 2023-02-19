@@ -236,7 +236,6 @@ init 5 python:
         return
 
     def advance_time_assign_limited_time_events(people):
-        start_time = time.time()
         for person in [x[0] for x in people if x[0].title or x[0].mc_title != "Stranger"]:
             if renpy.random.randint(0,100) < 10: #Only assign one to 10% of people, to cut down on the number of people we're checking.
                 crisis = get_limited_time_action_for_person(person)
