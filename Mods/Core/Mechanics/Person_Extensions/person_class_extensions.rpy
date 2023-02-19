@@ -1739,7 +1739,7 @@ init -1 python:
 
     def person_is_at_work(self): #Checks to see if the character is at work.
         # special handling for college interns
-        if self.has_role("College Intern") and self.location in [rd_division, p_division, m_division, office]:
+        if self.is_intern() and self.location in [rd_division, p_division, m_division, office]:
             return True
 
         if self.has_role(maid_role):

@@ -321,13 +321,14 @@ label horny_at_work_crisis_enhanced_label():
             $ clear_scene()
             $ scene_manager = Scene()
             "You're going to need to get this taken care of if you want to get any work done."
+
+            $ old_location = mc.location
+            $ mc.change_location(work_bathroom)
             "You get up from your desk and head for the washrooms, attempting to hide your erection from your staff as you go."
 
             $ active_person = horny_at_work_get_follower()
             if active_person is not None:
                 #You were followed.
-                $ old_location = mc.location
-                $ mc.change_location(work_bathroom)
                 "You relax when you reach the bathroom, but a moment after you enter [active_person.title] opens the door and comes inside too."
                 $ active_person.draw_person()
                 mc.name "[active_person.title], I..."
@@ -373,14 +374,13 @@ label horny_at_work_crisis_enhanced_label():
                         "When you're finished you clean up and get back to work, your mind now crystal clear."
 
                 $ del active_person
-                $ mc.change_location(old_location)
-                $ old_location = None
-
             else:
                 "Once you have some privacy you pull some porn up on your phone, pull out your dick, and take matters into your own hand."
                 call bedroom_masturbation(location_description = "bathroom", edging_available = False, should_advance_time = False) from _call_bedroom_masturbation_2
                 "When you're finished you clean up and get back to work, your mind now crystal clear."
 
+            $ mc.change_location(old_location)
+            $ old_location = None
 
         "Ask [the_person.title] to come over (tooltip)She got you turned on, she should be the one to get you off." if the_person is not None:
             mc.name "[the_person.title], I need you to come over here for a moment."
