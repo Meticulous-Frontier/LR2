@@ -60,107 +60,107 @@ init 5 python:
     }
 
     neutral_color_map = {
-    "Jeans": ["dark denim", "denim", "light denim", "midnight black"],
-    "Suit_Pants": ["midnight black", "khaki", "grey"],
-    "Capris": ["dark denim", "denim", "dark grey"],
-    "Leggings": ["midnight black", "dark grey"],
-    "Leggings_Pattern": ["pale pink", "light grey", "white smoke"],
-    "Jean_Hotpants": ["dark denim", "denim", "light denim", "midnight black", "dark grey"],
-    "Booty_Shorts": ["midnight black", "dark grey"],
-    "Daisy_Dukes": ["light denim", "sky blue"],
+        "Jeans": ["dark denim", "denim", "light denim", "midnight black"],
+        "Suit_Pants": ["midnight black", "khaki", "grey"],
+        "Capris": ["dark denim", "denim", "dark grey"],
+        "Leggings": ["midnight black", "dark grey"],
+        "Leggings_Pattern": ["pale pink", "light grey", "white smoke"],
+        "Jean_Hotpants": ["dark denim", "denim", "light denim", "midnight black", "dark grey"],
+        "Booty_Shorts": ["midnight black", "dark grey"],
+        "Daisy_Dukes": ["light denim", "sky blue"],
 
-    "Long_Skirt": ["midnight black"],
-    "Pencil_Skirt": ["midnight black", "dark grey", "grey", "khaki", "white smoke"],
-    "Lace_Skirt": ["midnight black", "white smoke", "light grey"],
-    "Skirt": ["khaki", "light grey", "light beige", "white smoke"],
-    "Belted_Skirt": ["khaki", "grey", "light grey"],
-    "Belted_Skirt_Pattern": ["leather", "dark grey"],
-    "Mini_Skirt": ["khaki", "dark grey", "white smoke"],
-    "Micro_Skirt": ["midnight black", "light grey", "white smoke"],
+        "Long_Skirt": ["midnight black"],
+        "Pencil_Skirt": ["midnight black", "dark grey", "grey", "khaki", "white smoke"],
+        "Lace_Skirt": ["midnight black", "white smoke", "light grey"],
+        "Skirt": ["khaki", "light grey", "light beige", "white smoke"],
+        "Belted_Skirt": ["khaki", "grey", "light grey"],
+        "Belted_Skirt_Pattern": ["leather", "dark grey"],
+        "Mini_Skirt": ["khaki", "dark grey", "white smoke"],
+        "Micro_Skirt": ["midnight black", "light grey", "white smoke"],
 
-    "Lab_Coat": ["midnight black", "white smoke", "light grey"],
-    "Suit_Jacket": ["midnight black", "white smoke", "dark denim", "dark grey"],
-    "Vest": ["midnight black", "white smoke", "light grey", "leather"],
+        "Lab_Coat": ["midnight black", "white smoke", "light grey"],
+        "Suit_Jacket": ["midnight black", "white smoke", "dark denim", "dark grey"],
+        "Vest": ["midnight black", "white smoke", "light grey", "leather"],
 
-    "Short_Socks": ["white smoke", "light grey", "midnight black"],
-    "Long_Socks": ["midnight black", "white smoke"],
-    "High_Socks": ["midnight black", "white smoke", "light grey"],
-    "Thigh_Highs": ["midnight black", "white smoke", "light grey", "mocha"],
-    "Fishnets": ["midnight black", "white smoke", "dark grey"],
-    "Garter_and_Fishnets": ["charcoal", "dark grey", "grey", "white smoke"],
-    "Garter_and_Fishnets_Pattern": ["charcoal", "white smoke"],
+        "Short_Socks": ["white smoke", "light grey", "midnight black"],
+        "Long_Socks": ["midnight black", "white smoke"],
+        "High_Socks": ["midnight black", "white smoke", "light grey"],
+        "Thigh_Highs": ["midnight black", "white smoke", "light grey", "mocha"],
+        "Fishnets": ["midnight black", "white smoke", "dark grey"],
+        "Garter_and_Fishnets": ["charcoal", "dark grey", "grey", "white smoke"],
+        "Garter_and_Fishnets_Pattern": ["charcoal", "white smoke"],
 
-    "Sandles": ["white smoke", "midnight black", "leather", "grey"],
-    "Shoes": ["leather", "light grey"],
-    "Slips": ["leather", "white smoke", "midnight black", "mocha", "dark grey"],
-    "Sneakers": ["grey", "white smoke", "light beige"],
-    "Sneakers_Pattern": ["white smoke"],
-    "Sandal_Heels": ["midnight black", "grey", "white smoke", "light beige"],
-    "Pumps": ["white smoke", "charcoal"],
-    "Heels": ["midnight black", "charcoal", "white smoke"],
-    "High_Heels": ["midnight black", "white smoke", "grey"],
-    "Boot_Heels": ["leather", "grey"],
-    "High_Boots": ["charcoal", "leather"],
-    "Thigh_Boots": ["charcoal", "leather", "light grey"],
+        "Sandles": ["white smoke", "midnight black", "leather", "grey"],
+        "Shoes": ["leather", "light grey"],
+        "Slips": ["leather", "white smoke", "midnight black", "mocha", "dark grey"],
+        "Sneakers": ["grey", "white smoke", "light beige"],
+        "Sneakers_Pattern": ["white smoke"],
+        "Sandal_Heels": ["midnight black", "grey", "white smoke", "light beige"],
+        "Pumps": ["white smoke", "charcoal"],
+        "Heels": ["midnight black", "charcoal", "white smoke"],
+        "High_Heels": ["midnight black", "white smoke", "grey"],
+        "Boot_Heels": ["leather", "grey"],
+        "High_Boots": ["charcoal", "leather"],
+        "Thigh_Boots": ["charcoal", "leather", "light grey"],
 
-    "Tshirt": ["midnight black", "dark grey", "white smoke"],
-    "Tshirt_Pattern": ["grey", "light grey"],
-    "Lace_Sweater": ["white smoke", "light grey", "midnight black"],
-    "Long_Sweater": ["midnight black", "light grey", "white smoke"],
-    "Sleveless_Top": ["midnight black", "dark grey", "white smoke"],
-    "Long_Tshirt": ["midnight black", "white smoke", "dark grey"],
-    "Long_Tshirt_Pattern": ["white smoke", "light grey", "light beige"],
-    "Frilly_Longsleeve_Shirt": ["white smoke", "dark grey", "charcoal"],
-    "Sweater": ["leather", "white smoke", "charcoal", "khaki"],
-    "Belted_Top": ["leather", "khaki", "grey", "white smoke", "charcoal"],
-    "Lace_Crop_Top": ["charcoal", "light beige", "light grey", "white smoke"],
-    "Tanktop": ["leather", "white smoke", "grey", "midnight black"],
-    "Camisole": ["midnight black", "dark grey", "white smoke"],
-    "Long_Sleeve_Blouse": ["white smoke", "midnight black", "sky blue"],
-    "Short_Sleeve_Blouse": ["charcoal", "white smoke", "light beige", "light grey"],
-    "Wrapped_Blouse": ["charcoal", "light beige", "white smoke"],
-    "Tube_Top": ["white smoke", "midnight black", "dark grey", "charcoal"],
-    "Tie_Sweater": ["midnight black", "dark grey", "white smoke"],
-    "Tie_Sweater_Pattern": ["scarlet", "pale pink", "light grey", "light beige"],
-    "Dress_Shirt": ["charcoal", "grey", "white smoke"],
-    "Tight_Vest": ["white smoke", "light beige", "dark grey", "charcoal"],
+        "Tshirt": ["midnight black", "dark grey", "white smoke"],
+        "Tshirt_Pattern": ["grey", "light grey"],
+        "Lace_Sweater": ["white smoke", "light grey", "midnight black"],
+        "Long_Sweater": ["midnight black", "light grey", "white smoke"],
+        "Sleveless_Top": ["midnight black", "dark grey", "white smoke"],
+        "Long_Tshirt": ["midnight black", "white smoke", "dark grey"],
+        "Long_Tshirt_Pattern": ["white smoke", "light grey", "light beige"],
+        "Frilly_Longsleeve_Shirt": ["white smoke", "dark grey", "charcoal"],
+        "Sweater": ["leather", "white smoke", "charcoal", "khaki"],
+        "Belted_Top": ["leather", "khaki", "grey", "white smoke", "charcoal"],
+        "Lace_Crop_Top": ["charcoal", "light beige", "light grey", "white smoke"],
+        "Tanktop": ["leather", "white smoke", "grey", "midnight black"],
+        "Camisole": ["midnight black", "dark grey", "white smoke"],
+        "Long_Sleeve_Blouse": ["white smoke", "midnight black", "sky blue"],
+        "Short_Sleeve_Blouse": ["charcoal", "white smoke", "light beige", "light grey"],
+        "Wrapped_Blouse": ["charcoal", "light beige", "white smoke"],
+        "Tube_Top": ["white smoke", "midnight black", "dark grey", "charcoal"],
+        "Tie_Sweater": ["midnight black", "dark grey", "white smoke"],
+        "Tie_Sweater_Pattern": ["scarlet", "pale pink", "light grey", "light beige"],
+        "Dress_Shirt": ["charcoal", "grey", "white smoke"],
+        "Tight_Vest": ["white smoke", "light beige", "dark grey", "charcoal"],
 
-    "Wool_Scarf": ["khaki", "charcoal", "grey", "white smoke"],
-    "Lace_Choker": ["charcoal", "white smoke", "dark grey", "pale pink"],
-    "Wide_Choker": ["charcoal", "white smoke", "dark grey", "pale pink"],
-    "Spiked_Choker": ["charcoal", "white smoke", "dark grey", "pale pink"],
-    # "Necklace_Set"
-    # "Gold_Chain_Necklace"
-    # "Collar_Breed"    # probably just leave these collars alone...
-    # "Collar_Cum_Slut"
-    # "Collar_Fuck_Doll"
+        "Wool_Scarf": ["khaki", "charcoal", "grey", "white smoke"],
+        "Lace_Choker": ["charcoal", "white smoke", "dark grey", "pale pink"],
+        "Wide_Choker": ["charcoal", "white smoke", "dark grey", "pale pink"],
+        "Spiked_Choker": ["charcoal", "white smoke", "dark grey", "pale pink"],
+        # "Necklace_Set"
+        # "Gold_Chain_Necklace"
+        # "Collar_Breed"    # probably just leave these collars alone...
+        # "Collar_Cum_Slut"
+        # "Collar_Fuck_Doll"
 
-    "Forearm_Gloves": ["charcoal", "light beige", "light grey", "white smoke"],
-    "Forearm_Gloves_Pattern": ["charcoal", "pale pink", "white smoke"],
-    # "Copper_Bracelet"
-    # "Gold_Bracelet"
-    # "Spiked_Bracelet"
-    # "Bead_Bracelet"
-    # "Colourful_Bracelets"
-    #
-    # "Diamond_Ring"
-    # "Garnet_Ring"
-    # "Copper_Ring_Set"
+        "Forearm_Gloves": ["charcoal", "light beige", "light grey", "white smoke"],
+        "Forearm_Gloves_Pattern": ["charcoal", "pale pink", "white smoke"],
+        # "Copper_Bracelet"
+        # "Gold_Bracelet"
+        # "Spiked_Bracelet"
+        # "Bead_Bracelet"
+        # "Colourful_Bracelets"
+        #
+        # "Diamond_Ring"
+        # "Garnet_Ring"
+        # "Copper_Ring_Set"
 
-    # "Chandelier_Earings" #TODO
-    # "Gold_Earings"
-    "Modern_Glasses": ["charcoal", "midnight black"],
-    "Big_Glasses": ["charcoal", "midnight black"],
-    "Sunglasses": ["charcoal", "midnight black"],
-    "Head_Towel": ["white smoke"],
-    # "Ball_Gag"
-    # "Upper_Eye_Shadow"
-    # "Full_Shimmer"
-    # "Blush"
-    # "Lipstick"
+        # "Chandelier_Earings" #TODO
+        # "Gold_Earings"
+        "Modern_Glasses": ["charcoal", "midnight black"],
+        "Big_Glasses": ["charcoal", "midnight black"],
+        "Sunglasses": ["charcoal", "midnight black"],
+        "Head_Towel": ["white smoke"],
+        # "Ball_Gag"
+        # "Upper_Eye_Shadow"
+        # "Full_Shimmer"
+        # "Blush"
+        # "Lipstick"
 
 
-    "Underwear": ["charcoal", "white smoke", "dark grey", "pale pink"]
+        "Underwear": ["charcoal", "white smoke", "dark grey", "pale pink"]
     }
 
     swap_bottoms_map = {

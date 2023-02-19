@@ -60,13 +60,11 @@ init -1 python:
     #####################################
 
     def vagina_visible_enhanced(self):
-            return _get_transparency_factor(self.lower_body) >= 1.0
-
+        return _get_transparency_factor(self.lower_body) >= 1.0
     Outfit.vagina_visible = vagina_visible_enhanced
 
     def tits_visible_enhanced(self):
-            return _get_transparency_factor(self.upper_body) >= 1.0
-
+        return _get_transparency_factor(self.upper_body) >= 1.0
     Outfit.tits_visible = tits_visible_enhanced
 
     def bra_covered_enhanced(self):
@@ -532,6 +530,18 @@ init 6 python:
 
     Outfit.get_full_strip_list = get_full_strip_list_enhanced
 
+    # enhances original function to only return items
+    # on layer 1 and higher
+    def get_tit_strip_list_extended(org_func):
+        def get_tit_strip_list_wrapper(outfit, visible_enough = True):
+            result = org_func(outfit, visible_enough)
+            # only return items not on layer 0 (for now cincher, heart_pasties)
+            return [x for x in result if x.layer != 0]
+
+        return get_tit_strip_list_wrapper
+
+    Outfit.get_tit_strip_list = get_tit_strip_list_extended(Outfit.get_tit_strip_list)
+
     def get_total_slut_modifiers_enhanced(self):
         return sum(x.get_slut_value() for x in self)
 
@@ -568,14 +578,20 @@ init 6 python:
 
     Outfit.has_hose = has_hose
 
-    # enhances original function to only return items
-    # on layer 1 and higher
-    def get_tit_strip_list_extended(org_func):
-        def get_tit_strip_list_wrapper(outfit, visible_enough = True):
-            result = org_func(outfit, visible_enough)
-            # only return items not on layer 0 (for now cincher, heart_pasties)
-            return [x for x in result if x.layer != 0]
+    def shows_off_her_ass(self):
+        if self.has_overwear():
+            outfit = self.get_overwear()
+            return any(x for x in outfit if x in WardrobeBuilder.preferences["showing her ass"]["lower_body"] + WardrobeBuilder.preferences["showing her ass"]["upper_body"])
+        else:
+            return any(x for x in outfit if x in WardrobeBuilder.preferences["showing her ass"]["lower_body"] + WardrobeBuilder.preferences["showing her ass"]["upper_body"])
 
-        return get_tit_strip_list_wrapper
+    Outfit.shows_off_her_ass = shows_off_her_ass
 
-    Outfit.get_tit_strip_list = get_tit_strip_list_extended(Outfit.get_tit_strip_list)
+    def shows_off_her_tits(self):
+        if self.has_overwear():
+            outfit = self.get_overwear()
+            return any(x for x in outfit if x in WardrobeBuilder.preferences["showing her tits"])
+        else:
+            return any(x for x in outfit if x in WardrobeBuilder.preferences["showing her tits"])
+
+    Outfit.shows_off_her_tits = shows_off_her_tits
