@@ -213,7 +213,7 @@ label crisis_nighttime_attaboy_label():
                 "When you finish, [the_person.possessive_title] lays back in her bed."
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
                 the_person "I think I'll be able to sleep well now!"
-                "You say goodnght to [the_person.possessive_title], then quietly got back to your room for the night."
+                "You say goodnight to [the_person.possessive_title], then quietly got back to your room for the night."
 
                 $ mc.location.show_background()
                 $ the_person.apply_planned_outfit()
@@ -269,7 +269,7 @@ label crisis_nighttime_attaboy_label():
             $ the_person.change_slut(1, 60)
 
     the_person "Anyway, good night! Hopefully I'll see you tomorrow."
-    mc.name "Good night"
+    mc.name "Good night."
     $ mc.end_text_convo()
     $ the_person.apply_planned_outfit()
     $ clear_scene()
