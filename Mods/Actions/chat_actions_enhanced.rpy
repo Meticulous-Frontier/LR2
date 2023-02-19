@@ -12,6 +12,24 @@ label flirt_person_enhanced(the_person): #Tier 1. Raises a character's sluttines
         mc.name "You look so good today [the_person.title], you're making me want to do some very naughty things to you."
         $ the_person.call_dialogue("flirt_response_affair")
 
+    elif the_person.has_role(prostitute_role) and the_person.love <= 40:
+        if the_person.outfit.shows_off_her_ass():
+            mc.name "Hello [the_person.title], your outfit really shows off your nice ass."
+        elif the_person.outfit.shows_off_her_tits():
+            mc.name "Hello [the_person.title], your outfit really shows off your [the_person.tits_description]."
+        else:
+            mc.name "Hi [the_person.title], your are looking quite perky today."
+
+        the_person "Thanks, I thought I looked pretty hot in it too."
+        "As she is saying that, she moves in closer, putting her arms around your shoulders."
+        $ the_person.draw_person(position = "kissing")
+        $ mc.change_locked_clarity(10)
+        the_person "Would you like to do more than just look?"
+        the_person "Well if you got the cash for it, you can even touch it."
+        mc.name "Very tempting, I will let you know."
+        $ the_person.draw_person()
+        the_person "Alright, anything else you wanted?"
+
     elif the_person.love <= 20:
         #Low Love
         if the_person.outfit.get_full_outfit_slut_score() > 30:
