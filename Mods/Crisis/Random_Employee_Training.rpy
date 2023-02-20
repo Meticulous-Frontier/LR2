@@ -101,6 +101,9 @@ label SB_one_on_one_label():
     if the_person is None: # "No one eligible for training!"
         return
 
+    $ old_location = mc.location
+    $ mc.change_location(lobby)
+
     "You take a quick break from work to go get a quick snack from the vending machine. While you are trying do decide what snack to buy, [the_person.possessive_title] enters the break room."
     $ the_person.draw_person()
     the_person "Oh, hey [the_person.mc_title]!"
@@ -177,5 +180,8 @@ label SB_one_on_one_label():
             the_person "Sorry, I just don't think I would ever be happy doing [topic]."
     else:
         the_person "That's okay, [the_person.mc_title], I understand. Maybe another time then!"
+
+    $ mc.change_location(old_location)
+    $ old_location = None
     $ clear_scene()
     return
