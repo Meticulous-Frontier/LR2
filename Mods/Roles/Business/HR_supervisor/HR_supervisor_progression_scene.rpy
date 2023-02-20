@@ -688,4 +688,6 @@ label hr_director_post_scene(the_group):
     else:
         $ the_person.apply_planned_outfit()
         "She quickly starts to get dressed to continue your meeting."
+
+    $ the_person.draw_person(position = "sitting")
     return

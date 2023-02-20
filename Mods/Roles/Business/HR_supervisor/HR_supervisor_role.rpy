@@ -1435,7 +1435,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ the_person.apply_planned_outfit()
         "She quickly starts to get dressed to continue your meeting."
 
-
+    $ the_person.draw_person(position = "sitting")
     return
 
 label HR_director_mind_control_label(the_person):
