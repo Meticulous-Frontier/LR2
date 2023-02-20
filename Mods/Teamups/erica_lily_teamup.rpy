@@ -441,6 +441,7 @@ label erica_lily_weekly_photoshoot_label(the_person):
         $ mc.business.add_mandatory_morning_crisis(erica_lily_post_insta_morning_mand)
 
     $ erica.add_unique_on_room_enter_event(erica_lily_weekly_photoshoot)
+    $ mc.change_location(bedroom)
     $ del lily_insta_outfit
     $ del erica_insta_outfit
     $ del current_pos
