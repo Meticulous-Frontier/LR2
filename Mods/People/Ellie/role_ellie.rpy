@@ -623,7 +623,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
     "[the_person.possessive_title] sits back down at her desk, and you decide to let her keep working, but you can tell you've struck a nerve with her."
     $ clear_scene()
     "You decide to leave her alone for now. You finish inspecting the research department then head to your office."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You sit down and start to work on some paperwork. You pull up some emails and get to work responding to some supply requests from logistics."
     "*KNOCK KNOCK*"
     $ the_person.draw_person()
@@ -774,7 +774,7 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
         $ the_person.draw_person(position = "blowjob")
         $ mc.change_locked_clarity(50)
         "In a flash she has your cock out."
-        call fuck_person(the_person, private=True, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True) from _call_ellie_arousal_relief_01
+        call fuck_person(the_person, private=True, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, position_locked = True, self_strip = False) from _call_ellie_arousal_relief_01
     elif the_person.has_anal_fetish():
         "[the_person.title] closes your office door and locks it. Then she walks over to your desk, and bends over it."
         the_person "It's been a while since you had it in my ass... why don't you just take me for a quickie?"
@@ -793,15 +793,22 @@ label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness 
         $ mc.change_locked_clarity(50)
         "She fumbles with your pants a bit, but eventually managed to pull your cock out."
         "She gives it a couple licks before she gets started."
-        call fuck_person(the_person, private=True, start_position = blowjob, start_object = make_floor(), skip_intro = True) from _call_ellie_arousal_relief_04
-    if mc.arousal < 20:
+        call fuck_person(the_person, private=True, start_position = blowjob, start_object = make_floor(), skip_intro = True, position_locked = True, self_strip = False) from _call_ellie_arousal_relief_04
+
+    $ report_log = _return
+    if report_log.get("guy orgasms", 0) > 0:
         "After you finish, you feel much better."
         mc.name "Thank you [the_person.title], I really needed that."
         the_person "Glad to help!"
         $ the_person.change_stats(happiness = 10, love = 5, obedience = 10)
+    $ the_person.draw_person()
+    $ the_person.review_outfit()
+    "She smiles at you while putting her clothes back in order."
+    mc.name "Alright, now get back to work."
+    $ the_person.draw_person(position = "walking_away")
+    the_person "Of course, [the_person.mc_title]."
     $ clear_scene()
-    "You dismiss her. After you get yourself cleaned up, you get back to work."
-    $ mc.location.show_background()
+    "After you get yourself cleaned up, you get back to work."
     return
 
 label ellie_grope_followup_label():
