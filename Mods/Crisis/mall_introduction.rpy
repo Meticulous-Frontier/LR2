@@ -65,6 +65,8 @@ label mall_introduction_action_label():
     python:
         title_choice = get_random_from_list(stranger.get_player_titles())
         stranger.set_mc_title(title_choice)
+        # set to player full name for intro
+        title_choice = mc.name + " " + mc.last_name
 
     if known_person.is_employee():
         known_person "And this is my boss, [title_choice]."
