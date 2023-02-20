@@ -30,3 +30,17 @@ init 1 python:
                     mc.log_event(self.name + " developed side effect " + the_side_effect.name + " due to " + trait.name, "float_text_blue")
 
     SerumDesign.generate_side_effects = generate_side_effects_enhanced
+
+    def serum_design_update_attention_extended(org_func):
+        def update_attention_wrapper(serum_design):
+            # original function
+            org_func(serum_design)
+            # extension code
+            max_value = serum_design.attention
+            if max_value > 0 and clinical_testing in serum_design.traits:
+                max_value -= 1
+            serum_design.attention = max_value
+
+        return update_attention_wrapper
+
+    SerumDesign.update_attention = serum_design_update_attention_extended(SerumDesign.update_attention)
