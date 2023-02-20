@@ -18,10 +18,18 @@ init 5 python:
         # nora_sluttiness_boost.tier = 1
         return
 
+    def add_extra_capability_to_clinical_testing_trait():
+        clinical_testing = find_serum_by_name("Clinical Testing Procedures")
+        if clinical_testing:
+            clinical_testing.attention = -1
+            clinical_testing.desc = "A set of careful tests rather than any single ingredient or process. Serums may be put through formal clinical testing, significantly boosting their value to the general public. This also significantly raises the research cost of each serum design, but also lowers overall attention of design by 1."
+        return
+
 
 label fix_nora_serum_traits(stack):
     python:
         fix_nora_serum_traits_names()
+        add_extra_capability_to_clinical_testing_trait()
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
     return

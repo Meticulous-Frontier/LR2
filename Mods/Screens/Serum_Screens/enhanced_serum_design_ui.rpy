@@ -388,7 +388,7 @@ init 2:
                 spacing 40
                 textbutton "Create Design":
                     action [Hide("trait_tooltip"), Hide("serum_design_ui"), Hide("serum_tooltip"), Return(starting_serum)]
-                    sensitive (starting_serum.slots >= starting_serum.slots_used and __builtin__.len(starting_serum.traits) and starting_serum.has_tag("Production")) > 0
+                    sensitive (starting_serum.slots >= starting_serum.slots_used and __builtin__.len(starting_serum.traits) > 0 and starting_serum.has_tag("Production"))
 
                     style "textbutton_style"
                     text_style "serum_text_style"
