@@ -30,12 +30,25 @@ init 2:
             aspect_tags += "{/size}"
             return aspect_tags
 
+        def get_filtered_traits(traits):
+            cs = renpy.current_screen()
+            show_mental = cs.scope["show_mental"]
+            show_sexual = cs.scope["show_sexual"]
+            show_physical = cs.scope["show_physical"]
+            show_medical = cs.scope["show_medical"]
+
+            return [x for x in traits if (show_mental or x.mental_aspect != 0) and (show_sexual or x.sexual_aspect != 0) and (show_physical or x.physical_aspect != 0) and (show_medical or x.medical_aspect != 0)]
+
 
     screen serum_design_ui(starting_serum,current_traits):
         $ renpy.block_rollback()
 
         default decorated = sorted([(trait.exclude_tags or "zzz", trait.name, i, trait) for i, trait in enumerate(list_of_traits + mc.business.blueprinted_traits)])
         default sorted_traits = [trait for exclude_tags, name, i, trait in decorated]
+        default show_mental = True
+        default show_sexual = True
+        default show_physical = True
+        default show_medical = True
 
         add "Science_Menu_Background.png"
         default trait_tooltip = primitive_serum_prod
@@ -67,14 +80,61 @@ init 2:
                                 scrollbars "vertical"
                                 mousewheel True
                                 vbox:
-                                    for trait in sorted(list_of_traits + mc.business.blueprinted_traits, key = lambda trait: trait.tier, reverse = True): # Sort traits by exclude tags (So all production traits are grouped, for example), then by tier (so the highest tier production tag ends up at the top
-                                        if trait not in starting_serum.traits and trait.researched and "Production" in trait.exclude_tags:
+                                    for trait in sorted([x for x in list_of_traits + mc.business.blueprinted_traits if x.researched and x not in starting_serum.traits and "Production" in x.exclude_tags], key = lambda trait: trait.tier, reverse = True):
+                                        $ trait_tags = get_exclude_tags(trait)
+                                        $ trait_allowed = get_trait_allowed(starting_serum, trait)
+
+                                        #$ trait_side_effects_text = get_trait_side_effect_text(trait)
+                                        #$ trait_mastery_text = get_trait_mastery_text(trait)
+                                                    #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                        textbutton "[trait.name][trait_tags]":
+                                            style "textbutton_style"
+                                            text_style "serum_text_style"
+                                            xsize 530
+                                            sensitive trait_allowed
+                                            action [
+                                                Function(starting_serum.add_trait,trait)
+                                            ]
+                                            hovered [
+                                                SetScreenVariable("trait_tooltip", trait)
+                                            ]
+
+                                            #unhovered [
+                                            #Hide("trait_tooltip")
+                                            #]
+
+                    frame:
+                        background "#000080"
+                        xsize 530
+                        text "Add Serum Traits" style "menu_text_title_style" xalign .5
+
+                    frame:
+                        background "#0a142688"
+                        xalign 0.5
+                        xsize 530
+                        ysize ((490 + 216) if starting_serum.has_production_trait() else 490)
+
+                        viewport:
+                            xsize 530
+                            scrollbars "vertical"
+                            mousewheel True
+
+                            vbox:
+                                for dt in range(mc.business.research_tier + 1, -1, -1):
+                                    if any([x for x in get_filtered_traits(list_of_traits + mc.business.blueprinted_traits) if x.tier == dt and x not in starting_serum.traits and x.researched and "Production" not in x.exclude_tags]):
+
+                                        frame:
+                                            background "#000000"
+                                            xsize 530
+                                            text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
+
+                                        for trait in [x for x in get_filtered_traits(sorted_traits) if x.tier == dt and x.researched and x not in starting_serum.traits and "Production" not in x.exclude_tags]:
                                             $ trait_tags = get_exclude_tags(trait)
                                             $ trait_allowed = get_trait_allowed(starting_serum, trait)
 
                                             #$ trait_side_effects_text = get_trait_side_effect_text(trait)
                                             #$ trait_mastery_text = get_trait_mastery_text(trait)
-                                                        #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
+                                                            #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
                                             textbutton "[trait.name][trait_tags]":
                                                 style "textbutton_style"
                                                 text_style "serum_text_style"
@@ -94,51 +154,38 @@ init 2:
                     frame:
                         background "#000080"
                         xsize 530
-                        text "Add Serum Traits" style "menu_text_title_style" xalign .5
+                        text "Aspect Filter" style "menu_text_title_style" xalign .5
 
                     frame:
                         background "#0a142688"
                         xalign 0.5
                         xsize 530
-                        ysize ((574 + 175) if starting_serum.has_production_trait() else 574)
+                        grid 4 1 xanchor 0.5 xalign 0.5 xfill True:
+                            textbutton "{color=#387aff}Mental{/color}":
+                                style "textbutton_style"
+                                text_style "serum_text_style"
+                                hover_background "#143869"
+                                background ("#171717" if show_mental else "#14386988")
+                                action [ToggleScreenVariable("show_mental")]
+                            textbutton "{color=#00AA00}Physical{/color}":
+                                style "textbutton_style"
+                                text_style "serum_text_style"
+                                hover_background "#143869"
+                                background ("#171717" if show_physical else "#14386988")
+                                action [ToggleScreenVariable("show_physical")]
+                            textbutton "{color=#FFC0CB}Sexual{/color}":
+                                style "textbutton_style"
+                                text_style "serum_text_style"
+                                hover_background "#143869"
+                                background ("#171717" if show_sexual else "#14386988")
+                                action [ToggleScreenVariable("show_sexual")]
+                            textbutton "{color=#FFFFFF}Medical{/color}":
+                                style "textbutton_style"
+                                text_style "serum_text_style"
+                                hover_background "#143869"
+                                background ("#171717" if show_medical else "#14386988")
+                                action [ToggleScreenVariable("show_medical")]
 
-                        viewport:
-                            xsize 530
-                            scrollbars "vertical"
-                            mousewheel True
-
-                            vbox:
-                                for dt in range(mc.business.research_tier + 1, -1, -1):
-                                    if any([x for x in list_of_traits + mc.business.blueprinted_traits if x.tier == dt and x not in starting_serum.traits and x.researched and "Production" not in x.exclude_tags]):
-
-                                        frame:
-                                            background "#000000"
-                                            xsize 530
-                                            text "Tier " + str(dt) style "serum_text_style_header" xalign 0.5
-
-                                        for trait in sorted_traits:
-                                            if trait.tier == dt and trait not in starting_serum.traits and trait.researched and "Production" not in trait.exclude_tags:
-                                                $ trait_tags = get_exclude_tags(trait)
-                                                $ trait_allowed = get_trait_allowed(starting_serum, trait)
-
-                                                #$ trait_side_effects_text = get_trait_side_effect_text(trait)
-                                                #$ trait_mastery_text = get_trait_mastery_text(trait)
-                                                                #+ "\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text] %":
-                                                textbutton "[trait.name][trait_tags]":
-                                                    style "textbutton_style"
-                                                    text_style "serum_text_style"
-                                                    xsize 530
-                                                    sensitive trait_allowed
-                                                    action [
-                                                        Function(starting_serum.add_trait,trait)
-                                                    ]
-                                                    hovered [
-                                                        SetScreenVariable("trait_tooltip", trait)
-                                                    ]
-
-                                                    #unhovered [
-                                                    #Hide("trait_tooltip")
-                                                    #]
             frame:
                 background "#0a142688"
                 ysize 850
