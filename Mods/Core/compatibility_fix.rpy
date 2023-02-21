@@ -143,7 +143,7 @@ init 5 python: # add to stack later then other mods
 init 100 python:
     add_label_hijack("normal_start", "store_game_version")
 
-init 0 python:
+init 1 python:
     global is64Bit
     is64Bit = sys.maxsize > 2**32
 
@@ -193,7 +193,8 @@ init 0 python:
     config.autosave_on_choice = False
     config.autosave_on_quit = False
     config.autosave_on_input = False
-    config.has_autosave = False
+    config.autosave_frequency = None
+    config.has_autosave = True
     config.has_quicksave = True
     config.autosave_slots = 6
     # config.autosave_frequency = 200 # default: 200
