@@ -256,6 +256,7 @@ label scene_prone_anal_3(the_girl, the_location, the_object):
                         the_girl "Oh god, you're really going to do it! Oh fuck..."
                         "You slide into her ass without any protection this time. She moans at the sensations.."
                     $ mc.condom = False
+                    $ use_condom = False # don't put a condom on again this loop
                 "Leave it on":
                     "You decide to leave it on for now."
         "Degrade her":
