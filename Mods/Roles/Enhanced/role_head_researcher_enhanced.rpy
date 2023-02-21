@@ -503,7 +503,7 @@ label head_researcher_cure_discovery_patent_kept_label():
     the_person "Oh [the_person.mc_title], I knew you were a reasonable man! I'll make it up to you, I promise!"
     mc.name "Of course you are going to make it up to me. Get to my office, NOW."
     the_person "Yes sir!"
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     $ the_person.draw_person()
     "You hear a knock. You look up and see [the_person.possessive_title]."
     the_person "You wanted to see me?"

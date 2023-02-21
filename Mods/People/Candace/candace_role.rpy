@@ -1377,7 +1377,7 @@ label candace_meet_doctor_candace_label():
         if candace_get_sex_record_difference_tier() >= 4:
             "Even now, you can't help but day dream a bit about dumping your seed inside her yet again."
             "Something about her resurgent intelligence leaves you wary though. You decide to talk to her about it."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You head to your office. You sit down at your desk and call down to [the_person.title] and ask her to come to your office. Soon she is at your door, stepping inside."
     $ the_person.draw_person()
     the_person "Good day [the_person.mc_title]."
@@ -1529,7 +1529,7 @@ label candace_meet_doctor_candace_label():
                 "You consider for a moment getting a nice couch for your office..."
                 "But then whenever you call a girl in they'd probably assume you were getting ready to make a cheap porno movie. Better not."
                 mc.name "Rest up, I'm going to get back to work."
-                "You leave your office. You feel great about how things have progressed with [the_person.possessive_title]."
+                "You feel great about how things have progressed with [the_person.possessive_title]."
             "Reject (disabled)":
                 pass
     $ clear_scene()

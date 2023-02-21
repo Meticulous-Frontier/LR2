@@ -861,7 +861,7 @@ label erica_getting_watched_reaction_label(the_person, watched_count = 0): #A sh
 
 label erica_post_yoga_love_label():
     "You head to your office, bringing [the_person.possessive_title] with you. You open the door, walk in, then close and lock it behind you."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     the_person "So... what was it you wanted to talk abo... AH!"
     "You quickly grab her and pin her to the wall."
     $ scene_manager.update_actor(the_person, position = "kissing", display_transform = character_right)
@@ -942,7 +942,7 @@ label erica_post_yoga_love_label():
 
 label erica_after_yoga_office_session_label(the_person): #Theoretically this could be anyone, don't use any specific reference to a person.
     "You head to your office, bringing [the_person.possessive_title] with you. You open the door, walk in, then close and lock it behind you."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You quickly grab her and pin her to the wall."
     $ scene_manager.update_actor(the_person, position = "kissing", display_transform = character_right)
     $ mc.change_locked_clarity(20)

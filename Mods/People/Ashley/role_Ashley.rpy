@@ -928,7 +928,7 @@ label ashley_ask_about_porn_label(the_person):
     "You decide to broach the difficult topic of the porn video you discovered."
     mc.name "I was hoping to talk to you about something a little sensitive. Would you mind if we went to my office?"
     the_person "Oh... sure..."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "[the_person.possessive_title] follows you to your office. After you enter, you close the door behind you."
     mc.name "Go ahead and have a seat."
     $ scene_manager.update_actor(the_person, position = "sitting", emotion = "sad")
@@ -1030,9 +1030,7 @@ label ashley_ask_about_porn_label(the_person):
     "[the_person.possessive_title] quickly leaves the room."
     "Welp, you just got a handjob from [the_person.title]... and then her sister promptly walked in and witnessed the whole thing."
     "You'll have to consider how to approach both girls carefully before you talk to them next."
-    "You walk back to the [mc.location.formal_name]."
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
-    $ mc.location.show_background()
     $ scene_manager.clear_scene()
     $ ashley.add_unique_on_talk_event(ashley_post_handjob_convo)
     $ jump_game_loop() # she runs after her sister so end talk with Ashley

@@ -979,7 +979,7 @@ label kaya_uni_scholarship_intro_label(the_person):
 label kaya_HR_start_internship_program_label():
     $ the_person = mc.business.hr_director
     "You page your HR director to have her meet you in your office. You need to talk to her about starting up the internship program."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     $ the_person.draw_person()
     the_person "You wanted to see me?"
     mc.name "I do. Have a seat."
@@ -1033,7 +1033,7 @@ label kaya_first_day_of_internship_label():
     call unlock_college_interns() from _unlock_intern_with_nora_and_business_01
     $ mc.business.hire_college_intern(the_person, "Research", add_to_location = False)
     "Today is the first day of your internship program. You make sure to head to work early to meet your first intern, [the_person.title]."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You go to your office and make sure you are ready to start the day. On your desk is the paperwork packet your HR director made up."
     "The packet looks great, with very detailed instructions and guidelines. You should consider giving her a bonus..."
     "KNOCK KNOCK"
@@ -1047,9 +1047,9 @@ label kaya_first_day_of_internship_label():
     the_person "Oh, yeah. I just couldn't decide what to wear and this was an easy way to look professional."
     mc.name "I'm not complaining, just feel free to wear whatever you want."
     the_person "Ok, thanks!"
-    $ mc.business.p_div.show_background()
+    $ mc.change_location(mc.business.p_div)
     "You give her a tour of the facility, showing her all the different departments."
-    $ mc.business.r_div.show_background()
+    $ mc.change_location(mc.business.r_div)
     "Finally, you get to the research department."
     mc.name "And, this is where I'll have you working most of the time."
     the_person "Wow! A real lab. This is amazing!"
