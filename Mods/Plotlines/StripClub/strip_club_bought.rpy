@@ -135,7 +135,12 @@ label strip_club_evaluate_stripper(the_person):
         if the_person not in unique_character_list:
             the_person.set_override_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[3,4])
         if the_person.is_employee():
-            mc.business.remove_employee(the_person) # she will quit your business no matter what
+            # switch her back to strippers without changing her location (should only apply to Cousin, since other strippers can't work for you while stripping)
+            mc.business.undesignate_person(the_person)
+            the_person.change_job(unemployed_job, job_known = True)
+            if the_person not in stripclub_strippers:
+                stripclub_strippers.append(the_person)
+
     "A new song starts playing over the speakers and a stripper moves elegantly up on the stage."
 
     if the_person.title is None:
