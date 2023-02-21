@@ -8,6 +8,7 @@ init -2:
     default persistent.stat_change_messages = True
     default persistent.skill_change_messages = True
     default persistent.clarity_messages = True
+    default persistent.energy_messages = True
 
 init 2 python:
     import inspect
@@ -68,12 +69,13 @@ init 2 python:
     Person.change_arousal = generic_messages_extended(Person.change_arousal, "stat_change_messages", True)
     Person.change_max_arousal = generic_messages_extended(Person.change_max_arousal, "stat_change_messages", True)
     Person.change_novelty = generic_messages_extended(Person.change_novelty, "stat_change_messages", True)
-    Person.change_energy = generic_messages_extended(Person.change_energy, "stat_change_messages", True)
-    Person.change_max_energy = generic_messages_extended(Person.change_max_energy, "stat_change_messages", True)
     Person.change_stats = generic_messages_extended(Person.change_stats, "stat_change_messages", True)
 
-    MainCharacter.change_energy = generic_messages_extended(MainCharacter.change_energy, "stat_change_messages", True)
-    MainCharacter.change_max_energy = generic_messages_extended(MainCharacter.change_max_energy, "stat_change_messages", True)
+    # energy changes
+    Person.change_energy = generic_messages_extended(Person.change_energy, "energy_messages", True)
+    Person.change_max_energy = generic_messages_extended(Person.change_max_energy, "energy_messages", True)
+    MainCharacter.change_energy = generic_messages_extended(MainCharacter.change_energy, "energy_messages", True)
+    MainCharacter.change_max_energy = generic_messages_extended(MainCharacter.change_max_energy, "energy_messages", True)
 
     # skill changes
     Person.change_hr_skill = generic_messages_extended(Person.change_hr_skill, "skill_change_messages", True)

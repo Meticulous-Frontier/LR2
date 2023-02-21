@@ -107,6 +107,7 @@ init 2: # Add some additional
                             textbutton "Clarity Related" action [ToggleField(persistent, "clarity_messages", True, False)]
                             textbutton "Stat Changes" action [ToggleField(persistent, "stat_change_messages", True, False)]
                             textbutton "Skill Changes" action [ToggleField(persistent, "skill_change_messages", True, False)]
+                            textbutton "Energy Changes" action [ToggleField(persistent, "energy_messages", True, False)]
 
 
                     null height (2 * gui.pref_spacing)
