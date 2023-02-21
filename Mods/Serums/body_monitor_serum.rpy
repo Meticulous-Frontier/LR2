@@ -17,7 +17,7 @@ init -2 python:
 
     def body_monitor_on_day(the_person, the_serum, add_to_log):
         if the_person.max_energy < 180:
-            the_person.change_max_energy(1)
+            the_person.change_max_energy(1, add_to_log = add_to_log)
         return
 
     def add_body_monitor_serum():
