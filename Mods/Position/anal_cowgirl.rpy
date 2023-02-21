@@ -38,7 +38,7 @@ label intro_SB_anal_cowgirl(the_girl, the_location, the_object):
         "She quickly moves some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_anal_cowgirl.position_tag, visible_enough = True, prefer_half_off = True)
     the_girl "Ready?"
-    if the_girl.sex_skills["Anal"] >= 3:
+    if the_girl.sex_skills["Anal"] > 3:
         "You nod. She grinds forward one last time, then lifts herself up. She reaches back behind her and guides your cock to the entrance of her puckered hole."
         "With a grunt, she slowly lets her body weight sink down on top of you. Her sphincter finally gives way with a pleasing pop, and she slowly sinks down on top of you."
     else:
@@ -179,7 +179,7 @@ label scene_SB_anal_cowgirl_4(the_girl, the_location, the_object):
             the_girl "Fuck you are so big... it feels so good to just have you deep for a bit."
             "[the_girl.possessive_title]'s subtle strokes and heavy breathing is really turning you on. It's clear she is savoring having your cock deep in her ass."
             $ mc.change_arousal(5)
-    elif the_girl.sex_skills["Anal"] >= 3 and the_girl.get_opinion_score("anal sex") >= 0:
+    elif the_girl.sex_skills["Anal"] > 3 and the_girl.get_opinion_score("anal sex") > 0:
         if the_girl.arousal > 90:   #She tries to edge herself.
             "Even though she stopped, you can still feel her body twitching and pulsing around you."
             "It seems like she's trying to edge herself a bit, but she is still slowly getting herself off from the pleasure of having her ass filled."
@@ -342,7 +342,7 @@ label transition_default_SB_anal_cowgirl(the_girl, the_location, the_object):
     if not the_girl.vagina_available():
         "She moves some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_anal_cowgirl.position_tag, visible_enough = True, prefer_half_off = True)
-    if the_girl.sex_skills["Anal"] >= 3:
+    if the_girl.sex_skills["Anal"] > 3:
         "You nod. She grinds forward one last time, then lifts herself up. She reaches back behind her and guides your cock to the entrance of her puckered hole."
         "With a grunt, she slowly lets her body weight sink down on top of you. Her sphincter finally gives way with a pleasing pop, and she slow sinks down on top of you."
     else:
@@ -401,7 +401,7 @@ label taboo_break_SB_anal_cowgirl(the_girl, the_location, the_object):
     $ the_girl.call_dialogue(SB_anal_standing.associated_taboo+"_taboo_break")
 
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her tight hole."
-    if the_girl.sex_skills["Anal"] > 2:
+    if the_girl.sex_skills["Anal"] > 3:
         "She gasps as your tip starts to spread her open, but continues to lower herself down on your throbbing cock."
         the_girl "Oh god... Mfphhhh!"
     else:

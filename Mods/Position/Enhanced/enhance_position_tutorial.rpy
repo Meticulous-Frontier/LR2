@@ -9,8 +9,9 @@ init 2 python:
     stealth_orgasm = False                          #Create a new variable to find out if orgasm was stealthed
     doggy.outro = "outro_stealth_doggy"             #Completely replace the orgasm scene
 
-    doggy_anal.transitions.remove([doggy,"transition_doggy_anal_doggy"])
+    doggy_anal.transitions.remove([doggy,"transition_doggy_dogy_anal"])
     doggy_anal.transitions.append([doggy,"transition_stealth_doggy_anal_doggy"])
+
     #Other variables we could change to enhance the position
 
     # doggy.strip_description = "strip_doggy"         #Make her notice the condom is off when she strips
@@ -177,7 +178,7 @@ label transition_doggy_to_anal_doggy_taboo_break_label(the_girl, the_location, t
     mc.name "It's a start. I think it's time we stretched you open."
     $ the_girl.call_dialogue(doggy_anal.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her tight hole."
-    if the_girl.sex_skills["Anal"] > 2:
+    if the_girl.sex_skills["Anal"] > 3:
         "She gasps as your tip starts to spread her open. She lowers her shoulders and pushes her hips against you, helping the process."
         the_girl "Oh god... Mfphhhh!"
 

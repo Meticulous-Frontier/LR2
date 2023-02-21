@@ -457,8 +457,24 @@ label transition_SB_anal_standing_doggy_anal(the_girl, the_location, the_object)
     return
 
 label transition_default_anal_penetration_dialog(the_girl, the_location, the_object):
-    if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
+    if the_girl.sex_skills["Anal"] > 3 or the_girl.get_opinion_score("anal sex") > 1:
         the_girl "Oh god, yes. Fuck my ass [the_girl.mc_title]!"
+        menu:
+            "Slide it all in":
+                "You keep a firm grip on her hips as you push forward, sliding it into her ass in one smooth motion."
+                if the_girl.get_opinion_score("being submissive") > 0:
+                    the_girl "Ah! Yes! Now we are getting somewhere!"
+                else:
+                    the_girl "Mmmhph... Fuck..."
+            "Ram it home!":
+                "You get a firm grip on her hips, make sure you're lined up, and push yourself in with all your might."
+                if the_girl.get_opinion_score("being submissive") > 0:
+                    the_girl "Ah! Yes! Tear that ass up!"
+                    $ the_girl.change_arousal(5* the_girl.get_opinion_score(["being submissive", "anal sex"]))
+                    "Using her pussy juice as lube you lay into her tight ass, wasting no time in fucking her hard."
+                else:
+                    the_girl "Oh fuck! FUCK! YES!"
+                    "She yells out in surprise and pain. You bottom out and hold still, giving her a second to get used to your size."
     else:
         the_girl "Uh... Oh fuck, you'd tear me apart [the_girl.mc_title]..."
         menu:
@@ -582,7 +598,7 @@ label taboo_break_SB_anal_standing(the_girl, the_location, the_object):
     mc.name "Almost. I think it's time we stretched you open."
     $ the_girl.call_dialogue(SB_anal_standing.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you press it against her tight hole."
-    if the_girl.sex_skills["Anal"] > 2:
+    if the_girl.sex_skills["Anal"] > 3:
         "She gasps as your tip starts to spread her open. She lowers her shoulders and pushes her hips against you, helping the process."
         the_girl "Oh god... Mfphhhh!"
     else:

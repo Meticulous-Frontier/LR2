@@ -407,7 +407,7 @@ label transition_standing_doggy_to_standing_anal_taboo_break_label(the_girl, the
     $ the_girl.call_dialogue(SB_anal_standing.associated_taboo+"_taboo_break")
     if the_girl.get_opinion_score("anal sex") > 0:
         "[the_girl.title] shivers with anticipation."
-    if the_girl.sex_skills["Anal"] > 2:
+    if the_girl.sex_skills["Anal"] > 3:
         "She gasps as your tip starts to spread her open. She tilts her head back and pushes her hips against you, helping the process."
         the_girl "Oh god... Mfphhhh!"
     else:

@@ -72,9 +72,31 @@ label train_anal_fetish_label(the_person):
                     the_person "Yes... I will... hmmm... right there..."
                     "You continue to shove your fingers up her bum, until her [the_person.pubes_description] pussy gets really wet."
 
-        # TODO: Write the dildo part
-        #"Shove a dildo inside" if the_person.sex_skills["Anal"] > 2 and perk_system.has_item_perk("Dildo"):
-        #    pass
+        "Shove a dildo inside" if the_person.sex_skills["Anal"] > 2 and perk_system.has_item_perk("Dildo"):
+            if the_girl.event_triggers_dict.get("has_used_dildo", False):
+                mc.name "I have brought your favorite toy."
+                the_girl "Ok, slide that bad boy right in there!"
+            else:
+                mc.name "I have something I think you might enjoy."
+                the_girl "Oh? What might that be?"
+                "You pull the dildo out of your backpack. Her eyes fix on it and she realizes what you want to do."
+                if the_girl.sluttiness > 40: #She is excited.
+                    the_girl "Oh! That looks like fun..."
+                else:
+                    the_girl "Oh my god, it's so big! I don't know about this..."
+                    mc.name "Don't worry, I'll go slow."
+
+            "You lube up the dildo and slide it all the way into her bowels, leaving just enough room to hold it."
+            the_person "Oh god, that's it [the_person.mc_title]."
+            mc.name "You enjoy this, don't you?"
+            the_person "Oh yes, please, can you push it a little further."
+            mc.name "Do you want to swallow it with your ass?"
+            the_person "I wouldn't mind giving it a try..."
+            "You smile, and press the last part of the toy into her ass until her sphincter closes over the end caressing your fingers."
+            the_person "Ahhh....Yes...sooo deep...keep moving..."
+            mc.name "You are going to be my little anal whore, aren't you [the_person.fname]?"
+            the_person "I am...YES...deeper...your greedy little anal whore!!"
+            "You continue to push the toy back when it slowly starts moving out again, until you finally let it pop out completely."
 
     mc.name "Alright, [the_person.title], that's enough for now. We will continue this another time."
     $ increase_anal_fetish(the_person)

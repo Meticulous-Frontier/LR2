@@ -98,7 +98,7 @@ label scene_anal_on_lap_2(the_girl, the_location, the_object):
     mc.name "Here, let me take over for a minute."
     "You reach down and grab [the_girl.possessive_title]'s hips. You lift her up slightly, then let her down, slowly setting the pace you want."
     "Soon, you are bouncing her up and down, impaling her forbidden hole. You speed up, intent on fucking her raw."
-    if the_girl.sex_skills["Anal"] > 2 : #She begs you to fuck her good.
+    if the_girl.sex_skills["Anal"] > 3 : #She begs you to fuck her good.
         the_girl "Yes! Fuck me good [the_girl.mc_title]!"
         "Empowered by her encouragement, you speed up, pounding her hole with wild abandon. The sound of her ass clapping against you crescendos, filling you with primal lust."
         menu:

@@ -40,7 +40,7 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
     the_girl "Oh god, it's crazy when you fuck my pussy like this."
     mc.name "I'm not fucking your pussy."
     "Your run your cock along her slit a few times, getting it lubricated. She understands what you mean after a few seconds."
-    if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
+    if the_girl.sex_skills["Anal"] > 3 or the_girl.get_opinion_score("anal sex") > 1:
         if the_girl.effective_sluttiness() > 90:
             the_girl "Oh god, you're gonna pin me to the [the_object.name] and fuck my ass, aren't you?"
         else:
@@ -54,7 +54,7 @@ label intro_piledriver_anal(the_girl, the_location, the_object):
 
     "When your cock is all lubed up, you pull back slightly, then line it up with her pretty little asshole."
     mc.name "Ready?"
-    if the_girl.sex_skills["Anal"] > 2 or the_girl.get_opinion_score("anal sex") > 0:
+    if the_girl.sex_skills["Anal"] > 3 or the_girl.get_opinion_score("anal sex") > 1:
         the_girl "Yes!"
     else:
         the_girl "No, but I don't know if I ever will be."
