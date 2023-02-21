@@ -10,7 +10,7 @@ init -1 python:
         the_person.change_slut(-(15 if change_amount is None else change_amount), add_to_log = add_to_log)
 
     pher_ther = SerumTraitMod(name = "Pheromone Therapy",
-        desc = "By mimicking pheromones found in closely related animals, this serum can recreate feelings of going into heat in women.",
+        desc = "By mimicking pheromones found in closely related animals, this serum can recreate feelings of going into heat in women. No effect when girl at maximum sluttiness.",
         positive_slug = "+15 Sluttiness",
         negative_slug = "",
         research_added = 200,
