@@ -43,6 +43,6 @@ label condition_taking_virginity_post_label(the_person, the_position, the_object
 label condition_taking_virginity_reward_label(the_person, report_log, the_condition):
     $ the_person.change_stats(slut = 2, max_slut = 80, obedience = 15)
     "[the_person.possessive_title] is amazed. She seems to be in disbelief how pleasurable it was."
-    the_person "[the_person.mc_title], that was so good! I can't beleive I've been missing out on that for so long..."
+    the_person "[the_person.mc_title], that was so good! I can't believe I've been missing out on that for so long..."
     the_person "You can do that to me any time... okay?"
     return

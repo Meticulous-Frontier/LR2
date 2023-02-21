@@ -210,7 +210,7 @@ label lazy_morning_crisis_action_label():
     else: #Not slutty, she excuses herself.
         "She is making a pointed effort to not look your direction. You realize you have crazy morning wood. Your cock is making the blanket tent and she is pretending not to have noticed."
         mc.name "What do you want?"
-        the_person "Oh, I was just.. I'm sorry for interupting... I mean... Ah!"
+        the_person "Oh, I was just.. I'm sorry for interrupting... I mean... Ah!"
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] turns and flees your room, leaving you tired and frustrated."
         $ the_person.change_slut(2)
