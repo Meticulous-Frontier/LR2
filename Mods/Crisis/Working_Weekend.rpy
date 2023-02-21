@@ -95,12 +95,12 @@ label SB_working_weekend_crisis_label():
     $ scene_manager.add_actor(person_one, emotion="default")
     $ scene_manager.draw_scene()
     "You can tell by the look on her face that [person_one.possessive_title] is also surprised to see you."
-    if person_one.effective_sluttiness() < 40:
-        call SB_working_weekend_crisis_label_low(person_one) from _call_SB_working_weekend_crisis_label_low
-    elif person_one.effective_sluttiness() < 70:
+    if person_one.effective_sluttiness() > 70 and not person_one.has_taboo("vaginal_sex"):
+        call SB_working_weekend_crisis_label_high(person_one) from _call_SB_working_weekend_crisis_label_high
+    elif person_one.effective_sluttiness() > 40 and not person_one.has_taboo("sucking_cock"):
         call SB_working_weekend_crisis_label_medium(person_one) from _call_SB_working_weekend_crisis_label_medium
     else:
-        call SB_working_weekend_crisis_label_high(person_one) from _call_SB_working_weekend_crisis_label_high
+        call SB_working_weekend_crisis_label_low(person_one) from _call_SB_working_weekend_crisis_label_low
     $ scene_manager.clear_scene()
     $ person_one.apply_planned_outfit()
     $ del person_one
