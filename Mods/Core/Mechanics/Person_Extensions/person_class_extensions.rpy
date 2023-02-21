@@ -2928,68 +2928,63 @@ init -1 python:
     # Day function wrappers
 
     def person_set_event_day(self, dict_key, override = True, set_day = None):
-        if not override and self.event_triggers_dict.get(dict_key, None):
+        if not override and not dict_key in self.event_triggers_dict:
             return False
-        if set_day is not None:
-            self.event_triggers_dict[dict_key] = set_day
-        else:
-            self.event_triggers_dict[dict_key] = day
-        return
+        self.event_triggers_dict[dict_key] = day if set_day is None else set_day
+        return True
+    Person.set_event_day = person_set_event_day
 
     def person_get_event_day(self, dict_key, set_if_none = True):
-        if self.event_triggers_dict.get(dict_key, None) is None and set_if_none:
+        if not dict_key in self.event_triggers_dict and set_if_none:
             self.set_event_day(dict_key)
-        return self.event_triggers_dict.get(dict_key, None)
+
+        return self.event_triggers_dict.get(dict_key, 0)
+    Person.get_event_day = person_get_event_day
 
     def person_days_since_event(self, dict_key, set_if_none = True):
-        if self.event_triggers_dict.get(dict_key, None) is None and set_if_none:
+        if not dict_key in self.event_triggers_dict and set_if_none:
             self.set_event_day(dict_key)
-        if self.event_triggers_dict.get(dict_key, None):
-            return day - self.event_triggers_dict.get(dict_key, None)
-        else:
-            return day
+
+        return day - self.event_triggers_dict.get(dict_key, 0)
+    Person.days_since_event = person_days_since_event
 
     def person_story_event_ready(self, dict_key):
         if self.days_since_event("story_event") < TIER_1_TIME_DELAY:        #In general, we want to keep tier 1 between all events with a certain person
             return False
-        check_key = dict_key + "_event"
-        if self.days_since_event(check_key) >= TIER_2_TIME_DELAY:           #Events of the same type should be spaced out a little further
+        if self.days_since_event(dict_key + "_event") >= TIER_2_TIME_DELAY:           #Events of the same type should be spaced out a little further
             return True
         return False
+    Person.story_event_ready = person_story_event_ready
 
     def person_story_event_log(self, dict_key):
         self.set_event_day(dict_key + "_event")
         self.set_event_day("story_event")
         return
-
-    def person_string_since_event(self, dict_key, set_if_none = True): #Returns a string describing how long it has been since an event
-        if self.days_since_event(dict_key) < 1:
-            return "earlier"
-        elif self.days_since_event(dict_key) == 1:
-            return "yesterday"
-        elif self.days_since_event(dict_key) <= 4:
-            return "a few days ago"
-        elif self.days_since_event(dict_key) <= 10:
-            return "a week ago"
-        elif self.days_since_event(dict_key) <= 19:
-            return "a couple weeks ago"
-        elif self.days_since_event(dict_key) <= 28:
-            return "a few weeks ago"
-        elif self.days_since_event(dict_key) <= 45:
-            return "a month ago"
-        elif self.days_since_event(dict_key) <= 75:
-            return "a couple months ago"
-        elif self.days_since_event(dict_key) <= 145:
-            return "a few months ago"
-        else:
-            return "a while ago"
-
-
-    Person.set_event_day = person_set_event_day
-    Person.get_event_day = person_get_event_day
-    Person.days_since_event = person_days_since_event
-    Person.story_event_ready = person_story_event_ready
     Person.story_event_log =  person_story_event_log
+
+    def person_string_since_event(self, dict_key): #Returns a string describing how long it has been since an event
+        since = self.days_since_event(dict_key, set_if_none = False)
+
+        if since < 1:
+            return "earlier"
+        elif since == 1:
+            return "yesterday"
+        elif since <= 4:
+            return "a few days ago"
+        elif since <= 10:
+            return "a week ago"
+        elif since <= 19:
+            return "a couple weeks ago"
+        elif since <= 28:
+            return "a few weeks ago"
+        elif since <= 45:
+            return "a month ago"
+        elif since <= 75:
+            return "a couple months ago"
+        elif since <= 145:
+            return "a few months ago"
+        return "quite some time ago"
+
     Person.string_since_event = person_string_since_event
 
 #Suggestibility mod work
