@@ -2548,7 +2548,7 @@ label ellie_search_update_label(the_person):    #You locate the contact
     "You snap a couple quick pictures, when she suddenly gags hard and backs off."
     $ mc.change_locked_clarity(50)
     the_person "Stars! You are so big..."
-    "She takes a moment to recoverr, then with your encouragement gets back to work."
+    "She takes a moment to recover, then with your encouragement gets back to work."
     "The soft slurping noises of [the_person.possessive_title] as she blows you are really turning you on."
     "Her steamy mouth milking your cock is getting to you. You are going to cum soon."
     mc.name "I'm gonna cum. Let me cum on your face, it'll make the most convincing pictures."
