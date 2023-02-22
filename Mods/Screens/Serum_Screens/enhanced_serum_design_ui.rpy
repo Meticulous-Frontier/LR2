@@ -233,7 +233,7 @@ init 2:
                         frame:
                             background None
                             xsize 530
-                            text "Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]" style "serum_text_style" xalign .5
+                            text "{size=14}Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]{/size}" style "serum_text_style" xalign .5
 
                         use aspect_grid(trait_tooltip)
 

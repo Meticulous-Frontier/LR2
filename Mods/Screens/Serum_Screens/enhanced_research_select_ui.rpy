@@ -25,14 +25,14 @@ init -1 python:
             trait_tags = "\nExcludes Other: "
             for a_tag in trait.exclude_tags:
                 trait_tags += "{color=#FFFF00}[" + a_tag + "]{/color}"
-        return trait_tags
+        return "{size=12}" +  trait_tags + "{/size}"
 
     def get_trait_display_title(trait):
         trait_tags = get_trait_tags(trait)
         if trait.research_needed > 10000: #Assume very high values are impossible #TODO: Just make this a boolean we can toggle on each trait.
             research_needed_string = "\nResearch Impossible"
         else:
-            research_needed_string = "(" +str(__builtin__.round(trait.current_research, 1))+"/"+ str(int(trait.research_needed)) + ")"
+            research_needed_string = "{size=14}(" +str(__builtin__.round(trait.current_research, 1))+"/"+ str(int(trait.research_needed)) + "){/size}"
 
         return trait.name + " " + research_needed_string + trait_tags
 
@@ -62,7 +62,7 @@ init 2:
                         if isinstance(mc.business.active_research_design, SerumTrait):
                             $ trait_side_effects_text = get_trait_side_effect_text(mc.business.active_research_design)
                             $ trait_mastery_text = get_trait_mastery_text(mc.business.active_research_design)
-                            text "Current: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" + "{size=14} Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
+                            text "Current: [mc.business.active_research_design.name] ([mc.business.active_research_design.current_research]/[mc.business.active_research_design.research_needed])" + "{size=14} Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]{/size}":
                                 style "serum_text_style"
                                 size 22
                                 xalign 0.0
@@ -159,7 +159,7 @@ init 2:
                                                 $ trait_side_effects_text = get_trait_side_effect_text(trait)
                                                 $ trait_mastery_text = get_trait_mastery_text(trait)
 
-                                                textbutton "[trait_title]\nMastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]":
+                                                textbutton "[trait_title]\n{size=14}Mastery Level: [trait_mastery_text] | Side Effect Chance: [trait_side_effects_text]{/size}":
                                                     text_xalign 0.5
                                                     text_text_align 0.5
 
