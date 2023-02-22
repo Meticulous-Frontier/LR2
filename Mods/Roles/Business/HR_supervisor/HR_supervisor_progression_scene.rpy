@@ -202,16 +202,11 @@ label hr_director_prog_scene_multiple_choice_scene(the_group):
             return 6
         "Anal Fetish Scene" if 7 in hr_director_prog_scene.scene_unlock_list:
             return 7
-
-    $ position_choice = HR_director_choose_position()
-    if position_choice == "any":
-        the_person "Mmmm, I can do that!"
-        $ mc.change_arousal(20)
-        $ the_person.change_stats(happiness = 5, obedience = 3)
-        $ position_choice = get_random_from_list(mc.business.hr_director.HR_unlocks.keys())
-
-
-
+        "Surprise me":
+            the_person "Mmmm, I can do that!"
+            $ mc.change_arousal(20)
+            $ the_person.change_stats(happiness = 5, obedience = 3)
+            return renpy.random.choice(hr_director_prog_scene.scene_unlock_list)
     return
 
 
