@@ -152,9 +152,7 @@ init 2 python:
                 else:
                     cloth_info += "|{image=gui/extra_images/clothing_token.png}"
             if self.has_extension.layer == 2:
-                if self.has_extension == leotard_bottom:
-                    cloth_info += "|{image=gui/extra_images/clothing_token.png}"
-                elif self.has_extension in shoes_list:
+                if self.has_extension in shoes_list:
                     cloth_info += "|{image=gui/extra_images/shoes_token.png}"
                 else:
                     cloth_info += "|{image=gui/extra_images/accessory_token.png}"

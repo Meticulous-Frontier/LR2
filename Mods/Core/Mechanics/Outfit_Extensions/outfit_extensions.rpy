@@ -62,7 +62,11 @@ init -1 python:
     def generate_clothing_list_enhanced(self):
         def _cloth_sort_key(cloth):
             key = cloth.layer
-            if cloth in shirts_list: # draw shirts over pants
+            if cloth == leotard:
+                key = 1.2 # for sorting to layer 1.2 (over underwear but under layer 2)
+            if cloth == garter_with_fishnets:
+                key = 1.3 # also draw above leotard
+            if cloth in shirts_list + bracelet_list: # draw shirts over pants
                 key += .1
             if cloth in neckwear_list: # move from layer 2 to 3.5 (between clothing and overwear)
                 key += 1.5

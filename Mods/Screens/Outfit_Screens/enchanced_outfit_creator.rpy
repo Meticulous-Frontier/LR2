@@ -345,15 +345,17 @@ init 2:
             $ valid_layers = [0,1,2,3,4]
             $ outfit_class_selected = "FullSets"
 
-        default valid_categories = ["Panties", "Bras", "Pants", "Skirts", "Dresses", "Shirts", "Socks", "Shoes", "Makeup", "Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"] #Holds the valid list of categories strings to be shown at the top.
+        default valid_categories = ["Panties", "Bras", "One Piece", "Pants", "Skirts", "Dresses", "Shirts", "Outer wear", "Socks", "Shoes", "Makeup", "Facial", "Rings", "Bracelets", "Neckwear", "Not Paint"] #Holds the valid list of categories strings to be shown at the top.
 
         default categories_mapping = {
             "Panties": [panties_list, Outfit.can_add_lower, Outfit.add_lower],  #Maps each category to the function it should use to determine if it is valid and how it should be added to the outfit.
             "Bras": [bra_list, Outfit.can_add_upper, Outfit.add_upper],
+            "One Piece": [[leotard, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear], Outfit.can_add_dress, Outfit.add_dress],
             "Pants": [[x for x in pants_list if not x in [cop_pants]] , Outfit.can_add_lower, Outfit.add_lower],
             "Skirts": [skirts_list, Outfit.can_add_lower, Outfit.add_lower],
-            "Dresses": [dress_list, Outfit.can_add_dress, Outfit.add_dress],
-            "Shirts": [[x for x in shirts_list if not x in [cop_blouse]], Outfit.can_add_upper, Outfit.add_upper],
+            "Dresses": [[x for x in dress_list if x not in [leotard, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, apron]], Outfit.can_add_dress, Outfit.add_dress],
+            "Shirts": [[x for x in shirts_list if not x in [cop_blouse, lab_coat, suit_jacket, vest]], Outfit.can_add_upper, Outfit.add_upper],
+            "Outer wear": [[apron, lab_coat, suit_jacket, vest], Outfit.can_add_upper, Outfit.add_upper],
             "Socks": [socks_list, Outfit.can_add_feet, Outfit.add_feet],
             "Shoes": [shoes_list, Outfit.can_add_feet, Outfit.add_feet],
             "Makeup": [makeup_list, Outfit.can_add_accessory, Outfit.add_accessory],
@@ -968,33 +970,32 @@ init 2:
                                             xfill True
                                             vbox:
                                                 spacing 5
-                                                for cloth in demo_outfit.upper_body + demo_outfit.lower_body + demo_outfit.feet + demo_outfit.accessories:
-                                                    if not cloth.is_extension and not cloth.layer in hide_list:
-                                                        button:
-                                                            background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
+                                                for cloth in [x for x in demo_outfit if not x.is_extension and ((x != leotard and not x.layer in hide_list) or (x == leotard and 1 not in hide_list))]:
+                                                    button:
+                                                        background Color(rgb = (cloth.colour[0], cloth.colour[1], cloth.colour[2]))
 
-                                                            action [ # NOTE: Left click makes more sense for selection than right clicking
-                                                                SetScreenVariable("category_selected", get_category(cloth)),
-                                                                SetScreenVariable("selected_clothing", cloth),
-                                                                SetScreenVariable("selected_colour", "colour"),
+                                                        action [ # NOTE: Left click makes more sense for selection than right clicking
+                                                            SetScreenVariable("category_selected", get_category(cloth)),
+                                                            SetScreenVariable("selected_clothing", cloth),
+                                                            SetScreenVariable("selected_colour", "colour"),
 
-                                                                SetScreenVariable("current_r", cloth.colour[0]),
-                                                                SetScreenVariable("current_g", cloth.colour[1]),
-                                                                SetScreenVariable("current_b", cloth.colour[2]),
-                                                                SetScreenVariable("current_a", cloth.colour[3]),
+                                                            SetScreenVariable("current_r", cloth.colour[0]),
+                                                            SetScreenVariable("current_g", cloth.colour[1]),
+                                                            SetScreenVariable("current_b", cloth.colour[2]),
+                                                            SetScreenVariable("current_a", cloth.colour[3]),
 
-                                                                Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
-                                                            ]
-                                                            alternate [
-                                                                Function(hide_mannequin),
-                                                                Function(starting_outfit.remove_clothing, cloth),
-                                                                Function(demo_outfit.remove_clothing, cloth),
-                                                                Function(preview_outfit)
-                                                            ]
-                                                            xalign 0.5
-                                                            xfill True
-                                                            ysize 34
-                                                            text "[cloth.name]" xalign 0.5 yalign 0.5 xfill True yoffset 2 style "custom_outfit_style"
+                                                            Function(preview_outfit) # Make sure it is showing the correct outfit during changes, demo_outfit is a copy of starting_outfit
+                                                        ]
+                                                        alternate [
+                                                            Function(hide_mannequin),
+                                                            Function(starting_outfit.remove_clothing, cloth),
+                                                            Function(demo_outfit.remove_clothing, cloth),
+                                                            Function(preview_outfit)
+                                                        ]
+                                                        xalign 0.5
+                                                        xfill True
+                                                        ysize 34
+                                                        text "[cloth.name]" xalign 0.5 yalign 0.5 xfill True yoffset 2 style "custom_outfit_style"
 
                 frame:
                     background "#0a142688"

@@ -668,7 +668,7 @@ init 5 python:
                 overwear.add_accessory(item)
 
             # prevent any item from having no colour set
-            for cloth in [x for x in overwear.upper_body + overwear.lower_body + overwear.feet + overwear.accessories if __builtin__.len(x.colour) < 4]:
+            for cloth in [x for x in overwear if __builtin__.len(x.colour) < 4]:
                 cloth.colour = [1, 1, 1, .2]    # transparent white is easy to spot for debugging
 
             return overwear
@@ -768,7 +768,7 @@ init 5 python:
                 or not (points >= 6 and renpy.random.randint(0, 3 - self.person.get_opinion_score("not wearing underwear")) == 0):
 
                 # find upper body item
-                item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(real_bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear], points, min_points), points, ["showing her tits", "not wearing underwear"])
+                item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(real_bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear, leotard], points, min_points), points, ["showing her tits", "not wearing underwear"])
                 if item:
                     outfit.add_upper(*make_upper_item_transparent(item, points, color_upper))
 
