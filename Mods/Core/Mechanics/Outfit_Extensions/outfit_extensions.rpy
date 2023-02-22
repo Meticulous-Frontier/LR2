@@ -59,6 +59,19 @@ init -1 python:
     # Enhanced Methods for Outfit Class #
     #####################################
 
+    def generate_clothing_list_enhanced(self):
+        def _cloth_sort_key(cloth):
+            key = cloth.layer
+            if cloth in neckwear_list: # move from layer 2 to 3.5 (between clothing and overwear)
+                key += 1.5
+            if cloth.tucked: # tucked is always a between layer value
+                key + .5
+            return key
+
+        return sorted(self, key= lambda x: _cloth_sort_key(x))
+
+    Outfit.generate_clothing_list = generate_clothing_list_enhanced
+
     def vagina_visible_enhanced(self):
         return _get_transparency_factor(self.lower_body) >= 1.0
     Outfit.vagina_visible = vagina_visible_enhanced
