@@ -202,7 +202,7 @@ label hr_director_prog_scene_multiple_choice_scene(the_group):
             return 6
         "Anal Fetish Scene" if 7 in hr_director_prog_scene.scene_unlock_list:
             return 7
-        "Surprise me":
+        "Surprise me" if len(hr_director_prog_scene.scene_unlock_list) > 1:
             the_person "Mmmm, I can do that!"
             $ mc.change_arousal(20)
             $ the_person.change_stats(happiness = 5, obedience = 3)
