@@ -62,6 +62,8 @@ init -1 python:
     def generate_clothing_list_enhanced(self):
         def _cloth_sort_key(cloth):
             key = cloth.layer
+            if cloth in shirts_list: # draw shirts over pants
+                key += .1
             if cloth in neckwear_list: # move from layer 2 to 3.5 (between clothing and overwear)
                 key += 1.5
             if cloth.tucked: # tucked is always a between layer value
