@@ -2202,6 +2202,8 @@ init -1 python: #Requirement functions
         return False
 
     def ellie_start_search_requirement():
+        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+            return False
         if ellie.days_since_event("obedience_event") <= TIER_2_TIME_DELAY or mc.business.get_event_day("IT_dir_nanobot_takeover_day") < TIER_3_TIME_DELAY:
             return False
         if ellie.obedience >= 140 and nanobot_program_is_IT() and mc.business.is_open_for_business():  #Need to make sure we know contact has ghosted head researcher.
@@ -2209,6 +2211,8 @@ init -1 python: #Requirement functions
         return False
 
     def ellie_search_update_requirement(the_person):
+        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+            return False
         if not ellie.story_event_ready("obedience"):
             return False
         if not ellie_has_given_blowjob():
@@ -2216,14 +2220,17 @@ init -1 python: #Requirement functions
         return True
 
     def ellie_search_finish_requirement():
+        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+            return False
         if ellie.story_event_ready("obedience") and time_of_day == 3:
             return True
         return False
 
     def ellie_submission_requirement():
+        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+            return False
         if ellie.obedience > 160 and time_of_day == 3 and ellie.story_event_ready("obedience"):
-            if mc.business.is_open_for_business() and mc.is_at_work():
-                return True
+            return True
         return False
 
     def ellie_nanobot_fetish_testing_requirement(the_person):
@@ -2245,6 +2252,7 @@ label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     $ the_person = ellie
     $ mc.arousal = 30
     $ the_person.event_triggers_dict["tit_fuck"] = True
+    $ mc.change_location(mc.business.r_div)
     "You sit at a desk, working in the research department."
     "However, you are having an incredibly hard time concentrating. You look across the room at [the_person.possessive_title]"
     $ the_person.draw_person(position = "sitting")
@@ -2266,7 +2274,7 @@ label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     the_person "Of course..."
     $ the_person.draw_person(position = "stand2")
     "You walk quietly to your office with [the_person.possessive_title] following you."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You step into your office. After she follows you in, you close and lock the door."
     the_person "[the_person.mc_title], you're scaring me..."
     mc.name "[the_person.title], you've been doing great work for me ever since I hired you. Your work on the company IT programs has been examplary."
@@ -2359,7 +2367,6 @@ label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] awkwardly turns and leaves your office. You can't help but smile."
     "She'll get used to servicing your needs in your office with more than just her tits soon enough. For now you are content with the leap of progress you have made with her."
-    $ mc.location.show_background()
     $ mc.business.add_mandatory_crisis(ellie_start_search)
     $ ellie.story_event_log("obedience")
     # $ ellie.set_event_day("obedience_event", override = True)
@@ -2371,6 +2378,7 @@ label ellie_start_search_label(): #140 obedience. Scene where you talk to ellie 
     $ the_person = ellie
     $ scene_manager = Scene()
     $ the_researcher = mc.business.head_researcher
+    $ mc.change_location(mc.business.r_div)
     "You walk into the Research department. As you step in, you see [the_researcher.title] look up from her work and walk over to you."
     $ scene_manager.add_actor(the_researcher)
     the_researcher "Hey [the_researcher.mc_title]. You'll never believe what just happened to me."
@@ -2468,18 +2476,19 @@ label ellie_start_search_label(): #140 obedience. Scene where you talk to ellie 
     $ scene_manager.remove_actor(the_person)
     $ scene_manager.remove_actor(the_researcher)
     "You step out of the examination room. You have no idea if this plan will work or not, but you know it will take time to find out."
-    "Even if the guy never bites, atleast you convinced [the_person.title] to start a DikDok account..."
+    "Even if the guy never bites, at least you convinced [the_person.title] to start a DikDok account..."
     $ del the_researcher
     $ ellie.story_event_log("obedience")
     $ the_person.add_unique_on_room_enter_event(ellie_search_update)
     return
 
 label ellie_search_update_label(the_person):    #You locate the contact
+    $ mc.change_location(mc.business.r_div)
     "You step into the Research and Development department. When you do, [the_person.title] notices you, gets up, and walks over to you."
     $ the_person.draw_person()
     the_person "Hey! Have a second? I have something I need to talk to you about... you know... in private."
     mc.name "Sure. Let's head for my office."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You walk into your office with [the_person.possessive_title] and sit down."
     $ the_person.draw_person(position = "sitting")
     the_person "Well, Alan, you know that guy we've been trying to find, messaged me on DikDok and I've been messaging back and forth with him."
@@ -2552,9 +2561,9 @@ label ellie_search_update_label(the_person):    #You locate the contact
     "The soft slurping noises of [the_person.possessive_title] as she blows you are really turning you on."
     "Her steamy mouth milking your cock is getting to you. You are going to cum soon."
     mc.name "I'm gonna cum. Let me cum on your face, it'll make the most convincing pictures."
+    $ the_person.draw_person(position = "kneeling1")
     "[the_person.title] pops off your cock and looks up at you as you point it at her face and give it the final few strokes."
     $ the_person.cum_on_face()
-    $ the_person.draw_person(position = "blowjob")
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
     "You do your best to snap pictures as you finish all over [the_person.title]'s face. One spurt hits her in the eye and she flinches."
     the_person "Ah! Careful where you point that thing!"
@@ -2570,7 +2579,7 @@ label ellie_search_update_label(the_person):    #You locate the contact
     "This could have been you ;)"
     "You send him a message with it. Let's see if he takes the bait or not."
     $ the_person.apply_planned_outfit()
-    $ the_person.draw_person(position = the_person.idle_pose)
+    $ the_person.draw_person()
     "You are starting to come up with a plan for what to do if this guy responds when [the_person.title] comes back."
     the_person "Alright, did I get it all?"
     mc.name "Yeah, I think you did. Alright, here is the plan. I want you to see if you can seduce this guy. Make it clear that you want to meet up and go back to his place, okay?"
@@ -2602,6 +2611,7 @@ label ellie_search_update_label(the_person):    #You locate the contact
     "You share a few more details of your plan with [the_person.possessive_title], then she returns to work."
     $ the_person.draw_person(position = "walking_away")
     "You aren't sure what kind material you will find, going into this guy's apartment, but you are sure you will be able to find something."
+    $ clear_scene()
     "There is just one more piece to the puzzle you need..."
     if starbuck_is_business_partner():
         "You place a phone call to your business partner at the mall."
@@ -2637,7 +2647,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     mc.name "Hey. Tonight is the night, meet me in my office ASAP, and bring the equipment."
     the_researcher "OMW"
     $ mc.end_text_convo()
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You hurry to your office. [the_person.title] is right behind you."
     $ scene_manager.add_actor(the_person, position = "sitting")
     "She sits down at your desk and starts to talk hurriedly, clearly nervous."
@@ -2655,9 +2665,10 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     the_researcher "So like... what are we going to do if his neighbor or something catches us?"
     mc.name "Leave that to me. We have on more stop before dinner time."
     mc.name "Let's go."
+    $ mc.change_location(mall)
     $ scene_manager.update_actor(the_person, position = the_person.idle_pose)
     "You go with the two girls to the mall, then walk into the sex shop."
-    $ sex_store.show_background()
+    $ mc.change_location(sex_store)
     "You step into the sex store with [the_person.title] and [the_researcher.possessive_title], looking for someone..."
     $ scene_manager.add_actor(starbuck, display_transform = character_left_flipped)
     if starbuck_is_business_partner():
@@ -2708,7 +2719,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     starbuck "Have fun everyone!"
     $ scene_manager.remove_actor(starbuck)
     "You step out into the mall with [the_person.title] and [the_researcher.possessive_title]."
-    $ mall.show_background()
+    $ mc.change_location(mall)
     the_researcher "Alright, here's the earpiece. Me and [the_researcher.mc_title] will be listening to everything."
     mc.name "When you get back to his place, see if you can leave the front door unlocked so we can get in easier."
     the_researcher "I'm also recording, so try to get him to say something incriminating."
@@ -2727,7 +2738,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     "This part is outlined. Have a scene with the head researcher in discreet while listening to Ellie have dinner."
     "Pick back up following Ellie to Alan's."
 
-    $ the_person.home.show_background()
+    $ mc.change_location(the_person.home)
     "You quietly slip into the contact's apartment with [the_researcher.title] while [the_person.possessive_title] is keeping him occupied."
     "The place is an absolute mess. Dishes are piled up on the small kitchen counter, and there are dirty clothes on the floor."
     "There are three doors, and one is closed with light coming out from underneath it. That must be the bedroom."
@@ -2759,7 +2770,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     the_researcher "I know... thankfully he had basically zero success. He didn't realize we were combining them with the suggestibility serums..."
     mc.name "Do you have copies of his research data?"
     the_researcher "Almost... it is still copying..."
-    $ the_person.bedroom.show_background()
+    $ mc.change_location(the_person.bedroom)
     $ scene_manager.hide_actor(the_researcher)
     $ scene_manager.show_actor(the_person, position = "stand3")
     "Alan" "Okay, okay. $100 it is. I have the cash right here."
@@ -2775,7 +2786,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
                 mc.name "Don't worry, we'll be there in a few seconds, help is on the way [the_person.title]."
                 $ the_person.change_love(3, 80)
                 $ the_person.change_happiness(5)
-                $ the_person.home.show_background()
+                $ mc.change_location(the_person.home)
                 $ scene_manager.hide_actor(the_person)
                 $ scene_manager.show_actor(the_researcher)
                 "You look at [the_researcher.title]."
@@ -2800,7 +2811,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
                 "Through the receiver, you listen as blowjob noises begin."
                 "You can hear [the_person.title] lips smack and the soft sounds of sucking start coming through the received."
                 "Alan" "Ohh, that's it. Swallow it all bitch."
-                $ the_person.home.show_background()
+                $ mc.change_location(the_person.home)
                 $ scene_manager.hide_actor(the_person)
                 $ scene_manager.show_actor(the_researcher)
                 mc.name "Alright, she's buying us some extra time, let's make sure we get everything we need."
@@ -2837,7 +2848,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
         mc.name "Yeah, but HE doesn't know that."
     "You step out of the office and next to the bedroom door."
     "You count down from 3, then kick the door open as loudly as possible."
-    $ the_person.bedroom.show_background()
+    $ mc.change_location(the_person.bedroom)
     $ scene_manager.show_actor(the_person, display_transform = character_left_flipped, position = "standing_doggy")
     mc.name "POLICE! Stop right there!!!"
     "[the_person.possessive_title] is bent over the contact, his cock in her hand."
@@ -2876,7 +2887,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     "Alan" "You... you aren't going to release any of that data... are you?"
     mc.name "Maybe. Maybe not. We'll see. But secrets carry a price. Be ready for it."
     "The contact just looks down. You look at the two girls and motion for them to follow you out of the room."
-    $ the_person.home.show_background()
+    $ mc.change_location(the_person.home)
     "You leave him there, cuffed to a chair, going back to his office."
     if ellie_ntr:
         the_person "Let me just... wash up really quick..."
@@ -2899,9 +2910,10 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     "You walk out of the contact's apartment. You can hear him yelling after you."
     "Alan" "Hey! You aren't... you can't leave me like this!?!"
     # TODO if you have beta male obedience serum for ashley, give the option to use it here.
+    $ mc.change_location(downtown)
     "[the_person.title] chuckles as you step outside the apartment."
     mc.name "I'm sure he'll figure out those cuffs have an easy release button sooner or later..."
-    $ mc.business.r_div.show_background()
+    $ mc.change_location(mc.business.r_div)
     "You and the two girls take your loot back to the research department. You start to unload your new equipment."
     the_researcher "We'll have to keep this somewhere secure."
     "You look at the nanobot production equipment."
@@ -2946,7 +2958,9 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
 
 label ellie_submission_label():   #Ellie submits herself to be used by MC
     $ the_person = ellie
+    $ mc.change_location(lobby)
     "Closing time. You make your rounds through the business, making sure the lights are off and the rooms are empty."
+    $ mc.change_location(mc.business.r_div)
     $ the_person.draw_person(position = "walking_away")
     "You enter the research department. You notice [the_person.possessive_title] standing at her desk, and barely hear her muttering to herself."
     the_person "I said work... there's no reason in on god's name that you shouldn't be working you piece of..."
