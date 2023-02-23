@@ -11,6 +11,12 @@ init 2 python:
         "Single": 25,
     }
 
+    breakup_chance_relationship = {
+        "Married" : 5,
+        "Fiancée" : 15,
+        "Girlfriend": 30,
+    }
+
     def so_relationship_improve_requirement_enhanced():
         if time_of_day > 0 and time_of_day < 4:
             return not get_so_relationship_improve_person() is None
@@ -134,10 +140,11 @@ label so_relationship_worsen_label_enhanced():
 label so_relationship_quarrel_label(the_person):
     $ so_title = SO_relationship_to_title(the_person.relationship)
 
-    if renpy.random.randint(0, 100) >= 20: # she will only break up 20% of the time
+    if renpy.random.randint(0, 100) >= breakup_chance_relationship[the_person.relationship]:
         if renpy.random.randint(0,3) == 1: # 25% change to complain, otherwise go to talk
             the_person "Hey [the_person.mc_title], it's good to see you. Me and my [so_title], [the_person.SO_name], had a fight."
             mc.name "I'm sorry to hear that, are you ok?"
+            $ the_person.change_happiness(-5)
             the_person "Yeah, I'm ok. Sorry to bother you."
             mc.name "That's fine, let me know if I can help."
             the_person "Thanks."
