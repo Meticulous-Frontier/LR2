@@ -679,7 +679,7 @@ label ashley_after_hours_label():   #Ashley looks for an opportunity to get MC a
     mc.name "Right. Well, I'll see you at work."
     the_person "Bye!"
     $ scene_manager.update_actor(the_person, position = "kissing")
-    "Suddenly, [the_person.title] puts her arms around you nad gives you a hug, then plants a quick kiss on your cheek."
+    "Suddenly, [the_person.title] puts her arms around you and gives you a hug, then plants a quick kiss on your cheek."
     "As quickly as it started, she backs away."
     $ scene_manager.update_actor(the_person,position = "walking_away")
     "[the_person.title] turns and starts to walk away. You watch her for a bit, admiring her figure, before going inside."
