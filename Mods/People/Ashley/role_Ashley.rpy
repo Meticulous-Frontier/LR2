@@ -392,6 +392,7 @@ label ashley_first_talk_label(the_person):
     $ ashley.event_triggers_dict["intro_complete"] = True
     $ ashley.add_unique_on_room_enter_event(ashley_room_overhear_classical)
     $ ashley.special_role.insert(0, prod_assistant_role)
+    $ mc.business.set_event_day("prod_assistant_advance") #start production assistant chain
     $ mc.business.prod_assistant = ashley
     $ ashley.add_unique_on_room_enter_event(mc_serum_intro)
     return
