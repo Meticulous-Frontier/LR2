@@ -2089,7 +2089,7 @@ init -1 python:
         if not self.outfit.matches(self.current_planned_outfit) \
             and (__builtin__.len(self.location.people) > 1 \
             or (self.should_wear_uniform() and not self.is_wearing_uniform()) \
-            or (self.should_wear_dress_code() and not self.outfit.is_wearing_dress_code()) \
+            or (self.should_wear_dress_code() and not self.is_wearing_dress_code()) \
             or (self.outfit.slut_requirement > self.sluttiness)):
             self.apply_planned_outfit()
             if draw_person:
