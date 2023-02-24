@@ -1423,11 +1423,7 @@ label Sarah_tits_reveal_label():
     else:
         the_person "Do you want to give them a closer look? I mean, you are the man who made this all possible..."
         "You quickly agree."
-        while the_person.outfit.get_upper_top_layer():    #If covered up, have her take her top off
-            $ the_clothing = the_person.outfit.get_upper_top_layer()
-            "[the_person.possessive_title] takes off her [the_clothing.name]."
-            $ the_person.draw_animated_removal(the_clothing)
-        $ the_clothing = None
+        $ the_person.strip_to_tits(prefer_half_off = False)
 
         "Her chest now bare before you, [the_person.title] takes a breast in her hand, enjoying the weight."
         the_person "Go ahead and touch them. These are so much better than implants, I can't believe how good they feel. And they are so sensitive too..."
@@ -1475,7 +1471,6 @@ label Sarah_tits_reveal_label():
     "She gets up and leaves the room. You smile to yourself, thinking about how good her new tits felt around your cock."
     $ the_person.apply_planned_outfit()
     $ add_sarah_workout_in_tshirt_action()
-    $ mc.change_location(hall)
     return
 
 label Sarah_workout_in_tshirt_label(the_person):    #60 sluttiness event

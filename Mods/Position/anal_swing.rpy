@@ -122,11 +122,7 @@ label scene_SB_anal_swing_2(the_girl, the_location, the_object):
     else:
         "You reach around her body with both hands and grab as her tits. The fabric covering them is maddening. You decide to strip her down."
         mc.name "[the_girl.title]... I need to feel your skin!"
-        while the_girl.outfit.get_upper_top_layer():    #If covered up, have her take her top off
-            $ the_clothing = the_girl.outfit.get_upper_top_layer()
-            "You take off [the_girl.possessive_title]'s [the_clothing.name]."
-            $ the_girl.draw_animated_removal(the_clothing)
-        $ the_clothing = None
+        $ the_person.strip_to_tits(position = SB_anal_swing.position_tag, visible_enough = True, prefer_half_off = True)
 
         mc.name "Mmm, you tits are amazing."
         if the_girl.get_opinion_score("showing her tits") > 0:

@@ -149,12 +149,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
             "In front of you, you can see [the_girl_2.title]'s huge tits heaving up and down, barely contained in her [top_clothing.name] as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
             $ top_clothing = None
             "You decide they've been contained for too long."
-            while not the_girl_2.outfit.get_upper_top_layer():    #If covered up, have her take her top off
-                $ the_clothing = the_girl_2.outfit.get_upper_top_layer()
-                "You take off [the_girl_2.title]'s [the_clothing.name]."
-                $ the_girl_2.outfit.remove_clothing(the_clothing)
-                $ scene_manager.draw_scene()
-            $ the_clothing = None
+            $ scene_manager.strip_to_tits(the_girl_2, visible_enough = True, prefer_half_off = True)
     else:
         if the_girl_2.outfit.tits_available():
             "In front of you, you can see [the_girl_2.title]'s [the_girl_2.tits_description] swaying up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
@@ -163,12 +158,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
             "In front of you, you can see [the_girl_2.title]'s perky tits swaying up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
             "They look great in her [top_clothing.name], but you decide they've been contained for too long."
             $ top_clothing = None
-            while the_girl_2.outfit.get_upper_top_layer():    #If covered up, have her take her top off
-                $ the_clothing = the_girl_2.outfit.get_upper_top_layer()
-                "You take off [the_girl_2.title]'s [the_clothing.name]."
-                $ the_girl_2.outfit.remove_clothing(the_clothing)
-                $ scene_manager.draw_scene()
-            $ the_clothing = None
+            $ scene_manager.strip_to_tits(the_girl_2, visible_enough = True, prefer_half_off = True)
     menu:
         "Squeeze her tits":
             "You grab [the_girl_2.title]'s tits. They feel warm and soft in your hands. You pinch and tug at her nipples."
