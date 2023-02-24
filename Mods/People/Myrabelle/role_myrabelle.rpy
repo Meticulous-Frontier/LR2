@@ -218,7 +218,6 @@ init -2 python:
     def myra_gaming_cafe_opening_requirement():
         if gaming_cafe_is_business_hours() and alexia.is_employee() and mc.business.days_since_event("myra_rude_intro") >= TIER_2_TIME_DELAY and alexia.days_employed > TIER_1_TIME_DELAY:
             return True
-        mc.business.set_event_day("myra_rude_intro", override = False)
         return False
 
 #Actions
@@ -391,7 +390,6 @@ init -2 python:
     def myra_train_focus_intro_requirement(the_person):
         if gaming_cafe_is_business_hours() and mc.business.days_since_event("myra_fails_tournament") > TIER_1_TIME_DELAY and myra_at_cafe():
             return True
-        mc.business.set_event_day("myra_fails_tournament", override = False)
         return False
 
     def myra_train_focus_requirement(the_person):
@@ -933,7 +931,6 @@ init -2 python:
         if mc.business.head_researcher.location == rd_division:
             if mc.business.days_since_event("energy_drink_start_research") > TIER_2_TIME_DELAY:
                 return True
-        mc.business.set_event_day("energy_drink_start_research", override = False)
         return False
 
     def myra_energy_drink_test_requirement(the_person):
@@ -1860,13 +1857,11 @@ init -2 python:
     def myra_blowjob_training_progress_requirement(the_person):
         if myra_at_cafe() and mc.business.days_since_event("myra_bj_train") >= TIER_2_TIME_DELAY and the_person.obedience >= 160:
             return True
-        mc.business.set_event_day("myra_bj_train", override = False)
         return False
 
     def myra_blowjob_training_final_requirement(the_person):
         if myra_at_cafe() and mc.business.days_since_event("myra_bj_train")  >= TIER_2_TIME_DELAY and the_person.obedience >= 180:
             return True
-        mc.business.set_event_day("myra_bj_train", override = False)
         return False
 
 init 3 python:

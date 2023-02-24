@@ -129,7 +129,7 @@ init 1400 python:
 init -1 python:
     def head_researcher_suggest_testing_room_requirement():
         if mc.business.research_tier >= 1:
-            if mc.business.days_since_event("tier_1_serum_unlock_day") > TIER_2_TIME_DELAY:
+            if mc.business.days_since_event("tier_1_serum_unlock_day", set_if_none = True) > TIER_2_TIME_DELAY:
                 if mc.is_at_work() and mc.business.is_open_for_business():
                     return True
         return False

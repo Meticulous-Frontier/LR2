@@ -124,12 +124,12 @@ init 2 python:      #Other python functions
         return get_random_from_list(able_person_list)
 
     def cuckold_employee_get():
-        the_person = get_person_by_identifier(mc.business.event_triggers_dict.get("cuckold_employee_ident", None))
-        if the_person is None:
+        person = get_person_by_identifier(mc.business.event_triggers_dict.get("cuckold_employee_ident", None))
+        if person is None:
             return None
-        if not the_person.is_employee():
+        if not person.is_employee():
             return None
-        return the_person
+        return person
 
     def cuckold_employee_finished():
         return mc.business.event_triggers_dict.get("cuckold_employee_finish",False)

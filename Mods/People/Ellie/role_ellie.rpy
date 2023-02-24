@@ -1535,7 +1535,7 @@ label ellie_dinner_date_label():
     return
 
 label ellie_lingerie_shopping_label(the_person):    #Ellie's 80 love event. She asks MC to take her shopping for exciting underwear to wear for him.
-    $ ellie.story_event_log("slut")
+    $ ellie.story_event_log("love")
     return
 
 #Sluttiness EVents
