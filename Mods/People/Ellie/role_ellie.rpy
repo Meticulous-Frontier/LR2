@@ -2193,18 +2193,22 @@ label ellie_asks_to_join_harem_label(the_person):   #100 sluttiness event. Ellie
 # Obedience Events
 init -1 python: #Requirement functions
     def ellie_tit_fuck_requirement():
+        if not mc.business.is_open_for_business():
+            return False
         if not ellie.story_event_ready("obedience"):
             return False
-        if mc.location == mc.business.r_div and ellie.obedience >= 120 and mc.business.is_open_for_business():
+        if mc.location == mc.business.r_div and ellie.obedience >= 120:
             return True
         return False
 
     def ellie_start_search_requirement():
         if not (mc.is_at_work() or mc.business.is_open_for_business()):
             return False
-        if ellie.days_since_event("obedience_event") <= TIER_2_TIME_DELAY or mc.business.get_event_day("IT_dir_nanobot_takeover_day") < TIER_3_TIME_DELAY:
+        if ellie.days_since_event("obedience_event") <= TIER_2_TIME_DELAY:
             return False
-        if ellie.obedience >= 140 and nanobot_program_is_IT() and mc.business.is_open_for_business():  #Need to make sure we know contact has ghosted head researcher.
+        if mc.business.get_event_day("IT_dir_nanobot_takeover_day") < TIER_3_TIME_DELAY:
+            return False
+        if ellie.obedience >= 140 and nanobot_program_is_IT():  #Need to make sure we know contact has ghosted head researcher.
             return True
         return False
 
@@ -2220,14 +2224,18 @@ init -1 python: #Requirement functions
     def ellie_search_finish_requirement():
         if not (mc.is_at_work() or mc.business.is_open_for_business()):
             return False
-        if ellie.story_event_ready("obedience") and time_of_day == 3:
+        if not ellie.story_event_ready("obedience"):
+            return False
+        if time_of_day == 3:
             return True
         return False
 
     def ellie_submission_requirement():
         if not (mc.is_at_work() or mc.business.is_open_for_business()):
             return False
-        if ellie.obedience > 160 and time_of_day == 3 and ellie.story_event_ready("obedience"):
+        if not ellie.story_event_ready("obedience"):
+            return False
+        if ellie.obedience > 160 and time_of_day == 3:
             return True
         return False
 
