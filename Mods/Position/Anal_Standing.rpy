@@ -594,6 +594,9 @@ label taboo_break_SB_anal_standing(the_girl, the_location, the_object):
         $ the_girl.draw_person(position = "standing_doggy", the_animation = ass_bob, animation_effect_strength = 0.7)
         "She speeds up."
     the_girl "Is that what you wanted?"
+    if not the_girl.vagina_visible():
+        "You quickly move some clothing out of the way..."
+        $ the_girl.strip_to_vagina(position = SB_anal_standing.position_tag, visible_enough = True, prefer_half_off = True)
     "You slap your cock down on her ass and grab her tight cheeks, spreading them apart to get a look at her asshole."
     mc.name "Almost. I think it's time we stretched you open."
     $ the_girl.call_dialogue(SB_anal_standing.associated_taboo+"_taboo_break")

@@ -78,28 +78,6 @@ init -1 python:
 
     Outfit.generate_clothing_list = generate_clothing_list_enhanced
 
-    def vagina_visible_enhanced(self):
-        return _get_transparency_factor(self.lower_body) >= 1.0
-    Outfit.vagina_visible = vagina_visible_enhanced
-
-    def tits_visible_enhanced(self):
-        return _get_transparency_factor(self.upper_body) >= 1.0
-    Outfit.tits_visible = tits_visible_enhanced
-
-    def bra_covered_enhanced(self):
-        if not self.wearing_bra():
-            return False
-
-        return _get_transparency_factor(self.upper_body, overwear = True) < 1.0
-    Outfit.bra_covered = bra_covered_enhanced
-
-    def panties_covered_enhanced(self):
-        if not self.wearing_panties():
-            return False
-
-        return _get_transparency_factor(self.lower_body, overwear = True) < 1.0
-    Outfit.panties_covered = panties_covered_enhanced
-
     def remove_random_upper_enhanced(self, top_layer_first = False, do_not_remove = False):
         #if top_layer_first only the upper most layer is removed, otherwise anything unanchored is a valid target.
         #if do_not_remove is set to True we only use this to find something valid to remove and return that clothing item. this lets us use this function to find thigns to remove with an animation.
