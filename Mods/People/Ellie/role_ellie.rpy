@@ -2710,7 +2710,7 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     "[starbuck.possessive_title] quickly reaches down to a shelf behind the counter, then drops some handcuffs on the counter."
     starbuck "The cop suits came with these. They aren't real, so there is a quick escape button on the side!"
     mc.name "Thanks [starbuck.title]."
-    $ mc.business.change_funds(300)
+    $ mc.business.change_funds(-300)
     "You pay for the outfits before setting out from the sex shop."
     starbuck "Have fun everyone!"
     $ scene_manager.remove_actor(starbuck)
