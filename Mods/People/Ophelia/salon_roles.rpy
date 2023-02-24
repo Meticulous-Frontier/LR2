@@ -95,13 +95,13 @@ init 2 python:
             return True
 
     def ophelia_is_over_her_ex_requirement(person):
-        if not ophelia_get_is_over_her_ex() and day >= ophelia_get_day_of_revenge_date() + 7:
+        if ophelia_is_over_her_ex_day() != 0 and day >= ophelia_get_day_of_revenge_date() + 7:
             if person.is_at_work():
                 return True
         return False
 
     def ophelia_talk_about_candace_requirement(person):
-        if ophelia_get_is_over_her_ex():
+        if ophelia_is_over_her_ex_day() > TIER_2_TIME_DELAY:
             if ophelia_get_can_talk_about_candace():
                 if ophelia_get_will_help_candace():
                     return False
@@ -116,7 +116,7 @@ init 2 python:
         return False
 
     def ophelia_increased_service_begin_requirement(person):
-        if ophelia_get_is_over_her_ex():
+        if ophelia_is_over_her_ex_day() > TIER_1_TIME_DELAY:
             if person.sluttiness_tier >= 3:
                 if person.is_at_work():
                     return True
@@ -274,9 +274,9 @@ label ophelia_give_chocolate_label():
         "Leave alone":
             "You decide to leave the candy alone."
     "You write a quick note for her."
-    if ophelia_get_knows_secret_admirer() and not ophelia_get_is_over_her_ex():
+    if ophelia_get_knows_secret_admirer() and ophelia_is_over_her_ex_day() == 0:
         "\'From your not so secret admirer <3\'"
-    elif ophelia_get_is_over_her_ex():
+    elif ophelia_is_over_her_ex_day() != 0:
         if not ophelia_get_knows_secret_admirer():
             "You consider for a while what to put down in your note. You decide eventually that it is time to come clean."
             #TODO add new event where next time you see her, Ophelia confronts you about being her secret admirer the whole time.
@@ -881,7 +881,7 @@ label ophelia_is_over_her_ex_label(the_person):
         salon_dye_cost = __builtin__.int(15)
 
         salon_total_cost = salon_style_cost + salon_dye_cost
-        the_person.event_triggers_dict["over_her_ex"] = 1
+        the_person.set_event_day("over_her_ex")
         the_person.add_unique_on_talk_event(ophelia_increased_service_begin)
     return
 
@@ -1143,8 +1143,8 @@ init 2 python:
     def ophelia_get_special_bj_unlocked():
         return salon_manager.event_triggers_dict.get("special_bj_unlock", 0)
 
-    def ophelia_get_is_over_her_ex():
-        return salon_manager.event_triggers_dict.get("over_her_ex", 0)
+    def ophelia_is_over_her_ex_day():
+        return salon_manager.days_since_event("over_her_ex")
 
     def ophelia_get_can_talk_about_candace():
         return salon_manager.event_triggers_dict.get("talk_about_candace", 0)

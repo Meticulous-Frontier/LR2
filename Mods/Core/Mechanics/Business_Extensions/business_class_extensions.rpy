@@ -442,15 +442,15 @@ init -1 python:
         return self.event_triggers_dict.get(dict_key, 0)
     Business.get_event_day = get_event_day
 
-    def days_since_event(self, dict_key, set_if_none = True):
+    def days_since_event(self, dict_key, set_if_none = False):
         if not dict_key in self.event_triggers_dict and set_if_none:
             self.set_event_day(dict_key)
 
-        return day - self.event_triggers_dict.get(dict_key, 0)
+        return day - self.event_triggers_dict.get(dict_key, day)
     Business.days_since_event = days_since_event
 
     def string_since_event(self, dict_key): #Returns a string describing how long it has been since an event
-        since = self.days_since_event(dict_key, set_if_none = False)
+        since = self.days_since_event(dict_key)
 
         if since < 1:
             return "earlier"

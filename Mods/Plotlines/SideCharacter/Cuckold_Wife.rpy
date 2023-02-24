@@ -164,7 +164,7 @@ label cuckold_employee_intro_label():
     mc.name "Take care."
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] begins to walk away. Well that was an awkward moment..."
-    $ the_person.set_event_day("breeding_event", override = True)
+    $ the_person.set_event_day("breeding_event")
     $ mc.business.add_mandatory_crisis(cuckold_employee_decision)
     return
 
@@ -174,7 +174,7 @@ label cuckold_employee_decision_label():
         #ABORT ABORT, we fucked up somewhere.
         # $ cuckold_employee().quest_completed()
         return
-    $ the_person.set_event_day("breeding_event", override = True)
+    $ the_person.set_event_day("breeding_event")
     $ the_person.draw_person()
     $ the_person.tag_sex_record("Vaginal Creampies")
     "You are lost in your work when a feminine voice clearing her throat nearby catches your attention. You look up and see [the_person.title] standing in front of you again."
@@ -371,7 +371,7 @@ label cuckold_employee_rethink_decision_label():
         #ABORT ABORT, we fucked up somewhere.
         return
     $ the_person.ideal_fertile_day = (day % 30) + 2  #Peak fertility is in 2 days.
-    $ the_person.set_event_day("breeding_event", override = True)
+    $ the_person.set_event_day("breeding_event")
     $ the_person.event_triggers_dict["fertility_day"] = day + 2
     "You are lost in paperwork when a figure enters your peripheral vision. You look up and see [the_person.title] standing in front of you."
     $ the_person.draw_person()
@@ -641,7 +641,7 @@ label cuckold_employee_after_window_label():
     if the_person is None:
         #ABORT ABORT, we fucked up somewhere.
         return
-    $ the_person.set_event_day("breeding_event", override = True)
+    $ the_person.set_event_day("breeding_event")
     if not the_person.is_pregnant():
         if the_person.comp_sex_record("Vaginal Creampies") >= 5:  #You creamed her at least 5 times via the event. #TODO we should probably track this via person.sex_record instead...
             $ become_pregnant(the_person)
@@ -669,7 +669,7 @@ label cuckold_employee_after_window_label():
     return
 
 label cuckold_employee_reconsider_label(the_person):
-    $ the_person.set_event_day("breeding_event", override = True)
+    $ the_person.set_event_day("breeding_event")
     "You walk up to [the_person.title]. When she sees you she frowns."
     $ the_person.draw_person(emotion = "sad")
     the_person "Hey [the_person.mc_title]... I've been meaning to talk to you..."
@@ -748,7 +748,7 @@ label cuckold_employee_fertile_return_label():
         #ABORT ABORT, we fucked up somewhere.
         # $ cuckold_employee().quest_completed()
         return
-    $ the_person.set_event_day("breeding_event", override = True)
+    $ the_person.set_event_day("breeding_event")
     $ the_person.tag_sex_record("Vaginal Creampies")
     "You are lost in paperwork when a figure enters your peripheral vision. You look up and see [the_person.title] standing in front of you."
     $ the_person.draw_person()

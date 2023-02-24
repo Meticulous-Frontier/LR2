@@ -1437,7 +1437,7 @@ label myra_lewd_game_fuck_intro_label(the_person):
     "You can now visit [the_person.possessive_title] at the gaming cafe in the evening and she will let you fuck her in random positions, even letting you finish wherever it shows on the game!"
     $ myra.event_triggers_dict["lewd_game_fuck"] = True
     $ clear_scene()
-    $ mc.business.set_event_day("myra_lewd_game_fuck", override = True)
+    $ mc.business.set_event_day("myra_lewd_game_fuck")
     #$ myra.add_unique_on_room_enter_event(myra_lewd_gaming)
     call advance_time from _call_advance_myra_lewd_fuck_01
     return
@@ -1477,7 +1477,7 @@ label myra_adult_gaming_intro_label(the_person):    #80 sluttiness event. requir
     "She wants to open an adults only lewd section to the gaming cafe. Want's to know what MC thinks about it."
     "MC thinks it is a great idea. She says check back at a later time."
     $ mc.business.add_mandatory_crisis(myra_adult_gaming_opening)
-    $ mc.business.set_event_day("adult_cafe_opening_day", override = True)
+    $ mc.business.set_event_day("adult_cafe_opening_day")
     return
 
 label myra_adult_gaming_opening_label():
@@ -2185,7 +2185,7 @@ label myra_blowjob_training_intro_label(the_person):      #Myra ask for blowjob 
         "It seems you may have flipped a switch in [the_person.possessive_title]'s brain."
     #$ myra.increase_sex_skill("Oral")  #Moved to training condition file
     $ myra.increase_opinion_score("giving blowjobs")
-    $ mc.business.set_event_day("myra_bj_train", override = True)
+    $ mc.business.set_event_day("myra_bj_train")
     $ myra.add_unique_on_room_enter_event(myra_blowjob_training_progress)
     the_person "That actually was a lot more fun than I thought it would be."
     mc.name "Yes. Your enthusiasm helped a lot. I want you to practice your technique for a bit."
@@ -2313,7 +2313,7 @@ label myra_blowjob_training_progress_label(the_person):
     "[the_person.title] rolls her eyes."
     the_person "Right. I'm sure you do. Now fuck off, I gotta get decent."
     # $ myra.increase_sex_skill("Oral") Moved to condition training file
-    $ mc.business.set_event_day("myra_bj_train", override = True)
+    $ mc.business.set_event_day("myra_bj_train")
     $ myra.add_unique_on_room_enter_event(myra_blowjob_training_final)
     $ clear_scene()
     $ the_person.apply_outfit(the_person.planned_outfit)
@@ -2387,7 +2387,7 @@ label myra_blowjob_training_final_label(the_person):
     "[the_person.title] rolls her eyes, but you also see a little smirk. She has learned to enjoy servicing you."
     the_person "Right. I'm sure you do. Now fuck off, I gotta get decent."
     # $ myra.increase_sex_skill("Oral") Moved to condition training file
-    $ mc.business.set_event_day("myra_bj_train", override = True)
+    $ mc.business.set_event_day("myra_bj_train")
     $ clear_scene()
     $ the_person.apply_outfit(the_person.planned_outfit)
     "You step out of the supply closet."

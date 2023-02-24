@@ -92,7 +92,7 @@ label climax_check_double_orgasm_control_label():
 
 label climax_check_orgasm_control_in_convo_label(the_person):
     $ cum_location = None
-    $ mc.business.set_event_day("mc_orgasm_in_convo_serum", override = True)
+    $ mc.business.set_event_day("mc_orgasm_in_convo_serum")
     "In the middle of your conversation with [the_person.possessive_title], you decide to take advantage of your superior orgasm control to unload on her."
     "You quickly whip out your dick and stroke yourelf to an orgasm."
     #First, determine if she cooperates or just stands there.

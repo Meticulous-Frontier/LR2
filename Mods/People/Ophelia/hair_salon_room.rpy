@@ -80,7 +80,6 @@ init 2 python: # Declare variables to use
         salon_manager.event_triggers_dict["unique_sex_positions"] = ophelia_unique_sex_positions
         salon_manager.event_triggers_dict["ex_name"] = Person.get_random_male_name()
         salon_manager.event_triggers_dict["favorite_drink"] = "gin sour"
-        salon_manager.event_triggers_dict["over_her_ex"] = 0
         salon_manager.event_triggers_dict["talk_about_candace"] = 0
         salon_manager.event_triggers_dict["help_candace"] = 0
         salon_manager.event_triggers_dict["full_style_state"] = 0

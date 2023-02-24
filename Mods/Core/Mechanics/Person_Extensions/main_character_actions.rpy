@@ -88,9 +88,7 @@ init 2 python:
     def do_a_favor_requirement(person):
         if mc.energy < 15:
             return "Requires: 15{image=gui/extra_images/energy_token.png}"
-        if person.days_since_event("obedience_favor", set_if_none = False) is None:
-            person.set_event_day("obedience_favor", set_day = -1)
-        if person.days_since_event("obedience_favor") >= TIER_0_TIME_DELAY:
+        if person.days_since_event("obedience_favor", set_if_none = True) >= TIER_0_TIME_DELAY:
             return True
         return "Asked for a favor too recently"
 

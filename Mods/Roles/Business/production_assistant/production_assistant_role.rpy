@@ -187,7 +187,7 @@ label mc_serum_intro_label(the_person):
     "You get up and step out of the serum production area."
     "You definitely feel conflicted about what just happened... but you have to admit, the prospect of getting your hands on serums that would enhance your personal performance is tempting."
     "You decide to go along with it for now, but you definitely need to keep a closer eye on [the_person.possessive_title] and her activities."
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.set_event_day("prod_assistant_advance")
     return
 
 label mc_serum_timeout_label():
@@ -229,7 +229,7 @@ label mc_serum_review_intro_label(the_person):
     $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_essential_oils_intro)
     "You step away from [the_person.possessive_title]. You can now talk to her at work about serums for personal use."
     "She will leave them in your office for you each work day. If she needs your attention on something, she may hang around and wait for you to pick them up."
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.set_event_day("prod_assistant_advance")
     return
 
 label mc_serum_review_label(the_person):
@@ -351,7 +351,7 @@ label quest_essential_oils_research_start_label(the_person):
     mc.name "Perfect. Let me know what you find out."
     the_person "Okay. Is there anything else I can do you for you?"
     $ mc.business.head_researcher.add_unique_on_talk_event(quest_essential_oils_research_end)
-    $ mc.business.set_event_day("essential_oils_research_start", override = True)
+    $ mc.business.set_event_day("essential_oils_research_start")
     return
 
 label quest_essential_oils_research_end_label(the_person):
@@ -384,7 +384,7 @@ label quest_essential_oils_discover_supplier_label(the_person):
     return
 
 label quest_essential_oils_decision_label(the_person):
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.set_event_day("prod_assistant_advance")
     mc.name "I have an employee who told me she got some essential oils from you. Would you happen to be able to procure a bulk order?"
     the_person "Oh? How big are we talking?"
     mc.name "Well, I am interested in using them in a small run of pharmaceuticals I am developing."
@@ -433,7 +433,7 @@ label prod_assistant_unlock_auras_label(the_person):
         mc.name "That does sound useful. Let me know if you come up with something."
         "You have unlocked Personal Aura serums! These serums effect girls around you with every passage of time."
         "Check the serum review screen for information on what to research to enable them!"
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.set_event_day("prod_assistant_advance")
     $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_aura_upgrade)
     $ the_person.add_unique_on_room_enter_event(prod_assistant_unlock_cum)
     return
@@ -458,7 +458,7 @@ label prod_assistant_unlock_cum_label(the_person):
     the_person "I've added some info for prototypes to the database. Let me know if you want to try one of the new formulas!"
     "You have unlocked a new category of personal serum traits! This new category changes the effect of your semen on women exposed to it."
     $ mc.business.event_triggers_dict["mc_serum_cum_unlocked"] = True
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.set_event_day("prod_assistant_advance")
     $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_cum_upgrade)
     $ the_person.add_unique_on_room_enter_event(prod_assistant_unlock_physical)
     return
@@ -469,7 +469,7 @@ label prod_assistant_unlock_physical_label(the_person):
     "Unlocks physical MC serums."
     $ mc.business.event_triggers_dict["mc_serum_physical_unlocked"] = True
     $ mc.business.prod_assistant.add_unique_on_room_enter_event(prod_assistant_physical_upgrade)
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.set_event_day("prod_assistant_advance")
     return
 
 label prod_assistant_performance_upgrade_label(the_person):
@@ -483,7 +483,7 @@ label prod_assistant_performance_upgrade_label(the_person):
     mc.name "Excellent."
     "All performance related personal serums have increased in tier by 1!"
     $ mc.business.event_triggers_dict["mc_serum_energy_tier"] = 1
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.set_event_day("prod_assistant_advance")
     return
 
 label prod_assistant_aura_upgrade_label(the_person):
@@ -497,7 +497,7 @@ label prod_assistant_aura_upgrade_label(the_person):
     mc.name "Excellent."
     "All aura related personal serums increase in tier by 1!."
     $ mc.business.event_triggers_dict["mc_serum_aura_tier"] = 1
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.set_event_day("prod_assistant_advance")
     return
 
 label prod_assistant_cum_upgrade_label(the_person):
@@ -589,7 +589,7 @@ label prod_assistant_cum_upgrade_label(the_person):
     "[the_person.possessive_title] quickly gets dressed, then walks out of your office with her sample."
     "All cum related personal serums have increased in tier by 1!"
     $ mc.business.event_triggers_dict["mc_serum_cum_tier"] = 1
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.set_event_day("prod_assistant_advance")
     return
 
 label prod_assistant_physical_upgrade_label(the_person):
@@ -597,7 +597,7 @@ label prod_assistant_physical_upgrade_label(the_person):
     "In this label, the production assistant discusses recent progression with physical related serums."
     "All physical related serums increase in tier by 1 after this label."
     $ mc.business.event_triggers_dict["mc_serum_physical_tier"] = 0
-    $ mc.business.set_event_day("prod_assistant_advance", override = True)
+    $ mc.business.set_event_day("prod_assistant_advance")
     return
 
 label prod_assistant_increase_duration_1_label(the_person):

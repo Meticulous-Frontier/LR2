@@ -245,7 +245,7 @@ label head_researcher_suggest_testing_room_label():
     return
 
 label head_researcher_strip_tease_label(the_person):    #140 obedience event
-    $ the_person.set_event_day("obedience_event", override = True)
+    $ the_person.set_event_day("obedience_event")
     "You step into the research and development department. There is something on the edge of your mind but you just can't put your finger on it."
     "Something strange is going on. You feel tired. Uninspired. There is no passion in your work."
     $ the_person.draw_person(position = "sitting")
@@ -351,7 +351,7 @@ label head_researcher_cure_discovery_intro_label():
         $ mc.end_text_convo()
         "You quickly head to the lab."
         $ mc.change_location(rd_division)
-    $ the_person.set_event_day("obedience_event", override = True)
+    $ the_person.set_event_day("obedience_event")
     $ the_person.draw_person()
     the_person "Hey! I need to talk to you about something."
     mc.name "What is it?"
@@ -491,7 +491,7 @@ label head_researcher_cure_discovery_patent_kept_label():
     else:
         "Suddenly, you realize what must have happened. [the_person.title], not happy with your intention to keep the patent, must have secretly donated the rights to it."
     "You call her up."
-    $ the_person.set_event_day("obedience_event", override = True)
+    $ the_person.set_event_day("obedience_event")
     the_person "Hello?"
     mc.name "Hey. So, I'm guessing you're the one I have to thank for the email I got this morning from the Red Cross?"
     "There is silence on the other end. You think you hear an expletive whispered."
@@ -558,9 +558,9 @@ label head_researcher_cure_finish_label(the_person):
 
 label head_researcher_testing_room_intro_label(the_person):
     "In this label, we go with the head researcher to the new serum testing room, where we introduce the idea of an intensive serum trait test."
-    $ mc.business.set_event_day("serum_trait_test", override = True)
+    $ mc.business.set_event_day("serum_trait_test")
     $ the_person.add_unique_on_room_enter_event(head_researcher_strip_tease)
-    $ the_person.set_event_day("obedience_event", override = True)
+    $ the_person.set_event_day("obedience_event")
     return
 
 label head_researcher_serum_trait_test_label(the_person):
@@ -730,7 +730,7 @@ label head_researcher_serum_trait_test_label(the_person):
                 the_tester "Ah, okay. Thank you!"
                 $ scene_manager.clear_scene()
                 "You step out of the room, leaving [the_tester.title] to take care of herself. Your work here has increased your mastery of [the_serum_trait.name]!"
-                $ mc.business.set_event_day("serum_trait_test", override = True)
+                $ mc.business.set_event_day("serum_trait_test")
                 $ the_tester.have_orgasm()
                 call advance_time from _call_advance_time_mastery_research_02
                 return "Advance Time"
@@ -739,7 +739,7 @@ label head_researcher_serum_trait_test_label(the_person):
         mc.name "Yes. Thank you for you help, [the_tester.title]."
     $ scene_manager.clear_scene()
     "[the_tester.title] steps out of the room also. Your work here has increased your mastery of [the_serum_trait.name]!"
-    $ mc.business.set_event_day("serum_trait_test", override = True)
+    $ mc.business.set_event_day("serum_trait_test")
     call advance_time from _call_advance_time_mastery_research_01
     return "Advance Time"
 

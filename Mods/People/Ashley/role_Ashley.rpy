@@ -544,10 +544,10 @@ label ashley_classical_concert_date_label():
     the_person "Bye!"
     stephanie "See ya then!"
     $ scene_manager.clear_scene()
-    $ ashley.set_event_day("obedience_event", override = True)
-    $ ashley.set_event_day("love_event", override = True)
-    $ ashley.set_event_day("slut_event", override = True)
-    $ ashley.set_event_day("story_event", override = True)
+    $ ashley.set_event_day("obedience_event")
+    $ ashley.set_event_day("love_event")
+    $ ashley.set_event_day("slut_event")
+    $ ashley.set_event_day("story_event")
     $ ashley.event_triggers_dict["concert_date"] = 2
     #Add events for Ashley's three story lines
     $ mc.business.add_mandatory_crisis(ashley_porn_video_discover)
@@ -2351,7 +2351,7 @@ label ashley_second_concert_date_label():
     $ the_person.planned_outfit = the_person.wardrobe.get_outfit_with_name("Ashley Night Out Outfit") or the_person.get_random_appropriate_outfit(guarantee_output = True)
     $ the_person.apply_outfit(the_person.planned_outfit)
     $ the_person.event_triggers_dict["second_date_complete"] = True
-    $ ashley.set_event_day("story_event", override = True)
+    $ ashley.set_event_day("story_event")
     "Evening falls and soon it is time to make your way downtown to meet [the_person.title], your girlfriend's sister, for a date to another classical music concert."
     "Things with the two girls have gotten complicated. [ashley.fname] has been able to keep things between you a secret from her sister, but is getting more and more demanding and needy."
     "Lately it seems like [stephanie.title] is getting a little suspicious, and [the_person.possessive_title]'s demand to share you for a date is certain to have her unsettled."
@@ -2749,7 +2749,7 @@ label ashley_sneaks_over_label():   #Requires 60 love and 60 sluttiness events c
         mc.change_location(bedroom)
         the_person = ashley
         the_person.event_triggers_dict["sneaks_over_complete"] = True
-        ashley.set_event_day("story_event", override = True)
+        ashley.set_event_day("story_event")
 
     "After a long day, you sit down at your computer to work on a couple things before bedtime."
     "After getting through some emails, your phone vibrates."

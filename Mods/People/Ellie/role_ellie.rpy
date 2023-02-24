@@ -1070,10 +1070,10 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     #Load up the three story branches
     $ the_person.add_unique_on_room_enter_event(ellie_never_tasted_cock)
     $ mc.business.add_mandatory_crisis(ellie_brings_lunch)
-    $ ellie.set_event_day("obedience_event", override = True)
-    $ ellie.set_event_day("love_event", override = True)
-    $ ellie.set_event_day("slut_event", override = True)
-    $ ellie.set_event_day("story_event", override = True)
+    $ ellie.set_event_day("obedience_event")
+    $ ellie.set_event_day("love_event")
+    $ ellie.set_event_day("slut_event")
+    $ ellie.set_event_day("story_event")
     $ mc.business.add_mandatory_crisis(ellie_tit_fuck)
     # Link to her team up scenes here also?
     return
@@ -1813,8 +1813,6 @@ label ellie_never_tasted_cock_label(the_person):  #This is Ellie's 40 sluttiness
 label ellie_never_been_fucked_label(the_person):  #This is Ellie's 60 sluttiness event. Also requires X number of oral encounters?
     $ ellie.story_event_log("slut")
     $ the_person.arousal = 70
-    # $ ellie.set_event_day("slut_event", override = True)
-    # $ ellie.set_event_day("story_event", override = True)
     $ the_person.draw_person(position = "sitting")
     "You check up on [the_person.title] while she is working."
     "She appears to be getting herself really worked up again. She has one hand between her legs, touching herself, while she tries to type with the other."
@@ -2369,8 +2367,6 @@ label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     "She'll get used to servicing your needs in your office with more than just her tits soon enough. For now you are content with the leap of progress you have made with her."
     $ mc.business.add_mandatory_crisis(ellie_start_search)
     $ ellie.story_event_log("obedience")
-    # $ ellie.set_event_day("obedience_event", override = True)
-    # $ ellie.set_event_day("story_event", override = True)
     $ clear_scene()
     return
 
