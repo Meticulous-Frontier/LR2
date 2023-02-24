@@ -152,7 +152,11 @@ init -1 python:
             else:
                 self._bedroom = renpy.random.choice([generic_bedroom_1, generic_bedroom_2, generic_bedroom_3, generic_bedroom_4])
         return self._bedroom
-    Person.bedroom = property(get_person_bedroom, None, None, "Her bedroom")
+
+    def set_person_bedroom(self, location):
+        self._bedroom = location
+
+    Person.bedroom = property(get_person_bedroom, set_person_bedroom, None, "Her bedroom")
 
     # use dedicated locations, since each location has different objects
     def change_to_person_bedroom(self):

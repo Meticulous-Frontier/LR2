@@ -2,6 +2,7 @@
 init 3 python:
     list_of_instantiation_labels.append("build_custom_rooms")
     add_label_hijack("normal_start", "validate_custom_rooms")
+    add_label_hijack("normal_start", "link_unique_character_bedrooms")
 
 init 15 python:
     dungeon_objects = [
@@ -182,7 +183,17 @@ label build_custom_rooms():
         gaming_cafe = Room("gaming_cafe", "Gaming Cafe", [], standard_gaming_cafe_backgrounds, gaming_cafe_objects, [], [gaming_cafe_grind_character_action, gaming_cafe_buy_max_level_token_action, gaming_cafe_adult_swim], False, [6,2], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(gaming_cafe)
         gaming_cafe.privacy_level = 3
+    return
 
+label link_unique_character_bedrooms(stack):
+    # only executed once, after game-start (prevents duplicate bedroom objects for these characters)
+    python:
+        lily.bedroom = lily_bedroom
+        mom.bedroom = mom_bedroom
+        aunt.bedroom = aunt_bedroom
+        cousin.bedroom = cousin_bedroom
+
+        execute_hijack_call(stack)
     return
 
 label validate_custom_rooms(stack):
@@ -209,6 +220,17 @@ init 10 python:
             unique = list(set(room.objects))
             if len(unique) != len(room.objects):    # mismatch update
                 room.objects = unique
+        return
+
+    def fix_duplicate_room_objects():
+        if not lily.bedroom is lily_bedroom:
+            lily.bedroom = lily_bedroom
+        if not mom.bedroom is mom_bedroom:
+            mom.bedroom = mom_bedroom
+        if not aunt.bedroom is aunt_bedroom:
+            aunt.bedroom = aunt_bedroom
+        if not cousin.bedroom is cousin_bedroom:
+            cousin.bedroom = cousin_bedroom
         return
 
     def fix_lobby_objects():
@@ -290,8 +312,6 @@ init 10 python:
         city_hall.privacy_level = 3
         return
 
-
-# Dead code? Doesn't seem to trigger.   #This is declared as after load in above dec.^^^^
 label update_custom_rooms(stack):
     python:
         update_room_visibility()
@@ -300,6 +320,7 @@ label update_custom_rooms(stack):
         fix_duplicate_objects_in_rooms()
         fix_lobby_objects()
         fix_missing_rooms()
+        fix_duplicate_room_objects()
 
         execute_hijack_call(stack)
     return
