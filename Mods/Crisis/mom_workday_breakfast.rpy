@@ -17,7 +17,7 @@ init 2 python:
             return True
         return False
 
-    def mom_breakfast_mod_initialization(self):
+    def mom_breakfast_mod_initialization(action_mod):
         # No Init code for this yet.
         return
 
