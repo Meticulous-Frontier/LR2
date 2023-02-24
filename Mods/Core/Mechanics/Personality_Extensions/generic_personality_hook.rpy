@@ -644,6 +644,15 @@ init 2 python:
         alexia.sexy_opinions["cheating on men"] = [-2, False]  # she loves her boyfriend
         return
 
+    def update_cousin_opinions():
+        # kissing an groping are the only actions open for Gabrielle, it's too difficult when they are 'hated'
+        cousin.sexy_opinions["kissing"] = [1, False]
+        cousin.sexy_opinions["being fingered"] = [2, False]
+
+        # Goth so must love black
+        cousin.opinions["the colour black"] = [2, True]
+        return
+
     def get_titles_extended(org_func):
         def get_titles_wrapper(person):
             list_of_titles = org_func(person)
@@ -802,6 +811,7 @@ label activate_generic_personality(stack):
 
         update_stephanie_opinions()
         update_alexia_opinions()
+        update_cousin_opinions()
 
         generate_random_mothers_and_daughters()
 
