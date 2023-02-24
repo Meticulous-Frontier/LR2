@@ -10,7 +10,7 @@ init -1 python: #Requirement functions
         if mc.business.get_employee_count() < 10:
             return False  # wait until we have a sizeable business
         if mc.business.unisex_restroom_unlocks.get("unisex_restroom_gloryhole", 0) == 0:
-            return False  # disabled until gloryhole unlocked
+            return False  # disabled until glory hole unlocked
 
         # check if we have a married woman without kids who is slutty enough for breeding
         return not find_avail_cuckold_employee() is None
@@ -23,7 +23,7 @@ init -1 python: #Requirement functions
     def cuckold_employee_decision_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
             if cuckold_employee_get() is None:
-                return True #Return true so that the vvent clears and we clean up at the start of the label.
+                return True #Return true so that the event clears and we clean up at the start of the label.
             elif cuckold_employee_get().days_since_event("breeding_event") >= TIER_1_TIME_DELAY:
                 return True
         return False
@@ -31,7 +31,7 @@ init -1 python: #Requirement functions
     def cuckold_employee_rethink_decision_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
             if cuckold_employee_get() is None:
-                return True #Return true so that the vvent clears and we clean up at the start of the label.
+                return True #Return true so that the event clears and we clean up at the start of the label.
             elif cuckold_employee_get().days_since_event("breeding_event") >= TIER_1_TIME_DELAY:
                 return True
         return False
@@ -47,7 +47,7 @@ init -1 python: #Requirement functions
     def cuckold_employee_gloryhole_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
             if cuckold_employee_get() is None:
-                return True #Return true so that the vvent clears and we clean up at the start of the label.
+                return True #Return true so that the event clears and we clean up at the start of the label.
             elif cuckold_employee_get().days_since_event("breeding_event") >= TIER_1_TIME_DELAY:
                 return True
         return False
@@ -55,7 +55,7 @@ init -1 python: #Requirement functions
     def cuckold_employee_after_window_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
             if cuckold_employee_get() is None:
-                return True #Return true so that the vvent clears and we clean up at the start of the label.
+                return True #Return true so that the event clears and we clean up at the start of the label.
             elif cuckold_employee_get().days_since_event("breeding_event") >= 7:    #One week of fucking
                 return True
         return False
@@ -66,7 +66,7 @@ init -1 python: #Requirement functions
     def cuckold_employee_knocked_up_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
             if cuckold_employee_get() is None:
-                return True #Return true so that the vvent clears and we clean up at the start of the label.
+                return True #Return true so that the event clears and we clean up at the start of the label.
             elif cuckold_employee_get().days_since_event("breeding_event") >= TIER_1_TIME_DELAY:
                 return True
         return False
@@ -74,7 +74,7 @@ init -1 python: #Requirement functions
     def cuckold_employee_fertile_return_requirement():
         if mc.is_at_work() and mc.business.is_open_for_business():
             if cuckold_employee_get() is None:
-                return True #Return true so that the vvent clears and we clean up at the start of the label.
+                return True #Return true so that the event clears and we clean up at the start of the label.
             elif cuckold_employee_get().is_highly_fertile():    #She has started a new fertile period
                 return True
         return False
@@ -95,24 +95,24 @@ init 1 python:      #Actions
 
 init 2 python:      #Other python functions
     def setup_cuckold_employee():
-        the_person = find_avail_cuckold_employee()
-        if the_person is None:
+        person = find_avail_cuckold_employee()
+        if person is None:
             #Probably reset this event somehow.
             return
-        mc.business.event_triggers_dict["cuckold_employee_ident"] = the_person.identifier
+        mc.business.event_triggers_dict["cuckold_employee_ident"] = person.identifier
         mc.business.event_triggers_dict["cuckold_employee_start"] = True
         mc.business.event_triggers_dict["cuckold_employee_finish"] = False
-        the_person.event_triggers_dict["start_day"] = 9999
-        the_person.event_triggers_dict["decision_day"] = 9999
-        the_person.event_triggers_dict["fertility_day"] = 9999
-        the_person.event_triggers_dict["creampie_count"] = 0
-        the_person.add_opinion("creampies", 2, discovered = False, add_to_log = False)
-        the_person.add_opinion("bareback sex", 2, discovered = False, add_to_log = False)
-        the_person.add_opinion("vaginal sex", 2, discovered = False, add_to_log = False)
-        the_person.on_birth_control = False
-        the_person.change_baby_desire(1000)
+        person.event_triggers_dict["start_day"] = 9999
+        person.event_triggers_dict["decision_day"] = 9999
+        person.event_triggers_dict["fertility_day"] = 9999
+        person.event_triggers_dict["creampie_count"] = 0
+        person.add_opinion("creampies", 2, discovered = False, add_to_log = False)
+        person.add_opinion("bareback sex", 2, discovered = False, add_to_log = False)
+        person.add_opinion("vaginal sex", 2, discovered = False, add_to_log = False)
+        person.on_birth_control = False
+        person.change_baby_desire(1000)
         mc.business.add_mandatory_crisis(cuckold_employee_intro)
-        side_character_set_unavail(the_person)
+        side_character_set_unavail(person)
         return
 
     def find_avail_cuckold_employee():
