@@ -408,7 +408,7 @@ label do_a_favor_label(the_person):
                 else:
                     the_person "Sorry, I'm not here to play dress up for you."
                     "Ouch."
-            $ the_person.set_event_day("obedience_med_favor", override = True)
+            $ the_person.set_event_day("obedience_med_favor")
         "Large Favor" if the_person.days_since_event("obedience_large_favor", set_if_none = True) > TIER_2_TIME_DELAY and mc.phone.has_number(the_person):
             $ favor_success = True  #calculate this instead of assuming true
             if the_person.is_family():
@@ -477,6 +477,6 @@ label do_a_favor_label(the_person):
                     mc.name "Okay, well if you ever change your mind, you would be great!"
 
 
-            $ the_person.set_event_day("obedience_large_favor", override = True)
-    $ the_person.set_event_day("obedience_favor", override = True)
+            $ the_person.set_event_day("obedience_large_favor")
+    $ the_person.set_event_day("obedience_favor")
     return
