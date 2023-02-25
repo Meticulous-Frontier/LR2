@@ -1850,7 +1850,7 @@ init -2 python:
 
     def myra_blowjob_training_intro_requirement(the_person):
         if the_person.obedience >= 140 and the_person.opinion_score_giving_blowjobs() > -2:
-            if myra_at_cafe():
+            if myra_at_cafe() and the_person.event_triggers_dict("can_train_focus", False):
                 return True
         return False
 
