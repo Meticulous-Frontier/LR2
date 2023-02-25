@@ -1351,7 +1351,9 @@ label ellie_dinner_date_label():
     $ ellie.event_triggers_dict["dinner_date"] = False
     $ ellie.story_event_log("love")
     "It is Sunday night. You have a dinner date with [the_person.title] tonight. You shoot her a text and she sends you her address."
+    $ mc.change_location(downtown)
     "You swing by a store on the way there and pick up a bottle of mid range red wine. The make your way to her place."
+    $ mc.change_location(her_hallway)
     "Soon, you are at the front door to her apartment, knocking on her door."
     $ the_person.learn_home()
     $ the_person.draw_person()
@@ -1406,6 +1408,7 @@ label ellie_dinner_date_label():
         $ the_person.draw_person(position = "against_wall")
         mc.name "Which way to the bedroom."
         the_person "Back there!"
+        $ mc.change_location(the_person.bedroom)
         "She points to her bedroom door. You quickly open up and maneuver her through it, then throw her down on the bed."
         $ the_person.draw_person(position = "missionary")
         the_person "I know you aren't the typical romance type... but once in a while it is nice to do things the old fashioned way!"
@@ -1414,7 +1417,7 @@ label ellie_dinner_date_label():
         mc.name "Let's get these pesky clothes off you now, [the_person.title]."
         $ the_person.strip_outfit(position = "missionary")
         "You look down at [the_person.possessive_title]. Time to get some."
-        call fuck_person(the_person, private = True) from _call_sex_description_ellie_after_dinner_encore_01
+        call fuck_person(the_person, start_position = missionary, start_object = make_bed(), private = True, skip_condom = True, skip_intro = True) from _call_sex_description_ellie_after_dinner_encore_01
         $ had_sex = True
     else:
         mc.name "Thank you [the_person.title]. That was delicious."
@@ -1430,7 +1433,7 @@ label ellie_dinner_date_label():
         the_person "Oh! That's a great idea..."
         $ the_person.draw_person(position = "walking_away")
         "You get up and follow [the_person.possessive_title] into her bedroom."
-        $ the_person.bedroom.show_background()
+        $ mc.change_location(the_person.bedroom)
         $ the_person.draw_person(position = the_person.idle_pose)
         the_person "This is it... this is where I..."
         "Her voice drifts off as you close in on her."
