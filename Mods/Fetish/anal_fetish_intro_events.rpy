@@ -407,7 +407,7 @@ label anal_fetish_family_intro_label(the_person):
         "You give her ass a smack, admiring the way her cheeks wobble."
     else:
         mc.name "Let's get this out of the way first."
-        $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
+        $ the_person.strip_to_vagina(position = "standing_doggy", prefer_half_off = True)
         "Once you've got her clothing out of the way, you give her ass a smack, admiring the way her cheeks wobble."
     $ the_person.change_arousal(10) #65
     "You give her another spank. Her cheeks are starting to redden a bit, but it's obvious from her arousal that she loves it."
