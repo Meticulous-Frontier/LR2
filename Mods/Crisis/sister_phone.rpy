@@ -106,7 +106,7 @@ label sister_phone_crisis_action_label():
                     renpy.pause(2)
             the_person "I hope you think [the_person.possessive_title] looks sexy in her underwear ;)"
         else:
-            $ the_person.strip_outfit(exclude_lower = True, delay = 0)
+            $ the_person.outfit.remove_all_upper_clothing()
             if mc.business.is_weekend():
                 the_person "I'm so glad it's the weekend, I can finally let these girls out..."
                 $ the_person.draw_person(emotion = "happy")
