@@ -25,9 +25,9 @@ init python:
         position_option_list.append(["Let her take a break", "Nothing"])
         return position_option_list
 
-# init 1:
-#     python:
-#         missionary.link_positions(piledriver,"transition_missionary_piledriver")
+init 1:
+    python:
+        prone_bone.link_positions(prone_anal, "transition_prone_bone_prone_anal")
 
 label prone_decision_label(the_girl, the_location, the_object, the_position):
     "[the_girl.possessive_title] seems exhausted, but you are still full of vigor. You could probably push her down and fuck her prone, but she may or may not like it..."
@@ -283,7 +283,26 @@ label scene_prone_bone_3(the_girl, the_location, the_object):
 
     return
 
-
+label transition_prone_bone_prone_anal(the_girl, the_location, the_object):
+    "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the [the_object.name]."
+    if the_girl.has_taboo("anal_sex"):
+        mc.name "It's time we took care of your little butthole, don't you think?"
+        $ the_girl.call_dialogue(prone_bone.associated_taboo+"_taboo_break")
+        the_girl "Ahrgh...mmmhph..."
+    else:
+        "You line your cock up with her asshole, the tip just barely pressing against it."
+        menu:
+            "Slide it all in":
+                "You keep a firm grip on her hips as you push forward, sliding it into her ass in one smooth motion."
+                the_girl "Mmmhph... Fuck..."
+            "Ram it home!":
+                "You get a firm grip on her hips, make sure you're lined up, and push yourself in with all your might."
+                if the_girl.get_opinion_score("being submissive") > 0:
+                    the_girl "Ah! Yes! Make me...mmmhph!"
+                    $ the_girl.change_arousal(5* the_girl.get_opinion_score(["being submissive", "anal sex"]))
+                else:
+                    the_girl "Oh fuck! Mmmhph! YES!"
+    return
 
 label outro_prone_bone(the_girl, the_location, the_object):
     "You get to hear every little gasp and moan from [the_girl.title] as you're pressed up against her. Combined with the feeling of fucking her pussy it's not long before you're pushed past the point of no return."

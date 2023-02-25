@@ -25,9 +25,9 @@ init python:
         position_option_list.append(["Let her take a break", "Nothing"])
         return position_option_list
 
-# init 1:
-#     python:
-#         missionary.link_positions(piledriver,"transition_missionary_piledriver")
+init 1:
+    python:
+        prone_anal.link_positions(prone_bone, "transition_prone_anal_prone_bone")
 
 label prone_anal_decision_label(the_girl, the_location, the_object, the_position):
     "[the_girl.possessive_title] seems exhausted, but you are still full of vigor. You could probably push her down and fuck her ass prone, but she may or may not like it..."
@@ -288,6 +288,18 @@ label scene_prone_anal_3(the_girl, the_location, the_object):
 
     return
 
+label transition_prone_anal_prone_bone(the_girl, the_location, the_object):
+    "You slide your cock out of her ass and drag it down between her legs, ending with your tip resting against her pussy."
+    mc.name "No, this is what I really want."
+    if the_girl.has_taboo("vaginal_sex"):
+        $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
+        "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
+        "After a moment of resistance your cock spreads her [the_girl.pubes_description] pussy open and you slide smoothly inside of her."
+        the_girl "Mmmhph...YES!!"
+    else:
+        "You ram your whole length into her wet pussy and start pounding her."
+        the_girl "Aahhh...mmmhph...aahhh..."
+    return
 
 
 label outro_prone_anal(the_girl, the_location, the_object):
