@@ -174,27 +174,30 @@ label return_from_seminar_action_label(the_person):
                 if the_person.get_opinion_score("drinking cum") > the_person.get_opinion_score("being covered in cum"):
                     "She withdraws her mouth from your cock, resting it by the tip as she looks into your eyes with her mouth wide open."
                     $ the_person.cum_in_mouth()
-                    $ the_person.draw_person(position="blowjob")
+                    $ the_person.draw_person(position = "blowjob")
                     $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
                     the_person "Yes, [the_person.mc_title]! Shoot your load right into my mouth. I love the taste of you."
                 else:
+                    $ the_person.draw_person(position = "kneeling1")
                     "She pulls your cock out of her mouth then looks intently at your eyes."
                     $ the_person.cum_on_face()
-                    $ the_person.draw_person(position="blowjob")
+                    $ the_person.draw_person(position = "kneeling1")
                     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
                     the_person "Yes, [the_person.mc_title]. Shoot it right onto me! Give me one... big... facial."
             else:
                 if the_person.get_opinion_score("giving tit fucks") > the_person.get_opinion_score("being covered in cum"):
+                    $ the_person.draw_person(position = "kneeling1")
                     "She pulls your cock out of her mouth then looks up into your eyes as she presents her chest to you."
                     $ the_person.cum_on_tits()
-                    $ the_person.draw_person(position="blowjob")
+                    $ the_person.draw_person(position = "kneeling1")
                     $ ClimaxController.manual_clarity_release(climax_type = "tits", the_person = the_person)
                     the_person "Like my tits, [the_person.mc_title]? They'll look much better covered in your cum..."
                 else:
+                    $ the_person.draw_person(position = "kneeling1")
                     "She pulls your cock out of her mouth then looks up into your eyes as she leans away from you."
                     the_person "Oh, [the_person.mc_title]. I just applied new makeup. Please, don't ruin it."
                     $ the_person.cum_on_stomach()
-                    $ the_person.draw_person(position="blowjob")
+                    $ the_person.draw_person(position = "kneeling1")
                     $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)
                     "[the_person.title] keeps sitting on her knees while receiving your load on her body."
 
