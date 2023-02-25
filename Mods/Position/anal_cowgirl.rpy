@@ -296,6 +296,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
             the_girl "Oh yes... so full..."
         "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
         "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
+        $ the_girl.draw_person(position = "missionary")
         "She rolls off and lies next to you on the [the_object.name]."
     elif the_girl.sluttiness < 30 or the_girl.get_opinion_score("anal creampies") < 0:
         #She always pull off and you cum on her stomach.
@@ -334,7 +335,9 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
                 $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
                 $ SB_anal_cowgirl.redraw_scene(the_girl)
                 the_girl "Whew, that was close..."
-                "She rolls off and lies next to you on the [the_object.name]."
+
+        $ the_girl.draw_person(position = "missionary")
+        "She rolls off and lies next to you on the [the_object.name]."
     return
 
 label transition_default_SB_anal_cowgirl(the_girl, the_location, the_object):
@@ -482,6 +485,7 @@ label GIC_outro_SB_anal_cowgirl(the_girl, the_location, the_object, the_goal = N
         $ the_girl.cum_on_stomach()
         $ SB_anal_cowgirl.redraw_scene(the_girl)
         $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
+        $ the_girl.draw_person(position = "missionary")
         "She rolls off and lies next to you on the [the_object.name]."
     else:
         $ SB_anal_cowgirl.call_default_outro(the_girl, the_location, the_object)

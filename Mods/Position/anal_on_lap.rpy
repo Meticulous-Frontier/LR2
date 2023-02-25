@@ -356,6 +356,6 @@ label GIC_outro_anal_on_lap(the_girl, the_location, the_object, the_goal = None)
         $ the_girl.cum_on_ass()
         $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
         $ anal_on_lap.redraw_scene(the_girl)
-        "She rolls off and lies next to you on the [the_object.name]."
+        "After a while she sits next to you on the [the_object.name]."
     else:
         $ anal_on_lap.call_default_outro(the_girl, the_location, the_object)

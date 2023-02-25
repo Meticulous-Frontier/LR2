@@ -299,7 +299,8 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
                 $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
                 $ SB_reverse_cowgirl.redraw_scene(the_girl)
                 the_girl "Whew, that was close..."
-                "She rolls off and lies next to you on the [the_object.name]."
+        $ the_girl.draw_person(position = "missionary")
+        "She rolls off and lies next to you on the [the_object.name]."
     return
 
 label transition_default_SB_reverse_cowgirl(the_girl, the_location, the_object):
@@ -451,7 +452,8 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
                 $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = the_girl)
                 "She watches as your cock twitches and finishes."
                 the_girl "Look at all that wasted cum... Too bad, [the_girl.mc_title]!"
-                "She rolls off and lies next to you on the [the_object.name]."
+        $ the_girl.draw_person(position = "missionary")
+        "She rolls off and lies next to you on the [the_object.name]."
     elif the_goal == "vaginal creampie":
         the_girl "Yes! Ah!"
         "[the_girl.title] drops herself down, grinding her hips against yours and pushing your cock as deep into her as possible."
@@ -483,6 +485,7 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
             $ SB_reverse_cowgirl.redraw_scene(the_girl)
             "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
             "[the_girl.possessive_title] straddles you for a few more seconds as she catches her breath. Your cum drips out of her and onto your stomach."
+        $ the_girl.draw_person(position = "missionary")
         "She rolls off and lies next to you on the [the_object.name]."
     elif the_goal == "body shot":
         the_girl "Ohhh, cum all over my ass!"
@@ -493,7 +496,7 @@ label GIC_outro_SB_reverse_cowgirl(the_girl, the_location, the_object, the_goal 
         "She strokes you and simultaneously points your cock at her ass."
         $ the_girl.cum_on_ass()
         $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_girl)
-        $ SB_reverse_cowgirl.redraw_scene(the_girl)
+        $ the_girl.draw_person(position = "missionary")
         "She rolls off and lies next to you on the [the_object.name]."
     elif the_goal == "oral creampie":
         the_girl "Wait! I want it in my mouth!"
