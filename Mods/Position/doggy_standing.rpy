@@ -391,7 +391,7 @@ label transition_SB_doggy_standing_doggy(the_girl, the_location, the_object):
     return
 
 label transition_SB_doggy_standing_SB_anal_standing(the_girl, the_location, the_object):
-    "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the floor."
+    "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the [the_object.name]."
     "You line your cock up with her asshole, the tip just barely pressing against it."
     call transition_default_anal_penetration_dialog(the_girl, the_location, the_object) from _call_transition_default_anal_penetration_dialog_2
     return
@@ -399,7 +399,7 @@ label transition_SB_doggy_standing_SB_anal_standing(the_girl, the_location, the_
 label transition_standing_doggy_to_standing_anal_taboo_break_label(the_girl, the_location, the_object):
     "You hold onto [the_girl.title]'s ass cheeks with each hand. You spread them apart, giving you a clear view of her asshole as you continue to fuck her pussy."
     if the_girl.arousal >= 70 or report_log.get("girl orgasms", 0) > 0:
-        "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the floor. You hold her ass cheeks in place with one hand, while you guide your well lubed cock to her tight hole."
+        "You pull out of [the_girl.title]'s wet pussy, leaving it dripping fluids on the [the_object.name]. You hold her ass cheeks in place with one hand, while you guide your well lubed cock to her tight hole."
     else:
         "You hold her ass cheeks in place with one hand as you pull back and out of [the_girl.title]'s pussy. You hold your cock with the other hand, guiding it as you press the head against her tight hole."
     "You lean forward to whisper in her ear."
