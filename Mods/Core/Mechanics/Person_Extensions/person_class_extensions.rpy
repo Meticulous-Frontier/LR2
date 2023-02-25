@@ -1749,10 +1749,11 @@ init -1 python:
         if self.has_role(maid_role):
             return not self.job.schedule.get_destination() is None
 
-        # special handling for unique characters working at stripclub (use roles since unique chars only get role instead of job)
-        if self.is_strip_club_employee() \
-            and self.location in [strip_club, bdsm_room]:
-                return True
+        # special handling for girls working at stripclub (use roles instead of job)
+        if self.is_strip_club_employee():
+            if (get_strip_club_foreclosed_stage() < 1 or get_strip_club_foreclosed_stage() >= 5):
+                return self.location in [strip_club, bdsm_room]
+            return False
 
         if not self.job:
             return False
@@ -1896,7 +1897,7 @@ init -1 python:
     Person.is_employee = is_employee
 
     def is_strip_club_employee(self):
-        return get_strip_club_foreclosed_stage() >= 5 and self.has_role([stripper_role, stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role])
+        return self.has_role([stripper_role, stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role])
     Person.is_strip_club_employee = is_strip_club_employee
 
     def only_normal_employee(self):
