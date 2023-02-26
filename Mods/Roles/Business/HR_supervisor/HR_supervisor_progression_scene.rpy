@@ -378,7 +378,7 @@ label hr_director_prog_trans_scene_4(the_group):
         the_person "[the_person.mc_title]... you know I care about you, right?"
         mc.name "Of course."
         the_person "Good"
-    $ the_person.draw_person(position = "stand3")
+    $ scene_manager.update_actor(the_person, position = "stand3")
     "[the_person.possessive_title] stands up."
     mc.name "Is there something wrong?"
     the_person "No. You know, I love these Monday meetings. Do you know why?"
