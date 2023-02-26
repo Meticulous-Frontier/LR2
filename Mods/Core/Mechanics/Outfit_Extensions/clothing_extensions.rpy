@@ -46,8 +46,8 @@ init -1 python:
         new_score = self.slut_value
         if WardrobeBuilder.clothing_in_preferences("skimpy outfits", self):
             new_score += 1
-        # if WardrobeBuilder.clothing_in_preferences("conservative outfits", self):
-        #     new_score -= 3
+        if WardrobeBuilder.clothing_in_preferences("conservative outfits", self):
+            new_score -= 3
         if WardrobeBuilder.clothing_in_preferences("showing her tits", self):
             new_score += 2
         if WardrobeBuilder.clothing_in_preferences("showing her ass", self):
@@ -58,11 +58,9 @@ init -1 python:
             new_score += 1
         if self in [pumps, high_heels, leggings]:
             new_score += 3 # small extra modifier
-        if self in [two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, micro_skirt, daisy_dukes, jean_hotpants]:
+        if self in [pinafore, two_part_dress, thin_dress, nightgown_dress, thigh_high_boots, micro_skirt, daisy_dukes, jean_hotpants]:
             new_score += 5 # extremely slutty clothing (applies extra modifier)
-        if self in [pinafore, lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear, leotard]:
-            new_score += 5 # migrated in from outfit_extensions. Remove?
-        return new_score
+        return new_score if new_score > 0 else 0
 
     Clothing.get_slut_value = get_slut_value_enhanced
 
@@ -71,7 +69,5 @@ init -1 python:
     #######################################
 
     def get_alpha(self):
-        if self.is_similar(thin_dress):
-            return self.colour[3] * 0.75
         return self.colour[3]
     Clothing.get_alpha = get_alpha
