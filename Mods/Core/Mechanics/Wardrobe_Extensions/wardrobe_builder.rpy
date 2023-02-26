@@ -655,16 +655,16 @@ init 5 python:
             underwear = self.build_underwear(points, min_points)
             overwear = self.build_overwear(points, min_points)
 
-            for item in [x for x in underwear.upper_body if overwear.can_add_upper(x)]:
+            for item in [x for x in underwear.upper_body if not x.is_extension]:
                 overwear.add_upper(item)
 
-            for item in [x for x in underwear.lower_body if overwear.can_add_lower(x)]:
+            for item in [x for x in underwear.lower_body if not x.is_extension]:
                 overwear.add_lower(item)
 
-            for item in [x for x in underwear.feet if overwear.can_add_feet(x)]:
+            for item in [x for x in underwear.feet if not x.is_extension]:
                 overwear.add_feet(item)
 
-            for item in [x for x in underwear.accessories if overwear.can_add_accessory(x)]:
+            for item in [x for x in underwear.accessories if not x.is_extension]:
                 overwear.add_accessory(item)
 
             # prevent any item from having no colour set
@@ -743,7 +743,6 @@ init 5 python:
             self.add_accessory_from_list(outfit, self.build_filter_list(neckwear_without_collars, points, min_points, self.person.base_outfit.accessories), 3, color_upper)
 
             outfit.update_name()
-
             return outfit
 
         def build_underwear(self, points = 0, min_points = 0):
