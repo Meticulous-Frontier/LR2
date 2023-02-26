@@ -596,6 +596,8 @@ init 5 python:
                     new_panties.colour = panties.colour
                 else:
                     new_panties.colour = the_colour
+                    new_panties.colour[3] = panties.colour[3]
+
                 outfit.remove_clothing(panties)
                 outfit.add_lower(new_panties)
                 return True
@@ -622,6 +624,8 @@ init 5 python:
                     new_bra.colour = bra.colour
                 else:
                     new_bra.colour = the_colour
+                    new_bra.colour[3] = bra.colour[3]
+
                 outfit.remove_clothing(bra)
                 outfit.add_upper(new_bra)
                 return True
