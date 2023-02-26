@@ -46,8 +46,8 @@ init -1 python:
         new_score = self.slut_value
         if WardrobeBuilder.clothing_in_preferences("skimpy outfits", self):
             new_score += 1
-        if WardrobeBuilder.clothing_in_preferences("conservative outfits", self):
-            new_score -= 3
+        # if WardrobeBuilder.clothing_in_preferences("conservative outfits", self):
+        #     new_score -= 3
         if WardrobeBuilder.clothing_in_preferences("showing her tits", self):
             new_score += 2
         if WardrobeBuilder.clothing_in_preferences("showing her ass", self):
