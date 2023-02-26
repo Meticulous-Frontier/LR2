@@ -120,33 +120,24 @@ init -1 python:
     Wardrobe.get_outfit_with_name = wardrobe_get_outfit_with_name
 
 
-    def calculate_minimum_sluttiness(person, target_sluttiness):
-        minimum_sluttiness = target_sluttiness - person.sluttiness # raise minimum sluttiness by the amount over normal sluttiness
-        if target_sluttiness > 40 and minimum_sluttiness == 0: # when there is no minimum sluttiness, increase it when the girl is slutty
-            minimum_sluttiness = (target_sluttiness - 40) // 2
-        if minimum_sluttiness > 40: # prevent minimum sluttiness from going too high (late game, high sluttiness)
-            minimum_sluttiness = 40
-        if target_sluttiness > 100 and minimum_sluttiness < 20: # when very slutty, don't bother with non-sexy clothes.
-            minimum_sluttiness = 20 + minimum_sluttiness
-        return minimum_sluttiness
-
     def build_assembled_outfit(outfit_under, outfit_over):
         assembled_outfit = outfit_over.get_copy()
 
-        for upper in outfit_under.upper_body:
+        for upper in [x for x in outfit_under.upper_body if not x.is_extension]:
             assembled_outfit.add_upper(upper.get_copy())
 
-        for lower in outfit_under.lower_body:
+        for lower in [x for x in outfit_under.lower_body if not x.is_extension]:
             assembled_outfit.add_lower(lower.get_copy())
 
-        for feet_wear in outfit_under.feet:
+        for feet_wear in [x for x in outfit_under.feet if not x.is_extension]:
             assembled_outfit.add_feet(feet_wear.get_copy())
 
-        for acc in outfit_under.accessories:
+        for acc in [x for x in outfit_under.accessories if not x.is_extension]:
             assembled_outfit.add_accessory(acc.get_copy())
 
         assembled_outfit.build_outfit_name()
 
+        # print("Assembled Outfit: {}".format(assembled_outfit.name))
         return assembled_outfit
 
     def generate_random_appropriate_outfit(person, outfit_type = "FullSets", sluttiness = None):
@@ -243,7 +234,9 @@ init -1 python:
         target_sluttiness = __builtin__.int(person.sluttiness * (1.0 + skimpy_outfit_score + marketing_score + sluttiness_modifier - conservative_score))
         target_sluttiness = __builtin__.min(target_sluttiness, slut_limit)
 
-        minimum_sluttiness = calculate_minimum_sluttiness(person, target_sluttiness)
+        minimum_sluttiness = __builtin__.int(target_sluttiness * .3)
+
+        # print("Target slut {}, min slut {}".format(target_sluttiness, minimum_sluttiness))
 
         if not self.outfits and not self.underwear_sets and not self.overwear_sets:
             #We have nothing to make a outfit out of. Use default builder function.

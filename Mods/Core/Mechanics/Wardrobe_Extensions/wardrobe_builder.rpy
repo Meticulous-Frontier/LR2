@@ -659,23 +659,7 @@ init 5 python:
             underwear = self.build_underwear(points, min_points)
             overwear = self.build_overwear(points, min_points)
 
-            for item in [x for x in underwear.upper_body if not x.is_extension]:
-                overwear.add_upper(item)
-
-            for item in [x for x in underwear.lower_body if not x.is_extension]:
-                overwear.add_lower(item)
-
-            for item in [x for x in underwear.feet if not x.is_extension]:
-                overwear.add_feet(item)
-
-            for item in [x for x in underwear.accessories if not x.is_extension]:
-                overwear.add_accessory(item)
-
-            # prevent any item from having no colour set
-            for cloth in [x for x in overwear if __builtin__.len(x.colour) < 4]:
-                cloth.colour = [1, 1, 1, .2]    # transparent white is easy to spot for debugging
-
-            return overwear
+            return build_assembled_outfit(underwear, overwear)
 
         def get_hate_list(self):
             return [x for x in self.preferences.keys() + self.color_prefs.keys() if self.person.get_opinion_score(x) == -2]
