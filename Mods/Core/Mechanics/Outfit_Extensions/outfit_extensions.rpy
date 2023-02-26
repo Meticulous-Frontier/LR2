@@ -302,8 +302,8 @@ init -1 python:
 
     def get_overwear(self):
         overwear = Outfit(self.name + " Overwear")
-        overwear.upper_body = list(x for x in self.upper_body if x.layer >= 2)
-        overwear.lower_body = list(x for x in self.lower_body if x.layer >= 2)
+        overwear.upper_body = list(x for x in self.upper_body if x.layer >= 2 and not x.is_extension)
+        overwear.lower_body = list(x for x in self.lower_body if x.layer >= 2 and not x.is_extension)
         overwear.feet = list(x for x in self.feet if x.layer >= 2)
         overwear.accessories = list(x for x in self.accessories if x.layer >= 2)
         return overwear
@@ -311,8 +311,8 @@ init -1 python:
 
     def get_underwear(self):
         underwear = Outfit(self.name + " Underwear")
-        underwear.upper_body = list(x for x in self.upper_body if x.layer < 2)
-        underwear.lower_body = list(x for x in self.lower_body if x.layer < 2)
+        underwear.upper_body = list(x for x in self.upper_body if x.layer < 2 and not x.is_extension)
+        underwear.lower_body = list(x for x in self.lower_body if x.layer < 2 and not x.is_extension)
         underwear.feet = list(x for x in self.feet if x.layer < 2)
         underwear.accessories = list(x for x in self.accessories if x.layer < 2)
         return underwear
