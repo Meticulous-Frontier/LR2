@@ -300,21 +300,37 @@ init -1 python:
         return
     Outfit.remove_bra_and_panties = remove_bra_and_panties
 
-    def get_overwear(self):
+    def get_overwear(self, exclude_upper = False, exclude_lower = False, exclude_feet = False, exclude_accessories = False, exclude_shoes = False):
         overwear = Outfit(self.name + " Overwear")
-        overwear.upper_body = list(x for x in self.upper_body if x.layer >= 2 and not x.is_extension)
-        overwear.lower_body = list(x for x in self.lower_body if x.layer >= 2 and not x.is_extension)
-        overwear.feet = list(x for x in self.feet if x.layer >= 2)
-        overwear.accessories = list(x for x in self.accessories if x.layer >= 2)
+        if not exclude_upper:
+            for item in [x for x in self.upper_body if x.layer >= 2 and not x.is_extension]:
+                overwear.add_upper(item.get_copy())
+        if not exclude_lower:
+            for item in [x for x in self.lower_body if x.layer >= 2 and not x.is_extension]:
+                overwear.add_lower(item.get_copy())
+        if not exclude_feet:
+            for item in [x for x in self.feet if x.layer >= (3 if exclude_shoes else 2)]:
+                overwear.add_feet(item.get_copy())
+        if not exclude_accessories:
+            for item in [x for x in self.accessories if x.layer >= 2]:
+                overwear.add_accessory(item.get_copy())
         return overwear
     Outfit.get_overwear = get_overwear
 
-    def get_underwear(self):
+    def get_underwear(self, exclude_upper = False, exclude_lower = False, exclude_feet = False, exclude_accessories = False, exclude_shoes = False):
         underwear = Outfit(self.name + " Underwear")
-        underwear.upper_body = list(x for x in self.upper_body if x.layer < 2 and not x.is_extension)
-        underwear.lower_body = list(x for x in self.lower_body if x.layer < 2 and not x.is_extension)
-        underwear.feet = list(x for x in self.feet if x.layer < 2)
-        underwear.accessories = list(x for x in self.accessories if x.layer < 2)
+        if not exclude_upper:
+            for item in [x for x in self.upper_body if x.layer <= 2 and not x.is_extension]:
+                underwear.add_upper(item.get_copy())
+        if not exclude_lower:
+            for item in [x for x in self.lower_body if x.layer <= 2 and not x.is_extension]:
+                underwear.add_lower(item.get_copy())
+        if not exclude_feet:
+            for item in [x for x in self.feet if x.layer <= (1 if exclude_shoes else 2)]:
+                underwear.add_feet(item.get_copy())
+        if not exclude_accessories:
+            for item in [x for x in self.accessories if x.layer <= 2]:
+                underwear.add_accessory(item.get_copy())
         return underwear
     Outfit.get_underwear = get_underwear
 

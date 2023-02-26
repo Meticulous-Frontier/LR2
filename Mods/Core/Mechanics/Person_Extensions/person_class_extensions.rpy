@@ -2124,12 +2124,7 @@ init -1 python:
                 self.planned_outfit = self.decide_on_outfit()
 
             yoga_outfit = Outfit("Yoga Outfit")
-            for cloth in [x for x in self.planned_outfit.upper_body if x.layer <= 2 and not x.is_extension]:
-                yoga_outfit.add_upper(cloth.get_copy())
-            for cloth in [x for x in self.planned_outfit.lower_body if x.layer <= 2 and not x.is_extension]:
-                yoga_outfit.add_lower(cloth.get_copy())
-            for item in [x for x in self.planned_outfit.accessories]:
-                yoga_outfit.add_accessory(item.get_copy())
+            yoga_outfit.merge_outfit(self.planned_outfit.get_underwear(exclude_feet = True))
 
             # make sure she's not nude (erica nude yoga goes into other function)
             if not yoga_outfit.wearing_bra():
