@@ -2120,16 +2120,32 @@ init -1 python:
     def apply_yoga_outfit(self):
         # strip to underwear or else pick workout outfit
         if self.effective_sluttiness("underwear_nudity") >= 60:
-            self.location_outfit = Outfit("Yoga Outfit")
-            for cloth in [x for x in self.planned_outfit.upper_body if x.layer <= 2]:
-                self.location_outfit.add_upper(cloth)
-            for cloth in [x for x in self.planned_outfit.lower_body if x.layer <= 2]:
-                self.location_outfit.add_lower(cloth)
+            if not self.planned_outfit: # make sure we have a planned outfit
+                self.planned_outfit = self.decide_on_outfit()
+
+            yoga_outfit = Outfit("Yoga Outfit")
+            for cloth in [x for x in self.planned_outfit.upper_body if x.layer <= 2 and not x.is_extension]:
+                yoga_outfit.add_upper(cloth.get_copy())
+            for cloth in [x for x in self.planned_outfit.lower_body if x.layer <= 2 and not x.is_extension]:
+                yoga_outfit.add_lower(cloth.get_copy())
             for item in [x for x in self.planned_outfit.accessories]:
-                self.location_outfit.add_accessory(item)
-            self.location_outfit.add_feet(slips.get_copy(), colour_black)
+                yoga_outfit.add_accessory(item.get_copy())
+
+            # make sure she's not nude (erica nude yoga goes into other function)
+            if not yoga_outfit.wearing_bra():
+                item = renpy.random.choice([bralette, lace_bra, strappy_bra])
+                if yoga_outfit.can_add_upper(item):
+                    yoga_outfit.add_upper(item.get_copy(), colour_black)
+            if not yoga_outfit.wearing_panties():
+                item = renpy.random.choice([cute_lace_panties, thong, strappy_panties])
+                if yoga_outfit.can_add_lower(item):
+                    yoga_outfit.add_lower(item.get_copy(), colour_black)
+
+            yoga_outfit.add_feet(slips.get_copy(), colour_black)
+
+            self.location_outfit = self.personalize_outfit(yoga_outfit, allow_skimpy = False)
         elif workout_wardrobe:
-            self.location_outfit = self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self))
+            self.location_outfit = self.personalize_outfit(workout_wardrobe.decide_on_outfit2(self), allow_skimpy = False)
 
         self.apply_outfit(self.location_outfit)
         return
