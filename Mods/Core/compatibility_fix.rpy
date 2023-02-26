@@ -170,6 +170,9 @@ init 1 python:
     # special case, it's part upper (layer 3) and part underwear (layer 1)
     leotard_bottom.layer = 1
 
+    # special case, nightgown dress upper (layer 1) and bottom (layer 3 - like skirt)
+    nightgown_dress.layer = 1
+
     # move makeup to layer 2 (in between layer)
     for x in [light_eye_shadow, heavy_eye_shadow, blush, lipstick]:
         x.layer += 1
