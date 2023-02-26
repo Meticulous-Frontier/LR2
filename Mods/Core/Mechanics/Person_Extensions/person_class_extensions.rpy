@@ -2134,12 +2134,10 @@ init -1 python:
             # make sure she's not nude (erica nude yoga goes into other function)
             if not yoga_outfit.wearing_bra():
                 item = renpy.random.choice([bralette, lace_bra, strappy_bra])
-                if yoga_outfit.can_add_upper(item):
-                    yoga_outfit.add_upper(item.get_copy(), colour_black)
+                yoga_outfit.add_upper(item.get_copy(), colour_black)
             if not yoga_outfit.wearing_panties():
                 item = renpy.random.choice([cute_lace_panties, thong, strappy_panties])
-                if yoga_outfit.can_add_lower(item):
-                    yoga_outfit.add_lower(item.get_copy(), colour_black)
+                yoga_outfit.add_lower(item.get_copy(), colour_black)
 
             yoga_outfit.add_feet(slips.get_copy(), colour_black)
 
