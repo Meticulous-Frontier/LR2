@@ -76,11 +76,15 @@ init -2 python:
         return False
 
     def kaya_ask_out_requirement(the_person):
+        if the_person.event_triggers_dict.get("move_help_day", 0) != 0: # she stops going out with MC
+            return False
         if the_person.is_at_work() and the_person.love > 20 and time_of_day == 3 and not kaya_can_get_drinks():
             return not mc.business.date_scheduled_today()
         return False
 
     def kaya_get_drinks_requirement(the_person):
+        if the_person.event_triggers_dict.get("move_help_day", 0) != 0: # she stops going out with MC
+            return False
         if the_person.location != the_person.job.job_location:
             return False
         if the_person.love < 20:
