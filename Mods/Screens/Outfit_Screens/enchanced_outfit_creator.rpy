@@ -911,13 +911,25 @@ init 2:
                                                         padding (1,1)
                                                         text "Panties Covered: " + str(demo_outfit.panties_covered()) style "serum_text_style_traits"
 
+                                                    # DEBUG CODE TO SEE THE BODY SCORE AND SLUT SCORE OF THE OUTFIT
+                                                    # frame:
+                                                    #     background "#143869"
+                                                    #     xsize 250
+                                                    #     padding (1,1)
+                                                    #     text "Body score: " + str(demo_outfit.get_body_parts_slut_score()) style "serum_text_style_traits"
+                                                    # frame:
+                                                    #     background "#143869"
+                                                    #     xsize 250
+                                                    #     padding (1,1)
+                                                    #     text "Slut score: " + str(demo_outfit.get_total_slut_modifiers()) style "serum_text_style_traits"
+
                                                     # DEBUG CODE TO SEE WHAT IS SELECTED WHEN WE CLICK AROUND
                                                     # frame:
                                                     #     background "#43B197"
                                                     #     xsize 250
                                                     #     padding (1,1)
                                                     #     if (selected_clothing):
-                                                    #         text "Seletect Item: " + selected_clothing.name style "serum_text_style_traits"
+                                                    #         text "Selected Item: " + selected_clothing.name style "serum_text_style_traits"
 
                                     frame:
                                         background "#0a142688"
