@@ -1253,7 +1253,8 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
                 mc.name "Thank you for telling me. I really appreciate it."
                 "You take the condom and put it back in your wallet. You start to move back toward [the_person.possessive_title]."
                 the_person "You just... so you..."
-        "You pick up [the_person.title] and throw her on the bed."
+        $ mc.change_location(the_person.bedroom)
+        "You pick up [the_person.title] move to the bedroom and throw her on the bed."
         the_person "{=kaya_lang}Hika!{/=kaya_lang}"
         $ the_person.draw_person(position = "missionary")
         "You quickly get on top of her. Her legs naturally wrap around your body as she urges you closer."
@@ -1269,7 +1270,10 @@ label kaya_asks_for_help_moving_label():    #Timed event after the drink refusal
             the_person "Oh my god... I never knew how good it could be to get filled like that!"
             $ become_pregnant(the_person, mc_father = True) #For story reasons, knock her up for sure.
             "[the_person.possessive_title] rubs her belly. A bit of your cum is dribbling down her slit, the rest deposited deep inside of her."
-            "Surely one creampie can't be TOO risky... can it?"
+            if report_log.get("creampies", 0) > 1:
+                "Surely a few creampies can't be TOO risky... can it?"
+            else:
+                "Surely one creampie can't be TOO risky... can it?"
     else:
         "You pick up [the_person.title] and throw her on the bed."
         the_person "{=kaya_lang}Hika!{/=kaya_lang}"
