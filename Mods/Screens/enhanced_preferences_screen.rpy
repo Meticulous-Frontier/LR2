@@ -126,7 +126,8 @@ init 2: # Add some additional
                         vbox:
                             style_prefix "check"
                             label "Visualization"
-                            textbutton "Show Portrait" action [ToggleField(persistent, "show_portrait", True, False)] text_size 24
+                            textbutton "Show Character Portrait" action [ToggleField(persistent, "show_portrait", True, False)] text_size 24
+                            textbutton "Show Detailed Goals" action [ToggleField(persistent, "show_goal_ui", True, False)] text_size 24
                             label "Dialog Opacity" text_size 18
                             bar value FieldValue(persistent, 'say_window_alpha', 1.0, max_is_zero=False, offset=0, step=.1) ysize 20 xsize 300
                             label "Hud Opacity" text_size 18

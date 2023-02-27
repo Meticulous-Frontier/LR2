@@ -79,7 +79,7 @@ screen mc_perk_sheet():
                                     text_style "textbutton_text_style"
                                     action Function(perk_system.click_ability, ability_perk)
                                     sensitive perk_system.get_ability_clickable(ability_perk)
-                                    background "#44BB44"
+                                    background "#43B197"
                                     insensitive_background "#222222"
                                     xalign 0.5
                                     yalign 0.5

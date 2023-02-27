@@ -27,10 +27,26 @@ init 2:
                 text "[day_info]" style "menu_text_style" size 18
                 textbutton "Outfit Manager" action Call("outfit_master_manager",from_current=True) style "textbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Design outfits to set as uniforms or give to suggest to women."
                 textbutton "Check Inventory" action ui.callsinnewcontext("check_inventory_loop") style "textbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Check what serums you are currently carrying."
-                if mc.stat_goal.completed or mc.work_goal.completed or mc.sex_goal.completed:
-                    textbutton "Character Sheet" action Show("mc_character_sheet") style "textbutton_style" text_style "textbutton_text_style" xsize 220 background "#44BB44" insensitive_background "#222222" hover_background "#aaaaaa" tooltip "Check your stats, skills, and goals."
+                if persistent.show_goal_ui:
+                    textbutton "Character Sheet" action Show("mc_character_sheet") style "textbutton_style" text_style "textbutton_text_style" xsize 220 background ("#43B197" if mc.stat_goal.completed or mc.work_goal.completed or mc.sex_goal.completed else "#0a142688") hover_background "#143869" tooltip "Check your stats, skills, and goals."
                 else:
-                    textbutton "Character Sheet" action Show("mc_character_sheet") style "textbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Check your stats, skills, and goals."
+                    hbox:
+                        spacing 5
+                        textbutton "Character Sheet" action Show("mc_character_sheet") style "textbutton_style" text_style "textbutton_text_style"
+                        frame:
+                            yoffset 5
+                            background ("#43B197" if mc.stat_goal.completed else "#0a142688")
+                            text "{:.0%}".format(mc.stat_goal.get_progress_fraction()) style "menu_text_style" size 14
+                        frame:
+                            yoffset 5
+                            background ("#43B197" if mc.work_goal.completed else "#0a142688")
+                            text "{:.0%}".format(mc.work_goal.get_progress_fraction()) style "menu_text_style" size 14
+                        frame:
+                            yoffset 5
+                            background ("#43B197" if mc.sex_goal.completed else "#0a142688")
+                            text "{:.0%}".format(mc.sex_goal.get_progress_fraction()) style "menu_text_style" size 14
+
+
                 textbutton "Perk Sheet" action Show("mc_perk_sheet") style "textbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Check your stat, item, and ability perks."
 
                 null height 10
