@@ -33,19 +33,15 @@ init 2:
                     hbox:
                         spacing 5
                         textbutton "Character Sheet" action Show("mc_character_sheet") style "textbutton_style" text_style "textbutton_text_style"
-                        frame:
-                            yoffset 5
-                            background ("#43B197" if mc.stat_goal.completed else "#0a142688")
-                            text "{:.0%}".format(mc.stat_goal.get_progress_fraction()) style "menu_text_style" size 14
-                        frame:
-                            yoffset 5
-                            background ("#43B197" if mc.work_goal.completed else "#0a142688")
-                            text "{:.0%}".format(mc.work_goal.get_progress_fraction()) style "menu_text_style" size 14
-                        frame:
-                            yoffset 5
-                            background ("#43B197" if mc.sex_goal.completed else "#0a142688")
-                            text "{:.0%}".format(mc.sex_goal.get_progress_fraction()) style "menu_text_style" size 14
-
+                        for goal in [mc.stat_goal, mc.work_goal, mc.sex_goal]:
+                            $ goal_info = goal.name + "\n{color=#aaaaaa}" + goal.get_reported_progress() + "{/color}\n" + goal.description
+                            textbutton "{:.0%}".format(goal.get_progress_fraction()):
+                                yoffset 2
+                                style "textbutton_style" text_style "outfit_description_style"
+                                tooltip goal_info
+                                action NullAction()
+                                hover_background "#0a142688"
+                                #background ("#43B197" if goal.completed else "#0a142688")
 
                 textbutton "Perk Sheet" action Show("mc_perk_sheet") style "textbutton_style" text_style "textbutton_text_style" xsize 220 tooltip "Check your stat, item, and ability perks."
 

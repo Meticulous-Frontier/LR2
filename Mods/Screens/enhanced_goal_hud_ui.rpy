@@ -10,7 +10,7 @@ init 2:
                 vbox:
                     textbutton "Goal Information" action Show("mc_character_sheet") style "textbutton_style" text_style "menu_text_title_style" text_size 14 xsize 245 text_align 0.5 tooltip "Complete goals to earn experience, and spend experience to improve your stats and skills."
                     for goal in [mc.stat_goal,mc.work_goal,mc.sex_goal]:
-                        $ goal_info = goal.name + "\n" + goal.get_reported_progress()
+                        $ goal_info = goal.name + "\n{color=#aaaaaa}" + goal.get_reported_progress() + "{/color}"
                         frame:
                             ysize 60
                             background None
