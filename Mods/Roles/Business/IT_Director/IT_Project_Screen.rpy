@@ -10,10 +10,16 @@ init 5 python:
     it_imagebutton_inactive = Image(get_file_handle("IT_button_a_inactive.png"))
     it_imagebutton_locked = Image(get_file_handle("IT_button_a_locked.png"))
 
+label check_business_it_projects():
+    call screen business_project_screen()
+    return
 
-# call screen it_project_screen()
+label check_nanobot_it_projects():
+    call screen nanobot_project_screen()
+    return
 
 init 5:
+
     screen it_project_screen():
         add "IT_Background.png"
         modal True
@@ -45,8 +51,7 @@ init 5:
                             text_style "menu_text_title_style"
                             text_size 40
                             #xalign 0.5
-                            action [Hide("it_project_screen"),
-                                    Show("business_project_screen")]
+                            action ui.callsinnewcontext("check_business_it_projects")
                             # sensitive perk_system.get_ability_clickable(ability_perk)
                             background Frame(business_proj_back, 5,5)
                             insensitive_background "#222222"
@@ -67,8 +72,7 @@ init 5:
                             text_style "menu_text_title_style"
                             text_size 40
                             #xalign 0.5
-                            action [Hide("it_project_screen"),
-                                    Show("nanobot_project_screen")]
+                            action ui.callsinnewcontext("check_nanobot_it_projects")
                             # sensitive perk_system.get_ability_clickable(ability_perk)
                             background Frame(business_proj_back, 5,5)
                             insensitive_background "#222222"
