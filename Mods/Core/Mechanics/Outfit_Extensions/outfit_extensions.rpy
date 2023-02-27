@@ -78,6 +78,13 @@ init -1 python:
 
     Outfit.generate_clothing_list = generate_clothing_list_enhanced
 
+    def half_off_clothing_enhanced(self, the_clothing):
+        found = next((x for x in self if x == the_clothing), None)
+        if found:
+            found.half_off = True
+
+    Outfit.half_off_clothing = half_off_clothing_enhanced
+
     def remove_random_upper_enhanced(self, top_layer_first = False, do_not_remove = False):
         #if top_layer_first only the upper most layer is removed, otherwise anything unanchored is a valid target.
         #if do_not_remove is set to True we only use this to find something valid to remove and return that clothing item. this lets us use this function to find thigns to remove with an animation.
