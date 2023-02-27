@@ -71,7 +71,7 @@ init -1 python:
             if cloth in neckwear_list: # move from layer 2 to 3.5 (between clothing and overwear)
                 key += 1.5
             if cloth.tucked: # tucked is always a between layer value
-                key + .5
+                key += .5
             return key
 
         return sorted(self, key= lambda x: _cloth_sort_key(x))
