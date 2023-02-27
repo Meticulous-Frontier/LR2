@@ -370,14 +370,16 @@ init -1 python:
             tits_score += 30
         elif self.tits_available():
             tits_score += 15
+            tits_score += 15 * _get_transparency_factor([x for x in self.upper_body])
         else:
-            tits_score += (30 * _get_transparency_factor([x for x in self.upper_body]))
+            tits_score += 30 * _get_transparency_factor([x for x in self.upper_body])
 
         vagina_score = 0
         if self.vagina_visible():
             vagina_score += 30
         elif self.vagina_available():
             vagina_score += 15
+            vagina_score += 15 * _get_transparency_factor([x for x in self.lower_body])
         else:
             vagina_score += 30 * _get_transparency_factor([x for x in self.lower_body])
 
