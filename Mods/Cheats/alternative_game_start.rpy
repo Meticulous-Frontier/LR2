@@ -43,32 +43,7 @@ label alternative_start():
         "Realistic pregnancy content\n{size=16}Realistic cycles. Girls know their fertile times. Pulling out not 100%% effective. Girls don't want to get pregnant.{/size}":
             $ persistent.pregnancy_pref = 3
 
-    "MOD" "How quickly would you like stories from the mod to play out? This will affect spacing between story events."
-    menu:
-        "Quick":
-            $ TIER_0_TIME_DELAY = -1
-            $ TIER_1_TIME_DELAY = 1
-            $ TIER_2_TIME_DELAY = 3
-            $ TIER_3_TIME_DELAY = 7
-            $ GAME_SPEED_FACTOR = 1.5
-        "Standard":
-            $ TIER_0_TIME_DELAY = 1
-            $ TIER_1_TIME_DELAY = 3
-            $ TIER_2_TIME_DELAY = 7
-            $ TIER_3_TIME_DELAY = 14
-            $ GAME_SPEED_FACTOR = 1.0
-        "Epic":
-            $ TIER_0_TIME_DELAY = 1
-            $ TIER_1_TIME_DELAY = 5
-            $ TIER_2_TIME_DELAY = 12
-            $ TIER_3_TIME_DELAY = 20
-            $ GAME_SPEED_FACTOR = 0.75
-        "Marathon":
-            $ TIER_0_TIME_DELAY = 2
-            $ TIER_1_TIME_DELAY = 7
-            $ TIER_2_TIME_DELAY = 15
-            $ TIER_3_TIME_DELAY = 30
-            $ GAME_SPEED_FACTOR = 0.60
+    call select_game_speed from _call_select_game_speed_alternative_start
 
     $ easy_mode = False
     "MOD" "Do you want to play with original game difficulty or make the game easier?"
