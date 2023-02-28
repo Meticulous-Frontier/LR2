@@ -109,6 +109,14 @@ init 2: # Add some additional
                             textbutton "Skill Changes" action [ToggleField(persistent, "skill_change_messages", True, False)]
                             textbutton "Energy Changes" action [ToggleField(persistent, "energy_messages", True, False)]
 
+                        vbox:
+                            style_prefix "radio"
+                            label "Game Speed"
+                            textbutton "Quick" action [SetVariable("GAME_SPEED", 0), Function(update_game_speed, 0)]
+                            textbutton "Standard" action [SetVariable("GAME_SPEED", 1), Function(update_game_speed, 1)]
+                            textbutton "Epic" action [SetVariable("GAME_SPEED", 2), Function(update_game_speed, 2)]
+                            textbutton "Marathon" action [SetVariable("GAME_SPEED", 3), Function(update_game_speed, 3)]
+
 
                     null height (2 * gui.pref_spacing)
 

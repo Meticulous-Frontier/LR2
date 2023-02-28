@@ -2,14 +2,40 @@ init -1:
     default persistent.stats = {}
 
     # initialize with defaults (standard)
+    default GAME_SPEED = 1
     default TIER_0_TIME_DELAY = 1
     default TIER_1_TIME_DELAY = 3
     default TIER_2_TIME_DELAY = 7
     default TIER_3_TIME_DELAY = 14
-    default GAME_SPEED_FACTOR = 1.0
 
 init 2 python:
     config.label_overrides["start"] = "alternative_start"
+
+    def update_game_speed(speed):
+        global GAME_SPEED, TIER_0_TIME_DELAY, TIER_1_TIME_DELAY, TIER_2_TIME_DELAY, TIER_3_TIME_DELAY
+
+        GAME_SPEED = speed
+        if speed == 0:
+            TIER_0_TIME_DELAY = -1
+            TIER_1_TIME_DELAY = 1
+            TIER_2_TIME_DELAY = 3
+            TIER_3_TIME_DELAY = 7
+        elif speed == 1:
+            TIER_0_TIME_DELAY = 1
+            TIER_1_TIME_DELAY = 3
+            TIER_2_TIME_DELAY = 7
+            TIER_3_TIME_DELAY = 14
+        elif speed == 2:
+            TIER_0_TIME_DELAY = 1
+            TIER_1_TIME_DELAY = 5
+            TIER_2_TIME_DELAY = 12
+            TIER_3_TIME_DELAY = 20
+        else:
+            TIER_0_TIME_DELAY = 2
+            TIER_1_TIME_DELAY = 7
+            TIER_2_TIME_DELAY = 15
+            TIER_3_TIME_DELAY = 30
+        return
 
 label alternative_start():
     scene bg paper_menu_background with fade
@@ -46,29 +72,13 @@ label alternative_start():
     "MOD" "How quickly would you like stories from the mod to play out? This will affect spacing between story events."
     menu:
         "Quick":
-            $ TIER_0_TIME_DELAY = -1
-            $ TIER_1_TIME_DELAY = 1
-            $ TIER_2_TIME_DELAY = 3
-            $ TIER_3_TIME_DELAY = 7
-            $ GAME_SPEED_FACTOR = 1.5
+            $ update_game_speed(0)
         "Standard":
-            $ TIER_0_TIME_DELAY = 1
-            $ TIER_1_TIME_DELAY = 3
-            $ TIER_2_TIME_DELAY = 7
-            $ TIER_3_TIME_DELAY = 14
-            $ GAME_SPEED_FACTOR = 1.0
+            $ update_game_speed(1)
         "Epic":
-            $ TIER_0_TIME_DELAY = 1
-            $ TIER_1_TIME_DELAY = 5
-            $ TIER_2_TIME_DELAY = 12
-            $ TIER_3_TIME_DELAY = 20
-            $ GAME_SPEED_FACTOR = 0.75
+            $ update_game_speed(2)
         "Marathon":
-            $ TIER_0_TIME_DELAY = 2
-            $ TIER_1_TIME_DELAY = 7
-            $ TIER_2_TIME_DELAY = 15
-            $ TIER_3_TIME_DELAY = 30
-            $ GAME_SPEED_FACTOR = 0.60
+            $ update_game_speed(3)
 
     $ easy_mode = False
     "MOD" "Do you want to play with original game difficulty or make the game easier?"
