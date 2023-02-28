@@ -46,7 +46,7 @@ label mall_introduction_action_label():
         scene_manager = Scene()
         # make sure they don't wear location outfits that don't match current location
         known_person.change_location(mc.location)
-        strange.change_location(mc.location)
+        stranger.change_location(mc.location)
 
         scene_manager.add_actor(known_person, position = "stand4", emotion = "happy", display_transform = character_center_flipped)
         scene_manager.add_actor(stranger, position = "stand3")
