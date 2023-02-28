@@ -159,7 +159,7 @@ init -2 python:
         return False
 
     def kaya_moving_day_requirement():
-        if time_of_day == 0:
+        if time_of_day == 1: # move on morning transition / not early morning
             return True
         return False
 
@@ -1436,6 +1436,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     "You come across a box that is labeled family pictures. When you take it inside, you ask [sakari.title] where to take it."
     sakari "Oh, that can probably just go in my closet for now. My room is the one on the right."
     $ scene_manager.clear_scene()
+    $ mc.change_location(the_person.bedroom)
     "You walk into [sakari.possessive_title]'s room and place the box on an empty shelf in her closet. When you finish putting it up, you glance around her room."
     "Suddenly, you see a picture on her wall. It is a picture of a much younger [sakari.title], but she is standing suspiciously close to a man you feel like you almost recognize."
     "The picture of [sakari.possessive_title] and the man make it clear that they are close. He seems so familiar, but you can't quite put your finger on why."
