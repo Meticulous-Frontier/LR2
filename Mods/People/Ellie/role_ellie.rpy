@@ -1550,7 +1550,7 @@ init -1 python:
 
     def ellie_never_tasted_cock_requirement(the_person):
         if mc.is_at_work() and mc.business.is_open_for_business():
-            if the_person.sluttiness >= 40 and  and ellie.story_event_ready("slut"):
+            if the_person.sluttiness >= 40 and ellie.story_event_ready("slut"):
                 if get_random_employees(1, exclude_list = [the_person], slut_required = 50):
                     return True
         return False
