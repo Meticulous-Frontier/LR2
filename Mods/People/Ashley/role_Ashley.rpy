@@ -779,8 +779,8 @@ label ashley_steph_harem_entry_label(): #100 Love AND requires both girls to be 
 #Ashley Slut Path
 init -1 python:
     def ashley_porn_video_discover_requirement():
-        if ashley.sluttiness >= 20 and time_of_day == 4:
-            if ashley.story_event_ready("slut", set_if_none = True):
+        if time_of_day == 4:
+            if ashley.sluttiness >= 20 and ashley.story_event_ready("slut"):
                 return True
         return False
 

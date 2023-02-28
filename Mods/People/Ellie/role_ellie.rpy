@@ -869,13 +869,16 @@ label ellie_text_message_apology_label():
 init -1 python:
 
     def ellie_brings_lunch_requirement():
-        if ellie.love >= 40 and mc.is_at_work() and mc.business.is_open_for_business() and time_of_day == 1 and ellie.story_event_ready("love"):
-            return True
+        if mc.is_at_work() and mc.business.is_open_for_business() and time_of_day == 1:
+            if ellie.love >= 40 and ellie.story_event_ready("love"):
+                return True
         return False
 
     def ellie_dinner_date_intro_requirement(the_person):
-        if the_person.love >= 60 and mc.is_at_work() and mc.business.is_open_for_business() and ellie.story_event_ready("love"):
-            return True
+        if mc.is_at_work() and mc.business.is_open_for_business():
+            if the_person.love >= 60 and ellie.story_event_ready("love"):
+                return True
+        return False
 
     def ellie_dinner_date_requirement():
         if day%7 == 6 and time_of_day == 3:
@@ -883,7 +886,7 @@ init -1 python:
         return False
 
     def ellie_lingerie_shopping_requirement(the_person):
-        if ellie.story_event_ready("love") and the_person.love >= 80:
+        if the_person.love >= 80 and ellie.story_event_ready("love"):
             return False
         return False
 
@@ -1546,14 +1549,16 @@ label ellie_lingerie_shopping_label(the_person):    #Ellie's 80 love event. She 
 init -1 python:
 
     def ellie_never_tasted_cock_requirement(the_person):
-        if the_person.sluttiness >= 40 and mc.is_at_work() and mc.business.is_open_for_business() and ellie.story_event_ready("slut"):
-            if get_random_employees(1, exclude_list = [the_person], slut_required = 50):
-                return True
+        if mc.is_at_work() and mc.business.is_open_for_business():
+            if the_person.sluttiness >= 40 and  and ellie.story_event_ready("slut"):
+                if get_random_employees(1, exclude_list = [the_person], slut_required = 50):
+                    return True
         return False
 
     def ellie_never_been_fucked_requirement(the_person):
-        if the_person.sluttiness >= 60 and mc.is_at_work() and mc.business.is_open_for_business() and ellie.story_event_ready("slut"):
-            return True
+        if mc.is_at_work() and mc.business.is_open_for_business():
+            if the_person.sluttiness >= 60 and ellie.story_event_ready("slut"):
+                return True
         return False
 
     def ellie_never_tried_anal_requirement(the_person):
