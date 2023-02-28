@@ -1776,6 +1776,27 @@ init -1 python:
 
     Person.is_home = is_person_home
 
+    def change_home_location(self, new_home):
+        if not isinstance(new_home, Room):
+            print("change_home_location(): Error new home parameter is not a room.")
+            return
+
+        # remove current location, if house will be empty
+        if not any(x for x in all_people_in_the_game(excluded_people = [self]) if x.home == self.home) \
+            and self.home in mc.known_home_locations:
+            mc.known_home_locations.remove(self.home)
+
+        # if at old home location, move to new home
+        if self.location == self.home:
+            self.change_location(new_home)
+
+        # set home and default schedule to new home location
+        self.set_schedule(new_home, the_times = [0,4])
+        self.home = new_home
+        return
+
+    Person.change_home_location = change_home_location
+
     ####### Begin cum extension functions ######
 
     # calculate generic arousal change for a person based on opinions during MC cum shot

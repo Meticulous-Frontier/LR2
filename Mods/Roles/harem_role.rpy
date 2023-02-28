@@ -75,19 +75,6 @@ init 1 python:
         girlfriend_shopping_date = Action("Go shopping together {image=gui/heart/Time_Advance.png}", shopping_date_requirement, "shopping_date_intro", menu_tooltip = "Take her to the mall and do some shopping together.")
         return [plan_fuck_date_action, girlfriend_shopping_date]
 
-    def move_into_harem(person):
-        # remove home location from visit map (if no other people live there)
-        # when currently home move to harem mansion
-        # change home location to mansion (sleep)
-        if not any(x for x in all_people_in_the_game(excluded_people = [person]) if x.home == person.home) \
-            and person.home in mc.known_home_locations:
-            mc.known_home_locations.remove(person.home)
-        if person.location == person.home:
-            person.change_location(harem_mansion)
-        person.set_schedule(harem_mansion, the_times = [0,4])
-        person.home = harem_mansion
-        return
-
     make_harem_action = Action("Ask her to join your harem", requirement = ask_harem_requirement, effect = "ask_to_join_harem_label",
         menu_tooltip = "Ask her to start an official, polyamorous relationship and be part of your Harem.", priority = 10)
     chat_actions.append(make_harem_action)
@@ -247,6 +234,5 @@ label harem_move_to_mansion_label(the_person):
     mc.name "Perfect, I've already made arrangements, I will see you at my new mansion soon."
 
     # if successful
-    $ move_into_harem(the_person)
-
+    $ the_person.change_home_location(harem_mansion)
     return

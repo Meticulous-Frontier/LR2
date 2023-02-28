@@ -462,6 +462,7 @@ label kaya_ask_out_label(the_person): #Requires 20 love, substitute for first da
     mc.name "I can understand that. Did I tell you I run a pharmaceutical company? We do our own research and development, although not for any major medical illnesses."
     the_person "Really? That's pretty interesting. You're a very interesting man [the_person.mc_title]."
     "You walk in silence a bit longer with [the_person.title]."
+    $ the_person.learn_home()
     "Soon you walk up to the steps of a run down apartment building. This must be where she is living."
     the_person "Hey, I just want to say, it's been a long time since I had a night like this to just relax and have fun. I had a great time... please come back and see me at the coffee shop, okay?"
     mc.name "Your charm is difficult to resist. And the coffee is good too."
@@ -624,7 +625,7 @@ label kaya_meet_lily_at_uni_label(the_person):    #This label starts Kaya and Li
     $ kaya.event_triggers_dict["has_started_internship"] = False
     return
 
-label kaya_meet_erica_at_uni_label(the_person):     #This label is a repalcement for kaya and lily event.
+label kaya_meet_erica_at_uni_label(the_person):     #This label is a replacement for kaya and lily event.
     $ scene_manager = Scene()
     "You go for a stroll at the university. With no particular aim, you just walk around, checking out some of the girls, stretching your legs a bit."
     the_person "[the_person.mc_title]? Is that you?"
@@ -1303,7 +1304,8 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     $ came_inside_kaya = False
     "It is moving day for [the_person.title]."
     if mc.business.is_open_for_business():
-        "You make sure to let work know you won't be in today."
+        "You make sure to let work know you will be out for the rest of the day."
+    $ the_person.change_location(the_person.home)   # make sure she doesn't wear a location based outfit
     $ mc.change_location(the_person.home)
     "You walk over and soon you are knocking on [the_person.possessive_title]'s front door. She swings it open."
     $ scene_manager.add_actor(the_person)
@@ -1411,6 +1413,7 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     mc.name "I've come to appreciate that. Don't worry, I'll roll with it."
     the_person "Okay. Let's go!"
     $ scene_manager.update_actor(the_person, position = "sitting")
+    $ mc.change_location(downtown)
     "[the_person.possessive_title] says goodbye to her apartment. You hop in the truck while she drives."
     "The truck ride is pretty quiet. You wonder what her mother is like. You guess you'll find out soon."
     #TODO have different backgrounds for Kaya and Sakari's homesteads. This will not feel right in the mean time.
@@ -1468,12 +1471,12 @@ label kaya_moving_day_label():  #Today we meet Sakari, Kaya's mom, and learn Kay
     mc.name "No, that's okay. I need to swing by work. I have some things I left there I need to take care of anyway."
     the_person "Alright... Mom I'll be back in a little bit, okay?"
     sakari "Okay. You take care too, young man."
-    "You say goodbye and leave. You can hear the moving truck start up as you walk away."
     $ clear_scene()
     $ mc.change_location(downtown)
+    "You say goodbye and leave. You can hear the moving truck start up as you walk away."
     # set kaya living with her mom
-    $ kaya.home = sakari.home
-    $ kaya.set_schedule(the_location = sakari.home, the_times = [0,4])  #Should still meet with erica on tuesday.
+    $ kaya.change_home_location(sakari.home)
+    $ sakari.learn_home()
     $ kaya.event_triggers_dict["mc_knows_relation"] = True
     "You leave the apartment and just walk for a while. You have a lot to think about."
     "You feel a tug in your heart. You want to be there for [kaya.possessive_title] over the next few weeks."
