@@ -363,7 +363,7 @@ label advance_time_mandatory_crisis_label():
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
-        del active_crisis_list
+        active_crisis_list = None
         crisis = None
     return
 
@@ -434,7 +434,7 @@ label advance_time_mandatory_morning_crisis_label():
 
     python: #Needs to be a different python block, otherwise the rest of the block is not called when the action returns.
         mc.location.show_background()
-        del active_crisis_list
+        active_crisis_list = None
         crisis = None
     return
 
