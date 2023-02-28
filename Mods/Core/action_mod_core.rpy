@@ -91,9 +91,6 @@ init 2 python:
     def action_mod_settings_requirement():
         return True
 
-    def action_mod_game_speed_requirement():
-        return True
-
     def action_mod_configuration_requirement():
         return any(x for x in ActionMod._instances if x.options_menu)
 
@@ -143,7 +140,6 @@ init 2 python:
     # mod settings action
     action_mod_options_action = Action("MOD Settings", action_mod_settings_requirement, "show_action_mod_settings", menu_tooltip = "Enable or disable mods")
     action_mod_configuration_action = Action("MOD Configuration", action_mod_configuration_requirement, "show_action_mod_configuration", menu_tooltip = "Change configuration for individual MODS")
-    action_mod_game_speed_action = Action("Game Speed", action_mod_game_speed_requirement, "select_game_speed", menu_tooltip = "Select how fast MOD story events will play-out")
 
 init 4 python: # NOTE: Having it at 5 was causing errors after I moved things around. Haven't seen any side-effects of it.
     add_label_hijack("normal_start", "activate_action_mod_core")
@@ -164,7 +160,6 @@ label activate_action_mod_core(stack):
 
         bedroom.add_action(action_mod_options_action)
         bedroom.add_action(action_mod_configuration_action)
-        bedroom.add_action(action_mod_game_speed_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -191,7 +186,6 @@ label update_action_mod_core(stack):
         append_and_initialize_action_mods()
         bedroom.add_action(action_mod_options_action)
         bedroom.add_action(action_mod_configuration_action)
-        bedroom.add_action(action_mod_game_speed_action)
 
         # continue on the hijack stack if needed
         execute_hijack_call(stack)
@@ -212,32 +206,3 @@ label show_action_mod_configuration():
         else:
             action_mod_choice.show_options()
     jump show_action_mod_configuration
-
-label select_game_speed:
-    "MOD" "How quickly would you like stories from the mod to play out? This will affect spacing between story events."
-    menu:
-        "Quick":
-            $ TIER_0_TIME_DELAY = -1
-            $ TIER_1_TIME_DELAY = 1
-            $ TIER_2_TIME_DELAY = 3
-            $ TIER_3_TIME_DELAY = 7
-            $ GAME_SPEED_FACTOR = 1.5
-        "Standard":
-            $ TIER_0_TIME_DELAY = 1
-            $ TIER_1_TIME_DELAY = 3
-            $ TIER_2_TIME_DELAY = 7
-            $ TIER_3_TIME_DELAY = 14
-            $ GAME_SPEED_FACTOR = 1.0
-        "Epic":
-            $ TIER_0_TIME_DELAY = 1
-            $ TIER_1_TIME_DELAY = 5
-            $ TIER_2_TIME_DELAY = 12
-            $ TIER_3_TIME_DELAY = 20
-            $ GAME_SPEED_FACTOR = 0.75
-        "Marathon":
-            $ TIER_0_TIME_DELAY = 2
-            $ TIER_1_TIME_DELAY = 7
-            $ TIER_2_TIME_DELAY = 15
-            $ TIER_3_TIME_DELAY = 30
-            $ GAME_SPEED_FACTOR = 0.60
-    return
