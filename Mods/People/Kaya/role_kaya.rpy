@@ -34,6 +34,7 @@ init 2 python:
             forced_sexy_opinions = [["vaginal sex", 2, False], ["bareback sex", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -1, False], ["missionary style sex", 2, False], ["creampies", 2, False]])
 
         kaya.generate_home()
+        kaya.home.background_image = student_apartment_background
         kaya.set_schedule(kaya.home, the_times = [0,1,2,3,4])
         kaya.change_job(unemployed_job)
         kaya.home.add_person(kaya)

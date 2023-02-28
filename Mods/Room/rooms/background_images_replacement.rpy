@@ -119,6 +119,7 @@ init -1 python:
     standard_bedroom4_background = room_background_image("Generic_Bedroom4_Background.jpg")
     prostitute_bedroom_background = room_background_image("Prostitute_Bedroom_Background.jpg")
     lily_bedroom_background = room_background_image("Lily_Bedroom_Background.jpg")
+    student_apartment_background = room_background_image("student_apartment_background.jpg")
     cousin_bedroom_background = room_background_image("Cousin_Bedroom_Background.jpg", darken = False)
 
     def update_rd_div_with_genetics_unlocked():

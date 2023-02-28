@@ -22,6 +22,7 @@ init 2 python:
 
         erica.max_energy = 120
         erica.generate_home()
+        erica.home.background_image = student_apartment_background
         erica.change_job(erica_student_job, job_known = True)
         erica.home.add_person(erica)
 
