@@ -38,7 +38,7 @@ init 1 python:
             if person in mc.business.hr_team:
                 h_stat += human_resource_potential_stat(person)
 
-        return [["Research", r_stat], ["Production", p_stat], ["Supply", s_stat], ["Marketing", m_stat], ["HR", h_stat]]
+        return [["Research", __builtin__.int(r_stat)], ["Production", __builtin__.int(p_stat)], ["Supply", __builtin__.int(s_stat)], ["Marketing", __builtin__.int(m_stat)], ["HR", __builtin__.int(h_stat)]]
 
 init 2:
     screen employee_overview(white_list = None, black_list = None, person_select = False): #If select is True it returns the person's name who you click on. If it is false it is a normal overview menu that lets you bring up their detailed info.
