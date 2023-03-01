@@ -29,31 +29,39 @@ init 2:
                     xsize 420
                     ysize 450
                     vbox:
-                        text "Personal Information" style "serum_text_style_header" #Info about the person: age, height, happiness, obedience, etc.
-                        text "Age: [person.age]" style "menu_text_style" size 16
-                        if person.is_employee():
-                            text "Required Salary: $[person.salary]/day" style "menu_text_style" size 16
-                        if person.is_strip_club_employee():
-                            text "Club Salary: $[person.stripper_salary]/day" style "menu_text_style" size 16
-                        text "Personality: " + person.personality.personality_type_prefix.capitalize() style "menu_text_style" size 16
-                        if person.is_girlfriend():
-                            text "Relationship: [mc.name]'s girlfriend" style "menu_text_style" size 16
-                        elif person.relationship:
-                            text "Relationship: " + person.relationship style "menu_text_style" size 16
-                            if person.relationship != "Single":
-                                text "Significant Other: " + person.SO_name style "menu_text_style" size 16
-                        if person.kids > 0:
-                            text "Kids: " + str(person.kids) style "menu_text_style" size 16
-                            text "TODO: kids with MC"
-                        text "" style "menu_text_style" size 16
-                        text "Happiness: [person.happiness]" style "menu_text_style" size 16
-                        text "Sluttiness: [person.sluttiness] - " + get_gold_heart(person.sluttiness) style "menu_text_style" size 16
-                        text "Obedience: [person.obedience] {image=triskelion_token_small} " + get_obedience_plaintext(person.obedience) style "menu_text_style" size 16
-                        text "Suggestibility: [person.suggestibility]%" style "menu_text_style" size 16
-                        text "Height: " + height_to_string(person.height) style "menu_text_style" size 16
-                        text "Eye Colour: " + person.eyes[0].title() style "menu_text_style" size 16
-                        text "Cup size: [person.tits]" style "menu_text_style" size 16
-                        text "Weight: " + get_person_weight_string(person) style "menu_text_style" size 16
+                        text "Obedience Story Progress" style "serum_text_style_header" #Info about the persons raw stats, work skills, and sex skills
+                        viewport:
+                            scrollbars "vertical"
+                            draggable False
+                            mousewheel True
+                            vbox:
+                                for love_text in person.story_obedience_list():
+                                    text love_text style "menu_text_style" size 16 text_align 0.0
+                        # text "Personal Information" style "serum_text_style_header" #Info about the person: age, height, happiness, obedience, etc.
+                        # text "Age: [person.age]" style "menu_text_style" size 16
+                        # if person.is_employee():
+                        #     text "Required Salary: $[person.salary]/day" style "menu_text_style" size 16
+                        # if person.is_strip_club_employee():
+                        #     text "Club Salary: $[person.stripper_salary]/day" style "menu_text_style" size 16
+                        # text "Personality: " + person.personality.personality_type_prefix.capitalize() style "menu_text_style" size 16
+                        # if person.is_girlfriend():
+                        #     text "Relationship: [mc.name]'s girlfriend" style "menu_text_style" size 16
+                        # elif person.relationship:
+                        #     text "Relationship: " + person.relationship style "menu_text_style" size 16
+                        #     if person.relationship != "Single":
+                        #         text "Significant Other: " + person.SO_name style "menu_text_style" size 16
+                        # if person.kids > 0:
+                        #     text "Kids: " + str(person.kids) style "menu_text_style" size 16
+                        #     text "TODO: kids with MC"
+                        # text "" style "menu_text_style" size 16
+                        # text "Happiness: [person.happiness]" style "menu_text_style" size 16
+                        # text "Sluttiness: [person.sluttiness] - " + get_gold_heart(person.sluttiness) style "menu_text_style" size 16
+                        # text "Obedience: [person.obedience] {image=triskelion_token_small} " + get_obedience_plaintext(person.obedience) style "menu_text_style" size 16
+                        # text "Suggestibility: [person.suggestibility]%" style "menu_text_style" size 16
+                        # text "Height: " + height_to_string(person.height) style "menu_text_style" size 16
+                        # text "Eye Colour: " + person.eyes[0].title() style "menu_text_style" size 16
+                        # text "Cup size: [person.tits]" style "menu_text_style" size 16
+                        # text "Weight: " + get_person_weight_string(person) style "menu_text_style" size 16
                 frame:
                     background "#1a45a1aa"
                     xsize 420

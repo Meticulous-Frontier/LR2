@@ -188,6 +188,8 @@ label mc_serum_intro_label(the_person):
     "You definitely feel conflicted about what just happened... but you have to admit, the prospect of getting your hands on serums that would enhance your personal performance is tempting."
     "You decide to go along with it for now, but you definitely need to keep a closer eye on [the_person.possessive_title] and her activities."
     $ mc.business.set_event_day("prod_assistant_advance")
+    if the_person == ashley:
+        $ ashley.other_messages[0] = "[ashley.fname] has given you a serum for personal use."
     return
 
 label mc_serum_timeout_label():
@@ -230,6 +232,8 @@ label mc_serum_review_intro_label(the_person):
     "You step away from [the_person.possessive_title]. You can now talk to her at work about serums for personal use."
     "She will leave them in your office for you each work day. If she needs your attention on something, she may hang around and wait for you to pick them up."
     $ mc.business.set_event_day("prod_assistant_advance")
+    if the_person == ashley:
+        $ ashley.other_messages[0] = "[ashley.fname] can give you serums for personal use."
     return
 
 label mc_serum_review_label(the_person):

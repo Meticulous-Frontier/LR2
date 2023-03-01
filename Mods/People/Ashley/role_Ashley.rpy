@@ -72,6 +72,20 @@ init 2 python:
         mc.business.event_triggers_dict["mc_serum_energy_unlocked"] = False
         mc.business.event_triggers_dict["mc_serum_physical_unlocked"] = False
         mc.business.event_triggers_dict["mc_serum_max_quant"] = 1
+        ashley.story_love_list = ashley_story_love_list
+        ashley.story_lust_list = ashley_story_lust_list
+        ashley.story_obedience_list = ashley_story_obedience_list
+        ashley.story_teamup_list = ashley_story_teamup_list
+        ashley.story_other_list = ashley_story_other_list
+        ashley.event_triggers_dict["story_dict"] = True
+        ashley.love_messages = ["Get to know her better to progress"]
+        ashley.lust_messages = []
+        ashley.obedience_messages = []
+        ashley.other_messages = ["Hire her as your production assistant", "", ""]
+        ashley.teamup_messages = []
+        ashley.love_step = 0
+        ashley.obedience_step = 0
+        ashley.lust_step = 0
         global list_of_upgraded_mc_serums
         list_of_upgraded_mc_serums = [] #Use this list to store serums that have had their base tiers upgraded for save / load purposes.
 
@@ -411,6 +425,7 @@ label ashley_room_overhear_classical_label(the_person):
     mc.name "Glad to hear it."
     "Hmm... she is looking for someone to go with her to a classical music concert. Maybe that person could be you?"
     $ ashley.event_triggers_dict["concert_overheard"] = True
+    $ ashley.love_messages[0] = "Talk to her about going to the classical concert."
     return
 
 label ashley_ask_date_classic_concert_label(the_person):
@@ -431,6 +446,7 @@ label ashley_ask_date_classic_concert_label(the_person):
     the_person "Okay, if you're sure about this..."
     "You feel good about this as you finish up your conversation."
     $ ashley.event_triggers_dict["concert_date"] = 1
+    $ ashley.love_messages[0] = "Go to the concert on Thursday night."
     $ mc.business.add_mandatory_crisis(ashley_classical_concert_date)
     return
 
@@ -554,6 +570,12 @@ label ashley_classical_concert_date_label():
     $ mc.business.add_mandatory_crisis(ashley_porn_video_discover)
     $ mc.business.add_mandatory_crisis(ashley_after_hours)
     $ mc.business.add_mandatory_crisis(ashley_demands_relief)
+    $ mc.business.add_mandatory_crisis(ashley_submission_titfuck)
+    $ ashley.love_messages[0] = "You went with [ashley.fname] to a classical music concert."
+    $ ashley.love_messages.append("Increase your love score with her to progress.")
+    $ ashley.lust_messages.append("")
+    $ ashley.love_step = 1
+    $ ashley.obedience_messages.append("")
     return
 
 
@@ -561,12 +583,19 @@ label ashley_classical_concert_date_label():
 #Ashley Love Path
 init -1 python:
     def ashley_after_hours_requirement():
+        if ashley.love < 20:
+            ashley.love_messages[1] = "Increase your love score with her to progress."
+        elif not ashley.story_event_ready("love"):
+            ashley.love_messages[1] = "[ashley.fname] needs time before she is ready to progress this story."
+        else:
+            ashley.love_messages[1] = "[ashley.fname] may approach you at work soon."
         if mc.is_at_work() and time_of_day == 3:
             if ashley.love >= 20 and ashley.story_event_ready("love"):
                 return True
         return False
 
     def ashley_asks_about_lily_requirement():
+        ashley.love_messages[2] = "This story has not yet been written."
         return False
         if ashley.love >= 40 and ashley.story_event_ready("love"):
             if mc.is_at_work() and mc.business.is_open_for_business():
@@ -688,6 +717,9 @@ label ashley_after_hours_label():   #Ashley looks for an opportunity to get MC a
     "So it turns out, your sister and [the_person.possessive_title] already know each other... but definitely not in a good way."
     "If you want to get close to [the_person.title], you might have to work on repairing their relationship."
     $ mc.business.add_mandatory_crisis(ashley_asks_about_lily)
+    $ ashley.love_messages[1] = "She walked you home, and it seems she already knows your sister."
+    $ ashley.love_messages.append("")
+    $ ashley.love_step = 2
     return
 
 label ashley_asks_about_lily_label():   #Ashley talks to MC about Lily and how she is doing. Expresses remorse for cheating issue. 40 love
@@ -779,38 +811,57 @@ label ashley_steph_harem_entry_label(): #100 Love AND requires both girls to be 
 #Ashley Slut Path
 init -1 python:
     def ashley_porn_video_discover_requirement():
+        if ashley.sluttiness < 20:
+            ashley.lust_messages[0] = "Increase [ashley.fname]'s sluttiness to progress"
+        elif not ashley.story_event_ready("slut"):
+            ashley.lust_messages[0] = "[ashley.fname] needs a few days to adjust before progressing."
+        else:
+            ashley.lust_messages[0] = "You think there will progess with [ashley.fname] soon."
         if time_of_day == 4:
             if ashley.sluttiness >= 20 and ashley.story_event_ready("slut"):
                 return True
         return False
 
     def ashley_ask_sister_about_porn_video_requirement(the_person):
+        ashley.lust_messages[0] = "You should talk to [ashley.fname]'s sister about the video you found."
         if the_person.is_at_work():
             return True
         return False
 
     def ashley_ask_about_porn_requirement(the_person):
-        if the_person.is_at_work() and the_person.days_since_event("slut_event") >= TIER_1_TIME_DELAY and time_of_day < 3:
+        ashley.lust_messages[0] = "You should talk to [ashley.fname] about the video you found."
+        if the_person.is_at_work() and time_of_day < 3:
             return True
         return False
 
     def ashley_post_handjob_convo_requirement(the_person):
+        ashley.lust_messages[1] = "You should talk to [ashley.fname] ASAP about the handjob."
         if the_person.is_at_work():
             return True
         return False
 
     def ashley_stephanie_arrange_relationship_requirement(the_person):
+        ashley.lust_messages[1] = "You should talk to [ashley.fname]'s sister about your relationships."
         if the_person.is_at_work():
             return True
         return False
 
     def ashley_blows_during_meeting_requirement():
+        if ashley.sluttiness < 40:
+            ashley.lust_messages[1] = "Increase [ashley.fname]'s sluttiness to progress"
+        elif not ashley.story_event_ready("slut"):
+            ashley.lust_messages[1] = "[ashley.fname] needs a few days to adjust before progressing."
+        elif not ashley.is_willing(blowjob):
+            ashley.lust_messages[1] = "[ashley.fname] needs to be willing to give blowjobs to progress."
+        else:
+            ashley.lust_messages[1] = "You think there will progess with [ashley.fname] soon."
         if ashley.sluttiness >= 40 and ashley.story_event_ready("slut"):
             if mc.is_at_work() and ashley.is_willing(blowjob) and mc.business.is_open_for_business():
                 return True
         return False
 
     def ashley_supply_closet_at_work_requirement():
+        ashley.lust_messages[2] = "This story has not yet been written."
         return False
         if ashley.sluttiness >= 60 and ashley.story_event_ready("slut"):
             if mc.is_at_work() and ashley.is_willing(against_wall) and mc.business.is_open_for_business():
@@ -1034,6 +1085,9 @@ label ashley_ask_about_porn_label(the_person):
     $ ashley.event_triggers_dict["porn_convo_avail"] = False
     $ scene_manager.clear_scene()
     $ ashley.add_unique_on_talk_event(ashley_post_handjob_convo)
+    $ ashley.lust_messages[0] = "[ashley.fname] gave you a handjob after asking her about her porn video."
+    $ ashley.lust_messages.append("")
+    $ ashley.lust_step = 1
     $ jump_game_loop() # she runs after her sister so end talk with Ashley
     return
 
@@ -1121,6 +1175,7 @@ label ashley_post_handjob_convo_label(the_person):
             "She bites her lip."
             the_person "Okay... let's give it a shot."
             $ the_person.event_triggers_dict["story_path"] = "secret"
+            $ ashley.other_messages[1] = "You are keeping your relationship with [ashley.fname] a secret for now."
             # $ assign_jealous_sister_role(the_person, stephanie)
         "I want to be friends with both of you" if ((ashley_steph_relationship_status() == "both" or mc.charisma > 4) and not stephanie.is_girlfriend()):
             mc.name "There are a lot of feelings going on right now, but I think we all need to calm down a bit."
@@ -1135,6 +1190,7 @@ label ashley_post_handjob_convo_label(the_person):
             $ the_person.event_triggers_dict["story_path"] = "fwb"
             the_person "I don't... I'm not sure how to talk to Steph about this though..."
             mc.name "Don't worry, I'll talk to her."
+            $ ashley.other_messages[1] = "You are keeping your relationship with [ashley.fname] casual for now."
     "You drink your coffee with [the_person.title]. You are happy you were able to come up with a solution."
     the_person "This place is nice... maybe I should bring Steph here some time..."
     "Eventually you finish up. You decide to head back to the office."
@@ -1142,6 +1198,7 @@ label ashley_post_handjob_convo_label(the_person):
     the_person "Ahh, thank you..."
     $ mc.location.show_background()
     $ stephanie.add_unique_on_talk_event(ashley_stephanie_arrange_relationship)
+
     call advance_time from _call_advance_ashley_post_hj_01
     return
 
@@ -1306,6 +1363,9 @@ label ashley_blows_during_meeting_label():      #40 Sluttiness
     $ scene_manager.clear_scene()
     "Your office now empty, you can't help but shake your head. Are you in over your head with those two sisters?"
     $ mc.business.add_mandatory_crisis(ashley_supply_closet_at_work)
+    $ ashley.lust_messages[1] = "She gave you a blowjob while her sister was asking for advice!"
+    $ ashley.lust_messages.append("")
+    $ ashley.lust_step = 2
     return
 
 label ashley_supply_closet_at_work_label():   #60 sluttiness
@@ -1361,6 +1421,10 @@ init -1 python:
         return False
 
     def ashley_submission_titfuck_requirement():
+        if ashley.obedience <= 120:
+            ashley.obedience_messages[0] = "Increase [ashley.fname]'s obedience to progress."
+        elif not ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
+            ashley.obedience_messages[0] = "Wait a few days to progress."
         if ashley.obedience > 120 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
             # ashley_stay_after_work_setup()
             if time_of_day == 3:
@@ -1368,6 +1432,7 @@ init -1 python:
         return False
 
     def ashley_submission_blowjob_requirement():
+        ashley.obedience_messages[1] = "This story has not yet been written."
         return False
         if ashley.obedience > 140 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
             if time_of_day == 3:
@@ -1405,6 +1470,46 @@ init -1 python:
     def ashley_final_submission_requirement():
         return False
 
+    def ashley_work_titfuck_requirement(the_person):
+        if ashley.obedience_step != 0:
+            return
+        if the_person.is_at_work():
+            if the_person.obedience < 120:
+                return "Requires 120 obedience"
+            else:
+                return True
+        return False
+
+    def ashley_work_blowjob_requirement(the_person):
+        if ashley.obedience_step != 1:
+            return
+        if the_person.is_at_work():
+            if the_person.obedience < 140:
+                return "Requires 140 obedience"
+            else:
+                return True
+        return False
+
+    def ashley_work_fuck_requirement(the_person):
+        if ashley.obedience_step != 2:
+            return
+        if the_person.is_at_work():
+            if the_person.obedience < 160:
+                return "Requires 160 obedience"
+            else:
+                return True
+        return False
+
+    def ashley_work_anal_requirement(the_person):
+        if ashley.obedience_step != 3:
+            return
+        if the_person.is_at_work():
+            if the_person.obedience < 180:
+                return "Requires 180 obedience"
+            else:
+                return True
+        return False
+
 init 1 python:
     ashley_demands_relief = Action("Ashley needs relief", ashley_demands_relief_requirement, "ashley_demands_relief_label")
     ashley_demands_oral = Action("Ashley needs oral relief", ashley_demands_oral_requirement, "ashley_demands_oral_label")
@@ -1420,16 +1525,25 @@ init 1 python:
     ashley_submission_anal_taboo_restore = Action("Taboo restoration", ashley_submission_taboo_restore_requirement, "ashley_submission_anal_taboo_restore_label")
     ashley_final_submission = Action("Ashley's serum plot", ashley_final_submission_requirement, "ashley_final_submission_label")
 
+    # Repeatable command scenes
+    ashley_work_titfuck = Action("Obedience: Fuck Her Tits", ashley_work_titfuck_requirement, "ashley_work_titfuck_label")
+    ashley_work_blowjob = Action("Obedience: Get Blowjob", ashley_work_blowjob_requirement, "ashley_work_blowjob_label")
+    ashley_work_fuck = Action("Obedience: Fuck Her", ashley_work_fuck_requirement, "ashley_work_fuck_label")
+    ashley_work_anal = Action("Obedience: Fuck Her Ass", ashley_work_anal_requirement, "ashley_work_anal_label")
+
+    ashley_submission_role = Role(role_name ="Ashley Submission", actions =[ashley_work_titfuck, ashley_work_blowjob, ashley_work_fuck, ashley_work_anal], hidden = True)
+
 #These labels are for MC hitting specific personal serum requirements.
 label ashley_demands_relief_label():    #at 30
     $ the_person = ashley
     "In this label, Ashley approaches MC and demands he gets her off."
     "MC seems conflicted, but ultimately sides with her and gets her off, but questions why would he take orders from her."
     $ ashley_clear_after_work_setup()
-    $ mc.business.add_mandatory_crisis(ashley_submission_titfuck)
+
     $ the_person.story_event_log("obedience")
     $ mc.business.add_mandatory_crisis(ashley_demands_oral)
     $ ashley.event_triggers_dict["dom_fingers"] = True
+    $ ashley.other_messages[0] = "[ashley.fname] sometimes requires you to finger her after work."
     return
 
 label ashley_demands_oral_label():  #at 60
@@ -1441,6 +1555,7 @@ label ashley_demands_oral_label():  #at 60
     $ the_person.story_event_log("obedience")
     $ mc.business.add_mandatory_crisis(ashley_arousal_serum_start)
     $ ashley.event_triggers_dict["dom_oral"] = True
+    $ ashley.other_messages[0] = "[ashley.fname] sometimes requires you to go down on her after work."
     return
 
 label ashley_arousal_serum_start_label():  #at 100
@@ -1453,6 +1568,7 @@ label ashley_arousal_serum_start_label():  #at 100
     $ ashley_clear_after_work_setup()
     $ the_person.story_event_log("obedience")
     $ mc.business.add_mandatory_crisis(ashley_demands_sub)
+    $ ashley.other_messages[2] = "She has found a serum candidate that causes intense female libido that may be worth studying."
     return
 
 label ashley_demands_sub_label():   #at 150
@@ -1464,6 +1580,7 @@ label ashley_demands_sub_label():   #at 150
     $ the_person.story_event_log("obedience")
     $ mc.business.add_mandatory_crisis(ashley_final_submission)
     $ ashley.event_triggers_dict["dom_fuck"] = True
+    $ ashley.other_messages[0] = "[ashley.fname] fucks you after work whenever she wants."
     return
 
 #Ashley's obedience levels
@@ -1633,6 +1750,9 @@ label ashley_submission_titfuck_label():  #at 20
     if first_time:
         "[the_person.possessive_title] has always been a little bit hard to predict."
         "You have a feeling you are going to hear about this event again from her."
+        $ ashley.obedience_messages[0] = "You convinced [ashley.fname] to service you with her tits."
+        $ ashley.obedience_messages.append("")
+        $ ashley.obedience_step = 1
     else:
         "You sigh. Maybe now she'll be able to accept that it is okay to be the submissive partner during sex once in a while?"
         "Either way, you are sure you'll hear about this soon."
@@ -1705,7 +1825,7 @@ label ashley_submission_titfuck_taboo_restore_label():
             the_person "Fine. But don't kid yourself into thinking I'm going to take things any farther."
             $ outcome_convince = True
 
-        "You are that type of girl.\n{color=#ff0000}{size=18}Requires: Ashley loves giving tit fucks{/size}{/color} (disabled)":
+        "You are that type of girl.\n{color=#ff0000}{size=18}Requires: Ashley loves giving tit fucks{/size}{/color} (disabled)"if the_person.opinion_score_giving_tit_fucks() != 2:
             pass
 
         "But it keeps happening..." if ashley.event_triggers_dict.get("sub_titfuck_count", 0) >= 3:
@@ -1731,11 +1851,135 @@ label ashley_submission_titfuck_taboo_restore_label():
         $ ashley.event_triggers_dict["sub_titfuck_avail"] = True
         "[the_person.title] is now willing to stay after work once in a while for some discreet fun! Talk to her during the workday and she'll stay late for you."
         "For now, she's willing to let you fuck her tits, but if you can teach her to be more submissive, you're sure there's more she could do while she's on her knees for you..."
+        $ ashley.obedience_messages[0] = "You've convinced [ashley.fname] to let you fuck her tits anytime you want."
+        $ ashley.remove_role(ashley_submission_role)
     else:
         $ the_person.change_obedience(-20)
         $ mc.business.add_mandatory_crisis(ashley_submission_titfuck_taboo_restore)
         "[the_person.title] isn't willing to make this a regular thing yet. You wonder if you can get her to be obedient if she would be willing to make this a more regular thing..."
+        $ ashley.obedience_messages[0] = "Use obedience to convince [ashley.fname] to let you use her tits again."
+        $ ashley.special_role.insert(0, ashley_submission_role)
     $ clear_scene()
+    return
+
+label ashley_work_titfuck_label(the_person):
+    "You look at [the_person.possessive_title]. You feel the time is right to push her obedience boundary again."
+    mc.name "Hey, can you come with me to my office? I have something I need to talk to you about in private."
+    the_person "Sure."
+    $ mc.change_location(ceo_office)
+    "[the_person.possessive_title] follows you to your office. After you enter, you close the door behind you."
+    the_person "So... what was it you needed?"
+    "You decided to get straight to the point."
+    mc.name "You know, you really DO have some incredible tits."
+    the_person "Ah geeze. This again?"
+    $ the_person.change_happiness(2)
+    "She questions you, but you notice a hint of a smile on her face."
+    mc.name "I mean, can you blame me?"
+    the_person "Yes. Yes I can."
+    $ the_person.change_arousal(20)
+    "You step closer to her. Now just an arms reach away."
+    if not the_person.tits_visible():
+        mc.name "Can I see them?"
+        "She mutters under her breath for a moment. But then nods."
+        $ the_person.strip_to_tits(prefer_half_off = False)
+        "You help her take her top off, and her amazing tits spill free from their prior confines."
+    "You notice a red tinge on her cheeks... her nipples are hard, ready to be sucked and pinched."
+    mc.name "May I?"
+
+    "She mumbles under her breath, but nods."
+    the_person "Yeah... but you can only touch them!"
+    mc.name "Of course."
+    "You reach forward with both hands and cup her big tits. They feel soft and hot to the touch."
+    "You keep your touch light for now, but grasp both of them. She sighs as enjoy feeling her up."
+    "She gives a little yelp when you pinch her nipples at the same time."
+    the_person "Ah! You're always so rough..."
+    mc.name "You like it rough though, don't you?"
+    "She falls silent. She won't admit it, but you can tell you are turning her on."
+    $ the_person.change_arousal(20)
+    "[the_person.title]'s breathing is getting quicker. Groping her tits is getting you really turned on as well."
+    $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(30)
+    "After a bit longer, you decide it is time to make your move. You reach down and unzip your pants, pulling out your cock."
+    "She sighs when she sees what you are doing."
+    the_person "Oh god... not again... in the middle of the workday? Really?"
+    mc.name "[the_person.title], your tits are incredible. Get on your knees, I want to feel them wrapped around my cock."
+    "You are careful to frame the statement as a command, not a question. She could say no, but you feel confident she will do it."
+    the_person "We said... we weren't going to do this again..."
+    mc.name "Are you saying you don't want to? You don't want to feel my hard cock between your big juicy tits?"
+    the_person "I... I shouldn't..."
+    mc.name "But you do. It's okay to want to."
+    "She sighs, but obediently gets on her knees."
+    $ the_person.draw_person(position = "blowjob")
+    "You got her on her knees again. Making her submit to you like this just gets you harder."
+    $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(30)
+    "She looks up at you, just a hint of defiance in her eyes. You step forward a bit until your cock is up against her cleavage."
+    "The defiance dies when she feels your cock against her hot tit flesh."
+    $ the_person.change_arousal(10)
+    $ the_person.break_taboo("touching_penis")
+    "[the_person.possessive_title] takes her tits in her hands and wraps them around your erection. At last her enticing melons are smothering your cock."
+    mc.name "Mmm, your tits are amazing. This is going to feel so good."
+    "She moves her tits up and down a couple times, but the friction feels a little rough. She looks down and spits a large glob of saliva that drips down into her cleavage."
+    "She works her tits around your cock, spreading her saliva all over you. She repeats this a couple more times until your member glides easily back and forth between them."
+    "[the_person.title] looks up at you and starts to move up and down a bit. Her heavenly titflesh massages your dick."
+    $ mc.change_arousal(20) #60
+    $ the_person.change_arousal(10)
+    mc.name "God you are so hot. That's it [the_person.title], fuck my cock with your big tits."
+    "You let her do all the work for now. Her breasts wobble enticingly as they slide up and down your length."
+    $ mc.change_arousal(20) #60
+    $ the_person.change_arousal(10)
+    $ mc.change_locked_clarity(50)
+    mc.name "You like it too, don't you?"
+    $ the_person.increase_opinion_score("giving tit fucks")
+    if the_person.opinion_score_giving_tit_fucks() >= 2:  #She orgasms.
+        $ the_person.change_arousal(20)
+        "[the_person.title] is looking up at you, but her eyes are glazing over. She's... going to orgasm?"
+        mc.name "Oh my god, look at you. You are going to cum aren't you? Just from giving me a titty fuck!"
+        the_person "Oh shit... Oh fuck!"
+        $ the_person.change_arousal(20)
+        mc.name "Look at me and tell me how much you love it and cum while you fuck me with those enormous titties you little slut!"
+        the_person "Fuck! I love it! I love fucking your hot cock with my tits! Oh fuck [the_person.mc_title] I'm cumming!"
+        "Her whole body starts to quake as she cums. Her tits tremble all around you as her body twitches in pleasure."
+        $ the_person.have_orgasm(force_trance = True)
+        "When she is finished she stops moving."
+        $ mc.change_locked_clarity(100)
+    else:
+        the_person "That doesn't matter."
+        mc.name "Of course it matters. Why are you doing this to yourself? Don't hold out on yourself. Just admit that you love it and move on."
+        the_person "Love and like are two very different things."
+        mc.name "Fine. Just admit that you like it. You like getting on your knees for me."
+        "[the_person.possessive_title] stops moving and remains quiet. Sometimes she drives you nuts, remaining quiet when she should just be honest and submit."
+    mc.name "Tired? That's okay, I can finish myself."
+    "You reach down and grab her tits. You start to move yourself up down, fucking her tits in earnest."
+    the_person "Ahhh, you don't need to..."
+    mc.name "Nah, I can tell you are wearing out. Don't worry, I'm almost ready to cum. I can't wait to cover those tits of yours!"
+    if mc_serum_cum_serum_is_active():
+        "She suddenly looks up at you. She obviously knows you are on a serum now that changes you cum's properties."
+        the_person "No... not on me!"
+        mc.name "Of course on you. How do you think a tit fuck ends?"
+    $ mc.change_arousal(40)
+    $ mc.change_locked_clarity(50)
+    "You speed up, hitting the point of no return. You pull out from between her tits at the last second and fire your load off all over her chest."
+    $ the_person.cum_on_tits()
+    $ the_person.draw_person(position = "blowjob")
+    "You fire wave after wave onto her breasts. When you finish, you look down at your incredible artwork."
+    mc.name "Fuck, that was amazing."
+    the_person "Yes... incredible..."
+    "Hah! You got her to admit it again."
+    $ the_person.draw_person(position = "stand2")
+    "[the_person.possessive_title] slowly stands up. A small drip of cum slowly oozes off the edge of one her breasts and onto the floor."
+    the_person "I can't believe I just did that. Again."
+    mc.name "It's okay. I'm sure it won't be that good EVERY time."
+    the_person "I need to go..."
+    "[the_person.title] quickly grabs her stuff and walks away."
+    $ the_person.draw_person(position = "walking_away")
+    "She quickly steps out of your office and then disappears into the hall."
+    $ clear_scene()
+    "You sigh. Maybe now she'll be able to accept that it is okay to be the submissive partner during sex once in a while?"
+    "Either way, you are sure you'll hear about this soon."
+    $ ashley.sex_record["Tit Fucks"] += 1   #Make sure to augment this so the break functions
+    $ ashley.remove_role(ashley_submission_role)
+    $ ashley.apply_planned_outfit()
     return
 
 
@@ -1853,6 +2097,9 @@ label ashley_submission_blowjob_label():  #140 obedience
         "She questions you, but you notice a hint of a smile on her face."
         mc.name "I mean, can you blame me?"
         the_person "Yes. Yes I can."
+
+
+
 
     "[the_person.title]'s head starts to bob up and down on your dick, the blowjob beginning in earnest now."
     "You savor the sensations of the busty girl, servicing you obediently with her mouth."
@@ -2043,6 +2290,11 @@ label ashley_submission_blowjob_taboo_restore_label():
         "[the_person.title] isn't willing to make this a regular thing yet. You wonder if you can get her to be obedient if you could give it another shot..."
     return
 
+label ashley_work_blowjob_label(the_person):
+    pass
+
+    return
+
 
 label ashley_submission_fuck_label(): #160 obedience
     $ the_person = ashley
@@ -2107,6 +2359,11 @@ label ashley_submission_fuck_taboo_restore_label():
         $ the_person.change_obedience(-20)
         $ mc.business.add_mandatory_crisis(ashley_submission_fuck)
         "[the_person.title] isn't willing to make this a regular thing yet. You wonder if you can get her to be obedient if you could give it another shot..."
+    return
+
+label ashley_work_fuck_label(the_person):
+    pass
+
     return
 
 label ashley_submission_anal_label():
@@ -2177,6 +2434,11 @@ label ashley_submission_anal_taboo_restore_label():
         "[the_person.title] isn't willing to make anal sex a regular thing yet. You wonder if you can get her to be obedient if you could give it another shot..."
     return
 
+label ashley_work_anal_label(the_person):
+    pass
+
+    return
+
 
 #Breaking Ashley path
 label ashley_second_concert_intro_label(the_person):    #120 obedience, requires first concert date complete.
@@ -2229,6 +2491,7 @@ label ashley_final_submission_label():
     "If Stephanie is a bimbo another employee with high love stat walks in and stops things before they can progress."
     "If none of those things are true... possible bad end? Or large setback?"
     $ mc.business.event_triggers_dict["ashley_submission_complete"] = True
+    $ ashley.other_messages[0] = "[ashley.fname] had a plan to dominate you, but abandoned it."
     return
 
 
