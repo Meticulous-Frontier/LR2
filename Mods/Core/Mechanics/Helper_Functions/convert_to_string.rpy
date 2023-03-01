@@ -10,7 +10,7 @@ init 0 python:
         inches = __builtin__.int(height_in_inches % 12)
 
         if use_imperial_system:
-            return "{}' {}\"".format(feet,inches)
+            return "{}' {}\"".format(feet, inches)
         else:
             return "{:.0f} cm".format(height_in_inches * 2.54)
 
@@ -33,33 +33,31 @@ init 0 python:
         return "wife"
 
     @renpy.pure
-    def get_energy_string(energy, max_energy):
-        percent = energy * 1.0 / max_energy
-        color_string = "{color=#43B197}"
+    def get_color_value_for_fraction(percent):
+        color_string = "#43B197"
         if percent < .5:
-            color_string = "{color=#e1e113}"
+            color_string = "#e1e113"
         if percent < .2:
-            color_string = "{color=#B14365}"
+            color_string = "#B14365"
+        return color_string
 
-        return color_string + str(__builtin__.int(energy)) +"/"+ str(__builtin__.int(max_energy)) + "{/color} {image=energy_token_small}"
+    @renpy.pure
+    def get_energy_string(energy, max_energy):
+        percent = energy * 1.0 / (max_energy or 1)
+        return "{{color={}}}{}/{}{{/color}} {{image=energy_token_small}}".format(get_color_value_for_fraction(percent), __builtin__.int(energy), __builtin__.int(max_energy))
 
     @renpy.pure
     def get_arousal_with_token_string(arousal, max_arousal):
-        return str(__builtin__.int(arousal)) + "/"+ str(__builtin__.int(max_arousal)) + " {image=arousal_token_small}"
+        return "{}/{} {{image=arousal_token_small}}".format(__builtin__.int(arousal), __builtin__.int(max_arousal))
 
     @renpy.pure
     def get_locked_clarity_with_token_string(locked_clarity):
-        return str(__builtin__.int(locked_clarity)) + " {image=lust_eye_token_small}"
+        return "{} {{image=lust_eye_token_small}}".format(__builtin__.int(locked_clarity))
 
     @renpy.pure
     def get_attention_string(attention, max_attention):
-        percent = attention * 1.0 / max_attention
-        color_string = "{color=#43B197}"
-        if percent > .5:
-            color_string = "{color=#e1e113}"
-        if percent > .8:
-            color_string = "{color=#B14365}"
-        return color_string + str(attention) + "/" + str(max_attention) + "{/color}"
+        percent = attention * 1.0 / (max_attention or 1)
+        return "{{color={}}}{}/{}{{/color}}".format(get_color_value_for_fraction(percent), attention, max_attention)
 
     def get_person_weight_string(person):
         kg = person.weight
@@ -69,8 +67,8 @@ init 0 python:
             kg += (1 - ((person.get_due_day() - day) / float(person.get_due_day() - person.pregnancy_show_day()))) * 11.4
 
         if use_imperial_system:
-            return str(__builtin__.round(kg * 2.205, 1)) + " lbs"
-        return str(__builtin__.round(kg, 1)) + " kg"
+            return "{} lbs".format(__builtin__.round(kg * 2.205, 1))
+        return "{} kg".format(__builtin__.round(kg, 1))
 
     @renpy.pure
     def time_of_day_string(time_of_day):
@@ -92,7 +90,7 @@ init 0 python:
         person_title = person.name + " " + person.last_name
         if not person.title or person.mc_title == "Stranger":
             return "???"    # we don't know her yet
-        return "{color=" + person.char.who_args["color"] + "}" + "{font=" + person.char.what_args["font"] + "}" + person_title + "{/font}{/color}"
+        return "{{color={}}}{{font={}}}{}{{/font}}{{/color}}".format(person.char.who_args["color"], person.char.what_args["font"], person_title)
 
     def format_titles_short(person):
         person_title = person.name + " "
@@ -100,4 +98,4 @@ init 0 python:
             person_title += person.last_name[0] + "."
         if not person.title or person.mc_title == "Stranger":
             return "???"    # we don't know her yet
-        return "{color=" + person.char.who_args["color"] + "}" + "{font=" + person.char.what_args["font"] + "}" + person_title + "{/font}{/color}"
+        return "{{color={}}}{{font={}}}{}{{/font}}{{/color}}".format(person.char.who_args["color"], person.char.what_args["font"], person_title)
