@@ -2920,10 +2920,14 @@ init -1 python:
     def story_other_list(self):
         return [""] #There is some default info here, so no need to add a generic text description
 
+    def story_obedience_list(self):
+        return ["This character's obedience progress menu has not yet been created."]
+
     Person.story_love_list = story_love_list
     Person.story_lust_list = story_lust_list
     Person.story_teamup_list = story_teamup_list
     Person.story_other_list = story_other_list
+    Person.story_obedience_list = story_obedience_list
     Person.story_character_description = ""
 
     def person_tag_sex_record(self, record_class = ""):    #Tag a sex record for later comparison
