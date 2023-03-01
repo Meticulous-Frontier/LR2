@@ -1921,10 +1921,6 @@ init -1 python:
         return self.has_role([stripper_role, stripclub_stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role, stripclub_manager_role, stripclub_mistress_role])
     Person.is_strip_club_employee = is_strip_club_employee
 
-    def only_normal_employee(self):
-        return self.is_employee() and not self.is_strip_club_employee()
-    Person.only_normal_employee = only_normal_employee
-
     def has_role_enhanced(self, role):
         if isinstance(role, basestring):
             return any(x for x in self.special_role if x.role_name == role) \

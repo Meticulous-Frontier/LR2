@@ -263,6 +263,14 @@ init 1 python:
             renpy.quit()
         return
 
+    def fix_strip_club_strippers():
+        stripclub_stripper_role.looks_like = []
+        for person in [x for x in all_people_in_the_game() if x.has_role(stripclub_stripper_role)]:
+            found = next((x for x in person.special_role if x == stripclub_stripper_role), None)
+            if found:
+                found.looks_like = []
+        return
+
 label check_mod_installation(stack):
     $ validate_mod_installation_location()
     $ mod_installed = True
@@ -279,6 +287,8 @@ label activate_compatibility_fix(stack):
 
     $ cleanup_default_wardrobe()
 
+    $ fix_strip_club_strippers()
+
     $ execute_hijack_call(stack)
     return
 
@@ -291,6 +301,8 @@ label update_compatibility_fix(stack):
     $ update_pinned_cache()
 
     $ cleanup_default_wardrobe()
+
+    $ fix_strip_club_strippers()
 
     $ execute_hijack_call(stack)
     return

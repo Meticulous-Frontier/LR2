@@ -38,6 +38,7 @@ init 2: # Need to allow for None name roles in this screen as well.
         else:
             default eyes_info = ""
         default desired_salary = the_person.calculate_base_salary()
+        default desired_stripper_salary = calculate_stripper_salary(the_person)
 
         vbox:
             spacing 25
@@ -124,7 +125,7 @@ init 2: # Need to allow for None name roles in this screen as well.
                             text "Significant Other: [mc.name]" style "menu_text_style"
                         if the_person.kids > 0:
                             text "Kids: [the_person.kids]" style "menu_text_style"
-                        if the_person.only_normal_employee():
+                        if the_person.is_employee():
                             text "Salary: $[the_person.salary]/day" style "menu_text_style"
                         if  the_person.is_strip_club_employee():
                             text "Club Salary: $[the_person.stripper_salary]/day" style "menu_text_style"
@@ -257,8 +258,10 @@ init 2: # Need to allow for None name roles in this screen as well.
                         text "Research: [research_base] Research Points" style "menu_text_style"
                         text "Production: [prod_base] Production Points" style "menu_text_style"
                         text "Supply: [supply_base] Supply Units" style "menu_text_style"
-                        if the_person.only_normal_employee():
+                        if the_person.is_employee():
                             text "Desired Salary: $[desired_salary]/day" style "menu_text_style"
+                        if the_person.is_strip_club_employee():
+                            text "Club Salary: $[desired_stripper_salary]/day" style "menu_text_style" size 16
 
                 frame:
                     background None
