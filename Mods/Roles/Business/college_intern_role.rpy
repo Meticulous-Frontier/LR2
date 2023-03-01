@@ -49,7 +49,8 @@ init 1 python:
         return False
 
     def college_intern_training_requirement(the_person):
-        return the_person.is_at_work() and not the_person.location == university
+        return False # disabled until written
+        #return the_person.is_at_work() and not the_person.location == university
 
     def college_intern_recruit_market_requirement(the_person):
         return False
@@ -88,7 +89,7 @@ init 1 python:
         return
 
 init 2 python:
-    hire_new_college_intern = Action("Hire new intern", hire_new_college_intern_requirement, "hire_new_college_intern_label")   #TODO tooltip
+    hire_new_college_intern = Action("Hire new intern {image=gui/heart/Time_Advance.png}", hire_new_college_intern_requirement, "hire_new_college_intern_label")   #TODO tooltip
     college_intern_recruit_market = Action("Recruit Marketing Interns", college_intern_recruit_market_requirement, "college_intern_recruit_market_label")
     college_intern_recruit_hr = Action("Recruit HR Interns", college_intern_recruit_hr_requirement, "college_intern_recruit_hr_label")
     college_intern_recruit_supply = Action("Recruit Supply Interns", college_intern_recruit_supply_requirement, "college_intern_recruit_supply_label")
