@@ -78,8 +78,9 @@ init 3304 python:
 
     def strip_club_manager_bdsm_room_reminder_requirement():
         if not mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and mc.business.event_triggers_dict.get("strip_club_bdsm_decision_day") == 0: # the event only trigger if the bdsm_room isn't started yet
-            if day % 5 == 2 and time_of_day == 2: # the event trigger every 5 days in the afternoon. (phone call)
-                return True
+            if strip_club_get_manager(): # the event only trigger if there's a Manager
+                if day % 5 == 2 and time_of_day == 2: # the event trigger every 5 days in the afternoon. (phone call)
+                    return True
         return False
 
     def add_strip_club_manager_bdsm_room_reminder_action():
@@ -127,22 +128,30 @@ label strip_club_manager_reminder_label():
 label strip_club_manager_hire_more_stripper_reminder_label(): # phone call
     if __builtin__.len(stripclub_strippers) >= 7:
         return
-    "Suddenly your smartphone rings, it's your strip club manager."
     $ the_person = strip_club_get_manager()
-    the_person "Hello [the_person.mc_title], I called just to remind you we can have seven girls here, performing on the stage."
+    if mc.location == strip_club and the_person.location == strip_club:
+        $ the_person.draw_person()
+    else:
+        "Suddenly your phone rings, it's your strip club manager."
+    the_person "Hello [the_person.mc_title], I just wanted to remind you that we can have seven girls here, performing on the stage."
     the_person "A full roster would make setting up the shifts easier and, of course, it would be more profitable for you."
     mc.name "Thank you [the_person.title]... I know, I'll find someone, I promise!"
     the_person "Okay [the_person.mc_title], thank you!"
+    $ clear_scene()
     return
 
 label strip_club_manager_hire_more_waitresses_reminder_label(): # phone call
     if __builtin__.len(stripclub_waitresses) >= 2:
         return
-    "Your smartphone rings. It's your strip club manager."
     $ the_person = strip_club_get_manager()
-    the_person "Hello [the_person.mc_title], I called just to remind you we need two waitresses, we can't have our strippers do that."
+    if mc.location == strip_club and the_person.location == strip_club:
+        $ the_person.draw_person()
+    else:
+        "Your phone rings. It's your strip club manager."
+    the_person "Hello [the_person.mc_title], I just wanted to remind you that we need two waitresses, we can't have our strippers do that."
     mc.name "Thank you [the_person.title]... I know, I'll find someone, I promise!"
     the_person "Okay [the_person.mc_title], thank you!"
+    $ clear_scene()
     return
 
 label strip_club_manager_waitresses_suggestion_label(): # (personal contact)
@@ -211,12 +220,16 @@ label strip_club_manager_bdsm_room_build_label(): # (action button)
     return
 
 label strip_club_manager_bdsm_room_reminder_label(): # phone call
-    "Your phone rings. It's your strip club manager."
     $ the_person = strip_club_get_manager()
+    if mc.location == strip_club and the_person.location == strip_club:
+        $ the_person.draw_person()
+    else:
+        "Your phone rings, it's your strip club manager."
     the_person "Hello [the_person.mc_title], did you check the business prospect I sent you for having a special room for BDSM shows?"
     the_person "I'm sure it would make the business here a lot more profitable, we would be the only club in the city having that kind of entertainment."
     mc.name "Thank you [the_person.title]... I know, I'll get back to you, I promise!"
     the_person "Ok [the_person.mc_title], thank you!"
+    $ clear_scene()
     return
 
 label strip_club_manager_bdsm_room_built_label(): # (time event)
