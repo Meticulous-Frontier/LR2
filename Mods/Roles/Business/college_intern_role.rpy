@@ -27,11 +27,6 @@ init 1 python:
         pass
         return
 
-    def college_intern_is_at_work(the_person):
-        if the_person.location in [rd_division, p_division, m_division, office]:
-            return True
-        return False
-
     def college_intern_happiness_score(the_person):
         happiness_score = the_person.happiness - 100
         happiness_score += the_person.sluttiness
