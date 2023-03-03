@@ -214,7 +214,8 @@ init 1 python:
     # extend main_loop_cleanup list from bugfix
     if "common_variable_list" in globals():
         common_variable_list.append("scene_manager");
-        common_variable_list.append('HR_employee_list');
+        common_variable_list.append('HR_employee_list')
+        common_variable_list.append('the_target');
 
     def update_pinned_cache():
         # cache all GUI images in memory
