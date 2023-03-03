@@ -403,7 +403,7 @@ label head_researcher_cure_discovery_intro_label():
     python:
         the_target.add_unique_on_talk_event(head_researcher_cure_discovery_market_patent)
         del the_disease
-        del the_target
+        the_target = None
     return
 
 label head_researcher_cure_discovery_market_patent_label(the_person):
