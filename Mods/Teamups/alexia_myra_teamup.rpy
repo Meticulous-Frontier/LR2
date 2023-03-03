@@ -438,12 +438,12 @@ label myra_alexia_teamup_scene_scene_0(the_group, scene_transition = False):  #M
         mc.name "Sorry... feel good doing what?"
         "[the_target.possessive_title] startles for a second."
         the_target "Ah! I mean ummm... Just like... you should do this more often..."
-        $ the_person.increase_opinion_score("being fingered")
+        $ the_target.increase_opinion_score("being fingered")
         "You have a feeling she meant something else..."
         $ mc.change_locked_clarity(10)
     "After a bit, it is definitely time to go."
     mc.name "Alright, well I need to get home. You have a good night, okay?"
-    the_person "God that was so good. Is it okay if I don't get up?"
+    the_target "God that was so good. Is it okay if I don't get up?"
     mc.name "That is fine. I'll see myself out."
     $ scene_manager.clear_scene()
     "You get up and head home."
