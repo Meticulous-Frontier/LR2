@@ -31,6 +31,13 @@ label relaxed_roleplay_taboo_break(the_person):
     pass
     return
 
+label relaxed_flirt_response_low_energy(the_person):
+    if the_person.sluttiness > 40:
+        the_person "Mmhm thanks, if I wasn't so tired, I might let you continue giving me compliments."
+    else:
+        the_person "Thank you, but would you mind if we continue this later, I'm a little tired."
+    return
+
 label relaxed_sleepover_yourplace_response(the_person): #Invited her over to spend the night
     if the_person.sluttiness < 80:
         the_person "Sounds great! Save some energy, we can make it a fun night."

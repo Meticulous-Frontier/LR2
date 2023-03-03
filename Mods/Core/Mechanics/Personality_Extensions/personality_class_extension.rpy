@@ -39,7 +39,7 @@ init -1 python:
         for ending in self.response_label_ending:
             if renpy.has_label(self.personality_type_prefix + "_" + ending):
                 self.response_dict[ending] = self.personality_type_prefix + "_" + ending
-            elif default_prefix is not None and renpy.has_label(self.default_prefix + "_" + ending):
+            elif self.default_prefix and renpy.has_label(self.default_prefix + "_" + ending):
                 self.response_dict[ending] = self.default_prefix + "_" + ending
             else:
                 self.response_dict[ending] = "relaxed_" + ending
@@ -48,6 +48,10 @@ init -1 python:
     Personality.rebuild_response_dictionary = rebuild_response_dictionary
 
     def get_dialogue_enhanced(self, the_person, type, **extra_args):
+        if not type in self.response_dict:
+            # self repairing personality response type (helps with upgrades / changes to personality files)
+            self.rebuild_response_dictionary()
+
         target = self.response_dict[type]
         if not renpy.has_label(target): # self repairing personality response dictionary (helps with upgrades / changes to personality files)
             self.rebuild_response_dictionary()
@@ -121,6 +125,7 @@ init 1299 python:
         Personality.response_label_ending.append("lingerie_shopping_excited_response")
         Personality.response_label_ending.append("lingerie_shopping_wow_response")
         Personality.response_label_ending.append("GIC_finish_response")
+        Personality.response_label_ending.append("flirt_response_low_energy")
 
 init 1400 python:
     # update default personalities with extra opinions (not in base game)

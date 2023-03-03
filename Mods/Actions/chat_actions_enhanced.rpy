@@ -39,7 +39,10 @@ label flirt_person_enhanced(the_person): #Tier 1. Raises a character's sluttines
         else:
             mc.name "[the_person.title], are you wearing a new outfit today?"
 
-        $ the_person.call_dialogue("flirt_response_low")
+        if the_person.energy > 15:
+            $ the_person.call_dialogue("flirt_response_low")
+        else:
+            $ the_person.call_dialogue("flirt_response_low_energy")
 
     elif the_person.love <= 40 or the_person.get_opinion_score("kissing") < -1: #20 to 40 or hates kissing
         # Mid Love
@@ -49,7 +52,11 @@ label flirt_person_enhanced(the_person): #Tier 1. Raises a character's sluttines
             mc.name "You're looking tasty today [the_person.title]. That outfit really shows off your [the_person.tits_description]."
         else:
             mc.name "You're looking cute today [the_person.title]. That outfit really shows off your body."
-        $ the_person.call_dialogue("flirt_response_mid")
+
+        if the_person.energy > 15:
+            $ the_person.call_dialogue("flirt_response_mid")
+        else:
+            $ the_person.call_dialogue("flirt_response_low_energy")
 
     else:
         # High Love
@@ -70,8 +77,10 @@ label flirt_person_enhanced(the_person): #Tier 1. Raises a character's sluttines
         else:
             mc.name "[the_person.title], you are looking good today. Any chance for me to see you naked any time soon?"
 
-        $ the_person.call_dialogue("flirt_response_high")
-
+        if the_person.energy > 15:
+            $ the_person.call_dialogue("flirt_response_high")
+        else:
+            $ the_person.call_dialogue("flirt_response_low_energy")
 
     python:
         mc.listener_system.fire_event("player_flirt", the_person = the_person)
