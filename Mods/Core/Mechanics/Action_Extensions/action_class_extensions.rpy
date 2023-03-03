@@ -66,6 +66,19 @@ init 1 python:
     Action.is_action_enabled = is_action_enabled
     Action.is_disabled_slug_shown = is_disabled_slug_shown
 
+    def update_action(self, action):
+        self.name = action.name
+        self.effect = action.effect
+        self.requirement = action.requirement
+        self.args = action.args
+        self.menu_tooltip = action.menu_tooltip
+        self.priority = action.priority
+        self.event_duration = action.event_duration
+        self.is_fast = action.is_fast
+        return
+
+    Action.update_action = update_action
+
     # hook for logging executed actions
     def call_action_extended(org_func):
         def call_action_wrapper(action, extra_args = None):

@@ -38,6 +38,8 @@ init -1 python:
         found = next((x for x in self.actions if x.effect == action.effect), None)
         if not found:
             self.actions.append(action)
+        else:
+            found.update_action(action)
 
     Role.add_action = add_action
 
