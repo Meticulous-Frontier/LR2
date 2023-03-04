@@ -66,6 +66,7 @@ init 1 python:
     Action.is_action_enabled = is_action_enabled
     Action.is_disabled_slug_shown = is_disabled_slug_shown
 
+    # CAN BE REMOVE IN FUTURE VERSION (NOW IN BUGFIX)
     def update_action(self, action):
         self.name = action.name
         self.effect = action.effect

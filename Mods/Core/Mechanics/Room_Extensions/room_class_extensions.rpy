@@ -98,6 +98,7 @@ init -1 python:
         return possible_locations
 
     # Adds an action to the room if not already present. Used with PolicyMod.
+    # CAN BE REMOVE IN FUTURE VERSION (NOW IN BUGFIX)
     def add_action(self, action):
         found = next((x for x in self.actions if x.effect == action.effect), None)
         if not found:
@@ -108,6 +109,7 @@ init -1 python:
     Room.add_action = add_action
 
     # Remove an action from if present
+    # CAN BE REMOVE IN FUTURE VERSION (NOW IN BUGFIX)
     def remove_action(self, action):
         found = None
         if isinstance(action, Action):
@@ -120,6 +122,7 @@ init -1 python:
 
     Room.remove_action = remove_action
 
+    # CAN BE REMOVE IN FUTURE VERSION (NOW IN BUGFIX)
     def remove_object(self, the_object):
         if isinstance(the_object, basestring):
             found = ((x for x in self.objects if x.name == the_object), None)
