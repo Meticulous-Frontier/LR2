@@ -985,14 +985,14 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
                 the_person "Fine, since you asked so nicely."
                 "She spits her last sentence out sarcastically. But it doesn't matter, she starts walking over to you."
                 the_person "I'll be damned before I let your cum touch me though."
-                call get_fucked(the_person, the_goal = "waste cum") from _after_yoga_hate_fuck_01
+                call get_fucked(the_person, the_goal = "waste cum", skip_intro = True) from _after_yoga_hate_fuck_01
             else:
                 the_person "Yes [the_person.mc_title]... with my mouth? or?"
                 mc.name "You can use your imagination."
                 "She smiles as she starts to walk over to you."
                 $ mc.change_locked_clarity(20)
                 the_person "Okay! I think I can think of a good way to do this..."
-                call get_fucked(the_person) from _after_yoga_get_serviced
+                call get_fucked(the_person, skip_intro = True) from _after_yoga_get_serviced
         "Make her service you (disabled) " if the_person.obedience < 130:
             pass
         "Mess around":
