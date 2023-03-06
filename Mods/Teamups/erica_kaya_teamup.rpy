@@ -657,9 +657,9 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
     else:
         if previous_punished:
             mc.name "Alright [kaya.title]. Your partner got her question right, it's your turn again."
+            $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
             "Your cock escapes her lips with a pop and she gets up and takes her seat."
             call kaya_erica_teamup_blowjob_condition() from _kaya_erica_teamup_oral_debrief_02
-            $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
         $ previous_punished = False
     mc.name "Alright, on to the second round of questions."
     call kaya_erica_teamup_question_label(kaya, active_punishment = previous_punished, punished_person = erica) from _kaya_erica_teamup_oral_question_03
@@ -684,9 +684,9 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
     else:
         if previous_punished:
             mc.name "Alright [erica.title]. Your partner got her question right, it's your turn again."
+            $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
             "Your cock escapes her lips with a pop and she gets up and takes her seat."
             call kaya_erica_teamup_blowjob_condition() from _kaya_erica_teamup_oral_debrief_04
-            $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
         $ previous_punished = False
     mc.name "Alright, [erica.title], next question."
     call kaya_erica_teamup_question_label(erica, active_punishment = previous_punished, punished_person = kaya) from _kaya_erica_teamup_oral_question_04
@@ -712,9 +712,9 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
     else:
         if previous_punished:
             mc.name "Alright [kaya.title]. Your partner got her question right, it's your turn again."
+            $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
             "Your cock escapes her lips with a pop and she gets up and takes her seat."
             call kaya_erica_teamup_blowjob_condition() from _kaya_erica_teamup_oral_debrief_06
-            $ scene_manager.update_actor(kaya, position = "sitting", display_transform = character_left_flipped)
         $ previous_punished = False
     mc.name "Alright, on to the final round of questions."
     call kaya_erica_teamup_question_label(kaya, active_punishment = previous_punished, punished_person = erica) from _kaya_erica_teamup_oral_question_05
@@ -740,9 +740,9 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
     else:
         if previous_punished:
             mc.name "Alright [erica.title]. Your partner got her question right, it's your turn again."
+            $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
             "Your cock escapes her lips with a pop and she gets up and takes her seat."
             call kaya_erica_teamup_blowjob_condition() from _kaya_erica_teamup_oral_debrief_08
-            $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
         $ previous_punished = False
     mc.name "Alright, [erica.title], last question."
     call kaya_erica_teamup_question_label(erica, active_punishment = previous_punished, punished_person = kaya) from _kaya_erica_teamup_oral_question_06
@@ -780,6 +780,7 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
         else:
             "As much as you want her to just keep going until you finish, you can tell it wouldn't really be fair."
             mc.name "Alright, that's enough."
+            $ scene_manager.update_actor(erica, erica.idle_pose, display_transform = character_right)
             "Your cock escapes her lips with a pop and she gets up."
             call kaya_erica_teamup_blowjob_condition(inc_mouth = False, final = True) from _kaya_erica_teamup_oral_debrief_10
         $ scene_manager.update_actor(erica, position = "sitting", display_transform = character_right)
