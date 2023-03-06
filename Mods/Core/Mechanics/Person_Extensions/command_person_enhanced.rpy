@@ -63,7 +63,6 @@ label make_onlyfans_together_label(the_person):
     the_person "Sure thing!"
     $ the_person.apply_planned_outfit()
     $ clear_scene
-    $ jump_game_loop()
     return
 
 label bend_over_your_desk_label(the_person):
@@ -331,9 +330,9 @@ label employee_lust_build_loop_label(the_person):
         else:
             #Right here we need the option to interact with other people in the room.
             if the_person.vagina_available():
-                $ mc.change_locked_clarity(50)
-            else:
                 $ mc.change_locked_clarity(30)
+            else:
+                $ mc.change_locked_clarity(10)
             if mc.arousal > 90 or mc.energy < 20:
                 $ loop_choice = "finish"
                 "You decide that it is time to stop teasing yourself."
