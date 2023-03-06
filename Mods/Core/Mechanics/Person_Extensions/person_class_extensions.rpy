@@ -924,12 +924,13 @@ init -1 python:
             self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
 
         destination = self.get_destination() #None destination means they have free time
-        # changing outfits is handled by move_person wrapper function
         if not destination:
             destination = get_random_from_list([x for x in list_of_places if x.public or x == self.home])
 
         if not location == destination: # only call move_person when location changed
             self.location_outfit = None # Clear the current location outfit
+
+            # changing outfits is handled by move_person wrapper function
             location.move_person(self, destination)
 
         if self.should_wear_uniform(): #She's wearing a uniform
