@@ -471,6 +471,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ allow_transitions = True
     $ ask_for_condom = skip_condom
     $ ask_for_threesome = False
+    $ skip_taboo_break = False
     $ use_condom = mc.condom if skip_condom else False
     $ stealth_orgasm = False
     $ stop_stripping = False
@@ -1078,6 +1079,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
             the_person "Could you put on a condom? I don't want to have a mess when you start pumping my ass."
         else:
             $ the_person.call_dialogue("condom_ask")
+            $ skip_taboo_break = True
 
         menu:
             "Put on a condom":
@@ -1086,7 +1088,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
 
             "Fuck her raw":
                 mc.name "No way. I want to feel you wrapped around me."
-                call fuck_without_condom_taboo_break_response(the_person, skill_tag) from _call_fuck_without_condom_taboo_break_response_3
+                call fuck_without_condom_taboo_break_response(the_person, skill_tag, skip_taboo_break = skip_taboo_break) from _call_fuck_without_condom_taboo_break_response_3
 
     else: #Slutty enough that she doesn't even care about a condom.
         if the_person.is_dominant() and (the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0): # likes it bare and is not a pushover
@@ -1125,6 +1127,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
                 the_person "Well... ah... could you fuck my little ass raw?"
             else:
                 $ the_person.call_dialogue("condom_bareback_ask")
+                $ skip_taboo_break = True
             menu:
                 "Put on condom":
                     mc.name "I think a condom is a good idea."
@@ -1132,7 +1135,7 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
 
                 "Fuck her raw":
                     mc.name "No arguments here."
-                    call fuck_without_condom_taboo_break_response(the_person, skill_tag, condom_promise = False) from _call_fuck_without_condom_taboo_break_response_6
+                    call fuck_without_condom_taboo_break_response(the_person, skill_tag, condom_promise = False, skip_taboo_break = skip_taboo_break) from _call_fuck_without_condom_taboo_break_response_6
 
     if not mc.condom:
         $ the_person.break_taboo("condomless_sex")
@@ -1154,8 +1157,8 @@ label prostitute_agree_no_condom_taboo_break_response(the_person):
             the_person "I'm not using any contraception at the moment."
     return
 
-label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal", condom_promise = True):
-    if the_person.has_taboo("condomless_sex") and skill_tag == "Vaginal":
+label fuck_without_condom_taboo_break_response(the_person, skill_tag == "Vaginal", condom_promise = True, skip_taboo_break = False):
+    if the_person.has_taboo("condomless_sex") and skill_tag == "Vaginal" and not skip_taboo_break:
         $ the_person.call_dialogue("condomless_sex_taboo_break")
     else:
         # TODO: make this a personality based response.
