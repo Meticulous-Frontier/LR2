@@ -471,14 +471,13 @@ init 5 python:
             for cp in [x for x in WardrobeBuilder.color_prefs if x not in get_excluded(base_color)]:
                 score = person.get_opinion_score(cp)
                 if score > -2: # don't append colors she hates
-                    color_list.extend([[WardrobeBuilder.color_prefs[cp][x][:], (score + 2) ^ 3] for x in WardrobeBuilder.color_prefs[cp]])
+                    color_list.extend([[WardrobeBuilder.color_prefs[cp][x][:], (score + 2) ** 2] for x in WardrobeBuilder.color_prefs[cp]])
 
             if not color_list:  # if she hates all colours
                 for cp in WardrobeBuilder.color_prefs:
                     color_list.extend([[WardrobeBuilder.color_prefs[cp][x][:], 5] for x in WardrobeBuilder.color_prefs[cp]])
 
-            # renpy.random.shuffle(color_list)
-            return get_random_from_weighted_list([x for x in color_list if x[1] > 0])
+            return get_random_from_weighted_list(color_list)
 
         @staticmethod
         def get_main_color_scheme(person, match_percent = 60):
@@ -527,7 +526,7 @@ init 5 python:
                         found = next((x for x in item_list if x[0]==item), None)
                         if score == -2:
                             found[2] = False
-                        found[1] += (score + 2) ^ 3
+                        found[1] += (score + 2) ** 2
 
             # first return pref without hated, then without pref and hate, then with pref, then any item
             return [x for x in item_list if x[1] > 1 and x[2]] \
