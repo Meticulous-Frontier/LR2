@@ -435,11 +435,12 @@ init 5 python:
 
         @staticmethod
         def get_color_opinion(colour):
-            color_name = closest_preference_color(Color(rgb=(colour[0], colour[1], colour[2])))
+            if isinstance(colour, list) and len(colour) >= 3:
+                color_name = closest_preference_color(Color(rgb=(colour[0], colour[1], colour[2])))
 
-            for opinion in WardrobeBuilder.color_prefs:
-                if color_name in WardrobeBuilder.color_prefs[opinion]:
-                    return opinion
+                for opinion in WardrobeBuilder.color_prefs:
+                    if color_name in WardrobeBuilder.color_prefs[opinion]:
+                        return opinion
 
             return "the colour black" # default fallback
 
