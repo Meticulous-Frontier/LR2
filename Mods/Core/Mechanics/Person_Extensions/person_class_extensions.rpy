@@ -911,7 +911,6 @@ init -1 python:
             serum.run_on_move(self) #Run the serum's on_move function if one exists
 
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
-        self.location_outfit = None # Clear the current location outfit (only valid 1 timeslot)
 
         if time_of_day == 0: #Change outfit here, because crisis events might be triggered after run day function
             if self.next_day_outfit:
@@ -926,10 +925,12 @@ init -1 python:
 
         destination = self.get_destination() #None destination means they have free time
         # changing outfits is handled by move_person wrapper function
-        if destination:
+        if not destination:
+            destination = get_random_from_list([x for x in list_of_places if x.public or x == self.home])
+
+        if not location == destination: # only call move_person when location changed
+            self.location_outfit = None # Clear the current location outfit
             location.move_person(self, destination)
-        else:
-            location.move_person(self, get_random_from_list([x for x in list_of_places if x.public or x == self.home]))
 
         if self.should_wear_uniform(): #She's wearing a uniform
             if creative_colored_uniform_policy.is_active():
