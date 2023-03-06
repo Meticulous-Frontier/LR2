@@ -1619,7 +1619,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
         "[the_person.possessive_title] lifts her leg up, allowing you easy access. You push her gently against the wall, lift her weight a bit to line yourself up with her cunt."
         "Once lined up, you let her body slide down the wall, her weight impaling her on your cock. You easily slide in to her eager pussy."
         the_person "Oh fuck... you better do this to me often, boyfriend!"
-        call fuck_person(the_person, private=True, start_position = against_wall, skip_condom = kaya_condom_check()) from _call_kaya_sex_at_shop_07
+        call fuck_person(the_person, private=True, start_position = against_wall, start_object = make_wall(), skip_intro = True, skip_condom = kaya_condom_check()) from _call_kaya_sex_at_shop_07
     else:
         $ kaya.event_triggers_dict["no_condom_talk"] = True
         "Primitive urges are overtaking you both. It isn't long until clothes start to come off."
@@ -1668,7 +1668,7 @@ label kaya_share_the_news_label():  # Timed event after helping her move.
         "[the_person.possessive_title] lifts her leg up, allowing you easy access. You push her gently against the wall, lift her weight a bit to line yourself up with her cunt."
         "Once lined up, you let her body slide down the wall, her weight impaling her on your cock. You slide in easily to her eager pussy."
         the_person "Oh fuck... you better do this to me often, boyfriend!"
-        call fuck_person(the_person, private=True, start_position = against_wall, skip_intro = True, skip_condom = True) from _call_kaya_sex_at_shop_08
+        call fuck_person(the_person, private=True, start_position = against_wall, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_kaya_sex_at_shop_08
     $ the_person.draw_person()
     "When you finish, [the_person.possessive_title] looks thoughtful."
     the_person "Living with my mother... we are going to have to get creative so we can get naughty..."
