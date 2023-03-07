@@ -28,6 +28,8 @@ init 5 python:
     def demand_strip_get_obedience_req(the_person, new_outfit, min = 100, private = False):
         # TODO: take into account preferences
         obedience_req = new_outfit.get_full_outfit_slut_score() - the_person.effective_sluttiness() / 2
+        obedience_req -= (the_person.get_opinion_score("showing her tits") * 3)
+        obedience_req -= (the_person.get_opinion_score("showing her ass") * 3)
 
         if private:
             obedience_req /= 2  # privacy reduces obedience requirements
@@ -35,7 +37,10 @@ init 5 python:
         return __builtin__.max(min, __builtin__.int(__builtin__.round(100 + obedience_req, -1)))
 
     def demand_strip_judge_public(the_person, new_outfit, opinion):
-        return the_person.judge_outfit(new_outfit, temp_sluttiness_boost = -10 + 5 * the_person.get_opinion_score(opinion))
+        apply_sex_modifiers(the_person, False)
+        judge = the_person.judge_outfit(new_outfit, temp_sluttiness_boost = -10 + 5 * the_person.get_opinion_score(opinion))
+        clear_sex_modifiers(the_person)
+        return judge
 
     def demand_strip_judge_private(the_person, new_outfit, opinion):
         apply_sex_modifiers(the_person) # quickly add and remove modifiers to get that sweet, sweet love bonus

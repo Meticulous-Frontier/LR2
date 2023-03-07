@@ -2,11 +2,11 @@ init 5 python:
     config.label_overrides["demand_strip_naked_label"] = "demand_strip_naked_label_enhanced"
 
     def demand_strip_naked_requirement_enhanced(the_person):
-        if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible() and the_person.outfit.tits_available() and the_person.outfit.vagina_available():
+        if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
             return False
         if the_person.obedience < 150:
             return "Requires: 150 Obedience"
-        return True
+        return __builtin__.len(the_person.outfit.get_full_strip_list(strip_feet = False)) > 0
 
     demand_strip_naked_requirement = demand_strip_naked_requirement_enhanced
 
@@ -17,6 +17,8 @@ label demand_strip_naked_label_enhanced(the_person):
     $ test_outfit = Outfit("Nude") # Doesn't include accessories. Don't actually apply this outfit.
     $ willing_private = demand_strip_judge_private(the_person, test_outfit, "not wearing anything")
     $ willing_public = demand_strip_judge_public(the_person, test_outfit, "not wearing anything")
+    $ obedience_requirement = demand_strip_get_obedience_req(the_person, test_outfit, min = 150, private = not willing_public)
+    $ test_outfit = None
 
     $ the_person.discover_opinion("not wearing anything")
 
@@ -27,7 +29,6 @@ label demand_strip_naked_label_enhanced(the_person):
             return
 
         "[the_person.possessive_title] looks around nervously, then back at you."
-        $ obedience_requirement = demand_strip_get_obedience_req(the_person, test_outfit, min = 130)
         if willing_private:
             the_person "But... Here? I don't want to get naked in front of other people."
             menu:
@@ -85,7 +86,6 @@ label demand_strip_naked_label_enhanced(the_person):
             call .start_stripping(private = True) from _demand_strip_naked_willing_private
             return
 
-        $ obedience_requirement = demand_strip_get_obedience_req(the_person, test_outfit, min = 130, private = True)
         if the_person.obedience >= obedience_requirement - 20:
             "[the_person.possessive_title] seems uncomfortable at your request."
             the_person "Do... do I have to?"
@@ -123,7 +123,7 @@ label .start_stripping(private = False, ordered = False):
                 $ remove_shoes = True
             "Leave them on":
                 mc.name "You can leave them on."
-    $ del the_item
+    $ the_item = None
 
     $ generalised_strip_description(the_person, the_person.outfit.get_full_strip_list(strip_feet = remove_shoes))
 
@@ -159,9 +159,9 @@ label .start_stripping(private = False, ordered = False):
     menu:
         "Let her get dressed":
             mc.name "I've seen enough. You can get dressed."
-            "You watch her as she gets dressed again."
             $ the_person.apply_outfit()
             $ the_person.draw_person()
+            "You watch her as she gets dressed again."
 
         "Keep her naked":
             mc.name "Your body is way too nice looking to hide away. Stay like this for a while."
@@ -169,14 +169,15 @@ label .start_stripping(private = False, ordered = False):
                 the_person "Okay, if that's what you want me to do [the_person.mc_title]."
                 "[the_person.title] doesn't seem to mind."
                 $ the_person.planned_outfit = the_person.outfit.get_copy()
-            elif the_person.obedience >= demand_strip_get_obedience_req(the_person, test_outfit, min = 150):
+            elif the_person.obedience >= obedience_requirement:
                 the_person "I... Okay, if that's what you want [the_person.mc_title]."
                 $ the_person.change_stats(obedience = 1, slut = 1, max_slut = 75, happiness = -2)
                 $ the_person.planned_outfit = the_person.outfit.get_copy()
             else:
                 the_person "Very funny. I'm not about to go out like this."
-                "She starts putting her clothes back on."
-                $ the_person.change_stats(obedience = -1, love = -1)
                 $ the_person.apply_outfit()
                 $ the_person.draw_person()
+                "She starts putting her clothes back on."
+                $ the_person.change_stats(obedience = -1, love = -1)
+
     return

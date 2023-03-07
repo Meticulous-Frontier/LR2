@@ -1,25 +1,24 @@
 init 5 python:
     config.label_overrides["demand_strip_tits_label"] = "demand_strip_tits_label_enhanced"
 
-    def demand_strip_tits_requirement_enhanced(the_person):
-        if the_person.outfit.tits_visible() and the_person.outfit.tits_available():
+    def demand_strip_tits_requirement(the_person):
+        if the_person.outfit.tits_visible():
             return False #Can't strip if they're already visible
         if the_person.obedience < 140:
             return "Requires: 140 Obedience"
-        return len(the_person.outfit.get_tit_strip_list(visible_enough = False)) > 0
-
-    demand_strip_tits_requirement = demand_strip_tits_requirement_enhanced
+        return __builtin__.len(the_person.outfit.get_tit_strip_list()) > 0
 
 
 label demand_strip_tits_label_enhanced(the_person):
     $ mc.change_energy(-5)
-    #TODO: Most of this dialogue should be moved into a personality specific branch. A task for next update.
     mc.name "You're going to get your tits out for me."
 
     $ test_outfit = the_person.outfit.get_copy()
     $ test_outfit.strip_to_tits(visible_enough = False)
     $ willing_private = demand_strip_judge_private(the_person, test_outfit, "showing her tits")
     $ willing_public = demand_strip_judge_public(the_person, test_outfit, "showing her tits")
+    $ obedience_requirement = demand_strip_get_obedience_req(the_person, test_outfit, min = 140, private = not willing_public)
+    $ test_outfit = None
 
     $ strip_list = the_person.outfit.get_tit_strip_list()
     $ first_item = strip_list[0]
@@ -33,7 +32,6 @@ label demand_strip_tits_label_enhanced(the_person):
             return
 
         "[the_person.possessive_title] looks around nervously, then back at you."
-        $ obedience_requirement = demand_strip_get_obedience_req(the_person, test_outfit, min = 130)
         if willing_private: # She's willing, but shy
             the_person "But... Here? Can we go somewhere without other people around first?"
             menu:
@@ -58,7 +56,6 @@ label demand_strip_tits_label_enhanced(the_person):
                 "Never mind":
                     mc.name "Never mind. Let's do something else."
                     $ the_person.change_stats(obedience = -1)
-                    return
 
         elif the_person.obedience >= obedience_requirement - 20: # She doesn't even want to do it in private
             the_person "Do... do I have to?"
@@ -76,13 +73,11 @@ label demand_strip_tits_label_enhanced(the_person):
                 "Never mind":
                     mc.name "Of course you don't. I just thought it'd be fun. Let's do something else."
                     $ the_person.change_stats(obedience = -1)
-                    return
         else:
             $ the_person.change_stats(obedience = -1)
             the_person "I don't think I will. My clothes stay on for now."
             mc.name "For now?"
             "[the_person.title] smirks and changes the subject."
-            return
 
     else: #You are alone
         if willing_private: #She's into it.
@@ -90,7 +85,6 @@ label demand_strip_tits_label_enhanced(the_person):
             call .start_stripping(private = True) from _demand_strip_tits_willing_private
             return
 
-        $ obedience_requirement = demand_strip_get_obedience_req(the_person, test_outfit, min = 130, private = True)
         if the_person.obedience >= obedience_requirement - 20: # She's considering it
             "[the_person.possessive_title] seems uncomfortable and hesitates to follow instructions."
             the_person "Do... do I have to?"
@@ -108,20 +102,21 @@ label demand_strip_tits_label_enhanced(the_person):
                 "Never mind":
                     mc.name "Of course you don't. I just thought it'd be fun. Let's do something else."
                     $ the_person.change_stats(obedience = -1)
-                    return
         else:
             $ the_person.change_stats(obedience = -1)
             the_person "I don't think I will. My clothes stay on for now."
             mc.name "For now?"
             "[the_person.title] smirks and changes the subject."
-            return
+
+    $ strip_list = None
+    $ first_item = None
     return
 
 label .start_stripping(private = False, ordered = False):
     $ top_strip_description(the_person, strip_list)
 
-    $ del first_item
     $ strip_list = None
+    $ first_item = None
 
     $ person_is_shy = not the_person.judge_outfit(the_person.outfit, temp_sluttiness_boost = 5 * the_person.get_opinion_score("showing her tits"))
 
@@ -145,24 +140,25 @@ label .start_stripping(private = False, ordered = False):
     menu:
         "Let her get dressed":
             mc.name "Yeah, you can."
-            "You watch her put her clothes back on, covering up her tits."
             $ the_person.apply_outfit()
             $ the_person.draw_person()
+            "You watch her put her clothes back on, covering up her tits."
 
         "Keep your tits out":
             mc.name "I think you look good with your tits out. Stay like this for a while, okay?"
             if willing_public:
                 the_person "Okay, if that's what you want me to do [the_person.mc_title]."
                 $ the_person.planned_outfit = the_person.outfit.get_copy()
-            elif the_person.obedience >= demand_strip_get_obedience_req(the_person, test_outfit, min = 140):
+            elif the_person.obedience >= obedience_requirement:
                 $ the_person.change_stats(obedience = 1, slut = 1, max_slut = 35, happiness = -2)
                 the_person "I... Okay, if that's what you want [the_person.mc_title]."
                 $ the_person.planned_outfit = the_person.outfit.get_copy()
             else:
                 $ the_person.change_stats(obedience = -1, love = -1)
                 the_person "Very funny. I'm not about to go out like this."
-                "She starts putting her clothes back on."
                 $ the_person.change_obedience(-2)
                 $ the_person.apply_outfit()
                 $ the_person.draw_person()
+                "She starts putting her clothes back on."
+
     return

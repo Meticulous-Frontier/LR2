@@ -30,7 +30,7 @@ label demand_panties_label(the_person):
             $ test_outfit.remove_clothing(the_item)
 
     $ the_person.discover_opinion("not wearing underwear")
-    
+
     if the_person.location.privacy_level == 3 or the_person.location.get_person_count() > 1:
         the_person "Right here? In public?"
         if demand_strip_judge_public(the_person, test_outfit, "not wearing underwear"):
@@ -111,8 +111,10 @@ label .start_stripping:
         $ the_person.apply_outfit(old_outfit)
         $ the_person.draw_person()
         "She quickly puts her clothes back on."
-    
+
     if modify_outfit:
         $ the_person.planned_outfit = the_person.outfit.get_copy()
-        
+
+    $ test_outfit = None
+    $ the_item = None
     return
