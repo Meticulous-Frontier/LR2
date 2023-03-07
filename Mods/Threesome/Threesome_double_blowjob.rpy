@@ -83,7 +83,7 @@ label intro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loca
     if the_girl_1.get_opinion_score("giving blowjobs") > 0:
         the_girl_1 "Mmm, you want to feel us slobbering all over your cock, [the_girl_1.mc_title]?"
     else:
-        the_girl_1 "I don't usually give blowjobs, but with [the_girl_2.name] here it should be fun!"
+        the_girl_1 "I don't usually give blowjobs, but with [the_girl_2.fname] here it should be fun!"
     if the_girl_2.get_opinion_score("giving blowjobs") > 0:
         the_girl_1 "This is gonna be great, I can lick your balls while she's blowing you, [the_girl_2.mc_title]!"
     else:
@@ -294,7 +294,7 @@ label orgasm_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locati
 label swap_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
     mc.name "Why don't you two makeout for a bit. I want to watch."
     "[the_girl_1.title] and [the_girl_2.title] turn to each other and begin to kiss. Their hands begin to explore each other's breasts."
-    the_girl_1 "Mmmm, I love your tits, [the_girl_2.name]!"
+    the_girl_1 "Mmmm, I love your tits, [the_girl_2.fname]!"
     the_girl_2 "Yours are nice too... I kinda want to suck on them..."
     "The girls are heating up as they start to make out with each other."
     return

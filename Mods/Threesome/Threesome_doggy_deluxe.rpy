@@ -178,7 +178,7 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_1(the_girl_1, the_girl_2, the_l
             if the_girl_2.get_opinion_score("being submissive") > 0: #She likes it
                 "[the_girl_2.possessive_title] leans forward a little farther, making sure her ass is as high as she can get it."
                 "*SMACK*"
-                mc.name "Is it true, [the_girl_2.title]? Have you been bad?"
+                mc.name "Is it true, [the_girl_2.fname]? Have you been bad?"
                 "She wiggles her ass back and forth a few times."
                 "*SMACK*"
                 "She moans loudly. You look up and see [the_girl_1.possessive_title] is enjoying the extra stimulation."
@@ -247,7 +247,7 @@ label outro_threesome_doggy_deluxe_fuck_girl_two(the_girl_1, the_girl_2, the_loc
                     "Around the base of your cock you see the remains of a broken condom. You just dumped your load in [the_girl_2.title]!"
                     mc.name "Hey, sorry, but the condom broke..."
                     #TODO a variety of responses
-                    the_girl_2 "Mmmm, so that's what felt so good. It's okay, it happens!"
+                    the_girl_2 "Mmmm, so that's why felt so good. It's okay, it happens!"
                     "When you pull back, you see your cum leaking out and down her legs. You enjoy your after orgasm bliss."
                 else:
                     "You wait until your orgasm has passed completely, then pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
@@ -364,7 +364,7 @@ label scene_threesome_doggy_deluxe_dp_girl_two_2(the_girl_1, the_girl_2, the_loc
     "[the_girl_2.possessive_title]'s pussy is dripping wet. A damp spot has begun to accumulate below her pussy as a result of your rutting."
     if the_girl_2.has_role(anal_fetish_role):
         "She is moaning so loudly, she is having a hard time concentrating on eating out [the_girl_1.title]."
-        mc.name "You are such a butt slut [the_girl_2.title]. Is it nice to finally have a real cock, stuffed deep in your tight little asshole?"
+        mc.name "You are such a butt slut [the_girl_2.fname]. Is it nice to finally have a real cock, stuffed deep in your tight little asshole?"
         "[the_girl_2.possessive_title] can only moan louder in response. You grab her hair and pull her face away from [the_girl_1.title]'s cunt while you whisper in her ear."
         mc.name "Don't worry, this won't be the last time I stuff your holes. Especially this one."
         "As you finish your sentence, you give her an extra rough thrust, your hips slamming against her ass."
@@ -428,7 +428,7 @@ label strip_ask_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_l
 label orgasm_threesome_doggy_deluxe_dp_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     if the_girl_1.arousal > 100 and the_girl_2.arousal > 100:  #Both girls orgasm#
         "[the_girl_2.possessive_title] is moaning urgently now as she continues to service [the_girl_1.title] orally."
-        the_girl_1 "Oh hell that's so good. You're gonna cum soon too aren't you? Cum with me [the_girl_2.name]!"
+        the_girl_1 "Oh hell that's so good. You're gonna cum soon too aren't you? Cum with me [the_girl_2.fname]!"
         "[the_girl_2.title] is moaning loudly but it all gets muffled as [the_girl_1.title] grinds against her face roughly."
         $ the_girl_1.run_orgasm()
         $ the_girl_2.run_orgasm()

@@ -106,11 +106,11 @@ label intro_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locat
         the_girl_1 "Sounds good! I can't wait, I bet this is going to be amazing..."
     "[the_girl_1.title] starts to lay down. [the_girl_2.title] turns to you."
     if the_girl_2.has_cum_fetish():
-        the_girl_2 "This should be good, I've heard [the_girl_1.name] has a pretty good tongue..."
+        the_girl_2 "This should be good, I've heard [the_girl_1.fname] has a pretty good tongue..."
     elif the_girl_2.has_breeding_fetish():
         the_girl_2 "This should be a good warmup... but don't forget, [the_girl_2.mc_title], I need you to fuck me sometime too..."
     elif the_girl_2.has_anal_fetish():
-        the_girl_2 "Sounds good! [the_girl_1.name] could you move your tongue into my little sphincter too, that would drive me wild..."
+        the_girl_2 "Sounds good! [the_girl_1.fname] could you move your tongue into my little sphincter too, that would drive me wild..."
     else:
         the_girl_2 "Sounds good! Don't forget to change it up once in a while... I'd be glad to take a turn sucking you off..."
 
@@ -181,7 +181,7 @@ label scene_threesome_sixty_nine_oral_girl_two_1(the_girl_1, the_girl_2, the_loc
         $the_girl_2.change_arousal(the_girl_2.get_opinion_score("giving blowjobs") * 3)
     else:
         "You can see that [the_girl_2.title] is bobbing her head on your cock in time with her hip movement as she grinds against [the_girl_1.title]'s face"
-    mc.name "Mmm, that feels great. When I blow my load, do you want it in your mouth or all over your face, [the_girl_2.title]?"
+    mc.name "Mmm, that feels great. When I blow my load, do you want it in your mouth or all over your face, [the_girl_2.fname]?"
     if the_girl_2.get_opinion_score("cum facials") > the_girl_2.get_opinion_score("drinking cum"):
         "[the_girl_2.possessive_title] pops off your cock for a second."
         the_girl_2 "I want you to just blow all over my face..."
@@ -201,7 +201,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_2(the_girl_1, the_girl_2, the_loc
     "You lean forward and grab the back of [the_girl_2.title]'s head, bringing her in for a kiss. Your tongues meet together and you start to make out on top of [the_girl_1.title]."
     "You decide it's time for [the_girl_2.possessive_title] to put her mouth to better use."
     "You pull back from making out with [the_girl_2.title]."
-    mc.name "I think [the_girl_1.title] needs a little more attention..."
+    mc.name "I think [the_girl_1.fname] needs a little more attention..."
     "You grab [the_girl_2.possessive_title]'s head by her hair and start to pull her head downwards. You pull out of [the_girl_1.title]'s pussy partially to give her room to work."
     "She starts to lap at [the_girl_1.title]'s cunt. You can feel her tongue brushing up against your cock."
     "You give [the_girl_1.title] a few slow thrusts, making sure to give [the_girl_2.title] room to work."
@@ -268,7 +268,7 @@ label outro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locat
     menu:
         "Cum inside [the_girl_2.title]'s mouth":
             "You put your hand on the back of [the_girl_2.possessive_title]'s head."
-            mc.name "That's it [the_girl_2.title]. I want you to swallow it all!"
+            mc.name "That's it [the_girl_2.fname]. I want you to swallow it all!"
             "[the_girl_2.title] moans and looks you in the eyes. She pulls off until just the tip of your cock is in her mouth and she begins to stroke you off eagerly."
             "Your cock explodes in orgasm into her greedy mouth."
             if the_girl_2.has_cum_fetish():
@@ -356,7 +356,7 @@ label orgasm_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_loca
 
 label swap_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_location, the_object):
     "Stepping back for a moment, you decide you want to fuck [the_girl_1.possessive_title]."
-    mc.name "Mmm, here it comes [the_girl_1.title]..."
+    mc.name "Mmm, here it comes [the_girl_1.fname]..."
     $ the_girl_1.break_taboo("vaginal_sex")
     $ the_girl_1.break_taboo("condomless_sex")
     "You lower yourself down until you are lined up with [the_girl_1.title]'s pussy. She moans as you slide yourself back into her, but it is muffled by [the_girl_2.title]'s hips as she rides her face."
@@ -365,7 +365,7 @@ label swap_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locati
 
 label swap_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object):
     "Stepping back for a moment, you begin to run your hands through [the_girl_2.title]'s hair, then slowly pull her mouth down towards your cock."
-    mc.name "Lick me clean, [the_girl_2.title]."
+    mc.name "Lick me clean, [the_girl_2.fname]."
     "[the_girl_2.title] opens her mouth and begins to greedily slurp at your cock. Her mouth feels great sliding up and down your erection."
     "You reach down with one hand and hold [the_girl_2.title]'s hair off to one side for her, and with your other hand you start to play with [the_girl_1.title]'s pussy."
     return

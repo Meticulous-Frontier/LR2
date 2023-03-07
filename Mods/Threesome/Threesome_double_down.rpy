@@ -134,7 +134,7 @@ label scene_threesome_double_down_fuck_girl_one_1(the_girl_1, the_girl_2, the_lo
 label scene_threesome_double_down_fuck_girl_one_2(the_girl_1, the_girl_2, the_location, the_object):
     "You put both hands on [the_girl_2.title]'s ass cheeks, pulling them apart to give you better access."
     "[the_girl_1.possessive_title] stops bouncing for a moment, and instead grinds her hips against you for a bit, changing the angle of penetration."
-    "You can hear lips smacking coming from above you as the girls begin to makeout while they ride you."
+    "You can hear lips smacking coming from above you as the girls begin to make-out while they ride you."
     "You lay your head back for a second and just enjoy the view of [the_girl_2.title]'s ass hovering right above your face. Maybe you should put a finger in?"
     menu:
         "Finger her pussy":
