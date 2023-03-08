@@ -73,17 +73,17 @@ label train_anal_fetish_label(the_person):
                     "You continue to shove your fingers up her bum, until her [the_person.pubes_description] pussy gets really wet."
 
         "Shove a dildo inside" if the_person.sex_skills["Anal"] > 2 and perk_system.has_item_perk("Dildo"):
-            if the_girl.event_triggers_dict.get("has_used_dildo", False):
+            if the_person.event_triggers_dict.get("has_used_dildo", False):
                 mc.name "I have brought your favorite toy."
-                the_girl "Ok, slide that bad boy right in there!"
+                the_person "Ok, slide that bad boy right in there!"
             else:
                 mc.name "I have something I think you might enjoy."
-                the_girl "Oh? What might that be?"
+                the_person "Oh? What might that be?"
                 "You pull the dildo out of your backpack. Her eyes fix on it and she realizes what you want to do."
-                if the_girl.sluttiness > 40: #She is excited.
-                    the_girl "Oh! That looks like fun..."
+                if the_person.sluttiness > 40: #She is excited.
+                    the_person "Oh! That looks like fun..."
                 else:
-                    the_girl "Oh my god, it's so big! I don't know about this..."
+                    the_person "Oh my god, it's so big! I don't know about this..."
                     mc.name "Don't worry, I'll go slow."
 
             "You lube up the dildo and slide it all the way into her bowels, leaving just enough room to hold it."
