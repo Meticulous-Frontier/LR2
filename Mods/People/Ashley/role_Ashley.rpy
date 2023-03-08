@@ -1773,7 +1773,7 @@ label ashley_submission_titfuck_taboo_restore_label():
     mc.name "Okay, is everything alright?"
     if first_time:
         the_person "Umm, no? Not at all?"
-        the_person "Look, I know what kind of drugs we're making around here. AND the serums I've been making you."
+        the_person "Look, I know what kind of drugs we're making around here. AND the serums I've been making for you."
         the_person "It didn't take me long last night to put two and two together."
         the_person "I'm not just a pair of tits for you to fuck whenever you feel like it. Okay?"
     else:
