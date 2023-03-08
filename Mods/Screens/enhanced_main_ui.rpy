@@ -35,7 +35,7 @@ init 2:
                         textbutton "Character Sheet" action Show("mc_character_sheet") style "textbutton_style" text_style "textbutton_text_style"
                         for goal in [mc.stat_goal, mc.work_goal, mc.sex_goal]:
                             $ goal_info = goal.name + "\n{color=#aaaaaa}" + goal.get_reported_progress() + "{/color}\n" + goal.description
-                            textbutton "{:.0%}".format(goal.get_progress_fraction()):
+                            textbutton "{:.0%}".format(1.0 if goal.completed else goal.get_progress_fraction()):
                                 yoffset 2
                                 style "textbutton_style" text_style "outfit_description_style"
                                 tooltip goal_info
