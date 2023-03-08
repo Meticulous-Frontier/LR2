@@ -3233,7 +3233,7 @@ label Sarah_naomi_visits_to_apologize_label():
     $ spank_factor_increment(the_person)
     mc.name "I don't think she's really sorry yet [sarah.fname]."
     sarah "I agree, [sarah.mc_title]."
-    while the_person.event_triggers_dict.get("spank_level", 0) < 8:
+    while the_person.event_triggers_dict.get("spank_level", 0) < 6:
         $ spank_factor_increment(the_person)
         $ rnd_num = renpy.random.randint(0,2)
         if rnd_num == 0:
@@ -3248,9 +3248,9 @@ label Sarah_naomi_visits_to_apologize_label():
             $ ass_desc = spanking_get_ass_description(the_person)
             "You look down at [the_person.fname]'s ass. It is [ass_desc]"
 
-        if the_person.event_triggers_dict.get("spank_level", 0) < 8:
+        if the_person.event_triggers_dict.get("spank_level", 0) < 6:
             mc.name "Just keep going, there is some room for improvement"
-            if the_person.event_triggers_dict.get("spank_level", 0) > 6:
+            if the_person.event_triggers_dict.get("spank_level", 0) > 4:
                 "As you are watching this scene you see [the_person.fname]'s [the_person.pubes_description] pussy seems to get wet also."
         else:
             mc.name "I think that should be enough."
