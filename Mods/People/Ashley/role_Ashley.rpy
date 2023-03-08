@@ -1817,7 +1817,7 @@ label ashley_submission_titfuck_taboo_restore_label():
         "I thought you liked to make me feel good\n{color=#ff0000}{size=18}Requires: Love Story Progress{/size}{/color} (disabled)":
             pass
 
-        "You are that type of girl." if the_person.opinion_score_giving_tit_fucks() == 2:
+        "You are that type of girl" if the_person.opinion_score_giving_tit_fucks() == 2:
             mc.name "You keep saying that you just aren't that type of girl, but it is obvious everytime it happens that you totally are."
             mc.name "It's okay, [the_person.title]. Boobs are sensitive. Cocks are warm. It's okay to enjoy the sensations of getting the two together."
             mc.name "You are only lying to yourself. You ARE the type of girl to drop to her knees and offer her tits for her boss' satisfaction."
@@ -1825,7 +1825,7 @@ label ashley_submission_titfuck_taboo_restore_label():
             the_person "Fine. But don't kid yourself into thinking I'm going to take things any farther."
             $ outcome_convince = True
 
-        "You are that type of girl.\n{color=#ff0000}{size=18}Requires: Ashley loves giving tit fucks{/size}{/color} (disabled)"if the_person.opinion_score_giving_tit_fucks() != 2:
+        "You are that type of girl\n{color=#ff0000}{size=18}Requires: Ashley loves giving tit fucks{/size}{/color} (disabled)"if the_person.opinion_score_giving_tit_fucks() != 2:
             pass
 
         "But it keeps happening..." if ashley.event_triggers_dict.get("sub_titfuck_count", 0) >= 3:
