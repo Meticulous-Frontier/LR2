@@ -621,7 +621,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     if the_person.outfit.check_outfit_cum():
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]. She clearly notices your cum still on her."
         $ mc.change_locked_clarity(20)
-        if person_choice.sluttiness > 80:
+        if willing_to_threesome(person_choice, the_person):
             person_choice "Wow, not sure why you called me in here, but I hope it's for the same thing you have her in here for..."
         else:
             person_choice "Is that... I'm sorry, what is it that you needed, [person_choice.mc_title]?"
@@ -630,20 +630,29 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title] showing off her pussy."
         $ person_choice.change_slut(2)
-        person_choice "Uh... right, what can I do for you, [person_choice.mc_title]?"
+        if willing_to_threesome(person_choice, the_person):
+            person_choice "I really like you the outfit you are wearing [the_person.fname]."
+        else:
+            person_choice "Uh... right, what can I do for you, [person_choice.mc_title]?"
     elif the_person.outfit.tits_visible():
         $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]'s exposed tits."
         $ person_choice.change_slut(1)
-        person_choice "Oh... what can I do for you, [person_choice.mc_title]?"
+        if willing_to_threesome(person_choice, the_person):
+            person_choice "That outfit really shows off your assets [the_person.fname], I love it."
+        else:
+            person_choice "Oh... what can I do for you, [person_choice.mc_title]?"
+    else:
+        "[person_choice.title] sits down across from you at your desk."
+        person_choice "Yes [person_choice.mc_title], is something wrong?"
 
     if get_HR_director_tag("business_HR_coffee_tier", 0) > 0:
-        "[person_choice.title] sits down across from you at your desk. [the_person.title] pours a cup of coffee while talking."
+        "[the_person.title] pours a cup of coffee while talking."
         the_person "Thanks for coming. [the_person.mc_title] just wanted to have quick chat. Here, have a cup of coffee."
         $ scene_manager.update_actor(the_person, position = "sitting")
         "[person_choice.title] takes the coffee and nods. She takes a few sips as you begin."
     else:
-        "[person_choice.title] sits down across from you at your desk. [the_person.title] starts talking while she sits down."
+        "[the_person.title] starts talking while she sits down."
         $ scene_manager.update_actor(the_person, position = "sitting")
         the_person "Thanks for coming. [the_person.mc_title] just wanted to have quick chat."
 
@@ -695,7 +704,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
                 $ mc.change_locked_clarity(20)
                 if the_person.outfit.check_outfit_cum():
                     "With [the_person.title] still wearing your cum from her service earlier, you get a burst of energy and arousal."
-                    $ mc.change_stats(arousal = 30, energy = 100)
+                    $ mc.change_stats(arousal = __builtin__.min(30, mc.max_arousal - mc.arousal), energy = __builtin__.min(80, mc.max_energy - mc.energy))
                 mc.name "Of course. Let's get started."
                 call start_threesome(person_choice, the_person) from threesome_HR_meeting_happy_ending
                 person_choice "Oh my... that was fun. Thanks for calling me in! I guess I'd better go get back to work..."
