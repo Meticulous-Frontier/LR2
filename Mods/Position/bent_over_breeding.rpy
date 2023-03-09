@@ -291,6 +291,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
 
 label transition_default_bent_over_breeding(the_girl, the_location, the_object):
     mc.name "Stand here."
+    $ bent_over_breeding.draw_scene(the_girl)
     "[the_girl.possessive_title] obeys then leans forward and puts her hands on [the_object.name]."
     if not the_girl.vagina_available():
         "You move some clothing out of the way..."

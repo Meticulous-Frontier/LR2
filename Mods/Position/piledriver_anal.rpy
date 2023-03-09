@@ -210,7 +210,7 @@ label transition_piledriver_piledriver_anal(the_girl, the_location, the_object):
     return
 
 label transition_default_piledriver_anal(the_girl, the_location, the_object):
-
+    $ piledriver_anal.redraw_scene(the_girl)
     "You push [the_girl.title] onto her back onto the [the_object.name]. You grab her ankles and push them up by her head."
     the_girl "Whoa! Oh god be gentle with me..."
     mc.name "Ready?"

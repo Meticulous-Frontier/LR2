@@ -134,8 +134,9 @@ label outro_spooning(the_girl, the_location, the_object):
     return
 
 label transition_default_spooning(the_girl, the_location, the_object):
-    "You turn lay down with [the_girl.title] so her back is to you, laying beside her on the [the_object.name]."
     mc.name "Just lay down. I'm going to lay behind you."
+    $ spooning_sex.redraw_scene(the_girl)
+    "You turn lay down with [the_girl.title] so her back is to you, laying beside her on the [the_object.name]."
     "Your cock is hard. You rub it up against [the_girl.title]'s ass, grinding a bit."
     "When you feel good about it, you reach down and gently spread her cheeks apart. You position yourself at her entrance and give it a little push."
     "You are able to ease yourself about halfway in, but the angle makes it hard to get deep penetration."

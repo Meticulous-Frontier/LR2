@@ -179,6 +179,7 @@ label transition_default_breeding_missionary(the_girl, the_location, the_object)
         the_girl "Mmm, sounds nice. Okay, I'm up for a little roleplaying."
     else:
         mc.name "Lie down now. It's time for me to put a baby inside you."
+    $ breeding_missionary.redraw_scene(the_girl)
     "She nods meekly and lies down on the [the_object.name], waiting while you climb on top of her."
     if not the_girl.vagina_available():
         "You move some clothing out of the way..."

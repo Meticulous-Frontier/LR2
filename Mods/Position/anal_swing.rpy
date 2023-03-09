@@ -297,6 +297,7 @@ label outro_SB_anal_swing(the_girl, the_location, the_object):
 
 
 label transition_default_SB_anal_swing(the_girl, the_location, the_object):
+    $ SB_anal_swing.redraw_scene(the_girl)
     "[the_girl.possessive_title] sits down in the [the_object.name]. Her ass is hanging off the back end."
     "You run your hands along her supple hips."
     if not the_girl.vagina_visible():

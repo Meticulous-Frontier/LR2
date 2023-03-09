@@ -181,6 +181,7 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
     return
 
 label transition_default_doggy_anal_enhanced(the_girl, the_location, the_object):
+    $ doggy_anal.redraw_scene(the_girl)
     "[the_girl.title] gets on her hands and knees as you kneel behind her. You bounce your hard shaft on her ass a couple of times before lining yourself up with tight asshole."
     mc.name "Ready?"
     the_girl "I... I think so."
@@ -193,7 +194,7 @@ label transition_anal_doggy_to_doggy_taboo_break_label(the_girl, the_location, t
     the_girl "Are you enjoying pounding my tight asshole?"
     "You slide your cock out of her ass and drag it down between her legs, ending with your tip resting against her pussy."
     mc.name "No, this is what I really want."
-    $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
+    $ the_girl.call_dialogue(doggy_anal.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
     "After a moment of resistance your cock spreads her [the_girl.pubes_description] pussy open and you slide smoothly inside of her."
     if the_girl.sex_skills["Vaginal"] > 2:

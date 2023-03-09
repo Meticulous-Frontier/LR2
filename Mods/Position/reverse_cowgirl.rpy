@@ -304,6 +304,7 @@ label outro_SB_reverse_cowgirl(the_girl, the_location, the_object):
     return
 
 label transition_default_SB_reverse_cowgirl(the_girl, the_location, the_object):
+    $ SB_reverse_cowgirl.redraw_scene(the_girl)
     "You lie down on the [the_object.name], and [the_girl.possessive_title] gets on top, facing away from you."
     "She reaches between her legs and wraps her hand around your cock. She slowly guides it into her slit and then slides the length of it inside her."
     return

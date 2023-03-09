@@ -345,6 +345,7 @@ label transition_doggy_doggy_anal_dp(the_girl, the_location, the_object):
     return
 
 label transition_default_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
+    $ SB_doggy_anal_dildo_dp.redraw_scene(the_girl)
     "[the_girl.possessive_title] gets on her hands and knees as you kneel behind her."
     if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
@@ -356,7 +357,7 @@ label transition_default_SB_doggy_anal_dildo_dp(the_girl, the_location, the_obje
 label strip_SB_doggy_anal_dildo_dp(the_girl, the_clothing, the_location, the_object):
     "[the_girl.possessive_title] leans forward a little further and pops off your cock."
     $ the_girl.call_dialogue("sex_strip")
-    $ the_girl.draw_animated_removal(the_clothing, position = doggy.position_tag)
+    $ the_girl.draw_animated_removal(the_clothing, position = SB_doggy_anal_dildo_dp.position_tag)
     "[the_girl.possessive_title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
     "She groans happily when you push back inside of her."
     return

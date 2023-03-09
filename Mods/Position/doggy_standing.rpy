@@ -427,6 +427,7 @@ label transition_standing_doggy_to_standing_anal_taboo_break_label(the_girl, the
 
 label transition_default_SB_doggy_standing(the_girl, the_location, the_object):
     mc.name "Stand here."
+    $ SB_doggy_standing.redraw_scene(the_girl)
     "[the_girl.possessive_title] obeys then leans forward and puts her hands on [the_object.name]."
     if not the_girl.vagina_available():
         "You move some clothing out of the way..."

@@ -225,6 +225,7 @@ label transition_default_standing_oral(the_girl, the_location, the_object):
             "[the_girl.title] winks at you as she gently but firmly pushes your shoulders down until you are kneeling before her."
         else:
             "[the_girl.title] gently but firmly pushes your shoulders down until you are kneeling before her."
+        $ standing_oral.redraw_scene(the_girl)
         if the_girl.sex_record.get("Cunnilingus", 0) > 1 and mc.sex_skills["Oral"] > 5:
             if the_girl.love < 0:
                 the_girl "Well? Get to it!"
@@ -236,6 +237,7 @@ label transition_default_standing_oral(the_girl, the_location, the_object):
         the_girl "Now start licking."
         "You do as you are told."
     else:
+        $ standing_oral.redraw_scene(the_girl)
         "You kneel before [the_girl.title] and gently start to lick her [the_girl.pubes_description] pussy."
         if the_girl.get_opinion_score("taking control")> 0:
             if the_girl.love < 0:

@@ -341,6 +341,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
     return
 
 label transition_default_SB_anal_cowgirl(the_girl, the_location, the_object):
+    $ SB_anal_cowgirl.redraw_scene(the_girl)
     "You lie down on [the_object.name]. [the_girl.possessive_title] swings a leg over your waist and straddles you."
     if not the_girl.vagina_available():
         "She moves some clothing out of the way..."

@@ -428,6 +428,8 @@ label transition_default_SB_anal_standing(the_girl, the_location, the_object):
     else:
         mc.name "Come stand over here."
 
+    $ SB_anal_standing.redraw_scene(the_girl)
+
     if not the_girl.vagina_available():
         "You move some clothing out of the way..."
         $ the_girl.strip_to_vagina(position = SB_anal_standing.position_tag, visible_enough = True, prefer_half_off = True)
@@ -453,6 +455,7 @@ label transition_standing_anal_to_standing_doggy_taboo_break_label(the_girl, the
 
 label transition_SB_anal_standing_doggy_anal(the_girl, the_location, the_object):
     mc.name "Get down on your knees [the_girl.title], I'm going to fuck you like the little bitch you are."
+    $ doggy_anal.redraw_scene(the_girl)
     the_girl "Oh yes, [the_girl.mc_title], make me your little bitch."
     return
 

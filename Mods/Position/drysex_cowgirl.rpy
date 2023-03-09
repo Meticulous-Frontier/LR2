@@ -146,6 +146,7 @@ label outro_drysex_cowgirl(the_girl, the_location, the_object, the_goal = None):
     return
 
 label transition_default_drysex_cowgirl(the_girl, the_location, the_object):
+    $ drysex_cowgirl.redraw_scene(the_girl)
     "You lie down on the [the_object.name]. [the_girl.title] swings a leg over your body and straddles you."
     if the_girl.outfit.vagina_available():
         "She leans back and grinds herself against you. She rubs her pussy along your cock, your pants the only thing separating the two."

@@ -263,6 +263,7 @@ label transition_piledriver_piledriver_DP(the_girl, the_location, the_object):
     return
 
 label transition_default_piledriver_DP(the_girl, the_location, the_object):
+    $ piledriver_DP.redraw_scene(the_girl)
     "You put [the_girl.title] on her back."
     if not the_girl.vagina_available():
         "You move some clothing out of the way..."

@@ -365,6 +365,7 @@ label outro_prone_anal(the_girl, the_location, the_object):
 
 
 label transition_default_prone_anal(the_girl, the_location, the_object):
+    $ prone_anal.redraw_scene(the_girl)
     "You put [the_girl.title] on her stomach and lie down on top of her, lining your hard cock up with her tight ass hole."
     "After running the tip of your penis along her slit a few times to get it wet, you push forward, sliding inside of her backdoor. She gasps softly and closes her eyes."
     return

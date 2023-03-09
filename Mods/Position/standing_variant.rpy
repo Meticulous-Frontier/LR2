@@ -623,6 +623,7 @@ label transition_against_wall_SB_facing_wall(the_girl, the_location, the_object)
     return
 
 label transition_default_SB_facing_wall(the_girl, the_location, the_object):
+    $ SB_facing_wall.redraw_scene(the_girl)
     "You turn [the_girl.possessive_title] so she is is facing [the_object.name]."
     if not the_girl.vagina_available():
         "You move some clothing out of the way..."

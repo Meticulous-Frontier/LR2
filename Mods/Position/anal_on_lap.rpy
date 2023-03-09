@@ -214,6 +214,7 @@ label outro_anal_on_lap(the_girl, the_location, the_object):
 
 
 label transition_default_anal_on_lap(the_girl, the_location, the_object):
+    $ anal_on_lap.redraw_scene(the_girl)
     "You sit down on the [the_object.name]. She follows and starts to sit on your lap."
     if not the_girl.vagina_available():
         "You move some clothing out of the way..."
