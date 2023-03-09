@@ -259,14 +259,12 @@ init 2:
             yalign 1.0
             action Function(mc.business.reset_tutorial,"production_tutorial")
 
-
-        $ production_tutorial_length = 5 #The number of  tutorial screens we have.
-        if mc.business.event_triggers_dict["production_tutorial"] > 0 and mc.business.event_triggers_dict["production_tutorial"] <= production_tutorial_length: #We use negative numbers to symbolize the tutorial not being enabled
+        if mc.business.event_triggers_dict.get("production_tutorial", 0) > 0 and mc.business.event_triggers_dict.get("production_tutorial", 1) <= 5: #We use negative numbers to symbolize the tutorial not being enabled
             imagebutton:
                 auto
                 sensitive True
                 xsize 1920
                 ysize 1080
-                idle "/tutorial_images/production_tutorial_"+__builtin__.str(mc.business.event_triggers_dict["production_tutorial"])+".png"
-                hover "/tutorial_images/production_tutorial_"+__builtin__.str(mc.business.event_triggers_dict["production_tutorial"])+".png"
+                idle "/tutorial_images/production_tutorial_{}.png".format(mc.business.event_triggers_dict.get("production_tutorial", 1))
+                hover "/tutorial_images/production_tutorial_{}.png".format(mc.business.event_triggers_dict.get("production_tutorial", 1))
                 action Function(mc.business.advance_tutorial,"production_tutorial")
