@@ -80,7 +80,7 @@ label GIC_outro_cowgirl(the_girl, the_location, the_object):
                 "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
                 $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
                 "The tip of your condom is ballooned out and hanging to the side, filled with your warm seed."
-                if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+                if the_girl.get_opinion_score("drinking cum") > 1 and the_girl.sluttiness > 50:
                     $ the_girl.discover_opinion("drinking cum")
                     "[the_girl.possessive_title] reaches below her for your cock. With delicate fingers she slides your condom off, pinching above the bulge to keep your cum from spilling out."
                     the_girl "It would be a shame to waste all of this, right?"

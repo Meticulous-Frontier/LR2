@@ -18,7 +18,8 @@ label SB_doggy_standing_double_orgasm(the_girl, the_location, the_object):
             $ climax_controller.do_clarity_release(the_girl)
             "Her cunt quivers as she joins you in orgasm. Her body goes rigid but you can feel the delicious pulsing as it feels like her body is trying to suck the condom off."
             "You wait until her orgasm has passed completely, then pull out and sit back. Your condom is bulged on the end where it is filled with your seed."
-            if (the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50) or the_girl.has_cum_fetish():
+            $ the_girl.draw_person(position = the_girl.idle_pose)
+            if (the_girl.get_opinion_score("drinking cum") > 1 and the_girl.sluttiness > 50) or the_girl.has_cum_fetish():
                 $ the_girl.discover_opinion("drinking cum")
                 "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
                 the_girl "It would be a shame to waste all of this, right?"

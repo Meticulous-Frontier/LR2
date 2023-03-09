@@ -94,7 +94,8 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
             $ the_girl.call_dialogue("cum_condom")
             $ climax_controller.do_clarity_release(the_girl)
             "You wait until your orgasm has passed completely, then pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
-            if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+            $ the_girl.draw_person(position = "kneeling1")
+            if the_girl.get_opinion_score("drinking cum") > 1 and the_girl.sluttiness > 50:
                 $ the_girl.discover_opinion("drinking cum")
                 "[the_girl.possessive_title] turns around and reaches for your cock. With delicate fingers she slides the condom off of you."
                 the_girl "It would be a shame to waste all of this, right?"

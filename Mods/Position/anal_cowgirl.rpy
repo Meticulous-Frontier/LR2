@@ -265,7 +265,7 @@ label outro_SB_anal_cowgirl(the_girl, the_location, the_object):
         the_girl "Ah... I hope the condom didn't break!"
         "She rocks herself back and forth on you until you're completely spent, then she pulls up and lets your dick fall out of her."
         "The condom is full of your potent seed."
-        if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+        if the_girl.get_opinion_score("drinking cum") > 1 and the_girl.sluttiness > 50:
             $ the_girl.discover_opinion("drinking cum")
             "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
             the_girl "It would be a shame to waste all of this, right?"

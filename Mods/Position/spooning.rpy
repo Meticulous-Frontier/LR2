@@ -202,7 +202,7 @@ label spooning_double_orgasm(the_girl, the_location, the_object):
             "You can feel her [the_girl.pubes_description] pussy quivering all around you as you cum in unison. Her body is milking your cum, with only a thin layer of latex keeping it from spilling deep inside her."
             "After you finish, you leave your cock deep inside her, enjoying her hole quivering with each aftershock."
             "You pull out and sit back. The condom is ballooned and sagging with the weight of your seed."
-            if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+            if the_girl.get_opinion_score("drinking cum") > 1 and the_girl.sluttiness > 50:
                 $ the_girl.discover_opinion("drinking cum")
                 "[the_girl.possessive_title] points to your crotch, but can't get out the words she wants to say."
                 mc.name "You want my cum, slut?"

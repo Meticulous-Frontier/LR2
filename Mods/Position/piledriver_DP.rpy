@@ -169,7 +169,7 @@ label outro_piledriver_DP(the_girl, the_location, the_object):
                 $ climax_controller.do_clarity_release(the_girl)
                 "You take a moment to catch your breath, then you pull your cock out of [the_girl.title] and sit back down. Her ass gapes slightly where the strap-on was previously buried."
                 "The condom tip is ballooned out, hanging to one side and filled with your cum."
-                if the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+                if the_girl.get_opinion_score("drinking cum") > 1 and the_girl.sluttiness > 50:
                     $ the_girl.discover_opinion("drinking cum")
                     "When you let [the_girl.possessive_title] down she reaches for your cock. With delicate fingers she slides the condom off of you."
                     the_girl "It would be a shame to waste all of this, right?"

@@ -322,7 +322,7 @@ label outro_SB_anal_standing(the_girl, the_location, the_object):
                 the_girl "I'm not letting a drop of this delicious cum go to waste!"
                 "She brings the condom to her mouth and drains it all into her mouth in one quick motion. You can see her pupils dilate as she feeds her cum fetish."
                 "She turns the condom inside out and licks the inside of it, desperate to get every drop of cum she possibly can."
-            elif the_girl.get_opinion_score("drinking cum") > 0 and the_girl.sluttiness > 50:
+            elif the_girl.get_opinion_score("drinking cum") > 1 and the_girl.sluttiness > 50:
                 $ the_girl.discover_opinion("drinking cum")
                 "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                 the_girl "It would be a shame to waste all of this, right?"
