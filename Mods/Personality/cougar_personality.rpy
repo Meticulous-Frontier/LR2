@@ -1149,7 +1149,7 @@ label cougar_date_seduction(the_person): #TODO: Change this to be different.
                 the_person "He has his poker night with some friends. Would you like to join me at my place and have glass of wine?"
         else:
             if the_person.love > 40:
-                the_person "I don't want this night to end. My [so_title] is on a business trip this weekend."
+                the_person "I don't want this night to end. My [so_title] is on a business trip."
                 the_person "Do you want to come over to my place so we can spend more time together?"
             else:
                 the_person "Tonight was fantastic. I think my [so_title] is out for the night."
