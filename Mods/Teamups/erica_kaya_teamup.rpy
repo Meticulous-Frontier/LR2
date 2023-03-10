@@ -646,7 +646,10 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
         $ scene_manager.update_actor(erica, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
         "[erica.title] gets on her knees at your feet. She wastes no time opening up and getting to work on your cock."
         $ previous_punished = True
-        "You run your hand through her hair as you start to enjoy [erica.possessive_title]'s oral ministrations."
+        if erica.is_bald():
+            "You run your hand over her smooth scalp as you start to enjoy [erica.possessive_title]'s oral ministrations."
+        else:
+            "You run your hand through her hair as you start to enjoy [erica.possessive_title]'s oral ministrations."
         $ erica.change_arousal(5)    #Everyone liked that
         $ mc.change_arousal(25)
         $ kaya.change_arousal(10)
@@ -771,7 +774,7 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
             $ erica.cum_in_mouth()
             $ erica.increase_opinion_score("drinking cum", weighted = True)
             $ scene_manager.update_actor(erica, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
-            "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
+            "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her [erica.hair_description]."
             "[kaya.title] just watches quietly, a hint of jealousy on her face."
             $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = erica)
             $ mc.arousal = 0
@@ -813,7 +816,7 @@ label kaya_erica_teamup_scene_3(the_group, scene_transition = False):
         $ kaya.cum_in_mouth()
         $ kaya.increase_opinion_score("drinking cum", weighted = True)
         $ scene_manager.update_actor(kaya, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
-        "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
+        "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her [kaya.hair_description]."
         "[erica.title] just watches quietly, a hint of jealousy on her face."
         $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = kaya)
         $ mc.arousal = 0
@@ -1189,7 +1192,7 @@ label kaya_erica_teamup_question_label(the_person, active_punishment = False, pu
                 $ punished_person.cum_in_mouth()
                 $ scene_manager.update_actor(punished_person, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
                 $ punished_person.increase_opinion_score("drinking cum", weighted = True)
-                "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
+                "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her [punished_person.hair_description]."
                 "[the_person.title] just watches quietly, a hint of jealousy on her face."
                 $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = punished_person)
                 $ mc.arousal = 0
@@ -1237,7 +1240,7 @@ label kaya_erica_teamup_question_label(the_person, active_punishment = False, pu
                 $ punished_person.cum_in_mouth()
                 $ punished_person.increase_opinion_score("drinking cum", weighted = True)
                 $ scene_manager.update_actor(punished_person, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
-                "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
+                "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her [punished_person.hair_description]."
                 "[the_person.title] just watches quietly, a hint of jealousy on her face."
                 $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = punished_person)
                 $ mc.arousal = 0
@@ -1274,7 +1277,7 @@ label kaya_erica_teamup_question_label(the_person, active_punishment = False, pu
                 $ punished_person.cum_in_mouth()
                 $ punished_person.increase_opinion_score("drinking cum", weighted = True)
                 $ scene_manager.update_actor(punished_person, position = "blowjob", display_transform = character_center(yoffset = .2, zoom = 1.2))
-                "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
+                "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her [punished_person.hair_description]."
                 "[the_person.title] just watches quietly, a hint of jealousy on her face."
                 $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = punished_person)
                 $ mc.arousal = 0

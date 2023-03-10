@@ -290,7 +290,10 @@ label mom_ntr_mod_action_label():
                                 man_name "You are really a slut, [the_person.fname]. Like being railed from behind?"
                                 the_person "Yes. Yes. Do me! Fuck my slutty pussy, [man_name]!"
                                 "For a while, there is silence in a room, aside from the wet sounds of [man_name]'s dick going in and out of [the_person.possessive_title]'s willing hole and the slapping of flesh on flesh."
-                                "[man_name] grabs a fistful of her hair and pulls her upwards."
+                                if the_person.is_bald():
+                                    "[man_name] grabs her by her neck and pulls her upwards."
+                                else:
+                                    "[man_name] grabs a fistful of her [the_person.hair_description] and pulls her upwards."
                                 man_name "Do you like it, [the_person.fname]? Speak, whore!"
                                 the_person "Oh yes! Don't stop, [man_name]. I'm going to cum!"
                                 "[man_name] goes on pumping [the_person.possessive_title] and then slaps her ass, leaving a red handprint on her sweaty, quivering flesh."
@@ -300,7 +303,10 @@ label mom_ntr_mod_action_label():
                                 the_person "Oh... Please, [man_name], stop. You can't rape me like that!"
                                 man_name "Shut your cockhole, [the_person.fname]. There's no way you can call this rape. You wanted it all along."
                                 "The sounds of [man_name]'s dick forcing its way in and out of [the_person.possessive_title]'s resistant slit and the impacts of his hips on her ass fill the room. Each thrust is punctuated with a cry of pain and anguish from [the_person.possessive_title]."
-                                "[man_name] grabs her hair and pulls her upwards."
+                                if the_person.is_bald():
+                                    "[man_name] grabs her by her neck and pulls her upwards."
+                                else:
+                                    "[man_name] grabs her [the_person.hair_description] and pulls her upwards."
                                 man_name "You love this, don't you? Admit it, slut! You're squeezing my dick like a teenage virgin!"
                                 the_person "Please, stop, [man_name]. Please, it hurts!"
                                 "[man_name] answers [the_person.possessive_title]'s plea with even harder thrusts, beating his hips against her ass like a weapon."
@@ -465,7 +471,7 @@ label mom_ntr_mod_action_label():
                                     "[man_name] pulls back and starts beating himself to climax. You can see that [the_person.fname] is panting, but excited. Her eyes are unfocused and her tongue is lolling out of her open mouth."
                                     $ cum_on_face_ntr(the_person) #$ the_person.cum_on_face()
                                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
-                                    "First he shoots [the_person.possessive_title]'s face and hair with his semen."
+                                    "First he shoots [the_person.possessive_title]'s face and her [the_person.hair_description] with his semen."
                                     $ cum_on_tits_ntr(the_person) #$ the_person.cum_on_tits()
                                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                                     "The load is big and he keeps going, covering [the_person.possessive_title]'s tits."
@@ -483,7 +489,7 @@ label mom_ntr_mod_action_label():
                                     man_name "Yeah, you're ready. Here it comes, don't you fucking dare look away!"
                                     $ cum_on_face_ntr(the_person) #$ the_person.cum_on_face()
                                     $ the_person.draw_person(position = "blowjob", emotion = "sad")
-                                    "First he shoots [the_person.possessive_title]'s face and hair with his semen."
+                                    "First he shoots [the_person.possessive_title]'s face and her [the_person.hair_description] with his semen."
                                     $ cum_on_tits_ntr(the_person) #$ the_person.cum_on_tits()
                                     $ the_person.draw_person(position = "blowjob", emotion = "sad")
                                     "The load is big and he keeps going, covering [the_person.possessive_title]'s tits."

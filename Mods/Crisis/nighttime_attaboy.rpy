@@ -35,7 +35,7 @@ init 1 python:
         "Kissing" : "When our lips met. The electric jolt I got, I knew this was going to be an amazing session.",
         "Missionary" : "You put me on my back and slid inside of me.",
         "Piledriver" : "You lift my ankles up in the air and started pounding me.",
-        "Skull Fuck" : "You grabbed me by the hair and started fucking my face.",
+        "Skull Fuck" : "You grabbed my head and started fucking my face.",
         "Fingering" : "Your fingers slipped inside of me.",
         "Groping" : "Your hands started to roam all over my body, it felt so good.",
         "Tit Fuck" : "I slipped your cock between my big tits.",

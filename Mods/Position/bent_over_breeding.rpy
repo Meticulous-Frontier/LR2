@@ -168,7 +168,10 @@ label scene_bent_over_breeding_2(the_girl, the_location, the_object):
             else:
                 the_girl "Mmm, I can't help it, you make me feel so good."
         "Rough Sex":
-            "You take one hand and start to knead the back of her scalp. You grab a fistful of hair and pull."
+            if the_girl.is_bald():
+                "You take one hand and start to knead the back of her scalp. You grab her throat and pull."
+            else:
+                "You take one hand and start to knead the back of her scalp. You grab a fistful of hair and pull."
             "[the_girl.possessive_title] arches her back in response."
             mc.name "That's a good slut. Take it nice and deep."
             if the_girl.get_opinion_score("being submissive") > 0 or the_girl.obedience > 130:

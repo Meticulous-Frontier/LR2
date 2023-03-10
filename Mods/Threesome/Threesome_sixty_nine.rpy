@@ -202,7 +202,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_2(the_girl_1, the_girl_2, the_loc
     "You decide it's time for [the_girl_2.possessive_title] to put her mouth to better use."
     "You pull back from making out with [the_girl_2.title]."
     mc.name "I think [the_girl_1.fname] needs a little more attention..."
-    "You grab [the_girl_2.possessive_title]'s head by her hair and start to pull her head downwards. You pull out of [the_girl_1.title]'s pussy partially to give her room to work."
+    "You grab [the_girl_2.possessive_title]'s head by her [the_girl_2.hair_description] and start to pull her head downwards. You pull out of [the_girl_1.title]'s pussy partially to give her room to work."
     "She starts to lap at [the_girl_1.title]'s cunt. You can feel her tongue brushing up against your cock."
     "You give [the_girl_1.title] a few slow thrusts, making sure to give [the_girl_2.title] room to work."
     the_girl_1 "Mmmm..."
@@ -364,10 +364,13 @@ label swap_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locati
     return
 
 label swap_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object):
-    "Stepping back for a moment, you begin to run your hands through [the_girl_2.title]'s hair, then slowly pull her mouth down towards your cock."
+    if the_girl2.is_bald():
+        "Stepping back for a moment, you begin to run your hands over [the_girl_2.title]'s smooth head, then slowly pull her mouth down towards your cock."
+    else:
+        "Stepping back for a moment, you begin to run your hands through [the_girl_2.title]'s hair, then slowly pull her mouth down towards your cock."
     mc.name "Lick me clean, [the_girl_2.fname]."
     "[the_girl_2.title] opens her mouth and begins to greedily slurp at your cock. Her mouth feels great sliding up and down your erection."
-    "You reach down with one hand and hold [the_girl_2.title]'s hair off to one side for her, and with your other hand you start to play with [the_girl_1.title]'s pussy."
+    "You reach down holding [the_girl_2.title]'s bobbing head, while your other hand you start to play with [the_girl_1.title]'s [the_girl_1.pubes_description] pussy."
     return
 
 label intro_threesome_sixty_nine_watch_girls(the_girl_1, the_girl_2, the_location, the_object):

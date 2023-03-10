@@ -521,7 +521,7 @@ label breeding_fetish_lily_intro_label(the_person): #NEeds testing, evening room
     $ the_person = lily
     "Note: This scene was written assuming that eventually you fuck [the_person.title] on a live stream, but so far Vren has not written this step."
     $ mc.change_location(the_person.home)
-    "You step into [the_person.possessive_title]'s room. She is standing next to her mirror playing with her hair, but looks over at you and smiles when she hears the door."
+    "You step into [the_person.possessive_title]'s room. She is standing next to her mirror playing with her [the_person.hair_description], but looks over at you and smiles when she hears the door."
     $ the_person.draw_person()
     the_person "Oh hey [the_person.mc_title]! I was wondering if you were going to be around tonight. Want to stream with me tonight?"
     "Your sister's job, over the last few months, has slowly evolved. From taking sexy snaps, to streaming sex with you live. Having sex with your sister, AND getting paid for it? It's amazing."

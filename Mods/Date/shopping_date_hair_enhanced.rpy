@@ -5,23 +5,35 @@ init 5 python:
 label shopping_date_hair_enhanced(the_person):
     mc.name "How about we get your hair done? I think there's a salon in here somewhere."
     if the_person.has_role(girlfriend_role) or the_person.has_role(affair_role):
-        "She runs her fingers through her hair."
+        if the_person.is_bald():
+            "She runs her hand over her bald scalp."
+        else:
+            "She runs her fingers through her [the_person.hair_description]."
         the_person "Do you think it's time for a change?"
         mc.name "Maybe. Let's take a look."
     elif the_person.has_role(sister_role):
         the_person "Why, don't you think my hair looks cute?"
         mc.name "Can't hurt to try a new style, right?"
-        "She runs her fingers through her hair and thinks for a few seconds."
+        if the_person.is_bald():
+            "She runs her hand over her bald scalp and thinks for a few seconds."
+        else:
+            "She runs her fingers through her [the_person.hair_description] and thinks for a few seconds."
         the_person "I guess... Alright, we can take a look."
     elif the_person.has_role(mother_role):
-        the_person "Oh, I don't like to spend money on things like that. I'm happy with my hair nice and plain."
+        the_person "Oh, I don't like to spend money on things like that. I'm happy with my [the_person.hair_description], nice and plain."
         mc.name "Come on, if it's money that's the issue I can pay for it. You should treat yourself once in a while."
-        "She runs her fingers through her hair and thinks for a moment."
+        if the_person.is_bald():
+            "She runs her hand over her bald scalp and thinks for a moment."
+        else:
+            "She runs her fingers through her [the_person.hair_description] and thinks for a moment."
         the_person "Well... I suppose it couldn't hurt to look."
     else: #In theory this shouldn't come up right now, but maybe it will in the future.
-        the_person "Don't you like my hair?"
+        the_person "Don't you like my [the_person.hair_description]?"
         mc.name "Sure, but a new style could be nice too, right?"
-        "She runs her fingers through her hair, then shrugs and nods."
+        if the_person.is_bald():
+            "She runs her hand over her bald scalp, then shrugs and nods."
+        else:
+            "She runs her fingers through her [the_person.hair_description], then shrugs and nods."
         the_person "Alright, we can take a look."
 
     "You and [the_person.possessive_title] walk to the salon."

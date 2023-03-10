@@ -385,7 +385,10 @@ label mom_outfit_help_crisis_label_enhanced():
                         mc.name "I don't think you're crazy. This is a great way to say thank you. I can't believe I'm so lucky."
                         the_person "I'm glad to hear that... I just... need to taste it!!!"
                         $ the_person.break_taboo("sucking_cock")
-                    "Suddenly, she opens a bit wider and takes your cock into her mouth. Your hands run through her hair as her head starts to bob up and down."
+                    if the_person.is_bald():
+                        "Suddenly, she opens a bit wider and takes your cock into her mouth. Your rest your hand on the top of her bald head as she starts to bob up and down."
+                    else:
+                        "Suddenly, she opens a bit wider and takes your cock into her mouth. Your hands run through her [the_person.hair_description] as her head starts to bob up and down."
                     call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, position_locked = True) from _call_fuck_person_mom_outfit_help_crisis_01
 
                 else:

@@ -319,7 +319,10 @@ label starbuck_candace_product_demo_label(the_person):
     $ scene_manager.update_actor(the_person, position = "doggy", display_transform = character_right_flipped, z_order = 2)
     "When she turns around, without even asking, [the_person.title] lifts her leg and starts to lick your cum off of [starbuck.possessive_title]'s leg."
     starbuck "Oh! Oh my..."
-    "[starbuck.title] runs her hands through [the_person.title]'s hair as her tongue goes higher between her legs. She moans as [the_person.possessive_title] licks around her pussy."
+    if the_person.is_bald():
+        "[starbuck.title] runs her hands over [the_person.title]'s smooth head as her tongue goes higher between her legs. She moans as [the_person.possessive_title] licks around her pussy."
+    else:
+        "[starbuck.title] runs her hands through [the_person.title]'s hair as her tongue goes higher between her legs. She moans as [the_person.possessive_title] licks around her pussy."
     starbuck "Oh fuck... sorry I... I can't do that right now!"
     "[the_person.possessive_title] stops, understanding. Damn what a scene."
     mc.name "Well... I'd call today a complete success. I'm going to go ahead and edit that video while you two recover..."

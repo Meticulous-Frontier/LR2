@@ -43,7 +43,7 @@ init -1 python:
     "A good slut gags on her mans cock. Get ready, I'm going to ram it down your throat again until you gag on it the way you should.",
     "Damn, your throat feels great. Does it make you happy to gag and slobber all over my cock? It should.",
     "You are almost the perfect slut. You do great, taking my cock like this, we just need to train out the last of your gag reflex.",
-    "Do you even have a gag reflex anymore? Don't answer that, I'm going to grab you by the hair and find out.",
+    "Do you even have a gag reflex anymore? Don't answer that, I'm going to grab you by your head and find out.",
     "I'm not sure there is much I can teach you, but I'm going to keep using that throat of yours anyway.",
     "Fuck, that throat of yours feels amazing. Now take it like a good little cocksleeve."]
 
@@ -58,7 +58,7 @@ label condition_blowjob_training_pre_label(the_person, the_position, the_object,
         $ mc_dialogue = blowjob_training_condition_deepthroat_list[dialogue_index]
     elif the_position == skull_fuck:
         $ mc_dialogue = blowjob_training_condition_skull_fuck_list[dialogue_index]
-    mc.name "[mc_dialogue]"
+    mc.name "[mc_dialogue!]"
     "[the_person.possessive_title] listens and tries what you suggest."
     return
 

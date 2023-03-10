@@ -1321,15 +1321,18 @@ label ashley_blows_during_meeting_label():      #40 Sluttiness
     mc.name "What can I do for you?"
     stephanie "Ah, well, I'm having some trouble with the synthesis on one of the latest serum designs, I was wondering if you could look at it."
     "Fuck, you aren't sure you can handle science talk right now..."
-    "Those pouty lips are working wonders sliding up and down your cock... you just wanna grab her by the hair..."
+    "Those pouty lips are working wonders sliding up and down your cock... you just wanna grab her by her [ashley.hair_description]..."
     $ mc.change_locked_clarity(40)
     mc.name "What issues are you having?"
     "[stephanie.possessive_title] grabs a folder from her bag and hands it to you."
     stephanie "Well, some of the new components are separating out. We tried a basic emulsifier, but they seem to be immune to normal protein binding..."
-    "With your right hand, you take the folder. With your left hand, you grab [ashley.possessive_title] by the back of her hair."
+    "With your right hand, you take the folder. With your left hand, you grab [ashley.possessive_title] by the back of her [ashley.hair_description]."
     mc.name "I see. Have you tried homogenizing it?"
     stephanie "We have, actually..."
-    "[stephanie.title] starts to talk about some of the other methods they've been using. You use your hand in [ashley.title]'s hair and force your cock down her throat."
+    if ashley.is_bald():
+        "[stephanie.title] starts to talk about some of the other methods they've been using. You use your hand at the back of [ashley.title]'s neck and force your cock down her throat."
+    else:
+        "[stephanie.title] starts to talk about some of the other methods they've been using. You use your hand in [ashley.title]'s hair and force your cock down her throat."
     "She manages to throat you for several seconds, but eventually sputters and gags. When you let go she quickly pulls off and gasps. You pretend to cough to cover up the noise."
     $ mc.change_locked_clarity(40)
     stephanie "Ah, you okay?"
@@ -1342,7 +1345,7 @@ label ashley_blows_during_meeting_label():      #40 Sluttiness
     "You put your hand on [ashley.possessive_title]'s head and force her down again as you start to cum, right down her throat."
     $ ashley.cum_in_mouth()
     $ scene_manager.update_actor(ashley)
-    "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her hair."
+    "You deliver spurt after spurt of your cum down her throat before finally relaxing your grip on her [ashley.hair_description]."
     "You do your best to remain absolutely silent, but you see [stephanie.title] looking at you confused."
     $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = ashley)
     stephanie "Are you okay? You seem a little... flushed."

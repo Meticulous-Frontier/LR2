@@ -447,15 +447,21 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                 return
 
             "Make her submit":
-                "You reach up with your free hand and grab her hair next to the back of her head."
+                if the_girl.is_bald():
+                    "You reach up with your free hand and grab her by the throat."
+                else:
+                    "You reach up with your free hand and grab her hair next to the back of her head."
                 mc.name "I don't think so. I'm the man here, I'll do what I please with you, when I please. If I want you to fuck me I'll tell you to."
                 if the_girl.get_opinion_score("being submissive") > 0:
                     "[the_girl.possessive_title] melts back into you. Her urge to take the lead has been replaced with submission."
-                    "You give a rough tug on her hair to show her than you mean it."
+                    if the_girl.is_bald():
+                        "You give a rough tug on neck to show her than you mean it."
+                    else:
+                        "You give a rough tug on her hair to show her than you mean it."
                     the_girl "Oh god... You've got me up against the [the_object.name]."
                     "You fuck her hard and fast. [the_girl.possessive_title] gasps and moans, her rounded hips shaking with every thrust."
                     mc.name "That's right, I've got you right where I want you and there's nothing you can do about it."
-                    "[the_girl.possessive_title] tries to move her head, but your strong grip on the her hair prevent her from shifting it much."
+                    "[the_girl.possessive_title] tries to move her head, but your strong grip on her [the_girl.hair_description] prevents her from shifting it much."
                     if the_girl.get_opinion_score("bareback sex") > 0:
                         the_girl "You could fuck me until you cum inside and there's nothing I could do. You could knock me up while I'm up against the [the_object.name] like I'm some kind of slut..."
                     elif the_girl.wants_creampie():
@@ -472,10 +478,14 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                     the_girl "Yow! Hey what the fuck?"
                     if the_girl.obedience > 130:
                         "[the_girl.possessive_title]'s body stiffens at your rough treatment, but she knows better than to disobey you."
-                        "You decide to release her hair, but continue to set the pace with your hips as you fuck her from behind."
+                        "You decide to release her [the_girl.hair_description], but continue to set the pace with your hips as you fuck her from behind."
                     else:
-                        the_girl "Don't push your luck back there! It hurts when you pull my hair!"
-                        "You release her hair and continue to fuck her. It seems she isn't turned on by your tough act."
+                        if the_girl.is_bald():
+                            the_girl "Don't push your luck back there! It hurts when you squeeze my throat!"
+                            "You release your grip and continue to fuck her. It seems she isn't turned on by your tough act."
+                        else:
+                            the_girl "Don't push your luck back there! It hurts when you pull my hair!"
+                            "You release her hair and continue to fuck her. It seems she isn't turned on by your tough act."
                         $ the_girl.change_arousal(-2)
 
 

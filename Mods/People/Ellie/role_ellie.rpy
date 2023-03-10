@@ -2458,7 +2458,10 @@ label ellie_start_search_label(): #140 obedience. Scene where you talk to ellie 
     mc.name "Alright, well, this should be straight forward. [the_researcher.title]... whenever you are ready?"
     the_researcher "Okay."
     "[the_researcher.possessive_title] pulls out her phone and takes a few seconds to boot up the app."
-    "She takes a few seconds to straighten her hair, then starts the video."
+    if the_person.is_bald():
+        "She checks her make-up and then starts the video."
+    else:
+        "She takes a few seconds to straighten her hair, then starts the video."
     the_researcher "Hey guys! Guess what!?!"
     "Her mock enthusiasm is amusing, but you keep yourself from laughing and ruining the video."
     the_researcher "I just found out... the new girl at work... has a DikDok account too! And she JUST STARTED!"
@@ -3083,10 +3086,16 @@ label ellie_submission_label():   #Ellie submits herself to be used by MC
         mc.name "Mmm... okay slut. Bend over your desk and get ready for me."
         "You let her off your knee and she quickly bends over her desk, her ass still pointed at you."
         $ the_person.draw_person(position = "standing_doggy")
-        "Her sorry little cheeks are red like her hair. You pull of your pants and get behind her, run your dick along her slit a few times."
-        "You put one hand on her hip, and with the other you grab the back of her hair. You line yourself up then push yourself deep inside her in one quick thrust."
+        "Her sorry little cheeks are red like her [the_person.hair_description]. You pull of your pants and get behind her, run your dick along her slit a few times."
+        if the_person.is_bald():
+            "You put one hand on her hip, and with the other you grab her shoulders. You line yourself up then push yourself deep inside her in one quick thrust."
+        else:
+            "You put one hand on her hip, and with the other you grab the back of her hair. You line yourself up then push yourself deep inside her in one quick thrust."
         the_person "Yes! Oh stars yes fuck me [the_person.mc_title]!"
-        "You pull her hair a bit to remind her you are in control, but you begin to do exactly as she asks."
+        if the_person.is_bald():
+            "You pull a little at her shoulders to remind her you are in control, but you begin to do exactly as she asks."
+        else:
+            "You pull her hair a bit to remind her you are in control, but you begin to do exactly as she asks."
         call fuck_person(the_person, private=True, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True) from _call_fuck_person_ellie_obedience_60_02
     else:
         the_person "Yes, yes sir. It feels so good."

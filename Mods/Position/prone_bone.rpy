@@ -187,14 +187,23 @@ label scene_prone_bone_2(the_girl, the_location, the_object):
             elif the_girl.is_dominant():
                 mc.name "I don't think so. You're my little slut, and I'll take you the way I want to, when I want to."
                 $ the_girl.change_stats(happiness = -5, obedience = 1, slut = 1)
-                "[the_girl.title] starts to say something, but you grab her hair and pull it back some. Her tight pussy clenches around you in response."
+                if the_girl.is_bald():
+                    "[the_girl.title] starts to say something, but you grab her neck and pull her back a little. Her tight pussy clenches around you in response."
+                else:
+                    "[the_girl.title] starts to say something, but you grab her hair and pull it back some. Her tight pussy clenches around you in response."
                 "She decides to just stay quiet for now and accept it as you continue to have you way with her."
             else:
                 the_girl "That's it... oh god it's so good..."
-                "You reach forward and grab her hair near the base of her head and pull it back some."
+                if the_girl.is_bald():
+                    "You reach forward and grab her neck at the base of her head and pull it back some."
+                else:
+                    "You reach forward and grab her hair near the base of her head and pull it back some."
                 the_girl "Oh fuck! Oh god fuck my pussy [the_girl.mc_title]!"
                 $ the_girl.change_stats(obedience = 1, arousal = 5)
-                "You oblige her, helping correlate in her head your rough treatment with the pleasure of sex. Her pussy clenches around you as you pull her hair."
+                if the_girl.is_bald():
+                    "You oblige her, helping correlate in her head your rough treatment with the pleasure of sex. Her pussy clenches around you as you squeeze her neck."
+                else:
+                    "You oblige her, helping correlate in her head your rough treatment with the pleasure of sex. Her pussy clenches around you as you pull her hair."
                 "She is exhausted, but constantly moaning from your dominating approach."
         "Go easy on her":
             "You decide for now just to enjoy the wet hole [the_girl.possessive_title] has pointed up at you."
@@ -261,12 +270,12 @@ label scene_prone_bone_3(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] moans as you degrade her. Her submission to you is total."
                 the_girl "I'm just glad you find my holes pleasurable, [the_girl.mc_title]!"
                 mc.name "Me too whore."
-                "You grab her by the hair and pull a little bit as you fuck her harder for a bit. She moans and writhes from being treated like a fuck doll."
+                "You grab her by her [the_girl.hair_description] and pull a little bit as you fuck her harder for a bit. She moans and writhes from being treated like a fuck doll."
                 $ the_girl.change_arousal(10)
             else:
                 the_girl "I just want you to feel good [the_girl.mc_title]..."
                 mc.name "Me too whore."
-                "You grab her by the hair and pull a little bit as you fuck her harder for a bit, showing her who the male alpha is."
+                "You grab her by her [the_girl.hair_description] and pull a little bit as you fuck her harder for a bit, showing her who the male alpha is."
                 $ the_girl.change_obedience(3)
         "Threaten to pull out":
             mc.name "I can't wait to pull out and cum all over that amazing ass of yours."

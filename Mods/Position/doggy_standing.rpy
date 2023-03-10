@@ -190,7 +190,10 @@ label scene_SB_doggy_standing_2(the_girl, the_location, the_object):
             else:
                 the_girl "Mmm, I can't help it, you make me feel so good."
         "Rough Sex":
-            "You take one hand and start to knead the back of her scalp. You grab a fistful of hair and pull."
+            if the_girl.is_bald():
+                "You take one hand and start to knead the back of her scalp. Getting a good grip around her neck and pull."
+            else:
+                "You take one hand and start to knead the back of her scalp. You grab a fistful of hair and pull."
             "[the_girl.possessive_title] arches her back in response."
             mc.name "That's a good slut. Take it nice and deep."
             if the_girl.get_opinion_score("being submissive") > 0 or the_girl.obedience > 130:
@@ -203,7 +206,7 @@ label scene_SB_doggy_standing_2(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] looks back at you with a scowl."
                 the_girl "Don't get used to it, [the_girl.mc_title]... I'm not sure how I let you talk me into this..."
                 $ the_girl.discover_opinion("being submissive")
-                "You let go of her hair and decide for now to keep your pace nice and slow."
+                "You let go of her [the_girl.hair_description] and decide for now to keep your pace nice and slow."
             else:
                 "[the_girl.possessive_title] moans."
                 the_girl "You are so deep... It feels good having you so deep inside me."

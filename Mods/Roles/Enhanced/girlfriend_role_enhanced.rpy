@@ -399,8 +399,12 @@ label girlfriend_roleplay_step_sister_label(the_person):
         "The roleplaying has begun..."
         mc.name "It's me, [the_person.title]. What's going on?"
         "She is bent over and has her head in the sink."
-        the_person "Oh thank god it's you [the_person.mc_title]! I somehow got my hair stuck! In the... err... sink!"
-        mc.name "You got your hair stuck in the sink, again!?! How does this keep happening [the_person.title]?"
+        if the_person.is_bald():
+            the_person "Oh thank god it's you [the_person.mc_title]! I somehow got my hand stuck! In the... err... sink!"
+            mc.name "You got your hand stuck in the sink, again!?! How does this keep happening [the_person.title]?"
+        else:
+            the_person "Oh thank god it's you [the_person.mc_title]! I somehow got my hair stuck! In the... err... sink!"
+            mc.name "You got your hair stuck in the sink, again!?! How does this keep happening [the_person.title]?"
         "Her hips start to wiggle a bit as you approach her."
         $ mc.change_locked_clarity(30)
         the_person "I don't know! You've got to help me [the_person.mc_title]!"

@@ -544,7 +544,10 @@ label erica_lily_post_insta_morning_label():
         "[the_person.title] lowers herself down your body until you feel her warm breath on your crotch. She opens her mouth and licks your pre-cum from the tip."
         the_person "Mmm, you taste better than those protein powders too..."
         "Opening her mouth, she slides her wet lips down over the tip and runs her tongue all up and down it a few times."
-        "You run your hand thru her hair as she begins to suck you off."
+        if the_person.is_bald():
+            "You run your hand over her smooth head as she begins to suck you off."
+        else:
+            "You run your hand thru her [the_person.hair_description] as she begins to suck you off."
         $ the_person.break_taboo("sucking_cock")
         $ mc.change_arousal(20)
         call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "oral creampie", private = True, skip_intro = True, allow_continue = False) from _erica_morning_blowjob_01

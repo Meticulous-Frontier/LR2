@@ -614,7 +614,10 @@ label ophelia_revenge_date_label():
     the_person "Alright, let's get going. Don't want to be late!"
     $ mc.change_location(fancy_restaurant)
     "You arrive at the restaurant. There are a few people in front of you, also waiting on their tables. It seems they are running a little bit behind tonight."
-    the_person "Hey, I'm just gonna run to the lady's room to check my hair, I'll be right back!"
+    if the_person.is_bald():
+        the_person "Hey, I'm just gonna run to the lady's room to check my make-up, I'll be right back!"
+    else:
+        the_person "Hey, I'm just gonna run to the lady's room to check my hair, I'll be right back!"
     mc.name "Sure thing."
     $ scene_manager.hide_actor(the_person)
     "You continue to wait for a few moments. You hear someone walk up behind you in line. At first, you pay the person no attention, but then you feel a tap on your shoulder."
@@ -1004,7 +1007,7 @@ label ophelia_choose_service_test_label():
         the_person "Oh! That sounds great! It is such a pain trying to shave down there."
         the_person "When can we go?"
     else: #The person is not slutty but is here due to high obedience.
-        the_person "Oh my... I'm not sure I feel comfortable having another woman cutting my hair down there..."
+        the_person "Oh my... I'm not sure I feel comfortable having another woman trimming my pubes..."
         mc.name "Well, not usually, I'm sure, but this would be a really big favor for me. Just this once?"
         the_person "Oh, well I suppose I could do it. For your sake of course!"
         the_person "So... when do we go?"
@@ -1048,7 +1051,7 @@ label ophelia_choose_service_test_label():
     elif the_person.sluttiness > 50:
         the_person "Wow! Great job! I'm going to have to come here from now on."
     else:
-        the_person "That was... an interesting experience. My hair looks great though! And everything matches."
+        the_person "That was... an interesting experience. My [the_person.hair_description] looks great though! And everything matches."
         the_person "I think... I could get used to this."
     salon_manager "Great! Let me get you a card so you can make an appointment when you want to come back."
     $ scene_manager.update_actor(salon_manager, position = "walking_away")

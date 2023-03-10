@@ -345,7 +345,10 @@ label cum_fetish_family_intro_label(the_person):
     "[the_person.title] gives in and drops the sheet. You get closer until you are standing right in front of her."
     mc.name "That's it. Now, you're already all warmed up. Why don't you give me a kiss and help me catch up a little."
     "Still sitting on the edge of the bed, [the_person.possessive_title] looks up at you as you bring your cock up to her face."
-    "You run your hand through her hair a couple times, as she begins to lick around the tip of your dick."
+    if the_person.is_bald():
+        "You run your hand over her smooth head, as she begins to lick around the tip of your dick."
+    else:
+        "You run your hand through her [the_person.hair_description] a couple times, as she begins to lick around the tip of your dick."
     "She licks up some of your precum."
     the_person "Mmm... that tastes so... good? It's funny... I'd never thought of cum as tasting so good before."
     mc.name "It's because of how turned on you are."
@@ -467,7 +470,10 @@ label cum_fetish_generic_intro_label(the_person):
             "[the_person.possessive_title] blushes and pauses..."
             mc.name "Did you get what you were hoping for?"
             the_person "Oh, I think I'm good for today... but I'm sure it won't be long until I get hungry again..."
-            "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
+            if the_person.is_bald():
+                "[the_person.possessive_title] runs her fingers over her lips and smiles at you."
+            else:
+                "[the_person.possessive_title] runs her hand through her [the_person.hair_description]. She licks her lips and smiles at you."
             $ the_person.apply_planned_outfit()
             the_person "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away", emotion = "happy")
@@ -521,8 +527,12 @@ label cum_fetish_mom_intro_label():
             $ add_cum_fetish(the_person)
             "You look down and see [the_person.possessive_title]. She uses her finger to wipe up a bit of cum that leaked out of her mouth and licks it clean."
         "Cum on her face":
-            "You rest your hand on her head, slowly gathering her hair up."
-            mc.name "That's it [the_person.title]. I'm going to cum all over that pretty little face of yours."
+            if the_person.is_bald():
+                "You rest your hand on her shiny head."
+                mc.name "That's it [the_person.title]. I'm going to cum all over that pretty little face and head of yours."
+            else:
+                "You rest your hand on her head, slowly gathering her hair up."
+                mc.name "That's it [the_person.title]. I'm going to cum all over that pretty little face of yours."
             "[the_person.possessive_title] moans. She is ready for her prize."
             mc.name "Fuck, here I come!"
             "[the_person.possessive_title] moans and looks you in the eyes. She pulls off your cock and strokes you eagerly, waiting for the first splash across her face."
@@ -813,7 +823,10 @@ label cum_fetish_sarah_intro_label():
             "You tease her."
             the_person "Oh, I think I'm good for today... but I'm sure it won't be long until I get hungry again..."
             "She's been under the influence of your serums for a while now. She has definitely developed a cum fetish."
-            "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
+            if the_person.is_bald():
+                "[the_person.possessive_title] runs her fingers over her lips and smiles at you."
+            else:
+                "[the_person.possessive_title] runs her hand through her [the_person.hair_description]. She licks her lips and smiles at you."
             $ the_person.apply_planned_outfit()
             the_person "Thanks again, [the_person.mc_title]. We should do this again... and soon."
             $ the_person.draw_person(position = "walking_away")
@@ -860,12 +873,15 @@ label cum_fetish_erica_intro_label(the_person):
     $ add_cum_fetish(the_person)
     $ the_person.event_triggers_dict["LastCumFetish"] = day
     "After you finish, [the_person.possessive_title] continues to lick her fingers, desperate for a little more of your cum."
-    "[the_person.possessive_title] runs her hand through her hair. She licks her lips and smiles at you."
-    erica "That was great. I think I'm ready to make some serious gains today!"
+    if the_person.is_bald():
+        "[the_person.possessive_title] runs her fingers over her lips and smiles at you."
+    else:
+        "[the_person.possessive_title] runs her hand through her [the_person.hair_description]. She licks her lips and smiles at you."
+    the_person "That was great. I think I'm ready to make some serious gains today!"
     mc.name "I'm sure you are..."
     "She's been under the influence of your serums for a while now. She has definitely developed a cum fetish."
     $ the_person.draw_person()
-    erica "Alright... I'm gonna sneak out of here... see you later!"
+    the_person "Alright... I'm gonna sneak out of here... see you later!"
     $ the_person.apply_planned_outfit()
     $ mc.location.show_background()
     $ clear_scene()

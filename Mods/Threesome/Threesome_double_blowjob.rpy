@@ -78,7 +78,7 @@ init:
         list_of_threesomes.append(threesome_double_blowjob)
 
 label intro_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object):
-    "As the girls get on their knees, you run your hands through their hair."
+    "As the girls get on their knees, you run your hands through along their faces."
     mc.name "I want you two to focus on me for a bit."
     if the_girl_1.get_opinion_score("giving blowjobs") > 0:
         the_girl_1 "Mmm, you want to feel us slobbering all over your cock, [the_girl_1.mc_title]?"
@@ -174,7 +174,7 @@ label orgasm_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_loc
     return
 
 label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_location, the_object):
-    "You decide to change things up a bit. You run your hands through their hair, pulling them toward your cock."
+    "You decide to change things up a bit. You run your hands behind their heads, pulling them toward your cock."
     mc.name "I want you two to focus on me for a bit."
     if the_girl_1.get_opinion_score("giving blowjobs") > 0:
         the_girl_1 "Mmm, you want to feel us slobbering all over your cock, [the_girl_1.mc_title]?"
@@ -191,7 +191,7 @@ label swap_threesome_double_blowjob_focus_oral(the_girl_1, the_girl_2, the_locat
 #In scene 2, girls make out around MC's cock
 
 label intro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_location, the_object):
-    "As the girls get on their knees, you run your hands through their hair."
+    "As the girls get on their knees, you run your hands over their faces, pushing them closer to each other."
     mc.name "Why don't you two makeout for a bit. I want to watch."
     "[the_girl_1.title] and [the_girl_2.title] turn to each other and begin to kiss. Their hands begin to explore each other's breasts."
     the_girl_1 "Mmmm, I love your tits, [the_girl_2.name]!"

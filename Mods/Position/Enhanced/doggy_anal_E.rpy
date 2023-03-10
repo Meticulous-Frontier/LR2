@@ -79,7 +79,10 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
                         the_girl "Honestly, I'm not usually into butt stuff... but I just want to make you feel so good..."
                 "[the_girl.possessive_title] continues to twerk her ass up and down on your penis. How does she make it look so easy?"
             "I'm in charge here":
-                "Sensing that your slut is getting out of hand, you quickly take charge. You grab her by the hair and pull her head back until her hands are no longer on the ground, taking away all her leverage."
+                if the_girl.is_bald():
+                    "Sensing that your slut is getting out of hand, you quickly take charge. You grab grab her by the troat an pull her head back until her hands are no longer on the ground, taking away all her leverage."
+                else:
+                    "Sensing that your slut is getting out of hand, you quickly take charge. You grab her by the hair and pull her head back until her hands are no longer on the ground, taking away all her leverage."
                 $ the_girl.call_dialogue("surprised_exclaim")
                 "You lean forward and whisper into [the_girl.possessive_title]'s ear."
                 mc.name "I know you dream about my dick in your ass constantly and it feels good to finally have that dream come true, but don't forget who is in charge around here."
@@ -90,9 +93,15 @@ label scene_SB_doggy_anal_1(the_girl, the_location, the_object):
                         "For once, [the_girl.possessive_title] is speechless. She can only whimper softly in total submission to you."
                     else:
                         the_girl "I'm sorry [the_girl.mc_title], I couldn't help myself. Please use me however you want, I'll be good I promise!"
-                    "You give her a couple slow, heavy thrusts before releasing her hair. She returns her hands to the ground and moans when you resume your slow, methodical fucking."
-                else :
-                    the_girl "Okay! Geesh! Be careful with my hair, that hurts!"
+                    if the_girl.is_bald():
+                        "You give her a couple slow, heavy thrusts before releasing your grip. She returns her hands to the ground and moans when you resume your slow, methodical fucking."
+                    else:
+                        "You give her a couple slow, heavy thrusts before releasing her hair. She returns her hands to the ground and moans when you resume your slow, methodical fucking."
+                else:
+                    if the_girl.is_bald():
+                        the_girl "Ah fuck! I can't breathe, take it a little easier, please!"
+                    else:
+                        the_girl "Okay! Geesh! Be careful with my hair, that hurts!"
                 #TODO this option is kinda boring... expand some?
 
     return
@@ -156,7 +165,10 @@ label scene_SB_doggy_anal_2(the_girl, the_location, the_object):
                 mc.name "Does this feel better than that plug? Is this what you're imagining every time you push that plug up your ass?"
                 "[the_girl.possessive_title] is writhing in pleasure, having her fetish of anal sex fulfilled."
                 the_girl "Oh god it is. Every time I play with my ass and all I can think about is your big meaty dick buried inside me."
-                "You grab her hair at the base of her scalp and pull her head back before whispering into her ear."
+                if the_girl.is_bald():
+                    "You lock her throat in your elbow and pull her head back before whispering into her ear."
+                else:
+                    "You grab her hair at the base of her scalp and pull her head back before whispering into her ear."
                 mc.name "Don't worry, slut. This won't be the last time I fill your ass with my cock."
                 "You can see goosebumps all over [the_girl.possessive_title]'s skin. She moans and then begs you to keep fucking her."
             elif the_girl.get_opinion_score("anal creampies") > 0:

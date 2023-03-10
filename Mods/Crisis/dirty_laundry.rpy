@@ -367,7 +367,10 @@ label dirty_laundry_stuck_in_dryer(the_person):
     "As you walk into the laundry room, you see [the_person.title] with her head in the dryer."
     $ the_person.draw_person(position = "doggy")
     $ mc.change_locked_clarity(5)
-    "She is muttering to herself about how she could have been so clumsy as to get her hair stuck in there; plainly it is preventing her from getting out."
+    if the_person.is_bald():
+        "She is muttering to herself about how she could have been so clumsy as to get her hand stuck in there; plainly it is preventing her from getting out."
+    else:
+        "She is muttering to herself about how she could have been so clumsy as to get her [the_person.hair_description] stuck in there; plainly it is preventing her from getting out."
 
     menu:
         "Help her get out":
@@ -380,7 +383,10 @@ label dirty_laundry_stuck_in_dryer(the_person):
             else:
                 mc.name "No worries, [the_person.title]. Here, let me untangle this for you."
 
-            "You manage to untangle [the_person.possessive_title]'s hair."
+            if the_person.is_bald():
+                "You manage to free [the_person.possessive_title]'s hand."
+            else:
+                "You manage to untangle [the_person.possessive_title]'s hair."
             $ the_person.draw_person(position = "stand3", emotion = "happy")
             the_person "Thanks, [the_person.mc_title], you're a lifesaver. Don't worry, I can finish the rest of this myself."
             $ the_person.change_stats(love = 2, happiness = 5)
@@ -433,7 +439,10 @@ label dirty_laundry_stuck_in_dryer(the_person):
 
         "Fuck her" if not the_person.has_taboo("vaginal_sex") and the_person.effective_sluttiness("bare_pussy") > 40:
             mc.name "Hey [the_person.title], what are you doing in there?"
-            the_person "Hey [the_person.mc_title], it's good that you're here, I've managed to get my hair stuck in this contraption."
+            if the_person.is_bald():
+                the_person "Hey [the_person.mc_title], it's good that you're here, I've managed to get my hand in this contraption."
+            else:
+                the_person "Hey [the_person.mc_title], it's good that you're here, I've managed to get my hair stuck in this contraption."
             mc.name "Don't worry, I know how to help you."
 
             $ the_item = the_person.outfit.get_lower_top_layer()
@@ -481,7 +490,10 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 the_person "It's still not cool that you took advantage of me like that, even if it was really good."
                 mc.name "Haven't you noticed?"
                 the_person "What?"
-                mc.name "Your hair came loose about a minute in, you could have stopped at any point."
+                if the_person.is_bald():
+                    mc.name "Your hand came loose about a minute in, you could have stopped at any point."
+                else:
+                    mc.name "Your hair came loose about a minute in, you could have stopped at any point."
                 the_person "Oh... well, it wasn't that bad after all. Now move..."
             elif the_report.get("girl orgasms", 0) > 0:
                 "After you are done, you help [the_person.title] out of the dryer."
@@ -492,7 +504,10 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 the_person "It's still not cool that you took advantage of me like that, though."
                 mc.name "Haven't you noticed?"
                 the_person "What?"
-                mc.name "Your hair came loose about a minute in, you could have stopped at any point."
+                if the_person.is_bald():
+                    mc.name "Your hand came loose about a minute in, you could have stopped at any point."
+                else:
+                    mc.name "Your hair came loose about a minute in, you could have stopped at any point."
                 the_person "Oh... well, next time just get me out, and we can do this properly. Now move..."
             else:
                 "Feeling satisfied, you pull [the_person.title] out of the dryer."
@@ -501,7 +516,10 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 the_person "You take advantage of me like that and don't even get me off? Not cool, [the_person.mc_title], not cool."
                 mc.name "Haven't you noticed?"
                 the_person "What?"
-                mc.name "Your hair came loose about a minute in, you could have stopped at any point."
+                if the_person.is_bald():
+                    mc.name "Your hand came loose about a minute in, you could have stopped at any point."
+                else:
+                    mc.name "Your hair came loose about a minute in, you could have stopped at any point."
                 the_person "Next time just get me out and make sure I get something out of it. Now move..."
 
     $ the_person.draw_person(position = "walking_away")

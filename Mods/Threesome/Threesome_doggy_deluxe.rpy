@@ -215,18 +215,24 @@ label scene_threesome_doggy_deluxe_fuck_girl_two_2(the_girl_1, the_girl_2, the_l
         "[the_girl_2.possessive_title] reaches back with one hand and pulls her ass cheek back, giving you a great view of her pussy stretched wide to accommodate you."
         "Buried deep inside, you give her ass a smack. Her pussy trembles and caresses you in response."
     the_girl_1 "I know it feels good, but don't forget you need to get me off too!"
-    "[the_girl_1.possessive_title] reaches down and runs her hands through [the_girl_2.title]'s hair."
+    if the_girl_2.is_bald():
+        "[the_girl_1.possessive_title] reaches down and grabs [the_girl_2.title]'s head."
+    else:
+        "[the_girl_1.possessive_title] reaches down and runs her hands through [the_girl_2.title]'s hair."
     if the_girl_1.is_dominant(): #She gets rough with her
-        "You watch as [the_girl_1.title] stop being gentle and grasps [the_girl_2.possessive_title] by the hair."
+        "You watch as [the_girl_1.title] stop being gentle and grasps [the_girl_2.possessive_title] by the [the_girl_2.hair_description]."
         "You slow your pace a bit and just watch. [the_girl_1.title] is starting to move her hips aggressively, humping [the_girl_2.possessive_title]'s face."
         the_girl_1 "Mmmm, that's it. Atta girl!"
         $ the_girl_1.change_arousal(5)
-        "Eventually [the_girl_1.title] lets go of her hair."
+        "Eventually [the_girl_1.title] lets go of her [the_girl_2.hair_description]."
     else:
         the_girl_2 "Sorry! This is just so intense..."
         "[the_girl_2.title] doubles down on her efforts to please [the_girl_1.possessive_title]."
-        "You slow your pace down a bit to give her a chance to catch her breath, watching [the_girl_1.title] run her hands through her hair intimately."
-        "Eventually [the_girl_1.title] lets go of her hair."
+        if the_girl_2.is_bald():
+            "You slow your pace down a bit to give her a chance to catch her breath, watching [the_girl_1.title] run her hands over her head intimately."
+        else:
+            "You slow your pace down a bit to give her a chance to catch her breath, watching [the_girl_1.title] run her hands through her hair intimately."
+        "Eventually [the_girl_1.title] lets go of her [the_girl_2.hair_description]."
     "You resume your normal pace, settling into a rhythm."
     return
 
@@ -365,11 +371,11 @@ label scene_threesome_doggy_deluxe_dp_girl_two_2(the_girl_1, the_girl_2, the_loc
     if the_girl_2.has_role(anal_fetish_role):
         "She is moaning so loudly, she is having a hard time concentrating on eating out [the_girl_1.title]."
         mc.name "You are such a butt slut [the_girl_2.fname]. Is it nice to finally have a real cock, stuffed deep in your tight little asshole?"
-        "[the_girl_2.possessive_title] can only moan louder in response. You grab her hair and pull her face away from [the_girl_1.title]'s cunt while you whisper in her ear."
+        "[the_girl_2.possessive_title] can only moan louder in response. You grab her [the_girl_2.hair_description] and pull her face away from [the_girl_1.title]'s cunt while you whisper in her ear."
         mc.name "Don't worry, this won't be the last time I stuff your holes. Especially this one."
         "As you finish your sentence, you give her an extra rough thrust, your hips slamming against her ass."
     else:
-        "You grab her hair and pull her face away from [the_girl_1.title]'s cunt while you whisper in her ear."
+        "You grab her [the_girl_1.hair_description] and pull her face away from [the_girl_1.title]'s cunt while you whisper in her ear."
         mc.name "Your backdoor is so tight, especially with your cunt stuffed at the same time."
         "As you finish your sentence, you give her an extra rough thrust, your hips slamming against her ass."
     the_girl_2 "So full... it's so good!"

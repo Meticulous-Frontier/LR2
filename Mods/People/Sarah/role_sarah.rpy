@@ -1006,7 +1006,7 @@ label Sarah_get_drinks_label():
     "You get in close behind her until you are right behind her, your body up against hers."
     $ mc.change_locked_clarity(20)
     the_person "Oh? I thought I did okay, but if you have some... tips... for me that would be nice!"
-    "The feminine smell in her hair enters your nostrils and you take a deep breath, enjoying your proximity with [the_person.title]."
+    "The feminine smell of her perfume enters your nostrils and you take a deep breath, enjoying your proximity with [the_person.title]."
     "You run your fingertips along her arm, until you are holding her hand as she holds her dart."
     mc.name "That's right, there was something about your posture that caught my eye."
     "You are now pushing yourself lightly up against [the_person.title]. She catches her breath when she feels your erection beginning to grow against her backside."

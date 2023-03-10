@@ -219,7 +219,7 @@ label orgasm_Ophelia_blowjob(the_girl, the_location, the_object):
             $ Ophelia_blowjob.redraw_scene(the_girl)
             mc.name "That's it, cum for me [the_girl.title]."
             "[the_girl.possessive_title] pulls off your cock as she climaxes. She nuzzles up against your hot, wet shaft as her body shivers uncontrollably."
-            "You stroke her hair and wait until she's over the worst of it."
+            "You stroke her [the_girl.hair_description] and wait until she's over the worst of it."
             $ the_girl.change_happiness(2)
             the_girl.name "Wow... Thanks for waiting, that was really intense."
             "She licks your shaft and looks up at you."

@@ -29,7 +29,7 @@ label salon_response(person_choice): # How does the_person respond to a company 
 
     if the_person.personality.base_personality_prefix == "bimbo":
         $ the_person.draw_person(emotion = "happy")
-        the_person "Oh, [the_person.mc_title], like, I love doing my hair."
+        the_person "Oh, [the_person.mc_title], like, I love changing my hair style."
 
     elif the_person.love > 30:
         $ the_person.draw_person(emotion = "happy")

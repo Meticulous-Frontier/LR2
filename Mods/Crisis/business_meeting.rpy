@@ -159,7 +159,10 @@ label business_meeting_seduction(the_person):
             menu:
                 "Continue":
                     if the_person.has_taboo("sucking_cock"):
-                        "You move your hand to her face, pushing back a hair, slowly moving your hand behind her head pulling her closer to your throbbing cock."
+                        if the_person.is_bald():
+                            "You move your hand to her face, slowly moving your hand behind her head pulling her closer to your throbbing cock."
+                        else:
+                            "You move your hand to her face, pushing back a hair, slowly moving your hand behind her head pulling her closer to your throbbing cock."
                         "She looks at you with confusion when the tip of your cock moves over her cheek and lips."
                         mc.name "Why don't you give it a lick, you might like the taste."
                         the_person "What? I don't know... it looks quite tasty though."

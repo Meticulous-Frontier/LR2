@@ -123,7 +123,7 @@ label cat_fight_crisis_enhanced_label():
             $ scene_manager.update_actor(loser, position = "stand4")
             $ scene_manager.update_actor(winner, position = "stand5")
             winner "Oh that's fucking IT! COME HERE BITCH!"
-            "[winner.title] throws herself at [loser.title]. Before you can say anything else they're grabbing at each others hair, yelling and screaming as they bounce around the office."
+            "[winner.title] throws herself at [loser.title]. Before you can say anything else they're grabbing at each others clothes, yelling and screaming as they bounce around the office."
             $ scene_manager.update_actor(winner, position = "stand3")
             #Random piece of clothing is lost from a random member of the fight, after which time they run off to get things organised again.
             $ the_clothing = loser.choose_strip_clothing_item()
@@ -148,9 +148,10 @@ label cat_fight_crisis_enhanced_label():
                     "[winner.title] looks at you, out of breath but obviously a little smug."
                     winner "Sorry sir, I won't let her get out of line like that again."
                     $ scene_manager.update_actor(winner, position = "walking_away")
-                    "She smooths her hair back and gets back to work. You decide to do the same."
+                    if not winner.is_bald():
+                        "She smooths her [winner.hair_description] back and gets back to work. You decide to do the same."
                 else:
-                    "After a minute of fighting [winner.title] gets her hands on [loser.title]'s hair and yanks on it hard. [loser.title] yells and struggles, but it's clear she's lost."
+                    "After a minute of fighting [winner.title] gets her hands on [loser.title]'s throat and squeezes hard. [loser.title] gaps and struggles, but it's clear she's lost."
                     $ scene_manager.update_actor(loser, emotion = "sad")
                     loser "Fine! Fine, you win!"
                     $ scene_manager.update_actor(winner, emotion = "happy")
@@ -166,7 +167,8 @@ label cat_fight_crisis_enhanced_label():
                     "[winner.title] looks at you, out of breath but obviously a little smug."
                     winner "Sorry sir, I won't let her get out of line like that again."
                     $ scene_manager.update_actor(winner, position = "walking_away")
-                    "She smooths her hair back and gets back to work. You decide to do the same."
+                    if not winner.is_bald():
+                        "She smooths her [winner.hair_description] back and gets back to work. You decide to do the same."
 
             else: #both >= 40
                 #Girls start pulling clothing off of each other on purpose until one is naked enough to be very embarrassed, then they give up.

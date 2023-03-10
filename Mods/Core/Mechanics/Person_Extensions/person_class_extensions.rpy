@@ -359,6 +359,24 @@ init -1 python:
 
     Person.set_pubic_style = set_pubic_style
 
+    def person_is_bald(self):
+        return self.hair_style == bald_hair
+
+    Person.is_bald = person_is_bald
+
+    def person_hair_description(self):
+        if self.is_bald():
+            return "bald head"
+        elif self.hair_style in [braided_bun]:
+            return "braided hair"
+        elif self.hair_style in [messy_short_hair, shaved_side_hair, short_hair, windswept_hair]:
+            return "short hair"
+        elif self.hair_style in [messy_ponytail, twintail, ponytail]:
+            return "pony tail"
+        return "long hair"
+
+    Person.hair_description = property(person_hair_description, None, None, "Returns a description for her hair for use ")
+
     def person_pubes_description_string(self):
         if self.pubes_style == shaved_pubes:
             return "bald"

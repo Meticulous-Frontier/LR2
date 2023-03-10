@@ -1030,7 +1030,10 @@ label candace_love_path_intro_label():
     $ the_person.draw_person(position = "blowjob")
     "You crack your eyes open and see Candi, working diligently to get you off with her mouth. You aren't sure how long she has been doing this, but it's definitely working."
     $ mc.change_locked_clarity(50)
-    "You reach down and run your hand through her hair, helping keep it out of her way. She looks up at you an makes eye contact... And then maintains is as she starts to give you long, slow strokes with her mouth."
+    if the_person.is_bald():
+        "You reach down and run your hand over her scalp. She looks up at you an makes eye contact... And then maintains it as she starts to give you long, slow strokes with her mouth."
+    else:
+        "You reach down and run your hand through her [the_person.hair_description], helping keep it out of her way. She looks up at you an makes eye contact... And then maintains it as she starts to give you long, slow strokes with her mouth."
     mc.name "God... I thought I was empty last time... Get ready here it cums again!"
     $ mc.change_locked_clarity(50)
     "She takes you out of her mouth and strokes you with her hands. She points you down at her chest as you begin to fire off your load."
@@ -1359,7 +1362,10 @@ label candace_meet_doctor_candace_label():
 
     "It's been about a week since you cured [the_person.title] of her bimboism..."
     "Well, mostly anyway. Since that time, talking with her is like talking to an entirely different person... But also the same."
-    "She still smells the same, she still twirls her hair around her finger the same way, she still smiles at you the same way."
+    if the_person.is_bald():
+        "She still smells the same, she still has the same naughty look in her eyes, she still smiles at you the same way."
+    else:
+        "She still smells the same, she still twirls her hair around her finger the same way, she still smiles at you the same way."
     "Yet, every time she opens her mouth and speaks, she is completely different."
     "A few days ago you walked by the break room while a trivia show was on, and [the_person.title] was spitting answers out before the host even finished with the question."
     "When she looks you in the eye and speaks, her words carry weight. You don't blow off her suggestions as if they are nonsense anymore."
@@ -1515,7 +1521,10 @@ label candace_meet_doctor_candace_label():
                 "Your grab her hips and move in close. She reaches between her legs and holds the tip of your erection, guiding you inside of her."
                 "You easily bottom out inside of her in one smooth stroke. She groans at the sensations of being filled again."
                 the_person "Okay... I'm done being cute. You can rough me up now!"
-                "You reach up and grab her hair."
+                if the_person.is_bald():
+                    "You reach up and grab her neck."
+                else:
+                    "You reach up and grab her hair."
                 mc.name "I think I'll do that."
                 "Pulling her head back, you start to thrust yourself inside of her at a rapid pace. It's time to give it to her good!"
                 call fuck_person(the_person,start_position = SB_doggy_standing, skip_intro = True, girl_in_charge = False, position_locked = True, skip_condom = True) from _fuck_doctor_candace_again_02

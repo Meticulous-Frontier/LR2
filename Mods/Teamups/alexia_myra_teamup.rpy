@@ -830,7 +830,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         "[the_loser.possessive_title] pulls off your cock for a second."
         the_loser "Hey, can you help me out? He normally does this for me, but he is a little busy right now."
         the_target "Mmmm... yeah? What do you need?"
-        the_loser "Would you grab my hair and like, you know, force me down on him?"
+        the_loser "Would you grab my head and like, you know, force me down on him?"
         the_target "Myr... you want me to... make you face fuck him?"
         the_loser "Yes please!"
         the_target "Fuck that's hot... Okay..."
@@ -914,7 +914,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
         $ the_loser.cum_in_mouth()
         $ scene_manager.update_actor(the_loser)
         "[the_loser.title] struggles to drink it all down, but doesn't try and pull off."
-        "When you finish, suddenly she pulls off when [the_target.title] lets go of her hair."
+        "When you finish, she suddenly pulls off when [the_target.title] lets go of her [the_loser.hair_description]."
         the_loser "Oh my god, I thought I was drowning..."
         if the_loser.opinion_score_drinking_cum() > 0:
             the_loser "It was amazing!"
@@ -2127,7 +2127,10 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
         mc.name "Sounds about right. Let's get this started off right then."
         "You push your weight down again, leaving her helplessly pinned to the couch as you start fucking her puckered hole earnestly."
     elif the_person.arousal < 50:   #Pull her hair
-        "Your reach up and run your hand though her hair, then grab a bunch at the base and pull back."
+        if the_person.is_bald():
+            "Your reach up and pull back by her neck."
+        else:
+            "Your reach up and run your hand though her hair, then grab a bunch at the base and pull back."
         the_person "Oh my god... ooohhhhh..."
         "She is moaning as you thrust yourself in hard and deep. [the_person.possessive_title] is taking your cock like a slut."
         mc.name "That's it. Be a good little cum dump and take it."
@@ -2234,7 +2237,10 @@ label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
         "She can only moan as you continue to have your way with her."
         "You push your weight down again, leaving her helplessly pinned to the couch as you fuck her."
     elif the_person.arousal < 50:   #Pull her hair
-        "Your reach up and run your hand though her hair, then grab a bunch at the base and pull back."
+        if the_person.is_bald():
+            "Your reach up and pull back by her neck."
+        else:
+            "Your reach up and run your hand though her hair, then grab a bunch at the base and pull back."
         the_person "Oh my god... ooohhhhh..."
         "She is moaning as you thrust yourself in hard and deep. [the_person.possessive_title] is taking your cock like a slut."
         mc.name "That's it. Be a good little cum dump and take it."

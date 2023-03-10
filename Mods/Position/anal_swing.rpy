@@ -74,7 +74,7 @@ label intro_SB_anal_swing(the_girl, the_location, the_object):
         "You rub the tip of your penis against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. You rub your lubricated penis against her ass to help prepare her for your initial penetration."
         "You rub your dick against her pussy again and gather more of her juices. She is already so wet you are soon slick with her secretions."
     else:
-        "You line yourself up with her ass, but the lack of lubricant makes it impossible to push it in. You pull on her hair to bring her head back around to face you."
+        "You line yourself up with her ass, but the lack of lubricant makes it impossible to push it in. You pull on her [the_girl.hair_description] to bring her head back around to face you."
         "You put your other hand in front of her face and she quickly opens her mouth and sucks on them. [the_girl.possessive_title] slobbers all over your fingers for a few a seconds before you pull them out with a loud pop"
         "You use your fingers to crudely work in and out of her ass a few times to help get it lubricated."
         "Deciding against making her suck on your fingers again after they've been in her ass, you spit a couple times down on her ass to get a bit more lubrication so you can penetrate her"

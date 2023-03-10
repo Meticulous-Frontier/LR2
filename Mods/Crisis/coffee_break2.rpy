@@ -79,7 +79,10 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                 "Help her":
                     loser "Awesome! Cum on my face real quick. The delivery guy just pulled into the parking lot."
                     $ scene_manager.update_actor(loser, position = "blowjob")
-                    "[loser.possessive_title] gives you a quick blowjob and you splatter your cum all over her face, she smears it around and into her hair for added effect."
+                    if loser.is_bald():
+                        "[loser.possessive_title] gives you a quick blowjob and you splatter your cum all over her face, she smears it around and over her bald head for added effect."
+                    else:
+                        "[loser.possessive_title] gives you a quick blowjob and you splatter your cum all over her face, she smears it around and into [loser.hair_description] for added effect."
                     $ loser.cum_on_face()
                     $ scene_manager.update_actor(loser, position = "stand3")
                     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = loser)

@@ -1065,7 +1065,10 @@ label HR_director_sexy_meeting_start_label(the_person):
             if the_report.get("guy orgasms", 0) > 0:
                 "After you finish, [the_person.possessive_title] runs her hands along her tits, rubbing your cum into her skin."
                 the_person "Mmm, god that was hot. Let me just enjoy this a minute before we move on with the meeting..."
-                "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
+                if the_person.is_bald():
+                    "You run your hands over her shiny scalp for a bit while she enjoys the warmth of your cum on her skin."
+                else:
+                    "You run your hands through her hair for a bit while she enjoys the warmth of your cum on her skin."
             else:
                 mc.name "That was great, but we have a long day ahead, could we finish this up another time?"
                 $ scene_manager.update_actor(the_person, emotion = "sad")

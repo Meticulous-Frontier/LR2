@@ -107,7 +107,7 @@ label scene_threesome_standing_embrace_fuck_girl_two_1(the_girl_1, the_girl_2, t
     the_girl_2 "Mmm, your bodies feel so good."
     "You thrust deep inside her and keep it there. You start to kiss the opposite side of [the_girl_2.possessive_title]'s neck."
     "[the_girl_1.title] is pinching and pulling at her nipples. You use one hand to grope her ass cheeks as you grind deep inside of her."
-    "[the_girl_2.possessive_title] is arching her back hard as the sensations overwhelm her. She reaches back with one hand and runs it through your hair, and does the same with [the_girl_1.title] with her other hand."
+    "[the_girl_2.possessive_title] is arching her back hard as the sensations overwhelm her. She reaches back with one hand and runs it through your hair, while sensually touching [the_girl_1.title]'s lips with her other hand."
     return
 
 label scene_threesome_standing_embrace_fuck_girl_two_2(the_girl_1, the_girl_2, the_location, the_object):

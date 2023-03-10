@@ -46,7 +46,10 @@ label scene_skull_fuck_4_enhanced(the_girl, the_location, the_object):
                             menu:
                                 "Keep fucking her throat" if the_girl.obedience >= 130:
                                     mc.name "Don't give up now [the_girl.title], you're doing great."
-                                    "You grab a handful of her hair to give you a better grip and don't let her go anywhere."
+                                    if the_girl.is_bald():
+                                        "You grab her head, locking your fingers behind her head to give you a better grip and control over her movements."
+                                    else:
+                                        "You grab a handful of her hair to give you a better grip and don't let her go anywhere."
                                     "[the_girl.title]'s throat starts to rhythmically clench down on the shaft of your dick."
                                     $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))
                                     $ mc.change_arousal(1)
@@ -108,7 +111,10 @@ label scene_skull_fuck_4_enhanced(the_girl, the_location, the_object):
 
             "[the_girl.title] yanks her head back and off of your hard cock. She gasps for breath as soon as you're clear."
             the_girl "That... was... intense... Ah..."
-            "It takes her a moment to catch her breath. You run your fingers through her hair while you let her recover."
+            if the_girl.is_bald():
+                "It takes her a moment to catch her breath. You run hand over her smooth head while you let her recover."
+            else:
+                "It takes her a moment to catch her breath. You run your fingers through her hair while you let her recover."
             the_girl "That was a long time, but I think I could do better next time... Don't go so easy on me, okay?"
             "With that she leans forward and you start fucking her pretty face again."
         else:

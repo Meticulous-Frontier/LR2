@@ -624,7 +624,10 @@ label anal_fetish_mom_intro_label():
     "You start to lift your shirt up over your head. As you do, you feel [the_person.possessive_title] lean forward and run her tongue up and down your cock."
     "Her mouth opens and her soft lips slowly descend onto your erection as you finish pulling your shirt off. When you look, she has her eyes closed, just enjoying servicing her son's erection."
     $ mc.change_locked_clarity(50)
-    "You run your hands through her hair. She doesn't stroke you at all, but you feel her tongue roaming all over the tip. It feels great. Eventually she pulls off."
+    if the_person.is_bald():
+        "You run your hands over her bald head. She doesn't stroke you at all, but you feel her tongue roaming all over the tip. It feels great. Eventually she pulls off."
+    else:
+        "You run your hands through her [the_person.hair_description]. She doesn't stroke you at all, but you feel her tongue roaming all over the tip. It feels great. Eventually she pulls off."
     the_person "Mmm, sorry, I needed a taste. Ready to start the movie?"
     mc.name "Ugghhh, yeah..."
     $ the_person.draw_person("standing_doggy")

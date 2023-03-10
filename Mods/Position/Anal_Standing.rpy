@@ -70,7 +70,7 @@ label intro_SB_anal_standing(the_girl, the_location, the_object):
         "You rub the tip of your penis against [the_girl.possessive_title]'s cunt, feeling how nice and wet she is already. You rub your lubricated penis against her ass to help prepare her for your initial penetration."
         "You rub your dick against her pussy again and gather more of her juices. She is already so wet you are soon slick with her secretions."
     else:
-        "You line yourself up with her ass, but the lack of lubricant makes it impossible to push it in. You pull on her hair to bring her head back around to face you."
+        "You line yourself up with her ass, but the lack of lubricant makes it impossible to push it in. You pull on her [the_girl.hair_description] to bring her head back around to face you."
         "You put your other hand in front of her face and she quickly opens her mouth and sucks on them. [the_girl.possessive_title] slobbers all over your fingers for a few a seconds before you pull them out with a loud pop."
         "You use your fingers to crudely work in and out of her ass a few times to help get it lubricated."
         "Deciding against making her suck on your fingers again after they've been in her ass, you spit a couple times down on her ass to get a bit more lubrication so you can penetrate her."
@@ -115,7 +115,10 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
                 "[the_girl.possessive_title] trembles at your words and touch."
                 "You pull her ass cheeks apart and revel in her ultimate submission, your cock in her forbidden hole."
                 the_girl "I couldn't stop you from fucking me... any way you want... even if I wanted to..."
-                "You reach forward and run a hand through her hair. You knead her scalp for a few seconds, then grasp her hair and pull it towards you."
+                if the_girl.is_bald():
+                    "You reach forward and run a hand over her shoulder. You knead them for a few seconds, then grasp on firmly and pull her towards you."
+                else:
+                    "You reach forward and run a hand through her hair. You knead her scalp for a few seconds, then grasp her hair and pull it towards you."
                 mc.name "That's right bitch, you're here to pleasure me, when, how, and wherever I want."
                 $ the_girl.discover_opinion("being submissive")
                 $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") * 3)
@@ -173,7 +176,10 @@ label scene_SB_anal_standing_1(the_girl, the_location, the_object):
             "After a bit longer of touching her, you straighten your back and begin to rock your hips again, continuing to fuck her ass."
 
         "Gag her with your fingers" if the_girl.get_opinion_score("being submissive") > 0:
-            "You grab a hold of the [the_girl.possessive_title]'s hair with one hand. You pull back causing her back to arch and she exclaims in surprise, her mouth opening slightly."
+            if the_girl.is_bald():
+                "You grab a hold of the [the_girl.possessive_title]'s throat with one hand. You pull back causing her back to arch and constricting her breathing, her mouth opening slightly."
+            else:
+                "You grab a hold of the [the_girl.possessive_title]'s hair with one hand. You pull back causing her back to arch and she exclaims in surprise, her mouth opening slightly."
             "You reach around and grab her shoulders, while forcing two fingers of your other hand into her mouth and down her throat as far as you can."
             if the_girl.sex_skills["Oral"] > 4:#expert
                 "[the_girl.possessive_title] moans in response."
@@ -275,9 +281,12 @@ label scene_SB_anal_standing_2(the_girl, the_location, the_object):
                 the_girl "You are stretching me out so much... Be careful back there, I'm not sure how much of this I can take!"
                 "You reassure her, and then slowly begin to fuck her tightest hole again."
         "Choke Her" if the_girl.get_opinion_score("being submissive") > 0:
-            "You take your hands off her hips and run them up her back. With one hand you grab the back of her hair and pull her head back."
+            if the_girl.is_bald():
+                "You take your hands off her hips and run them up her back. With one hand you grab her throat and pull her head back."
+            else:
+                "You take your hands off her hips and run them up her back. With one hand you grab the back of her hair and pull her head back."
             the_girl "Mmm, that's it, you can be rough with me if you want..."
-            "You pull her hair back hard enough to hurt a little, she arches her back in pleasure as you start to fuck her ass more roughly."
+            "You pull her [the_girl.hair_description] back hard enough to hurt a little, she arches her back in pleasure as you start to fuck her ass more roughly."
             mc.name "Of course I can, I can do anything I want to you, my little slut."
             "You run your other hand along the side of her neck. She begins to say something but you squeeze her neck and she stops."
             mc.name "Sshhh, there's no need for words right now."

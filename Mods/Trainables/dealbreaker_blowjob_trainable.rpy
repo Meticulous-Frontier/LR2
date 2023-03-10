@@ -130,7 +130,10 @@ label train_dealbreaker_blowjob_label(the_person):
     $ mc.change_locked_clarity(20)
 
     "You relax for a little while while [the_person.possessive_title] services your cock, stroking your shaft and sucking gently on your tip."
-    "You're pleasantly surprised when she reaches her other hand up and starts to gently play with your balls. You run your fingers through her hair and sigh contentedly."
+    if the_person.is_bald():
+        "You're pleasantly surprised when she reaches her other hand up and starts to gently play with your balls. You run your hand over her bald head and sigh contentedly."
+    else:
+        "You're pleasantly surprised when she reaches her other hand up and starts to gently play with your balls. You run your fingers through her hair and sigh contentedly."
 
     $ mc.change_locked_clarity(20)
 
