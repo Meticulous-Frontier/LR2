@@ -112,6 +112,8 @@ init 5 python:
                 watcher.add_situational_slut("public sex watcher", 5 * watcher.get_opinion_score("public sex"), "They're doing it right in front of me! That's so fucking hot!")
             elif watcher.get_opinion_score("public sex") < 0:
                 watcher.add_situational_slut("public sex watcher", 5 * watcher.get_opinion_score("public sex"), "Right here in front of me?! That's disgusting!")
+            if watcher.location in [strip_club, bdsm_room]:
+                watcher.add_situational_slut("at stripclub", 30, "I always get turned on at a strip club")
 
         return watcher #Get a random person from the people in the area, if there are any.
 
@@ -1274,6 +1276,7 @@ label watcher_check_enhanced(the_person, the_position, the_object, report_log): 
             $ the_person.discover_opinion("public sex")
 
         $ the_watcher.clear_situational_slut("public sex watcher")
+        $ the_watcher.clear_situational_slut("at stripclub")
 
     $ the_watcher = None
     return
