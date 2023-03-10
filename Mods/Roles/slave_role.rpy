@@ -13,17 +13,19 @@ init 10 python:
         return the_person.stay_wet
 
     def collar_slave_requirement(the_person):
-        if the_person.slave_collar == False:
-            return True
-        if the_person.slave_collar == True:
-            return False
+        return not the_person.slave_collar
 
     def slave_trim_pubes_requirement(the_person):
         if the_person.has_role(girlfriend_role) or the_person.has_role(affair_role):
             return False
-        if the_person.has_role(slave_role):
-            return True
-        return False
+        return True
+
+    def slave_shave_head_requirement(the_person):
+        if the_person.has_role(affair_role):
+            return False    # she still has a SO who would notice
+        if not the_person.location == dungeon:
+            return False    # only allow in dungeon
+        return not the_person.is_bald()
 
     def uncollar_slave_requirement(the_person):
         return the_person.slave_collar
@@ -96,8 +98,9 @@ init 10 python:
             person.obedience = 150
 
     stay_wet_action = ActionMod("Stay wet", stay_wet_requirement, "stay_wet_label", menu_tooltip = "Order your slave to stay aroused at all times.", category = "Slave Role")
-    calm_down_action = ActionMod("Calm down", calm_down_requirement, "stay_wet_label", menu_tooltip = "Let your slave calm down.", category = "Slave Role", allow_disable = False)
+    calm_down_action = ActionMod("Calm down", calm_down_requirement, "calm_down_label", menu_tooltip = "Let your slave calm down.", category = "Slave Role", allow_disable = False)
     slave_trim_pubes_action = ActionMod("Trim pubes", slave_trim_pubes_requirement, "slave_trim_pubes_label", menu_tooltip = "Order her to do a little personal landscaping. Tell her to wax it off, grow it out, or shape it into anything in between.", category = "Slave Role")
+    slave_shave_head_action = ActionMod("Shave her head", slave_shave_head_requirement, "slave_shave_head_label", menu_tooltip = "Make her submission complete by shaving her head.", category = "Slave Role")
 
     collar_slave_action = ActionMod("Place collar on [the_person.title]", collar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Put a collar of ownership on the target, ensure that their obedience stays high.", category = "Slave Role")
     uncollar_slave_action = ActionMod("Remove collar from [the_person.title]", uncollar_slave_requirement, "slave_collar_person_label", menu_tooltip = "Remove the collar, declaring them a free spirit.", category = "Dungeon Actions", allow_disable = False)
@@ -105,22 +108,20 @@ init 10 python:
     wakeup_duty_action = ActionMod("Wake me up in the morning", wakeup_duty_requirement, "wakeup_duty_label", menu_tooltip = "Have your slave wake you up in the morning", category = "Slave Role")
     wakeup_duty_crisis = Action("Slave Alarm Clock", wakeup_duty_crisis_requirement, "slave_alarm_clock_label")
 
-    slave_role = Role("Slave", [stay_wet_action, calm_down_action, collar_slave_action, uncollar_slave_action, slave_trim_pubes_action, wakeup_duty_action], \
+    slave_role = Role("Slave", [stay_wet_action, calm_down_action, collar_slave_action, uncollar_slave_action, slave_trim_pubes_action, slave_shave_head_action, wakeup_duty_action], \
         on_turn = slave_role_on_turn, hidden = False)
 
 label stay_wet_label(the_person): # Can expand with dialogue options and degrees of arousal, but just setting up basic actions for now.
+    "You order [the_person.possessive_title] to keep herself wet and ready at all times for you."
+    if the_person.arousal < 50:
+        $ the_person.arousal = 50
+    $ the_person.stay_wet = True
+    return
 
-    if the_person.stay_wet == False:
-        "You order [the_person.possessive_title] to keep herself wet and ready at all times for you."
-        if the_person.arousal < 50:
-            $ the_person.arousal = 50
-        $ the_person.stay_wet = True
-
-    elif the_person.stay_wet == True:
-        "You tell [the_person.possessive_title] to calm their tits."
-        $ the_person.stay_wet = False
-        $ the_person.reset_arousal()
-
+label calm_down_label(the_person):
+    "You tell [the_person.possessive_title] to calm their tits."
+    $ the_person.stay_wet = False
+    $ the_person.reset_arousal()
     return
 
 label slave_collar_person_label(the_person):
@@ -163,6 +164,43 @@ label slave_trim_pubes_label(the_person):
             the_person "Yes Sir, it will be ready for your inspection tomorrow, [the_person.mc_title]."
             $ add_girlfriend_do_trim_pubes_action(the_person, pubes_choice, 0)
     $ del pubes_choice
+    return
+
+label slave_shave_head_label(the_person):
+    mc.name "Would you like to please me, slave?"
+    the_person "Yes, Master."
+    mc.name "Don't you want to know how?"
+    the_person "Anything I can do for you, Maser."
+    mc.name "Good...I have decided that you hairstyle is not to my liking."
+    the_person "How would you like me to style it, Master."
+    mc.name "You don't need to do anything, I will style it for you."
+    the_person "Master?"
+    mc.name "I've decided that taking care of your hair is diminishing the time you can spend serving me."
+    mc.name "So, I will shave your pretty head, so you don't have to worry about that anymore."
+    if the_person.obedience < 240:
+        the_person "Oh, Master, please, don't remove my hair."
+        mc.name "That's not you decision slave, or did you want to disobey me?"
+        the_person "{size=16}...no master...{/size}"
+    else:
+        the_person "If that is your wish, Master."
+
+    mc.name "Come, sit here."
+    $ the_person.draw_person(position = "sitting")
+
+    "You take out your clippers and get to work."
+
+    $ the_person.clean_cache() # force rebuild of displayable
+    $ the_person.hair_style = bald_hair.get_copy()
+    $ the_person.draw_person(position = "sitting")
+
+    "After about 10 minutes, most of her hair is gone and you continue with a razor."
+
+    "You slide you hand over her smooth head."
+    mc.name "There, all done."
+    "She turns and looks into the mirror."
+
+    $ the_person.change_obedience(20)
+    the_person "Thank you, Master. I live to serve."
     return
 
 label wakeup_duty_label(the_person):
