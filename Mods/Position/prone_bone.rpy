@@ -38,17 +38,24 @@ label prone_decision_label(the_girl, the_location, the_object, the_position):
         return None
 
     mc.name "That's too bad. I'm not done with you yet though."
+
+    call check_position_willingness_bugfix(the_person, prone_bone, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix_prone_decision
+    if not _return == 1:
+        the_girl "I'm sorry [the_girl.mc_title], but I really had enough."
+        return None
+
+    $ prone_bone.redraw_scene(the_girl)
     if not the_object.has_trait(prone_bone.requires_location):
         call pick_object(the_girl, prone_bone) from _call_pick_object_in_prone_01
         $ the_object = _return
+
     if the_position.position_tag == "missionary":
         "You grab [the_girl.title]'s hips and roll her over onto her stomach."
     elif the_position.position_tag == "doggy":
         "You grab [the_girl.title]'s ass and push her forward onto her stomach."
     else:
         "You push [the_girl.title] down onto the [the_object.name] on her stomach."
-    #TODO check her willingness here, if she is not usually willing take a happiness hit. Can probably copy paste code from sex system
-    $ prone_bone.redraw_scene(the_girl)
+
     if the_girl.is_submissive():
         "[the_girl.possessive_title] gives a moan as you line yourself up and push back into her. She is completely helpless but submits to you obediently."
         $ the_girl.change_happiness(5)
@@ -76,6 +83,7 @@ label intro_prone_bone(the_girl, the_location, the_object):
     else:
         the_girl "Okay, just don't do anything too crazy, okay?"
         $ the_girl.change_obedience(1)
+    $ prone_bone.redraw_scene(the_girl)
     "She lies down on the [the_object.name], waiting while you climb on top of her. Before you get started, you give her ass a couple smacks with your dick."
     "[the_girl.possessive_title] looks back at you as you line your cock up with her [the_girl.pubes_description] pussy. She moans as you slide into her."
     return
@@ -86,6 +94,7 @@ label taboo_break_prone_bone(the_girl, the_location, the_object):
     $ the_girl.call_dialogue(prone_bone.associated_taboo+"_taboo_break")
     the_girl "Okay, just don't do anything too crazy, okay?"
     $ the_girl.change_obedience(2)
+    $ prone_bone.redraw_scene(the_girl)
     "She lies down on the [the_object.name] on her belly. She wiggles her ass at you, waiting while you climb on top of her."
     "[the_girl.possessive_title] looks back at you as you line your cock up with her [the_girl.pubes_description] pussy. She moans as you slide into her."
     return
@@ -262,7 +271,7 @@ label scene_prone_bone_3(the_girl, the_location, the_object):
                     $ mc.condom = False
                     $ use_condom = False
                 "Leave it on":
-                    "You decide to leave it on for now."
+                    mc.name "Well maybe I will do that in a minute, you little slut."
         "Degrade her":
             mc.name "Damn right it's good. You are such a cock hungry slut, your holes are just begging to be stuffed."
             mc.name "Don't worry, I'm gonna fuck your slutty holes until you can barely walk, bitch!"

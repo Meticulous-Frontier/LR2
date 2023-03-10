@@ -38,17 +38,24 @@ label prone_anal_decision_label(the_girl, the_location, the_object, the_position
         return None
 
     mc.name "That's too bad. I'm not done with you yet though."
+
+    call check_position_willingness_bugfix(the_person, prone_anal, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix_prone_anal_decision
+    if not _return == 1:
+        the_girl "I'm sorry [the_girl.mc_title], but I really had enough."
+        return None
+
     if not the_object.has_trait(prone_anal.requires_location):
         call pick_object(the_girl, prone_anal) from _call_pick_object_in_prone_anal_01
         $ the_object = _return
+
+    $ prone_anal.redraw_scene(the_girl)
     if the_position.position_tag == "missionary":
         "You grab [the_girl.title]'s hips and roll her over onto her stomach."
     elif the_position.position_tag == "doggy":
         "You grab [the_girl.title]'s ass and push her forward onto her stomach."
     else:
         "You push [the_girl.title] down onto the [the_object.name] on her stomach."
-    #TODO check her willingness here, if she is not usually willing take a happiness hit. Can probably copy paste code from sex system
-    $ prone_anal.redraw_scene(the_girl)
+
     if the_girl.is_submissive():
         "[the_girl.possessive_title] gives a moan as you line yourself up and push back into her ass. She is completely helpless but submits to you obediently."
         $ the_girl.change_happiness(5)
@@ -67,7 +74,7 @@ label intro_prone_anal(the_girl, the_location, the_object):
     if the_girl.is_submissive():
         the_girl "I'll do whatever you want, you always make me feel so good too..."
         $ the_girl.change_stats(happiness = 1, obedience = 1)
-        mc.name "Yeah, 'atta girl.'"
+        mc.name "Yeah, that's my girl.'"
     elif the_girl.is_dominant():
         the_girl "Is that so? What do I get out of it?"
         mc.name "Why should I care? Lay down."
@@ -76,8 +83,9 @@ label intro_prone_anal(the_girl, the_location, the_object):
     else:
         the_girl "Okay, just don't do anything too crazy, okay?"
         $ the_girl.change_obedience(1)
+    $ prone_anal.redraw_scene(the_girl)
     "She lies down on the [the_object.name], waiting while you climb on top of her. Before you get started, you give her ass a couple smacks with your dick."
-    "[the_girl.possessive_title] looks back at you as you line your cock up with her puckered hole. She groans as you slide into her."
+    "[the_girl.possessive_title] looks back at you as you line your cock up with her puckered hole. She groans as you slide your cock into her intestines."
     return
 
 label taboo_break_prone_anal(the_girl, the_location, the_object):
@@ -86,6 +94,7 @@ label taboo_break_prone_anal(the_girl, the_location, the_object):
     $ the_girl.call_dialogue(prone_anal.associated_taboo+"_taboo_break")
     the_girl "Okay, just don't do anything too crazy, okay?"
     $ the_girl.change_obedience(2)
+    $ prone_anal.redraw_scene(the_girl)
     "She lies down on the [the_object.name] on her belly. She wiggles her ass at you, waiting while you climb on top of her."
     "[the_girl.possessive_title] looks back at you as you line your cock up with her puckered hole. She groans as you slide into her."
     return
@@ -267,7 +276,7 @@ label scene_prone_anal_3(the_girl, the_location, the_object):
                     $ mc.condom = False
                     $ use_condom = False # don't put a condom on again this loop
                 "Leave it on":
-                    "You decide to leave it on for now."
+                    mc.name "Well maybe I will do that in a minute, you little ass slut."
         "Degrade her":
             mc.name "Damn right it's good. You are such a cock hungry slut, your holes are just begging to be stuffed."
             mc.name "Don't worry, I'm gonna fuck your slutty holes until you can barely walk, bitch!"
