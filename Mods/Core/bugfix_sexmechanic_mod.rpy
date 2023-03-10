@@ -560,10 +560,6 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             call screen enhanced_main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo, condition = condition, allow_transitions = allow_transitions)]))
             $ round_choice = _return #This gets the players choice for what to do this round.
 
-        if not allow_transitions and mc.condom and not round_choice in ["Leave", "Girl Leave"]: # we finished and jump right back in thanks to perk
-            call put_on_next_condom_routine(the_person) from _call_put_on_next_condom_routine_1
-
-        $ allow_transitions = True
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue" or round_choice == "early_orgasm":
             if round_choice == "Change": # If we are changing we first select and transition/intro the position, then run a round of sex. If we are continuing we ignore all of that
@@ -628,7 +624,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             $ position_choice.call_transition(start_position, the_person, mc.location, object_choice)
                     # redraw after transition not before
                     $ position_choice.redraw_scene(the_person)
+            if round_choice == "Continue" and not allow_transitions:
+                call check_position_willingness_bugfix(the_person, position_choice, ignore_taboo = ignore_taboo) from _call_check_position_willingness_bugfix_2
 
+            $ allow_transitions = True
             $ start_position = None #Clear start positions/objects so they aren't noticed next round.
             $ start_object = None
             # $ renpy.say(None, "Continue round => Position: " + position_choice.name + ", object: " + object_choice.name)
@@ -676,8 +675,6 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                         if perk_system.has_ability_perk("Serum: Energy Regeneration") and mc_serum_energy_regen.get_trait_tier() >= 2 and mc.energy > 30:
                             $ mc.recently_orgasmed = False
                             $ allow_transitions = False
-                            if use_condom:  # you already determined you are going to fuck her with condom
-                                $ mc.condom = True
                             "Despite your orgasm, because of your Energy Regeneration Serum, your cock quickly gets hard again, allowing you to continue [position_choice.verbing] [the_person.possessive_title] if you want."
                     if position_choice.requires_hard and mc.recently_orgasmed:
                         "Your post-orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
@@ -721,6 +718,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
         elif isinstance(round_choice, Position): #The only non-strings on the list are positions we are changing to
             call check_position_willingness_bugfix(the_person, round_choice, ignore_taboo = ignore_taboo, skip_dialog = True) from _call_check_position_willingness_bugfix_1
+            $ allow_transitions = True
             if _return:
                 $ round_choice.redraw_scene(the_person)
                 if not ignore_taboo and the_person.has_taboo(round_choice.associated_taboo):
@@ -1230,6 +1228,8 @@ label put_on_next_condom_routine(the_person):
         "You pull out another condom, [the_person.title] watches disappointingly while you slide it on."
     else:
         "You pull out another condom, [the_person.title] watches while you slide it on."
+
+    $ mc.condom = True
     return
 
 
