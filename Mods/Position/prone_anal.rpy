@@ -1,7 +1,7 @@
 #Prone anal position. Girl is pinned down on her front, very submissive position, so we make sure to use lots of references to submissive or dominant girls in dialogue and actions.
 #These actions generally increase obedience and sluttiness in dominant girls, increase happiness in submissives.
 init python:
-    prone_anal = Position(name = "Prone Anal", slut_requirement = 65, slut_cap = 95, requires_hard = True, requires_large_tits = False,
+    prone_anal = Position(name = "Prone Anal", slut_requirement = 75, slut_cap = 95, requires_hard = True, requires_large_tits = False,
         position_tag = "back_peek", requires_location = "Lay", requires_clothing = "Vagina", skill_tag = "Anal",
         girl_arousal = 14, girl_energy = 0,
         guy_arousal = 16, guy_energy = 14,
