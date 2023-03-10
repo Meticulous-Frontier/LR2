@@ -558,6 +558,9 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             call screen enhanced_main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo, condition = condition, allow_transitions = allow_transitions)]))
             $ round_choice = _return #This gets the players choice for what to do this round.
 
+        if not allow_transitions and mc.condom: # we finished and jump right back in thanks to perk
+            call put_on_next_condom_routine(the_person) from _call_put_on_next_condom_routine_1
+
         $ allow_transitions = True
         # Now that a round_choice has been picked we can do something.
         if round_choice == "Change" or round_choice == "Continue" or round_choice == "early_orgasm":
@@ -899,8 +902,8 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
                 else:
                     mc.name "I'm going to fuck your slutty asshole raw."
         elif use_condom:  # you already determined you are going to fuck her with condom
-            "You quickly put on another condom and continue to fuck her."
             $ mc.condom = True
+            call put_on_next_condom_routine(the_person) from _call_put_on_next_condom_routine_2
 
     if willing == 1 and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal" or the_position.name == "Dildo Fuck"):
         # make sure we move skirts out of the way when rendering
@@ -1204,6 +1207,27 @@ label put_on_condom_routine(the_person):
         "You pull out a condom from your wallet and rip open the package. [the_person.title] watches while you slide it on."
 
     $ mc.condom = True
+    return
+
+label put_on_next_condom_routine(the_person):
+    if the_person.sex_skills["Oral"] > 3 and the_person.get_opinion_score("giving blowjobs") > 1: #Knows what she's doing
+        "[the_person.title] quickly puts another condom between her lips and rolls down the condom while swallowing your member."
+        if the_person.get_opinion_score("being submissive") > 0:
+            "She keeps going to the very base of your cock, deep-throating you and entirely covering your cock."
+        else:
+            "Once she has rolled on about two thirds of the condom she brings her head back up and rolls the rest on with her hand."
+    elif the_person.get_opinion_score("giving handjobs") > 0:
+        the_person "Here, let me put another condom on."
+    elif the_person.get_opinion_score("bareback sex") < 0: # condoms are good
+        if the_person.is_dominant():
+            the_person "Quick, put on another condom!"
+            "You comply and quickly slip over another condom."
+        else:
+            "[the_person.title] watches eagerly while you roll on another condom."
+    elif the_person.get_opinion_score("bareback sex") > 0:
+        "You pull out another condom, [the_person.title] watches disappointingly while you slide it on."
+    else:
+        "You pull out another condom, [the_person.title] watches while you slide it on."
     return
 
 
