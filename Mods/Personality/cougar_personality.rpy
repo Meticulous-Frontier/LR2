@@ -883,7 +883,7 @@ label cougar_cum_mouth(the_person):
 label cougar_cum_pullout(the_person):
     # Lead in: "I'm going to cum!"
     if mc.condom:
-        the_person "Come on [the_person.mc_title], shoot your fertile semen right into me!"
+        the_person "Come on [the_person.mc_title], shoot your fertile semen into that condom while you fuck me!"
 
     else:
         if the_person.wants_creampie():
