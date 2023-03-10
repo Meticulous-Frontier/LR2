@@ -560,7 +560,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
             call screen enhanced_main_choice_display(build_menu_items([build_round_choice_menu(the_person, position_choice, position_locked, object_choice, ignore_taboo = ignore_taboo, condition = condition, allow_transitions = allow_transitions)]))
             $ round_choice = _return #This gets the players choice for what to do this round.
 
-        if not allow_transitions and mc.condom and not round_choice == "Leave": # we finished and jump right back in thanks to perk
+        if not allow_transitions and mc.condom and not round_choice in ["Leave", "Girl Leave"]: # we finished and jump right back in thanks to perk
             call put_on_next_condom_routine(the_person) from _call_put_on_next_condom_routine_1
 
         $ allow_transitions = True
