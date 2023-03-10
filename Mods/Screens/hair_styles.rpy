@@ -15,7 +15,7 @@ screen hair_creator(person, old_hair_style, old_pubes_style): ##Pass the person 
 
     #default valid_categories = ["Hair Style", "Pubic Style"] #Holds the valid list of categories strings to be shown at the top.
     default categories_mapping = { # list of clothing | Apply method | Valid / sensitive check | nudity switch | tooltip string
-        "Hair Style": [hair_styles, Person.set_hair_style, True, use_current_outfit],
+        "Hair Style": [[x for x in hair_styles if not x in [bald_hair]] , Person.set_hair_style, True, use_current_outfit],
         "Pubic Style": [pube_styles, Person.set_pubic_style, ophelia_person_wants_pubic_hair_included(person), use_nude] #Set the False bool to either true or a custom requirement function
     }
 
