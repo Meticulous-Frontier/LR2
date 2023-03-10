@@ -36,7 +36,7 @@ init 2 python:
 
         #global sakari_role
         global sakari
-        sakari = make_person(name = "Sakari", last_name ="Greene", age = 42, body_type = "thin_body", face_style = "Face_14",  tits="C", height = 0.92, hair_colour=["bald", [0.414, 0.305, 0.258,0]], hair_style = short_hair, skin="tan" , \
+        sakari = make_person(name = "Sakari", last_name ="Greene", age = 42, body_type = "thin_body", face_style = "Face_14",  tits="C", height = 0.92, hair_colour="black", hair_style = bald_hair, skin="tan" , \
             eyes = "brown", personality = sakari_personality, name_color = "#228b22", dial_color = "228b22" , job = unemployed_job, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [4,2,2,2], sluttiness = 7, obedience_range = [100, 120], happiness = 88, love = 0, \
             relationship = "Single", kids = 1, force_random = True, base_outfit = sakari_base_outfit, type = 'story',
@@ -46,8 +46,6 @@ init 2 python:
         sakari.generate_home()
         sakari.set_schedule(sakari.home, the_times = [0,1,2,3,4])   #Hide Sakari at home until we are ready to use her
         sakari.home.add_person(sakari)
-        sakari.hair_colour = ["bald", [0.414, 0.305, 0.258,0]]
-        sakari.hair_style.colour = [0.414, 0.305, 0.258,0]
 
         sakari.event_triggers_dict["intro_complete"] = False    # True after first talk
         sakari.event_triggers_dict["is_sick"] = False           # True after intro. This triggers her energy degeneration

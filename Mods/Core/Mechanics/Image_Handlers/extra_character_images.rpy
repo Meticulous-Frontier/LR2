@@ -34,6 +34,11 @@ init 2 python:
 
     master_clothing_offset_dict["Cop_Blouse"] = {"cowgirl":(148,273), "missionary":(158,192), "kissing":(88,168), "sitting":(238,269), "against_wall":(48,158), "back_peek":(107,190), "blowjob":(98,314), "stand4":(96,186), "stand5":(111,174), "standing_doggy":(75,164), "kneeling1":(156,313), "walking_away":(100,172), "doggy":(135,464), "stand2":(51,204), "stand3":(99,160)}
 
+    # extra hair style BALD
+
+    bald_hair = Clothing("Bald", 1, True, True, "Bald", False, False, 0)
+    hair_styles.append(bald_hair)
+
     #################################################################
     # override image get functions to allow for mod image retrieval #
     #################################################################
