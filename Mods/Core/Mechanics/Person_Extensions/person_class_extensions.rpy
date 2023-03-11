@@ -1489,17 +1489,6 @@ init -1 python:
 
     Person.change_base_fertility = person_change_base_fertility
 
-    ## CHANGE WILLPOWER EXTENSION
-    # changes the willpower of a person by set amount
-    def change_willpower(self, amount): #Logs change in willpower and shows new total.
-        self.willpower += amount
-        if self.willpower < 0:
-            self.willpower = 0
-        return self.willpower
-
-    # attach to person object
-    Person.change_willpower = change_willpower
-
     def draw_person_enhanced(self,position = None, emotion = None, special_modifier = None, show_person_info = True, lighting = None, background_fill = "auto", the_animation = None, animation_effect_strength = 1.0,
         draw_layer = "solo", display_transform = None, extra_at_arguments = None, display_zorder = None, wipe_scene = True): #Draw the person, standing as default if they aren't standing in any other position.
 
