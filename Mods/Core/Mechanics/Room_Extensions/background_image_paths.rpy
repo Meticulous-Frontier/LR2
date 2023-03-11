@@ -7,16 +7,15 @@ init -2 python:
     def room_background_image(name, darken = True):
         handle = get_file_handle(name)
 
-        if not darken:
-            return Image(handle)
+        return Image(handle)
 
-        early_morning_background = darken_background(Image(handle))
-        morning_background = Image(handle)
-        afternoon_background = Image(handle)
-        evening_background = Image(handle)
-        night_background = darken_background(Image(handle))
+        # early_morning_background = darken_background(Image(handle))
+        # morning_background = Image(handle)
+        # afternoon_background = Image(handle)
+        # evening_background = Image(handle)
+        # night_background = darken_background(Image(handle))
 
-        return [early_morning_background, morning_background , afternoon_background, evening_background, night_background]
+        # return [early_morning_background, morning_background , afternoon_background, evening_background, night_background]
 
     def prop_image(name):
         return Image(get_file_handle(name))

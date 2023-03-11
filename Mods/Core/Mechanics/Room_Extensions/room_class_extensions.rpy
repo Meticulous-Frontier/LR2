@@ -35,6 +35,16 @@ init -1 python:
 
     Room.__ne__ = room_ne
 
+    def get_room_darken(self):
+        if not hasattr(self, "_darken"):
+            self._darken = True
+        return self._darken
+
+    def set_room_darken(self, value):
+        self._darken = value
+
+    Room.darken = property(get_room_darken, set_room_darken, None, "Does location follow darkness outside.")
+
     #################################
     # Extend Default Room Functions #
     #################################
@@ -61,6 +71,23 @@ init -1 python:
     ########################
     # Added Room Functions #
     ########################
+    darken_matrix = im.matrix.saturation(0.9)*im.matrix.tint(.9,.9,.9)*im.matrix.brightness(-0.15)
+
+    def show_background_enhanced(self):
+        if isinstance(self.background_image, list): # convert to single image
+            self.background_image = self.background_image[2]
+
+        if (time_of_day == 0 or time_of_day == 4) and self.darken:
+            the_background_image = im.MatrixColor(self.background_image, darken_matrix)
+        else:
+            the_background_image = self.background_image
+
+        renpy.scene("master")
+        renpy.show(name = self.name, what = the_background_image, layer = "master")
+        return
+
+    Room.show_background = show_background_enhanced
+
     def purchase_room_on_buy_function(room):
         room.visible = True
 

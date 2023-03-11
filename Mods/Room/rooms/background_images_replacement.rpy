@@ -134,27 +134,28 @@ init -1 python:
         return
 
     def show_lily_room_background(*args, **kwargs):
-        bedroom_image = lily_bedroom_background[time_of_day]
-        renpy.show("emily_bedroom", what = Image(bedroom_image), layer = "master")
+        if time_of_day == 0 or time_of_day == 4:
+            renpy.show("student_study", what = im.MatrixColor(bedroom_background, darken_matrix), layer = "master")
+        else:
+            renpy.show("student_study", what = bedroom_background, layer = "master")
         return
 
     def show_university_library_background(*args, **kwargs):
-        library_image = university_library_backgrounds[time_of_day]
-        renpy.show("university_library", what=Image(library_image), layer = "master")
+        if time_of_day == 0 or time_of_day == 4:
+            renpy.show("university_library", what = im.MatrixColor(university_library_backgrounds, darken_matrix), layer = "master")
+        else:
+            renpy.show("university_library", what = university_library_backgrounds, layer = "master")
         return
 
-    def show_university_study_room_background(darken = False):
-        university_study_room_image = university_study_room_backgrounds[time_of_day]
-        if darken:
-            university_study_room_image = im.MatrixColor(university_study_room_image, im.matrix.saturation(0.9)*im.matrix.tint(.9,.9,.9)*im.matrix.brightness(-0.25))
-        renpy.show("university_study_room", what=Image(university_study_room_image), layer = "master")
+    def show_university_study_room_background():
+        renpy.show("university_study_room", what = university_study_room_backgrounds, layer = "master")
         return
 
     def show_concert_hall_background(darken = False):
-        concert_hall_image = concert_hall_backgrounds[time_of_day]
         if darken:
-            concert_hall_image = im.MatrixColor(concert_hall_image, im.matrix.saturation(0.9)*im.matrix.tint(.9,.9,.9)*im.matrix.brightness(-0.25))
-        renpy.show("concert_hall", what = Image(concert_hall_image), layer = "master")
+            renpy.show("concert_hall", what = im.MatrixColor(concert_hall_backgrounds, darken_matrix * im.matrix.brightness(-0.15)), layer = "master")
+        else:
+            renpy.show("concert_hall", what = concert_hall_backgrounds, layer = "master")
         return
 
 label updated_room_background(stack):
@@ -182,13 +183,16 @@ label updated_room_background(stack):
         office_store.background_image = standard_office_store_backgrounds
         electronics_store.background_image = standard_electronics_store_backgrounds
         home_store.background_image = standard_home_improvement_store_backgrounds
+        changing_room.background_image = standard_changing_room_backgrounds
 
         if "her_hallway" in globals(): # check if room exists
             her_hallway.background_image = standard_her_hallway_backgrounds
         laundry_room = Room("Laundry Room", "Laundry Room", [], standard_laundry_room_backgrounds,[make_bed(), make_wall(), make_floor()],[],[],False,[-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
         if not laundry_room in list_of_places:
             list_of_places.append(laundry_room)
-        changing_room.background_image = standard_changing_room_backgrounds
+
+        if not home_bathroom in list_of_places: # make sure the bathroom is accessible
+            list_of_places.append(home_bathroom)
 
         # bedrooms are linked in the person extensions, one time assignment of on of the bedrooms to a person
         prostitute_bedroom = Room("Prostitute Bedroom", "Prostitute Bedroom", [], prostitute_bedroom_background,[make_bed(), make_wall(), make_window(), make_love_rug()],[],[],False,[-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
@@ -216,6 +220,24 @@ label updated_room_background(stack):
 
         # student mom (rich uptown snob)
         christina.home.background_image = luxury_apartment_backgrounds
+
+        # disable darken for follwing rooms
+        christina.home.darken = False
+        cousin.home.darken = False
+        dungeon.darken = False
+        strip_club.darken = False
+        bdsm_room.darken = False
+        downtown_bar.darken = False
+        gym.darken = False
+        changing_room.darken = False
+        downtown_hotel.darken = False
+        downtown_hotel_room.darken = False
+        police_station.darken = False
+        police_jail.darken = False
+        home_bathroom.darken = False
+        work_bathroom.darken = False
+        her_hallway.darken = False
+
         # instead of changing the role label, just hook a python function before the label
         # to show the correct background for emily study at home
         hook_label("student_study_home", show_lily_room_background)
