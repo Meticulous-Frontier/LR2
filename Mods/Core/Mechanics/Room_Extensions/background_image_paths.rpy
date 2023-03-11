@@ -8,12 +8,12 @@ init -2 python:
         handle = get_file_handle(name)
 
         if not darken:
-            return Image(Image(handle))
+            return Image(handle)
 
         early_morning_background = darken_background(Image(handle))
-        morning_background = Image(Image(handle))
-        afternoon_background = Image(Image(handle))
-        evening_background = Image(Image(handle))
+        morning_background = Image(handle)
+        afternoon_background = Image(handle)
+        evening_background = Image(handle)
         night_background = darken_background(Image(handle))
 
         return [early_morning_background, morning_background , afternoon_background, evening_background, night_background]
