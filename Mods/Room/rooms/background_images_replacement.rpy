@@ -108,6 +108,8 @@ init -1 python:
     standard_police_jail_backgrounds = room_background_image("Police_Jail_Background.jpg", darken = False)
     standard_coffee_shop_backgrounds = room_background_image("Coffee_Shop_Background.jpg")
     standard_gaming_cafe_backgrounds = room_background_image("Internet_Cafe_Background.jpg")
+    standard_electronics_store_backgrounds = room_background_image("Home_Improvement_Store_Background.jpg")
+    standard_home_improvement_store_backgrounds = room_background_image("Electronics_Store_Background.jpg")
     luxury_apartment_backgrounds = room_background_image("Luxury_Apartment_Background.jpg", darken = False)
     university_library_backgrounds = room_background_image("University_Library_Background.jpg")
     university_study_room_backgrounds = room_background_image("Study_Room_Background.jpg")
@@ -178,6 +180,9 @@ label updated_room_background(stack):
         gym.background_image = standard_gym_backgrounds
         clothing_store.background_image = standard_clothing_store_backgrounds
         office_store.background_image = standard_office_store_backgrounds
+        electronics_store.background_image = standard_electronics_store_backgrounds
+        home_store.background_image = standard_home_improvement_store_backgrounds
+
         if "her_hallway" in globals(): # check if room exists
             her_hallway.background_image = standard_her_hallway_backgrounds
         laundry_room = Room("Laundry Room", "Laundry Room", [], standard_laundry_room_backgrounds,[make_bed(), make_wall(), make_floor()],[],[],False,[-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
