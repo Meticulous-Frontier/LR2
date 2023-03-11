@@ -12,7 +12,7 @@ init 10 python:
         return ashley.obedience_messages
 
     def ashley_story_teamup_list():
-        return ashley.teamup_messages
+        return [[stephanie, ashley.teamup_messages[0]], [lily, ashley.teamup_messages[1]]]
 
     def ashley_story_other_list():
         #Ashley's other story indices:
