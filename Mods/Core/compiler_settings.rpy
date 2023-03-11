@@ -16,6 +16,7 @@ init -2 python:
     build.classify("game/customizations/**.**", None)
     build.classify("**.", None)
     build.classify("**.ps1", None)
+    build.classify('**.json', None)
     # exclude icon images from build
     build.classify("game/Mods/Core/Images/**.ico", None)
     build.classify("game/Mods/Core/Images/**.icns", None)
