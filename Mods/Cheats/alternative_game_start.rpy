@@ -107,7 +107,11 @@ label alternative_start():
     $ [[persistent.stats["cha"],persistent.stats["int"],persistent.stats["foc"]], [persistent.stats["h_skill"],persistent.stats["m_skill"],persistent.stats["r_skill"],persistent.stats["p_skill"],persistent.stats["s_skill"]], [persistent.stats["F_skill"],persistent.stats["O_skill"],persistent.stats["V_skill"],persistent.stats["A_skill"]]] = _return
     $ [persistent.stats["name"],persistent.stats["l_name"],persistent.stats["b_name"]] = [store.name,store.l_name,store.b_name]
 
+
     python:
+        renpy.show("Loading", layer = "solo", at_list = [truecenter], what = Image(get_file_handle("creating_world.png")))
+        renpy.pause(0.5)
+        renpy.game.interface.timeout(30)
         if easy_mode:
             for array in range(0, len(return_arrays)):
                 for val in range(0, len(return_arrays[array])):
@@ -135,6 +139,7 @@ label alternative_start():
             purchase_policy(business_size_1_policy, ignore_cost = True)
             purchase_policy(theoretical_research, ignore_cost = True)
             purchase_policy(max_attention_increase_1_policy, ignore_cost = True)
+            renpy.hide("Loading", layer = "solo")
 
     $ renpy.block_rollback()
     menu:
