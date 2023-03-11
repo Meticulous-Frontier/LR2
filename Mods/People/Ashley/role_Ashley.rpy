@@ -2222,7 +2222,7 @@ label ashley_submission_blowjob_taboo_restore_label():
         "But it keeps happening...\n{color=#ff0000}{size=18}Requires repeated submission{/size}{/color} (disabled)" if ashley.event_triggers_dict.get("sub_blowjob_count", 0) < 3:
             pass
 
-        "Let's go to my office" if ashley.opinion_score_giving_blowjobs() == 2:
+        "Let's go to my office\n{color=#ff0000}{size=18}Not yet written{/size}{/color} (disabled)" if ashley.opinion_score_giving_blowjobs() == 2:
             pass
 
         "Let's go to my office\n{color=#ff0000}{size=18}Requires Ashley Loves Blowjobs{/size}{/color} (disabled)" if ashley.opinion_score_giving_blowjobs() != 2:
