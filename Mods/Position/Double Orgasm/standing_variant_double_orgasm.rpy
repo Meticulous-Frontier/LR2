@@ -30,14 +30,14 @@ label SB_facing_wall_double_orgasm(the_girl, the_location, the_object):
                     $ the_girl.change_slut(the_girl.get_opinion_score("drinking cum"))
                     "[the_girl.possessive_title] moans as she pours your cum into her mouth."
                     $ the_girl.cum_in_mouth()
-                    $ SB_facting_wall.redraw_scene(the_girl)
+                    $ SB_facing_wall.redraw_scene(the_girl)
                     "She shudders at the sensation. It is apparent to you, if it was not before, that [the_girl.possessive_title] is literally addicted to your cum."
                 else:
                     $ the_girl.discover_opinion("cum facials")
                     "[the_girl.possessive_title] reaches over for your cock. With delicate fingers she slides the condom off of you, pinching it off so your cum doesn't spill out."
                     the_girl "It would be a shame to waste all of this, right?"
                     $ the_girl.cum_on_face()
-                    $ SB_facting_wall.redraw_scene(the_girl)
+                    $ SB_facing_wall.redraw_scene(the_girl)
                     "She smiles and tips the contents of the condom out onto one of her hands. She tosses the condom aside and rubs her palms together."
                     "She takes a deep breath and closes her eyes. She reaches to her cheeks and starts to smear your cum over her face."
                     the_girl "Mmmmm. So good."
@@ -61,7 +61,7 @@ label SB_facing_wall_double_orgasm(the_girl, the_location, the_object):
             $ the_girl.call_dialogue("cum_vagina")
             $ the_girl.cum_in_vagina()
             $ climax_controller.do_clarity_release(the_girl)
-            $ SB_facting_wall.redraw_scene(the_girl)
+            $ SB_facing_wall.redraw_scene(the_girl)
             "You wait until your orgasm has passed, then step back and sigh happily. [the_girl.title] stays leaning against the [the_object.name] for a few seconds as your semen drips down her leg."
 
     elif the_choice == "Cum on her ass":
