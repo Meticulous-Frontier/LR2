@@ -1302,13 +1302,16 @@ init -1 python:
         message = []
         if not happiness is None:
             self.change_happiness(happiness, add_to_log = False)
-            message.append(("+" if happiness > 0 else "") + str(happiness) + " {image=happy_token_small}")
+            if happiness != 0:
+                message.append(("+" if happiness > 0 else "") + str(happiness) + " {image=happy_token_small}")
         if not obedience is None:
-            self.change_obedience(obedience, add_to_log = False)
-            message.append(("+" if obedience > 0 else "") + str(obedience) +" {image=triskelion_token_small}")
+            amount = self.change_obedience(obedience, add_to_log = False)
+            if amount and amount != 0:
+                message.append(("+" if amount > 0 else "") + str(amount) +" {image=triskelion_token_small}")
         if not arousal is None:
             self.change_arousal(arousal, add_to_log = False)
-            message.append(("+" if arousal > 0 else "") + str(arousal) + " {image=arousal_token_small}")
+            if arousal != 0:
+                message.append(("+" if arousal > 0 else "") + str(arousal) + " {image=arousal_token_small}")
         if not love is None:
             amount = self.change_love(love, max_love, add_to_log = False)
             if amount and amount != 0:
