@@ -33,7 +33,6 @@ label doggy_stealth_attempt(the_girl, the_location, the_object):  #Write the new
                 "You quickly strip off the condom as quietly as possible, then line yourself up and plunge into [the_girl.title]'s heavenly slick cunt."
                 $ stealth_orgasm = True
                 $ mc.condom = False
-                $ use_condom = False
                 #TODO add a check against focus where she realizes what you are doing
                 "You begin to pound her with renewed vigor, enjoying the steamy sensation of her raw pussy."
                 the_girl "Oh god it feels so good. I can feel you so deep!"
