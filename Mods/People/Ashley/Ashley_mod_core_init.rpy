@@ -17,14 +17,19 @@ label update_ashley_mod_core(stack):
         else:
             if not ashley.event_triggers_dict.get("story_dict", False):
                 ashley.event_triggers_dict["story_dict"] = True
-                ashley.love_messages = ["This menu may be broken.", "", "", "", ""]
-                ashley.lust_messages = ["This menu may be broken.", "", "", "", ""]
-                ashley.obedience_messages = ["This menu may be broken.", "", "", "", ""]
-                ashley.other_messages = ["This menu may be broken.", "", "", "", ""]
+                ashley.love_messages = ["This menu may be broken.", "", "", "", "", "", "", "", "", ""]
+                ashley.lust_messages = ["This menu may be broken.", "", "", "", "", "", "", "", "", ""]
+                ashley.obedience_messages = ["This menu may be broken.", "", "", "", "", "", "", "", "", ""]
+                ashley.other_messages = ["This menu may be broken.", "", ""]
                 ashley.teamup_messages = ["This menu may be broken.", ""]
                 ashley.love_step = 0
                 ashley.obedience_step = 0
                 ashley.lust_step = 0
+        if len(ashley.love_messages) < 9:   #To catch incorrect list formatting to hopefully retain some save game compat. Can be deleted later.
+            ashley.love_messages = ashley.love_messages + ["", "", "", "", ""]
+            ashley.lust_messages = ashley.love_messages + ["", "", "", "", ""]
+            ashley.obedience_messages = ashley.love_messages + ["", "", "", "", ""]
+            ashley.teamup_messages = ["", ""]
         global list_of_upgraded_mc_serums
         for trait in list_of_mc_traits:
             trait.on_load()
