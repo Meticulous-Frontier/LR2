@@ -679,6 +679,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     if position_choice.requires_hard and mc.recently_orgasmed:
                         "Your post-orgasm cock softens, stopping you from [position_choice.verbing] [the_person.possessive_title] for now."
                         $ position_choice = None
+                        $ allow_transitions = False
                     elif position_choice.calculate_energy_cost(mc) > mc.energy:
                         if girl_in_charge:
                             "You're too exhausted to let [the_person.possessive_title] keep [position_choice.verbing] you."
@@ -1184,6 +1185,7 @@ label put_on_condom_routine(the_person):
     if the_person.sex_skills["Oral"] > 3 and the_person.get_opinion_score("giving blowjobs") > 1: #Knows what she's doing
         "[the_person.title] gets a condom out of their own bag and opens it."
         "She carefully puts it in her mouth, behind her teeth."
+        $ the_person.draw_person(position = "blowjob", special_modifier = "blowjob")
         "She starts bobbing up and down on your cock."
         "As she goes down on your dick she unrolls the condom onto it with her mouth."
         if the_person.get_opinion_score("being submissive") > 0:
