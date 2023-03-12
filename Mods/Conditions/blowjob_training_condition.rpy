@@ -58,7 +58,7 @@ label condition_blowjob_training_pre_label(the_person, the_position, the_object,
         $ mc_dialogue = blowjob_training_condition_deepthroat_list[dialogue_index]
     elif the_position == skull_fuck:
         $ mc_dialogue = blowjob_training_condition_skull_fuck_list[dialogue_index]
-    mc.name "[mc_dialogue!]"
+    mc.name "[mc_dialogue]"
     "[the_person.possessive_title] listens and tries what you suggest."
     return
 
