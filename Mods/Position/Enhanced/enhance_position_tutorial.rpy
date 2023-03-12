@@ -77,8 +77,16 @@ label outro_stealth_doggy(the_girl, the_location, the_object):
                 else:
                     the_girl "Oh god that's so hot. You could knock me up you know? Next time be more careful!"
                 $ the_girl.change_stats(happiness = 2, obedience = 3)
+                # she liked it, so skip condom in next loops
+                $ use_condom = False
             elif the_girl.sluttiness > 80:                          #She is slutty enough she doesn't mind the cream filling
                 the_girl "Oh my god you took the condom off? You know you can cum inside me anytime you want, no need to be stealthy about it!"
+                menu:
+                    "Agree":
+                        mc.name "I like the sound of that."
+                        $ use_condom = False
+                    "Don't":
+                        mc.name "I was just checking how far you were willing to go."
                 $ the_girl.change_obedience(3)
             else:                                                   #She gets pissed
                 if the_girl.on_birth_control:
