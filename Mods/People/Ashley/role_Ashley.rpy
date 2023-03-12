@@ -190,7 +190,7 @@ init -1 python:
         return False
 
     def ashley_room_overhear_classical_requirement(the_person):
-        if the_person.is_at_work():
+        if the_person.is_at_work() and mc.business.p_div.get_person_count() > 1:
             if the_person.days_employed > TIER_2_TIME_DELAY:
                 return True
         return False
