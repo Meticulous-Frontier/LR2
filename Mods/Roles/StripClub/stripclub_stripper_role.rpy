@@ -39,7 +39,11 @@ init 5 python:
         return (profit_base + tit_modifier + ass_modifier + person.charisma) * shifts
 
     def is_strip_club_stripper_requirement(person):
+        if person.is_strip_club_employee():
+            return False
         if get_strip_club_foreclosed_stage() >= 5:
+            if not person.is_at_work():
+                return False
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formal_name]"
             if person.has_role([stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role]):
@@ -63,7 +67,11 @@ init 5 python:
         return True
 
     def strip_club_review_requirement(person):
+        if not person.is_strip_club_employee():
+            return False
         if get_strip_club_foreclosed_stage() >= 5 and person.has_role([stripper_role, stripclub_bdsm_performer_role, stripclub_waitress_role]):
+            if not person.is_at_work():
+                return False
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formal_name]"
             if day - person.event_triggers_dict.get("stripclub_last_promotion_day", -7) < 7:
@@ -86,6 +94,8 @@ init 5 python:
         if get_strip_club_foreclosed_stage() < 5:
             return False
         if person.is_employee() or person in [mom, lily, aunt, nora]:
+            return False
+        if not person.is_at_work():
             return False
         if person.has_role([stripper_role, stripclub_waitress_role, stripclub_bdsm_performer_role]) and not strip_club_get_manager():
             # if person.age < 25: # As requested from a lot of people to hire Gabrielle as manager

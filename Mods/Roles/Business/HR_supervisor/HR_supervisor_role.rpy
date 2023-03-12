@@ -132,19 +132,19 @@ init 5 python:
         return mc.business.is_work_day() and time_of_day == 1
 
     def HR_director_fire_requirement():
+        if not (mc.business.is_open_for_business() or the_person.is_at_work()):
+            return False
         return True
 
     def HR_director_coffee_tier_1_requirement(the_person):
+        if not (mc.business.is_open_for_business() or the_person.is_at_work()):
+            return False
         if get_HR_director_tag("business_HR_coffee_tier", 0) != 0:
             return False
         if get_HR_director_tag("business_HR_serum_tier", 0) == 0:
             return False
         if not mc.business.has_funds(500):
             return "Requires: $500"
-        if not mc.is_at_work():
-            return "Only in the office"
-        if not mc.business.is_open_for_business():
-            return "Only during business hours"
         return True
 
     def HR_director_coffee_tier_2_requirement(the_person):
@@ -152,85 +152,69 @@ init 5 python:
             return False
         if get_HR_director_tag("business_HR_serum_tier", 0) <= 1:
             return False
+        if not (mc.business.is_open_for_business() or the_person.is_at_work()):
+            return False
         if not mc.business.has_funds(1500):
             return "Requires: $1,500"
-        if not mc.is_at_work():
-            return "Only in the office"
-        if not mc.business.is_open_for_business():
-            return "Only during business hours"
         return True
 
     def HR_director_gym_membership_tier_1_requirement(the_person):
+        if not (mc.business.is_open_for_business() or the_person.is_at_work()):
+            return False
         if mc.business.get_employee_count() > 6 and get_HR_director_tag("business_HR_gym_tier", 0)  == 0:
-            if not mc.is_at_work():
-                return "Only in the office"
-            if not mc.business.is_open_for_business():
-                return "Only during business hours"
             return True
         return False
 
     def HR_director_gym_membership_tier_2_requirement(the_person):
+        if not (mc.business.is_open_for_business() or the_person.is_at_work()):
+            return False
         if mc.business.get_employee_count() > 14 and get_HR_director_tag("business_HR_gym_tier", 0)  == 1:
-            if not mc.is_at_work():
-                return "Only in the office"
-            if not mc.business.is_open_for_business():
-                return "Only during business hours"
             return True
         return False
 
     def HR_director_mind_control_requirement(the_person):
         if get_HR_director_tag("business_HR_serum_tier", 0) != 3:
             return False
+        if not (mc.business.is_open_for_business() or the_person.is_at_work()):
+            return False
         if not mc.business.has_funds(5000):
             return "Requires: $5,000"
-        if not mc.is_at_work():
-            return "Only in the office"
-        if not mc.business.is_open_for_business():
-            return "Only during business hours"
         return True
 
     def HR_director_mind_control_attempt_requirement(the_person):
         if get_HR_director_tag("business_HR_serum_tier", 0) < 4:
             return False
+        if not (mc.business.is_open_for_business() or the_person.is_at_work()):
+            return False
         if get_HR_director_tag("business_HR_meeting_last_day", 0) >= day:
             return "One meeting per day"
-        if not mc.is_at_work():
-            return "Only in the office"
-        if not mc.business.is_open_for_business():
-            return "Only during business hours"
         return True
 
     def HR_director_change_relative_recruitment_requirement(the_person):
         if get_HR_director_tag("business_HR_relative_recruitment", 0) == 0:
             return False
-        if not mc.is_at_work():
-            return "Only in the office"
-        if not mc.business.is_open_for_business():
-            return "Only during business hours"
+        if not (mc.business.is_open_for_business() or the_person.is_at_work()):
+            return False
         return True
 
     def HR_director_meeting_on_demand_requirement(the_person):
         if not get_HR_director_tag("business_HR_meeting_on_demand", False):
             return False
+        if not (mc.business.is_open_for_business() or the_person.is_at_work()):
+            return False
         if get_HR_director_tag("business_HR_meeting_last_day", 0) >= day:
             return "One meeting per day"
-        if not mc.is_at_work():
-            return "Only in the office"
-        if not mc.business.is_open_for_business():
-            return "Only during business hours"
         return True
 
     def HR_director_headhunt_initiate_requirement(the_person):
         if not get_HR_director_tag("business_HR_headhunter_initial", False):
             return False
+        if not (mc.business.is_open_for_business() or the_person.is_at_work()):
+            return False
         if get_HR_director_tag("business_HR_headhunter_progress", 0) != 0:
             return "Running a search"
         if mc.business.get_employee_count() >= mc.business.max_employee_count:
             return "At employee limit"
-        if not mc.is_at_work():
-            return "Only in the office"
-        if not mc.business.is_open_for_business():
-            return "Only during business hours"
         return True
 
     def HR_director_headhunt_interview_requirement():

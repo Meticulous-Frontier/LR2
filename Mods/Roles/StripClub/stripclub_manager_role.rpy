@@ -21,6 +21,8 @@ init 3303 python:
 
     def has_manager_role_requirement(person):
         if person.has_role(stripclub_manager_role):
+            if not person.is_at_work():
+                return False
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formal_name]"
             return True
@@ -28,6 +30,8 @@ init 3303 python:
 
     def allow_promote_to_mistress_requirement(person):
         if person.has_role(stripclub_manager_role) and mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False) and not strip_club_get_mistress():
+            if not person.is_at_work():
+                return False
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formal_name]"
             if day - the_person.event_triggers_dict.get("stripclub_last_promotion_day", -7) < 7:
@@ -37,6 +41,8 @@ init 3303 python:
 
     def has_mistress_role_requirement(person):
         if person.has_role(stripclub_mistress_role):
+            if not person.is_at_work():
+                return False
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formal_name]"
             return True
@@ -44,6 +50,8 @@ init 3303 python:
 
     def mistress_hunt_for_me_requirement(person):
         if person.has_role(stripclub_mistress_role):
+            if not person.is_at_work():
+                return False
             if not mc.location in [strip_club, bdsm_room]:
                 return "Only in [strip_club.formal_name]"
             if person.has_taboo("condomless_sex"):
