@@ -397,9 +397,11 @@ label taboo_break_SB_anal_cowgirl(the_girl, the_location, the_object):
     "You slap [the_girl.possessive_title]'s ass and give it a squeeze."
     if the_girl.effective_sluttiness(SB_anal_standing.associated_taboo) > SB_anal_standing.slut_cap or the_girl.get_opinion_score("showing her ass") > 0:
         mc.name "Now sit on my cock and shove it into your cute little butt."
+        $ SB_anal_cowgirl.redraw_scene(the_girl)
         "You lay down on the [the_object.name] and she straddles your body getting herself into position to ride your cock."
     else:
         "You lay down on the [the_object.name] and tell her to crouch down on your dick."
+        $ SB_anal_cowgirl.redraw_scene(the_girl)
         mc.name "Now sit down and push it into your cute little ass."
 
     $ the_girl.call_dialogue(SB_anal_standing.associated_taboo+"_taboo_break")

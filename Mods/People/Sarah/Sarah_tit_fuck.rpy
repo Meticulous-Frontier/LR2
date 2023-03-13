@@ -49,11 +49,13 @@ label taboo_break_sarah_tit_fuck(the_girl, the_location, the_object):
         the_girl "Of course I can. You're going to have to let go of these first though."
         "She places her hands over yours and presses them against her breasts."
         the_girl "I promise I'll put them to good use."
+        $ the_girl.draw_person(position = "kneeling1")
         "She lets go of your hands and kneels down, taking her tits into her own hands."
     else:
         the_girl "I can try. You're going to have to let go of me first though."
+        $ the_girl.draw_person(position = "kneeling1")
         "She lifts your hands off of her chest and kneels down, taking her tits up into her own hands"
-    $ the_girl.draw_person(position = "blowjob")
+    $ sarah_tit_fuck.redraw_scene(the_girl)
     "She hefts her breasts up and presses them on either side of your shaft."
     if Person.rank_tits(the_girl.tits) >= 7: #E sized or larger
         "They're warm, soft, and feel like they melt around your sensitive dick. Her breasts are so large the tip of your cock doesn't even make it to the top of her cleavage."

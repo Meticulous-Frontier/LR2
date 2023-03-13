@@ -279,7 +279,7 @@ label taboo_break_anal_on_lap(the_girl, the_location, the_object):
     the_girl "Ok, just be careful [the_girl.mc_title]..."
 
     "You work your fingers in and out of her ass a few times, getting it good and lubed up. You finger her pussy again, and this time use her arousal to rub on your cock, getting it ready."
-    $ the_girl.draw_person(position = "sitting")
+    $ anal_on_lap.redraw_scene(the_girl)
     "She slowly sits down in your lap. You hold your cock in your hand, pointed at her puckered hole as she backs up onto it."
     "[the_girl.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
     the_girl "Wow! Okay... I think I'm ready... let's do this!"

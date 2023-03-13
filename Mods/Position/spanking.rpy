@@ -78,6 +78,7 @@ label taboo_break_spanking(the_girl, the_location, the_object):
     the_girl "What... what are you gonna do to me?"
     mc.name "You need a spanking. It's only natural for a bad girl like you to get a spanking once in a while."
     the_girl "Oh god... I... Okay [the_girl.mc_title]..."
+    $ spanking.redraw_scene(the_girl)
     "You stand behind [the_girl.title] and put your arms around her waist, pushing her so she is bending over [the_object.name]."
     if the_girl.outfit.vagina_available():
         "You don't waste any time and put your hands on her ass, groping her cheeks."

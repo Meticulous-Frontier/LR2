@@ -386,6 +386,7 @@ label orgasm_SB_reverse_cowgirl(the_girl, the_location, the_object):
 label taboo_break_SB_reverse_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title] leads you to the [the_object.name]."
     the_girl "Lie down for me, [the_girl.mc_title]..."
+    $ SB_reverse_cowgirl.redraw_scene(the_girl)
     "You nod and follow her instructions. She steps over you and kneels down, giving you a perfect view of her ass."
     if the_girl.effective_sluttiness(SB_reverse_cowgirl.associated_taboo) > SB_reverse_cowgirl.slut_cap:
         "She reaches between her legs and grabs your cock, bringing it towards her and running the tip against her clit."

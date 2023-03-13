@@ -25,11 +25,11 @@ init:
 label intro_piledriver_DP(the_girl, the_location, the_object):
     "You grab your strap-on from your bag, then turn to [the_girl.title]."
     mc.name "[the_girl.title], I want you to lie down for me. I'm going to fuck your pussy and your ass."
-    $ the_girl.draw_person(position = piledriver_anal.position_tag)
+    $ piledriver_DP.redraw_scene(the_girl)
 
     if not the_girl.vagina_visible():
         "You quickly move some clothing out of the way..."
-        $ the_girl.strip_to_vagina(position = piledriver_anal.position_tag, visible_enough = True, prefer_half_off = True)
+        $ the_girl.strip_to_vagina(position = piledriver_DP.position_tag, visible_enough = True, prefer_half_off = True)
 
     "You secure the strap-on dildo to your cock. A quick lube application later, you get on top of [the_girl.possessive_title]."
     the_girl "I'm not sure the angle is gonna work for..."
@@ -57,6 +57,7 @@ label intro_piledriver_DP(the_girl, the_location, the_object):
     return
 
 label taboo_break_piledriver_DP(the_girl, the_location, the_object): #This should only be filler, since piledriver can only be transitioned to for now
+    $ piledriver_DP.redraw_scene(the_girl)
     "You take [the_girl.title]'s hands in yours and guide her down onto the [the_object.name]. She follows your lead, lying down for you."
     if not the_girl.vagina_available():
         "You move some clothing out of the way..."

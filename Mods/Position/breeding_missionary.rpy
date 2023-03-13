@@ -50,6 +50,7 @@ label taboo_break_breeding_missionary(the_girl, the_location, the_object):
     mc.name "Don't worry, we'll have the next 9 months, while your belly bloats and your tits swell with milk, to make up for lost time and fuck each other's brains out before the baby gets here."
     $ the_girl.change_arousal(10)
     the_girl "Oh fuck, that sounds amazing. You'd better!"
+    $ breeding_missionary.redraw_scene(the_girl)
     "She nods meekly and lies down on the [the_object.name], waiting while you climb on top of her."
     if mc.condom:
         the_girl "Why are you wearing that thing? Let's get that off of you."

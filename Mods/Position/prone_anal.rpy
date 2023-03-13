@@ -89,8 +89,9 @@ label intro_prone_anal(the_girl, the_location, the_object):
     return
 
 label taboo_break_prone_anal(the_girl, the_location, the_object):
-    "You take [the_girl.title]'s hands in yours and guide her down onto the [the_object.name]. You turn her back to you."
     mc.name "Lay down. I want to be in control the first time I take your ass."
+    $ prone_anal.redraw_scene(the_girl)
+    "You take [the_girl.title]'s hands in yours and guide her down onto the [the_object.name]. You turn her back to you."
     $ the_girl.call_dialogue(prone_anal.associated_taboo+"_taboo_break")
     the_girl "Okay, just don't do anything too crazy, okay?"
     $ the_girl.change_obedience(2)

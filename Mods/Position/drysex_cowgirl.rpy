@@ -29,6 +29,7 @@ init:
 
 label intro_drysex_cowgirl(the_girl, the_location, the_object):
     the_girl "Lie down for me, I want to feel you against me."
+    $ drysex_cowgirl.redraw_scene(the_girl)
     "You lie down on the [the_object.name]. [the_girl.title] swings a leg over your body and straddles you."
     if the_girl.outfit.vagina_available():
         "She leans back and grinds herself against you. She rubs her pussy along your cock, your pants the only thing separating the two."
@@ -45,6 +46,7 @@ label intro_drysex_cowgirl(the_girl, the_location, the_object):
 label taboo_break_drysex_cowgirl(the_girl, the_location, the_object):
     "[the_girl.possessive_title] leads you to the [the_object.name]."
     the_girl "Lie down for me [the_girl.mc_title]..."
+    $ drysex_cowgirl.redraw_scene(the_girl)
     "You nod and follow her instructions. She steps over you and kneels down, straddling your hips."
     if the_girl.effective_sluttiness(drysex_cowgirl.associated_taboo) > drysex_cowgirl.slut_cap:
         "She reaches between her legs and grabs your cock, bringing it towards her and running the tip against her clit."

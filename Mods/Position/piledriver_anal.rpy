@@ -67,6 +67,7 @@ label taboo_break_piledriver_anal(the_girl, the_location, the_object):
     "You grab [the_girl.possessive_title]'s ass and give it a squeeze, then a hard slap."
     mc.name "[the_girl.title], I want you to lie down for me."
     "[the_girl.possessive_title] nods, glancing briefly at the bulge in your pants. She gets onto the [the_object.name] and waits for you."
+    $ piledriver_anal.redraw_scene(the_girl)
     the_girl "How's this?"
     mc.name "You look amazing."
     "You lay down on top of her and kiss her neck a few times, then whisper in her ear."
