@@ -17,7 +17,7 @@ init 2 python:
         return False
 
     def get_fetish_shower_cum_girl():
-        return get_random_from_list([x for x in [mom, lily] if x.has_cum_fetish() and not x.has_limited_time_event("sleeping_walk_in_label") and x.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
+        return get_random_from_list([x for x in [mom, lily] if x.has_cum_fetish() and not x.has_queued_event("sleeping_walk_in_label") and x.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])
 
     def get_fetish_cum_dosage_employee():
         return get_random_from_list([x for x in mc.business.get_employee_list() if x.has_cum_fetish() and x.event_triggers_dict.get("LastCumFetish", 0) + 10 < day])

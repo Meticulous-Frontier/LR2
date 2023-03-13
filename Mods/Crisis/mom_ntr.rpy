@@ -114,7 +114,7 @@ init 2 python:
 
     def mom_ntr_mod_requirement():
         if mc_asleep() and mom.effective_sluttiness() >= 30 and mom.is_available:
-            if mom.has_limited_time_event("sleeping_walk_in_label"):
+            if mom.has_queued_event("sleeping_walk_in_label"):
                 return False
             return True
         return False

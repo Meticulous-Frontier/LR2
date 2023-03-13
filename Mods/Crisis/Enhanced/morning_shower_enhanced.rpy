@@ -11,7 +11,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
     # You wake up and go to take a shower, lily or your mom are already in there.
     "You wake up in the morning uncharacteristically early feeling refreshed and energized. You decide to take an early shower to kickstart the day."
     $ the_person = get_random_from_list(people_in_mc_home() + [None]) #Checks all the rooms in player's home
-    if the_person is None or the_person.has_limited_time_event("sleeping_walk_in_label"):
+    if the_person is None or the_person.has_queued_event("sleeping_walk_in_label"):
         #You run into nobody, gain some extra energy. TODO: One of the girls comes to join you.
         "You head to the bathroom and start the shower. You step in and let the water just flow over you, carrying away your worries for the day."
         "After a few long, relaxing minutes it's time to get out. You start the day feeling energized."

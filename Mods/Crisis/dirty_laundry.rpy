@@ -47,7 +47,7 @@ label dirty_laundry_action_label():
         $ the_person = get_random_from_list(people_in_mc_home([aunt]))
     else:
         $ the_person = get_random_from_list(people_in_mc_home())
-    if the_person is None or the_person.has_limited_time_event("sleeping_walk_in_label"):
+    if the_person is None or the_person.has_queued_event("sleeping_walk_in_label"):
         return
 
     $ set_night_outfit(the_person)

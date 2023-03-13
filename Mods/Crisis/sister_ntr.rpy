@@ -2,7 +2,7 @@
 # Based on the Pilotus13 Vanilla extension
 init 3 python:
     def sister_ntr_crisis_requirement():
-        if lily.has_limited_time_event("sleeping_walk_in_label"):
+        if lily.has_queued_event("sleeping_walk_in_label"):
             return False
         if mc_asleep():
             if not (day % 7 == 4 or day % 7 == 5):  # not on friday or saturday night, conflicts with story

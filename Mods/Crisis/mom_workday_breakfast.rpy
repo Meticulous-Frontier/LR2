@@ -7,7 +7,7 @@
 init 2 python:
     def mom_breakfast_crisis_requirement():
         if mc.is_home() and mc.business.is_work_day() and not mom.is_employee() and mom.is_available:
-            if mom.has_limited_time_event("sleeping_walk_in_label"):
+            if mom.has_queued_event("sleeping_walk_in_label"):
                 return False
             return True
         return False
