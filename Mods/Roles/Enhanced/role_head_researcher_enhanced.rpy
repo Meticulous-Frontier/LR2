@@ -192,7 +192,7 @@ init -1 python:
 #Action definitions
     head_researcher_suggest_testing_room = Action("Testing room request", head_researcher_suggest_testing_room_requirement, "head_researcher_suggest_testing_room_label")
     head_researcher_testing_room_intro = Action("Testing Room Intro", head_researcher_testing_room_intro_requirement, "head_researcher_testing_room_intro_label")
-    head_researcher_serum_trait_test = Action("Test a Serum Trait", head_researcher_serum_trait_test_requirement, "head_researcher_serum_trait_test_label",
+    head_researcher_serum_trait_test = Action("Test a Serum Trait {image=gui/heart/Time_Advance.png}", head_researcher_serum_trait_test_requirement, "head_researcher_serum_trait_test_label",
         menu_tooltip = "Perform intensive serum trait test with the help of your head researcher on an employee.", priority = 5)
     head_researcher_strip_tease = Action("Head Researcher Strip Tease", head_researcher_strip_tease_requirement, "head_researcher_strip_tease_label")
     head_researcher_cure_discovery_intro = Action("Begin Cure Discovery Quest", head_researcher_cure_discovery_intro_requirement, "head_researcher_cure_discovery_intro_label")
@@ -566,12 +566,12 @@ label head_researcher_testing_room_intro_label(the_person):
 label head_researcher_serum_trait_test_label(the_person):
     mc.name "There is a serum trait that I would like to study."
     the_person "Okay."
-    $ clear_scene()
-    $ scene_manager = Scene()
     call serum_research_select_tester_label(the_person) from _select_research_tester_01
     $ the_tester = _return
+    $ clear_scene()
+    $ scene_manager = Scene()
     "You head down to the testing room. After a few minutes, [the_person.possessive_title] returns with today's test subject."
-    $ scene_manager.add_actor(the_person, display_transform = character_left_flipped)
+    $ scene_manager.add_actor(the_person, display_transform = character_left_flipped, z_order = 10)
     $ scene_manager.add_actor(the_tester, display_transform = character_right)
     mc.name "Hello [the_tester.title]. Are you ready to begin the test?"
     call serum_research_tester_response_label(the_tester) from _research_serum_mastery_01
