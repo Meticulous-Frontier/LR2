@@ -193,7 +193,7 @@ init -1 python:
     head_researcher_suggest_testing_room = Action("Testing room request", head_researcher_suggest_testing_room_requirement, "head_researcher_suggest_testing_room_label")
     head_researcher_testing_room_intro = Action("Testing Room Intro", head_researcher_testing_room_intro_requirement, "head_researcher_testing_room_intro_label")
     head_researcher_serum_trait_test = Action("Test a Serum Trait", head_researcher_serum_trait_test_requirement, "head_researcher_serum_trait_test_label",
-        menu_tooltip = "Perform intensive serum trait test with the help of your head researcher on an employee.")
+        menu_tooltip = "Perform intensive serum trait test with the help of your head researcher on an employee.", priority = 5)
     head_researcher_strip_tease = Action("Head Researcher Strip Tease", head_researcher_strip_tease_requirement, "head_researcher_strip_tease_label")
     head_researcher_cure_discovery_intro = Action("Begin Cure Discovery Quest", head_researcher_cure_discovery_intro_requirement, "head_researcher_cure_discovery_intro_label")
     head_researcher_cure_discovery_market_patent = Action("Attempt to sell patent", head_researcher_cure_discovery_market_patent_requirement, "head_researcher_cure_discovery_market_patent_label")
