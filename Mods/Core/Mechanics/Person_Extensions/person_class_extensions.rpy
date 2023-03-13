@@ -2975,7 +2975,7 @@ init -1 python:
     # Day function wrappers
 
     def person_set_event_day(self, dict_key, override = True, set_day = None):
-        if not override and not dict_key in self.event_triggers_dict:
+        if dict_key in self.event_triggers_dict and not override:
             return False
         self.event_triggers_dict[dict_key] = day if set_day is None else set_day
         return True
