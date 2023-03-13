@@ -209,6 +209,7 @@ label aunt_drunk_cuddle_label():
     "You notice as you walk past them to the coffee pot, your aunt is sneaking looks your way. Her cheeks a little rosey and blushed."
     $ mc.change_locked_clarity(5)
     "You pour yourself a cup and lean against the counter. The two sisters are chatting about plans for a bit, when suddenly [mom.possessive_title] stands up."
+    $ scene_manager.update_actor(mom, position = mom.idle_pose)
     mom "Well, I need to head out. Good luck with the apartment [aunt.fname]!"
     the_person "Thank you! I'm sure we'll be out of here soon."
     $ scene_manager.update_actor(mom, position = "walking_away")
