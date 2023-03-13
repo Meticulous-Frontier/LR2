@@ -902,11 +902,11 @@ init -1 python:
         clothing = None
         # If she has a preference (even a least-bad preference) she'll strip that down first.
         if self.get_opinion_score("showing her tits") > self.get_opinion_score("showing her ass"):
-            clothing = self.outfit.remove_random_any(exclude_feet = True, exclude_lower = True, do_not_remove = True)
+            clothing = self.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, exclude_lower = True, do_not_remove = True)
         elif self.get_opinion_score("showing her tits") < self.get_opinion_score("showing her ass"):
-            clothing = self.outfit.remove_random_any(exclude_feet = True, exclude_upper = True, do_not_remove = True)
+            clothing = self.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, exclude_upper = True, do_not_remove = True)
         if clothing is None: #Either our previous checks failed to produce anything OR they were equal
-            clothing = self.outfit.remove_random_any(exclude_feet = True, do_not_remove = True)
+            clothing = self.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove = True)
         return clothing
 
     Person.choose_strip_clothing_item = choose_strip_clothing_item
