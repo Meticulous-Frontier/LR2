@@ -363,37 +363,46 @@ init -1 python:
     Business.remove_employee = business_remove_employee_extended(Business.remove_employee)
 
     def business_add_mandatory_crisis(self, crisis_event):
-        if not crisis_event in self.mandatory_crises_list:
+        # TODO: remove the else branch -> now handled by ActionList object
+        if isinstance(self.mandatory_crises_list, ActionList):
             self.mandatory_crises_list.append(crisis_event)
+        else:
+            if not crisis_event in self.mandatory_crises_list:
+                self.mandatory_crises_list.append(crisis_event)
 
     Business.add_mandatory_crisis = business_add_mandatory_crisis
 
     def business_add_mandatory_morning_crisis(self, crisis_event):
-        if not crisis_event in self.mandatory_morning_crises_list:
+        # TODO: remove the else branch -> now handled by ActionList object
+        if isinstance(self.mandatory_morning_crises_list, ActionList):
             self.mandatory_morning_crises_list.append(crisis_event)
+        else:
+            if not crisis_event in self.mandatory_morning_crises_list:
+                self.mandatory_morning_crises_list.append(crisis_event)
 
     Business.add_mandatory_morning_crisis = business_add_mandatory_morning_crisis
 
     def business_remove_mandatory_crisis(self, crisis_event):
-        if isinstance(crisis_event, basestring):
-            found = next((x for x in self.mandatory_crises_list if x.effect == crisis_event), None)
-            if found:
-                self.mandatory_crises_list.remove(found)
-                return True
-            found = next((x for x in self.mandatory_morning_crises_list if x.effect == crisis_event), None)
-            if found:
-                self.mandatory_morning_crises_list.remove(found)
-                return True
-        elif isinstance(crisis_event, Action):
-            found = next((x for x in self.mandatory_crises_list if x == crisis_event), None)
-            if found:
-                self.mandatory_crises_list.remove(found)
-                return True
-            found = next((x for x in self.mandatory_morning_crises_list if x == crisis_event), None)
-            if found:
-                self.mandatory_morning_crises_list.remove(found)
-                return True
-        return False
+        # TODO: remove the else branch -> now handled by ActionList object
+        if isinstance(self.mandatory_crises_list, ActionList):
+            self.mandatory_crises_list.remove(crisis_event)
+            self.mandatory_morning_crises_list.remove(crisis_event)
+        else:
+            if isinstance(crisis_event, basestring):
+                found = next((x for x in self.mandatory_crises_list if x.effect == crisis_event), None)
+                if found:
+                    self.mandatory_crises_list.remove(found)
+                found = next((x for x in self.mandatory_morning_crises_list if x.effect == crisis_event), None)
+                if found:
+                    self.mandatory_morning_crises_list.remove(found)
+            elif isinstance(crisis_event, Action):
+                found = next((x for x in self.mandatory_crises_list if x == crisis_event), None)
+                if found:
+                    self.mandatory_crises_list.remove(found)
+                found = next((x for x in self.mandatory_morning_crises_list if x == crisis_event), None)
+                if found:
+                    self.mandatory_morning_crises_list.remove(found)
+        return
 
     Business.remove_mandatory_crisis = business_remove_mandatory_crisis
 
