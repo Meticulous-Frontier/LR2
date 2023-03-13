@@ -88,6 +88,35 @@ init 2 python:
             if self.on_enabled_changed:
                 self.on_enabled_changed(self.enabled)
 
+            # update in game crisis lists ()
+            if self.is_crisis:
+                def _update_crisis(cl, action):
+                    found = next((x for x in cl if x[0] == action), None)
+                    if found and not action.enabled:
+                        cl.remove(found)
+                    if not found and action.enabled:
+                        cl.append([action, 5])
+
+                if "crisis_list" in globals() and not self.is_morning_crisis:
+                    _update_crisis(crisis_list, self)
+
+                if "morning_crisis_list" in globals() and self.is_morning_crisis:
+                    _update_crisis(morning_crisis_list, self)
+
+            if self.is_mandatory_crisis:
+                def _update_mandatory_crisis(cl, action, add_func, remove_func):
+                    found = next((x for x in cl if x == action), None)
+                    if found and not action.enabled:
+                        remove_func(action)
+                    if not found and action.enabled:
+                        add_func(action)
+
+                if "mc" in globals() and not self.is_morning_crisis:
+                    _update_mandatory_crisis(mc.business.mandatory_crises_list, self, mc.business.add_mandatory_crisis, mc.business.remove_mandatory_crisis)
+
+                if "mc" in globals() and self.is_morning_crisis:
+                    _update_mandatory_crisis(mc.business.mandatory_morning_crises_list, self, mc.business.add_mandatory_morning_crisis, mc.business.remove_mandatory_crisis)
+
     def action_mod_settings_requirement():
         return True
 
@@ -120,7 +149,7 @@ init 2 python:
                         crisis_list.append([action_mod, 5])
             elif action_mod.is_mandatory_crisis:
                 if action_mod.is_morning_crisis:
-                    mc.business.add_mandatory_morning_crisis_event(action_mod)
+                    mc.business.add_mandatory_morning_crisis(action_mod)
                 else:
                     mc.business.add_mandatory_crisis(action_mod)
 
