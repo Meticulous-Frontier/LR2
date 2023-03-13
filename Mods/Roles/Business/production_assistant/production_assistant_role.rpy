@@ -143,9 +143,9 @@ label mc_serum_intro_label(the_person):
     $ mc_serum_energy_regen.apply_trait()
     $ mc_serum_energy_regen.is_selected = True
     "As you finish up with your coffee, she changes the subject."
-    if ashley_on_default_path() and the_person == ashley:
-        the_person "So I was talking with Steph about how things are going here at work."
-        the_person "She was just gushing all about how her 'boyfriend' built her a special room just for her science work."
+    if stephanie == mc.business.head_researcher and the_person == ashley:
+        the_person "So I was talking with my sister about how things are going here at work."
+        the_person "She was just gushing all about how you built her a special room just for her science work."
     else:
         the_person "So I was talking with the head researcher about how things are going with me settling in here."
         the_person "She was going on and on about the specialized research room you built over in the lab."
