@@ -75,8 +75,8 @@ label IT_director_nanobot_intro_label(the_person):
     mc.name "Can we go to my office?"
     the_person "Sure."
     $ ceo_office.show_background()
+    $ the_person.draw_person(position = "sitting")
     "You walk with [the_person.possessive_title] to your office. She sits down across from you."
-    $ the_person.draw_person()
     if fetish_serum_unlock_count() == 1:
         mc.name "Right, well as you know, we have a basic nanobot program, designed to increase a female's propensity for sexual activities."
         the_person "errmm... right..."
