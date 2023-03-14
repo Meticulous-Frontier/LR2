@@ -204,7 +204,7 @@ label ellie_climax_responses_foreplay(the_person):
     else:
         the_person "Mmmmhm!"
     if ellie_is_a_squirter():
-        if the_position:
+        if "the_position" in globals():
             if the_position == standing_finger:
                 "[the_person.possessive_title]'s pussy gushes her juices all around your fingers as she cums."
             elif the_position == standing_grope:
