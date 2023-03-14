@@ -673,9 +673,9 @@ label starbuck_sex_store_promo_one_label(the_person):
     $ SB_advert_one_outfit.add_feet(garter_with_fishnets.get_copy(), colour_black)
 
     $ SB_advert_two_outfit = Outfit("Lingerie Set Blue Nightgown")
-    $ SB_advert_two_outfit.add_upper(thin_bra.get_copy(),colour_sky_blue)
-    $ SB_advert_two_outfit.add_lower(cute_panties.get_copy(), colour_sky_blue)
     $ SB_advert_two_outfit.add_upper(nightgown_dress.get_copy(), colour_sky_blue)
+    $ SB_advert_two_outfit.add_lower(cute_panties.get_copy(), colour_sky_blue)
+    $ SB_advert_two_outfit.add_feet(thigh_highs.get_copy(),colour_sky_blue)
 
     $ SB_advert_three_outfit = Outfit("Lingerie Set Pink Onepiece")
     $ SB_advert_three_outfit.add_upper(lacy_one_piece_underwear.get_copy(),colour_pink)
