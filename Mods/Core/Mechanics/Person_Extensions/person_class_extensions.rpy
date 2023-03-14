@@ -119,6 +119,20 @@ init -1 python:
 
     Person.change_location = person_change_location
 
+    def person_reset_arousal(self):
+        base_arousal = self.sluttiness / 10.0
+        base_arousal += self.get_opinion_score("masturbating")
+        base_arousal += self.get_opinion_score("showing her tits")
+        base_arousal += self.get_opinion_score("showing her ass")
+        base_arousal += self.get_opinion_score("not wearing underwear")
+
+        if base_arousal < 0:
+            base_arousal = 0
+
+        self.arousal = __builtin__.round(base_arousal)
+
+    Person.reset_arousal = person_reset_arousal
+
     def get_follow_me(self):
         if not hasattr(self, "_follow_me"):
             self._follow_me = False
