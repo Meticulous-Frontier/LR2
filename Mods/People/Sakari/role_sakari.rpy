@@ -37,7 +37,7 @@ init 2 python:
         #global sakari_role
         global sakari
         sakari = make_person(name = "Sakari", last_name ="Greene", age = 42, body_type = "thin_body", face_style = "Face_14",  tits="C", height = 0.92, hair_colour="black", hair_style = bald_hair, skin="tan" , \
-            eyes = "brown", personality = sakari_personality, name_color = "#228b22", dial_color = "228b22" , job = unemployed_job, \
+            eyes = "brown", personality = sakari_personality, name_color = "#FFA500", job = unemployed_job, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [4,2,2,2], sluttiness = 7, obedience_range = [100, 120], happiness = 88, love = 0, \
             relationship = "Single", kids = 1, force_random = True, base_outfit = sakari_base_outfit, type = 'story',
             forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],

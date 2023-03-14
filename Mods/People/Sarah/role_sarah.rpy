@@ -47,7 +47,7 @@ init 2 python:
 
         global sarah
         sarah = make_person(name = "Sarah", last_name ="Cooper", age = 21, body_type = "thin_body", face_style = "Face_3", tits = "A", height = 0.90, hair_colour = ["chocolate", [.247, .0, .058, 1]], hair_style = windswept_hair, skin="white",\
-            eyes = "dark blue", personality = Sarah_personality, name_color = "#dda0dd", dial_color = "#dda0dd", starting_wardrobe = sarah_wardrobe, \
+            eyes = "dark blue", personality = Sarah_personality, name_color = "#dda0dd", starting_wardrobe = sarah_wardrobe, \
             stat_array = [5,3,3], skill_array = [5,3,2,1,1], sex_skill_array = [1,2,3,1], sluttiness = 3, happiness = 102, love = 3, \
             title = "Sarah", possessive_title = "Your childhood friend",mc_title = mc.name, relationship = "Single", kids = 0, base_outfit = sarah_base_outfit, type = 'story', \
             force_random = True, forced_opinions = [

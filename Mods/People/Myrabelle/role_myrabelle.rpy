@@ -58,8 +58,7 @@ init 2 python:
             job = myra_job,                         # Generic job title. Use for random town people or people with jobs OUTSIDE of MC's company
             personality = myrabelle_personality,    # Personality
             custom_font = None,                     #
-            name_color = "2a9df4",                 #
-            dial_color = "2a9df4" ,                 #
+            name_color = "#2a9df4",                 #
             starting_wardrobe = myrabelle_wardrobe,  # Leave None to make basic wardrobe
             stat_array = [1,3,3],                   # [charisma, int, focus]
             skill_array = [1,1,5,2,1],              # [HR, market, research, production, supply]

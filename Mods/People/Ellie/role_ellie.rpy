@@ -35,7 +35,7 @@ init 2 python:
         #global ellie
         global ellie
         ellie = make_person(name = "Ellie", age = 24, body_type = "thin_body", face_style = "Face_13",  tits="DDD", height = 0.92, hair_colour="dark auburn", hair_style = bobbed_hair, skin="white" , \
-            eyes = "light blue", personality = ellie_personality, name_color = "#228b22", dial_color = "228b22" , starting_wardrobe = ellie_wardrobe, job = ellie_job, \
+            eyes = "light blue", personality = ellie_personality, name_color = "#FFA07A", starting_wardrobe = ellie_wardrobe, job = ellie_job, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [1,1,1,1], sluttiness = 0, obedience_range = [100, 110], happiness = 103, love = -3, \
             relationship = "Single", kids = 0, work_experience = 2, force_random = True, base_outfit = ellie_base_outfit, type = 'story',
             forced_opinions = [["production work", 2, True], ["work uniforms", 1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["cooking", 2, False]])

@@ -44,7 +44,7 @@ init 2 python:
         starbuck_base.add_accessory(starbuck_lipstick)
 
         starbuck = make_person(name = "Cara", last_name = "Thrace", age = 32, body_type = "curvy_body", face_style = "Face_4", tits="E", height = 0.89, hair_colour= ["golden blonde", [0.895, 0.781, 0.656,1]], hair_style = messy_short_hair, skin = "white",
-            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], pubes_style = landing_strip_pubes, personality = starbuck_personality, name_color = "#cd5c5c", dial_color = "#cd5c5c", starting_wardrobe = starbuck_wardrobe,  \
+            eyes = ["green",[0.245, 0.734, 0.269, 1.0]], pubes_style = landing_strip_pubes, personality = starbuck_personality, name_color = "#cd5c5c", starting_wardrobe = starbuck_wardrobe,  \
             stat_array = [3,4,3], skill_array = [1,1,4,2,1], sex_skill_array = [3,3,4,4], sluttiness = 27, obedience_range = [70, 85], happiness = 119, love = 0, \
             relationship = "Single", kids = 0, force_random = True, base_outfit = starbuck_base, type = 'story')
 

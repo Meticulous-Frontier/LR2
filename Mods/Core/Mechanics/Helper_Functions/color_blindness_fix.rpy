@@ -12,6 +12,12 @@ init -1 python:
     readable_color_list.append("#fcf7de") # Corn Silk
     readable_color_list.append("#f0defd") # Lavender
     readable_color_list.append("#f2d7b4") # Wheat
+    readable_color_list.append("#DAA520") # Golden Rod
+    readable_color_list.append("#FFA07A") # Light Salmon
+    readable_color_list.append("#FFA500") # Orange
+    readable_color_list.append("#D2691E") # Chocolate
+    readable_color_list.append("#20B2AA") # Light Sea Green
+    readable_color_list.append("#C0C0C0") # Silver
 
     for replacement in color_replacement_list:
         if replacement[0] in readable_color_list:
