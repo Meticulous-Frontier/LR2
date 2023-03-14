@@ -104,7 +104,7 @@ label lust_blowjob_intro_label():
     the_person "Mmm, you're right, it's so hard! I bet you've got a big load saved up for me..."
     "[the_person.title] runs her tongue along the tip, tasting your pre-cum. She moans quietly before opening her mouth and slowly sliding the tip in her mouth."
     $ the_person.break_taboo("sucking_cock")
-    call fuck_person(the_person, private = True, start_position = blowjob, skip_intro = True, position_locked = True) from _lust_blowjob_at_work_01
+    call get_fucked(the_person, the_goal = ("oral creampie" if the_person.get_opinion_score("drinking cum") >= the_person.get_opinion_score("being covered in cum") else "facial"), private = True, start_position = (blowjob if the_person.sex_skills["Oral"] < 4 else deepthroat), start_object = mc.location.get_object_with_trait("Kneel"), skip_intro = True, allow_continue = False)
     $ the_report = _return
 
     if the_report.get("guy orgasms", 0) == 0:
@@ -230,7 +230,7 @@ label lust_blowjob_office_label():
         the_person "Mmm, you're right, it's so hard! I bet you've got a big load saved up for me..."
         "[the_person.title] runs her tongue along the tip, tasting your pre-cum. She moans quietly before opening her mouth and slowly sliding the tip in her mouth."
         $ the_person.break_taboo("sucking_cock")
-        call fuck_person(the_person, private = True, start_position = blowjob, skip_intro = True, position_locked = True) from _lust_blowjob_at_work_03
+        call get_fucked(the_person, the_goal = ("oral creampie" if the_person.get_opinion_score("drinking cum") >= the_person.get_opinion_score("being covered in cum") else "facial"), private = True, start_position = (blowjob if the_person.sex_skills["Oral"] < 4 else deepthroat), start_object = mc.location.get_object_with_trait("Kneel"), skip_intro = True, allow_continue = False)
         $ the_report = _return
         if the_report.get("guy orgasms", 0) == 0:
             $ the_person.draw_person(position = "blowjob")
@@ -275,7 +275,7 @@ label lust_blowjob_office_label():
         the_person "Wow... it looks so hard! It's okay... I'll take care of it!"
         $ the_person.add_situational_slut("situation",10, "I'm doing my work duties.")
         "[the_person.title] opens her mouth and begins to suck you off. She starts off tentatively, but soon has a good rhythm going."
-        call fuck_person(the_person, private = True, start_position = blowjob, skip_intro = True, position_locked = True) from _lust_blowjob_at_work_04
+        call get_fucked(the_person, the_goal = ("oral creampie" if the_person.get_opinion_score("drinking cum") >= the_person.get_opinion_score("being covered in cum") else "facial"), private = True, start_position = (blowjob if the_person.sex_skills["Oral"] < 4 else deepthroat), start_object = mc.location.get_object_with_trait("Kneel"), skip_intro = True, allow_continue = False)
         $ the_report = _return
         $ the_person.clear_situational_slut("situation")
         if the_report.get("guy orgasms", 0) == 0:
