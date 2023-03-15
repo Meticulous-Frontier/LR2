@@ -48,174 +48,195 @@ init 3 python: #Add appropriate opinion tags to all vanilla positions
 init -1:
     python:
         #List of completion requirements for different possible dom sex positions.
-        def dom_requirement_creampie(the_person, the_report):
-            if report_log["guy orgasms"] >= 1 and the_person.has_creampie_cum():
+        def dom_requirement_creampie(person, the_report):
+            if report_log["guy orgasms"] >= 1 and person.has_creampie_cum():
                 return True
             return False
 
-        def dom_requirement_anal_creampie(the_person, the_report):
-            if report_log["guy orgasms"] >= 1 and the_person.has_creampie_cum():
+        def dom_requirement_anal_creampie(person, the_report):
+            if report_log["guy orgasms"] >= 1 and person.has_creampie_cum():
                 return True
             return False
 
-        def dom_requirement_oral_creampie(the_person, the_report):
-            if report_log["guy orgasms"] >= 1 and the_person.has_mouth_cum():
+        def dom_requirement_oral_creampie(person, the_report):
+            if report_log["guy orgasms"] >= 1 and person.has_mouth_cum():
                 return True
             return False
 
-        def dom_requirement_facial(the_person, the_report):
-            if report_log["guy orgasms"] >= 1 and the_person.has_face_cum():
+        def dom_requirement_facial(person, the_report):
+            if report_log["guy orgasms"] >= 1 and person.has_face_cum():
                 return True
             return False
 
-        def dom_requirement_body_shot(the_person, the_report):
+        def dom_requirement_body_shot(person, the_report):
             if report_log["guy orgasms"] >= 1:
-                if the_person.has_ass_cum() or the_person.has_tits_cum() or the_person.has_stomach_cum() or the_person.has_face_cum():
+                if person.has_ass_cum() or person.has_tits_cum() or person.has_stomach_cum() or person.has_face_cum():
                     return True
             return False
 
-        def dom_requirement_get_mc_off(the_person, the_report):
+        def dom_requirement_get_mc_off(person, the_report):
             if report_log["guy orgasms"] >= 1:
                 return True
             return False
 
-        def dom_requirement_get_off(the_person, the_report):
+        def dom_requirement_get_off(person, the_report):
             if report_log["girl orgasms"] >= 1:
                 return True
             return False
 
-        def dom_requirement_hate_fuck(the_person, the_report):
+        def dom_requirement_hate_fuck(person, the_report):
             if report_log["girl orgasms"] >= 2:
                 return True
             return False
 
-        def dom_requirement_waste_cum(the_person, the_report):
+        def dom_requirement_waste_cum(person, the_report):
             if report_log["guy orgasms"] >= 1:
                 return True
             return False
 
-        def dom_requirement_mc_aroused(the_person, the_report):
-            if mc.arousal > 40:
-                return True
-            return False
+        def dom_requirement_mc_hard(person, the_report):
+            return mc.arousal > 20
 
-        def dom_requirement_girl_aroused(the_person, the_report):
-            if the_person.arousal > 40:
-                return True
-            return False
+        def dom_requirement_mc_aroused(person, the_report):
+            return mc.arousal > 40
 
-        def dom_requirement_mc_highly_aroused(the_person, the_report):
-            if mc.arousal > 70:
-                return True
-            return False
+        def dom_requirement_mc_highly_aroused(person, the_report):
+            return mc.arousal > 70
 
-        def dom_requirement_girl_highly_aroused(the_person, the_report):
-            if the_person.arousal > 40:
-                return True
-            return False
+        def dom_requirement_girl_aroused(person, the_report):
+            return person.arousal > 40
 
-        def dom_requirement_girl_vagina_avail(the_person, the_report):
-            return the_person.vagina_available()
+        def dom_requirement_girl_highly_aroused(person, the_report):
+            return person.arousal > 70
 
-        def dom_requirement_tits_avail(the_person, the_report):
-            return the_person.tits_available()
+        def dom_requirement_girl_vagina_avail(person, the_report):
+            return person.vagina_available()
 
-        def construct_mc_turn_on_weighted_list(the_person, prohibit_tags = []):
+        def dom_requirement_tits_avail(person, the_report):
+            return person.tits_available()
+
+        def construct_mc_turn_on_weighted_list(person, prohibit_tags = []):
             position_option_list = []
-            position_option_list.append([kissing, 30 + the_person.get_opinion_score("kissing")])
-            position_option_list.append([handjob, 30 + the_person.get_opinion_score("giving handjobs")])
-            position_option_list.append([drysex_cowgirl, 30 + the_person.get_opinion_score("taking control")])
+            position_option_list.append([kissing, 30 + person.get_opinion_score("kissing")])
+            position_option_list.append([handjob, 30 + person.get_opinion_score("giving handjobs")])
+            position_option_list.append([drysex_cowgirl, 30 + person.get_opinion_score("taking control")])
             return get_random_from_weighted_list(position_option_list)
 
 init 2:
     python:
         #Use this function to make a "random" sex goal. Weights outcome based on the person and how far things have already gone.
         #weight is scale 0-100
-        def create_sex_goal(the_person, report_log = None):
+        def create_sex_goal(person, report_log = None):
             if report_log is not None: #First, check if we are here
                 if report_log.get("guy orgasms", 0) > 0 and report_log.get("girl orgasms", 0) == 0:   #We are here because Mc finished too fast.
                     pass #TODO do this here or in the original call?
 
             dom_sex_goal_weighted_list = []
 
-            if the_person.get_fetish_count() > 0: #She has fetishes, so use those to set a goal.
-                if the_person.has_anal_fetish():
+            if person.get_fetish_count() > 0: #She has fetishes, so use those to set a goal.
+                if person.has_anal_fetish():
                     dom_sex_goal_weighted_list.append(["anal creampie", 100])
-                if the_person.has_cum_fetish():
+                if person.has_cum_fetish():
                     dom_sex_goal_weighted_list.append(["oral creampie", 50])
                     dom_sex_goal_weighted_list.append(["body shot", 50])
                     dom_sex_goal_weighted_list.append(["facial", 50])
-                if the_person.has_breeding_fetish():
+                if person.has_breeding_fetish():
                     dom_sex_goal_weighted_list.append(["vaginal creampie", 100])
                 return get_random_from_weighted_list(dom_sex_goal_weighted_list)  #Hopefully this works if list only has one entry
 
             # If love is less than 0, we consider selfish sex goals
-            if the_person.love < 0:
+            if person.love < 0:
                 for goal in list_of_selfish_dom_sex_goals:
-                    dom_sex_goal_weighted_list.append ([goal,-the_person.love])
+                    dom_sex_goal_weighted_list.append ([goal,-person.love])
             else: #Always have at least one option in the list
                 dom_sex_goal_weighted_list.append(["get mc off", 30])
 
             #Next, we add individual goals based on her sluttiness. #TODO consider a list of constants declared at the top that can be changed for setting sluttiness threshholds for these.
             #body shot
-            if the_person.sluttiness > 30:
-                body_shot_weight = 40 + (the_person.get_opinion_score("being covered in cum") * 10)
+            if person.sluttiness > 30:
+                body_shot_weight = 40 + (person.get_opinion_score("being covered in cum") * 10)
                 dom_sex_goal_weighted_list.append(["body shot", body_shot_weight])
 
             #Facial
-            if the_person.sluttiness > 40:
-                facial_weight = 40 + (the_person.get_opinion_score("being covered in cum") * 10) + (the_person.get_opinion_score("cum facials") * 10)
+            if person.sluttiness > 40:
+                facial_weight = 40 + (person.get_opinion_score("being covered in cum") * 10) + (person.get_opinion_score("cum facials") * 10)
                 dom_sex_goal_weighted_list.append(["facial", facial_weight])
 
             #oral creampie
-            if the_person.sluttiness > 50:
-                oral_creampie_weight = 40 + (the_person.get_opinion_score("drinking cum") * 20)
+            if person.sluttiness > 50:
+                oral_creampie_weight = 40 + (person.get_opinion_score("drinking cum") * 20)
                 dom_sex_goal_weighted_list.append(["oral creampie", oral_creampie_weight])
 
             #vaginal creampie
-            if the_person.sluttiness > 60:
-                vaginal_creampie_weight = 40 + (the_person.get_opinion_score("creampies") * 20)
+            if person.sluttiness > 60:
+                vaginal_creampie_weight = 40 + (person.get_opinion_score("creampies") * 20)
                 dom_sex_goal_weighted_list.append(["vaginal creampie", vaginal_creampie_weight])
 
             #anal creampie
-            if the_person.sluttiness > 70:
-                anal_creampie_weight = 40 + (the_person.get_opinion_score("anal creampies") * 20)
+            if person.sluttiness > 70:
+                anal_creampie_weight = 40 + (person.get_opinion_score("anal creampies") * 20)
                 dom_sex_goal_weighted_list.append(["anal creampie", anal_creampie_weight])
 
             return get_random_from_weighted_list(dom_sex_goal_weighted_list)
 
-        def create_sex_path(the_person, the_goal, prohibit_tags = []):
+        def build_mc_request_blowjob_path(person):
+            path = [] # start off with normal blowjob
+            path.append(dom_sex_path_node(blowjob, dom_requirement_mc_aroused))
+
+            transition = deepthroat
+            if person.sex_skills["Oral"] >= 5 and person.get_opinion_score("giving blowjobs") > 1 and person.get_opinion_score("being submissive") > 1:
+                transition = skull_fuck
+            if person.has_cum_fetish():
+                transition = cum_fetish_blowjob
+            if person == salon_manager:
+                transition = Ophelia_blowjob
+
+            path.append(dom_sex_path_node(transition, dom_requirement_get_mc_off))
+            return path
+
+        def build_mc_request_titfuck_path(person):
+            path = [] # use handjob as intro
+            path.append(dom_sex_path_node(handjob, dom_requirement_mc_hard))
+
+            transition = tit_fuck
+            if person == sarah:
+                transition = sarah_tit_fuck
+
+            if person.has_cum_fetish(): # when she has a cum fetish she will finish you off with her mouth
+                path.append(dom_sex_path_node(transition, dom_requirement_mc_highly_aroused))
+                path.append(dom_sex_path_node(cum_fetish_blowjob, dom_requirement_get_mc_off))
+            else: # complete titfuck
+                path.append(dom_sex_path_node(transition, dom_requirement_get_mc_off))
+            return path
+
+        def create_sex_path(person, the_goal, prohibit_tags = []):
             position_option_list = []
             second_position_option_list = []
             extra_positions = []
             ### Create list of possible positions###
             # when she enjoys blow jobs, add one to her choices (to prevent always going to blowjob variant)
-            if the_person.has_cum_fetish():
+            if person.has_cum_fetish():
                 extra_positions.append(cum_fetish_blowjob)
-            elif the_person.sex_skills["Oral"] >= 5 and the_person.get_opinion_score("giving blowjobs") > 1 and the_person.get_opinion_score("being submissive") > 1:
+            elif person.sex_skills["Oral"] >= 5 and person.get_opinion_score("giving blowjobs") > 1 and person.get_opinion_score("being submissive") > 1:
                 extra_positions.append(skull_fuck)
-            elif the_person.sex_skills["Oral"] > 3 and the_person.get_opinion_score("giving blowjobs") > 1:
+            elif person.sex_skills["Oral"] > 3 and person.get_opinion_score("giving blowjobs") > 1:
                 extra_positions.append(deepthroat)
-            elif the_person.sex_skills["Oral"] > 2 and the_person.get_opinion_score("giving blowjobs") > 0:
+            elif person.sex_skills["Oral"] > 2 and person.get_opinion_score("giving blowjobs") > 0:
                 extra_positions.append(blowjob)
             elif the_goal == "oral creampie" or the_goal == "facial":
                 extra_positions.append(blowjob)
 
-
-
-
             # when she enjoys tit fucks, add it to her position choices
-            if the_person.sex_skills["Foreplay"] > 2 and the_person.get_opinion_score("giving tit fucks") >= 1 and the_person.has_large_tits():
+            if person.sex_skills["Foreplay"] > 2 and person.get_opinion_score("giving tit fucks") >= 1 and person.has_large_tits():
                 extra_positions.append(tit_fuck)
-
 
             #TODO we also need to check and make sure an object exists for each possible sex position. Figure out how to do this
             #TODO Add in per character position filters so make sure ALL positions are included
             for position in list_of_girl_positions + extra_positions:
                 if the_goal in position.opinion_tags:
-                    if the_person.sluttiness >= position.slut_requirement:
+                    if person.sluttiness >= position.slut_requirement:
                         if not position.skill_tag in prohibit_tags:
-                            position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])  #every qualifying position has at least weight 20, with higher weights if actual sluttiness is close to requirement
+                            position_option_list.append([position, max(20, 100 - abs(person.sluttiness - position.slut_requirement))])  #every qualifying position has at least weight 20, with higher weights if actual sluttiness is close to requirement
 
             if len(position_option_list) == 0: #Somehow no positions available for this requirement.
                 return None
@@ -247,18 +268,18 @@ init 2:
             first_position = None
 
             #She isn't naked enough to go straight to final node
-            if not final_node.position.check_clothing(the_person):  #She isn't naked enough to go straight to the end node
+            if not final_node.position.check_clothing(person):  #She isn't naked enough to go straight to the end node
                 for position in list_of_girl_positions + extra_positions:
-                    if allow_position(the_person, position) and mc.location.has_object_with_trait(position.requires_location) and (the_person.has_large_tits() or not position.requires_large_tits):
-                        if position.check_clothing(the_person):
+                    if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits):
+                        if position.check_clothing(person):
                             if final_node.position.skill_tag == "Vaginal" or final_node.position.skill_tag == "Anal":
                                 if position.skill_tag == "Foreplay" or position.skill_tag == "Oral":
                                     if not position.skill_tag in prohibit_tags:
-                                        second_position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
+                                        second_position_option_list.append([position, max(20, 100 - abs(person.sluttiness - position.slut_requirement))])
                             else:
                                 if position.skill_tag == "Foreplay":
                                     if not position.skill_tag in prohibit_tags:
-                                        second_position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
+                                        second_position_option_list.append([position, max(20, 100 - abs(person.sluttiness - position.slut_requirement))])
                 if len(second_position_option_list) == 0: #No workable options.
                     return None
                 first_position = get_random_from_weighted_list(second_position_option_list)
@@ -269,22 +290,22 @@ init 2:
 
             #MC isn't hard enough for final node
             elif mc.recently_orgasmed and final_node.position.requires_hard:
-                first_position = construct_mc_turn_on_weighted_list(the_person, prohibit_tags)
+                first_position = construct_mc_turn_on_weighted_list(person, prohibit_tags)
                 req_func = dom_requirement_mc_aroused
 
             #If we don't have a first node, 50/50 chance we create a first node, or sex begins with final node
             elif renpy.random.randint(0,100) < 50:
                 for position in list_of_girl_positions + extra_positions:
-                    if allow_position(the_person, position) and mc.location.has_object_with_trait(position.requires_location) and (the_person.has_large_tits() or not position.requires_large_tits):
-                        if position.check_clothing(the_person):
+                    if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits):
+                        if position.check_clothing(person):
                             if final_node.position.skill_tag == "Vaginal" or final_node.position.skill_tag == "Anal":
                                 if position.skill_tag == "Foreplay" or position.skill_tag == "Oral":
                                     if not position.skill_tag in prohibit_tags:
-                                        second_position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
+                                        second_position_option_list.append([position, max(20, 100 - abs(person.sluttiness - position.slut_requirement))])
                             else:
                                 if position.skill_tag == "Foreplay":
                                     if not position.skill_tag in prohibit_tags:
-                                        second_position_option_list.append([position, max(20, 100 - abs(the_person.sluttiness - position.slut_requirement))])
+                                        second_position_option_list.append([position, max(20, 100 - abs(person.sluttiness - position.slut_requirement))])
                 first_position  = get_random_from_weighted_list(second_position_option_list)
 
                 if first_position.girl_arousal > first_position.guy_arousal: #Choose our exit function based on who the position arouses more
@@ -324,31 +345,31 @@ init 2:
                 return dom_requirement_oral_creampie
             return dom_requirement_get_mc_off
 
-        def sex_can_continue(the_person, the_position = None, the_node = None): #Use this to check and see if girl would be up to continue the current position
+        def sex_can_continue(person, the_position = None, the_node = None): #Use this to check and see if girl would be up to continue the current position
             if the_node is not None:
                 the_position = the_node.position
 
             if the_position is not None:
-                if not the_position.check_clothing(the_person):
+                if not the_position.check_clothing(person):
                     return False
-                if the_person.energy < the_position.girl_energy * 2:  #Enough for at least 2 more rounds
+                if person.energy < the_position.girl_energy * 2:  #Enough for at least 2 more rounds
                     return False
 
                 if mc.energy < the_position.guy_energy * 2:
                     return False
-            elif the_person.energy < 30 or mc.energy < 30:
+            elif person.energy < 30 or mc.energy < 30:
                 return False
             return True
 
-        def requires_condom(the_person):
-            if the_person == kaya and persistent.pregnancy_pref != 0:
+        def requires_condom(person):
+            if person == kaya and persistent.pregnancy_pref != 0:
                 return False
-            if the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold(situational_modifier = 10):  #
+            if person.effective_sluttiness("condomless_sex") < person.get_no_condom_threshold(situational_modifier = 10):  #
                 return True
             return False
 
-        def go_raw_mid_sex(the_person):
-            if the_person.effective_sluttiness("condomless_sex") > the_person.get_no_condom_threshold(situational_modifier = 25):
+        def go_raw_mid_sex(person):
+            if person.effective_sluttiness("condomless_sex") > person.get_no_condom_threshold(situational_modifier = 25):
                 if renpy.random.randint(0,100) < 10:  #10% chance per round over sluttiness threshold
                     return True
             return False
@@ -511,7 +532,6 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
                     "[the_person.title] gets a condom out of their own bag and opens it."
                     "She holds it at the top of your cock with one hand as she strokes further and further with the other hand, rolling the condom down onto it."
                     $ mc.condom = True
-                $ current_node.position.redraw_scene(the_person)
                 if not ignore_taboo and the_person.has_taboo(current_node.position.associated_taboo):
                     # call mod taboo break
                     $ current_node.position.call_transition_taboo_break(current_node.position, the_person, mc.location, object_choice)
@@ -647,6 +667,24 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         the_person.reset_sex_goal()
     # We return the report_log so that events can use the results of the encounter to figure out what to do.
     return report_log
+
+# use as wrapper for get_fucked to satisfy mc requests, by building a custom sex path to fullfill request
+# for now only supports 'blowjob' and 'titfuck'
+label mc_sex_request(the_person, the_request = "blowjob", private = True):
+    python:
+        if the_request == "titfuck":
+            path = build_mc_request_titfuck_path(the_person)
+            start_object = mc.location.get_object_with_trait("Kneel")
+        else:   # default blowjob
+            path = build_mc_request_blowjob_path(the_person)
+            start_object = mc.location.get_object_with_trait("Kneel")
+
+    call get_fucked(the_person, sex_path = path, private = private, start_object = start_object, skip_intro = True, allow_continue = False) from _call_get_fucked_mc_request
+
+    python:
+        path = None
+        start_object = None
+    return
 
 label remove_condom_go_raw(the_person, the_position):
     the_person "Hang on a second..."
