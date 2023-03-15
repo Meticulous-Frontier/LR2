@@ -363,7 +363,11 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                     call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_lily_morning_encounter_handjob_02
 
                 "Force her to her knees" if the_person.is_willing(blowjob):
-                    call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = False, position_locked = True) from _call_fuck_person_lily_morning_encounter_kitchenblow
+                    "You open up your pants and take out your hardening member."
+                    mc.name "Now show me how good you are at sucking cock."
+                    $ the_person.draw_person(position = "kneeling1")
+                    "You force her down to her knees, pulling her head closer to your crotch."
+                    call mc_sex_request(the_person, the_request = "blowjob") from _call_mc_sex_request_lily_morning_encounter_kitchenblow
 
                 "Lay her on the table" if the_person.is_willing(missionary):
                     call fuck_person(the_person, private = False, start_position = missionary, start_object = make_table(), skip_intro = False) from _call_fuck_person_lily_morning_encounter_kitchenfuck
@@ -431,7 +435,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                             mc.name "I can't argue with that, do you want to stay and watch?"
                             the_other_person "Well I was going to make breakfast, but I guess a little show with my meal wouldn't hurt."
                             $ scene_manager.update_actor(the_other_person, position = "sitting", emotion = "happy")
-                            call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = True, position_locked = True) from _call_lily_morning_encounter_kitchenblow2
+                            call mc_sex_request(the_person, the_request = "blowjob") from _call_mc_sex_request_lily_morning_encounter_kitchenblow2
                             $ scene_manager.update_actor(the_person, position = "kneeling1")
                             the_other_person "Thanks for the show."
 

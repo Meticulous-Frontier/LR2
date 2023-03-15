@@ -786,7 +786,7 @@ label erica_pre_insta_love_label(the_person):
     "[the_person.title] starts to bob her head up and down, eager to satisfy you with her mouth."
     $ mc.change_arousal(10)
     "It's so hot, getting a blowjob from [the_person.possessive_title] while sitting on your sister's bed!"
-    call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = blowjob, skip_intro = True, ignore_taboo = True, allow_continue = False) from _call_get_fucked_erica_pre_insta_oral_01
+    call mc_sex_request(the_person, the_request = "blowjob") from _call_mc_sex_request_erica_pre_insta_oral_01
     "When you finish, [the_person.possessive_title] quickly starts to straighten up her clothes and wipes the cum from her face."
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person()

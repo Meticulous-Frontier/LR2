@@ -30,6 +30,10 @@ label intro_sarah_tit_fuck(the_girl, the_location, the_object):
     the_girl "Want to put your cock between them again? It feels so good, I think I'm getting addicted to that feeling."
     mc.name "Mmm, do it [the_girl.title]."
     "[the_girl.possessive_title] gets down on her knees. She starts to open up your pants."
+    if not the_girl.tits_visible():
+        the_girl "Well, let me get them ready for you."
+        $ the_girl.strip_to_tits(position = sarah_tit_fuck.position_tag, visible_enough = True, prefer_half_off = False)
+
     $ sarah_tit_fuck.redraw_scene(the_girl)
     "She takes her tits up in her hands and lifts them up, pressing them on either size of your shaft."
     "They're warm, soft, and feel like they melt around your sensitive dick. Her breasts are so large the tip of your cock doesn't even make it to the top of her cleavage."
@@ -50,11 +54,16 @@ label taboo_break_sarah_tit_fuck(the_girl, the_location, the_object):
         "She places her hands over yours and presses them against her breasts."
         the_girl "I promise I'll put them to good use."
         $ the_girl.draw_person(position = "kneeling1")
-        "She lets go of your hands and kneels down, taking her tits into her own hands."
+        "She lets go of your hands and kneels down."
     else:
         the_girl "I can try. You're going to have to let go of me first though."
         $ the_girl.draw_person(position = "kneeling1")
-        "She lifts your hands off of her chest and kneels down, taking her tits up into her own hands"
+        "She lifts your hands off of her chest and kneels down."
+
+    if not the_girl.tits_visible():
+        the_girl "Well, let me get them ready for you."
+        $ the_girl.strip_to_tits(position = sarah_tit_fuck.position_tag, visible_enough = True, prefer_half_off = False)
+
     $ sarah_tit_fuck.redraw_scene(the_girl)
     "She hefts her breasts up and presses them on either side of your shaft."
     if Person.rank_tits(the_girl.tits) >= 7: #E sized or larger
@@ -141,6 +150,9 @@ label outro_sarah_tit_fuck(the_girl, the_location, the_object):
     return
 
 label transition_default_sarah_tit_fuck(the_girl, the_location, the_object):
+    if not the_girl.tits_visible():
+        the_girl "Well, let's get the puppies out to play."
+        $ the_girl.strip_to_tits(position = sarah_tit_fuck.position_tag, visible_enough = True, prefer_half_off = False)
     $ sarah_tit_fuck.redraw_scene(the_girl)
     "You grab a hold of her sizeable tits and give them a gentle squeeze, bringing a little moan from her lips."
     mc.name "I want to feel my cock between these lovely tits again."

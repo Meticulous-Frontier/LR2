@@ -123,12 +123,8 @@ label sarah_bar_date_label(the_person):
                     mc.name "Right! I'm sure a short diversion wouldn't delay me too much."
                     the_person "Mmm, ever since I took those serums, I've been craving your cock between my tits..."
                     $ mc.change_locked_clarity(30)
-                    "She walks right up to you and starts to get down on her knees. You pull your cock out, which is now fully erect."
-                    $ scene_manager.update_actor(the_person, position = "blowjob")
-                    the_person "That's it. Let me just take care of this for you..."
-                    # call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_sarah_weekend_titfuck_1
-                    #TODO change this to sarah's special tit fuck when applicable
-                    call get_fucked(the_person, the_goal = "body shot", private= True, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_get_fucked_sarah_weekend_titfuck_5
+                    the_person "Let me just take care of this for you..."
+                    call mc_sex_request(the_person, the_request = "titfuck") from _call_mc_sex_request_sarah_weekend_titfuck_5
                     "[the_person.possessive_title] moans as she rubs your cum into her chest."
                     the_person "It feels so sticky on my skin... Mmmm, that was nice."
                     "You clear your throat and then respond."
