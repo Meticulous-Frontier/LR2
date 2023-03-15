@@ -516,7 +516,7 @@ label ashley_classical_concert_date_label():
     mc.name "Plus, I'm glad to be able to spend some time with you and get to know you better."
     "You notice her blush a bit, but you can also see her smile."
     $ the_person.change_stats(love = 2, happiness = 2)
-    #end branch
+    $ show_concert_hall_background(darken = True)
     "Soon, the lights dim, and the music begins. It begins with a splendid piano melody."
     "You and [the_person.possessive_title] sit together silently, enjoying the music."
     "It goes through emotional highs and lows. At one point, you look over and you think you see a tear on [the_person.title]'s cheek."
@@ -537,6 +537,7 @@ label ashley_classical_concert_date_label():
             $ mc.change_locked_clarity(15)
             $ the_person.change_stats(obedience = 2, happiness = 5)
             "You watch the remainder of the concert in silence with her head against you."
+    $ show_concert_hall_background()
     "When the concert is over, the lights slowly come back on. You let go of her as you both start to get up."
     $ scene_manager.update_actor(the_person, position = "stand3")
     "You slowly file out of the concert hall, chatting about the concert."
@@ -2791,8 +2792,8 @@ label ashley_second_concert_date_label():
     mc.name "When we can go do stuff like this more often, then go back to your place after, and me, you, and [stephanie.fname] all hop in bed together and screw until the sun comes up."
     ashley "Ha! Oh wow. You've been watching some good porn lately huh? I don't think Steph is really the sharing type... I'm usually not either..."
     mc.name "And yet, here you are, with your sister's boyfriend. Maybe you just haven't met someone worth sharing before?"
-    "[the_person.title] is quiet. Right on cue, the lights turn down and the music begins."
     $ show_concert_hall_background(darken = True)
+    "[the_person.title] is quiet. Right on cue, the lights turn down and the music begins."
     "The music begins, playing through some classical music that you aren't familiar with, but it is quite enjoyable. When you look over at [the_person.possessive_title] she seems to be really enjoying herself."
     "After a while, as the music goes through a crescendo, you feel her squeeze your hand, then turn it over, so her palm is against the back of your hand."
     "She puts your hand on her leg, then slowly starts to push it up, under her dress..."
