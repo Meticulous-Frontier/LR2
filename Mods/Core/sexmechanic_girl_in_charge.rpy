@@ -680,11 +680,11 @@ label mc_sex_request(the_person, the_request = "blowjob", private = True):
             start_object = mc.location.get_object_with_trait("Kneel")
 
     call get_fucked(the_person, sex_path = path, private = private, start_object = start_object, skip_intro = True, allow_continue = False) from _call_get_fucked_mc_request
-
+    $ report_log = _return
     python:
         path = None
         start_object = None
-    return
+    return report_log
 
 label remove_condom_go_raw(the_person, the_position):
     the_person "Hang on a second..."
