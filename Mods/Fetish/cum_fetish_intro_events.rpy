@@ -453,7 +453,7 @@ label cum_fetish_generic_intro_label(the_person):
             the_person "Mmh, I love it when I can feel it grow in my mouth."
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
             # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC10B
-            call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_SBC10B
+            call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_get_fucked_cum_fetish_generic_01
             $ add_cum_fetish(the_person)
 
             "[the_person.possessive_title] is moaning ecstatically."
@@ -619,7 +619,7 @@ label cum_fetish_lily_intro_label():
     $ the_person.break_taboo("sucking_cock")
     "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
     # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_fuck_person_SBC40
-    call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_lily_cum_fetish_intro_01
+    call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_get_fucked_lily_cum_fetish_intro_01
     $ add_cum_fetish(the_person)
     "[the_person.possessive_title] is moaning ecstatically. You start to worry that [mom.possessive_title] might hear."
     $ the_person.draw_person(position = "kissing")
@@ -805,7 +805,7 @@ label cum_fetish_sarah_intro_label():
             "She immediately gets to work, pulling your dick out of your pants. You feel her soft, velvet mouth wrapped around you."
             $ the_person.break_taboo("sucking_cock")
             "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
-            call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_sarah_cum_fetish_intro_01
+            call get_fucked(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_get_fucked_sarah_cum_fetish_intro_01
             $ add_cum_fetish(the_person)
             "[the_person.possessive_title] is moaning ecstatically below your desk."
             if the_person.has_mouth_cum():
@@ -869,7 +869,7 @@ label cum_fetish_erica_intro_label(the_person):
     "You nod, and she immediately gets to work, pulling your dick out of your underwear. You feel her soft, velvet mouth wrapped around you."
     $ the_person.break_taboo("sucking_cock")
     "[the_person.possessive_title] begins bobbing her head up and down eagerly, hungry for your delicious cum."
-    call get_fucked(the_person, start_position = blowjob, the_goal = "oral creampie", start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_erica_cum_fetish_intro_01
+    call get_fucked(the_person, start_position = blowjob, the_goal = "oral creampie", start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_get_fucked_erica_cum_fetish_intro_01
     $ add_cum_fetish(the_person)
     $ the_person.event_triggers_dict["LastCumFetish"] = day
     "After you finish, [the_person.possessive_title] continues to lick her fingers, desperate for a little more of your cum."

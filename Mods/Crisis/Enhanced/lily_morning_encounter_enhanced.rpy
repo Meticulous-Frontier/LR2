@@ -360,16 +360,16 @@ label lily_morning_encounter_follow_up_two_label(the_person):
             mc.name "Now get over here [the_person.title]."
             menu:
                 "Get a handjob":
-                    call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_lily_morning_encounter_handjob_02
+                    call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_lily_morning_encounter_handjob_02
 
                 "Force her to her knees" if the_person.is_willing(blowjob):
-                    call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = False, position_locked = True) from _call_lily_morning_encounter_kitchenblow
+                    call fuck_person(the_person, private = False, start_position = blowjob, skip_intro = False, position_locked = True) from _call_fuck_person_lily_morning_encounter_kitchenblow
 
                 "Lay her on the table" if the_person.is_willing(missionary):
-                    call fuck_person(the_person, private = False, start_position = missionary, start_object = make_table(), skip_intro = False) from _call_lily_morning_encounter_kitchenfuck
+                    call fuck_person(the_person, private = False, start_position = missionary, start_object = make_table(), skip_intro = False) from _call_fuck_person_lily_morning_encounter_kitchenfuck
 
                 "Bend her over the table" if the_person.is_willing(spanking):
-                    call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False) from _call_lily_morning_encounter_kitchenspank4
+                    call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False) from _call_fuck_person_lily_morning_encounter_kitchenspank4
 
             the_person "Thanks bro, I'm going to do my laundry now."
             $ the_person.draw_person(position = "walking_away")
@@ -399,7 +399,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                     the_person "Oh god... I don't know why, but it always surprises me how warm it is..."
                     "Her hand starts to stroke you."
                     $ mc.change_arousal(15)
-                call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False, ) from _call_lily_morning_encounter_handjob_01
+                call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False, ) from _call_get_fucked_lily_morning_encounter_handjob_01
 
             "Force her to her knees" if the_person.is_willing(blowjob):
                 $ scene_manager.update_actor(the_person, position = "kneeling1")

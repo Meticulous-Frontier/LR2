@@ -678,7 +678,7 @@ label anal_fetish_mom_intro_label():
     $ the_person.break_taboo("anal_sex")
     "It takes her a few moments, but eventually she starts to move her hips."
     the_person "Okay... don't hold back! Mommy wants your cum baby!"
-    call get_fucked(the_person, the_goal = "anal creampie", start_position = anal_on_lap, start_object = make_couch(), skip_intro = True, allow_continue = False) from _mom_anal_fetish_intro_01
+    call get_fucked(the_person, the_goal = "anal creampie", start_position = anal_on_lap, start_object = make_couch(), skip_intro = True, allow_continue = False) from _call_get_fucked_mom_anal_fetish_intro_01
     $ the_person.draw_person(position = "sitting")
     $ add_anal_fetish(the_person)
     the_person "Oh my god... [the_person.mc_title] that was so good."
@@ -716,7 +716,7 @@ label anal_fetish_mom_intro_label():
     "[the_person.possessive_title] goes slow, but steadily slides down, impaling her sphincter on your throbbing erection. She bottoms out and moans loudly."
     $ the_person.break_taboo("anal_sex")
     # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBA41
-    call get_fucked(the_person, the_goal = "anal creampie", private= True, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _mom_anal_fetish_intro_02
+    call get_fucked(the_person, the_goal = "anal creampie", private= True, start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _call_get_fucked_mom_anal_fetish_intro_02
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         the_person "Oh god, I came so hard..."
@@ -1005,7 +1005,7 @@ label anal_fetish_stephanie_normal_label(the_person):
     "She looks at you expectantly."
     the_person "Well? Why are you still wearing clothes? You said you would help!"
     # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
-    call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_desk(), allow_continue = False) from _anal_fetish_steph_normal_intro_01
+    call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_desk(), allow_continue = False) from _call_get_fucked_anal_fetish_steph_normal_intro_01
     $ add_anal_fetish(the_person)
     the_person "Oh god... It's even better than I dreamed about last night."
     "[the_person.possessive_title] takes a minute to recover before standing up."
@@ -1182,7 +1182,7 @@ label anal_fetish_erica_intro_label():
     "[the_person.possessive_title] leans forward and whispers in your ear."
     the_person "I want you to cum in my ass... okay?"
     mc.name "Mmm, okay, let's see what you can do."
-    call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _anal_fetish_erica_intro_01
+    call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _call_get_fucked_anal_fetish_erica_intro_01
     $ add_anal_fetish(the_person)
     $ the_person.arousal = 60
     "When you finish, you quickly get up."

@@ -1210,7 +1210,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             "[the_person.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
             $ the_person.break_taboo("anal_sex")
             the_person "Oh god! It's in!"
-            call get_fucked(the_person, the_goal = "anal creampie", private= True, start_position = anal_on_lap, skip_intro = True, allow_continue = False) from _sarah_gives_anal_lapdance_monday_01
+            call get_fucked(the_person, the_goal = "anal creampie", private= True, start_position = anal_on_lap, skip_intro = True, allow_continue = False) from _call_get_fucked_sarah_gives_anal_lapdance_monday_01
             $ the_report = _return
             if the_report.get("guy orgasms", 0) > 0:
                 "[the_person.possessive_title] stands up. Some of your cum has managed to escape, running down her leg."
@@ -1382,7 +1382,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         "[the_person.possessive_title] uses her weight to provide the pressure required to squeeze your cock past her sphincter. She gasps when her body finally relents and lets you in."
         $ the_person.break_taboo("anal_sex")
         the_person "Oh god! It's in!"
-        call get_fucked(the_person, the_goal = "anal creampie", private= True, start_position = anal_on_lap, skip_intro = True, allow_continue = False) from _sarah_gives_anal_lapdance_monday_02
+        call get_fucked(the_person, the_goal = "anal creampie", private= True, start_position = anal_on_lap, skip_intro = True, allow_continue = False) from _call_get_fucked_sarah_gives_anal_lapdance_monday_02
         $ the_report = _return
         if the_report.get("guy orgasms", 0) > 0:
             "[the_person.possessive_title] stands up. Some of your cum has managed to escape, running down her leg."

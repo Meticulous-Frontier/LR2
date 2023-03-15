@@ -1716,7 +1716,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         the_person "Mmm... Good morning [the_person.mc_title]... When I woke up this morning you were poking me pretty good... I figured you wouldn't mind if I took it for a quick ride."
         "You murmur your acceptance. Her mesmerizing tits are bouncing up and down right in front of you. You take them both in your palms and give them a good squeeze."
         # call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_sex_description_SBS125
-        call get_fucked(the_person, the_goal = "vaginal creampie", private= True, start_position = cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _call_sex_description_SBS125
+        call get_fucked(the_person, the_goal = "vaginal creampie", private= True, start_position = cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _call_get_fucked_starbuck_spend_the_night_01
         the_person "Mmmff. So good... I wish I could call in sick and we could fuck all day... but I need to get to the shop."
         $ the_person.draw_person(position = "stand3")
         the_person "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"

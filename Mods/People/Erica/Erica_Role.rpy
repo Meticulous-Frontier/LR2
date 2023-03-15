@@ -483,7 +483,7 @@ label erica_phase_one_label(the_person):
                 "You lean forward and run your tongue along her slit. She moans softly as soon as you make contact."
                 the_person "Oh [the_person.mc_title]..."
                 $ the_person.break_taboo("licking_pussy")
-                call get_fucked(the_person, the_goal = "get off", private= True, start_position = cowgirl_cunnilingus, start_object = make_bench(), skip_intro = True, ignore_taboo = True, allow_continue = False) from _erica_first_oral_01
+                call get_fucked(the_person, the_goal = "get off", private= True, start_position = cowgirl_cunnilingus, start_object = make_bench(), skip_intro = True, ignore_taboo = True, allow_continue = False) from _call_get_fucked_erica_first_oral_01
                 the_person "Wow, I needed that so bad..."
                 "For a bit she just sits on top of you, recovering. Soon, however, you feel her reach back and start to stroke your cock."
                 the_person "Mmm, it wouldn't be fair for me be the only one getting some relief... I bet you taste good..."
@@ -494,7 +494,7 @@ label erica_phase_one_label(the_person):
                 "[the_person.possessive_title] looks down at your shaft for a moment, giving it a couple strokes. She leans forward and kisses the tip of your dick gingerly."
                 "Her mouth opens and you feel the warm wetness of her gullet envelop your cock. It feels great as she starts to bob her head up and down on it."
                 $ the_person.break_taboo("sucking_cock")
-                call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = cowgirl_blowjob, start_object = make_bench(), skip_intro = True, ignore_taboo = True, allow_continue = False) from _erica_first_oral_02
+                call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = cowgirl_blowjob, start_object = make_bench(), skip_intro = True, ignore_taboo = True, allow_continue = False) from _call_get_fucked_erica_first_oral_02
                 "You lie back and catch your breath as [the_person.title] gets up."
                 $ the_person.draw_person()
                 the_person "Mmm, that was really nice. I could get used to that."
@@ -640,7 +640,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                 $ the_person.add_situational_obedience("submissive", 20, "She submits to you")
                 $ the_person.draw_person(position = "kissing")
                 the_person "Mmm, I'm ready... do whatever you want, [the_person.mc_title]..."
-                call fuck_person(the_person, private = True) from _erica_gets_fucked_by_her_man_in_lockerroom_01
+                call fuck_person(the_person, private = True) from _call_fuck_person_erica_gets_fucked_by_her_man_in_lockerroom_01
             "Let her take the lead":
                 mc.name "I'd like to see how you handle this thing."
                 "You give your dick a stroke. She chuckles and leans forward."
@@ -649,7 +649,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                 $ the_person.add_situational_slut("horny", 10, "She takes the lead")
                 $ the_person.add_situational_obedience("submissive", -20, "You submit to her")
                 "She is excited to take the lead."
-                call get_fucked(the_person, private= True) from _erica_pleases_her_man_in_lockerroom_01
+                call get_fucked(the_person, private= True) from _call_get_fucked_erica_pleases_her_man_in_lockerroom_01
         $ the_report = _return
         $ the_person.draw_person(position = "sitting")
         $ the_person.clear_situational_slut("horny")
@@ -711,7 +711,7 @@ label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness
                     $ the_person.add_situational_slut("horny", 10, "She takes the lead")
                     $ the_person.add_situational_obedience("submissive", -20, "You submit to her")
                     "She is excited to take the lead."
-                    call get_fucked(the_person, private= True) from _erica_pleases_her_man_in_lockerroom_02
+                    call get_fucked(the_person, private= True) from _call_get_fucked_erica_pleases_her_man_in_lockerroom_02
 
             $ the_report = _return
             $ the_person.clear_situational_slut("horny")

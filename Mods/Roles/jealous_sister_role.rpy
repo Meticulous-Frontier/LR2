@@ -188,7 +188,7 @@ label girlfriend_wakeup_jealous_sister_label(the_person):
     $ mc.change_locked_clarity(30)
     "She leans forward and replaces her finger with her lips. She kisses you hungrily, making her need for you known."
     "Without breaking the kiss, she reaches down between you and grabs your dick, pointing it up. A quick movement of her hips, and your manhood slips inside of her."
-    call get_fucked(jealous_sister, the_goal = "get off", start_position = cowgirl, skip_intro = True) from _jealous_sister_special_wakeup_01
+    call get_fucked(jealous_sister, the_goal = "get off", start_position = cowgirl, skip_intro = True) from _call_get_fucked_jealous_sister_special_wakeup_01
     "As you are both recovering, you suddenly hear the water in the shower stop. [jealous_sister.possessive_title] quickly springs up, and quietly slips out the door, leaving you alone in [the_person.title]'s bed."
     $ clear_scene()
     "You take a few moments to make sure you are presentable. You don't want [the_person.title] to get suspicious... Soon the bathroom door opens."

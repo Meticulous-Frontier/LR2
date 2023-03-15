@@ -482,7 +482,7 @@ label erica_lily_post_insta_handjob_label():
         mc.name "This is great, but I'm pretty tired. I'm not sure I'll be able to reciprocate."
         the_person "Don't worry, I just want to take care of this for you!"
     "You lay back in your bed and just enjoy it as [the_person.possessive_title] starts to give you a handjob."
-    call get_fucked(the_person, start_position = cowgirl_handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _erica_first_handjob_01
+    call get_fucked(the_person, start_position = cowgirl_handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_erica_first_handjob_01
     "[the_person.possessive_title] slowly gets up after you finish."
     the_person "Take care [the_person.mc_title]. I'll see you soon!"
     $ the_person.draw_person(position = "walking_away")
@@ -521,7 +521,7 @@ label erica_lily_post_insta_morning_label():
         $ the_person.change_arousal(20)
         $ mc.change_arousal(20)
         $ the_person.break_taboo("touching_body")
-        call get_fucked(the_person, start_position = drysex_cowgirl, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _erica_morning_drysex_01
+        call get_fucked(the_person, start_position = drysex_cowgirl, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_erica_morning_drysex_01
         $ erica_get_wakeup_options().append("drysex")
         $ the_person.apply_planned_outfit()
         $ the_person.change_slut(1, 40)
@@ -550,7 +550,7 @@ label erica_lily_post_insta_morning_label():
             "You run your hand thru her [the_person.hair_description] as she begins to suck you off."
         $ the_person.break_taboo("sucking_cock")
         $ mc.change_arousal(20)
-        call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "oral creampie", private = True, skip_intro = True, allow_continue = False) from _erica_morning_blowjob_01
+        call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "oral creampie", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_erica_morning_blowjob_01
         $ erica_get_wakeup_options().append("blowjob")
         $ the_person.apply_planned_outfit()
         $ the_person.change_slut(1, 60)
@@ -638,14 +638,14 @@ label erica_lily_post_insta_morning_label():
         "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
         the_person "God it's so warm..."
         "[the_person.possessive_title] doesn't waste any time and starts stroking you off."
-        call get_fucked(the_person, start_position = cowgirl_handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _erica_wakeup_handjob_02
+        call get_fucked(the_person, start_position = cowgirl_handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_erica_wakeup_handjob_02
         $ the_person.change_slut(1, 40)
     elif position_choice == "drysex":
         the_person "It's so big, I want to feel it against me."
         "You pull your blanket down as [the_person.possessive_title] climbs on top of you."
         $ the_person.draw_person(position = "cowgirl")
         "She gets into position and starts to grind up against you. The friction of your clothes and her body feels great."
-        call get_fucked(the_person, start_position = drysex_cowgirl, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _erica_morning_drysex_02
+        call get_fucked(the_person, start_position = drysex_cowgirl, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_erica_morning_drysex_02
     elif position_choice == "blowjob":
         the_person "Let me have a dose of your protein before I go work out."
         "You pull your blanket down and your shorts. When your cock springs free, she takes it in her hand and starts stroking it again."
@@ -653,7 +653,7 @@ label erica_lily_post_insta_morning_label():
         "She moves her head down to your crotch and licks your pre-cum from the tip."
         the_person "Mmm, I should do this every time I need some extra protein... you taste so good."
         "[the_person.possessive_title] opens her mouth and begins to bob her head up and down on your morning wood."
-        call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "oral creampie", private = True, skip_intro = True, allow_continue = False) from _erica_morning_blowjob_02
+        call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "oral creampie", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_erica_morning_blowjob_02
         $ the_person.change_slut(1, 60)
     elif position_choice == "anal cowgirl":
         the_person "Mmm, that sounds amazing. But try to be gentle, okay? I still want to go for a run today."
@@ -672,7 +672,7 @@ label erica_lily_post_insta_morning_label():
         "She lowers herself gently, but easily takes your hardness into her well trained back passage."
         the_person "Ahhh! Oh fuck it's so big..."
         "It takes her a moment, but soon [the_person.possessive_title] starts to rock her hips. Time to fuck her silly."
-        call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), allow_continue = False) from _anal_fetish_erica_morning_wakeup_01
+        call get_fucked(the_person, the_goal = "anal creampie", start_position = SB_anal_cowgirl, start_object = make_bed(), allow_continue = False) from _call_get_fucked_anal_fetish_erica_morning_wakeup_01
         $ the_person.change_slut(2, 100)
     elif position_choice == "threesome":
         the_person "I'll go get [lily.fname]. She DID say to let her know when I sneak back in anyway..."
@@ -786,7 +786,7 @@ label erica_pre_insta_love_label(the_person):
     "[the_person.title] starts to bob her head up and down, eager to satisfy you with her mouth."
     $ mc.change_arousal(10)
     "It's so hot, getting a blowjob from [the_person.possessive_title] while sitting on your sister's bed!"
-    call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = blowjob, skip_intro = True, ignore_taboo = True, allow_continue = False) from _erica_pre_insta_oral_01
+    call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = blowjob, skip_intro = True, ignore_taboo = True, allow_continue = False) from _call_get_fucked_erica_pre_insta_oral_01
     "When you finish, [the_person.possessive_title] quickly starts to straighten up her clothes and wipes the cum from her face."
     $ the_person.apply_planned_outfit()
     $ the_person.draw_person()

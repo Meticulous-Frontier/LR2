@@ -1453,7 +1453,7 @@ label candace_meet_doctor_candace_label():
     "Her tongue dances with yours as the first fledgling thrusts are made of her hips onto yours. Her kisses punctuated with moans."
     the_person "Mmm... You feel so good. I swear, every time we fuck is better than the last..."
     $ the_person.change_arousal(30)
-    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _meet_dr_candace_fuck_01
+    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_meet_dr_candace_fuck_01
     "When you finish, she just stays on top of you for a bit. You can feel your seed dribble out of her for a bit, but she doesn't seem to care about the mess. She just holds on to you."
     the_person "Thank you. I needed that."
     mc.name "Yes. I admit I was being apprehensive, but that certainly, ermmm, eased my mind."

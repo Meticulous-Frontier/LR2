@@ -489,7 +489,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
         "[the_person_one.title] looks at you."
         the_person_one "Why don't you just sit back. I'll take good care of you!"
 
-        call get_fucked(the_person_one, the_goal = "vaginal creampie") from _candace_starbuck_teamup_orgasm_denial_intro_01
+        call get_fucked(the_person_one, the_goal = "vaginal creampie") from _call_get_fucked_candace_starbuck_teamup_orgasm_denial_intro_01
         "Damn... [the_person_one.title] was right. She really did take care of you! You start to clean yourself up."
 
         $ scene_manager.update_actor(the_person_one, position = None)
@@ -693,7 +693,7 @@ label starbuck_candace_orgasm_denial_contest_label(the_person_one, the_person_tw
             the_person_two "Yes! Oh my god [the_person_two.mc_title] I need your cock so bad..."
             $ scene_manager.update_actor(the_person_two, position = None)
             "[the_person_two.title] stands up, she quickly pulls out the wildly moving dildo and tosses it aside. She pushes you back onto the table then climbs up on top of you."
-            call get_fucked(the_person_two, the_goal = "vaginal creampie", private= False, start_position = cowgirl, start_object = make_table()) from _call_get_fucked_candace_won_orgasm_contest_01
+            call get_fucked(the_person_two, the_goal = "vaginal creampie", private= False, start_position = cowgirl, start_object = make_table()) from _call_get_fucked_call_get_fucked_candace_won_orgasm_contest_01
             $ scene_manager.update_actor(the_person_one, position = None, display_transform = character_center_flipped)
             $ scene_manager.update_actor(the_person_two, position = None, display_transform = character_right)
             "After finishing, [the_person_two.title] gets up off of you. You notice [the_person_one.title] has recovered from her earlier orgasm and is standing to the side, watching."

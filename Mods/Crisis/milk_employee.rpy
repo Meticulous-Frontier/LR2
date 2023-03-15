@@ -150,7 +150,7 @@ label milk_employee_crisis_label():
                 the_person "Mmm. Just lay back, I'll take care of everything!"
                 $ the_person.strip_outfit()
                 # call fuck_person(the_person, start_position = cowgirl, start_object = make_desk(), girl_in_charge = True) from _milking_cowgirl_01
-                call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), allow_continue = True) from _milking_cowgirl_01
+                call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), allow_continue = True) from _call_get_fucked_milking_cowgirl_01
             "Get back to work":
                 mc.name "I need to get back to work, but I'll take you up on that another time."
     "Once you are finished, you leave [the_person.title] in the break room and get back to work."

@@ -55,7 +55,7 @@ label cum_fetish_morning_shower_label():
     "[the_person.possessive_title] gets down on her knees."
     the_person "I'm sorry, I know I shouldn't approach you like this... but I can't help myself this morning! Give me your cum please!"
     "[the_person.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans forward and slides her lips over the tip of your dick."
-    call get_fucked(the_person, private= True, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_fuck_person_SBC50
+    call get_fucked(the_person, private= True, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_get_fucked_cum_fetish_morning_shower
     the_person "Oh my god, thank you [the_person.mc_title]. I needed that so bad."
     "[the_person.possessive_title] stands up. Her hunger for cum satisfied for now."
     $ the_person.draw_person(position = "stand4")

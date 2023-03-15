@@ -498,7 +498,7 @@ label breeding_fetish_mom_intro_label(): # Needs testing
     mc.name "Of course I'll give you my cum. From now on, you'll be my own personal mare. I'll breed you every chance I get."
     $ the_person.change_arousal(15)
     the_person "Oh [the_person.mc_title], that's so hot... I want it now! I'm going to ride the cum out of you now!"
-    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _mom_breeding_fetish_intro_01
+    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_mom_breeding_fetish_intro_01
     if the_person.has_creampie_cum():
         the_person "Oh god... I need to keep it all in..."
         "[the_person.title] reaches her hand down, trying to keep your cum inside of her, but failing, as your cum drips down the inside of her thighs."
@@ -763,7 +763,7 @@ label breeding_fetish_stephanie_normal_label(the_person):
     "She looks at you expectantly."
     the_person "Well? Why are you still wearing clothes? You said you would help!"
     # call fuck_person(the_person, start_position = SB_anal_cowgirl, start_object = make_desk(), girl_in_charge = True, position_locked = True) from _call_sex_description_SBA093
-    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), allow_continue = False) from _call_steph_breeding_fetish_cowgirl_01
+    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_desk(), allow_continue = False) from _call_get_fucked_call_steph_breeding_fetish_cowgirl_01
     $ add_breeding_fetish(the_person)
     the_person "Oh god... It's even better than I dreamed about last night."
     "[the_person.possessive_title] takes a minute to recover before standing up. She rubs her belly."
@@ -1052,7 +1052,7 @@ label breeding_fetish_erica_unsuccessful_followup_label():
     mc.name "What are you doing here?"
     the_person "I've been tracking my cycles and I am soooo fertile right now. I understand you were too tired last night, but I need your cum ASAP."
     "[the_person.possessive_title] starts to work her hips. You know you should be concerned about how she even got in here, but right now you decide to just lie back and enjoy."
-    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _erica_breeding_fetish_intro_02
+    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_erica_breeding_fetish_intro_02
     "When you finish, she rolls off you and lays beside you on your bed."
     $ the_person.draw_person(position = "missionary")
     $ add_breeding_fetish(the_person)

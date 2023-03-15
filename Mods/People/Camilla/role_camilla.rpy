@@ -540,7 +540,7 @@ label camilla_take_pics_label(the_person):  #Not the first time.
             "You make sure to snap more pictures of her. She's getting good at this!"
             "You decide to just enjoy her skilled mouth going down on you."
             # call fuck_person(the_person, start_position = deepthroat, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH011
-            call get_fucked(the_person, start_position = deepthroat, start_object = make_sink(), private = True, skip_intro = True, allow_continue = False) from _call_camilla_sex_description_CSH011
+            call get_fucked(the_person, start_position = deepthroat, start_object = make_sink(), private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_camilla_sex_description_CSH011
         else:
             the_person "Mmmm, I can't wait any longer... I have to taste it!"
             $ the_person.break_taboo("sucking_cock")
@@ -549,7 +549,7 @@ label camilla_take_pics_label(the_person):  #Not the first time.
             mc.name "Mmm, that feels great [the_person.title]."
             "You decide to just enjoy her skilled mouth going down on you."
             # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH012
-            call get_fucked(the_person, start_position = blowjob, start_object = make_sink(), private = True, skip_intro = True, allow_continue = False) from _call_camilla_sex_description_CSH012
+            call get_fucked(the_person, start_position = blowjob, start_object = make_sink(), private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_camilla_sex_description_CSH012
 
         if the_person.has_mouth_cum():
             "[the_person.possessive_title] looks up at you. She couldn't quite swallow all your cum, some of it is slowly dripping down the sides of her mouth."
@@ -628,7 +628,7 @@ label camilla_bathroom_blowjob_label(the_person):
     $ mc.change_locked_clarity(40)
     "You forget you are supposed to take pictures and begin to just enjoy the wonderful sensations."
     # call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = True, position_locked = True) from _call_camilla_sex_description_CSH010
-    call get_fucked(the_person, start_position = blowjob, start_object = make_sink(), private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_camilla_sex_description_CSH010
+    call get_fucked(the_person, start_position = blowjob, start_object = make_sink(), private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_get_fucked_camilla_sex_description_CSH010
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         the_person "Wow... I can't believe I came... while I was blowing you! That was fucking hot!"
@@ -1241,7 +1241,7 @@ label camilla_lingerie_help_label(the_person):  #40
     "You snap more pictures as [the_person.title] opens up and slides her warm wet mouth down over the tip of your erection."
     $ mc.change_locked_clarity(50)
     "All the sexy wardrobe changes have you aching for release. You sigh as [the_person.possessive_title]'s mouth starts bobbing up and down."
-    call get_fucked(the_person, start_position = blowjob, private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_camilla_lingerie_blowjob_01
+    call get_fucked(the_person, start_position = blowjob, private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_get_fucked_camilla_lingerie_blowjob_01
     if the_person.has_mouth_cum():
         "[the_person.possessive_title] looks up at you. You frame the cum dribbling down the sides of her mouth in a final set of pictures."
         the_person "Mmm, another tasty snack. Glad I got a high protein lunch today!"
@@ -1376,7 +1376,7 @@ label camilla_formal_date_label():    #60
         first_node = dom_sex_path_node(cowgirl_blowjob, completion_requirement = dom_requirement_mc_aroused)    #Blowjob to arousal
         final_node = dom_sex_path_node(SB_reverse_cowgirl, completion_requirement = dom_requirement_creampie)   #Finish inside her
         sex_path = [first_node, final_node]
-    call get_fucked(the_person, the_goal = "vaginal creampie", sex_path = sex_path, skip_intro = True, allow_continue = False, start_object = make_bed()) from _camilla_sleepover_fuck_01
+    call get_fucked(the_person, the_goal = "vaginal creampie", sex_path = sex_path, skip_intro = True, allow_continue = False, start_object = make_bed()) from _call_get_fucked_camilla_sleepover_fuck_01
     $ the_report = _return
     if the_report.get("girl orgasms", 0) > 0:
         the_person "Oh my god... that was amazing. You ALWAYS get me off... its incredible..."

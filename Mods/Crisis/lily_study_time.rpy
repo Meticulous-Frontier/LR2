@@ -324,7 +324,7 @@ label sister_failed_test_label():
                     the_person "Mmm, I love to hear you beg."
                     "[the_person.possessive_title] opens her mouth wide and slowly slides your cock past her lips. Their velvet warmth feels amazing."
                     "[the_person.title] begins to slowly bob her head up and down."
-                call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _lily_study_time_blowjob_01
+                call get_fucked(the_person, start_position = cowgirl_blowjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_lily_study_time_blowjob_01
             "Ask for quickie" if the_person.sluttiness >= 60 and mc.energy > 50 and the_person.vagina_available() and not the_person.has_taboo("touching_penis") and not the_person.has_taboo("sucking_cock"):
                 if the_person.has_taboo("vaginal_sex"):
                     the_person "Wow... you want me to just... hop on and go for a ride? That's... a little crazy, don't you think?"
@@ -373,7 +373,7 @@ label sister_failed_test_label():
                     $ the_person.break_taboo("condomless_sex")
                 "[the_person.possessive_title] lifts her hips up slightly, lining you up with her pussy. She slowly lowers herself down, your cock pushing inside of her."
                 "It takes a few seconds, but with steady pressure she manages to take you all the way. She takes a few moments to adjust to the feeling, then begins to rock her hips."
-                call get_fucked(the_person, start_position = cowgirl, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _lily_study_time_quickie_01
+                call get_fucked(the_person, start_position = cowgirl, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_lily_study_time_quickie_01
                 $ the_report = _return
                 if the_report.get("girl orgasms", 0) > 0:
                     the_person "Wow... that felt so good..."

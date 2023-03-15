@@ -1060,7 +1060,7 @@ label ashley_ask_about_porn_label(the_person):
     $ mc.change_locked_clarity(20)
     "She looks into your eyes as she continues to give you a handjob."
     the_person "Alright, don't hold back now."
-    call get_fucked(the_person, start_position = handjob, private = True, skip_intro = True, allow_continue = False) from _ashley_first_handjob_01
+    call get_fucked(the_person, start_position = handjob, private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_ashley_first_handjob_01
     $ scene_manager.update_actor(the_person, position = "stand3")
     $ the_report = _return
     if the_report.get("guy orgasms", 0) > 0:
@@ -2857,7 +2857,7 @@ label ashley_second_concert_date_label():
                 "She looks into your eyes as she starts to give you a handjob."
                 the_person "Alright, don't hold back now."
                 $ date_outcome = "handjob"
-                call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _ashley_handjob_second_date_01
+                call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_ashley_handjob_second_date_01
                 $ the_report = _return
                 if the_report.get("guy orgasms", 0) > 0:
                     if the_person.has_face_cum():
@@ -2899,7 +2899,7 @@ label ashley_second_concert_date_label():
                 "You put your hand on the back of her head."
                 mc.name "You say that like you have a choice."
                 "She smirks for a second, but quickly opens her mouth as you pull her head down. Her velvet lips wrap around you and start to eagerly suck you off."
-                call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = blowjob, skip_intro = True, ignore_taboo = True, allow_continue = False) from _ashley_second_date_blowjob_01
+                call get_fucked(the_person, the_goal = "oral creampie", private= True, start_position = blowjob, skip_intro = True, ignore_taboo = True, allow_continue = False) from _call_get_fucked_ashley_second_date_blowjob_01
                 $ the_report = _return
                 if the_report.get("guy orgasms", 0) > 0:
                     if the_person.has_face_cum():
@@ -3102,7 +3102,7 @@ label ashley_second_concert_date_label():
             "She reaches down and takes your cock in her hand and lines it up with her raw cunt."
             stephanie "I want to feel you cum inside me tonight. I'm going give you the ride of your life and then finish you off deep..."
             "[stephanie.possessive_title] lowers her hips, sheathing your erection. She sighs in satisfaction when she bottoms out."
-            call get_fucked(stephanie, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _ashley_second_date_creampie_steph_01
+            call get_fucked(stephanie, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_ashley_second_date_creampie_steph_01
         elif stephanie.is_willing(cowgirl):
             "She reaches over to her nightstand and pulls out a pack of condoms. She grabs one and quickly rolls it onto you with her hand."
             stephanie "I know you don't like this, but I don't trust myself to pull off in time..."
@@ -3111,9 +3111,9 @@ label ashley_second_concert_date_label():
             $ mc.condom = True
             "She reaches down and takes your cock in her hand and lines it up with her cunt."
             "[stephanie.possessive_title] lowers her hips, sheathing your erection. She sighs in satisfaction when she bottoms out."
-            call get_fucked(stephanie, the_goal = "get mc off", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _ashley_second_date_fuck_steph_01
+            call get_fucked(stephanie, the_goal = "get mc off", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_ashley_second_date_fuck_steph_01
         else:
-            call get_fucked(stephanie, the_goal = "get mc off", start_position = drysex_cowgirl, private = True, skip_intro = True, allow_continue = False) from _ashley_second_date_drysex_steph_01
+            call get_fucked(stephanie, the_goal = "get mc off", start_position = drysex_cowgirl, private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_ashley_second_date_drysex_steph_01
         $ stephanie.draw_person(position = "back_peek")
         "[stephanie.possessive_title] turns her back to you. You cuddle up with her, wrapping your arm around her."
         mc.name "Goodnight..."
@@ -3290,7 +3290,7 @@ label ashley_sneaks_over_label():   #Requires 60 love and 60 sluttiness events c
         "[the_person.title] points your cock toward her slit, then starts to rub against it. Her arousal glistens at the tip of the condom as she moves her hips back and forth."
         the_person "Here we go. Round one!"
         "[the_person.possessive_title] stops rolling her hips. With one smooth movement she slides you deep into her tight cunt."
-    call get_fucked(the_person, start_position = cowgirl, the_goal = ashley_sex_goal, private = True, skip_intro = True, allow_continue = False) from _ashley_comes_over_cowgirl_01
+    call get_fucked(the_person, start_position = cowgirl, the_goal = ashley_sex_goal, private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_ashley_comes_over_cowgirl_01
     $ the_person.draw_person(position = "missionary")
 
     $ the_report = _return

@@ -106,7 +106,7 @@ label breeding_fetish_high_fertility_crisis_label():
         the_person "Yes! Oh [the_person.mc_title]..."
         "She descends slowly, but finally bottoms out with a sigh. She takes a moment to adjust to your girth before she starts to rock her hips some."
         the_person "Oh god... here we go!"
-        call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _highly_fertile_breeding_901
+        call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, private = True, skip_intro = True, allow_continue = False) from _call_get_fucked_highly_fertile_breeding_901
         if the_person.has_creampie_cum():
             the_person "It's inside me! It worked! Don't ask me how I know... I can just feel it!"
             "She rubs her belly and sighs."
@@ -483,7 +483,7 @@ label breeder_cowgirl_wakeup_label(the_person):
     "[the_person.possessive_title] moans during one slow stroke."
     "You decide to lay back and enjoy the ride."
     # call fuck_person(the_person, start_position = cowgirl, start_object = make_bed(), skip_intro = True, girl_in_charge = True) from _call_sex_description_SBV50
-    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _call_sex_description_breeder_wakeup__01
+    call get_fucked(the_person, the_goal = "vaginal creampie", start_position = cowgirl, start_object = make_bed(), skip_intro = True, allow_continue = False) from _call_get_fucked_breeder_cowgirl_wakeup__01
     mc.name "Oh god what a wakeup. I think I'm gonna go back to sleep for a bit. Thanks!"
     if the_person == mom:
         "[the_person.possessive_title] looks at you and smiles."
