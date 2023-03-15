@@ -172,7 +172,7 @@ label strip_ask_cum_fetish_blowjob(the_girl, the_clothing, the_location, the_obj
         "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = cum_fetish_blowjob.position_tag)
-            "[the_girl.possessive_title] stands up and strips out of her [the_clothing.name]. Then she gets back onto her knees and slides your cock all the way to the back of her mouth."
+            "[the_girl.possessive_title] strips out of her [the_clothing.name]. Then she gets back to work sliding your cock all the way to the back of her mouth."
 
         "Leave it on":
             mc.name "No, I like how you look with it on."

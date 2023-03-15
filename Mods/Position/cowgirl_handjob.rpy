@@ -150,7 +150,7 @@ label strip_ask_cowgirl_handjob(the_girl, the_clothing, the_location, the_object
         "Let her strip":
             mc.name "Take it off for me."
             $ the_girl.draw_animated_removal(the_clothing, position = cowgirl_handjob.position_tag)
-            "[the_girl.possessive_title] stands up and strips out of her [the_clothing.name]. Then she gets back on top of you and starts stroking you again."
+            "[the_girl.possessive_title] strips out of her [the_clothing.name]. Then she gets back to work and starts stroking you again."
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
