@@ -1148,7 +1148,7 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
     while not finished:
         "You quickly remind yourself, the serum must include the energy drink trait, and you need at least 10."
         call screen serum_inventory_select_ui(mc.business.inventory)
-        if not _return == "None":
+        if isinstance(_return, SerumDesign):
             $ the_serum = _return
             if mc.business.inventory.get_serum_count(the_serum) >= 10 and myra_serum_is_acceptable_energy_drink(the_serum):
                 "You set it up for [the_person.title] to take 10 [the_serum.name]s to the gaming cafe."

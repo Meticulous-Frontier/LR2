@@ -45,5 +45,5 @@ init 2:
                 align [0.5,0.5]
                 auto "gui/button/choice_%s_background.png"
                 focus_mask "gui/button/choice_idle_background.png"
-                action [Hide("serum_tooltip"), Return("None")]
+                action [Hide("serum_tooltip"), Return(None)]
             textbutton "Return" align [0.5,0.5] text_style "return_button_style"

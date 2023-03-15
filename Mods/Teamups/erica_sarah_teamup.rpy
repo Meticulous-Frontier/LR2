@@ -557,7 +557,7 @@ label erica_weekly_yoga_label(the_person):
         menu:
             "Fill it for her\n{color=#00FF00}{size=18}Give class serum{/size}{/color}":
                 call screen serum_inventory_select_ui(mc.inventory)
-                if not _return == "None":
+                if isinstance(_return, SerumDesign):
                     $ the_serum = _return
                     if mc.inventory.get_serum_count(the_serum) > __builtin__.len([the_person, yoga_assistant] + yoga_list):
                         "You decide to add [class_size] doses of [the_serum.name] to the water jug. You quickly return and place it on the counter."
