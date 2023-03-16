@@ -57,6 +57,7 @@ init 2 python:
             heart_string += "{image=" + get_individual_heart(sluttiness - x, effective_sluttiness - x, capacity) + "}"
         return heart_string
 
+
     @renpy.pure
     def get_individual_heart(base_sluttiness, actual_sluttiness, capacity  = 20): #Give this the core, temp, core+suggest slut, minus 20*(current heart-1) each and it will find out the current heart status for that chunk of the heart array.
         image_string = "gui/heart/"

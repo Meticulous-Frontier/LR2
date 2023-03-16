@@ -65,7 +65,7 @@ init 2:
             arousal_info = get_arousal_with_token_string(person.arousal, person.max_arousal)
             energy_info = get_energy_string(person.energy, person.max_energy)
             happiness_info = str(__builtin__.int(person.happiness))
-            love_info = str(__builtin__.int(person.love))
+            love_info = get_red_heart_list(person.love, 5)
             sluttiness_info = get_heart_image_list(person.sluttiness, person.effective_sluttiness())
             obedience_info = str(person.obedience) + " {image=triskelion_token_small} " + get_obedience_plaintext(person.obedience)
             height_info = height_to_string(person.height)

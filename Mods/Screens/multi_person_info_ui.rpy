@@ -6,7 +6,7 @@ init 2 python:
         tooltip = ""
         if mc.business.get_employee_title(person) != "None":
             tooltip += "Job: " + mc.business.get_employee_title(person) + "\n"
-        tooltip += "Love: " + str(person.love) + "\n"
+        tooltip += "Love: " + get_red_heart_list(person.love, 5) + "\n"
         tooltip += "Suggestibility: " + str(person.suggestibility) + "%\n"
         tooltip += "Age: " + str(person.age) + "\n"
         tooltip += "Height: " + height_to_string(person.height) + "\n"
