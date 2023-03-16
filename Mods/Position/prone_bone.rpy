@@ -228,6 +228,10 @@ label scene_prone_bone_3(the_girl, the_location, the_object):
     menu:
         "Threaten to creampie her" if not mc.condom:
             mc.name "God your pussy is so tight. I can't wait to dump my load inside it."
+            if the_girl.knows_pregnant():
+                the_girl "Oh Yes! Fill me up with that potent love juice!"
+                $ the_girl.change_arousal(12)
+                "You can feel her womb pulsating around your member."
             if the_girl.has_breeding_fetish():
                 the_girl "Yes! Oh fuck yes make sure you cum deep [the_girl.mc_title]!"
                 $ the_girl.change_arousal(20)
