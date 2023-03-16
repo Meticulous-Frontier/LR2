@@ -38,7 +38,7 @@ init 0 python:
         if percent < .5:
             color_string = "#e1e113"
         if percent < .2:
-            color_string = "#B14365"
+            color_string = "#f13355"
         return color_string
 
     @renpy.pure
@@ -47,7 +47,7 @@ init 0 python:
         if percent > .5:
             color_string = "#e1e113"
         if percent > .8:
-            color_string = "#B14365"
+            color_string = "#f13355"
         return color_string
 
     @renpy.pure
