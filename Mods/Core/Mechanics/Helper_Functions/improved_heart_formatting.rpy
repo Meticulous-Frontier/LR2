@@ -18,6 +18,24 @@ init 2 python:
 
         return the_final_string
 
+    @renpy.pure
+    def get_red_heart_list(value, max_hearts = 5):
+        the_final_string = ""
+        count = 0
+        while count < max_hearts:
+            if value > 20:
+                the_final_string += get_red_heart(20)
+                count += 1
+                value -= 20
+            elif value > 5:
+                the_final_string += get_red_heart(value)
+                count += 1
+                value -= value
+            else:
+                the_final_string += "{image=gui/heart/empty_heart.png}"
+                count += 1
+        return the_final_string
+
     # override default function to limit call stack depth
     @renpy.pure
     def get_gold_heart(sluttiness, depth = 0):
