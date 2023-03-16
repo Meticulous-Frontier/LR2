@@ -206,7 +206,7 @@ label transition_anal_doggy_to_doggy_taboo_break_label(the_girl, the_location, t
     the_girl "Are you enjoying pounding my tight asshole?"
     "You slide your cock out of her ass and drag it down between her legs, ending with your tip resting against her pussy."
     mc.name "No, this is what I really want."
-    $ the_girl.call_dialogue(doggy_anal.associated_taboo+"_taboo_break")
+    $ the_girl.call_dialogue(doggy.associated_taboo+"_taboo_break")
     "You hold onto [the_girl.title]'s hips with one hand and your cock with the other, guiding it as you push forward."
     "After a moment of resistance your cock spreads her [the_girl.pubes_description] pussy open and you slide smoothly inside of her."
     if the_girl.sex_skills["Vaginal"] > 2:
