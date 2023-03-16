@@ -364,7 +364,7 @@ label swap_threesome_sixty_nine_fuck_girl_one(the_girl_1, the_girl_2, the_locati
     return
 
 label swap_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_location, the_object):
-    if the_girl2.is_bald():
+    if the_girl_2.is_bald():
         "Stepping back for a moment, you begin to run your hands over [the_girl_2.title]'s smooth head, then slowly pull her mouth down towards your cock."
     else:
         "Stepping back for a moment, you begin to run your hands through [the_girl_2.title]'s hair, then slowly pull her mouth down towards your cock."
