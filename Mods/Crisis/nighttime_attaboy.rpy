@@ -30,7 +30,7 @@ init 1 python:
         "Cunnilingus" : "Your tongue slipped into my pussy.",
         "Deepthroat" : "I finally got your cock to slide into my throat.",
         "Anal Doggy" : "You got me on all fours and slid into my ass.",
-        "Doggy" : "You got me on all fours and pounded be doggystyle.",
+        "Doggy" : "You got me on all fours and pounded me doggystyle.",
         "Handjob" : "I could barely get my hand around your monster cock and started stroking it.",
         "Kissing" : "When our lips met. The electric jolt I got, I knew this was going to be an amazing session.",
         "Missionary" : "You put me on my back and slid inside of me.",
