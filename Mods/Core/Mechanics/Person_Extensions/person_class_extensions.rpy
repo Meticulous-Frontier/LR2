@@ -334,6 +334,11 @@ init -1 python:
 
     Person.available = property(get_person_available, set_person_available, None, "Mark a person available or not.")
 
+    def get_person_arousal_perc(self):
+        return (self.arousal / 1.0 * (self.max_arousal or 1)) * 100
+
+    Person.arousal_perc = property(get_person_arousal_perc, None, None)
+
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
     def match_skin(self, color):

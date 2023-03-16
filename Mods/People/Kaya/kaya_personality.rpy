@@ -89,13 +89,13 @@ label kaya_greetings(the_person):
     return
 
 label kaya_sex_responses_foreplay(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm... this feels great. Keep going!"
         else:
             the_person "Mmmm... that feels good..."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Oh! I like it when you touch me there."
             "She purrs warmly."
@@ -103,7 +103,7 @@ label kaya_sex_responses_foreplay(the_person):
             the_person "Oh god that's nice."
             "It seems like she's trying not to moan too loudly."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             if the_person.outfit.wearing_panties():
                 the_person "Ah... I should probably get my panties off soon before I make a mess."
@@ -127,19 +127,19 @@ label kaya_sex_responses_foreplay(the_person):
     return
 
 label kaya_sex_responses_oral(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Oh your tongue is so good [the_person.mc_title]..."
         else:
             the_person "Oh wow... that's... Mph!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Mmmm, that's so good. Glad you are putting that tongue to such good use."
         else:
             the_person "That... that feels so good [the_person.mc_title]... So fucking good."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "God, your tongue is amazing!"
 
@@ -159,19 +159,19 @@ label kaya_sex_responses_oral(the_person):
     return
 
 label kaya_sex_responses_vaginal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "God it feels so good when it first goes in."
         else:
             the_person "Oh my god... Ah..."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Keep fucking me [the_person.mc_title], it feels fantastic!"
         else:
             the_person "Oh my god, that feeling..."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Ah, fuck me [the_person.mc_title]! Give me that big cock!"
 
@@ -191,20 +191,20 @@ label kaya_sex_responses_vaginal(the_person):
     return
 
 label kaya_sex_responses_anal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Oh fuck, I can't believe it actually fit!"
         else:
             the_person "Fuck, it feels so big... That's all of it, right? I can't take any more!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Fuck my ass [the_person.mc_title], I can take it!"
         else:
             the_person "Oh fuck, my poor ass..."
             "Her groan is a mixture of pain and pleasure."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Oh my poor little ass, you're going to ruin me..."
             "She doesn't seem very upset with the idea."

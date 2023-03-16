@@ -63,13 +63,13 @@ label myrabelle_greetings(the_person):
     return
 
 label myrabelle_sex_responses_foreplay(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm.... Your hands feel amazing, you know that right?"
         else:
             the_person "Mmmm... Ah..."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Mmm fuck, you are really getting me going aren't you?"
             "She purrs warmly."
@@ -77,7 +77,7 @@ label myrabelle_sex_responses_foreplay(the_person):
             the_person "Oh my god..."
             "It seems like she's trying not to moan too loudly."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             if the_person.outfit.wearing_panties():
                 the_person "Ah. fuck, are you trying to make me soak my panties?"
@@ -101,19 +101,19 @@ label myrabelle_sex_responses_foreplay(the_person):
     return
 
 label myrabelle_sex_responses_oral(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Fuck yeah, finally put that mouth of yours to good use..."
         else:
             the_person "Oh wow... that's... Mph!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Mmmm, that's so good. Ah..."
         else:
             the_person "That... that feels so good [the_person.mc_title]... So fucking good."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Fuck [the_person.mc_title], where did you learn to do that with your tongue?"
 
@@ -133,20 +133,20 @@ label myrabelle_sex_responses_oral(the_person):
     return
 
 label myrabelle_sex_responses_vaginal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm, it feels so good."
             the_person "Just go slow for a bit, I need to get warmed up."
         else:
             the_person "Oh my god... Ah..."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Fuck me [the_person.mc_title], it feels amazing!"
         else:
             the_person "Oh my god, that feeling..."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Ah, fuck me [the_person.mc_title]! Give me that big cock!"
 
@@ -166,20 +166,20 @@ label myrabelle_sex_responses_vaginal(the_person):
     return
 
 label myrabelle_sex_responses_anal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Oh fuck, you stretch me so good!"
         else:
             the_person "Fuck, it feels so big... That's all of it, right? I can't take any more!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Fuck my ass like you mean it [the_person.mc_title]!"
         else:
             the_person "Oh fuck, my poor ass..."
             "Her groan is a mixture of pain and pleasure."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "That's it [the_person.mc_title]! Stretch my ass and make it yours!"
         else:
