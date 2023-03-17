@@ -12,16 +12,16 @@ init 2 python:
     list_of_mc_traits.append(mc_serum_cum_suggest)
 
 init 1 python:  #Associated Perks
-    def perk_cum_suggest_small_on_cum(the_person, the_place):
-        the_person.change_modded_suggestibility(2, max_amt = 10)
+    def perk_cum_suggest_small_on_cum(the_person, the_place, add_to_log = True):
+        the_person.change_modded_suggestibility(2, max_amt = 10, add_to_log = add_to_log)
         return
 
-    def perk_cum_suggest_med_on_cum(the_person, the_place):
-        the_person.change_modded_suggestibility(3, max_amt = 20)
+    def perk_cum_suggest_med_on_cum(the_person, the_place, add_to_log = True):
+        the_person.change_modded_suggestibility(3, max_amt = 20, add_to_log = add_to_log)
         return
 
-    def perk_cum_suggest_large_on_cum(the_person, the_place):
-        the_person.change_modded_suggestibility(4, max_amt = 30)
+    def perk_cum_suggest_large_on_cum(the_person, the_place, add_to_log = True):
+        the_person.change_modded_suggestibility(4, max_amt = 30, add_to_log = add_to_log)
         return
 
     def perk_cum_suggest_small():

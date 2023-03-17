@@ -176,9 +176,9 @@ init -1 python:
                         ret_text += " (On Cooldown)"
             return ret_text
 
-        def perk_on_cum(self, the_person = None, the_place = None):
+        def perk_on_cum(self, the_person = None, the_place = None, add_to_log = True):
             for perk_name in self.ability_perks:
-                self.ability_perks[perk_name].on_cum(the_person, the_place)
+                self.ability_perks[perk_name].on_cum(the_person, the_place, add_to_log)
 
     class Stat_Perk(renpy.store.object):
         # owner can be MC or any other Person object (default is MC)
@@ -331,10 +331,10 @@ init -1 python:
             pass
             return
 
-        def on_cum(self, the_person = None, the_place = None):
+        def on_cum(self, the_person = None, the_place = None, add_to_log = True):
             if hasattr(self, "cum_func"):
                 if self.cum_func is not None and self.toggle:
-                    self.cum_func(the_person, the_place)
+                    self.cum_func(the_person, the_place, add_to_log)
             return
 
     def second_wind_func():
