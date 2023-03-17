@@ -1087,11 +1087,21 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
 
         menu:
             "Put on a condom":
-                mc.name "I think you're right. One second."
+                if the_person.knows_pregnant():
+                    mc.name "Not this time slut, we are using a condom."
+                elif the_person.wants_creampie():
+                    mc.name "Not this time, we will use a condom."
+                else:
+                    mc.name "I think you're right. One second."
                 call put_on_condom_routine(the_person) from _call_put_on_condom_routine_5
 
             "Fuck her raw":
-                mc.name "No way. I want to feel you wrapped around me."
+                if the_person.knows_pregnant():
+                    mc.name "I'm going to fuck that pregnant pussy raw."
+                elif the_person.wants_creampie():
+                    mc.name "I'm going to fill up that little cunt of yours."
+                else:
+                    mc.name "No way. I want to feel you wrapped around me."
                 call fuck_without_condom_taboo_break_response(the_person, skill_tag, skip_taboo_break = skip_taboo_break) from _call_fuck_without_condom_taboo_break_response_3
 
     else: #Slutty enough that she doesn't even care about a condom.
