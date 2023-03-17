@@ -1485,7 +1485,7 @@ init -1 python:
 
     def ashley_work_titfuck_requirement(the_person):
         if ashley.obedience_step != 1:
-            return
+            return False
         if the_person.is_at_work():
             if the_person.obedience < 120:
                 return "Requires 120 obedience"
@@ -1495,7 +1495,7 @@ init -1 python:
 
     def ashley_work_blowjob_requirement(the_person):
         if ashley.obedience_step != 2:
-            return
+            return False
         if the_person.is_at_work():
             if the_person.obedience < 140:
                 return "Requires 140 obedience"
@@ -1505,7 +1505,7 @@ init -1 python:
 
     def ashley_work_fuck_requirement(the_person):
         if ashley.obedience_step != 3:
-            return
+            return False
         if the_person.is_at_work():
             if the_person.obedience < 160:
                 return "Requires 160 obedience"
@@ -1515,7 +1515,7 @@ init -1 python:
 
     def ashley_work_anal_requirement(the_person):
         if ashley.obedience_step != 4:
-            return
+            return False
         if the_person.is_at_work():
             if the_person.obedience < 180:
                 return "Requires 180 obedience"
@@ -1539,10 +1539,10 @@ init 1 python:
     ashley_final_submission = Action("Ashley's serum plot", ashley_final_submission_requirement, "ashley_final_submission_label")
 
     # Repeatable command scenes
-    ashley_work_titfuck = Action("Obedience: Fuck Her Tits", ashley_work_titfuck_requirement, "ashley_work_titfuck_label")
-    ashley_work_blowjob = Action("Obedience: Get Blowjob", ashley_work_blowjob_requirement, "ashley_work_blowjob_label")
-    ashley_work_fuck = Action("Obedience: Fuck Her", ashley_work_fuck_requirement, "ashley_work_fuck_label")
-    ashley_work_anal = Action("Obedience: Fuck Her Ass", ashley_work_anal_requirement, "ashley_work_anal_label")
+    ashley_work_titfuck = Action("Obedience: Fuck Her Tits", ashley_work_titfuck_requirement, "ashley_work_titfuck_label", priority = 20)
+    ashley_work_blowjob = Action("Obedience: Get Blowjob", ashley_work_blowjob_requirement, "ashley_work_blowjob_label", priority = 20)
+    ashley_work_fuck = Action("Obedience: Fuck Her", ashley_work_fuck_requirement, "ashley_work_fuck_label", priority = 20)
+    ashley_work_anal = Action("Obedience: Fuck Her Ass", ashley_work_anal_requirement, "ashley_work_anal_label", priority = 20)
 
     ashley_submission_role = Role(role_name ="Ashley Submission", actions =[ashley_work_titfuck, ashley_work_blowjob, ashley_work_fuck, ashley_work_anal], hidden = True)
 
@@ -1871,7 +1871,7 @@ label ashley_submission_titfuck_taboo_restore_label():
         $ mc.business.add_mandatory_crisis(ashley_submission_titfuck_taboo_restore)
         "[the_person.title] isn't willing to make this a regular thing yet. You wonder if you can get her to be obedient if she would be willing to make this a more regular thing..."
         $ ashley.obedience_messages[0] = "Use obedience to convince [ashley.fname] to let you use her tits again."
-        $ ashley.special_role.insert(0, ashley_submission_role)
+        $ ashley.add_role(ashley_submission_role)
     $ clear_scene()
     return
 
@@ -2249,7 +2249,7 @@ label ashley_submission_blowjob_taboo_restore_label():
         $ mc.business.add_mandatory_crisis(ashley_submission_blowjob_taboo_restore)
         "[the_person.title] isn't willing to make this a regular thing yet. You wonder if you can get her to be obedient if you could give it another shot..."
         $ ashley.obedience_messages[1] = "Use obedience to convince [ashley.fname] to blow you again."
-        $ ashley.special_role.insert(0, ashley_submission_role)
+        $ ashley.add_role(ashley_submission_role)
     $ clear_scene()
 
 
