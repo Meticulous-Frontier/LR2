@@ -2150,7 +2150,7 @@ label ashley_submission_blowjob_label():  #140 obedience
     $ the_person.draw_person(position = "walking_away")
     "She quickly steps out of your office and then disappears into the hall."
     $ clear_scene()
-    "Dsepite your progress, [the_person.possessive_title] appears to be resisting your commanding influence again."
+    "Despite your progress, [the_person.possessive_title] appears to be resisting your commanding influence again."
     "You have a feeling you are going to hear about this event again from her."
     $ ashley.obedience_messages[1] = "You convinced [ashley.fname] to give you a blowjob."
     $ ashley.obedience_messages[2] = ""
