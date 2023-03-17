@@ -1406,26 +1406,26 @@ label ashley_tests_serum_on_sister_label(): #100 sluttiness, also requires drink
 init -1 python:
     def ashley_demands_relief_requirement():
         if ashley.event_triggers_dict.get("mc_obedience", 0) > 30 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if time_of_day == 3:
+            if mc.is_at_work() and time_of_day == 3:
                 return True
         return False
 
     def ashley_demands_oral_requirement():
         return False    #Current writing place
         if ashley.event_triggers_dict.get("mc_obedience", 0) > 60 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if time_of_day == 3:
+            if mc.is_at_work() and time_of_day == 3:
                 return True
         return False
 
     def ashley_arousal_serum_start_requirement():
         if ashley.event_triggers_dict.get("mc_obedience", 0) > 100 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if time_of_day == 3:
+            if mc.is_at_work() and time_of_day == 3:
                 return True
         return False
 
     def ashley_demands_sub_requirement(the_person):
         if ashley.event_triggers_dict.get("mc_obedience", 0) > 150 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if time_of_day == 3:
+            if mc.is_at_work() and time_of_day == 3:
                 return True
         return False
 
@@ -1436,7 +1436,7 @@ init -1 python:
             ashley.obedience_messages[0] = "Wait a few days to progress."
         if ashley.obedience > 120 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
             # ashley_stay_after_work_setup()
-            if time_of_day == 3:
+            if mc.is_at_work() and time_of_day == 3:
                 return True
         return False
 
@@ -1447,7 +1447,7 @@ init -1 python:
         if ashley.days_since_event("obedience_event") < TIER_1_TIME_DELAY:
             ashley.obedience_messages[1] = "Wait a few days to progress."
             return False
-        if time_of_day == 3:
+        if mc.is_at_work() and time_of_day == 3:
             return True
         return False
 
@@ -1455,13 +1455,13 @@ init -1 python:
         ashley.obedience_messages[2] = "The next scene has not been written yet!"
         return False    #Current writing spot
         if ashley.obedience > 160 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if time_of_day == 3:
+            if mc.is_at_work() and time_of_day == 3:
                 return True
         return False
 
     def ashley_submission_anal_requirement():
         if ashley.obedience > 180 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if time_of_day == 3:
+            if mc.is_at_work() and time_of_day == 3:
                 return True
         return False
 
