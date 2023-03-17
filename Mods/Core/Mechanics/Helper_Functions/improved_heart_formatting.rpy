@@ -23,18 +23,18 @@ init 2 python:
         the_final_string = ""
         count = 0
         while count < max_hearts:
-            if value > 20:
+            if value >= 20:
                 the_final_string += get_red_heart(20)
                 value -= 20
-            elif value > 5:
+            elif value >= 5:
                 the_final_string += get_red_heart(value)
                 value -= value
-            elif value < -20:
+            elif value <= -20:
                 the_final_string += get_red_heart(20, color="grey")
                 value += 20
-            elif value < -5:
-                the_final_string += get_red_heart(value, color="grey")
-                value += value
+            elif value <= -5:
+                the_final_string += get_red_heart(-value, color="grey")
+                value -= value
             else:
                 the_final_string += "{image=gui/heart/empty_heart.png}"
             count += 1
