@@ -5,8 +5,8 @@ init -1 python:
     def person_info_ui_format_hearts(value):
         heart_value = __builtin__.abs(value)
         if (heart_value / 4) > 10:
-            return get_gold_heart(heart_value / 4)
-        return get_red_heart(heart_value)
+            return get_hearts(heart_value / 4, color = "gold")
+        return get_hearts(heart_value)
 
     def person_info_ui_get_formatted_tooltip(person):
         tooltip = ""
@@ -65,7 +65,7 @@ init 2:
             arousal_info = get_arousal_with_token_string(person.arousal, person.max_arousal)
             energy_info = get_energy_string(person.energy, person.max_energy)
             happiness_info = str(__builtin__.int(person.happiness))
-            love_info = get_red_heart_list(person.love, 5)
+            love_info = get_love_hearts(person.love, 5)
             sluttiness_info = get_heart_image_list(person.sluttiness, person.effective_sluttiness())
             obedience_info = str(person.obedience) + " {image=triskelion_token_small} " + get_obedience_plaintext(person.obedience)
             height_info = height_to_string(person.height)
@@ -152,7 +152,7 @@ init 2:
                         textbutton "Sluttiness: [sluttiness_info]":
                             style "transparent_style"
                             text_style "menu_text_style"
-                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is added to her sluttiness based on effect modifiers {image=question_mark_small}."
+                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness ({image=red_heart_token_small}) is added to her sluttiness based on effect modifiers {image=question_mark_small}."
                             action NullAction()
                             sensitive True
 

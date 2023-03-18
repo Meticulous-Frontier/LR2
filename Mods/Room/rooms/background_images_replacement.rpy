@@ -29,6 +29,9 @@ init 5 python:
     red_heart_token_small_image = im.Scale(Image(get_file_handle("heart/red_heart.png")), 18, 18)
     renpy.image("red_heart_token_small", red_heart_token_small_image)
 
+    gold_heart_token_small_image = im.Scale(Image(get_file_handle("heart/gold_heart.png")), 18, 18)
+    renpy.image("gold_heart_token_small", gold_heart_token_small_image)
+
     lust_eye_token_small_image = im.Scale(Image(get_file_handle("lust_eye.png")), 18, 18)
     renpy.image("lust_eye_token_small", lust_eye_token_small_image)
 

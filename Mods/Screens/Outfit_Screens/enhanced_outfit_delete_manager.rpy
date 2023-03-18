@@ -36,7 +36,7 @@ init 3:
                         mousewheel True
                         vbox:
                             for outfit in sorted(target_wardrobe.get_outfit_list(), key = lambda outfit: outfit.slut_requirement):
-                                textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(outfit.slut_requirement, 1):
+                                textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_hearts(outfit.slut_requirement, color = "gold"):
                                     style "textbutton_no_padding_highlight"
                                     text_style "serum_text_style"
 
@@ -71,7 +71,7 @@ init 3:
                             mousewheel True
                             vbox:
                                 for outfit in sorted(target_wardrobe.get_overwear_sets_list(), key = lambda outfit: outfit.get_overwear_slut_score()):
-                                    textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(outfit.get_overwear_slut_score() / 0.6, 1): # Overwear maxes out at ~60 slut
+                                    textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_hearts(outfit.get_overwear_slut_score() / 0.6, color = "gold"): # Overwear maxes out at ~60 slut
                                         style "textbutton_no_padding_highlight"
                                         text_style "serum_text_style"
 
@@ -105,7 +105,7 @@ init 3:
                             mousewheel True
                             vbox:
                                 for outfit in sorted(target_wardrobe.get_underwear_sets_list(), key = lambda outfit: outfit.get_underwear_slut_score()):
-                                    textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_heart_image_list_cloth(outfit.get_underwear_slut_score() / 0.4, 1): # Underwear maxes out at ~40 slut
+                                    textbutton "Delete " + outfit.name.replace("_", " ").title() + "\n" + get_hearts(outfit.get_underwear_slut_score() / 0.4, color = "gold"): # Underwear maxes out at ~40 slut
                                         style "textbutton_no_padding_highlight"
                                         text_style "serum_text_style"
 
