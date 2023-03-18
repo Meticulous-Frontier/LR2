@@ -1763,6 +1763,7 @@ label ashley_submission_titfuck_label():  #at 20
     $ the_person.cum_on_tits()
     $ the_person.draw_person(position = "blowjob")
     "You fire wave after wave onto her breasts. When you finish, you look down at your incredible artwork."
+    $ ClimaxController.manual_clarity_release(climax_type = "tits", the_person = the_person)
     mc.name "Fuck, that was amazing."
     the_person "Yes... incredible..."
     if first_time:
@@ -1997,6 +1998,7 @@ label ashley_work_titfuck_label(the_person):
     $ the_person.cum_on_tits()
     $ the_person.draw_person(position = "blowjob")
     "You fire wave after wave onto her breasts. When you finish, you look down at your incredible artwork."
+    $ ClimaxController.manual_clarity_release(climax_type = "tits", the_person = the_person)
     mc.name "Fuck, that was amazing."
     the_person "Yes... incredible..."
     "Hah! You got her to admit it again."
@@ -2147,9 +2149,9 @@ label ashley_submission_blowjob_label():  #140 obedience
         "When she tries to pull off, you firmly keep her head in place. She glares at you but quickly realizes it is no use."
     "You start to cum and quickly fill up [the_person.possessive_title]'s mouth with your seed. She coughs and sputters a bit."
     $ the_person.cum_in_mouth()
-    $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
     $ the_person.draw_person(position = "blowjob", special_modifier=None)
     "Even after you finish, you hold her head in place for a couple extra seconds, savoring it."
+    $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
     "When you let go, [the_person.title] gasps. You quickly order her before she can get a word in."
     mc.name "That was amazing. Now swallow."
     "She looks up at you, and for a moment, you see a hint of defiance. However, it quickly melts away."
@@ -2394,9 +2396,9 @@ label ashley_work_blowjob_label(the_person):
         "You keep a hand on the back of [the_person.title]'s head to make it clear you want her to keep sucking. She keeps blowing you until you tense up and start to pump your load out into her mouth."
         "[the_person.possessive_title] stops when she feels the first wave of your cum erupt into her mouth."
         $ the_person.cum_in_mouth()
-        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
         $ the_person.draw_person(position = "blowjob")
         "[the_person.title] gags once, but otherwise dutifully takes your load in her mouth. When you finish, she pulls back, her lips leaving your skin with a smack."
+        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
         mc.name "Fuck, that was amazing."
         "[the_person.title] just moans her approval as she swallows your cum."
         if mc_serum_cum_serum_is_active():
@@ -2436,9 +2438,9 @@ label ashley_work_blowjob_label(the_person):
         "You grunt and twitch as you start to empty your balls right into her stomach."
         "[the_person.possessive_title] closes her eyes and holds still as you climax. You feel her throat spasm a few times as she struggles to keep your cock in place."
         $ the_person.cum_in_mouth()
-        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
         $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
         "As you finish, her moaning crescendos. You watch as her legs start to twitch as she finishes masturbating."
+        $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
         mc.name "That's it, cum for me you little slut!"
         $ the_person.have_orgasm(force_trance = True)
         "Even though you are finished, [the_person.title] keeps herself in place with your cock down her throat as she cums."
