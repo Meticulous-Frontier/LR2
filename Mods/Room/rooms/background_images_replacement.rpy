@@ -199,7 +199,7 @@ label updated_room_background(stack):
             list_of_places.append(home_bathroom)
 
         if not "testing_room" in globals(): # save compatibility remove in future
-            testing_room = Room("testing_room", "Test Room", [], testing_room_backgrounds, [make_floor(), make_wall(), make_chair(), make_table(), make_mirror()], [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+            testing_room = Room("testing_room", "Test Room", [], testing_room_backgrounds, [make_floor(), make_wall(), make_medical_table(), make_mirror()], [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
 
         if not testing_room in list_of_places:
             list_of_places.append(testing_room)

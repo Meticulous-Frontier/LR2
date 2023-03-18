@@ -106,6 +106,9 @@ init 15 python:
     def make_mirror():
         return Object("mirror", ["Lean"])
 
+    def make_medical_table():
+        return Object("medical table", ["Lay", "Sit", "Low"])
+
 
 label build_custom_rooms():
     python:
@@ -170,7 +173,7 @@ label build_custom_rooms():
         mall_salon.privacy_level = 3
 
         # special testing room
-        testing_room = Room("testing_room", "Test Room", [], testing_room_backgrounds, [make_floor(), make_wall(), make_chair(), make_table(), make_mirror()], [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        testing_room = Room("testing_room", "Test Room", [], testing_room_backgrounds, [make_floor(), make_wall(), make_medical_table(), make_mirror()], [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(testing_room)
         testing_room.privacy_level = 0
 
