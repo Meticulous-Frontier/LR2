@@ -60,18 +60,11 @@ screen multi_person_info_ui(actors):
                                 tooltip person_info_ui_get_serum_info_tooltip(actor.person)
                                 action NullAction()
 
-                    if actor.person.arousal > 0:
-                        textbutton "Arousal: [arousal_info]":
-                            style "transparent_style"
-                            text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider.\nCurrently: {}".format(arousal_tooltip_info)
-                            action NullAction()
-                    else:
-                        textbutton "Arousal: 0%":
-                            style "transparent_style"
-                            text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
-                            action NullAction()
+                    textbutton "Arousal: [arousal_info]":
+                        style "transparent_style"
+                        text_style "menu_text_style"
+                        tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider.\nCurrently: {}".format(arousal_tooltip_info)
+                        action NullAction()
 
                     textbutton "Energy: [energy_info]":
                         style "transparent_style"
