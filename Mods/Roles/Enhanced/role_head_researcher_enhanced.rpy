@@ -219,13 +219,14 @@ label head_researcher_suggest_testing_room_label():
     $ the_person.draw_person(position = "walking_away")
     "[the_person.title] turns and starts to walk to the far end of the lab. You follow her."
     "When she gets there, she opens a side door and goes down a short hallway, and at the end is a small room, with another small room adjacent room."
+    $ mc.change_location(testing_room)
     "The two rooms are currently sitting completely unused."
     $ the_person.draw_person()
     the_person "I was thinking about what you said, about testing for changes based on orgasms and interactions with our serums."
     the_person "But the problem is... we don't really have a good place to run the tests at. The lab is great, but it is so open."
     the_person "It might make things uncomfortable and skew results."
     mc.name "You're right."
-    the_person "Anyway, I found these two old rooms, that I thought would make a good serum testing site. We could set up a medical exam bed here, and install a window between the two rooms."
+    the_person "Anyway, I found these two old rooms, that I thought would make a good serum testing site. We could set up a medical exam table here, and install a window between the two rooms."
     the_person "That way we can research serum effects in a more clinical environment."
     mc.name "That's a great idea. How much would it run?"
     the_person "I priced out some basic medical equipment. A bed, some monitors, etc. I think it could be done for about $1000."
@@ -570,6 +571,7 @@ label head_researcher_serum_trait_test_label(the_person):
     $ the_tester = _return
     $ clear_scene()
     $ scene_manager = Scene()
+    $ mc.change_location(testing_room)
     "You head down to the testing room. After a few minutes, [the_person.possessive_title] returns with today's test subject."
     $ scene_manager.add_actor(the_person, display_transform = character_left_flipped, z_order = 10)
     $ scene_manager.add_actor(the_tester, display_transform = character_right)
@@ -693,7 +695,7 @@ label head_researcher_serum_trait_test_label(the_person):
         "[the_person.possessive_title] steps out, leaving you alone with [the_tester.title] in the testing room."
         $ scene_manager.remove_actor(the_person)
 
-    #Use this section to determine what extra curriculars we want to engage in.
+    #Use this section to determine what extra curricular's we want to engage in.
     if ("love" in test_positive_flags and the_tester.love > 30) or the_tester.is_girlfriend():    #She asks MC on a date.
         the_tester "Well, honestly, it was nice just being able spend some time in here with you."
         the_tester "I was wondering... would you want to catch a movie sometime? It would nice to just hang out!"
@@ -944,7 +946,7 @@ label serum_research_serum_results_label(the_person, the_tester, the_serum_trait
         $ positive_flags.append("suggest")
         the_person "She seems to be more suspectible to suggestions about her behavior and beliefs."
     if len(positive_flags) == 0:    #No obvious immediate positive effects.
-        the_person "Unforunately, I don't think that this serum trait has any positive immediate effects. There is a little bit of variability in the results, but it is hard to make a pattern of."
+        the_person "Unfortunately, I don't think that this serum trait has any positive immediate effects. There is a little bit of variability in the results, but it is hard to make a pattern of."
         the_person "It is likely it has longer term effects in longer laster serum cocktails than in the simple production run we use for these tests."
 
     the_person "Next, the negative effects."
@@ -965,7 +967,7 @@ label serum_research_serum_results_label(the_person, the_tester, the_serum_trait
         the_person "She started to show negative signs of submission to authority during the test."
     if serum_trait_result_list[5] < 0:  #Work skill Serum
         $ negative_flags.append("work")
-        the_person "She seems to be less qualifed for her work related tasts while under the effects of this serum."
+        the_person "She seems to be less qualified for her work related stats while under the effects of this serum."
     if serum_trait_result_list[6] < 0:  #sex skill serum
         $ negative_flags.append("sex")
         the_person "Strangely, she seems to be less in tune to the needs and desires of those around her."
@@ -1108,7 +1110,7 @@ label serum_tester_suggest_help_label(the_person):
 label serum_tester_trance_label(the_tester):
     mc.name "Alright, sit up on the table there. Let's take a look at you."
     $ scene_manager.update_actor(the_tester, position = "sitting")
-    "You grab a small flashlight and wave it in front of her eyes a bit. Her pupils are definitely dialated."
+    "You grab a small flashlight and wave it in front of her eyes a bit. Her pupils are definitely dilated."
     "She has all the signs of being in a trance. You consider the opportunity."
     call do_training(the_person) from _call_do_training_serum_testing_01
     return
@@ -1126,7 +1128,7 @@ label serum_tester_masturbate_privately_label(the_tester):
     else:
         "You decide not to intrude on her masturbation session. It could effect the data from the test, anyway..."
     $ the_tester.have_orgasm(force_trance = True)
-    "After several minutes, the light on the outside of the door iluminates, so you step inside."
+    "After several minutes, the light on the outside of the door illuminates, so you step inside."
     $ scene_manager.add_actor(the_tester, position = "sitting")
     "[the_tester.possessive_title] is sitting on the edge of the bed."
     mc.name "Finished?"
@@ -1149,7 +1151,7 @@ label serum_tester_masturbation_show_label(the_tester):
 
 label serum_tester_finger_aid_label(the_person):
     if the_person.vagina_available() and the_person.vagina_visible():
-        "[the_person.title] scoots to the edge of the medical bed and spreads her legs for you as you walk over to her."
+        "[the_person.title] scoots to the edge of the medical table and spreads her legs for you as you walk over to her."
     else:
         "[the_person.title] strips off her bottoms as you walk over to her."
         $ scene_manager.strip_to_vagina(the_person)
@@ -1249,7 +1251,7 @@ label serum_tester_finger_aid_label(the_person):
 
 label serum_tester_dildo_aid_label(the_person):
     if the_person.vagina_available() and the_person.vagina_visible():
-        "[the_person.title] scoots to the edge of the medical bed and spreads her legs for you as you walk over to her."
+        "[the_person.title] scoots to the edge of the medical table and spreads her legs for you as you walk over to her."
     else:
         "[the_person.title] strips off her bottoms as you walk over to her."
         $ scene_manager.strip_to_vagina(the_person)
@@ -1338,7 +1340,7 @@ label serum_tester_dildo_aid_label(the_person):
         "[the_person.possessive_title] moans and writhes on the sex toy. She is moaning non stop now."
         the_person "Yes! Oh fuck yes... harder!"
         "Her words and her breathing show you just how close she is. You can tell she is in the final stretch."
-        "You start to really bang her with the dildo, and you eagily grope her fantastic tits."
+        "You start to really bang her with the dildo, and you eagerly grope her fantastic tits."
         if the_person.opinion_score_giving_handjobs() > 0:
             "You feel yourself moving your own hips. Her soft hand feels amazing wrapped around your dick."
             "Having [the_person.title] completely exposed in the office and banging her with the dildo is really turning you on."
@@ -1403,7 +1405,7 @@ label serum_tester_dildo_aid_label(the_person):
 
 label serum_tester_oral_aid_label(the_person):
     if the_person.outfit.full_access():
-        "[the_person.title] scoots to the edge of the medical bed and spreads her legs for you as you walk over to her."
+        "[the_person.title] scoots to the edge of the medical table and spreads her legs for you as you walk over to her."
     else:
         "[the_person.title] gets naked as you walk over to her."
         $ scene_manager.strip_full_outfit(the_person)
@@ -1502,7 +1504,7 @@ label serum_tester_oral_aid_label(the_person):
         $ mc.change_locked_clarity(20)
     if the_person.arousal < 80:
         the_person "Oh fuck! Mmm... that is so good!"
-        "[the_person.title]'s hips are moving with your finger as you stroke her insides. You lash eargerly at her clit with your tongue."
+        "[the_person.title]'s hips are moving with your finger as you stroke her insides. You lash eagerly at her clit with your tongue."
         "It is time to take things up a notch. You remove your fingers for a moment, then push your pinky inside her sopping wet hole. You get it lubed up, then take it out."
         "Without further delay, you position your hand so your index and middle fingers are at the entrance to her cunt and your pinky is at her puckered asshole."
         if the_person.opinion_score_anal_sex() == -2:
@@ -1618,7 +1620,7 @@ label serum_tester_oral_aid_label(the_person):
 
 label serum_tester_fuck_aid_label(the_person):
     if the_person.outfit.full_access():
-        "[the_person.title] scoots to the edge of the medical bed and spreads her legs for you as you walk over to her."
+        "[the_person.title] scoots to the edge of the medical table and spreads her legs for you as you walk over to her."
     else:
         "[the_person.title] gets naked as you walk over to her."
         $ scene_manager.strip_full_outfit(the_person)
@@ -1749,9 +1751,9 @@ label serum_tester_fuck_aid_label(the_person):
         if the_person.opinion_score_vaginal_sex() == -2:
             "You know that [the_person.possessive_title] normally hates vaginal sex, so you focus on making this as pleasurable as possible for her."
             if the_person.has_large_tits():
-                "Her big tits are wobbling enticingly with each thrust. You let go of her hip with one hand and grope one while you fuck her."
+                "Her [the_person.tits_description] are wobbling enticingly with each thrust. You let go of her hip with one hand and grope one while you fuck her."
             else:
-                "Her perky tits shimy slightly with each thrust. You let go of her hip with one hand and grope her while you fuck her."
+                "Her [the_person.tits_description] shimmy slightly with each thrust. You let go of her hip with one hand and grope her while you fuck her."
             the_person "That's nice... mmm..."
         # Otherwise, we can try and push her other limits...
         else:
@@ -1863,7 +1865,7 @@ label serum_tester_fuck_aid_label(the_person):
     if the_person.arousal < 60:
         the_person "Ahhh... Mmmm..."
         "[the_person.possessive_title] moans grow more eager."
-        "You wrap your arms around her legs and pull her ass a little further off the edge of the examination bed."
+        "You wrap your arms around her legs and pull her ass a little further off the edge of the examination table."
         "The higher penetration angle makes her moan even louder, and by closing her legs together and putter her feet over your shoulders, her pussy grips your [condom_descrption] cock even tighter."
         the_person "Oh my god... fuck me [the_person.mc_title]!"
         "You oblige her. You hips are moving at an urgent pace."
@@ -1876,9 +1878,9 @@ label serum_tester_fuck_aid_label(the_person):
         if the_person.opinion_score_vaginal_sex() == -2:
             "She really seems to be enjoying herself. You are positive you'll be able to get her off if you keep at it."
             if the_person.has_large_tits():
-                "Her big tits are bouncing wildly now as you pound her. You seem to be on the edge of orgasming together."
+                "Her [the_person.tits_description] are bouncing wildly now as you pound her. You seem to be on the edge of orgasming together."
             else:
-                "Her perky tits shimy with every thrust. You can't wait to orgasm together with her."
+                "Her [the_person.tits_description] shimmy with every thrust. You can't wait to orgasm together with her."
             the_person "I can't believe how good it feels... oh [the_person.mc_title] don't stop!"
         # Otherwise, we can try and push her other limits...
         else:
@@ -1943,9 +1945,9 @@ label serum_tester_fuck_aid_label(the_person):
                     mc.name "Your body is amazing. We should fuck more often."
                     the_person "Mmm, you make me feel so good... I'm not sure I could say no to you... if I even try to!"
                     if the_person.has_large_tits():
-                        "Her big tits are bouncing wildly now as you pound her. You seem to be on the edge of orgasming together."
+                        "Her [the_person.tits_description] are bouncing wildly now as you pound her. You seem to be on the edge of orgasming together."
                     else:
-                        "Her perky tits shimy with every thrust. You can't wait to orgasm together with her."
+                        "Her [the_person.tits_description] shimmy with every thrust. You can't wait to orgasm together with her."
             else:
                 mc.name "Of fuck I'm getting so close. You are too, aren't you?"
                 the_person "Yes! I'm gonna cum all over your big cock!"
@@ -1970,9 +1972,9 @@ label serum_tester_fuck_aid_label(the_person):
                         the_person "Yes! Pull out and cover me in your wonderful seed!"
                         the_person "That cock makes me feel so good, I can't wait to feel it cover me!"
                 if the_person.has_large_tits():
-                    "Her big tits are bouncing wildly now as you pound her. You are on the edge of orgasming together."
+                    "Her [the_person.tits_description] are bouncing wildly now as you pound her. You are on the edge of orgasming together."
                 else:
-                    "Her perky tits shimy with every thrust. You can't wait to orgasm together with her."
+                    "Her [the_person.tits_description] shimmy with every thrust. You can't wait to orgasm together with her."
         $ the_person.change_arousal(30)
         $ mc.change_locked_clarity(50)
         $ mc.change_arousal(20)
@@ -2002,7 +2004,7 @@ label serum_tester_fuck_aid_label(the_person):
                 "When you finish, you slowly let go of her legs, setting her down on the examination table."
                 "You pull the condom off and throw it in the trash."
             elif cum_goal == "creampie":
-                "With your arms wrapped around her legs and her ass several inches off the examination bed, you begin to dump your seed inside of her."
+                "With your arms wrapped around her legs and her ass several inches off the examination table, you begin to dump your seed inside of her."
                 "Even if she wanted to, there's nothing she could do about it now. She has zero leverage and is barely hanging on to the bed."
                 $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_person)
                 $ the_person.cum_in_vagina()
@@ -2034,7 +2036,7 @@ label serum_tester_fuck_aid_label(the_person):
                     $ the_person.increase_opinion_score("creampies")
                     "You definitely seem to have shifted her opinion on getting creampied!"
             else:
-                "At the last possible second, you set her ass down on the examination bed and pull out."
+                "At the last possible second, you set her ass down on the examination table and pull out."
                 "You spread her legs with your hands and she quickly reaches down and strokes your cock, finishing you off."
                 mc.name "Oh fuck, here it comes!"
                 $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_person)

@@ -173,6 +173,7 @@ label ellie_stephanie_teamup_progression_scene_intro_scene(the_group):
     pick_1 "I see. I guess that's okay then."
     the_researcher "Alright. Let's get started!"
     "In the corner of the research department, you have a small room designed for private testing. You walk into the room with the three girls."
+    $ mc.change_location(testing_room)
     $ scene_manager.update_actor(the_person, display_transform = character_researcher_1)
     $ scene_manager.update_actor(the_researcher, display_transform = character_researcher_2)
     $ scene_manager.update_actor(pick_1, display_transform = character_right, position = "sitting")
@@ -299,7 +300,8 @@ label ellie_stephanie_teamup_progression_multi_choice_scene(the_group):
     $ scene_manager.add_actor(the_researcher, display_transform = character_center_flipped)
     $ nano_opinion_list = []
     $ bot_selection = ""
-    "You step into the research room and hand the two girls their coffees."
+    $ mc.change_location(testing_room)
+    "You step into the testing room and hand the two girls their coffees."
     the_researcher "Okay, now we just need to figure out who to test on..."
     menu:
         "Random Employee" if 0 in ellie_stephanie_teamup_progression_scene.scene_unlock_list:
