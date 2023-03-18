@@ -38,9 +38,9 @@ screen multi_person_info_ui(actors):
             for actor in sorted(actors, key=lambda a: a.sort_order):
                 python:
                     arousal_info = get_arousal_with_token_string(actor.person.arousal, actor.person.max_arousal)
-                    arousal_tooltip_info = get_arousal_number_string(mc.arousal, mc.max_arousal)
+                    arousal_tooltip_info = get_arousal_number_string(actor.person.arousal, actor.person.max_arousal)
                     energy_info = get_energy_string(actor.person.energy, actor.person.max_energy)
-                    energy_tooltip_info = get_energy_number_string(person.energy, person.max_energy)
+                    energy_tooltip_info = get_energy_number_string(actor.person.energy, actor.person.max_energy)
                     sluttiness_info = get_heart_image_list(actor.person.sluttiness, actor.person.effective_sluttiness())
 
                 vbox:
