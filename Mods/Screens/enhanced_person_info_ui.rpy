@@ -63,7 +63,9 @@ init 2:
         python:
             job_title = person_info_ui_get_job_title(person)
             arousal_info = get_arousal_with_token_string(person.arousal, person.max_arousal)
+            arousal_tooltip_info = get_arousal_number_string(person.arousal, person.max_arousal)
             energy_info = get_energy_string(person.energy, person.max_energy)
+            energy_tooltip_info = get_energy_number_string(person.energy, person.max_energy)
             happiness_info = str(__builtin__.int(person.happiness))
             love_info = get_love_hearts(person.love, 5)
             sluttiness_info = get_heart_image_list(person.sluttiness, person.effective_sluttiness())
@@ -107,14 +109,14 @@ init 2:
                     textbutton "Arousal: [arousal_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
-                        tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will make a girl happier and may put them into a Trance if their suggestibility is higher than 0."
+                        tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will make a girl happier and may put them into a Trance if their suggestibility is higher than 0.\nCurrently: {}".format(arousal_tooltip_info)
                         action NullAction()
                         sensitive True
 
                     textbutton "Energy: [energy_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
-                        tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night."
+                        tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night.\nCurrently {}".format(energy_tooltip_info)
                         action NullAction()
                         sensitive True
 

@@ -6,6 +6,7 @@ init 2:
             market_reach = "{market_reach:,}".format(market_reach = __builtin__.int(mc.business.market_reach))
             funds = "${funds:,}".format(funds = __builtin__.int(mc.business.funds))
             attention_info = get_attention_string(mc.business.attention, mc.business.max_attention) + " (-" + str(mc.business.attention_bleed) + "/Day)"
+            attention_tooltip_info = get_attention_number_string(mc.business.attention, mc.business.max_attention)
             mental_price = "{value:.2f}".format(value = mc.business.get_aspect_price("Mental"))
             physical_price = "{value:.2f}".format(value = mc.business.get_aspect_price("Physical"))
             sexual_price = "{value:.2f}".format(value = mc.business.get_aspect_price("Sexual"))
@@ -94,7 +95,7 @@ init 2:
                         hbox:
                             textbutton "Attention:":
                                 action VrenNullAction style "textbutton_style" text_style "textbutton_text_style"
-                                tooltip "How much attention your business has drawn. If this gets too high the authorities will act, outlawing a serum design, leveling a fine, or seizing your inventory."
+                                tooltip "How much attention your business has drawn. If this gets too high the authorities will act, outlawing a serum design, leveling a fine, or seizing your inventory.\nCurrently: {}".format(attention_tooltip_info)
 
                             text "[attention_info]" style "textbutton_text_style" yalign 0.5
 

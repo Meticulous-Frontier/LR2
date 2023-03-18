@@ -38,7 +38,9 @@ screen multi_person_info_ui(actors):
             for actor in sorted(actors, key=lambda a: a.sort_order):
                 python:
                     arousal_info = get_arousal_with_token_string(actor.person.arousal, actor.person.max_arousal)
+                    arousal_tooltip_info = get_arousal_number_string(mc.arousal, mc.max_arousal)
                     energy_info = get_energy_string(actor.person.energy, actor.person.max_energy)
+                    energy_tooltip_info = get_energy_number_string(person.energy, person.max_energy)
                     sluttiness_info = get_heart_image_list(actor.person.sluttiness, actor.person.effective_sluttiness())
 
                 vbox:
@@ -62,7 +64,7 @@ screen multi_person_info_ui(actors):
                         textbutton "Arousal: [arousal_info]":
                             style "transparent_style"
                             text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
+                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider.\nCurrently: {}".format(arousal_tooltip_info)
                             action NullAction()
                     else:
                         textbutton "Arousal: 0%":
@@ -74,7 +76,7 @@ screen multi_person_info_ui(actors):
                     textbutton "Energy: [energy_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
-                        tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night."
+                        tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night.\nCurrently {}".format(energy_tooltip_info)
                         action NullAction()
 
                     textbutton "Happiness: [actor.person.happiness]":
