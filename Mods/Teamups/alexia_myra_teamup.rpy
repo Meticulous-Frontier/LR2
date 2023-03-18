@@ -1380,8 +1380,8 @@ label myra_alexia_teamup_trans_scene_2(the_group):
 
 label myra_alexia_teamup_trans_scene_3(the_group):
     $ the_person = the_group[0]
-    $ scene_manager.outfit.remove_all_upper_clothing()
-    $ scene_manager.outfit.remove_all_upper_clothing()
+    $ alexia.outfit.remove_all_upper_clothing()
+    $ the_person.outfit.remove_all_upper_clothing()
     $ scene_manager.add_actor(alexia, display_transform = character_center_flipped, position = "sitting")
     $ scene_manager.add_actor(the_person, position = "sitting")
     "You walk to the back where the couches are and see the two girls playing the claymation fighting game again."
