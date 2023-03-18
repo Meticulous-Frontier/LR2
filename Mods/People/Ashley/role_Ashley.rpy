@@ -61,9 +61,10 @@ init 2 python:
         ashley.event_triggers_dict["dom_fingers"] = False
         ashley.event_triggers_dict["dom_oral"] = False
         ashley.event_triggers_dict["dom_fuck"] = False
-        ashley.event_triggers_dict["oral_position_filter"] = ellie_oral_position_filter
-        ashley.event_triggers_dict["vaginal_position_filter"] = ellie_vaginal_position_filter
-        ashley.event_triggers_dict["anal_position_filter"] = ellie_anal_position_filter
+        ashley.event_triggers_dict["foreplay_position_filter"] = ashley_foreplay_position_filter
+        ashley.event_triggers_dict["oral_position_filter"] = ashley_oral_position_filter
+        ashley.event_triggers_dict["vaginal_position_filter"] = ashley_vaginal_position_filter
+        ashley.event_triggers_dict["anal_position_filter"] = ashley_anal_position_filter
 
         mc.business.event_triggers_dict["ashley_submission_complete"] = False   #Set to true if we complete her submission arc.
         mc.business.event_triggers_dict["mc_serum_duration"] = 3
@@ -112,6 +113,13 @@ init 2 python:
 
         return
 
+    def ashley_foreplay_position_filter(foreplay_positions):
+        if not ashley.event_triggers_dict.get("sub_titfuck_avail", False):
+            filter_out = [tit_fuck]
+            if foreplay_positions[1] in filter_out:
+                return False
+        return True
+
     def ashley_oral_position_filter(oral_positions):
         return ashley.event_triggers_dict.get("sub_blowjob_avail", False)
 
@@ -120,7 +128,6 @@ init 2 python:
 
     def ashley_anal_position_filter(anal_positions):
         return ashley.event_triggers_dict.get("sub_anal_avail", False)
-
 
 
     # ashley_room_excitement_overhear = Action("Overhear Ashley",ashley_room_excitement_overhear_requirement,"ashley_room_excitement_overhear_label")
