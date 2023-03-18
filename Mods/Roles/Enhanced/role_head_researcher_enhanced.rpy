@@ -142,10 +142,8 @@ init -1 python:
 
     def head_researcher_serum_trait_test_requirement(the_person):
         if testing_room_creation_policy.is_active():
-            if not mc.is_at_work():
-                return "Only in the office"
-            if not mc.business.is_open_for_business():
-                return "Only during business hours"
+            if not (mc.is_at_work() and mc.business.is_open_for_business()):
+                return False
             if mc.business.days_since_event("serum_trait_test") > TIER_1_TIME_DELAY:
                 return True
             else:
