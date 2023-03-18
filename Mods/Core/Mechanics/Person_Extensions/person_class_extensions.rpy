@@ -752,7 +752,7 @@ init -1 python:
             if self.has_family_taboo():
                 final_slut_requirement += (self.get_opinion_score("incest") - 2) * 5          # love incest negates requirement penalty
 
-            if the_position.associated_taboo:
+            if self.has_taboo(the_position.associated_taboo):
                 final_slut_requirement += 10    # taboo increases requirement by 10
 
         # print("Position: " + the_position.name + "[Sluttiness: " + str(self.sluttiness) + ", Required: " + str(final_slut_requirement) + "]")
