@@ -1068,8 +1068,8 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] turns and starts walking out of your office. You watch her hips as she moves away."
     "You are a bit surprised how quickly she has opened up to you like this. Maybe she is more ready to move past her repressed childhood than you realized?"
-    "Either way, you are certain there is more fun to be had with the busty redhead soon."
     $ clear_scene()
+    "Either way, you are certain there is more fun to be had with the busty redhead soon."
     #Load up the three story branches
     $ the_person.add_unique_on_room_enter_event(ellie_never_tasted_cock)
     $ mc.business.add_mandatory_crisis(ellie_brings_lunch)
@@ -2210,7 +2210,7 @@ init -1 python: #Requirement functions
         return False
 
     def ellie_start_search_requirement():
-        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
         if ellie.days_since_event("obedience_event") <= TIER_2_TIME_DELAY:
             return False
@@ -2221,7 +2221,7 @@ init -1 python: #Requirement functions
         return False
 
     def ellie_search_update_requirement(the_person):
-        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
         if not ellie.story_event_ready("obedience"):
             return False
@@ -2230,7 +2230,7 @@ init -1 python: #Requirement functions
         return True
 
     def ellie_search_finish_requirement():
-        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
         if not ellie.story_event_ready("obedience"):
             return False
@@ -2239,7 +2239,7 @@ init -1 python: #Requirement functions
         return False
 
     def ellie_submission_requirement():
-        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
         if not ellie.story_event_ready("obedience"):
             return False
@@ -2268,10 +2268,10 @@ label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     $ the_person.event_triggers_dict["tit_fuck"] = True
     $ mc.change_location(mc.business.r_div)
     "You sit at a desk, working in the research department."
-    "However, you are having an incredibly hard time concentrating. You look across the room at [the_person.possessive_title]"
+    "However, you are having an incredibly hard time concentrating. You look across the room at [the_person.possessive_title]."
     $ the_person.draw_person(position = "sitting")
-    $ desc_string = "You hired her " + mc.business.string_since_event("hired_ellie_IT")
-    "[desc_string]"
+    $ desc_string = mc.business.string_since_event("hired_ellie_IT")
+    "You hired her [desc_string]."
     "Since then you've found yourself getting closer with the buxom redhead. You gaze at her from across the lab."
     "Her chest heaves slightly with every breath. You can't help but fantasize about sliding your cock between her generous tits."
     $ mc.change_locked_clarity(30)
