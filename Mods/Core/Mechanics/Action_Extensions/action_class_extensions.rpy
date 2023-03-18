@@ -1,7 +1,7 @@
 init 1 python:
     def action__cmp__(self, other):
         if isinstance(self, other.__class__):
-            if self.effect == other.effect and self.args == other.args:
+            if self.name == other.name and self.effect == other.effect and self.args == other.args:
                 return 0
 
         if self.__hash__() < other.__hash__():
@@ -12,21 +12,21 @@ init 1 python:
     Action.__cmp__ = action__cmp__
 
     def action__hash__(self):
-        return hash(tuple([self.effect] + self.args))
+        return hash(tuple([self.name, self.effect] + self.args))
 
     Action.__hash__ = action__hash__
     Action.hash = action__hash__
 
     def action_eq(self, other):
         if isinstance(self, other.__class__):
-            return self.effect == other.effect and self.args == other.args
+            return self.name == other.name and self.effect == other.effect and self.args == other.args
         return False
 
     Action.__eq__ = action_eq
 
     def action_ne(self, other):
         if isinstance(self, other.__class__):
-            return self.effect != other.effect and self.args == other.args
+            return self.name != other.name and self.effect != other.effect and self.args == other.args
         return True
 
     Action.__ne__ = action_ne
