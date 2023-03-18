@@ -439,6 +439,7 @@ label ellie_stephanie_teamup_progression_scene_exit_scene(the_group):
     the_person "I understand. Maybe next week [the_person.mc_title]."
     mc.name "Maybe."
     $ clear_scene()
+    $ mc.change_location(mc.business.r_div)
     return
 
 label ellie_stephanie_teamup_final_opinion_shift_label(the_tester, program_name, program_opinion_list):
