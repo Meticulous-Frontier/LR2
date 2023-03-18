@@ -48,7 +48,7 @@ init 1400 python:
     alpha_personality = Personality("alpha", default_prefix = reserved_personality.default_prefix,
         common_likes = ["flirting", "HR work", "work uniforms", "working", "sports", "small talk", "boots", "dresses", "high heels", "skirts", "the colour black", "the colour red"],
         common_sexy_likes = ["taking control", "threesomes", "getting head", "lingerie", "not wearing underwear", "showing her tits", "showing her ass", "skimpy uniforms"],
-        common_dislikes = ["conservative outfits", "pants", "punk", "the colour green", "the colour pink", "classical", "jazz"],
+        common_dislikes = ["conservative outfits", "pants", "punk music", "the colour green", "the colour pink", "classical music", "jazz"],
         common_sexy_dislikes = ["being submissive", "bareback sex", "being fingered", "missionary style sex"],
         titles_function = alpha_titles, possessive_titles_function = alpha_possessive_titles, player_titles_function = alpha_player_titles)
 

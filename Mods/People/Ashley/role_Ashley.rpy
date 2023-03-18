@@ -27,7 +27,7 @@ init 2 python:
             eyes = "brown", personality = introvert_personality, name_color = "#228b22", starting_wardrobe = ashley_wardrobe, \
             stat_array = [1,4,4], skill_array = [1,1,3,5,1], sex_skill_array = [4,2,2,2], sluttiness = 7, obedience_range = [70, 85], happiness = 119, love = 0, \
             relationship = "Single", kids = 0, force_random = True, base_outfit = ashley_base_outfit, type = 'story',
-            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -1, False], ["classical", 2, False]],
+            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -1, False], ["classical music", 2, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -1, False], ["giving blowjobs", -2, False], ["public sex", -1, False], ["giving tit fucks", -2, False], ["being submissive", -2, False]])
 
         ashley.change_job(unemployed_job)
