@@ -61,6 +61,10 @@ init 2 python:
         ashley.event_triggers_dict["dom_fingers"] = False
         ashley.event_triggers_dict["dom_oral"] = False
         ashley.event_triggers_dict["dom_fuck"] = False
+        ashley.event_triggers_dict["oral_position_filter"] = ellie_oral_position_filter
+        ashley.event_triggers_dict["vaginal_position_filter"] = ellie_vaginal_position_filter
+        ashley.event_triggers_dict["anal_position_filter"] = ellie_anal_position_filter
+
         mc.business.event_triggers_dict["ashley_submission_complete"] = False   #Set to true if we complete her submission arc.
         mc.business.event_triggers_dict["mc_serum_duration"] = 3
         mc.business.event_triggers_dict["mc_serum_aura_tier"] = 0
@@ -107,6 +111,16 @@ init 2 python:
         ashley.add_role(ashley_role)
 
         return
+
+    def ashley_oral_position_filter(oral_positions):
+        return ashley.event_triggers_dict.get("sub_blowjob_avail", False)
+
+    def ashley_vaginal_position_filter(vaginal_positions):
+        return ashley.event_triggers_dict.get("sub_fuck_avail", False)
+
+    def ashley_anal_position_filter(anal_positions):
+        return ashley.event_triggers_dict.get("sub_anal_avail", False)
+
 
 
     # ashley_room_excitement_overhear = Action("Overhear Ashley",ashley_room_excitement_overhear_requirement,"ashley_room_excitement_overhear_label")
@@ -929,7 +943,7 @@ label ashley_porn_video_discover_label():   #20 Sluttiness
     $ scene_manager.clear_scene()
     "Wow... [the_person.title]..."
     "This seems pretty crazy. She seems to be some kind of closet dom? It's hard to believe."
-    "And the bakground... was this done in a real hospital room?"
+    "And the background... was this done in a real hospital room?"
     "There's no way you can talk to her about it yet. Maybe you should bring it up with [stephanie.title] first?"
     $ stephanie.add_unique_on_talk_event(ashley_ask_sister_about_porn_video)
     $ ashley.event_triggers_dict["porn_discovered"] = True

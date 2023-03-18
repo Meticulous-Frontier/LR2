@@ -353,7 +353,7 @@ init 5 python:
         # insert unique positions into choices
         for unique_position in person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, prohibit_tags):
             position = unique_position[0]
-            if allow_position(person, position) and  mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+            if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
                 positions[position.skill_tag].insert(unique_position[1], [willingness, position])
 
