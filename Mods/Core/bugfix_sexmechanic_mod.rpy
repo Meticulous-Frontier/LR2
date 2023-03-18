@@ -64,7 +64,7 @@ init 5 python:
             extra_positions.append(tit_fuck)
 
         for position in list_of_girl_positions + extra_positions:
-            if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+            if person.allow_position(position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 if position.her_position_willingness_check(person, ignore_taboo = ignore_taboo):
                     position_option_list.append([position, person.sex_skills[position.skill_tag]])
 
@@ -199,28 +199,6 @@ init 5 python:
         person.clear_situational_obedience("aura")
         return
 
-    def allow_position(person, position):
-        if position.opinion_tags:
-            for opinion in position.opinion_tags:
-                if person.get_known_opinion_score(opinion) == -2:
-                    if person.has_role(slave_role) and person.obedience > 200: #A slave does what she is told.
-                        return True
-                    if perk_system.has_ability_perk("Serum: Aura of Compliance") and mc_serum_aura_obedience.get_trait_tier() >= 3:
-                        return True
-                    return False
-        return True
-
-    def is_position_filtered(person, position):
-        if position.skill_tag == "Foreplay" and callable(person.event_triggers_dict.get("foreplay_position_filter", None)):
-            return not person.event_triggers_dict["foreplay_position_filter"]([1, position])
-        if position.skill_tag == "Oral" and callable(person.event_triggers_dict.get("oral_position_filter", None)):
-            return not person.event_triggers_dict["oral_position_filter"]([1, position])
-        if position.skill_tag == "Vaginal" and callable(person.event_triggers_dict.get("vaginal_position_filter", None)):
-            return not person.event_triggers_dict["vaginal_position_filter"]([1, position])
-        if position.skill_tag == "Anal" and callable(person.event_triggers_dict.get("anal_position_filter", None)):
-            return not person.event_triggers_dict["anal_position_filter"]([1, position])
-        return False
-
     def build_position_rejection_string(person, position):
         result = position.name + "\nHates: "
         if position.opinion_tags:
@@ -298,7 +276,7 @@ init 5 python:
                 option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
 
-                    if allow_transitions and allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and condition.filter_condition_positions(position):
+                    if allow_transitions and person.allow_position(position) and not person.is_position_filtered(position) and object_choice.has_trait(position.requires_location) and condition.filter_condition_positions(position):
                         appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
@@ -306,7 +284,7 @@ init 5 python:
                 # allow transition to positions with same traits and skill requirements
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
-                        if allow_transitions and allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag and condition.filter_condition_positions(position):
+                        if allow_transitions and person.allow_position(position) and not person.is_position_filtered(position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag and condition.filter_condition_positions(position):
                             appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
 
@@ -343,7 +321,7 @@ init 5 python:
         }
         for position in sorted(list_of_positions, key = lambda x: x.name):
             if mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits) and condition.filter_condition_positions(position): #There is a valid object and if it requires large tits she has them.
-                if allow_position(person, position):
+                if person.allow_position(position):
                     willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
                     if not position.skill_tag in prohibit_tags:
                         positions[position.skill_tag].append([willingness, position])
@@ -353,7 +331,7 @@ init 5 python:
         # insert unique positions into choices
         for unique_position in person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, prohibit_tags):
             position = unique_position[0]
-            if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+            if person.allow_position(position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
                 positions[position.skill_tag].insert(unique_position[1], [willingness, position])
 

@@ -270,7 +270,7 @@ init 2:
             #She isn't naked enough to go straight to final node
             if not final_node.position.check_clothing(person):  #She isn't naked enough to go straight to the end node
                 for position in list_of_girl_positions + extra_positions:
-                    if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits):
+                    if person.allow_position(position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits):
                         if position.check_clothing(person):
                             if final_node.position.skill_tag == "Vaginal" or final_node.position.skill_tag == "Anal":
                                 if position.skill_tag == "Foreplay" or position.skill_tag == "Oral":
@@ -296,7 +296,7 @@ init 2:
             #If we don't have a first node, 50/50 chance we create a first node, or sex begins with final node
             elif renpy.random.randint(0,100) < 50:
                 for position in list_of_girl_positions + extra_positions:
-                    if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits):
+                    if person.allow_position(position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits):
                         if position.check_clothing(person):
                             if final_node.position.skill_tag == "Vaginal" or final_node.position.skill_tag == "Anal":
                                 if position.skill_tag == "Foreplay" or position.skill_tag == "Oral":

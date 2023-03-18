@@ -714,14 +714,13 @@ init -1 python:
         # TO VALIDATE PRIOR TO ACTUALLY STARTING THE SEX LOOP
         # IT VALIDATES IF SHE IS WILLING BY HERSELF (NOT USING OBEDIENCE)
 
-        # quick return if she hates any required opinion tags for the position
-        for tag in the_position.opinion_tags:
-            if self.get_opinion_score(tag) <= -2:
-                return False
+        # quick exit for hate
+        if not self.allow_position(the_position):
+            return False
 
-        # add modifiers
-        if self.has_family_taboo():
-            final_slut_requirement += (self.get_opinion_score("incest") - 2) * 5          # love incest negates requirement penalty
+        # quick exit for custom blocking of position (story line)
+        if not self.is_position_filtered(the_position):
+            return False
 
         if self.has_role(prostitute_role):
             final_slut_requirement -= 20        # prostitutes are more willing by nature
@@ -748,8 +747,13 @@ init -1 python:
 
         final_slut_requirement -= __builtin__.min(__builtin__.int((self.happiness - 100)/4.0), 20) # happiness can lower requirement by up to 20 points
 
-        if not ignore_taboo and the_position.associated_taboo:
-            final_slut_requirement += 10    # taboo increases requirement by 10
+        # add modifiers
+        if not ignore_taboo:
+            if self.has_family_taboo():
+                final_slut_requirement += (self.get_opinion_score("incest") - 2) * 5          # love incest negates requirement penalty
+
+            if the_position.associated_taboo:
+                final_slut_requirement += 10    # taboo increases requirement by 10
 
         # print("Position: " + the_position.name + "[Sluttiness: " + str(self.sluttiness) + ", Required: " + str(final_slut_requirement) + "]")
         if self.sluttiness >= final_slut_requirement:
@@ -757,6 +761,32 @@ init -1 python:
         return False
 
     Person.is_willing = person_is_willing
+
+    def allow_position(self, position):
+        if position.opinion_tags:
+            for opinion in position.opinion_tags:
+                if self.get_known_opinion_score(opinion) == -2:
+                    if self.has_role(slave_role) and self.obedience > 200: #A slave does what she is told.
+                        return True
+                    if perk_system.has_ability_perk("Serum: Aura of Compliance") and mc_serum_aura_obedience.get_trait_tier() >= 3:
+                        return True
+                    return False
+        return True
+
+    Person.allow_position = allow_position
+
+    def is_position_filtered(self, position):
+        if position.skill_tag == "Foreplay" and callable(self.event_triggers_dict.get("foreplay_position_filter", None)):
+            return not self.event_triggers_dict["foreplay_position_filter"]([1, position])
+        if position.skill_tag == "Oral" and callable(self.event_triggers_dict.get("oral_position_filter", None)):
+            return not self.event_triggers_dict["oral_position_filter"]([1, position])
+        if position.skill_tag == "Vaginal" and callable(self.event_triggers_dict.get("vaginal_position_filter", None)):
+            return not self.event_triggers_dict["vaginal_position_filter"]([1, position])
+        if position.skill_tag == "Anal" and callable(self.event_triggers_dict.get("anal_position_filter", None)):
+            return not self.event_triggers_dict["anal_position_filter"]([1, position])
+        return False
+
+    Person.is_position_filtered = is_position_filtered
 
     ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
     # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
