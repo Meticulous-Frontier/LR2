@@ -437,12 +437,17 @@ init 5 python:
 
         return opinion_score
 
+    def create_report_log(extra_values = {}):
+        report_log = defaultdict(int)
+        report_log["positions_used"] = []
+        report_log.update(extra_values)
+        return report_log
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = Condition_Type("Empty"), used_obedience = False):
+
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = Condition_Type("Empty")):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
-        $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
-        $ report_log["positions_used"] = [] #This is a list, not an int.
+        $ report_log = create_report_log()
 
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
@@ -455,8 +460,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ use_condom = mc.condom if skip_condom else False
     $ stealth_orgasm = False
     $ stop_stripping = False
-    if used_obedience:
-        $ report_log["used_obedience"] = True
+    $ report_log["was_public"] = not private
 
     #Privacy modifiers
     if mc.location.get_person_count() == 1 and not private and mc.location.privacy_level != 3 and mc.location.privacy_level != 1:
@@ -464,7 +468,6 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
     # $ renpy.say(None, "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person, private = private)
-    $ report_log["was_public"] = not private
 
     $ round_choice = "Change" # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     $ first_round = True

@@ -97,32 +97,35 @@ label bend_over_your_desk_label(the_person):
         "You are incredibly turned on. You decide to take things with [the_person.title] a step further."
     else:
         "Do you want to take things with [the_person.title] a step further?"
+
+    $ report_log = create_report_log({ "obedience_used": True}) # we already start with obedience used set
     menu:
         "Ask for handjob" if the_person.obedience < 140:
             mc.name "You are so fucking hot. Would you please finish me off? You can use your hand."
             the_person "Okay, I can do that."
+            call get_fucked(the_person, start_position = handjob, the_goal = "get mc off", private = False, skip_intro = False, allow_continue = False, report_log = report_log) from _obedience_lust_loop_handjob_finish_01
         "Demand blowjob" if the_person.obedience >= 140 or the_person.is_willing(blowjob, private = False):
             mc.name "That's enough, now I need you to finish me off. Get on your knees and suck me off."
             if the_person.opinion_score_giving_blowjobs() <= -2:
                 the_person "I'm sorry, I can't do that... but I can get you off some other way!"
                 mc.name "Fine, just do that then."
                 the_person "Okay..."
-                call get_fucked(the_person, the_goal = "get mc off", private = False, skip_intro = False, allow_continue = False) from _obedience_lust_loop_blowjob_finish_01
+                call get_fucked(the_person, the_goal = "get mc off", private = False, skip_intro = False, allow_continue = False, report_log = report_log) from _obedience_lust_loop_blowjob_finish_01
             else:
                 $ the_person.draw_person(position = "blowjob")
                 "[the_person.possessive_title] obediently turns and gets down on her knees."
                 "You pull your cock out and she opens her mouth, taking you in her mouth obediently."
-                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, position_locked = True, used_obedience = True)from _obedience_lust_loop_blowjob_finish_02
+                call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, position_locked = True, report_log = report_log) from _obedience_lust_loop_blowjob_finish_02
         "Fuck her" if (the_person.obedience >= 170 or the_person.is_willing(SB_doggy_standing, private = False)) and the_person.vagina_available():
             "You stand up and pull your cock out. You rub yourself along her slit for a moment."
             the_person "Ah... sir?"
             mc.name "Just keep working. This will only take a moment."
-            call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), condition = make_condition_computer_work(), skip_intro = False, position_locked = True, used_obedience = True)from _obedience_lust_loop_doggy_finish_01
+            call fuck_person(the_person, start_position = SB_doggy_standing, start_object = make_desk(), condition = make_condition_computer_work(), skip_intro = False, position_locked = True, report_log = report_log) from _obedience_lust_loop_doggy_finish_01
         "Fuck her ass" if (the_person.obedience >= 190 or the_person.is_willing(SB_anal_standing, private = False)) and the_person.vagina_available():
             "You stand up and pull your cock out. You rub yourself along her slit for a moment."
             the_person "Ah... sir?"
             mc.name "Just keep working. This will only take a moment."
-            call fuck_person(the_person, start_position = SB_anal_standing, condition = make_condition_computer_work(), start_object = make_desk(), skip_intro = False, position_locked = True, used_obedience = True)from _obedience_lust_loop_anal_finish_01
+            call fuck_person(the_person, start_position = SB_anal_standing, condition = make_condition_computer_work(), start_object = make_desk(), skip_intro = False, position_locked = True, report_log = report_log) from _obedience_lust_loop_anal_finish_01
         "Leave her alone" if not (get_lust_tier() >= 4 or (get_lust_tier() * 2 > mc.focus)):
             pass
     mc.name "Thank you, [the_person.title]. That was just what I needed."
