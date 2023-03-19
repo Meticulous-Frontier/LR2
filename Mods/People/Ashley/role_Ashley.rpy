@@ -2288,12 +2288,12 @@ label ashley_work_blowjob_label(the_person):
     "You decide to get straight to the point."
     mc.name "I need some relief. In a way that only you can provide."
     the_person "Ah, I wondered if you were going to make it all the way through the workday today..."
-    $ the_person.draw_person(position = "blowjob")
+    $ the_person.draw_person(position = "kneeling1")
     "[the_person.title] gets down on her knees as she teases you."
     the_person "I guess not!"
     if not the_person.tits_visible():
-        "She smiles up at you at she pulls her top off."
-        $ the_person.strip_to_tits(prefer_half_off = False)
+        "She smiles up at you as she pulls her top off."
+        $ the_person.strip_to_tits(position = "kneeling1", prefer_half_off = False)
         "Her amazing tits spill free from their prior confines."
     "You step over to her while pulling your cock free from your trousers."
     if the_person.opinion_score_giving_blowjobs() < 1:
