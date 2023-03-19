@@ -707,8 +707,8 @@ init -1 python:
 
     Person.generate_mother = generate_mother_enhanced
 
-    def person_is_willing(self, the_position, private = True, ignore_taboo = False):
-        final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(self, ignore_taboo)
+    def person_is_willing(self, the_position, private = True):
+        final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(self, False)
         # DON'T USE EFFECTIVE SLUTTINESS IN THIS FUNCTION
         # IT CAN HAVE THE MODIFIERS THAT THIS FUNCTION EMULATES
         # TO VALIDATE PRIOR TO ACTUALLY STARTING THE SEX LOOP
@@ -716,12 +716,15 @@ init -1 python:
 
         # quick exit for hate
         if not self.allow_position(the_position):
+            # print("Position not allowed for " + self.name)
             return False
 
         # quick exit for custom blocking of position (story line)
-        if not self.is_position_filtered(the_position):
+        if self.is_position_filtered(the_position):
+            # print("Position is filtered for " + self.name)
             return False
 
+        # print("Initial requirement: {}".format(final_slut_requirement))
         if self.has_role(prostitute_role):
             final_slut_requirement -= 20        # prostitutes are more willing by nature
         elif self.relationship == "Girlfriend":
@@ -730,30 +733,31 @@ init -1 python:
             final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 3  # love negates requirement penalty
         elif self.relationship == "Married":
             final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 5 # love negates requirement penalty
+        # print("After relation modifier: {}".format(final_slut_requirement))
 
         if not private:
             multiplier = 5 if self.sluttiness < 50 else 2
             final_slut_requirement -= (self.get_opinion_score("public sex") - 2) * multiplier # love negates requirement penalty
+            # print("After private modifier: {}".format(final_slut_requirement))
 
-        if self.love < 0:
-            final_slut_requirement += self.love
-        elif private:
+        if self.love < 0:   # the more they hate you the higher the requirement
+            final_slut_requirement += __builtin__.int(self.love * .2)
+        else:
             if self.has_role([girlfriend_role, affair_role]):               # girlfriend lowers requirement by love
-                final_slut_requirement -= self.love
+                final_slut_requirement -= __builtin__int(self.love * .2)
             elif self.is_family():
-                final_slut_requirement -= __builtin__.int(self.love / 4.0)  # family lowers requirement by love / 4
+                final_slut_requirement -= __builtin__.int((self.love - 50) * .2)  # family only lowers if they love you enough
             else:
-                final_slut_requirement -= __builtin__.int(self.love / 2.0)  # default lowers requirement by love / 2
+                final_slut_requirement -= __builtin__.int((self.love - 50) * .1)  # default only lowers if they love you enough
+        # print("After love modifier: {}".format(final_slut_requirement))
 
-        final_slut_requirement -= __builtin__.min(__builtin__.int((self.happiness - 100)/4.0), 20) # happiness can lower requirement by up to 20 points
+        final_slut_requirement -= __builtin__.int((self.happiness - 120) * .2) # happiness only lowers requirement if they have a good mood
+        # print("After happiness modifier: {}".format(final_slut_requirement))
 
-        # add modifiers
-        if not ignore_taboo:
-            if self.has_family_taboo():
-                final_slut_requirement += (self.get_opinion_score("incest") - 2) * 5          # love incest negates requirement penalty
-
-            if self.has_taboo(the_position.associated_taboo):
-                final_slut_requirement += 10    # taboo increases requirement by 10
+        # obedience can lower / increase requirement by up to 30 points
+        # at default obedience of 100 increases requirement by 10 points
+        final_slut_requirement -= __builtin__.int((self.obedience - 150) * .2)
+        # print("After obedience modifier: {}".format(final_slut_requirement))
 
         # print("Position: " + the_position.name + "[Sluttiness: " + str(self.sluttiness) + ", Required: " + str(final_slut_requirement) + "]")
         if self.sluttiness >= final_slut_requirement:

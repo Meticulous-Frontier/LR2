@@ -56,7 +56,7 @@ init 10 python:
         if erica_has_given_morning_handjob():
             lust_story_list.append("[erica.title] woke you up with a handjob after spending the night with [lily.title].")
             lust_story_list.append("Talk to her if you want her to wake you up more or less often.")
-        elif not erica.is_willing(cowgirl_handjob, ignore_taboo = True):
+        elif not erica.is_willing(cowgirl_handjob):
             lust_story_list.append("[erica.title] needs to be willing to give a handjob to continue this story. Try raising her sluttiness and check her opinions.")
             return lust_story_list
         elif not erica_get_is_doing_insta_sessions():

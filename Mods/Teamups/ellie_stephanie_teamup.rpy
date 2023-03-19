@@ -556,7 +556,7 @@ label ellie_stephanie_tester_reaction_anal_label(the_tester, the_person, the_res
             $ the_tester.change_arousal(10)
             the_tester "Mmm, that sounds amazing right now..."
             call ellie_stephanie_tester_anal_finger_label(the_tester) from _anal_bot_anal_finger_01
-        "Fuck her ass" if the_tester.is_willing(prone_anal, private = True, ignore_taboo = True):
+        "Fuck her ass" if the_tester.is_willing(prone_anal):
             mc.name "Don't worry, I can help you."
             if the_tester.sluttiness < 60:
                 "[the_tester.title] looks at you nervously as you start to walk over to her."
