@@ -329,7 +329,7 @@ label ellie_head_researcher_halfway_intro_label():
     $ the_person.draw_person(position = "sitting")
     "You close the door and walk over."
     mc.name "What is it?"
-    the_person "Well, following a hunch, I contacted the contact I had that got us the nanobots and the program in the first place."
+    the_person "Well, following a hunch, I got in touch with the contact I had that got us the nanobots and the software in the first place."
     the_person "It was just too weird that this girl had so much info about them."
     the_person "I gave him a description of the blackmailer, and he finally got back to me this morning."
     the_person "The company launched an investigation trying to figure out who leaked the bots, but they got the wrong person."
