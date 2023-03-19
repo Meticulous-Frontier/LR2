@@ -339,6 +339,7 @@ label ellie_stephanie_teamup_progression_scene_scene_0(the_group, scene_transiti
     the_researcher "Hang on, I'll just select someone at random."
     $ pick_1 = get_random_from_list(mc.business.get_requirement_employee_list(exclude_list = [the_person, the_researcher]))
     the_researcher "Ah, here we go."
+    "She shows you the personell file for [pick_1.title] your [pick_1.job.job_title]."
     the_researcher "I'll go get her."
     $ scene_manager.update_actor(the_researcher, position = "walking_away")
     "As she goes to leave, [the_person.title] looks at you."
@@ -578,6 +579,7 @@ label ellie_stephanie_tester_reaction_anal_label(the_tester, the_person, the_res
 
     $ scene_manager.remove_actor(the_tester)
     "You step out of the testing room, leaving [the_tester.possessive_title] to recover."
+    $ mc.change_location(mc.business.r_div)
     $ get_fetish_anal_serum().add_mastery(1)
     "You are pretty sure that [the_researcher.title] and [the_person.possessive_title] got some useful research data from this experiment."
     $ the_tester.clear_situational_slut("Test")
