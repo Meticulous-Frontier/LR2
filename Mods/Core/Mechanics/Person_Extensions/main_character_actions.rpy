@@ -331,7 +331,6 @@ label mc_remove_person_label(person):
 
 #Obedience Actions
 label do_a_favor_label(the_person):
-    $ mc.change_energy(-15)
     mc.name "Hey. I was wondering if you would be willing to do me a favor."
     if the_person.obedience < 70:
         "[the_person.possessive_title] scoffs and rolls her eyes."
@@ -346,6 +345,7 @@ label do_a_favor_label(the_person):
         the_person "Anything for you, [the_person.mc_title]."
     menu:
         "Small Favor":
+            $ mc.change_energy(-15)
             $ favor_success = True
             if mc_at_home():
                 mc.name "Hey, I'm a little short. Any chance I can borrow $5 to grab some coffee?"
@@ -383,6 +383,7 @@ label do_a_favor_label(the_person):
                     mc.name "Right, sorry."
 
         "Moderate Favor" if the_person.days_since_event("obedience_med_favor", set_if_none = True) > TIER_1_TIME_DELAY:
+            $ mc.change_energy(-15)
             $ favor_success = True  #calculate this instead of assuming true
             if not mc.phone.has_number(the_person):
                 mc.name "I was just wondering if I could get your number."
@@ -410,6 +411,7 @@ label do_a_favor_label(the_person):
                     "Ouch."
             $ the_person.set_event_day("obedience_med_favor")
         "Large Favor" if the_person.days_since_event("obedience_large_favor", set_if_none = True) > TIER_2_TIME_DELAY and mc.phone.has_number(the_person):
+            $ mc.change_energy(-15)
             $ favor_success = True  #calculate this instead of assuming true
             if the_person.is_family():
                 if mc_at_home():
