@@ -268,7 +268,7 @@ init -1 python:
         def get_uniform_wardrobe_for_person_wrapper(business, person):
             # run original function
             result = org_func(business, person)
-            if result:
+            if result and person.is_at_office():
                 return result
             # run extension code
             if not person.job:

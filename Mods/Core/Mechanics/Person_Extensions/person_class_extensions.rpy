@@ -986,9 +986,13 @@ init -1 python:
             else:
                 self.planned_outfit = None
             self.planned_uniform = None
-            self.dress_code_outfit = None
             self.maid_outfit = None
             self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
+
+        # off duty clear planned uniform / dress code outfit
+        if self.is_employee() and time_of_day == 4:
+            self.planned_uniform = None
+            self.dress_code_outfit = None
 
         destination = self.get_destination() #None destination means they have free time
         if not destination:
@@ -1804,7 +1808,7 @@ init -1 python:
 
     def person_is_at_work(self): #Checks to see if the character is at work.
         # special handling for college interns
-        if self.is_intern() and self.location in [rd_division, p_division, m_division, office]:
+        if self.is_intern() and self.is_at_office():
             return True
 
         if self.has_role(maid_role):
@@ -1826,6 +1830,11 @@ init -1 python:
         return self.location == self.job.job_location
 
     Person.is_at_work = person_is_at_work
+
+    def is_person_at_office(self):
+        return self.location in [rd_division, p_division, m_division, office, lobby]
+
+    Person.is_at_office = is_person_at_office
 
     def is_person_at_mc_house(self):
         return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
@@ -2110,6 +2119,9 @@ init -1 python:
         wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
         if wardrobe is None:
             return False
+
+        if self.is_strip_club_employee(): # no casual friday for strippers (employee moonlighting)
+            return True
 
         if self.is_employee() or self.is_intern():
             # Casual fridays for employees only
