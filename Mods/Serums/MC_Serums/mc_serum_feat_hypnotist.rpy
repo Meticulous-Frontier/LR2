@@ -41,7 +41,7 @@ label hypnotize_in_sex_label(the_person, the_position):
     elif the_position.position_tag == "blowjob":
         "[the_person.title] looks up at you."
     else:
-        "[the_person.title]at you."
+        "[the_person.title] looks at you."
     "Using your hypnosis ability, you quickly hypnotize her into a trance."
     $ the_person.increase_trance(show_dialogue = False, reset_arousal = False, add_to_log = True)
     if mc_serum_feat_hypnotist.get_trait_tier() > 1:
