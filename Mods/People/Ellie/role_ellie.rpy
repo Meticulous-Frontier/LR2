@@ -3141,7 +3141,7 @@ label ellie_submission_label():   #Ellie submits herself to be used by MC
         $ take_virginity(the_person)
         $ the_person.draw_person(position = "standing_doggy")
         "Another small push, and you bottom out inside of her. You are finally balls deep inside of [the_person.possessive_title]."
-        call fuck_person(the_person, private=True, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, condition = make_condition_taking_virginity()) from _call_fuck_person_ellie_obedience_60_01
+        call fuck_person(the_person, private=True, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, position_locked = True, condition = make_condition_taking_virginity()) from _call_fuck_person_ellie_obedience_60_01
         $ the_person.change_obedience(5)
     "When you finish with her, [the_person.title] slumps over her desk. Her well used ass is still bare and pointing back at you."
     $ the_person.draw_person(position = "standing_doggy")
