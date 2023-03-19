@@ -475,8 +475,9 @@ label do_a_favor_label(the_person):
                 else:
                     the_person "Sorry, I'm not really into social media."
                     mc.name "Okay, well if you ever change your mind, you would be great!"
-
-
             $ the_person.set_event_day("obedience_large_favor")
+        "Nevermind":
+            mc.name "Nevermind, it's okay."
+            return
     $ the_person.set_event_day("obedience_favor")
     return
