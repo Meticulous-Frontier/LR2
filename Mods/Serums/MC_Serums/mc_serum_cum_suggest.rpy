@@ -13,25 +13,25 @@ init 2 python:
 
 init 1 python:  #Associated Perks
     def perk_cum_suggest_small_on_cum(the_person, the_place, add_to_log = True):
-        the_person.change_modded_suggestibility(2, max_amt = 10, add_to_log = add_to_log)
+        the_person.change_modded_suggestibility(1, max_amt = 10, add_to_log = add_to_log)
         return
 
     def perk_cum_suggest_med_on_cum(the_person, the_place, add_to_log = True):
-        the_person.change_modded_suggestibility(3, max_amt = 20, add_to_log = add_to_log)
+        the_person.change_modded_suggestibility(2, max_amt = 20, add_to_log = add_to_log)
         return
 
     def perk_cum_suggest_large_on_cum(the_person, the_place, add_to_log = True):
-        the_person.change_modded_suggestibility(4, max_amt = 30, add_to_log = add_to_log)
+        the_person.change_modded_suggestibility(2, max_amt = 30, add_to_log = add_to_log)
         return
 
     def perk_cum_suggest_small():
-        return Ability_Perk(description = "When exposed to your cum, women become permanently, slightly more suggestible.", usable = False, cum_func = perk_cum_suggest_small_on_cum)
+        return Ability_Perk(description = "When exposed to your cum, increases her suggestibility by 1% to a maximum of 10%.", usable = False, cum_func = perk_cum_suggest_small_on_cum)
 
     def perk_cum_suggest_med():
-        return Ability_Perk(description = "When exposed to your cum, women become permanently, more suggestible.", usable = False, cum_func = perk_cum_suggest_med_on_cum)
+        return Ability_Perk(description = "When exposed to your cum, increases her suggestibility by 2% to a maximum of 20%.", usable = False, cum_func = perk_cum_suggest_med_on_cum)
 
     def perk_cum_suggest_large():
-        return Ability_Perk(description = "When exposed to your cum, women become permanently much more suggestible.", usable = False, cum_func = perk_cum_suggest_large_on_cum)
+        return Ability_Perk(description = "When exposed to your cum, increases her suggestibility by 2% to a maximum of 30%.", usable = False, cum_func = perk_cum_suggest_large_on_cum)
 
 
 
