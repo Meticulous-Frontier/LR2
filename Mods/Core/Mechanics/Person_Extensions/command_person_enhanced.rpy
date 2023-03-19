@@ -209,6 +209,7 @@ label employee_lust_build_loop_label(the_person):
                     $ the_person.change_arousal(spank_factor * ((mc.sex_skills["Foreplay"] / 10) + 1))
                     $ the_person.change_obedience(-spank_factor)
                     $ the_person.change_love(spank_factor)
+                $ spank_factor_increment(the_person)
 
             "Pull her bottoms off" if not (the_person.vagina_available() or the_person.vagina_visible()) and (the_person.sluttiness > 30 or the_person.obedience > 140):
                 "You decide that it is time to get a better view. You pull at her clothing."
