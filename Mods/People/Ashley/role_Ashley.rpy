@@ -3122,7 +3122,7 @@ label ashley_second_concert_date_label():
         "[stephanie.title] slowly moves up your body until her hips are on yours. She grinds her cunt a few times along your length, enjoying the pressure against her groin."
         $ stephanie.change_arousal(10)
         $ mc.change_locked_clarity(30)
-        if stephanie.has_cum_fetish() or stephanie.has_breeding_fetish() or stephanie.wants_creampie():
+        if stephanie.has_cum_fetish() or stephanie.wants_creampie():
             "She reaches down and takes your cock in her hand and lines it up with her raw cunt."
             stephanie "I want to feel you cum inside me tonight. I'm going give you the ride of your life and then finish you off deep..."
             "[stephanie.possessive_title] lowers her hips, sheathing your erection. She sighs in satisfaction when she bottoms out."

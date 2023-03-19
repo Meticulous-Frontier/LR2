@@ -1088,10 +1088,8 @@ init -1 python:
             # when breeding fetish, she always wants a creampie
             if person.has_breeding_fetish():
                 return True
-            if persistent.pregnancy_pref == 3 and person.is_highly_fertile():
-                if person.baby_desire > 200:
-                    return True
-                return False
+            if persistent.pregnancy_pref == 3 and person.is_highly_fertile() and person.baby_desire > 200:
+                return True
             return org_func(person)
 
         return wants_creampie_wrapper

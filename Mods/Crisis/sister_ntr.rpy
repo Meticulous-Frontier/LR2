@@ -24,7 +24,7 @@ init 3 python:
         finishes = []
         if person.get_opinion_score("being covered in cum") > 0 or person.get_opinion_score("cum facials") > 0:
             finishes.append ("facial")
-        if person.get_opinion_score("creampies") > 0 or person.get_opinion_score("bareback sex") > 0:
+        if person.wants_creampie():
             finishes.append ("inside")
         if person.get_opinion_score("giving blowjobs") > 0 or person.get_opinion_score("drinking cum") > 0:
             finishes.append ("drink")

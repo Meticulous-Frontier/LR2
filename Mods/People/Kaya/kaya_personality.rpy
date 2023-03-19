@@ -830,7 +830,7 @@ label kaya_condom_ask(the_person):
         the_person "Hey, do you think you should put on a condom?"
         the_person "I'm on birth control, so we don't really need one..."
         $ the_person.update_birth_control_knowledge()
-    elif the_person.get_opinion_score("creampies") > 0:
+    elif the_person.wants_creampie():
         $ the_person.discover_opinion("creampies")
         the_person "Hey, maybe you should put on a condom. If you don't you'll have to pull out."
     else:
@@ -882,7 +882,7 @@ label kaya_cum_mouth(the_person):
 label kaya_cum_pullout(the_person):
     # Lead in: "I'm going to cum!"
     if mc.condom: #TODO: All of the cum-drunk stuff
-        if the_person.wants_creampie() and the_person.get_opinion_score("creampies") > 0 and not the_person.has_taboo("condomless_sex"): #TODO: FIgure out we want any more requirements for this to fire.
+        if the_person.wants_creampie() and not the_person.has_taboo("condomless_sex"): #TODO: FIgure out we want any more requirements for this to fire.
             if the_person.event_triggers_dict.get("preg_knows", False):
                 the_person "I'm already pregnant, why are we even bothering with a condom?"
                 the_person "Take it off and cum inside my pussy, just like you did when you knocked me up!"

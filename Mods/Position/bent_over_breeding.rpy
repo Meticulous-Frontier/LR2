@@ -276,7 +276,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         if the_girl.knows_pregnant():
             the_girl "It's nice, already being pregnant, I can take a load like that anytime..."
-        elif the_girl.wants_creampie() or the_girl.get_opinion_score("bareback sex") > 0:
+        elif the_girl.wants_creampie():
             the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
             "[the_girl.possessive_title]'s voice starts to trail off."
         elif the_girl.sluttiness > 90:

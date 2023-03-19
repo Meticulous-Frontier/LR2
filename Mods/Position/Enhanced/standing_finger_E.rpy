@@ -16,7 +16,7 @@ label outro_standing_finger_enhanced(the_girl, the_location, the_object):
     else:
         the_girl "Aww, I thought I was going to get there first. Oh well."
 
-    if the_girl.get_opinion_score("creampies") > 0 or the_girl.get_opinion_score("anal creampies") > 0 or the_girl.get_opinion_score("drinking cum") > 0 or the_girl.get_opinion_score("cum facials") > 0 or the_girl.get_opinion_score("being covered in cum") > 0:
+    if the_girl.wants_creampie() or the_girl.has_cum_fetish():
         the_girl "Maybe next time we'll find somewhere else for you to do that."
         if the_girl.get_opinion_score("drinking cum") > 0:
             "[the_girl.title] winks at you as she licks her lips."

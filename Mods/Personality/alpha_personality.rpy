@@ -772,7 +772,7 @@ label alpha_flirt_response_text(the_person):
     return
 
 label alpha_condom_demand(the_person):
-    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
+    if the_person.wants_creampie():
         the_person "Put some rubber on that that bad boy up, so we can get going."
         if the_person.relationship != "Single":
             $ so_title = SO_relationship_to_title(the_person.relationship)
@@ -792,8 +792,8 @@ label alpha_condom_ask(the_person):
     if the_person.on_birth_control:
         the_person "I have an IUD, so we don't need a condom."
         $ the_person.update_birth_control_knowledge()
-    elif the_person.get_opinion_score("creampies") > 0:
-        if the_person.wants_creampie():
+    elif the_person.wants_creampie():
+        if the_person.get_opinion_score("creampies" > 0):
             the_person "You don't need a condom, so you can keep fucking me as you cum..."
         else:
             the_person "You don't need a condom, so you can cover me with that cum..."
@@ -804,7 +804,7 @@ label alpha_condom_ask(the_person):
     return
 
 label alpha_condom_bareback_ask(the_person):
-    if the_person.get_opinion_score("creampies") > 0:
+    if the_person.get_opinion_score("bareback sex") > 0:
         if the_person.on_birth_control:
             the_person "Don't bother with a condom [the_person.mc_title]. I have long term protection."
             if the_person.wants_creampie():
@@ -825,7 +825,7 @@ label alpha_condom_bareback_ask(the_person):
     return
 
 label alpha_condom_bareback_demand(the_person):
-    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0: #Just likes raw sex
+    if the_person.wants_creampie(): #Just likes raw sex
         if the_person.on_birth_control:
             the_person "You don't need that, get that cock over here."
             the_person "Come on [the_person.mc_title], I want you to cum inside me!"

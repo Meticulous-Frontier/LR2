@@ -781,7 +781,7 @@ label cougar_flirt_response_text(the_person):
     return
 
 label cougar_condom_demand(the_person):
-    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
+    if the_person.wants_creampie():
         the_person "Why don't you wrap that bad boy up, so we can get going."
         if the_person.relationship != "Single":
             $ so_title = SO_relationship_to_title(the_person.relationship)
@@ -801,7 +801,7 @@ label cougar_condom_ask(the_person):
     if the_person.on_birth_control:
         the_person "I have an IUD, so you don't need to put on a condom unless you want to be very safe."
         $ the_person.update_birth_control_knowledge()
-    elif the_person.get_opinion_score("creampies") > 0:
+    elif the_person.wants_creampie():
         the_person "Maybe you don't need a condom. Then you can keep fucking me as you cum..."
         $ the_person.discover_opinion("creampies")
     else:
@@ -810,7 +810,7 @@ label cougar_condom_ask(the_person):
     return
 
 label cougar_condom_bareback_ask(the_person):
-    if the_person.get_opinion_score("creampies") > 0:
+    if the_person.wants_creampie():
         if the_person.on_birth_control:
             the_person "Don't bother with a condom [the_person.mc_title]. I have an IUD, so it's perfectly safe."
             the_person "You can cum right inside of me, as often as you want."
