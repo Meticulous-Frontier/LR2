@@ -511,6 +511,7 @@ label ellie_stephanie_tester_reaction_basic_label(the_tester, the_person, the_re
     "[the_tester.title] startles at the sudden question."
     the_tester "Oh! Uhhh... yeah... but I think I need to lay down for a bit..."
     the_researcher "That's fine. We will leave you the room to recover."
+    $ mc.change_location(mc.business.r_div)
     "You step out of the room with [the_researcher.title] and [the_person.possessive_title], leaving the test subject to recover."
     return
 
@@ -578,8 +579,8 @@ label ellie_stephanie_tester_reaction_anal_label(the_tester, the_person, the_res
             return
 
     $ scene_manager.remove_actor(the_tester)
-    "You step out of the testing room, leaving [the_tester.possessive_title] to recover."
     $ mc.change_location(mc.business.r_div)
+    "You step out of the testing room, leaving [the_tester.possessive_title] to recover."
     $ get_fetish_anal_serum().add_mastery(1)
     "You are pretty sure that [the_researcher.title] and [the_person.possessive_title] got some useful research data from this experiment."
     $ the_tester.clear_situational_slut("Test")
@@ -647,6 +648,7 @@ label ellie_stephanie_tester_reaction_breeding_label(the_tester, the_person, the
             return
 
     $ scene_manager.remove_actor(the_tester)
+    $ mc.change_location(mc.business.r_div)
     "You step out of the testing room, leaving [the_tester.possessive_title] to recover."
     $ get_fetish_breeding_serum().add_mastery(1)
     "You are pretty sure that [the_researcher.title] and [the_person.possessive_title] got some useful research data from this experiment."
