@@ -861,11 +861,11 @@ label myra_focus_training_encounter(the_person):
 
     $ encounter_won = myra_calc_encounter_outcome(the_person, (encounter_num + 1) * 10, base_difficulty)
     if the_person.arousal > 100:
-        call  myra_focus_training_orgasm(the_person) from _myra_focus_training_orgasms_03
+        call myra_focus_training_orgasm(the_person) from _myra_focus_training_orgasms_03
         $ encounter_won = False
     if mc.arousal > 100 and myra_focus_progression_scene.get_stage() >= 3:
         call myra_focus_training_mc_orgasm(the_person) from _myra_focus_train_mc_cums_01
-        if myra_focus_progression_scene.get_stage() == 3:
+        if myra_focus_progression_scene.get_stage() >= 3:
             $ encounter_won = True
     if encounter_won:
         #Wins encounter
@@ -1267,7 +1267,7 @@ label myra_focus_training_orgasm(the_person):
             "[the_person.possessive_title] is getting ready to cum, and you aren't far behind her."
             the_person "Fuck... Oh fuck!"
             "You whisper in her ear."
-            mc.name "Get ready for it, I'm gonna cum to!"
+            mc.name "Get ready for it, I'm gonna cum too!"
             "[the_person.possessive_title] stops playing and rides you as you start to cum together."
             "As you start to shoot your load inside of her, she suddenly falls back against you, bottoming out on top of you as she orgasms also."
             the_person "Oh fuck! Fill my slutty ass with your cum [the_person.mc_title]!"
@@ -1342,22 +1342,22 @@ label myra_focus_training_mc_orgasm(the_person):
 
 init 4 python:
     def myra_calculate_stat_and_difficulty(the_person, difficulty, dif_modifier = 0):
-        encounter_dif = difficulty + dif_modifier + min(the_person.arousal, 100)
-        skill_stat = (the_person.focus + the_person.sex_skills["Foreplay"]) * 10 #Max 140, min 20
+        encounter_dif = __builtin__.int(difficulty + dif_modifier + __builtin__.min(the_person.arousal, 100))
+        skill_stat = __builtin__.int((the_person.focus + the_person.sex_skills["Foreplay"]) * 10) #Max 140, min 20
 
         #print("Skill stat: " + str(skill_stat) + " Difficulty: " + str(difficulty) + " Modifier: " + str(dif_modifier) + " Final Difficulty: " + str(encounter_dif))
         return (skill_stat, encounter_dif)
 
     def myra_calc_encounter_outcome(the_person, difficulty, dif_modifier = 0):
         (skill_stat, encounter_dif) = myra_calculate_stat_and_difficulty(the_person, difficulty, dif_modifier)
-        if skill_stat > renpy.random.randint(0,encounter_dif):
+        if skill_stat > renpy.random.randint(0, encounter_dif):
             return True
         return False
 
     #Return odds for the purpose of creating a menu string
     def myra_calc_encounter_odds(the_person, difficulty, dif_modifier = 0):
         (skill_stat, encounter_dif) = myra_calculate_stat_and_difficulty(the_person, difficulty, dif_modifier)
-        chance = int(((encounter_dif - skill_stat) * 1.0 / encounter_dif) * 100)
+        chance = __builtin__.int(((encounter_dif - skill_stat) * 1.0 / encounter_dif) * 100)
 
         if chance < 0:
             chance = 0
