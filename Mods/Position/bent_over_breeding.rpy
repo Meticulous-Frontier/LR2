@@ -12,9 +12,9 @@ init python:
         orgasm_description = "orgasm_bent_over_breeding",
         taboo_break_description = "taboo_break_bent_over_breeding",
         verb = "fuck",
-        opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up"], record_class = "Vaginal Sex",
+        opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up", "bareback sex"], record_class = "Vaginal Sex",
         default_animation = blowjob_bob,
-        associated_taboo = "bareback_sex")
+        associated_taboo = "condomless_sex")
 
 
 
