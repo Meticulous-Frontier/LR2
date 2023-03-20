@@ -40,5 +40,5 @@ init -1 python:
         return Object("Stripper Pole", ["Lean", "Low"], sluttiness_modifier = 0, obedience_modifier = 0)
 
     # Classic porn audition couch
-    def make_black_leather_couch():
-        return Object("Black Leather Couch",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
+    def make_white_leather_couch():
+        return Object("White Leather Couch",["Sit","Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)

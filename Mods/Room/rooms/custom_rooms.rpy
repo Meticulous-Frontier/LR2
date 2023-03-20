@@ -61,7 +61,7 @@ init 15 python:
         make_wall(),
         make_window(),
         make_floor(),
-        make_black_leather_couch(),
+        make_white_leather_couch(),
     ]
     police_jail_objects = [
         Object("cell bars", ["Lean"], sluttiness_modifier = 0, obedience_modifier = 0),
