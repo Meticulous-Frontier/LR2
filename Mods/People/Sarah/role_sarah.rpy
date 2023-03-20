@@ -431,10 +431,6 @@ init 2 python:
         mc.business.add_mandatory_crisis(HR_director_initial_hire_action)
 
     def add_naomi_reconciliation_action():
-        # make her free roaming so you can run into her.
-        naomi.change_job(unemployed_job)
-        naomi.set_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[1,2,3])
-
         naomi_reconciliation_action = Action("Naomi reconciliation", naomi_reconciliation_requirement, "Sarah_naomi_reconciliation_label")
         naomi.add_unique_on_room_enter_event(naomi_reconciliation_action)
 
@@ -3082,6 +3078,9 @@ label Sarah_naomi_reconciliation_label(the_person):
         so_name = the_person.SO_name
         the_person.SO_name = None
         the_person.relationship = "Single"
+        # bring her back into the game
+        the_person.change_job(unemployed_job)
+        the_person.set_schedule(None, the_days=[0,1,2,3,4,5,6], the_times=[1,2,3])
 
     "As you are walking around, you suddenly hear a familiar voice calling you."
     the_person "Hey [the_person.mc_title], is that you?"
