@@ -966,8 +966,9 @@ label starbuck_sex_store_promo_two_label(the_person):
                 "[the_person.possessive_title] runs her hands along your sides as you get into position."
                 "She grabs your cock with your hand and points it at her soaked slit. With one smooth motion you thrust into her. She's so wet you glide in with no resistance."
             $ the_person.break_taboo("condomless_sex")
+            $ the_person.break_taboo("vaginal_sex")
             "Wasting no time, you begin thrusting into her. Her pussy feels amazing wrapped around you."
-            call fuck_person(the_person, start_position = missionary, start_object = make_floor(), skip_intro = True) from _call_fuck_person_SBS80
+            call fuck_person(the_person, start_position = missionary, start_object = make_floor(), skip_intro = True, skip_condom = True) from _call_fuck_person_SBS80
             "[the_person.possessive_title] lays there in a daze. Between the toy and your cock, she had multiple orgasms."
             if (the_person.love > 50):
                 "As your start getting dressed again, out of the corner of your eye you see [the_person.possessive_title] begin to shudder."
