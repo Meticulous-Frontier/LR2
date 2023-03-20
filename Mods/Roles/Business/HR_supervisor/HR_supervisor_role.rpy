@@ -366,7 +366,7 @@ label HR_director_initial_hire_label(the_person):
     else:
         "You head to your office with her."
 
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     the_person "Well, I am excited to have this opportunity. To be honest I'm not really even sure where to begin!"
     mc.name "I'll tell you what, for the rest of this week, why don't you just get to know the other employees and see how they perform. I'll send over to you my personal dossiers on all the employees, and as you have time you can look over them."
     the_person "Okay, I can do that. I'll look over them over the weekend as well. Do you want to plan on having a meeting sometime next week?"
@@ -455,14 +455,14 @@ label HR_director_monday_meeting_label(the_person):
 
     $ scene_manager = Scene()
 
-    if mc.location != office:
+    if mc.location != ceo_office:
         "You hurry to your office for your weekly meeting with your HR director [the_person.title]."
         $ mc.change_location(ceo_office)
         the_person "Hello [the_person.mc_title]!"
         $ scene_manager.add_actor(the_person)
         mc.name "Hi [the_person.title], come in and take a seat."
     else:
-        $ ceo_office.show_background()
+        $ mc.location.show_background()
         the_person "Hello [the_person.mc_title]!"
         $ scene_manager.add_actor(the_person)
         "Your HR Director appears in the doorway to your office. It is time for your weekly HR meeting."
@@ -585,14 +585,9 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
     $ scene_manager.update_actor(the_person, position = "stand2")
     the_person "Alright, let me go get her."
     $ scene_manager.hide_actor(the_person)
-    $ ceo_office.show_background()
-    #$ clear_scene()
-    #$ scene_manager.clear_scene()
     "[person_choice.title] steps in to the office after a few minutes, followed by [the_person.title]."
     person_choice "Hello [person_choice.mc_title]."
 
-    # initialize
-    #$ scene_manager = Scene()
     $ scene_manager.add_actor(person_choice, position = "stand3", display_transform = character_left_flipped)
     mc.name "Hello [person_choice.title], come in and take a seat."
 
@@ -971,7 +966,7 @@ label HR_director_change_relative_recruitment_label(the_person):
 label HR_director_meeting_on_demand_label(the_person):
     $ scene_manager = Scene() # make sure we have an empty scene manager for on-demand meetings
     the_person "Okay, I think I have time for that! Let me grab my dossiers from Monday and I'll meet you in your office."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You head to your office and [the_person.possessive_title] quickly arrives with her papers."
     $ the_person.draw_person(position = "sitting")
     the_person "Ok! Let me see who I have on my list here..."
@@ -1605,7 +1600,7 @@ label HR_director_headhunt_interview_label(the_person):
     $ prospect = generate_HR_recruit()
     $ scene_manager = Scene()
     $ set_HR_director_tag("business_HR_headhunter_progress", 2)
-    if mc.location != office:
+    if mc.location != ceo_office:
         "You are hard at work when you get a message from your HR supervisor."
         the_person "Hey, I got a hit on criteria you had for a prospective employee. Want me to send you the info?"
         if mc.business.get_employee_count() >= mc.business.max_employee_count:  #We accidentally filled all available slots
@@ -1620,7 +1615,7 @@ label HR_director_headhunt_interview_label(the_person):
         $ scene_manager.add_actor(the_person)
         mc.name "Hi [the_person.title], come in and take a seat."
     else:
-        $ ceo_office.show_background()
+        $ mc.location.show_background()
         the_person "Hello [the_person.mc_title]!"
         $ scene_manager.add_actor(the_person)
         "Your HR Director appears in the doorway to your office."
