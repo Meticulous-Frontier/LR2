@@ -462,6 +462,15 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ stop_stripping = False
     $ report_log["was_public"] = not private
 
+    # break taboos automatically, so the caller doesn't need to remember to do it
+    if not ignore_taboo and isinstance(start_position, Position):
+        # since we skip intro, it's assumed we are already in the position and use the loop to continue
+        if skip_intro:
+            $ the_person.break_taboo(start_position.associated_taboo)
+        # we don't ask for condom and the mc is not wearing it and we are having intercourse
+        if skip_condom and not mc.condom and start_position.skill_tag in ["Vaginal", "Anal"]:
+            $ the_person.break_taboo("condomless_sex")
+
     #Privacy modifiers
     if mc.location.get_person_count() == 1 and not private and mc.location.privacy_level != 3 and mc.location.privacy_level != 1:
         $ private = True #If we're alone in the space and its a private room or at work, set to Private
