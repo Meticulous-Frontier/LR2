@@ -20,6 +20,11 @@ init -1 python:
 
     MainCharacter.is_home = is_home
 
+    def is_at_work_enhanced(self): #Checks to see if the main character is at work, generally used in crisis checks.
+        return self.location in [lobby, self.business.m_div, self.business.p_div, self.business.r_div, self.business.s_div, self.business.h_div, ceo_office, testing_room]
+
+    MainCharacter.is_at_work = is_at_work_enhanced
+
     def is_home_improvement_in_progress():
         return mc.business.event_triggers_dict.get("home_improvement_in_progress", False) == True
 
