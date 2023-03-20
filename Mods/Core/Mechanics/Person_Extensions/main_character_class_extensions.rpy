@@ -37,13 +37,13 @@ init -1 python:
             if perk_system.get_ability_flag("Lustful Priorities"):
                 amount += 5
 
-        amount = __builtin__.int(amount)
+        amount = __builtin__.int(__builtin__.round(amount))
         self.locked_clarity += amount
 
-        arousal = __builtin__.int(amount * .2)
+        arousal = amount * .2
         if arousal > 5:
             arousal = 5
-        self.arousal += arousal
+        self.change_arousal(arousal, add_to_log = False)
 
         if add_to_log and amount != 0:
             log_string = "You: " + ("+" if amount > 0 else "") + str(amount) + " {image=lust_eye_token_small} " + ("+" if arousal > 0 else "") + str(arousal)+ " {image=arousal_token_small}"

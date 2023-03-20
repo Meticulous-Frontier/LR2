@@ -1,6 +1,7 @@
 init -1 python:
     def change_funds(self, amount, add_to_log = True):
-        self.funds += __builtin__.int(amount)
+        amount = __builtin__.int(__builtin__.round(amount))
+        self.funds += amount
 
         if add_to_log:
             if amount >= 0:
@@ -23,7 +24,8 @@ init -1 python:
 
         max_supply = __builtin__.int(max_supply)
 
-        self.funds -= __builtin__.round(max_supply * candace_calculate_discount(), 1)
+        self.change_funds(-(max_supply * candace_calculate_discount()), add_to_log = False)
+
         self.supply_count += max_supply
         self.supplies_purchased += max_supply #Used for end of day reporting
         return max_supply
