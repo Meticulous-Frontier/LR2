@@ -348,7 +348,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
             jump dildochair_reward_menu
         "Max speed\n{color=#ff0000}{size=18}Requires at least 25 {image=gui/extra_images/energy_token.png}{/size}{/color} (disabled)" if the_person.energy < 25:
             pass
-        "Change your mind (tooltip)Change your mind and let her cum." if is_punishment and the_person.energy >=25 and the_person.arousal >= 80:
+        "Change your mind (tooltip)Change your mind and let her cum." if is_punishment and the_person.energy >=25 and the_person.arousal_perc >= 80:
             "You decide to let her finally cum, and you set the chair to its maximum speed."
             "A loud buzz can be heard in the room, [the_person.title]'s tongue is out crying out in pleasure!"
             $ dildochair_pleasure_loop_intensity(the_person, arousal = 10, energy = -5)
@@ -400,7 +400,7 @@ label strip_club_bdsm_dildochair_pleasure_loop(the_person, mistress = None, is_p
                 $ scene_manager.update_actor(the_person, position = "stand3", emotion = "sad")
                 $ the_person.change_stats(obedience = 5)
                 "Her eyes are full of love for her Master."
-            elif the_person.arousal >= 90:
+            elif the_person.arousal_perc >= 90:
                 "While you stop the chair and start to release the restraints she looks at you with hopeful eyes."
                 the_person "Please [the_person.mc_title]... Master! Yes, Master... Please, let me cum at least one time!"
                 mc.name "I will consider your request for the next time, Slave. Now you can get dressed."

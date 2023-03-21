@@ -703,7 +703,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                             call girl_strip_event(the_person, position_choice, object_choice) from _call_girl_strip_event_bugfix
 
                         if girl_in_charge and position_choice is not None: # girls in charge and wants to spice things up
-                            if the_person.effective_sluttiness() > position_choice.slut_cap and the_person.arousal > position_choice.slut_cap:
+                            if the_person.effective_sluttiness() > position_choice.slut_cap and the_person.arousal_perc > position_choice.slut_cap:
                                 "[the_person.title] wants to spice things up."
                                 $ position_choice = None
 
@@ -743,7 +743,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                 $ has_taken_control = True #After successful position and object choice she will let you know she wants to keep going.
                 $ position_choice = None #She picks the position now, because she has her own list of possibilities
 
-            elif not position_locked and the_person.energy >= 30 and (the_person.arousal > the_person.max_arousal - 30) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
+            elif not position_locked and the_person.energy >= 30 and (the_person.arousal_perc > 70) and (report_log.get("girl orgasms", 0) == 0) and report_log.get("beg finish", 0) == 0: #Within 30 of orgasming and she hasn't cum yet
                 # They're close to their orgasm and beg you to help them finish.
                 $ the_person.call_dialogue("sex_beg_finish")
                 menu:

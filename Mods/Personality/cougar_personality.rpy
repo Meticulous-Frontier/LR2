@@ -274,19 +274,19 @@ label cougar_seduction_accept_alone(the_person):
     return
 
 label cougar_sex_responses_foreplay(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm, you know just what I like, don't you?"
         else:
             the_person "Oh my... that feels very good, [the_person.mc_title]!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             "[the_person.title] closes her eyes and lets out a loud, sensual moan."
         else:
             the_person "Keep doing that [the_person.mc_title]... Wow, you're good!"
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Oh gods above that feels amazing!"
         else:
@@ -304,7 +304,7 @@ label cougar_sex_responses_foreplay(the_person):
     return
 
 label cougar_sex_responses_oral(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Oh [the_person.mc_title], you're so good to me."
         else:
@@ -312,13 +312,13 @@ label cougar_sex_responses_oral(the_person):
             "She sighs happily."
             the_person "Yes, right there!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Yes, just like that! Mmm!"
         else:
             the_person "Keep doing that [the_person.mc_title], it's making me feel... very aroused."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Mmm, you really know how to put that tongue of yours to good use. That feels amazing!"
         else:
@@ -335,19 +335,19 @@ label cougar_sex_responses_oral(the_person):
     return
 
 label cougar_sex_responses_vaginal(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm, I love feeling you inside of me!"
         else:
             the_person "Oh lord, you're so big... Whew!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             "[the_person.title] closes her eyes and lets out a loud, sensual moan."
         else:
             the_person "Oh that feels very good, keep doing that!"
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Yes! Oh god yes, fuck me!"
         else:
@@ -365,19 +365,19 @@ label cougar_sex_responses_vaginal(the_person):
     return
 
 label cougar_sex_responses_anal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm, you feel so big when you're inside me like this."
         else:
             the_person "Be gentle, it feels like you're going to tear me in half!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Give it to me, [the_person.mc_title], give me every last inch!"
         else:
             the_person "Oh god! Oww! Move a little slower..."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "I hope my ass isn't too tight for you, I don't want you to cum early."
         else:
@@ -997,19 +997,19 @@ label cougar_cum_anal(the_person):
 
 label cougar_sex_strip(the_person):
     if the_person.sluttiness < 20:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "I hope you don't mind if I slip this off..."
         else:
             the_person "I'm just going to take this off for you [the_person.mc_title]..."
 
     elif the_person.sluttiness < 60:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "How about I take this off for you."
         else:
             the_person "Oh [the_person.mc_title], you make me feel so young again!"
             the_person "I really need to take some more off."
     else:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "I'm really horny, I bet you want to see some more of me."
         else:
             the_person "I need to get this off, I want to feel your young body against mine!"
@@ -1159,31 +1159,31 @@ label cougar_date_seduction(the_person): #TODO: Change this to be different.
 label cougar_sex_end_early(the_person):
     if the_person.sluttiness > 50:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Is that it? You're going to drive me crazy [the_person.mc_title], I'm so horny..."
             else:
                 the_person "All done? I hope you were having a good time."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Already done? I don't know how you can stop, I'm so excited at the moment!"
             else:
                 the_person "Leaving already? Well, that's disappointing."
 
     else:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "That's it? Well, you could at least make me cum too."
             else:
                 the_person "All done? Maybe we can pick this up the next time when we're alone."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "I... I don't know what to say, did I exhaust you?"
             else:
                 the_person "That's all you wanted? I guess we're finished then."
     return
 
 label cougar_sex_take_control(the_person):
-    if the_person.arousal > 60:
+    if the_person.arousal_perc > 60:
         the_person "I just can't let you go [the_person.mc_title], You are going to finish what you started!"
     else:
         the_person "Do you think you're going somewhere? You are not yet done [the_person.mc_title]."

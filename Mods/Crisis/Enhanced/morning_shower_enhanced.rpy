@@ -58,7 +58,7 @@ label morning_shower_enhanced_label(): #TODO: make a similar event for your Aunt
                 "Just as this thought flashes through your mind, she starts rubbing her breasts, pinching her small nipples."
             $ mc.change_locked_clarity(10)
             $ the_person.change_arousal(renpy.random.randint(10,50))
-            if the_person.effective_sluttiness() >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35:
+            if the_person.effective_sluttiness() >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal_perc > 35:
                 call morning_shower_masturbation() from _call_morning_shower_masturbation_enhanced
 
             menu:
@@ -127,7 +127,7 @@ label morning_shower_masturbation():
     "The warmth of the water and her caresses seem to turn [the_person.possessive_title] on."
     $ the_person.draw_person(position = "missionary")
     "She sits on the shower floor, spreads her legs and begins to masturbate with her hand."
-    while the_person.arousal < 100:
+    while the_person.arousal_perc < 100:
         $ ran_num = renpy.random.randint(0,4)
         if ran_num == 0:
             "[the_person.possessive_title] rubs her clit and her moans grow louder."

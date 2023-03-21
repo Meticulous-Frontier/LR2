@@ -1578,7 +1578,7 @@ label myra_alexia_teamup_light_distraction(the_person):
         "[the_person.title] sighs as you hit a particularly sensitive area. She feels good and relaxed."
         return 10
     if myra_alexia_teamup_scene.stage == 1:
-        if the_person.arousal < 40:
+        if the_person.arousal_perc < 40:
             "You let your hands roam up an down [the_person.possessive_title]'s back for a bit as the match gets started."
             "She wiggles a bit when you put your hands on her sides and pull her back against you a little bit more."
             "Your wrap your hands around her front, rubbing her stomach."
@@ -1605,7 +1605,7 @@ label myra_alexia_teamup_light_distraction(the_person):
                 "You softly knead her tits through her clothes for the remainder of the match."
                 return 15
     if myra_alexia_teamup_scene.stage == 2:
-        if the_person.arousal < 30:
+        if the_person.arousal_perc < 30:
             "You softly run hands up and down [the_person.possessive_title]'s soft skin on her sides and belly as the match gets started."
             "You don't want to be too much of a distraction, you just want to get her slowly turned on as the match progresses."
             "Slowly, you reach up with your right hand and run your finger tips along her breast."
@@ -1621,7 +1621,7 @@ label myra_alexia_teamup_light_distraction(the_person):
                 return 30
             return 25
 
-        elif the_person.arousal < 65:
+        elif the_person.arousal_perc < 65:
             "[the_person.possessive_title] leans back against you. She sighs when your hands start to move along her skin."
             the_person "Mmm, that's nice..."
             "You bring both hands up to her tits for a bit. Her nipples are hard with arousal, so you give them a few light pinches as the game begins."
@@ -1659,7 +1659,7 @@ label myra_alexia_teamup_light_distraction(the_person):
             return 40
     if myra_alexia_teamup_scene.stage == 3:
         "For now, you are content to let the girls have a mostly fair match. You decide to enjoy the hot young body of [the_person.possessive_title] on your lap without going overboard."
-        if the_person.arousal < 25:
+        if the_person.arousal_perc < 40:
             "Her sides, her stomach, her thighs, her chest, her crotch... you let your hands roam her body."
             "Her skin is hot and soft, and feels amazing against yours. Your cock twitches between her ass cheeks when she adjusts her weight slightly"
             the_person "Mmm. God you feel so hard..."
@@ -1672,7 +1672,7 @@ label myra_alexia_teamup_light_distraction(the_person):
             "The match is already almost over, so you spend the rest of it gently fingering her pussy, and getting her warmed up."
             $ mc.change_arousal(10)
             return 30
-        elif the_person.arousal < 50:
+        elif the_person.arousal_perc < 65:
             "[the_person.possessive_title] whispers back to you."
             the_person "Do... do you want to put it in?"
             mc.name "Not yet."
@@ -1690,7 +1690,7 @@ label myra_alexia_teamup_light_distraction(the_person):
             $ mc.change_arousal(10)
             return 30
 
-        elif the_person.arousal < 75:
+        elif the_person.arousal_perc < 90:
             the_person "Do you... want to put it in?"
             mc.name "No, I don't want to scew the game matchup."
             the_person "Ah... okay..."
@@ -1730,7 +1730,7 @@ label myra_alexia_teamup_med_distraction(the_person):
         "[the_person.title] sighs as you hit a particularly sensitive area. She feels good and relaxed."
         return 15
     if myra_alexia_teamup_scene.stage == 1:
-        if the_person.arousal < 40:
+        if the_person.arousal_perc < 40:
             "You let your hands roam up an down [the_person.possessive_title]'s back for a bit as the match gets started."
             "She wiggles a bit when you put your hands on her sides and pull her back against you a little bit more."
             "Your wrap your hands around her front, rubbing her stomach and working your way upward."
@@ -1758,7 +1758,7 @@ label myra_alexia_teamup_med_distraction(the_person):
             "[the_person.title] gasps and squirms under your touch. She's trying to hide her pleasure, but she is barely keeping it together."
             return 30
     if myra_alexia_teamup_scene.stage == 2:
-        if the_person.arousal < 30:
+        if the_person.arousal_perc < 30:
             "You softly run hands up and down [the_person.possessive_title]'s soft skin on her sides and belly."
             "Your goal isn't necessarily to throw the match, but you want to get her aroused and needy as the match progresses."
             "You reach up with your right hand and grab her breast, kneading it and once in a while you give her nipple a light pinch."
@@ -1775,7 +1775,7 @@ label myra_alexia_teamup_med_distraction(the_person):
                 return 35
             return 30
 
-        elif the_person.arousal < 60:
+        elif the_person.arousal_perc < 60:
             if not the_person.vagina_available():
                 "[the_person.possessive_title] is starting to get aroused, and you want to drive her arousal even further, but that is hard to do while she is still covered up."
                 "You reach down and start to take her bottoms off."
@@ -1808,11 +1808,11 @@ label myra_alexia_teamup_med_distraction(the_person):
             "Completely ignoring the game, [the_person.possessive_title] starts rocking her hips, grinding herself on your hand."
             return 40
     if myra_alexia_teamup_scene.stage == 3:
-        if the_person.arousal >= 50:
+        if the_person.arousal_perc >= 50:
             "You can tell that [the_person.title] is getting really turned on. You decide to fuck her for a bit as the match starts."
             "With one hand you urge her hips back up. She gets off your lap just enough for you to reach down and take your cock in your hand."
             "You point it up and then gently urge her back down."
-        if the_person.arousal < 25:
+        if the_person.arousal_perc < 40:
             "Her sides, her stomach, her thighs, her chest, her crotch... you let your hands roam her body."
             "Her skin is hot and soft, and feels amazing against yours. Your cock twitches between her ass cheeks when she adjusts her weight slightly"
             the_person "Mmm. God you feel so hard..."
@@ -1828,7 +1828,7 @@ label myra_alexia_teamup_med_distraction(the_person):
             "[the_person.title] squirms a bit under your touch, but clearly enjoys having your hands all over her as she finishes her match."
             $ mc.change_arousal(10)
             return 40
-        elif the_person.arousal < 50:
+        elif the_person.arousal_perc < 65:
             "[the_person.possessive_title] whispers back to you."
             the_person "Do... do you want to put it in?"
             mc.name "Not yet."
@@ -1847,7 +1847,7 @@ label myra_alexia_teamup_med_distraction(the_person):
             $ mc.change_arousal(15)
             return 30
 
-        elif the_person.arousal < 75:
+        elif the_person.arousal_perc < 90:
             "[the_person.title]'s cunt slides down easily over your cock. She gasps when her ass is finally resting against your hips, your cock deep inside her."
             the_person "Oh fuck... that feels so good..."
             "[the_person.possessive_title] is trying to concentrate on playing her match, but her hips are moving up and down."
@@ -1893,7 +1893,7 @@ label myra_alexia_teamup_large_distraction(the_person):
             "[the_person.title] starts to protest, but you quickly pull her clothes off her upper body anyway."
             $ scene_manager.strip_to_tits(the_person)
             "Finally topless, you bring your hands up to her amazing skin, running both hands down her sides."
-        if the_person.arousal < 40:
+        if the_person.arousal_perc < 40:
             "You let your hands roam up and down [the_person.possessive_title]'s soft skin on her back and sides."
             "You don't even bother pretending to be gentle. With one hand you work on a knot you find on her back, with the other hand you reach around and grab one of her tits."
             the_person "Mmm! God... take it easy..."
@@ -1920,7 +1920,7 @@ label myra_alexia_teamup_large_distraction(the_person):
             the_person "Hey, that's no fair, I can't concen..."
             "[the_person.title] starts to protest, but you quickly pull her clothes off her lower body anyway."
             $ scene_manager.strip_to_vagina(the_person)
-        if the_person.arousal < 30:
+        if the_person.arousal_perc < 30:
             "You softly run your hands up and down [the_person.possessive_title]'s soft skin on her sides and belly."
             "You couldn't care less about the match, to be honest, you just want to get her as needy as possible in the time you have."
             "You reach up with your right hand and grab her breast, kneading it and once in a while you give her nipple a pinch."
@@ -1932,7 +1932,7 @@ label myra_alexia_teamup_large_distraction(the_person):
             "[the_person.possessive_title] whimpers and squirms under your touch. She is protesting, but it is obvious she is getting turned on."
             "She gives a moan, but the match is unfortunately almost over."
             return 45
-        elif the_person.arousal < 60:
+        elif the_person.arousal_perc < 60:
             "[the_person.possessive_title] leans back against you. She sighs when you grope her tit."
             "You reach down with your other hand and easily slide two fingers into her cunt. Her arousal is clear from her smell and her gasps."
             the_person "Mmm, that feels so good."
@@ -1953,7 +1953,7 @@ label myra_alexia_teamup_large_distraction(the_person):
     if myra_alexia_teamup_scene.stage == 3:
         "With one hand you urge her hips back up. She gets off your lap just enough for you to reach down and take your cock in your hand."
         "You point it up and then gently urge her back down."
-        if the_person.arousal < 25:
+        if the_person.arousal_perc < 40:
             "Since she is just getting warmed up, it takes her a few moments to sink down on your cock."
             the_person "Mmm... just getting right to it tonight then?"
             mc.name "That's right. Good luck with your game."
@@ -1971,7 +1971,7 @@ label myra_alexia_teamup_large_distraction(the_person):
             "[the_person.title] is starting to gasp and her breathing is getting deeper when the match is almost over."
             $ mc.change_arousal(25)
             return 50
-        elif the_person.arousal < 50:
+        elif the_person.arousal_perc < 65:
             "[the_person.possessive_title] is fairly aroused, so you are able to slide in easily."
             the_person "Oh fuck... I'm not sure this is fair... how am I supposed to play with your cock inside me?"
             mc.name "I have no idea. And to be honest I don't really care."
@@ -1992,7 +1992,7 @@ label myra_alexia_teamup_large_distraction(the_person):
             $ mc.change_arousal(25)
             return 50
 
-        elif the_person.arousal < 75:
+        elif the_person.arousal_perc < 90:
             "[the_person.title]'s cunt slides down easily over your cock. She gasps when her ass is finally resting against your hips, your cock deep inside her."
             the_person "Oh fuck... that feels so good..."
             "[the_person.possessive_title] is trying to concentrate on playing her match, but her hips are moving up and down."
@@ -2117,7 +2117,7 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
             "You give her a several strokes, then pull out. Your erection is slick with her arousal."
         "You work slowly, but with steady pressure, you push yourself into [the_person.possessive_title]'s tight anal passage."
     "Buried inside her, you let your weight pin her to the couch as you start to fuck her."
-    if the_person.arousal < 25: #Spank her to warm her up
+    if the_person.arousal_perc < 40: #Spank her to warm her up
         "You push yourself up a bit. [the_person.title] is still getting warmed up, and you have an idea of how to help."
         "*SMACK*"
         "You give her ass a solid spank. She yelps, but arches her back, pushing your cock deeper."
@@ -2126,7 +2126,7 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
         "*SMACK*"
         mc.name "Sounds about right. Let's get this started off right then."
         "You push your weight down again, leaving her helplessly pinned to the couch as you start fucking her puckered hole earnestly."
-    elif the_person.arousal < 50:   #Pull her hair
+    elif the_person.arousal_perc < 65:   #Pull her hair
         if the_person.is_bald():
             "Your reach up and pull back by her neck."
         else:
@@ -2135,7 +2135,7 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
         "She is moaning as you thrust yourself in hard and deep. [the_person.possessive_title] is taking your cock like a slut."
         mc.name "That's it. Be a good little cum dump and take it."
         "She can only moan as you continue to have your way with her."
-    elif the_person.arousal < 75:   #dominate her
+    elif the_person.arousal_perc < 90:   #dominate her
         mc.name "That's it. Your ass is nothing more than my personal cocksleeve, here to use as I wish."
         mc.name "You like being used, don't you? Every hole is an opportunity to pleasure a man and make him cum."
         mc.name "Don't worry. You're doing great."
@@ -2154,13 +2154,13 @@ label myra_alexia_teamup_anal_prone(the_person, warmed_up = True):
     $ mc.change_arousal(15 * (1.0 + 0.1 * the_person.sex_skills["Anal"]))
     $ mc.change_locked_clarity(200)
     $ mc.change_energy(-12, add_to_log = False)
-    if the_person.arousal > 100 and mc.arousal < 100:
+    if the_person.arousal_perc > 100 and mc.arousal < 100:
         call orgasm_prone_anal(the_person, gaming_cafe, make_couch()) from _myra_alexia_anal_teamup_orgasm_01
         $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = 100, reset_arousal = False)
         $ the_person.change_arousal(-70)
     elif mc.arousal > 100:
         $ her_orgasm = False
-        if the_person.arousal > 100:
+        if the_person.arousal_perc > 100:
             $ her_orgasm = True
         "You get to hear every little gasp and moan from [the_person.title] as you're pressed up against her. Combined with the feeling of fucking her ass it's not long before you're pushed past the point of no return."
         mc.name "I'm going to cum!"
@@ -2229,14 +2229,14 @@ label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
         the_person "Mmm... you feel so hard..."
         "You let yourself grind against her cunt for a few seconds, getting your cock lubed up with her arousal."
         "When you feel ready, you line yourself up, then slowly push into her pussy."
-    if the_person.arousal < 25: #Grab her shoulders
+    if the_person.arousal_perc < 40: #Grab her shoulders
         "You put your hands on [the_person.title]'s shoulders. The leverage helps you pound her harder."
         the_person "Oh my god... ooohhhhh..."
         "She is moaning as you thrust yourself in hard and deep. [the_person.possessive_title] is taking your cock like a slut."
         mc.name "That's it. Be a good little cum dump and take it."
         "She can only moan as you continue to have your way with her."
         "You push your weight down again, leaving her helplessly pinned to the couch as you fuck her."
-    elif the_person.arousal < 50:   #Pull her hair
+    elif the_person.arousal_perc < 65:   #Pull her hair
         if the_person.is_bald():
             "Your reach up and pull back by her neck."
         else:
@@ -2245,7 +2245,7 @@ label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
         "She is moaning as you thrust yourself in hard and deep. [the_person.possessive_title] is taking your cock like a slut."
         mc.name "That's it. Be a good little cum dump and take it."
         "She can only moan as you continue to have your way with her."
-    elif the_person.arousal < 75:   #dominate her
+    elif the_person.arousal_perc < 90:   #dominate her
         "Being completely in control of [the_person.possessive_title] as you pound her prone is such a turn on."
         "She is arching her back and moaning loudly as you fuck her."
         the_person "Fuck me [the_person.mc_title], your cock feels so good!"
@@ -2265,13 +2265,13 @@ label myra_alexia_teamup_vaginal_prone(the_person, warmed_up = True):
     $ mc.change_arousal(15 * (1.0 + 0.1 * the_person.sex_skills["Vaginal"]))
     $ mc.change_locked_clarity(200)
     $ mc.change_energy(-12, add_to_log = False)
-    if the_person.arousal > 100 and mc.arousal < 100:
+    if the_person.arousal_perc > 100 and mc.arousal < 100:
         call orgasm_prone_bone(the_person, gaming_cafe, make_couch()) from _myra_alexia_vaginal_teamup_orgasm_01
         $ the_person.run_orgasm(force_trance = True, sluttiness_increase_limit = 100, reset_arousal = False)
         $ the_person.change_arousal(-70)
     elif mc.arousal > 100:
         $ her_orgasm = False
-        if the_person.arousal > 100:
+        if the_person.arousal_perc > 100:
             $ her_orgasm = True
         "You get to hear every little gasp and moan from [the_person.title] as you're pressed up against her. Her quivering pussy soon pushes you past the point of no return."
         mc.name "I'm going to cum!"

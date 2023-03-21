@@ -89,13 +89,13 @@ label kaya_greetings(the_person):
     return
 
 label kaya_sex_responses_foreplay(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm... this feels great. Keep going!"
         else:
             the_person "Mmmm... that feels good..."
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Oh! I like it when you touch me there."
             "She purrs warmly."
@@ -103,7 +103,7 @@ label kaya_sex_responses_foreplay(the_person):
             the_person "Oh god that's nice."
             "It seems like she's trying not to moan too loudly."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             if the_person.outfit.wearing_panties():
                 the_person "Ah... I should probably get my panties off soon before I make a mess."
@@ -127,19 +127,19 @@ label kaya_sex_responses_foreplay(the_person):
     return
 
 label kaya_sex_responses_oral(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Oh your tongue is so good [the_person.mc_title]..."
         else:
             the_person "Oh wow... that's... Mph!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Mmmm, that's so good. Glad you are putting that tongue to such good use."
         else:
             the_person "That... that feels so good [the_person.mc_title]... So fucking good."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "God, your tongue is amazing!"
 
@@ -159,19 +159,19 @@ label kaya_sex_responses_oral(the_person):
     return
 
 label kaya_sex_responses_vaginal(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "God it feels so good when it first goes in."
         else:
             the_person "Oh my god... Ah..."
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Keep fucking me [the_person.mc_title], it feels fantastic!"
         else:
             the_person "Oh my god, that feeling..."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Ah, fuck me [the_person.mc_title]! Give me that big cock!"
 
@@ -191,20 +191,20 @@ label kaya_sex_responses_vaginal(the_person):
     return
 
 label kaya_sex_responses_anal(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Oh fuck, I can't believe it actually fit!"
         else:
             the_person "Fuck, it feels so big... That's all of it, right? I can't take any more!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Fuck my ass [the_person.mc_title], I can take it!"
         else:
             the_person "Oh fuck, my poor ass..."
             "Her groan is a mixture of pain and pleasure."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Oh my poor little ass, you're going to ruin me..."
             "She doesn't seem very upset with the idea."
@@ -1019,19 +1019,19 @@ label kaya_talk_busy(the_person):
 
 label kaya_sex_strip(the_person):
     if the_person.sluttiness < 20:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "Let me get this out of the way..."
         else:
             the_person "Let me get this out of the way for you..."
 
     elif the_person.sluttiness < 60:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "This is just getting in the way..."
         else:
             the_person "Ah... I need to get this off."
 
     else:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "Let me get this worthless thing off..."
         else:
             the_person "Oh god, I need all of this off so badly!"
@@ -1225,31 +1225,31 @@ label kaya_date_seduction(the_person):
 label kaya_sex_end_early(the_person):
     if the_person.sluttiness > 50:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Oh damn it [the_person.mc_title], I want more of you so badly!"
             else:
                 the_person "Is that all you wanted to do? I was happy just being close to you."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Is that really all? [the_person.mc_title], I was just getting started!"
             else:
                 the_person "Aww, we were just getting started and you're already finished?"
 
     else:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "You don't want to take this any further? I thought we had a real connection."
             else:
                 the_person "That's all? Well, maybe we can try again some other time."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Oh my god... you've got me all out of breath..."
             else:
                 the_person "That's all? Alright."
     return
 
 label kaya_sex_take_control(the_person):
-    if the_person.arousal > 60:
+    if the_person.arousal_perc > 60:
         the_person "No no no, I'm not done with you yet!"
     else:
         the_person "Wait, we're just getting started! You just relax and leave this to me."

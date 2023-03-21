@@ -647,7 +647,7 @@ label mom_ntr_mod_action_label():
 
                             if not hidden or renpy.random.randint(0,2) == 1:
                                 "[the_person.possessive_title] turns her head and see that the door is slightly ajar and you standing there."
-                                if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal > 35:
+                                if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal_perc > 35:
                                     the_person "[the_person.mc_title], don't just stay there, come on in. [the_person.possessive_title] will help you relax as well."
                                     "[man_name] does not mind you joining the show as he keeps fucking [the_person.possessive_title]'s pussy."
                                     man_name "Go on, boy. You see she's ready for both of us. Aren't you, [the_person.fname]?"
@@ -660,7 +660,7 @@ label mom_ntr_mod_action_label():
                                     # NOTE: Does this sentence make sense with anything else than "mom" / "mother". Other characters would not use the titles, but for the sake of avoiding mentions of incest title should be used.
                                     #Longshot note: agreed, try not to hard-code family titles in case someone is playing a non-inc game and has changed her to "landlord" or something. Removing "your son seeing his [the_person.title]" in favor of "him seeing you".
                                     the_person "The only thing I care about right now is your cock inside of me. Keep going, [man_name]! Don't stop for anything!"
-                                    while the_person.arousal < 100:
+                                    while the_person.arousal_perc < 100:
                                         "[man_name] thrusts his dick into [the_person.possessive_title]'s pussy. You can hear the wet sound of her sex taking his; clearly [the_person.possessive_title] is having great time."
                                         the_person "Please, [man_name], more. Do me! Do me!"
                                         if the_person.get_opinion_score("being submissive") > 0:
@@ -804,7 +804,7 @@ label mom_ntr_mod_action_label():
                                     the_person "[the_person.mc_title]! Don't spy on [the_person.possessive_title]! Get back to your room now!"
                                     "You go back to your bedroom accompanied by the squeaking sounds from [the_person.possessive_title]'s room as [man_name] keeps pounding her."
                             else:
-                                while the_person.arousal < 100:
+                                while the_person.arousal_perc < 100:
                                         "[man_name] thrusts his dick into [the_person.possessive_title]'s pussy. It goes in and out with a wet sound. [the_person.title] moans loudly, and seems to be enjoying every thrust."
                                         the_person "Harder, [man_name], harder! Do me! Do me! Fuck me!"
                                         if the_person.get_opinion_score("being submissive") > 0:
@@ -959,7 +959,7 @@ label mom_ntr_mod_action_label():
                                     $ hidden = False
                             if not hidden or renpy.random.randint(0,2) == 1:
                                 "In a mirror next to the bed [the_person.possessive_title] sees that the door is slightly ajar and you standing there."
-                                if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal > 35:
+                                if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal_perc > 35:
                                     the_person "[the_person.mc_title], don't just stay there, come on in. [the_person.possessive_title] will help you relax as well."
                                     man_name "Holy cow, [the_person.fname]. You'll let your son watch you being fucked?"
                                     the_person "I don't mind [the_person.mc_title] seeing me like this. Now, come closer, [the_person.mc_title]."
@@ -970,7 +970,7 @@ label mom_ntr_mod_action_label():
                                     the_person "Oh, [man_name], please go on. Keep fucking me! Your hand feels so good on my ass."
                                     man_name "Sure, [the_person.fname]. You really look lovely from this position."
                                     the_person "Enjoy the view. But don't forget - you must try hard if you want to do this again. So keep going, [man_name]!"
-                                    while the_person.arousal < 100:
+                                    while the_person.arousal_perc < 100:
                                         "[man_name] thrusts his dick into [the_person.possessive_title] pussy. With each move [the_person.possessive_title] moans. Clearly she is having great time."
                                         the_person "Please, [man_name], more. Do me! Do me!"
                                         if the_person.get_opinion_score("being submissive") > 0:
@@ -1120,7 +1120,7 @@ label mom_ntr_mod_action_label():
                                     the_person "[the_person.mc_title]! Don't spy on [the_person.possessive_title]! Get beck to your room now!"
                                     "You go back to your bedroom accompanied by the squeaking sounds from [the_person.possessive_title]'s room as [man_name] keeps pounding her."
                             else:
-                                while the_person.arousal < 100:
+                                while the_person.arousal_perc < 100:
                                     "[man_name] thrusts his dick into [the_person.possessive_title] pussy. As he slaps her ass, she moans."
                                     the_person "Please, [man_name], more. Do me!"
                                     if the_person.get_opinion_score("being submissive") > 0:
@@ -1269,14 +1269,14 @@ label mom_ntr_mod_action_label():
                                     $ hidden = False
                             if not hidden or renpy.random.randint(0,2) == 1:
                                 "[the_person.possessive_title] turns her head a little and see that the door is slightly ajar and you standing there."
-                                if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal > 35:
+                                if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal_perc > 35:
                                     "[the_person.possessive_title] takes [man_name]'s dick out of her mouth."
                                     the_person "[the_person.mc_title], don't just stay there, come on in. [the_person.possessive_title] will help you relax as well."
                                     man_name "Shit, [the_person.fname]. Your son sees you sucking a guy off, and you don't mind?"
                                     "[the_person.possessive_title] doesn't bother to answer as she goes back to sucking him."
                                     "You come close to [the_person.possessive_title] and take your dick out of your pants."
                                     "She starts stroking you while [man_name] keeps driving his dick into her mouth."
-                                    while the_person.arousal < 100:
+                                    while the_person.arousal_perc < 100:
                                         "[the_person.possessive_title] keeps sucking his dick. You notice that she is rubbing her clit with her free hand."
                                         man_name "Oh, that's great, [the_person.fname]! You are great at sucking cocks."
                                         if the_person.get_opinion_score("being submissive") > 0:
@@ -1387,7 +1387,7 @@ label mom_ntr_mod_action_label():
                                     the_person "[the_person.mc_title]! Don't spy on [the_person.possessive_title]! Get back to your room now!"
                                     "You go back to your bedroom accompanied by slobbering sounds from [the_person.possessive_title]'s room as she keeps sucking [man_name]'s dick."
                             else:
-                                while the_person.arousal < 100:
+                                while the_person.arousal_perc < 100:
                                     "[the_person.possessive_title] keeps sucking his dick. You notice that she is rubbing her clit with a free hand."
                                     man_name "Oh, that's great, [the_person.fname]! Your mouth is so sweet and nice."
                                     if the_person.get_opinion_score("being submissive") > 0:
@@ -1574,7 +1574,7 @@ label mom_ntr_mod_action_label():
                         man_name2 "How about you take care of me as well while I wait for my turn?"
                         the_person "Sure, [man_name2]. How about some helping hand?"
                         "She grabs his cock and starts stroking him while being pumped by [man_name]."
-                        while the_person.arousal < 60:
+                        while the_person.arousal_perc < 60:
                             "[man_name] moves his dick in [the_person.possessive_title] pussy. It goes in and out with a wet sound. Clearly [the_person.title] is having great time."
                             the_person "Please, [man_name], more. Bang me like you always wanted!"
                             if the_person.get_opinion_score("being submissive") > 0:
@@ -1598,7 +1598,7 @@ label mom_ntr_mod_action_label():
                                 "You and [man_name] come to the table from both sides and [the_person.possessive_title] starts stroking your dicks."
                                 "[man_name2] clearly has no objections of you joining the show as he puts his rock-hard cock into woman wet pussy."
                                 the_person "Yes! It is so good!"
-                                while the_person.arousal < 100:
+                                while the_person.arousal_perc < 100:
                                     "[man_name2] keeps doing [the_person.possessive_title]. His hip are smashing into [the_person.possessive_title]'s."
                                     the_person "Yes, [man_name2]! Fuck me more. I feel so good now."
                                     if the_person.get_opinion_score("being submissive") > 0:
@@ -1758,7 +1758,7 @@ label mom_ntr_mod_action_label():
                                 the_person "[the_person.mc_title]! Don't spy on [the_person.possessive_title]! Get beck to your room now!"
                                 "You go back to your bedroom accompanied by squeaking sound from [the_person.possessive_title]'s room as both men keep pounding her."
                         else:
-                            while the_person.arousal < 100:
+                            while the_person.arousal_perc < 100:
                                 "[man_name2] puts his dick into [the_person.possessive_title] pussy. By the look on [the_person.title]'s face she is clearly having great time."
                                 "While being pumped by [man_name2], she grabs [man_name] cock and strokes him."
                                 the_person "Please, [man_name2], more. Fuck me! Fuck your [the_person.fname]!"
@@ -1941,7 +1941,7 @@ label mom_ntr_mod_action_label():
                                 "You stand on the bed in front of [the_person.possessive_title] and she starts sucking your dick."
                                 "The guys go on doing [the_person.possessive_title]'s two holes at once."
                                 the_person "Mhhhh... Ohmmmm..."
-                                while the_person.arousal < 100:
+                                while the_person.arousal_perc < 100:
                                     "[man_name2] and [man_name] keep fucking [the_person.possessive_title] two ways."
                                     the_person "Mhmhmmmmh..."
                                     "Your cock in [the_person.possessive_title]'s mouth prevents her from saying anything, she can only moan. On her face you see a mixture of pain and pleasure."
@@ -2115,7 +2115,7 @@ label mom_ntr_mod_action_label():
                         else:
                             "The guys go on doing [the_person.possessive_title]'s two holes at once."
                             the_person "Ow, it is so good! More!"
-                            while the_person.arousal < 100:
+                            while the_person.arousal_perc < 100:
                                 "[man_name2] and [man_name] keep fucking [the_person.possessive_title] two ways."
                                 the_person "More, please. Fuck me more!"
                                 if the_person.get_opinion_score("being submissive") > 0:

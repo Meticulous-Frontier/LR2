@@ -1160,52 +1160,52 @@ label serum_tester_finger_aid_label(the_person):
     "You stand next to her and start to your hands up and down her thighs. She bites her lip and looks you in the eyes."
     mc.name "Alright, here we go."
     "Carefully, you insert one finger up into her slit."
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         "You go nice and slow, working your finger in and out, as you begin to feel the first indications of her arousal building."
         "It takes a bit, but you can feel her pussy start to get wet as you begin to finger her."
         $ mc.change_locked_clarity(20)
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         "Your finger slides in easily, with just a bit of resistance. She was already a bit aroused before the test."
         $ mc.change_locked_clarity(20)
     else:
         "Your finger slides easily into her sopping wet cunt. Apparently she was already aroused and ready for this!"
         $ mc.change_locked_clarity(20)
-    if the_person.arousal >= 40:
+    if the_person.arousal_perc >= 40:
         "You push a second finger into her eager cunt while she gives a low moan."
-    if the_person.arousal >= 80:
+    if the_person.arousal_perc >= 80:
         if not the_person.tits_visible() or not the_person.tits_available():
             the_person "Ah! One second... I... I need to do something..."
             "You keep fingering her as she pulls off her top."
             $ scene_manager.strip_to_tits(the_person)
         "You lean forward and start to lick and suck on one of her exposed nipples."
         $ mc.change_locked_clarity(20)
-    if the_person.arousal >= 100:
+    if the_person.arousal_perc >= 100:
         the_person "Oh fuck! I'm so hot... [the_person.mc_title] I'm sorry, I'm... I'm gonna cum!"
         "Wow, she must have been really pent up! She is getting ready to orgasm already!"
         $ mc.change_locked_clarity(30)
 
-    if the_person.arousal < 20:
+    if the_person.arousal_perc < 20:
         the_person "Ah... go slow please... I need to warm up a bit."
         "You follow her request. You take it nice and slow, exploring her insides with one finger."
         the_person "Mmm yeah... that's it..."
         "She closes her eyes and concentrates on her feelings as her body gets aroused."
         $ the_person.change_arousal (20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 40:
+    if the_person.arousal_perc < 40:
         the_person "That's starting to feel so good... keep going..."
         "Her body is definitely responding to your intimate touches. Her cheeks are getting red and her breathing is getting deeper."
         "You finger is sliding in and out of her easily now. You pull out for a moment, then push two fingers inside of her."
         the_person "Ahhh! That's it! So good..."
         $ the_person.change_arousal (20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 60:
+    if the_person.arousal_perc < 60:
         the_person "Ahhh... Mmmm..."
         "[the_person.possessive_title] is trying to stifle her moans as they begin to grow more eager."
         "She looks up at you, and when your eyes meet, she can't stifle them anymore."
         the_person "Ahh! Oh [the_person.mc_title], that feels really good!"
         $ the_person.change_arousal (20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 80:
+    if the_person.arousal_perc < 80:
         if not the_person.tits_visible() or not the_person.tits_available():
             the_person "Ah! One second... I... I need to do something..."
             "You keep fingering her as she pulls off her top."
@@ -1217,7 +1217,7 @@ label serum_tester_finger_aid_label(the_person):
         the_person "Ohhh fuck... that is so good..."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(30)
-    if the_person.arousal < 100:
+    if the_person.arousal_perc < 100:
         "[the_person.possessive_title] moans and writhes beneath your skillful touching. She is moaning non stop now."
         the_person "Yes! Oh fuck yes... I'm so close..."
         "Her words and her breathing show you just how close she is. You can tell she is in the final stretch."
@@ -1260,23 +1260,23 @@ label serum_tester_dildo_aid_label(the_person):
     "You grab some lubrication from a nearby shelf and spread some on the dildo, getting it ready to penetrate her."
     mc.name "Alright, here we go."
     "Carefully, you slowly start to push the dildo inside of her."
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         "You go nice and slow. [the_person.possessive_title]'s pussy is tight, and you need to get her worked up a bit more before you fuck her with the dildo outright."
         "It takes a bit, but after a couple strokes you can feel the dildo start to slide in and out easier."
         $ mc.change_locked_clarity(20)
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         "There is a little bit of resistance, but the dildo slides into her. She was already a little bit aroused before this test, apparently."
         $ mc.change_locked_clarity(20)
     else:
         "The dildo slides into her soaking wet pussy easily. She must have already been pretty aroused!"
-    if the_person.arousal >= 40:
+    if the_person.arousal_perc >= 40:
         if not the_person.tits_visible() or not the_person.tits_available():
             the_person "Ah! One second... I... I need to do something..."
             "You leave the dildo inserted as she starts to wiggle out of her top."
             $ scene_manager.strip_to_tits(the_person)
         "With one hand, you start to fuck her with the dildo, with the other you grope her exposed tits."
         $ mc.change_locked_clarity(20)
-    if the_person.arousal > 80 and the_person.opinion_score_giving_handjobs() > 0:
+    if the_person.arousal_perc > 80 and the_person.opinion_score_giving_handjobs() > 0:
         "You feel her hand on your crotch as she pulls the zipper down. She pulls your cock out of your pants."
         the_person "I want to touch it while you do that... can I please?"
         "Her request really turns you on. You nod."
@@ -1284,20 +1284,20 @@ label serum_tester_dildo_aid_label(the_person):
         "[the_person.possessive_title]'s soft hand strokes you in time with each thrust you make with the dildo. It feels amazing."
         $ mc.change_locked_clarity(50)
         $ mc.change_arousal(25)
-    if the_person.arousal >= 100:
+    if the_person.arousal_perc >= 100:
         the_person "Oh fuck! I'm so hot... [the_person.mc_title] I'm sorry, I'm... I'm gonna cum!"
         "Wow, she must have been really pent up! She is getting ready to orgasm already!"
         "You quickly speed up and start to really bang her with the dildo."
         $ mc.change_locked_clarity(30)
 
-    if the_person.arousal < 20:
+    if the_person.arousal_perc < 20:
         the_person "Ah... fuck... it's so big, take it slow!"
         "You can tell that definitely be for the best. Her body is still adjusting to the size of the dildo, so you give her nice and slow thrusts."
         the_person "Mmm yeah... that's it..."
         "She closes her eyes and concentrates on her feelings as her body gets aroused."
         $ the_person.change_arousal (20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 40:
+    if the_person.arousal_perc < 40:
         the_person "That feels good. You can go a little faster now."
         "You gently speed up. The dildo is sliding in and out of her easy now, and her body is adjusted to the size."
         if not the_person.tits_visible() or not the_person.tits_available():
@@ -1309,7 +1309,7 @@ label serum_tester_dildo_aid_label(the_person):
         "You oblige her and start to grope her tits with one hand, while you fuck her with the dildo in your other hand."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 60:
+    if the_person.arousal_perc < 60:
         the_person "Ahhh... Mmmm..."
         "[the_person.possessive_title] is trying to stifle her moans as they begin to grow more eager."
         "She looks up at you, and when your eyes meet, she can't stifle them anymore."
@@ -1317,7 +1317,7 @@ label serum_tester_dildo_aid_label(the_person):
         "Her eyes flicker down to your crotch. You can tell she is wondering if your cock would feel just as good."
         $ the_person.change_arousal (20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 80:
+    if the_person.arousal_perc < 80:
         "[the_person.title] is moving her hips in time with your thrusts now. She moans loudly when you pinch her nipple."
         the_person "Oh fuck! Mmm..."
         if the_person.opinion_score_giving_handjobs() > 0:
@@ -1334,7 +1334,7 @@ label serum_tester_dildo_aid_label(the_person):
         the_person "Ohhh fuck... that's it... mmmm..."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 100:
+    if the_person.arousal_perc < 100:
         "[the_person.possessive_title] moans and writhes on the sex toy. She is moaning non stop now."
         the_person "Yes! Oh fuck yes... harder!"
         "Her words and her breathing show you just how close she is. You can tell she is in the final stretch."
@@ -1416,19 +1416,19 @@ label serum_tester_oral_aid_label(the_person):
     "She smiles shyly but doesn't move to cover herself up from your gaze."
     mc.name "Alright, here we go."
     "You get down on your knees at the edge of the medical bed. She sighs as you start to kiss along the inside of her thigh, working your way up to her crotch."
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         "[the_person.possessive_title]'s pristine pussy looks amazing. You run your tongue along it a couple times."
         the_person "Ahh... your breath is so warm..."
         "Tentatively, you push your tongue into her warm folds. She gasps as you start to work your tongue along her slit."
         $ mc.change_locked_clarity(20)
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         "[the_person.possessive_title]'s pussy looks amazing. Her labia are just starting to show and her juices fill your nose with signs of her arousal."
         "You run your tongue up and down her slit, enjoying her taste from her already aroused state."
         $ mc.change_locked_clarity(20)
     else:
         "[the_person.possessive_title]'s pussy lips are puffy and are flush with obvious signs of arousal. A tiny bit of her juices are beginning to leak out of it."
         "You run your tongue all along her slit, enjoying her copious juices as you begin to eat her out."
-    if the_person.arousal >= 80:
+    if the_person.arousal_perc >= 80:
         "[the_person.title] is already so aroused, her body is eager and she moans loudly."
         "You decide to make this quick. You push your pinky into her quivering cunt, getting it good and wet, then remove it."
         "Without further delay, you position your hand so your index and middle fingers are at the entrance to her cunt and your pinky is at her puckered asshole."
@@ -1448,7 +1448,7 @@ label serum_tester_oral_aid_label(the_person):
             "She moans loudly when she feels your fingers push inside of her."
             the_person "Oh fuck... oh my god!"
         $ mc.change_locked_clarity(50)
-    elif the_person.arousal >= 40:
+    elif the_person.arousal_perc >= 40:
         "[the_person.title]'s arousal is obvious. You can tell you can probably get her off pretty quick."
         "You take two fingers and push them into her as you lick her clit."
         if the_person.opinion_score_being_fingered() == -2:
@@ -1461,20 +1461,20 @@ label serum_tester_oral_aid_label(the_person):
             "She moans loudly when she feels your fingers push inside of her."
             the_person "Ohhhhh fuck..."
         $ mc.change_locked_clarity(50)
-    if the_person.arousal >= 100:
+    if the_person.arousal_perc >= 100:
         the_person "Oh fuck! [the_person.mc_title] I'm sorry, I'm... I'm gonna cum!"
         "Wow, she must have been really pent up! She is getting ready to orgasm already!"
         "You latch onto her clit with your tongue and eagerly bang her holes with your fingers."
         $ mc.change_locked_clarity(50)
 
-    if the_person.arousal < 20:
+    if the_person.arousal_perc < 20:
         the_person "Ah... your tongue feels so good... that's it..."
         "Her body responds to your tongue as you begin to lick her in earnest. You twirl your tongue around the entrance to her vagina, then slowly push it in."
         the_person "Mmm yeah... that's it..."
         "She closes her eyes and concentrates on her feelings as her body gets aroused."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(40)
-    if the_person.arousal < 40:
+    if the_person.arousal_perc < 40:
         "You push your tongue inside of her as deep as it will go, then move it in and out a few times."
         "She tastes great, but you know that penetration with your tongue is just the warmup."
         "You move up along her slit, then start to run circles around her clit with your tongue."
@@ -1491,7 +1491,7 @@ label serum_tester_oral_aid_label(the_person):
             the_person "Ohhhhh fuck..."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(40)
-    if the_person.arousal < 60:
+    if the_person.arousal_perc < 60:
         the_person "Ahhh... Mmmm..."
         "[the_person.possessive_title] is trying to stifle her moans as they begin to grow more eager."
         "Your skillful tongue and fingers are hitting all the right spots, she can't stifle her moans much longer."
@@ -1500,7 +1500,7 @@ label serum_tester_oral_aid_label(the_person):
         "You can feel her body trembling as you continue to eat her out."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 80:
+    if the_person.arousal_perc < 80:
         the_person "Oh fuck! Mmm... that is so good!"
         "[the_person.title]'s hips are moving with your finger as you stroke her insides. You lash eagerly at her clit with your tongue."
         "It is time to take things up a notch. You remove your fingers for a moment, then push your pinky inside her sopping wet hole. You get it lubed up, then take it out."
@@ -1517,7 +1517,7 @@ label serum_tester_oral_aid_label(the_person):
         "You work both her holes with your fingers now as your tongue gets back to work. She is gasping and moaning with every stroke."
         $ mc.change_locked_clarity(50)
         $ the_person.change_arousal(20)
-    if the_person.arousal < 100:
+    if the_person.arousal_perc < 100:
         "[the_person.possessive_title] moans and writhes. Her hip movements are so erratic it is starting to get hard to keep your tongue on her clit."
         "You grab her hip with your free hand and pin her to the bed. She whimpers helplessly as you push her down the final stretch."
         the_person "[the_person.mc_title]... [the_person.mc_title]! I'm so close... Oh baby!"
@@ -1709,13 +1709,13 @@ label serum_tester_fuck_aid_label(the_person):
         $ condom_descrption = "gloved"
     "You put your hands on her hips and pull her to the edge of the medical bed. Her feet go up over your shoulders."
     "You put your hand on your [condom_descrption] cock, lining it up with her cunt, then slowly start to push it inside of her."
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         "[the_person.possessive_title]'s pussy takes several seconds to penetrate. Her arousal is just starting to build, and you don't want to push things too fast."
         the_person "Ahh... go slow, I need to get warmed up!"
         "You oblige. You give her incredible slow, shallow strokes, but push yourself just a tiny bit deeper with each one."
         "After several strokes, you finally feel yourself push all the way in. You leave your hips in place, finally fully inside of her."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         "[the_person.possessive_title]'s pussy takes a few seconds to penetrate, but you are able to slide in with minimal resistance."
         "She is clearly already a bit aroused, making it easier for you to slide in."
         "Once your are fully inside of her, you stop and enjoy the feeling of having her hot cunt wrapped around your [condom_descrption] dick."
@@ -1726,7 +1726,7 @@ label serum_tester_fuck_aid_label(the_person):
         "You let yourself enjoy her sopping wet cunt for a few moments before you begin to fuck her."
     $ mc.change_locked_clarity(50)
 
-    if the_person.arousal >= 100:
+    if the_person.arousal_perc >= 100:
         "As you start to move your hips, [the_person.title] gasps and immediately begins to cry out."
         the_person "Oh fuck! [the_person.mc_title] I'm sorry, I'm... I'm gonna cum!"
         "Wow, she must have been really pent up! She is getting ready to orgasm already!"
@@ -1734,7 +1734,7 @@ label serum_tester_fuck_aid_label(the_person):
         $ mc.change_locked_clarity(50)
         $ mc.change_arousal(20)
 
-    if the_person.arousal < 20:
+    if the_person.arousal_perc < 20:
         the_person "Ah... you feel so big."
         "Her body is starting to respond to you. You make sure to take it nice and slow, enjoying the feeling of her cunt slowly getting wetter for you."
         the_person "Mmm yeah... that's it..."
@@ -1742,7 +1742,7 @@ label serum_tester_fuck_aid_label(the_person):
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(50)
         $ mc.change_arousal(20)
-    if the_person.arousal < 40:
+    if the_person.arousal_perc < 40:
         "Sensing she is ready, you put your hands on her hips and increase the pace. You hips impact her ass with the sound of a satisfying slaps."
         the_person "Oh [the_person.mc_title]..."
         #If she hates vaginal sex, we focus only on making it as pleasureable as possible for her.
@@ -1860,7 +1860,7 @@ label serum_tester_fuck_aid_label(the_person):
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(50)
         $ mc.change_arousal(20)
-    if the_person.arousal < 60:
+    if the_person.arousal_perc < 60:
         the_person "Ahhh... Mmmm..."
         "[the_person.possessive_title] moans grow more eager."
         "You wrap your arms around her legs and pull her ass a little further off the edge of the examination table."
@@ -1870,7 +1870,7 @@ label serum_tester_fuck_aid_label(the_person):
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(20)
         $ mc.change_arousal(20)
-    if the_person.arousal < 80:
+    if the_person.arousal_perc < 80:
         the_person "Oh fuck! Mmm... that is so good! I'm getting so close!"
         "[the_person.title]'s whole body is quivering as you pound her."
         if the_person.opinion_score_vaginal_sex() == -2:
@@ -1976,7 +1976,7 @@ label serum_tester_fuck_aid_label(the_person):
         $ the_person.change_arousal(30)
         $ mc.change_locked_clarity(50)
         $ mc.change_arousal(20)
-    if the_person.arousal < 100:
+    if the_person.arousal_perc < 100:
         "[the_person.possessive_title] moans and writhes. She tries to move her hips in time with you, but you are basically picking her up now as you bang her mercilessly."
         the_person "[the_person.mc_title]... [the_person.mc_title]! I'm so close... Oh fuck me baby!"
         "She is right on the edge. You dig deep and somehow manage to fuck her even harder."

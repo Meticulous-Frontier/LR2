@@ -3044,13 +3044,13 @@ label Sarah_weekend_date_strip_club_label():
                 pass
             "Get outta here":
                 $ loop_count += 5
-        if the_person.arousal >= 70:
+        if the_person.arousal_perc >= 70:
             the_person "Hey, so... don't you think it's about time for us to get outta here? I'm not sure I can take much more teasing!"
             $ loop_count += 5
             mc.name "Good idea..."
 
     "You step out of the strip club with [the_person.title]. You can tell she is hesitant to part ways with you already."
-    if the_person.arousal < 70:
+    if the_person.arousal_perc < 70:
         the_person "That was fun! Can we go back to your place now?"
     else:
         the_person "That was hot. I'm am SO worked up. Can we please go back to your place now?"

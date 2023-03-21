@@ -182,7 +182,7 @@ label train_dealbreaker_fingering_label(the_person):
         "[the_person.title] lets out a soft moan, encouraging you to keep going. Her body is melting into yours."
         $ the_person.change_arousal(10 + mc.sex_skills["Foreplay"])
         $ mc.change_locked_clarity(10)
-        if the_person.arousal >= 90:
+        if the_person.arousal_perc >= 90:
             the_person "Oh my god... I'm... I'm!!!"
             "Her knees start to buckle for a moment. You stop groping her breast with your free hand and catch her."
             $ the_person.change_arousal(30)

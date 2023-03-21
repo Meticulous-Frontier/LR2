@@ -17,7 +17,7 @@ init -1 python:
 
 
 label condition_computer_work_pre_label(the_person, the_position, the_object, report_log, the_condition):
-    if the_person.arousal < 50 or the_condition.condition_vars[1] < 50:
+    if the_person.arousal_perc < 50 or the_condition.condition_vars[1] < 50:
         "[the_person.possessive_title] continues working on her computer while you take advantage of her."
     elif the_condition.condition_vars[0]:
         if the_condition.condition_vars[1] < 100:   #She's not very distracted
