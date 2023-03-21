@@ -1178,10 +1178,10 @@ label camilla_lingerie_help_label(the_person):  #40
 
             $ the_person.apply_outfit(camilla_lingerie_1, update_taboo = True)
             $ the_person.draw_person(position = "stand2")
-            $ the_person.add_outfit(camilla_lingerie_1,"full")
+            $ the_person.add_outfit(camilla_lingerie_1,"under")
         "This set":
             the_person "Ah, I see..."
-            $ the_person.add_outfit(camilla_lingerie_2,"full")
+            $ the_person.add_outfit(camilla_lingerie_2,"under")
 
     the_person "Okay, can you snap some pics for me?"
     mc.name "Sure."
@@ -1254,6 +1254,7 @@ label camilla_lingerie_help_label(the_person):  #40
     the_person "Go ahead and sneak out, I'm going to buy this and send a few messages..."
     mc.name "Sounds good... I'll see you next time."
     $ clear_scene()
+    $ the_person.apply_planned_outfit() # restore clothes
     $ mc.change_location(clothing_store)
     "With a quick wink, you excuse yourself from the changing room and go out into the clothing store."
     "[the_person.title] was so hot in that lingerie. You really hope you get the chance to take more photos of her like that."
