@@ -167,7 +167,10 @@ label genius_sex_responses_anal(the_person):
 
     elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
-            the_person "That's it! Fuck my poor little hole raw!"
+            if mc.condom:
+                the_person "That's it! Fuck that nasty hole!"
+            else:
+                the_person "That's it! Fuck my poor little hole raw!"
         else:
             "[the_person.title] bites down on her lip and growls defiantly."
             the_person "Oh fuck... Fuck you're big!"

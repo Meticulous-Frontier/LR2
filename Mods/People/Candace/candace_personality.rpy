@@ -167,7 +167,10 @@ label candace_sex_responses_anal(the_person):
 
     elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
-            the_person "Fuck my ass [the_person.mc_title], fuck it good and raw and you're done with me!"
+            if mc.condom:
+                the_person "Fuck my ass [the_person.mc_title], fuck it good until you're done with me!"
+            else:
+                the_person "Fuck my ass [the_person.mc_title], fuck it good and raw and you're done with me!"
         else:
             the_person "Oh, it feels like you're stirring up my insides with your dick! Ah!"
 
