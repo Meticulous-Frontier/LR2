@@ -1140,6 +1140,7 @@ label camilla_lingerie_help_label(the_person):  #40
     the_person "So, I have a special night planned with the hubby... I was hoping you could give me your opinion on some lingerie sets..."
     the_person "And then snap a couple quick pictures that I can send to him as a tease!"
     mc.name "Alright, I think I'm down for that."
+    $ mc.change_location(changing_room)
     "When you get to the dressing rooms, [the_person.possessive_title] takes a quick look around to make sure the coast is clear, then quickly drags you into the changing room with her."
     the_person "Shh, just be quiet. It'll be easier if you're in here with me while I try these on."
     $ the_person.strip_outfit(exclude_feet = False)
@@ -1241,7 +1242,7 @@ label camilla_lingerie_help_label(the_person):  #40
     "You snap more pictures as [the_person.title] opens up and slides her warm wet mouth down over the tip of your erection."
     $ mc.change_locked_clarity(50)
     "All the sexy wardrobe changes have you aching for release. You sigh as [the_person.possessive_title]'s mouth starts bobbing up and down."
-    call get_fucked(the_person, start_position = blowjob, private = True, skip_intro = True, ignore_taboo = True,  allow_continue = False) from _call_get_fucked_camilla_lingerie_blowjob_01
+    call get_fucked(the_person, start_position = blowjob, private = True, skip_intro = True, ignore_taboo = True, allow_continue = False) from _call_get_fucked_camilla_lingerie_blowjob_01
     if the_person.has_mouth_cum():
         "[the_person.possessive_title] looks up at you. You frame the cum dribbling down the sides of her mouth in a final set of pictures."
         the_person "Mmm, another tasty snack. Glad I got a high protein lunch today!"
@@ -1253,6 +1254,7 @@ label camilla_lingerie_help_label(the_person):  #40
     the_person "Go ahead and sneak out, I'm going to buy this and send a few messages..."
     mc.name "Sounds good... I'll see you next time."
     $ clear_scene()
+    $ mc.change_location(clothing_store)
     "With a quick wink, you excuse yourself from the changing room and go out into the clothing store."
     "[the_person.title] was so hot in that lingerie. You really hope you get the chance to take more photos of her like that."
     $ mc.business.add_mandatory_crisis(camilla_formal_date)
