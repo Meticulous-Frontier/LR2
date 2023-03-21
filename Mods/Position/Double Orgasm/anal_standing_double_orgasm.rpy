@@ -15,7 +15,7 @@ label SB_anal_standing_double_orgasm(the_girl, the_location, the_object):
             "You push yourself balls deep into [the_girl.title]'s ass and dump your load. Her moans grow desperate as she cums with you in unison."
             $ climax_controller.do_clarity_release(the_girl)
             if the_girl.get_opinion_score("anal creampies") > 0:
-                the_girl "Oh god yes fill me up! Fill up my poor little ass with your cum!"
+                the_girl "Oh god yes come for me! Shoot your load while you fuck my little ass!"
             else:
                 the_girl "Oh god I can't believe it, I'm cumming!"
             "You can feel her ass pulsating all around you as you cum in unison. Her bowels are milking your cum, with only a thin layer of latex keeping it from spilling deep inside her."
@@ -37,13 +37,19 @@ label SB_anal_standing_double_orgasm(the_girl, the_location, the_object):
                 the_girl "Mmmm, look at all that cum. I guess that means my ass was pretty good!"
         else:
             "You pull back on [the_girl.possessive_title]'s hips and drive your cock deep inside of her as you cum. She moans in time with each new shot of hot semen inside of her."
-            the_girl "Oh god cum with me!"
+            if the_girl.get_opinion_score("anal creampies") > 0:
+                the_girl "Oh god yes fill me up! Fill up my poor little ass with your cum!"
+            else:
+                the_girl "Oh god cum with me!"
             $ the_girl.cum_in_ass()
             $ SB_anal_standing.redraw_scene(the_girl)
             "You can feel her bowels quivering all around you as you cum in unison. Her body is milking your cum, you swear it feels like she's sucking your cock with her intestines."
             "After you finish, you leave your cock deep inside her, enjoying her hole pulsating with each aftershock."
             $ climax_controller.do_clarity_release(the_girl)
             "You slowly pull out of [the_girl.possessive_title] asshole, then roll over next to her."
+            if the_girl.has_cum_fetish():
+                "[the_girl.possessive_title] reaches back and starts fingering her ass, occasionally putting her fingers in her mouth to taste you cum."
+                the_girl "Hmmm, just delicious!"
 
     elif the_choice == "Cum on her ass":
         if mc.condom:
