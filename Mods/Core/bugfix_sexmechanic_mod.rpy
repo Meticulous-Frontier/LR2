@@ -1090,9 +1090,15 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
 
             "Fuck her raw":
                 if the_person.knows_pregnant():
-                    mc.name "I'm going to fuck that pregnant pussy raw."
+                    if skill_tag == "Vaginal":
+                        mc.name "I'm going to fuck that pregnant pussy raw."
+                    else:
+                        mc.name "I'm going to fuck that slutty ass raw."
                 elif the_person.wants_creampie():
-                    mc.name "I'm going to fill up that little cunt of yours."
+                    if skill_tag == "Vaginal":
+                        mc.name "I'm going to fill up that little cunt of yours."
+                    else:
+                        mc.name "I'm going to fill up that cute ass of yours."
                 else:
                     mc.name "No way. I want to feel you wrapped around me."
                 call fuck_without_condom_taboo_break_response(the_person, skill_tag, skip_taboo_break = skip_taboo_break) from _call_fuck_without_condom_taboo_break_response_3
