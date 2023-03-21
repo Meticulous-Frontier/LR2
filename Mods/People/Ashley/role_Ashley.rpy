@@ -874,6 +874,8 @@ init -1 python:
         return False
 
     def ashley_blows_during_meeting_requirement():
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
         if ashley.sluttiness < 40:
             ashley.lust_messages[1] = "Increase [ashley.fname]'s sluttiness to progress"
         elif not ashley.story_event_ready("slut"):
@@ -883,22 +885,25 @@ init -1 python:
         else:
             ashley.lust_messages[1] = "You think there will progess with [ashley.fname] soon."
         if ashley.sluttiness >= 40 and ashley.story_event_ready("slut"):
-            if mc.is_at_work() and ashley.is_willing(blowjob) and mc.business.is_open_for_business():
+            if ashley.is_willing(blowjob):
                 return True
         return False
 
     def ashley_supply_closet_at_work_requirement():
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
         ashley.lust_messages[2] = "This story has not yet been written."
         return False
         if ashley.sluttiness >= 60 and ashley.story_event_ready("slut"):
-            if mc.is_at_work() and ashley.is_willing(against_wall) and mc.business.is_open_for_business():
+            if ashley.is_willing(against_wall):
                 return True
         return False
 
     def ashley_asks_for_anal_requirement():
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
         if ashley.sluttiness >= 80 and ashley.story_event_ready("slut"):
-            if mc.is_at_work() and mc.business.is_open_for_business():
-                return True
+            return True
         return False
 
     def ashley_tests_serum_on_sister_requirement():
@@ -1426,63 +1431,84 @@ label ashley_tests_serum_on_sister_label(): #100 sluttiness, also requires drink
 #Ashley taking command path
 init -1 python:
     def ashley_demands_relief_requirement():
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
         if ashley.event_triggers_dict.get("mc_obedience", 0) > 30 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if mc.is_at_work() and time_of_day == 3:
+            if time_of_day == 3:
                 return True
         return False
 
     def ashley_demands_oral_requirement():
         return False    #Current writing place
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
+
         if ashley.event_triggers_dict.get("mc_obedience", 0) > 60 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if mc.is_at_work() and time_of_day == 3:
+            if time_of_day == 3:
                 return True
         return False
 
     def ashley_arousal_serum_start_requirement():
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
+
         if ashley.event_triggers_dict.get("mc_obedience", 0) > 100 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if mc.is_at_work() and time_of_day == 3:
+            if time_of_day == 3:
                 return True
         return False
 
     def ashley_demands_sub_requirement(the_person):
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
         if ashley.event_triggers_dict.get("mc_obedience", 0) > 150 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if mc.is_at_work() and time_of_day == 3:
+            if time_of_day == 3:
                 return True
         return False
 
     def ashley_submission_titfuck_requirement():
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
         if ashley.obedience <= 120:
             ashley.obedience_messages[0] = "Increase [ashley.fname]'s obedience to progress."
         elif not ashley.days_since_event("obedience_event") < TIER_1_TIME_DELAY:
             ashley.obedience_messages[0] = "Wait a few days to progress."
         if ashley.obedience > 120 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
             # ashley_stay_after_work_setup()
-            if mc.is_at_work() and time_of_day == 3:
+            if time_of_day == 3:
                 return True
         return False
 
     def ashley_submission_blowjob_requirement():
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
+
         if ashley.obedience < 140:
             ashley.obedience_messages[1] = "Increase [ashley.fname]'s obedience to progress."
             return False
         if ashley.days_since_event("obedience_event") < TIER_1_TIME_DELAY:
             ashley.obedience_messages[1] = "Wait a few days to progress."
             return False
-        if mc.is_at_work() and time_of_day == 3:
+        if time_of_day == 3:
             return True
         return False
 
     def ashley_submission_fuck_requirement():
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
+
         ashley.obedience_messages[2] = "The next scene has not been written yet!"
         return False    #Current writing spot
         if ashley.obedience > 160 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if mc.is_at_work() and time_of_day == 3:
+            if time_of_day == 3:
                 return True
         return False
 
     def ashley_submission_anal_requirement():
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
+
         if ashley.obedience > 180 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if mc.is_at_work() and time_of_day == 3:
+            if time_of_day == 3:
                 return True
         return False
 
@@ -1507,7 +1533,7 @@ init -1 python:
     def ashley_work_titfuck_requirement(the_person):
         if ashley.obedience_step != 1:
             return False
-        if the_person.is_at_work():
+        if the_person.is_at_work() and mc.business.is_open_for_business():
             if the_person.obedience < 120:
                 return "Requires 120 obedience"
             else:
@@ -1517,7 +1543,7 @@ init -1 python:
     def ashley_work_blowjob_requirement(the_person):
         if ashley.obedience_step != 2:
             return False
-        if the_person.is_at_work():
+        if the_person.is_at_work() and mc.business.is_open_for_business():
             if the_person.obedience < 140:
                 return "Requires 140 obedience"
             else:
@@ -1527,7 +1553,7 @@ init -1 python:
     def ashley_work_fuck_requirement(the_person):
         if ashley.obedience_step != 3:
             return False
-        if the_person.is_at_work():
+        if the_person.is_at_work() and mc.business.is_open_for_business():
             if the_person.obedience < 160:
                 return "Requires 160 obedience"
             else:
@@ -1537,7 +1563,7 @@ init -1 python:
     def ashley_work_anal_requirement(the_person):
         if ashley.obedience_step != 4:
             return False
-        if the_person.is_at_work():
+        if the_person.is_at_work() and mc.business.is_open_for_business():
             if the_person.obedience < 180:
                 return "Requires 180 obedience"
             else:
@@ -2671,10 +2697,12 @@ init -1 python:
         return False
 
     def ashley_asks_for_second_date_requirement():
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
+            return False
+
         if ashley_lily_are_friends() and ashley_dom_oral_avail():
             if ashley.days_since_event("story_event") >= TIER_1_TIME_DELAY:
-                if mc.is_at_work() and mc.business.is_open_for_business():
-                    return True
+                return True
         return False
 
     def ashley_second_concert_date_requirement():
