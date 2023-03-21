@@ -135,6 +135,9 @@ init -2 python:
         return False
 
     def kaya_uni_scholarship_intro_requirement(the_person):
+        # don't start internship before she moved out (changes her job and will lock out the move out / sakari intro)
+        if not the_person.event_triggers_dict.get("has_moved", False):
+            return False
         if the_person.love > 40 and mc.business.has_funds(10000) and the_person.location == university and day%7 < 4:
             return True
         return False
