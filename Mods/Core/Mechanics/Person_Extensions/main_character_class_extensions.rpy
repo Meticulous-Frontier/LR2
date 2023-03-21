@@ -43,7 +43,7 @@ init -1 python:
         arousal = amount * .2
         if arousal > 5:
             arousal = 5
-        self.change_arousal(arousal, add_to_log = False)
+        self.change_arousal(arousal)
 
         if add_to_log and amount != 0:
             log_string = "You: " + ("+" if amount > 0 else "") + str(amount) + " {image=lust_eye_token_small} " + ("+" if arousal > 0 else "") + str(arousal)+ " {image=arousal_token_small}"
