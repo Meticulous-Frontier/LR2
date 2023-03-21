@@ -2658,8 +2658,8 @@ label ellie_search_update_label(the_person):    #You locate the contact
 label ellie_search_finish_label():    #You and Ellie sabotage the contact
     $ police_chief_wardrobe = wardrobe_from_xml("Cop_Wardrobe")
     $ cop_outfit = police_chief_wardrobe.get_outfit_with_name("Cop")
-    $ prostitute_ward = wardrobe_from_xml("Prostitute_Wardrobe")
-    $ prost_outfit = prostitute_ward.get_outfit_with_name("Body Suit")
+    $ prost_outfit = prostitute_wardrobe.get_outfit_with_name("Body Suit")
+    $ ellie.add_outfit(prost_outfit)    # she might want to surprise you by wearing it
     $ the_person = ellie
     $ the_researcher = mc.business.head_researcher
     $ scene_manager = Scene()
