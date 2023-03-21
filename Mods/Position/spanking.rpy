@@ -61,7 +61,7 @@ init 1 python:
 label intro_spanking(the_girl, the_location, the_object):
     "You stand behind [the_girl.title] and put your arms around her waist, pushing her so she is bending over the [the_object.name]."
     mc.name "Someone has been a bad girl. It's time for your punishment, [the_girl.title]."
-    if the_girl.outfit.vagina_available():
+    if the_girl.vagina_visible():
         "You don't waste any time and put your hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
@@ -80,7 +80,7 @@ label taboo_break_spanking(the_girl, the_location, the_object):
     the_girl "Oh god... I... Okay [the_girl.mc_title]..."
     $ spanking.redraw_scene(the_girl)
     "You stand behind [the_girl.title] and put your arms around her waist, pushing her so she is bending over [the_object.name]."
-    if the_girl.outfit.vagina_available():
+    if the_girl.vagina_visible():
         "You don't waste any time and put your hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
@@ -186,7 +186,7 @@ label transition_default_spanking(the_girl, the_location, the_object):
     $ spanking.redraw_scene(the_girl)
     "You stand behind [the_girl.title] and put your arms around her waist, pushing her so she is bending over [the_object.name]."
     mc.name "Someone has been a bad girl. It's time for your punishment, [the_girl.title]."
-    if the_girl.outfit.vagina_available():
+    if the_girl.vagina_visible():
         "You don't waste any time and put your hands on her ass, groping her cheeks."
         "You raise one hand and bring it down hard, give her ass a firm spank."
     else:
