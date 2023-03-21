@@ -4,7 +4,7 @@
 
 
 init -2 python:
-    class Condition_Type(renpy.store.object):
+    class Condition_Type():
         def __init__(self, name, pre_label = None, post_label = None, position_whitelist = None, position_blacklist = None, reward_cond = None, reward_label = None, fail_label = None):
             self.name = name #A descriptive name of the contract.
             self.pre_label = pre_label  #Run this label before each sex round

@@ -12,9 +12,9 @@ init python:
         orgasm_description = "orgasm_bent_over_breeding",
         taboo_break_description = "taboo_break_bent_over_breeding",
         verb = "fuck",
-        opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up"], record_class = "Vaginal Sex",
+        opinion_tags = ["doggy style sex", "vaginal sex", "sex standing up", "bareback sex"], record_class = "Vaginal Sex",
         default_animation = blowjob_bob,
-        associated_taboo = "bareback_sex")
+        associated_taboo = "condomless_sex")
 
 
 
@@ -276,7 +276,7 @@ label outro_bent_over_breeding(the_girl, the_location, the_object):
             "[the_girl.possessive_title] revels in having her cum fetish fulfilled."
         if the_girl.knows_pregnant():
             the_girl "It's nice, already being pregnant, I can take a load like that anytime..."
-        elif the_girl.wants_creampie() or the_girl.get_opinion_score("bareback sex") > 0:
+        elif the_girl.wants_creampie():
             the_girl "Oh god... I can feel it so deep. I mean... it could... hopefully..."
             "[the_girl.possessive_title]'s voice starts to trail off."
         elif the_girl.sluttiness > 90:
@@ -343,10 +343,10 @@ label strip_ask_bent_over_breeding(the_girl, the_clothing, the_location, the_obj
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
-            if the_girl.sluttiness < 80:
+            if the_girl.sluttiness < 60:
                 the_girl "Do you think I look sexy in it?"
                 "You speed up, fucking her faster in response to her question."
-            elif the_girl.sluttiness < 100:
+            elif the_girl.sluttiness < 80:
                 the_girl "Does it make me look like a good little slut? All I want to be is your good little slut sir."
                 "She pushes her hips back into you and moans happily."
             else:

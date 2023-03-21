@@ -6,7 +6,7 @@ init 2 python:
         tooltip = ""
         if mc.business.get_employee_title(person) != "None":
             tooltip += "Job: " + mc.business.get_employee_title(person) + "\n"
-        tooltip += "Love: " + str(person.love) + "\n"
+        tooltip += "Love: " + get_love_hearts(person.love, 5) + "\n"
         tooltip += "Suggestibility: " + str(person.suggestibility) + "%\n"
         tooltip += "Age: " + str(person.age) + "\n"
         tooltip += "Height: " + height_to_string(person.height) + "\n"
@@ -38,7 +38,9 @@ screen multi_person_info_ui(actors):
             for actor in sorted(actors, key=lambda a: a.sort_order):
                 python:
                     arousal_info = get_arousal_with_token_string(actor.person.arousal, actor.person.max_arousal)
+                    arousal_tooltip_info = get_arousal_number_string(actor.person.arousal, actor.person.max_arousal)
                     energy_info = get_energy_string(actor.person.energy, actor.person.max_energy)
+                    energy_tooltip_info = get_energy_number_string(actor.person.energy, actor.person.max_energy)
                     sluttiness_info = get_heart_image_list(actor.person.sluttiness, actor.person.effective_sluttiness())
 
                 vbox:
@@ -58,23 +60,16 @@ screen multi_person_info_ui(actors):
                                 tooltip person_info_ui_get_serum_info_tooltip(actor.person)
                                 action NullAction()
 
-                    if actor.person.arousal > 0:
-                        textbutton "Arousal: [arousal_info]":
-                            style "transparent_style"
-                            text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
-                            action NullAction()
-                    else:
-                        textbutton "Arousal: 0%":
-                            style "transparent_style"
-                            text_style "menu_text_style"
-                            tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider."
-                            action NullAction()
+                    textbutton "Arousal: [arousal_info]":
+                        style "transparent_style"
+                        text_style "menu_text_style"
+                        tooltip "When a girl is brought to 100% arousal she will start to climax. Climaxing will increase sluttiness, as well as make the girl happy. The more aroused you make a girl the more sex positions she is willing to consider.\nCurrently: {}".format(arousal_tooltip_info)
+                        action NullAction()
 
                     textbutton "Energy: [energy_info]":
                         style "transparent_style"
                         text_style "menu_text_style"
-                        tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night."
+                        tooltip "Energy is spent while having sex, with more energy spent on positions that give the man more pleasure. Some energy comes back each turn, and a lot of energy comes back over night.\nCurrently {}".format(energy_tooltip_info)
                         action NullAction()
 
                     textbutton "Happiness: [actor.person.happiness]":
@@ -100,7 +95,7 @@ screen multi_person_info_ui(actors):
                         textbutton "Sluttiness: [sluttiness_info]":
                             style "transparent_style"
                             text_style "menu_text_style"
-                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness (" + get_red_heart(20) + ") is easier to raise but drops slowly over time. Core sluttiness (" + get_gold_heart(20) + ") is permanent, but only increases slowly unless a girl is suggestible."
+                            tooltip "The higher a girls sluttiness the more slutty actions she will consider acceptable and normal. Temporary sluttiness ({image=red_heart_token_small}) is easier to raise but drops slowly over time. Core sluttiness ({image=gold_heart_token_small}) is permanent, but only increases slowly unless a girl is suggestible."
                             action NullAction()
 
                         if any(x[0] > 0 or x[0] < 0 for x in actor.person.situational_sluttiness.itervalues()):

@@ -179,7 +179,7 @@ init 2:
 
             return get_random_from_weighted_list(dom_sex_goal_weighted_list)
 
-        def build_mc_request_blowjob_path(person):
+        def build_blowjob_path(person):
             path = [] # start off with normal blowjob
             path.append(dom_sex_path_node(blowjob, dom_requirement_mc_aroused))
 
@@ -194,7 +194,7 @@ init 2:
             path.append(dom_sex_path_node(transition, dom_requirement_get_mc_off))
             return path
 
-        def build_mc_request_titfuck_path(person):
+        def build_titfuck_path(person):
             path = [] # use handjob as intro
             path.append(dom_sex_path_node(handjob, dom_requirement_mc_hard))
 
@@ -270,7 +270,7 @@ init 2:
             #She isn't naked enough to go straight to final node
             if not final_node.position.check_clothing(person):  #She isn't naked enough to go straight to the end node
                 for position in list_of_girl_positions + extra_positions:
-                    if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits):
+                    if person.allow_position(position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits):
                         if position.check_clothing(person):
                             if final_node.position.skill_tag == "Vaginal" or final_node.position.skill_tag == "Anal":
                                 if position.skill_tag == "Foreplay" or position.skill_tag == "Oral":
@@ -296,7 +296,7 @@ init 2:
             #If we don't have a first node, 50/50 chance we create a first node, or sex begins with final node
             elif renpy.random.randint(0,100) < 50:
                 for position in list_of_girl_positions + extra_positions:
-                    if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits):
+                    if person.allow_position(position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits):
                         if position.check_clothing(person):
                             if final_node.position.skill_tag == "Vaginal" or final_node.position.skill_tag == "Anal":
                                 if position.skill_tag == "Foreplay" or position.skill_tag == "Oral":
@@ -389,6 +389,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         $ report_log["guy orgasms"] = 0
         $ report_log["girl orgasms"] = 0
     else:
+        $ report_log = create_report_log({ "was_public": not private })
         $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
         $ report_log["positions_used"] = []
         $ report_log["was_public"] = not private
@@ -397,6 +398,24 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         $ using_condom = mc.condom
     else:
         $ using_condom = requires_condom(the_person)
+
+    # generate a sex path for locked requests
+    if not sex_path and not allow_continue and (not the_goal or the_goal == "get mc off"):
+        if start_position == blowjob:
+            $ sex_path = build_blowjob_path(the_person)
+            $ print("Build blowjob path: {}".format(len(sex_path)))
+        if start_position == tit_fuck:
+            $ sex_path = build_titfuck_path(the_person)
+            $ print("Build titfuck path: {}".format(len(sex_path)))
+
+    # break taboos automatically, so the caller doesn't need to remember to do it
+    if not ignore_taboo and isinstance(start_position, Position):
+        # since we skip intro, it's assumed we are already in the position and use the loop to continue
+        if skip_intro:
+            $ the_person.break_taboo(start_position.associated_taboo)
+        # we don't ask for condom and the mc is not wearing it and we are having intercourse
+        if not mc.condom and start_position.skill_tag in ["Vaginal", "Anal"]:
+            $ the_person.break_taboo("condomless_sex")
 
     if start_position and not sex_path:
         if not the_goal:
@@ -673,10 +692,10 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 label mc_sex_request(the_person, the_request = "blowjob", private = True):
     python:
         if the_request == "titfuck":
-            path = build_mc_request_titfuck_path(the_person)
+            path = build_titfuck_path(the_person)
             start_object = mc.location.get_object_with_trait("Kneel")
         else:   # default blowjob
-            path = build_mc_request_blowjob_path(the_person)
+            path = build_blowjob_path(the_person)
             start_object = mc.location.get_object_with_trait("Kneel")
 
     call get_fucked(the_person, sex_path = path, private = private, start_object = start_object, skip_intro = True, allow_continue = False) from _call_get_fucked_mc_request

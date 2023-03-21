@@ -1,40 +1,52 @@
 init 2 python:
     # override default function to limit call stack depth
     @renpy.pure
-    def get_red_heart(sluttiness, depth = 0): #A recursive function, feet it a sluttiness and it will return a string of all red heart images for it. Heatrts taht are entirely empty are left out.
-        if depth >= 5:
-            return ""
-
-        the_final_string = ""
-        if sluttiness >= 20:
-            the_final_string += "{image=gui/heart/red_heart.png}"
-            the_final_string += get_red_heart(sluttiness - 20, depth + 1) #Call it recursively if we might have another heart after this.
-        elif sluttiness >= 15:
-            the_final_string += "{image=gui/heart/three_quarter_red_quarter_empty_heart.png}"
-        elif sluttiness >= 10:
-            the_final_string += "{image=gui/heart/half_red_half_empty_heart.png}"
-        elif sluttiness >= 5:
-            the_final_string += "{image=gui/heart/quarter_red_three_quarter_empty_heart.png}"
-
-        return the_final_string
+    def get_red_heart(sluttiness, depth = 0):
+        return get_hearts(sluttiness, depth)
 
     # override default function to limit call stack depth
     @renpy.pure
     def get_gold_heart(sluttiness, depth = 0):
+        return get_hearts(sluttiness, depth, color = "gold")
+
+    @renpy.pure
+    def get_hearts(sluttiness, depth = 0, color = "red"): #A recursive function, feet it a sluttiness and it will return a string of all red heart images for it. Heatrts taht are entirely empty are left out.
         if depth >= 5:
             return ""
 
         the_final_string = ""
         if sluttiness >= 20:
-            the_final_string += "{image=gui/heart/gold_heart.png}"
-            the_final_string += get_gold_heart(sluttiness - 20, depth + 1) #Call it recursively if we might have another heart after this.
+            the_final_string += "{{image=gui/heart/{}_heart.png}}".format(color)
+            the_final_string += get_hearts(sluttiness - 20, depth + 1, color) #Call it recursively if we might have another heart after this.
         elif sluttiness >= 15:
-            the_final_string += "{image=gui/heart/three_quarter_gold_quarter_empty_heart.png}"
+            the_final_string += "{{image=gui/heart/three_quarter_{}_quarter_empty_heart.png}}".format(color)
         elif sluttiness >= 10:
-            the_final_string += "{image=gui/heart/half_gold_half_empty_heart.png}"
+            the_final_string += "{{image=gui/heart/half_{}_half_empty_heart.png}}".format(color)
         elif sluttiness >= 5:
-            the_final_string += "{image=gui/heart/quarter_gold_three_quarter_empty_heart.png}"
+            the_final_string += "{{image=gui/heart/quarter_{}_three_quarter_empty_heart.png}}".format(color)
 
+        return the_final_string
+
+    @renpy.pure
+    def get_love_hearts(value, max_hearts = 5):
+        the_final_string = ""
+        count = 0
+        while count < max_hearts:
+            if value >= 20:
+                the_final_string += get_hearts(20)
+                value -= 20
+            elif value >= 5:
+                the_final_string += get_hearts(value)
+                value -= value
+            elif value <= -20:
+                the_final_string += get_hearts(20, color="grey")
+                value += 20
+            elif value <= -5:
+                the_final_string += get_hearts(-value, color="grey")
+                value -= value
+            else:
+                the_final_string += "{image=gui/heart/empty_heart.png}"
+            count += 1
         return the_final_string
 
     @renpy.pure
@@ -56,6 +68,7 @@ init 2 python:
         for x in range(heart_start, heart_end - 15, __builtin__.int(capacity)):
             heart_string += "{image=" + get_individual_heart(sluttiness - x, effective_sluttiness - x, capacity) + "}"
         return heart_string
+
 
     @renpy.pure
     def get_individual_heart(base_sluttiness, actual_sluttiness, capacity  = 20): #Give this the core, temp, core+suggest slut, minus 20*(current heart-1) each and it will find out the current heart status for that chunk of the heart array.

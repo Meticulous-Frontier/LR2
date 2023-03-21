@@ -58,7 +58,7 @@ init 2 python:
             generate_onlyfans = None,               #
             force_random = True,                    # If False, we may grab a pre-generated person for his function from patreon rewards and overwrite her properties!
             base_outfit = TEMPLATE_base_outfit,     #
-            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical", 1, False]],
+            forced_opinions = [["production work", 2, True], ["work uniforms", -1, False], ["flirting", 1, False], ["working", 1, False], ["the colour green", 2, False], ["pants", 1, False], ["the colour blue", -2, False], ["classical music", 1, False]],
             forced_sexy_opinions = [["taking control", 2, False], ["getting head", 2, False], ["drinking cum", -2, False], ["giving blowjobs", -2, False], ["public sex", 2, False]])   #random_lists.rpy for list of sexy and normal opinions
 
         TEMPLATE.generate_home()                                    #Omit this if girl lives with someone else

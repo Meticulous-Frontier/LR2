@@ -57,13 +57,13 @@ label genius_greetings(the_person):
     return
 
 label genius_sex_responses_foreplay(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm... This is a great warmup."
         else:
             the_person "Mmmm... That feels nice."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Oh wow you are hitting all the right places."
             "She purrs warmly."
@@ -71,7 +71,7 @@ label genius_sex_responses_foreplay(the_person):
             the_person "Oh my god..."
             "It seems like she's trying not to moan too loudly."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             if the_person.outfit.wearing_panties():
                 the_person "I think it's about time we get naked and get down to business."
@@ -95,19 +95,19 @@ label genius_sex_responses_foreplay(the_person):
     return
 
 label genius_sex_responses_oral(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "It's time to put that tongue of yours to work [the_person.mc_title]... Ah..."
         else:
             the_person "Oh wow... that's... Mph!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Mmm, I expected it to be good, but I didn't think it would be THIS good..."
         else:
             the_person "That... that feels so good [the_person.mc_title]... So fucking good."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "God, your tongue feels so good!"
 
@@ -127,19 +127,19 @@ label genius_sex_responses_oral(the_person):
     return
 
 label genius_sex_responses_vaginal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm, your cock feels so good when it first goes in."
         else:
             the_person "Oh my god... Ah..."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Keep fucking me [the_person.mc_title]! My body is just getting warmed up!"
         else:
             the_person "Oh my god, that feeling..."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Ah, fuck me [the_person.mc_title]! Give me that big cock!"
 
@@ -152,22 +152,25 @@ label genius_sex_responses_vaginal(the_person):
     return
 
 label genius_sex_responses_anal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Oh fuck, you feel even bigger in my ass!"
         else:
             the_person "Fuck, it feels so big... That's all of it, right? I can't take any more!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Fuck my ass [the_person.mc_title], I can take it!"
         else:
             the_person "Oh fuck, my poor ass..."
             "Her groan is a mixture of pain and pleasure."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
-            the_person "That's it! Fuck my poor little hole raw!"
+            if mc.condom:
+                the_person "That's it! Fuck that nasty hole!"
+            else:
+                the_person "That's it! Fuck my poor little hole raw!"
         else:
             "[the_person.title] bites down on her lip and growls defiantly."
             the_person "Oh fuck... Fuck you're big!"
@@ -764,7 +767,7 @@ label genius_cum_mouth(the_person):
 label genius_cum_pullout(the_person):
     # Lead in: "I'm going to cum!"
     if mc.condom: #TODO: All of the cum-drunk stuff
-        if the_person.wants_creampie() and the_person.get_opinion_score("creampies") > 0 and not the_person.has_taboo("condomless_sex"): #TODO: FIgure out we want any more requirements for this to fire.
+        if the_person.wants_creampie() and not the_person.has_taboo("condomless_sex"): #TODO: FIgure out we want any more requirements for this to fire.
             if the_person.knows_pregnant():
                 the_person "I'm already pregnant, why are we even bothering with a condom?"
                 the_person "Take it off and cum inside my pussy, just like you did when you knocked me up!"

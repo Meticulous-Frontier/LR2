@@ -48,7 +48,7 @@ init 1400 python:
 
 init 2 python:
     def unisex_restroom_crisis_requirement():
-        if mc.is_at_work():
+        if mc.is_at_work() and day%7 != 5 and time_of_day < 3: # Since some events require a follow up, don't trigger in the evening or on fridays
             if __builtin__.len(mc.business.get_employee_list()) > 2: #Have at least 3 employees.
                 if mc.business.is_open_for_business(): #Only trigger if people are in the office.
                     return True
@@ -117,7 +117,8 @@ label unisex_restroom_action_label():
         $ ran_num = mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0)
         $ unisex_bathroom_policy_unlock(ran_num + 1)
     else:
-        $ ran_num = renpy.random.randint(1, mc.business.unisex_restroom_unlocks.get("unisex_policy_unlock", 0))
+        $ ran_num = renpy.random.randint(2, 4)
+
     if ran_num == 1:
         call unisex_restroom_door_greet_label() from _call_unisex_restroom_greet_call_1
     if ran_num == 2:

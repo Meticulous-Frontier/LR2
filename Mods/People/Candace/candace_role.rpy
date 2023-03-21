@@ -152,6 +152,8 @@ init 2 python:
         candace.event_triggers_dict["supply_discount_active"] = False
         candace.event_triggers_dict["is_bimbo"] = True
 
+        side_character_set_unavail(candace) # exclude her from certain events
+
         candace.add_unique_on_room_enter_event(candace_meet_at_office_store)
         return
 

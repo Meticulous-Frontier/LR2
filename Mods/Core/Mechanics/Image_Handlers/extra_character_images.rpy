@@ -167,7 +167,7 @@ init 2 python:
                 cloth_info += "|{image=gui/extra_images/sexy_underwear_token.png}"
 
         # Match modifier in `get_total_slut_modifiers_enhanced()` for now
-        cloth_info += "+" +str(self.get_slut_value()) + "{image=gui/heart/red_heart.png}"
+        cloth_info += " +" +str(self.get_slut_value()) + "{image=gold_heart_token_small}"
         return cloth_info
 
     Clothing.generate_stat_slug = clothing_generate_stat_slug

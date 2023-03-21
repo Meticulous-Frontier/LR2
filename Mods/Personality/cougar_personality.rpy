@@ -274,19 +274,19 @@ label cougar_seduction_accept_alone(the_person):
     return
 
 label cougar_sex_responses_foreplay(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm, you know just what I like, don't you?"
         else:
             the_person "Oh my... that feels very good, [the_person.mc_title]!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             "[the_person.title] closes her eyes and lets out a loud, sensual moan."
         else:
             the_person "Keep doing that [the_person.mc_title]... Wow, you're good!"
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Oh gods above that feels amazing!"
         else:
@@ -304,7 +304,7 @@ label cougar_sex_responses_foreplay(the_person):
     return
 
 label cougar_sex_responses_oral(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Oh [the_person.mc_title], you're so good to me."
         else:
@@ -312,13 +312,13 @@ label cougar_sex_responses_oral(the_person):
             "She sighs happily."
             the_person "Yes, right there!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Yes, just like that! Mmm!"
         else:
             the_person "Keep doing that [the_person.mc_title], it's making me feel... very aroused."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Mmm, you really know how to put that tongue of yours to good use. That feels amazing!"
         else:
@@ -335,19 +335,19 @@ label cougar_sex_responses_oral(the_person):
     return
 
 label cougar_sex_responses_vaginal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm, I love feeling you inside of me!"
         else:
             the_person "Oh lord, you're so big... Whew!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             "[the_person.title] closes her eyes and lets out a loud, sensual moan."
         else:
             the_person "Oh that feels very good, keep doing that!"
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Yes! Oh god yes, fuck me!"
         else:
@@ -781,7 +781,7 @@ label cougar_flirt_response_text(the_person):
     return
 
 label cougar_condom_demand(the_person):
-    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
+    if the_person.wants_creampie():
         the_person "Why don't you wrap that bad boy up, so we can get going."
         if the_person.relationship != "Single":
             $ so_title = SO_relationship_to_title(the_person.relationship)
@@ -801,7 +801,7 @@ label cougar_condom_ask(the_person):
     if the_person.on_birth_control:
         the_person "I have an IUD, so you don't need to put on a condom unless you want to be very safe."
         $ the_person.update_birth_control_knowledge()
-    elif the_person.get_opinion_score("creampies") > 0:
+    elif the_person.wants_creampie():
         the_person "Maybe you don't need a condom. Then you can keep fucking me as you cum..."
         $ the_person.discover_opinion("creampies")
     else:
@@ -810,7 +810,7 @@ label cougar_condom_ask(the_person):
     return
 
 label cougar_condom_bareback_ask(the_person):
-    if the_person.get_opinion_score("creampies") > 0:
+    if the_person.wants_creampie():
         if the_person.on_birth_control:
             the_person "Don't bother with a condom [the_person.mc_title]. I have an IUD, so it's perfectly safe."
             the_person "You can cum right inside of me, as often as you want."

@@ -11,6 +11,7 @@ init 5 python:
         "hiking": "going hiking",
         "jazz": "jazz music",
         "make up": "girls who wear makeup",
+        "getting head": "licking pussy",
         "giving blowjobs": "getting blowjobs",
         "giving handjobs": "getting handjobs",
         "giving tit fucks": "fucking tits",

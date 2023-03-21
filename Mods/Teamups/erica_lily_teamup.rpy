@@ -38,7 +38,7 @@ init -2 python:
         return person.location == lily.location and time_of_day == 4 and day%7 == 5
 
     def erica_lily_post_insta_handjob_requirement():
-        if erica.is_willing(cowgirl_handjob, ignore_taboo = True) and day%7 == 6:
+        if erica.is_willing(cowgirl_handjob) and day%7 == 6:
             return True
         return False
 

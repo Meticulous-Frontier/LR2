@@ -143,6 +143,10 @@ init 5 python: # add to stack later then other mods
 init 100 python:
     add_label_hijack("normal_start", "store_game_version")
 
+label before_main_menu: # override bugfix mod installed setting
+    $ mod_installed = True
+    return
+
 init 1 python:
     global is64Bit
     is64Bit = sys.maxsize > 2**32

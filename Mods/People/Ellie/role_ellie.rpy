@@ -210,7 +210,8 @@ label ellie_start_intro_note_label():
     "?????" "Meet me tomorrow night in alley between 3rd and 5th street downtown. Come alone, and bring cash."
     "Well that's not good. That sounds very not good. You find yourself panicking for a moment."
     "You take a deep breath. You should get with [the_person.possessive_title]. You quickly page her to meet you in your office."
-    $ ceo_office.show_background()
+    if mc.location != ceo_office:
+        $ mc.change_location(ceo_office)
     "You sit at your desk and anxiously wait for her to meet you."
     $ the_person.draw_person()
     the_person "Hey, you wanted to see me?"
@@ -322,14 +323,21 @@ label ellie_head_researcher_halfway_intro_label():
     "You feel your phone vibrate in your pocket. It's [the_person.possessive_title]."
     $ mc.start_text_convo(the_person)
     the_person "I'm a genius. Meet me in your office!"
-    mc.name "I'll be right there."
+    if mc.location != ceo_office:
+        mc.name "I'll be right there."
+    else:
+        mc.name "I'll be waiting for you."
     $ mc.end_text_convo()
-    $ ceo_office.show_background()
-    "You step into your office, as you do, you see [the_person.title] sitting behind your desk."
-    $ the_person.draw_person(position = "sitting")
-    "You close the door and walk over."
+    if mc.location != ceo_office:
+        $ mc.change_location(ceo_office)
+        $ the_person.draw_person(position = "sitting")
+        "You step into your office, as you do, you see [the_person.title] sitting behind your desk."
+        "You close the door and walk over."
+    else:
+        "[the_person.title] steps into your office and sits down."
+        $ the_person.draw_person(position = "sitting")
     mc.name "What is it?"
-    the_person "Well, following a hunch, I contacted the contact I had that got us the nanobots and the program in the first place."
+    the_person "Well, following a hunch, I got in touch with the contact I had that got us the nanobots and the software in the first place."
     the_person "It was just too weird that this girl had so much info about them."
     the_person "I gave him a description of the blackmailer, and he finally got back to me this morning."
     the_person "The company launched an investigation trying to figure out who leaked the bots, but they got the wrong person."
@@ -503,7 +511,7 @@ label ellie_end_blackmail_label():
 label ellie_work_welcome_label():
     $ the_person = ellie
     "You head into work a bit early. You are meeting [the_person.title], who you are hoping will be your new IT girl."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "Shortly after you arrive, you hear a knock on your office door."
     mc.name "Come in."
     $ the_person.draw_person()
@@ -526,13 +534,15 @@ label ellie_work_welcome_label():
     $ mc.business.add_employee_research(the_person)
     $ the_person.set_schedule(None, the_times = [1,2,3])    # free roam when not working
     $ mc.business.add_mandatory_crisis(ellie_work_welcome_monday)
-    $ mc.location.show_background()
-
+    mc.name "That will be all, thank you [the_person.title]."
+    $ the_person.draw_person(position = "walking_away")
+    "[the_person.possessive_title] gets up and leaves your office."
+    $ clear_scene()
     return
 
 label ellie_work_welcome_monday_label():
     $ the_person = ellie
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "When you arrive at work on Monday morning, you head to your office."
     "Shortly after you arrive, you hear a knock on your office door. It's [the_person.title]."
     $ the_person.draw_person()
@@ -575,10 +585,10 @@ label ellie_work_welcome_monday_label():
     mc.name "I'll keep that in mind. Thank you."
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] gets up and starts to walk away. You have now unlocked IT projects!"
+    $ clear_scene()
     "Talk to your IT director to change projects when she is at work. If she is working on developing a new project, she will be in the Research Department."
     "You have also unlocked the IT Work duty for the research department. If assigned, an employee will help work on IT projects."
     $ ellie.add_unique_on_room_enter_event(ellie_never_been_kissed)
-    $ mc.location.show_background()
     return
 
 label ellie_never_been_kissed_label(the_person):  #This is Ellies 20 sluttiness event. Also kick starts all other events
@@ -815,10 +825,11 @@ label ellie_grope_followup_label():
     $ the_person = ellie
     "You are going about your work, when [the_person.possessive_title] finds you."
     $ the_person.draw_person()
-    the_person "Hey, can we talk somewhere private?"
-    mc.name "Sure."
-    $ ceo_office.show_background()
-    "You take her to your office and close the door. You offer to let her sit down but she declines."
+    if mc.location != ceo_office:
+        the_person "Hey, can we talk somewhere private?"
+        mc.name "Sure."
+        $ mc.change_location(ceo_office)
+        "You take her to your office and close the door. You offer to let her sit down but she declines."
     the_person "I'll keep this short, I just didn't want any other girls to hear this..."
     the_person "I'm sorry for... yah know... peeing my pants like that..."
     $ the_person.draw_person(emotion = "angry")
@@ -839,7 +850,6 @@ label ellie_grope_followup_label():
     mc.name "I'm not saying you have to masturbate, but getting to know your body better might help you better understand what we are trying to achieve here, in general."
     the_person "Okay, I'll take a look."
     $ clear_scene()
-    $ mc.location.show_background()
     "[the_person.possessive_title] leaves your office. You take a few minutes and email her some links to positive sex health websites and information."
     $ mc.business.add_mandatory_morning_crisis(ellie_text_message_apology)
     return
@@ -904,10 +914,11 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     $ mc.arousal = 0
     "You are going about your work, when [the_person.possessive_title] finds you."
     $ the_person.draw_person()
-    the_person "Hey, can we talk somewhere private?"
-    mc.name "Sure."
-    $ ceo_office.show_background()
-    "You bring her to your office. After stepping inside, she closes the door and locks it."
+    if mc.location != ceo_office:
+        the_person "Hey, can we talk somewhere private?"
+        mc.name "Sure."
+        $ mc.change_location(ceo_office)
+        "You bring her to your office. After stepping inside, she closes the door and locks it."
     mc.name "Have a seat?"
     the_person "Yes sir."
     $ the_person.draw_person(position = "sitting")
@@ -1067,9 +1078,9 @@ label ellie_never_given_handjob_label():    #20 Love event. Requires 20 slut eve
     mc.name "Of course. I won't hold you up any longer."
     $ the_person.draw_person(position = "walking_away")
     "[the_person.possessive_title] turns and starts walking out of your office. You watch her hips as she moves away."
+    $ clear_scene()
     "You are a bit surprised how quickly she has opened up to you like this. Maybe she is more ready to move past her repressed childhood than you realized?"
     "Either way, you are certain there is more fun to be had with the busty redhead soon."
-    $ clear_scene()
     #Load up the three story branches
     $ the_person.add_unique_on_room_enter_event(ellie_never_tasted_cock)
     $ mc.business.add_mandatory_crisis(ellie_brings_lunch)
@@ -2210,7 +2221,7 @@ init -1 python: #Requirement functions
         return False
 
     def ellie_start_search_requirement():
-        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
         if ellie.days_since_event("obedience_event") <= TIER_2_TIME_DELAY:
             return False
@@ -2221,7 +2232,7 @@ init -1 python: #Requirement functions
         return False
 
     def ellie_search_update_requirement(the_person):
-        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
         if not ellie.story_event_ready("obedience"):
             return False
@@ -2230,7 +2241,7 @@ init -1 python: #Requirement functions
         return True
 
     def ellie_search_finish_requirement():
-        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
         if not ellie.story_event_ready("obedience"):
             return False
@@ -2239,7 +2250,7 @@ init -1 python: #Requirement functions
         return False
 
     def ellie_submission_requirement():
-        if not (mc.is_at_work() or mc.business.is_open_for_business()):
+        if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
         if not ellie.story_event_ready("obedience"):
             return False
@@ -2268,10 +2279,10 @@ label ellie_tit_fuck_label(): #120 obedience. Unlocks Ellie's tit fucks
     $ the_person.event_triggers_dict["tit_fuck"] = True
     $ mc.change_location(mc.business.r_div)
     "You sit at a desk, working in the research department."
-    "However, you are having an incredibly hard time concentrating. You look across the room at [the_person.possessive_title]"
+    "However, you are having an incredibly hard time concentrating. You look across the room at [the_person.possessive_title]."
     $ the_person.draw_person(position = "sitting")
-    $ desc_string = "You hired her " + mc.business.string_since_event("hired_ellie_IT")
-    "[desc_string]"
+    $ desc_string = mc.business.string_since_event("hired_ellie_IT")
+    "You hired her [desc_string]."
     "Since then you've found yourself getting closer with the buxom redhead. You gaze at her from across the lab."
     "Her chest heaves slightly with every breath. You can't help but fantasize about sliding your cock between her generous tits."
     $ mc.change_locked_clarity(30)
@@ -2647,8 +2658,8 @@ label ellie_search_update_label(the_person):    #You locate the contact
 label ellie_search_finish_label():    #You and Ellie sabotage the contact
     $ police_chief_wardrobe = wardrobe_from_xml("Cop_Wardrobe")
     $ cop_outfit = police_chief_wardrobe.get_outfit_with_name("Cop")
-    $ prostitute_ward = wardrobe_from_xml("Prostitute_Wardrobe")
-    $ prost_outfit = prostitute_ward.get_outfit_with_name("Body Suit")
+    $ prost_outfit = prostitute_wardrobe.get_outfit_with_name("Body Suit")
+    $ ellie.add_outfit(prost_outfit)    # she might want to surprise you by wearing it
     $ the_person = ellie
     $ the_researcher = mc.business.head_researcher
     $ scene_manager = Scene()
@@ -3141,7 +3152,7 @@ label ellie_submission_label():   #Ellie submits herself to be used by MC
         $ take_virginity(the_person)
         $ the_person.draw_person(position = "standing_doggy")
         "Another small push, and you bottom out inside of her. You are finally balls deep inside of [the_person.possessive_title]."
-        call fuck_person(the_person, private=True, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, condition = make_condition_taking_virginity()) from _call_fuck_person_ellie_obedience_60_01
+        call fuck_person(the_person, private=True, start_position = SB_doggy_standing, start_object = make_desk(), skip_intro = True, skip_condom = True, position_locked = True, condition = make_condition_taking_virginity()) from _call_fuck_person_ellie_obedience_60_01
         $ the_person.change_obedience(5)
     "When you finish with her, [the_person.title] slumps over her desk. Her well used ass is still bare and pointing back at you."
     $ the_person.draw_person(position = "standing_doggy")

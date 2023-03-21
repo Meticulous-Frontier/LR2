@@ -61,7 +61,7 @@ init 15 python:
         make_wall(),
         make_window(),
         make_floor(),
-        make_black_leather_couch(),
+        make_white_leather_couch(),
     ]
     police_jail_objects = [
         Object("cell bars", ["Lean"], sluttiness_modifier = 0, obedience_modifier = 0),
@@ -102,6 +102,12 @@ init 15 python:
 
     def make_dryer():
         return Object("dryer", ["Lay","Low"], sluttiness_modifier = 0, obedience_modifier = 0)
+
+    def make_mirror():
+        return Object("mirror", ["Lean"])
+
+    def make_medical_table():
+        return Object("medical table", ["Lay", "Sit", "Low"])
 
 
 label build_custom_rooms():
@@ -156,7 +162,7 @@ label build_custom_rooms():
         # room is public so girls are not always visible in the main map
         gym_shower = Room("gym shower", "Gym Shower", [], standard_gym_shower_backgrounds, gym_shower_objects, [], [], True, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(gym_shower)
-        gym_shower.privacy_level = 0    #Is this right?
+        gym_shower.privacy_level = 1
 
         home_shower = Room("home shower", "Home Shower", [], standard_old_home_shower_backgrounds, gym_shower_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(home_shower)
@@ -165,6 +171,11 @@ label build_custom_rooms():
         mall_salon = Room("salon", "Hair Salon", [], standard_salon_backgrounds, [make_floor(), make_wall(), make_chair(), make_window(), make_counter()], [], [], True, [7,2], None, True, lighting_conditions = standard_indoor_lighting)
         list_of_places.append(mall_salon)
         mall_salon.privacy_level = 3
+
+        # special testing room
+        testing_room = Room("testing_room", "Test Room", [], testing_room_backgrounds, [make_floor(), make_wall(), make_medical_table(), make_mirror()], [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+        list_of_places.append(testing_room)
+        testing_room.privacy_level = 0
 
         # added police station (and jail) at request of Starbuck
         police_station = Room("police_station", "Police Station", [], standard_police_station_backgrounds, ceo_office_objects, [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
@@ -296,6 +307,7 @@ init 10 python:
         sex_store.privacy_level = 1
         home_store.privacy_level = 3
         gym.privacy_level = 3
+        gym_shower.privacy_level = 1
         electronics_store.privacy_level = 3
         mall.privacy_level = 3
         changing_room.privacy_level = 1

@@ -334,6 +334,11 @@ init -1 python:
 
     Person.available = property(get_person_available, set_person_available, None, "Mark a person available or not.")
 
+    def get_person_arousal_perc(self):
+        return ((self.arousal * 1.0) / (self.max_arousal or 1)) * 100
+
+    Person.arousal_perc = property(get_person_arousal_perc, None, None)
+
     ## MATCH SKIN COLOR
     # Matches skin, body, face and expression images based on input of skin color
     def match_skin(self, color):
@@ -702,22 +707,24 @@ init -1 python:
 
     Person.generate_mother = generate_mother_enhanced
 
-    def person_is_willing(self, the_position, private = True, ignore_taboo = False):
-        final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(self, ignore_taboo)
+    def person_is_willing(self, the_position, private = True):
+        final_slut_requirement, final_slut_cap = the_position.calculate_position_requirements(self, False)
         # DON'T USE EFFECTIVE SLUTTINESS IN THIS FUNCTION
         # IT CAN HAVE THE MODIFIERS THAT THIS FUNCTION EMULATES
         # TO VALIDATE PRIOR TO ACTUALLY STARTING THE SEX LOOP
         # IT VALIDATES IF SHE IS WILLING BY HERSELF (NOT USING OBEDIENCE)
 
-        # quick return if she hates any required opinion tags for the position
-        for tag in the_position.opinion_tags:
-            if self.get_opinion_score(tag) <= -2:
-                return False
+        # quick exit for hate
+        if not self.allow_position(the_position):
+            # print("Position not allowed for " + self.name)
+            return False
 
-        # add modifiers
-        if self.has_family_taboo():
-            final_slut_requirement += (self.get_opinion_score("incest") - 2) * 5          # love incest negates requirement penalty
+        # quick exit for custom blocking of position (story line)
+        if self.is_position_filtered(the_position):
+            # print("Position is filtered for " + self.name)
+            return False
 
+        # print("Initial requirement: {}".format(final_slut_requirement))
         if self.has_role(prostitute_role):
             final_slut_requirement -= 20        # prostitutes are more willing by nature
         elif self.relationship == "Girlfriend":
@@ -726,25 +733,31 @@ init -1 python:
             final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 3  # love negates requirement penalty
         elif self.relationship == "Married":
             final_slut_requirement -= (self.get_opinion_score("cheating on men") - 2) * 5 # love negates requirement penalty
+        # print("After relation modifier: {}".format(final_slut_requirement))
 
         if not private:
             multiplier = 5 if self.sluttiness < 50 else 2
             final_slut_requirement -= (self.get_opinion_score("public sex") - 2) * multiplier # love negates requirement penalty
+            # print("After private modifier: {}".format(final_slut_requirement))
 
-        if self.love < 0:
-            final_slut_requirement += self.love
-        elif private:
+        if self.love < 0:   # the more they hate you the higher the requirement
+            final_slut_requirement += __builtin__.int(self.love * .2)
+        else:
             if self.has_role([girlfriend_role, affair_role]):               # girlfriend lowers requirement by love
-                final_slut_requirement -= self.love
+                final_slut_requirement -= __builtin__.int(self.love * .2)
             elif self.is_family():
-                final_slut_requirement -= __builtin__.int(self.love / 4.0)  # family lowers requirement by love / 4
+                final_slut_requirement -= __builtin__.int((self.love - 50) * .2)  # family only lowers if they love you enough
             else:
-                final_slut_requirement -= __builtin__.int(self.love / 2.0)  # default lowers requirement by love / 2
+                final_slut_requirement -= __builtin__.int((self.love - 50) * .1)  # default only lowers if they love you enough
+        # print("After love modifier: {}".format(final_slut_requirement))
 
-        final_slut_requirement -= __builtin__.min(__builtin__.int((self.happiness - 100)/4.0), 20) # happiness can lower requirement by up to 20 points
+        final_slut_requirement -= __builtin__.int((self.happiness - 120) * .2) # happiness only lowers requirement if they have a good mood
+        # print("After happiness modifier: {}".format(final_slut_requirement))
 
-        if not ignore_taboo and the_position.associated_taboo:
-            final_slut_requirement += 10    # taboo increases requirement by 10
+        # obedience can lower / increase requirement by up to 30 points
+        # at default obedience of 100 increases requirement by 10 points
+        final_slut_requirement -= __builtin__.int((self.obedience - 150) * .2)
+        # print("After obedience modifier: {}".format(final_slut_requirement))
 
         # print("Position: " + the_position.name + "[Sluttiness: " + str(self.sluttiness) + ", Required: " + str(final_slut_requirement) + "]")
         if self.sluttiness >= final_slut_requirement:
@@ -752,6 +765,32 @@ init -1 python:
         return False
 
     Person.is_willing = person_is_willing
+
+    def allow_position(self, position):
+        if position.opinion_tags:
+            for opinion in position.opinion_tags:
+                if self.get_known_opinion_score(opinion) == -2:
+                    if self.has_role(slave_role) and self.obedience > 200: #A slave does what she is told.
+                        return True
+                    if perk_system.has_ability_perk("Serum: Aura of Compliance") and mc_serum_aura_obedience.get_trait_tier() >= 3:
+                        return True
+                    return False
+        return True
+
+    Person.allow_position = allow_position
+
+    def is_position_filtered(self, position):
+        if position.skill_tag == "Foreplay" and callable(self.event_triggers_dict.get("foreplay_position_filter", None)):
+            return not self.event_triggers_dict["foreplay_position_filter"]([1, position])
+        if position.skill_tag == "Oral" and callable(self.event_triggers_dict.get("oral_position_filter", None)):
+            return not self.event_triggers_dict["oral_position_filter"]([1, position])
+        if position.skill_tag == "Vaginal" and callable(self.event_triggers_dict.get("vaginal_position_filter", None)):
+            return not self.event_triggers_dict["vaginal_position_filter"]([1, position])
+        if position.skill_tag == "Anal" and callable(self.event_triggers_dict.get("anal_position_filter", None)):
+            return not self.event_triggers_dict["anal_position_filter"]([1, position])
+        return False
+
+    Person.is_position_filtered = is_position_filtered
 
     ## STRIP OUTFIT TO MAX SLUTTINESS EXTENSION
     # Strips down the person to a clothing their are comfortable with (starting with top, before bottom)
@@ -951,9 +990,13 @@ init -1 python:
             else:
                 self.planned_outfit = None
             self.planned_uniform = None
-            self.dress_code_outfit = None
             self.maid_outfit = None
             self.apply_planned_outfit() # let apply planned outfit select day outfit (if needed)
+
+        # off duty clear planned uniform / dress code outfit
+        if self.is_employee() and time_of_day == 4:
+            self.planned_uniform = None
+            self.dress_code_outfit = None
 
         destination = self.get_destination() #None destination means they have free time
         if not destination:
@@ -1049,10 +1092,8 @@ init -1 python:
             # when breeding fetish, she always wants a creampie
             if person.has_breeding_fetish():
                 return True
-            if persistent.pregnancy_pref == 3 and person.is_highly_fertile():
-                if person.baby_desire > 200:
-                    return True
-                return False
+            if persistent.pregnancy_pref == 3 and person.is_highly_fertile() and person.baby_desire > 200:
+                return True
             return org_func(person)
 
         return wants_creampie_wrapper
@@ -1769,7 +1810,7 @@ init -1 python:
 
     def person_is_at_work(self): #Checks to see if the character is at work.
         # special handling for college interns
-        if self.is_intern() and self.location in [rd_division, p_division, m_division, office]:
+        if self.is_intern() and self.is_at_office():
             return True
 
         if self.has_role(maid_role):
@@ -1791,6 +1832,11 @@ init -1 python:
         return self.location == self.job.job_location
 
     Person.is_at_work = person_is_at_work
+
+    def is_person_at_office(self):
+        return self.location in [rd_division, p_division, m_division, office, lobby]
+
+    Person.is_at_office = is_person_at_office
 
     def is_person_at_mc_house(self):
         return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
@@ -1841,7 +1887,7 @@ init -1 python:
         def cum_in_vagina_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
-            perk_system.perk_on_cum(the_person = person, the_place = "creampies")
+            perk_system.perk_on_cum(the_person = person, the_place = "creampies", add_to_log = add_to_record)
             # run extension code
             person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("creampies"), add_to_log = add_to_record)
         return cum_in_vagina_wrapper
@@ -1853,7 +1899,7 @@ init -1 python:
         def cum_in_ass_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
-            perk_system.perk_on_cum(the_person = person, the_place = "anal creampies")
+            perk_system.perk_on_cum(the_person = person, the_place = "anal creampies", add_to_log = add_to_record)
             # run extension code
             person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("anal creampies"), add_to_log = add_to_record)
         return cum_in_ass_wrapper
@@ -1865,7 +1911,7 @@ init -1 python:
         def cum_on_face_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
-            perk_system.perk_on_cum(the_person = person, the_place = "cum facials")
+            perk_system.perk_on_cum(the_person = person, the_place = "cum facials", add_to_log = add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_face", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
@@ -1880,7 +1926,7 @@ init -1 python:
         def cum_on_tits_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
-            perk_system.perk_on_cum(the_person = person, the_place = "being covered in cum")
+            perk_system.perk_on_cum(the_person = person, the_place = "being covered in cum", add_to_log = add_to_record)
             # run extension code
             mc.listener_system.fire_event("sex_cum_on_tits", the_person = person)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
@@ -1897,7 +1943,7 @@ init -1 python:
             org_func(person, add_to_record)
             perk_system.perk_on_cum(the_person = person, the_place = "being covered in cum")
             # run extension code
-            mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person)
+            mc.listener_system.fire_event("sex_cum_on_stomach", the_person = person, add_to_log = add_to_record)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on stomach"] = report_log.get("cum on stomach", 0) + 1
             person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"), add_to_log = add_to_record)
@@ -1912,7 +1958,7 @@ init -1 python:
             org_func(person, add_to_record)
             perk_system.perk_on_cum(the_person = person, the_place = "being covered in cum")
             # run extension code
-            mc.listener_system.fire_event("sex_cum_on_ass", the_person = person)
+            mc.listener_system.fire_event("sex_cum_on_ass", the_person = person, add_to_log = add_to_record)
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["cum on ass"] = report_log.get("cum on ass", 0) + 1
             person.change_arousal(partner_generic_arousal(person) + 5 * person.get_opinion_score("being covered in cum"), add_to_log = add_to_record)
@@ -1925,7 +1971,7 @@ init -1 python:
         def cum_in_mouth_wrapper(person, add_to_record = True):
             # run original function
             org_func(person, add_to_record)
-            perk_system.perk_on_cum(the_person = person, the_place = "drinking cum")
+            perk_system.perk_on_cum(the_person = person, the_place = "drinking cum", add_to_log = add_to_record)
             # run extension code
             if "report_log" in globals() and add_to_record:   # add to report log if exists
                 report_log["drinking cum"] = report_log.get("drinking cum", 0) + 1
@@ -2075,6 +2121,9 @@ init -1 python:
         wardrobe = mc.business.get_uniform_wardrobe_for_person(self)
         if wardrobe is None:
             return False
+
+        if self.is_strip_club_employee(): # no casual friday for strippers (employee moonlighting)
+            return True
 
         if self.is_employee() or self.is_intern():
             # Casual fridays for employees only
@@ -3050,13 +3099,13 @@ init -1 python:
 
 #Suggestibility mod work
 
-    def person_change_modded_suggestibility(self, amount, max_amt = 30):
+    def person_change_modded_suggestibility(self, amount, max_amt = 30, add_to_log = True):
         if self.event_triggers_dict.get("mod_suggest_amt", 0) >= max_amt:
             return
         change_amount = amount
         if self.event_triggers_dict.get("mod_suggest_amt", 0) + amount > max_amt:
             change_amount = max_amt - self.event_triggers_dict.get("mod_suggest_amt", 0)
-        self.change_suggest(change_amount, add_to_log = True)
+        self.change_suggest(change_amount, add_to_log = add_to_log)
         self.event_triggers_dict["mod_suggest_amt"] = self.event_triggers_dict.get("mod_suggest_amt", 0) + change_amount
         return
 

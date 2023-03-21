@@ -653,7 +653,7 @@ label condition_test_bend_over_employee_label(the_person):
     $ the_person.draw_person(position = "standing_doggy")
     the_person "Oh! I'm sorry, I thought you needed..."
     mc.name "To do an entry, yes, but not on the computer."
-    if the_person.vagina_available():
+    if the_person.vagina_visible():
         "You run your hand down her ass and along her slit."
     else:
         mc.name "One second, this is in the way."

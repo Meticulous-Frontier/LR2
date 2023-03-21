@@ -13,10 +13,13 @@ init 2:
             total = len(all_people_in_the_game())
             day_info = "{size=16}" + get_formatted_date_string() + " (day "+ str(day) + "){/size}"
             arousal_info = get_arousal_with_token_string(mc.arousal, mc.max_arousal)
+            arousal_tooltip_info = get_arousal_number_string(mc.arousal, mc.max_arousal)
             energy_info = get_energy_string(mc.energy, mc.max_energy)
+            energy_tooltip_info = get_energy_number_string(mc.energy, mc.max_energy)
             clarity_info = str(__builtin__.int(mc.free_clarity))
             locked_clarity_info = get_locked_clarity_with_token_string(mc.locked_clarity)
             attention_info = get_attention_string(mc.business.attention, mc.business.max_attention)
+            attention_tooltip_info = get_attention_number_string(mc.business.attention, mc.business.max_attention)
 
         frame:
             background Transform("Info_Frame_1.png", alpha=persistent.hud_alpha)
@@ -50,13 +53,13 @@ init 2:
                 textbutton "Arousal: [arousal_info]":
                     style "transparent_style"
                     text_style "menu_text_style"
-                    tooltip "Your personal arousal. When you reach your limit you will be forced to climax and your energy will drop."
+                    tooltip "Your personal arousal. When you reach your limit you will be forced to climax and your energy will drop.\nCurrently: {}".format(arousal_tooltip_info)
                     action NullAction()
 
                 textbutton "Energy: [energy_info]":
                     style "transparent_style"
                     text_style "menu_text_style"
-                    tooltip "Many actions require energy to perform, sex especially. Energy comes back slowly throughout the day, and most of it is recovered after a good night's sleep."
+                    tooltip "Many actions require energy to perform, sex especially. Energy comes back slowly throughout the day, and most of it is recovered after a good night's sleep.\nCurrently: {}".format(energy_tooltip_info)
                     action NullAction()
 
                 textbutton "Clarity: [clarity_info]":
@@ -74,7 +77,7 @@ init 2:
                 textbutton "Attention: [attention_info]":
                     style "transparent_style"
                     text_style "menu_text_style"
-                    tooltip "The attention your company is attracting from the local authorities."
+                    tooltip "The attention your company is attracting from the local authorities.\nCurrently: {}".format(attention_tooltip_info)
                     action NullAction()
 
                 textbutton "World: [known]/[total]":

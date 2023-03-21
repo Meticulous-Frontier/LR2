@@ -173,6 +173,7 @@ label ellie_stephanie_teamup_progression_scene_intro_scene(the_group):
     pick_1 "I see. I guess that's okay then."
     the_researcher "Alright. Let's get started!"
     "In the corner of the research department, you have a small room designed for private testing. You walk into the room with the three girls."
+    $ mc.change_location(testing_room)
     $ scene_manager.update_actor(the_person, display_transform = character_researcher_1)
     $ scene_manager.update_actor(the_researcher, display_transform = character_researcher_2)
     $ scene_manager.update_actor(pick_1, display_transform = character_right, position = "sitting")
@@ -299,7 +300,8 @@ label ellie_stephanie_teamup_progression_multi_choice_scene(the_group):
     $ scene_manager.add_actor(the_researcher, display_transform = character_center_flipped)
     $ nano_opinion_list = []
     $ bot_selection = ""
-    "You step into the research room and hand the two girls their coffees."
+    $ mc.change_location(testing_room)
+    "You step into the testing room and hand the two girls their coffees."
     the_researcher "Okay, now we just need to figure out who to test on..."
     menu:
         "Random Employee" if 0 in ellie_stephanie_teamup_progression_scene.scene_unlock_list:
@@ -337,6 +339,7 @@ label ellie_stephanie_teamup_progression_scene_scene_0(the_group, scene_transiti
     the_researcher "Hang on, I'll just select someone at random."
     $ pick_1 = get_random_from_list(mc.business.get_requirement_employee_list(exclude_list = [the_person, the_researcher]))
     the_researcher "Ah, here we go."
+    "She shows you the personell file for [pick_1.title] your [pick_1.job.job_title]."
     the_researcher "I'll go get her."
     $ scene_manager.update_actor(the_researcher, position = "walking_away")
     "As she goes to leave, [the_person.title] looks at you."
@@ -437,6 +440,7 @@ label ellie_stephanie_teamup_progression_scene_exit_scene(the_group):
     the_person "I understand. Maybe next week [the_person.mc_title]."
     mc.name "Maybe."
     $ clear_scene()
+    $ mc.change_location(mc.business.r_div)
     return
 
 label ellie_stephanie_teamup_final_opinion_shift_label(the_tester, program_name, program_opinion_list):
@@ -507,6 +511,7 @@ label ellie_stephanie_tester_reaction_basic_label(the_tester, the_person, the_re
     "[the_tester.title] startles at the sudden question."
     the_tester "Oh! Uhhh... yeah... but I think I need to lay down for a bit..."
     the_researcher "That's fine. We will leave you the room to recover."
+    $ mc.change_location(mc.business.r_div)
     "You step out of the room with [the_researcher.title] and [the_person.possessive_title], leaving the test subject to recover."
     return
 
@@ -553,7 +558,7 @@ label ellie_stephanie_tester_reaction_anal_label(the_tester, the_person, the_res
             $ the_tester.change_arousal(10)
             the_tester "Mmm, that sounds amazing right now..."
             call ellie_stephanie_tester_anal_finger_label(the_tester) from _anal_bot_anal_finger_01
-        "Fuck her ass" if the_tester.is_willing(prone_anal, private = True, ignore_taboo = True):
+        "Fuck her ass" if the_tester.is_willing(prone_anal):
             mc.name "Don't worry, I can help you."
             if the_tester.sluttiness < 60:
                 "[the_tester.title] looks at you nervously as you start to walk over to her."
@@ -574,6 +579,7 @@ label ellie_stephanie_tester_reaction_anal_label(the_tester, the_person, the_res
             return
 
     $ scene_manager.remove_actor(the_tester)
+    $ mc.change_location(mc.business.r_div)
     "You step out of the testing room, leaving [the_tester.possessive_title] to recover."
     $ get_fetish_anal_serum().add_mastery(1)
     "You are pretty sure that [the_researcher.title] and [the_person.possessive_title] got some useful research data from this experiment."
@@ -642,6 +648,7 @@ label ellie_stephanie_tester_reaction_breeding_label(the_tester, the_person, the
             return
 
     $ scene_manager.remove_actor(the_tester)
+    $ mc.change_location(mc.business.r_div)
     "You step out of the testing room, leaving [the_tester.possessive_title] to recover."
     $ get_fetish_breeding_serum().add_mastery(1)
     "You are pretty sure that [the_researcher.title] and [the_person.possessive_title] got some useful research data from this experiment."

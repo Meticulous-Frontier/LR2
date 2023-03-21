@@ -20,6 +20,11 @@ init -1 python:
 
     MainCharacter.is_home = is_home
 
+    def is_at_work_enhanced(self): #Checks to see if the main character is at work, generally used in crisis checks.
+        return self.location in [lobby, self.business.m_div, self.business.p_div, self.business.r_div, self.business.s_div, self.business.h_div, ceo_office, testing_room]
+
+    MainCharacter.is_at_work = is_at_work_enhanced
+
     def is_home_improvement_in_progress():
         return mc.business.event_triggers_dict.get("home_improvement_in_progress", False) == True
 
@@ -32,13 +37,13 @@ init -1 python:
             if perk_system.get_ability_flag("Lustful Priorities"):
                 amount += 5
 
-        amount = __builtin__.int(amount)
+        amount = __builtin__.int(__builtin__.round(amount))
         self.locked_clarity += amount
 
-        arousal = __builtin__.int(amount * .2)
+        arousal = amount * .2
         if arousal > 5:
             arousal = 5
-        self.arousal += arousal
+        self.change_arousal(arousal)
 
         if add_to_log and amount != 0:
             log_string = "You: " + ("+" if amount > 0 else "") + str(amount) + " {image=lust_eye_token_small} " + ("+" if arousal > 0 else "") + str(arousal)+ " {image=arousal_token_small}"

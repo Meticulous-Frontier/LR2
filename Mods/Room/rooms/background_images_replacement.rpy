@@ -29,6 +29,9 @@ init 5 python:
     red_heart_token_small_image = im.Scale(Image(get_file_handle("heart/red_heart.png")), 18, 18)
     renpy.image("red_heart_token_small", red_heart_token_small_image)
 
+    gold_heart_token_small_image = im.Scale(Image(get_file_handle("heart/gold_heart.png")), 18, 18)
+    renpy.image("gold_heart_token_small", gold_heart_token_small_image)
+
     lust_eye_token_small_image = im.Scale(Image(get_file_handle("lust_eye.png")), 18, 18)
     renpy.image("lust_eye_token_small", lust_eye_token_small_image)
 
@@ -114,6 +117,7 @@ init -1 python:
     university_library_backgrounds = room_background_image("University_Library_Background.jpg")
     university_study_room_backgrounds = room_background_image("Study_Room_Background.jpg")
     concert_hall_backgrounds = room_background_image("Concert_Hall_Background.jpg")
+    testing_room_backgrounds = room_background_image("Testing_Room_Background.jpg")
     # bedroom backgrounds
     standard_bedroom1_background = room_background_image("Generic_Bedroom1_Background.jpg")
     standard_bedroom2_background = room_background_image("Generic_Bedroom2_Background.jpg")
@@ -193,6 +197,12 @@ label updated_room_background(stack):
 
         if not home_bathroom in list_of_places: # make sure the bathroom is accessible
             list_of_places.append(home_bathroom)
+
+        if not "testing_room" in globals(): # save compatibility remove in future
+            testing_room = Room("testing_room", "Test Room", [], testing_room_backgrounds, [make_floor(), make_wall(), make_medical_table(), make_mirror()], [], [], False, [], None, False, lighting_conditions = standard_indoor_lighting)
+
+        if not testing_room in list_of_places:
+            list_of_places.append(testing_room)
 
         # bedrooms are linked in the person extensions, one time assignment of on of the bedrooms to a person
         prostitute_bedroom = Room("Prostitute Bedroom", "Prostitute Bedroom", [], prostitute_bedroom_background,[make_bed(), make_wall(), make_window(), make_love_rug()],[],[],False,[-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)

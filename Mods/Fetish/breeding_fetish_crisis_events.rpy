@@ -343,7 +343,7 @@ label breeding_fetish_family_sleep_crisis_label():
         the_person "Throw me down on your bed, [the_person.mc_title]. I want to feel your weight on top of me while you fuck my brains out!"
         "You roughly pick up [the_person.possessive_title] and carry her over to the bed. You throw her down and quickly jump on top of her."
         if not the_person.vagina_available():
-            $ the_girl.strip_to_vagina(position = "missionary", visible_enough = True, prefer_half_off = True)
+            $ the_person.strip_to_vagina(position = "missionary", visible_enough = True, prefer_half_off = True)
         "[the_person.possessive_title] spreads her legs wide, giving you easy access. She sighs as you sink your cock into her greedy cunt."
 
     elif the_person == mom:

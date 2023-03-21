@@ -61,13 +61,13 @@ label ellie_greetings(the_person):
     return
 
 label ellie_sex_responses_foreplay(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm... You're good at getting me warmed up..."
         else:
             the_person "Mmmm... Ah..."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Oh that's it. Mmm."
             "She purrs warmly."
@@ -75,7 +75,7 @@ label ellie_sex_responses_foreplay(the_person):
             the_person "Oh my god..."
             "It seems like she's trying not to moan too loudly."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             if the_person.outfit.wearing_panties():
                 the_person "Ah... If you get me any wetter I'm going to soak right through my panties."
@@ -99,19 +99,19 @@ label ellie_sex_responses_foreplay(the_person):
     return
 
 label ellie_sex_responses_oral(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Oh you know what I want [the_person.mc_title]... Ah..."
         else:
             the_person "Oh wow... that's... Mph!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Mmmm, that's so good. Ah..."
         else:
             the_person "That... that feels so good [the_person.mc_title]..."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "God, your tongue feels so good!"
 
@@ -131,19 +131,19 @@ label ellie_sex_responses_oral(the_person):
     return
 
 label ellie_sex_responses_vaginal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm, your cock feels real good inside me."
         else:
             the_person "Oh my god... Ah..."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Keep going [the_person.mc_title], it feels fantastic!"
         else:
             the_person "Oh my god, that feeling..."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Ah, do me [the_person.mc_title]! Give me that big cock!"
 
@@ -163,20 +163,20 @@ label ellie_sex_responses_vaginal(the_person):
     return
 
 label ellie_sex_responses_anal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Oh stars, you're really stretching me out!"
         else:
             the_person "Stars, it feels so big... That's all of it, right? I can't take any more!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Do my ass [the_person.mc_title], I can take it!"
         else:
             the_person "Oh stars, my poor ass..."
             "Her groan is a mixture of pain and pleasure."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Oh my poor little ass, you're going to ruin me..."
             "She doesn't seem very upset with the idea."
@@ -797,7 +797,7 @@ label ellie_flirt_response_text(the_person):
     return
 
 label ellie_condom_demand(the_person):
-    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0:
+    if the_person.wants_creampie():
         the_person "You need to put on a condom first."
         the_person "I don't like making you wear one either, but we need to be safe."
     else:
@@ -809,7 +809,7 @@ label ellie_condom_ask(the_person):
         the_person "Hey, do you think you should put on a condom?"
         the_person "I'm on birth control, so we don't really need one..."
         $ the_person.update_birth_control_knowledge()
-    elif the_person.get_opinion_score("creampies") > 0:
+    elif the_person.wants_creampie():
         $ the_person.discover_opinion("creampies")
         the_person "Hey, maybe you should put on a condom. If you don't you'll have to pull out."
     else:
@@ -817,7 +817,7 @@ label ellie_condom_ask(the_person):
     return
 
 label ellie_condom_bareback_ask(the_person):
-    if the_person.get_opinion_score("creampies") > 0:
+    if the_person.wants_creampie():
         if the_person.on_birth_control:
             the_person "Don't put on a condom, I'm on the pill. You can cum inside me and we don't have to worry."
             $ the_person.update_birth_control_knowledge()
@@ -831,7 +831,7 @@ label ellie_condom_bareback_ask(the_person):
     return
 
 label ellie_condom_bareback_demand(the_person): # Lead in: mc.name "One sec, let me just get a condom on..."
-    if the_person.get_opinion_score("bareback sex") > 0 or the_person.get_opinion_score("creampies") > 0: #Just likes raw sex
+    if the_person.wants_creampie(): #Just likes raw sex
         if the_person.on_birth_control:
             the_person "What? Forget it, you don't need one of those. Hurry up and put it in!"
         else:
@@ -881,7 +881,7 @@ label ellie_cum_mouth(the_person):
 label ellie_cum_pullout(the_person):
     # Lead in: "I'm going to cum!"
     if mc.condom: #TODO: All of the cum-drunk stuff
-        if the_person.wants_creampie() and the_person.get_opinion_score("creampies") > 0 and not the_person.has_taboo("condomless_sex"): #TODO: FIgure out we want any more requirements for this to fire.
+        if the_person.wants_creampie() and not the_person.has_taboo("condomless_sex"): #TODO: FIgure out we want any more requirements for this to fire.
             if the_person.event_triggers_dict.get("preg_knows", False):
                 the_person "I'm already pregnant, why are we even bothering with a condom?"
                 the_person "Take it off and cum inside my pussy, just like you did when you knocked me up!"

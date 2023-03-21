@@ -62,7 +62,7 @@ label missionary_double_orgasm(the_girl, the_location, the_object):
             "You roll off of [the_girl.possessive_title] and lie beside her."
 
     elif the_choice == "Cum outside":
-        if mc.condom == False and (the_girl.has_cum_fetish() or (the_girl.wants_creampie() and the_girl.obedience <150 and the_girl.get_opinion_score("taking control") > -1 and the_girl.get_opinion_score("creampies") > 0)):
+        if mc.condom == False and (the_girl.has_cum_fetish() or the_girl.wants_creampie()):
             "Before you get the chance to pull back and out, [the_girl.title] lifts both her feet up and wraps her legs around you, locking her ankles together."
             $ wordchoice = renpy.random.choice(["Oh God,", "Oh yes", "Oh... OH! Yes "])
             $ wordchoice2 = renpy.random.choice(["Cum for me!", "Cum inside!", "Cum for me!", "Cum in me!", "Pump it deep!", ""])

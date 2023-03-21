@@ -38,7 +38,7 @@ init 0 python:
         if percent < .5:
             color_string = "#e1e113"
         if percent < .2:
-            color_string = "#B14365"
+            color_string = "#f13355"
         return color_string
 
     @renpy.pure
@@ -47,18 +47,28 @@ init 0 python:
         if percent > .5:
             color_string = "#e1e113"
         if percent > .8:
-            color_string = "#B14365"
+            color_string = "#f13355"
         return color_string
 
     @renpy.pure
     def get_energy_string(energy, max_energy):
         percent = energy * 1.0 / (max_energy or 1)
-        return "{{color={}}}{}/{}{{/color}} {{image=energy_token_small}}".format(get_color_value_for_fraction(percent), __builtin__.int(energy), __builtin__.int(max_energy))
+        return "{{color={}}}{:0.0f}%{{/color}} {{image=energy_token_small}}".format(get_color_value_for_fraction(percent), percent * 100)
+
+    @renpy.pure
+    def get_energy_number_string(energy, max_energy):
+        percent = energy * 1.0 / (max_energy or 1)
+        return "{{color={}}}{:0.0f}/{:0.0f}{{/color}} {{image=energy_token_small}}".format(get_color_value_for_fraction(percent), energy, max_energy)
 
     @renpy.pure
     def get_arousal_with_token_string(arousal, max_arousal):
         percent = arousal * 1.0 / (max_arousal or 1)
-        return "{{color={}}}{}/{}{{/color}} {{image=arousal_token_small}}".format(get_inverted_color_value_for_fraction(percent), __builtin__.int(arousal), __builtin__.int(max_arousal))
+        return "{{color={}}}{:0.0f}%{{/color}} {{image=arousal_token_small}}".format(get_inverted_color_value_for_fraction(percent), percent * 100)
+
+    @renpy.pure
+    def get_arousal_number_string(arousal, max_arousal):
+        percent = arousal * 1.0 / (max_arousal or 1)
+        return "{{color={}}}{:0.0f}/{:0.0f}{{/color}} {{image=arousal_token_small}}".format(get_inverted_color_value_for_fraction(percent), arousal, max_arousal)
 
     @renpy.pure
     def get_locked_clarity_with_token_string(locked_clarity):
@@ -67,7 +77,12 @@ init 0 python:
     @renpy.pure
     def get_attention_string(attention, max_attention):
         percent = attention * 1.0 / (max_attention or 1)
-        return "{{color={}}}{}/{}{{/color}}".format(get_inverted_color_value_for_fraction(percent), attention, max_attention)
+        return "{{color={}}}{:0.0f}%{{/color}}".format(get_inverted_color_value_for_fraction(percent), percent * 100)
+
+    @renpy.pure
+    def get_attention_number_string(attention, max_attention):
+        percent = attention * 1.0 / (max_attention or 1)
+        return "{{color={}}}{:0.0f}/{:0.0f}{{/color}}".format(get_inverted_color_value_for_fraction(percent), attention, max_attention)
 
     def get_person_weight_string(person):
         kg = person.weight

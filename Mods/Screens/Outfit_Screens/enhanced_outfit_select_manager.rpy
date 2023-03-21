@@ -48,7 +48,7 @@ init 2:
                                     null height 20
 
                                 for outfit in category_info[6](mc.designed_wardrobe):
-                                    textbutton outfit.name + " (" +str(category_info[3](outfit)) + " {image=red_heart_token_small})":
+                                    textbutton outfit.name + " (" +str(category_info[3](outfit)) + " {image=gold_heart_token_small})":
                                         action [
                                             Function(hide_mannequin),
                                             Return(["select",outfit.get_copy()])

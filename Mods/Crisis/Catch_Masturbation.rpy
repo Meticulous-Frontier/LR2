@@ -331,7 +331,7 @@ label SB_caught_masturbating_crisis_label():
                         $ the_person.break_taboo("bare_pussy")
                         the_person "Could you just give me a little quickie? I'm all warmed up, you could just stick it in right now..."
                         menu:
-                            "Fuck her" if not the_person.has_taboo("vaginal_sex"): # only show sex option if you had sex before
+                            "Fuck her" if the_person.is_willing(doggy): # only show sex option if you had sex before and not locked for any reason
                                 mc.name "Sure, I could go for a quick fuck right now."
                                 "You quickly pull your pants down. [the_person.possessive_title] is wiggling her ass back and forth, waiting for you."
                                 "You rub the tip of your penis against [the_person.possessive_title]'s cunt. She is already soaking wet."

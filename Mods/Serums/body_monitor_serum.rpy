@@ -242,7 +242,7 @@ label body_monitor_phase_3_label():
     mc.name "Come in!"
     $ scene_manager.add_actor(person_2, display_transform = character_center_flipped, position = "stand3")
     person_2 "You wanted to see me, [person_2.mc_title]?"
-    "Her eyes brush over [person_1.possessive_title]"
+    "Her eyes brush over [person_1.possessive_title]."
     person_2 "Is there something wrong?"
     mc.name "No need to worry. We were just discussing something, and we need your work expertise about the topic. Please take a seat."
     $scene_manager.update_actor(person_2, position = "sitting")

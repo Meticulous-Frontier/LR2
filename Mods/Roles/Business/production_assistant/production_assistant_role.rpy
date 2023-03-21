@@ -510,7 +510,7 @@ label prod_assistant_cum_upgrade_label(the_person):
     the_person "Hey, I could really use your help with something. Can we go to your office?"
     mc.name "Certainly."
     "You walk with [the_person.title] from the production area to your office."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You step inside, and [the_person.possessive_title] steps in after you and locks your door. You like where this is going."
     the_person "Take your pants and underwear off and lie down on your desk. I'll take care of the rest."
     mc.name "Damn, not even dinner first? You think I'm some kind of slut?"
@@ -600,7 +600,7 @@ label prod_assistant_physical_upgrade_label(the_person):
     "Use this label to start to process of upgrading physical serums."
     "In this label, the production assistant discusses recent progression with physical related serums."
     "All physical related serums increase in tier by 1 after this label."
-    $ mc.business.event_triggers_dict["mc_serum_physical_tier"] = 0
+    $ mc.business.event_triggers_dict["mc_serum_physical_tier"] = 1
     $ mc.business.set_event_day("prod_assistant_advance")
     return
 

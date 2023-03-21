@@ -63,19 +63,19 @@ label candace_greetings(the_person):
     return
 
 label candace_sex_responses_foreplay(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm, you know just how to touch me [the_person.mc_title]!"
         else:
             "[the_person.title] giggles softly while you touch her."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Do you like touching me [the_person.mc_title]? I know I like it when you do!"
         else:
             the_person "Do you like touching me [the_person.mc_title]? You seem to know exactly what to do."
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Yes! That feels really nice!"
             "She giggles happily, clearly having a good time."
@@ -95,19 +95,19 @@ label candace_sex_responses_foreplay(the_person):
     return
 
 label candace_sex_responses_oral(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Aww, you always know what I like [the_person.mc_title]!"
         else:
             "[the_person.title] giggles softly."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Does my pussy taste good [the_person.mc_title]? I'll repay the favor and suck your cock later!"
         else:
             the_person "That, like, feels so good [the_person.mc_title]!"
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Ah! Hehe, that feels so good!"
             "She giggles happily, clearly having a good time."
@@ -127,19 +127,19 @@ label candace_sex_responses_oral(the_person):
     return
 
 label candace_sex_responses_vaginal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "Mmm, you know what I like [the_person.mc_title]!"
         else:
             "[the_person.title] giggles softly."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
             the_person "Is your cock always this big, or are you just happy to see me? Hehe!"
         else:
             the_person "Am I your dirty girl [the_person.mc_title]? Because I'm having so much fun right now!"
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "Yes! Keep fucking me!"
             "She giggles happily, clearly having a good time."
@@ -159,19 +159,22 @@ label candace_sex_responses_vaginal(the_person):
     return
 
 label candace_sex_responses_anal(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         if the_person.sluttiness > 50:
             the_person "I can, like, feel every single inch of you in me! You're so big!"
         else:
             the_person "You're, like, {i}huge{/i} inside of me! I don't know if I can do this for very long!"
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         if the_person.sluttiness > 50:
-            the_person "Fuck my ass [the_person.mc_title], fuck it good and raw and you're done with me!"
+            if mc.condom:
+                the_person "Fuck my ass [the_person.mc_title], fuck it good until you're done with me!"
+            else:
+                the_person "Fuck my ass [the_person.mc_title], fuck it good and raw and you're done with me!"
         else:
             the_person "Oh, it feels like you're stirring up my insides with your dick! Ah!"
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 75:
         if the_person.sluttiness > 50:
             the_person "I'm so stretched out, I think I'm starting to get the hang of this!"
             "She giggles happily, clearly proud of her accomplishment."

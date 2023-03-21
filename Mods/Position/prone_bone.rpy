@@ -228,7 +228,11 @@ label scene_prone_bone_3(the_girl, the_location, the_object):
     menu:
         "Threaten to creampie her" if not mc.condom:
             mc.name "God your pussy is so tight. I can't wait to dump my load inside it."
-            if the_girl.has_breeding_fetish():
+            if the_girl.knows_pregnant():
+                the_girl "Oh Yes! Fill me up with that potent love juice!"
+                $ the_girl.change_arousal(12)
+                "You can feel her womb pulsating around your member."
+            elif the_girl.has_breeding_fetish():
                 the_girl "Yes! Oh fuck yes make sure you cum deep [the_girl.mc_title]!"
                 $ the_girl.change_arousal(20)
                 "Goosebumps raise up all along her shoulders. It is a massive turn on for her to hear you threaten to cum inside of her."
@@ -408,26 +412,26 @@ label strip_prone_bone(the_girl, the_clothing, the_location, the_object):
     return
 
 label strip_ask_prone_bone(the_girl, the_clothing, the_location, the_object):
-    the_girl "[the_girl.mc_title], I'd like to take off my [the_clothing.name], would you mind?"
+    the_girl "Please [the_girl.mc_title], take off my [the_clothing.name], I need to feel more."
     "[the_girl.title] pants as you fuck her."
     menu:
-        "Let her strip":
-            mc.name "Take it off for me."
+        "Take it off":
+            mc.name "Alright."
             $ the_girl.draw_animated_removal(the_clothing, position = prone_bone.position_tag)
-            "You move back kneel for a moment while [the_girl.title] struggles out of her [the_clothing.name] and throws it to the side. Then she gets herself lined up in front of you again."
-            "She sighs happily when you get on top of her and slide your cock back inside."
+            "You move back and pull off her [the_clothing.name], throwing it to the side."
+            "She sighs happily when you get back on top of her and slide your cock inside."
 
         "Leave it on":
             mc.name "No, I like how you look with it on."
-            if the_girl.sluttiness < 80:
+            if the_girl.sluttiness < 60:
                 the_girl "Do you think I look sexy in it?"
                 "You speed up, fucking her faster in response to her question."
-            elif the_girl.sluttiness < 100:
+            elif the_girl.sluttiness < 80:
                 the_girl "Does it make me look like a good little slut? All I want to be is your good little slut sir."
-                "She pushes her hips against yours and moans happily."
+                "She pushes her pussy back up and moans happily."
             else:
                 the_girl "Does it make me look like the cum hungry slut that I am? That's all I want to be for you sir, your dirty little cum dumpster!"
-                "She grinds her hips against you and moans ecstatically."
+                "She grinds her pussy on your cock and moans ecstatically."
     return
 
 label orgasm_prone_bone(the_girl, the_location, the_object):

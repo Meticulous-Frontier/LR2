@@ -992,7 +992,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
                 "She smiles as she starts to walk over to you."
                 $ mc.change_locked_clarity(20)
                 the_person "Okay! I think I can think of a good way to do this..."
-                call get_fucked(the_person, skip_intro = True) from _call_get_fucked_after_yoga_get_serviced
+                call get_fucked(the_person, the_goal = "get mc off", skip_intro = True) from _call_get_fucked_after_yoga_get_serviced
         "Make her service you (disabled) " if the_person.obedience < 130:
             pass
         "Mess around":

@@ -64,7 +64,7 @@ init 5 python:
             extra_positions.append(tit_fuck)
 
         for position in list_of_girl_positions + extra_positions:
-            if allow_position(person, position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+            if person.allow_position(position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 if position.her_position_willingness_check(person, ignore_taboo = ignore_taboo):
                     position_option_list.append([position, person.sex_skills[position.skill_tag]])
 
@@ -199,28 +199,6 @@ init 5 python:
         person.clear_situational_obedience("aura")
         return
 
-    def allow_position(person, position):
-        if position.opinion_tags:
-            for opinion in position.opinion_tags:
-                if person.get_known_opinion_score(opinion) == -2:
-                    if person.has_role(slave_role) and person.obedience > 200: #A slave does what she is told.
-                        return True
-                    if perk_system.has_ability_perk("Serum: Aura of Compliance") and mc_serum_aura_obedience.get_trait_tier() >= 3:
-                        return True
-                    return False
-        return True
-
-    def is_position_filtered(person, position):
-        if position.skill_tag == "Foreplay" and callable(person.event_triggers_dict.get("foreplay_position_filter", None)):
-            return not person.event_triggers_dict["foreplay_position_filter"]([1, position])
-        if position.skill_tag == "Oral" and callable(person.event_triggers_dict.get("oral_position_filter", None)):
-            return not person.event_triggers_dict["oral_position_filter"]([1, position])
-        if position.skill_tag == "Vaginal" and callable(person.event_triggers_dict.get("vaginal_position_filter", None)):
-            return not person.event_triggers_dict["vaginal_position_filter"]([1, position])
-        if position.skill_tag == "Anal" and callable(person.event_triggers_dict.get("anal_position_filter", None)):
-            return not person.event_triggers_dict["anal_position_filter"]([1, position])
-        return False
-
     def build_position_rejection_string(person, position):
         result = position.name + "\nHates: "
         if position.opinion_tags:
@@ -298,7 +276,7 @@ init 5 python:
                 option_list.append(["Pause and change position\n-5 {image=arousal_token_small}","Change"])
                 for position in position_choice.connections:
 
-                    if allow_transitions and allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and condition.filter_condition_positions(position):
+                    if allow_transitions and person.allow_position(position) and not person.is_position_filtered(position) and object_choice.has_trait(position.requires_location) and condition.filter_condition_positions(position):
                         appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                         option_list.append([appended_name,position])
 
@@ -306,7 +284,7 @@ init 5 python:
                 # allow transition to positions with same traits and skill requirements
                 for position in position_choice.connections:
                     if isinstance(object_choice, Object): # Had an error with cousin's kissing blackmail where it would pass object_choice as a list, haven't looked further into it
-                        if allow_transitions and allow_position(person, position) and not is_position_filtered(person, position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag and condition.filter_condition_positions(position):
+                        if allow_transitions and person.allow_position(position) and not person.is_position_filtered(position) and object_choice.has_trait(position.requires_location) and position_choice.skill_tag == position.skill_tag and condition.filter_condition_positions(position):
                             appended_name = "Transition to " + position.build_position_willingness_string(person, ignore_taboo = ignore_taboo) #NOTE: clothing and energy checks are done inside of build_position_willingness, invalid position marked (disabled)
                             option_list.append([appended_name, position])
 
@@ -343,7 +321,7 @@ init 5 python:
         }
         for position in sorted(list_of_positions, key = lambda x: x.name):
             if mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits) and condition.filter_condition_positions(position): #There is a valid object and if it requires large tits she has them.
-                if allow_position(person, position):
+                if person.allow_position(position):
                     willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
                     if not position.skill_tag in prohibit_tags:
                         positions[position.skill_tag].append([willingness, position])
@@ -353,7 +331,7 @@ init 5 python:
         # insert unique positions into choices
         for unique_position in person.event_triggers_dict.get("unique_sex_positions", default_unique_sex_positions)(person, prohibit_tags):
             position = unique_position[0]
-            if allow_position(person, position) and  mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
+            if person.allow_position(position) and mc.location.has_object_with_trait(position.requires_location) and (person.has_large_tits() or not position.requires_large_tits): #There is a valid object and if it requires large tits she has them.
                 willingness = position.build_position_willingness_string(person, ignore_taboo = ignore_taboo)
                 positions[position.skill_tag].insert(unique_position[1], [willingness, position])
 
@@ -459,26 +437,42 @@ init 5 python:
 
         return opinion_score
 
+    def create_report_log(extra_values = {}):
+        report_log = defaultdict(int)
+        report_log["positions_used"] = []
+        report_log.update(extra_values)
+        return report_log
 
-label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = Condition_Type("Empty"), used_obedience = False):
+
+label fuck_person_bugfix(the_person, private= True, start_position = None, start_object = None, skip_intro = False, girl_in_charge = False, self_strip = True, hide_leave = False, position_locked = False, report_log = None, affair_ask_after = True, ignore_taboo = False, skip_condom = False, prohibit_tags = [], condition = Condition_Type("Empty")):
     # When called fuck_person starts a sex scene with someone. Sets up the encounter, mainly with situational modifiers.
     if report_log is None:
-        $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
-        $ report_log["positions_used"] = [] #This is a list, not an int.
+        $ report_log = create_report_log()
 
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
     $ guy_orgasms_before_control = 0
-    $ allow_transitions = True
+    $ allow_transitions = not (skip_intro or start_position or start_object) # disable first time transitions if we continue a custom intro
+    $ round_choice = "Continue" if skip_intro and start_position and start_object else "Change" # use "Continue" if just had a custom intro
+    $ first_round = True
+    $ has_taken_control = False
     $ ask_for_condom = skip_condom
     $ ask_for_threesome = False
     $ skip_taboo_break = False
     $ use_condom = mc.condom if skip_condom else False
     $ stealth_orgasm = False
     $ stop_stripping = False
-    if used_obedience:
-        $ report_log["used_obedience"] = True
+    $ report_log["was_public"] = not private
+
+    # break taboos automatically, so the caller doesn't need to remember to do it
+    if not ignore_taboo and isinstance(start_position, Position):
+        # since we skip intro, it's assumed we are already in the position and use the loop to continue
+        if skip_intro:
+            $ the_person.break_taboo(start_position.associated_taboo)
+        # we don't ask for condom and the mc is not wearing it and we are having intercourse
+        if skip_condom and not mc.condom and start_position.skill_tag in ["Vaginal", "Anal"]:
+            $ the_person.break_taboo("condomless_sex")
 
     #Privacy modifiers
     if mc.location.get_person_count() == 1 and not private and mc.location.privacy_level != 3 and mc.location.privacy_level != 1:
@@ -486,11 +480,8 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
 
     # $ renpy.say(None, "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person, private = private)
-    $ report_log["was_public"] = not private
 
-    $ round_choice = "Change" # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
-    $ first_round = True
-    $ has_taken_control = False
+    # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     while not finished:
         if girl_in_charge:
             if not position_choice is None and position_choice.skill_tag == "Foreplay" and not mc.recently_orgasmed and not first_round and not position_locked:
@@ -1087,15 +1078,27 @@ label condom_ask_enhanced(the_person, skill_tag = "Vaginal"):
 
         menu:
             "Put on a condom":
-                mc.name "I think you're right. One second."
+                if the_person.knows_pregnant():
+                    mc.name "Not this time slut, we are using a condom."
+                elif the_person.on_birth_control:
+                    mc.name "A condom might be a good idea."
+                elif the_person.wants_creampie():
+                    mc.name "Not this time, we will use a condom."
+                else:
+                    mc.name "I think you're right. One second."
                 call put_on_condom_routine(the_person) from _call_put_on_condom_routine_5
 
             "Fuck her raw":
-                mc.name "No way. I want to feel you wrapped around me."
+                if the_person.knows_pregnant():
+                    mc.name "I'm going to fuck that pregnant pussy raw."
+                elif the_person.wants_creampie():
+                    mc.name "I'm going to fill up that little cunt of yours."
+                else:
+                    mc.name "No way. I want to feel you wrapped around me."
                 call fuck_without_condom_taboo_break_response(the_person, skill_tag, skip_taboo_break = skip_taboo_break) from _call_fuck_without_condom_taboo_break_response_3
 
     else: #Slutty enough that she doesn't even care about a condom.
-        if the_person.is_dominant() and (the_person.get_opinion_score("creampies") > 0 or the_person.get_opinion_score("anal creampies") > 0): # likes it bare and is not a pushover
+        if the_person.is_dominant() and the_person.wants_creampie(): # likes it bare and is not a pushover
             menu:
                 "Put on a condom":
                     mc.name "One sec, let me just get a condom on..."
