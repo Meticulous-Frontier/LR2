@@ -315,9 +315,8 @@ label chemist_daughter_help_move_label():
     the_person "Oh my god, I can't believe it. We did it!"
     mc.name "Thankfully you don't have too much stuff."
     the_person "Yeah... this is it! My first place... all to myself!"
-    $ lily_bedroom.show_background()
     $ the_person.draw_person(position = "sitting")
-    "[the_person.title] sits on the edge of her bed. One of the few places in her apartment to sit, for now."
+    "[the_person.title] sits on the couch. One of the few places in her apartment to sit, for now."
     if the_person.sluttiness < 20:
         the_person "This has been a ton of work, but you have no idea how much I appreciate this."
         mc.name "Of course. Always glad to help out."
@@ -332,6 +331,7 @@ label chemist_daughter_help_move_label():
         the_person "Thank you again, for everything!"
         mc.name "You're welcome [the_person.title]. I'll see you at work?"
         the_person "Yes Sir!"
+        $ mc.change_location(downtown)
         $ the_person.add_unique_on_room_enter_event(chemist_daughter_daddy_title)
     else:
         the_person "So... I was wondering something."
@@ -387,13 +387,19 @@ label chemist_daughter_help_move_label():
             the_person "Oh god... that was wonderful [the_person.mc_title]."
             $ the_person.draw_person()
             "You stand up and get yourself together."
-            $ the_person.outfit.add_upper(bath_robe.get_copy(), [1, .73, .85, .9], "Pattern_1", [.95, .95, .95, .9])
-            $ the_person.draw_person()
-            "She quickly puts on a robe and walks you to her door."
+            if the_person.outfit.has_overwear():
+                $ the_person.apply_outfit(the_person.planned_outfit)
+                $ the_person.draw_person()
+                "She adjusts her clothes and walks you to her door."
+            else:
+                $ the_person.outfit.add_upper(bath_robe.get_copy(), [1, .73, .85, .9], "Pattern_1", [.95, .95, .95, .9])
+                $ the_person.draw_person()
+                "She quickly puts on a robe and walks you to her door."
             the_person "Thank you again, for everything!"
             mc.name "You're welcome [the_person.title]. I'll see you at work?"
             the_person "Yes Sir!"
             $ clear_scene()
+            $ mc.change_location(downtown)
             "As you turn from her door, you process all the events of the last few days."
             "One of your employees, recently had an amicable breakup... with her dad? And now she calls you Daddy... And she likes to get spanked."
 
@@ -409,6 +415,7 @@ label chemist_daughter_help_move_label():
             the_person "Thank you again, for everything!"
             mc.name "You're welcome [the_person.title]. I'll see you at work?"
             the_person "Yes Sir!"
+            $ mc.change_location(downtown)
             $ the_person.add_unique_on_room_enter_event(chemist_daughter_daddy_title)
     return
 
