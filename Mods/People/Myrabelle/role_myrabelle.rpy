@@ -1316,7 +1316,7 @@ label myra_lewd_gaming_label(the_person):           #40 sluttiness event. Catch 
     $ the_person.draw_person(position = "sitting")
     "[the_person.possessive_title] sits down. You decide to get down below desk level and eat her out until she finishes."
     mc.name "Here, turn this way, so I can have better access."
-    "[the_person.title] turns, and you start to pull aside the clothes in your way."
+    "[the_person.title] turns and spreads her legs, and you start to pull aside the clothes in your way."
     $ the_person.strip_to_vagina(prefer_half_off = True, position = "missionary")
     "You hear as [the_person.possessive_title] plugs her headphones back in and looks at the computer screen again."
     "You bring your face up to her cunt. She is soaked, her puffy pink lips showing clear signs of arousal. This should be quick!"
