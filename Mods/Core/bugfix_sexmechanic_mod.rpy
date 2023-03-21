@@ -453,7 +453,10 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     $ position_choice = start_position # initialize with start_position (in case girl is in charge or position is locked)
     $ object_choice = start_object # initialize with start_object (in case girl is in charge or position is locked)
     $ guy_orgasms_before_control = 0
-    $ allow_transitions = True
+    $ allow_transitions = not (skip_intro or start_position or start_object) # disable first time transitions if we continue a custom intro
+    $ round_choice = "Continue" if skip_intro and start_position and start_object else "Change" # use "Continue" if just had a custom intro
+    $ first_round = True
+    $ has_taken_control = False
     $ ask_for_condom = skip_condom
     $ ask_for_threesome = False
     $ skip_taboo_break = False
@@ -478,9 +481,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
     # $ renpy.say(None, "Fuck Person Enhanced => start position: " + ("None" if start_position is None else start_position.name) + " , object: " + ("None" if start_object is None else start_object.name))
     $ apply_sex_modifiers(the_person, private = private)
 
-    $ round_choice = "Change" # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
-    $ first_round = True
-    $ has_taken_control = False
+    # We start any encounter by letting them pick what position they want (unless something is forced or the girl is in charge)
     while not finished:
         if girl_in_charge:
             if not position_choice is None and position_choice.skill_tag == "Foreplay" and not mc.recently_orgasmed and not first_round and not position_locked:
