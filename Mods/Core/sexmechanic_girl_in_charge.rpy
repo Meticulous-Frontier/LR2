@@ -179,7 +179,7 @@ init 2:
 
             return get_random_from_weighted_list(dom_sex_goal_weighted_list)
 
-        def build_mc_request_blowjob_path(person):
+        def build_blowjob_path(person):
             path = [] # start off with normal blowjob
             path.append(dom_sex_path_node(blowjob, dom_requirement_mc_aroused))
 
@@ -194,7 +194,7 @@ init 2:
             path.append(dom_sex_path_node(transition, dom_requirement_get_mc_off))
             return path
 
-        def build_mc_request_titfuck_path(person):
+        def build_titfuck_path(person):
             path = [] # use handjob as intro
             path.append(dom_sex_path_node(handjob, dom_requirement_mc_hard))
 
@@ -398,6 +398,15 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         $ using_condom = mc.condom
     else:
         $ using_condom = requires_condom(the_person)
+
+    # generate a sex path for locked requests
+    if not sex_path and not allow_continue and (not the_goal or the_goal == "get mc off"):
+        if start_position == blowjob:
+            $ sex_path = build_blowjob_path(the_person)
+            $ print("Build blowjob path: {}".format(len(sex_path)))
+        if start_position == tit_fuck:
+            $ sex_path = build_titfuck_path(the_person)
+            $ print("Build titfuck path: {}".format(len(sex_path)))
 
     # break taboos automatically, so the caller doesn't need to remember to do it
     if not ignore_taboo and isinstance(start_position, Position):
@@ -683,10 +692,10 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
 label mc_sex_request(the_person, the_request = "blowjob", private = True):
     python:
         if the_request == "titfuck":
-            path = build_mc_request_titfuck_path(the_person)
+            path = build_titfuck_path(the_person)
             start_object = mc.location.get_object_with_trait("Kneel")
         else:   # default blowjob
-            path = build_mc_request_blowjob_path(the_person)
+            path = build_blowjob_path(the_person)
             start_object = mc.location.get_object_with_trait("Kneel")
 
     call get_fucked(the_person, sex_path = path, private = private, start_object = start_object, skip_intro = True, allow_continue = False) from _call_get_fucked_mc_request
