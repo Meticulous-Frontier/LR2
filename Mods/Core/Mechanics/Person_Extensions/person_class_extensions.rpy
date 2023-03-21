@@ -744,7 +744,7 @@ init -1 python:
             final_slut_requirement += __builtin__.int(self.love * .2)
         else:
             if self.has_role([girlfriend_role, affair_role]):               # girlfriend lowers requirement by love
-                final_slut_requirement -= __builtin__int(self.love * .2)
+                final_slut_requirement -= __builtin__.int(self.love * .2)
             elif self.is_family():
                 final_slut_requirement -= __builtin__.int((self.love - 50) * .2)  # family only lowers if they love you enough
             else:
