@@ -516,7 +516,7 @@ label ashley_classical_concert_date_label():
     mc.name "Plus, I'm glad to be able to spend some time with you and get to know you better."
     "You notice her blush a bit, but you can also see her smile."
     $ the_person.change_stats(love = 2, happiness = 2)
-    $ show_concert_hall_background(darken = True)
+    #end branch
     "Soon, the lights dim, and the music begins. It begins with a splendid piano melody."
     "You and [the_person.possessive_title] sit together silently, enjoying the music."
     "It goes through emotional highs and lows. At one point, you look over and you think you see a tear on [the_person.title]'s cheek."
@@ -537,7 +537,6 @@ label ashley_classical_concert_date_label():
             $ mc.change_locked_clarity(15)
             $ the_person.change_stats(obedience = 2, happiness = 5)
             "You watch the remainder of the concert in silence with her head against you."
-    $ show_concert_hall_background()
     "When the concert is over, the lights slowly come back on. You let go of her as you both start to get up."
     $ scene_manager.update_actor(the_person, position = "stand3")
     "You slowly file out of the concert hall, chatting about the concert."
@@ -1549,14 +1548,43 @@ init 1 python:
 #These labels are for MC hitting specific personal serum requirements.
 label ashley_demands_relief_label():    #at 30
     $ the_person = ashley
-    "In this label, Ashley approaches MC and demands he gets her off."
-    "MC seems conflicted, but ultimately sides with her and gets her off, but questions why would he take orders from her."
+    $ the_person.arousal = 50   #She's horny
+    $ the_person.add_situational_slut("Horny", 20, "I really need some relief!")
+    $ first_time = the_person.event_triggers_dict.get("sub_titfuck_count", 0) == 0
     $ ashley_clear_after_work_setup()
+    "It is the end of the day, so you swing by your office to pick up your daily serum dose."
+    $ ceo_office.show_background()
+    $ the_person.draw_person()
+    "When you walk in, you see [the_person.possessive_title] standing next to your desk."
+    mc.name "Ah, hello [the_person.title]."
+    the_person "Oh hey. I was just dropping off your serums for you."
+    mc.name "Thanks."
+    "You walk over to your desk. As you reach down to pick them up, [the_person.title] puts her hand on yours."
+    the_person "Hey, umm... I kinda need you to do something for me."
+    mc.name "Oh?"
+    the_person "Working on these serums, and around here in general, I'm really picking up a lot of tension, if you know what I mean."
+    mc.name "I think I do."
+    if ashley.lust_step >= 1:
+        the_person "I mean obviously we need to be quick... we don't want my sister to catch on or anything..."
+    else:
+        the_person "I need to be quick, I made a commitment with my sister this evening..."
+    the_person "But I was thinking, you kinda owe me for making these serums for you anyway."
+    the_person "I've heard you are pretty good with your hands, can you just get me off really quick?"
+    mc.name "Hmmm... I don't know..."
+    the_person "Seriously? It isn't often a girl asks you to stink your hands in her pants. Think carefully."
+    "Something about her tone tells you she is being serious. You think about it for a moment."
+    menu:
+        "Finger Her\n{color=#ff0000}{size=18}Increases Sluttiness and Love{/size}{/color}":
+            mc.name "Alright"
+        "Mutual Masturbation\n{color=#ff0000}{size=18}Increases Obedience{/size}{/color}":
+            pass
+
 
     $ the_person.story_event_log("obedience")
     $ mc.business.add_mandatory_crisis(ashley_demands_oral)
     $ ashley.event_triggers_dict["dom_fingers"] = True
     $ ashley.other_messages[0] = "[ashley.fname] sometimes requires you to finger her after work."
+    $ the_person.clear_situational_slut("Eager")
     return
 
 label ashley_demands_oral_label():  #at 60
@@ -2792,8 +2820,8 @@ label ashley_second_concert_date_label():
     mc.name "When we can go do stuff like this more often, then go back to your place after, and me, you, and [stephanie.fname] all hop in bed together and screw until the sun comes up."
     ashley "Ha! Oh wow. You've been watching some good porn lately huh? I don't think Steph is really the sharing type... I'm usually not either..."
     mc.name "And yet, here you are, with your sister's boyfriend. Maybe you just haven't met someone worth sharing before?"
-    $ show_concert_hall_background(darken = True)
     "[the_person.title] is quiet. Right on cue, the lights turn down and the music begins."
+    $ show_concert_hall_background(darken = True)
     "The music begins, playing through some classical music that you aren't familiar with, but it is quite enjoyable. When you look over at [the_person.possessive_title] she seems to be really enjoying herself."
     "After a while, as the music goes through a crescendo, you feel her squeeze your hand, then turn it over, so her palm is against the back of your hand."
     "She puts your hand on her leg, then slowly starts to push it up, under her dress..."
