@@ -394,19 +394,19 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
         $ report_log["positions_used"] = []
         $ report_log["was_public"] = not private
 
+    if skip_intro:  #If we are already having sex, using whatever condom status presently is
+        $ using_condom = mc.condom
+    else:
+        $ using_condom = requires_condom(the_person)
+
     # break taboos automatically, so the caller doesn't need to remember to do it
     if not ignore_taboo and isinstance(start_position, Position):
         # since we skip intro, it's assumed we are already in the position and use the loop to continue
         if skip_intro:
             $ the_person.break_taboo(start_position.associated_taboo)
         # we don't ask for condom and the mc is not wearing it and we are having intercourse
-        if skip_condom and not mc.condom and start_position.skill_tag in ["Vaginal", "Anal"]:
+        if not mc.condom and start_position.skill_tag in ["Vaginal", "Anal"]:
             $ the_person.break_taboo("condomless_sex")
-
-    if skip_intro:  #If we are already having sex, using whatever condom status presently is
-        $ using_condom = mc.condom
-    else:
-        $ using_condom = requires_condom(the_person)
 
     if start_position and not sex_path:
         if not the_goal:
