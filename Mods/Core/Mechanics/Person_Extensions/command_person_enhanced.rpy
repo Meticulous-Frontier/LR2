@@ -1,10 +1,12 @@
 
 init 2 python:
     def make_onlyfans_together_requirement(person):
+        if not the_person.has_role(onlyfans_role):
+            return False
+        if time_of_day == 4:
+            return "Not enough time"
         if person.obedience < 150:
             return "Requires: 150 Obedience"
-        if not the_person.has_role(onlyfans_role):
-            return "No OnlyFans Account"
         return True
 
     def bend_over_your_desk_requirement(person):
@@ -20,7 +22,7 @@ init 2 python:
     # extend the bugfix build_command_person_actions_menu function
     def build_command_person_actions_menu2(the_person):
         result = build_command_person_actions_menu(the_person)
-        make_onlyfans_together_action = Action("Make a OnlyFans video together", requirement = make_onlyfans_together_requirement, effect = "make_onlyfans_together_label", args = the_person, requirement_args = the_person,
+        make_onlyfans_together_action = Action("Make an OnlyFans video together", requirement = make_onlyfans_together_requirement, effect = "make_onlyfans_together_label", args = the_person, requirement_args = the_person,
             menu_tooltip = "Order " + the_person.title + " to make a OnlyFans video together with you.", priority = -5)
         bend_over_your_desk_action = Action("Bend her over her desk", requirement = bend_over_your_desk_requirement, effect = "bend_over_your_desk_label", args = the_person, requirement_args = the_person,
             menu_tooltip = "Order " + the_person.title + " to bend over her desk so you can enjoy her ass.", priority = -5)
