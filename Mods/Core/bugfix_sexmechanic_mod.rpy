@@ -897,7 +897,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
             $ mc.condom = True
             call put_on_next_condom_routine(the_person) from _call_put_on_next_condom_routine_2
 
-    if willing == 1 and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal" or the_position.name == "Dildo Fuck"):
+    if willing == 1 and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal" or the_position.name == "Dildo Fuck") and not the_person.vagina_visible():
         # make sure we move skirts out of the way when rendering
         python:
             for the_clothing in [x for x in the_person.outfit.get_lower_ordered() if not (x.underwear or x.half_off)]:
