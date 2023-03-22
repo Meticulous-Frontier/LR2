@@ -114,20 +114,22 @@ init 2 python:
         return
 
     def ashley_foreplay_position_filter(foreplay_positions):
-        if not ashley.event_triggers_dict.get("sub_titfuck_avail", False):
+        if not ashley_sub_titfuck_avail():
             filter_out = [tit_fuck]
             if foreplay_positions[1] in filter_out:
                 return False
         return True
 
     def ashley_oral_position_filter(oral_positions):
-        return ashley.event_triggers_dict.get("sub_blowjob_avail", False)
+        return ashley_sub_oral_avail() \
+            or ashley_dom_oral_avail()
 
     def ashley_vaginal_position_filter(vaginal_positions):
-        return ashley.event_triggers_dict.get("sub_fuck_avail", False)
+        return ashley_sub_fuck_avail() \
+            or ashley_dom_fuck_avail()
 
     def ashley_anal_position_filter(anal_positions):
-        return ashley.event_triggers_dict.get("sub_anal_avail", False)
+        return ashley_sub_anal_avail()
 
 
     # ashley_room_excitement_overhear = Action("Overhear Ashley",ashley_room_excitement_overhear_requirement,"ashley_room_excitement_overhear_label")
@@ -1344,6 +1346,7 @@ label ashley_blows_during_meeting_label():      #40 Sluttiness
     $ scene_manager.update_actor(ashley, position = "blowjob", display_transform = character_left_flipped(yoffset = .35, zoom = 1.45))
     "[ashley.possessive_title] quickly slides under your desk and unzips your pants, pulling your cock out."
     mc.name "Are you serious? Is this really the right time for..."
+    $ scene_manager.update_actor(ashley, special_modifier = "blowjob")
     "[ashley.title] engulfs the entirety of your rapidly hardening cock in her mouth, stopping your words in your throat."
     $ mc.change_locked_clarity(30)
     "It only takes a few moments to reach full hardness as she starts to work your cock over with her soft lips."
