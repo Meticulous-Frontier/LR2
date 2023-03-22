@@ -112,7 +112,7 @@ label train_dealbreaker_fingering_label(the_person):
 
     #Copy fingering position's taboo break scene.
     "You kiss [the_person.title]'s neck from behind, distracting her from your hand sliding along her inner thigh and towards her crotch."
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "She starts as you brush her sensitive pussy. She grabs your wrist and stops you from moving any further."
     else:
         $ the_item = the_person.outfit.get_lower_top_layer()
@@ -141,7 +141,7 @@ label train_dealbreaker_fingering_label(the_person):
         $ mc.change_locked_clarity(15)
         "You slide your fingers in and out of her pussy, stroking the inside of that soft tunnel."
         "Each movement draws moans of pleasure from [the_person.possessive_title], who presses herself against you."
-        if the_person.outfit.vagina_available():
+        if the_person.vagina_available():
             "Her pussy is dripping wet now, dripping juices down her thighs."
         else:
             $ the_item = the_person.outfit.get_lower_top_layer()
@@ -164,12 +164,12 @@ label train_dealbreaker_fingering_label(the_person):
         $ the_person.change_arousal(10 + mc.sex_skills["Foreplay"])
         $ mc.change_locked_clarity(10)
         if the_person.has_large_tits():
-            if the_person.outfit.tits_available():
+            if the_person.tits_available():
                 "You reach your free hand up to [the_person.title]'s bare [the_person.tits_description] and cup one, massaging it while you finger her."
             else:
                 "You reach your free hand up to [the_person.title]'s large breasts and squeeze one through her clothing, enjoying its size and weight."
         else:
-            if the_person.outfit.tits_available():
+            if the_person.tits_available():
                 "You paw at [the_person.possessive_title]'s [the_person.tits_description] with your free hand, running your thumb over one of her nipples as you continue to finger her."
                 "Her body responds, the nipple hardening as you play with it."
             else:

@@ -480,7 +480,7 @@ label increase_slave_submission_label(the_person):
         "She looks at you intently..."
         the_person "No Master, I've got other duties that prevent that."
         mc.name "It seems you need a punishment for this insolence."
-        if not the_person.outfit.vagina_visible():
+        if not the_person.vagina_visible():
             mc.name "Take off your clothes and bend over against the desk."
             $ the_person.strip_outfit(exclude_upper = True, position = "stand3", emotion = "sad")
         else:

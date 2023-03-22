@@ -1409,7 +1409,7 @@ label Sarah_tits_reveal_label():
     $ the_person.draw_person(position = "stand4", emotion = "happy")
     the_person "Thank you [the_person.mc_title]. I'm sorry again about being sneaky about the whole thing. I really appreciate you letting me do this!"
     "You notice she turns and closes your office door... and then locks it."
-    if the_person.outfit.tits_available():
+    if the_person.tits_available():
         "[the_person.title] takes a breast in her hand, enjoying the weight of it."
         the_person "It is incredible. So much better than a implant, and they've gotten more sensitive too."
         "Her hand begins to idly pinch one of her nipples."
@@ -1767,7 +1767,7 @@ label Sarah_stripclub_story_label():
     $ scene_manager.update_actor(the_person, position = "kneeling1")
     "[the_person.title] climbs up on your lap."
 
-    if the_person.outfit.tits_available():
+    if the_person.tits_available():
         "She runs her hands through your hair and brings your face up to her naked, heaving chest."
     else:
         "She begins to undress her top half right in front of you, letting you watch as she exposes her soft skin."
@@ -1788,7 +1788,7 @@ label Sarah_stripclub_story_label():
     $ mc.change_arousal(10)
     $ scene_manager.update_actor(the_person, position = "back_peek")
     "[the_person.possessive_title] stands up and turns away from you."
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "Her hips sway back forth. Her shapely ass inches from your face makes a tantalizing target."
         $ scene_manager.strip_full_outfit(person = the_person)
     else:
@@ -2666,10 +2666,10 @@ label watch_strip_show(the_person):  #This scene assumes scene manager is runnin
             else:
                 finished_chance += 5
                 renpy.pause(1)
-    if showgirl.outfit.vagina_visible():
+    if showgirl.vagina_visible():
         "As she finishes, the showgirl gives one more pose, showing off her exposed ass to the crowd."
         $ scene_manager.update_actor(showgirl, position = "standing_doggy")
-    elif showgirl.outfit.tits_visible():
+    elif showgirl.tits_visible():
         "As she finishes, the showgirl gives one more pose, showing off her exposed tits to the crowd."
         $ scene_manager.update_actor(showgirl, position = "kneeling1")
     else:
@@ -2872,7 +2872,7 @@ label Sarah_weekend_surprise_crisis_label():    #This code is old. It should be 
             elif sarah_epic_tits_progress() > 1:
                 the_person "I got an idea. Why don't you let me help you, you know, relieve a little tension?"
                 mc.name "I'm not honestly that tense right now..."
-                if the_person.outfit.tits_available():
+                if the_person.tits_available():
                     "[the_person.title] begins to grope her own tits and play with her nipples."
                 else:
                     "Without prompting, [the_person.title] starts to remove her top..."
@@ -3566,7 +3566,7 @@ label Sarah_unlock_special_tit_fuck(the_person):
     $ the_person.change_arousal(20)
     the_person "I can't stop thinking about it. Can I... Can I service you with them? Please?"
     mc.name "Go ahead. I want to see if your practice has been paying off."
-    if the_person.outfit.tits_available():
+    if the_person.tits_available():
         "With her tits already out and ready to be used, she just gives you a big smile."
     else:
         if the_person.outfit.can_half_off_to_tits():

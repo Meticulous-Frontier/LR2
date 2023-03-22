@@ -4,8 +4,8 @@
 
 init -1 python:
     def requirement_both_vagina_available(the_person_one, the_person_two):
-        if the_person_one.outfit.vagina_available():
-            if the_person_two.outfit.vagina_available():
+        if the_person_one.vagina_available():
+            if the_person_two.vagina_available():
                 return True
         return False
 
@@ -15,8 +15,8 @@ init -1 python:
     def requirement_hard_both_vagina_available(the_person_one, the_person_two):
         if mc.recently_orgasmed:
             return False
-        if the_person_one.outfit.vagina_available():
-            if the_person_two.outfit.vagina_available():
+        if the_person_one.vagina_available():
+            if the_person_two.vagina_available():
                 return True
         return False
     def requirement_always_true(the_person_one, the_person_two):
@@ -38,16 +38,16 @@ init -1 python:
             return False
         if the_person_two.get_opinion_score("anal sex") < 0:
             return False
-        if the_person_one.outfit.vagina_available():
-            if the_person_two.outfit.vagina_available():
+        if the_person_one.vagina_available():
+            if the_person_two.vagina_available():
                 return True
         return False
 
     def requirement_hard_both_vagina_male_strapon(the_person_one, the_person_two):
         if mc.recently_orgasmed:
             return False
-        if the_person_one.outfit.vagina_available():
-            if the_person_two.outfit.vagina_available():
+        if the_person_one.vagina_available():
+            if the_person_two.vagina_available():
                 if perk_system.has_item_perk("Male Strapon"):
                     return True
         return False

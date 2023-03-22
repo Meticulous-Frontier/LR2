@@ -105,12 +105,12 @@ label business_meeting_seduction(the_person):
         if strip_choice:
             "After talking for a while she takes off her [strip_choice.display_name]."
             $ the_person.draw_animated_removal(strip_choice, position="sitting", emotion="default")
-            if the_person.outfit.tits_visible():
+            if the_person.tits_visible():
                 if the_person.has_taboo("bare_tits"):
                     $ mc.change_locked_clarity(10)
                     "She hesitates for a second, it seems she forgot she didn't put on a bra today, but after a second she continues without hesitation."
                     $ the_person.break_taboo("bare_tits")
-            elif not the_person.outfit.bra_covered():
+            elif not the_person.bra_covered():
                 $ mc.change_locked_clarity(5)
                 if the_person.has_taboo("underwear_nudity"):
                     "She seems nervous at first, but quickly gets used to being in her underwear in front of you."

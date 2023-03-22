@@ -787,7 +787,7 @@ label cum_fetish_sarah_intro_label():
             the_person "I'm not sure what is going on with me but... lately... I've just been craving your cum so bad..."
             "You aren't surprised, it's been a while since you started giving her the serum for increased cum enjoyment."
             the_person "I feel like I'm going crazy..."
-            if the_person.outfit.tits_available():
+            if the_person.tits_available():
                 "You check out [the_person.possessive_title]. Her delicious looking tits are on full display."
             else:
                 "You check out [the_person.possessive_title]. You decide it might be easier to get off if you have a little more skin to look at while she sucks you."

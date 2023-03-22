@@ -252,7 +252,7 @@ label breeding_fetish_employee_intro_label(the_person):
     $ the_person.draw_person(position = "missionary")
     "You force her down onto her back."
     the_person "Oh my god..."
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "You reach down and pull your cock out from your pants."
     else:
         "As you start to pull your cock out, [the_person.possessive_title] reaches down and starts pulling her clothes off."
@@ -347,7 +347,7 @@ label breeding_fetish_family_intro_label(the_person):
     mc.name "Tell you what, let's go a little farther, and if it feels wrong we can stop."
     $ the_person.add_situational_slut("situation",20, "I can stop if I want to...")
     "She nods her head in agreement."
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "You finish pulling your cock out and begin to rub it along her slit."
     else:
         "As you finish pulling your cock out, [the_person.possessive_title] reaches down and starts pulling her bottoms off."
@@ -436,7 +436,7 @@ label breeding_fetish_generic_intro_label(the_person): #This function to be used
     $ the_person.draw_person(position = "missionary")
     mc.name "That's what you want, isn't it? For me to pin you down and breed you, over and over, like the little slut you are."
     the_person "Oh [the_person.mc_title], I really do!"
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "You pull your cock out and begin to rub it along her inviting slit."
     else:
         "As you pull your cock out, [the_person.possessive_title] pulls her bottoms off."
@@ -757,7 +757,7 @@ label breeding_fetish_stephanie_normal_label(the_person):
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person, position = "stand4")
     "[the_person.possessive_title] stands up."
-    if not the_person.outfit.vagina_available():
+    if not the_person.vagina_available():
         "She starts to strip down."
         $ scene_manager.strip_to_vagina(person = the_person)
     "She looks at you expectantly."
@@ -831,7 +831,7 @@ label breeding_fetish_starbuck_intro_label():  #Needs TEsting
     the_person "Oh god, yes!"
     $ the_person.draw_person(position = "standing_doggy")
     "She turns around and bends over the counter, as you asked her to. You step close behind her."
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "With her pussy already out and ready to be used, you waste no time getting your pants off. When your cock springs free, you use it to smack her ass a couple times."
     else:
         "As you start to pull your cock out, [the_person.possessive_title] reaches back and starts to pull off the clothing covering her ass."
@@ -985,7 +985,7 @@ label breeding_fetish_erica_intro_label():
     mc.name "Lie down on the table, [erica.fname]."
     the_person "Oh! Oh my god..."
     $ the_person.draw_person(position = "missionary")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "You reach down and pull your cock out from your pants."
     else:
         "As you start to pull your cock out, [the_person.possessive_title] reaches down and starts pulling her bottoms off."
@@ -1109,7 +1109,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
             "You nod and hand her your phone, with it set to video mode."
         "You turn back to [the_person.possessive_title]."
         $ the_person.draw_person(position = "standing_doggy")
-        if the_person.outfit.vagina_available():
+        if the_person.vagina_available():
             "With her pussy already out and ready to be used, you waste no time getting your pants off. When your cock springs free, you use it to smack her ass a couple times."
         else:
             "As you start to pull your cock out, [the_person.possessive_title] reaches back and starts to pull off the clothing covering her ass."
@@ -1175,7 +1175,7 @@ label breeding_fetish_candace_intro_label(the_person): #This is going to be two 
         $ mc.change_locked_clarity(50)
         "[the_person.title] stands up and bends over her desk."
         the_person "You should start right now. It's okay, I'll count it as my 5 minute break."
-        if the_person.outfit.vagina_available():
+        if the_person.vagina_available():
             "With her pussy already out and ready to be used, you waste no time getting your pants off. When your cock springs free, you use it to smack her ass a couple times."
         else:
             "As you start to pull your cock out, [the_person.possessive_title] reaches back and starts to pull off the clothing covering her ass."

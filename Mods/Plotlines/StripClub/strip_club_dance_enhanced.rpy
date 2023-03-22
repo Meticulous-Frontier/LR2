@@ -107,7 +107,7 @@ label stripclub_dance_enhanced_label():
     $ the_person.change_arousal(2)
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_1
     if the_person.has_large_tits():
-        if the_person.outfit.tits_available():
+        if the_person.tits_available():
             $ mc.change_locked_clarity(15)
             "As the music builds, [title]'s dance becomes more energetic. Her [the_person.tits_description] bounce and jiggle in rhythm with her movements."
         else:
@@ -124,7 +124,7 @@ label stripclub_dance_enhanced_label():
     $ the_person.change_arousal(4)
     call stripshow_strip(the_person) from _call_stripshow_strip_dance_enhanced_3
     $ the_person.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 0.8)
-    if the_person.outfit.vagina_visible():
+    if the_person.vagina_visible():
         $ the_person.change_arousal(8)
         $ mc.change_locked_clarity(15)
         "As the song comes to an end, the dancer lowers herself to all fours, showing off her ass and pussy to the crowd."

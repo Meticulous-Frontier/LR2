@@ -910,8 +910,8 @@ init -1 python:
 
     def strip_outfit(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, display_transform = None, position = None, emotion = None, lighting = None, scene_manager = None, wipe_scene = False):
         def extra_strip_check(person, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
-            done = exclude_upper or person.outfit.tits_available()
-            if done and (exclude_lower or person.outfit.vagina_available()):
+            done = exclude_upper or person.tits_available()
+            if done and (exclude_lower or person.vagina_available()):
                 if done and (exclude_feet or person.outfit.feet_available()):
                     return False
 
@@ -939,7 +939,7 @@ init -1 python:
             strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
 
         # special case where she is wearing a two-part item that blocks her vagina, but we need it be available
-        if not exclude_lower and not self.outfit.vagina_available():
+        if not exclude_lower and not self.vagina_available():
             strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
             while not strip_choice is None:
                 if delay > 0:
@@ -1037,19 +1037,19 @@ init -1 python:
             self.change_slut(lingerie_bonus, max_modified_to = 30, add_to_log = False)
 
         # not wearing underwear only impacts sluttiness to level 40
-        if self.outfit and not (self.outfit.wearing_bra() or self.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+        if self.outfit and not (self.wearing_bra() or self.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
             underwear_bonus = 0
-            if not self.outfit.wearing_bra():
+            if not self.wearing_bra():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
-            if not self.outfit.wearing_panties():
+            if not self.wearing_panties():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
             underwear_bonus = __builtin__.int(underwear_bonus/2.0) #I believe this rounds towards 0. No big deal if it doesn't, very minor detail.
             self.change_slut(underwear_bonus, max_modified_to = 40, add_to_log = False)
 
         # showing the goods only impacts sluttiness to level 50
-        if self.outfit and self.outfit.tits_visible():
+        if self.outfit and self.tits_visible():
             self.change_slut(self.get_opinion_score("showing her tits"), max_modified_to = 50, add_to_log = False)
-        if self.outfit and self.outfit.vagina_visible():
+        if self.outfit and self.vagina_visible():
             self.change_slut(self.get_opinion_score("showing her ass"), max_modified_to = 50, add_to_log = False)
 
         # showing everything only impacts sluttiness to level 60

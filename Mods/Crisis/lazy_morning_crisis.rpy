@@ -131,7 +131,7 @@ label lazy_morning_crisis_action_label():
         the_person "God it's so hard..."
         $ mc.change_locked_clarity(30)
         "Her hand stroking your cock feels great, but soon you decide to make the pleasure mutual."
-        if the_person.outfit.tits_visible():
+        if the_person.tits_visible():
             "With one hand, you reach over and start to grope [the_person.possessive_title]'s tits. Her breath catches in her throat when you pinch one of her nipples."
         else:
             "With one hand, you reach over and grope [the_person.possessive_title]'s tits through her clothing. She sighs and you can feel her nipple harden when you pull on it."
@@ -140,7 +140,7 @@ label lazy_morning_crisis_action_label():
             $ the_person.break_taboo("touching_body")
         "When you finish with her chest, you run your hand down her stomach. It slows when you reach the top of her hips."
         if the_person.has_taboo("touching_vagina"):
-            if the_person.outfit.vagina_visible():
+            if the_person.vagina_visible():
                 if the_person.pubes_style == shaved_pubes:
                     "When your hand slides over her smooth mound, she stops you."
                 else:
@@ -154,7 +154,7 @@ label lazy_morning_crisis_action_label():
             $ the_person.break_taboo("touching_vagina")
             "You move your fingers further down along [the_person.title]'s slit."
         else:
-            if the_person.outfit.vagina_visible():
+            if the_person.vagina_visible():
                 if the_person.pubes_style == shaved_pubes:
                     "[the_person.title] arches her back when your hand reaches her smooth mound."
                 else:

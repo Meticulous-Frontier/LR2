@@ -13,7 +13,7 @@ init 3 python:
 
     def select_position(person):
         positions = ["bj"]
-        if person.outfit.vagina_available():
+        if person.vagina_available():
             positions.append("missionary")
             positions.append("wall")
             if person.get_opinion_score("anal sex") > 0 or person.sluttiness > 70:

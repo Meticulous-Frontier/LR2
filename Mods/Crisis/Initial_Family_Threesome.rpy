@@ -114,7 +114,7 @@ label SB_fetish_vaginal_family_threesome_label():
         "She presses her body against yours and sighs."
         the_person "Mmm... I can't wait for you to fuck me..."
         $ the_person.change_arousal(10)
-        if mom.outfit.vagina_available():
+        if mom.vagina_available():
             "You glance over at [mom.possessive_title]. She is watching you and [the_person.possessive_title] intently and has one hand between her legs, stroking the outer lips of her pussy."
         else:
             "You glance over and see that [mom.possessive_title] has her hand in her [the_clothing.name], playing with herself as she watches."

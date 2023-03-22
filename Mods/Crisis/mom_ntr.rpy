@@ -268,7 +268,7 @@ label mom_ntr_mod_action_label():
                         else:
                             man_name "Fuck, that's good. If I knew you are so good at sucking cock, I would've shoved mine in your throat a long time ago."
                             "[the_person.possessive_title] keeps sucking [man_name], making him groan with pleasure. She also seems to get aroused a little."
-                        if the_person.outfit.vagina_available():
+                        if the_person.vagina_available():
                             man_name "You're a great cocksucker, [the_person.fname]! Let's find out if you are any good with other stuff. Get on the bed and show me that fat ass."
                             $ the_person.draw_person(position = "doggy")
                             "[the_person.possessive_title] has lost all will to resist [man_name]'s orders. She gets on the bed, displaying her ass in front of him."
@@ -622,7 +622,7 @@ label mom_ntr_mod_action_label():
                     "They are both undressed, and you can clearly see where this is going."
                     the_person "Well, I think we are both ready for action. So, let's do it!"
                     menu:
-                        "[the_person.possessive_title] lays on the bed..." if the_person.outfit.vagina_available():
+                        "[the_person.possessive_title] lays on the bed..." if the_person.vagina_available():
                             $ the_person.draw_person(position = "missionary", emotion = "happy")
                             "You watch as [the_person.possessive_title] lays on her bed and spreads her legs, inviting [man_name] to enter her."
                             the_person "Oh, [man_name], how about take do me the old-fashioned way?"
@@ -933,7 +933,7 @@ label mom_ntr_mod_action_label():
                                         "Screams go on long into the night..."
                                     else:
                                         "You go back to your bedroom and while drifting to sleep you hear quiet moans from [the_person.possessive_title]'s room."
-                        "[the_person.possessive_title] poses next to bed..." if the_person.outfit.vagina_available():
+                        "[the_person.possessive_title] poses next to bed..." if the_person.vagina_available():
                             $ the_person.draw_person(position = "standing_doggy")
                             "You see as [the_person.possessive_title] turns back and poses on her bed spreading her legs, inviting [man_name] to enter her from behind."
                             the_person "All the evening you seemed to be interested in my ass."
@@ -1540,7 +1540,7 @@ label mom_ntr_mod_action_label():
                     if not mom_clothing is None:
                         the_person "Ooooh, [man_name2], you are really turning me on with your touches."
                         $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
-                        if the_person.outfit.vagina_available():
+                        if the_person.vagina_available():
                             "[man_name] takes off her [mom_clothing.name], while [man_name2] plays with her open pussy."
                         else:
                             "[man_name] takes off her [mom_clothing.name], while [man_name2] and [the_person.possessive_title] kiss passionately."
@@ -1549,7 +1549,7 @@ label mom_ntr_mod_action_label():
                     if not mom_clothing is None:
                         the_person "I don't mind go even more naked, guys. Who would like to take my [mom_clothing.name] off?"
                         $ the_person.draw_animated_removal (mom_clothing, position = "kissing")
-                        if the_person.outfit.vagina_available():
+                        if the_person.vagina_available():
                             "[man_name2] grants her wish, while [man_name] fingers her open pussy."
                         else:
                             "[man_name2] grants her wish, while [the_person.possessive_title] caresses [man_name2]'s crotch."
@@ -1558,7 +1558,7 @@ label mom_ntr_mod_action_label():
                 "Now with all of them pretty naked, you clearly see where it will go."
                 the_person "Oh, guys, I feel so horny around you. Let's have some fun!"
                 menu:
-                    "[the_person.title] lays on the table..." if the_person.outfit.vagina_available():
+                    "[the_person.title] lays on the table..." if the_person.vagina_available():
                         $ the_person.draw_person(position = "missionary", emotion = "happy")
                         "You see as [the_person.possessive_title] lays on her table and spreads her legs, smiling broadly."
                         the_person "Alright, who's wanna be the first to bang your colleague?"
@@ -1901,7 +1901,7 @@ label mom_ntr_mod_action_label():
                                 the_person "Didn't that event paid off, dear?"
                                 the_person "Now go to the bathroom, guys. I will join you shortly."
                                 "You go back to your bedroom accompanied by shower sounds from [the_person.possessive_title]'s room."
-                    "[the_person.title] shows on the bed..." if the_person.outfit.vagina_available() and (the_person.sluttiness > 70 or the_person.get_opinion_score("anal sex") > 0):
+                    "[the_person.title] shows on the bed..." if the_person.vagina_available() and (the_person.sluttiness > 70 or the_person.get_opinion_score("anal sex") > 0):
                         the_person "Alright, I have an idea of how we all can have fun. Please, [man_name], lie on the bed."
                         "The man does so. From where you stand you can see how hard he is."
                         $ the_person.draw_person(position = "doggy")

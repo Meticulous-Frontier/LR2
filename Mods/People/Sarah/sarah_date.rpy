@@ -112,7 +112,7 @@ label sarah_bar_date_label(the_person):
                 elif sarah_epic_tits_progress() > 1:
                     the_person "I got an idea. Why don't you let me help you, you know, relieve a little tension?"
                     mc.name "I'm not honestly that tense right now..."
-                    if the_person.outfit.tits_available():
+                    if the_person.tits_available():
                         "[the_person.title] begins to grope her own tits and play with her nipples."
                     else:
                         "Without prompting, [the_person.title] starts to remove her top..."

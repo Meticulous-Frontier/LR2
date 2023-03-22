@@ -2,7 +2,7 @@ init 5 python:
     config.label_overrides["demand_strip_naked_label"] = "demand_strip_naked_label_enhanced"
 
     def demand_strip_naked_requirement_enhanced(the_person):
-        if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
+        if the_person.tits_visible() and the_person.vagina_visible():
             return False
         if the_person.obedience < 150:
             return "Requires: 150 Obedience"

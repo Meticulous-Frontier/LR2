@@ -15,7 +15,7 @@ init 5 python:
     def horny_at_work_strip_down(person):
         for clothing in person.outfit.get_half_off_to_vagina_list():
             scene_manager.draw_animated_removal(person, clothing, half_off_instead = True)
-            if person.outfit.vagina_available():
+            if person.vagina_available():
                 renpy.say(None,"You pull her " + clothing.display_name + " out of the way so you can get to her pussy.")
             else:
                 renpy.say(None,"You pull her " + clothing.display_name + " out of the way.")
@@ -571,25 +571,25 @@ label horny_at_work_crisis_enhanced_label():
 
                             else: #We need to strip her down completely. TODO: We need a way to determine if we can strip someone half down, then pull things aside (ie. pull off pants, pull panties to the side)
                                 $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True) #Start by stripping off her bottom.
-                                while (the_item and not the_person.outfit.vagina_available()):
+                                while (the_item and not the_person.vagina_available()):
                                     $ scene_manager.draw_animated_removal(the_person, the_item)
-                                    if the_person.outfit.vagina_available():
+                                    if the_person.vagina_available():
                                         "You pull off her [the_item.name] and reveal her pussy, ready for you to use."
                                     else:
                                         "You pull off her [the_item.name], getting closer to revealing her pussy for you to use."
                                     $ the_item = the_person.outfit.remove_random_lower(top_layer_first = True, do_not_remove = True)
 
                                 $ the_item = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove= True) #If that fails we need to strip off her top, because she might have a dress style thing on blocking it.
-                                while (the_item and not the_person.outfit.vagina_available()):
+                                while (the_item and not the_person.vagina_available()):
                                     $ scene_manager.draw_animated_removal(the_person, the_item)
-                                    if the_person.outfit.vagina_available():
+                                    if the_person.vagina_available():
                                         "You pull off her [the_item.name] and reveal her pussy, ready for you to use."
                                     else:
                                         "You pull off her [the_item.name], getting closer to revealing her pussy for you to use."
                                     $ the_item = the_person.outfit.remove_random_any(top_layer_first = True, exclude_feet = True, do_not_remove= True)
 
                                 $ the_item = None
-                            if the_person.outfit.vagina_available():
+                            if the_person.vagina_available():
                                 $ mc.change_locked_clarity(20)
                                 "You unzip your pants and pull out your hard cock, laying it onto [the_person.title]'s crotch. You rub the shaft against her pussy lips, teasing her with the tip each time."
                                 call condom_ask(the_person) from _call_condom_ask_horny_at_work_enhanced

@@ -435,7 +435,7 @@ label erica_phase_one_label(the_person):
         "With a grunt, you begin your reps. The weight is tough, but you get through your reps without help. When you finish you slowly stand up and turn to her."
         $ the_person.draw_person( position = "stand4")
         $ mc.change_locked_clarity(20)
-        if the_person.outfit.tits_available():
+        if the_person.tits_available():
             "[the_person.title] has a little more color in her cheeks than she did a minute ago. You also notice her nipples are a little more prominent."
         else:
             "[the_person.title] has a little more color in her cheeks than she did a minute ago, and it looks like her nipples are poking out a little bit against the fabric containing them."
@@ -972,7 +972,7 @@ label erica_post_race_fwb_label(the_person):
     $ the_person.change_to_bedroom()
     $ the_person.draw_person(position = "missionary")
     "You throw her down on her bed."
-    if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
+    if the_person.vagina_available() and the_person.tits_available():
         "You stop for a second and admire [the_person.title], her body on display in front of you."
         $ the_person.change_arousal(20)
         "You notice some moisture building around her slit. She is definitely enjoying your hungry eyes roaming her body."
@@ -1035,7 +1035,7 @@ label erica_post_race_love_label(the_person):
     $ the_person.change_to_bedroom()
     $ the_person.draw_person(position = "missionary")
     "You throw her down on her bed."
-    if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
+    if the_person.vagina_available() and the_person.tits_available():
         "You stop for a second and admire [the_person.title], her tight body on display in front of you."
         $ the_person.change_arousal(20)
         "You notice some moisture building around her slit. She is definitely enjoying your hungry eyes roaming her body."
@@ -1209,7 +1209,7 @@ label erica_house_call_label(the_person):
     $ the_person.change_to_bedroom()
     $ the_person.draw_person(position = "missionary")
     "You throw her down on her bed."
-    if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
+    if the_person.vagina_available() and the_person.tits_available():
         "You stop for a second and admire [the_person.title], her body on display in front of you."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(20)
@@ -1398,7 +1398,7 @@ label erica_breeding_fetish_team_crisis_label():
     the_person "Stop talking anyway... yeah..."
     "As you step toward [the_person.possessive_title], she lays back on your bed."
     $ the_person.draw_person(position = "missionary", emotion = "happy")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "When she spreads her legs, the aroused folds of [the_person.possessive_title] lay open and exposed to you."
         $ mc.change_locked_clarity(50)
     else:

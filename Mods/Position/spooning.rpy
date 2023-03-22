@@ -44,7 +44,7 @@ label scene_spooning_1(the_girl, the_location, the_object):
     "With her legs closed and on her side like this, her pussy feels really tight. You can feel her gripping you every time you start to pull it out."
     "Your reach around her with your hand and grab one of her tits. You start to get a little rough with her and pinch and pull at one of her nipples."
     if the_girl.has_large_tits() :
-        if the_girl.outfit.tits_available():
+        if the_girl.tits_available():
             the_girl "Oh god, handle with care [the_girl.mc_title]..."
             "[the_girl.possessive_title]'s hot and ample tit flesh feels great in your hand."
             "You enjoy the squishy weight of her breasts for a few moments, then shift your focus back to fucking her."
@@ -54,7 +54,7 @@ label scene_spooning_1(the_girl, the_location, the_object):
             $ top_clothing = None
             the_girl "Mmm, you should just pull that out of the way. I want you to be able to grab them and squeeze them."
     else:
-        if the_girl.outfit.tits_available():
+        if the_girl.tits_available():
             "[the_girl.possessive_title]'s cute [the_girl.tits_description] feel firm and hot in your hand."
             the_girl "Oh! Mmm, gentle with me [the_girl.mc_title]."
             "You rub her nipple for a moment and feel it get hard, then move to her other breast and do the same."

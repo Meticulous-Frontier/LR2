@@ -296,7 +296,7 @@ label cuckold_employee_decision_label():
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_visible():
         "She spreads her legs, her pussy on display in front of you."
     else:
         if the_person.outfit.can_half_off_to_vagina():
@@ -397,7 +397,7 @@ label cuckold_employee_rethink_decision_label():
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_visible():
         "She spreads her legs, her pussy on display in front of you."
     else:
         if the_person.outfit.can_half_off_to_vagina():
@@ -492,7 +492,7 @@ label cuckold_employee_breeding_session_label(the_person):
     the_person "Oh god, it's so hot when you talk to me like that."
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_visible():
         $ mc.change_arousal(5)
         $ the_person.change_arousal(5)
         "She spreads her legs, her pussy on display in front of you."

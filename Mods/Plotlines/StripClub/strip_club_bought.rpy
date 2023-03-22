@@ -154,7 +154,7 @@ label strip_club_evaluate_stripper(the_person):
     $ the_person.draw_person(position = "back_peek")
     "She spins and poses for you, and you can easily imagine a crowd responding with whoops and cheers."
     if the_person.has_large_tits():
-        if the_person.outfit.tits_available():
+        if the_person.tits_available():
             "As the music builds, [the_person.title]'s dance becomes more energetic. Her [the_person.tits_description] bounce and jiggle in rhythm with her movements."
         else:
             "As the music builds, [the_person.title]'s dance becomes more energetic. Her big tits bounce and jiggle, looking almost desperate to escape her clothing."
@@ -163,7 +163,7 @@ label strip_club_evaluate_stripper(the_person):
     $ the_person.draw_person(position = get_random_from_list(cousin_strip_pose_list), the_animation = blowjob_bob, animation_effect_strength = 1.5)
     "Her music hits its crescendo and her dancing does the same. [the_person.title] holds onto the pole in the middle of the stage and spins herself around it."
     $ the_person.draw_person(position = "doggy", the_animation = ass_bob, animation_effect_strength = 1.5)
-    if the_person.outfit.vagina_visible():
+    if the_person.vagina_visible():
         "As the song comes to an end, the dancer lowers herself to all fours, showing off her ass and pussy."
     else:
         "As the song comes to an end, the dancer lowers herself to all fours. She spreads her legs and works her hips, jiggling her ass for your amusement."

@@ -116,7 +116,7 @@ label scene_standing_oral_1(the_girl, the_location, the_object):
     else:
         "You use your tongue on [the_girl.possessive_title]. On your knees in front of her, you look up and admire her shapely body and chest."
         "[the_girl.possessive_title] rests one hand on your shoulder."
-    if the_girl.outfit.tits_available():# TODO: put in not heart pasties? How do I do that?
+    if the_girl.tits_available():# TODO: put in not heart pasties? How do I do that?
         if the_girl.get_opinion_score("being submissive") > 0:
             "[the_girl.possessive_title] reaches up and pinches one of her nipples hard, wincing from excitement and pain. She then proceeds to tweak and roll it between her fingers."
             $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive") + 1)

@@ -28,7 +28,7 @@ label intro_SB_anal_cowgirl(the_girl, the_location, the_object):
     "You lie down on the [the_object.name] and undo your pants."
     "[the_girl.possessive_title] swings a leg over your body and straddles you."
     the_girl "I'm gonna put it in my ass. Let's get you lubed up first though..."
-    if the_girl.outfit.vagina_visible():
+    if the_girl.vagina_visible():
         "She leans back and grinds herself against you. The shaft of your cock rubs against the lips of her pussy."
     else:
         $ blocking_item = the_girl.outfit.get_lower_visible()[0]
@@ -78,7 +78,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
     "[the_girl.possessive_title] speeds up, working her thighs to pump herself up and down your cock."
     "Her ass makes a few lewd squelching noises from her aggressive fucking. Her buttery smooth puckered hole strokes your erection with every pump."
     if the_girl.has_large_tits():
-        if the_girl.outfit.tits_visible():
+        if the_girl.tits_visible():
             "Her large, unconstrained [the_girl.tits_description] bounce up and down with each stroke."
             the_girl "Fuck, hold onto these!"
             "[the_girl.possessive_title] reaches down and grabs your hands. She brings them up to her tits and plants them there."
@@ -108,7 +108,7 @@ label scene_SB_anal_cowgirl_2(the_girl, the_location, the_object):
                     return
 
     else:
-        if the_girl.outfit.tits_visible():
+        if the_girl.tits_visible():
             "She reaches up and grabs onto one of her own [the_girl.tits_description], squeezing it while she rides you."
             the_girl "Ah!"
             "You decide to get in on the action. You reach up and grab her other breast."

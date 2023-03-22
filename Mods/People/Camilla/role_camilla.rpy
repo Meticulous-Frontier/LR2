@@ -515,7 +515,7 @@ label camilla_take_pics_label(the_person):  #Not the first time.
             the_person "Oh my god... that was amazing. You always make me feel so good."
 
     else:
-        if the_person.effective_sluttiness() > 30 and not the_person.outfit.tits_available():
+        if the_person.effective_sluttiness() > 30 and not the_person.tits_available():
             "[the_person.possessive_title] steps back suddenly."
             the_person "Let me just get this off... Papi loves it when I have my tits out for this..."
             "She hands you her phone with the camera app out. You snap some pictures as she starts to strip."
@@ -597,7 +597,7 @@ label camilla_bathroom_blowjob_label(the_person):
     the_person "Exactly!"
     "She hands you her phone with the camera app up."
     $ the_person.draw_person(position = "stand3")
-    if not the_person.outfit.tits_available():    #If covered up, have her take her top off
+    if not the_person.tits_available():    #If covered up, have her take her top off
         the_person "Here I go... don't forget to take pictures!"
         $ the_clothing = the_person.outfit.get_upper_top_layer()
         "[the_person.possessive_title] takes off her [the_clothing.name]."
@@ -747,7 +747,7 @@ label camilla_dancing_sex_label(the_person):
         "You grab her and pick her up. Her legs wrap around you."
         the_person "Oh god... I can't believe I'm doing this... but I need it so bad!"
         "You take her over to the bathroom sinks and set her on the edge of it. You start to strip her clothes off."
-        if the_person.outfit.vagina_visible():
+        if the_person.vagina_visible():
             "You stop for a second and admire [the_person.title]'s [the_person.pubes_description] little slit glistening in the florescent lights."
         else:
             "You quickly remove [the_person.title]'s clothes blocking the way to your prize."

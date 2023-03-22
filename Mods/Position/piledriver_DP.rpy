@@ -109,7 +109,7 @@ label scene_piledriver_DP_1(the_girl, the_location, the_object):
                 "She gives a small frown."
                 the_girl "I would rather we keep things personal... just between me and you."
 
-        "Pinch her nipples" if the_girl.outfit.tits_available():
+        "Pinch her nipples" if the_girl.tits_available():
             "While she holds her own ankles, you decide to take advantage and play with her tits."
             "You grab both her nipples and pinch and twist them."
             the_girl "Gah! God you know just how to mix pleasure with pain, don't you?"
@@ -141,7 +141,7 @@ label scene_piledriver_DP_2(the_girl, the_location, the_object):
             "She almost has time to protest, but then you slam them both deep with one forceful thrust."
             the_girl "AH! Oh fuck me!"
             "You give her slow but forceful thrusts."
-            if the_girl.outfit.tits_available():
+            if the_girl.tits_available():
                 "[the_girl.possessive_title]'s tits jiggle enticingly with every thrust. Shock waves erupting from her crotch arc through her entire body."
             else:
                 "Shock waves erupting from her crotch arc through her entire body."

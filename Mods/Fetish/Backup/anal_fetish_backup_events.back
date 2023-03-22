@@ -428,7 +428,7 @@
 #         the_person "You have NO idea how glad I am to hear that."
 #         "[the_person.possessive_title] stands up."
 #         $ scene_manager.update_actor(the_person, position = "stand4")
-#         if the_person.outfit.tits_available() and the_person.outfit.vagina_available():
+#         if the_person.tits_available() and the_person.vagina_available():
 #             pass
 #         else:
 #             "She starts to strip down."
@@ -478,7 +478,7 @@
 #         the_person "You have NO idea how glad I am to hear that."
 #         "[the_person.possessive_title] stands up."
 #         $ scene_manager.update_actor(the_person, position = "stand4")
-#         if the_person.outfit.tits_available() and the_person.outfit.vagina_available():
+#         if the_person.tits_available() and the_person.vagina_available():
 #             pass
 #         else:
 #             "She starts to strip down."

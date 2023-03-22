@@ -145,7 +145,7 @@ label scene_bent_over_breeding_1(the_girl, the_location, the_object):
 
 label scene_bent_over_breeding_2(the_girl, the_location, the_object):
     "You take a breather, and then slowly start bringing the pace back up a bit."
-    if the_girl.outfit.tits_available():
+    if the_girl.tits_available():
         "You reach around her body with one hand and grasp her tit. You pinch and pull at her nipple roughly as you fuck her saturated slit."
     else:
         "You run your hands along her hips. You grab her hips and smack her ass roughly as you fuck her saturated slit."

@@ -2,7 +2,7 @@ init 5 python:
     config.label_overrides["demand_strip_tits_label"] = "demand_strip_tits_label_enhanced"
 
     def demand_strip_tits_requirement(the_person):
-        if the_person.outfit.tits_visible():
+        if the_person.tits_visible():
             return False #Can't strip if they're already visible
         if the_person.obedience < 140:
             return "Requires: 140 Obedience"
