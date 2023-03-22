@@ -65,7 +65,7 @@ label slave_attention_crisis_action_label():
 
                     $ mc.change_stats(arousal = 20, energy = -20)
 
-                    if the_person.arousal >= 100:
+                    if the_person.arousal_perc >= 100:
                         the_person "Oh my god, I'm cumming... Aaargh... YES... please [the_person.mc_title], continue abusing my body..."
                         $ the_person.have_orgasm(half_arousal = True, the_position = "against_wall")
 

@@ -146,7 +146,7 @@ label crisis_nighttime_attaboy_label():
         return
 
     if the_person.arousal < 60:
-        $the_person.arousal = 60
+        $ the_person.arousal = 60
 
     $ text_1 = get_attaboy_string_1(attaboy_record, the_person)
     $ text_2 = get_attaboy_string_2(attaboy_record, the_person)

@@ -68,19 +68,19 @@ label Sarah_greetings(the_person):
     return
 
 label Sarah_sex_responses(the_person):
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Oh fuck, I love that rush when you first get started."
         else:
             the_person "Oh... [the_person.mc_title] that feels really good..."
 
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Mmm, keep going [the_person.mc_title]. You are getting me so hot."
         else:
             the_person "That... That feels great [the_person.mc_title]!"
 
-    elif the_person.arousal < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             if the_person.event_triggers_dict.get("dating_path", False) == True:
                 the_person "Oh god, I'm your dirty little slut [the_person.mc_title]! It feels so good!"
@@ -632,19 +632,19 @@ label Sarah_talk_busy(the_person):
 
 label Sarah_sex_strip(the_person):
     if the_person.sluttiness < 20:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "One sec, I want to take something off."
         else:
             the_person "Ah, I'm wearing way too much right now. One sec!"
 
     elif the_person.sluttiness < 60:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "Why do I bother wearing all this?"
         else:
             the_person "Wait, I want to get a little more naked for you."
 
     else:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "Give me a second, I'm going to strip something off just. For. You."
         else:
             the_person "Ugh, let me get this off. I want to feel you pressed against every inch of me!"
@@ -775,24 +775,24 @@ label Sarah_date_seduction(the_person):
 label Sarah_sex_end_early(the_person):
     if the_person.sluttiness > 50:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "You're really done? Fuck [the_person.mc_title], I'm still so horny..."
             else:
                 the_person "That's all you wanted? I was prepared to do so much more to you..."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Fuck, I'm so horny... you're sure you're finished?"
             else:
                 the_person "That was a little bit of fun, I suppose."
 
     else:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "[the_person.mc_title], you got me so turned on..."
             else:
                 the_person "I hope you had a good time."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Oh god, that was intense..."
             else:
                 the_person "Done? Good, nice and quick."
@@ -800,7 +800,7 @@ label Sarah_sex_end_early(the_person):
 
 
 label Sarah_sex_take_control (the_person):
-    if the_person.arousal > 60:
+    if the_person.arousal_perc > 60:
         the_person "Ha! That's funny. Get back here, I'm almost done!"
     else:
         the_person "You wish! I'm not done with you yet."

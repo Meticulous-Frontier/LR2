@@ -688,13 +688,13 @@ label ellie_stephanie_tester_anal_finger_label(the_person):
     mc.name "Alright, here we go."
     "You spit onto your fingers and get the lubed up, then lean forward and spit onto her puckered hole."
     "Carefully, you start to push a finger into her back door."
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         "You go nice and slow, working your finger in and out. She gasps as she tries to get used to the sensations."
         mc.name "Force yourself to relax your muscles. Just receive, and this will feel incredible."
         the_person "Ah, I think I can do that..."
         "With a bit more pressure, you are able to push your finger all the way inside of her asshole."
         $ mc.change_locked_clarity(20)
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         "Another round of spit, and you are able to push your finger all the way inside her puckered asshole."
         "She moans when you get it all the way, willing herself to relax under your touch."
         "A bit of her arousal is starting to leak from her cunt."
@@ -703,27 +703,27 @@ label ellie_stephanie_tester_anal_finger_label(the_person):
         "Your finger slides in with some effort. Her pussy lips are swollen with arousal, and some of her juices are running down between her legs."
         "When you pull your finger out, you can easily rub your finger in some and then slide your finger back inside of her asshole easily."
         $ mc.change_locked_clarity(20)
-    if the_person.arousal >= 40:
+    if the_person.arousal_perc >= 40:
         "You can tell her body is ready for another finger, so you quickly spit on your middle finger and then on your next stroke, you start to push them both inside her."
         "Her back arches when she feels the larger intrusion into her forbidden hole."
-    if the_person.arousal >= 80:
+    if the_person.arousal_perc >= 80:
         the_person "Oh fuck, that feels so good! I can't believe it!"
         "[the_person.title] is really worked up. Without thinking, you reach with your other hand and stroke her clit with your thumb."
         the_person "Oh! Oh fuck..."
         $ mc.change_locked_clarity(20)
-    if the_person.arousal >= 100:
+    if the_person.arousal_perc >= 100:
         the_person "[the_person.mc_title]! Oh my god I'm... I'm gonna cum!"
         "Wow, she must have been really pent up! She is getting ready to orgasm already!"
         $ mc.change_locked_clarity(30)
 
-    if the_person.arousal < 20:
+    if the_person.arousal_perc < 20:
         the_person "Ah... go slow please... I need to warm up a bit."
         "You follow her request. You take it nice and slow, exploring her insides with one finger."
         the_person "Mmm yeah... that's it..."
         "She closes her eyes and concentrates on her feelings as her body gets aroused."
         $ the_person.change_arousal (20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 40:
+    if the_person.arousal_perc < 40:
         the_person "That's starting to feel so good... keep going..."
         "Her body is definitely responding to your intimate touches. Her cheeks are getting red and her breathing is getting deeper."
         "You finger is sliding in and out of her puckered hole easily now. You decide it is time for another finger."
@@ -732,21 +732,21 @@ label ellie_stephanie_tester_anal_finger_label(the_person):
         "Her back arches when she feels the larger intrusion into her forbidden hole."
         $ the_person.change_arousal (20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 60:
+    if the_person.arousal_perc < 60:
         the_person "Ahhh... Mmmm..."
         "[the_person.possessive_title] is trying to stifle her moans as they begin to grow more eager."
         "She looks up at you, and when your eyes meet, she can't stifle them anymore."
         the_person "Ahh! Oh [the_person.mc_title], that feels really good!"
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(20)
-    if the_person.arousal < 80:
+    if the_person.arousal_perc < 80:
         the_person "Yes! Oh yes! It feels so good!"
         "[the_person.title] isn't trying to stifle her moans any more. She is actively encouraging you to keep going."
         "You reach down with your free hand and run your thumb over her exposed clit. Her hips twitch when you make contact."
         the_person "Ohhh fuck... that is so good..."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(30)
-    if the_person.arousal < 100:
+    if the_person.arousal_perc < 100:
         "[the_person.possessive_title] moans and writhes beneath your skillful hands. She is moaning non stop now."
         the_person "Yes! Oh fuck yes... I'm so close..."
         "Her words and her breathing show you just how close she is. You can tell she is in the final stretch."
@@ -783,11 +783,11 @@ label ellie_stephanie_tester_anal_sex_label(the_person):
         mc.name "Don't worry, this might be the first time, but it won't be the last time. You're going to learn to love it."
         the_person "I think I already do..."
         $ the_person.break_taboo("anal_sex")
-    if the_person.arousal < 25:
+    if the_person.arousal_perc < 25:
         "You push forward with a slow and steady pressure. Her body resists your penetration a bit as you start."
         "You hold onto her ankles and push yourself in. She gasps as the tip of your cock slips into her ass."
         "[the_person.title] grunts and gasps as you push deeper and deeper. When you finally bottom out, you hold still, giving her time to adjust to your size."
-    elif the_person.arousal < 50:
+    elif the_person.arousal_perc < 50:
         "[the_person.possessive_title]'s ass takes a few seconds to penetrate, but you are able to slide in with minimal resistance."
         "You hold her ankles and just enjoy the sensation of having your cock sheathed in her smooth, tight back door."
     else:
@@ -797,7 +797,7 @@ label ellie_stephanie_tester_anal_sex_label(the_person):
         "You can feel her body twitch now and then as adjusts to your size and gets ready to get her ass fucked raw."
     $ mc.change_locked_clarity(50)
 
-    if the_person.arousal >= 100:
+    if the_person.arousal_perc >= 100:
         "As you start to move your hips, [the_person.title] gasps and immediately begins to cry out."
         the_person "Oh fuck! [the_person.mc_title] I'm sorry, I'm... I'm gonna cum!"
         "Wow, she must have been really pent up! She is getting ready to orgasm already!"
@@ -805,7 +805,7 @@ label ellie_stephanie_tester_anal_sex_label(the_person):
         $ mc.change_locked_clarity(50)
         $ mc.change_arousal(20)
 
-    if the_person.arousal < 20:
+    if the_person.arousal_perc < 20:
         the_person "Oh god you did it... it's all the way in!"
         mc.name "It is. And doesn't it feel amazing?"
         the_person "It does... it feels so... OH!"
@@ -817,7 +817,7 @@ label ellie_stephanie_tester_anal_sex_label(the_person):
         $ the_person.change_arousal (20)
         $ mc.change_locked_clarity(50)
         $ mc.change_arousal(20)
-    if the_person.arousal < 40:
+    if the_person.arousal_perc < 40:
         the_person "It's so good... I can't believe how good this is!"
         "Her body is starting to tremble. The intense sensations of getting her puckered hole stuffed are driving her arousal higher."
         "You let go of her ankles and grab her hips. You go slow, but use the leverage to fuck her hard, with loud slaps as your hips come together."
@@ -825,7 +825,7 @@ label ellie_stephanie_tester_anal_sex_label(the_person):
         $ the_person.change_arousal (20)
         $ mc.change_locked_clarity(50)
         $ mc.change_arousal(20)
-    if the_person.arousal < 60:
+    if the_person.arousal_perc < 60:
         the_person "Ahhh... [the_person.mc_title]! Oh god!"
         "[the_person.possessive_title] is eagerly calling out to you as fuck her tight back door."
         "She looks up at you and your eyes meet, she can't stifle them anymore."
@@ -834,12 +834,12 @@ label ellie_stephanie_tester_anal_sex_label(the_person):
         $ the_person.change_arousal (20)
         $ mc.change_locked_clarity(50)
         $ mc.change_arousal(20)
-    if the_person.arousal < 80:
+    if the_person.arousal_perc < 80:
         the_person "Yes! Oh yes! It feels so good! Ohh!"
         "[the_person.title]'s moans are turning into whimpers as you sodomize her roughly."
         $ the_person.change_arousal(20)
         $ mc.change_locked_clarity(30)
-    if the_person.arousal < 100:
+    if the_person.arousal_perc < 100:
         "[the_person.possessive_title] moans and writhes beneath you. She is moaning and whimpering non stop now."
         the_person "Yes! My poor little ass... I'm... I'm so close!"
         "Her eyes are starting to glaze over. Her ass cheeks clap loudly as you butt fuck her with wild abandon."

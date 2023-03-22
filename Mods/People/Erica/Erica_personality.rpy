@@ -354,7 +354,7 @@ label erica_hookup_accept(the_person):
     "You decide to go with it. You flatten your tongue out and begin to move it across her clitoris in long strokes."
     "She grinds herself happily against your face. She moans appreciatively at your skilled oral stimulation."
     $ the_person.change_arousal( 15 + (mc.sex_skills["Oral"] * 2)) #65 + 6
-    if the_person.arousal > 100: #She is surprised how fast you make her cum
+    if the_person.arousal_perc > 100: #She is surprised how fast you make her cum
         "Suddenly, you feel her body go stiff and her moans ramp up quickly."
         the_person "Fuck! I'm gonna... you're gonna make me...!"
         $ mc.change_locked_clarity(20)
@@ -366,7 +366,7 @@ label erica_hookup_accept(the_person):
         "[the_person.title]'s hand leaves the back of your head but you keep going. You lightly suck on her clit, drawing it into your mouth a few seconds at a time before licking it again."
         "Her body is responding. Her hips are starting to twitch back and forth on their own as she approaches an orgasm."
         $ the_person.change_arousal( 15 + (mc.sex_skills["Oral"] * 2)) #80 + 8
-        if the_person.arousal > 100: #She orgasms
+        if the_person.arousal_perc > 100: #She orgasms
             $ mc.change_locked_clarity(20)
             the_person "Yes! That's it! I'm gonna cum!"
             $ the_person.have_orgasm()
@@ -426,7 +426,7 @@ label erica_hookup_accept(the_person):
     if mc.condom:
         "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
         $ the_person.change_arousal(20) #90 + 8
-        if the_person.arousal > 100:
+        if the_person.arousal_perc > 100:
             $ the_person.have_orgasm()
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
         "After the stimulation from her blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
@@ -478,7 +478,7 @@ label erica_hookup_accept(the_person):
         "With every thrust, her ass ripples pleasantly. You give her cheek an open handed spank and watch as shockwaves expand from the epicenter."
         "[the_person.title] moans at your rough treatment."
         $ the_person.change_arousal(20) #70 + 8
-        if the_person.arousal > 100:
+        if the_person.arousal_perc > 100:
             $ the_person.have_orgasm()
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. Her silky wetness contracting around you feels amazing."
 
@@ -492,7 +492,7 @@ label erica_hookup_accept(the_person):
         $ mc.change_locked_clarity(30)
         "You give [the_person.possessive_title]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
         $ the_person.change_arousal(20)#90 + 8
-        if the_person.arousal > 120:
+        if the_person.arousal_perc > 120:
             the_person "OH! It's so good... fuck I'm gonna cum again!!!"
             "You get the now familiar feeling of [the_person.title] cumming around your cock, but this time you can also feel the waves around your finger."
             "You wonder what it would feel like to make her cum again, but with your cock in her ass instead..."

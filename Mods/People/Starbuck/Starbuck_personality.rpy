@@ -278,19 +278,19 @@ label starbuck_cum_vagina(the_person):
 
 label starbuck_sex_strip(the_person):
     if the_person.sluttiness < 20:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "One sec, I want to take something off."
         else:
             the_person "Ah, I'm wearing way too much right now. One sec!"
 
     elif the_person.sluttiness < 60:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "Why do I bother wearing all this?"
         else:
             the_person "Wait, I want to get a little more naked for you."
 
     else:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "Give me a second, I'm going to strip something off just. For. You."
         else:
             the_person "Ugh let me get this off. I want to feel your skin pressed up against me!"

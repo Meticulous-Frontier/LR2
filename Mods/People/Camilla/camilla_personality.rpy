@@ -406,7 +406,7 @@ label camilla_hookup_accept(the_person):
     the_person "Mmm, that's the spot..."
     "[the_person.title] gasps as you stroke her. Her body is reacting quickly to your fingers."
     $ the_person.change_arousal( 15 + (mc.sex_skills["Foreplay"] * 2)) #65 + 6
-    if the_person.arousal > 100: #She is surprised how fast you make her cum
+    if the_person.arousal_perc > 100: #She is surprised how fast you make her cum
         "Suddenly, you feel her body go stiff and her moans ramp up quickly."
         the_person "Fuck! I'm gonna... you're gonna make me...!"
         $ the_person.have_orgasm()
@@ -417,7 +417,7 @@ label camilla_hookup_accept(the_person):
         "[the_person.title]'s hand on the back of your head guides your face down to one of her breasts. You like and suck at her nipples as you continue to finger her."
         "Her body is responding. Her hips are starting to twitch back and forth on their own as she approaches an orgasm."
         $ the_person.change_arousal( 15 + (mc.sex_skills["Foreplay"] * 2)) #80 + 8
-        if the_person.arousal > 100: #She orgasms
+        if the_person.arousal_perc > 100: #She orgasms
             the_person "Yes! That's it! I'm gonna cum!"
             $ the_person.have_orgasm()
             "[the_person.title] convulses as she orgasms. She moans and runs her hands through your hair."
@@ -478,7 +478,7 @@ label camilla_hookup_accept(the_person):
     if mc.condom == True:
         "You grasp her ass with both hands and begin to grope her. You knead her cheeks as your hips slowly work your erection in and out of her."
         $ the_person.change_arousal(20) #90 + 8
-        if the_person.arousal > 100:
+        if the_person.arousal_perc > 100:
             $ the_person.have_orgasm()
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. You can see in the mirror that her mouth is hanging open and her eyes are closed."
         "After the stimulation from her blowjob earlier, you know you aren't going to last long. You give her ass a loud spank."
@@ -506,7 +506,7 @@ label camilla_hookup_accept(the_person):
                     mc.name "I can't pull out, even for a second!"
         "You bottom out and cum, dumping your load into the condom."
         "You wait until your orgasm has passed completely, then pull out and stand back. Your condom is bulged on the end where it is filled with your seed."
-        if the_person.arousal < 100:
+        if the_person.arousal_perc < 100:
             the_person "Wow, okay, I guess we are done?"
             $ the_person.change_stats(happiness = -5, obedience = -5)
             "She is a bit disappointed she didn't finish."
@@ -519,7 +519,7 @@ label camilla_hookup_accept(the_person):
         "With every thrust, her ass ripples pleasantly. You give her cheek an open handed spank and watch as shockwaves expand from the epicenter."
         "[the_person.title] moans at your rough treatment."
         $ the_person.change_arousal(20) #70 + 8
-        if the_person.arousal > 100:
+        if the_person.arousal_perc > 100:
             $ the_person.have_orgasm()
             "You can feel [the_person.title]'s pussy begin to spasm as she cums. Her silky wetness contracting around you feels amazing."
 
@@ -532,7 +532,7 @@ label camilla_hookup_accept(the_person):
         the_person "Ohh, yes. You can move your hips, that feels good..."
         "You give [the_person.possessive_title]'s cunt a few slow thrusts, while simultaneously fingering her other hole."
         $ the_person.change_arousal(20)#90 + 8
-        if the_person.arousal > 120:
+        if the_person.arousal_perc > 120:
             the_person "OH! It's so good... fuck I'm gonna cum again!!!"
             "You get the now familiar feeling of [the_person.title] cumming around your cock, but this time you can also feel the waves around your finger."
             $ the_person.have_orgasm()

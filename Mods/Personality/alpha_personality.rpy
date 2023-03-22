@@ -273,19 +273,19 @@ label alpha_seduction_accept_alone(the_person):
     return
 
 label alpha_sex_responses_foreplay(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm, you know just what I like, don't you?"
         else:
             the_person "Oh my... that feels very good, [the_person.mc_title]!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             "[the_person.title] closes her eyes and lets out a loud, sensual moan."
         else:
             the_person "Keep doing that [the_person.mc_title]... Wow, you're good!"
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Oh gods, that feels amazing!"
         else:
@@ -303,7 +303,7 @@ label alpha_sex_responses_foreplay(the_person):
     return
 
 label alpha_sex_responses_oral(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Oh [the_person.mc_title], you're so good to me."
         else:
@@ -311,13 +311,13 @@ label alpha_sex_responses_oral(the_person):
             "She sighs happily."
             the_person "Yes, right there!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Yes, just like that! Mmmmmh!"
         else:
             the_person "Keep doing that [the_person.mc_title], it excites me so badly!"
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Mmm, you really know how to put that tongue of yours to good use. That feels amazing!"
         else:
@@ -334,19 +334,19 @@ label alpha_sex_responses_oral(the_person):
     return
 
 label alpha_sex_responses_vaginal(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm, I love feeling you inside of me!"
         else:
             the_person "Oh lord, you're so big... Whew!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             "[the_person.title] closes her eyes and lets out a loud, sensual moan."
         else:
             the_person "Oh that feels very good, keep doing that!"
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Yes! Oh god yes, fill me!"
         else:
@@ -364,19 +364,19 @@ label alpha_sex_responses_vaginal(the_person):
     return
 
 label alpha_sex_responses_anal(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm, you feel so big when you're inside me like this."
         else:
             the_person "Be gentle, it feels like you're going to tear me in half!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Give it to me, [the_person.mc_title], give me every last inch!"
         else:
             the_person "Oh god! Owwww! Move a little slower..."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "I hope my ass isn't too tight for you, I don't want you to cum too early."
         else:
@@ -937,19 +937,19 @@ label alpha_cum_anal(the_person):
 
 label alpha_sex_strip(the_person):
     if the_person.sluttiness < 20:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "I hope you don't mind if I slip this off..."
         else:
             the_person "I'm just going to take this off for you [the_person.mc_title]..."
 
     elif the_person.sluttiness < 60:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "How about I take this off for you."
         else:
             the_person "Oh [the_person.mc_title], you make me feel even more beautiful than I am!"
             the_person "I really need to take some more off and show my perfect body."
     else:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "I'm really horny: I bet you want to see some more of me."
         else:
             the_person "I need to get this off, I want to feel your body against mine!"
@@ -1098,31 +1098,31 @@ label alpha_date_seduction(the_person):
 label alpha_sex_end_early(the_person):
     if the_person.sluttiness > 50:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Is that it? You think you can drive me crazy [the_person.mc_title], well I'm really horny..."
             else:
                 the_person "All done? I was expecting a little more from you."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Already done? You can't stop now, I'm so excited at the moment..."
             else:
                 the_person "Leaving already? Well, that's very disappointing."
 
     else:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "That's it? Well, you could at least pleasure me too."
             else:
                 the_person "All done? Fine, we will pick this up another time."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Already tired [the_person.mc_title]? Did I exhaust you? We definitely need to do something about that."
             else:
                 the_person "That's all you wanted? This is far from over, but for now you can go."
     return
 
 label alpha_sex_take_control(the_person):
-    if the_person.arousal > 60:
+    if the_person.arousal_perc > 60:
         the_person "I just can't let you go [the_person.mc_title], you're going to finish what you started!"
     else:
         the_person "Do you think you're going somewhere? You are not yet done with me [the_person.mc_title]."

@@ -156,10 +156,10 @@ label employee_lust_build_loop_label(the_person):
         $ the_person.draw_person(position = "standing_doggy")
         "[the_person.possessive_title] is standing in front of you, bent over her desk while you sit right behind her."
         if the_person.vagina_available():
-            if the_person.arousal > 75:
+            if the_person.arousal_perc > 75:
                 "Her juices are leaking down the inside of her leg. Her lips are puffy with desperate arousal."
                 "Her ass jiggles enticingly and her ass sways with every touch."
-            elif the_person.arousal>30:
+            elif the_person.arousal_perc > 30:
                 "Her pussy is exposed to your view, and a hint of her arousal can be seen on her lips."
                 "Her ass jiggles enticingly with every touch."
             else:
@@ -264,14 +264,14 @@ label employee_lust_build_loop_label(the_person):
                 the_person "Y... yes sir!"
                 "[the_person.possessive_title] tries to muffle her moans as you start to finger her eagerly. Her soft gasps are incredibly arousing."
                 $ the_person.change_arousal(15)
-                if the_person.arousal > 100:
+                if the_person.arousal_perc > 100:
                     the_person "Oh god... ohhh!"
                     "Her whole body tenses up and she pushes back against you. A shiver runs through her body as she climaxes."
                     $ the_person.call_dialogue("climax_responses_foreplay")
                     $ the_person.have_orgasm(the_position = "standing_doggy", half_arousal = True)
                     $ the_person.change_slut(1, 60)
                     "She quivers with pleasure for a few seconds before her whole body relaxes."
-                elif the_person.arousal > 50:
+                elif the_person.arousal_perc > 50:
                     "You pull your fingers out for a moment. A long strand of her juices connects your fingers to her soaking wet cunt."
                     mc.name "Wow, you are soaked. I'm glad you are enjoying this as much as I am."
                     "You push your two fingers back inside of her and finger her for a bit longer."
@@ -282,7 +282,7 @@ label employee_lust_build_loop_label(the_person):
             "Finger her ass{color=#FFFF00}-10{/color} {image=gui/extra_images/energy_token.png}" if the_person.opinion_score_anal_sex() >= 0 and the_person.vagina_available()and (the_person.sluttiness > 40 or the_person.obedience > 150):
                 if not ass_lubed:
                     "You decide to stretch her ass hole a bit, but first, you need to get it lubed up."
-                    if the_person.arousal > 50: #Use her natural arousal to lube her up.
+                    if the_person.arousal_perc > 50: #Use her natural arousal to lube her up.
                         "You take two fingers and push them into her soaking wet cunt, pumping them inside her a few times."
                         "Once they are good and wet, you pull them out, then run them along her puckered hole."
 
@@ -308,14 +308,14 @@ label employee_lust_build_loop_label(the_person):
                 the_person "Y... yes sir!"
                 "[the_person.possessive_title] tries to muffle her groans as you finger her puckered hole."
                 $ the_person.change_arousal(20)
-                if the_person.arousal > 100:
+                if the_person.arousal_perc > 100:
                     the_person "Oh god... ohhh!"
                     "Her whole body tenses up and she pushes back against you. A shiver runs through her body as she climaxes."
                     the_person "Your fingers... oh fuck!"
                     $ the_person.have_orgasm(the_position = "standing_doggy", half_arousal = True)
                     $ the_person.change_slut(1, 70)
                     "She quivers with pleasure for a few seconds before her whole body relaxes."
-                elif the_person.arousal > 50:
+                elif the_person.arousal_perc > 50:
                     "[the_person.possessive_title]'s cunt is leaking juices as you finger her forbidden hole."
                     mc.name "You are such a good slut, you like my fingers in your tight little asshole, don't you?"
                     the_person "Yes [the_person.mc_title]!"

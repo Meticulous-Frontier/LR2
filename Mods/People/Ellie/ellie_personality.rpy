@@ -61,13 +61,13 @@ label ellie_greetings(the_person):
     return
 
 label ellie_sex_responses_foreplay(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm... You're good at getting me warmed up..."
         else:
             the_person "Mmmm... Ah..."
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Oh that's it. Mmm."
             "She purrs warmly."
@@ -75,7 +75,7 @@ label ellie_sex_responses_foreplay(the_person):
             the_person "Oh my god..."
             "It seems like she's trying not to moan too loudly."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             if the_person.outfit.wearing_panties():
                 the_person "Ah... If you get me any wetter I'm going to soak right through my panties."
@@ -99,19 +99,19 @@ label ellie_sex_responses_foreplay(the_person):
     return
 
 label ellie_sex_responses_oral(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Oh you know what I want [the_person.mc_title]... Ah..."
         else:
             the_person "Oh wow... that's... Mph!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Mmmm, that's so good. Ah..."
         else:
             the_person "That... that feels so good [the_person.mc_title]..."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "God, your tongue feels so good!"
 
@@ -131,19 +131,19 @@ label ellie_sex_responses_oral(the_person):
     return
 
 label ellie_sex_responses_vaginal(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm, your cock feels real good inside me."
         else:
             the_person "Oh my god... Ah..."
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Keep going [the_person.mc_title], it feels fantastic!"
         else:
             the_person "Oh my god, that feeling..."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Ah, do me [the_person.mc_title]! Give me that big cock!"
 
@@ -163,20 +163,20 @@ label ellie_sex_responses_vaginal(the_person):
     return
 
 label ellie_sex_responses_anal(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Oh stars, you're really stretching me out!"
         else:
             the_person "Stars, it feels so big... That's all of it, right? I can't take any more!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Do my ass [the_person.mc_title], I can take it!"
         else:
             the_person "Oh stars, my poor ass..."
             "Her groan is a mixture of pain and pleasure."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Oh my poor little ass, you're going to ruin me..."
             "She doesn't seem very upset with the idea."
@@ -1021,19 +1021,19 @@ label ellie_talk_busy(the_person):
 
 label ellie_sex_strip(the_person):
     if the_person.sluttiness < 20:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "Let me get this out of the way..."
         else:
             the_person "Let me get this out of the way for you..."
 
     elif the_person.sluttiness < 60:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "This is just getting in the way..."
         else:
             the_person "Ah... I need to get this off."
 
     else:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "Let me get this worthless thing off..."
         else:
             the_person "Oh god, I need all of this off so badly!"
@@ -1227,31 +1227,31 @@ label ellie_date_seduction(the_person):
 label ellie_sex_end_early(the_person):
     if the_person.sluttiness > 50:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Oh damn it [the_person.mc_title], I want more of you so badly!"
             else:
                 the_person "Is that all you wanted to do? I was happy just being close to you."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Is that really all? [the_person.mc_title], I was just getting started!"
             else:
                 the_person "Aww, we were just getting started and you're already finished?"
 
     else:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "You don't want to take this any further? I thought we had a real connection."
             else:
                 the_person "That's all? Well, maybe we can try again some other time."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Oh my god... you've got me all out of breath..."
             else:
                 the_person "That's all? Alright."
     return
 
 label ellie_sex_take_control(the_person):
-    if the_person.arousal > 60:
+    if the_person.arousal_perc > 60:
         the_person "No no no, you can't just get worked up and then leave. We're finishing this, one way or another."
     else:
         the_person "Wait, we're just getting started! You just relax and leave this to me."

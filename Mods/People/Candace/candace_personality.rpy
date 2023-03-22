@@ -63,19 +63,19 @@ label candace_greetings(the_person):
     return
 
 label candace_sex_responses_foreplay(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm, you know just how to touch me [the_person.mc_title]!"
         else:
             "[the_person.title] giggles softly while you touch her."
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Do you like touching me [the_person.mc_title]? I know I like it when you do!"
         else:
             the_person "Do you like touching me [the_person.mc_title]? You seem to know exactly what to do."
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Yes! That feels really nice!"
             "She giggles happily, clearly having a good time."
@@ -95,19 +95,19 @@ label candace_sex_responses_foreplay(the_person):
     return
 
 label candace_sex_responses_oral(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Aww, you always know what I like [the_person.mc_title]!"
         else:
             "[the_person.title] giggles softly."
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Does my pussy taste good [the_person.mc_title]? I'll repay the favor and suck your cock later!"
         else:
             the_person "That, like, feels so good [the_person.mc_title]!"
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Ah! Hehe, that feels so good!"
             "She giggles happily, clearly having a good time."
@@ -127,19 +127,19 @@ label candace_sex_responses_oral(the_person):
     return
 
 label candace_sex_responses_vaginal(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "Mmm, you know what I like [the_person.mc_title]!"
         else:
             "[the_person.title] giggles softly."
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             the_person "Is your cock always this big, or are you just happy to see me? Hehe!"
         else:
             the_person "Am I your dirty girl [the_person.mc_title]? Because I'm having so much fun right now!"
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "Yes! Keep fucking me!"
             "She giggles happily, clearly having a good time."
@@ -159,13 +159,13 @@ label candace_sex_responses_vaginal(the_person):
     return
 
 label candace_sex_responses_anal(the_person):
-    if the_person.arousal_perc < 25:
+    if the_person.arousal_perc < 40:
         if the_person.sluttiness > 50:
             the_person "I can, like, feel every single inch of you in me! You're so big!"
         else:
             the_person "You're, like, {i}huge{/i} inside of me! I don't know if I can do this for very long!"
 
-    elif the_person.arousal_perc < 50:
+    elif the_person.arousal_perc < 65:
         if the_person.sluttiness > 50:
             if mc.condom:
                 the_person "Fuck my ass [the_person.mc_title], fuck it good until you're done with me!"
@@ -174,7 +174,7 @@ label candace_sex_responses_anal(the_person):
         else:
             the_person "Oh, it feels like you're stirring up my insides with your dick! Ah!"
 
-    elif the_person.arousal_perc < 75:
+    elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
             the_person "I'm so stretched out, I think I'm starting to get the hang of this!"
             "She giggles happily, clearly proud of her accomplishment."
@@ -622,19 +622,19 @@ label candace_talk_busy(the_person):
 
 label candace_sex_strip(the_person):
     if the_person.sluttiness < 20:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "Oh wait, I know what you want to see more of..."
         else:
             the_person "Ugh, all this clothing is getting in the way!"
 
     elif the_person.sluttiness < 60:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "I spent so much time this morning picking out this outfit, but I think you'd enjoy it more if I took it off, right?"
         else:
             the_person "Ah... I need to get all of this silly stuff off of me!"
 
     else:
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             the_person "Teehee, just wait a moment and I'll strip this off for you..."
         else:
             the_person "Oh my god, let me strip for you [the_person.mc_title], let me be your slutty stripper!"
@@ -759,24 +759,24 @@ label candace_date_seduction(the_person):
 label candace_sex_end_early(the_person):
     if the_person.sluttiness > 50:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Aww sweety, I was just getting close to cumming and you're done?!"
             else:
                 the_person "That's all? Aww, I hope you had a good time with me..."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 "Wait, you're stopping? Aren't you crazy horny right now too?"
             else:
                 the_person "Don't you want to play with me any more? Oh well, your loss."
 
     else:
         if the_person.love > 40:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "You're actually done? But weren't you, like, having fun? I'm so fucking horny now..."
             else:
                 the_person "Is that all you wanted to do? I thought guys had to, like, cum or it hurt."
         else:
-            if the_person.arousal > 60:
+            if the_person.arousal_perc > 60:
                 the_person "Aww, I was just getting getting warmed up!"
 
             else:
@@ -784,7 +784,7 @@ label candace_sex_end_early(the_person):
     return
 
 label candace_sex_take_control(the_person):
-    if the_person.arousal > 60:
+    if the_person.arousal_perc > 60:
         the_person "You're funny! I haven't even cum yet! There's not way I'm letting you leave yet!"
     else:
         the_person "Oh honey, we're just getting started! You just relax and leave this to me."

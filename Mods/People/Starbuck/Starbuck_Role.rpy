@@ -2090,7 +2090,7 @@ label starbuck_anal_fetish_checkup(alert = False):
     $ the_person = starbuck
     "You decide to check up on [the_person.title]. You pull out your phone and check up on her."
     "You see she has been good. She's had the plug in, just the way she said she would!"
-    if the_person.arousal > 40:
+    if the_person.arousal_perc > 40:
         "You can also see her temperature is a little elevated, consistent with what you would expect from someone in a consistent arousal state."
     "You decide to let her know you're thinking about her and her delicious ass."
     "You set the vibration setting to high, then press and hold the vibration button for several seconds. You can see her heart rate spike as her plug quakes inside her ass."

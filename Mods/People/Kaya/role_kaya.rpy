@@ -72,14 +72,14 @@ init -2 python:
         return False
 
     def kaya_intro_requirement(the_person):
-        if the_person.is_at_work():
+        if the_person.location == coffee_shop and the_person.is_at_work():
             return True
         return False
 
     def kaya_ask_out_requirement(the_person):
         if the_person.event_triggers_dict.get("move_help_day", 0) != 0: # she stops going out with MC
             return False
-        if the_person.is_at_work() and the_person.love > 20 and time_of_day == 3 and not kaya_can_get_drinks():
+        if the_person.location == coffee_shop and the_person.is_at_work() and the_person.love > 20 and time_of_day == 3 and not kaya_can_get_drinks():
             return not mc.business.date_scheduled_today()
         return False
 
@@ -121,7 +121,7 @@ init -2 python:
     def kaya_lily_study_night_apology_requirement(the_person):
         if not lily.has_job(sister_student_job):
             return False
-        if the_person.is_at_work():
+        if the_person.location == coffee_shop:
             return True
         return False
 
@@ -135,12 +135,15 @@ init -2 python:
         return False
 
     def kaya_uni_scholarship_intro_requirement(the_person):
+        # don't start internship before she moved out (changes her job and will lock out the move out / sakari intro)
+        if not the_person.event_triggers_dict.get("has_moved", False):
+            return False
         if the_person.love > 40 and mc.business.has_funds(10000) and the_person.location == university and day%7 < 4:
             return True
         return False
 
     def kaya_HR_start_internship_program_requirement():
-        if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.hr_director.is_at_work():
+        if the_person.location == coffee_shop and mc.business.hr_director.is_at_work():
             return True
         return False
 
@@ -150,7 +153,7 @@ init -2 python:
         return False
 
     def kaya_moving_in_with_mother_intro_requirement(the_person):
-        if kaya.sluttiness > 40 and the_person.is_at_work() and kaya_studies_with_erica():
+        if kaya.sluttiness > 40 and the_person.location == coffee_shop and kaya_studies_with_erica():
             return True
         return False
 

@@ -20,9 +20,9 @@ init -1 python:
 label condition_taking_virginity_pre_label(the_person, the_position, the_object, report_log, the_condition):
     if the_condition.condition_vars[0]:
         $ the_person.change_arousal(-5)
-        if the_person.arousal < 50:
+        if the_person.arousal_perc < 50:
             "[the_person.possessive_title] whimpers in a mixture of pain and pleasure as you continue to fuck her for the first time."
-        elif the_person.arousal < 85 and the_condition.condition_vars[1] == 0:
+        elif the_person.arousal_perc < 85 and the_condition.condition_vars[1] == 0:
             "[the_person.possessive_title] is starting to moan in pleasure from the incredible sensations your cock is giving her."
         else:
             "[the_person.possessive_title] is moaning constantly, in awe of the pleasure she is experiencing for the first time."

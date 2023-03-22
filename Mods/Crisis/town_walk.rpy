@@ -87,7 +87,7 @@ label town_walk_crisis_action_label():
             $ mc.change_locked_clarity(10)
             "[the_person.possessive_title] only took off her top clothes, you just wonder why..."
 
-    if the_person.outfit.vagina_available() and (the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal > 35):
+    if the_person.outfit.vagina_available() and (the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal_perc > 35):
         "[the_person.possessive_title] seems to get turned on by her own image in the mirror."
         $ the_person.draw_person(position = "missionary")
         "She lays down on the bed, spreads her legs and begins to masturbate slowly."
@@ -97,7 +97,7 @@ label town_walk_crisis_action_label():
             "You notice that with one hand [the_person.possessive_title] squeezes her tits, while shoving the other between her legs."
 
         $ mc.change_locked_clarity(10)
-        while the_person.arousal < 100:
+        while the_person.arousal_perc < 100:
             $ ran_num = renpy.random.randint(0,3)
             if ran_num == 0:
                 "As she gets more and more turned on, her hand moves faster and faster."
@@ -129,7 +129,7 @@ label town_walk_crisis_action_label():
             "You decide to use this opportunity and join her."
             mc.name "I was passing by, heard some noise and decided to investigate. All these robberies, you know..."
             mc.name "And I see that that you indeed require some attention, [the_person.title]. Should I join?"
-            if the_person.sluttiness > 50 or the_person.arousal > 50:
+            if the_person.sluttiness > 50 or the_person.arousal_perc > 50:
                 $ the_person.draw_person(position = "stand5", emotion = "happy")
                 "[the_person.possessive_title] turns around upon hearing your voice. You see her smile."
                 if (the_person.love) > 30:
