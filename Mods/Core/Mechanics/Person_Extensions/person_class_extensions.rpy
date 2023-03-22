@@ -1102,7 +1102,7 @@ init -1 python:
 
     def person_call_dialogue_extended(org_func):
         def person_call_dialogue_wrapper(person, type, *args, **kwargs):
-            if type == "sex_review" and extra_args.get("the_report", {}).get("is_angry", False):
+            if type == "sex_review" and kwargs.get("the_report", {}).get("is_angry", False):
                 renpy.say(person, "Now leave me alone, I'm done.")
             else:
                 org_func(person, type, *args, **kwargs)
