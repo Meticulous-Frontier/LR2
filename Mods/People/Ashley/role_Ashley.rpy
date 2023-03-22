@@ -668,7 +668,7 @@ label ashley_after_hours_label():   #Ashley looks for an opportunity to get MC a
     $ the_person = ashley
     $ the_person.story_event_log("love")
     "It is the end of the day, so you swing by your office to pick up your daily serum dose."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     $ scene_manager.add_actor(the_person, emotion = "happy")
     "As you open the door, you see [the_person.possessive_title] standing there, waiting for you."
     mc.name "Ah, hello [the_person.title]."
@@ -966,7 +966,7 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     $ scene_manager.add_actor(the_person)
     mc.name "Hello [the_person.title]. I need to talk to you about something... sensitive. Could you please come with me to my office?"
     the_person "Of course."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     "You enter your office an gesture for her to sit down."
     $ scene_manager.update_actor(the_person, position = "sitting")
     if the_person.sluttiness > 50:
@@ -997,8 +997,6 @@ label ashley_ask_sister_about_porn_video_label(the_person):
     "Maybe with some serums, you could try taming her a bit... so she can see what the other side of it is like..."
     the_person "Look umm... just so I make myself clear here... be careful with her. She can be sneaky, and knows a lot more than she lets on."
     mc.name "I understand. Thank you [the_person.title]."
-    "You both walk back to the [mc.location.formal_name]."
-    $ mc.location.show_background()
     $ scene_manager.clear_scene()
     $ ashley.event_triggers_dict["porn_discussed"] = True
     $ ashley.story_event_log("slut")
@@ -1240,7 +1238,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
     mc.name "Hey, we need to chat. Can you come with me to my office?"
     the_person "Sounds good."
     "You walk to your office. She enters first, and you close the door behind your back as you both take a seat."
-    $ ceo_office.show_background()
+    $ mc.change_location(ceo_office)
     $ the_person.draw_person(position = "sitting")
     mc.name "So, I want to talk to you about me and [ashley.name]..."
     the_person "Yeah, I figured. Look, I know, I encouraged the whole thing, so I shouldn't be surprised when you two were messing around..."
@@ -1273,6 +1271,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         "You puts your arms around her and you pull her close. You bring your face to hers and you kiss for a few moments. She slowly steps back."
         $ the_person.draw_person(position = "stand2")
         the_person "Alright... I'm going to get back to work. I'm so glad we got to talk!"
+        $ the_person.draw_person(position = "walking_away")
         "As [the_person.possessive_title] leaves the room, you wonder if you are being smart. Keeping your relationship with her sister secret, even it's only physical, might be difficult."
     elif ashley_is_fwb_path():
         mc.name "I know it seems like things between [ashley.name] and I are moving really fast, but I want you to know it probably isn't what you are thinking."
@@ -1288,6 +1287,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         the_person "It might be a little weird... you know? Getting physical with a guy who is doing the same with my sister... but you're right. We're all adults here, getting what we want from each other, consensually."
         $ the_person.draw_person(position = "stand2")
         the_person "Alright. I'm glad we got to talk about it. It makes me feel better, knowing what is going on between you two. I think I'll get back to work."
+        $ the_person.draw_person(position = "walking_away")
         "[the_person.possessive_title] turns and walks out of your office. Both girls are sexy, and you feel like your prospects are better if you can keep them from competing with each other for your attention."
     else:
         mc.name "I honestly was not expecting this to happen so quickly either. We went on that date, and had a great time"
@@ -1310,6 +1310,7 @@ label ashley_stephanie_arrange_relationship_label(the_person):
         $ the_person.draw_person(position = "stand2")
         "[the_person.possessive_title] stands up and smiles. It looks a little forced, but she's trying to be genuine."
         the_person "Thank you for this chat. I feel better knowing what is going on with you two. Now... I think I'll get back to work?"
+        $ the_person.draw_person(position = "walking_away")
         "[the_person.title] turns and leaves your office. Things got a little sticky there, but you feel like you are now in the clear to pursue things with [ashley.title] from now on."
     $ clear_scene()
     # $ stephanie.set_override_schedule(coffee_shop, the_days = [6], the_times = [0])   #Coffee scene is currently broke af
@@ -1327,10 +1328,14 @@ label ashley_blows_during_meeting_label():      #40 Sluttiness
     "You get a text from [stephanie.possessive_title]."
     $ mc.start_text_convo(stephanie)
     stephanie "Hey, can you meet me in your office? I just found something I wanted to talk to you about."
-    mc.name "Sure, I'll be right there."
+    if mc.location == ceo_office:
+        mc.name "Sure, come on over."
+        "Soon, you hear a knock on the door."
+    else:
+        mc.name "Sure, I'll be right there."
+        $ mc.change_location(ceo_office)
+        "You head to your office and sit down. Soon, you hear a knock on the door."
     $ mc.end_text_convo()
-    $ ceo_office.show_background()
-    "You head to your office and sit down. Soon, you hear a knock on the door."
     mc.name "Come in."
     $ scene_manager.add_actor(ashley)
     mc.name "[ashley.title]?"
@@ -1649,14 +1654,21 @@ label ashley_submission_titfuck_label():  #at 20
     $ first_time = the_person.event_triggers_dict.get("sub_titfuck_count", 0) == 0
     $ ashley_clear_after_work_setup()
     $ the_person.story_event_log("obedience")
-    if first_time:
-        $ mc.business.add_mandatory_crisis(ashley_submission_titfuck_taboo_restore)
+
+    if mc.location == ceo_office:
+        "At the end of the day, you are working in your office, when someone enters your door."
+        $ the_person.draw_person(emotion = "happy")
+        "As you look up, you see [the_person.possessive_title] walking in."
+    else:
         "It is the end of the day, so you swing by your office to pick up your daily serum dose."
-        $ ceo_office.show_background()
+        $ mc.change_location(ceo_office)
         $ the_person.draw_person(emotion = "happy")
         "As you open the door, you see [the_person.possessive_title] standing next to your desk."
-        mc.name "Ah, hello [the_person.title]."
-        the_person "Oh hey. I was just dropping off your serums for you. Have a good evening."
+    mc.name "Ah, hello [the_person.title]."
+    the_person "Oh hey. I was just dropping off your serums for you. Have a good evening."
+
+    if first_time:
+        $ mc.business.add_mandatory_crisis(ashley_submission_titfuck_taboo_restore)
         if the_person.tits_visible():
             "[the_person.possessive_title]'s big tits are on full display for you. They heave a little with each breath and movement she makes."
         else:
@@ -2052,10 +2064,16 @@ label ashley_submission_blowjob_label():  #140 obedience
 
     $ mc.arousal = 0
     $ mc.business.add_mandatory_crisis(ashley_submission_titfuck_taboo_restore)
-    "It is the end of the day, so you swing by your office to pick up your daily serum dose."
-    $ ceo_office.show_background()
-    $ the_person.draw_person(emotion = "happy")
-    "As you open the door, you see [the_person.possessive_title] standing next to your desk."
+    if mc.location == ceo_office:
+        "At the end of the day, you are working in your office, when someone enters your door."
+        $ the_person.draw_person(emotion = "happy")
+        "As you look up, you see [the_person.possessive_title] walking in."
+    else:
+        "It is the end of the day, so you swing by your office to pick up your daily serum dose."
+        $ mc.change_location(ceo_office)
+        $ the_person.draw_person(emotion = "happy")
+        "As you open the door, you see [the_person.possessive_title] standing next to your desk."
+
     mc.name "Ah, hello [the_person.title]."
     the_person "Oh hey. I was just dropping off your serums for you. Have a good evening."
     if the_person.tits_visible():
