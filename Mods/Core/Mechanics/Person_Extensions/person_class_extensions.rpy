@@ -1816,6 +1816,10 @@ init -1 python:
         if self.has_role(maid_role):
             return not self.job.schedule.get_destination() is None
 
+        # she works around town, so when the job has a scheduled location, she's at work
+        if self == police_chief:
+            return not self.job.schedule.get_destination() is None
+
         # special handling for girls working at stripclub (use roles instead of job)
         if self.is_strip_club_employee():
             if (get_strip_club_foreclosed_stage() < 1 or get_strip_club_foreclosed_stage() >= 5):
@@ -1825,21 +1829,17 @@ init -1 python:
         if not self.job:
             return False
 
-        # she works around town, so when the job has a scheduled location, she's at work
-        if self == police_chief:
-            return not self.job.schedule.get_destination() is None
-
         return self.location == self.job.job_location
 
     Person.is_at_work = person_is_at_work
 
     def is_person_at_office(self):
-        return self.location in [rd_division, p_division, m_division, office, lobby]
+        return self.location in [rd_division, p_division, m_division, office, lobby, ceo_office, testing_room, work_bathroom]
 
     Person.is_at_office = is_person_at_office
 
     def is_person_at_mc_house(self):
-        return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
+        return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, dungeon, home_shower]
 
     Person.is_at_mc_house = is_person_at_mc_house
 
