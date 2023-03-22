@@ -10,7 +10,7 @@ init 2 python:
         return True
 
     def bend_over_your_desk_requirement(person):
-        if not the_person.is_employee():
+        if not the_person.is_employee() or not the_person.is_at_work():
             return False
         if mc.business.event_triggers_dict.get("employee_over_desk_unlock", False):
             if person.obedience < 130:
