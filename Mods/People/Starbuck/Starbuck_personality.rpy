@@ -38,7 +38,7 @@ label starbuck_strip_reject(the_person, the_clothing, strip_type = "Full"):
         the_person "I can't take my [the_clothing.display_name] off right now [the_person.mc_title]!"
     return
 
-label starbuck_sex_accept(the_person):
+label starbuck_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.obedience < 100:
             "[the_person.possessive_title] gives you a wink."

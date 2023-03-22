@@ -326,7 +326,7 @@ label kaya_strip_obedience_accept(the_person, the_clothing, strip_type = "Full")
 #         "She doesn't say anything more, but she still seems uncomfortable with the situation."
 #     return
 
-# label kaya_sex_accept(the_person):
+# label kaya_sex_accept(the_person, the_position):
 #     if the_person.sluttiness > 70:
 #         if the_person.obedience < 70:
 #             the_person "I was just about to suggest the same thing."

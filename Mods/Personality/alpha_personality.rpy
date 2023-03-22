@@ -134,7 +134,7 @@ label alpha_strip_reject(the_person, the_clothing, strip_type = "Full"):
         the_person "Don't touch that [the_person.mc_title]. Could you imagine if my [the_clothing.display_name] came off?"
     return
 
-label alpha_sex_accept(the_person):
+label alpha_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.obedience < 100:
             the_person "Such a nice body you have, [the_person.mc_title], and I love sex... Let's give it a try and see how it feels!"

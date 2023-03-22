@@ -143,7 +143,7 @@ label camilla_clothing_accept(the_person):
 #        the_person "I think that should stay where it is for now."
 #    return
 
-# label camilla_sex_accept(the_person):
+# label camilla_sex_accept(the_person, the_position):
 #     if the_person.effective_sluttiness() > 70:
 #         if the_person.obedience < 70:
 #             the_person "I was just about to suggest the same thing."

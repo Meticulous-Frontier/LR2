@@ -317,14 +317,14 @@ label ellie_grope_body_reject(the_person):
         "She doesn't say anything more, but she still seems uncomfortable with the situation."
     return
 
-label ellie_sex_accept(the_person):
+label ellie_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.obedience < 70:
             the_person "I was just about to suggest the same thing."
         else:
             the_person "Mmm, you have a dirty mind [the_person.mc_title], I like it."
     else:
-        the_person "Okay, we can give that a try."
+        the_person "Oh Lord, we can try."
     return
 
 label ellie_sex_obedience_accept(the_person):

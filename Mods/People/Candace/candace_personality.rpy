@@ -267,7 +267,7 @@ label candace_strip_reject(the_person, the_clothing, strip_type = "Full"):
         the_person "Not yet, there's so much fun stuff we have to do first!"
     return
 
-label candace_sex_accept(the_person):
+label candace_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.obedience < 70:
             the_person "Oh yeah, that's one of my favorite things to do! Come on, let's do it!"

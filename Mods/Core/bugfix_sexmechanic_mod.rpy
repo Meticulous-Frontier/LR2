@@ -830,7 +830,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
         pass
     elif not hates_position and the_person.effective_sluttiness(the_taboo) >= final_slut_requirement:
         if not (skip_dialog or the_person.has_taboo(the_taboo)):
-            $ the_person.call_dialogue("sex_accept")
+            $ the_person.call_dialogue("sex_accept", the_position)
 
     elif not hates_position and the_person.effective_sluttiness(the_taboo) + (the_person.obedience-100) >= final_slut_requirement:
         "[the_person.possessive_title] doesn't seem enthusiastic, but a little forceful encouragement would probably convince her."

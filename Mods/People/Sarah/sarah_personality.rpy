@@ -185,7 +185,7 @@ label Sarah_strip_reject(the_person, the_clothing, strip_type = "Full"):
         the_person "Not yet... get me a little warmed up first, okay?"
     return
 
-label Sarah_sex_accept(the_person):
+label Sarah_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.is_highly_fertile():
             the_person "My body is yours to use, [the_person.mc_title]. Just try to cum inside me... it's a good time of the month for that!"

@@ -278,14 +278,14 @@ label genius_grope_body_reject(the_person):
         "She doesn't say anything more, but she still seems uncomfortable with the situation."
     return
 
-label genius_sex_accept(the_person):
+label genius_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.obedience < 70:
             the_person "That is an excellent suggestion!"
         else:
             the_person "Mmm, you have a dirty mind [the_person.mc_title]. I can't wait to see how you use it!"
     else:
-        the_person "Okay, we can give that a try."
+        the_person "I like that plan, [the_person.mc_title]."
     return
 
 label genius_sex_obedience_accept(the_person):

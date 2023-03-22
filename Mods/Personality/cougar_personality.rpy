@@ -139,14 +139,14 @@ label cougar_strip_reject(the_person, the_clothing, strip_type = "Full"):
         the_person "Don't touch that [the_person.mc_title]. Could you imagine if my [the_clothing.display_name] came off? I could be your mother, we shouldn't do this."
     return
 
-label cougar_sex_accept(the_person):
+label cougar_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.obedience < 100:
             the_person "Such a nice body you have [the_person.mc_title] and I really want to do this... do you mind?"
         else:
             the_person "Whatever you want me to do [the_person.mc_title]. I just want to make sure you're happy."
     else:
-        the_person "Okay, let's try this, I hope you don't mind having sex with an older woman?"
+        the_person "Okay, my young lover, let's do it!"
     return
 
 label cougar_sex_obedience_accept(the_person):
