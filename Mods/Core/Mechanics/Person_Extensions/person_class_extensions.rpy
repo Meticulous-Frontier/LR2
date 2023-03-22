@@ -1101,11 +1101,11 @@ init -1 python:
     Person.wants_creampie = person_wants_creampie_extended(Person.wants_creampie)
 
     def person_call_dialogue_extended(org_func):
-        def person_call_dialogue_wrapper(person, type, **extra_args):
+        def person_call_dialogue_wrapper(person, type, *args, **kwargs):
             if type == "sex_review" and extra_args.get("the_report", {}).get("is_angry", False):
                 renpy.say(person, "Now leave me alone, I'm done.")
             else:
-                org_func(person, type, **extra_args)
+                org_func(person, type, *args, **kwargs)
 
         return person_call_dialogue_wrapper
 
