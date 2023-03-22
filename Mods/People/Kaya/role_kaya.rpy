@@ -143,7 +143,7 @@ init -2 python:
         return False
 
     def kaya_HR_start_internship_program_requirement():
-        if the_person.location == coffee_shop and mc.business.hr_director.is_at_work():
+        if mc.business.is_open_for_business() and mc.is_at_work() and mc.business.hr_director.is_at_work():
             return True
         return False
 
