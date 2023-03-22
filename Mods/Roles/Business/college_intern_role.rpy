@@ -70,13 +70,14 @@ init 1 python:
         candidates = []
 
         for x in range(0,count):
-            candidates.append(
-                make_person(age = renpy.random.randint(19, 22), stat_array = stat_array, skill_array = skill_array,
-                forced_opinions = forced_opinions, job = student_job, force_random = True))
+            candidates.append(make_person(age = renpy.random.randint(19, 22), stat_array = stat_array, skill_array = skill_array, job = student_job, force_random = True))
 
-        for a_candidate in candidates:
+        for candidate in candidates:
+            for opinion in forced_opinions:
+                candidate.set_opinion(opinion[0], opinion[1], opinion[2])
+
             for x in __builtin__.range(0,2): #Reveal all of their opinions based on our policies.
-                a_candidate.discover_opinion(a_candidate.get_random_opinion(include_known = False, include_sexy = False),add_to_log = False) #Get a random opinion and reveal it.
+                candidate.discover_opinion(candidate.get_random_opinion(include_known = False, include_sexy = False),add_to_log = False) #Get a random opinion and reveal it.
         return candidates
 
     def college_intern_quit(person):
