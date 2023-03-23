@@ -916,7 +916,7 @@ label myra_gaming_cafe_expansion_intro_label(the_person):   #100 love event. Myr
 
 init -2 python:
     def myra_develop_energy_drink_intro_requirement(the_person):
-        if the_person.sluttiness > 20 and myra_focus_progression_scene.get_stage() >= 1:    #Must have started focus training
+        if the_person.sluttiness > 20 and myra_at_cafe() and gaming_cafe_is_business_hours() and myra_focus_progression_scene.get_stage() >= 1:    #Must have started focus training
             if mc.business.days_since_event("myra_sponsor_day") > TIER_2_TIME_DELAY:
                 return True
         return False
@@ -933,7 +933,7 @@ init -2 python:
         return False
 
     def myra_energy_drink_test_requirement(the_person):
-        if myra_at_cafe() and myra_mc_has_acceptable_energy_serum():
+        if myra_at_cafe() and gaming_cafe_is_business_hours() and myra_mc_has_acceptable_energy_serum():
             return True
         return False
 
@@ -2443,6 +2443,8 @@ init 3 python:
         return myra.event_triggers_dict.get("gaming_cafe_open", False)
 
     def gaming_cafe_is_business_hours():
+        if not gaming_cafe_is_open():
+            return False
         if day%7 in [2,3,4] and time_of_day in [2,3]:
             return True
         if day%7 in [5,6] and time_of_day in [1,2,3]:
