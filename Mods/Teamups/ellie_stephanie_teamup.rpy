@@ -339,7 +339,7 @@ label ellie_stephanie_teamup_progression_scene_scene_0(the_group, scene_transiti
     the_researcher "Hang on, I'll just select someone at random."
     $ pick_1 = get_random_from_list(mc.business.get_requirement_employee_list(exclude_list = [the_person, the_researcher]))
     the_researcher "Ah, here we go."
-    "She shows you the personell file for [pick_1.title] your [pick_1.job.job_title]."
+    "She shows you the personnel file for [pick_1.title] your [pick_1.job.job_title]."
     the_researcher "I'll go get her."
     $ scene_manager.update_actor(the_researcher, position = "walking_away")
     "As she goes to leave, [the_person.title] looks at you."
