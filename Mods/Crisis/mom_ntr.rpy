@@ -175,15 +175,15 @@ label mom_ntr_mod_action_label():
             "You take a look inside the room and your eyes widen. You see [the_person.possessive_title] sitting in front of an unknown man, sucking his cock."
             "By the look on man's face, you can tell that he is also quite surprised."
             "As they go on, you seem to recognize him. It's [man_name], one of [the_person.title]'s colleagues. You might have seen him at some corporate events."
-            man_name "Wow, [the_person.fname]! We just arrived and you already have my dick in your mouth. I didn't expect that, to say the least."
+            man_name "Wow, [the_person.fname]! We just got here and you already have my dick in your mouth. I didn't expect that, to say the least."
             $ the_person.draw_person(position = "blowjob", emotion = "happy")
             "[the_person.possessive_title] takes his dick out of her mouth and starts stroking it, looking up at [man_name]."
-            the_person "Well, [man_name], you were so nice with me this evening that I felt you deserve a little present."
+            the_person "Well, [man_name], you were so nice to me this evening that I felt you deserve a little present."
             $ the_person.discover_opinion("giving blowjobs")
-            the_person "Besides, I just love to feel strong, hard dick in my mouth."
+            the_person "Besides, I just love to feel a strong, hard dick in my mouth."
             man_name "We have been working together for years now... I had no idea that you were such a cock-sucking slut, [the_person.fname]."
             $ the_person.draw_person(position = "kissing", emotion = "happy")
-            "[the_person.possessive_title] smiles and gets up to embrace and kiss her man passionately."
+            "[the_person.possessive_title] smiles and gets up to embrace and kiss him passionately."
             "You are unsure what to do here."
         else:
             $ the_person.draw_person(position = "kissing", emotion = "happy")
@@ -197,17 +197,17 @@ label mom_ntr_mod_action_label():
                 "They go on kissing. After a while, [man_name] places his hands on [the_person.possessive_title]'s ass, caressing it."
                 if the_person.sluttiness <= 30 or (the_person.is_dominant() and the_person.sluttiness <= 45):
                     "[the_person.possessive_title] looks surprised by [man_name]'s actions."
-                    the_person "No, [man_name]. We work together, we should not cross some lines."
+                    the_person "No, [man_name]. We work together, there are some lines we should not cross."
                     the_person "It's late. Thanks for the wonderful evening. I'll see you in the office."
                     $ ran_num = renpy.random.randint(0,2) ##if man is aggressive
                     if ran_num < 1:
                         man_name "Sorry, [the_person.fname]. I lost control. I'll go now... good night."
-                        "You go back to your room and through half-closed door you see [man_name] leaving the house, head low in shameful disappointment."
+                        "You go back to your room and through the half-closed door you see [man_name] leaving the house, head low in shameful disappointment."
                     else:
                         if the_person.get_opinion_score("giving blowjobs") > 0:
-                            man_name "What the fuck, [the_person.fname]?! You've been flirting around me the whole evening, brought me to your room, sucked my cock, and now you want to stop?"
+                            man_name "What the fuck, [the_person.fname]?! You've been flirting with me the whole evening, brought me to your room, sucked my cock, and now you want to stop?"
                         else:
-                            man_name "Oh, no, [the_person.fname]. You've been flirting around me the whole evening, brought me to your room, and now you want to stop?"
+                            man_name "Oh, no, [the_person.fname]. You've been flirting with me the whole evening, brought me to your room, and now you want to stop?"
                         man_name "No way. I can't go home with blue balls. You have to do something about it. You just need a little push."
                         $ mom_clothing = the_person.choose_strip_clothing_item()
                         if mom_clothing is None:
@@ -215,7 +215,7 @@ label mom_ntr_mod_action_label():
                         else:
                             man_name "I don't think you need your [mom_clothing.name] anymore."
                             $ the_person.draw_animated_removal (mom_clothing, position = "stand3", emotion = "sad")
-                            "He tears off [the_person.possessive_title]'s [mom_clothing.name] and throws it on a floor."
+                            "He tears off [the_person.possessive_title]'s [mom_clothing.name] and throws it on the floor."
                             if the_person.get_opinion_score("being submissive") > 0:
                                 "[the_person.possessive_title] just keeps standing there, shocked into submission, while [man_name] undresses her."
                             else:
@@ -255,10 +255,11 @@ label mom_ntr_mod_action_label():
                         $ mom_clothing = None
                         if the_person.get_opinion_score("giving blowjobs") < 0:
                             man_name "Much better, [the_person.fname]! Now get on your knees and get back to it, you worthless whore."
+                            "[the_person.title] can't refuse [man_name]'s force as she obeys him. She gets down on her knees."
                         else:
                             man_name "Much better, [the_person.fname]! Now get on your knees. I know want to suck my cock. I've seen the way you lick your lips when you look at it."
+                            "[the_person.title] can't refuse [man_name]'s force as she obeys him. She gets down on her knees while he drops his pants."
                         $ the_person.draw_person(position = "blowjob", emotion = "sad")
-                        "[the_person.title] can't refuse [man_name]'s force as she obeys him. She gets down on her knees while he drops his pants."
                         man_name "That's better. Like the view of my friend? See how big he is because of you? Now get to work, [the_person.fname]!"
                         $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                         "[the_person.possessive_title] can't resist [man_name]'s urging and starts to suck him off."
@@ -266,10 +267,10 @@ label mom_ntr_mod_action_label():
                             man_name "That's it, bitch! You like to suck my cock, don't you? You're just too afraid to say it."
                             "[the_person.possessive_title] keeps sucking [man_name], making him groan with pleasure."
                         else:
-                            man_name "Fuck, that's good. If I knew you are so good at sucking cock, I would've shoved mine in your throat a long time ago."
-                            "[the_person.possessive_title] keeps sucking [man_name], making him groan with pleasure. She also seems to get aroused a little."
+                            man_name "Fuck, that's good. If I knew you were so good at sucking cock, I would've shoved mine in your throat a long time ago."
+                            "[the_person.possessive_title] keeps sucking [man_name], making him groan with pleasure. She also seems to get a little aroused."
                         if the_person.vagina_available():
-                            man_name "You're a great cocksucker, [the_person.fname]! Let's find out if you are any good with other stuff. Get on the bed and show me that fat ass."
+                            man_name "You're a great cocksucker, [the_person.fname]! Let's find out if you are any good at other stuff. Get on the bed and show me that fat ass."
                             $ the_person.draw_person(position = "doggy")
                             "[the_person.possessive_title] has lost all will to resist [man_name]'s orders. She gets on the bed, displaying her ass in front of him."
                             man_name "Good girl! You're already soaking wet, bitch. Did you know that?"
@@ -289,7 +290,7 @@ label mom_ntr_mod_action_label():
                                 the_person "Fuck, yes! Please, [man_name], fuck me! Fuck me hard!"
                                 man_name "You are really a slut, [the_person.fname]. Like being railed from behind?"
                                 the_person "Yes. Yes. Do me! Fuck my slutty pussy, [man_name]!"
-                                "For a while, there is silence in a room, aside from the wet sounds of [man_name]'s dick going in and out of [the_person.possessive_title]'s willing hole and the slapping of flesh on flesh."
+                                "For a while, there is silence in the room, aside from the wet sounds of [man_name]'s dick going in and out of [the_person.possessive_title]'s willing hole and the slapping of flesh on flesh."
                                 if the_person.is_bald():
                                     "[man_name] grabs her by her neck and pulls her upwards."
                                 else:
@@ -316,10 +317,10 @@ label mom_ntr_mod_action_label():
                             $ finish = mom_ntr_select_finish(the_person)
                             if finish == "facial":
                                 if the_person.get_opinion_score("being submissive") > 0:
-                                    man_name "Fuck, I'm cumming! Get down your knees!"
+                                    man_name "Fuck, I'm cumming! Get down on your knees!"
                                     "[man_name] steps back, sliding out of [the_person.possessive_title]. She hurries off the bed and drops to her knees before him."
                                     $ the_person.draw_person(position = "blowjob")
-                                    the_person "Now shower me with your hot jizz. Cover my body with it!"
+                                    the_person "Now shower me with your hot jizz. Cover my face with it!"
                                     man_name "Want me to paint your face, eh, [the_person.fname]? You're such a good little slut!"
                                     "[the_person.possessive_title] grins, reaching up toward him. You can hear the wet slapping as she desperately jerks his cock for her reward."
                                     "[man_name] can't hold for much longer and he starts cumming over [the_person.possessive_title]'s cock-drunk face."
@@ -369,7 +370,7 @@ label mom_ntr_mod_action_label():
                                     man_name "Alright, [the_person.fname]. Your cunt is pretty good, but I expect you to behave better next time."
                             elif finish == "drink":
                                 if the_person.get_opinion_score("being submissive") > 0:
-                                    man_name "Fuck, I'm cumming! Get down your knees!"
+                                    man_name "Fuck, I'm cumming! Get down on your knees!"
                                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                                     "[man_name] steps back, sliding out of [the_person.possessive_title]. She hurries off the bed and drops to her knees before him."
                                     the_person "Please Sir, fill my mouth with your hot jizz!"
@@ -377,7 +378,6 @@ label mom_ntr_mod_action_label():
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     man_name "You're in no position to make requests, but I like the idea. Ngh, keep it up, I'm almost there!"
                                     "[the_person.possessive_title] purrs with lusty delight and sucks harder. Moments later, [man_name] moans in pleasure as he starts cumming into her mouth."
-                                    "[the_person.possessive_title] gags and squirms as the cum overflows. She coughs loudly, shooting ropes of it across [man_name]'s merciless shaft."
                                 else:
                                     man_name "Fuck, I'm cumming!"
                                     $ the_person.draw_person(position = "blowjob", emotion = "sad")
@@ -387,7 +387,7 @@ label mom_ntr_mod_action_label():
                                     "[man_name] grabs [the_person.possessive_title]'s face in both hands and starts to fuck her mouth. She chokes loudly and pushes on his hips with her hands, but is powerless to resist him."
                                     man_name "Get used to being face fucked, [the_person.fname]. As of today, you're my own personal slut. Fuck, here it comes!"
                                     "[man_name] roars in triumph as he starts cumming into [the_person.possessive_title]'s throat."
-                                    "[the_person.possessive_title] gags and squirms as the cum overflows. She coughs loudly, shooting ropes of it across [man_name]'s merciless shaft."
+                                "[the_person.possessive_title] gags and squirms as the cum overflows. She coughs loudly, shooting ropes of it across [man_name]'s merciless shaft."
                                 $ cum_in_mouth_ntr(the_person) #$ cum_in_mouth_ntr(the_person) #$ the_person.cum_in_mouth()
                                 $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                 "It takes a while, but eventually he seems to reach his limit."
@@ -397,7 +397,7 @@ label mom_ntr_mod_action_label():
                                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                                     "[the_person.possessive_title] gulps and drinks [man_name]'s cum in one shot. She licks her lips, cleaning a drop that had spilled out."
                                     "She looks up at him and smiles."
-                                    the_person "Ah, you taste so good, [man_name]. I hope there be more of it."
+                                    the_person "Ah, you taste so good, [man_name]. I hope there will be more of it."
                                     man_name "You are just a perverted cum-loving slut, [the_person.fname]. You know that?"
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "[the_person.possessive_title] gets up and smiles."
@@ -431,7 +431,7 @@ label mom_ntr_mod_action_label():
                                     man_name "That's it, [the_person.fname]. You got what a teasing slut like you deserves."
                                     $ the_person.draw_person(position = "stand2", emotion = "sad")
                                     "[the_person.possessive_title] gets up. You see tears in her eyes."
-                                    the_person "Damn you, [man_name]! I wish I never met even you. Now get out of my house. I never want to see you again!"
+                                    the_person "Damn you, [man_name]! I wish I never even met you. Now get out of my house. I never want to see you again!"
                                     $ the_person.draw_person(position = "sitting", emotion = "sad")
                                     "[the_person.possessive_title] sits on her bed, sobbing."
                                     man_name "Bah. You'll come crawling back soon enough. A cunt like you can't stand being empty for long."
@@ -442,7 +442,7 @@ label mom_ntr_mod_action_label():
                                 the_person "Take me with your hard dick, [man_name]. I want to feel it again. Please, use me again!"
                                 man_name "Aren't you a cock-hungry whore, [the_person.fname]? Now lay on the table. I want to see your tits bouncing this time."
                                 the_person "Of course, [man_name]. You can take me however you want. Just keep covering my slut body with your hot sperm."
-                                "It seems that [the_person.possessive_title] now does not wish the encounter to end as her screams and [man_name]'s moans keep on..."
+                                "It seems that [the_person.possessive_title] does not wish for the encounter to end as her screams and [man_name]'s moans continue..."
                             else:
                                 if the_person.sluttiness > 60:
                                     the_person "Yes, [man_name]. I'm sorry. You were right, it was scary... intense... but I feel good."
@@ -452,9 +452,9 @@ label mom_ntr_mod_action_label():
                                     the_person "Take me with your hard dick, [man_name]. I want to feel it again. Please, rape me again!"
                                     man_name "You're such a cock-hungry whore, [the_person.fname]. Now lay on the table. I want to see your tits this time, watch them bounce as I fuck you."
                                     the_person "Of course, [man_name]. You can take me however you want. Just keep filling me with your cum!"
-                                    "It seems that [the_person.possessive_title] now does not wish the encounter to end as her screams and [man_name]'s moans keep on..."
+                                    "It seems that [the_person.possessive_title] does not wish for the encounter to end as her screams and [man_name]'s moans continue..."
                                 else:
-                                    "You hurry back to your room, closing the door before [man_name] emerges. You hear his heavy footsteps down the hall, followed by a slam and the sound of a car peeling out."
+                                    "You hurry back to your room, closing the door before [man_name] emerges. You hear his heavy footsteps move down the hall, followed by a slam and the sound of a car peeling out."
                                     "You go back to bed, ignoring the sounds of sobbing from [the_person.possessive_title]'s room. After a while, you hear her shuffle down the hall and run a shower, no doubt cleaning the evidence of her shameful encounter from her body."
                         else:
                             if the_person.get_opinion_score("giving blowjobs") > 0 :
@@ -509,21 +509,21 @@ label mom_ntr_mod_action_label():
                                     $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
                                     "[man_name] resumes thrusting into [the_person.possessive_title]'s mouth, but no longer needs to hold her head to do it."
                                     "[the_person.possessive_title] sucks him hungrily, eager for the load he's about to deliver into her throat."
-                                    "She starts sucking harder while playing with man's balls. Soon he is on the edge."
+                                    "She starts sucking harder while playing with [man_name]'s balls. Soon he is on the edge."
                                     man_name "Oh fuck, here it comes! Take it, baby!"
                                     "[the_person.possessive_title] barely flinches as he drives into her, groaning and pumping blast after blast of thick cum directly into her stomach."
                                     "Eventually, the tension drains from him, and he pulls back. [the_person.possessive_title] swallows loudly, then opens wide to show her empty mouth."
                                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
                                     the_person "That was amazing, there was so much I thought I was going to drown!"
                                     "She looks up at him and smiles."
-                                    the_person "I hope there be more next time."
+                                    the_person "I hope there will be more next time."
                                     man_name "You're a perverted cum-slut, [the_person.fname]. You know that?"
                                     $ the_person.draw_person(position = "stand2", emotion = "happy")
                                     "[the_person.possessive_title] gets up and smiles."
                                 else:
                                     man_name "No slacking off for you, whore!"
                                     "He grabs [the_person.possessive_title]'s head and impales it on his big cock."
-                                    "It goes all the way inside with man's balls hitting [the_person.title]'s jaw. She squirms, choking and struggling for air."
+                                    "It goes all the way inside with [man_name]'s balls hitting [the_person.title]'s jaw. She squirms, choking and struggling for air."
                                     man_name "I bet you love being face fucked, [the_person.fname]. Don't worry, I'll make sure you get exactly what you deserve."
                                     "[the_person.possessive_title]'s eyes lose focus and her struggles weaken. Ignoring her plight, [man_name] grips her head tighter and starts pulling her into him rapidly, using her throat as an onahole."
                                     $ cum_on_tits_ntr(the_person) #$ the_person.cum_on_tits()
@@ -543,7 +543,7 @@ label mom_ntr_mod_action_label():
                                 man_name "Fuck yeah. Now relax, I'm gonna fuck your tits and cover them in cum!"
                                 if the_person.get_opinion_score("being submissive") > 0 or the_person.sluttiness > 60:
                                     $ the_person.draw_person(position = "blowjob", emotion = "happy")
-                                    "[the_person.possessive_title] leans back against the side of her bed, relieved to me able to breathe once more. Her chest is heaving with panting breaths."
+                                    "[the_person.possessive_title] leans back against the side of her bed, relieved to be able to breathe once more. Her chest is heaving with panting breaths."
                                     "[man_name] grabs her tits in both hands and lines his cock up between them, squeezing the hot flesh together and pumping his hips."
                                     man_name "These tits are great, [the_person.fname]. You were born to be a fucktoy, weren't you?"
                                     the_person "Y-yes sir. Please, u-use them however you wish."
@@ -553,7 +553,7 @@ label mom_ntr_mod_action_label():
                                     "[man_name] keeps pumping his hips, groaning as his cum shoots up between them. [the_person.possessive_title] flinches as it splashes off her chin and covers her tits."
                                     $ cum_on_stomach_ntr(the_person) #$ the_person.cum_on_stomach()
                                     $ the_person.draw_person(position = "blowjob")
-                                    "There's so much it even drips down on her stomach. With a final sated sigh, [man_name] steps back and releases her, enjoying the sight of his handiwork."
+                                    "There's so much it even drips down onto her stomach. With a final sated sigh, [man_name] steps back and releases her, enjoying the sight of his handiwork."
                                     man_name "There, now isn't it easier when you don't fight, [the_person.fname]?"
                                 else:
                                     $ the_person.draw_person(position = "blowjob", emotion = "sad")
@@ -569,11 +569,11 @@ label mom_ntr_mod_action_label():
                             if the_person.get_opinion_score("being submissive") > 0:
                                 the_person "How about a shower, [man_name]?"
                                 "They both go into the bathroom and you decide to get back to bed."
-                                "Some time later at night you awoke again by the noise coming from [the_person.possessive_title]'s room."
+                                "Some time later at night you are awoken again by the noise coming from [the_person.possessive_title]'s room."
                                 the_person "Mrmh... Blgrhm..."
                                 the_person "Fuck my throat with your hard dick, [man_name]. I need to feel it again. Please, use me until I pass out!"
                                 man_name "Don't worry, [the_person.fname]. I plan to fuck your throat until you can't talk anymore!"
-                                "It seems that [the_person.possessive_title] now does not wish the encounter to end as her gagging and [man_name]'s moans continue."
+                                "It seems that [the_person.possessive_title] now does not wish for the encounter to end as her gagging and [man_name]'s moans continue."
                             else:
                                 if the_person.sluttiness > 60:
                                     the_person "Yes, [man_name]. I'm sorry. You were right, it was scary... intense... but I feel good."
@@ -582,17 +582,17 @@ label mom_ntr_mod_action_label():
                                     "You have trouble getting back to sleep. [the_person.possessive_title] is making a lot of noise in the shower."
                                     the_person "Glkk... ghhh... ah, fuck! Take me with your hard dick, [man_name]. I want to feel it again. Please, rape my teasing whore face again!"
                                     man_name "You're such a cock-hungry slut, [the_person.fname]. Open wide, let's see if I can get my balls down to your chin."
-                                    "It seems that [the_person.possessive_title] now does not wish the encounter to end as her gagging and [man_name]'s moans continue."
+                                    "It seems that [the_person.possessive_title] now does not wish for the encounter to end as her gagging and [man_name]'s moans continue."
                                 else:
-                                    "You hurry back to your room, closing the door before [man_name] emerges. You hear his heavy footsteps down the hall, followed by a slam and the sound of a car peeling out."
+                                    "You hurry back to your room, closing the door before [man_name] emerges. You hear his heavy footsteps move down the hall, followed by a slam and the sound of a car peeling out."
                                     "You go back to bed, ignoring the sounds of sobbing from [the_person.possessive_title]'s room. After a while, you hear her shuffle down the hall and run a shower, no doubt cleaning the evidence of her shameful encounter from her body."
                 else:
                     the_person "Oh, [man_name]. You clearly have some plans for tonight, don't you?"
                     if the_person.get_opinion_score("giving blowjobs") > 0:
                         "She strokes his penis a little."
                     else:
-                        "She caresses the bulge on his pants."
-                    the_person "I like those plans, as well as my little friend here. Now let me help you get rid of those clothes."
+                        "She caresses the bulge in his pants."
+                    the_person "I like those plans, and my little friend here seems to as well. Now let me help you get rid of those clothes."
                     "You see them help each other undress."
                     $ mom_clothing = the_person.choose_strip_clothing_item()
                     if not mom_clothing is None:
@@ -625,13 +625,13 @@ label mom_ntr_mod_action_label():
                         "[the_person.possessive_title] lays on the bed..." if the_person.vagina_available():
                             $ the_person.draw_person(position = "missionary", emotion = "happy")
                             "You watch as [the_person.possessive_title] lays on her bed and spreads her legs, inviting [man_name] to enter her."
-                            the_person "Oh, [man_name], how about take do me the old-fashioned way?"
+                            the_person "Oh, [man_name], how about you do me the old-fashioned way?"
                             man_name "Fuck, you look good like that... you don't have to ask me twice!"
-                            "He quickly drops his shorts and climbs atop of [the_person.possessive_title], entering her pussy in one smooth thrust."
+                            "He quickly drops his shorts and climbs on top of [the_person.possessive_title], entering her pussy in one smooth thrust."
                             the_person "Oh yes, [man_name]! I really needed that. Do it!"
                             "[man_name] speeds up, pumping [the_person.possessive_title]'s wet vagina and kissing her hard."
                             man_name "God, [the_person.fname], you are really tight there!"
-                            "[the_person.possessive_title] pulls [man_name]'s head down to hers, kissing him hungrily. Her hand caress his back as he continues thrusting down into her."
+                            "[the_person.possessive_title] pulls [man_name]'s head down to hers, kissing him hungrily. Her hand caresses his back as he continues thrusting down into her."
                             "After a moment, she breaks the kiss to breathe, letting out a cry of pleasure."
                             the_person "Yes! Do me! I love how you do it! Fuck me harder!"
                             if the_person.get_opinion_score("being submissive") > 0:
@@ -646,9 +646,9 @@ label mom_ntr_mod_action_label():
                                     $ hidden = False
 
                             if not hidden or renpy.random.randint(0,2) == 1:
-                                "[the_person.possessive_title] turns her head and see that the door is slightly ajar and you standing there."
+                                "[the_person.possessive_title] turns her head and sees that the door is slightly ajar and you are standing there."
                                 if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal_perc > 35:
-                                    the_person "[the_person.mc_title], don't just stay there, come on in. [the_person.possessive_title] will help you relax as well."
+                                    the_person "[the_person.mc_title], don't just stand there, come on in. [the_person.possessive_title] will help you relax as well."
                                     "[man_name] does not mind you joining the show as he keeps fucking [the_person.possessive_title]'s pussy."
                                     man_name "Go on, boy. You see she's ready for both of us. Aren't you, [the_person.fname]?"
                                     the_person "I don't mind [the_person.mc_title] seeing me like this. Now, come closer, dear."
@@ -958,9 +958,9 @@ label mom_ntr_mod_action_label():
                                 "Don't hide...":
                                     $ hidden = False
                             if not hidden or renpy.random.randint(0,2) == 1:
-                                "In a mirror next to the bed [the_person.possessive_title] sees that the door is slightly ajar and you standing there."
+                                "In a mirror next to the bed [the_person.possessive_title] sees that the door is slightly ajar and you are standing there."
                                 if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal_perc > 35:
-                                    the_person "[the_person.mc_title], don't just stay there, come on in. [the_person.possessive_title] will help you relax as well."
+                                    the_person "[the_person.mc_title], don't just stand there, come on in. [the_person.possessive_title] will help you relax as well."
                                     man_name "Holy cow, [the_person.fname]. You'll let your son watch you being fucked?"
                                     the_person "I don't mind [the_person.mc_title] seeing me like this. Now, come closer, [the_person.mc_title]."
                                     "You lay down on bed in front of [the_person.possessive_title] and take your dick out of your pants."
@@ -1268,10 +1268,10 @@ label mom_ntr_mod_action_label():
                                 "Don't hide...":
                                     $ hidden = False
                             if not hidden or renpy.random.randint(0,2) == 1:
-                                "[the_person.possessive_title] turns her head a little and see that the door is slightly ajar and you standing there."
+                                "[the_person.possessive_title] turns her head a little and sees that the door is slightly ajar and you are standing there."
                                 if the_person.sluttiness >=50 or the_person.get_opinion_score("public sex") > 0 or the_person.arousal_perc > 35:
                                     "[the_person.possessive_title] takes [man_name]'s dick out of her mouth."
-                                    the_person "[the_person.mc_title], don't just stay there, come on in. [the_person.possessive_title] will help you relax as well."
+                                    the_person "[the_person.mc_title], don't just stand there, come on in. [the_person.possessive_title] will help you relax as well."
                                     man_name "Shit, [the_person.fname]. Your son sees you sucking a guy off, and you don't mind?"
                                     "[the_person.possessive_title] doesn't bother to answer as she goes back to sucking him."
                                     "You come close to [the_person.possessive_title] and take your dick out of your pants."
@@ -1590,9 +1590,9 @@ label mom_ntr_mod_action_label():
                             "Don't hide...":
                                 $ hidden = False
                         if not hidden or renpy.random.randint(0,2) == 1:
-                            "While the men are changing positions, [the_person.possessive_title] turns her head and see that the door is slightly ajar and you standing there."
+                            "While the men are changing positions, [the_person.possessive_title] turns her head and sees that the door is slightly ajar and you are standing there."
                             if the_person.sluttiness >=70 or the_person.get_opinion_score("public sex") > 0:
-                                the_person "[the_person.mc_title], don't just stay there, come on in. [the_person.possessive_title] will help you relax as well."
+                                the_person "[the_person.mc_title], don't just stand there, come on in. [the_person.possessive_title] will help you relax as well."
                                 man_name "Wow, [the_person.fname]! Having two men at once, and now letting your son see it..."
                                 the_person "My house, my rules. So, come on closer. I will help you let it go."
                                 "You and [man_name] come to the table from both sides and [the_person.possessive_title] starts stroking your dicks."
@@ -1931,7 +1931,7 @@ label mom_ntr_mod_action_label():
                         if not hidden or renpy.random.randint(0,2) == 1:
                             if the_person.sluttiness >=70 or the_person.get_opinion_score("public sex") > 0:
                                 "[the_person.possessive_title] raises her head and looks into the mirror next to her bed, she sees you standing there, looking at her, through the slightly opened door."
-                                the_person "[the_person.mc_title], don't just stay there, come on in. [the_person.possessive_title] will help you relax as well."
+                                the_person "[the_person.mc_title], don't just stand there, come on in. [the_person.possessive_title] will help you relax as well."
                                 man_name2 "Wow, [the_person.fname]! Two of us not enough for you?"
                                 if the_person.get_opinion_score("being submissive") > 0:
                                     the_person "I want two of you to fuck me real hard so that I would scream like mad. I don't want to wake [lily.fname] so I need something to shut my mouth."
@@ -2283,10 +2283,10 @@ label mom_ntr_mod_action_label():
                             "Don't hide...":
                                 $ hidden = False
                         if not hidden or renpy.random.randint(0,2) == 1:
-                            "[the_person.possessive_title] turns her head and sees that the door is slightly ajar and you standing there."
+                            "[the_person.possessive_title] turns her head and sees that the door is slightly ajar and you are standing there."
                             if the_person.sluttiness >=70 or the_person.get_opinion_score("public sex") > 0:
                                 "[the_person.possessive_title] takes [man_name2]'s dick out of her mouth."
-                                the_person "[the_person.mc_title], don't just stay there, come on in. [the_person.possessive_title] will help you relax as well."
+                                the_person "[the_person.mc_title], don't just stand there, come on in. [the_person.possessive_title] will help you relax as well."
                                 "Both [man_name] and [man_name2] don't mind you joining the show as [the_person.possessive_title] goes back to sucking them."
                                 "You come close to [the_person.possessive_title] and take your dick out of your pants."
                                 "She starts stroking you along with [man_name] while [man_name2] keeps driving his dick into her mouth."
