@@ -1509,7 +1509,7 @@ label myra_sex_roullette_session_label(the_person, breeding_fetish_intro = False
     "You give her ass a solid spank, then grope it gingerly."
     "You slide your fingers down her crack to her slit. You give it some attention as she pulls the game up."
     "When she finishes pulling up the game, you see a couple of people in a bedroom together."
-    the_person "Alright, got it ready..."
+    the_person "Alright, get ready..."
     if persistent.always_ask_condom or the_person.effective_sluttiness("condomless_sex") < the_person.get_no_condom_threshold() + 50 or the_person.has_taboo("condomless_sex"):
         $ condom_threshold = the_person.get_no_condom_threshold()
         if the_person.has_breeding_fetish() or breeding_fetish_intro:
