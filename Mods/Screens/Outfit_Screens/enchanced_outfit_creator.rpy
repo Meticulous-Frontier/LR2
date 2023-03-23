@@ -199,6 +199,19 @@ init 10 python:
     def update_transparency(new_value):
         cs = renpy.current_screen()
 
+        if not new_value:
+            new_value = .33
+
+        try:
+            new_value = float(new_value)
+        except ValueError:
+            new_value = .33
+
+        if new_value < .33:
+            new_value = .33
+        elif new_value > 1.0:
+            new_value = 1.0
+
         cs.scope["current_a"] = __builtin__.round(float(new_value),2)
         if cs.scope["selected_colour"] == "colour_pattern":
             cs.scope["selected_clothing"].colour_pattern = [cs.scope["current_r"], cs.scope["current_g"], cs.scope["current_b"], __builtin__.round(float(new_value),2)]
@@ -734,11 +747,16 @@ init 2:
                                                                             text "[trans_name]" style "menu_text_style" xalign 0.5 xanchor 0.5 yalign 0.5 yanchor 0.5
                                                                             xysize (60, 40)
                                                                             action [Function(update_transparency, float(trans))]
-                                                                    frame:
+                                                                    button:
+                                                                        action ToggleScreenVariable("bar_select", 4, 0)
+                                                                        hovered SetScreenVariable("bar_value", "current_a")
+                                                                        if bar_select == 4:
+                                                                            input default current_a length 4 changed update_transparency allow ".0123456789" style "serum_text_style" size 16 yoffset 10
+                                                                        else:
+                                                                            text str(int(float(current_a)*100)) + "%" style "serum_text_style" yalign 0.5 size 16
                                                                         padding (0,0)
                                                                         xysize (60, 40)
                                                                         background "#143869"
-                                                                        text str(int(float(current_a)*100)) + "%" style "serum_text_style" yalign 0.5 size 16
 
                                                     if color_selection:
                                                         for block_count, colour_list in __builtin__.enumerate(split_list_in_blocks(persistent.colour_palette, 13)):
