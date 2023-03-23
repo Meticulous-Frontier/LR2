@@ -15,7 +15,7 @@ label SB_anal_standing_double_orgasm(the_girl, the_location, the_object):
             "You push yourself balls deep into [the_girl.title]'s ass and dump your load. Her moans grow desperate as she cums with you in unison."
             $ climax_controller.do_clarity_release(the_girl)
             if the_girl.get_opinion_score("anal creampies") > 0:
-                the_girl "Oh god yes come for me! Shoot your load while you fuck my little ass!"
+                the_girl "Oh god yes cum for me! Shoot your load while you fuck my little ass!"
             else:
                 the_girl "Oh god I can't believe it, I'm cumming!"
             "You can feel her ass pulsating all around you as you cum in unison. Her bowels are milking your cum, with only a thin layer of latex keeping it from spilling deep inside her."

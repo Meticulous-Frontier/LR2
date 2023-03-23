@@ -842,7 +842,7 @@ label breeding_stock_sex_accept(the_person, the_position):
         the_person "Mmmm, let me get you ready for another breeding session."
     elif the_position.skill_tag == "Oral":
         if "getting head" in the_position.opinion_tags:
-            the_person "Oh yes, lets get my pussy ready for your baby machine."
+            the_person "Oh yes, let's get my pussy ready for your baby machine."
         else:
             the_person "Let me make your cock nice and slick so you can cum deep inside me."
     else:

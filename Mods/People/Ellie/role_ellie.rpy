@@ -2449,7 +2449,7 @@ label ellie_start_search_label(): #140 obedience. Scene where you talk to ellie 
     "You walk her through getting her account set up."
     "Of course you make note of the name so you can check up on it."
     $ the_person.change_stats(obedience = 3)
-    mc.name "Alright, once in a while make a new posting with a pic of you doing something naughty, but first lets get you a promo."
+    mc.name "Alright, once in a while make a new posting with a pic of you doing something naughty, but first let's get you a promo."
     mc.name "Let's go back to the testing room."
     #TODO make a testing room background and transition to it here.
     "You walk with the girls back to the serum testing room for privacy."
