@@ -685,6 +685,8 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
                     "With [the_person.title] still wearing your cum from her service earlier, you get a burst of energy and arousal."
                     $ mc.change_stats(arousal = __builtin__.min(30, mc.max_arousal - mc.arousal), energy = __builtin__.min(80, mc.max_energy - mc.energy))
                 mc.name "Of course. Let's get started."
+                if not (the_person.vagina_visible() and person_choice.vagina_visible()):
+                    $ scene_manager.strip_to_vagina()
                 call start_threesome(person_choice, the_person) from threesome_HR_meeting_happy_ending
                 person_choice "Oh my... that was fun. Thanks for calling me in! I guess I'd better go get back to work..."
                 if the_person is sarah:
