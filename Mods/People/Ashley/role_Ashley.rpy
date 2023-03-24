@@ -857,11 +857,13 @@ label ashley_lily_hangout_label():
     "Thankfully, her hand moves over into your lap as well. Through your pants you feel her start to stroke your rapidly hardening cock."
     $ the_person.change_arousal(20)
     $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(30)
     "You easily slide your middle finger into [the_person.title]'s vagina as you watch the movie together with [lily.possessive_title]."
     "[the_person.title] looks over at your sister, then you feel her unzip your pants. Her hand carefully reaches in, and after several seconds she manages to pull out your dick."
     "Her soft hand starts to stroke you, skin to skin. It feels pretty good as you continue to finger her."
     $ the_person.change_arousal(20)
     $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(30)
     "The movie keeps going, but you start to zone out. [the_person.possessive_title]'s soft hand stroking you is turning you on, and your sister being the in same room makes it even more exciting."
     "You push a second finger into [the_person.title]. With the angle of your hand, you are able to use the palm of your hand to put pressure on her clit while you stroke her g-spot."
     "She is starting to get a little bit restless in her seat, shifting back and forth. She stifles a moan, trying to keep quiet."
@@ -869,10 +871,12 @@ label ashley_lily_hangout_label():
     "When she resumes stroking you, the extra lubrication makes her soft hand feel even better."
     $ the_person.change_arousal(30)
     $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(30)
     "[the_person.possessive_title]'s hips are starting to move on their own. She is still stroking you with her hand, but her rhythm is off as she approaches climax."
     "You look over at her face. She bites her lip and closes her eyes as you push her over the edge."
     $ the_person.change_arousal(30)
     $ mc.change_arousal(20)
+    $ mc.change_locked_clarity(30)
     "[the_person.title]'s body trembles slightly as she start to cum. You stroke her g-spot relentlessly as her body clenches in orgasm."
     "Somehow, she manages to hold her breath and stifles any noises while she cums. After several seconds, you worry she might pass out."
     $ the_person.have_orgasm(the_position = "sitting", half_arousal = False)
@@ -881,6 +885,7 @@ label ashley_lily_hangout_label():
     "She gives you a half smile, then keeps stroking you."
     "The excitement of getting a handjob with your sister in the same room and watching [the_person.title] orgasm is too much."
     $ mc.change_arousal(30)
+    $ mc.change_locked_clarity(30)
     "As you start to cum, [the_person.possessive_title] uses her hand to keep your cum contained and off the blanket."
     "You can feel yourself making a mess of her hand and your pants but you don't care."
     $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = ashley)
@@ -2508,6 +2513,8 @@ label ashley_submission_blowjob_taboo_restore_label():
             the_person "Fine. But just because I'm willing to suck you off once in a while, doesn't make me one of your airheaded sluts, okay?"
             mc.name "I never said you were."
             $ outcome_convince = True
+            $ the_person.draw_person(position = "walking_away")
+            "[the_person.possessive_title] turns and walks back to her desk."
 
         "But it keeps happening...\n{color=#ff0000}{size=18}Requires repeated submission{/size}{/color} (disabled)" if ashley.event_triggers_dict.get("sub_blowjob_count", 0) < 3:
             pass
@@ -2522,6 +2529,7 @@ label ashley_submission_blowjob_taboo_restore_label():
             mc.name "Did you mean it though? I mean..."
             "You undo your zipper and pull out your dick."
             $ the_person.change_arousal(10)
+            $ mc.change_locked_clarity(30)
             mc.name "You really DID seem to enjoy it. Maybe you should try it one more time. Just to make sure that is how you feel."
             $ the_person.draw_person(position = "blowjob")
             "[the_person.possessive_title] is already getting down on her knees. Her resistance is crumbling."
@@ -2532,6 +2540,7 @@ label ashley_submission_blowjob_taboo_restore_label():
             "Her skillful mouth is yours to use as your cocksleeve, whenever you please. She sighs and then envelopes the tip of your penis between her lips, sliding them down the shaft in sweet victory."
             "[the_person.possessive_title]'s head begins to bob up and down, accompanied by sweet sounds of slurps and sighs."
             $ the_person.change_arousal(15)
+            $ mc.change_locked_clarity(30)
             "She really is enjoying this! It has taken a while to get her to this point, but your obedient employee is now dedicated to making you cum."
             "You put your hand on her head, controling the pace while she continues to slurp and moan happily sucking you off."
             "You feel yourself getting ready to cum, but you want to make a point, so you pull her back from your cock for moment."
@@ -2549,6 +2558,7 @@ label ashley_submission_blowjob_taboo_restore_label():
             "She gags a little as you start to cum, but obediently takes it down her throat and straight into her stomach."
             $ the_person.cum_in_mouth()
             $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
+            $ mc.change_locked_clarity(30)
             "She gags again, and this time a little bit of cum escapes from the corners of her mouth."
             "After you finish, you hold her head in place for a couple extra seconds, savoring it."
             $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
@@ -2562,12 +2572,13 @@ label ashley_submission_blowjob_taboo_restore_label():
 
         "Let's go to my office\n{color=#ff0000}{size=18}Requires Ashley Loves Blowjobs{/size}{/color} (disabled)" if ashley.opinion_score_giving_blowjobs() != 2:
             pass
+
         "Understood":
             mc.name "I understand. You have boundaries and I won't cross them again without approval."
             "She looks at you suspiciously, but ultimately accepts your proposal.."
             the_person "Alright. Let's just not have this talk again, okay?"
-    $ the_person.draw_person(position = "walking_away")
-    "[the_person.possessive_title] turns and walks back to her desk."
+            $ the_person.draw_person(position = "walking_away")
+            "[the_person.possessive_title] turns and walks back to her desk."
 
     if outcome_convince:
         $ mc.business.add_mandatory_crisis(ashley_submission_fuck)
