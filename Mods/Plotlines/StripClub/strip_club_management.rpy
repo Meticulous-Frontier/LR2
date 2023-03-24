@@ -1,5 +1,33 @@
 ## Stripclub storyline Mod by Corrado
 # You have some strippers but the business could improve.
+init 3 python:
+    def strip_club_manager_bdsm_room_build_requirement():
+        if not mc.business.has_funds(10000):
+            return False
+        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
+            return False
+        if not mc.business.is_open_for_business():
+            return "Only during business hours"
+        if strip_club_get_manager():
+            return True
+        return False
+
+    # extend the default build phone menu function with renovations
+    def build_phone_menu_build_bdsm_room_extended(org_func):
+        def phone_menu_wrapper():
+            # run original function
+            phone_menu = org_func()
+            if mc.business.event_triggers_dict.get("strip_club_bdsm_decision_day", None) == 0: # only show option when we haven't started construction
+                strip_club_manager_bdsm_room_build_action = Action("Build a BDSM room\n{color=#ff0000}{size=18}Costs: $10,000{/size}{/color}", strip_club_manager_bdsm_room_build_requirement, "strip_club_manager_bdsm_room_build_label")
+                phone_menu[2].insert(1, strip_club_manager_bdsm_room_build_action)
+
+            return phone_menu
+
+        return phone_menu_wrapper
+
+    if "build_phone_menu" in globals():
+        build_phone_menu = build_phone_menu_build_bdsm_room_extended(build_phone_menu)
+
 
 init 3304 python:
     def strip_club_get_manager():
@@ -88,18 +116,6 @@ init 3304 python:
             strip_club_manager_bdsm_room_reminder_action = Action("A simple reminder from the strip club manager to build a BDSM room.", strip_club_manager_bdsm_room_reminder_requirement, "strip_club_manager_bdsm_room_reminder_label")
             mc.business.add_mandatory_crisis(strip_club_manager_bdsm_room_reminder_action)
 
-    def strip_club_manager_bdsm_room_build_requirement():
-        if not mc.business.has_funds(10000):
-            return False
-        if mc.business.event_triggers_dict.get("strip_club_has_bdsm_room", False):
-            return False
-        if not mc.business.is_open_for_business():
-            return "Only during business hours"
-        if strip_club_get_manager():
-            return True
-        return False
-
-    strip_club_manager_bdsm_room_build_action = Action("Build a BDSM room\n{color=#ff0000}{size=18}Costs: $10,000{/size}{/color}", strip_club_manager_bdsm_room_build_requirement, "strip_club_manager_bdsm_room_build_label")
 
     def strip_club_manager_bdsm_room_built_requirement():
         if day >= (mc.business.event_triggers_dict.get("strip_club_bdsm_decision_day") + 5):
@@ -204,9 +220,9 @@ label strip_club_manager_bdsm_room_suggestion_label(): # (personal contact)
     mc.name "Thank you, [the_person.title], I'll look at it."
     $ the_person.draw_person(emotion = "happy", position = "stand4")
     "As you glance over the documents, you quickly realize that the $10,000 investment could be very, very profitable."
+
     $ add_strip_club_manager_bdsm_room_reminder_action()
     $ mc.business.event_triggers_dict["strip_club_bdsm_decision_day"] = 0
-    $ strip_club.add_action(strip_club_manager_bdsm_room_build_action)
     return
 
 label strip_club_manager_bdsm_room_build_label(): # (action button)
@@ -215,7 +231,6 @@ label strip_club_manager_bdsm_room_build_label(): # (action button)
     "You go over the details and agree on a price of $10,000 for converting some unused space into a fully equipped and soundproofed BDSM room."
     $ mc.business.change_funds(-10000)
     $ add_strip_club_manager_bdsm_room_built_event()
-    $ strip_club.remove_action(strip_club_manager_bdsm_room_build_action)
     $ mc.business.event_triggers_dict["strip_club_bdsm_decision_day"] = day
     return
 
