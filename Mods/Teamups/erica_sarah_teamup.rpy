@@ -610,7 +610,7 @@ label erica_weekly_yoga_label(the_person):
         if willing_to_threesome(the_person, yoga_assistant) and renpy.random.randint(0,2) == 0: #Give a chance, if possible, to get a double blowjob after the show
             "[yoga_assistant.title] is blatantly gawking at your tent, when [the_person.title] speaks up."
             the_person "Yup, there's only one thing left to do!"
-            mc.name "Oh? Whats that?"
+            mc.name "Oh? What's that?"
             the_person "The best way to make gains after a workout is with a shot of protein!"
             "[the_person.possessive_title] is clearly referencing your cum."
             yoga_assistant "Oh! That sounds good! Can I get some too?"
