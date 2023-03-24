@@ -771,24 +771,72 @@ label ashley_asks_about_lily_label():   #Ashley talks to MC about Lily and how s
     mc.name "It would be a good chance for you two to maybe make up a little."
     the_person "Yeah... I mean, I kind of have my doubts, but that might actually work."
     the_person "I think it'll help that you're her brother, and not her boyfriend!"
-    mc.name "Oh yeah, totally."
-
-
-    "In this label, Ashley approach MC at work."
-    "She brings up the encounter with Lily."
-    "She shares that she has this problem. She finds taken men to be extremely attractive. Makes sense why she is stealing other girls boyfriends."
-    "Says she doesn't want things with Lily to cause a problem with you. Asks if she can come over sometime just to hang out."
-    "Add mandatory event for hanging out at MC's house next Saturday. MC texts Lily and she agrees to hang out that time, but doesn't know Ashley is coming over."
+    #TODO after integration check lilys love path
+    mc.name "Oh yeah, totally. Alright I'll text her. Tonight okay?"
+    the_person "Yeah, should be..."
+    "You pull out your phone and look up [lily.possessive_title]."
+    $ mc.start_text_convo(lily)
+    mc.name "Hey, what are you up to tonight?"
+    lily "Hey bro! Not much, probably just studying for an exam I have next week."
+    mc.name "Put it off. I want to watch Three Amigos tonight."
+    "Several seconds go by."
+    lily "Hey! You know I love that movie. Just come get me when you get ready to start it."
+    mc.name "Will do."
+    $ mc.end_text_convo()
+    "You put your phone away."
+    mc.name "Alright, we're on for tonight. Be there about 9, okay?"
+    the_person "Okay. I'll be there."
+    mc.name "I hope this plan of your works..."
+    the_person "Don't worry, I got this."
+    $ clear_scene()
+    "[the_person.possessive_title] turns and steps away, leaving you at your work station."
+    "You are a little nervous about this plan, but maybe she can pull off redemption with your sister?"
     $ mc.business.add_mandatory_crisis(ashley_lily_hangout)
     return
 
 label ashley_lily_hangout_label():
     $ the_person = ashley
     $ the_person.story_event_log("love")
-    "In this label, MC is hanging out with Lily and then Ashley comes over."
-    "Lily gets pissed, but you are able to calm her down."
-    "Ashley apologizes. Lily doesn't like it, but with your insistence, agrees to try and forgive her and get long with her."
-    "The girls exchange numbers. Maybe they will even hang out once in a a while?"
+    "It is late, and you have a date with [the_person.title] and your sister for a movie tonight. You get the TV ready when you phone goes off."
+    $ mc.start_text_convo(the_person)
+    the_person "Hey, I'm here. Let me in?"
+    mc.name "OMW"
+    "You step to the front door and open it."
+    $ scene_manager = Scene()
+    $ scene_manager.add_actor(the_person)
+    the_person "Hey. Ready to rock and roll?"
+    mc.name "I guess. Make yourself comfortable in the living room, and I'll go get [lily.fname]."
+    the_person "Okay."
+    $ scene_manager.remove_actor(the_person)
+    $ mc.change_location(lily.home)
+    "You knock on [lily.possessive_title]'s door."
+    $ scene_manager.add_actor(lily)
+    mc.name "Hey, I'm starting the movie up."
+    lily "Great! I could really use a break."
+    mc.name "Hey, as a headsup, I have a friend over to watch it with us."
+    lily "Oh? Who is it?"
+    mc.name "You'll see..."
+    $ mc.change_location(hall)
+    $ scene_manager.add_actor(the_person, display_transform = character_center_flipped, position = "sitting")
+    "[lily.title] stops when she walks into the living room."
+    lily "... Seriously?"
+    mc.name "Hey, she likes comedy movies too."
+    the_person "Hey! Don't worry you won't even know I'm here. I love this movie!"
+    $ scene_manager.update_actor(lily, emotion = "angry")
+    lily "[lily.mc_title], are you kidding me!?!"
+    mc.name "It's just a movie. Okay?"
+    "[lily.possessive_title] gives you a long glare. For a moment, it seems she may turn around and walk back to her room, but eventually she relents."
+    lily "You're lucky I love this movie."
+    the_person "Me too!"
+    lily "I wasn't talking to you."
+    $ scene_manager.update_actor(lily, position = "sitting")
+    "[lily.title] walks over and sits down in a chair across the room. You sit down next to [the_person.title]."
+    "You give her a nervous smile, but she looks at you with unnerving determination."
+    "You pick up the remote and start the movie. There is some definite tension as the it starts."
+    "Thankfully, the comedic stylings of Steve Martin, Chevy Chase, and Martin Short let some air of the room."
+    $ scene_manager.update_actor(lily, emotion = "happy")
+    "When it gets to the scene in the bar where the three amigos perform a musical number, [lily.title] is openly laughing."
+
     "They find out they both actually like a similar clothing line at the mall. Ashley likes to shop? You had no idea."
     "They agree to hang out and go shopping once in a while. Wait... maybe this is a bad idea... is ashley going to be a good influence on Lily?"
     $ mc.business.add_mandatory_crisis(ashley_lily_shopping_selfies)
