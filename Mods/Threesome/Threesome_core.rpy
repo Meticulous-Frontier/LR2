@@ -401,9 +401,7 @@ init 5 python:
 label start_threesome(the_person_one, the_person_two, start_position = None, start_object = None, skip_intro = False, private = True, girl_in_charge = False, position_locked = False, report_log = None, affair_ask_after = True, hide_leave = False, swapped = False):
     # When called
     if report_log is None:
-        $ report_log = defaultdict(int) #Holds information about the encounter: what positions were tried, how many rounds it went, who came and how many times, etc. Defaultdict sets values to 0 if they don't exist when accessed
-        $ report_log["positions_used"] = []  #We don't need to add threesome to the list, because we add it manually at the end of this function.
-        #$ report_log["positions_used"]
+        $ report_log = create_report_log()
 
     $ finished = False #When True we exit the main loop (or never enter it, if we can't find anything to do)
     $ position_choice = None
