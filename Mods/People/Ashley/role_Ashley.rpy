@@ -811,6 +811,7 @@ label ashley_lily_hangout_label():
     $ mc.start_text_convo(the_person)
     the_person "Hey, I'm here. Let me in?"
     mc.name "OMW"
+    $ mc.end_text_convo()
     "You step to the front door and open it."
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person)
@@ -915,13 +916,13 @@ label ashley_lily_hangout_label():
     "[mom.title] settles into the couch, sitting right next to you as she watches the movie."
     "After a few minutes, you can hear two girls chatting as the re-enter the room, carrying snacks and drinks."
     $ scene_manager.add_actor(the_person, display_transform = character_center)
-    $ scene_amanager.add_actor(lily, display_transform = character_right)
+    $ scene_manager.add_actor(lily, display_transform = character_right)
     lily "Oh hey mom."
     "[the_person.title] stops when she sees your mother sitting next to you. She gives you a mischievous smile when she realizes what state you are in."
     mom "Ah! Hello there, you must be the friend that [mc.name] was telling me about..."
     the_person "Hi, I'm [the_person.fname]. It is an absolute PLEASURE to meet you!"
-    $ scene_amanager.update_actor(lily, position = "sitting")
-    $ scene_amanager.update_actor(the_person, position = "sitting")
+    $ scene_manager.update_actor(lily, position = "sitting")
+    $ scene_manager.update_actor(the_person, position = "sitting")
     "The two girls sit down next to each other on the other end of the couch, sharing popcorn and watching the movie."
     "You sit there, your mother right next to you, your shirt and pants covered in cum. You manage to put your dick away atleast without your family noticing..."
     "[lily.possessive_title] and [the_person.title] are chatting constantly now. You can't really hear what they are talking about, but you are glad they seem to be getting along."
@@ -980,6 +981,7 @@ label ashley_lily_hangout_label():
     "Wow. What a night. The way that [the_person.title] is able to manipulate people... it is a little bit scary."
     "After one night, she appears to be well on the way to befriending your sister. You wonder... is it possible she used some kind of serum on her in the kitchen?"
     "You are glad they agreed to hang out and go shopping once in a while. Wait... maybe this is a bad idea... is [the_person.title] going to be a good influence on [lily.possessive_title]?"
+    "You clean yourself up in the bathroom, then head to bed."
     $ mc.business.add_mandatory_crisis(ashley_lily_shopping_selfies)
     $ town_relationships.update_relationship(lily, ashley, "Friend")
     $ ashley.event_triggers_dict["lily_friend"] = True
@@ -2107,7 +2109,7 @@ label ashley_submission_titfuck_taboo_restore_label():
         #     mc.name "Of course. That is perfectly reasonable."
         #     $ outcome_convince = True
         "I thought you liked to make me feel good" if ashley.love_step >= 3:
-
+            pass
 
         "I thought you liked to make me feel good\n{color=#ff0000}{size=18}Requires: Love Story Progress{/size}{/color} (disabled)" if ashley.love_step < 3:
             pass
