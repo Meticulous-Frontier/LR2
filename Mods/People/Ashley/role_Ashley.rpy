@@ -213,9 +213,15 @@ init -1 python:
         return False
 
     def ashley_room_overhear_classical_requirement(the_person):
+        if mc.business.p_div.get_person_count() <= 1:
+            ashley.love_messages[0] = "Hire more production staff"
+            return False
         if the_person.is_at_work() and mc.business.p_div.get_person_count() > 1:
             if the_person.days_employed > TIER_2_TIME_DELAY:
                 return True
+            else:
+                ashley.love_messages[0] = "Give [ashley.fname] time to settle into her new job."
+                return False
         return False
 
     def ashley_ask_date_classic_concert_requirement(the_person):
@@ -226,6 +232,8 @@ init -1 python:
     def ashley_classical_concert_date_requirement():
         if time_of_day == 3 and day%7 == 3:  #Thursday
             return ashley_get_concert_date_stage() == 1
+        else:
+            ashley.love_messages[0] = "Go with [ashley.fname] to the concert on Thursday night"
         return False
 
     # def ashley_room_excitement_overhear_requirement(the_person):
