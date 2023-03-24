@@ -927,7 +927,7 @@ label ashley_lily_hangout_label():
     mom "Huh... this couch is smelling kind of musty. Maybe I should do some cleaning this weekend."
     mc.name "Yeah... good idea..."
     "[mom.title] settles into the couch, sitting right next to you as she watches the movie."
-    "After a few minutes, you can hear two girls chatting as the re-enter the room, carrying snacks and drinks."
+    "After a few minutes, you can hear two girls chatting as they re-enter the room, carrying snacks and drinks."
     $ scene_manager.add_actor(the_person, display_transform = character_center)
     $ scene_manager.add_actor(lily, display_transform = character_right)
     lily "Oh hey mom."
@@ -941,7 +941,7 @@ label ashley_lily_hangout_label():
     "[lily.possessive_title] and [the_person.title] are chatting constantly now. You can't really hear what they are talking about, but you are glad they seem to be getting along."
     if mom.love > 40:
         "[mom.title] scoots over a bit closer to you now, putting her head on your shoulder."
-        "Normally you would enjoy this sign of affection from her, but you are one wrong move from her could lead to a really awkward situation..."
+        "Normally you would enjoy this sign of affection from her, but you are just one wrong move away from her finding out and that could lead to a really awkward situation..."
     "You settle in and just try and enjoy what is left of the movie. Thankfully, the movie ends and [mom.possessive_title] never discoveres the source of the odd smell."
     mom "Oh wow, what a fun movie! I need to get to bed though. Goodnight everyone!"
     $ scene_manager.update_actor(mom, position = "walking_away")
