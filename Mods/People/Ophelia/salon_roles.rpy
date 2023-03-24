@@ -95,7 +95,7 @@ init 2 python:
             return True
 
     def ophelia_is_over_her_ex_requirement(person):
-        if ophelia_is_over_her_ex_day() != 0 and day >= ophelia_get_day_of_revenge_date() + 7:
+        if day >= ophelia_get_day_of_revenge_date() + 7:
             if person.is_at_work():
                 return True
         return False

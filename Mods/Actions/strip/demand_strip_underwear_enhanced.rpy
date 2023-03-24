@@ -134,7 +134,7 @@ label demand_strip_underwear_label_enhanced(the_person):
 
 label .start_stripping(private = False, ordered = False):
     $ underwear_strip_description(the_person)
-    $ person_is_shy = not the_person.judge_outfit(the_person.outfit, temp_sluttiness_boost = 5 * the_person.get_opinion_score("lingere"))
+    $ person_is_shy = not the_person.judge_outfit(the_person.outfit, temp_sluttiness_boost = 5 * the_person.get_opinion_score("lingerie"))
 
     if the_person.update_outfit_taboos() or person_is_shy: # She's shy
         the_person "Um... So what do we do now?"

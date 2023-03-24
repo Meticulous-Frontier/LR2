@@ -75,11 +75,10 @@ init -2 python:
         def is_available(self):     #Returns true of the serum is able to be used.
             if self.get_unlocked(): #Determine if its unlocked first
                 active_traits = 0
-                for trait in list_of_mc_traits:
-                    if trait.is_selected:
-                        active_traits += 1
-                        if trait.category == self.category:   #Check and see if another trait in the same catagory is available.
-                            return False
+                for trait in [x for x in list_of_mc_traits if x.is_selected]:
+                    active_traits += 1
+                    if trait.category == self.category:   #Check and see if another trait in the same catagory is available.
+                        return False
                 if active_traits >= mc_serum_max_quantity():    #Check and see if we have hit the max possible active traits.
                     return False
                 return True
@@ -174,57 +173,27 @@ init -2 python:
         return mc.business.event_triggers_dict.get("mc_serum_max_quant", 1)
 
     def mc_serum_energy_serum_is_active():
-        for trait in mc_serum_get_energy_list():
-            if trait.is_active():
-                return True
-        return False
+        return any(x for x in mc_serum_get_energy_list() if x.is_active())
 
     def mc_serum_aura_serum_is_active():
-        for trait in mc_serum_get_aura_list():
-            if trait.is_active():
-                return True
-        return False
+        return any(x for x in mc_serum_get_aura_list() if x.is_active())
 
     def mc_serum_cum_serum_is_active():
-        for trait in mc_serum_get_cum_list():
-            if trait.is_active():
-                return True
-        return False
+        return any(x for x in mc_serum_get_cum_list() if x.is_active())
 
     def mc_serum_physical_serum_is_active():
-        for trait in mc_serum_get_physical_list():
-            if trait.is_active():
-                return True
-        return False
+        return any(x for x in mc_serum_get_physical_list() if x.is_active())
 
     def mc_serum_list_of_upgradable_serums():   #Rework this so we can upgrade active traits
-        list_of_upgrades = []
-        for trait in mc_serum_get_energy_list():
-            if trait.check_upgrade():
-                list_of_upgrades.append(trait)
-        for trait in mc_serum_get_aura_list():
-            if trait.check_upgrade():
-                list_of_upgrades.append(trait)
-        for trait in mc_serum_get_cum_list():
-            if trait.check_upgrade():
-                list_of_upgrades.append(trait)
-        for trait in mc_serum_get_physical_list():
-            if trait.check_upgrade():
-                list_of_upgrades.append(trait)
-        return list_of_upgrades
+        return [x for x in list_of_mc_traits if x.check_upgrade()]
 
     def mc_serum_save_selected_list():
-        list_selected_traits = []
-        for trait in list_of_mc_traits:
-            if trait.is_selected:
-                list_selected_traits.append(trait.name)
-
+        list_selected_traits = [x.name for x in list_of_mc_traits if x.is_selected]
         mc.business.event_triggers_dict["selected_mc_serums_list"] = list_selected_traits
         return
 
     def mc_serum_load_selected_list():
         list_selected_traits = mc.business.event_triggers_dict.get("selected_mc_serums_list", [])
-        for trait in list_of_mc_traits:
-            if trait.name in list_selected_traits:
-                trait.is_selected = True
+        for trait in [x for x in list_of_mc_traits if x.name in list_selected_traits]:
+            trait.is_selected = True
         return
