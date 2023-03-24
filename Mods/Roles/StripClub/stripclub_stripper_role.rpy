@@ -55,8 +55,10 @@ init 5 python:
             return False
         if person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
             return False
-        if the_person in [mom, aunt] and not the_person.has_job(unemployed_job):
-            return "Only when unemployed"
+        if person in [mom, aunt]:   # special work around for mom and aunt (will block the wednesday night event)
+            if not person.has_job([unemployed_job, aunt_unemployed_job]):
+                return "Only when unemployed"
+            return True
         if person.has_job_role(critical_job_role): # critical jobs require very high sluttiness
             if person.sluttiness < 80:
                 return False
