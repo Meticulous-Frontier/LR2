@@ -490,7 +490,7 @@ label ashley_classical_concert_date_label():
     the_person "I know, I know... are you sure you don't want to go?"
     stephanie "Don't be silly, you've only got two tickets. You two will have a blast!"
     the_person "Okay..."
-    $ ashley.teamup_messages[0] = "[the_person.fname] and her sister would make an interesting pair to get together, but right now that seems impossible."
+    $ ashley.teamup_messages[0] = "[ashley.fname] and her sister would make an interesting pair to get together, but right now that seems impossible."
     "As you look at the two sisters, you have a sudden vision in your head of the two girls on top of each other, eating each other out, while you fuck [the_person.title]."
     "Right now a goal like that seems impossibly far away... but maybe someday you'll be able to get the two sisters to bend to your sexual desires."
     $ mc.change_locked_clarity(30)
@@ -750,7 +750,7 @@ label ashley_after_hours_label():   #Ashley looks for an opportunity to get MC a
     $ scene_manager.clear_scene()
     "So it turns out, your sister and [the_person.possessive_title] already know each other... but definitely not in a good way."
     "If you want to get close to [the_person.title], you might have to work on repairing their relationship."
-    $ ashley.teamup_messages[1] = "[the_person.fname] and your sister already seem to know each. What might happen if you work on repairing their relationship?"
+    $ ashley.teamup_messages[1] = "[ashley.fname] and your sister already seem to know each. What might happen if you work on repairing their relationship?"
     $ mc.business.add_mandatory_crisis(ashley_asks_about_lily)
     $ ashley.love_messages[1] = "She walked you home, and it seems she already knows your sister."
     $ ashley.love_messages[2] = ("")
@@ -2098,18 +2098,15 @@ label ashley_submission_titfuck_taboo_restore_label():
         the_person "Besides, I'm not the type to just get drop to her knees on demand."
 
     menu:
-        # "We can avoid your sister staying late" if the_person.get_known_opinion_score("incest") > 0:
-        #     mc.name "Why not [the_person.title]? I thought you told me when you walked me home the other night that you were enjoying spending time with me."
-        #     the_person "That's not... I don't..."
-        #     mc.name "It's okay that we enjoy spending time together, even if your sister does have feelings for me."
-        #     "[the_person.possessive_title] seems torn."
-        #     mc.name "I mean, at this point, we've both finished a day here with urges. If you can come to me when your sexual appetite is whet, why can't I do the same?"
-        #     "She takes a deep breath and nods her approval."
-        #     the_person "Fine... I'm willing to stick around after work once in a while for a little fun... but only if you reciprocate!"
-        #     mc.name "Of course. That is perfectly reasonable."
-        #     $ outcome_convince = True
         "I thought you liked to make me feel good" if ashley.love_step >= 3:
-            pass
+            mc.name "But remember what you told me the other night at my place, after the movie? You said you liked to make me feel good."
+            mc.name "That I deserved to have someone do that for me once in a while."
+            the_person "I... I know I did..."
+            mc.name "Is this really any different? Your tits are amazing. They feel so good when my cock slides between them..."
+            "She bites her lip, thinking. Eventually she relents."
+            the_person "You're right... you deserve it... just once in a while! Okay?"
+            mc.name "Of course."
+            $ outcome_convince = True
 
         "I thought you liked to make me feel good\n{color=#ff0000}{size=18}Requires: Love Story Progress{/size}{/color} (disabled)" if ashley.love_step < 3:
             pass
