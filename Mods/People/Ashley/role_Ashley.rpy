@@ -622,19 +622,26 @@ init -1 python:
         return False
 
     def ashley_asks_about_lily_requirement():
-        ashley.love_messages[2] = "This story has not yet been written."
-        return False
-        if ashley.love >= 40 and ashley.story_event_ready("love"):
-            if mc.is_at_work() and mc.business.is_open_for_business():
-                return True
+        if ashley.love < 40:
+            ashley.love_messages[2] = "Increase [ashley.title]'s love to atleast 40."
+            return False
+        if not ashley.story_event_ready("love"):
+            ashley.love_messages[2] = "[ashley.title] needs some time to progress this story."
+            return False
+        if mc.is_at_work() and mc.business.is_open_for_business():
+            return True
         return False
 
     def ashley_lily_hangout_requirement():
         if time_of_day == 4:
             return True
+        else:
+            ashley.love_messages[2] = "[ashley.title] will come over this evening."
         return False
 
     def ashley_lily_shopping_selfies_requirement():
+        ashley.love_messages[3] = "The next scene has not been written yet."
+        return False
         if ashley.love >= 60 and ashley.story_event_ready("love"):
             if time_of_day != 0 and day%7 == 5: #Saturday
                 return True
@@ -798,6 +805,7 @@ label ashley_asks_about_lily_label():   #Ashley talks to MC about Lily and how s
 
 label ashley_lily_hangout_label():
     $ the_person = ashley
+    $ the_person.arousal = 20
     $ the_person.story_event_log("love")
     "It is late, and you have a date with [the_person.title] and your sister for a movie tonight. You get the TV ready when you phone goes off."
     $ mc.start_text_convo(the_person)
@@ -839,11 +847,18 @@ label ashley_lily_hangout_label():
     $ scene_manager.update_actor(lily, emotion = "happy")
     "When it gets to the scene in the bar where the three amigos perform a musical number, [lily.title] is openly laughing."
 
+
+
+    "As you are watching the movie, you feel [the_person.title] take your hand."
+
     "They find out they both actually like a similar clothing line at the mall. Ashley likes to shop? You had no idea."
     "They agree to hang out and go shopping once in a while. Wait... maybe this is a bad idea... is ashley going to be a good influence on Lily?"
     $ mc.business.add_mandatory_crisis(ashley_lily_shopping_selfies)
     $ town_relationships.update_relationship(lily, ashley, "Friend")
     $ ashley.event_triggers_dict["lily_friend"] = True
+    $ ashley.love_messages[2] = "[ashley.fname] patched things up with your sister during movie night."
+    $ ashley.love_messages[3] = ("")
+    $ ashley.love_step = 3
     return
 
 label ashley_lily_shopping_selfies_label(): #60
@@ -1903,8 +1918,7 @@ label ashley_submission_titfuck_label():  #at 20
         "[the_person.possessive_title] has always been a little bit hard to predict."
         "You have a feeling you are going to hear about this event again from her."
         $ ashley.obedience_messages[0] = "You convinced [ashley.fname] to service you with her tits."
-        $ ashley.obedience_messages[1] = ""
-        $ ashley.obedience_step = 1
+
     else:
         "You sigh. Maybe now she'll be able to accept that it is okay to be the submissive partner during sex once in a while?"
         "Either way, you are sure you'll hear about this soon."
@@ -1965,8 +1979,10 @@ label ashley_submission_titfuck_taboo_restore_label():
         #     the_person "Fine... I'm willing to stick around after work once in a while for a little fun... but only if you reciprocate!"
         #     mc.name "Of course. That is perfectly reasonable."
         #     $ outcome_convince = True
+        "I thought you liked to make me feel good" if ashley.love_step >= 3:
 
-        "I thought you liked to make me feel good\n{color=#ff0000}{size=18}Requires: Love Story Progress{/size}{/color} (disabled)":
+
+        "I thought you liked to make me feel good\n{color=#ff0000}{size=18}Requires: Love Story Progress{/size}{/color} (disabled)" if ashley.love_step < 3:
             pass
 
         "You are that type of girl" if the_person.opinion_score_giving_tit_fucks() == 2:
@@ -2005,6 +2021,8 @@ label ashley_submission_titfuck_taboo_restore_label():
         "For now, she's willing to let you fuck her tits, but if you can teach her to be more submissive, you're sure there's more she could do while she's on her knees for you..."
         $ ashley.obedience_messages[0] = "You've convinced [ashley.fname] to let you fuck her tits anytime you want."
         $ ashley.remove_role(ashley_submission_role)
+        $ ashley.obedience_messages[1] = ""
+        $ ashley.obedience_step = 1
     else:
         $ the_person.change_obedience(-20)
         $ mc.business.add_mandatory_crisis(ashley_submission_titfuck_taboo_restore)
@@ -2299,8 +2317,7 @@ label ashley_submission_blowjob_label():  #140 obedience
     "Despite your progress, [the_person.possessive_title] appears to be resisting your commanding influence again."
     "You have a feeling you are going to hear about this event again from her."
     $ ashley.obedience_messages[1] = "You convinced [ashley.fname] to give you a blowjob."
-    $ ashley.obedience_messages[2] = ""
-    $ ashley.obedience_step = 2
+
     $ ashley.sex_record["Blowjobs"] += 1   #Make sure to augment this so the break functions
 
     $ mc.business.add_mandatory_crisis(ashley_submission_blowjob_taboo_restore)
@@ -2369,8 +2386,53 @@ label ashley_submission_blowjob_taboo_restore_label():
         "But it keeps happening...\n{color=#ff0000}{size=18}Requires repeated submission{/size}{/color} (disabled)" if ashley.event_triggers_dict.get("sub_blowjob_count", 0) < 3:
             pass
 
-        "Let's go to my office\n{color=#ff0000}{size=18}Not yet written{/size}{/color} (disabled)" if ashley.opinion_score_giving_blowjobs() == 2:
-            pass
+        "Let's go to my office" if ashley.opinion_score_giving_blowjobs() == 2:
+            mc.name "Come on. Let's go to my office and settle this."
+            the_person "Umm... Okay..."
+            $ mc.change_location(ceo_office)
+            "You escort her to your office, then lock the door after you both enter."
+            mc.name "Alright, so... what is it you said before? You aren't here to drop to your knees and take my thick, meaty cock anytime it suites my fancy?"
+            the_person "Right... that is what I said."
+            mc.name "Did you mean it though? I mean..."
+            "You undo your zipper and pull out your dick."
+            $ the_person.change_arousal(10)
+            mc.name "You really DID seem to enjoy it. Maybe you should try it one more time. Just to make sure that is how you feel."
+            $ the_person.draw_person(position = "blowjob")
+            "[the_person.possessive_title] is already getting down on her knees. Her resistance is crumbling."
+            "Her eyes are fixed on your crotch. She bites her lip and moves closer, inch by inch."
+            $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
+            "Her tongue slithers out and swirls around your testicles, before she slides her mouth up the shaft, her tongue now swirling around the tip."
+            "[the_person.title]'s eyes look up and meet yours in a fleeting moment of recognition, as she realizes she is passing the point of no return."
+            "Her skillful mouth is yours to use as your cocksleeve, whenever you please. She sighs and then envelopes the tip of your penis between her lips, sliding them down the shaft in sweet victory."
+            "[the_person.possessive_title]'s head begins to bob up and down, accompanied by sweet sounds of slurps and sighs."
+            $ the_person.change_arousal(15)
+            "She really is enjoying this! It has taken a while to get her to this point, but your obedient employee is now dedicated to making you cum."
+            "You put your hand on her head, controling the pace while she continues to slurp and moan happily sucking you off."
+            "You feel yourself getting ready to cum, but you want to make a point, so you pull her back from your cock for moment."
+            $ the_person.draw_person(position = "blowjob", special_modifier=None)
+            mc.name "So, [the_person.title]. Can I count on your to drop to your knees, and take my thick, meaty cock, anytime I want it?"
+            "It takes her a moment, but she agrees."
+            the_person "I... I will..."
+            mc.name "And you'll take my cum, wherever I tell you to. Be it on your face, on your tits, or down your throat?"
+            the_person "Yes [the_person.mc_title]"
+            $ the_person.change_obedience(3)
+            mc.name "Good. Today I want it down your throat. Here it comes!"
+            $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
+            "Before she can respond, you pull her face back down on your cock. You easil slide into her mouth and down into her throat."
+            mc.name "Mmm, that's it. Here it comes!"
+            "She gags a little as you start to cum, but obediently takes it down her throat and straight into her stomach."
+            $ the_person.cum_in_mouth()
+            $ the_person.draw_person(position = "blowjob", special_modifier="blowjob")
+            "She gags again, and this time a little bit of cum escapes from the corners of her mouth."
+            "After you finish, you hold her head in place for a couple extra seconds, savoring it."
+            $ ClimaxController.manual_clarity_release(climax_type = "mouth", the_person = the_person)
+            "When you let go, [the_person.title] gasps for air, but doesn't complain."
+            mc.name "Good. I'm glad we could come to an understanding. Now get yourself back to work."
+            $ the_person.draw_person()
+            the_person "Yes sir."
+            $ the_person.draw_person(position = "walking_away")
+            "[the_person.possessive_title] stands up and leaves you alone in your office."
+            $ outcome_convince = True
 
         "Let's go to my office\n{color=#ff0000}{size=18}Requires Ashley Loves Blowjobs{/size}{/color} (disabled)" if ashley.opinion_score_giving_blowjobs() != 2:
             pass
@@ -2390,14 +2452,16 @@ label ashley_submission_blowjob_taboo_restore_label():
         "You can envision [the_person.possessive_title], bent over your desk, ass in the air, begging for your cum to fill up her quivering pussy."
         "You are certain it is just a matter of time."
         $ ashley.remove_role(ashley_submission_role)
+        $ ashley.obedience_messages[2] = ""
+        $ ashley.obedience_step = 2
     else:
         $ the_person.change_obedience(-20)
         $ mc.business.add_mandatory_crisis(ashley_submission_blowjob_taboo_restore)
         "[the_person.title] isn't willing to make this a regular thing yet. You wonder if you can get her to be obedient if you could give it another shot..."
         $ ashley.obedience_messages[1] = "Use obedience to convince [ashley.fname] to blow you again."
         $ ashley.add_role(ashley_submission_role)
+    $ the_person.apply_planned_outfit()
     $ clear_scene()
-
 
     return
 
