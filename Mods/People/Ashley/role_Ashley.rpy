@@ -1505,7 +1505,6 @@ init -1 python:
             return False
 
         ashley.obedience_messages[2] = "The next scene has not been written yet!"
-        return False    #Current writing spot
         if ashley.obedience > 160 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
             if time_of_day == 3:
                 return True
@@ -1515,6 +1514,7 @@ init -1 python:
         if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
 
+        return False    #Current writing spot is submission fuck
         if ashley.obedience > 180 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
             if time_of_day == 3:
                 return True
@@ -2522,9 +2522,15 @@ label ashley_submission_fuck_label(): #160 obedience
     "In this event, [the_person.title] offers to give MC a blowjob, but MC refuses."
     "He bends her over his desk and fucks her roughly. She loves it."
     "At the end, MC chooses where to cum, and she gains a point towards being submissive."
+    "This is current point of writing and will unlock the remaining positions."
 
-    $ mc.business.add_mandatory_crisis(ashley_submission_fuck_taboo_restore)
-    $ ashley.event_triggers_dict["sub_fuck_count"] = ashley.event_triggers_dict.get("sub_fuck_count", 0) + 1
+    # this will unlock her for now remove when continue story
+    $ ashley.event_triggers_dict["sub_fuck_avail"] = True
+    $ ashley.event_triggers_dict["sub_anal_avail"] = True
+
+    # Restore these lines when continue story
+    # $ mc.business.add_mandatory_crisis(ashley_submission_fuck_taboo_restore)
+    #$ ashley.event_triggers_dict["sub_fuck_count"] = ashley.event_triggers_dict.get("sub_fuck_count", 0) + 1
     return
 
 label ashley_submission_fuck_taboo_restore_label():
