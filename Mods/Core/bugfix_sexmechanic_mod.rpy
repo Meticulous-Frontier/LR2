@@ -1437,6 +1437,8 @@ label public_sex_post_round(the_person, position_choice, report_log):
     $ scr_change = 0
     if position_choice is None: #We got here by accident
         return
+    if finished:
+        return False
     if position_choice.skill_tag == "Foreplay":
         $ scr_change = 1
     elif position_choice.skill_tag == "Oral":

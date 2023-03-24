@@ -534,39 +534,40 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             $ finished = True
 
         #Determine if the current node has completed it's finished requirement.
-        if current_node.completion_requirement(the_person, report_log):
-            if len(sex_path) > 0:
-                $ current_node = sex_path.pop(0)
-                $ object_choice = girl_choose_object_enhanced(the_person, current_node.position)
-                if object_choice is None:
-                    if current_node.position.requires_location == "kneel" or current_node.position.requires_location == "lay":
-                        $ object_choice = make_floor()
-                    elif current_node.position.requires_location == "lean":
-                        $ object_choice = make_wall()
+        if not finished:
+            if current_node.completion_requirement(the_person, report_log):
+                if len(sex_path) > 0:
+                    $ current_node = sex_path.pop(0)
+                    $ object_choice = girl_choose_object_enhanced(the_person, current_node.position)
+                    if object_choice is None:
+                        if current_node.position.requires_location == "kneel" or current_node.position.requires_location == "lay":
+                            $ object_choice = make_floor()
+                        elif current_node.position.requires_location == "lean":
+                            $ object_choice = make_wall()
+                        else:
+                            $ object_choice = make_chair()
+                    the_person "Mmm, I think we're ready. Let's move on now!"
+                    if (current_node.position.skill_tag == "Vaginal" or current_node.position.skill_tag == "Anal") and using_condom and not mc.condom:
+                        the_person "Hang on a second. I need to wrap this thing up first."
+                        "[the_person.title] gets a condom out of their own bag and opens it."
+                        "She holds it at the top of your cock with one hand as she strokes further and further with the other hand, rolling the condom down onto it."
+                        $ mc.condom = True
+                    if not ignore_taboo and the_person.has_taboo(current_node.position.associated_taboo):
+                        # call mod taboo break
+                        $ current_node.position.call_transition_taboo_break(current_node.position, the_person, mc.location, object_choice)
+                        $ the_person.break_taboo(current_node.position.associated_taboo)
                     else:
-                        $ object_choice = make_chair()
-                the_person "Mmm, I think we're ready. Let's move on now!"
-                if (current_node.position.skill_tag == "Vaginal" or current_node.position.skill_tag == "Anal") and using_condom and not mc.condom:
-                    the_person "Hang on a second. I need to wrap this thing up first."
-                    "[the_person.title] gets a condom out of their own bag and opens it."
-                    "She holds it at the top of your cock with one hand as she strokes further and further with the other hand, rolling the condom down onto it."
-                    $ mc.condom = True
-                if not ignore_taboo and the_person.has_taboo(current_node.position.associated_taboo):
-                    # call mod taboo break
-                    $ current_node.position.call_transition_taboo_break(current_node.position, the_person, mc.location, object_choice)
-                    $ the_person.break_taboo(current_node.position.associated_taboo)
-                else:
-                    $ current_node.position.call_transition(current_node.position, the_person, mc.location, object_choice)
+                        $ current_node.position.call_transition(current_node.position, the_person, mc.location, object_choice)
 
-            else:
-                $ finished = True    #Sex goal has been accomplished
-                $ the_person.call_dialogue("GIC_finish_response", the_goal = the_goal)
-        elif len(sex_path) > 0:
-            if not sex_path[0].position.check_clothing(the_person): #We don't meet the clothing requirements for the next position, so we strip some
-                $ the_clothing = the_person.choose_strip_clothing_item()
-                $ current_node.position.call_strip(the_person, the_clothing, mc.location, object_choice)
-            else:
-                call girl_strip_event(the_person, current_node.position, object_choice) from _call_girl_strip_event_girl_in_charge_01
+                else:
+                    $ finished = True    #Sex goal has been accomplished
+                    $ the_person.call_dialogue("GIC_finish_response", the_goal = the_goal)
+            elif len(sex_path) > 0:
+                if not sex_path[0].position.check_clothing(the_person): #We don't meet the clothing requirements for the next position, so we strip some
+                    $ the_clothing = the_person.choose_strip_clothing_item()
+                    $ current_node.position.call_strip(the_person, the_clothing, mc.location, object_choice)
+                else:
+                    call girl_strip_event(the_person, current_node.position, object_choice) from _call_girl_strip_event_girl_in_charge_01
 
 
     #TODO create positive feedback here for accomplishing sex goal
