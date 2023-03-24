@@ -846,17 +846,144 @@ label ashley_lily_hangout_label():
     "Thankfully, the comedic stylings of Steve Martin, Chevy Chase, and Martin Short let some air of the room."
     $ scene_manager.update_actor(lily, emotion = "happy")
     "When it gets to the scene in the bar where the three amigos perform a musical number, [lily.title] is openly laughing."
-
-
-
-    "As you are watching the movie, you feel [the_person.title] take your hand."
-
-    "They find out they both actually like a similar clothing line at the mall. Ashley likes to shop? You had no idea."
-    "They agree to hang out and go shopping once in a while. Wait... maybe this is a bad idea... is ashley going to be a good influence on Lily?"
+    "Near the end of the musical scene, [the_person.title] quotes the bartender in time with the movie."
+    the_person "My little buttercup!"
+    "[lily.possessive_title] looks over and laughs. It definitely feels like some of the tension is leaving the room."
+    "As you are watching the movie, you feel [the_person.title] take your hand. She guides your hand to her stomach and starts to slide your hand down her panties."
+    "You glance over at [lily.possessive_title]. She seems to be unaware, so you let [the_person.title] guide your hand between her legs."
+    "[the_person.possessive_title] shifts in her seat a little, hiding under the blanket, opening her legs up to give your fingers easy access."
+    "She sighs when your finger slides between her labia. You can feel that she is already a little aroused as you slide your fingers along her slit."
+    "Thankfully, her hand moves over into your lap as well. Through your pants you feel her start to stroke your rapidly hardening cock."
+    $ the_person.change_arousal(20)
+    $ mc.change_arousal(20)
+    "You easily slide your middle finger into [the_person.title]'s vagina as you watch the movie together with [lily.possessive_title]."
+    "[the_person.title] looks over at your sister, then you feel her unzip your pants. Her hand carefully reaches in, and after several seconds she manages to pull out your dick."
+    "Her soft hand starts to stroke you, skin to skin. It feels pretty good as you continue to finger her."
+    $ the_person.change_arousal(20)
+    $ mc.change_arousal(20)
+    "The movie keeps going, but you start to zone out. [the_person.possessive_title]'s soft hand stroking you is turning you on, and your sister being the in same room makes it even more exciting."
+    "You push a second finger into [the_person.title]. With the angle of your hand, you are able to use the palm of your hand to put pressure on her clit while you stroke her g-spot."
+    "She is starting to get a little bit restless in her seat, shifting back and forth. She stifles a moan, trying to keep quiet."
+    "Double checking to make sure [lily.title] is still tranfixed on the movie, she brings her hand up to her mouth and lets a large amount of saliva dribble out and onto her hand."
+    "When she resumes stroking you, the extra lubrication makes her soft hand feel even better."
+    $ the_person.change_arousal(30)
+    $ mc.change_arousal(20)
+    "[the_person.possessive_title]'s hips are starting to move on their own. She is still stroking you with her hand, but her rhythm is off as she approaches climax."
+    "You look over at her face. She bites her lip and closes her eyes as you push her over the edge."
+    $ the_person.change_arousal(30)
+    $ mc.change_arousal(20)
+    "[the_person.title]'s body trembles slightly as she start to cum. You stroke her g-spot relentlessly as her body clenches in orgasm."
+    "Somehow, she manages to hold her breath and stifles any noises while she cums. After several seconds, you worry she might pass out."
+    $ the_person.have_orgasm(the_position = "sitting", half_arousal = False)
+    "Eventually she starts to breath again though, beginning with a large exhale."
+    "Damn. Watching her orgasm like that has got you right on the edge. You move your hips, encouraging [the_person.title] to keep stroking and finish you off."
+    "She gives you a half smile, then keeps stroking you."
+    "The excitement of getting a handjob with your sister in the same room and watching [the_person.title] orgasm is too much."
+    $ mc.change_arousal(30)
+    "As you start to cum, [the_person.possessive_title] uses her hand to keep your cum contained and off the blanket."
+    "You can feel yourself making a mess of her hand and your pants but you don't care."
+    $ ClimaxController.manual_clarity_release(climax_type = "air", the_person = ashley)
+    $ mc.arousal = 0
+    "You finish climaxing. Damn that felt good."
+    $ scene_manager.update_actor(lily, position = "stand2")
+    "Suddenly, [lily.title] jumps up. You startle, thinking she might have noticed what was going on."
+    lily "I'm gonna make some popcorn."
+    "[the_person.possessive_title] quickly wipes her hand on your shirt, thankfully hidden underneath the blanket."
+    the_person "Oh! I could use a drink. I'll come too!"
+    $ scene_manager.update_actor(the_person, position = "stand3")
+    "[lily.title] rolls her eyes for a second, then looks at you. She seems to notice something is off."
+    lily "Hey, what's with the dopey look, [lily.mc_title]?"
+    "[the_person.title] looks at you."
+    the_person "Does he not usually look dopey like that? That's how he always looks, I think..."
+    lily "Ha! Maybe so..."
+    $ scene_manager.update_actor(lily, position = "walking_away")
+    $ scene_manager.update_actor(the_person, position = "walking_away")
+    "The two girls turn and leave the living room to go get some snacks and drinks."
+    $ scene_manager.clear_scene()
+    "You are just considering making your escape to your room to clean up for a bit, when [mom.title] walks in."
+    $ scene_manager.add_actor(mom)
+    mom "Oh hey [mom.mc_title]. Watching a movie?"
+    mc.name "Oh... yeah... with Lily and a friend..."
+    mom "Oh! I love this one. That blanket looks comfy. Scoot over!"
+    mc.name "Oh, umm my friend was actually sitting..."
+    mom "There's plenty of seats in this house for her to sit in. Now scoot!"
+    "You shift the end of the couch and lift up the blanket just enough for [mom.possessive_title] to sit down next to you."
+    $ scene_manager.update_actor(mom, display_transform = character_left_flipped, position = "sitting")
+    "Thankfully, she doesn't appear to notice your current state..."
+    mom "Huh... this couch is smelling kind of musty. Maybe I should do some cleaning this weekend."
+    mc.name "Yeah... good idea..."
+    "[mom.title] settles into the couch, sitting right next to you as she watches the movie."
+    "After a few minutes, you can hear two girls chatting as the re-enter the room, carrying snacks and drinks."
+    $ scene_manager.add_actor(the_person, display_transform = character_center)
+    $ scene_amanager.add_actor(lily, display_transform = character_right)
+    lily "Oh hey mom."
+    "[the_person.title] stops when she sees your mother sitting next to you. She gives you a mischievous smile when she realizes what state you are in."
+    mom "Ah! Hello there, you must be the friend that [mc.name] was telling me about..."
+    the_person "Hi, I'm [the_person.fname]. It is an absolute PLEASURE to meet you!"
+    $ scene_amanager.update_actor(lily, position = "sitting")
+    $ scene_amanager.update_actor(the_person, position = "sitting")
+    "The two girls sit down next to each other on the other end of the couch, sharing popcorn and watching the movie."
+    "You sit there, your mother right next to you, your shirt and pants covered in cum. You manage to put your dick away atleast without your family noticing..."
+    "[lily.possessive_title] and [the_person.title] are chatting constantly now. You can't really hear what they are talking about, but you are glad they seem to be getting along."
+    if mom.love > 40:
+        "[mom.title] scoots over a bit closer to you now, putting her head on your shoulder."
+        "Normally you would enjoy this sign of affection from her, but you are one wrong move from her could lead to a really awkward situation..."
+    "You settle in and just try and enjoy what is left of the movie. Thankfully, the movie ends and [mom.possessive_title] never discoveres the source of the odd smell."
+    mom "Oh wow, what a fun movie! I need to get to bed though. Goodnight everyone!"
+    $ scene_manager.update_actor(mom, position = "walking_away")
+    "[mom.title] gets up and leaves the room. You are releived."
+    "[lily.possessive_title] and [the_person.title] are still chatting, seemingly unaware that the movie is over."
+    $ scene_manager.remove_actor(mom)
+    lily "No, it isn't like that. I just take pictures and upload them. I never meet with anyone."
+    lily "The most annoying part is shopping for new outifts. It isn't like I can just call up my friends and be like... Hey! I need to shop for a new thirst trap outfit!"
+    the_person "Why not? I mean, I would go. That sounds like a lot of fun actually."
+    lily "Ha... I... I don't know. I guess I'm just not open like that with most of my friends."
+    "There is a moment of silence. Then [the_person.title] speaks up."
+    the_person "Look... I know we aren't like... close... but... why don't you take my number? Insta doesn't really sound like my thing, but shopping for outfits for it sounds like fun."
+    "[lily.title] thinks about it for a moment."
+    lily "Okay... I don't know... we'll see, okay?"
+    "Your sister and [the_person.possessive_title] exchange numbers, and [lily.title] promises to think about it."
+    "They might go shopping together? Sounds interesting for sure. You had no idea [the_person.title] was into shopping..."
+    lily "Alright... I really need to get to bed."
+    $ scene_manager.update_actor(lily, position = lily.idle_pose)
+    "She stands up."
+    if lily.sluttiness > 40:
+        lily "And bro... you should really wash that blanket after this! Your cum is smelling up the whole living room!"
+        "[the_person.title] about chokes on a bite of popcorn."
+        the_person "Ha! Oh man, when I saw your mom had sat next to him, I almost died. So funny!"
+        "Damn, [lily.title] must have known the whole time! Atleast she doesn't seem to be mad about it..."
+    lily "Goodnight!"
+    $ scene_manager.remove_actor(lily)
+    $ scene_manager.update_actor(the_person, display_transform = character_left_flipped, position = "sitting")
+    "[the_person.possessive_title] scoots over next to you."
+    the_person "Well. THAT was hilarious!"
+    mc.name "Speak for yourself!"
+    the_person "I am!"
+    mc.name "So... It seems like you managed to patch things up a bit with my sister..."
+    the_person "Yep! I told you this would work."
+    "She lays her head on your shoulder for a bit."
+    mc.name "I... I still can't believe what we did... in my living room."
+    the_person "Mmm, yeah. That was exciting."
+    "She turns and looks you in the eye."
+    the_person "You know, you really were a good sport about it. I'm just glad I was able to to make you feel good."
+    the_person "You deserve to have someone make you feel good once in a while like that."
+    "She sighs."
+    the_person "I mean... obviously Steph does... but it is nice for me to be able to..."
+    mc.name "Yeah..."
+    "Things with [the_person.possessive_title] sure are getting complicated. It is clear that she is starting to get feelings for you, but isn't ready to admit it yet."
+    "After a little longer, she gets up."
+    $ scene_manager.update_actor(ashley, position = lily.idle_pose)
+    the_person "Well, I need to get going. Don't worry about me, I know the way home."
+    the_person "Besides... you stink like cum. Go clean yourself up!"
+    $ scene_manager.clear_scene()
+    "You get up as [the_person.possessive_title] leaves."
+    "Wow. What a night. The way that [the_person.title] is able to manipulate people... it is a little bit scary."
+    "After one night, she appears to be well on the way to befriending your sister. You wonder... is it possible she used some kind of serum on her in the kitchen?"
+    "You are glad they agreed to hang out and go shopping once in a while. Wait... maybe this is a bad idea... is [the_person.title] going to be a good influence on [lily.possessive_title]?"
     $ mc.business.add_mandatory_crisis(ashley_lily_shopping_selfies)
     $ town_relationships.update_relationship(lily, ashley, "Friend")
     $ ashley.event_triggers_dict["lily_friend"] = True
-    $ ashley.love_messages[2] = "[ashley.fname] patched things up with your sister during movie night."
+    $ ashley.love_messages[2] = "[ashley.fname] patched things up with your sister during movie night and they exhchanged phone numbers."
     $ ashley.love_messages[3] = ("")
     $ ashley.love_step = 3
     return
