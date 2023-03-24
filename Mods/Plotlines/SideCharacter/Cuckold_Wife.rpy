@@ -647,7 +647,6 @@ label cuckold_employee_after_window_label():
         the_person "I'll be able to test for sure in a couple of days! I wouldn't mind a couple more tries between now and then though... just in case my period is just late."
         mc.name "I'll make time to breed you again cow. Be prepared to receive my potent seed."
         $ mc.end_text_convo()
-        $ the_person.on_room_enter_event_list = Actionlist()  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
         $ mc.business.add_mandatory_crisis(cuckold_employee_knocked_up)
         return
 
