@@ -228,7 +228,7 @@ label hr_director_prog_trans_scene_1(the_group):
         the_person "So... I was thinking this week maybe I could do that thing again. You know, where I put your cock between my tits?"
         the_person "It felt soooo good last time. I've been thinking about it a lot."
         mc.name "That sounds great, I'll admit it, seeing my cock between your tits is hot."
-        if the_person.outfit.tits_available():
+        if the_person.tits_available():
             "With her tits already out and ready to be used, she just gives you a big smile."
         else:
             if the_person.outfit.can_half_off_to_tits():
@@ -263,7 +263,7 @@ label hr_director_prog_trans_scene_1(the_group):
         mc.name "You know, you have some pretty generous cleavage. I've been wondering... what would it feel like to have those tits wrapped around my cock."
         the_person "Ah, you mean these?"
         $ scene_manager.update_actor(the_person, position = "stand3")
-        if the_person.outfit.tits_available():
+        if the_person.tits_available():
             "[the_person.title] stands up, then gropes herself with both hands, shifting her tits back and forth in a pleasing wobble motion."
         else:
             if the_person.outfit.can_half_off_to_tits():
@@ -308,7 +308,7 @@ label hr_director_prog_trans_scene_2(the_group):
     the_person "Oh! Yes sir!"
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ scene_manager.update_actor(the_person, position = "missionary", emotion = "happy")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_visible():
         "She spreads her legs, her pussy on display in front of you."
     else:
         if the_person.outfit.can_half_off_to_vagina():
@@ -345,7 +345,7 @@ label hr_director_prog_trans_scene_3(the_group):
     $ mc.change_arousal(20)
     the_person "Oh my!"
 
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_visible():
         "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
     else:
         if the_person.outfit.can_half_off_to_vagina():
@@ -503,7 +503,7 @@ label hr_director_prog_scene_scene_1(the_group, scene_transition = False):
     $ the_person = the_group[0]
     if scene_transition:
         return
-    if not the_person.outfit.tits_available():
+    if not the_person.tits_available():
         if the_person.outfit.can_half_off_to_tits():
             "[the_person.possessive_title] moves her top out of the way."
             $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True)
@@ -527,7 +527,7 @@ label hr_director_prog_scene_scene_2(the_group, scene_transition = False):
     $ the_person = the_group[0]
     if scene_transition:
         return
-    if not (the_person.outfit.vagina_available() and the_person.outfit.vagina_visible()):
+    if not the_person.vagina_visible():
         if the_person.outfit.can_half_off_to_vagina():
             "[the_person.possessive_title] moves her clothes out of the way."
             $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
@@ -560,7 +560,7 @@ label hr_director_prog_scene_scene_3(the_group, scene_transition = False):
     "You stand up as she walks around to your side of the desk. You roughly pull her closer and give her ass a tight squeeze."
     $ scene_manager.update_actor(the_person, position="stand3")
     the_person "Oh my!"
-    if the_person.outfit.vagina_available() and the_person.outfit.vagina_visible():
+    if the_person.vagina_visible():
         "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bend her over your desk."
     else:
         if the_person.outfit.can_half_off_to_vagina():
@@ -588,7 +588,7 @@ label hr_director_prog_scene_scene_4(the_group, scene_transition = False):
         return
     the_person "Oh god, you want your HR director's ass, do you? What a naughty CEO!"
     $ the_person.change_arousal(20)
-    if not (the_person.outfit.vagina_available() and the_person.outfit.vagina_visible()):
+    if not the_person.vagina_visible():
         if the_person.outfit.can_half_off_to_vagina():
             "[the_person.possessive_title] moves her clothes out of the way."
             $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)

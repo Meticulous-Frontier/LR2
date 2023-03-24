@@ -142,7 +142,7 @@ label intro_threesome_sixty_nine_oral_girl_two(the_girl_1, the_girl_2, the_locat
 label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_location, the_object):
     "You run your hands along [the_girl_1.title]'s hips as you fuck her. You can see her hands groping [the_girl_2.title]'s ass cheeks as she pleasures her with her tongue."
     if the_girl_2.has_large_tits() :
-        if the_girl_2.outfit.tits_available():
+        if the_girl_2.tits_available():
             "In front of you, you can see [the_girl_2.title]'s [the_girl_2.tits_description] heaving up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
         else:
             $ top_clothing = the_girl_2.outfit.get_upper_top_layer()
@@ -151,7 +151,7 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
             "You decide they've been contained for too long."
             $ scene_manager.strip_to_tits(the_girl_2, visible_enough = True, prefer_half_off = True)
     else:
-        if the_girl_2.outfit.tits_available():
+        if the_girl_2.tits_available():
             "In front of you, you can see [the_girl_2.title]'s [the_girl_2.tits_description] swaying up and down as she slowly rocks her hips back and forth across [the_girl_1.title]'s tongue."
         else:
             $ top_clothing = the_girl_2.outfit.get_upper_top_layer()
@@ -164,12 +164,12 @@ label scene_threesome_sixty_nine_fuck_girl_one_1(the_girl_1, the_girl_2, the_loc
             "You grab [the_girl_2.title]'s tits. They feel warm and soft in your hands. You pinch and tug at her nipples."
             the_girl_2 "Mmmm, [the_girl_2.mc_title]. I love your hands on me."
             $the_girl_2.change_arousal(mc.sex_skills["Foreplay"])
-        "Suck her nipples" if the_girl_2.outfit.tits_available():
+        "Suck her nipples" if the_girl_2.tits_available():
             "You lean forward and run your tongue all around one of [the_girl_2.title]'s nipples."
             the_girl_2 "Oh! [the_girl_2.mc_title]! That feels good!"
             "You suck one of [the_girl_2.possessive_title]'s nipples into your mouth. You flip it up and down with your tongue a few times."
             $the_girl_2.change_arousal(mc.sex_skills["Oral"])
-        "Suck her nipples\n{color=#ff0000}{size=18}Obstructed by Clothing{/size}{/color} (disabled)" if not the_girl_2.outfit.tits_available():
+        "Suck her nipples\n{color=#ff0000}{size=18}Obstructed by Clothing{/size}{/color} (disabled)" if not the_girl_2.tits_available():
             pass
     "While you give attention to [the_girl_2.possessive_title]'s tits, you never stop pistoning your cock in and out of [the_girl_1.title]'s slick pussy."
     return

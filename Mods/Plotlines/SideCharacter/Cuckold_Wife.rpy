@@ -296,7 +296,7 @@ label cuckold_employee_decision_label():
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_visible():
         "She spreads her legs, her pussy on display in front of you."
     else:
         if the_person.outfit.can_half_off_to_vagina():
@@ -328,7 +328,7 @@ label cuckold_employee_decision_label():
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
         $ clear_scene()
-        $ mc.location.show_background()
+        $ mc.change_location(lobby)
         "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
         $ the_person.event_triggers_dict["creampie_count"] = the_person.event_triggers_dict.get("creampie_count", 0) + 1
         $ the_person.add_unique_on_talk_event(cuckold_employee_breeding_session)
@@ -397,13 +397,10 @@ label cuckold_employee_rethink_decision_label():
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_visible():
         "She spreads her legs, her pussy on display in front of you."
     else:
-        if the_person.outfit.can_half_off_to_vagina():
-            $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "missionary")
-        else:
-            $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "missionary")
+        $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "missionary")
     the_person "Alright [the_person.mc_title]. This is it. Time to put a baby in me!"
     call fuck_person(the_person, start_position = breeding_missionary, start_object = make_desk(), private= True, position_locked = True, skip_intro = True, affair_ask_after = False, skip_condom = True) from _breed_cuckold_attempt_3
     $ the_report = _return
@@ -429,7 +426,7 @@ label cuckold_employee_rethink_decision_label():
         mc.name "Me neither."
         "With that, you leave your office, being careful to lock the door behind you."
         $ clear_scene()
-        $ mc.location.show_background()
+        $ mc.change_location(lobby)
         "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
         $ the_person.event_triggers_dict["creampie_count"] = the_person.event_triggers_dict.get("creampie_count", 0) + 1
         $ the_person.add_unique_on_talk_event(cuckold_employee_breeding_session)
@@ -492,15 +489,12 @@ label cuckold_employee_breeding_session_label(the_person):
     the_person "Oh god, it's so hot when you talk to me like that."
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_visible():
         $ mc.change_arousal(5)
         $ the_person.change_arousal(5)
         "She spreads her legs, her pussy on display in front of you."
     else:
-        if the_person.outfit.can_half_off_to_vagina():
-            $ generalised_strip_description(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True, position = "missionary")
-        else:
-            $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "missionary")
+        $ generalised_strip_description(the_person, the_person.outfit.get_vagina_strip_list(), position = "missionary")
     $ mc.change_arousal(10)
     mc.name "I'm gonna fuck you on my desk again. Tell your bull how much you want it."
     $ mc.change_arousal(15)
@@ -530,7 +524,7 @@ label cuckold_employee_breeding_session_label(the_person):
         the_person "Thank you [the_person.mc_title]. Let's keep our fingers crossed!"
         "With that, you leave your office, being careful to lock the door behind you."
         $ clear_scene()
-        $ mc.location.show_background()
+        $ mc.change_location(lobby)
         # only show message twice (first time and when you reached the requirement count)
         if the_person.event_triggers_dict.get("creampie_count", 0) < 5:
             "Your sperm might already be racing to her egg, ready to fertilize it, but it also might not be. To be certain, you should breed her as often as you can over the next few days."
@@ -653,7 +647,7 @@ label cuckold_employee_after_window_label():
         the_person "I'll be able to test for sure in a couple of days! I wouldn't mind a couple more tries between now and then though... just in case my period is just late."
         mc.name "I'll make time to breed you again cow. Be prepared to receive my potent seed."
         $ mc.end_text_convo()
-        $ the_person.on_room_enter_event_list = []  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
+        $ the_person.on_room_enter_event_list = Actionlist()  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
         $ mc.business.add_mandatory_crisis(cuckold_employee_knocked_up)
         return
 
@@ -841,6 +835,18 @@ label breeding_stock_sex_responses_vaginal(the_person):
     else:
         the_person "Keep fucking me [the_person.mc_title], it feels fantastic!"
 
+    return
+
+label breeding_stock_sex_accept(the_person, the_position):
+    if the_position.skill_tag == "Foreplay":
+        the_person "Mmmm, let me get you ready for another breeding session."
+    elif the_position.skill_tag == "Oral":
+        if "getting head" in the_position.opinion_tags:
+            the_person "Oh yes, let's get my pussy ready for your baby machine."
+        else:
+            the_person "Let me make your cock nice and slick so you can cum deep inside me."
+    else:
+        the_person "OH yes, my sweet bull, come and fill up your slutty cow."
     return
 
 label breeding_stock_cum_vagina(the_person):

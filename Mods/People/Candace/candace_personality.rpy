@@ -267,7 +267,7 @@ label candace_strip_reject(the_person, the_clothing, strip_type = "Full"):
         the_person "Not yet, there's so much fun stuff we have to do first!"
     return
 
-label candace_sex_accept(the_person):
+label candace_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.obedience < 70:
             the_person "Oh yeah, that's one of my favorite things to do! Come on, let's do it!"
@@ -363,7 +363,7 @@ label candace_flirt_response_low(the_person):
 
         else:
             #She's in uniform, but she thinks it's a little too slutty.
-            if the_person.outfit.vagina_visible():
+            if the_person.vagina_visible():
                 # Her pussy is on display.
                 the_person "Thanks! I keep worrying I'm going to get in trouble, but then I remember I'm allowed to be dressed like this!"
                 mc.name "Not just allowed: required."
@@ -371,7 +371,7 @@ label candace_flirt_response_low(the_person):
                 $ mc.change_locked_clarity(5)
                 "[the_person.possessive_title] bounces happily, unintentionally jiggling her tits."
 
-            elif the_person.outfit.tits_visible():
+            elif the_person.tits_visible():
                 #Her tits are out
                 if the_person.has_large_tits():
                     the_person "Hehe, thanks! I really like how it shows off my [the_person.tits_description]!"
@@ -383,7 +383,7 @@ label candace_flirt_response_low(the_person):
                     the_person "I wish they were bigger though. Oh well!"
                     $ mc.change_locked_clarity(5)
 
-            elif the_person.outfit.underwear_visible():
+            elif the_person.underwear_visible():
                 # Her underwear is visible.
                 the_person "Hehe, thank you! I know it's a little slutty, but I like how little these outfits you make us wear cover!"
                 mc.name "I certainly do too."
@@ -414,7 +414,7 @@ label candace_flirt_response_low(the_person):
 label candace_flirt_response_mid(the_person):
     if the_person.outfit == the_person.planned_uniform:
         if the_person.judge_outfit(the_person.outfit):
-            if the_person.outfit.tits_visible():
+            if the_person.tits_visible():
                 the_person "Hehe, thanks! Do you like my boobs?"
                 "She puts her hands behind her back and thrusts her chest out at you, waiting for your response."
                 $ mc.change_locked_clarity(10)

@@ -23,7 +23,7 @@ label outro_standing_finger_enhanced(the_girl, the_location, the_object):
         elif the_girl.get_opinion_score("cum facials") > 0:
             "[the_girl.title] strokes her cheek and pouts at you."
         elif the_girl.get_opinion_score("being covered in cum") > 0:
-            if the_girl.outfit.tits_available():
+            if the_girl.tits_available():
                 "[the_girl.title] strokes her bare chest with her hand."
             else:
                 "[the_girl.title] strokes her neck."

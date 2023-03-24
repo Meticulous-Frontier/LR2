@@ -31,7 +31,7 @@ label intro_drysex_cowgirl(the_girl, the_location, the_object):
     the_girl "Lie down for me, I want to feel you against me."
     $ drysex_cowgirl.redraw_scene(the_girl)
     "You lie down on the [the_object.name]. [the_girl.title] swings a leg over your body and straddles you."
-    if the_girl.outfit.vagina_available():
+    if the_girl.vagina_available():
         "She leans back and grinds herself against you. She rubs her pussy along your cock, your pants the only thing separating the two."
     else:
         "She leans back and grinds herself against you. It feels good, even with your clothes on."
@@ -103,7 +103,7 @@ label scene_drysex_cowgirl_1(the_girl, the_location, the_object):
 
 label scene_drysex_cowgirl_2(the_girl, the_location, the_object):
     #Scene 2. If she is exposed, rub her clit. If not, grab her tits.
-    if the_girl.outfit.vagina_available():
+    if the_girl.vagina_available():
         "[the_girl.possessive_title] continues to ride you, with just that thin cloth of your pants in the way between your cock and her steamy cunt."
         "You reach down and start to rub along her clit."
         if the_girl.get_opinion_score("being fingered") < 0:
@@ -115,7 +115,7 @@ label scene_drysex_cowgirl_2(the_girl, the_location, the_object):
             $ the_girl.change_arousal(7)
             $ mc.change_arousal(3)
     else:
-        if the_girl.outfit.tits_available():
+        if the_girl.tits_available():
             "[the_girl.possessive_title] continues to ride you. Her tits heaving up and down above you present an irresistible target."
             "You reach up with both hands and begin to fondle them."
             if the_girl.get_sex_goal() == "waste cum" or the_girl.get_sex_goal() == "hate fuck":
@@ -150,7 +150,7 @@ label outro_drysex_cowgirl(the_girl, the_location, the_object, the_goal = None):
 label transition_default_drysex_cowgirl(the_girl, the_location, the_object):
     $ drysex_cowgirl.redraw_scene(the_girl)
     "You lie down on the [the_object.name]. [the_girl.title] swings a leg over your body and straddles you."
-    if the_girl.outfit.vagina_available():
+    if the_girl.vagina_available():
         "She leans back and grinds herself against you. She rubs her pussy along your cock, your pants the only thing separating the two."
     else:
         "She leans back and grinds herself against you. It feels good, even with your clothes on."

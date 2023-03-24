@@ -910,8 +910,8 @@ init -1 python:
 
     def strip_outfit(self, top_layer_first = True, exclude_upper = False, exclude_lower = False, exclude_feet = True, delay = 1, display_transform = None, position = None, emotion = None, lighting = None, scene_manager = None, wipe_scene = False):
         def extra_strip_check(person, top_layer_first, exclude_upper, exclude_lower, exclude_feet):
-            done = exclude_upper or person.outfit.tits_available()
-            if done and (exclude_lower or person.outfit.vagina_available()):
+            done = exclude_upper or person.tits_available()
+            if done and (exclude_lower or person.vagina_available()):
                 if done and (exclude_feet or person.outfit.feet_available()):
                     return False
 
@@ -939,7 +939,7 @@ init -1 python:
             strip_choice = self.outfit.remove_random_any(top_layer_first, exclude_upper, exclude_lower, exclude_feet, do_not_remove = True)
 
         # special case where she is wearing a two-part item that blocks her vagina, but we need it be available
-        if not exclude_lower and not self.outfit.vagina_available():
+        if not exclude_lower and not self.vagina_available():
             strip_choice = self.outfit.remove_random_any(top_layer_first, False, exclude_lower, exclude_feet, do_not_remove = True)
             while not strip_choice is None:
                 if delay > 0:
@@ -1037,19 +1037,19 @@ init -1 python:
             self.change_slut(lingerie_bonus, max_modified_to = 30, add_to_log = False)
 
         # not wearing underwear only impacts sluttiness to level 40
-        if self.outfit and not (self.outfit.wearing_bra() or self.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
+        if self.outfit and not (self.wearing_bra() or self.wearing_panties()): #We need to determine how much underwear they are not wearing. Each piece counts as half, so a +2 "love" is +1 slut per chunk.
             underwear_bonus = 0
-            if not self.outfit.wearing_bra():
+            if not self.wearing_bra():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
-            if not self.outfit.wearing_panties():
+            if not self.wearing_panties():
                 underwear_bonus += self.get_opinion_score("not wearing underwear")
             underwear_bonus = __builtin__.int(underwear_bonus/2.0) #I believe this rounds towards 0. No big deal if it doesn't, very minor detail.
             self.change_slut(underwear_bonus, max_modified_to = 40, add_to_log = False)
 
         # showing the goods only impacts sluttiness to level 50
-        if self.outfit and self.outfit.tits_visible():
+        if self.outfit and self.tits_visible():
             self.change_slut(self.get_opinion_score("showing her tits"), max_modified_to = 50, add_to_log = False)
-        if self.outfit and self.outfit.vagina_visible():
+        if self.outfit and self.vagina_visible():
             self.change_slut(self.get_opinion_score("showing her ass"), max_modified_to = 50, add_to_log = False)
 
         # showing everything only impacts sluttiness to level 60
@@ -1101,11 +1101,11 @@ init -1 python:
     Person.wants_creampie = person_wants_creampie_extended(Person.wants_creampie)
 
     def person_call_dialogue_extended(org_func):
-        def person_call_dialogue_wrapper(person, type, **extra_args):
-            if type == "sex_review" and extra_args.get("the_report", {}).get("is_angry", False):
+        def person_call_dialogue_wrapper(person, type, *args, **kwargs):
+            if type == "sex_review" and kwargs.get("the_report", {}).get("is_angry", False):
                 renpy.say(person, "Now leave me alone, I'm done.")
             else:
-                org_func(person, type, **extra_args)
+                org_func(person, type, *args, **kwargs)
 
         return person_call_dialogue_wrapper
 
@@ -1816,6 +1816,10 @@ init -1 python:
         if self.has_role(maid_role):
             return not self.job.schedule.get_destination() is None
 
+        # she works around town, so when the job has a scheduled location, she's at work
+        if self == police_chief:
+            return not self.job.schedule.get_destination() is None
+
         # special handling for girls working at stripclub (use roles instead of job)
         if self.is_strip_club_employee():
             if (get_strip_club_foreclosed_stage() < 1 or get_strip_club_foreclosed_stage() >= 5):
@@ -1825,21 +1829,17 @@ init -1 python:
         if not self.job:
             return False
 
-        # she works around town, so when the job has a scheduled location, she's at work
-        if self == police_chief:
-            return not self.job.schedule.get_destination() is None
-
         return self.location == self.job.job_location
 
     Person.is_at_work = person_is_at_work
 
     def is_person_at_office(self):
-        return self.location in [rd_division, p_division, m_division, office, lobby]
+        return self.location in [rd_division, p_division, m_division, office, lobby, ceo_office, testing_room, work_bathroom]
 
     Person.is_at_office = is_person_at_office
 
     def is_person_at_mc_house(self):
-        return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, her_hallway, dungeon, home_shower]
+        return self.location in [hall, bedroom, lily_bedroom, mom_bedroom, kitchen, home_bathroom, dungeon, home_shower]
 
     Person.is_at_mc_house = is_person_at_mc_house
 

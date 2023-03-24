@@ -136,7 +136,7 @@ label dirty_laundry_wash_your_clothes(the_person):
                         $ the_person.draw_person (position = "missionary")
                         the_person "[the_person.mc_title]? Oh god, what are you going to do to me?"
                         "You put your finger over her lips to silence her."
-                        if the_person.outfit.vagina_available():           #If it's available no need to strip.
+                        if the_person.vagina_visible():           #If it's available no need to strip.
                             "You lower your face down between her legs. With her pussy exposed you waste no time diving right in."
                         else:                                              #Otherwise, strip her down.
                             "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy."
@@ -456,7 +456,7 @@ label dirty_laundry_stuck_in_dryer(the_person):
                 the_person "Okay, go ahead, just don't pull too much on my head."
                 $ the_item = None
 
-                if not the_person.outfit.vagina_visible():
+                if not the_person.vagina_visible():
                     "You quickly move [the_person.possessive_title]'s remaining clothing out of the way."
                     $ the_person.strip_to_vagina(visible_enough = True, prefer_half_off = True, position = "doggy")
                     $ mc.change_locked_clarity(10)

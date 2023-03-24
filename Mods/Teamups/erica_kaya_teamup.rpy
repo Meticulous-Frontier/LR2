@@ -1114,7 +1114,7 @@ label kaya_erica_trans_scene_4(the_group):
     kaya "[erica.fname]... I don't want either of us to get left out. How about we work together... as a team?"
     kaya "You still have to fuck both of us no matter what."
     kaya "But if between the two of us, we got more right than we got wrong, WE get to pick the postion? If we don't, you get to use us both however you want."
-    if not kaya.outfit.vagina_visible():
+    if not kaya.vagina_visible():
         $ scene_manager.strip_to_vagina(kaya)
         "As she finishes talking, you notice [kaya.title] is already stripping off her panties."
     "You can't believe it... [kaya.possessive_title] just suggested a mandatory threesome!"
@@ -1122,7 +1122,7 @@ label kaya_erica_trans_scene_4(the_group):
     erica "Ohhh... [kaya.fname]. You are so sweet."
     erica "I'm down for that! What do you think [erica.mc_title]? I feel like no matter what happens it'll be a happy ending for you!"
     mc.name "Yes, I think those terms are acceptable. Let's get started!"
-    if not erica.outfit.vagina_visible():
+    if not erica.vagina_visible():
         $ scene_manager.strip_to_vagina(erica)
         "Noticing her study partner is already naked, [erica.title] slips off her panties."
     return

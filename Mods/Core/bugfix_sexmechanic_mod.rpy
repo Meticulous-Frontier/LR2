@@ -688,14 +688,14 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                                 $ the_object = _return
                                 $ position_choice = prone_bone
                             else:
-                                $ position_choice = None
+                                $ finished = True
                         elif position_choice.skill_tag == "Anal" and mc.energy > 50 and mc.location.has_object_with_trait(prone_anal.requires_location):
                             call prone_anal_decision_label(the_girl = the_person, the_location = mc.location, the_object = object_choice, the_position = position_choice) from _prone_anal_sex_takeover_01
                             if _return:
                                 $ the_object = _return
                                 $ position_choice = prone_anal
                             else:
-                                $ position_choice = None
+                                $ finished = True
                         else:
                             $ position_choice = None
                     elif not position_locked: #Nothing major has happened that requires us to change positions, we can have girls take over, strip
@@ -830,7 +830,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
         pass
     elif not hates_position and the_person.effective_sluttiness(the_taboo) >= final_slut_requirement:
         if not (skip_dialog or the_person.has_taboo(the_taboo)):
-            $ the_person.call_dialogue("sex_accept")
+            $ the_person.call_dialogue("sex_accept", the_position)
 
     elif not hates_position and the_person.effective_sluttiness(the_taboo) + (the_person.obedience-100) >= final_slut_requirement:
         "[the_person.possessive_title] doesn't seem enthusiastic, but a little forceful encouragement would probably convince her."
@@ -897,7 +897,7 @@ label check_position_willingness_bugfix(the_person, the_position, ignore_taboo =
             $ mc.condom = True
             call put_on_next_condom_routine(the_person) from _call_put_on_next_condom_routine_2
 
-    if willing == 1 and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal" or the_position.name == "Dildo Fuck"):
+    if willing == 1 and (the_position.skill_tag == "Vaginal" or the_position.skill_tag == "Anal" or the_position.name == "Dildo Fuck") and not the_person.vagina_visible():
         # make sure we move skirts out of the way when rendering
         python:
             for the_clothing in [x for x in the_person.outfit.get_lower_ordered() if not (x.underwear or x.half_off)]:
@@ -1394,14 +1394,14 @@ label girl_strip_event_enhanced(the_person, the_position, the_object):
 # call after striping to show the stripping taboo break dialog
 label break_strip_outfit_taboos(the_person):
     $ taboo_broken = False
-    if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
+    if the_person.tits_visible() and the_person.vagina_visible():
         "Once she's done stripping [the_person.possessive_title] is practically naked."
         if the_person.has_taboo(["bare_pussy", "bare_tits"]):
             "She makes a vain attempt to keep herself covered with her hands, but soon enough seems to be comfortable being nude in front of you."
             $ the_person.break_taboo("bare_pussy")
             $ the_person.break_taboo("bare_tits")
             $ taboo_broken = True
-    elif the_person.outfit.tits_visible():
+    elif the_person.tits_visible():
         "Once she's done stripping [the_person.possessive_title] has her nice [the_person.tits] tits out on display."
         if the_person.has_taboo("bare_tits"):
             if the_person.has_large_tits():
@@ -1411,7 +1411,7 @@ label break_strip_outfit_taboos(the_person):
             "Soon enough she doesn't even mind having them out."
             $ the_person.break_taboo("bare_tits")
             $ taboo_broken = True
-    elif the_person.outfit.vagina_visible():
+    elif the_person.vagina_visible():
         "Once she's done stripping [the_person.possessive_title] has her pretty little pussy out on display for everyone."
         if the_person.has_taboo("bare_pussy"):
             "She tries to hide herself from you with her hand, but quickly realizes how impractical that would be."

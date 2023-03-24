@@ -218,15 +218,17 @@ init 5 python:
             if item.proper_name == "Sneakers": #For sneakers we always set the pattern color to white (laces)
                 item.pattern = item.supported_patterns[renpy.random.choice(item.supported_patterns.keys())]
                 color_key = item.proper_name + "_Pattern"
+                pattern_alpha = item.colour_pattern[3]
                 item.colour_pattern = renpy.random.choice(build_preference_colors(neutral_color_map[color_key], exclude_list))
-                item.colour_pattern[3] = current_alpha
+                item.colour_pattern[3] = pattern_alpha
             elif isinstance(item, Facial_Accessory):    #facial accessories don't have patterns
                 pass
             elif item.pattern:
                 color_key = item.proper_name + "_Pattern"
                 if color_key in neutral_color_map.keys():
+                    pattern_alpha = item.colour_pattern[3]
                     item.colour_pattern = renpy.random.choice(build_preference_colors(neutral_color_map[color_key], exclude_list))
-                    item.colour_pattern[3] = current_alpha
+                    item.colour_pattern[3] = pattern_alpha
                 else:
                     item.colour_pattern = item.colour   #Preserve the pattern to possibly colorize later
         return item
@@ -560,7 +562,7 @@ init 5 python:
                 item = item.get_copy() # get copy before applying pattern
                 item.pattern = item.supported_patterns[renpy.random.choice(item.supported_patterns.keys())]
                 item.colour_pattern = WardrobeBuilder.get_color(person, item.colour)
-
+                item.colour_pattern[3] = .80 + (renpy.random.randint(0, 15) / 100.0)    # random pattern transparency
             return item
 
         @staticmethod
@@ -679,15 +681,15 @@ init 5 python:
 
         def build_overwear(self, points = 0, min_points = 0):
             def make_upper_item_transparent(item, points, colour):
-                colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
+                colour[3] = .85 + (renpy.random.randint(0, 10) / 100.0)
                 if item.layer == 3 and item.slut_value > 0 and points >= 4 and item in real_shirt_list + real_dress_list:
-                    colour[3] = .8 + (renpy.random.randint(0, 15) / 100.0)
+                    colour[3] = .75 + (renpy.random.randint(0, 15) / 100.0)
                 return item.get_copy(), colour
 
             def make_lower_item_transparent(item, points, colour):
-                colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
+                colour[3] = .85 + (renpy.random.randint(0, 10) / 100.0)
                 if item.layer == 3 and item.slut_value > 0 and points >= 4 and item in skirts_list + [suitpants, leggings, booty_shorts]:
-                    colour[3] = .8 + (renpy.random.randint(0, 15) / 100.0)
+                    colour[3] = .75 + (renpy.random.randint(0, 15) / 100.0)
                 return item.get_copy(), colour
 
             outfit = Outfit("Overwear")
@@ -735,15 +737,15 @@ init 5 python:
 
         def build_underwear(self, points = 0, min_points = 0):
             def make_upper_item_transparent(item, points, colour):
-                colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
+                colour[3] = .90 + (renpy.random.randint(0, 5) / 100.0)
                 if points >= 8 and item.slut_value > 0 and item in [lacy_one_piece_underwear, lingerie_one_piece, bodysuit_underwear] + real_bra_list:
-                    colour[3] = .7 + (renpy.random.randint(0, 25) / 100.0)
+                    colour[3] = .7 + (renpy.random.randint(0, 20) / 100.0)
                 return item.get_copy(), colour
 
             def make_lower_item_transparent(item, points, colour):
-                colour[3] = .95 + (renpy.random.randint(0, 5) / 100.0)
+                colour[3] = .90 + (renpy.random.randint(0, 5) / 100.0)
                 if points >= 8 and item.slut_value > 0 and item in panties_list:
-                    colour[3] = .7 + (renpy.random.randint(0, 25) / 100.0)
+                    colour[3] = .7 + (renpy.random.randint(0, 20) / 100.0)
                 return item.get_copy(), colour
 
             outfit = Outfit("Underwear")
@@ -800,8 +802,8 @@ init 5 python:
             return outfit
 
         def personalize_outfit(self, outfit, opinion_color = None, coloured_underwear = False, main_colour = None, swap_bottoms = False, allow_skimpy = True):
-            def change_colour_alpha(new_colour, old_colour):
-                alpha_blended = new_colour
+            def preserve_colour_alpha(new_colour, old_colour):
+                alpha_blended = new_colour[:]
                 alpha_blended[3] = old_colour[3]
                 return alpha_blended
 
@@ -845,24 +847,24 @@ init 5 python:
                 # renpy.say ("", "Suitable dress set")
                 for item in outfit.upper_body:
                     if item in real_bra_list and coloured_underwear:
-                        item.colour = change_colour_alpha(underwear_colour, item.colour)
+                        item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                     elif item in real_dress_list:
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     else:
                         neutralize_item_colour(item, color_hate_list)
                         if item in real_bra_list:
                             underwear_colour = item.colour  #If we neutralized the bra, makes sure we save the colour the give matching panties
                 for item in outfit.lower_body:
                     if item in panties_list and (coloured_underwear or underwear_colour):
-                        item.colour = change_colour_alpha(underwear_colour, item.colour)
+                        item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                     elif item in real_dress_list:
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     else:
                         neutralize_item_colour(item, color_hate_list)
                 for item in outfit.feet:
                     if item.proper_name == "Sneakers":
                         neutralize_item_colour(item)
-                        item.colour_pattern = change_colour_alpha(main_colour, item.colour_pattern)
+                        item.colour_pattern = preserve_colour_alpha(main_colour, item.colour_pattern)
                     else:
                         neutralize_item_colour(item, color_hate_list)
                 for item in outfit.accessories:
@@ -875,21 +877,21 @@ init 5 python:
                 #Next, figure out what kind of top we have. Regular, bra, or topless.
                 if outfit.tits_visible():   #Tits are on display, but she may have a top still. Colour her top (if there) and pants
                     for item in outfit.upper_body:
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     for item in outfit.lower_body:
                         if item in panties_list and (coloured_underwear or underwear_colour):
-                            item.colour = change_colour_alpha(underwear_colour, item.colour)
+                            item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                         elif item in real_pants_list:
-                            item.colour = change_colour_alpha(main_colour, item.colour)
+                            item.colour = preserve_colour_alpha(main_colour, item.colour)
                         else:
                             neutralize_item_colour(item, color_hate_list)
 
                 elif not outfit.bra_covered(): #Bra is on display, use that for our colour theme. Bra is focal point of outfit, so neutralize pants
                     for item in outfit.upper_body:
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     for item in outfit.lower_body:
                         if item in panties_list and (coloured_underwear or underwear_colour):
-                            item.colour = change_colour_alpha(underwear_colour, item.colour)
+                            item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                         elif item in real_pants_list:
                             neutralize_item_colour(item, color_hate_list)
                         else:
@@ -897,16 +899,16 @@ init 5 python:
                 else: #Assume a decent top is being worn. Top is the focal point of the outfit
                     for item in outfit.upper_body:
                         if item in real_bra_list and coloured_underwear:
-                            item.colour = change_colour_alpha(underwear_colour, item.colour)
+                            item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                         elif item in shirts_list:
-                            item.colour = change_colour_alpha(main_colour, item.colour)
+                            item.colour = preserve_colour_alpha(main_colour, item.colour)
                         else:
                             neutralize_item_colour(item, color_hate_list)
                             if item in real_bra_list:
                                 underwear_colour = item.colour
                     for item in outfit.lower_body:
                         if item in panties_list and (coloured_underwear or underwear_colour):
-                            item.colour = change_colour_alpha(underwear_colour, item.colour)
+                            item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                         elif item in real_pants_list:
                             neutralize_item_colour(item, color_hate_list)
                         else:
@@ -917,7 +919,7 @@ init 5 python:
                         neutralize_item_colour(item)
                         item.colour_pattern = main_colour
                     elif renpy.random.randint(0,100) < 30 and item in shoes_list: #Nomrally we neutralize feet, but have a chance at having a matching set of shooes
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     else:
                         neutralize_item_colour(item, color_hate_list)
                 for item in outfit.accessories:
@@ -929,20 +931,20 @@ init 5 python:
                 #Next, determine what kind of top is being worn.
                 if outfit.tits_visible():   #Tits are on display, but she may have a top still. Colour her top (if there) and skirt
                     for item in outfit.upper_body:
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     for item in outfit.lower_body:
                         if item in panties_list and (coloured_underwear or underwear_colour):
-                            item.colour = change_colour_alpha(underwear_colour, item.colour)
+                            item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                         elif item in skirts_list:
-                            item.colour = change_colour_alpha(main_colour, item.colour)
+                            item.colour = preserve_colour_alpha(main_colour, item.colour)
                         else:
                             neutralize_item_colour(item, color_hate_list)
                 elif not outfit.bra_covered(): #Bra is on display, use that for our colour theme. Bra is focal point of outfit, so neutralize skirt
                     for item in outfit.upper_body:
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     for item in outfit.lower_body:
                         if item in panties_list and (coloured_underwear or underwear_colour):
-                            item.colour = change_colour_alpha(underwear_colour, item.colour)
+                            item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                         elif item in skirts_list:
                             neutralize_item_colour(item, color_hate_list)
                         else:
@@ -951,9 +953,9 @@ init 5 python:
                     skirt_focus = renpy.random.randint(0,100) < 30  #30% chance for skirt focus
                     for item in outfit.upper_body:
                         if item in real_bra_list and coloured_underwear:
-                            item.colour = change_colour_alpha(underwear_colour, item.colour)
+                            item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                         elif item in shirts_list and not skirt_focus:
-                            item.colour = change_colour_alpha(main_colour, item.colour)
+                            item.colour = preserve_colour_alpha(main_colour, item.colour)
                         else:
                             neutralize_item_colour(item, color_hate_list)
                             if item in real_bra_list:
@@ -963,10 +965,10 @@ init 5 python:
 
                     for item in outfit.lower_body:
                         if item in panties_list and (coloured_underwear or underwear_colour):
-                            item.colour = change_colour_alpha(underwear_colour, item.colour)
+                            item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                         elif item in skirts_list:
                             if skirt_focus:
-                                item.colour = change_colour_alpha(main_colour, item.colour)
+                                item.colour = preserve_colour_alpha(main_colour, item.colour)
                             else:
                                 neutralize_item_colour(item, color_hate_list)
                         else:
@@ -976,7 +978,7 @@ init 5 python:
                         neutralize_item_colour(item)
                         item.colour_pattern = main_colour
                     elif renpy.random.randint(0,100) < 30 and item in shoes_list: #Nomrally we neutralize feet, but have a chance at having a matching set of shooes
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     else:
                         neutralize_item_colour(item, color_hate_list)
                 for item in outfit.accessories:
@@ -988,9 +990,9 @@ init 5 python:
                 # renpy.say ("", "Suitable comfy set")
                 for item in outfit.upper_body:
                     if item in real_bra_list and coloured_underwear:
-                        item.colour = change_colour_alpha(underwear_colour, item.colour)
+                        item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                     elif item in shirts_list:
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     else:
                         neutralize_item_colour(item, color_hate_list)
                         if item in real_bra_list:
@@ -998,7 +1000,7 @@ init 5 python:
 
                 for item in outfit.lower_body:
                     if item in panties_list and (coloured_underwear or underwear_colour):
-                        item.colour = change_colour_alpha(underwear_colour, item.colour)
+                        item.colour = preserve_colour_alpha(underwear_colour, item.colour)
                     else:
                         neutralize_item_colour(item, color_hate_list)
                 for item in outfit.feet:
@@ -1006,7 +1008,7 @@ init 5 python:
                         neutralize_item_colour(item)
                         item.colour_pattern = main_colour
                     elif renpy.random.randint(0,100) < 30 and item in shoes_list: #Nomrally we neutralize feet, but have a chance at having a matching set of shooes
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     else:
                         neutralize_item_colour(item, color_hate_list)
                 for item in outfit.accessories:
@@ -1021,13 +1023,13 @@ init 5 python:
                 # renpy.say ("", "Suitable underwear set")
                 for item in outfit.upper_body:
                     if item in real_bra_list:
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     else:
                         neutralize_item_colour(item, color_hate_list)
 
                 for item in outfit.lower_body:
                     if item in panties_list:
-                        item.colour = change_colour_alpha(main_colour,item.colour)
+                        item.colour = preserve_colour_alpha(main_colour,item.colour)
                     else:
                         neutralize_item_colour(item, color_hate_list)
                 for item in outfit.feet:
@@ -1037,12 +1039,12 @@ init 5 python:
             else: #This is for exciting, lingerie style outfits. Lingerie is generally completely color matching, maybe with only one or two neutral pieces.
                 # renpy.say ("", "Suitable lingerie set")
                 for item in outfit.upper_body:
-                    item.colour = change_colour_alpha(main_colour, item.colour)
+                    item.colour = preserve_colour_alpha(main_colour, item.colour)
                 for item in outfit.lower_body:
-                    item.colour = change_colour_alpha(main_colour, item.colour)
+                    item.colour = preserve_colour_alpha(main_colour, item.colour)
                 for item in outfit.feet:
                     if item in socks_list and renpy.random.randint(0,100) < 70:
-                        item.colour = change_colour_alpha(main_colour, item.colour)
+                        item.colour = preserve_colour_alpha(main_colour, item.colour)
                     else:
                         neutralize_item_colour(item, color_hate_list)
                 for item in outfit.accessories:

@@ -14,11 +14,11 @@ label lily_morning_encounter_enhanced_label():
         else:
             the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(the_person.sluttiness, guarantee_output = True))
 
-        if the_person.outfit.wearing_panties() and the_person.outfit.wearing_bra():
+        if the_person.wearing_panties() and the_person.wearing_bra():
             comfortable = True
-        elif the_person.outfit.wearing_bra() or the_person.effective_sluttiness("bare_tits") > 40:
+        elif the_person.wearing_bra() or the_person.effective_sluttiness("bare_tits") > 40:
             comfortable = True
-        elif the_person.outfit.wearing_panties() or the_person.effective_sluttiness("bare_pussy") > 40:
+        elif the_person.wearing_panties() or the_person.effective_sluttiness("bare_pussy") > 40:
             comfortable = True
         elif the_person.effective_sluttiness(["bare_tits", "bare_pussy"]) > 40:
             comfortable = True
@@ -27,13 +27,13 @@ label lily_morning_encounter_enhanced_label():
 
     "You wake up in the morning to your alarm. You get dressed and leave your room to get some breakfast."
     $ the_person.draw_person()
-    if the_person.outfit.wearing_panties() and the_person.outfit.wearing_bra():
+    if the_person.wearing_panties() and the_person.wearing_bra():
         "The door to [the_person.possessive_title]'s room opens as you're walking past. She steps out, wearing nothing but her underwear."
         $ mc.change_locked_clarity(5)
-    elif the_person.outfit.wearing_panties():
+    elif the_person.wearing_panties():
         "The door to [the_person.possessive_title]'s room opens as you're walking past. She steps out, wearing just a tiny pair of panties."
         $ mc.change_locked_clarity(10)
-    elif the_person.outfit.wearing_bra():
+    elif the_person.wearing_bra():
         "The door to [the_person.possessive_title]'s room opens as you're walking past. She steps out, wearing a bra, but surprisingly no panties."
         $ mc.change_locked_clarity(10)
     else:
@@ -54,14 +54,14 @@ label lily_morning_encounter_enhanced_label():
     elif comfortable == False:
         "[the_person.title] closes her door behind her, then notices you. She turns and jumps slightly in shock, pressing herself against the door."
         the_person "Sorry [the_person.mc_title], you startled me a bit."
-        if the_person.outfit.wearing_panties():
-            if not the_person.outfit.wearing_bra():
+        if the_person.wearing_panties():
+            if not the_person.wearing_bra():
                 if the_person.has_large_tits():
                     "She moves her hands up to her [the_person.tits_description], covering them, but also creating some impressive cleavage in the process."
                 else:
                     "She covers her [the_person.tits_description] with her hands, but leaves the rest of her body exposed to you."
         else:
-            if not the_person.outfit.wearing_bra():
+            if not the_person.wearing_bra():
                 "She cups one hand on her pussy while stretching the other arm across her breasts."
                 if the_person.has_large_tits():
                     "It doesn't quite get the job done leaving them bulging out above and below her arm."
@@ -103,13 +103,13 @@ label lily_morning_encounter_enhanced_label():
         "[the_person.title] closes her door behind her, then notices you. She turns and smiles."
         the_person "Morning [the_person.mc_title], I didn't think you'd be up yet."
         mc.name "Yep, early start today. What are you up to?"
-        if the_person.outfit.wearing_panties():
-            if not the_person.outfit.wearing_bra():
+        if the_person.wearing_panties():
+            if not the_person.wearing_bra():
                 "She starts to walk alongside you and doesn't seem to mind being topless."
             else:
                 "She starts to walk alongside you and doesn't seem to mind being in her underwear."
         else:
-            if not the_person.outfit.wearing_bra():
+            if not the_person.wearing_bra():
                 "She starts to walk alongside you and doesn't seem to mind being naked."
             else:
                 "She starts to walk alongside you and doesn't seem to mind that she is only wearing a bra."
@@ -150,8 +150,8 @@ label lily_morning_encounter_enhanced_label():
         the_person "Morning [the_person.mc_title], I was wondering if you were going to be up now."
         mc.name "Yep, early start today. What are you up to?"
         the_person "I was just going to get some laundry out of the machine."
-        if the_person.outfit.wearing_panties():
-            if the_person.outfit.wearing_bra():
+        if the_person.wearing_panties():
+            if the_person.wearing_bra():
                 "[the_person.possessive_title] thumbs her underwear playfully."
                 $ mc.change_locked_clarity(5)
             else:
@@ -239,7 +239,7 @@ label lily_morning_encounter_follow_up_one_label(the_person):
     mc.name "I was, but I don't think I can leave you like this in good conscience."
     the_person "That is so sweet, I was worried I would have to take care of myself before I could think about school for the day."
     $ the_person.change_stats(happiness = 5, love = 3)
-    if the_person.outfit.wearing_panties():
+    if the_person.wearing_panties():
         $ the_person.outfit.strip_to_vagina()
         "As you step towards her she drops her panties off her hips to the floor."
         $ the_person.update_outfit_taboos()

@@ -999,7 +999,7 @@ label anal_fetish_stephanie_bimbo_label(the_person):
 label anal_fetish_stephanie_normal_label(the_person):
     $ scene_manager = Scene()
     $ scene_manager.add_actor(the_person, position = "stand4")
-    if not the_person.outfit.vagina_available():
+    if not the_person.vagina_visible():
         "She starts to strip down."
         $ scene_manager.strip_to_vagina(person = the_person)
     "She looks at you expectantly."

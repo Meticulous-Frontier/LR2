@@ -512,7 +512,7 @@ label princess_clothing_reject(the_person):
     the_person "I want to wear this for you [the_person.mc_title], but I'm not sure I can!"
     return
 
-label princess_sex_accept(the_person):
+label princess_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         the_person "Oh [the_person.mc_title]! I'll do ANYTHING for you."
     else:

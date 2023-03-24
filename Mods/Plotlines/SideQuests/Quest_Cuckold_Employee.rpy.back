@@ -342,7 +342,7 @@ label quest_cuckold_employee_decision_label():
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "She spreads her legs, her pussy on display in front of you."
     else:
         if the_person.outfit.can_half_off_to_vagina():
@@ -445,7 +445,7 @@ label quest_cuckold_employee_rethink_decision_label():
     the_person "Oh my god, I can't believe I'm doing this. I have a bull now, oh god!"
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "She spreads her legs, her pussy on display in front of you."
     else:
         if the_person.outfit.can_half_off_to_vagina():
@@ -547,7 +547,7 @@ label quest_cuckold_employee_breeding_session_label(the_person):
     the_person "Oh god, it's so hot when you talk to me like that."
     "[the_person.possessive_title] gets on your desk and lays on her back."
     $ the_person.draw_person(position = "missionary")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         $ mc.change_arousal(5)
         $ the_person.change_arousal(5)
         "She spreads her legs, her pussy on display in front of you."
@@ -698,7 +698,7 @@ label quest_cuckold_employee_after_window_label():
         the_person "I'll be able to test for sure in a couple of days! I wouldn't mind a couple more tries between now and then though... just in case my period is just late."
         mc.name "I'll make time to breed you again cow. Be prepared to receive my potent seed."
         $ mc.end_text_convo()
-        $ the_person.on_room_enter_event_list = []  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
+        $ the_person.on_room_enter_event_list = ActionList()  #We are overriding this event and doing our own announcement. No reason to use vanilla one in this situation.
         $ quest_cuckold_employee().set_quest_flag(91)
         $ mc.business.add_mandatory_crisis(quest_cuckold_employee_knocked_up)
         return

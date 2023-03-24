@@ -262,7 +262,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
         "How about a blowjob?\n{color=#ff0000}{size=18}Modifiers: +20 Sluttiness, +5 Obedience{/size}{/color}":
             "[person_one.possessive_title] smiles."
             person_one "Oh [person_one.mc_title], you work so hard. Don't worry, I'll take care of you."
-            if not person_one.outfit.tits_available():    #If covered up, have her take her top off
+            if not person_one.tits_available():    #If covered up, have her take her top off
                 person_one "Here... let me take this off. I bet that will help ease some of your stress."
                 $ the_clothing = person_one.outfit.get_upper_top_layer()
                 $ mc.change_arousal(10)
@@ -272,7 +272,7 @@ label SB_working_weekend_crisis_label_medium(person_one):
             $ mc.change_arousal(10)
             "Your eyes wander down to [person_one.possessive_title]'s tits."
             $ mc.change_locked_clarity(30)
-            if person_one.outfit.tits_available():
+            if person_one.tits_available():
                 if person_one.get_opinion_score("showing her tits") > 0:
                     "You can see a blush in [person_one.possessive_title]'s cheeks. She likes to show off her [person_one.tits] tits!"
                     $ person_one.discover_opinion("showing her tits")

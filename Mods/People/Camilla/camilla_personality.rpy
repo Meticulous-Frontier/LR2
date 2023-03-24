@@ -143,7 +143,7 @@ label camilla_clothing_accept(the_person):
 #        the_person "I think that should stay where it is for now."
 #    return
 
-# label camilla_sex_accept(the_person):
+# label camilla_sex_accept(the_person, the_position):
 #     if the_person.effective_sluttiness() > 70:
 #         if the_person.obedience < 70:
 #             the_person "I was just about to suggest the same thing."
@@ -280,7 +280,7 @@ label camilla_flirt_response_low(the_person):
 
 label camilla_flirt_response_mid(the_person):
     if the_person.effective_sluttiness() < 20 and mc.location.get_person_count() > 1:
-        if the_person.outfit.tits_visible():
+        if the_person.tits_visible():
             the_person "Are you sure you don't mean my tits look good in this outfit?"
             "She winks and wiggles her shoulders, setting her boobs jiggling for you."
             mc.name "All of you looks good, tits included."

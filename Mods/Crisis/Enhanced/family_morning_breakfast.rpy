@@ -40,10 +40,10 @@ label family_morning_breakfast_enhanced_label():
     $ scene_manager.show_actor(mom, position = "walking_away", display_transform = character_left_flipped)
 
     if mom.effective_sluttiness() > 40:
-        if mom.outfit.vagina_visible():
+        if mom.vagina_visible():
             "[mom.possessive_title] is in front of the stove naked, humming as she scrambles a pan full of eggs."
             $ mc.change_locked_clarity(20)
-        elif mom.outfit.tits_visible():
+        elif mom.tits_visible():
             "[mom.possessive_title] is standing in front of the stove topless, humming as she scrambles a pan full of eggs."
             $ mc.change_locked_clarity(10)
         else:
@@ -61,10 +61,10 @@ label family_morning_breakfast_enhanced_label():
     $ scene_manager.show_actor(lily)
 
     if lily.effective_sluttiness() > 40:
-        if lily.outfit.vagina_visible():
+        if lily.vagina_visible():
             "[lily.possessive_title] comes into the room naked. She gives a dramatic yawn before sitting down at the kitchen table."
             $ mc.change_locked_clarity(20)
-        elif lily.outfit.tits_visible():
+        elif lily.tits_visible():
             "[lily.possessive_title] walks topless into the kitchen, yawning dramatically before sitting down at the table."
             $ mc.change_locked_clarity(10)
         else:
@@ -159,9 +159,9 @@ label family_morning_breakfast_enhanced_label():
         mom "What? It's the weekend and it's just the three of us. I didn't think anyone would mind if I was a little more casual."
         $ scene_manager.update_actor(lily, position = "sitting")
 
-        if mom.outfit.vagina_visible():
+        if mom.vagina_visible():
             lily "Mom, I don't think you know what casual means. Could you at least put on some panties or something?"
-        elif mom.outfit.tits_visible():
+        elif mom.tits_visible():
             lily "Mom, I don't think you know what casual means. I mean, couldn't you at least put on a bra?"
         else:
             lily "Mom, you're prancing around the kitchen in your underwear. In front of your son and daughter. That's weird."

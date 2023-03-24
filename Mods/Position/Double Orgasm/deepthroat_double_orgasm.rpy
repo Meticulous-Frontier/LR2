@@ -53,7 +53,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
         if the_girl.sluttiness > 80:
             "When [the_girl.title]'s orgasm subsides, she closes her mouth and swallows loudly, smiling at you."
         else:
-            if the_girl.outfit.tits_visible():
+            if the_girl.tits_visible():
                 $ the_girl.cum_on_tits()
                 $ deepthroat.redraw_scene(the_girl)
                 if the_girl.has_large_tits():
@@ -81,7 +81,7 @@ label deepthroat_double_orgasm(the_girl, the_location, the_object):
                 $ the_girl.change_slut(the_girl.get_opinion_score("being submissive")) #If she likes being submissive this makes her cum and become sluttier super hard.
                 $ the_girl.change_slut(-the_girl.get_opinion_score("being submissive"))
             $ the_girl.change_obedience(2*the_girl.get_opinion_score("being submissive"))
-            if the_girl.outfit.vagina_visible():
+            if the_girl.vagina_visible():
                 "You can see that [the_girl.title]'s pussy is dripping wet as she starts shaking and enjoying her own orgasm."
             else:
                 $ the_item = the_girl.outfit.get_lower_top_layer()

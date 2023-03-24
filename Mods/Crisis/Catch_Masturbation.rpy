@@ -93,7 +93,7 @@ label SB_caught_masturbating_crisis_label():
         the_person "Mmmmmmmfff... oh..."
         $ the_person.change_arousal(50)
         $ the_person.discover_opinion("masturbating")
-        if the_person.outfit.vagina_visible(): #If she is naked below
+        if the_person.vagina_visible(): #If she is naked below
             $ mc.change_locked_clarity(20)
             "With her pussy on full display, you can see she is masturbating vigorously. Her pink lips glisten with moisture."
         else:
@@ -138,7 +138,7 @@ label SB_caught_masturbating_crisis_label():
                             $ the_person.draw_person(position = "missionary")
                             "You startle [the_person.possessive_title] and she quickly turns over on her back."
                             the_person "[the_person.mc_title]? Oh God, how long have you been here?"
-                            if the_person.outfit.vagina_available():           #If its available no need to strip.
+                            if the_person.vagina_visible():           #If its available no need to strip.
                                 "You drop down on the floor in front of her. With her pussy exposed you waste no time diving right in."
                             else:                                              #Otherwise, strip her down.
                                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy."
@@ -242,7 +242,7 @@ label SB_caught_masturbating_crisis_label():
                         $ the_person.draw_person(position = "missionary")
                         "[the_person.possessive_title] rolls over on her back and continues masturbating."
                         $ the_person.change_arousal(20)
-                        if the_person.outfit.vagina_visible():
+                        if the_person.vagina_visible():
                             "Her delicious pussy on full display, [the_person.possessive_title] increases her pace while closely watching you."
                             $ mc.change_locked_clarity(20)
                             $ the_person.break_taboo("bare_pussy")
@@ -271,7 +271,7 @@ label SB_caught_masturbating_crisis_label():
                         "You finish up your walk and return back to your previous work."
                     elif the_person.has_anal_fetish():
                         the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
-                        if not the_person.outfit.vagina_available():
+                        if not the_person.vagina_visible():
                             $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "doggy")
                         $ mc.change_locked_clarity(50)
                         $ the_person.break_taboo("bare_pussy")
@@ -324,7 +324,7 @@ label SB_caught_masturbating_crisis_label():
 
                     else: #She is very slutty
                         the_person "Oh [the_person.mc_title]! Thank god, I could really use your help here..."
-                        if not the_person.outfit.vagina_available():
+                        if not the_person.vagina_visible():
                             "[the_person.possessive_title] moves her clothes out of the way."
                             $ the_person.strip_to_vagina(prefer_half_off = True, visible_enough = True, position = "doggy")
                         $ mc.change_locked_clarity(20)

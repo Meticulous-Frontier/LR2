@@ -56,14 +56,14 @@ init 10 python:
 
     def strip_club_caged_strip_requirements(the_person):
         if the_person.has_role(caged_role):
-            if the_person.outfit.tits_available() and the_person.outfit.vagina_available():
+            if the_person.tits_available() and the_person.vagina_available():
                 return False
             return True
         return False
 
     def strip_club_caged_actions_milk_her_requirements(the_person):
         if the_person.has_role(caged_role):
-            if the_person.outfit.tits_available():
+            if the_person.tits_available():
                 return True
             else:
                 return "Obstructed by Clothing"
@@ -115,7 +115,7 @@ init -1 python:
     def strip_club_bdsm_strip_description(the_person, the_item, the_group):
         test_outfit = the_person.outfit.get_copy()
         test_outfit.remove_clothing(the_item)
-        if test_outfit.tits_visible() and not the_person.outfit.tits_visible():
+        if test_outfit.tits_visible() and not the_person.tits_visible():
             if person.has_taboo("bare_tits"):
                 renpy.say(None, the_person.title + " glances around nervously.")
                 renpy.say(the_person.char, "Maybe I can keep my bra on?")
@@ -132,7 +132,7 @@ init -1 python:
                 renpy.say(None, the_person.title + " tries to keep her breasts covered with her hands, cheeks red.")
                 the_person.break_taboo("bare_tits")
 
-        elif test_outfit.vagina_visible() and not the_person.outfit.vagina_visible():
+        elif test_outfit.vagina_visible() and not the_person.vagina_visible():
             if the_person.has_taboo("bare_pussy"):
                 renpy.say(None, the_person.title + " starts to move her " + the_item.display_name + ", but hesitates.")
                 renpy.say(the_person.char, "Should I really remove my "+ the_item.display_name + "?")
@@ -145,7 +145,7 @@ init -1 python:
                 renpy.say(None, the_item.display_name + " off, " + the_person.title + " cover herself as she can, blushing a fierce red.")
                 the_person.break_taboo("bare_pussy")
 
-        elif the_person.has_taboo("underwear_nudity") and test_outfit.underwear_visible() and not the_person.outfit.underwear_visible():
+        elif the_person.has_taboo("underwear_nudity") and test_outfit.underwear_visible() and not the_person.underwear_visible():
             renpy.say(None, the_person.title + " glances around nervously.")
             renpy.say(the_person.char, "You don't really want me to take off my " + the_item.display_name + ", do you? I'll just have my underwear on...")
             renpy.say(mc.name, "Come on " + the_person.title + ", that's the whole point of this place! Nobody cares about you just wearing your underwear.")

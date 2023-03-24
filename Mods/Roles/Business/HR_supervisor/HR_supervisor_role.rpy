@@ -605,7 +605,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
         else:
             person_choice "Is that... I'm sorry, what is it that you needed, [person_choice.mc_title]?"
         $ person_choice.change_slut(2) # give her a temp slut boost to maybe have a threesome later...
-    elif the_person.outfit.vagina_visible():
+    elif the_person.vagina_visible():
         $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title] showing off her pussy."
         $ person_choice.change_slut(2)
@@ -613,7 +613,7 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
             person_choice "I really like you the outfit you are wearing [the_person.fname]."
         else:
             person_choice "Uh... right, what can I do for you, [person_choice.mc_title]?"
-    elif the_person.outfit.tits_visible():
+    elif the_person.tits_visible():
         $ mc.change_locked_clarity(20)
         "[person_choice.title] sits down across from you, but is clearly distracted by [the_person.title]'s exposed tits."
         $ person_choice.change_slut(1)
@@ -685,6 +685,8 @@ label HR_director_personnel_interview_label(the_person, max_opinion = 0):
                     "With [the_person.title] still wearing your cum from her service earlier, you get a burst of energy and arousal."
                     $ mc.change_stats(arousal = __builtin__.min(30, mc.max_arousal - mc.arousal), energy = __builtin__.min(80, mc.max_energy - mc.energy))
                 mc.name "Of course. Let's get started."
+                if not (the_person.vagina_visible() and person_choice.vagina_visible()):
+                    $ scene_manager.strip_to_vagina()
                 call start_threesome(person_choice, the_person) from threesome_HR_meeting_happy_ending
                 person_choice "Oh my... that was fun. Thanks for calling me in! I guess I'd better go get back to work..."
                 if the_person is sarah:
@@ -1021,7 +1023,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             the_person "So... I was thinking this week maybe I could do that thing again. You know, where I put your cock between my tits?"
             the_person "It felt soooo good last time. I've been thinking about it a lot."
             mc.name "That sounds great, I'll admit it, seeing my cock between your tits is hot."
-            if the_person.outfit.tits_available():
+            if the_person.tits_available():
                 "With her tits already out and ready to be used, she just gives you a big smile."
             else:
                 if the_person.outfit.can_half_off_to_tits():
@@ -1073,7 +1075,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             the_person "Oh! Yes sir!"
             "[the_person.possessive_title] gets on your desk and lays on her back."
             $ scene_manager.update_actor(the_person, position = "missionary", emotion = "happy")
-            if the_person.outfit.vagina_available():
+            if the_person.vagina_visible():
                 "She spreads her legs, her pussy on display in front of you."
             else:
                 if the_person.outfit.can_half_off_to_vagina():
@@ -1115,7 +1117,7 @@ label HR_director_sexy_meeting_start_label(the_person):
                 the_person "Oh my!"
                 $ set_HR_director_unlock("bent over desk", True)
 
-                if the_person.outfit.vagina_available():
+                if the_person.vagina_visible():
                     "She wiggles her hips back at you a bit. Her pussy lips glisten with a bit of moisture."
                 else:
                     if the_person.outfit.can_half_off_to_vagina():
@@ -1275,7 +1277,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         call fuck_person(the_person, start_position = blowjob, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_one
 
     elif position_choice == "titfuck":
-        if not the_person.outfit.tits_available():
+        if not the_person.tits_available():
             if the_person.outfit.can_half_off_to_tits():
                 "[the_person.possessive_title] moves her top out of the way."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_tits_list(), half_off_instead = True)
@@ -1294,7 +1296,7 @@ label HR_director_sexy_meeting_start_label(the_person):
             call fuck_person(the_person, start_position = tit_fuck, start_object = make_floor(), skip_intro = True, girl_in_charge = False, position_locked = True) from _call_sex_description_meeting_mid_two
 
     elif position_choice == "missionary on desk":
-        if not (the_person.outfit.vagina_available() and the_person.outfit.vagina_visible()):
+        if not the_person.vagina_visible():
             if the_person.outfit.can_half_off_to_vagina():
                 "[the_person.possessive_title] moves her clothes out of the way."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)
@@ -1323,7 +1325,7 @@ label HR_director_sexy_meeting_start_label(the_person):
         $ scene_manager.update_actor(the_person, position="stand3")
         the_person "Oh my!"
 
-        if the_person.outfit.vagina_available() and the_person.outfit.vagina_visible():
+        if the_person.vagina_visible():
             "You give her pussy a little rub and show her your fingers glistening with a bit of moisture. You quickly turn her around and bend her over your desk."
         else:
             if the_person.outfit.can_half_off_to_vagina():
@@ -1346,7 +1348,7 @@ label HR_director_sexy_meeting_start_label(the_person):
     elif position_choice == "anal lapdance":
         the_person "Oh god, you want your HR director's ass, do you? What a naughty CEO!"
         $ the_person.change_arousal(20)
-        if not (the_person.outfit.vagina_available() and the_person.outfit.vagina_visible()):
+        if not the_person.vagina_visible():
             if the_person.outfit.can_half_off_to_vagina():
                 "[the_person.possessive_title] moves her clothes out of the way."
                 $ scene_manager.strip_actor_strip_list(the_person, the_person.outfit.get_half_off_to_vagina_list(), half_off_instead = True)

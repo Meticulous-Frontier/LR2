@@ -128,7 +128,7 @@ label mom_breakfast_action_label_medium():
                 "Finish Massage":
                     "You work on her shoulders for a while. She sighs in relaxation. You finish up and go back to your breakfast."
                     return None
-            if the_person.outfit.tits_available():
+            if the_person.tits_available():
                 "This skin of [the_person.possessive_title]'s creamy tits feels hot and soft in your hands."
             else:
                 menu:
@@ -148,7 +148,7 @@ label mom_breakfast_action_label_medium():
             $ the_person.change_arousal(20) #35
             the_person "Oh, that feels so good, but we should probably stop before your sister comes out..."
             menu:
-                "Pet Her Pussy" if the_person.sluttiness > 30 and not the_person.outfit.vagina_available() and not the_person.has_taboo("touching_vagina"):
+                "Pet Her Pussy" if the_person.sluttiness > 30 and not the_person.vagina_available() and not the_person.has_taboo("touching_vagina"):
                     "You whisper in her ear."
                     mc.name "I've got a better idea."
                     "You let one hand slowly descend from her breast down to the mound between her legs."
@@ -177,7 +177,7 @@ label mom_breakfast_action_label_medium():
                     mc.name "Don't want to go too far, [lily.fname] could walk out at any moment..."
                     $ the_person.change_stats(obedience = 5)
                     return "Advance Time"
-                "Finger Her" if the_person.sluttiness > 50 and the_person.outfit.vagina_available() and not the_person.has_taboo("touching_vagina"):
+                "Finger Her" if the_person.sluttiness > 50 and the_person.vagina_available() and not the_person.has_taboo("touching_vagina"):
                     "You whisper in her ear."
                     mc.name "I've got a better idea."
                     "You let one hand slowly descend from her breast down to her exposed cunt."

@@ -33,11 +33,11 @@ init 5 python:
             # only remove clothing, don't show it on screen
             removed_something = scene_manager.strip_actor_outfit_to_max_sluttiness(other_girl, temp_sluttiness_boost = 20)
             if removed_something:
-                if other_girl.outfit.tits_visible():
+                if other_girl.tits_visible():
                     other_girl.break_taboo("bare_tits")
-                if other_girl.outfit.vagina_visible():
+                if other_girl.vagina_visible():
                     other_girl.break_taboo("bare_pussy")
-                if (other_girl.outfit.are_panties_visible()) or (other_girl.outfit.is_bra_visible()):
+                if (other_girl.are_panties_visible()) or (other_girl.is_bra_visible()):
                     other_girl.break_taboo("underwear_nudity")
             else:
                 scene_manager.update_actor(other_girl, emotion = "sad")
@@ -176,7 +176,7 @@ label broken_AC_crisis_break_taboo(the_girl):
             "She makes a vain attempt to keep herself covered with her hands, but soon enough seems to be comfortable being nude in front of you."
             $ the_girl.break_taboo("bare_pussy")
             $ the_girl.break_taboo("bare_tits")
-    elif the_girl.outfit.tits_visible():
+    elif the_girl.tits_visible():
         $ mc.change_locked_clarity(20)
         "Once she's done stripping [the_girl.possessive_title] has her nice [the_girl.tits] tits out on display."
         if the_girl.has_taboo("bare_tits"):
@@ -186,7 +186,7 @@ label broken_AC_crisis_break_taboo(the_girl):
                 "She tries to hide her [the_girl.tits_description] from you with her hands, but quickly realizes how impractical that would be."
             "Soon enough she doesn't even mind having them out."
             $ the_girl.break_taboo("bare_tits")
-    elif the_girl.outfit.vagina_visible():
+    elif the_girl.vagina_visible():
         $ mc.change_locked_clarity(30)
         "Once she's done stripping [the_girl.possessive_title] has her pretty little pussy out on display for everyone."
         if the_girl.has_taboo("bare_pussy"):
@@ -196,7 +196,7 @@ label broken_AC_crisis_break_taboo(the_girl):
     else:
         $ mc.change_locked_clarity(10)
         "[the_girl.possessive_title] finishes stripping and looks back at you."
-        if (the_girl.outfit.are_panties_visible()) or (the_girl.outfit.is_bra_visible()):
+        if (the_girl.are_panties_visible()) or (the_girl.is_bra_visible()):
             if the_girl.has_taboo("underwear_nudity"):
                 "She seems nervous at first, but quickly gets used to being in her underwear in front of you."
                 $ the_girl.break_taboo("underwear_nudity")

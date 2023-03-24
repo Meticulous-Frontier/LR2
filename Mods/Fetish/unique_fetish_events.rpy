@@ -182,7 +182,7 @@ label fetish_mom_kitchen_label(the_person):
     "[the_person.possessive_title] hesitates for a second, clearly realizing you are up to something."
     "You pretend to look in the fridge for something as [the_person.possessive_title] resumes dinner preparations. She bends over the counter and starts to chop up some vegetables."
     $ the_person.draw_person(position = "standing_doggy")
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         "You steal a few glances over at [the_person.possessive_title]'s exposed ass. It looks soft and supple, and shakes a bit as she prepares dinner."
     else:
         "You steal a glance over at [the_person.possessive_title]'s ass as she is bent over. It looks great in her [the_clothing.name]."
@@ -194,14 +194,14 @@ label fetish_mom_kitchen_label(the_person):
             "You continue groping her. You give her ass a solid swat."
             mc.name "Stop? But doesn't that feel good, [the_person.title]?"
             the_person "Of course it does... But your sister, she could walk in anytime..."
-            if the_person.outfit.vagina_available():
+            if the_person.vagina_available():
                 mc.name "Shhh, just be quiet. Your ass looks so amazing [the_person.title]... I should just fuck it right here..."
             else:
                 mc.name "Shhh, just be quiet. Your ass looks so good in your [the_clothing.name]... I should just pull it down and fuck you in the ass right here..."
             $ the_person.change_arousal(10)
             "[the_person.possessive_title] stifles a moan, she pushes her hips back against you as you continue to stroke her."
             the_person "Mmmmmm... Okay... Do it! Just go quick! I don't want your sister to catch us."
-            if the_person.outfit.vagina_available():           #If it's available no need to strip.
+            if the_person.vagina_visible():           #If it's available no need to strip.
                 "You quickly pull your cock out and begin to rub it between her cheeks."
             else:                                              #Otherwise, strip her down.
                 "You don't bother to reply, instead you begin stripping away anything between you and her supple ass."
@@ -223,7 +223,7 @@ label fetish_mom_kitchen_label(the_person):
         "Fuck her ass\n{color=#ff0000}{size=18}Requires Anal Fetish{/size}{/color} (disabled)" if not the_person.has_anal_fetish():
             pass
         "Creampie her" if the_person.has_breeding_fetish():
-            if the_person.outfit.vagina_available():
+            if the_person.vagina_available():
                 "You slowly reach down and start to slowly caress her cunt."
             else:
                 "You slowly reach down and start to slowly rub her pussy through her [the_clothing.name]."
@@ -233,14 +233,14 @@ label fetish_mom_kitchen_label(the_person):
             the_person "Of course it does... But your sister, she could walk in anytime..."
             mc.name "You know you want a pussy full of my cum. Feel it dripping out of your fertile cunt all through dinner time."
             the_person "Yes I know but..."
-            if the_person.outfit.vagina_available():
+            if the_person.vagina_available():
                 mc.name "Shhh, just be quiet. Your ass looks so amazing [the_person.title]... I should just fuck you right here..."
             else:
                 mc.name "Shhh, just be quiet. Your ass looks so good in your [the_clothing.name]... I should just pull it down and fuck you right here..."
             $ the_person.change_arousal(10)
             "[the_person.possessive_title] stifles a moan, she pushes her hips back against you as you continue to stroke her."
             the_person "Mmmmmm... Okay... Do it! Just go quick! I don't want your sister to catch us."
-            if the_person.outfit.vagina_available():           #If it's available no need to strip.
+            if the_person.vagina_visible():           #If it's available no need to strip.
                 "You quickly pull your cock out and line it up with her wet slit."
             else:                                              #Otherwise, strip her down.
                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
@@ -276,7 +276,7 @@ label fetish_mom_kitchen_label(the_person):
             $ the_person.change_arousal(15)
             "Barely whispering, [the_person.possessive_title] tries to resist, but you can tell this is really turning her on."
             the_person "Your sister, she's going to..."
-            if the_person.outfit.vagina_available():
+            if the_person.vagina_available():
                 mc.name "Shhh, just be quiet. Your ass looks so amazing [the_person.title]... I should just fuck you right here..."
             else:
                 mc.name "Shhh, just be quiet. Your ass looks so good in your [the_clothing.name]... I should just pull it down and fuck you right here..."
@@ -286,7 +286,7 @@ label fetish_mom_kitchen_label(the_person):
             the_person "Oh god... Do it! Just go quick."
             mc.name "If I fuck you fast, it might get kinda noisy in here."
             the_person "I don't care! Just do it!"
-            if the_person.outfit.vagina_available():           #If it's available no need to strip.
+            if the_person.vagina_visible():
                 "You quickly pull your cock out and line it up with her wet slit."
             else:                                              #Otherwise, strip her down.
                 "You don't bother to reply, instead you begin stripping away anything between you and her delicious pussy"
@@ -362,7 +362,7 @@ label fetish_lily_stream_in_room_label(the_person): # NOTE: This scene is curren
     the_person "Don't want mom to find out..."
     $ the_person.draw_person(position = "standing_doggy")
     "[the_person.possessive_title] goes over to her dresser. She's going through a drawer looking for the toy."
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_available():
         mc.name "Mmmm, [the_person.title], your ass looks amazing. I can't wait to see that hole stretched around my cock..."
     else:
         "You step up behind [the_person.possessive_title] and start to grope her ass. She sighs as you massage it."

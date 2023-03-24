@@ -102,8 +102,8 @@ label camilla_alexia_boudoir_intro_label():
     if mc.is_at_work():
         "You finish up quickly with the last of your daily tasks before going to your office."
     else:
-        "You head back to work and to you office to get ready."
-    $ ceo_office.show_background()
+        "You head back to work and to your office to get ready."
+    $ mc.change_location(ceo_office)
     "Shortly after, you hear a knock on your door."
     $ scene_manager.add_actor(alexia)
     alexia "Knock knock! Hey [alexia.mc_title]."
@@ -124,8 +124,8 @@ label camilla_alexia_boudoir_recur_label(the_person):
     if mc.is_at_work():
         "You finish up quickly with the last of your daily tasks before going to your office."
     else:
-        "You head back to work and to you office to get ready."
-    $ ceo_office.show_background()
+        "You head back to work and to your office to get ready."
+    $ mc.change_location(ceo_office)
 
 
     return

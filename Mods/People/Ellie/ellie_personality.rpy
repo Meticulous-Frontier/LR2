@@ -77,9 +77,9 @@ label ellie_sex_responses_foreplay(the_person):
 
     elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
-            if the_person.outfit.wearing_panties():
+            if the_person.wearing_panties():
                 the_person "Ah... If you get me any wetter I'm going to soak right through my panties."
-            elif the_person.outfit.vagina_available():
+            elif the_person.vagina_available():
                 the_person "Good thing I'm not wearing any panties, you'd have me soaking right through them..."
             else:
                 the_person "Oh god, if I get any wetter it's going to soak right through my clothes."
@@ -317,14 +317,14 @@ label ellie_grope_body_reject(the_person):
         "She doesn't say anything more, but she still seems uncomfortable with the situation."
     return
 
-label ellie_sex_accept(the_person):
+label ellie_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.obedience < 70:
             the_person "I was just about to suggest the same thing."
         else:
             the_person "Mmm, you have a dirty mind [the_person.mc_title], I like it."
     else:
-        the_person "Okay, we can give that a try."
+        the_person "Oh Lord, we can try."
     return
 
 label ellie_sex_obedience_accept(the_person):
@@ -453,7 +453,7 @@ label ellie_flirt_response_low(the_person):
             "[the_person.possessive_title] smiles and laughs self-consciously."
         else:
             #She's in uniform, but she thinks it's a little too slutty.
-            if the_person.outfit.vagina_visible():
+            if the_person.vagina_visible():
                 # Her pussy is on display.
                 the_person "Thanks, but I really wish this uniform covered, well, anything."
                 the_person "I know it's company policy, but it's a little... breezy."
@@ -461,7 +461,7 @@ label ellie_flirt_response_low(the_person):
                 $ mc.change_locked_clarity(5)
                 "[the_person.possessive_title] blushes and looks away."
 
-            elif the_person.outfit.tits_visible():
+            elif the_person.tits_visible():
                 # Her tits are out
                 if the_person.has_large_tits():
                     the_person "Thanks, but I really wish my uniform included a bra."
@@ -474,7 +474,7 @@ label ellie_flirt_response_low(the_person):
                 mc.name "It might be a little uncomfortable, but you look incredible in it."
                 the_person "I better, I certainly wouldn't be wearing this if it wasn't required!"
 
-            elif the_person.outfit.underwear_visible():
+            elif the_person.underwear_visible():
                 # Her underwear is visible.
                 $ mc.change_locked_clarity(5)
                 the_person "Thanks, I just wish this uniform kept me a little more covered. It feels like I'm barely wearing anything."
@@ -500,7 +500,7 @@ label ellie_flirt_response_mid(the_person):
         if the_person.judge_outfit(the_person.outfit):
             $ mc.change_locked_clarity(10)
             the_person "No surprises there, since you're the one who designed this uniform."
-            if the_person.outfit.tits_visible():
+            if the_person.tits_visible():
                 the_person "I'm sure my boobs aren't out by accident. Not that I mind..."
                 "She jiggles and wiggles her shoulders, jiggling her breasts for you."
             else:
@@ -514,10 +514,10 @@ label ellie_flirt_response_mid(the_person):
         else:
             $ mc.change_locked_clarity(10)
             the_person "I think it shows off a little too much!"
-            if the_person.outfit.vagina_visible():
+            if the_person.vagina_visible():
                 the_person "Look at me, you can practically see everything!"
                 the_person "No offence, but this uniform makes me look like a whore."
-            elif the_person.outfit.tits_visible():
+            elif the_person.tits_visible():
                 the_person "My boobs are just hanging out, for goodness sakes!"
                 the_person "No offence, but your uniform makes me look like a slut."
             else:

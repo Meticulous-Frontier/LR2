@@ -96,7 +96,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
             "She gives you a wink and turns around to pick up the food."
             $ scene_manager.update_actor(loser, position = "walking_away")
 
-            if loser.effective_sluttiness() >= 90 and loser.outfit.vagina_visible():
+            if loser.effective_sluttiness() >= 90 and loser.vagina_visible():
                 if persistent.show_ntr:
                     "When [loser.possessive_title] reaches the lobby she pulls the sweaty guy into an empty office."
                     loser "I left my purse at my desk. I can go get it... or maybe I could pay another way."
@@ -163,7 +163,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                     loser "Hey now, it's not like that, you know you can claim me anytime you want, we were just looking for some free... FUCK"
                     $ mc.change_locked_clarity(20)
                     "You grab her hips and ram yourself forward into [loser.possessive_title]'s sopping wet pussy."
-                    if winner_one.effective_sluttiness() > 80 and winner_one.outfit.vagina_visible():
+                    if winner_one.effective_sluttiness() > 80 and winner_one.vagina_visible():
                         winner_one "Holy shit he's gonna fuck her right here!"
                         $ scene_manager.update_actor(winner_one, position = "kneeling1")
                         "While watching you, [winner_one.title] begins to touch herself and masturbate."
@@ -198,7 +198,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
                         "You pull out and look at [loser.possessive_title]. Your cum is running down the inside of her legs as your seed spills out of her."
 
                     $ loser.change_stats(obedience = 5, love = 3)
-                    if winner_one.effective_sluttiness() > 90 and winner_one.outfit.vagina_visible():
+                    if winner_one.effective_sluttiness() > 90 and winner_one.vagina_visible():
                         winner_one "Oh god, so hot..."
                         "[winner_one.title] can't help herself. She is so turned on watching, she makes herself cum."
                         winner_one "Oh Fuck!"
@@ -240,7 +240,7 @@ label coffee_break2_food_delivery_label(person_one, person_two, person_three):
         # do we strip more?
         $ scene_manager.strip_actor_outfit_to_max_sluttiness(loser, exclude_lower = True, temp_sluttiness_boost = 10)
         $ mc.change_locked_clarity(10)
-        if loser.outfit.tits_visible():
+        if loser.tits_visible():
             "[loser.possessive_title] sheepishly walks down the lobby trying to cover her breasts."
         else:
             "[loser.possessive_title] sheepishly walks down the lobby."

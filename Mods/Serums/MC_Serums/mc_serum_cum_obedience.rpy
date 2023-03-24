@@ -24,7 +24,7 @@ init 1 python:  #Associated Perks
             the_person.change_obedience(4, add_to_log = add_to_log)
             if the_person.obedience > 200:
                 the_person.obedience = 200
-        the_person.increase_opinion_score(the_place, max_value = 0)
+        the_person.increase_opinion_score(the_place, max_value = 0, add_to_log = add_to_log)
         return
 
     def perk_cum_obedience_large_on_cum(the_person, the_place, add_to_log = True):
@@ -32,7 +32,7 @@ init 1 python:  #Associated Perks
             the_person.change_obedience(6, add_to_log = add_to_log)
             if the_person.obedience > 250:
                 the_person.obedience = 250
-        the_person.increase_opinion_score(the_place, max_value = 2)
+        the_person.increase_opinion_score(the_place, max_value = 2, add_to_log = add_to_log)
         if not the_person.is_in_trance():
             the_person.increase_trance(show_dialogue = True, reset_arousal = False, add_to_log = add_to_log)
         return

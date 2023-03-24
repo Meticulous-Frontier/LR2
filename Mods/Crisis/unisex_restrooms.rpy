@@ -345,7 +345,7 @@ label unisex_restroom_fantasy_actout_label(the_person):
     $ mc.change_locked_clarity(10)
     the_person "Oh god oh god, it's happening..."
     $ the_person.change_arousal(30)
-    if the_person.outfit.vagina_available():
+    if the_person.vagina_visible():
         "You take your hand off her back and run it down along her ass crack to her cunt. You can feel it is moist and ready for you already!"
     else:
         "You take your hand off her back and start to pull off all the clothing between you and her cunt."
@@ -645,7 +645,7 @@ label unisex_restroom_gloryhole_joinme_label(the_person):
             $ scene_manager.add_actor(the_person, position = "kissing")
             "[the_person.title] is waiting for you as you step inside. You lock the stall and she immediately wraps her arms around you."
             the_person "Mmm, the glory hole is hot, but I am craving a more personal touch..."
-            if not the_person.outfit.vagina_available():
+            if not the_person.vagina_visible():
                 "You grab her ass for a bit, then start to peel off some clothes."
                 $ scene_manager.strip_to_vagina(person = the_person, prefer_half_off = True)
             $ mc.change_locked_clarity(20)

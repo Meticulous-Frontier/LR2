@@ -240,10 +240,10 @@ label friends_help_friends_be_sluts_enhanced_label():
                             person_one "I suppose. Thanks for the help [person_one.mc_title]."
                             "She gives you a smile and a wink, then leaves the room with [person_two.title]."
 
-                        "I'm going to need a closer look" if not person_one.outfit.tits_visible() or not person_two.outfit.tits_visible(): #Requires high obedience, sluttiness, or a uniform policy for the less slutty girl.
+                        "I'm going to need a closer look" if not person_one.tits_visible() or not person_two.tits_visible(): #Requires high obedience, sluttiness, or a uniform policy for the less slutty girl.
                             mc.name "Hmm. It's a close call, I'm going to need to take a moment for this and get a better look."
                             $ scene_manager.update_actor(person_one, emotion = "happy")
-                            if person_one.outfit.tits_visible():
+                            if person_one.tits_visible():
                                 # If her tits are already out then it must be her friend who has a shirt on.
                                 "[person_one.title] thrusts her chest forward and displays her tits proudly."
                                 person_one "Well, here are mine. Come on [person_two.fname], whip 'em out!"
@@ -251,12 +251,12 @@ label friends_help_friends_be_sluts_enhanced_label():
                                 person_one "Of course."
                                 $ scene_manager.strip_to_tits(person = person_one, prefer_half_off = True)
 
-                                if person_two.outfit.tits_visible():
+                                if person_two.tits_visible():
                                     $ person_one.break_taboo("bare_tits")
                                     person_one "There, what do you think now [person_one.mc_title]?"
                             $ mc.change_locked_clarity(10)
 
-                            if not person_two.outfit.tits_visible():
+                            if not person_two.tits_visible():
                                 $ scene_manager.update_actor(person_two, emotion = "angry")
                                 person_two "Oh my god, are we really doing this?"
                                 person_one "Come on, cut loose a little! It's just a little friendly competition, right?"

@@ -1376,7 +1376,7 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
     if the_person.love > 70:
         the_person "Mmm... I love it when you run your hands all over me [the_person.mc_title]."
         "You work your hands along her belly and then slowly up to her wonderful tits."
-        if the_person.outfit.tits_available():
+        if the_person.tits_available():
             "They are so soft and warm in your hands. You give them a good squeeze and then punch lightly at her nipples."
         else:
             "They feel so soft, even through her clothes. You give them a good squeeze, and you can feel her nipples start to poke through the fabric."
@@ -1562,7 +1562,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.change_to_bedroom()
         $ the_person.draw_person(position = "missionary")
         "When you get to her bed, you roughly throw her down on it."
-        if the_person.outfit.vagina_available() and the_person.outfit.tits_available():
+        if the_person.vagina_available() and the_person.tits_available():
             "You stop for a second and admire [the_person.title], her body on display in front of you. You guess she walks around the house like this?"
         else:
             "Your mind hazy with lust, you begin to pull [the_person.title]'s clothes off."
@@ -1890,7 +1890,7 @@ label starbuck_replay_dressup_label(the_person):
     "Thank god, things are about to get steamy."
     mc.name "For you? Anything."
     "You lay down on your back."
-    if not the_person.outfit.vagina_available():
+    if not the_person.vagina_available():
         "As you lay down, you notice [the_person.possessive_title] is stripping her bottoms off."
         $the_person.strip_outfit(top_layer_first = True, exclude_upper = True, exclude_lower = False, exclude_feet = True)
     $ the_person.draw_person(position = "stand4")

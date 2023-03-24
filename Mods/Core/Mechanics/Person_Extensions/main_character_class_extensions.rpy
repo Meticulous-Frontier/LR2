@@ -21,7 +21,7 @@ init -1 python:
     MainCharacter.is_home = is_home
 
     def is_at_work_enhanced(self): #Checks to see if the main character is at work, generally used in crisis checks.
-        return self.location in [lobby, self.business.m_div, self.business.p_div, self.business.r_div, self.business.s_div, self.business.h_div, ceo_office, testing_room]
+        return self.location in [lobby, self.business.m_div, self.business.p_div, self.business.r_div, self.business.s_div, self.business.h_div, ceo_office, testing_room, work_bathroom]
 
     MainCharacter.is_at_work = is_at_work_enhanced
 

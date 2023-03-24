@@ -616,7 +616,7 @@ label erica_weekly_yoga_label(the_person):
             yoga_assistant "Oh! That sounds good! Can I get some too?"
             mc.name "I think there's enough for both of you. Let's step into my office really quick."
             "The duo quickly follow you to your office. As you walk in, you turn and lock the door."
-            $ ceo_office.show_background()
+            $ mc.change_location(ceo_office)
             "Before you can say anything, the girls are already getting down on their knees, ready to earn their protein."
             "You take out your cock and let them get to work."
             call start_threesome(the_person, yoga_assistant, start_position = threesome_double_blowjob, position_locked = True) from _after_yoga_protein_yum_1
@@ -951,7 +951,7 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
     $ the_person.change_arousal(20)
     $ initial_outfit = the_person.outfit.get_copy() # store outfit
     menu:
-        "Fuck her against the wall" if the_person.sluttiness >= 70:
+        "Fuck her against the wall" if the_person.is_willing(against_wall):
             "You don't have the patience to wait any longer, you are going to fuck her right here against the wall."
             if the_person.vagina_available():
                 "You quickly pull your cock out and put it in between her legs, getting it into position."
@@ -969,9 +969,9 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
             call fuck_person(the_person, start_position = against_wall, private = True, start_object = make_wall(), skip_intro = True, skip_condom = True) from _call_fuck_after_yoga_01
             $ the_person.call_dialogue("sex_review", the_report = _return)
 
-        "Fuck her against the wall (disabled) " if the_person.sluttiness < 70:
+        "Fuck her against the wall (disabled) " if not the_person.is_willing(against_wall):
             pass
-        "Make her service you" if the_person.obedience >= 130:
+        "Make her service you" if the_person.obedience >= 150:
             "As things are starting to get heated, you slowly back off. You walk over to your desk and sit down at the edge of it, leaving her confused."
             the_person "Sir?"
             "You unzip your pants and take your cock out."
@@ -993,12 +993,11 @@ label erica_after_yoga_office_session_label(the_person): #Theoretically this cou
                 $ mc.change_locked_clarity(20)
                 the_person "Okay! I think I can think of a good way to do this..."
                 call get_fucked(the_person, the_goal = "get mc off", skip_intro = True) from _call_get_fucked_after_yoga_get_serviced
-        "Make her service you (disabled) " if the_person.obedience < 130:
+        "Make her service you (disabled) " if the_person.obedience < 150:
             pass
-        "Mess around":
+        "Have some fun":  # most simple form, she decides how far she is willing to go (she takes control)
             "You reach down and grab her ass, pulling her close to you. Through your pants, you grind your erection against her mound."
-            "Soon, you decide it's time to take things to the next level."
-            call fuck_person(the_person, private = True) from _call_fuck_after_yoga_02
+            call get_fucked(the_person, allow_continue = False) from _call_get_fucked_after_yoga_get_serviced_02
     "Finished, you get yourself cleaned up and walk over to your desk."
     $ the_person.apply_outfit(initial_outfit)
     $ initial_outfit = None

@@ -139,14 +139,14 @@ label cougar_strip_reject(the_person, the_clothing, strip_type = "Full"):
         the_person "Don't touch that [the_person.mc_title]. Could you imagine if my [the_clothing.display_name] came off? I could be your mother, we shouldn't do this."
     return
 
-label cougar_sex_accept(the_person):
+label cougar_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.obedience < 100:
             the_person "Such a nice body you have [the_person.mc_title] and I really want to do this... do you mind?"
         else:
             the_person "Whatever you want me to do [the_person.mc_title]. I just want to make sure you're happy."
     else:
-        the_person "Okay, let's try this, I hope you don't mind having sex with an older woman?"
+        the_person "Okay, my young lover, let's do it!"
     return
 
 label cougar_sex_obedience_accept(the_person):
@@ -414,14 +414,14 @@ label cougar_flirt_response_low(the_person):
         else:
             #She's in uniform, but she thinks it's a little too slutty.
             $ mc.change_locked_clarity(5)
-            if the_person.outfit.vagina_visible():
+            if the_person.vagina_visible():
                 # Her pussy is on display.
                 the_person "I would not call it much of an uniform, if you know what I mean."
                 the_person "I understand it's the company uniform, but a woman my age would like a little more coverage."
                 mc.name "It will take some getting used to, but I think it would be a shame to cover up your wonderful figure."
                 "[the_person.possessive_title] doesn't seem so sure, but she smiles and nods anyways."
 
-            elif the_person.outfit.tits_visible():
+            elif the_person.tits_visible():
                 # Her tits are out
                 if the_person.has_large_tits():
                     the_person "Thank you, but I can tell this uniform was designed by a horny boy."
@@ -432,7 +432,7 @@ label cougar_flirt_response_low(the_person):
                 mc.name "I understand it's a little uncomfortable, but I'm sure you'll get used to it."
                 the_person "Perhaps, in time, but for now, I really don't enjoy it at all."
 
-            elif the_person.outfit.underwear_visible():
+            elif the_person.underwear_visible():
                 # Her underwear is visible.
                 the_person "Thank you. But this is not appropriate for my age, it should be more descent and respectable, like me."
                 mc.name "I know it can take some getting used to, but you look fantastic in it. You definitely have the body to pull this off."
@@ -458,7 +458,7 @@ label cougar_flirt_response_low(the_person):
 label cougar_flirt_response_mid(the_person):
     if the_person.outfit == the_person.planned_uniform:
         if the_person.judge_outfit(the_person.outfit):
-            if the_person.outfit.tits_visible():
+            if the_person.tits_visible():
                 the_person "What it shows off most are my breasts. I'm not complaining though, between you and me, I kind of like it."
                 $ mc.change_locked_clarity(10)
                 "She winks and shakes her shoulders, jiggling her tits for you."
@@ -477,10 +477,10 @@ label cougar_flirt_response_mid(the_person):
 
         else:
             # the_person "I think it shows off a little too much!"
-            if the_person.outfit.vagina_visible():
+            if the_person.vagina_visible():
                 the_person "What doesn't this outfit show off!"
 
-            elif the_person.outfit.tits_visible():
+            elif the_person.tits_visible():
                 the_person "It certainly shows off my breasts!"
 
             else:
@@ -509,7 +509,7 @@ label cougar_flirt_response_mid(the_person):
             $ the_person.draw_person(position = "back_peek")
             $ mc.change_locked_clarity(10)
             "She turns and bends over a little bit, accentuating her butt."
-            if not the_person.outfit.wearing_panties() and not the_person.outfit.vagina_visible(): #Not wearing underwear, but you can't see so she coments on it.
+            if not the_person.wearing_panties() and not the_person.vagina_visible(): #Not wearing underwear, but you can't see so she coments on it.
                 the_person "My panties were always leaving unpleasant lines, so I had to stop wearing them. I hope you can't tell."
             else:
                 the_person "Well?"

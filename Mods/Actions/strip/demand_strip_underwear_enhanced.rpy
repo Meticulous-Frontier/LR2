@@ -2,9 +2,9 @@ init 5 python:
     config.label_overrides["demand_strip_underwear_label"] = "demand_strip_underwear_label_enhanced"
 
     def demand_strip_underwear_requirement_enhanced(the_person):
-        if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
+        if the_person.tits_visible() and the_person.vagina_visible():
             return False #Can't strip if we're already past underwear
-        if the_person.outfit.are_panties_visible() and the_person.outfit.is_bra_visible():
+        if the_person.are_panties_visible() and the_person.is_bra_visible():
             return False #Can't strip if we can already see all of her underwear.
         if the_person.obedience < 130:
             return "Requires: 130 Obedience"
@@ -17,8 +17,8 @@ label demand_strip_underwear_label_enhanced(the_person):
     mc.name "You're going to strip into your underwear for me."
 
     # If person is already topless or bottomless, they will only care about missing underwear we *can't* see
-    $ secretly_no_panties = not the_person.outfit.wearing_panties() and not the_person.outfit.vagina_visible()
-    $ secretly_no_bra = not the_person.outfit.wearing_bra() and not the_person.outfit.tits_visible()
+    $ secretly_no_panties = not the_person.wearing_panties() and not the_person.vagina_visible()
+    $ secretly_no_bra = not the_person.wearing_bra() and not the_person.tits_visible()
     if secretly_no_panties or secretly_no_bra:
         the_person "I can't do that [the_person.mc_title]."
         mc.name "Yes you can, you..."

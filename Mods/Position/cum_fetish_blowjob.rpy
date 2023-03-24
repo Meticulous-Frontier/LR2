@@ -50,7 +50,7 @@ label scene_cum_fetish_blowjob_1(the_girl, the_location, the_object):
             "You rest your hand on her head, guiding her as she sucks you off."
             "With a little encouragement, you pull [the_girl.possessive_title]'s head down a little further with each stroke."
             if the_girl.get_opinion_score("masturbating") > 0:
-                if the_girl.outfit.vagina_available():
+                if the_girl.vagina_available():
                     "[the_girl.possessive_title] puts a hand between her legs and starts to touch herself while she blows you."
                     $ the_girl.change_arousal(the_girl.get_opinion_score("masturbating"))
                     $ the_girl.discover_opinion("masturbating")
@@ -198,7 +198,7 @@ label orgasm_cum_fetish_blowjob(the_girl, the_location, the_object):
             $ the_girl.change_slut(the_girl.get_opinion_score("being submissive")) #If she likes being submissive this makes her cum and become sluttier super hard.
         $ the_girl.change_obedience(2*the_girl.get_opinion_score("being submissive"))
         "[the_girl.possessive_title] closes her eyes tight. You can feel her throat spasm around your shaft in time with her orgasmic contractions."
-        if the_girl.outfit.vagina_visible():
+        if the_girl.vagina_visible():
             "You can see that [the_girl.possessive_title]'s pussy is dripping wet as she cums."
         else:
             $ the_item = the_girl.outfit.get_lower_top_layer()

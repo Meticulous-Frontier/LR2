@@ -907,7 +907,7 @@ label myra_alexia_teamup_scene_scene_2(the_group, scene_transition = False):  #O
     "Having [the_target.title] cum all over your face has really gotten you turned on, you feel yourself getting ready to cum too."
     mc.name "Oh god... [the_loser.title] I'm gonna cum!"
     if face_fuck:
-        "You feel [the_loser.possessive_title]'s mouth get shoved forcefully down on your cock and it stays there. Her tongue is lapping all around your testicles."
+        "You feel [the_loser.possessive_title]'s mouth being shoved forcefully down on your cock and it stays there. Her tongue is lapping all around your testicles."
         the_target "That's it! Take it down your throat you little cum slut!"
         "You can't take it anymore. You buck your hips as you start to cum down [the_loser.title]'s throat."
         $ ClimaxController.manual_clarity_release(climax_type = "throat", the_person = the_loser)

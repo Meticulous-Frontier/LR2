@@ -109,6 +109,9 @@ init 15 python:
     def make_medical_table():
         return Object("medical table", ["Lay", "Sit", "Low"])
 
+    def make_washing_machine():
+        return Object("washing machine", ["Sit", "Lay"])
+
 
 label build_custom_rooms():
     python:

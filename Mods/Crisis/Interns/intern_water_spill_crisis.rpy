@@ -46,7 +46,7 @@ label intern_water_spill_crisis_label():
             the_person "I'm so sorry about this [the_person.mc_title]. Let me just take this off, you keep talking."
             $ the_person.draw_animated_removal(the_clothing)
             $ the_person.update_outfit_taboos()
-            if the_person.outfit.tits_visible():
+            if the_person.tits_visible():
                 "[the_person.title] strips off her [the_clothing.name], letting you get a nice good look at her [the_person.tits] sized tits."
                 $ mc.change_locked_clarity(30)
             else:
@@ -62,11 +62,11 @@ label intern_water_spill_crisis_label():
 
                 "Keep going...":
                     mc.name "You might as well keep going. All this homework talk is boring and I'd appreciate something pleasant to look at while I help you."
-                    if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
+                    if the_person.tits_visible() and the_person.vagina_visible():
                         mc.name "Not that there's much I can't see already..."
-                    elif the_person.outfit.tits_visible():
+                    elif the_person.tits_visible():
                         mc.name "You already have your tits out for me, what's a little more skin?"
-                    elif the_person.outfit.vagina_visible():
+                    elif the_person.vagina_visible():
                         mc.name "I mean, I can already see your cunt. What's a little more skin at this point?"
 
                     if the_person.judge_outfit(the_person.outfit, -25): #How comfortable are they with their current outfit? If they have an extra 20 sluttiness start stripping!
@@ -97,7 +97,7 @@ label intern_water_spill_crisis_label():
                         the_person.change_obedience(5)
                         if the_person.int < 6:
                             the_person.change_int(1)
-                    if the_person.outfit.tits_visible() and the_person.outfit.vagina_visible():
+                    if the_person.tits_visible() and the_person.vagina_visible():
                         "You help [the_person.possessive_title] with her homework while she stands next to your desk, her body completely on display."
                         $ mc.change_locked_clarity(50)
                     else:

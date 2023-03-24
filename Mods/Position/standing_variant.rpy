@@ -404,7 +404,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                 "You can tell that [the_girl.possessive_title] isn't getting as much pleasure from this position as you are, so you try to mix up your tactics a bit to keep her interested."
                 "With your free hand you reach around her and start to fondle her tits."
                 if the_girl.has_large_tits() :
-                    if the_girl.outfit.tits_available():
+                    if the_girl.tits_available():
                         "You plant a hand on [the_girl.possessive_title]'s nice, soft tits and squeeze. Her pliant flesh melts in your hand, and the heat coming form her skin feels amazing."
                         the_girl "Mmm, [the_girl.mc_title]. Your hands feel so good."
                         "You enjoy teasing her supple [the_girl.tits_description] for a few moments. You hold one in place while you fuck her, feeling the weight of it sway with each motion."
@@ -422,7 +422,7 @@ label scene_SB_facing_wall_2(the_girl, the_location, the_object):
                         $ mc.change_arousal( 100)
                         return
                 else:
-                    if the_girl.outfit.tits_available():
+                    if the_girl.tits_available():
                         "You run a hand over [the_girl.possessive_title]'s [the_girl.tits_description]. You pinch and pull at one of her nipples."
                         the_girl "Oh! Easy there, it's sensitive."
                         "You move to her other nipple ad give it similar treatment. She gasps at the work of your strong hands on her chest."

@@ -73,9 +73,9 @@ label genius_sex_responses_foreplay(the_person):
 
     elif the_person.arousal_perc < 90:
         if the_person.sluttiness > 50:
-            if the_person.outfit.wearing_panties():
+            if the_person.wearing_panties():
                 the_person "I think it's about time we get naked and get down to business."
-            elif the_person.outfit.vagina_available():
+            elif the_person.vagina_available():
                 the_person "I'm sure you've already observed this, but I think it's time to get down to business."
             else:
                 the_person "Oh god, I'm getting so hot. You'd better get me out of these clothes soon."
@@ -278,14 +278,14 @@ label genius_grope_body_reject(the_person):
         "She doesn't say anything more, but she still seems uncomfortable with the situation."
     return
 
-label genius_sex_accept(the_person):
+label genius_sex_accept(the_person, the_position):
     if the_person.sluttiness > 70:
         if the_person.obedience < 70:
             the_person "That is an excellent suggestion!"
         else:
             the_person "Mmm, you have a dirty mind [the_person.mc_title]. I can't wait to see how you use it!"
     else:
-        the_person "Okay, we can give that a try."
+        the_person "I like that plan, [the_person.mc_title]."
     return
 
 label genius_sex_obedience_accept(the_person):
@@ -415,7 +415,7 @@ label genius_flirt_response_low(the_person):
             "[the_person.possessive_title] smiles and laughs self-consciously."
         else:
             #She's in uniform, but she thinks it's a little too slutty.
-            if the_person.outfit.vagina_visible():
+            if the_person.vagina_visible():
                 # Her pussy is on display.
                 the_person "Thanks, but I really wish this uniform covered, well, anything."
                 the_person "I know it's company policy, but it's a little... breezy."
@@ -423,7 +423,7 @@ label genius_flirt_response_low(the_person):
                 $ mc.change_locked_clarity(5)
                 "[the_person.possessive_title] blushes and looks away."
 
-            elif the_person.outfit.tits_visible():
+            elif the_person.tits_visible():
                 # Her tits are out
                 if the_person.has_large_tits():
                     the_person "Thanks, but I really wish my uniform included a bra."
@@ -435,7 +435,7 @@ label genius_flirt_response_low(the_person):
                 $ mc.change_locked_clarity(5)
                 the_person "I better, I certainly wouldn't be wearing this if it wasn't required!"
 
-            elif the_person.outfit.underwear_visible():
+            elif the_person.underwear_visible():
                 # Her underwear is visible.
                 the_person "Thanks, I just wish this uniform kept me a little more covered. It feels like I'm barely wearing anything."
                 mc.name "I know it's a little unconventional, but you look fantastic in it. It's a perfect fit for you."
@@ -460,7 +460,7 @@ label genius_flirt_response_mid(the_person):
     if the_person.outfit == the_person.planned_uniform:
         if the_person.judge_outfit(the_person.outfit):
             the_person "Wow [the_person.mc_title], complimenting your own choice in uniform?"
-            if the_person.outfit.tits_visible():
+            if the_person.tits_visible():
                 the_person "I'm sure my boobs aren't out by accident. Not that I mind..."
                 "She jiggles and wiggles her shoulders, jiggling her breasts for you."
             else:
@@ -475,10 +475,10 @@ label genius_flirt_response_mid(the_person):
 
         else:
             the_person "I think it shows off a little too much!"
-            if the_person.outfit.vagina_visible():
+            if the_person.vagina_visible():
                 the_person "Look at me, you can practically see everything!"
                 the_person "No offence, but this uniform makes me look like a whore."
-            elif the_person.outfit.tits_visible():
+            elif the_person.tits_visible():
                 the_person "My boobs are just hanging out, for goodness sakes!"
                 the_person "No offence, but your uniform makes me look like a slut."
             else:

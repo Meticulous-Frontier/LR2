@@ -221,7 +221,7 @@ label starbuck_celebration_strip_event(the_person):
                         $ the_person.change_slut(1 * the_person.get_opinion_score("showing her tits"))
 
                 $ the_person.draw_animated_removal(the_item)
-                if the_person.outfit.tits_visible():
+                if the_person.tits_visible():
                     "[the_person.title] takes off her [the_item.display_name] slowly, teasing you as she frees her tits."
                     if the_person.has_taboo("bare_tits"):
                         the_person "God, it's the first time I'm doing this, but you know what? I like it."
@@ -243,7 +243,7 @@ label starbuck_celebration_strip_event(the_person):
                         $ the_person.change_slut(1 * the_person.get_opinion_score("showing her ass"))
 
                 $ the_person.draw_animated_removal(the_item)
-                if the_person.outfit.vagina_visible():
+                if the_person.vagina_visible():
                     "[the_person.possessive_title] peels off her [the_item.display_name], slowly revealing her cute pussy."
                     if the_person.has_taboo("bare_pussy"):
                         the_person "Am I really doing this? Am I, Yes, I am!"

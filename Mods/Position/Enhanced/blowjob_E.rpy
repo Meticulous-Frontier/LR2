@@ -317,7 +317,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
                         $ the_girl.cum_on_tits()
                         $ the_girl.draw_person(position = "kneeling1")
                         $ the_girl.change_stats(love = the_girl.get_opinion_score("being covered in cum"))
-                        if the_girl.outfit.tits_available():
+                        if the_girl.tits_available():
                             "You let out a shuddering moan as you cum, pumping your sperm over [the_girl.possessive_title]'s bare tits. She shivers herself as your cum splashes over her."
                         else:
                             "You let out a shuddering moan as you cum, pumping your sperm over [the_girl.possessive_title]'s chest. She smiles as your cum splashes over her."
@@ -396,7 +396,7 @@ label blowjob_enhanced_kneel_mouth_cum(the_girl):
 
 
         if not the_girl.has_cum_fetish():
-            if the_girl.get_opinion_score("being covered in cum") > 0 and the_girl.outfit.tits_available():
+            if the_girl.get_opinion_score("being covered in cum") > 0 and the_girl.tits_available():
                 "[the_girl.possessive_title] tilts her head forward and let your cum dribble out of her mouth onto her bare tits."
                 $ the_girl.call_dialogue("cum_mouth")
                 $ the_girl.cum_on_tits(add_to_record = False)

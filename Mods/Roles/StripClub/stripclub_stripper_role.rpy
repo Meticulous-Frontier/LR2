@@ -55,6 +55,10 @@ init 5 python:
             return False
         if person in list(set(unique_character_list)-set([cousin, aunt, mom, lily, nora])): # disqualified from action
             return False
+        if person in [mom, aunt]:   # special work around for mom and aunt (will block the wednesday night event)
+            if not person.has_job([unemployed_job, aunt_unemployed_job]):
+                return "Only when unemployed"
+            return True
         if person.has_job_role(critical_job_role): # critical jobs require very high sluttiness
             if person.sluttiness < 80:
                 return False
@@ -126,7 +130,7 @@ init 5 python:
     def hire_stripper(person, job):
         if not person in unique_character_list:
             person.set_override_schedule(None, the_times = [4]) # clear party schedule
-        if person.is_employee() or person in [lily, aunt, mom, nora]:    # moonlighting
+        if person.is_employee() or person in [lily, nora]:    # moonlighting
             person.event_triggers_dict["strip_club_shifts"] = 1
             person.set_schedule(job.job_location, the_times = [4])
             for role in job.job_roles:

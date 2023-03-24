@@ -61,7 +61,7 @@ label town_walk_crisis_action_label():
         ], temp_sluttiness_boost = 20)):
 
         # only show this part of the dialog if she removed clothing
-        if the_person.outfit.vagina_available():
+        if the_person.vagina_available():
             $ mc.change_locked_clarity(30)
             "You see that [the_person.possessive_title] also studies her pussy."
             if the_person.pubes_style is shaved_pubes:
@@ -73,7 +73,7 @@ label town_walk_crisis_action_label():
             "She moves her hand between her legs, just teasing herself."
             $ arousal_plus = renpy.random.randint (20,50)
             $ the_person.change_arousal (arousal_plus)
-        elif the_person.outfit.tits_available():
+        elif the_person.tits_available():
             $ mc.change_locked_clarity(20)
             "You see that [the_person.possessive_title] is looking at her breasts."
             if the_person.age <=30:
@@ -87,11 +87,11 @@ label town_walk_crisis_action_label():
             $ mc.change_locked_clarity(10)
             "[the_person.possessive_title] only took off her top clothes, you just wonder why..."
 
-    if the_person.outfit.vagina_available() and (the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal_perc > 35):
+    if the_person.vagina_available() and (the_person.sluttiness >=50 or the_person.get_opinion_score("masturbating") > 0 or the_person.arousal_perc > 35):
         "[the_person.possessive_title] seems to get turned on by her own image in the mirror."
         $ the_person.draw_person(position = "missionary")
         "She lays down on the bed, spreads her legs and begins to masturbate slowly."
-        if the_person.outfit.vagina_available():
+        if the_person.vagina_available():
             "You notice that she is fingering herself with one hand, while the other is caressing her clit."
         else:
             "You notice that with one hand [the_person.possessive_title] squeezes her tits, while shoving the other between her legs."
@@ -102,13 +102,13 @@ label town_walk_crisis_action_label():
             if ran_num == 0:
                 "As she gets more and more turned on, her hand moves faster and faster."
             elif ran_num == 1:
-                if the_person.outfit.vagina_available():
+                if the_person.vagina_available():
                     "Both her hands move really fast around her wide-spread pussy."
                 else:
                     "[the_person.possessive_title] pinches her nipples with one hand and squeezes the other vigorously between her legs."
                 the_person "Ahh, yes. That's it. Just what I need."
             elif ran_num == 2:
-                if the_person.outfit.vagina_available():
+                if the_person.vagina_available():
                     "She pushes 3 fingers inside, making a deep guttural noise."
                     $ the_person.call_dialogue("sex_responses_foreplay")
                 else:

@@ -47,7 +47,7 @@ init -1 python:
 
     Personality.rebuild_response_dictionary = rebuild_response_dictionary
 
-    def get_dialogue_enhanced(self, the_person, type, **extra_args):
+    def get_dialogue_enhanced(self, the_person, type, *args, **kwargs):
         if not type in self.response_dict:
             # self repairing personality response type (helps with upgrades / changes to personality files)
             self.rebuild_response_dictionary()
@@ -57,7 +57,7 @@ init -1 python:
             self.rebuild_response_dictionary()
             target = self.response_dict[type]
 
-        renpy.call(target, the_person, **extra_args)
+        renpy.call(target, the_person, *args, **kwargs)
         return
 
     Personality.get_dialogue = get_dialogue_enhanced

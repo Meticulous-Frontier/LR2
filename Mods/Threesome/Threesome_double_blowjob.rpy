@@ -200,13 +200,13 @@ label intro_threesome_double_blowjob_makeout(the_girl_1, the_girl_2, the_locatio
     return
 
 label scene_threesome_double_blowjob_makeout_1(the_girl_1, the_girl_2, the_location, the_object):
-    if the_girl_2.outfit.vagina_available():
+    if the_girl_2.vagina_visible():
         "As they are making out, you notice [the_girl_1.possessive_title] has her hand between [the_girl_2.title]'s legs, petting her pussy."
     else:
         the_girl_1 "Mmm... I want to touch you. Let's get these out of the way!"
         $ scene_manager.strip_to_vagina(person = the_girl_2, prefer_half_off = True)
         "Now [the_girl_1.title] immediately begins to fondle [the_girl_2.possessive_title]'s pussy."
-    if the_girl_1.outfit.vagina_available():
+    if the_girl_1.vagina_visible():
         "As she gets fingered, you notice that [the_girl_2.title] reaches down and begins to return the favor, fondling [the_girl_1.title]."
     else:
         the_girl_2 "Mmm, I want to touch you too! Let's get these off of you..."

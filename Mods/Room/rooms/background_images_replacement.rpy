@@ -191,7 +191,7 @@ label updated_room_background(stack):
 
         if "her_hallway" in globals(): # check if room exists
             her_hallway.background_image = standard_her_hallway_backgrounds
-        laundry_room = Room("Laundry Room", "Laundry Room", [], standard_laundry_room_backgrounds,[make_bed(), make_wall(), make_floor()],[],[],False,[-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
+        laundry_room = Room("Laundry Room", "Laundry Room", [], standard_laundry_room_backgrounds,[make_washing_machine(), make_wall(), make_floor()],[],[],False,[-5,-5], visible = False, lighting_conditions = standard_indoor_lighting)
         if not laundry_room in list_of_places:
             list_of_places.append(laundry_room)
 
