@@ -631,10 +631,10 @@ init -1 python:
 
     def ashley_asks_about_lily_requirement():
         if ashley.love < 40:
-            ashley.love_messages[2] = "Increase [ashley.title]'s love to atleast 40."
+            ashley.love_messages[2] = "Increase [ashley.fname]'s love to atleast 40."
             return False
         if not ashley.story_event_ready("love"):
-            ashley.love_messages[2] = "[ashley.title] needs some time to progress this story."
+            ashley.love_messages[2] = "[ashley.fname] needs some time to progress this story."
             return False
         if mc.is_at_work() and mc.business.is_open_for_business():
             return True
@@ -644,7 +644,7 @@ init -1 python:
         if time_of_day == 4:
             return True
         else:
-            ashley.love_messages[2] = "[ashley.title] will come over this evening."
+            ashley.love_messages[2] = "[ashley.fname] will come over this evening."
         return False
 
     def ashley_lily_shopping_selfies_requirement():
