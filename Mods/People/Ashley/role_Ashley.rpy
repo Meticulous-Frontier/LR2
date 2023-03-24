@@ -1643,6 +1643,7 @@ label ashley_tests_serum_on_sister_label(): #100 sluttiness, also requires drink
 #Ashley taking command path
 init -1 python:
     def ashley_demands_relief_requirement():
+        return False
         if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
         if ashley.event_triggers_dict.get("mc_obedience", 0) > 30 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
