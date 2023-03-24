@@ -546,15 +546,17 @@ label cum_fetish_mom_intro_label():
     the_person "Oh... I needed that so bad... you have no idea."
     $ the_person.reset_arousal()
     "[the_person.possessive_title] slowly crawls up the bed and lays down next to you. You put your arm around her."
+    $ the_person.draw_person(position = "missionary")
     "Completely satisfied, she quickly falls asleep."
     "Wow! [the_person.possessive_title] just woke you up, in the middle of the night, with an amazing blowjob, took your load, then cuddled up and fell asleep with you."
     "You have a feeling that this is only the beginning of things between you and her."
+    $ clear_scene()
     "You slowly fall asleep, enjoying the warmth of her body."
     $ mc.change_locked_clarity(30)
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_mom_cum_fetish_01
     "When morning comes, you feel a stirring in your loins again as you start to slowly wake up. The now familiar feeling of [the_person.possessive_title]'s mouth feels amazing."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
-    $ the_person.draw_person( position = "blowjob")
+    $ the_person.draw_person(position = "blowjob")
     $ mc.change_locked_clarity(50)
     "She senses that you are beginning to awaken."
     the_person "Good morning, [the_person.mc_title]. It's a new day... and I need another load of your cum..."
@@ -562,6 +564,7 @@ label cum_fetish_mom_intro_label():
     mc.name "Good morning. Why don't you get on top of me? I wanna eat your pussy for breakfast."
     the_person "Oh! That sounds good. As long as you promise to cum for me..."
     mc.name "Don't worry, I promise."
+    $ the_person.draw_person(position = SB_sixty_nine.position_tag)
     "[the_person.possessive_title] repositions and swings a leg over your body, presenting her pussy right in front of your face. You waste no time and start to flick your tongue around her slit."
     the_person "Mmm, that feels good [the_person.mc_title]... and your cock... it looks so good... I wanna swallow it whole!"
     "[the_person.possessive_title] begins to please you in return. Taking you into her mouth, she begins sucking you off."
