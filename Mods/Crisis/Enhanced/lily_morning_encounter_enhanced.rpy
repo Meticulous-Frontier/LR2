@@ -536,7 +536,7 @@ label lily_morning_encounter_follow_up_two_label(the_person):
                             $ scene_manager.update_actor(the_other_person, position = "sitting")
                             the_other_person "Yes, [the_other_person.mc_title]."
                             $ the_other_person.change_obedience(5)
-                            call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = False, private = False, position_locked = True) from _call_lily_morning_encounter_kitchenspank2
+                            call fuck_person(the_person, start_position = spanking, start_object = make_table(), skip_intro = True, private = False, position_locked = True) from _call_lily_morning_encounter_kitchenspank2
                             $ scene_manager.update_actor(the_other_person, position = "sitting")
                             $ scene_manager.update_actor(the_person, position = "stand2")
                             mc.name "You see, it isn't that hard, to make her behave."
