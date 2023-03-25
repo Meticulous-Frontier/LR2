@@ -740,6 +740,8 @@ label head_researcher_serum_trait_test_label(the_person):
     $ scene_manager.clear_scene()
     "[the_tester.title] steps out of the room also. Your work here has increased your mastery of [the_serum_trait.name]!"
     $ mc.business.set_event_day("serum_trait_test")
+    $ the_tester = None
+    $ the_serum_trait = None
     call advance_time from _call_advance_time_mastery_research_01
     return "Advance Time"
 

@@ -39,6 +39,10 @@ label futuristic_serum_stage_2_enhanced_label(the_person):
         "Reconsider":
             mc.name "On second thought, I don't think I want them involved. I'll think about it and come back."
             the_person "I'll be here."
+            python:
+                pick_1 = None
+                pick_2 = None
+                pick_3 = None
             return
 
     mc.name "Yes, you may begin."

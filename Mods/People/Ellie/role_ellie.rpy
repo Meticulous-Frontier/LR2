@@ -2978,8 +2978,12 @@ label ellie_search_finish_label():    #You and Ellie sabotage the contact
     "You give her ass a quick swat."
     mc.name "Now let's get going. We have a lot of work to do, but let's get some rest now."
     the_person "Yes [the_person.mc_title]!"
-    $ mc.business.add_mandatory_crisis(ellie_submission)
-    $ ellie.story_event_log("obedience")
+    python:
+        mc.business.add_mandatory_crisis(ellie_submission)
+        ellie.story_event_log("obedience")
+        the_researcher = None
+        cop_outfit = None
+        prost_outfit = None
     return
 
 label ellie_submission_label():   #Ellie submits herself to be used by MC

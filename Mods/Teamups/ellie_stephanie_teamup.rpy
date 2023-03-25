@@ -108,7 +108,6 @@ init 2 python:
 
 
 label ellie_stephanie_teamup_progression_scene_action_label(the_person):  #Use (the_person) if this event is attached to a person, otherwise leave params blank, EG: ellie_stephanie_teamup_progression_scene_action_label():
-    pass
     call progression_scene_label(ellie_stephanie_teamup_progression_scene, [the_person, mc.business.head_researcher]) from _ellie_stephanie_teamup_progression_scene_call_test_01  #[the_person] parameter should be a list of people in the scene itself, IE [mom], [mom,lily], [sarah,erica,mom], etc
     return
 
@@ -268,7 +267,7 @@ label ellie_stephanie_teamup_progression_scene_intro_scene(the_group):
     $ scene_manager.clear_scene()
     "You can now visit the research department every Wednesday morning to join [ellie.title] and [the_researcher.possessive_title] studying the nanobots."
     "As you return to your work, you try to adjust yourself. The scene has left you really turned on. Hopefully in the future you can take more a 'active' role in the research..."
-    $ del the_researcher
+    $ the_researcher = None
     return
 
 label ellie_stephanie_teamup_progression_scene_intro_0(the_group):
@@ -395,6 +394,8 @@ label ellie_stephanie_teamup_progression_scene_scene_0(the_group, scene_transiti
         call ellie_stephanie_tester_reaction_exhibition_label(pick_1, the_person, the_researcher) from _ellie_stephanie_teamup_exhibition_bot_test_01
     else:
         call ellie_stephanie_tester_reaction_basic_label(pick_1, the_person, the_researcher) from _ellie_stephanie_teamup_basic_bot_test_01
+    $ pick_1 = None
+    $ the_researcher = None
     return
 
 label ellie_stephanie_teamup_progression_scene_scene_1(the_group, scene_transition = False):
@@ -441,6 +442,7 @@ label ellie_stephanie_teamup_progression_scene_exit_scene(the_group):
     mc.name "Maybe."
     $ clear_scene()
     $ mc.change_location(mc.business.r_div)
+    $ the_researcher = None
     return
 
 label ellie_stephanie_teamup_final_opinion_shift_label(the_tester, program_name, program_opinion_list):
