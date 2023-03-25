@@ -1305,7 +1305,7 @@ label starbuck_sex_store_promo_four_label(the_person): #DP, ends in ???
     $ mc.change_locked_clarity(30)
     the_person "Oh my god! I'm so full... It's so good [the_person.mc_title]! This thing is amazing..."
     "With your hands on her hips, you slowly start to fuck her."
-    call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_floor(), skip_intro = True) from _call_sex_description_SBS100
+    call fuck_person(the_person, start_position = SB_doggy_anal_dildo_dp, start_object = make_floor(), skip_intro = True, skip_condom = True) from _call_sex_description_SBS100
     "[the_person.possessive_title] is in a sex induced daze after you finish. She struggles to make a coherent end to the video."
     the_person "So that's... when you use a strap-on... holy fuck people just get one."
     "You get up and head over to the camera and stop the recording."
