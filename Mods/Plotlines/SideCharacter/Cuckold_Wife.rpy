@@ -730,8 +730,8 @@ label cuckold_employee_knocked_up_label():
     "After you both recover, you carefully leave your office. Sounds like you have your very own breeding stock available from now on!"
     "It's going to be amazing to watch her belly swell with your seed."
     $ the_person.change_stats(obedience = 2, slut = 2, max_slut = 70)  #She is now your slutty breeding stock.
-    #TODO consider giving her a collar?
     $ the_person.personality = get_breeding_stock_personality(the_person)
+    $ add_breeding_fetish(the_person)   # she also develops a breeding fetish
     return
 
 label cuckold_employee_fertile_return_label():
