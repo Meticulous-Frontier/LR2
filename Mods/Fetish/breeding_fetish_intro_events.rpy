@@ -16,7 +16,7 @@ init -1 python:
             or person.sluttiness < 70: \
                 return False
 
-        # chance to start the anal fetish quest
+        # chance to start the breeding fetish quest
         if renpy.random.randint(0,100) > fetish_serum_roll_fetish_chance(FETISH_BREEDING_OPINION_LIST, person):
             return False
 
