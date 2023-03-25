@@ -613,6 +613,7 @@ label erica_phase_one_label(the_person):
 label erica_locker_room_label(the_person): #TODO this will be Erica's sluttiness scaling event. As sluttiness increases, she does crazier stuff in the locker room.
     $ the_person.apply_outfit(Outfit("Nude"), update_taboo = True)
     $ the_person.draw_person( position = "stand2")
+    $ mc.change_location(gym_shower)
     "As you enter, you see that [the_person.title] is already naked."
     $ mc.change_locked_clarity(20)
     if erica_on_love_path():
