@@ -38,7 +38,7 @@ init 1 python:  #Requirements
         return False
 
     def hr_director_prog_scene_4_req(): #This is actually Sarah's 80 love event
-        if  mc.business.hr_director is sarah and sarah.love >= 80 and sarah.sluttiness >= 60 and sarah.event_triggers_dict.get("stripclub_progress", 0) >= 1:
+        if mc.business.hr_director is sarah and sarah.love >= 80 and sarah.sluttiness >= 60 and sarah.event_triggers_dict.get("stripclub_progress", 0) >= 1:
             return True
         return False
 
