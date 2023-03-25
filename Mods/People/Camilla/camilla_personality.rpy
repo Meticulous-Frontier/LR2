@@ -666,7 +666,7 @@ label camilla_cum_pullout(the_person):
     # Lead in: "I'm going to cum!"
     if mc.condom: #TODO: All of the cum-drunk stuff
         if the_person.wants_creampie() and not the_person.has_taboo("condomless_sex"): #TODO: FIgure out we want any more requirements for this to fire.
-            if the_person.event_triggers_dict.get("preg_knows", False):
+            if the_person.knows_pregnant():
                 the_person "I'm already pregnant, why are we even bothering with a condom?"
                 the_person "Take it off and cum inside my pussy, just like you did when you knocked me up!"
             elif the_person.on_birth_control:
@@ -696,7 +696,7 @@ label camilla_cum_pullout(the_person):
 
     else:
         if the_person.wants_creampie():
-            if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
+            if the_person.knows_pregnant(): #She's already knocked up, so who cares!
                 the_person "Cum wherever you want [the_person.mc_title]!"
             elif the_person.get_opinion_score("creampies") > 0:
                 "[the_person.possessive_title] moans happily."
@@ -739,7 +739,7 @@ label camilla_cum_vagina(the_person):
         return
 
     if the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Mmm, your cum is so nice and warm..."
             "She sighs happily."
 
@@ -964,7 +964,7 @@ label camilla_roleplay_taboo_break(the_person):
     return
 
 label camilla_condomless_sex_taboo_break(the_person):
-    if the_person.has_role(pregnant_role) and the_person.event_triggers_dict.get("preg_knows", False):
+    if the_person.knows_pregnant():
         the_person "I don't mind, it's not like I could get more pregnant."
 
     elif the_person.get_opinion_score("bareback sex") > 0:
@@ -1013,7 +1013,7 @@ label camilla_condomless_sex_taboo_break(the_person):
 
 label camilla_creampie_taboo_break(the_person):
     if the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "OH señor! I love your cum deep inside me."
             "She sighs happily."
 
@@ -1049,7 +1049,7 @@ label camilla_creampie_taboo_break(the_person):
                 the_person "It's just this once, right? It's probably fine..."
 
     else:
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Oh, you came deep inside me."
 
         elif not the_person.on_birth_control and camilla_is_fertile():

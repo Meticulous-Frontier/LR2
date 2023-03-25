@@ -831,15 +831,21 @@ label alpha_condom_bareback_demand(the_person):
             the_person "Come on [the_person.mc_title], I want you to cum inside me!"
             $ the_person.update_birth_control_knowledge()
         else:
-            the_person "You don't need to do that, I want to feel you and your cum inside me."
-            the_person "I don't care if you get me pregnant [the_person.mc_title], just get over here and fuck me already!"
+            the_person "You don't need to do that, I want to feel you and your cum all over me."
+            if the_person.knows_pregnant():
+                the_person "Come on [the_person.mc_title], just get over here and fuck me already!"
+            else:
+                the_person "I don't care if you get me pregnant [the_person.mc_title], just get over here and fuck me already!"
     else:
         if the_person.on_birth_control:
             the_person "You don't need that [the_person.mc_title], I am protected."
             the_person "So hurry up and fuck me!"
             $ the_person.update_birth_control_knowledge()
         else:
-            the_person "Don't waste my time with that. I don't care about the risks, I just want you to fuck me!"
+            if the_person.knows_pregnant():
+                the_person "Don't waste my time with that. Stick your dick in me and fuck me!"
+            else:
+                the_person "Don't waste my time with that. I don't care about the risks, I just want you to fuck me!"
     return
 
 label alpha_cum_face(the_person):

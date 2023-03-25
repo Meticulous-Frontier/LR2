@@ -3,7 +3,7 @@ init 10 python:
     add_label_hijack("after_load", "update_base_serums")
 
     def massive_pregnancy_accelerator_on_turn_enhanced(the_person, the_serum, add_to_log):
-        if not the_person.has_role(pregnant_role):
+        if not the_person.is_pregnant():
             return
 
         if the_person.event_triggers_dict.get("preg_announce_day", day) -1 > day:
@@ -20,7 +20,7 @@ init 10 python:
         return
 
     def pregnancy_accelerator_on_day_enhanced(the_person, the_serum, add_to_log):
-        if not the_person.has_role(pregnant_role):
+        if not the_person.is_pregnant():
             return
 
         if the_person.event_triggers_dict.get("preg_announce_day", day) -1 > day:
@@ -37,7 +37,7 @@ init 10 python:
         return
 
     def pregnancy_decelerator_on_day_enhanced(the_person, the_serum, add_to_log):
-        if not the_person.has_role(pregnant_role):
+        if not the_person.is_pregnant():
             return
 
         if the_person.event_triggers_dict.get("preg_announce_day", day) > day:

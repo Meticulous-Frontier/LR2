@@ -10,7 +10,7 @@ init 5 python:
             return True
         elif person.has_role(nora_role) and person.sluttiness > 75 and nora_reward_nora_trait not in list_of_traits:
             return True
-        elif person.has_role(pregnant_role) and person.event_triggers_dict.get("preg_transform_day",day) < day and person.sluttiness > 75 and nora_reward_hucow_trait not in list_of_traits:
+        elif person.is_pregnant() and person.event_triggers_dict.get("preg_transform_day",day) < day and person.sluttiness > 75 and nora_reward_hucow_trait not in list_of_traits:
             return True
         elif person.love > 85 and nora_reward_high_love_trait not in list_of_traits:
             return True

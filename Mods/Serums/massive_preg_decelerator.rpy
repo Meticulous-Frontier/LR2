@@ -1,7 +1,7 @@
 # Massive Pregnancy Decelerator (Original by Kaden)
 init -1 python:
     def massive_pregnancy_decelerator_on_turn(the_person, the_serum, add_to_log):
-        if not the_person.has_role(pregnant_role):
+        if not the_person.is_pregnant():
             return
 
         if the_person.event_triggers_dict.get("preg_announce_day", day) > day:

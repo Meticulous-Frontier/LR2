@@ -883,7 +883,7 @@ label kaya_cum_pullout(the_person):
     # Lead in: "I'm going to cum!"
     if mc.condom: #TODO: All of the cum-drunk stuff
         if the_person.wants_creampie() and not the_person.has_taboo("condomless_sex"): #TODO: FIgure out we want any more requirements for this to fire.
-            if the_person.event_triggers_dict.get("preg_knows", False):
+            if the_person.knows_pregnant():
                 the_person "I'm already pregnant, why are we even bothering with a condom?"
                 the_person "Take it off and cum inside my pussy, just like you did when you knocked me up!"
             elif the_person.on_birth_control:
@@ -909,7 +909,7 @@ label kaya_cum_pullout(the_person):
 
     else:
         if the_person.wants_creampie():
-            if the_person.event_triggers_dict.get("preg_knows", False): #She's already knocked up, so who cares!
+            if the_person.knows_pregnant(): #She's already knocked up, so who cares!
                 the_person "Give me your cum [the_person.mc_title]! I want to feel you burst inside me!"
             elif the_person.get_opinion_score("creampies") > 0:
                 "[the_person.possessive_title] moans happily."
@@ -944,7 +944,7 @@ label kaya_cum_vagina(the_person):
         return
 
     if the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Oh my god, it's so warm. I love this feeling..."
             "She sighs happily."
 
@@ -1139,7 +1139,7 @@ label kaya_date_seduction(the_person):
         the_person "This was really fun, so..."
         "She gazes romantically into your eyes."
         $ mc.change_locked_clarity(30)
-        if the_person.effective_sluttiness(["vaginal_sex", "condomless_sex"]) > 60 and the_person.wants_creampie() and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") >= 0 and the_person.get_opinion_score("creampies") >= 0 and not the_person.on_birth_control and not the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.effective_sluttiness(["vaginal_sex", "condomless_sex"]) > 60 and the_person.wants_creampie() and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") >= 0 and the_person.get_opinion_score("creampies") >= 0 and not the_person.on_birth_control and not the_person.knows_pregnant():
             if the_person.get_opinion_score("creampies") > 0: #No condoms, loves creampies, she's basically asking you to knock her up. So... have her ask you to knock her up!
                 the_person "Would you like to come home with me? We could fuck until we both cum all over each other..."
                 the_person "... Or inside of me, if you wanted to do that. I promise I'll let you." #TODO Actually check if you've been dating for a while.
@@ -1167,7 +1167,7 @@ label kaya_date_seduction(the_person):
         the_person "My [so_title] is stuck at work tonight, so I was thinking..."
         "She holds onto your arm, stroking it gently."
         $ mc.change_locked_clarity(40)
-        if the_person.wants_creampie() and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") >= 0 and the_person.get_opinion_score("creampies") >= 0 and not the_person.on_birth_control and not the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.wants_creampie() and the_person.effective_sluttiness() > the_person.get_no_condom_threshold() and the_person.get_opinion_score("bareback sex") >= 0 and the_person.get_opinion_score("creampies") >= 0 and not the_person.on_birth_control and not the_person.knows_pregnant():
             if the_person.get_opinion_score("creampies") > 0: #No condoms, loves creampies, she's basically asking you to knock her up. So... have her ask you to knock her up!
                 the_person "Would you like to come home with me? You could, oh I don't know, pin me down and fuck me until I'm pregnant?"
             else:
@@ -1399,7 +1399,7 @@ label kaya_sex_review(the_person, the_report):
             "She laughs nervously, trying to hide her embarrassment."
 
     # Gave creampie while she is not on birth control (extra dialog when she could get pregnant)
-    if the_report.get("creampies", 0) > 0 and not the_person.on_birth_control and not the_person.event_triggers_dict.get("preg_knows", False):
+    if the_report.get("creampies", 0) > 0 and not the_person.on_birth_control and not the_person.knows_pregnant():
         the_person "Oh my... I wonder if I got pregnant..."
 
     $ del comment_position
@@ -1714,7 +1714,7 @@ label kaya_body_cum_taboo_break(the_person):
 
 label kaya_creampie_taboo_break(the_person):
     if the_person.wants_creampie():
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Hmm, I love your cum deep inside me."
             "She sighs happily."
 
@@ -1754,7 +1754,7 @@ label kaya_creampie_taboo_break(the_person):
                 the_person "It's just this once, right? It's probably fine..."
 
     else:
-        if the_person.event_triggers_dict.get("preg_knows", False):
+        if the_person.knows_pregnant():
             the_person "Oh, you came deep inside me."
 
         elif not the_person.on_birth_control:
