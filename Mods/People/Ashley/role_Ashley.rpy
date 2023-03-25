@@ -1643,7 +1643,6 @@ label ashley_tests_serum_on_sister_label(): #100 sluttiness, also requires drink
 #Ashley taking command path
 init -1 python:
     def ashley_demands_relief_requirement():
-        return False
         if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
         if ashley.event_triggers_dict.get("mc_obedience", 0) > 30 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
@@ -1832,20 +1831,59 @@ label ashley_demands_relief_label():    #at 30
     the_person "But I was thinking, you kinda owe me for making these serums for you anyway."
     the_person "I've heard you are pretty good with your hands, can you just get me off really quick?"
     mc.name "Hmmm... I don't know..."
-    the_person "Seriously? It isn't often a girl asks you to stink your hands in her pants. Think carefully."
+    the_person "Seriously? It isn't often a girl asks you to stick your hands in her pants. Think carefully."
     "Something about her tone tells you she is being serious. You think about it for a moment."
     menu:
         "Finger Her\n{color=#ff0000}{size=18}Increases Sluttiness and Love{/size}{/color}":
-            mc.name "Alright"
-        "Mutual Masturbation\n{color=#ff0000}{size=18}Increases Obedience{/size}{/color}":
+            mc.name "Alright, I can probably just get your sister to suck me off later anyway."
+            the_person "Yes! And if you're trying to make me jealous, it isn't going to work."
+            $ the_person.draw_person(position = "sitting")
+            $ the_person.change_stats(love = 5, slut = 2)
+            "[the_person.title] sits down on the edge of your desk. You walk over to her."
+            "She puts her legs out and reach up, pulling off her bottoms."
+            $ the_person.strip_to_vagina(position = "sitting")
+            $ mc.change_locked_clarity(30)
+            "Once exposed, she spreads her legs for you."
+            $ the_person.draw_person(position = "missionary")
+            the_person "Don't worry, you don't need to warm me up. I'm good to go."
+            "You look down at her slit. Her inner labia are peeking out, and are glistening with arousal."
+            mc.name "Damn. You really are turned on. Alright, time to get to work."
+            "You put your middle and index finger together and stroke her slit a few times. Once they are good and wet, you easily slide them inside of [the_person.possessive_title]."
+            the_person "Mmm... fuck that's good..."
+            $ the_person.change_arousal(15)
+            $ mc.change_locked_clarity(30)
+            "[the_person.title] lays back and closes her eyes as you get to work. You push your two fingers deep inside her, giving her a few long, sensual strokes."
+            the_person "That's good. I don't know why I didn't do this sooner..."
+            "[the_person.possessive_title]'s body is responding to your touch rapidly. Her hips are moving in time with your strokes."
+            $ the_person.change_arousal(15)
+            $ mc.change_locked_clarity(30)
+            "With your other hand, you wet your thumb along her slit, then use it to move in circle around her clit."
+            "[the_person.title] starts to writhe when you curl your two fingers inside her up, stroking her g-spot."
+            $ the_person.change_arousal(30)
+            $ mc.change_locked_clarity(30)
+            the_person "Oh fuck! Right there, that's it!"
+            "Her whole body tenses up and she shivers as she climaxes."
+            "She quivers with pleasure for a several seconds before her whole body relaxes."
+            $ the_person.have_orgasm(force_trance = False, half_arousal = False)
+            the_person "Oh my god... I needed that so bad... you have no idea."
+            "It was pretty hot, fingering [the_person.possessive_title] while she sits on your desk. You start to consider pulling out your dick and getting some service in return..."
+            the_person "Don't worry, I'll see myself out after a bit. If you go now maybe you can still catch Steph before she leaves for the day."
+            "Right, her sister. You consider for a moment just ignoring what she said and pulling your dick out anyway. But for some reason, it just seems like a bad idea."
+            "You decide to give her time to recover. You reach over and grab the vials of serum for tomorrow. As you hold them in your hand, something feels a little off..."
+            "Why are you doing what she told you to do? You want HER to get you off. But for some reason it just feels wrong."
+            "As you turn and leave your office, you are deep in thought."
+            the_person "That was great, [the_person.mc_title]. Next time I need another release like that, I'll be sure to swing by at closing time!"
+
+        "Mutual Masturbation\n{color=#ff0000}{size=18}Increases Obedience{/size}{/color} (disabled)":
             pass
 
-
+    "You leave your office, leaving [the_person.possessive_title] behind."
+    $ clear_scene()
     $ the_person.story_event_log("obedience")
     $ mc.business.add_mandatory_crisis(ashley_demands_oral)
     $ ashley.event_triggers_dict["dom_fingers"] = True
     $ ashley.other_messages[0] = "[ashley.fname] sometimes requires you to finger her after work."
-    $ the_person.clear_situational_slut("Eager")
+    $ the_person.clear_situational_slut("Horny")
     return
 
 label ashley_demands_oral_label():  #at 60
