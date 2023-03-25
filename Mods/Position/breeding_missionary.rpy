@@ -104,7 +104,7 @@ label scene_breeding_missionary_1(the_girl, the_location, the_object):
                 $ so_title = None
                 if the_girl.knows_pregnant():
                     if the_girl.is_mc_father():
-                        mc.name "Yeah, but I gave you that baby and fucking you senseless. Not him."
+                        mc.name "Yeah, but I gave you that baby, and I am fucking you senseless. Not him."
                     else:
                         mc.name "Maybe so, but I'm breeding you now. Not him."
                 else:
