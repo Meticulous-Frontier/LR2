@@ -88,27 +88,53 @@ label scene_breeding_missionary_1(the_girl, the_location, the_object):
             $ the_girl.change_arousal(the_girl.get_opinion_score("kissing"))
             the_girl "[the_girl.mc_title]... Oh [the_girl.mc_title], that feels so good."
             "She moans and runs her hands through your hair as you suckle her tits."
-            mc.name "Mmm, I can't wait until I knock you up and your milk comes in. I'm going to suck them dry every chance I get!"
+            if the_girl.knows_pregnant():
+                if the_girl.is_lactating():
+                    mc.name "Mmm, I love sucking your milk machines. I'm going to suck them dry every chance I get!"
+
+                else:
+                    mc.name "Mmm, I can't wait until you start producing milk. I'm going to suck them dry every chance I get!"
+            else:
+                mc.name "Mmm, I can't wait until I knock you up and your milk comes in. I'm going to suck them dry every chance I get!"
             if the_girl.relationship == "Single":
                 the_girl "Mmm, that's for the baby! But if I have any extra, I guess I wouldn't mind if you had some too..."
             else:
                 $ so_title = SO_relationship_to_title(the_girl.relationship)
                 the_girl "That's for the baby! And for my [so_title]!"
-                $ del so_title
-                mc.name "Yeah, but I'm putting the baby in you. Not him."
-                $ the_girl.change_arousal(the_girl.get_opinion_score("cheating on men") * 3)
+                $ so_title = None
+                if the_girl.knows_pregnant():
+                    if the_girl.is_mc_father():
+                        mc.name "Yeah, but I gave you that baby and fucking you senseless. Not him."
+                    else:
+                        mc.name "Maybe so, but I'm breeding you now. Not him."
+                else:
+                    mc.name "Yeah, but I'm putting the baby in you. Not him."
                 the_girl "Oh god... yes... yes you are!"
+                $ the_girl.change_arousal(the_girl.get_opinion_score("cheating on men") * 3)
 
         "Talk dirty to her":
             mc.name "You feel amazing, [the_girl.title]. I'm going to fuck you like this every day, and fill you with my seed over and over."
-            mc.name "I'm going to knock you up, but I'm not going to stop there. I'm going to fuck you over and over, and fill you up over and over, even as your belly grows."
-            the_girl "Oh god, I want that so bad! I want to feel your cum inside me, again and again..."
-            if the_girl.has_large_tits():
-                mc.name "Your massive udders are going to get even bigger. When I fuck you, your milk is going to spray out every time you cum."
+            if the_girl.knows_pregnant():
+                mc.name "I've knocked you up, but I'm not going to stop there. I'm going to fuck you over and over, and fill you up over and over, even as your belly grows."
             else:
-                mc.name "Your tits are going to swell, filling with milk. When I fuck you, it's going to spray out every time you cum."
+                mc.name "I'm going to knock you up, but I'm not going to stop there. I'm going to fuck you over and over, and fill you up over and over, even as your belly grows."
+            the_girl "Oh god, I want that so bad! I want to feel your cum inside me, again and again..."
+
+            if the_girl.knows_pregnant():
+                if the_girl.has_large_tits():
+                    mc.name "Your massive udders are going to stay that way, because I will be keeping you pregnant all the time. When I fuck you, your milk is going to spray out every time you cum."
+                else:
+                    mc.name "Your tits are going to stay that way, filled with milk. When I fuck you, it's going to spray out every time you cum."
+            else:
+                if the_girl.has_large_tits():
+                    mc.name "Your massive udders are going to get even bigger. When I fuck you, your milk is going to spray out every time you cum."
+                else:
+                    mc.name "Your tits are going to swell, filling with milk. When I fuck you, it's going to spray out every time you cum."
             if the_girl.love > 60:
-                the_girl "Yes! Make me a mommy! I want to think about you every time I feel it kick and move in my belly."
+                if the_girl.knows_pregnant():
+                    the_girl "Yes, keep me pregnant all the time, I want to be your baby breeding machine for ever."
+                else:
+                    the_girl "Yes! Make me a mommy! I want to think about you every time I feel it kick and move in my belly."
             else:
                 the_girl "Careful about making promises! I'm going to hold you to that!"
 
@@ -135,7 +161,10 @@ label scene_breeding_missionary_2(the_girl, the_location, the_object):
         "You start to pull yourself out of her."
         the_girl "No! Don't stop!"
         mc.name "Then what do you want?"
-        the_girl "I want you to fill me up! I want you to cum so deep not a drop of it escapes. Knock me up! Breed me like an animal!"
+        if the_girl.knows_pregnant():
+            the_girl "I want you to fill me up! I want you to cum so deep not a drop of it escapes. Breed me like the slut I am!"
+        else:
+            the_girl "I want you to fill me up! I want you to cum so deep not a drop of it escapes. Knock me up! Breed me like an animal!"
         $ the_girl.change_arousal(the_girl.get_opinion_score("being submissive"))
         $ the_girl.discover_opinion("being submissive")
         "You resume fucking her hard and fast. [the_girl.possessive_title] gasps and moans, her hips bucking with pleasure."
@@ -167,9 +196,10 @@ label outro_breeding_missionary(the_girl, the_location, the_object):
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
     $ breeding_missionary.redraw_scene(the_girl)
     "You take a moment to catch your breath, then roll off of [the_girl.possessive_title] and lie beside her."
-    "She lifts her legs up a bit, tilting her vagina so that your cum will naturally slide deeper inside. She sighs happily."
-
-
+    if the_girl.knows_pregnant():
+        "She rubs her dripping [the_girl.pubes_description] pussy and smears the juices over her belly."
+    else:
+        "She lifts her legs up a bit, tilting her vagina so that your cum will naturally slide deeper inside. She sighs happily."
     return
 
 
@@ -188,7 +218,10 @@ label transition_default_breeding_missionary(the_girl, the_location, the_object)
     if mc.condom:
         the_girl "Why are you wearing that thing? Let's get that off of you."
         "She reaches down and pulls off your condom."
-        the_girl "You aren't getting anyone pregnant wearing that silly thing!"
+        if the_girl.knows_pregnant():
+            the_girl "You aren't sticking it in me with that latex cover!"
+        else:
+            the_girl "You aren't getting anyone pregnant wearing that silly thing!"
         $ mc.condom = False
     "[the_girl.possessive_title] wraps her arms around you and holds you close as you line your cock up with her pussy. She sighs happily into your ear as you slide into her."
     "When you are deep inside her, you feel her legs lightly wrap around your back, holding you in place for a second."

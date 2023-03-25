@@ -18,7 +18,10 @@ label breeding_missionary_double_orgasm(the_girl, the_location, the_object):
     $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_girl)
     if the_girl.has_breeding_fetish():
         "[the_girl.possessive_title] moans as the first wave of your cum floods her [the_girl.pubes_description] pussy."
-        the_girl "Yes! Paint my fertile womb white with your cum!"
+        if the_girl.knows_pregnant():
+            the_girl "Yes! Paint my pregnant womb white with your cum!"
+        else:
+            the_girl "Yes! Paint my fertile womb white with your cum!"
         "Her body convulses as she begins to cum at the same time. She clings to you as her orgasm hits."
         if the_girl.knows_pregnant():
             "[the_girl.title] revels having her breeding fetish fulfilled as you pump her already pregnant body full of cum."
