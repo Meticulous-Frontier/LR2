@@ -987,9 +987,9 @@ init -1 python:
             serum.run_on_move(self) #Run the serum's on_move function if one exists
 
         # reset talk actions
-        self.event_triggers_dict["chatted"] = False
-        self.event_triggers_dict["flirted"] = False
-        self.event_triggers_dict["complimented"] = False
+        self.event_triggers_dict["chatted"] = 4 - GAME_SPEED
+        self.event_triggers_dict["flirted"] = 4 - GAME_SPEED
+        self.event_triggers_dict["complimented"] = 4 - GAME_SPEED
 
         self.sexed_count = 0 #Reset the counter for how many times you've been seduced, you might be seduced multiple times in one day!
 

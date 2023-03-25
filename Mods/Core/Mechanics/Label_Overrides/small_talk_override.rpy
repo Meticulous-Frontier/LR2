@@ -63,7 +63,7 @@ label small_talk_person_enhanced(person, apply_energy_cost = True, is_phone = Fa
     python:
         if apply_energy_cost:
             mc.change_energy(-15)
-        the_person.event_triggers_dict["chatted"] = True
+        the_person.event_triggers_dict["chatted"] = the_person.event_triggers_dict.get("chatted", 1) - 1
         renpy.say(mc.name, "So [person.title], what's been on your mind recently?")
         person.discover_opinion("small talk")
 

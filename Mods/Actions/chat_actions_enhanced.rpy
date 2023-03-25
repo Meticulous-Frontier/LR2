@@ -4,7 +4,7 @@ init 5 python:
 
 label flirt_person_enhanced(the_person): #Tier 1. Raises a character's sluttiness up to a low cap while also raising their love by less than a compliment.
     $ mc.change_energy(-15)
-    $ the_person.event_triggers_dict["flirted"] = True
+    $ the_person.event_triggers_dict["flirted"] = the_person.event_triggers_dict.get("flirted", 1) - 1
     if the_person.has_role(girlfriend_role):
         mc.name "You're so beautiful [the_person.title], I'm so lucky to have a woman like you in my life."
         $ the_person.call_dialogue("flirt_response_girlfriend")
