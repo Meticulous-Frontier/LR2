@@ -724,6 +724,11 @@ init -1 python:
             # print("Position is filtered for " + self.name)
             return False
 
+        # she hates one of the associated opinions
+        for opinion in the_position.opinion_tags:
+            if self.get_opinion_score(opinion) <= -2:
+                return False
+
         # print("Initial requirement: {}".format(final_slut_requirement))
         if self.has_role(prostitute_role):
             final_slut_requirement -= 20        # prostitutes are more willing by nature
