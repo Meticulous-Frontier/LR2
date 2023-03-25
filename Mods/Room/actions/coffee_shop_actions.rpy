@@ -2,19 +2,19 @@ init -1 python:
     def coffee_shop_get_coffee_requirement(): # Leave this in
         if time_of_day == 4: # Can be removed
             return "Closed for the night"
-        if day != mc.business.event_triggers_dict.get("coffee_shop_buy_coffee_day", 9999):
-            if not mc.business.has_funds(5): # $40 per session.
-                return "Requires: $5"
-            else:
-                return True
-        else:
-            return "You already bought coffee today."
+        if time_of_day == 0:
+            return "Opens in the morning"
+        if time_of_day == mc.business.event_triggers_dict.get("coffee_shop_buy_coffee_day", time_of_day):
+            return "Already bought coffee"
+        if not mc.business.has_funds(5):
+            return "Requires: $5"
+        return True
 
     # actions available from entry point action
     coffee_shop_get_coffee_action = Action("Order a coffee", coffee_shop_get_coffee_requirement, "coffee_shop_get_coffee_label", menu_tooltip = "Restore some energy with a hot coffee")
 
-label  coffee_shop_get_coffee_label():
-    $ mc.business.event_triggers_dict["coffee_shop_buy_coffee_day"] = day
+label coffee_shop_get_coffee_label():
+    $ mc.business.event_triggers_dict["coffee_shop_buy_coffee_day"] = time_of_day
     if kaya.location == coffee_shop:
         $ the_person = kaya
         "You step up to the coffee shop counter. [the_person.possessive_title] is working today."
@@ -38,11 +38,9 @@ label  coffee_shop_get_coffee_label():
         "You sit down at a table an enjoy the fresh brew. The flavor and caffeine perks you up a bit."
         $ mc.change_energy(30)
 
-
     else:
         "You step up to the coffee shop counter. You order yourself a coffee."
         "You sit down at a table an enjoy the fresh brew. The flavor and caffeine perks you up a bit."
         $ mc.change_energy(30)
         $ mc.business.change_funds(-5)
-
     return
