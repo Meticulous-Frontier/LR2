@@ -1145,26 +1145,18 @@ label myra_energy_drink_weekly_distribution_label():          #mandatory event. 
     else:
         "You get a message from [the_person.title]. She wants to know which serums you want delivered to the gaming cafe this week."
     "You take a look at your business' inventory. Time to decide which serum to send over to the gaming cafe for the next week."
-    while not finished:
-        "You quickly remind yourself, the serum must include the energy drink trait, and you need at least 10."
-        call screen serum_inventory_select_ui(mc.business.inventory)
-        if isinstance(_return, SerumDesign):
-            $ the_serum = _return
-            if mc.business.inventory.get_serum_count(the_serum) >= 10 and myra_serum_is_acceptable_energy_drink(the_serum):
-                "You set it up for [the_person.title] to take 10 [the_serum.name]s to the gaming cafe."
-                "It will be distributed there for the next week to anyone who stops by."
-                $ myra_set_weekly_serum(the_serum)
-                $ mc.business.inventory.change_serum(the_serum, -10)
-                $ finished = True
-            elif mc.business.inventory.get_serum_count(the_serum) < 10:
-                "Unfortunately you don't have enough of that serum to send it over."
-            elif not myra_serum_is_acceptable_energy_drink(the_serum):
-                "Unfortunately that serum isn't acceptable to send over to the gaming cafe."
-        else:
-            $ the_serum = None
-            "You decide not to send over any energy drinks this week."
-            $ myra_set_weekly_serum(None)
-            $ finished = True
+    "You quickly remind yourself, the serum must include the energy drink trait, and you need at least 10."
+    call screen serum_inventory_select_ui(mc.business.inventory, batch_size = 10, select_requirement = myra_serum_is_acceptable_energy_drink)
+    if isinstance(_return, SerumDesign):
+        $ the_serum = _return
+        "You set it up for [the_person.title] to take 10 [the_serum.name]s to the gaming cafe."
+        "It will be distributed there for the next week to anyone who stops by."
+        $ myra_set_weekly_serum(the_serum)
+        $ mc.business.inventory.change_serum(the_serum, -10)
+    else:
+        $ the_serum = None
+        "You decide not to send over any energy drinks this week."
+        $ myra_set_weekly_serum(None)
     if new_delivery_person or mc.is_at_work():
         $ the_person.draw_person(position = "walking_away")
         "[the_person.title] walks away."
