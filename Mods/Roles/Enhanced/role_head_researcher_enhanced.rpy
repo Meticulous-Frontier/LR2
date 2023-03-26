@@ -732,6 +732,8 @@ label head_researcher_serum_trait_test_label(the_person):
                 "You step out of the room, leaving [the_tester.title] to take care of herself. Your work here has increased your mastery of [the_serum_trait.name]!"
                 $ mc.business.set_event_day("serum_trait_test")
                 $ the_tester.have_orgasm()
+                $ the_tester = None
+                $ the_serum_trait = None
                 call advance_time from _call_advance_time_mastery_research_02
                 return "Advance Time"
     else:
@@ -1347,7 +1349,7 @@ label serum_tester_dildo_aid_label(the_tester):
                 $ mc.change_locked_clarity(50)
                 "It feels too good. The urge to cover her in your cum is overwhelming."
                 "You quickly takeover. You stroke yourself and start to cum, pointing right at her tits."
-                $ ClimaxController.manual_clarity_release(climax_type = "tits", the_tester = the_tester)
+                $ ClimaxController.manual_clarity_release(climax_type = "tits", the_person = the_tester)
                 $ the_tester.cum_on_tits()
                 $ scene_manager.update_actor(the_tester, position = "missionary")
                 "You coat her tits in your spunk. Deep in the throes of her own orgasm, she doesn't even realize it at first."
@@ -1989,13 +1991,13 @@ label serum_tester_fuck_aid_label(the_tester):
             if mc.condom:
                 "Knowing you've got protection on, you push yourself deep and cum inside of her."
                 "The condom swells and accepts your load as you pump it out."
-                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_tester = the_tester)
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_tester)
                 "When you finish, you slowly let go of her legs, setting her down on the examination table."
                 "You pull the condom off and throw it in the trash."
             elif cum_goal == "creampie":
                 "With your arms wrapped around her legs and her ass several inches off the examination table, you begin to dump your seed inside of her."
                 "Even if she wanted to, there's nothing she could do about it now. She has zero leverage and is barely hanging on to the bed."
-                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_tester = the_tester)
+                $ ClimaxController.manual_clarity_release(climax_type = "pussy", the_person = the_tester)
                 $ the_tester.cum_in_vagina()
                 $ scene_manager.update_actor(the_tester, position = "missionary")
                 "In the midst of her own orgasm, she just moans as you fill her up with your cum."
@@ -2028,7 +2030,7 @@ label serum_tester_fuck_aid_label(the_tester):
                 "At the last possible second, you set her ass down on the examination table and pull out."
                 "You spread her legs with your hands and she quickly reaches down and strokes your cock, finishing you off."
                 mc.name "Oh fuck, here it comes!"
-                $ ClimaxController.manual_clarity_release(climax_type = "body", the_tester = the_tester)
+                $ ClimaxController.manual_clarity_release(climax_type = "body", the_person = the_tester)
                 $ the_tester.cum_on_stomach()
                 $ scene_manager.update_actor(the_tester, position = "missionary")
                 "Her soft hands stroke you off as you finish. You fire off spurt after spurt of cum all over her stomach."
