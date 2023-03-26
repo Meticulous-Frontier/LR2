@@ -2088,5 +2088,6 @@ label serum_tester_fuck_aid_label(the_tester):
         $ the_tester.increase_opinion_score("vaginal sex")
         "[the_tester.title] seems to have warmed up on the idea of vaginal sex in the future!"
 
+    $ mc.condom = False # reset any condom use
     "You step away and clean up a bit as she lays back and recovers."
     return
