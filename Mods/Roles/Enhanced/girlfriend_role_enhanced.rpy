@@ -40,14 +40,11 @@ init 2 python:
     def girlfriend_quit_dikdok_requirement(the_person):
         if not the_person.has_role(dikdok_role):
             return False
-        if the_person in unique_character_list:
-            return False
         if the_person.love < 40: # hide option will love is very low
             return False
         if the_person.love < 60:
             return "Requires: 60 Love"
         return True
-
 
     girlfriend_sleepover_action = Action("Arrange a sleepover", girlfriend_myplace_yourplace_requirement, "girlfriend_myplace_yourplace_label",
         menu_tooltip = "Ask your girlfriend if she wants to sleep together tonight.")
@@ -611,5 +608,6 @@ label girlfriend_quit_dikdok_label(the_person):
     mc.name "I'm not very comfortable with you on DikDok, so I would prefer if you closed your account."
     the_person "Well, since I have you in my life, I don't see why not."
     $ the_person.remove_role(dikdok_role)
+    $ the_person.event_triggers_dict["block_dikdok"] = True
     "She pulls out her phone and closes her account right there."
     return
