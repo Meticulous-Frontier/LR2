@@ -395,7 +395,7 @@ label hr_director_prog_trans_scene_4(the_group):
     the_person "It just feels like we are starting the week off right."
     "[the_person.title] bends over and keeps stripping."
     $ scene_manager.update_actor(the_person, position = "standing_doggy")
-    $ scene_manager.strip_to_vagina(the_person, visible_enough = False, prefer_half_off = False)
+    $ scene_manager.strip_to_vagina(the_person, visible_enough = True, prefer_half_off = False)
     $ mc.change_locked_clarity(50)
     the_person "Especially when it starts with us messing around in your office!"
     "[the_person.possessive_title] gives her ass a little shake before standing back up."
