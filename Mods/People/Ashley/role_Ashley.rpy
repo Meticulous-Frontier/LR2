@@ -1680,14 +1680,13 @@ init -1 python:
     def ashley_submission_titfuck_requirement():
         if not (mc.is_at_work() and mc.business.is_open_for_business()):
             return False
-        if ashley.obedience <= 120:
+
+        if ashley.obedience < 120:
             ashley.obedience_messages[0] = "Increase [ashley.fname]'s obedience to progress."
-        elif not ashley.days_since_event("obedience_event") < TIER_1_TIME_DELAY:
+        elif ashley.days_since_event("obedience_event") < TIER_1_TIME_DELAY:
             ashley.obedience_messages[0] = "Wait a few days to progress."
-        if ashley.obedience > 120 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            # ashley_stay_after_work_setup()
-            if time_of_day == 3:
-                return True
+        if ashley.obedience >= 120 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
+            return time_of_day == 3
         return False
 
     def ashley_submission_blowjob_requirement():
@@ -1696,12 +1695,10 @@ init -1 python:
 
         if ashley.obedience < 140:
             ashley.obedience_messages[1] = "Increase [ashley.fname]'s obedience to progress."
-            return False
         if ashley.days_since_event("obedience_event") < TIER_1_TIME_DELAY:
             ashley.obedience_messages[1] = "Wait a few days to progress."
-            return False
-        if time_of_day == 3:
-            return True
+        if ashley.obedience >= 140 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
+            return time_of_day == 3
         return False
 
     def ashley_submission_fuck_requirement():
@@ -1710,8 +1707,7 @@ init -1 python:
 
         ashley.obedience_messages[2] = "The next scene has not been written yet!"
         if ashley.obedience > 160 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if time_of_day == 3:
-                return True
+            return time_of_day == 3
         return False
 
     def ashley_submission_anal_requirement():
@@ -1720,8 +1716,7 @@ init -1 python:
 
         return False    #Current writing spot is submission fuck
         if ashley.obedience > 180 and ashley.days_since_event("obedience_event") >= TIER_1_TIME_DELAY:
-            if time_of_day == 3:
-                return True
+            return time_of_day == 3
         return False
 
     def ashley_submission_titfuck_taboo_restore_requirement():
@@ -1743,7 +1738,7 @@ init -1 python:
         return False
 
     def ashley_work_titfuck_requirement(the_person):
-        if ashley.obedience_step != 1:
+        if the_person.obedience_step != 0 or the_person.event_triggers_dict.get("sub_titfuck_count", 0) == 0:
             return False
         if the_person.is_at_work() and mc.business.is_open_for_business():
             if the_person.obedience < 120:
@@ -1753,7 +1748,7 @@ init -1 python:
         return False
 
     def ashley_work_blowjob_requirement(the_person):
-        if ashley.obedience_step != 2:
+        if the_person.obedience_step != 1 or the_person.event_triggers_dict.get("sub_blowjob_count", 0) == 0:
             return False
         if the_person.is_at_work() and mc.business.is_open_for_business():
             if the_person.obedience < 140:
@@ -1763,7 +1758,7 @@ init -1 python:
         return False
 
     def ashley_work_fuck_requirement(the_person):
-        if ashley.obedience_step != 3:
+        if the_person.obedience_step != 2 or the_person.event_triggers_dict.get("sub_fuck_count", 0) == 0:
             return False
         if the_person.is_at_work() and mc.business.is_open_for_business():
             if the_person.obedience < 160:
@@ -1773,7 +1768,7 @@ init -1 python:
         return False
 
     def ashley_work_anal_requirement(the_person):
-        if ashley.obedience_step != 4:
+        if the_person.obedience_step != 3 or the_person.event_triggers_dict.get("sub_anal_count", 0) == 0:
             return False
         if the_person.is_at_work() and mc.business.is_open_for_business():
             if the_person.obedience < 180:
