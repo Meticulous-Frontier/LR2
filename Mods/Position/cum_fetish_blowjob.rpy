@@ -130,7 +130,7 @@ label outro_cum_fetish_blowjob(the_girl, the_location, the_object):
     $ the_girl.draw_person(position = "kneeling1")
     "[the_girl.possessive_title] moans and looks you in the eyes. She pulls off your cock and strokes you eagerly, waiting for the first splash across her face."
     "You erupt in orgasm and shoot your load across her glowing face. Her pupils dilate as her cum addicted brain registers the presence of your cum on her skin."
-    "[the_girl.possessive_title] moans uncontrollably with every spurt"
+    "[the_girl.possessive_title] moans uncontrollably with every spurt."
     $ the_girl.cum_on_face()
     $ the_girl.draw_person(position = "kneeling1")
     $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_girl)

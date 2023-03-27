@@ -72,11 +72,11 @@ label breeding_fetish_bend_her_over_label(the_person):
     elif mc.location == sex_store:
         if the_person == starbuck:
             the_person "Right here? In front of all of my customers?"
-            mc.name "Of course"
+            mc.name "Of course."
             the_person "Oh god, this is gonna be hot... okay!"
         else:
             the_person "Right here? At the sex shop?"
-            mc.name "Of course"
+            mc.name "Of course."
             the_person "Oh god, this is gonna be hot... okay!"
     elif mc.location == mall_salon:
         if the_person == salon_manager:
@@ -89,14 +89,14 @@ label breeding_fetish_bend_her_over_label(the_person):
             the_person "Of course!... Okay... I'll do it!"
     else:
         the_person "Right here? In front of everyone?"
-        mc.name "Of course"
+        mc.name "Of course."
         the_person "Oh god, this is gonna be hot... okay!"
     $ the_person.draw_person(position = "standing_doggy")
     $ mc.change_locked_clarity(50)
     "[the_person.title] turns around. You quickly get her ready to fuck."
     $ the_person.strip_outfit(exclude_upper = True, position = "standing_doggy")
     the_person "Oh my god... okay... where do you want me?"
-    call fuck_person(the_person, start_position = bent_over_breeding, private = False) from _call_bend_over_breeder_01
+    call fuck_person(the_person, private = mc.location.is_private(), start_position = bent_over_breeding) from _call_bend_over_breeder_01
     if the_person.has_creampie_cum():
         the_person "Oh fuck... every time you finish inside me is just so good..."
         "She rubs her belly and sighs."

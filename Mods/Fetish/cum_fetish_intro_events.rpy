@@ -540,7 +540,7 @@ label cum_fetish_mom_intro_label():
             $ the_person.draw_person(position = "kneeling1")
             $ ClimaxController.manual_clarity_release(climax_type = "face", the_person = the_person)
             "You erupt in orgasm and shoot your load across her glowing face. Her pupils dilate as her cum addicted brain registers the presence of your cum on her skin."
-            "[the_person.possessive_title] moans uncontrollably with every spurt"
+            "[the_person.possessive_title] moans uncontrollably with every spurt."
             $ add_cum_fetish(the_person)
             "Slowly recovering, you look at [the_person.possessive_title]'s cum covered face. Her eyes are closed and she is absentmindedly playing with some of the cum that is starting to run down her neck."
     the_person "Oh... I needed that so bad... you have no idea."
