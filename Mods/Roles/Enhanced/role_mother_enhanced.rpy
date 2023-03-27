@@ -17,7 +17,7 @@ label mom_weekly_pay_tit_fuck_label(the_person):    #Anticipate adding this as a
     mc.name "Alright, I'll pay you to let me fuck your tits."
     if (not the_person.has_taboo("touching_body")) or the_person.effective_sluttiness("touching_body") >= 40:
         "[the_person.title] peaks down at your crotch before responding."
-        the_person "These tits?."
+        the_person "These tits?"
         "She jiggles her hefty tits for you a couple times."
         $ mc.change_locked_clarity(10)
         "You pull out your wallet and count out her cash while [the_person.possessive_title] gets onto her knees in front of you."

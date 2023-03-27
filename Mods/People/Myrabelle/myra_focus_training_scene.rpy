@@ -399,7 +399,7 @@ label myra_focus_trans_scene_4(the_group):
     "You set her energy drink down next to her keyboard."
     "You've finally pushed her to giving you lap dances while she plays games. You are thoroughly enjoying each and every training session."
     the_person "Hey coach, I got an idea."
-    mc.name "Oh?."
+    mc.name "Oh?"
     the_person "I've been thinking about it, you know, how I can take my focus to the next level."
     the_person "I think I know how to do it."
     mc.name "And how would that be?"

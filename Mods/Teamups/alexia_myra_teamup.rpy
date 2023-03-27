@@ -1127,7 +1127,7 @@ label myra_alexia_teamup_scene_scene_3(the_group, scene_transition = False):  #S
     $ scene_manager.clear_scene()
     "You get up and head home."
     $ mc.change_location(bedroom)
-    "Things are amazing with the two gamer girls. Could it possibly even get any better?."
+    "Things are amazing with the two gamer girls. Could it possibly even get any better?"
 
     $ the_loser = None
     $ the_target = None
