@@ -308,7 +308,7 @@ label outro_SB_doggy_anal_dildo_dp(the_girl, the_location, the_object):
     return
 
 label transition_doggy_to_doggy_anal_dp_taboo_break_label(the_girl, the_location, the_object):
-    "[the_girl.possessive_title]'s tight sphincter feels amazing, but you decide it is time to take things up another notch."
+    "[the_girl.possessive_title]'s tight pussy feels amazing, but you decide it is time to take things up another notch."
     "She groans as you pull out and reach for you backpack. She looks back, and her eyes go wide when you pull out your strap-on."
     the_girl "What... what is that for?"
     call transition_doggy_doggy_anal_dp(the_girl, the_location, the_object) from _call_transition_doggy_anal_doggy_anal_dp_taboo_break
