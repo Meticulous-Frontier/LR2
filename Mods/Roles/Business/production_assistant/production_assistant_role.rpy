@@ -75,7 +75,7 @@ init -1 python:
 
     def quest_essential_oils_decision_requirement(the_person):
         if time_of_day > 0 and time_of_day < 4:
-            return True
+            return the_person.location == mall  # the_person is camilla
         return False
 
     def prod_assistant_unlock_auras_requirement(the_person):
