@@ -375,6 +375,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                         $ the_person.draw_person()
                         "[the_person.title] looks to the left, then to right. There's no one around. She speaks in a whisper."
                         the_person "Get in here!"
+                        $ mc.change_location(changing_room)
                         "You slip into the changing room. [the_person.possessive_title] closes it behind her."
                         if the_person.effective_sluttiness() < 80 and the_person.get_opinion_score("public sex") < 1: #She just wants to mess around a little
                             the_person "Mmm... want to have a little fun? Nothing too crazy though, I don't want to get caught..."
@@ -390,6 +391,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     $ the_person.draw_person(position = "back_peek")
                                     "When you finish, you sneak back out of the changing room. You turn and check her out for a moment."
                                     the_person "I'll be out in a minute..."
+                                    $ mc.change_location(clothing_store)
                                     $ clear_scene()
                                     "She closes the door slowly."
                                 "Too risky":
@@ -415,6 +417,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     "You sneak back out of the changing room. You turn and check her out for a moment."
                                     the_person "I'll be out in a minute..."
                                     $ clear_scene()
+                                    $ mc.change_location(clothing_store)
                                     "She closes the door slowly."
                         else:  #She wants to get a little crazy
                             "She reaches down and begins to stroke you through your pants."
@@ -441,6 +444,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     #TODO chance if there is anyone else at the clothing store to get noticed.
                                     the_person "I'll be out in a minute..."
                                     $ clear_scene()
+                                    $ mc.change_location(clothing_store)
                                     "She closes the door slowly."
                                 "Too risky":
                                     mc.name "I'm not sure I could keep it down... better play it safe."
@@ -465,6 +469,7 @@ label trying_on_clothes_label(the_person): #This label starts with trying on clo
                                     "You sneak back out of the changing room. You turn and check her out for a moment."
                                     the_person "I'll be out in a minute..."
                                     $ clear_scene()
+                                    $ mc.change_location(clothing_store)
                                     "She closes the door slowly."
                                 "Too risky\n{color=#ff0000}{size=18}Too aroused to say no{/size}{/color} (disabled)" if mc.arousal > 50:
                                     pass
