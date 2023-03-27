@@ -259,6 +259,9 @@ init -1 python:
                 mc.business.change_funds(strip_club_income, add_to_log = False)
                 mc.business.add_normal_message("The [strip_club.formal_name] has made a net profit of $" + str(__builtin__.round(strip_club_income, 1)) + " today!")
 
+            # reset some events
+            mc.business.event_triggers_dict["coffee_shop_buy_coffee_day"] = 0
+
         return run_day_wrapper
 
     # wrap up the run_day function
