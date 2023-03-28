@@ -100,7 +100,7 @@ label cum_fetish_employee_dosage_request_label():
             "[the_person.possessive_title] walks over to you and immediately drops down on her knees. You consider asking her to strip down a bit, but she is already too busy stroking your cock."
             $ the_person.draw_person(position = "blowjob")
             ###cum Scene, standing variant###
-            call fuck_person(the_person, start_position = cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, skip_intro = True, position_locked = True) from _call_fuck_person_SBC20
+            call get_fucked(the_person, sex_path = build_blowjob_path(the_person), start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_get_fucked_cum_fetish_employee
             the_person "Oh my god, thank you [the_person.mc_title]... I wish I had time to make you cum again... but I know you're a busy man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
             the_person "Thanks again, [the_person.mc_title]. Don't hesitate to ask if you ever need to be... you know... serviced."
@@ -134,15 +134,28 @@ label cum_fetish_non_employee_dosage_request_label():
     menu:
         "All right":
             $ the_person.event_triggers_dict["LastCumFetish"] = day
-            mc.name "All right, meet me at my place in 10 minutes."
-            $ mc.change_locked_clarity(30)
-            $ mc.change_location(hall)
-            "You just got home, when your doorbell rings."
+            if mc.is_at_work():
+                mc.name "All right, can you come down to my business, I can make some time for you."
+                the_person "No problem, I'll be in your office in 10 minutes."
+                if not mc.location == ceo_office:
+                    "You go up to your office to await [the_person.possessive_title]'s arrival."
+                    $ mc.change_location(ceo_office)
+                "You relax a while in your office, until there is a knock at your door."
+            else:
+                mc.name "All right, meet me at my place in 10 minutes."
+                $ mc.change_location(hall)
+                "You just got home, when your doorbell rings."
+
             $ the_person.draw_person()
+            $ mc.change_locked_clarity(30)
             the_person "Hey [the_person.mc_title], I came as fast as I could."
-            "[the_person.possessive_title] pushes you inside and immediately drops down on her knees. You consider asking her to strip down a bit, but she is already fishing your cock out of your pants."
-            $ the_person.draw_person(position = "blowjob")
-            call fuck_person(the_person, start_position = cum_fetish_blowjob, start_object = make_floor(), girl_in_charge = False, skip_intro = True, position_locked = True) from _call_fuck_person_SB_fetish_cum_dosage_non_employee_label
+            if mc.is_at_work():
+                "[the_person.possessive_title] walks up to you and immediately drops down on her knees."
+            else:
+                "[the_person.possessive_title] pushes you inside and immediately drops down on her knees."
+            $ the_person.draw_person(position = "kneeling1")
+            "You consider asking her to strip down a bit, but she has already managed to pull your cock out of your pants."
+            call get_fucked(the_person, sex_path = build_blowjob_path(the_person), start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_get_fucked_cum_fetish_non_employee
             the_person "Oh my god, thank you [the_person.mc_title]... I wish I had time to make you cum again... but I know you're a busy man..."
             "[the_person.possessive_title] starts to get up. Her hunger for cum satisfied for now."
             $ the_person.apply_planned_outfit()
