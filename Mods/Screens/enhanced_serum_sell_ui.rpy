@@ -38,7 +38,7 @@ init 2:
                         mousewheel True
                         scrollbars "vertical"
                         vbox:
-                            for serum_stock in mc.business.inventory.serums_held:
+                            for serum_stock in sorted(mc.business.inventory.serums_held, key = lambda x: x[0].name):
                                 hbox:
                                     $ serum_dose_value = mc.business.get_serum_base_value(serum_stock[0], round_value = True)
                                     use serum_design_menu_item(serum_stock[0], name_addition = ": " + str(serum_stock[1]) + " Doses, $" + str(serum_dose_value) + "/Dose")
