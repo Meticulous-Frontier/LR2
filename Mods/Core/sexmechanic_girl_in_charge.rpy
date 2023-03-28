@@ -485,7 +485,7 @@ label get_fucked(the_person, the_goal = None, sex_path = None, private= True, st
             $ the_person.break_taboo(current_node.position.associated_taboo)
         else:
             $ current_node.position.call_intro(the_person, mc.location, object_choice)
-    elif not finished and start_position is None:
+    elif not skip_intro and not finished and start_position is None:
         # show dialog since there is probably no intro for the position
         $ current_node.position.call_transition(start_position, the_person, mc.location, object_choice)
 
