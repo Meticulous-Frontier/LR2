@@ -653,7 +653,7 @@ label fuck_person_bugfix(the_person, private= True, start_position = None, start
                     $ report_log["girl orgasms"] += 1
 
                 $ condition.call_post_label(the_person, position_choice, object_choice, report_log)
-                if not private:
+                if not private and not mc.recently_orgasmed:
                     call public_sex_post_round(the_person, position_choice, report_log) from _public_sex_post_round_01
                     if not _return:
                         $ finished = True
