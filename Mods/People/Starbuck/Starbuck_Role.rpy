@@ -1479,12 +1479,11 @@ label starbuck_sex_store_promo_five_label(the_person): #Swingset anal, ends in ?
 
 #SBS120
 label starbuck_spend_the_night_label(the_person): #You spend the night at her place. You'll probably get busy
-    $ morning_fun_chance = 0
     mc.name "I was thinking I could spend the night here tonight."
     "[the_person.title] looks delighted."
     the_person "Oh! That would be great! I'd love the company!"
-    $ the_roll = renpy.random.randint(0,100) #Roll for the possible event#
-    if the_roll < 10 or mc.energy < 30: #No event, just cuddle up and go to bed.
+    $ ran_num = renpy.random.randint(0,100)
+    if ran_num < 10 or mc.energy < 30: #No event, just cuddle up and go to bed.
         mc.name "Thanks. It's been a long day and I'm exhausted."
         $ the_person.change_to_bedroom()
         "You strip off your work clothes, down to your boxers. You head to [the_person.title]'s bedroom and hop in her bed."
@@ -1493,8 +1492,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.apply_outfit(the_person.wardrobe.get_random_appropriate_underwear(the_person.sluttiness, 10, WardrobePreference(the_person)))
         $ the_person.draw_person()
         "She crawls into bed beside you. You cuddle up behind her and enjoy the warmth of her body as you drift off to a restful night's sleep."
-        $ morning_fun_chance = 100 #No action tonight? she wakes up hungry
-    elif the_roll < 40: #She seduces you
+    elif ran_num < 40: #She seduces you
         mc.name "Thanks. I just have a little bit of work stuff to finish up. I brought my laptop, mind if I take over your desk for a few?"
         the_person "Help yourself! I'll tell you what, I'm going to hop in the shower."
         "You sit down at the desk and pull out your laptop. You review some of the days research notes and begin emailing instructions for tomorrow."
@@ -1548,8 +1546,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         "She stretches her arms out and yawns."
         the_person "I'm worn out! Goodnight!"
         "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
-        $ morning_fun_chance = 20 #She got what she wanted
-    elif the_roll < 70 or mc.energy < 50: #You seduce her
+    elif ran_num < 70 or mc.energy < 60: #You seduce her
         $ the_person.draw_person(position = "kissing")
         "[the_person.possessive_title] wraps her arms around you to give you a hug. You use the opportunity."
         "You grab her ass and pick her up easily. She yelps for a second but quickly wraps her legs around you in an embrace."
@@ -1583,10 +1580,8 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_report = _return
         if the_report.get("girl orgasms", 0) > 0:
             the_person "Oh god, I came so hard..."
-            $ morning_fun_chance = 30 #She finished
         else:
             the_person "Mmm, that was so good, thank you [the_person.mc_title]..."
-            $ morning_fun_chance = 100 #She didn't finish, so she comes for you in the morning.
         "You lay down on the bed, hopping in the covers."
         "[the_person.title] doesn't bother to get up, she just cuddles up next to you."
         the_person "Thanks, [the_person.mc_title], I didn't know I needed that until you got here."
@@ -1605,7 +1600,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         menu:
             "Shower with her":
                 $ the_person.apply_outfit(Outfit("Nude"))
-                #TODO shower background?
+                $ mc.change_location(home_shower)
                 "You decide you've waited long enough and make your way into the bathroom. Inside you smell the scent of lavender body wash and quickly spy [the_person.title]'s soapy body through the hazy steam."
                 $ the_person.draw_person(position = "back_peek")
                 $ mc.change_locked_clarity(30)
@@ -1651,6 +1646,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 mc.name "Sounds good. I'm gonna fuck your brains out tonight."
                 $ the_person.draw_person(position = "walking_away")
             #"Wait for her":  #TODO
+        $ the_person.change_to_bedroom()
         "You follow [the_person.title] to her bedroom."
         "Her amazing ass sways back and forth as she walks. Your cock twitches thinking about the night ahead of you."
         "She gets to her bed and immediately opens her nightstand and begins looking for something."
@@ -1695,7 +1691,6 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
                 "She cuddles up next to you."
                 $ the_person.draw_person(position = "missionary", emotion = "happy")
 
-        $ morning_fun_chance = 50 #She finished. Maybe she wants an encore in the morning, maybe not.
         "[the_person.title] nuzzles up against you and slowly drifts off to sleep. In your sex induced haze, you quickly drift off to sleep with her."
 
     call advance_time_move_to_next_day() from _call_advance_time_move_to_next_day_SBS129
@@ -1704,8 +1699,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
     $ mc.change_location(the_person.home)
 
     $ clear_scene()
-    $ the_roll = renpy.random.randint(0,100)
-    if the_roll < morning_fun_chance:        #Roll for morning sex is successful
+    if renpy.random.randint(0,100) < 50:        #Roll for morning sex is successful
         "[the_person.title]'s naked body against yours makes for a very pleasant night of sleep. A couple times throughout the night you stirred for a bit and gave her a grope, but quickly fell back asleep."
         "Pleasant sensations and the feeling of weight around your torso slowly wakes you up."
         $ mc.change_arousal(10)
@@ -1731,6 +1725,7 @@ label starbuck_spend_the_night_label(the_person): #You spend the night at her pl
         $ the_person.draw_person(position = "stand3")
         the_person "I'm gonna go hop in the shower. Feel free to let yourself out! Thanks for spending the night [the_person.mc_title]!"
         "[the_person.title] heads to the bathroom. You grab your stuff and head out."
+    $ mc.change_location(downtown)
     $ the_person.apply_outfit(the_person.decide_on_outfit(.4))
     $ clear_scene()
     return "Advance Time"
