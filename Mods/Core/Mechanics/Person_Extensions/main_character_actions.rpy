@@ -29,24 +29,11 @@ init 2 python:
     def mc_stop_follow_requirement(person):
         return person.follow_mc
 
-    # Hire Person Requirements
-    def mc_hire_person_requirement(person):
-        excluded_roles = ["stripper_role", "stripclub_waitress_role", "stripclub_bdsm_performer_role", "stripclub_manager_role", "stripclub_mistress_role", "candace_role", "college_intern_role"]
-        for role in excluded_roles:
-            if role in globals():
-                if person.has_role(globals()[role]):
-                    return False
-
-        if person not in mc.business.get_employee_list() + unique_character_list:
-            if mc.business.get_employee_count() >= mc.business.max_employee_count:
-                return "At employee limit"
-            return True
-        return False
-
     def mc_action_lasik_surgery_person_requirement(person):
+        if person.love < 20: # you need have some connection with her to offer this
+            return False
+
         if person.base_outfit and person.base_outfit.has_glasses():
-            if person.love < 20: # you need have some connection with her to offer this
-                return False
             if person.love < 30:
                 return "Requires: 30 Love"
             if not mc.business.has_funds(5000):
@@ -68,15 +55,6 @@ init 2 python:
 
     def mc_remove_person_requirement(person):
         return person in known_people_in_the_game(unique_character_list)
-
-    # Pay Strip Requirements
-    def mc_action_pay_to_strip_requirement(person):
-        if not person is lily:
-            if (person.obedience >= 130 and person.sluttiness >= 15) or (person.sluttiness >= 25 and person.get_opinion_score("not wearing anything") > 0) or person.obedience >= 150 or person.sluttiness >= 50:
-                if mc.location.get_person_count() > 1:
-                    return "Must be alone with " + person.title
-                return True
-        return False
 
     # Obsolete remove next version
     def mc_ask_take_serum_requirement(person):
@@ -111,19 +89,11 @@ init 5 python:
     mc_start_follow_action = ActionMod("Follow me", mc_start_follow_requirement, "mc_start_follow_label", menu_tooltip = "Ask [the_person.title] to follow you around.", category = "Generic People Actions")
     mc_stop_follow_action = ActionMod("Stop following me", mc_stop_follow_requirement, "mc_stop_follow_label", menu_tooltip = "Have [the_person.title] stop following you.", allow_disable = False, category = "Generic People Actions")
 
-    # Hire Person | Allows you to hire a person if they are not already hired. (Moves them to the appropriate division, no duplicates)
-    # DISABLED: This functionality is now supported by the base-game
-    # mc_hire_person_action = ActionMod("Employ", mc_hire_person_requirement, "mc_hire_person_label", menu_tooltip = "Hire [the_person.title] to work for you in your business.", category = "Generic People Actions")
-
     # Rename Person | Opens a menu that allows you to change first and last name plus a (non- appended) custom the_person.title
     mc_rename_person_action = ActionMod("Rename", mc_action_rename_person_requirement, "mc_rename_person_label", menu_tooltip = "Change the name of [the_person.title].", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     # Spend the Night | Allows you to sleep in the home of a person you have increased the love stat.
     mc_spend_the_night_action = ActionMod("Spend the night with girl", mc_action_spend_the_night_requirement, "mc_spend_the_night_label", menu_tooltip = "Allows you to sleep in this location.", category = "Generic People Actions", initialization = init_action_mod_disabled)
-
-    # Pay to Strip | Allows you to enter the pay_strip label used in certain events if requirements are met.
-    # DISABLED: Stripping is now supported in the base game (conditions apply)
-    # pay_to_strip_action = ActionMod("Pay her to strip", mc_action_pay_to_strip_requirement, "mc_pay_to_strip_label", menu_tooltip = "Pay [the_person.title] to give you a strip tease.", category = "Generic People Actions", initialization = init_action_mod_disabled)
 
     mc_lasik_surgery_action = ActionMod("Pay for LASIK surgery\n{color=#ff0000}{size=18}Costs: $5000{/size}{/color}", mc_action_lasik_surgery_person_requirement, "mc_action_lasik_surgery_label", menu_tooltip = "You don't like [the_person.title] wearing glasses, offer to pay for LASIK surgery.", category = "Generic People Actions")
 
@@ -135,31 +105,12 @@ init 5 python:
         menu_tooltip = "Ask for a favor. Successfully asking for a favor tends to build obedience in your relationship.")
     chat_actions.append(do_a_favor_action)
 
-
-label mc_pay_to_strip_label(person):
-    # strip a copy of the current outfit (so review outfit can restore the original outfit)
-    $ person.outfit = person.outfit.get_copy()
-
-    call strip_tease(the_person, for_pay = True) from _call_pay_strip_scene_generic_people_role
-
-    # reset the person outfit to the one prior to the strip
-    python:
-        person.apply_planned_outfit()
-        person.draw_person(emotion = "happy")
-
-    if person.sluttiness > person.outfit.slut_requirement:
-        "She slowly puts her clothes back on, while looking at you seductively."
-    else:
-        "She quickly puts her clothes back on."
-    return
-
 # NOTE: Not sure where to place these actions yet. Basically actions that could fit on any person regardless of role.
 label mc_spend_the_night_label(person): # Consider adding the sleep_action to the_person's room, but stats jump all over the place so doesn't necessarily make sense.
     "You go to sleep in [person.home.name]."
     $ the_person.change_stats(happiness = 5, love = 3)
     call advance_time from _call_advance_time_spend_the_night
     return
-
 
 label mc_rename_person_label(person):
     "You tell [person.possessive_title] that you are giving her a new name."
@@ -190,47 +141,7 @@ label mc_rename_person_label(person):
             "Back":
                 return
 
-# Hire Person Labels
-label mc_hire_person_label(person):
-
-    python:
-        if not mc.business.has_funds(person.calculate_base_salary() * 10):
-            renpy.say(None, "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + " and put you in debt due to low funds.")
-        else:
-            renpy.say(None, "Hiring [person.title] will cost you $" + str(person.calculate_base_salary() * 10) + ", do you wish to proceed?")
-
-    menu:
-        "Yes":
-            pass
-        "No":
-            return
-
-    "You complete the necessary paperwork and hire [person.title]. What division do you assign them to?"
-    menu:
-        "Research and Development":
-            $ mc.business.add_employee_research(the_person)
-
-        "Production":
-            $ mc.business.add_employee_production(the_person)
-
-        "Supply Procurement":
-            $ mc.business.add_employee_supply(the_person)
-
-        "Marketing":
-            $ mc.business.add_employee_marketing(the_person)
-
-        "Human Resources":
-            $ mc.business.add_employee_hr(the_person)
-
-        "Back":
-            return
-
-    $ mc.business.change_funds(- (person.calculate_base_salary() * 10))
-    "You have hired [person.title], she will start working as soon as possible."
-    return
-
-
-    # Schedule Person Labels
+# Schedule Person Labels
 
 label mc_schedule_menu_label(person): # TODO: Find a way to handle "None" instances of schedule to display formal_name on Action.
     python: #Generate a list of options from the actions that have their requirement met, plus a back button in case the player wants to take none of them.

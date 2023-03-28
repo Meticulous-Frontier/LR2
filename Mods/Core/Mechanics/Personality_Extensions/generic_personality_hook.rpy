@@ -603,11 +603,6 @@ init 2 python:
             for action in main_character_actions_list:
                 if action not in mc.main_character_actions:
                     mc.main_character_actions.append(action)
-
-            # cleanup (remove next version)
-            found = next((x for x in mc.main_character_actions if x.effect in ["mc_hire_person_label", "mc_pay_to_strip_label"]), None)
-            if found:
-                mc.main_character_actions.remove(found)
         return
 
     def update_stephanie_opinions():
