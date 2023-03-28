@@ -19,11 +19,15 @@ init 2 python:
         return strangers, known_people
 
     def mall_introduction_requirement():
-        if time_of_day > 0 and time_of_day < 4: # only during morning afternoon or evening
-            if mc.location in get_mall_locations():
-                strangers, known_people = mall_introduction_get_people_with_status()
-                if __builtin__.len(strangers) > 0 and __builtin__.len(known_people) > 0:
-                    return True
+        if not time_of_day in [1,2,3]: # only during morning afternoon or evening
+            return False
+        if mc.business.days_since_event("mall_introduction", set_if_none = True) < TIER_0_TIME_DELAY:
+            return False
+        if not mc.location in get_mall_locations():
+            return False
+        strangers, known_people = mall_introduction_get_people_with_status()
+        if __builtin__.len(strangers) > 0 and __builtin__.len(known_people) > 0:
+            return True
         return False
 
     def mall_introduction_get_actors():
@@ -125,6 +129,7 @@ label mall_introduction_action_label():
     "While walking away [stranger.title] looks back at you smiling."
 
     python: # Release variables
+        mc.business.set_event_day("mall_introduction")
         scene_manager.clear_scene()
         title_choice = None
         formatted_title = None
