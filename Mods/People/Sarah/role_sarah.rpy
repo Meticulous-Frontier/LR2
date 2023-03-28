@@ -3229,11 +3229,11 @@ label Sarah_naomi_visits_to_apologize_label():
     sarah "I agree, [sarah.mc_title]."
     while the_person.event_triggers_dict.get("spank_level", 0) < 6:
         $ spank_factor_increment(the_person)
-        $ rnd_num = renpy.random.randint(0,2)
-        if rnd_num == 0:
+        $ ran_num = renpy.random.randint(0,2)
+        if ran_num == 0:
             the_person "Oh... I'm sorry [sarah.fname]! Oh god..."
             "She keeps her ass still, taking [sarah.possessive_title]'s punishment with pride."
-        elif rnd_num == 1:
+        elif ran_num == 1:
             the_person "Please... ah... fuck... [sarah.fname], please... ouch..."
         else:
             "[sarah.possessive_title] keeps slapping her old friends ass like there is no tomorrow."
