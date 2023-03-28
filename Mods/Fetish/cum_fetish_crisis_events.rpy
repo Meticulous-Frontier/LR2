@@ -38,7 +38,7 @@ label cum_fetish_morning_shower_label():
         return
     $ the_person.event_triggers_dict["LastCumFetish"] = day
     "You wake up a little groggy. Your head kinda hurts, so you grab some clothes and head towards the bathroom to take a hot shower. Hopefully the steam will help you feel better."
-    $ home_shower.show_background()
+    $ mc.change_location(home_shower)
     "You stand in the shower, enjoying the hot water for several minutes. The steam is beginning to cloud up the bathroom."
     "You hear the shower door open and see [the_person.possessive_title] getting in the shower with you."
     $ the_person.apply_outfit(special_fetish_nude_outfit)
@@ -50,12 +50,12 @@ label cum_fetish_morning_shower_label():
     "[the_person.possessive_title] reaches down and begins to stroke your cock."
     the_person "I had so many crazy dreams last night, all about you... cumming really hard!"
     the_person "It was amazing! You just kept cumming and cumming... all over me, and I was swallowing as much as a could and I was covered in it..."
-    $ the_person.draw_person(position = "blowjob")
+    $ the_person.draw_person(position = "kneeling1")
     $ mc.change_locked_clarity(50)
     "[the_person.possessive_title] gets down on her knees."
     the_person "I'm sorry, I know I shouldn't approach you like this... but I can't help myself this morning! Give me your cum please!"
     "[the_person.possessive_title] looks up at your from her knees. She looks you right in the eyes as she leans forward and slides her lips over the tip of your dick."
-    call get_fucked(the_person, private= True, start_position = cum_fetish_blowjob, start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_get_fucked_cum_fetish_morning_shower
+    call get_fucked(the_person, sex_path = build_blowjob_path(the_person), start_object = make_floor(), skip_intro = True, allow_continue = False) from _call_get_fucked_cum_fetish_morning_shower
     the_person "Oh my god, thank you [the_person.mc_title]. I needed that so bad."
     "[the_person.possessive_title] stands up. Her hunger for cum satisfied for now."
     $ the_person.draw_person(position = "stand4")
@@ -64,7 +64,7 @@ label cum_fetish_morning_shower_label():
 
     python:
         the_person.apply_planned_outfit()
-        mc.location.show_background()
+        mc.change_location(bedroom)
         clear_scene()
     return
 
