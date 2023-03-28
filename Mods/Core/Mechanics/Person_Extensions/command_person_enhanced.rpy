@@ -12,6 +12,8 @@ init 2 python:
     def bend_over_your_desk_requirement(person):
         if not the_person.is_employee() or not the_person.is_at_work():
             return False
+        if person.location in [strip_club, bdsm_room]:  # don't show when moonlighting in stripclub
+            return False
         if mc.business.event_triggers_dict.get("employee_over_desk_unlock", False):
             if person.obedience < 130:
                 return "Requires: 130 Obedience"
