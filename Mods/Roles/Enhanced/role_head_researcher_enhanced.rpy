@@ -629,7 +629,7 @@ label head_researcher_serum_trait_test_label(the_person):
             if the_tester.sluttiness < 20:
                 the_tester "Ah geeze... does he have to stay in?"
                 "Before she can respond, you step in."
-                mc.name "Yes. Atleast one of us needs to be here in case there are any unexpected side effects."
+                mc.name "Yes. At least one of us needs to be here in case there are any unexpected side effects."
                 the_tester "Ah... okay... I guess I can do that, if it would really help out."
                 the_person "It would! Just give me one moment and I'll gather my things and go..."
                 "[the_person.possessive_title] quickly gathers her things and leaves you alone with [the_tester.title]."
@@ -655,7 +655,7 @@ label head_researcher_serum_trait_test_label(the_person):
                 the_tester "No no, that is crazy. I can just do it myself."
                 the_person "Okay. I'll go file the results, but [the_person.mc_title] will still need to stay to observe."
                 the_tester "He does? Why?"
-                mc.name "Atleast one of us needs to be here in case there are any unexpected side effects."
+                mc.name "At least one of us needs to be here in case there are any unexpected side effects."
                 the_tester "Ah... okay... I guess I can do that, if it would really help out."
                 the_person "It would! Just give me one moment and I'll gather my things and go..."
                 "[the_person.possessive_title] quickly gathers her things and leaves you alone with [the_tester.title]."
@@ -664,7 +664,7 @@ label head_researcher_serum_trait_test_label(the_person):
                 the_tester "Okay, try not to look too close..."
                 call serum_tester_masturbation_show_label(the_tester) from _serum_test_masturbation_show_02
                 call serum_tester_trance_label(the_tester) from _serum_test_trance_finish_03
-            elif not willing_to_threesome(the_person, the_tester):  #She's atleast somewhat slutty but not willing to threesome.
+            elif not willing_to_threesome(the_person, the_tester):  #She's at least somewhat slutty but not willing to threesome.
                 the_tester "I don't think I need both of you. [the_tester.mc_title] can help?"
                 mc.name "Of course, I'd be glad to."
                 the_tester "Okay! An orgasm for science sounds okay by me!"
@@ -1550,7 +1550,7 @@ label serum_tester_oral_aid_label(the_tester):
             $ the_tester.increase_opinion_score("being fingered")
             $ the_tester.increase_opinion_score("anal sex")
             mc.name "Maybe we could try more foreplay or anal activity again."
-            the_tester "I... maybe... I could try again. With you atleast!"
+            the_tester "I... maybe... I could try again. With you at least!"
             "You can tell that you have made an impression on her. She may be more receptive to being fingered by you and anal activity in the future!"
         else:
             the_tester "When I felt you finger my ass though... god it felt so right."
