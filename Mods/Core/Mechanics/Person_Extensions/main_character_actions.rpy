@@ -44,9 +44,6 @@ init 2 python:
         return False
 
     def mc_action_lasik_surgery_person_requirement(person):
-        if person in unique_character_list:
-            return False
-
         if person.base_outfit and person.base_outfit.has_glasses():
             if person.love < 20: # you need have some connection with her to offer this
                 return False
