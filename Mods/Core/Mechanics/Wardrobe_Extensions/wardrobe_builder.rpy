@@ -754,7 +754,7 @@ init 5 python:
 
             # decide if person will wear underwear
             if self.person.get_opinion_score("not wearing underwear") <= -2 \
-                or not (points >= 6 and renpy.random.randint(0, 3 - self.person.get_opinion_score("not wearing underwear")) == 0):
+                or not (points > 6 and renpy.random.randint(0, 3 - self.person.get_opinion_score("not wearing underwear")) == 0):
 
                 # find upper body item
                 item = self.get_item_from_list(self.person, "upper_body", self.build_filter_list(real_bra_list + [lingerie_one_piece, lacy_one_piece_underwear, bodysuit_underwear, leotard], points, min_points), points, ["showing her tits", "not wearing underwear"])

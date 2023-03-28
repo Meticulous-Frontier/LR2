@@ -98,7 +98,7 @@ init 10 python:
 
     def personalize_generated_outfit():
         cs = renpy.current_screen()
-        cs.scope["outfit_builder"].personalize_outfit(cs.scope["demo_outfit"], swap_bottoms = False)
+        cs.scope["outfit_builder"].personalize_outfit(cs.scope["demo_outfit"], swap_bottoms = False, allow_skimpy = False)
         cs.scope["demo_outfit"].update_name()
         duplicate_outfit(cs.scope["starting_outfit"], cs.scope["demo_outfit"])
         preview_outfit()
